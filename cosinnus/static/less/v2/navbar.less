@@ -125,6 +125,13 @@
 		
 	}
 	.nav-buttons {
+		.user-menu-button {
+			img {
+				width: 18px;
+				height: 18px;
+				margin-top: -4px;
+			}
+		}
 	}
 	
 	.nav-brand {
@@ -290,6 +297,9 @@
 		}
 		.nav-column {
 			width: 100%;
+			&:nth-child(2) {
+				width: 100%;
+			}
 			&:not(:last-of-type) {
 				border-right: none;
 				border-bottom: 1px solid @border-color;

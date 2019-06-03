@@ -66,10 +66,10 @@
 			<a class="nav-button" href="{% url 'postman:inbox' %}" role="button" title="{% trans "Nachrichten" %}"> 
 	    		<i class="fas fa-fw fa-envelope"></i>
 			</a>
-			<a class="nav-button" rel="toggle" role="button" title="{% trans "Menu" %}" 
+			<a class="nav-button user-menu-button" rel="toggle" role="button" title="{% trans "Menu" %}" 
 			    		aria-expanded="false" aria-controls="user-menu-collapse"
 			    		data-toggle="collapse" data-target="#user-menu-collapse"> 
-	    		<i class="fas fa-fw fa-user"></i>
+			    {% include "cosinnus/user/user_avatar_image.html" with user=request.user image_size="mini" show_v2_icon_on_missing=True %}
 			</a>
 		{% else %}
 			<a class="nav-button nav-header-textlink" rel="toggle" role="button" title="{% trans "Change language" %}" 

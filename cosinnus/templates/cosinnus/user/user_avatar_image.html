@@ -5,6 +5,8 @@
 	    <img src="{% if image_size == "large" %}{% thumbnail avatar 263x263 crop=1 upscale=1 %}{% elif image_size == "medium-large" %}{% thumbnail avatar 120x120 crop=1 upscale=1 %}{% elif image_size == "medium" %}{% thumbnail avatar 90x90 crop=1 upscale=1 %}{% elif image_size == "mini" %}{% thumbnail avatar 35x35 crop=1 upscale=1 %}{% else %}{% thumbnail avatar 40x40 crop=1 upscale=1 %}{% endif %}" title="{{ user|full_name }}{% if extra_title %} - {{ extra_title }}{% endif %}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %} style="{{ extra_style }}"{% endif %}/>
 	{% elif show_icon_on_missing %}
 	    <i class="fa fa-user"></i>
+	{% elif show_v2_icon_on_missing %}
+		<i class="fas fa-fw fa-user"></i>
 	{% else %}
 	    <img src="{% static 'images/jane-doe.png' %}" title="{{ user|full_name }}{% if extra_title %} - {{ extra_title }}{% endif %}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %}style="{{ extra_style }}" {% endif %}></img>
 	{% endif %}

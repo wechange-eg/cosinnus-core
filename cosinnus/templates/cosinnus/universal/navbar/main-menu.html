@@ -71,6 +71,14 @@
 				{# Translators: __INCLUDE_JS_PO__ #}
 				{% trans "Create new Project" %} 
 			</a></div>
+			<div><a href="/groups/">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Browse all Groups" %} 
+			</a></div>
+			<div><a href="/projects/">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Browse all Projects" %} 
+			</a></div>
 		</div>
 	</div>
 	
@@ -119,11 +127,16 @@
 				{# Translators: __INCLUDE_JS_PO__ #}
 				{% trans "Post new Idea" %} 
 			</a></div>
-			<div><a href="/map/?people=false&events=false&projects=false&groups=false&ideas=true">
+			<div><a href="/ideas/">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Browse all Ideas" %} 
+			</a></div>
+			<div style="display:none;"><a href="/map/?people=false&events=false&projects=false&groups=false&ideas=true">
 				{# Translators: __INCLUDE_JS_PO__ #}
 				{% trans "Search for Ideas" %} 
 			</a></div>
 		</div>
+		
 	</div>
 	{% endif %}
 	
