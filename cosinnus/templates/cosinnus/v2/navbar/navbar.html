@@ -10,18 +10,22 @@
 		    		<i class="fas fa-fw fa-bars"></i>
 	    		</a>
     		{% endif %}
-            <a class="nav-button" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "Dashboard" %}">
+            <a class="nav-button" href="/cms/?noredir=1" " title="{% trans "Home" %}">
             	{% comment %} {% include 'cosinnus/brand.html' %} {% endcomment %}
             	<img src="{% static 'img/mokwi_logo.svg' %}">
+            </a>
+            <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "Dashboard" %}">
+            	{% trans "My" %}
+            	{{ COSINNUS_CURRENT_PORTAL.name }}
+            </a>
+            <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:map" %}" title="{% trans "Discover" %}">
+            	{% trans "Discover" %}
             </a>
             {% if not SETTINGS.COSINNUS_USE_V2_NAVBAR and SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
 	            <a class="nav-button nav-header-textlink" href="#">
 	            	***ADMIN-ONLY TEST PHASE***
 	            </a>
         	{% endif %}
-            <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:map" %}" title="{% trans "Discover" %}">
-            	{% trans "Discover" %}
-            </a>
     	</div>
     </div>
     
