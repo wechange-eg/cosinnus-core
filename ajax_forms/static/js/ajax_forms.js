@@ -9,37 +9,31 @@ window.AjaxForms = {
 	
 	handleFormSubmit: function (event) { 
 		event.preventDefault();  // prevent form from submitting
-        var $form = $(event.target);
+        var $form = $(this);
         
+        // serialize and disable form (serialization must be done before disabling)
+		var data = $form.serializeArray();
+		data.push({'name': 'ajax_form_id', 'value': $form.attr('id')});
         $form.addClass('disabled');
         $form.find('input,textarea').attr('disabled', 'disabled');
     	
-    	var finally_compat = function() {
-			// self.hideLoadingPlaceholder();
-    		
-		};
-    	window.AjaxForms.submitForm($form).then(function(data){
+    	window.AjaxForms.submitForm($form, data).then(function(data){
     		window.AjaxForms.handleData(data);
-			finally_compat();
-			alert('success')
-		}).catch(function(message){
-			//self.handleError(message);
-			finally_compat();
-			alert('fail')
+		}).catch(function(responseJSON){
+			if (responseJSON && 'form_errors' in responseJSON) {
+				alert('Please fill out all required fields!')
+			} else {
+				alert('An error occured while posting the comment. Please reload the page and try again!');
+			}
 			
 			// re-enable form
 	        $form.removeClass('disabled');
 	        $form.find('input,textarea').removeAttr('disabled');
-			
-			console.log(message)
 		});
     }, 
 	
-	submitForm: function ($form) {
+	submitForm: function ($form, data) {
 		return new Promise(function(resolve, reject) {
-			var data = $form.serialize();
-			data['ajax-form-id'] = $form.attr('id');
-			
 			$.ajax({
 			  url: $form.attr("action"),
 			  type: 'POST',
@@ -52,15 +46,20 @@ window.AjaxForms = {
 	              }
 	          },
 	          error: function (xhr, textStatus) {
-	          	reject(textStatus);
+	          	  reject(xhr.responseJSON);
 	          },
 			});
 		});
 	},
 	
 	handleData: function (data) {
-		// we get passed {'result_html': str, 'new_form_html': str, 'ajax-form-id'} here, 
-		// and place them in the given 
+		// we get passed {'result_html': str, 'new_form_html': str, 'ajax_form_id'} here, 
+		// we replace the sent form with a new one, and place the result html at the anchor 
+		$('form#' + data['ajax_form_id']).replaceWith(data['new_form_html']);
+		$(data['result_html'])
+			.hide()
+			.insertBefore('[data-target="ajax-form-result-anchor"][data-ajax-form-id="' + data['ajax_form_id'] + '"]')
+			.fadeIn();
 	},
 }
 

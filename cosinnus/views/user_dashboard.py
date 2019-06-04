@@ -127,7 +127,6 @@ class MyGroupsClusteredMixin(object):
                     items.append(DashboardItem(project))
                     projects.pop(i)
                     project_dt = group_last_visited.get(project.id, default_date)
-                    logger.warn('Checking %s ' % project.id)
                     most_recent_dt = project_dt if project_dt > most_recent_dt else most_recent_dt
             items.last_visited = most_recent_dt
             clusters.append(items)

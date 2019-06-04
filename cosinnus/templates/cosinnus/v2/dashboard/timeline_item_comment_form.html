@@ -1,0 +1,12 @@
+{% load i18n %}
+
+{% comment %}
+	Expected args: 
+		- action_url: url for the form
+		- form_id: id for the form
+{% endcomment %}
+
+<form id="{{ form_id }}" action="{{ action_url }}" data-target="ajax-form" method="post">
+    {% csrf_token %}
+	<textarea id="id_text" name="text" type="text" placeholder="{% trans "Write comment..." %}"></textarea>
+</form>
