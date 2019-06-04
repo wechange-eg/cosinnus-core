@@ -10,13 +10,9 @@
 		    		<i class="fas fa-fw fa-bars"></i>
 	    		</a>
     		{% endif %}
-            <a class="nav-button" href="/cms/?noredir=1" " title="{% trans "Home" %}">
+            <a class="nav-button" href="{% url "cosinnus:user-dashboard" %}" " title="{% trans "Home" %}">
             	{% comment %} {% include 'cosinnus/brand.html' %} {% endcomment %}
             	<img src="{% static 'img/mokwi_logo.svg' %}">
-            </a>
-            <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "Dashboard" %}">
-            	{% trans "My" %}
-            	{{ COSINNUS_CURRENT_PORTAL.name }}
             </a>
             <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:map" %}" title="{% trans "Discover" %}">
             	{% trans "Discover" %}
@@ -62,6 +58,9 @@
 		    		aria-expanded="false" aria-controls="create-menu-collapse"
 		    		data-toggle="collapse" data-target="#create-menu-collapse"> 
     		<i class="fas fa-fw fa-plus"></i>
+		</a>
+		<a class="nav-button" href="/cms/?noredir=1" role="button" title="{% trans "Events" %}"> 
+    		<i class="fas fa-fw fa-home"></i>
 		</a>
 		<a class="nav-button" href="{% group_url "cosinnus:event:list" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" role="button" title="{% trans "Events" %}"> 
     		<i class="fas fa-fw fa-calendar"></i>

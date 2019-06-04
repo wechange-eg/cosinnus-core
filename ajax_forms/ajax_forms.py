@@ -18,7 +18,9 @@ class AjaxEnabledFormViewBaseMixin(object):
 class AjaxFormsCreateViewMixin(AjaxEnabledFormViewBaseMixin):
     
     """ A mixin for a CreateView that enables POSTing to that view with an
-        ajax request, receiving a JsonResponse back.
+        ajax request, receiving a JsonResponse back. With this you can make
+        your existing template form use ajax calls with just a few tweaks,
+        without writing new logic.
         
         How to use for any of your Django-Style Forms:
         
