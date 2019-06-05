@@ -13,7 +13,7 @@
 	            <i class="fas fa-ellipsis-h"></i>
 	        </a>
 	        <ul class="dropdown-menu">
-	        	{% if user|has_write_access:comment %}
+	        	{% if user|has_write_access:object %}
 		        	<li>
 		        		<a href="#" onclick="if(window.confirm('{% trans "Are you sure you want to delete the item?" %}')){$('#{{ delete_form_id }}').submit();} return false;">
 		        			{% trans "Delete comment" %}
@@ -24,7 +24,7 @@
 					</li>
 	        	{% endif %}
 				<li>
-					<a href="#" {% cosinnus_report_object_action comment %}>
+					<a href="#" {% cosinnus_report_object_action object %}>
 						{% trans "Report offensive comment" %}
 					</a>
 				</li>

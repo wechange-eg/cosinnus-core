@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-31 15:37+0200\n"
-"PO-Revision-Date: 2019-06-03 15:54+0100\n"
+"PO-Revision-Date: 2019-06-05 15:33+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -4816,7 +4816,7 @@ msgstr "Bist du sicher dass du diesen Inhalt löschen willt?"
 
 #, python-format
 msgid "Show all %(count)s comments"
-msgstr "Zeige alle %(count)s comments"
+msgstr "Zeige alle %(count)s Kommentare"
 
 #
 msgid "Delete comment"

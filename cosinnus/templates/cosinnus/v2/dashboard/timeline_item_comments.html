@@ -18,7 +18,7 @@
 			{% for comment in comments %}
 				{% include 'cosinnus/v2/dashboard/timeline_item_comment.html' with object=comment %}
 			{% endfor %}
-			<div data-target="ajax-form-result-anchor" data-ajax-form-id="{{ ajax_form_id }}"></div>
+			<div data-target="ajax-form-result-anchor-before" data-ajax-form-id="{{ ajax_form_id }}"></div>
 		{% endwith %}
 		
 		<div class="timeline-item-row comment-form flex-row">

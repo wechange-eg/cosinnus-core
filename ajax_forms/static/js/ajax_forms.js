@@ -68,13 +68,23 @@ window.AjaxForms = {
 		if ('result_html' in data && 'ajax_form_id' in data) {
 			$(data['result_html'])
 				.hide()
-				.insertBefore('[data-target="ajax-form-result-anchor"][data-ajax-form-id="' + data['ajax_form_id'] + '"]')
+				.insertAfter('[data-target="ajax-form-result-anchor"][data-ajax-form-id="' + data['ajax_form_id'] + '"]')
+				.fadeIn();
+			$(data['result_html'])
+				.hide()
+				.insertBefore('[data-target="ajax-form-result-anchor-before"][data-ajax-form-id="' + data['ajax_form_id'] + '"]')
 				.fadeIn();
 		}
-		// delete elements marked to delete 
 		if ('ajax_form_id' in data) {
+			// delete elements marked to delete 
 			$('[data-target="ajax-form-delete-element"][data-ajax-form-id="' + data['ajax_form_id'] + '"]')
 				.fadeOut(function() {$(this).remove();});
+			// execute oncomplete code
+			var oncomplete = $('[data-target="ajax-form"][id="' + data['ajax_form_id'] + '"]').attr('data-ajax-oncomplete');
+			if (oncomplete) {
+				eval(oncomplete);
+			}
+		
 		}
 	},
 }

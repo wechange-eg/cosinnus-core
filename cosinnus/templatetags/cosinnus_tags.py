@@ -985,6 +985,15 @@ def truncatenumber(value, max=99):
         return '%d+' % max
     return force_text(intval)
 
+@register.simple_tag(takes_context=True)
+def debug_context(context, obj=None):
+    if not settings.DEBUG:
+        return ''
+    else:
+        context = context
+        logger.warn(context)
+        import ipdb; ipdb.set_trace(); from pprint import pprint as pp;
+
 @register.filter
 def debugthis(obj):
     """ Debug-inspects a template element """

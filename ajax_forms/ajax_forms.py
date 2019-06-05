@@ -5,6 +5,7 @@ from django.http.response import JsonResponse
 from django.template.context import make_context
 from django.template.loader import render_to_string
 from django.utils.encoding import force_text
+import copy
 
 logger = logging.getLogger('cosinnus')
 
@@ -36,10 +37,17 @@ class AjaxFormsCreateViewMixin(AjaxEnabledFormViewBaseMixin):
             - Include the JS script: <script src="{% static 'js/ajax_forms.js' %}"></script>
             - To your <form>, add the attribute data-target="ajax-form"
             - To your <form>, add an id="<unique-form-id>"
-            - To your list, add an anchor for the result HTML to be prepended to:
+            - (optional) To your main template, add an anchor for the result HTML to be appended to:
                 <div data-target="ajax-form-result-anchor" data-ajax-form-id="<unique-form-id>"></div>
+                (Use data-target="ajax-form-result-anchor-before" to prepend them).
                 This anchor must have the same id as the <form>. The objects in this template
                 must be referenced by `object` as this is what will be passed in the context.
+            - (optional) In your main template, mark elements that will be removed when the ajax
+                form resolves by adding the attributes
+                `data-target="ajax-form-result-anchor" data-ajax-form-id="<unique-form-id>"`
+            - (optional) To your <form> add an attribute with arbitrary JS code to execude
+                when the ajax form resolves: `data-ajax-oncomplete="alert('Success!')`
+            
     """
     
     def form_valid(self, form):
@@ -51,7 +59,7 @@ class AjaxFormsCreateViewMixin(AjaxEnabledFormViewBaseMixin):
         form_id = self.request.POST.get('ajax_form_id')
         context = make_context({
             'object': self.object,
-            
+            'user': self.request.user,
         }, request=self.request).flatten()
         data = {
             'result_html': render_to_string(self.ajax_result_partial, context, request=self.request),
@@ -77,13 +85,13 @@ class AjaxFormsCreateViewMixin(AjaxEnabledFormViewBaseMixin):
             'initial': self.get_initial(),
             'prefix': self.get_prefix(),
         }
-        form = form_class(form_kwargs)
+        form = form_class(**form_kwargs)
         context = self.get_context_data(form=form) # this skips `self.get_form()` because 'form' is in kwargs 
         context.update({
             'action_url': self.request.get_full_path(),
             'form_id': form_id,
+            'user': self.request.user,
         })
-        # TODO: check if it is fine to pass the POST request here, when it should be a get
         form_html = render_to_string(self.ajax_form_partial, context, self.request)
         return form_html
 
