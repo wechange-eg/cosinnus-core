@@ -13,6 +13,7 @@ USERPROFILE_UI_PREF_KEY = 'ui_pref__%s'
 
 
 UI_PREF_DASHBOARD_TIMELINE_HIDE_WELCOME_SCREEN = 'timeline__hide_welcome_screen'
+UI_PREF_DASHBOARD_TIMELINE_HIDE_WELCOME_WIDGET_BOX = 'timeline__hide_welcome_widget_box'
 UI_PREF_DASHBOARD_TIMELINE_MINE_ONLY = 'timeline__only_mine'
 UI_PREF_DASHBOARD_WIDGET_SORT_KEY_PADS = 'dashboard_widgets_sort_key__pads'
 UI_PREF_DASHBOARD_WIDGET_SORT_KEY_FILES = 'dashboard_widgets_sort_key__files'
@@ -25,6 +26,7 @@ UI_PREF_DASHBOARD_WIDGET_SORT_KEY_OFFERS = 'dashboard_widgets_sort_key__offers'
 
 ALL_UI_PREFS = {
     UI_PREF_DASHBOARD_TIMELINE_HIDE_WELCOME_SCREEN: forms.BooleanField(initial=False, required=False),
+    UI_PREF_DASHBOARD_TIMELINE_HIDE_WELCOME_WIDGET_BOX: forms.BooleanField(initial=False, required=False),
     UI_PREF_DASHBOARD_TIMELINE_MINE_ONLY: forms.BooleanField(initial=False, required=False),
     UI_PREF_DASHBOARD_WIDGET_SORT_KEY_PADS: forms.IntegerField(initial=1, validators=[MinValueValidator(0), MaxValueValidator(100)]),
     UI_PREF_DASHBOARD_WIDGET_SORT_KEY_FILES: forms.IntegerField(initial=2, validators=[MinValueValidator(0), MaxValueValidator(100)]),

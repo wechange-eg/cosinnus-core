@@ -117,9 +117,11 @@ module.exports = BaseView.extend({
     /** After empty widgets have removed themselves, will display the "new users"
      *  info box if too or none few are shown */
     manageWidgetConditions: function () {
-    	var $widgets = this.$rightBar.find('div.widget-content');
-    	if ($widgets.length < 3) {
-    		this.$rightBar.find('.widget-info-box').show();
+    	// show widget info box if ui pref is set
+    	if (this.uiPrefsView.getUiPref('timeline__hide_welcome_widget_box')) {
+    		this.$rightBar.find('.welcome_widget_box').remove();
+    	} else {
+    		this.$rightBar.find('.welcome_widget_box').show();
     	}
     },
     

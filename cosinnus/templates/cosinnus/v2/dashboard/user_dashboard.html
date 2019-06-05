@@ -155,8 +155,15 @@
 			<div class="typed-widgets-root">
 			</div>
 			
-			<div class="widget-info-box no-header no-select" style="display: none;">
-				{% trans "Once you get started, your recently visited Pads, Files, Events, Todos and other content will be shown here." %}
+			<div class="widget-info-box welcome_widget_box no-header no-select" style="display: none;">
+				<div class="margin-large">
+					{% trans "Once you get started, your recently visited Pads, Files, Events, Todos and other content will be shown here." %}
+				</div>
+				<div class="text-small">
+					<a class="pale-color pale-with-highlight" data-target="ui-pref" data-ui-pref="timeline__hide_welcome_widget_box" data-ui-pref-value="1" data-hide-after=".welcome_widget_box">
+						{% trans "Do not show this again" %}
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>

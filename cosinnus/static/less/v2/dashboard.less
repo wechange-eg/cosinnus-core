@@ -25,6 +25,16 @@
 		border-left: 1px solid @border-color;
 	}
 	
+	.pale-color, .pale-color a {
+		color: @text-color-pale;
+		font-weight: normal;
+	}
+	a.pale-with-highlight:hover,
+	a.pale-with-highlight:active {
+		text-decoration: none;
+		color: @text-highlight-color;
+	}
+	
 	.widget-content {
 		border-bottom: 1px solid @pale-border-color;
 		padding: 10px 0px;
@@ -35,7 +45,7 @@
 		&.no-header {
 			padding: 20px;
 		}
-		a {
+		a:not(.pale-color) {
 			color: @text-color;
 			text-decoration: underline;
 			&:hover, &:active {
@@ -220,7 +230,7 @@
 		position: relative;
 	}
 	.dashboard-center-bar {
-		a {
+		a:not(.pale-color) {
 			color: @text-color;
 			font-weight: bold;
 			
@@ -230,15 +240,6 @@
 		}
 		.plain-links a {
 			font-weight: normal;
-		}
-		.pale-color, .pale-color a {
-			color: @text-color-pale;
-			font-weight: normal;
-		}
-		a.pale-with-highlight:hover,
-		a.pale-with-highlight:active {
-			text-decoration: none;
-			color: @text-highlight-color;
 		}
 	}
 	.timeline {
@@ -617,6 +618,7 @@
 			font-size: 10px;
 		}
 	}
+	
 	
 }
 
