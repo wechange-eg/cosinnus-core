@@ -1,15 +1,31 @@
 {% import "include/macros.html" as macros %}
 
 <div class="widget-content" {% block attrs %}{% endblock %}>
+	{% block widget_dropdown %}
+		{% if isMovable or isHidable %}
+			<div class="widget-dropdown v2-dropdown dropdown">
+		    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		            <i class="fas fa-ellipsis-h"></i>
+		        </a>
+		        <ul class="dropdown-menu">
+					<li>
+						<a class="sort-up">
+							{% trans "Move up" %}
+						</a>
+					</li>
+					<li>
+						<a class="sort-down">
+							{% trans "Move down" %}
+						</a>
+					</li>
+		        </ul>
+			</div>
+		{% endif %}
+	{% endblock %}
+	
 	<h2 class="headline">
 		{% block title %}{% endblock %}
 	</h2>
-	
-	{% if isMovable or isHidable %}
-		<div class="widget-options">
-			TODO: widg options
-		</div>
-	{% endif %}
 	
 	{% if hadErrors %}
 		<ul class="item-list">

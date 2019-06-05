@@ -23,18 +23,6 @@
 		background-color: @background-color;
 		border-right: 1px solid @border-color;
 		border-left: 1px solid @border-color;
-		
-		a:not(.pale-color) {
-			color: @text-color;
-			font-weight: bold;
-			
-			&:hover, &:active {
-				text-decoration: underline;
-			}
-		}
-		.plain-links a {
-			font-weight: normal;
-		}
 	}
 	
 	.widget-content {
@@ -53,19 +41,6 @@
 			&:hover, &:active {
 				color: @text-highlight-color;
 			}
-		}
-	}
-	
-	.dashboard-center-bar, .widget-info-box {
-		.pale-color, .pale-color a {
-			color: @text-color-pale;
-			font-weight: normal;
-			text-decoration: none;
-		}
-		a.pale-with-highlight:hover,
-		a.pale-with-highlight:active {
-			text-decoration: none;
-			color: @text-highlight-color;
 		}
 	}
 	
@@ -244,6 +219,32 @@
 	
 	.timeline-root {
 		position: relative;
+	}
+	.dashboard-center-bar {
+		a {
+			color: @text-color;
+			font-weight: bold;
+			
+			&:hover, &:active {
+				text-decoration: underline;
+			}
+		}
+		.plain-links a {
+			font-weight: normal;
+		}
+	}
+	
+	.dashboard-center-bar, .widget-info-box {
+		.pale-color, .pale-color a {
+			color: @text-color-pale;
+			font-weight: normal;
+			text-decoration: none;
+		}
+		a.pale-with-highlight:hover,
+		a.pale-with-highlight:active {
+			text-decoration: none;
+			color: @text-highlight-color;
+		}
 	}
 	.timeline {
 	
@@ -533,6 +534,16 @@
 		}
 		.action-button-wrapper {
 			display: inline-block;
+		}
+	}
+	
+	.widget-dropdown {
+		position: absolute;
+		right: 16px;
+		margin-top: 10px;
+		
+		.dropdown-toggle {
+			font-size: 18px;
 		}
 	}
 	

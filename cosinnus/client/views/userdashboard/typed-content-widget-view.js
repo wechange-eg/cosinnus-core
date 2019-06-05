@@ -15,7 +15,7 @@ module.exports = DelegatedWidgetView.extend({
     	
     	type: null, // the type of the content the widget displays
     	isMovable: true, // widget template options
-    	isHidable: true, // widget template options
+    	isHidable: false, // widget template options
         
         state: {
         	sortIndex: 0,
@@ -25,15 +25,15 @@ module.exports = DelegatedWidgetView.extend({
     
     // The DOM events specific to an item.
     events: {
-    	//'focus .nav-search-box': 'onSearchBoxFocusIn',
+    	'click .sort-up': 'onMoveUpClicked',
+    	'click .sort-down': 'onMoveDownClicked',
     },
     
-
     initialize: function (options, app) {
         var self = this;
         self.app = app;
-        self.type = options.type; // would have happened in initialize already but let's be explicit
         DelegatedWidgetView.prototype.initialize.call(self, options);
+        self.options.type = options.type; // would have happened in initialize already but let's be explicit
         self.state.sortIndex = options.sortIndex;
     },
     
@@ -44,9 +44,18 @@ module.exports = DelegatedWidgetView.extend({
     
     /** Overriding params for request */
     getParamsForFetchRequest: function() {
-    	return {urlSuffix: this.type, urlParams: {}}
+    	return {urlSuffix: this.options.type, urlParams: {}}
     },
     
+    onMoveUpClicked: function (event) {
+    	var self = this;
+    	App.userDashboardView.moveRightSideWidget(self.options.type, true);
+    },
+    
+    onMoveDownClicked: function (event) {
+    	var self = this;
+    	App.userDashboardView.moveRightSideWidget(self.options.type, false);
+    },
 
     render: function () {
         var self = this;
@@ -55,7 +64,7 @@ module.exports = DelegatedWidgetView.extend({
         util.log('# ## Rendered widget ' + self.widgetId);
     	
         // remove widget if empty
-        if (self.widgetData && self.widgetData.items.length == 0) {
+        if (self.widgetData && self.widgetData.items && self.widgetData.items.length == 0) {
         	self.$el.remove()
         }
         

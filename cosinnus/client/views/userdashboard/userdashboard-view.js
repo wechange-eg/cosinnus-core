@@ -32,6 +32,8 @@ module.exports = BaseView.extend({
     typedContentWidgetTypes: ['pads', 'files', 'messages', 'events', 'todos', 'polls'],
     typedContentWidgets: {},
     
+    uiPrefKeyRightBarWidget: 'dashboard_widgets_sort_key__',
+    
     // will be set to self.options during initialization
     defaults: {
         
@@ -95,7 +97,7 @@ module.exports = BaseView.extend({
     		self.typedContentWidgets[type] = new TypedContentWidgetView({
         		elParent: self.$el.find('.typed-widgets-root'),
         		type: type,
-        		sortIndex: i,
+        		sortIndex: self.uiPrefsView.getUiPref(self.uiPrefKeyRightBarWidget + type),
         	}, self.app);
     		rightBarPromises.push(self.typedContentWidgets[type].load());
     	});
@@ -151,6 +153,38 @@ module.exports = BaseView.extend({
     	}
     },
     
-    
+    /** Moves a widget up or down by swapping it with its sibling.
+     *  Params:
+     *  	- type: the content type of the source widget (i.e. 'events')
+     *  	- directionUp: true for up, false for down
+     */
+    moveRightSideWidget: function (type, directionUp) {
+    	var self = this;
+    	
+    	// find both widgets
+    	var widget = self.$rightBar.find('.widget-content[data-content-type="' + type + '"]');
+    	if (widget.length == 0) {
+    		return;
+    	}
+    	var other_widget = directionUp ? widget.prev('.widget-content') : widget.next('.widget-content');
+    	if (other_widget.length == 0) {
+    		return;
+    	}
+    	
+    	// swap their sort index
+    	var idx = widget.attr('data-sort-index');
+    	var other_idx = other_widget.attr('data-sort-index');
+    	widget.attr('data-sort-index', other_idx);
+    	other_widget.attr('data-sort-index', idx);
+    	
+    	// sort the widgets
+    	self.sortRightBarWidgets();
+    	
+    	// save the uiPrefs
+    	var uiPrefs = {};
+    	uiPrefs[self.uiPrefKeyRightBarWidget + widget.attr('data-content-type')] = other_idx;
+    	uiPrefs[self.uiPrefKeyRightBarWidget + other_widget.attr('data-content-type')] = idx;
+    	self.uiPrefsView.saveUiPrefs(uiPrefs);
+    },
 
 });

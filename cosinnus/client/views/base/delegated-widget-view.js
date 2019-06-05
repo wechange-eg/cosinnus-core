@@ -12,6 +12,18 @@ module.exports = BaseView.extend({
 
     widgetId: null, // set at initialization
     widgetData: {},
+    
+    // will be set to self.options during initialization
+    defaults: {
+    	
+    	isMovable: false, // widget template options
+    	isHidable: false, // widget template options
+        
+        state: {
+        	sortIndex: 0,
+            
+        }
+    },
 
     initialize: function (options, app) {
         var self = this;
@@ -101,6 +113,7 @@ module.exports = BaseView.extend({
         var data = _.extend(
         	data,
         	self.state,
+        	self.options,
             self.widgetData
         );
         return data;
