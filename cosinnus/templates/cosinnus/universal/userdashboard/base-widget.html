@@ -46,6 +46,19 @@
 					{% for item in items %}
 						{{ macros.listItem(item.text, item.url, item.icon, item.subtext, is_emphasized=item.is_emphasized) }}
 					{% endfor %}
+					{% if loadMoreEnabled and hasMore %}
+						<li>
+							<a class="list-item list-item-link show-more" role="button" titledby=".item-text"> 
+								<div class="item-icon item-icon-offset">
+					    			<i class="fas fa-fw"></i>
+					    		</div>
+								<div class="item-text">
+					                {# Translators: __INCLUDE_JS_PO__ #}
+									{% trans "Show more" %}
+								</div>
+							<a>
+						</li>
+					{% endif %}
 				</ul>
 			{% else %}
 				{% block empty_content %}

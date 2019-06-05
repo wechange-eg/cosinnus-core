@@ -18,11 +18,18 @@ module.exports = BaseView.extend({
     	
     	isMovable: false, // widget template options
     	isHidable: false, // widget template options
-        
+    	loadMoreEnabled: false, // widget template options
+    	
         state: {
         	sortIndex: 0,
-            
+        	hasMore: false,
+    		offsetTimestamp: null,
         }
+    },
+    
+    // You will need to add these events to extending widget views as well!
+    events: {
+    	'click .show-more': 'onShowMoreClicked',
     },
 
     initialize: function (options, app) {
@@ -45,7 +52,18 @@ module.exports = BaseView.extend({
      *  Stub to be overridden.
      *  */
     getParamsForFetchRequest: function() {
-    	return {urlSuffix: null, urlParams: {}}
+    	var self = this;
+    	var urlParams = {};
+    	if (self.options.loadMoreEnabled && self.state.offsetTimestamp) {
+    		urlParams = {
+				'offset_timestamp': self.state.offsetTimestamp,
+				'page_size': 5,
+    		}
+    	}
+    	return {
+    		urlSuffix: null,
+    		urlParams: urlParams,
+    	}
     },
        
     /**
@@ -71,7 +89,6 @@ module.exports = BaseView.extend({
     	var self = this;
 		return new Promise(function(resolve, reject) {
 			self.state['hadErrors'] = false;
-			self.widgetData = {};
 			
 			// build URL
 			var params = self.getParamsForFetchRequest();
@@ -86,7 +103,7 @@ module.exports = BaseView.extend({
                     util.log('# # Fetched data for widget ' + self.widgetId);
     			
                     if (xhr.status == 200) {
-                    	self.widgetData = response['data'];
+                    	self.handleData(response);
                     } else {
                     	self.state['hadErrors'] = true;
                     }
@@ -98,6 +115,36 @@ module.exports = BaseView.extend({
                 	resolve();
                 }
             });
+    	});
+    },
+    
+    /** Handles data that has been loaded */
+    handleData: function (response) {
+    	var self = this;
+    	var data = response['data'];
+    	
+    	if (self.state.offsetTimestamp) {
+    		// append item data
+    		Array.prototype.push.apply(self.widgetData['items'], data['items'])
+    	} else {
+    		// first data load
+    		self.widgetData = data;
+    	}
+    	
+    	if (self.options.loadMoreEnabled) {
+    		if ('has_more' in data) {
+    			self.state.hasMore = data['has_more'];
+    		}
+    		if ('offset_timestamp' in data) {
+    			self.state.offsetTimestamp = data['offset_timestamp'];
+    		}
+    	}
+    },
+    
+    /** Load more items */
+    onShowMoreClicked: function (event) {
+    	this.load().then(function(){
+    		$.cosinnus.renderMomentDataDate();
     	});
     },
     

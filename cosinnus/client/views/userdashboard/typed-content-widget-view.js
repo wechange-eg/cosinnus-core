@@ -16,6 +16,7 @@ module.exports = DelegatedWidgetView.extend({
     	type: null, // the type of the content the widget displays
     	isMovable: true, // widget template options
     	isHidable: false, // widget template options
+    	loadMoreEnabled: true, // widget template options
         
         state: {
         	sortIndex: 0,
@@ -27,6 +28,7 @@ module.exports = DelegatedWidgetView.extend({
     events: {
     	'click .sort-up': 'onMoveUpClicked',
     	'click .sort-down': 'onMoveDownClicked',
+    	'click .show-more': 'onShowMoreClicked',
     },
     
     initialize: function (options, app) {
@@ -44,7 +46,9 @@ module.exports = DelegatedWidgetView.extend({
     
     /** Overriding params for request */
     getParamsForFetchRequest: function() {
-    	return {urlSuffix: this.options.type, urlParams: {}}
+    	var self = this;
+    	var superParams = DelegatedWidgetView.prototype.getParamsForFetchRequest.call(self);
+    	return {urlSuffix: this.options.type, urlParams: superParams['urlParams']}
     },
     
     onMoveUpClicked: function (event) {

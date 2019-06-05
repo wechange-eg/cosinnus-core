@@ -265,6 +265,14 @@ class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
     # if False: will show all of the users content, sorted by creation date
     show_recent = False
     
+    default_page_size = 3
+    min_page_size = 1
+    max_page_size = 20
+    
+    # if given, will only return items *older* than the given timestamp!
+    offset_timestamp = None
+    default_offset_timestamp = None
+    
     def get(self, request, *args, **kwargs):
         self.show_recent = kwargs.pop('show_recent', False)
         
@@ -275,19 +283,43 @@ class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
         if not self.model:
             return HttpResponseBadRequest('Unknown content type supplied: "%s"' % content)
         
+        self.page_size = int(request.GET.get('page_size', self.default_page_size))
+        if not is_number(self.page_size):
+            return HttpResponseBadRequest('Malformed parameter: "page_size": %s' % self.page_size)
+        self.page_size = max(self.min_page_size, min(self.max_page_size, self.page_size))
+        
+        self.offset_timestamp = request.GET.get('offset_timestamp', self.default_offset_timestamp)
+        if self.offset_timestamp is not None and not is_number(self.offset_timestamp):
+            return HttpResponseBadRequest('Malformed parameter: "offset_timestamp"')
+        if self.offset_timestamp is not None and isinstance(self.offset_timestamp, six.string_types):
+            self.offset_timestamp = float(self.offset_timestamp)
+        
         return super(TypedContentWidgetView, self).get(request, *args, **kwargs)
     
     def get_data(self, **kwargs):
+        has_more = False
+        offset_timestamp = None
+        
         if self.show_recent:
             # showing "last-visited" content, ordering by visit datetime
             ct = ContentType.objects.get_for_model(self.model)
             queryset = LastVisitedObject.objects.filter(content_type=ct, user=self.request.user, portal=CosinnusPortal.get_current())
             queryset = queryset.order_by('-visited')
             
-            # TODO real limiting
-            queryset = queryset[:3]
+            # cut off at timestamp if given
+            if self.offset_timestamp:
+                offset_datetime = datetime_from_timestamp(self.offset_timestamp)
+                queryset = queryset.filter(visited__lt=offset_datetime)
+        
+            # calculate has_more and new offset timestamp
+            has_more = queryset.count() > self.page_size
+            queryset = queryset[:self.page_size]
             # the `item_data` field already contains the JSON of `DashboardItem`
             items = list(queryset.values_list('item_data', flat=True))
+            
+            queryset = list(queryset)
+            if len(queryset) > 0:
+                offset_timestamp = timestamp_from_datetime(queryset[-1].visited)
         else:
             # all content, ordered by creation date
             only_mine = True
@@ -296,13 +328,24 @@ class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
             if queryset is None:
                 return {'items':[], 'widget_title': '(error: %s)' % self.model.__name__}
             
-            # TODO real limiting
-            queryset = queryset[:3]
+            # cut off at timestamp if given
+            if self.offset_timestamp:
+                offset_datetime = datetime_from_timestamp(self.offset_timestamp)
+                queryset = queryset.filter(created__lt=offset_datetime)
+        
+            # calculate has_more and new offset timestamp
+            has_more = queryset.count() > self.page_size
+            queryset = list(queryset[:self.page_size])
+            if len(queryset) > 0:
+                offset_timestamp = timestamp_from_datetime(queryset[-1].created)
+            
             items = [DashboardItem(item, user=self.request.user) for item in queryset]
             
         return {
             'items': items,
             'widget_title': self.model._meta.verbose_name_plural,
+            'has_more': has_more,
+            'offset_timestamp': offset_timestamp,
         }
 
 api_user_typed_content = TypedContentWidgetView.as_view()
