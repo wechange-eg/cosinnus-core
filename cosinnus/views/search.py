@@ -87,10 +87,7 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
                 `self.max_page_size` is supplied, `self.max_page_size`is used instead.
                 Default: `self.default_page_size`
         """
-        # require authenticated user
         self.user = request.user
-        if not request.user.is_authenticated:
-            return HttpResponseForbidden('Not authenticated.')
         
         query = self.request.GET.get('q', '').strip()
         if not query:
@@ -142,7 +139,7 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
     
     def _get_queryset_for_model(self, model, filter_field):
         """ Returns a *sorted* queryset of items of a model for a user, filtered by the query terms """
-        queryset = self.fetch_queryset_for_user(model, self.user, sort_key=self.sort_key, only_mine=True)
+        queryset = self.fetch_queryset_for_user(model, self.user, sort_key=self.sort_key, only_mine=False)
         
         if queryset is None:
             if settings.DEBUG:
