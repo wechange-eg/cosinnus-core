@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-31 15:37+0200\n"
+"POT-Creation-Date: 2019-06-05 21:00+0200\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3466,6 +3466,18 @@ msgid "Create new Project"
 msgstr "Créer projet"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All Groups"
+msgid "Browse all Groups"
+msgstr "Tous les groupes"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Browse all Projects"
+msgstr "Projets créés"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
 msgstr ""
 
@@ -3480,6 +3492,12 @@ msgstr "Tu es invité !"
 #| msgid "Cosinnus Idea"
 msgid "Post new Idea"
 msgstr "Idée Cosinnus"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All Ideas"
+msgid "Browse all Ideas"
+msgstr "Toutes les idées"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3669,9 +3687,27 @@ msgstr "Projet message"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Move"
+msgid "Move up"
+msgstr "Déplacer"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Move"
+msgid "Move down"
+msgstr "Déplacer"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "There was an error when trying to delete the invitation."
 msgid "There was an error loading the widget"
 msgstr "Une erreur est survenue lors de la suppression de l'invitation."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Show more Projects"
+msgid "Show more"
+msgstr "Afficher plus de projets"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4018,10 +4054,6 @@ msgstr "Nous n'avons pas pu récupérer tes groupes depuis Facebook à cause d'u
 msgid "Are you sure you want to delete the item?"
 msgstr "Veux-tu vraiment supprimer cette équipe ?"
 
-#, python-format
-msgid "Show all %(count)s comments"
-msgstr ""
-
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete comment"
@@ -4033,6 +4065,10 @@ msgid "Report offensive comment"
 msgstr "Rapporter un contenu choquant"
 
 msgid "Write comment..."
+msgstr ""
+
+#, python-format
+msgid "Show all %(count)s comments"
 msgstr ""
 
 #, fuzzy
@@ -4087,7 +4123,7 @@ msgstr ""
 msgid "What's the latest news?"
 msgstr ""
 
-msgid "Once you get started, your recently visited Pads, Files, Events, Todos and other content will be shown here."
+msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
 msgstr ""
 
 #, fuzzy
@@ -4097,6 +4133,9 @@ msgid "created an idea"
 msgstr "Créer idée"
 
 msgid "Menu"
+msgstr ""
+
+msgid "Home"
 msgstr ""
 
 #, fuzzy
@@ -4121,11 +4160,6 @@ msgstr "Langue"
 #| msgid "Register and join!"
 msgid "Register a new account"
 msgstr "Inscris-toi et rejoins !"
-
-#, fuzzy
-#| msgid "Portal"
-msgid "Switch Portal"
-msgstr "Portail"
 
 #, fuzzy
 #| msgid "Edit Profile"
@@ -4598,6 +4632,11 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#, fuzzy
+#~| msgid "Portal"
+#~ msgid "Switch Portal"
+#~ msgstr "Portail"
 
 #~ msgid "User Dashboard"
 #~ msgstr "Tableau de bord utilisateur"

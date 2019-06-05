@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-31 15:37+0200\n"
-"PO-Revision-Date: 2019-06-05 15:33+0100\n"
+"POT-Creation-Date: 2019-06-05 21:00+0200\n"
+"PO-Revision-Date: 2019-06-05 21:00+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -4089,6 +4089,15 @@ msgid "Create new Project"
 msgstr "Neues Projekt anlegen"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Browse all Groups"
+msgstr "Alle Gruppen anzeigen"
+
+#
+#. Translators: __INCLUDE_JS_PO__
+msgid "Browse all Projects"
+msgstr "Alle Projekte anzeigen"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
 msgstr "Ideen, die mir gefallen"
 
@@ -4099,6 +4108,10 @@ msgstr "Du folgst noch keinen Ideen."
 #. Translators: __INCLUDE_JS_PO__
 msgid "Post new Idea"
 msgstr "Neue Idee eintragen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Browse all Ideas"
+msgstr "Alle Ideen anzeigen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Ideas"
@@ -4295,8 +4308,20 @@ msgid "Message Project"
 msgstr "Projekt anschreiben"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Move up"
+msgstr "Nach oben"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Move down"
+msgstr "Nach unten"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "There was an error loading the widget"
 msgstr "Es gab einen Fehler beim Laden der Inhalte"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show more"
+msgstr "Weitere anzeigen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "There are no items yet"
@@ -4814,10 +4839,6 @@ msgstr ""
 msgid "Are you sure you want to delete the item?"
 msgstr "Bist du sicher dass du diesen Inhalt löschen willt?"
 
-#, python-format
-msgid "Show all %(count)s comments"
-msgstr "Zeige alle %(count)s Kommentare"
-
 #
 msgid "Delete comment"
 msgstr "Kommentar löschen"
@@ -4827,6 +4848,10 @@ msgstr "Anstößigen Kommentar melden"
 
 msgid "Write comment..."
 msgstr "Kommentar schreiben..."
+
+#, python-format
+msgid "Show all %(count)s comments"
+msgstr "Zeige alle %(count)s Kommentare"
 
 msgid "Timeline"
 msgstr "Timeline"
@@ -4843,13 +4868,11 @@ msgstr "Große Karte anzeigen"
 msgid "Do not show this again"
 msgstr "Hinweis nicht wieder anzeigen"
 
-#| msgid "Welcome!"
 msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "Welcome"
 msgstr "Willkommen"
 
 #, python-format
-#| msgid "Edit “%(team_name)s”"
 msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "to %(portal_name)s"
 msgstr "auf %(portal_name)s"
@@ -4898,12 +4921,15 @@ msgstr "Was ist wann wo los? Was gibt's zu erleben? Wo trifft man sich?"
 msgid "What's the latest news?"
 msgstr "Was gibt's neues?"
 
+#| msgid ""
+#| "Once you get started, your recently visited Pads, Files, Events, Todos "
+#| "and other content will be shown here."
 msgid ""
-"Once you get started, your recently visited Pads, Files, Events, Todos and "
-"other content will be shown here."
+"Your recently visited Pads, Files, Events, Todos and other content will be "
+"shown here."
 msgstr ""
-"Hier findest du in Zukunft eine Übersicht über die von dir zuletzt genutzten "
-"Pads, Dateien, Termine, Aufgaben und andere Inhalte aus deinen Projekten und "
+"Hier findest du eine Übersicht über die von dir zuletzt genutzten Pads, "
+"Dateien, Termine, Aufgaben und andere Inhalte aus deinen Projekten und "
 "Gruppen."
 
 msgctxt ""
@@ -4914,6 +4940,9 @@ msgstr "hat eine Idee erstellt"
 
 msgid "Menu"
 msgstr "Menü"
+
+msgid "Home"
+msgstr ""
 
 msgid "Quick Search"
 msgstr "Schnellsuche"
@@ -4930,9 +4959,6 @@ msgstr "Sprache ändern"
 
 msgid "Register a new account"
 msgstr "Neues Konto registrieren"
-
-msgid "Switch Portal"
-msgstr "Portal wechseln"
 
 msgid "Edit My Profile"
 msgstr "Profil-Einstellungen"
@@ -5658,6 +5684,9 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Switch Portal"
+#~ msgstr "Portal wechseln"
 
 #~ msgid "You have not liked any ideas yet"
 #~ msgstr "Du hast noch keine Ideen geliked"

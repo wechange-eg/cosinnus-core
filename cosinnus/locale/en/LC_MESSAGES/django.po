@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-31 15:37+0200\n"
+"POT-Creation-Date: 2019-06-05 21:00+0200\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3411,6 +3411,18 @@ msgid "Create new Project"
 msgstr "Create Project"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "List all groups"
+msgid "Browse all Groups"
+msgstr "List all projects"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects"
+msgid "Browse all Projects"
+msgstr "My Projects"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
 msgstr ""
 
@@ -3423,6 +3435,10 @@ msgstr ""
 #| msgid "Cosinnus project"
 msgid "Post new Idea"
 msgstr "Project"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Browse all Ideas"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3617,10 +3633,24 @@ msgid "Message Project"
 msgstr "Create Project"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Move up"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Move down"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "There are no groups."
 msgid "There was an error loading the widget"
 msgstr "There are no groups."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Other Projects"
+msgid "Show more"
+msgstr "Other Projects"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3972,10 +4002,6 @@ msgstr ""
 msgid "Are you sure you want to delete the item?"
 msgstr "Are you sure you want to delete this prject?"
 
-#, python-format
-msgid "Show all %(count)s comments"
-msgstr ""
-
 msgid "Delete comment"
 msgstr ""
 
@@ -3983,6 +4009,10 @@ msgid "Report offensive comment"
 msgstr ""
 
 msgid "Write comment..."
+msgstr ""
+
+#, python-format
+msgid "Show all %(count)s comments"
 msgstr ""
 
 msgid "Timeline"
@@ -4029,7 +4059,7 @@ msgstr ""
 msgid "What's the latest news?"
 msgstr ""
 
-msgid "Once you get started, your recently visited Pads, Files, Events, Todos and other content will be shown here."
+msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
 msgstr ""
 
 #, fuzzy
@@ -4039,6 +4069,9 @@ msgid "created an idea"
 msgstr "Create Project"
 
 msgid "Menu"
+msgstr ""
+
+msgid "Home"
 msgstr ""
 
 msgid "Quick Search"
@@ -4056,9 +4089,6 @@ msgid "Change language"
 msgstr ""
 
 msgid "Register a new account"
-msgstr ""
-
-msgid "Switch Portal"
 msgstr ""
 
 #, fuzzy
@@ -4587,9 +4617,6 @@ msgstr ""
 
 #~ msgid "No group found with this name"
 #~ msgstr "No project found with this name"
-
-#~ msgid "List all groups"
-#~ msgstr "List all projects"
 
 #~ msgid "You're receiving this email because you are an administrator of this group."
 #~ msgstr "You're receiving this email because you are an administrator of this project."

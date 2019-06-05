@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-31 15:37+0200\n"
+"POT-Creation-Date: 2019-06-05 21:00+0200\n"
 "PO-Revision-Date: 2019-05-06 16:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3461,6 +3461,18 @@ msgid "Create new Project"
 msgstr "Стварыць праект"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All Groups"
+msgid "Browse all Groups"
+msgstr "Усе групы"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Browse all Projects"
+msgstr "Створаныя праекты"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
 msgstr ""
 
@@ -3475,6 +3487,12 @@ msgstr "Вы сочыце за гэтым элементам"
 #| msgid "Cosinnus Idea"
 msgid "Post new Idea"
 msgstr "Cosinnus-ідэя"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All Ideas"
+msgid "Browse all Ideas"
+msgstr "Усе ідэі"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3658,9 +3676,27 @@ msgstr "Даслаць паведамленне праекту"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Move"
+msgid "Move up"
+msgstr "Перамясціць"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Move"
+msgid "Move down"
+msgstr "Перамясціць"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "There was an error when trying to delete the invitation."
 msgid "There was an error loading the widget"
 msgstr "Падчас спробы выдаліць гэта запрашэнне здарылася памылка."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Show more Projects"
+msgid "Show more"
+msgstr "Паказаць больш праектаў"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4007,10 +4043,6 @@ msgstr "У нас не атрымалася выняць Вашы групы з 
 msgid "Are you sure you want to delete the item?"
 msgstr "Вы сапраўды хочаце выдаліць гэту каманду?"
 
-#, python-format
-msgid "Show all %(count)s comments"
-msgstr ""
-
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete comment"
@@ -4022,6 +4054,10 @@ msgid "Report offensive comment"
 msgstr "Паскардзіцца на абразлівае змесціва"
 
 msgid "Write comment..."
+msgstr ""
+
+#, python-format
+msgid "Show all %(count)s comments"
 msgstr ""
 
 #, fuzzy
@@ -4076,7 +4112,7 @@ msgstr ""
 msgid "What's the latest news?"
 msgstr ""
 
-msgid "Once you get started, your recently visited Pads, Files, Events, Todos and other content will be shown here."
+msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
 msgstr ""
 
 #, fuzzy
@@ -4086,6 +4122,9 @@ msgid "created an idea"
 msgstr "Стварыць ідэю"
 
 msgid "Menu"
+msgstr ""
+
+msgid "Home"
 msgstr ""
 
 #, fuzzy
@@ -4110,11 +4149,6 @@ msgstr "Мова"
 #| msgid "Register and join!"
 msgid "Register a new account"
 msgstr "Зарэгіструйцеся і далучыцеся!"
-
-#, fuzzy
-#| msgid "Portal"
-msgid "Switch Portal"
-msgstr "Партал"
 
 #, fuzzy
 #| msgid "Edit Profile"
@@ -4585,6 +4619,11 @@ msgstr "Вы не з'яўляецеся чальцом %s! Пры жаданні
 
 msgid "Your changes have been saved."
 msgstr "Вашы змены захаваныя."
+
+#, fuzzy
+#~| msgid "Portal"
+#~ msgid "Switch Portal"
+#~ msgstr "Партал"
 
 #~ msgid "Microsite Wallpaper"
 #~ msgstr "Фонавая выява мікрасайта"
