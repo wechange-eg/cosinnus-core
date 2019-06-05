@@ -14,6 +14,7 @@ import logging
 from cosinnus.models.idea import CosinnusIdea
 from django.urls.base import reverse
 from cosinnus.models.profile import BaseUserProfile
+from django.utils.html import escape
 
 logger = logging.getLogger('cosinnus')
 
@@ -36,27 +37,27 @@ class DashboardItem(dict):
             # smart conversion by known models
             if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
                 self['icon'] = 'fa-sitemap' if obj.type == CosinnusGroup.TYPE_SOCIETY else 'fa-group'
-                self['text'] = obj.name
+                self['text'] = escape(obj.name)
                 self['url'] = obj.get_absolute_url()
             elif type(obj) is CosinnusIdea:
                 self['icon'] = 'fa-lightbulb-o'
-                self['text'] = obj.title
+                self['text'] = escape(obj.title)
                 self['url'] = obj.get_absolute_url()
             elif obj._meta.model.__name__ == 'Message':
                 self['icon'] = 'fa-envelope'
-                self['text'] = obj.subject
+                self['text'] = escape(obj.subject)
                 self['url'] = reverse('postman:view_conversation', kwargs={'thread_id': obj.thread_id}) if obj.thread_id else obj.get_absolute_url()
-                self['subtext'] = ', '.join([full_name(participant) for participant in obj.other_participants(user)])
+                self['subtext'] = escape(', '.join([full_name(participant) for participant in obj.other_participants(user)]))
             elif issubclass(obj.__class__, BaseUserProfile):
                 self['icon'] = 'fa-user'
-                self['text'] = full_name(obj.user)
+                self['text'] = escape(full_name(obj.user))
                 self['url'] = obj.get_absolute_url()
             elif BaseTaggableObjectModel in inspect.getmro(obj.__class__):
                 self['icon'] = 'fa-question'
-                self['text'] = obj.title
+                self['text'] = escape(obj.title)
                 self['url'] = obj.get_absolute_url()
-                self['subtext'] = obj.group.name
-                self['group'] = obj.group.name
+                self['subtext'] = escape(obj.group.name)
+                self['group'] = escape(obj.group.name)
                 self['group_icon'] = 'fa-group' if obj.group.type == CosinnusGroup.TYPE_PROJECT else 'fa-sitemap'
                 if obj.__class__.__name__ == 'Event':
                     if obj.state == 2:
@@ -76,4 +77,5 @@ class DashboardItem(dict):
                     self['icon'] = 'fa-tasks'
                 if obj.__class__.__name__ == 'Poll':
                     self['icon'] = 'fa-bar-chart'
-
+            
+            
