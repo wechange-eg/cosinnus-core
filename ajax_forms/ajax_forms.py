@@ -86,7 +86,7 @@ class AjaxFormsCreateViewMixin(AjaxEnabledFormViewBaseMixin):
         # TODO: check if it is fine to pass the POST request here, when it should be a get
         form_html = render_to_string(self.ajax_form_partial, context, self.request)
         return form_html
-    
+
     
 class AjaxFormsCommentCreateViewMixin(AjaxFormsCreateViewMixin):
     """ Can be used for any CommentCreateView in BaseTaggableObjects """
@@ -94,3 +94,42 @@ class AjaxFormsCommentCreateViewMixin(AjaxFormsCreateViewMixin):
     ajax_form_partial = 'cosinnus/v2/dashboard/timeline_item_comment_form.html'
     ajax_result_partial = 'cosinnus/v2/dashboard/timeline_item_comment.html'
     
+
+class AjaxFormsDeleteViewMixin(object):
+    
+    """ A mixin for a DeleteView that enables POSTing to that view with an
+        ajax request, receiving a JsonResponse back. With this you can make
+        your existing template form use ajax calls with just a few tweaks,
+        without writing new logic.
+        
+        How to use for any of your Django-Style Forms:
+        
+        # In the view:
+            - include this mixin
+        
+        # In your template:
+            - Include the JS script: <script src="{% static 'js/ajax_forms.js' %}"></script>
+            - To your <form>, add the attribute data-target="ajax-form"
+            - To your <form>, add an id="<unique-form-id>"
+            - To your object template, add these attributes to any element you want to be
+                removed when the delete process resolves successfully:
+                `data-target="ajax-form-delete-element" data-ajax-form-id="<unique-form-id>"`
+                This anchor must have the same id as the <form>. The objects in this template
+                must be referenced by `object` as this is what will be passed in the context.
+    """
+    
+    def delete(self, *args, **kwargs):
+        if not self.request.is_ajax():
+            return super(AjaxFormsDeleteViewMixin, self).delete(*args, **kwargs)
+        
+        try:
+            super(AjaxFormsDeleteViewMixin, self).delete(*args, **kwargs)
+            form_id = self.request.POST.get('ajax_form_id')
+            data = {
+                'ajax_form_id': form_id,
+                'messages': [force_text(msg) for msg in get_messages(self.request)], # this consumes the messages
+            }
+            return JsonResponse(data)
+        except:
+            raise
+        

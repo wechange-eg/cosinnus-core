@@ -52,14 +52,30 @@ window.AjaxForms = {
 		});
 	},
 	
+	/**
+	 * possible params: {
+	 * 		'result_html': str,
+	 * 		'new_form_html': str,
+	 * 		'ajax_form_id': str,
+	 * 	} 
+	 */
 	handleData: function (data) {
-		// we get passed {'result_html': str, 'new_form_html': str, 'ajax_form_id'} here, 
-		// we replace the sent form with a new one, and place the result html at the anchor 
-		$('form#' + data['ajax_form_id']).replaceWith(data['new_form_html']);
-		$(data['result_html'])
-			.hide()
-			.insertBefore('[data-target="ajax-form-result-anchor"][data-ajax-form-id="' + data['ajax_form_id'] + '"]')
-			.fadeIn();
+		// replace the sent form with a new one
+		if ('new_form_html' in data && 'ajax_form_id' in data) {
+			$('form#' + data['ajax_form_id']).replaceWith(data['new_form_html']);
+		}
+		// place the result html at the anchor 
+		if ('result_html' in data && 'ajax_form_id' in data) {
+			$(data['result_html'])
+				.hide()
+				.insertBefore('[data-target="ajax-form-result-anchor"][data-ajax-form-id="' + data['ajax_form_id'] + '"]')
+				.fadeIn();
+		}
+		// delete elements marked to delete 
+		if ('ajax_form_id' in data) {
+			$('[data-target="ajax-form-delete-element"][data-ajax-form-id="' + data['ajax_form_id'] + '"]')
+				.fadeOut(function() {$(this).remove();});
+		}
 	},
 }
 

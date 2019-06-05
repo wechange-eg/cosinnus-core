@@ -4,52 +4,54 @@
 	Expected args: 
 		- object: the comment object
 {% endcomment %}
-
-<div class="timeline-item-row comment {% if comment_count > 3 and forloop.counter <= comment_count|subtract:3 %}comment-hidden{% endif %}">
-					
-	<div class="comment-dropdown v2-dropdown dropdown">
-    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fas fa-ellipsis-h"></i>
-        </a>
-        <ul class="dropdown-menu">
-        	{% if user|has_write_access:comment %}
-	        	<li>
-	        		<a href="#" onclick="if(window.confirm('{% trans "Are you sure you want to delete the item?" %}')){$('#delete_comment_form_{{ object.pk }}').submit();} return false;">
-	        			{% trans "Delete comment" %}
-	    			</a>
+{% with delete_form_id="delete-comment-form-"|add_uuid %}
+	<div class="timeline-item-row comment {% if comment_count > 3 and forloop.counter <= comment_count|subtract:3 %}comment-hidden{% endif %}"
+			data-target="ajax-form-delete-element" data-ajax-form-id="{{ delete_form_id }}">
+						
+		<div class="comment-dropdown v2-dropdown dropdown">
+	    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	            <i class="fas fa-ellipsis-h"></i>
+	        </a>
+	        <ul class="dropdown-menu">
+	        	{% if user|has_write_access:comment %}
+		        	<li>
+		        		<a href="#" onclick="if(window.confirm('{% trans "Are you sure you want to delete the item?" %}')){$('#{{ delete_form_id }}').submit();} return false;">
+		        			{% trans "Delete comment" %}
+		    			</a>
+						<form id="{{ delete_form_id }}" action="{{ object.get_delete_url }}" method="post" data-target="ajax-form">
+				            {% csrf_token %}
+				        </form>
+					</li>
+	        	{% endif %}
+				<li>
+					<a href="#" {% cosinnus_report_object_action comment %}>
+						{% trans "Report offensive comment" %}
+					</a>
 				</li>
-        	{% endif %}
-			<li>
-				<a href="#" {% cosinnus_report_object_action comment %}>
-					{% trans "Report offensive comment" %}
-				</a>
-			</li>
-        </ul>
-		<form id="delete_comment_form_{{ object.pk }}" action="{{ object.get_delete_url }}" method="post">
-            {% csrf_token %}
-        </form>
-	</div>
-
-	<div class="comment-header text-small flex-row">
-		<div class="avatar-small">
-			<a href="{{ object.creator|profile_url }}">
-				{% include "cosinnus/user/user_avatar_image.html" with user=object.creator %}
-			</a>
+	        </ul>
 		</div>
-		<div class="comment-creator-label">
-			<span>
+	
+		<div class="comment-header text-small flex-row">
+			<div class="avatar-small">
 				<a href="{{ object.creator|profile_url }}">
-					{{ object.creator|full_name }}
+					{% include "cosinnus/user/user_avatar_image.html" with user=object.creator %}
 				</a>
-			</span>
-			<span class="plain-links">
-				<a href="{{ object.get_absolute_url }}"><span class="annotation moment-data-date" data-date="{{ object.created_on|date:'c' }}" ></span></a>
-			</span>
+			</div>
+			<div class="comment-creator-label">
+				<span>
+					<a href="{{ object.creator|profile_url }}">
+						{{ object.creator|full_name }}
+					</a>
+				</span>
+				<span class="plain-links">
+					<a href="{{ object.get_absolute_url }}"><span class="annotation moment-data-date" data-date="{{ object.created_on|date:'c' }}" ></span></a>
+				</span>
+			</div>
+		</div>
+		<div class="comment-body v2-textfield truncated-textfield truncated-textfield-small">
+			{{ object.text|textfield }}
 		</div>
 	</div>
-	<div class="comment-body v2-textfield truncated-textfield truncated-textfield-small">
-		{{ object.text|textfield }}
-	</div>
-</div>
-<hr class="seperator {% if comment_count > 3 and forloop.counter <= comment_count|subtract:3 %}comment-hidden{% endif %}" />
-
+	<hr class="seperator {% if comment_count > 3 and forloop.counter <= comment_count|subtract:3 %}comment-hidden{% endif %}" 
+			data-target="ajax-form-delete-element" data-ajax-form-id="{{ delete_form_id }}"/>
+{% endwith %}

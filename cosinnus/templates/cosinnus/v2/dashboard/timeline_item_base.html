@@ -1,167 +1,172 @@
 {% load i18n cosinnus_tags %}
 
-<div class="timeline-item {% block container_class %}{% endblock %}">
-
-	<div class="header-dropdown v2-dropdown dropdown">
-    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fas fa-ellipsis-h"></i>
-        </a>
-        <ul class="dropdown-menu">
-        	{% if user|has_write_access:item %}
-        		{% block edit_button_frame %}
-		        	<li>
-		        		<a href="{{ item.get_edit_url }}">
-		        			{% trans "Edit" %}
-		    			</a>
-					</li>
-				{% endblock %}
-	        	<li>
-	        		<a href="#" onclick="if(window.confirm('{% trans "Are you sure you want to delete the item?" %}')){$('#delete_item_form_{{ item.pk }}').submit();} return false;">
-	        			{% trans "Delete" %}
-	    			</a>
-				</li>
-        	{% endif %}
-			<li>
-				<a href="#" {% cosinnus_report_object_action item %}>
-					{% trans "Report offensive content" %}
-				</a>
-			</li>
-        </ul>
-        <form id="delete_item_form_{{ item.pk }}" action="{{ item.get_delete_url }}" method="post">
-            {% csrf_token %}
-        </form>
-	</div>
+{% with delete_form_id="delete-form-"|add_uuid %}
+	<div class="timeline-item {% block container_class %}{% endblock %}" 
+			data-target="ajax-form-delete-element" data-ajax-form-id="{{ delete_form_id }}">
 	
-	<div class="timeline-item-row header flex-row">
-		<div class="avatar">
-			<a href="{{ item.creator|profile_url }}">
-				{% include "cosinnus/user/user_avatar_image.html" with user=item.creator %}
+		<div class="header-dropdown v2-dropdown dropdown">
+	    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	            <i class="fas fa-ellipsis-h"></i>
+	        </a>
+	        <ul class="dropdown-menu">
+	        	{% if user|has_write_access:item %}
+	        		{% block edit_button_frame %}
+			        	<li>
+			        		<a href="{{ item.get_edit_url }}">
+			        			{% trans "Edit" %}
+			    			</a>
+						</li>
+					{% endblock %}
+					{% block delete_button_frame %}
+			        	<li>
+			        		<a href="#" onclick="if(window.confirm('{% trans "Are you sure you want to delete the item?" %}')){$('#{{ delete_form_id }}').submit();} return false;">
+			        			{% trans "Delete" %}
+			    			</a>
+						</li>
+				        <form id="{{ delete_form_id }}" action="{{ item.get_delete_url }}" method="post" data-target="ajax-form">
+				            {% csrf_token %}
+				        </form>
+			        {% endblock %}
+	        	{% endif %}
+				<li>
+					<a href="#" {% cosinnus_report_object_action item %}>
+						{% trans "Report offensive content" %}
+					</a>
+				</li>
+	        </ul>
+		</div>
+		
+		<div class="timeline-item-row header flex-row">
+			<div class="avatar">
+				<a href="{{ item.creator|profile_url }}">
+					{% include "cosinnus/user/user_avatar_image.html" with user=item.creator %}
+				</a>
+			</div>
+			<div class="header-info flex-grow">
+				<div class="item-info">
+					<a href="{{ item.creator|profile_url }}">
+						{{ item.creator|full_name }}
+					</a>
+					<span class="highlighted-text plain-links">
+						<a href="{{ item.get_absolute_url }}">
+							{% block creation_label %}{% endblock %}
+						</a>
+					</span>
+				</div>
+				<div class="item-date pale-color">
+					<a href="{{ item.get_absolute_url }}">
+						<span class="moment-data-date" data-date="{{ item.created|date:'c' }}" title="{{ item.created|date:'r' }}"></span>
+					</a>
+				</div>
+			</div>
+			<div class="header-context truncated-oneline pale-color">
+				{% if item.group and item.group.is_default_user_group %}
+					<a href="{{ item.group.portal.get_absolute_url }}">
+						</i><span>{{ item.group.portal.name }}</span>
+					</a>
+				{% elif item.group %}
+					<a href="{{ item.group.get_absolute_url }}">
+						<i class="fas fa-fw {% if item.group.type == 0 %}fa-group{% else %}fa-sitemap{% endif %}">
+						</i><span>{{ item.group.name }}</span>
+					</a>
+				{% else %}
+					<a href="{{ item.portal.get_absolute_url }}">
+						</i><span>{{ item.portal.name }}</span>
+					</a>
+				{% endif %}
+			</div>
+		</div>
+		
+		<div class="icon {% block icon_class %}{% comment %} can contain "icon-padded"{% endcomment %} {% endblock %}">
+			<a href="{{ item.get_absolute_url }}">
+				<i class="fas fa-fw {% block icon %}{% endblock %}"></i>
 			</a>
 		</div>
-		<div class="header-info flex-grow">
-			<div class="item-info">
-				<a href="{{ item.creator|profile_url }}">
-					{{ item.creator|full_name }}
-				</a>
-				<span class="highlighted-text plain-links">
-					<a href="{{ item.get_absolute_url }}">
-						{% block creation_label %}{% endblock %}
-					</a>
-				</span>
-			</div>
-			<div class="item-date pale-color">
-				<a href="{{ item.get_absolute_url }}">
-					<span class="moment-data-date" data-date="{{ item.created|date:'c' }}" title="{{ item.created|date:'r' }}"></span>
-				</a>
-			</div>
+		
+		<div class="timeline-item-row body">
+			{% block title_frame %}
+				<div class="title-frame">
+					<div class="title">
+						<a href="{{ item.get_absolute_url }}"> 
+							{% block title %}{% endblock %}
+						</a>
+					</div>
+					
+					<div class="subtitle plain-links">
+						{% block subtitle %}
+							<span class="spacer-if-inbetween"></span>
+						{% endblock %}
+					</div>
+				</div>
+			{% endblock %}
+			{% block body_frame %}
+				<div class="v2-textfield truncated-textfield truncated-textfield-small">
+					{% block body %}{% endblock %}
+				</div>
+			{% endblock %}
 		</div>
-		<div class="header-context truncated-oneline pale-color">
-			{% if item.group and item.group.is_default_user_group %}
-				<a href="{{ item.group.portal.get_absolute_url }}">
-					</i><span>{{ item.group.portal.name }}</span>
-				</a>
-			{% elif item.group %}
-				<a href="{{ item.group.get_absolute_url }}">
-					<i class="fas fa-fw {% if item.group.type == 0 %}fa-group{% else %}fa-sitemap{% endif %}">
-					</i><span>{{ item.group.name }}</span>
-				</a>
-			{% else %}
-				<a href="{{ item.portal.get_absolute_url }}">
-					</i><span>{{ item.portal.name }}</span>
-				</a>
+		
+		{% block attached_images %}
+			{% if item.attached_images %}
+				<div class="timeline-item-row attachments attached-images">
+					{% include 'cosinnus/v2/dashboard/timeline_attached_image_gallery.html' with object=item max_images=3 %}
+				</div>
 			{% endif %}
-		</div>
-	</div>
-	
-	<div class="icon {% block icon_class %}{% comment %} can contain "icon-padded"{% endcomment %} {% endblock %}">
-		<a href="{{ item.get_absolute_url }}">
-			<i class="fas fa-fw {% block icon %}{% endblock %}"></i>
-		</a>
-	</div>
-	
-	<div class="timeline-item-row body">
-		{% block title_frame %}
-			<div class="title-frame">
-				<div class="title">
-					<a href="{{ item.get_absolute_url }}"> 
-						{% block title %}{% endblock %}
-					</a>
+		{% endblock %}
+		
+		{% block attached_objects %}
+			{% if item.attached_objects.exists %}
+				<div class="timeline-item-row attachments attached-objects">
+				    {% cosinnus_render_attached_objects item v2Style=True %}
+				</div>
+			{% endif %}
+		{% endblock %}
+		
+		{% block tags %}
+			{% with topics=item.media_tag.topics tags=item.media_tag.tags.all comments=item.comments %}
+			
+				<hr class="seperator remove-if-next-empty" />
+				
+				<div class="timeline-item-row meta-row text-small flex-row plain-links remove-if-empty">
+					<div class="timeline-tags flex-grow">
+						{% if comments %}
+							{% with comment_count=comments.count %}
+								{% if comment_count > 0 %}
+									<span>
+										<i class="fas fa-fw fa-comments"></i>
+										{{ comment_count }}
+									</span>
+								{% endif %}
+							{% endwith %}
+						{% endif %}
+						{% if topics %}
+							<span>
+								<i class="fas fa-fw fa-lightbulb-o"></i>
+								{% render_cosinnus_topics topics %}
+							</span>
+						{% endif %}
+						{% if tags %}
+							<span>
+								<i class="fas fa-fw fa-tag"></i>
+								{% for tag in tags %}
+									{{ tag }}{% if not forloop.last %}, {% endif %}
+								{% endfor %}
+							</span>
+						{% endif %}
+					</div>
+					<div class="action-buttons">
+						{% block action_buttons %}{% endblock %}
+					</div>
 				</div>
 				
-				<div class="subtitle plain-links">
-					{% block subtitle %}
-						<span class="spacer-if-inbetween"></span>
-					{% endblock %}
-				</div>
-			</div>
+				<hr class="seperator {% if not comments %}remove-if-prev-empty{% endif %}" />
+			
+				{% if comments %}
+					{% include 'cosinnus/v2/dashboard/timeline_item_comments.html' with item=item comments=comments.all %}
+				{% endif %}
+			{% endwith %}
+			
 		{% endblock %}
-		{% block body_frame %}
-			<div class="v2-textfield truncated-textfield truncated-textfield-small">
-				{% block body %}{% endblock %}
-			</div>
-		{% endblock %}
+		
 	</div>
-	
-	{% block attached_images %}
-		{% if item.attached_images %}
-			<div class="timeline-item-row attachments attached-images">
-				{% include 'cosinnus/v2/dashboard/timeline_attached_image_gallery.html' with object=item max_images=3 %}
-			</div>
-		{% endif %}
-	{% endblock %}
-	
-	{% block attached_objects %}
-		{% if item.attached_objects.exists %}
-			<div class="timeline-item-row attachments attached-objects">
-			    {% cosinnus_render_attached_objects item v2Style=True %}
-			</div>
-		{% endif %}
-	{% endblock %}
-	
-	{% block tags %}
-		{% with topics=item.media_tag.topics tags=item.media_tag.tags.all comments=item.comments %}
-		
-			<hr class="seperator remove-if-next-empty" />
-			
-			<div class="timeline-item-row meta-row text-small flex-row plain-links remove-if-empty">
-				<div class="timeline-tags flex-grow">
-					{% if comments %}
-						{% with comment_count=comments.count %}
-							{% if comment_count > 0 %}
-								<span>
-									<i class="fas fa-fw fa-comments"></i>
-									{{ comment_count }}
-								</span>
-							{% endif %}
-						{% endwith %}
-					{% endif %}
-					{% if topics %}
-						<span>
-							<i class="fas fa-fw fa-lightbulb-o"></i>
-							{% render_cosinnus_topics topics %}
-						</span>
-					{% endif %}
-					{% if tags %}
-						<span>
-							<i class="fas fa-fw fa-tag"></i>
-							{% for tag in tags %}
-								{{ tag }}{% if not forloop.last %}, {% endif %}
-							{% endfor %}
-						</span>
-					{% endif %}
-				</div>
-				<div class="action-buttons">
-					{% block action_buttons %}{% endblock %}
-				</div>
-			</div>
-			
-			<hr class="seperator {% if not comments %}remove-if-prev-empty{% endif %}" />
-		
-			{% if comments %}
-				{% include 'cosinnus/v2/dashboard/timeline_item_comments.html' with item=item comments=comments.all %}
-			{% endif %}
-		{% endwith %}
-		
-	{% endblock %}
-	
-</div>
+{% endwith %}

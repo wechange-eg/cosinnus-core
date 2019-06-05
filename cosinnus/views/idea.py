@@ -14,6 +14,7 @@ from cosinnus.models.tagged import LikeObject
 from cosinnus.views.mixins.group import RequireLoggedInMixin, RequireWriteGrouplessMixin
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
+from ajax_forms.ajax_forms import AjaxFormsDeleteViewMixin
 
 
 logger = logging.getLogger('cosinnus')
@@ -95,7 +96,8 @@ class IdeaEditView(RequireWriteGrouplessMixin, CosinnusIdeaFormMixin, UpdateView
 idea_edit = IdeaEditView.as_view()
 
 
-class IdeaDeleteView(RequireWriteGrouplessMixin, SamePortalGroupMixin, DeleteView):
+class IdeaDeleteView(RequireWriteGrouplessMixin, SamePortalGroupMixin, AjaxFormsDeleteViewMixin, 
+        DeleteView):
 
     model = CosinnusIdea
     message_success = _('Your idea was deleted successfully.')
