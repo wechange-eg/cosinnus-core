@@ -17,8 +17,10 @@
 
 /** Extended mobile triple dot navbar */
 
-body.mobile-triple-dots-active .app-root, .app-fullscreen,
-body.mobile-triple-dots-active .map-fullscreen, .tile-list-fullscreen {
+body.mobile-triple-dots-active .app-root, 
+body.mobile-triple-dots-active .app-fullscreen,
+body.mobile-triple-dots-active .map-fullscreen, 
+body.mobile-triple-dots-active .tile-list-fullscreen {
     top: 100px; 
     height: calc(100% - 100px);
 }
