@@ -4,7 +4,7 @@
     <div class="nav-content">
     	<div class="nav-section nav-brand">
     		{% if request.user.is_authenticated %}
-	            <a class="nav-button" rel="toggle" role="button" title="{% trans "Menu" %}" 
+	            <a class="nav-button burger-menu" rel="toggle" role="button" title="{% trans "Menu" %}" 
 			    		aria-expanded="false" aria-controls="main-collapse"
 			    		data-toggle="collapse" data-target="#main-collapse"> 
 		    		<i class="fas fa-fw fa-bars"></i>
@@ -12,8 +12,7 @@
     		{% endif %}
     		
             <a class="nav-button" href="{% url "cosinnus:user-dashboard" %}" " title="{% trans "Home" %}">
-            	{% comment %} {% include 'cosinnus/brand.html' %} {% endcomment %}
-            	<img src="{% static 'img/mokwi_logo.svg' %}">
+            	{% include 'cosinnus/v2/navbar/brand.html' %}
             </a>
             <div class="brand-links mobile-hidden">
             	{% include 'cosinnus/v2/navbar/brand_links.html' %}
