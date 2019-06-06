@@ -141,6 +141,9 @@
 		}
 		height: 50px;
 	}
+	.brand-links {
+		display: inline;
+	}
 	
 	.nav-button {
 		cursor: pointer;
@@ -337,14 +340,20 @@
 			padding-top: 0;
 		}
 		.nav-buttons {
-			display: none; /** Toggled via body.mobile-triple-dots-active */
-			
 			position: absolute;
 		    top: 50px;
 		    background: @background-color-secondary;
 		    width: 100%;
 		    text-align: right;
 		    border-bottom: 1px solid @border-color;
+		    
+		    /** Nav-buttons transition hiding */
+		    max-height: 0;
+			opacity: 0;
+			overflow-y: hidden;
+			transition-property: all;
+			transition-duration: .5s;
+			transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 		}
 		
 	}
@@ -361,7 +370,9 @@
 				}
 			}
 			.nav-buttons {
-				display: block;
+				/** Nav-buttons transition hiding */
+				opacity: 1;
+				max-height: 50px;
 			}
 			.brand-links {
 				float: left;
