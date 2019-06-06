@@ -632,7 +632,9 @@
 			font-size: 10px;
 		}
 	}
-	
+	.brand-links {
+		display: inline;
+	}
 	
 }
 
@@ -689,10 +691,16 @@
 			}
 		}
 		
-		.dashboard-left-bar, .dashboard-right-bar, .dashboard-center-bar {
+		.dashboard-left-bar,
+		.dashboard-right-bar,
+		.dashboard-center-bar {
 			width: 100%;
+			border-right: none;
+    		border-left: none;
 		}
-		
+		.dashboard-news-create-frame {
+			padding-top: 20px;
+		}
 		
 		.dashboard-mobile-header {
 			position: fixed;
@@ -725,7 +733,34 @@
 				}
 			}
 		}
+		.timeline-item {
+			.timeline-item-row {
+				margin: 0 -10px;
+			}
+			.header {
+				width: 90%;
+			}
+			.icon {
+				position: inherit;
+			    float: left;
+    			padding-right: 12px;
+			}
+			hr.seperator {
+				margin: 1px -3px;
+			}
+		} 
+		
+		
 		
 	}
 	
+	body.mobile-triple-dots-active {
+		.v2-dashboard {
+			margin-top: 150px;
+			
+			.dashboard-mobile-header {
+				top: 100px;
+			}
+		}
+	}
 }

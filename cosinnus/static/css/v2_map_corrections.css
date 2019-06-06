@@ -14,3 +14,19 @@
 .app-root .tile-detail {
     height: calc(100% - 50px);
 }
+
+/** Extended mobile triple dot navbar */
+
+body.mobile-triple-dots-active .app-root, .app-fullscreen,
+body.mobile-triple-dots-active .map-fullscreen, .tile-list-fullscreen {
+    top: 100px; 
+    height: calc(100% - 100px);
+}
+body.mobile-triple-dots-active .app-fullscreen .tile-detail {
+    margin-top: 100px;
+    height: calc(100% - 100px);
+}
+body.mobile-triple-dots-active .app-root .tile-detail {
+    height: calc(100% - 100px);
+}
+	
