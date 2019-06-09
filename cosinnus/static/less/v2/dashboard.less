@@ -155,8 +155,30 @@
 				}
 			}
 			.cosinnus-field, .cosinnus-media-field {
+				border-top: 1px solid @border-color;
+				border-bottom: 1px solid @border-color;
+				margin: -1px 0 -1px 0;
+				padding: 4px 0px;
+				
+				&.header-only {
+					display: none;
+				}
+				.regular-space {
+					margin: 0;
+				}
+				.editor-toolbar {
+					border-top: none;
+				}
+				.CodeMirror {
+					border-bottom: none;
+				}
+				
 				&> label, .field-description {
 					display: none;
+				}
+				&, input, label {
+					font-family: @font-regular !important;
+					font-size: 14px;
 				}
 			}
 			.cosinnus-field-input input {
@@ -171,6 +193,28 @@
 			}
 			.modal-body {
 				padding: 0;
+				
+				.btn-no-float.regular-space.w100 {
+					margin: 0 0 -1px 0;
+	   				padding: 15px 0 35px;
+	   				border-bottom: 1px solid @border-color;
+	   				font-size: 14px;
+				}
+				span#attachments-existing-files {
+					display: inline-block;
+				}
+				.dropzone {
+					padding: 0 10px 0 0;
+					border-top: 1px solid @pale-border-color;
+					
+					label {
+						margin-top: 10px;						
+						margin-bottom: 0;
+					}				
+					.label-soft {
+						color: @text-color-pale;
+					}
+				} 
 			}
 			.modal-footer button {
 				text-align: left;
