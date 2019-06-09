@@ -460,7 +460,11 @@
                             </span>
                         {% endif %}
                         
-                        <div class="dropdown pull-right">
+                        {% comment %} 
+                        	Ordering removed until the relevance for results can be cutoff-filtered.
+                        	Otherwise we have meaningless search results with 0.001 relevance, sorted by new.
+                        {% endcomment %}
+                        <div class="dropdown pull-right" style="display: none;">
                             <button class="btn btn-default dropdown-toggle autowidth" type="button" id="filter-odering" data-toggle="dropdown" title="{% trans "Ordering" %}">
                                 {% trans "Ordering" %}
                                 <span class="caret"></span>
