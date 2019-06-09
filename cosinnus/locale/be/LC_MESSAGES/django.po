@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-09 12:59+0200\n"
-"PO-Revision-Date: 2019-05-06 16:53+0100\n"
+"POT-Creation-Date: 2019-06-09 13:20+0200\n"
+"PO-Revision-Date: 2019-06-09 13:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: be\n"
@@ -694,10 +694,10 @@ msgid "Related Teams"
 msgstr "Роднасныя тэрміны"
 
 msgid "Cosinnus project"
-msgstr "Праект Cosinnus"
+msgstr "Cosinnus-праект"
 
 msgid "Cosinnus projects"
-msgstr "Праекты Cosinnus"
+msgstr "Cosinnus-праекты"
 
 msgid "Slug must not be empty."
 msgstr "Загаловак для URL-адраса не можа быць пусты."
@@ -939,7 +939,7 @@ msgstr "Адлюстраваныя аб'екты"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Liked"
-msgstr "Упадабаныя"
+msgstr "Упадабалі"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
@@ -1015,7 +1015,7 @@ msgid "Footer"
 msgstr "Падвал"
 
 msgid "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
-msgstr "Будзе адлюстроўвацца як падвал на КОЖНАЙ старонцы гэтага вэбсайта (не толькі на старонках лічбавай панэлі!)"
+msgstr "Будзе адлюстроўвацца як падвал на КОЖНАЙ старонцы гэтага вэбсайта (не толькі на старонках панэлі кіравання!)"
 
 msgid "Show Register Button"
 msgstr "Паказать кнопку рэгістрацыі"
@@ -1042,10 +1042,10 @@ msgid "Right footer"
 msgstr "Правы падвал"
 
 msgid "1-Column Dashboard Page"
-msgstr "Аднаслупковая старонка лічбавай панэлі"
+msgstr "Аднаслупковая старонка панэлі кіравання"
 
 msgid "2-Column Dashboard Page"
-msgstr "Двухслупковая старонка лічбавай панэлі"
+msgstr "Двухслупковая старонка панэлі кіравання"
 
 msgid "Content (left column)"
 msgstr "Змесціва (левы слупок)"
@@ -1054,7 +1054,7 @@ msgid "Content (right column)"
 msgstr "Змесціва (правы слупок)"
 
 msgid "3-Column Dashboard Page"
-msgstr "Трохслупковая старонка лічбавай панэлі"
+msgstr "Трохслупковая старонка панэлі кіравання"
 
 msgid "Content (center column)"
 msgstr "Змесціва (цэнтральны слупок)"
@@ -1069,13 +1069,13 @@ msgid "Left Sidebar"
 msgstr "Левая бакавая панэль"
 
 msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "Аднаслупковая старонка лічбавай панэлі (модульная, БОЛЬШ НЕ ВЫКАРЫСТОЎВАЙЦЕ!)"
+msgstr "Аднаслупковая старонка панэлі кіравання (модульная, БОЛЬШ НЕ ВЫКАРЫСТОЎВАЙЦЕ!)"
 
 msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "Двухслупковая старонка лічбавай панэлі (модульная, БОЛЬШ НЕ ВЫКАРЫСТОЎВАЙЦЕ!)"
+msgstr "Двухслупковая старонка панэлі кіравання (модульная, БОЛЬШ НЕ ВЫКАРЫСТОЎВАЙЦЕ!)"
 
 msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "Трохслупковая старонка лічбавай панэлі (модульная, БОЛЬШ НЕ ВЫКАРЫСТОЎВАЙЦЕ!)"
+msgstr "Трохслупковая старонка панэлі кіравання (модульная, БОЛЬШ НЕ ВЫКАРЫСТОЎВАЙЦЕ!)"
 
 msgid "Simple One-Column Page (Modular)"
 msgstr "Простая аднаслупковая старонка (модульная)"
@@ -1105,7 +1105,7 @@ msgid "Bottom content (gray background)"
 msgstr "Змесціва ніжняй часткі (шэры фон)"
 
 msgid "Dashboard"
-msgstr "Старонка лічбавай панэлі"
+msgstr "Панэль кіравання"
 
 msgid "Microsite"
 msgstr "Мікрасайт"
@@ -1565,7 +1565,7 @@ msgid "Saving..."
 msgstr "Захоўваецца..."
 
 msgid "You are now editing the dashboard's layout"
-msgstr "Зараз Вы рэдагуеце макет старонкі лічбавай панэлі"
+msgstr "Зараз Вы рэдагуеце макет панэлі кіравання"
 
 #, python-format
 msgid "The layout you choose will be the layout for all members of %(team_name)s! Click save to apply your changes."
@@ -1840,7 +1840,7 @@ msgstr "Выдаліць запрашэнне"
 
 msgctxt "an action done *by* <username>"
 msgid "by"
-msgstr "карыстальнікам(-цай)"
+msgstr "Стваральнік(-ца):"
 
 #, python-format
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
@@ -2037,7 +2037,7 @@ msgid "This project will be set to be publicly visible!"
 msgstr "Гэты праект будзе пазначаны як бачны ўсім!"
 
 msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
-msgstr "Гэта значыць, што кожны(-ая) зарэгістраваны(-ая) карыстальнік(-ца) зможа атрымаць доступ і бачыць яе, пры гэтым толькі чальцы змогуць ствараць змесціва. Акрамя таго, усё змесціва будзе па змаўчанні публічна бачнае (гэта можна змяніць для кожнага элемента падчас стварэння). Публічна дастунае змесціва можа праглядацца КОЖНЫМ(-АЙ) карыстальнікам(-цай) Інтэрнэту і патэнцыйна адлюстроўвацца ў выніках пошукавых сістэм!"
+msgstr "Гэта значыць, што кожны(-ая) зарэгістраваны(-ая) карыстальнік(-ца) зможа атрымаць доступ і бачыць яе, пры гэтым толькі чальцы змогуць ствараць змесціва. Акрамя таго, усё змесціва будзе па змаўчанні публічна бачнае (гэта можна змяніць для кожнага элемента падчас стварэння). Публічна даступнае змесціва можа праглядацца КОЖНЫМ(-АЙ) карыстальнікам(-цай) Інтэрнэту і патэнцыйна адлюстроўвацца ў выніках пошукавых сістэм!"
 
 msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!"
 msgstr "Ваш абавязак як адміністратара групы або праекта - сачыць, каб змесціва, якое публікуецца чальцамі, не парушала ніякіх законаў аб аўтарскіх правах ці іншых законаў. Калі ласка, майце гэта на ўвазе, асабліва калі ўключаеце наладу бачнасці!"
@@ -2375,7 +2375,7 @@ msgid "Anyone can create a project based on your idea and there is no limit on h
 msgstr "Любы чалавек можа стварыць праект, грунтуючыся на Вашай ідэі; няма ніякіх абмежаванняў па колькасці створаных праектаў. Ваша ідэя застанецца бачнай і нават будзе адлюстроўвацца ў спісе ўсіх праектаў, якія ёй натхніліся!"
 
 msgid "You and anyone who like (and follow) your idea will be notified when a new project gets created from it. This way, everyone who is interested can jump right into it and become active in the new project (they still have to ask permission to become a member)."
-msgstr "Вы і кожны, хто ўпадабае Вашу ідэю і стане сачыць за ёй, будзе атрымліваць апавяшчэнні, калі з яе ствараецца новы праект. Такім чынам кожны зацікаўлены зможа наўпрост далучыцца і дзейнічаць на карысць новага праекта (але яму (ёй) ўсё ж прыйдзецца папрасіць дазволу стаць чальцом)."
+msgstr "Вы і кожны, хто ўпадабае Вашу ідэю і стане сачыць за ёй, будзеце атрымліваць апавяшчэнні, калі з яе ствараецца новы праект. Такім чынам кожны зацікаўлены зможа наўпрост далучыцца і дзейнічаць на карысць новага праекта (але яму (ёй) ўсё ж прыйдзецца папрасіць дазволу стаць чальцом)."
 
 msgid "Enter a descriptive title for your idea"
 msgstr "Увядзіце апісальную назву Вашай ідэі"
@@ -2393,10 +2393,10 @@ msgid "This idea will be set to be publicly visible!"
 msgstr "Гэта ідэя будзе публічна даступная!"
 
 msgid "Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
-msgstr "Публічна дастунае змесціва можа праглядацца КОЖНЫМ(-АЙ) карыстальнікам(-цай) Інтэрнэту і патэнцыйна быць ўключана ў вынікі пошукавых сістэм!"
+msgstr "Публічна даступнае змесціва можа праглядацца КОЖНЫМ(-АЙ) карыстальнікам(-цай) Інтэрнэту і патэнцыйна быць ўключана ў вынікі пошукавых сістэм!"
 
 msgid "Registered users only"
-msgstr "Толькі для зарэгістраваных карыстальнікаў(-ц)"
+msgstr "Толькі зарэгістраваныя карыстальнікі(-цы)"
 
 msgid "Edit folder"
 msgstr "Рэдагаваць папку"
@@ -3177,16 +3177,16 @@ msgid "Thanks for using our site!"
 msgstr "Дзякуем за карыстанне нашым сайтам!"
 
 msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
-msgstr "Забыліся пароль? Увядзіце свой адрас электроннай пошты ніжэй, і мы дашлем інструкцыі па заданні новага пароля."
+msgstr "Забыліся пароль? Увядзіце свой адрас электроннай пошты ніжэй, і мы дашлём інструкцыі па заданні новага пароля."
 
 msgid "The email you used to register your account. This is the one you receive email notifications on"
-msgstr "Адрас электроннай пошты, які вы выкарысталі падчас рэгістрацыі свайго акаўнта. На гэты адрас вы атрымліваеце апавяшчэнні"
+msgstr "Адрас электроннай пошты, які Вы выкарысталі падчас рэгістрацыі свайго акаўнта. На гэты адрас Вы атрымліваеце апавяшчэнні"
 
 msgid "Example: mymail@example.com"
 msgstr "Напрыклад: mymail@example.com"
 
 msgid "Sign up"
-msgstr "Загэгістравацца"
+msgstr "Зарэгістравацца"
 
 msgid "Create account"
 msgstr "Стварыць акаўнт"
@@ -3468,9 +3468,9 @@ msgstr "Усе групы"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Created Projects"
+#| msgid "All Projects"
 msgid "Browse all Projects"
-msgstr "Створаныя праекты"
+msgstr "Усе праекты"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
@@ -4595,7 +4595,7 @@ msgid "The link you supplied for the email confirmation is no longer valid!"
 msgstr "Спасылка, якую Вы падалі для пацверджання адраса электроннай пошты, ужо несапраўдная!"
 
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
-msgstr "Адрас электроннай пошты, які вы спрабуеце пацвердзіць, ужо пацверджаны або належыць іншаму(-й) карыстальніку(-цы)!"
+msgstr "Адрас электроннай пошты, які Вы спрабуеце пацвердзіць, ужо пацверджаны або належыць іншаму(-й) карыстальніку(-цы)!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
@@ -4621,11 +4621,6 @@ msgstr "Вы не з'яўляецеся чальцом %s! Пры жаданні
 
 msgid "Your changes have been saved."
 msgstr "Вашы змены захаваныя."
-
-#, fuzzy
-#~| msgid "Portal"
-#~ msgid "Switch Portal"
-#~ msgstr "Партал"
 
 #~ msgid "Microsite Wallpaper"
 #~ msgstr "Фонавая выява мікрасайта"
