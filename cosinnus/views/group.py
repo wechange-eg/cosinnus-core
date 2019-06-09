@@ -718,7 +718,7 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
                 signals.user_group_invitation_accepted.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
         except CosinnusGroupMembership.DoesNotExist:
             # default user-auto-join groups will accept immediately
-            if self.object.slug in getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', []):
+            if self.object.slug in getattr(settings, 'COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS', []):
                 CosinnusGroupMembership.objects.create(
                     user=self.request.user,
                     group=self.object,

@@ -152,6 +152,11 @@ class CosinnusConf(AppConf):
         'cosinnus_marketplace',
     ]
     
+    # a list of groups slugs for a portal, that do not require the group
+    # admins to accept join requests, instead the user will become a member immediately
+    # upon requesting membership
+    AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS = []
+    
     # if True, the entire /admin/ area is protected by 2-factor-authentication
     # and no user that hasn't got a device set up can gain access.
     # Set up at least one device at <host>/admin/otp_totp/totpdevice/ before activating this setting!
