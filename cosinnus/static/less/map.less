@@ -406,7 +406,6 @@ seems to be the wrong font file! (non-capitalized letters are squished!)
 	    position: absolute;
 	    right: 0;
 	    top: 0;
-	    width: 22px;
 	    height: 52px;
 	    font-size: 18px;
 	    color: @map-clickable-icon-color;
@@ -426,15 +425,29 @@ seems to be the wrong font file! (non-capitalized letters are squished!)
 	    }
 	}
 	/** Toggle state for the expand-button icon */
-	.map-expand-button i.expanded {
-		display: none;
-	}
-	&.map-splitscreen {
-		.map-expand-button i.expanded {
-			display: inherit;
-		}
-		.map-expand-button i.contracted {
+	/** Contracted state in fullscreen */
+	.map-expand-button {
+	    width: 50px;
+	    
+		i.expanded {
 			display: none;
+		}
+		i.fa.contracted {
+	    	padding: 14px 14px;
+	    	font-size: 24px;
+	    }
+	} 
+	/** Expanded state in splitscreen */ 
+	&.map-splitscreen {
+		.map-expand-button {
+	    	width: 22px;
+	    	
+			i.expanded {
+				display: inherit;
+			}
+			i.contracted {
+				display: none;
+			}
 		}
 	}
 }
