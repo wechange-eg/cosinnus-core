@@ -44,9 +44,11 @@
 			</div>
 			<div class="header-info flex-grow">
 				<div class="item-info">
-					<a href="{{ item.creator|profile_url }}">
-						{{ item.creator|full_name }}
-					</a>
+					{% if item.creator != user %}
+						<a href="{{ item.creator|profile_url }}">
+							{{ item.creator|full_name }}
+						</a>
+					{% endif %}
 					<span class="highlighted-text plain-links">
 						<a href="{{ item.get_absolute_url }}">
 							{% block creation_label %}{% endblock %}

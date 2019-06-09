@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-06 17:15+0200\n"
+"POT-Creation-Date: 2019-06-09 12:59+0200\n"
 "PO-Revision-Date: 2019-05-06 16:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4114,6 +4114,11 @@ msgstr ""
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
 msgstr ""
+
+#, fuzzy
+#| msgid "Create idea"
+msgid "You created an idea"
+msgstr "Стварыць ідэю"
 
 #, fuzzy
 #| msgid "Create idea"
