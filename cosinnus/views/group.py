@@ -284,7 +284,8 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
         context['submit_label'] = _('Create')
         # if we have 'group=xx' in the GET, add the parent if we are looking at a project
         if 'group' in self.request.GET and 'parent' in kwargs['form'].forms['obj']._meta.fields:
-            init_parent = CosinnusGroup.objects.get_cached(pks=int(self.request.GET.get('group')))
+            init_parent = CosinnusGroup.objects.get_cached(slugs=self.request.GET.get('group'))
+            logger.warn('GROUP IS: %s' % init_parent)
             kwargs['form'].forms['obj'].initial['parent'] = init_parent
             kwargs['form'].forms['obj'].fields['parent'].initial = init_parent
         return context
