@@ -229,9 +229,11 @@ $('.js-todo-link').on('click', function(e) {
                     
                     $('[data-target=widget-title]', holder).html(s);
                     var title_url = data['X-Cosinnus-Widget-Title-URL'];
-                    if (title_url !== null) {
+                    if (title_url) {
                         $('[data-target=widget-title-url]', holder).attr("href", title_url);
-                    } 
+                    } else {
+                    	$('[data-target=widget-title-url]', holder).removeAttr("href");
+                    }
                     holder.attr("data-app-name", data['X-Cosinnus-Widget-App-Name']);
                     holder.attr("data-widget-name", data['X-Cosinnus-Widget-Widget-Name']);
                     

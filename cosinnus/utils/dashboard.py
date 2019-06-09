@@ -151,8 +151,7 @@ class DashboardWidget(object):
         if self.config.group:
             return group_aware_reverse('cosinnus:%s:index' % self.app_name,
                            kwargs={'group': self.config.group})
-        # return '#' as default url to prevent firefox dropping the <a> tag content
-        return '#'
+        return ''
     
     def attached_objects_from_field(self, field):
         """ Resolves attached BaseTaggableObjects from a widget config field that contains
@@ -282,10 +281,10 @@ class GroupMembersWidget(DashboardWidget):
     @property
     def title_url(self):
         if self.config.type == WidgetConfig.TYPE_MICROSITE:
-            return '#'
+            return ''
         if self.config.group:
             return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.config.group})
-        return '#'
+        return ''
 
 
 class GroupProjectsWidget(DashboardWidget):
@@ -347,7 +346,7 @@ class GroupProjectsWidget(DashboardWidget):
 
     @property
     def title_url(self):
-        return '#'
+        return ''
     
 
 class RelatedGroupsWidget(GroupProjectsWidget):
