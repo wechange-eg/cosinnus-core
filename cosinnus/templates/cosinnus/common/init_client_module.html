@@ -10,7 +10,8 @@
                 showTiles: false,
                 showControls: {% if controlsEnabled == True or controlsEnabled == "1" %}true{% else %}false{% endif %},
                 fullscreen: {% if fullscreen == True %}true{% else %}false{% endif %},
-                routeNavigation: false
+                routeNavigation: false,
+                forcePaginationControlsEnabled: {% if forcePaginationControlsEnabled %}true{% else %}false{% endif %},
            }
         });
     });

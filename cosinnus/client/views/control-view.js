@@ -108,6 +108,12 @@ module.exports = ContentControlView.extend({
         if (!self.collection) {
             self.collection = new ResultCollection();
         }
+        if (options.searchResultLimit && !isNaN(options.searchResultLimit)) {
+        	var searchResultLimit = parseInt(options.searchResultLimit);
+        	if (searchResultLimit > 0) {
+        		self.state.searchResultLimit = options.searchResultLimit;
+        	}
+        }
         
         Backbone.mediator.subscribe('want:search', self.handleStartSearch, self);
         Backbone.mediator.subscribe('end:search', self.handleEndSearch, self);

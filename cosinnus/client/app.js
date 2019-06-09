@@ -55,7 +55,8 @@ var App = function App () {
         showTiles: true,
         showControls: true,
         fullscreen: true,
-        routeNavigation: true
+        routeNavigation: true,
+        forcePaginationControlsEnabled: false
     };
     self.displayOptions = {}
     self.defaultEl = '#app-fullscreen';
@@ -168,13 +169,14 @@ var App = function App () {
                 portalInfo: portalInfo,
                 controlsEnabled: self.displayOptions.showControls,
                 scrollControlsEnabled: self.displayOptions.showControls && self.displayOptions.showMap,
-                paginationControlsEnabled: self.displayOptions.showTiles,
+                paginationControlsEnabled: self.displayOptions.forcePaginationControlsEnabled || self.displayOptions.showTiles,
                 paginationControlsUseInfiniteScroll: !self.displayOptions.showMap && self.displayOptions.showTiles,
                 filterGroup: self.settings.filterGroup,
                 basePageURL: basePageUrl,
                 showMine: self.settings.showMine,
                 fullscreen: self.displayOptions.fullscreen,
-                splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+                splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles,
+                searchResultLimit: self.settings.searchResultLimit || 20,
             }, 
             self, 
             null
@@ -209,7 +211,8 @@ var App = function App () {
     			var options = {
     				elParent: self.el,
     				fullscreen: self.displayOptions.fullscreen,
-    				splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+    				splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles,
+                    controlsEnabled: self.displayOptions.showControls,
     			};
     			if (self.settings.map && self.settings.map.location) {
     				options['location'] = self.settings.map.location;

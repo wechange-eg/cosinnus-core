@@ -39,7 +39,7 @@ except:
 USER_MODEL = get_user_model()
 logger = logging.getLogger('cosinnus')
 
-SERVER_SIDE_SEARCH_LIMIT = 30
+SERVER_SIDE_SEARCH_LIMIT = 200
 
 
 def _better_json_loads(s):
