@@ -490,6 +490,7 @@
                     
         
                     {% for result in page.object_list %}
+                    	<!-- <span class="score">{{ result.score }}</span> -->
                       {{ result.rendered|safe }}
                     {% empty %}
                     	{% captureas empty_message %}{% trans "We could not find any results matching your search query." %}{% endcaptureas %}

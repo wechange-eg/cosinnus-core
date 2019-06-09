@@ -171,7 +171,7 @@ class TaggableModelSearchForm(SearchForm):
             if self.cleaned_data.get('q', None):
                 sqs = self._boost_search_query(sqs)
             if self.request.GET.get('o', None) == 'newest':
-                sqs = sqs.order_by('-created')
+                sqs = sqs.order_by('-created', '-_score')
         ret = sqs.models(*self.get_models())
         return ret
     
