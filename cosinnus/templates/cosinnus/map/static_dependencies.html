@@ -8,6 +8,16 @@
 <script src="{% static 'js/vendor/masonry.pkgd.min.js' %}"></script>
 <script src="{% static 'js/vendor/imagesloaded.pkgd.min.js' %}"></script>
 <script src="{% static 'js/client.js' %}?v=0.24"></script>
+
+{% comment %} Internet Explorer only: Bluebird Promise library implementation for compatibility {% endcomment %}
+<script type="text/javascript"> 
+	var ua = window.navigator.userAgent; 
+	var msie = ua.indexOf("MSIE "); 
+	if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) { 
+		document.write('<script src="{% static 'js/vendor/bluebird-promise-3.3.5.min.js' %}"><\/scr'+'ipt>');
+	} 
+</script>
+
 {% endaddtoblock %}
 
 {% addtoblock "css" %}
