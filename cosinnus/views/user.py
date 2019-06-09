@@ -64,6 +64,7 @@ from annoying.functions import get_object_or_None
 import logging
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView
 from django.utils.timezone import now
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -684,12 +685,17 @@ def user_api_me(request):
     data = {}
     if request.user.is_authenticated:
         user = request.user
+        user_societies = CosinnusSociety.objects.get_for_user(request.user)
+        user_projects = CosinnusProject.objects.get_for_user(request.user)
+        
         data.update({
             'username': user.username,
             'id': user.id,
             'first_name': user.first_name or '',
             'last_name': user.last_name or '',
             'avatar_url': CosinnusPortal.get_current().get_domain() + user.cosinnus_profile.get_avatar_thumbnail_url(), 
+            'groups': [society.slug for society in user_societies],
+            'projects': [project.slug for project in user_projects],
         })
     
     return JsonResponse(data)
