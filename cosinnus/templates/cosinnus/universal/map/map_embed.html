@@ -12,6 +12,7 @@
             var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");
             var COSINNUS_SHOW_SUPERUSER_CONTROLS = {% if user|is_superuser %}true{% else %}false{% endif %};
         </script>
+		{% include 'cosinnus/map/extra_head_map.html' %}
         
         <script src="{% static 'js/vendor/jquery-2.1.0.min.js' %}"></script>
         <script src="{% static 'js/vendor/underscore-1.8.3.js' %}"></script>

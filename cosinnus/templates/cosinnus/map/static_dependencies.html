@@ -36,3 +36,5 @@
     var COSINNUS_IDEAS_ENABLED = {% if SETTINGS.COSINNUS_IDEAS_ENABLED %}true{% else %}false{% endif %};
     var COSINNUS_SHOW_SUPERUSER_CONTROLS = {% if user|is_superuser %}true{% else %}false{% endif %};
 </script>
+
+{% include 'cosinnus/map/extra_head_map.html' %}

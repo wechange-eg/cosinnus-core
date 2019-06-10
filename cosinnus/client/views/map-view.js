@@ -507,11 +507,11 @@ module.exports = ContentControlView.extend({
                     // style see https://leafletjs.com/reference-1.3.0.html#path-option
                     var district_boundary = new L.geoJson(null, {
                         style: function (feature) {
-                            return {
+                            return util.ifundef(COSINNUS_MAP_OPTIONS.geojson_style, {
                                 width: 1,
                                 weight: 0.5,
                                 fillOpacity: 0.035,
-                            };
+                            });
                         }
                     });
                     district_boundary.addTo(self.leaflet);
