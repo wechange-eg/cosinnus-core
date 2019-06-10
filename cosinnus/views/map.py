@@ -84,11 +84,15 @@ class MapView(BaseMapView):
                         'zoom': 9,
                     }
                 })
-        # apply search result limit GET param, which is a settings parameter and is
+        # apply GET params that are settings parameters and are
         # set once and then discarded (unlike the map/search query parameters)
         if self.request.GET.get('search_result_limit', None):
             settings.update({
                 'searchResultLimit': self.request.GET.get('search_result_limit'),
+            })
+        if self.request.GET.get('filter_group', None):
+            settings.update({
+                'filterGroup': self.request.GET.get('filter_group'),
             })
         options.update({
             'settings': settings,
