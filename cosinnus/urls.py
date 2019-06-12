@@ -182,6 +182,7 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/edit/$' % url_key, group.group_update, name=prefix+'group-edit'),
         url(r'^%s/(?P<group>[^/]+)/delete/$' % url_key, group.group_delete, name=prefix+'group-delete'),
         url(r'^%s/(?P<group>[^/]+)/join/$' % url_key, group.group_user_join, name=prefix+'group-user-join'),
+        url(r'^%s/(?P<group>[^/]+)/join/nocsrf/$' % url_key, group.group_user_join_csrf_exempt, name=prefix+'group-user-join-nocsrf'),
         url(r'^%s/(?P<group>[^/]+)/leave/$' % url_key, group.group_user_leave, name=prefix+'group-user-leave'),
         url(r'^%s/(?P<group>[^/]+)/withdraw/$' % url_key, group.group_user_withdraw, name=prefix+'group-user-withdraw'),
         url(r'^%s/(?P<group>[^/]+)/decline/$' % url_key, group.group_user_invitation_decline, name=prefix+'group-user-decline'),

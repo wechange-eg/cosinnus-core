@@ -62,7 +62,7 @@ from django.conf import settings
 from django.core.paginator import Paginator
 from cosinnus.utils.user import filter_active_users
 from cosinnus.utils.functions import resolve_class
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
 import logging
 from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name,\
@@ -738,6 +738,24 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
         
 
 group_user_join = GroupUserJoinView.as_view()
+
+
+class CSRFExemptGroupJoinView(GroupUserJoinView):
+    """ A CSRF-exempt group user join view that only works on groups/projects with slugs
+        in settings.COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS in this portal.
+    """
+    
+    @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(CSRFExemptGroupJoinView, self).dispatch(*args, **kwargs)
+    
+    def get_object(self, *args, **kwargs): 
+        group = super(CSRFExemptGroupJoinView, self).get_object(*args, **kwargs)
+        if group and group.slug not in getattr(settings, 'COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS', []):
+            raise PermissionDenied('The group/project requested for the join is not marked as auto-join!')
+        return group
+     
+group_user_join_csrf_exempt = CSRFExemptGroupJoinView.as_view()
 
 
 class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
