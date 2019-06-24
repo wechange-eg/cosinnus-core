@@ -31,7 +31,7 @@
 		
 		{# We use makeSafe here because we escape results' text in handleDate() #}
 		{% for item in quicksearchResults %}
-			{{ macros.listItem(item.text, item.url, item.icon, annotation=item.group, annotationIcon=item.group_icon, includeUnderdrop=true, makeSafe=true) }}
+			{{ macros.listItem(item.text, item.url, item.icon, annotation=item.group, annotationIcon=item.group_icon, includeUnderdrop=true) }}
 		{% endfor %} 
 		
 		

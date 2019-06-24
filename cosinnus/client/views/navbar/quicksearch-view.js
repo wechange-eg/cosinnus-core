@@ -256,9 +256,9 @@ module.exports = BaseView.extend({
         if (data['count'] > 0) {
         	self.state.quicksearchResults = data['items'];
         	$.each(self.state.quicksearchResults, function(itemIdx, item) {
-        		console.log(item)
-        		// make text safe by escaping it
-        		var text = $('<div>').text(item['text']).html();
+        		// we expect escaped text here! 
+        		// otherwise, we could make it safe using: var text = $('<div>').text(item['text']).html();
+        		var text = item['text'];
         		$.each(self.state.query.split(' '), function(queryTermIdx, queryTerm) {
         			text = util.iReplace(text, queryTerm, '<b>$1</b>');
         		});

@@ -22,6 +22,7 @@ from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.http import is_safe_url
 from django.contrib.redirects.middleware import RedirectFallbackMiddleware
+from cosinnus.utils.urls import redirect_next_or
 
 
 logger = logging.getLogger('cosinnus')
@@ -216,7 +217,7 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
         if request.user.is_authenticated:
             # hiding login and signup pages for logged in users
             if request.path in ['/login/', '/signup/']:
-                redirect_url = getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None)
+                redirect_url = redirect_next_or(request, getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None))
                 if redirect_url:
                     return HttpResponseRedirect(redirect_url)
             
