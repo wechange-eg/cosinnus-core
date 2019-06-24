@@ -68,6 +68,9 @@ class ThumbnailableImageMixin(object):
             except (InvalidImageFormatError, OSError):
                 logger.warn('Invalid Image format on an object', extra={'class': self.__class__.__name__, 'id': getattr(self, 'id')})
                 return ''
+            except Exception as e:
+                logger.warn('Unexptected Exception while trying to generate a thumbnail!', extra={'class': self.__class__.__name__, 'id': getattr(self, 'id'), 'exception': e})
+                return ''
             
             if not thumbnail:
                 return ''
