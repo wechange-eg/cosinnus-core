@@ -154,7 +154,7 @@
 {% endmacro %}
 
 
-{% macro listItem(text, url, icon, subtext=null, annotation=null, annotationIcon=null, includeUnderdrop=false, is_emphasized=false, inactive=false, makeSafe=false) %}
+{% macro listItem(text, url, icon, subtext=null, annotation=null, annotationIcon=null, includeUnderdrop=false, is_emphasized=false, inactive=false, makeSafe=true) %}
     <li>
 		<a class="list-item {% if inactive %}inactive no-select{% endif %}" href="{{ url }}" role="button" titledby="{% if subtext %}.item-text-primary{% else %}.item-text{% endif %}"> 
 			<div class="item-icon {% if subtext %}item-icon-offset{% endif %}">
@@ -162,7 +162,13 @@
     		</div>
     		{% if subtext %}
 	    		<div class="item-text item-text-dual">
-	    			<div class="item-text-primary text-bold">{{ text|safe }}</div>
+	    			<div class="item-text-primary text-bold">
+	    				{% if makeSafe %}
+	    					{{ text|safe }}
+						{% else %}
+		    				{{ text }} 
+	    				{% endif %}
+    				</div>
 	    			<br/>
 	    			{% if subtext['is_date'] %}
 	    				<div class="moment-data-date" data-date="{{ subtext.date }}" data-date-style="short"></div>
@@ -184,7 +190,11 @@
     				{% if annotationIcon %}
     					<i class="fas fa-fw {{ annotationIcon }}"></i>
     				{% endif %}
-	    			{{ annotation }}
+	    			{% if makeSafe %}
+    					{{ annotation|safe }}
+					{% else %}
+	    				{{ annotation }} 
+    				{% endif %}
 	    		</div>
     		{% endif %}
     		{% if includeUnderdrop %}
