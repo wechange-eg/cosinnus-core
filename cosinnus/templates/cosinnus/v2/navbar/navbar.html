@@ -8,6 +8,9 @@
 			    		aria-expanded="false" aria-controls="main-collapse"
 			    		data-toggle="collapse" data-target="#main-collapse"> 
 		    		<i class="fas fa-fw fa-bars"></i>
+		    		{% if groups_invited_count and groups_invited_count > 0 %}
+		    			<span class="message-counter"> {{ groups_invited_count }}</span>
+		    		{% endif %}
 	    		</a>
     		{% endif %}
     		
