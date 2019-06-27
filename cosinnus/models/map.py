@@ -578,6 +578,20 @@ try:
 except:
     Note = None
     
+
+try:
+    from cosinnus_marketplace.models import Offer #noqa
+    SEARCH_MODEL_NAMES.update({
+        Offer: 'offers',                           
+    })
+    SHORT_MODEL_MAP.update({
+        12: Offer,
+    })
+    #SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+    #    'notes': NYI,
+    #})
+except:
+    Offer = None
     
     
 SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])

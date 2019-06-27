@@ -5,7 +5,8 @@ import inspect
 
 from django.template.defaultfilters import date as django_date_filter
 
-from cosinnus.models.group import CosinnusGroup
+from cosinnus.conf import settings
+from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -57,8 +58,13 @@ class DashboardItem(dict):
                 self['text'] = escape(obj.title)
                 self['url'] = obj.get_absolute_url()
                 self['subtext'] = escape(obj.group.name)
-                self['group'] = escape(obj.group.name)
-                self['group_icon'] = 'fa-group' if obj.group.type == CosinnusGroup.TYPE_PROJECT else 'fa-sitemap'
+                
+                if obj.group.slug in settings.NEWW_DEFAULT_USER_GROUPS:
+                    self['group'] = escape(CosinnusPortal.get_current().name)
+                else:
+                    self['group'] = escape(obj.group.name)
+                    self['group_icon'] = 'fa-group' if obj.group.type == CosinnusGroup.TYPE_PROJECT else 'fa-sitemap'
+                    
                 if obj.__class__.__name__ == 'Event':
                     if obj.state == 2:
                         self['icon'] = 'fa-calendar-check-o'
@@ -77,5 +83,7 @@ class DashboardItem(dict):
                     self['icon'] = 'fa-tasks'
                 if obj.__class__.__name__ == 'Poll':
                     self['icon'] = 'fa-bar-chart'
+                if obj.__class__.__name__ == 'Offer':
+                    self['icon'] = 'fa-exchange-alt'
             
             

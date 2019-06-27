@@ -183,6 +183,19 @@
 					{% trans "Add Event" %} 
 				</div>
 			</a>
+			{% if SETTINGS.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE %}
+			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% group_url "cosinnus:marketplace:add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" 
+					class="create-menu-link flex-grow">
+				<h2 class="headline margin-regular">{% trans "Offer" %}</h2>
+				<div class="description">
+					(TODO: Better text!)
+					{% trans "Do you have something to share, sell or give away? Are you searching for something? (... TODO)" %}
+				</div>
+				<div class="action text-bold">
+					{% trans "Post new Offer" %} 
+				</div>
+			</a>
+			{% endif %}
 			
 		</div>
 		<div class="nav-flyout-backdrop"></div>

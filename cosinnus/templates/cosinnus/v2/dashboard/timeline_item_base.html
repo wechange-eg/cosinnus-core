@@ -124,6 +124,8 @@
 			{% endif %}
 		{% endblock %}
 		
+		{% block additional_content %}{% endblock %}
+		
 		{% block tags %}
 			{% with topics=item.media_tag.topics tags=item.media_tag.tags.all comments=item.comments %}
 			
@@ -141,20 +143,24 @@
 								{% endif %}
 							{% endwith %}
 						{% endif %}
-						{% if topics %}
-							<span>
-								<i class="fas fa-fw fa-lightbulb-o"></i>
-								{% render_cosinnus_topics topics %}
-							</span>
-						{% endif %}
-						{% if tags %}
-							<span>
-								<i class="fas fa-fw fa-tag"></i>
-								{% for tag in tags %}
-									{{ tag }}{% if not forloop.last %}, {% endif %}
-								{% endfor %}
-							</span>
-						{% endif %}
+						{% block topics_content %}
+							{% if topics %}
+								<span>
+									<i class="fas fa-fw fa-lightbulb-o"></i>
+									{% render_cosinnus_topics topics %}
+								</span>
+							{% endif %}
+						{% endblock %}
+						{% block tags_content %}
+							{% if tags %}
+								<span>
+									<i class="fas fa-fw fa-tag"></i>
+									{% for tag in tags %}
+										{{ tag }}{% if not forloop.last %}, {% endif %}
+									{% endfor %}
+								</span>
+							{% endif %}
+						{% endblock %}
 					</div>
 					<div class="action-buttons">
 						{% block action_buttons %}{% endblock %}

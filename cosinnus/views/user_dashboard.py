@@ -204,6 +204,8 @@ class ModelRetrievalMixin(object):
             queryset = exclude_special_folders(queryset)
         elif model_name == 'cosinnus_event.Event' and current_only:
             queryset = model.objects.all_upcoming()
+        elif model_name == 'cosinnus_marketplace.Offer':
+            queryset = model.objects.all_active()
         elif model is CosinnusIdea or BaseTaggableObjectModel in inspect.getmro(model):
             queryset = model._default_manager.all()
         elif model_name == "postman.Message":
@@ -361,6 +363,9 @@ class TimelineView(ModelRetrievalMixin, View):
     
     # which models can be displaed, as found in `SEARCH_MODEL_NAMES_REVERSE`
     content_types = ['polls', 'todos', 'files', 'pads', 'ideas', 'events', 'notes',]
+    
+    if settings.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE:
+        content_types += ['offers']
     
     # the key by which the timeline stream is ordered. must be present on *all* models
     sort_key = '-last_action'

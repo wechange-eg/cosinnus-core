@@ -34,6 +34,7 @@
 	var COSINNUS_MAP_OPTIONS = {{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }};
     var COSINNUS_PORTAL_INFOS = {% render_cosinnus_portal_info_json %};
     var COSINNUS_IDEAS_ENABLED = {% if SETTINGS.COSINNUS_IDEAS_ENABLED %}true{% else %}false{% endif %};
+    var COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE = {% if SETTINGS.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE %}true{% else %}false{% endif %};
     var COSINNUS_SHOW_SUPERUSER_CONTROLS = {% if user|is_superuser %}true{% else %}false{% endif %};
 </script>
 

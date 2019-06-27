@@ -572,6 +572,9 @@ class CosinnusConf(AppConf):
     # Debug: enable naive queryset picking for dashboard timeline
     V2_DASHBOARD_USE_NAIVE_FETCHING = False
     
+    # should the dashboard show marketplace offers, both as widgets and in the timeline?
+    V2_DASHBOARD_SHOW_MARKETPLACE = False
+    
     # not all servers are running Postgres >= 9.3 yet. as long as this is true, we cannot uniformly run some nicer queries
     DO_ALL_SERVERS_HAVE_PSQL_9_3 = False
     

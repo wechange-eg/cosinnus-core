@@ -54,8 +54,12 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
     
     # which models can be displaed, as found in `SEARCH_MODEL_NAMES_REVERSE`
     content_types = ['polls', 'todos', 'files', 'pads', 'ideas', 'events', 'projects', 'groups',]
+    
+    if settings.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE:
+        content_types += ['offers']
+    
     # which fields should be filtered for the query for each model
-    contenty_type_filter_fields = {
+    content_type_filter_fields = {
         'polls': 'title',
         'todos': 'title',
         'files': 'title',
@@ -65,6 +69,9 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
         'projects': 'name',
         'groups': 'name',
     }
+    if settings.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE:
+        content_type_filter_fields['offers'] = 'title'
+    
     
     # the key by which the timeline stream is ordered. must be present on *all* models
     sort_key = '-created'
@@ -132,7 +139,7 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
                 if settings.DEBUG:
                     raise ImproperlyConfigured('Could not find content model for timeline content type "%s"' % content_type)
                 continue
-            single_querysets.append(self._get_queryset_for_model(content_model, self.contenty_type_filter_fields[content_type]))
+            single_querysets.append(self._get_queryset_for_model(content_model, self.content_type_filter_fields[content_type]))
                 
         items = self._mix_items_from_querysets(*single_querysets)
         return items
