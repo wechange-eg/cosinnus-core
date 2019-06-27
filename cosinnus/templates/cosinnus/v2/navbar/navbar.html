@@ -72,9 +72,11 @@
 		    		data-toggle="collapse" data-target="#create-menu-collapse"> 
     		<i class="fas fa-fw fa-plus"></i>
 		</a>
-		<a class="nav-button" href="/cms/?noredir=1" role="button" title="{% trans "Events" %}"> 
+		{% block home_icon_button %}
+		<a class="nav-button" href="/cms/?noredir=1" role="button" title="{% trans "Home" %}"> 
     		<i class="fas fa-fw fa-home"></i>
 		</a>
+		{% endblock %}
 		<a class="nav-button" href="{% group_url "cosinnus:event:list" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" role="button" title="{% trans "Events" %}"> 
     		<i class="fas fa-fw fa-calendar"></i>
 		</a>
