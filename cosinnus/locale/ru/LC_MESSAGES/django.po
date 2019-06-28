@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-09 13:20+0200\n"
+"POT-Creation-Date: 2019-06-28 16:30+0200\n"
 "PO-Revision-Date: 2019-04-11 17:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4143,6 +4143,9 @@ msgstr "Поиск"
 msgid "Create content"
 msgstr "Создать аккаунт"
 
+msgid "Home"
+msgstr ""
+
 msgid "Nachrichten"
 msgstr ""
 
@@ -4155,6 +4158,19 @@ msgstr "Язык"
 #| msgid "Register and join!"
 msgid "Register a new account"
 msgstr "Зарегистрируйтесь и присоединитесь!"
+
+#, fuzzy
+#| msgid "Offers"
+msgid "Offer"
+msgstr "Объявления"
+
+msgid "Do you have something to share, sell or give away? Are you searching for something? (... TODO)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus Idea"
+msgid "Post new Offer"
+msgstr "Cosinnus идея"
 
 #, fuzzy
 #| msgid "Edit Profile"

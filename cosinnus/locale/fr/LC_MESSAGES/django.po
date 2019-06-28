@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-09 13:20+0200\n"
+"POT-Creation-Date: 2019-06-28 16:30+0200\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4150,6 +4150,9 @@ msgstr "Rechercher"
 msgid "Create content"
 msgstr "Créer compte"
 
+msgid "Home"
+msgstr ""
+
 msgid "Nachrichten"
 msgstr ""
 
@@ -4162,6 +4165,19 @@ msgstr "Langue"
 #| msgid "Register and join!"
 msgid "Register a new account"
 msgstr "Inscris-toi et rejoins !"
+
+#, fuzzy
+#| msgid "Offers"
+msgid "Offer"
+msgstr "Offres"
+
+msgid "Do you have something to share, sell or give away? Are you searching for something? (... TODO)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus Idea"
+msgid "Post new Offer"
+msgstr "Idée Cosinnus"
 
 #, fuzzy
 #| msgid "Edit Profile"
