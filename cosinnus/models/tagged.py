@@ -36,6 +36,7 @@ from django.utils.http import urlencode
 from django.core.validators import validate_comma_separated_integer_list
 from django.contrib.postgres.fields.jsonb import JSONField
 from annoying.functions import get_object_or_None
+from django.contrib.auth import get_user_model
 
 
 
@@ -654,6 +655,9 @@ class LikeableObjectMixin(models.Model):
             self._liked_obj_ids = user_ids
         return user_ids
     
+    def get_liked_users(self):
+        return get_user_model().objects.filter(id__in=self.get_liked_user_ids(), is_active=True)
+    
     def get_followed_user_ids(self):
         """ Returns a list of int user ids for users that are following this object. """
         if self._followed_obj_ids is not None:
@@ -664,6 +668,9 @@ class LikeableObjectMixin(models.Model):
             cache.set(self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id), user_ids, settings.COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT)
             self._followed_obj_ids = user_ids
         return user_ids
+    
+    def get_followed_users(self):
+        return get_user_model().objects.filter(id__in=self.get_followed_user_ids(), is_active=True)
     
     def clear_likes_cache(self):
         """ Clears the remote and local object cache for this object's like and follow counts """
