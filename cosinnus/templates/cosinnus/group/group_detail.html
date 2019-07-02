@@ -198,7 +198,7 @@
 		
         {% if user|has_write_access:object or user in pendings %}
             
-            <legend>{% trans "Membership requests" %}</legend>
+            <legend id="requests">{% trans "Membership requests" %}</legend>
             
 	        {% for member in pendings %}
 	           

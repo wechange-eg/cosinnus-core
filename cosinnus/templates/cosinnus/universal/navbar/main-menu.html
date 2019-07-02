@@ -19,6 +19,21 @@
 			<hr>
 		{% endif %}
 		
+		{% if group_requests|length > 0 %}
+			<h2 class="headline headline-condensed">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Membership Requests" %} ({{ group_requests_count }})
+			</h2>
+		
+			<ul class="item-list">
+				{% for item in group_requests %}
+					{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+				{% endfor %}
+			</ul>
+			
+			<hr>
+		{% endif %}
+		
 		<h2 class="headline headline-condensed">
 			{# Translators: __INCLUDE_JS_PO__ #}
 			{% trans "My Groups and Projects" %}

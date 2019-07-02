@@ -20,7 +20,7 @@ from django.utils.translation import ugettext_lazy as _, get_language
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager,\
-    CosinnusPortal, get_cosinnus_group_model
+    CosinnusPortal, get_cosinnus_group_model, CosinnusGroupMembership
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token,
@@ -229,8 +229,14 @@ def multiply(value, arg):
     return value * arg
 
 @register.filter
+def add_num(value, arg):
+    """Template filter to add two numbers
+    """
+    return value + arg
+
+@register.filter
 def subtract(value, arg):
-    """Template filter to multiply two numbers
+    """Template filter to subtract two numbers
     """
     return value - arg
 
@@ -361,6 +367,23 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
         groups_invited += [DashboardItem(group) for group in projects_invited]
         context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         context['groups_invited_count'] = len(groups_invited)
+        
+        membership_requests = []
+        membership_requests_count = 0
+        admined_group_ids = CosinnusGroup.objects.get_for_user_group_admin_pks(request.user)
+        admined_groups = CosinnusGroup.objects.get_cached(pks=admined_group_ids)
+        for admined_group in admined_groups:
+            pending_ids = CosinnusGroupMembership.objects.get_pendings(group=admined_group)
+            if len(pending_ids) > 0:
+                membership_request_item = DashboardItem()
+                membership_request_item['icon'] = 'fa-sitemap' if admined_group.type == CosinnusGroup.TYPE_SOCIETY else 'fa-group'
+                membership_request_item['text'] = escape('%s (%d)' % (admined_group.name, len(pending_ids)))
+                membership_request_item['url'] = group_aware_reverse('cosinnus:group-detail', kwargs={'group': admined_group}) + '#requests'
+                membership_requests.append(membership_request_item)
+                membership_requests_count += len(pending_ids)
+        context['group_requests_json_encoded'] = _escape_quotes(_json.dumps(membership_requests))
+        context['group_requests_count'] = membership_requests_count
+        
         
         attending_events = []
         try:

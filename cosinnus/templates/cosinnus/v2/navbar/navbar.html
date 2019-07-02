@@ -8,9 +8,11 @@
 			    		aria-expanded="false" aria-controls="main-collapse"
 			    		data-toggle="collapse" data-target="#main-collapse"> 
 		    		<i class="fas fa-fw fa-bars"></i>
-		    		{% if groups_invited_count and groups_invited_count > 0 %}
-		    			<span class="message-counter"> {{ groups_invited_count }}</span>
-		    		{% endif %}
+		    		{% with total_counter=groups_invited_count|add_num:group_requests_count %}
+			    		{% if total_counter > 0 %}
+			    			<span class="message-counter"> {{ total_counter }}</span>
+			    		{% endif %}
+		    		{% endwith %}
 	    		</a>
     		{% endif %}
     		
@@ -120,6 +122,8 @@
 	            	contextDataJSON: {
 	            		'group_clusters': "{{ group_clusters_json_encoded }}",
 	            		'groups_invited': "{{ groups_invited_json_encoded }}",
+	            		'group_requests': "{{ group_requests_json_encoded }}",
+	            		'group_requests_count': {{ group_requests_count }},
 	            		'followed_ideas': "{{ followed_ideas_json_encoded }}",
 	            		'my_ideas': "{{ my_ideas_json_encoded }}",
 	            		'attending_events': "{{ attending_events_json_encoded }}",
