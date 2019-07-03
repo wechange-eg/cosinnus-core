@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-28 16:30+0200\n"
+"POT-Creation-Date: 2019-07-03 17:47+0200\n"
 "PO-Revision-Date: 2019-06-14 00:20+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -3423,6 +3423,12 @@ msgid "Search this area"
 msgstr "In diesem Ausschnitt suchen"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Membership requests"
+msgid "Membership Requests"
+msgstr "Mitglieder-Anträge"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Groups and Projects"
 msgstr "Meine Gruppen und Projekte"
 
@@ -4094,7 +4100,7 @@ msgstr "Neues Konto registrieren"
 msgid "Offer"
 msgstr "Inserate"
 
-msgid "Do you have something to share, sell or give away? Are you searching for something? (... TODO)"
+msgid "Do you have something to share, sell or give away? Are you searching for something?"
 msgstr ""
 
 #, fuzzy

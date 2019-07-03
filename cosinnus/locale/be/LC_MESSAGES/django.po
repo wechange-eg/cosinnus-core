@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-28 16:30+0200\n"
+"POT-Creation-Date: 2019-07-03 17:47+0200\n"
 "PO-Revision-Date: 2019-06-09 13:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3434,6 +3434,12 @@ msgstr "Шукаць ў гэтай вобласці"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Membership requests"
+msgid "Membership Requests"
+msgstr "Запыты на членства"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "My Projects"
 msgid "My Groups and Projects"
 msgstr "Мае праекты"
@@ -4160,7 +4166,7 @@ msgstr "Зарэгіструйцеся і далучыцеся!"
 msgid "Offer"
 msgstr "Прапановы"
 
-msgid "Do you have something to share, sell or give away? Are you searching for something? (... TODO)"
+msgid "Do you have something to share, sell or give away? Are you searching for something?"
 msgstr ""
 
 #, fuzzy
