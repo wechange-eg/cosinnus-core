@@ -95,6 +95,7 @@ module.exports = BaseView.extend({
     		this.fireSearch();
     	} else if (event.keyCode == 27) {
     		this.$searchBarEl.removeClass('active').find('.nav-search-box').blur();
+    		$('.v2-navbar').removeClass('search-open');
     	}
     },
     
@@ -164,6 +165,7 @@ module.exports = BaseView.extend({
     	util.log('*** Showing quicksearch results ***')
     	document.addEventListener('click', this.thisContext(this.checkQuickSearchFocusOut));
     	this.$searchBarEl.addClass('active');
+    	$('.v2-navbar').addClass('search-open');
     },
     
     /** Hides the quicksearch result list */
@@ -177,6 +179,7 @@ module.exports = BaseView.extend({
     	if ((this.$searchBarEl.hasClass('active') && !this.$searchBarEl[0].contains(event.target)) 
 				|| $(event.target).hasClass('nav-search-backdrop')) {
     		this.$searchBarEl.removeClass('active');
+    		$('.v2-navbar').removeClass('search-open');
     		document.removeEventListener('click', this.thisContext(this.checkQuickSearchFocusOut));
     	}
     },

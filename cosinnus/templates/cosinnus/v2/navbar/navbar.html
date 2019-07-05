@@ -24,7 +24,7 @@
             </div>
             
             {% if not SETTINGS.COSINNUS_USE_V2_NAVBAR and SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
-	            <a class="nav-button nav-header-textlink" href="#">
+	            <a class="nav-button nav-header-textlink hidden-during-search" href="#">
 	            	***ADMIN-ONLY TEST PHASE***
 	            </a>
         	{% endif %}
