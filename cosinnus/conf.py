@@ -327,10 +327,10 @@ class CosinnusConf(AppConf):
     # this exists so we can blanket boost specific models for visibility without diving
     # into the SearchIndexes and boost logic.
     HAYSTACK_GLOBAL_MODEL_BOOST_MULTIPLIERS = {
-        'cosinnus_event.event': 0.5,
+        'cosinnus_event.event': 0.35,
         #'cosinnus.cosinnusproject': 1.0,
         #'cosinnus.cosinnussociety': 1.0,
-        #'cosinnus.cosinnusidea': 1.0,
+        'cosinnus.cosinnusidea': 1.2,
         'cosinnus.userprofile': 0.5,
     } 
     
