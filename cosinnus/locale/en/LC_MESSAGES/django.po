@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-03 17:47+0200\n"
+"POT-Creation-Date: 2019-07-07 20:02+0200\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -544,10 +544,13 @@ msgstr ""
 msgid "Website"
 msgstr ""
 
+msgid "Welcome-Email sending enabled"
+msgstr ""
+
 msgid "Welcome-Email Text"
 msgstr ""
 
-msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
+msgid "If set and enabled, this text will be sent to all new users after their registration is complete."
 msgstr ""
 
 msgid "Public"
@@ -1286,6 +1289,35 @@ msgstr ""
 msgid "Back to Project Overview"
 msgstr ""
 
+#, fuzzy
+#| msgid "There are no groups."
+msgid "Administration"
+msgstr "There are no groups."
+
+msgid "Select a page on the left side."
+msgstr ""
+
+msgid "Simple Statistics"
+msgstr ""
+
+msgid "User Welcome Email"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Currently set Welcome-Email Text"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr ""
+
 msgid "Settings"
 msgstr ""
 
@@ -1592,9 +1624,6 @@ msgid "Show in my projects..."
 msgstr "Other Projects"
 
 msgid "Rearrange"
-msgstr ""
-
-msgid "Save"
 msgstr ""
 
 msgid "Saving..."
@@ -1997,9 +2026,6 @@ msgstr ""
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr ""
 
-msgid "There was an error in one of the fields you entered. Please correct it before saving!"
-msgstr ""
-
 msgid "General"
 msgstr ""
 
@@ -2219,9 +2245,6 @@ msgid "Leave"
 msgstr ""
 
 msgid "Withdraw"
-msgstr ""
-
-msgid "Edit"
 msgstr ""
 
 msgid "Details"
@@ -3242,9 +3265,6 @@ msgid "next"
 msgstr ""
 
 msgid "Enter one or more search terms or select a topic to search."
-msgstr ""
-
-msgid "Simple Statistics"
 msgstr ""
 
 msgid "Date"
@@ -4533,6 +4553,11 @@ msgstr ""
 
 msgid "Sorry, but the invite token you have used does not seem to be valid!"
 msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgid "Welcome to %(portal_name)s!"
+msgstr "Edit project “%(team_name)s”"
 
 msgid "The user account you were looking for does not exist! Their registration was probably already denied."
 msgstr ""

@@ -8,6 +8,8 @@ from django.views.generic.base import TemplateView
 from cosinnus.forms.administration import UserWelcomeEmailForm
 from cosinnus.models.group import CosinnusPortal
 from django.urls.base import reverse
+from cosinnus.views.user import _send_user_welcome_email_if_enabled
+from django.shortcuts import redirect
 
 
 class AdministrationView(TemplateView):
@@ -31,6 +33,9 @@ class UserWelcomeEmailEditView(FormView):
         if not check_user_superuser(request.user):
             raise PermissionDenied('You do not have permission to access this page.')
         self.portal = CosinnusPortal.get_current()
+        if request.GET.get('send_test', False) == '1':
+            _send_user_welcome_email_if_enabled(self.request.user, force=True)
+            return redirect(self.get_success_url())
         return super(UserWelcomeEmailEditView, self).dispatch(request, *args, **kwargs)
     
     def get_initial(self, *args, **kwargs):

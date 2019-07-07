@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-03 17:47+0200\n"
+"POT-Creation-Date: 2019-07-07 20:02+0200\n"
 "PO-Revision-Date: 2019-06-09 13:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -541,11 +541,16 @@ msgstr ""
 msgid "Website"
 msgstr "Вэбсайт"
 
+#, fuzzy
+#| msgid "Welcome-Email Text"
+msgid "Welcome-Email sending enabled"
+msgstr "Тэкст вітальнага ліста"
+
 msgid "Welcome-Email Text"
 msgstr "Тэкст вітальнага ліста"
 
-msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
-msgstr "Калі гэта функцыя абраная, гэты тэкст замяшчае стандартны тэкст вітальнага ліста, які будзе адпраўлены на парталы, дзе ўключана опцыя \"Карыстальнікі(-цы) патрабуюць актывацыі\"."
+msgid "If set and enabled, this text will be sent to all new users after their registration is complete."
+msgstr ""
 
 msgid "Public"
 msgstr "Публічны"
@@ -1260,6 +1265,39 @@ msgstr "Інфармацыя не прызначана"
 msgid "Back to Project Overview"
 msgstr "Вярнуцца да агульнага апісання праекту"
 
+#, fuzzy
+#| msgid "Administrator"
+msgid "Administration"
+msgstr "Адміністратар"
+
+msgid "Select a page on the left side."
+msgstr ""
+
+msgid "Simple Statistics"
+msgstr "Простая статыстыка"
+
+#, fuzzy
+#| msgid "Welcome-Email Text"
+msgid "User Welcome Email"
+msgstr "Тэкст вітальнага ліста"
+
+msgid "Edit"
+msgstr "Рэдагаваць"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "У адным з палёў, якія вы запоўнілі, ёсць памылка. Калі ласка, выпраўце яе перш чым захаваць старонку!"
+
+msgid "Save"
+msgstr "Захаваць"
+
+#, fuzzy
+#| msgid "Welcome-Email Text"
+msgid "Currently set Welcome-Email Text"
+msgstr "Тэкст вітальнага ліста"
+
+msgid "Send yourself a Test-Mail"
+msgstr ""
+
 msgid "Settings"
 msgstr "Налады"
 
@@ -1557,9 +1595,6 @@ msgstr "Паказваць у маіх праектах..."
 
 msgid "Rearrange"
 msgstr "Змяніць парадак"
-
-msgid "Save"
-msgstr "Захаваць"
 
 msgid "Saving..."
 msgstr "Захоўваецца..."
@@ -1952,9 +1987,6 @@ msgstr "Ваш новы праект будзе таксама адлюстро�
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr "Вядома, вы таксама можаце стварыць праект без прывязвання да ідэі - каб гэта зрабіць, проста націсніце \"Стварыць праект\" злева."
 
-msgid "There was an error in one of the fields you entered. Please correct it before saving!"
-msgstr "У адным з палёў, якія вы запоўнілі, ёсць памылка. Калі ласка, выпраўце яе перш чым захаваць старонку!"
-
 msgid "General"
 msgstr "Агульныя"
 
@@ -2169,9 +2201,6 @@ msgstr "Выйсці"
 
 msgid "Withdraw"
 msgstr "Адклікаць"
-
-msgid "Edit"
-msgstr "Рэдагаваць"
 
 msgid "Details"
 msgstr "Падрабязнасці"
@@ -3307,9 +3336,6 @@ msgstr "наступная"
 
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Увядзіце адзін ці больш ключавых слоў для пошуку або абярыце тэму для пошуку."
-
-msgid "Simple Statistics"
-msgstr "Простая статыстыка"
 
 msgid "Date"
 msgstr "Дата"
@@ -4589,6 +4615,11 @@ msgstr "Калі ласка, увядзіце маркер!"
 msgid "Sorry, but the invite token you have used does not seem to be valid!"
 msgstr "На жаль, маркер запрашэння, які Вы выкарысталі, выглядае несапраўдным!"
 
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgid "Welcome to %(portal_name)s!"
+msgstr "Рэдагаваць “%(team_name)s”"
+
 msgid "The user account you were looking for does not exist! Their registration was probably already denied."
 msgstr "Уліковы запіс карыстальніка, які Вы шукалі, не існуе! Верагодна, у рэгістрацыі карыстальніка(-цы) ўжо адмоўлена."
 
@@ -4643,6 +4674,14 @@ msgstr "Вы не з'яўляецеся чальцом %s! Пры жаданні
 
 msgid "Your changes have been saved."
 msgstr "Вашы змены захаваныя."
+
+#, fuzzy
+#~| msgid "Administrator"
+#~ msgid "Administration Area"
+#~ msgstr "Адміністратар"
+
+#~ msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
+#~ msgstr "Калі гэта функцыя абраная, гэты тэкст замяшчае стандартны тэкст вітальнага ліста, які будзе адпраўлены на парталы, дзе ўключана опцыя \"Карыстальнікі(-цы) патрабуюць актывацыі\"."
 
 #~ msgid "Microsite Wallpaper"
 #~ msgstr "Фонавая выява мікрасайта"

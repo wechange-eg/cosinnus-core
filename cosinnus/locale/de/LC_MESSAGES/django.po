@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-03 17:47+0200\n"
-"PO-Revision-Date: 2019-07-05 17:15+0100\n"
+"POT-Creation-Date: 2019-07-07 20:02+0200\n"
+"PO-Revision-Date: 2019-07-07 20:05+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -666,16 +666,19 @@ msgstr ""
 msgid "Website"
 msgstr "Webseite"
 
+#| msgid "Welcome-Email Text"
+msgid "Welcome-Email sending enabled"
+msgstr "Willkommens-Email verschicken aktiviert"
+
 msgid "Welcome-Email Text"
 msgstr "Willkommens-Email Text"
 
 msgid ""
-"If set, this text overrides the default welcome e-mail text which will be "
-"sent on portals with \"Users Need Activation\" enabled."
+"If set and enabled, this text will be sent to all new users after their "
+"registration is complete."
 msgstr ""
-"Wenn gesetzt, wird dieser Text statt der Standard-Willkommens-Email an neue "
-"Benutzer geschickt. Gilt nur für Portale mit aktivierter \"Bestätigung für "
-"neue Benutzer\" Option."
+"Wenn gesetzt und aktiviert, wird dieser Text an jeden neuen Benutzer "
+"geschickt, wenn dessen Registrierung abgeschlossen ist."
 
 msgid "Public"
 msgstr "Öffentlich"
@@ -1439,6 +1442,40 @@ msgstr "Keine Beschreibung verfasst."
 msgid "Back to Project Overview"
 msgstr "Zurück zur Übersicht"
 
+#| msgid "Administrator"
+msgid "Administration"
+msgstr "Administration"
+
+msgid "Select a page on the left side."
+msgstr "Wähle links eine Seite aus."
+
+msgid "Simple Statistics"
+msgstr "Simple Statistiken"
+
+#| msgid "Welcome-Email Text"
+msgid "User Welcome Email"
+msgstr "Willkommens-Email für neue Benutzer"
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid ""
+"There was an error in one of the fields you entered. Please correct it "
+"before saving!"
+msgstr ""
+"In einem der eingegebenen Felder trat ein Fehler auf. Bitte korrigiere ihn "
+"vor dem Speichern!"
+
+msgid "Save"
+msgstr "Speichern"
+
+#| msgid "Welcome-Email Text"
+msgid "Currently set Welcome-Email Text"
+msgstr "Aktueller Willkommens-Email Text"
+
+msgid "Send yourself a Test-Mail"
+msgstr "Schicke eine Test-Mail an dich selbst"
+
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -1871,9 +1908,6 @@ msgstr "In Projekten anzeigen..."
 
 msgid "Rearrange"
 msgstr "Umsortieren"
-
-msgid "Save"
-msgstr "Speichern"
 
 msgid "Saving..."
 msgstr "Speichere..."
@@ -2328,13 +2362,6 @@ msgstr ""
 "Natürlich kannst du auch ein Projekt ohne diese Verbindung zur Idee "
 "erstellen - klicke dazu einfach links \"Projekt erstellen\"."
 
-msgid ""
-"There was an error in one of the fields you entered. Please correct it "
-"before saving!"
-msgstr ""
-"In einem der eingegebenen Felder trat ein Fehler auf. Bitte korrigiere ihn "
-"vor dem Speichern!"
-
 msgid "General"
 msgstr "Allgemein"
 
@@ -2592,9 +2619,6 @@ msgstr "Verlassen"
 
 msgid "Withdraw"
 msgstr "Zurückziehen"
-
-msgid "Edit"
-msgstr "Bearbeiten"
 
 msgid "Details"
 msgstr "Details"
@@ -3941,9 +3965,6 @@ msgstr ""
 "Gib einen oder mehrere Suchbegriffe ein oder wähle ein Thema aus um zu "
 "Suchen."
 
-msgid "Simple Statistics"
-msgstr "Simple Statistiken"
-
 msgid "Date"
 msgstr "Datum"
 
@@ -4068,7 +4089,6 @@ msgid "Search this area"
 msgstr "In diesem Ausschnitt suchen"
 
 #. Translators: __INCLUDE_JS_PO__
-#| msgid "Membership requests"
 msgid "Membership Requests"
 msgstr "Mitgliedschaftsanträge"
 
@@ -4965,7 +4985,6 @@ msgstr "Sprache ändern"
 msgid "Register a new account"
 msgstr "Neues Konto registrieren"
 
-#| msgid "Offers"
 msgid "Offer"
 msgstr "Inserat"
 
@@ -4976,7 +4995,6 @@ msgstr ""
 "Hast du etwas, das du teilen, verkaufen oder verschenken möchtest? Suchst du "
 "nach etwas Bestimmtem?"
 
-#| msgid "Post new Idea"
 msgid "Post new Offer"
 msgstr "Neues Inserat eintragen"
 
@@ -5598,6 +5616,12 @@ msgid "Sorry, but the invite token you have used does not seem to be valid!"
 msgstr ""
 "Das Einladungs-Token, das du benutzt hast, scheint nicht gültig zu sein!"
 
+#, python-format
+#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+#| msgid "to %(portal_name)s"
+msgid "Welcome to %(portal_name)s!"
+msgstr "Willkommen bei %(portal_name)s!"
+
 msgid ""
 "The user account you were looking for does not exist! Their registration was "
 "probably already denied."
@@ -5704,68 +5728,3 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
-
-#~ msgid "Switch Portal"
-#~ msgstr "Portal wechseln"
-
-#~ msgid "You have not liked any ideas yet"
-#~ msgstr "Du hast noch keine Ideen geliked"
-
-#~ msgid "User Dashboard"
-#~ msgstr "Mein Dashboard"
-
-#~ msgid "Microsite Wallpaper"
-#~ msgstr "Microsite Hintergrundbild"
-
-#~ msgid "%s (descending)"
-#~ msgstr "%s (absteigend)"
-
-#~ msgid "Group overview"
-#~ msgstr "Gruppenübersicht"
-
-#~ msgid "Project overview"
-#~ msgstr "Projektübersicht"
-
-#~ msgid "Deutsch"
-#~ msgstr "Deutsch"
-
-#~ msgid "English"
-#~ msgstr "English"
-
-#~ msgid "Russian"
-#~ msgstr "Русский"
-
-#~ msgid "Ukrainian"
-#~ msgstr "Українська"
-
-#~ msgid "Stream"
-#~ msgstr "Aktivitäten"
-
-#~ msgid "Satellite"
-#~ msgstr "Satellit"
-
-#~ msgid "Terrain"
-#~ msgstr "Terrain"
-
-#~ msgid "French"
-#~ msgstr "Français"
-
-#~ msgid "Polish"
-#~ msgstr "Polski"
-
-#~ msgctxt "read and accept the [Privacy Policy]"
-#~ msgid "I have read and accept the"
-#~ msgstr "Ich habe die Datenschutzerklärung gelesen und akzeptiere sie:"
-
-#~ msgid "Privacy Policy"
-#~ msgstr "Datenschutzerklärung"
-
-#~ msgid ""
-#~ "If you need assistance with your registration, or your registration "
-#~ "fails, please send a short E-mail with the subject \"Registration failed"
-#~ "\" to %(email_link)s and we will assist you as soon as possible!"
-#~ msgstr ""
-#~ "Falls du Hilfe bei der Registrierung benötigst oder du die Registrierung "
-#~ "nicht abschließen kannst, schicke eine kurze Email mit dem Betreff "
-#~ "\"Registrierung nicht möglich\" an %(email_link)s. Wir helfen dir sobald "
-#~ "wie möglich!"

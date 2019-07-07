@@ -17,6 +17,9 @@ from threading import Thread
 from django.core.mail.message import EmailMultiAlternatives
 from cosinnus.utils.user import get_list_unsubscribe_url
 from cosinnus.models.group import CosinnusPortal
+from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.utils.safestring import mark_safe
+from django.utils.html import strip_tags
 logger = logging.getLogger('cosinnus')
 
 __all__ = ['send_mail']
@@ -163,13 +166,15 @@ def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc
 def send_html_mail_threaded(to_user, subject, html_content):
     """ Sends out a pretty html to an email-address.
         The given `html_content` will be placed inside the notification html template,
-        and the style will be a "from-portal" style. """
-        
+        and the style will be a "from-portal" style (instead of a "from-group" style. """
+    
+    from cosinnus.templatetags.cosinnus_tags import full_name    
     template = '/cosinnus/html_mail/notification.html'
+    
     portal = CosinnusPortal.get_current()
     domain = portal.get_domain()
     portal_image_url = '%s%s' % (domain, static('img/logo-icon.png'))
-    data = context = {
+    data = {
         'site': portal.site,
         'site_name': portal.site.name,
         'domain_url': domain,
@@ -178,21 +183,20 @@ def send_html_mail_threaded(to_user, subject, html_content):
         'portal_name': portal.name,
         'receiver': to_user, 
         'addressee': mark_safe(strip_tags(full_name(to_user))), 
-        'topic': topic,
-        'prefs_url': mark_safe(preference_url),
+        'topic': subject,
+        'prefs_url': None,
+        'notification_reason': None,
         
-        'notification_reason': reason,
-        
-        'origin_name': self.group['name'],
-        'origin_url': self.group.get_absolute_url() + self.options.get('origin_url_suffix', ''),
-        'origin_image_url': domain + (self.group.get_avatar_thumbnail_url() or static('images/group-avatar-placeholder.png')),
+        'origin_name': portal.name,
+        'origin_url': domain,
+        'origin_image_url': portal_image_url,
         
         'notification_body': None, # this is a body text that can be used for group description or similar
         
-        'notification_item_html': mark_safe(notification_item_html),
+        'notification_item_html': mark_safe(html_content),
     }
     
-    send_mail_or_fail_threaded(user.email, subject, template, data is_html=True)
+    send_mail_or_fail_threaded(to_user.email, subject, template, data, is_html=True)
     
 
 def get_common_mail_context(request, group=None, user=None):

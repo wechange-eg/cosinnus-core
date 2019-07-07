@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-03 17:47+0200\n"
+"POT-Creation-Date: 2019-07-07 20:02+0200\n"
 "PO-Revision-Date: 2018-08-30 04:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -548,11 +548,16 @@ msgstr ""
 msgid "Website"
 msgstr "Strona internetowa"
 
+#, fuzzy
+#| msgid "Welcome-Email Text"
+msgid "Welcome-Email sending enabled"
+msgstr "Tekst powitalny e-mail"
+
 msgid "Welcome-Email Text"
 msgstr "Tekst powitalny e-mail"
 
-msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
-msgstr "To ustawienie nadpisuje domyślny tekst powitalny e-mail, który może być wysyłany na portale z włączoną opcją \"Wymagana Aktywacja Użytkownika\"."
+msgid "If set and enabled, this text will be sent to all new users after their registration is complete."
+msgstr ""
 
 msgid "Public"
 msgstr "Publiczne"
@@ -1279,6 +1284,39 @@ msgstr "Nie ma ustawionych informacji"
 msgid "Back to Project Overview"
 msgstr "Wróć do Przeglądu Projektu"
 
+#, fuzzy
+#| msgid "Administrator"
+msgid "Administration"
+msgstr "Administrator"
+
+msgid "Select a page on the left side."
+msgstr ""
+
+msgid "Simple Statistics"
+msgstr ""
+
+#, fuzzy
+#| msgid "Welcome-Email Text"
+msgid "User Welcome Email"
+msgstr "Tekst powitalny e-mail"
+
+msgid "Edit"
+msgstr "Edytuj"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "W jednym z wypełnionych pól jest błąd. Popraw go przed zapisaniem!"
+
+msgid "Save"
+msgstr "Zapisz"
+
+#, fuzzy
+#| msgid "Welcome-Email Text"
+msgid "Currently set Welcome-Email Text"
+msgstr "Tekst powitalny e-mail"
+
+msgid "Send yourself a Test-Mail"
+msgstr ""
+
 msgid "Settings"
 msgstr "Ustawienia"
 
@@ -1585,9 +1623,6 @@ msgstr "Pokaż w moich projektach..."
 
 msgid "Rearrange"
 msgstr "Ułóż"
-
-msgid "Save"
-msgstr "Zapisz"
 
 msgid "Saving..."
 msgstr "Zapisywanie..."
@@ -1980,9 +2015,6 @@ msgstr "Twój nowy projekt zostanie także wyświetlony w kategorii idei aby ka�
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr "Możesz też oczywiście utworzyć projekt bez łączenia go z ideą - aby to zrobić, po prostu kliknij na \"Utwórz Projekt\" po lewej stronie."
 
-msgid "There was an error in one of the fields you entered. Please correct it before saving!"
-msgstr "W jednym z wypełnionych pól jest błąd. Popraw go przed zapisaniem!"
-
 msgid "General"
 msgstr "Ogólne"
 
@@ -2197,9 +2229,6 @@ msgstr "Opuść"
 
 msgid "Withdraw"
 msgstr "Wycofaj"
-
-msgid "Edit"
-msgstr "Edytuj"
 
 msgid "Details"
 msgstr "Szczegóły"
@@ -3329,9 +3358,6 @@ msgstr "następna"
 
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Wpisz jedno lub więcej pojęć lub wybierz temat do wyszukiwania."
-
-msgid "Simple Statistics"
-msgstr ""
 
 #, fuzzy
 #| msgid "Delete"
@@ -4646,6 +4672,11 @@ msgstr ""
 msgid "Sorry, but the invite token you have used does not seem to be valid!"
 msgstr "Kliknięty przez Ciebie link cofnięcia subskrypcji jest nieprawidłowy!"
 
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgid "Welcome to %(portal_name)s!"
+msgstr "Edytuj “%(team_name)s”"
+
 msgid "The user account you were looking for does not exist! Their registration was probably already denied."
 msgstr "Konto, którego szukasz, nie istnieje! Rejestracja prawdopodobnie została już odrzucona."
 
@@ -4700,6 +4731,14 @@ msgstr "Obecnie nie jesteś członkiem %s! Jeśli chcesz nim zostać, możesz wy
 
 msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
+
+#, fuzzy
+#~| msgid "Administrator"
+#~ msgid "Administration Area"
+#~ msgstr "Administrator"
+
+#~ msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
+#~ msgstr "To ustawienie nadpisuje domyślny tekst powitalny e-mail, który może być wysyłany na portale z włączoną opcją \"Wymagana Aktywacja Użytkownika\"."
 
 #, fuzzy
 #~| msgid "Portal"

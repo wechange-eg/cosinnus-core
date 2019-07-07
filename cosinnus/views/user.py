@@ -31,7 +31,7 @@ from cosinnus.models.group import CosinnusPortal,\
     MEMBERSHIP_INVITED_PENDING, CosinnusGroupInviteToken, MEMBERSHIP_MEMBER,\
     MEMBER_STATUS
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
-    send_mail_or_fail_threaded
+    send_mail_or_fail_threaded, send_html_mail_threaded
 from django.template.loader import render_to_string
 from django.http.response import HttpResponseNotAllowed, JsonResponse, HttpResponseRedirect,\
     HttpResponseForbidden, HttpResponse, HttpResponseServerError
@@ -201,6 +201,7 @@ class UserCreateView(CreateView):
         if not CosinnusPortal.get_current().users_need_activation and not CosinnusPortal.get_current().email_needs_verification:
             messages.success(self.request, self.message_success % {'user': user.email})
             user.backend = 'cosinnus.backends.EmailAuthBackend'
+            _send_user_welcome_email_if_enabled(user)
             login(self.request, user)
         
         # send user registration signal
@@ -394,21 +395,21 @@ def _check_user_approval_permissions(request, user_id):
     return None
 
 
-def _send_user_welcome_email_if_enabled(user):
+def _send_user_welcome_email_if_enabled(user, force=False):
     """ If welcome email sending is enabled for this portal, send one out to the given user """
     
     # if a welcome email text is set in the portal in admin
     portal = CosinnusPortal.get_current()
-    if not portal.welcome_email_active:
+    if not portal.welcome_email_active and not force:
         return
     text = portal.welcome_email_text.strip() if portal.welcome_email_text else ''
-    if not text or not user: 
+    if not force and (not text or not user): 
         return
     
     # render the text as markdown
     text = textfield(text)
     subj_user = _('Welcome to %(portal_name)s!') % {'portal_name': portal.name}
-    send_mail_or_fail_threaded(user.email, subj_user, template, data)
+    send_html_mail_threaded(user, subj_user, text)
     
 
 def approve_user(request, user_id):
@@ -436,12 +437,14 @@ def approve_user(request, user_id):
         'user': user,
     })
     template = 'cosinnus/mail/user_registration_approved.html'
+    subj_user = render_to_string('cosinnus/mail/user_registration_approved_subj.txt', data)
+    send_mail_or_fail_threaded(user.email, subj_user, template, data)
     
     _send_user_welcome_email_if_enabled(user)
     
     messages.success(request, _('Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site.') \
                      % {'username':full_name_force(user), 'email': user.email})
-    return redirect(reverse('cosinnus:user-list'))
+    return redirect(reverse('cosinnus:profile-detail', kwargs={'username': user.username}) + '?force_show=1')
 
 
 
@@ -520,6 +523,7 @@ def verifiy_user_email(request, email_verification_param):
     if user.is_active:
         messages.success(request, _('Your email address %(email)s was successfully confirmed! Welcome to the community!') % {'email': user.email})
         user.backend = 'cosinnus.backends.EmailAuthBackend'
+        _send_user_welcome_email_if_enabled(user)
         login(request, user)
         return redirect(reverse('cosinnus:map'))
     else:

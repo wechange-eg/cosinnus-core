@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n thumbnail cosinnus_tags cosinnus_map_tags static %}
 
-{% block page_title %}{% trans "Simple Statistics" %}{% endblock %}
+{% block page_title %}{% trans "Administration" %}{% endblock %}
 
 {% block leftnav %}
 	{% include 'cosinnus/administration/leftnav.html' %}
@@ -16,9 +16,9 @@
         <!-- a box with semi transparent background -->
         <div class="content-box white-content">
             
-	        <h1>{% trans "Administration Area" %}</h1>
+	        <h2>{% trans "Administration" %}</h2>
 	        
-	        <div>{% trans "Select a page on the left side." %}</div>
+	        <p>{% trans "Select a page on the left side." %}</p>
             
         </div>
     

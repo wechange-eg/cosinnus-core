@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags %}
 
-{% block page_title %}{% trans "Simple Statistics" %}{% endblock %}
+{% block page_title %}{% trans "User Welcome Email" %} - {% trans "Edit" %}{% endblock %}
 
 {% block leftnav %}
 	{% include 'cosinnus/administration/leftnav.html' %}
@@ -51,7 +51,7 @@
 	        <ul class="media-list">
 	            <li class="media">
 	                <a class="pull-left" href="#">
-	                    <i class="fa fa-pencil"></i>
+	                    <i class="fa fa-floppy-o"></i>
 	                </a>
 	                <div class="media-body">
 	                      {% trans "Save" %}
@@ -72,6 +72,19 @@
 	        
         	<div class="textfield">{{ email_text|textfield }}</div>
         </div>
+        
+        <div class="btn btn-emphasized btn-autosize" href="?send_test=1">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-envelope"></i>
+	                </a>
+	                <div class="media-body">
+	                      {% trans "Send yourself a Test-Mail" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
     {% endif %}
     
 {% endblock %}

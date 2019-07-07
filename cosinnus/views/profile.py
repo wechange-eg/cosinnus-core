@@ -22,7 +22,7 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
 from cosinnus.models.widget import WidgetConfig
 from django.contrib.auth import logout
 from cosinnus.utils.permissions import check_user_integrated_portal_member,\
-    check_user_can_see_user
+    check_user_can_see_user, check_user_superuser
 from django.views.generic.edit import DeleteView
 from cosinnus.core.decorators.views import redirect_to_not_logged_in
 from cosinnus.utils.urls import safe_redirect
@@ -139,9 +139,10 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
     def get_queryset(self):
         if not getattr(self, 'qs', None):
             qs = super(UserProfileDetailView, self).get_queryset()
-            qs = qs.exclude(user__is_active=False).\
-                    exclude(user__last_login__exact=None).\
-                    filter(settings__contains='tos_accepted')
+            if not (self.request.GET.get('force_show', False) == '1' and check_user_superuser(self.request.user)):
+                qs = qs.exclude(user__is_active=False).\
+                        exclude(user__last_login__exact=None).\
+                        filter(settings__contains='tos_accepted')
             self.qs = qs
         return self.qs
     
