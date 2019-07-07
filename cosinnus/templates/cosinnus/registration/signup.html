@@ -26,10 +26,16 @@
     {% if request.GET.invite_token %}
         <input type="hidden" name="invite_token" value="{{ request.GET.invite_token }}">
     {% endif %}
-
     
     <!-- a box with semi transparent background -->
     <div class="content-box">
+		{% if form.errors %}
+	        <div class="alert alert-danger alert-dismissable">
+	            <i class="fa fa-exclamation-triangle fa-3x"></i>
+	            <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+	        </div>
+	    {% endif %}
+    
 	    {% if request.GET.join_msg == "1" or request.GET.acc_req_msg == "1" %}
             <div class="alert alert-warning">
                 <i class="fa fa-heart fa-3x"></i>
@@ -61,7 +67,6 @@
             </div>
         {% endif %}
         
-	    
         <h2>{% trans "Sign up" %}</h2>
     
         {{ form.non_field_errors }}

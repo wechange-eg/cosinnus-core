@@ -1,0 +1,26 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n thumbnail cosinnus_tags cosinnus_map_tags static %}
+
+{% block page_title %}{% trans "Administration" %}{% endblock %}
+
+{% block leftnav %}
+	{% include 'cosinnus/administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+	<li class="active">{% trans "Administration" %}</li>
+{% endblock %}
+
+{% block content %}
+    
+        <!-- a box with semi transparent background -->
+        <div class="content-box white-content">
+            
+	        <h2>{% trans "Administration" %}</h2>
+	        
+	        <p>{% trans "Select a page on the left side." %}</p>
+            
+        </div>
+    
+{% endblock %}
+

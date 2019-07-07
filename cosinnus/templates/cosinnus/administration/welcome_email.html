@@ -1,0 +1,91 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block page_title %}{% trans "User Welcome Email" %} - {% trans "Edit" %}{% endblock %}
+
+{% block leftnav %}
+	{% include 'cosinnus/administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li class="active">{% trans "User Welcome Email" %}</li>
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.email_text.id_for_label %}
+{% endblock %}
+
+
+{% block content %}
+    
+    {% if form.errors %}
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+        </div>
+    {% endif %}
+    
+    <form method="POST" action="" class="cosinnus-form form-horizontal">{% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+        
+	        <h2>{% trans "User Welcome Email" %}</h2>
+	        
+	        <p class="transparent">{% trans "If set and enabled, this text will be sent to all new users after their registration is complete." %}</p>
+	        
+	        {% captureas is_active_label %}{% trans "Is active" %}?{% endcaptureas %}
+            {% trans "Welcome-Email sending enabled" as checkbox_label %}
+            {% include 'cosinnus/fields/checkbox_field.html' with field=form.is_active label=is_active_label checkbox_label=checkbox_label %}
+            
+			{% trans "Welcome-Email Text" as email_text_label %}
+			{% trans "Welcome-Email Text" as email_text_placeholder %}
+			{% include 'cosinnus/fields/default_field.html' with field=form.email_text label=email_text_label placeholder=email_text_placeholder large_field=True %}
+        </div>
+        
+        
+        <button type="submit" class="btn btn-emphasized">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-floppy-o"></i>
+	                </a>
+	                <div class="media-body">
+	                      {% trans "Save" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    </form>
+    
+    
+    <div class="clearfix large-space"></div>
+
+    {% if email_text %}
+        <!-- a box with semi transparent background -->
+        <div class="content-box white-content">
+        	
+	        <h2>{% trans "Currently set Welcome-Email Text" %}:</h2>
+	        
+        	<div class="textfield">{{ email_text|textfield }}</div>
+        </div>
+        
+        <div class="btn btn-emphasized btn-autosize" href="?send_test=1">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-envelope"></i>
+	                </a>
+	                <div class="media-body">
+	                      {% trans "Send yourself a Test-Mail" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
+    {% endif %}
+    
+{% endblock %}
+

@@ -15,7 +15,7 @@ from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
     OrganisationViewSet, UserView
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
-    user_dashboard, ui_prefs
+    user_dashboard, ui_prefs, administration
 from cosinnus_event.api.views import EventViewSet
 from django_otp.views import LoginView
 
@@ -76,7 +76,11 @@ urlpatterns = [
     url(r'^administration/activate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-activate', kwargs={'activate': True}),
     url(r'^administration/deactivate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-deactivate', kwargs={'activate': False}),
     url(r'^administration/login-2fa/$', authentication.admin_only_otp_token_validation, name='login-2fa'),
-
+    
+    # these URLs belong to the frontend administration area for superusers
+    url(r'^administration/$', administration.administration, name='administration'),
+    url(r'^administration/welcome_email$', administration.welcome_email_edit, name='administration-welcome-email'),
+    
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     
     #url(r'^housekeeping/$', housekeeping.housekeeping, name='housekeeping'),
