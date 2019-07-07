@@ -493,9 +493,11 @@ class CosinnusPortal(models.Model):
     description = models.TextField(verbose_name=_('Description'), blank=True)
     support_email = models.EmailField(verbose_name=_('Support Email'), help_text=_('This email is shown to users as contact address on many pages'), blank=True)
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
+    
+    welcome_email_active = models.BooleanField(verbose_name=_('Welcome-Email sending enabled'), default=False)
     welcome_email_text = models.TextField(verbose_name=_('Welcome-Email Text'), 
         blank=True, null=True, editable=True, 
-        help_text=_('If set, this text overrides the default welcome e-mail text which will be sent on portals with "Users Need Activation" enabled.'))
+        help_text=_('If set and enabled, this text will be sent to all new users after their registration is complete.'))
     
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,

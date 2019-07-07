@@ -32,7 +32,14 @@
                             {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
                             	<li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "My Profile" %}</a></li>
                             {% endif %}
+                            
                             <li><a href="{% url 'cosinnus:notifications' %}">{% trans "Notification Preferences" %}</a></li>
+                            
+                            {% if request.user|is_superuser %}
+                            	<li class="divider"></li>
+                            	<li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+                            {% endif %}
+                            
                             {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 		                        <li class="divider"></li>
 								<li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>

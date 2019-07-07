@@ -1,0 +1,27 @@
+{% load i18n %}
+
+<div type="button" class="btn w100 btn-emphasized regular-space" href="{% url "cosinnus:simple-statistics" %}">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-table"></i>
+            </a>
+            <div class="media-body">
+                {% trans "Simple Statistics" %}
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-welcome-email' %}">
+    <ul class="media-list">
+        <li class="media">
+           <a class="pull-left">
+                <i class="fa fa-envelope"></i>
+            </a>
+            <div class="media-body">
+                {% trans "User Welcome Email" %}
+            </div>
+        </li>
+    </ul>
+</div>

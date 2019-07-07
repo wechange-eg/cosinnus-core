@@ -275,6 +275,21 @@
 			</ul>
 		</div>
 		
+		{% if request.user|is_superuser %}
+			<div class="nav-flyout-section padded">
+				<ul class="item-list">
+					<li>
+						<a href="{% url 'cosinnus:administration' %}" class="list-item" role="button" titledby=".item-text"> 
+				    		<div class="item-text">
+				    			{% trans "Administration" %} 
+				    		</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		
+		{% endif %}
+		
 		<div class="nav-flyout-section padded">
 			<ul class="item-list">
 				<li>

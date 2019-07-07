@@ -36,7 +36,7 @@ from django.template.loader import render_to_string
 from django.http.response import HttpResponseNotAllowed, JsonResponse, HttpResponseRedirect,\
     HttpResponseForbidden, HttpResponse, HttpResponseServerError
 from django.shortcuts import redirect, render
-from cosinnus.templatetags.cosinnus_tags import full_name_force
+from cosinnus.templatetags.cosinnus_tags import full_name_force, textfield
 from cosinnus.utils.permissions import check_user_integrated_portal_member
 from django.template.response import TemplateResponse
 from django.core.paginator import Paginator
@@ -394,6 +394,23 @@ def _check_user_approval_permissions(request, user_id):
     return None
 
 
+def _send_user_welcome_email_if_enabled(user):
+    """ If welcome email sending is enabled for this portal, send one out to the given user """
+    
+    # if a welcome email text is set in the portal in admin
+    portal = CosinnusPortal.get_current()
+    if not portal.welcome_email_active:
+        return
+    text = portal.welcome_email_text.strip() if portal.welcome_email_text else ''
+    if not text or not user: 
+        return
+    
+    # render the text as markdown
+    text = textfield(text)
+    subj_user = _('Welcome to %(portal_name)s!') % {'portal_name': portal.name}
+    send_mail_or_fail_threaded(user.email, subj_user, template, data)
+    
+
 def approve_user(request, user_id):
     """ Approves an inactive, registration pending user and sends out an email to let them know """
     error = _check_user_approval_permissions(request, user_id)
@@ -420,19 +437,7 @@ def approve_user(request, user_id):
     })
     template = 'cosinnus/mail/user_registration_approved.html'
     
-    # if a welcome email text is set in the portal in admin, send that text instead of the default template
-    portal = CosinnusPortal.get_current()
-    welcome_text = getattr(portal, 'welcome_email_text', None) or '' 
-    welcome_text = force_text(welcome_text).strip()
-    if welcome_text:
-        template = None
-        data.update({
-           'content': portal.welcome_email_text,
-        })
-    
-    subj_user = render_to_string('cosinnus/mail/user_registration_approved_subj.txt', data)
-    send_mail_or_fail_threaded(user.email, subj_user, template, data)
-    
+    _send_user_welcome_email_if_enabled(user)
     
     messages.success(request, _('Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site.') \
                      % {'username':full_name_force(user), 'email': user.email})
