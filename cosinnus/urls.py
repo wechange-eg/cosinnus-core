@@ -79,7 +79,7 @@ urlpatterns = [
     
     # these URLs belong to the frontend administration area for superusers
     url(r'^administration/$', administration.administration, name='administration'),
-    url(r'^administration/welcome_email$', administration.welcome_email_edit, name='administration-welcome-email'),
+    url(r'^administration/welcome_email/$', administration.welcome_email_edit, name='administration-welcome-email'),
     
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     
