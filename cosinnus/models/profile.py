@@ -240,7 +240,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
         return image_thumbnail(self.avatar, size)
 
     def get_avatar_thumbnail_url(self, size=(80, 80)):
-        return image_thumbnail_url(self.avatar, size) or static('images/jane-doe.png')
+        return image_thumbnail_url(self.avatar, size) or static('images/jane-doe-small.png')
     
     def get_image_field_for_icon(self):
         return self.avatar or static('images/jane-doe.png')
