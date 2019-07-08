@@ -1005,7 +1005,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         return image_thumbnail(self.avatar, size)
 
     def get_avatar_thumbnail_url(self, size=(80, 80)):
-        return image_thumbnail_url(self.avatar, size) or static('images/group-avatar-placeholder.png')
+        return image_thumbnail_url(self.avatar, size) or static('images/group-avatar-placeholder-small.png')
     
     def get_image_field_for_icon(self):
         return self.avatar or static('images/group-avatar-placeholder.png')
