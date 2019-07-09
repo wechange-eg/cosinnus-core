@@ -9,7 +9,8 @@ from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from cosinnus.templatetags.cosinnus_tags import full_name
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model,\
+    get_default_user_group_slugs
 
 import logging
 from cosinnus.models.idea import CosinnusIdea
@@ -59,7 +60,7 @@ class DashboardItem(dict):
                 self['url'] = obj.get_absolute_url()
                 self['subtext'] = escape(obj.group.name)
                 
-                if obj.group.slug in settings.NEWW_DEFAULT_USER_GROUPS:
+                if obj.group.slug in get_default_user_group_slugs():
                     self['group'] = escape(CosinnusPortal.get_current().name)
                 else:
                     self['group'] = escape(obj.group.name)

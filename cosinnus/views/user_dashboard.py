@@ -30,7 +30,8 @@ from cosinnus.utils.dates import timestamp_from_datetime, \
     datetime_from_timestamp
 from cosinnus.utils.filters import exclude_special_folders
 from cosinnus.utils.functions import is_number
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model,\
+    get_default_user_group_slugs
 from cosinnus.utils.pagination import QuerysetLazyCombiner
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.views.mixins.group import RequireLoggedInMixin
@@ -113,9 +114,8 @@ class MyGroupsClusteredMixin(object):
         class AttrList(list):
             last_visited = None
         
-        filter_group_slugs = getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', [])
         for society in societies:
-            if society.slug in filter_group_slugs:
+            if society.slug in get_default_user_group_slugs():
                 continue
             
             # the most recent visit time to any project or society in the cluster
@@ -238,7 +238,7 @@ class ModelRetrievalMixin(object):
                 
                 # in strict mode, filter any content from the default groups as well
                 if only_mine and only_mine_strict:
-                    exclude_slugs = getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', [])
+                    exclude_slugs = get_default_user_group_slugs()
                     if exclude_slugs:
                         exclude_groups = get_cosinnus_group_model().objects.get_cached(slugs=exclude_slugs, portal_id=portal_id)
                         exclude_group_ids = [group.id for group in exclude_groups]

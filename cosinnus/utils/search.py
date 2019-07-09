@@ -18,7 +18,8 @@ from django.db.models import Count
 from django.core.cache import cache
 from django.apps import apps
 import numpy
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model,\
+    get_default_user_group_slugs
 import six
 from cosinnus.utils.files import image_thumbnail_url
 
@@ -326,6 +327,9 @@ class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObje
         return obj.group.slug
     
     def prepare_group_name(self, obj):
+        # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't shown)
+        if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) and obj.group.slug in get_default_user_group_slugs():
+            return None
         return obj.group.name
     
     def prepare_group_members(self, obj):

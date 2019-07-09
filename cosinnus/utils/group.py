@@ -8,6 +8,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_text
 from django.utils.http import urlquote
 
+from cosinnus.conf import settings
+from functools import lru_cache
+
 
 DEFAULT_CONTENT_MODELS = [
     'cosinnus_note.Note', 
@@ -73,4 +76,16 @@ def message_group_admins_url(group, group_admins=None):
         return None
     message_subject = force_text(_('Question about')) + ' ' + force_text(_('Group') if group.type == group.TYPE_SOCIETY else _('Project')) + ': ' + group.name
     return reverse('postman:write', kwargs={'recipients':','.join([user.username for user in group_admins])}) + '?subject=' + urlquote(message_subject)
-        
+
+
+def get_default_user_group_slugs():
+    """ Returns the slugs of the default user groups, that every user gets placed in on registering. """
+    return getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', [])
+
+
+@lru_cache(maxsize=None)
+def get_default_user_group_ids():
+    """ Returns the ids of the default user groups, that every user gets placed in on registering. """
+    default_user_groups = get_cosinnus_group_model().objects.filter(slug__in=get_default_user_group_slugs())
+    return list(default_user_groups.values_list('id', flat=True))
+    

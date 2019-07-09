@@ -55,7 +55,8 @@ from cosinnus.utils.tokens import email_blacklist_token_generator
 from cosinnus.utils.functions import is_email_valid
 from django.views.generic.base import TemplateView
 from cosinnus.utils.urls import redirect_with_next, redirect_next_or
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model,\
+    get_default_user_group_slugs
 from django.template import loader
 
 from honeypot.decorators import check_honeypot
@@ -767,7 +768,7 @@ def convert_email_group_invites(sender, profile, **kwargs):
         with transaction.atomic():
             for invite in invites:
                 # skip inviting to auto-invite groups, users are in them automatically
-                if invite.group.slug in settings.NEWW_DEFAULT_USER_GROUPS:
+                if invite.group.slug in get_default_user_group_slugs():
                     continue
                 CosinnusGroupMembership.objects.create(group=invite.group, user=user, status=MEMBERSHIP_INVITED_PENDING)
             # trigger translation indexing

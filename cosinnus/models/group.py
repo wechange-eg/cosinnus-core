@@ -44,7 +44,8 @@ import shutil
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from django.contrib.auth import get_user_model
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model,\
+    get_default_user_group_slugs
 from cosinnus.utils.user import filter_active_users
 from cosinnus.models.mixins.images import ThumbnailableImageMixin
 from cosinnus.views.mixins.media import VideoEmbedFieldMixin,\
@@ -1031,7 +1032,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     
     @property
     def is_default_user_group(self):
-        return self.slug in getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', [])
+        return self.slug in get_default_user_group_slugs()
     
     @property
     def is_forum_group(self):

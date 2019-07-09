@@ -28,7 +28,8 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import check_object_read_access
 from django.utils.html import escape
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model,\
+    get_default_user_group_slugs
 
 
 try:
@@ -145,6 +146,9 @@ def map_search_endpoint(request, filter_group_id=None):
     if params['events'] and Event is not None:
         sqs = filter_event_searchqueryset_by_upcoming(sqs)
     
+    # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't shown)
+    if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
+        sqs = sqs.exclude(is_group_model=True,slug__in=get_default_user_group_slugs())
     
     # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
     if not query:

@@ -12,7 +12,8 @@ from django.http.response import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from cosinnus.views.profile import delete_userprofile
-from cosinnus.utils.group import move_group_content as move_group_content_utils
+from cosinnus.utils.group import move_group_content as move_group_content_utils,\
+    get_default_user_group_slugs
 from cosinnus.models.widget import WidgetConfig
 from django.core.cache import cache
 from django.conf import settings
@@ -205,7 +206,7 @@ def add_members_to_forum(request=None):
     
     for portal in CosinnusPortal.objects.all():
         users = get_user_model().objects.filter(id__in=portal.members)
-        for group_slug in getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', []):
+        for group_slug in get_default_user_group_slugs():
             try:
                 group = CosinnusGroup.objects.get(slug=group_slug, portal_id=portal.id)
                 for user in users:

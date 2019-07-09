@@ -14,7 +14,8 @@ from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.auth import get_user_model
 from cosinnus.utils.functions import normalize_within_stddev, resolve_class
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model,\
+    get_default_user_group_ids
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.contrib.auth.models import AnonymousUser
@@ -36,6 +37,8 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     always_visible = indexes.BooleanField(default=True)
     created = indexes.DateTimeField(model_attr='created')
     group = indexes.IntegerField(model_attr='id')
+    # for filtering on this model
+    is_group_model = indexes.BooleanField(default=True)
     
     local_cached_attrs = ['_group_members']
     
@@ -218,7 +221,10 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     
     def prepare_membership_groups(self, obj):
         """ Better to convert this QS to native list """
-        return list(obj.cosinnus_groups_pks)
+        group_ids = list(obj.cosinnus_groups_pks)
+        if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
+            group_ids = [pk for pk in group_ids if not pk in get_default_user_group_ids()]
+        return group_ids
     
     def prepare_member_count(self, obj):
         """ Memberships for users """

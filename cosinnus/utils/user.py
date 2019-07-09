@@ -6,7 +6,8 @@ import logging
 from django.conf import settings
 
 from cosinnus.core.registries.widgets import widget_registry
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model,\
+    get_default_user_group_slugs
 from django.contrib.auth import get_user_model
 from django.core.exceptions import MultipleObjectsReturned
 from django.utils.crypto import get_random_string
@@ -94,7 +95,7 @@ def ensure_user_to_default_portal_groups(sender, created, **kwargs):
         from cosinnus.models.group import CosinnusGroupMembership, MEMBERSHIP_MEMBER
         membership = kwargs.get('instance')
         CosinnusGroup = get_cosinnus_group_model()
-        for group_slug in getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', []):
+        for group_slug in get_default_user_group_slugs():
             try:
                 group = CosinnusGroup.objects.get(slug=group_slug, portal_id=membership.group.id)
                 CosinnusGroupMembership.objects.get_or_create(user=membership.user, group=group, defaults={'status': MEMBERSHIP_MEMBER})
