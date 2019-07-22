@@ -1267,12 +1267,10 @@ def group_user_recruit(request, group):
         group_copy = group
         
     # send emails as notification signal
-    virtual_users = []
     for email in success:
         virtual_user = AnonymousUser()
         virtual_user.email = email
-        virtual_users.append(virtual_user)
-        signals.user_group_recruited.send(sender=user, obj=group_copy, user=user, audience=virtual_users)
+        signals.user_group_recruited.send(sender=user, obj=group_copy, user=user, audience=[virtual_user])
     
     # create invite objects
     with transaction.atomic():
