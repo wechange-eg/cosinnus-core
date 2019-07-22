@@ -1168,7 +1168,7 @@ def group_user_recruit(request, group):
         Checks for recent invites and existing ones first. 
         Sends out invitation mails to newly invited users. """
     
-    MAXIMUM_EMAILS = 20
+    MAXIMUM_EMAILS = 50
     
     if not request.method=='POST':
         return HttpResponseNotAllowed(['POST'])
@@ -1272,7 +1272,7 @@ def group_user_recruit(request, group):
         virtual_user = AnonymousUser()
         virtual_user.email = email
         virtual_users.append(virtual_user)
-    signals.user_group_recruited.send(sender=user, obj=group_copy, user=user, audience=virtual_users)
+        signals.user_group_recruited.send(sender=user, obj=group_copy, user=user, audience=virtual_users)
     
     # create invite objects
     with transaction.atomic():
