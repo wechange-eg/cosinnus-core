@@ -38,6 +38,10 @@ from django.contrib.postgres.fields.jsonb import JSONField
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 
+import logging
+
+logger = logging.getLogger('cosinnus')
+
 
 
 class PeopleModelMixin(models.Model):
@@ -310,19 +314,23 @@ class LastVisitedMixin(object):
     def mark_visited(self, user):
         """ Creates or updates a `LastVisited` object for this object and the given user """
         if not user.is_authenticated:
-            return now
+            return None
         
-        from cosinnus.models.user_dashboard import DashboardItem
-        from cosinnus.models.group import CosinnusPortal
-        ct = self.get_content_type_for_last_visited()
-        visit = get_object_or_None(LastVisitedObject, content_type=ct, object_id=self.id, user=user, portal=CosinnusPortal.get_current())
-        if visit is None:
-            visit = LastVisitedObject(content_type=ct, object_id=self.id, user=user, portal=CosinnusPortal.get_current())
-        
-        visit.visited = now()
-        visit.item_data = DashboardItem(self)
-        visit.save()
-        return visit
+        try:
+            from cosinnus.models.user_dashboard import DashboardItem
+            from cosinnus.models.group import CosinnusPortal
+            ct = self.get_content_type_for_last_visited()
+            visit = get_object_or_None(LastVisitedObject, content_type=ct, object_id=self.id, user=user, portal=CosinnusPortal.get_current())
+            if visit is None:
+                visit = LastVisitedObject(content_type=ct, object_id=self.id, user=user, portal=CosinnusPortal.get_current())
+            
+            visit.visited = now()
+            visit.item_data = DashboardItem(self)
+            visit.save()
+            return visit
+        except Exception as e:
+            logger.exception('An unknown error occured while saving the last_visited visit! Exception in extra.', extra={'exception': force_text(e)})
+            return None
     
     def get_content_type_for_last_visited(self):
         return ContentType.objects.get_for_model(self)
