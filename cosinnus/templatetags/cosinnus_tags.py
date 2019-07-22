@@ -345,7 +345,7 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
         from cosinnus.models.user_dashboard import DashboardItem
         
         def _escape_quotes(text):
-            return text.replace('"', '\\"').replace("'", "\\'")
+            return text.replace('\\', '\\\\').replace('"', '\\"').replace("'", "\\'")
         
         if settings.COSINNUS_IDEAS_ENABLED:
             # "My Ideas"

@@ -2,7 +2,7 @@
 {% load i18n cosinnus_tags %}
 
 {% block widget_button %}
-    <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:group-add' %}?group={{ group.pk }}">
+    <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:group-add' %}?group={{ group.slug }}">
         <ul class="media-list">
             <li class="media">
                 <a class="pull-right btn-extra-emphasized" href="#">

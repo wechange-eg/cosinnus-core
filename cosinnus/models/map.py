@@ -297,6 +297,12 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
         sqs = sqs.filter_and(admin_groups=obj.id)
         #sqs = filter_searchqueryset_for_read_access(sqs, user)
         sqs = sqs.order_by('title')
+        
+        # private users are not visible to anonymous users, BUT they are visible to logged in users!
+        # because if a user chose to make his group visible, he has to take authorship responsibilities
+        if not user.is_authenticated:
+            sqs = filter_searchqueryset_for_read_access(sqs, user)
+            
         kwargs.update({
             'admins': [HaystackUserMapCard(result) for result in sqs]
         })
