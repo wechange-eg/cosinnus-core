@@ -1265,12 +1265,15 @@ def group_user_recruit(request, group):
         setattr(group_copy, 'render_additional_notification_content_rows', render_additional_notification_content_rows)
     else:
         group_copy = group
-        
-    # send emails as notification signal
+
+    # collect target emails        
+    virtual_target_users = []
     for email in success:
         virtual_user = AnonymousUser()
         virtual_user.email = email
-        signals.user_group_recruited.send(sender=user, obj=group_copy, user=user, audience=[virtual_user])
+        virtual_target_users.append(virtual_user)
+    # send emails as single notification signal
+    signals.user_group_recruited.send(sender=user, obj=group_copy, user=user, audience=virtual_target_users)
     
     # create invite objects
     with transaction.atomic():
