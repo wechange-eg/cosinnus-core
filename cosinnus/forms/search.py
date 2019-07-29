@@ -123,7 +123,7 @@ class TaggableModelSearchForm(SearchForm):
     :class:`~cosinnus.models.BaseTaggableObjectModel`.
     """
     
-    MAX_RESULTS = 500
+    MAX_RESULTS = 200
 
     groups = forms.ChoiceField(label=_('Limit to teams'), required=False, initial='all',
         choices=(('all', _('All')), ('mine', _('My teams')), ('others', _('Other teams'))),
