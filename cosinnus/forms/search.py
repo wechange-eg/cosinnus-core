@@ -122,6 +122,8 @@ class TaggableModelSearchForm(SearchForm):
     it limits the choices to models that are a subclasses of the
     :class:`~cosinnus.models.BaseTaggableObjectModel`.
     """
+    
+    MAX_RESULTS = 200
 
     groups = forms.ChoiceField(label=_('Limit to teams'), required=False, initial='all',
         choices=(('all', _('All')), ('mine', _('My teams')), ('others', _('Other teams'))),
@@ -173,6 +175,7 @@ class TaggableModelSearchForm(SearchForm):
             if self.request.GET.get('o', None) == 'newest':
                 sqs = sqs.order_by('-created', '-_score')
         ret = sqs.models(*self.get_models())
+        ret = ret[:self.MAX_RESULTS]
         return ret
     
     def no_query_found(self):
