@@ -361,8 +361,11 @@ class TimelineView(ModelRetrievalMixin, View):
     
     http_method_names = ['get',]
     
-    # which models can be displaed, as found in `SEARCH_MODEL_NAMES_REVERSE`
-    content_types = ['polls', 'todos', 'files', 'pads', 'ideas', 'events', 'notes',]
+    # which models can be displayed, as found in `SEARCH_MODEL_NAMES_REVERSE`
+    content_types = ['polls', 'todos', 'files', 'pads', 'events', 'notes',]
+    
+    if settings.COSINNUS_IDEAS_ENABLED:
+        content_types += ['ideas']
     
     if settings.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE:
         content_types += ['offers']

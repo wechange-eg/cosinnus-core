@@ -124,8 +124,10 @@
 	            		'groups_invited': "{{ groups_invited_json_encoded }}",
 	            		'group_requests': "{{ group_requests_json_encoded }}",
 	            		'group_requests_count': {{ group_requests_count }},
+	            		{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
 	            		'followed_ideas': "{{ followed_ideas_json_encoded }}",
 	            		'my_ideas': "{{ my_ideas_json_encoded }}",
+	            		{% endif %}
 	            		'attending_events': "{{ attending_events_json_encoded }}",
 	            	},
 	            	contextData: {
