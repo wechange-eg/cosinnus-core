@@ -11,6 +11,9 @@
         margin-bottom: 18px;
     }
     
+    hr {
+    	border-top: 1px solid #fff;
+    }
 }
 
 .cosinnus-field, .cosinnus-media-field {
@@ -62,6 +65,10 @@
             margin: 0;
             padding: 7px 10px 5px 10px;
             color: @app-neutral-color-dark;
+            
+            &.missing {
+            	background-color: #ffcccc;
+            }
         }
         
         input, select {
@@ -192,3 +199,12 @@
     cursor: pointer;
 }
 
+
+/** .conditional-select-container are shown/hidden using JS
+	depending on the value of a .conditional-select select field. They are hidden by default so they do not all show up
+	on page load.
+	Example: <div class="conditional-select" data-select-name="payment_type" data-select-value="dd">
+ */
+.conditional-select-container {
+	display: none;	
+}

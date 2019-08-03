@@ -1591,6 +1591,28 @@
         popover: function() {
             $('.popover-button').popover();
         },
+        
+        
+        /** .conditional-select-container are shown/hidden using JS
+			depending on the value of a .conditional-select select field. They are hidden by default so they do not all show up
+			on page load.
+	    	Example: <div class="conditional-select" data-select-name="payment_type" data-select-value="dd">
+	     */
+	    conditionalSelectField: function() {
+	    	var switchContainer = function(name, value){
+	    		$('.conditional-select-container[data-select-name="' + name + '"]').hide();
+	    		$('.conditional-select-container[data-select-name="' + name + '"][data-select-value="' + value + '"]').fadeIn();
+	    	};
+	    	// onchange trigger
+	    	$('.conditional-select select').on('change', function() {
+	    		switchContainer(this.name, this.value);
+    		});
+	    	// initial state
+	    	$('.conditional-select select').each(function(){
+	    		switchContainer(this.name, this.value);
+	    	});
+	    },
+	    
 
     };
 })( jQuery );
@@ -1662,5 +1684,6 @@ $(function() {
     $.cosinnus.fixBootstrapModalScroll();
     $.cosinnus.fixBootstrapMobileNavbar();
     $.cosinnus.truncatedTextfield();
+    $.cosinnus.conditionalSelectField();
 });
 

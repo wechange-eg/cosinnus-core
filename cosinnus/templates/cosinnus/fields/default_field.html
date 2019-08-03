@@ -33,6 +33,9 @@
 		    {% if field and not field.field.required and not required %}
                 ({% trans "optional" context "written next to optional form fields" %})
             {% endif %}
+            {% if show_required %}
+            	<span class="required-label">*</span>
+            {% endif %}
             {% if help_popup %}
                 {% include 'cosinnus/common/help_button_for_popup.html' with help_text_id=help_popup %}
             {% endif %}
