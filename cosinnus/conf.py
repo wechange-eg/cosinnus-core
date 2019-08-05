@@ -586,6 +586,8 @@ class CosinnusConf(AppConf):
     # receive a newsletter
     USERPROFILE_ENABLE_NEWSLETTER_OPT_IN = False
     
+    # if True, payment urls and views will be enabled
+    PAYMENTS_ENABLED = False
     
 
 class CosinnusDefaultSettings(AppConf):

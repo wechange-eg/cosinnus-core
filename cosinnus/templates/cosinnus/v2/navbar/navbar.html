@@ -274,6 +274,15 @@
 			    		</div>
 					</a>
 				</li>
+				{% if SETTINGS.COSINNUS_PAYMENTS_ENABLED %}
+				<li>
+					<a href="{% url 'wechange-payments:payment' %}" class="list-item" role="button" titledby=".item-text"> 
+			    		<div class="item-text">
+			    			{% trans "Payments (Name TBD)" %} 
+			    		</div>
+					</a>
+				</li>
+				{% endif %}
 			</ul>
 		</div>
 		

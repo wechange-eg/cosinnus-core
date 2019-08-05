@@ -34,11 +34,14 @@
 	font-size: 14px !important;
 }
 .btn-default {
-	background-color: transparent;
-	border-width: 0;
+	background-color: @app-neutral-color-white;
+	border: 1px solid @app-neutral-color-light;
 }
 .btn-default:hover {
-	background-color: transparent;
+	background-color: @app-neutral-color-light;
+}
+.btn-default:hover .media > .media-body {
+	background-color: @app-neutral-color-light;
 }
 
 /* media-lists */

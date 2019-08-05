@@ -35,6 +35,10 @@
                             
                             <li><a href="{% url 'cosinnus:notifications' %}">{% trans "Notification Preferences" %}</a></li>
                             
+                            {% if SETTINGS.COSINNUS_PAYMENTS_ENABLED %}
+								<li><a href="{% url 'wechange-payments:payment' %}">{% trans "Payments (Name TBD)" %}</a></li>
+							{% endif %}
+                            
                             {% if request.user|is_superuser %}
                             	<li class="divider"></li>
                             	<li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
