@@ -578,9 +578,6 @@ class CosinnusConf(AppConf):
     # in v2, the footer is disabled by default. set this to True to enable it!
     V2_FORCE_SITE_FOOTER = False
     
-    # not all servers are running Postgres >= 9.3 yet. as long as this is true, we cannot uniformly run some nicer queries
-    DO_ALL_SERVERS_HAVE_PSQL_9_3 = False
-    
     # if true, an additional signup form field will be present
     SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK = False
     

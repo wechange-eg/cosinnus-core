@@ -77,13 +77,8 @@ def callback(request):
     # because of this, we actually may end up with non-unique emails in cosinnus, but since regular authentication is disabled,  this should not cause problems
     # Note: using a raw query here for actual safe JSON-matching
     try:
-        if getattr(settings, 'COSINNUS_DO_ALL_SERVERS_HAVE_PSQL_9_3', False):
-            # psql 9.3 does JSON right
-            profile = get_user_profile_model().objects.all().extra(where=["settings::json->>'%s' = '%d'" % (SSO_USERPROFILE_FIELD_ID, user_info['id'])]).get()
-        else:
-            # fall back to a bad method for JSON field filtering
-            attr = '"%s":%d' % (SSO_USERPROFILE_FIELD_ID, user_info['id'])
-            profile = get_user_profile_model().objects.all().filter(Q(settings__icontains='%s,' % attr) | Q(settings__icontains='%s}' % attr)).get()
+        # psql 9.3 does JSON right
+        profile = get_user_profile_model().objects.all().extra(where=["settings::json->>'%s' = '%d'" % (SSO_USERPROFILE_FIELD_ID, user_info['id'])]).get()
         
         user = profile.user
         if not user.is_active:
