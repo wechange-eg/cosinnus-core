@@ -396,6 +396,9 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
     def get_image_field_for_background(self, obj):
         return obj.image
     
+    def get_image_field_for_icon(self, obj):
+        return obj.image
+    
     def index_queryset(self, using=None):
         qs = self.get_model().objects.active()
         qs = qs.select_related('media_tag')

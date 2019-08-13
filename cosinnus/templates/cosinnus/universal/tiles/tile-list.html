@@ -6,7 +6,7 @@
     {% if not splitscreen %}
         <div class="tile-list-header">
             <span class="pull-right">
-	            {% for type in ['projects', 'groups', 'ideas'] %}
+	            {% for type in ['projects', 'groups', 'ideas', 'organizations'] %}
 	                {% if type in controlView.availableFilterList %}
 			            <a href="{% if not cosinnus_active_user %}/signup/?acc_req_msg=1&next={% endif %}/{{type}}/add/" class="rounded-button button-color-{{ type }}-inverted">
 				            <span class="rounded-button-inner">

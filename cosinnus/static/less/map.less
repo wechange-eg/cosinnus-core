@@ -93,6 +93,9 @@
     .apply-color-ideas {
         color: @map-ideas-color;
     }
+    .apply-color-organizations {
+        color: @map-organizations-color;
+    }
     .apply-color-liked {
         color: @map-liked-color;
     }
@@ -261,6 +264,7 @@
         .colored-button(projects, @map-projects-color, @map-projects-color);
         .colored-button(groups, @map-groups-color, @map-groups-color);
         .colored-button(ideas, @map-ideas-color, @map-ideas-color);
+        .colored-button(organizations, @map-organizations-color, @map-organizations-color);
         
     }
     
@@ -356,6 +360,7 @@
     .placemark(events, event);
     .placemark(groups, group);
     .placemark(ideas, idea);
+    .placemark(organizations, organization);
     .placemark(people, person);
     .placemark(projects, project);
     
@@ -576,6 +581,13 @@
         background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-ideas-color 100%); /* Chrome10-25,Safari5.1-6 */
         background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-ideas-color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-ideas-color', GradientType=0); /* IE6-9 */
+    }
+    .image-placeholder-background-organizations {
+        background: @map-ideas-color; /* Old browsers */
+        background: -moz-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-organizations-color', GradientType=0); /* IE6-9 */
     }
     
     .one-line {

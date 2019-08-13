@@ -455,7 +455,7 @@ class DetailedOrganizationMapResult(DetailedMapResult):
     fields.update({
         'projects': [],
         'groups': [],
-        'followed': False,
+        'admins': [],
     })
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -476,7 +476,25 @@ class DetailedOrganizationMapResult(DetailedMapResult):
             'groups': [HaystackProjectMapCard(result) for result in groups_sqs],
             'creator_name': obj.creator.get_full_name(),
             'creator_slug': obj.creator.username,
+            'address': obj.address,
+            'website_url': obj.website,
+            'email': obj.email,
+            'phone_number': obj.phone_number.as_international,
         })
+        
+        
+        # collect administrator users. these are *not* filtered by visibility, as project admins are always visible!
+        sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['people'])
+        sqs = sqs.filter_and(id=obj.creator_id)
+        #sqs = filter_searchqueryset_for_read_access(sqs, user)
+        # private users are not visible to anonymous users, BUT they are visible to logged in users!
+        # because if a user chose to make his group visible, he has to take authorship responsibilities
+        if not user.is_authenticated:
+            sqs = filter_searchqueryset_for_read_access(sqs, user)
+        kwargs.update({
+            'admins': [HaystackUserMapCard(result) for result in sqs]
+        })
+        
         ret = super(DetailedOrganizationMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
         return ret
 

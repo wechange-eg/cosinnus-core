@@ -128,6 +128,9 @@
 	            		'followed_ideas': "{{ followed_ideas_json_encoded }}",
 	            		'my_ideas': "{{ my_ideas_json_encoded }}",
 	            		{% endif %}
+	            		{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
+	            		'my_organizations': "{{ my_organizations_json_encoded }}",
+	            		{% endif %}
 	            		'attending_events': "{{ attending_events_json_encoded }}",
 	            	},
 	            	contextData: {
@@ -135,6 +138,9 @@
 	            		'project_add_url': '{% url 'cosinnus:group-add' %}',
 	            		{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
 	            		'idea_add_url': '{% url "cosinnus:idea-create" %}',
+	            		{% endif %}
+	            		{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
+	            		'organization_add_url': '{% url "cosinnus:organization-create" %}',
 	            		{% endif %}
 	            		'event_add_url': '{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}',
 	            		'event_calendar_url': '{% group_url "cosinnus:event:list" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}',
@@ -176,6 +182,18 @@
 				</div>
 				<div class="action text-bold">
 					{% trans "Post new Idea" %} 
+				</div>
+			</a>
+			{% endif %}
+			{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
+			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url "cosinnus:organization-create" %}" 
+					class="create-menu-link flex-grow">
+				<h2 class="headline margin-regular">{% trans "Organization" %}</h2>
+				<div class="description">
+					{% trans "(TBD) Description text for organizations." %}
+				</div>
+				<div class="action text-bold">
+					{% trans "Create new Organization" %} 
 				</div>
 			</a>
 			{% endif %}

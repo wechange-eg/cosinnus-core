@@ -10,6 +10,7 @@ var templates = {
     'people': require('tiles/tile-detail-people'),
     'events': require('tiles/tile-detail-events'),
     'ideas': require('tiles/tile-detail-ideas'),
+    'organizations': require('tiles/tile-detail-organizations'),
     'error-403': require('tiles/tile-detail-error-403'),
     'error': require('tiles/tile-detail-error'),
 };
@@ -57,7 +58,7 @@ module.exports = BaseView.extend({
     /** Adjust this view's template based on the result type it displays (and other states) */
     fitTemplate: function () {
         var self = this;
-        if (self.model.get('type') == 'people') {
+        if (self.model.get('type') == 'people' || self.model.get('type') == 'organizations') {
             self.state.isSmall = true;
         } 
         self.state.isYou = self.model.get('type') == 'people' && cosinnus_active_user && self.model.get('slug') == cosinnus_active_user.username;

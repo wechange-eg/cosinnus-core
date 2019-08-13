@@ -11,7 +11,7 @@
 
 {% block page_title %}
 	{% if object %}
-	   {% blocktrans with team_name=object.title %}Edit “{{ team_name }}”{% endblocktrans %}
+	   {% blocktrans with organization_name=object.title %}Edit “{{ organization_name }}”{% endblocktrans %}
 	{% else %}
 	   {% trans "Create Organization" %}
     {% endif %}
@@ -174,13 +174,17 @@
 			{% trans "Phone number" as phone_placeholder %}
 			{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.phone_number label=phone_label placeholder=phone_placeholder %}
 			        
-            
+            {# Regular Field #}
+			{% trans "Postal Address" as address_label %}
+			{% trans "Postal Address" as address_placeholder %}
+			{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.address label=address_label placeholder=address_placeholder %}
+			        
             <hr>  
             
             
             {% if form.forms.obj.related_groups %}
                 {# Related Groups Field #}
-                {% trans "Are there any projects/groups related to this one?" as related_label %}
+                {% trans "Are there any projects/groups related to this organization?" as related_label %}
                 {% trans "Select related Projects/Groups" as related_placeholder %}
                 {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder large_field=True %}
             {% endif %}

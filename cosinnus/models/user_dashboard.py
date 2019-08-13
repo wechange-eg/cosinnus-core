@@ -17,6 +17,7 @@ from cosinnus.models.idea import CosinnusIdea
 from django.urls.base import reverse
 from cosinnus.models.profile import BaseUserProfile
 from django.utils.html import escape
+from cosinnus.models.organization import CosinnusOrganization
 
 logger = logging.getLogger('cosinnus')
 
@@ -43,6 +44,10 @@ class DashboardItem(dict):
                 self['url'] = obj.get_absolute_url()
             elif type(obj) is CosinnusIdea:
                 self['icon'] = 'fa-lightbulb-o'
+                self['text'] = escape(obj.title)
+                self['url'] = obj.get_absolute_url()
+            elif type(obj) is CosinnusOrganization:
+                self['icon'] = 'fa-building'
                 self['text'] = escape(obj.title)
                 self['url'] = obj.get_absolute_url()
             elif obj._meta.model.__name__ == 'Message':

@@ -1,0 +1,159 @@
+{% extends 'tiles/tile-detail-base' %}
+{% import "include/macros.html" as macros %}
+
+{% block header_image %}
+    <div class="single-tile-image">
+        <img class="framed-tile-image" src="{{ backgroundImageLargeUrl }}" />
+    </div>
+{% endblock header_image %}
+
+{% block topic_line %}
+	{{ super() }}
+	
+    {% if may_be_contacted == true %}
+		<div class="top-line extra-space extra-space-top">
+            <i class="fa fa-fw fa-commenting-o"></i>
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Open to be contacted about potential collaboration opportunities" %}
+        </div>
+	{% elif may_be_contacted == false %}
+		<div class="top-line extra-space extra-space-top">
+            <i class="fa fa-fw fa-ban"></i>
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Does NOT wish to be contacted for potential collaboration!" %}
+        </div>
+	{% endif %}
+	
+{% endblock topic_line %}
+
+
+{% block action_buttons %}
+    <div class="tile-section tile-section-button-list">
+        {% if COSINNUS_SHOW_SUPERUSER_CONTROLS or cosinnus_active_user and cosinnus_active_user.username == creator_slug %}
+            <a href="/organizations/{{ slug }}/edit/" class="rounded-button button-action">
+                <span class="rounded-button-inner">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Edit your Organization" %}
+                </span>
+            </a>
+        {% endif %}
+        
+        {{ super() }}
+    </div>
+{% endblock %}
+
+
+{% block contact %}
+
+    <div class="tile-section tile-section-divided">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="subheading">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Contact" %}
+                </div>
+                {% if not address and not website_url and not email and not phone_number %}
+                    <p class="pale-color">
+                        <i>
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "No info." %}
+                        </i>
+                    </p>
+                {% else %}
+                    <div class="tile-section tile-section-compact">
+	                    {% if website_url %}
+	                        <div class="tile-section-header">
+	                            <a href="{{ website_url }}" target="_blank" class="compact-link">
+	                                <i class="fa fa-globe"></i>{{ website_url }}
+	                            </a>
+	                        </div>
+	                    {% endif %}
+	                    {% if email %}
+	                        <div class="tile-section-header">
+	                            <a href="mailto:{{ email }}" target="_blank" class="compact-link">
+	                                <i class="fa fa-envelope"></i>{{ email }}
+	                            </a>
+	                        </div>
+	                    {% endif %}
+	                    {% if phone_number %}
+	                        <div class="tile-section-header">
+	                            <a href="tel:{{ phone_number }}" target="_blank" class="compact-link">
+	                                <i class="fa fa-phone"></i>{{ phone_number }}
+	                            </a>
+	                        </div>
+	                    {% endif %}
+	                    {% if address %}
+	                        <div class="tile-section-header">
+	                            <i class="fa fa-home"></i>{{ address }}
+	                        </div>
+	                    {% endif %}
+                    </div>
+                {% endif %}
+                
+            </div>
+            <div class="col-xs-6">
+                <div class="subheading">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Contact Person" %}
+                </div>
+                <div class="tile-section">
+                    {% if admins|length > 0 %}
+                        {% for admin in admins %}
+                            {{ macros.itemCard(admin.portal, admin.slug, admin.title, admin.type, admin.iconImageUrl, admin.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
+                        {% endfor %}
+                    {% else %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        </i>{% trans "Contact Persons unknown" %}</i>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    
+{% endblock contact %}
+
+
+{% block related_content %}
+    
+    {% if groups|length > 0 %}
+        <div class="clearfix"></div>
+    
+        <div class="tile-section tile-section-divided">
+            <div class="subheading">
+                <i class="fa fa-sitemap"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Groups" %} ({{ groups|length }})
+            </div>
+        </div>
+        <div class="tile-section">
+            <div class="row">
+                {% for group in groups %}
+                    <div class="col-sm-6">
+                        {{ macros.itemCard(group.portal, group.slug, group.title, group.type, group.iconImageUrl, group.address, "fa-map-marker", group.dataSlot1, "fa-group", cosinnus_active_user=cosinnus_active_user) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if projects|length > 0 %}
+        <div class="tile-section tile-section-divided">
+            <div class="subheading">
+                <i class="fa fa-group"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Projects" %} ({{ projects|length }})
+            </div>
+        </div>
+        <div class="tile-section">
+            <div class="row">
+                {% for project in projects %}
+                    <div class="col-sm-6">
+                        {{ macros.itemCard(project.portal, project.slug, project.title, project.type, project.iconImageUrl, project.address, "fa-map-marker", project.dataSlot1, "fa-group", cosinnus_active_user=cosinnus_active_user) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    
+{% endblock related_content %}

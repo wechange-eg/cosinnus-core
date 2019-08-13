@@ -96,6 +96,11 @@ module.exports = ContentControlView.extend({
         	self.defaults.availableFilters['ideas'] = true;
         	self.defaults.activeFilters['ideas'] = true;
         }
+        // add organization models if active
+        if (COSINNUS_ORGANIZATIONS_ENABLED) {
+        	self.defaults.availableFilters['organizations'] = true;
+        	self.defaults.activeFilters['organizations'] = true;
+        }
         
         ContentControlView.prototype.initialize.call(self, options, app, collection);
         
@@ -1127,6 +1132,9 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_IDEAS_ENABLED) {
         	this.state.activeFilters['ideas'] = this.options.availableFilters.ideas ? util.ifundef(urlParams.ideas, this.options.activeFilters.ideas) : false;
         }
+        if (COSINNUS_ORGANIZATIONS_ENABLED) {
+        	this.state.activeFilters['organizations'] = this.options.availableFilters.organizations ? util.ifundef(urlParams.organizations, this.options.activeFilters.organizations) : false;
+        }
         if (cosinnus_active_user) {
         	this.options.showMine = util.ifundef(urlParams.mine, this.options.showMine);
         }
@@ -1144,6 +1152,11 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_IDEAS_ENABLED) {
         	_.extend(searchParams, {
                 ideas: this.state.activeFilters.ideas
+            });
+        }
+        if (COSINNUS_ORGANIZATIONS_ENABLED) {
+        	_.extend(searchParams, {
+        		organizations: this.state.activeFilters.organizations
             });
         }
         if (this.state.activeTopicIds.length > 0) {

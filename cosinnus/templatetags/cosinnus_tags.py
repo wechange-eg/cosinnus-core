@@ -54,6 +54,7 @@ from django.core.serializers import serialize
 from cosinnus.models.idea import CosinnusIdea
 from django.db.models.functions import Lower
 from django.contrib.contenttypes.models import ContentType
+from cosinnus.models.organization import CosinnusOrganization
 
 
 logger = logging.getLogger('cosinnus')
@@ -284,6 +285,9 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
         if settings.COSINNUS_IDEAS_ENABLED:
             # TODO: cache
             context['my_ideas_count'] = CosinnusIdea.objects.all_in_portal().filter(creator=user).count()
+        if settings.COSINNUS_ORGANIZATIONS_ENABLED:
+            # TODO: cache
+            context['my_organizations_count'] = CosinnusOrganization.objects.all_in_portal().filter(creator=user).count()
     
     try:
         current_app = resolve(request.path).app_name.replace(':', '_')
@@ -357,7 +361,13 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
             my_followed_ideas = CosinnusIdea.objects.all_in_portal().filter(id__in=my_followed_ids).order_by(Lower('title'))
             my_followed_ideas = my_followed_ideas.exclude(creator=user)
             context['followed_ideas_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(idea) for idea in my_followed_ideas]))
-            
+        
+        if settings.COSINNUS_ORGANIZATIONS_ENABLED:
+            # "My Organizations"
+            my_organizations = CosinnusOrganization.objects.all_in_portal().filter(creator=user).order_by(Lower('title'))
+            context['my_organizations_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(organization) for organization in my_organizations]))
+        
+        
         # "My Groups and Projects"
         context['group_clusters_json_encoded'] = _escape_quotes(_json.dumps(MyGroupsClusteredMixin().get_group_clusters(user)))
         # "Invitations"

@@ -74,21 +74,21 @@
                     {% if youtube_url or twitter_username or flickr_url %}
                         <div class="tile-section tile-section-compact">
                         {% if youtube_url %}
-                            <div>
+                            <div class="tile-section-header">
                                 <a href="{{ website_url }}" target="_blank" class="compact-link">
                                     <i class="fa fa-youtube"></i>Youtube
                                 </a>
                             </div>
                         {% endif %}
                         {% if twitter_username %}
-                            <div>
+                            <div class="tile-section-header">
                                 <a href="{{ website_url }}" target="_blank" class="compact-link">
                                     <i class="fa fa-twitter"></i>Twitter
                                 </a>
                             </div>
                         {% endif %}
                         {% if flickr_url %}
-                            <div>
+                            <div class="tile-section-header">
                                 <a href="{{ flickr_url }}" target="_blank" class="compact-link">
                                    <i class="fa fa-flickr"></i>Flickr
                                 </a>
@@ -101,7 +101,7 @@
             </div>
             <div class="col-xs-6">
                 <div class="subheading">
-                    {% if "TODO"|length > 1 %} 
+                    {% if admins|length > 1 %} 
                         {# Translators: __INCLUDE_JS_PO__ #}
                         {% trans "Administrator" %}
                     {% else %}

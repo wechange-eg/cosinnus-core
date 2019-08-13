@@ -98,6 +98,11 @@ module.exports = {
     			ct: 'cosinnus.CosinnusIdea',
     			slug: data.slug,
     		};
+    	} else if (data.type == 'organizations') {
+    		apiData = {
+				ct: 'cosinnus.CosinnusOrganization',
+				slug: data.slug,
+    		};
     	} else if (data.type == 'events') {
     		apiData = {
 				ct: 'cosinnus_event.Event',

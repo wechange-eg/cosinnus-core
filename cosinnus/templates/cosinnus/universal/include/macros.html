@@ -21,6 +21,10 @@
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "My Ideas" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "organizations" %}
+                {% if showIcon == 1 %}<i class="fa fa-building"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "My Organizations" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% elif all %}
             {% if type == "people" %}
@@ -43,6 +47,10 @@
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "All Ideas" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "organizations" %}
+                {% if showIcon == 1 %}<i class="fa fa-building"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "All Organizations" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% elif singular %}
             {% if type == "people" %}
@@ -65,6 +73,10 @@
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Idea" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "organizations" %}
+                {% if showIcon == 1 %}<i class="fa fa-building"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Organization" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% elif create %}
             {% if type == "people" %}
@@ -87,6 +99,10 @@
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Create Idea" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "organizations" %}
+                {% if showIcon == 1 %}<i class="fa fa-building"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Create Organization" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% else %}
             {% if type == "people" %}
@@ -109,6 +125,10 @@
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Ideas" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "organizations" %}
+                {% if showIcon == 1 %}<i class="fa fa-building"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Organizations" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% endif %}
     </span>
