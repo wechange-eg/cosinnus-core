@@ -36,6 +36,7 @@ from cosinnus.core import signals
 from copy import deepcopy, copy
 from django import forms
 from django.core.exceptions import ValidationError
+from cosinnus.models.organization import CosinnusOrganization
 
 
 class SingleDeleteActionMixin(object):
@@ -564,13 +565,25 @@ admin.site.register(TagObject, TagObjectAdmin)
 if settings.COSINNUS_IDEAS_ENABLED:
     
     class CosinnusIdeaAdmin(admin.ModelAdmin):
-        list_display = ('created', 'title', 'creator', 'portal')
+        list_display = ('title', 'created', 'creator', 'portal')
         list_filter = ('created', 'portal')
         search_fields = ('slug', 'title', 'creator__first_name', 'creator__last_name', 'creator__email') 
         readonly_fields = ('created', 'created_groups')
         raw_id_fields = ('creator',)
     
     admin.site.register(CosinnusIdea, CosinnusIdeaAdmin)
+
+
+if settings.COSINNUS_ORGANIZATIONS_ENABLED:
+    
+    class CosinnusOrganizationAdmin(admin.ModelAdmin):
+        list_display = ('title', 'created', 'creator', 'portal')
+        list_filter = ('created', 'portal')
+        search_fields = ('slug', 'title', 'creator__first_name', 'creator__last_name', 'creator__email') 
+        readonly_fields = ('created',)
+        raw_id_fields = ('creator',)
+    
+    admin.site.register(CosinnusOrganization, CosinnusOrganizationAdmin)
 
 
 

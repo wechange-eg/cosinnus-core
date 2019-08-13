@@ -236,6 +236,18 @@ class CosinnusConf(AppConf):
     # should CosinnusIdeas be enabled for this Portal?
     IDEAS_ENABLED = False
     
+    #: How long an idea should at most stay in cache until it will be removed
+    ORGANIZATION_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
+    
+    # TODO: add here all values for new instances of organizations that should
+    # be set as default for each new organization instance on create
+    ORGANIZATION_DEFAULT_VALUES = {
+        'place_type': 0, # TODO should always be 'initiative'
+    }
+    
+    # should CosinnusOrganizations be enabled for this Portal?
+    ORGANIZATIONS_ENABLED = False
+    
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
 

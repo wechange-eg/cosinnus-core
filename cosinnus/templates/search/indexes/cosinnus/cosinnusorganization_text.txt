@@ -1,0 +1,4 @@
+{{ object.title }}
+{% if object.description %}{{ object.description }}{% endif %}
+{% if object.media_tag and object.media_tag.location %}{{ object.media_tag.location }}{% endif %}
+{% include "search/indexes/cosinnus/_media_tag_text.txt" %}

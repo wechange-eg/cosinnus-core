@@ -15,7 +15,7 @@ from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
     OrganisationViewSet, UserView
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
-    user_dashboard, ui_prefs, administration
+    user_dashboard, ui_prefs, administration, organization
 from cosinnus_event.api.views import EventViewSet
 from django_otp.views import LoginView
 
@@ -160,7 +160,17 @@ if settings.COSINNUS_IDEAS_ENABLED:
         url(r'^ideas/(?P<slug>[^/]+)/edit/$', idea.idea_edit, name='idea-edit'),
         url(r'^ideas/(?P<slug>[^/]+)/delete/$', idea.idea_delete, name='idea-delete'),
     ]
-    
+
+if settings.COSINNUS_ORGANIZATIONS_ENABLED:
+    urlpatterns += [
+        url(r'^organizations/$', map.tile_view, name='organization-list', kwargs={'types': ['organizations']}),
+        url(r'^organizations/mine/$', map.tile_view, name='organization-list-mine', kwargs={'types': ['organizations'], 'show_mine': True}),
+        url(r'^organizations/add/$', organization.organization_create, name='organization-create'),
+        url(r'^organizations/(?P<slug>[^/]+)/edit/$', organization.organization_edit, name='organization-edit'),
+        url(r'^organizations/(?P<slug>[^/]+)/delete/$', organization.organization_delete, name='organization-delete'),
+    ]
+
+
 if settings.COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED:
     urlpatterns += [
         url(r'^portal/supporters/$', TemplateView.as_view(template_name='premium_info_page.html'), name='premium-info-page'),

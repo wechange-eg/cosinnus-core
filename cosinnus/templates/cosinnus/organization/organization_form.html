@@ -1,0 +1,324 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% if not object and request.GET.description %}
+	    {% captureas description_value %}{{ request.GET.description }}{% endcaptureas %}
+	{% endif %}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label value=description_value %}
+{% endblock %}
+
+{% block page_title %}
+	{% if object %}
+	   {% blocktrans with team_name=object.title %}Edit “{{ team_name }}”{% endblocktrans %}
+	{% else %}
+	   {% trans "Create Organization" %}
+    {% endif %}
+{% endblock %}
+
+
+{% block leftnav %}
+    {% url 'cosinnus:organization-create' as href %}
+    {% captureas label %}{% trans "Create Organization" %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with extra_classes="large-space" icon="fa-lightbulb-o" label=label href=href %}
+    
+    {% if object %}
+        
+        <div class="app-etherpad">
+	        <div type="button" class="btn w100 btn-emphasized" data-toggle="modal" data-target="#deleteModal">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left" href="#">
+	                        <i class="fa fa-eraser"></i>
+	                    </a>
+	                    <div class="media-body">
+	                        {% trans "Delete this organization" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+        {% captureas label %}{% blocktrans with title=object.title %}Do you really want to delete organization „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+        {% captureas title %}{% trans "Delete Organization" %}{% endcaptureas %}
+        {% trans "Yes" as submit_button_label %}
+        {% url "cosinnus:organization-delete" slug=object.slug as delete_url %}
+        {% include "cosinnus/modal_box.html" with id="deleteModal" label=label title=title form_action=delete_url submit_button_label=submit_button_label %}
+    
+    {% endif %}
+    
+{% endblock leftnav %}
+
+
+{% block breadcrumb %}
+    {{ block.super }}
+    {% if object %}
+        <li class="active">{% trans "Edit Organization" %}</li>
+    {% else %}
+        <li class="active">{% trans "Create Organization" %}</li>
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+    {% if form.forms.obj.errors or form.forms.media_tag.errors %}
+	    <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+	        <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+	    </div>
+    {% endif %}
+    
+	<form action="" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
+	    {% csrf_token %}
+	    {{ form.forms.obj.media }}
+	    {{ form.forms.obj.non_field_errors }}
+        {{ form.forms.media_tag.media }}
+	    {{ form.forms.media_tag.non_field_errors }}
+
+	    
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+        
+            {# Title Field #}
+            {% trans "Title" as title_label %}
+            {% captureas title_placeholder %}{% trans "Enter a descriptive title for your organization" %}{% endcaptureas %}
+            {% if request.GET.title %}
+                {% captureas title_val %}{{ request.GET.title }}{% endcaptureas %}
+            {% endif %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title placeholder=title_placeholder label=title_label field_value=title_val first=True %}
+	        
+	        {# SimpleMDE Description Field (gets initialized in extrahead) #}                                  
+            {% trans "Description" as description_label %}
+            {% captureas description_placeholder %}{% trans "The description for your organization. Explain your vision and your goals." %}{% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description label=description_label placeholder=description_placeholder large_field=True %}
+            
+            {# Organization Image Field #}
+            {% captureas image_label %}{% trans "Image" %} ({% trans "max. 10 MB" %}){% endcaptureas %}
+            {% captureas image_html %}
+                {{ form.forms.obj.image.errors }}
+                
+                {% if object.image %}
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-2">
+                            <img class="image" style="width: 120px;" src="{% thumbnail object.image 200x110 crop=1 upscale=1 %}"></img>
+                        </div>
+                        <div class="col-xs-8 col-sm-10">
+                {% endif %} 
+                <div class="file-input">
+                    <input class="form-control" id="fileToUpload" name="image" placeholder="{% trans "Upload an image." %}" type="file">
+                </div>
+                {% if object.image %}
+                        </div>
+                    </div>
+                {% endif %}
+                    
+            {% endcaptureas %}
+            {% captureas image_extra_html %}
+                {% if object.image %}
+                    <div class="btn btn-emphasized btn-small btn-no-float regular-space">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-square-o"></i>
+                                    <input type="hidden" id="image-clear_id" name="image-clear"> 
+                                </a>
+                                <div class="media-body click-previous-a">
+                                    {% trans "Reset" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with label=image_label field_html=image_html extra_html=image_extra_html first=True large_field=True %}
+            
+            
+            <ul id="osm-reverse-search-failed-error-display" class="errorlist" style="display: none;">
+                <li>{% trans "We could not find an address for your location. Please enter an address manually!" %}</li>
+            </ul>
+
+			{# Regular field with custom HTML #}
+			{% trans "Where is your organization located?" as location_label %}
+			{% captureas location_html %}
+			    {% trans "Enter a place or address and then choose a point on the map." as location_placeholder %}
+			    {% render_field form.forms.media_tag.location placeholder=location_placeholder %}
+			    {{ form.forms.media_tag.location_lat }}
+			    {{ form.forms.media_tag.location_lon }}
+			    <div id="id_media_tag-location-map"></div>
+			{% endcaptureas %}
+			{% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.location field_html=location_html label=location_label placeholder=location_placeholder large_field=True required=True %}
+			
+            
+			{# Large Field #}
+			{% trans "Which topics fit your organization?" as topics_label %}
+			{% trans "Select topics" as topics_placeholder %}
+			{% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.topics label=topics_label placeholder=topics_placeholder large_field=True %}
+			
+			<hr>
+			                    
+            <h2>{% trans "Contact Info" %}</h2>
+            
+            {# Website Field #}
+            {% trans "Website" as website_label %}
+            {% trans "Example: http://mywebsite.com" as website_placeholder %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.website label=website_label placeholder=website_placeholder %}
+            
+            {# email Field #}
+			{% trans "E-Mail" as email_label %}
+			{% trans "E-Mail" as email_placeholder %}
+			{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.email label=email_label placeholder=email_placeholder %}
+            
+		    {# Regular Field #}
+			{% trans "Phone number" as phone_label %}
+			{% trans "Phone number" as phone_placeholder %}
+			{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.phone_number label=phone_label placeholder=phone_placeholder %}
+			        
+            
+            <hr>  
+            
+            
+            {% if form.forms.obj.related_groups %}
+                {# Related Groups Field #}
+                {% trans "Are there any projects/groups related to this one?" as related_label %}
+                {% trans "Select related Projects/Groups" as related_placeholder %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder large_field=True %}
+            {% endif %}
+            
+            {# Organization Visibility Field #}
+            {% trans "Privacy settings" as visibility_label %}
+            {% trans "This will determine who can see your organization." as visibility_legend %}
+            {% captureas visibility_warning_html %}
+                <div class="group-public-warning-area" {% if object and not object.public %}style="display: none;"{% endif %} id="organization-visibility-warning">
+                    <i class="fa fa-fw fa-globe"></i>
+                    {% trans "This organization will be set to be publicly visible!" %}
+                    <br/><br/>
+                    {% trans "Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!" %}
+                    <br/><br/>
+                    {% trans "If you do not wish this, you can change the visibility setting above." %}
+                </div>
+                <script type="text/javascript">
+                    {# show or hide a visibility warning #}
+                    $(function(){
+                        $('#organization-public-field').on('change', function(){
+                            if ($(this).val() == "true") {
+                                $('#organization-visibility-warning').show();
+                            } else {
+                                $('#organization-visibility-warning').hide();
+                            } 
+                        });
+                    });
+                </script>
+            {% endcaptureas %}
+            {% captureas visibility_field_html %}
+                <select name="public" id="organization-public-field">
+                    <option default value="false">{% trans "Registered users only" %}</option>
+                    <option {% if not object or object and object.public %}selected{% endif %} value="true">{% trans "Public (visible without login)" %}</option>
+                </select>
+            {% endcaptureas %}
+            
+            {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html field=form.forms.media_tag.visibility field_id="organization-public-field" label=visibility_label legend=visibility_legend extra_html=visibility_warning_html %}
+            
+                        
+	    </div>
+	    
+	    <button type="submit" class="btn btn-emphasized">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-check"></i>
+	                </a>
+	                <div class="media-body">
+                        {% trans "Save" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    
+    </form>
+
+{% endblock %}
+
+{% block extrafooter %}
+    {% if form_view == 'add' %}
+	    {% if request.GET.lat and request.GET.lon %}
+	        <script type="text/javascript">
+	            $(function(){
+	                try {
+	                   // instantly use the given coordinates
+                        var osmfield = $('input.osmfield');
+                        var lat = {{ request.GET.lat }};
+                        var lng = {{ request.GET.lon }};
+                        osmfield.data('lat-element').val(lat);
+                        osmfield.data('lng-element').val(lng);
+                        var newLatLng = new L.LatLng(lat, lng);
+                        osmfield.data('marker').setLatLng(newLatLng);
+                        osmfield.data('map').panTo(newLatLng);
+                        
+                        osmfield.data('map-element').show();
+                        window.dispatchEvent(new Event('resize'));
+	                }
+	                catch (error) {}
+	                function query_osm_reverse () {
+		                try {
+                            // also do a reverse search for the given adress
+		                    var url = 'https://nominatim.openstreetmap.org/reverse?json_callback=?';
+			                $.getJSON(url, {
+			                        format: 'json',
+			                        lat: {{ request.GET.lat }},
+			                        lon: {{ request.GET.lon }},
+			                        addressdetails: 1,
+			                        'accept-language': "{{ COSINNUS_CURRENT_LANGUAGE }}"
+			                        // osm_type: N,
+			                    }, function(data) {
+			                        // coordinates found for this address?
+			                        if (data && 'address' in data) {
+			                            console.log
+			                            var road = data.address.road ? data.address.road : '';
+			                            var city = data.address.city ? data.address.city : (
+                                             data.address.town ? data.address.town : (
+                                                  data.address.village ? data.address.village : (
+                                                      data.address.state ? data.address.state : (
+	                                                      data.address.suburb ? data.address.suburb : ''
+	                                                 )
+                                                 )
+                                             )
+                                         );
+			                            var address =  road + (road && city ? ', ' : '') + city ;
+			                            $('#id_media_tag-location').val(address);
+			                        } else {
+			                            $('#osm-reverse-search-failed-error-display').show();
+			                        }
+			                });
+		                }
+		                catch (error) {
+		                    $('#osm-reverse-search-failed-error-display').show();
+		                }
+		            }
+		            {# We wait a bit because sometimes the query fizzles if the osm map isnt fully loaded #}
+		            setTimeout(query_osm_reverse, 1000);
+	            });
+	        </script>
+	    {% else %}
+	        {% comment %}  
+	        No default location for now!
+	        
+	        <script type="text/javascript">
+	            $(function(){
+	                var osmfield = $('#id_media_tag-location');
+	                if (!osmfield.val()) {
+	                    osmfield.val('Berlin');
+	                }
+	            });
+	        </script>
+	        {% endcomment %}
+	    {% endif %}
+    {% endif %}
+    {% if object and request.GET.delete == "1" %}
+        <script type="text/javascript">
+            $(function(){
+                $('#deleteModal').modal('show');
+            });
+        </script>
+    {% endif %}
+{% endblock %}

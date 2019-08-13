@@ -90,6 +90,10 @@ if settings.COSINNUS_IDEAS_ENABLED:
     MAP_SEARCH_PARAMETERS.update({
         'ideas': True,
     })
+if settings.COSINNUS_ORGANIZATIONS_ENABLED:
+    MAP_SEARCH_PARAMETERS.update({
+        'organizations': True,
+    })
 
 
 def map_search_endpoint(request, filter_group_id=None):

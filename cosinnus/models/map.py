@@ -447,6 +447,40 @@ class DetailedIdeaMapResult(DetailedMapResult):
         return ret
 
 
+class DetailedOrganizationMapResult(DetailedMapResult):
+    """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
+         into a proper MapResult """
+    
+    fields = copy(DetailedMapResult.fields)
+    fields.update({
+        'projects': [],
+        'groups': [],
+        'followed': False,
+    })
+    
+    def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        # collect group's created visible projects
+        projects_sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['projects'])
+        projects_sqs = projects_sqs.filter_and(id__in=obj.related_groups.all().values_list('id', flat=True))
+        # collect group's created visible groups
+        groups_sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['groups'])
+        groups_sqs = groups_sqs.filter_and(id__in=obj.related_groups.all().values_list('id', flat=True))
+        
+        # the preview for projects and groups is always visible for everyone!
+        #sqs = filter_searchqueryset_for_read_access(sqs, user)
+        projects_sqs = projects_sqs.order_by('title')
+        groups_sqs = groups_sqs.order_by('title')
+        
+        kwargs.update({
+            'projects': [HaystackProjectMapCard(result) for result in projects_sqs],
+            'groups': [HaystackProjectMapCard(result) for result in groups_sqs],
+            'creator_name': obj.creator.get_full_name(),
+            'creator_slug': obj.creator.username,
+        })
+        ret = super(DetailedOrganizationMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
+        return ret
+
+
 
 SHORTENED_ID_MAP = {
     'cosinnus.cosinnusproject': 1,
@@ -454,6 +488,7 @@ SHORTENED_ID_MAP = {
     'cosinnus.userprofile': 3,
     'cosinnus_event.event': 4,
     'cosinnus.cosinnusidea': 5,
+    'cosinnus.cosinnusorganization': 6,
 }
 
 SEARCH_MODEL_NAMES = {
@@ -496,7 +531,6 @@ if settings.COSINNUS_IDEAS_ENABLED:
     SEARCH_RESULT_DETAIL_TYPE_MAP.update({
         'ideas': DetailedIdeaMapResult,
     })
-    
     
 """ pads, files, messages, todos, polls """
 try:
@@ -598,7 +632,20 @@ try:
     #})
 except:
     Offer = None
-    
+
+
+if settings.COSINNUS_ORGANIZATIONS_ENABLED:
+    from cosinnus.models.organization import CosinnusOrganization
+    SEARCH_MODEL_NAMES.update({
+        CosinnusOrganization: 'organizations',                       
+    })
+    SHORT_MODEL_MAP.update({
+        13: CosinnusOrganization,
+    })
+    SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+        'organizations': DetailedOrganizationMapResult,
+    })
+
     
 SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
 # these can always be read by any user (returned fields still vary)

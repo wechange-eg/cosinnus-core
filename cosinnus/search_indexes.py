@@ -24,6 +24,7 @@ from cosinnus.models.tagged import LikeObject
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.timezone import now
+from cosinnus.models.organization import CosinnusOrganization
     
 
 class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
@@ -345,6 +346,66 @@ class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearch
         members_rank_from_date = max(1.0 - (age_timedelta.days/90.0), 0) 
         
         return (members_rank_from_likes / 2.0) + (members_rank_from_date / 2.0)
+    
+    def apply_boost_penalty(self, obj, indexed_data):
+        """ Penaliize by 15% for not having a wallpaper image.
+            @return: 1.0 for no penalty, a float in range [0.0..1.0] for a penalty
+        """
+        if not self.get_image_field_for_background(obj):
+            return DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
+        return 1.0
+    
+    
+class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex, 
+          StoredDataIndexMixin, indexes.Indexable):
+    
+    text = TemplateResolveNgramField(document=True, use_template=True)
+    boosted = indexes.NgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
+
+    public = indexes.BooleanField(model_attr='public')
+    visible_for_all_authenticated_users = indexes.BooleanField()
+    creator = indexes.IntegerField(null=True)
+    portal = indexes.IntegerField(model_attr='portal_id')
+    location = indexes.LocationField(null=True)
+    
+    def get_model(self):
+        return CosinnusOrganization
+    
+    def prepare_creator(self, obj):
+        """ Returning this without using model_attr because of a haystack bug resolving lazy objects """
+        return obj.creator_id
+    
+    def prepare_visible_for_all_authenticated_users(self, obj):
+        """ This is hacky, but Haystack provides no method to filter
+            for models in subqueries, so we set this indexed flag to be
+            able to filter on for permissions """
+        return True
+    
+    def prepare_liked_user_ids(self, obj):
+        return obj.get_liked_user_ids()
+    
+    def prepare_content_count(self, obj):
+        return obj.related_groups.filter(is_active=True).count()
+    
+    def prepare_location(self, obj):
+        if obj.media_tag and obj.media_tag.location_lat and obj.media_tag.location_lon:
+            # this expects (lat,lon)!
+            return "%s,%s" % (obj.media_tag.location_lat, obj.media_tag.location_lon)
+        return None
+
+    def get_image_field_for_background(self, obj):
+        return obj.image
+    
+    def index_queryset(self, using=None):
+        qs = self.get_model().objects.active()
+        qs = qs.select_related('media_tag')
+        return qs
+    
+    def boost_model(self, obj, indexed_data):
+        """ We boost a single measure of 1 factor: newness (100%). """
+        age_timedelta = now() - obj.created
+        organization_newness = max(1.0 - (age_timedelta.days/90.0), 0) 
+        return organization_newness
     
     def apply_boost_penalty(self, obj, indexed_data):
         """ Penaliize by 15% for not having a wallpaper image.
