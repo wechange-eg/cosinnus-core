@@ -16,6 +16,7 @@ from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_ids
 from cosinnus.models.idea import CosinnusIdea
 from annoying.functions import get_object_or_None
+from cosinnus.models.organization import CosinnusOrganization
 
 
 def check_ug_admin(user, group):
@@ -93,6 +94,9 @@ def check_object_read_access(obj, user):
         return check_user_superuser(user) or obj_is_visible or obj.grant_extra_read_permissions(user)
     elif type(obj) is CosinnusIdea:
         # ideas are only either public or visible by any logged in user, no private setting
+        return obj.public or user.is_authenticated
+    elif type(obj) is CosinnusOrganization:
+        # organizations are only either public or visible by any logged in user, no private setting
         return obj.public or user.is_authenticated
     elif issubclass(obj.__class__, BaseUserProfile):
         return check_user_can_see_user(user, obj.user)

@@ -479,7 +479,7 @@ class DetailedOrganizationMapResult(DetailedMapResult):
             'address': obj.address,
             'website_url': obj.website,
             'email': obj.email,
-            'phone_number': obj.phone_number.as_international,
+            'phone_number': obj.phone_number.as_international if obj.phone_number else None,
         })
         
         

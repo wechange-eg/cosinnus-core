@@ -2,8 +2,10 @@
 {% import "include/macros.html" as macros %}
 
 {% block header_image %}
-    <div class="single-tile-image">
-        <img class="framed-tile-image" src="{{ backgroundImageLargeUrl }}" />
+    <div class="single-tile-image {% if not iconImageUrl %}image-placeholder-background image-placeholder-background-{{ type }}{% endif %}">
+    	{% if iconImageUrl %}
+        	<img class="framed-tile-image" src="{{ iconImageUrl }}" />
+        {% endif %}
     </div>
 {% endblock header_image %}
 
@@ -116,8 +118,9 @@
 
 {% block related_content %}
     
+    <div class="clearfix"></div>
+    
     {% if groups|length > 0 %}
-        <div class="clearfix"></div>
     
         <div class="tile-section tile-section-divided">
             <div class="subheading">

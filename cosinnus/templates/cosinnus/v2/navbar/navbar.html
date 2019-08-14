@@ -173,18 +173,6 @@
 					{% trans "Create new Group" %} 
 				</div>
 			</a>
-			{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
-			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url "cosinnus:idea-create" %}" 
-					class="create-menu-link flex-grow">
-				<h2 class="headline margin-regular">{% trans "Idea" %}</h2>
-				<div class="description">
-					{% trans "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas." %}
-				</div>
-				<div class="action text-bold">
-					{% trans "Post new Idea" %} 
-				</div>
-			</a>
-			{% endif %}
 			{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
 			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url "cosinnus:organization-create" %}" 
 					class="create-menu-link flex-grow">
@@ -194,6 +182,18 @@
 				</div>
 				<div class="action text-bold">
 					{% trans "Create new Organization" %} 
+				</div>
+			</a>
+			{% endif %}
+			{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
+			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url "cosinnus:idea-create" %}" 
+					class="create-menu-link flex-grow">
+				<h2 class="headline margin-regular">{% trans "Idea" %}</h2>
+				<div class="description">
+					{% trans "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas." %}
+				</div>
+				<div class="action text-bold">
+					{% trans "Post new Idea" %} 
 				</div>
 			</a>
 			{% endif %}
