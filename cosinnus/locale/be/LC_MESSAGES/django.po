@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-07 20:02+0200\n"
+"POT-Creation-Date: 2019-08-14 16:02+0200\n"
 "PO-Revision-Date: 2019-06-09 13:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -831,6 +831,37 @@ msgstr "Cosinnus-ідэя"
 
 msgid "Cosinnus Ideas"
 msgstr "Cosinnus-ідэі"
+
+msgid "Synced"
+msgstr ""
+
+#, fuzzy
+#| msgid "Permissions"
+msgid "Version"
+msgstr "Дазволы"
+
+msgid "License"
+msgstr ""
+
+#, fuzzy
+#| msgid "E-Mail Addresses"
+msgid "Address"
+msgstr "Адрасы электроннай пошты"
+
+#, fuzzy
+#| msgid "Email address"
+msgid "Email Address"
+msgstr "Адрас электроннай пошты"
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "Cosinnus Organization"
+msgstr "CosinnusМесцазнаходжанне"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "Cosinnus Organizations"
+msgstr "CosinnusМесцазнаходжанні"
 
 msgid "Language"
 msgstr "Мова"
@@ -3021,6 +3052,9 @@ msgstr "Пераключыць навігацыю"
 msgid "My Profile"
 msgstr "Мой профіль"
 
+msgid "Payments (Name TBD)"
+msgstr ""
+
 msgid "Logout"
 msgstr "Выйсці"
 
@@ -3065,6 +3099,20 @@ msgstr "Мае ідэі"
 msgid "All Ideas"
 msgstr "Усе ідэі"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organizations"
+msgstr "Запрашэнні"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Organizations"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Organizations"
+msgstr ""
+
 msgid "Search..."
 msgstr "Пошук..."
 
@@ -3082,6 +3130,86 @@ msgstr "Вы не ўвайшлі ў сістэму."
 
 msgid "You cannot create or edit events until you are logged in!"
 msgstr "Вы не можаце ствараць ці рэдагаваць падзеі, пакуль не ўвойдзеце!"
+
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgid "Edit \"%(organization_name)s\""
+msgstr "Рэдагаваць “%(team_name)s”"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Create Organization"
+msgstr "Выдаліць запрашэнне"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Delete this organization"
+msgstr "Выдаліць запрашэнне"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete idea „%(title)s“?"
+msgid "Do you really want to delete organization „%(title)s“?"
+msgstr "Вы сапраўды хочаце выдаліць ідэю \"%(title)s\"?"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Delete Organization"
+msgstr "Выдаліць запрашэнне"
+
+msgid "Edit Organization"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a descriptive title for your idea"
+msgid "Enter the name of your organization"
+msgstr "Увядзіце апісальную назву Вашай ідэі"
+
+#, fuzzy
+#| msgid "The description for your idea. Explain your vision and your goals."
+msgid "The description of your organization. Explain your vision and your goals and add additional interesting details."
+msgstr "Апісанне Вашай ідэі. Растлумачце Ваша бачанне і мэты."
+
+msgid "Where is your organization located?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Which topics fit your idea?"
+msgid "Which topics fit your organization?"
+msgstr "Якія тэмы падыходзяць да Вашай ідэі?"
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Info"
+msgstr "Кантактныя даныя"
+
+msgid "E-Mail"
+msgstr "Адрас электроннай пошты"
+
+#, fuzzy
+#| msgid "Promote Member"
+msgid "Phone number"
+msgstr "Павысіць чальца"
+
+#, fuzzy
+#| msgid "E-Mail Addresses"
+msgid "Postal Address"
+msgstr "Адрасы электроннай пошты"
+
+#, fuzzy
+#| msgid "Are there any projects/groups related to this one?"
+msgid "Are there any projects/groups related to this organization?"
+msgstr "Ці ёсць іншыя праекты/групы, звязаныя з гэтай?"
+
+#, fuzzy
+#| msgid "This will determine who can see your idea."
+msgid "This will determine who can see your organization."
+msgstr "Гэта вызначыць, хто зможа бачыць Вашу ідэю."
+
+#, fuzzy
+#| msgid "This idea will be set to be publicly visible!"
+msgid "This organization will be set to be publicly visible!"
+msgstr "Гэта ідэя будзе публічна даступная!"
 
 msgid "No anonymous access!"
 msgstr "Ананімны доступ забаронены!"
@@ -3383,6 +3511,12 @@ msgid "Idea"
 msgstr "Ідэя"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organization"
+msgstr "Запрашэнні"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create User"
 msgstr "Стварыць карыстальніка(-цу)"
 
@@ -3503,6 +3637,30 @@ msgstr "Усе групы"
 #| msgid "All Projects"
 msgid "Browse all Projects"
 msgstr "Усе праекты"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You are following this item"
+msgid "You have not created any organizations yet."
+msgstr "Вы сочыце за гэтым элементам"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Group"
+msgid "Create new Organization"
+msgstr "Стварыць групу"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All Groups"
+msgid "Browse all Organizations"
+msgstr "Усе групы"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Organizations"
+msgstr "Шукаць карыстальнікаў(-ц)"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
@@ -3699,6 +3857,24 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Edit your Idea"
+msgid "Edit your Organization"
+msgstr "Рэдагаваць Вашу ідэю"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Person"
+msgstr "Кантактныя даныя"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Administrators unknown"
+msgid "Contact Persons unknown"
+msgstr "Адміністратары невядомыя"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Далучыцца да праекта"
 
@@ -3877,9 +4053,6 @@ msgstr "Рэдагаваць Ваш профіль"
 
 msgid "Basic data"
 msgstr "Асноўная інфармацыя"
-
-msgid "E-Mail"
-msgstr "Адрас электроннай пошты"
 
 msgid "Profile avatar"
 msgstr "Аватар профіля"
@@ -4136,6 +4309,9 @@ msgid "Groups help improve communication and collaboration in large networks or 
 msgstr ""
 
 msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
+msgstr ""
+
+msgid "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!"
 msgstr ""
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
@@ -4542,6 +4718,11 @@ msgstr "Аб'ект \"%(title)s\" паспяхова выдалены."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d іншых(-я) аб'ектаў(-ы) выдалена(-ыя)."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your organization was deleted successfully."
+msgstr "Ваша ідэя паспяхова выдаленая."
 
 #, python-format
 msgid "No %(verbose_name)s found matching the query"

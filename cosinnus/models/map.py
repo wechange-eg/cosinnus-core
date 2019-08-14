@@ -117,6 +117,12 @@ class HaystackGroupMapCard(HaystackMapCard):
             'dataSlot2': result.participant_count, # subproject count
         })
         return super(HaystackGroupMapCard, self).__init__(result, *args, **kwargs)
+
+
+class HaystackOrganizationMapCard(HaystackMapCard):
+    
+    def __init__(self, result, *args, **kwargs):
+        return super(HaystackOrganizationMapCard, self).__init__(result, *args, **kwargs)
     
     
 class HaystackEventMapCard(HaystackMapCard):
@@ -256,6 +262,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
     fields.update({
         'events': [],
         'admins': [],
+        'organizations': [],
         'followed': False,
     })
          
@@ -306,6 +313,16 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
         kwargs.update({
             'admins': [HaystackUserMapCard(result) for result in sqs]
         })
+        
+        if settings.COSINNUS_ORGANIZATIONS_ENABLED:
+            sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['organizations'])
+            sqs = sqs.filter_and(related_groups=obj.id)
+            sqs = filter_searchqueryset_for_read_access(sqs, user)
+            sqs = sqs.order_by('title')
+            
+            kwargs.update({
+                'organizations': [HaystackOrganizationMapCard(result) for result in sqs]
+            })
         
         return super(DetailedBaseGroupMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
@@ -476,7 +493,7 @@ class DetailedOrganizationMapResult(DetailedMapResult):
             'groups': [HaystackProjectMapCard(result) for result in groups_sqs],
             'creator_name': obj.creator.get_full_name(),
             'creator_slug': obj.creator.username,
-            'address': obj.address,
+            'postal_address': obj.address,
             'website_url': obj.website,
             'email': obj.email,
             'phone_number': obj.phone_number.as_international if obj.phone_number else None,

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-07 20:02+0200\n"
+"POT-Creation-Date: 2019-08-14 16:02+0200\n"
 "PO-Revision-Date: 2018-08-30 04:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -850,6 +850,37 @@ msgstr "Idea Projektu Cosinnus"
 
 msgid "Cosinnus Ideas"
 msgstr "Idee Projektu Cosinnus"
+
+msgid "Synced"
+msgstr ""
+
+#, fuzzy
+#| msgid "Permissions"
+msgid "Version"
+msgstr "Uprawnienia"
+
+msgid "License"
+msgstr ""
+
+#, fuzzy
+#| msgid "E-Mail Addresses"
+msgid "Address"
+msgstr "Adresy e-mail"
+
+#, fuzzy
+#| msgid "Email address"
+msgid "Email Address"
+msgstr "Adres e-mail"
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "Cosinnus Organization"
+msgstr "Lokalizacja Cosinnus"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "Cosinnus Organizations"
+msgstr "Lokalizacje Cosinnus"
 
 msgid "Language"
 msgstr "Język"
@@ -3040,6 +3071,9 @@ msgstr "Przełącznik nawigacji"
 msgid "My Profile"
 msgstr "Mój Profil"
 
+msgid "Payments (Name TBD)"
+msgstr ""
+
 msgid "Logout"
 msgstr "Wyloguj"
 
@@ -3085,6 +3119,20 @@ msgstr "Moje Idee"
 msgid "All Ideas"
 msgstr "Wszystkie Idee"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organizations"
+msgstr "Zaproszenia"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Organizations"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Organizations"
+msgstr ""
+
 msgid "Search..."
 msgstr "Szukaj..."
 
@@ -3102,6 +3150,86 @@ msgstr "Niezalogowany/a."
 
 msgid "You cannot create or edit events until you are logged in!"
 msgstr "Musisz się zalogować, aby tworzyć lub edytować wydarzenia!"
+
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgid "Edit \"%(organization_name)s\""
+msgstr "Edytuj “%(team_name)s”"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Create Organization"
+msgstr "Usuń zaproszenie"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Delete this organization"
+msgstr "Usuń zaproszenie"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete idea „%(title)s“?"
+msgid "Do you really want to delete organization „%(title)s“?"
+msgstr "Czy na pewno usunąć ideę „%(title)s“?"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Delete Organization"
+msgstr "Usuń zaproszenie"
+
+msgid "Edit Organization"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a descriptive title for your idea"
+msgid "Enter the name of your organization"
+msgstr "Wprować opisową nazwę Twojej idei"
+
+#, fuzzy
+#| msgid "The description for your idea. Explain your vision and your goals."
+msgid "The description of your organization. Explain your vision and your goals and add additional interesting details."
+msgstr "Opis idei. Wyjaśnij swoją wizję i cel."
+
+msgid "Where is your organization located?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Which topics fit your idea?"
+msgid "Which topics fit your organization?"
+msgstr "Jakie tematy są zgodne z Twoją ideą?"
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Info"
+msgstr "Informacje kontaktowe"
+
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#, fuzzy
+#| msgid "Promote Member"
+msgid "Phone number"
+msgstr "Awansuj Członka"
+
+#, fuzzy
+#| msgid "E-Mail Addresses"
+msgid "Postal Address"
+msgstr "Adresy e-mail"
+
+#, fuzzy
+#| msgid "Are there any projects/groups related to this one?"
+msgid "Are there any projects/groups related to this organization?"
+msgstr "Czy są jakieś projekty/grupy związane z tą grupą?"
+
+#, fuzzy
+#| msgid "This will determine who can see your idea."
+msgid "This will determine who can see your organization."
+msgstr "To zdecyduje o tym, kto będzie mógł zobaczyć Twoją ideę."
+
+#, fuzzy
+#| msgid "This idea will be set to be publicly visible!"
+msgid "This organization will be set to be publicly visible!"
+msgstr "Ta idea będzie widoczny publicznie!"
 
 msgid "No anonymous access!"
 msgstr "Brak anonimowego dostępu!"
@@ -3413,6 +3541,12 @@ msgid "Idea"
 msgstr "Idea"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organization"
+msgstr "Zaproszenia"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create User"
 msgstr "Utwórz folder"
 
@@ -3533,6 +3667,30 @@ msgstr "Wszystkie Grupy"
 #| msgid "Created Projects"
 msgid "Browse all Projects"
 msgstr "Utworzone Projekty"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You are invited!"
+msgid "You have not created any organizations yet."
+msgstr "Zostałeś/aś zaproszony/a!"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Group"
+msgid "Create new Organization"
+msgstr "Utwórz Grupę"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All Groups"
+msgid "Browse all Organizations"
+msgstr "Wszystkie Grupy"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Organizations"
+msgstr "Wyszukiwanie Użytkowników"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
@@ -3738,6 +3896,24 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Edit your Idea"
+msgid "Edit your Organization"
+msgstr "Edytuj swoją Ideę"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Person"
+msgstr "Informacje kontaktowe"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Administrators unknown"
+msgid "Contact Persons unknown"
+msgstr "Administratorzy nieznani"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Dołącz do Projektu"
 
@@ -3924,9 +4100,6 @@ msgstr "Edytuj Profil"
 
 msgid "Basic data"
 msgstr "Dane podstawowe"
-
-msgid "E-Mail"
-msgstr "E-Mail"
 
 msgid "Profile avatar"
 msgstr "Awatar profilu"
@@ -4183,6 +4356,9 @@ msgid "Groups help improve communication and collaboration in large networks or 
 msgstr ""
 
 msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
+msgstr ""
+
+msgid "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!"
 msgstr ""
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
@@ -4593,6 +4769,11 @@ msgstr "Obiekt \"%(title)s\" usunięty pomyślnie."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d innych obiektów usunięto pomyślnie."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your organization was deleted successfully."
+msgstr "Twój profil został pomyślnie usunięty."
 
 #, python-format
 msgid "No %(verbose_name)s found matching the query"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-07 20:02+0200\n"
-"PO-Revision-Date: 2019-07-22 16:58+0100\n"
+"POT-Creation-Date: 2019-08-14 16:02+0200\n"
+"PO-Revision-Date: 2019-08-14 16:04+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -666,7 +666,6 @@ msgstr ""
 msgid "Website"
 msgstr "Webseite"
 
-#| msgid "Welcome-Email Text"
 msgid "Welcome-Email sending enabled"
 msgstr "Willkommens-Email verschicken aktiviert"
 
@@ -1000,6 +999,27 @@ msgstr "Cosinnus Idee"
 
 msgid "Cosinnus Ideas"
 msgstr "Cosinnus Ideen"
+
+msgid "Synced"
+msgstr "Synchronisiert"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "License"
+msgstr "Lizenz"
+
+msgid "Address"
+msgstr "Adresse"
+
+msgid "Email Address"
+msgstr "E-mail Adresse"
+
+msgid "Cosinnus Organization"
+msgstr "Cosinnus Organisation"
+
+msgid "Cosinnus Organizations"
+msgstr "Cosinnus Organisationen"
 
 msgid "Language"
 msgstr "Sprache"
@@ -1442,7 +1462,6 @@ msgstr "Keine Beschreibung verfasst."
 msgid "Back to Project Overview"
 msgstr "Zurück zur Übersicht"
 
-#| msgid "Administrator"
 msgid "Administration"
 msgstr "Administration"
 
@@ -1452,7 +1471,6 @@ msgstr "Wähle links eine Seite aus."
 msgid "Simple Statistics"
 msgstr "Simple Statistiken"
 
-#| msgid "Welcome-Email Text"
 msgid "User Welcome Email"
 msgstr "Willkommens-Email für neue Benutzer"
 
@@ -1469,7 +1487,6 @@ msgstr ""
 msgid "Save"
 msgstr "Speichern"
 
-#| msgid "Welcome-Email Text"
 msgid "Currently set Welcome-Email Text"
 msgstr "Aktueller Willkommens-Email Text"
 
@@ -3588,6 +3605,9 @@ msgstr "Navigation ab-/abschalten"
 msgid "My Profile"
 msgstr "Mein Profil"
 
+msgid "Payments (Name TBD)"
+msgstr ""
+
 msgid "Logout"
 msgstr "Abmelden"
 
@@ -3632,6 +3652,18 @@ msgstr "Meine Ideen"
 msgid "All Ideas"
 msgstr "Alle Ideen"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Organizations"
+msgstr "Organisationen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Organizations"
+msgstr "Meine Organisationen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Organizations"
+msgstr "Alle Organisationen"
+
 msgid "Search..."
 msgstr "Suchen..."
 
@@ -3651,6 +3683,75 @@ msgid "You cannot create or edit events until you are logged in!"
 msgstr ""
 "Sie können keine Veranstaltungen anlegen oder bearbeiten bis sie sich "
 "einloggen."
+
+#, python-format
+msgid "Edit \"%(organization_name)s\""
+msgstr "\"%(organization_name)s\" bearbeiten"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Organization"
+msgstr "Organisation anlegen"
+
+msgid "Delete this organization"
+msgstr "Organisation löschen"
+
+#, python-format
+msgid "Do you really want to delete organization „%(title)s“?"
+msgstr "Möchtest du die Organisation \"%(title)s\" wirklich löschen?"
+
+msgid "Delete Organization"
+msgstr "Organisation löschen"
+
+msgid "Edit Organization"
+msgstr "Organisation bearbeiten"
+
+#| msgid "Enter a descriptive title for your organization"
+msgid "Enter the name of your organization"
+msgstr "Gib den Namen deiner Organisation an"
+
+#| msgid "The description for your idea. Explain your vision and your goals."
+msgid ""
+"The description of your organization. Explain your vision and your goals and "
+"add additional interesting details."
+msgstr ""
+"Die Beschreibung deiner Organisation. Stellte deine Vision und Ziele vor und "
+"füge weitere interessante Details ein."
+
+msgid "Where is your organization located?"
+msgstr "Wo sitzt deine Organisation?"
+
+#, fuzzy
+#| msgid "Which topics fit your idea?"
+msgid "Which topics fit your organization?"
+msgstr "Um welche Themen geht es?"
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Info"
+msgstr "Kontaktinfos"
+
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#| msgid "Promote Member"
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+#| msgid "E-Mail Addresses"
+msgid "Postal Address"
+msgstr "Postanschrift"
+
+#| msgid "Are there any projects/groups related to this one?"
+msgid "Are there any projects/groups related to this organization?"
+msgstr "Welche deiner Projekte/Gruppen gehören der Organisation an?"
+
+#| msgid "This will determine who can see your idea."
+msgid "This will determine who can see your organization."
+msgstr "Dies bestimmt wer deine Organisation sehen kann."
+
+#| msgid "This idea will be set to be publicly visible!"
+msgid "This organization will be set to be publicly visible!"
+msgstr "Diese Organisation wird auf öffentlich sichtbar eingestellt!"
 
 msgid "No anonymous access!"
 msgstr "Kein anonymer Zugriff erlaubt!"
@@ -4011,6 +4112,11 @@ msgid "Idea"
 msgstr "Idee"
 
 #. Translators: __INCLUDE_JS_PO__
+#| msgid "Invitations"
+msgid "Organization"
+msgstr "Organisation"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create User"
 msgstr "Benutzer_in erstellen"
 
@@ -4121,6 +4227,26 @@ msgstr "Alle Gruppen anzeigen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Browse all Projects"
 msgstr "Alle Projekte anzeigen"
+
+#. Translators: __INCLUDE_JS_PO__
+#| msgid "You have not RSVPed to any Events."
+msgid "You have not created any organizations yet."
+msgstr "Du hast noch keine Organisationen angelegt."
+
+#. Translators: __INCLUDE_JS_PO__
+#| msgid "Create new Group"
+msgid "Create new Organization"
+msgstr "Neue Organisation anlegen"
+
+#. Translators: __INCLUDE_JS_PO__
+#| msgid "Browse all Groups"
+msgid "Browse all Organizations"
+msgstr "Alle Organisationen anzeigen"
+
+#. Translators: __INCLUDE_JS_PO__
+#| msgid "Search for Users"
+msgid "Search for Organizations"
+msgstr "Nach Organisation suchen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
@@ -4322,6 +4448,21 @@ msgstr "Kann gerne für potentielle Zusammenarbeit kontaktiert werden"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "Möchte KEINE Anfragen für potentielle Zusammenarbeit erhalten!"
+
+#. Translators: __INCLUDE_JS_PO__
+#| msgid "Edit your Idea"
+msgid "Edit your Organization"
+msgstr "Deine Organisation bearbeiten"
+
+#. Translators: __INCLUDE_JS_PO__
+#| msgid "Contact info"
+msgid "Contact Person"
+msgstr "Kontaktperson"
+
+#. Translators: __INCLUDE_JS_PO__
+#| msgid "Administrators unknown"
+msgid "Contact Persons unknown"
+msgstr "Kontaktpersonen unbekannt"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
@@ -4541,9 +4682,6 @@ msgstr "Profil bearbeiten"
 
 msgid "Basic data"
 msgstr "Basisdaten"
-
-msgid "E-Mail"
-msgstr "E-Mail"
 
 msgid "Profile avatar"
 msgstr "Avatar"
@@ -4939,6 +5077,13 @@ msgstr ""
 "Wie sieht unsere Region in der Zukunft aus? Was ist deine Idee für eine "
 "klimafreundliche und nachhaltige Region? Finde MitstreiterInnen für deine "
 "Projektideen."
+
+msgid ""
+"Are you part of an interesting company, an NGO or an association? Put your "
+"organization on the map and create visibility!"
+msgstr ""
+"Bist du Teil eines interessanten Unternehmens, einer NGO oder eines Vereins? "
+"Trage deine Organisation auf der Karte ein und schaffe so Sichtbarkeit!"
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
 msgstr "Was ist wann wo los? Was gibt's zu erleben? Wo trifft man sich?"
@@ -5479,6 +5624,10 @@ msgstr "Objekt \"%(title)s\" wurde erfolgreich gelöscht."
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 
+#| msgid "Your idea was deleted successfully."
+msgid "Your organization was deleted successfully."
+msgstr "Deine Organisation wurde erfolgreich gelöscht."
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Kein passender %(verbose_name)s für die Anfrage gefunden"
@@ -5617,8 +5766,6 @@ msgstr ""
 "Das Einladungs-Token, das du benutzt hast, scheint nicht gültig zu sein!"
 
 #, python-format
-#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-#| msgid "to %(portal_name)s"
 msgid "Welcome to %(portal_name)s!"
 msgstr "Willkommen bei %(portal_name)s!"
 

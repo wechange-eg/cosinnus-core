@@ -36,6 +36,11 @@ class CosinnusOrganizationFormMixin(object):
         })
         return context
     
+    def form_valid(self, *args, **kwargs):
+        ret = super(CosinnusOrganizationFormMixin, self).form_valid(*args, **kwargs)
+        self.object.update_index()
+        return ret
+    
 
 class OrganizationCreateView(RequireLoggedInMixin, CosinnusOrganizationFormMixin, CreateView):
     """ Create View for Organizations """

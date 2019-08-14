@@ -19,6 +19,31 @@
         </div>
     {% endif %}
     
+    
+    {% if organizations|length > 0 %}
+        <div class="tile-section tile-section-divided">
+            <div class="subheading">
+                <i class="fa fa-building"></i>
+                {% if organizations|length > 1 %}
+                	{# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Organizations" %} 
+                {% else %}
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Organization" %} 
+	            {% endif %}
+            </div>
+        </div>
+        <div class="tile-section">
+            <div class="row">
+                {% for organization in organizations %}
+                    <div class="col-sm-6">
+                        {{ macros.itemCard(organization.portal, organization.slug, organization.title, organization.type, organization.iconImageUrl, organization.address, "fa-map-marker") }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    
 {% endblock related_content %}
 
 {% block action_buttons %}

@@ -366,6 +366,7 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
     visible_for_all_authenticated_users = indexes.BooleanField()
     creator = indexes.IntegerField(null=True)
     portal = indexes.IntegerField(model_attr='portal_id')
+    related_groups = indexes.MultiValueField() # ids of all groups that belong to the organization
     location = indexes.LocationField(null=True)
     
     def get_model(self):
@@ -398,6 +399,9 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
     
     def get_image_field_for_icon(self, obj):
         return obj.image
+    
+    def prepare_related_groups(self, obj):
+        return list(obj.related_groups.all().values_list('id', flat=True))
     
     def index_queryset(self, using=None):
         qs = self.get_model().objects.active()

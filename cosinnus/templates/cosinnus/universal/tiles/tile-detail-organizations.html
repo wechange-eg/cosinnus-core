@@ -54,7 +54,7 @@
                     {# Translators: __INCLUDE_JS_PO__ #}
                     {% trans "Contact" %}
                 </div>
-                {% if not address and not website_url and not email and not phone_number %}
+                {% if not postal_address and not website_url and not email and not phone_number %}
                     <p class="pale-color">
                         <i>
                             {# Translators: __INCLUDE_JS_PO__ #}
@@ -84,31 +84,35 @@
 	                            </a>
 	                        </div>
 	                    {% endif %}
-	                    {% if address %}
+	                    {% if postal_address %}
 	                        <div class="tile-section-header">
-	                            <i class="fa fa-home"></i>{{ address }}
+	                            <i class="fa fa-home"></i>{{ postal_address }}
 	                        </div>
 	                    {% endif %}
                     </div>
                 {% endif %}
                 
             </div>
-            <div class="col-xs-6">
-                <div class="subheading">
-                    {# Translators: __INCLUDE_JS_PO__ #}
-                    {% trans "Contact Person" %}
-                </div>
-                <div class="tile-section">
-                    {% if admins|length > 0 %}
-                        {% for admin in admins %}
-                            {{ macros.itemCard(admin.portal, admin.slug, admin.title, admin.type, admin.iconImageUrl, admin.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
-                        {% endfor %}
-                    {% else %}
-                        {# Translators: __INCLUDE_JS_PO__ #}
-                        </i>{% trans "Contact Persons unknown" %}</i>
-                    {% endif %}
-                </div>
-            </div>
+            
+            {% if False %}
+	            {# TODO: contact person hidden for now, until ownership can be transferred #}
+	            <div class="col-xs-6">
+	                <div class="subheading">
+	                    {# Translators: __INCLUDE_JS_PO__ #}
+	                    {% trans "Contact Person" %}
+	                </div>
+	                <div class="tile-section">
+	                    {% if admins|length > 0 %}
+	                        {% for admin in admins %}
+	                            {{ macros.itemCard(admin.portal, admin.slug, admin.title, admin.type, admin.iconImageUrl, admin.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
+	                        {% endfor %}
+	                    {% else %}
+	                        {# Translators: __INCLUDE_JS_PO__ #}
+	                        </i>{% trans "Contact Persons unknown" %}</i>
+	                    {% endif %}
+	                </div>
+	            </div>
+            {% endif %}
         </div>
     
     </div>

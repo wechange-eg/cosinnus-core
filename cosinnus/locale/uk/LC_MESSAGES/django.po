@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-07 20:02+0200\n"
+"POT-Creation-Date: 2019-08-14 16:02+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -829,6 +829,37 @@ msgstr "Ідея"
 
 msgid "Cosinnus Ideas"
 msgstr "Ідеї"
+
+msgid "Synced"
+msgstr ""
+
+#, fuzzy
+#| msgid "ToS Version"
+msgid "Version"
+msgstr "ToS Версія"
+
+msgid "License"
+msgstr ""
+
+#, fuzzy
+#| msgid "E-Mail Addresses"
+msgid "Address"
+msgstr "Адреси електронної пошти"
+
+#, fuzzy
+#| msgid "Email address"
+msgid "Email Address"
+msgstr "Адреса електронної скриньки"
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "Cosinnus Organization"
+msgstr "Cosinnus місце знаходження"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "Cosinnus Organizations"
+msgstr "Cosinnus місця знаходження"
 
 msgid "Language"
 msgstr "Мова"
@@ -2997,6 +3028,9 @@ msgstr "Переключення навігації"
 msgid "My Profile"
 msgstr "Мій профіль"
 
+msgid "Payments (Name TBD)"
+msgstr ""
+
 msgid "Logout"
 msgstr "Вихід"
 
@@ -3041,6 +3075,20 @@ msgstr "Мої ідеї"
 msgid "All Ideas"
 msgstr "Всі ідеї"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organizations"
+msgstr "Запрошення"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Organizations"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Organizations"
+msgstr ""
+
 msgid "Search..."
 msgstr "Пошук..."
 
@@ -3058,6 +3106,86 @@ msgstr "Не в системі."
 
 msgid "You cannot create or edit events until you are logged in!"
 msgstr "Ви не можете створювати або редагувати заходи, поки не увійдете в систему!"
+
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgid "Edit \"%(organization_name)s\""
+msgstr "Редагувати проект «%(team_name)s»"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Create Organization"
+msgstr "Видалити запрошення"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Delete this organization"
+msgstr "Видалити запрошення"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete idea „%(title)s“?"
+msgid "Do you really want to delete organization „%(title)s“?"
+msgstr "Ви дійсно бажаєте видалити ідею «%(title)s»?"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Delete Organization"
+msgstr "Видалити запрошення"
+
+msgid "Edit Organization"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a descriptive title for your idea"
+msgid "Enter the name of your organization"
+msgstr "Введіть опис Вашої ідеї"
+
+#, fuzzy
+#| msgid "The description for your idea. Explain your vision and your goals."
+msgid "The description of your organization. Explain your vision and your goals and add additional interesting details."
+msgstr "Опис Вашої ідеї. Поясніть візію та цілі."
+
+msgid "Where is your organization located?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Which topics fit your idea?"
+msgid "Which topics fit your organization?"
+msgstr "Яким темам відповідає Ваша ідея?"
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Info"
+msgstr "Контактна інформація"
+
+msgid "E-Mail"
+msgstr "Адреса електронної скриньки"
+
+#, fuzzy
+#| msgid "Promote Member"
+msgid "Phone number"
+msgstr "Підвищити члена"
+
+#, fuzzy
+#| msgid "E-Mail Addresses"
+msgid "Postal Address"
+msgstr "Адреси електронної пошти"
+
+#, fuzzy
+#| msgid "Are there any projects/groups related to this one?"
+msgid "Are there any projects/groups related to this organization?"
+msgstr "Існують пов'язані проекти/спільноти?"
+
+#, fuzzy
+#| msgid "This will determine who can see your idea."
+msgid "This will determine who can see your organization."
+msgstr "Це визначить, хто може бачити Вашу ідею."
+
+#, fuzzy
+#| msgid "This idea will be set to be publicly visible!"
+msgid "This organization will be set to be publicly visible!"
+msgstr "Ця ідея буде налаштована як публічно видима!"
 
 msgid "No anonymous access!"
 msgstr "Анонімний доступ не дозволено!"
@@ -3359,6 +3487,12 @@ msgid "Idea"
 msgstr "Ідея"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organization"
+msgstr "Запрошення"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create User"
 msgstr "Створити користувача"
 
@@ -3465,6 +3599,30 @@ msgstr "Переглянути усі Спільноти"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Browse all Projects"
 msgstr "Переглянути усі Проекти"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You have not RSVPed to any Events."
+msgid "You have not created any organizations yet."
+msgstr "Ти не підписався на жодну Подію."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create new Group"
+msgid "Create new Organization"
+msgstr "Створити нову Спільноту"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Browse all Groups"
+msgid "Browse all Organizations"
+msgstr "Переглянути усі Спільноти"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Organizations"
+msgstr "Пошук користувачів"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
@@ -3647,6 +3805,24 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "НЕ бажає контакту щодо можливої співпраці!"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Edit your Idea"
+msgid "Edit your Organization"
+msgstr "Редагувати Вашу ідею"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Person"
+msgstr "Контактна інформація"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Administrators unknown"
+msgid "Contact Persons unknown"
+msgstr "Адміністратори невідомі"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Долучитися до проекту"
 
@@ -3811,9 +3987,6 @@ msgstr "Редагувати профіль"
 
 msgid "Basic data"
 msgstr "Основні дані"
-
-msgid "E-Mail"
-msgstr "Адреса електронної скриньки"
 
 msgid "Profile avatar"
 msgstr "Основне фото"
@@ -4056,6 +4229,9 @@ msgstr "Спільноти допомагають вдосконалити зв'
 
 msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
 msgstr "Як розвиватиметься наш регіон? Як зробити цей розвиток максимально екологічним та сталим? Знайди однодумців для реалізації твого власного проекту!"
+
+msgid "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!"
+msgstr ""
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
 msgstr "Що, де і коли відбувається? Про що варто дізнатись? Де зустрітись?"
@@ -4443,6 +4619,11 @@ msgstr "Об'єкт «%(title)s» було успішно видалено."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d інших об'єктів було видалено."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your organization was deleted successfully."
+msgstr "Ваша ідея успішно видалена."
 
 #, python-format
 msgid "No %(verbose_name)s found matching the query"

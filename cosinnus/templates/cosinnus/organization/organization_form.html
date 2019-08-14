@@ -11,7 +11,7 @@
 
 {% block page_title %}
 	{% if object %}
-	   {% blocktrans with organization_name=object.title %}Edit “{{ organization_name }}”{% endblocktrans %}
+	   {% blocktrans with organization_name=object.title %}Edit "{{ organization_name }}"{% endblocktrans %}
 	{% else %}
 	   {% trans "Create Organization" %}
     {% endif %}
@@ -82,7 +82,7 @@
         
             {# Title Field #}
             {% trans "Title" as title_label %}
-            {% captureas title_placeholder %}{% trans "Enter a descriptive title for your organization" %}{% endcaptureas %}
+            {% captureas title_placeholder %}{% trans "Enter the name of your organization" %}{% endcaptureas %}
             {% if request.GET.title %}
                 {% captureas title_val %}{{ request.GET.title }}{% endcaptureas %}
             {% endif %}
@@ -90,7 +90,7 @@
 	        
 	        {# SimpleMDE Description Field (gets initialized in extrahead) #}                                  
             {% trans "Description" as description_label %}
-            {% captureas description_placeholder %}{% trans "The description for your organization. Explain your vision and your goals." %}{% endcaptureas %}
+            {% captureas description_placeholder %}{% trans "The description of your organization. Explain your vision and your goals and add additional interesting details." %}{% endcaptureas %}
             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description label=description_label placeholder=description_placeholder large_field=True %}
             
             {# Organization Image Field #}

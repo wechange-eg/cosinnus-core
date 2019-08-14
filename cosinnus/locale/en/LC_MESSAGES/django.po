@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-07 20:02+0200\n"
+"POT-Creation-Date: 2019-08-14 16:02+0200\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -857,6 +857,31 @@ msgstr "Project"
 #| msgid "Cosinnus projects"
 msgid "Cosinnus Ideas"
 msgstr "Projects"
+
+msgid "Synced"
+msgstr ""
+
+msgid "Version"
+msgstr ""
+
+msgid "License"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
+msgid "Email Address"
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus groups"
+msgid "Cosinnus Organization"
+msgstr "Groups"
+
+#, fuzzy
+#| msgid "Cosinnus groups"
+msgid "Cosinnus Organizations"
+msgstr "Groups"
 
 msgid "Language"
 msgstr ""
@@ -2937,6 +2962,9 @@ msgstr ""
 msgid "My Profile"
 msgstr ""
 
+msgid "Payments (Name TBD)"
+msgstr ""
+
 msgid "Logout"
 msgstr ""
 
@@ -2987,6 +3015,18 @@ msgstr "My projects"
 msgid "All Ideas"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Organizations"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Organizations"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Organizations"
+msgstr ""
+
 msgid "Search..."
 msgstr ""
 
@@ -3003,6 +3043,70 @@ msgid "Not logged in."
 msgstr ""
 
 msgid "You cannot create or edit events until you are logged in!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgid "Edit \"%(organization_name)s\""
+msgstr "Edit project “%(team_name)s”"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "There are no groups."
+msgid "Create Organization"
+msgstr "There are no groups."
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "Delete this organization"
+msgstr "There are no groups."
+
+#, fuzzy, python-format
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to delete organization „%(title)s“?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "Delete Organization"
+msgstr "There are no groups."
+
+msgid "Edit Organization"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter the name of your organization"
+msgstr "Enter a name for the project."
+
+msgid "The description of your organization. Explain your vision and your goals and add additional interesting details."
+msgstr ""
+
+msgid "Where is your organization located?"
+msgstr ""
+
+msgid "Which topics fit your organization?"
+msgstr ""
+
+msgid "Contact Info"
+msgstr ""
+
+msgid "E-Mail"
+msgstr ""
+
+msgid "Phone number"
+msgstr ""
+
+msgid "Postal Address"
+msgstr ""
+
+msgid "Are there any projects/groups related to this organization?"
+msgstr ""
+
+msgid "This will determine who can see your organization."
+msgstr ""
+
+msgid "This organization will be set to be publicly visible!"
 msgstr ""
 
 msgid "No anonymous access!"
@@ -3321,6 +3425,10 @@ msgid "Idea"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Organization"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Create Project"
 msgid "Create User"
@@ -3445,6 +3553,28 @@ msgstr "List all projects"
 #| msgid "My Projects"
 msgid "Browse all Projects"
 msgstr "My Projects"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You have not created any organizations yet."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Group"
+msgid "Create new Organization"
+msgstr "Create Group"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "List all groups"
+msgid "Browse all Organizations"
+msgstr "List all projects"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Project"
+msgid "Search for Organizations"
+msgstr "Create Project"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
@@ -3645,6 +3775,18 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Edit your Organization"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact Person"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact Persons unknown"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Edit Project"
 msgid "Join Project"
@@ -3826,9 +3968,6 @@ msgid "Edit Your Profile"
 msgstr ""
 
 msgid "Basic data"
-msgstr ""
-
-msgid "E-Mail"
 msgstr ""
 
 msgid "Profile avatar"
@@ -4075,6 +4214,9 @@ msgid "Groups help improve communication and collaboration in large networks or 
 msgstr ""
 
 msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
+msgstr ""
+
+msgid "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!"
 msgstr ""
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
@@ -4481,6 +4623,9 @@ msgstr ""
 
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
+msgstr ""
+
+msgid "Your organization was deleted successfully."
 msgstr ""
 
 #, python-format

@@ -152,29 +152,9 @@ class OrganizationManager(models.Manager):
 @python_2_unicode_compatible
 class CosinnusOrganization(IndexingUtilsMixin, models.Model):
     """
-    Identifier    id
-    Version    version
-    Created at    createdAt
-    Updated at    updatedAt last_modified
-    License    license 
-    Place type    placeType
-    Category   categories
-                   
-    Title / Name    title
-    Description    description
-    Logo    avatar
-    Coordinates    coordinates
-    Website    websites
-    Address    address
-    Tags        tags
-    Contact-email    email
-    Contact-phonenumber phonenumber
-    Contact-website  url
+    Organisation model.
     """
     
-    # don't worry, the default Portal with id 1 is created in a datamigration
-    # there was no other way to generate completely runnable migrations 
-    # (with a get_default function, or any other way)
     portal = models.ForeignKey(CosinnusPortal, verbose_name=_('Portal'), related_name='organizations', 
         null=False, blank=False, default=1, on_delete=models.CASCADE) # port_id 1 is created in a datamigration!
     
