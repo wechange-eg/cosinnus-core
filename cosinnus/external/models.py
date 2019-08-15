@@ -15,10 +15,17 @@ logger = logging.getLogger('cosinnus')
 
 
 class ExternalObjectBaseModel(IndexingUtilsMixin, models.Model):
+    """ Used for Haystack indexing of non-Databased map objects. 
+        Index items by instantiating a subclass of this model and calling save() on it.
+        
+        Retrieve indexed items for the map by filtering for their model in a haystack
+        SearchQuerySet. The aim of this base class is to always be compatible with both
+        `HaystackMapCard` and `HaystackMapResult`.
+    """
     
     source = models.CharField(max_length=255, null=False)
     # TODO: how to display external portals
-    portal = models.IntegerField(default=0)
+    portal = models.IntegerField()
     
     """ from StoredDataIndexMixin """
     
@@ -68,6 +75,7 @@ class ExternalObjectBaseModel(IndexingUtilsMixin, models.Model):
             - `topics` is passed as an array of ints and then saved as comma-separated int string
                 (see `settings.TOPIC_CHOICES`)
         """
+        self.pk = url
         self.slug = external_id
         self.source = source
         self.title = title
@@ -79,6 +87,7 @@ class ExternalObjectBaseModel(IndexingUtilsMixin, models.Model):
         self.icon_image_url = icon_image_url
         self.contact_info = contact_info
         self.mt_topics = ','.join((str(topic) for topic in topics))
+        
         # add unknown tags to taggit, save all ids
         all_tags = []
         for str_tag in tags:
@@ -88,11 +97,23 @@ class ExternalObjectBaseModel(IndexingUtilsMixin, models.Model):
                 tag = Tag.objects.create(name=str_tag)
             all_tags.append(str(tag.id))
         self.mt_tags = ','.join(all_tags)
+        
+        # fill all other fields' default values, or None (haystack needs this)
+        self.portal = 0
+        self.background_image_small_url = None
+        self.background_image_large_url = None
+        self.group_slug = None
+        self.group_name = None
+        self.participant_count = 0
+        self.member_count = 0
+        self.content_count = None
+        self.mt_visibility = 2
+        self.mt_public = True
     
-           
     def save(self, *args, **kwargs):
+        """ Only updates the haystack index for this instance, does not save anything to DB.
+            Calling save() on any ExternalModel has this functionality. """
         self.update_index()
-
         
     
 class ExternalBaseGroup(ExternalObjectBaseModel):
