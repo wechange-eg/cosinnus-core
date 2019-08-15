@@ -9,7 +9,11 @@
     
         {% block type_area %}
             <div class="tile-section-header one-line">
-               {{ macros.typeLabel(type, singular=1) }}
+                {{ macros.typeLabel(type, singular=1) }}
+                {% if portal == 99999 %}
+                	{# Translators: __INCLUDE_JS_PO__ #}
+	                ({% trans "External" %})
+                {% endif %}
                 
                 {% if not isSmall and controlView.portalInfo.current != portal %}
                     <span class="inline-spacer"></span>

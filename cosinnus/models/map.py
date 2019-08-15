@@ -22,6 +22,7 @@ from cosinnus.utils.group import message_group_admins_url
 from cosinnus.utils.permissions import check_ug_membership, check_ug_pending,\
     check_ug_invited_pending
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.external.models import ExternalProject, ExternalSociety
 
 
 def _prepend_url(user, portal=None):
@@ -693,6 +694,13 @@ SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS = [
     'groups',
 ]
 
+if settings.COSINNUS_EXTERNAL_CONTENT_ENABLED:
+    EXTERNAL_SEARCH_MODEL_NAMES = {
+        ExternalProject: 'projects',
+        ExternalSociety: 'groups'
+    }
+    SEARCH_MODEL_NAMES.update(EXTERNAL_SEARCH_MODEL_NAMES)
+    EXTERNAL_SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(EXTERNAL_SEARCH_MODEL_NAMES.items())])
 
 
 

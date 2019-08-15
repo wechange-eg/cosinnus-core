@@ -8,11 +8,14 @@ from cosinnus.external.models import ExternalProject, ExternalSociety
 from cosinnus.utils.search import CommaSeperatedIntegerMultiValueField, TemplateResolveNgramField
 
 
+EXTERNAL_CONTENT_PORTAL_ID = 99999
+
 
 class ExternalBaseIndexMixin(indexes.SearchIndex):
     
     source = indexes.CharField(stored=True, indexed=False, model_attr='source')
-    portal = indexes.IntegerField(model_attr='portal')
+    portal = indexes.IntegerField(default=EXTERNAL_CONTENT_PORTAL_ID)
+    location = indexes.LocationField(null=True)
     
     """ from StoredDataIndexMixin """
     
@@ -44,21 +47,32 @@ class ExternalBaseIndexMixin(indexes.SearchIndex):
     mt_location_lat = indexes.FloatField(null=True, model_attr='mt_location_lat')
     mt_location_lon = indexes.FloatField(null=True, model_attr='mt_location_lon')
     mt_topics = CommaSeperatedIntegerMultiValueField(null=True, model_attr='mt_topics')
-    mt_visibility = indexes.IntegerField(stored=True, indexed=False, model_attr='mt_visibility')
+    mt_visibility = indexes.IntegerField(stored=True, indexed=False, default=2)
     
-    mt_public = indexes.BooleanField(default=False, model_attr='mt_public')
+    mt_public = indexes.BooleanField(default=True)
     
     text = TemplateResolveNgramField(document=True, model_attr='title')
     
-    
+    def prepare_location(self, obj):
+        if obj.mt_location_lat and obj.mt_location_lon:
+            # this expects (lat,lon)!
+            return "%s,%s" % (obj.mt_location_lat, obj.mt_location_lon)
+        return None
 
-class ExternalProjectIndex(ExternalBaseIndexMixin, indexes.Indexable):
+class ExternalBaseGroupIndex(ExternalBaseIndexMixin, indexes.SearchIndex):
+    # for filtering on this model
+    is_group_model = indexes.BooleanField(default=True)
+    always_visible = indexes.BooleanField(default=True)
+    public = indexes.BooleanField(default=True)
+
+
+class ExternalProjectIndex(ExternalBaseGroupIndex, indexes.Indexable):
     
     def get_model(self):
         return ExternalProject
 
 
-class ExternalSocietyIndex(ExternalBaseIndexMixin, indexes.Indexable):
+class ExternalSocietyIndex(ExternalBaseGroupIndex, indexes.Indexable):
     
     def get_model(self):
         return ExternalSociety

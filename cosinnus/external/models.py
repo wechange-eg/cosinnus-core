@@ -49,8 +49,10 @@ class ExternalObjectBaseModel(IndexingUtilsMixin, models.Model):
     """
     
     source = models.CharField(max_length=255, null=False)
-    # TODO: how to display external portals
-    portal = models.IntegerField()
+    # defaults to 0, which means external
+    portal = models.IntegerField(null=False)
+    # defaults to public=True because external
+    public = models.BooleanField(default=True)
     
     """ from StoredDataIndexMixin """
     
@@ -126,7 +128,6 @@ class ExternalObjectBaseModel(IndexingUtilsMixin, models.Model):
         self.mt_tags = ','.join(all_tags)
         
         # fill all other fields' default values, or None (haystack needs this)
-        self.portal = 0
         self.background_image_small_url = None
         self.background_image_large_url = None
         self.group_slug = None
@@ -134,8 +135,6 @@ class ExternalObjectBaseModel(IndexingUtilsMixin, models.Model):
         self.participant_count = 0
         self.member_count = 0
         self.content_count = None
-        self.mt_visibility = 2
-        self.mt_public = True
     
     def save(self, *args, **kwargs):
         """ Only updates the haystack index for this instance, does not save anything to DB.

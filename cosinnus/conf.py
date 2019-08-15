@@ -248,6 +248,9 @@ class CosinnusConf(AppConf):
     # should CosinnusOrganizations be enabled for this Portal?
     ORGANIZATIONS_ENABLED = False
     
+    # is the external content (GoodDB for example) enabled?
+    EXTERNAL_CONTENT_ENABLED = False
+    
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
 

@@ -23,6 +23,7 @@ from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,\
 from haystack.query import EmptySearchQuerySet
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.functions import ensure_list_of_ints
+from cosinnus.external.search_indexes import EXTERNAL_CONTENT_PORTAL_ID
 
 MODEL_ALIASES = {
     'todo': 'cosinnus_todo.todoentry',
@@ -99,15 +100,19 @@ def get_visible_portal_ids():
         VISIBLE_PORTAL_IDS = list(set(portals))
     return VISIBLE_PORTAL_IDS
 
-def filter_searchqueryset_for_portal(sqs, portals=None, restrict_multiportals_to_current=False):
+def filter_searchqueryset_for_portal(sqs, portals=None, restrict_multiportals_to_current=False, external=False):
     """ Filters a searchqueryset by which portal the objects belong to.
         @param portals: If not provided, will default to this portal and all foreign portals allowed in settings 
             ([current-portal] + settings.COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS)
         @param restrict_multiportals_to_current: if True, will force objects with multiple portals to
-            definitely be in the current portal  """
+            definitely be in the current portal  
+        @param external: should we include external API content? """
             
     if portals is None:
         portals = get_visible_portal_ids()
+    if external:
+        # if enabled, add the non-existing 0-id portal, for external portals
+        portals = [EXTERNAL_CONTENT_PORTAL_ID] + portals
     
     if portals and restrict_multiportals_to_current:
         sqs = sqs.filter_and(SQ(portal__in=portals) | SQ(portals__in=[CosinnusPortal.get_current().id]))
