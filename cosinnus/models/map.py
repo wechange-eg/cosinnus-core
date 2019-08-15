@@ -62,6 +62,10 @@ class BaseMapCard(DictResult):
     
 
 class HaystackMapCard(BaseMapCard):
+    """ Serialization class for small item cards on
+        detailed search results. For example, a list of admins
+        for a project on that project's detail view would
+        be modeled as a `HaystackUserMapCard` """
     
     def __init__(self, result, *args, **kwargs):
         if result.portals:
