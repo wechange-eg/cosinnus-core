@@ -11,8 +11,33 @@ import logging
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from taggit.models import Tag
 from django.core.validators import validate_comma_separated_integer_list
+from django.db.models.query import QuerySet
 logger = logging.getLogger('cosinnus')
 
+
+class ExternalModelQuerySet(QuerySet):
+
+    def count(self):
+        return 0
+
+    def all(self):
+        return self.none()
+
+    def filter(self, *args, **kwargs):
+        return self.none()
+
+    def exclude(self, *args, **kwargs):
+        return self.none()
+
+    def order_by(self, *ordering):
+        return self.none()
+
+
+class ExternalModelManager(models.Manager):
+    
+    def all(self):
+        return ExternalModelQuerySet()
+    
 
 class ExternalObjectBaseModel(IndexingUtilsMixin, models.Model):
     """ Used for Haystack indexing of non-Databased map objects. 
@@ -64,6 +89,8 @@ class ExternalObjectBaseModel(IndexingUtilsMixin, models.Model):
         validators=[validate_comma_separated_integer_list])
     mt_visibility = models.IntegerField(default=2)
     mt_public = models.BooleanField(default=True)
+    
+    objects = ExternalModelManager()
     
     class Meta(object):
         managed = False
