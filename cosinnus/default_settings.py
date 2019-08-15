@@ -536,3 +536,17 @@ OTP_TOTP_ISSUER = 'WECHANGE eG'
 COSINNUS_GOODDB_BASE_URL = "https://virtserver.swaggerhub.com/WECHANGE-eG/GoodDB/0.0.7"
 COSINNUS_GOODDB_USER = "user"
 COSINNUS_GOODDB_PASSWORD = "password"
+COSINNUS_GOODDB_PUSH = {
+    'events': {
+        'path': '/events/batch',
+        'model': 'cosinnus_event.Event',
+        'serializer': 'cosinnus_event.api.serializers.EventGoodDBSerializer'
+    },
+}
+COSINNUS_GOODDB_PULL = {
+    'events': {
+        'path': '/events/',
+        'model': 'cosinnus.ExternalEvent',
+        'serializer': 'cosinnus.external.serializers.ExternalEventGoodDBSerializer'
+    },
+}

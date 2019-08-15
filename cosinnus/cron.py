@@ -30,16 +30,29 @@ class CosinnusCronJobBase(CronJobBase):
 
 class PushToGoodDB(CosinnusCronJobBase):
     """
-    Pushes all public data from e. g. events and initiatives to GoodDB microservice
+    Pushes public data from e. g. events and initiatives to GoodDB microservice
     """
 
     RUN_EVERY_MINS = 1
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
 
-    cosinnus_code = 'cosinnus.push_to_good_db'
+    cosinnus_code = 'cosinnus.gooddb_push'
 
     def do(self):
         gdb_connection = GoodDBConnection()
-        gdb_connection.push_events()
-        gdb_connection.push_societies()
-        gdb_connection.push_projects()
+        gdb_connection.push()
+
+
+class PullFromGoodDB(CosinnusCronJobBase):
+    """
+    Pulls public data from e. g. events and initiatives to GoodDB microservice
+    """
+
+    RUN_EVERY_MINS = 1
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.gooddb_pull'
+
+    def do(self):
+        gdb_connection = GoodDBConnection()
+        gdb_connection.pull()

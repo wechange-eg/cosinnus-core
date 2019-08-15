@@ -1,11 +1,13 @@
 import json
 import logging
 from datetime import datetime, timedelta
+from importlib import import_module
 
 import requests
 from cosinnus_event.api.serializers import EventGoodDBSerializer
 from cosinnus_event.models import Event
 from django.conf import settings
+from django.apps import apps
 
 logger = logging.getLogger(__name__)
 
@@ -62,6 +64,7 @@ class GoodDBConnection:
 
     def _push(self, path, queryset, serializer, key='items'):
         """
+        Push given queryset data to GoodDB
         :return:
         """
         headers = {
@@ -86,34 +89,81 @@ class GoodDBConnection:
             except requests.HTTPError:
                 raise GoodDBError(response.status_code, response.content)
 
-    def push_events(self):
+    def push(self):
         """
-        Pushes all public data from e. g. events and initiatives to GoodDB microservice
+        Push all registered models to GoodDB
         :return:
         """
-        queryset = Event.objects.public_upcoming()
-        return self._push('/events/batch', queryset, EventGoodDBSerializer, key='events')
+        for name, config in settings.COSINNUS_GOODDB_PUSH.items():
+            # Resolve model
+            app_label, model_name = config['model'].rsplit('.')
+            model = apps.get_model(app_label, model_name)
 
-    def push_societies(self):
+            # Resolve serializer
+            serializer_module_name, serializer_name = config['model'].rsplit('.')
+            serializer_module = import_module(serializer_module_name)
+            serializer = getattr(serializer_module, serializer_name)
+
+            # Create (public but not synced)
+            queryset = model.objects.gooddb_create()
+            self._push(config['path'], queryset, serializer, name)
+            # Update (public, synced and modified since last run)
+            queryset = model.objects.gooddb_update()
+            self._push(config['path'], queryset, serializer, name)
+            # Delete (not public but synced)
+            queryset = model.objects.gooddb_delete()
+            self._push(config['path'], queryset, serializer, name)
+
+    def _pull(self, path, queryset, serializer, key='items'):
         """
-        Pushes all public data from e. g. events and initiatives to GoodDB microservice
+        Pull given queryset data from GoodDB
         :return:
         """
-        pass
+        headers = {
+            'Authorization': 'Bearer %s' % self._access_token,
+            'Accept': 'application/json'
+        }
+        self.authenticate()
 
-    def push_projects(self):
+        serializer = serializer()
+        offset, limit = 0, 100
+        count = queryset.count()
+        while offset < count:
+            # Get items
+            items = [serializer.to_representation(instance=e) for e in queryset.all()[offset:offset + limit]]
+            self._push(path, {key: items})
+            offset += limit
+
+            # Push items
+            response = requests.put(f'{self._base_url}{path}', data={key: items}, headers=headers)
+            try:
+                response.raise_for_status()
+            except requests.HTTPError:
+                raise GoodDBError(response.status_code, response.content)
+
+    def pull(self):
         """
-        Pushes all public data from e. g. events and initiatives to GoodDB microservice
+        Pull all registered models from GoodDB
         :return:
         """
-        pass
+        for name, config in settings.COSINNUS_GOODDB_PULL.items():
+            # Resolve model
+            app_label, model_name = config['model'].rsplit('.')
+            model = apps.get_model(app_label, model_name)
 
-    def push_initiatives_to_good_db(self):
-        raise NotImplementedError
+            # Resolve serializer
+            serializer_module_name, serializer_name = config['model'].rsplit('.')
+            serializer_module = import_module(serializer_module_name)
+            serializer = getattr(serializer_module, serializer_name)
 
-    def _build_params(self, args_dict):
-        if args_dict:
-            params = ["%s=%s" % item for item in args_dict.items()]
-            return u"?%s" % u'&'.join(params)
-        else:
-            return u""
+            # Create (public but not synced)
+            queryset = model.objects.gooddb_create()
+            self._push(config['path'], queryset, serializer, name)
+
+            # Update (public, synced and modified since last run)
+            queryset = model.objects.gooddb_update()
+            self._push(config['path'], queryset, serializer, name)
+
+            # Delete (not public but synced)
+            queryset = model.objects.gooddb_delete()
+            self._push(config['path'], queryset, serializer, name)
