@@ -533,6 +533,6 @@ SUIT_CONFIG = {
 # 2-factor authentication issuer name for admin backend
 OTP_TOTP_ISSUER = 'WECHANGE eG'
 
-COSINNUS_GOODDB_BASE_URL = "https://virtserver.swaggerhub.com/WECHANGE-eG/GoodDB/0.0.7"
+COSINNUS_GOODDB_BASE_URL = "https://virtserver.swaggerhub.com/WECHANGE-eG/GoodDB/0.0.9"
 COSINNUS_GOODDB_USER = "user"
 COSINNUS_GOODDB_PASSWORD = "password"
