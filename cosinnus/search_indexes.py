@@ -421,4 +421,6 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
         if not self.get_image_field_for_background(obj):
             return DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
         return 1.0
-    
+
+# also import all external search indexes
+from cosinnus.external.search_indexes import * #noqa

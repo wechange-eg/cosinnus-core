@@ -4,6 +4,8 @@ from datetime import datetime, timedelta
 from importlib import import_module
 
 import requests
+from cosinnus.api.serializers import CosinnusProjectGoodDBSerializer
+from cosinnus.models.group_extra import CosinnusProject
 from cosinnus_event.api.serializers import EventGoodDBSerializer
 from cosinnus_event.models import Event
 from django.conf import settings
@@ -57,7 +59,7 @@ class GoodDBConnection:
             data = json.loads(response.content)
         except ValueError:
             raise GoodDBError(response.status_code, response.content)
-        if data.has_key('errors'):
+        if 'errors' in data:
             raise GoodDBError(response.status_code, response.content)
         self._access_token = data['access_token']
         self._expires_in = datetime.now() + timedelta(seconds=data['expiresIn'])
@@ -71,7 +73,7 @@ class GoodDBConnection:
             'Authorization': 'Bearer %s' % self._access_token,
             'Accept': 'application/json'
         }
-        self.authenticate()
+        # self.authenticate()
 
         serializer = serializer()
         offset, limit = 0, 100
