@@ -23,7 +23,7 @@ from cosinnus.models.map import HaystackMapResult, \
     SEARCH_MODEL_NAMES, SEARCH_MODEL_NAMES_REVERSE, \
     SEARCH_RESULT_DETAIL_TYPE_MAP, \
     SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS, \
-    filter_event_searchqueryset_by_upcoming, EXTERNAL_SEARCH_MODEL_NAMES_REVERSE
+    filter_event_searchqueryset_by_upcoming
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import check_object_read_access
@@ -287,7 +287,8 @@ def get_searchresult_by_args(portal, model_type, slug, user=None):
         in the form of `<classid>.<instanceid>` (see `itemid_from_searchresult()`). """
     
     # monkey-hack: if the portal id is 0, we have an external item, so look up the external models
-    if portal == EXTERNAL_CONTENT_PORTAL_ID:
+    if settings.COSINNUS_EXTERNAL_CONTENT_ENABLED and portal == EXTERNAL_CONTENT_PORTAL_ID:
+        from cosinnus.models.map import EXTERNAL_SEARCH_MODEL_NAMES_REVERSE
         model = EXTERNAL_SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
     else:
         model = SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
