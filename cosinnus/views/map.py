@@ -72,13 +72,13 @@ class MapView(BaseMapView):
         options = super(MapView, self).collect_map_options(**kwargs)
         # for areas without a region, on the default map view, if the user has a location set up in his profile,
         # zoom them into their location-region to start out at
-        settings = options.get('settings', {})
+        map_settings = options.get('settings', {})
         if not self.request.user.is_anonymous\
                 and not any([arg_check in self.request.GET for arg_check in ['ne_lat', 'ne_lon', 'sw_lat', 'sw_lon']])\
                 and not getattr(settings, 'COSINNUS_MAP_OPTIONS', {}).get('geojson_region', None) :
             mt = self.request.user.cosinnus_profile.media_tag
             if mt.location_lat and mt.location_lon:
-                settings.update({
+                map_settings.update({
                     'map': {
                         'location': [mt.location_lat, mt.location_lon],
                         'zoom': 9,
@@ -87,15 +87,15 @@ class MapView(BaseMapView):
         # apply GET params that are settings parameters and are
         # set once and then discarded (unlike the map/search query parameters)
         if self.request.GET.get('search_result_limit', None):
-            settings.update({
+            map_settings.update({
                 'searchResultLimit': self.request.GET.get('search_result_limit'),
             })
         if self.request.GET.get('filter_group', None):
-            settings.update({
+            map_settings.update({
                 'filterGroup': self.request.GET.get('filter_group'),
             })
         options.update({
-            'settings': settings,
+            'settings': map_settings,
         })
         return options
 
