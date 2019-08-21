@@ -69,6 +69,11 @@
 	        {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
 	        {% import_django_select2_js %}
 	        
+	        {% comment %} Import any select2 locale we have {% endcomment %}
+	        {% if COSINNUS_CURRENT_LANGUAGE == 'de' %}
+	        	<script src="{% static 'js/vendor/select2_locale_de.js' %}"></script>
+	        {% endif %}
+	        
 	        {% if request.GET.report == "1" %}
 	            {% if object or group %}
 		            <script>$(function(){
