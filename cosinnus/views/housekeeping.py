@@ -38,6 +38,7 @@ from django.db.models.aggregates import Count
 from cosinnus.utils.http import make_csv_response
 from operator import itemgetter
 from dateutil import parser
+from cosinnus.utils.permissions import check_user_can_receive_emails
 
 
 def housekeeping(request=None):
@@ -479,3 +480,17 @@ def user_activity_info(request):
     #return HttpResponse(prints)
     return make_csv_response(rows, headers, 'user-activity-report')
 
+
+def newsletter_users(request):
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    user_mails = []
+    portal = CosinnusPortal.get_current()
+    for membership in CosinnusPortalMembership.objects.filter(
+            group=portal, user__is_active=True).exclude(user__last_login__exact=None).\
+            prefetch_related('user'):
+        user = membership.user
+        if check_user_can_receive_emails(user) and user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True:
+            user_mails.append([user.email])
+    return make_csv_response(user_mails, file_name='newsletter-user-emails')

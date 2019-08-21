@@ -84,6 +84,7 @@ urlpatterns = [
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     
     #url(r'^housekeeping/$', housekeeping.housekeeping, name='housekeeping'),
+    url(r'^housekeeping/newsletterusers/$', housekeeping.newsletter_users),
     url(r'^housekeeping/deletespamusers/$', housekeeping.delete_spam_users, name='housekeeping_delete_spam_users'),
     url(r'^housekeeping/movegroupcontent/(?P<fromgroup>[^/]+)/(?P<togroup>[^/]+)/$', housekeeping.move_group_content, name='housekeeping_move_group_content'),
     url(r'^housekeeping/recreategroupwidgets/$', housekeeping.recreate_all_group_widgets, name='housekeeping_recreate_all_group_widgets'),
