@@ -49,7 +49,7 @@
 			<div class="ideas-widget-root">
 			</div>
 			<div class="map-widget square-widget">
-					<div class="widget-content square-content">
+					<div class="widget-content square-content background-content">
 						<h2 class="headline">{% trans "Close to me" %}</h2>
 					</div>
 					<a href="/map/" class="square-content hover-link">
@@ -72,9 +72,11 @@
 				</a>
 			</div>
 			<h1 class="headline headline-big no-side-margin">
-				{% trans "Welcome" context "this is a two-line text that says 'Welcome to <WebsiteName>'" %}
-				<br/>
-				{% blocktrans with portal_name=COSINNUS_CURRENT_PORTAL.name context "this is a two-line text that says 'Welcome to <WebsiteName>'"  %}to {{ portal_name }}{% endblocktrans %}
+				{% block welcome_frame_header %}
+					{% trans "Welcome" context "this is a two-line text that says 'Welcome to <WebsiteName>'" %}
+					<br/>
+					{% blocktrans with portal_name=COSINNUS_CURRENT_PORTAL.name context "this is a two-line text that says 'Welcome to <WebsiteName>'"  %}to {{ portal_name }}{% endblocktrans %}
+				{% endblock %}
 			</h1>
 			<div class="description margin-extra-large">
 				{% block welcome_frame_text %}
@@ -85,7 +87,9 @@
 				<div class="flex-grow margin-extra-large">
 					<h2 class="headline no-side-margin">{% trans "Projects" %}</h2>
 					<div class="description">
-						{% trans "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more." %}
+						{% block projects_description %}
+							{% trans "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more." %}
+						{% endblock %}
 					</div>
 					<br/>
 					<a href="{% url 'cosinnus:group-add' %}" class="pale-color pale-with-highlight">
@@ -95,7 +99,9 @@
 				<div class="flex-grow margin-extra-large">
 					<h2 class="headline no-side-margin">{% trans "Groups" %}</h2>
 					<div class="description">
-						{% trans "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups." %}
+						{% block groups_description %}
+							{% trans "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups." %}
+						{% endblock %}
 					</div>
 					<br/>
 					<a href="{% url 'cosinnus:group__group-add' %}" class="pale-color pale-with-highlight">
@@ -108,7 +114,9 @@
 				<div class="flex-grow margin-extra-large">
 					<h2 class="headline no-side-margin">{% trans "Ideas" %}</h2>
 					<div class="description">
-						{% trans "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas." %}
+						{% block ideas_description %}
+							{% trans "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas." %}
+						{% endblock %}
 					</div>
 					<br/>
 					<a href="{% url "cosinnus:idea-create" %}" class="pale-color pale-with-highlight">
@@ -119,7 +127,9 @@
 				<div class="flex-grow margin-extra-large">
 					<h2 class="headline no-side-margin">{% trans "Events" %}</h2>
 					<div class="description">
-						{% trans "What's happening where and when? What's to discover? Where to meet?" %}
+						{% block events_description %}
+							{% trans "What's happening where and when? What's to discover? Where to meet?" %}
+						{% endblock %}
 					</div>
 					<br/>
 					<a href="{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" class="pale-color pale-with-highlight">
