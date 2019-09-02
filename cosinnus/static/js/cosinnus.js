@@ -1614,6 +1614,25 @@
 	    },
 	    
 
+        disableSubmitButton: function() {
+            /* disables submit button after click */
+            console.log('disableSubmitButton');
+
+            // after click 
+            $("button[type='submit']").click(function() {
+
+                var $self = $(this);
+                console.log('click');
+                // disable button
+                $self.attr("disabled","true");
+                console.log('after disabled');
+                // after 10 sec
+                setTimeout(function() {
+                    // enable button 
+                    $self.removeAttr("disabled");
+                }, 10000);
+            });
+        },
     };
 })( jQuery );
 
@@ -1675,6 +1694,7 @@ $(function() {
     $.cosinnus.dashboardArrange();
     $.cosinnus.dashboardArrangeInput();
     $.cosinnus.popover();
+    $.cosinnus.disableSubmitButton();
     $.cosinnus.toggleGroup();
     $.cosinnus.toggleSwitch();
     $.cosinnus.snapToBottom();
