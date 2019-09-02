@@ -1039,7 +1039,7 @@
                     // clone and show progress bar
                     var proto_bar = $('#' + $(this).data('cosinnus-upload-select2-target-field') + '_progressbar');
                     data.context = proto_bar.clone().removeAttr('id').insertAfter(proto_bar).show();
-                    
+ 
                     data.submit();
                 },
                 progress: function (e, data) {
@@ -1616,18 +1616,17 @@
 
         disableSubmitButton: function() {
             /* disables submit button after click */
-            console.log('disableSubmitButton');
 
             // after click 
-            $("button[type='submit']").click(function() {
-
+            $("button[type='submit']").on(function() {
                 var $self = $(this);
-                console.log('click');
-                // disable button
+
+                //disable button
                 $self.attr("disabled","true");
-                console.log('after disabled');
+
                 // after 10 sec
                 setTimeout(function() {
+                    
                     // enable button 
                     $self.removeAttr("disabled");
                 }, 10000);
