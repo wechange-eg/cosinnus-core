@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-07 20:02+0200\n"
-"PO-Revision-Date: 2019-08-21 12:44+0100\n"
+"POT-Creation-Date: 2019-09-07 17:51+0200\n"
+"PO-Revision-Date: 2019-09-07 17:51+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -666,7 +666,6 @@ msgstr ""
 msgid "Website"
 msgstr "Webseite"
 
-#| msgid "Welcome-Email Text"
 msgid "Welcome-Email sending enabled"
 msgstr "Willkommens-Email verschicken aktiviert"
 
@@ -1442,7 +1441,6 @@ msgstr "Keine Beschreibung verfasst."
 msgid "Back to Project Overview"
 msgstr "Zurück zur Übersicht"
 
-#| msgid "Administrator"
 msgid "Administration"
 msgstr "Administration"
 
@@ -1452,7 +1450,6 @@ msgstr "Wähle links eine Seite aus."
 msgid "Simple Statistics"
 msgstr "Simple Statistiken"
 
-#| msgid "Welcome-Email Text"
 msgid "User Welcome Email"
 msgstr "Willkommens-Email für neue Benutzer"
 
@@ -1469,7 +1466,6 @@ msgstr ""
 msgid "Save"
 msgstr "Speichern"
 
-#| msgid "Welcome-Email Text"
 msgid "Currently set Welcome-Email Text"
 msgstr "Aktueller Willkommens-Email Text"
 
@@ -3588,6 +3584,9 @@ msgstr "Navigation ab-/abschalten"
 msgid "My Profile"
 msgstr "Mein Profil"
 
+msgid "Payments (Name TBD)"
+msgstr ""
+
 msgid "Logout"
 msgstr "Abmelden"
 
@@ -3893,6 +3892,9 @@ msgstr "Captcha"
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr ""
 "Wir müssen sicherstellen dass du eine echte Person bist (tut uns leid!)"
+
+msgid "Generate a new captcha"
+msgstr "Neues Captcha generieren"
 
 msgid "Search options..."
 msgstr "Suchoptionen..."
@@ -5617,8 +5619,6 @@ msgstr ""
 "Das Einladungs-Token, das du benutzt hast, scheint nicht gültig zu sein!"
 
 #, python-format
-#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-#| msgid "to %(portal_name)s"
 msgid "Welcome to %(portal_name)s!"
 msgstr "Willkommen bei %(portal_name)s!"
 

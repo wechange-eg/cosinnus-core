@@ -533,3 +533,8 @@ SUIT_CONFIG = {
 # 2-factor authentication issuer name for admin backend
 OTP_TOTP_ISSUER = 'WECHANGE eG'
 
+# django-simple captcha settings
+CAPTCHA_CHALLENGE_FUNCT = 'cosinnus.utils.captcha.dissimilar_random_char_challenge'
+CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
+CAPTCHA_TIMEOUT = 30
+
