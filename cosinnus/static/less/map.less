@@ -351,6 +351,16 @@
                 background-image: url('@{placemark-url}placemark-l-icon-@{filetype}-invert.png');
             }
         }
+        .placemark.marker-hovered {
+        	z-index: 9999 !important;
+        }
+        .placemark .marker-title {
+        	display: none;
+        	position: fixed;
+        }
+        .placemark.marker-hovered .marker-title {
+        	display: block;
+        }
     }
     
     .placemark(events, event);
@@ -358,6 +368,22 @@
     .placemark(ideas, idea);
     .placemark(people, person);
     .placemark(projects, project);
+    
+    .placemark .arrow-box {
+		color: @map-text-color;
+    }
+    .placemark.s .arrow-box {
+		bottom: 20px;    	
+		margin-left: -143px;
+    }
+    .placemark.m .arrow-box {
+		bottom: 25px;    	
+		margin-left: -139px;
+    }
+    .placemark.l .arrow-box {
+		bottom: 40px;    	
+		margin-left: -136px;
+    }
     
 }
 .app-root.no-navbar, .app-root.no-navbar .map-fullscreen, .app-root.no-navbar .tile-list-fullscreen {
