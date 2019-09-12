@@ -240,6 +240,7 @@ module.exports = ContentControlView.extend({
                 iconSize: [markerIcon.iconWidth, markerIcon.iconHeight],
                 iconAnchor: [markerIcon.iconWidth / 2, (markerIcon.iconHeight / (isPointedMarker ? 1 : 2)) + clusterOffset],
                 className: markerIcon.className + (result.get('selected') ? ' marker-selected' : ''),
+                html: '<div class="marker-title arrow-box arrow-bottom">' + result.get('title') + '</div>',
 //                popupAnchor: [1, -27],
             }),
             zIndexOffset: clusterLevel ? (1000 + (100*clusterLevel)) : null,

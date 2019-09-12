@@ -550,3 +550,9 @@ COSINNUS_GOODDB_PULL = {
         'serializer': 'cosinnus.external.serializers.ExternalEventGoodDBSerializer'
     },
 }
+
+# django-simple captcha settings
+CAPTCHA_CHALLENGE_FUNCT = 'cosinnus.utils.captcha.dissimilar_random_char_challenge'
+CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
+CAPTCHA_TIMEOUT = 30
+
