@@ -395,12 +395,6 @@
     white-space: normal;
     padding: 5px;
     margin-top: 15px;
-    text-align: center;
-    pointer-events: none;
-}
-.arrow-box-top {
-	
-	
 }
 .arrow-box:after, .arrow-box:before {
 	bottom: 100%;
@@ -412,32 +406,16 @@
 	position: absolute;
 	pointer-events: none;
 }
-.arrow-box.arrow-bottom:after, .arrow-box.arrow-bottom:before {
-	bottom: unset;
-	top: 100%;
-}
 
-.arrow-box:not(.arrow-bottom):after {
+.arrow-box:after {
 	border-color: rgba(0, 0, 0, 0);
 	border-bottom-color: @background-color-secondary;
 	border-width: 10px;
 	margin-left: -10px;
 }
-.arrow-box:not(.arrow-bottom):before {
+.arrow-box:before {
 	border-color: rgba(0, 0, 0, 0);
 	border-bottom-color: @border-color;
-	border-width: 11px;
-	margin-left: -11px;
-}
-.arrow-box.arrow-bottom:after {
-	border-color: rgba(0, 0, 0, 0);
-	border-top-color: @background-color-secondary;
-	border-width: 10px;
-	margin-left: -10px;
-}
-.arrow-box.arrow-bottom:before {
-	border-color: rgba(0, 0, 0, 0);
-	border-top-color: @border-color;
 	border-width: 11px;
 	margin-left: -11px;
 }
