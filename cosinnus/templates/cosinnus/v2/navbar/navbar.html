@@ -276,9 +276,14 @@
 				</li>
 				{% if SETTINGS.COSINNUS_PAYMENTS_ENABLED %}
 				<li>
-					<a href="{% url 'wechange-payments:overview' %}" class="list-item" role="button" titledby=".item-text"> 
+					<a href="{% url 'wechange-payments:overview' %}" class="list-item" role="button" titledby=".item-text-title"> 
+		    			{% trans "My Contribution" as payments_label %} 
+						<div class="item-text-title">
+							{{ payments_label }}
+			    		</div>
 			    		<div class="item-text">
-			    			{% trans "Payments (Name TBD)" %} 
+			    			{{ payments_label }}
+			    			{% include 'wechange_payments/partials/my_contribution_badge.html' %}
 			    		</div>
 					</a>
 				</li>
