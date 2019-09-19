@@ -588,6 +588,8 @@ class CosinnusConf(AppConf):
     
     # if True, payment urls and views will be enabled
     PAYMENTS_ENABLED = False
+    # if True, enables additional views for payments
+    PAYMENTS_TEST_PHASE = False
     
 
 class CosinnusDefaultSettings(AppConf):
