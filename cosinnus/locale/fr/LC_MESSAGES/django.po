@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-07 20:02+0200\n"
+"POT-Creation-Date: 2019-09-24 14:44+0200\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3024,6 +3024,11 @@ msgstr "Faire basculer la navigation"
 msgid "My Profile"
 msgstr "Mon profil"
 
+#, fuzzy
+#| msgid "My location"
+msgid "My Contribution"
+msgstr "Ma localisation"
+
 msgid "Logout"
 msgstr "Déconnexion"
 
@@ -3276,6 +3281,9 @@ msgstr "Captcha"
 
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Nous devons nous assurer que tu es une vraie personne"
+
+msgid "Generate a new captcha"
+msgstr ""
 
 #, fuzzy
 #| msgid "Show more options..."

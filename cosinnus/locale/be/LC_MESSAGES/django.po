@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-07 20:02+0200\n"
+"POT-Creation-Date: 2019-09-24 14:44+0200\n"
 "PO-Revision-Date: 2019-06-09 13:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3021,6 +3021,11 @@ msgstr "Пераключыць навігацыю"
 msgid "My Profile"
 msgstr "Мой профіль"
 
+#, fuzzy
+#| msgid "My location"
+msgid "My Contribution"
+msgstr "Маё месцазнаходжанне"
+
 msgid "Logout"
 msgstr "Выйсці"
 
@@ -3273,6 +3278,9 @@ msgstr "Капча"
 
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Нам трэба пераканацца, што Вы сапраўды чалавек (прабачце!)"
+
+msgid "Generate a new captcha"
+msgstr ""
 
 msgid "Search options..."
 msgstr "Параметры пошуку..."

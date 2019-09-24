@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-07 20:02+0200\n"
+"POT-Creation-Date: 2019-09-24 14:44+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3000,6 +3000,11 @@ msgstr "Включить/выключить навигацию"
 msgid "My Profile"
 msgstr "Мой профиль"
 
+#, fuzzy
+#| msgid "My location"
+msgid "My Contribution"
+msgstr "Моё местоположение"
+
 msgid "Logout"
 msgstr "Выход из системы"
 
@@ -3252,6 +3257,9 @@ msgstr "Проверочные символы"
 
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Нам необходимо убедиться, что Вы - реальная личность (просим прощения!)"
+
+msgid "Generate a new captcha"
+msgstr ""
 
 msgid "Search options..."
 msgstr "Искать варианты…"
