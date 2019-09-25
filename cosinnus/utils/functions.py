@@ -70,7 +70,9 @@ def unique_aware_slugify(item, slug_source, slug_field,
     
     max_length = item._meta.get_field(slug_field).max_length
     slug_len = max_length - 10  # 1 for '-'and 4 (+5 for etherpad-id compatibility) for the counter
-    slug = slugify(getattr(item, slug_source)[:slug_len])
+    slug_name = getattr(item, slug_source)
+    slug_name = slug_name.lower().replace('ö', 'oe').replace('ä', 'ae').replace('ü', 'ue').replace('ß', 'ss')
+    slug = slugify(slug_name[:slug_len])
     
     # sanity check, we can never ever have an empty slug!
     # note: cyrillic-only names will slugify to empty, so generate a uuid
