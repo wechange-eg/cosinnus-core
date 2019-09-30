@@ -16,6 +16,7 @@ from cosinnus.models.tagged import BaseTagObject
 from django.core.validators import MaxLengthValidator
 from captcha.fields import CaptchaField
 from django.utils.timezone import now
+from cosinnus.utils.user import accept_user_tos_for_portal
 
 
 class UserKwargModelFormMixin(object):
@@ -101,8 +102,7 @@ class UserCreationForm(TermsOfServiceFormFields, DjUserCreationForm):
             media_tag.save()
         
         # set the user's tos_accepted flag to true and date to now
-        user.cosinnus_profile.settings['tos_accepted'] = True
-        user.cosinnus_profile.settings['tos_accepted_date'] = now()
+        accept_user_tos_for_portal(user, save=False)
         
         # set the newsletter opt-in
         if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:

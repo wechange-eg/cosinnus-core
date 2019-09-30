@@ -54,6 +54,7 @@ from django.core.serializers import serialize
 from cosinnus.models.idea import CosinnusIdea
 from django.db.models.functions import Lower
 from django.contrib.contenttypes.models import ContentType
+from cosinnus.utils.user import check_user_has_accepted_portal_tos
 
 
 logger = logging.getLogger('cosinnus')
@@ -1090,3 +1091,9 @@ def app_url_for_model(obj):
         return obj.__class__.__module__.split('.')[0].replace('_', ':')
     return ''
 
+@register.filter
+def has_accepted_portal_tos(user):
+    """ Checks if the user has accepted this portal's ToS """
+    if not user:
+        return False
+    return check_user_has_accepted_portal_tos(user)

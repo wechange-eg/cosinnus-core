@@ -20,7 +20,7 @@ module.exports = ContentControlView.extend({
                 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png' :
                 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'),
             options: {
-                attribution: 'CartoDB'
+                attribution: '<a href="https://carto.com" target="_blank">CartoDB</a> | <a href="https://www.openstreetmap.org" target="_blank">&copy; OpenStreetMap contributors</a>'
             }
         },
     },

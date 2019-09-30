@@ -4187,7 +4187,17 @@ msgstr "Я согласен с Условиями Пользования сай�
 msgid "Change of Terms of Services and Privacy Policy"
 msgstr "Изменения условий пользования и политики конфиденциальности"
 
+#, fuzzy
+#| msgid "Change of Terms of Services and Privacy Policy"
+msgid "Our Terms of Services and Privacy Policy"
+msgstr "Изменения условий пользования и политики конфиденциальности"
+
 msgid "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications."
+msgstr "Защита ваших персональных данных — это наш приоритет, поэтому мы обновили политику конфиденциальности и условия пользования. Чтобы продолжить эффективно пользоваться нашей платформой, просим ознакомиться и принять эти изменения."
+
+#, fuzzy
+#| msgid "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications."
+msgid "We prioritise the protection of your data, which is reflected in our privacy policy and terms of services. We encourage you to read and accept the terms."
 msgstr "Защита ваших персональных данных — это наш приоритет, поэтому мы обновили политику конфиденциальности и условия пользования. Чтобы продолжить эффективно пользоваться нашей платформой, просим ознакомиться и принять эти изменения."
 
 #, python-format
