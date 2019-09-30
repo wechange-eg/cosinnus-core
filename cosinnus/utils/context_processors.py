@@ -13,9 +13,10 @@ import json
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.forms.user import TermsOfServiceFormFields
-from dateutil import parser
 
 import logging
+from cosinnus.utils.user import get_user_tos_accepted_date,\
+    check_user_has_accepted_portal_tos
 logger = logging.getLogger('cosinnus')
 
 
@@ -116,10 +117,11 @@ def tos_check(request):
     user = request.user
     if user.is_authenticated:
         try:
-            tos_accepted_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
+            tos_accepted_date = get_user_tos_accepted_date(user)
+            tos_were_updated = portal.tos_date.year > 2000 and (tos_accepted_date is None or tos_accepted_date < portal.tos_date)
             # if a portal's tos_date has never moved beyond the default, we don't check the tos_accepted_date, 
             # to maintain backwards compatibility with users who have only the `settings.tos_accepted` boolean
-            if portal.tos_date.year > 2000 and (tos_accepted_date is None or parser.parse(tos_accepted_date) < portal.tos_date):
+            if tos_were_updated or not check_user_has_accepted_portal_tos(user):
                 updated_tos_form = TermsOfServiceFormFields(initial={
                     'newsletter_opt_in': user.cosinnus_profile.settings.get('newsletter_opt_in', False)
                 })
