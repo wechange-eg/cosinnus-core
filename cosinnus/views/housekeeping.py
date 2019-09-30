@@ -28,7 +28,8 @@ import datetime
 from cosinnus.models.tagged import BaseTagObject
 import random
 from django.utils.timezone import now
-from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.user import filter_active_users, accept_user_tos_for_portal,\
+    get_user_tos_accepted_date
 from cosinnus.models.profile import get_user_profile_model
 from django.core.mail.message import EmailMessage
 from cosinnus.core.mail import send_mail_or_fail, send_mail,\
@@ -37,7 +38,6 @@ from django.template.defaultfilters import linebreaksbr
 from django.db.models.aggregates import Count
 from cosinnus.utils.http import make_csv_response
 from operator import itemgetter
-from dateutil import parser
 from cosinnus.utils.permissions import check_user_can_receive_emails
 
 
@@ -285,8 +285,7 @@ def create_map_test_entities(request=None, count=1):
         user = get_user_model().objects.create(username='mapuser%d' % usernum, first_name='MapUser #%d' % usernum,
             email='testuser%d@nowhere.com' % usernum, is_active=True, last_login=now())
         CosinnusPortalMembership.objects.create(group=CosinnusPortal.get_current(), user=user, status=1)
-        user.cosinnus_profile.settings['tos_accepted'] = 'true'
-        user.cosinnus_profile.save()
+        accept_user_tos_for_portal(user)
         event = Event.objects.create(group=proj, creator=user, title='MapEvent #%d' % eventnum, note='Test description', 
             state=1, from_date=datetime.datetime(2099, 1, 1), to_date=datetime.datetime(2099, 1, 3))
         
@@ -466,8 +465,8 @@ def user_activity_info(request):
             user_row[2] +=1 
         if membership.status == MEMBERSHIP_ADMIN:
             user_row[3] += 1
-        tos_accepted_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
-        if portal.tos_date.year > 2000 and (tos_accepted_date is None or parser.parse(tos_accepted_date) < portal.tos_date):
+        tos_accepted_date = get_user_tos_accepted_date(user)
+        if portal.tos_date.year > 2000 and (tos_accepted_date is None or tos_accepted_date < portal.tos_date):
             user_row[5] = 0
         
         users[membership.user.id] = user_row

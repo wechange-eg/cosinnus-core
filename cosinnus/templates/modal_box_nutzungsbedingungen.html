@@ -34,7 +34,7 @@
                 </div>
                 
                 <div id="nutzungsbedingungen_ok_button_frame" class="app-main" style="display:none;">
-	                <button type="submit" class="btn btn-emphasized" data-dismiss="modal" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value="tos_accepted:true" %}>
+	                <button id="nutzungsbedingungen_ok_button" type="submit" class="btn btn-emphasized" data-dismiss="modal">
 	                    <ul class="media-list">
 	                        <li class="media">
 	                            <a class="pull-left" href="#">
@@ -63,6 +63,11 @@
 	                </button>
                 </div>
                 
+                <script type="text/javascript">
+					$('#nutzungsbedingungen_ok_button').on('click', function(){
+						$.ajax({url: '{% url "cosinnus:accept-tos" %}', type: 'POST'});
+					});
+				</script>
                 
             </div>
         </div>

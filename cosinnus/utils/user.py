@@ -19,6 +19,8 @@ from django.apps import apps
 from django.urls import reverse
 from cosinnus.utils.urls import get_domain_for_portal
 from cosinnus.utils.tokens import email_blacklist_token_generator
+from django.utils.timezone import now
+from dateutil import parser
 
 _CosinnusPortal = None
 
@@ -229,3 +231,60 @@ def get_list_unsubscribe_url(email):
         _CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
     domain = get_domain_for_portal(_CosinnusPortal.get_current())
     return domain + reverse('cosinnus:user-add-email-blacklist', kwargs={'email': email, 'token': email_blacklist_token_generator.make_token(email)})
+
+
+def accept_user_tos_for_portal(user, profile=None, portal=None, save=True):
+    """ Saves that the user has accepted this portal's ToS.
+        @param profile: if supplied, will use the given profile instance instead of querying it from the user. """
+    if portal is None:
+        from cosinnus.models.group import CosinnusPortal
+        portal = CosinnusPortal.get_current()
+    
+    # set the user's tos_accepted flag to true and date for this portal to now
+    if profile is None:
+        profile = user.cosinnus_profile
+    profile.settings['tos_accepted'] = True
+    
+    # save the accepted date for this portal in a new dict, or update the dict for this portal
+    # (the old style setting for this only had a datetime saved, now we use a dict)
+    portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
+    if portal_dict_or_date is None or type(portal_dict_or_date) is not dict:
+        profile.settings['tos_accepted_date'] = {str(portal.id): now()}
+    else:
+        portal_dict_or_date[portal.id] = now()
+        profile.settings['tos_accepted_date'] = portal_dict_or_date
+    
+    if save:
+        profile.save()
+
+
+def check_user_has_accepted_any_tos(user):
+    """ Checks if the user has accepted any ToS ever, of any portal """
+    return user.cosinnus_profile.settings.get('tos_accepted', False)
+
+
+def check_user_has_accepted_portal_tos(user):
+    """ Checks if the user has accepted the ToS of this portal before """
+    return check_user_has_accepted_any_tos(user) and (get_user_tos_accepted_date(user) is not None)
+
+    
+def get_user_tos_accepted_date(user):
+    """ Gets the datetime the user accepted this portals ToS, or None if they have not accepted it yet. 
+        @return: a Datetime object or None
+    """
+    from cosinnus.models.group import CosinnusPortal
+    portal = CosinnusPortal.get_current()
+    portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
+    if portal_dict_or_date is None:
+        return None
+    if type(portal_dict_or_date) is not dict:
+        # the old style setting for this only had a datetime saved, convert it to the modern
+        # dict version of {<portal_id>: datetime, ...}
+        portal_dict_or_date = {str(portal.id): portal_dict_or_date}
+        user.cosinnus_profile.settings['tos_accepted_date'] = portal_dict_or_date
+        user.cosinnus_profile.save(update_fields=['settings'])
+    
+    datetime_or_none = portal_dict_or_date.get(str(portal.id), None)
+    if datetime_or_none is not None:
+        datetime_or_none = parser.parse(datetime_or_none)
+    return datetime_or_none

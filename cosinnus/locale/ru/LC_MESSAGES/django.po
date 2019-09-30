@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-07 20:02+0200\n"
+"POT-Creation-Date: 2019-09-30 13:00+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3000,6 +3000,9 @@ msgstr "Включить/выключить навигацию"
 msgid "My Profile"
 msgstr "Мой профиль"
 
+msgid "Payments (Name TBD)"
+msgstr ""
+
 msgid "Logout"
 msgstr "Выход из системы"
 
@@ -3252,6 +3255,9 @@ msgstr "Проверочные символы"
 
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Нам необходимо убедиться, что Вы - реальная личность (просим прощения!)"
+
+msgid "Generate a new captcha"
+msgstr ""
 
 msgid "Search options..."
 msgstr "Искать варианты…"
@@ -4179,7 +4185,17 @@ msgstr "Я согласен с Условиями Пользования сай�
 msgid "Change of Terms of Services and Privacy Policy"
 msgstr "Изменения условий пользования и политики конфиденциальности"
 
+#, fuzzy
+#| msgid "Change of Terms of Services and Privacy Policy"
+msgid "Our Terms of Services and Privacy Policy"
+msgstr "Изменения условий пользования и политики конфиденциальности"
+
 msgid "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications."
+msgstr "Защита ваших персональных данных — это наш приоритет, поэтому мы обновили политику конфиденциальности и условия пользования. Чтобы продолжить эффективно пользоваться нашей платформой, просим ознакомиться и принять эти изменения."
+
+#, fuzzy
+#| msgid "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications."
+msgid "We prioritise the protection of your data, which is reflected in our privacy policy and terms of services. We encourage you to read and accept the terms."
 msgstr "Защита ваших персональных данных — это наш приоритет, поэтому мы обновили политику конфиденциальности и условия пользования. Чтобы продолжить эффективно пользоваться нашей платформой, просим ознакомиться и принять эти изменения."
 
 #, python-format

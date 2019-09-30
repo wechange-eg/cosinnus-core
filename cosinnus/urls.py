@@ -66,6 +66,7 @@ urlpatterns = [
     url(r'^join/(?P<token>[^/]+)/$', user.group_invite_token_view, name='group-invite-token'),
     
     url(r'^account/report/$', feedback.report_object, name='report-object'),
+    url(r'^account/accept_tos/$', user.accept_tos, name='accept-tos'),
     url(r'^account/accept_updated_tos/$', user.accept_updated_tos, name='accept-updated-tos'),
     
     url(r'^administration/approve_user/(?P<user_id>\d+)/$', user.approve_user, name='user-approve'),

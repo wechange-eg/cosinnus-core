@@ -43,7 +43,7 @@ from django.core.paginator import Paginator
 from cosinnus.views.mixins.group import EndlessPaginationMixin,\
     RequireLoggedInMixin
 from cosinnus.utils.user import filter_active_users,\
-    get_newly_registered_user_email
+    get_newly_registered_user_email, accept_user_tos_for_portal
 from uuid import uuid1
 from django.utils.encoding import force_text
 from cosinnus.core import signals
@@ -732,8 +732,23 @@ def add_email_to_blacklist(request, email, token):
     return render(request, 'cosinnus/common/200.html')
 
 
+def accept_tos(request):
+    """ A bare-bones ajax endpoint to save that a user has accepted the ToS settings.
+        The frontend doesn't care about a return values, so we don't either 
+        (on fail, the user will just see another popup on next request). """
+    if not request.method=='POST':
+        return HttpResponseNotAllowed(['POST'])
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden('You must be logged in to do that!')
+    try:
+        accept_user_tos_for_portal(request.user)
+    except Exception as e:
+        logger.error('Error in `user.accept_tos`: %s' % e, extra={'exception': e})
+    return JsonResponse({'status': 'ok'})
+
+
 def accept_updated_tos(request):
-    """ A bare-bones ajax endpoint to save a user's accepted ToS settings.
+    """ A bare-bones ajax endpoint to save a user's accepted ToS settings and newsletter settings.
         The frontend doesn't care about a return values, so we don't either 
         (on fail, the user will just see another popup on next request). """
     if request.method != 'POST':
@@ -744,13 +759,11 @@ def accept_updated_tos(request):
     
     form = TermsOfServiceFormFields(request.POST)
     if form.is_valid():
-        # set the user's tos_accepted flag to true and date to now
-        cosinnus_profile.settings['tos_accepted'] = True
-        cosinnus_profile.settings['tos_accepted_date'] = now()
         # set the newsletter opt-in
         if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
             cosinnus_profile.settings['newsletter_opt_in'] = form.cleaned_data.get('newsletter_opt_in')
-        cosinnus_profile.save()
+        # set the user's tos_accepted flag to true and date to now
+        accept_user_tos_for_portal(request.user, profile=cosinnus_profile, save=True)
         return HttpResponse('Ok')
     else: 
         logger.warning('Could not save a user\'s updated ToS settings.', extra={'errors': form.errors, 'post-data': request.POST})

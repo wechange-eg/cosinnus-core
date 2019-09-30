@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import requests
 import logging
 from cosinnus.utils.urls import safe_redirect
+from cosinnus.utils.user import accept_user_tos_for_portal
 logger = logging.getLogger('cosinnus')
 
 from django.conf import settings
@@ -210,8 +211,7 @@ def create_user_integrated(request):
             logger.warn('Cosinnus integration: Avatar saved/updated.', extra={'user': user})
             
         # always accept terms of service automatically in integrated portals
-        user.cosinnus_profile.settings['tos_accepted'] = 'true'    
-        user.cosinnus_profile.save()
+        accept_user_tos_for_portal(user)
         
         # retransmit a hashed version of the hashed password.
         # yes, we double hash the original password. because then the first password hash 

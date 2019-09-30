@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-07 20:02+0200\n"
+"POT-Creation-Date: 2019-09-30 13:00+0200\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3024,6 +3024,9 @@ msgstr "Faire basculer la navigation"
 msgid "My Profile"
 msgstr "Mon profil"
 
+msgid "Payments (Name TBD)"
+msgstr ""
+
 msgid "Logout"
 msgstr "Déconnexion"
 
@@ -3276,6 +3279,9 @@ msgstr "Captcha"
 
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Nous devons nous assurer que tu es une vraie personne"
+
+msgid "Generate a new captcha"
+msgstr ""
 
 #, fuzzy
 #| msgid "Show more options..."
@@ -4285,7 +4291,13 @@ msgstr "J'accepte les conditions d'utilisation"
 msgid "Change of Terms of Services and Privacy Policy"
 msgstr ""
 
+msgid "Our Terms of Services and Privacy Policy"
+msgstr ""
+
 msgid "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications."
+msgstr ""
+
+msgid "We prioritise the protection of your data, which is reflected in our privacy policy and terms of services. We encourage you to read and accept the terms."
 msgstr ""
 
 #, python-format
