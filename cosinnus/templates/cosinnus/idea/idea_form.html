@@ -165,7 +165,10 @@
             
             {# Idea Visibility Field #}
             {% trans "Privacy settings" as visibility_label %}
-            {% trans "This will determine who can see your idea." as visibility_legend %}
+            {% captureas visibility_legend %}
+	            {% trans "This will determine who can see your idea." %}
+            	{% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="idea" %}
+        	{% endcaptureas %}
             {% captureas visibility_warning_html %}
                 <div class="group-public-warning-area" {% if object and not object.public %}style="display: none;"{% endif %} id="idea-visibility-warning">
                     <i class="fa fa-fw fa-globe"></i>
