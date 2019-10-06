@@ -282,6 +282,7 @@ def get_user_tos_accepted_date(user):
             portal_dict_or_date = {str(portal.id): datetime.datetime(1999, 1, 1, 13, 37, 0)}
             user.cosinnus_profile.settings['tos_accepted_date'] = portal_dict_or_date
             user.cosinnus_profile.save(update_fields=['settings'])
+            portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
         else:
             return None
     if type(portal_dict_or_date) is not dict:
