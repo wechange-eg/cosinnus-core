@@ -3,7 +3,7 @@
 
 {% if user.is_authenticated %}
 
-	{% if updated_tos_form %}
+	{% if updated_tos_form and request.path != '/nutzungsbedingungen/' %}
 		{% include "modal_box_updated_tos.html" with form=updated_tos_form %}
 	    <script type="text/javascript">
 	        $('#updated_tos_modal').modal('show');
