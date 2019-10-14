@@ -292,7 +292,7 @@
         
         {% comment %} -------- Recruit Box and list of recruitees -------- {% endcomment %}
         
-        {% if user in members or user|is_superuser %}
+        {% if user in admins or user|is_superuser %}
             <div class="clearfix large-space"></div>
         
             <legend>{% trans "Invite People to Register and Join" %}</legend>
