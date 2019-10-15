@@ -21,6 +21,7 @@ from cosinnus.utils.urls import get_domain_for_portal
 from cosinnus.utils.tokens import email_blacklist_token_generator
 from django.utils.timezone import now
 from dateutil import parser
+import datetime
 
 _CosinnusPortal = None
 
@@ -276,7 +277,14 @@ def get_user_tos_accepted_date(user):
     portal = CosinnusPortal.get_current()
     portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
     if portal_dict_or_date is None:
-        return None
+        if check_user_has_accepted_any_tos(user):
+            # if user has accepted some ToS, but we don't know when, set it to in the past for this portal
+            portal_dict_or_date = {str(portal.id): datetime.datetime(1999, 1, 1, 13, 37, 0)}
+            user.cosinnus_profile.settings['tos_accepted_date'] = portal_dict_or_date
+            user.cosinnus_profile.save(update_fields=['settings'])
+            portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
+        else:
+            return None
     if type(portal_dict_or_date) is not dict:
         # the old style setting for this only had a datetime saved, convert it to the modern
         # dict version of {<portal_id>: datetime, ...}

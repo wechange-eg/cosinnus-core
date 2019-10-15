@@ -553,7 +553,12 @@ class GroupListInvitedView(RequireLoggedInMixin, GroupListView):
             self.group_type = group_class.GROUP_MODEL_TYPE
             model = group_class or self.model
         
-        my_invited_groups = model.objects.get_for_user_invited(self.request.user)
+        my_invited_groups = list(model.objects.get_for_user_invited(self.request.user))
+        # add groups that a user was only recruited for, but not invited by an admin
+        recruited_ids = self.request.user.cosinnus_profile.settings.get('group_recruits', [])
+        if recruited_ids:
+            my_invited_groups = my_invited_groups + list(model.objects.get_cached(pks=recruited_ids))
+        
         return my_invited_groups
     
     def get_context_data(self, **kwargs):
@@ -1186,17 +1191,20 @@ def group_user_recruit(request, group):
     redirect_url = request.META.get('HTTP_REFERER', group_aware_reverse('cosinnus:group-detail', kwargs={'group': group}))
     
     # do permission checking using has_write_access(request.user, group)
-    
-    if not is_superuser(user) and not user.id in group.members:
+    # TODO: make this available to group.members soon!
+    if not is_superuser(user) and not user.id in group.admins:
         logger.error('Permission error when trying to recruit users!', 
              extra={'user': request.user, 'request': request, 'path': request.path, 'group_slug': group})
         messages.error(request, _('Only group/project members have permission to do this!'))
         return redirect(redirect_url)
     
+    # flag for admins who may issue direct invites instead of just recruits
+    is_group_admin = user.id in group.admins
     invalid = []
     existing_already_members = []
     existing_already_invited = []
     existing_newly_invited = []
+    
     spam_protected = []
     success = []
     prev_invites_to_refresh = []
@@ -1226,17 +1234,25 @@ def group_user_recruit(request, group):
             # check if there is already a group membership for this user
             membership = get_object_or_None(CosinnusGroupMembership, group=group, user=existing_user)
             if not membership:
-                # user exists, invite him on the platform
-                CosinnusGroupMembership.objects.create(group=group, user=existing_user, status=MEMBERSHIP_INVITED_PENDING)
-                existing_newly_invited.append(email)
+                # user exists, invite him via email, or directy on the platform if the user is an admin
+                if is_group_admin:
+                    CosinnusGroupMembership.objects.create(group=group, user=existing_user, status=MEMBERSHIP_INVITED_PENDING)
+                    existing_newly_invited.append(email)
+                else:
+                    # currently unreachable because recruit only works as group admins
+                    # TODO: once recruiting is enabled for group-members, we need a solution for what to do here!
+                    invalid.append(email)
             elif membership.status in MEMBER_STATUS:
                 # user is already a member
                 existing_already_members.append(email)
             elif membership.status == MEMBERSHIP_PENDING:
-                # user has already requested to join, make member
-                membership.status = MEMBERSHIP_MEMBER
-                membership.save()
-                existing_newly_invited.append(email)
+                # user has already requested to join, make member if group admin
+                if is_group_admin:
+                    membership.status = MEMBERSHIP_MEMBER
+                    membership.save()
+                    existing_newly_invited.append(email)
+                else:
+                    existing_already_invited.append(email)
             elif membership.status == MEMBERSHIP_INVITED_PENDING:
                 # we have already invited the user on the platform
                 existing_already_invited.append(email)
@@ -1279,9 +1295,12 @@ def group_user_recruit(request, group):
         for email in success:
             just_refresh_invites = [inv for inv in prev_invites_to_refresh if inv.email == email]
             if just_refresh_invites:
-                just_refresh_invites[0].invited_by = user
+                if is_group_admin:
+                    just_refresh_invites[0].invited_by = user
                 just_refresh_invites[0].save()
                 continue
+            # we always create an initial object here, even if the user is not admin.
+            # the invite permission is checked on user join 
             CosinnusUnregisterdUserGroupInvite.objects.create(email=email, group=group, invited_by=user)
     
     if invalid:
