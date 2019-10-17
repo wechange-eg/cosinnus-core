@@ -29,7 +29,10 @@ module.exports = BaseView.extend({
     ideasWidgetView: null,
     uiPrefsView: null,
     
-    typedContentWidgetTypes: ['pads', 'files', 'messages', 'events', 'todos', 'polls'].concat(COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE ? ['offers'] : []),
+    typedContentWidgetTypes: ['pads', 'files']
+		.concat(COSINNUS_ROCKET_ENABLED ? [] : ['messages'])
+	    .concat(['events', 'todos', 'polls'])
+		.concat(COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE ? ['offers'] : []),
     typedContentWidgets: {},
     
     uiPrefKeyRightBarWidget: 'dashboard_widgets_sort_key__',
