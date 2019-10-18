@@ -272,10 +272,6 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
     def decorator(function):
         @functools.wraps(function, assigned=available_attrs(function))
         def wrapper(self, request, *args, **kwargs):
-            if request.GET.get('rocket_secret') == '7HvW8psev+VkeKoNC,mC':
-                import pdb
-                pdb.set_trace()
-                return function(self, request, *args, **kwargs)
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:
                 return HttpResponseNotFound(_("No team provided"))
