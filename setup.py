@@ -101,6 +101,7 @@ setup(
         'redis==2.10.6',
         'requests==2.20.0',
         'requests-oauthlib==0.8.0',
+        'rocketchat-API==0.6.26',
         'six==1.11.0',
         'sqlparse==0.1.10',
         'python-dateutil==2.4.1',

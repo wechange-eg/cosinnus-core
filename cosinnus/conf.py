@@ -74,7 +74,9 @@ class CosinnusConf(AppConf):
             'cosinnus_poll.Poll',
             'cosinnus_event.Event',
         ],
-      'postman.Message': [
+    }
+    if not settings.COSINNUS_ROCKET_ENABLED:
+        ATTACHABLE_OBJECTS['postman.Message'] = [
             'cosinnus_file.FileEntry',
             'cosinnus_todo.TodoEntry',
             'cosinnus_etherpad.Etherpad',
@@ -82,8 +84,7 @@ class CosinnusConf(AppConf):
             'cosinnus_poll.Poll',
             'cosinnus_event.Event',
             'cosinnus_marketplace.Offer',
-        ],
-    }
+        ]
     
     # Configures by which search terms each Attachable Model can be match-restricted in the select 2 box
     # Each term will act as an additional restriction on search objects. Subterms of these terms will be matched!

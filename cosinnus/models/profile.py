@@ -43,6 +43,7 @@ PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN = 'email_verification_pwd'
 PROFILE_SETTING_REDIRECT_NEXT_VISIT = 'redirect_next'
 # first login datetime, used to determine if user first logged in
 PROFILE_SETTING_FIRST_LOGIN = 'first_login'
+PROFILE_SETTING_ROCKET_CHAT_ID = 'rocket_chat_id'
 
 
 class BaseUserProfileManager(models.Manager):

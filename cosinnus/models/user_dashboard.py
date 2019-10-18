@@ -45,7 +45,7 @@ class DashboardItem(dict):
                 self['icon'] = 'fa-lightbulb-o'
                 self['text'] = escape(obj.title)
                 self['url'] = obj.get_absolute_url()
-            elif obj._meta.model.__name__ == 'Message':
+            elif obj._meta.model.__name__ == 'Message' and not settings.COSINNUS_ROCKET_ENABLED:
                 self['icon'] = 'fa-envelope'
                 self['text'] = escape(obj.subject)
                 self['url'] = reverse('postman:view_conversation', kwargs={'thread_id': obj.thread_id}) if obj.thread_id else obj.get_absolute_url()
