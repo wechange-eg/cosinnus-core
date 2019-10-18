@@ -142,7 +142,6 @@ TEMPLATES = [
 ]
 
 
-
 def compile_installed_apps(internal_apps=[]):
     """ Supports gathering INSTALLED_APPS with external-project options.
         Must be called after importing these settings!
@@ -395,19 +394,58 @@ COSINNUS_MICROSITE_RENDER_EMPTY_APPS = False
 
 # Default title for all pages unless the title block is overwritten. 
 # This is put through a {% trans %} tag. """
-COSINNUS_BASE_PAGE_TITLE_TRANS = 'Netzwerk Wachstumswende'
+COSINNUS_BASE_PAGE_TITLE_TRANS = ''
 
 # Etherpad config.
 # Warning: Etherpad URL and KEY are usually overwritten in settings.py on the server! """
-COSINNUS_ETHERPAD_BASE_URL = 'https://pad.sinnwerkstatt.com/api'
-COSINNUS_ETHERPAD_API_KEY = '11456b253e74523f62059a5e341dd877fa4c01dbade5ba5309e1df7dfbc45e14'
+COSINNUS_ETHERPAD_BASE_URL = None
+COSINNUS_ETHERPAD_API_KEY = None
 
 # Ethercalc config
 COSINNUS_ETHERPAD_ENABLE_ETHERCALC = True
-COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = 'https://calc.wechange.de'
+COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = None
+
+# Chat config
+COSINNUS_CHAT_BASE_URL = None
+COSINNUS_CHAT_GROUP_GENERAL = '%s-general'
+COSINNUS_CHAT_GROUP_NEWS = '%s-news'
+COSINNUS_CHAT_SETTINGS = {
+    # General
+    'UTF8_Names_Validation': '[0-9a-zA-Z-_.äÄöÖüÜß]+',
+
+    # Accounts
+    #'Accounts_AllowAnonymousRead': False,
+    #'Accounts_AllowAnonymousWrite': False,
+    #'Accounts_AllowDeleteOwnAccount': False,
+    'Accounts_AllowEmailChange': True,
+    'Accounts_AllowPasswordChange': False,
+    'Accounts_AllowRealNameChange': True,
+    'Accounts_AllowUserAvatarChange': True,
+    'Accounts_AllowUserProfileChange': False,
+    #'Accounts_AllowUserStatusMessageChange': True,
+    'Accounts_AllowUsernameChange': False,
+    'Accounts_ShowFormLogin': True,
+    #'Accounts_Default_User_Preferences_sidebarGroupByType': False,
+    #'Accounts_Default_User_Preferences_hideUsernames': True,
+
+    # Layout
+    'Layout_Home_Body': '''<p>Willkommen bei Rocket.Chat!</p>
+<p>Die Rocket.Chat-Desktops-Apps für Windows, MacOS und Linux stehen <a title="Rocket.Chat desktop apps" href="https://rocket.chat/download" target="_blank" rel="noopener">hier</a> zum Download bereit..</p>
+<p>Die native Mobile-App Rocket.Chat für Android und iOS ist bei <a title="Rocket.Chat+ on Google Play" href="https://play.google.com/store/apps/details?id=chat.rocket.android" target="_blank" rel="noopener">Google Play</a> und im  <a title="Rocket.Chat+ on the App Store" href="https://itunes.apple.com/app/rocket-chat/id1148741252" target="_blank" rel="noopener">App Store</a> erhältlich.</p>
+<p>Weitere Informationen finden Sie in der <a title="Rocket.Chat Documentation" href="https://rocket.chat/docs/" target="_blank" rel="noopener">Dokumentation</a>.</p>
+''',
+    'Layout_Terms_of_Service': '<a href="https://plattform-n.org/cms/datenschutz/">Nutzungsbedingungen</a><br><a href="https://wechange.de/cms/datenschutz/">Datenschutz</a>',
+    'Layout_Login_Terms': 'Indem Sie fortfahren, stimmen Sie unseren <a href="https://plattform-n.org/cms/nutzungsbedingungen/">Nutzungs-</a> und <a href="https://wechange.de/cms/datenschutz/">Datenschutzbestimmungen</a> zu.',
+    'Layout_Privacy_Policy': '<a href="https://wechange.de/cms/datenschutz/">Datenschutz</a>',
+    #'UI_Group_Channels_By_Type': False,
+    'UI_Use_Real_Name': True,
+
+    # Rate Limiter
+    'API_Enable_Rate_Limiter_Limit_Calls_Default': 100,
+}
 
 # default from-email:
-COSINNUS_DEFAULT_FROM_EMAIL = 'noreply@wachstumswende.de'
+COSINNUS_DEFAULT_FROM_EMAIL = ''
 DEFAULT_FROM_EMAIL = COSINNUS_DEFAULT_FROM_EMAIL
 
 # settings for email-dkim signing. you can follow this guide for creating a key https://blog.codinghorror.com/so-youd-like-to-send-some-email-through-code/ (point 2)
@@ -538,3 +576,5 @@ CAPTCHA_CHALLENGE_FUNCT = 'cosinnus.utils.captcha.dissimilar_random_char_challen
 CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
 CAPTCHA_TIMEOUT = 30
 
+COSINNUS_ROCKET_ENABLED = False
+COSINNUS_ROCKET_EXPORT_ENABLED = False
