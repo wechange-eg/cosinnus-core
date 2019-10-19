@@ -8,6 +8,7 @@ import os
 import re
 import six
 
+from django.contrib.postgres.fields.jsonb import JSONField as PostgresJSONField
 from django.contrib.sites.models import Site
 from django.core.cache import cache
 from django.core.exceptions import ValidationError, ImproperlyConfigured
@@ -752,6 +753,8 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     # this indicates that objects of this model are in some way always visible by registered users
     # on the platform, no matter their visibility settings, and thus subject to moderation 
     cosinnus_always_visible_by_users_moderator_flag = True
+
+    settings = PostgresJSONField(default=dict, blank=True, null=True)
     
     objects = CosinnusGroupManager()
     
@@ -930,13 +933,16 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         return qs
     
     def get_admin_contact_url(self):
-        subject = _('Request about your project "%(group_name)s"') if self.type == self.TYPE_PROJECT else _('Request about your group "%(group_name)s"')
-        subject = subject % {'group_name': self.name} 
-        return '%s?subject=%s&next=%s' % (
-            reverse('postman:write', kwargs={'recipients': ':'.join([user.username for user in self.actual_admins])}), 
-            subject,
-            reverse('postman:sent')
-        )
+        if settings.COSINNUS_ROCKET_ENABLED:
+            return reverse('cosinnus:message-write-group', kwargs={'slug': self.slug})
+        else:
+            subject = _('Request about your project "%(group_name)s"') if self.type == self.TYPE_PROJECT else _('Request about your group "%(group_name)s"')
+            subject = subject % {'group_name': self.name}
+            return '%s?subject=%s&next=%s' % (
+                reverse('postman:write', kwargs={'recipients': ':'.join([user.username for user in self.actual_admins])}),
+                subject,
+                reverse('postman:sent')
+            )
     
     @classmethod
     def _clear_cache(self, slug=None, slugs=None, group=None):

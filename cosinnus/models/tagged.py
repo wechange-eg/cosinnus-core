@@ -380,6 +380,7 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         related_name='+',
         help_text='The user which caused the last significant action to update the `last_action` datetime.')
 
+    settings = JSONField(default=dict, blank=True, null=True)
 
     class Meta(object):
         abstract = True

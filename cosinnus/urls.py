@@ -217,6 +217,12 @@ router.register(r'projects', CosinnusProjectViewSet)
 router.register(r'organisation', OrganisationViewSet)
 router.register(r'event', EventViewSet)
 
+if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
+    from cosinnus_message.api.views import MessageExportView
+    urlpatterns += [
+        url(r'api/v2/rocket-export/', MessageExportView.as_view()),
+    ]
+
 urlpatterns += [
     url(r'^o/me/', UserView.as_view()),
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
