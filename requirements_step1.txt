@@ -31,7 +31,7 @@ django-widget-tweaks==1.3
 djangorestframework==3.6.4  # must go to 3.8.2 after installing django >=1.10
 dnspython==1.15.0
 easy-thumbnails==2.5
-ecdsa==0.10
+ecdsa==0.13.3
 geopy==1.11.0
 jsonfield==1.0.0
 html5lib
