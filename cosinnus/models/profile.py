@@ -12,6 +12,7 @@ from django.core.cache import cache
 from django.db import models, transaction
 from django.db.models.signals import post_save, class_prepared
 from django.utils.encoding import python_2_unicode_compatible, force_text
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 
 from jsonfield import JSONField
@@ -44,6 +45,7 @@ PROFILE_SETTING_REDIRECT_NEXT_VISIT = 'redirect_next'
 # first login datetime, used to determine if user first logged in
 PROFILE_SETTING_FIRST_LOGIN = 'first_login'
 PROFILE_SETTING_ROCKET_CHAT_ID = 'rocket_chat_id'
+PROFILE_SETTING_ROCKET_CHAT_USERNAME = 'rocket_chat_username'
 
 
 class BaseUserProfileManager(models.Manager):
@@ -278,7 +280,49 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
             self.save(update_fields=['settings'])
             return next_redirect
         return False
-    
+
+    def _get_rocket_username(self):
+        """ Builds rocket username from first and last name (or ID if not given) """
+        user = self.user
+        if user.first_name or user.last_name:
+            username = '.'.join(filter(None, [slugify(user.first_name), slugify(user.last_name)]))
+        else:
+            username = str(user.id)
+
+        def is_username_free(username):
+            value = f'"{PROFILE_SETTING_ROCKET_CHAT_USERNAME}":"{username}"'
+            queryset = UserProfile.objects.filter(settings__contains=value)
+            return queryset.count() == 0
+
+        i = 1
+        while True:
+            if i == 1 and is_username_free(username):
+                break
+            else:
+                new_username = f'{username}{i}'
+                if is_username_free(new_username):
+                    username = new_username
+                    break
+            i += 1
+            if i > 1000:
+                raise Exception('Name is very popular')
+        return username
+
+    @property
+    def rocket_username(self):
+        """ Retrieves or creates rocket username """
+        username = self.settings.get(PROFILE_SETTING_ROCKET_CHAT_USERNAME, '')
+        if not username:
+            username = self._get_rocket_username()
+            self.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = username
+            self.save(update_fields=['settings'])
+        return username
+
+    @rocket_username.setter
+    def rocket_username(self, username):
+        """ Sets new username for Rocket.Chat """
+        self.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = username
+
 
 class UserProfile(BaseUserProfile):
     
