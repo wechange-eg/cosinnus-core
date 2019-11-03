@@ -55,7 +55,7 @@ from cosinnus.models.idea import CosinnusIdea
 from django.db.models.functions import Lower
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.utils.user import check_user_has_accepted_portal_tos
-
+from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
 
 logger = logging.getLogger('cosinnus')
 
@@ -1082,6 +1082,10 @@ def render_cosinnus_topics_json():
     topic_choices = dict([(top_id, force_text(val)) for top_id, val in TAG_OBJECT.TOPIC_CHOICES])
     return mark_safe(_json.dumps(topic_choices))
 
+@register.simple_tag()
+def get_non_cms_root_url():
+    """ Returns the root URL for this portal that isn't the cms page """
+    return _get_non_cms_root_url()
 
 @register.filter
 def app_url_for_model(obj):
