@@ -281,8 +281,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
             return next_redirect
         return False
 
-    def _get_rocket_username(self):
-        """ Builds rocket username from first and last name (or ID if not given) """
+    def get_new_rocket_username(self):
+        """ Builds rocket username based upon first and last name (or ID if not given) """
         user = self.user
         if user.first_name or user.last_name:
             username = '.'.join(filter(None, [slugify(user.first_name), slugify(user.last_name)]))
@@ -313,7 +313,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
         """ Retrieves or creates rocket username """
         username = self.settings.get(PROFILE_SETTING_ROCKET_CHAT_USERNAME, '')
         if not username:
-            username = self._get_rocket_username()
+            username = self.get_new_rocket_username()
             self.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = username
             self.save(update_fields=['settings'])
         return username
