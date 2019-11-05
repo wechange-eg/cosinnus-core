@@ -226,9 +226,6 @@ class UserCreateView(CreateView):
         if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
             # add redirect to the welcome-settings page, with priority so that it is shown as first one
             profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), self.request), message=None, priority=True)
-        if getattr(settings, 'COSINNUS_PAYMENTS_ENABLED', False):
-            # add redirect to the welcome-settings page, with priority so that it is shown as last one
-            profile.add_redirect_on_next_page(redirect_with_next(reverse('wechange-payments:welcome-page'), self.request), message=None, priority=False)
         return ret
     
     def dispatch(self, *args, **kwargs):
