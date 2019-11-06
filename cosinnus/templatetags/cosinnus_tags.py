@@ -180,7 +180,7 @@ def full_name(value):
     from django.contrib.auth.models import AbstractBaseUser
     if isinstance(value, AbstractBaseUser):
         if not value.is_active:
-            return _("(Deleted User)")
+            return str(_("(Deleted User)"))
         # adding support for overriden cosinnus profile models
         if hasattr(value, 'cosinnus_profile'):
             profile_full_name = value.cosinnus_profile.get_full_name()

@@ -74,8 +74,10 @@ def cosinnus(request):
         from cosinnus_stream.models import Stream
         stream_unseen_count = Stream.objects.my_stream_unread_count(user)
         if getattr(SETTINGS, 'COSINNUS_ROCKET_ENABLED', False):
-            from cosinnus_message.rocket_chat import RocketChatConnection
-            unread_count = RocketChatConnection().unread_messages(user)
+            #from cosinnus_message.rocket_chat import RocketChatConnection
+            #unread_count = RocketChatConnection().unread_messages(user)
+            unread_count = 0
+            stream_unseen_count = 0
         else:
             from postman.models import Message
             unread_count = Message.objects.inbox_unread_count(user)
