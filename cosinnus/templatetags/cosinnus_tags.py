@@ -56,6 +56,7 @@ from django.db.models.functions import Lower
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.utils.user import check_user_has_accepted_portal_tos
 from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
+from django.templatetags.i18n import do_translate, do_block_translate, TranslateNode, BlockTranslateNode
 
 logger = logging.getLogger('cosinnus')
 
@@ -1101,3 +1102,57 @@ def has_accepted_portal_tos(user):
     if not user:
         return False
     return check_user_has_accepted_portal_tos(user)
+
+
+
+class RenderContextIdMixin(object):
+
+    def render(self, context, **kwargs):
+        rendered_text = super(RenderContextIdMixin, self).render(context, **kwargs)
+        if getattr(settings, 'COSINNUS_SHOW_TRANSLATED_CONTEXT_IDS', False) and self.message_context:
+            message_context = self.message_context.resolve(context).strip()
+            if message_context.startswith('(') and message_context.endswith(')'):
+                rendered_text += ' ' + message_context
+        if self.asvar:
+            context[self.asvar] =  context[self.asvar] + rendered_text
+            return ''
+        else:
+            return rendered_text
+
+
+class ContextIdTranslateNode(RenderContextIdMixin, TranslateNode):
+    
+    def __init__(self, translate_node):
+        self.noop = translate_node.noop
+        self.asvar = translate_node.asvar
+        self.message_context = translate_node.message_context
+        self.filter_expression = translate_node.filter_expression
+
+
+class ContextIdBlockTranslateNode(RenderContextIdMixin, BlockTranslateNode):
+    
+    def __init__(self, block_translate_node):
+        self.extra_context = block_translate_node.extra_context
+        self.singular = block_translate_node.singular
+        self.plural = block_translate_node.plural
+        self.countervar = block_translate_node.countervar
+        self.counter = block_translate_node.counter
+        self.message_context = block_translate_node.message_context
+        self.trimmed = block_translate_node.trimmed
+        self.asvar = block_translate_node.asvar
+    
+
+@register.tag("trans")
+def context_id_do_translate(parser, token):
+    """ Overwriting the original tag (if you load `cosinnus_tags` after `i18n`.
+        Adds in a settings switch to display an identifier if you include it in parentheses
+        as context for the translated string.
+        Example: {% trans "My String" context "(MS1)" %} renders as "My String [MS1] """
+    translate_node = do_translate(parser, token)
+    return ContextIdTranslateNode(translate_node)
+
+
+@register.tag("blocktrans")
+def context_id_do_block_translate(parser, token):
+    block_translate_node = do_block_translate(parser, token)
+    return ContextIdBlockTranslateNode(block_translate_node)
