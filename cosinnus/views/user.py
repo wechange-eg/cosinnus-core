@@ -247,7 +247,9 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
         the global notification setting and the userprofile visibility setting. """
     
     template_name = 'cosinnus/user/welcome_settings.html'
-    message_success = _('Your privacy settings were saved. Welcome!')
+    # not showing this message as it is not showing immediately if redirected to dashboard
+    # and is confusing
+    message_success = None # _('Your privacy settings were saved. Welcome!')
 
     def post(self, request, *args, **kwargs):
         self.get_data()
