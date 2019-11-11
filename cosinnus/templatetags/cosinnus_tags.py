@@ -1109,7 +1109,11 @@ class RenderContextIdMixin(object):
 
     def render(self, context, **kwargs):
         rendered_text = super(RenderContextIdMixin, self).render(context, **kwargs)
-        if getattr(settings, 'COSINNUS_SHOW_TRANSLATED_CONTEXT_IDS', False) and self.message_context:
+        
+        request = context.get('request', None)
+        ids_enabled = bool(getattr(settings, 'COSINNUS_SHOW_TRANSLATED_CONTEXT_IDS', False) or \
+                           (request and request.GET.get('show_translation_ids', None) == '1'))
+        if ids_enabled and self.message_context:
             message_context = self.message_context.resolve(context).strip()
             if message_context.startswith('(') and message_context.endswith(')'):
                 rendered_text += ' ' + message_context
