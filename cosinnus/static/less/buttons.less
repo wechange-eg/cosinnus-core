@@ -673,7 +673,8 @@ a.light-link:hover i { display: inherit; }
     display: inline-block;
     cursor: pointer;
     
-    height: 34px;
+    height: auto;
+    min-height: 34px;
     line-height: 32px;
     font-size: 14px;
     border-radius: 4px;
@@ -688,7 +689,8 @@ a.light-link:hover i { display: inherit; }
     }
     
     .rounded-button-inner {
-        padding: 10px;
+        padding: 0 10px;
+        display: inline-block;
         -webkit-user-select: none; /* Safari */        
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+/Edge */

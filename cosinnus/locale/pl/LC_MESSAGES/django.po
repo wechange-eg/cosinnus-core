@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-24 17:25+0200\n"
+"POT-Creation-Date: 2019-11-12 11:49+0100\n"
 "PO-Revision-Date: 2018-08-30 04:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2039,11 +2039,11 @@ msgstr "Krótki opis"
 msgid "Describe the group in a few sentences."
 msgstr "Opisz swoją grupę w kilku zdaniach."
 
-msgid "This description will be publicly visible."
-msgstr "Opis będzie widoczny publicznie."
-
 msgid "Describe the project in a few sentences."
 msgstr "Opisz swój projekt w kilku zdaniach."
+
+msgid "This description will be publicly visible."
+msgstr "Opis będzie widoczny publicznie."
 
 msgid "A picture for better recognition."
 msgstr "Zdjęcie w celu większej rozpoznawalności."
@@ -3042,7 +3042,7 @@ msgstr "Mój Profil"
 
 #, fuzzy
 #| msgid "My location"
-msgid "My Contribution"
+msgid "Your Contribution"
 msgstr "Moja lokalizacja"
 
 msgid "Logout"
@@ -4580,8 +4580,9 @@ msgstr "Wystąpił błąd podczas przetwarzania Twojego awatara. Plik jest uszko
 msgid "<Root folder>"
 msgstr "<Folder źródłowy>"
 
-#, python-format
-msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+#, fuzzy, python-format
+#| msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+msgid "You are now located in %(group_name)s. You were redirected here from another project or group that links to this item."
 msgstr "Jesteś teraz w %(group_name)s.<br/>Zostałeś/aś przekierowany/a tu z innego projektu lub grupy, w której umieszczono link do tego elementu."
 
 #, python-format
@@ -4675,9 +4676,6 @@ msgstr "Wystąpił błąd podczas przetwarzania Twojego awatara. Upewnij się, �
 msgid "You are already logged in!"
 msgstr "Jesteś już zalogowany/a!"
 
-msgid "Your privacy settings were saved. Welcome!"
-msgstr "Ustawienia prywatności zapisane. Witamy!"
-
 msgid "Please enter a token!"
 msgstr ""
 
@@ -4745,6 +4743,9 @@ msgstr "Obecnie nie jesteś członkiem %s! Jeśli chcesz nim zostać, możesz wy
 
 msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
+
+#~ msgid "Your privacy settings were saved. Welcome!"
+#~ msgstr "Ustawienia prywatności zapisane. Witamy!"
 
 #, fuzzy
 #~| msgid "Administrator"
