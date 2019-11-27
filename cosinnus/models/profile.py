@@ -466,7 +466,7 @@ class GlobalBlacklistedEmail(models.Model):
             or doesn't have a portal membership in this current portal.
             Otherwise will simply set the global "no-email" setting for that user. """
         from django.contrib.auth import get_user_model
-        user = get_object_or_None(get_user_model(), email=email)
+        user = get_object_or_None(get_user_model(), email=email, is_active=True)
         portal_membership = get_object_or_None(CosinnusPortalMembership, user=user, group=CosinnusPortal.get_current())
         if portal_membership:
             with transaction.atomic():

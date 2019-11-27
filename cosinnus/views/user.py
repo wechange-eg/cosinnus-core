@@ -718,16 +718,24 @@ def add_email_to_blacklist(request, email, token):
     
     if not is_email_valid(email):
         messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (1)')
-        return render(request, 'cosinnus/common/200.html')
+        return redirect('cosinnus:user-add-email-blacklist-result')
     
     if not email_blacklist_token_generator.check_token(email, token):
         messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (2)')
-        return render(request, 'cosinnus/common/200.html')
+        return redirect('cosinnus:user-add-email-blacklist-result')
     
     GlobalBlacklistedEmail.add_for_email(email)
+    
     messages.success(request, _('We have unsubscribed your email "%(email)s" from our mailing list. You will not receive any more emails from us!') 
         % {'email': email})
-    
+    return redirect('cosinnus:user-add-email-blacklist-result')
+
+
+def add_email_to_blacklist_result(request):
+    """ We redirect to a different URL because the original URL is valid forever, 
+        and the browser tab may get reloaded and we don't want to fire another 
+        unsubscribe each time.
+        It is expected that there is a messages.success or error message queued when arriving here """
     return render(request, 'cosinnus/common/200.html')
 
 
