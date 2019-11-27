@@ -188,6 +188,7 @@ def compile_installed_apps(internal_apps=[]):
     
     _INSTALLED_APPS += [
         'cosinnus',
+        'cosinnus_cloud',
         'cosinnus_etherpad',
         'cosinnus_event',
         'cosinnus_file',
