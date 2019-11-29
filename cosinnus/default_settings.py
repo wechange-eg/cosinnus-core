@@ -114,7 +114,7 @@ TEMPLATES = [
             # base directory is being put in by the main app's settings file
         ],
         'OPTIONS': {
-            'context_processors': (
+            'context_processors': [
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
@@ -130,7 +130,7 @@ TEMPLATES = [
                 'cosinnus.utils.context_processors.cosinnus',
                 'cosinnus.utils.context_processors.tos_check',
                 'announcements.context_processors.add_custom_announcements',
-             ),
+             ],
             'loaders': (
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader',

@@ -13,7 +13,7 @@
                     <i class="fa fa-table"></i>
                 </a>
 	            <div class="media-body">
-	                CSV-Statistiken
+	                CSV-Downloads
 	            </div>
 	        </li>
 	    </ul>
@@ -32,7 +32,7 @@
 	    </ul>
 	</button>
 	
-	<button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:housekeeping-project-storage-report' %}">
+	<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-project-storage-report' %}">
 	    <ul class="media-list">
 	        <li class="media">
 	           <a class="pull-left">
@@ -45,18 +45,48 @@
 	    </ul>
 	</button>
 	
-	<button type="button" class="btn w100 btn-emphasized" href="{% url 'cosinnus:housekeeping-user-activity-info' %}">
-	    <ul class="media-list">
-	        <li class="media">
-	           <a class="pull-left">
-	                <i class="fa fa-download"></i>
-	            </a>
-	            <div class="media-body">
-	                Benutzerstatistiken (min 1x eingeloggt)
-	            </div>
-	        </li>
-	    </ul>
-	</button>
+	<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-user-activity-info' %}">
+        <ul class="media-list">
+            <li class="media">
+               <a class="pull-left">
+                    <i class="fa fa-download"></i>
+                </a>
+                <div class="media-body">
+                    Benutzerstatistiken (min 1x eingeloggt)
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-newsletter-user-emails' %}">
+        <ul class="media-list">
+            <li class="media">
+               <a class="pull-left">
+                    <i class="fa fa-download"></i>
+                </a>
+                <div class="media-body">
+                    E-Mails aller Newsletter-Abonnenten 
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-active-user-emails' %}">
+        <ul class="media-list">
+            <li class="media">
+               <a class="pull-left">
+                    <i class="fa fa-download"></i>
+                </a>
+                <div class="media-body">
+                    E-Mails ALLER aktiven Benutzer
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+	
+	
+	
 
 {% endblock leftnav %}
 

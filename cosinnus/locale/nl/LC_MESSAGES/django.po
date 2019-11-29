@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-05 13:50+0200\n"
+"POT-Creation-Date: 2019-11-12 11:49+0100\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.2.3\n"
 
 #, python-format
@@ -1982,11 +1982,11 @@ msgstr "Korte beschrijving"
 msgid "Describe the group in a few sentences."
 msgstr "Beschrijf de groep in een paar zinnen."
 
-msgid "This description will be publicly visible."
-msgstr "Deze beschrijving zal openbaar zichtbaar zijn."
-
 msgid "Describe the project in a few sentences."
 msgstr "Beschrijf het project in een paar zinnen."
+
+msgid "This description will be publicly visible."
+msgstr "Deze beschrijving zal openbaar zichtbaar zijn."
 
 msgid "A picture for better recognition."
 msgstr "Een foto voor betere herkenning."
@@ -2968,8 +2968,10 @@ msgstr "Schakelnavigatie"
 msgid "My Profile"
 msgstr "Mijn profiel"
 
-msgid "Payments (Name TBD)"
-msgstr "Betalingen (Naam TBD)"
+#, fuzzy
+#| msgid "My location"
+msgid "Your Contribution"
+msgstr "Mijn locatie"
 
 msgid "Logout"
 msgstr "Uitloggen"
@@ -3223,6 +3225,9 @@ msgstr "Captcha"
 
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "We moeten ervoor zorgen dat je een echt persoon bent (sorry!)"
+
+msgid "Generate a new captcha"
+msgstr ""
 
 msgid "Search options..."
 msgstr "Zoek opties…"
@@ -4149,7 +4154,17 @@ msgstr "Ik ga akkoord met de gebruiksvoorwaarden"
 msgid "Change of Terms of Services and Privacy Policy"
 msgstr "Wijziging van servicevoorwaarden en privacybeleid"
 
+#, fuzzy
+#| msgid "Change of Terms of Services and Privacy Policy"
+msgid "Our Terms of Services and Privacy Policy"
+msgstr "Wijziging van servicevoorwaarden en privacybeleid"
+
 msgid "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications."
+msgstr "We geven prioriteit aan de bescherming van uw gegevens, dus hebben we ons privacybeleid en onze servicevoorwaarden bijgewerkt. We raden u aan de wijzigingen te lezen en te accepteren om optimaal gebruik te blijven maken van ons platform."
+
+#, fuzzy
+#| msgid "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications."
+msgid "We prioritise the protection of your data, which is reflected in our privacy policy and terms of services. We encourage you to read and accept the terms."
 msgstr "We geven prioriteit aan de bescherming van uw gegevens, dus hebben we ons privacybeleid en onze servicevoorwaarden bijgewerkt. We raden u aan de wijzigingen te lezen en te accepteren om optimaal gebruik te blijven maken van ons platform."
 
 #, python-format
@@ -4390,8 +4405,9 @@ msgstr "Er is een fout opgetreden tijdens het verwerken van uw avatar. Het afbee
 msgid "<Root folder>"
 msgstr "<Root folder>"
 
-#, python-format
-msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+#, fuzzy, python-format
+#| msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+msgid "You are now located in %(group_name)s. You were redirected here from another project or group that links to this item."
 msgstr "U bevindt zich nu in %(group_name)s.<br/>U bent hier omgeleid van een ander project of groep die gelinkt is naar dit item."
 
 #, python-format
@@ -4480,9 +4496,6 @@ msgstr "Er is een fout opgetreden tijdens het verwerken van uw uitnodigingen. So
 msgid "You are already logged in!"
 msgstr "U bent al ingelogd!"
 
-msgid "Your privacy settings were saved. Welcome!"
-msgstr "Uw privacy-instellingen zijn opgeslagen. Welkom!"
-
 msgid "Please enter a token!"
 msgstr "Voer een token in!"
 
@@ -4547,3 +4560,9 @@ msgstr "U bent momenteel geen lid van %s! Als u wilt, kunt u hieronder een lidma
 
 msgid "Your changes have been saved."
 msgstr "Uw veranderingen zijn bewaard."
+
+#~ msgid "Your privacy settings were saved. Welcome!"
+#~ msgstr "Uw privacy-instellingen zijn opgeslagen. Welkom!"
+
+#~ msgid "Payments (Name TBD)"
+#~ msgstr "Betalingen (Naam TBD)"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-30 13:00+0200\n"
+"POT-Creation-Date: 2019-11-12 11:49+0100\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2054,11 +2054,11 @@ msgstr ""
 msgid "Describe the group in a few sentences."
 msgstr "Describe the project in a few sentences."
 
-msgid "This description will be publicly visible."
-msgstr ""
-
 msgid "Describe the project in a few sentences."
 msgstr "Describe the project in a few sentences."
+
+msgid "This description will be publicly visible."
+msgstr ""
 
 msgid "A picture for better recognition."
 msgstr ""
@@ -2937,7 +2937,7 @@ msgstr ""
 msgid "My Profile"
 msgstr ""
 
-msgid "Payments (Name TBD)"
+msgid "Your Contribution"
 msgstr ""
 
 msgid "Logout"
@@ -4468,7 +4468,7 @@ msgid "<Root folder>"
 msgstr ""
 
 #, python-format
-msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+msgid "You are now located in %(group_name)s. You were redirected here from another project or group that links to this item."
 msgstr ""
 
 #, python-format
@@ -4555,9 +4555,6 @@ msgid "There was an error while processing your invites. Some of your invites ma
 msgstr ""
 
 msgid "You are already logged in!"
-msgstr ""
-
-msgid "Your privacy settings were saved. Welcome!"
 msgstr ""
 
 msgid "Please enter a token!"

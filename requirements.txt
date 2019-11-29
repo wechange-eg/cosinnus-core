@@ -36,7 +36,7 @@ dnspython==1.15.0
 easy-thumbnails==2.5
 ecdsa==0.10
 geopy==1.11.0
-jsonfield==1.0.0
+jsonfield==2.0.2
 html5lib
 html2text==2016.9.19
 numpy==1.14.5

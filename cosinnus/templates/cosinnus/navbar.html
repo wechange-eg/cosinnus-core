@@ -35,8 +35,13 @@
                             
                             <li><a href="{% url 'cosinnus:notifications' %}">{% trans "Notification Preferences" %}</a></li>
                             
-                            {% if SETTINGS.COSINNUS_PAYMENTS_ENABLED %}
-								<li><a href="{% url 'wechange-payments:overview' %}">{% trans "Payments (Name TBD)" %}</a></li>
+                            {% if SETTINGS.COSINNUS_PAYMENTS_ENABLED or SETTINGS.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY and user.is_superuser %}
+								<li>
+									<a href="{% url 'wechange-payments:overview' %}">
+										{% trans "Your Contribution" %}
+										{% include 'wechange_payments/partials/my_contribution_badge.html' %}
+									</a>
+								</li>
 							{% endif %}
                             
                             {% if request.user|is_superuser %}

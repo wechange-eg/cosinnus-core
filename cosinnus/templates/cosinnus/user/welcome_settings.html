@@ -56,13 +56,19 @@
 	       {% trans "You can change or customize this setting later in your notification settings" %}
 	       ({% trans "in the top right menu" %})
 	    </em>
-        
-	    
+	{% endcaptureas %}
+	
+	{% captureas submit_button_html %}
+		<button type="submit" class="rounded-button button-color-primary-inverted">
+	        <span class="rounded-button-inner">
+	            {% trans "OK" %}
+	        </span>
+	    </button>
 	{% endcaptureas %}
 	
 	{% captureas title %}{% trans "Your privacy: You are in control!" %}{% endcaptureas %}
 	{% captureas form_action %}.{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}{% endcaptureas %}
-	{% include "cosinnus/modal_box.html" with id="modal-recruit-users" label=label title=title form_action=form_action title_icon="fa-user" show_inline=True hide_cancel_button=True %}
+	{% include "cosinnus/modal_box.html" with id="modal-recruit-users" label=label title=title form_action=form_action title_icon="fa-user" show_inline=True hide_cancel_button=True hide_submit_button=True custom_button_html=submit_button_html %}
         
     
 {% endblock main_page %}
