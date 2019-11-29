@@ -592,9 +592,9 @@ class CosinnusConf(AppConf):
     
     # if True, payment urls and views will be enabled
     PAYMENTS_ENABLED = False
-    # if True, enables additional views for payments
-    PAYMENTS_TEST_PHASE = False
-    
+    # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins
+    PAYMENTS_ENABLED_ADMIN_ONLY = False
+
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
