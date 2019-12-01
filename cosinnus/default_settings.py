@@ -294,6 +294,11 @@ LOGGING = {
             'handlers': ['console', 'sentry'],
             'propagate': False,
         },
+        'wechange-payments': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'sentry'],
+            'propagate': False,
+        },
     },
 }
 
