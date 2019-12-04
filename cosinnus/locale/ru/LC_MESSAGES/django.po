@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-30 13:00+0200\n"
+"POT-Creation-Date: 2019-11-12 11:49+0100\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1999,11 +1999,11 @@ msgstr "Краткое описание"
 msgid "Describe the group in a few sentences."
 msgstr "Описать группу в нескольких предложениях."
 
-msgid "This description will be publicly visible."
-msgstr "Это описание будет видимо всем."
-
 msgid "Describe the project in a few sentences."
 msgstr "Описать проект в нескольких предложениях."
+
+msgid "This description will be publicly visible."
+msgstr "Это описание будет видимо всем."
 
 msgid "A picture for better recognition."
 msgstr "Изображение поможет быстрее распознать Вас."
@@ -3000,8 +3000,10 @@ msgstr "Включить/выключить навигацию"
 msgid "My Profile"
 msgstr "Мой профиль"
 
-msgid "Payments (Name TBD)"
-msgstr ""
+#, fuzzy
+#| msgid "My location"
+msgid "Your Contribution"
+msgstr "Моё местоположение"
 
 msgid "Logout"
 msgstr "Выход из системы"
@@ -4438,8 +4440,9 @@ msgstr "При обработке вашего аватара произошла
 msgid "<Root folder>"
 msgstr "<Корневая папка>"
 
-#, python-format
-msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+#, fuzzy, python-format
+#| msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+msgid "You are now located in %(group_name)s. You were redirected here from another project or group that links to this item."
 msgstr "Вы сейчас находитесь в %(group_name)s.<br/> Вы были перенаправленны с другого проекта, или группы, связанного с этим элементом."
 
 # ???
@@ -4529,9 +4532,6 @@ msgstr "При обработке приглашений произошла ош
 msgid "You are already logged in!"
 msgstr "Вы уже вошли в систему!"
 
-msgid "Your privacy settings were saved. Welcome!"
-msgstr "Ваши настройки приватности сохранены. Добро пожаловать!"
-
 msgid "Please enter a token!"
 msgstr "Пожалуйста, введите токен!"
 
@@ -4598,6 +4598,9 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
+
+#~ msgid "Your privacy settings were saved. Welcome!"
+#~ msgstr "Ваши настройки приватности сохранены. Добро пожаловать!"
 
 #, fuzzy
 #~| msgid "Administrator"

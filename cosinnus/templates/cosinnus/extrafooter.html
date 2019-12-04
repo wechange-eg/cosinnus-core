@@ -22,3 +22,10 @@
 	{% endif %}
 
 {% endif %}
+
+{% comment %} 
+	This block can be used by other apps to extend the footer further.
+	Remember to use {{ block.super }} to chain all extensions!
+{% endcomment %}
+{% block extrafooter_extensions %}
+{% endblock %}

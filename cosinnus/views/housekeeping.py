@@ -480,7 +480,7 @@ def user_activity_info(request):
     return make_csv_response(rows, headers, 'user-activity-report')
 
 
-def newsletter_users(request):
+def newsletter_users(request, includeOptedOut=False, file_name='newsletter-user-emails'):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     
@@ -490,6 +490,9 @@ def newsletter_users(request):
             group=portal, user__is_active=True).exclude(user__last_login__exact=None).\
             prefetch_related('user'):
         user = membership.user
-        if check_user_can_receive_emails(user) and user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True:
+        if check_user_can_receive_emails(user) and (includeOptedOut or user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True):
             user_mails.append([user.email])
-    return make_csv_response(user_mails, file_name='newsletter-user-emails')
+    return make_csv_response(user_mails, file_name=file_name)
+
+def active_user_emails(request):
+    return newsletter_users(request, includeOptedOut=True, file_name='active-user-emails')

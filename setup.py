@@ -57,7 +57,7 @@ setup(
         # please mirror all changes in the requirements.txt for local installs!
         'Django>=2.1.5,<2.2',
         'MarkupSafe==0.23',
-        'Pillow==5.2.0',
+        'Pillow==6.2.0',
         'Celery==4.2.0',
         
         'django-annoying==0.7.6',
@@ -86,10 +86,10 @@ setup(
         'django-suit==0.2.26',
         'django-taggit==0.23.0',
         'django-widget-tweaks==1.3',
-        'djangorestframework==3.8.2',
+        'djangorestframework==3.9.1',
         'dnspython==1.15.0',
         'easy-thumbnails==2.5',
-        'ecdsa==0.10',
+        'ecdsa==0.13.3',
         'geopy==1.11.0',
         'jsonfield==1.0.0',
         'html5lib',
