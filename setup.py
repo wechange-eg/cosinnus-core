@@ -89,7 +89,7 @@ setup(
         'djangorestframework==3.9.1',
         'dnspython==1.15.0',
         'easy-thumbnails==2.5',
-        'ecdsa==0.13.3',
+        'ecdsa==0.14.1',
         'geopy==1.11.0',
         'jsonfield==1.0.0',
         'html5lib',
