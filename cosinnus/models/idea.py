@@ -289,7 +289,7 @@ class CosinnusIdea(IndexingUtilsMixin, LikeableObjectMixin, models.Model):
                 forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
                 if forum_group:
                     # send creation signal
-                    signals.idea_object_ceated.send(sender=self, group=forum_group)
+                    signals.idea_object_created.send(sender=self, group=forum_group)
                     # we need to patch a group onto the idea, because notifications need a group
                     setattr(self, 'group', forum_group)
                     # the audience is empty because this is a moderator-only notification
