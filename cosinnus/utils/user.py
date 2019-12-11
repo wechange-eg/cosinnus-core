@@ -280,7 +280,7 @@ def get_user_tos_accepted_date(user):
     if portal_dict_or_date is None:
         if check_user_has_accepted_any_tos(user):
             # if user has accepted some ToS, but we don't know when, set it to in the past for this portal
-            portal_dict_or_date = {str(portal.id): datetime.datetime(1999, 1, 1, 13, 37, 0, pytz.utc)}
+            portal_dict_or_date = {str(portal.id): datetime.datetime(1999, 1, 1, 13, 37, 0, 0, pytz.utc)}
             user.cosinnus_profile.settings['tos_accepted_date'] = portal_dict_or_date
             user.cosinnus_profile.save(update_fields=['settings'])
             portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
