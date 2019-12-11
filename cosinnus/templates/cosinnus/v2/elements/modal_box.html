@@ -1,0 +1,28 @@
+{% load i18n %}
+
+<!-- Modal -->
+{% if not show_inline %}
+<div class="modal fade" id="{{ id }}" tabindex="1" role="dialog" aria-labelledby="{{ id }}Label" aria-hidden="true">
+{% endif %}
+    <div class="modal-dialog v2-modal-dialog {{ extra_modal_classes }}">
+        <div class="modal-content v2-content">
+        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="fa fa-times"></i>
+            </button>
+            
+        	<h1>{{ title }}</h1>
+    		
+    		<hr class="invisible" />
+    		
+	    	{{ body }}
+        	
+			<div class="button-section clearfix">
+				{{ buttons }}
+			</div>
+        	
+        </div>
+    </div>
+   
+{% if not show_inline %}
+</div><!-- modal -->
+{% endif %}

@@ -13,7 +13,15 @@
                 <a class="pull-left" href="#">
                 </a>
                 <a class="pull-left" href="#">
-                    <i class="fa fa-book"></i>
+                	{% if active_app %}
+                      {% for app in apps %}
+                        {% if app.active %}
+                          <i class="fa {% if app.app == 'cosinnus_todo' %}fa-tasks{% elif app.app == 'cosinnus_note' %}fa-book{% elif app.app == 'cosinnus_poll' %}fa-bar-chart{% elif app.app == 'cosinnus_marketplace' %}fa-exchange{% elif app.app == 'cosinnus_file' %}fa-file{% elif app.app == 'cosinnus_etherpad' %}fa-file-text{% elif app.app == 'cosinnus_event' %}fa-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}"></i>
+                        {% endif %}
+                      {% endfor %}
+                    {% else %}
+                      <i class="fa fa-group"></i>
+                    {% endif %}
                 </a>
                 {% if user|has_read_access:group %}
                 <a class="pull-right" href="#">

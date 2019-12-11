@@ -472,6 +472,9 @@ class CosinnusConf(AppConf):
     # if set to True, private groups will be shown in group lists, even for non-logged in users
     SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS = True
     
+    # shows any (MS1)-like context IDs in trans texts when rendered into templates
+    SHOW_TRANSLATED_CONTEXT_IDS = False
+    
     # if the app that includes has swappable models, it needs to either have all swappable definitions
     # in its initial migration or define a migration from within its app where all swappable models
     # are loaded
@@ -589,7 +592,9 @@ class CosinnusConf(AppConf):
     
     # if True, payment urls and views will be enabled
     PAYMENTS_ENABLED = False
-    
+    # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins
+    PAYMENTS_ENABLED_ADMIN_ONLY = False
+
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.

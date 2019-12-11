@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-30 13:00+0200\n"
+"POT-Creation-Date: 2019-11-12 11:49+0100\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1992,11 +1992,11 @@ msgstr "Короткий опис"
 msgid "Describe the group in a few sentences."
 msgstr "Опишіть спільноту кількома реченнями."
 
-msgid "This description will be publicly visible."
-msgstr "Цей опис буде налаштований як публічно видимий."
-
 msgid "Describe the project in a few sentences."
 msgstr "Опишіть проект кількома реченнями."
+
+msgid "This description will be publicly visible."
+msgstr "Цей опис буде налаштований як публічно видимий."
 
 msgid "A picture for better recognition."
 msgstr "Зображення для кращої впізнаваності."
@@ -2997,8 +2997,10 @@ msgstr "Переключення навігації"
 msgid "My Profile"
 msgstr "Мій профіль"
 
-msgid "Payments (Name TBD)"
-msgstr ""
+#, fuzzy
+#| msgid "My location"
+msgid "Your Contribution"
+msgstr "Моє місцезнаходження"
 
 msgid "Logout"
 msgstr "Вихід"
@@ -4432,8 +4434,9 @@ msgstr "Під час обробки вашого основного фото в
 msgid "<Root folder>"
 msgstr "<Головна папка>"
 
-#, python-format
-msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+#, fuzzy, python-format
+#| msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+msgid "You are now located in %(group_name)s. You were redirected here from another project or group that links to this item."
 msgstr "Ви зараз знаходитесь в %(group_name)s.<br/> Ви були перенаправлені сюди з іншого проекту чи спільноти яка пов'язана з цим елементом."
 
 #, python-format
@@ -4522,9 +4525,6 @@ msgstr "Під час обробки ваших запрошень виникл�
 msgid "You are already logged in!"
 msgstr "Ви уже увійшли в систему!"
 
-msgid "Your privacy settings were saved. Welcome!"
-msgstr "Ваші налаштування приватності збережено. Вітаємо!"
-
 msgid "Please enter a token!"
 msgstr "Будь ласка, введіть токен!"
 
@@ -4591,6 +4591,9 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#~ msgid "Your privacy settings were saved. Welcome!"
+#~ msgstr "Ваші налаштування приватності збережено. Вітаємо!"
 
 #, fuzzy
 #~| msgid "Administrator"
