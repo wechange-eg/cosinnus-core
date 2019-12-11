@@ -1281,6 +1281,11 @@ class CosinnusGroupMembership(BaseGroupMembership):
         if created_as_membership or changed_to_membership:
             signals.user_joined_group.send(sender=self, user=self.user, group=self.group)
     
+    def delete(self, *args, **kwargs):
+        """ Checks and fires `user_left_group` signal if a user has hereby left this group """
+        super(CosinnusGroupMembership, self).delete(*args, **kwargs)
+        signals.user_left_group.send(sender=self.group, user=self.user, group=self.group)
+    
 
 class CosinnusPortalMembership(BaseGroupMembership):
     group = models.ForeignKey(CosinnusPortal, related_name='memberships',

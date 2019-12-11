@@ -22,8 +22,11 @@ user_registered = dispatch.Signal(providing_args=["user"])
 """ Called when the user logs in for the first time ever """
 user_logged_in_first_time = dispatch.Signal(providing_args=['request', 'user'])
 
-""" Called after a new user voluntarily signs up on the portal, using the web frontend """
+""" Called after a new user properly joined a group as member (invites or join-requests do not trigger this!) """
 user_joined_group = dispatch.Signal(providing_args=["user", "group"])
+
+""" Called after a new user left a group or was kicked out """
+user_left_group = dispatch.Signal(providing_args=["user", "group"])
 
 """ Called when a user requests membership of a group """
 user_group_join_requested = dispatch.Signal(providing_args=["user", "obj", "audience"])
