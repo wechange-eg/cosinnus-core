@@ -699,6 +699,14 @@ def user_api_me(request):
         user_societies = CosinnusSociety.objects.get_for_user(request.user)
         user_projects = CosinnusProject.objects.get_for_user(request.user)
         
+        # euro amount if current subscription payments for this user
+        is_paying = 0
+        if getattr(settings, 'COSINNUS_PAYMENTS_ENABLED', False):
+            from wechange_payments.models import Subscription
+            current_subscription = Subscription.get_current_for_user(request.user)
+            if current_subscription:
+                is_paying = int(current_subscription.amount)
+            
         data.update({
             'username': user.username,
             'id': user.id,
@@ -707,6 +715,7 @@ def user_api_me(request):
             'avatar_url': CosinnusPortal.get_current().get_domain() + user.cosinnus_profile.get_avatar_thumbnail_url(), 
             'groups': [society.slug for society in user_societies],
             'projects': [project.slug for project in user_projects],
+            'is_paying': is_paying,
         })
     
     return JsonResponse(data)
