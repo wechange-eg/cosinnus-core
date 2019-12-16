@@ -22,7 +22,8 @@ from cosinnus.core.decorators.views import membership_required, redirect_to_403,
     dispatch_group_access, get_group_for_request
 from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import MembershipForm, CosinnusLocationForm,\
-    CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm
+    CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm,\
+    MultiUserSelectForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusPortal, CosinnusLocation,
     CosinnusGroupGalleryImage, MEMBERSHIP_INVITED_PENDING,
@@ -53,14 +54,16 @@ from django.shortcuts import redirect, get_object_or_404
 from django.http.response import Http404, HttpResponseNotAllowed,\
     HttpResponseBadRequest
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser,\
-    check_object_read_access, check_ug_membership, check_object_write_access
+    check_object_read_access, check_ug_membership, check_object_write_access,\
+    check_user_can_see_user
 from cosinnus.views.widget import GroupDashboard
 from cosinnus.views.microsite import GroupMicrositeView
 from django.views.generic.base import View
 import six
 from django.conf import settings
 from django.core.paginator import Paginator
-from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.user import filter_active_users, get_user_select2_pills,\
+    get_user_query_filter_for_search_terms
 from cosinnus.utils.functions import resolve_class
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
@@ -82,6 +85,9 @@ from django.template.defaultfilters import linebreaksbr
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
 from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
+from django_select2.views import NO_ERR_RESP, Select2View
+from django.views.generic.edit import FormView
+from cosinnus.utils.group import get_cosinnus_group_model
 logger = logging.getLogger('cosinnus')
 
 
@@ -426,6 +432,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             'member_count': user_count,
             'hidden_user_count': hidden_members,
             'more_user_count': more_user_count,
+            'member_invite_form': MultiUserSelectForm(group=self.group),
         })
         return context
 
@@ -912,6 +919,8 @@ class UserSelectMixin(object):
 class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
                        CreateView):
     
+    #TODONEXT: delete this view probably!
+    
     template_name = 'cosinnus/group/group_detail.html'
     
     def form_valid(self, form):
@@ -954,6 +963,69 @@ class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
 
 group_user_add = GroupUserInviteView.as_view()
 group_user_add_api = GroupUserInviteView.as_view(is_ajax_request_url=True)
+
+
+class GroupUserInviteMultipleView(RequireAdminMixin, FormView):
+    
+    form_class = MultiUserSelectForm
+    template_name = 'cosinnus/group/group_detail.html'
+    
+    def get(self, *args, **kwargs):
+        messages.error(self.request, _('This action is not available directly!'))
+        return redirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': kwargs.get('group', '<NOGROUPKWARG>')}))
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group})
+    
+    def get_form_kwargs(self):
+        kwargs = super(GroupUserInviteMultipleView, self).get_form_kwargs()
+        kwargs['group'] = self.group
+        return kwargs
+    
+    def form_valid(self, form):
+        users = form.cleaned_data.get('users')
+        for user in users:
+            self.do_invite_valid_user(user, form)
+        return HttpResponseRedirect(self.get_success_url())
+    
+    #TODONEXT: error handling!
+    
+    def do_invite_valid_user(self, user, form):
+        try:
+            m = CosinnusGroupMembership.objects.get(user=user, group=self.group)
+            # if the user has already requested a join when we try to invite him, accept him immediately
+            if m.status == MEMBERSHIP_PENDING:
+                m.status = MEMBERSHIP_MEMBER
+                m.save()
+                # update index for the group
+                typed_group = ensure_group_type(self.group)
+                typed_group.update_index()
+                signals.user_group_join_accepted.send(sender=self, obj=self.group, user=user, audience=[user])
+                messages.success(self.request, _('User %(username)s had already requested membership and has now been made a member immediately!') % {'username': user.get_full_name()})
+                # trigger signal for accepting that user's join request
+            return HttpResponseRedirect(self.get_success_url())
+        except CosinnusGroupMembership.DoesNotExist:
+            CosinnusGroupMembership.objects.create(user=user, group=self.group, status=MEMBERSHIP_INVITED_PENDING)
+            signals.user_group_invited.send(sender=self, obj=self.group, user=self.request.user, audience=[user])
+            
+            #TODONEXT: refactor messages into one!
+            # we will also send out an internal direct message about the invitation to the user
+            try:
+                from cosinnus_message.utils.utils import write_postman_message
+                subject = _('I invited you to join "%(team_name)s"!') % {'team_name': self.group.name}
+                data = {
+                    'user': user,
+                    'group': self.group,
+                }
+                text = render_to_string('cosinnus/mail/user_group_invited_direct_message.txt', data)
+                write_postman_message(user, self.request.user, subject, text)
+            except ImportError:
+                pass
+        
+            messages.success(self.request, _('User %(username)s was successfully invited!') % {'username': user.get_full_name()})
+            return HttpResponseRedirect(self.get_success_url())
+        
+group_user_add_multiple = GroupUserInviteMultipleView.as_view()
 
 
 class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
@@ -1417,3 +1489,35 @@ def group_assign_reflected_object(request, group):
     redirect_url = obj.get_absolute_url()
     return redirect(redirect_url)
 
+
+class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
+    """
+    This view is used as API backend to serve the suggestions for the group member invite field.
+    """
+
+    def check_all_permissions(self, request, *args, **kwargs):
+        user = request.user
+        if not user.is_authenticated:
+            raise PermissionDenied
+
+    def get_results(self, request, term, page, context):
+        terms = term.strip().lower().split(' ')
+        
+        # filter for active portal members that are not group members
+        users = filter_active_users(get_user_model().objects.all()).exclude(id__in=self.group.members)
+        # filter for query terms
+        q = get_user_query_filter_for_search_terms(terms)
+        users = users.filter(q)
+        
+        # as a last filter, remove all users that that have their privacy setting to "only members of groups i am in",
+        # if they aren't in a group with the user
+        users = [user for user in users if check_user_can_see_user(request.user, user)]
+        
+        users = sorted(users, key=lambda useritem: full_name(useritem).lower())
+        
+        results = get_user_select2_pills(users)
+
+        # Any error response, Has more results, options list
+        return (NO_ERR_RESP, False, results)
+
+user_group_member_invite_select2 = UserGroupMemberInviteSelect2View.as_view()

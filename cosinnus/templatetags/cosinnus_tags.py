@@ -380,7 +380,7 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
                 membership_request_item = DashboardItem()
                 membership_request_item['icon'] = 'fa-sitemap' if admined_group.type == CosinnusGroup.TYPE_SOCIETY else 'fa-group'
                 membership_request_item['text'] = escape('%s (%d)' % (admined_group.name, len(pending_ids)))
-                membership_request_item['url'] = group_aware_reverse('cosinnus:group-detail', kwargs={'group': admined_group}) + '#requests'
+                membership_request_item['url'] = group_aware_reverse('cosinnus:group-detail', kwargs={'group': admined_group}) + '?requests=1#requests'
                 membership_requests.append(membership_request_item)
                 membership_requests_count += len(pending_ids)
         context['group_requests_json_encoded'] = _escape_quotes(_json.dumps(membership_requests))

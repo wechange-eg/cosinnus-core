@@ -15,7 +15,7 @@ from awesome_avatar import forms as avatar_forms
 from cosinnus.models.group import (CosinnusGroupMembership,
     MEMBERSHIP_MEMBER, CosinnusPortal,
     CosinnusLocation, RelatedGroups, CosinnusGroupGalleryImage,
-    MEMBERSHIP_INVITED_PENDING, CosinnusGroupCallToActionButton)
+    CosinnusGroupCallToActionButton)
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.conf import settings
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
@@ -24,6 +24,10 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from django.urls import reverse
 from cosinnus.views.facebook_integration import FacebookIntegrationGroupFormMixin
 from cosinnus.utils.lanugages import MultiLanguageFieldValidationFormMixin
+from cosinnus.fields import UserSelect2MultipleChoiceField
+from django.contrib.auth import get_user_model
+from cosinnus.utils.user import get_user_select2_pills, filter_active_users
+from cosinnus.utils.urls import group_aware_reverse
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -232,6 +236,61 @@ class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):
         obj.group = self.group
         obj.save()
         return obj
+    
+
+class MultiUserSelectForm(forms.Form):
+    """ The form to select users in a select2 field """
+    
+    base_data_url = 'cosinnus:group-member-invite-select2'
+    
+    # specify help_text only to avoid the possible default 'Enter text to search.' of ajax_select v1.2.5
+    # data_url will be set to a group_aware version of `self.base_data_url` in __init__
+    users = UserSelect2MultipleChoiceField(label=_("Users"), help_text='', data_url='/stub/')
+    
+    class Meta(object):
+        fields = ('users',)
+        
+    def __init__(self, *args, **kwargs):
+        self.group = kwargs.pop('group')
+        super(MultiUserSelectForm, self).__init__(*args, **kwargs)
+        
+        include_uids = CosinnusPortal.get_current().members
+        exclude_uids = self.group.members
+        user_qs = filter_active_users(get_user_model().objects.filter(id__in=include_uids).exclude(id__in=exclude_uids))
+        
+        # retrieve the attached objects ids to select them in the update view
+        users = []
+        initial_users = kwargs.get('initial', {}).get('users', None)
+        preresults = []
+        use_ids = False
+        user_list = []
+        
+        if initial_users:
+            user_list = initial_users.split(', ')
+            # delete the initial data or our select2 field initials will be overwritten by django
+            if 'users' in kwargs['initial']:
+                del kwargs['initial']['users']
+            if 'users' in self.initial:
+                del self.initial['users']
+        elif 'data' in kwargs and kwargs['data'].getlist('users'):
+            user_list = kwargs['data'].getlist('users')
+            use_ids = True
+            
+        if user_list:
+            user_tokens, __ = self.fields['users'].get_user_and_group_ids_for_value(user_list, intify=use_ids)
+            if use_ids:
+                users = user_qs.filter(id__in=user_tokens)
+            else:
+                users = user_qs.filter(username__in=user_tokens)
+            
+            preresults = get_user_select2_pills(users, text_only=False)
+            
+        # we need to cheat our way around select2's annoying way of clearing initial data fields
+        self.fields['users'].choices = preresults
+        self.fields['users'].initial = [key for key,__ in preresults]
+        self.fields['users'].widget.options['ajax']['url'] = group_aware_reverse(self.base_data_url, kwargs={'group': self.group})
+        self.initial['users'] = self.fields['users'].initial
+    
     
 
 class CosinnusLocationForm(forms.ModelForm):

@@ -191,9 +191,10 @@ ul.appnavi-dropdown-menu {
 .btn-app-colors(@light,@normal,@dark) {
 	.btn-emphasized .media,
 	.btn-appnavi .media,
-	.btn-emphasized .media > .media-body,
+	.btn-emphasized .media > .media-body, 
 	.btn-appnavi .media > .media-body,
 	.btn-emphasized .media > .pull-right,
+	.btn-emphasized.btn-icon-only .media > .pull-left,
 	.btn-appnavi .media > .pull-left,
 	.btn-appnavi .media > .pull-right {
 		color: @app-neutral-color-white;
@@ -208,7 +209,8 @@ ul.appnavi-dropdown-menu {
 	.fadedown.open .btn-emphasized.w100 .media  > .media-body,
 	.btn-appnavi:hover .media  > .media-body,
 	.btn-extra-emphasized .media  > .media-body,
-	.btn-emphasized .media > .pull-left,
+	.btn-emphasized:not(.btn-icon-only) .media > .pull-left,
+    .btn-emphasized:hover .media > .pull-left,
 	.media > .pull-left.btn-emphasized,
 	.btn-appnavi .media > .pull-left:first-child,
 	.btn-appnavi:hover .media > .pull-left,
