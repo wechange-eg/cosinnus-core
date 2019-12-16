@@ -63,7 +63,7 @@ import six
 from django.conf import settings
 from django.core.paginator import Paginator
 from cosinnus.utils.user import filter_active_users, get_user_select2_pills,\
-    get_user_query_filter_for_search_terms
+    get_user_query_filter_for_search_terms, get_user_by_email_safe
 from cosinnus.utils.functions import resolve_class
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
@@ -1504,7 +1504,9 @@ class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
         terms = term.strip().lower().split(' ')
         
         # filter for active portal members that are not group members
-        users = filter_active_users(get_user_model().objects.all()).exclude(id__in=self.group.members)
+        users = filter_active_users(get_user_model().objects.all())\
+                .exclude(id__in=self.group.members)\
+                .exclude(id__in=self.group.invited_pendings)
         # filter for query terms
         q = get_user_query_filter_for_search_terms(terms)
         users = users.filter(q)
@@ -1514,6 +1516,15 @@ class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
         users = [user for user in users if check_user_can_see_user(request.user, user)]
         
         users = sorted(users, key=lambda useritem: full_name(useritem).lower())
+        
+        # check for a direct email match
+        direct_email_user = get_user_by_email_safe(term)
+        if direct_email_user:
+            # filter for members/pending/self manually
+            if not direct_email_user.id in self.group.members \
+                    and not direct_email_user.id in self.group.invited_pendings \
+                    and not direct_email_user.id == request.user.id:
+                users = [direct_email_user] + users
         
         results = get_user_select2_pills(users)
 

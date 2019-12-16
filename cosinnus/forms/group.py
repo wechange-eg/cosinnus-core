@@ -245,7 +245,7 @@ class MultiUserSelectForm(forms.Form):
     
     # specify help_text only to avoid the possible default 'Enter text to search.' of ajax_select v1.2.5
     # data_url will be set to a group_aware version of `self.base_data_url` in __init__
-    users = UserSelect2MultipleChoiceField(label=_("Users"), help_text='', data_url='/stub/')
+    users = UserSelect2MultipleChoiceField(label=_("Users"), data_url='/stub/')
     
     class Meta(object):
         fields = ('users',)

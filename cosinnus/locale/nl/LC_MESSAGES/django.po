@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 11:49+0100\n"
+"POT-Creation-Date: 2019-12-16 17:13+0100\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -395,6 +395,9 @@ msgstr "Dit lijkt geen geldige widget ID or embed HTML code van Twitter!"
 
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 msgstr "Dit lijkt geen geldige Flickr Gallery-link te zijn! Het moet de vorm hebben van “https://www.flickr.com/photos/username/sets/1234567890”!"
+
+msgid "Users"
+msgstr "Gebruikers"
 
 msgid "Name"
 msgstr "Naam"
@@ -943,9 +946,6 @@ msgstr "Volgend"
 
 msgid "Create-Project or Group Button"
 msgstr "Maak—Project of Groep Knop"
-
-msgid "Users"
-msgstr "Gebruikers"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Events"
@@ -1537,6 +1537,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
 msgstr "helptext_51_objectprivacy"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_4_profile"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_52_profilelastname"
+msgstr "helptext_4_profile"
+
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Voer de e-mailadressen in van mensen die u wilt uitnodigen om deel te nemen aan het platform."
 
@@ -1766,17 +1773,24 @@ msgstr "Weet u zeker dat u dit team wilt verwijderen?"
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Leden"
 
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Invite registered users..."
+msgstr "Team Uitnodigingen voor Ongeregistreerde Gebruikers"
+
 msgid "Invite a member"
 msgstr "Nodig een lid uit"
 
-msgid "Invite user"
+msgid "Enter a user name or email to find users to invite..."
+msgstr ""
+
+#, fuzzy
+#| msgid "Invite user"
+msgid "Invite users"
 msgstr "Nodig gebruiker uit"
 
 msgid "Invited Members"
 msgstr "Nodig leden uit"
-
-msgid "Invited to be a member"
-msgstr "Uitgenodigd om lid te worden"
 
 msgid "Revoke Invitation"
 msgstr "Uitnodiging intrekken"
@@ -1786,6 +1800,9 @@ msgstr "Uitnodiging afwijzen"
 
 msgid "Accept Invitation"
 msgstr "Uitnodiging accepteren"
+
+msgid "Invited to be a member"
+msgstr "Uitgenodigd om lid te worden"
 
 #, python-format
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
@@ -1800,17 +1817,53 @@ msgstr "Wilt u de uitnodiging echt weigeren?"
 msgid "There are no pending invitations."
 msgstr "Er zijn geen openstaande uitnodigingen."
 
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Invite unregistered users..."
+msgstr "Team Uitnodigingen voor Ongeregistreerde Gebruikers"
+
+msgid "Invite People to Register and Join"
+msgstr "Nodig mensen uit om te registreren en deel te nemen"
+
+msgid "Invite people"
+msgstr "Nodig mensen uit"
+
+msgid "The email was added to the invite list. Click \"Invite people\" to resend the invitations!"
+msgstr ""
+
+msgid "All currently invited people"
+msgstr "Alle momenteel uitgenodigde mensen"
+
+msgid "People currently invited by you"
+msgstr "Mensen die momenteel door u zijn uitgenodigd"
+
+msgid "Delete invitation"
+msgstr "Verwijder uitnodiging"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Resend invitation"
+msgstr "Verwijder uitnodiging"
+
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr "door"
+
+#, python-format
+msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgstr "Weet u zeker dat u de uitnodiging voor “%(title)s” wilt verwijderen?"
+
 msgid "Membership requests"
 msgstr "Lidmaatschapsverzoeken"
-
-msgid "Membership requested"
-msgstr "Lidmaatschap aangevraagd"
 
 msgid "Decline User"
 msgstr "Gebruiker afwijzen"
 
 msgid "Accept User"
 msgstr "Gebruiker accepteren"
+
+msgid "Membership requested"
+msgstr "Lidmaatschap aangevraagd"
 
 #, python-format
 msgid "Do you really want to accept user „%(name)s“ as a member?"
@@ -1829,28 +1882,10 @@ msgstr "Lid weigeren"
 msgid "There are no new membership requests."
 msgstr "Er zijn geen nieuwe lidmaatschapsverzoeken."
 
-msgid "Invite People to Register and Join"
-msgstr "Nodig mensen uit om te registreren en deel te nemen"
-
-msgid "Invite people"
-msgstr "Nodig mensen uit"
-
-msgid "All currently invited people"
-msgstr "Alle momenteel uitgenodigde mensen"
-
-msgid "People currently invited by you"
-msgstr "Mensen die momenteel door u zijn uitgenodigd"
-
-msgid "Delete invitation"
-msgstr "Verwijder uitnodiging"
-
-msgctxt "an action done *by* <username>"
-msgid "by"
-msgstr "door"
-
-#, python-format
-msgid "Do you really want to delete the invitation for \"%(title)s\"?"
-msgstr "Weet u zeker dat u de uitnodiging voor “%(title)s” wilt verwijderen?"
+#, fuzzy
+#| msgid "Invited Members"
+msgid "Current Members"
+msgstr "Nodig leden uit"
 
 msgid "Message all members"
 msgstr "Bericht alle leden"

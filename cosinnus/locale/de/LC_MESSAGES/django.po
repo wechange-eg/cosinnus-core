@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 11:49+0100\n"
-"PO-Revision-Date: 2019-11-12 11:50+0100\n"
+"POT-Creation-Date: 2019-12-16 17:13+0100\n"
+"PO-Revision-Date: 2019-12-16 17:19+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -510,6 +510,9 @@ msgstr ""
 "Dies scheint keine gültige Flickr-Gallerie oder Slideshow URL zu sein! Es "
 "sollte in der Form von \"https://www.flickr.com/photos/username/"
 "sets/1234567890\" sein!"
+
+msgid "Users"
+msgstr "Benutzer_innen"
 
 msgid "Name"
 msgstr "Name"
@@ -1114,9 +1117,6 @@ msgstr "Gefolgt"
 
 msgid "Create-Project or Group Button"
 msgstr "Projekt oder Gruppe-erstellen Button"
-
-msgid "Users"
-msgstr "Benutzer_innen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Events"
@@ -1865,6 +1865,17 @@ msgstr ""
 "Suchmaschinenergebnissen erscheint. Wenn du das nicht möchtest, kannst du "
 "unten die Sichtbarkeitseinstellung anpassen."
 
+#| msgctxt ""
+#| "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_4_profile"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_52_profilelastname"
+msgstr ""
+"Wir respektieren deinen Wunsch, anonym zu bleiben – du musst deinen "
+"Nachnamen nicht angeben. Aber bedenke dass es so auch für Nutzer die dich "
+"kennen schwer ist dich zu finden, wenn sie dich z.B. zur Zusammenarbeit in "
+"einem Projekt einladen möchten."
+
 msgid ""
 "Enter the email addresses of people you wish to invite to join the platform."
 msgstr ""
@@ -2146,17 +2157,22 @@ msgstr "Sind sie sicher dass sie dieses Projekt löschen wollen?"
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Mitglieder"
 
+#| msgid "Team Invites for Unregistered Users"
+msgid "Invite registered users..."
+msgstr "Registrierte Benutzer einladen..."
+
 msgid "Invite a member"
 msgstr "Mitglied einladen"
 
-msgid "Invite user"
+msgid "Enter a user name or email to find users to invite..."
+msgstr "Gib einen Benutzernamen oder E-Mail zum Einladen ein..."
+
+#| msgid "Invite user"
+msgid "Invite users"
 msgstr "Benutzer einladen"
 
 msgid "Invited Members"
 msgstr "Eingeladene Mitglieder"
-
-msgid "Invited to be a member"
-msgstr "Als Mitglied eingeladen"
 
 msgid "Revoke Invitation"
 msgstr "Einladung zurückziehen"
@@ -2166,6 +2182,9 @@ msgstr "Einladung ablehnen"
 
 msgid "Accept Invitation"
 msgstr "Einladung annehmen"
+
+msgid "Invited to be a member"
+msgstr "Als Mitglied eingeladen"
 
 #, python-format
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
@@ -2180,17 +2199,55 @@ msgstr "Möchtest du die Einladung wirklich ablehnen?"
 msgid "There are no pending invitations."
 msgstr "Es gibt aktuell keine eingeladenen Mitglieder."
 
+#| msgid "Team Invites for Unregistered Users"
+msgid "Invite unregistered users..."
+msgstr "Nicht registrierte Benutzer einladen..."
+
+msgid "Invite People to Register and Join"
+msgstr "Lade Leute zum Registrieren und Beitreten ein"
+
+msgid "Invite people"
+msgstr "Leute einladen"
+
+msgid ""
+"The email was added to the invite list. Click \"Invite people\" to resend "
+"the invitations!"
+msgstr ""
+"Die E-Mail Adresse wurde in die Einladungsliste übernommen. Klicke auf "
+"\"Leute einladen\" um die Einladungen erneut zu senden!"
+
+msgid "All currently invited people"
+msgstr "Alle aktuell eingeladenen Leute"
+
+msgid "People currently invited by you"
+msgstr "Von dir eingeladene Leute"
+
+msgid "Delete invitation"
+msgstr "Einladung löschen"
+
+#| msgid "Delete invitation"
+msgid "Resend invitation"
+msgstr "Einladung erneut senden"
+
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr "von"
+
+#, python-format
+msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgstr "Möchtest du die Einladung für \"%(title)s\" wirklich löschen?"
+
 msgid "Membership requests"
 msgstr "Mitglieder-Anträge"
-
-msgid "Membership requested"
-msgstr "Mitgliederschaft wurde beantragt"
 
 msgid "Decline User"
 msgstr "Ablehnen"
 
 msgid "Accept User"
 msgstr "Annehmen"
+
+msgid "Membership requested"
+msgstr "Mitgliederschaft wurde beantragt"
 
 #, python-format
 msgid "Do you really want to accept user „%(name)s“ as a member?"
@@ -2209,28 +2266,9 @@ msgstr "Mitglied ablehen"
 msgid "There are no new membership requests."
 msgstr "Es gibt aktuell keine neuen Mitglieder-Anträge."
 
-msgid "Invite People to Register and Join"
-msgstr "Lade Leute zum Registrieren und Beitreten ein"
-
-msgid "Invite people"
-msgstr "Leute einladen"
-
-msgid "All currently invited people"
-msgstr "Alle aktuell eingeladenen Leute"
-
-msgid "People currently invited by you"
-msgstr "Von dir eingeladene Leute"
-
-msgid "Delete invitation"
-msgstr "Einladung löschen"
-
-msgctxt "an action done *by* <username>"
-msgid "by"
-msgstr "von"
-
-#, python-format
-msgid "Do you really want to delete the invitation for \"%(title)s\"?"
-msgstr "Möchtest du die Einladung für \"%(title)s\" wirklich löschen?"
+#| msgid "Invited Members"
+msgid "Current Members"
+msgstr "Aktuelle Mitglieder"
 
 msgid "Message all members"
 msgstr "Nachricht an alle Mitglieder"
@@ -3584,7 +3622,6 @@ msgstr "Navigation ab-/abschalten"
 msgid "My Profile"
 msgstr "Mein Profil"
 
-#| msgid "My Contribution"
 msgid "Your Contribution"
 msgstr "Dein Beitrag"
 
@@ -5073,7 +5110,6 @@ msgstr "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
 msgid "Change of Terms of Services and Privacy Policy"
 msgstr "Änderung unserer Datenschutz-/und Nutzungsbedingungen"
 
-#| msgid "Change of Terms of Services and Privacy Policy"
 msgid "Our Terms of Services and Privacy Policy"
 msgstr "Unsere Datenschutz- und Nutzungsbedingungen"
 
@@ -5459,9 +5495,6 @@ msgid "<Root folder>"
 msgstr "<Oberster Ordner>"
 
 #, python-format
-#| msgid ""
-#| "You are now located in %(group_name)s.<br/>You were redirected here from "
-#| "another project or group that links to this item."
 msgid ""
 "You are now located in %(group_name)s. You were redirected here from another "
 "project or group that links to this item."

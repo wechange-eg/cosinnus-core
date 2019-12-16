@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 11:49+0100\n"
+"POT-Creation-Date: 2019-12-16 17:13+0100\n"
 "PO-Revision-Date: 2019-06-09 13:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -394,6 +394,9 @@ msgstr "Выглядае, што гэта несапраўдны ідэнтыф�
 
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 msgstr "Выглядае, што гэта несапраўдная спасылка на галерэю Flickr! Яна павінна быць наступнага фармату: \"https://www.flickr.com/photos/username/sets/1234567890\"!"
+
+msgid "Users"
+msgstr "Карыстальнікі(-цы)"
 
 msgid "Name"
 msgstr "Імя"
@@ -952,9 +955,6 @@ msgstr "Сачу"
 
 msgid "Create-Project or Group Button"
 msgstr "Кнопка \"Стварыць праект або групу\""
-
-msgid "Users"
-msgstr "Карыстальнікі(-цы)"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Events"
@@ -1562,6 +1562,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
 msgstr "helptext_1_прыватнасць_аб'екта"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_4_profile"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_52_profilelastname"
+msgstr "helptext_1_профіль"
+
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Увядзіце адрасы электроннай пошты людзей, якіх Вы жадаеце запрасіць далучыцца да платформы."
 
@@ -1795,17 +1802,24 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - чальцы"
 
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Invite registered users..."
+msgstr "Запрашэнні ў каманду для незарэгістраваных карыстальнікаў(-ц)"
+
 msgid "Invite a member"
 msgstr "Запрасіць чальца"
 
-msgid "Invite user"
+msgid "Enter a user name or email to find users to invite..."
+msgstr ""
+
+#, fuzzy
+#| msgid "Invite user"
+msgid "Invite users"
 msgstr "Запрасіць карыстальніка(-цу)"
 
 msgid "Invited Members"
 msgstr "Запрошаныя чальцы"
-
-msgid "Invited to be a member"
-msgstr "Запрошаны стаць чальцом"
 
 msgid "Revoke Invitation"
 msgstr "Адклікаць запрашэнне"
@@ -1815,6 +1829,9 @@ msgstr "Адхіліць запрашэнне"
 
 msgid "Accept Invitation"
 msgstr "Прынять запрашэнне"
+
+msgid "Invited to be a member"
+msgstr "Запрошаны стаць чальцом"
 
 #, python-format
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
@@ -1829,17 +1846,53 @@ msgstr "Вы сапраўды хочаце адхіліць запрашэнне
 msgid "There are no pending invitations."
 msgstr "Няма запрашэнняў, што чакаюць рашэння."
 
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Invite unregistered users..."
+msgstr "Запрашэнні ў каманду для незарэгістраваных карыстальнікаў(-ц)"
+
+msgid "Invite People to Register and Join"
+msgstr "Запрасіць людзей зарэгістравацца і далучыцца"
+
+msgid "Invite people"
+msgstr "Запрасіць людзей"
+
+msgid "The email was added to the invite list. Click \"Invite people\" to resend the invitations!"
+msgstr ""
+
+msgid "All currently invited people"
+msgstr "Усе запрошаныя людзі на дадзены момант"
+
+msgid "People currently invited by you"
+msgstr "Людзі, запрошаныя Вамі, на дадзены момант"
+
+msgid "Delete invitation"
+msgstr "Выдаліць запрашэнне"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Resend invitation"
+msgstr "Выдаліць запрашэнне"
+
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr "Стваральнік(-ца):"
+
+#, python-format
+msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgstr "Вы сапраўды хочаце выдаліць запрашэнне для \"%(title)s\"?"
+
 msgid "Membership requests"
 msgstr "Запыты на членства"
-
-msgid "Membership requested"
-msgstr "Адпраўлены запыт на членства"
 
 msgid "Decline User"
 msgstr "Адмовіць карыстальніку(-цы)"
 
 msgid "Accept User"
 msgstr "Прыняць карыстальніка(-цу)"
+
+msgid "Membership requested"
+msgstr "Адпраўлены запыт на членства"
 
 #, python-format
 msgid "Do you really want to accept user „%(name)s“ as a member?"
@@ -1858,28 +1911,10 @@ msgstr "Адмовіць кандыдату(-цы)"
 msgid "There are no new membership requests."
 msgstr "Больш няма запытаў на членства."
 
-msgid "Invite People to Register and Join"
-msgstr "Запрасіць людзей зарэгістравацца і далучыцца"
-
-msgid "Invite people"
-msgstr "Запрасіць людзей"
-
-msgid "All currently invited people"
-msgstr "Усе запрошаныя людзі на дадзены момант"
-
-msgid "People currently invited by you"
-msgstr "Людзі, запрошаныя Вамі, на дадзены момант"
-
-msgid "Delete invitation"
-msgstr "Выдаліць запрашэнне"
-
-msgctxt "an action done *by* <username>"
-msgid "by"
-msgstr "Стваральнік(-ца):"
-
-#, python-format
-msgid "Do you really want to delete the invitation for \"%(title)s\"?"
-msgstr "Вы сапраўды хочаце выдаліць запрашэнне для \"%(title)s\"?"
+#, fuzzy
+#| msgid "Invited Members"
+msgid "Current Members"
+msgstr "Запрошаныя чальцы"
 
 msgid "Message all members"
 msgstr "Даслаць паведамленне ўсім чальцам"
