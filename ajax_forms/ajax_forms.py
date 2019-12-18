@@ -32,6 +32,8 @@ class AjaxFormsCreateViewMixin(AjaxEnabledFormViewBaseMixin):
             - set the attribute `ajax_result_partial` to a template partial that renders *only*
                 the snippet for the result object that was created with the form. This will be 
                 added to your page after the ajax form resolves successfully
+            - (optional) set `ajax_result_partial_object_alias` to the template variable that should
+                also contain the object for your result partial template
         
         # In your template:
             - Include the JS script: <script src="{% static 'js/ajax_forms.js' %}"></script>
@@ -44,10 +46,11 @@ class AjaxFormsCreateViewMixin(AjaxEnabledFormViewBaseMixin):
                 must be referenced by `object` as this is what will be passed in the context.
             - (optional) In your main template, mark elements that will be removed when the ajax
                 form resolves by adding the attributes
-                `data-target="ajax-form-result-anchor" data-ajax-form-id="<unique-form-id>"`
+                `data-target="ajax-form-delete-element" data-ajax-form-id="<unique-form-id>"`
             - (optional) To your <form> add an attribute with arbitrary JS code to execude
                 when the ajax form resolves: `data-ajax-oncomplete="alert('Success!')`
-            
+            - (optional) To your <form> add an attribute with a custom error message to display
+                when there are form errors: `data-ajax-form-error-message="<your message>"``
     """
     
     def form_valid(self, form):
@@ -57,10 +60,14 @@ class AjaxFormsCreateViewMixin(AjaxEnabledFormViewBaseMixin):
         super(AjaxFormsCreateViewMixin, self).form_valid(form)
         
         form_id = self.request.POST.get('ajax_form_id')
-        context = make_context({
+        context_data = {
             'object': self.object,
             'user': self.request.user,
-        }, request=self.request).flatten()
+            'created_with_ajax_forms': True, 
+        }
+        if hasattr(self, 'ajax_result_partial_object_alias'):
+            context_data[self.ajax_result_partial_object_alias] = self.object
+        context = make_context(context_data, request=self.request).flatten()
         data = {
             'result_html': render_to_string(self.ajax_result_partial, context, request=self.request),
             'new_form_html': self.render_new_form(self.ajax_form_partial, form_id),
