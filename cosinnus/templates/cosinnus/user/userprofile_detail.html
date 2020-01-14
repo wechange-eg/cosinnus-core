@@ -31,7 +31,7 @@
 			        	{# Buttons for my userprofile #}
 			        	
 			            {% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
-				            <button type="button" class="btn btn-emphasized v-offset-s" href="{% url 'cosinnus:profile-edit' %}">
+				            <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" href="{% url 'cosinnus:profile-edit' %}">
 	                            <ul class="media-list">
 	                                <li class="media">
 	                                    <a class="pull-left" href="#">
@@ -45,7 +45,7 @@
 	                        </button>
                         {% endif %}
                         
-                        <button type="button" class="btn btn-emphasized v-offset-s" href="{% url 'cosinnus:notifications' %}" title="{% trans "Notification Preferences" %}" style="width: auto;">
+                        <button type="button" class="btn btn-emphasized v-offset-s btn-autosize" href="{% url 'cosinnus:notifications' %}" title="{% trans "Notification Preferences" %}">
                             <ul class="media-list">
                                 <li class="media">
                                     <a class="pull-left" href="#">
@@ -59,8 +59,8 @@
                         </button>
                         
                         
-                        <button type="button" class="btn btn-emphasized v-offset-s" 
-                        		title="{% trans "Deactivated Projects and Groups" %}" style="width: auto;"
+                        <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" 
+                        		title="{% trans "Deactivated Projects and Groups" %}" 
                         		{% if has_deactivated_groups %}href="{% url 'cosinnus:deactivated-groups' %}"{% else %}disabled="true"{% endif %}>
                             <ul class="media-list">
                                 <li class="media">
@@ -76,7 +76,7 @@
                         
                         {% if SETTINGS.COSINNUS_IS_SSO_PORTAL %}
                         	{# need this here because usually it shows in the profile form, but sso portals don't have that #}
-                            <button type="button" class="btn btn-emphasized v-offset-s" href="{% url 'cosinnus:profile-delete' %}">
+                            <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" href="{% url 'cosinnus:profile-delete' %}">
                                 <ul class="media-list">
                                     <li class="media">
                                         <a class="pull-left" href="#">
@@ -110,7 +110,7 @@
 			            </button>
 			             {% endcomment %}
 			            {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-			            <button type="button" class="btn btn-emphasized v-offset-s" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=this_user.username %}{% else %}{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}{% endif %}">
+			            <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=this_user.username %}{% else %}{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}{% endif %}">
 			                <ul class="media-list">
 			                    <li class="media">
 			                        <a class="pull-left" href="#">

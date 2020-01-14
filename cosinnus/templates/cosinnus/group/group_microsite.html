@@ -124,7 +124,7 @@
 	    	{% elif user.pk in group.members %}
 	    		<h2>{% trans "You are a member!" %}</h2>
 	    	
-	            <button href="{{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
+	            <button href="{{ group.get_absolute_url }}" type="button" class="btn btn-emphasized btn-autosize">
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#">
@@ -144,7 +144,7 @@
 	        	<h2>{% trans "Membership request pending..." %}</h2>
 	        	
 	        	<span class="app-etherpad">
-		            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#join_withdraw_modal">
+		            <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#join_withdraw_modal">
 	                    <ul class="media-list">
 	                        <li class="media">
 	                            <a class="pull-left" href="#">
@@ -166,7 +166,7 @@
 	        	<h2>{% trans "You are invited!" %}</h2>
 	        	
                 <span class="app-calendar"> {# Hacky green color #}
-		            <button type="button" class="btn btn-emphasized" onclick="$('#accept-group-invitation-form').submit();">
+		            <button type="button" class="btn btn-emphasized btn-autosize" onclick="$('#accept-group-invitation-form').submit();">
 		                <ul class="media-list">
 		                    <li class="media">
 		                        <a class="pull-left" href="#">
@@ -182,7 +182,7 @@
                 
                 {% captureas modal_decline_invitation_id %}userModal_decline_invitation_{{member.pk}}{% endcaptureas %}
                 <span class="app-etherpad">
-		            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
+		            <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
 	                    <ul class="media-list">
 	                        <li class="media">
 	                            <a class="pull-left" href="#">
@@ -209,7 +209,7 @@
 	        	<h2>{% trans "Collaborate!" %}</h2>
 	        	
 	        	<span class="app-calendar"> {# Hacky green color #}
-		            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#join_withdraw_modal">
+		            <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#join_withdraw_modal">
 		                <ul class="media-list">
 		                    <li class="media">
 		                        <a class="pull-left" href="#">
@@ -231,7 +231,7 @@
 			{% endif %}
 			
 			{% if group.public and user.is_authenticated and not user.pk in group.members and not user.pk in group.invited_pendings %}
-	    		<button href="{{ group.get_absolute_url }}?browse=true" type="button" class="btn btn-emphasized">
+	    		<button href="{{ group.get_absolute_url }}?browse=true" type="button" class="btn btn-emphasized btn-autosize">
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#">
