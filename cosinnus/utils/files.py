@@ -98,11 +98,6 @@ def create_zip_from_files(file_list):
     # add files to zip with custom path
     for file_path, zip_path in file_list:
         if path.exists(file_path):
-            import logging
-            logger = logging.getLogger('cosinnus')
-            logger.warn('>>>>')
-            logger.warn(file_path)
-            logger.warn(zip_path)
             zip_file.write(file_path, zip_path)
     # Must close zip for all contents to be written
     zip_file.close()
