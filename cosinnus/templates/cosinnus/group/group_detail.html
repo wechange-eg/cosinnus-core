@@ -340,7 +340,7 @@
                                         {% endif %}
                                     </span>
                                     {{ recruitation.email }}
-                                    {% if not recruitation.invited_by == user %}
+                                    {% if recruitation.invited_by and not recruitation.invited_by == user %}
 				                        <i>
 				                           ({% trans "by" context "an action done *by* <username>" %}
 				                           <a href="{% url 'cosinnus:profile-detail' username=recruitation.invited_by.username %}">{{ recruitation.invited_by|full_name }}</a>)
