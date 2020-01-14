@@ -152,6 +152,10 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             if group.portal_id != CosinnusPortal.get_current().id:
                 refused_portal_names.append(group.name)
                 continue
+            
+            # remove haystack index for this group, re-index after
+            group.remove_index()
+            # swap types
             group.type = CosinnusGroup.TYPE_SOCIETY
             # clear parent group if the project had one (societies cannot have parents!)
             group.parent = None
@@ -169,6 +173,11 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             # delete and recreate all group widgets (there might be different ones for group than for project)
             WidgetConfig.objects.filter(group_id=group.pk).delete()
             create_initial_group_widgets(group, group)
+            
+            # re-index haystack for this group after getting a properly classed, fresh object
+            group.remove_index()
+            group = CosinnusSociety.objects.get(id=group.id)
+            group.update_index()
         
         if converted_names:
             message = _('The following Projects were converted to Groups:') + '\n' + ", ".join(converted_names)
@@ -314,8 +323,12 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
             if group.portal_id != CosinnusPortal.get_current().id:
                 refused_portal_names.append(group.name)
                 continue
+            # remove haystack index for this group, re-index after
+            group.remove_index()
+            # swap types
             group.type = CosinnusGroup.TYPE_PROJECT
             group.save(allow_type_change=True)
+            
             if group.type == CosinnusGroup.TYPE_PROJECT:
                 converted_names.append(group.name)
                 CosinnusPermanentRedirect.create_for_pattern(group.portal, CosinnusGroup.TYPE_SOCIETY, group.slug, group)
@@ -332,10 +345,14 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
             CosinnusSociety._clear_cache(group=group)
             get_cosinnus_group_model()._clear_cache(group=group)
             CosinnusGroupMembership.clear_member_cache_for_group(group)
-        
             # delete and recreate all group widgets (there might be different ones for group than for porject)
             WidgetConfig.objects.filter(group_id=group.pk).delete()
             create_initial_group_widgets(group, group)
+            
+            # re-index haystack for this group after getting a properly classed, fresh object
+            group.remove_index()
+            group = CosinnusProject.objects.get(id=group.id)
+            group.update_index()
         
         if converted_names:
             message = _('The following Groups were converted to Projects:') + '\n' + ", ".join(converted_names)
