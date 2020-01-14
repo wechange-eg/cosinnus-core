@@ -77,7 +77,7 @@ class DashboardItem(dict):
                 if obj.__class__.__name__ == 'Ethercalc':
                     self['icon'] = 'fa-table'
                 if obj.__class__.__name__ == 'FileEntry':
-                    self['icon'] = 'fa-file'
+                    self['icon'] = obj.get_icon()
                 if obj.__class__.__name__ == 'Message':
                     self['icon'] = 'fa-envelope'
                 if obj.__class__.__name__ == 'TodoEntry':

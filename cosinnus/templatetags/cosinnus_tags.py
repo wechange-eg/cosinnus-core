@@ -865,7 +865,7 @@ def textfield(text, arg=''):
     for m in reversed([it for it in BETTER_URL_RE.finditer(text)]):
         if (m.start() == 0 or text[m.start()-2:m.start()] != '](') and (m.start() == 0 or text[m.start()-1] != '@') and (m.end() == len(text) or text[m.end():m.end()+2] != ']('):
             short = (m.group()[:47] + '...') if len(m.group()) > 50 else m.group()
-            text = text[:m.start()] + ('[%s](%s%s)' % (short, 'http://' if not short.startswith('http') else '', m.group())) + text[m.end():] 
+            text = text[:m.start()] + ('[%s](%s%s)' % (short, 'https://' if not short.startswith('http') else '', m.group())) + text[m.end():] 
     
     
     text = escape(text.strip())

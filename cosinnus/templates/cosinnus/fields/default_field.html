@@ -30,7 +30,7 @@
 	{% if label %}
 		<label {% if for_id %}for="{{ for_id }}"{% endif %} {% if first %}class="first"{% endif %}>
 		    {{ label }}
-		    {% if field and not field.field.required and not required %}
+		    {% if field and not field.field.required and not required and not hide_optional %}
                 ({% trans "optional" context "written next to optional form fields" %})
             {% endif %}
             {% if show_required %}
@@ -51,7 +51,7 @@
 	{% endif %}
 	
 	{% if field or field_html %}
-		<div class="{% if not unstyled %}cosinnus-field-input{% endif %} {% if not large_field %}regular-field{% endif %} {% if field_classes %}{{ field_classes }}{% endif %}">
+		<div class="{% if not unstyled %}cosinnus-field-input{% endif %} {% if major_field %}major-field{% elif large_field %}large-field{% else %}regular-field{% endif %} {% if field_classes %}{{ field_classes }}{% endif %}">
 	        {% if field_html %}
 	            {{ field_html|safe }}
 	        {% elif field %}
