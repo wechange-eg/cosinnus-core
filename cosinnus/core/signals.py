@@ -19,6 +19,13 @@ userprofile_ceated = dispatch.Signal(providing_args=["profile"])
 """ Called after a new user voluntarily signs up on the portal, using the web frontend """
 user_registered = dispatch.Signal(providing_args=["user"])
 
+""" Called after a user account has been deactived 
+    (this also happens when a user "deletes" their account """
+user_deactivated = dispatch.Signal(providing_args=["user"])
+
+""" Called after a user account is activated, or re-activated after being deactivated """
+user_activated = dispatch.Signal(providing_args=["user"])
+
 """ Called when the user logs in for the first time ever """
 user_logged_in_first_time = dispatch.Signal(providing_args=['request', 'user'])
 
@@ -55,4 +62,9 @@ user_group_recruited = dispatch.Signal(providing_args=["user", "obj", "audience"
 """ Called when a group is moved to the current portal, serves as a notifcation message for users """
 group_moved_to_portal = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
+""" Called after a CosinnusGroup, or one of its extending models was deactivated """
+group_deactivated = dispatch.Signal(providing_args=["group"])
+
+""" Called after a CosinnusGroup, or one of its extending models was reactivated """
+group_reactivated = dispatch.Signal(providing_args=["group"])
 

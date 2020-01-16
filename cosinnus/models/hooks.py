@@ -6,7 +6,7 @@ from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
 from cosinnus.utils.user import assign_user_to_default_auth_group, \
     ensure_user_to_default_portal_groups
 from django.contrib.auth import get_user_model
-from django.db.models.signals import post_delete, post_save
+from django.db.models.signals import post_delete, post_save, pre_save
 from django.dispatch.dispatcher import receiver
 
 from cosinnus.models.tagged import ensure_container
@@ -105,6 +105,29 @@ def reset_cookie_expiry_for_anonymous_user(sender, user, request, **kwargs):
     """ Default for cookies for anonymous users is browser-session and as set in 
         `COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS` logged in users """
     request.session.set_expiry(0)
+
+
+""" User account activation/deactivation logic """
+def user_pre_save(sender, **kwargs):
+    """ Saves a user's is_active value as it was before saving """
+    user = kwargs['instance']
+    actual_value = user.is_active
+    user.refresh_from_db(fields=['is_active'])
+    user._is_active = user.is_active
+    user.is_active = actual_value
+    
+def user_post_save(sender, **kwargs):
+    """ Compares the saved is_active value and sends signals if it was changed """
+    user = kwargs['instance']
+    if hasattr(user, '_is_active'):
+        if user.is_active != user._is_active:
+            if user.is_active:
+                signals.user_activated.send(sender=sender, user=user)
+            else:
+                signals.user_deactivated.send(sender=sender, user=user)
+
+pre_save.connect(user_pre_save, sender=get_user_model())
+post_save.connect(user_post_save, sender=get_user_model())
 
 
 from cosinnus.apis.cleverreach import *

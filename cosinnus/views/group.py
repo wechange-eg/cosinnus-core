@@ -1098,9 +1098,11 @@ class ActivateOrDeactivateGroupView(TemplateView):
             typed_group.update_index()
             typed_group.update_index_for_all_group_objects()
             messages.success(request, self.message_success_activate % {'team_name': self.group.name})
+            signals.group_reactivated.send(sender=typed_group.__class__, group=typed_group)
             return redirect(self.group.get_absolute_url())
         else:
             messages.success(request, self.message_success_deactivate % {'team_name': self.group.name})
+            signals.group_deactivated.send(sender=typed_group.__class__, group=typed_group)
             return redirect(get_non_cms_root_url(self.request))
     
     def get_context_data(self, **kwargs):
