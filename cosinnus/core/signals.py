@@ -8,13 +8,22 @@ import django.dispatch as dispatch
 all_cosinnus_apps_loaded = dispatch.Signal()
 
 """ Called after a CosinnusGroup, or one of its extending models is freshly created """
-group_object_ceated = dispatch.Signal(providing_args=["group"])
+group_object_created = dispatch.Signal(providing_args=["group"])
+
+""" Deprecated name for group_object_created """
+group_object_ceated = group_object_created
 
 """ Called after a CosinnusIdea is freshly created """
-idea_object_ceated = dispatch.Signal(providing_args=["idea"])
+idea_object_created = dispatch.Signal(providing_args=["idea"])
+
+""" Deprecated name for idea_object_created """
+idea_object_ceated = idea_object_created
 
 """ Called after a new user and their profile is freshly created """
-userprofile_ceated = dispatch.Signal(providing_args=["profile"])
+userprofile_created = dispatch.Signal(providing_args=["profile"])
+
+""" Deprecated name for userprofile_created """
+userprofile_ceated = userprofile_created
 
 """ Called after a new user voluntarily signs up on the portal, using the web frontend """
 user_registered = dispatch.Signal(providing_args=["user"])

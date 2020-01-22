@@ -857,7 +857,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         
         if created:
             # send creation signal
-            signals.group_object_ceated.send(sender=self, group=self)
+            signals.group_object_created.send(sender=self, group=self)
     
     
     def delete(self, *args, **kwargs):
