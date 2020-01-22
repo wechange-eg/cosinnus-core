@@ -36,14 +36,18 @@ from django.template.loader import render_to_string
 from django.http.response import HttpResponseNotAllowed, JsonResponse, HttpResponseRedirect,\
     HttpResponseForbidden, HttpResponse, HttpResponseServerError
 from django.shortcuts import redirect, render
-from cosinnus.templatetags.cosinnus_tags import full_name_force, textfield
-from cosinnus.utils.permissions import check_user_integrated_portal_member
+from cosinnus.templatetags.cosinnus_tags import full_name_force, textfield,\
+    full_name
+from cosinnus.utils.permissions import check_user_integrated_portal_member,\
+    check_user_can_see_user, check_user_superuser
 from django.template.response import TemplateResponse
 from django.core.paginator import Paginator
 from cosinnus.views.mixins.group import EndlessPaginationMixin,\
     RequireLoggedInMixin
 from cosinnus.utils.user import filter_active_users,\
-    get_newly_registered_user_email, accept_user_tos_for_portal
+    get_newly_registered_user_email, accept_user_tos_for_portal,\
+    get_user_query_filter_for_search_terms, get_user_select2_pills,\
+    get_group_select2_pills
 from uuid import uuid1
 from django.utils.encoding import force_text
 from cosinnus.core import signals
@@ -66,6 +70,8 @@ import logging
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView
 from django.utils.timezone import now
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from django_select2.views import Select2View, NO_ERR_RESP
+from django.core.exceptions import PermissionDenied
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -699,6 +705,14 @@ def user_api_me(request):
         user_societies = CosinnusSociety.objects.get_for_user(request.user)
         user_projects = CosinnusProject.objects.get_for_user(request.user)
         
+        # euro amount if current subscription payments for this user
+        is_paying = 0
+        if getattr(settings, 'COSINNUS_PAYMENTS_ENABLED', False):
+            from wechange_payments.models import Subscription
+            current_subscription = Subscription.get_current_for_user(request.user)
+            if current_subscription:
+                is_paying = int(current_subscription.amount)
+            
         data.update({
             'username': user.username,
             'id': user.id,
@@ -707,6 +721,7 @@ def user_api_me(request):
             'avatar_url': CosinnusPortal.get_current().get_domain() + user.cosinnus_profile.get_avatar_thumbnail_url(), 
             'groups': [society.slug for society in user_societies],
             'projects': [project.slug for project in user_projects],
+            'is_paying': is_paying,
         })
     
     return JsonResponse(data)
@@ -776,7 +791,54 @@ def accept_updated_tos(request):
         logger.warning('Could not save a user\'s updated ToS settings.', extra={'errors': form.errors, 'post-data': request.POST})
         return HttpResponseServerError('Failed')
 
-    
+
+class UserSelect2View(Select2View):
+    """
+    This view is used as API backend to serve the suggestions for the message recipient field.
+    """
+
+    def check_all_permissions(self, request, *args, **kwargs):
+        user = request.user
+        if not user.is_authenticated:
+            raise PermissionDenied
+
+    def get_results(self, request, term, page, context):
+        terms = term.strip().lower().split(' ')
+        q = get_user_query_filter_for_search_terms(terms)
+        
+        users = filter_active_users(get_user_model().objects.filter(q).exclude(id__exact=request.user.id))
+        # as a last filter, remove all users that that have their privacy setting to "only members of groups i am in",
+        # if they aren't in a group with the user
+        users = [user for user in users if check_user_can_see_user(request.user, user)]
+        
+        
+        # | Q(username__icontains=term))
+        # Filter all groups the user is a member of, and all public groups for
+        # the term.
+        # Use CosinnusGroup.objects.get_cached() to search in all groups
+        # instead
+        groups = set(get_cosinnus_group_model().objects.get_for_user(request.user)).union(
+            get_cosinnus_group_model().objects.public())
+        
+        forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        groups = [group for group in groups if all([term.lower() in group.name.lower() for term in terms]) and (check_user_superuser(request.user) or group.slug != forum_slug)]
+
+        # these result sets are what select2 uses to build the choice list
+        #results = [("user:" + six.text_type(user.id), render_to_string('cosinnus/common/user_select_pill.html', {'type':'user','text':escape(user.first_name) + " " + escape(user.last_name), 'user': user}),)
+        #           for user in users]
+        #results.extend([("group:" + six.text_type(group.id), render_to_string('cosinnus/common/user_select_pill.html', {'type':'group','text':escape(group.name)}),)
+        #               for group in groups])
+        
+        # sort results
+        
+        users = sorted(users, key=lambda useritem: full_name(useritem).lower())
+        groups = sorted(groups, key=lambda groupitem: groupitem.name.lower())
+        
+        results = get_user_select2_pills(users)
+        results.extend(get_group_select2_pills(groups))
+
+        # Any error response, Has more results, options list
+        return (NO_ERR_RESP, False, results)
 
 
 @receiver(userprofile_ceated)

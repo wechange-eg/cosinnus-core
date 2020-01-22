@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 11:49+0100\n"
-"PO-Revision-Date: 2018-06-23 17:01+0200\n"
+"POT-Creation-Date: 2020-01-14 19:31+0100\n"
+"PO-Revision-Date: 2019-12-16 17:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -398,6 +398,9 @@ msgid "This doesn't seem to be a valid widget ID or embed HTML code from Twitter
 msgstr ""
 
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
+msgstr ""
+
+msgid "Users"
 msgstr ""
 
 msgid "Name"
@@ -976,9 +979,6 @@ msgstr ""
 #| msgid "Convert selected Projects to Groups"
 msgid "Create-Project or Group Button"
 msgstr "Convert selected Projects to Groups"
-
-msgid "Users"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Events"
@@ -1588,6 +1588,10 @@ msgstr ""
 "\n"
 "*  **Public (visible without login):** This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
 
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_52_profilelastname"
+msgstr "We respect your wish for anonymity - you don't have to enter your last name. But keep in mind that even for users who know you, it will be hard to find you, for example when they want to invite you to collaborate on a project."
+
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr ""
 
@@ -1824,16 +1828,21 @@ msgstr "Are you sure you want to delete this prject?"
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Members"
 
+msgid "Invite registered users..."
+msgstr ""
+
 msgid "Invite a member"
 msgstr ""
 
-msgid "Invite user"
+msgid "Enter a user name or email to find users to invite..."
 msgstr ""
+
+#, fuzzy
+#| msgid "Edit Group"
+msgid "Invite users"
+msgstr "Edit Project"
 
 msgid "Invited Members"
-msgstr ""
-
-msgid "Invited to be a member"
 msgstr ""
 
 msgid "Revoke Invitation"
@@ -1843,6 +1852,9 @@ msgid "Decline Invitation"
 msgstr ""
 
 msgid "Accept Invitation"
+msgstr ""
+
+msgid "Invited to be a member"
 msgstr ""
 
 #, fuzzy, python-format
@@ -1863,16 +1875,53 @@ msgstr "Do you really want to leave project „%(title)s“?"
 msgid "There are no pending invitations."
 msgstr "There are no groups."
 
-msgid "Membership requests"
+msgid "Invite unregistered users..."
 msgstr ""
 
-msgid "Membership requested"
+msgid "Invite People to Register and Join"
+msgstr ""
+
+msgid "Invite people"
+msgstr ""
+
+msgid "The email was added to the invite list. Click \"Invite people\" to resend the invitations!"
+msgstr ""
+
+msgid "All currently invited people"
+msgstr ""
+
+msgid "People currently invited by you"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "Delete invitation"
+msgstr "There are no groups."
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "Resend invitation"
+msgstr "There are no groups."
+
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+msgid "Membership requests"
 msgstr ""
 
 msgid "Decline User"
 msgstr ""
 
 msgid "Accept User"
+msgstr ""
+
+msgid "Membership requested"
 msgstr ""
 
 #, python-format
@@ -1892,31 +1941,10 @@ msgstr ""
 msgid "There are no new membership requests."
 msgstr ""
 
-msgid "Invite People to Register and Join"
-msgstr ""
-
-msgid "Invite people"
-msgstr ""
-
-msgid "All currently invited people"
-msgstr ""
-
-msgid "People currently invited by you"
-msgstr ""
-
 #, fuzzy
-#| msgid "There are no groups."
-msgid "Delete invitation"
-msgstr "There are no groups."
-
-msgctxt "an action done *by* <username>"
-msgid "by"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "Do you really want to leave „%(title)s“?"
-msgid "Do you really want to delete the invitation for \"%(title)s\"?"
-msgstr "Do you really want to leave project „%(title)s“?"
+#| msgid "Convert selected Projects to Groups"
+msgid "Current Members"
+msgstr "Convert selected Projects to Groups"
 
 msgid "Message all members"
 msgstr ""
@@ -4647,17 +4675,10 @@ msgstr ""
 #~ msgid "Polish"
 #~ msgstr "Polski"
 
-#, fuzzy
-#~| msgid "Convert selected Projects to Groups"
-#~ msgid "Project/Group Members"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
 #~| msgid "Group"
 #~ msgid "Gruppen"
 #~ msgstr "Group"
 
-#, fuzzy
 #~| msgid "Enter a name for the group."
 #~ msgid "Enter a descriptive name for your group."
 #~ msgstr "Enter a name for the project."

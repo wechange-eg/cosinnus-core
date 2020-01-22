@@ -56,9 +56,10 @@
                             {# Regular Field #}
 							{% trans "Last name" as last_name_label %}
 							{% trans "Last name" as  last_name_placeholder %}
-							{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.last_name label=last_name_label placeholder=last_name_placeholder %}
+							{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.last_name label=last_name_label placeholder=last_name_placeholder help_popup="helptext_52_profilelastname" %}
                         </div>
                     </div><!-- row -->
+                    
                 
                 {% endblock user_info %}
                 

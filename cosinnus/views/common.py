@@ -1,33 +1,34 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from annoying.functions import get_object_or_None
+from bs4 import BeautifulSoup
 from django.apps import apps
-from django.urls import reverse_lazy
-from django.views.generic import RedirectView
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _, LANGUAGE_SESSION_KEY
-
-from cosinnus.conf import settings
-
-from cosinnus.utils.context_processors import cosinnus as cosinnus_context
-from cosinnus.utils.context_processors import settings as cosinnus_context_settings
-from cosinnus.utils.urls import safe_redirect
-from django.http.response import  HttpResponseNotFound,\
-    HttpResponseForbidden, HttpResponseServerError, HttpResponseNotAllowed,\
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ImproperlyConfigured
+from django.http.response import  HttpResponseNotFound, \
+    HttpResponseForbidden, HttpResponseServerError, HttpResponseNotAllowed, \
     HttpResponseBadRequest, JsonResponse
 from django.template.loader import render_to_string
-from django.contrib.contenttypes.models import ContentType
-from cosinnus.models.tagged import LikeObject
-from annoying.functions import get_object_or_None
+from django.urls import reverse_lazy
+from django.utils.translation import ugettext_lazy as _, LANGUAGE_SESSION_KEY
 from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth.views import LoginView, LogoutView
-from cosinnus.views.mixins.group import RequireCreateObjectsInMixin
+from django.views.generic import RedirectView
 from django.views.generic.base import View
-from django.core.exceptions import ImproperlyConfigured
-from django.shortcuts import get_object_or_404
-from cosinnus.utils.permissions import check_object_write_access,\
-    check_object_likefollow_access
+import requests
+
+from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.tagged import LikeObject
+from cosinnus.utils.context_processors import cosinnus as cosinnus_context
+from cosinnus.utils.context_processors import settings as cosinnus_context_settings
+from cosinnus.utils.permissions import check_object_write_access, \
+    check_object_likefollow_access
+from cosinnus.utils.urls import safe_redirect
+from cosinnus.views.mixins.group import RequireCreateObjectsInMixin
+
 
 class IndexView(RedirectView):
     permanent = False
@@ -273,4 +274,60 @@ class DeleteElementView(RequireCreateObjectsInMixin, View):
     def delete_element(self, element):
         element.delete()
         return True
+    
+    
+def get_metadata_from_url(request):
+    """ Fetches the title and description meta tags from any given url.
+        Returns {
+            'title': str,
+            'description': str,
+            <'error': str> (if an error occured),
+        } """
+        
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden('Not authenticated')
+    
+    url = request.GET.get('url', None)
+    if not url:
+        return HttpResponseBadRequest('Parameter "url" missing!')
+    
+    error = None
+    try:
+        response = requests.get(url)
+    except:
+        error = 'Error fetching URL'
+    
+    title = ''
+    description = ''
+    if not error:
+        soup = BeautifulSoup(response.text)
+        if soup.title:
+            title = soup.title.string
+        else:
+            titletag = soup.find('meta', attrs={'name': 'title'}) 
+            if titletag:
+                title = titletag.attrs.get('content', '')
+            else:
+                titletag = soup.find('meta', attrs={'property': 'og:title'}) 
+                if titletag:
+                    title = titletag.attrs.get('content', '')
+        descriptiontag = soup.find('meta', attrs={'name': 'description'}) 
+        if descriptiontag:
+            description = descriptiontag.attrs.get('content', '')
+        else:
+            descriptiontag = soup.find('meta', attrs={'property': 'og:description'}) 
+            if descriptiontag:
+                description = descriptiontag.attrs.get('content', '')
+    
+    data = {
+        'title': title,
+        'description': description,
+    }
+    if error:
+        data['error'] = error
+    return JsonResponse(data)
+    
+
+
+
         

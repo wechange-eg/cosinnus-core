@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 11:49+0100\n"
+"POT-Creation-Date: 2020-01-14 19:31+0100\n"
 "PO-Revision-Date: 2018-08-30 04:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -400,6 +400,9 @@ msgstr "To nie jest prawidłowe ID widgetu lub kodu HTML z Twittera!"
 
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 msgstr "To nie jest poprawny link z Flickr Gallery! Powinien mieć następującą formę: ”https://www.flickr.com/photos/username/sets/1234567890\"!"
+
+msgid "Users"
+msgstr "Użytkownicy"
 
 # Is it about the user's name or a name of the team? If it's about the name of the team, the translation is correct. If it's about the urer's name (name + surname) it should be translated as " Imię i nazwisko"
 msgid "Name"
@@ -971,9 +974,6 @@ msgstr "Śledzone"
 
 msgid "Create-Project or Group Button"
 msgstr "Przycisk Stwórz Grupę lub Projekt"
-
-msgid "Users"
-msgstr "Użytkownicy"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Events"
@@ -1590,6 +1590,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
 msgstr "helptext_51_objectprivacy"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_4_profile"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_52_profilelastname"
+msgstr "helptext_4_profile"
+
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Wpisz adresy e-mail osób, które chcesz zaprosić do dołączenia do platformy."
 
@@ -1823,17 +1830,24 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Członkowie"
 
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Invite registered users..."
+msgstr "Zaproszenia do Grupy dla Niezarejestrowanych Użytkowników"
+
 msgid "Invite a member"
 msgstr "Zaproś członka"
 
-msgid "Invite user"
+msgid "Enter a user name or email to find users to invite..."
+msgstr ""
+
+#, fuzzy
+#| msgid "Invite user"
+msgid "Invite users"
 msgstr "Zaproś użytkownika"
 
 msgid "Invited Members"
 msgstr "Zaproszeni członkowie"
-
-msgid "Invited to be a member"
-msgstr "Zaproszeni do zostania członkami"
 
 msgid "Revoke Invitation"
 msgstr "Wycofaj Zaproszenie"
@@ -1843,6 +1857,9 @@ msgstr "Odrzuć Zaproszenie"
 
 msgid "Accept Invitation"
 msgstr "Przyjmij Zaproszenie"
+
+msgid "Invited to be a member"
+msgstr "Zaproszeni do zostania członkami"
 
 #, python-format
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
@@ -1857,17 +1874,53 @@ msgstr "Czy na pewno chcesz odrzucić to zaproszenie?"
 msgid "There are no pending invitations."
 msgstr "Nie ma oczekujących zaproszeń."
 
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Invite unregistered users..."
+msgstr "Zaproszenia do Grupy dla Niezarejestrowanych Użytkowników"
+
+msgid "Invite People to Register and Join"
+msgstr "Zaproś Osoby do Rejestracji i Dołączenia"
+
+msgid "Invite people"
+msgstr "Zaproś osoby"
+
+msgid "The email was added to the invite list. Click \"Invite people\" to resend the invitations!"
+msgstr ""
+
+msgid "All currently invited people"
+msgstr "Wszyscy zaproszeni"
+
+msgid "People currently invited by you"
+msgstr "Osoby zaproszone przez Ciebie"
+
+msgid "Delete invitation"
+msgstr "Usuń zaproszenie"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Resend invitation"
+msgstr "Usuń zaproszenie"
+
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr "przez"
+
+#, python-format
+msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgstr "Czy na pewno chcesz usunąć zaproszenie dla \"%(title)s”?"
+
 msgid "Membership requests"
 msgstr "Prośby o zostanie członkiem"
-
-msgid "Membership requested"
-msgstr "Prośba o zostanie członkiem"
 
 msgid "Decline User"
 msgstr "Odrzuć Użytkownika"
 
 msgid "Accept User"
 msgstr "Zaakceptuj Użytkownika"
+
+msgid "Membership requested"
+msgstr "Prośba o zostanie członkiem"
 
 #, python-format
 msgid "Do you really want to accept user „%(name)s“ as a member?"
@@ -1886,28 +1939,10 @@ msgstr "Odrzuć Członka"
 msgid "There are no new membership requests."
 msgstr "Nie ma nowych próśb o członkostwo."
 
-msgid "Invite People to Register and Join"
-msgstr "Zaproś Osoby do Rejestracji i Dołączenia"
-
-msgid "Invite people"
-msgstr "Zaproś osoby"
-
-msgid "All currently invited people"
-msgstr "Wszyscy zaproszeni"
-
-msgid "People currently invited by you"
-msgstr "Osoby zaproszone przez Ciebie"
-
-msgid "Delete invitation"
-msgstr "Usuń zaproszenie"
-
-msgctxt "an action done *by* <username>"
-msgid "by"
-msgstr "przez"
-
-#, python-format
-msgid "Do you really want to delete the invitation for \"%(title)s\"?"
-msgstr "Czy na pewno chcesz usunąć zaproszenie dla \"%(title)s”?"
+#, fuzzy
+#| msgid "Invited Members"
+msgid "Current Members"
+msgstr "Zaproszeni członkowie"
 
 msgid "Message all members"
 msgstr "Wyślij wiadomość do wszystkich członków"

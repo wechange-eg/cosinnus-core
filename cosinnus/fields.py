@@ -1,5 +1,4 @@
 from django_select2 import (HeavyModelSelect2MultipleChoiceField)
-from cosinnus_message.views import UserSelect2View
 from django.core.exceptions import ValidationError
 from cosinnus.conf import settings
 from django.http.response import Http404
@@ -7,6 +6,7 @@ from cosinnus.models.group import CosinnusGroup
 from django_select2.util import JSFunction
 from django.contrib.auth import get_user_model
 from cosinnus.utils.user import filter_active_users
+from cosinnus.views.user import UserSelect2View
 
 User = get_user_model()
 
@@ -48,7 +48,7 @@ class UserSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
     def clean(self, value):
         """ We organize the ids gotten back from the recipient select2 field.
             This is a list of mixed ids which could either be groups or users.
-            See cosinnus_messages.views.UserSelect2View for how these ids are built.
+            See cosinnus.views.user.UserSelect2View for how these ids are built.
             
             Example for <value>: [u'user:1', u'group:4'] 
         """

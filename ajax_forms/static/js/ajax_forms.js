@@ -21,7 +21,11 @@ window.AjaxForms = {
     		window.AjaxForms.handleData(data);
 		}).catch(function(responseJSON){
 			if (responseJSON && 'form_errors' in responseJSON) {
-				alert('Please fill out all required fields!')
+			    if ($form.attr('data-ajax-form-error-message')) {
+                    alert($form.attr('data-ajax-form-error-message'));			        
+			    } else {
+    				alert('Please fill out all required fields!');
+			    }
 			} else {
 				alert('An error occured while posting the comment. Please reload the page and try again!');
 			}
@@ -35,19 +39,19 @@ window.AjaxForms = {
 	submitForm: function ($form, data) {
 		return new Promise(function(resolve, reject) {
 			$.ajax({
-			  url: $form.attr("action"),
-			  type: 'POST',
-			  data: data, 
-			  success: function (response, textStatus, xhr) {
-	              if (xhr.status == 200) {
-	              	resolve(response);
-	              } else {
-	              	reject(xhr.statusText);
-	              }
-	          },
-	          error: function (xhr, textStatus) {
-	          	  reject(xhr.responseJSON);
-	          },
+			    url: $form.attr("action"),
+			    type: 'POST',
+			    data: data, 
+			    success: function (response, textStatus, xhr) {
+	                if (xhr.status == 200) {
+                        resolve(response);
+                    } else {
+                        reject(xhr.statusText);
+                    }
+	            },
+	            error: function (xhr, textStatus) {
+	          	    reject(xhr.responseJSON);
+	            },
 			});
 		});
 	},

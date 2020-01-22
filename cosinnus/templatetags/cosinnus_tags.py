@@ -380,7 +380,7 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
                 membership_request_item = DashboardItem()
                 membership_request_item['icon'] = 'fa-sitemap' if admined_group.type == CosinnusGroup.TYPE_SOCIETY else 'fa-group'
                 membership_request_item['text'] = escape('%s (%d)' % (admined_group.name, len(pending_ids)))
-                membership_request_item['url'] = group_aware_reverse('cosinnus:group-detail', kwargs={'group': admined_group}) + '#requests'
+                membership_request_item['url'] = group_aware_reverse('cosinnus:group-detail', kwargs={'group': admined_group}) + '?requests=1#requests'
                 membership_requests.append(membership_request_item)
                 membership_requests_count += len(pending_ids)
         context['group_requests_json_encoded'] = _escape_quotes(_json.dumps(membership_requests))
@@ -865,7 +865,7 @@ def textfield(text, arg=''):
     for m in reversed([it for it in BETTER_URL_RE.finditer(text)]):
         if (m.start() == 0 or text[m.start()-2:m.start()] != '](') and (m.start() == 0 or text[m.start()-1] != '@') and (m.end() == len(text) or text[m.end():m.end()+2] != ']('):
             short = (m.group()[:47] + '...') if len(m.group()) > 50 else m.group()
-            text = text[:m.start()] + ('[%s](%s%s)' % (short, 'http://' if not short.startswith('http') else '', m.group())) + text[m.end():] 
+            text = text[:m.start()] + ('[%s](%s%s)' % (short, 'https://' if not short.startswith('http') else '', m.group())) + text[m.end():] 
     
     
     text = escape(text.strip())
