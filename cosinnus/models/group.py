@@ -741,6 +741,9 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     facebook_page_id = models.CharField(_('Facebook Page ID'), max_length=200, 
         blank=True, null=True, validators=[MaxLengthValidator(200)])
     
+    nextcloud_group_id = models.CharField(_('Nextcloud Group ID'), max_length=250,
+        unique=True, blank=True, null=True, validators=[MaxLengthValidator(250)])
+    
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
     related_groups = models.ManyToManyField("self", 
