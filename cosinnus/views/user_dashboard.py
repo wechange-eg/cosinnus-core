@@ -262,8 +262,8 @@ class ModelRetrievalMixin(object):
 class BasePagedOffsetWidgetView(BaseUserDashboardWidgetView):
     """ Shows BaseTaggable content for the user """
     
-    # needs to be set in implementing widget view!
-    # the model field on which to cut off the timed offset from
+    model = None # can be None, needs to be set in implementing widget view!
+    # the model field on which to cut off the timed offset from, needs to be set in implementing widget view!
     offset_model_field = None 
     
     default_page_size = 3
@@ -297,7 +297,6 @@ class BasePagedOffsetWidgetView(BaseUserDashboardWidgetView):
         return ImproperlyConfigured('Implement this function in your extending widget view!')
     
     def get_data(self, **kwargs):
-        
         queryset = self.get_queryset()
         
         # cut off at timestamp if given
@@ -319,7 +318,7 @@ class BasePagedOffsetWidgetView(BaseUserDashboardWidgetView):
             
         return {
             'items': items,
-            'widget_title': self.model._meta.verbose_name_plural,
+            'widget_title': self.model._meta.verbose_name_plural if self.model else None,
             'has_more': has_more,
             'offset_timestamp': last_offset_timestamp,
         }
