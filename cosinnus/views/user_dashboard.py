@@ -264,7 +264,7 @@ class BasePagedOffsetWidgetView(BaseUserDashboardWidgetView):
     
     model = None # can be None, needs to be set in implementing widget view!
     # the model field on which to cut off the timed offset from, needs to be set in implementing widget view!
-    offset_model_field = None 
+    offset_model_field = None
     
     default_page_size = 3
     min_page_size = 1
@@ -286,7 +286,12 @@ class BasePagedOffsetWidgetView(BaseUserDashboardWidgetView):
         if self.offset_timestamp is not None and isinstance(self.offset_timestamp, six.string_types):
             self.offset_timestamp = float(self.offset_timestamp)
         
+        self.set_options()
         return super(BasePagedOffsetWidgetView, self).get(request, *args, **kwargs)
+    
+    def set_options(self):
+        """ Optional additional function to set some options for overriding views """
+        pass 
     
     def get_queryset(self):
         """ Returns a queryset of sorted data """

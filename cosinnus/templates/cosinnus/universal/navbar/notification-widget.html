@@ -1,0 +1,63 @@
+{% import "include/macros.html" as macros %}
+
+<div class="nav-column nav-column-fullwidth">
+    
+	{% if hadErrors %}
+	    <ul class="item-list">
+	        <li>
+	            <span class="list-item list-item-link list-item-center no-select" href="#" role="button" titledby=".item-text"> 
+	                <div class="item-text">
+	                    {# Translators: __INCLUDE_JS_PO__ #}
+	                    {% trans "There was an error loading the widget" %}
+	                </div>
+	            </span>
+	        </li>
+	    </ul>
+	{% else %}
+        <h2 class="headline headline-condensed">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Notifications" %}
+        </h2>
+        
+        <ul class="item-list item-list-divided">
+            {% if items|length > 0 %}
+            <!--
+                    { macros.notificationItem(item.text, item.url, item.item_icon_or_image_url, item.subtext, is_emphasized=item.is_emphasized) }
+                    -->
+                {% for item in items %}
+                    {{ macros.notificationItem(item.text, item.url, item.user_icon_or_image_url, 
+                    subtext=item.group,
+                    subtextIcon=item.group_icon, 
+                    actionTime=item.action_datetime,
+                    annotationIcon=item.item_icon_or_image_url, 
+                    is_emphasized=item.is_emphasized, 
+                    makeSafe=true) }}
+                {% endfor %}
+                {% if loadMoreEnabled and hasMore %}
+                    <li>
+                        <a class="list-item list-item-link show-more" role="button" titledby=".item-text"> 
+                            <div class="item-icon item-icon-offset">
+                                <i class="fas fa-fw"></i>
+                            </div>
+                            <div class="item-text">
+                                {# Translators: __INCLUDE_JS_PO__ #}
+                                {% trans "Show more" %}
+                            </div>
+                        </a>
+                    </li>
+                {% endif %}
+            {% else %}
+                <li>
+                    <span class="list-item list-item-link no-select" href="#" role="button" titledby=".item-text"> 
+                        <div class="item-text">
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "No current notifications" %}
+                        </div>
+                    </span>
+                </li>
+            {% endif %}
+        </ul>
+        
+	{% endif %}
+	
+</div>

@@ -8,7 +8,6 @@ from django.template.defaultfilters import date as django_date_filter
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.models.tagged import BaseTaggableObjectModel
-from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_slugs
 
@@ -34,6 +33,7 @@ class DashboardItem(dict):
     
     def __init__(self, obj=None, is_emphasized=False, user=None):
         if obj:
+            from cosinnus.templatetags.cosinnus_tags import full_name
             if is_emphasized:
                 self['is_emphasized'] = is_emphasized
             # smart conversion by known models

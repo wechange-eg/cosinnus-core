@@ -108,6 +108,12 @@
 		font-size: 14px;
 		line-height: 35px;
 		
+		&.item-list-divided {
+		    li + li {
+    		    border-top: 1px solid @medium-border-color;
+		    }
+		}
+		
 		hr {
 			border-top: 1px solid @pale-border-color;
 			margin: 10px 20px;
@@ -131,6 +137,10 @@
 			.item-icon.item-icon-offset i.fas {
 				vertical-align: middle;
 			}
+			.item-icon.item-icon-vertical-center {
+			    margin-top: auto;
+			    margin-bottom: auto;
+			}
 			.item-text {
 				overflow: hidden;
 				text-overflow: ellipsis;
@@ -139,11 +149,43 @@
 				&.item-text-dual {
 					line-height: 18px;
 					padding: 4px 0;
-					div {
-						display: inline-block;
-					}
 				}
 			}
+			&.list-item-extended {
+			    padding-top: 5px;
+                padding-bottom: 5px;
+			    .item-text-primary {
+    			    white-space: normal;
+    			}
+    			.item-icon {
+        			i.fa, i.fas {
+        			    font-size: 20px;
+        			}
+        			img {
+        			     width: 44px;
+        			}
+    			}
+			}
+			&.list-item-emphasized {
+			    background-color: @color-light-medium-gray;
+			}
+			.item-text-secondary, .item-text-tertiary {
+			    margin: 2px 0;
+			    overflow: hidden;
+                text-overflow: ellipsis;
+                i.fa, i.fas {
+                    font-size: 10px;
+                }
+			}
+			.item-text-tertiary {
+                &, i.fa, i.fas {
+                    color: @text-color-pale;
+                    margin-right: 2px;
+                }
+            }
+            .item-text-inline-spacer {
+                padding-right: 14px;
+            }
 			.right-side-annotation {
 				margin-right: 15px;
 				max-width: 40%;

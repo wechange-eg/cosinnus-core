@@ -76,6 +76,13 @@
 		    		data-toggle="collapse" data-target="#create-menu-collapse"> 
     		<i class="fas fa-fw fa-plus"></i>
 		</a>
+		
+		<a class="nav-button" rel="toggle" role="button" title="{% trans "Notifications" %}" 
+                    aria-expanded="false" aria-controls="notification-widget-collapse"
+                    data-toggle="collapse" data-target="#notification-widget-collapse"> 
+            <i class="fas fa-fw fa-bell"></i>
+        </a>
+		
 		{% block home_icon_button %}
 		<a class="nav-button" href="/cms/?noredir=1" role="button" title="{% trans "Home" %}"> 
     		<i class="fas fa-fw fa-home"></i>
@@ -208,8 +215,19 @@
 		<div class="nav-flyout-backdrop"></div>
 	</div>
 	
-	
-	
+	<div class="collapse nav-flyout nav-flyout-half-side nav-flyout-right notification-widget" id="notification-widget-collapse">
+        <div class="nav-flyout-section flex-row mobile-flex-column" id="nav-notification-items">
+            {% comment %} This is the backbone App 'module-navbar-quicksearch! {% endcomment %}
+        </div>
+        <div class="nav-flyout-backdrop"></div>
+    </div>
+	<script>
+        $('html').on('init:client', function () {
+            Backbone.mediator.publish('init:module-navbar-notification-widget', {
+                el: '#nav-notification-items',
+            });
+        });
+    </script>
 	
 	
 	<div class="collapse nav-flyout text-right" id="language-menu-collapse">
