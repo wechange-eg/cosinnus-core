@@ -10,6 +10,9 @@ module.exports = DelegatedWidgetView.extend({
     
     fetchURL: '/profile/api/alerts/get/', // overridden for subview
     
+    // the notification-show button in the navbar
+    $notificationButtonEl: null,
+    
     // will be set to self.options during initialization
     defaults: {
     	
@@ -18,7 +21,7 @@ module.exports = DelegatedWidgetView.extend({
         
         state: {
             newestTimestamp: null,
-            seenCount: 0,
+            unseenCount: 0,
         }
     },
     
@@ -32,6 +35,10 @@ module.exports = DelegatedWidgetView.extend({
         self.app = app;
         DelegatedWidgetView.prototype.initialize.call(self, options);
         self.options.type = options.type; // would have happened in initialize already but let's be explicit
+        
+        self.$notificationButtonEl = $('#navbar-notifications-button');
+        // events that have to be defined here because they happen in the notification button:
+        self.$notificationButtonEl.on('click', self.thisContext(self.onNotificationButtonClicked));
     },
     
     /** Overriding base function for unique widget ID. */
@@ -76,7 +83,7 @@ module.exports = DelegatedWidgetView.extend({
         if (data['newest_timestamp'] !== "undefined") {
             self.state.newestTimestamp = data['newest_timestamp'];
         }
-        if (data['unseen_count'] !== "undefined") {
+        if (data['unseen_count'] !== "undefined" && data['unseen_count'] >= 0) {
             self.state.unseenCount = data['unseen_count'];
         }
     },
@@ -86,8 +93,17 @@ module.exports = DelegatedWidgetView.extend({
         DelegatedWidgetView.prototype.render.call(self);
         
         util.log('# ## Rendered notification widget ' + self.widgetId);
-    	
         return self;
+    },
+    
+    afterRender: function () {
+        var self = this;
+        // update out-of-frame elements
+        if (self.state.unseenCount && self.state.unseenCount > 0) {
+            self.$notificationButtonEl.find('.message-counter').text(self.state.unseenCount).show();
+        } else {
+            self.$notificationButtonEl.find('.message-counter').hide();
+        }  
     },
     
     /** Extend the template data by the controlView's options and state */
@@ -97,7 +113,41 @@ module.exports = DelegatedWidgetView.extend({
         return data;
     },
     
+    /** Fired when the navbar notification button is clicked */
+    onNotificationButtonClicked: function (event) {
+        var self = this;
+        if (this.$notificationButtonEl.hasClass('collapsed')) {
+            // fired only when the menu is opened
+            if (self.state.newestTimestamp) {
+                self.markSeen();
+            }
+        } 
+    },
     
-    
+    /** Posts to the server, sets all alerts older than the newest displayed as seen on the server */
+    markSeen: function() {
+        var self = this;
+        var url = '/profile/api/alerts/markseen/' + self.state.newestTimestamp + '/';
+        $.ajax(url, {
+            type: 'POST',
+            timeout: 15000,
+            success: function (response, textStatus, xhr) {
+                self.markSeenLocal();
+                util.log('Successfully marked as seen!');
+            },
+            error: function (xhr, textStatus) {
+                // marking seen even if it wasn't persisted (even more annoying if not)
+                self.markSeenLocal(); 
+                util.log('Error during marking as seen!');
+            }
+        });
+    },
+
+    /** Removes the notification button unseen number badge, in local frontend only. */    
+    markSeenLocal: function() {
+        var self = this;  
+        self.state.unseenCount = 0;
+        self.afterRender();
+    },
 
 });

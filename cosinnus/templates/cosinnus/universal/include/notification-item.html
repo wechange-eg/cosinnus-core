@@ -59,7 +59,7 @@
         <div class="sub-item-container collapse" id="notification-collapse-{{ itemId }}">
             <ul class="item-list item-list-divided">
                 {% for subItem in subItems %}
-                    {{ macros.listItem(subItem.title, subItem.url, subItem.icon_or_image_url) }}
+                    {{ macros.listItem(subItem.title, subItem.url, subItem.icon_or_image_url, padded=true) }}
                 {% endfor %}
             </ul>
         </div>

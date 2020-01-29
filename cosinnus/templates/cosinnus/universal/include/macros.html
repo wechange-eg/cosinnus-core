@@ -154,9 +154,9 @@
 {% endmacro %}
 
 
-{% macro listItem(text, url, icon, subtext=null, annotation=null, annotationIcon=null, includeUnderdrop=false, is_emphasized=false, inactive=false, makeSafe=true) %}
+{% macro listItem(text, url, icon, subtext=null, annotation=null, annotationIcon=null, includeUnderdrop=false, is_emphasized=false, inactive=false, padded=false, makeSafe=true) %}
     <li>
-		<a class="list-item {% if inactive %}inactive no-select{% endif %}" href="{{ url }}" role="button" titledby="{% if subtext %}.item-text-primary{% else %}.item-text{% endif %}"> 
+		<a class="list-item {% if padded %}list-item-padded {% endif %}{% if inactive %}inactive no-select {% endif %}" href="{{ url }}" role="button" titledby="{% if subtext %}.item-text-primary{% else %}.item-text{% endif %}"> 
 			<div class="item-icon {% if subtext %}item-icon-offset{% endif %}">
     			{% if icon and '/' in icon %}
                     <img src="{{ icon }}"></img>

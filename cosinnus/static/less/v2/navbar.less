@@ -134,6 +134,31 @@
 		}
 	}
 	
+	.nav-collapse-button {
+	    &:not(.collapsed) {
+	        i.fas {
+	            color: @text-highlight-color;
+	        }
+	    }
+	}
+	.nav-button-with-message-counter {
+	    position: relative;
+	}
+	.message-counter {
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: @color-primary;
+        color: @background-color;
+        border-radius: 12px;
+        height: 15px;
+        width: 15px;
+        line-height: 15px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 10px;
+    }
 	.nav-button.burger-menu {
 		padding-top: 15px;
     	padding-bottom: 15px;
@@ -149,24 +174,14 @@
 			position: relative;
 		}
 		.message-counter {
-		    position: absolute;
-		    left: 0px;
-		    top: 6px;
-		    background-color: @color-primary;
-		    color: @background-color;
-		    border-radius: 12px;
-		    height: 15px;
-		    width: 15px;
-		    display: block;
-		    line-height: 15px;
-		    text-align: center;
-		    font-weight: bold;
-		    font-size: 10px;
-		}
+            top: 6px;
+        }
 	}
 	.brand-links {
 		display: inline;
 	}
+	
+    
 	
 	.nav-button {
 		cursor: pointer;

@@ -583,6 +583,8 @@
         					&& $item.hasClass('in') && '#'+item.id != $target.parents('a').attr('data-target')
         					&& '#'+item.id != $target.attr('data-target')) {
         				$item.collapse('hide');
+        				// re-add collapsed class on button
+        				$('a[data-target="#' + item.id + '"]').addClass('collapsed');
         			}
         		});
         	});
