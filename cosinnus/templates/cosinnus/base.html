@@ -38,6 +38,7 @@
 	        <link href="{% static 'css/vendor/select2.css' %}" rel="stylesheet">
 	        <link href="{% static 'css/vendor/fullcalendar.css' %}" rel="stylesheet">
 	        <link href="{% static 'css/vendor/lightbox.css' %}" rel="stylesheet">
+            <link href="{% static 'css/vendor/simplebar.css' %}" rel="stylesheet">
 	        {% if SETTINGS.DEBUG %}
 			<link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
 			<script src="{% static "js/vendor/less.min.js" %}"></script>
@@ -60,7 +61,8 @@
 	        <script src="{% static 'js/vendor/jquery.sortElements.js' %}"></script>
 	        <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
 	        <script src="{% static 'js/vendor/jquery.ui.widget.js' %}"></script>
-	        <script src="{% static 'js/vendor/jquery.fileupload.js' %}"></script>
+            <script src="{% static 'js/vendor/jquery.fileupload.js' %}"></script>
+            <script src="{% static 'js/vendor/simplebar.min.js' %}"></script>
 	        {% comment %}  Load this for sortable dashboard widgets {% endcomment %}
 	        {% if SETTINGS.COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE %}
 	        <script src="{% static 'js/vendor/html.sortable.min.js' %}"></script>

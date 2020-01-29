@@ -134,13 +134,21 @@
 				z-index: 3;
 				margin: 0 8px;
 			}
-			.item-icon.item-icon-offset i.fas {
-				vertical-align: middle;
-			}
-			.item-icon.item-icon-vertical-center {
-			    margin-top: auto;
-			    margin-bottom: auto;
-			}
+			.item-icon {
+                img {
+                     width: 20px;
+                }
+    			&.item-icon-offset i.fas {
+    				vertical-align: middle;
+    			}
+    			&.item-icon-vertical-center {
+    			    margin-top: auto;
+    			    margin-bottom: auto;
+    			    i.fas {
+                        vertical-align: middle;
+                    }
+    			}
+            }
 			.item-text {
 				overflow: hidden;
 				text-overflow: ellipsis;
@@ -158,11 +166,11 @@
     			    white-space: normal;
     			}
     			.item-icon {
+    			    img {
+                         width: 44px;
+                    }
         			i.fa, i.fas {
-        			    font-size: 20px;
-        			}
-        			img {
-        			     width: 44px;
+        			    font-size: 24px;
         			}
     			}
 			}
@@ -179,8 +187,12 @@
 			}
 			.item-text-tertiary {
                 &, i.fa, i.fas {
-                    color: @text-color-pale;
                     margin-right: 2px;
+                }
+            }
+            &:not(:hover) .item-text-tertiary {
+                &, i.fa, i.fas {
+                    color: @text-color-pale;
                 }
             }
             .item-text-inline-spacer {
@@ -223,6 +235,35 @@
 			&.inactive {
 				color: @text-color-pale;
 			}
+		}
+		.list-item-group {
+		    .main-item {
+    		    display: flex;
+    		    flex-direction: row;
+		    }
+		    .sub-item-container {
+		        &.in {
+                    border-top: 1px solid @medium-border-color;
+		        }
+		    }
+		    
+		    .list-item {
+		        padding-right: 0;
+		    }
+		    .list-item-group-dropdown-link {
+	            display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 0 8px;
+                border-left: 1px solid @color-light-medium-gray;
+                
+                &.collapsed .show-uncollapsed {
+                    display: none;
+                }
+                &:not(.collapsed) .show-collapsed {
+                    display: none;
+                }
+		    }
 		}
 		a.list-item.list-item-link:not(.inactive) {
 			&:hover, :active {

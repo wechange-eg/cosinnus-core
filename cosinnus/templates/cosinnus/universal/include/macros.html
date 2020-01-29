@@ -158,7 +158,11 @@
     <li>
 		<a class="list-item {% if inactive %}inactive no-select{% endif %}" href="{{ url }}" role="button" titledby="{% if subtext %}.item-text-primary{% else %}.item-text{% endif %}"> 
 			<div class="item-icon {% if subtext %}item-icon-offset{% endif %}">
-    			<i class="fas fa-fw {{ icon }}"></i>
+    			{% if icon and '/' in icon %}
+                    <img src="{{ icon }}"></img>
+                {% else %}
+                    <i class="fas fa-fw {{ icon }}"></i>
+                {% endif %}
     		</div>
     		{% if subtext %}
 	    		<div class="item-text item-text-dual">
@@ -203,50 +207,3 @@
 	</li>
 {% endmacro %}
 
-
-{% macro notificationItem(text, url, icon, subtext=null, subtextIcon=null, actionTime=null, annotationIcon=null, is_emphasized=false, inactive=false, makeSafe=true) %}
-    <li>
-        <a class="list-item list-item-extended {% if is_emphasized %}list-item-emphasized {% endif %}{% if inactive %}inactive no-select{% endif %}" href="{{ url }}" role="button" titledby=".item-text-primary"> 
-            <div class="item-icon item-icon-offset item-icon-vertical-center">
-                {% if '/' in icon %}
-                    <img src="{{ icon }}"></img>
-                {% else %}
-                    <i class="fas fa-fw {{ icon }}"></i>
-                {% endif %}
-            </div>
-            <div class="item-text item-text-dual">
-                <div class="item-text-primary">
-                    {% if makeSafe %}
-                        {{ text|safe }}
-                    {% else %}
-                        {{ text }} 
-                    {% endif %}
-                </div>
-                {% if subtext or actionTime %}
-                    <div class="item-text-tertiary">
-                        {% if actionTime %}
-	                        <i class="fas fa-fw fa-clock"></i>
-	                        <span class="moment-data-date" data-date="{{ actionTime }}" data-date-style="short"></span>
-	                        <span class="item-text-inline-spacer"></span>
-                        {% endif %}
-                        {% if subtext %}
-	                        {% if subtextIcon %}
-			                    <i class="fas fa-fw {{ subtextIcon }}"></i>
-			                {% endif %}
-	                        {{ subtext }}
-                        {% endif %}
-                    </div>
-                {% endif %}
-            </div>
-            {% if annotationIcon %}
-	            <div class="right-side-annotation item-icon item-icon-vertical-center">
-	                {% if '/' in annotationIcon %}
-	                    <img src="{{ annotationIcon }}"></img>
-	                {% else %}
-	                    <i class="fas fa-fw {{ annotationIcon }}"></i>
-	                {% endif %}
-                </div>
-            {% endif %}
-        </a>
-    </li>
-{% endmacro %}

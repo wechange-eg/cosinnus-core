@@ -1,4 +1,5 @@
 {% import "include/macros.html" as macros %}
+{% import "include/notification-item.html" as notification_macros %}
 
 <div class="nav-column nav-column-fullwidth">
     
@@ -25,12 +26,14 @@
                     { macros.notificationItem(item.text, item.url, item.item_icon_or_image_url, item.subtext, is_emphasized=item.is_emphasized) }
                     -->
                 {% for item in items %}
-                    {{ macros.notificationItem(item.text, item.url, item.user_icon_or_image_url, 
+                    {{ notification_macros.notificationItem(item.text, item.url, item.user_icon_or_image_url, 
                     subtext=item.group,
                     subtextIcon=item.group_icon, 
                     actionTime=item.action_datetime,
                     annotationIcon=item.item_icon_or_image_url, 
                     is_emphasized=item.is_emphasized, 
+                    subItems=item.sub_items,
+                    itemId=item.id,
                     makeSafe=true) }}
                 {% endfor %}
                 {% if loadMoreEnabled and hasMore %}
