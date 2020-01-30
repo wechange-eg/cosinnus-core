@@ -20,7 +20,7 @@
             {% trans "Notifications" %}
         </h2>
         
-        <ul class="item-list item-list-divided">
+        <ul class="item-list item-list-divided bordered">
             {% if items|length > 0 %}
                 {% for item in items %}
                     {{ notification_macros.notificationItem(item.text, item.url, item.user_icon_or_image_url, 

@@ -13,15 +13,26 @@ module.exports = DelegatedWidgetView.extend({
     // the notification-show button in the navbar
     $notificationButtonEl: null,
     
+    // the setTimeout object
+	pollIntervalObj: null,
+	
     // will be set to self.options during initialization
     defaults: {
     	
     	type: null, // the type of the content the widget displays
     	loadMoreEnabled: true, // widget template options
+    	
+    	pollInterval: 60000, // polling interval in ms
+    	
+    	// for resumed connections, after how minutes of *not having polled*,
+    	// will the entire widget be reloaded instead of polling new data 
+    	pollResetMinutes: 60, // reset interval in minutes
         
         state: {
             newestTimestamp: null,
             unseenCount: 0,
+            hasUnrenderedItems: true,
+            lastPollDate: null,
         }
     },
     
@@ -67,20 +78,41 @@ module.exports = DelegatedWidgetView.extend({
         }
     },
     
-    
-    /** Handles data that has been loaded */
+    /** Handles data that has been loaded.
+        We are *not* calling super() here! */
     handleData: function (response) {
         var self = this;
-        DelegatedWidgetView.prototype.handleData.call(self, response);
-        
         var data = response['data'];
-        if (data.polled_timestamp) {
-            // was a poll, prepend new items 
-            Array.prototype.push.apply(data['items'], self.widgetData['items'])
-            self.widgetData['items'] = data['items'];
-        } 
         
-        if (data['newest_timestamp'] !== "undefined") {
+        if (data.polled_timestamp) {
+            // was a poll query. prepend new items before existing items
+            if (data['items'].length > 0) {
+                self.addNewerItems(data['items']);
+                self.state.hasUnrenderedItems = true;                
+            }
+        } else if (self.state.offsetTimestamp) {
+            // was a load-more query. append new items to existing items
+            Array.prototype.push.apply(self.widgetData['items'], data['items']);
+            // always set true, so we re-render always (make the load-more button disappear on 0 new items) 
+            self.state.hasUnrenderedItems = true; 
+        } else {
+            // first data load query, set data and init polling
+            self.widgetData = data;
+            self.state.hasUnrenderedItems = true;
+            self.initPoll();
+        }
+        
+        if (!data.polled_timestamp && self.options.loadMoreEnabled) {
+            if ('has_more' in data) {
+                self.state.hasMore = data['has_more'];
+            }
+            if ('offset_timestamp' in data && data['offset_timestamp']) {
+                self.state.offsetTimestamp = data['offset_timestamp'];
+            }
+        }
+        
+        // if given, set the timestamp of the newest item, from which on we will poll
+        if (data['newest_timestamp'] !== "undefined" && data['newest_timestamp']) {
             self.state.newestTimestamp = data['newest_timestamp'];
         }
         if (data['unseen_count'] !== "undefined" && data['unseen_count'] >= 0) {
@@ -88,11 +120,92 @@ module.exports = DelegatedWidgetView.extend({
         }
     },
     
+    /** Prepends the given items to the existing items, eg. after a poll event.
+        This will remove any existing items with the same id as any of the new items
+        (in this case they were refreshed on the server) */
+    addNewerItems: function (items) {
+        var self = this;
+        var oldItems = self.widgetData['items'];
+        // remove same-id old items
+        for (var i=oldItems.length-1; i >= 0; i--) {
+            var oldItemId = oldItems[i].id;
+            var contained = false;
+            for (var j=0; j < items.length; j++) {
+                if (items[j].id == oldItemId) {
+                    contained = true;
+                    break;
+                }
+            }
+            if (contained) {
+                oldItems.splice(i, 1);
+            }            
+        }
+        Array.prototype.push.apply(items, oldItems)
+        self.widgetData['items'] = items;
+    },
+    
+    /** Initialize polling */
+    initPoll: function () {
+        var self = this;
+        if (self.pollIntervalObj == null) {
+            self.pollIntervalObj = setTimeout(self.thisContext(self.pollFunction), self.options.pollInterval);
+        }
+    },
+    
+    /** Target interval function for each poll */
+    pollFunction: function () {
+        var self = this;
+        var reload = false;
+        // find out if this window has been a long time since last poll,
+        // and if so, reload the widget instead of polling
+        if (self.state.lastPollDate !== null) {
+            var diff = Math.abs(self.state.lastPollDate - new Date());
+            var minutes = Math.floor((diff/1000)/60);
+            reload = minutes >= self.options.pollResetMinutes;
+        }
+        if (reload) {
+            self.reloadWidget();  
+        } else {
+            // retrieve new items. if any, self.handleData() will handle the poll differently
+            self.load({
+                'isPoll': true
+            });
+            self.state.lastPollDate = new Date();
+            // renew poll
+            self.pollIntervalObj = setTimeout(self.thisContext(self.pollFunction), self.options.pollInterval);
+        }
+    },
+    
+    /** Stops polling */
+    stopPoll: function () {
+        var self = this;
+        clearTimeout(self.pollIntervalObj);
+        self.pollIntervalObj = null;
+    },
+    
+    /** Reloads the entire widget anew, with fresh data */
+    reloadWidget: function () {
+        var self = this;
+        util.log('RELOAAAAAAAAAAAAAAADING!')
+        self.stopPoll();
+        self.state.offsetTimestamp = null;  
+        self.state.newestTimestamp = null;
+        self.state.unseenCount = 0;
+        self.state.lastPollDate = null;
+        self.load();
+    },
+    
     render: function () {
         var self = this;
-        DelegatedWidgetView.prototype.render.call(self);
         
-        util.log('# ## Rendered notification widget ' + self.widgetId);
+        // only render items if we have unrendered items (ie. not on a poll with 0 new items)
+        if (self.state.hasUnrenderedItems) {
+            self.state.hasUnrenderedItems = false;
+            DelegatedWidgetView.prototype.render.call(self);
+            util.log('# ## Rendered notification widget ' + self.widgetId);
+        }
+        // piggybacking on this poll, we refresh the moment dates on the entire page!
+        $.cosinnus.renderMomentDataDate();
         return self;
     },
     
@@ -103,7 +216,7 @@ module.exports = DelegatedWidgetView.extend({
             self.$notificationButtonEl.find('.message-counter').text(self.state.unseenCount).show();
         } else {
             self.$notificationButtonEl.find('.message-counter').hide();
-        }  
+        }
     },
     
     /** Extend the template data by the controlView's options and state */

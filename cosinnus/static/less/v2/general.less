@@ -109,7 +109,8 @@
 		line-height: 35px;
 		
 		&.item-list-divided {
-		    li + li {
+		    li + li,
+		    &.bordered > li {
     		    border-top: 1px solid @medium-border-color;
 		    }
 		}

@@ -70,20 +70,12 @@
     	<div class="brand-links mobile-only">
         	{% include 'cosinnus/v2/navbar/brand_links.html' %}
         </div>
-            
+        
 		<a class="nav-button nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Create content" %}" 
 		    		aria-expanded="false" aria-controls="create-menu-collapse"
 		    		data-toggle="collapse" data-target="#create-menu-collapse"> 
     		<i class="fas fa-fw fa-plus"></i>
 		</a>
-		
-		<a class="nav-button nav-button-with-message-counter nav-collapse-button collapsed" id="navbar-notifications-button" rel="toggle" role="button" 
-		            title="{% trans "Notifications" %}" 
-                    aria-expanded="false" aria-controls="notification-widget-collapse"
-                    data-toggle="collapse" data-target="#notification-widget-collapse"> 
-            <i class="fas fa-fw fa-bell"></i>
-            <span class="message-counter" style="display: none;"></span>
-        </a>
 		
 		{% block home_icon_button %}
 		<a class="nav-button" href="/cms/?noredir=1" role="button" title="{% trans "Home" %}"> 
@@ -97,6 +89,13 @@
 			<a class="nav-button" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-global' %}{% else %}{% url 'postman:inbox' %}{% endif %}" role="button" title="{% trans "Nachrichten" %}">
 	    		<i class="fas fa-fw fa-envelope"></i>
 			</a>
+	        <a class="nav-button nav-button-with-message-counter nav-collapse-button collapsed" id="navbar-notifications-button" rel="toggle" role="button" 
+	                    title="{% trans "Notifications" %}" 
+	                    aria-expanded="false" aria-controls="notification-widget-collapse"
+	                    data-toggle="collapse" data-target="#notification-widget-collapse"> 
+	            <i class="fas fa-fw fa-bell"></i>
+	            <span class="message-counter" style="display: none;"></span>
+	        </a>
 			<a class="nav-button user-menu-button nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Menu" %}" 
 			    		aria-expanded="false" aria-controls="user-menu-collapse"
 			    		data-toggle="collapse" data-target="#user-menu-collapse"> 
@@ -217,7 +216,9 @@
 		<div class="nav-flyout-backdrop"></div>
 	</div>
 	
-	<div class="collapse nav-flyout nav-flyout-half-side nav-flyout-right notification-widget" id="notification-widget-collapse" data-simplebar>
+	{% if request.user.is_authenticated %}
+	<div class="collapse nav-flyout nav-flyout-half-side nav-flyout-right nav-flyout-part-height notification-widget" 
+	       id="notification-widget-collapse" data-simplebar>
         <div class="nav-flyout-section flex-row mobile-flex-column" id="nav-notification-items">
             {% comment %} This is the backbone App 'module-navbar-quicksearch! {% endcomment %}
         </div>
@@ -230,7 +231,7 @@
             });
         });
     </script>
-	
+    {% endif %}
 	
 	<div class="collapse nav-flyout text-right" id="language-menu-collapse">
 	

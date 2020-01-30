@@ -335,7 +335,6 @@ var App = function App () {
                 el: el,
             }, self.app);
             self.navbarNotificationWidgetView.load().then(function(){
-                $.cosinnus.renderMomentDataDate();
                 Backbone.mediator.publish('navbar-notification-widget:ready');
                 util.log('# #### loaded notification widget.')
             });
