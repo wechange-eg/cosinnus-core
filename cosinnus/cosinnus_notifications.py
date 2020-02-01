@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import django.dispatch as dispatch
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, ngettext_lazy as n_
 from cosinnus.conf import settings
 
 
@@ -55,6 +55,12 @@ notifications = {
         'signals': [user_group_join_requested],
         'default': True,
         
+        'alert_text': _('%(sender_name)s requested to become a member'),
+        'alert_text_multi': n_('%(sender_name)s and %(count_minus_one)d other requested to become a member',
+                               '%(sender_name)s and %(count_minus_one)d others requested to become a member', 'count_minus_one'),
+        'alert_multi_type': 1,
+        'alert_reason': _('You are an admin of this team'),
+        
         'is_html': True,
         'snippet_type': 'news',
         'event_text': _('New membership request'),
@@ -76,6 +82,9 @@ notifications = {
         'default': True,
         'hidden': True,
         
+        'alert_text': _('Your membership request was accepted'),
+        'alert_reason': '',
+        
         'is_html': True,
         'snippet_type': 'news',
         'event_text': _('Membership request accepted'),
@@ -93,6 +102,9 @@ notifications = {
         'signals': [user_group_join_declined],
         'default': True,
         'hidden': True,
+        
+        'alert_text': _('Your membership request was declined'),
+        'alert_reason': '',
         
         'is_html': True,
         'snippet_type': 'news',
@@ -112,6 +124,12 @@ notifications = {
         'signals': [user_group_invitation_accepted],
         'default': True,
         
+        'alert_text': _('%(sender_name)s accepted the invitation'),
+        'alert_text_multi': n_('%(sender_name)s and %(count_minus_one)d other accepted the invitation',
+                               '%(sender_name)s and %(count_minus_one)d others accepted the invitation', 'count_minus_one'),
+        'alert_multi_type': 1,
+        'alert_reason': _('You are an admin of this team'),
+        
         'is_html': True,
         'snippet_type': 'news',
         'event_text': _('%(sender_name)s accepted the invitation'),
@@ -130,6 +148,12 @@ notifications = {
         'signals': [user_group_invitation_declined],
         'default': True,
         
+        'alert_text': _('%(sender_name)s declined the invitation'),
+        'alert_text_multi': n_('%(sender_name)s and %(count_minus_one)d other declined the invitation',
+                               '%(sender_name)s and %(count_minus_one)d others declined the invitation', 'count_minus_one'),
+        'alert_multi_type': 1,
+        'alert_reason': _('You are an admin of this team'),
+        
         'is_html': True,
         'snippet_type': 'news',
         'event_text': _('%(sender_name)s declined the invitation'),
@@ -147,6 +171,9 @@ notifications = {
         'subject_template': '<html-only>',
         'signals': [user_group_made_admin],
         'default': True,
+        
+        'alert_text': _('%(sender_name)s made you an admin'),
+        'alert_reason': '',
         
         'is_html': True,
         'snippet_type': 'news',
@@ -167,6 +194,9 @@ notifications = {
         'signals': [user_group_admin_demoted],
         'default': True,
         
+        'alert_text': _('%(sender_name)s revoked your admin status'),
+        'alert_reason': '',
+        
         'is_html': True,
         'snippet_type': 'news',
         'event_text': _('Revoked your admin status'),
@@ -186,6 +216,10 @@ notifications = {
         'signals': [user_tagged_in_object],
         'default': True,
         
+        'alert_text': _('%(sender_name)s tagged you in %(object_name)s'),
+        'alert_text_multi': _('%(sender_name)s tagged you in %(count)d items'),
+        'alert_multi_type': 2,
+        
         'is_html': True,
         'snippet_type': 'event',
         'event_text': _('%(sender_name)s tagged you in'),
@@ -203,6 +237,9 @@ notifications = {
         'signals': [user_group_invited],
         'default': True,
         'hidden': True,
+        
+        'alert_text': _('%(sender_name)s invited you to join %(team_name)s'),
+        'alert_reason': '',
         
         'is_html': True,
         'snippet_type': 'news',
@@ -227,6 +264,7 @@ notifications = {
         'signals': [user_group_recruited],
         'default': True,
         'hidden': True,
+        'can_be_alert': False,
         
         'is_html': True,
         'snippet_type': 'news',
@@ -251,6 +289,7 @@ notifications = {
         'signals': [group_moved_to_portal],
         'default': True,
         'hidden': True,
+        'can_be_alert': False,
         
         'is_html': True,
         'snippet_type': 'news',
