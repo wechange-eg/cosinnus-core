@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import django.dispatch as dispatch
-from django.utils.translation import ugettext_lazy as _, ngettext_lazy as n_
+from django.utils.translation import ugettext_lazy as _, ngettext_lazy
 from cosinnus.conf import settings
 
 
@@ -56,7 +56,7 @@ notifications = {
         'default': True,
         
         'alert_text': _('%(sender_name)s requested to become a member'),
-        'alert_text_multi': n_('%(sender_name)s and %(count_minus_one)d other requested to become a member',
+        'alert_text_multi': ngettext_lazy('%(sender_name)s and %(count_minus_one)d other requested to become a member',
                                '%(sender_name)s and %(count_minus_one)d others requested to become a member', 'count_minus_one'),
         'alert_multi_type': 1,
         'alert_reason': _('You are an admin of this team'),
@@ -125,7 +125,7 @@ notifications = {
         'default': True,
         
         'alert_text': _('%(sender_name)s accepted the invitation'),
-        'alert_text_multi': n_('%(sender_name)s and %(count_minus_one)d other accepted the invitation',
+        'alert_text_multi': ngettext_lazy('%(sender_name)s and %(count_minus_one)d other accepted the invitation',
                                '%(sender_name)s and %(count_minus_one)d others accepted the invitation', 'count_minus_one'),
         'alert_multi_type': 1,
         'alert_reason': _('You are an admin of this team'),
@@ -149,7 +149,7 @@ notifications = {
         'default': True,
         
         'alert_text': _('%(sender_name)s declined the invitation'),
-        'alert_text_multi': n_('%(sender_name)s and %(count_minus_one)d other declined the invitation',
+        'alert_text_multi': ngettext_lazy('%(sender_name)s and %(count_minus_one)d other declined the invitation',
                                '%(sender_name)s and %(count_minus_one)d others declined the invitation', 'count_minus_one'),
         'alert_multi_type': 1,
         'alert_reason': _('You are an admin of this team'),

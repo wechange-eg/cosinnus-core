@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-14 19:31+0100\n"
+"POT-Creation-Date: 2020-02-02 16:09+0100\n"
 "PO-Revision-Date: 2019-12-16 17:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -171,6 +171,19 @@ msgstr ""
 msgid "A user requested to become a member of this team (admins only)"
 msgstr ""
 
+#, python-format
+msgid "%(sender_name)s requested to become a member"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other requested to become a member"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others requested to become a member"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "You are an admin of this team"
+msgstr ""
+
 msgid "New membership request"
 msgstr ""
 
@@ -178,11 +191,17 @@ msgstr ""
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr ""
 
+msgid "Your membership request was accepted"
+msgstr ""
+
 msgid "Membership request accepted"
 msgstr ""
 
 #, python-format
 msgid "Your membership request for %(team_name)s was accepted!"
+msgstr ""
+
+msgid "Your membership request was declined"
 msgstr ""
 
 msgid "Membership request declined"
@@ -204,6 +223,12 @@ msgid "%(sender_name)s accepted the invitation"
 msgstr ""
 
 #, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other accepted the invitation"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others accepted the invitation"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
 msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
 msgstr ""
 
@@ -215,10 +240,20 @@ msgid "%(sender_name)s declined the invitation"
 msgstr ""
 
 #, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other declined the invitation"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others declined the invitation"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgstr ""
 
 msgid "You were made an admin of this team"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s made you an admin"
 msgstr ""
 
 msgid "Made you an admin"
@@ -229,6 +264,10 @@ msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s
 msgstr ""
 
 msgid "Your admin status for this team was revoked"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s revoked your admin status"
 msgstr ""
 
 msgid "Revoked your admin status"
@@ -242,6 +281,14 @@ msgid "You were tagged in a post, document or other item"
 msgstr ""
 
 #, python-format
+msgid "%(sender_name)s tagged you in %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s tagged you in %(count)d items"
+msgstr ""
+
+#, python-format
 msgid "%(sender_name)s tagged you in"
 msgstr ""
 
@@ -252,6 +299,13 @@ msgstr ""
 #, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%(sender_name)s invited you to join %(team_name)s"
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
 
 msgid "Invited you"
 msgstr ""
@@ -1729,11 +1783,9 @@ msgstr "Group:"
 msgid "No Description set"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications whenever public content is posted in this project."
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr ""
 
@@ -2381,6 +2433,14 @@ msgstr ""
 #| msgid "Convert selected Projects to Groups"
 msgid "Related Projects/Groups"
 msgstr "Convert selected Projects to Groups"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications for content posted in this project."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications for content posted in this group."
+msgstr ""
 
 msgid "Share"
 msgstr ""
@@ -3519,6 +3579,28 @@ msgid "Go to Calendar"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "There are no groups."
+msgid "There was an error loading the widget"
+msgstr "There are no groups."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Cosinnus groups"
+msgid "Notifications"
+msgstr "Groups"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Other Projects"
+msgid "Show more"
+msgstr "Other Projects"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No current notifications"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Network"
 msgstr ""
 
@@ -3697,18 +3779,6 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move down"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "There are no groups."
-msgid "There was an error loading the widget"
-msgstr "There are no groups."
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Other Projects"
-msgid "Show more"
-msgstr "Other Projects"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy

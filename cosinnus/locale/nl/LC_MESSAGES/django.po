@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-14 19:31+0100\n"
+"POT-Creation-Date: 2020-02-02 16:09+0100\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -173,6 +173,23 @@ msgstr "U heeft te vaak geprobeerd in te loggen. U kunt proberen opnieuw in te l
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Een gebruiker heeft gevraagd lid te worden van dit team (alleen beheerders)"
 
+#, fuzzy, python-format
+#| msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
+msgid "%(sender_name)s requested to become a member"
+msgstr "“%(sender_name)s” heeft gevraagd om lid te worden van %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other requested to become a member"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others requested to become a member"
+msgstr[0] "“%(sender_name)s” heeft gevraagd om lid te worden van %(team_name)s."
+msgstr[1] "“%(sender_name)s” heeft gevraagd om lid te worden van %(team_name)s."
+
+#, fuzzy
+#| msgid "You were made an admin of this team"
+msgid "You are an admin of this team"
+msgstr "U bent beheerder van dit team geworden"
+
 msgid "New membership request"
 msgstr "Nieuw lidmaatschapsverzoek"
 
@@ -180,12 +197,22 @@ msgstr "Nieuw lidmaatschapsverzoek"
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "“%(sender_name)s” heeft gevraagd om lid te worden van %(team_name)s."
 
+#, fuzzy
+#| msgid "Membership request accepted"
+msgid "Your membership request was accepted"
+msgstr "Lidmaatschapsverzoek geaccepteerd"
+
 msgid "Membership request accepted"
 msgstr "Lidmaatschapsverzoek geaccepteerd"
 
 #, python-format
 msgid "Your membership request for %(team_name)s was accepted!"
 msgstr "Uw lidmaatschapsverzoek voor %(team_name)s is geaccepteerd!"
+
+#, fuzzy
+#| msgid "Membership request declined"
+msgid "Your membership request was declined"
+msgstr "Lidmaatschapsverzoek afgewezen"
 
 msgid "Membership request declined"
 msgstr "Lidmaatschapsverzoek afgewezen"
@@ -205,6 +232,13 @@ msgstr "Een gebruiker heeft de uitnodiging voor dit team geaccepteerd (alleen be
 msgid "%(sender_name)s accepted the invitation"
 msgstr "%(sender_name)s heeft de uitnodiging geaccepteerd"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s accepted the invitation"
+msgid "%(sender_name)s and %(count_minus_one)d other accepted the invitation"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others accepted the invitation"
+msgstr[0] "%(sender_name)s heeft de uitnodiging geaccepteerd"
+msgstr[1] "%(sender_name)s heeft de uitnodiging geaccepteerd"
+
 #, python-format
 msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
 msgstr "“%(sender_name)s” heeft de uitnodiging geaccepteerd voor %(team_name)s."
@@ -216,12 +250,24 @@ msgstr "Een gebruiker heeft de uitnodiging voor dit team afgewezen (alleen behee
 msgid "%(sender_name)s declined the invitation"
 msgstr "%(sender_name)s heeft de uitnodiging afgewezen"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s declined the invitation"
+msgid "%(sender_name)s and %(count_minus_one)d other declined the invitation"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others declined the invitation"
+msgstr[0] "%(sender_name)s heeft de uitnodiging afgewezen"
+msgstr[1] "%(sender_name)s heeft de uitnodiging afgewezen"
+
 #, python-format
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgstr "“%(sender_name)s” heeft de uitnodiging afwezen voor %(team_name)s."
 
 msgid "You were made an admin of this team"
 msgstr "U bent beheerder van dit team geworden"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s made you an admin"
+msgstr "%(sender_name)s heeft u getagt in"
 
 msgid "Made you an admin"
 msgstr "Heeft u een beheerder gemaakt"
@@ -233,6 +279,11 @@ msgstr "%(sender_name)s heeft u een beheerder gemaakt van “%(team_name)s” op
 msgid "Your admin status for this team was revoked"
 msgstr "Uw beheerdersstatus voor dit team is ingetrokken"
 
+#, fuzzy, python-format
+#| msgid "Revoked your admin status"
+msgid "%(sender_name)s revoked your admin status"
+msgstr "Uw beheerdersstatus ingetrokken"
+
 msgid "Revoked your admin status"
 msgstr "Uw beheerdersstatus ingetrokken"
 
@@ -242,6 +293,16 @@ msgstr "%(sender_name)s heeft uw beheerders status van “%(team_name)s” op %(
 
 msgid "You were tagged in a post, document or other item"
 msgstr "U bent getagt in een bericht, document of ander item"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s tagged you in %(object_name)s"
+msgstr "%(sender_name)s heeft u getagt in"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s tagged you in %(count)d items"
+msgstr "%(sender_name)s heeft u getagt in"
 
 #, python-format
 msgid "%(sender_name)s tagged you in"
@@ -254,6 +315,11 @@ msgstr "U bent getagt door %(sender_name)s"
 #, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "U bent getagt in “%(object_name)s” in %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s invited you to join %(team_name)s"
+msgstr "%(sender_name)s heeft u uitgenodigd deel te nemen aan “%(team_name)s” op %(portal_name)s!"
 
 msgid "Invited you"
 msgstr "Heeft u uitgenodigd"
@@ -1677,11 +1743,9 @@ msgstr "Groep:"
 msgid "No Description set"
 msgstr "Geen Beschrijving vastgesteld"
 
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications whenever public content is posted in this project."
 msgstr "U ontvangt nu meldingen wanneer openbare inhoud in dit project wordt geplaatst."
 
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "Je ontvangt nu meldingen wanneer openbare inhoud in deze groep wordt geplaatst."
 
@@ -2297,6 +2361,18 @@ msgstr "Er is nog geen beschrijving vastgesteld voor dit project."
 
 msgid "Related Projects/Groups"
 msgstr "Gerelateerde Projecten/Groepen"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will now receive notifications whenever public content is posted in this project."
+msgid "You will now receive notifications for content posted in this project."
+msgstr "U ontvangt nu meldingen wanneer openbare inhoud in dit project wordt geplaatst."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will now receive notifications whenever public content is posted in this group."
+msgid "You will now receive notifications for content posted in this group."
+msgstr "Je ontvangt nu meldingen wanneer openbare inhoud in deze groep wordt geplaatst."
 
 msgid "Share"
 msgstr "Delen"
@@ -3513,6 +3589,26 @@ msgid "Go to Calendar"
 msgstr "Ga naar kalender"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "There was an error loading the widget"
+msgstr "Er is een fout opgetreden bij het laden van de widget"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Notification ID"
+msgid "Notifications"
+msgstr "Notificatie ID"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show more"
+msgstr "Toon meer"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Notification ID"
+msgid "No current notifications"
+msgstr "Notificatie ID"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Network"
 msgstr "Netwerk"
 
@@ -3675,14 +3771,6 @@ msgstr "Ga omhoog"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move down"
 msgstr "Ga omlaag"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "There was an error loading the widget"
-msgstr "Er is een fout opgetreden bij het laden van de widget"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Show more"
-msgstr "Toon meer"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "There are no items yet"
