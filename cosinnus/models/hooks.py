@@ -9,8 +9,9 @@ from django.contrib.auth import get_user_model
 from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
 
-from cosinnus.models.tagged import ensure_container
+from cosinnus.models.tagged import ensure_container, LikeObject
 from cosinnus.core.registries.group_models import group_model_registry
+from cosinnus.core import signals
 
 import logging
 from django.contrib.auth.signals import user_logged_in, user_logged_out
@@ -21,6 +22,10 @@ from django.db import transaction
 
 from cosinnus.core.middleware.login_ratelimit_middleware import login_ratelimit_triggered
 from django.utils.encoding import force_text
+
+from cosinnus.conf import settings
+from cosinnus.utils.group import get_cosinnus_group_model
+from django.contrib.contenttypes.models import ContentType
 
 logger = logging.getLogger('cosinnus')
 
@@ -105,7 +110,26 @@ def reset_cookie_expiry_for_anonymous_user(sender, user, request, **kwargs):
     """ Default for cookies for anonymous users is browser-session and as set in 
         `COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS` logged in users """
     request.session.set_expiry(0)
-
+    
+    
+if getattr(settings, 'COSINNUS_USER_FOLLOWS_GROUP_WHEN_JOINING', True):
+    @receiver(signals.user_joined_group)
+    def user_follow_joined_group_trigger(sender, user, group, **kwargs):
+        """ Will automatically make a user follow a group after they joined it """
+        group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
+        # create a new followed likeobject
+        likeobj, created = LikeObject.objects.get_or_create(
+            content_type=group_ct, 
+            object_id=group.id, 
+            user=user,
+            defaults={'liked': False, 'followed': True}
+        )
+        # or make the existing likeobject followed
+        if not created:
+            if not likeobj.followed:
+                likeobj.followed = True
+                likeobj.save(update_fields=['followed'])
+        group.clear_likes_cache()
 
 from cosinnus.apis.cleverreach import *
 from cosinnus.models.wagtail_models import * # noqa
