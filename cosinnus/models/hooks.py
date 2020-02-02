@@ -26,6 +26,7 @@ from django.utils.encoding import force_text
 from cosinnus.conf import settings
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.contrib.contenttypes.models import ContentType
+from annoying.functions import get_object_or_None
 
 logger = logging.getLogger('cosinnus')
 
@@ -113,6 +114,7 @@ def reset_cookie_expiry_for_anonymous_user(sender, user, request, **kwargs):
     
     
 if getattr(settings, 'COSINNUS_USER_FOLLOWS_GROUP_WHEN_JOINING', True):
+    
     @receiver(signals.user_joined_group)
     def user_follow_joined_group_trigger(sender, user, group, **kwargs):
         """ Will automatically make a user follow a group after they joined it """
@@ -130,6 +132,24 @@ if getattr(settings, 'COSINNUS_USER_FOLLOWS_GROUP_WHEN_JOINING', True):
                 likeobj.followed = True
                 likeobj.save(update_fields=['followed'])
         group.clear_likes_cache()
+    
+    @receiver(signals.user_left_group)
+    def user_unfollow_left_group_trigger(sender, user, group, **kwargs):
+        """ Will automatically make a user unfollow a group after they left it """
+        group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
+        # get an existing following object
+        likeobj = get_object_or_None(LikeObject, 
+            content_type=group_ct,
+            object_id=group.id, 
+            user=user,
+            followed=True
+        )
+        # make the followed likeobject unfollowed if it exists
+        if likeobj:
+            likeobj.followed = False
+            likeobj.save(update_fields=['followed'])
+            group.clear_likes_cache()
+        
 
 from cosinnus.apis.cleverreach import *
 from cosinnus.models.wagtail_models import * # noqa
