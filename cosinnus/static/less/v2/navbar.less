@@ -134,6 +134,31 @@
 		}
 	}
 	
+	.nav-collapse-button {
+	    &:not(.collapsed) {
+	        i.fas {
+	            color: @text-highlight-color;
+	        }
+	    }
+	}
+	.nav-button-with-message-counter {
+	    position: relative;
+	}
+	.message-counter {
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: @color-primary;
+        color: @background-color;
+        border-radius: 12px;
+        height: 15px;
+        width: 15px;
+        line-height: 15px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 10px;
+    }
 	.nav-button.burger-menu {
 		padding-top: 15px;
     	padding-bottom: 15px;
@@ -149,24 +174,14 @@
 			position: relative;
 		}
 		.message-counter {
-		    position: absolute;
-		    left: 0px;
-		    top: 6px;
-		    background-color: @color-primary;
-		    color: @background-color;
-		    border-radius: 12px;
-		    height: 15px;
-		    width: 15px;
-		    display: block;
-		    line-height: 15px;
-		    text-align: center;
-		    font-weight: bold;
-		    font-size: 10px;
-		}
+            top: 6px;
+        }
 	}
 	.brand-links {
 		display: inline;
 	}
+	
+    
 	
 	.nav-button {
 		cursor: pointer;
@@ -205,6 +220,19 @@
 				padding: 10px 0;
 		    }
 		}
+		&.nav-flyout-half-side {
+		    width: 50%;
+		    background-color: transparent;
+		    
+            .nav-flyout-section {
+                background: transparent;
+                border-bottom: none;
+            }
+		}
+		&.nav-flyout-right {
+		    left: unset;
+		    right: 0;
+		}
 	}
 	.nav-flyout-backdrop,
 	.nav-search-backdrop {
@@ -226,17 +254,25 @@
 	.nav-column {
 		width: 33%;
 		white-space: normal;
+		background-color: @background-color-secondary;
 		&:nth-child(2) {
 			width: 34%;
 		}
 		&:not(:last-of-type) {
 			border-right: 1px solid @border-color;
 		}
+		&.nav-column-fullwidth {
+            width: 100%;
+        }
 	}
 	.nav-flyout.in {
 		max-height: ~"calc(100vh - 50px)"; 
 		overflow-y: auto;
+		&.nav-flyout-part-height {
+		    max-height: ~"calc(80vh - 50px)"; 
+		}
 	}
+	
 	.main-menu {
 		display: flex;
 		flex-direction: row;
@@ -336,6 +372,9 @@
 				border-right: none;
 				border-bottom: 1px solid @border-color;
 			}
+			&.nav-column-50 {
+			    width: 100%;
+			}
 		}
 		
 		.nav-search {
@@ -384,7 +423,11 @@
 			transition-duration: .5s;
 			transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 		}
-		
+		.nav-flyout {
+    		&.nav-flyout-half-side {
+                width: 100%;
+            }
+		}
 	}
 	
 	body.mobile-triple-dots-active {

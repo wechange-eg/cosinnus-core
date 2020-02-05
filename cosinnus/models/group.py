@@ -1004,6 +1004,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         for instance in self.get_all_objects_for_group():
             instance.remove_index()
     
+    def get_icon(self):
+        """ Returns the font-awesome icon specific to the group type """
+        return 'fa-group' if self.type == self.TYPE_PROJECT else 'fa-sitemap'
+    
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
@@ -1276,6 +1280,11 @@ class CosinnusGroupMembership(BaseGroupMembership):
         changed_to_membership = bool(not created and self._status not in MEMBER_STATUS and self.status in MEMBER_STATUS)
         if created_as_membership or changed_to_membership:
             signals.user_joined_group.send(sender=self, user=self.user, group=self.group)
+    
+    def delete(self, *args, **kwargs):
+        """ Checks and fires `user_left_group` signal if a user has hereby left this group """
+        super(CosinnusGroupMembership, self).delete(*args, **kwargs)
+        signals.user_left_group.send(sender=self.group, user=self.user, group=self.group)
     
 
 class CosinnusPortalMembership(BaseGroupMembership):

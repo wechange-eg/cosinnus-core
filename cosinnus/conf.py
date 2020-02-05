@@ -552,6 +552,9 @@ class CosinnusConf(AppConf):
     # will the `profile.may_be_contacted` be shown in forms and detail views?
     USER_SHOW_MAY_BE_CONTACTED_FIELD = False
     
+    # if True, any user joining a group will also automatically follow it
+    USER_FOLLOWS_GROUP_WHEN_JOINING = True
+    
     # Temporary setting for the digest test phase.
     # set to ``False`` once testing is over
     DIGEST_ONLY_FOR_ADMINS = False

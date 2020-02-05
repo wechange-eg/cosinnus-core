@@ -73,10 +73,10 @@ module.exports = BaseView.extend({
      * Returns a promise which resolves after the chain completes or an error occured 
      * (the widget shows an error message then). Never rejects.
      */
-    load: function() {
+    load: function(loadOptions) {
     	var self = this;
     	return new Promise(function(resolve, reject) {
-    		self.loadData()
+    		self.loadData(loadOptions)
 	    		.then(self.thisContext(self.render))
 	    		.then(function(){
 	    			util.log('# ### loaded and resolving widget ' + self.widgetId);
@@ -85,13 +85,13 @@ module.exports = BaseView.extend({
     	});
     },
     
-    loadData: function() {
+    loadData: function(loadOptions) {
     	var self = this;
 		return new Promise(function(resolve, reject) {
 			self.state['hadErrors'] = false;
 			
 			// build URL
-			var params = self.getParamsForFetchRequest();
+			var params = self.getParamsForFetchRequest(loadOptions);
 			var url = self.fetchURL + (params.urlSuffix ? params.urlSuffix + '/' : '');
 			if (params.urlParams) {
 				url += '?' + $.param(params.urlParams);
