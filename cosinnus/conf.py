@@ -253,7 +253,7 @@ class CosinnusConf(AppConf):
     GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT = GROUP_CACHE_TIMEOUT
     
     # sets if live notification alerts are enabled
-    NOTIFICATION_ALERTS_ENABLED = True
+    NOTIFICATION_ALERTS_ENABLED = False
     
     # how long like and follow counts should be retained in cache
     LIKEFOLLOW_COUNT_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT

@@ -149,6 +149,10 @@
                         vertical-align: middle;
                     }
     			}
+    			&.item-icon-fixed-width {
+    			    width: 44px;
+    			    text-align: center;
+    			}
             }
 			.item-text {
 				overflow: hidden;
@@ -208,7 +212,7 @@
 			.right-side-annotation {
 				margin-right: 15px;
 				max-width: 40%;
-				i.fas {
+				i.fas, img {
 					margin-right: 4px;
 					font-size: 14px;
 				}
@@ -256,6 +260,9 @@
 		    
 		    .list-item {
 		        padding-right: 0;
+		        .right-side-annotation {
+                    margin-right: 10px;
+                }
 		    }
 		    .list-item-group-dropdown-link {
 	            display: flex;
