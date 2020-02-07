@@ -33,6 +33,7 @@ module.exports = DelegatedWidgetView.extend({
             unseenCount: 0,
             hasUnrenderedItems: true,
             lastPollDate: null,
+            originalPageTitle: null,
         }
     },
     
@@ -50,6 +51,8 @@ module.exports = DelegatedWidgetView.extend({
         self.$notificationButtonEl = $('#navbar-notifications-button');
         // events that have to be defined here because they happen in the notification button:
         self.$notificationButtonEl.on('click', self.thisContext(self.onNotificationButtonClicked));
+        
+        self.state.originalPageTitle = document.title;
     },
     
     /** Overriding base function for unique widget ID. */
@@ -117,6 +120,7 @@ module.exports = DelegatedWidgetView.extend({
         }
         if (data['unseen_count'] !== "undefined" && data['unseen_count'] >= 0) {
             self.state.unseenCount = data['unseen_count'];
+            self.updatePageTitle();
         }
     },
     
@@ -186,7 +190,6 @@ module.exports = DelegatedWidgetView.extend({
     /** Reloads the entire widget anew, with fresh data */
     reloadWidget: function () {
         var self = this;
-        util.log('RELOAAAAAAAAAAAAAAADING!')
         self.stopPoll();
         self.state.offsetTimestamp = null;  
         self.state.newestTimestamp = null;
@@ -261,6 +264,17 @@ module.exports = DelegatedWidgetView.extend({
         var self = this;  
         self.state.unseenCount = 0;
         self.afterRender();
+        self.updatePageTitle();
+    },
+    
+    /** Updates the page title by prefixing a (3) unread counter to it */
+    updatePageTitle: function() {
+        var self = this;
+        var unseenPrefix = '';
+        if (self.state.unseenCount > 0) {
+            unseenPrefix = '(' + self.state.unseenCount + ') ';
+        }
+        document.title = unseenPrefix + self.state.originalPageTitle;  
     },
 
 });
