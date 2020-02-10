@@ -108,6 +108,8 @@
             <script src="{% static 'js/cosinnus.js' %}?v=0.46"></script>
             <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
             <script src="{% static 'js/cosinnus.feedback.js' %}?v=0.1"></script>
+            
+            {% include 'cosinnus/common/simplemde_dependencies.html' with lazy=True %}
         {% endblock cosinnus_jshead %}
         
         {% block js_app_dependencies %}

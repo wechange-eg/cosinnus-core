@@ -26,8 +26,6 @@
 <link href="{% static 'css/vendor/leaflet.markercluster.default-0.7.css' %}" rel="stylesheet">
 <link href="{% static 'css/vendor/spinkit-double-bounce.css' %}" rel="stylesheet">
 {% endaddtoblock %}
-
-{% include 'cosinnus/common/simplemde_dependencies.html' with lazy=True %}
     
 <script type="text/javascript">
     var COSINNUS_MAP_TOPICS_JSON = {% render_cosinnus_topics_json %};
