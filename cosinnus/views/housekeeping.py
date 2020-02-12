@@ -39,6 +39,9 @@ from django.db.models.aggregates import Count
 from cosinnus.utils.http import make_csv_response
 from operator import itemgetter
 from cosinnus.utils.permissions import check_user_can_receive_emails
+import logging
+
+logger = logging.getLogger('cosinnus')
 
 
 def housekeeping(request=None):
@@ -496,3 +499,36 @@ def newsletter_users(request, includeOptedOut=False, file_name='newsletter-user-
 
 def active_user_emails(request):
     return newsletter_users(request, includeOptedOut=True, file_name='active-user-emails')
+
+
+def group_admin_emails(request, slugs):
+    """ For a comma-seperated list of group slugs, return a CSV of all emails
+        of all admins of the groups.
+        Will only return emails of users who CAN receive emails and
+        who want to receive the newsletter """
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+        
+    slugs = slugs.split(',')
+    slugs = [slug.strip() for slug in slugs if len(slug.strip()) > 0]
+    
+    user_mails = []
+    file_name='group-admin-user-emails'
+    includeOptedOut = request.GET.get('includeOptedOut', False) == '1'
+    portal = CosinnusPortal.get_current()
+    memberships = CosinnusGroupMembership.objects.filter(
+            group__portal=portal, 
+            group__slug__in=slugs,
+            status=MEMBERSHIP_ADMIN,
+            user__is_active=True
+        ).exclude(user__last_login__exact=None).prefetch_related('user')
+    
+    for membership in memberships:
+        user = membership.user
+        logger.warn(user.email)
+        if check_user_can_receive_emails(user) and (includeOptedOut or user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True):
+            user_mails.append(user.email)
+    user_mails = list(set(user_mails))
+    user_mails = [[user_mail] for user_mail in user_mails]
+    
+    return make_csv_response(user_mails, file_name=file_name)
