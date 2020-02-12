@@ -229,7 +229,6 @@ if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
 
 urlpatterns += [
     url(r'^o/me/', UserView.as_view()),
-    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url(r'api/v2/docs/', get_swagger_view()),
     url(r'api/v2/', include(router.urls)),
 ]
