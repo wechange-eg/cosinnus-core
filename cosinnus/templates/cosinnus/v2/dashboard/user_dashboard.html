@@ -141,7 +141,9 @@
 		</div>
 		
 		<div class="dashboard-news-create-frame">
-			<h2 class="headline mobile-hidden">{% trans "News" %}</h2>
+		    {% block news_form_headline %}
+			    <h2 class="headline mobile-hidden">{% trans "News" %}</h2>
+			{% endblock %}
 			
 			<div class="news-textbox-frame">
 				<div class="news-textbox" data-toggle="modal" data-target="#write-news-modal">
