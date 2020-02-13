@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-02 16:09+0100\n"
+"POT-Creation-Date: 2020-02-13 16:35+0100\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3609,7 +3609,9 @@ msgid "No current notifications"
 msgstr "Notificatie ID"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Network"
+#, fuzzy
+#| msgid "Network"
+msgid "Entire Network"
 msgstr "Netwerk"
 
 #. Translators: __INCLUDE_JS_PO__

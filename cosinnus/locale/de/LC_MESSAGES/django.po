@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-02 16:09+0100\n"
-"PO-Revision-Date: 2020-02-12 16:57+0100\n"
+"POT-Creation-Date: 2020-02-13 16:35+0100\n"
+"PO-Revision-Date: 2020-02-13 16:35+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -235,7 +235,6 @@ msgid "%(sender_name)s requested to become a member"
 msgstr "%(sender_name)s möchte Mitglied werden"
 
 #, python-format
-#| msgid "%(sender_name)s requested to become a member"
 msgid ""
 "%(sender_name)s and %(count_minus_one)d other requested to become a member"
 msgid_plural ""
@@ -293,7 +292,6 @@ msgid "%(sender_name)s accepted the invitation"
 msgstr "%(sender_name)s hat die Einladung angenommen"
 
 #, python-format
-#| msgid "%(sender_name)s accepted the invitation"
 msgid "%(sender_name)s and %(count_minus_one)d other accepted the invitation"
 msgid_plural ""
 "%(sender_name)s and %(count_minus_one)d others accepted the invitation"
@@ -318,7 +316,6 @@ msgid "%(sender_name)s declined the invitation"
 msgstr "%(sender_name)s hat die Einladung abgelehnt"
 
 #, python-format
-#| msgid "%(sender_name)s declined the invitation"
 msgid "%(sender_name)s and %(count_minus_one)d other declined the invitation"
 msgid_plural ""
 "%(sender_name)s and %(count_minus_one)d others declined the invitation"
@@ -2805,17 +2802,11 @@ msgid "Related Projects/Groups"
 msgstr "Verwandte Projekte/Gruppen"
 
 #. Translators: __INCLUDE_JS_PO__
-#| msgid ""
-#| "You will now receive notifications whenever public content is posted in "
-#| "this project."
 msgid "You will now receive notifications for content posted in this project."
 msgstr ""
 "Du wirst jetzt Benachrichtigungen für Inhalte in diesem Projekt erhalten"
 
 #. Translators: __INCLUDE_JS_PO__
-#| msgid ""
-#| "You will now receive notifications whenever public content is posted in "
-#| "this group."
 msgid "You will now receive notifications for content posted in this group."
 msgstr ""
 "Du wirst jetzt Benachrichtigungen für Inhalte in dieser Gruppe erhalten"
@@ -4287,8 +4278,9 @@ msgid "No current notifications"
 msgstr "Keine aktuellen Benachrichtigungen"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Network"
-msgstr "Netzwerk"
+#| msgid "Network"
+msgid "Entire Network"
+msgstr "Gesamtes Netzwerk"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "On the Map"
