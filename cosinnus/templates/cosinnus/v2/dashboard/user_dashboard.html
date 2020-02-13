@@ -56,9 +56,11 @@
 						{% trans "Show large map" %} 
 					</a>
 			</div>
-			<div class="legal-links">
-				{% include 'cosinnus/v2/dashboard/tos_links.html' %}
-			</div>
+			{% block legal_links %}
+				<div class="legal-links">
+					{% include 'cosinnus/v2/dashboard/tos_links.html' %}
+				</div>
+			{% endblock %}
 		</div>
 	</div>
 		
