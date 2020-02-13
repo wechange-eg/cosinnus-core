@@ -76,14 +76,16 @@ module.exports = BaseView.extend({
     	self.groupWidgetView = new GroupWidgetView({
     		el: self.$el.find('.group-widget-root'),
     	}, self.app);
-    	self.ideasWidgetView = new IdeasWidgetView({
-    		el: self.$el.find('.ideas-widget-root'),
-    	}, self.app);
     	
     	var leftBarPromises = [
     		self.groupWidgetView.load(),
-    		self.ideasWidgetView.load(),
     	];
+    	if (COSINNUS_IDEAS_ENABLED) {
+    	    self.ideasWidgetView = new IdeasWidgetView({
+                el: self.$el.find('.ideas-widget-root'),
+            }, self.app);
+    		leftBarPromises.push(self.ideasWidgetView.load());
+    	}
     	Promise.all(leftBarPromises).then(function(){
     		self.$leftBar.show();
     	});
