@@ -600,7 +600,11 @@ class CosinnusConf(AppConf):
     PAYMENTS_ENABLED = False
     # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins
     PAYMENTS_ENABLED_ADMIN_ONLY = False
-
+    
+    # if set to a hex color string,
+    # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
+    FORUM_GROUP_CUSTOM_BACKGROUND = None
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.

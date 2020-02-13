@@ -127,7 +127,10 @@
         {% render_block "js" %} {# sekizai use for extra scripts/styles #}
     </head>
     {% comment %} 'lang=' attribute is required for OSM-Field language definition {% endcomment %}
-    <body {% block body_attributes %}{% endblock body_attributes %} lang="{{ COSINNUS_CURRENT_LANGUAGE }}">
+    <body {% block body_attributes %}{% endblock body_attributes %} lang="{{ COSINNUS_CURRENT_LANGUAGE }}"
+        {% if SETTINGS.COSINNUS_FORUM_GROUP_CUSTOM_BACKGROUND and group and group.slug == SETTINGS.NEWW_FORUM_GROUP_SLUG %}
+            style="background: {{ SETTINGS.COSINNUS_FORUM_GROUP_CUSTOM_BACKGROUND }} !important;"
+        {% endif %}>
     <!-- class="{{ COSINNUS_CURRENT_APP }}" -->
 
         {% include 'cosinnus/extra_body_header.html' %}
