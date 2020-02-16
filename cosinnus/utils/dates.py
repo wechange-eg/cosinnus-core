@@ -3,6 +3,9 @@ from __future__ import unicode_literals
 
 from datetime import datetime
 
+import pytz
+
+
 # http://momentjs.com/docs/#/parsing/string-format/
 # http://docs.python.org/2/library/datetime.html#strftime-strptime-behavior
 FORMAT_MAP = (
@@ -51,4 +54,4 @@ def timestamp_from_datetime(datetime_obj=None):
     
 def datetime_from_timestamp(timestamp):
     """ Creates a datetime from a float timestamp """
-    return datetime.fromtimestamp(timestamp)
+    return datetime.fromtimestamp(timestamp, pytz.utc)

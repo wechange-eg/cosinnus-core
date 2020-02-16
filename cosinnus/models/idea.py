@@ -247,6 +247,10 @@ class CosinnusIdea(IndexingUtilsMixin, LikeableObjectMixin, models.Model):
     def __str__(self):
         return '%s (Portal %d)' % (self.title, self.portal_id)
     
+    def get_icon(self):
+        """ Returns the font-awesome icon specific to this object type """
+        return 'fa-lightbulb-o'
+    
     def save(self, *args, **kwargs):
         created = bool(self.pk is None)
         slugs = [self.slug] if self.slug else []

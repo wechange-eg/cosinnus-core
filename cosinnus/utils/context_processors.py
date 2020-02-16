@@ -68,19 +68,16 @@ def cosinnus(request):
         user_json = json.dumps(False)
     
     # we only need these expensive metrics for the old-style navbar
-    if user.is_authenticated and not \
+    if getattr(SETTINGS, 'COSINNUS_ROCKET_ENABLED', False):
+        unread_count = 0
+        stream_unseen_count = 0
+    elif user.is_authenticated and not \
             (getattr(SETTINGS, 'COSINNUS_USE_V2_DASHBOARD', False) or \
                 (getattr(SETTINGS, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False) and user.is_superuser)):
         from cosinnus_stream.models import Stream
         stream_unseen_count = Stream.objects.my_stream_unread_count(user)
-        if getattr(SETTINGS, 'COSINNUS_ROCKET_ENABLED', False):
-            #from cosinnus_message.rocket_chat import RocketChatConnection
-            #unread_count = RocketChatConnection().unread_messages(user)
-            unread_count = 0
-            stream_unseen_count = 0
-        else:
-            from postman.models import Message
-            unread_count = Message.objects.inbox_unread_count(user)
+        from postman.models import Message
+        unread_count = Message.objects.inbox_unread_count(user)
     else:
         unread_count = 0
         stream_unseen_count = 0

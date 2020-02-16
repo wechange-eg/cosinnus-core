@@ -1,0 +1,69 @@
+{% import "include/macros.html" as macros %}
+
+{% macro notificationItem(text, url, icon, subtext=null, subtextIcon=null, actionTime=null, annotationIcon=null, is_emphasized=false, subItems=[], itemId=null, inactive=false, makeSafe=true) %}
+
+    <li class="list-item-group">
+        <div class="main-item">
+            <a class="list-item list-item-extended {% if is_emphasized %}list-item-emphasized {% endif %}{% if inactive %}inactive no-select{% endif %}" href="{{ url }}" role="button" titledby=".item-text-primary"> 
+                <div class="item-icon item-icon-offset item-icon-vertical-center">
+                    {% if icon and '/' in icon %}
+                        <img src="{{ icon }}"></img>
+                    {% else %}
+                        <i class="fas fa-fw {{ icon }}"></i>
+                    {% endif %}
+                </div>
+                <div class="item-text item-text-dual">
+                    <div class="item-text-primary">
+                        {% if makeSafe %}
+                            {{ text|safe }}
+                        {% else %}
+                            {{ text }} 
+                        {% endif %}
+                    </div>
+                    {% if subtext or actionTime %}
+                        <div class="item-text-tertiary">
+                            {% if actionTime %}
+                                <i class="fas fa-fw fa-clock"></i>
+                                <span class="moment-data-date" data-date="{{ actionTime }}"></span>
+                                <span class="item-text-inline-spacer"></span>
+                            {% endif %}
+                            {% if subtext %}
+                                {% if subtextIcon %}
+                                    <i class="fas fa-fw {{ subtextIcon }}"></i>
+                                {% endif %}
+                                {{ subtext }}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+                {% if annotationIcon %}
+                    <div class="right-side-annotation item-icon item-icon-vertical-center item-icon-fixed-width">
+                        {% if annotationIcon and '/' in annotationIcon %}
+                            <img src="{{ annotationIcon }}"></img>
+                        {% else %}
+                            <i class="fas fa-fw {{ annotationIcon }}"></i>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </a>
+            
+            {% if subItems|length > 0 %}
+                <a class="list-item-group-dropdown-link collapsed" data-toggle="collapse" href="#notification-collapse-{{ itemId }}" 
+                           role="button" aria-expanded="false" aria-controls="notification-collapse-{{ itemId }}">
+                    <i class="fas fa-fw fa-caret-right show-collapsed"></i>
+                    <i class="fas fa-fw fa-caret-down show-uncollapsed"></i>
+                </a>
+            {% endif %}
+        </div>
+        
+        {% if subItems|length > 0 %}
+	        <div class="sub-item-container collapse" id="notification-collapse-{{ itemId }}">
+	            <ul class="item-list item-list-divided">
+	                {% for subItem in subItems %}
+	                    {{ macros.listItem(subItem.title, subItem.url, subItem.icon_or_image_url, padded=true) }}
+	                {% endfor %}
+	            </ul>
+	        </div>
+        {% endif %}
+    </li>
+{% endmacro %}

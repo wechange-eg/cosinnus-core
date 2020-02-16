@@ -106,6 +106,7 @@ urlpatterns = [
     url(r'^housekeeping/group_storage_report/', housekeeping.group_storage_report_csv, name='housekeeping-group-storage-report'),
     url(r'^housekeeping/project_storage_report/', housekeeping.project_storage_report_csv, name='housekeeping-project-storage-report'),
     url(r'^housekeeping/user_activity_info/', housekeeping.user_activity_info, name='housekeeping-user-activity-info'),
+    url(r'^housekeeping/group_admin_emails/(?P<slugs>[^/]+)/', housekeeping.group_admin_emails, name='housekeeping-group-admin-emails'),
     
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
@@ -229,7 +230,6 @@ if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
 
 urlpatterns += [
     url(r'^o/me/', UserView.as_view()),
-    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url(r'api/v2/docs/', get_swagger_view()),
     url(r'api/v2/', include(router.urls)),
 ]

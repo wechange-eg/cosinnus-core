@@ -38,11 +38,12 @@
 	        <link href="{% static 'css/vendor/select2.css' %}" rel="stylesheet">
 	        <link href="{% static 'css/vendor/fullcalendar.css' %}" rel="stylesheet">
 	        <link href="{% static 'css/vendor/lightbox.css' %}" rel="stylesheet">
+            <link href="{% static 'css/vendor/simplebar.css' %}" rel="stylesheet">
 	        {% if SETTINGS.DEBUG %}
 			<link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
 			<script src="{% static "js/vendor/less.min.js" %}"></script>
 			{% else %}
-		    <link href="{% static 'css/cosinnus.css' %}?v=0.57" rel="stylesheet">
+		    <link href="{% static 'css/cosinnus.css' %}?v=0.58" rel="stylesheet">
 			{% endif %}
 	        <link href="{% static 'css/cosinnus_portal_style.css' %}?v=0.6" rel="stylesheet">
 	        <link href="{% static COSINNUS_CURRENT_PORTAL.custom_stylesheet_url %}?v=0.2" rel="stylesheet">
@@ -60,7 +61,8 @@
 	        <script src="{% static 'js/vendor/jquery.sortElements.js' %}"></script>
 	        <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
 	        <script src="{% static 'js/vendor/jquery.ui.widget.js' %}"></script>
-	        <script src="{% static 'js/vendor/jquery.fileupload.js' %}"></script>
+            <script src="{% static 'js/vendor/jquery.fileupload.js' %}"></script>
+            <script src="{% static 'js/vendor/simplebar.min.js' %}"></script>
 	        {% comment %}  Load this for sortable dashboard widgets {% endcomment %}
 	        {% if SETTINGS.COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE %}
 	        <script src="{% static 'js/vendor/html.sortable.min.js' %}"></script>
@@ -103,9 +105,11 @@
                 var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
                 var cosinnus_report_object_url = "{% url 'cosinnus:report-object' %}";
             </script>
-            <script src="{% static 'js/cosinnus.js' %}?v=0.45"></script>
+            <script src="{% static 'js/cosinnus.js' %}?v=0.46"></script>
             <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
             <script src="{% static 'js/cosinnus.feedback.js' %}?v=0.1"></script>
+            
+            {% include 'cosinnus/common/simplemde_dependencies.html' with lazy=True %}
         {% endblock cosinnus_jshead %}
         
         {% block js_app_dependencies %}
@@ -123,7 +127,10 @@
         {% render_block "js" %} {# sekizai use for extra scripts/styles #}
     </head>
     {% comment %} 'lang=' attribute is required for OSM-Field language definition {% endcomment %}
-    <body {% block body_attributes %}{% endblock body_attributes %} lang="{{ COSINNUS_CURRENT_LANGUAGE }}">
+    <body {% block body_attributes %}{% endblock body_attributes %} lang="{{ COSINNUS_CURRENT_LANGUAGE }}"
+        {% if SETTINGS.COSINNUS_FORUM_GROUP_CUSTOM_BACKGROUND and group and group.slug == SETTINGS.NEWW_FORUM_GROUP_SLUG %}
+            style="background: {{ SETTINGS.COSINNUS_FORUM_GROUP_CUSTOM_BACKGROUND }} !important;"
+        {% endif %}>
     <!-- class="{{ COSINNUS_CURRENT_APP }}" -->
 
         {% include 'cosinnus/extra_body_header.html' %}

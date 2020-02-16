@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-14 19:31+0100\n"
+"POT-Creation-Date: 2020-02-13 16:35+0100\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -172,6 +172,23 @@ msgstr "Tu as essayé de te connecter trop de fois. Tu pourras essayer de te rec
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Un utilisateur a demandé à devenir membre de cette équipe (admins only)"
 
+#, fuzzy, python-format
+#| msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
+msgid "%(sender_name)s requested to become a member"
+msgstr "\"%(sender_name)s\" a demandé à devenir membre de %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other requested to become a member"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others requested to become a member"
+msgstr[0] "\"%(sender_name)s\" a demandé à devenir membre de %(team_name)s."
+msgstr[1] "\"%(sender_name)s\" a demandé à devenir membre de %(team_name)s."
+
+#, fuzzy
+#| msgid "You were made an admin of this team"
+msgid "You are an admin of this team"
+msgstr "Tu es devenu administrateur de cette équipe"
+
 msgid "New membership request"
 msgstr "Nouvelle demande d'ajout"
 
@@ -179,12 +196,22 @@ msgstr "Nouvelle demande d'ajout"
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "\"%(sender_name)s\" a demandé à devenir membre de %(team_name)s."
 
+#, fuzzy
+#| msgid "Membership request accepted"
+msgid "Your membership request was accepted"
+msgstr "Demande d'ajout acceptée"
+
 msgid "Membership request accepted"
 msgstr "Demande d'ajout acceptée"
 
 #, python-format
 msgid "Your membership request for %(team_name)s was accepted!"
 msgstr "Ta demande d'ajout pour %(team_name)s a été acceptée !"
+
+#, fuzzy
+#| msgid "Membership request declined"
+msgid "Your membership request was declined"
+msgstr "Demande d'ajout refusée"
 
 msgid "Membership request declined"
 msgstr "Demande d'ajout refusée"
@@ -204,6 +231,13 @@ msgstr "Un utilisateur a accepté l'invitation à rejoindre ce groupe (admins on
 msgid "%(sender_name)s accepted the invitation"
 msgstr "%(sender_name)s a accepté l'invitation"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s accepted the invitation"
+msgid "%(sender_name)s and %(count_minus_one)d other accepted the invitation"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others accepted the invitation"
+msgstr[0] "%(sender_name)s a accepté l'invitation"
+msgstr[1] "%(sender_name)s a accepté l'invitation"
+
 #, python-format
 msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
 msgstr "\"%(sender_name)s\" a accepté l'invitation à rejoindre %(team_name)s."
@@ -215,12 +249,24 @@ msgstr "Un utilisateur a décliné l'invitation a rejoindre cette équipe (admin
 msgid "%(sender_name)s declined the invitation"
 msgstr "%(sender_name)s a décliné l'invitation"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s declined the invitation"
+msgid "%(sender_name)s and %(count_minus_one)d other declined the invitation"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others declined the invitation"
+msgstr[0] "%(sender_name)s a décliné l'invitation"
+msgstr[1] "%(sender_name)s a décliné l'invitation"
+
 #, python-format
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgstr "\"%(sender_name)s\" a décliné l'invitation à rejoindre %(team_name)s."
 
 msgid "You were made an admin of this team"
 msgstr "Tu es devenu administrateur de cette équipe"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s made you an admin"
+msgstr "%(sender_name)s t'a identifié dans"
 
 msgid "Made you an admin"
 msgstr "T'a rendu administrateur"
@@ -232,6 +278,11 @@ msgstr "%(sender_name)s t'a rendu administrateur de \"%(team_name)s\" sur %(port
 msgid "Your admin status for this team was revoked"
 msgstr "Ton statut d'admin de cette équipe a été révoqué"
 
+#, fuzzy, python-format
+#| msgid "Revoked your admin status"
+msgid "%(sender_name)s revoked your admin status"
+msgstr "Annuler votre statut d’administrateur"
+
 msgid "Revoked your admin status"
 msgstr "Annuler votre statut d’administrateur"
 
@@ -241,6 +292,16 @@ msgstr "%(sender_name)s a révoqué ton statut d'admin de \"%(team_name)s\" sur 
 
 msgid "You were tagged in a post, document or other item"
 msgstr "Tu as été identifié dans un post, un document ou un autre item"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s tagged you in %(object_name)s"
+msgstr "%(sender_name)s t'a identifié dans"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s tagged you in %(count)d items"
+msgstr "%(sender_name)s t'a identifié dans"
 
 #, python-format
 msgid "%(sender_name)s tagged you in"
@@ -253,6 +314,11 @@ msgstr "Tu as été identifié par %(sender_name)s"
 #, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "Tu as été identifié dans \"%(object_name)s\" dans %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s invited you to join %(team_name)s"
+msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
 
 msgid "Invited you"
 msgstr "T'a invité"
@@ -1714,11 +1780,9 @@ msgstr "Groupe :"
 msgid "No Description set"
 msgstr "Pas de descriptions définie"
 
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications whenever public content is posted in this project."
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr ""
 
@@ -2338,6 +2402,18 @@ msgstr "Il n'y a pas encore de description pour ce groupe."
 
 msgid "Related Projects/Groups"
 msgstr "Projets / groupes liés"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgid "You will now receive notifications for content posted in this project."
+msgstr "Tu recevras une notification lorsqu'un projet sera créé à partir de l'idée que tu aimes. Si tu ne souhaites pas recevoir de notifications, clique sur le bouton de désabonnement !"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgid "You will now receive notifications for content posted in this group."
+msgstr "Tu recevras une notification lorsqu'un projet sera créé à partir de l'idée que tu aimes. Si tu ne souhaites pas recevoir de notifications, clique sur le bouton de désabonnement !"
 
 msgid "Share"
 msgstr "Partager"
@@ -3595,7 +3671,31 @@ msgid "Go to Calendar"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Network"
+#, fuzzy
+#| msgid "There was an error when trying to delete the invitation."
+msgid "There was an error loading the widget"
+msgstr "Une erreur est survenue lors de la suppression de l'invitation."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Notification ID"
+msgid "Notifications"
+msgstr "ID de notification"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Show more Projects"
+msgid "Show more"
+msgstr "Afficher plus de projets"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Notification ID"
+msgid "No current notifications"
+msgstr "ID de notification"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Entire Network"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -3771,18 +3871,6 @@ msgstr "Déplacer"
 #| msgid "Move"
 msgid "Move down"
 msgstr "Déplacer"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "There was an error when trying to delete the invitation."
-msgid "There was an error loading the widget"
-msgstr "Une erreur est survenue lors de la suppression de l'invitation."
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Show more Projects"
-msgid "Show more"
-msgstr "Afficher plus de projets"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy

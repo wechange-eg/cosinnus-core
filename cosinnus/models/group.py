@@ -1007,6 +1007,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         for instance in self.get_all_objects_for_group():
             instance.remove_index()
     
+    def get_icon(self):
+        """ Returns the font-awesome icon specific to the group type """
+        return 'fa-group' if self.type == self.TYPE_PROJECT else 'fa-sitemap'
+    
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None

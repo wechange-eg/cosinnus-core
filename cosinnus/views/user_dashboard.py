@@ -259,13 +259,12 @@ class ModelRetrievalMixin(object):
         return queryset
     
 
-class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
+class BasePagedOffsetWidgetView(BaseUserDashboardWidgetView):
     """ Shows BaseTaggable content for the user """
     
-    model = None
-    # if True: will show only content that the user has recently visited
-    # if False: will show all of the users content, sorted by creation date
-    show_recent = False
+    model = None # can be None, needs to be set in implementing widget view!
+    # the model field on which to cut off the timed offset from, needs to be set in implementing widget view!
+    offset_model_field = None
     
     default_page_size = 3
     min_page_size = 1
@@ -276,15 +275,6 @@ class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
     default_offset_timestamp = None
     
     def get(self, request, *args, **kwargs):
-        self.show_recent = kwargs.pop('show_recent', False)
-        
-        content = kwargs.pop('content', None)
-        if not content:
-            return HttpResponseBadRequest('No content type supplied')
-        self.model = SEARCH_MODEL_NAMES_REVERSE.get(content, None)
-        if not self.model:
-            return HttpResponseBadRequest('Unknown content type supplied: "%s"' % content)
-        
         self.page_size = int(request.GET.get('page_size', self.default_page_size))
         if not is_number(self.page_size):
             return HttpResponseBadRequest('Malformed parameter: "page_size": %s' % self.page_size)
@@ -296,32 +286,79 @@ class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
         if self.offset_timestamp is not None and isinstance(self.offset_timestamp, six.string_types):
             self.offset_timestamp = float(self.offset_timestamp)
         
-        return super(TypedContentWidgetView, self).get(request, *args, **kwargs)
+        self.set_options()
+        return super(BasePagedOffsetWidgetView, self).get(request, *args, **kwargs)
+    
+    def set_options(self):
+        """ Optional additional function to set some options for overriding views """
+        pass 
+    
+    def get_queryset(self):
+        """ Returns a queryset of sorted data """
+        return ImproperlyConfigured('Implement this function in your extending widget view!')
+    
+    def get_items_from_queryset(self, queryset):
+        """ Returns a list of converted item data from the queryset """
+        return ImproperlyConfigured('Implement this function in your extending widget view!')
     
     def get_data(self, **kwargs):
-        has_more = False
-        offset_timestamp = None
+        queryset = self.get_queryset()
         
+        # cut off at timestamp if given
+        if self.offset_timestamp:
+            offset_datetime = datetime_from_timestamp(self.offset_timestamp)
+            filter_exp = {'%s__lt' % self.offset_model_field: offset_datetime}
+            queryset = queryset.filter(**filter_exp)
+    
+        # calculate has_more and new offset timestamp
+        has_more = queryset.count() > self.page_size
+        queryset = queryset[:self.page_size]
+        
+        items = self.get_items_from_queryset(queryset)
+        queryset = list(queryset)
+        
+        last_offset_timestamp = None
+        if len(queryset) > 0:
+            last_offset_timestamp = timestamp_from_datetime(getattr(queryset[-1], self.offset_model_field))
+            
+        return {
+            'items': items,
+            'widget_title': self.model._meta.verbose_name_plural if self.model else None,
+            'has_more': has_more,
+            'offset_timestamp': last_offset_timestamp,
+        }
+
+
+class TypedContentWidgetView(ModelRetrievalMixin, BasePagedOffsetWidgetView):
+    """ Shows BaseTaggable content for the user """
+
+    model = None
+    # if True: will show only content that the user has recently visited
+    # if False: will show all of the users content, sorted by creation date
+    show_recent = False
+    
+    def get(self, request, *args, **kwargs):
+        self.show_recent = kwargs.pop('show_recent', False)
+        if self.show_recent:
+            self.offset_model_field = 'visited'
+        else:
+            self.offset_model_field = 'created'
+        
+        content = kwargs.pop('content', None)
+        if not content:
+            return HttpResponseBadRequest('No content type supplied')
+        self.model = SEARCH_MODEL_NAMES_REVERSE.get(content, None)
+        if not self.model:
+            return HttpResponseBadRequest('Unknown content type supplied: "%s"' % content)
+        
+        return super(TypedContentWidgetView, self).get(request, *args, **kwargs)
+    
+    def get_queryset(self):
         if self.show_recent:
             # showing "last-visited" content, ordering by visit datetime
             ct = ContentType.objects.get_for_model(self.model)
             queryset = LastVisitedObject.objects.filter(content_type=ct, user=self.request.user, portal=CosinnusPortal.get_current())
             queryset = queryset.order_by('-visited')
-            
-            # cut off at timestamp if given
-            if self.offset_timestamp:
-                offset_datetime = datetime_from_timestamp(self.offset_timestamp)
-                queryset = queryset.filter(visited__lt=offset_datetime)
-        
-            # calculate has_more and new offset timestamp
-            has_more = queryset.count() > self.page_size
-            queryset = queryset[:self.page_size]
-            # the `item_data` field already contains the JSON of `DashboardItem`
-            items = list(queryset.values_list('item_data', flat=True))
-            
-            queryset = list(queryset)
-            if len(queryset) > 0:
-                offset_timestamp = timestamp_from_datetime(queryset[-1].visited)
         else:
             # all content, ordered by creation date
             only_mine = True
@@ -329,29 +366,18 @@ class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
             queryset = self.fetch_queryset_for_user(self.model, self.request.user, sort_key=sort_key, only_mine=only_mine)
             if queryset is None:
                 return {'items':[], 'widget_title': '(error: %s)' % self.model.__name__}
-            
-            # cut off at timestamp if given
-            if self.offset_timestamp:
-                offset_datetime = datetime_from_timestamp(self.offset_timestamp)
-                queryset = queryset.filter(created__lt=offset_datetime)
-        
-            # calculate has_more and new offset timestamp
-            has_more = queryset.count() > self.page_size
-            queryset = list(queryset[:self.page_size])
-            if len(queryset) > 0:
-                offset_timestamp = timestamp_from_datetime(queryset[-1].created)
-            
-            items = [DashboardItem(item, user=self.request.user) for item in queryset]
-            
-        return {
-            'items': items,
-            'widget_title': self.model._meta.verbose_name_plural,
-            'has_more': has_more,
-            'offset_timestamp': offset_timestamp,
-        }
-
+        return queryset
+    
+    def get_items_from_queryset(self, queryset):
+        """ Returns a list of converted item data from the queryset """
+        if self.show_recent:
+            # the `item_data` field already contains the JSON of `DashboardItem`
+            items = list(queryset.values_list('item_data', flat=True))
+        else:
+            items = [DashboardItem(item, user=self.request.user) for item in list(queryset)]
+        return items
+    
 api_user_typed_content = TypedContentWidgetView.as_view()
-
 
 
 class TimelineView(ModelRetrievalMixin, View):

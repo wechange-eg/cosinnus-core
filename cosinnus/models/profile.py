@@ -138,6 +138,10 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
     def __str__(self):
         return six.text_type(self.user)
     
+    def get_icon(self):
+        """ Returns the font-awesome icon specific to this object type """
+        return 'fa-user'
+    
     def get_full_name(self):
         return self.user.get_full_name()
     

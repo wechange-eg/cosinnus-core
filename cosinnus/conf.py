@@ -252,6 +252,9 @@ class CosinnusConf(AppConf):
     # how long should user notification settings be retained in cache
     GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT = GROUP_CACHE_TIMEOUT
     
+    # sets if live notification alerts are enabled
+    NOTIFICATION_ALERTS_ENABLED = False
+    
     # how long like and follow counts should be retained in cache
     LIKEFOLLOW_COUNT_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
@@ -552,6 +555,9 @@ class CosinnusConf(AppConf):
     # will the `profile.may_be_contacted` be shown in forms and detail views?
     USER_SHOW_MAY_BE_CONTACTED_FIELD = False
     
+    # if True, any user joining a group will also automatically follow it
+    USER_FOLLOWS_GROUP_WHEN_JOINING = True
+    
     # Temporary setting for the digest test phase.
     # set to ``False`` once testing is over
     DIGEST_ONLY_FOR_ADMINS = False
@@ -594,7 +600,11 @@ class CosinnusConf(AppConf):
     PAYMENTS_ENABLED = False
     # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins
     PAYMENTS_ENABLED_ADMIN_ONLY = False
-
+    
+    # if set to a hex color string,
+    # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
+    FORUM_GROUP_CUSTOM_BACKGROUND = None
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.

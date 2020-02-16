@@ -56,9 +56,11 @@
 						{% trans "Show large map" %} 
 					</a>
 			</div>
-			<div class="legal-links">
-				{% include 'cosinnus/v2/dashboard/tos_links.html' %}
-			</div>
+			{% block legal_links %}
+				<div class="legal-links">
+					{% include 'cosinnus/v2/dashboard/tos_links.html' %}
+				</div>
+			{% endblock %}
 		</div>
 	</div>
 		
@@ -141,7 +143,9 @@
 		</div>
 		
 		<div class="dashboard-news-create-frame">
-			<h2 class="headline mobile-hidden">{% trans "News" %}</h2>
+		    {% block news_form_headline %}
+			    <h2 class="headline mobile-hidden">{% trans "News" %}</h2>
+			{% endblock %}
 			
 			<div class="news-textbox-frame">
 				<div class="news-textbox" data-toggle="modal" data-target="#write-news-modal">
