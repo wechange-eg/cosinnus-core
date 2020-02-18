@@ -39,7 +39,7 @@
 	        <link href="{% static 'css/vendor/fullcalendar.css' %}" rel="stylesheet">
 	        <link href="{% static 'css/vendor/lightbox.css' %}" rel="stylesheet">
             <link href="{% static 'css/vendor/simplebar.css' %}" rel="stylesheet">
-	        {% if SETTINGS.DEBUG %}
+	        {% if SETTINGS.DEBUG or SETTINGS.COSINNUS_FORCE_LIVE_LESS_COMPILE %}
 			<link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
 			<script src="{% static "js/vendor/less.min.js" %}"></script>
 			{% else %}
