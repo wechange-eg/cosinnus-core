@@ -1,0 +1,4 @@
+{% load i18n %}
+{% trans "Welcome" context "this is a two-line text that says 'Welcome to <WebsiteName>'" %}
+<br/>
+{% blocktrans with portal_name=COSINNUS_CURRENT_PORTAL.name context "this is a two-line text that says 'Welcome to <WebsiteName>'"  %}to {{ portal_name }}{% endblocktrans %}
