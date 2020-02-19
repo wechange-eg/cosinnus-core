@@ -6,6 +6,7 @@ import logging
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls.base import reverse
+from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
@@ -62,12 +63,12 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
     valid_till = models.DateTimeField(verbose_name=_('Valid From'), null=False, blank=False,
         help_text='The announcement will not be shown after this date.')
     
-    title = models.CharField(_('Title'), max_length="250", 
+    title = models.CharField(_('Title'), max_length=250, 
         help_text='Internal title field only.')
     slug = models.SlugField(_('Slug'), 
         help_text=_('Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'), 
         max_length=50)
-    type = models.PositiveSmallIntegerField(_('Announcement Category'), blank=False,
+    category = models.PositiveSmallIntegerField(_('Announcement Category'), blank=False,
         default=0, choices=ANNOUNCEMENT_CATEGORIES,
         help_text='A selection of text headlines to display as header')
     text = models.TextField(verbose_name=_('Text'),

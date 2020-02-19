@@ -19,6 +19,7 @@ class UserDashboardAnnouncementForm(AsssignPortalMixin, forms.ModelForm):
             'valid_from',
             'valid_till',
             'title',
+            'category',
             'type',
             'text',
             'raw_html',

@@ -20,7 +20,7 @@
         - field_classes: extra CSS classes to apply to the input area
         - extra_html: extra HTML that will be placed after the field
         - help_popup: if supplied, add a Help-Button next to the label which will popup a help field using the supplied id string
-
+        - hide_optional: forces hiding the "(Optional)" label for non-required fields
 {% endcomment %}
 
 {% if field or field_id %}{% captureas for_id %}{% if field %}{{ field.id_for_label }}{% else %}{{ field_id }}{% endif %}{% endcaptureas %}{% endif %}

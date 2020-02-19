@@ -11,12 +11,12 @@
 {% endblock %}
 
 {% block leftnav %}
-    {% include "cosinnus_administration/leftnav.html" %}
+    {% include "cosinnus/administration/leftnav.html" %}
 {% endblock leftnav %}
 
 {% block content %}
     <div class="alert alert-success">
-        <i class="fa fa-info fa-3x"></i>
+        <i class="fa fa-info-circle fa-3x"></i>
         <h4>{% trans "User Dashboard Announcements" %}</h4>
         <div class="v-offset-s">
             <p>
@@ -44,7 +44,7 @@
 
     <!-- a box with semi transparent background -->
     <div class="content-box large-space">
-        <button type="button" href="{% url "cosinnus:user-dashboard-announcement-create" %}" class="btn btn-emphasized large-space" title="{% trans "Create Announcement" %}">
+        <button type="button" href="{% url "cosinnus:user-dashboard-announcement-create" %}" class="btn btn-emphasized btn-autosize" title="{% trans "Create Announcement" %}">
             <ul class="media-list">
                 <li class="media">
                     <a class="pull-left" href="#">

@@ -6,7 +6,7 @@ from cosinnus.core.decorators.views import (require_read_access,
     require_write_access, require_admin_access,
     require_create_objects_in_access, redirect_to_not_logged_in,
     dispatch_group_access, require_logged_in, require_write_access_groupless,
-    superuser_required)
+    superuser_required, require_superuser)
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from django.core.exceptions import PermissionDenied, ImproperlyConfigured
@@ -54,9 +54,9 @@ class RequireSuperuserMixin(object):
     .. seealso:: :class:`RequireReadMixin`, :class:`RequireWriteMixin`, :class:`RequireCreateObjectsInMixin`
     """
 
-    @superuser_required()
+    @require_superuser()
     def dispatch(self, request, *args, **kwargs):
-        return super(RequireLoggedInMixin, self).dispatch(request, *args, **kwargs)
+        return super(RequireSuperuserMixin, self).dispatch(request, *args, **kwargs)
 
 
 class DipatchGroupURLMixin(object):
