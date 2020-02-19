@@ -9,6 +9,19 @@ from django.core.exceptions import ValidationError
 
 logger = logging.getLogger('cosinnus')
 
+
+class UiPrefIntegerListField(forms.IntegerField):
+    """ Acts as a wrapper around the fields used here, so integer lists can be stored.
+        The validator and field contents will still use a single integer given,
+        but the initial value is overridden """
+    
+    def __init__(self, *args, **kwargs):
+        actual_initial = kwargs['initial']
+        kwargs['initial'] = 0
+        super(UiPrefIntegerListField, self).__init__(*args, **kwargs)
+        self.initial = actual_initial
+
+
 USERPROFILE_UI_PREF_KEY = 'ui_pref__%s'
 
 
@@ -22,6 +35,7 @@ UI_PREF_DASHBOARD_WIDGET_SORT_KEY_EVENTS = 'dashboard_widgets_sort_key__events'
 UI_PREF_DASHBOARD_WIDGET_SORT_KEY_TODOS = 'dashboard_widgets_sort_key__todos'
 UI_PREF_DASHBOARD_WIDGET_SORT_KEY_POLLS = 'dashboard_widgets_sort_key__polls'
 UI_PREF_DASHBOARD_WIDGET_SORT_KEY_OFFERS = 'dashboard_widgets_sort_key__offers'
+UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS = 'dashboard_announcements__hidden'
 
 
 ALL_UI_PREFS = {
@@ -35,7 +49,9 @@ ALL_UI_PREFS = {
     UI_PREF_DASHBOARD_WIDGET_SORT_KEY_TODOS: forms.IntegerField(initial=5, validators=[MinValueValidator(0), MaxValueValidator(100)]),
     UI_PREF_DASHBOARD_WIDGET_SORT_KEY_POLLS: forms.IntegerField(initial=6, validators=[MinValueValidator(0), MaxValueValidator(100)]),
     UI_PREF_DASHBOARD_WIDGET_SORT_KEY_OFFERS: forms.IntegerField(initial=7, validators=[MinValueValidator(0), MaxValueValidator(100)]),
+    UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS: UiPrefIntegerListField(initial=[]),
 }
+
 
 class UIPrefsApiView(View):
     """ Saves UI Prefs for a user. Ui prefs will be checked to exist in `ALL_UI_PREFS`
@@ -59,6 +75,8 @@ class UIPrefsApiView(View):
         if not request.user.is_authenticated:
             return HttpResponseForbidden('Not authenticated.')
         
+        old_ui_prefs = get_ui_prefs_for_user(request.user)
+        
         ui_prefs = {}
         for post_key, raw_value in self.request.POST.items():
             ui_pref = post_key
@@ -68,7 +86,12 @@ class UIPrefsApiView(View):
                 return HttpResponseBadRequest('ui_pref "%s" not found!' % ui_pref)
             try:
                 value = self.get_valid_value(field, raw_value)
-                ui_prefs[ui_pref] = value
+                if field is UiPrefIntegerListField:
+                    # for list fields, store the value by appending to the existing list
+                    ui_prefs[ui_pref] = list(set(old_ui_prefs[ui_pref] + [value]))
+                else:
+                    ui_prefs[ui_pref] = value
+                    
             except ValidationError as e:
                 return HttpResponseBadRequest('Validation error for ui_pref "%s": %s' % (ui_pref, str(e)))
         
@@ -98,10 +121,11 @@ api_ui_prefs = UIPrefsApiView.as_view()
 
 
 def get_ui_prefs_for_user(user):
+    """ Returns all UI-prefs for a given user, providing default (initial) values for the unset ones """
+    
     if not user.is_authenticated:
         return {}
-    
     settings = user.cosinnus_profile.settings
     ui_prefs = dict(((ui_pref, settings.get(USERPROFILE_UI_PREF_KEY % ui_pref, pref_field.initial)) for ui_pref, pref_field in ALL_UI_PREFS.items()))
     return ui_prefs
-    
+

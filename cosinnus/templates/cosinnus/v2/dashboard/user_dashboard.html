@@ -67,9 +67,10 @@
 	</div>
 		
 	<div class="dashboard-center-bar dashboard-column visible-panel-2">
+	
 		<div class="dashboard-welcome-frame" style="display: none">
 			<div class="aside-link text-small">
-				<a class="pale-color pale-with-highlight hide-welcome-screen"
+				<a class="pale-color pale-with-highlight"
 					data-target="ui-pref" data-ui-pref="timeline__hide_welcome_screen"
 					data-ui-pref-value="1" data-hide-after=".dashboard-welcome-frame">
 					{% trans "Do not show this again" %}
@@ -128,7 +129,25 @@
 				</div>
 				
 			</div>
-		</div>
+		</div> {% comment %} end dashboard-welcome-frame {% endcomment %}
+		
+		{% if announcement %}
+			<div class="dashboard-announcement-frame" style="display: none">
+	            <div class="aside-link text-small">
+	                <a class="pale-color pale-with-highlight"
+	                    data-target="ui-pref" data-ui-pref="dashboard_announcements__hidden"
+	                    data-ui-pref-value="{{ announcement.id }}" data-hide-after=".dashboard-announcement-frame">
+	                    {% trans "Do not show this again" %}
+	                </a>
+	            </div>
+	            <h1 class="headline headline-big no-side-margin">
+	                {% include 'cosinnus/v2/texts/welcome_frame_header.html' %}
+	            </h1>
+	            <div class="description margin-extra-large">
+	                {% include 'cosinnus/v2/texts/welcome_frame_text.html' %}
+	            </div>
+	        </div> {% comment %} end dashboard-announcement-frame {% endcomment %}
+        {% endif %}        
 		
 		<div class="dashboard-news-create-frame">
 		    {% block news_form_headline %}

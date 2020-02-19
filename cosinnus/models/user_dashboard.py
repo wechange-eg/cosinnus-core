@@ -2,23 +2,22 @@
 from __future__ import unicode_literals
 
 import inspect
+import logging
 
 from django.template.defaultfilters import date as django_date_filter
-
-from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal
-from cosinnus.models.tagged import BaseTaggableObjectModel
-from cosinnus.utils.group import get_cosinnus_group_model,\
-    get_default_user_group_slugs
-
-import logging
-from cosinnus.models.idea import CosinnusIdea
 from django.urls.base import reverse
-from cosinnus.models.profile import BaseUserProfile
 from django.utils.html import escape
 
-logger = logging.getLogger('cosinnus')
+from cosinnus.conf import settings
+from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.idea import CosinnusIdea
+from cosinnus.models.profile import BaseUserProfile
+from cosinnus.models.tagged import BaseTaggableObjectModel
+from cosinnus.utils.group import get_cosinnus_group_model, \
+    get_default_user_group_slugs
 
+
+logger = logging.getLogger('cosinnus')
 
 
 class DashboardItem(dict):
@@ -70,4 +69,5 @@ class DashboardItem(dict):
                 if obj.__class__.__name__ == 'Event':
                     if obj.state != 2:
                         self['subtext'] = {'is_date': True, 'date': django_date_filter(obj.from_date, 'Y-m-d')}
-                        
+
+
