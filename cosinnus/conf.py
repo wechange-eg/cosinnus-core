@@ -605,6 +605,11 @@ class CosinnusConf(AppConf):
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
     FORUM_GROUP_CUSTOM_BACKGROUND = None
     
+    # enable e-mail downloads of newsletter-enabled users in the administration area
+    # if enabled, this allows all portal-admins to download user emails, this might be
+    # *VERY* risky, so use cautiously
+    ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS = False
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
