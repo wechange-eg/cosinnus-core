@@ -16,6 +16,7 @@ from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus.utils.urls import get_domain_for_portal
 from cosinnus.views.ui_prefs import get_ui_prefs_for_user, \
     UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS
+from django.utils.timezone import now
 
 
 logger = logging.getLogger('cosinnus')
@@ -34,7 +35,7 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
     )
     
     ANNOUNCEMENT_CATEGORIES = (
-        (0, _('(not displayed)')),
+        (0, _('(none displayed)')),
         (1, _('Announcement')),
         (2, _('Maintenance')),
         (3, _('Update')),
@@ -53,7 +54,7 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
     
     is_active = models.BooleanField(_('Is active'),
         help_text='If an idea is not active, it counts as non-existent for all purposes and views on the website.',
-        default=True)
+        default=False)
     type = models.PositiveSmallIntegerField(_('Announcement Display Type'), blank=False,
         default=TYPE_EDITOR, choices=ANNOUNCEMENT_TYPES,
         help_text='Whether the announcement displays markdown text from an editor field or raw pasted HTML.')
@@ -119,9 +120,16 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
     def get_delete_url(self):
         return reverse('cosinnus:user-dashboard-announcement-delete', kwargs={'slug': self.slug})
     
-    def get_preview_url(self):
-        return get_domain_for_portal(self.portal) + reverse('cosinnus:user-dashboard') + '?show_announcement=' + self.id
+    def get_activate_url(self):
+        return reverse('cosinnus:user-dashboard-announcement-activate', kwargs={'slug': self.slug})
     
+    def get_preview_url(self):
+        return get_domain_for_portal(self.portal) + reverse('cosinnus:user-dashboard') + '?show_announcement=%d' % self.id
+    
+    def is_valid(self):
+        """ Returns true if the announcement is in between its valid dates, so would be displayed """
+        right_now = now()
+        return bool(self.valid_from <= right_now and right_now <= self.valid_till)
 
 def get_hidden_user_dashboard_announcements_for_user(user):
     """ Returns a list of ids of UserDashboardAnnouncement that the user has chosen to 

@@ -13,6 +13,10 @@ from cosinnus.forms.user_dashboard_announcement import UserDashboardAnnouncement
 from cosinnus.models.user_dashboard_announcement import UserDashboardAnnouncement
 from cosinnus.views.mixins.group import RequireSuperuserMixin
 from django.views.generic.list import ListView
+from cosinnus.utils.permissions import check_user_superuser
+from django.http.response import HttpResponseForbidden, HttpResponseNotFound
+from django.shortcuts import redirect
+from annoying.functions import get_object_or_None
 
 
 logger = logging.getLogger('cosinnus')
@@ -48,7 +52,7 @@ class UserDashboardAnnouncementListView(RequireSuperuserMixin, SamePortalGroupMi
 list_view = UserDashboardAnnouncementListView.as_view()
 
 
-class UserDashboardAnnouncementCreateView(RequireSuperuserMixin, UserDashboardAnnouncementFormMixin, CreateView):
+class UserDashboardAnnouncementCreateView(RequireSuperuserMixin, SamePortalGroupMixin, UserDashboardAnnouncementFormMixin, CreateView):
     """ Create View for UserDashboardAnnouncements """
     
     form_view = 'add'
@@ -73,7 +77,7 @@ class UserDashboardAnnouncementCreateView(RequireSuperuserMixin, UserDashboardAn
 user_dashboard_announcement_create = UserDashboardAnnouncementCreateView.as_view()
 
 
-class UserDashboardAnnouncementEditView(RequireSuperuserMixin, UserDashboardAnnouncementFormMixin, UpdateView):
+class UserDashboardAnnouncementEditView(RequireSuperuserMixin, SamePortalGroupMixin, UserDashboardAnnouncementFormMixin, UpdateView):
 
     form_view = 'edit'
     message_success = _('Your Announcement was saved successfully.')
@@ -104,3 +108,20 @@ class UserDashboardAnnouncementDeleteView(RequireSuperuserMixin, SamePortalGroup
 
 user_dashboard_announcement_delete = UserDashboardAnnouncementDeleteView.as_view()
 
+
+def user_dashboard_announcement_activate(request, slug):
+    """ Toggles an announcement active/inactive """
+    if not check_user_superuser(request.user):
+        return HttpResponseForbidden('Not authenticated')
+    
+    announcement = get_object_or_None(UserDashboardAnnouncement, portal=CosinnusPortal.get_current(), slug=slug)
+    if announcement is None:
+        return HttpResponseNotFound()
+    announcement.is_active = not announcement.is_active
+    announcement.save()
+    if announcement.is_active:
+        messages.success(request, _('Your Announcement was activated successfully.'))
+    else:
+        messages.success(request, _('Your Announcement was deactivated successfully.'))
+    return redirect('cosinnus:user-dashboard-announcement-list')
+    

@@ -86,6 +86,7 @@ urlpatterns = [
     url(r'^administration/announcements/add/$', user_dashboard_announcement.user_dashboard_announcement_create, name='user-dashboard-announcement-create'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/edit/$', user_dashboard_announcement.user_dashboard_announcement_edit, name='user-dashboard-announcement-edit'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/delete/$', user_dashboard_announcement.user_dashboard_announcement_delete, name='user-dashboard-announcement-delete'),
+    url(r'^administration/announcement/(?P<slug>[^/]+)/activate-toggle/$', user_dashboard_announcement.user_dashboard_announcement_activate, name='user-dashboard-announcement-activate'),
     
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     

@@ -42,20 +42,22 @@
         </div>
     </div>
 
+    <button type="button" href="{% url "cosinnus:user-dashboard-announcement-create" %}" class="btn btn-emphasized btn-autosize" title="{% trans "Create Announcement" %}">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-plus"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Create Announcement" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    <div class="clearfix"></div>
+    
     <!-- a box with semi transparent background -->
     <div class="content-box large-space">
-        <button type="button" href="{% url "cosinnus:user-dashboard-announcement-create" %}" class="btn btn-emphasized btn-autosize" title="{% trans "Create Announcement" %}">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#">
-                        <i class="fa fa-plus"></i>
-                    </a>
-                    <div class="media-body">
-                        {% trans "Create Announcement" %}
-                    </div>
-                </li>
-            </ul>
-        </button>
     
         {% for announcement in object_list %}
             {% include 'cosinnus/user_dashboard_announcement/list_object.html' with object=announcement %}

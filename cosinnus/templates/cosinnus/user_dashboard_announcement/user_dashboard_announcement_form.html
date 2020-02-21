@@ -108,7 +108,6 @@
 	        {% endcaptureas %}
 	        {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label label=date_label large_field=True %} 
 	        
-            
             {# Announcement Type Field #}
             {% trans "Display type" as type_label %}
             {% trans "Choose between a markdown editor, or insert your own raw HTML (it is recommended to have a designer create the HTML!)" as type_legend %}
@@ -128,7 +127,7 @@
 	            {# SimpleMDE Description Field (gets initialized in extrahead) #}                                  
 	            {% trans "Text" as text_label %}
 	            {% captureas text_placeholder %}{% trans "The main text of the announcement." %}{% endcaptureas %}
-                {% captureas text_legend %}{% trans "The main text of the announcement." %}{% trans "Use Header-1 as main title and Header-2 as in-between header. They will be styled appropriately on the dashboard!" %}{% endcaptureas %}
+                {% captureas text_legend %}{% trans "The main text of the announcement." %} {% trans 'Use "# Big Header" as main title and "## Small Header" as in-between header. They will be styled appropriately on the dashboard!' %}{% endcaptureas %}
 	            {% include 'cosinnus/fields/default_field.html' with field=form.text label=text_label legend=text_legend placeholder=text_placeholder large_field=True %}
             </div>
             
@@ -190,7 +189,7 @@
         </div>
         
         
-        <button type="submit" class="btn btn-autosize {% if object %}btn-emphasized{% else %}btn-default{% endif %} pull-left no-margin"
+        <button type="button" class="btn btn-autosize {% if object %}btn-emphasized{% else %}btn-default{% endif %} pull-left no-margin"
                 {% if object %}href="{{ object.get_preview_url }}" target="_blank"{% endif %}>
             <ul class="media-list">
                 <li class="media">
@@ -198,7 +197,7 @@
                         <i class="fa fa-check"></i>
                     </a>
                     <div class="media-body">
-                        {% trans "Open Preview (requires Save)" %}
+                        {% trans "Open Preview" %} ({% trans "requires Save" %})
                     </div>
                 </li>
             </ul>

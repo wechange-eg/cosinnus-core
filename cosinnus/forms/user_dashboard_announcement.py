@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.conf import settings
 from cosinnus.forms.group import AsssignPortalMixin
 from cosinnus.models.user_dashboard_announcement import UserDashboardAnnouncement
+from cosinnus.forms.widgets import SplitHiddenDateWidget
 
 
 class UserDashboardAnnouncementForm(AsssignPortalMixin, forms.ModelForm):
@@ -26,5 +27,8 @@ class UserDashboardAnnouncementForm(AsssignPortalMixin, forms.ModelForm):
             'image', 
             'url',
         ]
+        
+    valid_from = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='00:00'))
+    valid_till = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='23:59'))
 
 
