@@ -30,5 +30,8 @@ class UserDashboardAnnouncementForm(AsssignPortalMixin, forms.ModelForm):
         
     valid_from = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='00:00'))
     valid_till = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='23:59'))
-
+    
+    def __init__(self, *args, **kwargs):
+        super(UserDashboardAnnouncementForm, self).__init__(*args, **kwargs)
+        self.fields['text'].initial = "# Enter your\n# Big Headline here\n\nDear Community,\n\nExample text.\n\n## Secondary Headline\n\nMore text"
 

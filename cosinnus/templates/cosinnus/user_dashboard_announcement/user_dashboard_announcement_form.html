@@ -136,9 +136,22 @@
 	            {% trans "Raw HTML" as raw_html_label %}
 	            {% captureas raw_html_placeholder %}
 	                {% trans "Raw HTML. Should contain a Dismiss-button" %}.
-	                You may use the following variables: %(full_name)s,  raw_html_label
+	                {% trans "You may use the following variables:" %}
+	                %(user_first_name)s
+                    %(user_last_name)s
+                    %(user_full_name)s
+                    %(announcement_id)s
 	            {% endcaptureas %}
 	            {% include 'cosinnus/fields/default_field.html' with field=form.raw_html label=raw_html_label placeholder=raw_html_label legend=raw_html_placeholder large_field=True %}
+	            
+	            {% trans 'Use one of these buttons as "Do not show this again"-Button' %} 
+	            <code>
+                
+                </code>
+                <code>
+                
+                </code>
+                
             </div>
             
             {# Idea Image Field #}

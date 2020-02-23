@@ -133,19 +133,40 @@
 		
 		{% if announcement %}
 			<div class="dashboard-announcement-frame" style="display: none">
-	            <div class="aside-link text-small">
-	                <a class="pale-color pale-with-highlight"
-	                    data-target="ui-pref" data-ui-pref="dashboard_announcements__hidden"
-	                    data-ui-pref-value="{{ announcement.id }}" data-hide-after=".dashboard-announcement-frame">
-	                    {% trans "Do not show this again" %}
-	                </a>
-	            </div>
-	            <h1 class="headline headline-big no-side-margin">
-	                {% include 'cosinnus/v2/texts/welcome_frame_header.html' %}
-	            </h1>
-	            <div class="description margin-extra-large">
-	                {% include 'cosinnus/v2/texts/welcome_frame_text.html' %}
-	            </div>
+			    {% if announcement.type == 0 %}
+			        {% if not announcement_is_preview %}
+			            <div class="aside-link text-small">
+			                <a class="pale-color pale-with-highlight"
+			                    data-target="ui-pref" data-ui-pref="dashboard_announcements__hidden"
+			                    data-ui-pref-value="{{ announcement.id }}" data-hide-after=".dashboard-announcement-frame">
+			                    <i class="fas fa-close"></i>
+			                </a>
+			            </div>
+		            {% endif %}
+		            {% if announcement.category > 0 %}
+    		            <h2>{{ announcement.category_text }}</h2>
+    		        {% endif %}
+		            <div class="v2-textfield transparent">
+                        {{ announcement.text|textfield }}
+                    </div>
+                    {% if announcement.url or not announcement_is_preview %}
+                        <div class="spacer-large">&nbsp;</div>
+                        <h2>
+	                        {% if announcement.url %}
+                                <a href="{{ announcement.url }}" target="_blank" rel="nofollow">
+                                    {% trans "Continue reading" %}</a>
+                            {% endif %}
+                            {% if not announcement_is_preview %}
+                                <a class="pale-color pale-bold pale-with-highlight"
+	                                data-target="ui-pref" data-ui-pref="dashboard_announcements__hidden"
+	                                data-ui-pref-value="{{ announcement.id }}" data-hide-after=".dashboard-announcement-frame">
+	                                {% trans "Do not show this again" %}</a>
+                            {% endif %}
+                        </h2>
+                    {% endif %}
+		        {% else %}
+		            {% render_announcement_html announcement %}
+		        {% endif %}
 	        </div> {% comment %} end dashboard-announcement-frame {% endcomment %}
         {% endif %}        
 		

@@ -1104,6 +1104,11 @@ def has_accepted_portal_tos(user):
     return check_user_has_accepted_portal_tos(user)
 
 
+@register.simple_tag(takes_context=True)
+def render_announcement_html(context, announcement):
+    """ Renders the raw_html for a UserDashboardAnnouncement """
+    return mark_safe(announcement.get_raw_with_variables(context.request))
+    
 
 class RenderContextIdMixin(object):
 

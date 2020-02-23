@@ -86,7 +86,7 @@ class UIPrefsApiView(View):
                 return HttpResponseBadRequest('ui_pref "%s" not found!' % ui_pref)
             try:
                 value = self.get_valid_value(field, raw_value)
-                if field is UiPrefIntegerListField:
+                if type(field) is UiPrefIntegerListField:
                     # for list fields, store the value by appending to the existing list
                     ui_prefs[ui_pref] = list(set(old_ui_prefs[ui_pref] + [value]))
                 else:

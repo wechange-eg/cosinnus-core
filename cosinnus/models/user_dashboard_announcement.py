@@ -17,6 +17,7 @@ from cosinnus.utils.urls import get_domain_for_portal
 from cosinnus.views.ui_prefs import get_ui_prefs_for_user, \
     UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS
 from django.utils.timezone import now
+from cosinnus.templatetags.cosinnus_tags import full_name
 
 
 logger = logging.getLogger('cosinnus')
@@ -130,6 +131,39 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
         """ Returns true if the announcement is in between its valid dates, so would be displayed """
         right_now = now()
         return bool(self.valid_from <= right_now and right_now <= self.valid_till)
+    
+    @property
+    def category_text(self):
+        return dict(self.ANNOUNCEMENT_CATEGORIES)[self.category]
+    
+    def get_raw_with_variables(self, request):
+        variables = {
+            'user_first_name': request.user.first_name,
+            'user_last_name': request.user.last_name,
+            'user_full_name': full_name(request.user),
+            'announcement_id': self.id,
+        }
+        return self.raw_html % variables
+    
+    @classmethod
+    def get_next_for_user(cls, user):
+        """ Returns the next valid announcement for a user that they haven't hidden already,
+            or None. """
+        user_hidden_ids = get_hidden_user_dashboard_announcements_for_user(user)
+        right_now = now()
+        candidates = cls.objects.filter(
+            portal=CosinnusPortal.get_current(),
+            is_active=True,
+            valid_from__lte=right_now,
+            valid_till__gte=right_now,
+        ).exclude(
+            id__in=user_hidden_ids
+        ).order_by('valid_from')
+        
+        if len(candidates) > 0:
+            return candidates[0]
+        return None
+        
 
 def get_hidden_user_dashboard_announcements_for_user(user):
     """ Returns a list of ids of UserDashboardAnnouncement that the user has chosen to 
@@ -137,5 +171,5 @@ def get_hidden_user_dashboard_announcements_for_user(user):
     if not user.is_authenticated:
         return []
     ui_prefs = get_ui_prefs_for_user(user)
-    # TODO: convert to actual int?
+    # TODO: need to convert to actual int?
     return ui_prefs[UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS]
