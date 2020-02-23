@@ -133,6 +133,9 @@
 		
 		{% if announcement %}
 			<div class="dashboard-announcement-frame" style="display: none">
+			    {% if announcement_is_preview %}
+	                <h2><i>({% trans "Preview" %})</i></h2>
+	            {% endif %}
 			    {% if announcement.type == 0 %}
 			        {% if not announcement_is_preview %}
 			            <div class="aside-link text-small">
@@ -145,6 +148,9 @@
 		            {% endif %}
 		            {% if announcement.category > 0 %}
     		            <h2>{{ announcement.category_text }}</h2>
+    		        {% endif %}
+    		        {% if announcement.image %}
+    		            <img class="image" src="{{ announcement.static_image_url }}" />
     		        {% endif %}
 		            <div class="v2-textfield transparent">
                         {{ announcement.text|textfield }}

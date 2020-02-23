@@ -128,7 +128,7 @@
 	            {% trans "Text" as text_label %}
 	            {% captureas text_placeholder %}{% trans "The main text of the announcement." %}{% endcaptureas %}
                 {% captureas text_legend %}{% trans "The main text of the announcement." %} {% trans 'Use "# Big Header" as main title and "## Small Header" as in-between header. They will be styled appropriately on the dashboard!' %}{% endcaptureas %}
-	            {% include 'cosinnus/fields/default_field.html' with field=form.text label=text_label legend=text_legend placeholder=text_placeholder large_field=True %}
+	            {% include 'cosinnus/fields/default_field.html' with field=form.text label=text_label legend=text_legend placeholder=text_placeholder large_field=True hide_optional=True %}
             </div>
             
             <div id="announcement-type-frame-1" {% if not object or object.type != 1 %}style="display: none;"{% endif %}>
@@ -136,22 +136,15 @@
 	            {% trans "Raw HTML" as raw_html_label %}
 	            {% captureas raw_html_placeholder %}
 	                {% trans "Raw HTML. Should contain a Dismiss-button" %}.
-	                {% trans "You may use the following variables:" %}
-	                %(user_first_name)s
+	            {% endcaptureas %}
+	            {% include 'cosinnus/fields/default_field.html' with field=form.raw_html label=raw_html_label placeholder=raw_html_label legend=raw_html_placeholder large_field=True %}
+	            <p>
+		            {% trans "You may use the following variables:" %}
+                    %(user_first_name)s
                     %(user_last_name)s
                     %(user_full_name)s
                     %(announcement_id)s
-	            {% endcaptureas %}
-	            {% include 'cosinnus/fields/default_field.html' with field=form.raw_html label=raw_html_label placeholder=raw_html_label legend=raw_html_placeholder large_field=True %}
-	            
-	            {% trans 'Use one of these buttons as "Do not show this again"-Button' %} 
-	            <code>
-                
-                </code>
-                <code>
-                
-                </code>
-                
+                </p>
             </div>
             
             {# Idea Image Field #}
@@ -207,10 +200,10 @@
             <ul class="media-list">
                 <li class="media">
                     <a class="pull-left">
-                        <i class="fa fa-check"></i>
+                        <i class="fa fa-eye"></i>
                     </a>
                     <div class="media-body">
-                        {% trans "Open Preview" %} ({% trans "requires Save" %})
+                        {% trans "Open Preview" %} ({% trans "requires a Save before" %})
                     </div>
                 </li>
             </ul>

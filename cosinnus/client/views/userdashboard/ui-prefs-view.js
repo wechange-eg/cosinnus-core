@@ -62,13 +62,18 @@ module.exports = Backbone.View.extend({
     	var prefs = {};
     	var $link = $(event.target);
     	
-    	prefs[$link.attr('data-ui-pref')] = $link.attr('data-ui-pref-value');
-    	this.saveUiPrefs(prefs);
-    	
-    	// if an element is given in `data-hide-after`, hide that element
-    	var hideAfter = $link.attr('data-hide-after');
-    	if (hideAfter) {
-    		$(hideAfter).fadeOut();
+    	if (!$link.is('[data-target="ui-pref"]')) {
+    	    $link = $link.parents('[data-target="ui-pref"]');
+    	}
+    	if ($link.is('[data-target="ui-pref"]')) {
+        	prefs[$link.attr('data-ui-pref')] = $link.attr('data-ui-pref-value');
+        	this.saveUiPrefs(prefs);
+        	
+        	// if an element is given in `data-hide-after`, hide that element
+        	var hideAfter = $link.attr('data-hide-after');
+        	if (hideAfter) {
+        		$(hideAfter).fadeOut();
+        	}
     	}
     },
     

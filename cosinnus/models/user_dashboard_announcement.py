@@ -31,8 +31,8 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
     TYPE_EDITOR = 0
     TYPE_RAW_HTML = 1
     ANNOUNCEMENT_TYPES= (
-        (TYPE_EDITOR, 'Editor Text'),
-        (TYPE_RAW_HTML, 'Raw HTML'),
+        (TYPE_EDITOR, _('Text Editor')),
+        (TYPE_RAW_HTML, _('Raw HTML')),
     )
     
     ANNOUNCEMENT_CATEGORIES = (

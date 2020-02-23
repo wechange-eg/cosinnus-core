@@ -34,4 +34,22 @@ class UserDashboardAnnouncementForm(AsssignPortalMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserDashboardAnnouncementForm, self).__init__(*args, **kwargs)
         self.fields['text'].initial = "# Enter your\n# Big Headline here\n\nDear Community,\n\nExample text.\n\n## Secondary Headline\n\nMore text"
+        self.fields['raw_html'].initial = """
+Paste your raw HTML here. Use one of these button codes as "Do not show this again"-Button:
 
+<a class="pale-color pale-with-highlight"
+    data-target="ui-pref" data-ui-pref="dashboard_announcements__hidden"
+    data-ui-pref-value="%(announcement_id)s" data-hide-after=".dashboard-announcement-frame">
+    <i class="fas fa-close"></i>
+</a>
+
+or 
+
+<h2>
+<a class="pale-color pale-bold pale-with-highlight"
+    data-target="ui-pref" data-ui-pref="dashboard_announcements__hidden"
+    data-ui-pref-value="%(announcement_id)s" data-hide-after=".dashboard-announcement-frame">
+    Hinweis nicht wieder anzeigen</a>
+</h2>
+        """
+        
