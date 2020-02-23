@@ -22,19 +22,19 @@
     "beepbeep": "^1.2.0",
     "browser-sync": "^2.11.0",
     "colors": "^1.1.2",
-    "gulp": "git+https://github.com/gulpjs/gulp.git#4.0",
+    "gulp": "^4.0.2",
     "gulp-awspublish": "^3.0.1",
-    "gulp-cli": "^1.1.0",
+    "gulp-cli": "^2.2.0",
     "gulp-html-src": "^1.0.0",
-    "gulp-htmlmin": "^1.1.1",
+    "gulp-htmlmin": "^5.0.1",
     "gulp-if": "^2.0.0",
-    "gulp-imagemin": "^2.4.0",
+    "gulp-imagemin": "^7.1.0",
     "gulp-inline-css": "^3.0.0",
     "gulp-litmus": "0.0.7",
     "gulp-load-plugins": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
-    "gulp-sass": "^2.1.0",
+    "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-zip": "^3.2.0",
     "inky": "^1.3.6",
@@ -46,7 +46,8 @@
     "yargs": "^4.1.0"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   }
-
 }
