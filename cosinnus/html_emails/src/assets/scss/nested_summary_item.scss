@@ -1,7 +1,3 @@
 .nested-summary-item {
     margin-top: $global-margin;
-
-    @include respond() {
-        margin-left: $global-margin * 2 !important;
-    }
 }

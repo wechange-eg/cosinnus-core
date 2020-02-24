@@ -1,13 +1,13 @@
 {{> page_header}}
 
 <row class="origin">
-    <columns small="2" large="1" valign="middle">
+    <columns small="2" large="2" valign="middle">
         <a href="{{#rw this}}origin_url{{/rw}}" target="_blank">
             <img src="{{#rw this}}origin_image_url{{/rw}}" alt="" />
         </a>
     </columns>
 
-    <columns small="10" large="11" valign="middle">
+    <columns small="11" large="11" valign="middle">
         <h3>
             <a href="{{#rw this}}origin_url{{/rw}}" target="_blank">
                 {{#rw this}}origin_name{{/rw}}
@@ -36,7 +36,7 @@
 
 {{#rwif show_action_buttons raw_if="show_action_buttons"}}
     <row class="action_buttons">
-        <columns large="3">
+        <columns large="3" small="3">
             {{#rwif action_button_1_text raw_if="action_button_1_text"}}
 	            <a class="action-button {{#rwif action_button_1_alternate raw_if="action_button_1_alternate"}}action-button-alternate{{/rwif}}" href="{{#rw this}}action_button_1_url{{/rw}}" target="_blank">
 	                {{#rw this}}action_button_1_text{{/rw}}

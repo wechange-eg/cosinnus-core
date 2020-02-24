@@ -3,10 +3,6 @@
 @import 'mixins';
 
 .summary-item {
-    @include respond() {
-        margin-bottom: $global-margin * 2;
-    }
-
     .columns {
         padding-bottom: $global-margin / 2;
     }
@@ -30,10 +26,6 @@
 
         .row {
             margin-left: $global-margin;
-
-            @include respond() {
-                margin-left: 0 !important;
-            }
 
             &.event-text {
                 a {
@@ -87,15 +79,4 @@
         }
     }
 
-    .image {
-        @include respond() {
-            padding-bottom: 6px !important;
-        }
-
-        img {
-            @include respond() {
-                width: 33% !important;
-            }
-        }
-    }
 }

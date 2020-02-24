@@ -7,10 +7,6 @@
 
     .items {
         padding-bottom: $global-margin * 2;
-
-        @include respond() {
-            padding-bottom: 0;
-        }
     }
 
 
