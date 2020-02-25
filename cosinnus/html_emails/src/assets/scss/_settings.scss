@@ -13,12 +13,18 @@
 //   8. Thumbnail
 
 
-// 1. Global
+// 1. Global (wechange colors)
 // ---------
-$back: lighten(#f2f0ec, 2%);
-
+$back: #f0f0f0;
+$text-color: #333333;
+$pale-text-color: #bebebe;
 $primary-color: #74b8a1;
-$secondary-color: #777777;
+$secondary-color: #bebebe;
+$background-color: #ffffff;
+
+// 1. Global (default)
+// ---------
+
 $success-color: #3adb76;
 $warning-color: #ffae00;
 $alert-color: #ec5840;
@@ -31,11 +37,11 @@ $white: #fefefe;
 $pre-color: #ff6908;
 $global-width: 580px;
 $global-width-small: 95%;
-$global-gutter: 26px;
+$global-gutter: 0;
 $body-background: $back;
 $container-background: white;
-$global-padding: 16px;
-$global-margin: 16px;
+$global-padding: 0;
+$global-margin: 0;
 $global-radius: 3px;
 $global-rounded: 500px;
 $global-breakpoint: $global-width + $global-gutter;
@@ -57,7 +63,7 @@ $block-grid-gutter: $global-gutter;
 // -------------
 
 $global-font-color: $black;
-$body-font-family: 'Helvetica Neue', Arial, sans-serif;
+$body-font-family: Arial, sans-serif;
 $global-font-weight: normal;
 $header-color: inherit;
 $global-line-height: 1.3;

@@ -1,27 +1,3 @@
 @import 'wechange_variables';
 @import 'mixins';
 
-.summary-group {
-    margin-bottom: $global-margin * 2;
-    border-bottom: 2px solid #f6f5f2;
-
-    .items {
-        padding-bottom: $global-margin * 2;
-    }
-
-
-    h3 {
-        @extend h5;
-        margin-bottom: $global-margin;
-
-        a {
-            text-decoration: none;
-            font-weight: bold;
-            color: $link-emphasis-color;
-        }
-    }
-
-    &.last {
-        border: none;
-    }
-}

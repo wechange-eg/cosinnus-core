@@ -18,12 +18,11 @@
 // -------------
 
 .content {
-    border-radius: 6px;
-    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.02);
+    border-radius: 1px;
 }
 
 img {
-    width: 100%;
+    width: auto;
 }
 
 .body {
@@ -32,14 +31,31 @@ img {
     }
 }
 
-.columns {
-    &.tight {
-        padding-bottom: 0;
-    }
-}
-
 /* Hide linebreaks in sublists (those linebreaks are some markdown glitch) */
 ul br, ol br, ul br {
     display: none;
 }
 
+a {
+    color: $primary-color;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;    
+}
+
+/* reset paddings and margins */
+.column, .columns, .first, .last {
+    padding: 0 !important;
+    margin: 0;
+    padding-left: 0 !important;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    
+    background-color: red !important;
+}
+th.large-12.first {
+    padding-left: 0 !important;
+    

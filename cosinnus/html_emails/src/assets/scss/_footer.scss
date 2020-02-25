@@ -5,15 +5,17 @@ table.container.footer {
     margin-top: $global-margin * 1.5;
 
     .opt-out {
-        $hue: hue($primary-color);
-        $opt-out-color: hsl($hue, 5, 60);
 
         p {
             font-size: $global-font-size / 1.15;
-            color: $opt-out-color;
 
             a {
-                color: $opt-out-color;
+                color: $text-color;
+                font-weight: bold;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;    
             }
         }
     }

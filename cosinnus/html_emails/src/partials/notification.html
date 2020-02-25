@@ -1,12 +1,10 @@
-{{> page_header}}
-
+    <!-- 
 <row class="origin">
     <columns small="2" large="2" valign="middle">
         <a href="{{#rw this}}origin_url{{/rw}}" target="_blank">
             <img src="{{#rw this}}origin_image_url{{/rw}}" alt="" />
         </a>
     </columns>
-
     <columns small="11" large="11" valign="middle">
         <h3>
             <a href="{{#rw this}}origin_url{{/rw}}" target="_blank">
@@ -16,6 +14,8 @@
     </columns>
 </row>
 
+TODO: here the top notification intro with anchors
+
 {{#rwif notification_body raw_if="notification_body"}}
     <row class="notification-body">
         <columns>
@@ -23,6 +23,7 @@
         </columns>
     </row>
 {{/rwif}}
+    -->
 
 {{#if raw}}
     {{{{raw}}}}
@@ -33,25 +34,3 @@
 {{else}}
 	{{> summary_item notification_object}}
 {{/if}}
-
-{{#rwif show_action_buttons raw_if="show_action_buttons"}}
-    <row class="action_buttons">
-        <columns large="3" small="3">
-            {{#rwif action_button_1_text raw_if="action_button_1_text"}}
-	            <a class="action-button {{#rwif action_button_1_alternate raw_if="action_button_1_alternate"}}action-button-alternate{{/rwif}}" href="{{#rw this}}action_button_1_url{{/rw}}" target="_blank">
-	                {{#rw this}}action_button_1_text{{/rw}}
-	            </a>
-            {{/rwif}}
-            {{#rwif action_button_2_text raw_if="action_button_2_text"}}
-                <a class="action-button {{#rwif action_button_2_alternate raw_if="action_button_2_alternate"}}action-button-alternate{{/rwif}}" href="{{#rw this}}action_button_2_url{{/rw}}" target="_blank">
-                    {{#rw this}}action_button_2_text{{/rw}}
-                </a>
-            {{/rwif}}
-            {{#rwif action_button_alternate_text raw_if="action_button_alternate_text"}}
-                <a class="action-button action-button-alternate" href="{{#rw this}}action_button_alternate_url{{/rw}}" target="_blank">
-                    {{#rw this}}action_button_alternate_text{{/rw}}
-                </a>
-            {{/rwif}}
-        </columns>
-    </row>
-{{/rwif}}

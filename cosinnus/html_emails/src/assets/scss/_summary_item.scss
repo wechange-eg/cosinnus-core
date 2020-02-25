@@ -3,80 +3,79 @@
 @import 'mixins';
 
 .summary-item {
+    background-color: $background-color;
+    border-bottom: 2px solid $back;
+    
     .columns {
-        padding-bottom: $global-margin / 2;
+    }
+    
+    /* Frames */
+    .main-item {
+        
+    }
+    .sub-item {
+        
+    }
+    .item-content {
+        
+    }
+    .action-buttons {
+        
+    }
+    
+    /* Content frames */
+    .spacer {
+    }
+    .event-text {
+    }
+    .event-time {
+    }
+    .group-label {
+    }
+    .image {
+    }
+    .event-time {
+    }
+    .event-time {
+    }
+    
+
+    .object-name {
+        width: auto;
     }
 
-    .text {
-        h3 {
-            @extend h5;
+    .object-text {
+        p {
             font-size: $global-font-size - 2;
-            margin-bottom: 0;
-            font-weight: 500;
-
-            a {
-                text-decoration: none;
-                font-weight: 700;
-            }
-        }
-
-        .columns {
-            padding-bottom: 0;
-        }
-
-        .row {
-            margin-left: $global-margin;
-
-            &.event-text {
-                a {
-                    font-size: 12px;
-                    color: #999;
-                    text-decoration: none;
-                }
-            }
-
-            &.object-name {
-                width: auto;
-                border-bottom-style: solid;
-                border-bottom-width: 1px;
-                margin-bottom: 6px;
-
-                &.news {
-                    border-bottom-color: $news-color;
-                }
-
-                &.event {
-                    border-bottom-color: $event-color;
-                }
-
-                &.todo {
-                    border-bottom-color: $todo-color;
-                }
-
-                &.doc {
-                    border-bottom-color: $doc-color;
-                }
-
-                &.file {
-                    border-bottom-color: $file-color;
-                }
-
-                &.poll {
-                    border-bottom-color: $poll-color;
-                }
-
-                h3 {
-                    display: inline-block;
-                }
-            }
-
-            &.object-text {
-                p {
-                    font-size: $global-font-size - 2;
-                }
-            }
-
         }
     }
 
+
+    .group-label {
+    }
+    
+    .colored-text, .colored-text a {
+        color: $primary-color;
+    }
+    .bold-text {
+        font-weight: bold;
+    }
+    .grey-text, .grey-text a {
+        color: $pale-text-color;
+    }
+    .regular-img {
+        height: 40px;        
+    }
+    .small-img {
+        height: 20px;
+    }
+
+    a.action-button {
+    color: $primary-color;
+    
+    &.action-button-alternate {
+        color: $primary-color;
+    }
+    
 }
+

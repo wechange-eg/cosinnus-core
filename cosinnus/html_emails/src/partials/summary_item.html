@@ -1,83 +1,120 @@
-<row class="body body-inner">
-    <columns class="tight">
-        <row class="summary-item">
+<row class="summary-item">
+    <columns>
+	    <row class="main-item">
+            <columns class="spacer" large="1" small="1">&nbsp;</columns>
+            
             <columns class="image" large="1" small="1" valign="top">
                 <a href="{{#rw this}}object_url{{/rw}}">
-                    <img class="level-2" src="{{#rw this}}image_url{{/rw}}" alt="" />
+                    <img class="regular-img" src="{{#rw this}}image_url{{/rw}}" alt="" />
                 </a>
             </columns>
-
-            <columns class="text" large="10" small="10" valign="middle">
-                <row class="event-text">
-                    <columns>
+        
+            <columns large="6" small="6" valign="middle">
+                <row class="event-text colored-text">
+                    <columns large="8" small="8" >
                         <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
+                            <span class="bold-text">{{#rw this}}action_user_name{{/rw}}</span>
                             {{#rw this}}event_text{{/rw}}
-
-                            {{#rwif event_meta raw_if="event_meta"}}
-                                - {{#rw this}}event_meta{{/rw}}
-                            {{/rwif}}
                         </a>
                     </columns>
                 </row>
-
-                {{#rwif object_name raw_if="object_name" }}
-                    <row class="object-name {{#rw this}}type{{/rw}}">
-                        <columns>
-                            <h3>
-                                <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
-                                    {{#rw this}}object_name{{/rw}}
-                                </a>
-                            </h3>
+                <row class="event-time">
+                    <columns>
+                        {{#rw this}}event_meta{{/rw}}
+                    </columns>
+                </row>
+            </columns>
+            
+            <columns class="group-label grey-text" large="3" small="3" valign="top">
+                <a href="{{#rw this}}origin_url{{/rw}}" target="_blank">
+                    <img class="small-img" src="{{#rw this}}origin_icon_url{{/rw}}" />
+                    {{#rw this}}origin_name{{/rw}}
+                </a>
+            </columns>
+            
+            <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
+        </row>
+		
+		{{#rwif sub_object_name raw_if="sub_object_name" }}
+            <row class="sub-item">
+                <columns class="spacer" large="1" small="1">&nbsp;</columns>
+                
+                <columns class="image" large="1" small="1" valign="top">
+                    <a href="{{#rw this}}object_url{{/rw}}">
+                        <img class="regular-img" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
+                    </a>
+                </columns>
+            
+                <columns class="text" large="9" small="9" valign="middle">
+                    <row class="bold-text">
+                        <columns large="8" small="8" >
+                            <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
+                                <span class="bold-text">{{#rw this}}sub_object_name{{/rw}}</span>
+                            </a>
                         </columns>
                     </row>
-                {{/rwif}}
-
-                {{#if raw}}
-                    {{{{raw}}}}
-                        {% if object_text or content_rows and not this_is_a_sub_snippet %}
-	                        <row class="object-text {{ type }}">
-	                            <columns>
-	                                {% if object_text %}
-	                                   <p>{{ object_text }}</p>
-	                                {% endif %}
-		                            {% for content in content_rows %}
-		                                <p>{{ content }}</p>
-		                            {% endfor %}
-	                            </columns>
-	                        </row>
-                        {% endif %}
-                    {{{{/raw}}}}
-                {{else}}
-	                {{#rwif object_text raw_if="object_text" }}
-	                    <row class="object-text {{#rw this}}type{{/rw}}">
+                    {{#rwif sub_object_text raw_if="sub_object_text" }}
+	                    <row>
 	                        <columns>
-	                            <p>{{#rw this}}object_text{{/rw}}</p>
+	                            {{#rw this}}sub_object_text{{/rw}}
 	                        </columns>
 	                    </row>
-	                {{/rwif}}                    
-                {{/if}}
-
-                {{#if raw}}
-                    {{{{raw}}}}
-                        {% comment %} render the comment if there is one, using this same template {% endcomment %}
-                        {% if sub_object_text and sub_image_url and not this_is_a_sub_snippet %}
-                            <row class="nested-summary-item">
-                                <columns>
-                                	{% include snippet_template with object_text=sub_object_text image_url=sub_image_url event_meta=sub_event_meta event_text=sub_event_text object_name="" this_is_a_sub_snippet=True %}
-                                </columns>
-                            </row>
-                        {% endif %}
-                    {{{{/raw}}}}
-                {{else}}
-                    {{#if comment}}
-                        <row class="nested-summary-item">
-                            <columns>
-                                {{> summary_item comment}}
-                            </columns>
-                        </row>
-                    {{/if}}
-                {{/if}}
-            </columns>
-        </row>
+                    {{/rwif}}
+                </columns>
+                
+                <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
+            </row>
+        {{/rwif}}
+        
+        {{#rwif object_text raw_if="object_text" }}
+            <row class="item-content">
+                <columns class="image" large="1" small="1" valign="top">
+                    <a href="{{#rw this}}object_url{{/rw}}">
+                        <img class="regular-img" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
+                    </a>
+                </columns>
+            
+                <columns class="text" large="1" small="10" valign="middle">
+                    {{#rwif object_name raw_if="object_name" }}
+                        <p class="bold-text">
+                            {{#rw this}}object_name{{/rw}}
+                        </p>
+	                {{/rwif}}
+	                <p>
+	                   {{#rw this}}object_text{{/rw}}
+                    </p>
+                </columns>
+                
+                <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
+            </row>
+        {{/rwif}}
+        
+        {{#rwif show_action_buttons raw_if="show_action_buttons"}}
+            <row class="action_buttons">
+                <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
+            
+                <columns class="text" large="1" small="10" valign="middle">
+                    {{#rwif action_button_1_text raw_if="action_button_1_text"}}
+                        <a class="action-button {{#rwif action_button_1_alternate raw_if="action_button_1_alternate"}}action-button-alternate{{/rwif}}" href="{{#rw this}}action_button_1_url{{/rw}}" target="_blank">
+                            {{#rw this}}action_button_1_text{{/rw}}
+                        </a>
+                    {{/rwif}}
+                    {{#rwif action_button_2_text raw_if="action_button_2_text"}}
+                        <a class="action-button {{#rwif action_button_2_alternate raw_if="action_button_2_alternate"}}action-button-alternate{{/rwif}}" href="{{#rw this}}action_button_2_url{{/rw}}" target="_blank">
+                            {{#rw this}}action_button_2_text{{/rw}}
+                        </a>
+                    {{/rwif}}
+                    {{#rwif action_button_alternate_text raw_if="action_button_alternate_text"}}
+                        <a class="action-button action-button-alternate" href="{{#rw this}}action_button_alternate_url{{/rw}}" target="_blank">
+                            {{#rw this}}action_button_alternate_text{{/rw}}
+                        </a>
+                    {{/rwif}}
+                    
+                </columns>
+                
+                <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
+            </row>
+        {{/rwif}}
+		        
     </columns>
 </row>

@@ -171,7 +171,7 @@
                             {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.select_area_width}}px;height:{{SETTINGS.AWESOME_AVATAR.select_area_height}}px{% endcaptureas %}
                             {% captureas group_avatar_type %}{% if group_model == "CosinnusSociety" %}group{% else %}project{% endif %}{% endcaptureas %}
                             <div id="id_avatar-preview" class="awesome-avatar-preview regular-space" style="{{ preview_style }}">
-                                {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style type=group_avatar_type %}
+                                {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style group_avatar_type=group_avatar_type %}
                             </div>
                         {% endcaptureas %}
                         {% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
