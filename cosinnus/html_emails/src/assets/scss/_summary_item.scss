@@ -7,13 +7,19 @@
     border-bottom: 2px solid $back;
     
     .columns {
+        &:not(.unpadded) {
+            padding: 20px 10px;
+            th {
+                padding: 0 5px;    
+            }
+        }
+    }
+    .main-row {
+        margin: 15px 0;
     }
     
     /* Frames */
     .main-item {
-        
-    }
-    .sub-item {
         
     }
     .item-content {
@@ -32,46 +38,54 @@
     }
     .group-label {
     }
-    .image {
-    }
-    .event-time {
-    }
-    .event-time {
-    }
-    
 
-    .object-name {
-        width: auto;
-    }
-
-    .object-text {
-        p {
-            font-size: $global-font-size - 2;
+    .border-inlay {
+        border-top: 2px solid $back;
+        border-bottom: 2px solid $back;
+        & > table {
+            margin: 15px 0;
         }
-    }
-
-
-    .group-label {
     }
     
     .colored-text, .colored-text a {
         color: $primary-color;
     }
     .bold-text {
-        font-weight: bold;
+        &, & tr, & th , & a {
+            font-weight: bold;
+        }
     }
-    .grey-text, .grey-text a {
-        color: $pale-text-color;
+    .grey-text {
+        &, & tr, & th , & a {
+            color: $pale-text-color;
+        }
     }
+    .small-text {
+        &, & tr, & th , & a {
+            font-size: 12px;
+            line-height: 14px;
+        }
+    }
+    .smaller-text  {
+        &, & tr, & th , & a {
+            font-size: 11px;
+            line-height: 11px;
+        }
+    }
+
     .regular-img {
         height: 40px;        
     }
     .small-img {
-        height: 20px;
+        height: 30px;
+    }
+    .inline-img {
+        display: inline;   
     }
 
     a.action-button {
-    color: $primary-color;
+        color: $primary-color;
+    }
     
     &.action-button-alternate {
         color: $primary-color;

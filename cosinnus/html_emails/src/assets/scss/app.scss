@@ -45,17 +45,4 @@ a:hover {
     text-decoration: underline;    
 }
 
-/* reset paddings and margins */
-.column, .columns, .first, .last {
-    padding: 0 !important;
-    margin: 0;
-    padding-left: 0 !important;
-    padding-right: 0;
-    padding-bottom: 0;
-    padding-top: 0;
-    
-    background-color: red !important;
-}
-th.large-12.first {
-    padding-left: 0 !important;
     

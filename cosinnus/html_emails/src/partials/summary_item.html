@@ -1,17 +1,17 @@
 <row class="summary-item">
     <columns>
-	    <row class="main-item">
+	    <row class="main-row main-item">
             <columns class="spacer" large="1" small="1">&nbsp;</columns>
             
-            <columns class="image" large="1" small="1" valign="top">
+            <columns class="image" large="1" small="1" valign="middle">
                 <a href="{{#rw this}}object_url{{/rw}}">
                     <img class="regular-img" src="{{#rw this}}image_url{{/rw}}" alt="" />
                 </a>
             </columns>
         
-            <columns large="6" small="6" valign="middle">
+            <columns class="small-text" large="6" small="6" valign="middle">
                 <row class="event-text colored-text">
-                    <columns large="8" small="8" >
+                    <columns class="unpadded">
                         <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
                             <span class="bold-text">{{#rw this}}action_user_name{{/rw}}</span>
                             {{#rw this}}event_text{{/rw}}
@@ -19,35 +19,39 @@
                     </columns>
                 </row>
                 <row class="event-time">
-                    <columns>
+                    <columns class="unpadded">
                         {{#rw this}}event_meta{{/rw}}
                     </columns>
                 </row>
             </columns>
             
-            <columns class="group-label grey-text" large="3" small="3" valign="top">
-                <a href="{{#rw this}}origin_url{{/rw}}" target="_blank">
-                    <img class="small-img" src="{{#rw this}}origin_icon_url{{/rw}}" />
-                    {{#rw this}}origin_name{{/rw}}
-                </a>
+            <columns class="group-label smaller-text grey-text bold-text" large="3" small="3" valign="top">
+                <row class="event-time">
+                    <columns class="unpadded" large="2" small="2" valign="middle">
+	                    <img class="small-img inline-img" src="{{#rw this}}origin_icon_url{{/rw}}" />
+                    </columns>
+                    <columns class="unpadded smaller-text" valign="middle">
+                        {{#rw this}}origin_name{{/rw}}
+                    </columns>
+                </row>
             </columns>
             
             <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
         </row>
 		
 		{{#rwif sub_object_name raw_if="sub_object_name" }}
-            <row class="sub-item">
+            <row class="main-row sub-item">
                 <columns class="spacer" large="1" small="1">&nbsp;</columns>
                 
-                <columns class="image" large="1" small="1" valign="top">
+                <columns class="border-inlay" large="1" small="1" valign="middle">
                     <a href="{{#rw this}}object_url{{/rw}}">
                         <img class="regular-img" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
                     </a>
                 </columns>
             
-                <columns class="text" large="9" small="9" valign="middle">
+                <columns class="border-inlay" large="9" small="9" valign="middle">
                     <row class="bold-text">
-                        <columns large="8" small="8" >
+                        <columns class="unpadded">
                             <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
                                 <span class="bold-text">{{#rw this}}sub_object_name{{/rw}}</span>
                             </a>
@@ -55,7 +59,7 @@
                     </row>
                     {{#rwif sub_object_text raw_if="sub_object_text" }}
 	                    <row>
-	                        <columns>
+	                        <columns class="unpadded">
 	                            {{#rw this}}sub_object_text{{/rw}}
 	                        </columns>
 	                    </row>
@@ -67,14 +71,14 @@
         {{/rwif}}
         
         {{#rwif object_text raw_if="object_text" }}
-            <row class="item-content">
+            <row class="main-row item-content">
                 <columns class="image" large="1" small="1" valign="top">
                     <a href="{{#rw this}}object_url{{/rw}}">
                         <img class="regular-img" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
                     </a>
                 </columns>
             
-                <columns class="text" large="1" small="10" valign="middle">
+                <columns class="text" large="10" small="10" valign="middle">
                     {{#rwif object_name raw_if="object_name" }}
                         <p class="bold-text">
                             {{#rw this}}object_name{{/rw}}
@@ -90,7 +94,7 @@
         {{/rwif}}
         
         {{#rwif show_action_buttons raw_if="show_action_buttons"}}
-            <row class="action_buttons">
+            <row class="main-row action_buttons">
                 <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
             
                 <columns class="text" large="1" small="10" valign="middle">
