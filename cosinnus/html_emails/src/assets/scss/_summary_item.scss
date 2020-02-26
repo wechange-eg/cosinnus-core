@@ -55,6 +55,11 @@
             font-weight: bold;
         }
     }
+    .non-bold-text {
+        &, & tr, & th , & a {
+            font-weight: normal;
+        }
+    }
     .grey-text {
         &, & tr, & th , & a {
             color: $pale-text-color;

@@ -9,12 +9,12 @@
                 </a>
             </columns>
         
-            <columns class="small-text" large="6" small="6" valign="middle">
+            <columns class="small-text" large="5" small="5" valign="middle">
                 <row class="event-text colored-text">
                     <columns class="unpadded">
                         <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
                             <span class="bold-text">{{#rw this}}action_user_name{{/rw}}</span>
-                            {{#rw this}}event_text{{/rw}}
+                            <span class="non-bold-text">{{#rw this}}event_text{{/rw}}</span>
                         </a>
                     </columns>
                 </row>
@@ -25,7 +25,7 @@
                 </row>
             </columns>
             
-            <columns class="group-label smaller-text grey-text bold-text" large="3" small="3" valign="top">
+            <columns class="group-label smaller-text grey-text bold-text" large="4" small="4" valign="top">
                 <row class="event-time">
                     <columns class="unpadded" large="2" small="2" valign="middle">
 	                    <img class="small-img inline-img" src="{{#rw this}}origin_icon_url{{/rw}}" />
@@ -52,9 +52,7 @@
                 <columns class="border-inlay" large="9" small="9" valign="middle">
                     <row class="bold-text">
                         <columns class="unpadded">
-                            <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
-                                <span class="bold-text">{{#rw this}}sub_object_name{{/rw}}</span>
-                            </a>
+                            <span class="bold-text">{{#rw this}}sub_object_name{{/rw}}</span>
                         </columns>
                     </row>
                     {{#rwif sub_object_text raw_if="sub_object_text" }}
