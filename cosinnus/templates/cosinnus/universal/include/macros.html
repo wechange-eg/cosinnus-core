@@ -176,7 +176,13 @@
 	    			{% if subtext['is_date'] %}
 	    				<div class="moment-data-date" data-date="{{ subtext.date }}" data-date-style="short"></div>
 	    			{% else %}
-	    				<div>{{ subtext }}</div>
+	    				<div>
+		    				{% if makeSafe %}
+	                            {{ subtext|safe }}
+	                        {% else %}
+	                            {{ subtext }} 
+	                        {% endif %}
+                        </div>
 	    			{% endif %}
 	    		</div>
     		{% else %}

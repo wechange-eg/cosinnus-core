@@ -486,6 +486,8 @@ def user_activity_info(request):
 def newsletter_users(request, includeOptedOut=False, file_name='newsletter-user-emails'):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
+    if not getattr(settings, 'COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS', False):
+        return HttpResponseForbidden('This Feature is currently not enabled!')
     
     user_mails = []
     portal = CosinnusPortal.get_current()

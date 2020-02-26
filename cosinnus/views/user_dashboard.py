@@ -33,13 +33,15 @@ from cosinnus.utils.functions import is_number
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_slugs
 from cosinnus.utils.pagination import QuerysetLazyCombiner
-from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
+from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
+    check_user_superuser
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from django.shortcuts import redirect
 from cosinnus.views.ui_prefs import get_ui_prefs_for_user
 from django.utils.timezone import now
 from dateutil.relativedelta import relativedelta
+from cosinnus.models.user_dashboard_announcement import UserDashboardAnnouncement
 
 
 logger = logging.getLogger('cosinnus')
@@ -66,7 +68,18 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
             except: 
                 if settings.DEBUG:
                     raise
-            
+        
+        announcement = None
+        announcement_is_preview = False
+        # for superusers, check if we're viewing an announcement_preview
+        if self.request.GET.get('show_announcement', None) is not None and check_user_superuser(self.request.user):
+            announcement_id = self.request.GET.get('show_announcement')
+            if is_number(announcement_id):
+                announcement_is_preview = True
+                announcement = get_object_or_None(UserDashboardAnnouncement, id=int(announcement_id))
+        else:
+            announcement = UserDashboardAnnouncement.get_next_for_user(self.request.user)
+        
         options = {
             'ui_prefs': get_ui_prefs_for_user(self.request.user),
         }
@@ -74,6 +87,8 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
             'user_dashboard_options_json': json.dumps(options),
             'forum_group': forum_group,
             'note_form' : note_form,
+            'announcement': announcement,
+            'announcement_is_preview': announcement_is_preview,
         }
         return ctx
 

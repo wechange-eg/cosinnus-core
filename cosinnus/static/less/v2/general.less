@@ -13,7 +13,9 @@
 		cursor: pointer;
 	}
 	
-	.headline {
+	.headline, 
+	.dashboard-announcement-frame h1,
+    .dashboard-announcement-frame h2 {
 		margin: 10px 20px 20px 20px;
 		font-size: 14px;
 		font-weight: bold;
@@ -21,6 +23,15 @@
 		letter-spacing: 1px;
 		line-height: 21px;
 		text-transform: uppercase;
+		&, & a {
+		    color: @color-primary;
+		}
+		& a {
+            letter-spacing: normal;
+            & + a {
+                margin-left: 25px;
+            }
+		}
 		
 		/** no text select */
 		-webkit-touch-callout: none; /* iOS Safari */
@@ -44,6 +55,30 @@
 			margin-right: 0;
 		}
 	}
+	/* This is a repeat of &.headline-big */
+    .dashboard-announcement-frame h1 {
+        margin: 20px;
+        font-size: 20px;
+        line-height: 26px;
+    }
+    .dashboard-announcement-frame p + h2 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    /* This is a repeat of &.no-side-margin */
+    .dashboard-announcement-frame h1,
+    .dashboard-announcement-frame h2 {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    /* The next two styles condense to following h-s  */
+    .dashboard-announcement-frame h1 + h1 {
+        margin-top: 0;
+    }
+    .dashboard-announcement-frame h1:nth-last-of-type(2) {
+        margin-bottom: 0;
+    }
+    
 	a:hover .headline, a:active .headline {
 		color: @background-color;
 	}
@@ -356,6 +391,11 @@
 	    display: none;
 	}
 	
+	&.transparent {
+	    &, & p {
+    	    background-color: transparent;
+	    }
+	}
 }
 
 

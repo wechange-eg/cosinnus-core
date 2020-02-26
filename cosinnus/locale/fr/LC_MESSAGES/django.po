@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 16:35+0100\n"
+"POT-Creation-Date: 2020-02-23 16:09+0100\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -765,6 +765,11 @@ msgstr "ID du groupe Facebook"
 msgid "Facebook Page ID"
 msgstr "ID de la page Facebook"
 
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Group ID"
+msgstr "ID du groupe Facebook"
+
 msgid "Parent Group"
 msgstr "Groupe père"
 
@@ -1022,6 +1027,47 @@ msgstr "Est aimé"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
 msgstr "Suit"
+
+msgid "Text Editor"
+msgstr ""
+
+msgid "Raw HTML"
+msgstr ""
+
+msgid "(none displayed)"
+msgstr ""
+
+msgid "Announcement"
+msgstr ""
+
+msgid "Maintenance"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Technical Issues"
+msgstr ""
+
+msgid "Miscellaneous"
+msgstr ""
+
+msgid "Announcement Display Type"
+msgstr ""
+
+#, fuzzy
+#| msgid "Valid from"
+msgid "Valid From"
+msgstr "Valide à partir de"
+
+msgid "Announcement Category"
+msgstr ""
+
+msgid "Main text of this announcement."
+msgstr ""
+
+msgid "Raw HTML for this announcement."
+msgstr ""
 
 msgid "Create-Project or Group Button"
 msgstr "Bouton créer un projet ou groupe"
@@ -1350,6 +1396,11 @@ msgstr "Statistiques simples"
 #| msgid "Welcome-Email Text"
 msgid "User Welcome Email"
 msgstr "Texte d'email de bienvenue"
+
+#, fuzzy
+#| msgid "User Dashboard"
+msgid "User Dashboard Announcements"
+msgstr "Tableau de bord utilisateur"
 
 msgid "Edit"
 msgstr "Editer"
@@ -4065,6 +4116,122 @@ msgstr "Tu peux changer ou personnaliser ce paramètre plus tard dans tes param�
 msgid "Your privacy: You are in control!"
 msgstr "Confidentialité : tu as le contrôle !"
 
+#, fuzzy
+#| msgctxt "an action done *by* <username>"
+#| msgid "by"
+msgid "by"
+msgstr "par"
+
+#, fuzzy
+#| msgid "Overview"
+msgid "Open Preview"
+msgstr "Vue d'ensemble"
+
+#, fuzzy
+#| msgid "Is active"
+msgid "active"
+msgstr "Est actif"
+
+msgid "displayed right now"
+msgstr ""
+
+msgid "not displayed right now"
+msgstr ""
+
+#, fuzzy
+#| msgid "(Inactive)"
+msgid "inactive"
+msgstr "(Inactif)"
+
+#, fuzzy
+#| msgid "Re-Activate"
+msgid "Activate"
+msgstr "Réactiver"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgid "Do you really want to delete announcement \"%(title)s\"?"
+msgstr "Veux-tu vraiment supprimer l'invitation pour \"%(title)s\" ?"
+
+#, fuzzy
+#| msgid "Delete Account"
+msgid "Delete announcement"
+msgstr "Supprimer compte"
+
+msgid "Edit Announcement"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create account"
+msgid "Create Announcement"
+msgstr "Créer compte"
+
+msgid "Announcement is enabled"
+msgstr ""
+
+msgid "Announcement Title (internal only)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Header Title"
+msgid "Internal Title"
+msgstr "Titre d'en-tête"
+
+msgid "Category for the Announcement"
+msgstr ""
+
+msgid "Will be displayed as a small first header in the announcement"
+msgstr ""
+
+msgid "Timeframe to display announcement"
+msgstr ""
+
+msgid "Display type"
+msgstr ""
+
+msgid "Choose between a markdown editor, or insert your own raw HTML (it is recommended to have a designer create the HTML!)"
+msgstr ""
+
+msgid "The main text of the announcement."
+msgstr ""
+
+msgid "Use \"# Big Header\" as main title and \"## Small Header\" as in-between header. They will be styled appropriately on the dashboard!"
+msgstr ""
+
+msgid "Raw HTML. Should contain a Dismiss-button"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are invited!"
+msgid "You may use the following variables:"
+msgstr "Tu es invité !"
+
+msgid "External Link for a \"Read more\" link"
+msgstr ""
+
+msgid "requires a Save before"
+msgstr ""
+
+msgid "User Dashboard Announcements are sticky posts that appear on top of each user's personal Dashboard."
+msgstr ""
+
+msgid "An announcement will only appear during its valid-time frame."
+msgstr ""
+
+msgid "Only one announcement at a time will ever be shown to a user."
+msgstr ""
+
+msgid "If the user still has not hidden their introduction-message on the dashboard, they will not see any announcements."
+msgstr ""
+
+msgid "A user can dismiss an announcement, in which case it will disappear and never be shown again. On the next visit to their Dashboard, another valid announcement they have not yet hidden may be shown."
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no visible users."
+msgid "There are no announcements yet."
+msgstr "Il n'y a pas d'utilisateurs visibles."
+
 msgid "Enable posting to Facebook"
 msgstr "Activer post sur Facebook"
 
@@ -4256,31 +4423,11 @@ msgid "Do not show this again"
 msgstr ""
 
 #, fuzzy
-#| msgid "Welcome!"
-msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-msgid "Welcome"
-msgstr "Bienvenue !"
+#| msgid "view"
+msgid "Preview"
+msgstr "voir"
 
-#, fuzzy, python-format
-#| msgid "Edit “%(team_name)s”"
-msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-msgid "to %(portal_name)s"
-msgstr "Editer “%(team_name)s”"
-
-#, python-format
-msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
-msgstr ""
-
-msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
-msgstr ""
-
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
-msgstr ""
-
-msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
-msgstr ""
-
-msgid "What's happening where and when? What's to discover? Where to meet?"
+msgid "Continue reading"
 msgstr ""
 
 msgid "What's the latest news?"
@@ -4316,7 +4463,7 @@ msgstr "Créer compte"
 msgid "Home"
 msgstr ""
 
-msgid "Nachrichten"
+msgid "Rocket.Chat"
 msgstr ""
 
 #, fuzzy
@@ -4334,9 +4481,6 @@ msgstr "Inscris-toi et rejoins !"
 msgid "Offer"
 msgstr "Offres"
 
-msgid "Do you have something to share, sell or give away? Are you searching for something?"
-msgstr ""
-
 #, fuzzy
 #| msgid "Cosinnus Idea"
 msgid "Post new Offer"
@@ -4346,6 +4490,37 @@ msgstr "Idée Cosinnus"
 #| msgid "Edit Profile"
 msgid "Edit My Profile"
 msgstr "Modifier mon profil"
+
+msgid "What's happening where and when? What's to discover? Where to meet?"
+msgstr ""
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgstr ""
+
+msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
+msgstr ""
+
+msgid "Do you have something to share, sell or give away? Are you searching for something?"
+msgstr ""
+
+msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
+msgstr ""
+
+#, fuzzy
+#| msgid "Welcome!"
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "Welcome"
+msgstr "Bienvenue !"
+
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "to %(portal_name)s"
+msgstr "Editer “%(team_name)s”"
+
+#, python-format
+msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+msgstr ""
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "S'inscrire et co-administrer"
@@ -4816,6 +4991,31 @@ msgstr "Nous avons supprimé ton adresse \"%(email)s\" de notre liste d'envoi. T
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Bienvenue ! Tu as été invité aux projets et groupes suivants. Clique sur le bouton pour accepter ou décliner l'invitation pour chacun d'eux !"
 
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was created successfully."
+msgstr "Ton profil a été modifié."
+
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was saved successfully."
+msgstr "Ton profil a été modifié."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your Announcement was deleted successfully."
+msgstr "Ton profil a été modifié."
+
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was activated successfully."
+msgstr "Ton profil a été modifié."
+
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was deactivated successfully."
+msgstr "Ton profil a été modifié."
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le devenir ci-dessous."
@@ -4838,9 +5038,6 @@ msgstr "Tes changements ont été enregistrés."
 #~| msgid "Portal"
 #~ msgid "Switch Portal"
 #~ msgstr "Portail"
-
-#~ msgid "User Dashboard"
-#~ msgstr "Tableau de bord utilisateur"
 
 #~ msgid "Microsite Wallpaper"
 #~ msgstr "Fond d'écran du microsite"

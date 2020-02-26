@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 16:35+0100\n"
+"POT-Creation-Date: 2020-02-23 16:09+0100\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -758,6 +758,11 @@ msgstr "Facebook Groep ID"
 msgid "Facebook Page ID"
 msgstr "Facebook Pagina ID"
 
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Group ID"
+msgstr "Facebook Groep ID"
+
 msgid "Parent Group"
 msgstr "Ouder Groep"
 
@@ -1009,6 +1014,47 @@ msgstr "Ge-liked"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
 msgstr "Volgend"
+
+msgid "Text Editor"
+msgstr ""
+
+msgid "Raw HTML"
+msgstr ""
+
+msgid "(none displayed)"
+msgstr ""
+
+msgid "Announcement"
+msgstr ""
+
+msgid "Maintenance"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Technical Issues"
+msgstr ""
+
+msgid "Miscellaneous"
+msgstr ""
+
+msgid "Announcement Display Type"
+msgstr ""
+
+#, fuzzy
+#| msgid "Valid from"
+msgid "Valid From"
+msgstr "Geldig vanaf"
+
+msgid "Announcement Category"
+msgstr ""
+
+msgid "Main text of this announcement."
+msgstr ""
+
+msgid "Raw HTML for this announcement."
+msgstr ""
 
 msgid "Create-Project or Group Button"
 msgstr "Maak—Project of Groep Knop"
@@ -1333,6 +1379,9 @@ msgstr "Simpele Statistiek"
 
 msgid "User Welcome Email"
 msgstr "Welkomst-e-mail voor Gebruikers"
+
+msgid "User Dashboard Announcements"
+msgstr ""
 
 msgid "Edit"
 msgstr "Wijzig"
@@ -3961,6 +4010,122 @@ msgstr "U kunt deze instelling later wijzigen of aanpassen in uw meldingsinstell
 msgid "Your privacy: You are in control!"
 msgstr "Uw privacy: u heeft de controle!"
 
+#, fuzzy
+#| msgctxt "an action done *by* <username>"
+#| msgid "by"
+msgid "by"
+msgstr "door"
+
+#, fuzzy
+#| msgid "Overview"
+msgid "Open Preview"
+msgstr "Overzicht"
+
+#, fuzzy
+#| msgid "Is active"
+msgid "active"
+msgstr "Is actief"
+
+msgid "displayed right now"
+msgstr ""
+
+msgid "not displayed right now"
+msgstr ""
+
+#, fuzzy
+#| msgid "(Inactive)"
+msgid "inactive"
+msgstr "(Inactief)"
+
+#, fuzzy
+#| msgid "Re-Activate"
+msgid "Activate"
+msgstr "Re-activeer"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgid "Do you really want to delete announcement \"%(title)s\"?"
+msgstr "Weet u zeker dat u de uitnodiging voor “%(title)s” wilt verwijderen?"
+
+#, fuzzy
+#| msgid "Delete comment"
+msgid "Delete announcement"
+msgstr "Verwijder opmerking"
+
+msgid "Edit Announcement"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create Announcement"
+msgstr "Maak inhoud aan"
+
+msgid "Announcement is enabled"
+msgstr ""
+
+msgid "Announcement Title (internal only)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Header Title"
+msgid "Internal Title"
+msgstr "Hoofdtitel"
+
+msgid "Category for the Announcement"
+msgstr ""
+
+msgid "Will be displayed as a small first header in the announcement"
+msgstr ""
+
+msgid "Timeframe to display announcement"
+msgstr ""
+
+msgid "Display type"
+msgstr ""
+
+msgid "Choose between a markdown editor, or insert your own raw HTML (it is recommended to have a designer create the HTML!)"
+msgstr ""
+
+msgid "The main text of the announcement."
+msgstr ""
+
+msgid "Use \"# Big Header\" as main title and \"## Small Header\" as in-between header. They will be styled appropriately on the dashboard!"
+msgstr ""
+
+msgid "Raw HTML. Should contain a Dismiss-button"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are not following any ideas yet."
+msgid "You may use the following variables:"
+msgstr "U volgt mijn ideeën nog niet."
+
+msgid "External Link for a \"Read more\" link"
+msgstr ""
+
+msgid "requires a Save before"
+msgstr ""
+
+msgid "User Dashboard Announcements are sticky posts that appear on top of each user's personal Dashboard."
+msgstr ""
+
+msgid "An announcement will only appear during its valid-time frame."
+msgstr ""
+
+msgid "Only one announcement at a time will ever be shown to a user."
+msgstr ""
+
+msgid "If the user still has not hidden their introduction-message on the dashboard, they will not see any announcements."
+msgstr ""
+
+msgid "A user can dismiss an announcement, in which case it will disappear and never be shown again. On the next visit to their Dashboard, another valid announcement they have not yet hidden may be shown."
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no announcements yet."
+msgstr "Er zijn nog geen items"
+
 msgid "Enable posting to Facebook"
 msgstr "Posten op Facebook inschakelen"
 
@@ -4139,30 +4304,13 @@ msgstr "Toon grote kaart"
 msgid "Do not show this again"
 msgstr "Laat dit niet opnieuw zien"
 
-msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-msgid "Welcome"
-msgstr "Welkom"
+#, fuzzy
+#| msgid "view"
+msgid "Preview"
+msgstr "bekijk"
 
-#, python-format
-msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-msgid "to %(portal_name)s"
-msgstr "naar %(portal_name)s"
-
-#, python-format
-msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
-msgstr "Goed om u te zien! Bij %(portal_name)s kunt u samenwerken met anderen in projecten en groepen. Of het nu gaat om een initiatief, organisatie of netwerk - %(portal_name)s biedt alle benodigde hulpmiddelen voor uw online samenwerking."
-
-msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
-msgstr "Organiseer uw projecten of initiatieven efficiënt met uw collega-campagnevoerders. Alle belangrijke tools om op één plek samen te werken: Nieuws, Pads, Evenementen, Todos en meer."
-
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
-msgstr "Groepen helpen de communicatie en samenwerking in grote netwerken of organisaties te verbeteren. Binnen een groep kunt u verschillende kleinere projecten of werkgroepen samenbrengen."
-
-msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
-msgstr "Hoe ziet onze regio er in de toekomst uit? Wat is uw idee voor een milieuvriendelijke en duurzame regio? Zoek co-campagnevoerders voor uw projectideeën."
-
-msgid "What's happening where and when? What's to discover? Where to meet?"
-msgstr "Wat gebeurt er waar en wanneer? Wat valt er te ontdekken? Waar af te spreken?"
+msgid "Continue reading"
+msgstr ""
 
 msgid "What's the latest news?"
 msgstr "Wat is het laatste nieuws?"
@@ -4189,8 +4337,8 @@ msgstr "Maak inhoud aan"
 msgid "Home"
 msgstr "Thuis"
 
-msgid "Nachrichten"
-msgstr "Nieuws"
+msgid "Rocket.Chat"
+msgstr ""
 
 msgid "Change language"
 msgstr "Verander taal"
@@ -4201,14 +4349,39 @@ msgstr "Registreer een nieuw account"
 msgid "Offer"
 msgstr "Bied aan"
 
-msgid "Do you have something to share, sell or give away? Are you searching for something?"
-msgstr "Heeft u iets om te delen, verkopen of weg te geven? Bent u op zoek naar iets?"
-
 msgid "Post new Offer"
 msgstr "Plaats een nieuwe aanbieding"
 
 msgid "Edit My Profile"
 msgstr "Wijzig mijn profiel"
+
+msgid "What's happening where and when? What's to discover? Where to meet?"
+msgstr "Wat gebeurt er waar en wanneer? Wat valt er te ontdekken? Waar af te spreken?"
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgstr "Groepen helpen de communicatie en samenwerking in grote netwerken of organisaties te verbeteren. Binnen een groep kunt u verschillende kleinere projecten of werkgroepen samenbrengen."
+
+msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
+msgstr "Hoe ziet onze regio er in de toekomst uit? Wat is uw idee voor een milieuvriendelijke en duurzame regio? Zoek co-campagnevoerders voor uw projectideeën."
+
+msgid "Do you have something to share, sell or give away? Are you searching for something?"
+msgstr "Heeft u iets om te delen, verkopen of weg te geven? Bent u op zoek naar iets?"
+
+msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
+msgstr "Organiseer uw projecten of initiatieven efficiënt met uw collega-campagnevoerders. Alle belangrijke tools om op één plek samen te werken: Nieuws, Pads, Evenementen, Todos en meer."
+
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "Welcome"
+msgstr "Welkom"
+
+#, python-format
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "to %(portal_name)s"
+msgstr "naar %(portal_name)s"
+
+#, python-format
+msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+msgstr "Goed om u te zien! Bij %(portal_name)s kunt u samenwerken met anderen in projecten en groepen. Of het nu gaat om een initiatief, organisatie of netwerk - %(portal_name)s biedt alle benodigde hulpmiddelen voor uw online samenwerking."
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Registreer nu en help mee vorm te geven"
@@ -4679,12 +4852,40 @@ msgstr "We hebben uw e-mail “%(email)s” van onze mailinglijst afgemeld. U on
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Welkom! U bent uitgenodigd voor de volgende projecten en groepen. Klik op de vervolgknop om op de uitnodigingen te antwoorden!"
 
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was created successfully."
+msgstr "Uw profiel is succesvol gewijzigd."
+
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was saved successfully."
+msgstr "Uw profiel is succesvol gewijzigd."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your Announcement was deleted successfully."
+msgstr "Uw idee is succesvol verwijderd."
+
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was activated successfully."
+msgstr "Uw profiel is succesvol gewijzigd."
+
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was deactivated successfully."
+msgstr "Uw profiel is succesvol gewijzigd."
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "U bent momenteel geen lid van %s! Als u wilt, kunt u hieronder een lidmaatschap aanvragen."
 
 msgid "Your changes have been saved."
 msgstr "Uw veranderingen zijn bewaard."
+
+#~ msgid "Nachrichten"
+#~ msgstr "Nieuws"
 
 #~ msgid "Your privacy settings were saved. Welcome!"
 #~ msgstr "Uw privacy-instellingen zijn opgeslagen. Welkom!"

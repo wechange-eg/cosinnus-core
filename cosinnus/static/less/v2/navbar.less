@@ -179,13 +179,14 @@
 	}
 	.brand-links {
 		display: inline;
+		margin-left: 3px;
 	}
 	
     
 	
 	.nav-button {
 		cursor: pointer;
-		padding: 10px 5px;
+		padding: 10px 7px;
 		
 		img:hover {
 			-webkit-filter: brightness(85%);
@@ -446,9 +447,17 @@
 				opacity: 1;
 				max-height: 50px;
 				height: 50px;
+				
+				& + .nav-buttons {
+				    /** This supports two-line mobile nav triple-dot flyouts */
+				    top: 100px;
+				}
 			}
 			.brand-links {
 				float: left;
+				&.brand-links-full-width {
+				    width: 100%;
+				} 
 			}
 			.nav-flyout, 
 			.nav-flyout-backdrop,

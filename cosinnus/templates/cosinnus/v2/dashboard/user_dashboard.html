@@ -48,14 +48,16 @@
 			</div>
 			<div class="ideas-widget-root">
 			</div>
-			<div class="map-widget square-widget">
-					<div class="widget-content square-content background-content">
-						<h2 class="headline">{% trans "Close to me" %}</h2>
-					</div>
-					<a href="/map/" class="square-content hover-link">
-						{% trans "Show large map" %} 
-					</a>
-			</div>
+			{% block map_widget %}
+				<div class="map-widget square-widget">
+						<div class="widget-content square-content background-content">
+							<h2 class="headline">{% trans "Close to me" %}</h2>
+						</div>
+						<a href="/map/" class="square-content hover-link">
+							{% trans "Show large map" %} 
+						</a>
+				</div>
+			{% endblock %}
 			{% block legal_links %}
 				<div class="legal-links">
 					{% include 'cosinnus/v2/dashboard/tos_links.html' %}
@@ -65,33 +67,26 @@
 	</div>
 		
 	<div class="dashboard-center-bar dashboard-column visible-panel-2">
+	
 		<div class="dashboard-welcome-frame" style="display: none">
 			<div class="aside-link text-small">
-				<a class="pale-color pale-with-highlight hide-welcome-screen"
+				<a class="pale-color pale-with-highlight"
 					data-target="ui-pref" data-ui-pref="timeline__hide_welcome_screen"
 					data-ui-pref-value="1" data-hide-after=".dashboard-welcome-frame">
 					{% trans "Do not show this again" %}
 				</a>
 			</div>
 			<h1 class="headline headline-big no-side-margin">
-				{% block welcome_frame_header %}
-					{% trans "Welcome" context "this is a two-line text that says 'Welcome to <WebsiteName>'" %}
-					<br/>
-					{% blocktrans with portal_name=COSINNUS_CURRENT_PORTAL.name context "this is a two-line text that says 'Welcome to <WebsiteName>'"  %}to {{ portal_name }}{% endblocktrans %}
-				{% endblock %}
+                {% include 'cosinnus/v2/texts/welcome_frame_header.html' %}
 			</h1>
 			<div class="description margin-extra-large">
-				{% block welcome_frame_text %}
-					{% blocktrans with portal_name=COSINNUS_CURRENT_PORTAL.name %}Good to see you! At {{ portal_name }} you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - {{ portal_name }} offers all the necessary tools for your online collaboration.{% endblocktrans %}
-				{% endblock %}
+                {% include 'cosinnus/v2/texts/welcome_frame_text.html' %}
 			</div>
 			<div class="flex-row mobile-flex-column">
 				<div class="flex-grow margin-extra-large">
 					<h2 class="headline no-side-margin">{% trans "Projects" %}</h2>
 					<div class="description">
-						{% block projects_description %}
-							{% trans "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more." %}
-						{% endblock %}
+                        {% include 'cosinnus/v2/texts/create_projects_description.html' %}
 					</div>
 					<br/>
 					<a href="{% url 'cosinnus:group-add' %}" class="pale-color pale-with-highlight">
@@ -101,9 +96,7 @@
 				<div class="flex-grow margin-extra-large">
 					<h2 class="headline no-side-margin">{% trans "Groups" %}</h2>
 					<div class="description">
-						{% block groups_description %}
-							{% trans "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups." %}
-						{% endblock %}
+                        {% include 'cosinnus/v2/texts/create_groups_description.html' %}
 					</div>
 					<br/>
 					<a href="{% url 'cosinnus:group__group-add' %}" class="pale-color pale-with-highlight">
@@ -116,9 +109,7 @@
 				<div class="flex-grow margin-extra-large">
 					<h2 class="headline no-side-margin">{% trans "Ideas" %}</h2>
 					<div class="description">
-						{% block ideas_description %}
-							{% trans "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas." %}
-						{% endblock %}
+                        {% include 'cosinnus/v2/texts/create_ideas_description.html' %}
 					</div>
 					<br/>
 					<a href="{% url "cosinnus:idea-create" %}" class="pale-color pale-with-highlight">
@@ -129,9 +120,7 @@
 				<div class="flex-grow margin-extra-large">
 					<h2 class="headline no-side-margin">{% trans "Events" %}</h2>
 					<div class="description">
-						{% block events_description %}
-							{% trans "What's happening where and when? What's to discover? Where to meet?" %}
-						{% endblock %}
+						{% include 'cosinnus/v2/texts/create_events_description.html' %}
 					</div>
 					<br/>
 					<a href="{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" class="pale-color pale-with-highlight">
@@ -140,7 +129,52 @@
 				</div>
 				
 			</div>
-		</div>
+		</div> {% comment %} end dashboard-welcome-frame {% endcomment %}
+		
+		{% if announcement %}
+			<div class="dashboard-announcement-frame" style="display: none">
+			    {% if announcement_is_preview %}
+	                <h2><i>({% trans "Preview" %})</i></h2>
+	            {% endif %}
+			    {% if announcement.type == 0 %}
+			        {% if not announcement_is_preview %}
+			            <div class="aside-link text-small">
+			                <a class="pale-color pale-with-highlight"
+			                    data-target="ui-pref" data-ui-pref="dashboard_announcements__hidden"
+			                    data-ui-pref-value="{{ announcement.id }}" data-hide-after=".dashboard-announcement-frame">
+			                    <i class="fas fa-close"></i>
+			                </a>
+			            </div>
+		            {% endif %}
+		            {% if announcement.category > 0 %}
+    		            <h2>{{ announcement.category_text }}</h2>
+    		        {% endif %}
+    		        {% if announcement.image %}
+    		            <img class="image" src="{{ announcement.static_image_url }}" />
+    		        {% endif %}
+		            <div class="v2-textfield transparent">
+                        {{ announcement.text|textfield }}
+                    </div>
+                    {% if announcement.url or not announcement_is_preview %}
+                        <div class="spacer-large">&nbsp;</div>
+                        <h2>
+	                        {% if announcement.url %}
+                                <a href="{{ announcement.url }}" target="_blank" rel="nofollow">
+                                    {% trans "Continue reading" %}</a>
+                            {% endif %}
+                            {% if not announcement_is_preview %}
+                                <a class="pale-color pale-bold pale-with-highlight"
+	                                data-target="ui-pref" data-ui-pref="dashboard_announcements__hidden"
+	                                data-ui-pref-value="{{ announcement.id }}" data-hide-after=".dashboard-announcement-frame">
+	                                {% trans "Do not show this again" %}</a>
+                            {% endif %}
+                        </h2>
+                    {% endif %}
+		        {% else %}
+		            {% render_announcement_html announcement %}
+		        {% endif %}
+	        </div> {% comment %} end dashboard-announcement-frame {% endcomment %}
+        {% endif %}        
 		
 		<div class="dashboard-news-create-frame">
 		    {% block news_form_headline %}

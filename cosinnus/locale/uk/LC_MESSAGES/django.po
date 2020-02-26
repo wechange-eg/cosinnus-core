@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 16:35+0100\n"
+"POT-Creation-Date: 2020-02-23 16:09+0100\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -762,6 +762,11 @@ msgstr "ID Facebook спільноти"
 msgid "Facebook Page ID"
 msgstr "ID Facebook сторінки"
 
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Group ID"
+msgstr "ID Facebook спільноти"
+
 msgid "Parent Group"
 msgstr "Основна спільнота"
 
@@ -1013,6 +1018,47 @@ msgstr "Вподобані"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
 msgstr "Відстежуються"
+
+msgid "Text Editor"
+msgstr ""
+
+msgid "Raw HTML"
+msgstr ""
+
+msgid "(none displayed)"
+msgstr ""
+
+msgid "Announcement"
+msgstr ""
+
+msgid "Maintenance"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Technical Issues"
+msgstr ""
+
+msgid "Miscellaneous"
+msgstr ""
+
+msgid "Announcement Display Type"
+msgstr ""
+
+#, fuzzy
+#| msgid "Valid from"
+msgid "Valid From"
+msgstr "Дійсний з"
+
+msgid "Announcement Category"
+msgstr ""
+
+msgid "Main text of this announcement."
+msgstr ""
+
+msgid "Raw HTML for this announcement."
+msgstr ""
 
 msgid "Create-Project or Group Button"
 msgstr "Кнопкп створити проект чи групу"
@@ -1341,6 +1387,9 @@ msgstr "Проста статистика"
 #| msgid "Welcome-Email Text"
 msgid "User Welcome Email"
 msgstr "Текст вітального електронного листа"
+
+msgid "User Dashboard Announcements"
+msgstr ""
 
 msgid "Edit"
 msgstr "Редагувати"
@@ -3993,6 +4042,124 @@ msgstr "Ви можете пізніше налаштувати в налашт�
 msgid "Your privacy: You are in control!"
 msgstr "Ваша приватність: ви можете змінити її!"
 
+#, fuzzy
+#| msgctxt "an action done *by* <username>"
+#| msgid "by"
+msgid "by"
+msgstr ""
+"дії, здійснені\n"
+" *by*<username>"
+
+#, fuzzy
+#| msgid "Overview"
+msgid "Open Preview"
+msgstr "Огляд"
+
+#, fuzzy
+#| msgid "Is active"
+msgid "active"
+msgstr "Активний"
+
+msgid "displayed right now"
+msgstr ""
+
+msgid "not displayed right now"
+msgstr ""
+
+#, fuzzy
+#| msgid "(Inactive)"
+msgid "inactive"
+msgstr "(Неактивний)"
+
+#, fuzzy
+#| msgid "Re-Activate"
+msgid "Activate"
+msgstr "Активувати повторно"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgid "Do you really want to delete announcement \"%(title)s\"?"
+msgstr "Ви дійсно бажаєте видалити запрошення для „%(title)s“?"
+
+#, fuzzy
+#| msgid "Delete comment"
+msgid "Delete announcement"
+msgstr "Видалити коментар"
+
+msgid "Edit Announcement"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create Announcement"
+msgstr "Створити контент"
+
+msgid "Announcement is enabled"
+msgstr ""
+
+msgid "Announcement Title (internal only)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Header Title"
+msgid "Internal Title"
+msgstr "Назва верхнього колонтитула"
+
+msgid "Category for the Announcement"
+msgstr ""
+
+msgid "Will be displayed as a small first header in the announcement"
+msgstr ""
+
+msgid "Timeframe to display announcement"
+msgstr ""
+
+msgid "Display type"
+msgstr ""
+
+msgid "Choose between a markdown editor, or insert your own raw HTML (it is recommended to have a designer create the HTML!)"
+msgstr ""
+
+msgid "The main text of the announcement."
+msgstr ""
+
+msgid "Use \"# Big Header\" as main title and \"## Small Header\" as in-between header. They will be styled appropriately on the dashboard!"
+msgstr ""
+
+msgid "Raw HTML. Should contain a Dismiss-button"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are not following any ideas yet."
+msgid "You may use the following variables:"
+msgstr "Ти поки що не відстежуєш жодні Ідеї."
+
+msgid "External Link for a \"Read more\" link"
+msgstr ""
+
+msgid "requires a Save before"
+msgstr ""
+
+msgid "User Dashboard Announcements are sticky posts that appear on top of each user's personal Dashboard."
+msgstr ""
+
+msgid "An announcement will only appear during its valid-time frame."
+msgstr ""
+
+msgid "Only one announcement at a time will ever be shown to a user."
+msgstr ""
+
+msgid "If the user still has not hidden their introduction-message on the dashboard, they will not see any announcements."
+msgstr ""
+
+msgid "A user can dismiss an announcement, in which case it will disappear and never be shown again. On the next visit to their Dashboard, another valid announcement they have not yet hidden may be shown."
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no announcements yet."
+msgstr "Поки що немає жодного елементу"
+
 msgid "Enable posting to Facebook"
 msgstr "Дозволити публікування на Facebook"
 
@@ -4171,30 +4338,13 @@ msgstr "Показати розгорнуту карту"
 msgid "Do not show this again"
 msgstr "Не показувати цього знову"
 
-msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-msgid "Welcome"
-msgstr "Вітаємо"
+#, fuzzy
+#| msgid "view"
+msgid "Preview"
+msgstr "переглянути"
 
-#, python-format
-msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-msgid "to %(portal_name)s"
-msgstr "на  «%(portal_name)s»"
-
-#, python-format
-msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
-msgstr "Раді бачити тебе! На%(portal_name)s ти можеш співпрацювати з іншими Проектами та Спільнотами. Ініціатива, Організація або ж Мережа - %(portal_name)s пропонує всі необхідні інструменти для твоєї онлайн співпраці. "
-
-msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
-msgstr "Реалізовуй проети або ініціативи разом із однодумцями ефективно! Ми зібрали всі необхідні інструменти в одному місці: Новини, Документи, Завдання, Заходи та значно більше."
-
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
-msgstr "Спільноти допомагають вдосконалити зв'язок та співпрацю у великих мережах та організаціях. Всередині Спільноти ти можеш об'єднати декілька менших проектів або робочих груп."
-
-msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
-msgstr "Як розвиватиметься наш регіон? Як зробити цей розвиток максимально екологічним та сталим? Знайди однодумців для реалізації твого власного проекту!"
-
-msgid "What's happening where and when? What's to discover? Where to meet?"
-msgstr "Що, де і коли відбувається? Про що варто дізнатись? Де зустрітись?"
+msgid "Continue reading"
+msgstr ""
 
 msgid "What's the latest news?"
 msgstr "Які останні новини?"
@@ -4221,8 +4371,8 @@ msgstr "Створити контент"
 msgid "Home"
 msgstr "Головна"
 
-msgid "Nachrichten"
-msgstr "Повідомлення"
+msgid "Rocket.Chat"
+msgstr ""
 
 msgid "Change language"
 msgstr "Змінити мову"
@@ -4233,14 +4383,39 @@ msgstr "Зареєструвати новий акаунт"
 msgid "Offer"
 msgstr "Пропозиція"
 
-msgid "Do you have something to share, sell or give away? Are you searching for something?"
-msgstr "Ти хочеш чимось поділитись, щось продати або віддати? Ти шукаєш щось?"
-
 msgid "Post new Offer"
 msgstr "Поділитись новою пропозицією"
 
 msgid "Edit My Profile"
 msgstr "Редагувати мій обліковий запис"
+
+msgid "What's happening where and when? What's to discover? Where to meet?"
+msgstr "Що, де і коли відбувається? Про що варто дізнатись? Де зустрітись?"
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgstr "Спільноти допомагають вдосконалити зв'язок та співпрацю у великих мережах та організаціях. Всередині Спільноти ти можеш об'єднати декілька менших проектів або робочих груп."
+
+msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
+msgstr "Як розвиватиметься наш регіон? Як зробити цей розвиток максимально екологічним та сталим? Знайди однодумців для реалізації твого власного проекту!"
+
+msgid "Do you have something to share, sell or give away? Are you searching for something?"
+msgstr "Ти хочеш чимось поділитись, щось продати або віддати? Ти шукаєш щось?"
+
+msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
+msgstr "Реалізовуй проети або ініціативи разом із однодумцями ефективно! Ми зібрали всі необхідні інструменти в одному місці: Новини, Документи, Завдання, Заходи та значно більше."
+
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "Welcome"
+msgstr "Вітаємо"
+
+#, python-format
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "to %(portal_name)s"
+msgstr "на  «%(portal_name)s»"
+
+#, python-format
+msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+msgstr "Раді бачити тебе! На%(portal_name)s ти можеш співпрацювати з іншими Проектами та Спільнотами. Ініціатива, Організація або ж Мережа - %(portal_name)s пропонує всі необхідні інструменти для твоєї онлайн співпраці. "
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Зареєструватися та долучитися"
@@ -4713,12 +4888,40 @@ msgstr "Ми прибрали вашу електронну адресу \"%(ema
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Ласкаво просимо! Вас запросили до таких проектів та спільнот. Будь ласка, натисніть клавішу, що випадає, для того, щоб прийняти, або відхилити запрошення!"
 
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was created successfully."
+msgstr "Ваш профіль успішно відредаговано."
+
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was saved successfully."
+msgstr "Ваш профіль успішно відредаговано."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your Announcement was deleted successfully."
+msgstr "Ваша ідея успішно видалена."
+
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was activated successfully."
+msgstr "Ваш профіль успішно відредаговано."
+
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was deactivated successfully."
+msgstr "Ваш профіль успішно відредаговано."
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєте стати членом, надішліть запит нижче."
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#~ msgid "Nachrichten"
+#~ msgstr "Повідомлення"
 
 #~ msgid "Your privacy settings were saved. Welcome!"
 #~ msgstr "Ваші налаштування приватності збережено. Вітаємо!"

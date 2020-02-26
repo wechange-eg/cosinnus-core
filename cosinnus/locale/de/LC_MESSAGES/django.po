@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 16:35+0100\n"
-"PO-Revision-Date: 2020-02-13 16:35+0100\n"
+"POT-Creation-Date: 2020-02-23 16:09+0100\n"
+"PO-Revision-Date: 2020-02-23 16:10+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -916,6 +916,9 @@ msgstr "Facebook Gruppen-ID"
 msgid "Facebook Page ID"
 msgstr "Facebook Fan-Seiten-ID"
 
+msgid "Nextcloud Group ID"
+msgstr "Nextcloud Gruppen-ID"
+
 msgid "Parent Group"
 msgstr "Übergeordnete Gruppe"
 
@@ -1181,6 +1184,45 @@ msgstr "Gefällt dir"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
 msgstr "Gefolgt"
+
+msgid "Text Editor"
+msgstr "Text-Editor"
+
+msgid "Raw HTML"
+msgstr "Quell-HTML"
+
+msgid "(none displayed)"
+msgstr "(nicht angezeigt)"
+
+msgid "Announcement"
+msgstr "Ankündigung"
+
+msgid "Maintenance"
+msgstr "Wartunsarbeiten"
+
+msgid "Update"
+msgstr "Update"
+
+msgid "Technical Issues"
+msgstr "Technische Schwierigkeiten"
+
+msgid "Miscellaneous"
+msgstr "Verschiedenes"
+
+msgid "Announcement Display Type"
+msgstr "Ankündigungs-Anzeigetyp"
+
+msgid "Valid From"
+msgstr "Gültig von"
+
+msgid "Announcement Category"
+msgstr "Ankündigungs-Kategorie"
+
+msgid "Main text of this announcement."
+msgstr "Haupttext für diese Ankündigung."
+
+msgid "Raw HTML for this announcement."
+msgstr "Quell-HTML für diese Ankündigung."
 
 msgid "Create-Project or Group Button"
 msgstr "Projekt oder Gruppe-erstellen Button"
@@ -1519,6 +1561,9 @@ msgstr "Simple Statistiken"
 
 msgid "User Welcome Email"
 msgstr "Willkommens-E-Mail für neue Benutzer"
+
+msgid "User Dashboard Announcements"
+msgstr "Benutzerdashboard-Ankündigungen"
 
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -4278,7 +4323,6 @@ msgid "No current notifications"
 msgstr "Keine aktuellen Benachrichtigungen"
 
 #. Translators: __INCLUDE_JS_PO__
-#| msgid "Network"
 msgid "Entire Network"
 msgstr "Gesamtes Netzwerk"
 
@@ -4716,6 +4760,127 @@ msgstr ""
 msgid "Your privacy: You are in control!"
 msgstr "Deine Privatsphäre: Du hast die Kontrolle!"
 
+msgid "by"
+msgstr "von"
+
+msgid "Open Preview"
+msgstr "Vorschau öffnen"
+
+msgid "active"
+msgstr "aktiv"
+
+msgid "displayed right now"
+msgstr "wird aktuell angezeigt"
+
+msgid "not displayed right now"
+msgstr "wird aktuell nicht angezeigt"
+
+msgid "inactive"
+msgstr "inaktiv"
+
+msgid "Activate"
+msgstr "Aktivieren"
+
+#, python-format
+msgid "Do you really want to delete announcement \"%(title)s\"?"
+msgstr "Möchtest du die Ankündigungen \"%(title)s\" wirklich löschen?"
+
+#
+msgid "Delete announcement"
+msgstr "Ankündigungen löschen"
+
+msgid "Edit Announcement"
+msgstr "Ankündigung bearbeiten"
+
+#
+msgid "Create Announcement"
+msgstr "Ankündigungen erstellen"
+
+msgid "Announcement is enabled"
+msgstr "Ankündigung ist aktiviert"
+
+msgid "Announcement Title (internal only)"
+msgstr "Ankündigungs-Titel (nur intern)"
+
+msgid "Internal Title"
+msgstr "Interner Titel"
+
+msgid "Category for the Announcement"
+msgstr "Kategorie für die Ankündigung"
+
+msgid "Will be displayed as a small first header in the announcement"
+msgstr "Wird als kleine erste Überschrift in der Ankündigung angezeigt"
+
+msgid "Timeframe to display announcement"
+msgstr "Zeitrahmen, in dem die Ankündigung angezeigt wird"
+
+msgid "Display type"
+msgstr "Anzeigetyp"
+
+msgid ""
+"Choose between a markdown editor, or insert your own raw HTML (it is "
+"recommended to have a designer create the HTML!)"
+msgstr ""
+"Wähle zwischen einem Markdown-Editor oder der Möglichkeit, Quell-HTML "
+"einzufügen (es wird empfohlen, das HTML von einem Designer entwerfen zu "
+"lassen!)"
+
+msgid "The main text of the announcement."
+msgstr "Haupttext der Ankündigung"
+
+msgid ""
+"Use \"# Big Header\" as main title and \"## Small Header\" as in-between "
+"header. They will be styled appropriately on the dashboard!"
+msgstr ""
+"Benutze \"# Große Überschrift\" als Hauptüberschrift und \"## Kleine "
+"Überschrift\" als Zwischenüberschrift. Diese werden auf dem Dashboard "
+"passend angezeigt!"
+
+msgid "Raw HTML. Should contain a Dismiss-button"
+msgstr "Quell-HTML. Sollte einen \"Nicht mehr anzeigen\"-Button enthalten"
+
+msgid "You may use the following variables:"
+msgstr "Du kannst die folgenden Variablen benutzen:"
+
+msgid "External Link for a \"Read more\" link"
+msgstr "Externer Link für einen \"Weiterlesen\" link"
+
+msgid "requires a Save before"
+msgstr "benötigt vorheriges Abspeichern"
+
+msgid ""
+"User Dashboard Announcements are sticky posts that appear on top of each "
+"user's personal Dashboard."
+msgstr ""
+"Benutzerdashboard-Ankündigungen sind Posts, die ganz oben auf dem "
+"Benutzerdashboard erscheinen."
+
+msgid "An announcement will only appear during its valid-time frame."
+msgstr "Eine Ankündigung erscheint nur während dem angegebenen Zeitrahmen."
+
+msgid "Only one announcement at a time will ever be shown to a user."
+msgstr "Nur eine Ankündigung wird jeweils dem Benutzer angezeigt."
+
+msgid ""
+"If the user still has not hidden their introduction-message on the "
+"dashboard, they will not see any announcements."
+msgstr ""
+"Wenn ein Benutzer die \"Willkommen!\"-Einleitungstext auf dem Dashboard noch "
+"nicht weggeklickt hat, wird er keine Ankündigung sehen."
+
+msgid ""
+"A user can dismiss an announcement, in which case it will disappear and "
+"never be shown again. On the next visit to their Dashboard, another valid "
+"announcement they have not yet hidden may be shown."
+msgstr ""
+"Benutzer kann eine Ankündigungen wegklicken, woraufhin sie verschwindet und "
+"dem Benutzer nie wieder angezeigt wird. Beim nächsten Besuch des Dashboards "
+"wird die nächste Ankündigung angezeigt, falls es noch welche gibt, die der "
+"Benutzer nicht weggeklickt hat."
+
+msgid "There are no announcements yet."
+msgstr "Noch keine Ankündigungen vorhanden."
+
 msgid "Enable posting to Facebook"
 msgstr "Posten auf Facebook aktivieren"
 
@@ -5010,55 +5175,11 @@ msgstr "Große Karte anzeigen"
 msgid "Do not show this again"
 msgstr "Hinweis nicht wieder anzeigen"
 
-msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-msgid "Welcome"
-msgstr "Willkommen"
+msgid "Preview"
+msgstr "Vorschau"
 
-#, python-format
-msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-msgid "to %(portal_name)s"
-msgstr "auf %(portal_name)s"
-
-#, python-format
-msgid ""
-"Good to see you! At %(portal_name)s you can collaborate with others in "
-"Projects and Groups. Whether Initiative, Organisation, or Network - "
-"%(portal_name)s offers all the necessary tools for your online collaboration."
-msgstr ""
-"Schön, dass du da bist! Auf %(portal_name)s kannst du in Gruppen und "
-"Projekten mit anderen zusammenarbeiten. Ob Initiative, Organisation oder "
-"Netzwerk - %(portal_name)s bietet dir die nötigen Tools zur Online-"
-"Zusammenarbeit."
-
-msgid ""
-"Organize your projects or initiatives efficiently with your fellow "
-"campaigners. All important tools for collaborating in one place: News, Pads, "
-"Events, Todos, and more."
-msgstr ""
-"Organisiere dich effizient mit MitstreiterInnen aus deinem Projekt oder "
-"deiner Initiative. Alle wichtigen Tools für eine gute Zusammenarbeit, wie "
-"Neuigkeiten, Pads, Kalender, Aufageben, etc. an einem Ort."
-
-msgid ""
-"Groups help improve communication and collaboration in large networks or "
-"organisations. Within a Group you can bring together several smaller "
-"projects or workgroups."
-msgstr ""
-"Mit Gruppen kannst du die Kommunikation und Zusammenarbeit in großen "
-"Netzwerken oder Organisationen vereinfachen. Unter einer Gruppe könnt ihr "
-"mehrere kleine Projekte, Arbeitsgruppen oder -kreise abbilden."
-
-msgid ""
-"What will our region look like in the future? What is your idea for an "
-"environmentally friendly and sustainable region? Find co-campaigners for "
-"your project ideas."
-msgstr ""
-"Wie sieht unsere Region in der Zukunft aus? Was ist deine Idee für eine "
-"klimafreundliche und nachhaltige Region? Finde MitstreiterInnen für deine "
-"Projektideen."
-
-msgid "What's happening where and when? What's to discover? Where to meet?"
-msgstr "Was ist wann wo los? Was gibt's zu erleben? Wo trifft man sich?"
+msgid "Continue reading"
+msgstr "Weiterlesen"
 
 msgid "What's the latest news?"
 msgstr "Was gibt's Neues?"
@@ -5093,8 +5214,8 @@ msgstr "Inhalt erstellen"
 msgid "Home"
 msgstr "Startseite"
 
-msgid "Nachrichten"
-msgstr "Messages"
+msgid "Rocket.Chat"
+msgstr "Rocket.Chat"
 
 msgid "Change language"
 msgstr "Sprache ändern"
@@ -5105,6 +5226,33 @@ msgstr "Neues Konto registrieren"
 msgid "Offer"
 msgstr "Inserat"
 
+msgid "Post new Offer"
+msgstr "Neues Inserat eintragen"
+
+msgid "Edit My Profile"
+msgstr "Profil-Einstellungen"
+
+msgid "What's happening where and when? What's to discover? Where to meet?"
+msgstr "Was ist wann wo los? Was gibt's zu erleben? Wo trifft man sich?"
+
+msgid ""
+"Groups help improve communication and collaboration in large networks or "
+"organisations. Within a Group you can bring together several smaller "
+"projects or workgroups."
+msgstr ""
+"Mit Gruppen kannst du die Kommunikation und Zusammenarbeit in großen "
+"Netzwerken oder Organisationen vereinfachen. Unter einer Gruppe könnt ihr "
+"mehrere kleine Projekte, Arbeitsgruppen oder -kreise abbilden."
+
+msgid ""
+"What will our region look like in the future? What is your idea for an "
+"environmentally friendly and sustainable region? Find co-campaigners for "
+"your project ideas."
+msgstr ""
+"Wie sieht unsere Region in der Zukunft aus? Was ist deine Idee für eine "
+"klimafreundliche und nachhaltige Region? Finde MitstreiterInnen für deine "
+"Projektideen."
+
 msgid ""
 "Do you have something to share, sell or give away? Are you searching for "
 "something?"
@@ -5112,11 +5260,34 @@ msgstr ""
 "Hast du etwas, das du teilen, verkaufen oder verschenken möchtest? Suchst du "
 "nach etwas Bestimmtem?"
 
-msgid "Post new Offer"
-msgstr "Neues Inserat eintragen"
+msgid ""
+"Organize your projects or initiatives efficiently with your fellow "
+"campaigners. All important tools for collaborating in one place: News, Pads, "
+"Events, Todos, and more."
+msgstr ""
+"Organisiere dich effizient mit MitstreiterInnen aus deinem Projekt oder "
+"deiner Initiative. Alle wichtigen Tools für eine gute Zusammenarbeit, wie "
+"Neuigkeiten, Pads, Kalender, Aufageben, etc. an einem Ort."
 
-msgid "Edit My Profile"
-msgstr "Profil-Einstellungen"
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "Welcome"
+msgstr "Willkommen"
+
+#, python-format
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "to %(portal_name)s"
+msgstr "auf %(portal_name)s"
+
+#, python-format
+msgid ""
+"Good to see you! At %(portal_name)s you can collaborate with others in "
+"Projects and Groups. Whether Initiative, Organisation, or Network - "
+"%(portal_name)s offers all the necessary tools for your online collaboration."
+msgstr ""
+"Schön, dass du da bist! Auf %(portal_name)s kannst du in Gruppen und "
+"Projekten mit anderen zusammenarbeiten. Ob Initiative, Organisation oder "
+"Netzwerk - %(portal_name)s bietet dir die nötigen Tools zur Online-"
+"Zusammenarbeit."
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
@@ -5842,6 +6013,21 @@ msgstr ""
 "Bitte klicke den Ausklappen-Button der Einladungen, die du annehmen oder "
 "ablehnen möchtest!"
 
+msgid "Your Announcement was created successfully."
+msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
+
+msgid "Your Announcement was saved successfully."
+msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
+
+msgid "Your Announcement was deleted successfully."
+msgstr "Deine Ankündigung wurde erfolgreich gelöscht."
+
+msgid "Your Announcement was activated successfully."
+msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
+
+msgid "Your Announcement was deactivated successfully."
+msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
+
 #, python-format
 msgid ""
 "You are not currently a member of %s! If you wish you can request to become "
@@ -5852,6 +6038,9 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Nachrichten"
+#~ msgstr "Messages"
 
 #~ msgid "Your privacy settings were saved. Welcome!"
 #~ msgstr "Deine Privatsphären-Einstellungen wurden gespeichert. Willkommen!"

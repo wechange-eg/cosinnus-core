@@ -139,6 +139,12 @@ module.exports = BaseView.extend({
     	var $welcomeFrame = self.$el.find('.dashboard-welcome-frame');
     	if (self.uiPrefsView.getUiPref('timeline__hide_welcome_screen')) {
     		$welcomeFrame.remove();
+    		
+    		// if we are not showing the welcome screen, show the dashboard announcement, if one exists
+    		var $announcementFrame = self.$el.find('.dashboard-announcement-frame');
+    		if ($announcementFrame.length > 0) {
+    		    $announcementFrame.show();
+    		}
     	} else {
     		$welcomeFrame.show();
     	}

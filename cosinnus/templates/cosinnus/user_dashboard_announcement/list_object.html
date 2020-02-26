@@ -1,0 +1,86 @@
+{% load i18n cosinnus_tags %}
+
+<div id="cosinnus_list_element_{{ object.id }}" class="fadedown {% if not forloop.last %}regular-space{% endif %}">
+    <div class="btn {% if object.is_active %}btn-emphasized{% else %}btn-default{% endif %} w100" href="{{ object.get_edit_url }}">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left square-date-icon" href="{{ object.get_edit_url }}">
+                    <div>{{ object.valid_from|date:"d" }}</div>
+                    <div>{{ object.valid_from|date:"M" }}</div>
+                </a>
+                <a class="pull-left square-date-icon" href="{{ object.get_edit_url }}">
+                    <div>{{ object.valid_till|date:"d" }}</div>
+                    <div>{{ object.valid_till|date:"M" }}</div>
+                </a>
+                <a class="pull-right fadedown-clickarea">
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+                <div class="media-body">
+                    {% with creator=object.creator %}
+                        <span class="annotation mobile-hidden">{% trans "by" %} 
+                            <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>
+	                        <span>
+	                            <a href="{{ object.get_preview_url }}" target="_blank" >
+	                                <i class="fa fa-eye"></i>
+	                                {% trans "Open Preview" %}
+	                            </a>
+	                        </span>
+                        </span>
+                    {% endwith %}
+                    <a href="{{ object.get_edit_url }}">
+                        {{ object.title }}
+                        {% if object.is_active %}
+                            <i>
+                                ({% trans "active" %},
+                                {% if object.is_valid %}{% trans "displayed right now" %}{% else %}{% trans "not displayed right now" %}{% endif %})
+                            </i>
+                            
+                        {% else %}
+                            <i>({% trans "inactive" %})</i>
+                        {% endif %}
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    {% captureas modal_id %}deleteModal_{{ object.slug }}{% endcaptureas %}
+    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{ modal_id }}">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-eraser"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Delete" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+      
+    <button type="button" class="btn btn-emphasized" href="{{ object.get_activate_url }}">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    {% if object.is_active %}
+                    <i class="fa fa-close"></i>
+                    {% else %}
+                    <i class="fa fa-check"></i>
+                    {% endif %}
+                </a>
+                <div class="media-body">
+                    {% if object.is_active %}
+                        {% trans "Deactivate" %}
+                    {% else %}
+                        {% trans "Activate" %}
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </button> 
+    
+</div><!-- fadedown -->
+
+{% captureas label %}{% blocktrans with title=object.title %}Do you really want to delete announcement "{{ title }}"?{% endblocktrans %}{% endcaptureas %}
+{% captureas title %}{% trans "Delete announcement" %}{% endcaptureas %}
+{% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=object.get_delete_url %}

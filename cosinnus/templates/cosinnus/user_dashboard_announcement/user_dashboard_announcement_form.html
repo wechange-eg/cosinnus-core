@@ -1,0 +1,228 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+{% block page_title %}
+    {% trans "User Dashboard Announcements" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li><a href="{% url 'cosinnus:user-dashboard-announcement-list' %}">{% trans "User Dashboard Announcements" %}</a></li>
+    {% if object %}
+        <li class="active">{% trans "Edit Announcement" %}</li>
+    {% else %}
+        <li class="active">{% trans "Create Announcement" %}</li>
+    {% endif %}
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.text.id_for_label %}
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/administration/leftnav.html" %}
+{% endblock leftnav %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+        </div>
+    {% endif %}
+    
+    <form action="" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.non_field_errors }}
+        
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+        
+	        {# Checkbox Field #}
+	        {% trans "Announcement is enabled" as active_label %}
+	        {% include 'cosinnus/fields/checkbox_field.html' with field=form.is_active label=active_label checkbox_label=active_label hide_optional=True %}
+            
+            {# Title Field #}
+            {% trans "Announcement Title (internal only)" as title_label %}
+            {% trans "Internal Title" as title_placeholder %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.title label=title_label placeholder=title_placeholder %}
+            
+            {# Category Field #}
+            {% trans "Category for the Announcement" as category_label %}
+            {% trans "Will be displayed as a small first header in the announcement" as category_placeholder %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.category label=category_label placeholder=category_placeholder %}
+                                        
+	        {% trans "Timeframe to display announcement" as date_label %}
+	        {% captureas date_html %}
+	            {{ form.valid_from.errors }}
+	            {{ form.valid_till.errors }}
+	            <ol class="input-area">
+	                <li class="calendar-date-time-chooser">
+	                    {% trans "From" %} <i class="fa fa-calendar"></i>
+	                    <input
+	                        placeholder="{% trans "Date" %}"
+	                        readonly ="readonly"
+	                        class="calendar-date-time-chooser-date" />
+	                    <input class="calendar-date-time-chooser-hiddendate" id="id_valid_from_0" name="valid_from_0" 
+	                        placeholder="{% trans "Start date." %}" type="hidden" 
+	                        {% if form_view == "add" and request.GET.start %}
+	                        value="{{ request.GET.start }}" 
+	                        {% elif form_view == "edit" %}
+	                        value="{{ form.valid_from.value|date:"Y-m-d" }}" 
+	                        {% else %}
+	                        value="{% now "Y-m-d" %}" 
+	                        {% endif %}
+	                    >
+	                    <input class="calendar-date-time-chooser-time" id="id_valid_from_1" name="valid_from_1" 
+	                        placeholder="00:00" type="text" 
+	                        value="{{ form.valid_from.value|date:"H:i" }}" 
+	                    >                                           
+	                    <div class="small-calendar"></div>
+	                </li>
+	                <li class="calendar-date-time-chooser">
+	                    {% trans "Until" %} <i class="fa fa-calendar"></i>
+	                    <input
+	                        placeholder="{% trans "Date" %}"
+	                        readonly ="readonly"
+	                        class="calendar-date-time-chooser-date" />
+	                    <input class="calendar-date-time-chooser-hiddendate" id="id_valid_till_0" name="valid_till_0" 
+	                        placeholder="{% trans "End date." %}" type="hidden" 
+	                        {% if form_view == "add" and request.GET.end %}
+	                        value="{{ request.GET.end }}" 
+	                        {% elif form_view == "edit" %}
+	                        value="{{ form.valid_till.value|date:"Y-m-d" }}" 
+	                        {% else %}
+	                        value="{% now "Y-m-d" %}" 
+	                        {% endif %}
+	                    >
+	                    <input class="calendar-date-time-chooser-time" id="id_valid_till_1" name="valid_till_1" 
+	                        placeholder="23:59" type="text" 
+	                        value="{{ form.valid_till.value|date:"H:i" }}" 
+	                    >    
+	                    <div class="small-calendar"></div>
+	                </li>
+	            </ol>
+	        {% endcaptureas %}
+	        {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label label=date_label large_field=True %} 
+	        
+            {# Announcement Type Field #}
+            {% trans "Display type" as type_label %}
+            {% trans "Choose between a markdown editor, or insert your own raw HTML (it is recommended to have a designer create the HTML!)" as type_legend %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.type label=type_label legend=type_legend %}
+            <script type="text/javascript">
+                {# show or hide the type-dependant fields #}
+                $(function(){
+                    $('#id_type').on('change', function(){
+                        var val = $(this).val();
+                        $('#announcement-type-frame-0').toggle(val == 0);
+                        $('#announcement-type-frame-1').toggle(val == 1);
+                    });
+                });
+            </script>
+            
+            <div id="announcement-type-frame-0" {% if object and object.type != 0 %}style="display: none;"{% endif %}>
+	            {# SimpleMDE Description Field (gets initialized in extrahead) #}                                  
+	            {% trans "Text" as text_label %}
+	            {% captureas text_placeholder %}{% trans "The main text of the announcement." %}{% endcaptureas %}
+                {% captureas text_legend %}{% trans "The main text of the announcement." %} {% trans 'Use "# Big Header" as main title and "## Small Header" as in-between header. They will be styled appropriately on the dashboard!' %}{% endcaptureas %}
+	            {% include 'cosinnus/fields/default_field.html' with field=form.text label=text_label legend=text_legend placeholder=text_placeholder large_field=True hide_optional=True %}
+            </div>
+            
+            <div id="announcement-type-frame-1" {% if not object or object.type != 1 %}style="display: none;"{% endif %}>
+	            {# Raw HTML field #}
+	            {% trans "Raw HTML" as raw_html_label %}
+	            {% captureas raw_html_placeholder %}
+	                {% trans "Raw HTML. Should contain a Dismiss-button" %}.
+	            {% endcaptureas %}
+	            {% include 'cosinnus/fields/default_field.html' with field=form.raw_html label=raw_html_label placeholder=raw_html_label legend=raw_html_placeholder large_field=True %}
+	            <p>
+		            {% trans "You may use the following variables:" %}
+                    %(user_first_name)s
+                    %(user_last_name)s
+                    %(user_full_name)s
+                    %(announcement_id)s
+                </p>
+            </div>
+            
+            {# Idea Image Field #}
+            {% captureas image_label %}{% trans "Image" %} ({% trans "max. 10 MB" %}){% endcaptureas %}
+            {% captureas image_html %}
+                {{ form.image.errors }}
+                
+                {% if object.image %}
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-2">
+                            <img class="image" style="width: 120px;" src="{% thumbnail object.image 200x110 crop=1 upscale=1 %}"></img>
+                        </div>
+                        <div class="col-xs-8 col-sm-10">
+                {% endif %} 
+                <div class="file-input">
+                    <input class="form-control" id="fileToUpload" name="image" placeholder="{% trans "Upload an image." %}" type="file">
+                </div>
+                {% if object.image %}
+                        </div>
+                    </div>
+                {% endif %}
+                    
+            {% endcaptureas %}
+            {% captureas image_extra_html %}
+                {% if object.image %}
+                    <div class="btn btn-emphasized btn-small btn-no-float regular-space">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-square-o"></i>
+                                    <input type="hidden" id="image-clear_id" name="image-clear"> 
+                                </a>
+                                <div class="media-body click-previous-a">
+                                    {% trans "Reset" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with label=image_label field_html=image_html extra_html=image_extra_html first=True large_field=True %}
+            
+            {# Url field #}              
+	        {% trans 'External Link for a "Read more" link' as url_label %}
+	        {% trans "Example: http://mywebsite.com" as url_placeholder %}
+	        {% include 'cosinnus/fields/default_field.html' with field=form.url label=url_label placeholder=url_placeholder %}
+	                      
+        </div>
+        
+        
+        <button type="button" class="btn btn-autosize {% if object %}btn-emphasized{% else %}btn-default{% endif %} pull-left no-margin"
+                {% if object %}href="{{ object.get_preview_url }}" target="_blank"{% endif %}>
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <div class="media-body">
+                        {% trans "Open Preview" %} ({% trans "requires a Save before" %})
+                    </div>
+                </li>
+            </ul>
+        </button>
+        
+        <button type="submit" class="btn btn-emphasized">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-check"></i>
+                    </a>
+                    <div class="media-body">
+                        {% trans "Save" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+    
+    </form>
+
+{% endblock %}
+
