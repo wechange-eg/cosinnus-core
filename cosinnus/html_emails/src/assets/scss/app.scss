@@ -36,6 +36,10 @@ ul br, ol br, ul br {
     display: none;
 }
 
+p {
+    margin: 0;    
+}
+
 a {
     color: $primary-color;
     font-weight: bold;

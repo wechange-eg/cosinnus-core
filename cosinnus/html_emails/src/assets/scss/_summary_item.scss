@@ -15,7 +15,8 @@
         }
     }
     .main-row {
-        margin: 15px 0;
+        padding: 15px 0;
+        vertical-align: middle;
     }
     
     /* Frames */
@@ -43,7 +44,8 @@
         border-top: 2px solid $back;
         border-bottom: 2px solid $back;
         & > table {
-            margin: 15px 0;
+            padding: 15px 0;
+            vertical-align: middle;
         }
     }
     
@@ -79,10 +81,14 @@
     }
 
     .regular-img {
-        height: 40px;        
+        height: 40px;
+        width: 40px;
+        max-width: 40px;
     }
     .small-img {
         height: 30px;
+        width: 30px;
+        max-width: 30px;
     }
     .inline-img {
         display: inline;   

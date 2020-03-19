@@ -5,7 +5,8 @@
             
             <columns class="image" large="1" small="1" valign="middle">
                 <a href="{{#rw this}}object_url{{/rw}}">
-                    <img class="regular-img" src="{{#rw this}}image_url{{/rw}}" alt="" />
+                    <!-- always include the width="nn" attribute in <img> for Outlook! -->
+                    <img class="regular-img" width="40" src="{{#rw this}}image_url{{/rw}}" alt="" />
                 </a>
             </columns>
         
@@ -26,14 +27,26 @@
             </columns>
             
             <columns class="group-label smaller-text grey-text bold-text" large="4" small="4" valign="top">
-                <row class="event-time">
+                <row class="">
                     <columns class="unpadded" large="2" small="2" valign="middle">
-	                    <img class="small-img inline-img" src="{{#rw this}}origin_icon_url{{/rw}}" />
+                        <!-- always include the width="nn" attribute in <img> for Outlook! -->
+	                    <img class="small-img inline-img" width="30" src="{{#rw this}}origin_icon_url{{/rw}}" />
                     </columns>
                     <columns class="unpadded smaller-text" valign="middle">
                         {{#rw this}}origin_name{{/rw}}
                     </columns>
                 </row>
+                
+                <!--
+                     Eventuell einfach sowas hier benutzen für die kleinen Einpassungen, vor allem damit das alignment rechts passt!
+                <table role=”presentation” cellspacing=”0″ cellpadding=”0″ border=”0″>
+				   <tr>
+					   <td>Column 1</td>
+					   <td>Column 2</td>
+				   </tr>
+				</table>
+				-->
+                
             </columns>
             
             <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
@@ -45,7 +58,8 @@
                 
                 <columns class="border-inlay" large="1" small="1" valign="middle">
                     <a href="{{#rw this}}object_url{{/rw}}">
-                        <img class="regular-img" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
+                        <!-- always include the width="nn" attribute in <img> for Outlook! -->
+                        <img class="regular-img" width="40" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
                     </a>
                 </columns>
             
@@ -72,7 +86,8 @@
             <row class="main-row item-content">
                 <columns class="image" large="1" small="1" valign="top">
                     <a href="{{#rw this}}object_url{{/rw}}">
-                        <img class="regular-img" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
+                        <!-- always include the width="nn" attribute in <img> for Outlook! -->
+                        <img class="regular-img" width="40" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
                     </a>
                 </columns>
             
