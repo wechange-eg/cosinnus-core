@@ -439,7 +439,7 @@ class GlobalUserNotificationSetting(models.Model):
     portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='user_notification_settings', 
         null=False, blank=False, default=1, on_delete=models.CASCADE)
     setting = models.PositiveSmallIntegerField(choices=SETTING_CHOICES,
-            default=SETTING_WEEKLY,
+            default=settings.COSINNUS_DEFAULT_GLOBAL_NOTIFICATION_SETTING,
             help_text='Determines if the user wants no mail, immediate mails,s aggregated mails, or group specific settings')
     last_modified = models.DateTimeField(_('Last modified'), auto_now=True, editable=False)
     
