@@ -655,7 +655,13 @@ class CosinnusPortal(models.Model):
         if not os.path.isfile(os.path.join(self._get_static_folder(), 'css', self._CUSTOM_CSS_FILENAME % self.slug)):
             self.compile_custom_stylesheet()
         return 'css/' + self._CUSTOM_CSS_FILENAME % self.slug
-        
+    
+    @property
+    def video_conference_server_url(self):
+        if self.video_conference_server:
+            return '%s%s-videochat' % (self.video_conference_server, CosinnusPortal.get_current().name)
+        return None
+    
 
 @python_2_unicode_compatible
 class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin, 
