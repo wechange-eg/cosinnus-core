@@ -36,6 +36,10 @@ from cosinnus.utils.user import get_newly_registered_user_email
 from annoying.functions import get_object_or_None
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 
+import logging
+
+logger = logging.getLogger('cosinnus')
+
 # if a user profile has this settings, its user has not yet confirmed a new email
 # address and this long is bound to his old email (or to a scrambled, unusable one if they just registered)
 PROFILE_SETTING_EMAIL_TO_VERIFY = 'email_to_verify'
@@ -477,6 +481,8 @@ class GlobalBlacklistedEmail(models.Model):
                 setting_object = GlobalUserNotificationSetting.objects.get_object_for_user(user) 
                 setting_object.setting = GlobalUserNotificationSetting.SETTING_NEVER
                 setting_object.save()
+                logger.warn('GlobalBlacklistedEmail: Set a global user notification to NEVER from blacklist', 
+                            extra={'user': user.email, 'portal': CosinnusPortal.get_current().id})
                 cls.remove_for_email(email)
         else:
             cls.objects.get_or_create(email=email, portal=CosinnusPortal.get_current())
