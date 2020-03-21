@@ -482,7 +482,7 @@ class GlobalBlacklistedEmail(models.Model):
                 setting_object.setting = GlobalUserNotificationSetting.SETTING_NEVER
                 setting_object.save()
                 logger.warn('GlobalBlacklistedEmail: Set a global user notification to NEVER from blacklist', 
-                            extra={'user': user.email, 'portal': CosinnusPortal.get_current().id})
+                            extra={'email': user.email, 'portal': CosinnusPortal.get_current().id})
                 cls.remove_for_email(email)
         else:
             cls.objects.get_or_create(email=email, portal=CosinnusPortal.get_current())
