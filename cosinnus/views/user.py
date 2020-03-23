@@ -739,6 +739,9 @@ def add_email_to_blacklist(request, email, token):
         messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (2)')
         return redirect('cosinnus:user-add-email-blacklist-result')
     
+    logger.warn('Adding email to blacklist from URL link', 
+                            extra={'email': email, 'portal': CosinnusPortal.get_current().id})
+    
     GlobalBlacklistedEmail.add_for_email(email)
     
     messages.success(request, _('We have unsubscribed your email "%(email)s" from our mailing list. You will not receive any more emails from us!') 

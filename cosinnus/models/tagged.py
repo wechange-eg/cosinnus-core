@@ -39,6 +39,7 @@ from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 
 import logging
+from cosinnus.utils.dates import timestamp_from_datetime
 
 logger = logging.getLogger('cosinnus')
 
@@ -488,6 +489,11 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
             self.last_action_user = last_action_user
         if save:
             self.save()
+    
+    @property    
+    def secret_from_created(self):
+        """ Returns an (unsafe) secret id based on the created date timestamp """
+        return str(timestamp_from_datetime(self.created)).replace('.', '')
         
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):

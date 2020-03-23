@@ -541,6 +541,9 @@ class CosinnusPortal(models.Model):
     extra_css = models.TextField(_('Extra CSS'), help_text=_('Extra CSS for this portal, will be applied after all other styles.'),
         blank=True, null=True)
     
+    video_conference_server = models.URLField(_('Video Conference Server'), max_length=250, blank=True, null=True,
+        help_text=_('If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended.'))
+    
     # exact time when last digest was sent out for each of the period settings
     SAVED_INFO_LAST_DIGEST_SENT = 'last_digest_sent_for_period_%d'
         
@@ -652,7 +655,13 @@ class CosinnusPortal(models.Model):
         if not os.path.isfile(os.path.join(self._get_static_folder(), 'css', self._CUSTOM_CSS_FILENAME % self.slug)):
             self.compile_custom_stylesheet()
         return 'css/' + self._CUSTOM_CSS_FILENAME % self.slug
-        
+    
+    @property
+    def video_conference_server_url(self):
+        if self.video_conference_server:
+            return '%s%s-videochat' % (self.video_conference_server, CosinnusPortal.get_current().name)
+        return None
+    
 
 @python_2_unicode_compatible
 class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin, 
