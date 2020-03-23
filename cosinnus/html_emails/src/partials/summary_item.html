@@ -1,6 +1,6 @@
 <row class="summary-item">
     <columns>
-	    <row class="v-padded-row-regular-large h-padded-row-regular main-item">
+	    <row class="special-padded-row avatar-row main-item">
             <columns class="spacer" large="1" small="1">&nbsp;</columns>
             
             <columns class="image" large="1" small="1" valign="middle">
@@ -46,7 +46,7 @@
         </row>
 		
 		{{#rwif sub_object_name raw_if="sub_object_name" }}
-            <row class="v-padded-row-regular h-padded-row-regular sub-item">
+            <row class="special-padded-row sub-object-row sub-item">
                 <columns class="spacer" large="1" small="1">&nbsp;</columns>
                 
                 <columns class="border-inlay" large="1" small="1" valign="middle">
@@ -78,7 +78,7 @@
         {{/rwif}}
         
         {{#rwif object_text raw_if="object_text" }}
-            <row class="v-padded-row-regular h-padded-row-regular item-content">
+            <row class="special-padded-row object-row item-content">
                 <columns class="image" large="1" small="1" valign="top">
                     <a href="{{#rw this}}object_url{{/rw}}">
                         <!-- always include the width="nn" attribute in <img> for Outlook! -->
@@ -102,7 +102,7 @@
         {{/rwif}}
         
         {{#rwif show_action_buttons raw_if="show_action_buttons"}}
-            <row class="v-padded-row-small h-padded-row-regular v-padded-row-large-bottom action_buttons">
+            <row class="special-padded-row action-button-row action_buttons">
                 <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
             
                 <columns class="text" large="10" small="10" valign="middle">

@@ -21,9 +21,11 @@ const PRODUCTION = !!(yargs.argv.production);
 // Declar var so that both AWS and Litmus task can use it.
 var CONFIG;
 
+var replace = require('gulp-replace');
+
 // Build the "dist" folder by running all of the above tasks
 gulp.task('build',
-  gulp.series(clean, pages, sass, images, inline));
+  gulp.series(clean, pages, sass, images, inline, cellspaceClasses));
 
 // Build emails, run the server, and watch for file changes
 gulp.task('default',
@@ -88,6 +90,23 @@ function inline() {
     .pipe(gulp.dest('dist'));
 }
 
+
+// add cellspacing/cellpadding onto tables that have padding classes to support Outlook
+function cellspaceClasses() {
+  return gulp.src('dist/**/*.html')
+//     .pipe(replace('<th ', '<td '))  // needed?
+//     .pipe(replace('</th>', '</td>')) // needed?
+    
+    .pipe(replace('padding-top: invalid !important;', ''))
+    .pipe(replace('padding-right: invalid !important;', ''))
+    .pipe(replace('padding-bottom: invalid !important;', ''))
+    .pipe(replace('padding-left: invalid !important;', ''))
+    
+    .pipe(replace(/\s+</gim, '\n<'))  // remove whitespaces between tags for newlines
+    .pipe(replace(/<style>[\s\S]+<\/style>/gim, ''))
+    .pipe(gulp.dest('dist'));
+}
+
 // Start a server with LiveReload to preview the site in
 function server(done) {
   browser.init({
@@ -98,9 +117,9 @@ function server(done) {
 
 // Watch for file changes
 function watch() {
-  gulp.watch('src/pages/**/*.html').on('change', gulp.series(pages, inline, browser.reload));
-  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(resetPages, pages, inline, browser.reload));
-  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(resetPages, sass, pages, inline, browser.reload));
+  gulp.watch('src/pages/**/*.html').on('change', gulp.series(pages, inline, cellspaceClasses, browser.reload));
+  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(resetPages, pages, inline, cellspaceClasses, browser.reload));
+  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(resetPages, sass, pages, inline, cellspaceClasses, browser.reload));
   gulp.watch('src/assets/img/**/*').on('change', gulp.series(images, browser.reload));
 }
 
