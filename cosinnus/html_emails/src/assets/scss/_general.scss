@@ -1,0 +1,136 @@
+@import 'mixins';
+
+.v-padded-row-ultra > tbody > tr > th {
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;  
+}
+.v-padded-row-large > tbody > tr > th {
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;  
+}
+.v-padded-row-regular-large > tbody > tr > th {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;  
+}
+.v-padded-row-regular > tbody > tr > th {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;  
+}
+.v-padded-row-small > tbody > tr > th {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;  
+}
+.h-padded-row-large > tbody > tr > th {
+    padding-left: 20px !important;
+    padding-right: 20px !important;  
+}
+.h-padded-row-regular > tbody > tr > th {
+    padding-left: 10px !important;
+    padding-right: 10px !important;  
+}
+.h-padded-row-small > tbody > tr > th {
+    padding-left: 5px !important;
+    padding-right: 5px !important;  
+}
+
+.v-padded-row-large-bottom > tbody > tr > th {
+    padding-bottom: 30px !important;  
+}
+
+.spacer {
+    padding-left: 28px !important;    
+    padding-right: 28px !important;
+    width: 4px;
+}
+
+
+
+
+
+.border-inlay {
+    position: relative;
+    & > table {
+        vertical-align: middle;
+    }
+    
+    .inlayed-border {
+        border-top: 2px solid $back;
+        border-bottom: 2px solid $back;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 10px;
+        right: 10px;
+    }
+    .inlayed-border-left {
+        left: 10px;
+        right: 0;
+    }
+    .inlayed-border-right {
+        left: 0;
+        right: 10px;
+    }
+}
+
+.colored-text, .colored-text a {
+    color: $primary-color;
+}
+.bold-text {
+    &, & tr, & th , & a {
+        font-weight: bold;
+    }
+}
+.non-bold-text {
+    &, & tr, & th , & a {
+        font-weight: normal;
+    }
+}
+.grey-text {
+    &, & tr, & th , & a {
+        color: $pale-text-color;
+    }
+}
+.small-text {
+    &, & tr, & th , & a {
+        font-size: 12px;
+        line-height: 14px;
+    }
+}
+.smaller-text  {
+    &, & tr, & th , & a {
+        font-size: 11px;
+        line-height: 11px;
+    }
+}
+
+.regular-img {
+    height: 40px;
+    width: 40px;
+    max-width: 40px;
+}
+.small-img {
+    height: 30px;
+    width: 30px;
+    max-width: 30px;
+}
+.inline-img {
+    display: inline;   
+}
+
+.action-button-span {
+    display: inline-block; 
+    padding-bottom: 10px;
+}
+a.action-button {
+    color: $primary-color;
+    text-transform: uppercase;
+    padding-right: 15px;
+    letter-spacing: 0.5px;
+    
+    &.action-button-alternate {
+        color: $button-color-alt;
+    }
+}
+
+
+

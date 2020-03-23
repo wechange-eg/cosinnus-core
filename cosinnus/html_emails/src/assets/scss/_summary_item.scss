@@ -6,19 +6,6 @@
     background-color: $background-color;
     border-bottom: 2px solid $back;
     
-    .columns {
-        &:not(.unpadded) {
-            padding: 20px 10px;
-            th {
-                padding: 0 5px;    
-            }
-        }
-    }
-    .main-row {
-        padding: 15px 0;
-        vertical-align: middle;
-    }
-    
     /* Frames */
     .main-item {
         
@@ -29,10 +16,25 @@
     .action-buttons {
         
     }
+    .group-aside {
+        &, & th, & tr {
+            text-align: right;
+            vertical-align: middle;
+        }
+        .group-aside-icon {
+            width: 100%;
+        }
+        .group-aside-text {
+            width: auto;
+            white-space: nowrap;
+        }
+    }
+
+    .object-text-column {
+        padding-top: 25px !important;    
+    }
     
     /* Content frames */
-    .spacer {
-    }
     .event-text {
     }
     .event-time {
@@ -40,67 +42,6 @@
     .group-label {
     }
 
-    .border-inlay {
-        border-top: 2px solid $back;
-        border-bottom: 2px solid $back;
-        & > table {
-            padding: 15px 0;
-            vertical-align: middle;
-        }
-    }
-    
-    .colored-text, .colored-text a {
-        color: $primary-color;
-    }
-    .bold-text {
-        &, & tr, & th , & a {
-            font-weight: bold;
-        }
-    }
-    .non-bold-text {
-        &, & tr, & th , & a {
-            font-weight: normal;
-        }
-    }
-    .grey-text {
-        &, & tr, & th , & a {
-            color: $pale-text-color;
-        }
-    }
-    .small-text {
-        &, & tr, & th , & a {
-            font-size: 12px;
-            line-height: 14px;
-        }
-    }
-    .smaller-text  {
-        &, & tr, & th , & a {
-            font-size: 11px;
-            line-height: 11px;
-        }
-    }
-
-    .regular-img {
-        height: 40px;
-        width: 40px;
-        max-width: 40px;
-    }
-    .small-img {
-        height: 30px;
-        width: 30px;
-        max-width: 30px;
-    }
-    .inline-img {
-        display: inline;   
-    }
-
-    a.action-button {
-        color: $primary-color;
-    }
-    
-    &.action-button-alternate {
-        color: $primary-color;
-    }
     
 }
 

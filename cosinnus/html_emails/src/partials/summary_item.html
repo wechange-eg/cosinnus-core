@@ -1,6 +1,6 @@
 <row class="summary-item">
     <columns>
-	    <row class="main-row main-item">
+	    <row class="v-padded-row-regular-large h-padded-row-regular main-item">
             <columns class="spacer" large="1" small="1">&nbsp;</columns>
             
             <columns class="image" large="1" small="1" valign="middle">
@@ -19,7 +19,7 @@
                         </a>
                     </columns>
                 </row>
-                <row class="event-time">
+                <row class="event-time grey-text">
                     <columns class="unpadded">
                         {{#rw this}}event_meta{{/rw}}
                     </columns>
@@ -27,25 +27,18 @@
             </columns>
             
             <columns class="group-label smaller-text grey-text bold-text" large="4" small="4" valign="top">
-                <row class="">
-                    <columns class="unpadded" large="2" small="2" valign="middle">
-                        <!-- always include the width="nn" attribute in <img> for Outlook! -->
-	                    <img class="small-img inline-img" width="30" src="{{#rw this}}origin_icon_url{{/rw}}" />
-                    </columns>
-                    <columns class="unpadded smaller-text" valign="middle">
-                        {{#rw this}}origin_name{{/rw}}
-                    </columns>
-                </row>
                 
-                <!--
-                     Eventuell einfach sowas hier benutzen für die kleinen Einpassungen, vor allem damit das alignment rechts passt!
-                <table role=”presentation” cellspacing=”0″ cellpadding=”0″ border=”0″>
-				   <tr>
-					   <td>Column 1</td>
-					   <td>Column 2</td>
-				   </tr>
-				</table>
-				-->
+                <table class="group-aside" role=”presentation” cellspacing=”0″ cellpadding=”0″  align="right">
+                   <tr>
+                       <th class="group-aside-icon">
+                           <!-- always include the width="nn" attribute in <img> for Outlook! -->
+                           <img class="small-img inline-img" width="30" src="{{#rw this}}origin_icon_url{{/rw}}" />
+                       </th>
+                       <th class="group-aside-text smaller-text">
+                           {{#rw this}}origin_name{{/rw}} 
+                       </th>
+                   </tr>
+                </table>
                 
             </columns>
             
@@ -53,10 +46,11 @@
         </row>
 		
 		{{#rwif sub_object_name raw_if="sub_object_name" }}
-            <row class="main-row sub-item">
+            <row class="v-padded-row-regular h-padded-row-regular sub-item">
                 <columns class="spacer" large="1" small="1">&nbsp;</columns>
                 
                 <columns class="border-inlay" large="1" small="1" valign="middle">
+                    <span class="inlayed-border inlayed-border-left"></span>
                     <a href="{{#rw this}}object_url{{/rw}}">
                         <!-- always include the width="nn" attribute in <img> for Outlook! -->
                         <img class="regular-img" width="40" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
@@ -64,6 +58,7 @@
                 </columns>
             
                 <columns class="border-inlay" large="9" small="9" valign="middle">
+                    <span class="inlayed-border inlayed-border-right"></span>
                     <row class="bold-text">
                         <columns class="unpadded">
                             <span class="bold-text">{{#rw this}}sub_object_name{{/rw}}</span>
@@ -83,7 +78,7 @@
         {{/rwif}}
         
         {{#rwif object_text raw_if="object_text" }}
-            <row class="main-row item-content">
+            <row class="v-padded-row-regular h-padded-row-regular item-content">
                 <columns class="image" large="1" small="1" valign="top">
                     <a href="{{#rw this}}object_url{{/rw}}">
                         <!-- always include the width="nn" attribute in <img> for Outlook! -->
@@ -91,7 +86,7 @@
                     </a>
                 </columns>
             
-                <columns class="text" large="10" small="10" valign="middle">
+                <columns class="object-text-column" large="10" small="10" valign="middle">
                     {{#rwif object_name raw_if="object_name" }}
                         <p class="bold-text">
                             {{#rw this}}object_name{{/rw}}
@@ -107,24 +102,30 @@
         {{/rwif}}
         
         {{#rwif show_action_buttons raw_if="show_action_buttons"}}
-            <row class="main-row action_buttons">
+            <row class="v-padded-row-small h-padded-row-regular v-padded-row-large-bottom action_buttons">
                 <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
             
-                <columns class="text" large="1" small="10" valign="middle">
+                <columns class="text" large="10" small="10" valign="middle">
                     {{#rwif action_button_1_text raw_if="action_button_1_text"}}
-                        <a class="action-button {{#rwif action_button_1_alternate raw_if="action_button_1_alternate"}}action-button-alternate{{/rwif}}" href="{{#rw this}}action_button_1_url{{/rw}}" target="_blank">
-                            {{#rw this}}action_button_1_text{{/rw}}
-                        </a>
+                        <span class="action-button-span">
+	                        <a class="action-button {{#rwif action_button_1_alternate raw_if="action_button_1_alternate"}}action-button-alternate{{/rwif}}" href="{{#rw this}}action_button_1_url{{/rw}}" target="_blank">
+	                            {{#rw this}}action_button_1_text{{/rw}}
+	                        </a>
+                        </span>
                     {{/rwif}}
                     {{#rwif action_button_2_text raw_if="action_button_2_text"}}
-                        <a class="action-button {{#rwif action_button_2_alternate raw_if="action_button_2_alternate"}}action-button-alternate{{/rwif}}" href="{{#rw this}}action_button_2_url{{/rw}}" target="_blank">
-                            {{#rw this}}action_button_2_text{{/rw}}
-                        </a>
+                        <span class="action-button-span">
+	                        <a class="action-button {{#rwif action_button_2_alternate raw_if="action_button_2_alternate"}}action-button-alternate{{/rwif}}" href="{{#rw this}}action_button_2_url{{/rw}}" target="_blank">
+	                            {{#rw this}}action_button_2_text{{/rw}}
+	                        </a>
+                        </span>
                     {{/rwif}}
                     {{#rwif action_button_alternate_text raw_if="action_button_alternate_text"}}
-                        <a class="action-button action-button-alternate" href="{{#rw this}}action_button_alternate_url{{/rw}}" target="_blank">
-                            {{#rw this}}action_button_alternate_text{{/rw}}
-                        </a>
+                        <span class="action-button-span">
+	                        <a class="action-button action-button-alternate" href="{{#rw this}}action_button_alternate_url{{/rw}}" target="_blank">
+	                            {{#rw this}}action_button_alternate_text{{/rw}}
+	                        </a>
+                        </span>
                     {{/rwif}}
                     
                 </columns>
