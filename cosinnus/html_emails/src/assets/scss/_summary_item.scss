@@ -3,8 +3,6 @@
 @import 'mixins';
 
 .summary-item {
-    background-color: $background-color;
-    border-bottom: 2px solid $back;
     
     /* Frames */
     .main-item {
@@ -20,19 +18,14 @@
         &, & th, & tr {
             text-align: right;
             vertical-align: middle;
+            min-height: 30px;
         }
         .group-aside-icon {
-            width: 100%;
         }
         .group-aside-text {
-            width: auto;
-            white-space: nowrap;
         }
     }
 
-    .object-text-column {
-        padding: 25px 10px 15px 10px !important;    
-    }    
     /* Content frames */
     .event-text {
     }

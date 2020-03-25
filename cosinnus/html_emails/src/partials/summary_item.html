@@ -1,4 +1,4 @@
-<row class="summary-item">
+<row class="summary-item bordered-container">
     <columns>
 	    <row class="special-padded-row avatar-row main-item">
             <columns class="spacer" large="1" small="1">&nbsp;</columns>
@@ -31,12 +31,14 @@
                 <table class="group-aside" role=”presentation” cellspacing=”0″ cellpadding=”0″  align="right">
                    <tr>
                        <th class="group-aside-icon">
+                           {{#rw this}}origin_name{{/rw}} 
+                       </th>
+                       {{#rwif origin_icon_url raw_if="origin_icon_url" }}
+                       <th class="group-aside-text smaller-text">
                            <!-- always include the width="nn" attribute in <img> for Outlook! -->
                            <img class="small-img inline-img" width="30" src="{{#rw this}}origin_icon_url{{/rw}}" />
                        </th>
-                       <th class="group-aside-text smaller-text">
-                           {{#rw this}}origin_name{{/rw}} 
-                       </th>
+                       {{/rwif}}
                    </tr>
                 </table>
                 
@@ -78,11 +80,11 @@
         {{/rwif}}
         
         {{#rwif object_text raw_if="object_text" }}
-            <row class="special-padded-row object-row item-content">
+            <row class="special-padded-row object-row {{#rwif sub_object_name raw_if="sub_object_name" }}object-row-after-sub-object{{/rwif}} item-content">
                 <columns class="image" large="1" small="1" valign="top">
                     <a href="{{#rw this}}object_url{{/rw}}">
                         <!-- always include the width="nn" attribute in <img> for Outlook! -->
-                        <img class="regular-img" width="40" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
+                        <img class="regular-img" width="40" src="{{#rw this}}object_icon_url{{/rw}}" alt="" />
                     </a>
                 </columns>
             

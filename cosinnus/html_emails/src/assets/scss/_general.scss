@@ -22,16 +22,36 @@
     padding: 50px 20px;
 }
 .avatar-row > tbody > tr > th,
+.digest-header-row > tbody > tr > th {
+    padding: 25px 10px;
+}
 .footer-row > tbody > tr > th {
     padding: 20px 10px;
 }
-.sub-object-row > tbody > tr > th,
-.object-row > tbody > tr > th {
-    padding: 15px 10px;
+.sub-object-row > tbody > tr > th {
+    padding: 15px 10px;    
 }
+.object-row {
+    & > tbody > tr > th {
+        padding: 0px 10px 15px 10px;
+    }
+    .object-text-column {
+        padding: 10px 10px 15px 10px !important;    
+    }  
+}
+.object-row-after-sub-object {
+    & > tbody > tr > th {
+        padding: 15px 10px;
+    }
+    .object-text-column {
+        padding: 25px 10px 15px 10px !important;    
+    }  
+}
+
 .action-button-row > tbody > tr > th {
     padding: 10px 10px 30px 10px;
 }
+
 
 /* This might still cause problems (misaligning the left side) with Outlook, which doesn't deal with !important too well */
 .spacer {
@@ -39,6 +59,11 @@
     padding-right: 28px !important;
     padding: 20px 28px 20px 28px;
     width: 4px;
+}
+
+.bordered-container {
+    background-color: $background-color;
+    border-bottom: 2px solid $back;    
 }
 
 
