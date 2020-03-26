@@ -17,6 +17,11 @@
     padding-left: invalid !important;   
 }
 
+.content-wrapper-row > tbody > tr > th {
+    padding: 0 10px;
+    background: $back;
+}
+
 /* Main padding scaffolding of the row-tables */
 .header-row > tbody > tr > th {
     padding: 50px 20px;
@@ -44,7 +49,7 @@
         padding: 0px 10px 15px 10px;
     }
     .object-text-column {
-        padding: 10px 10px 15px 10px !important;    
+        padding: 10px 10px 15px 10px;    
     }
     .image-column {
         padding: 0px 5px 15px 15px;
@@ -55,7 +60,7 @@
         padding: 15px 10px;
     }
     .object-text-column {
-        padding: 25px 10px 15px 10px !important;    
+        padding: 25px 10px 15px 10px;    
     }  
     .image-column {
         padding: 15px 5px 15px 15px;
@@ -66,13 +71,12 @@
     padding: 10px 10px 30px 10px;
 }
 
-
-/* This might still cause problems (misaligning the left side) with Outlook, which doesn't deal with !important too well */
-.spacer {
-    padding-left: 28px !important;    
-    padding-right: 28px !important;
-    padding: 20px 28px 20px 28px;
-    width: 4px;
+/* needs to be wrapped */
+.special-padded-row {
+    .spacer {
+        padding: 20px 28px 20px 28px;
+        width: 4px;
+    }
 }
 
 .bordered-container {
