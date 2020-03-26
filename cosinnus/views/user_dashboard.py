@@ -42,6 +42,7 @@ from cosinnus.views.ui_prefs import get_ui_prefs_for_user
 from django.utils.timezone import now
 from dateutil.relativedelta import relativedelta
 from cosinnus.models.user_dashboard_announcement import UserDashboardAnnouncement
+from datetime import timedelta
 
 
 logger = logging.getLogger('cosinnus')
@@ -89,6 +90,7 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
             'note_form' : note_form,
             'announcement': announcement,
             'announcement_is_preview': announcement_is_preview,
+            'welcome_screen_expired': self.request.user.date_joined < (now() - timedelta(days=7)),
         }
         return ctx
 
