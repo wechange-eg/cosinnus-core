@@ -25,8 +25,16 @@
 .digest-header-row > tbody > tr > th {
     padding: 25px 10px;
 }
+.group-header-row {
+    & > tbody > tr > th {
+        padding: 12px 10px;
+    }
+    .image-column {
+        padding: 12px 5px 12px 15px;
+    }
+}
 .footer-row > tbody > tr > th {
-    padding: 20px 10px;
+    padding: 20px 9px;
 }
 .sub-object-row > tbody > tr > th {
     padding: 15px 10px;    
@@ -37,7 +45,10 @@
     }
     .object-text-column {
         padding: 10px 10px 15px 10px !important;    
-    }  
+    }
+    .image-column {
+        padding: 0px 5px 15px 15px;
+    }
 }
 .object-row-after-sub-object {
     & > tbody > tr > th {
@@ -46,6 +57,9 @@
     .object-text-column {
         padding: 25px 10px 15px 10px !important;    
     }  
+    .image-column {
+        padding: 15px 5px 15px 15px;
+    }
 }
 
 .action-button-row > tbody > tr > th {
@@ -64,7 +78,12 @@
 .bordered-container {
     background-color: $background-color;
     border-bottom: 2px solid $back;    
+    
+    &.top-padded {
+        border-top: 18px solid $back;    
+    }
 }
+
 
 
 
@@ -96,10 +115,8 @@
 .colored-text, .colored-text a {
     color: $primary-color;
 }
-.bold-text {
-    &, & tr, & th , & a {
-        font-weight: bold;
-    }
+.uncolored-text, .uncolored-text a {
+    color: $text-color;
 }
 .non-bold-text {
     &, & tr, & th , & a {
@@ -109,6 +126,18 @@
 .grey-text {
     &, & tr, & th , & a {
         color: $pale-text-color;
+        font-weight: normal;
+    }
+}
+.bold-text {
+    &, & tr, & th , & a {
+        font-weight: bold;
+    }
+}
+.large-text {
+    &, & tr, & th , & a {
+        font-size: 18px;
+        line-height: 20px;
     }
 }
 .small-text {
@@ -134,6 +163,17 @@
     width: 30px;
     max-width: 30px;
 }
+.smallest-img {
+    height: 20px;
+    width: 20px;
+    max-width: 20px;
+}
+.padded-img {
+    padding: 5px;    
+}
+.padded-img-no-right {
+    padding: 5px 0 5px 5px;    
+}
 .inline-img {
     display: inline;   
 }
@@ -145,6 +185,7 @@
 a.action-button {
     color: $primary-color;
     text-transform: uppercase;
+    font-size: 13px;
     padding-right: 15px;
     letter-spacing: 0.5px;
     

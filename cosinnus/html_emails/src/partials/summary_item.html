@@ -21,7 +21,9 @@
                 </row>
                 <row class="event-time grey-text">
                     <columns class="unpadded">
-                        {{#rw this}}event_meta{{/rw}}
+                        <a href="{{#rw this}}object_url{{/rw}}">
+                            {{#rw this}}event_meta{{/rw}}
+                        </a>
                     </columns>
                 </row>
             </columns>
@@ -31,12 +33,16 @@
                 <table class="group-aside" role=”presentation” cellspacing=”0″ cellpadding=”0″  align="right">
                    <tr>
                        <th class="group-aside-icon">
-                           {{#rw this}}origin_name{{/rw}} 
+                           <a href="{{#rw this}}object_url{{/rw}}">
+                               {{#rw this}}origin_name{{/rw}} 
+                           </a>
                        </th>
                        {{#rwif origin_icon_url raw_if="origin_icon_url" }}
                        <th class="group-aside-text smaller-text">
-                           <!-- always include the width="nn" attribute in <img> for Outlook! -->
-                           <img class="small-img inline-img" width="30" src="{{#rw this}}origin_icon_url{{/rw}}" />
+                           <a href="{{#rw this}}object_url{{/rw}}">
+	                           <!-- always include the width="nn" attribute in <img> for Outlook! -->
+                               <img class="smallest-img inline-img padded-img-no-right" width="20" src="{{#rw this}}origin_icon_url{{/rw}}" />
+                           </a>
                        </th>
                        {{/rwif}}
                    </tr>
@@ -55,7 +61,7 @@
                     <span class="inlayed-border inlayed-border-left"></span>
                     <a href="{{#rw this}}object_url{{/rw}}">
                         <!-- always include the width="nn" attribute in <img> for Outlook! -->
-                        <img class="regular-img" width="40" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
+                        <img class="small-img padded-img" width="30" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
                     </a>
                 </columns>
             
@@ -81,17 +87,20 @@
         
         {{#rwif object_text raw_if="object_text" }}
             <row class="special-padded-row object-row {{#rwif sub_object_name raw_if="sub_object_name" }}object-row-after-sub-object{{/rwif}} item-content">
-                <columns class="image" large="1" small="1" valign="top">
+            
+                <columns class="image image-column" large="1" small="1" valign="top">
                     <a href="{{#rw this}}object_url{{/rw}}">
                         <!-- always include the width="nn" attribute in <img> for Outlook! -->
-                        <img class="regular-img" width="40" src="{{#rw this}}object_icon_url{{/rw}}" alt="" />
+                        <img class="small-img padded-img" width="30" src="{{#rw this}}object_icon_url{{/rw}}" alt="" />
                     </a>
                 </columns>
             
                 <columns class="object-text-column" large="10" small="10" valign="middle">
                     {{#rwif object_name raw_if="object_name" }}
                         <p class="bold-text">
-                            {{#rw this}}object_name{{/rw}}
+                            <a class="uncolored-text" href="{{#rw this}}object_url{{/rw}}">
+                                {{#rw this}}object_name{{/rw}}
+                            </a>
                         </p>
 	                {{/rwif}}
 	                <p>
