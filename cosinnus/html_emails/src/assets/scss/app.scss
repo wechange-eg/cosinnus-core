@@ -37,14 +37,15 @@ ul br, ol br, ul br {
 }
 
 p {
-    margin: 0;
+    margin: invalid; /* changed for outlook-p margin hack, was "0" */
     margin-top: 0; 
     margin-right: 0; 
     margin-bottom: 0; 
     margin-left: 0; 
     
     &:not(:first-of-type) {
-        padding: 16px 0 0 0;    
+        padding: 16px 0 0 0; 
+        Margin: 16px 0 0 0; /* added for outlook-p margin hack */
     }
 }
 
