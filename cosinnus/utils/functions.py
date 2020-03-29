@@ -188,6 +188,7 @@ def resolve_attributes(obj, attr_or_function, default=None, func_args=[]):
     """ Returns the given string attribute of an object, or its return value if it's a function.
         If None given, or the object had no such attribute or function, try to find
         the given default attribute. If no default given, return None. 
+        Supplying a string argument 'None' to attr_or_function will override the default and return None.
         This function takes stacked attributes, much like a django template would.
         @param func_args: If given, and the resolved attribute is a function, supply these args
         
@@ -196,6 +197,9 @@ def resolve_attributes(obj, attr_or_function, default=None, func_args=[]):
         
     attribute = None
     if attr_or_function:
+        if attr_or_function == 'None':
+            # string 'None's will make us return None
+            return None
         # pick and resolve first attribute in string
         attributes = attr_or_function.split('.', 1)
         attribute = attributes[0]

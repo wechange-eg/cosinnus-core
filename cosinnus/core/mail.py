@@ -173,7 +173,7 @@ def send_html_mail_threaded(to_user, subject, html_content):
     
     portal = CosinnusPortal.get_current()
     domain = portal.get_domain()
-    portal_image_url = '%s%s' % (domain, static('img/logo-icon.png'))
+    portal_image_url = '%s%s' % (domain, static('img/email-header.png'))
     data = {
         'site': portal.site,
         'site_name': portal.site.name,

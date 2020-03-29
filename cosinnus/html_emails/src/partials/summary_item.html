@@ -14,18 +14,22 @@
                 <row class="event-text colored-text">
                     <columns class="unpadded">
                         <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
-                            <span class="bold-text">{{#rw this}}action_user_name{{/rw}}</span>
+                            {{#rwif action_user_name raw_if="action_user_name" }}
+                                <span class="bold-text">{{#rw this}}action_user_name{{/rw}}</span>
+                            {{/rwif}}
                             <span class="non-bold-text">{{#rw this}}event_text{{/rw}}</span>
                         </a>
                     </columns>
                 </row>
-                <row class="event-time grey-text">
-                    <columns class="unpadded">
-                        <a href="{{#rw this}}object_url{{/rw}}">
-                            {{#rw this}}event_meta{{/rw}}
-                        </a>
-                    </columns>
-                </row>
+                {{#rwif event_meta raw_if="event_meta" }}
+	                <row class="event-time grey-text">
+	                    <columns class="unpadded">
+	                        <a href="{{#rw this}}object_url{{/rw}}">
+	                            {{#rw this}}event_meta{{/rw}}
+	                        </a>
+	                    </columns>
+	                </row>
+                {{/rwif}}
             </columns>
             
             <columns class="group-label smaller-text grey-text bold-text" large="4" small="4" valign="top">
@@ -85,7 +89,7 @@
             </row>
         {{/rwif}}
         
-        {{#rwif object_text raw_if="object_text" }}
+        {{#rwif object_text  raw_if="object_name or object_text" }}
             <row class="special-padded-row object-row {{#rwif sub_object_name raw_if="sub_object_name" }}object-row-after-sub-object{{/rwif}} item-content">
             
                 <columns class="image image-column" large="1" small="1" valign="top">
@@ -95,7 +99,7 @@
                     </a>
                 </columns>
             
-                <columns class="object-text-column" large="10" small="10" valign="middle">
+                <columns class="object-text-column" large="10" small="10" valign="top">
                     {{#rwif object_name raw_if="object_name" }}
                         <p class="bold-text">
                             <a class="uncolored-text" href="{{#rw this}}object_url{{/rw}}">
@@ -103,9 +107,7 @@
                             </a>
                         </p>
 	                {{/rwif}}
-	                <p>
-	                   {{#rw this}}object_text{{/rw}}
-                    </p>
+                   {{#rw this}}object_text{{/rw}}
                 </columns>
                 
                 <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
