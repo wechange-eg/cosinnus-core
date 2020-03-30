@@ -527,7 +527,6 @@ def group_admin_emails(request, slugs):
     
     for membership in memberships:
         user = membership.user
-        logger.warn(user.email)
         if check_user_can_receive_emails(user) and (includeOptedOut or user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True):
             user_mails.append(user.email)
     user_mails = list(set(user_mails))

@@ -207,6 +207,9 @@ class CosinnusConf(AppConf):
     # the notification setting for groups when user newly join them (3: weekly)
     DEFAULT_GROUP_NOTIFICATION_SETTING = 3
     
+    # the global notification setting for users on the plattform (3: weekly)
+    DEFAULT_GLOBAL_NOTIFICATION_SETTING = 3
+    
     # default setting for notifications for followed objects
     DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING = 2 # SETTING_DAILY = 2
     
