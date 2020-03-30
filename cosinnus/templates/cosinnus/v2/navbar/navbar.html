@@ -85,6 +85,14 @@
 	    		<i class="fas fa-fw fa-home"></i>
 			</a>
 			{% endblock %}
+			{% if SETTINGS.COSINNUS_CLOUD_ENABLED %}
+			    {% block cloud_icon_button %}
+			        <a class="nav-button" href="{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}" role="button" 
+			               title="{% trans "Cloud" %}" {% if SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}> 
+			            <i class="fas fa-fw fa-cloud"></i>
+			        </a>
+			    {% endblock %}
+		    {% endif %}
 			<a class="nav-button" href="{% group_url "cosinnus:event:list" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" role="button" title="{% trans "Events" %}"> 
 	    		<i class="fas fa-fw fa-calendar"></i>
 			</a>
