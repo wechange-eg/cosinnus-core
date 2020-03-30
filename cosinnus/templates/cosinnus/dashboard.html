@@ -153,6 +153,15 @@
                 <div class="multiline-ellipsis-main">
                     {% if user.pk in group.members or user in group.admins or not user.is_authenticated %}
                     	
+                    	{% if "cloud" in object_counts %}
+                            <div class="dashboard-header-link app-cloud mobile-hidden">
+                                <a href="{% group_url 'cosinnus:cloud:index' group=group %}" {% if SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}>
+                                    <i class="fa fa-cloud"></i>
+                                    <span>??</span>
+                                    {% trans "Cloud" %}
+                                </a>
+                            </div>
+                        {% endif %}
                     	{% if "marketplace" in object_counts %}
                             <div class="dashboard-header-link app-marketplace mobile-hidden">
                                 <a href="{% group_url 'cosinnus:marketplace:list' group=group %}">

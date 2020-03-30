@@ -606,7 +606,6 @@ class CosinnusConf(AppConf):
     
     # whether to enable the cosinnus cloud app
     CLOUD_ENABLED = False
-    
         
     # base url of the nextcloud service, without trailing slash
     CLOUD_NEXTCLOUD_URL = None
@@ -619,6 +618,8 @@ class CosinnusConf(AppConf):
     
     # URL for the iframe/tab leading to a specific group folder (with leading slash)
     CLOUD_GROUP_FOLDER_IFRAME_URL = '/apps/files/?dir=/%(group_folder_name)s'
+    # whether all cloud links should open with target="_blank"
+    CLOUD_OPEN_IN_NEW_TAB = True
     
     # if set to a hex color string,
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages

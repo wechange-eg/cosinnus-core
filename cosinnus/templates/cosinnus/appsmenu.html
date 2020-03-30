@@ -16,7 +16,7 @@
                 	{% if active_app %}
                       {% for app in apps %}
                         {% if app.active %}
-                          <i class="fa {% if app.app == 'cosinnus_todo' %}fa-tasks{% elif app.app == 'cosinnus_note' %}fa-book{% elif app.app == 'cosinnus_poll' %}fa-bar-chart{% elif app.app == 'cosinnus_marketplace' %}fa-exchange{% elif app.app == 'cosinnus_file' %}fa-file{% elif app.app == 'cosinnus_etherpad' %}fa-file-text{% elif app.app == 'cosinnus_event' %}fa-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}"></i>
+                          <i class="fa {% if app.app == 'cosinnus_todo' %}fa-tasks{% elif app.app == 'cosinnus_note' %}fa-book{% elif app.app == 'cosinnus_poll' %}fa-bar-chart{% elif app.app == 'cosinnus_marketplace' %}fa-exchange{% elif app.app == 'cosinnus_file' %}fa-file{% elif app.app == 'cosinnus_etherpad' %}fa-file-text{% elif app.app == 'cosinnus_cloud' %}fa-cloud{% elif app.app == 'cosinnus_event' %}fa-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}"></i>
                         {% endif %}
                       {% endfor %}
                     {% else %}
@@ -72,7 +72,7 @@
             {% captureas app_icon %}{% if app.app == 'cosinnus_todo' %}fa-tasks{% elif app.app == 'cosinnus_note' %}fa-book{% elif app.app == 'cosinnus_poll' %}fa-bar-chart{% elif app.app == 'cosinnus_cloud' %}fa-cloud{% elif app.app == 'cosinnus_marketplace' %}fa-exchange{% elif app.app == 'cosinnus_file' %}fa-file{% elif app.app == 'cosinnus_etherpad' %}fa-file-text{% elif app.app == 'cosinnus_event' %}fa-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
         
 	        <li class="{{app_css_class}} appnavi-listelement {% if app.active %}active{% endif %}">
-	            <a href="{{ app.url }}">
+	            <a href="{{ app.url }}" {% if app.app == 'cosinnus_cloud' and SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}>
 	                <i class="fa {{ app_icon }}"></i>
 	                {{ app.label }}
 	            </a>
