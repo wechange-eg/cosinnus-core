@@ -156,7 +156,11 @@ def user_pre_save(sender, **kwargs):
     """ Saves a user's is_active value as it was before saving """
     user = kwargs['instance']
     actual_value = user.is_active
-    user.refresh_from_db(fields=['is_active'])
+    try:
+        user.refresh_from_db(fields=['is_active'])
+    except get_user_model().DoesNotExist:
+        # happens on user create
+        pass
     user._is_active = user.is_active
     user.is_active = actual_value
     
