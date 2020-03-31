@@ -85,7 +85,7 @@
 	    		<i class="fas fa-fw fa-home"></i>
 			</a>
 			{% endblock %}
-			{% if SETTINGS.COSINNUS_CLOUD_ENABLED %}
+			{% if SETTINGS.COSINNUS_CLOUD_ENABLED and request.user.is_authenticated %}
 			    {% block cloud_icon_button %}
 			        <a class="nav-button" href="{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}" role="button" 
 			               title="{% trans "Cloud" %}" {% if SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}> 

@@ -620,6 +620,8 @@ class CosinnusConf(AppConf):
     CLOUD_GROUP_FOLDER_IFRAME_URL = '/apps/files/?dir=/%(group_folder_name)s'
     # whether all cloud links should open with target="_blank"
     CLOUD_OPEN_IN_NEW_TAB = True
+    # whether to prefix all nextcloud group folders with "Projekt" or "Gruppe"
+    CLOUD_PREFIX_GROUP_FOLDERS = True
     
     # if set to a hex color string,
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
