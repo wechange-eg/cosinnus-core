@@ -1,29 +1,6 @@
-    <!-- 
-<row class="origin">
-    <columns small="2" large="2" valign="middle">
-        <a href="{{#rw this}}origin_url{{/rw}}" target="_blank">
-            <img src="{{#rw this}}origin_image_url{{/rw}}" alt="" />
-        </a>
-    </columns>
-    <columns small="11" large="11" valign="middle">
-        <h3>
-            <a href="{{#rw this}}origin_url{{/rw}}" target="_blank">
-                {{#rw this}}origin_name{{/rw}}
-            </a>
-        </h3>
-    </columns>
-</row>
-
-TODO: here the top notification intro with anchors
-
-{{#rwif notification_body raw_if="notification_body"}}
-    <row class="notification-body">
-        <columns>
-            <p>{{#rw this}}notification_body{{/rw}}</p>
-        </columns>
-    </row>
+{{#rwif topic raw_if="topic" }}
+    {{> digest_header}}
 {{/rwif}}
-    -->
 
 {{#if raw}}
     {{{{raw}}}}

@@ -2,19 +2,21 @@
     <columns class="spacer" large="1" small="1">&nbsp;</columns>
     
     <columns class="small-text" large="10" small="10" valign="middle">
-        <p class="bold-text">
-            {{#if raw}}
-                {{{{raw}}}}{% trans "Hello" %}{{{{/raw}}}}
-            {{else}}
-                Hello
-            {{/if}}
-            
-            {{#rwif addressee raw_if="addressee"}}
-                {{#rw this}}addressee{{/rw}},
-            {{/rwif}}
-        </p>
         <p>
-            {{#rw this}}topic{{/rw}}
+	        {{#rwif addressee raw_if="addressee"}}
+	            <span class="bold-text">
+		            {{#if raw}}
+		                {{{{raw}}}}{% trans "Hello" %}{{{{/raw}}}}
+		            {{else}}
+		                Hello
+		            {{/if}}
+	                {{#rw this}}addressee{{/rw}},
+	            </span>
+	            <br/>
+                <br/>
+	        {{/rwif}}
+	        
+	        {{#rw this}}topic{{/rw}}
         </p>
     </columns>
     

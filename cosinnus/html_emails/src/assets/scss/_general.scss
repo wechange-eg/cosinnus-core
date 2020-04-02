@@ -55,20 +55,14 @@
         padding: 0px 5px 15px 15px;
     }
 }
-.object-row-after-sub-object {
+.spacer-row {
     & > tbody > tr > th {
-        padding: 15px 10px;
-    }
-    .object-text-column {
-        padding: 25px 10px 15px 10px;    
-    }  
-    .image-column {
-        padding: 15px 5px 15px 15px;
+        padding: 0 0 0 0;
     }
 }
 
 .action-button-row > tbody > tr > th {
-    padding: 10px 10px 30px 10px;
+    padding: 20px 10px 30px 10px;
 }
 
 /* needs to be wrapped */
@@ -82,10 +76,6 @@
 .bordered-container {
     background-color: $background-color;
     border-bottom: 2px solid $back;    
-    
-    &.top-padded {
-        border-top: 18px solid $back;    
-    }
 }
 
 

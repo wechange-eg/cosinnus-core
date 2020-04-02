@@ -89,8 +89,14 @@
             </row>
         {{/rwif}}
         
-        {{#rwif object_text  raw_if="object_name or object_text" }}
-            <row class="special-padded-row object-row {{#rwif sub_object_name raw_if="sub_object_name" }}object-row-after-sub-object{{/rwif}} item-content">
+        {{#rwif sub_object_name raw_if="sub_object_name" }}
+            <row class="special-padded-row spacer-row">
+                <columns large="12" small="12" valign="top">&nbsp;</columns>
+            </row>
+        {{/rwif}}
+        
+        {{#rwif object_text raw_if="object_name or object_text" }}
+            <row class="special-padded-row object-row item-content">
             
                 <columns class="image image-column" large="1" small="1" valign="top">
                     <a href="{{#rw this}}object_url{{/rw}}">
@@ -100,7 +106,7 @@
                 </columns>
             
                 <columns class="object-text-column" large="10" small="10" valign="top">
-                    {{#rwif object_name raw_if="object_name" }}
+                    {{#rwif display_object_name raw_if="display_object_name" }}
                         <p class="bold-text">
                             <a class="uncolored-text" href="{{#rw this}}object_url{{/rw}}">
                                 {{#rw this}}object_name{{/rw}}
@@ -108,6 +114,22 @@
                         </p>
 	                {{/rwif}}
                    {{#rw this}}object_text{{/rw}}
+                   
+                   {{#if raw}}
+					    {{{{raw}}}}
+					        {% if content_rows %}
+						        {% for content_row in content_rows %}
+						           <p>{{ content_row }}</p>
+						        {% endfor %}
+					        {% endif %}
+					    {{{{/raw}}}}
+					{{else}}
+					    {{#each content_rows}}
+					        <p>
+                                {{#rw this}}content_row{{/rw}}
+                            </p>
+                        {{/each}}
+					{{/if}}
                 </columns>
                 
                 <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
