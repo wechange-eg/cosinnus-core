@@ -21,10 +21,12 @@
             min-height: 30px;
         }
         .group-aside-icon {
-            width: 100%;
-            word-break: break-word;
+            opacity: 0.5;
+            background-color: white;
         }
         .group-aside-text {
+            width: 100%;
+            word-break: break-word;
         }
     }
 

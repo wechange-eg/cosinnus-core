@@ -36,13 +36,13 @@
                 
                 <table class="group-aside" role=”presentation” cellspacing=”0″ cellpadding=”0″  align="right">
                    <tr>
-                       <th class="group-aside-icon">
+                       <th class="group-aside-text smaller-text">
                            <a href="{{#rw this}}object_url{{/rw}}">
                                {{#rw this}}origin_name{{/rw}} 
                            </a>
                        </th>
                        {{#rwif origin_icon_url raw_if="origin_icon_url" }}
-                       <th class="group-aside-text smaller-text">
+                       <th class="group-aside-icon">
                            <a href="{{#rw this}}object_url{{/rw}}">
 	                           <!-- always include the width="nn" attribute in <img> for Outlook! -->
                                <img class="smallest-img inline-img padded-img-no-right" width="20" src="{{#rw this}}origin_icon_url{{/rw}}" />

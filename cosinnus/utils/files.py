@@ -144,6 +144,6 @@ def image_thumbnail_url(image, size):
 def get_image_url_for_icon(icon_name, large=False):
     """ Returns the static URL for an image of a font-awesome icon.
         @param icon_name: e.g. "fa-user" """
-    file_path =  'images/fa-icons/%s%s.png' % (icon_name, '-large' if large else '')
+    file_path =  'images/fa-icons/%s/%s.png' % ('large' if large else 'small', icon_name)
     return static(file_path)
     
