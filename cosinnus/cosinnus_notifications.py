@@ -62,7 +62,6 @@ notifications = {
         'alert_reason': _('You are an admin of this team'),
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('New membership request'),
         'notification_text': _('"%(sender_name)s" requested to become a member of %(team_name)s.'),
         'subject_text': _('"%(sender_name)s" requested to become a member of %(team_name)s.'),
@@ -86,7 +85,6 @@ notifications = {
         'alert_reason': '',
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('Membership request accepted'),
         'notification_text': _('Your membership request for %(team_name)s was accepted!'),
         'subject_text': _('Your membership request for %(team_name)s was accepted!'),
@@ -107,7 +105,6 @@ notifications = {
         'alert_reason': '',
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('Membership request declined'),
         'notification_text': _("We're sorry, but your membership request for %(team_name)s was declined."),
         'subject_text': _('Your membership request for %(team_name)s was declined.'),
@@ -131,7 +128,6 @@ notifications = {
         'alert_reason': _('You are an admin of this team'),
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('%(sender_name)s accepted the invitation'),
         'subject_text': _('"%(sender_name)s" has accepted the invitation to %(team_name)s.'),
         'data_attributes': {
@@ -155,7 +151,6 @@ notifications = {
         'alert_reason': _('You are an admin of this team'),
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('%(sender_name)s declined the invitation'),
         'subject_text': _('"%(sender_name)s" has declined the invitation to %(team_name)s.'),
         'data_attributes': {
@@ -176,7 +171,6 @@ notifications = {
         'alert_reason': '',
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('Made you an admin'),
         'notification_text': _('%(sender_name)s made you an admin of "%(team_name)s" on %(portal_name)s!'),
         'subject_text': _('%(sender_name)s made you an admin of "%(team_name)s" on %(portal_name)s!'),
@@ -198,7 +192,6 @@ notifications = {
         'alert_reason': '',
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('Revoked your admin status'),
         'notification_text': _('%(sender_name)s revoked your admin status of "%(team_name)s" on %(portal_name)s!'),
         'subject_text': _('%(sender_name)s revoked your admin status of "%(team_name)s" on %(portal_name)s!'),
@@ -221,7 +214,6 @@ notifications = {
         'alert_multi_type': 2,
         
         'is_html': True,
-        'snippet_type': 'event',
         'event_text': _('%(sender_name)s tagged you in'),
         'notification_text': _('You were tagged by %(sender_name)s'),
         'subject_text': _('You were tagged in "%(object_name)s" in %(team_name)s.'),
@@ -242,7 +234,6 @@ notifications = {
         'alert_reason': '',
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('Invited you'),
         'notification_text': _('%(sender_name)s invited you to join "%(team_name)s" on %(portal_name)s! <br/><br/>' 
                            ' To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation.'),
@@ -267,7 +258,6 @@ notifications = {
         'can_be_alert': False,
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('%(sender_name)s invited you'),
         'topic': settings.COSINNUS_RECRUIT_EMAIL_BODY_TEXT,
         'subject_text': _('%(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
@@ -295,7 +285,6 @@ notifications = {
         'can_be_alert': False,
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('New link to the moved project/group'),
         'notification_text': _('One of your projects/groups were moved to the portal "%(portal_name)s"! <br/><br/> '
                                'Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>'
@@ -317,7 +306,6 @@ notifications = {
         'moderatable_content': True,
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('Created'),
         'notification_text': _('%(sender_name)s just created the project/group "%(team_name)s" on %(portal_name)s!'),
         'subject_text': _('%(sender_name)s just created the project/group "%(team_name)s" on %(portal_name)s!'),
@@ -341,8 +329,7 @@ if settings.COSINNUS_IDEAS_ENABLED:
             'moderatable_content': True,
             
             'is_html': True,
-            'snippet_type': 'news',
-            #'snippet_template': 'cosinnus/html_mail/summary_group.html',
+                #'snippet_template': 'cosinnus/html_mail/summary_group.html',
             'event_text': _('Has created'),
             'notification_text': _('%(sender_name)s just created the idea "%(object_name)s" on %(portal_name)s!'),
             'subject_text': _('%(sender_name)s just created the idea "%(object_name)s"!'),
@@ -362,8 +349,7 @@ if settings.COSINNUS_IDEAS_ENABLED:
             'hidden': True,
             
             'is_html': True,
-            'snippet_type': 'news',
-            #'snippet_template': 'cosinnus/html_mail/summary_group.html',
+                #'snippet_template': 'cosinnus/html_mail/summary_group.html',
             'event_text': _('Has created'),
             'notification_text': _('%(sender_name)s just created the project "%(team_name)s" on %(portal_name)s from an idea you follow! <br/><br/>' 
                                ' To check it out, please click on the link below. There you can see if you would like to join the project.'),

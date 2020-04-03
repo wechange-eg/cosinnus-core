@@ -94,9 +94,6 @@ function inline() {
 // add cellspacing/cellpadding onto tables that have padding classes to support Outlook
 function cellspaceClasses() {
   return gulp.src('dist/**/*.html')
-//     .pipe(replace('<th ', '<td '))  // needed?
-//     .pipe(replace('</th>', '</td>')) // needed?
-    
     .pipe(replace('padding-top: invalid !important;', ''))
     .pipe(replace('padding-right: invalid !important;', ''))
     .pipe(replace('padding-bottom: invalid !important;', ''))

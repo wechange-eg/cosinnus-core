@@ -62,18 +62,20 @@
                 <columns class="spacer" large="1" small="1">&nbsp;</columns>
                 
                 <columns class="border-inlay" large="1" small="1" valign="middle">
-                    <span class="inlayed-border inlayed-border-left"></span>
-                    <a href="{{#rw this}}object_url{{/rw}}">
-                        <!-- always include the width="nn" attribute in <img> for Outlook! -->
-                        <img class="small-img padded-img" width="30" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
-                    </a>
+	                    <a href="{{#rw this}}object_url{{/rw}}">
+	                        <!-- always include the width="nn" attribute in <img> for Outlook! -->
+	                        <img class="small-img padded-img" width="30" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
+                            <span class="inlayed-border inlayed-border-left"></span>
+	                    </a>
                 </columns>
             
                 <columns class="border-inlay" large="9" small="9" valign="middle">
                     <span class="inlayed-border inlayed-border-right"></span>
                     <row class="bold-text">
                         <columns class="unpadded">
-                            <span class="bold-text">{{#rw this}}sub_object_name{{/rw}}</span>
+                            <span class="bold-text">
+                                <a class="uncolored-text" href="{{#rw this}}object_url{{/rw}}">{{#rw this}}sub_object_name{{/rw}}</a>
+                            </span>
                         </columns>
                     </row>
                     {{#rwif sub_object_text raw_if="sub_object_text" }}
