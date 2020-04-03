@@ -35,7 +35,7 @@
         padding: 12px 10px;
     }
     .image-column {
-        padding: 12px 5px 12px 15px;
+        padding: 12px 0 12px 10px;
     }
 }
 .footer-row > tbody > tr > th {
@@ -52,7 +52,7 @@
         padding: 10px 10px 15px 10px;    
     }
     .image-column {
-        padding: 0px 5px 15px 15px;
+        padding: 0px 0 15px 10px;
     }
 }
 .spacer-row {
@@ -68,7 +68,7 @@
 /* needs to be wrapped */
 .special-padded-row {
     .spacer {
-        padding: 20px 28px 20px 28px;
+        padding: 20px 23px 20px 23px;
         width: 4px;
     }
 }

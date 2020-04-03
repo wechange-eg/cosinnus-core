@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width">
 <title></title>
+<!-- Overriding styles for dynamic content -->
 <style no-scrub="1">
         h1, h2, h3, h4, h5, h6 {
             font-size: 14px;
@@ -15,6 +16,9 @@
             color: #38b6b7;
 		    font-weight: bold;
 		    text-decoration: none;
+        }
+        p img {
+            width: 100%;
         }
 </style>
 </head>
@@ -50,7 +54,7 @@
                         
                         {% if topic %}
 <table class="row special-padded-row digest-header-row digest-header bordered-container" style="background-color: #ffffff; border-bottom: 2px solid #f0f0f0; border-collapse: collapse; border-spacing: 0; display: table; padding: 0; position: relative; text-align: left; vertical-align: top; width: 100%;"><tbody><tr style="padding: 0; text-align: left; vertical-align: top;">
-<th class="spacer small-1 large-1 columns first" style="Margin: 0 auto; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0 auto; padding: 20px 28px 20px 28px;     text-align: left; width: 8.33333%;"><table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;"><tr style="padding: 0; text-align: left; vertical-align: top;"><th style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0; padding: 0; text-align: left;">&nbsp;</th></tr></table></th>
+<th class="spacer small-1 large-1 columns first" style="Margin: 0 auto; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0 auto; padding: 20px 23px 20px 23px;     text-align: left; width: 8.33333%;"><table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;"><tr style="padding: 0; text-align: left; vertical-align: top;"><th style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0; padding: 0; text-align: left;">&nbsp;</th></tr></table></th>
 <th class="small-text small-10 large-10 columns" valign="middle" style="Margin: 0 auto; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 300; line-height: 14px; margin: 0 auto; padding: 25px 10px;     text-align: left; width: 83.33333%;"><table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;"><tr style="font-size: 12px; line-height: 14px; padding: 0; text-align: left; vertical-align: top;"><th style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 300; line-height: 14px; margin: 0; padding: 0; text-align: left;">
 <p style="Margin: 0; Margin-bottom: 10px; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: invalid; margin-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; padding: 0; text-align: left;">
                             {% if addressee %}
@@ -64,7 +68,7 @@
                             	        {{topic}}
 </p>
 </th></tr></table></th>
-<th class="spacer small-1 large-1 columns last" valign="top" style="Margin: 0 auto; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0 auto; padding: 20px 28px 20px 28px;     text-align: left; width: 8.33333%;"><table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;"><tr style="padding: 0; text-align: left; vertical-align: top;"><th style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0; padding: 0; text-align: left;">&nbsp;</th></tr></table></th>
+<th class="spacer small-1 large-1 columns last" valign="top" style="Margin: 0 auto; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0 auto; padding: 20px 23px 20px 23px;     text-align: left; width: 8.33333%;"><table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;"><tr style="padding: 0; text-align: left; vertical-align: top;"><th style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0; padding: 0; text-align: left;">&nbsp;</th></tr></table></th>
 </tr></tbody></table>
                         {% endif %}
                                 {% if notification_item_html %}
