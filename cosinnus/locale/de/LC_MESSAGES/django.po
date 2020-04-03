@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 16:09+0100\n"
-"PO-Revision-Date: 2020-02-23 16:10+0100\n"
+"POT-Creation-Date: 2020-04-03 17:48+0200\n"
+"PO-Revision-Date: 2020-04-03 17:48+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -419,6 +419,11 @@ msgstr "Einladung annehmen"
 msgid "View invitation"
 msgstr "Einladung ansehen"
 
+#, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s invited you"
+msgstr "%(sender_name)s hat dich eingeladen"
+
 msgid "New link to the moved project/group"
 msgstr "Neue Adresse des Projekts/Gruppe"
 
@@ -626,6 +631,9 @@ msgstr ""
 msgid "This account is inactive."
 msgstr "Dieses Benutzerkonto ist deaktiviert worden."
 
+msgid "Hello"
+msgstr "Hallo"
+
 msgid "Click the following link to change which emails you receive:"
 msgstr "Klicke den folgenden Link, um einzustellen welche E-Mails du erhältst:"
 
@@ -637,9 +645,6 @@ msgstr "Klicke den folgenden Link, um keine E-Mails mehr von uns zu erhalten:"
 
 msgid "Unsubscribe"
 msgstr "Abbestellen"
-
-msgid "Hi,"
-msgstr "Hi,"
 
 msgid "Tiny (50 x *)"
 msgstr "Tiny (50 x *)"
@@ -818,6 +823,14 @@ msgstr "Zusätzliches CSS"
 
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Wird vorgezogen gegenüber sämtlichem anderen CSS"
+
+msgid "Video Conference Server"
+msgstr ""
+
+msgid ""
+"If entered, will enable video conference functionality across the site. "
+"Needs to be a URL up to the point where any random room name can be appended."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
@@ -6038,6 +6051,9 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Hi,"
+#~ msgstr "Hi,"
 
 #~ msgid "Nachrichten"
 #~ msgstr "Messages"

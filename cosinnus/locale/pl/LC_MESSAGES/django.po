@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 16:09+0100\n"
+"POT-Creation-Date: 2020-04-03 17:48+0200\n"
 "PO-Revision-Date: 2018-08-30 04:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -340,6 +340,11 @@ msgstr "Przyjmij Zaproszenie"
 msgid "View invitation"
 msgstr "Usuń zaproszenie"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s invited you"
+msgstr "%(sender_name)s oznaczył/a Cię w"
+
 msgid "New link to the moved project/group"
 msgstr "Nowy link do przeniesionych projektów/grup"
 
@@ -508,6 +513,9 @@ msgstr "Twoja przeglądarka nie ma włączonych plików cookies. Są one wymagan
 msgid "This account is inactive."
 msgstr "To konto jest nieaktywne."
 
+msgid "Hello"
+msgstr ""
+
 msgid "Click the following link to change which emails you receive:"
 msgstr "Kliknij w poniższy link w celu zmiany preferencji otrzymywanych wiadomości e-mail:"
 
@@ -519,9 +527,6 @@ msgstr "Kliknij w poniższy link, jeśli nie chcesz otrzymywać od nas wiadomoś
 
 msgid "Unsubscribe"
 msgstr "Zrezygnuj z subskrypcji"
-
-msgid "Hi,"
-msgstr "Cześć,"
 
 msgid "Tiny (50 x *)"
 msgstr "Mikro (50 x *)"
@@ -681,6 +686,12 @@ msgstr "Dodatkowe CSS"
 
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Dodatkowe CSS dla tego portalu, zostanie zastosowane po innych stylach."
+
+msgid "Video Conference Server"
+msgstr ""
+
+msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
@@ -5068,6 +5079,9 @@ msgstr "Obecnie nie jesteś członkiem %s! Jeśli chcesz nim zostać, możesz wy
 
 msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
+
+#~ msgid "Hi,"
+#~ msgstr "Cześć,"
 
 #~ msgid "Your privacy settings were saved. Welcome!"
 #~ msgstr "Ustawienia prywatności zapisane. Witamy!"

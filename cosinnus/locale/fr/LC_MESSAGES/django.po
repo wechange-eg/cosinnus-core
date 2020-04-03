@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 16:09+0100\n"
+"POT-Creation-Date: 2020-04-03 17:48+0200\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -341,6 +341,11 @@ msgstr "Accepter l'invitation"
 msgid "View invitation"
 msgstr "Supprimer l'invitation"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s invited you"
+msgstr "%(sender_name)s t'a identifié dans"
+
 msgid "New link to the moved project/group"
 msgstr "Nouveau lien vers le projet / groupe déplacé"
 
@@ -505,6 +510,9 @@ msgstr "Il semble que votre navigateur n'accepte pas les cookies. Ils sont deman
 msgid "This account is inactive."
 msgstr "Ce compte est inactif."
 
+msgid "Hello"
+msgstr ""
+
 msgid "Click the following link to change which emails you receive:"
 msgstr "Clique sur le lien suivant pour changer le type d'emails que tu reçois :"
 
@@ -516,9 +524,6 @@ msgstr "Clique sur le lien suivant pour ne plus recevoir d'e-mails de notre part
 
 msgid "Unsubscribe"
 msgstr "Se désabonner"
-
-msgid "Hi,"
-msgstr "Bonjour,"
 
 msgid "Tiny (50 x *)"
 msgstr "Tiny (50 x *)"
@@ -678,6 +683,12 @@ msgstr "CSS supplémentaire"
 
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "CSS supplémentaire pour ce portail, s’appliquera après tous les autres styles."
+
+msgid "Video Conference Server"
+msgstr ""
+
+msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
@@ -5022,6 +5033,9 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#~ msgid "Hi,"
+#~ msgstr "Bonjour,"
 
 #~ msgid "Your privacy settings were saved. Welcome!"
 #~ msgstr "Tes paramètres de confidentialité ont été enregistrés. Bienvenue !"

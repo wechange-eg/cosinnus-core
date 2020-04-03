@@ -1,4 +1,4 @@
-
+{% load i18n %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
@@ -12,6 +12,13 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
+        p, li, ul, ol {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        ul br, ol br, ul br {
+		    display: none; 
+		}
         p a {
             color: #38b6b7;
 		    font-weight: bold;
@@ -67,6 +74,15 @@
                             {% endif %}	        
                             	        {{topic}}
 </p>
+</th></tr></table></th>
+<th class="spacer small-1 large-1 columns last" valign="top" style="Margin: 0 auto; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0 auto; padding: 20px 23px 20px 23px;     text-align: left; width: 8.33333%;"><table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;"><tr style="padding: 0; text-align: left; vertical-align: top;"><th style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0; padding: 0; text-align: left;">&nbsp;</th></tr></table></th>
+</tr></tbody></table>
+                        {% endif %}
+                        {% if notification_raw_html %}
+<table class="row special-padded-row raw-header-row bordered-container" style="background-color: #ffffff; border-bottom: 2px solid #f0f0f0; border-collapse: collapse; border-spacing: 0; display: table; padding: 0; position: relative; text-align: left; vertical-align: top; width: 100%;"><tbody><tr style="padding: 0; text-align: left; vertical-align: top;">
+<th class="spacer small-1 large-1 columns first" style="Margin: 0 auto; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0 auto; padding: 20px 23px 20px 23px;     text-align: left; width: 8.33333%;"><table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;"><tr style="padding: 0; text-align: left; vertical-align: top;"><th style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0; padding: 0; text-align: left;">&nbsp;</th></tr></table></th>
+<th class="small-text small-10 large-10 columns" valign="middle" style="Margin: 0 auto; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 300; line-height: 14px; margin: 0 auto; padding: 40px 10px 50px 10px;     text-align: left; width: 83.33333%;"><table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;"><tr style="font-size: 12px; line-height: 14px; padding: 0; text-align: left; vertical-align: top;"><th style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 300; line-height: 14px; margin: 0; padding: 0; text-align: left;">
+                        	        {{notification_raw_html}}
 </th></tr></table></th>
 <th class="spacer small-1 large-1 columns last" valign="top" style="Margin: 0 auto; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0 auto; padding: 20px 23px 20px 23px;     text-align: left; width: 8.33333%;"><table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;"><tr style="padding: 0; text-align: left; vertical-align: top;"><th style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0; padding: 0; text-align: left;">&nbsp;</th></tr></table></th>
 </tr></tbody></table>

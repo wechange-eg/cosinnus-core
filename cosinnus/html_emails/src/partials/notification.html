@@ -2,6 +2,18 @@
     {{> digest_header}}
 {{/rwif}}
 
+{{#rwif notification_raw_html raw_if="notification_raw_html" }}
+	<row class="special-padded-row raw-header-row bordered-container">
+	    <columns class="spacer" large="1" small="1">&nbsp;</columns>
+	    
+	    <columns class="small-text" large="10" small="10" valign="middle">
+	        {{#rw this}}notification_raw_html{{/rw}}
+	    </columns>
+	    
+	    <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
+	</row>
+{{/rwif}}
+
 {{#if raw}}
     {{{{raw}}}}
         {% if notification_item_html %}

@@ -26,6 +26,9 @@
 .header-row > tbody > tr > th {
     padding: 50px 20px;
 }
+.raw-header-row > tbody > tr > th {
+    padding: 40px 10px 50px 10px;
+}
 .avatar-row > tbody > tr > th,
 .digest-header-row > tbody > tr > th {
     padding: 25px 10px;
@@ -78,6 +81,10 @@
     border-bottom: 2px solid $back;    
 }
 
+/* This fix cost me an hour, trust me, it is needed for the final django-rendered emails! */
+.image-column {
+    width: 40px !important;
+}
 
 
 
@@ -151,16 +158,19 @@
     height: 40px;
     width: 40px;
     max-width: 40px;
+    display: inline-block;
 }
 .small-img {
     height: 30px;
     width: 30px;
     max-width: 30px;
+    display: inline-block;
 }
 .smallest-img {
     height: 20px;
     width: 20px;
     max-width: 20px;
+    display: inline-block;
 }
 .padded-img {
     padding: 5px;    

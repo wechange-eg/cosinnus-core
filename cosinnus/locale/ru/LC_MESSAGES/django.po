@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 16:09+0100\n"
+"POT-Creation-Date: 2020-04-03 17:48+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -339,6 +339,11 @@ msgstr "Принять приглашение"
 msgid "View invitation"
 msgstr "Просмотреть приглашение"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s invited you"
+msgstr "%(sender_name)s отметил(а) Вас в"
+
 msgid "New link to the moved project/group"
 msgstr "Новая ссылка на перемещаемый проект/группу"
 
@@ -505,6 +510,9 @@ msgstr "Скорее всего, в Вашем браузере выключен
 msgid "This account is inactive."
 msgstr "Неактивный аккаунт."
 
+msgid "Hello"
+msgstr ""
+
 msgid "Click the following link to change which emails you receive:"
 msgstr "Нажмите на ссылку, чтобы изменить уведомления, которые Вы будете получать:"
 
@@ -516,9 +524,6 @@ msgstr "Пройдите по ссылке, чтобы изменить увед
 
 msgid "Unsubscribe"
 msgstr "Отписаться"
-
-msgid "Hi,"
-msgstr "Здравствуйте,"
 
 msgid "Tiny (50 x *)"
 msgstr "Крошечный (50 x *)"
@@ -679,6 +684,12 @@ msgstr "Дополнительный CSS"
 
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Дополнительный CSS для этого портала предпочтительнее других CSS."
+
+msgid "Video Conference Server"
+msgstr ""
+
+msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
@@ -4924,6 +4935,9 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
+
+#~ msgid "Hi,"
+#~ msgstr "Здравствуйте,"
 
 #~ msgid "Nachrichten"
 #~ msgstr "Новости"

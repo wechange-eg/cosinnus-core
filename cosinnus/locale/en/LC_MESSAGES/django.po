@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 16:09+0100\n"
+"POT-Creation-Date: 2020-04-03 17:48+0200\n"
 "PO-Revision-Date: 2019-12-16 17:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -328,6 +328,13 @@ msgstr "There are no groups."
 msgid "View invitation"
 msgstr "There are no groups."
 
+#, fuzzy, python-format
+msgid "%(sender_name)s invited you"
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
+
 #, fuzzy
 #| msgid "Convert selected Projects to Groups"
 msgid "New link to the moved project/group"
@@ -494,6 +501,9 @@ msgstr ""
 msgid "This account is inactive."
 msgstr ""
 
+msgid "Hello"
+msgstr ""
+
 msgid "Click the following link to change which emails you receive:"
 msgstr ""
 
@@ -504,9 +514,6 @@ msgid "Click the following link to never receive any more emails from us:"
 msgstr ""
 
 msgid "Unsubscribe"
-msgstr ""
-
-msgid "Hi,"
 msgstr ""
 
 msgid "Tiny (50 x *)"
@@ -662,6 +669,12 @@ msgid "Extra CSS"
 msgstr ""
 
 msgid "Extra CSS for this portal, will be applied after all other styles."
+msgstr ""
+
+msgid "Video Conference Server"
+msgstr ""
+
+msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
