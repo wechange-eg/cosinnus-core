@@ -58,19 +58,23 @@
         </row>
 		
 		{{#rwif sub_object_name raw_if="sub_object_name" }}
+		    <row class="special-padded-row sub-object-border-row">
+                <columns class="border-spacer" large="1" small="1">&nbsp;</columns>
+                <columns class="border-cell border-cell-bottom" large="10" small="10" valign="bottom">&nbsp;</columns>
+                <columns class="border-spacer" large="1" small="1">&nbsp;</columns>
+            </row>
+		
             <row class="special-padded-row sub-object-row sub-item">
                 <columns class="spacer" large="1" small="1">&nbsp;</columns>
                 
-                <columns class="border-inlay image-column" large="1" small="1" valign="middle">
+                <columns class="image-column" large="1" small="1" valign="middle">
 	                    <a href="{{#rw this}}object_url{{/rw}}">
 	                        <!-- always include the width="nn" attribute in <img> for Outlook! -->
 	                        <img class="small-img padded-img" width="30" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
-                            <span class="inlayed-border inlayed-border-left">&nbsp;</span>
 	                    </a>
                 </columns>
             
-                <columns class="border-inlay" large="9" small="9" valign="middle">
-                    <span class="inlayed-border inlayed-border-right">&nbsp;</span>
+                <columns class="" large="9" small="9" valign="middle">
                     <row class="bold-text">
                         <columns class="unpadded">
                             <span class="bold-text">
@@ -88,6 +92,12 @@
                 </columns>
                 
                 <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
+            </row>
+            
+            <row class="special-padded-row sub-object-border-row">
+                <columns class="border-spacer" large="1" small="1">&nbsp;</columns>
+                <columns class="border-cell border-cell-top" large="10" small="10" valign="top">&nbsp;</columns>
+                <columns class="border-spacer" large="1" small="1">&nbsp;</columns>
             </row>
         {{/rwif}}
         

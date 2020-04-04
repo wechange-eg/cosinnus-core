@@ -76,6 +76,29 @@
     }
 }
 
+.sub-object-border-row {
+    & > tbody > tr > th {
+        padding: 0px 10px 15px 10px;
+    }
+    .border-spacer {
+        padding: 0 28px;
+        width: 1px;   
+    }
+    .border-cell {
+        padding: 0 10px;       
+    }
+    .border-cell-top {
+        border-top: 2px solid $back;
+    }
+    .border-cell-bottom {
+        border-bottom: 2px solid $back;
+    }
+    &, & th {
+        font-size: 1px;
+        line-height: 1px;
+    }
+}
+
 .bordered-container {
     background-color: $background-color;
     border-bottom: 2px solid $back;    
@@ -86,33 +109,6 @@
     width: 40px !important;
 }
 
-
-
-.border-inlay {
-    position: relative;
-    & > table {
-        vertical-align: middle;
-    }
-    
-    /* Inlayed extra border for outlook */
-    .inlayed-border {
-        border-top: 2px solid $back;
-        border-bottom: 2px solid $back;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 10px;
-        right: 10px;
-    }
-    .inlayed-border-left {
-        left: 10px;
-        right: 0;
-    }
-    .inlayed-border-right {
-        left: 0;
-        right: 10px;
-    }
-}
 
 .colored-text, .colored-text a {
     color: $primary-color;
