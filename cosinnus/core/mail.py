@@ -182,7 +182,7 @@ def send_html_mail_threaded(to_user, subject, html_content):
         'portal_image_url': portal_image_url,
         'portal_name': portal.name,
         'receiver': to_user, 
-        'addressee': mark_safe(strip_tags(full_name(to_user))), 
+        'addressee': mark_safe(strip_tags(to_user.first_name)), 
         'topic': subject,
         'prefs_url': None,
         'notification_reason': None,
