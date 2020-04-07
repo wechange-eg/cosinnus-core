@@ -13,6 +13,9 @@ module.exports = DelegatedWidgetView.extend({
     // the notification-show button in the navbar
     $notificationButtonEl: null,
     
+    // the messages-show button in the navbar
+    $messagesButtonEl: null,
+    
     // the setTimeout object
 	pollIntervalObj: null,
 	
@@ -49,6 +52,8 @@ module.exports = DelegatedWidgetView.extend({
         self.options.type = options.type; // would have happened in initialize already but let's be explicit
         
         self.$notificationButtonEl = $('#navbar-notifications-button');
+        self.$messagesButtonEl = $('#navbar-messages-button');
+        
         // events that have to be defined here because they happen in the notification button:
         self.$notificationButtonEl.on('click', self.thisContext(self.onNotificationButtonClicked));
         
@@ -118,8 +123,17 @@ module.exports = DelegatedWidgetView.extend({
         if (data['newest_timestamp'] !== "undefined" && data['newest_timestamp']) {
             self.state.newestTimestamp = data['newest_timestamp'];
         }
+        var counterNumbers = false;
         if (data['unseen_count'] !== "undefined" && data['unseen_count'] >= 0) {
             self.state.unseenCount = data['unseen_count'];
+            counterNumbers = true;
+        }
+        if (data['unread_messages_count'] !== "undefined" && data['unread_messages_count'] >= 0) {
+            self.state.unreadMessagesCount = data['unread_messages_count'];
+            counterNumbers = true;
+        }
+        if (counterNumbers == true) {
+            self.afterRender();
             self.updatePageTitle();
         }
     },
@@ -194,6 +208,7 @@ module.exports = DelegatedWidgetView.extend({
         self.state.offsetTimestamp = null;  
         self.state.newestTimestamp = null;
         self.state.unseenCount = 0;
+        self.state.unreadMessagesCount = 0;
         self.state.lastPollDate = null;
         self.load();
     },
@@ -219,6 +234,11 @@ module.exports = DelegatedWidgetView.extend({
             self.$notificationButtonEl.find('.message-counter').text(self.state.unseenCount).show();
         } else {
             self.$notificationButtonEl.find('.message-counter').hide();
+        }
+        if (self.state.unreadMessagesCount && self.state.unreadMessagesCount > 0) {
+            self.$messagesButtonEl.find('.message-counter').text(self.state.unreadMessagesCount).show();
+        } else {
+            self.$messagesButtonEl.find('.message-counter').hide();
         }
     },
     
@@ -271,8 +291,10 @@ module.exports = DelegatedWidgetView.extend({
     updatePageTitle: function() {
         var self = this;
         var unseenPrefix = '';
-        if (self.state.unseenCount > 0) {
-            unseenPrefix = '(' + self.state.unseenCount + ') ';
+        var totalCount = self.state.unseenCount + self.state.unreadMessagesCount;
+        
+        if (totalCount > 0) {
+            unseenPrefix = '(' + totalCount + ') ';
         }
         document.title = unseenPrefix + self.state.originalPageTitle;  
     },

@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import logging
 
-from django.conf import settings
+from cosinnus.conf import settings
 
 from cosinnus.core.registries.widgets import widget_registry
 from cosinnus.utils.group import get_cosinnus_group_model,\
@@ -27,6 +27,9 @@ import pytz
 _CosinnusPortal = None
 
 logger = logging.getLogger('cosinnus')
+
+# global for a reusable rocketchat connection
+RocketChatConnection = None
 
 
 def get_user_by_email_safe(email):
@@ -301,3 +304,20 @@ def get_user_tos_accepted_date(user):
         if is_naive(datetime_or_none):
             datetime_or_none = pytz.utc.localize(datetime_or_none)
     return datetime_or_none
+
+
+def get_unread_message_count_for_user(user):
+    """ Returns the unread message count for a user, independent of which internal
+        messaging system is being used (Postman, Rocketchat, etc) """
+    if not user.is_authenticated:
+        return 0
+    if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
+        global RocketChatConnection
+        if RocketChatConnection is None:
+            from cosinnus_message.rocket_chat import RocketChatConnection as RocketChatConnectionClass # noqa
+            RocketChatConnection = RocketChatConnectionClass()
+        unread_count = RocketChatConnection.unread_messages(user)
+    else:
+        from postman.models import Message
+        unread_count = Message.objects.inbox_unread_count(user)
+    return unread_count
