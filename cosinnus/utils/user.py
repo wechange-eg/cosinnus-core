@@ -309,8 +309,10 @@ def get_unread_message_count_for_user(user):
     if not user.is_authenticated:
         return 0
     if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
-        from cosinnus_message.rocket_chat import RocketChatConnection # noqa
-        unread_count = RocketChatConnection().unread_messages(user)
+        #from cosinnus_message.rocket_chat import RocketChatConnection # noqa
+        #unread_count = RocketChatConnection().unread_messages(user)
+        # disabling this for now, as we suspect it might lead to user disconnects
+        return 0
     else:
         from postman.models import Message
         unread_count = Message.objects.inbox_unread_count(user)
