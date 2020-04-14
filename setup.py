@@ -112,7 +112,7 @@ setup(
         'Unidecode==0.4.21',
         
         # wagtail
-        'wagtail==2.3',
+        'wagtail==2.7.2',
         'django-compressor',
         
         # requirements loaded in from github
