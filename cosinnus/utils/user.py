@@ -29,7 +29,7 @@ _CosinnusPortal = None
 logger = logging.getLogger('cosinnus')
 
 # global for a reusable rocketchat connection
-RocketChatConnection = None
+rocktetchat_connection = None
 
 
 def get_user_by_email_safe(email):
@@ -312,11 +312,16 @@ def get_unread_message_count_for_user(user):
     if not user.is_authenticated:
         return 0
     if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
-        global RocketChatConnection
-        if RocketChatConnection is None:
-            from cosinnus_message.rocket_chat import RocketChatConnection as RocketChatConnectionClass # noqa
-            RocketChatConnection = RocketChatConnectionClass()
-        unread_count = RocketChatConnection.unread_messages(user)
+        global rocktetchat_connection
+        try:
+            if rocktetchat_connection is None:
+                from cosinnus_message.rocket_chat import RocketChatConnection # noqa
+                rocktetchat_connection = RocketChatConnection()
+            unread_count = rocktetchat_connection.unread_messages(user)
+        except Exception as e:
+            logger.error('Rocketchat unread message count: unexpected Exception',
+                         extra={'exception': e})
+            rocktetchat_connection = None
     else:
         from postman.models import Message
         unread_count = Message.objects.inbox_unread_count(user)
