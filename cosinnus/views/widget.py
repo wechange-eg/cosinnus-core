@@ -305,7 +305,6 @@ class GroupDashboard(RequireReadOrRedirectMixin, DashboardWidgetMixin, GroupObje
         messages.warning(request, _('You are not currently a member of %s! If you wish you can request to become a member below.') % self.group.name)
         return redirect(group_aware_reverse('cosinnus:group-list-filtered', kwargs={'group': kwargs.get('group')}))
     
-
 group_dashboard = GroupDashboard.as_view()
 
 
