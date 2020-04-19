@@ -77,3 +77,9 @@ group_deactivated = dispatch.Signal(providing_args=["group"])
 """ Called after a CosinnusGroup, or one of its extending models was reactivated """
 group_reactivated = dispatch.Signal(providing_args=["group"])
 
+""" Called after a CosinnusGroup, or one of its extending models had one or more of their cosinnus apps activated """
+group_apps_activated = dispatch.Signal(providing_args=["group", "apps"])
+
+""" Called after a CosinnusGroup, or one of its extending models had one or more of their cosinnus apps deactivated """
+group_apps_deactivated = dispatch.Signal(providing_args=["group", "apps"])
+

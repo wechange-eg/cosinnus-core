@@ -213,9 +213,28 @@ class CosinnusGroupFormMixin(object):
         })
         return context
     
+    def post(self, *args, **kwargs):
+        # save deactivated_apps for checking after POSTs
+        if hasattr(self, 'group'):
+            self._old_deactivated_apps = self.group.get_deactivated_apps()
+        else:
+            self._old_deactivated_apps = []
+        ret = super(CosinnusGroupFormMixin, self).post(*args, **kwargs)
+        new_apps = self.object.get_deactivated_apps()
+        
+        # check if any group apps were activated or deactivated
+        deactivated_apps = [app for app in new_apps if not app in self._old_deactivated_apps]
+        activated_apps = [app for app in self._old_deactivated_apps if not app in new_apps]
+        if activated_apps:
+            signals.group_apps_activated.send(sender=self, group=self.object, apps=activated_apps)
+        if deactivated_apps:
+            signals.group_apps_deactivated.send(sender=self, group=self.object, apps=deactivated_apps)
+        return ret
+    
     def forms_valid(self, form, inlines):
         """ We update the haystack index again after the inlineforms have also been saved,
             so that data changed in those forms are reflected in the updated group object """
+            
         ret = super(CosinnusGroupFormMixin, self).forms_valid(form, inlines)
         if self.object.type == CosinnusGroup.TYPE_PROJECT:
             group_index = CosinnusProjectIndex()
