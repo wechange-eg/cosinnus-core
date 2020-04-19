@@ -111,7 +111,7 @@
 					</a>
 				</li>
 				{% endif %}
-				{% if SETTINGS.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED %}
+				{% if SETTINGS.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED and user|is_superuser  %}
                 <li {% if request.GET.tab == 'dashboard' %}class="active"{% endif %}>
                     <a href="#dashboard" class="_group-form-tab" role="tab" data-toggle="tab">
                         <i class="fa fa-columns"></i>
@@ -480,7 +480,7 @@
                         </div>
                     {% endif %}
                     
-                    {% if SETTINGS.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED %}
+                    {% if SETTINGS.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED and user|is_superuser %}
                         <div class="tab-pane {% if request.GET.tab == 'dashboard' %}active{% endif %}" id="dashboard" >
                             {% block group_dashboard_tab %}
                             
