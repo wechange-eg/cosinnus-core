@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n bootstrap3 cosinnus_tags %}
+{% load i18n bootstrap3 cosinnus_tags djajax_tags %}
 {% load static from staticfiles %}
 
 {% block page_title %}{{ group.name }}{% endblock page_title %}
@@ -136,6 +136,44 @@
 					</div>
 			    </div>
 		    {% endif %}
+	    {% endif %}
+	    
+	    {% captureas cloud_hide_pref %}cloud_group_teaser_{{ group.id }}{% endcaptureas %}
+        {% captureas cloud_hide_value %}cloud_group_teaser_{{ group.id }}:true{% endcaptureas %}
+	    {% if SETTINGS.COSINNUS_CLOUD_ENABLED and user.pk in group.admins and 'cosinnus_cloud' in group.get_deactivated_apps and not user|cosinnus_setting:cloud_hide_pref %}
+	       <div class="large-space">
+		        <div class="alert alert-black-white no-margin alert-dismissable">
+	                <i class="fa fa-cloud fa-3x"></i>
+	                <button id="close_button" type="button" class="close" data-dismiss="alert" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value=cloud_hide_value %}>&#215;</button>
+	            
+	                <h4>{% trans "The n-Cloud is here!" %}</h4>
+	                <div class="v-offset-s">
+	                <p>
+	                    {% trans "With the Cloud, we offer your team a new file repository with extensive office functions to work together on documents, tables and presentations. It is based on Nextcloud and OnlyOffice. So you have two apps at your disposal with which you can use the cloud on the road and synchronize files with your desktop! As administrator you can activate the cloud for your project/group and transfer data from files and pads." %}
+	                </p>
+	                <p>
+	                    <a href="/n/cloud-infos">{% trans "Learn more" %}</a>
+	                </p>
+	                </div>
+	            </div>
+	            
+	            <form method="POST" action="{% group_url 'cosinnus:group-activate-app' group=group %}" class="cosinnus-form form-horizontal app-main">{% csrf_token %}
+	                <input type="hidden" name="app" value="cosinnus_cloud" />
+		            <button type="submit" class="btn btn-emphasized">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-cloud"></i>
+			                    </a>
+			                    <div class="media-body">
+			                          {% trans "Activate Cloud" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </button>
+		        </form>
+		        <div class="clearfix"></div>
+	        </div>
 	    {% endif %}
 	
 	{% endblock group_announcements %}

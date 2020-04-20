@@ -1553,3 +1553,30 @@ class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
         return (NO_ERR_RESP, False, results)
 
 user_group_member_invite_select2 = UserGroupMemberInviteSelect2View.as_view()
+
+
+class GroupActivateAppView(SamePortalGroupMixin, AjaxableFormMixin, RequireAdminMixin, View):
+    """ Deactivates the cosinnus app for a group passed via the "app" form field  """
+    
+    http_method_names = ['post',]
+    model = CosinnusGroup
+    slug_url_kwarg = 'group'
+    message_success = _('The %s-app was activated!')
+
+    @atomic
+    def dispatch(self, *args, **kwargs):
+        return super(GroupActivateAppView, self).dispatch(*args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        app = self.request.POST.get('app', None)
+        # remove the given app from the deactivated list
+        if app and app in app_registry.get_deactivatable_apps() and app in self.group.get_deactivated_apps():
+            self.group.deactivated_apps = ','.join(list(set([
+                prior_app for prior_app in self.group.get_deactivated_apps()
+                if not prior_app == app
+            ])))
+            self.group.save(update_fields=['deactivated_apps'])
+            messages.success(self.request, self.message_success % app_registry.get_label(app))
+        return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
+
+group_activate_app = GroupActivateAppView.as_view()
