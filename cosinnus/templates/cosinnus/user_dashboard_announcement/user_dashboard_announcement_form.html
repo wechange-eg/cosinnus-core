@@ -140,10 +140,10 @@
 	            {% include 'cosinnus/fields/default_field.html' with field=form.raw_html label=raw_html_label placeholder=raw_html_label legend=raw_html_placeholder large_field=True %}
 	            <p>
 		            {% trans "You may use the following variables:" %}
-                    %(user_first_name)s
-                    %(user_last_name)s
-                    %(user_full_name)s
-                    %(announcement_id)s
+                    [[user_first_name]]
+                    [[user_last_name]]
+                    [[user_full_name]]
+                    [[announcement_id]]
                 </p>
             </div>
             

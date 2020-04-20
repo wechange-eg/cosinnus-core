@@ -1107,8 +1107,26 @@ def has_accepted_portal_tos(user):
 @register.simple_tag(takes_context=True)
 def render_announcement_html(context, announcement):
     """ Renders the raw_html for a UserDashboardAnnouncement """
-    return mark_safe(announcement.get_raw_with_variables(context.request))
-    
+    return render_embedded_html_with_variables(context, announcement.raw_html, variables={
+        'announcement_id': announcement.id
+    })
+
+
+@register.simple_tag(takes_context=True)
+def render_embedded_html_with_variables(context, html, variables=None):
+    """ Renders any raw HTML with some request context variables """
+    if variables is None:
+        variables = {}
+    user = context.request.user
+    variables.update({
+        'user_first_name': user.first_name,
+        'user_last_name': user.last_name,
+        'user_full_name': full_name(user),
+    })
+    for variable_name, variable_value in variables.items():
+        html = html.replace('[[%s]]' % variable_name, str(variable_value))
+    return mark_safe(html)
+
 
 class RenderContextIdMixin(object):
 

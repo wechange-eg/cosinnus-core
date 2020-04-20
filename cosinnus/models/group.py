@@ -735,6 +735,11 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     call_to_action_description = models.TextField(verbose_name=_('Call to Action Box Description'), 
         blank=True, null=True)
     
+    # a field that can contain HTML to be embedded into the group dashboard (visible for members only)
+    embedded_dashboard_html = models.TextField(verbose_name=_('Embedded Dashboard HTML'),
+         help_text='A field with custom HTML that will be shown to all group members on the group dashboard',
+         blank=True, null=True)
+    
     # a comma-seperated list of all cosinnus apps that should not be shown in the frontend, 
     # be editable, or be indexed by search indices for this group
     deactivated_apps = models.CharField(_('Deactivated Apps'), max_length=255, 

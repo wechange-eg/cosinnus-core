@@ -28,6 +28,7 @@ from cosinnus.fields import UserSelect2MultipleChoiceField
 from django.contrib.auth import get_user_model
 from cosinnus.utils.user import get_user_select2_pills, filter_active_users
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.templatetags.cosinnus_tags import is_superuser
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -106,7 +107,8 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
                          'twitter_widget_id', 'flickr_url', 'deactivated_apps', 'microsite_public_apps',
                          'call_to_action_active', 'call_to_action_title', 'call_to_action_description'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
-                        + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else [])
+                        + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else []) \
+                        + (['embedded_dashboard_html',] if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED else [])
 
     def __init__(self, instance, *args, **kwargs):    
         if 'request' in kwargs:
@@ -119,6 +121,8 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
                  queryset=get_cosinnus_group_model().objects.filter(portal_id=CosinnusPortal.get_current().id),
                  initial=[] if not instance else [rel_group.pk for rel_group in instance.related_groups.all()],
              )
+        if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED and not is_superuser(self.request.user):
+            self.fields['embedded_dashboard_html'].disabled = True
         
         # use select2 widgets for m2m fields
         for field in list(self.fields.values()):

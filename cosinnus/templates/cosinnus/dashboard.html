@@ -307,6 +307,18 @@
             </div>
         </div>
     </div>
+    
+    {% if SETTINGS.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED and group.embedded_dashboard_html %}
+        {% if user.pk in group.members %}
+	        {% block group_dashboard_embedded_html %}
+	            <div class="dashboard-embedded-html">
+	                {% render_embedded_html_with_variables group.embedded_dashboard_html %}
+	            </div>
+	        {% endblock %}
+        {% endif %}
+    {% endif %}
+    
+    
 {% endblock main_page_header %}
             
 
