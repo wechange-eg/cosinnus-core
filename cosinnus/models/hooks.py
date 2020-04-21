@@ -27,6 +27,8 @@ from cosinnus.conf import settings
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.contrib.contenttypes.models import ContentType
 from annoying.functions import get_object_or_None
+from cosinnus.utils.dashboard import ensure_group_widget
+from cosinnus.models.widget import WidgetConfig
 
 logger = logging.getLogger('cosinnus')
 
@@ -176,6 +178,13 @@ def user_post_save(sender, **kwargs):
 
 pre_save.connect(user_pre_save, sender=get_user_model())
 post_save.connect(user_post_save, sender=get_user_model())
+
+
+@receiver(signals.group_apps_activated)
+def group_cloud_app_activated_sub(sender, group, apps, **kwargs):
+    """ Whenever a group app is activated, make sure all dashboard widgets have a config instance. """
+    for app_name, widget_name, options in settings.COSINNUS_INITIAL_GROUP_WIDGETS:
+        ensure_group_widget(group, app_name, widget_name, WidgetConfig.TYPE_DASHBOARD, options)
 
 
 from cosinnus.apis.cleverreach import *
