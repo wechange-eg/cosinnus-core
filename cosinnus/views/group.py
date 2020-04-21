@@ -1576,6 +1576,7 @@ class GroupActivateAppView(SamePortalGroupMixin, AjaxableFormMixin, RequireAdmin
                 if not prior_app == app
             ])))
             self.group.save(update_fields=['deactivated_apps'])
+            signals.group_apps_activated.send(sender=self, group=self.group, apps=[app])
             messages.success(self.request, self.message_success % app_registry.get_label(app))
         return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
 
