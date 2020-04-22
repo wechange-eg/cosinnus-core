@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 16:09+0100\n"
+"POT-Creation-Date: 2020-04-22 13:06+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -395,6 +395,12 @@ msgstr "Français"
 msgid "Polish--NATIVE-LANGUAGE"
 msgstr "Polski"
 
+msgid "Spanish--NATIVE-LANGUAGE"
+msgstr "Español"
+
+msgid "Romanian--NATIVE-LANGUAGE"
+msgstr "Română"
+
 msgid "Attachments"
 msgstr "Додатки"
 
@@ -503,6 +509,9 @@ msgstr "Здається, у вашому веб-браузері не увім�
 
 msgid "This account is inactive."
 msgstr "Цей обліковий запис було деактивовано."
+
+msgid "Hello"
+msgstr ""
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Пройдіть за цим посиланням, щоб змінити налаштування електронних листів, які ви отримуєте:"
@@ -676,6 +685,12 @@ msgstr "Додаткові CSS"
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Додаткові CSS для цього порталу застосовуються після усіх інших стилів."
 
+msgid "Video Conference Server"
+msgstr ""
+
+msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Проект"
@@ -743,6 +758,9 @@ msgstr "Назва вікна Заклик до дії"
 
 msgid "Call to Action Box Description"
 msgstr "Опис вікна Заклик до дії"
+
+msgid "Embedded Dashboard HTML"
+msgstr ""
 
 msgid "Deactivated Apps"
 msgstr "Деактивовані застосунки"
@@ -2298,6 +2316,14 @@ msgstr "Інтеграція з Facebook можлива після того як
 
 msgid "Facebook integration is available after you created the project!"
 msgstr "Інтеграція з Facebook можлива після того як Ви створили проект!"
+
+msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are not following any ideas yet."
+msgid "You may use the following variables:"
+msgstr "Ти поки що не відстежуєш жодні Ідеї."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
@@ -4128,11 +4154,6 @@ msgstr ""
 
 msgid "Raw HTML. Should contain a Dismiss-button"
 msgstr ""
-
-#, fuzzy
-#| msgid "You are not following any ideas yet."
-msgid "You may use the following variables:"
-msgstr "Ти поки що не відстежуєш жодні Ідеї."
 
 msgid "External Link for a \"Read more\" link"
 msgstr ""

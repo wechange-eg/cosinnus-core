@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 16:09+0100\n"
+"POT-Creation-Date: 2020-04-22 13:06+0200\n"
 "PO-Revision-Date: 2020-01-14 19:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -398,6 +398,12 @@ msgstr "Français"
 msgid "Polish--NATIVE-LANGUAGE"
 msgstr "Polski"
 
+msgid "Spanish--NATIVE-LANGUAGE"
+msgstr "Español"
+
+msgid "Romanian--NATIVE-LANGUAGE"
+msgstr "Română"
+
 msgid "Attachments"
 msgstr "Далучэнні"
 
@@ -506,6 +512,9 @@ msgstr "Выглядае, што ў Вашым аглядальніку не ў�
 
 msgid "This account is inactive."
 msgstr "Гэты акаўнт неактыўны."
+
+msgid "Hello"
+msgstr ""
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Перайдзіце па наступнай спасылцы, каб наладзіць, якія электронныя лісты Вы атрымліваеце:"
@@ -681,6 +690,12 @@ msgstr "Дадатковая CSS"
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Дадатковая CSS для гэтага партала, будзе прымяняцца пасля ўсіх іншых стыляў."
 
+msgid "Video Conference Server"
+msgstr ""
+
+msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Праект"
@@ -748,6 +763,9 @@ msgstr "Назва рамкі закліку да дзеяння"
 
 msgid "Call to Action Box Description"
 msgstr "Апісанне рамкі закліку да дзеяння"
+
+msgid "Embedded Dashboard HTML"
+msgstr ""
 
 msgid "Deactivated Apps"
 msgstr "Неактыўныя прыкладанні"
@@ -2320,6 +2338,14 @@ msgstr "Інтэграцыя з Facebook стане даступнай пасл�
 
 msgid "Facebook integration is available after you created the project!"
 msgstr "Інтэграцыя з Facebook стане даступнай пасля стварэння праекта!"
+
+msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are following this item"
+msgid "You may use the following variables:"
+msgstr "Вы сочыце за гэтым элементам"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
@@ -4191,11 +4217,6 @@ msgstr ""
 
 msgid "Raw HTML. Should contain a Dismiss-button"
 msgstr ""
-
-#, fuzzy
-#| msgid "You are following this item"
-msgid "You may use the following variables:"
-msgstr "Вы сочыце за гэтым элементам"
 
 msgid "External Link for a \"Read more\" link"
 msgstr ""

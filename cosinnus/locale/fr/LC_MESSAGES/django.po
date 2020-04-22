@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 16:09+0100\n"
+"POT-Creation-Date: 2020-04-22 13:06+0200\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -396,6 +396,12 @@ msgstr "Français"
 msgid "Polish--NATIVE-LANGUAGE"
 msgstr "Polski"
 
+msgid "Spanish--NATIVE-LANGUAGE"
+msgstr "Español"
+
+msgid "Romanian--NATIVE-LANGUAGE"
+msgstr "Română"
+
 msgid "Attachments"
 msgstr "Pièces jointes"
 
@@ -504,6 +510,9 @@ msgstr "Il semble que votre navigateur n'accepte pas les cookies. Ils sont deman
 
 msgid "This account is inactive."
 msgstr "Ce compte est inactif."
+
+msgid "Hello"
+msgstr ""
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Clique sur le lien suivant pour changer le type d'emails que tu reçois :"
@@ -679,6 +688,12 @@ msgstr "CSS supplémentaire"
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "CSS supplémentaire pour ce portail, s’appliquera après tous les autres styles."
 
+msgid "Video Conference Server"
+msgstr ""
+
+msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Projet"
@@ -746,6 +761,9 @@ msgstr "Titre de la boîte Appel à l'action"
 
 msgid "Call to Action Box Description"
 msgstr "Description de la boîte Appel à l'action"
+
+msgid "Embedded Dashboard HTML"
+msgstr ""
 
 msgid "Deactivated Apps"
 msgstr "Applications désactivées"
@@ -2328,6 +2346,14 @@ msgstr "L'intégration Facebook est disponible après la création du groupe !"
 
 msgid "Facebook integration is available after you created the project!"
 msgstr "L'intégration Facebook est disponible après la création du projet !"
+
+msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are invited!"
+msgid "You may use the following variables:"
+msgstr "Tu es invité !"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
@@ -4200,11 +4226,6 @@ msgstr ""
 
 msgid "Raw HTML. Should contain a Dismiss-button"
 msgstr ""
-
-#, fuzzy
-#| msgid "You are invited!"
-msgid "You may use the following variables:"
-msgstr "Tu es invité !"
 
 msgid "External Link for a \"Read more\" link"
 msgstr ""

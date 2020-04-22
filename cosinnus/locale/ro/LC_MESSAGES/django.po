@@ -8,364 +8,374 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-22 13:06+0200\n"
-"PO-Revision-Date: 2019-12-16 17:17+0100\n"
+"PO-Revision-Date: 2019-11-18 04:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: en\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+"X-Generator: Poedit 2.0.7\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
-msgstr ""
+msgstr "1 %(object)s a fost șters cu succes"
 
 #, python-format
 msgid "%(number)d %(objects)s were deleted successfully"
-msgstr ""
+msgstr "%(number)d %(objects)s au fost șterse cu succes"
 
 msgid "Delete selected entries"
-msgstr ""
+msgstr "Ștergeți intrările selectate"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
-msgstr ""
+msgstr "Un jeton cu același cod există deja! Vă rugăm să alegeți un alt șir pentru jetonul dvs."
 
 msgid "The following Projects were converted to Groups:"
-msgstr "The following Projects were converted to Groups:"
+msgstr "Următoarele Proiecte au fost transformate în Grupuri:"
 
 msgid "Convert selected Projects to Groups"
-msgstr "Convert selected Projects to Groups"
+msgstr "Convertiți Proiectele selectate în Grupuri"
 
 msgid "The following Users were added to this portal:"
-msgstr ""
+msgstr "La acest portal au fost adăugați următorii utilizatori:"
 
 msgid "Add all members to current Portal"
-msgstr ""
+msgstr "Adăugați toți membrii la Portalul curent"
 
 msgid "Move selected teams to current portal"
-msgstr ""
+msgstr "Mutați echipele selectate pe portalul curent"
 
 msgid "Move selected teams to current portal and message members"
-msgstr ""
+msgstr "Mutați echipele selectate către membrii actuali ai portalului și mesajului"
 
 msgid "In addition, the members were removed from all other Portals."
-msgstr ""
+msgstr "În plus, membrii au fost eliminați din toate celelalte portaluri."
 
 msgid "Move all members to current Portal (removes all other memberships!)"
-msgstr ""
+msgstr "Mutați toți membrii pe Portalul actual (elimină toate celelalte apartenențe!)"
 
 msgid "Move selected groups and their subprojects to current portal"
-msgstr ""
+msgstr "Mutați grupurile selectate și subproiectele lor în portalul curent"
 
 msgid "Move selected groups and their subprojects to current portal and message members"
-msgstr ""
+msgstr "Mutați grupurile selectate și subproiectele lor către membrii de portal și mesajul curent"
 
 msgid "The following Groups were converted to Projects:"
-msgstr "The following Groups were converted to Projects:"
+msgstr "Următoarele Grupuri au fost transformate în Proiecte:"
 
 msgid "Convert selected Groups to Projects"
-msgstr "Convert selected Groups to Projects"
+msgstr "Convertiți Grupuri selectate în Proiecte"
 
 msgid "ToS Accepted"
-msgstr ""
+msgstr "ToS Acceptat"
 
 msgid "ToS not Accepted"
-msgstr ""
+msgstr "ToS nu este acceptat"
 
 msgid "User Logged In"
-msgstr ""
+msgstr "Utilizator Conectat în"
 
 msgid "Logged in before"
-msgstr ""
+msgstr "Autentificat înainte"
 
 msgid "Never logged in"
-msgstr ""
+msgstr "Niciodată autentificat"
 
 msgid "Has Logged In"
-msgstr ""
+msgstr "S-a autentificat"
 
 msgid "ToS accepted?"
-msgstr ""
+msgstr "ToS admis?"
 
 #, python-format
 msgid "%d Users were deactivated successfully."
-msgstr ""
+msgstr "%d Utilizatorii au fost dezactivați cu succes."
 
 msgid "Deactivate users (will keep all all items they created on the site)"
-msgstr ""
+msgstr "Dezactivează utilizatorii (va păstra toate articolele pe care le-au creat pe site-ul)"
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
-msgstr ""
+msgstr "Trebuie să fie activată adresa de e-mail a contului pe care încercați să îl utilizați înainte de a vă autentifica."
 
 #, python-format
 msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
-msgstr ""
+msgstr "Dacă nu ați primit încă un e-mail de activare, încercați să vă înscrieți din nou sau contactați asistența noastră la %(email)s!"
 
 msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
-msgstr ""
+msgstr "Dacă nu ați primit încă un e-mail de activare, încercați să vă înscrieți din nou sau contactați asistența noastră!"
 
 #, python-format
 msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
-msgstr ""
+msgstr "%(sender_name)s aș dori să vii să te înscrii în proiect ”%(team_name)s” pe %(portal_name)s! Faceți clic pe numele proiectului de mai jos pentru a-l verifica și a colabora!"
 
 msgid "Mobilität"
-msgstr "Mobility"
+msgstr "Mobilitate"
 
 msgid "Energie"
-msgstr "Energy"
+msgstr "Energie"
 
 msgid "Umwelt"
-msgstr "Environment"
+msgstr "Mediu"
 
 msgid "Bildung"
-msgstr "Education"
+msgstr "Formare"
 
 msgid "Gesundheit"
-msgstr "Health"
+msgstr "Sănătate"
 
 msgid "Ernährung und Konsum"
-msgstr "Nutrition and Consumption"
+msgstr "Nutriție și Consum"
 
 msgid "Kunst und Kultur"
-msgstr "Art and Culture"
+msgstr "Artă și cultură"
 
 msgid "Geld und Finanzen"
-msgstr "Money and Finance"
+msgstr "Bani și finanțe"
 
 msgid "Arbeit und Recht"
-msgstr "Business and Law"
+msgstr "Munca și Dreptul"
 
 msgid "Bauen und Wohnen"
-msgstr "Construction and Living"
+msgstr "Construiește și Trăiește"
 
 msgid "Klimaschutz"
-msgstr "Climate Protection"
+msgstr "Protecția climei"
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
-msgstr ""
+msgstr "Numai membrii echipei pot vedea conținutul pe care l-ați solicitat. Aplicați pentru a deveni membru acum!"
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
-msgstr ""
+msgstr "Numai membrii înregistrați pot vedea conținutul pe care l-ați solicitat. Conectați-vă un cont acum!"
 
 msgid "Please log in to access this page."
-msgstr ""
+msgstr "Vă rugăm să vă autentificați pentru a accesa această pagină."
 
 #, python-format
 msgid "The page you tried to access belongs to an app that has been deactivated for this %(team_type)s. If you feel this is in error, ask the %(team_type)s's administrator to reactivate the app."
-msgstr ""
+msgstr "Pagina la care ați încercat să accesați aparține unei aplicații care a fost dezactivată pentru aceasta %(team_type)s. Dacă considerați că aceasta este greșită, întrebați %(team_type)s's cereți administratorului să reactiveze aplicația."
 
 msgid "No team provided"
-msgstr "No project provided"
+msgstr "Nici o echipă furnizată"
 
 msgid "This team no longer resides under the URL you entered. You have been redirected automatically to the current location."
-msgstr ""
+msgstr "Această echipă nu mai locuiește sub URL-ul pe care l-ați introdus. Ați fost redirecționat automat către locația curentă."
 
 msgid "This account is no longer active. You have been logged out."
-msgstr ""
+msgstr "Acest cont nu mai este activ. Ai fost deconectat."
 
 #, python-format
 msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
-msgstr ""
+msgstr "Ai încercat să te autentifici de prea multe ori. Puteți încerca să vă autentificați din nou în: %(duration)s."
 
 msgid "A user requested to become a member of this team (admins only)"
-msgstr ""
+msgstr "Un utilizator a solicitat să devină membru al acestei echipe (doar admin)"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgid "%(sender_name)s requested to become a member"
-msgstr ""
+msgstr "”%(sender_name)s” a solicitat să devină membru al %(team_name)s."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgid "%(sender_name)s and %(count_minus_one)d other requested to become a member"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others requested to become a member"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "”%(sender_name)s” a solicitat să devină membru al %(team_name)s."
+msgstr[1] "”%(sender_name)s” a solicitat să devină membru al %(team_name)s."
+msgstr[2] "”%(sender_name)s” a solicitat să devină membru al %(team_name)s."
 
+#, fuzzy
+#| msgid "You were made an admin of this team"
 msgid "You are an admin of this team"
-msgstr ""
+msgstr "Ați făcut un administrator al acestei echipe"
 
 msgid "New membership request"
-msgstr ""
+msgstr "Nouă solicitare de membru"
 
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
-msgstr ""
+msgstr "”%(sender_name)s” a solicitat să devină membru al %(team_name)s."
 
+#, fuzzy
+#| msgid "Membership request accepted"
 msgid "Your membership request was accepted"
-msgstr ""
+msgstr "Cerere de membru acceptată"
 
 msgid "Membership request accepted"
-msgstr ""
+msgstr "Cerere de membru acceptată"
 
 #, python-format
 msgid "Your membership request for %(team_name)s was accepted!"
-msgstr ""
+msgstr "Cererea dvs. de membru pentru %(team_name)s a fost acceptat!"
 
+#, fuzzy
+#| msgid "Membership request declined"
 msgid "Your membership request was declined"
-msgstr ""
+msgstr "Cererea de membru a fost refuzată"
 
 msgid "Membership request declined"
-msgstr ""
+msgstr "Cererea de membru a fost refuzată"
 
 #, python-format
 msgid "We're sorry, but your membership request for %(team_name)s was declined."
-msgstr ""
+msgstr "Ne pare rău, dar cererea dvs. de membru pentru %(team_name)s a fost refuzată."
 
 #, python-format
 msgid "Your membership request for %(team_name)s was declined."
-msgstr ""
+msgstr "Cererea dvs. de membru pentru %(team_name)s a fost refuzată."
 
 msgid "A user has accepted the invitation to this team (admins only)"
-msgstr ""
+msgstr "Un utilizator a acceptat invitația către această echipă (doar admin)"
 
 #, python-format
 msgid "%(sender_name)s accepted the invitation"
-msgstr ""
+msgstr "%(sender_name)s a acceptat invitația"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s accepted the invitation"
 msgid "%(sender_name)s and %(count_minus_one)d other accepted the invitation"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others accepted the invitation"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(sender_name)s a acceptat invitația"
+msgstr[1] "%(sender_name)s a acceptat invitația"
+msgstr[2] "%(sender_name)s a acceptat invitația"
 
 #, python-format
 msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
-msgstr ""
+msgstr "”%(sender_name)s” a acceptat invitația la %(team_name)s."
 
 msgid "A user has declined the invitation to this team (admins only)"
-msgstr ""
+msgstr "Un utilizator a refuzat invitația către această echipă (doar admin)"
 
 #, python-format
 msgid "%(sender_name)s declined the invitation"
-msgstr ""
+msgstr "%(sender_name)s a refuzat această invitație"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s declined the invitation"
 msgid "%(sender_name)s and %(count_minus_one)d other declined the invitation"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others declined the invitation"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(sender_name)s a refuzat această invitație"
+msgstr[1] "%(sender_name)s a refuzat această invitație"
+msgstr[2] "%(sender_name)s a refuzat această invitație"
 
 #, python-format
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
-msgstr ""
+msgstr "”%(sender_name)s” a refuzat invitația la %(team_name)s."
 
 msgid "You were made an admin of this team"
-msgstr ""
+msgstr "Ați făcut un administrator al acestei echipe"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
 msgid "%(sender_name)s made you an admin"
-msgstr ""
+msgstr "%(sender_name)s te-a etichetat"
 
 msgid "Made you an admin"
-msgstr ""
+msgstr "V-a făcut admin"
 
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
-msgstr ""
+msgstr "%(sender_name)s v-a făcut admin de ”%(team_name)s” pe %(portal_name)s!"
 
 msgid "Your admin status for this team was revoked"
-msgstr ""
+msgstr "Starea dvs. de administrator pentru această echipă a fost revocată"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "Revoked your admin status"
 msgid "%(sender_name)s revoked your admin status"
-msgstr ""
+msgstr "A revocat starea dvs. de admin"
 
 msgid "Revoked your admin status"
-msgstr ""
+msgstr "A revocat starea dvs. de admin"
 
 #, python-format
 msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
-msgstr ""
+msgstr "%(sender_name)s a revocat statutul de admin ”%(team_name)s” pe %(portal_name)s!"
 
 msgid "You were tagged in a post, document or other item"
-msgstr ""
+msgstr "Ați fost etichetat într-o postare, document sau alt articol"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
 msgid "%(sender_name)s tagged you in %(object_name)s"
-msgstr ""
+msgstr "%(sender_name)s te-a etichetat"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
 msgid "%(sender_name)s tagged you in %(count)d items"
-msgstr ""
+msgstr "%(sender_name)s te-a etichetat"
 
 #, python-format
 msgid "%(sender_name)s tagged you in"
-msgstr ""
+msgstr "%(sender_name)s te-a etichetat"
 
 #, python-format
 msgid "You were tagged by %(sender_name)s"
-msgstr ""
+msgstr "Ai fost etichetat de %(sender_name)s"
 
 #, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
-msgstr ""
+msgstr "Ai fost etichetat în ”%(object_name)s” în %(team_name)s."
 
 #, fuzzy, python-format
+#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s invited you to join %(team_name)s"
-msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
+msgstr "%(sender_name)s v-a invitat să vă alăturați ”%(team_name)s” pe %(portal_name)s!"
 
 msgid "Invited you"
-msgstr ""
+msgstr "Te-a invitat"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
-msgstr ""
+msgstr "%(sender_name)s te-a invitat să te înscrii ”%(team_name)s” pe %(portal_name)s! <br/><br/> Pentru a vă alătura, vă rugăm să faceți clic pe linkul de mai jos. Veți fi redirecționat către portal, unde puteți vedea și accepta invitația."
 
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
-msgstr ""
+msgstr "%(sender_name)s v-a invitat să vă alăturați ”%(team_name)s” pe %(portal_name)s!"
 
-#, fuzzy
-#| msgid "There are no groups."
 msgid "Accept invitation"
-msgstr "There are no groups."
+msgstr "Invitația acceptată"
 
-#, fuzzy
-#| msgid "There are no groups."
 msgid "View invitation"
-msgstr "There are no groups."
+msgstr "Vizualizați invitația"
 
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "New link to the moved project/group"
-msgstr "Convert selected Projects to Groups"
+msgstr "Nou link către proiectul/grupul mutat"
 
 #, python-format
 msgid "One of your projects/groups were moved to the portal \"%(portal_name)s\"! <br/><br/> Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>All of your old URLs will continue to work and redirect you to the correct page on the new portal."
-msgstr ""
+msgstr "Unul dintre proiectele/grupurile dvs. a fost mutat în portal ”%(portal_name)s”! <br/><br/> Contul dvs. de utilizator pentru acest portal este același ca și pentru cel vechi - nu este necesar să vă înregistrați un cont nou! <br/><br/>Toate adresele URL-lui vechi vor continua să funcționeze și să vă redirecționeze către pagina corectă din noul portal."
 
 #, python-format
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
-msgstr ""
+msgstr "”%(team_name)s” a fost mutat la %(portal_name)s!"
 
 msgid "Created"
-msgstr ""
+msgstr "Creată"
 
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
-msgstr ""
+msgstr "%(sender_name)s tocmai a creat proiectul/grupul ”%(team_name)s” pe %(portal_name)s!"
 
 msgid "Has created"
-msgstr ""
+msgstr "A creat"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
-msgstr ""
+msgstr "%(sender_name)s tocmai a creat ideea ”%(object_name)s” pe %(portal_name)s!"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
-msgstr ""
+msgstr "%(sender_name)s tocmai a creat ideea ”%(object_name)s”!"
 
 #, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
-msgstr ""
+msgstr "%(sender_name)s tocmai a creat proiectul ”%(team_name)s” pe %(portal_name)s dintr-o idee pe care o urmezi! <br/><br/> Pentru a-l verifica, faceți clic pe linkul de mai jos. Acolo puteți vedea dacă doriți să vă alăturați proiectului."
 
 #, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
-msgstr ""
+msgstr "%(sender_name)s tocmai a creat proiectul ”%(team_name)s” dintr-o idee pe care o urmezi!"
 
 msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
@@ -392,286 +402,286 @@ msgid "Romanian--NATIVE-LANGUAGE"
 msgstr "Română"
 
 msgid "Attachments"
-msgstr ""
+msgstr "Atașamente"
 
 msgid "Type the title and/or type of attachment"
-msgstr ""
+msgstr "Tastați titlul și/sau tipul de atașament"
 
 msgid "Sort_field"
-msgstr ""
+msgstr "Câmp_sortare"
 
 msgid "Enter a number for sort order"
-msgstr ""
+msgstr "Introduceți un număr pentru o comandă de sortare"
 
 msgid "Widget label"
-msgstr ""
+msgstr "Etichetă widget"
 
 msgid "Enter a title for the widget"
-msgstr ""
+msgstr "Introduceți un titlu pentru widget"
 
 msgid "Widget icon"
-msgstr ""
+msgstr "Programa widget"
 
 msgid "A font-awesome icon for the widget"
-msgstr ""
+msgstr "O pictogramă minunată pentru widget"
 
 msgid "Link label"
-msgstr ""
+msgstr "Etichetă de legătură"
 
 msgid "Enter a label for the widget-button"
-msgstr ""
+msgstr "Introduceți o etichetă pentru butonul widget"
 
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 msgid "Enter a description"
-msgstr ""
+msgstr "Introduceți o descriere"
 
 msgid "All"
-msgstr ""
+msgstr "Toate"
 
 msgid "Not assigned"
-msgstr ""
+msgstr "Nealocat"
 
 msgid "Any date"
-msgstr ""
+msgstr "Orice dată"
 
 msgid "Today"
-msgstr ""
+msgstr "Azi"
 
 msgid "This week"
-msgstr ""
+msgstr "Săptămâna aceasta"
 
 msgid "Next week"
-msgstr ""
+msgstr "Săptămâna viitoare"
 
 msgid "Next month"
-msgstr ""
+msgstr "Luna viitoare"
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
-msgstr ""
+msgstr "Aceasta nu pare să fie o legătură validă de Youtube sau Vimeo!"
 
 msgid "This doesn't seem to be a Twitter username!"
-msgstr ""
+msgstr "Acesta nu pare să fie un nume de utilizator Twitter!"
 
 msgid "This doesn't seem to be a valid widget ID or embed HTML code from Twitter!"
-msgstr ""
+msgstr "Acesta nu pare să fie un ID de widget valid sau să încorporeze cod HTML de pe Twitter!"
 
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
-msgstr ""
+msgstr "Aceasta nu pare să fie o legătură Galeria Flickr validă! Ar trebui să fie sub formă de ”https://www.flickr.com/photos/username/sets/1234567890”!"
 
 msgid "Users"
-msgstr ""
+msgstr "Utilizatorii"
 
 msgid "Name"
-msgstr ""
+msgstr "Nume"
 
 msgid "Limit to teams"
-msgstr "Limit to projects"
+msgstr "Limita de echipe"
 
 msgid "My teams"
-msgstr "My projects"
+msgstr "Echipele mele"
 
 msgid "Other teams"
-msgstr "Other projects"
+msgstr "Alte echipe"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Like"
-msgstr ""
+msgstr "Ca"
 
 msgid "Persons"
-msgstr ""
+msgstr "Persoane"
 
 msgid "email address"
-msgstr ""
+msgstr "adresa de e-mail"
 
 msgid "first name"
-msgstr ""
+msgstr "prenume"
 
 msgid "This email address already has a registered user!"
-msgstr ""
+msgstr "Această adresă de e-mail are deja un utilizator înregistrat!"
 
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
-msgstr ""
+msgstr "Introduceți un e-mail și o parolă corectă. Rețineți că ambele câmpuri pot fi sensibile la litere mari și mici."
 
 msgid "Your Web browser doesn't appear to have cookies enabled. Cookies are required for logging in."
-msgstr ""
+msgstr "Navigatorul dvs. Web nu pare să aibă cookie-uri activate. Cookie-urile sunt necesare pentru logarea."
 
 msgid "This account is inactive."
-msgstr ""
+msgstr "Acest cont este inactiv."
 
 msgid "Hello"
 msgstr ""
 
 msgid "Click the following link to change which emails you receive:"
-msgstr ""
+msgstr "Faceți clic pe linkul următor pentru a modifica ce e-mailuri primiți:"
 
 msgid "Notification Preferences"
-msgstr ""
+msgstr "Preferințe de notificare"
 
 msgid "Click the following link to never receive any more emails from us:"
-msgstr ""
+msgstr "Faceți clic pe linkul următor pentru a nu primi niciodată mai multe e-mailuri de la noi:"
 
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Dezabonare"
 
 msgid "Hi,"
-msgstr ""
+msgstr "Salut,"
 
 msgid "Tiny (50 x *)"
-msgstr ""
+msgstr "Minuscul (50 x *)"
 
 msgid "Very Small (100 x *)"
-msgstr ""
+msgstr "Foarte Mic (100 x *)"
 
 msgid "Smaller (150 x *)"
-msgstr ""
+msgstr "Mai mică (150 x *)"
 
 msgid "Small (200 x *)"
-msgstr ""
+msgstr "Mic (200 x *)"
 
 msgid "Medium-small (250 x *)"
-msgstr ""
+msgstr "Mediu-mic (250 x *)"
 
 msgid "Medium (300 x *)"
-msgstr ""
+msgstr "Mediu (300 x *)"
 
 msgid "Large (400 x *)"
-msgstr ""
+msgstr "Mare (400 x *)"
 
 msgid "Larger (500 x *)"
-msgstr ""
+msgstr "Mai mare (500 x *)"
 
 msgid "Very large (650 x *)"
-msgstr ""
+msgstr "Foarte mare (650 x *)"
 
 msgid "Extra large (800 x *)"
-msgstr ""
+msgstr "Extra mare (800 x *)"
 
 msgid "XXL (1200 x *)"
-msgstr ""
+msgstr "XXL (1200 x *)"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Title"
-msgstr ""
+msgstr "Titlu"
 
 msgid "Last edited"
-msgstr ""
+msgstr "Ultima modificare"
 
 msgid "Last edited by"
-msgstr ""
+msgstr "Ultima editare de"
 
 msgid "Cosinnus CMS Micropage"
-msgstr ""
+msgstr "Cosinus CMS Micropage"
 
 msgid "Cosinnus Micropages"
-msgstr ""
+msgstr "Cosinus Micropage"
 
 msgid "Complaint Text"
-msgstr ""
+msgstr "Text de reclamație"
 
 msgid "Creator"
-msgstr ""
+msgstr "Creator"
 
 msgid "Reported object"
-msgstr ""
+msgstr "Obiect raportat"
 
 msgid "Reported objects"
-msgstr ""
+msgstr "Obiecte raportate"
 
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 msgid "Notification ID"
-msgstr ""
+msgstr "Notificare ID"
 
 msgid "Portal"
-msgstr ""
+msgstr "Portal"
 
 msgid "Enter a valid name. Forward slash is not allowed."
-msgstr ""
+msgstr "Introduceți un nume valid. Redirecționarea înainte nu este permisă."
 
 msgid "Portals"
-msgstr ""
+msgstr "Portaluri"
 
 msgid "Slug"
-msgstr ""
+msgstr "Slug"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Description"
-msgstr ""
+msgstr "Descriere"
 
 msgid "Support Email"
-msgstr ""
+msgstr "Suport E-mail"
 
 msgid "This email is shown to users as contact address on many pages"
-msgstr ""
+msgstr "Acest e-mail este arătat utilizatorilor ca adresă de contact în mai multe pagini"
 
 msgid "Website"
-msgstr ""
+msgstr "Website"
 
 msgid "Welcome-Email sending enabled"
-msgstr ""
+msgstr "Bun venit-trimitere prin E-mail activată"
 
 msgid "Welcome-Email Text"
-msgstr ""
+msgstr "Bun venit- E-mail Text"
 
 msgid "If set and enabled, this text will be sent to all new users after their registration is complete."
-msgstr ""
+msgstr "Dacă este setat și activat, acest text va fi trimis tuturor utilizatorilor noi după finalizarea înregistrării."
 
 msgid "Public"
-msgstr ""
+msgstr "Public"
 
 msgid "Associated Site"
-msgstr ""
+msgstr "Site-ul asociat"
 
 msgid "Http/Https Protocol (overrides settings)"
-msgstr ""
+msgstr "Http/Https Protocol (înlocuiește setările)"
 
 msgid "Users Need Activation"
-msgstr ""
+msgstr "Utilizatorii au Nevoie de Activare"
 
 msgid "If activated, newly registered users need to be approved by a portal admin before being able to log in."
-msgstr ""
+msgstr "Dacă este activat, utilizatorii nou înregistrați trebuie să fie aprobați de un administrator de portal înainte de a se putea autentifica."
 
 msgid "Emails Need Verification"
-msgstr ""
+msgstr "E-mailurile au Nevoie de Verificare"
 
 msgid "If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them."
-msgstr ""
+msgstr "Dacă sunt activate, utilizatorii nou înregistrați și utilizatorii care își schimbă adresa de e-mail vor trebui să își confirme        e-mailul, făcând clic pe un link dintr-un e-mail care le este trimis."
 
 msgid "ToS Version"
-msgstr ""
+msgstr "ToS Versiune"
 
 msgid "Background Image"
-msgstr ""
+msgstr "Imagine Fundală"
 
 msgid "Used for the background of the landing and CMS-pages"
-msgstr ""
+msgstr "Utilizatorul pentru fundalul paginii de destinație și CMS"
 
 msgid "Logo Image"
-msgstr ""
+msgstr "Imaginea logo-ului"
 
 msgid "Used as a small logo in the navigation bar and for external links to this portal"
-msgstr ""
+msgstr "Utilizator ca mic logo în bara de navigare și pentru link-uri externe către acest portal"
 
 msgid "Main color"
-msgstr ""
+msgstr "Culoarea principală"
 
 msgid "Main background color (css hex value, with or without \"#\")"
-msgstr ""
+msgstr "Culoarea principală a fundalului (css hex valoarea, cu sau fără ”#”)"
 
 msgid "Gradient color"
-msgstr ""
+msgstr "Culoarea gradientă"
 
 msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
-msgstr ""
+msgstr "Culoarea inferioară pentru gradient (css hex valoare, cu sau fără ”#”)"
 
 msgid "Extra CSS"
-msgstr ""
+msgstr "Suplimentar CSS"
 
 msgid "Extra CSS for this portal, will be applied after all other styles."
-msgstr ""
+msgstr "CSS suplimentar pentru acest portal, va fi aplicat după toate celelalte stiluri."
 
 msgid "Video Conference Server"
 msgstr ""
@@ -681,374 +691,349 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
-msgstr ""
+msgstr "Proiect"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Group"
-msgstr "Group"
+msgstr "Grup"
 
 msgid "Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!"
-msgstr ""
+msgstr "Fiți extrem de atenți atunci când schimbați acest slug manual! Pot exista multe reacții adverse (redirecționări de rupere, de ex.)!"
 
 msgid "Project Type"
-msgstr "Project Type"
+msgstr "Tip de proiect"
 
 msgid "Last modified"
-msgstr ""
+msgstr "Modificat ultima dată"
 
 msgid "Short Description"
-msgstr ""
+msgstr "Scurtă descriere"
 
 msgid "Short Description. Internal, will not be shown publicly."
-msgstr ""
+msgstr "Scurtă descriere. Intern, nu va fi afișat public."
 
 msgid "Detailed Description"
-msgstr ""
+msgstr "Descriere detailată"
 
 msgid "Detailed, public description."
-msgstr ""
+msgstr "Detailată, descriere publică."
 
 msgid "Contact Information"
-msgstr ""
+msgstr "Informații de contact"
 
 msgid "How you can be contacted - addresses, social media, etc."
-msgstr ""
+msgstr "Modul în care poți fi contactat - adrese, social media, etc."
 
 msgid "Avatar"
-msgstr ""
+msgstr "Avatar"
 
 msgid "Wallpaper image"
-msgstr ""
+msgstr "Imagine de tapet"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
-msgstr ""
+msgstr "Este afișată ca imagine de banner mare pe Microsite (1140 x 240 px)"
 
 msgid "Microsite Video"
-msgstr ""
+msgstr "Video Microsite"
 
 msgid "Microsite Twitter Timeline Username"
-msgstr ""
+msgstr "Microsite Twitter Cronologie  Nume de Utilizator"
 
 msgid "Microsite Twitter Timeline Custom Widget ID"
-msgstr ""
+msgstr "Microsite Twitter Cronologie Personalizat Widget ID"
 
 msgid "Flickr Gallery URL"
-msgstr ""
+msgstr "Galeria Flickr URL-ul"
 
 msgid "Call to Action Microsite Box active"
-msgstr ""
+msgstr "Caseta de apel la Acțiunea Microsite activ"
 
 msgid "If this is active, a Call to Action box will be shown on the microsite."
-msgstr ""
+msgstr "Dacă aceasta este activă, pe Microsite va fi afișată o casetă Apel la Acțiune."
 
 msgid "Call to Action Box title"
-msgstr ""
+msgstr "Titlul la caseta Apel de Acțiune"
 
 msgid "Call to Action Box Description"
-msgstr ""
+msgstr "Descrierea casetei Apel la Acțiune"
 
 msgid "Embedded Dashboard HTML"
 msgstr ""
 
 msgid "Deactivated Apps"
-msgstr ""
+msgstr "Aplicații Dezactivate"
 
 msgid "Microsite Public Apps"
-msgstr ""
+msgstr "Aplicații publice pentru Microsite"
 
 msgid "Is active"
-msgstr ""
+msgstr "Este activ"
 
 msgid "If a team is not active, it counts as non-existent for all purposes and views on the website."
-msgstr ""
+msgstr "Dacă o echipă nu este activată, aceasta este considerată inexistentă pentru toate scopurile și vizualizările de pe site-ul web."
 
 msgid "Facebook Group ID"
-msgstr ""
+msgstr "ID de grup Facebook"
 
 msgid "Facebook Page ID"
-msgstr ""
+msgstr "ID de pagina Facebook"
 
+#, fuzzy
+#| msgid "Facebook Group ID"
 msgid "Nextcloud Group ID"
-msgstr ""
+msgstr "ID de grup Facebook"
 
 msgid "Parent Group"
-msgstr ""
+msgstr "Grup de Părinți"
 
 msgid "Related Teams"
-msgstr ""
+msgstr "Echipe Conexe"
 
 msgid "Cosinnus project"
-msgstr "Project"
+msgstr "Proiect cosinnus"
 
 msgid "Cosinnus projects"
-msgstr "Projects"
+msgstr "Proiectele cosinnus"
 
 msgid "Slug must not be empty."
-msgstr ""
+msgstr "Slug-ul nu trebuie să fie gol."
 
 msgid "The URL for this team has changed. A redirect from all existing URLs has automatically been created!"
-msgstr ""
+msgstr "URL-ul pentru această echipă s-a schimbat. A fost creat automat o redirecționare de la toate adresele URL-ului existente!"
 
 #, python-format
 msgid "Request about your project \"%(group_name)s\""
-msgstr ""
+msgstr "Cerere despre proiectul dvs. ”%(group_name)s”"
 
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
-msgstr ""
+msgstr "Cerere despre grupul dvs. ”%(group_name)s”"
 
 msgid "Is Moderator"
-msgstr ""
+msgstr "Este Moderator"
 
 msgid "Team membership"
-msgstr ""
+msgstr "Calitatea de membru al echipei"
 
 msgid "Team memberships"
-msgstr ""
+msgstr "Calitate membrului echipei"
 
 msgid "Portal membership"
-msgstr ""
+msgstr "Calitatea de membru al portalului"
 
 msgid "Portal memberships"
-msgstr ""
+msgstr "Abonamentele portalului"
 
 msgid "Team Invite for Unregistered User"
-msgstr ""
+msgstr "Echipa invită pentru un utilizator neînregistrat"
 
 msgid "Team Invites for Unregistered Users"
-msgstr ""
+msgstr "Echipa invitărilor pentru utilizatorii neînregistrați"
 
 msgid "Token"
-msgstr ""
+msgstr "Jeton"
 
 msgid "The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want."
-msgstr ""
+msgstr "Șirul de jeton. Va fi afișat așa cum este, dar atunci când utilizatorii îl introduc, majuscule/minuscule nu contează. Poate conține litere și numere, dar fără spații și poate fi atât de lung sau de scurt cât doriți."
 
 msgid "Short Description (optional). Will be shown on the token page."
-msgstr ""
+msgstr "Scurtă descriere (opțional). Va fi afișat pe pagina cu jeton."
 
 msgid "Valid until"
-msgstr ""
+msgstr "Valabil până la"
 
-#, fuzzy
-#| msgid "Edit Group"
 msgid "Invite-Groups"
-msgstr "Edit Project"
+msgstr "Invita-Grupuri"
 
-#, fuzzy
-#| msgid "Cosinnus group"
 msgid "Cosinnus Group Invite Token"
-msgstr "Group"
+msgstr "Grupul Cosinnus invită Jeton"
 
-#, fuzzy
-#| msgid "Cosinnus groups"
 msgid "Cosinnus Group Invite Tokens"
-msgstr "Groups"
+msgstr "Grupul Cosinnus invită Jetoane"
 
 msgid "Token must not be empty."
-msgstr ""
+msgstr "Jetonul nu trebuie să fie gol."
 
 msgid "From Portal"
-msgstr ""
+msgstr "Din Portal"
 
-#, fuzzy
 msgid "From Team Type"
-msgstr "Project Type"
+msgstr "De la Tipul Echipei"
 
 msgid "From Slug"
-msgstr ""
+msgstr "De la Slug"
 
 msgid "Permanent Team Redirects"
-msgstr ""
+msgstr "Redirecționări Permanente ale Echipei"
 
 msgid "Permanent Team Redirect"
-msgstr ""
+msgstr "Redirecționare Permanentă a Echipei"
 
 msgid "Location"
-msgstr ""
+msgstr "Locație"
 
 msgid "Latitude"
-msgstr ""
+msgstr "Latitudine"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Longitudine"
 
 msgid "Team"
-msgstr ""
+msgstr "Echipă"
 
-#, fuzzy
-#| msgid "Cosinnus groups"
 msgid "CosinnusLocation"
-msgstr "Groups"
+msgstr "Cosinnus Locație"
 
-#, fuzzy
-#| msgid "Cosinnus groups"
 msgid "CosinnusLocations"
-msgstr "Groups"
+msgstr "Cosinnus Locații"
 
-#, fuzzy
-#| msgid "Group"
 msgid "Group Image"
-msgstr "Group"
+msgstr "Imagine de Grup"
 
-#, fuzzy
-#| msgid "Cosinnus group"
 msgid "CosinnusGroup GalleryImage"
-msgstr "Group"
+msgstr "Cosinnus Grup Galerie Imagine"
 
-#, fuzzy
-#| msgid "Cosinnus groups"
 msgid "CosinnusGroup GalleryImages"
-msgstr "Groups"
+msgstr "Cosinnus Grup Galerie Imagini"
 
 msgid "URL"
-msgstr ""
+msgstr "URL-ul"
 
 msgid "CosinnusGroup CallToAction Button"
-msgstr ""
+msgstr "Cosinnus Grup Buton de Apel la Acțiune"
 
 msgid "CosinnusGroup CallToAction Buttons"
-msgstr ""
+msgstr "Cosinnus Grup Butoane  la Apel de Acțiune"
 
 msgid "Cosinnus group"
-msgstr "Group"
+msgstr "Cosinnus grup"
 
 msgid "Cosinnus groups"
-msgstr "Groups"
+msgstr "Cosinnus grupuri"
 
-#, fuzzy
-#| msgid "Group"
 msgid "Image"
-msgstr "Group"
+msgstr "Imagine"
 
-#, fuzzy
-#| msgid "Create Project"
 msgid "Created Projects"
-msgstr "Create Project"
+msgstr "Proiecte Create"
 
-#, fuzzy
-#| msgid "Cosinnus project"
 msgid "Cosinnus Idea"
-msgstr "Project"
+msgstr "Cosinnus Ideea"
 
-#, fuzzy
-#| msgid "Cosinnus projects"
 msgid "Cosinnus Ideas"
-msgstr "Projects"
+msgstr "Cosinnus Idei"
 
 msgid "Language"
-msgstr ""
+msgstr "Limba"
 
 msgid "May be contacted"
-msgstr ""
+msgstr "Poate fi contactat"
 
 msgid "Terms of Service"
-msgstr ""
+msgstr "Termeni și Service"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Never (we will not send you any emails)"
-msgstr ""
+msgstr "Niciodată (nu vă vom trimite nici un e-mail)"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Immediately (an individual email per event)"
-msgstr ""
+msgstr "Imediat (un e-mail individual pe aventură)"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "In a Daily Report"
-msgstr ""
+msgstr "Într-un Raport Zilnic"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "In a Weekly Report"
-msgstr ""
+msgstr "Într-un Raport Săptămânal"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
-msgstr ""
+msgstr "Setări individuale pentru fiecare Proiect/Grup..."
 
 msgid "Name (EN)"
-msgstr ""
+msgstr "Nume (EN)"
 
 msgid "Name (RU)"
-msgstr ""
+msgstr "Nume (RU)"
 
 msgid "Name (UK)"
-msgstr ""
+msgstr "Nume (UK)"
 
 msgid "Only me"
-msgstr ""
+msgstr "Doar eu"
 
 msgid "Team members only"
-msgstr ""
+msgstr "Doar membrii echipei"
 
 msgid "Public (visible without login)"
-msgstr ""
+msgstr "Public (vizibil fără autentificare)"
 
 msgid "Tags"
-msgstr ""
+msgstr "Etichetă"
 
 msgid "Permissions"
-msgstr ""
+msgstr "Permisiune"
 
 msgid "Place"
-msgstr ""
+msgstr "Loc"
 
 msgid "Valid from"
-msgstr ""
+msgstr "Valabil din"
 
 msgid "Valid to"
-msgstr ""
+msgstr "Valabil până la"
 
 msgid "Approach"
-msgstr ""
+msgstr "Abordare"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Topics"
-msgstr ""
+msgstr "Subiecte"
 
 msgid "Text Topics"
-msgstr ""
+msgstr "Subiecte de text"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Likes"
-msgstr ""
+msgstr "Îi place"
 
 msgid "Attached object"
-msgstr ""
+msgstr "Obiect atașat"
 
 msgid "Attached objects"
-msgstr ""
+msgstr "Obiecte atașate"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "User"
-msgstr ""
+msgstr "Utilizator"
 
 msgid "Visited"
-msgstr ""
+msgstr "Vizitat"
 
 msgid "LastVisited"
-msgstr ""
+msgstr "Ultima vizitată"
 
 msgid "LastVisiteds"
-msgstr ""
+msgstr "Ultimele vizite"
 
 msgid "Path"
-msgstr ""
+msgstr "Cale"
 
 msgid "Reflected Object"
-msgstr ""
+msgstr "Obiect Reflectat"
 
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Reflected Objects"
-msgstr "Convert selected Projects to Groups"
+msgstr "Obiecte Reflectate"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Liked"
-msgstr ""
+msgstr "Plăcut"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
-msgstr ""
+msgstr "Ca urmare"
 
 msgid "Text Editor"
 msgstr ""
@@ -1077,8 +1062,10 @@ msgstr ""
 msgid "Announcement Display Type"
 msgstr ""
 
+#, fuzzy
+#| msgid "Valid from"
 msgid "Valid From"
-msgstr ""
+msgstr "Valabil din"
 
 msgid "Announcement Category"
 msgstr ""
@@ -1089,1613 +1076,1554 @@ msgstr ""
 msgid "Raw HTML for this announcement."
 msgstr ""
 
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Create-Project or Group Button"
-msgstr "Convert selected Projects to Groups"
+msgstr "Create-Proiect sau Grup de Buton"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Events"
-msgstr ""
+msgstr "Evenimente"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
-msgstr ""
+msgstr "Proiecte"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
-msgstr "Groups"
+msgstr "Grupuri"
 
 msgid "At least one type of Map object must be chosen!"
-msgstr ""
+msgstr "Trebuie ales cel puțin un tip de obiect sau Map!"
 
 msgid "Proportions"
-msgstr ""
+msgstr "Proporții"
 
 msgid "1/2 + 1/2"
-msgstr ""
+msgstr "1/2+1/2"
 
 msgid "2/3 + 1/3"
-msgstr ""
+msgstr "2/3+1/3"
 
 msgid "1/3 + 2/3"
-msgstr ""
+msgstr "1/3+2/3"
 
 msgid "1/3 + 1/3 + 1/3"
-msgstr ""
+msgstr "1/3+1/3+1/3"
 
 msgid "1/2 + 1/4 + 1/4"
-msgstr ""
+msgstr "1/2+1/4+1/4"
 
 msgid "1/4 + 1/2 + 1/4"
-msgstr ""
+msgstr "1/4+1/2+1/4"
 
 msgid "1/4 + 1/4 + 1/2"
-msgstr ""
+msgstr "1/4+1/4+1/2"
 
 msgid "Medium News Widget"
-msgstr ""
+msgstr "Widget de Știri Medii"
 
 msgid "Large News Widget"
-msgstr ""
+msgstr "Widget de Știri Mari"
 
 msgid "4 Random Projects Widget"
-msgstr ""
+msgstr "4 Widget de Proiecte la Alegere"
 
 msgid "8 Random Projects Widget"
-msgstr ""
+msgstr "8 Widget de Proiecte la Alegere"
 
 msgid "Content"
-msgstr ""
+msgstr "Conținut"
 
 msgid "Portal Root Page"
-msgstr ""
+msgstr "Portal Rădăcină Pagină"
 
 msgid "Assigned Portal"
-msgstr ""
+msgstr "Portalul Atribuit"
 
 msgid "Footer"
-msgstr ""
+msgstr "Subsol"
 
 msgid "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
-msgstr ""
+msgstr "Va fi afișat ca un subsol pe FIECARE pagină de pe acest site web (nu numai paginile de pe bord!)"
 
 msgid "Show Register Button"
-msgstr ""
+msgstr "Arată Butonul de Înregistrare"
 
 msgid "Redirect Logged in Users"
-msgstr ""
+msgstr "Redirecționați Utilizatorii Autentificați"
 
 msgid "If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page."
-msgstr ""
+msgstr "Dacă este activă, această pagină va fi vizibilă doar pentru utilizatorii neînregistrați. Toate celelalte vor fi redirecționate către pagina de activități."
 
 msgid "Left banner (top)"
-msgstr ""
+msgstr "Stânga banner (top)"
 
 msgid "Right banner (top)"
-msgstr ""
+msgstr "Dreapta banner (top)"
 
 msgid "Header"
-msgstr ""
+msgstr "Antet"
 
 msgid "Left footer"
-msgstr ""
+msgstr "Piciorul stâng"
 
 msgid "Right footer"
-msgstr ""
+msgstr "Piciorul drept"
 
 msgid "1-Column Dashboard Page"
-msgstr ""
+msgstr "1-Coloana Bord tablou Pagina"
 
 msgid "2-Column Dashboard Page"
-msgstr ""
+msgstr "2-Coloana Bord tablou Pagina"
 
 msgid "Content (left column)"
-msgstr ""
+msgstr "Conținut (coloana din stânga)"
 
 msgid "Content (right column)"
-msgstr ""
+msgstr "Conținut (coloana din dreapta)"
 
 msgid "3-Column Dashboard Page"
-msgstr ""
+msgstr "3-Coloana Bord tablou Pagina"
 
 msgid "Content (center column)"
-msgstr ""
+msgstr "Conținut (coloana centrală)"
 
 msgid "Simple One-Column Page"
-msgstr ""
+msgstr "Pagina Simplă cu o Coloană"
 
 msgid "Simple Page with Left Navigation"
-msgstr ""
+msgstr "Pagina Simplă cu Navigare din Stânga"
 
 msgid "Left Sidebar"
-msgstr ""
+msgstr "Bara Laterală din Stânga"
 
 msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr ""
+msgstr "1-Coloana Tablou de Bord Pagina (Modular, NU MAI FOLOSIȚI!)"
 
 msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr ""
+msgstr "2-Coloana Tablou de Bord Pagina (Modular, NU MAI FOLOSIȚI!)"
 
 msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr ""
+msgstr "3-Coloana Tablou de Bord Pagina (Modular, NU MAI FOLOSIȚI!)"
 
 msgid "Simple One-Column Page (Modular)"
-msgstr ""
+msgstr "Pagina Simplă cu O-Coloană (Modular)"
 
 msgid "Simple Page with Left Navigation (Modular)"
-msgstr ""
+msgstr "Pagina Simplă cu Navigare din Stânga (Modular)"
 
 msgid "Start Page (Modular)"
-msgstr ""
+msgstr "Pagina de Start (Modular)"
 
 msgid "Header image"
-msgstr ""
+msgstr "Imagine Antet"
 
 msgid "Header Title"
-msgstr ""
+msgstr "Antet de Titlu"
 
 msgid "Header Text"
-msgstr ""
+msgstr "Text Antet"
 
 msgid "Additional Header content"
-msgstr ""
+msgstr "Adaugă conținut Antet"
 
 msgid "Site Widgets"
-msgstr ""
+msgstr "Widget-ul pentru Site"
 
 msgid "Bottom content (gray background)"
-msgstr ""
+msgstr "Conținutul de jos (fundal gri)"
 
 msgid "Dashboard"
-msgstr ""
+msgstr "Bord Tablou"
 
 msgid "Microsite"
-msgstr ""
+msgstr "Microsite"
 
 msgid "Application name"
-msgstr ""
+msgstr "Numele Aplicației"
 
 msgid "Widget name"
-msgstr ""
+msgstr "Numele Widget"
 
 msgid "Widget Type"
-msgstr ""
+msgstr "Tipul Widget"
 
 msgid "Sort field"
-msgstr ""
+msgstr "Câmp de sortare"
 
 msgid "Widget configuration"
-msgstr ""
+msgstr "Widget de configurare"
 
 msgid "Widget configurations"
-msgstr ""
+msgstr "Widget de configurații"
 
 msgid "Either team or user must be defined."
-msgstr "Either project or user must be defined."
+msgstr "Trebuie definită fie echipa, fie utilizatorul."
 
 msgid "key"
-msgstr ""
+msgstr "cheie"
 
 msgid "value"
-msgstr ""
+msgstr "valoare"
 
 msgid "Widget configuration item"
-msgstr ""
+msgstr "Element de configurare widget"
 
 msgid "Widget configuration items"
-msgstr ""
+msgstr "Elemente de configurare Widget"
 
 msgid "select this page"
-msgstr ""
+msgstr "selectați această pagină"
 
 msgid "edit this page"
-msgstr ""
+msgstr "editați această pagină"
 
 msgid "edit"
-msgstr ""
+msgstr "editați"
 
 msgid "insert above"
-msgstr ""
+msgstr "introduceți mai sus"
 
 msgid "insert below"
-msgstr ""
+msgstr "introduceți mai jos"
 
 msgid "insert inside"
-msgstr ""
+msgstr "introduceți în interior"
 
 msgid "softroot"
-msgstr ""
+msgstr "rădăcina"
 
 msgid "home"
-msgstr ""
+msgstr "acasă"
 
 #, python-format
 msgid "Edit this page in %(language)s "
-msgstr ""
+msgstr "Editați această pagină în %(language)s "
 
 msgid "Cut"
-msgstr ""
+msgstr "Tăiat"
 
 msgid "cut"
-msgstr ""
+msgstr "tăiat"
 
 msgid "Copy"
-msgstr ""
+msgstr "Copie"
 
 msgid "copy"
-msgstr ""
+msgstr "copie"
 
 msgid "Add Child"
-msgstr ""
+msgstr "Adaugă Copil"
 
 msgid "add"
-msgstr ""
+msgstr "adaugă"
 
 msgid "Delete"
-msgstr ""
+msgstr "Șterge"
 
 msgid "delete"
-msgstr ""
+msgstr "șterge"
 
 msgid "Unpublish"
-msgstr ""
+msgstr "Anulați publicarea"
 
 msgid "Publish"
-msgstr ""
+msgstr "Publica"
 
 msgid "View on page"
-msgstr ""
+msgstr "Vizualizarea pe pagină"
 
 msgid "view"
-msgstr ""
+msgstr "vedere"
 
 msgid "View reported item..."
-msgstr ""
+msgstr "Vizualizați articolul raportat..."
 
 msgid "Edit reported item..."
-msgstr ""
+msgstr "Editați articolul raportat..."
 
 msgid "Delete reported item..."
-msgstr ""
+msgstr "Ștergeți articolul raportat..."
 
 msgid "(The reported item has been deleted.)"
-msgstr ""
+msgstr "(Elementul raportat a fost șters.)"
 
 msgid "Enter the 4 capital letters in the scrambled image"
-msgstr ""
+msgstr "Introduceți 4 litere majuscule în imaginea amestecată"
 
 msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
-msgstr ""
+msgstr "Această pagină este o previzualizare a multor lucruri bune care vor veni! Este în curs de dezvoltare și multe caracteristici sunt incomplete sau s-ar putea să nu funcționeze corect încă!"
 
 msgid "Done"
-msgstr ""
+msgstr "Terminat"
 
 msgid "Configure"
-msgstr ""
+msgstr "Configurează"
 
 msgid "Withdraw request"
-msgstr ""
+msgstr "Cerere de retragere"
 
 msgid "Join"
-msgstr ""
+msgstr "A te alătura"
 
 #, python-format
 msgid "Do you really want to withdraw your join request to „%(title)s“?"
-msgstr "Do you really want to withdraw your join request to project „%(title)s“?"
+msgstr "Doriți cu adevărat să vă retrageți solicitarea de a se alătura la „%(title)s”?"
 
 msgid "Withdraw Join Request"
-msgstr ""
+msgstr "Retragere cerere de alăturare"
 
 #, python-format
 msgid "Do you wish to request to join „%(title)s“?"
-msgstr ""
+msgstr "Doriți să solicitați și să vă alăturați „%(title)s”?"
 
 msgid "Add widget"
-msgstr ""
+msgstr "Adăugați widget-ul"
 
 msgid "Informations"
-msgstr ""
+msgstr "Informații"
 
 msgid "No informations set"
-msgstr ""
+msgstr "Nu sunt setate informații"
 
 msgid "Back to Project Overview"
-msgstr ""
+msgstr "Înapoi la prezentarea generală a Proiectului"
 
-#, fuzzy
-#| msgid "There are no groups."
 msgid "Administration"
-msgstr "There are no groups."
+msgstr "Administrare"
 
 msgid "Select a page on the left side."
-msgstr ""
+msgstr "Selectați o pagină din partea stângă."
 
 msgid "Simple Statistics"
-msgstr ""
+msgstr "Statistici Simple"
 
 msgid "User Welcome Email"
-msgstr ""
+msgstr "Utilizator Bun Venit pe E-mail"
 
 msgid "User Dashboard Announcements"
 msgstr ""
 
 msgid "Edit"
-msgstr ""
+msgstr "Editați"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
-msgstr ""
+msgstr "A existat o eroare într-unul din câmpurile pe care le-ați introdus. Vă rugăm să o corectați înainte de a o salva!"
 
 msgid "Save"
-msgstr ""
+msgstr "Salvați"
 
 msgid "Currently set Welcome-Email Text"
-msgstr ""
+msgstr "Setează în prezent Textul Bun Venit pe E-mail"
 
 msgid "Send yourself a Test-Mail"
-msgstr ""
+msgstr "Trimiteți-vă un E-mail de Testare"
 
 msgid "Settings"
-msgstr ""
+msgstr "Setări"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
-msgstr ""
+msgstr "Membrii"
 
 msgid "Choose App"
-msgstr ""
+msgstr "Alege Aplicația"
 
 msgid "Attach existing Files..."
-msgstr ""
+msgstr "Atașați Fișierele existente..."
 
 msgid "Drag and Drop files here..."
-msgstr ""
+msgstr "Trageți și aruncați fișierele aici..."
 
 msgid "Drag and Drop files or folders here..."
-msgstr ""
+msgstr "Trageți și Aruncați fișierele sau dosarele aici..."
 
 msgid "Click to upload a new file/image. You can also drag & drop a file from your computer."
-msgstr ""
+msgstr "Faceți clic pentru a încărca un nou fișier/imagine. De asemenea, puteți trage și arunca un fișier de pe computer."
 
 msgid "Browse..."
-msgstr ""
+msgstr "Naviga..."
 
 msgid "Drag and drop one or more files into this area to upload them to this folder."
-msgstr ""
+msgstr "Trageți și aruncați unul sau mai multe fișiere în această zonă pentru a le încărca în acest dosar."
 
 msgid "You can also upload a whole folder, including all files and subfolders, by dragging it here. The new folders will be created automatically, with the same folder structure as on your computer."
-msgstr ""
+msgstr "Puteți, de asemenea, încărca un dosar întreg, inclusiv toate fișierele și subdosarele, trăgându-l aici. Noile dosare vor fi create automat, cu aceeași structură de dosar ca pe computer."
 
 msgid "Unfortunately, the folder upload feature is only available on some browsers. This is because some browsers will not provide the file path information that is needed for the upload. If your browser doesn't support this, you may wish to switch to a different browser for your upload."
-msgstr ""
+msgstr "Din păcate, funcția de încărcare a dosarului este disponibilă doar în unele browsere. Acest lucru se datorează faptului că unele browsere nu vor furniza informațiile despre calea fișierului necesar pentru încărcare. Dacă browserul nu acceptă acest lucru, poate doriți să treceți la un browser diferit pentru încărcare."
 
 msgid "Currently, the Browsers supporting folder upload are:"
-msgstr ""
+msgstr "În prezent, browserele care acceptă încărcarea dosarului sunt:"
 
 msgid "File and Folder Upload"
-msgstr ""
+msgstr "Încărcarea Fișierelor și Dosarului"
 
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Vă rog corectați eroare de mai jos."
+msgstr[1] "Vă rog să corectați următoarele greșeli."
+msgstr[2] "Vă rog corectați greșelile de mai jos."
 
 msgid "2-factor access only"
-msgstr ""
+msgstr "2- numai acces la factor"
 
 msgid "OTP Device:"
-msgstr ""
+msgstr "OTP Dispozitiv:"
 
 msgid "Enter the generated number code from your authenticator app"
-msgstr ""
+msgstr "Introduceți codul de număr generat din aplicația de autentificare"
 
 msgid "Forgotten your password or username?"
-msgstr ""
+msgstr "Ai uitat parola sau numele de utilizator?"
 
 msgid "Validate"
-msgstr ""
+msgstr "Validă"
 
 msgid "Log out"
-msgstr ""
+msgstr "Deconectați-vă"
 
 msgid "You are logged in as"
-msgstr ""
+msgstr "Sunteți autentificat ca"
 
 msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
-msgstr ""
+msgstr "Se pare că niciun dispozitiv de autentificare nu este atașat la contul dvs. Vă rugăm să cereți unui alt administrator să configurați unul și să vă trimită codul QR!"
 
 msgid "Services"
-msgstr ""
+msgstr "Servicii"
 
 msgid "Access denied!"
-msgstr ""
+msgstr "Acces interzis!"
 
 msgid "You don't have permission to access this site."
-msgstr ""
+msgstr "Nu aveți permisiunea de a accesa acest site."
 
 msgid "Page expired!"
-msgstr ""
+msgstr "Pagina a expirat!"
 
 msgid "Your request seems to have come from an outdated version of this page. Please reload the page and try again!"
-msgstr ""
+msgstr "Cererea dvs. pare să provină dintr-o versiune depășită a acestei pagini. Vă rugăm reîncărcați pagina și încercați din nou!"
 
 msgid "Page not found!"
-msgstr ""
+msgstr "Pagina nu a fost găsită!"
 
 msgid "The page you requested was not found on the server."
-msgstr ""
+msgstr "Pagina solicitată nu a fost găsită pe server."
 
 msgid "Server Error"
-msgstr ""
+msgstr "Eroare de server"
 
 msgid "Sorry! Something went wrong..."
-msgstr ""
+msgstr "Scuze! Ceva n-a mers bine..."
 
 msgid "Looks like we had an internal problem while processing your request. The error has been recorded, and we will try to fix it as soon as possible!"
-msgstr ""
+msgstr "Se pare că am avut o problemă internă în timpul procesării cererii. Eroarea a fost înregistrată și vom încerca să o remediem cât mai curând posibil!"
 
 #, python-format
 msgid "+%(num_pictures)s more..."
-msgstr ""
+msgstr "+%(num_pictures)s mai mult..."
 
 msgid "Mark All"
-msgstr ""
+msgstr "Marchează-le pe toate"
 
 msgid "Deselect All"
-msgstr ""
+msgstr "De selectați toate"
 
 msgid "Delete elements"
-msgstr ""
+msgstr "Ștergeți elementul"
 
-#, fuzzy
-#| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete all selected elements?"
-msgstr "Are you sure you want to delete this prject?"
+msgstr "Sunteți sigur că doriți să ștergeți toate elementele selectate?"
 
 msgid "There was an error while trying to submit your report. Please try again in a moment."
-msgstr ""
+msgstr "A apărut o eroare în timp ce încercați să trimiteți raportul. Va rog, încercați din nou într-o clipă."
 
 msgid "Cancel"
-msgstr ""
+msgstr "Anulare"
 
 msgid "Deleting..."
-msgstr ""
+msgstr "Ștergerea..."
 
 msgid "Error embedding a Flickr gallery"
-msgstr ""
+msgstr "Eroarea înglobarea unei galerii Flickr"
 
 msgid "Error embedding a twitter timeline"
-msgstr ""
+msgstr "Eroarea la încorporarea unei cronologii Twitter"
 
 msgid "Click to activate video"
-msgstr ""
+msgstr "Faceți clic pentru a activa videoclipul"
 
 msgid "Error embedding a video"
-msgstr ""
+msgstr "Eroarea la încorporarea unui videoclip"
 
 msgid "Help and Assistance for this page"
-msgstr ""
+msgstr "Ajutor și asistență pentru această pagină"
 
 msgid "Help"
-msgstr ""
+msgstr "Ajutor"
 
 msgid "Help for this page"
-msgstr ""
+msgstr "Ajutor pentru această pagină"
 
 msgid "Root Folder"
-msgstr ""
+msgstr "Dosarul Root"
 
 msgid "We're sorry. The Map is not supported in Internet Explorer."
-msgstr ""
+msgstr "Ne pare rău. Harta nu este acceptată în Internet Explorer."
 
 msgid "Consider using an alternate browser!"
-msgstr ""
+msgstr "Ia în considerare utilizarea unui browser alternativ!"
 
 msgid "I want to like this"
-msgstr ""
+msgstr "Vreau să-mi placă asta"
 
 msgid "I want to follow this"
-msgstr ""
+msgstr "Vreau să urmez asta"
 
 msgid "Yes"
-msgstr ""
+msgstr "Da"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Follow"
-msgstr ""
+msgstr "Urmează"
 
 msgid "You will now receive notifications for comments or when this content is updated."
-msgstr ""
+msgstr "Acum veți primi notificări pentru comentarii sau când acest conținut este actualizat."
 
 msgid "You are following this item"
-msgstr ""
+msgstr "Urmărești acest articol"
 
 msgid "Expand"
-msgstr ""
+msgstr "Extinde"
 
 msgid "Shrink"
-msgstr ""
+msgstr "Se contracta"
 
 msgid "Check the projects/groups where you wish to show this item in. It will be shown in all lists, but will still remain in this group."
-msgstr ""
+msgstr "Verificați proiectele/grupurile în care doriți să afișați acest articol. Acesta va fi afișat în toate listele, dar va rămâne în acest grup."
 
 msgid "Items from the Forum can be shown in any of your projects/groups."
-msgstr ""
+msgstr "Articole din Forum pot fi afișate în oricare dintre proiectele/grupurile dvs."
 
 msgid "Items from this group can be shown in any of the group's subprojects."
-msgstr ""
+msgstr "Elemente din acest grup pot fi afișate în orice subproiecte ale grupului."
 
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Show in other projects/groups"
-msgstr "Convert selected Projects to Groups"
+msgstr "Spectacol în alte proiecte/grupuri"
 
 msgid "Apply"
-msgstr ""
+msgstr "Aplica"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_1_group"
-msgstr "There are Groups and Projects on this Portal. \"Projects\" represent a certain number of people, who can coordinate themselves within this \"Project\". If several projects wish to join together under one roof, for example, in order to discuss topics for all the individual projects, they can found a Group together. If you wish to create a Group, please send a message to the Portal Administrators with the request to create a group. They will clarify all the details."
+msgstr "helptext_1_group"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_2_project"
-msgstr "There are Groups and Projects on this Portal. \"Projects\" represent a certain number of people, who can coordinate themselves within this \"Project\". If several Projects wish to join together under one roof, for example, in order to discuss topics for all the individual projects, thez can found a Group together. Within a project, together with its members, you can create to-do lists, deposit files, create Etherpads and much more."
+msgstr "helptext_2_project"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_3_marketplace"
-msgstr "If you would like to place an advert on Wechange, you can do it here. First choose a title, description a category and a photo (amongst other things) for the ad. By clicking on the \"Create\" button, the ad will be activated for four weeks."
+msgstr "helptext_3_marketplace"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_4_profile"
-msgstr "Here you can edit your profile. Upload an avatar, enter your location or a topic you are interested in and confirm the changes by clicking on \"Save\" on the bottom right-hand side. "
+msgstr "helptext_4_profile"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_5_password"
-msgstr "You can change your password in the fields below. When doing so, it is especially important that you try to make your password as long as possible (at least 10 characters). The longer it is, the better. In addition, a special character, a capital letter and a small letter are recommended."
+msgstr "helptext_5_password"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_6_microsite"
-msgstr "You can create a Microsite to make your project externally visible. On this Microsite, you have the opportunity to upload photos, link social media accounts and include contact details. Since an excerpt of the project's short description is visible on the networking map, you should include all the important information in the first three sentences."
+msgstr "helptext_6_microsite"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_7_notes"
-msgstr "You can post a news item in this section. The news post will be shows to all members of your project/group and serves to keep them updated with the latest."
+msgstr "helptext_7_notes"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_8_poll"
-msgstr "Here you can create a poll. This is here for voting over certain things (such as dietary requirements). If you want to find an appointment time with your team, you need to go to the Events tab and then go to \"Event Polls\". "
+msgstr "helptext_8_poll"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_9_todo"
-msgstr "Here you can create a To-Do. In the top right hand corner, you can set a due date or assign the task to a person from your team. By clicking on \"Create\" in the bottom right-hand corner, you have created your To-Do."
+msgstr "helptext_9_todo"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_10_documentsetting"
-msgstr "Here you cann add further information to your document, in addition to its already chosen title. For instance, you can assign your document a topic, a place or a file."
+msgstr "helptext_10_documentsetting"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_11_document"
-msgstr "Here you can edit your document by entering things into the pad. With the help of the Timeslider (clock symbol), you can look at previous versions and with the arrow symbol, you can easily change the pad into a PDF. You can activate a link in the pad by clicking on </>."
+msgstr "helptext_11_document"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_12_projectadministration"
-msgstr "The administration of Projects begins with managing its membership. Here you can decide who can join your project and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal."
+msgstr "helptext_12_projectadministration"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
-msgstr "The administration of Groups begins with managing its membership. Here you can decide who can join your Group and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal. "
+msgstr "helptext_13_groupadministration"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
-msgstr ""
-"Privacy settings for your profile:\n"
-"\n"
-"*  **Members of your projects and groups only:** Your profile is only visible for members of your projects and groups. You will not be listed in \"People\" in the top navigation bar.\n"
-"*  **Registered users only:** People that have registered a user account on the platform can see your profile. Your profile is not publicly visible. You will be listed in \"People\" in the top navigation bar.\n"
-"*  **Everybody:** Even people who are not logged in can see your profile. Your profile is publicly visible and can be found using search engines on the internet."
+msgstr "helptext_50_profileprivacy"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
-msgstr ""
-"Privacy settings for content:\n"
-"\n"
-"*  **Only me:** You are the only one in your group or project who can see and access the content.  \n"
-"\n"
-"*  **Team Members only:** Only members of the group or project, in which this content was posted, may access it.\n"
-"\n"
-"*  **Public (visible without login):** This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
+msgstr "helptext_51_objectprivacy"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_4_profile"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_52_profilelastname"
-msgstr "We respect your wish for anonymity - you don't have to enter your last name. But keep in mind that even for users who know you, it will be hard to find you, for example when they want to invite you to collaborate on a project."
+msgstr "helptext_4_profile"
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
-msgstr ""
+msgstr "Introduceți adresele de e-mail ale persoanelor pe care doriți să le invitați să se alăture platformei."
 
 #, python-format
 msgid "We will send them an email asking them to sign up and join %(group_name)s."
-msgstr ""
+msgstr "Le vom trimite un e-mail care le va cere să se înscrie și să se alăture %(group_name)s."
 
 msgid "E-Mail Addresses"
-msgstr ""
+msgstr "Adrese de e-mail"
 
 msgid "(one per line or comma-seperated)"
-msgstr ""
+msgstr "(unul pe linie sau separat prin virgulă)"
 
 msgid "Personal Message (optional)"
-msgstr ""
+msgstr "Mesaj Personal (facultativ)"
 
 msgid "Include a personal message (optional)"
-msgstr ""
+msgstr "Includeți un mesaj personal (facultativ)"
 
 msgid "Invite new Members"
-msgstr ""
+msgstr "Invită noi Membrii"
 
 msgid "Invite"
-msgstr ""
+msgstr "Invita"
 
-#, fuzzy
-#| msgid "Other Projects"
 msgid "Shown in my projects..."
-msgstr "Other Projects"
+msgstr "Arătat în proiectele mele..."
 
-#, fuzzy
-#| msgid "Other Projects"
 msgid "Show in my projects..."
-msgstr "Other Projects"
+msgstr "Arată în proiectele mele..."
 
 msgid "Rearrange"
-msgstr ""
+msgstr "Rearanja"
 
 msgid "Saving..."
-msgstr ""
+msgstr "Salvare..."
 
 msgid "You are now editing the dashboard's layout"
-msgstr ""
+msgstr "Acum editați aspectul tabloului de bord"
 
 #, python-format
 msgid "The layout you choose will be the layout for all members of %(team_name)s! Click save to apply your changes."
-msgstr ""
+msgstr "Aspectul pe care îl alegeți va fi aspectul pentru toți membrii %(team_name)s! Faceți clic pe salvați pentru a aplica modificările."
 
 msgid "Drag and drop individual widgets to rearrange their order. Please note that the order you give is only an approximate prioritization for the widgets. After saving, the actual order on the page might differ depending on the widgets' current size and the overall page layout."
-msgstr ""
+msgstr "Trageți și plasați widget-uri individuale pentru a-și rearanja comanda. Vă rugăm să rețineți că comanda pe care o dați este doar o prioritate aproximativă pentru widget. După salvare, comanda reală din pagină poate diferi în funcție de dimensiunea actuală a widget-ului și de aspectul general al paginii."
 
 msgid "Your Microsite needs some love!"
-msgstr ""
+msgstr "Microsite tău are nevoie de ceva dragoste!"
 
 msgid "The Microsite is your projects's welcome page for everyone checking it out. Make it awesome so they want to join you!"
-msgstr ""
+msgstr "Microsite este pagina de bun venit a proiectelor dvs. pentru toată lumea. Face minunat astfel încât vor să se alăture!"
 
 msgid "The Microsite is your group's welcome page for everyone checking it out. Make it awesome so they want to join you!"
-msgstr ""
+msgstr "Microsite este pagina de bun venit a grupului dvs. pentru toată lumea. Faceți-l minunat, așa că vor să vă alăture!"
 
 msgid "Access it from the top menu or"
-msgstr ""
+msgstr "Accesați-l din meniul de sus sau"
 
 msgid "get started here..."
-msgstr ""
+msgstr "începe aici..."
 
 msgid "Marketplace"
-msgstr ""
+msgstr "Piața de desfacere"
 
 msgid "Poll"
-msgstr ""
+msgstr "Sondaj"
 
 msgid "Polls"
-msgstr ""
+msgstr "Sondaje"
 
 msgid "File"
-msgstr ""
+msgstr "Fișier"
 
 msgid "Files"
-msgstr ""
+msgstr "Fișiere"
 
 msgid "Etherpad"
-msgstr "Pad"
+msgstr "EtherPad"
 
 msgid "Etherpads"
-msgstr "Pads"
+msgstr "Etherpaduri"
 
 msgid "Todo"
-msgstr ""
+msgstr "Tot"
 
 msgid "Todos"
-msgstr ""
+msgstr "Toate"
 
 msgctxt "Calendar"
 msgid "Event"
-msgstr ""
+msgstr "Eveniment"
 
 msgctxt "Calendar"
 msgid "Events"
-msgstr ""
+msgstr "Evenimente"
 
 msgid "News"
-msgstr ""
+msgstr "Știri"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
-msgstr ""
+msgstr "Retrage"
 
 msgctxt "withdraw join team button second item"
 msgid "Request"
-msgstr ""
+msgstr "Cerere"
 
 msgctxt "join request pending team button first item"
 msgid "Join"
-msgstr ""
+msgstr "A te alătura"
 
 msgctxt "join request pending team button second item"
 msgid "Requested"
-msgstr ""
+msgstr "Solicitat"
 
 msgctxt "join team button first item"
 msgid "Join"
-msgstr ""
+msgstr "A te alătura"
 
 msgctxt "join team button second item"
 msgid "Now"
-msgstr ""
+msgstr "Acum"
 
 msgid "View on Facebook"
-msgstr ""
+msgstr "Vedere pe Facebook"
 
 msgid "Group:"
-msgstr "Group:"
+msgstr "Grup:"
 
 msgid "No Description set"
-msgstr ""
+msgstr "Fără set de Descriere"
 
 msgid "You will now receive notifications whenever public content is posted in this project."
-msgstr ""
+msgstr "Acum veți primi notificări ori de câte ori este publicat conținut public în acest proiect."
 
 msgid "You will now receive notifications whenever public content is posted in this group."
-msgstr ""
+msgstr "Acum veți primi notificări ori de câte ori conținutul public este postat în acest grup."
 
 msgid "more"
-msgstr ""
+msgstr "mai mult"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
-msgstr ""
+msgstr "Raportați conținutul ofensator"
 
 msgid "Please enter a description of why you are reporting this content!"
-msgstr ""
+msgstr "Introduceți o descriere a motivului pentru care raportați acest conținut!"
 
 msgid "(required)"
-msgstr ""
+msgstr "(necesar)"
 
 msgid "Thank you! Your report has been received and we will review the items in question as soon as possible."
-msgstr ""
+msgstr "Mulțumesc! Raportul dvs. a fost primit și vom examina elementele în cauză cât mai curând posibil."
 
 msgid "Send"
-msgstr ""
+msgstr "Trimite"
 
 msgid "Submitting..."
-msgstr ""
+msgstr "Depunere..."
 
 msgid "Close"
-msgstr ""
+msgstr "Închide"
 
 msgid "Avatar will be deleted once you save."
-msgstr ""
+msgstr "Avatarul va fi șters odată ce salvați."
 
 msgctxt "written next to optional form fields"
 msgid "optional"
-msgstr ""
+msgstr "facultativ"
 
 msgid "Call to Action Button"
-msgstr ""
+msgstr "Butonul de apel la acțiune"
 
 msgid "Label of the Button"
-msgstr ""
+msgstr "Eticheta Butonului"
 
 msgid "Link URL"
-msgstr ""
+msgstr "Link-ul URL-lui"
 
 msgid "Enter a place or address."
-msgstr ""
+msgstr "Introduceți un loc sau o adresă."
 
 msgid "Choose and upload a gallery image"
-msgstr ""
+msgstr "Alegeți și încărcați o imagine de galerie"
 
 msgid "Re-Activate Project/Group"
-msgstr ""
+msgstr "Re-Activează Proiectul/Grupul"
 
 msgid "Deactivate Project/Group"
-msgstr ""
+msgstr "Dezactivă Proiectul/Grupul"
 
-#, fuzzy
-#| msgid "Other Projects"
 msgid "Deactivated Projects and Groups"
-msgstr "Other Projects"
+msgstr "Proiectele și Grupuri dezactivate"
 
 msgid "Warning!"
-msgstr ""
+msgstr "Prevenire!"
 
-#, fuzzy
 msgid "You are about to deactivate this project/group!"
-msgstr "Are you sure you want to delete this prject?"
+msgstr "Sunteți pe punctul de a dezactiva acest proiect/grup!"
 
 msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
-msgstr ""
+msgstr "Sunteți pe punctul de a reactiva acest proiect/grup. Acesta și tot conținutul său vor fi din nou vizibile pe site."
 
 msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr ""
+msgstr "Urmează să dezactivezi acest proiect/grup. Acesta și tot conținutul său vor fi ascunse pe site-ul web și invizibile tuturor, inclusiv dvs."
 
 msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-msgstr ""
+msgstr "Acest proces este reversibil. Puteți reactiva proiectul/grupul din profilul dvs. de utilizator în orice moment."
 
 msgid "Re-Activate"
-msgstr ""
+msgstr "Reactiva"
 
 msgid "Deactivate"
-msgstr ""
+msgstr "Deactivă"
 
 #, python-format
 msgid "Delete team “%(team_name)s”"
-msgstr "Delete project “%(team_name)s”"
+msgstr "Ștergeți echipa ”%(team_name)s”"
 
 msgid "Are you sure you want to delete this team?"
-msgstr "Are you sure you want to delete this prject?"
+msgstr "Sunteți sigur că doriți să ștergeți această echipă?"
 
 #, python-format
 msgid "%(team_name)s - Members"
-msgstr "%(team_name)s - Members"
+msgstr "%(team_name)s - Membrii"
 
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
 msgid "Invite registered users..."
-msgstr ""
+msgstr "Echipa invitărilor pentru utilizatorii neînregistrați"
 
 msgid "Invite a member"
-msgstr ""
+msgstr "Invită un membru"
 
 msgid "Enter a user name or email to find users to invite..."
 msgstr ""
 
 #, fuzzy
-#| msgid "Edit Group"
+#| msgid "Invite user"
 msgid "Invite users"
-msgstr "Edit Project"
+msgstr "Invită utilizator"
 
 msgid "Invited Members"
-msgstr ""
+msgstr "Membrii invitați"
 
 msgid "Revoke Invitation"
-msgstr ""
+msgstr "Revocă Invitația"
 
 msgid "Decline Invitation"
-msgstr ""
+msgstr "Refuză Invitația"
 
 msgid "Accept Invitation"
-msgstr ""
+msgstr "Acceptă Invitația"
 
 msgid "Invited to be a member"
-msgstr ""
+msgstr "Invitat să fie membru"
 
-#, fuzzy, python-format
-#| msgid "Do you really want to leave „%(title)s“?"
+#, python-format
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr "Doriți cu adevărat să revocați invitația pentru membru „%(name)s”?"
 
 msgid "Revoke Invitation for Member"
-msgstr ""
+msgstr "Revocă Invitația pentru Membru"
 
-#, fuzzy
-#| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to decline the invitation?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr "Chiar vrei să refuzi invitația?"
+
+msgid "There are no pending invitations."
+msgstr "Nu există invitații în așteptare."
 
 #, fuzzy
-#| msgid "There are no groups."
-msgid "There are no pending invitations."
-msgstr "There are no groups."
-
+#| msgid "Team Invites for Unregistered Users"
 msgid "Invite unregistered users..."
-msgstr ""
+msgstr "Echipa invitărilor pentru utilizatorii neînregistrați"
 
 msgid "Invite People to Register and Join"
-msgstr ""
+msgstr "Invită Oameni să se Înregistreze și să se Alăture"
 
 msgid "Invite people"
-msgstr ""
+msgstr "Invită oameni"
 
 msgid "The email was added to the invite list. Click \"Invite people\" to resend the invitations!"
 msgstr ""
 
 msgid "All currently invited people"
-msgstr ""
+msgstr "Toți oamenii invitați în prezent"
 
 msgid "People currently invited by you"
-msgstr ""
+msgstr "Oameni invitați în prezent de tine"
 
-#, fuzzy
-#| msgid "There are no groups."
 msgid "Delete invitation"
-msgstr "There are no groups."
+msgstr "Șterge invitația"
 
 #, fuzzy
-#| msgid "There are no groups."
+#| msgid "Delete invitation"
 msgid "Resend invitation"
-msgstr "There are no groups."
+msgstr "Șterge invitația"
 
 msgctxt "an action done *by* <username>"
 msgid "by"
-msgstr ""
+msgstr "de"
 
-#, fuzzy, python-format
-#| msgid "Do you really want to leave „%(title)s“?"
+#, python-format
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr "Doriți cu adevărat să ștergeți invitația pentru ”%(title)s”?"
 
 msgid "Membership requests"
-msgstr ""
+msgstr "Solicitări de membru"
 
 msgid "Decline User"
-msgstr ""
+msgstr "Refuz utilizator"
 
 msgid "Accept User"
-msgstr ""
+msgstr "Accept utilizatorul"
 
 msgid "Membership requested"
-msgstr ""
+msgstr "Membru solicitat"
 
 #, python-format
 msgid "Do you really want to accept user „%(name)s“ as a member?"
-msgstr ""
+msgstr "Vrei într-adevăr să accepți utilizatorul „%(name)s” ca membru?"
 
 msgid "Accept Member"
-msgstr ""
+msgstr "Accept membru"
 
 #, python-format
 msgid "Do you really want to decline member „%(name)s“?"
-msgstr ""
+msgstr "Vrei într-adevăr să refuzi membru „%(name)s”?"
 
 msgid "Decline Member"
-msgstr ""
+msgstr "Declină membru"
 
 msgid "There are no new membership requests."
-msgstr ""
+msgstr "Nu există noi solicitări de membru."
 
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
+#| msgid "Invited Members"
 msgid "Current Members"
-msgstr "Convert selected Projects to Groups"
+msgstr "Membrii invitați"
 
 msgid "Message all members"
-msgstr ""
+msgstr "Mesaj tuturor membrilor"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
-msgstr ""
+msgstr "Trimite mesaj"
 
 msgid "Admin"
-msgstr ""
+msgstr "Administrator"
 
 msgid "Member"
-msgstr ""
+msgstr "Membru"
 
 msgid "Kick"
-msgstr "Remove"
+msgstr "Lovitură"
 
 msgid "Make Member"
-msgstr ""
+msgstr "Face membru"
 
 msgid "Make Admin"
-msgstr ""
+msgstr "Face Administratorul"
 
 #, python-format
 msgid "Do you really want to demote administrator „%(name)s“ to member?"
-msgstr ""
+msgstr "Vrei într-adevăr să renunți la administrator „%(name)s” de membru?"
 
 msgid "Demote Admin"
-msgstr ""
+msgstr "Renunță Admin"
 
 #, python-format
 msgid "Do you really want to promote member „%(name)s“ to administrator?"
-msgstr ""
+msgstr "Vrei într-adevăr să promovezi membru „%(name)s” la administrator?"
 
 msgid "Promote Member"
-msgstr ""
+msgstr "Promovează membru"
 
 #, python-format
 msgid "Do you really want to remove member „%(name)s“ from the team?"
-msgstr ""
+msgstr "Vrei cu adevărat să eliminați membru „%(name)s” din echipă?"
 
 msgid "Remove Member"
-msgstr ""
+msgstr "Eliminați Membru"
 
 #, python-format
 msgid "And %(hidden_count)s private users..."
-msgstr ""
+msgstr "Și %(hidden_count)s utilizatori privați..."
 
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
-msgstr ""
+msgstr "Arată toți ceilalți  %(more_count)s utilizatori..."
 
 #, python-format
 msgid "Export Team “%(team_name)s”"
-msgstr "Export Project “%(team_name)s”"
+msgstr "Echipa de Export ”%(team_name)s”"
 
 #, python-format
 msgid "Export %(app_label)s"
-msgstr ""
+msgstr "Export %(app_label)s"
 
 msgctxt "the verb"
 msgid "Export"
-msgstr ""
+msgstr "Export"
 
 #, python-format
 msgid "Edit “%(team_name)s”"
-msgstr "Edit project “%(team_name)s”"
+msgstr "Editați ”%(team_name)s”"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Group"
-msgstr "Create Group"
+msgstr "Creează Grup"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Project"
-msgstr "Create Project"
+msgstr "Creează Proiect"
 
 msgid "Help about groups"
-msgstr ""
+msgstr "Ajutor pentru grupuri"
 
-#, fuzzy
-#| msgid "All projects"
 msgid "Help about projects"
-msgstr "All projects"
+msgstr "Ajutor pentru proiete"
 
 msgid "Help about the microsite"
-msgstr ""
+msgstr "Ajutor pentru microsite"
 
 msgid "Edit Group"
-msgstr "Edit Project"
+msgstr "Editați Grupul"
 
 msgid "Edit Project"
-msgstr "Edit Project"
+msgstr "Editați Proiectul"
 
 msgid "Let's bring this idea to life!"
-msgstr ""
+msgstr "Hai să aducem această idee la viață!"
 
 #, python-format
 msgid "Great to see you're creating a project from the idea \"%(idea_name)s\"!"
-msgstr ""
+msgstr "Minunat să văd că creați un proiect din idee ”%(idea_name)s”!"
 
 msgid "Once you have created your project, everyone who liked (and followed) the idea will receive a notification! They can then jump in and become a member of your new project. Don't worry - you still have to approve who may join and who can't when they request a membership."
-msgstr ""
+msgstr "Odată ce ați creat proiectul dvs., toți celora care le-a plăcut (și au urmat) ideea vor primi o notificare! Ei pot apoi să sară și să devină membru al noului dvs. proiect. Nu vă faceți griji - trebuie totuși să aprobați cine se poate alătura și cine nu poate atunci când solicită un membru."
 
 msgid "Your new project will also be displayed on the idea itself, so that everyone can see it and join in later on."
-msgstr ""
+msgstr "Noul dvs. proiect va fi afișat și pe ideea în sine, astfel încât toată lumea să o poată vedea și să se alăture mai târziu."
 
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
-msgstr ""
+msgstr "Desigur, puteți crea, de asemenea, un proiect fără o conexiune la idee - trebuie doar să faceți clic pe ”Creați Proiect” în partea stângă pentru a face acest lucru."
 
 msgid "General"
-msgstr ""
+msgstr "General"
 
 msgid "Facebook-Integration"
-msgstr ""
+msgstr "Facebook-Integrare"
 
-#, fuzzy
-#| msgid "Group"
 msgid "Group name"
-msgstr "Group"
+msgstr "Numele grupului"
 
-#, fuzzy
-#| msgid "Project Type"
 msgid "Project name"
-msgstr "Project Type"
+msgstr "Numele proiectului"
 
 msgid "Enter a name for the group."
-msgstr "Enter a name for the project."
+msgstr "Introduceți un nume pentru grup."
 
 msgid "Enter a name for the project."
-msgstr "Enter a name for the project."
+msgstr "Introduceți un nume pentru proiect."
 
 msgid "Short description"
-msgstr ""
+msgstr "Scurtă descriere"
 
 msgid "Describe the group in a few sentences."
-msgstr "Describe the project in a few sentences."
+msgstr "Descrie grupul în câteva propoziții."
 
 msgid "Describe the project in a few sentences."
-msgstr "Describe the project in a few sentences."
+msgstr "Descrie proiectul în câteva propoziții."
 
 msgid "This description will be publicly visible."
-msgstr ""
+msgstr "Această descriere va fi vizibilă publicului."
 
 msgid "A picture for better recognition."
-msgstr ""
+msgstr "O imagine pentru o mai bună recunoaștere."
 
 msgid "File Size"
-msgstr ""
+msgstr "Mărime Fișier"
 
 msgid "max. 10 MB"
-msgstr ""
+msgstr "max. 10 MB"
 
 msgid "Upload an image."
-msgstr ""
+msgstr "Încărcați o imagine."
 
 msgid "Reset"
-msgstr ""
+msgstr "Restabili"
 
 msgid "Example: http://mywebsite.com"
-msgstr ""
+msgstr "Exemplu: http://mywebsite.com"
 
 msgid "Where are you active?"
-msgstr ""
+msgstr "Unde ești activ?"
 
 msgid "Remove location"
-msgstr ""
+msgstr "Eliminați locația"
 
 msgid "Add location"
-msgstr ""
+msgstr "Adăugați locația"
 
 msgid "Which Group does the group belong to?"
-msgstr "Which Group does the project belong to?"
+msgstr "Din ce Grup aparține grupul?"
 
 msgid "Select Group"
-msgstr "Select Group"
+msgstr "Selectați grupul"
 
 msgid "Are there any projects/groups related to this one?"
-msgstr ""
+msgstr "Există proiecte/grupuri legate de acesta?"
 
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Select related Projects/Groups"
-msgstr "Convert selected Projects to Groups"
+msgstr "Selectați Proiecte/grupuri conexă"
 
 msgid "Privacy settings"
-msgstr ""
+msgstr "Setările de confidențialitate"
 
 msgid "This will be the default setting for all content created by members."
-msgstr ""
+msgstr "Aceasta va fi setarea implicită pentru tot conținutul creat de membrii."
 
 msgid "This group will be set to be publicly visible!"
-msgstr ""
+msgstr "Acest grup va fi setat să fie vizibil publicului!"
 
 msgid "This project will be set to be publicly visible!"
-msgstr ""
+msgstr "Acest proiect va fi setat să fie vizibil publicului!"
 
 msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
-msgstr ""
+msgstr "Acest lucru înseamnă că orice utilizator înregistrat îl poate accesa și vedea, deși numai membrii pot crea conținut. În plus, tot conținutul va fi setat să fie vizibil public în mod implicit (acesta poate fi modificat pentru fiecare articol la cerere). Orice conținut vizibil poate fi văzut de ORICINE pe internet și poate fi inclus în rezultatele motorului de căutare!"
 
 msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!"
-msgstr ""
+msgstr "Ca administrator al unui grup sau proiect, este responsabilitatea dvs. să vă asigurați că conținutul postat de membrii săi nu încălcă niciun drept de autor sau alte legi. Vă rugăm să rețineți acest lucru, în special atuncă când activați setarea de vizibilitate publică!"
 
 msgid "If you do not wish this, you can change the visibility setting above."
-msgstr ""
+msgstr "Dacă nu doriți acest lucru, puteți modifica setarea de vizibilitate de mai sus."
 
 msgid "Which apps should be activated?"
-msgstr ""
+msgstr "Ce aplicații trebuie activate?"
 
 msgid "This App can only be activated for a Group, but not for a Project!"
-msgstr ""
+msgstr "Această Aplicație poate fi activată doar pentru un Grup, dar nu și pentru un Proiect!"
 
 msgid "Description and Infos"
-msgstr ""
+msgstr "Descriere și Informații"
 
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
-msgstr ""
+msgstr "Aceasta este o descriere publică care poate fi văzută de oricine și va fi afișată pe microsite."
 
 msgid "Contact info"
-msgstr ""
+msgstr "Informații de contact"
 
 msgid "How you can be reached, addresses, social media, etc..."
-msgstr ""
+msgstr "Cum poți fi contactat, adrese, social media, și etc..."
 
 msgid "From which apps should public items be shown on the microsite?"
-msgstr ""
+msgstr "Din care aplicații ar trebui să fie afișate articole publice pe microsite?"
 
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 msgid "Youtube or Vimeo URL"
-msgstr ""
+msgstr "Youtube sau Vimeo URL"
 
 msgid "https://www.youtube.com/watch?v=example-video"
-msgstr ""
+msgstr "https://www.youtube.com/watch?v=example-video"
 
 msgid "Twitter: Embedded User Timeline"
-msgstr ""
+msgstr "Twitter: Cronologia Utilizatorului Încorporată"
 
 msgid "Twitter Username (example: @username)"
-msgstr ""
+msgstr "Twitter Nume de Utilizator (exemplu: @username)"
 
 msgid "Twitter: Embedded Hashtag or Custom Timeline"
-msgstr ""
+msgstr "Twitter: Hashtag Încorporat sau Cronologie Personalizată"
 
 msgid "You can create a custom twitter timeline here:"
-msgstr ""
+msgstr "Puteți crea o cronologie twitter personalizată aici:"
 
 msgid "Widget-id (example: 744907261810618721) or embed-code (HTML)"
-msgstr ""
+msgstr "Widget-id (exemplu: 744907261810618721) sau cod ascuns (HTML)"
 
 msgid "Embed Flickr Gallery"
-msgstr ""
+msgstr "Încorporați Flickr Gallery"
 
 msgid "Flickr Gallery URL (example: \"https://www.flickr.com/photos/username/sets/1234567890\")"
-msgstr ""
+msgstr "Flickr Gallery URL (exemplu: ”https://www.flickr.com/photos/username/sets/1234567890”)"
 
 msgid "Microsite Gallery Images"
-msgstr ""
+msgstr "Microsite Galeria Imagini"
 
 msgid "Remove gallery image"
-msgstr ""
+msgstr "Eliminați galeria imaginea"
 
 msgid "Add gallery image"
-msgstr ""
+msgstr "Adăugați galeria imaginea"
 
 msgid "Show Microsite Call to Action Box"
-msgstr ""
+msgstr "Afișați Apelul Microsite la Action Box"
 
 msgid "A box shown on the microsite that contains buttons to your external campaigns or websites"
-msgstr ""
+msgstr "Un box afișat pe microsite-ul care conține butoane pentru campaniile sau site-urile dvs. externe"
 
 msgid "Show Call to Action Box"
-msgstr ""
+msgstr "Afișați Apelul la Boxul de Acțiune"
 
 msgid "Call to Action Box Title"
-msgstr ""
+msgstr "Apel la Titlul Acțiunii Box"
 
 msgid "Title of the box header"
-msgstr ""
+msgstr "Titlul antetului de box"
 
 msgid "Description text inside the box"
-msgstr ""
+msgstr "Textul de descriere din interiorul cutiei"
 
 msgid "Remove button"
-msgstr ""
+msgstr "Butonul de eliminare"
 
 msgid "Add button"
-msgstr ""
+msgstr "Adăugați butonul"
 
 msgid "Facebook integration is available after you created the group!"
-msgstr ""
+msgstr "Integrarea Facebook este disponibilă după ce ați creat grupul!"
 
 msgid "Facebook integration is available after you created the project!"
-msgstr ""
+msgstr "Integrarea Facebook este disponibilă după ce ați creat proiectul!"
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
 
+#, fuzzy
+#| msgid "You are not following any ideas yet."
 msgid "You may use the following variables:"
-msgstr ""
+msgstr "Nu urmați niciun fel de idei."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
-msgstr ""
+msgstr "Invitații"
 
 msgid "About me"
-msgstr ""
+msgstr "Despre mine"
 
 msgid "Related to"
-msgstr ""
+msgstr "În legătură cu"
 
 msgid "Your Profile"
-msgstr ""
+msgstr "Profilul Tău"
 
 msgid "Overview"
-msgstr ""
+msgstr "Prezentare generală"
 
 msgid "To the Forum"
-msgstr ""
+msgstr "La Forum"
 
 msgctxt "Group"
 msgid "Public"
-msgstr ""
+msgstr "Public"
 
 msgid "Not a member"
-msgstr ""
+msgstr "Nu e membru"
 
 msgid "(Inactive)"
-msgstr ""
+msgstr "(Inactiv)"
 
 msgid "Leave"
-msgstr ""
+msgstr "Lăsați"
 
 msgid "Withdraw"
-msgstr ""
+msgstr "Retrage"
 
 msgid "Details"
-msgstr "Details"
+msgstr "Detalii"
 
 #, python-format
 msgid "Do you really want to leave „%(title)s“?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr "Chiar vrei să lași „%(title)s”?"
 
 msgid "There are no groups."
-msgstr "There are no groups."
+msgstr "Nu există grupuri."
 
 msgid "There are no projects."
-msgstr ""
+msgstr "Nu există proiecte."
 
-#, fuzzy
-#| msgid "There are no groups."
 msgid "There are no invitations."
-msgstr "There are no groups."
+msgstr "Nu există invitații."
 
 msgid "Map"
-msgstr ""
+msgstr "Hartă"
 
 msgid "Not happy with how your Microsite looks?"
-msgstr ""
+msgstr "Nu ești mulțumit de aspectul Microsite-lui tău?"
 
 msgid "Change it here..."
-msgstr ""
+msgstr "Schimbă-l aici..."
 
 msgid "You have been invited to collaborate!"
-msgstr ""
+msgstr "Ai fost invitat să colaborezi!"
 
 msgid "Register and join!"
-msgstr ""
+msgstr "Înregistrați-vă și alăturați-vă!"
 
 msgid "Join now and collaborate!"
-msgstr ""
+msgstr "Alătură-te acum și colaborează!"
 
 msgid "Register"
-msgstr ""
+msgstr "Înregistrează-te"
 
 msgid "Login"
-msgstr ""
+msgstr "Autentificare"
 
 msgid "You are a member!"
-msgstr ""
+msgstr "Ești membru!"
 
-#, fuzzy
-#| msgid "Edit Project"
 msgid "View Project"
-msgstr "Edit Project"
+msgstr "Vezi Proiect"
 
-#, fuzzy
-#| msgid "Edit Group"
 msgid "View Group"
-msgstr "Edit Project"
+msgstr "Vezi Grupul"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership request pending..."
-msgstr ""
+msgstr "Cerere de membru în așteptare..."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are invited!"
-msgstr ""
+msgstr "Ești invitat!"
 
 msgid "Collaborate!"
-msgstr ""
+msgstr "Colabora!"
 
-#, fuzzy
 msgid "Join now!"
-msgstr "Join Project"
+msgstr "Alătură-te acum!"
 
 msgid "Browse"
-msgstr ""
+msgstr "Naviga"
 
-#, fuzzy
-#| msgid "All Projects"
 msgid "Public Project"
-msgstr "All Projects"
+msgstr "Proiect Public"
 
-#, fuzzy
-#| msgid "Select Group"
 msgid "Public Group"
-msgstr "Select Group"
+msgstr "Proiect Public"
 
 msgid "News posts"
-msgstr ""
+msgstr "Postări de știri"
 
-#, fuzzy
-#| msgid "About the group"
 msgid "About the Project"
-msgstr "About the project"
+msgstr "Despre Proiect"
 
-#, fuzzy
-#| msgid "About the group"
 msgid "About the Group"
-msgstr "About the project"
+msgstr "Despre Grup"
 
 msgid "There is no description for this project yet."
-msgstr ""
+msgstr "Încă nu există o descriere pentru acest proiect."
 
 msgid "There is no description for this group yet."
-msgstr ""
+msgstr "Încă nu există o descriere pentru acest grup."
 
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Related Projects/Groups"
-msgstr "Convert selected Projects to Groups"
+msgstr "Proiecte/grupuri conexe"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will now receive notifications whenever public content is posted in this project."
 msgid "You will now receive notifications for content posted in this project."
-msgstr ""
+msgstr "Acum veți primi notificări ori de câte ori este publicat conținut public în acest proiect."
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will now receive notifications whenever public content is posted in this group."
 msgid "You will now receive notifications for content posted in this group."
-msgstr ""
+msgstr "Acum veți primi notificări ori de câte ori conținutul public este postat în acest grup."
 
 msgid "Share"
-msgstr ""
+msgstr "Acțiune"
 
 msgid "Share on Facebook"
-msgstr ""
+msgstr "Share pe Facebook"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 msgid "No contact data has been added yet."
-msgstr ""
+msgstr "Nu au fost adăugate încă date de contact."
 
 msgid "Project Administrator"
-msgstr ""
+msgstr "Administrator de Proiect"
 
 msgid "Group Administrator"
-msgstr ""
+msgstr "Administrator de Grup"
 
 msgid "Tweets"
-msgstr ""
+msgstr "Tweeturi"
 
 msgid "Flickr Gallery"
-msgstr ""
+msgstr "Galeria Flickr"
 
 msgid "Call to Action"
-msgstr ""
+msgstr "Apel la Acțiune"
 
 #, python-format
 msgid "Users in team %(group)s"
-msgstr "Users in project %(group)s"
+msgstr "Utilizatorii în echipă %(group)s"
 
 msgid "Add user"
-msgstr ""
+msgstr "Adăugați utilizator"
 
 msgid "There are no visible users."
-msgstr ""
+msgstr "Nu există utilizatori vizibili."
 
 msgid "All projects"
-msgstr "All projects"
+msgstr "Toate proiectele"
 
 msgid "All groups"
-msgstr "All projects"
+msgstr "Toate grupurile"
 
 msgid "All users"
-msgstr ""
+msgstr "Toți utilizatorii"
 
 msgid "Portal Administrators"
-msgstr ""
+msgstr "Administratorii Portalului"
 
-#, fuzzy
-#| msgid "All projects"
 msgid "All societies"
-msgstr "All projects"
+msgstr "Toate societățiile"
 
-#, fuzzy
 msgid "Re-activate Group"
-msgstr "Create Project"
+msgstr "Re-activează Grupul"
 
-#, fuzzy
 msgid "Deactivate Group"
-msgstr "Create Project"
+msgstr "Dezactivă Grupul"
 
-#, fuzzy
 msgid "Activate Project"
-msgstr "Create Project"
+msgstr "Activează Proiectul"
 
-#, fuzzy
 msgid "Deactivate Project"
-msgstr "Create Project"
+msgstr "Dezactivă Proiectul"
 
 msgid "Withdraw Request"
-msgstr ""
+msgstr "Cerere de retragere"
 
 msgid "Add container"
-msgstr ""
+msgstr "Adăugați recipient"
 
 msgid "Add"
-msgstr ""
+msgstr "Adaugă"
 
 msgid "Move to another Folder"
-msgstr ""
+msgstr "Treceți la alt Dosar"
 
 msgid "Move"
-msgstr ""
+msgstr "Mișcare"
 
 #, python-format
 msgid "A message from %(sender_full_name)s"
-msgstr ""
+msgstr "Un mesaj din %(sender_full_name)s"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Project"
 msgid "Create Idea"
-msgstr "Create Project"
+msgstr "Crea Idee"
 
-#, fuzzy
-#| msgid "There are no groups."
 msgid "Delete this idea"
-msgstr "There are no groups."
+msgstr "Ștergeți această idee"
 
-#, fuzzy, python-format
-#| msgid "Do you really want to leave „%(title)s“?"
+#, python-format
 msgid "Do you really want to delete idea „%(title)s“?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr "Vrei cu adevărat să ștergeți ideea „%(title)s”?"
 
 msgid "Delete Idea"
-msgstr ""
+msgstr "Șterge Ideea"
 
 msgid "Edit Idea"
-msgstr ""
+msgstr "Editați Ideea"
 
 msgid "We make your ideas heard!"
-msgstr ""
+msgstr "Îți facem ideile auzite!"
 
 msgid "Ideas are a great way to inspire poeple and start a project in your region!"
-msgstr ""
+msgstr "Ideile sunt o modalitate excelentă de a inspira oamenii și de a începe un proiect în regiunea dvs.!"
 
 msgid "Anyone can create a project based on your idea and there is no limit on how many projects can be created. Your idea will remain visible and will even show a list of all the projects inspired by it!"
-msgstr ""
+msgstr "Oricine poate crea un proiect pe baza ideii dvs. și nu există nici o limită la câte proiecte pot fi create. Ideea ta va rămâne vizibilă și chiar va arăta o listă cu toate proiectele inspirate de ea!"
 
 msgid "You and anyone who like (and follow) your idea will be notified when a new project gets created from it. This way, everyone who is interested can jump right into it and become active in the new project (they still have to ask permission to become a member)."
-msgstr ""
+msgstr "Dvs. și oricui doriți (și urmăriți) ideea dvs. vor fi anunțați atunci când un nou proiect va fi creat din acesta. În acest fel, toți cei interesați pot sări direct în el și pot deveni activi în noul proiect (trebuie să ceară permisiunea de a deveni membru)."
 
-#, fuzzy
-#| msgid "Enter a name for the project."
 msgid "Enter a descriptive title for your idea"
-msgstr "Enter a name for the project."
+msgstr "Introduceți un titlu descriptiv pentru ideea dvs"
 
 msgid "The description for your idea. Explain your vision and your goals."
-msgstr ""
+msgstr "Descrierea pentru ideea ta. Explicați-vă viziunea și obiectivele."
 
 msgid "We could not find an address for your location. Please enter an address manually!"
-msgstr ""
+msgstr "Nu am găsit o adresă pentru locația dvs. Vă rugăm să introduceți o adresă manual!"
 
 msgid "This will determine who can see your idea."
-msgstr ""
+msgstr "Acest lucru va determina cine vă poate vedea ideea."
 
 msgid "This idea will be set to be publicly visible!"
-msgstr ""
+msgstr "Această idee va fi setată să fie vizibilă publicului!"
 
 msgid "Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
-msgstr ""
+msgstr "Conținutul vizibil public poate fi văzut de ORICINE pe internet și poate fi inclus în rezultatele motorului de căutare!"
 
 msgid "Registered users only"
-msgstr ""
+msgstr "Doar utilizatorii înregistrați"
 
 msgid "Edit folder"
-msgstr ""
+msgstr "Editarea dosarului"
 
 msgid "Folder name"
-msgstr ""
+msgstr "Numele dosarului"
 
 msgid "Delete folder"
-msgstr ""
+msgstr "Ștergeți dosarul"
 
 msgid "Download"
-msgstr ""
+msgstr "Descarcă"
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
-msgstr ""
+msgstr "Doriți cu adevărat să ștergeți acest dosar și TOATE dosarele și elementele pe care le conține? Aceste acțiuni NU pot fi rezervate!"
 
 msgid "Gesendet"
-msgstr ""
+msgstr "Dent s-a înălțat mult"
 
 msgid "Archiv"
-msgstr ""
+msgstr "Archiv"
 
 msgid "Papierkorb"
-msgstr ""
+msgstr "Gunoi"
 
 msgid "Verfassen"
-msgstr ""
+msgstr "Scrie"
 
 msgid "Back"
-msgstr ""
+msgstr "Înapoi"
 
 msgid "Back to"
-msgstr ""
+msgstr "Înapoi la"
 
 msgid "New folder name"
-msgstr ""
+msgstr "Nume nou de dosar"
 
 msgid "Create folder"
-msgstr ""
+msgstr "Creează dosar"
 
 #, python-format
 msgid ""
@@ -2703,6 +2631,9 @@ msgid ""
 "\n"
 "Here is a summary: %(msg)s"
 msgstr ""
+"%(site_name)s CSV importul nu a reușit!\n"
+"\n"
+"Iată un rezumat: %(msg)s"
 
 #, python-format
 msgid ""
@@ -2710,6 +2641,9 @@ msgid ""
 "\n"
 "Here is why: %(msg)s"
 msgstr ""
+"Importul CSV pe %(site_name)s a eșuat.\n"
+"\n"
+"Iată de ce: %(msg)s"
 
 #, python-format
 msgid ""
@@ -2717,10 +2651,13 @@ msgid ""
 "\n"
 "Here is a summary: %(msg)s"
 msgstr ""
+"Importul CSV pe %(site_name)s a avut succes.\n"
+"\n"
+"Iată un rezumat: %(msg)s"
 
 #, python-format
 msgid "%(site_name)s CSV import was successful"
-msgstr ""
+msgstr "%(site_name)s CSV importul a avut succes"
 
 #, python-format
 msgid ""
@@ -2742,10 +2679,27 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
+"Utilizator ”%(sender_name)s” a raportat articolul ”%(object_name)s” a fi ofensator.\n"
+"\n"
+"Motivul, așa cum a fost scris de reporter:\n"
+"”%(report_text)s”\n"
+"\n"
+"\n"
+"Puteți vizualiza articolele în cauză aici:\n"
+"%(object_url)s\n"
+"\n"
+"Accesați pagina următoare pentru a răspunde la raport:\n"
+"%(domain_url)s%(report_admin_url)s\n"
+"\n"
+"\n"
+"(Primiți acest e-mail pentru că sunteți administratorul acestui portal.)\n"
+"\n"
+"\n"
+"A ta %(site_name)s Echipă"
 
 #, python-format
 msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
-msgstr ""
+msgstr "Articol ofensat raportat: ”%(object_name)s” pe %(site_name)s!"
 
 #, python-format
 msgid ""
@@ -2765,6 +2719,21 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
+"Salut %(user_name)s,\n"
+"\n"
+"tocmai ai înregistrat un cont la %(site_name)s. Ne bucurăm să te vedem!\n"
+"\n"
+"Va trebui să vă confirmați e-mailul %(user_email)s înainte să vă puteți autentifica.\n"
+"\n"
+"\n"
+"Vă rugăm să faceți clic pe următorul link pentru a vă confirma adresa de e-mail (sau copiați și lipiți linkul în browser):\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
+"\n"
+"\n"
+"\n"
+"Mulțumesc și ne vedem curând!\n"
+"\n"
+"A ta %(site_name)s Echipă"
 
 #, python-format
 msgid ""
@@ -2782,10 +2751,23 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
+"Salut %(user_name)s,\n"
+"\n"
+"tocmai v-ați schimbat adresa de e-mail la %(site_name)s.\n"
+"\n"
+"Va trebui să vă confirmați e-mailul %(user_email)s înainte ca modificările să intre în vigoare.\n"
+"\n"
+"\n"
+"Vă rugăm să faceți clic pe următorul link pentru a vă confirma adresa de e-mail (sau copiați și lipiți linkul în browser):\n"
+"%(domain_url)s%(user_verification_url)s\n"
+"\n"
+"\n"
+"\n"
+"A ta %(site_name)s Echipă"
 
 #, python-format
 msgid "Please verify your email address for %(site_name)s!"
-msgstr ""
+msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
 
 #, python-format
 msgid ""
@@ -2798,10 +2780,18 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
+"Utilizator ”%(sender_name)s” a acceptat invitația de a vă alătura ”%(team_name)s”.\n"
+"\n"
+"Primiți acest e-mail deoarece sunteți administrator al acestei echipe.\n"
+"\n"
+"(Urmați acest link pentru a modifica preferințele de notificare: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"A ta %(site_name)s Echipă"
 
 #, python-format
 msgid "%(sender_name)s has accepted the invitation to %(team_name)s on %(site_name)s!"
-msgstr ""
+msgstr "%(sender_name)s a acceptat invitația la %(team_name)s în %(site_name)s!"
 
 #, python-format
 msgid ""
@@ -2814,10 +2804,18 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
+"Utilizator ”%(sender_name)s” a refuzat invitația de a vă alătura ”%(team_name)s”.\n"
+"\n"
+"Primiți acest e-mail deoarece sunteți administrator al acestei echipe.\n"
+"\n"
+"(urmați acest link pentru a modifica preferințele de notificare: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"A ta %(site_name)s Echipă"
 
 #, python-format
 msgid "%(sender_name)s has declined the invitation to %(team_name)s on %(site_name)s!"
-msgstr ""
+msgstr "%(sender_name)s a refuzat invitația la %(team_name)s sau %(site_name)s!"
 
 #, python-format
 msgid ""
@@ -2826,10 +2824,14 @@ msgid ""
 "\n"
 "You have been invited to join \"%(team_name)s\"! Follow the link below to join and get active!"
 msgstr ""
+"Salut, %(user_name)s!\n"
+"\n"
+"\n"
+"Ai fost invitat să te înscrii ”%(team_name)s”! Urmați linkul de mai jos pentru a vă alătura și a vă activa!"
 
 #, python-format
 msgid "The %(site_name)s team"
-msgstr ""
+msgstr "Cea %(site_name)s echipă"
 
 #, python-format
 msgid ""
@@ -2837,9 +2839,12 @@ msgid ""
 "\n"
 "Your membership request for %(team_name)s has been accepted!"
 msgstr ""
+"Salut, %(user_name)s!\n"
+"\n"
+"Cererea de membru pentru %(team_name)s a fost acceptat!"
 
 msgid "Follow this link to get active:"
-msgstr ""
+msgstr "Urmați acest link pentru a deveni activ:"
 
 #, python-format
 msgid ""
@@ -2847,9 +2852,12 @@ msgid ""
 "\n"
 "We're sorry, but your membership request for %(team_name)s has been declined."
 msgstr ""
+"Salut, %(user_name)s!\n"
+"\n"
+"Ne pare rău, dar cererea dvs. de membru pentru %(team_name)s a fost refuzat."
 
 msgid "If you feel this is unfair, we suggest you contact one of the team's administrators for further information:"
-msgstr "If you feel this is unfair, we suggest you contact one of the project's administrators for further information:"
+msgstr "Dacă considerați că acest lucru este nedrept, vă sugerăm să contactați cu unul dintre administratorii echipei pentru informații suplimentare:"
 
 #, python-format
 msgid ""
@@ -2865,10 +2873,21 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
+"Utilizator ”%(sender_name)s” a solicitat să se alăture %(team_name)s.\n"
+"\n"
+"Vă rugăm să accesați pagina următoare pentru a accepta sau a refuza solicitarea:\n"
+"%(domain_url)s%(group_page_url)s\n"
+"\n"
+"Primiți acest e-mail deoarece sunteți administrator al acestei echipe.\n"
+"\n"
+"(Urmați acest link pentru a modifica preferințele de notificare: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"A ta %(site_name)s Echipă"
 
 #, python-format
 msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
-msgstr ""
+msgstr "%(sender_name)s vrea să se alăture %(team_name)s pe %(site_name)s!"
 
 #, python-format
 msgid ""
@@ -2888,13 +2907,25 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-
-#, fuzzy, python-format
-msgid "New user request: %(user_name)s wants to join %(site_name)s!"
-msgstr ""
-"Hi %(admin_name)s,\n"
+"Utilizator ”%(user_name)s” (%(user_mail)s) a solicitat să se alăture %(site_name)s.\n"
 "\n"
-"The user %(user_name)s wants to join project %(team_name)s."
+"Utilizatorul nu se va putea autentifica până când nu (sau un alt Portal-Admin) aprobă cererea sa.\n"
+"\n"
+"Dacă doriți să aprobați solicitarea de aderare a utilizatorului, faceți clic pe următorul link:\n"
+"%(domain_url)s%(user_approve_url)s\n"
+"\n"
+"\n"
+"Faceți clic aici pentru a respinge solicitarea:%(domain_url)s%(user_deny_url)s\n"
+"\n"
+"\n"
+"Primiți acest e-mail pentru că sunteți administrator de portal.\n"
+"\n"
+"\n"
+"A ta %(site_name)s Echipă"
+
+#, python-format
+msgid "New user request: %(user_name)s wants to join %(site_name)s!"
+msgstr "Cerere de utilizator nou: %(user_name)s vrea să se alăture %(site_name)s!"
 
 #, python-format
 msgid ""
@@ -2918,7 +2949,7 @@ msgstr ""
 
 #, python-format
 msgid "Your request to join %(site_name)s was approved!"
-msgstr ""
+msgstr "Cererea dvs. de a vă alătura %(site_name)s a fost aprobat!"
 
 #, python-format
 msgid ""
@@ -2928,10 +2959,15 @@ msgid ""
 "\n"
 "Your %(site_name)s Team:"
 msgstr ""
+"Cererea dvs. de a deveni membru %(site_name)s a fost respins.\n"
+"\n"
+"Dacă aveți întrebări, vă rugăm să contactați unul dintre administratorii site-ului dvs., așa cum sunt enumerați mai jos.\n"
+"\n"
+"A ta %(site_name)s Echipă:"
 
 #, python-format
 msgid "Your request to join %(site_name)s was denied."
-msgstr ""
+msgstr "Cererea dvs. de a vă alătura %(site_name)s a fost respins."
 
 #, python-format
 msgid ""
@@ -2942,10 +2978,16 @@ msgid ""
 "Until then, with warm greetings, \n"
 "your %(site_name)s Team"
 msgstr ""
+"Salut! Suntem fericiți să știm că doriți să deveniți membru %(site_name)s.\n"
+"\n"
+"Administratorii vor examina solicitarea dvs. și vor aproba contul de utilizator în curând!\n"
+"\n"
+"Până atunci, cu salutări calde,\n"
+"a ta %(site_name)s Echipă"
 
 #, python-format
 msgid "You have requested to become a member of %(site_name)s!"
-msgstr ""
+msgstr "Ai solicitat să devii membru al %(site_name)s!"
 
 #, python-format
 msgid ""
@@ -2961,10 +3003,21 @@ msgid ""
 "\n"
 "Your %(site_name)s Team."
 msgstr ""
+"Salut %(receiver_name)s,\n"
+"\n"
+"ai fost etichetat în ”%(object_name)s” în %(team_name)s de %(sender_name)s.\n"
+"\n"
+"Îl puteți găsi urmărind acest link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Urmați acest link pentru a modifica preferințele de notificare: %(notification_settings_url)s )\n"
+"\n"
+"A ta %(site_name)s Echipă."
 
 #, python-format
 msgid "You were tagged in: \"%(object_name)s\", in %(team_name)s"
-msgstr ""
+msgstr "Ai fost etichetat în: ”%(object_name)s”, în %(team_name)s"
 
 #, python-format
 msgid ""
@@ -2980,1080 +3033,1026 @@ msgid ""
 "\n"
 "%(domain_url)s"
 msgstr ""
+"Salut %(user_name)s,\n"
+"\n"
+"tocmai ai acceptat Termenii de Servicii la %(site_name)s. Aici este o copie pentru înregistrările dvs.\n"
+"\n"
+"\n"
+"%(tos_content)s\n"
+"\n"
+"\n"
+"A ta %(site_name)s Echipă\n"
+"\n"
+"%(domain_url)s"
 
 msgid "Additional options"
-msgstr ""
+msgstr "Opțiuni suplimentare"
 
 msgid "Attach files, add a location, mark topics and adjust visibility settings"
-msgstr ""
+msgstr "Atașați fișierele, adăugați o locație, marcați subiecte și ajustați setările de vizibilitate"
 
 msgid "Tag persons"
-msgstr ""
+msgstr "Eticheta persoane"
 
 msgid "Select tags"
-msgstr ""
+msgstr "Selectați etichetele"
 
 msgid "Place or adress"
-msgstr ""
+msgstr "Locul sau adresa"
 
 msgid "Upload a file or image or attach an existing one"
-msgstr ""
+msgstr "Încărcați un fișier sau o imagine sau atașați una existentă"
 
 msgid "Select topic"
-msgstr ""
+msgstr "Selectați subiectul"
 
 msgid "Visibility"
-msgstr ""
+msgstr "Vizibilitate"
 
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
-msgstr ""
+msgstr "Acest articol va fi postat ca public vizibil! Aceasta înseamnă că oricine de pe internet îl poate accesa și vedea și poate fi inclus în rezultatele motorului de căutare."
 
 msgid "If you do not wish this, you can change this item's visibility setting below."
-msgstr ""
+msgstr "Dacă nu doriți acest lucru, puteți modifica setarea de vizibilitate a acestui articol de mai jos."
 
-#, fuzzy
-#| msgid "Other Projects"
 msgid "Show more options..."
-msgstr "Other Projects"
+msgstr "Arată mai multe opțiuni..."
 
 msgid "Which topics are you involved with?"
-msgstr ""
+msgstr "Cu ce subiecte sunteți implicat?"
 
 msgid "Select topics"
-msgstr ""
+msgstr "Selectă subiecte"
 
 msgid "Which tags further describe your activities?"
-msgstr ""
+msgstr "Ce etichete descriu în continuare activitățile tale?"
 
 msgid "Select or create tags"
-msgstr ""
+msgstr "Selectați sau creați etichete"
 
 msgid "Topics we are involved with"
-msgstr ""
+msgstr "Subiecte cu care suntem implicați"
 
 msgid "Activities and interests"
-msgstr ""
+msgstr "Activități și interese"
 
 msgid "Where would your idea be realized?"
-msgstr ""
+msgstr "Unde s-ar realiza ideea ta?"
 
 msgid "Enter a place or address and then choose a point on the map."
-msgstr ""
+msgstr "Introduceți un loc sau o adresă și apoi alegeți un punct pe hartă."
 
 msgid "Which topics fit your idea?"
-msgstr ""
+msgstr "Ce subiecte se potrivesc ideii tale?"
 
 msgid "Where do you live?"
-msgstr ""
+msgstr "Unde locuiți?"
 
 msgid "Set your location to let other users find your profile on the map (as long as your privacy setting permits it). You will also start out there when you open the map."
-msgstr ""
+msgstr "Setați-vă locația pentru a permite altor utilizatori să-și găsească profilul pe hartă (atât timp cât setarea dvs. de confidențialitate o permite). Veți începe, de asemenea, acolo când deschideți harta."
 
 msgid "Which topics are you interested in?"
-msgstr ""
+msgstr "Ce subiecte vă interesează?"
 
 msgid "What would you like to learn?"
-msgstr ""
+msgstr "Ce ai vrea să înveți?"
 
 msgid "Who may see your plattform profile?"
-msgstr ""
+msgstr "Cine poate vedea profilul platformei tale?"
 
 msgid "Your profile will be set to be publicly visible!"
-msgstr ""
+msgstr "Profilul dvs. va fi setat să fie vizibil publicului!"
 
 msgid "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!"
-msgstr ""
+msgstr "Acest lucru înseamnă că numele, avatarul și profilul utilizatorului dvs. pot fi văzute de ORICINE pe internet și pot fi incluse în rezultatele motorului de căutare!"
 
 msgid "Please note that changes in this setting will not have an immediate effect on search engine results! Depending on the search provider, it might take days or weeks until this setting is reflected in their results."
-msgstr ""
+msgstr "Vă rugăm să rețineți că modificările din această setare nu vor avea un efect imediat asupra rezultatelor motorului de căutare! În funcție de furnizorul de căutare, poate dura zile sau săptămâni până când această setare este reflectată în rezultatele acestora."
 
 msgid "Privacy"
-msgstr ""
+msgstr "Private"
 
 msgid "My location"
-msgstr ""
+msgstr "Locația mea"
 
 msgid "Topics I am interested in"
-msgstr ""
+msgstr "Subiecte de care mă interesează"
 
 msgid "What I wish to learn"
-msgstr ""
+msgstr "Ce vreau să învăț"
 
 msgid "Logged in Members only"
-msgstr ""
+msgstr "Autentificat numai Membrii"
 
 msgid "Everybody"
-msgstr ""
+msgstr "Toată lumea"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Toggle navigation"
-msgstr ""
+msgstr "Comutare navigare"
 
 msgid "My Profile"
-msgstr ""
+msgstr "Profilul Meu"
 
+#, fuzzy
+#| msgid "My Contribution"
 msgid "Your Contribution"
-msgstr ""
+msgstr "Contribuția mea"
 
 msgid "Logout"
-msgstr ""
+msgstr "Deconectare"
 
 msgid "Forum"
-msgstr ""
+msgstr "Forum"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
-msgstr ""
+msgstr "Oameni"
 
-#, fuzzy
-#| msgid "Edit Group"
 msgid "Invited Groups"
-msgstr "Edit Project"
+msgstr "Invită Grupuri"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Groups"
-msgstr "My Groups"
+msgstr "Grupurile Mele"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Groups"
-msgstr "All Groups"
+msgstr "Toate Grupurile"
 
-#, fuzzy
-#| msgid "Edit Project"
 msgid "Invited Projects"
-msgstr "Edit Project"
+msgstr "Proiecte Invitate"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
-msgstr "My Projects"
+msgstr "Proiectele Mele"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Projects"
-msgstr "All Projects"
+msgstr "Toate Proiectele"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas"
-msgstr ""
+msgstr "Idei"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "My teams"
 msgid "My Ideas"
-msgstr "My projects"
+msgstr "Ideile Mele"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Ideas"
-msgstr ""
+msgstr "Toate Ideile"
 
 msgid "Search..."
-msgstr ""
+msgstr "Căutare..."
 
 msgid "Search"
-msgstr ""
+msgstr "Căutare"
 
 msgid "Messages"
-msgstr ""
+msgstr "Mesaje"
 
 msgid "My Stream"
-msgstr "Activities"
+msgstr "Fluxul meu"
 
 msgid "Not logged in."
-msgstr ""
+msgstr "Nu te-ai autentificat."
 
 msgid "You cannot create or edit events until you are logged in!"
-msgstr ""
+msgstr "Nu puteți crea sau edita evenimente până nu sunteți autentificat!"
 
 msgid "No anonymous access!"
-msgstr ""
+msgstr "Fără acces anonim!"
 
 msgid "This website allows no anonymous access."
-msgstr ""
+msgstr "Acest site web nu permite accesul."
 
 msgid "Log in..."
-msgstr ""
+msgstr "Autentificare..."
 
 msgctxt "read and accept the [Terms of Services]"
 msgid "I have read and accept the"
-msgstr ""
+msgstr "Am citit și accept"
 
 msgid "Terms and Services"
-msgstr ""
+msgstr "Termeni și Servicii"
 
 msgid "Forgot password?"
-msgstr ""
+msgstr "Ai uitat?"
 
 msgid "Logged out"
-msgstr ""
+msgstr "Delogat"
 
 msgid "Log in"
-msgstr ""
+msgstr "Autentificare"
 
 msgid "Password"
-msgstr ""
+msgstr "Parola"
 
 msgid "Password change"
-msgstr ""
+msgstr "Schimbare parolă"
 
 msgid "Change password"
-msgstr ""
+msgstr "Schimbați parola"
 
 msgid "Password cannot be changed!"
-msgstr ""
+msgstr "Parola nu poate fi modificată!"
 
 msgid "Sorry, but your account is associated with an integrated Portal! This means that neither your email, nor your password cannot be changed."
-msgstr ""
+msgstr "Ne pare rău, dar contul dvs. este asociat cu un Portal integrat! Aceasta înseamnă că nici e-mailul dvs., nici parola dvs. nu pot fi schimbate."
 
 msgid "Please contact an administrator if this is an issue for you."
-msgstr ""
+msgstr "Vă rugăm să contactați un administrator dacă acesta este o problemă pentru dvs."
 
 msgid "Password reset"
-msgstr ""
+msgstr "Resetare parola"
 
 msgid "Your password has been changed successfully!"
-msgstr ""
+msgstr "Parola dvs. a fost modificată cu succes!"
 
 msgid "Enter old password"
-msgstr ""
+msgstr "Introduceți parola veche"
 
 msgid "We need to make sure it's really you"
-msgstr ""
+msgstr "Trebuie să ne asigurăm că ești cu adevărat tu"
 
 msgid "Old password"
-msgstr ""
+msgstr "Parola veche"
 
 msgid "New Password"
-msgstr ""
+msgstr "Parola Nouă"
 
 msgid "Enter a password you don't use anywhere else. The longer the better!"
-msgstr ""
+msgstr "Introduceți o parolă pe care nu o utilizați în altă parte. Cu cât mai mult cu atât mai bine!"
 
 msgid "Repeat your password just to make sure"
-msgstr ""
+msgstr "Repetați parola doar pentru a vă asigura"
 
 msgid "Repeat new Password"
-msgstr ""
+msgstr "Repetă Parola nouă"
 
 msgid "Change my password"
-msgstr ""
+msgstr "Schimbă-mi parola"
 
 msgid "Password reset complete"
-msgstr ""
+msgstr "Resetarea parolei completată"
 
 msgid "Reset password"
-msgstr ""
+msgstr "Resetarea parolei"
 
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr ""
+msgstr "Parola dvs. a fost setată.  Este posibil să mergeți înainte și să vă autentificați acum."
 
 msgid "Enter new password"
-msgstr ""
+msgstr "Introduceți o parolă nouă"
 
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
-msgstr ""
+msgstr "Vă rugăm să introduceți noua parolă de două ori, astfel încât să putem verifica că ați introdus-o corect."
 
 msgid "New password"
-msgstr ""
+msgstr "Parola nouă"
 
 msgid "New password confirmation"
-msgstr ""
+msgstr "Confirmare parolă nouă"
 
 msgid "Password reset unsuccessful"
-msgstr ""
+msgstr "Resetarea parolei nu reușește"
 
 msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."
-msgstr ""
+msgstr "Legătura de resetare a parolei a fost nevalidă, probabil pentru că a fost deja folosită.  Vă rugăm să solicitați o nouă resetare a parolei."
 
 msgid "Password reset successful"
-msgstr ""
+msgstr "Resetarea parolei a reușit"
 
 msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
-msgstr ""
+msgstr "V-am trimis prin e-mail instrucțiuni pentru setarea parolei. Ar trebui să le primiți în scurt timp."
 
 msgid "If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder."
-msgstr ""
+msgstr "Dacă nu primiți un e-mail, asigurați-vă că ați introdus adresa cu care v-ați înregistrat și verificați dosarul de spam."
 
 #, python-format
 msgid "You're receiving this email because you requested a password reset for your user account at %(site_name)s."
-msgstr ""
+msgstr "Primiți acest e-mail pentru că ați solicitat o resetare a parolei pentru contul de utilizator la %(site_name)s."
 
 msgid "Please go to the following page and choose a new password:"
-msgstr ""
+msgstr "Accesați pagina următoare și alegeți o nouă parolă:"
 
 msgid "Your username, in case you've forgotten:"
-msgstr ""
+msgstr "Numele de utilizator, în caz că ai uitat:"
 
 msgid "Thanks for using our site!"
-msgstr ""
+msgstr "Mulțumesc pentru utilizarea site-ului nostru!"
 
 msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
-msgstr ""
+msgstr "Ați uitat parola? Introduceți adresa de e-mail de mai jos și vom primi instrucțiuni de e-mail pentru setarea unei noi."
 
 msgid "The email you used to register your account. This is the one you receive email notifications on"
-msgstr ""
+msgstr "E-mailul pe care l-ați folosit pentru a vă înregistra contul. Acesta este cel pe care primiți notificări prin e-mail"
 
 msgid "Example: mymail@example.com"
-msgstr ""
+msgstr "Exemplu: mymail@example.com"
 
 msgid "Sign up"
-msgstr ""
+msgstr "Înscrie-te"
 
 msgid "Create account"
-msgstr ""
+msgstr "Creează cont"
 
 msgid "Welcome to the Community!"
-msgstr ""
+msgstr "Bine ați venit în Comunitate!"
 
 msgid "You need a user account to join projects and become active!"
-msgstr ""
+msgstr "Ați nevoie de un cont de utilizator pentru a vă alătura proiectelor și a deveni activ!"
 
 msgid "You need a user account to continue!"
-msgstr ""
+msgstr "Aveți nevoie de un cont de utilizator pentru a continua!"
 
 msgid "Signing up is easy and fast. Just fill out these fields and you're all set!"
-msgstr ""
+msgstr "Înscrierea este ușoară și rapidă. Completați aceste câmpuri și sunteți gata!"
 
 msgid "Already have an account?"
-msgstr ""
+msgstr "Ai deja un cont?"
 
 msgid "Log in here"
-msgstr ""
+msgstr "Autentifică-te aici"
 
 msgid "You are signing up using this invite token:"
-msgstr ""
+msgstr "Vă înregistrați folosind acest jeton de invitație:"
 
 msgid "After signup, you will automatically become a member of the associated projects and groups."
-msgstr ""
+msgstr "După înregistrare, veți deveni un membru automat al proiectelor și grupurilor asociate."
 
 msgid "Email address"
-msgstr ""
+msgstr "Adresa de e-mail"
 
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr ""
+msgstr "Aceasta va fi folosită ca autentificare. E-mailurile de notificare vor fi trimise la această adresă (dacă doriți să le primiți)."
 
 msgid "Repeat Password"
-msgstr ""
+msgstr "Repetă Parola"
 
 msgid "Your name"
-msgstr ""
+msgstr "Numele dumneavoastră"
 
 msgid "This name will be displayed to other users on the site"
-msgstr ""
+msgstr "Acest nume va fi afișat altor utilizatori de pe site"
 
 msgid "First name"
-msgstr ""
+msgstr "Nume"
 
 msgid "Last name"
-msgstr ""
+msgstr "Numele de familie"
 
 msgid "You can supply your last name to be displayed as well"
-msgstr ""
+msgstr "Puteți furniza numele dvs. pentru a fi afișat, de asemenea"
 
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 msgid "We need to make sure you are a real person (sorry!)"
-msgstr ""
+msgstr "Trebuie să ne asigurăm că sunteți o persoană reală (scuze!)"
 
 msgid "Generate a new captcha"
-msgstr ""
+msgstr "Generați o captcha nouă"
 
-#, fuzzy
-#| msgid "Other Projects"
 msgid "Search options..."
-msgstr "Other Projects"
+msgstr "Opțiuni de căutare..."
 
 msgid "Search in Apps"
-msgstr ""
+msgstr "Căutați în Aplicații"
 
 msgid "Ethercalcs"
-msgstr ""
+msgstr "Ethercalc"
 
 msgid "Offers"
-msgstr ""
+msgstr "Promoții"
 
 msgid "Search in teams"
-msgstr ""
+msgstr "Căutare în Echipe"
 
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "All Projects and Groups"
-msgstr "Convert selected Projects to Groups"
+msgstr "Toate Proiectele și Grupurile"
 
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "My Projects and Groups"
-msgstr "Convert selected Projects to Groups"
+msgstr "Proiectele și Grupurile mele"
 
-#, fuzzy
-#| msgid "Other Projects"
 msgid "Other Projects and Groups"
-msgstr "Other Projects"
+msgstr "Alte proiecte și Grupuri"
 
 msgid "Search for Users"
-msgstr ""
+msgstr "Căutați Utilizatori"
 
 msgid "Ordering"
-msgstr ""
+msgstr "Comanda"
 
 msgid "Newest"
-msgstr ""
+msgstr "Cele mai noi"
 
 msgid "Relevance"
-msgstr ""
+msgstr "Relevanță"
 
 #, python-format
 msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
-msgstr ""
+msgstr "Se afișează %(end)s de %(total)s rezultate pentru interogarea dvs. ”%(query)s” cu subiecte:"
 
 #, python-format
 msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\""
-msgstr ""
+msgstr "Se afișează %(end)s de %(total)s rezultate pentru interogarea dvs. ”%(query)s”"
 
 #, python-format
 msgid "Showing %(end)s of %(total)s results with topics:"
-msgstr ""
+msgstr "Se afișează %(end)s de %(total)s rezultate cu subiecte:"
 
 msgid "or"
-msgstr ""
+msgstr "sau"
 
 msgid "We could not find any results matching your search query."
-msgstr ""
+msgstr "Nu am găsit rezultate care să corespundă interogării dvs. de căutare."
 
 msgid "previous"
-msgstr ""
+msgstr "anterior"
 
 msgid "next"
-msgstr ""
+msgstr "următor"
 
 msgid "Enter one or more search terms or select a topic to search."
-msgstr ""
+msgstr "Introduceți unul sau mai mulți termeni de căutare sau selectați un subiect pentru a căuta."
 
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 msgid "From"
-msgstr ""
+msgstr "Din"
 
 msgid "Start date."
-msgstr ""
+msgstr "Data de început."
 
 msgid "Time"
-msgstr ""
+msgstr "Ora"
 
 msgid "Until"
-msgstr ""
+msgstr "Până când"
 
 msgid "End date."
-msgstr ""
+msgstr "Data de sfârșit."
 
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "My teams"
 msgid "My Users"
-msgstr "My projects"
+msgstr "Utilizatorii Mei"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "My Projects"
 msgid "My Events"
-msgstr "My Projects"
+msgstr "Evenimentele Mele"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "All projects"
 msgid "All Users"
-msgstr "All projects"
+msgstr "Toți Utilizatorii"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "All projects"
 msgid "All Events"
-msgstr "All projects"
+msgstr "Toate Evenimentele"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Event"
-msgstr ""
+msgstr "Eveniment"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Idea"
-msgstr ""
+msgstr "Ideea"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Project"
 msgid "Create User"
-msgstr "Create Project"
+msgstr "Creează Utilizator"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Project"
 msgid "Create Event"
-msgstr "Create Project"
+msgstr "Creează Eveniment"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names, Topics and Places..."
-msgstr ""
+msgstr "Căutați Nume, Subiecte și Locuri..."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names and Topics..."
-msgstr ""
+msgstr "Căutați Nume și Subiecte..."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Where"
-msgstr ""
+msgstr "Unde"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "In map area"
-msgstr ""
+msgstr "În zona hărții"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
-msgstr ""
+msgstr "Dacă este activ, căutarea va fi limitată la zona de hartă vizibilă."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Apply Filters"
-msgstr ""
+msgstr "Aplicați Filtre"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Clear Filters"
-msgstr ""
+msgstr "Ștergeți Filtrele"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Street"
-msgstr ""
+msgstr "Strada"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Project"
 msgid "Create idea"
-msgstr "Create Project"
+msgstr "Crea idee"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Next"
-msgstr ""
+msgstr "Următor"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Choose a location for your idea by dragging the marker!"
-msgstr ""
+msgstr "Alegeți o locație pentru ideea dvs. trăgând marcatorul!"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "of"
-msgstr ""
+msgstr "de"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Results"
-msgstr ""
+msgstr "Rezultate"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No results found."
-msgstr ""
+msgstr "Nici un rezultat găsit."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Could not complete the search due to an error."
-msgstr ""
+msgstr "Nu s-a putut finaliza căutarea din cauza unei erori."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search when moving the map"
-msgstr ""
+msgstr "Căutați atunci când mutați harta"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
-msgstr ""
+msgstr "Căutați în această zonă"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership Requests"
-msgstr ""
+msgstr "Cereri de Membru"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "My Projects"
 msgid "My Groups and Projects"
-msgstr "My Projects"
+msgstr "Grupurile și Proiectele mele"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Other Projects"
 msgid "Show more Projects of this Group"
-msgstr "Other Projects"
+msgstr "Arată mai multe Proiecte ale acestui Grup"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are not in any groups or projects yet"
-msgstr ""
+msgstr "Nu sunteți încă în nici un grup sau proiect"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Group"
 msgid "Create new Group"
-msgstr "Create Group"
+msgstr "Creați un Grup nou"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Project"
 msgid "Create new Project"
-msgstr "Create Project"
+msgstr "Creați un Proiect nou"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "List all groups"
 msgid "Browse all Groups"
-msgstr "List all projects"
+msgstr "Răsfoiți toate Grupurile"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "My Projects"
 msgid "Browse all Projects"
-msgstr "My Projects"
+msgstr "Răsfoiți toate Proiectele"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
-msgstr ""
+msgstr "Idei pe care le urmăresc"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are not following any ideas yet."
-msgstr ""
+msgstr "Nu urmați niciun fel de idei."
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Cosinnus project"
 msgid "Post new Idea"
-msgstr "Project"
+msgstr "Postează o nouă Idee"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Browse all Ideas"
-msgstr ""
+msgstr "Răsfoiți toate Ideile"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Project"
 msgid "Search for Ideas"
-msgstr "Create Project"
+msgstr "Caută Idei"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You have not RSVPed to any Events."
-msgstr ""
+msgstr "Nu ați făcut RSVPed la niciun Eveniment."
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "All projects"
 msgid "Add Event"
-msgstr "All projects"
+msgstr "Adăugați eveniment"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Go to Calendar"
-msgstr ""
+msgstr "Accesați Calendar"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "There are no groups."
 msgid "There was an error loading the widget"
-msgstr "There are no groups."
+msgstr "A apărut o eroare la încărcarea widget-ului"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Cosinnus groups"
+#| msgid "Notification ID"
 msgid "Notifications"
-msgstr "Groups"
+msgstr "Notificare ID"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show more"
+msgstr "Afișați mai multe"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Other Projects"
-msgid "Show more"
-msgstr "Other Projects"
-
-#. Translators: __INCLUDE_JS_PO__
+#| msgid "Notification ID"
 msgid "No current notifications"
-msgstr ""
+msgstr "Notificare ID"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Network"
 msgid "Entire Network"
-msgstr ""
+msgstr "Rețea"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "On the Map"
-msgstr ""
+msgstr "Pe Hartă"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "My Projects"
 msgid "In my Groups and Projects"
-msgstr "My Projects"
+msgstr "În Grupurile și Proiectele mele"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
-msgstr ""
+msgstr "Subiect"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You"
-msgstr ""
+msgstr "Tu"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Participants"
-msgstr ""
+msgstr "Participanți"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Projects/Groups"
-msgstr "Convert selected Projects to Groups"
+msgstr "Proiecte/Grupuri"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No info."
-msgstr ""
+msgstr "Fără informații."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Administrator"
-msgstr ""
+msgstr "Administrator"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Administrators"
-msgstr ""
+msgstr "Administratorii"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Administrators unknown"
-msgstr ""
+msgstr "Administratorii necunoscuți"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No description yet."
-msgstr ""
+msgstr "Nici o descriere încă."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
-msgstr ""
+msgstr "Alegeți o locație pentru ideea dvs. trăgând & aruncând marcajul. Puteți schimba această locație ulterior."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Back to location selection"
-msgstr ""
+msgstr "Înapoi la selecția locației"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Project Type"
 msgid "Protected Content"
-msgstr "Project Type"
+msgstr "Conținutul Protejat"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sorry, but you cannot view details for this content."
-msgstr ""
+msgstr "Scuze, dar nu puteți vedea detalii pentru acest conținut."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "This can happen when its visibility settings have changed recently."
-msgstr ""
+msgstr "Acest lucru se poate întâmpla atunci când setările sale de vizibilitate s-au schimbat recent."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Please register or log in to continue!"
-msgstr ""
+msgstr "Vă rugăm să vă înregistrați sau să vă autentificați pentru a continua!"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Error!"
-msgstr ""
+msgstr "Eroare!"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sorry, but the requested content could not be retrieved from the server."
-msgstr ""
+msgstr "Scuză, dar conținutul solicitat nu a putut fi preluat de pe server."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
-msgstr ""
+msgstr "Accesați Pagina de Evenimente"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for comments or when this event is updated or its details change."
-msgstr ""
+msgstr "A cum veți primi notificări pentru comentarii sau când acest eveniment este actualizat sau detaliile sale se schimbă."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If you do not want notifications, click the unfollow button!"
-msgstr ""
+msgstr "Dacă nu doriți notificări, faceți clic pe butonul de urmărire!"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Could not save your like setting because of an error."
-msgstr ""
+msgstr "Nu s-a putut salva setarea dvs. similară din cauza unei erori."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Could not save your follow setting because of an error."
-msgstr ""
+msgstr "Nu s-a putut salva setarea de urmărire din cauza unei erori."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Hidden Users"
-msgstr ""
+msgstr "Utilizatorii ascunși"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Hidden User"
-msgstr ""
+msgstr "Utilizator ascuns"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
-msgstr ""
+msgstr "Sunteți membru"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Edit Group"
 msgid "Join Group"
-msgstr "Edit Project"
+msgstr "Alăturați-vă Grupului"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Group"
 msgid "Message Group"
-msgstr "Create Group"
+msgstr "Grup de Mesaje"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Project"
 msgid "Create Project from Idea"
-msgstr "Create Project"
+msgstr "Creați Proiect din Idea"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Edit your Idea"
-msgstr ""
+msgstr "Editează-ți Ideea"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You will receive a notification when a project is created from your liked idea."
-msgstr ""
+msgstr "Veți primi o notificare atunci când un proiect este creat din ideea dvs. preferată."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
-msgstr ""
+msgstr "Proiecte - Create din această Idee"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Open to be contacted about potential collaboration opportunities"
-msgstr ""
+msgstr "Deschis pentru a fi contactat cu privire la oportunitățile de colaborare potențiale"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Does NOT wish to be contacted for potential collaboration!"
-msgstr ""
+msgstr "Nu dorește să fie contactat pentru o colaborare potențială!"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Edit Project"
 msgid "Join Project"
-msgstr "Edit Project"
+msgstr "Alăturați-vă Proiectului"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Project"
 msgid "Message Project"
-msgstr "Create Project"
+msgstr "Proiect de Mesaje"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
-msgstr ""
+msgstr "Mută în sus"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move down"
-msgstr ""
+msgstr "Mută în jos"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "There are no groups."
 msgid "There are no items yet"
-msgstr "There are no groups."
+msgstr "Nu există articole încă"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "My Projects"
 msgid "Groups and Projects"
-msgstr "My Projects"
+msgstr "Grupuri și Proiecte"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Here you can find an overview of your Groups and Projects once you become active in one or more of them."
-msgstr ""
+msgstr "Aici puteți găsi o imagine de ansamblu asupra Grupurilor și Proiectelor dvs. odată ce ați activat într-unul sau mai multe dintre acestea."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You can create Groups or Projects via the '+' button in the header."
-msgstr ""
+msgstr "Puteți crea Grupuri sau Proiecte prin intermediul '+' buton în antet."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I like"
-msgstr ""
+msgstr "Idei îmi plac"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Here you can find an overview of Ideas you have liked."
-msgstr ""
+msgstr "Aici puteți găsi o imagine o imagine de ansamblu a Ideilor care v-au plăcut."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
-msgstr ""
+msgstr "Puteți să vă creați propriile Idei cu ajutorul butonului '+' din antet sau puteți descoperi Idei existente aici"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
-msgstr ""
+msgstr "Descoperi"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "My Projects"
 msgid "Only content from my Groups and Projects"
-msgstr "My Projects"
+msgstr "Conținut numai din Grupurile și Proiectele mele"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
-msgstr ""
+msgstr "Nu am putut încărca mai multe date în acest moment."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Retry"
-msgstr ""
+msgstr "Reîncercare"
 
 msgid "Quick Join"
-msgstr ""
+msgstr "Alătură Rapid"
 
 msgid "Using this token, you can automatically join the following projects and groups"
-msgstr ""
+msgstr "Folosind acest simbol, vă puteți alătura automat la următoarele proiecte și grupuri"
 
 msgid "Team up quickly using an invite token"
-msgstr ""
+msgstr "Echipați-vă rapid folosind un jeton de invitație"
 
-#, fuzzy
 msgid "Join all now!"
-msgstr "Join Project"
+msgstr "Alătură-te tuturor acum!"
 
 msgid "Create account and join"
-msgstr ""
+msgstr "Creați cont și alăturați-vă"
 
 msgid "If you know an invite token, you can automatically join groups and projects, no matter if you have a user account yet or not."
-msgstr ""
+msgstr "Dacă cunoașteți un jeton de invitație, vă puteți alătura automat la grupuri și proiecte, indiferent dacă aveți un cont de utilizator sau nu."
 
 msgid "Enter a token:"
-msgstr ""
+msgstr "Intră în jeton:"
 
-#, fuzzy
 msgid "For example"
-msgstr "Project Type"
+msgstr "De exemplu"
 
 msgid "Edit Profile"
-msgstr ""
+msgstr "Editează Profilul"
 
 #, python-format
 msgid "Your account is currently connected with the Facebook account \"%(name)s\". Do you really want to disconnect your Facebook account? This will also revoke all permissions you granted us to your Facebook account."
-msgstr ""
+msgstr "Contul dvs. este în prezent conectat la contul de Facebook ”%(name)s”. Doriți cu adevărat să vă deconectați contul de Facebook? Aceasta va revoca, de asemenea, toate permisiunile pe care ni le-ați acordat pe contul dvs. de Facebook."
 
 msgid "Disconnect Facebook Account"
-msgstr ""
+msgstr "Deconectați contul de Facebook"
 
 msgid "Disconnect Facebook"
-msgstr ""
+msgstr "Deconectați Facebook"
 
 msgid "Delete profile"
-msgstr ""
+msgstr "Șterge profilul"
 
 msgid "User overview"
-msgstr ""
+msgstr "Prezentarea generală a utilizatorului"
 
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Members of your projects and groups only"
-msgstr "Convert selected Projects to Groups"
+msgstr "Numai membrii proiectelor și grupurilor dvs"
 
 msgid "Everybody (public profile)"
-msgstr ""
+msgstr "Toată lumea (profil public)"
 
 msgid "Delete user profile"
-msgstr ""
+msgstr "Ștergeți profilul utilizatorului"
 
 msgid "Delete Profile"
-msgstr ""
+msgstr "Ștergeți Profilul"
 
 msgid "You are about to delete your user account from the site!"
-msgstr ""
+msgstr "Ești pe cale să ștergi contul de utilizator de pe site!"
 
 msgid "By clicking the button below, you will irrevocably delete your user account, profile and personal information from this site."
-msgstr ""
+msgstr "Făcând clic pe butonul de mai jos, veți șterge irevocabil contul de utilizator, profilul și informațiile personale de pe acest site."
 
 msgid "Your created documents, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you."
-msgstr "Your created pads, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you."
+msgstr "Documentele create, postările de noutăți, fișierele încărcate și alt conținut vor fi păstrate pe site. Cu toate acestea, acest conținut nu va mai purta numele tău sau nu va fi conectat la tine."
 
 msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
-msgstr ""
+msgstr "Dacă doriți să ștergeți conținutul dvs., reveniți și faceți acest lucru acum. După ce ștergeți profilul dvs., nu veți mai avea acces la nimic pe care l-ați creat cu acest cont."
 
 msgid "Delete Account"
-msgstr ""
+msgstr "Șterge Contul"
 
 msgid "I have understood that any content created by me will be retained on the website. I wish to irrevocably delete my user account:"
-msgstr ""
+msgstr "Am înțeles că orice conținut creat de mine va fi păstrat pe site. Doresc să îmi șterg irevocabil contul de utilizator:"
 
 msgid "Delete user account"
-msgstr ""
+msgstr "Ștergeți contul de utilizator"
 
 #, python-format
 msgid "User profile: %(username)s"
-msgstr ""
+msgstr "Profil de utilizator: %(username)s"
 
 msgid "Cooperation requests"
-msgstr ""
+msgstr "Cerere de cooperare"
 
 msgid "I am open to be contacted about potential collaboration opportunities!"
-msgstr ""
+msgstr "Sunt deschis să fiu contactat despre oportunitățile de colaborare potențiale!"
 
 msgid "I do NOT wish to be contacted for potential collaboration!"
-msgstr ""
+msgstr "NU doresc să fiu contactat pentru o colaborare potențială!"
 
 msgid "My Website"
-msgstr ""
+msgstr "Site-ul Meu"
 
 msgid "Edit Your Profile"
-msgstr ""
+msgstr "Editează-ți Profilul"
 
 msgid "Basic data"
-msgstr ""
+msgstr "Data de bază"
 
 msgid "E-Mail"
-msgstr ""
+msgstr "E-Mail"
 
 msgid "Profile avatar"
-msgstr ""
+msgstr "Profil avatar"
 
 msgid "Who are you and what motivates you?"
-msgstr ""
+msgstr "Cine ești tu și ce te motivează?"
 
 msgid "Tell others something about you!"
-msgstr ""
+msgstr "Spune altora ceva despre tine!"
 
 msgid "Cooperation requests for you"
-msgstr ""
+msgstr "Cereri de cooperare pentru dumneavoastră"
 
 msgid "Signals your willingness to be contacted by other users who wish to collaborate with you"
-msgstr ""
+msgstr "Semnalează disponibilitatea dvs. de a fi contactat de alți utilizatori care doresc să colaboreze cu dvs"
 
 msgid "I am open for cooperation requests"
-msgstr ""
+msgstr "Sunt deschis pentru cereri de cooperare"
 
 msgid "Welcome!"
-msgstr ""
+msgstr "Bine ați venit!"
 
 msgid "We give you full control over what people can see of you on the platform and what you hear from us!"
-msgstr ""
+msgstr "Vă oferim un control deplin asupra a ceea ce oamenii pot vedea despre dvs. pe platformă și ceea ce auziți de la noi!"
 
 msgid "Who is allowed to see you on the platform?"
-msgstr ""
+msgstr "Cine are voie să te vadă pe platformă?"
 
 msgid "You can change this setting later in your profile settings"
-msgstr ""
+msgstr "Puteți modifica această setare ulterior în setările profilului"
 
 msgid "in the top right menu"
-msgstr ""
+msgstr "în meniul din dreapta sus"
 
 msgid "When may we send you email notifications?"
-msgstr ""
+msgstr "Când vă putem trimite notificări prin e-mail?"
 
 msgid "You can change or customize this setting later in your notification settings"
-msgstr ""
+msgstr "Puteți modifica sau personaliza această setare ulterior în setările de notificare"
 
 msgid "Your privacy: You are in control!"
-msgstr ""
+msgstr "Confidențialitatea dvs: Sunteți în control!"
 
+#, fuzzy
+#| msgctxt "an action done *by* <username>"
+#| msgid "by"
 msgid "by"
-msgstr ""
+msgstr "de"
 
+#, fuzzy
+#| msgid "Overview"
 msgid "Open Preview"
-msgstr ""
+msgstr "Prezentare generală"
 
+#, fuzzy
+#| msgid "Is active"
 msgid "active"
-msgstr ""
+msgstr "Este activ"
 
 msgid "displayed right now"
 msgstr ""
@@ -4061,28 +4060,33 @@ msgstr ""
 msgid "not displayed right now"
 msgstr ""
 
+#, fuzzy
+#| msgid "(Inactive)"
 msgid "inactive"
-msgstr ""
+msgstr "(Inactiv)"
 
 #, fuzzy
+#| msgid "Re-Activate"
 msgid "Activate"
-msgstr "Create Project"
+msgstr "Reactiva"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to leave „%(title)s“?"
+#| msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgid "Do you really want to delete announcement \"%(title)s\"?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr "Doriți cu adevărat să ștergeți invitația pentru ”%(title)s”?"
 
+#, fuzzy
+#| msgid "Delete comment"
 msgid "Delete announcement"
-msgstr ""
+msgstr "Ștergeți comentariu"
 
 msgid "Edit Announcement"
 msgstr ""
 
 #, fuzzy
-#| msgid "Create Project"
+#| msgid "Create content"
 msgid "Create Announcement"
-msgstr "Create Project"
+msgstr "Creați conținut"
 
 msgid "Announcement is enabled"
 msgstr ""
@@ -4090,8 +4094,10 @@ msgstr ""
 msgid "Announcement Title (internal only)"
 msgstr ""
 
+#, fuzzy
+#| msgid "Header Title"
 msgid "Internal Title"
-msgstr ""
+msgstr "Antet de Titlu"
 
 msgid "Category for the Announcement"
 msgstr ""
@@ -4139,364 +4145,344 @@ msgid "A user can dismiss an announcement, in which case it will disappear and n
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no groups."
+#| msgid "There are no items yet"
 msgid "There are no announcements yet."
-msgstr "There are no groups."
+msgstr "Nu există articole încă"
 
 msgid "Enable posting to Facebook"
-msgstr ""
+msgstr "Activați postarea pe Facebook"
 
 msgid "Loading Facebook-Scripts..."
-msgstr ""
+msgstr "Se încarcă Facebook-Scripturi..."
 
 msgid "If nothing happens please disable any addons like Ghostery or NoScript..."
-msgstr ""
+msgstr "Dacă nu se întâmplă nimic, vă rugăm să dezactivați suplimente precum Ghostery sau NoScript..."
 
 msgid "Connect Facebook Account"
-msgstr ""
+msgstr "Conectați Contul Facebook"
 
 msgctxt "Facebook connect explanation box"
 msgid "Why connect?"
-msgstr ""
+msgstr "De ce să vă conectați?"
 
 msgctxt "Facebook connect explanation box"
 msgid "When you connect your Facebook account you can easily publish your news posts on your Facebook timeline. You can also connect your projects/groups to a Facebook Group or Fan-Site to enable members to publish their news posts there, too."
-msgstr ""
+msgstr "Când vă conectați contul de Facebook, puteți publica cu ușurință postările de știri pe cronologia dvs. Facebook. De asemenea, vă puteți conecta proiectele/grupurile la un Grup Facebook sau Fan-Site pentru a permite membrilor să își publice postările de știri și acolo."
 
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
-msgstr ""
+msgstr "Pentru asta, avem nevoie de permisiunea dvs. pentru a publica pe Facebook pe numele dvs."
 
 msgctxt "Facebook connect explanation box list header"
 msgid "We guarantee:"
-msgstr ""
+msgstr "Garantăm:"
 
 msgctxt "Facebook connect explanation box list items"
 msgid "We will only post exactly what you have written"
-msgstr ""
+msgstr "Vom posta doar exact ceea ce ai scris"
 
 msgctxt "Facebook connect explanation box list items"
 msgid "We will only post with your explicit consent for every news post, and never automatically"
-msgstr ""
+msgstr "Vom posta numai cu acordul dvs. explicit pentru fiecare post de știri și niciodată automat"
 
 msgctxt "Facebook connect explanation box list items"
 msgid "Except for your name and profile picture, we will obtain absolutely no other data from your Facebook account"
-msgstr ""
+msgstr "Cu excepția numelui și a imaginii de profil, nu vom obține absolut alte date din contul dvs. de Facebook"
 
 #, python-format
 msgctxt "Facebook connect explanation box list items"
 msgid "You can revoke your permission at any time from your %(site_name)s profile settings"
-msgstr ""
+msgstr "Puteți revoca permisiunea în orice moment de la dvs %(site_name)s setările profilului"
 
 msgid "Log in with Facebook"
-msgstr ""
+msgstr "Logheaza-te cu Facebook"
 
 msgid "Also post this to my Facebook timeline"
-msgstr ""
+msgstr "Postează și asta pe cronologia mea pe Facebook"
 
 msgid "When you submit this post, it will be posted on your Facebook timeline exactly as seen."
-msgstr ""
+msgstr "Când trimiteți această postare, aceasta va fi postată pe cronologia dvs. Facebook exact așa cum s-a văzut."
 
 msgid "Also post this to this project/group's Facebook Fan-Page"
-msgstr ""
+msgstr "Postează și acest lucru pe Fan-Pagina Facebook a acestui Proiect/grup"
 
 msgid "Also post this as a visitor's post to this project/group's Facebook Fan-Page"
-msgstr ""
+msgstr "Postează și aceasta ca postare a vizitatorului la Fan-Pagina Facebook a acestui proiect/grup"
 
 msgid "If you are an Editor of the Fan-Page on Facebook, confirm your Editor access to post in the voice of that Fan-Page!"
-msgstr ""
+msgstr "Dacă sunteți Editor al Fan-Paginii de pe Facebook, confirmați-vă accesul Editorului pentru a posta în vocea acelei Fan-Pagini!"
 
 msgctxt "a link to click on"
 msgid "You can do this here"
-msgstr ""
+msgstr "Puteți face acest lucru aici"
 
 msgid "Also post this to this project/group's Facebook Group"
-msgstr ""
+msgstr "Postează și acest lucru pe Grupul Facebook al acestui proiect/grup"
 
 msgid "When you submit this post, it will be posted to the Facebook Fan-Page of this project/group, in the voice of that Fan-Page."
-msgstr ""
+msgstr "Când trimiteți această postare, aceasta va fi postată pe Fan-Pagina a Facebook a acestui proiect/grup, în vocea Fan-paginii respective."
 
 msgid "When you submit this post, it will be posted from your Facebook Account as a visitor's post to the Facebook Fan-Page of this project/group."
-msgstr ""
+msgstr "Când trimiteți această postare, aceasta va fi postată din contul dvs. de Facebook ca postare a vizitatorului pe Fan-Pagina a Facebook a acestui proiect/grup."
 
 msgid "When you submit this post, it will be posted from your Facebook Account, exactly as seen, on the Facebook Group of this project/group."
-msgstr ""
+msgstr "Când trimiteți această postare, aceasta va fi postată din contul dvs. de Facebook, exact așa cum s-a văzut, pe Grupul de Facebook al acestui proiect/grup."
 
 msgid "Connect a Facebook Group or Fan-Page to enable members to publish their news posts there, too!"
-msgstr ""
+msgstr "Conectați un Grup de Facebook sau o Fan-Pagină pentru a permite membrilor să își publice și postările de știri acolo!"
 
 msgid "You need to connect your user account to Facebook before you can link this group/project!"
-msgstr ""
+msgstr "Trebuie să vă conectați contul de utilizator la Facebook înainte de a putea conecta acest grup/proiect!"
 
 msgid "Connect a Facebook Group"
-msgstr ""
+msgstr "Conectați un Grup Facebook"
 
 #, python-format
 msgid "You can connect your projects and groups to a Facebook Group. Once connected, your members can choose to share the news posts they write on %(site_name)s to the Facebook Group. (They need to connect their accounts to Facebook, as well!)"
-msgstr ""
+msgstr "Puteți conecta proiectele și grupurile dvs. la un Grup Facebook. Odată conectat, membrii dvs. pot alege să partajeze mesajele de știri pe care le scriu %(site_name)s grupului Facebook. (Ei trebuie să își conecteze conturile și la Facebook!)"
 
 msgid "Please be aware that users can only post to your Group if they would also be permitted post in it on Facebook!"
-msgstr ""
+msgstr "Vă rugăm să rețineți că utilizatorii pot posta în Grupul dvs. numai dacă li s-ar permite și postarea acestui pe Facebook!"
 
 msgid "You can find the ID of your Facebook Group on the Info-page in the About tab of the Group on Facebook."
-msgstr ""
+msgstr "Puteți găsi ID-ul Grupului dvs. Facebook pe pagina de Informații din fila Despre Grupul de pe Facebook."
 
 msgid "Facebook Group to link to"
-msgstr ""
+msgstr "Facebook Group pentru a face link către"
 
 msgid "Group Id or name (example: 1172392116092353)"
-msgstr ""
+msgstr "ID sau nume de Group (de exemplu: 1172392116092353)"
 
 msgid "Connect a Facebook Fan-Page"
-msgstr ""
+msgstr "Conectați o Fan-Pagină pe Facebook"
 
 #, python-format
 msgid "You can connect your projects and groups to a Facebook Fan-Page. Once connected, you can publish the posts you write on %(site_name)s directly on that Fan-Page, if you are one of its administrators on Facebook."
-msgstr ""
+msgstr "Puteți conecta proiectele și grupurile dvs. la o Fan-Pagină de pe Facebook. Odată conectat, puteți publica postările pe care le scrieți  %(site_name)s direct pe Fan-Pagina respectivă, dacă sunteți unul dintre administratorii acesteia pe Facebook."
 
 msgid "All other members of your project/group can publish their posts as visitor's posts on the Fan-Page. (They need to connect their accounts to Facebook, as well!)"
-msgstr ""
+msgstr "Toți ceilalți membri ai proiectului/grupului dvs. își pot publica postările ca postări ale vizitatorilor pe Fan-Pagină. (Trebuie să își conecteze conturile și la Facebook!)"
 
 msgid "If you wish for other members to be able to post directly to the Fan-Page, you can make them co-administrators of your project/group (and you must make them Editors of the Fan-Page on Facebook!). They will be asked to confirm their Editor access of the Fan-Page, and then will be able to publish to it."
-msgstr ""
+msgstr "Dacă doriți ca alți membri să poată posta direct pe Fan-Pagină, îi puteți face co-administratori ai proiectului/grupului dvs. (și trebuie să îi faceți Editori ai Fan-Paginii de pe Facebook!). Au solicitat să confirme accesul Editorului lor la Fan-Pagină și apoi vor putea să îi publice."
 
 msgid "The unique name of your Fan-Page is the name of the Fan-Page in the URL on Facebook (example: https://www.facebook.com/myfanpage/)"
-msgstr ""
+msgstr "Numele unic al Fan-Paginii dvs. este numele Fan-Paginii din URL-ul de pe Facebook (de exemplu: https://www.facebook.com/myfanpage/)"
 
 msgid "Facebook Fan-Page link to"
-msgstr ""
+msgstr "Facebook Fan-Pagina link către"
 
 msgid "Fan-Page unique name (example: myfanpage)"
-msgstr ""
+msgstr "Numele unic al Fan-Paginii (de exemplu: myfanpage)"
 
 msgid "Choose from your Pages..."
-msgstr ""
+msgstr "Alegeți din Paginile dvs..."
 
 msgid "You have Editor access to this Fan-Page and can publish your posts directly to it."
-msgstr ""
+msgstr "Aveți acces de Editor la această Fan-Pagină și vă puteți publica postările direct la aceasta."
 
 msgid "Editor access of your Facebook-account for this Fan-Page has not been confirmed. This is required before you can publish your posts in the voice of the Fan-Page!"
-msgstr ""
+msgstr "Accesul Editorului contului dvs. de Facebook pentru această Fan-Pagină nu a fost confirmat. Acest lucru este necesar înainte de a putea publica postările dvs. în vocea Fan-Paginii!"
 
-#, fuzzy
 msgid "Confirm now!"
-msgstr "Join Project"
+msgstr "Confirmă acum!"
 
 msgid "Select one of your Facebook pages to connect to"
-msgstr ""
+msgstr "Selectați una dintre paginile dvs. de Facebook la care să vă conectați"
 
 msgid "You do not seem to be Editor or Admin of any pages."
-msgstr ""
+msgstr "Nu vi se pare Editor sau Administrator al niciunei pagini."
 
 msgid "We could not retrieve your groups from Facebook because of an error. Please contact an administrator!"
-msgstr ""
+msgstr "Nu am putut recupera grupurile dvs. de pe Facebook din cauza unei erori. Vă rugăm să contactați un administrator!"
 
-#, fuzzy
-#| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete the item?"
-msgstr "Are you sure you want to delete this prject?"
+msgstr "Sigur doriți să ștergeți articolul?"
 
 msgid "Delete comment"
-msgstr ""
+msgstr "Ștergeți comentariu"
 
 msgid "Report offensive comment"
-msgstr ""
+msgstr "Raportați un comentariu jignitor"
 
 msgid "Write comment..."
-msgstr ""
+msgstr "Scrie comentariu..."
 
 #, python-format
 msgid "Show all %(count)s comments"
-msgstr ""
+msgstr "Arătați  toate %(count)s comentariile"
 
 msgid "Timeline"
-msgstr ""
+msgstr "Cronologie"
 
 msgid "Contents"
-msgstr ""
+msgstr "Cuprins"
 
 msgid "Close to me"
-msgstr ""
+msgstr "Aproape de mine"
 
 msgid "Show large map"
-msgstr ""
+msgstr "Afișați o hartă mare"
 
 msgid "Do not show this again"
-msgstr ""
+msgstr "Nu îmi mai arăta asta"
 
 #, fuzzy
-#| msgid "Project overview"
+#| msgid "view"
 msgid "Preview"
-msgstr "Project overview"
+msgstr "vedere"
 
 msgid "Continue reading"
 msgstr ""
 
 msgid "What's the latest news?"
-msgstr ""
+msgstr "Care este cea mai recentă veste?"
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
-msgstr ""
+msgstr "Pads, Fișiere, Evenimente, Todos și alt conținut vizitat recent vor fi afișate aici."
 
-#, fuzzy
-#| msgid "Create Project"
 msgid "You created an idea"
-msgstr "Create Project"
+msgstr "Ai creat o idee"
 
-#, fuzzy
-#| msgid "Create Project"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an idea"
-msgstr "Create Project"
+msgstr "a creat o idee"
 
 msgid "Menu"
-msgstr ""
+msgstr "Meniul"
 
 msgid "Quick Search"
-msgstr ""
+msgstr "Căutare Rapidă"
 
-#, fuzzy
-#| msgid "Create Project"
 msgid "Create content"
-msgstr "Create Project"
+msgstr "Creați conținut"
 
 msgid "Home"
-msgstr ""
+msgstr "Acasă"
 
 msgid "Rocket.Chat"
 msgstr ""
 
 msgid "Change language"
-msgstr ""
+msgstr "Schimbă limba"
 
 msgid "Register a new account"
-msgstr ""
+msgstr "Înregistrați un cont nou"
 
 msgid "Offer"
-msgstr ""
+msgstr "Oferi"
 
-#, fuzzy
-#| msgid "Cosinnus project"
 msgid "Post new Offer"
-msgstr "Project"
+msgstr "Publicați o nouă Ofertă"
 
-#, fuzzy
-#| msgid "Edit Project"
 msgid "Edit My Profile"
-msgstr "Edit Project"
+msgstr "Editează Profilul Meu"
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
-msgstr ""
+msgstr "Ce se întâmplă unde și când? Ce este descoperit? Unde să întâlnim?"
 
 msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
-msgstr ""
+msgstr "Grupurile ajută la îmbunătățirea comunicării și colaborării în rețele sau organizații mari. În cadrul unui grup puteți reuni mai multe proiecte sau grupuri de lucru mai mici."
 
 msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
-msgstr ""
+msgstr "Cum va arăta regiunea noastră în viitor? Care este ideea dvs. pentru o regiune ecologică și durabilă? Găsiți colaboratori pentru ideile dvs. de proiect."
 
 msgid "Do you have something to share, sell or give away? Are you searching for something?"
-msgstr ""
+msgstr "Aveți ceva de distribuit pentru a vinde sau a da? Căutați ceva?"
 
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
-msgstr ""
+msgstr "Organizează-ți eficient proiectele sau inițiativele împreună cu colegii de campanie. Toate instrumentele importante pentru colaborarea într-un singur loc: Știri, PAD-uri, Evenimente, Todos și multe altele."
 
 msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "Welcome"
-msgstr ""
+msgstr "Bine ați venit"
 
-#, fuzzy, python-format
-#| msgid "Edit “%(team_name)s”"
+#, python-format
 msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "to %(portal_name)s"
-msgstr "Edit project “%(team_name)s”"
+msgstr "la %(portal_name)s"
 
 #, python-format
 msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
-msgstr ""
+msgstr "Mă bucur să te văd! La %(portal_name)s puteți colabora cu alții în Proiecte și Grupuri. Fie inițiativă, organizație sau rețea- %(portal_name)s oferă toate instrumentele necesare colaborării tale online."
 
 msgid "Jetzt anmelden und mitgestalten"
-msgstr "Join now and collaborate"
+msgstr "Înregistrați-vă acum și ajutați la modelarea acestuia"
 
-#, fuzzy
-#| msgid "Other Projects"
 msgid "Show more Projects"
-msgstr "Other Projects"
+msgstr "Afișează mai multe Proiecte"
 
 msgid "Add Widget"
-msgstr ""
+msgstr "Adăugați Widget-ul"
 
 msgid "Edit Widget"
-msgstr ""
+msgstr "Editează Widget-ul"
 
 msgid "More"
-msgstr ""
+msgstr "Mai mult"
 
 msgid "Widget title"
-msgstr ""
+msgstr "Titlul widget-lui"
 
 msgid "Widget Icon (FA)"
-msgstr ""
+msgstr "Pictograma Widget (FA)"
 
 msgid "Font-awesome Widget Icon"
-msgstr ""
+msgstr "Pictograma Widget Font-minunat"
 
 msgid "Delete widget"
-msgstr ""
+msgstr "Ștergeți widget-ul"
 
 msgid "(This widget has no additional options)"
-msgstr ""
+msgstr "(Acest widget nu are opțiuni suplimentare)"
 
 msgid "All members"
-msgstr ""
+msgstr "Toți membrii"
 
 msgid "There are no projects in this group yet."
-msgstr ""
+msgstr "Nu există proiecte în acest grup încă."
 
 msgid "Add project"
-msgstr ""
+msgstr "Adăugați proiect"
 
 msgid "Attach Images/Files"
-msgstr ""
+msgstr "Atașați Imagini/Fișiere"
 
 msgid "Attach image/file"
-msgstr ""
+msgstr "Atașați imagine/fișier"
 
 msgid "You cannot put this widget on a team dashboard."
-msgstr "You cannot put this widget on a project dashboard."
+msgstr "Nu puteți pune acest widget pe un tablou de board al echipei."
 
 msgid "You cannot put this widget on a user dashboard."
-msgstr ""
+msgstr "Nu puteți pune acest widget pe un tablou de board pentru utilizatori."
 
 msgid "Widget not found."
-msgstr ""
+msgstr "Widget-ul nu a fost găsit."
 
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "No related projects/groups"
-msgstr "Convert selected Projects to Groups"
+msgstr "Nu există proiecte/grupuri conexe"
 
-#, fuzzy
-#| msgid "Russian"
 msgid "Assign"
-msgstr "Русский"
+msgstr "Atribui"
 
 msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
-msgstr ""
+msgstr "Vă rugăm să acceptați  condițiile noastre de utilizare"
 
 msgid "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
-msgstr ""
+msgstr "Sunt de acord cu termenii de Utilizare"
 
 msgid "Change of Terms of Services and Privacy Policy"
-msgstr ""
+msgstr "Modificarea condițiilor de Furnizare a Serviciilor și a Politicii de Confidențialitate"
 
 msgid "Our Terms of Services and Privacy Policy"
-msgstr ""
+msgstr "Termenii noștri de Serviciu și Politica de Confidențialitate"
 
 msgid "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications."
-msgstr ""
+msgstr "Vă acordăm prioritate protecției datelor dvs. Continuăm să folosim la maxim platforma noastră. Vă recomandăm să citiți și să acceptați modificările."
 
 msgid "We prioritise the protection of your data, which is reflected in our privacy policy and terms of services. We encourage you to read and accept the terms."
-msgstr ""
+msgstr "Priorităm protecția datelor dvs., care se reflectă în politica noastră de confidențialitate și în termenii serviciilor. Vă recomandăm să citiți și să acceptați termenii."
 
 #, python-format
 msgid ""
@@ -4504,453 +4490,421 @@ msgid ""
 "\n"
 "The user %(user_name)s wants to join %(team_name)s."
 msgstr ""
-"Hi %(admin_name)s,\n"
+"Salut %(admin_name)s,\n"
 "\n"
-"The user %(user_name)s wants to join project %(team_name)s."
+"Utilizatorul %(user_name)s vrea să se alăture %(team_name)s."
 
 msgid "Nutzungsbedingungen"
-msgstr ""
+msgstr "Termeni de utilizare"
 
 msgid "(Deleted User)"
-msgstr ""
+msgstr "(Ștergeți Utilizatorul)"
 
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
-msgstr ""
+msgstr "<i>Render pentru %(model_name)s nu a găsit!</i>"
 
 msgid "Team Description"
-msgstr ""
+msgstr "Descrierea Echipei"
 
 msgid "About Us"
-msgstr ""
+msgstr "Despre Noi"
 
 msgid "Question about"
-msgstr ""
+msgstr "Întrebare despre"
 
 #, python-format
 msgid "The language \"%s\" is not supported"
-msgstr ""
+msgstr "Limba ”%s” nu este acceptat"
 
 msgid "No model given to export data from."
-msgstr ""
+msgstr "Niciun model dat la exportul de date din."
 
 msgid "Your news post was also posted on your Facebook timeline."
-msgstr ""
+msgstr "Știrile dvs. postează ce a postat pe cronologia dvs. Facebook."
 
 msgid "We could not post this news post on your Facebook timeline. If this problem persists, please make sure you have granted us all required Facebook permissions, or try disconnecting and re-connecting your Facebook account!"
-msgstr ""
+msgstr "Nu am putut posta această știre pe cronologia dvs. Facebook. Dacă această problemă persistă, asigurați-vă că ne-ați acordat toate permisiunile necesare Facebook sau încercați să deconectați și să conectați din nou contul de Facebook!"
 
 msgid "Your news post was also posted to the Facebook Fan-Page."
-msgstr ""
+msgstr "Postarea dvs. de știri a fost postată și pe Fan-Pagina Facebook."
 
 msgid "Your news post was also posted on the Facebook Fan-Page as a visitor's post."
-msgstr ""
+msgstr "Postarea dvs. de știri a fost, de asemenea, postată pe Fan-Pagina de Facebook pe post de vizitator."
 
 msgid "Your news post was also posted in the Facebook Group."
-msgstr ""
+msgstr "Postarea dvs. de știri a fost postată și în Grupul Facebook."
 
 msgid "We could not post this news post on the Facebook Group/Fan-Page. If this problem persists, please try disconnecting and re-connecting your Facebook account and make sure you allow us to post with a visibility of at least \"Friends\". If you are trying to post as a Fan-Page, make sure you accept the necessary permissions for us to post there, and make sure you are an Editor of the Fan-Page! If this doesn't work, contact this project/group's administrator!"
-msgstr ""
+msgstr "Nu am putut posta această știre pe Facebook Group/Fan-Pagină. Dacă această problemă persistă, încercați să deconectați și să re-conectați din nou contul de Facebook și asigurați-vă că ne permiteți să postăm cu o vizibilitate a cel puțin                  ”Prieteni”. Dacă încercați să postați ca Fan-Pagina, asigurați-vă că acceptați permisiunile necesare pentru ca noi să postăm acolo și asigurați-vă că sunteți un Editor al Fan-Paginii! Dacă acest lucru nu funcționează, contactați administratorul acestui proiect/grup!"
 
 msgid "You can only connect to either a Facebook Group or a Fan-Page, but not both!"
-msgstr ""
+msgstr "Vă puteți conecta doar la un Grup Facebook sau la o Fan-Pagină, dar nu la ambele!"
 
 msgid "Please enter a numeric Facebook Group-ID only!"
-msgstr ""
+msgstr "Vă rugăm să introduceți un cod numeric de Grup-ID pe Facebook!"
 
 msgid "The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make sure you have entered the correct ID for your Group/Fan-Page!"
-msgstr ""
+msgstr "ID-ul Fan-Paginii Facebook sau ID-ul de Grup nu a putut fi găsit pe Facebook! Asigurați-vă că ați introdus codul corect pentru dvs. de Grup/Fan-pagina!"
 
 msgid "We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an Editor of that Fan-Page!"
-msgstr ""
+msgstr "Nu am putut avea acces la Fan-Pagina pentru contul de Facebook conectat. Vă rugăm să verificați dacă ați introdus numele corect al Fan-Paginii și că sunteți Editor al acestei Fan-Pagini!"
 
 msgid "This group does not have a Facebook Fan-Page associated with it!"
-msgstr ""
+msgstr "Acest grup nu are asociată Fan-Pagină web pe Facebook!"
 
 msgid "Your Editor access for the linked Facebook Fan-Page was confirmed!"
-msgstr ""
+msgstr "Accesul Editorului dvs. pentru Fan-Pagina de Facebook conectată a fost confirmat!"
 
 msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
-msgstr ""
+msgstr "A apărut o eroare când încercați să vă deconectați contul de Facebook! Vă rugăm să contactați un administrator!"
 
 msgid "Your Facebook account was successfully disconnected from this account."
-msgstr ""
+msgstr "Contul dvs. de Facebook a fost deconectat cu succes de acest cont."
 
 msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-msgstr ""
+msgstr "Ne pare rău, numai administratorii portalului pot crea Grupuri! Puteți crea un Proiect sau scrie un mesaj unuia dintre administratori pentru a crea un Grup pentru dvs. Mai jos puteți găsi o listă cu toți administratorii."
 
 #, python-format
 msgid "%(team_type)s \"%(group)s\" was created successfully."
-msgstr ""
+msgstr "%(team_type)s ”%(group)s” a fost creat cu succes."
 
 msgid "Create"
-msgstr ""
+msgstr "Crea"
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
-msgstr ""
+msgstr "%(team_type)s a fost modificată cu succes."
 
 msgid "This action is not available directly!"
-msgstr ""
+msgstr "Această acțiune nu este disponibilă direct!"
 
 #, python-format
 msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
-msgstr ""
+msgstr "Ați solicitat să vă alăturați %(team_type)s ”%(team_name)s”. Veți primi un e-mail imediat ce un administrator al echipei răspunde la solicitarea dvs."
 
 #, python-format
 msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
-msgstr ""
+msgstr "Ai fost deja invitat ”%(team_name)s” și acum au fost făcuți membrii imediat!"
 
 #, python-format
 msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
-msgstr ""
+msgstr "Acum sunteți membru %(team_type)s ”%(team_name)s”. Bine ați venit!"
 
 #, python-format
 msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
-msgstr ""
+msgstr "Nu mai sunteți membru %(team_type)s ”%(team_name)s”."
 
 #, python-format
 msgid "You cannot leave this %(team_type)s. You are the only administrator left."
-msgstr ""
+msgstr "Nu puteți părăsi asta %(team_type)s. Sunteți singurul administrator rămas."
 
 #, python-format
 msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
-msgstr ""
+msgstr "Solicitarea dvs. de aderare a fost retrasă %(team_type)s ”%(team_name)s” cu succes."
 
 #, python-format
 msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
-msgstr ""
+msgstr "Invitația ta la %(team_type)s ”%(team_name)s” a fost refuzată cu succes."
 
 #, python-format
 msgid "User %(username)s had already requested membership and has now been made a member immediately!"
-msgstr ""
+msgstr "Utilizatorul %(username)s a solicitat deja calitatea de membru și acum a devenit membru imediat!"
 
 #, python-format
 msgid "I invited you to join \"%(team_name)s\"!"
-msgstr ""
+msgstr "Te-am invitat să te înscrii ”%(team_name)s”!"
 
 #, python-format
 msgid "User %(username)s was successfully invited!"
-msgstr ""
+msgstr "Utilizatorul %(username)s trebuia invitat!"
 
 msgid "You cannot change your own admin status."
-msgstr ""
+msgstr "Nu puteți schimba propriul statut de administrator."
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
-msgstr "You cannot remove “%(username)s” form this project. Only one admin left."
+msgstr "Nu puteți elimina ”%(username)s din această echipă. A rămas doar un administrator."
 
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
-msgstr ""
+msgstr "Nu te poți îndepărta de la o %(team_type)s."
 
-#, fuzzy, python-format
-#| msgid "You cannot remove “%(username)s” form this team. Only one admin left."
+#, python-format
 msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
-msgstr "You cannot remove “%(username)s” form this project. Only one admin left."
+msgstr "Nu puteți elimina ”%(username)s formați această echipă. A rămas doar un administrator."
 
 #, python-format
 msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
-msgstr ""
+msgstr "Solicitarea dvs. de aderare a fost retrasă %(team_type)s ”%(team_name)s” cu succes."
 
 #, python-format
 msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
-msgstr ""
+msgstr "Invitația dvs. către utilizator ”%(username)s” a fost retras cu succes."
 
 #, python-format
 msgid "User \"%(username)s\" is no longer a member."
-msgstr ""
+msgstr "Utilizatorul ”%(username)s” nu mai este membru."
 
 #, python-format
 msgid "%(team_name)s was re-activated successfully!"
-msgstr ""
+msgstr "%(team_name)s a fost reactivat cu succes!"
 
 #, python-format
 msgid "%(team_name)s was deactivated successfully!"
-msgstr ""
+msgstr "%(team_name)s a fost dezactivat cu succes!"
 
 msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
-msgstr ""
+msgstr "Ne pare rău, numai administratorii portalului pot dezactiva Grupuri! Puteți scrie un mesaj unuia dintre administratori pentru a-l dezactiva pentru dvs. Mai jos puteți găsi o listă cu toți administratorii."
 
 msgid "This project/group is already active!"
-msgstr ""
+msgstr "Acest proiect/grup este deja activ!"
 
 msgid "This project/group is already inactive!"
-msgstr ""
+msgstr "Acest proiect/grup este deja inactiv!"
 
 msgid "Only group/project members have permission to do this!"
-msgstr ""
+msgstr "Numai membrii grupului/proiectului au permisiunea de a face acest lucru!"
 
 #, python-format
 msgid "You may only invite %(maximum_number)d people at once. Any emails above that number have been ignored."
-msgstr ""
+msgstr "Puteți invita doar %(maximum_number)d oameni deodată. Orice e-mailuri peste acest număr au fost ignorate."
 
 #, python-format
 msgid "Sorry, these did not seem to be valid email addresses: %s"
-msgstr ""
+msgstr "Ne pare rău, acestea nu par să fie adrese de e-mail valabile: %s"
 
 #, python-format
 msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
-msgstr ""
+msgstr "Aceste persoane au primit o invitație prin e-mail abia de curând. Puteți să le trimiteți din nou o invitație mâine: %s"
 
 #, python-format
 msgid "Good news! The people with these addresses are already members: %s"
-msgstr ""
+msgstr "O veste bună! Persoanele cu aceste adrese sunt deja membre: %s"
 
 #, python-format
 msgid "The people with these addresses already have a user account and already have a pending invitation: %s"
-msgstr ""
+msgstr "Persoanele cu aceste adrese au deja un cont de utilizator și au deja o invitație în așteptare: %s"
 
 #, python-format
 msgid "The people with these addresses already have a registered user account and have been invited directly: %s"
-msgstr ""
+msgstr "Persoanele cu aceste adrese au deja un cont de utilizator înregistrat și au fost invitate direct: %s"
 
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
-msgstr ""
+msgstr "Succes! Acum trimitem invitații la aceste adrese de e-mail: %s"
 
-#, fuzzy
-#| msgid "There are no groups."
 msgid "There was an error when trying to delete the invitation."
-msgstr "There are no groups."
+msgstr "A apărut o eroare când încercați să ștergeți invitația."
 
 msgid "The invitation was successfully deleted."
-msgstr ""
+msgstr "Invitația a fost ștearsă cu succes."
 
 msgid "Your selection for showing this item in projects/groups was updated."
-msgstr ""
+msgstr "Selecția dvs. pentru afișarea acestui articol în proiecte/grupuri a fost actualizată."
 
 #, python-format
 msgid "This item is now being shown in these projects/groups: %(group_names)s"
-msgstr ""
+msgstr "Acest articol este acum prezentat în aceste proiecte/grupuri: %(group_names)s"
 
 msgid "No appname given for adding containers."
-msgstr ""
+msgstr "Nu este dat niciun nume de aplicație pentru adăugarea containerelor."
 
 msgid "Your idea was deleted successfully."
-msgstr ""
+msgstr "Ideea ta a fost ștearsă cu succes."
 
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
-msgstr ""
+msgstr "A apărut o eroare la procesarea avatarului. Vă rugăm să vă asigurați că ați selectat o parte suficient de mare din imagine!"
 
 msgid "There was an error while processing your avatar. The image file might be broken or the file transfer was interrupted."
-msgstr ""
+msgstr "A apărut o eroare la procesarea avatarului. Fișierul de imagini ar putea fi spart sau transferul fișierului a fost întrerupt."
 
 msgid "<Root folder>"
-msgstr ""
+msgstr "<Dosarul Root>"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
 msgid "You are now located in %(group_name)s. You were redirected here from another project or group that links to this item."
-msgstr ""
+msgstr "Acum vă aflați în %(group_name)s.<br/>Ați fost redirecționat aici de la un alt proiect sau grup care face legătura cu acest articol."
 
 #, python-format
 msgid "Container \"%(title)s\" could not be deleted because it contained objects that could not be deleted."
-msgstr ""
+msgstr "Containerul ”%(title)s” nu a putut fi șters deoarece conținea obiecte care nu puteau fi șterse."
 
 #, python-format
 msgid "You do not have permissions to delete \"%(title)s\"."
-msgstr ""
+msgstr "Nu aveți permisiuni de șters ”%(title)s”."
 
 #, python-format
 msgid "Object \"%(title)s\" could not be deleted."
-msgstr ""
+msgstr "Obiectul ”%(title)s” nu a putut fi șters."
 
 #, python-format
 msgid "%(numobjects)d objects were deleted successfully."
-msgstr ""
+msgstr "%(numobjects)d obiectele au fost șterse cu succes."
 
 #, python-format
 msgid "Object \"%(title)s\" was deleted successfully."
-msgstr ""
+msgstr "Obiectul ”%(title)s” a fost șters cu succes."
 
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
-msgstr ""
+msgstr "%(numobjects)d alte obiecte au fost șterse."
 
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
-msgstr ""
+msgstr "Nu %(verbose_name)s s-a găsit nici o potrivire cu interogare"
 
 msgid "Your profile was edited successfully."
-msgstr ""
+msgstr "Profilul dvs. a fost modificat cu succes."
 
 msgid "Your user account is associated with an integrated Portal. This account's email address is fixed and therefore was left unchanged."
-msgstr ""
+msgstr "Contul dvs. de utilizator este asociat cu un portal integrat. Adresa de e-mail a acestui cont este fixă și, prin urmare, a fost lăsată neschimbată."
 
 msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
-msgstr ""
+msgstr "Ți-ai schimbat adresa de e-mail. Vă vom trimite în curând un e-mail la această adresă cu un link de confirmare. Până să faceți clic pe linkul respectiv, profilul dvs. vă va păstra adresa de e-mail veche!"
 
 msgid "Sorry, your profile could not be saved because there was an error while processing the avatar!"
-msgstr ""
+msgstr "Ne pare rău, profilul dvs. nu a putut fi salvat, deoarece a apărut o eroare la procesarea avatarului!"
 
 msgid "Sorry, something went wrong while saving your profile!"
-msgstr ""
+msgstr "Ne pare rău, ceva nu a funcționat în timp ce îți salvezi profilul!"
 
 msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
-msgstr ""
+msgstr "Profilul dvs. a fost șters cu succes. Ne pare rău că nu mai sunteți cu noi."
 
 #, python-format
 msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
-msgstr ""
+msgstr "Sunteți singurul administrator rămas ”%s”. Vă rugăm să numiți un administrator diferit sau să îl ștergeți mai întâi."
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
-msgstr ""
+msgstr "Ne pare rău, nu am putut conecta contul de utilizator din cauza unei erori interne. Vă rugăm să contactați un administrator de sistem!"
 
 msgid "Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!"
-msgstr ""
+msgstr "Ne pare rău, nu am putut conecta contul de utilizator, deoarece nu am putut prelua informații importante despre contul de utilizator. Vă rugăm să contactați un administrator de sistem!"
 
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
-msgstr ""
+msgstr "Ne pare rău, nu vă puteți autentifica, deoarece contul dvs. este suspendat. Vă rugăm să contactați un administrator de sistem!"
 
 #, python-format
 msgid "Your account \"%(user)s\" was registered successfully. Welcome to the community!"
-msgstr ""
+msgstr "Contul dvs ”%(user)s” a fost înregistrat cu succes. Bine ați venit în comunitate!"
 
 #, python-format
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
-msgstr ""
+msgstr "Utilizatorul ”%(user)s” a fost înregistrat cu succes. Contul va trebui să fie aprobat înainte de a vă autentifica. Vom trimite un e-mail la adresa dvs ”%(email)s” când se va întâmpla acest lucru."
 
 #, python-format
 msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
-msgstr ""
+msgstr "Utilizatorul ”%(user)s” a fost înregistrată cu succes. Vă vom trimite un e-mail la adresa dvs %(email)s” în curând. Trebuie să confirmați adresa de e-mail înainte de a vă autentifica."
 
 msgid "The invite token you have used does not exist!"
-msgstr ""
+msgstr "Jetonul de invitație pe care l-ați folosit nu există!"
 
 msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
-msgstr ""
+msgstr "Ne pare rău, dar jetonul de invitație pe care l-ați folosit nu mai este activ sau nu mai este activ!"
 
 msgid "Token invitations applied. You are now a member of the associated projects/groups!"
-msgstr ""
+msgstr "Jetonul de invitație a fost aplicat. Acum sunteți membru al proiectelor/grupurilor asociate!"
 
 msgid "There was an error while processing your invites. Some of your invites may not have been applied."
-msgstr ""
+msgstr "A apărut o eroare la procesarea invitațiilor. Este posibil ca unele dintre invitațiile dvs. să nu fi fost aplicate."
 
 msgid "You are already logged in!"
-msgstr ""
+msgstr "Sunteți deja conectat!"
 
 msgid "Please enter a token!"
-msgstr ""
+msgstr "Vă rog introduceți un jeton!"
 
 msgid "Sorry, but the invite token you have used does not seem to be valid!"
-msgstr ""
+msgstr "Ne pare rău, dar jetonul de invitație pe care l-ați folosit nu pare să fie valid!"
 
-#, fuzzy, python-format
-#| msgid "Edit “%(team_name)s”"
+#, python-format
 msgid "Welcome to %(portal_name)s!"
-msgstr "Edit project “%(team_name)s”"
+msgstr "Bun venit la %(portal_name)s!"
 
 msgid "The user account you were looking for does not exist! Their registration was probably already denied."
-msgstr ""
+msgstr "Contul de utilizator pe care îl căutați nu există! Înregistrarea lor a fost probabil deja refuzată."
 
 msgid "The user account was already approved, but thank you anyway!"
-msgstr ""
+msgstr "Contul de utilizator a fost deja aprobat, dar vă mulțumesc oricum!"
 
 #, python-format
 msgid "Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site."
-msgstr ""
+msgstr "Vă mulțumim pentru aprobarea utilizatorului %(username)s (%(email)s)! Le-a fost trimis un e-mail de introducere și aceștia se pot autentifica pe site."
 
 #, python-format
 msgid "The user account %(username)s (%(email)s) was already approved, so you cannot deny the registration! If this is a problem, you may want to deactivate the user manually from the admin interface."
-msgstr ""
+msgstr "Contul de utilizator %(username)s (%(email)s) a fost deja aprobat, deci nu puteți refuza înregistrarea! Dacă aceasta este o problemă, poate doriți să dezactivați utilizatorul manual din interfața de administrare."
 
 #, python-format
 msgid "You have denied the join request of %(username)s (%(email)s)! An email was sent to let them know."
-msgstr ""
+msgstr "Ați refuzat cererea de alăturare din %(username)s (%(email)s)! A fost trimis un e-mail pentru a le informa."
 
 msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
-msgstr ""
+msgstr "Contul de utilizator pe care îl căutați nu există! Probabil că înregistrarea dvs. a fost deja refuzată sau jetonul e-mailului a expirat."
 
 msgid "The email for this account seems to already have been confirmed!"
-msgstr ""
+msgstr "E-mailul pentru acest cont pare să fi fost deja confirmat!"
 
 msgid "The link you supplied for the email confirmation is no longer valid!"
-msgstr ""
+msgstr "Link-ul furnizat pentru confirmarea e-mailului nu mai este valabil!"
 
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
-msgstr ""
+msgstr "E-mailul pe care încercați să-l confirmați a fost deja confirmat sau aparține unui alt utilizator!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
-msgstr ""
+msgstr "Adresa ta de e-mail %(email)s a fost confirmată cu succes! Bun venit în comunitate!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
-msgstr ""
+msgstr "Adresa dvs. de e-mail %(email)s a fost confirmată cu succes! Cu toate acestea, contul dvs. nu este încă activ și va trebui să fie aprobat de un administrator înainte de a vă autentifica. Vă vom trimite un e-mail imediat ce se va întâmpla!"
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
-msgstr ""
+msgstr "Linkul de dezabonare pe care l-ați făcut clic nu pare să fie valid!"
 
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
-msgstr ""
+msgstr "V-am dezabonat e-mailul ”%(email)s” du lista noastră de e-mailuri. Nu veți mai primi e-mailuri de la noi!"
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
-msgstr ""
+msgstr "Bun venit! Ați fost invitat următoarele proiecte și grupuri. Vă rugăm faceți clic pe butonul derulant pentru a accepta sau refuza invitația pentru fiecare dintre ele!"
 
+#, fuzzy
+#| msgid "Your profile was edited successfully."
 msgid "Your Announcement was created successfully."
-msgstr ""
+msgstr "Profilul dvs. a fost modificat cu succes."
 
+#, fuzzy
+#| msgid "Your profile was edited successfully."
 msgid "Your Announcement was saved successfully."
-msgstr ""
+msgstr "Profilul dvs. a fost modificat cu succes."
 
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
 msgid "Your Announcement was deleted successfully."
-msgstr ""
+msgstr "Ideea ta a fost ștearsă cu succes."
 
+#, fuzzy
+#| msgid "Your profile was edited successfully."
 msgid "Your Announcement was activated successfully."
-msgstr ""
+msgstr "Profilul dvs. a fost modificat cu succes."
 
+#, fuzzy
+#| msgid "Your profile was edited successfully."
 msgid "Your Announcement was deactivated successfully."
-msgstr ""
+msgstr "Profilul dvs. a fost modificat cu succes."
 
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
-msgstr ""
+msgstr "În prezent nu sunteți membru %s! Dacă doriți, puteți solicita să deveniți membru mai jos."
 
 msgid "Your changes have been saved."
-msgstr ""
+msgstr "Schimbările tale au fost salvate."
 
-#~ msgid "Group overview"
-#~ msgstr "Group overview"
+#~ msgid "Nachrichten"
+#~ msgstr "Știri"
 
-#~ msgid "Deutsch"
-#~ msgstr "Deutsch"
-
-#~ msgid "English"
-#~ msgstr "English"
-
-#~ msgid "Russian"
-#~ msgstr "Русский"
-
-#~ msgid "Ukrainian"
-#~ msgstr "Українська"
-
-#~ msgid "French"
-#~ msgstr "Français"
-
-#~ msgid "Polish"
-#~ msgstr "Polski"
-
-#~| msgid "Group"
-#~ msgid "Gruppen"
-#~ msgstr "Group"
-
-#~| msgid "Enter a name for the group."
-#~ msgid "Enter a descriptive name for your group."
-#~ msgstr "Enter a name for the project."
-
-#, fuzzy
-#~ msgid "Browse this public team"
-#~ msgstr "Public project"
-
-#~ msgid "Do you really want to leave group „%(title)s“?"
-#~ msgstr "Do you really want to leave „%(title)s“?"
-
-#~ msgid "No group found with this name"
-#~ msgstr "No project found with this name"
-
-#~ msgid "You're receiving this email because you are an administrator of this group."
-#~ msgstr "You're receiving this email because you are an administrator of this project."
-
-#~ msgid "join team"
-#~ msgstr "Join Project"
+#~ msgid "Your privacy settings were saved. Welcome!"
+#~ msgstr "Setările dvs. de confidențialitate au fost salvate. Bine ați venit!"
