@@ -60,7 +60,7 @@
                 	{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL and login_url %}
 	                    <li>
 	                        <a href="{{ login_url }}{% if request.path != "/" %}?next={{ request.path }}{% endif %}">
-	                            {% trans "Login" %}
+	                            {% trans "Log in" %}
 	                        </a>
 	                    </li>
                     {% endif %}

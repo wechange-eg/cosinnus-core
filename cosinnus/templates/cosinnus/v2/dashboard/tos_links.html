@@ -1,5 +1,6 @@
 {% comment %} Override this in your project like this:
-	<div><a href="/cms/haeufig-gestellte-fragen-faqs/">Hilfe & FAQ</a></div>
-	<div><a href="/cms/datenschutz/">Datenschutzerklärung</a></div>
-	<div><a href="/cms/nutzungsbedingungen-agbs/">Nutzungsbedingungen</a></div>
+	<div><a href="{% include 'cosinnus/v2/urls/impressum_url.html' %}">{% trans "Legal Notice" %}</a></div>
+	<div><a href="{% include 'cosinnus/v2/urls/tos_url.html' %}">{% trans "Terms of Service" %}</a></div>
+	<div><a href="{% include 'cosinnus/v2/urls/privacy_policy_url.html' %}">{% trans "Privacy Policy" %}</a></div>
+	<div><a href="{% include 'cosinnus/v2/urls/faq_url.html' %}">{% trans "Help & FAQ" %}</a></div>
 {% endcomment %}
