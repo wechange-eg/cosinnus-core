@@ -341,7 +341,7 @@ notifications = {
         'subject_text': _('%(sender_name)s has just created a new user account on %(portal_name)s!'),
         'data_attributes': {
             'object_name': '_sender_name',
-            'object_text': 'description', 
+            'object_text': 'user.email', 
         },
         'notification_reason': 'none',
     },
