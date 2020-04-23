@@ -343,9 +343,7 @@ notifications = {
         'moderatable_content': True,
         
         'is_html': True,
-        'snippet_type': 'news',
-        'event_text': _('Created'),
-        'notification_text': _('%(sender_name)s has just created a new user account on %(portal_name)s!'),
+        'event_text': _('%(sender_name)s has just created a new user account on %(portal_name)s!'),
         'subject_text': _('%(sender_name)s has just created a new user account on %(portal_name)s!'),
         'data_attributes': {
             'object_name': '_sender_name',
