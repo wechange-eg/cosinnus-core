@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-03 17:48+0200\n"
+"POT-Creation-Date: 2020-04-23 11:46+0200\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -190,9 +190,6 @@ msgstr[1] "“%(sender_name)s” heeft gevraagd om lid te worden van %(team_name
 msgid "You are an admin of this team"
 msgstr "U bent beheerder van dit team geworden"
 
-msgid "New membership request"
-msgstr "Nieuw lidmaatschapsverzoek"
-
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "“%(sender_name)s” heeft gevraagd om lid te worden van %(team_name)s."
@@ -269,9 +266,6 @@ msgstr "U bent beheerder van dit team geworden"
 msgid "%(sender_name)s made you an admin"
 msgstr "%(sender_name)s heeft u getagt in"
 
-msgid "Made you an admin"
-msgstr "Heeft u een beheerder gemaakt"
-
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s heeft u een beheerder gemaakt van “%(team_name)s” op %(portal_name)s!"
@@ -282,9 +276,6 @@ msgstr "Uw beheerdersstatus voor dit team is ingetrokken"
 #, fuzzy, python-format
 #| msgid "Revoked your admin status"
 msgid "%(sender_name)s revoked your admin status"
-msgstr "Uw beheerdersstatus ingetrokken"
-
-msgid "Revoked your admin status"
 msgstr "Uw beheerdersstatus ingetrokken"
 
 #, python-format
@@ -309,10 +300,6 @@ msgid "%(sender_name)s tagged you in"
 msgstr "%(sender_name)s heeft u getagt in"
 
 #, python-format
-msgid "You were tagged by %(sender_name)s"
-msgstr "U bent getagt door %(sender_name)s"
-
-#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "U bent getagt in “%(object_name)s” in %(team_name)s."
 
@@ -320,9 +307,6 @@ msgstr "U bent getagt in “%(object_name)s” in %(team_name)s."
 #| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s invited you to join %(team_name)s"
 msgstr "%(sender_name)s heeft u uitgenodigd deel te nemen aan “%(team_name)s” op %(portal_name)s!"
-
-msgid "Invited you"
-msgstr "Heeft u uitgenodigd"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -354,15 +338,17 @@ msgstr "Een van uw projecten/groepen is verplaatst naar het portaal “%(portal_
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "“%(team_name)s” is verplaatst naar %(portal_name)s!"
 
-msgid "Created"
-msgstr "Aangemaakt"
-
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s heeft zojuist het project/de groep “%(team_name)s” op %(portal_name)s gemaakt!"
 
-msgid "Has created"
-msgstr "Is aangemaakt"
+msgid "Created"
+msgstr "Aangemaakt"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
+msgstr "%(sender_name)s heeft zojuist het idee “%(object_name)s” aangemaakt op %(portal_name)s!"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -373,30 +359,36 @@ msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr "%(sender_name)s heeft zojuist het idee “%(object_name)s” aangemaakt!"
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
-msgstr "%(sender_name)s heeft zojuist het project “%(team_name)s” op %(portal_name)s gemaakt op basis van een idee dat u volgt! <br/><br/> Klik op de onderstaande link om het te bekijken. Daar kunt u zien of u mee wilt doen aan het project."
-
-#, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr "%(sender_name)s heeft zojuist het project “%(team_name)s” gemaakt op basis van een idee dat u volgt!"
 
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr "%(sender_name)s heeft zojuist het project “%(team_name)s” op %(portal_name)s gemaakt op basis van een idee dat u volgt! <br/><br/> Klik op de onderstaande link om het te bekijken. Daar kunt u zien of u mee wilt doen aan het project."
+
 msgid "Deutsch--NATIVE-LANGUAGE"
-msgstr "Duits—MOEDERTAAL"
+msgstr "Deutsch"
 
 msgid "English--NATIVE-LANGUAGE"
-msgstr "Engels—MOEDERTAAL"
+msgstr "English"
 
 msgid "Russian--NATIVE-LANGUAGE"
-msgstr "Russisch—MOEDERTAAL"
+msgstr "Русский"
 
 msgid "Ukrainian--NATIVE-LANGUAGE"
-msgstr "Oekraïens—MOEDERTAAL"
+msgstr "Українська"
 
 msgid "French--NATIVE-LANGUAGE"
-msgstr "Frans——MOEDERTAAL"
+msgstr "Français"
 
 msgid "Polish--NATIVE-LANGUAGE"
-msgstr "Pools—MOEDERTAAL"
+msgstr "Polski"
+
+msgid "Spanish--NATIVE-LANGUAGE"
+msgstr "Español"
+
+msgid "Romanian--NATIVE-LANGUAGE"
+msgstr "Română"
 
 msgid "Attachments"
 msgstr "Bijlagen"
@@ -750,6 +742,9 @@ msgstr "Bel tot Actie Vak titel"
 
 msgid "Call to Action Box Description"
 msgstr "Bel tot Actie Vak Beschrijving"
+
+msgid "Embedded Dashboard HTML"
+msgstr ""
 
 msgid "Deactivated Apps"
 msgstr "Gedeactiveerde Apps"
@@ -2297,6 +2292,14 @@ msgstr "Facebook-integratie is beschikbaar nadat u de groep hebt gemaakt!"
 msgid "Facebook integration is available after you created the project!"
 msgstr "Facebook-integratie is beschikbaar nadat u het project hebt gemaakt!"
 
+msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are not following any ideas yet."
+msgid "You may use the following variables:"
+msgstr "U volgt mijn ideeën nog niet."
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
 msgstr "Uitnodigingen"
@@ -2369,8 +2372,8 @@ msgstr "Doe nu mee en werk samen!"
 msgid "Register"
 msgstr "Registreer"
 
-msgid "Login"
-msgstr "Log in"
+msgid "Log in"
+msgstr "Inloggen"
 
 msgid "You are a member!"
 msgstr "U bent een lid!"
@@ -3228,9 +3231,6 @@ msgstr "Wachtwoord vergeten?"
 msgid "Logged out"
 msgstr "Uitgelogd"
 
-msgid "Log in"
-msgstr "Inloggen"
-
 msgid "Password"
 msgstr "Wachtwoord"
 
@@ -3287,6 +3287,9 @@ msgstr "Reset wachtwoord"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Uw wachtwoord is vastgesteld. U kunt doorgaan en inloggen."
+
+msgid "Login"
+msgstr "Log in"
 
 msgid "Enter new password"
 msgstr "Voer een nieuw wachtwoord in"
@@ -4106,11 +4109,6 @@ msgstr ""
 msgid "Raw HTML. Should contain a Dismiss-button"
 msgstr ""
 
-#, fuzzy
-#| msgid "You are not following any ideas yet."
-msgid "You may use the following variables:"
-msgstr "U volgt mijn ideeën nog niet."
-
 msgid "External Link for a \"Read more\" link"
 msgstr ""
 
@@ -4894,6 +4892,24 @@ msgstr "U bent momenteel geen lid van %s! Als u wilt, kunt u hieronder een lidma
 
 msgid "Your changes have been saved."
 msgstr "Uw veranderingen zijn bewaard."
+
+#~ msgid "New membership request"
+#~ msgstr "Nieuw lidmaatschapsverzoek"
+
+#~ msgid "Made you an admin"
+#~ msgstr "Heeft u een beheerder gemaakt"
+
+#~ msgid "Revoked your admin status"
+#~ msgstr "Uw beheerdersstatus ingetrokken"
+
+#~ msgid "You were tagged by %(sender_name)s"
+#~ msgstr "U bent getagt door %(sender_name)s"
+
+#~ msgid "Invited you"
+#~ msgstr "Heeft u uitgenodigd"
+
+#~ msgid "Has created"
+#~ msgstr "Is aangemaakt"
 
 #~ msgid "Hi,"
 #~ msgstr "Hallo,"

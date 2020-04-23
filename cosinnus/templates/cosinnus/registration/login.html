@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags widget_tweaks %}
 
-{% block page_title %}{% trans "Login" %}{% endblock %}
+{% block page_title %}{% trans "Log in" %}{% endblock %}
 
 {% block jshead %}
     {% comment %} This page deals with authentication data and loads only the most necessary vendor scripts! {% endcomment %}
@@ -48,7 +48,7 @@
                     <i class="fa fa-hand-o-right"></i>
                 </span>
                 <div class="media-body">
-                    {% trans "Login" %}
+                    {% trans "Log in" %}
                 </div>
             </li>
         </ul>
@@ -61,7 +61,7 @@
     
     <div class="content-box cms-content">
         
-	    <h1>{% trans "Login" %}</h1>
+	    <h1>{% trans "Log in" %}</h1>
 	    
 	    <br/>
         {% include 'cosinnus/registration/sso_login_button.html' %}                        

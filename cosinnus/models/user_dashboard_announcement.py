@@ -136,15 +136,6 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
     def category_text(self):
         return dict(self.ANNOUNCEMENT_CATEGORIES)[self.category]
     
-    def get_raw_with_variables(self, request):
-        variables = {
-            'user_first_name': request.user.first_name,
-            'user_last_name': request.user.last_name,
-            'user_full_name': full_name(request.user),
-            'announcement_id': self.id,
-        }
-        return self.raw_html % variables
-    
     @classmethod
     def get_next_for_user(cls, user):
         """ Returns the next valid announcement for a user that they haven't hidden already,

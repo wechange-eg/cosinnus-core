@@ -24,6 +24,7 @@ user_group_admin_demoted = dispatch.Signal(providing_args=["user", "obj", "audie
 project_created_from_idea = dispatch.Signal(providing_args=["user", "obj", "audience"])
 idea_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 group_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
+user_account_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
 """ Notification definitions.
@@ -329,6 +330,26 @@ notifications = {
             'sub_object_name': '_sender_name', 
             'sub_object_text': '_sender.cosinnus_profile.description',
             'sub_object_icon': '_sender.cosinnus_profile.get_icon',
+        },
+        'notification_reason': 'none',
+    },
+    'user_account_created': {
+        'label': '<hidden-user_account_created>', 
+        'mail_template': '<html-only>',
+        'subject_template': '<html-only>',
+        'signals': [user_account_created],
+        'default': False,
+        'hidden': True,
+        'moderatable_content': True,
+        
+        'is_html': True,
+        'snippet_type': 'news',
+        'event_text': _('Created'),
+        'notification_text': _('%(sender_name)s has just created a new user account on %(portal_name)s!'),
+        'subject_text': _('%(sender_name)s has just created a new user account on %(portal_name)s!'),
+        'data_attributes': {
+            'object_name': '_sender_name',
+            'object_text': 'user.email', 
         },
         'notification_reason': 'none',
     },

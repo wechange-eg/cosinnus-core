@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-03 17:48+0200\n"
+"POT-Creation-Date: 2020-04-23 11:46+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -190,9 +190,6 @@ msgstr[2] "\"%(sender_name)s\" запросив членства в %(team_name)
 msgid "You are an admin of this team"
 msgstr "Вас було призначено адміністратором цієї команди"
 
-msgid "New membership request"
-msgstr "Новий запит щодо членства"
-
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "\"%(sender_name)s\" запросив членства в %(team_name)s."
@@ -271,9 +268,6 @@ msgstr "Вас було призначено адміністратором ці
 msgid "%(sender_name)s made you an admin"
 msgstr "%(sender_name)s відмітив Вас"
 
-msgid "Made you an admin"
-msgstr "Вас призначено адміністратором"
-
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s призначив Вас адміністратором %(team_name)s на %(portal_name)s!"
@@ -284,9 +278,6 @@ msgstr "Ваш статус адміністратора цієї команди
 #, fuzzy, python-format
 #| msgid "Revoked your admin status"
 msgid "%(sender_name)s revoked your admin status"
-msgstr "Відмінено Ваш статус адміністратора"
-
-msgid "Revoked your admin status"
 msgstr "Відмінено Ваш статус адміністратора"
 
 #, python-format
@@ -311,10 +302,6 @@ msgid "%(sender_name)s tagged you in"
 msgstr "%(sender_name)s відмітив Вас"
 
 #, python-format
-msgid "You were tagged by %(sender_name)s"
-msgstr "%(sender_name)s позначив Вас"
-
-#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "Вас позначили в \"%(object_name)s\" у %(team_name)s."
 
@@ -322,9 +309,6 @@ msgstr "Вас позначили в \"%(object_name)s\" у %(team_name)s."
 #| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s invited you to join %(team_name)s"
 msgstr "%(sender_name)s запросив Вас долучитися до %(team_name)s на %(portal_name)s!"
-
-msgid "Invited you"
-msgstr "Запросив Вас"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -356,15 +340,17 @@ msgstr "Один з Ваших проектів/спільнот було пер
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "„%(team_name)s“ було переміщено на %(portal_name)s!"
 
-msgid "Created"
-msgstr "Створено"
-
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s тільки що створив проект/спільноту „%(team_name)s“ на %(portal_name)s!"
 
-msgid "Has created"
-msgstr "Створив"
+msgid "Created"
+msgstr "Створено"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
+msgstr "%(sender_name)s тільки що створив ідею „%(object_name)s“ на %(portal_name)s!"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -375,12 +361,12 @@ msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr "%(sender_name)s тільки що створив ідею „%(object_name)s“!"
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
-msgstr "%(sender_name)s тільки що створив проект %(team_name)s“ на %(portal_name)s щодо ідеї, яку Ви відстежуєте! <br/><br/> Щоби ознайомитися, перейдіть за посиланням внизу. Ви зможете вирішити, чи хочете ви доєднатися до проекту."
-
-#, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr "%(sender_name)s тільки що створив проект %(team_name)s“ щодо ідеї, яку Ви відстежуєте!"
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr "%(sender_name)s тільки що створив проект %(team_name)s“ на %(portal_name)s щодо ідеї, яку Ви відстежуєте! <br/><br/> Щоби ознайомитися, перейдіть за посиланням внизу. Ви зможете вирішити, чи хочете ви доєднатися до проекту."
 
 msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
@@ -399,6 +385,12 @@ msgstr "Français"
 
 msgid "Polish--NATIVE-LANGUAGE"
 msgstr "Polski"
+
+msgid "Spanish--NATIVE-LANGUAGE"
+msgstr "Español"
+
+msgid "Romanian--NATIVE-LANGUAGE"
+msgstr "Română"
 
 msgid "Attachments"
 msgstr "Додатки"
@@ -754,6 +746,9 @@ msgstr "Назва вікна Заклик до дії"
 
 msgid "Call to Action Box Description"
 msgstr "Опис вікна Заклик до дії"
+
+msgid "Embedded Dashboard HTML"
+msgstr ""
 
 msgid "Deactivated Apps"
 msgstr "Деактивовані застосунки"
@@ -2310,6 +2305,14 @@ msgstr "Інтеграція з Facebook можлива після того як
 msgid "Facebook integration is available after you created the project!"
 msgstr "Інтеграція з Facebook можлива після того як Ви створили проект!"
 
+msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are not following any ideas yet."
+msgid "You may use the following variables:"
+msgstr "Ти поки що не відстежуєш жодні Ідеї."
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
 msgstr "Запрошення"
@@ -2382,7 +2385,7 @@ msgstr "Увійдіть і почніть співпрацю!"
 msgid "Register"
 msgstr "Зареєструватися"
 
-msgid "Login"
+msgid "Log in"
 msgstr "Вхід в систему"
 
 msgid "You are a member!"
@@ -3260,9 +3263,6 @@ msgstr "Забули пароль?"
 msgid "Logged out"
 msgstr "Вийшли із системи"
 
-msgid "Log in"
-msgstr "Вхід в систему"
-
 msgid "Password"
 msgstr "Пароль"
 
@@ -3319,6 +3319,9 @@ msgstr "Змінити пароль"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Ваш пароль змінено. Тепер за допомогою нього ви можете увійти у систему."
+
+msgid "Login"
+msgstr "Вхід в систему"
 
 msgid "Enter new password"
 msgstr "Введіть новий пароль"
@@ -4140,11 +4143,6 @@ msgstr ""
 msgid "Raw HTML. Should contain a Dismiss-button"
 msgstr ""
 
-#, fuzzy
-#| msgid "You are not following any ideas yet."
-msgid "You may use the following variables:"
-msgstr "Ти поки що не відстежуєш жодні Ідеї."
-
 msgid "External Link for a \"Read more\" link"
 msgstr ""
 
@@ -4930,6 +4928,24 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#~ msgid "New membership request"
+#~ msgstr "Новий запит щодо членства"
+
+#~ msgid "Made you an admin"
+#~ msgstr "Вас призначено адміністратором"
+
+#~ msgid "Revoked your admin status"
+#~ msgstr "Відмінено Ваш статус адміністратора"
+
+#~ msgid "You were tagged by %(sender_name)s"
+#~ msgstr "%(sender_name)s позначив Вас"
+
+#~ msgid "Invited you"
+#~ msgstr "Запросив Вас"
+
+#~ msgid "Has created"
+#~ msgstr "Створив"
 
 #~ msgid "Hi,"
 #~ msgstr "Вітання,"
