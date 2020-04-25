@@ -13,7 +13,7 @@
                     <i class="fa fa-table"></i>
                 </a>
 	            <div class="media-body">
-	                CSV-Downloads
+                    {% trans "CSV Downloads" %}
 	            </div>
 	        </li>
 	    </ul>
@@ -26,7 +26,7 @@
 	                <i class="fa fa-download"></i>
 	            </a>
 	            <div class="media-body">
-	                Speicherbedarf Gruppen
+                    {% trans "HD space used by groups" %}
 	            </div>
 	        </li>
 	    </ul>
@@ -39,7 +39,7 @@
 	                <i class="fa fa-download"></i>
 	            </a>
 	            <div class="media-body">
-	                Speicherbedarf Projekte
+                    {% trans "HD space used by projects" %}
 	            </div>
 	        </li>
 	    </ul>
@@ -52,13 +52,13 @@
                     <i class="fa fa-download"></i>
                 </a>
                 <div class="media-body">
-                    Benutzerstatistiken (min 1x eingeloggt)
+                    {% trans "User statistics (min 1x logged in)" %}
                 </div>
             </li>
         </ul>
     </button>
     
-    {% if settings.COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS %}
+    {% if SETTINGS.COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS %}
 	    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-newsletter-user-emails' %}">
 	        <ul class="media-list">
 	            <li class="media">
@@ -66,7 +66,7 @@
 	                    <i class="fa fa-download"></i>
 	                </a>
 	                <div class="media-body">
-	                    E-Mails aller Newsletter-Abonnenten 
+                        {% trans "E-Mails of all newsletter subcribers" %}
 	                </div>
 	            </li>
 	        </ul>
@@ -79,7 +79,7 @@
 	                    <i class="fa fa-download"></i>
 	                </a>
 	                <div class="media-body">
-	                    E-Mails ALLER aktiven Benutzer
+	                    {% trans "E-Mails of ALL active users" %}
 	                </div>
 	            </li>
 	        </ul>

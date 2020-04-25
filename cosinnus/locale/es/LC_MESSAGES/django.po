@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-22 13:06+0200\n"
+"POT-Creation-Date: 2020-04-25 18:01+0200\n"
 "PO-Revision-Date: 2020-04-22 12:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -104,7 +104,8 @@ msgstr ""
 msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
 msgstr ""
 
-msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+#, python-format
+msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
 msgstr ""
 
 #, python-format
@@ -355,6 +356,11 @@ msgstr "Creado"
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s creó el proyecto/grupo \"%(team_name)s\" en %(portal_name)s!"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
+msgstr "%(sender_name)s creó la idea \"%(object_name)s\" en %(portal_name)s!"
 
 msgid "Has created"
 msgstr "Ha creado"
@@ -2424,7 +2430,7 @@ msgstr "Participa ahora y colabora!"
 msgid "Register"
 msgstr "Registrar"
 
-msgid "Login"
+msgid "Log in"
 msgstr "Iniciar seción"
 
 msgid "You are a member!"
@@ -3298,9 +3304,6 @@ msgstr "Se te olvidó tu contraseña?"
 msgid "Logged out"
 msgstr "Seción cerrada"
 
-msgid "Log in"
-msgstr "Iniciar seción"
-
 msgid "Password"
 msgstr "Contraseña"
 
@@ -3357,6 +3360,9 @@ msgstr "Reiniciar contraseña"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Tu contraseña ha sido establecida. Puedes continuar e iniciar sesión ahora."
+
+msgid "Login"
+msgstr "Iniciar seción"
 
 msgid "Enter new password"
 msgstr "Inserta contraseña nueva"
@@ -3532,6 +3538,26 @@ msgstr "próximo"
 
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Inserta uno o varios términos de búsqueda o seleccione un tema para buscar."
+
+#, fuzzy
+#| msgid "Download"
+msgid "CSV Downloads"
+msgstr "Descargar"
+
+msgid "HD space used by groups"
+msgstr ""
+
+msgid "HD space used by projects"
+msgstr ""
+
+msgid "User statistics (min 1x logged in)"
+msgstr ""
+
+msgid "E-Mails of all newsletter subcribers"
+msgstr ""
+
+msgid "E-Mails of ALL active users"
+msgstr ""
 
 msgid "Date"
 msgstr "Fecha"
@@ -4922,8 +4948,9 @@ msgstr "Tu cuenta \"%(user)s\"  ha sido registrada con éxito. ¡Bienvenido al a
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgstr "Usario \"%(user)s\" ha sido registrado con éxito. La cuenta tendrá que ser aprobada antes de que puedas iniciar sesión. Te mandaremos un correo electrónico a tu dirección \"%(email)s\" cuando pasará."
 
-#, python-format
-msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+#, fuzzy, python-format
+#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 msgstr "Usario \"%(user)s\" ha sido registrado con éxito. Te mandaremos un correo electrónico a tu dirección %(email)s\" pronto. Tienes que confirmar tu correo electrónico antes de poder iniciar sesión."
 
 msgid "The invite token you have used does not exist!"

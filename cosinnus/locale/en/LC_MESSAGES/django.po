@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-22 13:06+0200\n"
+"POT-Creation-Date: 2020-04-25 18:01+0200\n"
 "PO-Revision-Date: 2019-12-16 17:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -102,7 +102,8 @@ msgstr ""
 msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
 msgstr ""
 
-msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+#, python-format
+msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
 msgstr ""
 
 #, python-format
@@ -347,6 +348,13 @@ msgstr ""
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
 
 msgid "Has created"
 msgstr ""
@@ -2435,7 +2443,7 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-msgid "Login"
+msgid "Log in"
 msgstr ""
 
 msgid "You are a member!"
@@ -3187,9 +3195,6 @@ msgstr ""
 msgid "Logged out"
 msgstr ""
 
-msgid "Log in"
-msgstr ""
-
 msgid "Password"
 msgstr ""
 
@@ -3245,6 +3250,9 @@ msgid "Reset password"
 msgstr ""
 
 msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+msgid "Login"
 msgstr ""
 
 msgid "Enter new password"
@@ -3428,6 +3436,24 @@ msgid "next"
 msgstr ""
 
 msgid "Enter one or more search terms or select a topic to search."
+msgstr ""
+
+msgid "CSV Downloads"
+msgstr ""
+
+msgid "HD space used by groups"
+msgstr ""
+
+msgid "HD space used by projects"
+msgstr ""
+
+msgid "User statistics (min 1x logged in)"
+msgstr ""
+
+msgid "E-Mails of all newsletter subcribers"
+msgstr ""
+
+msgid "E-Mails of ALL active users"
 msgstr ""
 
 msgid "Date"
@@ -4811,7 +4837,7 @@ msgid "User \"%(user)s\" was registered successfully. The account will need to b
 msgstr ""
 
 #, python-format
-msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 msgstr ""
 
 msgid "The invite token you have used does not exist!"

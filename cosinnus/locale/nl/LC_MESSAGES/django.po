@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-22 13:06+0200\n"
+"POT-Creation-Date: 2020-04-25 18:01+0200\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -104,7 +104,9 @@ msgstr "Het e-mailadres voor het account dat u probeert te gebruiken, moet worde
 msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
 msgstr "Als u nog geen mail heeft ontvangen voor het activeren van uw account, probeert u u dan opnieuw aan te melden of neem contact op met onze support via %(email)s!"
 
-msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+#, fuzzy, python-format
+#| msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
 msgstr "Als u nog geen mail heeft ontvangen voor het activeren van uw account, probeert u u dan opnieuw aan te melden of neem contact op met onze support!"
 
 #, python-format
@@ -355,6 +357,11 @@ msgstr "Aangemaakt"
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s heeft zojuist het project/de groep “%(team_name)s” op %(portal_name)s gemaakt!"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
+msgstr "%(sender_name)s heeft zojuist het idee “%(object_name)s” aangemaakt op %(portal_name)s!"
 
 msgid "Has created"
 msgstr "Is aangemaakt"
@@ -2384,8 +2391,8 @@ msgstr "Doe nu mee en werk samen!"
 msgid "Register"
 msgstr "Registreer"
 
-msgid "Login"
-msgstr "Log in"
+msgid "Log in"
+msgstr "Inloggen"
 
 msgid "You are a member!"
 msgstr "U bent een lid!"
@@ -3243,9 +3250,6 @@ msgstr "Wachtwoord vergeten?"
 msgid "Logged out"
 msgstr "Uitgelogd"
 
-msgid "Log in"
-msgstr "Inloggen"
-
 msgid "Password"
 msgstr "Wachtwoord"
 
@@ -3302,6 +3306,9 @@ msgstr "Reset wachtwoord"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Uw wachtwoord is vastgesteld. U kunt doorgaan en inloggen."
+
+msgid "Login"
+msgstr "Log in"
 
 msgid "Enter new password"
 msgstr "Voer een nieuw wachtwoord in"
@@ -3477,6 +3484,26 @@ msgstr "volgende"
 
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Voer een of meer zoektermen in of selecteer een onderwerp om te zoeken."
+
+#, fuzzy
+#| msgid "Download"
+msgid "CSV Downloads"
+msgstr "Download"
+
+msgid "HD space used by groups"
+msgstr ""
+
+msgid "HD space used by projects"
+msgstr ""
+
+msgid "User statistics (min 1x logged in)"
+msgstr ""
+
+msgid "E-Mails of all newsletter subcribers"
+msgstr ""
+
+msgid "E-Mails of ALL active users"
+msgstr ""
 
 msgid "Date"
 msgstr "Datum"
@@ -4796,8 +4823,9 @@ msgstr "Uw account “%(user)s” is succesvol geregistreerd. Welkom bij de comm
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgstr "Gebruiker “%(user)s” is succesvol geregistreerd. Het account moet worden goedgekeurd voordat u kunt inloggen. We sturen een e-mail naar uw adres “%(email)s” als dit gebeurt."
 
-#, python-format
-msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+#, fuzzy, python-format
+#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 msgstr "Gebruiker “%(user)s” is succesvol geregistreerd. We sturen binnenkort een e-mail naar uw adres %(email)s”“. U moet het e-mailadres bevestigen voordat u kunt inloggen."
 
 msgid "The invite token you have used does not exist!"

@@ -51,9 +51,9 @@ class EmailAuthBackend(ModelBackend):
                 message_parts = force_text(_('The email address for the account you are trying to use needs to be activated before you can log in.'))
                 support_email = CosinnusPortal.get_current().support_email
                 if support_email:
-                    message_parts += ' ' + force_text(_('If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!' % {'email': support_email}))
+                    message_parts += ' ' + force_text(_('If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!') % {'email': support_email})
                 else:
-                    message_parts += ' ' + force_text(_('If you have not received an activation email yet, please try signing up again or contact our support!'))
+                    message_parts += ' ' + force_text(_('If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!') % {'portal_name': CosinnusPortal.get_current().name})
                 messages.error(request, message_parts)
         elif user and user.check_password(password) and self.user_can_authenticate(user):
             return user

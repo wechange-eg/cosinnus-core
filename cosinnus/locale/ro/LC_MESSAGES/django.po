@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-22 13:06+0200\n"
+"POT-Creation-Date: 2020-04-25 18:01+0200\n"
 "PO-Revision-Date: 2019-11-18 04:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -103,7 +103,9 @@ msgstr "Trebuie să fie activată adresa de e-mail a contului pe care încercaț
 msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
 msgstr "Dacă nu ați primit încă un e-mail de activare, încercați să vă înscrieți din nou sau contactați asistența noastră la %(email)s!"
 
-msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+#, fuzzy, python-format
+#| msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
 msgstr "Dacă nu ați primit încă un e-mail de activare, încercați să vă înscrieți din nou sau contactați asistența noastră!"
 
 #, python-format
@@ -357,6 +359,11 @@ msgstr "Creată"
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s tocmai a creat proiectul/grupul ”%(team_name)s” pe %(portal_name)s!"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
+msgstr "%(sender_name)s tocmai a creat ideea ”%(object_name)s” pe %(portal_name)s!"
 
 msgid "Has created"
 msgstr "A creat"
@@ -2387,7 +2394,7 @@ msgstr "Alătură-te acum și colaborează!"
 msgid "Register"
 msgstr "Înregistrează-te"
 
-msgid "Login"
+msgid "Log in"
 msgstr "Autentificare"
 
 msgid "You are a member!"
@@ -3245,9 +3252,6 @@ msgstr "Ai uitat?"
 msgid "Logged out"
 msgstr "Delogat"
 
-msgid "Log in"
-msgstr "Autentificare"
-
 msgid "Password"
 msgstr "Parola"
 
@@ -3304,6 +3308,9 @@ msgstr "Resetarea parolei"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Parola dvs. a fost setată.  Este posibil să mergeți înainte și să vă autentificați acum."
+
+msgid "Login"
+msgstr "Autentificare"
 
 msgid "Enter new password"
 msgstr "Introduceți o parolă nouă"
@@ -3479,6 +3486,26 @@ msgstr "următor"
 
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Introduceți unul sau mai mulți termeni de căutare sau selectați un subiect pentru a căuta."
+
+#, fuzzy
+#| msgid "Download"
+msgid "CSV Downloads"
+msgstr "Descarcă"
+
+msgid "HD space used by groups"
+msgstr ""
+
+msgid "HD space used by projects"
+msgstr ""
+
+msgid "User statistics (min 1x logged in)"
+msgstr ""
+
+msgid "E-Mails of all newsletter subcribers"
+msgstr ""
+
+msgid "E-Mails of ALL active users"
+msgstr ""
 
 msgid "Date"
 msgstr "Data"
@@ -4794,8 +4821,9 @@ msgstr "Contul dvs ”%(user)s” a fost înregistrat cu succes. Bine ați venit
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgstr "Utilizatorul ”%(user)s” a fost înregistrat cu succes. Contul va trebui să fie aprobat înainte de a vă autentifica. Vom trimite un e-mail la adresa dvs ”%(email)s” când se va întâmpla acest lucru."
 
-#, python-format
-msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+#, fuzzy, python-format
+#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 msgstr "Utilizatorul ”%(user)s” a fost înregistrată cu succes. Vă vom trimite un e-mail la adresa dvs %(email)s” în curând. Trebuie să confirmați adresa de e-mail înainte de a vă autentifica."
 
 msgid "The invite token you have used does not exist!"

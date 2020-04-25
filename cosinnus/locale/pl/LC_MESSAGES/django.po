@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-22 13:06+0200\n"
+"POT-Creation-Date: 2020-04-25 18:01+0200\n"
 "PO-Revision-Date: 2020-04-06 11:57+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -103,7 +103,8 @@ msgstr ""
 msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
 msgstr ""
 
-msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+#, python-format
+msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
 msgstr ""
 
 #, python-format
@@ -361,6 +362,11 @@ msgstr "Stworzył/a"
 #, fuzzy, python-format
 #| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s zaprosił/a Cię do dołączenia do zespołu ’’%(team_name)s\" na %(portal_name)s!"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s zaprosił/a Cię do dołączenia do zespołu ’’%(team_name)s\" na %(portal_name)s!"
 
 msgid "Has created"
@@ -2448,7 +2454,7 @@ msgstr "Dołącz teraz i współpracuj!"
 msgid "Register"
 msgstr "Zarejestruj się"
 
-msgid "Login"
+msgid "Log in"
 msgstr "Zaloguj się"
 
 msgid "You are a member!"
@@ -3325,9 +3331,6 @@ msgstr "Nie pamiętasz hasła?"
 msgid "Logged out"
 msgstr "Wylogowany/a"
 
-msgid "Log in"
-msgstr "Zaloguj się"
-
 msgid "Password"
 msgstr "Hasło"
 
@@ -3384,6 +3387,9 @@ msgstr "Zresetuj hasło"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Twoje hasło zostało ustawione. Możesz się zalogować."
+
+msgid "Login"
+msgstr "Zaloguj się"
 
 msgid "Enter new password"
 msgstr "Wpisz nowe hasło"
@@ -3561,6 +3567,26 @@ msgstr "następna"
 
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Wpisz jedno lub więcej pojęć lub wybierz temat do wyszukiwania."
+
+#, fuzzy
+#| msgid "Download"
+msgid "CSV Downloads"
+msgstr "Pobierz"
+
+msgid "HD space used by groups"
+msgstr ""
+
+msgid "HD space used by projects"
+msgstr ""
+
+msgid "User statistics (min 1x logged in)"
+msgstr ""
+
+msgid "E-Mails of all newsletter subcribers"
+msgstr ""
+
+msgid "E-Mails of ALL active users"
+msgstr ""
 
 #, fuzzy
 #| msgid "Delete"
@@ -4977,8 +5003,9 @@ msgstr "Twoje konto \"%(user)s\" zostało zarejestrowanie pomyślnie. Witaj w na
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgstr "Użytownik \"%(user)s\" zarejestrowany pomyślnie. Zanim się zalogujesz, musimy zatwierdzić Twoje konto. Wyślemy Ci wiadomość e-mail na adres \"%(email)s\", kiedy będzie po wszystkim."
 
-#, python-format
-msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+#, fuzzy, python-format
+#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 msgstr "Użytownik \"%(user)s\" zarejestrowany pomyślnie. Wkrótce wyślemy Ci wiadomość e-mail na adres \"%(email)s\". Zanim się zalogujesz, musisz zatwierdzić Twój adres e-mail."
 
 #, fuzzy
