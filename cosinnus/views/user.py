@@ -72,6 +72,7 @@ from django.utils.timezone import now
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from django_select2.views import Select2View, NO_ERR_RESP
 from django.core.exceptions import PermissionDenied
+from cosinnus import cosinnus_notifications
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -158,7 +159,7 @@ class UserCreateView(CreateView):
 
     message_success = _('Your account "%(user)s" was registered successfully. Welcome to the community!')
     message_success_inactive = _('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')
-    message_success_email_verification = _('User "%(user)s" was registered successfully. We will send an email to your address %(email)s" soon. You need to confirm the email address before you can log in.')
+    message_success_email_verification = _('User "%(email)s" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in.')
     
     def get_success_url(self):
         return redirect_with_next(reverse('login'), self.request)
@@ -209,6 +210,13 @@ class UserCreateView(CreateView):
             messages.success(self.request, self.message_success % {'user': user.email})
             user.backend = 'cosinnus.backends.EmailAuthBackend'
             _send_user_welcome_email_if_enabled(user)
+            # send user account creation signal, the audience is empty because this is a moderator-only notification
+            user_profile = user.cosinnus_profile
+            # need to attach a group to notification objects
+            forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+            forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+            setattr(user_profile, 'group', forum_group) 
+            cosinnus_notifications.user_account_created.send(sender=self, user=user, obj=user_profile, audience=[])
             login(self.request, user)
         
         # send user registration signal
@@ -449,6 +457,14 @@ def approve_user(request, user_id):
     send_mail_or_fail_threaded(user.email, subj_user, template, data)
     
     _send_user_welcome_email_if_enabled(user)
+    # send user account creation signal, the audience is empty because this is a moderator-only notification
+    user_profile = user.cosinnus_profile
+    # need to attach a group to notification objects
+    forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+    forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+    setattr(user_profile, 'group', forum_group) 
+    cosinnus_notifications.user_account_created.send(sender=user, user=user, obj=user_profile, audience=[])
+
     
     messages.success(request, _('Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site.') \
                      % {'username':full_name_force(user), 'email': user.email})
@@ -532,6 +548,13 @@ def verifiy_user_email(request, email_verification_param):
         messages.success(request, _('Your email address %(email)s was successfully confirmed! Welcome to the community!') % {'email': user.email})
         user.backend = 'cosinnus.backends.EmailAuthBackend'
         _send_user_welcome_email_if_enabled(user)
+        # send user account creation signal, the audience is empty because this is a moderator-only notification
+        user_profile = user.cosinnus_profile
+        # need to attach a group to notification objects
+        forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+        setattr(user_profile, 'group', forum_group) 
+        cosinnus_notifications.user_account_created.send(sender=user, user=user, obj=user_profile, audience=[])
         login(request, user)
         return redirect(reverse('cosinnus:map'))
     else:

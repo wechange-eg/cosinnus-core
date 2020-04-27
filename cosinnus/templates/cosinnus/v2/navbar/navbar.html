@@ -74,12 +74,13 @@
 		        </div>
 	        {% endblock %}
 	        
+	        {% block create_icon_button %}
 			<a class="nav-button nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Create content" %}" 
 			    		aria-expanded="false" aria-controls="create-menu-collapse"
 			    		data-toggle="collapse" data-target="#create-menu-collapse"> 
 	    		<i class="fas fa-fw fa-plus"></i>
 			</a>
-			
+			{% endblock %}
 			{% block home_icon_button %}
 			<a class="nav-button" href="/cms/?noredir=1" role="button" title="{% trans "Home" %}"> 
 	    		<i class="fas fa-fw fa-home"></i>
@@ -93,9 +94,12 @@
 			        </a>
 			    {% endblock %}
 		    {% endif %}
+			{% block calendar_icon_button %}
 			<a class="nav-button" href="{% group_url "cosinnus:event:list" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" role="button" title="{% trans "Events" %}"> 
 	    		<i class="fas fa-fw fa-calendar"></i>
 			</a>
+			{% endblock %}
+			
 			{% if request.user.is_authenticated %} 
 				<a class="nav-button nav-button-with-message-counter" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-global' %}{% else %}{% url 'postman:inbox' %}{% endif %}"
 				         role="button" title="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% trans "Rocket.Chat" %}{% else %}{% trans "Messages" %}{% endif %}"

@@ -247,6 +247,8 @@ LANGUAGES = [
     # (enable them for your specific portals by defining `LANGUAGES` in settings.py
     ('fr', _('French--NATIVE-LANGUAGE')),
     ('pl', _('Polish--NATIVE-LANGUAGE')),
+    ('es', _('Spanish--NATIVE-LANGUAGE')),
+    ('ro', _('Romanian--NATIVE-LANGUAGE')),
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -336,6 +338,9 @@ TESTING = 'test' in sys.argv
 # use session storage for CSRF instead of cookie
 # can't use this yet, until we fix the jQuery-POST usage of csrf cookies
 CSRF_USE_SESSIONS = False
+
+# use session based CSRF cookies
+CSRF_COOKIE_AGE = None
 
 # leave this on for production, but may want to disable for dev
 #SESSION_COOKIE_SECURE = True

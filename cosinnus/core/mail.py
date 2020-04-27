@@ -201,14 +201,14 @@ def send_html_mail_threaded(to_user, subject, html_content):
 
 def get_common_mail_context(request, group=None, user=None):
     """ Collects common context variables for Email templates """
-    
-    site = get_current_site(request)
-    protocol = request.is_secure() and 'https' or 'http'
+    portal = CosinnusPortal.get_current()
+    protocol = portal.protocol or getattr(settings, 'COSINNUS_SITE_PROTOCOL', 'http')
+    site = portal.site
     context = {
         'site': site,
         'site_name': site.name,
         'protocol': protocol,
-        'domain_url': "%s://%s" % (protocol, site.domain),
+        'domain_url': portal.get_domain(),
     }
     if group:
         context.update({

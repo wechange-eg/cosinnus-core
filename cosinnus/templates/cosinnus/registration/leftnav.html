@@ -11,7 +11,7 @@
 {% endif %}
 
 {% captureas href %}{% url "login" %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}{% endcaptureas %}
-{% captureas label %}{% trans "Login" %}{% endcaptureas %}
+{% captureas label %}{% trans "Log in" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_login extra_classes="fine-space" icon="fa-hand-o-right" label=label href=href  %}
 
 {% captureas href %}{% url "cosinnus:user-add" %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}{% endcaptureas %}

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 16:09+0100\n"
+"POT-Creation-Date: 2020-04-25 18:01+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -102,7 +102,9 @@ msgstr "Электронный адрес, что ты пытаешься исп
 msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
 msgstr "Если ты еще не получил(а) уведомление о активации, зарегистрируйся еще раз либо свяжись с нашей службой поддержки, написав нам на %(email)s!"
 
-msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+#, fuzzy, python-format
+#| msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
 msgstr "Если ты еще не получил(а) уведомление о активации, попробуй зарегистрироваться еще раз либо свяжись с нашей службой поддержки!"
 
 #, python-format
@@ -357,6 +359,11 @@ msgstr "Создано"
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s только что создал(а) проект/группу “%(team_name)s” on %(portal_name)s!"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
+msgstr "%(sender_name)s пригласил(а) Вас присоединиться к “%(object_name)s\" на %(portal_name)s!"
+
 msgid "Has created"
 msgstr "Создал"
 
@@ -393,6 +400,12 @@ msgstr "Français"
 
 msgid "Polish--NATIVE-LANGUAGE"
 msgstr "Polski"
+
+msgid "Spanish--NATIVE-LANGUAGE"
+msgstr "Español"
+
+msgid "Romanian--NATIVE-LANGUAGE"
+msgstr "Română"
 
 msgid "Attachments"
 msgstr "Приложения"
@@ -504,6 +517,9 @@ msgstr "Скорее всего, в Вашем браузере выключен
 
 msgid "This account is inactive."
 msgstr "Неактивный аккаунт."
+
+msgid "Hello"
+msgstr ""
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Нажмите на ссылку, чтобы изменить уведомления, которые Вы будете получать:"
@@ -680,6 +696,12 @@ msgstr "Дополнительный CSS"
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Дополнительный CSS для этого портала предпочтительнее других CSS."
 
+msgid "Video Conference Server"
+msgstr ""
+
+msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Проект"
@@ -748,6 +770,9 @@ msgstr "Название Призыва к действию"
 
 msgid "Call to Action Box Description"
 msgstr "Описание Призыва к действию"
+
+msgid "Embedded Dashboard HTML"
+msgstr ""
 
 msgid "Deactivated Apps"
 msgstr "Деактивированные приложения"
@@ -2306,6 +2331,14 @@ msgstr "Фейсбук-Интеграция будет доступна, как 
 msgid "Facebook integration is available after you created the project!"
 msgstr "Фейсбук-Интеграция будет доступна, как только Вы создадите проект!"
 
+msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are not following any ideas yet."
+msgid "You may use the following variables:"
+msgstr "Ты не следишь за идеями пока что."
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
 msgstr "Приглашения"
@@ -2379,8 +2412,8 @@ msgstr "Присоединяйтесь сейчас и давайте сотру
 msgid "Register"
 msgstr "Регистрация"
 
-msgid "Login"
-msgstr "Логин"
+msgid "Log in"
+msgstr "Войти"
 
 msgid "You are a member!"
 msgstr "Вы являетесь участником!"
@@ -3252,9 +3285,6 @@ msgstr "Забыли пароль?"
 msgid "Logged out"
 msgstr "Вы вышли из системы"
 
-msgid "Log in"
-msgstr "Войти"
-
 msgid "Password"
 msgstr "Пароль"
 
@@ -3311,6 +3341,9 @@ msgstr "Переустановить пароль"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Ваш пароль принят. Вы можете продолжить работу и войти в систему прямо сейчас."
+
+msgid "Login"
+msgstr "Логин"
 
 msgid "Enter new password"
 msgstr "Введите новый пароль"
@@ -3487,6 +3520,26 @@ msgstr "следующее"
 
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Введите один или больше поисковых вопросов или выберите тему для поиска."
+
+#, fuzzy
+#| msgid "Download"
+msgid "CSV Downloads"
+msgstr "Скачать"
+
+msgid "HD space used by groups"
+msgstr ""
+
+msgid "HD space used by projects"
+msgstr ""
+
+msgid "User statistics (min 1x logged in)"
+msgstr ""
+
+msgid "E-Mails of all newsletter subcribers"
+msgstr ""
+
+msgid "E-Mails of ALL active users"
+msgstr ""
 
 msgid "Date"
 msgstr "Дата"
@@ -4130,11 +4183,6 @@ msgstr ""
 
 msgid "Raw HTML. Should contain a Dismiss-button"
 msgstr ""
-
-#, fuzzy
-#| msgid "You are not following any ideas yet."
-msgid "You may use the following variables:"
-msgstr "Ты не следишь за идеями пока что."
 
 msgid "External Link for a \"Read more\" link"
 msgstr ""
@@ -4814,8 +4862,9 @@ msgstr "Ваш аккаунт \"%(user)s\" успешно зарегистрир
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgstr "Пользователь \"%(user)s“ зарегистрирован. Перед тем, как Вы сможете войти в систему, этот аккаунт требует проверки и подключения. Мы оповестим Вас по электронной почте \"%(email)s“, когда это произойдет."
 
-#, python-format
-msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+#, fuzzy, python-format
+#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 msgstr "Пользователь \"%(user)s“ зарегистрирован. В ближайшее время мы вышлем Вам электронное письмо на Вашу электронную почту %(email)s\". Вам необходимо подтвердить адрес Вашей электронной почты, прежде чем Вы сможете зайти на сайт."
 
 msgid "The invite token you have used does not exist!"

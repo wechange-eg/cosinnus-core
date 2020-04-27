@@ -129,7 +129,11 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
 
     SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings']\
                     + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
-                    
+    
+    # this indicates that objects of this model are in some way always visible by registered users
+    # on the platform, no matter their visibility settings, and thus subject to moderation 
+    cosinnus_always_visible_by_users_moderator_flag = True
+    
     _settings = None                
     
     class Meta(object):

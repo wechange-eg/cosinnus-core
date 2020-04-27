@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 16:09+0100\n"
-"PO-Revision-Date: 2020-02-23 16:10+0100\n"
+"POT-Creation-Date: 2020-04-25 18:01+0200\n"
+"PO-Revision-Date: 2020-04-25 18:04+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -127,12 +127,17 @@ msgstr ""
 "registriere dich bitte erneut oder kontaktiere unseren Support unter "
 "%(email)s!"
 
+#, python-format
+#| msgid ""
+#| "If you have not received an activation email yet, please try signing up "
+#| "again or contact our support!"
 msgid ""
-"If you have not received an activation email yet, please try signing up "
-"again or contact our support!"
+"If you have not received an activation email from %(portal_name)s within a "
+"few minutes please look in your spam folder or try signing up again!"
 msgstr ""
-"Wenn du noch keine Mail mit einem Bestätigungslink bekommen hast, "
-"registriere dich bitte erneut oder kontaktiere unseren Support!"
+"Wenn du noch keine Mail mit einem Bestätigungslink von %(portal_name)s "
+"bekommen hast, schaue bitte in deinem Spam-Ordner nach oder versuche, dich "
+"erneutz zu registrieren!"
 
 #, python-format
 msgid ""
@@ -450,6 +455,15 @@ msgstr ""
 "%(sender_name)s hat gerade die Gruppe/das Projekt %(team_name)s erstellt auf "
 "%(portal_name)s!"
 
+#, python-format
+#| msgid ""
+#| "%(sender_name)s just created the idea \"%(object_name)s\" on "
+#| "%(portal_name)s!"
+msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
+msgstr ""
+"%(sender_name)s hat gerade einen neuen Benutzeraccount auf %(portal_name)s "
+"erstellt!"
+
 msgid "Has created"
 msgstr "Hat erstellt"
 
@@ -501,6 +515,12 @@ msgstr "Français"
 
 msgid "Polish--NATIVE-LANGUAGE"
 msgstr "Polski"
+
+msgid "Spanish--NATIVE-LANGUAGE"
+msgstr "Español"
+
+msgid "Romanian--NATIVE-LANGUAGE"
+msgstr "Română"
 
 msgid "Attachments"
 msgstr "Anhänge"
@@ -625,6 +645,9 @@ msgstr ""
 
 msgid "This account is inactive."
 msgstr "Dieses Benutzerkonto ist deaktiviert worden."
+
+msgid "Hello"
+msgstr ""
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Klicke den folgenden Link, um einzustellen welche E-Mails du erhältst:"
@@ -819,6 +842,14 @@ msgstr "Zusätzliches CSS"
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Wird vorgezogen gegenüber sämtlichem anderen CSS"
 
+msgid "Video Conference Server"
+msgstr ""
+
+msgid ""
+"If entered, will enable video conference functionality across the site. "
+"Needs to be a URL up to the point where any random room name can be appended."
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Projekt"
@@ -893,6 +924,9 @@ msgstr "Aufruf zum Handeln - Microsite-Box Titel"
 
 msgid "Call to Action Box Description"
 msgstr "Aufruf zum Handeln - Microsite-Box Beschreibungstext"
+
+msgid "Embedded Dashboard HTML"
+msgstr ""
 
 msgid "Deactivated Apps"
 msgstr "Deaktivierte Apps"
@@ -2720,6 +2754,14 @@ msgid "Facebook integration is available after you created the project!"
 msgstr ""
 "Die Facebook-Integration wird verfügbar sobald du das Projekt erstellt hast!"
 
+msgid ""
+"The HTML entered here will be displayed on the group/project dashboard (only "
+"for members)"
+msgstr ""
+
+msgid "You may use the following variables:"
+msgstr "Du kannst die folgenden Variablen benutzen:"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
 msgstr "Einladungen"
@@ -2793,8 +2835,8 @@ msgstr "Jetzt anmelden und mitgestalten!"
 msgid "Register"
 msgstr "Registrieren"
 
-msgid "Login"
-msgstr "Login"
+msgid "Log in"
+msgstr "Einloggen"
 
 msgid "You are a member!"
 msgstr "Du bist Mitglied!"
@@ -3823,9 +3865,6 @@ msgstr "Passwort vergessen?"
 msgid "Logged out"
 msgstr "Abgemeldet"
 
-msgid "Log in"
-msgstr "Login"
-
 msgid "Password"
 msgstr "Passwort"
 
@@ -3891,6 +3930,9 @@ msgstr "Passwort zurücksetzen"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Ihr Passwort wurde geändert. Sie können sich jetzt damit einloggen."
+
+msgid "Login"
+msgstr "Anmelden"
 
 msgid "Enter new password"
 msgstr "Neues Passwort eingeben"
@@ -4116,6 +4158,25 @@ msgid "Enter one or more search terms or select a topic to search."
 msgstr ""
 "Gib einen oder mehrere Suchbegriffe ein oder wähle ein Thema aus um zu "
 "Suchen."
+
+#| msgid "Download"
+msgid "CSV Downloads"
+msgstr "CSV Downloads"
+
+msgid "HD space used by groups"
+msgstr "Speicherbedarf Gruppen"
+
+msgid "HD space used by projects"
+msgstr "Speicherbedarf Projekte"
+
+msgid "User statistics (min 1x logged in)"
+msgstr "Benutzerstatistiken (mind. 1x eingeloggt)"
+
+msgid "E-Mails of all newsletter subcribers"
+msgstr "E-Mails aller Newsletter-Abonnenten"
+
+msgid "E-Mails of ALL active users"
+msgstr "E-Mails ALLER aktiven Benutzer"
 
 msgid "Date"
 msgstr "Datum"
@@ -4838,9 +4899,6 @@ msgstr ""
 
 msgid "Raw HTML. Should contain a Dismiss-button"
 msgstr "Quell-HTML. Sollte einen \"Nicht mehr anzeigen\"-Button enthalten"
-
-msgid "You may use the following variables:"
-msgstr "Du kannst die folgenden Variablen benutzen:"
 
 msgid "External Link for a \"Read more\" link"
 msgstr "Externer Link für einen \"Weiterlesen\" link"
@@ -5869,14 +5927,18 @@ msgstr ""
 "senden dir eine E-Mail an \"%(email)s\" wenn es soweit ist!"
 
 #, python-format
+#| msgid ""
+#| "User \"%(user)s\" was registered successfully. We will send an email to "
+#| "your address %(email)s\" soon. You need to confirm the email address "
+#| "before you can log in."
 msgid ""
-"User \"%(user)s\" was registered successfully. We will send an email to your "
-"address %(email)s\" soon. You need to confirm the email address before you "
-"can log in."
+"User \"%(email)s\" was registered successfully. You will receive an "
+"activation email from us in a few minutes. You need to confirm the email "
+"address before you can log in."
 msgstr ""
-"Benutzer \"%(user)s\" wurde erfolgreich registriert. Wir senden eine E-Mail "
-"an deine Adresse %(email)s\". Du musst den enthaltenen Bestätigungslink "
-"klicken bevor du dich einloggen kannst."
+"Benutzer \"%(email)s\" wurde erfolgreich registriert. Du wirst innerhalb "
+"weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du "
+"klicken, bevor du dich einloggen kannst."
 
 msgid "The invite token you have used does not exist!"
 msgstr "Das Einladungs-Token, das du benutzt hast, existiert nicht!"
