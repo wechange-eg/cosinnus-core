@@ -10,6 +10,7 @@ from django.views.generic import TemplateView
 from cosinnus.conf import settings
 from cosinnus.views.mixins.group import DipatchGroupURLMixin, GroupObjectCountMixin
 from cosinnus.views.mixins.tagged import DisplayTaggedObjectsMixin
+from cosinnus.core.decorators.views import redirect_to_not_logged_in
 
 
 class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTaggedObjectsMixin, TemplateView):
@@ -18,6 +19,8 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
     def dispatch(self, request, *args, **kwargs):
         if not getattr(settings, 'COSINNUS_MICROSITES_ENABLED', False):
             raise Http404
+        if not self.request.user.is_authenticated and getattr(settings, 'COSINNUS_MICROSITES_DISABLE_ANONYMOUS_ACCESS', False):
+            return redirect_to_not_logged_in(self.request, view=self)
         return super(GroupMicrositeView, self).dispatch(request, *args, **kwargs)
     
     def get_public_objects(self):

@@ -1205,7 +1205,10 @@ class GroupStartpage(View):
             return False
         
         if not request.user.is_authenticated:
-            return True
+            if getattr(settings, 'COSINNUS_MICROSITES_DISABLE_ANONYMOUS_ACCESS', False):
+                return False
+            else:
+                return True
         if not check_object_read_access(self.group, request.user):
             return True
         

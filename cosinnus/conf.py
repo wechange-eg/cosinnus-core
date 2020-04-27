@@ -438,6 +438,9 @@ class CosinnusConf(AppConf):
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False
     
+    # switch whether non-logged in users may access microsites
+    MICROSITES_DISABLE_ANONYMOUS_ACCESS = False
+    
     # the default setting used when a group has no microsite_public_apps setting set
     # determines which apps public objects are shown on a microsite
     # e.g: ['cosinnus_file', 'cosinnus_event', ]
