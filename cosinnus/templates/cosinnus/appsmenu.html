@@ -5,23 +5,15 @@
 {% group_url 'cosinnus:group-dashboard' group=group as group_dashboard_page %}
 {% group_url 'cosinnus:group-microsite' group=group as group_microsite_page %}
 
-
+{% if user|has_read_access:group %}
 <div class="btn-group w100 large-space">
-    <button type="button" class="btn btn-appnavi w100{% if user|has_read_access:group %} dropdown-toggle{% endif %}" {% if user|has_read_access:group %}data-toggle="dropdown"{% endif %}>
+    <button type="button" class="btn btn-appnavi w100 dropdown-toggle" data-toggle="dropdown">
         <ul class="media-list">
             <li class="media">
                 <a class="pull-left" href="#">
                 </a>
                 <a class="pull-left" href="#">
-                	{% if active_app %}
-                      {% for app in apps %}
-                        {% if app.active %}
-                          <i class="fa {% if app.app == 'cosinnus_todo' %}fa-tasks{% elif app.app == 'cosinnus_note' %}fa-book{% elif app.app == 'cosinnus_poll' %}fa-bar-chart{% elif app.app == 'cosinnus_marketplace' %}fa-exchange{% elif app.app == 'cosinnus_file' %}fa-file{% elif app.app == 'cosinnus_etherpad' %}fa-file-text{% elif app.app == 'cosinnus_event' %}fa-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}"></i>
-                        {% endif %}
-                      {% endfor %}
-                    {% else %}
-                      <i class="fa fa-group"></i>
-                    {% endif %}
+                    <i class="fa {{ group.get_icon }}"></i>
                 </a>
                 {% if user|has_read_access:group %}
                 <a class="pull-right" href="#">
@@ -29,23 +21,7 @@
                 </a>
                 {% endif %}
                 <div class="media-body">
-                    {% if active_app %}
-                      {% for app in apps %}
-                        {% if app.active %}
-                          {{ app.label }}
-                        {% endif %}
-                      {% endfor %}
-                    {% elif request.path == group_edit_page %}  
-                        {% trans "Settings" %}
-                    {% elif request.path == group_detail_page or request.path == group_members_map_page %}
-                        {% trans "Members" %}
-                    {% elif request.path == group_microsite_page %}  
-                        {% trans "Microsite" %}
-                    {% elif request.path == group_dashboard_page %}
-                        {% trans "Dashboard" %}
-                    {% else %}
-                      {% trans "Choose App" %}
-                    {% endif %}
+                    {{ group.get_group_menu_label }}
                 </div>
             </li>
         </ul>
@@ -56,7 +32,7 @@
         <li class="app-main appnavi-listelement fine-space">
             <a href="{% group_url 'cosinnus:group-dashboard' group=group %}{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}{% if group.public or user.is_superuser %}?browse=true{% endif %}{% endif %}">
                 <i class="fa fa-th-large"></i>
-                {% trans "Dashboard" %}
+                {{ group.get_group_dashboard_label }}
             </a>
         </li>
         {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
@@ -95,3 +71,4 @@
     </ul>
     {% endif %} 
 </div><!-- btn-group -->
+{% endif %}

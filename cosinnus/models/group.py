@@ -1025,6 +1025,18 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         """ Returns the font-awesome icon specific to the group type """
         return 'fa-group' if self.type == self.TYPE_PROJECT else 'fa-sitemap'
     
+    def get_group_label(self):
+        """ Returns the vocal name of the group, depending on type """
+        return _('Project') if self.type == self.TYPE_PROJECT else _('Group')
+    
+    def get_group_menu_label(self):
+        """ Returns the vocal name of the group menu, depending on type """
+        return _('Project Menu') if self.type == self.TYPE_PROJECT else _('Group Menu')
+    
+    def get_group_dashboard_label(self):
+        """ Returns the vocal name of the group dashboard, depending on type """
+        return _('Project Dashboard') if self.type == self.TYPE_PROJECT else _('Group Dashboard')
+    
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None

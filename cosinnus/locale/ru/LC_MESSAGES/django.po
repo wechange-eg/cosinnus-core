@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-25 18:01+0200\n"
+"POT-Creation-Date: 2020-04-27 12:12+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -823,6 +823,26 @@ msgstr "Запрос о Вашем проекте \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Запрос о Вашей группе \"%(group_name)s\""
 
+#, fuzzy
+#| msgid "Project Type"
+msgid "Project Menu"
+msgstr "Тип проекта"
+
+#, fuzzy
+#| msgid "Group name"
+msgid "Group Menu"
+msgstr "Название группы"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Project Dashboard"
+msgstr "Панель управления"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Group Dashboard"
+msgstr "Панель управления"
+
 msgid "Is Moderator"
 msgstr "Является модератором"
 
@@ -1440,15 +1460,12 @@ msgstr "Текст приветственного письма"
 msgid "Send yourself a Test-Mail"
 msgstr ""
 
-msgid "Settings"
-msgstr "Настройки"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr "Члены"
 
-msgid "Choose App"
-msgstr "Выбрать приложение"
+msgid "Settings"
+msgstr "Настройки"
 
 msgid "Attach existing Files..."
 msgstr "Приложить имеющиеся файлы…"
@@ -4973,6 +4990,14 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Society Dashboard"
+#~ msgstr "Панель управления"
+
+#~ msgid "Choose App"
+#~ msgstr "Выбрать приложение"
 
 #~ msgid "Nachrichten"
 #~ msgstr "Новости"

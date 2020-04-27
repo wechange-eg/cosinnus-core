@@ -115,7 +115,7 @@
                 <li {% if request.GET.tab == 'dashboard' %}class="active"{% endif %}>
                     <a href="#dashboard" class="_group-form-tab" role="tab" data-toggle="tab">
                         <i class="fa fa-columns"></i>
-                        {% trans "Dashboard" %}
+                        {{ group.get_group_dashboard_label }}
                     </a>
                 </li>
                 {% endif %}
