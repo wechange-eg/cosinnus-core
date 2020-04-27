@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 11:46+0200\n"
+"POT-Creation-Date: 2020-04-25 18:01+0200\n"
 "PO-Revision-Date: 2020-04-22 12:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -104,7 +104,8 @@ msgstr ""
 msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
 msgstr ""
 
-msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+#, python-format
+msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
 msgstr ""
 
 #, python-format
@@ -190,6 +191,9 @@ msgstr[1] "\"%(sender_name)s solicitó para ser miembro de %(team_name)s."
 msgid "You are an admin of this team"
 msgstr "Has sido hecho un administrador de este equipo"
 
+msgid "New membership request"
+msgstr "Solicitud de participación nueva"
+
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "\"%(sender_name)s solicitó para ser miembro de %(team_name)s."
@@ -266,6 +270,9 @@ msgstr "Has sido hecho un administrador de este equipo"
 msgid "%(sender_name)s made you an admin"
 msgstr "%(sender_name)s te etiquetó en"
 
+msgid "Made you an admin"
+msgstr "Te hizo un administrador"
+
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s the hizo un administrador de \"%(team_name)s\" en %(portal_name)s!"
@@ -276,6 +283,9 @@ msgstr "Tu estatus de administrador ha sido revocado"
 #, fuzzy, python-format
 #| msgid "Revoked your admin status"
 msgid "%(sender_name)s revoked your admin status"
+msgstr "Revocó tu estatus de administrador"
+
+msgid "Revoked your admin status"
 msgstr "Revocó tu estatus de administrador"
 
 #, python-format
@@ -300,6 +310,10 @@ msgid "%(sender_name)s tagged you in"
 msgstr "%(sender_name)s te etiquetó en"
 
 #, python-format
+msgid "You were tagged by %(sender_name)s"
+msgstr "Has sido etiquetado de %(sender_name)s"
+
+#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "Has sido etiquetado en \"%(object_name)s\" en %(team_name)s."
 
@@ -307,6 +321,9 @@ msgstr "Has sido etiquetado en \"%(object_name)s\" en %(team_name)s."
 #| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s invited you to join %(team_name)s"
 msgstr "%(sender_name)s te ha invitado a participar en \"%(team_name)s\" en %(portal_name)s!"
+
+msgid "Invited you"
+msgstr "Te invitó"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -322,11 +339,6 @@ msgstr "Aceptar invitación"
 msgid "View invitation"
 msgstr "Ver invitación"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s tagged you in"
-msgid "%(sender_name)s invited you"
-msgstr "%(sender_name)s te etiquetó en"
-
 msgid "New link to the moved project/group"
 msgstr "Enlace nuevo al"
 
@@ -338,17 +350,20 @@ msgstr "Uno de tus proyectos/grupos fue trasladado al portal \"%(portal_name)s\"
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "\"%(team_name)s\" fue trasladado a %(portal_name)s!"
 
+msgid "Created"
+msgstr "Creado"
+
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s creó el proyecto/grupo \"%(team_name)s\" en %(portal_name)s!"
-
-msgid "Created"
-msgstr "Creado"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s creó la idea \"%(object_name)s\" en %(portal_name)s!"
+
+msgid "Has created"
+msgstr "Ha creado"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -359,12 +374,12 @@ msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr "%(sender_name)s creó la idea \"%(object_name)s\"!"
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
-msgstr "%(sender_name)s creó el proyecto \"%(team_name)s\" de una idea que estas siguiendo!"
-
-#, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
 msgstr "%(sender_name)s creó el proyecto \"%(team_name)s\" en %(portal_name)s de una idea que estas siguiendo! <br/><br/> Para verlo, haz clic en el enlace abajo. Ahí puedes ver si quieres participar en el proyecto."
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
+msgstr "%(sender_name)s creó el proyecto \"%(team_name)s\" de una idea que estas siguiendo!"
 
 msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
@@ -518,6 +533,9 @@ msgstr "Haz clic en el enlace siguiente para terminar de recibir correos electr�
 
 msgid "Unsubscribe"
 msgstr "Anular"
+
+msgid "Hi,"
+msgstr "Hola,"
 
 msgid "Tiny (50 x *)"
 msgstr "Diminuto (50 x *)"
@@ -3521,6 +3539,26 @@ msgstr "próximo"
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Inserta uno o varios términos de búsqueda o seleccione un tema para buscar."
 
+#, fuzzy
+#| msgid "Download"
+msgid "CSV Downloads"
+msgstr "Descargar"
+
+msgid "HD space used by groups"
+msgstr ""
+
+msgid "HD space used by projects"
+msgstr ""
+
+msgid "User statistics (min 1x logged in)"
+msgstr ""
+
+msgid "E-Mails of all newsletter subcribers"
+msgstr ""
+
+msgid "E-Mails of ALL active users"
+msgstr ""
+
 msgid "Date"
 msgstr "Fecha"
 
@@ -4910,8 +4948,9 @@ msgstr "Tu cuenta \"%(user)s\"  ha sido registrada con éxito. ¡Bienvenido al a
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgstr "Usario \"%(user)s\" ha sido registrado con éxito. La cuenta tendrá que ser aprobada antes de que puedas iniciar sesión. Te mandaremos un correo electrónico a tu dirección \"%(email)s\" cuando pasará."
 
-#, python-format
-msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+#, fuzzy, python-format
+#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 msgstr "Usario \"%(user)s\" ha sido registrado con éxito. Te mandaremos un correo electrónico a tu dirección %(email)s\" pronto. Tienes que confirmar tu correo electrónico antes de poder iniciar sesión."
 
 msgid "The invite token you have used does not exist!"
@@ -5020,27 +5059,6 @@ msgstr "Actualmente no eres miembro de %s! Si lo deseas, puedes solicitar para s
 
 msgid "Your changes have been saved."
 msgstr "Se han guardado los cambios."
-
-#~ msgid "New membership request"
-#~ msgstr "Solicitud de participación nueva"
-
-#~ msgid "Made you an admin"
-#~ msgstr "Te hizo un administrador"
-
-#~ msgid "Revoked your admin status"
-#~ msgstr "Revocó tu estatus de administrador"
-
-#~ msgid "You were tagged by %(sender_name)s"
-#~ msgstr "Has sido etiquetado de %(sender_name)s"
-
-#~ msgid "Invited you"
-#~ msgstr "Te invitó"
-
-#~ msgid "Has created"
-#~ msgstr "Ha creado"
-
-#~ msgid "Hi,"
-#~ msgstr "Hola,"
 
 #~ msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
 #~ msgstr "Si está configurado, este texto anula el texto de correo electrónico de bienvenida predeterminado que se enviará a los portales con \"Usuarios necesitan activación\" habilitado."

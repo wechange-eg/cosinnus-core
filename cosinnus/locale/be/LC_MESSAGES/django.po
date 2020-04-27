@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 11:46+0200\n"
+"POT-Creation-Date: 2020-04-25 18:01+0200\n"
 "PO-Revision-Date: 2020-01-14 19:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -103,7 +103,8 @@ msgstr ""
 msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
 msgstr ""
 
-msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+#, python-format
+msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
 msgstr ""
 
 #, python-format
@@ -347,8 +348,13 @@ msgstr "\"%(team_name)s\" была перамешчаная на %(portal_name)s
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s толькі што стварыў праект/групу \"%(team_name)s\" на %(portal_name)s!"
 
-msgid "Created"
-msgstr "Створана"
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
+msgstr "%(sender_name)s толькі што стварыў(-ла) ідэю \"%(object_name)s\" на %(portal_name)s!"
+
+msgid "Has created"
+msgstr "Стварыў(-ла)"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -3523,6 +3529,26 @@ msgstr "наступная"
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Увядзіце адзін ці больш ключавых слоў для пошуку або абярыце тэму для пошуку."
 
+#, fuzzy
+#| msgid "Download"
+msgid "CSV Downloads"
+msgstr "Сцягнуць"
+
+msgid "HD space used by groups"
+msgstr ""
+
+msgid "HD space used by projects"
+msgstr ""
+
+msgid "User statistics (min 1x logged in)"
+msgstr ""
+
+msgid "E-Mails of all newsletter subcribers"
+msgstr ""
+
+msgid "E-Mails of ALL active users"
+msgstr ""
+
 msgid "Date"
 msgstr "Дата"
 
@@ -4909,8 +4935,9 @@ msgid "User \"%(user)s\" was registered successfully. The account will need to b
 msgstr "Карыстальнік(-ца) \"%(user)s\" паспяхова зарэгістраваны. Акаўнт павінен быць зацверджаны, перш чым Вы зможаце ўвайсці. Калі гэта адбудзецца, мы вышлем ліст на Ваш адрас \"%(email)s\"."
 
 # EN > missed " in address
-#, python-format
-msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+#, fuzzy, python-format
+#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 msgstr "Карыстальнік(-ца) \"%(user)s\" паспяхова зарэгістраваны. У бліжэйшы час мы дашлем ліст на Ваш адрас \"%(email)s\". Вы павінны пацвердзіць адрас электроннай пошты, перш чым увайсці."
 
 msgid "The invite token you have used does not exist!"

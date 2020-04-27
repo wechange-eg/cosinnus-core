@@ -554,8 +554,14 @@
         
         /** Click triggers for labels of onoffSwitches */
         onoffSwitch: function() {
-        	$('body').on('click', '.onoffswitch-frame', function(event){
-        		$(event.target).parent().find('input[type="checkbox"]').click();
+        	$('body').off('click', '.onoffswitch-frame').on('click', '.onoffswitch-frame', function(event){
+        	    var $box = $(event.target).closest('.onoffswitch-frame').find('input[type="checkbox"]');
+        	    var checked = Boolean($box.attr("checked"));
+        		$box.attr("checked", !checked);
+        		$box[0].checked = !checked;
+        		$box.trigger('change');
+        		event.preventDefault();
+        		return false;
         	});
         },
         

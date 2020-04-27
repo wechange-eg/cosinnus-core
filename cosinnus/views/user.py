@@ -159,7 +159,7 @@ class UserCreateView(CreateView):
 
     message_success = _('Your account "%(user)s" was registered successfully. Welcome to the community!')
     message_success_inactive = _('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')
-    message_success_email_verification = _('User "%(user)s" was registered successfully. We will send an email to your address %(email)s" soon. You need to confirm the email address before you can log in.')
+    message_success_email_verification = _('User "%(email)s" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in.')
     
     def get_success_url(self):
         return redirect_with_next(reverse('login'), self.request)

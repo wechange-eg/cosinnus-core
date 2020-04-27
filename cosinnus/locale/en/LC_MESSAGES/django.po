@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 11:46+0200\n"
+"POT-Creation-Date: 2020-04-25 18:01+0200\n"
 "PO-Revision-Date: 2019-12-16 17:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -102,7 +102,8 @@ msgstr ""
 msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
 msgstr ""
 
-msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+#, python-format
+msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
 msgstr ""
 
 #, python-format
@@ -184,6 +185,9 @@ msgstr[1] ""
 msgid "You are an admin of this team"
 msgstr ""
 
+msgid "New membership request"
+msgstr ""
+
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr ""
@@ -253,6 +257,9 @@ msgstr ""
 msgid "%(sender_name)s made you an admin"
 msgstr ""
 
+msgid "Made you an admin"
+msgstr ""
+
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr ""
@@ -262,6 +269,9 @@ msgstr ""
 
 #, python-format
 msgid "%(sender_name)s revoked your admin status"
+msgstr ""
+
+msgid "Revoked your admin status"
 msgstr ""
 
 #, python-format
@@ -284,6 +294,10 @@ msgid "%(sender_name)s tagged you in"
 msgstr ""
 
 #, python-format
+msgid "You were tagged by %(sender_name)s"
+msgstr ""
+
+#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr ""
 
@@ -293,6 +307,9 @@ msgstr ""
 "Hi %(admin_name)s,\n"
 "\n"
 "The user %(user_name)s wants to join project %(team_name)s."
+
+msgid "Invited you"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -312,13 +329,6 @@ msgstr "There are no groups."
 msgid "View invitation"
 msgstr "There are no groups."
 
-#, fuzzy, python-format
-msgid "%(sender_name)s invited you"
-msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
-
 #, fuzzy
 #| msgid "Convert selected Projects to Groups"
 msgid "New link to the moved project/group"
@@ -332,11 +342,11 @@ msgstr ""
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr ""
 
-#, python-format
-msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+msgid "Created"
 msgstr ""
 
-msgid "Created"
+#, python-format
+msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr ""
 
 #, fuzzy, python-format
@@ -345,6 +355,9 @@ msgstr ""
 "Hi %(admin_name)s,\n"
 "\n"
 "The user %(user_name)s wants to join project %(team_name)s."
+
+msgid "Has created"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -355,11 +368,11 @@ msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr ""
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
 msgstr ""
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr ""
 
 msgid "Deutsch--NATIVE-LANGUAGE"
@@ -508,6 +521,9 @@ msgid "Click the following link to never receive any more emails from us:"
 msgstr ""
 
 msgid "Unsubscribe"
+msgstr ""
+
+msgid "Hi,"
 msgstr ""
 
 msgid "Tiny (50 x *)"
@@ -3422,6 +3438,24 @@ msgstr ""
 msgid "Enter one or more search terms or select a topic to search."
 msgstr ""
 
+msgid "CSV Downloads"
+msgstr ""
+
+msgid "HD space used by groups"
+msgstr ""
+
+msgid "HD space used by projects"
+msgstr ""
+
+msgid "User statistics (min 1x logged in)"
+msgstr ""
+
+msgid "E-Mails of all newsletter subcribers"
+msgstr ""
+
+msgid "E-Mails of ALL active users"
+msgstr ""
+
 msgid "Date"
 msgstr ""
 
@@ -4803,7 +4837,7 @@ msgid "User \"%(user)s\" was registered successfully. The account will need to b
 msgstr ""
 
 #, python-format
-msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 msgstr ""
 
 msgid "The invite token you have used does not exist!"
