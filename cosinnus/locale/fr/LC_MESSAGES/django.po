@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-25 18:01+0200\n"
+"POT-Creation-Date: 2020-04-27 12:12+0200\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -820,6 +820,26 @@ msgstr "Demande à propos de ton projet \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Demande à propos de ton groupe \"%(group_name)s\""
 
+#, fuzzy
+#| msgid "Project Type"
+msgid "Project Menu"
+msgstr "Type de projet"
+
+#, fuzzy
+#| msgid "Group name"
+msgid "Group Menu"
+msgstr "Nom du groupe"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Project Dashboard"
+msgstr "Tableau de bord"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Group Dashboard"
+msgstr "Tableau de bord"
+
 msgid "Is Moderator"
 msgstr ""
 
@@ -1443,15 +1463,12 @@ msgstr "Texte d'email de bienvenue"
 msgid "Send yourself a Test-Mail"
 msgstr ""
 
-msgid "Settings"
-msgstr "Paramètres"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr "Membres"
 
-msgid "Choose App"
-msgstr "Choisir l'application"
+msgid "Settings"
+msgstr "Paramètres"
 
 msgid "Attach existing Files..."
 msgstr "Attacher les fichiers existants..."
@@ -5070,6 +5087,14 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Society Dashboard"
+#~ msgstr "Tableau de bord"
+
+#~ msgid "Choose App"
+#~ msgstr "Choisir l'application"
 
 #~ msgid "Your privacy settings were saved. Welcome!"
 #~ msgstr "Tes paramètres de confidentialité ont été enregistrés. Bienvenue !"

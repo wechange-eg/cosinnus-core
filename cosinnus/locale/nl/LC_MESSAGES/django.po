@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-25 18:01+0200\n"
+"POT-Creation-Date: 2020-04-27 12:12+0200\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -814,6 +814,26 @@ msgstr "Verzoek voor uw project “%(group_name)s”"
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Verzoek voor uw groep “%(group_name)s”"
 
+#, fuzzy
+#| msgid "Project Type"
+msgid "Project Menu"
+msgstr "Project Type"
+
+#, fuzzy
+#| msgid "Group name"
+msgid "Group Menu"
+msgstr "Groep naam"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Project Dashboard"
+msgstr "Dashboard"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Group Dashboard"
+msgstr "Dashboard"
+
 msgid "Is Moderator"
 msgstr "Is Moderator"
 
@@ -1423,15 +1443,12 @@ msgstr "Momenteel ingestelde welkmost-e-mailtekst"
 msgid "Send yourself a Test-Mail"
 msgstr "Verzend een Test-mail naar jezelf"
 
-msgid "Settings"
-msgstr "Instellingen"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr "Leden"
 
-msgid "Choose App"
-msgstr "Kies App"
+msgid "Settings"
+msgstr "Instellingen"
 
 msgid "Attach existing Files..."
 msgstr "Voeg bestaande bestanden toe…"
@@ -4932,6 +4949,14 @@ msgstr "U bent momenteel geen lid van %s! Als u wilt, kunt u hieronder een lidma
 
 msgid "Your changes have been saved."
 msgstr "Uw veranderingen zijn bewaard."
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Society Dashboard"
+#~ msgstr "Dashboard"
+
+#~ msgid "Choose App"
+#~ msgstr "Kies App"
 
 #~ msgid "Nachrichten"
 #~ msgstr "Nieuws"

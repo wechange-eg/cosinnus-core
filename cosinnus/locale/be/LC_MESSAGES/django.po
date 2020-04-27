@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-25 18:01+0200\n"
+"POT-Creation-Date: 2020-04-27 12:12+0200\n"
 "PO-Revision-Date: 2020-01-14 19:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -822,6 +822,26 @@ msgstr "Запыт наконт Вашага праекта \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Запыт наконт Вашай групы \"%(group_name)s\""
 
+#, fuzzy
+#| msgid "Project Type"
+msgid "Project Menu"
+msgstr "Тып праекта"
+
+#, fuzzy
+#| msgid "Group name"
+msgid "Group Menu"
+msgstr "Імя групы"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Project Dashboard"
+msgstr "Панэль кіравання"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Group Dashboard"
+msgstr "Панэль кіравання"
+
 msgid "Is Moderator"
 msgstr "З'яўляецца мадэратарам"
 
@@ -1445,15 +1465,12 @@ msgstr "Тэкст вітальнага ліста"
 msgid "Send yourself a Test-Mail"
 msgstr ""
 
-msgid "Settings"
-msgstr "Налады"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr "Чальцы"
 
-msgid "Choose App"
-msgstr "Выбраць прыкладанне"
+msgid "Settings"
+msgstr "Налады"
 
 msgid "Attach existing Files..."
 msgstr "Далучыць існуючыя файлы..."
@@ -5057,6 +5074,14 @@ msgstr "Вы не з'яўляецеся чальцом %s! Пры жаданні
 
 msgid "Your changes have been saved."
 msgstr "Вашы змены захаваныя."
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Society Dashboard"
+#~ msgstr "Панэль кіравання"
+
+#~ msgid "Choose App"
+#~ msgstr "Выбраць прыкладанне"
 
 #~ msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
 #~ msgstr "Калі гэта функцыя абраная, гэты тэкст замяшчае стандартны тэкст вітальнага ліста, які будзе адпраўлены на парталы, дзе ўключана опцыя \"Карыстальнікі(-цы) патрабуюць актывацыі\"."

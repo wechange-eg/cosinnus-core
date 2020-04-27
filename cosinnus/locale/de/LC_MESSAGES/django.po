@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-25 18:01+0200\n"
-"PO-Revision-Date: 2020-04-25 18:04+0100\n"
+"POT-Creation-Date: 2020-04-27 12:12+0200\n"
+"PO-Revision-Date: 2020-04-27 12:12+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -128,9 +128,6 @@ msgstr ""
 "%(email)s!"
 
 #, python-format
-#| msgid ""
-#| "If you have not received an activation email yet, please try signing up "
-#| "again or contact our support!"
 msgid ""
 "If you have not received an activation email from %(portal_name)s within a "
 "few minutes please look in your spam folder or try signing up again!"
@@ -456,9 +453,6 @@ msgstr ""
 "%(portal_name)s!"
 
 #, python-format
-#| msgid ""
-#| "%(sender_name)s just created the idea \"%(object_name)s\" on "
-#| "%(portal_name)s!"
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr ""
 "%(sender_name)s hat gerade einen neuen Benutzeraccount auf %(portal_name)s "
@@ -647,7 +641,7 @@ msgid "This account is inactive."
 msgstr "Dieses Benutzerkonto ist deaktiviert worden."
 
 msgid "Hello"
-msgstr ""
+msgstr "Hallo"
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Klicke den folgenden Link, um einzustellen welche E-Mails du erhältst:"
@@ -983,6 +977,20 @@ msgstr "Frage zu deinem Projekt \"%(group_name)s\""
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Frage zu deiner Gruppe \"%(group_name)s\""
+
+msgid "Project Menu"
+msgstr "Projektmenü"
+
+#| msgid "Group name"
+msgid "Group Menu"
+msgstr "Gruppenmenü"
+
+msgid "Project Dashboard"
+msgstr "Projektdashboard"
+
+#| msgid "Project Dashboard"
+msgid "Group Dashboard"
+msgstr "Gruppendashboard"
 
 msgid "Is Moderator"
 msgstr "Ist Moderator"
@@ -1618,16 +1626,13 @@ msgstr "Aktueller Willkommens-E-Mail Text"
 msgid "Send yourself a Test-Mail"
 msgstr "Schicke eine Test-Mail an dich selbst"
 
-msgid "Settings"
-msgstr "Einstellungen"
-
 #
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr "Mitglieder"
 
-msgid "Choose App"
-msgstr "App auswählen"
+msgid "Settings"
+msgstr "Einstellungen"
 
 msgid "Attach existing Files..."
 msgstr "Vorhandene Datei wählen..."
@@ -4159,7 +4164,6 @@ msgstr ""
 "Gib einen oder mehrere Suchbegriffe ein oder wähle ein Thema aus um zu "
 "Suchen."
 
-#| msgid "Download"
 msgid "CSV Downloads"
 msgstr "CSV Downloads"
 
@@ -5927,10 +5931,6 @@ msgstr ""
 "senden dir eine E-Mail an \"%(email)s\" wenn es soweit ist!"
 
 #, python-format
-#| msgid ""
-#| "User \"%(user)s\" was registered successfully. We will send an email to "
-#| "your address %(email)s\" soon. You need to confirm the email address "
-#| "before you can log in."
 msgid ""
 "User \"%(email)s\" was registered successfully. You will receive an "
 "activation email from us in a few minutes. You need to confirm the email "
@@ -6101,8 +6101,5 @@ msgstr ""
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
-#~ msgid "Nachrichten"
-#~ msgstr "Messages"
-
-#~ msgid "Your privacy settings were saved. Welcome!"
-#~ msgstr "Deine Privatsphären-Einstellungen wurden gespeichert. Willkommen!"
+#~ msgid "Society"
+#~ msgstr "Gruppe"

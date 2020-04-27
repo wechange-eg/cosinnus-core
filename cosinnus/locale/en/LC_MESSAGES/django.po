@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-25 18:01+0200\n"
-"PO-Revision-Date: 2019-12-16 17:17+0100\n"
+"POT-Creation-Date: 2020-04-27 12:12+0200\n"
+"PO-Revision-Date: 2020-04-27 12:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -805,6 +805,26 @@ msgstr ""
 msgid "Request about your group \"%(group_name)s\""
 msgstr ""
 
+#, fuzzy
+#| msgid "Project Type"
+msgid "Project Menu"
+msgstr "Project Type"
+
+#, fuzzy
+#| msgid "Group"
+msgid "Group Menu"
+msgstr "Group"
+
+#, fuzzy
+#| msgid "Project Type"
+msgid "Project Dashboard"
+msgstr "Project Type"
+
+#, fuzzy
+#| msgid "Project Type"
+msgid "Group Dashboard"
+msgstr "Project Type"
+
 msgid "Is Moderator"
 msgstr ""
 
@@ -1443,14 +1463,11 @@ msgstr ""
 msgid "Send yourself a Test-Mail"
 msgstr ""
 
-msgid "Settings"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr ""
 
-msgid "Choose App"
+msgid "Settings"
 msgstr ""
 
 msgid "Attach existing Files..."
@@ -4935,6 +4952,15 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr ""
+
+#~ msgid "Society"
+#~ msgstr "Group"
+
+#~ msgid "Society Menu"
+#~ msgstr "Group Menu"
+
+#~ msgid "Society Dashboard"
+#~ msgstr "Group Dashboard"
 
 #~ msgid "Group overview"
 #~ msgstr "Group overview"

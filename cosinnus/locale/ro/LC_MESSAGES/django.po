@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-25 18:01+0200\n"
+"POT-Creation-Date: 2020-04-27 12:12+0200\n"
 "PO-Revision-Date: 2019-11-18 04:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -816,6 +816,26 @@ msgstr "Cerere despre proiectul dvs. ”%(group_name)s”"
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Cerere despre grupul dvs. ”%(group_name)s”"
 
+#, fuzzy
+#| msgid "Project Type"
+msgid "Project Menu"
+msgstr "Tip de proiect"
+
+#, fuzzy
+#| msgid "Group name"
+msgid "Group Menu"
+msgstr "Numele grupului"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Project Dashboard"
+msgstr "Bord Tablou"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Group Dashboard"
+msgstr "Bord Tablou"
+
 msgid "Is Moderator"
 msgstr "Este Moderator"
 
@@ -1425,15 +1445,12 @@ msgstr "Setează în prezent Textul Bun Venit pe E-mail"
 msgid "Send yourself a Test-Mail"
 msgstr "Trimiteți-vă un E-mail de Testare"
 
-msgid "Settings"
-msgstr "Setări"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr "Membrii"
 
-msgid "Choose App"
-msgstr "Alege Aplicația"
+msgid "Settings"
+msgstr "Setări"
 
 msgid "Attach existing Files..."
 msgstr "Atașați Fișierele existente..."
@@ -4930,6 +4947,14 @@ msgstr "În prezent nu sunteți membru %s! Dacă doriți, puteți solicita să d
 
 msgid "Your changes have been saved."
 msgstr "Schimbările tale au fost salvate."
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Society Dashboard"
+#~ msgstr "Bord Tablou"
+
+#~ msgid "Choose App"
+#~ msgstr "Alege Aplicația"
 
 #~ msgid "Nachrichten"
 #~ msgstr "Știri"

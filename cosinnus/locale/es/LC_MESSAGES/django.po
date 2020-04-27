@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-25 18:01+0200\n"
+"POT-Creation-Date: 2020-04-27 12:12+0200\n"
 "PO-Revision-Date: 2020-04-22 12:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -823,6 +823,26 @@ msgstr "Solicitud sobre tu proyecto \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Solicitud sobre tu grupo \"%(group_name)s\""
 
+#, fuzzy
+#| msgid "Project Type"
+msgid "Project Menu"
+msgstr "Tipo del proyecto"
+
+#, fuzzy
+#| msgid "Group name"
+msgid "Group Menu"
+msgstr "Nombre del grupo"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Project Dashboard"
+msgstr "Tablero"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Group Dashboard"
+msgstr "Tablero"
+
 msgid "Is Moderator"
 msgstr "Es moderador"
 
@@ -1448,15 +1468,12 @@ msgstr "Texto de bienvenida-email"
 msgid "Send yourself a Test-Mail"
 msgstr ""
 
-msgid "Settings"
-msgstr "Ajustes"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr "Miembros"
 
-msgid "Choose App"
-msgstr "Escoger aplicación"
+msgid "Settings"
+msgstr "Ajustes"
 
 msgid "Attach existing Files..."
 msgstr "Adjuntar archivos existentes..."
@@ -5059,6 +5076,14 @@ msgstr "Actualmente no eres miembro de %s! Si lo deseas, puedes solicitar para s
 
 msgid "Your changes have been saved."
 msgstr "Se han guardado los cambios."
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Society Dashboard"
+#~ msgstr "Tablero"
+
+#~ msgid "Choose App"
+#~ msgstr "Escoger aplicación"
 
 #~ msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
 #~ msgstr "Si está configurado, este texto anula el texto de correo electrónico de bienvenida predeterminado que se enviará a los portales con \"Usuarios necesitan activación\" habilitado."
