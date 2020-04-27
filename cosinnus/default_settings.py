@@ -333,6 +333,9 @@ TESTING = 'test' in sys.argv
 # can't use this yet, until we fix the jQuery-POST usage of csrf cookies
 CSRF_USE_SESSIONS = False
 
+# use session based CSRF cookies
+CSRF_COOKIE_AGE = None
+
 # leave this on for production, but may want to disable for dev
 #SESSION_COOKIE_SECURE = True
 
