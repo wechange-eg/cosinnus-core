@@ -82,7 +82,7 @@ STATICFILES_FINDERS = (
 
 MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.PreventAnonymousUserCookieSessionMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.MovedTemporarilyRedirectFallbackMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     
