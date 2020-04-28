@@ -23,6 +23,7 @@ from django.utils.deprecation import MiddlewareMixin
 from django.utils.http import is_safe_url
 from django.contrib.redirects.middleware import RedirectFallbackMiddleware
 from cosinnus.utils.urls import redirect_next_or
+from django.contrib.sessions.middleware import SessionMiddleware
 
 
 logger = logging.getLogger('cosinnus')
@@ -239,4 +240,14 @@ class MovedTemporarilyRedirectFallbackMiddleware(RedirectFallbackMiddleware):
         of 301 Permanent redirects. """
     
     response_redirect_class = HttpResponseRedirect
+
+
+class PreventAnonymousUserCookieSessionMiddleware(SessionMiddleware):
+    """ Replace this with django's SessionMiddleware to prevent anonymous users
+        from receiving a session cookie. """
     
+    def process_response(self, request, response):
+        response = super(PreventAnonymousUserCookieSessionMiddleware, self).process_response(request, response)
+        if not request.user.is_authenticated and settings.SESSION_COOKIE_NAME in response.cookies:
+            del response.cookies[settings.SESSION_COOKIE_NAME]
+        return response
