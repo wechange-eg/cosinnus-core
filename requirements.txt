@@ -38,6 +38,7 @@ easy-thumbnails==2.5
 ecdsa==0.13.3
 geopy==1.11.0
 jsonfield==2.0.2
+lxml==4.5.0
 html5lib
 html2text==2016.9.19
 numpy==1.14.5
