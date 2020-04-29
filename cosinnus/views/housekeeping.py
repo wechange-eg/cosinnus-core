@@ -489,15 +489,16 @@ def newsletter_users(request, includeOptedOut=False, file_name='newsletter-user-
     if not getattr(settings, 'COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS', False):
         return HttpResponseForbidden('This Feature is currently not enabled!')
     
-    user_mails = []
+    result_columns = [['email', 'firstname', 'lastname', 'registration_timestamp', 'language'],]
     portal = CosinnusPortal.get_current()
     for membership in CosinnusPortalMembership.objects.filter(
             group=portal, user__is_active=True).exclude(user__last_login__exact=None).\
             prefetch_related('user'):
         user = membership.user
         if check_user_can_receive_emails(user) and (includeOptedOut or user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True):
-            user_mails.append([user.email])
-    return make_csv_response(user_mails, file_name=file_name)
+            row = [user.email, user.first_name, user.last_name, user.date_joined, user.cosinnus_profile.language]
+            result_columns.append(row)
+    return make_csv_response(result_columns, file_name=file_name)
 
 def active_user_emails(request):
     return newsletter_users(request, includeOptedOut=True, file_name='active-user-emails')
