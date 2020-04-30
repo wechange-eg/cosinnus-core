@@ -81,12 +81,10 @@
 		    </button><!-- btn -->
 		    {% endif %}
 		    {% endif %}
-
-
             
             <ol class="breadcrumb">
                 {% include 'cosinnus/breadcrumb.html' %}
-                <li class="active">{% trans "Dashboard" %}</li>
+                <li class="active">{{ group.get_group_dashboard_label }}</li>
             </ol>
             
     		<div class="clearfix"></div>
