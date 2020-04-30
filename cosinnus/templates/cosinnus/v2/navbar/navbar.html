@@ -159,8 +159,10 @@
 	            		{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
 	            		'idea_add_url': '{% url "cosinnus:idea-create" %}',
 	            		{% endif %}
+	            		{% if SETTINGS.NEWW_EVENTS_GROUP_SLUG %}
 	            		'event_add_url': '{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}',
 	            		'event_calendar_url': '{% group_url "cosinnus:event:list" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}',
+	            		{% endif %}
 	            	}
 		        });
 		    });
@@ -202,27 +204,29 @@
 				</div>
 			</a>
 			{% endif %}
-			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" 
-					class="create-menu-link flex-grow">
-				<h2 class="headline margin-regular">{% trans "Event" %}</h2>
-				<div class="description">
-                    {% include 'cosinnus/v2/texts/create_events_description.html' %}
-				</div>
-				<div class="action text-bold">
-					{% trans "Add Event" %} 
-				</div>
-			</a>
-			{% if SETTINGS.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE %}
-			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% group_url "cosinnus:marketplace:add" group=SETTINGS.NEWW_FORUM_GROUP_SLUG %}" 
-					class="create-menu-link flex-grow">
-				<h2 class="headline margin-regular">{% trans "Offer" %}</h2>
-				<div class="description">
-                    {% include 'cosinnus/v2/texts/create_offers_description.html' %}
-				</div>
-				<div class="action text-bold">
-					{% trans "Post new Offer" %} 
-				</div>
-			</a>
+			{% if SETTINGS.NEWW_EVENTS_GROUP_SLUG %}
+				<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" 
+						class="create-menu-link flex-grow">
+					<h2 class="headline margin-regular">{% trans "Event" %}</h2>
+					<div class="description">
+	                    {% include 'cosinnus/v2/texts/create_events_description.html' %}
+					</div>
+					<div class="action text-bold">
+						{% trans "Add Event" %} 
+					</div>
+				</a>
+				{% if SETTINGS.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE %}
+				<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% group_url "cosinnus:marketplace:add" group=SETTINGS.NEWW_FORUM_GROUP_SLUG %}" 
+						class="create-menu-link flex-grow">
+					<h2 class="headline margin-regular">{% trans "Offer" %}</h2>
+					<div class="description">
+	                    {% include 'cosinnus/v2/texts/create_offers_description.html' %}
+					</div>
+					<div class="action text-bold">
+						{% trans "Post new Offer" %} 
+					</div>
+				</a>
+				{% endif %}
 			{% endif %}
 			
 		</div>
