@@ -57,6 +57,9 @@ module.exports = BaseView.extend({
         
         self.uiPrefsView = new UiPrefsView(self.options.uiPrefs);
         
+        console.log('LLLOOOOOOOOOOOOOOOOOOOOOOOOo')
+        console.log(options)
+        
         self.el = '.v2-dashboard';
         self.$el = $(self.el);
         self.$el.removeClass('loading');

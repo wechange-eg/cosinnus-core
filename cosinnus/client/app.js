@@ -353,6 +353,7 @@ var App = function App () {
         		topicsJson: topicsJson,
         		portalInfo: portalInfo,
         		uiPrefs: options.ui_prefs,
+        		force_only_mine: options.force_only_mine,
         	}, 
         	self
         	).render();
