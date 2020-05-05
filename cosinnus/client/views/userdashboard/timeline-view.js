@@ -33,7 +33,7 @@ module.exports = BaseView.extend({
     events: {
     	//'focus .nav-search-box': 'onSearchBoxFocusIn',
     	// todo: onlyMine button
-    	'click .toggle-group-content-only': 'toggleOnlyMineClicked',
+    	'change .toggle-group-content-only': 'toggleOnlyMineClicked',
     	'click .retry-load': 'retryLoadAfterErrors',
     	'click .show-all-comments': 'showAllCommentsForItem',
     	'click .comment-form :not(textarea)': 'delegateTextInputClick',
