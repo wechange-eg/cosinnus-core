@@ -719,7 +719,7 @@ class GroupURLNode(URLNode):
             patched_group_slug_arg.var.lookups = list(self.kwargs['group'].var.lookups) + ['slug']
         elif not isinstance(group_arg, six.string_types):
             if ignoreErrors:
-                return None
+                return ''
             raise TemplateSyntaxError("'group_url' tag requires a group kwarg that is a group or a slug! Have you passed one? (You passed: 'group=%s')" % group_arg)
         else:
             group_slug = group_arg
