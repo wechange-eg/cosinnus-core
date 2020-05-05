@@ -60,9 +60,9 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
     def get_context_data(self, **kwargs):
         forum_group = None
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        note_form = None
         if forum_slug:
             forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
-            note_form = None
             try:
                 from cosinnus_note.forms import NoteForm
                 note_form = NoteForm(group=forum_group)
@@ -83,6 +83,8 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
         
         options = {
             'ui_prefs': get_ui_prefs_for_user(self.request.user),
+            'force_only_mine': getattr(settings, 'COSINNUS_USERDASHBOARD_FORCE_ONLY_MINE', False) or \
+                                getattr(settings, 'COSINNUS_FORUM_DISABLED', False),
         }
         ctx = {
             'user_dashboard_options_json': json.dumps(options),

@@ -611,6 +611,13 @@ class CosinnusConf(AppConf):
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
     FORUM_GROUP_CUSTOM_BACKGROUND = None
     
+    # if set to True, will hide some UI elements in navbar and dashboard and change some redirects
+    FORUM_DISABLED = False
+    
+    # if set to True, will hide the userdashboard timeline controls and force the 
+    # "only show content from my projects and groups" option 
+    USERDASHBOARD_FORCE_ONLY_MINE = False
+    
     GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED = False
     
     # enable e-mail downloads of newsletter-enabled users in the administration area

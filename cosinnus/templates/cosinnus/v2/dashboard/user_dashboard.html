@@ -118,17 +118,18 @@
 						</a>
 					</div>
 					{% endif %}
-					<div class="flex-grow margin-extra-large">
-						<h2 class="headline no-side-margin">{% trans "Events" %}</h2>
-						<div class="description">
-							{% include 'cosinnus/v2/texts/create_events_description.html' %}
+					{% if SETTINGS.NEWW_EVENTS_GROUP_SLUG %}
+						<div class="flex-grow margin-extra-large">
+							<h2 class="headline no-side-margin">{% trans "Events" %}</h2>
+							<div class="description">
+								{% include 'cosinnus/v2/texts/create_events_description.html' %}
+							</div>
+							<br/>
+							<a href="{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" class="pale-color pale-with-highlight">
+								{% trans "Add Event" %} 
+							</a>
 						</div>
-						<br/>
-						<a href="{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" class="pale-color pale-with-highlight">
-							{% trans "Add Event" %} 
-						</a>
-					</div>
-					
+					{% endif %}
 				</div>
 			</div> {% comment %} end dashboard-welcome-frame {% endcomment %}
 		{% endif %}
@@ -183,15 +184,17 @@
 			    <h2 class="headline mobile-hidden">{% trans "News" %}</h2>
 			{% endblock %}
 			
-			<div class="news-textbox-frame">
-				<div class="news-textbox" data-toggle="modal" data-target="#write-news-modal">
-					<span class="news-textbox-icon">
-						<i class="fas fa-fw fa-pencil-alt"></i>
-					</span>
-					{% trans "What's the latest news?" %}
+			{% if not SETTINGS.COSINNUS_FORUM_DISABLED %}
+				<div class="news-textbox-frame">
+					<div class="news-textbox" data-toggle="modal" data-target="#write-news-modal">
+						<span class="news-textbox-icon">
+							<i class="fas fa-fw fa-pencil-alt"></i>
+						</span>
+						{% trans "What's the latest news?" %}
+					</div>
 				</div>
-			</div>
-			{% include 'cosinnus_note/v2/note_form_modal.html' with group=forum_group form=note_form %}
+				{% include 'cosinnus_note/v2/note_form_modal.html' with group=forum_group form=note_form %}
+		    {% endif %}
 		</div>
 		
 		<div class="timeline-root">

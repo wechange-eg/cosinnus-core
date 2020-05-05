@@ -117,12 +117,18 @@ def redirect_next_or(request_with_next, alternate_url):
         return alternate_url
     return next_param
 
-def redirect_with_next(url, request_with_next):
+def redirect_with_next(url, request_with_next, additional_param_str=None):
     """ Checks the given request if it contains a ?next= param, and if that is a safe url,
         attaches to the given url a "?next=<next_url>" fragment.
-        Otherwise, returns `url` """
+        Otherwise, returns `url`
+        @param additional_param_str: if given, this string will be appended as a param as well,
+            either with ? or &, depending if params are already present """
     next_param = request_with_next.GET.get('next', None)
     if not next_param or not is_safe_url(next_param, allowed_hosts=[request_with_next.get_host()]):
+        if additional_param_str:
+            return f"{url}?{additional_param_str}"
         return url
-    return '%s?next=%s' % (url, next_param) 
+    if additional_param_str:
+        return f"{url}?next={next_param}&{additional_param_str}" 
+    return f"{url}?next={next_param}" 
     
