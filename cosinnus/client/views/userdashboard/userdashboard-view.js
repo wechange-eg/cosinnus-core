@@ -57,9 +57,6 @@ module.exports = BaseView.extend({
         
         self.uiPrefsView = new UiPrefsView(self.options.uiPrefs);
         
-        console.log('LLLOOOOOOOOOOOOOOOOOOOOOOOOo')
-        console.log(options)
-        
         self.el = '.v2-dashboard';
         self.$el = $(self.el);
         self.$el.removeClass('loading');
@@ -156,6 +153,7 @@ module.exports = BaseView.extend({
     	
     	self.timelineView = new TimelineView({
     		el: self.$el.find('.timeline-root'),
+    		forceOnlyMine: self.options.forceOnlyMine,
     	}, self.app, self.uiPrefsView);
     	self.timelineView.load();
     },

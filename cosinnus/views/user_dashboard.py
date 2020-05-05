@@ -83,7 +83,7 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
         
         options = {
             'ui_prefs': get_ui_prefs_for_user(self.request.user),
-            'force_only_mine': getattr(settings, 'COSINNUS_FORUM_DISABLED', False),
+            'force_only_mine': getattr(settings, 'COSINNUS_USERDASHBOARD_FORCE_ONLY_MINE', False),
         }
         ctx = {
             'user_dashboard_options_json': json.dumps(options),
