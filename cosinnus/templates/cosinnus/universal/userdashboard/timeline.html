@@ -1,26 +1,26 @@
-<div class="timeline-controls">
-    
-	<table class="onoffswitch-frame">
-        <tr>
-            <td>
-                <div class="onoffswitch">
-                    <input type="checkbox" name="onoffswitch-group-content-only"
-                    	 class="onoffswitch-checkbox toggle-group-content-only" id="check-group-content-only" 
-                    	 {% if onlyMine %}checked{% endif %}>
-                    <label class="onoffswitch-label" for="check-group-content-only">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
-                </div>
-            </td>
-            <td class="onoffswitch-text-label text-bold text-small">
-                {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "Only content from my Groups and Projects" %}
-            </td>
-        </tr>
-    </table>
-    		
-</div>
+{% if not forceOnlyMine %}
+	<div class="timeline-controls">
+		<table class="onoffswitch-frame">
+	        <tr>
+	            <td>
+	                <div class="onoffswitch">
+	                    <input type="checkbox" name="onoffswitch-group-content-only"
+	                    	 class="onoffswitch-checkbox toggle-group-content-only" id="check-group-content-only" 
+	                    	 {% if onlyMine %}checked{% endif %}>
+	                    <label class="onoffswitch-label" for="check-group-content-only">
+	                        <span class="onoffswitch-inner"></span>
+	                        <span class="onoffswitch-switch"></span>
+	                    </label>
+	                </div>
+	            </td>
+	            <td class="onoffswitch-text-label text-bold text-small">
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Only content from my Groups and Projects" %}
+	            </td>
+	        </tr>
+	    </table>
+	</div>
+{% endif %}
 
 <div class="timeline">
 	{# Timeline items get appended here #}
