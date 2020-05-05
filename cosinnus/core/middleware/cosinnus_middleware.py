@@ -248,6 +248,8 @@ class PreventAnonymousUserCookieSessionMiddleware(SessionMiddleware):
     
     def process_response(self, request, response):
         response = super(PreventAnonymousUserCookieSessionMiddleware, self).process_response(request, response)
-        if not request.user.is_authenticated and settings.SESSION_COOKIE_NAME in response.cookies:
-            del response.cookies[settings.SESSION_COOKIE_NAME]
+        # exempt the password reset views, as they require an anonymous user session to work
+        if not request.path.startswith('/reset/') and not request.path.startswith('/password_reset/'):
+            if not request.user.is_authenticated and settings.SESSION_COOKIE_NAME in response.cookies:
+                del response.cookies[settings.SESSION_COOKIE_NAME]
         return response
