@@ -191,9 +191,10 @@ class UserCreateView(CreateView):
             # message user for pending request
             subj_user = render_to_string('cosinnus/mail/user_registration_pending_subj.txt', data)
             send_mail_or_fail_threaded(user.email, subj_user, 'cosinnus/mail/user_registration_pending.html', data)
-            
             messages.success(self.request, self.message_success_inactive % {'user': user.email, 'email': user.email})
-        
+            # since anonymous users have no session, show the success message in the template via a flag
+            ret = HttpResponseRedirect(redirect_with_next(reverse('login'), self.request, 'validate_msg=admin'))
+            
         # scramble this users email so he cannot log in until he verifies his email, if the portal has this enabled
         if CosinnusPortal.get_current().email_needs_verification:
             
@@ -205,7 +206,9 @@ class UserCreateView(CreateView):
                 set_user_email_to_verify(user, original_user_email, self.request)
             
             messages.success(self.request, self.message_success_email_verification % {'user': original_user_email, 'email': original_user_email})
-
+            # since anonymous users have no session, show the success message in the template via a flag
+            ret = HttpResponseRedirect(redirect_with_next(reverse('login'), self.request, 'validate_msg=email'))
+            
         if not CosinnusPortal.get_current().users_need_activation and not CosinnusPortal.get_current().email_needs_verification:
             messages.success(self.request, self.message_success % {'user': user.email})
             user.backend = 'cosinnus.backends.EmailAuthBackend'

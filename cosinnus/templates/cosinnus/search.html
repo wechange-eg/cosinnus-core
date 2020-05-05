@@ -81,174 +81,187 @@
               </button>
             </div>
             
-            <div class="app-todos">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=todo">
-                <ul class="media-list">
-                  <li class="media">
-                    <!--
-                    <a class="pull-left" href="#">
-                      2
-                    </a>
-                    <a class="pull-left" style="background-color:inherit;" href="#">
-                    -->
-                    <a class="pull-left" href="#">
-                      <i class="fa fa-tasks"></i>
-                    </a>
-                    <div class="media-body">
-                      {% trans "Todos" %}
-                    </div>
-                  </li>
-                </ul>
-              </button>
-            </div>
-        
-            <div class="app-files">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=file">
-                <ul class="media-list">
-                  <li class="media">
-                    <!--
-                    <a class="pull-left" href="#">
-                      0
-                    </a>
-                    <a class="pull-left" style="background-color:inherit;" href="#">
-                    -->
-                    <a class="pull-left" href="#">
-                      <i class="fa fa-file"></i>
-                    </a>
-                    <div class="media-body">
-                      {% trans "Files" %}
-                    </div>
-                  </li>
-                </ul>
-              </button>
-            </div>
-        
-            <div class="app-etherpad">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=etherpad&models=ethercalc">
-                <ul class="media-list">
-                  <li class="media">
-                    <!--
-                    <a class="pull-left" href="#">
-                      2
-                    </a>
-                    <a class="pull-left" style="background-color:inherit;" href="#">
-                    -->
-                    <a class="pull-left" href="#">
-                      <i class="fa fa-file-text-o"></i>
-                    </a>
-                    <div class="media-body">
-                      {% trans "Etherpads" %}
-                    </div>
-                  </li>
-                </ul>
-              </button>
-            </div>
+            {% if not 'cosinnus_note' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}        
+                <div class="app-main">
+                  <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=note">
+                    <ul class="media-list">
+                      <li class="media">
+                        <!--
+                        <a class="pull-left" href="#">
+                          2
+                        </a>
+                        <a class="pull-left" style="background-color:inherit;" href="#">
+                        -->
+                        <a class="pull-left" href="#">
+                          <i class="fa fa-file-text-o"></i>
+                        </a>
+                        <div class="media-body">
+                          {% trans "News" %}
+                        </div>
+                      </li>
+                    </ul>
+                  </button>
+                </div>
+            {% endif %}
             
+            {% if not 'cosinnus_event' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+                <div class="app-calendar">
+                  <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=event">
+                    <ul class="media-list">
+                      <li class="media">
+                        <!--
+                        <a class="pull-left" href="#">
+                          4
+                        </a>
+                        <a class="pull-left" style="background-color:inherit;" href="#">
+                        -->
+                        <a class="pull-left" href="#">
+                          <i class="fa fa-calendar"></i>
+                        </a>
+                        <div class="media-body">
+                          {% trans "Events" %}
+                        </div>
+                      </li>
+                    </ul>
+                  </button>
+                </div>
+            {% endif %}
             
-            <div class="app-etherpad">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=ethercalc">
-                <ul class="media-list">
-                  <li class="media">
-                    <!--
-                    <a class="pull-left" href="#">
-                      2
-                    </a>
-                    <a class="pull-left" style="background-color:inherit;" href="#">
-                    -->
-                    <a class="pull-left" href="#">
-                      <i class="fa fa-table"></i>
-                    </a>
-                    <div class="media-body">
-                      {% trans "Ethercalcs" %}
-                    </div>
-                  </li>
-                </ul>
-              </button>
-            </div>
-            
-            <div class="app-poll">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=poll">
-                <ul class="media-list">
-                  <li class="media">
-                    <!--
-                    <a class="pull-left" href="#">
-                      2
-                    </a>
-                    <a class="pull-left" style="background-color:inherit;" href="#">
-                    -->
-                    <a class="pull-left" href="#">
-                      <i class="fa fa-bar-chart"></i>
-                    </a>
-                    <div class="media-body">
-                      {% trans "Polls" %}
-                    </div>
-                  </li>
-                </ul>
-              </button>
-            </div>
-            
-            <div class="app-marketplace">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=offer">
-                <ul class="media-list">
-                  <li class="media">
-                    <!--
-                    <a class="pull-left" href="#">
-                      2
-                    </a>
-                    <a class="pull-left" style="background-color:inherit;" href="#">
-                    -->
-                    <a class="pull-left" href="#">
-                      <i class="fa fa-exchange"></i>
-                    </a>
-                    <div class="media-body">
-                      {% trans "Offers" %}
-                    </div>
-                  </li>
-                </ul>
-              </button>
-            </div>
+            {% if not 'cosinnus_todo' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+	            <div class="app-todos">
+	              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=todo">
+	                <ul class="media-list">
+	                  <li class="media">
+	                    <!--
+	                    <a class="pull-left" href="#">
+	                      2
+	                    </a>
+	                    <a class="pull-left" style="background-color:inherit;" href="#">
+	                    -->
+	                    <a class="pull-left" href="#">
+	                      <i class="fa fa-tasks"></i>
+	                    </a>
+	                    <div class="media-body">
+	                      {% trans "Todos" %}
+	                    </div>
+	                  </li>
+	                </ul>
+	              </button>
+	            </div>
+            {% endif %}
         
-            <div class="app-main">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=note">
-                <ul class="media-list">
-                  <li class="media">
-                    <!--
-                    <a class="pull-left" href="#">
-                      2
-                    </a>
-                    <a class="pull-left" style="background-color:inherit;" href="#">
-                    -->
-                    <a class="pull-left" href="#">
-                      <i class="fa fa-file-text-o"></i>
-                    </a>
-                    <div class="media-body">
-                      {% trans "News" %}
-                    </div>
-                  </li>
-                </ul>
-              </button>
-            </div>
-        
-            <div class="app-calendar">
-              <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "models" %}&models=event">
-                <ul class="media-list">
-                  <li class="media">
-                    <!--
-                    <a class="pull-left" href="#">
-                      4
-                    </a>
-                    <a class="pull-left" style="background-color:inherit;" href="#">
-                    -->
-                    <a class="pull-left" href="#">
-                      <i class="fa fa-calendar"></i>
-                    </a>
-                    <div class="media-body">
-                      {% trans "Events" %}
-                    </div>
-                  </li>
-                </ul>
-              </button>
-            </div>
+            {% if not 'cosinnus_etherpad' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+	            <div class="app-etherpad">
+	              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=etherpad&models=ethercalc">
+	                <ul class="media-list">
+	                  <li class="media">
+	                    <!--
+	                    <a class="pull-left" href="#">
+	                      2
+	                    </a>
+	                    <a class="pull-left" style="background-color:inherit;" href="#">
+	                    -->
+	                    <a class="pull-left" href="#">
+	                      <i class="fa fa-file-text-o"></i>
+	                    </a>
+	                    <div class="media-body">
+	                      {% trans "Etherpads" %}
+	                    </div>
+	                  </li>
+	                </ul>
+	              </button>
+	            </div>
+            
+	            <div class="app-etherpad">
+	              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=ethercalc">
+	                <ul class="media-list">
+	                  <li class="media">
+	                    <!--
+	                    <a class="pull-left" href="#">
+	                      2
+	                    </a>
+	                    <a class="pull-left" style="background-color:inherit;" href="#">
+	                    -->
+	                    <a class="pull-left" href="#">
+	                      <i class="fa fa-table"></i>
+	                    </a>
+	                    <div class="media-body">
+	                      {% trans "Ethercalcs" %}
+	                    </div>
+	                  </li>
+	                </ul>
+	              </button>
+	            </div>
+            {% endif %}
+            
+            {% if not 'cosinnus_file' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+                <div class="app-files">
+                  <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=file">
+                    <ul class="media-list">
+                      <li class="media">
+                        <!--
+                        <a class="pull-left" href="#">
+                          0
+                        </a>
+                        <a class="pull-left" style="background-color:inherit;" href="#">
+                        -->
+                        <a class="pull-left" href="#">
+                          <i class="fa fa-file"></i>
+                        </a>
+                        <div class="media-body">
+                          {% trans "Files" %}
+                        </div>
+                      </li>
+                    </ul>
+                  </button>
+                </div>
+            {% endif %}
+            
+            {% if not 'cosinnus_poll' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+                <div class="app-poll">
+                  <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=poll">
+                    <ul class="media-list">
+                      <li class="media">
+                        <!--
+                        <a class="pull-left" href="#">
+                          2
+                        </a>
+                        <a class="pull-left" style="background-color:inherit;" href="#">
+                        -->
+                        <a class="pull-left" href="#">
+                          <i class="fa fa-bar-chart"></i>
+                        </a>
+                        <div class="media-body">
+                          {% trans "Polls" %}
+                        </div>
+                      </li>
+                    </ul>
+                  </button>
+                </div>
+            {% endif %}
+            
+            {% if not 'cosinnus_marketplace' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+                <div class="app-marketplace">
+                  <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=offer">
+                    <ul class="media-list">
+                      <li class="media">
+                        <!--
+                        <a class="pull-left" href="#">
+                          2
+                        </a>
+                        <a class="pull-left" style="background-color:inherit;" href="#">
+                        -->
+                        <a class="pull-left" href="#">
+                          <i class="fa fa-exchange"></i>
+                        </a>
+                        <div class="media-body">
+                          {% trans "Offers" %}
+                        </div>
+                      </li>
+                    </ul>
+                  </button>
+                </div>
+            {% endif %}
             
             {% comment %}  {% if "groups" in request.GET %} {% endcomment %}
             <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=project">

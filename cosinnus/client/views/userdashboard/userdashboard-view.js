@@ -153,6 +153,7 @@ module.exports = BaseView.extend({
     	
     	self.timelineView = new TimelineView({
     		el: self.$el.find('.timeline-root'),
+    		forceOnlyMine: self.options.forceOnlyMine,
     	}, self.app, self.uiPrefsView);
     	self.timelineView.load();
     },
