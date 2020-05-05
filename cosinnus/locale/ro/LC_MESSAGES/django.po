@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 12:12+0200\n"
+"POT-Creation-Date: 2020-05-05 12:18+0200\n"
 "PO-Revision-Date: 2019-11-18 04:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2953,22 +2953,16 @@ msgstr "Cerere de utilizator nou: %(user_name)s vrea să se alăture %(site_name
 
 #, python-format
 msgid ""
-"Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
+"Hello, %(user_name)s! \n"
 "\n"
-"Du kannst dich ab sofort unter %(domain_url)s einloggen.\n"
+"Welcome to %(site_name)s! Your user account was approved.\n"
 "\n"
-"Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
+"You can now log in at %(domain_url)s.\n"
 "\n"
-"Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
 "\n"
-"Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
+"Best regards,\n"
 "\n"
-"Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
-"\n"
-"Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
-"\n"
-"Viele Grüße und viel Spaß hier,\n"
-"das %(site_name)s Team"
+"the %(site_name)s Team"
 msgstr ""
 
 #, python-format
@@ -3268,6 +3262,16 @@ msgstr "Ai uitat?"
 
 msgid "Logged out"
 msgstr "Delogat"
+
+#, fuzzy
+#| msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
+msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+msgstr "Utilizatorul ”%(user)s” a fost înregistrat cu succes. Contul va trebui să fie aprobat înainte de a vă autentifica. Vom trimite un e-mail la adresa dvs ”%(email)s” când se va întâmpla acest lucru."
+
+#, fuzzy
+#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+msgstr "Utilizatorul ”%(user)s” a fost înregistrată cu succes. Vă vom trimite un e-mail la adresa dvs %(email)s” în curând. Trebuie să confirmați adresa de e-mail înainte de a vă autentifica."
 
 msgid "Password"
 msgstr "Parola"
