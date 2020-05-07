@@ -96,13 +96,15 @@
 				{% endif %}
 			{% endblock %}
 			
-			{% if request.user.is_authenticated %} 
+			{% if request.user.is_authenticated %}
+                {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
 				<a class="nav-button nav-button-with-message-counter" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-global' %}{% else %}{% url 'postman:inbox' %}{% endif %}"
 				         role="button" title="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% trans "Rocket.Chat" %}{% else %}{% trans "Messages" %}{% endif %}"
 				         id="navbar-messages-button" >
 		    		<i class="fas fa-fw fa-envelope"></i>
 		    		<span class="message-counter" style="display: none;"></span>
 				</a>
+				{% endif %}
 				{% if SETTINGS.COSINNUS_NOTIFICATION_ALERTS_ENABLED %}
 		        <a class="nav-button nav-button-with-message-counter nav-collapse-button collapsed" id="navbar-notifications-button" rel="toggle" role="button" 
 		                    title="{% trans "Notifications" %}" 

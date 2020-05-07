@@ -444,6 +444,7 @@
             <div id="collapseThree" class="panel-collapse {% if request.GET.invite %}collapse{% else %}in{% endif %}">
                 <div class="panel-body">
 			        
+			        {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
 			        <div class="large-space">
 			            {% if not group.slug == SETTINGS.NEWW_FORUM_GROUP_SLUG and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 					        <div href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url "cosinnus:message-write-group" slug=group.slug %}{% else %}{% url "postman:write-group" group_recipients=group.slug %}{% endif %}" class="btn btn-small btn-emphasized">
@@ -462,7 +463,8 @@
 				        <legend>{% trans "Members" %}{% if member_count %} ({{ member_count }}){% endif %}</legend>
 			        </div>
 			        <div class="clearfix"></div>
-			    
+			        {% endif %}
+			        
 			        {% for member in members %}
 			            <div class="fadedown {% if not forloop.last or hidden_user_count > 0 %}regular-space{% endif %}">
 			                <div class="btn btn-emphasized w100">
@@ -477,9 +479,11 @@
 			                            </a>
 			                            {% endif %}
 			                            {% if not member == user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+					                    {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
 			                            <a class="pull-right" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=member.username %}" title="{% trans "Send Message" %}{% else %}{% url 'postman:write' recipients=member.username %}{% endif %}" title="{% trans "Send Message" %}">
 				                            <i class="fa fa-envelope"></i>
 				                        </a>
+                                        {% endif %}
 				                        {% endif %}
 			                            <div class="media-body">
 			                                    <span class="annotation">
