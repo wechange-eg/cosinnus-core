@@ -595,6 +595,12 @@ class CosinnusConf(AppConf):
     # should the dashboard show marketplace offers, both as widgets and in the timeline?
     V2_DASHBOARD_SHOW_MARKETPLACE = False
     
+    # should the user dashboard welcome screen be shown?
+    V2_DASHBOARD_WELCOME_SCREEN_ENABLED = True
+    
+    # default duration for which the welcome screen should be shown on the user dashboard, unless clicked aways
+    V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS = 7
+    
     # in v2, the footer is disabled by default. set this to True to enable it!
     V2_FORCE_SITE_FOOTER = False
     

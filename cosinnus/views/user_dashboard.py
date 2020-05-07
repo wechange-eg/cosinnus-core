@@ -81,6 +81,9 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
         else:
             announcement = UserDashboardAnnouncement.get_next_for_user(self.request.user)
         
+        welcome_screen_expired = self.request.user.date_joined < (now() - timedelta(days=getattr(settings, 'COSINNUS_V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS', 7)))
+        welcome_screen_enabled = getattr(settings, 'COSINNUS_V2_DASHBOARD_WELCOME_SCREEN_ENABLED', True)
+        
         options = {
             'ui_prefs': get_ui_prefs_for_user(self.request.user),
             'force_only_mine': getattr(settings, 'COSINNUS_USERDASHBOARD_FORCE_ONLY_MINE', False) or \
@@ -92,7 +95,7 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
             'note_form' : note_form,
             'announcement': announcement,
             'announcement_is_preview': announcement_is_preview,
-            'welcome_screen_expired': self.request.user.date_joined < (now() - timedelta(days=7)),
+            'show_welcome_screen': welcome_screen_enabled and not welcome_screen_expired,
         }
         return ctx
 
