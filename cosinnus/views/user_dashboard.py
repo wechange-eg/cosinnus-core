@@ -29,7 +29,7 @@ from cosinnus.models.user_dashboard import DashboardItem
 from cosinnus.utils.dates import timestamp_from_datetime, \
     datetime_from_timestamp
 from cosinnus.utils.filters import exclude_special_folders
-from cosinnus.utils.functions import is_number
+from cosinnus.utils.functions import is_number, sort_key_strcoll_attr
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_slugs
 from cosinnus.utils.pagination import QuerysetLazyCombiner
@@ -120,7 +120,10 @@ class MyGroupsClusteredMixin(object):
     def get_group_clusters(self, user, sort_by_activity=False):
         clusters = []
         projects = list(CosinnusProject.objects.get_for_user(user))
+        projects = sorted(projects, key=sort_key_strcoll_attr('name'))
         societies = list(CosinnusSociety.objects.get_for_user(user))
+        societies = sorted(societies, key=sort_key_strcoll_attr('name'))
+        
         group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
         if sort_by_activity:
             group_last_visited_qs = LastVisitedObject.objects.filter(user=user, content_type=group_ct, portal=CosinnusPortal.get_current())
@@ -139,14 +142,22 @@ class MyGroupsClusteredMixin(object):
             
             # the most recent visit time to any project or society in the cluster
             most_recent_dt = group_last_visited.get(society.id, default_date)
-            items = AttrList([DashboardItem(society, is_emphasized=True)])
+            items_projects = []
             for i in range(len(projects)-1, -1, -1):
                 project = projects[i]
                 if project.parent == society:
-                    items.append(DashboardItem(project))
+                    items_projects.append(project)
                     projects.pop(i)
                     project_dt = group_last_visited.get(project.id, default_date)
                     most_recent_dt = project_dt if project_dt > most_recent_dt else most_recent_dt
+            
+            # sort sub items by last_visited or name
+            if sort_by_activity:
+                items_projects = sorted(items_projects, key=lambda project: group_last_visited.get(project.id, default_date), reverse=True)
+            else:
+                items_projects = sorted(items_projects, key=sort_key_strcoll_attr('name'))
+            items_items = [DashboardItem(project) for project in items_projects]
+            items = AttrList([DashboardItem(society, is_emphasized=True)] + items_items)
             items.last_visited = most_recent_dt
             clusters.append(items)
             
