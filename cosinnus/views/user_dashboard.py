@@ -510,7 +510,7 @@ class TimelineView(ModelRetrievalMixin, View):
                 content_model = SEARCH_MODEL_NAMES_REVERSE.get(content_type, None)
                 if content_model is None:
                     if settings.DEBUG:
-                        raise ImproperlyConfigured('Could not find content model for timeline content type "%s"' % content_type)
+                        logger.warn('Could not find content model for timeline content type "%s"' % content_type)
                     continue
                 single_querysets.append(self._get_queryset_for_model(content_model))
                 
