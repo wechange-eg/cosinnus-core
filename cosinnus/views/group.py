@@ -144,9 +144,15 @@ class CosinnusGroupFormMixin(object):
         self.group_model_class = model_class
         self.group_form_class = form_class
         
+        # special check, if group/project creation is limited to admins, deny regular users
+        if getattr(settings, 'COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS', False) \
+                and not check_user_superuser(self.request.user):
+            messages.warning(self.request, _('Sorry, only portal administrators can create projects and groups!'))
+            return redirect(reverse('cosinnus:portal-admin-list'))
+        
         # special check: only portal admins can create groups
         if not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False) and self.form_view == 'add' and model_class == CosinnusSociety:
-            if not (self.request.user.id in CosinnusPortal.get_current().admins or check_user_superuser(self.request.user)):
+            if not check_user_superuser(self.request.user):
                 
                 if getattr(settings, 'COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED', False):
                     redirect_url = reverse('cosinnus:premium-info-page')

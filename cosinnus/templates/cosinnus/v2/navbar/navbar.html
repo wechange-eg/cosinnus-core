@@ -75,11 +75,13 @@
 	        {% endblock %}
 	        
 	        {% block create_icon_button %}
-			<a class="nav-button nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Create content" %}" 
-			    		aria-expanded="false" aria-controls="create-menu-collapse"
-			    		data-toggle="collapse" data-target="#create-menu-collapse"> 
-	    		<i class="fas fa-fw fa-plus"></i>
-			</a>
+	            {% if not SETTINGS.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS or user|is_superuser %}
+					<a class="nav-button nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Create content" %}" 
+					    		aria-expanded="false" aria-controls="create-menu-collapse"
+					    		data-toggle="collapse" data-target="#create-menu-collapse"> 
+			    		<i class="fas fa-fw fa-plus"></i>
+					</a>
+				{% endif %}
 			{% endblock %}
 			{% block home_icon_button %}
 			<a class="nav-button" href="/cms/?noredir=1" role="button" title="{% trans "Home" %}"> 

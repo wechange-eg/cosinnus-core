@@ -83,6 +83,7 @@
 				<div class="description margin-extra-large">
 	                {% include 'cosinnus/v2/texts/welcome_frame_text.html' %}
 				</div>
+				{% if not SETTINGS.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS or user|is_superuser %}
 				<div class="flex-row mobile-flex-column">
 					<div class="flex-grow margin-extra-large">
 						<h2 class="headline no-side-margin">{% trans "Projects" %}</h2>
@@ -105,6 +106,7 @@
 						</a>
 					</div>
 				</div>
+				{% endif %}
 				<div class="flex-row mobile-flex-column">
 					{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
 					<div class="flex-grow margin-extra-large">
