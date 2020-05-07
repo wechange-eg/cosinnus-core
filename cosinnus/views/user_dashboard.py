@@ -29,7 +29,7 @@ from cosinnus.models.user_dashboard import DashboardItem
 from cosinnus.utils.dates import timestamp_from_datetime, \
     datetime_from_timestamp
 from cosinnus.utils.filters import exclude_special_folders
-from cosinnus.utils.functions import is_number
+from cosinnus.utils.functions import is_number, sort_key_strcoll_attr
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_slugs
 from cosinnus.utils.pagination import QuerysetLazyCombiner
@@ -119,8 +119,8 @@ class MyGroupsClusteredMixin(object):
     
     def get_group_clusters(self, user, sort_by_activity=False):
         clusters = []
-        projects = list(CosinnusProject.objects.get_for_user(user))
-        societies = list(CosinnusSociety.objects.get_for_user(user))
+        
+        # collect map of last visited groups
         group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
         if sort_by_activity:
             group_last_visited_qs = LastVisitedObject.objects.filter(user=user, content_type=group_ct, portal=CosinnusPortal.get_current())
@@ -130,35 +130,39 @@ class MyGroupsClusteredMixin(object):
             group_last_visited = {}
         default_date = now() - relativedelta(years=100)
         
-        class AttrList(list):
-            last_visited = None
+        # collect and sort user projects and societies lists
+        projects = list(CosinnusProject.objects.get_for_user(user))
+        societies = list(CosinnusSociety.objects.get_for_user(user))
+        # sort sub items by last_visited or name
+        if sort_by_activity:
+            projects = sorted(projects, key=lambda project: group_last_visited.get(project.id, default_date), reverse=True)
+            societies = sorted(societies, key=lambda society: group_last_visited.get(society.id, default_date), reverse=True)
+        else:
+            projects = sorted(projects, key=sort_key_strcoll_attr('name'))
+            societies = sorted(societies, key=sort_key_strcoll_attr('name'))
         
+        # sort projects into their societies clusters, society clusters are always displayed first
         for society in societies:
             if society.slug in get_default_user_group_slugs():
                 continue
             
             # the most recent visit time to any project or society in the cluster
             most_recent_dt = group_last_visited.get(society.id, default_date)
-            items = AttrList([DashboardItem(society, is_emphasized=True)])
+            items_projects = []
             for i in range(len(projects)-1, -1, -1):
                 project = projects[i]
                 if project.parent == society:
-                    items.append(DashboardItem(project))
+                    items_projects.insert(0, DashboardItem(project)) # prepend because of reversed order
                     projects.pop(i)
                     project_dt = group_last_visited.get(project.id, default_date)
                     most_recent_dt = project_dt if project_dt > most_recent_dt else most_recent_dt
-            items.last_visited = most_recent_dt
+            items = [DashboardItem(society, is_emphasized=True)] + items_projects
             clusters.append(items)
             
         # add unclustered projects as own cluster
         for proj in projects:
-            items = AttrList([DashboardItem(proj)])
-            items.last_visited = group_last_visited.get(proj.id, default_date)
+            items = [DashboardItem(proj)]
             clusters.append(items)
-        
-        # sort clusters by last_visited
-        if sort_by_activity:
-            clusters = sorted(clusters, key=lambda cluster: cluster.last_visited, reverse=True)
         
         return clusters
 

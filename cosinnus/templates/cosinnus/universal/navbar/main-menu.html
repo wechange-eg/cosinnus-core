@@ -78,14 +78,16 @@
 		<hr>
 		
 		<div class="main-menu-links">
-			<div><a href="{{ group_add_url }}">
-				{# Translators: __INCLUDE_JS_PO__ #}
-				{% trans "Create new Group" %}
-			</a></div>
-			<div><a href="{{ project_add_url }}">
-				{# Translators: __INCLUDE_JS_PO__ #}
-				{% trans "Create new Project" %} 
-			</a></div>
+		    {% if COSINNUS_SHOW_PROJECT_AND_GROUP_CREATE_BUTTONS %}
+				<div><a href="{{ group_add_url }}">
+					{# Translators: __INCLUDE_JS_PO__ #}
+					{% trans "Create new Group" %}
+				</a></div>
+				<div><a href="{{ project_add_url }}">
+					{# Translators: __INCLUDE_JS_PO__ #}
+					{% trans "Create new Project" %} 
+				</a></div>
+			{% endif %}
 			<div><a href="/groups/">
 				{# Translators: __INCLUDE_JS_PO__ #}
 				{% trans "Browse all Groups" %} 
