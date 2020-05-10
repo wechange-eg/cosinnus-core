@@ -950,6 +950,8 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         return qs
     
     def get_admin_contact_url(self):
+        if 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
+            return ''
         if settings.COSINNUS_ROCKET_ENABLED:
             return reverse('cosinnus:message-write-group', kwargs={'slug': self.slug})
         else:

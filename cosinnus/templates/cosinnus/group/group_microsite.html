@@ -480,17 +480,19 @@
 		<div class="col-md-6">
 			{% block microsite_left_column %}
 				
-				{# Contact box #}
-				<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
-		            <ul class="media-list">
-		                <li class="media">
-		                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-		                    <div class="media-body">
-		                        {% trans "Contact" %}
-		                    </div>
-		                </li>
-		            </ul>
-		        </div><!-- btn -->
+				{% if not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS %}
+					{# Contact box #}
+					<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    <div class="media-body">
+			                        {% trans "Contact" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+		        {% endif %}
 		        
 	        	{# Little hack to show an empty message, because a render-time empty check is complex due to extendable blocks #}
 	        	<script type="text/javascript"> 
