@@ -263,7 +263,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
 
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
         message_url = None
-        if not settings.COSINNUS_IS_INTEGRATED_PORTAL:
+        if not settings.COSINNUS_IS_INTEGRATED_PORTAL and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
             if settings.COSINNUS_ROCKET_ENABLED:
                 message_url = reverse('cosinnus:message-write-group', kwargs={'slug': obj.slug})
             else:
@@ -359,7 +359,7 @@ class DetailedUserMapResult(DetailedMapResult):
         kwargs.update({
             'is_member': user.id == obj.user_id,
         })
-        if not settings.COSINNUS_IS_INTEGRATED_PORTAL:
+        if not settings.COSINNUS_IS_INTEGRATED_PORTAL and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
             if settings.COSINNUS_ROCKET_ENABLED:
                 kwargs.update({
                     'action_url_1': _prepend_url(user, None) + reverse('cosinnus:message-write',
@@ -537,7 +537,7 @@ try:
 except:
     FileEntry = None
 
-if not settings.COSINNUS_ROCKET_ENABLED:
+if not settings.COSINNUS_ROCKET_ENABLED and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
     try:
         from postman.models import Message #noqa
         SEARCH_MODEL_NAMES.update({
