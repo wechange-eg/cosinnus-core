@@ -30,7 +30,7 @@ module.exports = BaseView.extend({
     uiPrefsView: null,
     
     typedContentWidgetTypes: ['pads', 'files']
-		.concat(COSINNUS_ROCKET_ENABLED ? [] : ['messages'])
+		.concat((COSINNUS_ROCKET_ENABLED || !COSINNUS_MESSAGES_ENABLED) ? [] : ['messages'])
 	    .concat(['events', 'todos', 'polls'])
 		.concat(COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE ? ['offers'] : []),
     typedContentWidgets: {},
