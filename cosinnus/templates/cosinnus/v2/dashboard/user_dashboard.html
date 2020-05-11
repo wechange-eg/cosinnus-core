@@ -68,7 +68,7 @@
 		
 	<div class="dashboard-center-bar dashboard-column visible-panel-2">
 	
-	    {% if not welcome_screen_expired %}
+	    {% if show_welcome_screen %}
 			<div class="dashboard-welcome-frame" style="display: none">
 				<div class="aside-link text-small">
 					<a class="pale-color pale-with-highlight"
@@ -83,6 +83,7 @@
 				<div class="description margin-extra-large">
 	                {% include 'cosinnus/v2/texts/welcome_frame_text.html' %}
 				</div>
+				{% if not SETTINGS.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS or user|is_superuser %}
 				<div class="flex-row mobile-flex-column">
 					<div class="flex-grow margin-extra-large">
 						<h2 class="headline no-side-margin">{% trans "Projects" %}</h2>
@@ -105,6 +106,7 @@
 						</a>
 					</div>
 				</div>
+				{% endif %}
 				<div class="flex-row mobile-flex-column">
 					{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
 					<div class="flex-grow margin-extra-large">
@@ -210,7 +212,9 @@
 			
 			<div class="widget-info-box welcome_widget_box no-header no-select" style="display: none;">
 				<div class="margin-large">
-					{% trans "Your recently visited Pads, Files, Events, Todos and other content will be shown here." %}
+				    {% block recent_widgets_text_right %}
+    					{% trans "Your recently visited Pads, Files, Events, Todos and other content will be shown here." %}
+					{% endblock %}
 				</div>
 				<div class="text-small">
 					<a class="pale-color pale-with-highlight" data-target="ui-pref" data-ui-pref="timeline__hide_welcome_widget_box" data-ui-pref-value="1" data-hide-after=".welcome_widget_box">

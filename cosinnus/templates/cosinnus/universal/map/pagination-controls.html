@@ -104,7 +104,7 @@
 	    </a>
     {% endif %}
     
-    {% if splitscreen %}
+    {% if splitscreen and COSINNUS_SHOW_PROJECT_AND_GROUP_CREATE_BUTTONS %}
 	    <a href="{% if not cosinnus_active_user %}/signup/?acc_req_msg=1&next={% endif %}/projects/add/" class="rounded-button button-color-projects-inverted shadowed-button">
 	        <span class="rounded-button-inner">
 	            <i class="fa fa-group"></i>

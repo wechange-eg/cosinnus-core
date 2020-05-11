@@ -555,9 +555,13 @@ class CosinnusConf(AppConf):
     # when users newly register, are their profiles marked as visible rather than private on the site?
     USER_DEFAULT_VISIBLE_WHEN_CREATED = True
     
-    # should regular, non-admin users be allowed to create Groups as well?
+    # should regular, non-admin users be allowed to create Groups (Societies) as well?
     # if False, users can only create Projects 
     USERS_CAN_CREATE_GROUPS = False
+    
+    # if set to True, regular non-portal admin users can not create projects and groups by themselves
+    # and some elements like the "+" button in the navbar is hidden
+    LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS = False
     
     # will the `profile.may_be_contacted` be shown in forms and detail views?
     USER_SHOW_MAY_BE_CONTACTED_FIELD = False
@@ -591,6 +595,12 @@ class CosinnusConf(AppConf):
     
     # should the dashboard show marketplace offers, both as widgets and in the timeline?
     V2_DASHBOARD_SHOW_MARKETPLACE = False
+    
+    # should the user dashboard welcome screen be shown?
+    V2_DASHBOARD_WELCOME_SCREEN_ENABLED = True
+    
+    # default duration for which the welcome screen should be shown on the user dashboard, unless clicked aways
+    V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS = 7
     
     # in v2, the footer is disabled by default. set this to True to enable it!
     V2_FORCE_SITE_FOOTER = False

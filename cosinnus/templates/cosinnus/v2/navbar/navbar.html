@@ -75,11 +75,13 @@
 	        {% endblock %}
 	        
 	        {% block create_icon_button %}
-			<a class="nav-button nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Create content" %}" 
-			    		aria-expanded="false" aria-controls="create-menu-collapse"
-			    		data-toggle="collapse" data-target="#create-menu-collapse"> 
-	    		<i class="fas fa-fw fa-plus"></i>
-			</a>
+	            {% if not SETTINGS.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS or user|is_superuser %}
+					<a class="nav-button nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Create content" %}" 
+					    		aria-expanded="false" aria-controls="create-menu-collapse"
+					    		data-toggle="collapse" data-target="#create-menu-collapse"> 
+			    		<i class="fas fa-fw fa-plus"></i>
+					</a>
+				{% endif %}
 			{% endblock %}
 			{% block home_icon_button %}
 			<a class="nav-button" href="/cms/?noredir=1" role="button" title="{% trans "Home" %}"> 
@@ -102,13 +104,15 @@
 				{% endif %}
 			{% endblock %}
 			
-			{% if request.user.is_authenticated %} 
+			{% if request.user.is_authenticated %}
+                {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
 				<a class="nav-button nav-button-with-message-counter" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-global' %}{% else %}{% url 'postman:inbox' %}{% endif %}"
 				         role="button" title="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% trans "Rocket.Chat" %}{% else %}{% trans "Messages" %}{% endif %}"
 				         id="navbar-messages-button" >
 		    		<i class="fas fa-fw fa-envelope"></i>
 		    		<span class="message-counter" style="display: none;"></span>
 				</a>
+				{% endif %}
 				{% if SETTINGS.COSINNUS_NOTIFICATION_ALERTS_ENABLED %}
 		        <a class="nav-button nav-button-with-message-counter nav-collapse-button collapsed" id="navbar-notifications-button" rel="toggle" role="button" 
 		                    title="{% trans "Notifications" %}" 

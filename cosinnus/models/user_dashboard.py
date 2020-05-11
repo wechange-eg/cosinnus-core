@@ -44,7 +44,7 @@ class DashboardItem(dict):
                 self['icon'] = obj.get_icon()
                 self['text'] = escape(obj.title)
                 self['url'] = obj.get_absolute_url()
-            elif obj._meta.model.__name__ == 'Message' and not settings.COSINNUS_ROCKET_ENABLED:
+            elif obj._meta.model.__name__ == 'Message' and not settings.COSINNUS_ROCKET_ENABLED and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
                 self['icon'] = 'fa-envelope'
                 self['text'] = escape(obj.subject)
                 self['url'] = reverse('postman:view_conversation', kwargs={'thread_id': obj.thread_id}) if obj.thread_id else obj.get_absolute_url()
