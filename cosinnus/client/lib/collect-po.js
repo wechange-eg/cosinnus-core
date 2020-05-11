@@ -22,8 +22,7 @@ module.exports = {
                     try {
                         po_contents = fs.readFileSync(path, 'utf-8').toString();
                     } catch (e) {
-                        console.log('Could not open a translation PO file for a language for JS generation. If this language is not supported in the current cosinnus project, you can safely ignore this message.\nThe error was:')
-                        console.log(e)
+                        console.log('Could not open translation PO file "' + path + '" for language for JS generation. If this language is not supported in the current cosinnus project, you can safely ignore this message.');
                     }
                     if (po_contents) {
                         var po = PO.parse(po_contents);
