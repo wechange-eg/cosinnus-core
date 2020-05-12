@@ -193,24 +193,6 @@
                                 </a>
                             </div>
                         {% endif %}
-                    	{% if "marketplace" in object_counts %}
-                            <div class="dashboard-header-link app-marketplace mobile-hidden">
-                                <a href="{% group_url 'cosinnus:marketplace:list' group=group %}">
-                                    <i class="fa fa-exchange"></i>
-                                    <span>{{ object_counts.marketplace }}</span>
-                                    {% if object_counts.marketplace == 1 %}{% trans "Marketplace" %}{% else %}{% trans "Marketplace" %}{% endif %}
-                                </a>
-                            </div>
-                        {% endif %}
-                    	{% if "poll" in object_counts %}
-                            <div class="dashboard-header-link app-poll mobile-hidden">
-                                <a href="{% group_url 'cosinnus:poll:list' group=group %}">
-                                    <i class="fa fa-bar-chart"></i>
-                                    <span>{{ object_counts.poll }}</span>
-                                    {% if object_counts.poll == 1 %}{% trans "Poll" %}{% else %}{% trans "Polls" %}{% endif %}
-                                </a>
-                            </div>
-                        {% endif %}
                         {% if "file" in object_counts %}
                             <div class="dashboard-header-link app-files mobile-hidden">
                                 <a href="{% group_url 'cosinnus:file:list' group=group %}">
@@ -229,12 +211,30 @@
                                 </a>
                             </div>
                         {% endif %}
+                        {% if "poll" in object_counts %}
+                            <div class="dashboard-header-link app-poll mobile-hidden">
+                                <a href="{% group_url 'cosinnus:poll:list' group=group %}">
+                                    <i class="fa fa-bar-chart"></i>
+                                    <span>{{ object_counts.poll }}</span>
+                                    {% if object_counts.poll == 1 %}{% trans "Poll" %}{% else %}{% trans "Polls" %}{% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
                         {% if "todo" in object_counts %}
                             <div class="dashboard-header-link app-todos mobile-hidden">
                                 <a href="{% group_url 'cosinnus:todo:list' group=group %}">
                                     <i class="fa fa-tasks"></i>
                                     <span>{{ object_counts.todo }}</span>
                                     {% if object_counts.todo == 1 %}{% trans "Todo" %}{% else %}{% trans "Todos" %}{% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if "marketplace" in object_counts %}
+                            <div class="dashboard-header-link app-marketplace mobile-hidden">
+                                <a href="{% group_url 'cosinnus:marketplace:list' group=group %}">
+                                    <i class="fa fa-exchange"></i>
+                                    <span>{{ object_counts.marketplace }}</span>
+                                    {% if object_counts.marketplace == 1 %}{% trans "Marketplace" %}{% else %}{% trans "Marketplace" %}{% endif %}
                                 </a>
                             </div>
                         {% endif %}
