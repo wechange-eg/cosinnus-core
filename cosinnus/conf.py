@@ -146,11 +146,12 @@ class CosinnusConf(AppConf):
     APPS_MENU_ORDER = [
         'cosinnus_note',
         'cosinnus_event',
-        'cosinnus_poll',
+        'cosinnus_marketplace',
         'cosinnus_todo',
+        'cosinnus_poll',
         'cosinnus_etherpad',
         'cosinnus_file',
-        'cosinnus_marketplace',
+        'cosinnus_cloud',
     ]
     
     # a list of groups slugs for a portal, that do not require the group

@@ -463,6 +463,9 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         """ Similar to get_absolute_url, this returns the URL for this object's implemented delete view.
             Needs to be set by a specific implementation of BaseTaggableObjectModel """
         raise ImproperlyConfigured("The get_delete_url function must be implemented for model '%s'" % self.__class__)
+
+    def get_cosinnus_app(self):
+        return self.__class__.__module__.split('.')[0]
     
     def get_cosinnus_app_name(self):
         return app_registry.get_name(self.__class__.__module__.split('.')[0])
