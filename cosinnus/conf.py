@@ -637,6 +637,8 @@ class CosinnusConf(AppConf):
     CLOUD_OPEN_IN_NEW_TAB = True
     # whether to prefix all nextcloud group folders with "Projekt" or "Gruppe"
     CLOUD_PREFIX_GROUP_FOLDERS = True
+    # the quota for groupfolders, in bytes. -3 is the default for "unlimited"
+    CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA = -3
     
     # if set to a hex color string,
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
