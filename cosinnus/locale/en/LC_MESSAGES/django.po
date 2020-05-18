@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 12:18+0200\n"
+"POT-Creation-Date: 2020-05-18 12:05+0200\n"
 "PO-Revision-Date: 2020-04-27 12:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -777,6 +777,12 @@ msgid "Facebook Page ID"
 msgstr ""
 
 msgid "Nextcloud Group ID"
+msgstr ""
+
+msgid "Nextcloud Groupfolder Name"
+msgstr ""
+
+msgid "Nextcloud Groupfolder ID"
 msgstr ""
 
 msgid "Parent Group"
@@ -1800,13 +1806,11 @@ msgstr ""
 msgid "get started here..."
 msgstr ""
 
-msgid "Marketplace"
-msgstr ""
+#, fuzzy
+msgid "Activate Cloud"
+msgstr "Create Project"
 
-msgid "Poll"
-msgstr ""
-
-msgid "Polls"
+msgid "Cloud"
 msgstr ""
 
 msgid "File"
@@ -1821,10 +1825,19 @@ msgstr "Pad"
 msgid "Etherpads"
 msgstr "Pads"
 
+msgid "Poll"
+msgstr ""
+
+msgid "Polls"
+msgstr ""
+
 msgid "Todo"
 msgstr ""
 
 msgid "Todos"
+msgstr ""
+
+msgid "Marketplace"
 msgstr ""
 
 msgctxt "Calendar"
@@ -3398,6 +3411,21 @@ msgstr ""
 msgid "Offers"
 msgstr ""
 
+msgid "Search in Cloud files (seperate)"
+msgstr ""
+
+msgid "Search results from the Cloud app can currently only be displayed in the Cloud app itself."
+msgstr ""
+
+msgid "To search for Cloud files, please visit the Cloud app and use the integrated search function there."
+msgstr ""
+
+msgid "Searching in Cloud files"
+msgstr ""
+
+msgid "Search in Cloud files"
+msgstr ""
+
 msgid "Search in teams"
 msgstr ""
 
@@ -3492,6 +3520,15 @@ msgid "End date."
 msgstr ""
 
 msgid "Ok"
+msgstr ""
+
+msgid "The WE-Cloud is here!"
+msgstr ""
+
+msgid "With the Cloud, we offer your team a new file repository with extensive office functions to work together on documents, tables and presentations. It is based on Nextcloud and OnlyOffice. So you have two apps at your disposal with which you can use the cloud on the road and synchronize files with your desktop! As administrator you can activate the cloud for your project/group and transfer data from files and pads."
+msgstr ""
+
+msgid "Learn more"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -4619,6 +4656,9 @@ msgstr ""
 msgid "Your Facebook account was successfully disconnected from this account."
 msgstr ""
 
+msgid "Sorry, only portal administrators can create projects and groups!"
+msgstr ""
+
 msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgstr ""
 
@@ -4765,6 +4805,10 @@ msgstr ""
 
 #, python-format
 msgid "This item is now being shown in these projects/groups: %(group_names)s"
+msgstr ""
+
+#, python-format
+msgid "The %s-app was activated!"
 msgstr ""
 
 msgid "No appname given for adding containers."

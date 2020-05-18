@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 12:18+0200\n"
+"POT-Creation-Date: 2020-05-18 12:05+0200\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -786,6 +786,16 @@ msgstr "Facebook Pagina ID"
 #, fuzzy
 #| msgid "Facebook Group ID"
 msgid "Nextcloud Group ID"
+msgstr "Facebook Groep ID"
+
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Groupfolder Name"
+msgstr "Facebook Groep ID"
+
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Groupfolder ID"
 msgstr "Facebook Groep ID"
 
 msgid "Parent Group"
@@ -1763,14 +1773,13 @@ msgstr "Open het via het hoofdmenu of"
 msgid "get started here..."
 msgstr "start hier…"
 
-msgid "Marketplace"
-msgstr "Marktplaats"
+#, fuzzy
+#| msgid "Re-Activate"
+msgid "Activate Cloud"
+msgstr "Re-activeer"
 
-msgid "Poll"
-msgstr "Poll"
-
-msgid "Polls"
-msgstr "Polls"
+msgid "Cloud"
+msgstr ""
 
 msgid "File"
 msgstr "Document"
@@ -1784,11 +1793,20 @@ msgstr "Etherpad"
 msgid "Etherpads"
 msgstr "Etherpads"
 
+msgid "Poll"
+msgstr "Poll"
+
+msgid "Polls"
+msgstr "Polls"
+
 msgid "Todo"
 msgstr "Todo"
 
 msgid "Todos"
 msgstr "Todos"
+
+msgid "Marketplace"
+msgstr "Marktplaats"
 
 msgctxt "Calendar"
 msgid "Event"
@@ -3455,6 +3473,25 @@ msgstr "Ethercalcs"
 msgid "Offers"
 msgstr "Aanbiedingen"
 
+msgid "Search in Cloud files (seperate)"
+msgstr ""
+
+msgid "Search results from the Cloud app can currently only be displayed in the Cloud app itself."
+msgstr ""
+
+msgid "To search for Cloud files, please visit the Cloud app and use the integrated search function there."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Searching in Cloud files"
+msgstr "Zoek in teams"
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search in Cloud files"
+msgstr "Zoek in teams"
+
 msgid "Search in teams"
 msgstr "Zoek in teams"
 
@@ -3546,6 +3583,15 @@ msgstr "Einddatum."
 
 msgid "Ok"
 msgstr "Oké"
+
+msgid "The WE-Cloud is here!"
+msgstr ""
+
+msgid "With the Cloud, we offer your team a new file repository with extensive office functions to work together on documents, tables and presentations. It is based on Nextcloud and OnlyOffice. So you have two apps at your disposal with which you can use the cloud on the road and synchronize files with your desktop! As administrator you can activate the cloud for your project/group and transfer data from files and pads."
+msgstr ""
+
+msgid "Learn more"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
@@ -4612,6 +4658,9 @@ msgstr "Er is een fout opgetreden bij het loskoppelen van uw Facebook-account! N
 msgid "Your Facebook account was successfully disconnected from this account."
 msgstr "Uw Facebook-account is succesvol losgekoppeld."
 
+msgid "Sorry, only portal administrators can create projects and groups!"
+msgstr ""
+
 msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgstr "Sorry, alleen portaalbeheerders kunnen groepen maken. U kunt een project starten of een bericht schrijven naar een van de beheerders om een groep voor u te aan te maken. Hieronder vindt u een lijst met alle beheerders."
 
@@ -4756,6 +4805,11 @@ msgstr "Uw selectie voor het weergeven van dit item in projecten/groepen is bijg
 #, python-format
 msgid "This item is now being shown in these projects/groups: %(group_names)s"
 msgstr "Deze item wordt nu weergegeven in deze projecten/groepen: %(group_names)s"
+
+#, fuzzy, python-format
+#| msgid "Which apps should be activated?"
+msgid "The %s-app was activated!"
+msgstr "Welke apps moeten worden geactiveerd?"
 
 msgid "No appname given for adding containers."
 msgstr "Geen appnaam gegeven voor het toevoegen van containers."

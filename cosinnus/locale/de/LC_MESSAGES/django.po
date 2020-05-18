@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 12:18+0200\n"
-"PO-Revision-Date: 2020-05-05 12:19+0100\n"
+"POT-Creation-Date: 2020-05-18 12:05+0200\n"
+"PO-Revision-Date: 2020-05-18 12:14+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -837,12 +837,15 @@ msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Wird vorgezogen gegenüber sämtlichem anderen CSS"
 
 msgid "Video Conference Server"
-msgstr ""
+msgstr "Videokonferenz-Server"
 
 msgid ""
 "If entered, will enable video conference functionality across the site. "
 "Needs to be a URL up to the point where any random room name can be appended."
 msgstr ""
+"Wenn eingegeben, ermöglicht es Videokonferenz-Funktionalität auf der "
+"plattform. Es muss eine URL sein, bis zu dem Punkt ab den beliebige "
+"Raumnamen an die URL angehängt werden können."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
@@ -920,7 +923,7 @@ msgid "Call to Action Box Description"
 msgstr "Aufruf zum Handeln - Microsite-Box Beschreibungstext"
 
 msgid "Embedded Dashboard HTML"
-msgstr ""
+msgstr "Eingebettetes Dashboard-HTML"
 
 msgid "Deactivated Apps"
 msgstr "Deaktivierte Apps"
@@ -946,6 +949,14 @@ msgstr "Facebook Fan-Seiten-ID"
 
 msgid "Nextcloud Group ID"
 msgstr "Nextcloud Gruppen-ID"
+
+#| msgid "Nextcloud Group ID"
+msgid "Nextcloud Groupfolder Name"
+msgstr "Nextcloud Gruppenordner-Name"
+
+#| msgid "Nextcloud Group ID"
+msgid "Nextcloud Groupfolder ID"
+msgstr "Nextcloud Gruppenordner-ID"
 
 msgid "Parent Group"
 msgstr "Übergeordnete Gruppe"
@@ -2112,14 +2123,12 @@ msgstr "Schaut sie euch an über den Link im Menü oben oder"
 msgid "get started here..."
 msgstr "direkt hier..."
 
-msgid "Marketplace"
-msgstr "Marktplatz"
+#| msgid "Activate"
+msgid "Activate Cloud"
+msgstr "Cloud aktivieren"
 
-msgid "Poll"
-msgstr "Umfrage"
-
-msgid "Polls"
-msgstr "Umfragen"
+msgid "Cloud"
+msgstr "Cloud"
 
 msgid "File"
 msgstr "Datei"
@@ -2133,11 +2142,20 @@ msgstr "Pad"
 msgid "Etherpads"
 msgstr "Pads"
 
+msgid "Poll"
+msgstr "Umfrage"
+
+msgid "Polls"
+msgstr "Umfragen"
+
 msgid "Todo"
 msgstr "Aufgabe"
 
 msgid "Todos"
 msgstr "Aufgaben"
+
+msgid "Marketplace"
+msgstr "Marktplatz"
 
 msgctxt "Calendar"
 msgid "Event"
@@ -2761,6 +2779,8 @@ msgid ""
 "The HTML entered here will be displayed on the group/project dashboard (only "
 "for members)"
 msgstr ""
+"Das hier eingegebene HTML wird auf dem Gruppen/Projektdashboard dargestellt "
+"(nur für Mitglieder)"
 
 msgid "You may use the following variables:"
 msgstr "Du kannst die folgenden Variablen benutzen:"
@@ -4065,6 +4085,31 @@ msgstr "Ethercalcs"
 msgid "Offers"
 msgstr "Inserate"
 
+msgid "Search in Cloud files (seperate)"
+msgstr "Suche in Cloud-Dateien (gesondert)"
+
+msgid ""
+"Search results from the Cloud app can currently only be displayed in the "
+"Cloud app itself."
+msgstr ""
+"Suchergebnisse aus der Cloud-App können aktuell nur in der Cloud-App selbst "
+"angezeigt werden."
+
+msgid ""
+"To search for Cloud files, please visit the Cloud app and use the integrated "
+"search function there."
+msgstr ""
+"Um nach Cloud-Dateien zu suchen, besuche bitte die Cloud-App und benutze "
+"dort die integrierte Suchfunktion."
+
+#| msgid "Search in teams"
+msgid "Searching in Cloud files"
+msgstr "In Cloud-Dateien suchen"
+
+#| msgid "Search in teams"
+msgid "Search in Cloud files"
+msgstr "In Cloud-Dateien suchen"
+
 msgid "Search in teams"
 msgstr "In Gruppen und Projekten suchen"
 
@@ -4162,6 +4207,28 @@ msgstr "Enddatum"
 
 msgid "Ok"
 msgstr "Ok"
+
+msgid "The WE-Cloud is here!"
+msgstr "Die WE-Cloud ist da!"
+
+msgid ""
+"With the Cloud, we offer your team a new file repository with extensive "
+"office functions to work together on documents, tables and presentations. It "
+"is based on Nextcloud and OnlyOffice. So you have two apps at your disposal "
+"with which you can use the cloud on the road and synchronize files with your "
+"desktop! As administrator you can activate the cloud for your project/group "
+"and transfer data from files and pads."
+msgstr ""
+"Mit der Cloud bieten wir eurem Team eine neue Dateiablage mit umfangreichen "
+"Office-Funktionen, um gemeinsam an Dokumenten, Tabellen und Präsentationen "
+"zu arbeiten. Sie basiert auf Nextcloud und OnlyOffice. So stehen euch zwei "
+"Apps zur Verfügung, mit denen ihr die Cloud auch unterwegs nutzen und "
+"Dateien mit dem Desktop synchronisieren könnt! Du kannst als Administrator "
+"die Cloud für dein Projekt/Gruppe aktivieren und die Daten aus Dateien und "
+"Pads übertragen."
+
+msgid "Learn more"
+msgstr "Mehr erfahren"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
@@ -5527,6 +5594,11 @@ msgid "Your Facebook account was successfully disconnected from this account."
 msgstr ""
 "Dein Facebook-Konto wurde erfolgreich von deinem Benutzerprofil getrennt."
 
+msgid "Sorry, only portal administrators can create projects and groups!"
+msgstr ""
+"Tut uns leid, aber nur Portal-Administratoren können Projekte und Gruppen "
+"anlegen!"
+
 msgid ""
 "Sorry, only portal administrators can create Groups! You can either create a "
 "Project, or write a message to one of the administrators to create a Group "
@@ -5739,6 +5811,11 @@ msgid "This item is now being shown in these projects/groups: %(group_names)s"
 msgstr ""
 "Dieser Inhalt wird jetzt in folgenden Projekten/Gruppen angezeigt: "
 "%(group_names)s"
+
+#, python-format
+#| msgid "Which apps should be activated?"
+msgid "The %s-app was activated!"
+msgstr "Die %s-App wurde aktiviert!"
 
 msgid "No appname given for adding containers."
 msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."
