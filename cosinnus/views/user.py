@@ -169,13 +169,14 @@ class UserCreateView(CreateView):
         user = self.object
         
         # sanity check, retrieve the user's profile (will create it if it doesnt exist)
-        profile = user.cosinnus_profile or get_user_profile_model()._default_manager.get_for_user(user)
+        if not user.cosinnus_profile:
+            get_user_profile_model()._default_manager.get_for_user(user)
         
         # set current django language during signup as user's profile language
         lang = get_language()
-        if not profile.language == lang:
-            profile.language = lang
-            profile.save(update_fields=['language']) 
+        if not user.cosinnus_profile.language == lang:
+            user.cosinnus_profile.language = lang
+            user.cosinnus_profile.save(update_fields=['language']) 
         
         # set user inactive if this portal needs user approval and send an email to portal admins
         if CosinnusPortal.get_current().users_need_activation:
@@ -242,7 +243,7 @@ class UserCreateView(CreateView):
         
         if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
             # add redirect to the welcome-settings page, with priority so that it is shown as first one
-            profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), self.request), message=None, priority=True)
+            user.cosinnus_profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), self.request), message=None, priority=True)
         return ret
     
     def dispatch(self, *args, **kwargs):
