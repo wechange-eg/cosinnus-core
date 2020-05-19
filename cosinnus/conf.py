@@ -146,11 +146,12 @@ class CosinnusConf(AppConf):
     APPS_MENU_ORDER = [
         'cosinnus_note',
         'cosinnus_event',
-        'cosinnus_poll',
+        'cosinnus_marketplace',
         'cosinnus_todo',
+        'cosinnus_poll',
         'cosinnus_etherpad',
         'cosinnus_file',
-        'cosinnus_marketplace',
+        'cosinnus_cloud',
     ]
     
     # a list of groups slugs for a portal, that do not require the group
@@ -265,7 +266,7 @@ class CosinnusConf(AppConf):
     GROUP_PLURAL_URL_PATH = 'projects'
     
     # number of members displayed in the group widet
-    GROUP_MEMBER_WIDGET_USER_COUNT = 15
+    GROUP_MEMBER_WIDGET_USER_COUNT = 19
     
     # widgets listed here will be created for the group dashboard upon CosinnusGroup creation.
     # this. will check if the cosinnus app is installed and if the widget is registered, so
@@ -276,6 +277,7 @@ class CosinnusConf(AppConf):
         ("event", "upcoming", {'amount':'5', 'sort_field':'2'}),
         ("todo", "mine", {'amount':'5', 'amount_subtask':'2', 'sort_field':'3'}),
         ("etherpad", "latest", {'amount':'5', 'sort_field':'4'}),
+        ("cloud", "latest", {'amount':'5', 'sort_field':'4'}),
         ("file", "latest", {'sort_field':'5', 'amount':'5'}),
         ("poll", "current", {'sort_field':'6', 'amount':'5'}),
         ("marketplace", "current", {'sort_field':'7', 'amount':'5'}),
@@ -616,6 +618,27 @@ class CosinnusConf(AppConf):
     PAYMENTS_ENABLED = False
     # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins
     PAYMENTS_ENABLED_ADMIN_ONLY = False
+    
+    # whether to enable the cosinnus cloud app
+    CLOUD_ENABLED = False
+        
+    # base url of the nextcloud service, without trailing slash
+    CLOUD_NEXTCLOUD_URL = None
+    # admin user for the nextcloud api
+    CLOUD_NEXTCLOUD_ADMIN_USERNAME = None
+    # admin authorization (name, password)
+    CLOUD_NEXTCLOUD_AUTH = (None, None)
+    # base for the groupfolders app
+    CLOUD_NEXTCLOUD_GROUPFOLDER_BASE = None
+    
+    # URL for the iframe/tab leading to a specific group folder (with leading slash)
+    CLOUD_GROUP_FOLDER_IFRAME_URL = '/apps/files/?dir=/%(group_folder_name)s'
+    # whether all cloud links should open with target="_blank"
+    CLOUD_OPEN_IN_NEW_TAB = True
+    # whether to prefix all nextcloud group folders with "Projekt" or "Gruppe"
+    CLOUD_PREFIX_GROUP_FOLDERS = True
+    # the quota for groupfolders, in bytes. -3 is the default for "unlimited"
+    CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA = -3
     
     # if set to a hex color string,
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages

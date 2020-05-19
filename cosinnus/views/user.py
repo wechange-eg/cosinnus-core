@@ -52,7 +52,7 @@ from uuid import uuid1
 from django.utils.encoding import force_text
 from cosinnus.core import signals
 from django.dispatch.dispatcher import receiver
-from cosinnus.core.signals import userprofile_ceated, user_logged_in_first_time
+from cosinnus.core.signals import userprofile_created, user_logged_in_first_time
 from django.contrib.auth.signals import user_logged_in
 from cosinnus.conf import settings
 from cosinnus.utils.tokens import email_blacklist_token_generator
@@ -870,7 +870,7 @@ class UserSelect2View(Select2View):
         return (NO_ERR_RESP, False, results)
 
 
-@receiver(userprofile_ceated)
+@receiver(userprofile_created)
 def convert_email_group_invites(sender, profile, **kwargs):
     """ Converts all `CosinnusUnregisterdUserGroupInvite` to `CosinnusGroupMembership` pending invites
         for a user after registration. If there were any, also adds an entry to the user's profile's visit-next setting. """
@@ -900,14 +900,14 @@ def convert_email_group_invites(sender, profile, **kwargs):
             # the invites will be deleted upon first login using the `user_logged_in_first_time` signal
 
 
-@receiver(userprofile_ceated)
+@receiver(userprofile_created)
 def remove_user_from_blacklist(sender, profile, **kwargs):
     user = profile.user
     email = get_newly_registered_user_email(user)
     GlobalBlacklistedEmail.remove_for_email(email)
     
 
-@receiver(userprofile_ceated)
+@receiver(userprofile_created)
 def create_user_notification_setting(sender, profile, **kwargs):
     user = profile.user
     GlobalUserNotificationSetting.objects.get_object_for_user(user)

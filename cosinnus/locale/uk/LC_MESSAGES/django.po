@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 12:18+0200\n"
+"POT-Creation-Date: 2020-05-18 12:05+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -790,6 +790,16 @@ msgstr "ID Facebook сторінки"
 #, fuzzy
 #| msgid "Facebook Group ID"
 msgid "Nextcloud Group ID"
+msgstr "ID Facebook спільноти"
+
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Groupfolder Name"
+msgstr "ID Facebook спільноти"
+
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Groupfolder ID"
 msgstr "ID Facebook спільноти"
 
 msgid "Parent Group"
@@ -1774,14 +1784,13 @@ msgstr "Перейдіть за допомогою меню зверху або"
 msgid "get started here..."
 msgstr "розпочніть прямо тут..."
 
-msgid "Marketplace"
-msgstr "Дошка оголошень"
+#, fuzzy
+#| msgid "Re-Activate"
+msgid "Activate Cloud"
+msgstr "Активувати повторно"
 
-msgid "Poll"
-msgstr "Опитування"
-
-msgid "Polls"
-msgstr "Опитування"
+msgid "Cloud"
+msgstr ""
 
 msgid "File"
 msgstr "Файл"
@@ -1795,11 +1804,20 @@ msgstr "Документ"
 msgid "Etherpads"
 msgstr "Документи"
 
+msgid "Poll"
+msgstr "Опитування"
+
+msgid "Polls"
+msgstr "Опитування"
+
 msgid "Todo"
 msgstr "Завдання"
 
 msgid "Todos"
 msgstr "Завдання"
+
+msgid "Marketplace"
+msgstr "Дошка оголошень"
 
 msgctxt "Calendar"
 msgid "Event"
@@ -3470,6 +3488,25 @@ msgstr "Таблиці"
 msgid "Offers"
 msgstr "Оголошення"
 
+msgid "Search in Cloud files (seperate)"
+msgstr ""
+
+msgid "Search results from the Cloud app can currently only be displayed in the Cloud app itself."
+msgstr ""
+
+msgid "To search for Cloud files, please visit the Cloud app and use the integrated search function there."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Searching in Cloud files"
+msgstr "Пошук серед проектів"
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search in Cloud files"
+msgstr "Пошук серед проектів"
+
 msgid "Search in teams"
 msgstr "Пошук серед проектів"
 
@@ -3561,6 +3598,15 @@ msgstr "Кінцева дата."
 
 msgid "Ok"
 msgstr "Ок"
+
+msgid "The WE-Cloud is here!"
+msgstr ""
+
+msgid "With the Cloud, we offer your team a new file repository with extensive office functions to work together on documents, tables and presentations. It is based on Nextcloud and OnlyOffice. So you have two apps at your disposal with which you can use the cloud on the road and synchronize files with your desktop! As administrator you can activate the cloud for your project/group and transfer data from files and pads."
+msgstr ""
+
+msgid "Learn more"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
@@ -4629,6 +4675,9 @@ msgstr "При спробі від'єднати цей акаунт від Ва�
 msgid "Your Facebook account was successfully disconnected from this account."
 msgstr "Ваш Facebook акаунт було успішно від'єднано від цього акаунту."
 
+msgid "Sorry, only portal administrators can create projects and groups!"
+msgstr ""
+
 msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgstr "Вибачте, лише адміністратори порталу можуть створювати спільноти! Ви можете створити або проект, або написати одному/одній з адміністраторів, щоб вони створили для вас спільноту. Нижче наведений перелік усіх адміністраторів."
 
@@ -4773,6 +4822,11 @@ msgstr "Ваш вибір для відображення цього об’єк
 #, python-format
 msgid "This item is now being shown in these projects/groups: %(group_names)s"
 msgstr "Цей об’єкт тепер відображається в цих проектах/спільнотах: %(group_names)s"
+
+#, fuzzy, python-format
+#| msgid "Which apps should be activated?"
+msgid "The %s-app was activated!"
+msgstr "Які застосунки потрібно використовувати?"
 
 msgid "No appname given for adding containers."
 msgstr "Не вказано імені застосунку для додавання контейнерів."

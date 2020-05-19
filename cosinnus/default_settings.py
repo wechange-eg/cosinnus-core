@@ -142,7 +142,7 @@ TEMPLATES = [
 ]
 
 
-def compile_installed_apps(internal_apps=[]):
+def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     """ Supports gathering INSTALLED_APPS with external-project options.
         Must be called after importing these settings!
     """
@@ -198,6 +198,12 @@ def compile_installed_apps(internal_apps=[]):
         'cosinnus_poll',
         'cosinnus_stream',
         'cosinnus_todo',
+    ]
+    
+    # Extra Cosinnus Apps (as defined in external project)
+    _INSTALLED_APPS += extra_cosinnus_apps
+    
+    _INSTALLED_APPS += [
         'announcements',
         'ajax_forms',
         

@@ -46,7 +46,7 @@ div.dashboard-appwidget:last-child {
 			padding: 0;
 			a {
 				float: left;
-				width: 25%;
+				width: 20%;
 				padding: 0;
 				margin: 0;
 
@@ -147,8 +147,11 @@ div.dashboard-appwidget:last-child {
 			background-color: @app-todos-color;
 		}
 		&.app-etherpad {
-			background-color: @app-etherpad-color;
-		}
+            background-color: @app-etherpad-color;
+        }
+        &.app-cloud {
+            background-color: @app-cloud-color;
+        }
 
 		i {
 			display: block;
@@ -285,4 +288,9 @@ div.dashboard-appwidget:last-child {
 	background-color: white;
 	height: 100px;
 	margin-bottom: 10px;
+}
+
+.alert-black-white {
+    background-color: @color-white;
+    color: @color-black;
 }

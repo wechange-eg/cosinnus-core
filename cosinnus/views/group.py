@@ -219,9 +219,28 @@ class CosinnusGroupFormMixin(object):
         })
         return context
     
+    def post(self, *args, **kwargs):
+        # save deactivated_apps for checking after POSTs
+        if hasattr(self, 'group'):
+            self._old_deactivated_apps = self.group.get_deactivated_apps()
+        else:
+            self._old_deactivated_apps = []
+        ret = super(CosinnusGroupFormMixin, self).post(*args, **kwargs)
+        new_apps = self.object.get_deactivated_apps()
+        
+        # check if any group apps were activated or deactivated
+        deactivated_apps = [app for app in new_apps if not app in self._old_deactivated_apps]
+        activated_apps = [app for app in self._old_deactivated_apps if not app in new_apps]
+        if activated_apps:
+            signals.group_apps_activated.send(sender=self, group=self.object, apps=activated_apps)
+        if deactivated_apps:
+            signals.group_apps_deactivated.send(sender=self, group=self.object, apps=deactivated_apps)
+        return ret
+    
     def forms_valid(self, form, inlines):
         """ We update the haystack index again after the inlineforms have also been saved,
             so that data changed in those forms are reflected in the updated group object """
+            
         ret = super(CosinnusGroupFormMixin, self).forms_valid(form, inlines)
         if self.object.type == CosinnusGroup.TYPE_PROJECT:
             group_index = CosinnusProjectIndex()
@@ -1176,9 +1195,11 @@ class ActivateOrDeactivateGroupView(TemplateView):
             typed_group.update_index()
             typed_group.update_index_for_all_group_objects()
             messages.success(request, self.message_success_activate % {'team_name': self.group.name})
+            signals.group_reactivated.send(sender=typed_group.__class__, group=typed_group)
             return redirect(self.group.get_absolute_url())
         else:
             messages.success(request, self.message_success_deactivate % {'team_name': self.group.name})
+            signals.group_deactivated.send(sender=typed_group.__class__, group=typed_group)
             return redirect(get_non_cms_root_url(self.request))
     
     def get_context_data(self, **kwargs):
@@ -1541,3 +1562,31 @@ class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
         return (NO_ERR_RESP, False, results)
 
 user_group_member_invite_select2 = UserGroupMemberInviteSelect2View.as_view()
+
+
+class GroupActivateAppView(SamePortalGroupMixin, AjaxableFormMixin, RequireAdminMixin, View):
+    """ Deactivates the cosinnus app for a group passed via the "app" form field  """
+    
+    http_method_names = ['post',]
+    model = CosinnusGroup
+    slug_url_kwarg = 'group'
+    message_success = _('The %s-app was activated!')
+
+    @atomic
+    def dispatch(self, *args, **kwargs):
+        return super(GroupActivateAppView, self).dispatch(*args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        app = self.request.POST.get('app', None)
+        # remove the given app from the deactivated list
+        if app and app in app_registry.get_deactivatable_apps() and app in self.group.get_deactivated_apps():
+            self.group.deactivated_apps = ','.join(list(set([
+                prior_app for prior_app in self.group.get_deactivated_apps()
+                if not prior_app == app
+            ])))
+            self.group.save(update_fields=['deactivated_apps'])
+            signals.group_apps_activated.send(sender=self, group=self.group, apps=[app])
+            messages.success(self.request, self.message_success % app_registry.get_label(app))
+        return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
+
+group_activate_app = GroupActivateAppView.as_view()

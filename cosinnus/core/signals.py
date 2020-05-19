@@ -8,16 +8,32 @@ import django.dispatch as dispatch
 all_cosinnus_apps_loaded = dispatch.Signal()
 
 """ Called after a CosinnusGroup, or one of its extending models is freshly created """
-group_object_ceated = dispatch.Signal(providing_args=["group"])
+group_object_created = dispatch.Signal(providing_args=["group"])
+
+""" Deprecated name for group_object_created """
+group_object_ceated = group_object_created
 
 """ Called after a CosinnusIdea is freshly created """
-idea_object_ceated = dispatch.Signal(providing_args=["idea"])
+idea_object_created = dispatch.Signal(providing_args=["idea"])
+
+""" Deprecated name for idea_object_created """
+idea_object_ceated = idea_object_created
 
 """ Called after a new user and their profile is freshly created """
-userprofile_ceated = dispatch.Signal(providing_args=["profile"])
+userprofile_created = dispatch.Signal(providing_args=["profile"])
+
+""" Deprecated name for userprofile_created """
+userprofile_ceated = userprofile_created
 
 """ Called after a new user voluntarily signs up on the portal, using the web frontend """
 user_registered = dispatch.Signal(providing_args=["user"])
+
+""" Called after a user account has been deactived 
+    (this also happens when a user "deletes" their account """
+user_deactivated = dispatch.Signal(providing_args=["user"])
+
+""" Called after a user account is activated, or re-activated after being deactivated """
+user_activated = dispatch.Signal(providing_args=["user"])
 
 """ Called when the user logs in for the first time ever """
 user_logged_in_first_time = dispatch.Signal(providing_args=['request', 'user'])
@@ -55,4 +71,15 @@ user_group_recruited = dispatch.Signal(providing_args=["user", "obj", "audience"
 """ Called when a group is moved to the current portal, serves as a notifcation message for users """
 group_moved_to_portal = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
+""" Called after a CosinnusGroup, or one of its extending models was deactivated """
+group_deactivated = dispatch.Signal(providing_args=["group"])
+
+""" Called after a CosinnusGroup, or one of its extending models was reactivated """
+group_reactivated = dispatch.Signal(providing_args=["group"])
+
+""" Called after a CosinnusGroup, or one of its extending models had one or more of their cosinnus apps activated """
+group_apps_activated = dispatch.Signal(providing_args=["group", "apps"])
+
+""" Called after a CosinnusGroup, or one of its extending models had one or more of their cosinnus apps deactivated """
+group_apps_deactivated = dispatch.Signal(providing_args=["group", "apps"])
 

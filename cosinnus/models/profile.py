@@ -175,7 +175,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
         
         if created:
             # send creation signal
-            signals.userprofile_ceated.send(sender=self, profile=self)
+            signals.userprofile_created.send(sender=self, profile=self)
         
         # send a copy of the ToS to the User via email?
         if settings.COSINNUS_SEND_TOS_AFTER_USER_REGISTRATION and self.user and self.user.email:

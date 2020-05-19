@@ -757,6 +757,12 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     
     nextcloud_group_id = models.CharField(_('Nextcloud Group ID'), max_length=250,
         unique=True, blank=True, null=True, validators=[MaxLengthValidator(250)])
+    nextcloud_groupfolder_name = models.CharField(_('Nextcloud Groupfolder Name'), max_length=250,
+        unique=True, blank=True, null=True, validators=[MaxLengthValidator(250)],
+        help_text='The literal groupfolder name. This is initially the same as the group id, but can differ later. Set before the groupfolder is created.')
+    nextcloud_groupfolder_id = models.PositiveIntegerField(_('Nextcloud Groupfolder ID'),
+        unique=True, blank=True, null=True,
+        help_text='The boolean internal nextcloud id for the groupfolder. Only set once a groupfolder is created.')
     
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
@@ -871,7 +877,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         
         if created:
             # send creation signal
-            signals.group_object_ceated.send(sender=self, group=self)
+            signals.group_object_created.send(sender=self, group=self)
     
     
     def delete(self, *args, **kwargs):

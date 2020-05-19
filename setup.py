@@ -76,7 +76,7 @@ setup(
         'django-mailbox==4.7.1',
         'django-model-utils==1.5.0',
         'django-mptt==0.8.7',
-        'django-oauth-toolkit==1.2.0',
+        'django-oauth-toolkit==1.3.2',
         'django-otp==0.5.2',
         'django-phonenumber-field==1.1.0',
         'django-polymorphic==0.7.2',

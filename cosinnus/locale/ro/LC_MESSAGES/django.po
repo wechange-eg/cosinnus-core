@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 12:18+0200\n"
+"POT-Creation-Date: 2020-05-18 12:05+0200\n"
 "PO-Revision-Date: 2019-11-18 04:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -788,6 +788,16 @@ msgstr "ID de pagina Facebook"
 #, fuzzy
 #| msgid "Facebook Group ID"
 msgid "Nextcloud Group ID"
+msgstr "ID de grup Facebook"
+
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Groupfolder Name"
+msgstr "ID de grup Facebook"
+
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Groupfolder ID"
 msgstr "ID de grup Facebook"
 
 msgid "Parent Group"
@@ -1766,14 +1776,13 @@ msgstr "Accesați-l din meniul de sus sau"
 msgid "get started here..."
 msgstr "începe aici..."
 
-msgid "Marketplace"
-msgstr "Piața de desfacere"
+#, fuzzy
+#| msgid "Re-Activate"
+msgid "Activate Cloud"
+msgstr "Reactiva"
 
-msgid "Poll"
-msgstr "Sondaj"
-
-msgid "Polls"
-msgstr "Sondaje"
+msgid "Cloud"
+msgstr ""
 
 msgid "File"
 msgstr "Fișier"
@@ -1787,11 +1796,20 @@ msgstr "EtherPad"
 msgid "Etherpads"
 msgstr "Etherpaduri"
 
+msgid "Poll"
+msgstr "Sondaj"
+
+msgid "Polls"
+msgstr "Sondaje"
+
 msgid "Todo"
 msgstr "Tot"
 
 msgid "Todos"
 msgstr "Toate"
+
+msgid "Marketplace"
+msgstr "Piața de desfacere"
 
 msgctxt "Calendar"
 msgid "Event"
@@ -3457,6 +3475,25 @@ msgstr "Ethercalc"
 msgid "Offers"
 msgstr "Promoții"
 
+msgid "Search in Cloud files (seperate)"
+msgstr ""
+
+msgid "Search results from the Cloud app can currently only be displayed in the Cloud app itself."
+msgstr ""
+
+msgid "To search for Cloud files, please visit the Cloud app and use the integrated search function there."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Searching in Cloud files"
+msgstr "Căutare în Echipe"
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search in Cloud files"
+msgstr "Căutare în Echipe"
+
 msgid "Search in teams"
 msgstr "Căutare în Echipe"
 
@@ -3548,6 +3585,15 @@ msgstr "Data de sfârșit."
 
 msgid "Ok"
 msgstr "OK"
+
+msgid "The WE-Cloud is here!"
+msgstr ""
+
+msgid "With the Cloud, we offer your team a new file repository with extensive office functions to work together on documents, tables and presentations. It is based on Nextcloud and OnlyOffice. So you have two apps at your disposal with which you can use the cloud on the road and synchronize files with your desktop! As administrator you can activate the cloud for your project/group and transfer data from files and pads."
+msgstr ""
+
+msgid "Learn more"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
@@ -4610,6 +4656,9 @@ msgstr "A apărut o eroare când încercați să vă deconectați contul de Face
 msgid "Your Facebook account was successfully disconnected from this account."
 msgstr "Contul dvs. de Facebook a fost deconectat cu succes de acest cont."
 
+msgid "Sorry, only portal administrators can create projects and groups!"
+msgstr ""
+
 msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgstr "Ne pare rău, numai administratorii portalului pot crea Grupuri! Puteți crea un Proiect sau scrie un mesaj unuia dintre administratori pentru a crea un Grup pentru dvs. Mai jos puteți găsi o listă cu toți administratorii."
 
@@ -4754,6 +4803,11 @@ msgstr "Selecția dvs. pentru afișarea acestui articol în proiecte/grupuri a f
 #, python-format
 msgid "This item is now being shown in these projects/groups: %(group_names)s"
 msgstr "Acest articol este acum prezentat în aceste proiecte/grupuri: %(group_names)s"
+
+#, fuzzy, python-format
+#| msgid "Which apps should be activated?"
+msgid "The %s-app was activated!"
+msgstr "Ce aplicații trebuie activate?"
 
 msgid "No appname given for adding containers."
 msgstr "Nu este dat niciun nume de aplicație pentru adăugarea containerelor."

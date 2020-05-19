@@ -7,7 +7,7 @@
 <script src="{% static 'js/vendor/leaflet.markercluster-0.7.js' %}"></script>
 <script src="{% static 'js/vendor/masonry.pkgd.min.js' %}"></script>
 <script src="{% static 'js/vendor/imagesloaded.pkgd.min.js' %}"></script>
-<script src="{% static 'js/client.js' %}?v=0.34"></script>
+<script src="{% static 'js/client.js' %}?v=0.35"></script>
 
 {% comment %} Internet Explorer only: Bluebird Promise library implementation for compatibility {% endcomment %}
 <script type="text/javascript"> 
@@ -36,6 +36,7 @@
     var COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE = {% if SETTINGS.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE %}true{% else %}false{% endif %};
     var COSINNUS_ROCKET_ENABLED = {% if SETTINGS.COSINNUS_ROCKET_ENABLED %}true{% else %}false{% endif %};
     var COSINNUS_MESSAGES_ENABLED = {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}true{% else %}false{% endif %};
+    var COSINNUS_CLOUD_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}true{% else %}false{% endif %};
     var COSINNUS_SHOW_SUPERUSER_CONTROLS = {% if user|is_superuser %}true{% else %}false{% endif %};
 </script>
 

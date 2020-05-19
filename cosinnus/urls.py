@@ -117,6 +117,12 @@ urlpatterns = [
 ]
 
 if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False):
+    if getattr(settings, 'COSINNUS_CLOUD_ENABLED', False):
+        import cosinnus_cloud.views as cosinnus_cloud_views # noqa
+        urlpatterns += [
+            url(r'^dashboard/api/user_typed_content/cloud_files/$', cosinnus_cloud_views.api_user_cloud_files_content, name='user-dashboard-api-typed-content-cloud'),
+            url(r'^dashboard/api/user_typed_content/recent/cloud_files/$', cosinnus_cloud_views.api_user_cloud_files_content, name='user-dashboard-api-typed-content-cloud', kwargs={'show_recent':True}),
+        ]
     urlpatterns += [
         url(r'^dashboard/$', user_dashboard.user_dashboard_view, name='user-dashboard'),
         url(r'^dashboard/api/user_groups/$', user_dashboard.api_user_groups, name='user-dashboard-api-groups'),
@@ -201,6 +207,7 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/withdraw/$' % url_key, group.group_user_withdraw, name=prefix+'group-user-withdraw'),
         url(r'^%s/(?P<group>[^/]+)/decline/$' % url_key, group.group_user_invitation_decline, name=prefix+'group-user-decline'),
         url(r'^%s/(?P<group>[^/]+)/accept/$' % url_key, group.group_user_invitation_accept, name=prefix+'group-user-accept'),
+        url(r'^%s/(?P<group>[^/]+)/activate-app/$' % url_key, group.group_activate_app, name=prefix+'group-activate-app'),
         
         url(r'^%s/(?P<group>[^/]+)/users/$' % url_key, group.group_user_list, name=prefix+'group-user-list'),
         url(r'^%s/(?P<group>[^/]+)/users/add/$' % url_key, group.group_user_add, name=prefix+'group-user-add-generic'),

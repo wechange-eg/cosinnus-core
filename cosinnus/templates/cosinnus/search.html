@@ -298,53 +298,92 @@
             </button>
         
             {% if user.is_authenticated %}
-        
-            <p class="navi-explanation">{% trans "Search in teams" %}:</p>
             
-            {% comment %}  {% if "groups" in request.GET %} {% endcomment %}
-            <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "groups" %}">
-              <ul class="media-list">
-                <li class="media">
-                  <!--
-                  <a class="pull-left" style="background-color:inherit;" href="#">
-                  -->
-                  <a class="pull-left" href="#">
-                    <i class="fa fa-group"></i>
-                  </a>
-                  <div class="media-body">
-                    {% trans "All Projects and Groups" %}
-                  </div>
-                </li>
-              </ul>
-            </button>
+                {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}
+                    <p class="navi-explanation">
+                        {% trans "Search in Cloud files (seperate)" %}:
+                        <a href="#" data-toggle="modal" data-target="#cloud-search-help-modal">
+			                <i class="fa fa-question-circle-o"></i>
+			            </a>
+                    </p>
+                    {% captureas label %}
+	                   <div class="v-offset-s textfield">
+					       <p>
+                               {% trans "Search results from the Cloud app can currently only be displayed in the Cloud app itself." %}
+                           </p>
+                           <p>
+                               {% trans "To search for Cloud files, please visit the Cloud app and use the integrated search function there." %}
+                           </p>
+					   </div>
+		            {% endcaptureas %}
+		            {% captureas title %}{% trans "Searching in Cloud files" %}{% endcaptureas %}
+		            {% include "cosinnus/modal_box.html" with id="cloud-search-help-modal" label=label title=title title_icon="fa-cloud" %}
+		            
+	                <div class="app-cloud">
+		                <button type="button" class="btn w100 btn-emphasized large-space" href="{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}">
+		                  <ul class="media-list">
+		                    <li class="media">
+		                      <!--
+		                      <a class="pull-left" style="background-color:inherit;" href="#">
+		                      -->
+		                      <a class="pull-left" href="#">
+		                        <i class="fa fa-cloud"></i>
+		                      </a>
+		                      <div class="media-body">
+		                        {% trans "Search in Cloud files" %}
+		                        <i class="fa fa-external-link"></i>
+		                      </div>
+		                    </li>
+		                  </ul>
+		                </button>
+	                </div>
+                {% endif %}
             
-            
-            <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "groups" %}&groups=mine">
-              <ul class="media-list">
-                <li class="media">
-                  <a class="pull-left" href="#">
-                      <i class="fa fa-group"></i>
-                  </a>
-                  <div class="media-body">
-                    {% trans "My Projects and Groups" %}
-                  </div>
-                </li>
-              </ul>
-            </button>
-        
-            <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "groups" %}&groups=others">
-              <ul class="media-list">
-                <li class="media">
-                  <a class="pull-left" href="#">
-                      <i class="fa fa-group"></i>
-                  </a>
-                  <div class="media-body">
-                    {% trans "Other Projects and Groups" %}
-                  </div>
-                </li>
-              </ul>
-            </button>
-        
+	            <p class="navi-explanation">{% trans "Search in teams" %}:</p>
+	            
+	            {% comment %}  {% if "groups" in request.GET %} {% endcomment %}
+	            <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "groups" %}">
+	              <ul class="media-list">
+	                <li class="media">
+	                  <!--
+	                  <a class="pull-left" style="background-color:inherit;" href="#">
+	                  -->
+	                  <a class="pull-left" href="#">
+	                    <i class="fa fa-group"></i>
+	                  </a>
+	                  <div class="media-body">
+	                    {% trans "All Projects and Groups" %}
+	                  </div>
+	                </li>
+	              </ul>
+	            </button>
+	            
+	            
+	            <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "groups" %}&groups=mine">
+	              <ul class="media-list">
+	                <li class="media">
+	                  <a class="pull-left" href="#">
+	                      <i class="fa fa-group"></i>
+	                  </a>
+	                  <div class="media-body">
+	                    {% trans "My Projects and Groups" %}
+	                  </div>
+	                </li>
+	              </ul>
+	            </button>
+	        
+	            <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "groups" %}&groups=others">
+	              <ul class="media-list">
+	                <li class="media">
+	                  <a class="pull-left" href="#">
+	                      <i class="fa fa-group"></i>
+	                  </a>
+	                  <div class="media-body">
+	                    {% trans "Other Projects and Groups" %}
+	                  </div>
+	                </li>
+	              </ul>
+	            </button>
         	{% endif %}
             
             <p class="navi-explanation">{% trans "Search for Users" %}:</p>

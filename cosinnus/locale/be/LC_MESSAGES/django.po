@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 12:12+0200\n"
-"PO-Revision-Date: 2020-05-04 15:23+0100\n"
+"POT-Creation-Date: 2020-05-18 12:05+0200\n"
+"PO-Revision-Date: 2020-05-19 10:50+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: be\n"
@@ -936,6 +936,16 @@ msgstr "Ідэнтыфікатар Facebook-старонкі"
 #, fuzzy
 #| msgid "Facebook Group ID"
 msgid "Nextcloud Group ID"
+msgstr "Ідэнтыфікатар Facebook-групы"
+
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Groupfolder Name"
+msgstr "Ідэнтыфікатар Facebook-групы"
+
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Groupfolder ID"
 msgstr "Ідэнтыфікатар Facebook-групы"
 
 msgid "Parent Group"
@@ -2045,14 +2055,13 @@ msgstr "Перайдзіце на яго з верхняга меню або"
 msgid "get started here..."
 msgstr "пачніце адсюль..."
 
-msgid "Marketplace"
-msgstr "Дошка аб'яў"
+#, fuzzy
+#| msgid "Re-Activate"
+msgid "Activate Cloud"
+msgstr "Узнавіць"
 
-msgid "Poll"
-msgstr "Апытанне"
-
-msgid "Polls"
-msgstr "Апытанні"
+msgid "Cloud"
+msgstr ""
 
 msgid "File"
 msgstr "Файл"
@@ -2066,11 +2075,20 @@ msgstr "Etherpad"
 msgid "Etherpads"
 msgstr "Нататнікі Etherpad"
 
+msgid "Poll"
+msgstr "Апытанне"
+
+msgid "Polls"
+msgstr "Апытанні"
+
 msgid "Todo"
 msgstr "Задача"
 
 msgid "Todos"
 msgstr "Задачы"
+
+msgid "Marketplace"
+msgstr "Дошка аб'яў"
 
 msgctxt "Calendar"
 msgid "Event"
@@ -3440,7 +3458,7 @@ msgid ""
 msgstr ""
 "Добры дзень,%(user_name)s! Сардэчна вітаем на %(site_name)s!\n"
 "\n"
-"Цяпер Вы можаце ўвайсці па спасылцы %(domain_url)s.\n"
+"Цяпер Вы можаце ўвайсці па спасылцы %(site_name)s.\n"
 "\n"
 "Мы рады, што Вы вырашылі скарыстацца нашай платформай. Каб азнаёміцца ​​з яе "
 "найважнейшымі функцыямі, можаце паглядзець відэа на нашай галоўнай старонцы, "
@@ -3813,15 +3831,33 @@ msgid "Logged out"
 msgstr "Вы выйшлі"
 
 #, fuzzy
-#| msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
-msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-msgstr "Карыстальнік(-ца) \"%(user)s\" паспяхова зарэгістраваны. Акаўнт павінен быць зацверджаны, перш чым Вы зможаце ўвайсці. Калі гэта адбудзецца, мы вышлем ліст на Ваш адрас \"%(email)s\"."
+#| msgid ""
+#| "User \"%(user)s\" was registered successfully. The account will need to "
+#| "be approved before you can log in. We will send an email to your address "
+#| "\"%(email)s\" when this happens."
+msgid ""
+"Your account was registered successfully. The account will need to be "
+"approved by an administrator before you can log in. We will send an email to "
+"your address when this happens."
+msgstr ""
+"Карыстальнік(-ца) \"%(user)s\" паспяхова зарэгістраваны. Акаўнт павінен быць "
+"зацверджаны, перш чым Вы зможаце ўвайсці. Калі гэта адбудзецца, мы вышлем "
+"ліст на Ваш адрас \"%(email)s\"."
 
 # EN > missed " in address
 #, fuzzy
-#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
-msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "Карыстальнік(-ца) \"%(user)s\" паспяхова зарэгістраваны. У бліжэйшы час мы дашлем ліст на Ваш адрас \"%(email)s\". Вы павінны пацвердзіць адрас электроннай пошты, перш чым увайсці."
+#| msgid ""
+#| "User \"%(user)s\" was registered successfully. We will send an email to "
+#| "your address %(email)s\" soon. You need to confirm the email address "
+#| "before you can log in."
+msgid ""
+"Your account was registered successfully. You will receive an activation "
+"email from us in a few minutes. You need to confirm the email address before "
+"you can log in."
+msgstr ""
+"Карыстальнік(-ца) \"%(user)s\" паспяхова зарэгістраваны. У бліжэйшы час мы "
+"дашлем ліст на Ваш адрас \"%(email)s\". Вы павінны пацвердзіць адрас "
+"электроннай пошты, перш чым увайсці."
 
 msgid "Password"
 msgstr "Пароль"
@@ -4051,6 +4087,29 @@ msgstr "Нататнікі Ethercalc"
 msgid "Offers"
 msgstr "Прапановы"
 
+msgid "Search in Cloud files (seperate)"
+msgstr ""
+
+msgid ""
+"Search results from the Cloud app can currently only be displayed in the "
+"Cloud app itself."
+msgstr ""
+
+msgid ""
+"To search for Cloud files, please visit the Cloud app and use the integrated "
+"search function there."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Searching in Cloud files"
+msgstr "Шукаць ў камандах"
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search in Cloud files"
+msgstr "Шукаць ў камандах"
+
 msgid "Search in teams"
 msgstr "Шукаць ў камандах"
 
@@ -4147,6 +4206,21 @@ msgstr "Дата заканчэння."
 
 msgid "Ok"
 msgstr "OK"
+
+msgid "The WE-Cloud is here!"
+msgstr ""
+
+msgid ""
+"With the Cloud, we offer your team a new file repository with extensive "
+"office functions to work together on documents, tables and presentations. It "
+"is based on Nextcloud and OnlyOffice. So you have two apps at your disposal "
+"with which you can use the cloud on the road and synchronize files with your "
+"desktop! As administrator you can activate the cloud for your project/group "
+"and transfer data from files and pads."
+msgstr ""
+
+msgid "Learn more"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
@@ -5530,6 +5604,9 @@ msgstr ""
 msgid "Your Facebook account was successfully disconnected from this account."
 msgstr "Ваш Facebook-акаўнт паспяхова адлучаны ад гэтага акаўнта."
 
+msgid "Sorry, only portal administrators can create projects and groups!"
+msgstr ""
+
 msgid ""
 "Sorry, only portal administrators can create Groups! You can either create a "
 "Project, or write a message to one of the administrators to create a Group "
@@ -5731,6 +5808,11 @@ msgstr ""
 msgid "This item is now being shown in these projects/groups: %(group_names)s"
 msgstr ""
 "Гэты элемент цяпер адлюстроўваецца ў гэтых праектах/групах: %(group_names)s"
+
+#, fuzzy, python-format
+#| msgid "Which apps should be activated?"
+msgid "The %s-app was activated!"
+msgstr "Якія прыкладанні трэба актываваць?"
 
 msgid "No appname given for adding containers."
 msgstr "Для дабаўлення кантэйнераў не пазначана імя прыкладання."
