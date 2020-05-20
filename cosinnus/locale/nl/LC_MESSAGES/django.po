@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-18 12:05+0200\n"
+"POT-Creation-Date: 2020-05-20 13:35+0200\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -405,6 +405,24 @@ msgstr "Español"
 
 msgid "Romanian--NATIVE-LANGUAGE"
 msgstr "Română"
+
+msgid "Belarussian--NATIVE-LANGUAGE"
+msgstr "Русский"
+
+msgid "Dutch--NATIVE-LANGUAGE"
+msgstr "Nederlands"
+
+msgid "Azerbaijani--NATIVE-LANGUAGE"
+msgstr "Azerbaycan dili"
+
+msgid "Armenian--NATIVE-LANGUAGE"
+msgstr "Հայոց լեզու"
+
+msgid "Georgian--NATIVE-LANGUAGE"
+msgstr "ქართული ენა"
+
+msgid "Kazakh--NATIVE-LANGUAGE"
+msgstr "Қазақ тілі"
 
 msgid "Attachments"
 msgstr "Bijlagen"

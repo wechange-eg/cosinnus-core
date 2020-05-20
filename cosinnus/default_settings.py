@@ -249,6 +249,13 @@ LANGUAGES = [
     ('pl', _('Polish--NATIVE-LANGUAGE')),
     ('es', _('Spanish--NATIVE-LANGUAGE')),
     ('ro', _('Romanian--NATIVE-LANGUAGE')),
+    ('be', _('Belarussian--NATIVE-LANGUAGE')),
+    ('nl', _('Dutch--NATIVE-LANGUAGE')),
+    
+    ('az', _('Azerbaijani--NATIVE-LANGUAGE')),
+    ('hy', _('Armenian--NATIVE-LANGUAGE')),
+    ('ka', _('Georgian--NATIVE-LANGUAGE')),
+    ('kk', _('Kazakh--NATIVE-LANGUAGE')),
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

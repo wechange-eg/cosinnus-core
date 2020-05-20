@@ -1,0 +1,4980 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-20 13:35+0200\n"
+"PO-Revision-Date: 2020-04-01 13:27+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.3\n"
+
+#, python-format
+msgid "1 %(object)s was deleted successfully"
+msgstr "1 %(object)s -ը հաջողությամբ ջնջվեց"
+
+#, python-format
+msgid "%(number)d %(objects)s were deleted successfully"
+msgstr "%(number)d %(objects)s հաջողությամբ ջնջվեցին"
+
+msgid "Delete selected entries"
+msgstr "Ջնջել ընտրված գրառումները"
+
+msgid "A token with the same code already exists! Please choose a different string for your token."
+msgstr "Նույն կոդով թոքեն արդեն գոյություն ունի: Խնդրում ենք ընտրել այլ տող ձեր թոքենի համար."
+
+msgid "The following Projects were converted to Groups:"
+msgstr "Հետևյալ Ծրագրերը փոխակերպվել են Խմբերի:"
+
+msgid "Convert selected Projects to Groups"
+msgstr "Փոխակերպել ընտրված Ծրագրերը Խմբերի"
+
+msgid "The following Users were added to this portal:"
+msgstr "Հետևյալ Օգտատերերն ավելացվեցին այս պորտալ:"
+
+msgid "Add all members to current Portal"
+msgstr "Ավելացնել բոլոր անդամներին ընթացիկ Պորտալ"
+
+msgid "Move selected teams to current portal"
+msgstr "Տեղափոխել ընտրված թիմերը ընթացիկ պորտալ"
+
+msgid "Move selected teams to current portal and message members"
+msgstr "Ընտրված թիմերը տեղափոխել ընթացիկ պորտալ և հաղորդագրություն ուղարկել անդամներին"
+
+msgid "In addition, the members were removed from all other Portals."
+msgstr "Բացի այդ, անդամները ջնջվել են մնացած բոլոր Պորտալներից."
+
+msgid "Move all members to current Portal (removes all other memberships!)"
+msgstr "Տեղափոխել բոլոր անդամներին ընթացիկ Պորտալ (հեռացնում է բոլոր այլ անդամակցությունները):"
+
+msgid "Move selected groups and their subprojects to current portal"
+msgstr "Ընտրված խմբերը և դրանց ենթածրագրերը տեղափոխել ընթացիկ պորտալ"
+
+msgid "Move selected groups and their subprojects to current portal and message members"
+msgstr "Ընտրված խմբերը և դրանց ենթածրագրերը տեղափոխել ընթացիկ պորտալ և հաղորդագրություն ուղարկել անդամներին"
+
+msgid "The following Groups were converted to Projects:"
+msgstr "Հետևյալ Խմբերը վերափոխվել են Ծրագրերի:"
+
+msgid "Convert selected Groups to Projects"
+msgstr "Փոխակերպել ընտրված Խմբերը Ծրագրերի"
+
+msgid "ToS Accepted"
+msgstr "ToS-ը ընդունված է"
+
+msgid "ToS not Accepted"
+msgstr "ToS-ը ընդունված չէ"
+
+msgid "User Logged In"
+msgstr "Օգտատերը մուտք գործեց"
+
+msgid "Logged in before"
+msgstr "Մուտք է գործել անցյալում"
+
+msgid "Never logged in"
+msgstr "Երբեք մուտք չի գործել"
+
+msgid "Has Logged In"
+msgstr "Մուտք է գործել"
+
+msgid "ToS accepted?"
+msgstr "ToS ընդունվ՞ած է?"
+
+#, python-format
+msgid "%d Users were deactivated successfully."
+msgstr "%d Օգտատերերը հաջողությամբ ապաակտիվացվել են."
+
+msgid "Deactivate users (will keep all all items they created on the site)"
+msgstr "Ապաակտիվացնել օգտատերերին (կպահպանվի նրանց կողմից կայքում ստեղծված բոլոր կետերը)"
+
+msgid "The email address for the account you are trying to use needs to be activated before you can log in."
+msgstr "Անձնական էջի էլեկտրոնային փոստը, որը դուք փորձում եք օգտագործել, պետք է ակտիվացվի, նախքան մուտք գործելը."
+
+#, python-format
+msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
+msgstr "Եթե դեռ չեք ստացել ակտիվացման էլ. նամակ, փորձեք կրկին գրանցվել կամ դիմեք մեր աջակցությանը %(email)s -ով!"
+
+#, fuzzy, python-format
+#| msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
+msgstr "Եթե դեռ չեք ստացել ակտիվացման էլ. նամակ, փորձեք կրկին գրանցվել կամ կապ հաստատեք մեզ հետ!"
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
+msgstr "%(sender_name)s -ը ցանկանում է, որ դուք միանաք \"%(team_name)s\" -ի նախագծին %(portal_name)s -ում։ Սեղմեք ներքևում ծրագրի անվանման վրա այն տեսնելու և համագործակցելու համար!"
+
+msgid "Mobilität"
+msgstr "Mobilität"
+
+msgid "Energie"
+msgstr "Energie"
+
+msgid "Umwelt"
+msgstr "Umwelt"
+
+msgid "Bildung"
+msgstr "Bildung"
+
+msgid "Gesundheit"
+msgstr "Gesundheit"
+
+msgid "Ernährung und Konsum"
+msgstr "Ernährung und Konsum"
+
+msgid "Kunst und Kultur"
+msgstr "Kunst und Kultur"
+
+msgid "Geld und Finanzen"
+msgstr "Geld und Finanzen"
+
+msgid "Arbeit und Recht"
+msgstr "Arbeit und Recht"
+
+msgid "Bauen und Wohnen"
+msgstr "Bauen und Wohnen"
+
+msgid "Klimaschutz"
+msgstr "Klimaschutz"
+
+msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgstr "Միայն թիմի անդամները կարող են տեսնել ձեր կողմից հայցվող բովանդակությունը. Դիմեք ՝ այժմ անդամագրվելու համար!"
+
+msgid "Only registered members can see the content you requested! Log in or create an account now!"
+msgstr "Միայն գրանցված անդամները կարող են տեսնել ձեր կողմից հայցվող բովանդակությունը: Մուտք գործեք կամ ստեղծեք Ձեր անձնական էջն հիմա!"
+
+msgid "Please log in to access this page."
+msgstr "Խնդրում ենք մուտք գործել համակարգ այս էջ մուտք ունենալու համար."
+
+#, python-format
+msgid "The page you tried to access belongs to an app that has been deactivated for this %(team_type)s. If you feel this is in error, ask the %(team_type)s's administrator to reactivate the app."
+msgstr "Այն էջը, որը դուք փորձում եք մուտք գործել, պատկանում է այն հավելվածին, որը ապաակտիվացված է %(team_type)s - ի պատճառով: Եթե կարծում եք, որ առկա է սխալ, դիմեք %(team_type)s's -ի ադմինիստրատորին ծրագիրը վերաակտիվացնելու համար."
+
+msgid "No team provided"
+msgstr "Ոչ մի ծրագիր չի տրամադրվել"
+
+msgid "This team no longer resides under the URL you entered. You have been redirected automatically to the current location."
+msgstr "Այս թիմն այլևս ներկայացված չէ ձեր մուտքագրած URL- ի ներքո: Դուք ինքնաբերաբար վերահղվել եք այս էջ."
+
+msgid "This account is no longer active. You have been logged out."
+msgstr "Այս անձնական էջյ այլևս ակտիվ չէ: Դուք դուրս եք եկել համակարգից."
+
+#, python-format
+msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
+msgstr "Դուք գերազանցել եք մուտք գործելու սահմանված քանակը: Կարող եք փորձել կրկին մուտք գործել: %(duration)s -ից."
+
+msgid "A user requested to become a member of this team (admins only)"
+msgstr "Օգտատերը դիմել է այս թիմի անդամակցության համար (միայն ադմինիստրատորներ)"
+
+#, python-format
+msgid "%(sender_name)s requested to become a member"
+msgstr "%(sender_name)s-ը դիմել է անդամակցության համար"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other requested to become a member"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others requested to become a member"
+msgstr[0] "%(sender_name)s -ը և %(count_minus_one)d ուրիշը անդամագրվելու հարցում է ուղարկել"
+msgstr[1] "%(sender_name)s -ը և %(count_minus_one)d ուրիշները անդամագրվելու հարցում են ուղարկել"
+
+msgid "You are an admin of this team"
+msgstr "Դուք այս թիմի ադմինն եք"
+
+msgid "New membership request"
+msgstr "Անդամակցության նոր հայց"
+
+#, python-format
+msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
+msgstr "\"%(sender_name)s\"-ը հարցում է ուղարկել %(team_name)s- ին միանալու համար."
+
+msgid "Your membership request was accepted"
+msgstr "Ձեր անդամության հարցումն ընդունվել Է"
+
+msgid "Membership request accepted"
+msgstr "Անդամության հարցումն ընդունված Է"
+
+#, python-format
+msgid "Your membership request for %(team_name)s was accepted!"
+msgstr "Ձեր անդամության հարցումն %(team_name)s ընդունվել Է!"
+
+msgid "Your membership request was declined"
+msgstr "Ձեր անդամության հարցումը մերժվել է"
+
+msgid "Membership request declined"
+msgstr "Անդամության հարցումը մերժված է"
+
+#, python-format
+msgid "We're sorry, but your membership request for %(team_name)s was declined."
+msgstr "Ներեցեք, բայց ձեր անդամության հարցումը %(team_name)s -ին մերժվեl է."
+
+#, python-format
+msgid "Your membership request for %(team_name)s was declined."
+msgstr "Ձեր անդամության հարցումը %(team_name)s -ին մերժվել է."
+
+msgid "A user has accepted the invitation to this team (admins only)"
+msgstr "Օգտատերը ընդունել է այս թիմին միանալու հրավերը (միայն ադմինիստրատորներ)"
+
+#, python-format
+msgid "%(sender_name)s accepted the invitation"
+msgstr "%(sender_name)s-ը ընդունել է հրավերը"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other accepted the invitation"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others accepted the invitation"
+msgstr[0] "%(sender_name)s-ը և %(count_minus_one)d ուրիշը ընդունել է հրավերը"
+msgstr[1] "%(sender_name)s-ը և %(count_minus_one)d ուրիշները ընդունել են հրավերը"
+
+#, python-format
+msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
+msgstr "\"%(sender_name)s\"-ը ընդունել է հրավերը %(team_name)s -ին."
+
+msgid "A user has declined the invitation to this team (admins only)"
+msgstr "Օգտատերը մերժել է այս թիմին միանալու հրավերը (միայն ադմինիստրատորներ)"
+
+#, python-format
+msgid "%(sender_name)s declined the invitation"
+msgstr "%(sender_name)s-ը մերժել է հրավերը"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other declined the invitation"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others declined the invitation"
+msgstr[0] "%(sender_name)s-ը և %(count_minus_one)d ուրիշը մերժել է հրավերը"
+msgstr[1] "%(sender_name)s-ը և %(count_minus_one)d ուրիշները մերժել են հրավերը"
+
+#, python-format
+msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
+msgstr "\"%(sender_name)s\"-ը մերժել է %(team_name)s -ին միանալու հրավերը."
+
+msgid "You were made an admin of this team"
+msgstr "Դուք դարձել եք այս թիմի ադմինիստրատորը"
+
+#, python-format
+msgid "%(sender_name)s made you an admin"
+msgstr "%(sender_name)s-ը նշանակեց ձեզ ադմինիստրատոր"
+
+msgid "Made you an admin"
+msgstr "Ձեզ նշանակել են ադմինիստրատոր"
+
+#, python-format
+msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s -ը նշանակել է ձեզ \"%(team_name)s\" -ի ադմինիստրատոր %(portal_name)s -ում!"
+
+msgid "Your admin status for this team was revoked"
+msgstr "Ձեր ադմինիստրատորի կարգավիճակն այս թիմի համար չեղարկված է"
+
+#, python-format
+msgid "%(sender_name)s revoked your admin status"
+msgstr "%(sender_name)s -ը չեղարկել է ձեր ադմինիստրատորի կարգավիճակը"
+
+msgid "Revoked your admin status"
+msgstr "Ձեր ադմինիստրատորի կարգավիճակը չեղարկված է"
+
+#, python-format
+msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s-ը չեղարկել է \"%(team_name)s\" -ի ձեր ադմինիստրատորի կարգավիճակը %(portal_name)s -ում!"
+
+msgid "You were tagged in a post, document or other item"
+msgstr "Ձեզ նշել են փոստի, փաստաթղթի կամ այլ կետի մեջ"
+
+#, python-format
+msgid "%(sender_name)s tagged you in %(object_name)s"
+msgstr "%(sender_name)s-ը նշել է ձեզ %(object_name)s -ում"
+
+#, python-format
+msgid "%(sender_name)s tagged you in %(count)d items"
+msgstr "%(sender_name)s-ը նշել է ձեզ %(count)d կետերում"
+
+#, python-format
+msgid "%(sender_name)s tagged you in"
+msgstr "%(sender_name)s-ը նշել է ձեզ"
+
+#, python-format
+msgid "You were tagged by %(sender_name)s"
+msgstr "Ձեզ նշել է %(sender_name)s -ը"
+
+#, python-format
+msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
+msgstr "Ձեզ նշել են \"%(object_name)s\" -ում %(team_name)s -ում."
+
+#, python-format
+msgid "%(sender_name)s invited you to join %(team_name)s"
+msgstr "%(sender_name)s -ը հրավիրել է ձեզ միանալ %(team_name)s -ին"
+
+msgid "Invited you"
+msgstr "Հրավիրել է ձեզ"
+
+#, python-format
+msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
+msgstr "%(sender_name)s -ը հրավիրել է ձեզ միանալ %(team_name)s -ին %(portal_name)s -ում! <br/><br/> Միանալու համար խնդրում ենք անցնել ստորև նշված հղումով: Դուք կուղղորդվեք պորտալ, որտեղ կարող եք տեսնել և ընդունել հրավերը."
+
+#, python-format
+msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s-ը հրավիրել է ձեզ միանալ %(team_name)s -ին %(portal_name)s -ում!"
+
+msgid "Accept invitation"
+msgstr "Ընդունել հրավերը"
+
+msgid "View invitation"
+msgstr "Տեսնել հրավերը"
+
+msgid "New link to the moved project/group"
+msgstr "Տեղափոխված նախագծի/ խմբի նոր հղում"
+
+#, python-format
+msgid "One of your projects/groups were moved to the portal \"%(portal_name)s\"! <br/><br/> Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>All of your old URLs will continue to work and redirect you to the correct page on the new portal."
+msgstr "Ձեր նախագծերից / խմբերից մեկը տեղափոխվել է \"%(portal_name)s\" պորտալ! <br/><br/> Ձեր օգտատիրոջ էջն այս պորտալում նույնն է, ինչ հինը. Ձեզ հարկավոր չէ նոր էջ գրանցել: <br/> <br/> Ձեր բոլոր հին URL- ները կշարունակեն գործել և ուղղորդել ձեզ նոր պորտալի ճիշտ էջին."
+
+#, python-format
+msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
+msgstr "\"%(team_name)s\"-ը տեղափոխվել է %(portal_name)s!"
+
+msgid "Created"
+msgstr "Ստեղծված է"
+
+#, python-format
+msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s -ը ստեղծեց \"%(team_name)s\" նախագիծը / խումբը %(portal_name)s - ում!"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
+msgstr "%(sender_name)s-ը ստեղծեց \"%(object_name)s\" գաղափար %(portal_name)s -ում!"
+
+msgid "Has created"
+msgstr "Ստեղշծեց"
+
+#, python-format
+msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s-ը ստեղծեց \"%(object_name)s\" գաղափար %(portal_name)s -ում!"
+
+#, python-format
+msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
+msgstr "%(sender_name)s-ը ստեղծեց \"%(object_name)s\" գաղափար!"
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr "%(sender_name)s -ը ստեղծել է \"%(team_name)s\" նախագիծը %(portal_name)s -ում այն գաղափարի հիման վրա, որին դուք հետևում եք: <br/><br/> Դա ստուգելու համար սեղմեք ստորև նշված հղմանը: Այնտեղ կարող եք տեսնել, ցանկանում եք արդյոք միանալ նախագծին."
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
+msgstr "%(sender_name)s -ը ստեղծեց \"%(team_name)s\" նախագիծը Ձեր կողմից հետևվող գաղափարից!"
+
+msgid "Deutsch--NATIVE-LANGUAGE"
+msgstr "Deutsch"
+
+msgid "English--NATIVE-LANGUAGE"
+msgstr "English"
+
+msgid "Russian--NATIVE-LANGUAGE"
+msgstr "Русский"
+
+msgid "Ukrainian--NATIVE-LANGUAGE"
+msgstr "Українська"
+
+msgid "French--NATIVE-LANGUAGE"
+msgstr "Français"
+
+msgid "Polish--NATIVE-LANGUAGE"
+msgstr "Polski"
+
+msgid "Spanish--NATIVE-LANGUAGE"
+msgstr "Español"
+
+msgid "Romanian--NATIVE-LANGUAGE"
+msgstr "Română"
+
+msgid "Belarussian--NATIVE-LANGUAGE"
+msgstr "Русский"
+
+msgid "Dutch--NATIVE-LANGUAGE"
+msgstr "Nederlands"
+
+msgid "Azerbaijani--NATIVE-LANGUAGE"
+msgstr "Azerbaycan dili"
+
+msgid "Armenian--NATIVE-LANGUAGE"
+msgstr "Հայոց լեզու"
+
+msgid "Georgian--NATIVE-LANGUAGE"
+msgstr "ქართული ენა"
+
+msgid "Kazakh--NATIVE-LANGUAGE"
+msgstr "Қазақ тілі"
+
+msgid "Attachments"
+msgstr "Կից ֆայլեր"
+
+msgid "Type the title and/or type of attachment"
+msgstr "Մուտքագրեք կցված ֆայլի վերնագիրը և/ կամ տեսակը"
+
+msgid "Sort_field"
+msgstr "Տեսակավորել դաշտերը"
+
+msgid "Enter a number for sort order"
+msgstr "Մուտքագրեք թիվ տեսակավորելու համար"
+
+msgid "Widget label"
+msgstr "Վիդջետի պիտակը"
+
+msgid "Enter a title for the widget"
+msgstr "Մուտքագրեք վիդջետի վերնագիրը"
+
+msgid "Widget icon"
+msgstr "Վիդջետի պատկերակը"
+
+msgid "A font-awesome icon for the widget"
+msgstr "Font-awesome պատկերակ վիդջետի համար"
+
+msgid "Link label"
+msgstr "Հղման պիտակ"
+
+msgid "Enter a label for the widget-button"
+msgstr "Մուտքագրեք վիդջետ կոճակի պիտակ"
+
+msgid "Text"
+msgstr "Տեքստ"
+
+msgid "Enter a description"
+msgstr "Մուտքագրեք նկարագրություն"
+
+msgid "All"
+msgstr "Ամբողջը"
+
+msgid "Not assigned"
+msgstr "Նշանակված չէ"
+
+msgid "Any date"
+msgstr "Ցանկացած ամսաթիվ"
+
+msgid "Today"
+msgstr "Այսոր"
+
+msgid "This week"
+msgstr "Այս շաբաթ"
+
+msgid "Next week"
+msgstr "Հաջորդ շաբաթ"
+
+msgid "Next month"
+msgstr "Հաջորդ ամիս"
+
+msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
+msgstr "Սա կարծես թե Youtube- ի կամ Vimeo- ի վավեր հղում չէ!"
+
+msgid "This doesn't seem to be a Twitter username!"
+msgstr "Սա կարծես թե Twitter -i օգտատիրոջ անուն չէ!"
+
+msgid "This doesn't seem to be a valid widget ID or embed HTML code from Twitter!"
+msgstr "Սա կարծես թե վավեր վիդջետ ID կամ կոդ Twitter- ի HTML կոդ չէ!"
+
+msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
+msgstr "Սա կարծես թե Flickr Gallery- ի վավեր հղում չէ: Այն պետք է ունենա հետևյալ տեսքը - \"https://www.flickr.com/photos/username/sets/1234567890\"!"
+
+msgid "Users"
+msgstr "Օգտատերեր"
+
+msgid "Name"
+msgstr "Անուն"
+
+msgid "Limit to teams"
+msgstr "Խմբերի սահմանափակում"
+
+msgid "My teams"
+msgstr "Իմ խմբերը"
+
+msgid "Other teams"
+msgstr "Այլ խմբեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Like"
+msgstr "Հավանել"
+
+msgid "Persons"
+msgstr "Անձինք"
+
+msgid "email address"
+msgstr "էլեկտրոնային հասցե"
+
+msgid "first name"
+msgstr "անուն"
+
+msgid "This email address already has a registered user!"
+msgstr "Այս էլ.փոստի հասցեն արդեն ունի գրանցված օգտատեր!"
+
+msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
+msgstr "Խնդրում ենք մուտքագրել ճիշտ էլ.փոստ և գաղտնաբառ: Նկատի ունեցեք, որ երկու դաշտերն էլ կարող են գրանցմանը զգայուն լինել."
+
+msgid "Your Web browser doesn't appear to have cookies enabled. Cookies are required for logging in."
+msgstr "Ձեր վեբ բրաուզերում, կարծես, միացված չեն cookie- ներն: Cookie- ներն անհրաժեշտ են մուտք գործելու համար."
+
+msgid "This account is inactive."
+msgstr "Այս անձնական էջն ակտիվ չէ."
+
+msgid "Hello"
+msgstr ""
+
+msgid "Click the following link to change which emails you receive:"
+msgstr "Անցեք հետևյալ հղումով ՝ ձեր կողմից ստացվող էլեկտրոնային փոստերը փոխելու համար:"
+
+msgid "Notification Preferences"
+msgstr "Ծանուցման նախապատվություններ"
+
+msgid "Click the following link to never receive any more emails from us:"
+msgstr "Անցեք հետևյալ հղումով՝ այլևս մեզանից էլ-նամակներ չստանալու համար:"
+
+msgid "Unsubscribe"
+msgstr "Ապաբաժանորդագրվել"
+
+msgid "Hi,"
+msgstr "Ողջույն,"
+
+msgid "Tiny (50 x *)"
+msgstr "Փոքրիկ (50 x *)"
+
+msgid "Very Small (100 x *)"
+msgstr "Շատ փոքր (100 x *)"
+
+msgid "Smaller (150 x *)"
+msgstr "Ավելի փոքր (150 x *)"
+
+msgid "Small (200 x *)"
+msgstr "Փոքր (200 x *)"
+
+msgid "Medium-small (250 x *)"
+msgstr "Միջին փոքրության (250 x *)"
+
+msgid "Medium (300 x *)"
+msgstr "Միջին (300 x *)"
+
+msgid "Large (400 x *)"
+msgstr "Մեծ (400 x *)"
+
+msgid "Larger (500 x *)"
+msgstr "Ավելի մեծ (500 x *)"
+
+msgid "Very large (650 x *)"
+msgstr "Շատ մեծ (650 x *)"
+
+msgid "Extra large (800 x *)"
+msgstr "Էքստրա մեծ (800 x *)"
+
+msgid "XXL (1200 x *)"
+msgstr "XXL (1200 x *)"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Title"
+msgstr "Վերնագիր"
+
+msgid "Last edited"
+msgstr "Վերջին խմբագրումը"
+
+msgid "Last edited by"
+msgstr "Վերջին անգամ խմբագրել է"
+
+msgid "Cosinnus CMS Micropage"
+msgstr "Cosinnus CMS Միկրոէջ"
+
+msgid "Cosinnus Micropages"
+msgstr "Cosinnus Միկրոէջեր"
+
+msgid "Complaint Text"
+msgstr "Բողոքի տեքստ"
+
+msgid "Creator"
+msgstr "Ստեղծող"
+
+msgid "Reported object"
+msgstr "Հաղորդված օբյեկտ"
+
+msgid "Reported objects"
+msgstr "Հաղորդված օբյեկտներ"
+
+msgid "Email"
+msgstr "Էլ․ հասցե"
+
+msgid "Notification ID"
+msgstr "Ծանուցագրի ID"
+
+msgid "Portal"
+msgstr "Պորտալ"
+
+msgid "Enter a valid name. Forward slash is not allowed."
+msgstr "Մուտքագրեք վավեր անուն: Տողադարձ չի թույլատրվում."
+
+msgid "Portals"
+msgstr "Պորտալներ"
+
+msgid "Slug"
+msgstr "Slug"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Description"
+msgstr "Նկարագրություն"
+
+msgid "Support Email"
+msgstr "Էլ․ հասցե Աջակցության համար"
+
+msgid "This email is shown to users as contact address on many pages"
+msgstr "Այս էլ․ հասցեն ցուցադրված է օգտատերերին, որպես կոնտակտային հասցե բազմաթիվ էջերում"
+
+msgid "Website"
+msgstr "Վեբ Կայք"
+
+msgid "Welcome-Email sending enabled"
+msgstr "Ողջույնի էլ.նամակի ուղարկումը ակտիվացված է"
+
+msgid "Welcome-Email Text"
+msgstr "Ողջույնի Էլ.նամակի Տեքստը"
+
+msgid "If set and enabled, this text will be sent to all new users after their registration is complete."
+msgstr "Նախօրոք նշանակելու և ակտիվացնելու լինելու դեպքում, գրանցումն ավարտվելուց հետո այս տեքստը կուղարկվի բոլոր նոր օգտատերերին."
+
+msgid "Public"
+msgstr "Հանրային"
+
+msgid "Associated Site"
+msgstr "Համակցված կայք"
+
+msgid "Http/Https Protocol (overrides settings)"
+msgstr "Http / Https Արձանագրություն (շրջանցում է կարգավորումները)"
+
+msgid "Users Need Activation"
+msgstr "Օգտատերերին անհրաժեշտ է ակտիվացում"
+
+msgid "If activated, newly registered users need to be approved by a portal admin before being able to log in."
+msgstr "Ակտիվացման դեպքում նոր գրանցված օգտատերերը պետք է հաստատվեն պորտալի ադմինիստրատորի կողմից, նախքան մուտք գործելը."
+
+msgid "Emails Need Verification"
+msgstr "Էլ.փոստերը պետք է հաստատվեն"
+
+msgid "If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them."
+msgstr "Ակտիվացման դեպքում նոր գրանցված օգտատերերը և այն օգտատերերը, ովքեր փոխում են իրենց էլ․հասցեն, պետք է հաստատեն անցնելով իրենց ուղարկված նամակի հղումով."
+
+msgid "ToS Version"
+msgstr "ToS Տարբերակ"
+
+msgid "Background Image"
+msgstr "Ֆոնային պատկեր"
+
+msgid "Used for the background of the landing and CMS-pages"
+msgstr "Օգտագործվում է լէնդինգ և CMS- էջերի ֆոնի համար"
+
+msgid "Logo Image"
+msgstr "Լոգոյի պատկեր"
+
+msgid "Used as a small logo in the navigation bar and for external links to this portal"
+msgstr "Օգտագործվում է որպես փոքր պատկերանշան նավիգացիայի վահանակում և այս պորտալի արտաքին հղումների համար"
+
+msgid "Main color"
+msgstr "Հիմնական գույնը"
+
+msgid "Main background color (css hex value, with or without \"#\")"
+msgstr "Հիմնական ֆոնի գույնը (css hex value, with or without \"#\")"
+
+msgid "Gradient color"
+msgstr "Գրադիենտ գույնը"
+
+msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
+msgstr "Ներքևի գույնը գրադիենտի համար (css hex value, with or without \"#\")"
+
+msgid "Extra CSS"
+msgstr "Լրացուցիչ CSS"
+
+msgid "Extra CSS for this portal, will be applied after all other styles."
+msgstr "Լրացուցիչ CSS- ը այս պորտալի համար կկիրառվի բոլոր մյուս ոճերից հետո."
+
+msgid "Video Conference Server"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgstr "Մուտքագրված լինելու դեպքում, դա հնարավորություն կտա վիդեո-կոնֆերանսի ֆունկցիոնալությունը ամբողջ կայքում: Պետք է առկա լինի URL հասցե մինչև այնտեղ, որտեղ հնարավոր է ավելացնել ցանկացած պատահական սենյակի անվանում."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Project"
+msgstr "Նախագիծ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Խումբ"
+
+msgid "Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!"
+msgstr "Չափազանց զգույշ եղեք այս հասցեն փոփոխելիս: Կարող են ի հայտ գալ բազմաթիվ կողմնակի բարդություններ (օրինակ՝ վերահղումների խախտում)!"
+
+msgid "Project Type"
+msgstr "Նախագծի տեսակը"
+
+msgid "Last modified"
+msgstr "Վերջին անգամ փոփոխվել է"
+
+msgid "Short Description"
+msgstr "Կարճ նկարագրություն"
+
+msgid "Short Description. Internal, will not be shown publicly."
+msgstr "Կարճ Նկարագրություն. Ներքին բովանդակությունը, հրապարակայնորեն չի ցուցադրվելու."
+
+msgid "Detailed Description"
+msgstr "Մանրամասն նկարագրություն"
+
+msgid "Detailed, public description."
+msgstr "Մանրամասն, հրապարակայնորեն տեսանելի նկարագրություն."
+
+msgid "Contact Information"
+msgstr "Կոնտակտային տվյալներ"
+
+msgid "How you can be contacted - addresses, social media, etc."
+msgstr "Ինչպե՞ս է հնարավոր կապնվել Ձեզ հետ `հասցեներ, սոցիալական կայքեր և այլն."
+
+msgid "Avatar"
+msgstr "Ավատար"
+
+msgid "Wallpaper image"
+msgstr "Պաստառի պատկեր"
+
+msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
+msgstr "Ցուցադրվում է որպես մեծ բանների պատկեր ՝ Միկրոկայքի վրա (1140 x 240 px)"
+
+msgid "Microsite Video"
+msgstr "Միկրոկայքի տեսանյութ"
+
+msgid "Microsite Twitter Timeline Username"
+msgstr "Միկրոկայքի Twitter-ի Ժամանակասանդղակի Օգտանուն"
+
+msgid "Microsite Twitter Timeline Custom Widget ID"
+msgstr "Միկրոկայքի Twitter-ի Ժամանակասանդղակի Փոփոխվող Վիդջեթ ID"
+
+msgid "Flickr Gallery URL"
+msgstr "Flickr Pատկերասրահի URL"
+
+msgid "Call to Action Microsite Box active"
+msgstr "Գործողության կանչի Միկրոկայքի վանդակը ակտիվ է"
+
+msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgstr "Եթե այն ակտիվ է, միկրոկայքի վրա կցուցադրվի «Գործողության կոչ» վանդակը."
+
+msgid "Call to Action Box title"
+msgstr "Գործողության կոչի վանդակի վերնագիր"
+
+msgid "Call to Action Box Description"
+msgstr "Գործողության կոչի վանդակի նկարագրություն"
+
+msgid "Embedded Dashboard HTML"
+msgstr ""
+
+msgid "Deactivated Apps"
+msgstr "Ապաակտիվացված հավելվածներ"
+
+msgid "Microsite Public Apps"
+msgstr "Միկրոկայքի Հանրային հավելվածներ"
+
+msgid "Is active"
+msgstr "Ակտիվ է"
+
+msgid "If a team is not active, it counts as non-existent for all purposes and views on the website."
+msgstr "Եթե թիմը ակտիվ չէ, այն համարվում է կայքում ցանկացաց նպատակների և դիտումների համար որպես անիրական."
+
+msgid "Facebook Group ID"
+msgstr "Facebook Խմբի ID- ն"
+
+msgid "Facebook Page ID"
+msgstr "Facebook էջի ID- ն"
+
+msgid "Nextcloud Group ID"
+msgstr "Nextcloud Խմբի ID- ն"
+
+#, fuzzy
+#| msgid "Nextcloud Group ID"
+msgid "Nextcloud Groupfolder Name"
+msgstr "Nextcloud Խմբի ID- ն"
+
+#, fuzzy
+#| msgid "Nextcloud Group ID"
+msgid "Nextcloud Groupfolder ID"
+msgstr "Nextcloud Խմբի ID- ն"
+
+msgid "Parent Group"
+msgstr "Ծնողների խումբ"
+
+msgid "Related Teams"
+msgstr "Առնչվող թիմեր"
+
+msgid "Cosinnus project"
+msgstr "Cosinnus նախագիծ"
+
+msgid "Cosinnus projects"
+msgstr "Cosinnus նախագծեր"
+
+msgid "Slug must not be empty."
+msgstr "Slug- ը չպետք է դատարկ լինի."
+
+msgid "The URL for this team has changed. A redirect from all existing URLs has automatically been created!"
+msgstr "Այս թիմի URL- ն փոխվել է: Գոյություն ունեցող բոլոր URL- ներից ավտոմատ կերպով ստեղծվել է վերահղում!"
+
+#, python-format
+msgid "Request about your project \"%(group_name)s\""
+msgstr "Հայց ձեր նախագծի վերաբերյալ \"%(group_name)s\""
+
+#, python-format
+msgid "Request about your group \"%(group_name)s\""
+msgstr "Հայց ձեր խմբի վերաբերյալ \"%(group_name)s\""
+
+#, fuzzy
+#| msgid "Project Type"
+msgid "Project Menu"
+msgstr "Նախագծի տեսակը"
+
+#, fuzzy
+#| msgid "Group name"
+msgid "Group Menu"
+msgstr "Խմբի անվանում"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Project Dashboard"
+msgstr "Կառավարման վահանակ"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Group Dashboard"
+msgstr "Կառավարման վահանակ"
+
+msgid "Is Moderator"
+msgstr "Մոդերատոր է"
+
+msgid "Team membership"
+msgstr "Թիմային անդամակցություն"
+
+msgid "Team memberships"
+msgstr "Թիմային անդամակցություններ"
+
+msgid "Portal membership"
+msgstr "Պորտալի անդամակցություն"
+
+msgid "Portal memberships"
+msgstr "Պորտալի անդամակցություններ"
+
+msgid "Team Invite for Unregistered User"
+msgstr "Թիմի հրավեր չգրանցված օգտատիրոջ համար"
+
+msgid "Team Invites for Unregistered Users"
+msgstr "Թիմի հրավեր չգրանցված օգտատերերի համար"
+
+msgid "Token"
+msgstr "Թոքեն"
+
+msgid "The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want."
+msgstr "Թոքենի տողը: Այն կցուցադրվի այնպես, ինչպես կա, բայց նշանակություն չունի օգտատերերը այն մուտք են գործում մեծատառ թե փոքրատառ: Կարող է պարունակել տառեր և թվեր, բայց ոչ բաց տարածքներ, նաև կարող են լինել այնքան երկար կամ կարճ, որքան ցանկանում եք."
+
+msgid "Short Description (optional). Will be shown on the token page."
+msgstr "Կարճ նկարագրություն (ըստ ցանկության): Ցուցադրվելու է թոքենի էջում."
+
+msgid "Valid until"
+msgstr "Ուժի մեջ է մինչև"
+
+msgid "Invite-Groups"
+msgstr "Հրավիրող Խմբեր"
+
+msgid "Cosinnus Group Invite Token"
+msgstr "Cosinnus Խմբի Հրավերի Թոքեն"
+
+msgid "Cosinnus Group Invite Tokens"
+msgstr "Cosinnus Խմբի Հրավերի Թոքեններ"
+
+msgid "Token must not be empty."
+msgstr "Թոքենը չպետք է դատարկ լինի."
+
+msgid "From Portal"
+msgstr "Պորտալից"
+
+msgid "From Team Type"
+msgstr "Թիմի տեսակից"
+
+msgid "From Slug"
+msgstr "Slug -ից"
+
+msgid "Permanent Team Redirects"
+msgstr "Մշտական Թիմի վերահղումներ"
+
+msgid "Permanent Team Redirect"
+msgstr "Մշտական Թիմի վերահղում"
+
+msgid "Location"
+msgstr "Տեղորոշում"
+
+msgid "Latitude"
+msgstr "Լայնություն"
+
+msgid "Longitude"
+msgstr "Երկայնություն"
+
+msgid "Team"
+msgstr "Թիմ"
+
+msgid "CosinnusLocation"
+msgstr "CosinnusՏեղորոշում"
+
+msgid "CosinnusLocations"
+msgstr "CosinnusՏեղորոշումներ"
+
+msgid "Group Image"
+msgstr "Խմբային պատկեր"
+
+msgid "CosinnusGroup GalleryImage"
+msgstr "Cosinnus Խմբի Պատկերասրահի Նկար"
+
+msgid "CosinnusGroup GalleryImages"
+msgstr "Cosinnus Խմբի Պատկերասրահի Նկարներ"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "CosinnusGroup CallToAction Button"
+msgstr "Cosinnus Խմբի \"Գործողության Կոչ\" կոճակ"
+
+msgid "CosinnusGroup CallToAction Buttons"
+msgstr "Cosinnus Խմբի \"Գործողության Կոչ\" կոճակներ"
+
+msgid "Cosinnus group"
+msgstr "Cosinnus խումբ"
+
+msgid "Cosinnus groups"
+msgstr "Cosinnus խմբեր"
+
+msgid "Image"
+msgstr "Պատկեր"
+
+msgid "Created Projects"
+msgstr "Ստեղծված նախագծեր"
+
+msgid "Cosinnus Idea"
+msgstr "Cosinnus Գաղափար"
+
+msgid "Cosinnus Ideas"
+msgstr "Cosinnus Գաղափարներ"
+
+msgid "Language"
+msgstr "Լեզու"
+
+msgid "May be contacted"
+msgstr "Հնարավոր է կապվել"
+
+msgid "Terms of Service"
+msgstr "Ծառայությունների մատուցման պայմաններ"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Never (we will not send you any emails)"
+msgstr "Երբեք (մենք այլևս ձեզ էլ․նամակներ չենք ուղարկի)"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Immediately (an individual email per event)"
+msgstr "Անմիջապես (անհատական էլ․նամակ յուրաքանչյուր իրադարձության համար)"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "In a Daily Report"
+msgstr "Ամենօրյա զեկույցում"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "In a Weekly Report"
+msgstr "Շաբաթվա զեկույցում"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Individual settings for each Project/Group..."
+msgstr "Անհատական կարգավորումներ յուրաքանչյուր Ծրագրի / Խմբի համար ..."
+
+msgid "Name (EN)"
+msgstr "Անուն (EN)"
+
+msgid "Name (RU)"
+msgstr "Անուն (RU)"
+
+msgid "Name (UK)"
+msgstr "Անուն (UK)"
+
+msgid "Only me"
+msgstr "Միայն ես"
+
+msgid "Team members only"
+msgstr "Միայն թիմի անդամները"
+
+msgid "Public (visible without login)"
+msgstr "Հանրային (տեսանելի առանց մուտքագրվելու)"
+
+msgid "Tags"
+msgstr "Նշումներ"
+
+msgid "Permissions"
+msgstr "Թույլտվություններ"
+
+msgid "Place"
+msgstr "Վայր"
+
+msgid "Valid from"
+msgstr "Վավեր է սկսած"
+
+msgid "Valid to"
+msgstr "Վավեր է մինչև"
+
+msgid "Approach"
+msgstr "Մոտեցում"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Topics"
+msgstr "Թեմաներ"
+
+msgid "Text Topics"
+msgstr "Տեքստի թեմաներ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Likes"
+msgstr "Հավանումներ"
+
+msgid "Attached object"
+msgstr "Կցված օբյեկտ"
+
+msgid "Attached objects"
+msgstr "Կցված օբյեկտներ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Օգտատեր"
+
+msgid "Visited"
+msgstr "Այցելեց"
+
+msgid "LastVisited"
+msgstr "ՎերջինԱյցը"
+
+msgid "LastVisiteds"
+msgstr "ՎերջինԱյցերը"
+
+msgid "Path"
+msgstr "Ուղի"
+
+msgid "Reflected Object"
+msgstr "Արտացոլված օբյեկտ"
+
+msgid "Reflected Objects"
+msgstr "Արտացոլված օբյեկտներ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Liked"
+msgstr "Հավանեց"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Following"
+msgstr "Հետևում է"
+
+msgid "Text Editor"
+msgstr "Տեքստի խմբագիր"
+
+msgid "Raw HTML"
+msgstr "Raw HTML"
+
+msgid "(none displayed)"
+msgstr "(ոչ մեկը չի ցուցադրվում)"
+
+msgid "Announcement"
+msgstr "Հայտարարություն"
+
+msgid "Maintenance"
+msgstr "Սպասարկում"
+
+msgid "Update"
+msgstr "Թարմացում"
+
+msgid "Technical Issues"
+msgstr "Տեխնիկական Խնդիրներ"
+
+msgid "Miscellaneous"
+msgstr "Բազմազան"
+
+msgid "Announcement Display Type"
+msgstr "Հայտարարության ցուցադրման տեսակը"
+
+msgid "Valid From"
+msgstr "Գործում է սկսած"
+
+msgid "Announcement Category"
+msgstr "Հայտարարության կատեգորիա"
+
+msgid "Main text of this announcement."
+msgstr "Այս հայտարարության հիմնական տեքստը."
+
+msgid "Raw HTML for this announcement."
+msgstr "Raw HTML այս հայտարարության համար."
+
+msgid "Create-Project or Group Button"
+msgstr "Ստեղծել Նախագիծ կամ Խումբ կոճակ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Events"
+msgstr "Իրադարձություններ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Projects"
+msgstr "Նախագծեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "Խմբեր"
+
+msgid "At least one type of Map object must be chosen!"
+msgstr "Պետք է ընտրվի առնվազն մեկ տիպի Քարտեզի օբյեկտ!"
+
+msgid "Proportions"
+msgstr "Համամասնություններ"
+
+msgid "1/2 + 1/2"
+msgstr "1/2 + 1/2"
+
+msgid "2/3 + 1/3"
+msgstr "2/3 + 1/3"
+
+msgid "1/3 + 2/3"
+msgstr "1/3 + 2/3"
+
+msgid "1/3 + 1/3 + 1/3"
+msgstr "1/3 + 1/3 + 1/3"
+
+msgid "1/2 + 1/4 + 1/4"
+msgstr "1/2 + 1/4 + 1/4"
+
+msgid "1/4 + 1/2 + 1/4"
+msgstr "1/4 + 1/2 + 1/4"
+
+msgid "1/4 + 1/4 + 1/2"
+msgstr "1/4 + 1/4 + 1/2"
+
+msgid "Medium News Widget"
+msgstr "Միջին չափսի նորությունների վիդջեթ"
+
+msgid "Large News Widget"
+msgstr "Մեծ չափսի նորությունների վիդջեթ"
+
+msgid "4 Random Projects Widget"
+msgstr "4 պատահական նախագծերի վիդջեթ"
+
+msgid "8 Random Projects Widget"
+msgstr "8 պատահական նախագծերի վիդջեթ"
+
+msgid "Content"
+msgstr "Բովանդակություն"
+
+msgid "Portal Root Page"
+msgstr "Պորտալի Արմատային էջը"
+
+msgid "Assigned Portal"
+msgstr "Նշանակված Պորտալ"
+
+msgid "Footer"
+msgstr "Էջատակային նշում"
+
+msgid "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
+msgstr "Կցուցադրվի որպես Էջատակային նշում յուրաքանչյուր էջի վրա այս կայքում (ոչ միայն կառավարման վահանակի էջերին):"
+
+msgid "Show Register Button"
+msgstr "Ցուցադրել գրանցման կոճակը"
+
+msgid "Redirect Logged in Users"
+msgstr "Վերաուղղորդել մուտք գործած օգտատերերին"
+
+msgid "If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page."
+msgstr "Ակտիվ լինելու դեպքում այս էջը տեսանելի կլինի միայն համակարգ մուտք չգործած օգտատերերի համար: Բոլոր մյուսները կուղղորդվեն գործունեությունների էջ."
+
+msgid "Left banner (top)"
+msgstr "Ձախ բանները (վերևում)"
+
+msgid "Right banner (top)"
+msgstr "Աջ բանները (վերևում)"
+
+msgid "Header"
+msgstr "Վերնամաս"
+
+msgid "Left footer"
+msgstr "Ձախ Էջատակային նշում"
+
+msgid "Right footer"
+msgstr "Աջ Էջատակային նշում"
+
+msgid "1-Column Dashboard Page"
+msgstr "1-Սյունակի կառավարման վահանակի էջ"
+
+msgid "2-Column Dashboard Page"
+msgstr "2-Սյունակի կառավարման վահանակի էջ"
+
+msgid "Content (left column)"
+msgstr "Բովանդակություն (ձախ սյուն)"
+
+msgid "Content (right column)"
+msgstr "Բովանդակություն (աջ սյուն)"
+
+msgid "3-Column Dashboard Page"
+msgstr "3-Սյունակի կառավարման վահանակի էջ"
+
+msgid "Content (center column)"
+msgstr "Բովանդակություն (կենտրոնական սյունակ)"
+
+msgid "Simple One-Column Page"
+msgstr "Պարզ մեկ-սյունակային էջ"
+
+msgid "Simple Page with Left Navigation"
+msgstr "Ձախ նավիգացիայով պարզ էջ"
+
+msgid "Left Sidebar"
+msgstr "Ձախ կողային վահանակ"
+
+msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+msgstr "1-Սյունակի կառավարման վահանակի էջ (Մոդուլային, այլևս ՉՕԳՏԱԳՈՐՑԵԼ!)"
+
+msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+msgstr "2-Սյունակի կառավարման վահանակի էջ (Մոդուլային, այլևս ՉՕԳՏԱԳՈՐՑԵԼ!)"
+
+msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+msgstr "3-Սյունակի կառավարման վահանակի էջ (Մոդուլային, այլևս ՉՕԳՏԱԳՈՐՑԵԼ!)"
+
+msgid "Simple One-Column Page (Modular)"
+msgstr "Պարզ մեկ-սյունակային էջ (Մոդուլային)"
+
+msgid "Simple Page with Left Navigation (Modular)"
+msgstr "Ձախ նավիգացիայով պարզ էջ (Մոդուլային)"
+
+msgid "Start Page (Modular)"
+msgstr "Սկզբնական Էջ (Մոդուլային)"
+
+msgid "Header image"
+msgstr "Վերնամասի պատկեր"
+
+msgid "Header Title"
+msgstr "Վերնամասի վերնագիր"
+
+msgid "Header Text"
+msgstr "Վերնամասի տեկստ"
+
+msgid "Additional Header content"
+msgstr "Վերնամասի լրացուցիչ բովանդակություն"
+
+msgid "Site Widgets"
+msgstr "Կայքի Վիդջեթներ"
+
+msgid "Bottom content (gray background)"
+msgstr "Ստորին պարունակություն (մոխրագույն ֆոն)"
+
+msgid "Dashboard"
+msgstr "Կառավարման վահանակ"
+
+msgid "Microsite"
+msgstr "Միկրոկայք"
+
+msgid "Application name"
+msgstr "Հավելվածի անվանումը"
+
+msgid "Widget name"
+msgstr "Վիդջեթի անվանումը"
+
+msgid "Widget Type"
+msgstr "Վիդջեթի տեսակը"
+
+msgid "Sort field"
+msgstr "Տեսակավորել դաշտը"
+
+msgid "Widget configuration"
+msgstr "Վիդջեթի կոնֆիգուրացիա"
+
+msgid "Widget configurations"
+msgstr "Վիդջեթի կոնֆիգուրացիաներ"
+
+msgid "Either team or user must be defined."
+msgstr "Պետք է սահմանել թիմը կամ օգտատիրոջը."
+
+msgid "key"
+msgstr "կոդ"
+
+msgid "value"
+msgstr "արժեք"
+
+msgid "Widget configuration item"
+msgstr "Վիդջեթի կազմաձևման տարրը"
+
+msgid "Widget configuration items"
+msgstr "Վիդջեթի կազմաձևման տարրերը"
+
+msgid "select this page"
+msgstr "ընտրել այս էջը"
+
+msgid "edit this page"
+msgstr "խմբագրել այս էջը"
+
+msgid "edit"
+msgstr "խմբագրել"
+
+msgid "insert above"
+msgstr "տեղադրել վերևում"
+
+msgid "insert below"
+msgstr "տեղադրել ներքևում"
+
+msgid "insert inside"
+msgstr "տեղադրել ներսում"
+
+msgid "softroot"
+msgstr "softroot"
+
+msgid "home"
+msgstr "home"
+
+#, python-format
+msgid "Edit this page in %(language)s "
+msgstr "Խմբագրել այս էջը %(language)s "
+
+msgid "Cut"
+msgstr "Կտրել"
+
+msgid "cut"
+msgstr "կտրել"
+
+msgid "Copy"
+msgstr "Պատճենել"
+
+msgid "copy"
+msgstr "պատճենել"
+
+msgid "Add Child"
+msgstr "Ավելացնել երեխա"
+
+msgid "add"
+msgstr "ավելացնել"
+
+msgid "Delete"
+msgstr "Ջնջել"
+
+msgid "delete"
+msgstr "ջնջել"
+
+msgid "Unpublish"
+msgstr "Չհրապարակել"
+
+msgid "Publish"
+msgstr "Հրապարակել"
+
+msgid "View on page"
+msgstr "Դիտել էջում"
+
+msgid "view"
+msgstr "դիտել"
+
+msgid "View reported item..."
+msgstr "Դիտել հաղորդված տարրը ..."
+
+msgid "Edit reported item..."
+msgstr "Խմբագրել հաղորդված տարրը ..."
+
+msgid "Delete reported item..."
+msgstr "Ջնջել հաղորդված նյութը ..."
+
+msgid "(The reported item has been deleted.)"
+msgstr "(Հաղորդված տարրը ջնջվել է․)"
+
+msgid "Enter the 4 capital letters in the scrambled image"
+msgstr "Մուտքագրեք 4 մեծատառ սկրամբլավորված պատկերման մեջ"
+
+msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
+msgstr "Այս էջը շատ լավ սպասումների նախադիտում է: Այն գտնվում է մշակման փուլում, և շատ առանձնահատկություններ թերի են, կամ կարող են դեռևս ճիշտ չգործել!"
+
+msgid "Done"
+msgstr "Կատարված է"
+
+msgid "Configure"
+msgstr "Կարգավորել"
+
+msgid "Withdraw request"
+msgstr "Չեղարկել հայտը"
+
+msgid "Join"
+msgstr "Միանալ"
+
+#, python-format
+msgid "Do you really want to withdraw your join request to „%(title)s“?"
+msgstr "Դուք իսկապե՞ս ցանկանում եք չեղարկել ձեր „%(title)s“-ին միանալու հայցը?"
+
+msgid "Withdraw Join Request"
+msgstr "Չեղարկել ՄԻանալու հայտը"
+
+#, python-format
+msgid "Do you wish to request to join „%(title)s“?"
+msgstr "Ցանկանու՞մ եք „%(title)s“-ին միանալու հարցում ուղարկել?"
+
+msgid "Add widget"
+msgstr "Ավելացնել վիդջեթ"
+
+msgid "Informations"
+msgstr "Տեղեկատվություն"
+
+msgid "No informations set"
+msgstr "Ոչ մի տեղեկություն սահմանված չէ"
+
+msgid "Back to Project Overview"
+msgstr "Վերադառնալ Ծրագրի Դիտմանը"
+
+msgid "Administration"
+msgstr "Ադմինիստրացիա"
+
+msgid "Select a page on the left side."
+msgstr "Ընտրեք էջը ձախ կողմում."
+
+msgid "Simple Statistics"
+msgstr "Պարզ վիճակագրություն"
+
+msgid "User Welcome Email"
+msgstr "Օգտատիրոջ Ողջույնի էլ․ նամակ"
+
+msgid "User Dashboard Announcements"
+msgstr "Օգտատիրոջ կառավարման վահանակի հայտարարություններ"
+
+msgid "Edit"
+msgstr "Խմբագրել"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Ձեր մուտքագրված դաշտերից մեկում առկա է սխալ: Խնդրում ենք ուղղել այն նախքան պահպանելը!"
+
+msgid "Save"
+msgstr "Պահպանել"
+
+msgid "Currently set Welcome-Email Text"
+msgstr "Ներկայումս սահմանված Ողջույնի նամակի տեքստը"
+
+msgid "Send yourself a Test-Mail"
+msgstr "Ուղարկել ձեզ թեստային նամակ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Members"
+msgstr "Անդամներ"
+
+msgid "Settings"
+msgstr "Կարգավորումներ"
+
+msgid "Attach existing Files..."
+msgstr "Կցել առկա ֆայլերը ..."
+
+msgid "Drag and Drop files here..."
+msgstr "Քաշեք և թողեք ֆայլերը այստեղ ..."
+
+msgid "Drag and Drop files or folders here..."
+msgstr "Քաշեք և թողեք ֆայլերը կամ Ֆայլերի թղթապանակները այստեղ ..."
+
+msgid "Click to upload a new file/image. You can also drag & drop a file from your computer."
+msgstr "Սեղմեք այստեղ նոր ֆայլ / պատկեր վերբեռնելու համար: Կարող եք նաև վերբեռնել ֆայլ ձեր համակարգչից."
+
+msgid "Browse..."
+msgstr "Զննել."
+
+msgid "Drag and drop one or more files into this area to upload them to this folder."
+msgstr "Քաշեք և գցեք մեկ կամ մի քանի ֆայլ այստեղ` դրանք այս թղթապանակ վերբեռնելու համար."
+
+msgid "You can also upload a whole folder, including all files and subfolders, by dragging it here. The new folders will be created automatically, with the same folder structure as on your computer."
+msgstr "Կարող եք նաև վերբեռնել մի ամբողջ թղթապանակ, ներառյալ բոլոր ֆայլերը և ենթաֆայլերը, այն գցելով այստեղ: Նոր թղթապանակները կստեղծվեն ավտոմատ կերպով, նույն թղթապանակի կառուցվածքով, ինչ ձեր համակարգչում."
+
+msgid "Unfortunately, the folder upload feature is only available on some browsers. This is because some browsers will not provide the file path information that is needed for the upload. If your browser doesn't support this, you may wish to switch to a different browser for your upload."
+msgstr "Ցավոք, թղթապանակի բեռնման գործառույթը հասանելի է միայն որոշ բրաուզերներում: Դա այն պատճառով է, որ որոշ բրաուզերներ չեն տրամադրում ֆայլի ուղու վերաբերյալ տեղեկատվությունը, որն անհրաժեշտ է բեռնման համար: Եթե ձեր բրաուզերը չի ապահովում դա, կարող եք օգտագործել այլ բրաուզեր բեռնման համար."
+
+msgid "Currently, the Browsers supporting folder upload are:"
+msgstr "Ներկայումս թղթապանակի բեռնումը ապահովող բրաուզերներն են ՝:"
+
+msgid "File and Folder Upload"
+msgstr "Ֆայլի և Թղթապանակի Վերբեռնում"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "Խնդրում ենք ուղղել ստորև նշված սխալը."
+msgstr[1] "Խնդրում ենք ուղղել ստորև նշված սխալները."
+
+msgid "2-factor access only"
+msgstr "Մուտքը միայն 2-գործոնով"
+
+msgid "OTP Device:"
+msgstr "OTP Սարք:"
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr "Մուտքագրեք գեներացված կոդը ձեր նույնականացման ծրագրից"
+
+msgid "Forgotten your password or username?"
+msgstr "Մոռացե՞լ եք ձեր գաղտնաբառը կամ օգտանունը?"
+
+msgid "Validate"
+msgstr "Վավերացնել"
+
+msgid "Log out"
+msgstr "Դուրս գալ"
+
+msgid "You are logged in as"
+msgstr "Դուք մուտք եք գործել որպես"
+
+msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
+msgstr "Ոչ մի նույնականացման սարք կցված չէ ձեր էջին: Խնդրում ենք հարցում ուղարկել մեկ այլ ադմինիստրատորի, որպեսզի նա տեղադրի և ուղարկի ձեզ QR կոդ!"
+
+msgid "Services"
+msgstr "Ծառայություններ"
+
+msgid "Access denied!"
+msgstr "Մուտքն արգելված է!"
+
+msgid "You don't have permission to access this site."
+msgstr "Դուք թույլտվություն չունեք մուտք գործել այս կայք."
+
+msgid "Page expired!"
+msgstr "Էջի ժամանակը սպառվեց!"
+
+msgid "Your request seems to have come from an outdated version of this page. Please reload the page and try again!"
+msgstr "Ձեր հայցը, կարծես, գալիս է այս էջի հնացած տարբերակից: Վերբեռնեք էջը և փորձեք կրկին!"
+
+msgid "Page not found!"
+msgstr "Էջը չի գտնվել!"
+
+msgid "The page you requested was not found on the server."
+msgstr "Ձեր հայցված էջը չի գտնվել սերվերում."
+
+msgid "Server Error"
+msgstr "Սերվերի սխալ"
+
+msgid "Sorry! Something went wrong..."
+msgstr "Ներողություն: Ինչ որ բան սխալ է..."
+
+msgid "Looks like we had an internal problem while processing your request. The error has been recorded, and we will try to fix it as soon as possible!"
+msgstr "Կարծես ձեր հայցը մշակելիս մեզ մոտ ներքին խնդիր է առաջացել: Սխալը գրանցվել է, և մենք կփորձենք հնարավորինս արագ շտկել այն!"
+
+#, python-format
+msgid "+%(num_pictures)s more..."
+msgstr "+%(num_pictures)s ավելին..."
+
+msgid "Mark All"
+msgstr "Նշել բոլորը"
+
+msgid "Deselect All"
+msgstr "Նշումը հանել Բոլորից"
+
+msgid "Delete elements"
+msgstr "Ջնջել էլեմենտները"
+
+msgid "Are you sure you want to delete all selected elements?"
+msgstr "Համոզվա՞ծ եք, որ ցանկանում եք ջնջել բոլոր ընտրված էլեմենտները?"
+
+msgid "There was an error while trying to submit your report. Please try again in a moment."
+msgstr "Ձեր զեկույցը ներկայացնելիս սխալ տեղի ունեցավ: Խնդրում ենք փորձել մի փոքր ուշ."
+
+msgid "Cancel"
+msgstr "Չեղարկել"
+
+msgid "Deleting..."
+msgstr "Ջնջվում է ..."
+
+msgid "Error embedding a Flickr gallery"
+msgstr "Flickr պատկերասրահի տեղադրման սխալ"
+
+msgid "Error embedding a twitter timeline"
+msgstr "Twitter- ի ժամանակասանդղակի տեղադրման սխալ"
+
+msgid "Click to activate video"
+msgstr "Սեղմեք տեսանյութը ակտիվացնելու համար"
+
+msgid "Error embedding a video"
+msgstr "Տեսանյութի տեղադրման սխալ"
+
+msgid "Help and Assistance for this page"
+msgstr "Օգնություն և Աջակցություն այս էջի համար"
+
+msgid "Help"
+msgstr "Օգնություն"
+
+msgid "Help for this page"
+msgstr "Օգնություն այս էջում"
+
+msgid "Root Folder"
+msgstr "Արմատային թղթապանակ"
+
+msgid "We're sorry. The Map is not supported in Internet Explorer."
+msgstr "Ցավում ենք: Քարտեզը հնարավոր չէ գործարկել Internet Explorer բրաուզերում."
+
+msgid "Consider using an alternate browser!"
+msgstr "Խնդրում ենք փորձել այլընտրանքային բրաուզեր!"
+
+msgid "I want to like this"
+msgstr "Ես ցանկանում եմ հավանել սա"
+
+msgid "I want to follow this"
+msgstr "Ես ցանկանում եմ հետևել սա"
+
+msgid "Yes"
+msgstr "Այո"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Follow"
+msgstr "Հետևել"
+
+msgid "You will now receive notifications for comments or when this content is updated."
+msgstr "Այժմ դուք կստանաք ծանուցումներ մեկնաբանությունների համար կամ երբ այս բովանդակությունը թարմացվի."
+
+msgid "You are following this item"
+msgstr "Դուք հետևում եք այս նյութին"
+
+msgid "Expand"
+msgstr "Ընդլայնել"
+
+msgid "Shrink"
+msgstr "Կրճատել"
+
+msgid "Check the projects/groups where you wish to show this item in. It will be shown in all lists, but will still remain in this group."
+msgstr "Ստուգեք այն նախագծերը / խմբերը, որտեղ ցանկանում եք ցուցադրել այս նյութը: Այն կտեղադրվի բոլոր ցուցակներում, բայց դեռ կմնա այս խմբում."
+
+msgid "Items from the Forum can be shown in any of your projects/groups."
+msgstr "Ֆորումի նյութերը կարող են ցուցադրվել ձեր ցանկացած նախագծի / խմբերի մեջ."
+
+msgid "Items from this group can be shown in any of the group's subprojects."
+msgstr "Այս խմբի նյութերը կարող են ցուցադրվել խմբի ցանկացած ենթածրագրում."
+
+msgid "Show in other projects/groups"
+msgstr "Ցուցադրել այլ նախագծերում/ խմբերում"
+
+msgid "Apply"
+msgstr "Դիմել"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_1_group"
+msgstr "helptext_1_group"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_2_project"
+msgstr "helptext_2_project"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_3_marketplace"
+msgstr "helptext_3_marketplace"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_4_profile"
+msgstr "helptext_4_profile"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_5_password"
+msgstr "helptext_5_password"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_6_microsite"
+msgstr "helptext_6_microsite"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_7_notes"
+msgstr "helptext_7_notes"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_8_poll"
+msgstr "helptext_8_poll"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_9_todo"
+msgstr "helptext_9_todo"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_10_documentsetting"
+msgstr "helptext_10_documentsetting"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_11_document"
+msgstr "helptext_11_document"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_12_projectadministration"
+msgstr "helptext_12_projectadministration"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_13_groupadministration"
+msgstr "helptext_13_groupadministration"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_50_profileprivacy"
+msgstr "helptext_50_profileprivacy"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_51_objectprivacy"
+msgstr "helptext_51_objectprivacy"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_52_profilelastname"
+msgstr "helptext_52_profilelastname"
+
+msgid "Enter the email addresses of people you wish to invite to join the platform."
+msgstr "Մուտքագրեք այն մարդկանց էլ. փոստի հասցեները, որոնց ցանկանում եք հրավիրել այս հարթակ."
+
+#, python-format
+msgid "We will send them an email asking them to sign up and join %(group_name)s."
+msgstr "Մենք նրանց էլ-նամակ կուղարկենք ՝ խնդրելով գրանցվել և միանալ %(group_name)s - ին."
+
+msgid "E-Mail Addresses"
+msgstr "Էլ. Փոստի հասցեներ"
+
+msgid "(one per line or comma-seperated)"
+msgstr "(մեկ գցիկով կամ ստորակետով բաժանված)"
+
+msgid "Personal Message (optional)"
+msgstr "Անձնական հաղորդագրություն (ըստ ցանկության)"
+
+msgid "Include a personal message (optional)"
+msgstr "Ներառել անձնական հաղորդագրություն (ըստ ցանկության)"
+
+msgid "Invite new Members"
+msgstr "Հրավիրել նոր Անդամներ"
+
+msgid "Invite"
+msgstr "Հրավիրել"
+
+msgid "Shown in my projects..."
+msgstr "Ցուցադրվել է իմ նախագծերում ..."
+
+msgid "Show in my projects..."
+msgstr "Ցուցադրել իմ նախագծերում ..."
+
+msgid "Rearrange"
+msgstr "Վերադասավորվել"
+
+msgid "Saving..."
+msgstr "Պահպանվում է ..."
+
+msgid "You are now editing the dashboard's layout"
+msgstr "Դուք այժմ խմբագրում եք կառավարման վահանակի դասավորությունը"
+
+#, python-format
+msgid "The layout you choose will be the layout for all members of %(team_name)s! Click save to apply your changes."
+msgstr "Ձեր ընտրած դասավորությունը կդառնա հիմնական %(team_name)s - ի բոլոր անդամների համար: Սեղմեք \"պահպանել\" ձեր փոփոխությունները կիրառելու համար."
+
+msgid "Drag and drop individual widgets to rearrange their order. Please note that the order you give is only an approximate prioritization for the widgets. After saving, the actual order on the page might differ depending on the widgets' current size and the overall page layout."
+msgstr "Քաշեք և գցեք անհատական ֆայլերը `իրենց կարգը վերադասավորելու համար: Խնդրում ենք նկատի ունենալ, որ ձեր կողմից տրված կարգադրանքը ընդամենը մոտավոր առաջնահերթություն է ֆայլերի համար: Պահպանելուց հետո էջի իրական կարգը կարող է տարբերվել`կախված ֆայլերի ներկայիս չափից և էջի ընդհանուր պլանից."
+
+msgid "Your Microsite needs some love!"
+msgstr "Ձեր Միկրակայքը սեր է պահանջում!"
+
+msgid "The Microsite is your projects's welcome page for everyone checking it out. Make it awesome so they want to join you!"
+msgstr "Միկրոկայքը ձեր ծրագրի ողջույնի էջն է յուրաքանչյուրի համար, ով տեսնում է այն: Այն դարձրեք հիասքանչ, որպեսզի նրանք ցանկանան միանալ ձեզ!"
+
+msgid "The Microsite is your group's welcome page for everyone checking it out. Make it awesome so they want to join you!"
+msgstr "Միկրոկայքը ձեր խմբի ողջույնի էջն է յուրաքանչյուրի համար, ով տեսնում է այն: Այն դարձրեք հիասքանչ, որպեսզի նրանք ցանկանան միանալ ձեզ!"
+
+msgid "Access it from the top menu or"
+msgstr "Մուտք գործեք վերին ընտրացանկից կամ"
+
+msgid "get started here..."
+msgstr "սկսել այստեղ ..."
+
+#, fuzzy
+#| msgid "Activate"
+msgid "Activate Cloud"
+msgstr "Ակտիվացնել"
+
+msgid "Cloud"
+msgstr ""
+
+msgid "File"
+msgstr "Ֆայլ"
+
+msgid "Files"
+msgstr "Ֆայլեր"
+
+msgid "Etherpad"
+msgstr "Etherpad վեբ խմբագիր"
+
+msgid "Etherpads"
+msgstr "Etherpad վեբ խմբագրեր"
+
+msgid "Poll"
+msgstr "Հարցում"
+
+msgid "Polls"
+msgstr "Հարցումներ"
+
+msgid "Todo"
+msgstr "Անելիքների ցանկ"
+
+msgid "Todos"
+msgstr "Անելիքների ցանկեր"
+
+msgid "Marketplace"
+msgstr "Marketplace առևտրական հարթակ"
+
+msgctxt "Calendar"
+msgid "Event"
+msgstr "Իրադարձություն"
+
+msgctxt "Calendar"
+msgid "Events"
+msgstr "Իրադարձություններ"
+
+msgid "News"
+msgstr "Նորություններ"
+
+msgctxt "withdraw join team button first item"
+msgid "Withdraw"
+msgstr "Ետ քաշել"
+
+msgctxt "withdraw join team button second item"
+msgid "Request"
+msgstr "Հայցել"
+
+msgctxt "join request pending team button first item"
+msgid "Join"
+msgstr "Միանալ"
+
+msgctxt "join request pending team button second item"
+msgid "Requested"
+msgstr "Հայցված"
+
+msgctxt "join team button first item"
+msgid "Join"
+msgstr "Միանալ"
+
+msgctxt "join team button second item"
+msgid "Now"
+msgstr "Հիմա"
+
+msgid "View on Facebook"
+msgstr "Դիտել Facebook-ում"
+
+msgid "Group:"
+msgstr "Խումբ:"
+
+msgid "No Description set"
+msgstr "Նկարագրություն սահմանված չէ"
+
+msgid "You will now receive notifications whenever public content is posted in this project."
+msgstr "Այժմ դուք կստանաք ծանուցումներ, երբ այս նախագծում հրապարակային բովանդակություն տեղադրվի."
+
+msgid "You will now receive notifications whenever public content is posted in this group."
+msgstr "Այժմ դուք կստանաք ծանուցումներ, երբ այս խմբում հրապարակային բովանդակություն տեղադրվի."
+
+msgid "more"
+msgstr "ավելին"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Report offensive content"
+msgstr "Հաղորդել վիրավորական բովանդակության մասին"
+
+msgid "Please enter a description of why you are reporting this content!"
+msgstr "Խնդրում ենք մուտքագրել նկարագրություն, թե ինչու եք հաղորդում այս բովանդակության մասին!"
+
+msgid "(required)"
+msgstr "(պարտադիր է)"
+
+msgid "Thank you! Your report has been received and we will review the items in question as soon as possible."
+msgstr "Շնորհակալություն! Ձեր զեկույցը ստացվել է, և մենք հնարավորինս շուտ կվերանայենք հարցվող նյութերը."
+
+msgid "Send"
+msgstr "Ուղարկել"
+
+msgid "Submitting..."
+msgstr "Տեղադրվում է."
+
+msgid "Close"
+msgstr "Փակել"
+
+msgid "Avatar will be deleted once you save."
+msgstr "Պահպանելուց հետո \"Ավատարը\" կջնջվի."
+
+msgctxt "written next to optional form fields"
+msgid "optional"
+msgstr "ըստ ցանկության"
+
+msgid "Call to Action Button"
+msgstr "Գործողության կոչի կոճակ"
+
+msgid "Label of the Button"
+msgstr "Կոճակի պիտակ"
+
+msgid "Link URL"
+msgstr "URL հղում"
+
+msgid "Enter a place or address."
+msgstr "Մուտքագրեք վայրը կամ հասցեն."
+
+msgid "Choose and upload a gallery image"
+msgstr "Ընտրել և վերբեռնել պատկերասրահի պատկեր"
+
+msgid "Re-Activate Project/Group"
+msgstr "Վերաակտիվացրել նախագիծը/ խումբը"
+
+msgid "Deactivate Project/Group"
+msgstr "Ապաակտիվացնել նախագիծը/ խումբը"
+
+msgid "Deactivated Projects and Groups"
+msgstr "Դեակտիվացված նախագծեր և խմբեր"
+
+msgid "Warning!"
+msgstr "Զգուշացում!"
+
+msgid "You are about to deactivate this project/group!"
+msgstr "Դուք պատրաստվում եք ապաակտիվացնել այս նախագիծը/ խումբը!"
+
+msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
+msgstr "Դուք պատրաստվում եք նորից ակտիվացնել այս նախագիծը / խումբը: Այն և դրա ամբողջ բովանդակությունը կրկին տեսանելի կլինեն կայքում."
+
+msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr "Դուք պատրաստվում եք ապաակտիվացնել այս նախագիծը / խումբը: Այն և դրա ամբողջ բովանդակությունը անտեսանելի կլինեն կայքում."
+
+msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+msgstr "Այս գործընթացը փոխարկելի է: Կարող եք ցանկացած պահի ակտիվացնել նախագիծը / խումբը ձեր էջից."
+
+msgid "Re-Activate"
+msgstr "Վերաակտիվացնել"
+
+msgid "Deactivate"
+msgstr "Ապաակտիվացնել"
+
+#, python-format
+msgid "Delete team “%(team_name)s”"
+msgstr "Ջնջել “%(team_name)s” թիմը"
+
+msgid "Are you sure you want to delete this team?"
+msgstr "Համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս թիմը?"
+
+#, python-format
+msgid "%(team_name)s - Members"
+msgstr "%(team_name)s - Անդամներ"
+
+msgid "Invite registered users..."
+msgstr "Հրավիրել գրանցված օգտատերերի..."
+
+msgid "Invite a member"
+msgstr "Հրավիրել անդամ"
+
+msgid "Enter a user name or email to find users to invite..."
+msgstr "Մուտքագրեք օգտանուն կամ էլեկտրոնային փոստ օգտատերերին գտնելու և հրավիրելու համար."
+
+msgid "Invite users"
+msgstr "Հրավիրել օգտատերերի"
+
+msgid "Invited Members"
+msgstr "Հրավիրված անդամների"
+
+msgid "Revoke Invitation"
+msgstr "Չեղարկել հրավերը"
+
+msgid "Decline Invitation"
+msgstr "Մերժել հրավերը"
+
+msgid "Accept Invitation"
+msgstr "Ընդունել հրավերը"
+
+msgid "Invited to be a member"
+msgstr "Հրավիրված է անդամագրվելու"
+
+#, python-format
+msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgstr "Ցանկանու՞մ եք արդյոք չեղարկել անդամ „%(name)s“ -ի հրավերը?"
+
+msgid "Revoke Invitation for Member"
+msgstr "Չեղարկել հրավերը Անդամի համար"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Ցանկանու՞մ եք արդյոք մերժել հրավերը?"
+
+msgid "There are no pending invitations."
+msgstr "Առկա հրավերներ չկան."
+
+msgid "Invite unregistered users..."
+msgstr "Հրավիրել չգրանցված օգտատերերի..."
+
+msgid "Invite People to Register and Join"
+msgstr "Հրավիրել մարդկանց գրանցվելու և միանալու"
+
+msgid "Invite people"
+msgstr "Հրավիրել մարդկանց"
+
+msgid "The email was added to the invite list. Click \"Invite people\" to resend the invitations!"
+msgstr "Էլ. հասցեն ավելացվել է հրավերների ցուցակում: Սեղմեք «Հրավիրել մարդկանց» կոճակը `նորից հրավերներ ուղարկելու համար!"
+
+msgid "All currently invited people"
+msgstr "Բոլոր ներկայումս հրավիրված մարդիկ"
+
+msgid "People currently invited by you"
+msgstr "Ներկայումս Ձեր կողմից հրավիրված մարդիկ"
+
+msgid "Delete invitation"
+msgstr "Ջնջել հրավերը"
+
+msgid "Resend invitation"
+msgstr "Նորից ուղարկել հրավերը"
+
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr "- ի կողմից"
+
+#, python-format
+msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgstr "Ցանկանու՞մ եք արդյոք մերժել հրավերը \"%(title)s\" -ի համար?"
+
+msgid "Membership requests"
+msgstr "Անդամակցության հայտեր"
+
+msgid "Decline User"
+msgstr "Մերժել օգտատիրոջը"
+
+msgid "Accept User"
+msgstr "Ընդունել օգտատիրոջը"
+
+msgid "Membership requested"
+msgstr "Անդամակցությունը հայցված է"
+
+#, python-format
+msgid "Do you really want to accept user „%(name)s“ as a member?"
+msgstr "Ցանկանու՞մ եք արդյոք ընդունել „%(name)s“ -ին որպես անդամ?"
+
+msgid "Accept Member"
+msgstr "Ընդունել Անդամ"
+
+#, python-format
+msgid "Do you really want to decline member „%(name)s“?"
+msgstr "Ցանկանու՞մ եք արդյոք մերժել անդամ „%(name)s“ -ին?"
+
+msgid "Decline Member"
+msgstr "Մերժել անդամին"
+
+msgid "There are no new membership requests."
+msgstr "Անդամակցության նոր հայտեր չկան."
+
+msgid "Current Members"
+msgstr "Ներկայիս անդամները"
+
+msgid "Message all members"
+msgstr "Հաղորդագրություն ուղարկել բոլոր անդամներին"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Ուղարկել հաղորդագրությունը"
+
+msgid "Admin"
+msgstr "Ադմինիստրատոր"
+
+msgid "Member"
+msgstr "Անդամ"
+
+msgid "Kick"
+msgstr "Kick"
+
+msgid "Make Member"
+msgstr "Դարձնել Անդամ"
+
+msgid "Make Admin"
+msgstr "Դարձնել Ադմինիստրատոր"
+
+#, python-format
+msgid "Do you really want to demote administrator „%(name)s“ to member?"
+msgstr "Ցանկանու՞մ եք արդյոք „%(name)s“ ադմինիստրատորին սարգել անդամ?"
+
+msgid "Demote Admin"
+msgstr "Կարգազրկել ադմինիստրատորին"
+
+#, python-format
+msgid "Do you really want to promote member „%(name)s“ to administrator?"
+msgstr "Ցանկանու՞մ եք արդյոք „%(name)s“ անդամին սարգել ադմինիստրատոր?"
+
+msgid "Promote Member"
+msgstr "Կոչում տալ Անդամին"
+
+#, python-format
+msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgstr "Ցանկանու՞մ եք արդյոք „%(name)s“ անդամին ջնջել թիմից?"
+
+msgid "Remove Member"
+msgstr "Ջնջել Անդամին"
+
+#, python-format
+msgid "And %(hidden_count)s private users..."
+msgstr "Եվ %(hidden_count)s մասնավոր օգտատերեր..."
+
+#, python-format
+msgid "Show all of the other %(more_count)s users..."
+msgstr "Ցուցադրել մնացած բոլոր %(more_count)s օգտատերերին..."
+
+#, python-format
+msgid "Export Team “%(team_name)s”"
+msgstr "Արտահանել “%(team_name)s” թիմը"
+
+#, python-format
+msgid "Export %(app_label)s"
+msgstr "Արտահանում %(app_label)s"
+
+msgctxt "the verb"
+msgid "Export"
+msgstr "Արտահանել"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "Խմբագրել “%(team_name)s”"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Group"
+msgstr "Ստեղծել Խումբ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Project"
+msgstr "Ստեղծել Նախագիծ"
+
+msgid "Help about groups"
+msgstr "Օգնություն խմբերի մասին"
+
+msgid "Help about projects"
+msgstr "Օգնություն նախագծերի մասին"
+
+msgid "Help about the microsite"
+msgstr "Օգնություն միկրոկայքի մասին"
+
+msgid "Edit Group"
+msgstr "Խմբագրել խումբը"
+
+msgid "Edit Project"
+msgstr "Խմբագրել նախագիծը"
+
+msgid "Let's bring this idea to life!"
+msgstr "Եկեք կյանքի կոչենք այս գաղափարը!"
+
+#, python-format
+msgid "Great to see you're creating a project from the idea \"%(idea_name)s\"!"
+msgstr "Հիանալի է տեսնել, որ դուք նախագիծ եք ստեղծում \"%(idea_name)s\" գաղափարից!"
+
+msgid "Once you have created your project, everyone who liked (and followed) the idea will receive a notification! They can then jump in and become a member of your new project. Don't worry - you still have to approve who may join and who can't when they request a membership."
+msgstr "Ձեր նախագիծը ստեղծելուց հետո բոլոր նրանք, ովքեր հավանել (և հետևել) էին գաղափարն, կստանան ծանուցում: Դրանից հետո նրանք կարող են մտնել և դառնալ ձեր նոր նախագծի անդամ: Մի անհանգստացեք - անդամակցություն հայցելիս, դուք դեռ պետք է հաստատեք, թե ով կարող է միանալ, իսկ ով ոչ."
+
+msgid "Your new project will also be displayed on the idea itself, so that everyone can see it and join in later on."
+msgstr "Ձեր նոր նախագիծը նույնպես կցուցադրվի գաղափարի հետ, որպեսզի յուրաքանչյուրը կարողանա տեսնել այն և միանալ հետագայում."
+
+msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
+msgstr "Իհարկե, դուք կարող եք նաև ստեղծել նախագիծ ՝ գաղափարին չկապակցված, դա անելու համար պարզապես սեղմեք ձախ կողմում գտնվող «Ստեղծել նախագիծ» կոճակը."
+
+msgid "General"
+msgstr "Ընդհանուր"
+
+msgid "Facebook-Integration"
+msgstr "Facebook-ինտեգրացիա"
+
+msgid "Group name"
+msgstr "Խմբի անվանում"
+
+msgid "Project name"
+msgstr "Նախագծի անվանում"
+
+msgid "Enter a name for the group."
+msgstr "Մուտքագրեք անուն խմբի համար."
+
+msgid "Enter a name for the project."
+msgstr "Մուտքագրեք անուն նախագծի համար."
+
+msgid "Short description"
+msgstr "Կարճ նկարագրություն"
+
+msgid "Describe the group in a few sentences."
+msgstr "Նկարագրեք խումբը մի քանի նախադասությամբ."
+
+msgid "Describe the project in a few sentences."
+msgstr "Նկարագրեք նախագիծը մի քանի նախադասությամբ."
+
+msgid "This description will be publicly visible."
+msgstr "Այս նկարագրությունը հրապարակայնորեն տեսանելի կլինի."
+
+msgid "A picture for better recognition."
+msgstr "Պատկեր `ավելի լավ ճանաչման համար."
+
+msgid "File Size"
+msgstr "Ֆայլի չափսը"
+
+msgid "max. 10 MB"
+msgstr "max. 10 MB"
+
+msgid "Upload an image."
+msgstr "Վերբեռնել պատկեր."
+
+msgid "Reset"
+msgstr "Վերակայել"
+
+msgid "Example: http://mywebsite.com"
+msgstr "Օրինակ։ http://mywebsite.com"
+
+msgid "Where are you active?"
+msgstr "Որտե՞ղ եք ակտիվ?"
+
+msgid "Remove location"
+msgstr "Հեռացնել գտնվելու վայրը"
+
+msgid "Add location"
+msgstr "Ավելացնել գտնվելու վայրը"
+
+msgid "Which Group does the group belong to?"
+msgstr "Ո՞ր խմբին է պատկանում այս խումբը?"
+
+msgid "Select Group"
+msgstr "Ընտրել խումբ"
+
+msgid "Are there any projects/groups related to this one?"
+msgstr "Կա՞ն նախագծեր/խմբեր, որոնք կապված են այս ծրագրի հետ?"
+
+msgid "Select related Projects/Groups"
+msgstr "Ընտրել նմանատիպ Ծրագրեր / Խմբեր"
+
+msgid "Privacy settings"
+msgstr "Գաղտնիության կարգավորումներ"
+
+msgid "This will be the default setting for all content created by members."
+msgstr "Սա կլինի սկզբնական կարգավորում ՝ անդամների կողմից ստեղծված բոլոր բովանդակությունների համար."
+
+msgid "This group will be set to be publicly visible!"
+msgstr "Այս խումբը հրապարակայնորեն տեսանելի կլինի!"
+
+msgid "This project will be set to be publicly visible!"
+msgstr "Այս նախագիծը հրապարակայնորեն տեսանելի կլինի!"
+
+msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
+msgstr "Սա նշանակում է, որ ցանկացած գրանցված օգտատեր կարող է մուտք գործել և տեսնել այն, թեպետ միայն անդամները կարող են ստեղծել բովանդակություն: Բացի այդ, ամբողջ բովանդակությունը հանրայնորեն տեսանելի կլինի ըստ սկզբնական կարգավորման (սա կարող է փոփոխվել ստեղծվող յուրաքանչյուր նյութի համար): Հանրային տեսանելի բովանդակությունը կարող է դիտել ցանկացած մարդ ինտերնետում և հնարավոր է, որ այն ընդգրկվի որոնման արդյունքների մեջ!"
+
+msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!"
+msgstr "Որպես խմբի կամ նախագծի ադմինիստրատոր, ձեր պարտականությունն է ապահովել, որ իր անդամների կողմից տեղադրված բովանդակությունը չխախտի որևէ հեղինակային իրավունք կամ այլ օրենքներ: Խնդրում ենք հաշվի առնել սա, մանավանդ հանրային տեսանելիության կարգավորումն ակտիվացնելիս!"
+
+msgid "If you do not wish this, you can change the visibility setting above."
+msgstr "Եթե դուք դա չեք ցանկանում, կարող եք փոխել տեսանելիության կարգավորումը վերևում."
+
+msgid "Which apps should be activated?"
+msgstr "Ո՞ր հավելվածները պետք է ակտիվացվեն?"
+
+msgid "This App can only be activated for a Group, but not for a Project!"
+msgstr "Այս Հավելվածը կարող է ակտիվացվել միայն Խմբի համար, բայց ոչ Նախագծի համար!"
+
+msgid "Description and Infos"
+msgstr "Նկարագրություն և տեղեկություն"
+
+msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
+msgstr "Սա հանրային նկարագրություն է, որը կարող է տեսնել յուրաքանչյուր մարդ և այն կցուցադրվի միկրոկայքում."
+
+msgid "Contact info"
+msgstr "Կոնտակտային տվյալներ"
+
+msgid "How you can be reached, addresses, social media, etc..."
+msgstr "Ինչպե՞ս է հնարավոր Ձեզ հետ կապ հաստատել՝ հասցեներ, սոցիալական կայքեր և այլն."
+
+msgid "From which apps should public items be shown on the microsite?"
+msgstr "Ո՞ր հավելվածներից պետք է հանրային նյութերը ցուցադրվեն միկրոկայքում?"
+
+msgid "Video"
+msgstr "Տեսանյութ"
+
+msgid "Youtube or Vimeo URL"
+msgstr "Youtube կամ Vimeo URL"
+
+msgid "https://www.youtube.com/watch?v=example-video"
+msgstr "https://www.youtube.com/watch?v=example-video"
+
+msgid "Twitter: Embedded User Timeline"
+msgstr "Twitter: Ներկառուցված Օգտատիրոջ Ժամանակասանդղակ"
+
+msgid "Twitter Username (example: @username)"
+msgstr "Twitter Օգտանունը (օրինակ: @username)"
+
+msgid "Twitter: Embedded Hashtag or Custom Timeline"
+msgstr "Twitter: Ներկառուցված Hashtag կամ Փոփոխվող Ժամանակասանդղակ"
+
+msgid "You can create a custom twitter timeline here:"
+msgstr "Այստեղ դուք կարող եք ստեղծել twitter -ի ձեր իսկ ժամանակասանդղակը:"
+
+msgid "Widget-id (example: 744907261810618721) or embed-code (HTML)"
+msgstr "Վիդջեթ-id (օրինակ: 744907261810618721) կամ ներկառուցված կոդ (HTML)"
+
+msgid "Embed Flickr Gallery"
+msgstr "Տեղադրել Flickr պատկերասրահ"
+
+msgid "Flickr Gallery URL (example: \"https://www.flickr.com/photos/username/sets/1234567890\")"
+msgstr "Flickr պատկերասրահի URL (օրինակ: \"https://www.flickr.com/photos/username/sets/1234567890\")"
+
+msgid "Microsite Gallery Images"
+msgstr "Միկրոկայքի պատկերասրահի նկարներ"
+
+msgid "Remove gallery image"
+msgstr "Հեռացնել պատկերասրահի նկարը"
+
+msgid "Add gallery image"
+msgstr "Ավելացնել պատկերասրահի նկարներ"
+
+msgid "Show Microsite Call to Action Box"
+msgstr "Ցուցադրել Միկրոկայքի գործողության կանչի արկղը"
+
+msgid "A box shown on the microsite that contains buttons to your external campaigns or websites"
+msgstr "Արկղը ցուցադրված է միկրոկայքում, որը պարունակում է արտաքին կամպանիաներ կամ կայքեր"
+
+msgid "Show Call to Action Box"
+msgstr "Ցուցադրել գործողությունների կանչի արկղը"
+
+msgid "Call to Action Box Title"
+msgstr "Գործողության կանչի արկղի վերնագիր"
+
+msgid "Title of the box header"
+msgstr "Արկղի վերնամասի վերնագիր"
+
+msgid "Description text inside the box"
+msgstr "Նկարագրության տեքստը արկղի մեջ"
+
+msgid "Remove button"
+msgstr "Հեռացնել կոճակը"
+
+msgid "Add button"
+msgstr "Ավելացնել կոճակ"
+
+msgid "Facebook integration is available after you created the group!"
+msgstr "Facebook- ի ինտեգրումն հնարավոր է միայն խումբը ստեղծելուց հետո!"
+
+msgid "Facebook integration is available after you created the project!"
+msgstr "Facebook- ի ինտեգրումն հնարավոր է միայն նախագիծը ստեղծելուց հետո!"
+
+msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
+msgstr ""
+
+msgid "You may use the following variables:"
+msgstr "Կարող եք օգտագործել հետևյալ փոփոխականները:"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Հրավերներ"
+
+msgid "About me"
+msgstr "Իմ մասին"
+
+msgid "Related to"
+msgstr "Կապված"
+
+msgid "Your Profile"
+msgstr "Քո պրոֆիլը"
+
+msgid "Overview"
+msgstr "Ակնարկ"
+
+msgid "To the Forum"
+msgstr "Ֆորումին"
+
+msgctxt "Group"
+msgid "Public"
+msgstr "Հանրային"
+
+msgid "Not a member"
+msgstr "Անդամ չէ"
+
+msgid "(Inactive)"
+msgstr "(Ոչ ակտիվ)"
+
+msgid "Leave"
+msgstr "Լքել"
+
+msgid "Withdraw"
+msgstr "Հեռացնել"
+
+msgid "Details"
+msgstr "Մանրամասներ"
+
+#, python-format
+msgid "Do you really want to leave „%(title)s“?"
+msgstr "Արդյո՞ք ցանկանում եք լքել „%(title)s“-ը?"
+
+msgid "There are no groups."
+msgstr "Խմբեր չկան."
+
+msgid "There are no projects."
+msgstr "Նախագծեր չկան."
+
+msgid "There are no invitations."
+msgstr "Հրավերներ չկան."
+
+msgid "Map"
+msgstr "Քարտեզ"
+
+msgid "Not happy with how your Microsite looks?"
+msgstr "Ձեզ դուր չի՞ գալիս թե ինչ տեսք ունի ձեր Միկրոկայքի էջը?"
+
+msgid "Change it here..."
+msgstr "Փոխել այն այստեղ ..."
+
+msgid "You have been invited to collaborate!"
+msgstr "Ձե՜զ հրավիրվել են համագործակցության!"
+
+msgid "Register and join!"
+msgstr "Գրանցվեք և միացեք!"
+
+msgid "Join now and collaborate!"
+msgstr "Միացեք հիմա և համագործակցեք!"
+
+msgid "Register"
+msgstr "Գրանցվել"
+
+msgid "Log in"
+msgstr "Մուտք գործել"
+
+msgid "You are a member!"
+msgstr "Դուք անդամ եք!"
+
+msgid "View Project"
+msgstr "Դիտել նախագիծը"
+
+msgid "View Group"
+msgstr "Դիտել խումբը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership request pending..."
+msgstr "Անդամակցության հարցումը սպասման մեջ է ..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are invited!"
+msgstr "Դուք հրավիրված եք!"
+
+msgid "Collaborate!"
+msgstr "Համագործակցեք!"
+
+msgid "Join now!"
+msgstr "Միացիր հիմա!"
+
+msgid "Browse"
+msgstr "Դիտել"
+
+msgid "Public Project"
+msgstr "Հասարակական Նախագիծ"
+
+msgid "Public Group"
+msgstr "Հասարակական Խումբ"
+
+msgid "News posts"
+msgstr "Նորությունների հաղորդագրություններ"
+
+msgid "About the Project"
+msgstr "Նախագծի մասին"
+
+msgid "About the Group"
+msgstr "Խմբի մասին"
+
+msgid "There is no description for this project yet."
+msgstr "Այս նախագծի համար դեռ նկարագրություն չկա."
+
+msgid "There is no description for this group yet."
+msgstr "Այս խմբի համար դեռ նկարագրություն չկա."
+
+msgid "Related Projects/Groups"
+msgstr "Առնչվող նախագծեր / խմբեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications for content posted in this project."
+msgstr "Այժմ դուք կստանաք ծանուցումներ այս նախագծում տեղադրված բովանդակության համար."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications for content posted in this group."
+msgstr "Այժմ դուք կստանաք ծանուցումներ այս խմբում տեղադրված բովանդակության համար."
+
+msgid "Share"
+msgstr "Կիսվել"
+
+msgid "Share on Facebook"
+msgstr "Կիսվել Facebook -ում"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact"
+msgstr "Կապ"
+
+msgid "No contact data has been added yet."
+msgstr "Կոնտակտային տվյալներ դեռ չեն ավելացվել."
+
+msgid "Project Administrator"
+msgstr "Նախագցի ադմինիստրատոր"
+
+msgid "Group Administrator"
+msgstr "Խմբի ադմինիստրատոր"
+
+msgid "Tweets"
+msgstr "Tweets"
+
+msgid "Flickr Gallery"
+msgstr "Flickr պատկերասրահ"
+
+msgid "Call to Action"
+msgstr "Գործողության կոչ"
+
+#, python-format
+msgid "Users in team %(group)s"
+msgstr "%(group)s թմի օգտատերեր"
+
+msgid "Add user"
+msgstr "Ավելացնել օգտատեր"
+
+msgid "There are no visible users."
+msgstr "Տեսանելի օգտատերեր չկան."
+
+msgid "All projects"
+msgstr "Բոլոր նախագծերը"
+
+msgid "All groups"
+msgstr "Բոլոր խմբերը"
+
+msgid "All users"
+msgstr "Բոլոր օգտատերերը"
+
+msgid "Portal Administrators"
+msgstr "Պորտալի Ադմինիստրատորներ"
+
+msgid "All societies"
+msgstr "Բոլոր հասարակությունները"
+
+msgid "Re-activate Group"
+msgstr "Վերաակտիվացնել Խումբը"
+
+msgid "Deactivate Group"
+msgstr "Ապաակտիվացնել Խումբը"
+
+msgid "Activate Project"
+msgstr "Ակտիվացնել նախագիծը"
+
+msgid "Deactivate Project"
+msgstr "Ապաակտիվացնել նախագիծը"
+
+msgid "Withdraw Request"
+msgstr "Հանել Հայցը"
+
+msgid "Add container"
+msgstr "Ավելացնել կոնտեյներ"
+
+msgid "Add"
+msgstr "Ավելացնել"
+
+msgid "Move to another Folder"
+msgstr "Տեղափոխել այլ թղթապանակ"
+
+msgid "Move"
+msgstr "Տեղափոխել"
+
+#, python-format
+msgid "A message from %(sender_full_name)s"
+msgstr "Նամակ %(sender_full_name)s -ից"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Idea"
+msgstr "Ստեղծել գաղափար"
+
+msgid "Delete this idea"
+msgstr "Ջնջել այս գաղափարը"
+
+#, python-format
+msgid "Do you really want to delete idea „%(title)s“?"
+msgstr "Ցանկանու՞մ եք ջնջել „%(title)s“ գաղափարը?"
+
+msgid "Delete Idea"
+msgstr "Ջնջել գաղափարը"
+
+msgid "Edit Idea"
+msgstr "Խմբագրել գաղափարը"
+
+msgid "We make your ideas heard!"
+msgstr "Մենք օգնում ենք լսելի դարձնել ձեր գաղափարները!"
+
+msgid "Ideas are a great way to inspire poeple and start a project in your region!"
+msgstr "Գաղափարները հիանալի միջոց են մարդկանց ներշնչելու և ձեր տարածաշրջանում նախագիծ սկսելու համար!"
+
+msgid "Anyone can create a project based on your idea and there is no limit on how many projects can be created. Your idea will remain visible and will even show a list of all the projects inspired by it!"
+msgstr "Յուրաքանչյուրը կարող է ստեղծել նախագիծ ՝ հիմնվելով ձեր գաղափարի վրա, և լիմիտ չկա, թե քանի նախագիծ կարող է ստեղծվել: Ձեր գաղափարը կմնա տեսանելի և նույնիսկ կցուցադրի բոլոր այն նախագծերի ցանկը, որոնք ներշնչված են դրանով!"
+
+msgid "You and anyone who like (and follow) your idea will be notified when a new project gets created from it. This way, everyone who is interested can jump right into it and become active in the new project (they still have to ask permission to become a member)."
+msgstr "Դուք և յուրաքանչյուր ոք, ով հավանել է (և հետևում է) ձեր գաղափարին, կտեղեկացվեն, երբ դրանից ստեղծվի նոր նախագիծ: Այս կերպ բոլոր ցանկացողները կարող են տեսնել և ակտիվորեն ներգրավվել նոր նախագծում (նրանք դեռ պետք է անդամագրվելու թույլտվություն հայցեն)."
+
+msgid "Enter a descriptive title for your idea"
+msgstr "Մուտքագրեք նկարագրական վերնագիր ձեր գաղափարի համար"
+
+msgid "The description for your idea. Explain your vision and your goals."
+msgstr "Ձեր գաղափարի նկարագրությունը: Բացատրեք ձեր տեսլականը և ձեր նպատակները."
+
+msgid "We could not find an address for your location. Please enter an address manually!"
+msgstr "Մենք չկարողացանք գտնել ձեր գտնվելու վայրի հասցեն: Խնդրում ենք մուտքագրել հասցեն!"
+
+msgid "This will determine who can see your idea."
+msgstr "Սա կորոշի, թե ով կարող է տեսնել ձեր գաղափարը."
+
+msgid "This idea will be set to be publicly visible!"
+msgstr "Այս գաղափարը նախատեսվում է դարձնել հանրայինորեն տեսանելի!"
+
+msgid "Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
+msgstr "Հանրային տեսանելի բովանդակությունը ցանկացած ոք կարող է դիտել ինտերնետում և հնարավոր է, որ այն ընդգրկվի որոնման արդյունքների մեջ!"
+
+msgid "Registered users only"
+msgstr "Միայն գրանցված օգտատերերը"
+
+msgid "Edit folder"
+msgstr "Խմբագրել թղթապանակը"
+
+msgid "Folder name"
+msgstr "Թղթապանակի անունը"
+
+msgid "Delete folder"
+msgstr "Ջնջել թղթապանակը"
+
+msgid "Download"
+msgstr "Ներբեռնել"
+
+msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
+msgstr "Ցանկանու՞մ եք ջնջել այս թղթապանակը և իր մեջ պարունակվող բոլոր պանակներն ու նյութերը: Այս գործողությունները հնարավոր ՉԷ հակադարձել!"
+
+msgid "Gesendet"
+msgstr "Gesendet"
+
+msgid "Archiv"
+msgstr "Archiv"
+
+msgid "Papierkorb"
+msgstr "Papierkorb"
+
+msgid "Verfassen"
+msgstr "Verfassen"
+
+msgid "Back"
+msgstr "Հետ"
+
+msgid "Back to"
+msgstr "Հետ դեպի"
+
+msgid "New folder name"
+msgstr "Թղթապանակի նոր անունը"
+
+msgid "Create folder"
+msgstr "Ստեղծել թղթապանակ"
+
+#, python-format
+msgid ""
+"%(site_name)s CSV import failed!\n"
+"\n"
+"Here is a summary: %(msg)s"
+msgstr ""
+"CSV- ի ներմուծումը %(site_name)s ձախողվեց.\n"
+"\n"
+"Ահա ամփոփումը: %(msg)s"
+
+#, python-format
+msgid ""
+"The CSV import on %(site_name)s failed.\n"
+"\n"
+"Here is why: %(msg)s"
+msgstr ""
+"CSV- ի ներմուծումը %(site_name)s ձախողվեց.\n"
+"\n"
+"Ահա թե ինչու: %(msg)s"
+
+#, python-format
+msgid ""
+"The CSV import on %(site_name)s was successful.\n"
+"\n"
+"Here is a summary: %(msg)s"
+msgstr ""
+"CSV- ի ներմուծումը %(site_name)s հաջողվեց.\n"
+"\n"
+"Ահա ամփոփումը: %(msg)s"
+
+#, python-format
+msgid "%(site_name)s CSV import was successful"
+msgstr "%(site_name)s CSV ներմուծումը հաջողվեց"
+
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has reported the item \"%(object_name)s\" to be offensive.\n"
+"\n"
+"The reason, as written by the reporter:\n"
+"\"%(report_text)s\"\n"
+"\n"
+"\n"
+"You can view the item in question here:\n"
+"%(object_url)s\n"
+"\n"
+"Please go to the following page to respond to the report:\n"
+"%(domain_url)s%(report_admin_url)s\n"
+"\n"
+"\n"
+"(You're receiving this email because you are an administrator of this portal.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"\"%(sender_name)s\" օգտատերը հայտնել է վիրավորական նյութի \"%(object_name)s\" մասին.\n"
+"\n"
+"Պատճառը, ինչպես գրել է զեկուցողը՝\n"
+"\"%(report_text)s\"\n"
+"\n"
+"\n"
+"Դուք կարող եք դիտել հայցվող նյութը այստեղ։\n"
+"%(object_url)s\n"
+"\n"
+"Խնդրում ենք անցնել հետևյալ էջ ՝ զեկույցին պատասխանելու համար:\n"
+"%(domain_url)s%(report_admin_url)s\n"
+"\n"
+"\n"
+"(Դուք ստանում եք այս էլ. նամակը, քանի որ այս պորտալի ադմինիստրատորն եք):\n"
+"\n"
+"\n"
+"Ձեր %(site_name)s թիմ"
+
+#, python-format
+msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
+msgstr "Հաղորդվել է վիրավորական նյութի մասին՝ \"%(object_name)s\" %(site_name)s -ում!"
+
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"you have just registered an account at %(site_name)s. We're happy to see you!\n"
+"\n"
+"You will need to verify your email %(user_email)s before you can log in. \n"
+"\n"
+"\n"
+"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
+"\n"
+"\n"
+"\n"
+"Thank you and see you soon!\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"Ողջույն %(user_name)s,\n"
+"\n"
+"դուք գրանցվեցիք %(site_name)s -ում. Ուրախ ենք Ձեզ տեսնել!\n"
+"\n"
+"Դուք պետք է հաստատեք Ձեր էլ․հասցեն %(user_email)s նախքան կկարողանաք մուտք գործել։ \n"
+"\n"
+"\n"
+"Ձեր էլ.փոստի հասցեն հաստատելու համար անցեք հետևյալ հղումով (կամ բացեք այն ձեր բրաուզերում):\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
+"\n"
+"\n"
+"\n"
+"Շնորհակալություն, մինչ հանդիպում։\n"
+"\n"
+"Ձեր %(site_name)s թիմ"
+
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"you have just changed your email address at %(site_name)s.\n"
+"\n"
+"You will need to verify your email %(user_email)s before the changes take effect. \n"
+"\n"
+"\n"
+"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+"%(domain_url)s%(user_verification_url)s\n"
+"\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"Ողջույն %(user_name)s,\n"
+"\n"
+"Դուք փոխեցիք ձեր էլ․ հասցեն %(site_name)s -ում.\n"
+"\n"
+"Փոփոխությունները ուժի մեջ մտնելուց առաջ անհրաժեշտ կլինի հաստատել ձեր էլ. հասցեն %(user_email)s: \n"
+"\n"
+"\n"
+"Ձեր էլ.փոստի հասցեն հաստատելու համար անցեք հետևյալ հղումով (կամ բացեք այն ձեր բրաուզերում):\n"
+"%(domain_url)s%(user_verification_url)s\n"
+"\n"
+"\n"
+"\n"
+"Ձեր %(site_name)s թիմ"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
+
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has accepted the invitation to join \"%(team_name)s\".\n"
+"\n"
+"You're receiving this email because you are an administrator of this team.\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"\"%(sender_name)s\" օգտատերը ընդունել է \"%(team_name)s\" -ին միանալու հրավերը.\n"
+"\n"
+"Դուք ստանում եք այս էլ. նամակը, քանի որ այս թիմի ադմինիստրատորն եք.\n"
+"\n"
+"(Անցեք այս հղումով ՝ ձեր ծանուցման նախապատվությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Ձեր %(site_name)s թիմ"
+
+#, python-format
+msgid "%(sender_name)s has accepted the invitation to %(team_name)s on %(site_name)s!"
+msgstr "%(sender_name)s -ը ընդունել է %(team_name)s -ին %(site_name)s -ում միանալու հրավերը!"
+
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has declined the invitation to join \"%(team_name)s\".\n"
+"\n"
+"You're receiving this email because you are an administrator of this team.\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"\"%(sender_name)s\" օգտատերը մերժել է \"%(team_name)s\" -ին միանալու հրավերը.\n"
+"\n"
+"Դուք ստանում եք այս էլ. նամակը, քանի որ այս թիմի ադմինիստրատորն եք.\n"
+"\n"
+"(Անցեք այս հղումով ՝ ձեր ծանուցման նախապատվությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Ձեր %(site_name)s թիմ"
+
+#, python-format
+msgid "%(sender_name)s has declined the invitation to %(team_name)s on %(site_name)s!"
+msgstr "%(sender_name)s մերժել է հրավերը %(team_name)s %(site_name)s -ում!"
+
+#, python-format
+msgid ""
+"Hi, %(user_name)s!\n"
+"\n"
+"\n"
+"You have been invited to join \"%(team_name)s\"! Follow the link below to join and get active!"
+msgstr ""
+"Ողջույն, %(user_name)s!\n"
+"\n"
+"\n"
+"Ձեզ հրավիրվել են միանալ \"%(team_name)s\" -ին: Անցեք հետևյալ հղումով `միանալու և ակտիվանալու համար!"
+
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "%(site_name)s թիմը"
+
+#, python-format
+msgid ""
+"Hi, %(user_name)s!\n"
+"\n"
+"Your membership request for %(team_name)s has been accepted!"
+msgstr ""
+"Ողջույն, %(user_name)s!\n"
+"\n"
+"Ձեր անդամության հարցումը %(team_name)s- ին ընդունվել է!"
+
+msgid "Follow this link to get active:"
+msgstr "Ակտիվանալու համար անցեք հետևյալ հղումով:"
+
+#, python-format
+msgid ""
+"Hi, %(user_name)s!\n"
+"\n"
+"We're sorry, but your membership request for %(team_name)s has been declined."
+msgstr ""
+"Ողջույն, %(user_name)s!\n"
+"\n"
+"Ներեցեք, բայց ձեր անդամության հարցումը %(team_name)s- ին մերժվել է."
+
+msgid "If you feel this is unfair, we suggest you contact one of the team's administrators for further information:"
+msgstr "Եթե կարծում եք, որ դա անարդար է, մենք առաջարկում ենք կապվել թիմի ադմինիստրատորներից մեկի հետ `լրացուցիչ տեղեկությունների համար:"
+
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has requested to join %(team_name)s.\n"
+"\n"
+"Please go to the following page to accept or decline the request:\n"
+"%(domain_url)s%(group_page_url)s\n"
+"\n"
+"You're receiving this email because you are an administrator of this team.\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"\"%(sender_name)s\" օգտատերը հարցում է ուղարկել միանալ %(team_name)s -ին.\n"
+"\n"
+"Խնդրում ենք անցնել հետևյալ էջ՝ հարցումն ընդունել կամ մերժելու համար:\n"
+"%(domain_url)s%(group_page_url)s\n"
+"\n"
+"Դուք ստանում եք այս էլ. նամակը, քանի որ թիմի ադմինիստրատորն եք.\n"
+"\n"
+"(Անցեք այս հղումով ՝ ձեր ծանուցման նախապատվությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Ձեր %(site_name)s թիմ"
+
+#, python-format
+msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+msgstr "%(sender_name)s - ը ցանկանում է միանալ %(team_name)s %(site_name)s-ին!"
+
+#, python-format
+msgid ""
+"User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
+"\n"
+"The user won't be able to log in until you (or another Portal-Admin) approves of his request.\n"
+"\n"
+"If you wish to approve the user's join request click the following link:\n"
+"%(domain_url)s%(user_approve_url)s\n"
+"\n"
+"\n"
+"Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
+"\n"
+"\n"
+"You're receiving this email because you are a portal-administrator.\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"\"%(user_name)s\" (%(user_mail)s) օգտատերը հարցում է ուղարկել միանալ %(site_name)s -ին.\n"
+"\n"
+"Օգտատերը չի կարողանա մուտք գործել այնքան ժամանակ, մինչև դուք (կամ մեկ այլ պորտալ-ադմինիստրատոր) հաստատեք նրա հարցումը:\n"
+"\n"
+"Եթե ցանկանում եք հաստատել օգտատիրոջ միանալու հարցումը, սեղմեք հետևյալ հղմանը:\n"
+"%(domain_url)s%(user_approve_url)s\n"
+"\n"
+"\n"
+"Սեղմեք այստեղ հարցումը մերժելու համար: %(domain_url)s%(user_deny_url)s\n"
+"\n"
+"\n"
+"Դուք ստանում եք այս էլ. նամակը, քանի որ պորտալ-ադմինիստրատորն եք.\n"
+"\n"
+"\n"
+"Ձեր %(site_name)s թիմ"
+
+#, python-format
+msgid "New user request: %(user_name)s wants to join %(site_name)s!"
+msgstr "Նոր օգտատիրոջ հարցում. %(user_name)s -ը ցանկանում է միանալ %(site_name)s- ին!"
+
+#, python-format
+msgid ""
+"Hello, %(user_name)s! \n"
+"\n"
+"Welcome to %(site_name)s! Your user account was approved.\n"
+"\n"
+"You can now log in at %(domain_url)s.\n"
+"\n"
+"\n"
+"Best regards,\n"
+"\n"
+"the %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "Your request to join %(site_name)s was approved!"
+msgstr "%(site_name)s- ին միանալու ձեր հայցը հաստատվել է!"
+
+#, python-format
+msgid ""
+"Your request to become a member of %(site_name)s was denied.\n"
+"\n"
+"If you have any questions, please contact one of your site administrators, as listed below.\n"
+"\n"
+"Your %(site_name)s Team:"
+msgstr ""
+"%(site_name)s- ին միանալու ձեր հայցը մերժվել է:\n"
+"\n"
+"Հարցերի դեպքում դիմեք ձեր կայքի ադմինիստրատորներից որևէ մեկին, ինչպես նշված է ստորև.\n"
+"\n"
+"Ձեր %(site_name)s թիմ:"
+
+#, python-format
+msgid "Your request to join %(site_name)s was denied."
+msgstr "%(site_name)s- ին միանալու ձեր հայցը մերժվել է."
+
+#, python-format
+msgid ""
+"Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+"\n"
+"Out administrators will review your request and approve your user account soon!\n"
+"\n"
+"Until then, with warm greetings, \n"
+"your %(site_name)s Team"
+msgstr ""
+"Ողջույն! Մենք ուրախ ենք, որ ցանկանում եք %(site_name)s -ի անդամ դառնալ. \n"
+"\n"
+"Մեր ադմինիստրատորները շուտով կվերանայեն ձեր հայցը և կհաստատեն ձեր օգտատիրոջ անձնական էջը։\n"
+"\n"
+"Մինչ այդ ՝ ջերմ ողջույններով, \n"
+"Ձեր %(site_name)s թիմ"
+
+#, python-format
+msgid "You have requested to become a member of %(site_name)s!"
+msgstr "Դուք %(site_name)s-ին անդամակցելու հայց եք ուղարկել!"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"you were tagged in \"%(object_name)s\" in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Ողջու՜յն %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s-ը նշել է ձեզ \"%(object_name)s\"-ում %(team_name)s -ում։ \n"
+"\n"
+"Դուք կարող եք տեսմել դա ՝ անցնելով հետևալ հղումով: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Անցեք այս հղումով ՝ ձեր ծանուցման նախասիրությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"Ձեր %(site_name)s թիմ."
+
+#, python-format
+msgid "You were tagged in: \"%(object_name)s\", in %(team_name)s"
+msgstr "Ձեզ նշել են \"%(object_name)s\" -ում %(team_name)s-ում"
+
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"you have just accepted the Terms of Services at %(site_name)s. Here is a copy for your records.\n"
+"\n"
+"\n"
+"%(tos_content)s\n"
+"\n"
+"\n"
+"Your %(site_name)s Team \n"
+"\n"
+"%(domain_url)s"
+msgstr ""
+"Ողջու՜յն %(user_name)s,\n"
+"\n"
+"դուք ընդունել եք %(site_name)s էջի Ծառայությունների պայմանները: Ահա ձեր գրառումների պատճենը։\n"
+"\n"
+"\n"
+"%(tos_content)s\n"
+"\n"
+"\n"
+"Ձեր %(site_name)s թիմ\n"
+"\n"
+"%(domain_url)s"
+
+msgid "Additional options"
+msgstr "Լրացուցիչ տարբերակներ"
+
+msgid "Attach files, add a location, mark topics and adjust visibility settings"
+msgstr "Կցել ֆայլեր, ավելացնել գտնվելու վայրը, նշել թեմաները և կարգավորել տեսանելիության կարգավորումները"
+
+msgid "Tag persons"
+msgstr "Նշել անձանց"
+
+msgid "Select tags"
+msgstr "Ընտրել նշումները"
+
+msgid "Place or adress"
+msgstr "Վայր կամ հասցե"
+
+msgid "Upload a file or image or attach an existing one"
+msgstr "Վերբեռնել ֆայլ կամ պատկեր, կամ կցել գոյություն ունեցող պատկեր"
+
+msgid "Select topic"
+msgstr "Ընտրել թեմա"
+
+msgid "Visibility"
+msgstr "Տեսանելիություն"
+
+msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
+msgstr "Այս նյութը կտեղադրվի որպես հրապարակայնորեն տեսանելի: Սա նշանակում է, որ ինտերնետում յուրաքանչյուր ոք կարող է մուտք գործել և տեսնել այն, և հնարավոր է, որ այն ընդգրկվի որոնման արդյունքների մեջ."
+
+msgid "If you do not wish this, you can change this item's visibility setting below."
+msgstr "Եթե դուք դա չեք ցանկանում, կարող եք ստորև փոխել այս նյութի տեսանելիության կարգավորումը."
+
+msgid "Show more options..."
+msgstr "Ցուցադրել ավելի շատ տարբերակներ ..."
+
+msgid "Which topics are you involved with?"
+msgstr "Ո՞ր թեմաների հետ եք առնչվում?"
+
+msgid "Select topics"
+msgstr "Ընտրել թեմաներ"
+
+msgid "Which tags further describe your activities?"
+msgstr "Ո՞ր հատկորոշիչներն են նկարագրում ձեր գործողությունները?"
+
+msgid "Select or create tags"
+msgstr "Ընտրել կամ ստեղծել նշումներ"
+
+msgid "Topics we are involved with"
+msgstr "Թեմաներ, որոնցում ներգրավված ենք"
+
+msgid "Activities and interests"
+msgstr "Գործունեություն և հետաքրքրություններ"
+
+msgid "Where would your idea be realized?"
+msgstr "Որտե՞ղ կիրականացվի ձեր գաղափարը?"
+
+msgid "Enter a place or address and then choose a point on the map."
+msgstr "Մուտքագրեք վայրը կամ հասցեն, ապա ընտրեք կետը քարտեզի վրա."
+
+msgid "Which topics fit your idea?"
+msgstr "Ո՞ր թեմաներն են համապատասխանում ձեր գաղափարին?"
+
+msgid "Where do you live?"
+msgstr "Որտե՞ղ եք ապրում?"
+
+msgid "Set your location to let other users find your profile on the map (as long as your privacy setting permits it). You will also start out there when you open the map."
+msgstr "Սահմանեք ձեր գտնվելու վայրը ՝ թույլ տալով, որ այլ օգտատերեր գտնեն ձեր պրոֆիլը քարտեզի վրա (քանի դեռ դա թույլ է տալիս ձեր գաղտնիության կարգավորումը): Դուք նաև կհայտնվեք այնտեղ, որտեղ կբացեք քարտեզը."
+
+msgid "Which topics are you interested in?"
+msgstr "Ո՞ր թեմաներն են ձեզ հետաքրքրում?"
+
+msgid "What would you like to learn?"
+msgstr "Ի՞նչ կցանկանայիք սովորել?"
+
+msgid "Who may see your plattform profile?"
+msgstr "Ո՞վ կարող է տեսնել ձեր պլատֆորմի պրոֆիլը?"
+
+msgid "Your profile will be set to be publicly visible!"
+msgstr "Ձեր պրոֆիլը կդիտվի որպես հրապարակայնորեն տեսանելի!"
+
+msgid "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!"
+msgstr "Սա նշանակում է, որ ձեր անունը, ավատարը և օգտատիրոջ պրոֆիլը կարող է տեսնել ցանկացած ոք ինտերնետում և հնարավոր է, որ այն ներառվի որոնման արդյունքների մեջ!"
+
+msgid "Please note that changes in this setting will not have an immediate effect on search engine results! Depending on the search provider, it might take days or weeks until this setting is reflected in their results."
+msgstr "Խնդրում ենք նկատի ունենալ, որ այս պարամետրում կատարված փոփոխություններն անմիջական ազդեցություն չեն ունենա որոնիչների արդյունքների վրա: Կախված որոնման մատակարարից, դա կարող է տևել օրեր կամ շաբաթներ, մինչև այս պարամետրը արտացոլվի դրանց արդյունքներում."
+
+msgid "Privacy"
+msgstr "Գաղտնիություն"
+
+msgid "My location"
+msgstr "Իմ գտնվելու վայրը"
+
+msgid "Topics I am interested in"
+msgstr "Թեմաներ, որոնք ինձ հետաքրքրում են"
+
+msgid "What I wish to learn"
+msgstr "Ինչ եմ ցանկանում սովորել"
+
+msgid "Logged in Members only"
+msgstr "Միայն Մուտք գործած Անդամներ"
+
+msgid "Everybody"
+msgstr "Բոլորը"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Toggle navigation"
+msgstr "Նավիգացիայի փոփոխում"
+
+msgid "My Profile"
+msgstr "Իմ էջը"
+
+msgid "Your Contribution"
+msgstr "Ձեր ներդրումը"
+
+msgid "Logout"
+msgstr "Ելք"
+
+msgid "Forum"
+msgstr "Ֆորում"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "People"
+msgstr "Մարդիկ"
+
+msgid "Invited Groups"
+msgstr "Հրավիրված Խմբեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Groups"
+msgstr "Իմ Խմբերը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Groups"
+msgstr "Բոլոր Խմբերը"
+
+msgid "Invited Projects"
+msgstr "Հրավիրված Նախագծեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Projects"
+msgstr "Իմ Նախագծերը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Projects"
+msgstr "Բոլոր Նախագծերը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas"
+msgstr "Գաղափարներ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Ideas"
+msgstr "Իմ Գաղափարները"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Ideas"
+msgstr "Բոլոր Գաղափարները"
+
+msgid "Search..."
+msgstr "Որոնել."
+
+msgid "Search"
+msgstr "Որոնում"
+
+msgid "Messages"
+msgstr "Նամակներ"
+
+msgid "My Stream"
+msgstr "Իմ հոսքը"
+
+msgid "Not logged in."
+msgstr "Մուտք չեք գործել համակարգ."
+
+msgid "You cannot create or edit events until you are logged in!"
+msgstr "Դուք չեք կարող ստեղծել կամ խմբագրել իրադարձություններ, մինչև մուտք չգործեք համակարգ!"
+
+msgid "No anonymous access!"
+msgstr "Անանուն մուտք համակարգ չկա!"
+
+msgid "This website allows no anonymous access."
+msgstr "Այս կայքը չի թույլատրում անանուն մուտք ունենալ համակարգ."
+
+msgid "Log in..."
+msgstr "Մուտք գործել."
+
+msgctxt "read and accept the [Terms of Services]"
+msgid "I have read and accept the"
+msgstr "Ես կարդացել և ընդունում եմ"
+
+msgid "Terms and Services"
+msgstr "Պայմաններ և Ծառայություններ"
+
+msgid "Forgot password?"
+msgstr "Մոռացե՞լ եք գաղտնաբառը?"
+
+msgid "Logged out"
+msgstr "Լքել է համակարգը"
+
+#, fuzzy
+#| msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
+msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Անձնական էջը պետք է հաստատվի նախքան մուտքագրվելը: Երբ դա տեղի ունենա, մենք էլ․նամակ կուղարկենք ձեր \"%(email)s\" հասցեին."
+
+#, fuzzy
+#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Մենք շուտով կուղարկենք նամակ Ձեր նշված %(email)s\" էլ. հասցեյին: Մուտք գործելու համար անհրաժեշտ է հաստատել էլ. փոստի հասցեն."
+
+msgid "Password"
+msgstr "Գաղտնաբառ"
+
+msgid "Password change"
+msgstr "Գաղտնաբառի փոփոխում"
+
+msgid "Change password"
+msgstr "Փոխել գաղտնաբառը"
+
+msgid "Password cannot be changed!"
+msgstr "Գաղտնաբառը հնարավոր չէ փոխել!"
+
+msgid "Sorry, but your account is associated with an integrated Portal! This means that neither your email, nor your password cannot be changed."
+msgstr "Ներեցեք, բայց ձեր անձնական էջը կապված է ինտեգրված Պորտալի հետ: Սա նշանակում է, որ ոչ ձեր էլ.փոստը, ոչ էլ ձեր գաղտնաբառը չեն կարող փոփոխվել."
+
+msgid "Please contact an administrator if this is an issue for you."
+msgstr "Խնդրում ենք կապվել ադմինիստրատորի հետ, եթե դա ձեզ համար խնդիր է ներկայացնում."
+
+msgid "Password reset"
+msgstr "Գաղտնաբառը վերականգնվել է"
+
+msgid "Your password has been changed successfully!"
+msgstr "Ձեր գաղտնաբառը հաջողությամբ փոխվեց!"
+
+msgid "Enter old password"
+msgstr "Մութքագրեք հին գաղտնաբառը"
+
+msgid "We need to make sure it's really you"
+msgstr "Մենք պետք է համոզվենք, որ դա իսկապես դուք եք"
+
+msgid "Old password"
+msgstr "Հին գաղտնաբառ"
+
+msgid "New Password"
+msgstr "Նոր գաղտնաբառ"
+
+msgid "Enter a password you don't use anywhere else. The longer the better!"
+msgstr "Մուտքագրեք գաղտնաբառ, որը դուք չեք օգտագործում այլուր: Որքան երկար, այնքան լավ!"
+
+msgid "Repeat your password just to make sure"
+msgstr "Կրկին մութքագրեք նոր գաղտնաբառը պարզապես համոզվելու համար"
+
+msgid "Repeat new Password"
+msgstr "Կրկին մութքագրել նոր գաղտնաբառը"
+
+msgid "Change my password"
+msgstr "Փոխել իմ գաղտնաբառը"
+
+msgid "Password reset complete"
+msgstr "Գաղտնաբառի վերականգնումը ավարտված է"
+
+msgid "Reset password"
+msgstr "Վերականգնել գաղտնաբառը"
+
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr "Ձեր գաղտնաբառը պահպանվել է: Հիմա կարող եք մուտք գործել."
+
+msgid "Login"
+msgstr "Մուտք"
+
+msgid "Enter new password"
+msgstr "Մուտքագրել նոր գաղտնաբառ"
+
+msgid "Please enter your new password twice so we can verify you typed it in correctly."
+msgstr "Խնդրում ենք երկու անգամ մուտքագրել ձեր նոր գաղտնաբառը, որպեսզի կարողանանք ստուգել, որ այն ճիշտ է մուտքագրվել."
+
+msgid "New password"
+msgstr "Նոր գաղտնաբառ"
+
+msgid "New password confirmation"
+msgstr "Նոր գաղտնաբառի հաստատում"
+
+msgid "Password reset unsuccessful"
+msgstr "Գաղտնաբառի վերաբեռնումը անհաջող է"
+
+msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."
+msgstr "Գաղտնաբառի վերականգնման հղումը անվավեր էր, հնարավոր է, որ այն արդեն օգտագործվել է: Խնդրում ենք գաղտնաբառը վերականգնելու նոր հայց ուղարկել."
+
+msgid "Password reset successful"
+msgstr "Գաղտնաբառի վերաբեռնումը հաջողվեց"
+
+msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
+msgstr "Մենք ձեզ էլ. փոստով ուղարկել ենք համապատասխան հրահանգները գաղտնաբառ ստեղծելու համար: Դուք շուտով կստանաք դրանք."
+
+msgid "If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder."
+msgstr "Եթե էլ-նամակ չեք ստանում, համոզվեք, որ մուտքագրել եք ձեր գրանցման էլ․հասցեն և ստուգեք ձեր սպամի թղթապանակը."
+
+#, python-format
+msgid "You're receiving this email because you requested a password reset for your user account at %(site_name)s."
+msgstr "Դուք ստանում եք այս էլ. նամակը, քանի որ գաղտնաբառի վերափոխման հարցում եք ուղարկել ձեր %(site_name)s օգտատիրոջ անձնական էջի համար."
+
+msgid "Please go to the following page and choose a new password:"
+msgstr "Խնդրում ենք անցնել հետևյալ էջ և ընտրել նոր գաղտնաբառ:"
+
+msgid "Your username, in case you've forgotten:"
+msgstr "Ձեր օգտատիրոջ անունը, մոռանալու դեպքում:"
+
+msgid "Thanks for using our site!"
+msgstr "Շնորհակալություն մեր կայքից օգտվելու համար!"
+
+msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
+msgstr "Մոռացե՞լ եք ձեր գաղտնաբառը: Մուտքագրեք ձեր էլ. փոստի հասցեն ներքևում, և մենք կուղարկենք հրահանգներ `նորը ստեղծելու համար."
+
+msgid "The email you used to register your account. This is the one you receive email notifications on"
+msgstr "Ձեր անձնական էջը գրանցելու համար օգտագործված էլ.հասցեն։ Սա այն հասցեն է, որին ուղարկվելու են ծանուցման նամակները"
+
+msgid "Example: mymail@example.com"
+msgstr "Օրինակ- mymail@example.com"
+
+msgid "Sign up"
+msgstr "Գրանցվել"
+
+msgid "Create account"
+msgstr "Ստեղծել անձնական էջ"
+
+msgid "Welcome to the Community!"
+msgstr "Բարի գալուստ համայնք!"
+
+msgid "You need a user account to join projects and become active!"
+msgstr "Ծրագրերին միանալու և ակտիվ դառնալու համար պետք է օգտատիրոջ անձնական էջ!"
+
+msgid "You need a user account to continue!"
+msgstr "Շարունակելու համար ձեզ հարկավոր է օգտատիրոջ անձնական էջ!"
+
+msgid "Signing up is easy and fast. Just fill out these fields and you're all set!"
+msgstr "Գրանցվելը շատ հեշտ է և արագ: Պարզապես լրացրեք այս դաշտերը և Էջը պատրաստ է!"
+
+msgid "Already have an account?"
+msgstr "Արդեն ունե՞ք անձնական էջ?"
+
+msgid "Log in here"
+msgstr "Մուտք գործեք այստեղ"
+
+msgid "You are signing up using this invite token:"
+msgstr "Դուք գրանցվում եք ՝ օգտագործելով այս հրավերի թոքենը:"
+
+msgid "After signup, you will automatically become a member of the associated projects and groups."
+msgstr "Գրանցվելուց հետո դուք ավտոմատ կերպով կդառնաք կապակցված նախագծերի և խմբերի անդամ."
+
+msgid "Email address"
+msgstr "Էլեկտրոնային հասցե"
+
+msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
+msgstr "Սա կօգտագործվի որպես ձեր լոգին: Ծանուցման էլ․նամակները կուղարկվեն այս էլ․հասցեին (եթե ուզում եք ստանալ դրանք)."
+
+msgid "Repeat Password"
+msgstr "Կրկնեք գաղտնաբառը"
+
+msgid "Your name"
+msgstr "Ձեր անունը"
+
+msgid "This name will be displayed to other users on the site"
+msgstr "Այս անունը կցուցադրվի կայքի այլ օգտատերերին"
+
+msgid "First name"
+msgstr "Անուն"
+
+msgid "Last name"
+msgstr "Ազգանուն"
+
+msgid "You can supply your last name to be displayed as well"
+msgstr "Դուք կարող եք տրամադրել ձեր ազգանունը, որը նույնպես կցուցադրվի"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "Մենք պետք է համոզվենք, որ դուք իրական մարդ եք (ներողուցյուն):"
+
+msgid "Generate a new captcha"
+msgstr "Ստեղծել նոր captcha"
+
+msgid "Search options..."
+msgstr "Որոնման տարբերակներ ..."
+
+msgid "Search in Apps"
+msgstr "Որոնել ծրագրերում"
+
+msgid "Ethercalcs"
+msgstr "Ethercalcs"
+
+msgid "Offers"
+msgstr "Առաջարկներ"
+
+msgid "Search in Cloud files (seperate)"
+msgstr ""
+
+msgid "Search results from the Cloud app can currently only be displayed in the Cloud app itself."
+msgstr ""
+
+msgid "To search for Cloud files, please visit the Cloud app and use the integrated search function there."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Searching in Cloud files"
+msgstr "Որոնել թիմերում"
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search in Cloud files"
+msgstr "Որոնել թիմերում"
+
+msgid "Search in teams"
+msgstr "Որոնել թիմերում"
+
+msgid "All Projects and Groups"
+msgstr "Բոլոր Նախագծերը և Խմբերը"
+
+msgid "My Projects and Groups"
+msgstr "Իմ Նախագծերը և Խմբերը"
+
+msgid "Other Projects and Groups"
+msgstr "Այլ Նախագծեր և Խմբեր"
+
+msgid "Search for Users"
+msgstr "Օգտատերերի որոնում"
+
+msgid "Ordering"
+msgstr "Պատվեր"
+
+msgid "Newest"
+msgstr "Նորագույն"
+
+msgid "Relevance"
+msgstr "Համապատասխանություն"
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
+msgstr "Ցուցադրվում է արդյունքները %(end)s %(total)s թեմաներով \"%(query)s\" ձեր հարցման վերաբերյալ:"
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\""
+msgstr "Ցուցադրվում է %(end)s %(total)s արդյունքները ձեր %(query)s\" հարցման վերաբերյալ"
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results with topics:"
+msgstr "Ցուցադրվում է արդյունքները %(end)s %(total)s թեմաներով:"
+
+msgid "or"
+msgstr "կամ"
+
+msgid "We could not find any results matching your search query."
+msgstr "Մենք չկարողացանք գտնել ձեր որոնման հարցմանը համապատասխանող որևէ արդյունք."
+
+msgid "previous"
+msgstr "նախկին"
+
+msgid "next"
+msgstr "հաջորդ"
+
+msgid "Enter one or more search terms or select a topic to search."
+msgstr "Մուտքագրեք մեկ կամ մի քանի որոնման պայմաններ կամ ընտրեք թեմա որոնելու համար."
+
+#, fuzzy
+#| msgid "Download"
+msgid "CSV Downloads"
+msgstr "Ներբեռնել"
+
+msgid "HD space used by groups"
+msgstr ""
+
+msgid "HD space used by projects"
+msgstr ""
+
+msgid "User statistics (min 1x logged in)"
+msgstr ""
+
+msgid "E-Mails of all newsletter subcribers"
+msgstr ""
+
+msgid "E-Mails of ALL active users"
+msgstr ""
+
+msgid "Date"
+msgstr "Ամսաթիվ"
+
+msgid "From"
+msgstr "Սկսած"
+
+msgid "Start date."
+msgstr "Մեկնարկի ամսաթիվ."
+
+msgid "Time"
+msgstr "Ժամանակ"
+
+msgid "Until"
+msgstr "Մինչև"
+
+msgid "End date."
+msgstr "Ավարտի ամսաթիվ."
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "The WE-Cloud is here!"
+msgstr ""
+
+msgid "With the Cloud, we offer your team a new file repository with extensive office functions to work together on documents, tables and presentations. It is based on Nextcloud and OnlyOffice. So you have two apps at your disposal with which you can use the cloud on the road and synchronize files with your desktop! As administrator you can activate the cloud for your project/group and transfer data from files and pads."
+msgstr ""
+
+msgid "Learn more"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Users"
+msgstr "Իմ Օգտատերերը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Events"
+msgstr "Իմ Իրադարձությունները"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Users"
+msgstr "Բոլոր Օգտատերերը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Events"
+msgstr "Բոլոր Իրադարձությունները"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Իրադարձություն"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Idea"
+msgstr "Գաղափար"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create User"
+msgstr "Ստեղծել Օգտատեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Event"
+msgstr "Ստեղծել Իրադարձություն"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names, Topics and Places..."
+msgstr "Որոնել անուններ, թեմաներ և վայրեր ..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names and Topics..."
+msgstr "Որոնել անուններ և թեմաներ ..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Where"
+msgstr "Որտեղ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "In map area"
+msgstr "Քարտեզի տարածքում"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If active, searching will be restricted to the visible map area."
+msgstr "Ակտիվ լինելու դեպքում որոնումը կսահմանափակվի տեսանելի քարտեզի տարածքում."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Apply Filters"
+msgstr "Կիրառել Ֆիլտրեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Clear Filters"
+msgstr "Մաքրել Ֆիլտրերը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Street"
+msgstr "Փողոց"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create idea"
+msgstr "Ստեղծել գաղափար"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Next"
+msgstr "Հաջորդը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging the marker!"
+msgstr "Ընտրեք վայրը ձեր գաղափարի համար մարկերի օգնությամբ!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "of"
+msgstr "-"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Results"
+msgstr "Արդյունքներ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No results found."
+msgstr "Ոչ մի արդյունք չի գտնվել."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not complete the search due to an error."
+msgstr "Սխալի պատճառով որոնումը չի ավարտվել."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search when moving the map"
+msgstr "Որոնել քարտեզը շարժելիս"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search this area"
+msgstr "Որոնել այս տարածքում"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership Requests"
+msgstr "Անդամակցության Հայտեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Groups and Projects"
+msgstr "Իմ Խմբերը և Նախագծերը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show more Projects of this Group"
+msgstr "Ցուցադրել այս խմբի ավելի շատ նախագծեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are not in any groups or projects yet"
+msgstr "Դուք որևէ խմբում կամ նախագծում դեռ կայացած չեք"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create new Group"
+msgstr "Ստեղծել նոր Խումբ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create new Project"
+msgstr "Ստեղծել նոր Նախագիծ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Browse all Groups"
+msgstr "Դիտել բոլոր Խմբերը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Browse all Projects"
+msgstr "Դիտել բոլոր Նախագծերը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas I am following"
+msgstr "Գաղափարներ, որոնց ես հետևում եմ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are not following any ideas yet."
+msgstr "Դուք դեռ ոչ մի գաղափարի չեք հետևում."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Post new Idea"
+msgstr "Նոր գաղափար տեղադրել"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Browse all Ideas"
+msgstr "Դիտել բոլոր գաղափարները"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Ideas"
+msgstr "Փնտրել գաղափարներ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You have not RSVPed to any Events."
+msgstr "Դուք չեք ուղարկել RSVP որևէ Իրադարձության."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Add Event"
+msgstr "Ավելացնել Իրադարձություն"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Go to Calendar"
+msgstr "Մտնել Օրացույց"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "There was an error loading the widget"
+msgstr "Վիդջեթը բեռնելիս սխալ տեղի ունեցավ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Notifications"
+msgstr "Ծանուցումներ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show more"
+msgstr "Ցուցադրել ավելին"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No current notifications"
+msgstr "Ընթացիկ ծանուցումներ չկան"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Entire Network"
+msgstr "Ամբողջ ցանցը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "On the Map"
+msgstr "Քարտեզի վրա"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "In my Groups and Projects"
+msgstr "Իմ Նախագծերում / Խմբերում"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Topic"
+msgstr "Թեմա"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You"
+msgstr "Դուք"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Participants"
+msgstr "Մասնակիցներ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Projects/Groups"
+msgstr "Նախագծեր / Խմբեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No info."
+msgstr "Տեղեկություն չկա."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Administrator"
+msgstr "Ադմինիստրատոր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Administrators"
+msgstr "Ադմինիստրատորներ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Administrators unknown"
+msgstr "Ադմինիստրատորներն անհայտ են"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No description yet."
+msgstr "Առայժմ նկարագրություն չկա."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
+msgstr "Ընտրեք գտնվելու վայր ձեր գաղափարի համար մարկերի օգնությամբ: Դուք դեռ կարող եք փոխել այս գտնվելու վայրը ավելի ուշ."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Back to location selection"
+msgstr "Վերադառնալ գտնվելու վայրի ընտրությանը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Protected Content"
+msgstr "Պաշտպանված բովանդակություն"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Sorry, but you cannot view details for this content."
+msgstr "Ներեցեք, բայց դուք չեք կարող դիտել այս բովանդակության մանրամասները."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This can happen when its visibility settings have changed recently."
+msgstr "Դա կարող է տեղի ունենալ այն ժամանակ, երբ վերջին շրջանում նրա տեսանելիության կարգավորումները փոխվել են."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Please register or log in to continue!"
+msgstr "Խնդրում ենք գրանցվել կամ մուտք գործել համակարգ՝ շարունակելու համար!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Error!"
+msgstr "Սխալ!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Sorry, but the requested content could not be retrieved from the server."
+msgstr "Ներեցեք, բայց հայցվող բովանդակությունը հնարավոր չէ ստանալ սերվերից."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Visit Event Page"
+msgstr "Այցելել իրադարձությունների էջ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications for comments or when this event is updated or its details change."
+msgstr "Այժմ դուք կստանաք ծանուցումներ մեկնաբանությունների համար, կամ երբ այս իրադարձությունը թարմացվի կամ դրա մանրամասները փոփոխվեն."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If you do not want notifications, click the unfollow button!"
+msgstr "Եթե դուք չեք ուզում ստանալ ծանուցումներ, սեղմեք unfollow կոճակը!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr "Սխալի պատճառով ձեր հավանելու կարգավորումը չպահպանվեց."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr "Սխալի պատճառով ձեր հետևելու կարգավորումը չպահպանվեց."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Hidden Users"
+msgstr "Թաքնված օգտատերեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Hidden User"
+msgstr "Թաքնված օգտատեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are a Member"
+msgstr "Դուք Անդամ եք"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Join Group"
+msgstr "Միանալ Խմբին"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Message Group"
+msgstr "Հաղորդագրություն ուղարկել խումբ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Author"
+msgstr "Հեղինակ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Project from Idea"
+msgstr "Ստեղծել Նախագիծ Գաղափարից"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Edit your Idea"
+msgstr "Փոփոխել ձեր Գաղափարը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will receive a notification when a project is created from your liked idea."
+msgstr "Դուք կստանաք ծանուցում, երբ նախագիծ ստեղծվի ձեր հավանած գաղափարից."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Projects - Created from this Idea"
+msgstr "Նախագծեր - ստեղծված այս գաղափարից"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Open to be contacted about potential collaboration opportunities"
+msgstr "Ցանկանում է կապվել հնարավոր համագործակցության համար"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Does NOT wish to be contacted for potential collaboration!"
+msgstr "ՉԻ ցանկանում կապվել հնարավոր համագործակցության համար!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Join Project"
+msgstr "Միանալ Նախագծին"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Message Project"
+msgstr "Հաղորդագրությունների նախագիծ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Move up"
+msgstr "Բարձրանալ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Move down"
+msgstr "Իջնել"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "There are no items yet"
+msgstr "Դեռ նյութեր չկան"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups and Projects"
+msgstr "Խմբեր և նախագծեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can find an overview of your Groups and Projects once you become active in one or more of them."
+msgstr "Այստեղ կարող եք գտնել ձեր Խմբերի և նախագծերի ակնարկները ՝ դրանցից մեկի կամ մի քանիսի մեջ ակտիվ լինելու դեպքում."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You can create Groups or Projects via the '+' button in the header."
+msgstr "Դուք կարող եք ստեղծել Խմբեր կամ Նախագծեր վերևում գտնվող '+' կոճակի միջոցով."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas I like"
+msgstr "Իմ հավանած գաղափարները"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can find an overview of Ideas you have liked."
+msgstr "Այստեղ կարող եք գտնել ձեր հավանած գաղափարների ակնարկը."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+msgstr "Դուք կարող եք ստեղծել ձեր սեփական գաղափարները սեղմելով վերևում գտնվող «+» կոճակը կամ կարող եք գտնել այստեղ առկա գաղափարներ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Բացահայտել"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Only content from my Groups and Projects"
+msgstr "Միայն իմ Խմբերի և նախագծերի բովանդակությունը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "We could not load more data at this time."
+msgstr "Այս պահին մենք չկարողացանք բեռնել ավելի շատ տվյալներ."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Retry"
+msgstr "Փորձել կրկին"
+
+msgid "Quick Join"
+msgstr "Արագ Գրանցում"
+
+msgid "Using this token, you can automatically join the following projects and groups"
+msgstr "Օգտագործելով այս թոքենը, դուք կարող եք ավտոմատ կերպով միանալ հետևյալ նախագծերին և խմբերին"
+
+msgid "Team up quickly using an invite token"
+msgstr "Ավելի արագ հավաքեք թիմ՝ օգտագործելով հրավերի նշանը"
+
+msgid "Join all now!"
+msgstr "Միանալ բոլորին հիմա!"
+
+msgid "Create account and join"
+msgstr "Ստեղծել անձնական էջ և միանալ"
+
+msgid "If you know an invite token, you can automatically join groups and projects, no matter if you have a user account yet or not."
+msgstr "Եթե դուք գիտեք հրավիրման թոքենը, կարող եք ավտոմատ միանալ խմբերի և նախագծերի, անկախ նրանից ՝ դեռ ունեք օգտատիրոջ հաշիվ, թե ոչ."
+
+msgid "Enter a token:"
+msgstr "Մուտքագրեք թոքենը:"
+
+msgid "For example"
+msgstr "Օրինակ"
+
+msgid "Edit Profile"
+msgstr "Խմբագրել Պրոֆիլը"
+
+#, python-format
+msgid "Your account is currently connected with the Facebook account \"%(name)s\". Do you really want to disconnect your Facebook account? This will also revoke all permissions you granted us to your Facebook account."
+msgstr "Ձեր հաշիվն այժմ կապված է Facebook- ի \"%(name)s\" էջի հետ: Դուք իսկապես ցանկանու՞մ եք անջատել ձեր Facebook- ի էջը: Սա նաև կվերացնի այն բոլոր թույլտվությունները, որոնք մեզ տվել եք ձեր Facebook- ի էջում."
+
+msgid "Disconnect Facebook Account"
+msgstr "Անջատել Facebook- ի էջը"
+
+msgid "Disconnect Facebook"
+msgstr "Անջատել Facebook- ը"
+
+msgid "Delete profile"
+msgstr "Ջնջել պրոֆիլը"
+
+msgid "User overview"
+msgstr "Օգտատիրոջ ակնարկ"
+
+msgid "Members of your projects and groups only"
+msgstr "Միայն ձեր նախագծերի և խմբերի անդամները"
+
+msgid "Everybody (public profile)"
+msgstr "Բոլորը (հանրային պրոֆիլ)"
+
+msgid "Delete user profile"
+msgstr "Ջնջել օգտատիրոջ պրոֆիլը"
+
+msgid "Delete Profile"
+msgstr "Ջնջել Պրոֆիլը"
+
+msgid "You are about to delete your user account from the site!"
+msgstr "Դուք պատրաստվում եք ջնջել ձեր օգտատիրոջ անձնական էջը այս կայքից!"
+
+msgid "By clicking the button below, you will irrevocably delete your user account, profile and personal information from this site."
+msgstr "Սեղմելով ներքևի կոճակը ՝ դուք անվերադարձ կջնջեք ձեր օգտատիրոջ անձնական էջը, պրոֆիլը և անձնական տեղեկությունները այս կայքից."
+
+msgid "Your created documents, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you."
+msgstr "Ձեր ստեղծած փաստաթղթերը, նորությունների հաղորդագրությունները, բեռնված ֆայլերը և այլ բովանդակություն կպահպանվեն կայքում: Այնուամենայնիվ, այս բովանդակությունն այլևս չի կրելու ձեր անունը կամ կապված լինելու ձեզ հետ."
+
+msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
+msgstr "Եթե ցանկանում եք ջնջել որևէ բովանդակություն, խնդրում ենք վերադառնալ և դա անել հիմա: Ձեր պրոֆիլը ջնջելուց հետո այլևս մուտք չեք ունենա ձեր էջում ստեղծած որևէ նյութի."
+
+msgid "Delete Account"
+msgstr "Ջնջել Անձնական Էջը"
+
+msgid "I have understood that any content created by me will be retained on the website. I wish to irrevocably delete my user account:"
+msgstr "Ես հասկացել եմ, որ իմ կողմից ստեղծված ցանկացած բովանդակություն պահպանվի կայքում: Ես ցանկանում եմ անվերադարձ ջնջել իմ օգտատիրոջ հաշիվը:"
+
+msgid "Delete user account"
+msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
+#, python-format
+msgid "User profile: %(username)s"
+msgstr "Օգտատիրոջ անձնական էջ։ %(username)s"
+
+msgid "Cooperation requests"
+msgstr "Համագործակցության հայցեր"
+
+msgid "I am open to be contacted about potential collaboration opportunities!"
+msgstr "Ես պատրաստ եմ կապնվել հնարավոր համագործակցության համար!"
+
+msgid "I do NOT wish to be contacted for potential collaboration!"
+msgstr "Ես չեմ ցանկանում ինձ հետ կապնվեն՝ հնարավոր համագործակցության համար!"
+
+msgid "My Website"
+msgstr "Իմ վեբ կայքը"
+
+msgid "Edit Your Profile"
+msgstr "Խմբագրել ձեր էջը"
+
+msgid "Basic data"
+msgstr "Հիմնական տվյալները"
+
+msgid "E-Mail"
+msgstr "Էլ․ հասցե"
+
+msgid "Profile avatar"
+msgstr "Անձնական էջի ավատար"
+
+msgid "Who are you and what motivates you?"
+msgstr "Ո՞վ եք դուք և ի՞նչն է ձեզ ոգեշնչում?"
+
+msgid "Tell others something about you!"
+msgstr "Պատմեք մյուսներին որևէ բան ձեր մասին!"
+
+msgid "Cooperation requests for you"
+msgstr "Համագործակցության հայցեր ձեզ համար"
+
+msgid "Signals your willingness to be contacted by other users who wish to collaborate with you"
+msgstr "Ազդանշան է տալիս ձեր հետ կապնվելու պատրաստակամության մասին `այլ օգտատերերին, ովքեր ցանկանում են համագործակցել ձեզ հետ"
+
+msgid "I am open for cooperation requests"
+msgstr "Ես պատրաստ եմ համագործակցության հարցումների"
+
+msgid "Welcome!"
+msgstr "Բարի Գալուստ!"
+
+msgid "We give you full control over what people can see of you on the platform and what you hear from us!"
+msgstr "Մենք ձեզ լիակատար վերահսկողություն ենք տալիս ընտրել, թե ինչ կարող են մարդիկ տեսնել ձեր մասին այդ հարթակում և այն, ինչ տեսնել մեզանից!"
+
+msgid "Who is allowed to see you on the platform?"
+msgstr "Ու՞մ է կարող է ձեզ տեսնել հարթակում?"
+
+msgid "You can change this setting later in your profile settings"
+msgstr "Դուք կարող եք փոխել այս կարգավորումը ավելի ուշ ձեր պրոֆիլի պարամետրերում"
+
+msgid "in the top right menu"
+msgstr "վերևի աջ ընտրացանկում"
+
+msgid "When may we send you email notifications?"
+msgstr "Ե՞րբ ենք մենք կարող ձեզ ծանուցումներ ուղարկել էլ.փոստով?"
+
+msgid "You can change or customize this setting later in your notification settings"
+msgstr "Դուք կարող եք փոխել կամ անհատականացնել այս պարամետրը հետագայում ձեր ծանուցման կարգավորումներից"
+
+msgid "Your privacy: You are in control!"
+msgstr "Ձեր գաղտնիությունը- Դուք վերահսկում եք!"
+
+msgid "by"
+msgstr "կողմից"
+
+msgid "Open Preview"
+msgstr "Բացել նախադիտումը"
+
+msgid "active"
+msgstr "ակտիվ է"
+
+msgid "displayed right now"
+msgstr "այժմ ցուցադրվում է"
+
+msgid "not displayed right now"
+msgstr "այժմ չի ցուցադրվում"
+
+msgid "inactive"
+msgstr "ոչ ակտիվ"
+
+msgid "Activate"
+msgstr "Ակտիվացնել"
+
+#, python-format
+msgid "Do you really want to delete announcement \"%(title)s\"?"
+msgstr "Արդյո՞ք ցանկանում եք ջնջել \"%(title)s\" հայտարարությունը?"
+
+msgid "Delete announcement"
+msgstr "Ջնջել հայտարարությունը"
+
+msgid "Edit Announcement"
+msgstr "Խմբագրել հայտարարությունը"
+
+msgid "Create Announcement"
+msgstr "Ստեղծել հայտարարություն"
+
+msgid "Announcement is enabled"
+msgstr "Հայտարարությունը ակտիվացված է"
+
+msgid "Announcement Title (internal only)"
+msgstr "Հայտարարության վերնագիր (միայն ներքին)"
+
+msgid "Internal Title"
+msgstr "Ներքին Վերնագիր"
+
+msgid "Category for the Announcement"
+msgstr "Հայտարարության կատեգորիա"
+
+msgid "Will be displayed as a small first header in the announcement"
+msgstr "Հայտարարության մեջ կցուցադրվի որպես փոքր առաջին վերնագիր"
+
+msgid "Timeframe to display announcement"
+msgstr "Հայտարարության ցուցադրման ժամկետը"
+
+msgid "Display type"
+msgstr "Ցուցադրման տեսակը"
+
+msgid "Choose between a markdown editor, or insert your own raw HTML (it is recommended to have a designer create the HTML!)"
+msgstr "Ընտրեք նշագրման խմբագրողի միջև կամ տեղադրեք ձեր սեփական raw HTML- ը (խորհուրդ է տրվում ունենալ դիզայներ HTML ստեղծելու համար!):"
+
+msgid "The main text of the announcement."
+msgstr "Հայտարարության հիմնական տեքստը."
+
+msgid "Use \"# Big Header\" as main title and \"## Small Header\" as in-between header. They will be styled appropriately on the dashboard!"
+msgstr "Օգտագործեք \"# Big Header\" ՝ որպես հիմնական վերնագիր և \"## Small Header\", որպես վերնագրի միջանկյալ կետ: Դրանք համապատասխանաբար ոճավորվելու են կառավարման վահանակի վրա!"
+
+msgid "Raw HTML. Should contain a Dismiss-button"
+msgstr "Raw HTML: Պետք է պարունակի մերժման կոճակ"
+
+msgid "External Link for a \"Read more\" link"
+msgstr "Արտաքին հղում «Կարդալ ավելին» հղման համար"
+
+msgid "requires a Save before"
+msgstr "պետք է Պահպանել մինջև"
+
+msgid "User Dashboard Announcements are sticky posts that appear on top of each user's personal Dashboard."
+msgstr "Օգտատիրոջ կառավարման վահանակի հայտարարությունները գրառումներ են, որոնք հայտնվում են յուրաքանչյուր օգտատիրոջ անձնական վահանակի վերևի մասում."
+
+msgid "An announcement will only appear during its valid-time frame."
+msgstr "Հայտարարությունը կհայտնվի միայն իր վավեր ժամկետում."
+
+msgid "Only one announcement at a time will ever be shown to a user."
+msgstr "Օգտատիրոջը ցուցադրվելու է միառժամանակ միայն մեկ հայտարարություն."
+
+msgid "If the user still has not hidden their introduction-message on the dashboard, they will not see any announcements."
+msgstr "Եթե օգտատերը դեռ չի փակել իրեն ուղարկված ներածական հաղորդագրությունը կառավարման վահանակի վրա, նա որևէ այլ հայտարարություն չի տեսնի."
+
+msgid "A user can dismiss an announcement, in which case it will disappear and never be shown again. On the next visit to their Dashboard, another valid announcement they have not yet hidden may be shown."
+msgstr "Օգտատերը կարող է մերժել հայտարարությունը, որի դեպքում այն կվերանա և այլևս չի ցուցադրվի: Նրա հաջորդ այցի ժամանակ կառավարման վահանակի վրա կարող է ցուցադրվել ևս մեկ վավեր հայտարարություն, որը նա դեռ չեն փակել."
+
+msgid "There are no announcements yet."
+msgstr "Առայժմ հայտարարություններ չկան."
+
+msgid "Enable posting to Facebook"
+msgstr "Թույլատրել գրառումները Facebook- ում"
+
+msgid "Loading Facebook-Scripts..."
+msgstr "Facebook- ի գրությունները բեռնվում են ..."
+
+msgid "If nothing happens please disable any addons like Ghostery or NoScript..."
+msgstr "Եթե ոչինչ չկատարվեց, ապա անջատեք նման լրացումները ինչպիսիք են Ghostery կամ NoScript ..."
+
+msgid "Connect Facebook Account"
+msgstr "Կապակցել Facebook Էջը"
+
+msgctxt "Facebook connect explanation box"
+msgid "Why connect?"
+msgstr "Ինչո՞ւ միացնել?"
+
+msgctxt "Facebook connect explanation box"
+msgid "When you connect your Facebook account you can easily publish your news posts on your Facebook timeline. You can also connect your projects/groups to a Facebook Group or Fan-Site to enable members to publish their news posts there, too."
+msgstr "Facebook- ի ձեր էջը միացնելիս կարող եք հեշտությամբ հրապարակել ձեր լրատվական գրառումները Facebook-ի նորությունների բաժնում: Կարող եք նաև ձեր նախագծերը / խմբերը միացնել Facebook-ի խմբին կամ Fan-էջին, որպեսզի անդամները նույնպես հնարավորություն ունենան հրապարակել իրենց լրատվական գրառումները այնտեղ."
+
+msgctxt "Facebook connect explanation box"
+msgid "For that, we need your permission to publish on Facebook in your name."
+msgstr "Դրա համար մեզ պետք է ձեր թույլտվությունը հրապարակումներ անել Facebook- ում ձեր անունից."
+
+msgctxt "Facebook connect explanation box list header"
+msgid "We guarantee:"
+msgstr "Մենք երաշխավորում ենք:"
+
+msgctxt "Facebook connect explanation box list items"
+msgid "We will only post exactly what you have written"
+msgstr "Մենք կհրապարակենք միայն այն, ինչ գրել եք"
+
+msgctxt "Facebook connect explanation box list items"
+msgid "We will only post with your explicit consent for every news post, and never automatically"
+msgstr "Մենք կհրապարակենք յուրաքանչյուր նորություն միայն ձեր բացահայտ համաձայնությամբ և երբեք ոչ ավտոմատ"
+
+msgctxt "Facebook connect explanation box list items"
+msgid "Except for your name and profile picture, we will obtain absolutely no other data from your Facebook account"
+msgstr "Բացառությամբ ձեր անունից և պրոֆիլի նկարից, մենք ձեր Facebook- ի էջից այլևս այլ տվյալներ չենք ստանալու"
+
+#, python-format
+msgctxt "Facebook connect explanation box list items"
+msgid "You can revoke your permission at any time from your %(site_name)s profile settings"
+msgstr "Կարող եք ցանկացած պահի չեղարկել ձեր թույլտվությունը ձեր %(site_name)s պրոֆիլի կարգավորումներից"
+
+msgid "Log in with Facebook"
+msgstr "Մուտք գործել Facebook- ի Էջով"
+
+msgid "Also post this to my Facebook timeline"
+msgstr "Հրապարակել սա նաև իմ Facebook -ի նորությունների էջում"
+
+msgid "When you submit this post, it will be posted on your Facebook timeline exactly as seen."
+msgstr "Երբ հաստատեք այս գրառումը, այն կտեղադրվի ձեր Facebook- ի նորությունների էջում այնպես, ինչպես կա."
+
+msgid "Also post this to this project/group's Facebook Fan-Page"
+msgstr "Հրապարակել սա նաև այս նախագծի / խմբի Facebook-ի Fan-էջում"
+
+msgid "Also post this as a visitor's post to this project/group's Facebook Fan-Page"
+msgstr "Հրապարակել սա նաև որպես այցելուի գրառում այս նախագծի / խմբի Facebook-ի Fan-էջում"
+
+msgid "If you are an Editor of the Fan-Page on Facebook, confirm your Editor access to post in the voice of that Fan-Page!"
+msgstr "Եթե դուք Facebook- ի Fan-էջի խմբագիր եք, հաստատեք ձեր Խմբագրի մուտք գործելու իրավունքը `այդ Fan-էջի անունից!"
+
+msgctxt "a link to click on"
+msgid "You can do this here"
+msgstr "Դուք կարող եք դա անել այստեղ"
+
+msgid "Also post this to this project/group's Facebook Group"
+msgstr "Տեղադրել նաև այս նախագծի/ խմբի Facebook -ի Խմբում"
+
+msgid "When you submit this post, it will be posted to the Facebook Fan-Page of this project/group, in the voice of that Fan-Page."
+msgstr "Երբ հաստատեք այս գրառումը, այն կտեղադրվի այս նախագծի / խմբի Facebook Fan-էջում `այդ Fan-էջի անունից."
+
+msgid "When you submit this post, it will be posted from your Facebook Account as a visitor's post to the Facebook Fan-Page of this project/group."
+msgstr "Երբ հաստատեք այս գրառումը, այն կտեղադրվի ձեր Facebook-ի էջից ՝ որպես այցելուի գրառում, այս ծրագրի / խմբի Facebook-ի Fan-էջում."
+
+msgid "When you submit this post, it will be posted from your Facebook Account, exactly as seen, on the Facebook Group of this project/group."
+msgstr "Երբ հաստատեք այս գրառումը, այն կտեղադրվի ձեր Facebook-ի էջից, ինչպես երևում է այս նախագծի / խմբի Facebook-ի խմբում."
+
+msgid "Connect a Facebook Group or Fan-Page to enable members to publish their news posts there, too!"
+msgstr "Միանալ Facebook-ի Խմբին կամ Fan-Էջին, որպեսզի անդամները նույնպես հրապարակեն իրենց լրատվական գրառումները այնտեղ!"
+
+msgid "You need to connect your user account to Facebook before you can link this group/project!"
+msgstr "Նախքան այս խումբը / նախագիծը կապելը, դուք պետք է միացնեք ձեր օգտատիրոջ էջը Facebook- ին!"
+
+msgid "Connect a Facebook Group"
+msgstr "Միանալ Facebook-ի Խմբին"
+
+#, python-format
+msgid "You can connect your projects and groups to a Facebook Group. Once connected, your members can choose to share the news posts they write on %(site_name)s to the Facebook Group. (They need to connect their accounts to Facebook, as well!)"
+msgstr "Կարող եք ձեր նախագծերն ու խմբերը միացնել Facebook-ի Խմբին: Միանալուց հետո ձեր անդամները կարող են իրենց լուրերըով %(site_name)s -ից կիսվել Facebook- ի խմբում: (Նրանք նույնպես պետք է իրենց էջերը կապեն Facebook- ի հետ):"
+
+msgid "Please be aware that users can only post to your Group if they would also be permitted post in it on Facebook!"
+msgstr "Խնդրում ենք նկատի ունենալ, որ օգտատերերը կարող են հրապարակումներ անել ձեր Խւմբում միայն այն դեպքում, եթե նրանք այդ թույլատվությունը ունեն նաև Facebook- ում!"
+
+msgid "You can find the ID of your Facebook Group on the Info-page in the About tab of the Group on Facebook."
+msgstr "Ձեր Facebook-ի խմբի ID- ն կարող եք գտնել Ինֆորմացիոն էջում ՝ Facebook-ի «Խմբի մասին» էջում."
+
+msgid "Facebook Group to link to"
+msgstr "Facebook -ի Խումբը կապել"
+
+msgid "Group Id or name (example: 1172392116092353)"
+msgstr "Խմբի Id կամ անուն (օրինակ ՝ 1172392116092353)"
+
+msgid "Connect a Facebook Fan-Page"
+msgstr "Միանալ Facebook- ի Fan-էջին"
+
+#, python-format
+msgid "You can connect your projects and groups to a Facebook Fan-Page. Once connected, you can publish the posts you write on %(site_name)s directly on that Fan-Page, if you are one of its administrators on Facebook."
+msgstr "Դուք կարող եք ձեր նախագծերն ու խմբերը միացնել Facebook-ի Fan-էջին: Միանալուց հետո դուք կարող եք հրապարակել ձեր հաղորդագրությունները %(site_name)s - ում անմիջապես այդ Fan-էջում, եթե Facebook- ում նրա ադմինիստրատորներից եք."
+
+msgid "All other members of your project/group can publish their posts as visitor's posts on the Fan-Page. (They need to connect their accounts to Facebook, as well!)"
+msgstr "Ձեր ծրագրի / խմբի մնացած բոլոր անդամները կարող են հրապարակել իրենց գրառումները որպես այցելուի հաղորդագրություններ Fan-էջում: (Նրանք նույնպես պետք է իրենց անձնական էջերը կապեն Facebook- ի հետ):"
+
+msgid "If you wish for other members to be able to post directly to the Fan-Page, you can make them co-administrators of your project/group (and you must make them Editors of the Fan-Page on Facebook!). They will be asked to confirm their Editor access of the Fan-Page, and then will be able to publish to it."
+msgstr "Եթե ցանկանում եք, որ մյուս անդամները կարողանան հրապարակումներ անել Fan-էջում, կարող եք նրանց դարձնել ձեր ծրագրի / խմբի երկրորդական ադմինիստրատորներ (և դուք նրանց պետք է նշանակեք Facebook- ի Fan-էջի խմբագիրներ): Նրանց հարցում կուղարկվի իրենց խմբագրի մուտքն Fan-էջ հաստատելու համար, և այնուհետև նրանք կկարողանան հրապարակել նյութեր այնտեղ."
+
+msgid "The unique name of your Fan-Page is the name of the Fan-Page in the URL on Facebook (example: https://www.facebook.com/myfanpage/)"
+msgstr "Ձեր Fan- էջի եզակի անունը Fan- էջի անունն է Facebook URL- ում (օրինակ ՝ https://www.facebook.com/myfanpage/)"
+
+msgid "Facebook Fan-Page link to"
+msgstr "Facebook -ի Fan-էջը կապել"
+
+msgid "Fan-Page unique name (example: myfanpage)"
+msgstr "Fan-էջի եզակի անուն (օրինակ ՝ myfanpage)"
+
+msgid "Choose from your Pages..."
+msgstr "Ընտրեք ձեր էջերից ..."
+
+msgid "You have Editor access to this Fan-Page and can publish your posts directly to it."
+msgstr "Դուք ունեք այս Fan-էջի խմբագրիչի մուտքի իրավունք և կարող եք հրապարակել ձեր հաղորդագրությունները այստեղ."
+
+msgid "Editor access of your Facebook-account for this Fan-Page has not been confirmed. This is required before you can publish your posts in the voice of the Fan-Page!"
+msgstr "Այս Fan-էջի համար ձեր Facebook-ի էջի խմբագրչի մուտքը չի հաստատվել: Դա անհրաժեշտ է կատարել նախքան դուք կկարողանաք հաղորդագրություններ հրապարակել Fan-էջի անունից!"
+
+msgid "Confirm now!"
+msgstr "Հաստատել հիմա!"
+
+msgid "Select one of your Facebook pages to connect to"
+msgstr "Ընտրեք ձեր Facebook -ի էջերից մեկը `միանալու համար"
+
+msgid "You do not seem to be Editor or Admin of any pages."
+msgstr "Դուք կարծես որևէ էջի խմբագիր կամ ադմինիստրատոր չեք."
+
+msgid "We could not retrieve your groups from Facebook because of an error. Please contact an administrator!"
+msgstr "Սխալի պատճառով չկարողացանք ձեր խմբերը առբերել Facebook- ից: Խնդրում ենք դիմել ադմինիստրատորին!"
+
+msgid "Are you sure you want to delete the item?"
+msgstr "Համոզվա՞ծ եք, որ ցանկանում եք ջնջել նյութը?"
+
+msgid "Delete comment"
+msgstr "Ջնջել մեկնաբանությունը"
+
+msgid "Report offensive comment"
+msgstr "Հայտնել վիրավորական մեկնաբանության մասին"
+
+msgid "Write comment..."
+msgstr "Գրել մեկնաբանություն."
+
+#, python-format
+msgid "Show all %(count)s comments"
+msgstr "Ցույց տալ բոլոր %(count)s մեկնաբանությունները"
+
+msgid "Timeline"
+msgstr "Նորությունների էջ"
+
+msgid "Contents"
+msgstr "Բովանդակություն"
+
+msgid "Close to me"
+msgstr "Մոտ է ինձ"
+
+msgid "Show large map"
+msgstr "Ցույց տալ մեծ քարտեզը"
+
+msgid "Do not show this again"
+msgstr "Սա նորից չցուցադրել"
+
+msgid "Preview"
+msgstr "Նախադիտում"
+
+msgid "Continue reading"
+msgstr "Շարունակել կարդալ"
+
+msgid "What's the latest news?"
+msgstr "Ո՞րոնք են վերջին նորությունները?"
+
+msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
+msgstr "Ձեր վերջին այցելած Պահոցները, ֆայլերը, իրադարձությունները, անելիքների ցանկը և այլ բովանդակություն կցուցադրվեն այստեղ."
+
+msgid "You created an idea"
+msgstr "Դուք գաղափար եք ստեղծել"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an idea"
+msgstr "ստեղծեց գաղափար"
+
+msgid "Menu"
+msgstr "Ընտրացանկ"
+
+msgid "Quick Search"
+msgstr "Արագ Որոնում"
+
+msgid "Create content"
+msgstr "Ստեղծել բովանդակություն"
+
+msgid "Home"
+msgstr "Գլխավոր էջ"
+
+msgid "Rocket.Chat"
+msgstr "Rocket.Chat"
+
+msgid "Change language"
+msgstr "Փոխել լեզուն"
+
+msgid "Register a new account"
+msgstr "Գրանցել նոր անձնական էջ"
+
+msgid "Offer"
+msgstr "Առաջարկ"
+
+msgid "Post new Offer"
+msgstr "Հրապարակել նոր Առաջարկ"
+
+msgid "Edit My Profile"
+msgstr "Խմբագրել Իմ Անձնական Էջը"
+
+msgid "What's happening where and when? What's to discover? Where to meet?"
+msgstr "Ի՞նչ է տեղի ունենում, որտե՞ղ և ե՞րբ: Ի՞նչ հայտնաբերել: Որտե՞ղ հանդիպել?"
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgstr "Խմբերն օգնում են բարելավել հաղորդակցությունը և համագործակցությունը խոշոր ցանցերում կամ կազմակերպություններում: Մի խմբի շրջանակներում կարող եք միաձուլել մի քանի փոքր նախագծեր կամ աշխատանքային խմբեր."
+
+msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
+msgstr "Ինչ տեսք կունենա մեր տարածաշրջանը ապագայում: Ո՞րն է ձեր հասկացությունը էկոլոգիապես մաքուր և կայուն տարածաշրջանի մասին: Գտեք համախմբողներ ձեր ծրագրի գաղափարների համար."
+
+msgid "Do you have something to share, sell or give away? Are you searching for something?"
+msgstr "Դուք ինչ-որ բան ունե՞ք կիսելու, վաճառելու կամ նվիրելու համար: Ինչ-որ բա՞ն եք փնտրում?"
+
+msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
+msgstr "Արդյունավետ կազմակերպեք ձեր նախագծերը կամ նախաձեռնությունները ձեր գործընկերների հետ միասին: Մի տեղում համագործակցելու համար առկա են բոլոր կարևոր գործիքները- Նորություններ, Պահոցներ, իրադարձություններ, Անելիքների ցանկ և այլն."
+
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "Welcome"
+msgstr "Բարի գալուստ"
+
+#, python-format
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "to %(portal_name)s"
+msgstr "%(portal_name)s կայք"
+
+#, python-format
+msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+msgstr "Ուրախ ենք ձեզ տեսնել! %(portal_name)s - ում դուք կարող եք համագործակցել ուրիշների հետ Ծրագրերում և Խմբերում: Անկախ նախաձեռնությունից, կազմակերպությունից, կամ ցանցից - %(portal_name)s -ը առաջարկում է բոլոր անհրաժեշտ գործիքները ձեր առցանց համագործակցության համար."
+
+msgid "Jetzt anmelden und mitgestalten"
+msgstr "Jetzt anmelden und mitgestalten"
+
+msgid "Show more Projects"
+msgstr "Ցուցադրել ավելի շատ ծրագրեր"
+
+msgid "Add Widget"
+msgstr "Ավելացնել վիդջեթ"
+
+msgid "Edit Widget"
+msgstr "Խմբագրել վիդջեթը"
+
+msgid "More"
+msgstr "Ավելին"
+
+msgid "Widget title"
+msgstr "Վիդջեթի վերնագիր"
+
+msgid "Widget Icon (FA)"
+msgstr "Վիդջեթի պատկերակ (FA)"
+
+msgid "Font-awesome Widget Icon"
+msgstr "Font-awesome Վիդջեթի պատկերակ"
+
+msgid "Delete widget"
+msgstr "Ջնջել վիդջեթը"
+
+msgid "(This widget has no additional options)"
+msgstr "(Այս վիդջեթը լրացուցիչ տարբերակներ չունի)"
+
+msgid "All members"
+msgstr "Բոլոր անդամները"
+
+msgid "There are no projects in this group yet."
+msgstr "Այս խմբում դեռ նախագծեր չկան."
+
+msgid "Add project"
+msgstr "Ավելացնել նախագիծ"
+
+msgid "Attach Images/Files"
+msgstr "Կցել պատկերներ / ֆայլեր"
+
+msgid "Attach image/file"
+msgstr "Կցել պատկեր / ֆայլ"
+
+msgid "You cannot put this widget on a team dashboard."
+msgstr "Դուք չեք կարող տեղադրել այս վիդջեթը թիմի կառավարման վահանակի վրա."
+
+msgid "You cannot put this widget on a user dashboard."
+msgstr "Դուք չեք կարող տեղադրել այս վիդջեթը օգտատիրոջ կառավարման վահանակի վրա."
+
+msgid "Widget not found."
+msgstr "Վիդջեթ չի հայտնաբերվել."
+
+msgid "No related projects/groups"
+msgstr "Հարակից նախագծեր / խմբեր չկան"
+
+msgid "Assign"
+msgstr "Նշանակել"
+
+msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
+msgstr "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
+
+msgid "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
+msgstr "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
+
+msgid "Change of Terms of Services and Privacy Policy"
+msgstr "Ծառայությունների Մատուցման Պայմանների և Գաղտնիության Քաղաքականության Փոփոխություն"
+
+msgid "Our Terms of Services and Privacy Policy"
+msgstr "Մեր Ծառայությունների Մատուցման Պայմանները և Գաղտնիության Քաղաքականությունը"
+
+msgid "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications."
+msgstr "Մենք առաջնահերթացնում ենք ձեր տվյալների պաշտպանությունը, ուստի մենք թարմացրել ենք մեր գաղտնիության քաղաքականությունը և ծառայությունների մատուցման պայմանները: Մեր պլատֆորմից օպտիմալ օգտագործումը շարունակելու համար, մենք խրախուսում ենք ձեզ կարդալ և ընդունել փոփոխությունները."
+
+msgid "We prioritise the protection of your data, which is reflected in our privacy policy and terms of services. We encourage you to read and accept the terms."
+msgstr "Մենք առաջնահերթացնում ենք ձեր տվյալների պաշտպանությունը, ինչը արտացոլվում է մեր գաղտնիության քաղաքականության և ծառայությունների մատուցման պայմաններում: Մենք խրախուսում ենք ձեզ կարդալ և ընդունել պայմանները."
+
+#, python-format
+msgid ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join %(team_name)s."
+msgstr ""
+"Ողջույն %(admin_name)s,\n"
+"\n"
+"%(user_name)s օգտատերը ցանկանում է միանալ %(team_name)s-ին."
+
+msgid "Nutzungsbedingungen"
+msgstr "Nutzungsbedingungen"
+
+msgid "(Deleted User)"
+msgstr "(Ջնջված օգտատեր)"
+
+#, python-format
+msgid "<i>Renderer for %(model_name)s not found!</i>"
+msgstr "<i> Արտապատկերիչ %(model_name)s - ի համար չի գտնվել։</i>"
+
+msgid "Team Description"
+msgstr "Թիմի նկարագրություն"
+
+msgid "About Us"
+msgstr "Մեր մասին"
+
+msgid "Question about"
+msgstr "Հարց"
+
+#, python-format
+msgid "The language \"%s\" is not supported"
+msgstr "\"%s\" լեզուն չի մատուցվում"
+
+msgid "No model given to export data from."
+msgstr "Ոչ մի մոդել չի տրվել տվյալների արտահանման համար."
+
+msgid "Your news post was also posted on your Facebook timeline."
+msgstr "Ձեր նորությունների գրառումը տեղադրվել է նաև Facebook-ի ձեր նորությունների հոսքում."
+
+msgid "We could not post this news post on your Facebook timeline. If this problem persists, please make sure you have granted us all required Facebook permissions, or try disconnecting and re-connecting your Facebook account!"
+msgstr "Մենք չկարողացանք տեղադրել այս նորությունների գրառումը ձեր Facebook-ի նորությունների հոսքում: Եթե այս խնդիրը շարունակում է հայտնվել, խնդրում ենք համոզվեք, որ մեզ տվել եք բոլոր անհրաժեշտ Facebook-ի թույլտվությունները, կամ փորձեք անջատել և նորից միացնել ձեր Facebook- ի անձնական էջը!"
+
+msgid "Your news post was also posted to the Facebook Fan-Page."
+msgstr "Ձեր նորությունների գրառումը տեղադրվել է նաև Facebook-ի Fan-էջում."
+
+msgid "Your news post was also posted on the Facebook Fan-Page as a visitor's post."
+msgstr "Ձեր նորությունների գրառումը տեղադրվել է նաև Facebook-ի Fan-էջում `որպես այցելուի գրառում."
+
+msgid "Your news post was also posted in the Facebook Group."
+msgstr "Ձեր նորությունների գրառումը տեղադրվել է նաև Facebook-ի խմբում."
+
+msgid "We could not post this news post on the Facebook Group/Fan-Page. If this problem persists, please try disconnecting and re-connecting your Facebook account and make sure you allow us to post with a visibility of at least \"Friends\". If you are trying to post as a Fan-Page, make sure you accept the necessary permissions for us to post there, and make sure you are an Editor of the Fan-Page! If this doesn't work, contact this project/group's administrator!"
+msgstr "Մենք չկարողացանք հրապարակել այս լուրը Facebook-ի խմբում/Fan-էջում: Եթե այս խնդիրը շարունակում է հայտնվել, խնդրում ենք փորձեք անջատել և նորից միացնել ձեր Facebook-ի էջին և համոզվել, որ թույլ եք տալիս մեզ գրառում տեղադրել առնվազն «Ընկերների» տեսանելիությամբ: Եթե փորձում եք հրապարակել որպես Fan-էջ, համոզվեք, որ ընդունում եք մեզ համար անհրաժեշտ թույլտվությունները `այնտեղ հրապարակելու համար, և համոզվեք, որ դուք Fan-էջի խմբագիրն եք: Եթե դա ևս ձախողվեց, դիմեք այս ծրագրի/խմբի ադմինիստրատորին!"
+
+msgid "You can only connect to either a Facebook Group or a Fan-Page, but not both!"
+msgstr "Դուք կարող եք միանալ Facebook-ի խմբին կամ Fan-էջին, բայց ոչ երկուսին միառժամանակ!"
+
+msgid "Please enter a numeric Facebook Group-ID only!"
+msgstr "Խնդրում ենք մուտքագրել միայն թվային Facebook -ի Խմբի ID!"
+
+msgid "The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make sure you have entered the correct ID for your Group/Fan-Page!"
+msgstr "Facebook-ի Fan- էջի ID կամ Group ID չեն հայտնաբերվել Facebook-ում: Համոզվեք, որ Դուք մուտքագրել եք ձեր Խմբի/Fan-էջի ճիշտ ID!"
+
+msgid "We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an Editor of that Fan-Page!"
+msgstr "Մենք չկարողացանք մուտք գործել Fan-էջ ձեր միացված Facebook -ի էջի համար: Խնդրում ենք ստուգել, որ դուք մուտքագրել եք Fan-էջի ճիշտ անունը, և որ դուք հանդիսանում եք այդ Fan-էջի խմբագիրը!"
+
+msgid "This group does not have a Facebook Fan-Page associated with it!"
+msgstr "Այս խումբը չունի Facebook- ի Fan-էջ, որը կապված է դրա հետ!"
+
+msgid "Your Editor access for the linked Facebook Fan-Page was confirmed!"
+msgstr "Ձեր խմբագրիչի մուտքի հնարավորությունը կապակցված Facebook-ի Fan-էջի հետ հաստատվել է!"
+
+msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
+msgstr "Ձեր Facebook-ի էջն անջատելիս տեղի է ունեցել սխալ: Խնդրում ենք դիմել ադմինիստրատորին!"
+
+msgid "Your Facebook account was successfully disconnected from this account."
+msgstr "Ձեր Facebook- ի անձնական էջը հաջողությամբ անջատվել է այս էջից."
+
+msgid "Sorry, only portal administrators can create projects and groups!"
+msgstr ""
+
+msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորները կարող են ստեղծել Խմբեր: Կարող եք ստեղծել նախագիծ, կամ հաղորդագրություն գրել ադմինիստրատորներից մեկին `խումբ ստեղծելու համար: Ստորև կարող եք գտնել բոլոր ադմինիստրատորների ցուցակը."
+
+#, python-format
+msgid "%(team_type)s \"%(group)s\" was created successfully."
+msgstr "%(team_type)s \"%(group)s\"-ը հաջողությամբ ստեղծվել է."
+
+msgid "Create"
+msgstr "Ստեղծել"
+
+#, python-format
+msgid "The %(team_type)s was changed successfully."
+msgstr "%(team_type)s- ը հաջողությամբ փոխվել է."
+
+msgid "This action is not available directly!"
+msgstr "Այս գործողությունը ուղղակիորեն հասանելի չէ!"
+
+#, python-format
+msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+msgstr "Դուք դիմել եք %(team_type)s “%(team_name)s” -ին միանալու համար: Դուք կստանաք էլ․նամակ, հենց որ թիմի ադմինիստրատորը պատասխանի ձեր հարցմանը."
+
+#, python-format
+msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
+msgstr "Դուք արդեն հրավիրված էիք \"%(team_name)s\" և այժմ անմիջապես անդամակցվել եք!"
+
+#, python-format
+msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgstr "Դուք այժմ %(team_type)s “%(team_name)s” - ի անդամ եք: Բարի գալուստ!"
+
+#, python-format
+msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
+msgstr "Դուք այլևս %(team_type)s “%(team_name)s”- ի անդամ չեք."
+
+#, python-format
+msgid "You cannot leave this %(team_type)s. You are the only administrator left."
+msgstr "Դուք չեք կարող լքել այս %(team_type)s- ը: Դուք միակ ադմինիստրատորն եք."
+
+#, python-format
+msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
+msgstr "Ձեր միանալու հարցումը հաջողությամբ հեռացվել է %(team_type)s \"%(team_name)s\" -ից."
+
+#, python-format
+msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
+msgstr "Ձեր հրավերը %(team_type)s “%(team_name)s”- ին հաջողությամբ մերժվել է."
+
+#, python-format
+msgid "User %(username)s had already requested membership and has now been made a member immediately!"
+msgstr "%(username)s օգտատերը արդեն անդամակցության հայց է ուղարկել և այժմ դարձել է անդամ!"
+
+#, python-format
+msgid "I invited you to join \"%(team_name)s\"!"
+msgstr "Ես հրավիրել եմ ձեզ միանալ %(team_name)s\" -ին!"
+
+#, python-format
+msgid "User %(username)s was successfully invited!"
+msgstr "%(username)s օգտատերը հաջողությամբ հրավիրվել է!"
+
+msgid "You cannot change your own admin status."
+msgstr "Դուք չեք կարող փոխել ադմինիստրատորի ձեր սեփական կարգավիճակը."
+
+#, python-format
+msgid "You cannot remove “%(username)s” form this team. Only one admin left."
+msgstr "Դուք չեք կարող հեռացնել \"%(username)s\"-ին այս թիմից: Մնացել է ընդամենը մեկ ադմինիստրատոր."
+
+#, python-format
+msgid "You cannot remove yourself from a %(team_type)s."
+msgstr "Դուք չեք կարող հեռացնել ձեզ %(team_type)s -ից."
+
+#, python-format
+msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
+msgstr "Դուք չեք կարող հեռացնել \"%(username)s\" -ին այս թիմից: Մնացել է ընդամենը մեկ ադմինիստրատոր."
+
+#, python-format
+msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
+msgstr "Ձեր %(team_type)s \"%(team_name)s\" -ին միանալու հարցումը հաջողությամբ հեռացվել է."
+
+#, python-format
+msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
+msgstr "Ձեր հրավերը \"%(username)s\" օգտատիրոջը հաջողությամբ հեռացվել է."
+
+#, python-format
+msgid "User \"%(username)s\" is no longer a member."
+msgstr "\"%(username)s\" օգտատերը այլևս անդամ չէ."
+
+#, python-format
+msgid "%(team_name)s was re-activated successfully!"
+msgstr "%(team_name)s- ը հաջողությամբ վերաակտիվացվել է!"
+
+#, python-format
+msgid "%(team_name)s was deactivated successfully!"
+msgstr "%(team_name)s- ն հաջողությամբ ապակտիվացվել է!"
+
+msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորները կարող են ապաակտիվացնել խմբերը: Կարող եք հաղորդագրություն գրել ադմինիստրատորներից որևէ մեկին, որպեսզի նա անջատի այն ձեզ համար: Ստորև կարող եք գտնել բոլոր ադմինիստրատորների ցուցակը."
+
+msgid "This project/group is already active!"
+msgstr "Այս նախագիծը/ խումբն արդեն ակտիվ է!"
+
+msgid "This project/group is already inactive!"
+msgstr "Այս նախագիծը/ խումբն արդեն ակտիվ չէ!"
+
+msgid "Only group/project members have permission to do this!"
+msgstr "Միայն Խմբի / Նախագցի անդամներն իրավունք ունեն դա անել!"
+
+#, python-format
+msgid "You may only invite %(maximum_number)d people at once. Any emails above that number have been ignored."
+msgstr "Դուք կարող եք միանգամից հրավիրել միայն %(maximum_number)d մարդկանց: Նշված քանակից ավել էլ․հասցեները անտեսվել են."
+
+#, python-format
+msgid "Sorry, these did not seem to be valid email addresses: %s"
+msgstr "Ներեցեք, հասցեները կարծես թե վավեր չէն. %s"
+
+#, python-format
+msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
+msgstr "Այս մարդկանց վերջերս ուղարկվել է էլ․փոստի հրավեր: Դուք կարող եք կրկին հրավերք ուղարկել վաղը ։ %s"
+
+#, python-format
+msgid "Good news! The people with these addresses are already members: %s"
+msgstr "Լավ լուր։ Այս հասցեներով մարդիկ արդեն անդամ են. %s"
+
+#, python-format
+msgid "The people with these addresses already have a user account and already have a pending invitation: %s"
+msgstr "Այս հասցեներով մարդիկ արդեն ունեն գրանցված օգտատիրոջ էջ և արդեն իսկ ունեն հաստատում սպասող հրավեր։ %s"
+
+#, python-format
+msgid "The people with these addresses already have a registered user account and have been invited directly: %s"
+msgstr "Այս հասցեներով մարդիկ արդեն ունեն գրանցված օգտատիրոջ էջ և անմիջականորեն հրավիրված են եղել։ %s"
+
+#, python-format
+msgid "Success! We are now sending out invitations to these email addresses: %s"
+msgstr "Ինչպիսի Հաջողությու՜ն: Այժմ մենք հրավերներ ենք ուղարկում էլեկտրոնային փոստի այս հասցեներին։ %s"
+
+msgid "There was an error when trying to delete the invitation."
+msgstr "Հրավերը ջնջելիս սխալ տեղի ունեցավ."
+
+msgid "The invitation was successfully deleted."
+msgstr "Հրավերը հաջողությամբ ջնջվել է."
+
+msgid "Your selection for showing this item in projects/groups was updated."
+msgstr "Ձեր ընտրությունը այս նյութը նախագծերում/ խմբերում ցուցադրելու համար թարմացվել է."
+
+#, python-format
+msgid "This item is now being shown in these projects/groups: %(group_names)s"
+msgstr "Այս նյութը այժմ ցուցադրվում է այս նախագծերում / խմբերում. %(group_names)s"
+
+#, fuzzy, python-format
+#| msgid "Which apps should be activated?"
+msgid "The %s-app was activated!"
+msgstr "Ո՞ր հավելվածները պետք է ակտիվացվեն?"
+
+msgid "No appname given for adding containers."
+msgstr "Արկղ ավելացնելու համար որևէ ծրագրի անուն չի տրվել."
+
+msgid "Your idea was deleted successfully."
+msgstr "Ձեր գաղափարը հաջողությամբ ջնջվել է."
+
+msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
+msgstr "Ձեր ավատարը մշակելիս տեղի է ունեցել սխալ: Համոզվեք, որ դուք ընտրել եք պատկերի բավականաչափ մեծ մասը!"
+
+msgid "There was an error while processing your avatar. The image file might be broken or the file transfer was interrupted."
+msgstr "Ձեր ավատարը մշակելիս տեղի է ունեցել սխալ: Պատկերի ֆայլը հնարավոր է վնասված է կամ ֆայլի փոխանցումն ընդհատվել է."
+
+msgid "<Root folder>"
+msgstr "<Root folder>"
+
+#, python-format
+msgid "You are now located in %(group_name)s. You were redirected here from another project or group that links to this item."
+msgstr "Դուք այժմ գտնվում եք %(group_name)s - ում: Դուք ուղղորդվել եք այստեղ մեկ այլ նախագծից կամ խմբից, որը կապված է այս նյութի հետ."
+
+#, python-format
+msgid "Container \"%(title)s\" could not be deleted because it contained objects that could not be deleted."
+msgstr "\"%(title)s\" արկղը չի կարող ջնջվել, քանի որ այն պարունակում է օբյեկտներ, որոնք հնարավոր չէ ջնջել."
+
+#, python-format
+msgid "You do not have permissions to delete \"%(title)s\"."
+msgstr "Դուք չունեք \"%(title)s\" -ը ջնջելու թույլտվություն."
+
+#, python-format
+msgid "Object \"%(title)s\" could not be deleted."
+msgstr "\"%(title)s\" օբյեկտը հնարավոր չէ ջնջել."
+
+#, python-format
+msgid "%(numobjects)d objects were deleted successfully."
+msgstr "%(numobjects)d օբյեկտները հաջողությամբ ջնջվել են."
+
+#, python-format
+msgid "Object \"%(title)s\" was deleted successfully."
+msgstr "\"%(title)s\" օբյեկտը հաջողությամբ ջնջվել է."
+
+#, python-format
+msgid "%(numobjects)d other objects were deleted."
+msgstr "%(numobjects)d այլ օբյեկտները ջնջվել են."
+
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr "Հարցմանը համապատասխանող %(verbose_name)s չի գտնվել"
+
+msgid "Your profile was edited successfully."
+msgstr "Ձեր անձնական էջը հաջողությամբ խմբագրվել է."
+
+msgid "Your user account is associated with an integrated Portal. This account's email address is fixed and therefore was left unchanged."
+msgstr "Ձեր օգտատիրոջ անձնական էջը կապված է ինտեգրված Պորտալի հետ: Այս հաշվի էլ․փոստի հասցեն ամրագրված է, ուստի մնացել է անփոփոխ."
+
+msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
+msgstr "Դուք փոխել եք ձեր էլ. փոստի հասցեն: Մենք շուտով ձեր էլ․հասցեյին կուղարկենք հաստատման հղումը։ Մինչ այդ հղումով անցնելը, ձեր պրոֆիլը կպահպանի ձեր հին էլ. փոստի հասցեն!"
+
+msgid "Sorry, your profile could not be saved because there was an error while processing the avatar!"
+msgstr "Ներեցեք, ձեր անձնական էջն չհաջողվեց պահպանել, քանի որ ավատարն մշակելիս առաջացավ սխալ!"
+
+msgid "Sorry, something went wrong while saving your profile!"
+msgstr "Ներեցեք, ձեր անձնական էջն պահպանելիս ինչ-որ սխալ առաջացավ!"
+
+msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
+msgstr "Ձեր էջն հաջողությամբ ջնջվել է: Ցավում ենք, որ դուք այլևս մեզ հետ չեք."
+
+#, python-format
+msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
+msgstr "Դուք միակ ադմինիստրատորն եք, որը մնացել է \"%s\" - ի համար: Խնդրում ենք նշանակել այլ ադմինիստրատոր կամ նախ ջնջել այն."
+
+msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
+msgstr "Ներեցեք, մենք չկարողացանք միանալ ձեր օգտատիրոջ էջին ներքին սխալի պատճառով: Խնդրում ենք կապվել համակարգի ադմինիստրատորի հետ!"
+
+msgid "Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!"
+msgstr "Ներեցեք, մենք չկարողացանք միանալ ձեր օգտատիրոջ էջին, քանի որ չկարողացանք ստանալ էջի կարևոր մանրամասները: Խնդրում ենք կապվել համակարգի ադմինիստրատորի հետ!"
+
+msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
+msgstr "Ներեցեք, դուք չեք կարող մուտք գործել, քանի որ ձեր էջը կասեցված է: Խնդրում ենք կապվել համակարգի ադմինիստրատորի հետ!"
+
+#, python-format
+msgid "Your account \"%(user)s\" was registered successfully. Welcome to the community!"
+msgstr "Ձեր հաշիվը \"%(user)s\" հաջողությամբ գրանցվել է: Բարի գալուստ խմբակցություն!"
+
+#, python-format
+msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
+msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Անձնական էջը պետք է հաստատվի նախքան մուտքագրվելը: Երբ դա տեղի ունենա, մենք էլ․նամակ կուղարկենք ձեր \"%(email)s\" հասցեին."
+
+#, fuzzy, python-format
+#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Մենք շուտով կուղարկենք նամակ Ձեր նշված %(email)s\" էլ. հասցեյին: Մուտք գործելու համար անհրաժեշտ է հաստատել էլ. փոստի հասցեն."
+
+msgid "The invite token you have used does not exist!"
+msgstr "Ձեր կողմից օգտագործված հրավերի թոքենը գոյություն չունի!"
+
+msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
+msgstr "Ներողություն, բայց ձեր կողմից օգտագործված հրավերի թոքենը դեռ կամ այլևս ակտիվ չէ!"
+
+msgid "Token invitations applied. You are now a member of the associated projects/groups!"
+msgstr "Թոքենի հրավերներն ընդունված են: Դուք այժմ ասոցացված նախագծերի/ խմբերի անդամ եք!"
+
+msgid "There was an error while processing your invites. Some of your invites may not have been applied."
+msgstr "Ձեր հրավերը մշակելիս առաջացել է սխալ: Ձեր հրավերներից որոշը հնարավոր է որ չեն ընդունվել."
+
+msgid "You are already logged in!"
+msgstr "Դուք արդեն մուտք եք գործել!"
+
+msgid "Please enter a token!"
+msgstr "Խնդրում ենք մուտքագրել թոքենը!"
+
+msgid "Sorry, but the invite token you have used does not seem to be valid!"
+msgstr "Կներեք, բայց ձեր օգտագործած հրավերի թոքենը կարծես թե վավեր չէ!"
+
+#, python-format
+msgid "Welcome to %(portal_name)s!"
+msgstr "Բարի գալուստ %(portal_name)s!"
+
+msgid "The user account you were looking for does not exist! Their registration was probably already denied."
+msgstr "Այն օգտատիրոջ անձնական էջը, որը դուք փնտրում եք, գոյություն չունի: Նրանց գրանցումը, հավանաբար, արդեն մերժվել էր."
+
+msgid "The user account was already approved, but thank you anyway!"
+msgstr "Օգտատիրոջ էջն արդեն հաստատված էր, բայց, ամեն դեպքում, շնորհակալ ենք!"
+
+#, python-format
+msgid "Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site."
+msgstr "Շնորհակալություն %(username)s (%(email)s) օգտատիրոջը հաստատելու համար: Նրանց ուղարկվեց ներածության նամակ, և նրանք այժմ կարող են մուտք գործել կայք."
+
+#, python-format
+msgid "The user account %(username)s (%(email)s) was already approved, so you cannot deny the registration! If this is a problem, you may want to deactivate the user manually from the admin interface."
+msgstr "%(username)s (%(email)s) էջն արդեն հաստատված էր, այնպես որ դուք չեք կարող մերժել գրանցումը: Եթե դա խնդիր է ներկայացնում, կարող եք ապաակտիվացնել օգտատիրոջը ադմինիստրատորի ինտերֆեյսից."
+
+#, python-format
+msgid "You have denied the join request of %(username)s (%(email)s)! An email was sent to let them know."
+msgstr "Դուք մերժել եք %(username)s -ի միանալու հարցումը (%(email)s) հասցեից! Նրանց տեղեկացնելու համար էլ-նամակ է ուղարկվել."
+
+msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
+msgstr "Այն անձնական էջը, որը դուք փնտրում եք, գոյություն չունի: Ձեր գրանցումը հավանաբար արդեն մերժվել է կամ էլ․ հասցեի թոքենը լրացել է."
+
+msgid "The email for this account seems to already have been confirmed!"
+msgstr "Այս Էջի էլ․հասցեն, կարծես, արդեն հաստատված է!"
+
+msgid "The link you supplied for the email confirmation is no longer valid!"
+msgstr "Էլ.հասցեի հաստատման համար տրամադրած հղումն այլևս վավեր չէ!"
+
+msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
+msgstr "Էլ․հասցեն, որը դուք փորձում եք հաստատել, արդեն հաստատվել է կամ պատկանում է մեկ այլ օգտատիրոջ!"
+
+#, python-format
+msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+msgstr "Ձեր էլ. հասցեն %(email)s հաջողությամբ հաստատվեց։ Բարի գալուստ համայնք!"
+
+#, python-format
+msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
+msgstr "Ձեր էլ. հասցեն %(email)s հաջողությամբ հաստատվեց: Այնուամենայնիվ, ձեր Էջը դեռևս ակտիվ չէ և հարկավոր է, որպեսզի այն հաստատվի ադմինիստրատորի կողմից նախքան մուտք գործելը: Ակտիվացնելուն պես մենք ձեզ համապատասխան նամակ կուղարկենք!"
+
+msgid "The unsubscribe link you have clicked does not seem to be valid!"
+msgstr "Ձեր սեղմած բաժանորդագրման չեղարկման հղումը կարծես թե վավեր չէ!"
+
+#, python-format
+msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
+msgstr "Մենք հանեցինք ձեր էլ. հասցեն \"%(email)s\" մեր փոստային ցուցակից: Դուք այլևս էլ-նամակներ չեք ստանա մեզանից!"
+
+msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
+msgstr "Բարի գալուստ! Ձեզ հրավիրվել են հետևյալ նախագծեր և խմբեր: Խնդրում ենք սեղմել ներքևի կոճակը ՝ յուրաքանչյուրի հրավերը ընդունելու կամ մերժելու համար!"
+
+msgid "Your Announcement was created successfully."
+msgstr "Ձեր հայտարարությունը հաջողությամբ ստեղծվել է."
+
+msgid "Your Announcement was saved successfully."
+msgstr "Ձեր հայտարարությունը հաջողությամբ պահպանվել է."
+
+msgid "Your Announcement was deleted successfully."
+msgstr "Ձեր հայտարարությունը հաջողությամբ ջնջվել է."
+
+msgid "Your Announcement was activated successfully."
+msgstr "Ձեր հայտարարությունը հաջողությամբ ակտիվացվել է."
+
+msgid "Your Announcement was deactivated successfully."
+msgstr "Ձեր հայտարարությունը հաջողությամբ ապաակտիվացվել է."
+
+#, python-format
+msgid "You are not currently a member of %s! If you wish you can request to become a member below."
+msgstr "Դուք ներկայումս %s- ի անդամ չեք: Եթե ցանկանում եք, կարող եք անդամագրվել ներքևում."
+
+msgid "Your changes have been saved."
+msgstr "Ձեր փոփոխությունները պահպանվել են."
+
+#~ msgid "Choose App"
+#~ msgstr "Ընտրել հավելվածը"
+
+#~ msgid ""
+#~ "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
+#~ "\n"
+#~ "Du kannst dich ab sofort unter %(domain_url)s einloggen.\n"
+#~ "\n"
+#~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
+#~ "\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "\n"
+#~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
+#~ "\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "\n"
+#~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
+#~ "\n"
+#~ "Viele Grüße und viel Spaß hier,\n"
+#~ "das %(site_name)s Team"
+#~ msgstr ""
+#~ "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
+#~ "\n"
+#~ "Du kannst dich ab sofort unter %(domain_url)s einloggen.\n"
+#~ "\n"
+#~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
+#~ "\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "\n"
+#~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
+#~ "\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "\n"
+#~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
+#~ "\n"
+#~ "Viele Grüße und viel Spaß hier,\n"
+#~ "das %(site_name)s Team"
