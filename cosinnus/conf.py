@@ -221,6 +221,17 @@ class CosinnusConf(AppConf):
     # (they are still admin accessible)
     DISABLED_COSINNUS_APPS = []
     
+    # a list of which app checkboxes should be default-active on the create group form
+    DEFAULT_ACTIVE_GROUP_APPS = [
+        'cosinnus_etherpad',
+        'cosinnus_event',
+        'cosinnus_file',
+        'cosinnus_marketplace',
+        'cosinnus_note',
+        'cosinnus_poll',
+        'cosinnus_todo',
+    ]
+    
     # should the facebook integration scripts and templates be loaded?
     FACEBOOK_INTEGRATION_ENABLED = False
     # Facebook app id to use
