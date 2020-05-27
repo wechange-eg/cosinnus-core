@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-20 13:35+0200\n"
+"POT-Creation-Date: 2020-05-27 11:39+0200\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2513,6 +2513,11 @@ msgid "Share"
 msgstr "Delen"
 
 msgid "Share on Facebook"
+msgstr "Delen op Facebook"
+
+#, fuzzy
+#| msgid "Share on Facebook"
+msgid "Share on Twitter"
 msgstr "Delen op Facebook"
 
 #. Translators: __INCLUDE_JS_PO__
