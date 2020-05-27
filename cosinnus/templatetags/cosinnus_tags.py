@@ -57,6 +57,7 @@ from django.contrib.contenttypes.models import ContentType
 from cosinnus.utils.user import check_user_has_accepted_portal_tos
 from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
 from django.templatetags.i18n import do_translate, do_block_translate, TranslateNode, BlockTranslateNode
+from cosinnus.utils.html import render_html_with_variables
 
 logger = logging.getLogger('cosinnus')
 
@@ -1117,17 +1118,7 @@ def render_announcement_html(context, announcement):
 @register.simple_tag(takes_context=True)
 def render_embedded_html_with_variables(context, html, variables=None):
     """ Renders any raw HTML with some request context variables """
-    if variables is None:
-        variables = {}
-    user = context.request.user
-    variables.update({
-        'user_first_name': user.first_name,
-        'user_last_name': user.last_name,
-        'user_full_name': full_name(user),
-    })
-    for variable_name, variable_value in variables.items():
-        html = html.replace('[[%s]]' % variable_name, str(variable_value))
-    return mark_safe(html)
+    return render_html_with_variables(context.request.user, html, variables=variables)
 
 
 class RenderContextIdMixin(object):

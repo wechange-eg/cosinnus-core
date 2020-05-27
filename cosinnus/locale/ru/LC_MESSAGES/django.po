@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-18 12:05+0200\n"
+"POT-Creation-Date: 2020-05-27 11:39+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -406,6 +406,24 @@ msgstr "Español"
 
 msgid "Romanian--NATIVE-LANGUAGE"
 msgstr "Română"
+
+msgid "Belarussian--NATIVE-LANGUAGE"
+msgstr "Русский"
+
+msgid "Dutch--NATIVE-LANGUAGE"
+msgstr "Nederlands"
+
+msgid "Azerbaijani--NATIVE-LANGUAGE"
+msgstr "Azerbaycan dili"
+
+msgid "Armenian--NATIVE-LANGUAGE"
+msgstr "Հայոց լեզու"
+
+msgid "Georgian--NATIVE-LANGUAGE"
+msgstr "ქართული ენა"
+
+msgid "Kazakh--NATIVE-LANGUAGE"
+msgstr "Қазақ тілі"
 
 msgid "Attachments"
 msgstr "Приложения"
@@ -2516,6 +2534,11 @@ msgid "Share"
 msgstr "Поделиться"
 
 msgid "Share on Facebook"
+msgstr "Поделиться на Фейсбуке"
+
+#, fuzzy
+#| msgid "Share on Facebook"
+msgid "Share on Twitter"
 msgstr "Поделиться на Фейсбуке"
 
 #. Translators: __INCLUDE_JS_PO__

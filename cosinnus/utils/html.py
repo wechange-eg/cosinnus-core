@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from cosinnus.utils.urls import BETTER_URL_RE
 from cosinnus.models.group import CosinnusPortal
+from django.utils.safestring import mark_safe
 
 
 def replace_non_portal_urls(html_text, replacement_url, portal_url=None):
@@ -18,3 +19,19 @@ def replace_non_portal_urls(html_text, replacement_url, portal_url=None):
         if not matched_url.startswith(portal_url):
             html_text = html_text[:m.start()] + replacement_url + html_text[m.end():]
     return html_text
+
+
+def render_html_with_variables(user, html, variables=None):
+    """ Renders any raw HTML with some request context variables """
+    from cosinnus.templatetags.cosinnus_tags import full_name
+    if variables is None:
+            variables = {}
+    variables.update({
+        'user_first_name': user.first_name,
+        'user_last_name': user.last_name,
+        'user_full_name': full_name(user),
+    })
+    for variable_name, variable_value in variables.items():
+        html = html.replace('[[%s]]' % variable_name, str(variable_value))
+    return mark_safe(html)
+

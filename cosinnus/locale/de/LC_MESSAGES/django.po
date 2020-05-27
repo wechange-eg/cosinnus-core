@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-18 12:05+0200\n"
-"PO-Revision-Date: 2020-05-19 13:02+0100\n"
+"POT-Creation-Date: 2020-05-27 11:39+0200\n"
+"PO-Revision-Date: 2020-05-27 11:40+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -516,6 +516,24 @@ msgstr "Español"
 msgid "Romanian--NATIVE-LANGUAGE"
 msgstr "Română"
 
+msgid "Belarussian--NATIVE-LANGUAGE"
+msgstr "Русский"
+
+msgid "Dutch--NATIVE-LANGUAGE"
+msgstr "Nederlands"
+
+msgid "Azerbaijani--NATIVE-LANGUAGE"
+msgstr "Azerbaycan dili"
+
+msgid "Armenian--NATIVE-LANGUAGE"
+msgstr "Հայոց լեզու"
+
+msgid "Georgian--NATIVE-LANGUAGE"
+msgstr "ქართული ენა"
+
+msgid "Kazakh--NATIVE-LANGUAGE"
+msgstr "Қазақ тілі"
+
 msgid "Attachments"
 msgstr "Anhänge"
 
@@ -950,11 +968,9 @@ msgstr "Facebook Fan-Seiten-ID"
 msgid "Nextcloud Group ID"
 msgstr "Nextcloud Gruppen-ID"
 
-#| msgid "Nextcloud Group ID"
 msgid "Nextcloud Groupfolder Name"
 msgstr "Nextcloud Gruppenordner-Name"
 
-#| msgid "Nextcloud Group ID"
 msgid "Nextcloud Groupfolder ID"
 msgstr "Nextcloud Gruppenordner-ID"
 
@@ -2123,7 +2139,6 @@ msgstr "Schaut sie euch an über den Link im Menü oben oder"
 msgid "get started here..."
 msgstr "direkt hier..."
 
-#| msgid "Activate"
 msgid "Activate Cloud"
 msgstr "Cloud aktivieren"
 
@@ -2926,6 +2941,10 @@ msgstr "Teilen"
 
 msgid "Share on Facebook"
 msgstr "Auf Facebook teilen"
+
+#| msgid "Share on Facebook"
+msgid "Share on Twitter"
+msgstr "Auf Twitter teilen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Contact"
@@ -4102,11 +4121,9 @@ msgstr ""
 "Um nach Cloud-Dateien zu suchen, besuche bitte die Cloud-App und benutze "
 "dort die integrierte Suchfunktion."
 
-#| msgid "Search in teams"
 msgid "Searching in Cloud files"
 msgstr "In Cloud-Dateien suchen"
 
-#| msgid "Search in teams"
 msgid "Search in Cloud files"
 msgstr "In Cloud-Dateien suchen"
 
@@ -5813,7 +5830,6 @@ msgstr ""
 "%(group_names)s"
 
 #, python-format
-#| msgid "Which apps should be activated?"
 msgid "The %s-app was activated!"
 msgstr "Die %s-App wurde aktiviert!"
 

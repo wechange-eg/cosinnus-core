@@ -460,7 +460,7 @@ def user_activity_info(request):
     portal = CosinnusPortal.get_current()
     for membership in CosinnusGroupMembership.objects.filter(group__portal=CosinnusPortal.get_current(), user__is_active=True).exclude(user__last_login__exact=None):
         user = membership.user
-        user_row = users.get(user.id, [0, 0, 0, 0, (now()-user.last_login).days, 1])
+        user_row = users.get(user.id, [0, 0, 0, 0, (now()-user.last_login).days, 1, user.date_joined])
         user_row[0] += 1
         if membership.group.type == CosinnusGroup().TYPE_PROJECT:
             user_row[1] +=1 
@@ -476,7 +476,7 @@ def user_activity_info(request):
     
     rows = users.values()
     rows = sorted(rows, key=lambda row: row[0], reverse=True)
-    headers = ['projects-and-groups-count', 'groups-only-count', 'projects-only-count', 'admin-of-projects-and-groups-count', 'user-last-login-days', 'current-tos-accepted']
+    headers = ['projects-and-groups-count', 'groups-only-count', 'projects-only-count', 'admin-of-projects-and-groups-count', 'user-last-login-days', 'current-tos-accepted', 'registration-date']
 
     #prints += '<br/>'.join([','.join((str(cell) for cell in row)) for row in rows])
     #return HttpResponse(prints)

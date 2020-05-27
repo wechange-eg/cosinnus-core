@@ -44,6 +44,12 @@
 			{% trans "Welcome-Email Text" as email_text_label %}
 			{% trans "Welcome-Email Text" as email_text_placeholder %}
 			{% include 'cosinnus/fields/default_field.html' with field=form.email_text label=email_text_label placeholder=email_text_placeholder large_field=True %}
+			<p>
+                {% trans "You may use the following variables:" %}
+                [[user_first_name]]
+                [[user_last_name]]
+                [[user_full_name]]
+            </p>
         </div>
         
         

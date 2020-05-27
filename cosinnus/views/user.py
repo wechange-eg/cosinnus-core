@@ -73,6 +73,7 @@ from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from django_select2.views import Select2View, NO_ERR_RESP
 from django.core.exceptions import PermissionDenied
 from cosinnus import cosinnus_notifications
+from cosinnus.utils.html import render_html_with_variables
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -427,7 +428,7 @@ def _send_user_welcome_email_if_enabled(user, force=False):
         return
     
     # render the text as markdown
-    text = textfield(text)
+    text = textfield(render_html_with_variables(user, text))
     subj_user = _('Welcome to %(portal_name)s!') % {'portal_name': portal.name}
     send_html_mail_threaded(user, subj_user, text)
     
