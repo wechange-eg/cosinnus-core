@@ -2,7 +2,7 @@
         
 {{ inlineform.image.errors }}
 
-{% if inlineform.image.value %}
+{% if inlineform.image.value and inlineform.image.value.path %}
     <div class="row">
         <div class="col-xs-4 col-sm-2">
             <img class="image" style="width: 120px;" src="{% thumbnail inlineform.image.value 120x120 crop=1 upscale=1 %}"></img>
@@ -13,7 +13,7 @@
     {% trans "Choose and upload a gallery image" as placeholder %}
     {% render_field inlineform.image placeholder=placeholder %}
 </div>
-{% if inlineform.image.value %}
+{% if inlineform.image.value and inlineform.image.value.path %}
         </div>
     </div>
 {% endif %}
