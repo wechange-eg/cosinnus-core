@@ -460,15 +460,14 @@
 					
 					<p>
 						<b>{% trans "Share" %}:</b>&nbsp;
-						<a href="https://www.facebook.com/sharer/sharer.php?u={{ group.get_absolute_url|escape }}" target="_blank" title="{% trans "Share on Facebook" %}">
+						<a href="https://www.facebook.com/sharer/sharer.php?u={{ group.get_absolute_url|escape }}" target="_blank"
+						           title="{% trans "Share on Facebook" %}">
 							<i class="fa fa-2x fa-facebook-square"></i
 						></a>&nbsp;
-						<a href="https://twitter.com/intent/tweet?text=Check out {{ group.get_absolute_url|escape }}" target="_blank">
+						<a href="https://twitter.com/intent/tweet?text=Check out {{ group.get_absolute_url|escape }}" target="_blank"
+						           title="{% trans "Share on Twitter" %}">
 							<i class="fa fa-2x fa-twitter-square"></i
 						></a>&nbsp;
-						<a href="https://plus.google.com/share?url={{ group.get_absolute_url|escape }}" target="_blank">
-							<i class="fa fa-2x fa-google-plus-square"></i
-						></a>
 					</p>
 					
 				{% endblock microsite_group_description %}
