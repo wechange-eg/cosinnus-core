@@ -20,6 +20,7 @@ from cosinnus.models.group import CosinnusPortal
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.utils.safestring import mark_safe
 from django.utils.html import strip_tags
+from cosinnus.utils.html import replace_non_portal_urls
 logger = logging.getLogger('cosinnus')
 
 __all__ = ['send_mail']
@@ -193,7 +194,7 @@ def send_html_mail_threaded(to_user, subject, html_content):
         
         'notification_body': None, # this is a body text that can be used for group description or similar
         
-        'notification_item_html': mark_safe(html_content),
+        'notification_item_html': mark_safe(replace_non_portal_urls(html_content)),
     }
     
     send_mail_or_fail_threaded(to_user.email, subject, template, data, is_html=True)
