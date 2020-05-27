@@ -10,6 +10,8 @@ from cosinnus.models.group import CosinnusPortal
 from django.urls.base import reverse
 from cosinnus.views.user import _send_user_welcome_email_if_enabled
 from django.shortcuts import redirect
+from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
 
 
 class AdministrationView(TemplateView):
@@ -35,6 +37,7 @@ class UserWelcomeEmailEditView(FormView):
         self.portal = CosinnusPortal.get_current()
         if request.GET.get('send_test', False) == '1':
             _send_user_welcome_email_if_enabled(self.request.user, force=True)
+            messages.success(self.request, _('Test email sent!'))
             return redirect(self.get_success_url())
         return super(UserWelcomeEmailEditView, self).dispatch(request, *args, **kwargs)
     
