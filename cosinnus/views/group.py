@@ -1062,26 +1062,23 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
         current_status = self.object.status
         new_status = form.cleaned_data.get('status')
         
-        if (len(self.group.admins) > 1 or not self.group.is_admin(user)):
-            if user != self.request.user or check_user_superuser(self.request.user):
-                if current_status == MEMBERSHIP_PENDING and new_status == MEMBERSHIP_MEMBER:
-                    signals.user_group_join_accepted.send(sender=self, obj=self.group, user=user, audience=[user])
-                if current_status in [MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER] and new_status == MEMBERSHIP_ADMIN \
-                        and not user.id == self.request.user.id:
-                    cosinnus_notifications.user_group_made_admin.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
-                elif current_status == MEMBERSHIP_ADMIN and new_status in [MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER] \
-                        and not user.id == self.request.user.id:
-                    cosinnus_notifications.user_group_admin_demoted.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
-                ret = super(GroupUserUpdateView, self).form_valid(form)
-                # update index for the group
-                typed_group = ensure_group_type(self.object.group)
-                typed_group.update_index()
-                return ret
-            else:
-                messages.error(self.request, _('You cannot change your own admin status.'))
-        elif current_status == MEMBERSHIP_ADMIN and new_status != MEMBERSHIP_ADMIN:
+        if current_status == MEMBERSHIP_ADMIN and new_status != MEMBERSHIP_ADMIN and len(self.group.admins) <= 1:
             messages.error(self.request, _('You cannot remove “%(username)s” form '
                 'this team. Only one admin left.') % {'username': full_name(user)})
+        else:
+            if current_status == MEMBERSHIP_PENDING and new_status == MEMBERSHIP_MEMBER:
+                signals.user_group_join_accepted.send(sender=self, obj=self.group, user=user, audience=[user])
+            if current_status in [MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER] and new_status == MEMBERSHIP_ADMIN \
+                    and not user.id == self.request.user.id:
+                cosinnus_notifications.user_group_made_admin.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
+            elif current_status == MEMBERSHIP_ADMIN and new_status in [MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER] \
+                    and not user.id == self.request.user.id:
+                cosinnus_notifications.user_group_admin_demoted.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
+            ret = super(GroupUserUpdateView, self).form_valid(form)
+            # update index for the group
+            typed_group = ensure_group_type(self.object.group)
+            typed_group.update_index()
+            return ret
         return HttpResponseRedirect(self.get_success_url())
 
     def get_user_qs(self):
