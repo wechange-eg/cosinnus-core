@@ -650,6 +650,8 @@ class CosinnusConf(AppConf):
     CLOUD_PREFIX_GROUP_FOLDERS = True
     # the quota for groupfolders, in bytes. -3 is the default for "unlimited"
     CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA = -3
+    # timeout for nextcloud webdav requests in seconds
+    CLOUD_NEXTCLOUD_REQUEST_TIMEOUT = 15
     
     # if set to a hex color string,
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
