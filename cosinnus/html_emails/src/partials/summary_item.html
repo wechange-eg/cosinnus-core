@@ -4,28 +4,30 @@
             <columns class="spacer" large="1" small="1">&nbsp;</columns>
             
             <columns class="image image-column" large="1" small="1" valign="middle">
-                <a href="{{#rw this}}object_url{{/rw}}">
+                <a href="{{#rw this}}action_user_url{{/rw}}">
                     <!-- always include the width="nn" attribute in <img> for Outlook! -->
-                    <img class="regular-img" width="40" src="{{#rw this}}image_url{{/rw}}" alt="" />
+                    <img class="regular-img" width="40" src="{{#rw this}}user_image_url{{/rw}}" alt="" />
                 </a>
             </columns>
         
             <columns class="small-text" large="5" small="5" valign="middle">
                 <row class="event-text colored-text">
                     <columns class="unpadded">
-                        <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
+                        <a href="{{#rw this}}action_user_url{{/rw}}" target="_blank">
                             {{#rwif action_user_name raw_if="action_user_name" }}
                                 <span class="bold-text">{{#rw this}}action_user_name{{/rw}}</span>
                             {{/rwif}}
+                        </a>
+                        <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
                             <span class="non-bold-text">{{#rw this}}event_text{{/rw}}</span>
                         </a>
                     </columns>
                 </row>
-                {{#rwif event_meta raw_if="event_meta" }}
+                {{#rwif event_time raw_if="event_time" }}
 	                <row class="event-time grey-text">
 	                    <columns class="unpadded">
 	                        <a href="{{#rw this}}object_url{{/rw}}">
-	                            {{#rw this}}event_meta{{/rw}}
+	                            {{#rw this}}event_time{{/rw}}
 	                        </a>
 	                    </columns>
 	                </row>
@@ -37,13 +39,13 @@
                 <table class="group-aside" role=”presentation” cellspacing=”0″ cellpadding=”0″  align="right">
                    <tr>
                        <th class="group-aside-text smaller-text">
-                           <a href="{{#rw this}}object_url{{/rw}}">
+                           <a href="{{#rw this}}origin_url{{/rw}}">
                                {{#rw this}}origin_name{{/rw}} 
                            </a>
                        </th>
                        {{#rwif origin_icon_url raw_if="origin_icon_url" }}
                        <th class="group-aside-icon">
-                           <a href="{{#rw this}}object_url{{/rw}}">
+                           <a href="{{#rw this}}origin_url{{/rw}}">
 	                           <!-- always include the width="nn" attribute in <img> for Outlook! -->
                                <img class="smallest-img inline-img padded-img-no-right" width="20" src="{{#rw this}}origin_icon_url{{/rw}}" />
                            </a>
@@ -68,7 +70,7 @@
                 <columns class="spacer" large="1" small="1">&nbsp;</columns>
                 
                 <columns class="image-column" large="1" small="1" valign="middle">
-	                    <a href="{{#rw this}}object_url{{/rw}}">
+	                    <a href="{{#rw this}}sub_object_url{{/rw}}">
 	                        <!-- always include the width="nn" attribute in <img> for Outlook! -->
 	                        <img class="small-img padded-img" width="30" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
 	                    </a>
@@ -78,7 +80,7 @@
                     <row class="bold-text">
                         <columns class="unpadded">
                             <span class="bold-text">
-                                <a class="uncolored-text" href="{{#rw this}}object_url{{/rw}}">{{#rw this}}sub_object_name{{/rw}}</a>
+                                <a class="uncolored-text" href="{{#rw this}}sub_object_url{{/rw}}">{{#rw this}}sub_object_name{{/rw}}</a>
                             </span>
                         </columns>
                     </row>
@@ -119,12 +121,17 @@
             
                 <columns class="object-text-column" large="10" small="10" valign="top">
                     {{#rwif display_object_name raw_if="display_object_name" }}
-                        <p class="bold-text">
-                            <a class="uncolored-text" href="{{#rw this}}object_url{{/rw}}">
+                        <p>
+                            <a class="bold-text uncolored-text" href="{{#rw this}}object_url{{/rw}}">
                                 {{#rw this}}object_name{{/rw}}
                             </a>
+		                    {{#rwif event_meta raw_if="event_meta" }}
+		                        <br/>
+		                        {{#rw this}}event_meta{{/rw}}
+		                    {{/rwif}}
                         </p>
-	                {{/rwif}}
+                    {{/rwif}}
+	                
                    {{#rw this}}object_text{{/rw}}
                    
                    {{#if raw}}
