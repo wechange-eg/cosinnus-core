@@ -7,12 +7,14 @@ from cosinnus.models.group import CosinnusPortal
 from django.utils.safestring import mark_safe
 
 
-def replace_non_portal_urls(html_text, replacement_url, portal_url=None):
+def replace_non_portal_urls(html_text, replacement_url=None, portal_url=None):
     """ Replaces all URLs in html text that do not point to `portal_url` as domain,
         with a replacement URL. """
     
     if portal_url is None:
         portal_url = CosinnusPortal.get_current().get_domain()
+    if replacement_url is None:
+        replacement_url = portal_url
     
     for m in reversed([it for it in BETTER_URL_RE.finditer(html_text)]):
         matched_url = m.group()
