@@ -1,36 +1,3 @@
 @import 'settings';
 @import 'wechange_variables';
 
-.origin {
-    h3 {
-        padding-left: $global-margin;
-        @extend h5;
-        margin-bottom: 0;
-
-        a {
-            font-weight: 700;
-            text-decoration: none;
-            color: $link-emphasis-color;
-        }
-    }
-}
-.action_buttons {
-    margin-top: $global-margin * 2;
-}
-    
-a.action-button {
-    background-color: $link-emphasis-color;
-    color: #FFF;
-    border-radius: 3px;
-    padding: $global-padding * 0.5 $global-padding;
-    margin-right: $global-margin;
-    text-decoration: none;
-    font-weight: bold;
-    border: 1px solid $link-emphasis-color-dark;
-    
-    &.action-button-alternate {
-        background-color: $link-alternate-color;
-        border: 1px solid $link-alternate-color-dark;
-        color: $light-black;
-    }
-}

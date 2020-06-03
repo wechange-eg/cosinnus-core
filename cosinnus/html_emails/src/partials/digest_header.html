@@ -1,0 +1,24 @@
+<row class="special-padded-row digest-header-row digest-header bordered-container">
+    <columns class="spacer" large="1" small="1">&nbsp;</columns>
+    
+    <columns class="small-text" large="10" small="10" valign="middle">
+        <p>
+	        {{#rwif addressee raw_if="addressee"}}
+	            <span class="bold-text">
+		            {{#if raw}}
+		                {{{{raw}}}}{% trans "Hello" %}{{{{/raw}}}}
+		            {{else}}
+		                Hello
+		            {{/if}}
+	                {{#rw this}}addressee{{/rw}},
+	            </span>
+	            <br/>
+                <br/>
+	        {{/rwif}}
+	        
+	        {{#rw this}}topic{{/rw}}
+        </p>
+    </columns>
+    
+    <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
+</row>

@@ -16,6 +16,7 @@ from django.apps import apps
 
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 # delegate import to avoid cyclic dependencies
 _CosinnusPortal = None
@@ -139,4 +140,10 @@ def image_thumbnail_url(image, size):
         @param size: Tuple of sizes, e.g. (80, 80) """
     thumbnail = image_thumbnail(image, size)
     return thumbnail.url if thumbnail else None
+
+def get_image_url_for_icon(icon_name, large=False):
+    """ Returns the static URL for an image of a font-awesome icon.
+        @param icon_name: e.g. "fa-user" """
+    file_path =  'images/fa-icons/%s/%s.png' % ('large' if large else 'small', icon_name)
+    return static(file_path)
     

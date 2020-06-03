@@ -63,14 +63,13 @@ notifications = {
         'alert_reason': _('You are an admin of this team'),
         
         'is_html': True,
-        'snippet_type': 'news',
-        'event_text': _('New membership request'),
-        'notification_text': _('"%(sender_name)s" requested to become a member of %(team_name)s.'),
+        'event_text': _('"%(sender_name)s" requested to become a member of %(team_name)s.'),
         'subject_text': _('"%(sender_name)s" requested to become a member of %(team_name)s.'),
         'data_attributes': {
             'object_name': '_sender_name',
             'object_url': 'get_member_page_url', # the group members page
             'object_text': '_sender.cosinnus_profile.description', 
+            'object_icon': '_sender.cosinnus_profile.get_icon',
         },
        'notification_reason': 'admin',
     },
@@ -87,12 +86,12 @@ notifications = {
         'alert_reason': '',
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('Membership request accepted'),
-        'notification_text': _('Your membership request for %(team_name)s was accepted!'),
+        'topic': _('Your membership request for %(team_name)s was accepted!'),
         'subject_text': _('Your membership request for %(team_name)s was accepted!'),
         'data_attributes': {
-            'object_name': '_sender_name',
+            'object_name': 'name',
+            'object_text': 'description',
         },
        'notification_reason': 'none',
     },
@@ -108,12 +107,12 @@ notifications = {
         'alert_reason': '',
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('Membership request declined'),
-        'notification_text': _("We're sorry, but your membership request for %(team_name)s was declined."),
+        'topic': _("We're sorry, but your membership request for %(team_name)s was declined."),
         'subject_text': _('Your membership request for %(team_name)s was declined.'),
         'data_attributes': {
-            'object_name': '_sender_name',
+            'object_name': 'name',
+            'object_text': 'description',
         },
        'notification_reason': 'none',
     },
@@ -132,13 +131,17 @@ notifications = {
         'alert_reason': _('You are an admin of this team'),
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('%(sender_name)s accepted the invitation'),
         'subject_text': _('"%(sender_name)s" has accepted the invitation to %(team_name)s.'),
         'data_attributes': {
             'object_name': '_sender_name',
             'object_url': 'get_member_page_url', # the group members page
-            'object_text': '_sender.cosinnus_profile.description', 
+            'object_text': '_sender.cosinnus_profile.description',
+            'object_icon': '_sender.cosinnus_profile.get_icon',
+            'sub_object_name': 'name', 
+            'sub_object_text': 'description',
+            'sub_object_url': 'get_absolute_url',
+            'sub_object_icon': 'get_icon',
         },
        'notification_reason': 'admin',
     },
@@ -156,13 +159,17 @@ notifications = {
         'alert_reason': _('You are an admin of this team'),
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('%(sender_name)s declined the invitation'),
         'subject_text': _('"%(sender_name)s" has declined the invitation to %(team_name)s.'),
         'data_attributes': {
             'object_name': '_sender_name',
             'object_url': 'get_member_page_url', # the group members page
-            'object_text': '_sender.cosinnus_profile.description', 
+            'object_text': '_sender.cosinnus_profile.description',
+            'object_icon': '_sender.cosinnus_profile.get_icon',
+            'sub_object_name': 'name', 
+            'sub_object_text': 'description',
+            'sub_object_url': 'get_absolute_url',
+            'sub_object_icon': 'get_icon',
         },
        'notification_reason': 'admin',
     },    
@@ -177,14 +184,15 @@ notifications = {
         'alert_reason': '',
         
         'is_html': True,
-        'snippet_type': 'news',
-        'event_text': _('Made you an admin'),
-        'notification_text': _('%(sender_name)s made you an admin of "%(team_name)s" on %(portal_name)s!'),
+        'event_text': _('%(sender_name)s made you an admin of "%(team_name)s" on %(portal_name)s!'),
         'subject_text': _('%(sender_name)s made you an admin of "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
-            'object_name': '_sender_name',
-            'object_url': '_sender.cosinnus_profile.get_absolute_url',
-            'object_text': '_sender.cosinnus_profile.description', 
+            'object_name': 'name',
+            'object_text': 'description',
+            'sub_object_name': '_sender_name', 
+            'sub_object_text': '_sender.cosinnus_profile.description',
+            'sub_object_url': '_sender.cosinnus_profile.get_absolute_url',
+            'sub_object_icon': '_sender.cosinnus_profile.get_icon',
         },
         'notification_reason': 'none',
     },    
@@ -199,14 +207,15 @@ notifications = {
         'alert_reason': '',
         
         'is_html': True,
-        'snippet_type': 'news',
-        'event_text': _('Revoked your admin status'),
-        'notification_text': _('%(sender_name)s revoked your admin status of "%(team_name)s" on %(portal_name)s!'),
+        'event_text': _('%(sender_name)s revoked your admin status of "%(team_name)s" on %(portal_name)s!'),
         'subject_text': _('%(sender_name)s revoked your admin status of "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
-            'object_name': '_sender_name',
-            'object_url': '_sender.cosinnus_profile.get_absolute_url',
-            'object_text': '_sender.cosinnus_profile.description', 
+            'object_name': 'name',
+            'object_text': 'description',
+            'sub_object_name': '_sender_name', 
+            'sub_object_text': '_sender.cosinnus_profile.description',
+            'sub_object_url': '_sender.cosinnus_profile.get_absolute_url',
+            'sub_object_icon': '_sender.cosinnus_profile.get_icon',
         },
         'notification_reason': 'none',
     },
@@ -222,9 +231,7 @@ notifications = {
         'alert_multi_type': 2,
         
         'is_html': True,
-        'snippet_type': 'event',
         'event_text': _('%(sender_name)s tagged you in'),
-        'notification_text': _('You were tagged by %(sender_name)s'),
         'subject_text': _('You were tagged in "%(object_name)s" in %(team_name)s.'),
         'data_attributes': {
             'object_name': 'title', 
@@ -243,15 +250,18 @@ notifications = {
         'alert_reason': '',
         
         'is_html': True,
-        'snippet_type': 'news',
-        'event_text': _('Invited you'),
-        'notification_text': _('%(sender_name)s invited you to join "%(team_name)s" on %(portal_name)s! <br/><br/>' 
+        'event_text': _('%(sender_name)s invited you to join %(team_name)s'),
+        'topic': _('%(sender_name)s invited you to join "%(team_name)s" on %(portal_name)s! <br/><br/>' 
                            ' To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation.'),
         'subject_text': _('%(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
-            'object_name': '_sender_name',
+            'object_name': 'name',
             'object_text': 'description', 
             'action_button_alternate_url': 'get_absolute_url',
+            'sub_object_name': '_sender_name', 
+            'sub_object_text': '_sender.cosinnus_profile.description',
+            'sub_object_url': '_sender.cosinnus_profile.get_absolute_url',
+            'sub_object_icon': '_sender.cosinnus_profile.get_icon',
         },
         'origin_url_suffix': '?join=1',
         'action_button_text': _('Accept invitation'),
@@ -268,14 +278,17 @@ notifications = {
         'can_be_alert': False,
         
         'is_html': True,
-        'snippet_type': 'news',
-        'event_text': _('Invited you'),
-        'notification_text': settings.COSINNUS_RECRUIT_EMAIL_BODY_TEXT,
+        'event_text': _('%(sender_name)s invited you'),
+        'topic': settings.COSINNUS_RECRUIT_EMAIL_BODY_TEXT,
         'subject_text': _('%(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
-            'object_name': '_sender_name',
+            'object_name': 'name',
+            'object_text': 'description',
             'object_url': '_sender.cosinnus_profile.get_absolute_url',
-            'object_text': '_sender.cosinnus_profile.description', 
+            'sub_object_name': '_sender_name',
+            'sub_object_text': '_sender.cosinnus_profile.description', 
+            'sub_object_url': '_sender.cosinnus_profile.get_absolute_url',
+            'sub_object_icon': '_sender.cosinnus_profile.get_icon',
             'action_button_alternate_url': 'get_absolute_url',
         },
         'origin_url_suffix': '?invited=1',
@@ -293,14 +306,14 @@ notifications = {
         'can_be_alert': False,
         
         'is_html': True,
-        'snippet_type': 'news',
         'event_text': _('New link to the moved project/group'),
-        'notification_text': _('One of your projects/groups were moved to the portal "%(portal_name)s"! <br/><br/> '
+        'topic': _('One of your projects/groups were moved to the portal "%(portal_name)s"! <br/><br/> '
                                'Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>'
                                'All of your old URLs will continue to work and redirect you to the correct page on the new portal.'),
         'subject_text': _('"%(team_name)s" was moved to %(portal_name)s!'),
         'data_attributes': {
             'object_name': 'name', # Main title and label of the notification object
+            'object_text': 'description',
             'image_url': 'portal.get_logo_image_url', # image URL for the item. default if omitted is the event creator's user avatar
         },
         'notification_reason': 'none',
@@ -315,13 +328,15 @@ notifications = {
         'moderatable_content': True,
         
         'is_html': True,
-        'snippet_type': 'news',
-        'event_text': _('Created'),
-        'notification_text': _('%(sender_name)s just created the project/group "%(team_name)s" on %(portal_name)s!'),
+        'event_text': _('%(sender_name)s just created the project/group "%(team_name)s" on %(portal_name)s!'),
         'subject_text': _('%(sender_name)s just created the project/group "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
-            'object_name': '_sender_name',
-            'object_text': 'description', 
+            'object_name': 'name',
+            'object_text': 'description',
+            'sub_object_name': '_sender_name', 
+            'sub_object_text': '_sender.cosinnus_profile.description',
+            'sub_object_url': '_sender.cosinnus_profile.get_absolute_url',
+            'sub_object_icon': '_sender.cosinnus_profile.get_icon',
         },
         'notification_reason': 'none',
     },
@@ -335,9 +350,7 @@ notifications = {
         'moderatable_content': True,
         
         'is_html': True,
-        'snippet_type': 'news',
-        'event_text': _('Created'),
-        'notification_text': _('%(sender_name)s has just created a new user account on %(portal_name)s!'),
+        'event_text': _('%(sender_name)s has just created a new user account on %(portal_name)s!'),
         'subject_text': _('%(sender_name)s has just created a new user account on %(portal_name)s!'),
         'data_attributes': {
             'object_name': '_sender_name',
@@ -359,15 +372,16 @@ if settings.COSINNUS_IDEAS_ENABLED:
             'moderatable_content': True,
             
             'is_html': True,
-            'snippet_type': 'news',
-            #'snippet_template': 'cosinnus/html_mail/summary_group.html',
-            'event_text': _('Has created'),
-            'notification_text': _('%(sender_name)s just created the idea "%(object_name)s" on %(portal_name)s!'),
+                #'snippet_template': 'cosinnus/html_mail/summary_group.html',
+            'event_text': _('%(sender_name)s just created the idea "%(object_name)s" on %(portal_name)s!'),
             'subject_text': _('%(sender_name)s just created the idea "%(object_name)s"!'),
             'data_attributes': {
                 'object_name': 'title',
                 'object_text': 'description',
-                'sub_object_text': 'description', # property of a sub-divided item below the main one, see doc above
+                'sub_object_name': '_sender_name', 
+                'sub_object_text': '_sender.cosinnus_profile.description',
+                'sub_object_url': '_sender.cosinnus_profile.get_absolute_url',
+                'sub_object_icon': '_sender.cosinnus_profile.get_icon',
             },
             'notification_reason': 'none',
         },
@@ -380,17 +394,18 @@ if settings.COSINNUS_IDEAS_ENABLED:
             'hidden': True,
             
             'is_html': True,
-            'snippet_type': 'news',
-            #'snippet_template': 'cosinnus/html_mail/summary_group.html',
-            'event_text': _('Has created'),
-            'notification_text': _('%(sender_name)s just created the project "%(team_name)s" on %(portal_name)s from an idea you follow! <br/><br/>' 
+                #'snippet_template': 'cosinnus/html_mail/summary_group.html',
+            'event_text': _('%(sender_name)s just created the project "%(team_name)s" from an idea you follow!'),
+            'topic': _('%(sender_name)s just created the project "%(team_name)s" on %(portal_name)s from an idea you follow! <br/><br/>' 
                                ' To check it out, please click on the link below. There you can see if you would like to join the project.'),
             'subject_text': _('%(sender_name)s just created the project "%(team_name)s" from an idea you follow!'),
             'data_attributes': {
                 'object_name': 'name',
                 'object_text': 'description',
-                'sub_object_text': 'description', # property of a sub-divided item below the main one, see doc above
-            
+                'sub_object_name': '_sender_name', 
+                'sub_object_text': '_sender.cosinnus_profile.description',
+                'sub_object_url': '_sender.cosinnus_profile.get_absolute_url',
+                'sub_object_icon': '_sender.cosinnus_profile.get_icon',
             },
             'notification_reason': 'none',
         },

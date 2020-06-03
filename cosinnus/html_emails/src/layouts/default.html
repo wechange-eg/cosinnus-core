@@ -1,5 +1,7 @@
 {{!-- This is the base layout for your project, and will be used on every page. --}}
-
+{{{{raw}}}}
+{% load i18n %}
+{{{{/raw}}}}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -9,6 +11,38 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width">
     <title>{{subject}}</title>
+    <!-- Overriding styles for dynamic content -->
+    <style no-scrub="1">
+        h1, h2, h3, h4, h5, h6 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        p, li, ul, ol {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        ul br, ol br, ul br {
+		    display: none; 
+		}
+        p a {
+            color: #38b6b7;
+		    font-weight: bold;
+		    text-decoration: none;
+        }
+        p img {
+            width: 100%;
+        }
+        p {
+		    margin: 0;
+		    Margin: 0;
+		    padding: 0;
+		}
+        p + p {
+	        padding: 16px 0 0 0; 
+	        Margin: 0 0 0 0; /* added for outlook-p margin hack */
+	    }
+    </style>
   </head>
   <body>
     <!-- <style> -->
@@ -26,12 +60,10 @@
             {{> header}}
 
             <container class="content {{page_type}}">
-                <row>
-
-                    <columns large="12">
+                <row class="special-padded-row content-wrapper-row">
+                    <columns large="12" small="12">
                         {{> body}}
                     </columns>
-
                 </row>
             </container>
 

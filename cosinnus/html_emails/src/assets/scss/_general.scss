@@ -1,0 +1,199 @@
+@import 'mixins';
+
+/* 
+.special-padded-row: this class adds invalid single padding-* properties, which when inlining, overwrite
+    some "dumb" style additions added by the foundation email parser.
+    In the gulp script, we subsequently regex-remove these padding-*s, and are then left only
+    with one clean padding rule with all 4 dimensions in one. This is important, because:
+    a) Outlook only understands a single padding-rule and gets confused when eg "padding-top" is present
+    b) Normal browsers will display the paddings properly because the additional gutter paddings from
+        foundation email have been overwritten.
+*/
+
+.special-padded-row > tbody > tr > th {
+    padding-top: invalid !important;   
+    padding-right: invalid !important;   
+    padding-bottom: invalid !important;   
+    padding-left: invalid !important;   
+}
+
+.content-wrapper-row > tbody > tr > th {
+    padding: 0 10px;
+    background: $back;
+}
+
+/* Main padding scaffolding of the row-tables */
+.header-row > tbody > tr > th {
+    padding: 50px 20px;
+}
+.raw-header-row > tbody > tr > th {
+    padding: 40px 10px 50px 10px;
+}
+.avatar-row > tbody > tr > th,
+.digest-header-row > tbody > tr > th {
+    padding: 25px 10px;
+}
+.group-header-row {
+    & > tbody > tr > th {
+        padding: 12px 10px;
+    }
+    .image-column {
+        padding: 12px 0 12px 10px;
+    }
+}
+.footer-row > tbody > tr > th {
+    padding: 20px 9px;
+}
+.sub-object-row > tbody > tr > th {
+    padding: 15px 10px;    
+}
+.object-row {
+    & > tbody > tr > th {
+        padding: 0px 10px 15px 10px;
+    }
+    .object-text-column {
+        padding: 10px 10px 15px 10px;    
+    }
+    .image-column {
+        padding: 0px 0 15px 10px;
+    }
+}
+.spacer-row {
+    & > tbody > tr > th {
+        padding: 0 0 0 0;
+    }
+}
+
+.action-button-row > tbody > tr > th {
+    padding: 20px 10px 30px 10px;
+}
+
+/* needs to be wrapped */
+.special-padded-row {
+    .spacer {
+        padding: 20px 23px 20px 23px;
+        width: 4px;
+    }
+}
+
+.sub-object-border-row {
+    & > tbody > tr > th {
+        padding: 0px 10px 15px 10px;
+    }
+    .border-spacer {
+        padding: 0 28px;
+        width: 1px;   
+    }
+    .border-cell {
+        padding: 0 10px;       
+    }
+    .border-cell-top {
+        border-top: 2px solid $back;
+    }
+    .border-cell-bottom {
+        border-bottom: 2px solid $back;
+    }
+    &, & th {
+        font-size: 1px;
+        line-height: 1px;
+    }
+}
+
+.bordered-container {
+    background-color: $background-color;
+    border-bottom: 2px solid $back;    
+}
+
+/* This fix cost me an hour, trust me, it is needed for the final django-rendered emails! */
+.image-column {
+    width: 40px !important;
+}
+
+
+.colored-text, .colored-text a {
+    color: $primary-color;
+}
+.uncolored-text, .uncolored-text a {
+    color: $text-color;
+}
+.non-bold-text {
+    &, & tr, & th , & a {
+        font-weight: normal;
+    }
+}
+.grey-text {
+    &, & tr, & th , & a {
+        color: $pale-text-color;
+        font-weight: normal;
+    }
+}
+.bold-text {
+    &, & tr, & th , & a {
+        font-weight: bold;
+    }
+}
+.large-text {
+    &, & tr, & th , & a {
+        font-size: 18px;
+        line-height: 20px;
+    }
+}
+.small-text {
+    &, & tr, & th , & a {
+        font-size: 12px;
+        line-height: 1.3;
+    }
+}
+.smaller-text  {
+    &, & tr, & th , & a {
+        font-size: 11px;
+        line-height: 1.3;
+    }
+}
+
+.regular-img {
+    height: 40px;
+    width: 40px;
+    max-width: 40px;
+    display: inline-block;
+}
+.small-img {
+    height: 30px;
+    width: 30px;
+    max-width: 30px;
+    display: inline-block;
+}
+.smallest-img {
+    height: 20px;
+    width: 20px;
+    max-width: 20px;
+    display: inline-block;
+}
+.padded-img {
+    padding: 5px;    
+}
+.padded-img-no-right {
+    padding: 5px 0 5px 5px;    
+}
+.inline-img {
+    display: inline;   
+}
+
+.action-button-span {
+    display: inline-block; 
+    padding-bottom: 10px;
+}
+a.action-button {
+    color: $primary-color;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding-right: 15px;
+    letter-spacing: 0.5px;
+    
+    &.action-button-alternate {
+        color: $button-color-alt;
+    }
+}
+
+
+

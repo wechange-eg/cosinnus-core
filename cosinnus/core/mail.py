@@ -174,7 +174,7 @@ def send_html_mail_threaded(to_user, subject, html_content):
     
     portal = CosinnusPortal.get_current()
     domain = portal.get_domain()
-    portal_image_url = '%s%s' % (domain, static('img/logo-icon.png'))
+    portal_image_url = '%s%s' % (domain, static('img/email-header.png'))
     data = {
         'site': portal.site,
         'site_name': portal.site.name,
@@ -183,7 +183,7 @@ def send_html_mail_threaded(to_user, subject, html_content):
         'portal_image_url': portal_image_url,
         'portal_name': portal.name,
         'receiver': to_user, 
-        'addressee': mark_safe(strip_tags(full_name(to_user))), 
+        'addressee': mark_safe(strip_tags(to_user.first_name)), 
         'topic': subject,
         'prefs_url': None,
         'notification_reason': None,
@@ -192,9 +192,8 @@ def send_html_mail_threaded(to_user, subject, html_content):
         'origin_url': domain,
         'origin_image_url': portal_image_url,
         
-        'notification_body': None, # this is a body text that can be used for group description or similar
-        
-        'notification_item_html': mark_safe(replace_non_portal_urls(html_content)),
+        'notification_raw_html': mark_safe(replace_non_portal_urls(html_content)), # this is raw-html pastable section
+        'notification_item_html': None,
     }
     
     send_mail_or_fail_threaded(to_user.email, subject, template, data, is_html=True)

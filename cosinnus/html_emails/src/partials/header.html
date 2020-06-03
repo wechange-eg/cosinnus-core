@@ -1,18 +1,11 @@
 {{#if raw}}{{{{raw}}}}{% load i18n %}{{{{/raw}}}}{{/if}}
 
 <container class="header">
-    <row>
-        <columns large="7" valign="middle"></columns>
-
-        <columns class="logo" small="2" large="1" valign="middle">
+    <row class="special-padded-row header-row">
+        <columns class="logo" large="12" small="12" valign="middle">
             <a href="{{#rw this}}portal_url{{/rw}}" target="_blank">
-                <img src="{{#rw this}}portal_image_url{{/rw}}" alt="" />
-            </a>
-        </columns>
-
-        <columns small="10" large="4" valign="middle">
-            <a href="{{#rw this}}portal_url{{/rw}}" target="_blank">
-                {{#rw this}}portal_name{{/rw}}
+                <!-- always include the width="nn" attribute in <img> for Outlook! -->
+                <img class="logo-img" height="40" src="{{#rw this}}portal_image_url{{/rw}}" alt="" />
             </a>
         </columns>
     </row>

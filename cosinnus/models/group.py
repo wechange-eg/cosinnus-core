@@ -28,7 +28,7 @@ from cosinnus.utils.functions import unique_aware_slugify,\
 from cosinnus.utils.files import get_group_avatar_filename,\
     get_portal_background_image_filename, get_group_wallpaper_filename,\
     get_cosinnus_media_file_folder, get_group_gallery_image_filename,\
-    image_thumbnail, image_thumbnail_url
+    image_thumbnail, image_thumbnail_url, get_image_url_for_icon
 from django.urls import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
@@ -1053,10 +1053,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         return image_thumbnail(self.avatar, size)
 
     def get_avatar_thumbnail_url(self, size=(80, 80)):
-        return image_thumbnail_url(self.avatar, size) or static('images/group-avatar-placeholder-small.png')
+        return image_thumbnail_url(self.avatar, size) or get_image_url_for_icon(self.get_icon(), large=True)
     
     def get_image_field_for_icon(self):
-        return self.avatar or static('images/group-avatar-placeholder.png')
+        return self.avatar or get_image_url_for_icon(self.get_icon(), large=True)
     
     def get_image_field_for_background(self):
         return self.wallpaper
