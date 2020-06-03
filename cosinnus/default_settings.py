@@ -88,7 +88,7 @@ MIDDLEWARE = [
     
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_otp.middleware.OTPMiddleware',
-    'cosinnus.core.middleware.cosinnus_middleware.AdminOnlyOTPMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.OTPMiddleware',
     
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

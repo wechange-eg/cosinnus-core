@@ -164,6 +164,10 @@ class CosinnusConf(AppConf):
     # Set up at least one device at <host>/admin/otp_totp/totpdevice/ before activating this setting!
     ADMIN_2_FACTOR_AUTH_ENABLED = False
     
+    # if True while `ADMIN_2_FACTOR_AUTH_ENABLED` is enabled, will force 2-factor-authentication
+    # for superusers and portal on the ENTIRE site, and not only on the /admin/ backend
+    ADMIN_2_FACTOR_AUTH_STRICT_MODE = False
+    
     # enable this to sign up new members to a cleverreach newsletter group
     CLEVERREACH_AUTO_SIGNUP_ENABLED = False
     # dict of language --> int group-id of the cleverreach groups to sign up
