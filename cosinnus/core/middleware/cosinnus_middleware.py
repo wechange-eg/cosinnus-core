@@ -68,6 +68,8 @@ LOGIN_URLS = NEVER_REDIRECT_URLS + [
     '/integrated/create_user/',
 ]
 
+EXEMPTED_URLS_FOR_2FA = [url for url in LOGIN_URLS if url != '/admin/']
+
 # if any of these URLs was requested, auto-redirects in the user's profile settings won't trigger
 NO_AUTO_REDIRECTS = (
     reverse('cosinnus:invitations'),
@@ -111,16 +113,13 @@ class OTPMiddleware(MiddlewareMixin):
         
         # regular mode covers only the admin area
         filter_path = '/admin/'
-        exempted_urls = NEVER_REDIRECT_URLS
-        
         # strict mode covers the entire page
         if getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_STRICT_MODE', False):
             filter_path = '/'
-            exempted_urls = LOGIN_URLS
         
         user = getattr(request, 'user', None)
         # check if the user is a superuser and they attempted to access a covered url
-        if user and check_user_superuser(user) and request.path.startswith(filter_path) and not request.path in exempted_urls:
+        if user and check_user_superuser(user) and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
             # check if the user is not yet 2fa verified, if so send them to the verification view
             if not user.is_verified():
                 next_url = request.path
