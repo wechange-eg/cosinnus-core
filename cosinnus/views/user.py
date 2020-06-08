@@ -192,7 +192,8 @@ class UserCreateView(CreateView):
             email_portal_admins(subject, 'cosinnus/mail/user_register_notification.html', data)
             # message user for pending request
             subj_user = render_to_string('cosinnus/mail/user_registration_pending_subj.txt', data)
-            send_mail_or_fail_threaded(user.email, subj_user, 'cosinnus/mail/user_registration_pending.html', data)
+            text = textfield(render_to_string('cosinnus/mail/user_registration_pending.html', data))
+            send_html_mail_threaded(user, subj_user, text)
             messages.success(self.request, self.message_success_inactive % {'user': user.email, 'email': user.email})
             # since anonymous users have no session, show the success message in the template via a flag
             ret = HttpResponseRedirect(redirect_with_next(reverse('login'), self.request, 'validate_msg=admin'))
@@ -457,9 +458,9 @@ def approve_user(request, user_id):
     data.update({
         'user': user,
     })
-    template = 'cosinnus/mail/user_registration_approved.html'
     subj_user = render_to_string('cosinnus/mail/user_registration_approved_subj.txt', data)
-    send_mail_or_fail_threaded(user.email, subj_user, template, data)
+    text = textfield(render_to_string('cosinnus/mail/user_registration_approved.html', data))
+    send_html_mail_threaded(user, subj_user, text)
     
     _send_user_welcome_email_if_enabled(user)
     # send user account creation signal, the audience is empty because this is a moderator-only notification
@@ -504,8 +505,8 @@ def deny_user(request, user_id):
         'admins': admins,
     })
     subj_user = render_to_string('cosinnus/mail/user_registration_denied_subj.txt', data)
-    send_mail_or_fail_threaded(user.email, subj_user, 'cosinnus/mail/user_registration_denied.html', data)
-    
+    text = textfield(render_to_string('cosinnus/mail/user_registration_denied.html', data))
+    send_html_mail_threaded(user, subj_user, text)
     
     messages.success(request, _('You have denied the join request of %(username)s (%(email)s)! An email was sent to let them know.') \
                      % {'username':full_name_force(user), 'email': user.email})

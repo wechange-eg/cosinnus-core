@@ -33,13 +33,14 @@ from cosinnus.utils.user import filter_active_users, accept_user_tos_for_portal,
 from cosinnus.models.profile import get_user_profile_model
 from django.core.mail.message import EmailMessage
 from cosinnus.core.mail import send_mail_or_fail, send_mail,\
-    send_mail_or_fail_threaded
+    send_mail_or_fail_threaded, send_html_mail_threaded
 from django.template.defaultfilters import linebreaksbr
 from django.db.models.aggregates import Count
 from cosinnus.utils.http import make_csv_response
 from operator import itemgetter
 from cosinnus.utils.permissions import check_user_can_receive_emails
 import logging
+from cosinnus.templatetags.cosinnus_tags import textfield
 
 logger = logging.getLogger('cosinnus')
 
@@ -343,16 +344,16 @@ def send_testmail(request):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     mode = request.GET.get('mode', None)
-    if mode not in ['or_fail', 'direct', 'direct_html', 'threaded', 'override']:
-        mode = 'or_fail'
+    if mode not in ['html', 'direct', 'direct_html', 'threaded', 'override']:
+        mode = 'html'
     
     subject =  mode + ': Testmail from Housekeeping at %s' % str(now())
     template = 'cosinnus/common/internet_explorer_not_supported.html'
-    retmsg = '\n\n<br><br> Use ?mode=[or_fail, direct, direct_html, threaded, override]\n\nThe Answer was: '
+    retmsg = '\n\n<br><br> Use ?mode=[html, direct, direct_html, threaded, override]\n\nThe Answer was: '
     
-    if mode == 'or_fail':
-        retmsg += force_text(send_mail_or_fail(request.user.email, subject, template, {}))
-        return HttpResponse('Sent mail using or_fail mode. ' + retmsg)
+    if mode == 'html':
+        retmsg += force_text(send_html_mail_threaded(request.user, subject, textfield('This is a test mail from housekeeping.')))
+        return HttpResponse('Sent mail using html mode. ' + retmsg)
     if mode == 'direct':
         retmsg += force_text(send_mail(request.user.email, subject, template, {}))
         return HttpResponse('Sent mail using direct mode. ' + retmsg)
