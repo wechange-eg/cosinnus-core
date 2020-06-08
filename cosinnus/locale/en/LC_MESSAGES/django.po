@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-27 11:39+0200\n"
+"POT-Creation-Date: 2020-06-08 15:24+0200\n"
 "PO-Revision-Date: 2020-04-27 12:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -185,9 +185,6 @@ msgstr[1] ""
 msgid "You are an admin of this team"
 msgstr ""
 
-msgid "New membership request"
-msgstr ""
-
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr ""
@@ -257,9 +254,6 @@ msgstr ""
 msgid "%(sender_name)s made you an admin"
 msgstr ""
 
-msgid "Made you an admin"
-msgstr ""
-
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr ""
@@ -269,9 +263,6 @@ msgstr ""
 
 #, python-format
 msgid "%(sender_name)s revoked your admin status"
-msgstr ""
-
-msgid "Revoked your admin status"
 msgstr ""
 
 #, python-format
@@ -294,10 +285,6 @@ msgid "%(sender_name)s tagged you in"
 msgstr ""
 
 #, python-format
-msgid "You were tagged by %(sender_name)s"
-msgstr ""
-
-#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr ""
 
@@ -307,9 +294,6 @@ msgstr ""
 "Hi %(admin_name)s,\n"
 "\n"
 "The user %(user_name)s wants to join project %(team_name)s."
-
-msgid "Invited you"
-msgstr ""
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -329,6 +313,13 @@ msgstr "There are no groups."
 msgid "View invitation"
 msgstr "There are no groups."
 
+#, fuzzy, python-format
+msgid "%(sender_name)s invited you"
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
+
 #, fuzzy
 #| msgid "Convert selected Projects to Groups"
 msgid "New link to the moved project/group"
@@ -342,9 +333,6 @@ msgstr ""
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr ""
 
-msgid "Created"
-msgstr ""
-
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr ""
@@ -356,9 +344,6 @@ msgstr ""
 "\n"
 "The user %(user_name)s wants to join project %(team_name)s."
 
-msgid "Has created"
-msgstr ""
-
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
 msgstr ""
@@ -368,11 +353,11 @@ msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr ""
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr ""
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
 msgstr ""
 
 msgid "Deutsch--NATIVE-LANGUAGE"
@@ -541,9 +526,6 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-msgid "Hi,"
-msgstr ""
-
 msgid "Tiny (50 x *)"
 msgstr ""
 
@@ -597,6 +579,9 @@ msgid "Complaint Text"
 msgstr ""
 
 msgid "Creator"
+msgstr ""
+
+msgid "Created"
 msgstr ""
 
 msgid "Reported object"
@@ -1476,6 +1461,9 @@ msgid "Edit"
 msgstr ""
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr ""
+
+msgid "You may use the following variables:"
 msgstr ""
 
 msgid "Save"
@@ -2412,9 +2400,6 @@ msgid "Facebook integration is available after you created the project!"
 msgstr ""
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
-msgstr ""
-
-msgid "You may use the following variables:"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -4433,7 +4418,7 @@ msgstr "Project overview"
 msgid "Continue reading"
 msgstr ""
 
-msgid "What's the latest news?"
+msgid "What's the latest news that you would like to share with all users of the platform?"
 msgstr ""
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
@@ -4628,6 +4613,9 @@ msgstr ""
 msgid "Question about"
 msgstr ""
 
+msgid "Test email sent!"
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr ""
@@ -4735,9 +4723,6 @@ msgstr ""
 
 #, python-format
 msgid "User %(username)s was successfully invited!"
-msgstr ""
-
-msgid "You cannot change your own admin status."
 msgstr ""
 
 #, python-format

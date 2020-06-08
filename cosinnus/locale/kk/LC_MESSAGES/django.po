@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-27 11:39+0200\n"
+"POT-Creation-Date: 2020-06-08 15:24+0200\n"
 "PO-Revision-Date: 2020-04-14 13:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -187,9 +187,6 @@ msgstr[1] "%(sender_name)s және %(count_minus_one)d мүше болуды с
 msgid "You are an admin of this team"
 msgstr "Сіз осы топтың әкімшісісіз"
 
-msgid "New membership request"
-msgstr "Жаңа мүшелікке сұраныс"
-
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "„%(sender_name)s“ %(team_name)s.мүшесі болуды сұрады."
@@ -259,9 +256,6 @@ msgstr "Сіз осы топтың әкімшісі болып қойылдың�
 msgid "%(sender_name)s made you an admin"
 msgstr "%(sender_name)s сізді әкімші етті"
 
-msgid "Made you an admin"
-msgstr "Сізді әкімші қылды"
-
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s сізді %(portal_name)s %(team_name)s“ әкімшісі етті!"
@@ -272,9 +266,6 @@ msgstr "Осы топтың әкімші мәртебесі жойылды"
 #, python-format
 msgid "%(sender_name)s revoked your admin status"
 msgstr "%(sender_name)s сізден әкімші мәртебесін қайтарып алды"
-
-msgid "Revoked your admin status"
-msgstr "Әкімші мәртебесін қайтарып алды"
 
 #, python-format
 msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
@@ -296,19 +287,12 @@ msgid "%(sender_name)s tagged you in"
 msgstr "%(sender_name)s сізді белгіледі"
 
 #, python-format
-msgid "You were tagged by %(sender_name)s"
-msgstr "Сіз %(sender_name)s белгілендіңіз"
-
-#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "Сіз „%(object_name)s“ %(team_name)s ішінде белгіленгенсіз."
 
 #, python-format
 msgid "%(sender_name)s invited you to join %(team_name)s"
 msgstr "%(sender_name)s сізді %(team_name)s тобына қосылуға шақырды"
-
-msgid "Invited you"
-msgstr "Сізді шақырды"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -324,6 +308,11 @@ msgstr "Шақыруды қабылдау"
 msgid "View invitation"
 msgstr "Шақыруды қарау"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s invited you"
+msgstr "%(sender_name)s сізді белгіледі"
+
 msgid "New link to the moved project/group"
 msgstr "Көшірілген жоба / топқа жаңа сілтеме"
 
@@ -335,9 +324,6 @@ msgstr "Сіздің жобаларыңыздың / топтарыңыздың �
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "„%(team_name)s“ %(portal_name)s ге жылжытылды!"
 
-msgid "Created"
-msgstr "Құрған"
-
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s %(portal_name)s - де „%(team_name)s“ жоба / тобын жасады!"
@@ -346,9 +332,6 @@ msgstr "%(sender_name)s %(portal_name)s - де „%(team_name)s“ жоба / т
 #| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s %(portal_name)s-де „%(object_name)s“ идеясын жаңа ғана жасады!"
-
-msgid "Has created"
-msgstr "Жасады"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -359,12 +342,12 @@ msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr "%(sender_name)s „%(object_name)s“ идеясын жаңа ғана жасады!"
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
-msgstr "%(sender_name)s сіз жазылған идеядан %(portal_name)s „%(team_name)s“ жобасынжаңа ғана жасады! <br/> <br/> Қарау үшін төмендегі сілтемені нұқыңыз. Онда сіз жобаға қосылғыңыз келе мекенін көре аласыз."
-
-#, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr "Жаңа ғана %(sender_name)s сіз жазылған идеядан „%(team_name)s“ жобасын жасады!"
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr "%(sender_name)s сіз жазылған идеядан %(portal_name)s „%(team_name)s“ жобасынжаңа ғана жасады! <br/> <br/> Қарау үшін төмендегі сілтемені нұқыңыз. Онда сіз жобаға қосылғыңыз келе мекенін көре аласыз."
 
 msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
@@ -532,9 +515,6 @@ msgstr "Бізден ешқашан электрондық хатарды енд
 msgid "Unsubscribe"
 msgstr "Жазылуды тоқтату"
 
-msgid "Hi,"
-msgstr "Сәлем,"
-
 msgid "Tiny (50 x *)"
 msgstr "Кішкентай (50 x *)"
 
@@ -589,6 +569,9 @@ msgstr "Шағым мәтіні"
 
 msgid "Creator"
 msgstr "Жаратушы"
+
+msgid "Created"
+msgstr "Құрған"
 
 msgid "Reported object"
 msgstr "Шағымданатын объект"
@@ -1441,6 +1424,9 @@ msgstr "Өңдеу"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "Өрістердің бірінде қате пайда болды. Мұны сақтамас бұрын жөндеңіз!"
+
+msgid "You may use the following variables:"
+msgstr "Сіз келесі айнымалыларды пайдалана аласыз:"
 
 msgid "Save"
 msgstr "Сақтау"
@@ -2333,9 +2319,6 @@ msgstr "Facebook интеграциясы жоба жасалғаннан кей
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
-
-msgid "You may use the following variables:"
-msgstr "Сіз келесі айнымалыларды пайдалана аласыз:"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
@@ -4380,8 +4363,8 @@ msgstr "Алдын-ала қарау"
 msgid "Continue reading"
 msgstr "Оқуды жалғастыру"
 
-msgid "What's the latest news?"
-msgstr "Соңғы жаңалықтар қандай?"
+msgid "What's the latest news that you would like to share with all users of the platform?"
+msgstr ""
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
 msgstr "Жақында болған жастықшалар, файлдар, оқиғалар, Todos және басқа мазмұн осы жерде көрсетіледі."
@@ -4558,6 +4541,9 @@ msgstr "Біз туралы"
 msgid "Question about"
 msgstr "Туралы сұрақтар"
 
+msgid "Test email sent!"
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Тіл “%s” қолданылмайды"
@@ -4666,9 +4652,6 @@ msgstr "Мен сізді “%(team_name)s” тобына қосылуға ша
 #, python-format
 msgid "User %(username)s was successfully invited!"
 msgstr "Қолданушы %(username)s сәтті шақырылды!"
-
-msgid "You cannot change your own admin status."
-msgstr "Сіз өзіңіздің әкімші статусыңызды өзгерте алмайсыз."
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
@@ -4945,6 +4928,33 @@ msgstr "Сіз қазір %s мүшесі емессіз! Егер қаласа�
 
 msgid "Your changes have been saved."
 msgstr "Сіздің өзгертулеріңіз сақталды."
+
+#~ msgid "New membership request"
+#~ msgstr "Жаңа мүшелікке сұраныс"
+
+#~ msgid "Made you an admin"
+#~ msgstr "Сізді әкімші қылды"
+
+#~ msgid "Revoked your admin status"
+#~ msgstr "Әкімші мәртебесін қайтарып алды"
+
+#~ msgid "You were tagged by %(sender_name)s"
+#~ msgstr "Сіз %(sender_name)s белгілендіңіз"
+
+#~ msgid "Invited you"
+#~ msgstr "Сізді шақырды"
+
+#~ msgid "Has created"
+#~ msgstr "Жасады"
+
+#~ msgid "Hi,"
+#~ msgstr "Сәлем,"
+
+#~ msgid "What's the latest news?"
+#~ msgstr "Соңғы жаңалықтар қандай?"
+
+#~ msgid "You cannot change your own admin status."
+#~ msgstr "Сіз өзіңіздің әкімші статусыңызды өзгерте алмайсыз."
 
 #~ msgid "Choose App"
 #~ msgstr "Бағдарламаны таңдаңыз"

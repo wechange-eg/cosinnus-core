@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-27 11:39+0200\n"
+"POT-Creation-Date: 2020-06-08 15:24+0200\n"
 "PO-Revision-Date: 2020-04-22 12:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -191,9 +191,6 @@ msgstr[1] "\"%(sender_name)s solicitó para ser miembro de %(team_name)s."
 msgid "You are an admin of this team"
 msgstr "Has sido hecho un administrador de este equipo"
 
-msgid "New membership request"
-msgstr "Solicitud de participación nueva"
-
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "\"%(sender_name)s solicitó para ser miembro de %(team_name)s."
@@ -270,9 +267,6 @@ msgstr "Has sido hecho un administrador de este equipo"
 msgid "%(sender_name)s made you an admin"
 msgstr "%(sender_name)s te etiquetó en"
 
-msgid "Made you an admin"
-msgstr "Te hizo un administrador"
-
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s the hizo un administrador de \"%(team_name)s\" en %(portal_name)s!"
@@ -283,9 +277,6 @@ msgstr "Tu estatus de administrador ha sido revocado"
 #, fuzzy, python-format
 #| msgid "Revoked your admin status"
 msgid "%(sender_name)s revoked your admin status"
-msgstr "Revocó tu estatus de administrador"
-
-msgid "Revoked your admin status"
 msgstr "Revocó tu estatus de administrador"
 
 #, python-format
@@ -310,10 +301,6 @@ msgid "%(sender_name)s tagged you in"
 msgstr "%(sender_name)s te etiquetó en"
 
 #, python-format
-msgid "You were tagged by %(sender_name)s"
-msgstr "Has sido etiquetado de %(sender_name)s"
-
-#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "Has sido etiquetado en \"%(object_name)s\" en %(team_name)s."
 
@@ -321,9 +308,6 @@ msgstr "Has sido etiquetado en \"%(object_name)s\" en %(team_name)s."
 #| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s invited you to join %(team_name)s"
 msgstr "%(sender_name)s te ha invitado a participar en \"%(team_name)s\" en %(portal_name)s!"
-
-msgid "Invited you"
-msgstr "Te invitó"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -339,6 +323,11 @@ msgstr "Aceptar invitación"
 msgid "View invitation"
 msgstr "Ver invitación"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s invited you"
+msgstr "%(sender_name)s te etiquetó en"
+
 msgid "New link to the moved project/group"
 msgstr "Enlace nuevo al"
 
@@ -350,9 +339,6 @@ msgstr "Uno de tus proyectos/grupos fue trasladado al portal \"%(portal_name)s\"
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "\"%(team_name)s\" fue trasladado a %(portal_name)s!"
 
-msgid "Created"
-msgstr "Creado"
-
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s creó el proyecto/grupo \"%(team_name)s\" en %(portal_name)s!"
@@ -361,9 +347,6 @@ msgstr "%(sender_name)s creó el proyecto/grupo \"%(team_name)s\" en %(portal_na
 #| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s creó la idea \"%(object_name)s\" en %(portal_name)s!"
-
-msgid "Has created"
-msgstr "Ha creado"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -374,12 +357,12 @@ msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr "%(sender_name)s creó la idea \"%(object_name)s\"!"
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
-msgstr "%(sender_name)s creó el proyecto \"%(team_name)s\" en %(portal_name)s de una idea que estas siguiendo! <br/><br/> Para verlo, haz clic en el enlace abajo. Ahí puedes ver si quieres participar en el proyecto."
-
-#, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr "%(sender_name)s creó el proyecto \"%(team_name)s\" de una idea que estas siguiendo!"
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr "%(sender_name)s creó el proyecto \"%(team_name)s\" en %(portal_name)s de una idea que estas siguiendo! <br/><br/> Para verlo, haz clic en el enlace abajo. Ahí puedes ver si quieres participar en el proyecto."
 
 msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
@@ -552,9 +535,6 @@ msgstr "Haz clic en el enlace siguiente para terminar de recibir correos electr�
 msgid "Unsubscribe"
 msgstr "Anular"
 
-msgid "Hi,"
-msgstr "Hola,"
-
 msgid "Tiny (50 x *)"
 msgstr "Diminuto (50 x *)"
 
@@ -609,6 +589,9 @@ msgstr "Texto de queja"
 
 msgid "Creator"
 msgstr "Creador"
+
+msgid "Created"
+msgstr "Creado"
 
 msgid "Reported object"
 msgstr "Objeto reportado"
@@ -1484,6 +1467,11 @@ msgstr "Editar"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "Se ha producido un error en uno de las casillas insertadas. ¡Por favor, corrígelo antes de guardar!"
+
+#, fuzzy
+#| msgid "You are following this item"
+msgid "You may use the following variables:"
+msgstr "Estas siguiendo este item"
 
 msgid "Save"
 msgstr "Guardar"
@@ -2405,11 +2393,6 @@ msgstr "Integración de Facebook es disponible después de que hayas creado el p
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
-
-#, fuzzy
-#| msgid "You are following this item"
-msgid "You may use the following variables:"
-msgstr "Estas siguiendo este item"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
@@ -4541,7 +4524,7 @@ msgstr "ver"
 msgid "Continue reading"
 msgstr ""
 
-msgid "What's the latest news?"
+msgid "What's the latest news that you would like to share with all users of the platform?"
 msgstr ""
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
@@ -4739,6 +4722,9 @@ msgstr "Sobre nosotros"
 msgid "Question about"
 msgstr "Pregunta sobre"
 
+msgid "Test email sent!"
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "La idioma \"%s\" no es apollada"
@@ -4847,9 +4833,6 @@ msgstr "¡Te invité a unirte a \"%(team_name)s\"!"
 #, python-format
 msgid "User %(username)s was successfully invited!"
 msgstr "¡Usario\"%(username)s\" ha sido invitado con éxito!"
-
-msgid "You cannot change your own admin status."
-msgstr "No puedes cambiar tu propio estado de administrador."
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
@@ -5141,6 +5124,30 @@ msgstr "Actualmente no eres miembro de %s! Si lo deseas, puedes solicitar para s
 
 msgid "Your changes have been saved."
 msgstr "Se han guardado los cambios."
+
+#~ msgid "New membership request"
+#~ msgstr "Solicitud de participación nueva"
+
+#~ msgid "Made you an admin"
+#~ msgstr "Te hizo un administrador"
+
+#~ msgid "Revoked your admin status"
+#~ msgstr "Revocó tu estatus de administrador"
+
+#~ msgid "You were tagged by %(sender_name)s"
+#~ msgstr "Has sido etiquetado de %(sender_name)s"
+
+#~ msgid "Invited you"
+#~ msgstr "Te invitó"
+
+#~ msgid "Has created"
+#~ msgstr "Ha creado"
+
+#~ msgid "Hi,"
+#~ msgstr "Hola,"
+
+#~ msgid "You cannot change your own admin status."
+#~ msgstr "No puedes cambiar tu propio estado de administrador."
 
 #~ msgid ""
 #~ "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"

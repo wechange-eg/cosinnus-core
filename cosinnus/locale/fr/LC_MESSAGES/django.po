@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-27 11:39+0200\n"
+"POT-Creation-Date: 2020-06-08 15:24+0200\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -190,9 +190,6 @@ msgstr[1] "\"%(sender_name)s\" a demandé à devenir membre de %(team_name)s."
 msgid "You are an admin of this team"
 msgstr "Tu es devenu administrateur de cette équipe"
 
-msgid "New membership request"
-msgstr "Nouvelle demande d'ajout"
-
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "\"%(sender_name)s\" a demandé à devenir membre de %(team_name)s."
@@ -269,9 +266,6 @@ msgstr "Tu es devenu administrateur de cette équipe"
 msgid "%(sender_name)s made you an admin"
 msgstr "%(sender_name)s t'a identifié dans"
 
-msgid "Made you an admin"
-msgstr "T'a rendu administrateur"
-
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s t'a rendu administrateur de \"%(team_name)s\" sur %(portal_name)s!"
@@ -282,9 +276,6 @@ msgstr "Ton statut d'admin de cette équipe a été révoqué"
 #, fuzzy, python-format
 #| msgid "Revoked your admin status"
 msgid "%(sender_name)s revoked your admin status"
-msgstr "Annuler votre statut d’administrateur"
-
-msgid "Revoked your admin status"
 msgstr "Annuler votre statut d’administrateur"
 
 #, python-format
@@ -309,10 +300,6 @@ msgid "%(sender_name)s tagged you in"
 msgstr "%(sender_name)s t'a identifié dans"
 
 #, python-format
-msgid "You were tagged by %(sender_name)s"
-msgstr "Tu as été identifié par %(sender_name)s"
-
-#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "Tu as été identifié dans \"%(object_name)s\" dans %(team_name)s."
 
@@ -320,9 +307,6 @@ msgstr "Tu as été identifié dans \"%(object_name)s\" dans %(team_name)s."
 #| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s invited you to join %(team_name)s"
 msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
-
-msgid "Invited you"
-msgstr "T'a invité"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -342,6 +326,11 @@ msgstr "Accepter l'invitation"
 msgid "View invitation"
 msgstr "Supprimer l'invitation"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s invited you"
+msgstr "%(sender_name)s t'a identifié dans"
+
 msgid "New link to the moved project/group"
 msgstr "Nouveau lien vers le projet / groupe déplacé"
 
@@ -353,9 +342,6 @@ msgstr "Un de tes projets a été déplacé sur \"%(portal_name)s\" ! <br/><br/>
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "\"%(team_name)s a été déplacée sur %(portal_name)s !"
 
-msgid "Created"
-msgstr "Créé"
-
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name) s vient de créer le projet/groupe \"%(team_name)s\" sur %(portal_name)s!"
@@ -364,9 +350,6 @@ msgstr "%(sender_name) s vient de créer le projet/groupe \"%(team_name)s\" sur 
 #| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s vient de créer l'idée \"%(object_name)s\" sur %(portal_name)s!"
-
-msgid "Has created"
-msgstr "A créé"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -377,12 +360,12 @@ msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr "%(sender_name)s vient de créer l'idée \"%(object_name)s\"!"
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
-msgstr "%(sender_name)s vient de créer le projet \"%(team_name)s\" sur %(portal_name)s à partir d'une idée que tu suis ! <br/><br/> Pour aller le voir, clique sur le lien ci-dessous. Tu pourras voir si tu souhaites rejoindre le projet."
-
-#, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr "%(sender_name)s vient de créer le projet %(team_name)s à partir d'une idée que tu suis !"
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr "%(sender_name)s vient de créer le projet \"%(team_name)s\" sur %(portal_name)s à partir d'une idée que tu suis ! <br/><br/> Pour aller le voir, clique sur le lien ci-dessous. Tu pourras voir si tu souhaites rejoindre le projet."
 
 msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
@@ -550,9 +533,6 @@ msgstr "Clique sur le lien suivant pour ne plus recevoir d'e-mails de notre part
 msgid "Unsubscribe"
 msgstr "Se désabonner"
 
-msgid "Hi,"
-msgstr "Bonjour,"
-
 msgid "Tiny (50 x *)"
 msgstr "Tiny (50 x *)"
 
@@ -607,6 +587,9 @@ msgstr "Texte de réclamation"
 
 msgid "Creator"
 msgstr "Créateur"
+
+msgid "Created"
+msgstr "Créé"
 
 msgid "Reported object"
 msgstr "Objet rapporté"
@@ -1479,6 +1462,11 @@ msgstr "Editer"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "Il y a une erreur dans un des champs. Corrige-la avant d'enregistrer !"
+
+#, fuzzy
+#| msgid "You are invited!"
+msgid "You may use the following variables:"
+msgstr "Tu es invité !"
 
 msgid "Save"
 msgstr "Enregistrer"
@@ -2408,11 +2396,6 @@ msgstr "L'intégration Facebook est disponible après la création du projet !"
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
-
-#, fuzzy
-#| msgid "You are invited!"
-msgid "You may use the following variables:"
-msgstr "Tu es invité !"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
@@ -4551,7 +4534,7 @@ msgstr "voir"
 msgid "Continue reading"
 msgstr ""
 
-msgid "What's the latest news?"
+msgid "What's the latest news that you would like to share with all users of the platform?"
 msgstr ""
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
@@ -4750,6 +4733,9 @@ msgstr "A propos de nous"
 msgid "Question about"
 msgstr "Question à propos de"
 
+msgid "Test email sent!"
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Le langage \"%s\" n'est pas supporté"
@@ -4858,9 +4844,6 @@ msgstr "Je t'ai invité à rejoindre \"%(team_name)s\" !"
 #, python-format
 msgid "User %(username)s was successfully invited!"
 msgstr "L'utilisateur %(username)s a été invité avec succès !"
-
-msgid "You cannot change your own admin status."
-msgstr "Tu ne peux pas changer ton propre statut d'admin."
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
@@ -5152,6 +5135,30 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#~ msgid "New membership request"
+#~ msgstr "Nouvelle demande d'ajout"
+
+#~ msgid "Made you an admin"
+#~ msgstr "T'a rendu administrateur"
+
+#~ msgid "Revoked your admin status"
+#~ msgstr "Annuler votre statut d’administrateur"
+
+#~ msgid "You were tagged by %(sender_name)s"
+#~ msgstr "Tu as été identifié par %(sender_name)s"
+
+#~ msgid "Invited you"
+#~ msgstr "T'a invité"
+
+#~ msgid "Has created"
+#~ msgstr "A créé"
+
+#~ msgid "Hi,"
+#~ msgstr "Bonjour,"
+
+#~ msgid "You cannot change your own admin status."
+#~ msgstr "Tu ne peux pas changer ton propre statut d'admin."
 
 #~ msgid ""
 #~ "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"

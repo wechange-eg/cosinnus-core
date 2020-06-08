@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-27 11:39+0200\n"
+"POT-Creation-Date: 2020-06-08 15:24+0200\n"
 "PO-Revision-Date: 2019-11-18 04:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -192,9 +192,6 @@ msgstr[2] "”%(sender_name)s” a solicitat să devină membru al %(team_name)s
 msgid "You are an admin of this team"
 msgstr "Ați făcut un administrator al acestei echipe"
 
-msgid "New membership request"
-msgstr "Nouă solicitare de membru"
-
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "”%(sender_name)s” a solicitat să devină membru al %(team_name)s."
@@ -273,9 +270,6 @@ msgstr "Ați făcut un administrator al acestei echipe"
 msgid "%(sender_name)s made you an admin"
 msgstr "%(sender_name)s te-a etichetat"
 
-msgid "Made you an admin"
-msgstr "V-a făcut admin"
-
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s v-a făcut admin de ”%(team_name)s” pe %(portal_name)s!"
@@ -286,9 +280,6 @@ msgstr "Starea dvs. de administrator pentru această echipă a fost revocată"
 #, fuzzy, python-format
 #| msgid "Revoked your admin status"
 msgid "%(sender_name)s revoked your admin status"
-msgstr "A revocat starea dvs. de admin"
-
-msgid "Revoked your admin status"
 msgstr "A revocat starea dvs. de admin"
 
 #, python-format
@@ -313,10 +304,6 @@ msgid "%(sender_name)s tagged you in"
 msgstr "%(sender_name)s te-a etichetat"
 
 #, python-format
-msgid "You were tagged by %(sender_name)s"
-msgstr "Ai fost etichetat de %(sender_name)s"
-
-#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "Ai fost etichetat în ”%(object_name)s” în %(team_name)s."
 
@@ -324,9 +311,6 @@ msgstr "Ai fost etichetat în ”%(object_name)s” în %(team_name)s."
 #| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s invited you to join %(team_name)s"
 msgstr "%(sender_name)s v-a invitat să vă alăturați ”%(team_name)s” pe %(portal_name)s!"
-
-msgid "Invited you"
-msgstr "Te-a invitat"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -342,6 +326,11 @@ msgstr "Invitația acceptată"
 msgid "View invitation"
 msgstr "Vizualizați invitația"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s invited you"
+msgstr "%(sender_name)s te-a etichetat"
+
 msgid "New link to the moved project/group"
 msgstr "Nou link către proiectul/grupul mutat"
 
@@ -353,9 +342,6 @@ msgstr "Unul dintre proiectele/grupurile dvs. a fost mutat în portal ”%(porta
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "”%(team_name)s” a fost mutat la %(portal_name)s!"
 
-msgid "Created"
-msgstr "Creată"
-
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s tocmai a creat proiectul/grupul ”%(team_name)s” pe %(portal_name)s!"
@@ -364,9 +350,6 @@ msgstr "%(sender_name)s tocmai a creat proiectul/grupul ”%(team_name)s” pe %
 #| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s tocmai a creat ideea ”%(object_name)s” pe %(portal_name)s!"
-
-msgid "Has created"
-msgstr "A creat"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -377,12 +360,12 @@ msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr "%(sender_name)s tocmai a creat ideea ”%(object_name)s”!"
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
-msgstr "%(sender_name)s tocmai a creat proiectul ”%(team_name)s” pe %(portal_name)s dintr-o idee pe care o urmezi! <br/><br/> Pentru a-l verifica, faceți clic pe linkul de mai jos. Acolo puteți vedea dacă doriți să vă alăturați proiectului."
-
-#, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr "%(sender_name)s tocmai a creat proiectul ”%(team_name)s” dintr-o idee pe care o urmezi!"
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr "%(sender_name)s tocmai a creat proiectul ”%(team_name)s” pe %(portal_name)s dintr-o idee pe care o urmezi! <br/><br/> Pentru a-l verifica, faceți clic pe linkul de mai jos. Acolo puteți vedea dacă doriți să vă alăturați proiectului."
 
 msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
@@ -550,9 +533,6 @@ msgstr "Faceți clic pe linkul următor pentru a nu primi niciodată mai multe e
 msgid "Unsubscribe"
 msgstr "Dezabonare"
 
-msgid "Hi,"
-msgstr "Salut,"
-
 msgid "Tiny (50 x *)"
 msgstr "Minuscul (50 x *)"
 
@@ -607,6 +587,9 @@ msgstr "Text de reclamație"
 
 msgid "Creator"
 msgstr "Creator"
+
+msgid "Created"
+msgstr "Creată"
 
 msgid "Reported object"
 msgstr "Obiect raportat"
@@ -1463,6 +1446,11 @@ msgstr "Editați"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "A existat o eroare într-unul din câmpurile pe care le-ați introdus. Vă rugăm să o corectați înainte de a o salva!"
+
+#, fuzzy
+#| msgid "You are not following any ideas yet."
+msgid "You may use the following variables:"
+msgstr "Nu urmați niciun fel de idei."
 
 msgid "Save"
 msgstr "Salvați"
@@ -2369,11 +2357,6 @@ msgstr "Integrarea Facebook este disponibilă după ce ați creat proiectul!"
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
-
-#, fuzzy
-#| msgid "You are not following any ideas yet."
-msgid "You may use the following variables:"
-msgstr "Nu urmați niciun fel de idei."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
@@ -4452,8 +4435,8 @@ msgstr "vedere"
 msgid "Continue reading"
 msgstr ""
 
-msgid "What's the latest news?"
-msgstr "Care este cea mai recentă veste?"
+msgid "What's the latest news that you would like to share with all users of the platform?"
+msgstr ""
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
 msgstr "Pads, Fișiere, Evenimente, Todos și alt conținut vizitat recent vor fi afișate aici."
@@ -4630,6 +4613,9 @@ msgstr "Despre Noi"
 msgid "Question about"
 msgstr "Întrebare despre"
 
+msgid "Test email sent!"
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Limba ”%s” nu este acceptat"
@@ -4738,9 +4724,6 @@ msgstr "Te-am invitat să te înscrii ”%(team_name)s”!"
 #, python-format
 msgid "User %(username)s was successfully invited!"
 msgstr "Utilizatorul %(username)s trebuia invitat!"
-
-msgid "You cannot change your own admin status."
-msgstr "Nu puteți schimba propriul statut de administrator."
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
@@ -5028,6 +5011,33 @@ msgstr "În prezent nu sunteți membru %s! Dacă doriți, puteți solicita să d
 
 msgid "Your changes have been saved."
 msgstr "Schimbările tale au fost salvate."
+
+#~ msgid "New membership request"
+#~ msgstr "Nouă solicitare de membru"
+
+#~ msgid "Made you an admin"
+#~ msgstr "V-a făcut admin"
+
+#~ msgid "Revoked your admin status"
+#~ msgstr "A revocat starea dvs. de admin"
+
+#~ msgid "You were tagged by %(sender_name)s"
+#~ msgstr "Ai fost etichetat de %(sender_name)s"
+
+#~ msgid "Invited you"
+#~ msgstr "Te-a invitat"
+
+#~ msgid "Has created"
+#~ msgstr "A creat"
+
+#~ msgid "Hi,"
+#~ msgstr "Salut,"
+
+#~ msgid "What's the latest news?"
+#~ msgstr "Care este cea mai recentă veste?"
+
+#~ msgid "You cannot change your own admin status."
+#~ msgstr "Nu puteți schimba propriul statut de administrator."
 
 #, fuzzy
 #~| msgid "Dashboard"

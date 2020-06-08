@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-27 11:39+0200\n"
+"POT-Creation-Date: 2020-06-08 15:24+0200\n"
 "PO-Revision-Date: 2020-04-07 15:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -186,9 +186,6 @@ msgstr[0] "%(sender_name)s და %(count_minus_one)d სხვებმა წ�
 msgid "You are an admin of this team"
 msgstr "თქვენ ბრძანდებით ამ გუნდის ადმინისტრატორი"
 
-msgid "New membership request"
-msgstr "ახალი მოთხოვნა წევრობაზე"
-
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "\"%(sender_name)s\"-მ(ა)  %(team_name)s გუნდის წევრობაზე მოთხოვნა გააკეთა."
@@ -259,9 +256,6 @@ msgstr "თქვენ გახდით ამ გუნდის ადმ�
 msgid "%(sender_name)s made you an admin"
 msgstr "%(sender_name)s -მა მოახდინა თქვენი ადმინისტრატორად დასმა"
 
-msgid "Made you an admin"
-msgstr "მოახდინა თქვენი ადმინისტრატორად დასმა"
-
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s-მა მოახდინა თქვენი  გუნდის\"%(team_name)s\" ადმინისტრატორად დასმა პორტალზე - %(portal_name)s!"
@@ -272,9 +266,6 @@ msgstr "გუნდის ადმინისტრატორის სტ�
 #, python-format
 msgid "%(sender_name)s revoked your admin status"
 msgstr "%(sender_name)s-მა გუნდის ადმინისტრატორის სტატუსი გაგიუქმათ"
-
-msgid "Revoked your admin status"
-msgstr "გუნდის ადმინისტრატორის სტატუსი გაგიუქმდათ"
 
 #, python-format
 msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
@@ -296,19 +287,12 @@ msgid "%(sender_name)s tagged you in"
 msgstr "%(sender_name)s -მა მოგნიშნათ"
 
 #, python-format
-msgid "You were tagged by %(sender_name)s"
-msgstr "თქვენ მოინიშნეთ %(sender_name)s-ს მიერ"
-
-#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "თქვენ მოინიშნეთ %(team_name)s-ში \"%(object_name)s-ზე\"."
 
 #, python-format
 msgid "%(sender_name)s invited you to join %(team_name)s"
 msgstr "%(sender_name)s-მა მოგიწვიათ, რომ შეუერთდეთ %(team_name)s-ს"
-
-msgid "Invited you"
-msgstr "თქვენ მოგიწვიათ"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -324,6 +308,11 @@ msgstr "დათანხმება მოწვევაზე"
 msgid "View invitation"
 msgstr "მოწვევის ნახვა"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s invited you"
+msgstr "%(sender_name)s -მა მოგნიშნათ"
+
 msgid "New link to the moved project/group"
 msgstr "ახალი ბმული გადატანილი პროექტისათვის/ჯგუფისათვის"
 
@@ -335,9 +324,6 @@ msgstr "ერთ-ერთი თქვენი პროექტი/ჯგ�
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "\"%(team_name)s\"  გადატანილ იქნა %(portal_name)s-ზე!"
 
-msgid "Created"
-msgstr "შექმნილი"
-
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s ახლახან შექმნა პროექტი/ჯგუფი \"%(team_name)s\" %(portal_name)s-ზე!"
@@ -346,9 +332,6 @@ msgstr "%(sender_name)s ახლახან შექმნა პროექ
 #| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s ახლახან შექმნა იდეა \"%(object_name)s\" %(portal_name)s-ზე !"
-
-msgid "Has created"
-msgstr "შექმნა"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -359,12 +342,12 @@ msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr "%(sender_name)s ახალხან შექმნა იდეა \"%(object_name)s\"!"
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
-msgstr "%(sender_name)s ახალხან შექმნა პროექტი \"%(team_name)s\" %(portal_name)s-ზე იდეისგან, რომელსაც თქვენ თვალს ადევნებთ ! <br/><br/> შესამოწმებლად, გთხოვთ დააკლიკოთ ქვემოთ მოცემულ ბმულს. ბმულის მეშვეობით, თქვენ შეძლებთ ნახოთ გსურთ თუ არა შეუერთდეთ პროექტს."
-
-#, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr "%(sender_name)s-მა ახალხან შექმნა პროექტი \"%(team_name)s\", იმ იდეისგან, რომელსაც თქვენ ადევნებთ თვალს!"
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr "%(sender_name)s ახალხან შექმნა პროექტი \"%(team_name)s\" %(portal_name)s-ზე იდეისგან, რომელსაც თქვენ თვალს ადევნებთ ! <br/><br/> შესამოწმებლად, გთხოვთ დააკლიკოთ ქვემოთ მოცემულ ბმულს. ბმულის მეშვეობით, თქვენ შეძლებთ ნახოთ გსურთ თუ არა შეუერთდეთ პროექტს."
 
 msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
@@ -532,9 +515,6 @@ msgstr "დააკლიკეთ შემდეგ ბმულს, რო�
 msgid "Unsubscribe"
 msgstr "გამოწერის გაუქმება"
 
-msgid "Hi,"
-msgstr "გამარჯობა,"
-
 msgid "Tiny (50 x *)"
 msgstr "უმცირესი (50 x *)"
 
@@ -589,6 +569,9 @@ msgstr "საჩივრის ტექსტი"
 
 msgid "Creator"
 msgstr "შემქმნელი"
+
+msgid "Created"
+msgstr "შექმნილი"
 
 msgid "Reported object"
 msgstr "გამოვლენილი საგანი"
@@ -1441,6 +1424,9 @@ msgstr "რედაქტირება"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "შეცდომა დაფიქსირდა ერთ-ერთ გრაფაში, რომელშიც ინფორმაცია შეიყვანეთ. გთხოვთ შეასწოროთ შენახვამდე!"
+
+msgid "You may use the following variables:"
+msgstr "თქვენ შეგიძლიათ გამოიყენოთ შემდეგი ცვლადები:"
 
 msgid "Save"
 msgstr "შენახვა"
@@ -2332,9 +2318,6 @@ msgstr "პროექტის შექმნისთანავე, შე
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
-
-msgid "You may use the following variables:"
-msgstr "თქვენ შეგიძლიათ გამოიყენოთ შემდეგი ცვლადები:"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
@@ -4381,8 +4364,8 @@ msgstr "ანონსი"
 msgid "Continue reading"
 msgstr "კითხვის გაგრძელება"
 
-msgid "What's the latest news?"
-msgstr "რა არის უკანასკნელი სიახლე?"
+msgid "What's the latest news that you would like to share with all users of the platform?"
+msgstr ""
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
 msgstr "ბოლოს ნანახი პადები, ფაილები, ღონისძიებები, ტოდები და სხვა კონტენტი ნაჩვენები იქნება აქ."
@@ -4559,6 +4542,9 @@ msgstr "ჩვენ შესახებ"
 msgid "Question about"
 msgstr "კითხვა"
 
+msgid "Test email sent!"
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "\"%s\" ენა არ არის მხარდაჭერილი"
@@ -4667,9 +4653,6 @@ msgstr "მე მოგიწვიეთ, რომ ჩაერთოთ \"%(
 #, python-format
 msgid "User %(username)s was successfully invited!"
 msgstr "მოხმარებელი %(username)s წარმატებით იქნა მოწვეული!"
-
-msgid "You cannot change your own admin status."
-msgstr "თქვენ არ შეგიძლიათ თქვენი ადმინისტრატორის სტატუსის შეცვლა."
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
@@ -4946,6 +4929,33 @@ msgstr "თქვენ არ ხართ %s-ის წევრი! თუ �
 
 msgid "Your changes have been saved."
 msgstr "თქვენი ცვლილებები შენახულია."
+
+#~ msgid "New membership request"
+#~ msgstr "ახალი მოთხოვნა წევრობაზე"
+
+#~ msgid "Made you an admin"
+#~ msgstr "მოახდინა თქვენი ადმინისტრატორად დასმა"
+
+#~ msgid "Revoked your admin status"
+#~ msgstr "გუნდის ადმინისტრატორის სტატუსი გაგიუქმდათ"
+
+#~ msgid "You were tagged by %(sender_name)s"
+#~ msgstr "თქვენ მოინიშნეთ %(sender_name)s-ს მიერ"
+
+#~ msgid "Invited you"
+#~ msgstr "თქვენ მოგიწვიათ"
+
+#~ msgid "Has created"
+#~ msgstr "შექმნა"
+
+#~ msgid "Hi,"
+#~ msgstr "გამარჯობა,"
+
+#~ msgid "What's the latest news?"
+#~ msgstr "რა არის უკანასკნელი სიახლე?"
+
+#~ msgid "You cannot change your own admin status."
+#~ msgstr "თქვენ არ შეგიძლიათ თქვენი ადმინისტრატორის სტატუსის შეცვლა."
 
 #~ msgid "Choose App"
 #~ msgstr "აპლიკაციის არჩევა"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-27 11:39+0200\n"
+"POT-Creation-Date: 2020-06-08 15:24+0200\n"
 "PO-Revision-Date: 2020-04-01 13:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -187,9 +187,6 @@ msgstr[1] "%(sender_name)s -ը և %(count_minus_one)d ուրիշները անդ�
 msgid "You are an admin of this team"
 msgstr "Դուք այս թիմի ադմինն եք"
 
-msgid "New membership request"
-msgstr "Անդամակցության նոր հայց"
-
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "\"%(sender_name)s\"-ը հարցում է ուղարկել %(team_name)s- ին միանալու համար."
@@ -259,9 +256,6 @@ msgstr "Դուք դարձել եք այս թիմի ադմինիստրատորը"
 msgid "%(sender_name)s made you an admin"
 msgstr "%(sender_name)s-ը նշանակեց ձեզ ադմինիստրատոր"
 
-msgid "Made you an admin"
-msgstr "Ձեզ նշանակել են ադմինիստրատոր"
-
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s -ը նշանակել է ձեզ \"%(team_name)s\" -ի ադմինիստրատոր %(portal_name)s -ում!"
@@ -272,9 +266,6 @@ msgstr "Ձեր ադմինիստրատորի կարգավիճակն այս թիմ
 #, python-format
 msgid "%(sender_name)s revoked your admin status"
 msgstr "%(sender_name)s -ը չեղարկել է ձեր ադմինիստրատորի կարգավիճակը"
-
-msgid "Revoked your admin status"
-msgstr "Ձեր ադմինիստրատորի կարգավիճակը չեղարկված է"
 
 #, python-format
 msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
@@ -296,19 +287,12 @@ msgid "%(sender_name)s tagged you in"
 msgstr "%(sender_name)s-ը նշել է ձեզ"
 
 #, python-format
-msgid "You were tagged by %(sender_name)s"
-msgstr "Ձեզ նշել է %(sender_name)s -ը"
-
-#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "Ձեզ նշել են \"%(object_name)s\" -ում %(team_name)s -ում."
 
 #, python-format
 msgid "%(sender_name)s invited you to join %(team_name)s"
 msgstr "%(sender_name)s -ը հրավիրել է ձեզ միանալ %(team_name)s -ին"
-
-msgid "Invited you"
-msgstr "Հրավիրել է ձեզ"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -324,6 +308,11 @@ msgstr "Ընդունել հրավերը"
 msgid "View invitation"
 msgstr "Տեսնել հրավերը"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s invited you"
+msgstr "%(sender_name)s-ը նշել է ձեզ"
+
 msgid "New link to the moved project/group"
 msgstr "Տեղափոխված նախագծի/ խմբի նոր հղում"
 
@@ -335,9 +324,6 @@ msgstr "Ձեր նախագծերից / խմբերից մեկը տեղափոխվե
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "\"%(team_name)s\"-ը տեղափոխվել է %(portal_name)s!"
 
-msgid "Created"
-msgstr "Ստեղծված է"
-
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s -ը ստեղծեց \"%(team_name)s\" նախագիծը / խումբը %(portal_name)s - ում!"
@@ -346,9 +332,6 @@ msgstr "%(sender_name)s -ը ստեղծեց \"%(team_name)s\" նախագիծը / 
 #| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s-ը ստեղծեց \"%(object_name)s\" գաղափար %(portal_name)s -ում!"
-
-msgid "Has created"
-msgstr "Ստեղշծեց"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -359,12 +342,12 @@ msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr "%(sender_name)s-ը ստեղծեց \"%(object_name)s\" գաղափար!"
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
-msgstr "%(sender_name)s -ը ստեղծել է \"%(team_name)s\" նախագիծը %(portal_name)s -ում այն գաղափարի հիման վրա, որին դուք հետևում եք: <br/><br/> Դա ստուգելու համար սեղմեք ստորև նշված հղմանը: Այնտեղ կարող եք տեսնել, ցանկանում եք արդյոք միանալ նախագծին."
-
-#, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr "%(sender_name)s -ը ստեղծեց \"%(team_name)s\" նախագիծը Ձեր կողմից հետևվող գաղափարից!"
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr "%(sender_name)s -ը ստեղծել է \"%(team_name)s\" նախագիծը %(portal_name)s -ում այն գաղափարի հիման վրա, որին դուք հետևում եք: <br/><br/> Դա ստուգելու համար սեղմեք ստորև նշված հղմանը: Այնտեղ կարող եք տեսնել, ցանկանում եք արդյոք միանալ նախագծին."
 
 msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
@@ -532,9 +515,6 @@ msgstr "Անցեք հետևյալ հղումով՝ այլևս մեզանից է�
 msgid "Unsubscribe"
 msgstr "Ապաբաժանորդագրվել"
 
-msgid "Hi,"
-msgstr "Ողջույն,"
-
 msgid "Tiny (50 x *)"
 msgstr "Փոքրիկ (50 x *)"
 
@@ -589,6 +569,9 @@ msgstr "Բողոքի տեքստ"
 
 msgid "Creator"
 msgstr "Ստեղծող"
+
+msgid "Created"
+msgstr "Ստեղծված է"
 
 msgid "Reported object"
 msgstr "Հաղորդված օբյեկտ"
@@ -1441,6 +1424,9 @@ msgstr "Խմբագրել"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "Ձեր մուտքագրված դաշտերից մեկում առկա է սխալ: Խնդրում ենք ուղղել այն նախքան պահպանելը!"
+
+msgid "You may use the following variables:"
+msgstr "Կարող եք օգտագործել հետևյալ փոփոխականները:"
 
 msgid "Save"
 msgstr "Պահպանել"
@@ -2333,9 +2319,6 @@ msgstr "Facebook- ի ինտեգրումն հնարավոր է միայն նախ�
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
-
-msgid "You may use the following variables:"
-msgstr "Կարող եք օգտագործել հետևյալ փոփոխականները:"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
@@ -4380,8 +4363,8 @@ msgstr "Նախադիտում"
 msgid "Continue reading"
 msgstr "Շարունակել կարդալ"
 
-msgid "What's the latest news?"
-msgstr "Ո՞րոնք են վերջին նորությունները?"
+msgid "What's the latest news that you would like to share with all users of the platform?"
+msgstr ""
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
 msgstr "Ձեր վերջին այցելած Պահոցները, ֆայլերը, իրադարձությունները, անելիքների ցանկը և այլ բովանդակություն կցուցադրվեն այստեղ."
@@ -4558,6 +4541,9 @@ msgstr "Մեր մասին"
 msgid "Question about"
 msgstr "Հարց"
 
+msgid "Test email sent!"
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "\"%s\" լեզուն չի մատուցվում"
@@ -4666,9 +4652,6 @@ msgstr "Ես հրավիրել եմ ձեզ միանալ %(team_name)s\" -ին!"
 #, python-format
 msgid "User %(username)s was successfully invited!"
 msgstr "%(username)s օգտատերը հաջողությամբ հրավիրվել է!"
-
-msgid "You cannot change your own admin status."
-msgstr "Դուք չեք կարող փոխել ադմինիստրատորի ձեր սեփական կարգավիճակը."
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
@@ -4945,6 +4928,33 @@ msgstr "Դուք ներկայումս %s- ի անդամ չեք: Եթե ցանկ�
 
 msgid "Your changes have been saved."
 msgstr "Ձեր փոփոխությունները պահպանվել են."
+
+#~ msgid "New membership request"
+#~ msgstr "Անդամակցության նոր հայց"
+
+#~ msgid "Made you an admin"
+#~ msgstr "Ձեզ նշանակել են ադմինիստրատոր"
+
+#~ msgid "Revoked your admin status"
+#~ msgstr "Ձեր ադմինիստրատորի կարգավիճակը չեղարկված է"
+
+#~ msgid "You were tagged by %(sender_name)s"
+#~ msgstr "Ձեզ նշել է %(sender_name)s -ը"
+
+#~ msgid "Invited you"
+#~ msgstr "Հրավիրել է ձեզ"
+
+#~ msgid "Has created"
+#~ msgstr "Ստեղշծեց"
+
+#~ msgid "Hi,"
+#~ msgstr "Ողջույն,"
+
+#~ msgid "What's the latest news?"
+#~ msgstr "Ո՞րոնք են վերջին նորությունները?"
+
+#~ msgid "You cannot change your own admin status."
+#~ msgstr "Դուք չեք կարող փոխել ադմինիստրատորի ձեր սեփական կարգավիճակը."
 
 #~ msgid "Choose App"
 #~ msgstr "Ընտրել հավելվածը"

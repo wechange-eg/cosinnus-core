@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-27 11:39+0200\n"
+"POT-Creation-Date: 2020-06-08 15:24+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -191,9 +191,6 @@ msgstr[2] "\"%(sender_name)s\" отправил(a) заявку на членс�
 msgid "You are an admin of this team"
 msgstr "Вас сделали администратором этой команды"
 
-msgid "New membership request"
-msgstr "Новые заявки на вступление"
-
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "\"%(sender_name)s\" отправил(a) заявку на членство в %(team_name)s."
@@ -272,9 +269,6 @@ msgstr "Вас сделали администратором этой коман
 msgid "%(sender_name)s made you an admin"
 msgstr "%(sender_name)s отметил(а) Вас в"
 
-msgid "Made you an admin"
-msgstr "Зделал вас администратором"
-
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s  сделал Вас администратором %(team_name)s на %(portal_name)s!"
@@ -285,9 +279,6 @@ msgstr "Ваш статус администратора для этой ком�
 #, fuzzy, python-format
 #| msgid "Revoked your admin status"
 msgid "%(sender_name)s revoked your admin status"
-msgstr "Отзыв статуса администратора"
-
-msgid "Revoked your admin status"
 msgstr "Отзыв статуса администратора"
 
 #, python-format
@@ -312,10 +303,6 @@ msgid "%(sender_name)s tagged you in"
 msgstr "%(sender_name)s отметил(а) Вас в"
 
 #, python-format
-msgid "You were tagged by %(sender_name)s"
-msgstr "Вас отметил %(sender_name)s"
-
-#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "Вас отметили в \"%(object_name)s\" в %(team_name)s."
 
@@ -323,9 +310,6 @@ msgstr "Вас отметили в \"%(object_name)s\" в %(team_name)s."
 #| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s invited you to join %(team_name)s"
 msgstr "%(sender_name)s  пригласил(а) Вас присоединиться к \"%(team_name)s\" на %(portal_name)s!"
-
-msgid "Invited you"
-msgstr "Пригласил(а) Вас"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -341,6 +325,11 @@ msgstr "Принять приглашение"
 msgid "View invitation"
 msgstr "Просмотреть приглашение"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s invited you"
+msgstr "%(sender_name)s отметил(а) Вас в"
+
 msgid "New link to the moved project/group"
 msgstr "Новая ссылка на перемещаемый проект/группу"
 
@@ -352,9 +341,6 @@ msgstr "Один из ваших проектов/групп был переме
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "“%(team_name)s” перенесено на %(portal_name)s!"
 
-msgid "Created"
-msgstr "Создано"
-
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s только что создал(а) проект/группу “%(team_name)s” on %(portal_name)s!"
@@ -363,9 +349,6 @@ msgstr "%(sender_name)s только что создал(а) проект/гру
 #| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s пригласил(а) Вас присоединиться к “%(object_name)s\" на %(portal_name)s!"
-
-msgid "Has created"
-msgstr "Создал"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -376,12 +359,12 @@ msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr "%(sender_name)s только что создал(а) идею ”%(object_name)s”!"
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
-msgstr "%(sender_name)s только что создал проект “%(team_name)s” на %(portal_name)s на основе идеи, которой Вы интересуетесь! <br/><br/> Чтобы проверить это, пожалуйста, нажмите на ссылку ниже. Там вы можете увидеть, если вы хотели бы присоединиться к проекту."
-
-#, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr "%(sender_name)s только что создал(а) проект “%(team_name)s” на основе идеи, которая Вам интересна!"
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr "%(sender_name)s только что создал проект “%(team_name)s” на %(portal_name)s на основе идеи, которой Вы интересуетесь! <br/><br/> Чтобы проверить это, пожалуйста, нажмите на ссылку ниже. Там вы можете увидеть, если вы хотели бы присоединиться к проекту."
 
 msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
@@ -551,9 +534,6 @@ msgstr "Пройдите по ссылке, чтобы изменить увед
 msgid "Unsubscribe"
 msgstr "Отписаться"
 
-msgid "Hi,"
-msgstr "Здравствуйте,"
-
 msgid "Tiny (50 x *)"
 msgstr "Крошечный (50 x *)"
 
@@ -608,6 +588,9 @@ msgstr "Текст жалобы"
 
 msgid "Creator"
 msgstr "Создано пользователем"
+
+msgid "Created"
+msgstr "Создано"
 
 msgid "Reported object"
 msgstr "Объект жалобы"
@@ -1476,6 +1459,11 @@ msgstr "Редактировать"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "Произошла ошибка при заполнении одного из полей. Пожалуйста, исправьте её перед сохранением!"
+
+#, fuzzy
+#| msgid "You are not following any ideas yet."
+msgid "You may use the following variables:"
+msgstr "Ты не следишь за идеями пока что."
 
 msgid "Save"
 msgstr "Сохранить"
@@ -2386,11 +2374,6 @@ msgstr "Фейсбук-Интеграция будет доступна, как 
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
-
-#, fuzzy
-#| msgid "You are not following any ideas yet."
-msgid "You may use the following variables:"
-msgstr "Ты не следишь за идеями пока что."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
@@ -4472,8 +4455,8 @@ msgstr "посмотреть"
 msgid "Continue reading"
 msgstr ""
 
-msgid "What's the latest news?"
-msgstr "Какие последние новости?"
+msgid "What's the latest news that you would like to share with all users of the platform?"
+msgstr ""
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
 msgstr "Посещенные недавно тобой Документы, Файлы, События, Списки Задач и Новости будут показаны здесь."
@@ -4655,6 +4638,9 @@ msgstr "О нас"
 msgid "Question about"
 msgstr "Вопрос о"
 
+msgid "Test email sent!"
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Наша платформа не поддерживает “%s” язык"
@@ -4763,9 +4749,6 @@ msgstr "Я пригласил Вас присоединиться к \"%(team_na
 #, python-format
 msgid "User %(username)s was successfully invited!"
 msgstr "Пользователь %(username)s успешно приглашен!"
-
-msgid "You cannot change your own admin status."
-msgstr "Вы не можете изменить свой собственный статус администратора."
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
@@ -5057,6 +5040,33 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
+
+#~ msgid "New membership request"
+#~ msgstr "Новые заявки на вступление"
+
+#~ msgid "Made you an admin"
+#~ msgstr "Зделал вас администратором"
+
+#~ msgid "Revoked your admin status"
+#~ msgstr "Отзыв статуса администратора"
+
+#~ msgid "You were tagged by %(sender_name)s"
+#~ msgstr "Вас отметил %(sender_name)s"
+
+#~ msgid "Invited you"
+#~ msgstr "Пригласил(а) Вас"
+
+#~ msgid "Has created"
+#~ msgstr "Создал"
+
+#~ msgid "Hi,"
+#~ msgstr "Здравствуйте,"
+
+#~ msgid "What's the latest news?"
+#~ msgstr "Какие последние новости?"
+
+#~ msgid "You cannot change your own admin status."
+#~ msgstr "Вы не можете изменить свой собственный статус администратора."
 
 #~ msgid ""
 #~ "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
