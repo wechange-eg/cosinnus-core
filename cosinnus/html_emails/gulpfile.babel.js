@@ -30,7 +30,7 @@ gulp.task('default',
   
 // Build emails, run the server, and watch for file changes
 gulp.task('dev',
-  gulp.series('build', server, watch));
+  gulp.series('build', exportTemplates, server, watch));
 
 // Build emails, then zip
 gulp.task('zip',
@@ -83,7 +83,7 @@ function images() {
 // Inline CSS and minify HTML
 function inline() {
   return gulp.src('dist/**/*.html')
-    .pipe($.if(PRODUCTION, inliner('dist/css/app.css')))
+    .pipe(inliner('dist/css/app.css'))
     .pipe(gulp.dest('dist'));
 }
 
@@ -101,6 +101,17 @@ function cellspaceClasses() {
     .pipe(gulp.dest('dist'));
 }
 
+// add cellspacing/cellpadding onto tables that have padding classes to support Outlook
+function exportTemplates() {
+  return gulp.src([
+        'dist/summary_group.html',
+        'dist/summary_item.html',
+        'dist/notification.html',
+        'dist/digest.html'
+    ])
+    .pipe(gulp.dest('./../templates/cosinnus/html_mail/'));
+}
+
 // Start a server with LiveReload to preview the site in
 function server(done) {
   browser.init({
@@ -111,9 +122,8 @@ function server(done) {
 
 // Watch for file changes
 function watch() {
-  gulp.watch('src/pages/**/*.html').on('change', gulp.series(clean, pages, sass, images, inline, cellspaceClasses, browser.reload));
-  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(clean, pages, sass, images, inline, cellspaceClasses, browser.reload));
-  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(clean, pages, sass, images, inline, cellspaceClasses, browser.reload));
+  gulp.watch('src/**/*.html').on('change', gulp.series(clean, pages, sass, images, inline, cellspaceClasses, exportTemplates, browser.reload));
+  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(clean, pages, sass, images, inline, cellspaceClasses, exportTemplates, browser.reload));
   gulp.watch('src/assets/img/**/*').on('change', gulp.series(images, browser.reload));
 }
 
