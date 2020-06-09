@@ -188,11 +188,12 @@
 			
 			{% if not SETTINGS.COSINNUS_FORUM_DISABLED %}
 				<div class="news-textbox-frame">
-					<div class="news-textbox" data-toggle="modal" data-target="#write-news-modal">
+					{% trans "What's the latest news that you would like to share with all users of the platform?" as textbox_label %}
+					<div class="news-textbox" data-toggle="modal" data-target="#write-news-modal" title="{{ textbox_label }}">
 						<span class="news-textbox-icon">
 							<i class="fas fa-fw fa-pencil-alt"></i>
 						</span>
-						{% trans "What's the latest news that you would like to share with all users of the platform?" %}
+						{{ textbox_label }}
 					</div>
 				</div>
 				{% include 'cosinnus_note/v2/note_form_modal.html' with group=forum_group form=note_form %}
