@@ -18,9 +18,6 @@ const $ = plugins();
 // Look for the --production flag
 const PRODUCTION = !!(yargs.argv.production);
 
-// Declar var so that both AWS and Litmus task can use it.
-var CONFIG;
-
 var replace = require('gulp-replace');
 
 // Build the "dist" folder by running all of the above tasks
@@ -34,10 +31,6 @@ gulp.task('default',
 // Build emails, run the server, and watch for file changes
 gulp.task('dev',
   gulp.series('build', server, watch));
-
-// Build emails, then send to litmus
-gulp.task('litmus',
-  gulp.series('build', creds, aws, litmus));
 
 // Build emails, then zip
 gulp.task('zip',
@@ -142,47 +135,6 @@ function inliner(css) {
     });
 
   return pipe();
-}
-
-// Ensure creds for Litmus are at least there.
-function creds(done) {
-  var configPath = './config.json';
-  try { CONFIG = JSON.parse(fs.readFileSync(configPath)); }
-  catch(e) {
-    beep();
-    console.log('[AWS]'.bold.red + ' Sorry, there was an issue locating your config.json. Please see README.md');
-    process.exit();
-  }
-  done();
-}
-
-// Post images to AWS S3 so they are accessible to Litmus test
-function aws() {
-  var publisher = !!CONFIG.aws ? $.awspublish.create(CONFIG.aws) : $.awspublish.create();
-  var headers = {
-    'Cache-Control': 'max-age=315360000, no-transform, public'
-  };
-
-  return gulp.src('./dist/assets/img/*')
-    // publisher will add Content-Length, Content-Type and headers specified above
-    // If not specified it will set x-amz-acl to public-read by default
-    .pipe(publisher.publish(headers))
-
-    // create a cache file to speed up consecutive uploads
-    //.pipe(publisher.cache())
-
-    // print upload updates to console
-    .pipe($.awspublish.reporter());
-}
-
-// Send email to Litmus for testing. If no AWS creds then do not replace img urls.
-function litmus() {
-  var awsURL = !!CONFIG && !!CONFIG.aws && !!CONFIG.aws.url ? CONFIG.aws.url : false;
-
-  return gulp.src('dist/**/*.html')
-    .pipe($.if(!!awsURL, $.replace(/=('|")(\/?assets\/img)/g, "=$1"+ awsURL)))
-    .pipe($.litmus(CONFIG.litmus))
-    .pipe(gulp.dest('dist'));
 }
 
 // Copy and compress into Zip
