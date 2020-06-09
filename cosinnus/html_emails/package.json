@@ -6,7 +6,8 @@
   "main": "gulpfile.babel.js",
   "scripts": {
     "start": "gulp",
-    "build": "gulp --production",
+    "build": "gulp build --production",
+    "dev": "gulp dev --production",
     "zip": "gulp zip --production",
     "litmus": "gulp litmus --production"
   },

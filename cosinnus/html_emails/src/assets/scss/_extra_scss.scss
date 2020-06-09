@@ -1,0 +1,14 @@
+/* 
+    This file is a placeholder that enables you to override email styles per-portal.
+
+    Add this to your portal's repository under
+    ./wechange/html_emails/src/assets/scss/_extra_scss.scss
+    
+    and run ./compile_html_emails.sh locally to compile the portal-specific email templates.
+    
+    Example:
+    .non-bold-text {
+        font-weight: bold;   
+    }
+ */
+

@@ -29,6 +29,10 @@ gulp.task('build',
 
 // Build emails, run the server, and watch for file changes
 gulp.task('default',
+  gulp.series('build'));
+  
+// Build emails, run the server, and watch for file changes
+gulp.task('dev',
   gulp.series('build', server, watch));
 
 // Build emails, then send to litmus
@@ -114,9 +118,9 @@ function server(done) {
 
 // Watch for file changes
 function watch() {
-  gulp.watch('src/pages/**/*.html').on('change', gulp.series(pages, inline, cellspaceClasses, browser.reload));
-  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(resetPages, pages, inline, cellspaceClasses, browser.reload));
-  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(resetPages, sass, pages, inline, cellspaceClasses, browser.reload));
+  gulp.watch('src/pages/**/*.html').on('change', gulp.series(clean, pages, sass, images, inline, cellspaceClasses, browser.reload));
+  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(clean, pages, sass, images, inline, cellspaceClasses, browser.reload));
+  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(clean, pages, sass, images, inline, cellspaceClasses, browser.reload));
   gulp.watch('src/assets/img/**/*').on('change', gulp.series(images, browser.reload));
 }
 
