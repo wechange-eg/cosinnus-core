@@ -4,7 +4,7 @@
     Add this to your portal's repository under
     ./wechange/html_emails/src/assets/scss/_extra_variables.scss
     
-    and run ./compile_html_emails.sh locally to compile the portal-specific email templates.
+    During the fab deploy, the email templates will be custo-compiled for the portal.
     
     Example: 
     $primary-color: #333333;
