@@ -50,6 +50,11 @@ class VideoEmbedFieldMixin(object):
             return {'error': video}
         return {}
     
+    @property
+    def is_video(self):
+        props = self.get_video_properties()
+        return bool(props and not 'error' in props)
+    
     def render_video_embed(self):
         return mark_safe(render_to_string(self.video_embed_template, {'data': self.get_video_properties()}))
     

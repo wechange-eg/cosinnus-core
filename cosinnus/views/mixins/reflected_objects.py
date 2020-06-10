@@ -97,10 +97,8 @@ class ReflectedObjectRedirectNoticeMixin(object):
     def get(self, request, *args, **kwargs):
         if self.request.GET.get('reflected_item_redirect', None) == '1':
             messages.success(self.request, mark_safe(_(''
-                    'You are now located in %(group_name)s.'
-                    '<br/>'
-                    'You were redirected here from another project or group that links to this item.'
-                ) % {'group_name': '"<b>%s</b>"' % escape(self.group.name)}))
+                    'You are now located in %(group_name)s. You were redirected here from another project or group that links to this item.'
+                ) % {'group_name': '"%s"' % escape(self.group.name)}))
             params = request.GET.copy()
             del params['reflected_item_redirect']
             params = urlencode(params)

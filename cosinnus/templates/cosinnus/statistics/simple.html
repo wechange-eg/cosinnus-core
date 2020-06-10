@@ -13,7 +13,7 @@
                     <i class="fa fa-table"></i>
                 </a>
 	            <div class="media-body">
-	                CSV-Statistiken
+                    {% trans "CSV Downloads" %}
 	            </div>
 	        </li>
 	    </ul>
@@ -26,37 +26,69 @@
 	                <i class="fa fa-download"></i>
 	            </a>
 	            <div class="media-body">
-	                Speicherbedarf Gruppen
+                    {% trans "HD space used by groups" %}
 	            </div>
 	        </li>
 	    </ul>
 	</button>
 	
-	<button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:housekeeping-project-storage-report' %}">
+	<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-project-storage-report' %}">
 	    <ul class="media-list">
 	        <li class="media">
 	           <a class="pull-left">
 	                <i class="fa fa-download"></i>
 	            </a>
 	            <div class="media-body">
-	                Speicherbedarf Projekte
+                    {% trans "HD space used by projects" %}
 	            </div>
 	        </li>
 	    </ul>
 	</button>
 	
-	<button type="button" class="btn w100 btn-emphasized" href="{% url 'cosinnus:housekeeping-user-activity-info' %}">
-	    <ul class="media-list">
-	        <li class="media">
-	           <a class="pull-left">
-	                <i class="fa fa-download"></i>
-	            </a>
-	            <div class="media-body">
-	                Benutzerstatistiken (min 1x eingeloggt)
-	            </div>
-	        </li>
-	    </ul>
-	</button>
+	<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-user-activity-info' %}">
+        <ul class="media-list">
+            <li class="media">
+               <a class="pull-left">
+                    <i class="fa fa-download"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "User statistics (min 1x logged in)" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+    {% if SETTINGS.COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS %}
+	    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-newsletter-user-emails' %}">
+	        <ul class="media-list">
+	            <li class="media">
+	               <a class="pull-left">
+	                    <i class="fa fa-download"></i>
+	                </a>
+	                <div class="media-body">
+                        {% trans "E-Mails of all newsletter subcribers" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+	    
+	    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-active-user-emails' %}">
+	        <ul class="media-list">
+	            <li class="media">
+	               <a class="pull-left">
+	                    <i class="fa fa-download"></i>
+	                </a>
+	                <div class="media-body">
+	                    {% trans "E-Mails of ALL active users" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    {% endif %}
+    
+	
+	
+	
 
 {% endblock leftnav %}
 

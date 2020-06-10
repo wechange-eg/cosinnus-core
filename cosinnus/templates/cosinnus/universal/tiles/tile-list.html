@@ -8,11 +8,13 @@
             <span class="pull-right">
 	            {% for type in ['projects', 'groups', 'ideas', 'organizations'] %}
 	                {% if type in controlView.availableFilterList %}
-			            <a href="{% if not cosinnus_active_user %}/signup/?acc_req_msg=1&next={% endif %}/{{type}}/add/" class="rounded-button button-color-{{ type }}-inverted">
-				            <span class="rounded-button-inner">
-				                {{ macros.typeLabel(type, useStyles=0, create=true) }}
-				            </span>
-				        </a>
+	                    {% if not type in ['projects', 'groups'] or COSINNUS_SHOW_PROJECT_AND_GROUP_CREATE_BUTTONS %}
+				            <a href="{% if not cosinnus_active_user %}/signup/?acc_req_msg=1&next={% endif %}/{{type}}/add/" class="rounded-button button-color-{{ type }}-inverted">
+					            <span class="rounded-button-inner">
+					                {{ macros.typeLabel(type, useStyles=0, create=true) }}
+					            </span>
+					        </a>
+					    {% endif %}
 	                {% endif %}
 	            {% endfor %}
             </span>

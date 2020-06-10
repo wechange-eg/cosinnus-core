@@ -26,6 +26,7 @@
             <div class="modal-body">
                 {{ label|safe }}
             </div>
+            {% if not hide_footer %}
             <div class="modal-footer">
                 {% if not hide_submit_button %}
                 <button type="submit" id="{{ id }}_btnsubmit" class="submit-btn-x btn btn-emphasized {% if large_buttons %}btn-autosize{% endif %}" {% if not form_action %}data-dismiss="modal"{% endif %} {% if disable_on_submit %}onclick="setTimeout(function(){$('#{{ id }}_btnsubmit').attr('disabled', true);},50);"{% endif %}>
@@ -63,6 +64,7 @@
                     {{ custom_button_html }}
                 {% endif %} 
             </div>
+            {% endif %}
             {% if form_action %}
             </form>
             {% endif %}

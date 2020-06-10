@@ -1,5 +1,4 @@
 from django_select2 import (HeavyModelSelect2MultipleChoiceField)
-from cosinnus_message.views import UserSelect2View
 from django.core.exceptions import ValidationError
 from cosinnus.conf import settings
 from django.http.response import Http404
@@ -7,6 +6,7 @@ from cosinnus.models.group import CosinnusGroup
 from django_select2.util import JSFunction
 from django.contrib.auth import get_user_model
 from cosinnus.utils.user import filter_active_users
+from cosinnus.views.user import UserSelect2View
 
 User = get_user_model()
 
@@ -48,7 +48,7 @@ class UserSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
     def clean(self, value):
         """ We organize the ids gotten back from the recipient select2 field.
             This is a list of mixed ids which could either be groups or users.
-            See cosinnus_messages.views.UserSelect2View for how these ids are built.
+            See cosinnus.views.user.UserSelect2View for how these ids are built.
             
             Example for <value>: [u'user:1', u'group:4'] 
         """
@@ -58,11 +58,12 @@ class UserSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
         
         user_ids, group_ids = self.get_user_and_group_ids_for_value(value)
         
-        # unpack the members of the selected groups
+        # add group members to the list
         groups = CosinnusGroup.objects.get_cached(pks=group_ids)
         recipients = set()
         for group in groups:
-            recipients.update(filter_active_users(group.users.all()))
+            group_members = get_user_model().objects.filter(id__in=group.members)
+            recipients.update(filter_active_users(group_members))
             
         # combine the groups users with the directly selected users
         recipients.update(filter_active_users(User.objects.filter(id__in=user_ids)))

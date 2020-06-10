@@ -554,38 +554,56 @@
         
         /** Click triggers for labels of onoffSwitches */
         onoffSwitch: function() {
-        	$('body').on('click', '.onoffswitch-frame', function(event){
-        		$(event.target).parent().find('input[type="checkbox"]').click();
+        	$('body').off('click', '.onoffswitch-frame').on('click', '.onoffswitch-frame', function(event){
+        	    var $box = $(event.target).closest('.onoffswitch-frame').find('input[type="checkbox"]');
+        	    var checked = Boolean($box.attr("checked"));
+        		$box.attr("checked", !checked);
+        		$box[0].checked = !checked;
+        		$box.trigger('change');
+        		event.preventDefault();
+        		return false;
         	});
         },
         
         /** Click triggers for the .hide-on-click class and
-         * 	other elements that disappear when an element is clicked. */
+         *  other elements that disappear when an element is clicked. */
         hideOnClick: function() {
-        	$('body').on('click', function(event){
-        		var $target = $(event.target);
-        		
-        		// hide all .hide-on-click
-        		$('.hide-on-click:visible').hide();
-        		// hide all .hide-on-click-outside if clicked outside them
-        		$('.hide-on-click-outside').each(function(){
-        			var item = this;
-        			var $item = $(item);
-        			if (!item.contains(event.target)) {
-        				$item.hide();
-        			}
-        		});
-        		// hide nav-flyouts that are expanded if clicked outside them, except for their menu button
-        		$('.nav-flyout').each(function(){
-        			var item = this;
-        			var $item = $(item);
-        			if ((!item.contains(event.target) || $target.hasClass('nav-flyout-backdrop')) 
-        					&& $item.hasClass('in') && '#'+item.id != $target.parents('a').attr('data-target')
-        					&& '#'+item.id != $target.attr('data-target')) {
-        				$item.collapse('hide');
-        			}
-        		});
-        	});
+            $('body').on('click', function(event){
+                var $target = $(event.target);
+                
+                // hide all .hide-on-click
+                $('.hide-on-click:visible').hide();
+                // hide all .hide-on-click-outside if clicked outside them
+                $('.hide-on-click-outside').each(function(){
+                    var item = this;
+                    var $item = $(item);
+                    if (!item.contains(event.target)) {
+                        $item.hide();
+                    }
+                });
+                // hide nav-flyouts that are expanded if clicked outside them, except for their menu button
+                $('.nav-flyout').each(function(){
+                    var item = this;
+                    var $item = $(item);
+                    if ((!item.contains(event.target) || $target.hasClass('nav-flyout-backdrop')) 
+                            && $item.hasClass('in') && '#'+item.id != $target.parents('a').attr('data-target')
+                            && '#'+item.id != $target.attr('data-target')) {
+                        $item.collapse('hide');
+                        // re-add collapsed class on button
+                        $('a[data-target="#' + item.id + '"]').addClass('collapsed');
+                    }
+                });
+            });
+        },
+        
+        /** Hover trigger to show/hide the next element on hover/remove mouse */
+        showNextOnHover: function() {
+            $('body').on('click mouseover', '.show-next-on-hover', function(event){
+                $(event.target).next().fadeIn();
+            });
+            $('body').on('mouseout', '.show-next-on-hover', function(event){
+                $(event.target).next().hide();
+            });
         },
 
         todosSelect : function() {
@@ -1652,6 +1670,7 @@ $(function() {
     $.cosinnus.checkBox();
     $.cosinnus.onoffSwitch();
     $.cosinnus.hideOnClick();
+    $.cosinnus.showNextOnHover();
     $.cosinnus.fadedown();
     $.cosinnus.selectors();
     $.cosinnus.fullcalendar();

@@ -223,6 +223,33 @@ ul.errorlist {
 	}
 }
 
+.panel {
+    .panel-heading {
+        cursor: pointer;
+        padding: 0;
+        
+        .panel-title {
+            padding: 10px 15px;
+            font-size: 16px;
+            
+            &:not(.collapsed) .panel-collapsed {
+                display: none;
+            }
+            &.collapsed {
+                .panel-open {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+.panel-default {
+    border: none;
+    border-left: 3px solid whitesmoke;
+    margin-bottom: 20px !important;
+    background-color: transparent;
+}
+
 #map {
 	height: 100px;
 }
@@ -250,7 +277,10 @@ ul.errorlist {
 	.generic-background-colors(@app-main-color-light,@app-main-color,@app-main-color-dark);
 }
 .app-calendar {
-	.generic-background-colors(@app-calendar-color-light,@app-calendar-color,@app-calendar-color-dark);
+    .generic-background-colors(@app-calendar-color-light,@app-calendar-color,@app-calendar-color-dark);
+}
+.app-cloud {
+    .generic-background-colors(@app-cloud-color-light,@app-cloud-color,@app-cloud-color-dark);
 }
 .app-files {
 	.generic-background-colors(@app-files-color-light,@app-files-color,@app-files-color-dark);
@@ -538,6 +568,10 @@ a.portal-inlink:hover img {
      
      a {
          cursor: pointer;
+     }
+     
+     + .btn-icon-only {
+         margin-right: 1px;
      }
 }
 .btn-icon-only.pull-left {

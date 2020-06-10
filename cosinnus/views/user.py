@@ -36,19 +36,23 @@ from django.template.loader import render_to_string
 from django.http.response import HttpResponseNotAllowed, JsonResponse, HttpResponseRedirect,\
     HttpResponseForbidden, HttpResponse, HttpResponseServerError
 from django.shortcuts import redirect, render
-from cosinnus.templatetags.cosinnus_tags import full_name_force, textfield
-from cosinnus.utils.permissions import check_user_integrated_portal_member
+from cosinnus.templatetags.cosinnus_tags import full_name_force, textfield,\
+    full_name
+from cosinnus.utils.permissions import check_user_integrated_portal_member,\
+    check_user_can_see_user, check_user_superuser
 from django.template.response import TemplateResponse
 from django.core.paginator import Paginator
 from cosinnus.views.mixins.group import EndlessPaginationMixin,\
     RequireLoggedInMixin
 from cosinnus.utils.user import filter_active_users,\
-    get_newly_registered_user_email
+    get_newly_registered_user_email, accept_user_tos_for_portal,\
+    get_user_query_filter_for_search_terms, get_user_select2_pills,\
+    get_group_select2_pills
 from uuid import uuid1
 from django.utils.encoding import force_text
 from cosinnus.core import signals
 from django.dispatch.dispatcher import receiver
-from cosinnus.core.signals import userprofile_ceated, user_logged_in_first_time
+from cosinnus.core.signals import userprofile_created, user_logged_in_first_time
 from django.contrib.auth.signals import user_logged_in
 from cosinnus.conf import settings
 from cosinnus.utils.tokens import email_blacklist_token_generator
@@ -66,6 +70,10 @@ import logging
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView
 from django.utils.timezone import now
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from django_select2.views import Select2View, NO_ERR_RESP
+from django.core.exceptions import PermissionDenied
+from cosinnus import cosinnus_notifications
+from cosinnus.utils.html import render_html_with_variables
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -152,7 +160,7 @@ class UserCreateView(CreateView):
 
     message_success = _('Your account "%(user)s" was registered successfully. Welcome to the community!')
     message_success_inactive = _('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')
-    message_success_email_verification = _('User "%(user)s" was registered successfully. We will send an email to your address %(email)s" soon. You need to confirm the email address before you can log in.')
+    message_success_email_verification = _('User "%(email)s" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in.')
     
     def get_success_url(self):
         return redirect_with_next(reverse('login'), self.request)
@@ -162,13 +170,14 @@ class UserCreateView(CreateView):
         user = self.object
         
         # sanity check, retrieve the user's profile (will create it if it doesnt exist)
-        profile = user.cosinnus_profile or get_user_profile_model()._default_manager.get_for_user(user)
+        if not user.cosinnus_profile:
+            get_user_profile_model()._default_manager.get_for_user(user)
         
         # set current django language during signup as user's profile language
         lang = get_language()
-        if not profile.language == lang:
-            profile.language = lang
-            profile.save(update_fields=['language']) 
+        if not user.cosinnus_profile.language == lang:
+            user.cosinnus_profile.language = lang
+            user.cosinnus_profile.save(update_fields=['language']) 
         
         # set user inactive if this portal needs user approval and send an email to portal admins
         if CosinnusPortal.get_current().users_need_activation:
@@ -183,10 +192,12 @@ class UserCreateView(CreateView):
             email_portal_admins(subject, 'cosinnus/mail/user_register_notification.html', data)
             # message user for pending request
             subj_user = render_to_string('cosinnus/mail/user_registration_pending_subj.txt', data)
-            send_mail_or_fail_threaded(user.email, subj_user, 'cosinnus/mail/user_registration_pending.html', data)
-            
+            text = textfield(render_to_string('cosinnus/mail/user_registration_pending.html', data))
+            send_html_mail_threaded(user, subj_user, text)
             messages.success(self.request, self.message_success_inactive % {'user': user.email, 'email': user.email})
-        
+            # since anonymous users have no session, show the success message in the template via a flag
+            ret = HttpResponseRedirect(redirect_with_next(reverse('login'), self.request, 'validate_msg=admin'))
+            
         # scramble this users email so he cannot log in until he verifies his email, if the portal has this enabled
         if CosinnusPortal.get_current().email_needs_verification:
             
@@ -198,11 +209,20 @@ class UserCreateView(CreateView):
                 set_user_email_to_verify(user, original_user_email, self.request)
             
             messages.success(self.request, self.message_success_email_verification % {'user': original_user_email, 'email': original_user_email})
-
+            # since anonymous users have no session, show the success message in the template via a flag
+            ret = HttpResponseRedirect(redirect_with_next(reverse('login'), self.request, 'validate_msg=email'))
+            
         if not CosinnusPortal.get_current().users_need_activation and not CosinnusPortal.get_current().email_needs_verification:
             messages.success(self.request, self.message_success % {'user': user.email})
             user.backend = 'cosinnus.backends.EmailAuthBackend'
             _send_user_welcome_email_if_enabled(user)
+            # send user account creation signal, the audience is empty because this is a moderator-only notification
+            user_profile = user.cosinnus_profile
+            # need to attach a group to notification objects
+            forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+            forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+            setattr(user_profile, 'group', forum_group) 
+            cosinnus_notifications.user_account_created.send(sender=self, user=user, obj=user_profile, audience=[])
             login(self.request, user)
         
         # send user registration signal
@@ -225,10 +245,7 @@ class UserCreateView(CreateView):
         
         if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
             # add redirect to the welcome-settings page, with priority so that it is shown as first one
-            profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), self.request), message=None, priority=True)
-        if getattr(settings, 'COSINNUS_PAYMENTS_ENABLED', False):
-            # add redirect to the welcome-settings page, with priority so that it is shown as last one
-            profile.add_redirect_on_next_page(redirect_with_next(reverse('wechange-payments:welcome-page'), self.request), message=None, priority=False)
+            user.cosinnus_profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), self.request), message=None, priority=True)
         return ret
     
     def dispatch(self, *args, **kwargs):
@@ -250,7 +267,9 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
         the global notification setting and the userprofile visibility setting. """
     
     template_name = 'cosinnus/user/welcome_settings.html'
-    message_success = _('Your privacy settings were saved. Welcome!')
+    # not showing this message as it is not showing immediately if redirected to dashboard
+    # and is confusing
+    message_success = None # _('Your privacy settings were saved. Welcome!')
 
     def post(self, request, *args, **kwargs):
         self.get_data()
@@ -410,7 +429,7 @@ def _send_user_welcome_email_if_enabled(user, force=False):
         return
     
     # render the text as markdown
-    text = textfield(text)
+    text = textfield(render_html_with_variables(user, text))
     subj_user = _('Welcome to %(portal_name)s!') % {'portal_name': portal.name}
     send_html_mail_threaded(user, subj_user, text)
     
@@ -439,11 +458,19 @@ def approve_user(request, user_id):
     data.update({
         'user': user,
     })
-    template = 'cosinnus/mail/user_registration_approved.html'
     subj_user = render_to_string('cosinnus/mail/user_registration_approved_subj.txt', data)
-    send_mail_or_fail_threaded(user.email, subj_user, template, data)
+    text = textfield(render_to_string('cosinnus/mail/user_registration_approved.html', data))
+    send_html_mail_threaded(user, subj_user, text)
     
     _send_user_welcome_email_if_enabled(user)
+    # send user account creation signal, the audience is empty because this is a moderator-only notification
+    user_profile = user.cosinnus_profile
+    # need to attach a group to notification objects
+    forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+    forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+    setattr(user_profile, 'group', forum_group) 
+    cosinnus_notifications.user_account_created.send(sender=user, user=user, obj=user_profile, audience=[])
+
     
     messages.success(request, _('Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site.') \
                      % {'username':full_name_force(user), 'email': user.email})
@@ -478,8 +505,8 @@ def deny_user(request, user_id):
         'admins': admins,
     })
     subj_user = render_to_string('cosinnus/mail/user_registration_denied_subj.txt', data)
-    send_mail_or_fail_threaded(user.email, subj_user, 'cosinnus/mail/user_registration_denied.html', data)
-    
+    text = textfield(render_to_string('cosinnus/mail/user_registration_denied.html', data))
+    send_html_mail_threaded(user, subj_user, text)
     
     messages.success(request, _('You have denied the join request of %(username)s (%(email)s)! An email was sent to let them know.') \
                      % {'username':full_name_force(user), 'email': user.email})
@@ -527,6 +554,13 @@ def verifiy_user_email(request, email_verification_param):
         messages.success(request, _('Your email address %(email)s was successfully confirmed! Welcome to the community!') % {'email': user.email})
         user.backend = 'cosinnus.backends.EmailAuthBackend'
         _send_user_welcome_email_if_enabled(user)
+        # send user account creation signal, the audience is empty because this is a moderator-only notification
+        user_profile = user.cosinnus_profile
+        # need to attach a group to notification objects
+        forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+        setattr(user_profile, 'group', forum_group) 
+        cosinnus_notifications.user_account_created.send(sender=user, user=user, obj=user_profile, audience=[])
         login(request, user)
         return redirect(reverse('cosinnus:map'))
     else:
@@ -700,6 +734,14 @@ def user_api_me(request):
         user_societies = CosinnusSociety.objects.get_for_user(request.user)
         user_projects = CosinnusProject.objects.get_for_user(request.user)
         
+        # euro amount if current subscription payments for this user
+        is_paying = 0
+        if getattr(settings, 'COSINNUS_PAYMENTS_ENABLED', False):
+            from wechange_payments.models import Subscription
+            current_subscription = Subscription.get_current_for_user(request.user)
+            if current_subscription:
+                is_paying = int(current_subscription.amount)
+            
         data.update({
             'username': user.username,
             'id': user.id,
@@ -708,6 +750,7 @@ def user_api_me(request):
             'avatar_url': CosinnusPortal.get_current().get_domain() + user.cosinnus_profile.get_avatar_thumbnail_url(), 
             'groups': [society.slug for society in user_societies],
             'projects': [project.slug for project in user_projects],
+            'is_paying': is_paying,
         })
     
     return JsonResponse(data)
@@ -719,21 +762,47 @@ def add_email_to_blacklist(request, email, token):
     
     if not is_email_valid(email):
         messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (1)')
-        return render(request, 'cosinnus/common/200.html')
+        return redirect('cosinnus:user-add-email-blacklist-result')
     
     if not email_blacklist_token_generator.check_token(email, token):
         messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (2)')
-        return render(request, 'cosinnus/common/200.html')
+        return redirect('cosinnus:user-add-email-blacklist-result')
+    
+    logger.warn('Adding email to blacklist from URL link', 
+                            extra={'email': email, 'portal': CosinnusPortal.get_current().id})
     
     GlobalBlacklistedEmail.add_for_email(email)
+    
     messages.success(request, _('We have unsubscribed your email "%(email)s" from our mailing list. You will not receive any more emails from us!') 
         % {'email': email})
-    
+    return redirect('cosinnus:user-add-email-blacklist-result')
+
+
+def add_email_to_blacklist_result(request):
+    """ We redirect to a different URL because the original URL is valid forever, 
+        and the browser tab may get reloaded and we don't want to fire another 
+        unsubscribe each time.
+        It is expected that there is a messages.success or error message queued when arriving here """
     return render(request, 'cosinnus/common/200.html')
 
 
+def accept_tos(request):
+    """ A bare-bones ajax endpoint to save that a user has accepted the ToS settings.
+        The frontend doesn't care about a return values, so we don't either 
+        (on fail, the user will just see another popup on next request). """
+    if not request.method=='POST':
+        return HttpResponseNotAllowed(['POST'])
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden('You must be logged in to do that!')
+    try:
+        accept_user_tos_for_portal(request.user)
+    except Exception as e:
+        logger.error('Error in `user.accept_tos`: %s' % e, extra={'exception': e})
+    return JsonResponse({'status': 'ok'})
+
+
 def accept_updated_tos(request):
-    """ A bare-bones ajax endpoint to save a user's accepted ToS settings.
+    """ A bare-bones ajax endpoint to save a user's accepted ToS settings and newsletter settings.
         The frontend doesn't care about a return values, so we don't either 
         (on fail, the user will just see another popup on next request). """
     if request.method != 'POST':
@@ -744,22 +813,67 @@ def accept_updated_tos(request):
     
     form = TermsOfServiceFormFields(request.POST)
     if form.is_valid():
-        # set the user's tos_accepted flag to true and date to now
-        cosinnus_profile.settings['tos_accepted'] = True
-        cosinnus_profile.settings['tos_accepted_date'] = now()
         # set the newsletter opt-in
         if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
             cosinnus_profile.settings['newsletter_opt_in'] = form.cleaned_data.get('newsletter_opt_in')
-        cosinnus_profile.save()
+        # set the user's tos_accepted flag to true and date to now
+        accept_user_tos_for_portal(request.user, profile=cosinnus_profile, save=True)
         return HttpResponse('Ok')
     else: 
         logger.warning('Could not save a user\'s updated ToS settings.', extra={'errors': form.errors, 'post-data': request.POST})
         return HttpResponseServerError('Failed')
 
-    
+
+class UserSelect2View(Select2View):
+    """
+    This view is used as API backend to serve the suggestions for the message recipient field.
+    """
+
+    def check_all_permissions(self, request, *args, **kwargs):
+        user = request.user
+        if not user.is_authenticated:
+            raise PermissionDenied
+
+    def get_results(self, request, term, page, context):
+        terms = term.strip().lower().split(' ')
+        q = get_user_query_filter_for_search_terms(terms)
+        
+        users = filter_active_users(get_user_model().objects.filter(q).exclude(id__exact=request.user.id))
+        # as a last filter, remove all users that that have their privacy setting to "only members of groups i am in",
+        # if they aren't in a group with the user
+        users = [user for user in users if check_user_can_see_user(request.user, user)]
+        
+        
+        # | Q(username__icontains=term))
+        # Filter all groups the user is a member of, and all public groups for
+        # the term.
+        # Use CosinnusGroup.objects.get_cached() to search in all groups
+        # instead
+        groups = set(get_cosinnus_group_model().objects.get_for_user(request.user)).union(
+            get_cosinnus_group_model().objects.public())
+        
+        forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        groups = [group for group in groups if all([term.lower() in group.name.lower() for term in terms]) and (check_user_superuser(request.user) or group.slug != forum_slug)]
+
+        # these result sets are what select2 uses to build the choice list
+        #results = [("user:" + six.text_type(user.id), render_to_string('cosinnus/common/user_select_pill.html', {'type':'user','text':escape(user.first_name) + " " + escape(user.last_name), 'user': user}),)
+        #           for user in users]
+        #results.extend([("group:" + six.text_type(group.id), render_to_string('cosinnus/common/user_select_pill.html', {'type':'group','text':escape(group.name)}),)
+        #               for group in groups])
+        
+        # sort results
+        
+        users = sorted(users, key=lambda useritem: full_name(useritem).lower())
+        groups = sorted(groups, key=lambda groupitem: groupitem.name.lower())
+        
+        results = get_user_select2_pills(users)
+        results.extend(get_group_select2_pills(groups))
+
+        # Any error response, Has more results, options list
+        return (NO_ERR_RESP, False, results)
 
 
-@receiver(userprofile_ceated)
+@receiver(userprofile_created)
 def convert_email_group_invites(sender, profile, **kwargs):
     """ Converts all `CosinnusUnregisterdUserGroupInvite` to `CosinnusGroupMembership` pending invites
         for a user after registration. If there were any, also adds an entry to the user's profile's visit-next setting. """
@@ -768,28 +882,35 @@ def convert_email_group_invites(sender, profile, **kwargs):
     invites = CosinnusUnregisterdUserGroupInvite.objects.filter(email=get_newly_registered_user_email(user))
     if invites:
         with transaction.atomic():
+            other_invites = []
             for invite in invites:
                 # skip inviting to auto-invite groups, users are in them automatically
                 if invite.group.slug in get_default_user_group_slugs():
                     continue
-                CosinnusGroupMembership.objects.create(group=invite.group, user=user, status=MEMBERSHIP_INVITED_PENDING)
+                # check if the inviting user may invite directly
+                if invite.invited_by_id in invite.group.admins:
+                    CosinnusGroupMembership.objects.create(group=invite.group, user=user, status=MEMBERSHIP_INVITED_PENDING)
+                else:
+                    other_invites.append(invite.group.id)
             # trigger translation indexing
             _('Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!')
             msg = 'Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!'
             # create a user-settings-entry
+            if other_invites:
+                profile.settings['group_recruits'] = other_invites
             profile.add_redirect_on_next_page(reverse('cosinnus:invitations'), msg)
             # we actually do not delete the invites here yet, for many reasons such as re-registers when email verification didn't work
             # the invites will be deleted upon first login using the `user_logged_in_first_time` signal
 
 
-@receiver(userprofile_ceated)
+@receiver(userprofile_created)
 def remove_user_from_blacklist(sender, profile, **kwargs):
     user = profile.user
     email = get_newly_registered_user_email(user)
     GlobalBlacklistedEmail.remove_for_email(email)
     
 
-@receiver(userprofile_ceated)
+@receiver(userprofile_created)
 def create_user_notification_setting(sender, profile, **kwargs):
     user = profile.user
     GlobalUserNotificationSetting.objects.get_object_for_user(user)

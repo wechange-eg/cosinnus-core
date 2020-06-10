@@ -4,7 +4,7 @@
     <div class="nav-content">
     	<div class="nav-section nav-brand">
     		{% if request.user.is_authenticated %}
-	            <a class="nav-button burger-menu" rel="toggle" role="button" title="{% trans "Menu" %}" 
+	            <a class="nav-button nav-button-with-message-counter burger-menu nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Menu" %}"
 			    		aria-expanded="false" aria-controls="main-collapse"
 			    		data-toggle="collapse" data-target="#main-collapse"> 
 		    		<i class="fas fa-fw fa-bars"></i>
@@ -66,47 +66,82 @@
 		</a>
 	</div>
     
-    <div class="nav-section nav-buttons">
-    	<div class="brand-links mobile-only">
-        	{% include 'cosinnus/v2/navbar/brand_links.html' %}
-        </div>
-            
-		<a class="nav-button" rel="toggle" role="button" title="{% trans "Create content" %}" 
-		    		aria-expanded="false" aria-controls="create-menu-collapse"
-		    		data-toggle="collapse" data-target="#create-menu-collapse"> 
-    		<i class="fas fa-fw fa-plus"></i>
-		</a>
-		{% block home_icon_button %}
-		<a class="nav-button" href="/cms/?noredir=1" role="button" title="{% trans "Home" %}"> 
-    		<i class="fas fa-fw fa-home"></i>
-		</a>
-		{% endblock %}
-		<a class="nav-button" href="{% group_url "cosinnus:event:list" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" role="button" title="{% trans "Events" %}"> 
-    		<i class="fas fa-fw fa-calendar"></i>
-		</a>
-		{% if request.user.is_authenticated %}
-			<a class="nav-button" href="{% url 'postman:inbox' %}" role="button" title="{% trans "Nachrichten" %}"> 
-	    		<i class="fas fa-fw fa-envelope"></i>
+    {% block nav_buttons %}
+	    <div class="nav-section nav-buttons">
+	        {% block mobile_brand_links %}
+		    	<div class="brand-links mobile-only">
+		        	{% include 'cosinnus/v2/navbar/brand_links.html' %}
+		        </div>
+	        {% endblock %}
+
+	        {% block create_icon_button %}
+	            {% if not SETTINGS.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS or user|is_superuser %}
+					<a class="nav-button nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Create content" %}"
+					    		aria-expanded="false" aria-controls="create-menu-collapse"
+					    		data-toggle="collapse" data-target="#create-menu-collapse">
+			    		<i class="fas fa-fw fa-plus"></i>
+					</a>
+				{% endif %}
+			{% endblock %}
+			{% block home_icon_button %}
+			<a class="nav-button" href="/cms/?noredir=1" role="button" title="{% trans "Home" %}">
+	    		<i class="fas fa-fw fa-home"></i>
 			</a>
-			<a class="nav-button user-menu-button" rel="toggle" role="button" title="{% trans "Menu" %}" 
-			    		aria-expanded="false" aria-controls="user-menu-collapse"
-			    		data-toggle="collapse" data-target="#user-menu-collapse"> 
-			    {% include "cosinnus/user/user_avatar_image.html" with user=request.user image_size="mini" show_v2_icon_on_missing=True %}
-			</a>
-		{% else %}
-			<a class="nav-button nav-header-textlink" rel="toggle" role="button" title="{% trans "Change language" %}" 
-		    		aria-expanded="false" aria-controls="language-menu-collapse"
-		    		data-toggle="collapse" data-target="#language-menu-collapse"> 
-            	{{ request.LANGUAGE_CODE|upper }}
-            </a>
-            <a class="nav-button nav-header-textlink" href="{% url 'login' %}" title="{% trans "Log in" %}">
-            	{% trans "Log in" %}
-            </a>
-            <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
-            	{% trans "Register" %}
-            </a>
-		{% endif %}
-    </div>
+			{% endblock %}
+			{% if SETTINGS.COSINNUS_CLOUD_ENABLED and request.user.is_authenticated %}
+			    {% block cloud_icon_button %}
+			        <a class="nav-button" href="{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}" role="button"
+			               title="{% trans "Cloud" %}" {% if SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}>
+			            <i class="fas fa-fw fa-cloud"></i>
+			        </a>
+			    {% endblock %}
+		    {% endif %}
+			{% block calendar_icon_button %}
+				{% if SETTINGS.NEWW_EVENTS_GROUP_SLUG %}
+					<a class="nav-button" href="{% group_url "cosinnus:event:list" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" role="button" title="{% trans "Events" %}">
+			    		<i class="fas fa-fw fa-calendar"></i>
+					</a>
+				{% endif %}
+			{% endblock %}
+
+			{% if request.user.is_authenticated %}
+                {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+				<a class="nav-button nav-button-with-message-counter" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-global' %}{% else %}{% url 'postman:inbox' %}{% endif %}"
+				         role="button" title="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% trans "Rocket.Chat" %}{% else %}{% trans "Messages" %}{% endif %}"
+				         id="navbar-messages-button" >
+		    		<i class="fas fa-fw fa-envelope"></i>
+		    		<span class="message-counter" style="display: none;"></span>
+				</a>
+				{% endif %}
+				{% if SETTINGS.COSINNUS_NOTIFICATION_ALERTS_ENABLED %}
+		        <a class="nav-button nav-button-with-message-counter nav-collapse-button collapsed" id="navbar-notifications-button" rel="toggle" role="button"
+		                    title="{% trans "Notifications" %}"
+		                    aria-expanded="false" aria-controls="notification-widget-collapse"
+		                    data-toggle="collapse" data-target="#notification-widget-collapse">
+		            <i class="fas fa-fw fa-bell"></i>
+		            <span class="message-counter" style="display: none;"></span>
+		        </a>
+		        {% endif %}
+				<a class="nav-button user-menu-button nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Menu" %}"
+				    		aria-expanded="false" aria-controls="user-menu-collapse"
+				    		data-toggle="collapse" data-target="#user-menu-collapse">
+				    {% include "cosinnus/user/user_avatar_image.html" with user=request.user image_size="mini" show_v2_icon_on_missing=True %}
+				</a>
+			{% else %}
+				<a class="nav-button nav-header-textlink" rel="toggle" role="button" title="{% trans "Change language" %}"
+			    		aria-expanded="false" aria-controls="language-menu-collapse"
+			    		data-toggle="collapse" data-target="#language-menu-collapse">
+	            	{{ request.LANGUAGE_CODE|upper }}
+	            </a>
+	            <a class="nav-button nav-header-textlink" href="{% url 'login' %}" title="{% trans "Log in" %}">
+	            	{% trans "Log in" %}
+	            </a>
+	            <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
+	            	{% trans "Register" %}
+	            </a>
+			{% endif %}
+	    </div>
+    {% endblock %}
     
     {% if request.user.is_authenticated %}
 		<div class="collapse nav-flyout" id="main-collapse">
@@ -141,11 +176,13 @@
 	            		{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
 	            		'idea_add_url': '{% url "cosinnus:idea-create" %}',
 	            		{% endif %}
-	            		{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
-	            		'organization_add_url': '{% url "cosinnus:organization-create" %}',
-	            		{% endif %}
+	            		{% if SETTINGS.NEWW_EVENTS_GROUP_SLUG %}
 	            		'event_add_url': '{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}',
 	            		'event_calendar_url': '{% group_url "cosinnus:event:list" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}',
+	            		{% endif %}
+						{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
+	            		'organization_add_url': '{% url "cosinnus:organization-create" %}',
+	            		{% endif %}
 	            	}
 		        });
 		    });
@@ -159,7 +196,7 @@
 					class="create-menu-link flex-grow">
 				<h2 class="headline margin-regular">{% trans "Project" %}</h2>
 				<div class="description">
-					{% trans "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more." %}
+                    {% include 'cosinnus/v2/texts/create_projects_description.html' %}
 				</div>
 				<div class="action text-bold">
 					{% trans "Create new Project" %} 
@@ -169,21 +206,21 @@
 					class="create-menu-link flex-grow">
 				<h2 class="headline">{% trans "Group" %}</h2>
 				<div class="description">
-					{% trans "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups." %}
+                    {% include 'cosinnus/v2/texts/create_groups_description.html' %}
 				</div>
 				<div class="action text-bold">
 					{% trans "Create new Group" %} 
 				</div>
 			</a>
 			{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
-			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url "cosinnus:organization-create" %}" 
+			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url "cosinnus:organization-create" %}"
 					class="create-menu-link flex-grow">
 				<h2 class="headline margin-regular">{% trans "Organization" %}</h2>
 				<div class="description">
 					{% trans "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!" %}
 				</div>
 				<div class="action text-bold">
-					{% trans "Create new Organization" %} 
+					{% trans "Create new Organization" %}
 				</div>
 			</a>
 			{% endif %}
@@ -192,43 +229,58 @@
 					class="create-menu-link flex-grow">
 				<h2 class="headline margin-regular">{% trans "Idea" %}</h2>
 				<div class="description">
-					{% trans "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas." %}
+                    {% include 'cosinnus/v2/texts/create_ideas_description.html' %}
 				</div>
 				<div class="action text-bold">
 					{% trans "Post new Idea" %} 
 				</div>
 			</a>
 			{% endif %}
-			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" 
-					class="create-menu-link flex-grow">
-				<h2 class="headline margin-regular">{% trans "Event" %}</h2>
-				<div class="description">
-					{% trans "What's happening where and when? What's to discover? Where to meet?" %}
-				</div>
-				<div class="action text-bold">
-					{% trans "Add Event" %} 
-				</div>
-			</a>
-			{% if SETTINGS.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE %}
-			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% group_url "cosinnus:marketplace:add" group=SETTINGS.NEWW_FORUM_GROUP_SLUG %}" 
-					class="create-menu-link flex-grow">
-				<h2 class="headline margin-regular">{% trans "Offer" %}</h2>
-				<div class="description">
-					{% trans "Do you have something to share, sell or give away? Are you searching for something?" %}
-				</div>
-				<div class="action text-bold">
-					{% trans "Post new Offer" %} 
-				</div>
-			</a>
+			{% if SETTINGS.NEWW_EVENTS_GROUP_SLUG %}
+				<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}"
+						class="create-menu-link flex-grow">
+					<h2 class="headline margin-regular">{% trans "Event" %}</h2>
+					<div class="description">
+	                    {% include 'cosinnus/v2/texts/create_events_description.html' %}
+					</div>
+					<div class="action text-bold">
+						{% trans "Add Event" %}
+					</div>
+				</a>
+			{% endif %}
+			{% if SETTINGS.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE and SETTINGS.NEWW_FORUM_GROUP_SLUG %}
+				<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% group_url "cosinnus:marketplace:add" group=SETTINGS.NEWW_FORUM_GROUP_SLUG ignoreErrors=True %}"
+						class="create-menu-link flex-grow">
+					<h2 class="headline margin-regular">{% trans "Offer" %}</h2>
+					<div class="description">
+	                    {% include 'cosinnus/v2/texts/create_offers_description.html' %}
+					</div>
+					<div class="action text-bold">
+						{% trans "Post new Offer" %}
+					</div>
+				</a>
 			{% endif %}
 			
 		</div>
 		<div class="nav-flyout-backdrop"></div>
 	</div>
 	
-	
-	
-	
+	{% if request.user.is_authenticated and SETTINGS.COSINNUS_NOTIFICATION_ALERTS_ENABLED %}
+	<div class="collapse nav-flyout nav-flyout-half-side nav-flyout-right nav-flyout-part-height notification-widget"
+	       id="notification-widget-collapse" data-simplebar>
+        <div class="nav-flyout-section flex-row mobile-flex-column" id="nav-notification-items">
+            {% comment %} This is the backbone App 'module-navbar-quicksearch! {% endcomment %}
+        </div>
+        <div class="nav-flyout-backdrop"></div>
+    </div>
+	<script>
+        $('html').on('init:client', function () {
+            Backbone.mediator.publish('init:module-navbar-notification-widget', {
+                el: '#nav-notification-items',
+            });
+        });
+    </script>
+    {% endif %}
 	
 	<div class="collapse nav-flyout text-right" id="language-menu-collapse">
 	
@@ -294,11 +346,13 @@
 			    		</div>
 					</a>
 				</li>
-				{% if SETTINGS.COSINNUS_PAYMENTS_ENABLED %}
+				{% if SETTINGS.COSINNUS_PAYMENTS_ENABLED or SETTINGS.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY and user.is_superuser %}
 				<li>
-					<a href="{% url 'wechange-payments:overview' %}" class="list-item" role="button" titledby=".item-text"> 
+					<a href="{% url 'wechange-payments:overview' %}" class="list-item" role="button" titledby=".item-text-title">
+		    			{% trans "Your Contribution" as payments_label %}
 			    		<div class="item-text">
-			    			{% trans "Payments (Name TBD)" %} 
+			    			{{ payments_label }}
+			    			{% include 'wechange_payments/partials/my_contribution_badge.html' %}
 			    		</div>
 					</a>
 				</li>

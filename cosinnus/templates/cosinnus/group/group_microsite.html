@@ -112,7 +112,7 @@
 		                                <i class="fa fa-sign-in"></i>
 		                            </a>
 		                            <div class="media-body">
-		                                {% trans "Login" %}
+		                                {% trans "Log in" %}
 		                            </div>
 		                        </li>
 		                    </ul>
@@ -124,7 +124,7 @@
 	    	{% elif user.pk in group.members %}
 	    		<h2>{% trans "You are a member!" %}</h2>
 	    	
-	            <button href="{{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
+	            <button href="{{ group.get_absolute_url }}" type="button" class="btn btn-emphasized btn-autosize">
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#">
@@ -144,7 +144,7 @@
 	        	<h2>{% trans "Membership request pending..." %}</h2>
 	        	
 	        	<span class="app-etherpad">
-		            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#join_withdraw_modal">
+		            <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#join_withdraw_modal">
 	                    <ul class="media-list">
 	                        <li class="media">
 	                            <a class="pull-left" href="#">
@@ -166,7 +166,7 @@
 	        	<h2>{% trans "You are invited!" %}</h2>
 	        	
                 <span class="app-calendar"> {# Hacky green color #}
-		            <button type="button" class="btn btn-emphasized" onclick="$('#accept-group-invitation-form').submit();">
+		            <button type="button" class="btn btn-emphasized btn-autosize" onclick="$('#accept-group-invitation-form').submit();">
 		                <ul class="media-list">
 		                    <li class="media">
 		                        <a class="pull-left" href="#">
@@ -182,7 +182,7 @@
                 
                 {% captureas modal_decline_invitation_id %}userModal_decline_invitation_{{member.pk}}{% endcaptureas %}
                 <span class="app-etherpad">
-		            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
+		            <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
 	                    <ul class="media-list">
 	                        <li class="media">
 	                            <a class="pull-left" href="#">
@@ -209,7 +209,7 @@
 	        	<h2>{% trans "Collaborate!" %}</h2>
 	        	
 	        	<span class="app-calendar"> {# Hacky green color #}
-		            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#join_withdraw_modal">
+		            <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#join_withdraw_modal">
 		                <ul class="media-list">
 		                    <li class="media">
 		                        <a class="pull-left" href="#">
@@ -231,7 +231,7 @@
 			{% endif %}
 			
 			{% if group.public and user.is_authenticated and not user.pk in group.members and not user.pk in group.invited_pendings %}
-	    		<button href="{{ group.get_absolute_url }}?browse=true" type="button" class="btn btn-emphasized">
+	    		<button href="{{ group.get_absolute_url }}?browse=true" type="button" class="btn btn-emphasized btn-autosize">
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#">
@@ -340,7 +340,7 @@
 		<div class="col-xs-12">
 			
 			{# About Project box #}
-			<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+			<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
 	            <ul class="media-list">
 	                <li class="media">
 	                    <a class="pull-left btn-extra-emphasized" href="#"></a>
@@ -450,9 +450,9 @@
 	        	    <br/>
 	        	    <div>
 	        	        {% if group.type == 0 %}
-	        	            {% trans "You will now receive notifications whenever public content is posted in this project." as follow_success_message %}
+	        	            {% trans "You will now receive notifications for content posted in this project." as follow_success_message %}
 	        	        {% else %}
-	        	            {% trans "You will now receive notifications whenever public content is posted in this group." as follow_success_message %}
+	        	            {% trans "You will now receive notifications for content posted in this group." as follow_success_message %}
 	        	        {% endif %}
 	        	        {% include 'cosinnus/common/likefollow/follow_button.html' with object=group success_message=follow_success_message %}
                         {% include 'cosinnus/common/likefollow/confirm_likefollow_modal.html' with object=group %}
@@ -460,15 +460,14 @@
 					
 					<p>
 						<b>{% trans "Share" %}:</b>&nbsp;
-						<a href="https://www.facebook.com/sharer/sharer.php?u={{ group.get_absolute_url|escape }}" target="_blank" title="{% trans "Share on Facebook" %}">
+						<a href="https://www.facebook.com/sharer/sharer.php?u={{ group.get_absolute_url|escape }}" target="_blank"
+						           title="{% trans "Share on Facebook" %}">
 							<i class="fa fa-2x fa-facebook-square"></i
 						></a>&nbsp;
-						<a href="https://twitter.com/intent/tweet?text=Check out {{ group.get_absolute_url|escape }}" target="_blank">
+						<a href="https://twitter.com/intent/tweet?text=Check out {{ group.get_absolute_url|escape }}" target="_blank"
+						           title="{% trans "Share on Twitter" %}">
 							<i class="fa fa-2x fa-twitter-square"></i
 						></a>&nbsp;
-						<a href="https://plus.google.com/share?url={{ group.get_absolute_url|escape }}" target="_blank">
-							<i class="fa fa-2x fa-google-plus-square"></i
-						></a>
 					</p>
 					
 				{% endblock microsite_group_description %}
@@ -480,17 +479,19 @@
 		<div class="col-md-6">
 			{% block microsite_left_column %}
 				
-				{# Contact box #}
-				<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
-		            <ul class="media-list">
-		                <li class="media">
-		                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-		                    <div class="media-body">
-		                        {% trans "Contact" %}
-		                    </div>
-		                </li>
-		            </ul>
-		        </div><!-- btn -->
+				{% if not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS %}
+					{# Contact box #}
+					<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    <div class="media-body">
+			                        {% trans "Contact" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+		        {% endif %}
 		        
 	        	{# Little hack to show an empty message, because a render-time empty check is complex due to extendable blocks #}
 	        	<script type="text/javascript"> 
@@ -560,18 +561,23 @@
 				
 				{# Public objects box #}
 				{% if public_objects %}
-					{% for app_name, public_object_list in public_objects.items %}
+					{% for app, app_name, public_object_list in public_objects %}
 					    {% if not app_name == 'note' %} {% comment %} Fix "MICROSITE_DOUBLE_NEWSBOX": hide note box {% endcomment %}
-							<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
-					            <ul class="media-list">
-					                <li class="media">
-					                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-					                    <div class="media-body">
-					                        {% trans app_name context "the_app" %}
-					                    </div>
-					                </li>
-					            </ul>
-					        </div><!-- btn -->
+    					    {% captureas app_css_class %}{% if app == 'cosinnus_todo' %}app-todos{% elif app == 'cosinnus_note' %}app-main{% elif app == 'cosinnus_poll' %}app-poll{% elif app == 'cosinnus_cloud' %}app-cloud{% elif app == 'cosinnus_marketplace' %}app-marketplace{% elif app == 'cosinnus_file' %}app-files{% elif app == 'cosinnus_etherpad' %}app-etherpad{% elif app == 'cosinnus_event' %}app-calendar{% elif app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
+                            {% captureas app_icon %}{% if app == 'cosinnus_todo' %}fa-tasks{% elif app == 'cosinnus_note' %}fa-book{% elif app == 'cosinnus_poll' %}fa-bar-chart{% elif app == 'cosinnus_cloud' %}fa-cloud{% elif app == 'cosinnus_marketplace' %}fa-exchange{% elif app == 'cosinnus_file' %}fa-file{% elif app == 'cosinnus_etherpad' %}fa-file-text{% elif app == 'cosinnus_event' %}fa-calendar{% elif app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
+                            <div class="app {{ app_css_class }}">
+						        <div type="button" class="{{ app_css_class }} btn btn-emphasized btn-headline fine-space v-offset-l">
+						            <ul class="media-list">
+						                <li class="media">
+						                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+						                    <div class="media-body">
+						                        <i class="fa {{ app_icon }}"></i>
+						                        {% trans app_name context "the_app" %}
+						                    </div>
+						                </li>
+						            </ul>
+						        </div><!-- btn -->
+					        </div>
 					        <div class="" style="background-color: #ffffff !important;">
 					        	{% with user=anonymous_user %}
 						        	{% for public_object in public_object_list %}
@@ -592,7 +598,7 @@
 			
 				{# News box #}
 				{% if not group|is_app_deactivated:'cosinnus_note' %}
-					<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+					<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
 			            <ul class="media-list">
 			                <li class="media">
 			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
@@ -611,7 +617,7 @@
                 {% if SETTINGS.COSINNUS_MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE %}
 					{% if group.twitter_username %}
 						{# Twitter username feed box #}
-						<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+						<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
 				            <ul class="media-list">
 				                <li class="media">
 				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
@@ -628,7 +634,7 @@
 					
 					{% if group.twitter_widget_id %}
 						{# Twitter custom feed box #}
-						<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+						<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
 				            <ul class="media-list">
 				                <li class="media">
 				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
@@ -646,7 +652,7 @@
 					
 					{% if group.flickr_url %}
 						{# Flickr custom feed box #}
-						<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+						<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
 				            <ul class="media-list">
 				                <li class="media">
 				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
@@ -666,7 +672,7 @@
 					{% if group.call_to_action_active %}
 					    {% if call_to_action_buttons or group.call_to_action_description %}
 						    {# Call to Action box #}
-						    <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+						    <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
 		                        <ul class="media-list">
 		                            <li class="media">
 		                                <a class="pull-left btn-extra-emphasized" href="#"></a>

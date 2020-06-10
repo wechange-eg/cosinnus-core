@@ -9,7 +9,11 @@
             var COSINNUS_PORTAL_INFOS = {% render_cosinnus_portal_info_json %};
             var COSINNUS_IDEAS_ENABLED = {% if SETTINGS.COSINNUS_IDEAS_ENABLED %}true{% else %}false{% endif %};
             var COSINNUS_ORGANIZATIONS_ENABLED = {% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}true{% else %}false{% endif %};
+            var COSINNUS_SHOW_PROJECT_AND_GROUP_CREATE_BUTTONS = {% if SETTINGS.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS and not user|is_superuser %}false{% else %}true{% endif %};
             var COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE = {% if SETTINGS.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE %}true{% else %}false{% endif %};
+            var COSINNUS_ROCKET_ENABLED = {% if SETTINGS.COSINNUS_ROCKET_ENABLED %}true{% else %}false{% endif %};
+            var COSINNUS_MESSAGES_ENABLED = {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}true{% else %}false {% endif %};
+            var COSINNUS_CLOUD_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}true{% else %}false{% endif %};
             var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
             var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");
             var COSINNUS_SHOW_SUPERUSER_CONTROLS = {% if user|is_superuser %}true{% else %}false{% endif %};
@@ -26,9 +30,9 @@
         <script src="{% static 'js/vendor/select2.min.js' %}"></script>
         <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
         <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/cosinnus.js' %}?v=0.45"></script>
+        <script src="{% static 'js/cosinnus.js' %}?v=0.47"></script>
         <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
-        <script src="{% static 'js/client.js' %}?v=0.27"></script>
+        <script src="{% static 'js/client.js' %}?v=0.35"></script>
         <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/leaflet.css' %}" rel="stylesheet">
@@ -41,7 +45,7 @@
         <link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
         <script src="{% static "js/vendor/less.min.js" %}"></script>
         {% else %}
-        <link href="{% static 'css/cosinnus.css' %}?v=0.55" rel="stylesheet">
+        <link href="{% static 'css/cosinnus.css' %}?v=0.59" rel="stylesheet">
         {% endif %}
         
         {% if SETTINGS.COSINNUS_USE_V2_NAVBAR or SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}

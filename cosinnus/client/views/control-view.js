@@ -142,7 +142,7 @@ module.exports = ContentControlView.extend({
         'click .reset-q': 'resetQClicked',
         'click .reset-type-and-topic-filters': 'resetAllClicked', // use this to only reset the filters box: 'resetTypeAndTopicFiltersClicked',
         'click .active-filters': 'showFilterPanel',
-        'click .check-ignore-location': 'markSearchBoxSearchable',
+        'change .check-ignore-location': 'markSearchBoxSearchable',
         
         'keyup .q': 'handleTyping',
         'keydown .q': 'handleKeyDown',

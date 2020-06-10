@@ -5,7 +5,8 @@ from builtins import object
 from cosinnus.core.decorators.views import (require_read_access,
     require_write_access, require_admin_access,
     require_create_objects_in_access, redirect_to_not_logged_in,
-    dispatch_group_access, require_logged_in, require_write_access_groupless)
+    dispatch_group_access, require_logged_in, require_write_access_groupless,
+    superuser_required, require_superuser)
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from django.core.exceptions import PermissionDenied, ImproperlyConfigured
@@ -45,6 +46,17 @@ class RequireLoggedInMixin(object):
     def dispatch(self, request, *args, **kwargs):
         return super(RequireLoggedInMixin, self).dispatch(request, *args, **kwargs)
 
+
+class RequireSuperuserMixin(object):
+    """
+    Mixin to ease the use of :meth:`require_admin_access`.
+
+    .. seealso:: :class:`RequireReadMixin`, :class:`RequireWriteMixin`, :class:`RequireCreateObjectsInMixin`
+    """
+
+    @require_superuser()
+    def dispatch(self, request, *args, **kwargs):
+        return super(RequireSuperuserMixin, self).dispatch(request, *args, **kwargs)
 
 
 class DipatchGroupURLMixin(object):
@@ -286,6 +298,7 @@ class GroupObjectCountMixin(object):
         'cosinnus_note': 'cosinnus_note.models.Note',
         'cosinnus_poll': 'cosinnus_poll.models.Poll',
         'cosinnus_marketplace': 'cosinnus_marketplace.models.Offer',
+        'cosinnus_cloud': True,
     }
     
     def get_context_data(self, **kwargs):
@@ -296,7 +309,9 @@ class GroupObjectCountMixin(object):
             app_name = app_registry.get_name(app) 
             if self.group.is_app_deactivated(app):
                 continue
-            if app in self.app_object_count_mappings:
+            if app in self.app_object_count_mappings and self.app_object_count_mappings[app] is True:
+                object_counts[app_name] = 0
+            elif app in self.app_object_count_mappings:
                 model = resolve_class(self.app_object_count_mappings[app]) 
                 # only for counting the objects, we use a fake superuser, so we get the actual 
                 # counts of the contents, and not the visible ones for current user

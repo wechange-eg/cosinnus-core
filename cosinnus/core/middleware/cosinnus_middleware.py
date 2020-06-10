@@ -23,6 +23,8 @@ from django.utils.deprecation import MiddlewareMixin
 from django.utils.http import is_safe_url
 from django.contrib.redirects.middleware import RedirectFallbackMiddleware
 from cosinnus.utils.urls import redirect_next_or
+from django.contrib.sessions.middleware import SessionMiddleware
+from cosinnus.utils.permissions import check_user_superuser
 
 
 logger = logging.getLogger('cosinnus')
@@ -52,6 +54,7 @@ NEVER_REDIRECT_URLS = [
     '/admin/',
     '/admin/login/',
     '/admin/logout/',
+    '/administration/login-2fa/',
     '/media/',
     '/static/',
     '/language',
@@ -59,10 +62,13 @@ NEVER_REDIRECT_URLS = [
 
 LOGIN_URLS = NEVER_REDIRECT_URLS + [
     '/login/',
+    '/logout/',
     '/integrated/login/',
     '/integrated/logout/',
     '/integrated/create_user/',
 ]
+
+EXEMPTED_URLS_FOR_2FA = [url for url in LOGIN_URLS if url != '/admin/']
 
 # if any of these URLs was requested, auto-redirects in the user's profile settings won't trigger
 NO_AUTO_REDIRECTS = (
@@ -94,7 +100,7 @@ class StartupMiddleware(MiddlewareMixin):
         raise MiddlewareNotUsed
 
 
-class AdminOnlyOTPMiddleware(MiddlewareMixin):
+class OTPMiddleware(MiddlewareMixin):
     """
         If setting `COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED` is True, this middleware 
         will restrict all access to the django admin area to accounts with a django-otp
@@ -105,10 +111,16 @@ class AdminOnlyOTPMiddleware(MiddlewareMixin):
         if not getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED', False):
             return None
         
+        # regular mode covers only the admin area
+        filter_path = '/admin/'
+        # strict mode covers the entire page
+        if getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_STRICT_MODE', False):
+            filter_path = '/'
+        
         user = getattr(request, 'user', None)
-        # on all "real" admin urls
-        if user and (user.is_staff or user.is_superuser) and request.path.startswith('/admin/') and not request.path in ['/admin/login/', '/admin/logout/']:
-            # check if the user is not yet 2fa verified, if so send him to the verification view
+        # check if the user is a superuser and they attempted to access a covered url
+        if user and check_user_superuser(user) and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
+            # check if the user is not yet 2fa verified, if so send them to the verification view
             if not user.is_verified():
                 next_url = request.path
                 return redirect(reverse('cosinnus:login-2fa') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
@@ -239,4 +251,17 @@ class MovedTemporarilyRedirectFallbackMiddleware(RedirectFallbackMiddleware):
         of 301 Permanent redirects. """
     
     response_redirect_class = HttpResponseRedirect
+
+
+class PreventAnonymousUserCookieSessionMiddleware(SessionMiddleware):
+    """ Replace this with django's SessionMiddleware to prevent anonymous users
+        from receiving a session cookie. """
     
+    def process_response(self, request, response):
+        response = super(PreventAnonymousUserCookieSessionMiddleware, self).process_response(request, response)
+        # exempt the password reset views, as they require an anonymous user session to work
+        if not request.path.startswith('/reset/') and not request.path.startswith('/password_reset/') \
+                and not request.path.startswith('/administration/'):
+            if not request.user.is_authenticated and settings.SESSION_COOKIE_NAME in response.cookies:
+                del response.cookies[settings.SESSION_COOKIE_NAME]
+        return response

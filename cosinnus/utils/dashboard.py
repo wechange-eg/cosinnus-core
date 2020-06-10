@@ -21,7 +21,7 @@ from cosinnus.forms.dashboard import InfoWidgetForm, DashboardWidgetForm,\
 from cosinnus.models.tagged import AttachedObject, BaseTagObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.core.signals import group_object_ceated, userprofile_ceated
+from cosinnus.core.signals import group_object_created, userprofile_created
 from django.dispatch.dispatcher import receiver
 from cosinnus.core.registries.widgets import widget_registry
 from cosinnus.models.profile import get_user_profile_model
@@ -230,7 +230,7 @@ class GroupMembersWidget(DashboardWidget):
             return ''
         
         # how many members display. it's -1 because the last tile is always the "+72 members"
-        count = getattr(settings, 'COSINNUS_GROUP_MEMBER_WIDGET_USER_COUNT', 15)
+        count = getattr(settings, 'COSINNUS_GROUP_MEMBER_WIDGET_USER_COUNT', 19)
         
         admin_ids = CosinnusGroupMembership.objects.get_admins(group=group)
         member_ids = CosinnusGroupMembership.objects.get_members(group=group)
@@ -454,7 +454,7 @@ def ensure_group_widget(group, app_name, widget_name, widget_type, options):
             widget = widget_class.create(None, group=group, user=None, widget_type=widget_type)
             widget.save_config(options)
     
-@receiver(group_object_ceated)
+@receiver(group_object_created)
 def create_initial_group_widgets(sender, group, **kwargs):
     """ Function responsible for creating the initial widgets of CosinnusGroups
     (and subtypes) upon creation. Will create all group dashboard and microsite widgets 
@@ -477,7 +477,7 @@ def create_initial_group_widgets(sender, group, **kwargs):
         ensure_group_widget(group, app_name, widget_name, WidgetConfig.TYPE_MICROSITE, options)
 
 
-@receiver(userprofile_ceated)
+@receiver(userprofile_created)
 def create_initial_user_widgets(sender, profile, **kwargs):
     """ Function responsible for creating the initial widgets of the UserDashboard
     upon user creation. Will create widgets that are defined in:

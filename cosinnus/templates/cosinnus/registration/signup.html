@@ -8,7 +8,7 @@
 {% endblock jshead %}
 
 {% block breadcrumb %}
-	<li><a href="#">{% trans "Login" %}</a></li>
+	<li><a href="#">{% trans "Log in" %}</a></li>
 	<li class="active">{% trans "Create account" %}</li>
 {% endblock breadcrumb %}
 
@@ -100,7 +100,7 @@
         {% trans "Last name" as lastname_label %}
         {% trans "You can supply your last name to be displayed as well" as lastname_legend %}
         {% trans "Last name" as lastname_placeholder %}
-        {% include 'cosinnus/fields/default_field.html' with field=form.last_name label=lastname_label legend=lastname_legend placeholder=lastname_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.last_name label=lastname_label legend=lastname_legend placeholder=lastname_placeholder help_popup="helptext_52_profilelastname" %}
                 
         
         {# Regular Field #}

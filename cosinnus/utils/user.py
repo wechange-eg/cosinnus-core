@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import logging
 
-from django.conf import settings
+from cosinnus.conf import settings
 
 from cosinnus.core.registries.widgets import widget_registry
 from cosinnus.utils.group import get_cosinnus_group_model,\
@@ -19,6 +19,10 @@ from django.apps import apps
 from django.urls import reverse
 from cosinnus.utils.urls import get_domain_for_portal
 from cosinnus.utils.tokens import email_blacklist_token_generator
+from django.utils.timezone import now, is_naive
+from dateutil import parser
+import datetime
+import pytz
 
 _CosinnusPortal = None
 
@@ -229,3 +233,86 @@ def get_list_unsubscribe_url(email):
         _CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
     domain = get_domain_for_portal(_CosinnusPortal.get_current())
     return domain + reverse('cosinnus:user-add-email-blacklist', kwargs={'email': email, 'token': email_blacklist_token_generator.make_token(email)})
+
+
+def accept_user_tos_for_portal(user, profile=None, portal=None, save=True):
+    """ Saves that the user has accepted this portal's ToS.
+        @param profile: if supplied, will use the given profile instance instead of querying it from the user. """
+    if portal is None:
+        from cosinnus.models.group import CosinnusPortal
+        portal = CosinnusPortal.get_current()
+    
+    # set the user's tos_accepted flag to true and date for this portal to now
+    if profile is None:
+        profile = user.cosinnus_profile
+    profile.settings['tos_accepted'] = True
+    
+    # save the accepted date for this portal in a new dict, or update the dict for this portal
+    # (the old style setting for this only had a datetime saved, now we use a dict)
+    portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
+    if portal_dict_or_date is None or type(portal_dict_or_date) is not dict:
+        profile.settings['tos_accepted_date'] = {str(portal.id): now()}
+    else:
+        portal_dict_or_date[portal.id] = now()
+        profile.settings['tos_accepted_date'] = portal_dict_or_date
+    
+    if save:
+        profile.save()
+
+
+def check_user_has_accepted_any_tos(user):
+    """ Checks if the user has accepted any ToS ever, of any portal """
+    return user.cosinnus_profile.settings.get('tos_accepted', False)
+
+
+def check_user_has_accepted_portal_tos(user):
+    """ Checks if the user has accepted the ToS of this portal before """
+    return check_user_has_accepted_any_tos(user) and (get_user_tos_accepted_date(user) is not None)
+
+    
+def get_user_tos_accepted_date(user):
+    """ Gets the datetime the user accepted this portals ToS, or None if they have not accepted it yet. 
+        @return: a Datetime object or None
+    """
+    from cosinnus.models.group import CosinnusPortal
+    portal = CosinnusPortal.get_current()
+    portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
+    if portal_dict_or_date is None:
+        if check_user_has_accepted_any_tos(user):
+            # if user has accepted some ToS, but we don't know when, set it to in the past for this portal
+            portal_dict_or_date = {str(portal.id): datetime.datetime(1999, 1, 1, 13, 37, 0, 0, pytz.utc)}
+            user.cosinnus_profile.settings['tos_accepted_date'] = portal_dict_or_date
+            user.cosinnus_profile.save(update_fields=['settings'])
+            portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
+        else:
+            return None
+    if type(portal_dict_or_date) is not dict:
+        # the old style setting for this only had a datetime saved, convert it to the modern
+        # dict version of {<portal_id>: datetime, ...}
+        portal_dict_or_date = {str(portal.id): portal_dict_or_date}
+        user.cosinnus_profile.settings['tos_accepted_date'] = portal_dict_or_date
+        user.cosinnus_profile.save(update_fields=['settings'])
+    
+    datetime_or_none = portal_dict_or_date.get(str(portal.id), None)
+    if datetime_or_none is not None:
+        if not type(datetime_or_none) is datetime.datetime:
+            datetime_or_none = parser.parse(datetime_or_none)
+        # we had a phase where we had unaware default datetimes saved, so backport-make them aware
+        if is_naive(datetime_or_none):
+            datetime_or_none = pytz.utc.localize(datetime_or_none)
+    return datetime_or_none
+
+
+def get_unread_message_count_for_user(user):
+    """ Returns the unread message count for a user, independent of which internal
+        messaging system is being used (Postman, Rocketchat, etc) """
+    if not user.is_authenticated:
+        return 0
+    if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
+        from cosinnus_message.rocket_chat import RocketChatConnection # noqa
+        unread_count = RocketChatConnection().unread_messages(user)
+        
+    else:
+        from postman.models import Message
+        unread_count = Message.objects.inbox_unread_count(user)
+    return unread_count

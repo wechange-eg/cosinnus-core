@@ -56,6 +56,10 @@ from django.db.models.functions import Lower
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.models.organization import CosinnusOrganization
 
+from cosinnus.utils.user import check_user_has_accepted_portal_tos
+from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
+from django.templatetags.i18n import do_translate, do_block_translate, TranslateNode, BlockTranslateNode
+from cosinnus.utils.html import render_html_with_variables
 
 logger = logging.getLogger('cosinnus')
 
@@ -180,7 +184,7 @@ def full_name(value):
     from django.contrib.auth.models import AbstractBaseUser
     if isinstance(value, AbstractBaseUser):
         if not value.is_active:
-            return _("(Deleted User)")
+            return str(_("(Deleted User)"))
         # adding support for overriden cosinnus profile models
         if hasattr(value, 'cosinnus_profile'):
             profile_full_name = value.cosinnus_profile.get_full_name()
@@ -288,7 +292,7 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
         if settings.COSINNUS_ORGANIZATIONS_ENABLED:
             # TODO: cache
             context['my_organizations_count'] = CosinnusOrganization.objects.all_in_portal().filter(creator=user).count()
-    
+
     try:
         current_app = resolve(request.path).app_name.replace(':', '_')
     except Resolver404:
@@ -361,13 +365,13 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
             my_followed_ideas = CosinnusIdea.objects.all_in_portal().filter(id__in=my_followed_ids).order_by(Lower('title'))
             my_followed_ideas = my_followed_ideas.exclude(creator=user)
             context['followed_ideas_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(idea) for idea in my_followed_ideas]))
-        
+
         if settings.COSINNUS_ORGANIZATIONS_ENABLED:
             # "My Organizations"
             my_organizations = CosinnusOrganization.objects.all_in_portal().filter(creator=user).order_by(Lower('title'))
             context['my_organizations_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(organization) for organization in my_organizations]))
-        
-        
+
+
         # "My Groups and Projects"
         context['group_clusters_json_encoded'] = _escape_quotes(_json.dumps(MyGroupsClusteredMixin().get_group_clusters(user)))
         # "Invitations"
@@ -388,7 +392,7 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
                 membership_request_item = DashboardItem()
                 membership_request_item['icon'] = 'fa-sitemap' if admined_group.type == CosinnusGroup.TYPE_SOCIETY else 'fa-group'
                 membership_request_item['text'] = escape('%s (%d)' % (admined_group.name, len(pending_ids)))
-                membership_request_item['url'] = group_aware_reverse('cosinnus:group-detail', kwargs={'group': admined_group}) + '#requests'
+                membership_request_item['url'] = group_aware_reverse('cosinnus:group-detail', kwargs={'group': admined_group}) + '?requests=1#requests'
                 membership_requests.append(membership_request_item)
                 membership_requests_count += len(pending_ids)
         context['group_requests_json_encoded'] = _escape_quotes(_json.dumps(membership_requests))
@@ -726,6 +730,8 @@ class GroupURLNode(URLNode):
             patched_group_slug_arg.var.var += '.slug'
             patched_group_slug_arg.var.lookups = list(self.kwargs['group'].var.lookups) + ['slug']
         elif not isinstance(group_arg, six.string_types):
+            if ignoreErrors:
+                return ''
             raise TemplateSyntaxError("'group_url' tag requires a group kwarg that is a group or a slug! Have you passed one? (You passed: 'group=%s')" % group_arg)
         else:
             group_slug = group_arg
@@ -873,7 +879,7 @@ def textfield(text, arg=''):
     for m in reversed([it for it in BETTER_URL_RE.finditer(text)]):
         if (m.start() == 0 or text[m.start()-2:m.start()] != '](') and (m.start() == 0 or text[m.start()-1] != '@') and (m.end() == len(text) or text[m.end():m.end()+2] != ']('):
             short = (m.group()[:47] + '...') if len(m.group()) > 50 else m.group()
-            text = text[:m.start()] + ('[%s](%s%s)' % (short, 'http://' if not short.startswith('http') else '', m.group())) + text[m.end():] 
+            text = text[:m.start()] + ('[%s](%s%s)' % (short, 'https://' if not short.startswith('http') else '', m.group())) + text[m.end():]
     
     
     text = escape(text.strip())
@@ -1091,6 +1097,10 @@ def render_cosinnus_topics_json():
     topic_choices = dict([(top_id, force_text(val)) for top_id, val in TAG_OBJECT.TOPIC_CHOICES])
     return mark_safe(_json.dumps(topic_choices))
 
+@register.simple_tag()
+def get_non_cms_root_url():
+    """ Returns the root URL for this portal that isn't the cms page """
+    return _get_non_cms_root_url()
 
 @register.filter
 def app_url_for_model(obj):
@@ -1100,3 +1110,80 @@ def app_url_for_model(obj):
         return obj.__class__.__module__.split('.')[0].replace('_', ':')
     return ''
 
+@register.filter
+def has_accepted_portal_tos(user):
+    """ Checks if the user has accepted this portal's ToS """
+    if not user:
+        return False
+    return check_user_has_accepted_portal_tos(user)
+
+
+@register.simple_tag(takes_context=True)
+def render_announcement_html(context, announcement):
+    """ Renders the raw_html for a UserDashboardAnnouncement """
+    return render_embedded_html_with_variables(context, announcement.raw_html, variables={
+        'announcement_id': announcement.id
+    })
+
+
+@register.simple_tag(takes_context=True)
+def render_embedded_html_with_variables(context, html, variables=None):
+    """ Renders any raw HTML with some request context variables """
+    return render_html_with_variables(context.request.user, html, variables=variables)
+
+
+class RenderContextIdMixin(object):
+
+    def render(self, context, **kwargs):
+        rendered_text = super(RenderContextIdMixin, self).render(context, **kwargs)
+
+        request = context.get('request', None)
+        ids_enabled = bool(getattr(settings, 'COSINNUS_SHOW_TRANSLATED_CONTEXT_IDS', False) or \
+                           (request and request.GET.get('show_translation_ids', None) == '1'))
+        if ids_enabled and self.message_context:
+            message_context = self.message_context.resolve(context).strip()
+            if message_context.startswith('(') and message_context.endswith(')'):
+                rendered_text += ' ' + message_context
+        if self.asvar:
+            context[self.asvar] =  context[self.asvar] + rendered_text
+            return ''
+        else:
+            return rendered_text
+
+
+class ContextIdTranslateNode(RenderContextIdMixin, TranslateNode):
+
+    def __init__(self, translate_node):
+        self.noop = translate_node.noop
+        self.asvar = translate_node.asvar
+        self.message_context = translate_node.message_context
+        self.filter_expression = translate_node.filter_expression
+
+
+class ContextIdBlockTranslateNode(RenderContextIdMixin, BlockTranslateNode):
+
+    def __init__(self, block_translate_node):
+        self.extra_context = block_translate_node.extra_context
+        self.singular = block_translate_node.singular
+        self.plural = block_translate_node.plural
+        self.countervar = block_translate_node.countervar
+        self.counter = block_translate_node.counter
+        self.message_context = block_translate_node.message_context
+        self.trimmed = block_translate_node.trimmed
+        self.asvar = block_translate_node.asvar
+
+
+@register.tag("trans")
+def context_id_do_translate(parser, token):
+    """ Overwriting the original tag (if you load `cosinnus_tags` after `i18n`.
+        Adds in a settings switch to display an identifier if you include it in parentheses
+        as context for the translated string.
+        Example: {% trans "My String" context "(MS1)" %} renders as "My String [MS1] """
+    translate_node = do_translate(parser, token)
+    return ContextIdTranslateNode(translate_node)
+
+
+@register.tag("blocktrans")
+def context_id_do_block_translate(parser, token):
+    block_translate_node = do_block_translate(parser, token)
+    return ContextIdBlockTranslateNode(block_translate_node)

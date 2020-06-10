@@ -29,7 +29,11 @@ module.exports = BaseView.extend({
     ideasWidgetView: null,
     uiPrefsView: null,
     
-    typedContentWidgetTypes: ['pads', 'files', 'messages', 'events', 'todos', 'polls'].concat(COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE ? ['offers'] : []),
+    typedContentWidgetTypes: ['pads', 'files']
+		.concat((COSINNUS_ROCKET_ENABLED || !COSINNUS_MESSAGES_ENABLED) ? [] : ['messages'])
+        .concat(COSINNUS_CLOUD_ENABLED ? ['cloud_files'] : [])
+	    .concat(['events', 'todos', 'polls'])
+		.concat(COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE ? ['offers'] : []),
     typedContentWidgets: {},
     
     uiPrefKeyRightBarWidget: 'dashboard_widgets_sort_key__',
@@ -73,14 +77,16 @@ module.exports = BaseView.extend({
     	self.groupWidgetView = new GroupWidgetView({
     		el: self.$el.find('.group-widget-root'),
     	}, self.app);
-    	self.ideasWidgetView = new IdeasWidgetView({
-    		el: self.$el.find('.ideas-widget-root'),
-    	}, self.app);
     	
     	var leftBarPromises = [
     		self.groupWidgetView.load(),
-    		self.ideasWidgetView.load(),
     	];
+    	if (COSINNUS_IDEAS_ENABLED) {
+    	    self.ideasWidgetView = new IdeasWidgetView({
+                el: self.$el.find('.ideas-widget-root'),
+            }, self.app);
+    		leftBarPromises.push(self.ideasWidgetView.load());
+    	}
     	Promise.all(leftBarPromises).then(function(){
     		self.$leftBar.show();
     	});
@@ -132,14 +138,23 @@ module.exports = BaseView.extend({
     	
     	// show welcome screen if ui pref is set
     	var $welcomeFrame = self.$el.find('.dashboard-welcome-frame');
-    	if (self.uiPrefsView.getUiPref('timeline__hide_welcome_screen')) {
-    		$welcomeFrame.remove();
+    	if (self.uiPrefsView.getUiPref('timeline__hide_welcome_screen') || $welcomeFrame.length == 0) {
+    	    if ($welcomeFrame.length > 0) {
+        		$welcomeFrame.remove();
+    	    }
+    		
+    		// if we are not showing the welcome screen, show the dashboard announcement, if one exists
+    		var $announcementFrame = self.$el.find('.dashboard-announcement-frame');
+    		if ($announcementFrame.length > 0) {
+    		    $announcementFrame.show();
+    		}
     	} else {
     		$welcomeFrame.show();
     	}
     	
     	self.timelineView = new TimelineView({
     		el: self.$el.find('.timeline-root'),
+    		forceOnlyMine: self.options.forceOnlyMine,
     	}, self.app, self.uiPrefsView);
     	self.timelineView.load();
     },

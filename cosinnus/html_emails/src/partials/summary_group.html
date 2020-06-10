@@ -1,29 +1,35 @@
-<row class="body body-inner">
-    <columns class="tight">
-        <row class="summary-group{{#if @last}} last{{/if}}">
-            <columns class="items" small="10" large="10" valign="top">
-                <h3>
-                    <a href="{{#rw this}}group_url{{/rw}}" target="_blank">
-                        {{#rw this}}group_name{{/rw}}
-                    </a>
-                </h3>
-
-                {{#if raw}}
-                    {{{{raw}}}}
-                        {{ group_body_html }}
-                    {{{{/raw}}}}
-                {{else}}
-                    {{#each items}}
-                        {{> summary_item}}
-                    {{/each}}
-                {{/if}}
-            </columns>
-
-            <columns small="2" large="2" valign="top">
-                <a href="{{#rw this}}group_url{{/rw}}" target="_blank">
-                    <img src="{{#rw this}}image_url{{/rw}}" alt="" />
-                </a>
-            </columns>
-        </row>
-    </columns>
+<row class="special-padded-row spacer-row">
+    <columns large="12" small="12" valign="top">&nbsp;</columns>
 </row>
+
+<row class="special-padded-row group-header-row group-header bordered-container">
+
+    <columns class="image image-column" large="1" small="1" valign="middle">
+        <a href="{{#rw this}}group_url{{/rw}}" target="_blank">
+            <!-- always include the width="nn" attribute in <img> for Outlook! (TODO) -->
+            <img class="small-img padded-img" width="30" src="{{#rw this}}group_image_url{{/rw}}" alt="" />
+        </a>
+    </columns>
+    
+    <columns class="" large="10" small="10" valign="middle">
+        <span class="large-text bold-text">
+            <a href="{{#rw this}}group_url{{/rw}}" target="_blank">
+                {{#rw this}}group_name{{/rw}}
+            </a>
+        </span>
+    </columns>
+    
+    <columns class="spacer" large="1" small="1" valign="top">&nbsp;</columns>
+</row>
+        
+{{#if raw}}
+    {{{{raw}}}}
+        {{ group_body_html }}
+    {{{{/raw}}}}
+{{else}}
+    {{#each items}}
+        {{> summary_item}}
+    {{/each}}
+{{/if}}
+
+

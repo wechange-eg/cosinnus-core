@@ -16,6 +16,7 @@ module.exports = BaseView.extend({
     defaults: {
         
     	onlyMine: false, // inited from uiPrefs
+    	forceOnlyMine: false, // overwritten from passed options from higher views
     	
         state: {
         	loading: false, // if true, a request is currently loading
@@ -33,7 +34,7 @@ module.exports = BaseView.extend({
     events: {
     	//'focus .nav-search-box': 'onSearchBoxFocusIn',
     	// todo: onlyMine button
-    	'click .toggle-group-content-only': 'toggleOnlyMineClicked',
+    	'change .toggle-group-content-only': 'toggleOnlyMineClicked',
     	'click .retry-load': 'retryLoadAfterErrors',
     	'click .show-all-comments': 'showAllCommentsForItem',
     	'click .comment-form :not(textarea)': 'delegateTextInputClick',
@@ -61,7 +62,7 @@ module.exports = BaseView.extend({
     getParamsForFetchRequest: function() {
     	var self = this;
     	var urlParams = {
-			'only_mine': self.options.onlyMine,
+			'only_mine': self.options.forceOnlyMine || self.options.onlyMine,
     	};
     	if (self.state.offsetTimestamp) {
     		urlParams['offset_timestamp'] = self.state.offsetTimestamp;
@@ -251,6 +252,9 @@ module.exports = BaseView.extend({
     
     toggleOnlyMineClicked: function (event) {
     	var self = this;
+    	if (self.options.forceOnlyMine) {
+    	    return;
+    	}
     	self.options.onlyMine = event.target.checked;
     	// save ui pref
     	self.uiPrefsView.saveUiPrefs({'timeline__only_mine': self.options.onlyMine});

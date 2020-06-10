@@ -42,7 +42,7 @@
     height: ~"calc(100% - 55px)"; /** Navbar compensation */
     width: 100%;
     
-    font-family: 'Brandon Text', sans-serif;
+    font-family: @font-regular;
     font-size: 14px;
 
     /* For fullscreen mode, don't move the controls to compensate for the navbar */
@@ -99,180 +99,7 @@
     .apply-color-liked {
         color: @map-liked-color;
     }
-    
-    /** Rounded buttons */
-    .rounded-button {
-        display: inline-block;
-        cursor: pointer;
-        
-        height: 34px;
-        line-height: 32px;
-        font-size: 14px;
-        border-radius: 4px;
-        text-decoration: none;
-        margin-right: 10px;
-        
-        &.pull-right {
-            margin-right: 0;
-            margin-left: 10px;
-            z-index: 1;
-        }
-        
-        .rounded-button-inner {
-            padding: 10px;
-            -webkit-user-select: none; /* Safari */        
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE10+/Edge */
-            user-select: none; /* Standard */
-            
-            i {
-                margin-right: 5px;
-            }
-        }
-        &.rounded-button-circular {
-            border-radius: 20px;
-            .rounded-button-inner {
-                padding: 8px;      
-                i {
-                    margin-right: 0;
-                }
-            } 
-        }
-        &.rounded-button-icon-only {
-            i.fa {
-                padding-right: 0 !important;
-                margin-right: 0 !important;
-            }
-        }
-        &.rounded-button-small {
-            font-size: 11px;
-            height: 22px;
-            line-height: 20px;
-            margin-right: 0;
-        }
-        &.rounded-button-large {
-            font-size: 24px;
-            height: 42px;
-            line-height: 40px;
-            border-radius: 6px;
-            
-            &.rounded-button-circular {
-                border-radius: 24px;
-            }
-        }
-        &.shadowed-button {
-            -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
-            -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
-            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
-        }
-        &:focus, &:active {
-            -webkit-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.35);
-            -moz-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.35);
-            box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.35);
-        }
-        &.disabled {
-            pointer-events: none;
-            cursor: default;
-            opacity: 0.3;
-        }
-        
-        /** Action buttons */
-        /** Heavy hovers are disabled for mobile because it is really confusing on scrolling over */
-        
-        /** Colored submit buttons without hover effect */
-        &.button-color-action {
-            color: @map-button-color;
-            background-color: @map-action-button-color;
-            border: 1px solid @map-action-button-color;
-        }
-        
-        /** Colored action buttons */
-        &.button-action {
-            color: @map-action-button-color;
-            background-color: @map-button-color;
-            border: 1px solid @map-action-button-color;
-        }
-        &.button-action.selected {
-            color: @map-button-color;
-            background-color: @map-action-button-color;
-            border: 1px solid @map-action-button-color;
-        }
-        @media (min-width: 768px) {
-            &.button-action:hover {
-                color: @map-button-color;
-                background-color: @map-action-button-color;
-                border: 1px solid @map-action-button-color;
-            }
-        }
-        
-        
-        /** Grey action buttons */
-        &.button-action-faded {
-            color: @map-pale-color;
-            background-color: @map-button-color;
-            border: 1px solid @map-scroll-color;
-        }
-         &.button-action-faded.selected {
-            color: @map-button-color;
-            background-color: @map-pale-color;
-            border: 1px solid @map-pale-color;
-        }
-        @media (min-width: 768px) {
-            &.button-action-faded:hover {
-                color: @map-button-color;
-                background-color: @map-pale-color;
-                border: 1px solid @map-pale-color;
-            }
-        }
-        
-        .colored-button(@type, @color, @textcolor) {
-            &.button-color-@{type} {
-                color: @textcolor;
-                background-color: @map-button-color;
-                border: 1px solid @color;
-            }
-            &.button-color-@{type}.selected {
-                color: @map-button-color;
-                background-color: @color;
-            }
-            @media (min-width: 768px) {
-                &.button-color-@{type}:hover {
-                    color: @map-button-color;
-                    background-color: @color;
-                }
-            }
-            
-            &.button-color-@{type}-inverted {
-                color: @map-button-color;
-                background-color: @color;
-                border: 1px solid @color;
-            }
-            &.button-color-@{type}-inverted.selected {
-                color: @textcolor;
-                background-color: @map-button-color;
-            }
-            @media (min-width: 768px) {
-                &.button-color-@{type}-inverted:hover {
-                    color: @textcolor;
-                    background-color: @map-button-color;
-                }
-            }
-        }
-        .colored-button(topic, @map-topic-color, @map-text-color);
-        .colored-button(events, @map-events-color, @map-events-color);
-        .colored-button(people, @map-people-color, @map-people-color);
-        .colored-button(projects, @map-projects-color, @map-projects-color);
-        .colored-button(groups, @map-groups-color, @map-groups-color);
-        .colored-button(ideas, @map-ideas-color, @map-ideas-color);
-        .colored-button(organizations, @map-organizations-color, @map-organizations-color);
-        
-    }
-    
-    .pull-right .rounded-button {
-        margin-right: 0;
-        margin-left: 10px;
-    }
-    
+
     .inline-spacer {
         display: inline-block;
         margin-left: 20px;
@@ -589,7 +416,7 @@
         background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-organizations-color', GradientType=0); /* IE6-9 */
     }
-    
+
     .one-line {
         white-space: nowrap;
         overflow: hidden;
@@ -639,7 +466,7 @@
         margin: 0 15px 15px 0;
         position: relative;
         outline: 1px solid @map-frame-color;
-        
+
         &.image-placeholder-background {
         	height: 0;
         	padding-top: 25%;

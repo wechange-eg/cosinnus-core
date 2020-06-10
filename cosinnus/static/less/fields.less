@@ -20,6 +20,9 @@
 .cosinnus-field, .cosinnus-media-field {
     margin-bottom: 7px;
     
+    a {
+    	color: @text-color;
+    }
     &.header-only {
         margin-bottom: 0;
     }
@@ -67,13 +70,17 @@
             padding: 7px 10px 5px 10px;
             color: @app-neutral-color-dark;
             
-            &.missing {
-            	background-color: #ffcccc;
+            &.missing, &.error {
+            	background-color: #ffcccc !important;
             }
         }
         
         input, select {
             height: 40px;
+        }
+        &.major-field input, &.major-field select {
+            height: 60px;
+            font-size: 22px;
         }
         
         input:focus, textarea:focus {
@@ -110,6 +117,9 @@
     }
     .cosinnus-field-input.regular-field {
         height: 40px;
+    }
+    .cosinnus-field-input.major-field {
+        height: 60px;
     }
     .cosinnus-field-input.checkbox-field {
         height: auto;

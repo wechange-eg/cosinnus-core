@@ -2,7 +2,7 @@
 # (excepted the ones loaded via -e from github or similar, these are contained in the main project's requirements.txt)
 Django>=2.1.5,<2.2
 MarkupSafe==0.23
-Pillow==5.2.0
+Pillow==6.2.0
 Celery==4.2.0
 
 django-annoying==0.7.6
@@ -21,7 +21,7 @@ django-honeypot==0.6.0
 django-mailbox==4.7.1
 django-model-utils==1.5.0
 django-mptt==0.8.7
-django-oauth-toolkit==1.2.0
+django-oauth-toolkit==1.3.2
 django-otp==0.5.2
 django-phonenumber-field==1.1.0
 django-polymorphic==0.7.2
@@ -31,12 +31,14 @@ django-simple-captcha==0.5.7
 django-suit==0.2.26
 django-taggit==0.23.0
 django-widget-tweaks==1.3
-djangorestframework==3.8.2
+djangorestframework==3.9.1
+beautifulsoup4==4.8.1
 dnspython==1.15.0
-easy-thumbnails==2.5
-ecdsa==0.10
+easy-thumbnails==2.7
+ecdsa==0.13.3
 geopy==1.11.0
-jsonfield==1.0.0
+jsonfield==2.0.2
+lxml==4.5.0
 html5lib
 html2text==2016.9.19
 numpy==1.14.5
@@ -46,6 +48,7 @@ pycrypto==2.6.1
 redis==2.10.6
 requests==2.20.0
 requests-oauthlib==0.8.0
+rocketchat-API==0.6.26
 six==1.11.0
 sqlparse==0.1.10
 ###############wsgiref==0.1.2

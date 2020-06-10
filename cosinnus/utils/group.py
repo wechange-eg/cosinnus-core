@@ -88,4 +88,4 @@ def get_default_user_group_ids():
     """ Returns the ids of the default user groups, that every user gets placed in on registering. """
     default_user_groups = get_cosinnus_group_model().objects.filter(slug__in=get_default_user_group_slugs())
     return list(default_user_groups.values_list('id', flat=True))
-    
+

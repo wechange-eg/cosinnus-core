@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-14 16:02+0200\n"
+"POT-Creation-Date: 2020-06-08 15:24+0200\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -103,7 +103,8 @@ msgstr ""
 msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
 msgstr ""
 
-msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+#, python-format
+msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
 msgstr ""
 
 #, python-format
@@ -172,12 +173,31 @@ msgstr "Tu as essayé de te connecter trop de fois. Tu pourras essayer de te rec
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Un utilisateur a demandé à devenir membre de cette équipe (admins only)"
 
-msgid "New membership request"
-msgstr "Nouvelle demande d'ajout"
+#, fuzzy, python-format
+#| msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
+msgid "%(sender_name)s requested to become a member"
+msgstr "\"%(sender_name)s\" a demandé à devenir membre de %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other requested to become a member"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others requested to become a member"
+msgstr[0] "\"%(sender_name)s\" a demandé à devenir membre de %(team_name)s."
+msgstr[1] "\"%(sender_name)s\" a demandé à devenir membre de %(team_name)s."
+
+#, fuzzy
+#| msgid "You were made an admin of this team"
+msgid "You are an admin of this team"
+msgstr "Tu es devenu administrateur de cette équipe"
 
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "\"%(sender_name)s\" a demandé à devenir membre de %(team_name)s."
+
+#, fuzzy
+#| msgid "Membership request accepted"
+msgid "Your membership request was accepted"
+msgstr "Demande d'ajout acceptée"
 
 msgid "Membership request accepted"
 msgstr "Demande d'ajout acceptée"
@@ -185,6 +205,11 @@ msgstr "Demande d'ajout acceptée"
 #, python-format
 msgid "Your membership request for %(team_name)s was accepted!"
 msgstr "Ta demande d'ajout pour %(team_name)s a été acceptée !"
+
+#, fuzzy
+#| msgid "Membership request declined"
+msgid "Your membership request was declined"
+msgstr "Demande d'ajout refusée"
 
 msgid "Membership request declined"
 msgstr "Demande d'ajout refusée"
@@ -204,6 +229,13 @@ msgstr "Un utilisateur a accepté l'invitation à rejoindre ce groupe (admins on
 msgid "%(sender_name)s accepted the invitation"
 msgstr "%(sender_name)s a accepté l'invitation"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s accepted the invitation"
+msgid "%(sender_name)s and %(count_minus_one)d other accepted the invitation"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others accepted the invitation"
+msgstr[0] "%(sender_name)s a accepté l'invitation"
+msgstr[1] "%(sender_name)s a accepté l'invitation"
+
 #, python-format
 msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
 msgstr "\"%(sender_name)s\" a accepté l'invitation à rejoindre %(team_name)s."
@@ -215,6 +247,13 @@ msgstr "Un utilisateur a décliné l'invitation a rejoindre cette équipe (admin
 msgid "%(sender_name)s declined the invitation"
 msgstr "%(sender_name)s a décliné l'invitation"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s declined the invitation"
+msgid "%(sender_name)s and %(count_minus_one)d other declined the invitation"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others declined the invitation"
+msgstr[0] "%(sender_name)s a décliné l'invitation"
+msgstr[1] "%(sender_name)s a décliné l'invitation"
+
 #, python-format
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgstr "\"%(sender_name)s\" a décliné l'invitation à rejoindre %(team_name)s."
@@ -222,8 +261,10 @@ msgstr "\"%(sender_name)s\" a décliné l'invitation à rejoindre %(team_name)s.
 msgid "You were made an admin of this team"
 msgstr "Tu es devenu administrateur de cette équipe"
 
-msgid "Made you an admin"
-msgstr "T'a rendu administrateur"
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s made you an admin"
+msgstr "%(sender_name)s t'a identifié dans"
 
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
@@ -232,7 +273,9 @@ msgstr "%(sender_name)s t'a rendu administrateur de \"%(team_name)s\" sur %(port
 msgid "Your admin status for this team was revoked"
 msgstr "Ton statut d'admin de cette équipe a été révoqué"
 
-msgid "Revoked your admin status"
+#, fuzzy, python-format
+#| msgid "Revoked your admin status"
+msgid "%(sender_name)s revoked your admin status"
 msgstr "Annuler votre statut d’administrateur"
 
 #, python-format
@@ -242,20 +285,28 @@ msgstr "%(sender_name)s a révoqué ton statut d'admin de \"%(team_name)s\" sur 
 msgid "You were tagged in a post, document or other item"
 msgstr "Tu as été identifié dans un post, un document ou un autre item"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s tagged you in %(object_name)s"
+msgstr "%(sender_name)s t'a identifié dans"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s tagged you in %(count)d items"
+msgstr "%(sender_name)s t'a identifié dans"
+
 #, python-format
 msgid "%(sender_name)s tagged you in"
 msgstr "%(sender_name)s t'a identifié dans"
 
 #, python-format
-msgid "You were tagged by %(sender_name)s"
-msgstr "Tu as été identifié par %(sender_name)s"
-
-#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "Tu as été identifié dans \"%(object_name)s\" dans %(team_name)s."
 
-msgid "Invited you"
-msgstr "T'a invité"
+#, fuzzy, python-format
+#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s invited you to join %(team_name)s"
+msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -275,6 +326,11 @@ msgstr "Accepter l'invitation"
 msgid "View invitation"
 msgstr "Supprimer l'invitation"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s invited you"
+msgstr "%(sender_name)s t'a identifié dans"
+
 msgid "New link to the moved project/group"
 msgstr "Nouveau lien vers le projet / groupe déplacé"
 
@@ -286,15 +342,14 @@ msgstr "Un de tes projets a été déplacé sur \"%(portal_name)s\" ! <br/><br/>
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "\"%(team_name)s a été déplacée sur %(portal_name)s !"
 
-msgid "Created"
-msgstr "Créé"
-
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name) s vient de créer le projet/groupe \"%(team_name)s\" sur %(portal_name)s!"
 
-msgid "Has created"
-msgstr "A créé"
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
+msgstr "%(sender_name)s vient de créer l'idée \"%(object_name)s\" sur %(portal_name)s!"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -305,12 +360,12 @@ msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr "%(sender_name)s vient de créer l'idée \"%(object_name)s\"!"
 
 #, python-format
-msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
-msgstr "%(sender_name)s vient de créer le projet \"%(team_name)s\" sur %(portal_name)s à partir d'une idée que tu suis ! <br/><br/> Pour aller le voir, clique sur le lien ci-dessous. Tu pourras voir si tu souhaites rejoindre le projet."
-
-#, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr "%(sender_name)s vient de créer le projet %(team_name)s à partir d'une idée que tu suis !"
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr "%(sender_name)s vient de créer le projet \"%(team_name)s\" sur %(portal_name)s à partir d'une idée que tu suis ! <br/><br/> Pour aller le voir, clique sur le lien ci-dessous. Tu pourras voir si tu souhaites rejoindre le projet."
 
 msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
@@ -329,6 +384,30 @@ msgstr "Français"
 
 msgid "Polish--NATIVE-LANGUAGE"
 msgstr "Polski"
+
+msgid "Spanish--NATIVE-LANGUAGE"
+msgstr "Español"
+
+msgid "Romanian--NATIVE-LANGUAGE"
+msgstr "Română"
+
+msgid "Belarussian--NATIVE-LANGUAGE"
+msgstr "Русский"
+
+msgid "Dutch--NATIVE-LANGUAGE"
+msgstr "Nederlands"
+
+msgid "Azerbaijani--NATIVE-LANGUAGE"
+msgstr "Azerbaycan dili"
+
+msgid "Armenian--NATIVE-LANGUAGE"
+msgstr "Հայոց լեզու"
+
+msgid "Georgian--NATIVE-LANGUAGE"
+msgstr "ქართული ენა"
+
+msgid "Kazakh--NATIVE-LANGUAGE"
+msgstr "Қазақ тілі"
 
 msgid "Attachments"
 msgstr "Pièces jointes"
@@ -399,6 +478,9 @@ msgstr "L'ID de l'outil ou le code HTML intégré de Twitter ne semble pas valid
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 msgstr "Le lien vers une galerie Flickr ne semble pas valide ! Il devrait être de la forme \"https://www.flickr.com/photos/username/sets/1234567890\" !"
 
+msgid "Users"
+msgstr "Utilisateurs"
+
 msgid "Name"
 msgstr "Nom"
 
@@ -436,6 +518,9 @@ msgstr "Il semble que votre navigateur n'accepte pas les cookies. Ils sont deman
 msgid "This account is inactive."
 msgstr "Ce compte est inactif."
 
+msgid "Hello"
+msgstr ""
+
 msgid "Click the following link to change which emails you receive:"
 msgstr "Clique sur le lien suivant pour changer le type d'emails que tu reçois :"
 
@@ -447,9 +532,6 @@ msgstr "Clique sur le lien suivant pour ne plus recevoir d'e-mails de notre part
 
 msgid "Unsubscribe"
 msgstr "Se désabonner"
-
-msgid "Hi,"
-msgstr "Bonjour,"
 
 msgid "Tiny (50 x *)"
 msgstr "Tiny (50 x *)"
@@ -505,6 +587,9 @@ msgstr "Texte de réclamation"
 
 msgid "Creator"
 msgstr "Créateur"
+
+msgid "Created"
+msgstr "Créé"
 
 msgid "Reported object"
 msgstr "Objet rapporté"
@@ -610,6 +695,12 @@ msgstr "CSS supplémentaire"
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "CSS supplémentaire pour ce portail, s’appliquera après tous les autres styles."
 
+msgid "Video Conference Server"
+msgstr ""
+
+msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Projet"
@@ -678,6 +769,9 @@ msgstr "Titre de la boîte Appel à l'action"
 msgid "Call to Action Box Description"
 msgstr "Description de la boîte Appel à l'action"
 
+msgid "Embedded Dashboard HTML"
+msgstr ""
+
 msgid "Deactivated Apps"
 msgstr "Applications désactivées"
 
@@ -695,6 +789,21 @@ msgstr "ID du groupe Facebook"
 
 msgid "Facebook Page ID"
 msgstr "ID de la page Facebook"
+
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Group ID"
+msgstr "ID du groupe Facebook"
+
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Groupfolder Name"
+msgstr "ID du groupe Facebook"
+
+#, fuzzy
+#| msgid "Facebook Group ID"
+msgid "Nextcloud Groupfolder ID"
+msgstr "ID du groupe Facebook"
 
 msgid "Parent Group"
 msgstr "Groupe père"
@@ -721,6 +830,26 @@ msgstr "Demande à propos de ton projet \"%(group_name)s\""
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Demande à propos de ton groupe \"%(group_name)s\""
+
+#, fuzzy
+#| msgid "Project Type"
+msgid "Project Menu"
+msgstr "Type de projet"
+
+#, fuzzy
+#| msgid "Group name"
+msgid "Group Menu"
+msgstr "Nom du groupe"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Project Dashboard"
+msgstr "Tableau de bord"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Group Dashboard"
+msgstr "Tableau de bord"
 
 msgid "Is Moderator"
 msgstr ""
@@ -835,37 +964,6 @@ msgstr "Idée Cosinnus"
 
 msgid "Cosinnus Ideas"
 msgstr "Idées Cosinnus"
-
-msgid "Synced"
-msgstr ""
-
-#, fuzzy
-#| msgid "Permissions"
-msgid "Version"
-msgstr "Permissions"
-
-msgid "License"
-msgstr ""
-
-#, fuzzy
-#| msgid "E-Mail Addresses"
-msgid "Address"
-msgstr "Adresses e-mail"
-
-#, fuzzy
-#| msgid "Email address"
-msgid "Email Address"
-msgstr "Adresse e-mail"
-
-#, fuzzy
-#| msgid "CosinnusLocation"
-msgid "Cosinnus Organization"
-msgstr "Lieu Cosinnus"
-
-#, fuzzy
-#| msgid "CosinnusLocations"
-msgid "Cosinnus Organizations"
-msgstr "Lieux Cosinnus"
 
 msgid "Language"
 msgstr "Langue"
@@ -985,11 +1083,49 @@ msgstr "Est aimé"
 msgid "Following"
 msgstr "Suit"
 
+msgid "Text Editor"
+msgstr ""
+
+msgid "Raw HTML"
+msgstr ""
+
+msgid "(none displayed)"
+msgstr ""
+
+msgid "Announcement"
+msgstr ""
+
+msgid "Maintenance"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Technical Issues"
+msgstr ""
+
+msgid "Miscellaneous"
+msgstr ""
+
+msgid "Announcement Display Type"
+msgstr ""
+
+#, fuzzy
+#| msgid "Valid from"
+msgid "Valid From"
+msgstr "Valide à partir de"
+
+msgid "Announcement Category"
+msgstr ""
+
+msgid "Main text of this announcement."
+msgstr ""
+
+msgid "Raw HTML for this announcement."
+msgstr ""
+
 msgid "Create-Project or Group Button"
 msgstr "Bouton créer un projet ou groupe"
-
-msgid "Users"
-msgstr "Utilisateurs"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Events"
@@ -1316,11 +1452,21 @@ msgstr "Statistiques simples"
 msgid "User Welcome Email"
 msgstr "Texte d'email de bienvenue"
 
+#, fuzzy
+#| msgid "User Dashboard"
+msgid "User Dashboard Announcements"
+msgstr "Tableau de bord utilisateur"
+
 msgid "Edit"
 msgstr "Editer"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "Il y a une erreur dans un des champs. Corrige-la avant d'enregistrer !"
+
+#, fuzzy
+#| msgid "You are invited!"
+msgid "You may use the following variables:"
+msgstr "Tu es invité !"
 
 msgid "Save"
 msgstr "Enregistrer"
@@ -1333,15 +1479,12 @@ msgstr "Texte d'email de bienvenue"
 msgid "Send yourself a Test-Mail"
 msgstr ""
 
-msgid "Settings"
-msgstr "Paramètres"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr "Membres"
 
-msgid "Choose App"
-msgstr "Choisir l'application"
+msgid "Settings"
+msgstr "Paramètres"
 
 msgid "Attach existing Files..."
 msgstr "Attacher les fichiers existants..."
@@ -1605,6 +1748,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
 msgstr "Paramètres confidentialité pour le contenu : * **Moi uniquement :** Tu es l'unique personne dans ton groupe ou projet à pouvoir accéder à ce contenu. * **Membres de l'équipe uniquement :** Seuls les membres du groupe ou du projet dans lequel ce contenu a été posté peuvent y accéder. * **Public (visible sans connexion) :** Cet item sera posté en tant que visible publiquement ! Cela signifie que n'importe qui sur Internet peut y accéder et le voir, et il peut être inclus dans les résultats des moteurs de recherche."
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_4_profile"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_52_profilelastname"
+msgstr "Tu peux modifier ton profil ici. Télécharge un avatar, donne ton adresse ou un thème qui t'intéresse, et confirme à la fin en cliquant sur \"enregistrer\" en bas à droite."
+
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Entre l'adresse e-mail des personnes que tu souhaites inviter à rejoindre la plateforme."
 
@@ -1667,14 +1817,13 @@ msgstr "Y accéder par le menu supérieur ou"
 msgid "get started here..."
 msgstr "commence ici..."
 
-msgid "Marketplace"
-msgstr "Marché"
+#, fuzzy
+#| msgid "Re-Activate"
+msgid "Activate Cloud"
+msgstr "Réactiver"
 
-msgid "Poll"
-msgstr "Sondage"
-
-msgid "Polls"
-msgstr "Sondages"
+msgid "Cloud"
+msgstr ""
 
 msgid "File"
 msgstr "Fichier"
@@ -1688,11 +1837,20 @@ msgstr "Etherpad"
 msgid "Etherpads"
 msgstr "Etherpads"
 
+msgid "Poll"
+msgstr "Sondage"
+
+msgid "Polls"
+msgstr "Sondages"
+
 msgid "Todo"
 msgstr "A faire (liste)"
 
 msgid "Todos"
 msgstr "A faire (listes)"
+
+msgid "Marketplace"
+msgstr "Marché"
 
 msgctxt "Calendar"
 msgid "Event"
@@ -1738,11 +1896,9 @@ msgstr "Groupe :"
 msgid "No Description set"
 msgstr "Pas de descriptions définie"
 
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications whenever public content is posted in this project."
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr ""
 
@@ -1838,17 +1994,24 @@ msgstr "Veux-tu vraiment supprimer cette équipe ?"
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Membres"
 
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Invite registered users..."
+msgstr "Invitations à rejoindre l'équipe pour les utilisateurs non-enregistrés"
+
 msgid "Invite a member"
 msgstr "Inviter un membre"
 
-msgid "Invite user"
+msgid "Enter a user name or email to find users to invite..."
+msgstr ""
+
+#, fuzzy
+#| msgid "Invite user"
+msgid "Invite users"
 msgstr "Inviter un utilisateur"
 
 msgid "Invited Members"
 msgstr "Membres invités"
-
-msgid "Invited to be a member"
-msgstr "Invité à être membre"
 
 msgid "Revoke Invitation"
 msgstr "Révoquer l'invitation"
@@ -1858,6 +2021,9 @@ msgstr "Décliner l'invitation"
 
 msgid "Accept Invitation"
 msgstr "Accepter l'invitation"
+
+msgid "Invited to be a member"
+msgstr "Invité à être membre"
 
 #, python-format
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
@@ -1872,17 +2038,53 @@ msgstr "Veux-tu vraiment décliner l'invitation ?"
 msgid "There are no pending invitations."
 msgstr "Il n'y a aucune invitation en attente."
 
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Invite unregistered users..."
+msgstr "Invitations à rejoindre l'équipe pour les utilisateurs non-enregistrés"
+
+msgid "Invite People to Register and Join"
+msgstr "Invite des gens à s'inscrire et à rejoindre"
+
+msgid "Invite people"
+msgstr "Invite des personnes"
+
+msgid "The email was added to the invite list. Click \"Invite people\" to resend the invitations!"
+msgstr ""
+
+msgid "All currently invited people"
+msgstr "Toutes les personnes actuellement invitées"
+
+msgid "People currently invited by you"
+msgstr "Personnes actuellement invitées par toi"
+
+msgid "Delete invitation"
+msgstr "Supprimer l'invitation"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Resend invitation"
+msgstr "Supprimer l'invitation"
+
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr "par"
+
+#, python-format
+msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgstr "Veux-tu vraiment supprimer l'invitation pour \"%(title)s\" ?"
+
 msgid "Membership requests"
 msgstr "Demandes d'ajout"
-
-msgid "Membership requested"
-msgstr "Appartenance au groupe / projet requise"
 
 msgid "Decline User"
 msgstr "Refuser l'utilisateur"
 
 msgid "Accept User"
 msgstr "Accepter l'utilisateur"
+
+msgid "Membership requested"
+msgstr "Appartenance au groupe / projet requise"
 
 #, python-format
 msgid "Do you really want to accept user „%(name)s“ as a member?"
@@ -1901,28 +2103,10 @@ msgstr "Refuser le membre"
 msgid "There are no new membership requests."
 msgstr "Il n'y a aucune nouvelle demande d'ajout."
 
-msgid "Invite People to Register and Join"
-msgstr "Invite des gens à s'inscrire et à rejoindre"
-
-msgid "Invite people"
-msgstr "Invite des personnes"
-
-msgid "All currently invited people"
-msgstr "Toutes les personnes actuellement invitées"
-
-msgid "People currently invited by you"
-msgstr "Personnes actuellement invitées par toi"
-
-msgid "Delete invitation"
-msgstr "Supprimer l'invitation"
-
-msgctxt "an action done *by* <username>"
-msgid "by"
-msgstr "par"
-
-#, python-format
-msgid "Do you really want to delete the invitation for \"%(title)s\"?"
-msgstr "Veux-tu vraiment supprimer l'invitation pour \"%(title)s\" ?"
+#, fuzzy
+#| msgid "Invited Members"
+msgid "Current Members"
+msgstr "Membres invités"
 
 msgid "Message all members"
 msgstr "Envoyer un message à tous les membres"
@@ -2054,11 +2238,11 @@ msgstr "Description courte"
 msgid "Describe the group in a few sentences."
 msgstr "Décris le groupe en quelques phrases."
 
-msgid "This description will be publicly visible."
-msgstr "Cette description sera visible publiquement."
-
 msgid "Describe the project in a few sentences."
 msgstr "Décris le projet en quelques phrases."
+
+msgid "This description will be publicly visible."
+msgstr "Cette description sera visible publiquement."
 
 msgid "A picture for better recognition."
 msgstr "Une image pour une meilleure reconnaissance."
@@ -2210,6 +2394,9 @@ msgstr "L'intégration Facebook est disponible après la création du groupe !"
 msgid "Facebook integration is available after you created the project!"
 msgstr "L'intégration Facebook est disponible après la création du projet !"
 
+msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
 msgstr "Invitations"
@@ -2282,8 +2469,8 @@ msgstr "Rejoins maintenant et collabore !"
 msgid "Register"
 msgstr "S'inscrire"
 
-msgid "Login"
-msgstr "Se connecter"
+msgid "Log in"
+msgstr "Connexion"
 
 msgid "You are a member!"
 msgstr "Tu es membre !"
@@ -2335,10 +2522,27 @@ msgstr "Il n'y a pas encore de description pour ce groupe."
 msgid "Related Projects/Groups"
 msgstr "Projets / groupes liés"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgid "You will now receive notifications for content posted in this project."
+msgstr "Tu recevras une notification lorsqu'un projet sera créé à partir de l'idée que tu aimes. Si tu ne souhaites pas recevoir de notifications, clique sur le bouton de désabonnement !"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgid "You will now receive notifications for content posted in this group."
+msgstr "Tu recevras une notification lorsqu'un projet sera créé à partir de l'idée que tu aimes. Si tu ne souhaites pas recevoir de notifications, clique sur le bouton de désabonnement !"
+
 msgid "Share"
 msgstr "Partager"
 
 msgid "Share on Facebook"
+msgstr "Partager sur Facebook"
+
+#, fuzzy
+#| msgid "Share on Facebook"
+msgid "Share on Twitter"
 msgstr "Partager sur Facebook"
 
 #. Translators: __INCLUDE_JS_PO__
@@ -2812,39 +3016,17 @@ msgstr "Nouvelle demande d'ajout : %(user_name)s veut rejoindre %(site_name)s!"
 
 #, python-format
 msgid ""
-"Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
+"Hello, %(user_name)s! \n"
 "\n"
-"Du kannst dich ab sofort unter %(domain_url)s einloggen.\n"
+"Welcome to %(site_name)s! Your user account was approved.\n"
 "\n"
-"Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
+"You can now log in at %(domain_url)s.\n"
 "\n"
-"Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
 "\n"
-"Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
+"Best regards,\n"
 "\n"
-"Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
-"\n"
-"Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
-"\n"
-"Viele Grüße und viel Spaß hier,\n"
-"das %(site_name)s Team"
+"the %(site_name)s Team"
 msgstr ""
-"Bonjour, %(user_name)s! Bienvenue sur %(site_name)s! \n"
-"\n"
-"Tu peux te connecter dès maintenant ici %(domain_url)s.\n"
-"\n"
-"Nous nous réjouissons que tu souhaites utiliser la plateforme. Pour découvrir les fonctions importantes, regarde la vidéo de la page d'accueil, si ce n'est pas déjà fait. Tu peux y accéder en cliquant sur le logo du portail en haut à gauche.\n"
-"\n"
-"Une information avant de commencer : en t'inscrivant, tu deviens automatiquement membre du groupe Blog, où toutes les informations du portail seront affichées. Pour avoir une vue d'ensemble de tout ce qui se passe ici, tu peux paramétrer les informations que tu reçois (de quelles activités tu souhaites être tenu au courant par mail) sur l'ongler \"Paramètres de notification\" en cliquant sur ton nom en haut à droite. Pour ne pas recevoir trop d'e-mails indésirables, le paramètre de notification par défaut est \"aucune notification\".\n"
-"\n"
-"Pour tous les groupes et projets que tu rejoins de toi-même, le paramètre par défaut est \"toutes les notifications\". Tu peux le changer de la même façon.\n"
-"\n"
-"Encore une chose à savoir : le portail est un des nombreux portails de wechange.fr. Si tu souhaites aller sur d'autres portails, tu peux t'y connecter depuis celui-ci avec tes identifiants. Si tu t'inscris à plusieurs portails, toutes les nouvelles des groupes et projets dont tu es membre seront affichées dans la rubrique activités (en haut à gauche dans le menu). En cliquant sur les différents logos, tu peux changer de portail. Si tu souhaites être membre du groupe \"blog\" dans d'autres portails, tu dois en faire la demande.\n"
-"\n"
-"Si tu as des questions, des remarques techniques, des souhaits ou que tu as noté des erreurs, adresse-toi aux admins du portail.\n"
-"\n"
-"Profite bien du portail,\n"
-"l'équipe de%(site_name)s"
 
 #, python-format
 msgid "Your request to join %(site_name)s was approved!"
@@ -3055,8 +3237,10 @@ msgstr "Faire basculer la navigation"
 msgid "My Profile"
 msgstr "Mon profil"
 
-msgid "Payments (Name TBD)"
-msgstr ""
+#, fuzzy
+#| msgid "My location"
+msgid "Your Contribution"
+msgstr "Ma localisation"
 
 msgid "Logout"
 msgstr "Déconnexion"
@@ -3102,20 +3286,6 @@ msgstr "Mes idées"
 msgid "All Ideas"
 msgstr "Toutes les idées"
 
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Invitations"
-msgid "Organizations"
-msgstr "Invitations"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "My Organizations"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Organizations"
-msgstr ""
-
 msgid "Search..."
 msgstr "Rechercher..."
 
@@ -3133,86 +3303,6 @@ msgstr "Pas connecté."
 
 msgid "You cannot create or edit events until you are logged in!"
 msgstr "Tu ne peux ni créer ni modifier d'événement tant que tu n'es pas connecté !"
-
-#, fuzzy, python-format
-#| msgid "Edit “%(team_name)s”"
-msgid "Edit \"%(organization_name)s\""
-msgstr "Editer “%(team_name)s”"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Delete invitation"
-msgid "Create Organization"
-msgstr "Supprimer l'invitation"
-
-#, fuzzy
-#| msgid "Delete invitation"
-msgid "Delete this organization"
-msgstr "Supprimer l'invitation"
-
-#, fuzzy, python-format
-#| msgid "Do you really want to delete idea „%(title)s“?"
-msgid "Do you really want to delete organization „%(title)s“?"
-msgstr "Veux-tu vraiment supprime l'idée „%(title)s“ ?"
-
-#, fuzzy
-#| msgid "Delete invitation"
-msgid "Delete Organization"
-msgstr "Supprimer l'invitation"
-
-msgid "Edit Organization"
-msgstr ""
-
-#, fuzzy
-#| msgid "Enter a descriptive title for your idea"
-msgid "Enter the name of your organization"
-msgstr "Entrer un titre descriptif pour ton idée"
-
-#, fuzzy
-#| msgid "The description for your idea. Explain your vision and your goals."
-msgid "The description of your organization. Explain your vision and your goals and add additional interesting details."
-msgstr "La description de ton idée. Explique ta vision et tes objectifs."
-
-msgid "Where is your organization located?"
-msgstr ""
-
-#, fuzzy
-#| msgid "Which topics fit your idea?"
-msgid "Which topics fit your organization?"
-msgstr "Quels sujets correspondent à ton idée ?"
-
-#, fuzzy
-#| msgid "Contact info"
-msgid "Contact Info"
-msgstr "Info du contact"
-
-msgid "E-Mail"
-msgstr "E-Mail"
-
-#, fuzzy
-#| msgid "Promote Member"
-msgid "Phone number"
-msgstr "Promouvoir le membre"
-
-#, fuzzy
-#| msgid "E-Mail Addresses"
-msgid "Postal Address"
-msgstr "Adresses e-mail"
-
-#, fuzzy
-#| msgid "Are there any projects/groups related to this one?"
-msgid "Are there any projects/groups related to this organization?"
-msgstr "Y a-t-il des projets / groupes liés à celui-ci ?"
-
-#, fuzzy
-#| msgid "This will determine who can see your idea."
-msgid "This will determine who can see your organization."
-msgstr "Cela déterminera qui peut voir ton idée."
-
-#, fuzzy
-#| msgid "This idea will be set to be publicly visible!"
-msgid "This organization will be set to be publicly visible!"
-msgstr "Cette idée sera paramétrée pour être visible publiquement !"
 
 msgid "No anonymous access!"
 msgstr "Pas d'accès anonyme !"
@@ -3236,8 +3326,15 @@ msgstr "Mot de passe oublié ?"
 msgid "Logged out"
 msgstr "Déconnecté"
 
-msgid "Log in"
-msgstr "Connexion"
+#, fuzzy
+#| msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
+msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+msgstr "L'utilisateur \"%(user)s\"  a été inscrit avec succès. Le compte devra être approuvé avant que tu puisses te connecter. Nous enverrons un e-mail à ton adresse \"%(email)s\" quand ce sera fait."
+
+#, fuzzy
+#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+msgstr "L'utilisateur \"%(user)s\"  a été inscrit avec succès. Nous enverrons bientôt un e-mail à ton adresse %(email)s\". Tu devras confirmer ton adresse avant de pouvoir te connecter."
 
 msgid "Password"
 msgstr "Mot de passe"
@@ -3295,6 +3392,9 @@ msgstr "Réinitialiser mot de passe"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Ton mot de passe a été défini. Tu peux te connecter à présent."
+
+msgid "Login"
+msgstr "Se connecter"
 
 msgid "Enter new password"
 msgstr "Entrer nouveau mot de passe"
@@ -3405,6 +3505,9 @@ msgstr "Captcha"
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Nous devons nous assurer que tu es une vraie personne"
 
+msgid "Generate a new captcha"
+msgstr ""
+
 #, fuzzy
 #| msgid "Show more options..."
 msgid "Search options..."
@@ -3418,6 +3521,25 @@ msgstr "Ethercalcs"
 
 msgid "Offers"
 msgstr "Offres"
+
+msgid "Search in Cloud files (seperate)"
+msgstr ""
+
+msgid "Search results from the Cloud app can currently only be displayed in the Cloud app itself."
+msgstr ""
+
+msgid "To search for Cloud files, please visit the Cloud app and use the integrated search function there."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Searching in Cloud files"
+msgstr "Rechercher dans les équipes"
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search in Cloud files"
+msgstr "Rechercher dans les équipes"
 
 msgid "Search in teams"
 msgstr "Rechercher dans les équipes"
@@ -3470,6 +3592,26 @@ msgstr "suivant"
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Entre un terme de recherche ou plus ou sélectionne un sujet à rechercher."
 
+#, fuzzy
+#| msgid "Download"
+msgid "CSV Downloads"
+msgstr "Télécharger"
+
+msgid "HD space used by groups"
+msgstr ""
+
+msgid "HD space used by projects"
+msgstr ""
+
+msgid "User statistics (min 1x logged in)"
+msgstr ""
+
+msgid "E-Mails of all newsletter subcribers"
+msgstr ""
+
+msgid "E-Mails of ALL active users"
+msgstr ""
+
 msgid "Date"
 msgstr "Date"
 
@@ -3490,6 +3632,15 @@ msgstr "Date de fin."
 
 msgid "Ok"
 msgstr "Ok"
+
+msgid "The WE-Cloud is here!"
+msgstr ""
+
+msgid "With the Cloud, we offer your team a new file repository with extensive office functions to work together on documents, tables and presentations. It is based on Nextcloud and OnlyOffice. So you have two apps at your disposal with which you can use the cloud on the road and synchronize files with your desktop! As administrator you can activate the cloud for your project/group and transfer data from files and pads."
+msgstr ""
+
+msgid "Learn more"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
@@ -3514,12 +3665,6 @@ msgstr "Evénement"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Idea"
 msgstr "Idée"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Invitations"
-msgid "Organization"
-msgstr "Invitations"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create User"
@@ -3644,30 +3789,6 @@ msgid "Browse all Projects"
 msgstr "Projets créés"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "You are invited!"
-msgid "You have not created any organizations yet."
-msgstr "Tu es invité !"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Group"
-msgid "Create new Organization"
-msgstr "Créer groupe"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "All Groups"
-msgid "Browse all Organizations"
-msgstr "Tous les groupes"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Search for Users"
-msgid "Search for Organizations"
-msgstr "Rechercher utilisateurs"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
 msgstr ""
 
@@ -3710,7 +3831,31 @@ msgid "Go to Calendar"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Network"
+#, fuzzy
+#| msgid "There was an error when trying to delete the invitation."
+msgid "There was an error loading the widget"
+msgstr "Une erreur est survenue lors de la suppression de l'invitation."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Notification ID"
+msgid "Notifications"
+msgstr "ID de notification"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Show more Projects"
+msgid "Show more"
+msgstr "Afficher plus de projets"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Notification ID"
+msgid "No current notifications"
+msgstr "ID de notification"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Entire Network"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -3868,24 +4013,6 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Edit your Idea"
-msgid "Edit your Organization"
-msgstr "Modifier ton idée"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Contact info"
-msgid "Contact Person"
-msgstr "Info du contact"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Administrators unknown"
-msgid "Contact Persons unknown"
-msgstr "Administrateurs inconnus"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Rejoindre projet"
 
@@ -3904,18 +4031,6 @@ msgstr "Déplacer"
 #| msgid "Move"
 msgid "Move down"
 msgstr "Déplacer"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "There was an error when trying to delete the invitation."
-msgid "There was an error loading the widget"
-msgstr "Une erreur est survenue lors de la suppression de l'invitation."
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Show more Projects"
-msgid "Show more"
-msgstr "Afficher plus de projets"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4065,6 +4180,9 @@ msgstr "Modifier ton profil"
 msgid "Basic data"
 msgstr "Informations de base"
 
+msgid "E-Mail"
+msgstr "E-Mail"
+
 msgid "Profile avatar"
 msgstr "Avatar du profil"
 
@@ -4106,6 +4224,117 @@ msgstr "Tu peux changer ou personnaliser ce paramètre plus tard dans tes param�
 
 msgid "Your privacy: You are in control!"
 msgstr "Confidentialité : tu as le contrôle !"
+
+#, fuzzy
+#| msgctxt "an action done *by* <username>"
+#| msgid "by"
+msgid "by"
+msgstr "par"
+
+#, fuzzy
+#| msgid "Overview"
+msgid "Open Preview"
+msgstr "Vue d'ensemble"
+
+#, fuzzy
+#| msgid "Is active"
+msgid "active"
+msgstr "Est actif"
+
+msgid "displayed right now"
+msgstr ""
+
+msgid "not displayed right now"
+msgstr ""
+
+#, fuzzy
+#| msgid "(Inactive)"
+msgid "inactive"
+msgstr "(Inactif)"
+
+#, fuzzy
+#| msgid "Re-Activate"
+msgid "Activate"
+msgstr "Réactiver"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgid "Do you really want to delete announcement \"%(title)s\"?"
+msgstr "Veux-tu vraiment supprimer l'invitation pour \"%(title)s\" ?"
+
+#, fuzzy
+#| msgid "Delete Account"
+msgid "Delete announcement"
+msgstr "Supprimer compte"
+
+msgid "Edit Announcement"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create account"
+msgid "Create Announcement"
+msgstr "Créer compte"
+
+msgid "Announcement is enabled"
+msgstr ""
+
+msgid "Announcement Title (internal only)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Header Title"
+msgid "Internal Title"
+msgstr "Titre d'en-tête"
+
+msgid "Category for the Announcement"
+msgstr ""
+
+msgid "Will be displayed as a small first header in the announcement"
+msgstr ""
+
+msgid "Timeframe to display announcement"
+msgstr ""
+
+msgid "Display type"
+msgstr ""
+
+msgid "Choose between a markdown editor, or insert your own raw HTML (it is recommended to have a designer create the HTML!)"
+msgstr ""
+
+msgid "The main text of the announcement."
+msgstr ""
+
+msgid "Use \"# Big Header\" as main title and \"## Small Header\" as in-between header. They will be styled appropriately on the dashboard!"
+msgstr ""
+
+msgid "Raw HTML. Should contain a Dismiss-button"
+msgstr ""
+
+msgid "External Link for a \"Read more\" link"
+msgstr ""
+
+msgid "requires a Save before"
+msgstr ""
+
+msgid "User Dashboard Announcements are sticky posts that appear on top of each user's personal Dashboard."
+msgstr ""
+
+msgid "An announcement will only appear during its valid-time frame."
+msgstr ""
+
+msgid "Only one announcement at a time will ever be shown to a user."
+msgstr ""
+
+msgid "If the user still has not hidden their introduction-message on the dashboard, they will not see any announcements."
+msgstr ""
+
+msgid "A user can dismiss an announcement, in which case it will disappear and never be shown again. On the next visit to their Dashboard, another valid announcement they have not yet hidden may be shown."
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no visible users."
+msgid "There are no announcements yet."
+msgstr "Il n'y a pas d'utilisateurs visibles."
 
 msgid "Enable posting to Facebook"
 msgstr "Activer post sur Facebook"
@@ -4298,37 +4527,14 @@ msgid "Do not show this again"
 msgstr ""
 
 #, fuzzy
-#| msgid "Welcome!"
-msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-msgid "Welcome"
-msgstr "Bienvenue !"
+#| msgid "view"
+msgid "Preview"
+msgstr "voir"
 
-#, fuzzy, python-format
-#| msgid "Edit “%(team_name)s”"
-msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-msgid "to %(portal_name)s"
-msgstr "Editer “%(team_name)s”"
-
-#, python-format
-msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+msgid "Continue reading"
 msgstr ""
 
-msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
-msgstr ""
-
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
-msgstr ""
-
-msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
-msgstr ""
-
-msgid "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!"
-msgstr ""
-
-msgid "What's happening where and when? What's to discover? Where to meet?"
-msgstr ""
-
-msgid "What's the latest news?"
+msgid "What's the latest news that you would like to share with all users of the platform?"
 msgstr ""
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
@@ -4361,7 +4567,7 @@ msgstr "Créer compte"
 msgid "Home"
 msgstr ""
 
-msgid "Nachrichten"
+msgid "Rocket.Chat"
 msgstr ""
 
 #, fuzzy
@@ -4379,9 +4585,6 @@ msgstr "Inscris-toi et rejoins !"
 msgid "Offer"
 msgstr "Offres"
 
-msgid "Do you have something to share, sell or give away? Are you searching for something?"
-msgstr ""
-
 #, fuzzy
 #| msgid "Cosinnus Idea"
 msgid "Post new Offer"
@@ -4391,6 +4594,37 @@ msgstr "Idée Cosinnus"
 #| msgid "Edit Profile"
 msgid "Edit My Profile"
 msgstr "Modifier mon profil"
+
+msgid "What's happening where and when? What's to discover? Where to meet?"
+msgstr ""
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgstr ""
+
+msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
+msgstr ""
+
+msgid "Do you have something to share, sell or give away? Are you searching for something?"
+msgstr ""
+
+msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
+msgstr ""
+
+#, fuzzy
+#| msgid "Welcome!"
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "Welcome"
+msgstr "Bienvenue !"
+
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "to %(portal_name)s"
+msgstr "Editer “%(team_name)s”"
+
+#, python-format
+msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+msgstr ""
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "S'inscrire et co-administrer"
@@ -4461,7 +4695,13 @@ msgstr "J'accepte les conditions d'utilisation"
 msgid "Change of Terms of Services and Privacy Policy"
 msgstr ""
 
+msgid "Our Terms of Services and Privacy Policy"
+msgstr ""
+
 msgid "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications."
+msgstr ""
+
+msgid "We prioritise the protection of your data, which is reflected in our privacy policy and terms of services. We encourage you to read and accept the terms."
 msgstr ""
 
 #, python-format
@@ -4492,6 +4732,9 @@ msgstr "A propos de nous"
 
 msgid "Question about"
 msgstr "Question à propos de"
+
+msgid "Test email sent!"
+msgstr ""
 
 #, python-format
 msgid "The language \"%s\" is not supported"
@@ -4541,6 +4784,9 @@ msgstr "Une erreur est survenue durant la tentative de déconnexion de ton compt
 
 msgid "Your Facebook account was successfully disconnected from this account."
 msgstr "Ton compte Facebook a été déconnecté de ce compte avec succès."
+
+msgid "Sorry, only portal administrators can create projects and groups!"
+msgstr ""
 
 msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgstr "Désolé, seulement les admins de portails peuvent créer des groupes ! Tu peux soit créer un projet, soit écrire un message à un des admins pour créer un groupe pour toi. Tu peux trouver la liste des admins ci-dessous."
@@ -4598,9 +4844,6 @@ msgstr "Je t'ai invité à rejoindre \"%(team_name)s\" !"
 #, python-format
 msgid "User %(username)s was successfully invited!"
 msgstr "L'utilisateur %(username)s a été invité avec succès !"
-
-msgid "You cannot change your own admin status."
-msgstr "Tu ne peux pas changer ton propre statut d'admin."
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
@@ -4690,6 +4933,11 @@ msgstr "Ta sélection pour afficher cet item dans ces projets / groupes a été 
 msgid "This item is now being shown in these projects/groups: %(group_names)s"
 msgstr "Cet item est maintenant affiché dans ces projets / groupes : %(group_names)s"
 
+#, fuzzy, python-format
+#| msgid "Which apps should be activated?"
+msgid "The %s-app was activated!"
+msgstr "Quelles applications doivent être activées ?"
+
 msgid "No appname given for adding containers."
 msgstr "Pas de nom d'application pour ajouter des contenants."
 
@@ -4705,8 +4953,9 @@ msgstr "Il y a eu une erreur pendant la création de ton avatar. Le fichier imag
 msgid "<Root folder>"
 msgstr "<Fichier racine>"
 
-#, python-format
-msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+#, fuzzy, python-format
+#| msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+msgid "You are now located in %(group_name)s. You were redirected here from another project or group that links to this item."
 msgstr "Tu te situes maintenant dans %(group_name)s.<br/>Tu as été redirigé ici depuis un autre projet ou groupe qui renvoie vers cet item."
 
 #, python-format
@@ -4732,11 +4981,6 @@ msgstr "L'objet \"%(title)s\" a été supprimé."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d autres objetsont été supprimés avec succès."
-
-#, fuzzy
-#| msgid "Your idea was deleted successfully."
-msgid "Your organization was deleted successfully."
-msgstr "Ton profil a été modifié."
 
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
@@ -4781,8 +5025,9 @@ msgstr "Ton compte \"%(user)s\" a été enregistré avec succès. Bienvenue dans
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgstr "L'utilisateur \"%(user)s\"  a été inscrit avec succès. Le compte devra être approuvé avant que tu puisses te connecter. Nous enverrons un e-mail à ton adresse \"%(email)s\" quand ce sera fait."
 
-#, python-format
-msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+#, fuzzy, python-format
+#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
+msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 msgstr "L'utilisateur \"%(user)s\"  a été inscrit avec succès. Nous enverrons bientôt un e-mail à ton adresse %(email)s\". Tu devras confirmer ton adresse avant de pouvoir te connecter."
 
 msgid "The invite token you have used does not exist!"
@@ -4799,9 +5044,6 @@ msgstr "Il y a eu une erreur lors du traitement de vos invitations. Certaines de
 
 msgid "You are already logged in!"
 msgstr "Tu es déjà connecté !"
-
-msgid "Your privacy settings were saved. Welcome!"
-msgstr "Tes paramètres de confidentialité ont été enregistrés. Bienvenue !"
 
 msgid "Please enter a token!"
 msgstr ""
@@ -4862,12 +5104,107 @@ msgstr "Nous avons supprimé ton adresse \"%(email)s\" de notre liste d'envoi. T
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Bienvenue ! Tu as été invité aux projets et groupes suivants. Clique sur le bouton pour accepter ou décliner l'invitation pour chacun d'eux !"
 
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was created successfully."
+msgstr "Ton profil a été modifié."
+
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was saved successfully."
+msgstr "Ton profil a été modifié."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your Announcement was deleted successfully."
+msgstr "Ton profil a été modifié."
+
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was activated successfully."
+msgstr "Ton profil a été modifié."
+
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your Announcement was deactivated successfully."
+msgstr "Ton profil a été modifié."
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le devenir ci-dessous."
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#~ msgid "New membership request"
+#~ msgstr "Nouvelle demande d'ajout"
+
+#~ msgid "Made you an admin"
+#~ msgstr "T'a rendu administrateur"
+
+#~ msgid "Revoked your admin status"
+#~ msgstr "Annuler votre statut d’administrateur"
+
+#~ msgid "You were tagged by %(sender_name)s"
+#~ msgstr "Tu as été identifié par %(sender_name)s"
+
+#~ msgid "Invited you"
+#~ msgstr "T'a invité"
+
+#~ msgid "Has created"
+#~ msgstr "A créé"
+
+#~ msgid "Hi,"
+#~ msgstr "Bonjour,"
+
+#~ msgid "You cannot change your own admin status."
+#~ msgstr "Tu ne peux pas changer ton propre statut d'admin."
+
+#~ msgid ""
+#~ "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
+#~ "\n"
+#~ "Du kannst dich ab sofort unter %(domain_url)s einloggen.\n"
+#~ "\n"
+#~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
+#~ "\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "\n"
+#~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
+#~ "\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "\n"
+#~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
+#~ "\n"
+#~ "Viele Grüße und viel Spaß hier,\n"
+#~ "das %(site_name)s Team"
+#~ msgstr ""
+#~ "Bonjour, %(user_name)s! Bienvenue sur %(site_name)s! \n"
+#~ "\n"
+#~ "Tu peux te connecter dès maintenant ici %(domain_url)s.\n"
+#~ "\n"
+#~ "Nous nous réjouissons que tu souhaites utiliser la plateforme. Pour découvrir les fonctions importantes, regarde la vidéo de la page d'accueil, si ce n'est pas déjà fait. Tu peux y accéder en cliquant sur le logo du portail en haut à gauche.\n"
+#~ "\n"
+#~ "Une information avant de commencer : en t'inscrivant, tu deviens automatiquement membre du groupe Blog, où toutes les informations du portail seront affichées. Pour avoir une vue d'ensemble de tout ce qui se passe ici, tu peux paramétrer les informations que tu reçois (de quelles activités tu souhaites être tenu au courant par mail) sur l'ongler \"Paramètres de notification\" en cliquant sur ton nom en haut à droite. Pour ne pas recevoir trop d'e-mails indésirables, le paramètre de notification par défaut est \"aucune notification\".\n"
+#~ "\n"
+#~ "Pour tous les groupes et projets que tu rejoins de toi-même, le paramètre par défaut est \"toutes les notifications\". Tu peux le changer de la même façon.\n"
+#~ "\n"
+#~ "Encore une chose à savoir : le portail est un des nombreux portails de wechange.fr. Si tu souhaites aller sur d'autres portails, tu peux t'y connecter depuis celui-ci avec tes identifiants. Si tu t'inscris à plusieurs portails, toutes les nouvelles des groupes et projets dont tu es membre seront affichées dans la rubrique activités (en haut à gauche dans le menu). En cliquant sur les différents logos, tu peux changer de portail. Si tu souhaites être membre du groupe \"blog\" dans d'autres portails, tu dois en faire la demande.\n"
+#~ "\n"
+#~ "Si tu as des questions, des remarques techniques, des souhaits ou que tu as noté des erreurs, adresse-toi aux admins du portail.\n"
+#~ "\n"
+#~ "Profite bien du portail,\n"
+#~ "l'équipe de%(site_name)s"
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Society Dashboard"
+#~ msgstr "Tableau de bord"
+
+#~ msgid "Choose App"
+#~ msgstr "Choisir l'application"
+
+#~ msgid "Your privacy settings were saved. Welcome!"
+#~ msgstr "Tes paramètres de confidentialité ont été enregistrés. Bienvenue !"
 
 #, fuzzy
 #~| msgid "Administrator"
@@ -4881,9 +5218,6 @@ msgstr "Tes changements ont été enregistrés."
 #~| msgid "Portal"
 #~ msgid "Switch Portal"
 #~ msgstr "Portail"
-
-#~ msgid "User Dashboard"
-#~ msgstr "Tableau de bord utilisateur"
 
 #~ msgid "Microsite Wallpaper"
 #~ msgstr "Fond d'écran du microsite"

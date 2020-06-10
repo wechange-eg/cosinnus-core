@@ -78,14 +78,16 @@
 		<hr>
 		
 		<div class="main-menu-links">
-			<div><a href="{{ group_add_url }}">
-				{# Translators: __INCLUDE_JS_PO__ #}
-				{% trans "Create new Group" %}
-			</a></div>
-			<div><a href="{{ project_add_url }}">
-				{# Translators: __INCLUDE_JS_PO__ #}
-				{% trans "Create new Project" %} 
-			</a></div>
+		    {% if COSINNUS_SHOW_PROJECT_AND_GROUP_CREATE_BUTTONS %}
+				<div><a href="{{ group_add_url }}">
+					{# Translators: __INCLUDE_JS_PO__ #}
+					{% trans "Create new Group" %}
+				</a></div>
+				<div><a href="{{ project_add_url }}">
+					{# Translators: __INCLUDE_JS_PO__ #}
+					{% trans "Create new Project" %} 
+				</a></div>
+			{% endif %}
 			<div><a href="/groups/">
 				{# Translators: __INCLUDE_JS_PO__ #}
 				{% trans "Browse all Groups" %} 
@@ -223,18 +225,24 @@
 			{% endif %}
 		</ul>
 		
-		<hr>
-		
-		<div class="main-menu-links">
-			<div><a href="{{ event_add_url }}">
-				{# Translators: __INCLUDE_JS_PO__ #}
-				{% trans "Add Event" %} 
-			</a></div>
-			<div><a href="{{ event_calendar_url }}">
-				{# Translators: __INCLUDE_JS_PO__ #}
-				{% trans "Go to Calendar" %} 
-			</a></div>
-		</div>
+		{% if event_add_url or event_calendar_url %}
+			<hr>
+			
+			<div class="main-menu-links">
+			    {% if event_add_url %}
+					<div><a href="{{ event_add_url }}">
+						{# Translators: __INCLUDE_JS_PO__ #}
+						{% trans "Add Event" %} 
+					</a></div>
+	            {% endif %}
+				{% if event_calendar_url %}
+					<div><a href="{{ event_calendar_url }}">
+						{# Translators: __INCLUDE_JS_PO__ #}
+						{% trans "Go to Calendar" %} 
+					</a></div>
+	            {% endif %}
+			</div>
+		{% endif %}
 		
 	</div>
 </div>

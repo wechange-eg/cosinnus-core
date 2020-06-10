@@ -6,11 +6,12 @@ from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
 from cosinnus.utils.user import assign_user_to_default_auth_group, \
     ensure_user_to_default_portal_groups
 from django.contrib.auth import get_user_model
-from django.db.models.signals import post_delete, post_save
+from django.db.models.signals import post_delete, post_save, pre_save
 from django.dispatch.dispatcher import receiver
 
-from cosinnus.models.tagged import ensure_container
+from cosinnus.models.tagged import ensure_container, LikeObject
 from cosinnus.core.registries.group_models import group_model_registry
+from cosinnus.core import signals
 
 import logging
 from django.contrib.auth.signals import user_logged_in, user_logged_out
@@ -21,6 +22,13 @@ from django.db import transaction
 
 from cosinnus.core.middleware.login_ratelimit_middleware import login_ratelimit_triggered
 from django.utils.encoding import force_text
+
+from cosinnus.conf import settings
+from cosinnus.utils.group import get_cosinnus_group_model
+from django.contrib.contenttypes.models import ContentType
+from annoying.functions import get_object_or_None
+from cosinnus.utils.dashboard import ensure_group_widget
+from cosinnus.models.widget import WidgetConfig
 
 logger = logging.getLogger('cosinnus')
 
@@ -105,6 +113,78 @@ def reset_cookie_expiry_for_anonymous_user(sender, user, request, **kwargs):
     """ Default for cookies for anonymous users is browser-session and as set in 
         `COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS` logged in users """
     request.session.set_expiry(0)
+    
+    
+if getattr(settings, 'COSINNUS_USER_FOLLOWS_GROUP_WHEN_JOINING', True):
+    
+    @receiver(signals.user_joined_group)
+    def user_follow_joined_group_trigger(sender, user, group, **kwargs):
+        """ Will automatically make a user follow a group after they joined it """
+        group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
+        # create a new followed likeobject
+        likeobj, created = LikeObject.objects.get_or_create(
+            content_type=group_ct, 
+            object_id=group.id, 
+            user=user,
+            defaults={'liked': False, 'followed': True}
+        )
+        # or make the existing likeobject followed
+        if not created:
+            if not likeobj.followed:
+                likeobj.followed = True
+                likeobj.save(update_fields=['followed'])
+        group.clear_likes_cache()
+    
+    @receiver(signals.user_left_group)
+    def user_unfollow_left_group_trigger(sender, user, group, **kwargs):
+        """ Will automatically make a user unfollow a group after they left it """
+        group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
+        # get an existing following object
+        likeobj = get_object_or_None(LikeObject, 
+            content_type=group_ct,
+            object_id=group.id, 
+            user=user,
+            followed=True
+        )
+        # make the followed likeobject unfollowed if it exists
+        if likeobj:
+            likeobj.followed = False
+            likeobj.save(update_fields=['followed'])
+            group.clear_likes_cache()
+        
+
+""" User account activation/deactivation logic """
+def user_pre_save(sender, **kwargs):
+    """ Saves a user's is_active value as it was before saving """
+    user = kwargs['instance']
+    actual_value = user.is_active
+    try:
+        user.refresh_from_db(fields=['is_active'])
+    except get_user_model().DoesNotExist:
+        # happens on user create
+        pass
+    user._is_active = user.is_active
+    user.is_active = actual_value
+    
+def user_post_save(sender, **kwargs):
+    """ Compares the saved is_active value and sends signals if it was changed """
+    user = kwargs['instance']
+    if hasattr(user, '_is_active'):
+        if user.is_active != user._is_active:
+            if user.is_active:
+                signals.user_activated.send(sender=sender, user=user)
+            else:
+                signals.user_deactivated.send(sender=sender, user=user)
+
+pre_save.connect(user_pre_save, sender=get_user_model())
+post_save.connect(user_post_save, sender=get_user_model())
+
+
+@receiver(signals.group_apps_activated)
+def group_cloud_app_activated_sub(sender, group, apps, **kwargs):
+    """ Whenever a group app is activated, make sure all dashboard widgets have a config instance. """
+    for app_name, widget_name, options in settings.COSINNUS_INITIAL_GROUP_WIDGETS:
+        ensure_group_widget(group, app_name, widget_name, WidgetConfig.TYPE_DASHBOARD, options)
 
 
 from cosinnus.apis.cleverreach import *

@@ -29,17 +29,20 @@ from cosinnus.models.user_dashboard import DashboardItem
 from cosinnus.utils.dates import timestamp_from_datetime, \
     datetime_from_timestamp
 from cosinnus.utils.filters import exclude_special_folders
-from cosinnus.utils.functions import is_number
+from cosinnus.utils.functions import is_number, sort_key_strcoll_attr
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_slugs
 from cosinnus.utils.pagination import QuerysetLazyCombiner
-from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
+from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
+    check_user_superuser
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from django.shortcuts import redirect
 from cosinnus.views.ui_prefs import get_ui_prefs_for_user
 from django.utils.timezone import now
 from dateutil.relativedelta import relativedelta
+from cosinnus.models.user_dashboard_announcement import UserDashboardAnnouncement
+from datetime import timedelta
 
 
 logger = logging.getLogger('cosinnus')
@@ -57,23 +60,42 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
     def get_context_data(self, **kwargs):
         forum_group = None
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        note_form = None
         if forum_slug:
             forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
-            note_form = None
             try:
                 from cosinnus_note.forms import NoteForm
                 note_form = NoteForm(group=forum_group)
             except: 
                 if settings.DEBUG:
                     raise
-            
+        
+        announcement = None
+        announcement_is_preview = False
+        # for superusers, check if we're viewing an announcement_preview
+        if self.request.GET.get('show_announcement', None) is not None and check_user_superuser(self.request.user):
+            announcement_id = self.request.GET.get('show_announcement')
+            if is_number(announcement_id):
+                announcement_is_preview = True
+                announcement = get_object_or_None(UserDashboardAnnouncement, id=int(announcement_id))
+        else:
+            announcement = UserDashboardAnnouncement.get_next_for_user(self.request.user)
+        
+        welcome_screen_expired = self.request.user.date_joined < (now() - timedelta(days=getattr(settings, 'COSINNUS_V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS', 7)))
+        welcome_screen_enabled = getattr(settings, 'COSINNUS_V2_DASHBOARD_WELCOME_SCREEN_ENABLED', True)
+        
         options = {
             'ui_prefs': get_ui_prefs_for_user(self.request.user),
+            'force_only_mine': getattr(settings, 'COSINNUS_USERDASHBOARD_FORCE_ONLY_MINE', False) or \
+                                getattr(settings, 'COSINNUS_FORUM_DISABLED', False),
         }
         ctx = {
             'user_dashboard_options_json': json.dumps(options),
             'forum_group': forum_group,
             'note_form' : note_form,
+            'announcement': announcement,
+            'announcement_is_preview': announcement_is_preview,
+            'show_welcome_screen': welcome_screen_enabled and not welcome_screen_expired,
         }
         return ctx
 
@@ -100,8 +122,8 @@ class MyGroupsClusteredMixin(object):
     
     def get_group_clusters(self, user, sort_by_activity=False):
         clusters = []
-        projects = list(CosinnusProject.objects.get_for_user(user))
-        societies = list(CosinnusSociety.objects.get_for_user(user))
+        
+        # collect map of last visited groups
         group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
         if sort_by_activity:
             group_last_visited_qs = LastVisitedObject.objects.filter(user=user, content_type=group_ct, portal=CosinnusPortal.get_current())
@@ -111,35 +133,39 @@ class MyGroupsClusteredMixin(object):
             group_last_visited = {}
         default_date = now() - relativedelta(years=100)
         
-        class AttrList(list):
-            last_visited = None
+        # collect and sort user projects and societies lists
+        projects = list(CosinnusProject.objects.get_for_user(user))
+        societies = list(CosinnusSociety.objects.get_for_user(user))
+        # sort sub items by last_visited or name
+        if sort_by_activity:
+            projects = sorted(projects, key=lambda project: group_last_visited.get(project.id, default_date), reverse=True)
+            societies = sorted(societies, key=lambda society: group_last_visited.get(society.id, default_date), reverse=True)
+        else:
+            projects = sorted(projects, key=sort_key_strcoll_attr('name'))
+            societies = sorted(societies, key=sort_key_strcoll_attr('name'))
         
+        # sort projects into their societies clusters, society clusters are always displayed first
         for society in societies:
             if society.slug in get_default_user_group_slugs():
                 continue
             
             # the most recent visit time to any project or society in the cluster
             most_recent_dt = group_last_visited.get(society.id, default_date)
-            items = AttrList([DashboardItem(society, is_emphasized=True)])
+            items_projects = []
             for i in range(len(projects)-1, -1, -1):
                 project = projects[i]
                 if project.parent == society:
-                    items.append(DashboardItem(project))
+                    items_projects.insert(0, DashboardItem(project)) # prepend because of reversed order
                     projects.pop(i)
                     project_dt = group_last_visited.get(project.id, default_date)
                     most_recent_dt = project_dt if project_dt > most_recent_dt else most_recent_dt
-            items.last_visited = most_recent_dt
+            items = [DashboardItem(society, is_emphasized=True)] + items_projects
             clusters.append(items)
             
         # add unclustered projects as own cluster
         for proj in projects:
-            items = AttrList([DashboardItem(proj)])
-            items.last_visited = group_last_visited.get(proj.id, default_date)
+            items = [DashboardItem(proj)]
             clusters.append(items)
-        
-        # sort clusters by last_visited
-        if sort_by_activity:
-            clusters = sorted(clusters, key=lambda cluster: cluster.last_visited, reverse=True)
         
         return clusters
 
@@ -259,13 +285,12 @@ class ModelRetrievalMixin(object):
         return queryset
     
 
-class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
+class BasePagedOffsetWidgetView(BaseUserDashboardWidgetView):
     """ Shows BaseTaggable content for the user """
     
-    model = None
-    # if True: will show only content that the user has recently visited
-    # if False: will show all of the users content, sorted by creation date
-    show_recent = False
+    model = None # can be None, needs to be set in implementing widget view!
+    # the model field on which to cut off the timed offset from, needs to be set in implementing widget view!
+    offset_model_field = None
     
     default_page_size = 3
     min_page_size = 1
@@ -276,15 +301,6 @@ class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
     default_offset_timestamp = None
     
     def get(self, request, *args, **kwargs):
-        self.show_recent = kwargs.pop('show_recent', False)
-        
-        content = kwargs.pop('content', None)
-        if not content:
-            return HttpResponseBadRequest('No content type supplied')
-        self.model = SEARCH_MODEL_NAMES_REVERSE.get(content, None)
-        if not self.model:
-            return HttpResponseBadRequest('Unknown content type supplied: "%s"' % content)
-        
         self.page_size = int(request.GET.get('page_size', self.default_page_size))
         if not is_number(self.page_size):
             return HttpResponseBadRequest('Malformed parameter: "page_size": %s' % self.page_size)
@@ -296,32 +312,79 @@ class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
         if self.offset_timestamp is not None and isinstance(self.offset_timestamp, six.string_types):
             self.offset_timestamp = float(self.offset_timestamp)
         
-        return super(TypedContentWidgetView, self).get(request, *args, **kwargs)
+        self.set_options()
+        return super(BasePagedOffsetWidgetView, self).get(request, *args, **kwargs)
+    
+    def set_options(self):
+        """ Optional additional function to set some options for overriding views """
+        pass 
+    
+    def get_queryset(self):
+        """ Returns a queryset of sorted data """
+        return ImproperlyConfigured('Implement this function in your extending widget view!')
+    
+    def get_items_from_queryset(self, queryset):
+        """ Returns a list of converted item data from the queryset """
+        return ImproperlyConfigured('Implement this function in your extending widget view!')
     
     def get_data(self, **kwargs):
-        has_more = False
-        offset_timestamp = None
+        queryset = self.get_queryset()
         
+        # cut off at timestamp if given
+        if self.offset_timestamp:
+            offset_datetime = datetime_from_timestamp(self.offset_timestamp)
+            filter_exp = {'%s__lt' % self.offset_model_field: offset_datetime}
+            queryset = queryset.filter(**filter_exp)
+    
+        # calculate has_more and new offset timestamp
+        has_more = queryset.count() > self.page_size
+        queryset = queryset[:self.page_size]
+        
+        items = self.get_items_from_queryset(queryset)
+        queryset = list(queryset)
+        
+        last_offset_timestamp = None
+        if len(queryset) > 0:
+            last_offset_timestamp = timestamp_from_datetime(getattr(queryset[-1], self.offset_model_field))
+            
+        return {
+            'items': items,
+            'widget_title': self.model._meta.verbose_name_plural if self.model else None,
+            'has_more': has_more,
+            'offset_timestamp': last_offset_timestamp,
+        }
+
+
+class TypedContentWidgetView(ModelRetrievalMixin, BasePagedOffsetWidgetView):
+    """ Shows BaseTaggable content for the user """
+
+    model = None
+    # if True: will show only content that the user has recently visited
+    # if False: will show all of the users content, sorted by creation date
+    show_recent = False
+    
+    def get(self, request, *args, **kwargs):
+        self.show_recent = kwargs.pop('show_recent', False)
+        if self.show_recent:
+            self.offset_model_field = 'visited'
+        else:
+            self.offset_model_field = 'created'
+        
+        content = kwargs.pop('content', None)
+        if not content:
+            return HttpResponseBadRequest('No content type supplied')
+        self.model = SEARCH_MODEL_NAMES_REVERSE.get(content, None)
+        if not self.model:
+            return HttpResponseBadRequest('Unknown content type supplied: "%s"' % content)
+        
+        return super(TypedContentWidgetView, self).get(request, *args, **kwargs)
+    
+    def get_queryset(self):
         if self.show_recent:
             # showing "last-visited" content, ordering by visit datetime
             ct = ContentType.objects.get_for_model(self.model)
             queryset = LastVisitedObject.objects.filter(content_type=ct, user=self.request.user, portal=CosinnusPortal.get_current())
             queryset = queryset.order_by('-visited')
-            
-            # cut off at timestamp if given
-            if self.offset_timestamp:
-                offset_datetime = datetime_from_timestamp(self.offset_timestamp)
-                queryset = queryset.filter(visited__lt=offset_datetime)
-        
-            # calculate has_more and new offset timestamp
-            has_more = queryset.count() > self.page_size
-            queryset = queryset[:self.page_size]
-            # the `item_data` field already contains the JSON of `DashboardItem`
-            items = list(queryset.values_list('item_data', flat=True))
-            
-            queryset = list(queryset)
-            if len(queryset) > 0:
-                offset_timestamp = timestamp_from_datetime(queryset[-1].visited)
         else:
             # all content, ordered by creation date
             only_mine = True
@@ -329,29 +392,18 @@ class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
             queryset = self.fetch_queryset_for_user(self.model, self.request.user, sort_key=sort_key, only_mine=only_mine)
             if queryset is None:
                 return {'items':[], 'widget_title': '(error: %s)' % self.model.__name__}
-            
-            # cut off at timestamp if given
-            if self.offset_timestamp:
-                offset_datetime = datetime_from_timestamp(self.offset_timestamp)
-                queryset = queryset.filter(created__lt=offset_datetime)
-        
-            # calculate has_more and new offset timestamp
-            has_more = queryset.count() > self.page_size
-            queryset = list(queryset[:self.page_size])
-            if len(queryset) > 0:
-                offset_timestamp = timestamp_from_datetime(queryset[-1].created)
-            
-            items = [DashboardItem(item, user=self.request.user) for item in queryset]
-            
-        return {
-            'items': items,
-            'widget_title': self.model._meta.verbose_name_plural,
-            'has_more': has_more,
-            'offset_timestamp': offset_timestamp,
-        }
-
+        return queryset
+    
+    def get_items_from_queryset(self, queryset):
+        """ Returns a list of converted item data from the queryset """
+        if self.show_recent:
+            # the `item_data` field already contains the JSON of `DashboardItem`
+            items = list(queryset.values_list('item_data', flat=True))
+        else:
+            items = [DashboardItem(item, user=self.request.user) for item in list(queryset)]
+        return items
+    
 api_user_typed_content = TypedContentWidgetView.as_view()
-
 
 
 class TimelineView(ModelRetrievalMixin, View):
@@ -465,7 +517,7 @@ class TimelineView(ModelRetrievalMixin, View):
                 content_model = SEARCH_MODEL_NAMES_REVERSE.get(content_type, None)
                 if content_model is None:
                     if settings.DEBUG:
-                        raise ImproperlyConfigured('Could not find content model for timeline content type "%s"' % content_type)
+                        logger.warn('Could not find content model for timeline content type "%s"' % content_type)
                     continue
                 single_querysets.append(self._get_queryset_for_model(content_model))
                 

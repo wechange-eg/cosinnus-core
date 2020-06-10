@@ -8,6 +8,7 @@ import os
 import re
 import six
 
+from django.contrib.postgres.fields.jsonb import JSONField as PostgresJSONField
 from django.contrib.sites.models import Site
 from django.core.cache import cache
 from django.core.exceptions import ValidationError, ImproperlyConfigured
@@ -27,7 +28,7 @@ from cosinnus.utils.functions import unique_aware_slugify,\
 from cosinnus.utils.files import get_group_avatar_filename,\
     get_portal_background_image_filename, get_group_wallpaper_filename,\
     get_cosinnus_media_file_folder, get_group_gallery_image_filename,\
-    image_thumbnail, image_thumbnail_url
+    image_thumbnail, image_thumbnail_url, get_image_url_for_icon
 from django.urls import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
@@ -540,6 +541,9 @@ class CosinnusPortal(models.Model):
     extra_css = models.TextField(_('Extra CSS'), help_text=_('Extra CSS for this portal, will be applied after all other styles.'),
         blank=True, null=True)
     
+    video_conference_server = models.URLField(_('Video Conference Server'), max_length=250, blank=True, null=True,
+        help_text=_('If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended.'))
+    
     # exact time when last digest was sent out for each of the period settings
     SAVED_INFO_LAST_DIGEST_SENT = 'last_digest_sent_for_period_%d'
         
@@ -651,7 +655,13 @@ class CosinnusPortal(models.Model):
         if not os.path.isfile(os.path.join(self._get_static_folder(), 'css', self._CUSTOM_CSS_FILENAME % self.slug)):
             self.compile_custom_stylesheet()
         return 'css/' + self._CUSTOM_CSS_FILENAME % self.slug
-        
+    
+    @property
+    def video_conference_server_url(self):
+        if self.video_conference_server:
+            return '%s%s-videochat' % (self.video_conference_server, CosinnusPortal.get_current().name)
+        return None
+    
 
 @python_2_unicode_compatible
 class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin, 
@@ -725,6 +735,11 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     call_to_action_description = models.TextField(verbose_name=_('Call to Action Box Description'), 
         blank=True, null=True)
     
+    # a field that can contain HTML to be embedded into the group dashboard (visible for members only)
+    embedded_dashboard_html = models.TextField(verbose_name=_('Embedded Dashboard HTML'),
+         help_text='A field with custom HTML that will be shown to all group members on the group dashboard',
+         blank=True, null=True)
+    
     # a comma-seperated list of all cosinnus apps that should not be shown in the frontend, 
     # be editable, or be indexed by search indices for this group
     deactivated_apps = models.CharField(_('Deactivated Apps'), max_length=255, 
@@ -740,6 +755,15 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     facebook_page_id = models.CharField(_('Facebook Page ID'), max_length=200, 
         blank=True, null=True, validators=[MaxLengthValidator(200)])
     
+    nextcloud_group_id = models.CharField(_('Nextcloud Group ID'), max_length=250,
+        unique=True, blank=True, null=True, validators=[MaxLengthValidator(250)])
+    nextcloud_groupfolder_name = models.CharField(_('Nextcloud Groupfolder Name'), max_length=250,
+        unique=True, blank=True, null=True, validators=[MaxLengthValidator(250)],
+        help_text='The literal groupfolder name. This is initially the same as the group id, but can differ later. Set before the groupfolder is created.')
+    nextcloud_groupfolder_id = models.PositiveIntegerField(_('Nextcloud Groupfolder ID'),
+        unique=True, blank=True, null=True,
+        help_text='The boolean internal nextcloud id for the groupfolder. Only set once a groupfolder is created.')
+    
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
     related_groups = models.ManyToManyField("self", 
@@ -752,6 +776,8 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     # this indicates that objects of this model are in some way always visible by registered users
     # on the platform, no matter their visibility settings, and thus subject to moderation 
     cosinnus_always_visible_by_users_moderator_flag = True
+
+    settings = PostgresJSONField(default=dict, blank=True, null=True)
     
     objects = CosinnusGroupManager()
     
@@ -851,7 +877,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         
         if created:
             # send creation signal
-            signals.group_object_ceated.send(sender=self, group=self)
+            signals.group_object_created.send(sender=self, group=self)
     
     
     def delete(self, *args, **kwargs):
@@ -930,13 +956,18 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         return qs
     
     def get_admin_contact_url(self):
-        subject = _('Request about your project "%(group_name)s"') if self.type == self.TYPE_PROJECT else _('Request about your group "%(group_name)s"')
-        subject = subject % {'group_name': self.name} 
-        return '%s?subject=%s&next=%s' % (
-            reverse('postman:write', kwargs={'recipients': ':'.join([user.username for user in self.actual_admins])}), 
-            subject,
-            reverse('postman:sent')
-        )
+        if 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
+            return ''
+        if settings.COSINNUS_ROCKET_ENABLED:
+            return reverse('cosinnus:message-write-group', kwargs={'slug': self.slug})
+        else:
+            subject = _('Request about your project "%(group_name)s"') if self.type == self.TYPE_PROJECT else _('Request about your group "%(group_name)s"')
+            subject = subject % {'group_name': self.name}
+            return '%s?subject=%s&next=%s' % (
+                reverse('postman:write', kwargs={'recipients': ':'.join([user.username for user in self.actual_admins])}),
+                subject,
+                reverse('postman:sent')
+            )
     
     @classmethod
     def _clear_cache(self, slug=None, slugs=None, group=None):
@@ -998,6 +1029,22 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         for instance in self.get_all_objects_for_group():
             instance.remove_index()
     
+    def get_icon(self):
+        """ Returns the font-awesome icon specific to the group type """
+        return 'fa-group' if self.type == self.TYPE_PROJECT else 'fa-sitemap'
+    
+    def get_group_label(self):
+        """ Returns the vocal name of the group, depending on type """
+        return _('Project') if self.type == self.TYPE_PROJECT else _('Group')
+    
+    def get_group_menu_label(self):
+        """ Returns the vocal name of the group menu, depending on type """
+        return _('Project Menu') if self.type == self.TYPE_PROJECT else _('Group Menu')
+    
+    def get_group_dashboard_label(self):
+        """ Returns the vocal name of the group dashboard, depending on type """
+        return _('Project Dashboard') if self.type == self.TYPE_PROJECT else _('Group Dashboard')
+    
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
@@ -1006,10 +1053,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         return image_thumbnail(self.avatar, size)
 
     def get_avatar_thumbnail_url(self, size=(80, 80)):
-        return image_thumbnail_url(self.avatar, size) or static('images/group-avatar-placeholder-small.png')
+        return image_thumbnail_url(self.avatar, size) or get_image_url_for_icon(self.get_icon(), large=True)
     
     def get_image_field_for_icon(self):
-        return self.avatar or static('images/group-avatar-placeholder.png')
+        return self.avatar or get_image_url_for_icon(self.get_icon(), large=True)
     
     def get_image_field_for_background(self):
         return self.wallpaper
@@ -1270,6 +1317,11 @@ class CosinnusGroupMembership(BaseGroupMembership):
         changed_to_membership = bool(not created and self._status not in MEMBER_STATUS and self.status in MEMBER_STATUS)
         if created_as_membership or changed_to_membership:
             signals.user_joined_group.send(sender=self, user=self.user, group=self.group)
+    
+    def delete(self, *args, **kwargs):
+        """ Checks and fires `user_left_group` signal if a user has hereby left this group """
+        super(CosinnusGroupMembership, self).delete(*args, **kwargs)
+        signals.user_left_group.send(sender=self.group, user=self.user, group=self.group)
     
 
 class CosinnusPortalMembership(BaseGroupMembership):

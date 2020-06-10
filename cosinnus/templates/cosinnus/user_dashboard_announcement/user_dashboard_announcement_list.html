@@ -1,0 +1,69 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+    {% trans "User Dashboard Announcements" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li class="active">{% trans "User Dashboard Announcements" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/administration/leftnav.html" %}
+{% endblock leftnav %}
+
+{% block content %}
+    <div class="alert alert-success">
+        <i class="fa fa-info-circle fa-3x"></i>
+        <h4>{% trans "User Dashboard Announcements" %}</h4>
+        <div class="v-offset-s">
+            <p>
+                {% trans "User Dashboard Announcements are sticky posts that appear on top of each user's personal Dashboard." %}
+            </p>
+            <ul>
+                <li>
+                    {% trans "An announcement will only appear during its valid-time frame." %}
+                </li>
+                <li>
+                    {% trans "Only one announcement at a time will ever be shown to a user." %}
+                </li>
+                <li>
+                    {% trans "If the user still has not hidden their introduction-message on the dashboard, they will not see any announcements." %}
+                </li>
+                <li>
+                    {% trans "A user can dismiss an announcement, in which case it will disappear and never be shown again. On the next visit to their Dashboard, another valid announcement they have not yet hidden may be shown." %}
+                </li>
+                <li>
+                    {% trans "Only one announcement at a time will ever be shown to a user." %}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <button type="button" href="{% url "cosinnus:user-dashboard-announcement-create" %}" class="btn btn-emphasized btn-autosize" title="{% trans "Create Announcement" %}">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-plus"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Create Announcement" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    <div class="clearfix"></div>
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box large-space">
+    
+        {% for announcement in object_list %}
+            {% include 'cosinnus/user_dashboard_announcement/list_object.html' with object=announcement %}
+        {% empty %}
+            {% trans "There are no announcements yet." as empty_message %}
+            {% include 'cosinnus/common/empty_button.html' with message=empty_message %}
+        {% endfor %}
+    </div><!-- content-box -->
+{% endblock content %}

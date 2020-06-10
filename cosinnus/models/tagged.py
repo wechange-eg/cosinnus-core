@@ -39,6 +39,7 @@ from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 
 import logging
+from cosinnus.utils.dates import timestamp_from_datetime
 
 logger = logging.getLogger('cosinnus')
 
@@ -380,6 +381,7 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         related_name='+',
         help_text='The user which caused the last significant action to update the `last_action` datetime.')
 
+    settings = JSONField(default=dict, blank=True, null=True)
 
     class Meta(object):
         abstract = True
@@ -461,6 +463,9 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         """ Similar to get_absolute_url, this returns the URL for this object's implemented delete view.
             Needs to be set by a specific implementation of BaseTaggableObjectModel """
         raise ImproperlyConfigured("The get_delete_url function must be implemented for model '%s'" % self.__class__)
+
+    def get_cosinnus_app(self):
+        return self.__class__.__module__.split('.')[0]
     
     def get_cosinnus_app_name(self):
         return app_registry.get_name(self.__class__.__module__.split('.')[0])
@@ -487,6 +492,11 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
             self.last_action_user = last_action_user
         if save:
             self.save()
+    
+    @property    
+    def secret_from_created(self):
+        """ Returns an (unsafe) secret id based on the created date timestamp """
+        return str(timestamp_from_datetime(self.created)).replace('.', '')
         
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):

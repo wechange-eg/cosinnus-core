@@ -74,7 +74,9 @@ class CosinnusConf(AppConf):
             'cosinnus_poll.Poll',
             'cosinnus_event.Event',
         ],
-      'postman.Message': [
+    }
+    if not settings.COSINNUS_ROCKET_ENABLED:
+        ATTACHABLE_OBJECTS['postman.Message'] = [
             'cosinnus_file.FileEntry',
             'cosinnus_todo.TodoEntry',
             'cosinnus_etherpad.Etherpad',
@@ -82,8 +84,7 @@ class CosinnusConf(AppConf):
             'cosinnus_poll.Poll',
             'cosinnus_event.Event',
             'cosinnus_marketplace.Offer',
-        ],
-    }
+        ]
     
     # Configures by which search terms each Attachable Model can be match-restricted in the select 2 box
     # Each term will act as an additional restriction on search objects. Subterms of these terms will be matched!
@@ -145,11 +146,12 @@ class CosinnusConf(AppConf):
     APPS_MENU_ORDER = [
         'cosinnus_note',
         'cosinnus_event',
-        'cosinnus_poll',
+        'cosinnus_marketplace',
         'cosinnus_todo',
+        'cosinnus_poll',
         'cosinnus_etherpad',
         'cosinnus_file',
-        'cosinnus_marketplace',
+        'cosinnus_cloud',
     ]
     
     # a list of groups slugs for a portal, that do not require the group
@@ -161,6 +163,10 @@ class CosinnusConf(AppConf):
     # and no user that hasn't got a device set up can gain access.
     # Set up at least one device at <host>/admin/otp_totp/totpdevice/ before activating this setting!
     ADMIN_2_FACTOR_AUTH_ENABLED = False
+    
+    # if True while `ADMIN_2_FACTOR_AUTH_ENABLED` is enabled, will force 2-factor-authentication
+    # for superusers and portal on the ENTIRE site, and not only on the /admin/ backend
+    ADMIN_2_FACTOR_AUTH_STRICT_MODE = False
     
     # enable this to sign up new members to a cleverreach newsletter group
     CLEVERREACH_AUTO_SIGNUP_ENABLED = False
@@ -206,6 +212,9 @@ class CosinnusConf(AppConf):
     # the notification setting for groups when user newly join them (3: weekly)
     DEFAULT_GROUP_NOTIFICATION_SETTING = 3
     
+    # the global notification setting for users on the plattform (3: weekly)
+    DEFAULT_GLOBAL_NOTIFICATION_SETTING = 3
+    
     # default setting for notifications for followed objects
     DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING = 2 # SETTING_DAILY = 2
     
@@ -215,6 +224,17 @@ class CosinnusConf(AppConf):
     # a list of cosinnus apps that are installed but are disabled for the users, e.g. ['cosinnus_marketplace', ]
     # (they are still admin accessible)
     DISABLED_COSINNUS_APPS = []
+    
+    # a list of which app checkboxes should be default-active on the create group form
+    DEFAULT_ACTIVE_GROUP_APPS = [
+        'cosinnus_etherpad',
+        'cosinnus_event',
+        'cosinnus_file',
+        'cosinnus_marketplace',
+        'cosinnus_note',
+        'cosinnus_poll',
+        'cosinnus_todo',
+    ]
     
     # should the facebook integration scripts and templates be loaded?
     FACEBOOK_INTEGRATION_ENABLED = False
@@ -266,6 +286,9 @@ class CosinnusConf(AppConf):
     # how long should user notification settings be retained in cache
     GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT = GROUP_CACHE_TIMEOUT
     
+    # sets if live notification alerts are enabled
+    NOTIFICATION_ALERTS_ENABLED = False
+    
     # how long like and follow counts should be retained in cache
     LIKEFOLLOW_COUNT_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
@@ -273,7 +296,7 @@ class CosinnusConf(AppConf):
     GROUP_PLURAL_URL_PATH = 'projects'
     
     # number of members displayed in the group widet
-    GROUP_MEMBER_WIDGET_USER_COUNT = 15
+    GROUP_MEMBER_WIDGET_USER_COUNT = 19
     
     # widgets listed here will be created for the group dashboard upon CosinnusGroup creation.
     # this. will check if the cosinnus app is installed and if the widget is registered, so
@@ -284,6 +307,7 @@ class CosinnusConf(AppConf):
         ("event", "upcoming", {'amount':'5', 'sort_field':'2'}),
         ("todo", "mine", {'amount':'5', 'amount_subtask':'2', 'sort_field':'3'}),
         ("etherpad", "latest", {'amount':'5', 'sort_field':'4'}),
+        ("cloud", "latest", {'amount':'5', 'sort_field':'4'}),
         ("file", "latest", {'sort_field':'5', 'amount':'5'}),
         ("poll", "current", {'sort_field':'6', 'amount':'5'}),
         ("marketplace", "current", {'sort_field':'7', 'amount':'5'}),
@@ -446,6 +470,9 @@ class CosinnusConf(AppConf):
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False
     
+    # switch whether non-logged in users may access microsites
+    MICROSITES_DISABLE_ANONYMOUS_ACCESS = False
+    
     # the default setting used when a group has no microsite_public_apps setting set
     # determines which apps public objects are shown on a microsite
     # e.g: ['cosinnus_file', 'cosinnus_event', ]
@@ -485,6 +512,9 @@ class CosinnusConf(AppConf):
     
     # if set to True, private groups will be shown in group lists, even for non-logged in users
     SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS = True
+    
+    # shows any (MS1)-like context IDs in trans texts when rendered into templates
+    SHOW_TRANSLATED_CONTEXT_IDS = False
     
     # if the app that includes has swappable models, it needs to either have all swappable definitions
     # in its initial migration or define a migration from within its app where all swappable models
@@ -556,12 +586,19 @@ class CosinnusConf(AppConf):
     # when users newly register, are their profiles marked as visible rather than private on the site?
     USER_DEFAULT_VISIBLE_WHEN_CREATED = True
     
-    # should regular, non-admin users be allowed to create Groups as well?
+    # should regular, non-admin users be allowed to create Groups (Societies) as well?
     # if False, users can only create Projects 
     USERS_CAN_CREATE_GROUPS = False
     
+    # if set to True, regular non-portal admin users can not create projects and groups by themselves
+    # and some elements like the "+" button in the navbar is hidden
+    LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS = False
+    
     # will the `profile.may_be_contacted` be shown in forms and detail views?
     USER_SHOW_MAY_BE_CONTACTED_FIELD = False
+    
+    # if True, any user joining a group will also automatically follow it
+    USER_FOLLOWS_GROUP_WHEN_JOINING = True
     
     # Temporary setting for the digest test phase.
     # set to ``False`` once testing is over
@@ -590,6 +627,12 @@ class CosinnusConf(AppConf):
     # should the dashboard show marketplace offers, both as widgets and in the timeline?
     V2_DASHBOARD_SHOW_MARKETPLACE = False
     
+    # should the user dashboard welcome screen be shown?
+    V2_DASHBOARD_WELCOME_SCREEN_ENABLED = True
+    
+    # default duration for which the welcome screen should be shown on the user dashboard, unless clicked aways
+    V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS = 7
+    
     # in v2, the footer is disabled by default. set this to True to enable it!
     V2_FORCE_SITE_FOOTER = False
     
@@ -603,6 +646,49 @@ class CosinnusConf(AppConf):
     
     # if True, payment urls and views will be enabled
     PAYMENTS_ENABLED = False
+    # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins
+    PAYMENTS_ENABLED_ADMIN_ONLY = False
+    
+    # whether to enable the cosinnus cloud app
+    CLOUD_ENABLED = False
+        
+    # base url of the nextcloud service, without trailing slash
+    CLOUD_NEXTCLOUD_URL = None
+    # admin user for the nextcloud api
+    CLOUD_NEXTCLOUD_ADMIN_USERNAME = None
+    # admin authorization (name, password)
+    CLOUD_NEXTCLOUD_AUTH = (None, None)
+    # base for the groupfolders app
+    CLOUD_NEXTCLOUD_GROUPFOLDER_BASE = None
+    
+    # URL for the iframe/tab leading to a specific group folder (with leading slash)
+    CLOUD_GROUP_FOLDER_IFRAME_URL = '/apps/files/?dir=/%(group_folder_name)s'
+    # whether all cloud links should open with target="_blank"
+    CLOUD_OPEN_IN_NEW_TAB = True
+    # whether to prefix all nextcloud group folders with "Projekt" or "Gruppe"
+    CLOUD_PREFIX_GROUP_FOLDERS = True
+    # the quota for groupfolders, in bytes. -3 is the default for "unlimited"
+    CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA = -3
+    # timeout for nextcloud webdav requests in seconds
+    CLOUD_NEXTCLOUD_REQUEST_TIMEOUT = 15
+    
+    # if set to a hex color string,
+    # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
+    FORUM_GROUP_CUSTOM_BACKGROUND = None
+    
+    # if set to True, will hide some UI elements in navbar and dashboard and change some redirects
+    FORUM_DISABLED = False
+    
+    # if set to True, will hide the userdashboard timeline controls and force the 
+    # "only show content from my projects and groups" option 
+    USERDASHBOARD_FORCE_ONLY_MINE = False
+    
+    GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED = False
+    
+    # enable e-mail downloads of newsletter-enabled users in the administration area
+    # if enabled, this allows all portal-admins to download user emails, this might be
+    # *VERY* risky, so use cautiously
+    ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS = False
     
 
 class CosinnusDefaultSettings(AppConf):

@@ -15,7 +15,7 @@ from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
     OrganisationViewSet, UserView
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
-    user_dashboard, ui_prefs, administration, organization
+    user_dashboard, ui_prefs, administration, organization, user_dashboard_announcement
 from cosinnus_event.api.views import EventViewSet
 from django_otp.views import LoginView
 
@@ -66,12 +66,14 @@ urlpatterns = [
     url(r'^join/(?P<token>[^/]+)/$', user.group_invite_token_view, name='group-invite-token'),
     
     url(r'^account/report/$', feedback.report_object, name='report-object'),
+    url(r'^account/accept_tos/$', user.accept_tos, name='accept-tos'),
     url(r'^account/accept_updated_tos/$', user.accept_updated_tos, name='accept-updated-tos'),
     
     url(r'^administration/approve_user/(?P<user_id>\d+)/$', user.approve_user, name='user-approve'),
     url(r'^administration/deny_user/(?P<user_id>\d+)/$', user.deny_user, name='user-deny'),
     url(r'^administration/verify_email/(?P<email_verification_param>[^/]+)/$', user.verifiy_user_email, name='user-verifiy-email'),
     url(r'^administration/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', user.add_email_to_blacklist, name='user-add-email-blacklist'),
+    url(r'^administration/list-unsubscribe-result/$', user.add_email_to_blacklist_result, name='user-add-email-blacklist-result'),
     url(r'^administration/deactivated/$', group.group_list_mine_deactivated, name='deactivated-groups'),
     url(r'^administration/activate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-activate', kwargs={'activate': True}),
     url(r'^administration/deactivate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-deactivate', kwargs={'activate': False}),
@@ -80,12 +82,18 @@ urlpatterns = [
     # these URLs belong to the frontend administration area for superusers
     url(r'^administration/$', administration.administration, name='administration'),
     url(r'^administration/welcome_email/$', administration.welcome_email_edit, name='administration-welcome-email'),
-    
+    url(r'^administration/announcements/$', user_dashboard_announcement.list_view, name='user-dashboard-announcement-list'),
+    url(r'^administration/announcements/add/$', user_dashboard_announcement.user_dashboard_announcement_create, name='user-dashboard-announcement-create'),
+    url(r'^administration/announcement/(?P<slug>[^/]+)/edit/$', user_dashboard_announcement.user_dashboard_announcement_edit, name='user-dashboard-announcement-edit'),
+    url(r'^administration/announcement/(?P<slug>[^/]+)/delete/$', user_dashboard_announcement.user_dashboard_announcement_delete, name='user-dashboard-announcement-delete'),
+    url(r'^administration/announcement/(?P<slug>[^/]+)/activate-toggle/$', user_dashboard_announcement.user_dashboard_announcement_activate, name='user-dashboard-announcement-activate'),
+
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     
     #url(r'^housekeeping/$', housekeeping.housekeeping, name='housekeeping'),
-    url(r'^housekeeping/fillexternaldata/$', housekeeping.fill_external_data),
-    url(r'^housekeeping/newsletterusers/$', housekeeping.newsletter_users),
+    url(r'^housekeeping/fillexternaldata/$', housekeeping.fill_external_data, name='housekeeping-fill-external-data'),
+    url(r'^housekeeping/newsletterusers/$', housekeeping.newsletter_users, name='housekeeping-newsletter-user-emails'),
+    url(r'^housekeeping/activeuseremails/$', housekeeping.active_user_emails, name='housekeeping-active-user-emails'),
     url(r'^housekeeping/deletespamusers/$', housekeeping.delete_spam_users, name='housekeeping_delete_spam_users'),
     url(r'^housekeeping/movegroupcontent/(?P<fromgroup>[^/]+)/(?P<togroup>[^/]+)/$', housekeeping.move_group_content, name='housekeeping_move_group_content'),
     url(r'^housekeeping/recreategroupwidgets/$', housekeeping.recreate_all_group_widgets, name='housekeeping_recreate_all_group_widgets'),
@@ -104,11 +112,18 @@ urlpatterns = [
     url(r'^housekeeping/group_storage_report/', housekeeping.group_storage_report_csv, name='housekeeping-group-storage-report'),
     url(r'^housekeeping/project_storage_report/', housekeeping.project_storage_report_csv, name='housekeeping-project-storage-report'),
     url(r'^housekeeping/user_activity_info/', housekeeping.user_activity_info, name='housekeeping-user-activity-info'),
-    
+    url(r'^housekeeping/group_admin_emails/(?P<slugs>[^/]+)/', housekeeping.group_admin_emails, name='housekeeping-group-admin-emails'),
+
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
 
 if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False):
+    if getattr(settings, 'COSINNUS_CLOUD_ENABLED', False):
+        import cosinnus_cloud.views as cosinnus_cloud_views # noqa
+        urlpatterns += [
+            url(r'^dashboard/api/user_typed_content/cloud_files/$', cosinnus_cloud_views.api_user_cloud_files_content, name='user-dashboard-api-typed-content-cloud'),
+            url(r'^dashboard/api/user_typed_content/recent/cloud_files/$', cosinnus_cloud_views.api_user_cloud_files_content, name='user-dashboard-api-typed-content-cloud', kwargs={'show_recent':True}),
+        ]
     urlpatterns += [
         url(r'^dashboard/$', user_dashboard.user_dashboard_view, name='user-dashboard'),
         url(r'^dashboard/api/user_groups/$', user_dashboard.api_user_groups, name='user-dashboard-api-groups'),
@@ -203,12 +218,15 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/withdraw/$' % url_key, group.group_user_withdraw, name=prefix+'group-user-withdraw'),
         url(r'^%s/(?P<group>[^/]+)/decline/$' % url_key, group.group_user_invitation_decline, name=prefix+'group-user-decline'),
         url(r'^%s/(?P<group>[^/]+)/accept/$' % url_key, group.group_user_invitation_accept, name=prefix+'group-user-accept'),
-        
+        url(r'^%s/(?P<group>[^/]+)/activate-app/$' % url_key, group.group_activate_app, name=prefix+'group-activate-app'),
+
         url(r'^%s/(?P<group>[^/]+)/users/$' % url_key, group.group_user_list, name=prefix+'group-user-list'),
         url(r'^%s/(?P<group>[^/]+)/users/add/$' % url_key, group.group_user_add, name=prefix+'group-user-add-generic'),
+        url(r'^%s/(?P<group>[^/]+)/users/add-multiple/$' % url_key, group.group_user_add_multiple, name=prefix+'group-user-add-multiple'),
         url(r'^%s/(?P<group>[^/]+)/users/add/(?P<username>[^/]+)/$' % url_key, group.group_user_add, name=prefix+'group-user-add'),
         url(r'^%s/(?P<group>[^/]+)/users/delete/(?P<username>[^/]+)/$' % url_key, group.group_user_delete, name=prefix+'group-user-delete'),
         url(r'^%s/(?P<group>[^/]+)/users/edit/(?P<username>[^/]+)/$' % url_key, group.group_user_update, name=prefix+'group-user-edit'),
+        url(r'^%s/(?P<group>[^/]+)/users/member-invite-select2/$' % url_key, group.user_group_member_invite_select2, name=prefix+'group-member-invite-select2'),
         url(r'^%s/(?P<group>[^/]+)/export/$' % url_key, group.group_export, name=prefix+'group-export'),
     
         url(r'^%s/(?P<group>[^/]+)/widgets/add/$' % url_key, widget.widget_add_group, name=prefix+'widget-add-group-empty'),
@@ -227,9 +245,14 @@ router.register(r'projects', CosinnusProjectViewSet)
 router.register(r'organisation', OrganisationViewSet)
 router.register(r'event', EventViewSet)
 
+if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
+    from cosinnus_message.api.views import MessageExportView
+    urlpatterns += [
+        url(r'api/v2/rocket-export/', MessageExportView.as_view()),
+    ]
+
 urlpatterns += [
     url(r'^o/me/', UserView.as_view()),
-    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url(r'api/v2/docs/', get_swagger_view()),
     url(r'api/v2/', include(router.urls)),
 ]

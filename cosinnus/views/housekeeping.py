@@ -28,17 +28,21 @@ import datetime
 from cosinnus.models.tagged import BaseTagObject
 import random
 from django.utils.timezone import now
-from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.user import filter_active_users, accept_user_tos_for_portal,\
+    get_user_tos_accepted_date
 from cosinnus.models.profile import get_user_profile_model
 from django.core.mail.message import EmailMessage
 from cosinnus.core.mail import send_mail_or_fail, send_mail,\
-    send_mail_or_fail_threaded
+    send_mail_or_fail_threaded, send_html_mail_threaded
 from django.template.defaultfilters import linebreaksbr
 from django.db.models.aggregates import Count
 from cosinnus.utils.http import make_csv_response
 from operator import itemgetter
-from dateutil import parser
 from cosinnus.utils.permissions import check_user_can_receive_emails
+import logging
+from cosinnus.templatetags.cosinnus_tags import textfield
+
+logger = logging.getLogger('cosinnus')
 
 import logging
 from cosinnus.external.models import ExternalProject
@@ -316,8 +320,7 @@ def create_map_test_entities(request=None, count=1):
         user = get_user_model().objects.create(username='mapuser%d' % usernum, first_name='MapUser #%d' % usernum,
             email='testuser%d@nowhere.com' % usernum, is_active=True, last_login=now())
         CosinnusPortalMembership.objects.create(group=CosinnusPortal.get_current(), user=user, status=1)
-        user.cosinnus_profile.settings['tos_accepted'] = 'true'
-        user.cosinnus_profile.save()
+        accept_user_tos_for_portal(user)
         event = Event.objects.create(group=proj, creator=user, title='MapEvent #%d' % eventnum, note='Test description', 
             state=1, from_date=datetime.datetime(2099, 1, 1), to_date=datetime.datetime(2099, 1, 3))
         
@@ -372,16 +375,16 @@ def send_testmail(request):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     mode = request.GET.get('mode', None)
-    if mode not in ['or_fail', 'direct', 'direct_html', 'threaded', 'override']:
-        mode = 'or_fail'
+    if mode not in ['html', 'direct', 'direct_html', 'threaded', 'override']:
+        mode = 'html'
     
     subject =  mode + ': Testmail from Housekeeping at %s' % str(now())
     template = 'cosinnus/common/internet_explorer_not_supported.html'
-    retmsg = '\n\n<br><br> Use ?mode=[or_fail, direct, direct_html, threaded, override]\n\nThe Answer was: '
+    retmsg = '\n\n<br><br> Use ?mode=[html, direct, direct_html, threaded, override]\n\nThe Answer was: '
     
-    if mode == 'or_fail':
-        retmsg += force_text(send_mail_or_fail(request.user.email, subject, template, {}))
-        return HttpResponse('Sent mail using or_fail mode. ' + retmsg)
+    if mode == 'html':
+        retmsg += force_text(send_html_mail_threaded(request.user, subject, textfield('This is a test mail from housekeeping.')))
+        return HttpResponse('Sent mail using html mode. ' + retmsg)
     if mode == 'direct':
         retmsg += force_text(send_mail(request.user.email, subject, template, {}))
         return HttpResponse('Sent mail using direct mode. ' + retmsg)
@@ -489,7 +492,7 @@ def user_activity_info(request):
     portal = CosinnusPortal.get_current()
     for membership in CosinnusGroupMembership.objects.filter(group__portal=CosinnusPortal.get_current(), user__is_active=True).exclude(user__last_login__exact=None):
         user = membership.user
-        user_row = users.get(user.id, [0, 0, 0, 0, (now()-user.last_login).days, 1])
+        user_row = users.get(user.id, [0, 0, 0, 0, (now()-user.last_login).days, 1, user.date_joined])
         user_row[0] += 1
         if membership.group.type == CosinnusGroup().TYPE_PROJECT:
             user_row[1] +=1 
@@ -497,31 +500,69 @@ def user_activity_info(request):
             user_row[2] +=1 
         if membership.status == MEMBERSHIP_ADMIN:
             user_row[3] += 1
-        tos_accepted_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
-        if portal.tos_date.year > 2000 and (tos_accepted_date is None or parser.parse(tos_accepted_date) < portal.tos_date):
+        tos_accepted_date = get_user_tos_accepted_date(user)
+        if portal.tos_date.year > 2000 and (tos_accepted_date is None or tos_accepted_date < portal.tos_date):
             user_row[5] = 0
         
         users[membership.user.id] = user_row
     
     rows = users.values()
     rows = sorted(rows, key=lambda row: row[0], reverse=True)
-    headers = ['projects-and-groups-count', 'groups-only-count', 'projects-only-count', 'admin-of-projects-and-groups-count', 'user-last-login-days', 'current-tos-accepted']
+    headers = ['projects-and-groups-count', 'groups-only-count', 'projects-only-count', 'admin-of-projects-and-groups-count', 'user-last-login-days', 'current-tos-accepted', 'registration-date']
 
     #prints += '<br/>'.join([','.join((str(cell) for cell in row)) for row in rows])
     #return HttpResponse(prints)
     return make_csv_response(rows, headers, 'user-activity-report')
 
 
-def newsletter_users(request):
+def newsletter_users(request, includeOptedOut=False, file_name='newsletter-user-emails'):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
+    if not getattr(settings, 'COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS', False):
+        return HttpResponseForbidden('This Feature is currently not enabled!')
     
-    user_mails = []
+    result_columns = [['email', 'firstname', 'lastname', 'registration_timestamp', 'language'],]
     portal = CosinnusPortal.get_current()
     for membership in CosinnusPortalMembership.objects.filter(
             group=portal, user__is_active=True).exclude(user__last_login__exact=None).\
             prefetch_related('user'):
         user = membership.user
-        if check_user_can_receive_emails(user) and user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True:
-            user_mails.append([user.email])
-    return make_csv_response(user_mails, file_name='newsletter-user-emails')
+        if check_user_can_receive_emails(user) and (includeOptedOut or user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True):
+            row = [user.email, user.first_name, user.last_name, user.date_joined, user.cosinnus_profile.language]
+            result_columns.append(row)
+    return make_csv_response(result_columns, file_name=file_name)
+
+def active_user_emails(request):
+    return newsletter_users(request, includeOptedOut=True, file_name='active-user-emails')
+
+
+def group_admin_emails(request, slugs):
+    """ For a comma-seperated list of group slugs, return a CSV of all emails
+        of all admins of the groups.
+        Will only return emails of users who CAN receive emails and
+        who want to receive the newsletter """
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+        
+    slugs = slugs.split(',')
+    slugs = [slug.strip() for slug in slugs if len(slug.strip()) > 0]
+    
+    user_mails = []
+    file_name='group-admin-user-emails'
+    includeOptedOut = request.GET.get('includeOptedOut', False) == '1'
+    portal = CosinnusPortal.get_current()
+    memberships = CosinnusGroupMembership.objects.filter(
+            group__portal=portal, 
+            group__slug__in=slugs,
+            status=MEMBERSHIP_ADMIN,
+            user__is_active=True
+        ).exclude(user__last_login__exact=None).prefetch_related('user')
+    
+    for membership in memberships:
+        user = membership.user
+        if check_user_can_receive_emails(user) and (includeOptedOut or user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True):
+            user_mails.append(user.email)
+    user_mails = list(set(user_mails))
+    user_mails = [[user_mail] for user_mail in user_mails]
+    
+    return make_csv_response(user_mails, file_name=file_name)

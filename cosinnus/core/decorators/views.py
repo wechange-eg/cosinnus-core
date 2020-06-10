@@ -175,6 +175,25 @@ def require_logged_in():
     return decorator
 
 
+def require_superuser():
+    """A method decorator that checks that the requesting user is a superuser (admin or portal admin)
+    """
+
+    def decorator(function):
+        @functools.wraps(function, assigned=available_attrs(function))
+        def wrapper(self, request, *args, **kwargs):
+            user = request.user
+            
+            if not user.is_authenticated:
+                return redirect_to_not_logged_in(request, view=self)
+            if not check_user_superuser(user):
+                return HttpResponseForbidden()
+            
+            return function(self, request, *args, **kwargs)
+            
+        return wrapper
+    return decorator
+
 
 def dispatch_group_access(group_url_kwarg='group', group_attr='group'):
     """A method decorator that takes the group name from the kwargs of a

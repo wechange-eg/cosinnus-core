@@ -22,7 +22,8 @@ from cosinnus.core.decorators.views import membership_required, redirect_to_403,
     dispatch_group_access, get_group_for_request
 from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import MembershipForm, CosinnusLocationForm,\
-    CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm
+    CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm,\
+    MultiUserSelectForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusPortal, CosinnusLocation,
     CosinnusGroupGalleryImage, MEMBERSHIP_INVITED_PENDING,
@@ -53,14 +54,16 @@ from django.shortcuts import redirect, get_object_or_404
 from django.http.response import Http404, HttpResponseNotAllowed,\
     HttpResponseBadRequest
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser,\
-    check_object_read_access, check_ug_membership, check_object_write_access
+    check_object_read_access, check_ug_membership, check_object_write_access,\
+    check_user_can_see_user
 from cosinnus.views.widget import GroupDashboard
 from cosinnus.views.microsite import GroupMicrositeView
 from django.views.generic.base import View
 import six
 from django.conf import settings
 from django.core.paginator import Paginator
-from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.user import filter_active_users, get_user_select2_pills,\
+    get_user_query_filter_for_search_terms, get_user_by_email_safe
 from cosinnus.utils.functions import resolve_class
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
@@ -82,6 +85,9 @@ from django.template.defaultfilters import linebreaksbr
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
 from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
+from django_select2.views import NO_ERR_RESP, Select2View
+from django.views.generic.edit import FormView
+from cosinnus.utils.group import get_cosinnus_group_model
 logger = logging.getLogger('cosinnus')
 
 
@@ -138,9 +144,15 @@ class CosinnusGroupFormMixin(object):
         self.group_model_class = model_class
         self.group_form_class = form_class
         
+        # special check, if group/project creation is limited to admins, deny regular users creating groups/projects
+        if getattr(settings, 'COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS', False) \
+                and not check_user_superuser(self.request.user) and self.form_view == 'add':
+            messages.warning(self.request, _('Sorry, only portal administrators can create projects and groups!'))
+            return redirect(reverse('cosinnus:portal-admin-list'))
+        
         # special check: only portal admins can create groups
         if not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False) and self.form_view == 'add' and model_class == CosinnusSociety:
-            if not (self.request.user.id in CosinnusPortal.get_current().admins or check_user_superuser(self.request.user)):
+            if not check_user_superuser(self.request.user):
                 
                 if getattr(settings, 'COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED', False):
                     redirect_url = reverse('cosinnus:premium-info-page')
@@ -207,9 +219,28 @@ class CosinnusGroupFormMixin(object):
         })
         return context
     
+    def post(self, *args, **kwargs):
+        # save deactivated_apps for checking after POSTs
+        if hasattr(self, 'group'):
+            self._old_deactivated_apps = self.group.get_deactivated_apps()
+        else:
+            self._old_deactivated_apps = []
+        ret = super(CosinnusGroupFormMixin, self).post(*args, **kwargs)
+        new_apps = self.object.get_deactivated_apps()
+        
+        # check if any group apps were activated or deactivated
+        deactivated_apps = [app for app in new_apps if not app in self._old_deactivated_apps]
+        activated_apps = [app for app in self._old_deactivated_apps if not app in new_apps]
+        if activated_apps:
+            signals.group_apps_activated.send(sender=self, group=self.object, apps=activated_apps)
+        if deactivated_apps:
+            signals.group_apps_deactivated.send(sender=self, group=self.object, apps=deactivated_apps)
+        return ret
+    
     def forms_valid(self, form, inlines):
         """ We update the haystack index again after the inlineforms have also been saved,
             so that data changed in those forms are reflected in the updated group object """
+            
         ret = super(CosinnusGroupFormMixin, self).forms_valid(form, inlines)
         if self.object.type == CosinnusGroup.TYPE_PROJECT:
             group_index = CosinnusProjectIndex()
@@ -426,6 +457,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             'member_count': user_count,
             'hidden_user_count': hidden_members,
             'more_user_count': more_user_count,
+            'member_invite_form': MultiUserSelectForm(group=self.group),
         })
         return context
 
@@ -553,7 +585,12 @@ class GroupListInvitedView(RequireLoggedInMixin, GroupListView):
             self.group_type = group_class.GROUP_MODEL_TYPE
             model = group_class or self.model
         
-        my_invited_groups = model.objects.get_for_user_invited(self.request.user)
+        my_invited_groups = list(model.objects.get_for_user_invited(self.request.user))
+        # add groups that a user was only recruited for, but not invited by an admin
+        recruited_ids = self.request.user.cosinnus_profile.settings.get('group_recruits', [])
+        if recruited_ids:
+            my_invited_groups = my_invited_groups + list(model.objects.get_cached(pks=recruited_ids))
+        
         return my_invited_groups
     
     def get_context_data(self, **kwargs):
@@ -907,6 +944,8 @@ class UserSelectMixin(object):
 class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
                        CreateView):
     
+    #TODONEXT: delete this view probably!
+    
     template_name = 'cosinnus/group/group_detail.html'
     
     def form_valid(self, form):
@@ -951,6 +990,69 @@ group_user_add = GroupUserInviteView.as_view()
 group_user_add_api = GroupUserInviteView.as_view(is_ajax_request_url=True)
 
 
+class GroupUserInviteMultipleView(RequireAdminMixin, FormView):
+    
+    form_class = MultiUserSelectForm
+    template_name = 'cosinnus/group/group_detail.html'
+    
+    def get(self, *args, **kwargs):
+        messages.error(self.request, _('This action is not available directly!'))
+        return redirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': kwargs.get('group', '<NOGROUPKWARG>')}))
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group})
+    
+    def get_form_kwargs(self):
+        kwargs = super(GroupUserInviteMultipleView, self).get_form_kwargs()
+        kwargs['group'] = self.group
+        return kwargs
+    
+    def form_valid(self, form):
+        users = form.cleaned_data.get('users')
+        for user in users:
+            self.do_invite_valid_user(user, form)
+        return HttpResponseRedirect(self.get_success_url())
+    
+    #TODONEXT: error handling!
+    
+    def do_invite_valid_user(self, user, form):
+        try:
+            m = CosinnusGroupMembership.objects.get(user=user, group=self.group)
+            # if the user has already requested a join when we try to invite him, accept him immediately
+            if m.status == MEMBERSHIP_PENDING:
+                m.status = MEMBERSHIP_MEMBER
+                m.save()
+                # update index for the group
+                typed_group = ensure_group_type(self.group)
+                typed_group.update_index()
+                signals.user_group_join_accepted.send(sender=self, obj=self.group, user=user, audience=[user])
+                messages.success(self.request, _('User %(username)s had already requested membership and has now been made a member immediately!') % {'username': user.get_full_name()})
+                # trigger signal for accepting that user's join request
+            return HttpResponseRedirect(self.get_success_url())
+        except CosinnusGroupMembership.DoesNotExist:
+            CosinnusGroupMembership.objects.create(user=user, group=self.group, status=MEMBERSHIP_INVITED_PENDING)
+            signals.user_group_invited.send(sender=self, obj=self.group, user=self.request.user, audience=[user])
+            
+            #TODONEXT: refactor messages into one!
+            # we will also send out an internal direct message about the invitation to the user
+            try:
+                from cosinnus_message.utils.utils import write_postman_message
+                subject = _('I invited you to join "%(team_name)s"!') % {'team_name': self.group.name}
+                data = {
+                    'user': user,
+                    'group': self.group,
+                }
+                text = render_to_string('cosinnus/mail/user_group_invited_direct_message.txt', data)
+                write_postman_message(user, self.request.user, subject, text)
+            except ImportError:
+                pass
+        
+            messages.success(self.request, _('User %(username)s was successfully invited!') % {'username': user.get_full_name()})
+            return HttpResponseRedirect(self.get_success_url())
+        
+group_user_add_multiple = GroupUserInviteMultipleView.as_view()
+
+
 class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
                           UserSelectMixin, UpdateView):
 
@@ -960,26 +1062,23 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
         current_status = self.object.status
         new_status = form.cleaned_data.get('status')
         
-        if (len(self.group.admins) > 1 or not self.group.is_admin(user)):
-            if user != self.request.user or check_user_superuser(self.request.user):
-                if current_status == MEMBERSHIP_PENDING and new_status == MEMBERSHIP_MEMBER:
-                    signals.user_group_join_accepted.send(sender=self, obj=self.group, user=user, audience=[user])
-                if current_status in [MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER] and new_status == MEMBERSHIP_ADMIN \
-                        and not user.id == self.request.user.id:
-                    cosinnus_notifications.user_group_made_admin.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
-                elif current_status == MEMBERSHIP_ADMIN and new_status in [MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER] \
-                        and not user.id == self.request.user.id:
-                    cosinnus_notifications.user_group_admin_demoted.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
-                ret = super(GroupUserUpdateView, self).form_valid(form)
-                # update index for the group
-                typed_group = ensure_group_type(self.object.group)
-                typed_group.update_index()
-                return ret
-            else:
-                messages.error(self.request, _('You cannot change your own admin status.'))
-        elif current_status == MEMBERSHIP_ADMIN and new_status != MEMBERSHIP_ADMIN:
+        if current_status == MEMBERSHIP_ADMIN and new_status != MEMBERSHIP_ADMIN and len(self.group.admins) <= 1:
             messages.error(self.request, _('You cannot remove “%(username)s” form '
                 'this team. Only one admin left.') % {'username': full_name(user)})
+        else:
+            if current_status == MEMBERSHIP_PENDING and new_status == MEMBERSHIP_MEMBER:
+                signals.user_group_join_accepted.send(sender=self, obj=self.group, user=user, audience=[user])
+            if current_status in [MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER] and new_status == MEMBERSHIP_ADMIN \
+                    and not user.id == self.request.user.id:
+                cosinnus_notifications.user_group_made_admin.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
+            elif current_status == MEMBERSHIP_ADMIN and new_status in [MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER] \
+                    and not user.id == self.request.user.id:
+                cosinnus_notifications.user_group_admin_demoted.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
+            ret = super(GroupUserUpdateView, self).form_valid(form)
+            # update index for the group
+            typed_group = ensure_group_type(self.object.group)
+            typed_group.update_index()
+            return ret
         return HttpResponseRedirect(self.get_success_url())
 
     def get_user_qs(self):
@@ -1061,11 +1160,11 @@ class ActivateOrDeactivateGroupView(TemplateView):
         # only admins and group admins may deactivate groups/projects
         if not (is_admin or check_ug_admin(request.user, group)):
             redirect_to_403(request, self)
-        # only admins and portal admins may deactivate CosinnusSocieties
-        if group.type == CosinnusGroup.TYPE_SOCIETY:
-            if not is_admin:
-                messages.warning(self.request, _('Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.'))
-                return redirect(reverse('cosinnus:portal-admin-list'))
+        # special check: only portal admins can create/deactivate CosinnusSocieties
+        if group.type == CosinnusGroup.TYPE_SOCIETY and not is_admin and \
+                not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False):
+            messages.warning(self.request, _('Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.'))
+            return redirect(reverse('cosinnus:portal-admin-list'))
         
         if group.is_active and self.activate or (not group.is_active and not self.activate):
             if self.activate:
@@ -1093,9 +1192,11 @@ class ActivateOrDeactivateGroupView(TemplateView):
             typed_group.update_index()
             typed_group.update_index_for_all_group_objects()
             messages.success(request, self.message_success_activate % {'team_name': self.group.name})
+            signals.group_reactivated.send(sender=typed_group.__class__, group=typed_group)
             return redirect(self.group.get_absolute_url())
         else:
             messages.success(request, self.message_success_deactivate % {'team_name': self.group.name})
+            signals.group_deactivated.send(sender=typed_group.__class__, group=typed_group)
             return redirect(get_non_cms_root_url(self.request))
     
     def get_context_data(self, **kwargs):
@@ -1128,7 +1229,10 @@ class GroupStartpage(View):
             return False
         
         if not request.user.is_authenticated:
-            return True
+            if getattr(settings, 'COSINNUS_MICROSITES_DISABLE_ANONYMOUS_ACCESS', False):
+                return False
+            else:
+                return True
         if not check_object_read_access(self.group, request.user):
             return True
         
@@ -1186,17 +1290,20 @@ def group_user_recruit(request, group):
     redirect_url = request.META.get('HTTP_REFERER', group_aware_reverse('cosinnus:group-detail', kwargs={'group': group}))
     
     # do permission checking using has_write_access(request.user, group)
-    
-    if not is_superuser(user) and not user.id in group.members:
+    # TODO: make this available to group.members soon!
+    if not is_superuser(user) and not user.id in group.admins:
         logger.error('Permission error when trying to recruit users!', 
              extra={'user': request.user, 'request': request, 'path': request.path, 'group_slug': group})
         messages.error(request, _('Only group/project members have permission to do this!'))
         return redirect(redirect_url)
     
+    # flag for admins who may issue direct invites instead of just recruits
+    is_group_admin = user.id in group.admins
     invalid = []
     existing_already_members = []
     existing_already_invited = []
     existing_newly_invited = []
+    
     spam_protected = []
     success = []
     prev_invites_to_refresh = []
@@ -1226,17 +1333,25 @@ def group_user_recruit(request, group):
             # check if there is already a group membership for this user
             membership = get_object_or_None(CosinnusGroupMembership, group=group, user=existing_user)
             if not membership:
-                # user exists, invite him on the platform
-                CosinnusGroupMembership.objects.create(group=group, user=existing_user, status=MEMBERSHIP_INVITED_PENDING)
-                existing_newly_invited.append(email)
+                # user exists, invite him via email, or directy on the platform if the user is an admin
+                if is_group_admin:
+                    CosinnusGroupMembership.objects.create(group=group, user=existing_user, status=MEMBERSHIP_INVITED_PENDING)
+                    existing_newly_invited.append(email)
+                else:
+                    # currently unreachable because recruit only works as group admins
+                    # TODO: once recruiting is enabled for group-members, we need a solution for what to do here!
+                    invalid.append(email)
             elif membership.status in MEMBER_STATUS:
                 # user is already a member
                 existing_already_members.append(email)
             elif membership.status == MEMBERSHIP_PENDING:
-                # user has already requested to join, make member
-                membership.status = MEMBERSHIP_MEMBER
-                membership.save()
-                existing_newly_invited.append(email)
+                # user has already requested to join, make member if group admin
+                if is_group_admin:
+                    membership.status = MEMBERSHIP_MEMBER
+                    membership.save()
+                    existing_newly_invited.append(email)
+                else:
+                    existing_already_invited.append(email)
             elif membership.status == MEMBERSHIP_INVITED_PENDING:
                 # we have already invited the user on the platform
                 existing_already_invited.append(email)
@@ -1279,9 +1394,12 @@ def group_user_recruit(request, group):
         for email in success:
             just_refresh_invites = [inv for inv in prev_invites_to_refresh if inv.email == email]
             if just_refresh_invites:
-                just_refresh_invites[0].invited_by = user
+                if is_group_admin:
+                    just_refresh_invites[0].invited_by = user
                 just_refresh_invites[0].save()
                 continue
+            # we always create an initial object here, even if the user is not admin.
+            # the invite permission is checked on user join 
             CosinnusUnregisterdUserGroupInvite.objects.create(email=email, group=group, invited_by=user)
     
     if invalid:
@@ -1398,3 +1516,74 @@ def group_assign_reflected_object(request, group):
     redirect_url = obj.get_absolute_url()
     return redirect(redirect_url)
 
+
+class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
+    """
+    This view is used as API backend to serve the suggestions for the group member invite field.
+    """
+
+    def check_all_permissions(self, request, *args, **kwargs):
+        user = request.user
+        if not user.is_authenticated:
+            raise PermissionDenied
+
+    def get_results(self, request, term, page, context):
+        terms = term.strip().lower().split(' ')
+        
+        # filter for active portal members that are not group members
+        users = filter_active_users(get_user_model().objects.all())\
+                .exclude(id__in=self.group.members)\
+                .exclude(id__in=self.group.invited_pendings)
+        # filter for query terms
+        q = get_user_query_filter_for_search_terms(terms)
+        users = users.filter(q)
+        
+        # as a last filter, remove all users that that have their privacy setting to "only members of groups i am in",
+        # if they aren't in a group with the user
+        users = [user for user in users if check_user_can_see_user(request.user, user)]
+        
+        users = sorted(users, key=lambda useritem: full_name(useritem).lower())
+        
+        # check for a direct email match
+        direct_email_user = get_user_by_email_safe(term)
+        if direct_email_user:
+            # filter for members/pending/self manually
+            if not direct_email_user.id in self.group.members \
+                    and not direct_email_user.id in self.group.invited_pendings \
+                    and not direct_email_user.id == request.user.id:
+                users = [direct_email_user] + users
+        
+        results = get_user_select2_pills(users)
+
+        # Any error response, Has more results, options list
+        return (NO_ERR_RESP, False, results)
+
+user_group_member_invite_select2 = UserGroupMemberInviteSelect2View.as_view()
+
+
+class GroupActivateAppView(SamePortalGroupMixin, AjaxableFormMixin, RequireAdminMixin, View):
+    """ Deactivates the cosinnus app for a group passed via the "app" form field  """
+    
+    http_method_names = ['post',]
+    model = CosinnusGroup
+    slug_url_kwarg = 'group'
+    message_success = _('The %s-app was activated!')
+
+    @atomic
+    def dispatch(self, *args, **kwargs):
+        return super(GroupActivateAppView, self).dispatch(*args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        app = self.request.POST.get('app', None)
+        # remove the given app from the deactivated list
+        if app and app in app_registry.get_deactivatable_apps() and app in self.group.get_deactivated_apps():
+            self.group.deactivated_apps = ','.join(list(set([
+                prior_app for prior_app in self.group.get_deactivated_apps()
+                if not prior_app == app
+            ])))
+            self.group.save(update_fields=['deactivated_apps'])
+            signals.group_apps_activated.send(sender=self, group=self.group, apps=[app])
+            messages.success(self.request, self.message_success % app_registry.get_label(app))
+        return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
+
+group_activate_app = GroupActivateAppView.as_view()

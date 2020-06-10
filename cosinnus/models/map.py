@@ -274,11 +274,14 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
     background_image_field = 'wallpaper'
 
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
-        group_admins = list(obj.actual_admins)
         message_url = None
-        if not settings.COSINNUS_IS_INTEGRATED_PORTAL:
-            message_url = message_group_admins_url(obj, group_admins)
-        
+        if not settings.COSINNUS_IS_INTEGRATED_PORTAL and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
+            if settings.COSINNUS_ROCKET_ENABLED:
+                message_url = reverse('cosinnus:message-write-group', kwargs={'slug': obj.slug})
+            else:
+                group_admins = list(obj.actual_admins)
+                message_url = message_group_admins_url(obj, group_admins)
+
         kwargs.update({
             'is_member': check_ug_membership(user, obj),
             'is_pending': check_ug_pending(user, obj),
@@ -378,10 +381,17 @@ class DetailedUserMapResult(DetailedMapResult):
         kwargs.update({
             'is_member': user.id == obj.user_id,
         })
-        if not settings.COSINNUS_IS_INTEGRATED_PORTAL:
-            kwargs.update({
-                'action_url_1': _prepend_url(user, None) + reverse('postman:write', kwargs={'recipients': obj.user.username}),
-            })
+        if not settings.COSINNUS_IS_INTEGRATED_PORTAL and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
+            if settings.COSINNUS_ROCKET_ENABLED:
+                kwargs.update({
+                    'action_url_1': _prepend_url(user, None) + reverse('cosinnus:message-write',
+                                                                       kwargs={'username': obj.user.username}),
+                })
+            else:
+                kwargs.update({
+                    'action_url_1': _prepend_url(user, None) + reverse('postman:write',
+                                                                       kwargs={'recipients': obj.user.username}),
+                })
         # collect visible groups and projects that this user is in
         sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['projects'], SEARCH_MODEL_NAMES_REVERSE['groups'])
         sqs = sqs.filter_and(id__in=haystack_result.membership_groups)
@@ -600,20 +610,21 @@ try:
     #})
 except:
     FileEntry = None
-    
-try:
-    from postman.models import Message #noqa
-    SEARCH_MODEL_NAMES.update({
-        Message: 'messages',                           
-    })
-    SHORT_MODEL_MAP.update({
-        8: Message,
-    })
-    #SEARCH_RESULT_DETAIL_TYPE_MAP.update({
-    #    'messages': NYI,
-    #})
-except:
-    Message = None
+
+if not settings.COSINNUS_ROCKET_ENABLED and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
+    try:
+        from postman.models import Message #noqa
+        SEARCH_MODEL_NAMES.update({
+            Message: 'messages',
+        })
+        SHORT_MODEL_MAP.update({
+            8: Message,
+        })
+        #SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+        #    'messages': NYI,
+        #})
+    except:
+        Message = None
 
 try:
     from cosinnus_todo.models import TodoEntry #noqa

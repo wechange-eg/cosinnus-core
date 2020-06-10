@@ -1,0 +1,82 @@
+/** LESS for the v2 style of main content panels. */
+
+.v2-content {
+	background-color: @background-color;
+	padding: 40px;
+	
+	font-family: @font-regular;
+	font-size: 14px;
+	color: @text-color;
+	
+	h1, h2 {
+		font-size: 18px;
+		font-weight: bold;
+	}
+	h1, .cosinnus-form h1 {
+		color: @text-highlight-color;
+		text-transform: uppercase;
+		margin: 8px 0 40px 0;
+	}
+	h2, .cosinnus-form h2 {
+		margin: 8px 0 28px 0;	
+	}
+	h3, .cosinnus-form h3 {
+		font-size: 16px;
+		font-weight: bold;
+		margin: 8px 0 16px 0;	
+	}
+	hr, .cosinnus-form hr {
+		border-top: 1px solid @divider-color;
+		
+		&.invisible {
+			border-top: none;
+			margin: 15px 0;
+		}
+	}
+	
+	p {
+		padding: 0 0 16px 0;
+	}
+	
+	code {
+		background-color: @background-color;
+		color: @text-color;
+	}
+	
+	a:not(.rounded-button) {
+		color: @text-color;
+		text-decoration: none;
+		font-weight: bold;
+		
+		&:hover {
+			color: @text-color;
+			text-decoration: underline;
+			font-weight: bold;
+		}
+	}
+	.rounded-button {
+		text-transform: uppercase;
+		font-weight: bold;
+		height: auto;
+		min-height: 42px;
+    	line-height: 40px;
+	}
+	.button-section {
+		margin-top: 20px;
+		clear: both;
+	}
+	.divider {
+		margin-bottom: 44px;	
+	}
+	.cosinnus-field {
+		.cosinnus-field-input {
+			input, select {
+				background-color: @field-input-background-color;
+			}
+		}
+	}
+	.cosinnus-field.disabled,
+	form.disabled {
+		opacity: 0.6;
+	}
+}

@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n bootstrap3 cosinnus_tags %}
+{% load i18n bootstrap3 cosinnus_tags djajax_tags %}
 {% load static from staticfiles %}
 
 {% block page_title %}{{ group.name }}{% endblock page_title %}
@@ -81,12 +81,10 @@
 		    </button><!-- btn -->
 		    {% endif %}
 		    {% endif %}
-
-
             
             <ol class="breadcrumb">
                 {% include 'cosinnus/breadcrumb.html' %}
-                <li class="active">{% trans "Dashboard" %}</li>
+                <li class="active">{{ group.get_group_dashboard_label }}</li>
             </ol>
             
     		<div class="clearfix"></div>
@@ -137,6 +135,35 @@
 			    </div>
 		    {% endif %}
 	    {% endif %}
+	    
+	    {% captureas cloud_hide_pref %}cloud_group_teaser_{{ group.id }}{% endcaptureas %}
+        {% captureas cloud_hide_value %}cloud_group_teaser_{{ group.id }}:true{% endcaptureas %}
+	    {% if SETTINGS.COSINNUS_CLOUD_ENABLED and user.pk in group.admins and 'cosinnus_cloud' in group.get_deactivated_apps and not user|cosinnus_setting:cloud_hide_pref %}
+	       <div class="large-space cloud-teaser-frame">
+		        <div class="alert alert-black-white no-margin alert-dismissable">
+	                <i class="fa fa-cloud fa-3x"></i>
+	                <button id="close_button" type="button" class="close" onclick="$('.cloud-teaser-frame').hide();" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value=cloud_hide_value %}>&#215;</button>
+	                {% include 'cosinnus/texts/group_dashboard_cloud_teaser_text.html' %}
+	            </div>
+	            
+	            <form method="POST" action="{% group_url 'cosinnus:group-activate-app' group=group %}" class="cosinnus-form form-horizontal app-main">{% csrf_token %}
+	                <input type="hidden" name="app" value="cosinnus_cloud" />
+		            <button type="submit" class="btn btn-emphasized">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-cloud"></i>
+			                    </a>
+			                    <div class="media-body">
+			                          {% trans "Activate Cloud" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </button>
+		        </form>
+		        <div class="clearfix"></div>
+	        </div>
+	    {% endif %}
 	
 	{% endblock group_announcements %}
 
@@ -153,21 +180,16 @@
                 <div class="multiline-ellipsis-main">
                     {% if user.pk in group.members or user in group.admins or not user.is_authenticated %}
                     	
-                    	{% if "marketplace" in object_counts %}
-                            <div class="dashboard-header-link app-marketplace mobile-hidden">
-                                <a href="{% group_url 'cosinnus:marketplace:list' group=group %}">
-                                    <i class="fa fa-exchange"></i>
-                                    <span>{{ object_counts.marketplace }}</span>
-                                    {% if object_counts.marketplace == 1 %}{% trans "Marketplace" %}{% else %}{% trans "Marketplace" %}{% endif %}
-                                </a>
-                            </div>
-                        {% endif %}
-                    	{% if "poll" in object_counts %}
-                            <div class="dashboard-header-link app-poll mobile-hidden">
-                                <a href="{% group_url 'cosinnus:poll:list' group=group %}">
-                                    <i class="fa fa-bar-chart"></i>
-                                    <span>{{ object_counts.poll }}</span>
-                                    {% if object_counts.poll == 1 %}{% trans "Poll" %}{% else %}{% trans "Polls" %}{% endif %}
+                    	{% if "cloud" in object_counts %}
+                            <div class="dashboard-header-link app-cloud mobile-hidden">
+                                <a href="{% group_url 'cosinnus:cloud:index' group=group %}" {% if SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}>
+                                    <i class="fa fa-cloud"></i>
+                                    {% comment %} 
+                                        This count is not known at load time, and will be JS-patched in with the 
+                                        `Latest` widget in "cosinnus_cloud/widgets/latest.html".
+                                     {% endcomment %}
+                                    <span>...</span>
+                                    {% trans "Cloud" %}
                                 </a>
                             </div>
                         {% endif %}
@@ -189,12 +211,30 @@
                                 </a>
                             </div>
                         {% endif %}
+                        {% if "poll" in object_counts %}
+                            <div class="dashboard-header-link app-poll mobile-hidden">
+                                <a href="{% group_url 'cosinnus:poll:list' group=group %}">
+                                    <i class="fa fa-bar-chart"></i>
+                                    <span>{{ object_counts.poll }}</span>
+                                    {% if object_counts.poll == 1 %}{% trans "Poll" %}{% else %}{% trans "Polls" %}{% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
                         {% if "todo" in object_counts %}
                             <div class="dashboard-header-link app-todos mobile-hidden">
                                 <a href="{% group_url 'cosinnus:todo:list' group=group %}">
                                     <i class="fa fa-tasks"></i>
                                     <span>{{ object_counts.todo }}</span>
                                     {% if object_counts.todo == 1 %}{% trans "Todo" %}{% else %}{% trans "Todos" %}{% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if "marketplace" in object_counts %}
+                            <div class="dashboard-header-link app-marketplace mobile-hidden">
+                                <a href="{% group_url 'cosinnus:marketplace:list' group=group %}">
+                                    <i class="fa fa-exchange"></i>
+                                    <span>{{ object_counts.marketplace }}</span>
+                                    {% if object_counts.marketplace == 1 %}{% trans "Marketplace" %}{% else %}{% trans "Marketplace" %}{% endif %}
                                 </a>
                             </div>
                         {% endif %}
@@ -298,6 +338,18 @@
             </div>
         </div>
     </div>
+    
+    {% if SETTINGS.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED and group.embedded_dashboard_html %}
+        {% if user.pk in group.members %}
+	        {% block group_dashboard_embedded_html %}
+	            <div class="dashboard-embedded-html">
+	                {% render_embedded_html_with_variables group.embedded_dashboard_html %}
+	            </div>
+	        {% endblock %}
+        {% endif %}
+    {% endif %}
+    
+    
 {% endblock main_page_header %}
             
 

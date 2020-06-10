@@ -8,14 +8,14 @@ from django.utils.translation import get_language
 from cosinnus.conf import settings as SETTINGS
 from cosinnus.core.registries import app_registry
 from cosinnus.models.serializers.profile import UserSimpleSerializer
-from postman.models import Message
 import json
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.forms.user import TermsOfServiceFormFields
-from dateutil import parser
 
 import logging
+from cosinnus.utils.user import get_user_tos_accepted_date,\
+    check_user_has_accepted_portal_tos
 logger = logging.getLogger('cosinnus')
 
 
@@ -71,9 +71,17 @@ def cosinnus(request):
     if user.is_authenticated and not \
             (getattr(SETTINGS, 'COSINNUS_USE_V2_DASHBOARD', False) or \
                 (getattr(SETTINGS, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False) and user.is_superuser)):
-        from cosinnus_stream.models import Stream
-        stream_unseen_count = Stream.objects.my_stream_unread_count(user)
-        unread_count = Message.objects.inbox_unread_count(user)
+        if getattr(SETTINGS, 'COSINNUS_ROCKET_ENABLED', False):
+            unread_count = 0
+            stream_unseen_count = 0
+            # since this is a locking request, we do not use rocketchat unread counters on page load
+            #from cosinnus_message.rocket_chat import RocketChatConnection
+            #unread_count = RocketChatConnection().unread_messages(user)
+        else:
+            from cosinnus_stream.models import Stream
+            stream_unseen_count = Stream.objects.my_stream_unread_count(user)
+            from postman.models import Message
+            unread_count = Message.objects.inbox_unread_count(user)
     else:
         unread_count = 0
         stream_unseen_count = 0
@@ -116,10 +124,11 @@ def tos_check(request):
     user = request.user
     if user.is_authenticated:
         try:
-            tos_accepted_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
+            tos_accepted_date = get_user_tos_accepted_date(user)
+            tos_were_updated = portal.tos_date.year > 2000 and (tos_accepted_date is None or tos_accepted_date < portal.tos_date)
             # if a portal's tos_date has never moved beyond the default, we don't check the tos_accepted_date, 
             # to maintain backwards compatibility with users who have only the `settings.tos_accepted` boolean
-            if portal.tos_date.year > 2000 and (tos_accepted_date is None or parser.parse(tos_accepted_date) < portal.tos_date):
+            if tos_were_updated or not check_user_has_accepted_portal_tos(user):
                 updated_tos_form = TermsOfServiceFormFields(initial={
                     'newsletter_opt_in': user.cosinnus_profile.settings.get('newsletter_opt_in', False)
                 })

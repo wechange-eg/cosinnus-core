@@ -6,10 +6,10 @@
 // Components
 // ----------
 
+@import 'general';
 @import 'footer';
 @import 'header';
 @import 'notification';
-@import 'page_header';
 @import 'summary_group';
 @import 'summary_item';
 @import 'nested_summary_item';
@@ -18,12 +18,11 @@
 // -------------
 
 .content {
-    border-radius: 6px;
-    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.02);
+    border-radius: 1px;
 }
 
 img {
-    width: 100%;
+    width: auto;
 }
 
 .body {
@@ -32,14 +31,32 @@ img {
     }
 }
 
-.columns {
-    &.tight {
-        padding-bottom: 0;
-    }
-}
-
 /* Hide linebreaks in sublists (those linebreaks are some markdown glitch) */
 ul br, ol br, ul br {
     display: none;
 }
 
+p {
+    margin: invalid; /* changed for outlook-p margin hack, was "0" */
+    margin-top: 0; 
+    margin-right: 0; 
+    margin-bottom: 0; 
+    margin-left: 0; 
+    
+    & + p {
+        padding: 16px 0 0 0; 
+        Margin: 0 0 0 0; /* added for outlook-p margin hack */
+    }
+}
+
+
+a {
+    color: $primary-color;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;    
+}
+
+    

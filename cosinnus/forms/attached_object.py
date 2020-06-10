@@ -130,7 +130,7 @@ class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoice
     def clean(self, value):
         """ We organize the ids gotten back from the recipient select2 field.
             This is a list of mixed ids which could either be groups or users.
-            See cosinnus_messages.views.UserSelect2View for how these ids are built.
+            See cosinnus.views.user.UserSelect2View for how these ids are built.
             
             Example for <value>: [u'cosinnus_event.Event:1', u'cosinnus_file.FileEntry:1'] 
         """

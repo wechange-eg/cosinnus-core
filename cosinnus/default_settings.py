@@ -82,13 +82,13 @@ STATICFILES_FINDERS = (
 
 MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.PreventAnonymousUserCookieSessionMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.MovedTemporarilyRedirectFallbackMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_otp.middleware.OTPMiddleware',
-    'cosinnus.core.middleware.cosinnus_middleware.AdminOnlyOTPMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.OTPMiddleware',
     
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -114,7 +114,7 @@ TEMPLATES = [
             # base directory is being put in by the main app's settings file
         ],
         'OPTIONS': {
-            'context_processors': (
+            'context_processors': [
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
@@ -130,7 +130,7 @@ TEMPLATES = [
                 'cosinnus.utils.context_processors.cosinnus',
                 'cosinnus.utils.context_processors.tos_check',
                 'announcements.context_processors.add_custom_announcements',
-             ),
+             ],
             'loaders': (
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader',
@@ -142,8 +142,7 @@ TEMPLATES = [
 ]
 
 
-
-def compile_installed_apps(internal_apps=[]):
+def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     """ Supports gathering INSTALLED_APPS with external-project options.
         Must be called after importing these settings!
     """
@@ -199,6 +198,12 @@ def compile_installed_apps(internal_apps=[]):
         'cosinnus_poll',
         'cosinnus_stream',
         'cosinnus_todo',
+    ]
+    
+    # Extra Cosinnus Apps (as defined in external project)
+    _INSTALLED_APPS += extra_cosinnus_apps
+    
+    _INSTALLED_APPS += [
         'announcements',
         'ajax_forms',
         
@@ -242,6 +247,15 @@ LANGUAGES = [
     # (enable them for your specific portals by defining `LANGUAGES` in settings.py
     ('fr', _('French--NATIVE-LANGUAGE')),
     ('pl', _('Polish--NATIVE-LANGUAGE')),
+    ('es', _('Spanish--NATIVE-LANGUAGE')),
+    ('ro', _('Romanian--NATIVE-LANGUAGE')),
+    ('be', _('Belarussian--NATIVE-LANGUAGE')),
+    ('nl', _('Dutch--NATIVE-LANGUAGE')),
+    
+    ('az', _('Azerbaijani--NATIVE-LANGUAGE')),
+    ('hy', _('Armenian--NATIVE-LANGUAGE')),
+    ('ka', _('Georgian--NATIVE-LANGUAGE')),
+    ('kk', _('Kazakh--NATIVE-LANGUAGE')),
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -295,6 +309,11 @@ LOGGING = {
             'handlers': ['console', 'sentry'],
             'propagate': False,
         },
+        'wechange-payments': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'sentry'],
+            'propagate': False,
+        },
     },
 }
 
@@ -326,6 +345,9 @@ TESTING = 'test' in sys.argv
 # use session storage for CSRF instead of cookie
 # can't use this yet, until we fix the jQuery-POST usage of csrf cookies
 CSRF_USE_SESSIONS = False
+
+# use session based CSRF cookies
+CSRF_COOKIE_AGE = None
 
 # leave this on for production, but may want to disable for dev
 #SESSION_COOKIE_SECURE = True
@@ -395,19 +417,19 @@ COSINNUS_MICROSITE_RENDER_EMPTY_APPS = False
 
 # Default title for all pages unless the title block is overwritten. 
 # This is put through a {% trans %} tag. """
-COSINNUS_BASE_PAGE_TITLE_TRANS = 'Netzwerk Wachstumswende'
+COSINNUS_BASE_PAGE_TITLE_TRANS = ''
 
 # Etherpad config.
 # Warning: Etherpad URL and KEY are usually overwritten in settings.py on the server! """
-COSINNUS_ETHERPAD_BASE_URL = 'https://pad.sinnwerkstatt.com/api'
-COSINNUS_ETHERPAD_API_KEY = '11456b253e74523f62059a5e341dd877fa4c01dbade5ba5309e1df7dfbc45e14'
+COSINNUS_ETHERPAD_BASE_URL = None
+COSINNUS_ETHERPAD_API_KEY = None
 
 # Ethercalc config
 COSINNUS_ETHERPAD_ENABLE_ETHERCALC = True
-COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = 'https://calc.wechange.de'
+COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = None
 
 # default from-email:
-COSINNUS_DEFAULT_FROM_EMAIL = 'noreply@wachstumswende.de'
+COSINNUS_DEFAULT_FROM_EMAIL = ''
 DEFAULT_FROM_EMAIL = COSINNUS_DEFAULT_FROM_EMAIL
 
 # settings for email-dkim signing. you can follow this guide for creating a key https://blog.codinghorror.com/so-youd-like-to-send-some-email-through-code/ (point 2)
@@ -556,3 +578,5 @@ CAPTCHA_CHALLENGE_FUNCT = 'cosinnus.utils.captcha.dissimilar_random_char_challen
 CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
 CAPTCHA_TIMEOUT = 30
 
+COSINNUS_ROCKET_ENABLED = False
+COSINNUS_ROCKET_EXPORT_ENABLED = False

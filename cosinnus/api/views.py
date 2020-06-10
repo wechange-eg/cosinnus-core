@@ -96,10 +96,15 @@ class UserView(APIView):
     def get(self, request):
         if request.user.is_authenticated:
             user = request.user
+            avatar_url = user.cosinnus_profile.avatar.url if user.cosinnus_profile.avatar else ""
+            if avatar_url:
+                avatar_url = request.build_absolute_uri(avatar_url)
             return JsonResponse({
                 'success': True,
-                'id': user.id,
+                'id': str(user.id),
                 'email': user.email,
+                'name': user.get_full_name(),
+                'avatar': avatar_url,
             })
         else:
             return JsonResponse({

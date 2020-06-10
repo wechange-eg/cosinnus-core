@@ -12,6 +12,7 @@ from django.core.cache import cache
 from django.db import models, transaction
 from django.db.models.signals import post_save, class_prepared
 from django.utils.encoding import python_2_unicode_compatible, force_text
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 
 from jsonfield import JSONField
@@ -35,6 +36,10 @@ from cosinnus.utils.user import get_newly_registered_user_email
 from annoying.functions import get_object_or_None
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 
+import logging
+
+logger = logging.getLogger('cosinnus')
+
 # if a user profile has this settings, its user has not yet confirmed a new email
 # address and this long is bound to his old email (or to a scrambled, unusable one if they just registered)
 PROFILE_SETTING_EMAIL_TO_VERIFY = 'email_to_verify'
@@ -43,6 +48,8 @@ PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN = 'email_verification_pwd'
 PROFILE_SETTING_REDIRECT_NEXT_VISIT = 'redirect_next'
 # first login datetime, used to determine if user first logged in
 PROFILE_SETTING_FIRST_LOGIN = 'first_login'
+PROFILE_SETTING_ROCKET_CHAT_ID = 'rocket_chat_id'
+PROFILE_SETTING_ROCKET_CHAT_USERNAME = 'rocket_chat_username'
 
 
 class BaseUserProfileManager(models.Manager):
@@ -122,7 +129,11 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
 
     SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings']\
                     + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
-                    
+    
+    # this indicates that objects of this model are in some way always visible by registered users
+    # on the platform, no matter their visibility settings, and thus subject to moderation 
+    cosinnus_always_visible_by_users_moderator_flag = True
+    
     _settings = None                
     
     class Meta(object):
@@ -134,6 +145,10 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
         
     def __str__(self):
         return six.text_type(self.user)
+    
+    def get_icon(self):
+        """ Returns the font-awesome icon specific to this object type """
+        return 'fa-user'
     
     def get_full_name(self):
         return self.user.get_full_name()
@@ -160,7 +175,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
         
         if created:
             # send creation signal
-            signals.userprofile_ceated.send(sender=self, profile=self)
+            signals.userprofile_created.send(sender=self, profile=self)
         
         # send a copy of the ToS to the User via email?
         if settings.COSINNUS_SEND_TOS_AFTER_USER_REGISTRATION and self.user and self.user.email:
@@ -277,7 +292,49 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
             self.save(update_fields=['settings'])
             return next_redirect
         return False
-    
+
+    def get_new_rocket_username(self):
+        """ Builds rocket username based upon first and last name (or ID if not given) """
+        user = self.user
+        if user.first_name or user.last_name:
+            username = '.'.join(filter(None, [slugify(user.first_name), slugify(user.last_name)]))
+        else:
+            username = str(user.id)
+
+        def is_username_free(username):
+            value = f'"{PROFILE_SETTING_ROCKET_CHAT_USERNAME}":"{username}"'
+            queryset = get_user_profile_model().objects.filter(settings__contains=value)
+            return queryset.count() == 0
+
+        i = 1
+        while True:
+            if i == 1 and is_username_free(username):
+                break
+            else:
+                new_username = f'{username}{i}'
+                if is_username_free(new_username):
+                    username = new_username
+                    break
+            i += 1
+            if i > 1000:
+                raise Exception('Name is very popular')
+        return username
+
+    @property
+    def rocket_username(self):
+        """ Retrieves or creates rocket username """
+        username = self.settings.get(PROFILE_SETTING_ROCKET_CHAT_USERNAME, '')
+        if not username:
+            username = self.get_new_rocket_username()
+            self.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = username
+            self.save(update_fields=['settings'])
+        return username
+
+    @rocket_username.setter
+    def rocket_username(self, username):
+        """ Sets new username for Rocket.Chat """
+        self.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = username
+
 
 class UserProfile(BaseUserProfile):
     
@@ -390,7 +447,7 @@ class GlobalUserNotificationSetting(models.Model):
     portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='user_notification_settings', 
         null=False, blank=False, default=1, on_delete=models.CASCADE)
     setting = models.PositiveSmallIntegerField(choices=SETTING_CHOICES,
-            default=SETTING_WEEKLY,
+            default=settings.COSINNUS_DEFAULT_GLOBAL_NOTIFICATION_SETTING,
             help_text='Determines if the user wants no mail, immediate mails,s aggregated mails, or group specific settings')
     last_modified = models.DateTimeField(_('Last modified'), auto_now=True, editable=False)
     
@@ -421,13 +478,15 @@ class GlobalBlacklistedEmail(models.Model):
             or doesn't have a portal membership in this current portal.
             Otherwise will simply set the global "no-email" setting for that user. """
         from django.contrib.auth import get_user_model
-        user = get_object_or_None(get_user_model(), email=email)
+        user = get_object_or_None(get_user_model(), email=email, is_active=True)
         portal_membership = get_object_or_None(CosinnusPortalMembership, user=user, group=CosinnusPortal.get_current())
         if portal_membership:
             with transaction.atomic():
                 setting_object = GlobalUserNotificationSetting.objects.get_object_for_user(user) 
                 setting_object.setting = GlobalUserNotificationSetting.SETTING_NEVER
                 setting_object.save()
+                logger.warn('GlobalBlacklistedEmail: Set a global user notification to NEVER from blacklist', 
+                            extra={'email': user.email, 'portal': CosinnusPortal.get_current().id})
                 cls.remove_for_email(email)
         else:
             cls.objects.get_or_create(email=email, portal=CosinnusPortal.get_current())

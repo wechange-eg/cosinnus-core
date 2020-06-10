@@ -3,18 +3,17 @@
 table.container.header {
     background-color: $back;
     margin-top: $global-margin;
+    margin-bottom: $global-margin;
 
     .row {
         height: $global-margin * 4;
 
         .columns {
             padding-bottom: 0;
-
-            a {
-                font-weight: 700;
-                text-decoration: none;
-
-                @include lettering(2);
+            &.logo {
+                .logo-img {
+                    height: 40px;
+                }
             }
         }
     }
