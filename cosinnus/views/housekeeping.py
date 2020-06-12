@@ -13,7 +13,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 from cosinnus.views.profile import delete_userprofile
 from cosinnus.utils.group import move_group_content as move_group_content_utils,\
-    get_default_user_group_slugs
+    get_default_user_group_slugs, get_cosinnus_group_model
 from cosinnus.models.widget import WidgetConfig
 from django.core.cache import cache
 from django.conf import settings
@@ -33,7 +33,8 @@ from cosinnus.utils.user import filter_active_users, accept_user_tos_for_portal,
 from cosinnus.models.profile import get_user_profile_model
 from django.core.mail.message import EmailMessage
 from cosinnus.core.mail import send_mail_or_fail, send_mail,\
-    send_mail_or_fail_threaded, send_html_mail_threaded
+    send_mail_or_fail_threaded, send_html_mail_threaded,\
+    render_notification_item_html_mail
 from django.template.defaultfilters import linebreaksbr
 from django.db.models.aggregates import Count
 from cosinnus.utils.http import make_csv_response
@@ -41,6 +42,7 @@ from operator import itemgetter
 from cosinnus.utils.permissions import check_user_can_receive_emails
 import logging
 from cosinnus.templatetags.cosinnus_tags import textfield
+from annoying.functions import get_object_or_None
 
 logger = logging.getLogger('cosinnus')
 
@@ -340,6 +342,7 @@ def reset_user_tos_flags(request=None):
         
     return HttpResponse(ret)
 
+
 def send_testmail(request):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
@@ -369,6 +372,36 @@ def send_testmail(request):
         return HttpResponse('Sent mail using override mode. ' + retmsg)
         
     return HttpResponse('Did not send any mail. ' + retmsg)
+
+
+def print_testmail(request):
+    """ Displays a HTML email like it would be sent to a user """
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    subject =  'This is a test mail'
+    
+    content_html = textfield("Detailed testmail test content cannot be shown without a forum group.")
+    
+    forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+    if forum_slug:
+        from cosinnus_notifications.models import NotificationEvent # noqa
+        from cosinnus_note.models import Note, Comment # noqa
+        from cosinnus_notifications.notifications import render_digest_item_for_notification_event
+        
+        forum = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+        notes = Note.objects.filter(group=forum)
+        if notes.count() > 0:
+            note = notes[0]
+            comment = Comment(creator=request.user, text="This is a test comment.", note=note)
+            notification_event = NotificationEvent()
+            notification_event._target_object = comment
+            notification_event.group = forum
+            notification_event.notification_id = 'note__note_comment_posted_on_any'
+            notification_event.user = request.user
+            content_html = render_digest_item_for_notification_event(notification_event)
+        
+    html = render_notification_item_html_mail(request.user, subject, content_html)
+    return HttpResponse(html)
 
 
 def print_settings(request):
