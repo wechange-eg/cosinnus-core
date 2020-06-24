@@ -962,6 +962,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         qs = get_user_model().objects.filter(id__in=self.invited_pendings)
         qs = filter_active_users(qs)
         return qs
+
+    @property
+    def is_group_and_workshop(self):
+        return self.type == self.TYPE_SOCIETY and self.is_workshop
     
     def get_admin_contact_url(self):
         if 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
