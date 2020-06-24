@@ -763,6 +763,14 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     nextcloud_groupfolder_id = models.PositiveIntegerField(_('Nextcloud Groupfolder ID'),
         unique=True, blank=True, null=True,
         help_text='The boolean internal nextcloud id for the groupfolder. Only set once a groupfolder is created.')
+
+    is_workshop = models.BooleanField(_('Is workshop'),
+        help_text=_('If a group is marked as workshop it is possible to auto-generate accounts for workshop participants'),
+        default=False)
+    workshop_is_running = models.BooleanField(_('Workshop is running'),
+        help_text=_('Determins whether a group that is marked as workshop is running'),
+        default=False)
+
     
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
