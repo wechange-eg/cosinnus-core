@@ -54,12 +54,23 @@
 	            </a>
 	        </li>
         {% endfor %}
+
+
+        {% if group.is_group_and_workshop %}
+        <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %}">
+            <a href="">
+                <i class="fa fa-group"></i>
+                {% trans "Workshop Participants" %}
+            </a>
+        </li>
+        {% else %}
         <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %}">
             <a href="{{ group_detail_page }}">
                 <i class="fa fa-group"></i>
                 {% trans "Members" %}
             </a>
         </li>
+        {% endif %}
         {% if user|has_write_access:group %}
         <li class="app-main appnavi-listelement">
             <a href="{{ group_edit_page }}">
