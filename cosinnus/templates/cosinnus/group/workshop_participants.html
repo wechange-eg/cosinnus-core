@@ -1,0 +1,13 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags thumbnail %}
+{% load static from staticfiles %}
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block content %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock content %}

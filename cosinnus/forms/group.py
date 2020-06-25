@@ -322,5 +322,7 @@ class CosinnusGroupCallToActionButtonForm(forms.ModelForm):
     class Meta(object):
         model = CosinnusGroupCallToActionButton
         fields = ('group', 'label', 'url', )
-        
 
+class CosinusWorkshopParticipantCSVImportForm(forms.Form):
+
+    participants = forms.FileField()

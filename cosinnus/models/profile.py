@@ -50,6 +50,8 @@ PROFILE_SETTING_REDIRECT_NEXT_VISIT = 'redirect_next'
 PROFILE_SETTING_FIRST_LOGIN = 'first_login'
 PROFILE_SETTING_ROCKET_CHAT_ID = 'rocket_chat_id'
 PROFILE_SETTING_ROCKET_CHAT_USERNAME = 'rocket_chat_username'
+PROFILE_SETTING_WORKSHOP_PARTICIPANT = 'is_workshop_participant'
+PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME = 'workshop_participant_name'
 
 
 class BaseUserProfileManager(models.Manager):

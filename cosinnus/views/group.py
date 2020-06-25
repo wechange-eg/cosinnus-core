@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import csv
+import io
+
 from builtins import zip
 from builtins import object
 from itertools import chain
@@ -37,7 +40,7 @@ from cosinnus.utils.compat import atomic
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
     AjaxableFormMixin, ListAjaxableResponseMixin)
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin,\
-    RequireLoggedInMixin, EndlessPaginationMixin
+    RequireLoggedInMixin, EndlessPaginationMixin, RequireWriteMixin
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 
 from cosinnus.views.mixins.avatar import AvatarFormMixin
@@ -87,7 +90,16 @@ from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
 from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
 from django_select2.views import NO_ERR_RESP, Select2View
 from django.views.generic.edit import FormView
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.forms import UserCreationForm
+from cosinnus.models.profile import get_user_profile_model
+from django.utils.crypto import get_random_string
+from django.http import HttpResponse
+from cosinnus.models.group import MEMBERSHIP_MEMBER
+from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME
+from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
+
 logger = logging.getLogger('cosinnus')
 
 
@@ -463,6 +475,118 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
 
 group_detail = GroupDetailView.as_view()
 group_detail_api = GroupDetailView.as_view(is_ajax_request_url=True)
+
+
+class WorkshopParticipantsView(SamePortalGroupMixin, RequireWriteMixin, DetailView):
+
+
+    template_name = 'cosinnus/group/workshop_participants.html'
+
+    def get_object(self, queryset=None):
+        return self.group
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CosinusWorkshopParticipantCSVImportForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+
+        form = CosinusWorkshopParticipantCSVImportForm(request.POST, request.FILES)
+        if form.is_valid():
+            csv_file = request.FILES['participants']
+            decoded_file = csv_file.read().decode('utf-8')
+            header, accounts = self.process_csv(decoded_file)
+
+            filename = '{}_participants.csv'.format(self.group.slug)
+
+            response = HttpResponse(content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
+
+            writer = csv.writer(response)
+            writer.writerow(header)
+            for account in accounts:
+                writer.writerow(account)
+
+            return response
+
+    def process_csv(self, file):
+
+        io_string = io.StringIO(file)
+        reader =  csv.reader(io_string, delimiter=';', quotechar='|')
+        header = next(reader, None)
+        groups_list = self.get_groups_from_header(header)
+        accounts_list = []
+        for row in reader:
+            account = self.create_account(row, groups_list)
+            accounts_list.append(account)
+
+        return header + ['email', 'password'], accounts_list
+
+    def get_groups_from_header(self, header):
+        groups = []
+        for entry in header:
+            if entry:
+                try:
+                    group = CosinnusGroup.objects.get(parent=self.group,
+                                                      portal=self.group.portal,
+                                                      type=CosinnusGroup.TYPE_PROJECT,
+                                                      slug=entry)
+                    groups.append(group)
+                except ObjectDoesNotExist:
+                    groups.append('')
+            else:
+                groups.append('')
+        return groups
+
+    def create_account(self, data, groups):
+
+        username = data[0]
+        email = '{}--{}-nr@wechange.de'.format(str(self.get_object().id), username)
+        pwd = get_random_string()
+
+        user_data = {
+            'username': username,
+            'password1': pwd,
+            'password2': pwd
+        }
+
+        form = UserCreationForm(user_data)
+        if form.is_valid():
+            user = form.save()
+        else:
+            return False
+
+        user.email = email
+        user.username = user.id
+        user.backend = 'cosinnus.backends.EmailAuthBackend'
+        user.save()
+
+        profile = get_user_profile_model()._default_manager.get_for_user(user)
+
+        profile.settings['tos_accepted'] = False
+        profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
+        profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
+        profile.save()
+
+        for i, column in enumerate(data):
+            if column == '1':
+                group = groups[i]
+                if isinstance(group, CosinnusGroup):
+                    CosinnusGroupMembership.objects.create(
+                        group=group,
+                        user=user,
+                        status=MEMBERSHIP_MEMBER
+                    )
+                else:
+                    continue
+            else:
+                continue
+
+        return data + [email, pwd]
+
+
+workshop_participants = WorkshopParticipantsView.as_view()
 
 
 class GroupMembersMapListView(GroupDetailView):
