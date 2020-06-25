@@ -24,6 +24,7 @@ from dateutil import parser
 import datetime
 import pytz
 
+
 _CosinnusPortal = None
 
 logger = logging.getLogger('cosinnus')
@@ -162,6 +163,44 @@ def get_user_query_filter_for_search_terms(terms):
     return q
         
         
+def create_base_user(email, username=None, password=None, first_name=None, last_name=None):
+
+    from django.contrib.auth.forms import UserCreationForm
+    from cosinnus.models.profile import get_user_profile_model
+
+    if not password:
+        password = get_random_string()
+
+    user_data = {
+        'username': username or get_random_string(),
+        'password1': password,
+        'password2': password
+    }
+
+    form = UserCreationForm(user_data)
+    if form.is_valid():
+        user = form.save()
+    else:
+        logger.warning('Manual user creation failed because of form errors!', extra={'data': data, 'form-errors': form.errors})
+        return False
+
+    user.email = email
+    if not username:
+        user.username = user.id
+    if first_name:
+        user.first_name = first_name
+    if last_name:
+        user.last_name = last_name
+    user.backend = 'cosinnus.backends.EmailAuthBackend'
+    user.save()
+
+    profile = get_user_profile_model()._default_manager.get_for_user(user)
+    profile.settings['tos_accepted'] = False
+    profile.save()
+
+    return user, profile
+
+
 def create_user(email, username=None, first_name=None, last_name=None, tos_checked=True):
     """ Creates a user with a random password, and adds proper PortalMemberships for this portal.
         @param email: Email is required because it's basically our pk

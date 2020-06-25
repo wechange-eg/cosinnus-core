@@ -99,6 +99,7 @@ from django.http import HttpResponse
 from cosinnus.models.group import MEMBERSHIP_MEMBER
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
+from cosinnus.utils.user import create_base_user
 
 logger = logging.getLogger('cosinnus')
 
@@ -513,12 +514,14 @@ class WorkshopParticipantsView(SamePortalGroupMixin, RequireWriteMixin, DetailVi
     def process_csv(self, file):
 
         io_string = io.StringIO(file)
-        reader =  csv.reader(io_string, delimiter=';', quotechar='|')
+        reader = csv.reader(io_string, delimiter=';', quotechar='|')
         header = next(reader, None)
-        groups_list = self.get_groups_from_header(header)
+        cleaned_header = self.clean_row_data(header)
+        groups_list = self.get_groups_from_header(cleaned_header)
         accounts_list = []
         for row in reader:
-            account = self.create_account(row, groups_list)
+            cleaned_row = self.clean_row_data(row)
+            account = self.create_account(cleaned_row, groups_list)
             accounts_list.append(account)
 
         return header + ['email', 'password'], accounts_list
@@ -527,6 +530,7 @@ class WorkshopParticipantsView(SamePortalGroupMixin, RequireWriteMixin, DetailVi
         groups = []
         for entry in header:
             if entry:
+                entry = entry.lower()
                 try:
                     group = CosinnusGroup.objects.get(parent=self.group,
                                                       portal=self.group.portal,
@@ -539,32 +543,26 @@ class WorkshopParticipantsView(SamePortalGroupMixin, RequireWriteMixin, DetailVi
                 groups.append('')
         return groups
 
+    def clean_row_data(self, row):
+        cleaned_row = []
+        for entry in row:
+            cleaned_row.append(entry.strip())
+        return cleaned_row
+
     def create_account(self, data, groups):
 
-        username = data[0]
-        email = '{}--{}-nr@wechange.de'.format(str(self.get_object().id), username)
+        username = data[0].replace(' ', '_')
+        first_name = data[1]
+        last_name = data[2]
+        random_email = '{}@wechange.de'.format(get_random_string())
         pwd = get_random_string()
 
-        user_data = {
-            'username': username,
-            'password1': pwd,
-            'password2': pwd
-        }
+        user, profile = create_base_user(random_email, password=pwd, first_name=first_name, last_name=last_name)
 
-        form = UserCreationForm(user_data)
-        if form.is_valid():
-            user = form.save()
-        else:
-            return False
-
-        user.email = email
-        user.username = user.id
-        user.backend = 'cosinnus.backends.EmailAuthBackend'
+        unique_email = '{}--{}{}-nr@wechange.de'.format(str(self.get_object().id), username, str(user.id))
+        user.email = unique_email
         user.save()
 
-        profile = get_user_profile_model()._default_manager.get_for_user(user)
-
-        profile.settings['tos_accepted'] = False
         profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
         profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
         profile.save()
@@ -591,7 +589,7 @@ class WorkshopParticipantsView(SamePortalGroupMixin, RequireWriteMixin, DetailVi
             else:
                 continue
 
-        return data + [email, pwd]
+        return data + [unique_email, pwd]
 
 
 workshop_participants = WorkshopParticipantsView.as_view()
