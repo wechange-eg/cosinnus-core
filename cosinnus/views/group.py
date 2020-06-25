@@ -569,6 +569,14 @@ class WorkshopParticipantsView(SamePortalGroupMixin, RequireWriteMixin, DetailVi
         profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
         profile.save()
 
+        # Add user to the parent group
+        CosinnusGroupMembership.objects.create(
+            group=self.group,
+            user=user,
+            status=MEMBERSHIP_MEMBER
+        )
+
+        # Add user to all child groups/projects that were marked with 1 in the csv
         for i, column in enumerate(data):
             if column == '1':
                 group = groups[i]
