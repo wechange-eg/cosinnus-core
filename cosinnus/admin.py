@@ -139,7 +139,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
                 'move_groups_to_current_portal', 'move_groups_to_current_portal_and_message_users']
     list_display = ('name', 'slug', 'portal', 'public', 'is_active',)
     list_filter = ('portal', 'public', 'is_active',)
-    search_fields = ('name', 'slug',)
+    search_fields = ('name', 'slug', 'id',)
     prepopulated_fields = {'slug': ('name', )}
     readonly_fields = ('created', 'last_modified')
     raw_id_fields = ('parent',)
