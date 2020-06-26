@@ -1126,6 +1126,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
                     'size': size,
                 })
             except (InvalidImageFormatError, OSError, Exception):
+                thumbnail = None
                 if settings.DEBUG:
                     raise
             
