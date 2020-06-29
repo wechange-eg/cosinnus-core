@@ -98,6 +98,12 @@ function cellspaceClasses() {
     
     .pipe(replace(/\s+</gim, '\n<'))  // remove whitespaces between tags for newlines
     .pipe(replace(/<style>[\s\S]+<\/style>/gim, ''))
+    
+    // there two lines are used to abuse the inliner to print out the content of a SCSS class inline anywhere into the HTML
+    // example usage:     </style><inlinemagicreplacer class="primary-color"></inlinemagicreplacer><style no-scrub="1">
+    .pipe(replace(/<\/style><inlinemagicreplacer[\s\S]+?style="/gim, '')) 
+    .pipe(replace('"></inlinemagicreplacer><style no-scrub="1">', ''))
+    
     .pipe(gulp.dest('dist'));
 }
 
