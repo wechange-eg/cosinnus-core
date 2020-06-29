@@ -337,6 +337,14 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
         """ Sets new username for Rocket.Chat """
         self.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = username
 
+    @property
+    def workshop_user_name(self):
+        return self.settings.get(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME)
+
+    @property
+    def is_workshop_participant(self):
+        return self.settings.get(PROFILE_SETTING_WORKSHOP_PARTICIPANT, False)
+
 
 class UserProfile(BaseUserProfile):
     
