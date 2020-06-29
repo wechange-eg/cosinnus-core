@@ -87,6 +87,7 @@ from django.utils.safestring import mark_safe
 from django.template.defaultfilters import linebreaksbr
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
+from cosinnus.views.mixins.group import GroupIsWorkshopMixin
 from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
 from django_select2.views import NO_ERR_RESP, Select2View
 from django.views.generic.edit import FormView
@@ -99,7 +100,9 @@ from django.http import HttpResponse
 from cosinnus.models.group import MEMBERSHIP_MEMBER
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
+from cosinnus.models.profile import UserProfile
 from cosinnus.utils.user import create_base_user
+from django.views.generic.edit import FormView
 
 logger = logging.getLogger('cosinnus')
 
@@ -478,38 +481,59 @@ group_detail = GroupDetailView.as_view()
 group_detail_api = GroupDetailView.as_view(is_ajax_request_url=True)
 
 
-class WorkshopParticipantsView(SamePortalGroupMixin, RequireWriteMixin, DetailView):
+class WorkshopParticipantsView(SamePortalGroupMixin, RequireWriteMixin, GroupIsWorkshopMixin, DetailView):
 
 
     template_name = 'cosinnus/group/workshop_participants.html'
+
 
     def get_object(self, queryset=None):
         return self.group
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = CosinusWorkshopParticipantCSVImportForm()
+
+        admin_ids = CosinnusGroupMembership.objects.get_admins(group=self.group)
+        all_member_ids = CosinnusGroupMembership.objects.get_members(group=self.group)
+
+        _q = get_user_model().objects.all()
+        _q = _q.order_by('first_name', 'last_name').select_related('cosinnus_profile')
+
+        admins = _q.filter(id__in=admin_ids)
+        members = _q.filter(id__in=all_member_ids)
+        context['members'] = members
+        context['admins'] = admins
+
         return context
 
-    def post(self, request, *args, **kwargs):
 
-        form = CosinusWorkshopParticipantCSVImportForm(request.POST, request.FILES)
-        if form.is_valid():
-            csv_file = request.FILES['participants']
-            decoded_file = csv_file.read().decode('utf-8')
-            header, accounts = self.process_csv(decoded_file)
+workshop_participants = WorkshopParticipantsView.as_view()
 
-            filename = '{}_participants.csv'.format(self.group.slug)
 
-            response = HttpResponse(content_type='text/csv')
-            response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
+class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsWorkshopMixin, FormView):
 
-            writer = csv.writer(response)
-            writer.writerow(header)
-            for account in accounts:
-                writer.writerow(account)
+    template_name = 'cosinnus/group/workshop_participants_upload.html'
+    form_class = CosinusWorkshopParticipantCSVImportForm
 
-            return response
+    def get_object(self, queryset=None):
+        return self.group
+
+
+    def form_valid(self, form):
+        csv_file = self.request.FILES['participants']
+        decoded_file = csv_file.read().decode('utf-8')
+        header, accounts = self.process_csv(decoded_file)
+
+        filename = '{}_participants.csv'.format(self.group.slug)
+
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
+
+        writer = csv.writer(response)
+        writer.writerow(header)
+        for account in accounts:
+            writer.writerow(account)
+        return response
 
     def process_csv(self, file):
 
@@ -554,45 +578,65 @@ class WorkshopParticipantsView(SamePortalGroupMixin, RequireWriteMixin, DetailVi
         username = data[0].replace(' ', '_')
         first_name = data[1]
         last_name = data[2]
-        random_email = '{}@wechange.de'.format(get_random_string())
-        pwd = get_random_string()
 
-        user, profile = create_base_user(random_email, password=pwd, first_name=first_name, last_name=last_name)
+        try:
+            profile = UserProfile.objects.get(settings__contains=username)
+            user = profile.user
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
 
-        unique_email = '{}--{}{}-nr@wechange.de'.format(str(self.get_object().id), username, str(user.id))
-        user.email = unique_email
-        user.save()
+            self.create_or_update_memberships(user, data, groups)
 
-        profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
-        profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
-        profile.save()
+            return data + [user.email, '']
+
+        except ObjectDoesNotExist:
+            random_email = '{}@wechange.de'.format(get_random_string())
+            pwd = get_random_string()
+            user, profile = create_base_user(random_email, password=pwd, first_name=first_name, last_name=last_name)
+
+            profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
+            profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
+            profile.save()
+
+            unique_email = '{}--{}{}-nr@wechange.de'.format(str(self.group.id), username, str(user.id))
+            user.email = unique_email
+            user.save()
+
+            self.create_or_update_memberships(user, data, groups)
+
+            return data + [unique_email, pwd]
+
+    def create_or_update_memberships(self, user, data, groups):
 
         # Add user to the parent group
-        CosinnusGroupMembership.objects.create(
+        membership, created = CosinnusGroupMembership.objects.get_or_create(
             group=self.group,
-            user=user,
-            status=MEMBERSHIP_MEMBER
+            user=user
         )
+        if created:
+            membership.status = MEMBERSHIP_MEMBER
+            membership.save()
 
         # Add user to all child groups/projects that were marked with 1 in the csv
         for i, column in enumerate(data):
             if column == '1':
                 group = groups[i]
                 if isinstance(group, CosinnusGroup):
-                    CosinnusGroupMembership.objects.create(
+                    membership, created = CosinnusGroupMembership.objects.get_or_create(
                         group=group,
-                        user=user,
-                        status=MEMBERSHIP_MEMBER
+                        user=user
                     )
+                    if created:
+                        membership.status = MEMBERSHIP_MEMBER
+                        membership.save()
                 else:
                     continue
             else:
                 continue
 
-        return data + [unique_email, pwd]
 
-
-workshop_participants = WorkshopParticipantsView.as_view()
+workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
 
 
 class GroupMembersMapListView(GroupDetailView):
