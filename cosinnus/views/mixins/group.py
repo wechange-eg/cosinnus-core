@@ -342,3 +342,11 @@ class EndlessPaginationMixin(object):
             self.template_name = self.items_template
             self.is_paginated = True
         return super(EndlessPaginationMixin, self).dispatch( request, *args, **kwargs)
+
+
+class GroupIsWorkshopMixin:
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.group.is_group_and_workshop:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
