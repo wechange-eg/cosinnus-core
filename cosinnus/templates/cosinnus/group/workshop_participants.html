@@ -1,13 +1,65 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n cosinnus_tags thumbnail %}
-{% load static from staticfiles %}
+{% load i18n cosinnus_tags static thumbnail %}
 
 {% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
 
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_group.html"  with current_page="groupdetails" %}
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_13_groupadministration" %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">{% trans "Workshop Management" %}</li>
+{% endblock %}
+
 {% block content %}
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
+<div class="content-box">
+	{% group_url 'cosinnus:workshop-participants-upload' group=group as workshop_participants_upload_page %}
+	
+
+	<div class="panel panel-default large-space">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                {% trans "Accounts created via CSV Upload" %}
+                <a class="btn" href="{{ workshop_participants_upload_page }}">Upload Participants</a>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse">
+            <div class="panel-body">
+		        {% for member in members %}
+		        	{% if member.cosinnus_profile.is_workshop_participant %}
+		            <div class="fadedown {% if not forloop.last > 0 %}regular-space{% endif %}">
+		                <div class="btn btn-emphasized w100">
+		                    <ul class="media-list">
+		                        <li class="media">
+		                            <span class="pull-left" href="{{ member|profile_url }}">
+		                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
+		                            </span>
+		                            <div class="media-body">
+		                                    <span class="annotation">
+		                                        {% if member in admins %}
+		                                            {% trans "Admin" %}
+		                                        {% elif member in members %}
+		                                            {% trans "Member" %}
+		                                        {% endif %}
+		                                    </span>
+		                                <a href="{{ member|profile_url }}">
+		                                	{% if member.cosinnus_profile.workshop_user_name %}
+		                                	{{ member.cosinnus_profile.workshop_user_name }}
+		                                	{% else %}
+		                                    {{ member|full_name }}
+		                                    {% endif %}
+		                                </a>
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </div>
+		            </div>
+		            {% endif %}
+		        {% endfor %}
+            </div> 
+        </div> 
+    </div> 
+</div>
 {% endblock content %}

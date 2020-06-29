@@ -1,6 +1,7 @@
 {% load i18n cosinnus_tags %}
 
 {% group_url 'cosinnus:group-detail' group=group as group_detail_page %}
+{% group_url 'cosinnus:workshop-participants' group=group as workshop_participants_page %}
 {% group_url 'cosinnus:group-edit' group=group as group_edit_page %}
 {% group_url 'cosinnus:group-dashboard' group=group as group_dashboard_page %}
 {% group_url 'cosinnus:group-microsite' group=group as group_microsite_page %}
@@ -46,7 +47,7 @@
         {% for app in apps %}
             {% captureas app_css_class %}{% if app.app == 'cosinnus_todo' %}app-todos{% elif app.app == 'cosinnus_note' %}app-main{% elif app.app == 'cosinnus_poll' %}app-poll{% elif app.app == 'cosinnus_cloud' %}app-cloud{% elif app.app == 'cosinnus_marketplace' %}app-marketplace{% elif app.app == 'cosinnus_file' %}app-files{% elif app.app == 'cosinnus_etherpad' %}app-etherpad{% elif app.app == 'cosinnus_event' %}app-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
             {% captureas app_icon %}{% if app.app == 'cosinnus_todo' %}fa-tasks{% elif app.app == 'cosinnus_note' %}fa-book{% elif app.app == 'cosinnus_poll' %}fa-bar-chart{% elif app.app == 'cosinnus_cloud' %}fa-cloud{% elif app.app == 'cosinnus_marketplace' %}fa-exchange{% elif app.app == 'cosinnus_file' %}fa-file{% elif app.app == 'cosinnus_etherpad' %}fa-file-text{% elif app.app == 'cosinnus_event' %}fa-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
-        
+
 	        <li class="{{app_css_class}} appnavi-listelement {% if app.active %}active{% endif %}">
 	            <a href="{{ app.url }}" {% if app.app == 'cosinnus_cloud' and SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}>
 	                <i class="fa {{ app_icon }}"></i>
@@ -55,22 +56,22 @@
 	        </li>
         {% endfor %}
 
-
-        {% if group.is_group_and_workshop %}
+        {% if user|has_write_access:group and group.is_group_and_workshop %}
         <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %}">
-            <a href="">
+            <a href="{{ workshop_participants_page }}">
                 <i class="fa fa-group"></i>
-                {% trans "Workshop Participants" %}
+                {% trans "Workshop Management" %}
             </a>
         </li>
-        {% else %}
+        {% endif%}
+
         <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %}">
             <a href="{{ group_detail_page }}">
                 <i class="fa fa-group"></i>
                 {% trans "Members" %}
             </a>
         </li>
-        {% endif %}
+
         {% if user|has_write_access:group %}
         <li class="app-main appnavi-listelement">
             <a href="{{ group_edit_page }}">
