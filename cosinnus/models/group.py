@@ -764,11 +764,11 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         unique=True, blank=True, null=True,
         help_text='The boolean internal nextcloud id for the groupfolder. Only set once a groupfolder is created.')
 
-    is_workshop = models.BooleanField(_('Is workshop'),
-        help_text=_('If a group is marked as workshop it is possible to auto-generate accounts for workshop participants'),
+    is_conference = models.BooleanField(_('Is conference'),
+        help_text=_('If a group is marked as conference it is possible to auto-generate accounts for workshop participants'),
         default=False)
-    workshop_is_running = models.BooleanField(_('Workshop is running'),
-        help_text=_('Determins whether a group that is marked as workshop is running'),
+    conference_is_running = models.BooleanField(_('Conference is running'),
+        help_text=_('Determins whether a group that is marked as conference is running'),
         default=False)
 
     
@@ -964,8 +964,8 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         return qs
 
     @property
-    def is_group_and_workshop(self):
-        return self.type == self.TYPE_SOCIETY and self.is_workshop
+    def is_group_and_conference(self):
+        return self.type == self.TYPE_SOCIETY and self.is_conference
     
     def get_admin_contact_url(self):
         if 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:

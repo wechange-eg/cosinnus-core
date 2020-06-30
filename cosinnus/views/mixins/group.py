@@ -344,9 +344,9 @@ class EndlessPaginationMixin(object):
         return super(EndlessPaginationMixin, self).dispatch( request, *args, **kwargs)
 
 
-class GroupIsWorkshopMixin:
+class GroupIsConferenceMixin:
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.group.is_group_and_workshop:
+        if not self.group.is_group_and_conference:
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)

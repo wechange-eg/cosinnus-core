@@ -143,7 +143,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', )}
     readonly_fields = ('created', 'last_modified')
     raw_id_fields = ('parent',)
-    exclude = ('is_workshop', 'workshop_is_running')
+    exclude = ('is_conference', 'conference_is_running')
     
     def convert_to_society(self, request, queryset):
         """ Converts this CosinnusGroup's type """

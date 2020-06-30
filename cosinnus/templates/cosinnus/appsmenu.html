@@ -1,7 +1,7 @@
 {% load i18n cosinnus_tags %}
 
 {% group_url 'cosinnus:group-detail' group=group as group_detail_page %}
-{% group_url 'cosinnus:workshop-participants' group=group as workshop_participants_page %}
+{% group_url 'cosinnus:conference-management' group=group as conference_management_page %}
 {% group_url 'cosinnus:group-edit' group=group as group_edit_page %}
 {% group_url 'cosinnus:group-dashboard' group=group as group_dashboard_page %}
 {% group_url 'cosinnus:group-microsite' group=group as group_microsite_page %}
@@ -56,11 +56,11 @@
 	        </li>
         {% endfor %}
 
-        {% if user|has_write_access:group and group.is_group_and_workshop %}
+        {% if user|has_write_access:group and group.is_group_and_conference %}
         <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %}">
-            <a href="{{ workshop_participants_page }}">
+            <a href="{{ conference_management_page }}">
                 <i class="fa fa-group"></i>
-                {% trans "Workshop Management" %}
+                {% trans "Conference Management" %}
             </a>
         </li>
         {% endif%}

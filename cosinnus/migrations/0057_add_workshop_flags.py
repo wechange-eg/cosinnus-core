@@ -14,12 +14,12 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='cosinnusgroup',
-            name='is_workshop',
+            name='is_conference',
             field=models.BooleanField(default=False, help_text='If a group is marked as workshop it is possible to auto-generate accounts for workshop participants', verbose_name='Is workshop'),
         ),
         migrations.AddField(
             model_name='cosinnusgroup',
-            name='workshop_is_running',
+            name='conference_is_running',
             field=models.BooleanField(default=False, help_text='Determins whether a group that is marked as workshop is running', verbose_name='Workshop is running'),
         )
     ]

@@ -197,7 +197,7 @@ for url_key in group_model_registry:
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/$' % url_key, 'cms.group_microsite', name=prefix+'group-microsite'),
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/edit/$' % url_key, 'cms.group_microsite_edit', name=prefix+'group-microsite-edit'),
         url(r'^%s/(?P<group>[^/]+)/members/$' % url_key, group.group_detail, name=prefix+'group-detail'),
-        url(r'^%s/(?P<group>[^/]+)/workshop-participants/$' % url_key, group.workshop_participants, name=prefix+'workshop-participants'),
+        url(r'^%s/(?P<group>[^/]+)/conference-management/$' % url_key, group.conference_management, name=prefix+'conference-management'),
         url(r'^%s/(?P<group>[^/]+)/workshop-participants-upload/$' % url_key, group.workshop_participants_upload, name=prefix+'workshop-participants-upload'),
         url(r'^%s/(?P<group>[^/]+)/members/recruit/$' % url_key, group.group_user_recruit, name=prefix+'group-user-recruit'),
         url(r'^%s/(?P<group>[^/]+)/members/recruitdelete/(?P<id>\d+)/$' % url_key, group.group_user_recruit_delete, name=prefix+'group-user-recruit-delete'),

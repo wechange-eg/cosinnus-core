@@ -87,7 +87,7 @@ from django.utils.safestring import mark_safe
 from django.template.defaultfilters import linebreaksbr
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
-from cosinnus.views.mixins.group import GroupIsWorkshopMixin
+from cosinnus.views.mixins.group import GroupIsConferenceMixin
 from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
 from django_select2.views import NO_ERR_RESP, Select2View
 from django.views.generic.edit import FormView
@@ -481,10 +481,10 @@ group_detail = GroupDetailView.as_view()
 group_detail_api = GroupDetailView.as_view(is_ajax_request_url=True)
 
 
-class WorkshopParticipantsView(SamePortalGroupMixin, RequireWriteMixin, GroupIsWorkshopMixin, DetailView):
+class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, DetailView):
 
 
-    template_name = 'cosinnus/group/workshop_participants.html'
+    template_name = 'cosinnus/group/conference_management.html'
 
 
     def get_object(self, queryset=None):
@@ -507,10 +507,10 @@ class WorkshopParticipantsView(SamePortalGroupMixin, RequireWriteMixin, GroupIsW
         return context
 
 
-workshop_participants = WorkshopParticipantsView.as_view()
+conference_management = ConferenceManagementView.as_view()
 
 
-class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsWorkshopMixin, FormView):
+class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, FormView):
 
     template_name = 'cosinnus/group/workshop_participants_upload.html'
     form_class = CosinusWorkshopParticipantCSVImportForm
