@@ -97,7 +97,6 @@ from django.contrib.auth.forms import UserCreationForm
 from cosinnus.models.profile import get_user_profile_model
 from django.utils.crypto import get_random_string
 from django.http import HttpResponse
-from cosinnus.models.group import MEMBERSHIP_MEMBER
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
 from cosinnus.models.profile import UserProfile
@@ -618,22 +617,35 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
             membership.status = MEMBERSHIP_MEMBER
             membership.save()
 
-        # Add user to all child groups/projects that were marked with 1 in the csv
-        for i, column in enumerate(data):
-            if column == '1':
-                group = groups[i]
-                if isinstance(group, CosinnusGroup):
+        # Add user to all child groups/projects that were marked with 1 or 2 in the csv or delete membership
+        for i, group in enumerate(groups):
+            if isinstance(group, CosinnusGroup):
+                if data[i] in [str(MEMBERSHIP_MEMBER), str(MEMBERSHIP_ADMIN)]:
+                    status = int(data[i])
                     membership, created = CosinnusGroupMembership.objects.get_or_create(
                         group=group,
                         user=user
                     )
                     if created:
-                        membership.status = MEMBERSHIP_MEMBER
+                        membership.status = status
                         membership.save()
+                    else:
+                        current_status = membership.status
+                        if current_status < status:
+                            membership.status = status
+                            membership.save()
                 else:
-                    continue
+                    try:
+                        membership = CosinnusGroupMembership.objects.get(
+                            group=group,
+                            user=user
+                        )
+                        membership.delete()
+                    except ObjectDoesNotExist:
+                        continue
             else:
                 continue
+
 
 
 workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
