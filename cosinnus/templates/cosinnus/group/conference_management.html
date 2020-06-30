@@ -16,20 +16,20 @@
 {% block content %}
 <div class="content-box">
 	{% group_url 'cosinnus:workshop-participants-upload' group=group as workshop_participants_upload_page %}
-	
+
 
 	<div class="panel panel-default large-space">
         <div class="panel-heading">
             <h4 class="panel-title">
-                {% trans "Accounts created via CSV Upload" %}
-                <a class="btn" href="{{ workshop_participants_upload_page }}">Upload Participants</a>
+                {% trans "Participant Accounts created via CSV Upload" %}
+                <a class="btn" href="{{ workshop_participants_upload_page }}"><i class="fa fa-upload"></i> {% trans "Upload Participants" %}</a>
             </h4>
         </div>
         <div id="collapseThree" class="panel-collapse">
             <div class="panel-body">
 		        {% for member in members %}
 		        	{% if member.cosinnus_profile.is_workshop_participant %}
-		            <div class="fadedown {% if not forloop.last > 0 %}regular-space{% endif %}">
+		            <div class="fadedown regular-space">
 		                <div class="btn btn-emphasized w100">
 		                    <ul class="media-list">
 		                        <li class="media">
@@ -58,8 +58,33 @@
 		            </div>
 		            {% endif %}
 		        {% endfor %}
-            </div> 
-        </div> 
-    </div> 
+		        <div class="fadedown">
+			        <form action="" method="post">
+		    		{% csrf_token %}
+				        <button type="submit" class="btn btn-emphasized" name="{% if group.conference_is_running %}finishConferenence{% else %}startConferenence{% endif%}">
+				            <ul class="media-list">
+				                <li class="media">
+				                    <a class="pull-left" href="#">
+				                    	{% if group.conference_is_running %}
+				                    	<i class="far fa-stop-circle"></i>
+				                    	{% else %}
+				                        <i class="far fa-play-circle"></i>
+				                        {% endif %}
+				                    </a>
+				                    <div class="media-body">
+				                    	{% if group.conference_is_running %}
+				                        {% trans "Finish conference" %}
+				                        {% else %}
+				                        {% trans "Start conference" %}
+				                        {% endif %}
+				                    </div>
+				                </li>
+				            </ul>
+				        </button>
+					</form>
+				</div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}

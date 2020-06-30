@@ -489,6 +489,28 @@ class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsC
     def get_object(self, queryset=None):
         return self.group
 
+    def post(self, request, *args, **kwargs):
+        if 'startConferenence' in request.POST:
+            self.group.conference_is_running = True
+            self.group.save()
+            self.set_members_is_active(True)
+        if 'finishConferenence' in request.POST:
+            self.group.conference_is_running = False
+            self.group.save()
+            self.set_members_is_active(False)
+        return redirect(group_aware_reverse('cosinnus:conference-management',
+                                            kwargs={'group': self.group}))
+
+    def set_members_is_active(self, status):
+        all_member_ids = CosinnusGroupMembership.objects.get_members(group=self.group)
+        admin_ids = CosinnusGroupMembership.objects.get_admins(group=self.group)
+        non_admin_members = set(all_member_ids) - set(admin_ids)
+        _q = get_user_model().objects.all()
+        members = _q.filter(id__in=non_admin_members)
+        for member in members:
+            member.is_active = status
+            member.save()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -500,6 +522,7 @@ class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsC
 
         admins = _q.filter(id__in=admin_ids)
         members = _q.filter(id__in=all_member_ids)
+        context['group'] = self.group
         context['members'] = members
         context['admins'] = admins
 
@@ -516,7 +539,6 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
 
     def get_object(self, queryset=None):
         return self.group
-
 
     def form_valid(self, form):
         csv_file = self.request.FILES['participants']
@@ -599,6 +621,7 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
 
                 unique_email = '{}--{}{}-nr@wechange.de'.format(str(self.group.id), username, str(user.id))
                 user.email = unique_email
+                user.is_active = False
                 user.save()
 
                 self.create_or_update_memberships(user, data, groups)
