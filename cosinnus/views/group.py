@@ -584,27 +584,27 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
             user.first_name = first_name
             user.last_name = last_name
             user.save()
-
             self.create_or_update_memberships(user, data, groups)
-
             return data + [user.email, '']
-
         except ObjectDoesNotExist:
             random_email = '{}@wechange.de'.format(get_random_string())
             pwd = get_random_string()
-            user, profile = create_base_user(random_email, password=pwd, first_name=first_name, last_name=last_name)
+            user = create_base_user(random_email, password=pwd, first_name=first_name, last_name=last_name)
 
-            profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
-            profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
-            profile.save()
+            if user:
+                profile = get_user_profile_model()._default_manager.get_for_user(user)
+                profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
+                profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
+                profile.save()
 
-            unique_email = '{}--{}{}-nr@wechange.de'.format(str(self.group.id), username, str(user.id))
-            user.email = unique_email
-            user.save()
+                unique_email = '{}--{}{}-nr@wechange.de'.format(str(self.group.id), username, str(user.id))
+                user.email = unique_email
+                user.save()
 
-            self.create_or_update_memberships(user, data, groups)
-
-            return data + [unique_email, pwd]
+                self.create_or_update_memberships(user, data, groups)
+                return data + [unique_email, pwd]
+            else:
+                return data + [_('User was not created'), '']
 
     def create_or_update_memberships(self, user, data, groups):
 
