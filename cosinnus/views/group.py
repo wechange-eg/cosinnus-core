@@ -493,38 +493,48 @@ class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsC
         if 'startConferenence' in request.POST:
             self.group.conference_is_running = True
             self.group.save()
-            self.set_members_is_active(True)
-        if 'finishConferenence' in request.POST:
+            self.update_members_status(True)
+        elif 'finishConferenence' in request.POST:
             self.group.conference_is_running = False
             self.group.save()
-            self.set_members_is_active(False)
+            self.update_members_status(False)
+        elif 'deactivate_member' in request.POST:
+            user_id = int(request.POST.get('deactivate_member'))
+            self.update_member_status(user_id, False)
+        elif 'activate_member' in request.POST:
+            user_id = int(request.POST.get('activate_member'))
+            self.update_member_status(user_id, True)
         return redirect(group_aware_reverse('cosinnus:conference-management',
                                             kwargs={'group': self.group}))
 
-    def set_members_is_active(self, status):
-        all_member_ids = CosinnusGroupMembership.objects.get_members(group=self.group)
-        admin_ids = CosinnusGroupMembership.objects.get_admins(group=self.group)
-        non_admin_members = set(all_member_ids) - set(admin_ids)
+    def get_uploaded_members(self):
+        member_ids = CosinnusGroupMembership.objects.get_members(group=self.group)
         _q = get_user_model().objects.all()
-        members = _q.filter(id__in=non_admin_members)
-        for member in members:
+        members = _q.filter(id__in=member_ids)
+        uploaded_members = members.filter(cosinnus_profile__settings__contains=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
+
+        return uploaded_members
+
+    def update_members_status(self, status):
+        for member in self.get_uploaded_members():
             member.is_active = status
+            if status:
+                member.last_login = None
             member.save()
+
+    def update_member_status(self, user_id, status):
+        try:
+            user = get_user_model().objects.get(id=user_id)
+            user.is_active = status
+            user.save()
+        except ObjectDoesNotExist:
+            pass
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        admin_ids = CosinnusGroupMembership.objects.get_admins(group=self.group)
-        all_member_ids = CosinnusGroupMembership.objects.get_members(group=self.group)
-
-        _q = get_user_model().objects.all()
-        _q = _q.order_by('first_name', 'last_name').select_related('cosinnus_profile')
-
-        admins = _q.filter(id__in=admin_ids)
-        members = _q.filter(id__in=all_member_ids)
         context['group'] = self.group
-        context['members'] = members
-        context['admins'] = admins
+        context['members'] = self.get_uploaded_members()
+        context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
 
         return context
 

@@ -28,7 +28,6 @@
         <div id="collapseThree" class="panel-collapse">
             <div class="panel-body">
 		        {% for member in members %}
-		        	{% if member.cosinnus_profile.is_workshop_participant %}
 		            <div class="fadedown regular-space">
 		                <div class="btn btn-emphasized w100">
 		                    <ul class="media-list">
@@ -36,14 +35,31 @@
 		                            <span class="pull-left" href="{{ member|profile_url }}">
 		                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
 		                            </span>
+		                            <a class="pull-right fadedown-clickarea" href="#">
+			                            <i class="fa fa-chevron-down"></i>
+			                        </a>
 		                            <div class="media-body">
-		                                    <span class="annotation">
-		                                        {% if member in admins %}
-		                                            {% trans "Admin" %}
-		                                        {% elif member in members %}
-		                                            {% trans "Member" %}
-		                                        {% endif %}
-		                                    </span>
+		                                <span class="annotation mobile-hidden">
+		                                	{% if member.last_login %}
+		                                	<span>
+		                                		{% trans 'last login' %}: {{ member.last_login | date }}
+		                                		&nbsp;&nbsp;
+		                                	</span>
+		                                	{% else %}
+		                                	<span>
+		                                		{% trans 'last login' %}: {% trans 'no login yet'%}
+		                                		&nbsp;&nbsp;
+		                                	</span>
+		                                	{% endif %}
+		                                	<span>
+		                                		{% if member.id in group_admins %} {% trans "Admin" %} {% else %} {% trans "Member" %} {% endif %}
+		                                		&nbsp;&nbsp;
+		                                	</span>
+		                                	<span>
+	                                        {% if member.is_active %} {% trans 'active'%} {% else %} {% trans 'not active'%} {% endif %}
+	                                        	&nbsp;&nbsp;
+	                                    	</span>
+	                                	</span>
 		                                <a href="{{ member|profile_url }}">
 		                                	{% if member.cosinnus_profile.workshop_user_name %}
 		                                	{{ member.cosinnus_profile.workshop_user_name }}
@@ -55,8 +71,52 @@
 		                        </li>
 		                    </ul>
 		                </div>
+		                <div>
+
+		                	{% if member.is_active %}
+		                	{% captureas modal_deactivate_id %}userModal_deactivate_{{member.pk}}{% endcaptureas %}
+		                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_deactivate_id}}">
+		                        <ul class="media-list">
+		                            <li class="media">
+		                            	<a class="pull-left" href="#">
+				                                <i class="fas fa-minus-circle"></i>
+				                            </a>
+		                                <div class="media-body">
+		                                    {% trans "deactivate member" %}
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </button>
+
+		                    {% else %}
+		                    {% captureas modal_activate_id %}userModal_activate_{{member.pk}}{% endcaptureas %}
+		                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_activate_id}}">
+		                        <ul class="media-list">
+		                            <li class="media">
+		                            	<a class="pull-left" href="#">
+				                                <i class="fas fa-check-circle"></i>
+				                            </a>
+		                                <div class="media-body">
+		                                    {% trans "activate member" %}
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </button>
+		                    {% endif %}
+		                </div>
 		            </div>
-		            {% endif %}
+		            {% if member.is_active %}
+		            {% captureas label %}{% trans "Do you really want to deactivate the member's user account ?" %}{% endcaptureas %}
+	                {% captureas title %}{% trans "Deactivate Member" %}{% endcaptureas %}
+	                {% captureas action %}{% group_url 'cosinnus:conference-management' group=object %}{% endcaptureas %}
+	                {% include "cosinnus/modal_box.html" with id=modal_deactivate_id label=label title=title form_action=action submit_name="deactivate_member" submit_value=member.id title_icon='fas fa-minus-circle' %}
+
+	                {% else %}
+	                {% captureas label %}{% trans "Do you really want to activate the member's user account ?" %}{% endcaptureas %}
+	                {% captureas title %}{% trans "Activate Member" %}{% endcaptureas %}
+	                {% captureas action %}{% group_url 'cosinnus:conference-management' group=object %}{% endcaptureas %}
+	                {% include "cosinnus/modal_box.html" with id=modal_activate_id label=label title=title form_action=action submit_name="activate_member" submit_value=member.id title_icon='fas fa-check-circle' %}
+	                {% endif %}
 		        {% endfor %}
 		        <div class="fadedown">
 			        <form action="" method="post">
