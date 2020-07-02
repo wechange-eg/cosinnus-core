@@ -90,10 +90,8 @@ from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
 from cosinnus.views.mixins.group import GroupIsConferenceMixin
 from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
 from django_select2.views import NO_ERR_RESP, Select2View
-from django.views.generic.edit import FormView
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.forms import UserCreationForm
 from cosinnus.models.profile import get_user_profile_model
 from django.utils.crypto import get_random_string
 from django.http import HttpResponse
@@ -505,7 +503,7 @@ class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsC
             user_id = int(request.POST.get('activate_member'))
             self.update_member_status(user_id, True)
         return redirect(group_aware_reverse('cosinnus:conference-management',
-                                            kwargs={'group': self.group}))    
+                                            kwargs={'group': self.group}))
 
     def update_members_status(self, status):
         for member in self.group.conference_members:
@@ -599,8 +597,12 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
     def create_account(self, data, groups):
 
         username = data[0].replace(' ', '_')
-        first_name = data[1]
-        last_name = data[2]
+        first_name = ''
+        last_name = ''
+        if not isinstance(groups[1], CosinnusGroup) and not data[1] in [str(MEMBERSHIP_MEMBER), str(MEMBERSHIP_ADMIN)]:
+            first_name = data[1]
+        if not isinstance(groups[2], CosinnusGroup) and not data[2] in [str(MEMBERSHIP_MEMBER), str(MEMBERSHIP_ADMIN)]:
+            last_name = data[2]
 
         try:
             profile = UserProfile.objects.get(settings__contains=username)
