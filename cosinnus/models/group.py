@@ -60,6 +60,7 @@ from cosinnus.models.tagged import LikeableObjectMixin, LastVisitedMixin
 import datetime
 from django.contrib.contenttypes.models import ContentType
 
+
 logger = logging.getLogger('cosinnus')
 
 # this reads the environment and inits the right locale
@@ -966,7 +967,14 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     @property
     def is_group_and_conference(self):
         return self.type == self.TYPE_SOCIETY and self.is_conference
-    
+
+    @property
+    def conference_members(self):
+        from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
+        if self.is_group_and_conference:
+            return self.users.filter(cosinnus_profile__settings__contains=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
+        return []
+
     def get_admin_contact_url(self):
         if 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
             return ''

@@ -505,18 +505,10 @@ class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsC
             user_id = int(request.POST.get('activate_member'))
             self.update_member_status(user_id, True)
         return redirect(group_aware_reverse('cosinnus:conference-management',
-                                            kwargs={'group': self.group}))
-
-    def get_uploaded_members(self):
-        member_ids = CosinnusGroupMembership.objects.get_members(group=self.group)
-        _q = get_user_model().objects.all()
-        members = _q.filter(id__in=member_ids)
-        uploaded_members = members.filter(cosinnus_profile__settings__contains=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
-
-        return uploaded_members
+                                            kwargs={'group': self.group}))    
 
     def update_members_status(self, status):
-        for member in self.get_uploaded_members():
+        for member in self.group.conference_members:
             member.is_active = status
             if status:
                 member.last_login = None
@@ -533,7 +525,7 @@ class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsC
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['group'] = self.group
-        context['members'] = self.get_uploaded_members()
+        context['members'] = self.group.conference_members
         context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
 
         return context
@@ -555,7 +547,7 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
         decoded_file = csv_file.read().decode('utf-8')
         header, accounts = self.process_csv(decoded_file)
 
-        filename = '{}_participants.csv'.format(self.group.slug)
+        filename = '{}_participants_passwords.csv'.format(self.group.slug)
 
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
@@ -679,9 +671,37 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
             else:
                 continue
 
-
-
 workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
+
+
+class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
+
+
+    def get(self, request, *args, **kwars):
+        members = self.group.conference_members
+
+        filename = '{}_participants.csv'.format(self.group.slug)
+
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
+
+        header = [_('Workshop username'), _('email'), _('has logged in'), _('last login date')]
+
+        writer = csv.writer(response)
+        writer.writerow(header)
+        for member in members:
+            row = [member.cosinnus_profile.workshop_user_name,
+                   member.email] + self.get_last_login(member)
+            writer.writerow(row)
+        return response
+
+    def get_last_login(self, member):
+        has_logged_in = 1 if member.last_login else 0
+        logged_in_date = member.last_login.date() if member.last_login else ''
+
+        return [has_logged_in, logged_in_date]
+
+workshop_participants_download = WorkshopParticipantsDownloadView.as_view()
 
 
 class GroupMembersMapListView(GroupDetailView):

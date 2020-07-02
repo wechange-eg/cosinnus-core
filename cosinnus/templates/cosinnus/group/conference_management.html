@@ -16,12 +16,14 @@
 {% block content %}
 <div class="content-box">
 	{% group_url 'cosinnus:workshop-participants-upload' group=group as workshop_participants_upload_page %}
+	{% group_url 'cosinnus:workshop-participants-download' group=group as workshop_participants_download_page %}
 
 
 	<div class="panel panel-default large-space">
         <div class="panel-heading">
             <h4 class="panel-title">
                 {% trans "Participant Accounts created via CSV Upload" %}
+                <a class="btn" href="{{ workshop_participants_download_page }}"><i class="fa fa-download"></i> {% trans "Download Participants" %}</a>
                 <a class="btn" href="{{ workshop_participants_upload_page }}"><i class="fa fa-upload"></i> {% trans "Upload Participants" %}</a>
             </h4>
         </div>
