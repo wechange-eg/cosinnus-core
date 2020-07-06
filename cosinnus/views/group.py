@@ -557,9 +557,10 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
         return response
 
     def process_csv(self, file):
-
         io_string = io.StringIO(file)
-        reader = csv.reader(io_string, delimiter=';', quotechar='|')
+        dialect = csv.Sniffer().sniff(io_string.read(1024), delimiters=";,")
+        io_string.seek(0)
+        reader = csv.reader(io_string, dialect)
         header = next(reader, None)
         cleaned_header = self.clean_row_data(header)
         groups_list = self.get_groups_from_header(cleaned_header)
