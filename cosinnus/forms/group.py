@@ -332,4 +332,5 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
                                                "add a 1 to all workshop columns where the user should be a normal member or a 2 "
                                                "if that user should be workshop admin. The CSV upload will trigger the creation of "
                                                "the accounts and account workshop memberships and results in a direct CSV download with the "
-                                               "newly created accounts and passwords. Please refresh the page after the download."))
+                                               "newly created accounts and passwords. The passwords will only be included when the account is created. "
+                                               "Please refresh the page after the download."))
