@@ -21,7 +21,7 @@
 	    {% csrf_token %}
         {% for field in form %}
         <div class="cosinnus-field">
-            {% include 'cosinnus/fields/default_field.html' with field=field field_value=name_val %}
+            {% include 'cosinnus/fields/default_field.html' with field=field legend=field.help_text field_value=name_val %}
         </div>
         {% endfor %}
         <button type="submit" class="btn btn-emphasized">
