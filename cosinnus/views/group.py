@@ -531,10 +531,23 @@ class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsC
         except ObjectDoesNotExist:
             pass
 
+    def get_member_workshops(self, member):
+        return CosinnusGroupMembership.objects.filter(user=member, group__parent=self.group)
+
+    def get_members_and_workshops(self):
+        members = []
+        for member in self.group.conference_members:
+            member_dict = {
+                'member': member,
+                'workshops': self.get_member_workshops(member)
+            }
+            members.append(member_dict)
+        return members
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['group'] = self.group
-        context['members'] = self.group.conference_members
+        context['members'] = self.get_members_and_workshops()
         context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
 
         return context
