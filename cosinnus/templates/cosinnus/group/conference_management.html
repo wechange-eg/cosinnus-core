@@ -147,5 +147,34 @@
             </div>
         </div>
     </div>
-</div>
+
+    <div class="panel panel-default large-space">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                {% trans "Workshops belonging to this Conference" %}
+                <a class="btn" href="{% url 'cosinnus:group-add' %}?group={{ group.slug }}"><i class="fa fa-plus"></i> {% trans "Add workshop" %}</a>
+            </h4>
+        </div>
+        <div class="panel-body">
+        	{% for group in group.groups.all %}
+        	{% group_url 'cosinnus:group-dashboard' group=group as group_url %}
+        	<div class="fadedown regular-space">
+        		<div class="btn btn-emphasized w100">
+            		<ul class="media-list">
+            			<li class="media">
+            				<a class="pull-left" href="{{ group_url }}">
+                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+                        	</a>
+                        	<div class="media-body">
+                        		<a href="{{ group_url }}">
+                                {{ group.name }}
+                            	</a>
+                            </div>
+            			</li>
+            		</ul>
+            	</div>
+            </div>
+        	{% endfor %}
+        </div>
+	</div>
 {% endblock content %}
