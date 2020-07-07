@@ -122,7 +122,7 @@
 		        <div class="fadedown">
 			        <form action="" method="post">
 		    		{% csrf_token %}
-				        <button type="submit" class="btn btn-emphasized" name="{% if group.conference_is_running %}finishConferenence{% else %}startConferenence{% endif%}">
+				        <button type="submit" class="btn btn-emphasized btn-autosize" name="{% if group.conference_is_running %}finishConferenence{% else %}startConferenence{% endif%}">
 				            <ul class="media-list">
 				                <li class="media">
 				                    <a class="pull-left" href="#">
@@ -134,9 +134,9 @@
 				                    </a>
 				                    <div class="media-body">
 				                    	{% if group.conference_is_running %}
-				                        {% trans "Finish conference" %}
+				                        {% trans "Finish conference and deactivate user accounts" %}
 				                        {% else %}
-				                        {% trans "Start conference" %}
+				                        {% trans "Start conference and activate user accounts" %}
 				                        {% endif %}
 				                    </div>
 				                </li>
