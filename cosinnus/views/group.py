@@ -684,20 +684,27 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, 
     def get(self, request, *args, **kwars):
         members = self.group.conference_members
 
-        filename = '{}_participants.csv'.format(self.group.slug)
+        filename = '{}_statistics.csv'.format(self.group.slug)
 
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
 
-        header = [_('Workshop username'), _('email'), _('has logged in'), _('last login date')]
+        header = [_('Workshop username'), _('email'), _('workshops count'), _('has logged in'), _('last login date')]
 
         writer = csv.writer(response)
         writer.writerow(header)
+
         for member in members:
-            row = [member.cosinnus_profile.workshop_user_name,
-                   member.email] + self.get_last_login(member)
+            workshop_username = member.cosinnus_profile.workshop_user_name
+            email = member.email
+            workshop_count = self.get_membership_count(member)
+            has_logged_in, logged_in_date = self.get_last_login(member)
+            row = [workshop_username, email, workshop_count, has_logged_in, logged_in_date]
             writer.writerow(row)
         return response
+
+    def get_membership_count(self, member):
+        return member.cosinnus_groups.filter(parent=self.group).count()
 
     def get_last_login(self, member):
         has_logged_in = 1 if member.last_login else 0
