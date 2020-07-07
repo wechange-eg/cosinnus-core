@@ -606,7 +606,8 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
             last_name = data[2]
 
         try:
-            profile = UserProfile.objects.get(settings__contains=username)
+            name_string = '"{}":"{}"'.format(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME, username)
+            profile = UserProfile.objects.get(settings__contains=name_string)
             user = profile.user
             user.first_name = first_name
             user.last_name = last_name
