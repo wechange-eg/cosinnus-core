@@ -480,9 +480,7 @@ group_detail_api = GroupDetailView.as_view(is_ajax_request_url=True)
 
 class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, DetailView):
 
-
     template_name = 'cosinnus/group/conference_management.html'
-
 
     def get_object(self, queryset=None):
         return self.group
@@ -491,21 +489,33 @@ class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsC
         if 'startConferenence' in request.POST:
             self.group.conference_is_running = True
             self.group.save()
-            self.update_members_status(True)
+            self.update_all_members_status(True)
+            messages.add_message(request, messages.SUCCESS,
+                                 _('Conference successfully started and user accounts activated'))
+
         elif 'finishConferenence' in request.POST:
             self.group.conference_is_running = False
             self.group.save()
-            self.update_members_status(False)
+            self.update_all_members_status(False)
+            messages.add_message(request, messages.SUCCESS,
+                                 _('Conference successfully finished and user accounts deactivated'))
+
         elif 'deactivate_member' in request.POST:
             user_id = int(request.POST.get('deactivate_member'))
-            self.update_member_status(user_id, False)
+            user = self.update_member_status(user_id, False)
+            if user:
+                messages.add_message(request, messages.SUCCESS, _('Successfully deactivated user account'))
+
         elif 'activate_member' in request.POST:
             user_id = int(request.POST.get('activate_member'))
-            self.update_member_status(user_id, True)
+            user = self.update_member_status(user_id, True)
+            if user:
+                messages.add_message(request, messages.SUCCESS, _('Successfully activated user account'))
+
         return redirect(group_aware_reverse('cosinnus:conference-management',
                                             kwargs={'group': self.group}))
 
-    def update_members_status(self, status):
+    def update_all_members_status(self, status):
         for member in self.group.conference_members:
             member.is_active = status
             if status:
@@ -517,6 +527,7 @@ class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsC
             user = get_user_model().objects.get(id=user_id)
             user.is_active = status
             user.save()
+            return user
         except ObjectDoesNotExist:
             pass
 
