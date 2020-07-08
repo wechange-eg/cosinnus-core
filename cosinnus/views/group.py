@@ -564,10 +564,14 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
     def get_object(self, queryset=None):
         return self.group
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['group'] = self.group
+        return kwargs
+
     def form_valid(self, form):
-        csv_file = self.request.FILES['participants']
-        decoded_file = csv_file.read().decode('utf-8')
-        header, accounts = self.process_csv(decoded_file)
+        data = form.cleaned_data.get('participants')
+        header, accounts = self.process_data(data)
 
         filename = '{}_participants_passwords.csv'.format(self.group.slug)
 
@@ -580,54 +584,21 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
             writer.writerow(account)
         return response
 
-    def process_csv(self, file):
-        io_string = io.StringIO(file)
-        dialect = csv.Sniffer().sniff(io_string.read(1024), delimiters=";,")
-        io_string.seek(0)
-        reader = csv.reader(io_string, dialect)
-        header = next(reader, None)
-        cleaned_header = self.clean_row_data(header)
-        groups_list = self.get_groups_from_header(cleaned_header)
+    def process_data(self, data):
+        groups_list = data.get('header')
+        header = data.get('header_original')
         accounts_list = []
-        for row in reader:
-            cleaned_row = self.clean_row_data(row)
-            account = self.create_account(cleaned_row, groups_list)
+        for row in data.get('data'):
+            account = self.create_account(row, groups_list)
             accounts_list.append(account)
 
         return header + ['email', 'password'], accounts_list
 
-    def get_groups_from_header(self, header):
-        groups = []
-        for entry in header:
-            if entry:
-                entry = entry.lower()
-                try:
-                    group = CosinnusGroup.objects.get(parent=self.group,
-                                                      portal=self.group.portal,
-                                                      type=CosinnusGroup.TYPE_PROJECT,
-                                                      slug=entry)
-                    groups.append(group)
-                except ObjectDoesNotExist:
-                    groups.append('')
-            else:
-                groups.append('')
-        return groups
-
-    def clean_row_data(self, row):
-        cleaned_row = []
-        for entry in row:
-            cleaned_row.append(entry.strip())
-        return cleaned_row
-
     def create_account(self, data, groups):
 
         username = data[0].replace(' ', '_')
-        first_name = ''
-        last_name = ''
-        if not isinstance(groups[1], CosinnusGroup) and not data[1] in [str(MEMBERSHIP_MEMBER), str(MEMBERSHIP_ADMIN)]:
-            first_name = data[1]
-        if not isinstance(groups[2], CosinnusGroup) and not data[2] in [str(MEMBERSHIP_MEMBER), str(MEMBERSHIP_ADMIN)]:
-            last_name = data[2]
+        first_name = data[1]
+        last_name = data[2]
 
         try:
             name_string = '"{}":"{}"'.format(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME, username)

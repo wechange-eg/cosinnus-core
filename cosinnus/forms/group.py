@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from builtins import str
 from builtins import object
 import re
+import csv
+import io
 
 from django import forms
 from django.forms.widgets import SelectMultiple
@@ -29,6 +31,8 @@ from django.contrib.auth import get_user_model
 from cosinnus.utils.user import get_user_select2_pills, filter_active_users
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.templatetags.cosinnus_tags import is_superuser
+from django.core.exceptions import ObjectDoesNotExist
+from cosinnus.models.group import CosinnusGroup
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -323,6 +327,7 @@ class CosinnusGroupCallToActionButtonForm(forms.ModelForm):
         model = CosinnusGroupCallToActionButton
         fields = ('group', 'label', 'url', )
 
+
 class CosinusWorkshopParticipantCSVImportForm(forms.Form):
 
     participants = forms.FileField(help_text=_("Please upload a CSV with the following columns: unique user identifier, "
@@ -334,3 +339,52 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
                                                "the accounts and account workshop memberships and results in a direct CSV download with the "
                                                "newly created accounts and passwords. The passwords will only be included when the account is created. "
                                                "Please refresh the page after the download."))
+
+    def __init__(self, *args, **kwargs):
+        self.group = kwargs.pop('group', None)
+        super().__init__(*args, **kwargs)
+
+    def clean_participants(self):
+        csv_file = self.cleaned_data['participants']
+        reader = self.process_csv(csv_file)
+        header = next(reader, None)
+        cleaned_header = self.clean_row_data(header)
+
+        group_header = ['', '', '']
+        data = []
+
+        for entry in cleaned_header[3:]:
+            if entry:
+                entry = entry.lower()
+                try:
+                    group = CosinnusGroup.objects.get(parent=self.group,
+                                              portal=self.group.portal,
+                                              type=CosinnusGroup.TYPE_PROJECT,
+                                              slug=entry)
+                    group_header.append(group)
+                except ObjectDoesNotExist:
+                    raise forms.ValidationError(_("Can't find workshop with slug '{}'".format(entry)))
+
+        for row in reader:
+            data.append(self.clean_row_data(row))
+
+        return {
+            'header_original': cleaned_header,
+            'header': group_header,
+            'data': data
+        }
+
+    def process_csv(self, csv_file):
+        file = csv_file.read().decode('utf-8')
+        io_string = io.StringIO(file)
+        dialect = csv.Sniffer().sniff(io_string.read(1024), delimiters=";,")
+        io_string.seek(0)
+        reader = csv.reader(io_string, dialect)
+        return reader
+
+    def clean_row_data(self, row):
+        cleaned_row = []
+        for entry in row:
+            cleaned_row.append(entry.strip())
+        return cleaned_row
+
