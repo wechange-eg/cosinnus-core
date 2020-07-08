@@ -9,7 +9,7 @@
 
 {% block breadcrumb %}
         {{ block.super }}
-        <li class="active">{% trans "Conference Management" %}</li>
+        <li class="active">{% trans "Conference Management" %} ({% if group.conference_is_running %} {% trans "Conference is running" %} {% else %} {% trans "Conference is not running" %} {% endif %})</li>
 {% endblock %}
 
 {% block content %}
