@@ -621,7 +621,7 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
                 profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
                 profile.save()
 
-                unique_email = 'User{}{}.C{}@wechange.de'.format(str(self.group.id), str(user.id), str(self.group.id))
+                unique_email = 'User{}.C{}@wechange.de'.format(str(user.id), str(self.group.id))
                 user.email = unique_email
                 user.is_active = False
                 user.save()
