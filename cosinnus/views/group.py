@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 import csv
-import io
 
 from builtins import zip
 from builtins import object
@@ -100,6 +99,7 @@ from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
 from cosinnus.models.profile import UserProfile
 from cosinnus.utils.user import create_base_user
 from django.views.generic.edit import FormView
+from django.db import transaction
 
 logger = logging.getLogger('cosinnus')
 
@@ -594,6 +594,7 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
 
         return header + ['email', 'password'], accounts_list
 
+    @transaction.atomic
     def create_account(self, data, groups):
 
         username = data[0].replace(' ', '_')
