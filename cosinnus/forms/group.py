@@ -330,15 +330,7 @@ class CosinnusGroupCallToActionButtonForm(forms.ModelForm):
 
 class CosinusWorkshopParticipantCSVImportForm(forms.Form):
 
-    participants = forms.FileField(help_text=_("Please upload a CSV with the following columns: unique user identifier, "
-                                               "first name, last name and one column for each workshop identified "
-                                               "by the workshop's slug. Then add a row for each account that you want to add. "
-                                               "You have to add a unique user identifier but first and last name can be blank. Then "
-                                               "add a 1 to all workshop columns where the user should be a normal member or a 2 "
-                                               "if that user should be workshop admin. The CSV upload will trigger the creation of "
-                                               "the accounts and account workshop memberships and results in a direct CSV download with the "
-                                               "newly created accounts and passwords. The passwords will only be included when the account is created. "
-                                               "Please refresh the page after the download."))
+    participants = forms.FileField()
 
     def __init__(self, *args, **kwargs):
         self.group = kwargs.pop('group', None)
