@@ -67,7 +67,7 @@
 	                                	</span>
 		                                <a href="{{ member|profile_url }}">
 		                                	{% if member_dict.member.cosinnus_profile.workshop_user_name %}
-		                                	{{ member_dict.member.cosinnus_profile.workshop_user_name }}
+		                                	{{ member_dict.member.cosinnus_profile.readable_workshop_user_name }}
 		                                	{% else %}
 		                                    {{ member_dict.member|full_name }}
 		                                    {% endif %}

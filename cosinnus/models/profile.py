@@ -342,6 +342,11 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
         return self.settings.get(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME)
 
     @property
+    def readable_workshop_user_name(self):
+        settings_name = self.settings.get(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME)
+        return settings_name.split('__')[-1]
+
+    @property
     def is_workshop_participant(self):
         return self.settings.get(PROFILE_SETTING_WORKSHOP_PARTICIPANT, False)
 
