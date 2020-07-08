@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-08 15:24+0200\n"
+"POT-Creation-Date: 2020-07-08 15:33+0200\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -479,6 +479,21 @@ msgstr "Dit lijkt geen geldige Flickr Gallery-link te zijn! Het moet de vorm heb
 msgid "Users"
 msgstr "Gebruikers"
 
+msgid "Please remove the whitespace from '{}'"
+msgstr ""
+
+msgid "Names must be unique. You added '{}' more then once to your CSV. Please change the name."
+msgstr ""
+
+msgid "Can't find workshop with slug '{}'"
+msgstr ""
+
+msgid "This is not a valid CSV File"
+msgstr ""
+
+msgid "CSV could not be parsed. Please use ',' or ';' as delimiter."
+msgstr ""
+
 msgid "Name"
 msgstr "Naam"
 
@@ -798,6 +813,18 @@ msgstr "Facebook Groep ID"
 #| msgid "Facebook Group ID"
 msgid "Nextcloud Groupfolder ID"
 msgstr "Facebook Groep ID"
+
+msgid "Is conference"
+msgstr ""
+
+msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
+msgstr ""
+
+msgid "Conference is running"
+msgstr ""
+
+msgid "Determins whether a group that is marked as conference is running"
+msgstr ""
 
 msgid "Parent Group"
 msgstr "Ouder Groep"
@@ -1459,6 +1486,9 @@ msgstr "Momenteel ingestelde welkmost-e-mailtekst"
 msgid "Send yourself a Test-Mail"
 msgstr "Verzend een Test-mail naar jezelf"
 
+msgid "Conference Management"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr "Leden"
@@ -1911,6 +1941,89 @@ msgstr "Voer een plaats of adres."
 msgid "Choose and upload a gallery image"
 msgstr "Kies en upload een galerij afbeelding"
 
+msgid "Conference is not running"
+msgstr ""
+
+msgid "Accounts from CSV Upload"
+msgstr ""
+
+#, fuzzy
+#| msgid "Participants"
+msgid "Upload Participants"
+msgstr "Deelnemers"
+
+msgid "last login"
+msgstr ""
+
+msgid "no login yet"
+msgstr ""
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Member"
+msgstr "Lid"
+
+#, fuzzy
+#| msgid "Is active"
+msgid "active"
+msgstr "Is actief"
+
+#, fuzzy
+#| msgid "(Inactive)"
+msgid "not active"
+msgstr "(Inactief)"
+
+msgid "User participates in the following workshops:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate Group"
+msgid "deactivate member"
+msgstr "Deactiveer Groep"
+
+#, fuzzy
+#| msgid "Invite a member"
+msgid "activate member"
+msgstr "Nodig een lid uit"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to deactivate the member's user account ?"
+msgstr "Wilt u de uitnodiging echt weigeren?"
+
+#, fuzzy
+#| msgid "Decline Member"
+msgid "Deactivate Member"
+msgstr "Lid weigeren"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to activate the member's user account ?"
+msgstr "Wilt u de uitnodiging echt weigeren?"
+
+#, fuzzy
+#| msgid "Accept Member"
+msgid "Activate Member"
+msgstr "Accepteer lid"
+
+msgid "Finish conference and deactivate user accounts"
+msgstr ""
+
+msgid "Start conference and activate user accounts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Simple Statistics"
+msgid "Download Statistics"
+msgstr "Simpele Statistiek"
+
+msgid "Workshops"
+msgstr ""
+
+msgid "Add workshop"
+msgstr ""
+
 msgid "Re-Activate Project/Group"
 msgstr "Re-activeer Project/Groep"
 
@@ -2072,12 +2185,6 @@ msgstr "Bericht alle leden"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
 msgstr "Verzend Bericht"
-
-msgid "Admin"
-msgstr "Admin"
-
-msgid "Member"
-msgstr "Lid"
 
 msgid "Kick"
 msgstr "Kick"
@@ -2564,6 +2671,24 @@ msgstr "Deactiveer Project"
 
 msgid "Withdraw Request"
 msgstr "Verzoek intrekken"
+
+msgid "Workshop Participant File Upload"
+msgstr ""
+
+#, python-format
+msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgstr ""
+
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
+msgstr ""
+
+msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Upload File"
+msgstr "Upload een afbeelding."
 
 msgid "Add container"
 msgstr "Container toevoegen"
@@ -4147,11 +4272,6 @@ msgstr "door"
 msgid "Open Preview"
 msgstr "Overzicht"
 
-#, fuzzy
-#| msgid "Is active"
-msgid "active"
-msgstr "Is actief"
-
 msgid "displayed right now"
 msgstr ""
 
@@ -4507,6 +4627,100 @@ msgstr "Goed om u te zien! Bij %(portal_name)s kunt u samenwerken met anderen in
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Registreer nu en help mee vorm te geven"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups or Users"
+msgstr "Mijn Projecten en Groepen"
+
+msgid "Import from a CSV File"
+msgstr ""
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group CSV File"
+msgstr "Projecten/Groepen"
+
+msgid "User CSV File"
+msgstr ""
+
+#, fuzzy
+#| msgid "Proportions"
+msgid "Options"
+msgstr "Proporties"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Upload and Import..."
+msgstr "Upload een afbeelding."
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups"
+msgstr "Mijn Projecten en Groepen"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+msgid "CSV Import Results"
+msgstr ""
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+msgid "Read errors:"
+msgstr ""
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+msgid "Important messages:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Errors:"
+msgstr "Foutmelding!"
+
+#, fuzzy
+#| msgid "Messages"
+msgid "Info messages:"
+msgstr "Berichten"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Toon meerdere projecten"
 
@@ -4679,6 +4893,58 @@ msgstr "%(team_type)s “%(group)s” is succesvol aangemaakt."
 
 msgid "Create"
 msgstr "Maak aan"
+
+msgid "Conference successfully started and user accounts activated"
+msgstr ""
+
+msgid "Conference successfully finished and user accounts deactivated"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Successfully deactivated user account"
+msgstr "Gebruikersaccount verwijderen"
+
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Successfully activated user account"
+msgstr "Gebruikersaccount verwijderen"
+
+#, fuzzy
+#| msgid "Has created"
+msgid "User was not created"
+msgstr "Is aangemaakt"
+
+msgid "Workshop username"
+msgstr ""
+
+#, fuzzy
+#| msgid "Email"
+msgid "email"
+msgstr "E-mail"
+
+msgid "workshops count"
+msgstr ""
+
+#, fuzzy
+#| msgid "Has Logged In"
+msgid "has logged in"
+msgstr "Heeft Ingelogd"
+
+#, fuzzy
+#| msgid "Validate"
+msgid "last login date"
+msgstr "Valideer"
+
+#, fuzzy
+#| msgid "First name"
+msgid "First Name"
+msgstr "Voornaam"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "Last Name"
+msgstr "Achternaam"
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -5028,9 +5294,6 @@ msgstr "Uw veranderingen zijn bewaard."
 
 #~ msgid "Invited you"
 #~ msgstr "Heeft u uitgenodigd"
-
-#~ msgid "Has created"
-#~ msgstr "Is aangemaakt"
 
 #~ msgid "Hi,"
 #~ msgstr "Hallo,"

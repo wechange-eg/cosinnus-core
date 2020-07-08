@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-08 15:24+0200\n"
+"POT-Creation-Date: 2020-07-08 15:33+0200\n"
 "PO-Revision-Date: 2020-04-07 15:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -463,6 +463,21 @@ msgstr "Flickr Gallery ბმული სავარაუდოდ მოქ�
 msgid "Users"
 msgstr "მოხმარებლები"
 
+msgid "Please remove the whitespace from '{}'"
+msgstr ""
+
+msgid "Names must be unique. You added '{}' more then once to your CSV. Please change the name."
+msgstr ""
+
+msgid "Can't find workshop with slug '{}'"
+msgstr ""
+
+msgid "This is not a valid CSV File"
+msgstr ""
+
+msgid "CSV could not be parsed. Please use ',' or ';' as delimiter."
+msgstr ""
+
 msgid "Name"
 msgstr "სახელი"
 
@@ -780,6 +795,18 @@ msgstr "Nextcloud Group ID"
 #| msgid "Nextcloud Group ID"
 msgid "Nextcloud Groupfolder ID"
 msgstr "Nextcloud Group ID"
+
+msgid "Is conference"
+msgstr ""
+
+msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
+msgstr ""
+
+msgid "Conference is running"
+msgstr ""
+
+msgid "Determins whether a group that is marked as conference is running"
+msgstr ""
 
 msgid "Parent Group"
 msgstr "მშობლის ჯგუფი"
@@ -1437,6 +1464,9 @@ msgstr "ამჟამად დაყენებული მისასა�
 msgid "Send yourself a Test-Mail"
 msgstr "საკუთარი თავისთვის ტესტური ელ-ფოსტის გაგზავნა"
 
+msgid "Conference Management"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr "წევრები"
@@ -1885,6 +1915,87 @@ msgstr "შეიყვანეთ ადგილი ან მისამა
 msgid "Choose and upload a gallery image"
 msgstr "აარჩიეთ და ატვირთეთ ალბომის გამოსახულება"
 
+msgid "Conference is not running"
+msgstr ""
+
+msgid "Accounts from CSV Upload"
+msgstr ""
+
+#, fuzzy
+#| msgid "Participants"
+msgid "Upload Participants"
+msgstr "მონაწილეები"
+
+msgid "last login"
+msgstr ""
+
+msgid "no login yet"
+msgstr ""
+
+msgid "Admin"
+msgstr "ადმინისტრატორი"
+
+msgid "Member"
+msgstr "წევრი"
+
+msgid "active"
+msgstr "აქტიური"
+
+#, fuzzy
+#| msgid "inactive"
+msgid "not active"
+msgstr "არააქტიური"
+
+msgid "User participates in the following workshops:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate Group"
+msgid "deactivate member"
+msgstr "ჯგუფის აქტივაციის გაუქმება"
+
+#, fuzzy
+#| msgid "Invite a member"
+msgid "activate member"
+msgstr "წევრის მოწვევა"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to deactivate the member's user account ?"
+msgstr "ნამდვილად გსურთ მოწვევაზე უარის თქმა?"
+
+#, fuzzy
+#| msgid "Decline Member"
+msgid "Deactivate Member"
+msgstr "წევრისათვის უარის თქმა"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to activate the member's user account ?"
+msgstr "ნამდვილად გსურთ მოწვევაზე უარის თქმა?"
+
+#, fuzzy
+#| msgid "Accept Member"
+msgid "Activate Member"
+msgstr "წევრისათვის დათანხმება"
+
+msgid "Finish conference and deactivate user accounts"
+msgstr ""
+
+msgid "Start conference and activate user accounts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Simple Statistics"
+msgid "Download Statistics"
+msgstr "უბრალო სტატისტიკა"
+
+msgid "Workshops"
+msgstr ""
+
+msgid "Add workshop"
+msgstr ""
+
 msgid "Re-Activate Project/Group"
 msgstr "პროექტის/ჯგუფის ხელახლა აქტივაცია"
 
@@ -2036,12 +2147,6 @@ msgstr "ყველა წევრის შეტყობინება"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
 msgstr "შეტყობინების გაგზავნა"
-
-msgid "Admin"
-msgstr "ადმინისტრატორი"
-
-msgid "Member"
-msgstr "წევრი"
 
 msgid "Kick"
 msgstr "გამოგდება"
@@ -2524,6 +2629,24 @@ msgstr "პროექტის აქტივაციის გაუქმ�
 
 msgid "Withdraw Request"
 msgstr "მოთხოვნის გამოთხოვა"
+
+msgid "Workshop Participant File Upload"
+msgstr ""
+
+#, python-format
+msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgstr ""
+
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
+msgstr ""
+
+msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Upload File"
+msgstr "გამოსახულების ატვირთვა."
 
 msgid "Add container"
 msgstr "Add container"
@@ -4095,9 +4218,6 @@ msgstr "მიერ"
 msgid "Open Preview"
 msgstr "ანონსის გახსნა"
 
-msgid "active"
-msgstr "აქტიური"
-
 msgid "displayed right now"
 msgstr "ახლა მოხდა ჩვენება"
 
@@ -4438,6 +4558,100 @@ msgstr "გვიხარია თქვენი დანახვა! %(por
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups or Users"
+msgstr "ჩემი პროექტები და ჯგუფები"
+
+msgid "Import from a CSV File"
+msgstr ""
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group CSV File"
+msgstr "პროექტები/ჯგუფები"
+
+msgid "User CSV File"
+msgstr ""
+
+#, fuzzy
+#| msgid "Proportions"
+msgid "Options"
+msgstr "პროპორციები"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Upload and Import..."
+msgstr "გამოსახულების ატვირთვა."
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups"
+msgstr "ჩემი პროექტები და ჯგუფები"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+msgid "CSV Import Results"
+msgstr ""
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+msgid "Read errors:"
+msgstr ""
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+msgid "Important messages:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Errors:"
+msgstr "შეცდომა!"
+
+#, fuzzy
+#| msgid "Messages"
+msgid "Info messages:"
+msgstr "შეტყობინებები"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "სხვა პროექტების ჩვენება"
 
@@ -4606,6 +4820,58 @@ msgstr "%(team_type)s ''%(group)s\"  წარმატებით შეიქ
 
 msgid "Create"
 msgstr "შექმნა"
+
+msgid "Conference successfully started and user accounts activated"
+msgstr ""
+
+msgid "Conference successfully finished and user accounts deactivated"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Successfully deactivated user account"
+msgstr "მომხმარებლის ანგარიშის წაშლა"
+
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Successfully activated user account"
+msgstr "მომხმარებლის ანგარიშის წაშლა"
+
+#, fuzzy
+#| msgid "Has created"
+msgid "User was not created"
+msgstr "შექმნა"
+
+msgid "Workshop username"
+msgstr ""
+
+#, fuzzy
+#| msgid "Email"
+msgid "email"
+msgstr "ელ-ფოსტა"
+
+msgid "workshops count"
+msgstr ""
+
+#, fuzzy
+#| msgid "Has Logged In"
+msgid "has logged in"
+msgstr "შესულა"
+
+#, fuzzy
+#| msgid "Validate"
+msgid "last login date"
+msgstr "განახლება"
+
+#, fuzzy
+#| msgid "First name"
+msgid "First Name"
+msgstr "სახელი"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "Last Name"
+msgstr "გვარი"
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -4944,9 +5210,6 @@ msgstr "თქვენი ცვლილებები შენახულ�
 
 #~ msgid "Invited you"
 #~ msgstr "თქვენ მოგიწვიათ"
-
-#~ msgid "Has created"
-#~ msgstr "შექმნა"
 
 #~ msgid "Hi,"
 #~ msgstr "გამარჯობა,"

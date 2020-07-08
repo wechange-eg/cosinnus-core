@@ -359,12 +359,12 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
             cleaned_row = self.clean_row_data(row)
             workshop_username = cleaned_row[0]
             if ' ' in workshop_username:
-                raise forms.ValidationError(_("Please remove the whitespace from '{}'".format(workshop_username)))
+                raise forms.ValidationError(_("Please remove the whitespace from '{}'").format(workshop_username))
             if workshop_username not in workshop_usernames:
                 workshop_usernames.append(workshop_username)
             else:
                 raise forms.ValidationError(_("Names must be unique. You added '{}' more"
-                                              " then once to your CSV. Please change the name.".format(workshop_username)))
+                                              " then once to your CSV. Please change the name.").format(workshop_username))
             data.append(self.clean_row_data(cleaned_row))
 
         return data
@@ -380,7 +380,7 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
                                                       slug=slug.lower())
                     group_header.append(group)
                 except ObjectDoesNotExist:
-                    raise forms.ValidationError(_("Can't find workshop with slug '{}'".format(slug)))
+                    raise forms.ValidationError(_("Can't find workshop with slug '{}'").format(slug))
         return group_header
 
     def process_csv(self, csv_file):

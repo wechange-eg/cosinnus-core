@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-08 15:24+0200\n"
+"POT-Creation-Date: 2020-07-08 15:33+0200\n"
 "PO-Revision-Date: 2020-04-27 12:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -474,6 +474,21 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
+msgid "Please remove the whitespace from '{}'"
+msgstr ""
+
+msgid "Names must be unique. You added '{}' more then once to your CSV. Please change the name."
+msgstr ""
+
+msgid "Can't find workshop with slug '{}'"
+msgstr ""
+
+msgid "This is not a valid CSV File"
+msgstr ""
+
+msgid "CSV could not be parsed. Please use ',' or ';' as delimiter."
+msgstr ""
+
 msgid "Name"
 msgstr ""
 
@@ -786,6 +801,18 @@ msgid "Nextcloud Groupfolder Name"
 msgstr ""
 
 msgid "Nextcloud Groupfolder ID"
+msgstr ""
+
+msgid "Is conference"
+msgstr ""
+
+msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
+msgstr ""
+
+msgid "Conference is running"
+msgstr ""
+
+msgid "Determins whether a group that is marked as conference is running"
 msgstr ""
 
 msgid "Parent Group"
@@ -1475,6 +1502,9 @@ msgstr ""
 msgid "Send yourself a Test-Mail"
 msgstr ""
 
+msgid "Conference Management"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr ""
@@ -1943,6 +1973,77 @@ msgstr ""
 msgid "Choose and upload a gallery image"
 msgstr ""
 
+msgid "Conference is not running"
+msgstr ""
+
+msgid "Accounts from CSV Upload"
+msgstr ""
+
+msgid "Upload Participants"
+msgstr ""
+
+msgid "last login"
+msgstr ""
+
+msgid "no login yet"
+msgstr ""
+
+msgid "Admin"
+msgstr ""
+
+msgid "Member"
+msgstr ""
+
+msgid "active"
+msgstr ""
+
+msgid "not active"
+msgstr ""
+
+msgid "User participates in the following workshops:"
+msgstr ""
+
+#, fuzzy
+msgid "deactivate member"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "activate member"
+msgstr "Create Project"
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to deactivate the member's user account ?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+msgid "Deactivate Member"
+msgstr "Create Project"
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to activate the member's user account ?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+msgid "Activate Member"
+msgstr "Create Project"
+
+msgid "Finish conference and deactivate user accounts"
+msgstr ""
+
+msgid "Start conference and activate user accounts"
+msgstr ""
+
+msgid "Download Statistics"
+msgstr ""
+
+msgid "Workshops"
+msgstr ""
+
+msgid "Add workshop"
+msgstr ""
+
 msgid "Re-Activate Project/Group"
 msgstr ""
 
@@ -2110,12 +2211,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
-msgstr ""
-
-msgid "Admin"
-msgstr ""
-
-msgid "Member"
 msgstr ""
 
 msgid "Kick"
@@ -2627,6 +2722,22 @@ msgid "Deactivate Project"
 msgstr "Create Project"
 
 msgid "Withdraw Request"
+msgstr ""
+
+msgid "Workshop Participant File Upload"
+msgstr ""
+
+#, python-format
+msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgstr ""
+
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
+msgstr ""
+
+msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
+msgstr ""
+
+msgid "Upload File"
 msgstr ""
 
 msgid "Add container"
@@ -4138,9 +4249,6 @@ msgstr ""
 msgid "Open Preview"
 msgstr ""
 
-msgid "active"
-msgstr ""
-
 msgid "displayed right now"
 msgstr ""
 
@@ -4503,6 +4611,92 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Join now and collaborate"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Import Projects and Groups or Users"
+msgstr "Convert selected Projects to Groups"
+
+msgid "Import from a CSV File"
+msgstr ""
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Project/group CSV File"
+msgstr "Convert selected Projects to Groups"
+
+msgid "User CSV File"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+msgid "Upload and Import..."
+msgstr ""
+
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Import Projects and Groups"
+msgstr "Convert selected Projects to Groups"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+msgid "CSV Import Results"
+msgstr ""
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+msgid "Read errors:"
+msgstr ""
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+msgid "Important messages:"
+msgstr ""
+
+msgid "Errors:"
+msgstr ""
+
+msgid "Info messages:"
+msgstr ""
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 #, fuzzy
 #| msgid "Other Projects"
 msgid "Show more Projects"
@@ -4676,6 +4870,42 @@ msgid "%(team_type)s \"%(group)s\" was created successfully."
 msgstr ""
 
 msgid "Create"
+msgstr ""
+
+msgid "Conference successfully started and user accounts activated"
+msgstr ""
+
+msgid "Conference successfully finished and user accounts deactivated"
+msgstr ""
+
+msgid "Successfully deactivated user account"
+msgstr ""
+
+msgid "Successfully activated user account"
+msgstr ""
+
+msgid "User was not created"
+msgstr ""
+
+msgid "Workshop username"
+msgstr ""
+
+msgid "email"
+msgstr ""
+
+msgid "workshops count"
+msgstr ""
+
+msgid "has logged in"
+msgstr ""
+
+msgid "last login date"
+msgstr ""
+
+msgid "First Name"
+msgstr ""
+
+msgid "Last Name"
 msgstr ""
 
 #, python-format
