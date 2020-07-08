@@ -384,12 +384,18 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
         return group_header
 
     def process_csv(self, csv_file):
-        file = csv_file.read().decode('utf-8')
-        io_string = io.StringIO(file)
-        dialect = csv.Sniffer().sniff(io_string.read(1024), delimiters=";,")
-        io_string.seek(0)
-        reader = csv.reader(io_string, dialect)
-        return reader
+        try:
+            file = csv_file.read().decode('utf-8')
+            io_string = io.StringIO(file)
+            dialect = csv.Sniffer().sniff(io_string.read(1024), delimiters=";,")
+            io_string.seek(0)
+            reader = csv.reader(io_string, dialect)
+            return reader
+        except UnicodeDecodeError:
+            raise forms.ValidationError(_("This is not a valid CSV File"))
+        except csv.Error:
+            raise forms.ValidationError(_("CSV could not be parsed. Please use ',' or ';' as delimiter."))
+
 
     def clean_row_data(self, row):
         cleaned_row = []
