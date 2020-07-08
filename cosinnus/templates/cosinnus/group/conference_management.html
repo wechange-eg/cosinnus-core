@@ -9,10 +9,11 @@
 
 {% block breadcrumb %}
         {{ block.super }}
-        <li class="active">{% trans "Conference Management" %} ({% if group.conference_is_running %} {% trans "Conference is running" %} {% else %} {% trans "Conference is not running" %} {% endif %})</li>
+        <li class="active">{% trans "Conference Management" %}</li>
 {% endblock %}
 
 {% block content %}
+<h1 class="white-content">{{ group.name }} ({% if group.conference_is_running %} {% trans "Conference is running" %} {% else %} {% trans "Conference is not running" %} {% endif %})</h1>
 <div class="content-box">
 	{% group_url 'cosinnus:workshop-participants-upload' group=group as workshop_participants_upload_page %}
 	{% group_url 'cosinnus:workshop-participants-download' group=group as workshop_participants_download_page %}
