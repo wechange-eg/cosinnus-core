@@ -22,8 +22,7 @@
 	<div class="panel panel-default large-space">
         <div class="panel-heading">
             <h4 class="panel-title">
-                {% trans "Participant Accounts created via CSV Upload" %}
-                <a class="btn" href="{{ workshop_participants_download_page }}"><i class="fa fa-download"></i> {% trans "Download Statistics" %}</a>
+                {% trans "Accounts from CSV Upload" %}
                 <a class="btn" href="{{ workshop_participants_upload_page }}"><i class="fa fa-upload"></i> {% trans "Upload Participants" %}</a>
             </h4>
         </div>
@@ -131,30 +130,46 @@
 	                {% include "cosinnus/modal_box.html" with id=modal_activate_id label=label title=title form_action=action submit_name="activate_member" submit_value=member_dict.member.id title_icon='fas fa-check-circle' %}
 	                {% endif %}
 		        {% endfor %}
-		        <div class="fadedown">
-			        <form action="" method="post">
-		    		{% csrf_token %}
-				        <button type="submit" class="btn btn-emphasized btn-autosize" name="{% if group.conference_is_running %}finishConferenence{% else %}startConferenence{% endif%}">
-				            <ul class="media-list">
-				                <li class="media">
-				                    <a class="pull-left" href="#">
-				                    	{% if group.conference_is_running %}
-				                    	<i class="far fa-stop-circle"></i>
-				                    	{% else %}
-				                        <i class="far fa-play-circle"></i>
-				                        {% endif %}
-				                    </a>
-				                    <div class="media-body">
-				                    	{% if group.conference_is_running %}
-				                        {% trans "Finish conference and deactivate user accounts" %}
-				                        {% else %}
-				                        {% trans "Start conference and activate user accounts" %}
-				                        {% endif %}
-				                    </div>
-				                </li>
-				            </ul>
-				        </button>
-					</form>
+		        <div>
+			        <div class="fadedown pull-right regular-space">
+				        <form action="" method="post">
+			    		{% csrf_token %}
+					        <button type="submit" class="btn btn-emphasized btn-autosize" name="{% if group.conference_is_running %}finishConferenence{% else %}startConferenence{% endif%}">
+					            <ul class="media-list">
+					                <li class="media">
+					                    <a class="pull-left" href="#">
+					                    	{% if group.conference_is_running %}
+					                    	<i class="far fa-stop-circle"></i>
+					                    	{% else %}
+					                        <i class="far fa-play-circle"></i>
+					                        {% endif %}
+					                    </a>
+					                    <div class="media-body">
+					                    	{% if group.conference_is_running %}
+					                        {% trans "Finish conference and deactivate user accounts" %}
+					                        {% else %}
+					                        {% trans "Start conference and activate user accounts" %}
+					                        {% endif %}
+					                    </div>
+					                </li>
+					            </ul>
+					        </button>
+						</form>
+					</div>
+					<div class="fadedown pull-right">
+			        	<button class="btn btn-emphasized">
+			        		<ul class="media-list">
+			        			<li class="media">
+			        				<a class="pull-left" href="{{ workshop_participants_download_page }}">
+			        					<i class="fa fa-download"></i>
+					                </a>
+			        				<div class="media-body">
+			        					<a href="{{ workshop_participants_download_page }}">{% trans "Download Statistics" %}</a>
+			        				</div>
+			        			</li>
+			        		</ul>
+			        	</button>
+			        </div>
 				</div>
             </div>
         </div>
@@ -163,7 +178,7 @@
     <div class="panel panel-default large-space">
         <div class="panel-heading">
             <h4 class="panel-title">
-                {% trans "Workshops belonging to this Conference" %}
+                {% trans "Workshops" %}
                 <a class="btn" href="{% url 'cosinnus:group-add' %}?group={{ group.slug }}"><i class="fa fa-plus"></i> {% trans "Add workshop" %}</a>
             </h4>
         </div>
