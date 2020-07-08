@@ -716,6 +716,30 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, 
 workshop_participants_download = WorkshopParticipantsDownloadView.as_view()
 
 
+class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
+
+    def get(self, request, *args, **kwars):
+        filename = '{}_participants.csv'.format(self.group.slug)
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
+
+        writer = csv.writer(response)
+
+        header = [_('Workshop username'), _('First Name'), _('Last Name')]
+        workshop_slugs = [group.slug for group in self.group.groups.all()]
+
+        full_header = header + workshop_slugs
+
+        writer.writerow(full_header)
+
+        for i in range(5):
+            row = ['' for entry in full_header]
+            writer.writerow(row)
+        return response
+
+workshop_participants_upload_skeleton = WorkshopParticipantsUploadSkeletonView.as_view()
+
+
 class GroupMembersMapListView(GroupDetailView):
 
     template_name = 'cosinnus/group/group_members_map.html'

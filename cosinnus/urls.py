@@ -199,6 +199,7 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/members/$' % url_key, group.group_detail, name=prefix+'group-detail'),
         url(r'^%s/(?P<group>[^/]+)/conference-management/$' % url_key, group.conference_management, name=prefix+'conference-management'),
         url(r'^%s/(?P<group>[^/]+)/workshop-participants-upload/$' % url_key, group.workshop_participants_upload, name=prefix+'workshop-participants-upload'),
+        url(r'^%s/(?P<group>[^/]+)/workshop-participants-upload-skeleton/$' % url_key, group.workshop_participants_upload_skeleton, name=prefix+'workshop-participants-upload-skeleton'),
         url(r'^%s/(?P<group>[^/]+)/workshop-participants-download/$' % url_key, group.workshop_participants_download, name=prefix+'workshop-participants-download'),
         url(r'^%s/(?P<group>[^/]+)/members/recruit/$' % url_key, group.group_user_recruit, name=prefix+'group-user-recruit'),
         url(r'^%s/(?P<group>[^/]+)/members/recruitdelete/(?P<id>\d+)/$' % url_key, group.group_user_recruit_delete, name=prefix+'group-user-recruit-delete'),
