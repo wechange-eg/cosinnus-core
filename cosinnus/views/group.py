@@ -594,10 +594,15 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
 
         return header + ['email', 'password'], accounts_list
 
+    def get_unique_workshop_name(self, name):
+        no_whitespace = name.replace(' ', '')
+        unique_name = '{}_{}__{}'.format(self.group.portal.id, self.group.id, no_whitespace)
+        return unique_name
+
     @transaction.atomic
     def create_account(self, data, groups):
 
-        username = data[0].replace(' ', '_')
+        username = self.get_unique_workshop_name(data[0])
         first_name = data[1]
         last_name = data[2]
 
