@@ -143,6 +143,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', )}
     readonly_fields = ('created', 'last_modified')
     raw_id_fields = ('parent',)
+    exclude = ('is_conference', 'conference_is_running')
     
     def convert_to_society(self, request, queryset):
         """ Converts this CosinnusGroup's type """
@@ -295,6 +296,7 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
     
     actions = ['convert_to_project', 'move_society_and_subprojects_to_portal', 
                 'move_society_and_subprojects_to_portal_and_message_users']
+    exclude = None
     
     def get_actions(self, request):
         actions = super(CosinnusSocietyAdmin, self).get_actions(request)

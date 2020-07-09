@@ -5,6 +5,8 @@
             <span class="pull-left" href="#">
                 {% if icon_content %}
                     <i>{{ icon_content }}</i>
+                {% elif icon_full_class %}
+                    <i class="{{ icon_full_class }}"></i>
                 {% else %}
                     <i class="fa {{ icon }}"></i>
                 {% endif %}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-08 15:24+0200\n"
+"POT-Creation-Date: 2020-07-08 15:33+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -481,6 +481,21 @@ msgstr "Це не правильне посилання на галерею у F
 msgid "Users"
 msgstr "Користувачі"
 
+msgid "Please remove the whitespace from '{}'"
+msgstr ""
+
+msgid "Names must be unique. You added '{}' more then once to your CSV. Please change the name."
+msgstr ""
+
+msgid "Can't find workshop with slug '{}'"
+msgstr ""
+
+msgid "This is not a valid CSV File"
+msgstr ""
+
+msgid "CSV could not be parsed. Please use ',' or ';' as delimiter."
+msgstr ""
+
 msgid "Name"
 msgstr "Ім'я"
 
@@ -802,6 +817,18 @@ msgstr "ID Facebook спільноти"
 #| msgid "Facebook Group ID"
 msgid "Nextcloud Groupfolder ID"
 msgstr "ID Facebook спільноти"
+
+msgid "Is conference"
+msgstr ""
+
+msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
+msgstr ""
+
+msgid "Conference is running"
+msgstr ""
+
+msgid "Determins whether a group that is marked as conference is running"
+msgstr ""
 
 msgid "Parent Group"
 msgstr "Основна спільнота"
@@ -1469,6 +1496,9 @@ msgstr "Текст вітального електронного листа"
 msgid "Send yourself a Test-Mail"
 msgstr ""
 
+msgid "Conference Management"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr "Члени"
@@ -1922,6 +1952,89 @@ msgstr "Уведіть місце або адресу."
 msgid "Choose and upload a gallery image"
 msgstr "Обрати та завантажити зображення галереї"
 
+msgid "Conference is not running"
+msgstr ""
+
+msgid "Accounts from CSV Upload"
+msgstr ""
+
+#, fuzzy
+#| msgid "Participants"
+msgid "Upload Participants"
+msgstr "Учасники"
+
+msgid "last login"
+msgstr ""
+
+msgid "no login yet"
+msgstr ""
+
+msgid "Admin"
+msgstr "Адміністратор/-ка"
+
+msgid "Member"
+msgstr "Член"
+
+#, fuzzy
+#| msgid "Is active"
+msgid "active"
+msgstr "Активний"
+
+#, fuzzy
+#| msgid "(Inactive)"
+msgid "not active"
+msgstr "(Неактивний)"
+
+msgid "User participates in the following workshops:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate Group"
+msgid "deactivate member"
+msgstr "Деактивувати спільноту"
+
+#, fuzzy
+#| msgid "Invite a member"
+msgid "activate member"
+msgstr "Запросити члена"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to deactivate the member's user account ?"
+msgstr "Ви дійсно бажаєте віхилити запрошення?"
+
+#, fuzzy
+#| msgid "Decline Member"
+msgid "Deactivate Member"
+msgstr "Відмовити члену"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to activate the member's user account ?"
+msgstr "Ви дійсно бажаєте віхилити запрошення?"
+
+#, fuzzy
+#| msgid "Accept Member"
+msgid "Activate Member"
+msgstr "Долучити члена"
+
+msgid "Finish conference and deactivate user accounts"
+msgstr ""
+
+msgid "Start conference and activate user accounts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Simple Statistics"
+msgid "Download Statistics"
+msgstr "Проста статистика"
+
+msgid "Workshops"
+msgstr ""
+
+msgid "Add workshop"
+msgstr ""
+
 msgid "Re-Activate Project/Group"
 msgstr "Повторно активувати проект/спільноту"
 
@@ -2085,12 +2198,6 @@ msgstr "Написати всім членам"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
 msgstr "Надіслати повідомлення"
-
-msgid "Admin"
-msgstr "Адміністратор/-ка"
-
-msgid "Member"
-msgstr "Член"
 
 msgid "Kick"
 msgstr "Видалити"
@@ -2577,6 +2684,24 @@ msgstr "Деактивувати проект"
 
 msgid "Withdraw Request"
 msgstr "Відкликати запит"
+
+msgid "Workshop Participant File Upload"
+msgstr ""
+
+#, python-format
+msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgstr ""
+
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
+msgstr ""
+
+msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Upload File"
+msgstr "Завантажити зображення."
 
 msgid "Add container"
 msgstr "Додати контейнер"
@@ -4164,11 +4289,6 @@ msgstr ""
 msgid "Open Preview"
 msgstr "Огляд"
 
-#, fuzzy
-#| msgid "Is active"
-msgid "active"
-msgstr "Активний"
-
 msgid "displayed right now"
 msgstr ""
 
@@ -4524,6 +4644,100 @@ msgstr "Раді бачити тебе! На%(portal_name)s ти можеш сп
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Зареєструватися та долучитися"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups or Users"
+msgstr "Мо"
+
+msgid "Import from a CSV File"
+msgstr ""
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group CSV File"
+msgstr "Проекти/Спільноти"
+
+msgid "User CSV File"
+msgstr ""
+
+#, fuzzy
+#| msgid "Proportions"
+msgid "Options"
+msgstr "Пропорції"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Upload and Import..."
+msgstr "Завантажити зображення."
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups"
+msgstr "Мо"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+msgid "CSV Import Results"
+msgstr ""
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+msgid "Read errors:"
+msgstr ""
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+msgid "Important messages:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Errors:"
+msgstr "Помилка!"
+
+#, fuzzy
+#| msgid "Messages"
+msgid "Info messages:"
+msgstr "Повідомлення"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Показати більше проектів"
 
@@ -4696,6 +4910,58 @@ msgstr "%(team_type)s «%(group)s» було успішно створено."
 
 msgid "Create"
 msgstr "Створити"
+
+msgid "Conference successfully started and user accounts activated"
+msgstr ""
+
+msgid "Conference successfully finished and user accounts deactivated"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Successfully deactivated user account"
+msgstr "Видалити обліковий запис"
+
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Successfully activated user account"
+msgstr "Видалити обліковий запис"
+
+#, fuzzy
+#| msgid "Has created"
+msgid "User was not created"
+msgstr "Створив"
+
+msgid "Workshop username"
+msgstr ""
+
+#, fuzzy
+#| msgid "Email"
+msgid "email"
+msgstr "Адреса електронної скриньки"
+
+msgid "workshops count"
+msgstr ""
+
+#, fuzzy
+#| msgid "Has Logged In"
+msgid "has logged in"
+msgstr "Увійшов в систему"
+
+#, fuzzy
+#| msgid "Validate"
+msgid "last login date"
+msgstr "Підтвердити"
+
+#, fuzzy
+#| msgid "First name"
+msgid "First Name"
+msgstr "Ім'я"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "Last Name"
+msgstr "Прізвище"
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -5047,9 +5313,6 @@ msgstr "Ваші зміни були збережені."
 
 #~ msgid "Invited you"
 #~ msgstr "Запросив Вас"
-
-#~ msgid "Has created"
-#~ msgstr "Створив"
 
 #~ msgid "Hi,"
 #~ msgstr "Вітання,"

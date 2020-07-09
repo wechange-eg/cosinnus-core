@@ -1,6 +1,6 @@
 {% load i18n cosinnus_tags %}
 
-{% comment %} {{current_page}} is one of: editgroup, groupdetails {% endcomment %}
+{% comment %} {{current_page}} is one of: editgroup, groupdetails, groupdeactivate, conferencemanagement {% endcomment %}
 
 {% if current_page == "editgroup" %}
     {% captureas is_editgroup %}True{% endcaptureas %}
@@ -8,6 +8,8 @@
     {% captureas is_groupdetails %}True{% endcaptureas %}
 {% elif current_page == "groupdeactivate" %}
     {% captureas is_deactivategroup %}True{% endcaptureas %}
+{% elif current_page == "conferencemanagement" %}
+    {% captureas is_conferencemanagement %}True{% endcaptureas %}
 {% endif %}
 
 {% if user|has_write_access:object %}
@@ -16,9 +18,17 @@
 	{% include "cosinnus/leftnav_button.html" with active=is_editgroup extra_classes="fine-space" icon="fa-info-circle" label=label href=href  %}
 {% endif %}
 
+{% if group.is_group_and_conference and user|has_write_access:object %}
+{% captureas href %}{% group_url 'cosinnus:conference-management' group=group %}{% endcaptureas %}
+{% captureas label %}{% trans "Conference Management" %}{% endcaptureas %}
+{% include "cosinnus/leftnav_button.html" with active=is_conferencemanagement extra_classes="fine-space" icon_full_class="fas fa-chalkboard-teacher" label=label href=href  %}
+{% endif %}
+
 {% captureas href %}{% group_url 'cosinnus:group-detail' group=group %}{% endcaptureas %}
 {% captureas label %}{% trans "Members" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_groupdetails extra_classes="large-space" icon="fa-users" label=label href=href  %}
+
+
 
 
 {% if user|is_group_admin:group or user|is_superuser %}

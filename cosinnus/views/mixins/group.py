@@ -8,6 +8,7 @@ from cosinnus.core.decorators.views import (require_read_access,
     dispatch_group_access, require_logged_in, require_write_access_groupless,
     superuser_required, require_superuser)
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
+from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from django.core.exceptions import PermissionDenied, ImproperlyConfigured
 from django.shortcuts import redirect
@@ -342,3 +343,11 @@ class EndlessPaginationMixin(object):
             self.template_name = self.items_template
             self.is_paginated = True
         return super(EndlessPaginationMixin, self).dispatch( request, *args, **kwargs)
+
+
+class GroupIsConferenceMixin:
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.group.is_group_and_conference:
+            return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
+        return super().dispatch(request, *args, **kwargs)

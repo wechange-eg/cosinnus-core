@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from builtins import str
 from builtins import object
 import re
+import csv
+import io
 
 from django import forms
 from django.forms.widgets import SelectMultiple
@@ -29,6 +31,8 @@ from django.contrib.auth import get_user_model
 from cosinnus.utils.user import get_user_select2_pills, filter_active_users
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.templatetags.cosinnus_tags import is_superuser
+from django.core.exceptions import ObjectDoesNotExist
+from cosinnus.models.group import CosinnusGroup
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -322,5 +326,79 @@ class CosinnusGroupCallToActionButtonForm(forms.ModelForm):
     class Meta(object):
         model = CosinnusGroupCallToActionButton
         fields = ('group', 'label', 'url', )
-        
 
+
+class CosinusWorkshopParticipantCSVImportForm(forms.Form):
+
+    participants = forms.FileField()
+
+    def __init__(self, *args, **kwargs):
+        self.group = kwargs.pop('group', None)
+        super().__init__(*args, **kwargs)
+
+    def clean_participants(self):
+        csv_file = self.cleaned_data['participants']
+        reader = self.process_csv(csv_file)
+        header = next(reader, None)
+        cleaned_header = self.clean_row_data(header)
+
+        group_header = self.process_and_validate_header(cleaned_header)
+        data = self.process_and_validate_data(reader)
+
+        return {
+            'header_original': cleaned_header,
+            'header': group_header,
+            'data': data
+        }
+
+    def process_and_validate_data(self, reader):
+        data = []
+        workshop_usernames = []
+
+        for row in reader:
+            cleaned_row = self.clean_row_data(row)
+            workshop_username = cleaned_row[0]
+            if ' ' in workshop_username:
+                raise forms.ValidationError(_("Please remove the whitespace from '{}'").format(workshop_username))
+            if workshop_username not in workshop_usernames:
+                workshop_usernames.append(workshop_username)
+            else:
+                raise forms.ValidationError(_("Names must be unique. You added '{}' more"
+                                              " then once to your CSV. Please change the name.").format(workshop_username))
+            data.append(self.clean_row_data(cleaned_row))
+
+        return data
+
+    def process_and_validate_header(self, header):
+        group_header = ['', '', '']
+
+        for slug in header[3:]:
+                try:
+                    group = CosinnusGroup.objects.get(parent=self.group,
+                                                      portal=self.group.portal,
+                                                      type=CosinnusGroup.TYPE_PROJECT,
+                                                      slug=slug.lower())
+                    group_header.append(group)
+                except ObjectDoesNotExist:
+                    raise forms.ValidationError(_("Can't find workshop with slug '{}'").format(slug))
+        return group_header
+
+    def process_csv(self, csv_file):
+        try:
+            file = csv_file.read().decode('utf-8')
+            io_string = io.StringIO(file)
+            dialect = csv.Sniffer().sniff(io_string.read(1024), delimiters=";,")
+            io_string.seek(0)
+            reader = csv.reader(io_string, dialect)
+            return reader
+        except UnicodeDecodeError:
+            raise forms.ValidationError(_("This is not a valid CSV File"))
+        except csv.Error:
+            raise forms.ValidationError(_("CSV could not be parsed. Please use ',' or ';' as delimiter."))
+
+
+    def clean_row_data(self, row):
+        cleaned_row = []
+        for entry in row:
+            cleaned_row.append(entry.strip())
+        return cleaned_row
