@@ -653,7 +653,8 @@ class CosinnusConf(AppConf):
     # whether to prefix all nextcloud group folders with "Projekt" or "Gruppe"
     CLOUD_PREFIX_GROUP_FOLDERS = True
     # the quota for groupfolders, in bytes. -3 is the default for "unlimited"
-    CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA = -3
+    # currently set to 1GB
+    CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA = 1024 * 1024 * 1024
     # timeout for nextcloud webdav requests in seconds
     CLOUD_NEXTCLOUD_REQUEST_TIMEOUT = 15
     
