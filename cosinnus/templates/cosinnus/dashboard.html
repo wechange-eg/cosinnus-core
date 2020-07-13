@@ -296,7 +296,18 @@
 	                    {% elif group.facebook_page_id %}
 	                    		&nbsp;<a href="https://facebook.com/{{ group.facebook_page_id}}/" target="_blank" title="{% trans "View on Facebook" %}"><i class="fa fa-facebook-square"></i></a>
 	                    {% endif %}
+	                    
                     </h2>
+                    
+                    <p>
+	                    {% if group.type == 0 %}
+                            {% trans "You will now receive notifications whenever public content is posted in this project." as follow_success_message %}
+                        {% else %}
+                            {% trans "You will now receive notifications whenever public content is posted in this group." as follow_success_message %}
+                        {% endif %}
+                        {% include 'cosinnus/common/likefollow/follow_button.html' with object=group success_message=follow_success_message %}
+                        {% include 'cosinnus/common/likefollow/confirm_likefollow_modal.html' with object=group %}
+                    </p>
                     
                     {% with society=group.get_parent_typed %}
                         {% if society %}
@@ -313,16 +324,7 @@
                         </p>
                     {% endif %}
                     
-                    <p>
-                        {% if group.type == 0 %}
-                            {% trans "You will now receive notifications whenever public content is posted in this project." as follow_success_message %}
-                        {% else %}
-                            {% trans "You will now receive notifications whenever public content is posted in this group." as follow_success_message %}
-                        {% endif %}
-                        {% include 'cosinnus/common/likefollow/follow_button.html' with object=group success_message=follow_success_message %}
-                        {% include 'cosinnus/common/likefollow/confirm_likefollow_modal.html' with object=group %}
-                    </p>
-                    
+                        
                     {% block group_metadata %}
 	                    {% with  topics=group.media_tag_object.topics %}
 	                        {% if topics %}
