@@ -709,7 +709,7 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, 
 
     def get_last_login(self, member):
         has_logged_in = 1 if member.last_login else 0
-        logged_in_date = member.last_login.date() if member.last_login else ''
+        logged_in_date = member.last_login.strftime("%Y-%m-%d %H:%M") if member.last_login else ''
 
         return [has_logged_in, logged_in_date]
 
