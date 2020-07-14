@@ -696,7 +696,7 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, 
         writer.writerow(header)
 
         for member in members:
-            workshop_username = member.cosinnus_profile.workshop_user_name
+            workshop_username = member.cosinnus_profile.readable_workshop_user_name
             email = member.email
             workshop_count = self.get_membership_count(member)
             has_logged_in, logged_in_date = self.get_last_login(member)
