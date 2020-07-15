@@ -92,6 +92,7 @@ from django_select2.views import NO_ERR_RESP, Select2View
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
 from django.core.exceptions import ObjectDoesNotExist
 from cosinnus.models.profile import get_user_profile_model
+from cosinnus.views.profile import delete_userprofile
 from django.utils.crypto import get_random_string
 from django.http import HttpResponse
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME
@@ -511,6 +512,12 @@ class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsC
             user = self.update_member_status(user_id, True)
             if user:
                 messages.add_message(request, messages.SUCCESS, _('Successfully activated user account'))
+
+        elif 'remove_member' in request.POST:
+            user_id = int(request.POST.get('remove_member'))
+            user = get_user_model().objects.get(id=user_id)
+            delete_userprofile(user)
+            messages.add_message(request, messages.SUCCESS, _('Successfully removed user'))
 
         return redirect(group_aware_reverse('cosinnus:conference-management',
                                             kwargs={'group': self.group}))

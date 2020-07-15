@@ -115,6 +115,21 @@
 		                        </ul>
 		                    </button>
 		                    {% endif %}
+
+		                    {% captureas modal_remove_id %}userModal_remove_{{member_dict.member.pk}}{% endcaptureas %}
+		                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_remove_id}}">
+		                        <ul class="media-list">
+		                            <li class="media">
+		                            	<a class="pull-left" href="#">
+				                                <i class="fas fa-user-slash"></i>
+				                            </a>
+		                                <div class="media-body">
+		                                    {% trans "remove user" %}
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </button>
+
 		                </div>
 		            </div>
 		            {% if member_dict.member.is_active %}
@@ -129,6 +144,11 @@
 	                {% captureas action %}{% group_url 'cosinnus:conference-management' group=object %}{% endcaptureas %}
 	                {% include "cosinnus/modal_box.html" with id=modal_activate_id label=label title=title form_action=action submit_name="activate_member" submit_value=member_dict.member.id title_icon='fas fa-check-circle' %}
 	                {% endif %}
+
+	                {% captureas label %}{% trans "Do you really want to remove the user?" %}{% endcaptureas %}
+	                {% captureas title %}{% trans "Remove User" %}{% endcaptureas %}
+	                {% captureas action %}{% group_url 'cosinnus:conference-management' group=object %}{% endcaptureas %}
+	                {% include "cosinnus/modal_box.html" with id=modal_remove_id label=label title=title form_action=action submit_name="remove_member" submit_value=member_dict.member.id title_icon_full_class='fas fa-user-slash' %}
 		        {% endfor %}
 		        <div>
 			        <div class="fadedown pull-right regular-space">
