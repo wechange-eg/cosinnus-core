@@ -29,12 +29,16 @@ from cosinnus.utils.urls import safe_redirect
 from cosinnus.templatetags.cosinnus_tags import cosinnus_setting
 from uuid import uuid1
 from cosinnus.views.user import set_user_email_to_verify
+from cosinnus.core import signals
 
 
 def delete_userprofile(user):
     """ Deactivate and anonymize a user's profile """
     
     profile = user.cosinnus_profile
+    
+    # send deletion signal
+    signals.pre_userprofile_delete.send(sender=None, profile=profile)
     
     # delete user widgets
     widgets = WidgetConfig.objects.filter(user_id__exact=user.pk)
