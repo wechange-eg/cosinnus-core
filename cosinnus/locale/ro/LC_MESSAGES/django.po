@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-08 15:33+0200\n"
+"POT-Creation-Date: 2020-07-15 18:32+0200\n"
 "PO-Revision-Date: 2019-11-18 04:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1885,17 +1885,17 @@ msgstr "Acum"
 msgid "View on Facebook"
 msgstr "Vedere pe Facebook"
 
-msgid "Group:"
-msgstr "Grup:"
-
-msgid "No Description set"
-msgstr "Fără set de Descriere"
-
 msgid "You will now receive notifications whenever public content is posted in this project."
 msgstr "Acum veți primi notificări ori de câte ori este publicat conținut public în acest proiect."
 
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "Acum veți primi notificări ori de câte ori conținutul public este postat în acest grup."
+
+msgid "Group:"
+msgstr "Grup:"
+
+msgid "No Description set"
+msgstr "Fără set de Descriere"
 
 msgid "more"
 msgstr "mai mult"
@@ -1991,6 +1991,11 @@ msgid "activate member"
 msgstr "Invită un membru"
 
 #, fuzzy
+#| msgid "Remove Member"
+msgid "remove user"
+msgstr "Eliminați Membru"
+
+#, fuzzy
 #| msgid "Do you really want to decline the invitation?"
 msgid "Do you really want to deactivate the member's user account ?"
 msgstr "Chiar vrei să refuzi invitația?"
@@ -2009,6 +2014,16 @@ msgstr "Chiar vrei să refuzi invitația?"
 #| msgid "Accept Member"
 msgid "Activate Member"
 msgstr "Accept membru"
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to remove the user?"
+msgstr "Chiar vrei să lași „%(title)s”?"
+
+#, fuzzy
+#| msgid "Remove Member"
+msgid "Remove User"
+msgstr "Eliminați Membru"
 
 msgid "Finish conference and deactivate user accounts"
 msgstr ""
@@ -2679,7 +2694,7 @@ msgid "Workshop Participant File Upload"
 msgstr ""
 
 #, python-format
-msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 msgstr ""
 
 msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
@@ -4906,6 +4921,11 @@ msgstr "Ștergeți contul de utilizator"
 #, fuzzy
 #| msgid "Delete user account"
 msgid "Successfully activated user account"
+msgstr "Ștergeți contul de utilizator"
+
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Successfully removed user"
 msgstr "Ștergeți contul de utilizator"
 
 #, fuzzy

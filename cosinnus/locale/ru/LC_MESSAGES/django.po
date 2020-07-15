@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-08 15:33+0200\n"
+"POT-Creation-Date: 2020-07-15 18:32+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1901,17 +1901,17 @@ msgstr "Сейчас"
 msgid "View on Facebook"
 msgstr "Просмотреть на Фейсбуке"
 
-msgid "Group:"
-msgstr "Группа:"
-
-msgid "No Description set"
-msgstr "Нет описания"
-
 msgid "You will now receive notifications whenever public content is posted in this project."
 msgstr "Теперь Вы будете получать уведомления, если общественно-доступный контент будет опубликован в этом проекте."
 
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "Теперь Вы будете получать уведомления, если общественно-доступный контент будет опубликован в этой группе."
+
+msgid "Group:"
+msgstr "Группа:"
+
+msgid "No Description set"
+msgstr "Нет описания"
 
 msgid "more"
 msgstr "больше"
@@ -2008,6 +2008,11 @@ msgid "activate member"
 msgstr "Пригласить участника"
 
 #, fuzzy
+#| msgid "Remove Member"
+msgid "remove user"
+msgstr "Удалить пользователя из проекта"
+
+#, fuzzy
 #| msgid "Do you really want to decline the invitation?"
 msgid "Do you really want to deactivate the member's user account ?"
 msgstr "Вы действительно хотите отклонить приглашение?"
@@ -2026,6 +2031,16 @@ msgstr "Вы действительно хотите отклонить приг
 #| msgid "Accept Member"
 msgid "Activate Member"
 msgstr "Принять пользователя"
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to remove the user?"
+msgstr "Вы действительно хотите покинуть проект „%(title)s“?"
+
+#, fuzzy
+#| msgid "Remove Member"
+msgid "Remove User"
+msgstr "Удалить пользователя из проекта"
 
 msgid "Finish conference and deactivate user accounts"
 msgstr ""
@@ -2698,7 +2713,7 @@ msgid "Workshop Participant File Upload"
 msgstr ""
 
 #, python-format
-msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 msgstr ""
 
 msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
@@ -4932,6 +4947,11 @@ msgstr "Удалить аккаунт пользователя"
 #, fuzzy
 #| msgid "Delete user account"
 msgid "Successfully activated user account"
+msgstr "Удалить аккаунт пользователя"
+
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Successfully removed user"
 msgstr "Удалить аккаунт пользователя"
 
 #, fuzzy

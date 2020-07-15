@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-08 15:33+0200\n"
+"POT-Creation-Date: 2020-07-15 18:32+0200\n"
 "PO-Revision-Date: 2020-06-23 13:18+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -1856,17 +1856,17 @@ msgstr "beantragen"
 msgid "View on Facebook"
 msgstr "Auf Facebook ansehen"
 
-msgid "Group:"
-msgstr "Gruppe:"
-
-msgid "No Description set"
-msgstr "Keine Beschreibung erstellt"
-
 msgid "You will now receive notifications whenever public content is posted in this project."
 msgstr "Du wirst jetzt Benachrichtigungen erhalten wenn öffentliche Inhalte in diesem Projekt erstellt werden."
 
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "Du wirst jetzt Benachrichtigungen erhalten wenn öffentliche Inhalte in dieser Gruppe erstellt werden."
+
+msgid "Group:"
+msgstr "Gruppe:"
+
+msgid "No Description set"
+msgstr "Keine Beschreibung erstellt"
 
 msgid "more"
 msgstr "mehr"
@@ -1951,6 +1951,9 @@ msgstr "Teilnehmer deaktivieren"
 msgid "activate member"
 msgstr "Teilnehmer aktivieren"
 
+msgid "remove user"
+msgstr "Teilnehmer entfernen"
+
 msgid "Do you really want to deactivate the member's user account ?"
 msgstr "Möchten sie wirkich dieses Nutzerkonto deaktivieren?"
 
@@ -1962,6 +1965,12 @@ msgstr "Möchten sie wirkich dieses Nutzerkonto aktivieren?"
 
 msgid "Activate Member"
 msgstr "Teilnehmer aktivieren"
+
+msgid "Do you really want to remove the user?"
+msgstr "Möchtest du wirklich den Teilnehmer entfernen?"
+
+msgid "Remove User"
+msgstr "Teilnehmer entfernen"
 
 msgid "Finish conference and deactivate user accounts"
 msgstr "Tagung beenden und Teilnehmerkonten deaktivieren"
@@ -2615,8 +2624,7 @@ msgstr "Anfrage zurückziehen"
 msgid "Workshop Participant File Upload"
 msgstr "Workshop Teilnehmer Datei Upload"
 
-#, python-format
-msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 msgstr "Bitte laden sie ein CSV mit den folgenden Spalten hoch: eindeutiger Nutzer_innen-Name, Vorname, Nachname und eine Spalte für jeden Workshop (bitte den Slug angeben). Als Hilfe können Sie <a href=\"%(workshop_participants_upload_skeleton)s\">hier</a> ein entsprechendes Template herunterladen.."
 
 msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
@@ -4815,10 +4823,10 @@ msgid "Create"
 msgstr "Erstellen"
 
 msgid "Conference successfully started and user accounts activated"
-msgstr ""
+msgstr "Tagung erfolgreich gestartet und Nutzerkonten aktiviert"
 
 msgid "Conference successfully finished and user accounts deactivated"
-msgstr ""
+msgstr "Tagung erfolgreich beendet und Nutzerkonten deaktiviert"
 
 #
 #, fuzzy
@@ -4831,6 +4839,9 @@ msgstr "Benutzer_innen-Konto löschen"
 #| msgid "Delete user account"
 msgid "Successfully activated user account"
 msgstr "Benutzer_innen-Konto löschen"
+
+msgid "Successfully removed user"
+msgstr "Nutzer erfolgreich entfernt."
 
 #, fuzzy
 #| msgid "Has created"
