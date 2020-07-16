@@ -101,6 +101,7 @@ from cosinnus.models.profile import UserProfile
 from cosinnus.utils.user import create_base_user
 from django.views.generic.edit import FormView
 from django.db import transaction
+from cosinnus.utils.urls import redirect_with_next, group_aware_reverse
 
 logger = logging.getLogger('cosinnus')
 
@@ -631,6 +632,12 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
                 profile = get_user_profile_model()._default_manager.get_for_user(user)
                 profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
                 profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
+                profile.add_redirect_on_next_page(
+                    redirect_with_next(
+                        group_aware_reverse(
+                            'cosinnus:group-dashboard',
+                            kwargs={'group': self.group}),
+                        self.request), message=None, priority=True)
                 profile.save()
 
                 unique_email = 'User{}.C{}@wechange.de'.format(str(user.id), str(self.group.id))
