@@ -8,7 +8,7 @@
 
 {% with images=object.attached_images %}
     {% for image in images %}
-        <a href="{{ image.static_image_url }}" data-lightbox="image-{{ object.slug }}" data-lightbox-download="{{ image.static_image_url }}" data-title="{{ image.title }}" 
+        <a href="{{ image.static_image_url }}" data-lightbox="image-{{ object.slug }}" data-lightbox-download="{{ image.static_image_original_url }}" data-title="{{ image.title }}" 
                     class="cursor-zoom" {% if forloop.counter > 1 %}style="display: none"{% endif %}>
 		    <img src="{{ image.static_image_url }}" />
 		</a>

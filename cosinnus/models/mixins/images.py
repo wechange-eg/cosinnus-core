@@ -36,6 +36,36 @@ class ThumbnailableImageMixin(object):
             Can be overridden in case the original image was copied away. """
         return self.image.path.split(os.sep)[-1]
     
+    def static_image_original_url(self):
+        """ 
+        This function copies the image to its new path (if necessary) and
+        returns the URL for the image to be displayed on the page. (Ex:
+        '/media/cosinnus_files/images/dca2b30b1e07ed135c24d7dbd928e37523b474bb.jpg')
+
+        It is a helper function to display cosinnus image files on the webpage.
+
+        The image file is copied to a general image folder in cosinnus_files,
+        so the true image path is not shown to the client.
+        
+        The image returned is the original, uncropped image.
+        """
+        if not self.is_image:
+            return ''
+        # the modifier can be used to save images of different sizes
+        media_image_path = self.get_media_image_path(filename_modifier="original")
+
+        # if image is not in media dir yet, resize and copy it
+        imagepath_local = join(settings.MEDIA_ROOT, media_image_path)
+        if not exists(imagepath_local):
+            try:
+                shutil.copy(getattr(self, self.image_attr_name).path, imagepath_local)
+            except IOError:
+                # if the file wasn't found, we don't need to crash, people can reupload a broken image
+                pass
+        media_image_path = media_image_path.replace('\\', '/')  # fix for local windows systems
+        return join(settings.MEDIA_URL, media_image_path)
+    
+            
     def static_image_url(self, size=None, filename_modifier=None):
         """
         This function copies the image to its new path (if necessary) and

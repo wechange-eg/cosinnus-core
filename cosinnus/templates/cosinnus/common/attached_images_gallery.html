@@ -10,7 +10,7 @@
     {% with images=object.attached_images %}
         {% for image in images %}
             <div class="col-sm-4" {% if max_images and forloop.counter > max_images %}style="display: none"{% endif %}>
-                <a href="{{ image.static_image_url }}" data-lightbox="image-detailed-{{ object.slug }}" data-lightbox-download="{{ image.static_image_url }}" data-title="{{ image.title }}" class="thumbnail cursor-zoom">
+                <a href="{{ image.static_image_url }}" data-lightbox="image-detailed-{{ object.slug }}" data-lightbox-download="{{ image.static_image_original_url }}" data-title="{{ image.title }}" class="thumbnail cursor-zoom">
                     <img src="{% thumbnail image.file 263x263 crop=1 upscale=1 %}" title='{{ image.title }}'/>
                 </a>
             </div>
