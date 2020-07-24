@@ -1,0 +1,66 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags djajax_tags widget_tweaks %}
+
+{% block page_title %}{% trans "Signup" %}{% endblock %}
+
+{% block main_page %}
+
+{% captureas title %}
+{{ account.get_provider.id }}
+{% endcaptureas %}
+
+{% captureas label %}
+<div class="cosinnus-field">
+	<div class="field-description">
+	{% blocktrans with provider_name=account.get_provider.id site_name=site.name %} {{ site_name }} requests access to the following data from your {{provider_name}} Account: {% endblocktrans %}
+	<ul>
+		<li>{% trans 'email address' %}</li>
+		<li>{% trans 'first name' %}</li>
+		<li>{% trans 'last name (if set)' %}</li>
+	</ul>
+</div>
+
+{% csrf_token %}
+
+{% for field in form %}
+{% if field.name == 'copy_profile' %}
+{% trans 'Do you also want to copy your profile data?'  as label %}
+{% trans "Yes, allow access to my profile data: (e.g Avatar, Location, Topics, Language Settings)" as checkbox_label %}
+{% include 'cosinnus/fields/checkbox_field.html' with field=form.copy_profile checkbox_label=checkbox_label label=label %}
+{% endif %}
+{% endfor %}
+
+{% for field in form %}
+{% if field.name == 'newsletter_opt_in' %}
+{% trans 'Do you want to receive a newsletter?' as label %}
+{% trans "Yes, please send me newsletters!" as checkbox_label %}
+{% include 'cosinnus/fields/checkbox_field.html' with field=form.newsletter_opt_in checkbox_label=checkbox_label label=label %}
+{% endif %}
+{% endfor %}
+
+<div>
+    {{ form.tos_check.errors }}
+    <p class="inline-list transparent">
+        <span class="cursor-pointer-input inline-list-input">
+            {% render_field form.tos_check %}
+        </span>
+        <span class="cursor-pointer-input" onclick="$('#{{ form.tos_check.id_for_label }}').prop('checked', !($('#{{ form.tos_check.id_for_label }}').prop('checked'))).trigger('change');">
+            {% trans "I have read and accept the" context "read and accept the [Terms of Services]" %}
+        </span>
+        <a class="nowrap" href="/nutzungsbedingungen/" target="_blank">{% trans "Terms and Services" %} <i class="fa fa-external-link"></i></a>
+    </p>
+</div>
+
+{% for hidden in form.hidden_fields %}
+{{ hidden }}
+{% endfor %}
+{% if redirect_field_value %}
+<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+{% endif %}
+{% endcaptureas %}
+
+{% captureas form_action %}{% url 'socialaccount_signup' %}{% endcaptureas %}
+{% include "cosinnus/modal_box.html" with id="signup-social-account" label=label title=title form_action=form_action title_icon="fa-user" show_inline=True hide_submit_button=False hide_cancel_button=True %}
+
+{% endblock %}
+

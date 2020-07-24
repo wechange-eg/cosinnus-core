@@ -52,6 +52,7 @@ PROFILE_SETTING_ROCKET_CHAT_ID = 'rocket_chat_id'
 PROFILE_SETTING_ROCKET_CHAT_USERNAME = 'rocket_chat_username'
 PROFILE_SETTING_WORKSHOP_PARTICIPANT = 'is_workshop_participant'
 PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME = 'workshop_participant_name'
+PROFILE_SETTING_COSINUS_OAUTH_LOGIN = 'has_logged_in_with_cosinnus_oauth'
 
 
 class BaseUserProfileManager(models.Manager):
