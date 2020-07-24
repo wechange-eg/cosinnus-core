@@ -32,7 +32,7 @@
     </div>
 {% endif %}
 
-<form action="" method="post" class="cosinnus-form form-horizontal" role="form">
+<form action="" method="post" class="cosinnus-form form-horizontal ultra-space" role="form">
     {% csrf_token %}
     <input type="hidden" name="next" value="{% if request.GET.next %}{{ request.GET.next }}{% else %}{% url 'cosinnus:my_stream' %}{% endif %}">
     {{ form.non_field_errors }}
@@ -81,6 +81,10 @@
         
     </div><!-- content-box -->
 
+{% endif %}
+
+{% if SETTINGS.IS_COSINNUS_OAUTH_CLIENT %}
+{% include "socialaccount/snippets/provider_list.html" with process="login" type="login" %}
 {% endif %}
 
 {% endblock content %}

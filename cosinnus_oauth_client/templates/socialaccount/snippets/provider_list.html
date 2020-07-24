@@ -1,0 +1,30 @@
+{% load socialaccount i18n cosinnus_tags %}
+
+{% get_providers as socialaccount_providers %}
+<div class="ultra-space">
+	<div class="cosinnus-form">
+		<div class="content-box">
+			{% if type == 'signup'%}
+			<h2>{% trans 'Register with Social Account' %}</h2>
+			{% elif type == 'login' %}
+			<h2>{% trans 'Login with Social Account' %}</h2>
+			{% endif %}
+			{% for provider in socialaccount_providers %}
+			<div class="cosinnus-field">
+			<div class="field-description">{% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME provider=provider.id|upper %} {{ portal_name }} ist Teil der {{provider }}-Community. Du kannst dich mit deinem {{provider}}-Account auch auf {{ portal_name }} anmelden.{% endblocktrans %}</div></div>
+			{% endfor %}
+		</div>
+		{% for provider in socialaccount_providers %}
+		<button title="{{provider.name}}" class="btn btn-emphasized btn btn-emphasized btn-autosize" href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+			<ul class="media-list">
+				<li class="media">
+					<span class="pull-left">
+						<i class="fa fa-hand-o-right"></i>
+					</span>
+					<div class="media-body">{% blocktrans with provider_id=provider.id %}Login with {{ provider_id }}{% endblocktrans %}</div>
+				</li>
+			</ul>
+		</button>
+		{% endfor %}
+	</div>
+</div>
