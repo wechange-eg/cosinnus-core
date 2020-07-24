@@ -1,0 +1,68 @@
+{% extends "cosinnus/base.html" %}
+
+{% load i18n %}
+
+{% block page_title %}{% trans "Account Connections" %}{% endblock %}
+
+{% block breadcrumb %}
+        <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
+        <li class="active">{% trans "Account Connections" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus/user/leftnav.html' with view="socialaccount_connections" %}
+{% endblock leftnav %}
+
+{% block content %}
+
+{% if form.accounts %}
+<form method="post" action="{% url 'socialaccount_connections' %}" class="cosinnus-form">
+	<div class="content-box">
+	{% csrf_token %}
+
+	<h2>{% trans "Your Account Connections" %}</h2>
+
+	<div class="cosinnus-field">
+		<div class="field-description">{% blocktrans %}You can sign in to your account using any of the following third party accounts:{% endblocktrans %}</div>
+	</div>
+
+	<fieldset>
+	{% if form.non_field_errors %}
+	<div id="errorMsg">{{ form.non_field_errors }}</div>
+	{% endif %}
+
+	{% for base_account in form.accounts %}
+	{% with base_account.get_provider_account as account %}
+
+	<div class="large-space">
+		<div class="btn btn-white btn-headline cursor-text">
+			<ul class="media-list">
+				<li class="media">
+					<button name="account" class="pull-right btn btn-autosize" value="{{ base_account.id }}" type="submit">{% trans 'remove' %}</button>
+					<div class="media-body">{{account.get_brand.name}}</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	{% endwith %}
+	{% endfor %}
+
+	</fieldset>
+	</div>
+
+</form>
+
+{% else %}
+<p>{% trans 'You currently have no social network accounts connected to this account.' %}</p>
+{% endif %}
+
+<h2>{% trans 'Add a 3rd Party Account' %}</h2>
+
+<ul class="socialaccount_providers">
+{% include "socialaccount/snippets/provider_list.html" with process="connect" %}
+</ul>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% endblock %}
