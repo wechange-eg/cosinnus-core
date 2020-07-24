@@ -188,6 +188,10 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     
     _INSTALLED_APPS += [
         'cosinnus',
+        'cosinnus_oauth_client',
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
         'cosinnus_etherpad',
         'cosinnus_event',
         'cosinnus_file',
@@ -367,7 +371,7 @@ WAGTAIL_ENABLE_UPDATE_CHECK = False
     For cosinnus-specific internal default settings, check cosinnus/conf.py!
 """
 
-AUTHENTICATION_BACKENDS = ['cosinnus.backends.EmailAuthBackend',]
+AUTHENTICATION_BACKENDS = ['cosinnus.backends.EmailAuthBackend', 'allauth.account.auth_backends.AuthenticationBackend']
 
 # select2 render static files
 AUTO_RENDER_SELECT2_STATICS = False
