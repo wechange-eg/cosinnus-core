@@ -4,15 +4,30 @@
 <div class="ultra-space">
 	<div class="cosinnus-form">
 		<div class="content-box">
-			{% if type == 'signup'%}
-			<h2>{% trans 'Register with Social Account' %}</h2>
-			{% elif type == 'login' %}
-			<h2>{% trans 'Login with Social Account' %}</h2>
+			{% if socialaccount_providers|length == 1 %}
+				{% if type == 'signup'%}
+				<h2>{% blocktrans with provider=socialaccount_providers.0.id %}Sign up with {{ provider}} Account{% endblocktrans %}</h2>
+				{% elif type == 'login' %}
+				<h2>{% blocktrans with provider=socialaccount_providers.0.id %}Log in with {{ provider}} Account{% endblocktrans %}</h2>
+				{% endif %}
+			{% else %}
+				{% if type == 'signup'%}
+				<h2>{% trans 'Register with Social Account' %}</h2>
+				{% elif type == 'login' %}
+				<h2>{% trans 'Login with Social Account' %}</h2>
+				{% endif %}
 			{% endif %}
-			{% for provider in socialaccount_providers %}
+
 			<div class="cosinnus-field">
-			<div class="field-description">{% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME provider=provider.id|upper %} {{ portal_name }} ist Teil der {{provider }}-Community. Du kannst dich mit deinem {{provider}}-Account auch auf {{ portal_name }} anmelden.{% endblocktrans %}</div></div>
-			{% endfor %}
+				<div class="field-description">
+				{% if socialaccount_providers|length == 1 %}
+				{% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME provider=socialaccount_providers.0.id|upper %} {{ portal_name }} is part of the {{provider }} community. You can use your {{provider}} account to login on {{ portal_name }}.{% endblocktrans %}
+
+				{% else %}
+				{% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME %} {{ portal_name }} is part of the following communities. If you have an account on one of these communities you can use it to login on {{ portal_name }}. {% endblocktrans %}
+				{% endif %}
+				</div>
+			</div>
 		</div>
 		{% for provider in socialaccount_providers %}
 		<button title="{{provider.name}}" class="btn btn-emphasized btn btn-emphasized btn-autosize" href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
@@ -21,7 +36,11 @@
 					<span class="pull-left">
 						<i class="fa fa-hand-o-right"></i>
 					</span>
+					{% if type == 'signup'%}
+					<div class="media-body">{% blocktrans with provider_id=provider.id %}Sign up with {{ provider_id }}{% endblocktrans %}</div>
+					{% elif type == 'login' %}
 					<div class="media-body">{% blocktrans with provider_id=provider.id %}Login with {{ provider_id }}{% endblocktrans %}</div>
+					{% endif %}
 				</li>
 			</ul>
 		</button>
