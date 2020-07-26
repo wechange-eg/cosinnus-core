@@ -3,11 +3,14 @@ from allauth.socialaccount.providers.oauth2.views import (OAuth2Adapter,
                                                           OAuth2LoginView)
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
+from allauth.socialaccount.views import ConnectionsView
+from allauth.account.views import  PasswordSetView
 
 from cosinnus.utils.urls import redirect_with_next
 from django.urls import reverse
-
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.urls import reverse, reverse_lazy
 from cosinnus.models.profile import get_user_profile_model
 
 import requests
@@ -15,10 +18,19 @@ import requests
 from .provider import CosinnusOauthClientProvider
 
 
-class CosinusAllauthRedirectAdapter(DefaultAccountAdapter):
+class CosinusAccountAdapter(DefaultAccountAdapter):
 
     def get_login_redirect_url(self, request):
         return redirect_with_next(reverse('cosinnus:user-dashboard'), self.request)
+
+    def is_open_for_signup(self, request):
+        return False
+
+
+class CosinusSocialAccountAdapter(DefaultSocialAccountAdapter):
+
+    def is_open_for_signup(self, request, sociallogin):
+        return True
 
 
 class CosinnusOauthClientAdapter(OAuth2Adapter):
@@ -26,7 +38,6 @@ class CosinnusOauthClientAdapter(OAuth2Adapter):
     access_token_url = '{}/o/token/'.format(settings.COSINNUS_OAUTH_SERVER_BASEURL)
     user_url = '{}/o/user/'.format(settings.COSINNUS_OAUTH_SERVER_BASEURL)
     authorize_url = '{}/o/authorize/'.format(settings.COSINNUS_OAUTH_SERVER_BASEURL)
-
 
     def complete_login(self, request, app, token, **kwargs):
         url = self.user_url
