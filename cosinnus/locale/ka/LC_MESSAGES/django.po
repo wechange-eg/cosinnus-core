@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-27 11:58+0200\n"
+"POT-Creation-Date: 2020-07-27 13:58+0200\n"
 "PO-Revision-Date: 2020-04-07 15:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -529,6 +529,11 @@ msgstr "დააკლიკეთ შემდეგ ბმულს, რო�
 
 msgid "Unsubscribe"
 msgstr "გამოწერის გაუქმება"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "My Dashboard"
+msgstr "ხელსაწყოთა პანელი"
 
 msgid "Tiny (50 x *)"
 msgstr "უმცირესი (50 x *)"

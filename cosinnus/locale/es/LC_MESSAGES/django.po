@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-27 11:58+0200\n"
+"POT-Creation-Date: 2020-07-27 13:58+0200\n"
 "PO-Revision-Date: 2020-04-22 12:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -549,6 +549,11 @@ msgstr "Haz clic en el enlace siguiente para terminar de recibir correos electr√
 
 msgid "Unsubscribe"
 msgstr "Anular"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "My Dashboard"
+msgstr "Tablero"
 
 msgid "Tiny (50 x *)"
 msgstr "Diminuto (50 x *)"
