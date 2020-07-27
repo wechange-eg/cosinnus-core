@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-15 18:32+0200\n"
+"POT-Creation-Date: 2020-07-27 11:58+0200\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4764,100 +4764,6 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "S'inscrire et co-administrer"
 
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-#, fuzzy
-#| msgid "My Projects and Groups"
-msgid "Import Projects and Groups or Users"
-msgstr "Mes projets et groupes"
-
-msgid "Import from a CSV File"
-msgstr ""
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-#, fuzzy
-#| msgid "Projects/Groups"
-msgid "Project/group CSV File"
-msgstr "Projets / groupes"
-
-msgid "User CSV File"
-msgstr ""
-
-#, fuzzy
-#| msgid "Proportions"
-msgid "Options"
-msgstr "Proportions"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-msgid "Delimiter of the CSV file"
-msgstr ""
-
-#, fuzzy
-#| msgid "Upload an image."
-msgid "Upload and Import..."
-msgstr "Télécharger une image."
-
-#, fuzzy
-#| msgid "My Projects and Groups"
-msgid "Import Projects and Groups"
-msgstr "Mes projets et groupes"
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-msgid "CSV Import Results"
-msgstr ""
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-msgid "Read errors:"
-msgstr ""
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-msgid "Saved items:"
-msgstr ""
-
-msgid "Important messages:"
-msgstr ""
-
-#, fuzzy
-#| msgid "Error!"
-msgid "Errors:"
-msgstr "Erreur !"
-
-#, fuzzy
-#| msgid "Messages"
-msgid "Info messages:"
-msgstr "Messages"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
-
 msgid "Show more Projects"
 msgstr "Afficher plus de projets"
 
@@ -5421,6 +5327,41 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#, fuzzy
+#~| msgid "My Projects and Groups"
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Mes projets et groupes"
+
+#, fuzzy
+#~| msgid "Projects/Groups"
+#~ msgid "Project/group CSV File"
+#~ msgstr "Projets / groupes"
+
+#, fuzzy
+#~| msgid "Proportions"
+#~ msgid "Options"
+#~ msgstr "Proportions"
+
+#, fuzzy
+#~| msgid "Upload an image."
+#~ msgid "Upload and Import..."
+#~ msgstr "Télécharger une image."
+
+#, fuzzy
+#~| msgid "My Projects and Groups"
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Mes projets et groupes"
+
+#, fuzzy
+#~| msgid "Error!"
+#~ msgid "Errors:"
+#~ msgstr "Erreur !"
+
+#, fuzzy
+#~| msgid "Messages"
+#~ msgid "Info messages:"
+#~ msgstr "Messages"
 
 #~ msgid "New membership request"
 #~ msgstr "Nouvelle demande d'ajout"
