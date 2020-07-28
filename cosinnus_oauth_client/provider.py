@@ -1,8 +1,6 @@
 from allauth.socialaccount.providers.base import ProviderAccount
 from allauth.socialaccount.providers.oauth2.provider import OAuth2Provider
 
-from django.conf import settings
-
 
 class CosinnusOauthClientAccount(ProviderAccount):
     pass
@@ -10,7 +8,7 @@ class CosinnusOauthClientAccount(ProviderAccount):
 class CosinnusOauthClientProvider(OAuth2Provider):
 
     id = 'wechange'
-    name = 'Cosinnus OAuth Provider'
+    name = 'Wechange'
     account_class = CosinnusOauthClientAccount
 
     def extract_uid(self, data):
