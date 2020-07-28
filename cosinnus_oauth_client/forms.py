@@ -29,6 +29,11 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
     last_name = forms.CharField(widget=forms.HiddenInput(), required=False)
     copy_profile = forms.BooleanField(required=False)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if not self.sociallogin.account.provider == 'wechange':
+            del self.fields['copy_profile']
+
     def custom_signup(self, request, user):
         profile = self.setup_profile(user)
         accept_user_tos_for_portal(user)
