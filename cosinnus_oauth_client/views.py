@@ -58,7 +58,7 @@ class CustomConnectionView(ConnectionsView):
     def get_success_url(self):
         provider = self.request.POST.get('provider', False)
         if provider:
-            return '{}/?provider={}'.format(reverse_lazy("socialaccount_connections"), provider)
+            return '{}?provider={}'.format(reverse_lazy("socialaccount_connections"), provider)
         return reverse_lazy("socialaccount_connections")
 
 custom_connections = login_required(CustomConnectionView.as_view())
@@ -66,6 +66,9 @@ custom_connections = login_required(CustomConnectionView.as_view())
 class CustomSetPasswordView(PasswordSetView):
 
     def get_success_url(self):
+        provider = self.request.POST.get('provider', False)
+        if provider:
+            return '{}?provider={}'.format(reverse_lazy("socialaccount_connections"), provider)
         return reverse_lazy('password_change')
 
 custom_password_set = login_required(CustomSetPasswordView.as_view())
