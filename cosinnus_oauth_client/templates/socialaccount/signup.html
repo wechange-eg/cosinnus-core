@@ -14,9 +14,13 @@
 	{% blocktrans with provider_name=account.get_provider.id|upper portal_name=SETTINGS.COSINNUS_PORTAL_NAME %} You are about to use your {{ provider_name }} account to login on {{ portal_name }}. This means {{ portal_name }} will have access to the following data from your {{provider_name}} Account: {% endblocktrans %}
 </p>
 
-<p><b>{% trans 'email address' %}</b></p>
-<p><b>{% trans 'first name' %}</b></p>
-<p class="large-space"><b>{% trans 'last name (if set)' %}</b></p>
+<div class="large-space">
+	<p><b>{% trans 'email address' %} : {{ form.email.value }}</b></p>
+	<p><b>{% trans 'first name' %} : {{ form.first_name.value }}</b></p>
+	{% if form.last_name.value %}
+	<p><b>{% trans 'last name (if set)' %} : {{ form.last_name.value }}</b></p>
+{% endif %}
+</div>
 
 {% csrf_token %}
 

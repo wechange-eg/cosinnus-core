@@ -25,6 +25,8 @@ from cosinnus.models.profile import PROFILE_SETTING_COSINUS_OAUTH_LOGIN
 class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields):
     email = forms.EmailField(widget=forms.HiddenInput())
     username = forms.CharField(widget=forms.HiddenInput())
+    first_name = forms.CharField(widget=forms.HiddenInput())
+    last_name = forms.CharField(widget=forms.HiddenInput(), required=False)
     copy_profile = forms.BooleanField(required=False)
 
     def custom_signup(self, request, user):
