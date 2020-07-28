@@ -10,8 +10,17 @@
 {% endcaptureas %}
 
 {% captureas label %}
+
+{% if form.errors %}
+<div class="large-space">
+{% for key, error in form.errors.items %}
+{{ error }}
+{% endfor %}
+</div>
+{% endif %}
+
 <p class="no-horizontal-padding no-vertical-padding large-space">
-	{% blocktrans with provider_name=account.get_provider.id|upper portal_name=SETTINGS.COSINNUS_PORTAL_NAME %} You are about to use your {{ provider_name }} account to login on {{ portal_name }}. This means {{ portal_name }} will have access to the following data from your {{provider_name}} Account: {% endblocktrans %}
+	{% blocktrans with provider_name=account.get_provider.id|upper portal_name=SETTINGS.COSINNUS_PORTAL_NAME %} You are about to use your {{ provider_name }} account to login on {{ portal_name }}. This means {{ portal_name }} will use to the following data from your {{provider_name}} Account: {% endblocktrans %}
 </p>
 
 <div class="large-space">
@@ -23,6 +32,7 @@
 </div>
 
 {% csrf_token %}
+
 
 <div class="ultra-space">
 {% for field in form %}
@@ -42,11 +52,7 @@
 {% endif %}
 {% endfor %}
 
-{% captureas checkbox_label %}
-{% blocktrans %} I have read and accept the  <a class="nowrap" href="/nutzungsbedingungen/" target="_blank">Terms of Services</a>{% endblocktrans %}
-{% endcaptureas%}
-{% include 'cosinnus/fields/checkbox_field.html' with field=form.tos_check checkbox_label=checkbox_label label_class='small-label' %}
-
+{% include 'cosinnus/registration/extra_signup_fields.html' %}
 
 {% for hidden in form.hidden_fields %}
 {{ hidden }}
