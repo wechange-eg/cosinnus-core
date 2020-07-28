@@ -19,102 +19,53 @@
 
 {% block content %}
 
-{% if request.GET.provider %}
-	{% if form.accounts %}
-		{% for base_account in form.accounts %}
-			{% if base_account.provider == request.GET.provider %}
-			<div class="content-box">
-				<legend>{% trans 'Edit password or email' %}</legend>
-				<div class="textfield transparent">
-					<p>{% blocktrans with provider=request.GET.provider %} You connected your account with your account on {{ provider }} but you can only change the email address and password of the {{ provider }} account on the {{ provider }} website. {% endblocktrans %}</p>
-				</div>
-			</div>
-			<div class="content-box">
-				<legend>{% trans 'Remove Connection' %}</legend>
-				<div class="textfield transparent">
-					{% if request.user.has_usable_password %}
-					<p>{% blocktrans with provider=request.GET.provider %}When you remove the connection you cannot login to this website via {{ provider }}. Instead you have to use your email address and password. {% endblocktrans %}</p>
-					<form method="post" action="{% url 'socialaccount_connections' %}" class="cosinnus-form">
-					{% csrf_token %}
-						{% if form.non_field_errors %}
-						<div id="errorMsg">{{ form.non_field_errors }}</div>
-						{% endif %}
-						<input type="hidden" id="provider" name="provider" value="{{ request.GET.provider }}">
-						{% with base_account.get_provider_account as account %}
-						<button name="account" class="pull-right btn btn-emphasized btn-autosize" value="{{ base_account.id }}" type="submit">
-							<ul class="media-list">
-				                <li class="media">
-				                    <a class="pull-left" href="#">
-				                        <i class="fas fa-unlink"></i>
-				                    </a>
-				                    <div class="media-body">
-				                        {% trans 'Disconnect Accounts' %}
-				                    </div>
-				                </li>
-           					 </ul>
-						</button>
-						{% endwith %}
-					</form>
-					{% else %}
-					<p>{% trans 'To remove the connection you must first set a password.' %}</p>
-					<button class="pull-right btn btn-emphasized btn-autosize" href="{% url 'account_set_password' %}" >
-							<ul class="media-list">
-				                <li class="media">
-				                    <a class="pull-left" href="#">
-				                        <i class="fas fa-key"></i>
-				                    </a>
-				                    <div class="media-body">
-				                        {% trans 'Set Password' %}
-				                    </div>
-				                </li>
-           					 </ul>
-						</button>
-					{% endif %}
-				</div>
-			</div>
-			{% endif %}
-		{% endfor %}
+	{% if request.GET.provider %}
+		{% include 'cosinnus_oauth_client/connection_detail.html' with provider=request.GET.provider form=form %}
 	{% else %}
-		{% captureas title %}
-		{% blocktrans with provider=request.GET.provider|upper %}Connect your Account with {{ provider }}{% endblocktrans %}
-		{% endcaptureas %}
-		{% captureas label %}
-		{% blocktrans with provider=request.GET.provider|upper %} If you already have an account on {{ provider }} you can connect both accounts here. After that you only have to login on {{ provider }} and are also logged in here.{% endblocktrans %}
-		{% endcaptureas %}
-		{% captureas custom_button_html%}
-		<button type="button" class="btn btn-emphasized" data-dismiss="modal" href="{% provider_login_url request.GET.provider process="connect" %}&next={{request.path}}?provider={{ request.GET.provider }}">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#">
-                        <i class="fas fa-link"></i>
-                    </a>
-                    <div class="media-body">
-                        {% trans 'Connect Accounts' %}
-                    </div>
-                </li>
-            </ul>
-	    </button>
-		{% endcaptureas %}
-		{% include "cosinnus/modal_box.html" with label=label custom_button_html=custom_button_html title=title title_icon="fas fa-link" show_inline=True hide_submit_button=True hide_cancel_button=True %}
+		<!-- content from allauth/templates/socialaccount/connections.html that is overwritten here -->
+		<h1>{% trans "Account Connections" %}</h1>
+
+		{% if form.accounts %}
+			<p>{% blocktrans %}You can sign in to your account using any of the following third party accounts:{% endblocktrans %}</p>
+
+			<form method="post" action="{% url 'socialaccount_connections' %}">
+			{% csrf_token %}
+
+				<fieldset>
+					{% if form.non_field_errors %}
+					<div id="errorMsg">{{ form.non_field_errors }}</div>
+					{% endif %}
+
+					{% for base_account in form.accounts %}
+					{% with base_account.get_provider_account as account %}
+
+					<div>
+						<label for="id_account_{{ base_account.id }}">
+							<input id="id_account_{{ base_account.id }}" type="radio" name="account" value="{{ base_account.id }}"/>
+							<span class="socialaccount_provider {{ base_account.provider }} {{ account.get_brand.id }}">{{account.get_brand.name}}</span>
+							{{ account }}
+						</label>
+					</div>
+					{% endwith %}
+					{% endfor %}
+
+					<div>
+						<button type="submit">{% trans 'Remove' %}</button>
+					</div>
+
+				</fieldset>
+			</form>
+
+		{% else %}
+		<p>{% trans 'You currently have no social network accounts connected to this account.' %}</p>
+		{% endif %}
+
+		<h2>{% trans 'Add a 3rd Party Account' %}</h2>
+
+		<ul class="socialaccount_providers">
+		{% include "socialaccount/snippets/provider_list.html" with process="connect" %}
+		</ul>
+
+		{% include "socialaccount/snippets/login_extra.html" %}
 	{% endif %}
-{% else %}
-	{% if form.accounts %}
-	<div class="content-box">
-		<legend>{% trans 'Your Account connected to' %}</legend>
-	</div>
-	{% endif %}
-
-	<div class="content-box">
-		<legend>{% trans 'Connect you Account to' %}</legend>
-		<div class="textfield transparent">
-			
-		</div>
-	</div>
-
-	
-
-	{% include "socialaccount/snippets/login_extra.html" %}
-{% endif %}
-
-
 {% endblock %}
