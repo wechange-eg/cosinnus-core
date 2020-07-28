@@ -136,7 +136,7 @@ def oauth_profile(request):
     media_tag_fields = ['visibility', 'location',
                         'location_lat', 'location_lon',
                         'place', 'valid_start', 'valid_end',
-                        'approach', 'topics']
+                        'approach']
 
     media_tag = profile.media_tag
     media_tag_dict = {}
