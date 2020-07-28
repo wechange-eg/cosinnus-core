@@ -75,7 +75,9 @@ def delete_userprofile(user):
 
     if settings.IS_COSINNUS_OAUTH_CLIENT:
         from allauth.socialaccount.models import SocialAccount
+        from allauth.account.models import EmailAddress
         SocialAccount.objects.filter(user=user).delete()
+        EmailAddress.objects.filter(user=user).delete()
     
     user.is_active = False
     user.save()
