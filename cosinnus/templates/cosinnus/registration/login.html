@@ -18,6 +18,13 @@
 
 {% block content %}
 
+{% if SETTINGS.COSINNUS_IS_OAUTH_PROVIDER and '/o/authorize/' in request.GET.next %}
+<div class="alert alert-info">
+    <i class="fa fa-info-circle fa-3x"></i>
+    {% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME %}In order to use your {{ portal_name }} account to login to another platform you need to login on {{ portal_name }} first.{% endblocktrans %}
+</div>
+{% endif %}
+
 {% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
 
 {% if request.GET.validate_msg %}
