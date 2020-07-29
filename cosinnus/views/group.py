@@ -705,7 +705,7 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, 
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
 
-        header = [_('Workshop username'), _('email'), _('workshops count'), _('has logged in'), _('last login date'), _('Terms of use accepted')]
+        header = ['Workshop username', 'email', 'workshops count', 'has logged in', 'last login date', 'Terms of service accepted']
 
         writer = csv.writer(response)
         writer.writerow(header)
