@@ -11,6 +11,7 @@ from cosinnus.utils.urls import redirect_with_next
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.utils.user import accept_user_tos_for_portal
 from django.urls import reverse
+from django.contrib import messages
 from django import forms
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _, get_language
@@ -53,6 +54,9 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
             base_profile.save()
 
         self.send_welcome_mail(user, request)
+        messages.add_message(request,
+                             messages.SUCCESS,
+                             _('Successfully signed in as {}.').format(user.get_full_name()))
 
     def setup_profile(self, user):
         if not user.cosinnus_profile:
