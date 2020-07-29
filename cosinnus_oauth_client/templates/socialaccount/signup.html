@@ -45,12 +45,6 @@
 </div>
 
 <h4>{% trans 'Please also fill in the following information:' %}</h4>
-{% for field in form %}
-{% if field.name == 'newsletter_opt_in' %}
-{% trans "Please send me newsletters!" as checkbox_label %}
-{% include 'cosinnus/fields/checkbox_field.html' with field=form.newsletter_opt_in checkbox_label=checkbox_label label_class='small-label' %}
-{% endif %}
-{% endfor %}
 
 {% include 'cosinnus/registration/extra_signup_fields.html' %}
 
