@@ -8,6 +8,7 @@ from builtins import object
 from itertools import chain
 
 from django.contrib import messages
+from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ImproperlyConfigured, ValidationError,\
@@ -704,7 +705,7 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, 
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
 
-        header = [_('Workshop username'), _('email'), _('workshops count'), _('has logged in'), _('last login date')]
+        header = ['Workshop username', 'email', 'workshops count', 'has logged in', 'last login date', 'Terms of service accepted']
 
         writer = csv.writer(response)
         writer.writerow(header)
@@ -714,7 +715,8 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, 
             email = member.email
             workshop_count = self.get_membership_count(member)
             has_logged_in, logged_in_date = self.get_last_login(member)
-            row = [workshop_username, email, workshop_count, has_logged_in, logged_in_date]
+            tos_accepted = member.cosinnus_profile.settings.get('tos_accepted', False)
+            row = [workshop_username, email, workshop_count, has_logged_in, logged_in_date, tos_accepted]
             writer.writerow(row)
         return response
 
@@ -723,7 +725,8 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, 
 
     def get_last_login(self, member):
         has_logged_in = 1 if member.last_login else 0
-        logged_in_date = member.last_login.strftime("%Y-%m-%d %H:%M") if member.last_login else ''
+        last_login = timezone.localtime(member.last_login)
+        logged_in_date = last_login.strftime("%Y-%m-%d %H:%M") if member.last_login else ''
 
         return [has_logged_in, logged_in_date]
 
