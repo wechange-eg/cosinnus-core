@@ -112,7 +112,7 @@
 {% endif %}
 
 
-{% if SETTINGS.IS_COSINNUS_OAUTH_CLIENT %}
+{% if SETTINGS.COSINNUS_IS_OAUTH_CLIENT %}
 {% get_providers as socialaccount_providers %}
 {% for provider in socialaccount_providers %}
 <button type="button" class="btn w100 btn-{% if view == "socialaccount_connections" %}extra-{% endif %}emphasized regular-space" href="{% url 'socialaccount_connections' %}?provider={{ provider.id }}">

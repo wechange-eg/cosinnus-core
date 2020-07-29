@@ -73,7 +73,7 @@ def delete_userprofile(user):
     scrambled_email_prefix = scrambled_email_prefix[:scramble_cutoff]
     user.email = '%s__%s' % (scrambled_email_prefix, user.email)
 
-    if settings.IS_COSINNUS_OAUTH_CLIENT:
+    if settings.COSINNUS_IS_OAUTH_CLIENT:
         from allauth.socialaccount.models import SocialAccount
         from allauth.account.models import EmailAddress
         SocialAccount.objects.filter(user=user).delete()
