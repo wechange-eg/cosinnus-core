@@ -569,3 +569,11 @@ CAPTCHA_TIMEOUT = 30
 
 COSINNUS_ROCKET_ENABLED = False
 COSINNUS_ROCKET_EXPORT_ENABLED = False
+
+# SSO default settings for any client portal
+ACCOUNT_ADAPTER = 'cosinnus_oauth_client.views.CosinusAccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'cosinnus_oauth_client.views.CosinusSocialAccountAdapter'
+SOCIALACCOUNT_AUTO_SIGNUP = False
+SOCIALACCOUNT_FORMS = {'signup': 'cosinnus_oauth_client.forms.SocialSignupProfileSettingsForm'}
+SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
+
