@@ -1,0 +1,8 @@
+{% load i18n cosinnus_tags %}{% blocktrans with user_name=user|full_name_force %}Hi {{ user_name }},
+
+Someone has just registered on {{ site_name }} with your {{ provider }} Account. We are sending you this email to make sure that this was you.
+
+If it was you, then you don't have to do anything. Otherwise, please contact the support.
+
+
+Your {{ site_name }} Team{% endblocktrans %}

@@ -685,6 +685,15 @@ class CosinnusConf(AppConf):
     # if enabled, this allows all portal-admins to download user emails, this might be
     # *VERY* risky, so use cautiously
     ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS = False
+
+    # set to True if you want to use this instance as oauth provider for other platforms
+    IS_OAUTH_PROVIDER = False
+
+    # set to True if you want to enable oauth2 social login with another instance (this other
+    # instance then has to have IS_OAUTH_PROVIDER to True). Add the url of the other instane as
+    # OAUTH_SERVER_BASEURL
+    IS_OAUTH_CLIENT = False
+    OAUTH_SERVER_BASEURL = None
     
 
 class CosinnusDefaultSettings(AppConf):

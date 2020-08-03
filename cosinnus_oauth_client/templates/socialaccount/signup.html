@@ -1,0 +1,62 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags djajax_tags widget_tweaks %}
+
+{% block page_title %}{% trans "Signup" %}{% endblock %}
+
+{% block main_page %}
+
+{% captureas title %}
+{% blocktrans with provider=account.get_provider.id|upper %}Login with {{ provider }}{% endblocktrans %}
+{% endcaptureas %}
+
+{% captureas label %}
+
+{% if form.errors %}
+<div class="large-space">
+{% for key, error in form.errors.items %}
+{{ error }}
+{% endfor %}
+</div>
+{% endif %}
+
+<p class="no-horizontal-padding no-vertical-padding large-space">
+	{% blocktrans with provider_name=account.get_provider.id|upper portal_name=SETTINGS.COSINNUS_PORTAL_NAME %} You are about to use your {{ provider_name }} account to login on {{ portal_name }}. This means {{ portal_name }} will use to the following data from your {{provider_name}} Account: {% endblocktrans %}
+</p>
+
+<div class="large-space">
+	<p><b>{% trans 'email address' %} : {{ form.email.value }}</b></p>
+	<p><b>{% trans 'first name' %} : {{ form.first_name.value }}</b></p>
+	{% if form.last_name.value %}
+	<p><b>{% trans 'last name (if set)' %} : {{ form.last_name.value }}</b></p>
+{% endif %}
+</div>
+
+{% csrf_token %}
+
+
+<div class="ultra-space">
+{% for field in form %}
+{% if field.name == 'copy_profile' %}
+<h4>{% trans 'Do you also want to copy your profile data?' %}</h4>
+{% trans "Yes, allow access to my profile data: (e.g Avatar, Location, Topics, Language Settings)" as checkbox_label %}
+{% include 'cosinnus/fields/checkbox_field.html' with field=form.copy_profile checkbox_label=checkbox_label label_class='small-label' %}
+{% endif %}
+{% endfor %}
+</div>
+
+<h4>{% trans 'Please also fill in the following information:' %}</h4>
+
+{% include 'cosinnus/registration/extra_signup_fields.html' %}
+
+{% for hidden in form.hidden_fields %}
+{{ hidden }}
+{% endfor %}
+{% if redirect_field_value %}
+<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+{% endif %}
+{% endcaptureas %}
+
+{% captureas form_action %}{% url 'socialaccount_signup' %}{% endcaptureas %}
+{% include "cosinnus/modal_box.html" with id="signup-social-account" label=label title=title form_action=form_action title_icon="fa-user" show_inline=True hide_submit_button=False hide_cancel_button=True %}
+{% endblock %}
+

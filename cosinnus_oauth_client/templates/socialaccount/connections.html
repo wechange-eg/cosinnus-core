@@ -1,0 +1,71 @@
+{% extends "cosinnus/base.html" %}
+
+{% load i18n socialaccount cosinnus_tags %}
+
+{% block page_title %}{% trans "Account Connections" %}{% endblock %}
+
+{% block breadcrumb %}
+        <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
+        {% if request.GET.provider %}
+        <li class="active">{% blocktrans with provider=request.GET.provider %} {{ provider }} Account {% endblocktrans %}</li>
+        {% else %}
+        <li class="active">{% trans 'Account Connections' %}</li>
+        {% endif %}
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus/user/leftnav.html' with view="socialaccount_connections" %}
+{% endblock leftnav %}
+
+{% block content %}
+
+	{% if request.GET.provider %}
+		{% include 'cosinnus_oauth_client/connection_detail.html' with provider=request.GET.provider form=form %}
+	{% else %}
+		<!-- content from allauth/templates/socialaccount/connections.html that is overwritten here -->
+		<h1>{% trans "Account Connections" %}</h1>
+
+		{% if form.accounts %}
+			<p>{% blocktrans %}You can sign in to your account using any of the following third party accounts:{% endblocktrans %}</p>
+
+			<form method="post" action="{% url 'socialaccount_connections' %}">
+			{% csrf_token %}
+
+				<fieldset>
+					{% if form.non_field_errors %}
+					<div id="errorMsg">{{ form.non_field_errors }}</div>
+					{% endif %}
+
+					{% for base_account in form.accounts %}
+					{% with base_account.get_provider_account as account %}
+
+					<div>
+						<label for="id_account_{{ base_account.id }}">
+							<input id="id_account_{{ base_account.id }}" type="radio" name="account" value="{{ base_account.id }}"/>
+							<span class="socialaccount_provider {{ base_account.provider }} {{ account.get_brand.id }}">{{account.get_brand.name}}</span>
+							{{ account }}
+						</label>
+					</div>
+					{% endwith %}
+					{% endfor %}
+
+					<div>
+						<button type="submit">{% trans 'Remove' %}</button>
+					</div>
+
+				</fieldset>
+			</form>
+
+		{% else %}
+		<p>{% trans 'You currently have no social network accounts connected to this account.' %}</p>
+		{% endif %}
+
+		<h2>{% trans 'Add a 3rd Party Account' %}</h2>
+
+		<ul class="socialaccount_providers">
+		{% include "socialaccount/snippets/provider_list.html" with process="connect" %}
+		</ul>
+
+		{% include "socialaccount/snippets/login_extra.html" %}
+	{% endif %}
+{% endblock %}

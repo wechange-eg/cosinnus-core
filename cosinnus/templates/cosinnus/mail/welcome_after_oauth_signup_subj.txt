@@ -1,0 +1,1 @@
+{% load i18n cosinnus_tags %}{% blocktrans %}Someone registered on {{ site_name }} with your {{ provider }} account {% endblocktrans %}

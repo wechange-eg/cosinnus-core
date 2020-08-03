@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
+from django.conf import settings
 
 from cosinnus.forms.profile import UserProfileForm
 from cosinnus.models.profile import get_user_profile_model
@@ -71,6 +72,12 @@ def delete_userprofile(user):
     scramble_cutoff = user._meta.get_field('email').max_length - len(scrambled_email_prefix) - 2
     scrambled_email_prefix = scrambled_email_prefix[:scramble_cutoff]
     user.email = '%s__%s' % (scrambled_email_prefix, user.email)
+
+    if settings.COSINNUS_IS_OAUTH_CLIENT:
+        from allauth.socialaccount.models import SocialAccount
+        from allauth.account.models import EmailAddress
+        SocialAccount.objects.filter(user=user).delete()
+        EmailAddress.objects.filter(user=user).delete()
     
     user.is_active = False
     user.save()

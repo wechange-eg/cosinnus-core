@@ -18,6 +18,13 @@
 
 {% block content %}
 
+{% if SETTINGS.COSINNUS_IS_OAUTH_PROVIDER and '/o/authorize/' in request.GET.next %}
+<div class="alert alert-info">
+    <i class="fa fa-info-circle fa-3x"></i>
+    {% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME %}In order to use your {{ portal_name }} account to login to another platform you need to login on {{ portal_name }} first.{% endblocktrans %}
+</div>
+{% endif %}
+
 {% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
 
 {% if request.GET.validate_msg %}
@@ -32,42 +39,44 @@
     </div>
 {% endif %}
 
-<form action="" method="post" class="cosinnus-form form-horizontal" role="form">
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{% if request.GET.next %}{{ request.GET.next }}{% else %}{% url 'cosinnus:my_stream' %}{% endif %}">
-    {{ form.non_field_errors }}
-    
-    <!-- a box with semi transparent background -->
-    <div class="content-box">
-        <h2>{% trans "Log in" %}</h2>
-    
-        {# Regular Field #}
-		{% trans "Email" as login_label %}
-		{% trans "Email" as login_placeholder %}
-		{% include 'cosinnus/fields/default_field.html' with field=form.username label=login_label placeholder=login_placeholder first=True %}
-	        
-	    {# Regular Field #}
-		{% trans "Password" as password_label %}
-		{% trans "Password" as password_placeholder %}
-		{% include 'cosinnus/fields/default_field.html' with field=form.password label=password_label placeholder=password_placeholder %}
-	        
-    </div><!-- content-box -->
+<div class="ultra-space clearfix">
+    <form action="" method="post" class="cosinnus-form form-horizontal " role="form">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{% if request.GET.next %}{{ request.GET.next }}{% else %}{% url 'cosinnus:my_stream' %}{% endif %}">
+        {{ form.non_field_errors }}
+        
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+            <h2>{% trans "Log in" %}</h2>
+        
+            {# Regular Field #}
+    		{% trans "Email" as login_label %}
+    		{% trans "Email" as login_placeholder %}
+    		{% include 'cosinnus/fields/default_field.html' with field=form.username label=login_label placeholder=login_placeholder first=True %}
+    	        
+    	    {# Regular Field #}
+    		{% trans "Password" as password_label %}
+    		{% trans "Password" as password_placeholder %}
+    		{% include 'cosinnus/fields/default_field.html' with field=form.password label=password_label placeholder=password_placeholder %}
+    	        
+        </div><!-- content-box -->
 
-    <button type="submit" class="btn btn-emphasized">
-        <ul class="media-list">
-            <li class="media">
-                <span class="pull-left" href="#" tabindex="-1">
-                    <i class="fa fa-hand-o-right"></i>
-                </span>
-                <div class="media-body">
-                    {% trans "Log in" %}
-                </div>
-            </li>
-        </ul>
-    </button>
+        <button type="submit" class="btn btn-emphasized">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left" href="#" tabindex="-1">
+                        <i class="fa fa-hand-o-right"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Log in" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
 
 
-</form>
+    </form>
+</div>
 {% else %}
     
     
@@ -81,6 +90,10 @@
         
     </div><!-- content-box -->
 
+{% endif %}
+
+{% if SETTINGS.COSINNUS_IS_OAUTH_CLIENT %}
+{% include "socialaccount/snippets/provider_list.html" with process="login" type="login" %}
 {% endif %}
 
 {% endblock content %}
