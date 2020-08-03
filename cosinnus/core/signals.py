@@ -28,6 +28,9 @@ user_deactivated = dispatch.Signal(providing_args=["user"])
     Can be used to delete/disconnect any external linked accounts. """
 pre_userprofile_delete = dispatch.Signal(providing_args=["profile"])
 
+""" Called after a user has successfully changed their password """
+user_password_changed = dispatch.Signal(providing_args=["user"])
+
 """ Called after a user account is activated, or re-activated after being deactivated """
 user_activated = dispatch.Signal(providing_args=["user"])
 
