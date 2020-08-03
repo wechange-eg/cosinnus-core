@@ -15,7 +15,7 @@
             <div class="flex-grow">
             {% endif %}
             	<div class="attached-image">
-	                <a href="{{ image.static_image_url }}" data-lightbox="attached-image-{{ uuid }}" data-lightbox-download="{{ image.static_image_url }}" data-title="{{ image.title }}" class="thumbnail cursor-zoom no-margin no-padding">
+	                <a href="{{ image.static_image_url }}" data-lightbox="attached-image-{{ uuid }}" data-lightbox-download="{{ image.static_image_original_url }}" data-title="{{ image.title }}" class="thumbnail cursor-zoom no-margin no-padding">
 	                    <img title='{{ image.title }}'
 	                    	{% if images|length == 1 %}
 	                    		src="{% thumbnail image.file 900x200 crop=1 upscale=1 %}"

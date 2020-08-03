@@ -189,9 +189,7 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     _INSTALLED_APPS += [
         'cosinnus',
         'cosinnus_oauth_client',
-        'allauth',
-        'allauth.account',
-        'allauth.socialaccount',
+        'cosinnus_cloud',
         'cosinnus_etherpad',
         'cosinnus_event',
         'cosinnus_file',
@@ -210,6 +208,11 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     _INSTALLED_APPS += [
         'announcements',
         'ajax_forms',
+      
+        # SSO
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
         
         # 'django_extensions',
         'django_filters',

@@ -8,6 +8,7 @@ from builtins import object
 from itertools import chain
 
 from django.contrib import messages
+from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ImproperlyConfigured, ValidationError,\
@@ -92,6 +93,7 @@ from django_select2.views import NO_ERR_RESP, Select2View
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
 from django.core.exceptions import ObjectDoesNotExist
 from cosinnus.models.profile import get_user_profile_model
+from cosinnus.views.profile import delete_userprofile
 from django.utils.crypto import get_random_string
 from django.http import HttpResponse
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME
@@ -100,6 +102,7 @@ from cosinnus.models.profile import UserProfile
 from cosinnus.utils.user import create_base_user
 from django.views.generic.edit import FormView
 from django.db import transaction
+from cosinnus.utils.urls import redirect_with_next, group_aware_reverse
 
 logger = logging.getLogger('cosinnus')
 
@@ -512,6 +515,12 @@ class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsC
             if user:
                 messages.add_message(request, messages.SUCCESS, _('Successfully activated user account'))
 
+        elif 'remove_member' in request.POST:
+            user_id = int(request.POST.get('remove_member'))
+            user = get_user_model().objects.get(id=user_id)
+            delete_userprofile(user)
+            messages.add_message(request, messages.SUCCESS, _('Successfully removed user'))
+
         return redirect(group_aware_reverse('cosinnus:conference-management',
                                             kwargs={'group': self.group}))
 
@@ -624,6 +633,12 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
                 profile = get_user_profile_model()._default_manager.get_for_user(user)
                 profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
                 profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
+                profile.add_redirect_on_next_page(
+                    redirect_with_next(
+                        group_aware_reverse(
+                            'cosinnus:group-dashboard',
+                            kwargs={'group': self.group}),
+                        self.request), message=None, priority=True)
                 profile.save()
 
                 unique_email = 'User{}.C{}@wechange.de'.format(str(user.id), str(self.group.id))
@@ -690,17 +705,18 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, 
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
 
-        header = [_('Workshop username'), _('email'), _('workshops count'), _('has logged in'), _('last login date')]
+        header = ['Workshop username', 'email', 'workshops count', 'has logged in', 'last login date', 'Terms of service accepted']
 
         writer = csv.writer(response)
         writer.writerow(header)
 
         for member in members:
-            workshop_username = member.cosinnus_profile.workshop_user_name
+            workshop_username = member.cosinnus_profile.readable_workshop_user_name
             email = member.email
             workshop_count = self.get_membership_count(member)
             has_logged_in, logged_in_date = self.get_last_login(member)
-            row = [workshop_username, email, workshop_count, has_logged_in, logged_in_date]
+            tos_accepted = 1 if member.cosinnus_profile.settings.get('tos_accepted', False) else 0
+            row = [workshop_username, email, workshop_count, has_logged_in, logged_in_date, tos_accepted]
             writer.writerow(row)
         return response
 
@@ -709,7 +725,8 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, 
 
     def get_last_login(self, member):
         has_logged_in = 1 if member.last_login else 0
-        logged_in_date = member.last_login.date() if member.last_login else ''
+        last_login = timezone.localtime(member.last_login)
+        logged_in_date = last_login.strftime("%Y-%m-%d %H:%M") if member.last_login else ''
 
         return [has_logged_in, logged_in_date]
 

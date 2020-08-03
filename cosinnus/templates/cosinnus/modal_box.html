@@ -14,7 +14,13 @@
                 </button>
                 {% endif %}
                 <h4 class="modal-title no-select" id="{{ id }}Label">
-                    <i class="fa {% if title_icon %}{{ title_icon }}{% else %}fa-eraser{% endif %}"></i>
+                    {% if title_icon_full_class %}
+                    <i class="{{ title_icon_full_class }}"></i>
+                    {% elif title_icon %}
+                    <i class="fa {{ title_icon }}"></i>
+                    {% else %}
+                    <i class="fa fa-eraser"></i>
+                    {% endif %}
                     {{ title }}
                 </h4>
             </div>
