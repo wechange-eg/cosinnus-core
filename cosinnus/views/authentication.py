@@ -22,6 +22,7 @@ class AdminOnlyOTPTokenValidationView(auth_views.LoginView):
         user = self.request.user
         if _user_is_anonymous(user) or user.is_verified() or not (user.is_staff or user.is_superuser):
             return redirect('/admin/')
+        user.backend = 'cosinnus.backends.EmailAuthBackend'
         return super(AdminOnlyOTPTokenValidationView, self).dispatch(request, *args, **kwargs)
     
     @property
