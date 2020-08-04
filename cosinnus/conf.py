@@ -663,7 +663,7 @@ class CosinnusConf(AppConf):
         'ALLOW_PUBLIC_UPLOADS': 'no', # "yes" or "no"
         'ALLOW_AUTOCOMPLETE_USERS': 'no', # "yes" or "no"
         'SEND_EMAIL_TO_NEW_USERS': 'no', # "yes" or "no"
-        'ENABLE_APP_IDS': ["groupfolders", "onlyoffice", "sociallogin"], # list of string app ids
+        'ENABLE_APP_IDS': ["groupfolders", "onlyoffice", "sociallogin", "wechangecsp"], # list of string app ids
         'DISABLE_APP_IDS': ["theming", "photos", "activity", "systemtags"], # list of string app ids
         # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
     }
