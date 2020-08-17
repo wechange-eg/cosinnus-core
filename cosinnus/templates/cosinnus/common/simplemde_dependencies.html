@@ -14,7 +14,7 @@
   {% else %}
 	  $(function(){
   {% endif %}
-	      var simplemde = new EasyMDE({ 
+	      var simplemde = new EasyMDE({
 	          element: {% if lazy %}input{% else %}$('#{{ element_id }}')[0]{% endif %},
 	          indentWithTabs: false,
 	          shortcuts: {},
@@ -23,8 +23,31 @@
 	          styleSelectedText: false,
 	          autoDownloadFontAwesome: false,
 	          forceSync: true,
-	          toolbar: ["bold", "italic", "strikethrough", "heading", "|", "image", "link", "|", "unordered-list", "ordered-list", "|", "preview"],
+	          toolbar: [
+                  "bold",
+                  "italic",
+                  "strikethrough",
+                  "heading",
+                  "|",
+                  "image",
+                  "link",
+                  "|",
+                  "unordered-list",
+                  "ordered-list",
+                  "|",
+                  {
+                      name: "disableBtn",
+                      action: disableSimpleMDE,
+                      className: "btn",
+                      title: "DisableMDE"
+                  }
+              ],
 	      });
+
+	      function disableSimpleMDE(editor) {
+	        alert("a");
+	      }
+
 	      {% if value %}
 	          simplemde.value($('<textarea />').html(decodeURIComponent("{{ value|urlencode }}")).text());
 	      {% endif %}
