@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 
 {% if not noinclude %}
 <link rel="stylesheet" href="{% static 'css/vendor/easymde.min.css' %}?v=2.10.1">
@@ -35,18 +35,19 @@
                   "unordered-list",
                   "ordered-list",
                   "|",
+                  "preview",
                   {
                       name: "disableBtn",
-                      action: disableSimpleMDE,
-                      className: "btn",
-                      title: "DisableMDE"
+                      action: (editor) => {
+                        editor.toolbar = false;
+                        editor.toTextArea();
+                        editor = null;
+                      },
+                      className: "btn fa fa-window-close",
+                      title: '{% trans "Disable editor" %}'
                   }
               ],
 	      });
-
-	      function disableSimpleMDE(editor) {
-	        alert("a");
-	      }
 
 	      {% if value %}
 	          simplemde.value($('<textarea />').html(decodeURIComponent("{{ value|urlencode }}")).text());
