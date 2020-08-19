@@ -178,7 +178,7 @@
                     </div><!-- left column -->
                     {% endblock override_leftnav %}
 
-                    <div class="col-lg-9 col-md-9"><!-- right column -->
+                    <div {% block content_class %}class="col-lg-9 col-md-9"{% endblock content_class %}><!-- right column -->
                         <div class="row">
                             <div class="col-xs-12">
                                 {% include 'cosinnus/messages.html' %}
