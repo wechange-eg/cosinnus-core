@@ -12,30 +12,9 @@
 
 {% block leftnav %}
     {% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
-        {% if not SETTINGS.COSINNUS_IS_OAUTH_PROVIDER or not '/o/authorize/' in request.GET.next %}
-            {% include "cosinnus/registration/leftnav.html"  with current_page="login" %}
-        {% endif %}        
+        {% include "cosinnus/registration/leftnav.html"  with current_page="login" %}
     {% endif %}
 {% endblock leftnav %}
-
-{% block cosinnus_navbar %}
-    {% comment %} Navbar is disabled for SSO screens {% endcomment %}
-    {% if not SETTINGS.COSINNUS_IS_OAUTH_PROVIDER or not '/o/authorize/' in request.GET.next %}
-        {{ block.super }}
-    {% endif %}
-{% endblock cosinnus_navbar %}
-
-
-{% block content_class %}
-    {% comment %} Content pane is full-screen for SSO screens {% endcomment %}
-    {% if not SETTINGS.COSINNUS_IS_OAUTH_PROVIDER or not '/o/authorize/' in request.GET.next %}
-        {{ block.super }}
-    {% else %}
-        class="col-xs-6"
-    {% endif %}
-{% endblock content_class %}
-
-
 
 {% block content %}
 

@@ -1,0 +1,79 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{% block page_title %}{% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME %}Log in with {{ portal_name }}{% endblocktrans %}{% endblock %}
+
+{% block jshead %}
+    {% comment %} This page deals with authentication data and loads only the most necessary vendor scripts! {% endcomment %}
+{% endblock jshead %}
+
+{% block cosinnus_navbar %}
+    {% comment %} Navbar is disabled for SSO screens {% endcomment %}
+{% endblock cosinnus_navbar %}
+
+
+{% block main_page %}
+    <div class="row">
+        <!-- now the content -->
+        <div class="col-xs-6 col-xs-offset-3">
+            
+            <form action="" method="post" class="cosinnus-form form-horizontal " role="form">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{% if request.GET.next %}{{ request.GET.next }}{% else %}{% url 'cosinnus:my_stream' %}{% endif %}">
+                    
+	            <!-- a box with semi transparent background -->
+			    <div class="v2-content">
+			        <h1>{{ SETTINGS.COSINNUS_PORTAL_NAME }}</h1>
+			        
+			        <p class="large-space">
+			            {% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME %}Sign in now using your {{ portal_name }} account.{% endblocktrans %}
+			        </p>
+			        
+	                
+                    {{ form.non_field_errors }}
+	                
+	                {# Regular Field #}
+                    {% trans "Email" as login_label %}
+                    {% trans "Email" as login_placeholder %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.username label=login_label placeholder=login_placeholder first=True %}
+                        
+                    {# Regular Field #}
+                    {% trans "Password" as password_label %}
+                    {% trans "Password" as password_placeholder %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.password label=password_label placeholder=password_placeholder %}
+                        
+                    
+	                <div class="button-section clearfix">
+			            <button type="submit" class="pull-right rounded-button button-color-primary-inverted">
+			                <span class="rounded-button-inner">
+                                {% trans "Log in" %}
+			                </span>
+			            </button>
+			            <a onclick="history.back()" class="pull-left rounded-button button-color-tertiary">
+			                <span class="rounded-button-inner">
+			                    {% trans "Cancel" %}
+			                </span>
+			            </a>
+			        </div>
+			        
+			        <hr class="invisible" />
+			        
+			        <div class="button-section clearfix centered">
+                        <a href="{% url "cosinnus:user-add" %}?next={{request.GET.next}}" class="">
+                            <span class="rounded-button-inner">
+                                {% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME %}You don't have a {{ portal_name }} account yet?{% endblocktrans %}
+                            </span>
+                        </a>
+                    </div>
+			        
+	            </div>		
+            
+            </form>
+            
+			
+		</div>
+	</div>
+	
+{% endblock main_page %}
+
+
