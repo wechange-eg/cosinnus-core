@@ -82,7 +82,10 @@ STATICFILES_FINDERS = (
 
 MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
-    'cosinnus.core.middleware.cosinnus_middleware.PreventAnonymousUserCookieSessionMiddleware',
+     # enable this middleware to prevent all cookies for non-logged in users. this breaks
+     # language switching while not logged in!
+     #'cosinnus.core.middleware.cosinnus_middleware.PreventAnonymousUserCookieSessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.MovedTemporarilyRedirectFallbackMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     
