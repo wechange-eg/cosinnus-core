@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-19 16:20+0200\n"
+"POT-Creation-Date: 2020-08-20 14:56+0200\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3795,6 +3795,24 @@ msgstr ""
 "\n"
 "%(domain_url)s"
 
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"Someone has just registered on %(site_name)s with your %(provider)s Account. "
+"We are sending you this email to make sure that this was you.\n"
+"\n"
+"If it was you, then you don't have to do anything. Otherwise, please contact "
+"the support.\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "Someone registered on %(site_name)s with your %(provider)s account "
+msgstr ""
+
 msgid "Additional options"
 msgstr "Options additionnelles"
 
@@ -4023,6 +4041,12 @@ msgstr "Mot de passe oublié ?"
 msgid "Logged out"
 msgstr "Déconnecté"
 
+#, python-format
+msgid ""
+"In order to use your %(portal_name)s account to login to another platform "
+"you need to login on %(portal_name)s first."
+msgstr ""
+
 #, fuzzy
 #| msgid ""
 #| "User \"%(user)s\" was registered successfully. The account will need to "
@@ -4053,6 +4077,19 @@ msgstr ""
 
 msgid "Password"
 msgstr "Mot de passe"
+
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgid "Log in with %(portal_name)s"
+msgstr "Editer “%(team_name)s”"
+
+#, python-format
+msgid "Sign in now using your %(portal_name)s account."
+msgstr ""
+
+#, python-format
+msgid "You don't have a %(portal_name)s account yet?"
+msgstr ""
 
 msgid "Password change"
 msgstr "Changement de mot de passe"
@@ -5640,8 +5677,10 @@ msgstr ""
 msgid "Project/group CSV File"
 msgstr "Projets / groupes"
 
+#, fuzzy
+#| msgid "Projects/Groups"
 msgid "User CSV File"
-msgstr ""
+msgstr "Projets / groupes"
 
 #, fuzzy
 #| msgid "Proportions"
@@ -5678,8 +5717,10 @@ msgstr ""
 msgid "The import has finished. Here are the results:"
 msgstr ""
 
+#, fuzzy
+#| msgid "Error!"
 msgid "Read errors:"
-msgstr ""
+msgstr "Erreur !"
 
 msgid ""
 "These rows in your CSV file had errors or an incorrect number of columns and "
@@ -5689,8 +5730,10 @@ msgstr ""
 msgid "Saved items:"
 msgstr ""
 
+#, fuzzy
+#| msgid "Messages"
 msgid "Important messages:"
-msgstr ""
+msgstr "Messages"
 
 #, fuzzy
 #| msgid "Error!"
@@ -5968,24 +6011,6 @@ msgstr "A créé"
 
 msgid "Workshop username"
 msgstr ""
-
-#, fuzzy
-#| msgid "Email"
-msgid "email"
-msgstr "Email"
-
-msgid "workshops count"
-msgstr ""
-
-#, fuzzy
-#| msgid "Has Logged In"
-msgid "has logged in"
-msgstr "S'est connecté"
-
-#, fuzzy
-#| msgid "Valid to"
-msgid "last login date"
-msgstr "Valide jusqu'à"
 
 #, fuzzy
 #| msgid "First name"
@@ -6532,39 +6557,19 @@ msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
 
 #, fuzzy
-#~| msgid "My Projects and Groups"
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Mes projets et groupes"
+#~| msgid "Email"
+#~ msgid "email"
+#~ msgstr "Email"
 
 #, fuzzy
-#~| msgid "Projects/Groups"
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projets / groupes"
+#~| msgid "Has Logged In"
+#~ msgid "has logged in"
+#~ msgstr "S'est connecté"
 
 #, fuzzy
-#~| msgid "Proportions"
-#~ msgid "Options"
-#~ msgstr "Proportions"
-
-#, fuzzy
-#~| msgid "Upload an image."
-#~ msgid "Upload and Import..."
-#~ msgstr "Télécharger une image."
-
-#, fuzzy
-#~| msgid "My Projects and Groups"
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Mes projets et groupes"
-
-#, fuzzy
-#~| msgid "Error!"
-#~ msgid "Errors:"
-#~ msgstr "Erreur !"
-
-#, fuzzy
-#~| msgid "Messages"
-#~ msgid "Info messages:"
-#~ msgstr "Messages"
+#~| msgid "Valid to"
+#~ msgid "last login date"
+#~ msgstr "Valide jusqu'à"
 
 #~ msgid "New membership request"
 #~ msgstr "Nouvelle demande d'ajout"

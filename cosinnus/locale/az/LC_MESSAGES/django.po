@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-19 16:20+0200\n"
+"POT-Creation-Date: 2020-08-20 14:56+0200\n"
 "PO-Revision-Date: 2020-05-10 13:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3635,6 +3635,24 @@ msgstr ""
 "\n"
 "%(domain_url)s"
 
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"Someone has just registered on %(site_name)s with your %(provider)s Account. "
+"We are sending you this email to make sure that this was you.\n"
+"\n"
+"If it was you, then you don't have to do anything. Otherwise, please contact "
+"the support.\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "Someone registered on %(site_name)s with your %(provider)s account "
+msgstr ""
+
 msgid "Additional options"
 msgstr "Əlavə seçimlər"
 
@@ -3864,6 +3882,12 @@ msgstr "Şifrəni unutmusunuz?"
 msgid "Logged out"
 msgstr "Çıxış edin"
 
+#, python-format
+msgid ""
+"In order to use your %(portal_name)s account to login to another platform "
+"you need to login on %(portal_name)s first."
+msgstr ""
+
 #, fuzzy
 #| msgid ""
 #| "User \"%(user)s\" was registered successfully. The account will need to "
@@ -3894,6 +3918,20 @@ msgstr ""
 
 msgid "Password"
 msgstr "Şifrə"
+
+#, fuzzy, python-format
+#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+#| msgid "to %(portal_name)s"
+msgid "Log in with %(portal_name)s"
+msgstr "%(portal_name)s -a"
+
+#, python-format
+msgid "Sign in now using your %(portal_name)s account."
+msgstr ""
+
+#, python-format
+msgid "You don't have a %(portal_name)s account yet?"
+msgstr ""
 
 msgid "Password change"
 msgstr "Şifrə dəyişikliyi"
@@ -5401,8 +5439,10 @@ msgstr ""
 msgid "Project/group CSV File"
 msgstr "Layihələr/Qruplar"
 
+#, fuzzy
+#| msgid "Projects/Groups"
 msgid "User CSV File"
-msgstr ""
+msgstr "Layihələr/Qruplar"
 
 #, fuzzy
 #| msgid "Proportions"
@@ -5439,8 +5479,10 @@ msgstr ""
 msgid "The import has finished. Here are the results:"
 msgstr ""
 
+#, fuzzy
+#| msgid "Error!"
 msgid "Read errors:"
-msgstr ""
+msgstr "Xəta!"
 
 msgid ""
 "These rows in your CSV file had errors or an incorrect number of columns and "
@@ -5450,8 +5492,10 @@ msgstr ""
 msgid "Saved items:"
 msgstr ""
 
+#, fuzzy
+#| msgid "Messages"
 msgid "Important messages:"
-msgstr ""
+msgstr "Mesajlar"
 
 #, fuzzy
 #| msgid "Error!"
@@ -5740,24 +5784,6 @@ msgstr "Yaratdı"
 
 msgid "Workshop username"
 msgstr ""
-
-#, fuzzy
-#| msgid "Email"
-msgid "email"
-msgstr "E-poçt"
-
-msgid "workshops count"
-msgstr ""
-
-#, fuzzy
-#| msgid "Has Logged In"
-msgid "has logged in"
-msgstr "Daxil olub"
-
-#, fuzzy
-#| msgid "Validate"
-msgid "last login date"
-msgstr "Dəqiqləşdirin"
 
 #, fuzzy
 #| msgid "First name"
@@ -6269,39 +6295,19 @@ msgid "Your changes have been saved."
 msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 
 #, fuzzy
-#~| msgid "My Projects and Groups"
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Layihələrim və qruplarım"
+#~| msgid "Email"
+#~ msgid "email"
+#~ msgstr "E-poçt"
 
 #, fuzzy
-#~| msgid "Projects/Groups"
-#~ msgid "Project/group CSV File"
-#~ msgstr "Layihələr/Qruplar"
+#~| msgid "Has Logged In"
+#~ msgid "has logged in"
+#~ msgstr "Daxil olub"
 
 #, fuzzy
-#~| msgid "Proportions"
-#~ msgid "Options"
-#~ msgstr "Nisbətlər"
-
-#, fuzzy
-#~| msgid "Upload an image."
-#~ msgid "Upload and Import..."
-#~ msgstr "Şəkil yükləyin."
-
-#, fuzzy
-#~| msgid "My Projects and Groups"
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Layihələrim və qruplarım"
-
-#, fuzzy
-#~| msgid "Error!"
-#~ msgid "Errors:"
-#~ msgstr "Xəta!"
-
-#, fuzzy
-#~| msgid "Messages"
-#~ msgid "Info messages:"
-#~ msgstr "Mesajlar"
+#~| msgid "Validate"
+#~ msgid "last login date"
+#~ msgstr "Dəqiqləşdirin"
 
 #~ msgid "New membership request"
 #~ msgstr "Yeni üzvlük tələbi"

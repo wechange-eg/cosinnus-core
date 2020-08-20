@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-19 16:20+0200\n"
+"POT-Creation-Date: 2020-08-20 14:56+0200\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -689,7 +689,6 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr "Отписаться"
 
-#| msgid "Dashboard"
 msgid "My Dashboard"
 msgstr "Моя панель управления"
 
@@ -3716,6 +3715,24 @@ msgstr ""
 "\n"
 "%(domain_url)s"
 
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"Someone has just registered on %(site_name)s with your %(provider)s Account. "
+"We are sending you this email to make sure that this was you.\n"
+"\n"
+"If it was you, then you don't have to do anything. Otherwise, please contact "
+"the support.\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "Someone registered on %(site_name)s with your %(provider)s account "
+msgstr ""
+
 msgid "Additional options"
 msgstr "Дополнительные опции"
 
@@ -3946,6 +3963,12 @@ msgstr "Забыли пароль?"
 msgid "Logged out"
 msgstr "Вы вышли из системы"
 
+#, python-format
+msgid ""
+"In order to use your %(portal_name)s account to login to another platform "
+"you need to login on %(portal_name)s first."
+msgstr ""
+
 #, fuzzy
 #| msgid ""
 #| "User \"%(user)s\" was registered successfully. The account will need to "
@@ -3977,6 +4000,20 @@ msgstr ""
 
 msgid "Password"
 msgstr "Пароль"
+
+#, fuzzy, python-format
+#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+#| msgid "to %(portal_name)s"
+msgid "Log in with %(portal_name)s"
+msgstr "на %(portal_name)s"
+
+#, python-format
+msgid "Sign in now using your %(portal_name)s account."
+msgstr ""
+
+#, python-format
+msgid "You don't have a %(portal_name)s account yet?"
+msgstr ""
 
 msgid "Password change"
 msgstr "Смена пароля"
@@ -5517,8 +5554,10 @@ msgstr ""
 msgid "Project/group CSV File"
 msgstr "Проекты/группы"
 
+#, fuzzy
+#| msgid "Projects/Groups"
 msgid "User CSV File"
-msgstr ""
+msgstr "Проекты/группы"
 
 #, fuzzy
 #| msgid "Proportions"
@@ -5555,8 +5594,10 @@ msgstr ""
 msgid "The import has finished. Here are the results:"
 msgstr ""
 
+#, fuzzy
+#| msgid "Error!"
 msgid "Read errors:"
-msgstr ""
+msgstr "Ошибкa!"
 
 msgid ""
 "These rows in your CSV file had errors or an incorrect number of columns and "
@@ -5566,8 +5607,10 @@ msgstr ""
 msgid "Saved items:"
 msgstr ""
 
+#, fuzzy
+#| msgid "Messages"
 msgid "Important messages:"
-msgstr ""
+msgstr "Сообщения"
 
 #, fuzzy
 #| msgid "Error!"
@@ -5867,24 +5910,6 @@ msgstr "Создал"
 
 msgid "Workshop username"
 msgstr ""
-
-#, fuzzy
-#| msgid "Email"
-msgid "email"
-msgstr "Адрес электронной почты"
-
-msgid "workshops count"
-msgstr ""
-
-#, fuzzy
-#| msgid "Has Logged In"
-msgid "has logged in"
-msgstr "Уже заходил в систему"
-
-#, fuzzy
-#| msgid "Validate"
-msgid "last login date"
-msgstr "Подтвердить"
 
 #, fuzzy
 #| msgid "First name"
@@ -6423,39 +6448,19 @@ msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
 #, fuzzy
-#~| msgid "My Projects and Groups"
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Мои проекты и группы"
+#~| msgid "Email"
+#~ msgid "email"
+#~ msgstr "Адрес электронной почты"
 
 #, fuzzy
-#~| msgid "Projects/Groups"
-#~ msgid "Project/group CSV File"
-#~ msgstr "Проекты/группы"
+#~| msgid "Has Logged In"
+#~ msgid "has logged in"
+#~ msgstr "Уже заходил в систему"
 
 #, fuzzy
-#~| msgid "Proportions"
-#~ msgid "Options"
-#~ msgstr "Пропорции"
-
-#, fuzzy
-#~| msgid "Upload an image."
-#~ msgid "Upload and Import..."
-#~ msgstr "Загрузить изображение."
-
-#, fuzzy
-#~| msgid "My Projects and Groups"
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Мои проекты и группы"
-
-#, fuzzy
-#~| msgid "Error!"
-#~ msgid "Errors:"
-#~ msgstr "Ошибкa!"
-
-#, fuzzy
-#~| msgid "Messages"
-#~ msgid "Info messages:"
-#~ msgstr "Сообщения"
+#~| msgid "Validate"
+#~ msgid "last login date"
+#~ msgstr "Подтвердить"
 
 #~ msgid "New membership request"
 #~ msgstr "Новые заявки на вступление"
