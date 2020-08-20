@@ -570,8 +570,13 @@ CAPTCHA_CHALLENGE_FUNCT = 'cosinnus.utils.captcha.dissimilar_random_char_challen
 CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
 CAPTCHA_TIMEOUT = 30
 
+# enables rocketchat if True
 COSINNUS_ROCKET_ENABLED = False
 COSINNUS_ROCKET_EXPORT_ENABLED = False
+
+# enables the read-only mode for the legacy postman messages system if True
+# and shows an "archived messages button" in the user profile
+COSINNUS_POSTMAN_ARCHIVE_MODE = False 
 
 # SSO default settings for any client portal
 ACCOUNT_ADAPTER = 'cosinnus_oauth_client.views.CosinusAccountAdapter'

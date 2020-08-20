@@ -58,6 +58,22 @@
                             </ul>
                         </button>
                         
+                        {% if SETTINGS.COSINNUS_POSTMAN_ARCHIVE_MODE %}
+	                        <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" 
+	                                title="{% trans "Deactivated Projects and Groups" %}" 
+	                                href="{% url 'postman:index' %}">
+	                            <ul class="media-list">
+	                                <li class="media">
+	                                    <a class="pull-left" href="#">
+	                                        <i class="fa fa-envelope"></i>
+	                                    </a>
+	                                    <div class="media-body">
+	                                        {% trans "Legacy Messages Archive" %}
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </button>
+                        {% endif %}
                         
                         <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" 
                         		title="{% trans "Deactivated Projects and Groups" %}" 
