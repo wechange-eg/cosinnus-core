@@ -88,13 +88,13 @@ class SocialAppMixin:
 class CustomConnectionView(SocialAppMixin, ConnectionsView):
 
     def dispatch(self, request, *args, **kwargs):
-        if request.GET.get('provider', False):
-            return super().dispatch(request, *args, **kwargs)
-        elif self.get_single_social_apps_provider():
+        if request.method == "GET" and not request.GET.get('provider', False):
             provider = self.get_single_social_apps_provider()
-            return redirect('{}?provider={}'.format(reverse_lazy("socialaccount_connections"), provider))
-        else:
-            raise Http404
+            if provider:
+                return redirect('{}?provider={}'.format(reverse_lazy("socialaccount_connections"), provider))
+            else:
+                raise Http404
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         messages.add_message(self.request,
