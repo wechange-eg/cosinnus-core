@@ -9,7 +9,7 @@
             <div class="textfield transparent">
                 <p>{% blocktrans with provider=provider|upper %} You connected your account with your account on {{ provider }} but you can only change the email address and password of the {{ provider }} account on the {{ provider }} website. {% endblocktrans %}</p>
             </div>
-            {% if provider == 'wechange' %}
+            {% if provider == SETTINGS.COSINNUS_OAUTH_SERVER_PROVIDER_NAME %}
             <button class="pull-right btn btn-emphasized btn-autosize" target="_blank" href="{{ SETTINGS.COSINNUS_OAUTH_SERVER_BASEURL }}/profile/edit/" >
                 <ul class="media-list">
                     <li class="media">
