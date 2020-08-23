@@ -8,15 +8,17 @@ from allauth.account.views import PasswordSetView
 
 from allauth.socialaccount.models import SocialApp
 
+from cosinnus.core.mail import send_html_mail_threaded, get_common_mail_context
 from cosinnus.utils.urls import redirect_with_next
+
 from django.urls import reverse
+from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.contrib import messages
+from cosinnus.templatetags.cosinnus_tags import textfield
 from django.utils.translation import ugettext_lazy as _
-from django.urls import reverse, reverse_lazy
-from cosinnus.models.profile import get_user_profile_model
-from django.contrib import messages
+from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.http import Http404
 
@@ -96,10 +98,23 @@ class CustomConnectionView(SocialAppMixin, ConnectionsView):
                 raise Http404
         return super().dispatch(request, *args, **kwargs)
 
+    def send_disconnect_mail(self, user, provider, request):
+        data = get_common_mail_context(request)
+        data.update({
+            'user': user,
+            'provider': provider
+        })
+        subj_user = render_to_string('cosinnus/mail/notification_after_oauth_account_disconnect.txt', data)
+        text = textfield(render_to_string('cosinnus/mail/notification_after_oauth_account_disconnect.html', data))
+        send_html_mail_threaded(user, subj_user, text)
+
     def form_valid(self, form):
         messages.add_message(self.request,
                              messages.SUCCESS,
                              _('Successfully removed connection.'))
+        user = self.request.user
+        provider = form.cleaned_data.get('account').provider
+        self.send_disconnect_mail(user, provider, self.request)
         return super().form_valid(form)
 
 custom_connections = login_required(CustomConnectionView.as_view())
