@@ -10,7 +10,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured
 from django.http.response import  HttpResponseNotFound, \
     HttpResponseForbidden, HttpResponseServerError, HttpResponseNotAllowed, \
-    HttpResponseBadRequest, JsonResponse
+    HttpResponseBadRequest, JsonResponse, HttpResponse
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _, LANGUAGE_SESSION_KEY
@@ -328,6 +328,11 @@ def get_metadata_from_url(request):
     return JsonResponse(data)
     
 
-
+def empty_file_download(request, **kwargs):
+    """ Serves an empty file with the filename given as `COSINNUS_EMPTY_FILE_DOWNLOAD_NAME`.
+        Can be used to quickly make a file available for a DNS server check, e.g. for Mailjet. """
+    response = HttpResponse('', content_type="application/text")
+    response['Content-Disposition'] = 'attachment; filename="%s"' % settings.COSINNUS_EMPTY_FILE_DOWNLOAD_NAME
+    return response
 
         

@@ -236,6 +236,10 @@ class CosinnusConf(AppConf):
         'cosinnus_todo',
     ]
     
+    # If set, will enable a download under / of an empty text file with the given name.
+    # Can be used to quickly make a file available for a DNS server check, e.g. for Mailjet.
+    EMPTY_FILE_DOWNLOAD_NAME = None
+    
     # should the facebook integration scripts and templates be loaded?
     FACEBOOK_INTEGRATION_ENABLED = False
     # Facebook app id to use
