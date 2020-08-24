@@ -245,6 +245,11 @@ if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
         url(r'api/v2/rocket-export/', MessageExportView.as_view()),
     ]
 
+if getattr(settings, 'COSINNUS_EMPTY_FILE_DOWNLOAD_NAME', None):
+    urlpatterns += [
+        url(f'{settings.COSINNUS_EMPTY_FILE_DOWNLOAD_NAME}', common.empty_file_download),
+    ]
+
 urlpatterns += [
     url(r'^o/me/', UserView.as_view()),
     url(r'^o/user/', oauth_user),
