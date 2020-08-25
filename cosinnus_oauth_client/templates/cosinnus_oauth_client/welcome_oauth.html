@@ -1,0 +1,54 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags djajax_tags widget_tweaks %}
+
+{% block page_title %}{% trans "Signup" %}{% endblock %}
+
+{% block main_page %}
+
+{% captureas title %}
+{% blocktrans %}WECHANGE Account connected{% endblocktrans %}
+{% endcaptureas %}
+
+{% captureas label %}
+<p class="no-horizontal-padding no-vertical-padding large-space">
+	{% blocktrans %} This data we received from your WECHANGE account{% endblocktrans %}:
+</p>
+
+<div class="large-space">
+	<p>- {% trans 'email address' %}: {{ request.user.email }}</p>
+	<p>- {% trans 'first name' %}: {{ request.user.first_name }}</p>
+	{% if request.user.last_name %}
+	<p>- {% trans 'last name' %}: {{ request.user.last_name }}</p>
+	{% endif %}
+</div>
+
+{% if request.GET.copy_profile and request.GET.copy_profile == 'True' %}
+<div class="large-space">
+	<p>{% trans 'Your Avatar and other settings from your profile were also copied.' %}</p>
+</div>
+{% endif %}
+
+<div>
+	<p>{% trans 'You can change your this data any time in you profile settings.' %}</p>
+</div>
+{% endcaptureas %}
+
+{% captureas custom_button_html %}
+<button class="pull-right btn btn-emphasized btn-autosize" href="{% url 'cosinnus:user-dashboard' %}" >
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-check"></i>
+            </a>
+            <div class="media-body">
+                {% trans 'OK' %}
+            </div>
+        </li>
+     </ul>
+</button>
+{% endcaptureas %}
+
+{% include "cosinnus/modal_box.html" with id="signup-social-welcome" label=label title=title title_icon="fa-user" show_inline=True hide_submit_button=True hide_cancel_button=True custom_button_html=custom_button_html %}
+
+{% endblock %}
+

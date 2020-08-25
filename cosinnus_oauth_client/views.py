@@ -5,20 +5,17 @@ from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from allauth.socialaccount.views import ConnectionsView
 from allauth.account.views import PasswordSetView
-
 from allauth.socialaccount.models import SocialApp
-
 
 from cosinnus.utils.urls import redirect_with_next
 
-from django.urls import reverse
-
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.http import Http404
+from django.urls import reverse
+from django.views.generic.base import TemplateView
 
 import requests
 
@@ -94,3 +91,8 @@ class CustomSetPasswordView(SocialAppMixin, PasswordSetView):
     pass
 
 custom_password_set = login_required(CustomSetPasswordView.as_view())
+
+class OauthLoginWelcomeView(TemplateView):
+    template_name = 'cosinnus_oauth_client/welcome_oauth.html'
+
+welcome_oauth = login_required(OauthLoginWelcomeView.as_view())
