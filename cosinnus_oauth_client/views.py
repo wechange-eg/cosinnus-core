@@ -8,16 +8,14 @@ from allauth.account.views import PasswordSetView
 
 from allauth.socialaccount.models import SocialApp
 
-from cosinnus.core.mail import send_html_mail_threaded, get_common_mail_context
+
 from cosinnus.utils.urls import redirect_with_next
 
 from django.urls import reverse
-from django.template.loader import render_to_string
+
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from django.contrib import messages
-from cosinnus.templatetags.cosinnus_tags import textfield
-from django.utils.translation import ugettext_lazy as _
+
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.http import Http404
@@ -56,14 +54,6 @@ class CosinnusOauthClientAdapter(OAuth2Adapter):
         extra_data = resp.json()
         socialaccount = self.get_provider().sociallogin_from_response(request,
                                                                       extra_data)
-
-        if request.session.get('socialaccount_state'):
-            state = request.session.get('socialaccount_state')
-            process = state[0].get('process')
-            if process == 'connect':
-                messages.add_message(request,
-                             messages.SUCCESS,
-                             _('Successfully connected account'))
         return socialaccount
 
 
@@ -97,25 +87,6 @@ class CustomConnectionView(SocialAppMixin, ConnectionsView):
             else:
                 raise Http404
         return super().dispatch(request, *args, **kwargs)
-
-    def send_disconnect_mail(self, user, provider, request):
-        data = get_common_mail_context(request)
-        data.update({
-            'user': user,
-            'provider': provider
-        })
-        subj_user = render_to_string('cosinnus/mail/notification_after_oauth_account_disconnect.txt', data)
-        text = textfield(render_to_string('cosinnus/mail/notification_after_oauth_account_disconnect.html', data))
-        send_html_mail_threaded(user, subj_user, text)
-
-    def form_valid(self, form):
-        messages.add_message(self.request,
-                             messages.SUCCESS,
-                             _('Successfully removed connection.'))
-        user = self.request.user
-        provider = form.cleaned_data.get('account').provider
-        self.send_disconnect_mail(user, provider, self.request)
-        return super().form_valid(form)
 
 custom_connections = login_required(CustomConnectionView.as_view())
 
