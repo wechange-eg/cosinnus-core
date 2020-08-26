@@ -119,10 +119,10 @@
     <ul class="media-list">
         <li class="media">
            <a class="pull-left">
-                <i class="fas fa-link"></i>
+                <i class="fas fa-lock"></i>
             </a>
             <div class="media-body">
-                {{ provider.id }}
+            	{% blocktrans with provider=provider.id|upper %}{{ provider}}-Account{% endblocktrans%}
             </div>
         </li>
     </ul>
