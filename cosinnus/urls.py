@@ -12,7 +12,7 @@ from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    OrganisationViewSet, UserView
+    OrganisationViewSet, UserView, oauth_user, oauth_profile
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
     user_dashboard, ui_prefs, administration, user_dashboard_announcement
@@ -252,6 +252,8 @@ if getattr(settings, 'COSINNUS_EMPTY_FILE_DOWNLOAD_NAME', None):
 
 urlpatterns += [
     url(r'^o/me/', UserView.as_view()),
+    url(r'^o/user/', oauth_user),
+    url(r'^o/profile/', oauth_profile),
     url(r'api/v2/docs/', get_swagger_view()),
     url(r'api/v2/', include(router.urls)),
 ]

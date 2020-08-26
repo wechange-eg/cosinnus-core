@@ -667,7 +667,7 @@ class CosinnusConf(AppConf):
         'ALLOW_PUBLIC_UPLOADS': 'no', # "yes" or "no"
         'ALLOW_AUTOCOMPLETE_USERS': 'no', # "yes" or "no"
         'SEND_EMAIL_TO_NEW_USERS': 'no', # "yes" or "no"
-        'ENABLE_APP_IDS': ["groupfolders", "onlyoffice", "sociallogin"], # list of string app ids
+        'ENABLE_APP_IDS': ["groupfolders", "onlyoffice", "sociallogin", "wechangecsp"], # list of string app ids
         'DISABLE_APP_IDS': ["theming", "photos", "activity", "systemtags"], # list of string app ids
         # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
     }
@@ -689,6 +689,16 @@ class CosinnusConf(AppConf):
     # if enabled, this allows all portal-admins to download user emails, this might be
     # *VERY* risky, so use cautiously
     ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS = False
+
+    # set to True if you want to use this instance as oauth provider for other platforms
+    IS_OAUTH_PROVIDER = False
+    
+    # set to True if you want to enable oauth2 social login with another instance (this other
+    # instance then has to have IS_OAUTH_PROVIDER to True). Add the url of the other instane as
+    # OAUTH_SERVER_BASEURL
+    IS_OAUTH_CLIENT = False
+    OAUTH_SERVER_BASEURL = None
+    OAUTH_SERVER_PROVIDER_NAME = 'wechange'
     
 
 class CosinnusDefaultSettings(AppConf):

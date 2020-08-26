@@ -2,7 +2,7 @@
 
 {% captureas checkbox_html %}
     {% render_field field %}
-    <label for="{{ field.auto_id }}">
+    <label for="{{ field.auto_id }}" {% if label_class %}class="{{ label_class }}"{% endif %}>
         {{ checkbox_label }}
     </label>
 {% endcaptureas %}

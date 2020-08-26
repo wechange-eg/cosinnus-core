@@ -1,6 +1,11 @@
+import json
+
 from django.http.response import JsonResponse
 from rest_framework import viewsets
 from rest_framework.views import APIView
+
+from oauth2_provider.decorators import protected_resource
+from django.http import HttpResponse
 
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
@@ -110,3 +115,42 @@ class UserView(APIView):
             return JsonResponse({
                 'success': False,
             })
+
+
+@protected_resource(scopes=['read'])
+def oauth_user(request):
+    return HttpResponse(json.dumps(
+        {
+            'id': request.resource_owner.id,
+            'username': request.resource_owner.username,
+            'email': request.resource_owner.email,
+            'first_name': request.resource_owner.first_name,
+            'last_name': request.resource_owner.last_name
+        }
+    ), content_type="application/json")
+
+
+@protected_resource(scopes=['read'])
+def oauth_profile(request):
+    profile = request.resource_owner.cosinnus_profile
+    media_tag_fields = ['visibility', 'location',
+                        'location_lat', 'location_lon',
+                        'place', 'valid_start', 'valid_end',
+                        'approach']
+
+    media_tag = profile.media_tag
+    media_tag_dict = {}
+    if media_tag:
+        for field in media_tag_fields:
+            media_tag_dict[field] = getattr(media_tag, field)
+
+
+    return HttpResponse(json.dumps(
+        {
+            'avatar': profile.avatar_url,
+            'description': profile.description,
+            'website': profile.website,
+            'language': profile.language,
+            'media_tag': media_tag_dict
+        }
+    ), content_type="application/json")

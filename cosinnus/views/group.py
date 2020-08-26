@@ -715,7 +715,7 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, 
             email = member.email
             workshop_count = self.get_membership_count(member)
             has_logged_in, logged_in_date = self.get_last_login(member)
-            tos_accepted = member.cosinnus_profile.settings.get('tos_accepted', False)
+            tos_accepted = 1 if member.cosinnus_profile.settings.get('tos_accepted', False) else 0
             row = [workshop_username, email, workshop_count, has_logged_in, logged_in_date, tos_accepted]
             writer.writerow(row)
         return response

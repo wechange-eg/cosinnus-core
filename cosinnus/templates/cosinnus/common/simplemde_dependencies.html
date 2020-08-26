@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 
 {% if not noinclude %}
 <link rel="stylesheet" href="{% static 'css/vendor/easymde.min.css' %}?v=2.10.1">
@@ -14,7 +14,7 @@
   {% else %}
 	  $(function(){
   {% endif %}
-	      var simplemde = new EasyMDE({ 
+	      var simplemde = new EasyMDE({
 	          element: {% if lazy %}input{% else %}$('#{{ element_id }}')[0]{% endif %},
 	          indentWithTabs: false,
 	          shortcuts: {},
@@ -23,8 +23,32 @@
 	          styleSelectedText: false,
 	          autoDownloadFontAwesome: false,
 	          forceSync: true,
-	          toolbar: ["bold", "italic", "strikethrough", "heading", "|", "image", "link", "|", "unordered-list", "ordered-list", "|", "preview"],
+	          toolbar: [
+                  "bold",
+                  "italic",
+                  "strikethrough",
+                  "heading",
+                  "|",
+                  "image",
+                  "link",
+                  "|",
+                  "unordered-list",
+                  "ordered-list",
+                  "|",
+                  "preview",
+                  {
+                      name: "disableBtn",
+                      action: (editor) => {
+                        editor.toolbar = false;
+                        editor.toTextArea();
+                        editor = null;
+                      },
+                      className: "btn fa fa-window-close",
+                      title: '{% trans "Disable editor" %}'
+                  }
+              ],
 	      });
+
 	      {% if value %}
 	          simplemde.value($('<textarea />').html(decodeURIComponent("{{ value|urlencode }}")).text());
 	      {% endif %}
