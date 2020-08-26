@@ -16,8 +16,8 @@ def send_disconnect_mail(user, provider, request):
         'user': user,
         'provider': provider
     })
-    subj_user = render_to_string('cosinnus/mail/notification_after_oauth_account_disconnect.txt', data)
-    text = textfield(render_to_string('cosinnus/mail/notification_after_oauth_account_disconnect.html', data))
+    subj_user = render_to_string('cosinnus_oauth_client/mail/notification_after_oauth_account_disconnect.txt', data)
+    text = textfield(render_to_string('cosinnus_oauth_client/mail/notification_after_oauth_account_disconnect.html', data))
     send_html_mail_threaded(user, subj_user, text)
 
 def send_connect_mail(user, provider, request):
@@ -26,8 +26,8 @@ def send_connect_mail(user, provider, request):
         'user': user,
         'provider': provider
     })
-    subj_user = render_to_string('cosinnus/mail/notification_after_oauth_account_connect.txt', data)
-    text = textfield(render_to_string('cosinnus/mail/notification_after_oauth_account_connect.html', data))
+    subj_user = render_to_string('cosinnus_oauth_client/mail/notification_after_oauth_account_connect.txt', data)
+    text = textfield(render_to_string('cosinnus_oauth_client/mail/notification_after_oauth_account_connect.html', data))
     send_html_mail_threaded(user, subj_user, text)
 
 @receiver(social_account_added)

@@ -144,6 +144,6 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
             'user': user,
             'provider': provider
         })
-        subj_user = render_to_string('cosinnus/mail/welcome_after_oauth_signup_subj.txt', data)
-        text = textfield(render_to_string('cosinnus/mail/welcome_after_oauth_signup.html', data))
+        subj_user = render_to_string('cosinnus_oauth_client/mail/welcome_after_oauth_signup_subj.txt', data)
+        text = textfield(render_to_string('cosinnus_oauth_client/mail/welcome_after_oauth_signup.html', data))
         send_html_mail_threaded(user, subj_user, text)
