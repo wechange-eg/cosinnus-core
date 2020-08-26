@@ -69,6 +69,12 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
         profile.language = lang
         profile.save(update_fields=['language'])
 
+        copy_profile = self.cleaned_data.get('copy_profile')
+        welcome_page = '{}?copy_profile={}'.format(reverse('welcome_oauth'),
+                                                   copy_profile)
+        profile.add_redirect_on_next_page(redirect_with_next(welcome_page, request),
+            message=None, priority=True)
+
         # add welcomepage
         if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
             profile.add_redirect_on_next_page(
@@ -138,6 +144,6 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
             'user': user,
             'provider': provider
         })
-        subj_user = render_to_string('cosinnus/mail/welcome_after_oauth_signup_subj.txt', data)
-        text = textfield(render_to_string('cosinnus/mail/welcome_after_oauth_signup.html', data))
+        subj_user = render_to_string('cosinnus_oauth_client/mail/welcome_after_oauth_signup_subj.txt', data)
+        text = textfield(render_to_string('cosinnus_oauth_client/mail/welcome_after_oauth_signup.html', data))
         send_html_mail_threaded(user, subj_user, text)

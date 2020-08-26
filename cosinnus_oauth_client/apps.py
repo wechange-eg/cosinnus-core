@@ -6,3 +6,6 @@ class CosinnusOauthClientAppConfig(AppConfig):
 
     name = 'cosinnus_oauth_client'
     verbose_name = 'Cosinnus Oauth Client'
+
+    def ready(self):
+        from . import listeners

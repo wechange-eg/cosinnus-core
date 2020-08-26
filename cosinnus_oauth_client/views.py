@@ -5,20 +5,17 @@ from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from allauth.socialaccount.views import ConnectionsView
 from allauth.account.views import PasswordSetView
-
 from allauth.socialaccount.models import SocialApp
 
 from cosinnus.utils.urls import redirect_with_next
-from django.urls import reverse
+
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
-from django.urls import reverse, reverse_lazy
-from cosinnus.models.profile import get_user_profile_model
-from django.contrib import messages
+from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.http import Http404
+from django.urls import reverse
+from django.views.generic.base import TemplateView
 
 import requests
 
@@ -54,14 +51,6 @@ class CosinnusOauthClientAdapter(OAuth2Adapter):
         extra_data = resp.json()
         socialaccount = self.get_provider().sociallogin_from_response(request,
                                                                       extra_data)
-
-        if request.session.get('socialaccount_state'):
-            state = request.session.get('socialaccount_state')
-            process = state[0].get('process')
-            if process == 'connect':
-                messages.add_message(request,
-                             messages.SUCCESS,
-                             _('Successfully connected account'))
         return socialaccount
 
 
@@ -88,19 +77,13 @@ class SocialAppMixin:
 class CustomConnectionView(SocialAppMixin, ConnectionsView):
 
     def dispatch(self, request, *args, **kwargs):
-        if request.GET.get('provider', False):
-            return super().dispatch(request, *args, **kwargs)
-        elif self.get_single_social_apps_provider():
+        if request.method == "GET" and not request.GET.get('provider', False):
             provider = self.get_single_social_apps_provider()
-            return redirect('{}?provider={}'.format(reverse_lazy("socialaccount_connections"), provider))
-        else:
-            raise Http404
-
-    def form_valid(self, form):
-        messages.add_message(self.request,
-                             messages.SUCCESS,
-                             _('Successfully removed connection.'))
-        return super().form_valid(form)
+            if provider:
+                return redirect('{}?provider={}'.format(reverse_lazy("socialaccount_connections"), provider))
+            else:
+                raise Http404
+        return super().dispatch(request, *args, **kwargs)
 
 custom_connections = login_required(CustomConnectionView.as_view())
 
@@ -108,3 +91,8 @@ class CustomSetPasswordView(SocialAppMixin, PasswordSetView):
     pass
 
 custom_password_set = login_required(CustomSetPasswordView.as_view())
+
+class OauthLoginWelcomeView(TemplateView):
+    template_name = 'cosinnus_oauth_client/welcome_oauth.html'
+
+welcome_oauth = login_required(OauthLoginWelcomeView.as_view())
