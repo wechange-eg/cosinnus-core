@@ -477,7 +477,7 @@ class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
     actions = ['deactivate_users', 'export_as_csv', 'log_in_as_user']
     if settings.COSINNUS_ROCKET_ENABLED:
-        actions += ['force_sync_rocket_user']
+        actions += ['force_sync_rocket_user', 'make_user_rocket_admin']
     list_display = ('email', 'is_active', 'date_joined', 'has_logged_in', 'tos_accepted', 'username', 'first_name', 'last_name', 'is_staff', )
     list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,]
     
@@ -528,7 +528,18 @@ class UserAdmin(DjangoUserAdmin):
             message = _('%d Users were synchronized successfully.') % count
             self.message_user(request, message)
         force_sync_rocket_user.short_description = _('Re-synchronize RocketChat user-account (will log users out of RocketChat!)')
-    
+        
+        def make_user_rocket_admin(self, request, queryset):
+            count = 0
+            from cosinnus_message.rocket_chat import RocketChatConnection
+            rocket = RocketChatConnection()
+            for user in queryset:
+                rocket.rocket.users_update(user_id=rocket.get_user_id(user), roles=['user', 'admin'])
+                count += 1
+            message = _('%d Users were made RocketChat admins.') % count
+            self.message_user(request, message)
+        make_user_rocket_admin.short_description = _('Make user RocketChat admin')
+        
 
 admin.site.unregister(USER_MODEL)
 admin.site.register(USER_MODEL, UserAdmin)
