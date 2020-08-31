@@ -476,6 +476,8 @@ class UserHasLoggedInFilter(admin.SimpleListFilter):
 class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
     actions = ['deactivate_users', 'export_as_csv', 'log_in_as_user']
+    if settings.COSINNUS_ROCKET_ENABLED:
+        actions += ['force_sync_rocket_user']
     list_display = ('email', 'is_active', 'date_joined', 'has_logged_in', 'tos_accepted', 'username', 'first_name', 'last_name', 'is_staff', )
     list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,]
     
@@ -514,6 +516,18 @@ class UserAdmin(DjangoUserAdmin):
         user = queryset[0]
         user.backend = 'cosinnus.backends.EmailAuthBackend'
         django_login(request, user)
+    
+    if settings.COSINNUS_ROCKET_ENABLED:
+        def force_sync_rocket_user(self, request, queryset):
+            count = 0
+            from cosinnus_message.rocket_chat import RocketChatConnection
+            rocket = RocketChatConnection()
+            for user in queryset:
+                rocket.users_update(user, force_user_update=True, update_password=True)
+                count += 1
+            message = _('%d Users were synchronized successfully.') % count
+            self.message_user(request, message)
+        force_sync_rocket_user.short_description = _('Re-synchronize RocketChat user-account (will log users out of RocketChat!)')
     
 
 admin.site.unregister(USER_MODEL)
