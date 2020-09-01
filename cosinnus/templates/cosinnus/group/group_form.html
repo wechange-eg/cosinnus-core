@@ -224,33 +224,37 @@
 	                                {% endif %}
 		                    {% endcaptureas %}
 							{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label field_html=wallpaper_html extra_html=wallpaper_extra_html first=True large_field=True %}
-							
-                        
-                        
+
+
                         {# Website Field #}
                         {% trans "Website" as website_label %}
                         {% trans "Example: http://mywebsite.com" as website_placeholder %}
                         {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.website label=website_label placeholder=website_placeholder %}
-                        
-                        
-                        {% include "cosinnus/media_tags_group.html"%} 
-                        
-                        
+
+
+                        {% include "cosinnus/media_tags_group.html"%}
+
+                        {# Large Field #}
+                        {% trans "Which sustainable development goals (SDG) does your project contribute to?" as sdg_label %}
+                        {% trans "Select sustainable development goals" as sdg_placeholder %}
+
+                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.sdgs label=sdg_label placeholder=sdg_placeholder large_field=True %}
+
+
                         {# Locations Inlineform #}
                         {% trans "Where are you active?" as locations_label %}
                         {% trans "Remove location" as loc_rm_label %}
-                        {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}                
+                        {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}
                         {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=locations_label   content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
-                        
-                        
-                        
+
+
                         {% if form.forms.obj.parent %}
 	                        {# Parent Field #}
                             {% trans "Which Group does the group belong to?" as parent_label %}
 						    {% trans "Select Group" as parent_placeholder %}
                             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.parent label=parent_label placeholder=parent_placeholder %}
                         {% endif %}
-                        
+
                         {% if form.forms.obj.related_groups %}
                             {# Related Groups Field #}
                             {% trans "Are there any projects/groups related to this one?" as related_label %}
