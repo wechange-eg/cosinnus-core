@@ -450,6 +450,7 @@ class CosinnusConf(AppConf):
             'sw_lon': 5.01, # west,
         },
         'geojson_region': None,
+        'filter_panel_default_visible': False,
     }
     
     # dimensions of the images for map images

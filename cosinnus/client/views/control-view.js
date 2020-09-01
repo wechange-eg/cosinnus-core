@@ -104,6 +104,9 @@ module.exports = ContentControlView.extend({
             	self.options.availableFilterList.push(type); 
             }
         });
+        if (COSINNUS_MAP_OPTIONS['filter_panel_default_visible']) {
+            self.state.filterPanelVisible = true;
+        }
         
         if (!self.collection) {
             self.collection = new ResultCollection();
