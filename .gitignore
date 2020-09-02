@@ -24,3 +24,7 @@ dist
 
 # Ignore node modules.
 node_modules
+
+
+# ignore dev_settings
+dev_settings.py
