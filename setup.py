@@ -125,6 +125,10 @@ setup(
         'django-osm-field',
         'markdown2',
         'pydkim',
+
+        # requirements for BigBlueButton integration
+        'django-jalali',
+        'django-bigbluebutton',
     ],
     dependency_links=[
         'git+git://github.com/wechange-eg/django-awesome-avatar.git@django2#egg=django-awesome-avatar',
