@@ -520,10 +520,11 @@ class UserAdmin(DjangoUserAdmin):
     if settings.COSINNUS_ROCKET_ENABLED:
         def force_sync_rocket_user(self, request, queryset):
             count = 0
-            from cosinnus_message.rocket_chat import RocketChatConnection
+            from cosinnus_message.rocket_chat import RocketChatConnection, delete_cached_rocket_connection
             rocket = RocketChatConnection()
             for user in queryset:
                 rocket.users_update(user, force_user_update=True, update_password=True)
+                delete_cached_rocket_connection(user)
                 count += 1
             message = _('%d Users were synchronized successfully.') % count
             self.message_user(request, message)
