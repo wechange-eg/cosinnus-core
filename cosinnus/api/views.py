@@ -106,7 +106,7 @@ class UserView(APIView):
                 avatar_url = request.build_absolute_uri(avatar_url)
             return JsonResponse({
                 'success': True,
-                'id': str(user.id),
+                'id': user.username if user.username.isdigit() else str(user.id),
                 'email': user.email,
                 'name': user.get_full_name(),
                 'avatar': avatar_url,
