@@ -234,11 +234,12 @@
 
                         {% include "cosinnus/media_tags_group.html"%}
 
+                        {% if SETTINGS.COSINNUS_ENABLE_SDGS %}
                         {# Large Field #}
                         {% trans "Which sustainable development goals (SDG) does your project contribute to?" as sdg_label %}
                         {% trans "Select sustainable development goals" as sdg_placeholder %}
-
                         {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.sdgs label=sdg_label placeholder=sdg_placeholder large_field=True %}
+                        {% endif %}
 
 
                         {# Locations Inlineform #}

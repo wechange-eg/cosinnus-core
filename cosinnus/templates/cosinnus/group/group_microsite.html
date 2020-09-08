@@ -470,6 +470,7 @@
 						></a>&nbsp;
 					</p>
 					
+					{% if SETTINGS.COSINNUS_ENABLE_SDGS %}
 					<p>
 						<b>{% trans "Sustainable Development Goals" %}:</b>&nbsp;
 					</p>
@@ -481,6 +482,7 @@
 						{% endfor %}
 						{% endif %}
 					</p>
+					{% endif %}
 				{% endblock microsite_group_description %}
 	        </div>
 		</div> <!-- col-xs-12 -->

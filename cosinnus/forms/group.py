@@ -129,6 +129,8 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
              )
         if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED and not is_superuser(self.request.user):
             self.fields['embedded_dashboard_html'].disabled = True
+        if not settings.COSINNUS_ENABLE_SDGS:
+            del self.fields['sdgs']
         
         # use select2 widgets for m2m fields
         for field in list(self.fields.values()):
