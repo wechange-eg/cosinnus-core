@@ -243,7 +243,7 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'oauth2_provider',
         'corsheaders',
         'rest_framework',
-        'rest_framework_swagger',
+        'drf_yasg',
         'taggit',
     ]
     return _INSTALLED_APPS
@@ -544,19 +544,7 @@ REST_FRAMEWORK = {
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
     )
 }
-SWAGGER_SETTINGS = {
-    'api_version': '2',
-    'api_path': '/api/v2/',
-    'api_key': 'wechange',
-    'info': {
-        'contact': 'support@wechange.de',
-        'description': '',
-        'license': 'AGPL 3.0',
-        'licenseUrl': 'https://www.gnu.org/licenses/agpl-3.0.de.html',
-        #'termsOfServiceUrl': 'http://helloreverb.com/terms/',
-        'title': 'WECHANGE API',
-    },
-}
+
 
 SUIT_CONFIG = {
     'ADMIN_NAME': 'Wechange Admin'

@@ -4,22 +4,23 @@ from __future__ import unicode_literals
 from django.conf.urls import include, url
 from django.urls import reverse_lazy
 from django.views.generic.base import RedirectView, TemplateView
-from rest_framework import routers
-from rest_framework_swagger.views import get_swagger_view
+from rest_framework import routers, permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 
 from cosinnus.core.registries import url_registry
 from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    OrganisationViewSet, UserView, oauth_user, oauth_profile
+    OrganisationViewSet, UserView, oauth_user, oauth_profile, StatisticsView
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
     user_dashboard, ui_prefs, administration, user_dashboard_announcement
 from cosinnus_event.api.views import EventViewSet
 from django_otp.views import LoginView
 
-schema_view = get_swagger_view(title='WECHANGE API')
+from cosinnus_note.api.views import NoteViewSet
 
 app_name = 'cosinnus'
 
@@ -236,8 +237,9 @@ urlpatterns += url_registry.urlpatterns
 router = routers.SimpleRouter()
 router.register(r'groups', CosinnusSocietyViewSet)
 router.register(r'projects', CosinnusProjectViewSet)
-router.register(r'organisation', OrganisationViewSet)
-router.register(r'event', EventViewSet)
+router.register(r'organisations', OrganisationViewSet)
+router.register(r'events', EventViewSet)
+router.register(r'notes', NoteViewSet)
 
 if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
     from cosinnus_message.api.views import MessageExportView
@@ -254,6 +256,32 @@ urlpatterns += [
     url(r'^o/me/', UserView.as_view()),
     url(r'^o/user/', oauth_user),
     url(r'^o/profile/', oauth_profile),
-    url(r'api/v2/docs/', get_swagger_view()),
-    url(r'api/v2/', include(router.urls)),
+]
+
+schema_url_patterns = [
+    url(r'^api/v2/', include(router.urls)),
+    url(r'^api/v2/statistics/', StatisticsView.as_view(), name='api-statistics'),
+]
+
+urlpatterns += schema_url_patterns
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="WECHANGE API",
+        default_version='v2',
+        description="WECHANGE API (in progress)",
+        terms_of_service="https://wechange.de/cms/nutzungsbedingungen/",
+        contact=openapi.Contact(email="support@wechange.de"),
+        license=openapi.License(name="AGPL 3.0"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+    patterns=schema_url_patterns,
+)
+
+urlpatterns += [
+    url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    url(r'^api/v2/docs/$', RedirectView.as_view(url='/swagger/', permanent=False)),
 ]

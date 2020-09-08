@@ -1,12 +1,15 @@
 import json
 
-from django.http.response import JsonResponse
 from rest_framework import viewsets
+from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from oauth2_provider.decorators import protected_resource
+from django.contrib.auth import get_user_model
 from django.http import HttpResponse
+from oauth2_provider.decorators import protected_resource
+from django.views.generic.edit import FormView
 
+from cosinnus.utils.user import filter_active_users
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.tagged import BaseTagObject
@@ -36,10 +39,17 @@ class PublicTaggableObjectFilterMixin(object):
         return queryset
 
 
-class CosinnusSocietyViewSet(PublicCosinnusGroupFilterMixin,
-                             viewsets.ReadOnlyModelViewSet):
-    queryset = CosinnusSociety.objects.all()
-    serializer_class = CosinnusSocietySerializer
+class CosinnusFilterQuerySetMixin:
+    FILTER_CONDITION_MAP = {
+    }
+    FILTER_KEY_MAP = {
+        'tags': 'media_tag__tags__name'
+    }
+    FILTER_VALUE_MAP = {
+        'false': False,
+        'true': True
+    }
+    FILTER_DEFAULT_ORDER = ['-created', ]
 
     def get_queryset(self):
         """
@@ -49,28 +59,32 @@ class CosinnusSocietyViewSet(PublicCosinnusGroupFilterMixin,
         queryset = super().get_queryset()
         # Order
         query_params = self.request.query_params.copy()
-        order_by = query_params.pop('order_by', ['-created',])
+        order_by = query_params.pop('order_by', self.FILTER_DEFAULT_ORDER)
         queryset = queryset.order_by(*order_by)
         # Overwrite ugly but commonly used filters
-        FILTER_MAP = {
-            'tags': 'media_tag__tags__name'
-        }
-        VALUE_MAP = {
-            'false': False,
-            'true': True
-        }
         for key, value in list(query_params.items()):
             if key in (self.pagination_class.limit_query_param,
                        self.pagination_class.offset_query_param):
                 continue
-            key = FILTER_MAP.get(key, key)
-            value = VALUE_MAP.get(value, value)
+            if key in self.FILTER_CONDITION_MAP:
+                VALUE_MAP = self.FILTER_CONDITION_MAP.get(key)
+                if value in VALUE_MAP:
+                    (key, value), *rest = VALUE_MAP.get(value).items()
+            key = self.FILTER_KEY_MAP.get(key, key)
+            value = self.FILTER_VALUE_MAP.get(value, value)
             if value is not None:
                 if key.startswith('exclude_'):
                     queryset = queryset.exclude(**{key[8:]: value})
                 else:
                     queryset = queryset.filter(**{key: value})
         return queryset
+
+
+class CosinnusSocietyViewSet(CosinnusFilterQuerySetMixin,
+                             PublicCosinnusGroupFilterMixin,
+                             viewsets.ReadOnlyModelViewSet):
+    queryset = CosinnusSociety.objects.all()
+    serializer_class = CosinnusSocietySerializer
 
 
 class CosinnusProjectViewSet(CosinnusSocietyViewSet):
@@ -104,7 +118,7 @@ class UserView(APIView):
             avatar_url = user.cosinnus_profile.avatar.url if user.cosinnus_profile.avatar else ""
             if avatar_url:
                 avatar_url = request.build_absolute_uri(avatar_url)
-            return JsonResponse({
+            return Response({
                 'success': True,
                 'id': user.username if user.username.isdigit() else str(user.id),
                 'email': user.email,
@@ -112,7 +126,7 @@ class UserView(APIView):
                 'avatar': avatar_url,
             })
         else:
-            return JsonResponse({
+            return Response({
                 'success': False,
             })
 
@@ -154,3 +168,37 @@ def oauth_profile(request):
             'media_tag': media_tag_dict
         }
     ), content_type="application/json")
+
+
+class StatisticsView(APIView):
+    """
+    Returns a JSON dict of common statistics for this portal
+    """
+
+    def get(self, request):
+        all_users_qs = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members)
+        data = {
+            'groups': CosinnusSociety.objects.all_in_portal().count(),
+            'projects': CosinnusProject.objects.all_in_portal().count(),
+            'users_registered': all_users_qs.count(),
+            'users_active': filter_active_users(all_users_qs).count(),
+        }
+        try:
+            from cosinnus_event.models import Event
+            upcoming_event_count = Event.get_current_for_portal().count()
+            data.update({
+                'events_upcoming': upcoming_event_count,
+            })
+        except:
+            pass
+
+        try:
+            from cosinnus_note.models import Note
+            note_count = Note.get_current_for_portal().count()
+            data.update({
+                'notes': note_count,
+            })
+        except:
+            pass
+
+        return Response(data)
