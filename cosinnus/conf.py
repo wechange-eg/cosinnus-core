@@ -720,3 +720,4 @@ class CosinnusDefaultSettings(AppConf):
         'cosinnus_file.FileEntry': ('title', ),
     }
 
+    ENABLE_SDGS = False

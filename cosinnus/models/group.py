@@ -98,6 +98,44 @@ _MEMBERSHIP_MEMBERS_KEY = 'cosinnus/core/membership/%s/members/%d'
 _MEMBERSHIP_PENDINGS_KEY = 'cosinnus/core/membership/%s/pendings/%d'
 _MEMBERSHIP_INVITED_PENDINGS_KEY = 'cosinnus/core/membership/%s/invited_pendings/%d'
 
+SDG_NO_POVERTY = 1
+SDG_ZERO_HUNGER = 2
+SDG_GOOD_HEALTH = 3
+SDG_QUALITY_EDUCATION = 4
+SDG_GENDER_EQUALITY = 5
+SDG_CLEAN_WATER = 6
+SDG_AFFORDABLE_CLEAN_ENERGY = 7
+SDG_DECENT_WORK = 8
+SDG_INDUSTRY_INNOVATION = 9
+SDG_REDUCING_INEQUALITY = 10
+SDG_SUSTAINABLE_CITIES = 11
+SDG_RESPONSIBLE_CONSUMPTION = 12
+SDG_CLIMATE_ACTION = 13
+SDG_LIFE_BELOW_WATER = 14
+SDG_LIFE_ON_LAND = 15
+SDG_PEACE_JUSTICE = 16
+SDG_PARTNERSHIPS = 17
+
+SDG_CHOICES = [
+    (SDG_NO_POVERTY, _('No Poverty')),
+    (SDG_ZERO_HUNGER, _('Zero Hunger')),
+    (SDG_GOOD_HEALTH, _('Good Health and Well-being')),
+    (SDG_QUALITY_EDUCATION, _('Quality Education')),
+    (SDG_GENDER_EQUALITY, _('Gender Equality')),
+    (SDG_CLEAN_WATER, _('Clean Water and Sanitation')),
+    (SDG_AFFORDABLE_CLEAN_ENERGY, _('Affordable and Clean Energy')),
+    (SDG_DECENT_WORK, _('Decent Work and Economic Growth')),
+    (SDG_INDUSTRY_INNOVATION, _('Industry, Innovation, and Infrastructure')),
+    (SDG_REDUCING_INEQUALITY, _('Reducing Inequality')),
+    (SDG_SUSTAINABLE_CITIES, _('Sustainable Cities and Communities')),
+    (SDG_RESPONSIBLE_CONSUMPTION, _('Responsible Consumption and Production')),
+    (SDG_CLIMATE_ACTION, _('Climate Action')),
+    (SDG_LIFE_BELOW_WATER, _('Life Below Water')),
+    (SDG_LIFE_ON_LAND, _('Life On Land')),
+    (SDG_PEACE_JUSTICE, _('Peace, Justice, and Strong Institutions')),
+    (SDG_PARTNERSHIPS, _('Partnerships for the Goals')),
+]
+
 
 def group_name_validator(value):
     RegexValidator(
@@ -787,6 +825,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     cosinnus_always_visible_by_users_moderator_flag = True
 
     settings = PostgresJSONField(default=dict, blank=True, null=True)
+    sdgs = PostgresJSONField(default=list, blank=True, null=True)
     
     objects = CosinnusGroupManager()
     
