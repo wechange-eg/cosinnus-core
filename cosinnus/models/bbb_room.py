@@ -6,10 +6,32 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.contrib.postgres.fields import JSONField
 
+from django_bigbluebutton.utils import xml_to_json
+from cosinnus.apis import bigbluebutton as bbb
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 def random_password(length=5):
     """ generates a random moderator password for a BBBRoom  with lowercase ASCII characters """
     return ''.join(random.choice(string.ascii_lowercase) for i in range(length))
+
+
+def random_voice_bridge():
+    """ generates a random voice bridge dial in PIN between 10000 and 99999 that is unique within all BBB-Rooms
+
+    :return: random integer in the range of 10000 - 99999
+    :rtype: int
+    """
+    existing_pins = list(BBBRoom.objects.filter(ended=False).values_list("dial_number", flat=True))
+
+    random_pin = 10000
+
+    while True:
+        random_pin = random.randint(10000, 99999)
+        if random_pin not in existing_pins:
+            break
+
+    return random_pin
 
 
 class BBBRoom(models.Model):
@@ -29,6 +51,20 @@ class BBBRoom(models.Model):
 
     :var name: (optional) name of the room
     :type: str
+
+    :var moderator_password: password to enter a conversation as moderator
+    :type: str
+
+    :var attendee_password: password to enter a conversation as moderator
+    :type: str
+
+    :var welcome_message: Message that is displayed when enterin the conversation
+    :type: str
+
+    :var max_attendees: Message that is displayed when enterin the conversation
+    :type: str
+
+
     """
 
     presenter = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name="presenter",
@@ -44,6 +80,52 @@ class BBBRoom(models.Model):
                                          help_text=_("the password set to enter the room as a attendee"))
     welcome_message = models.CharField(max_length=300, null=True, blank=True, verbose_name=_("the rooms welcome message"),
                                        help_text=_("the welcome message, that is displayed to attendees"))
+    max_participants = models.PositiveIntegerField(null=True, default=None, verbose_name="maximum number of users",
+                                                   help_text=_("maximum number in the conference at the same time"))
+    dial_number = models.CharField(blank=True, null=True, default="", max_length=20,
+                                   help_text=_("number for dialing into the conference via telephone"),
+                                   verbose_name="telephone dial in number")
+    voice_bridge = models.PositiveIntegerField(help_text=_("pin to enter for telephone participants"),
+                                               unique=True, verbose_name="dial in PIN", default=random_voice_bridge,
+                                               validators=[MinValueValidator(10000), MaxValueValidator(99999)])
+    internal_meeting_id = models.CharField(max_length=100, blank=True, null=True)
+    parent_meeting_id = models.CharField(max_length=100, blank=True, null=True)
+    ended = models.BooleanField(default=False)
+
+    objects = models.Manager()
 
     def __str__(self):
         return str(self.token)
+
+    def end(self):
+        bbb.end_meeting(self.token, self.moderator_password)
+
+    @classmethod
+    def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=random_password(),
+               moderator_password=random_password()):
+        m_xml = bbb.start(
+            name=name,
+            meeting_id=meeting_id,
+            welcome=meeting_welcome,
+            attendee_password=attendee_password,
+            moderator_password=moderator_password
+        )
+        print(m_xml)
+        meeting_json = xml_to_json(m_xml)
+        if meeting_json['returncode'] != 'SUCCESS':
+            raise ValueError('Unable to create meeting!')
+
+        # Now create a model for it.
+        meeting, _ = BBBRoom.objects.get_or_create(token=meeting_id)
+        meeting.name = name
+        meeting.welcome_text = meeting_json['meetingID']
+        meeting.token = meeting_json['meetingID']
+        meeting.attendee_password = meeting_json['attendeePW']
+        meeting.moderator_password = meeting_json['moderatorPW']
+        meeting.internal_meeting_id = meeting_json['internalMeetingID']
+        meeting.parent_meeting_id = meeting_json['parentMeetingID']
+        meeting.voice_bridge = meeting_json['voiceBridge']
+        meeting.dial_number = meeting_json['dialNumber']
+        meeting.save()
+
+        return meeting
