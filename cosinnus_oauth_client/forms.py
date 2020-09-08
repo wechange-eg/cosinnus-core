@@ -30,6 +30,14 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
     last_name = forms.CharField(widget=forms.HiddenInput(), required=False)
     copy_profile = forms.BooleanField(required=False)
 
+    error_messages = {
+        'email_taken':
+        _("An account already exists with this e-mail address."
+          " To make sure that you are the owner of this account"
+          " please sign in to that account first, then connect"
+          " your {} account.")
+    }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if not self.sociallogin.account.provider == 'wechange':
@@ -57,6 +65,15 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
         messages.add_message(request,
                              messages.SUCCESS,
                              _('Successfully signed in as {}.').format(user.get_full_name()))
+
+    def validate_unique_email(self, value):
+        try:
+            return super().validate_unique_email(value)
+        except forms.ValidationError:
+            provider = self.sociallogin.account.get_provider()
+            raise forms.ValidationError(
+                self.error_messages['email_taken'].format(provider.name)
+            )
 
     def setup_profile(self, user):
         if not user.cosinnus_profile:
