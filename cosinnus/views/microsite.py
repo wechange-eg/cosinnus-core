@@ -20,7 +20,9 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
     def dispatch(self, request, *args, **kwargs):
         if not getattr(settings, 'COSINNUS_MICROSITES_ENABLED', False):
             raise Http404
-        if not self.request.user.is_authenticated and getattr(settings, 'COSINNUS_MICROSITES_DISABLE_ANONYMOUS_ACCESS', False):
+        # if microsite access is limited, only allow invite-links, but nothing else
+        if not self.request.user.is_authenticated and getattr(settings, 'COSINNUS_MICROSITES_DISABLE_ANONYMOUS_ACCESS', False) \
+                and not request.GET.get('invited', None) == '1':
             return redirect_to_not_logged_in(self.request, view=self)
         return super(GroupMicrositeView, self).dispatch(request, *args, **kwargs)
     

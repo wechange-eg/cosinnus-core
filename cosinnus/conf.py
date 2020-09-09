@@ -701,6 +701,9 @@ class CosinnusConf(AppConf):
     OAUTH_SERVER_BASEURL = None
     OAUTH_SERVER_PROVIDER_NAME = 'wechange'
     
+    # whether SDGs should be shown in group/project forms and detail templates
+    ENABLE_SDGS = False
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
