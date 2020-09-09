@@ -1521,7 +1521,9 @@ class GroupStartpage(View):
             return False
         
         if not request.user.is_authenticated:
-            if getattr(settings, 'COSINNUS_MICROSITES_DISABLE_ANONYMOUS_ACCESS', False):
+            # if microsite access is limited, only allow invite-links, but nothing else
+            if getattr(settings, 'COSINNUS_MICROSITES_DISABLE_ANONYMOUS_ACCESS', False) \
+                    and not request.GET.get('invited', None) == '1':
                 return False
             else:
                 return True
