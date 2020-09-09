@@ -245,7 +245,7 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'rest_framework',
         'rest_framework_swagger',
         'taggit',
-        'django_bigbluebutton',
+        #'django_bigbluebutton',
     ]
     return _INSTALLED_APPS
 
