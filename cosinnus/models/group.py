@@ -1004,15 +1004,17 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         return qs
 
     @property
-    def is_group_and_conference(self):
+    def group_is_conference(self):
+        """ Check if this is a proper conference (a type society with conference flag) """
         return self.type == self.TYPE_SOCIETY and self.is_conference
 
     @property
     def conference_members(self):
+        """ Returns a User QS of conference members of this group if it is a conference, an empty QS else """
         from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
-        if self.is_group_and_conference:
+        if self.group_is_conference:
             return self.users.filter(cosinnus_profile__settings__contains=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
-        return []
+        return get_user_model().objects.none()
 
     def get_admin_contact_url(self):
         if 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:

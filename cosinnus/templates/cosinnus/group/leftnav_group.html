@@ -18,7 +18,7 @@
 	{% include "cosinnus/leftnav_button.html" with active=is_editgroup extra_classes="fine-space" icon="fa-info-circle" label=label href=href  %}
 {% endif %}
 
-{% if group.is_group_and_conference and user|has_write_access:object %}
+{% if group.group_is_conference and user|has_write_access:object %}
 {% captureas href %}{% group_url 'cosinnus:conference-management' group=group %}{% endcaptureas %}
 {% captureas label %}{% trans "Conference Management" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_conferencemanagement extra_classes="fine-space" icon_full_class="fas fa-chalkboard-teacher" label=label href=href  %}

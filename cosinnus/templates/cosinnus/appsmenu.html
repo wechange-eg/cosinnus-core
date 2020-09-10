@@ -56,7 +56,7 @@
 	        </li>
         {% endfor %}
 
-        {% if user|has_write_access:group and group.is_group_and_conference %}
+        {% if user|has_write_access:group and group.group_is_conference %}
         <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %}">
             <a href="{{ conference_management_page }}">
                 <i class="fas fa-chalkboard-teacher"></i>
