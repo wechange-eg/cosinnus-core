@@ -1015,7 +1015,19 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         if self.group_is_conference:
             return self.users.filter(cosinnus_profile__settings__contains=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
         return get_user_model().objects.none()
-
+    
+    def get_additional_rocketchat_room_ids(self):
+        """ A group may have additional rocketchat room IDs that it corresponds to. 
+            All room ids returned here will also be managed by the rocketchat hooks for
+            members joining/leaving, etc. """
+        room_ids = []
+        # add all conference rooms with a rocketchat room type 
+        if self.group_is_conference:
+            for room in self.rooms:
+                if room.type in room.ROCKETCHAT_ROOM_TYPES and room.rocket_chat_room_id:
+                    room_ids.append(room.rocket_chat_room_id)
+        return list(set(room_ids))
+        
     def get_admin_contact_url(self):
         if 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
             return ''

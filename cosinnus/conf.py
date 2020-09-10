@@ -704,6 +704,13 @@ class CosinnusConf(AppConf):
     # whether SDGs should be shown in group/project forms and detail templates
     ENABLE_SDGS = False
     
+    # default value for form field for how many coffee table 
+    # participants should be allowed
+    CONFERENCE_COFFEETABLES_MAX_PARTICIPANTS_DEFAULT = 6
+    
+    # default value for form field for if to allow user creation of coffee tables
+    CONFERENCE_COFFEETABLES_ALLOW_USER_CREATION_DEFAULT = False
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
