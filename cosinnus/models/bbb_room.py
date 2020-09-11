@@ -6,9 +6,14 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.contrib.postgres.fields import JSONField
 
-from django_bigbluebutton.utils import xml_to_json
 from cosinnus.apis import bigbluebutton as bbb
 from django.core.validators import MaxValueValidator, MinValueValidator
+# from cosinnus.models import MEMBERSHIP_ADMIN
+
+
+def random_meeting_id():
+    """ generates a random meeting_id to identify the meeting at BigBlueButton """
+    return "room-" + random_password()
 
 
 def random_password(length=5):
@@ -43,9 +48,6 @@ class BBBRoom(models.Model):
     :var members: Users, that can join the meeting
     :type: list of auth.User
 
-    :var member_token: User -> BBB-Token mapping
-    :type: dict
-
     :var moderators: Users with moderator/admin permissions for this meeting
     :type: list of auth.User
 
@@ -69,10 +71,9 @@ class BBBRoom(models.Model):
 
     presenter = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name="presenter",
                                   help_text=_("this user will enter the BBB presenter mode for this conversation"))
-    members = models.ManyToManyField(User, related_name="members")
-    member_token = JSONField(default=dict, verbose_name="member token mapping")
+    attendees = models.ManyToManyField(User, related_name="attendees")
     moderators = models.ManyToManyField(User)
-    token = models.CharField(max_length=200, null=True, blank=True)
+    meeting_id = models.CharField(max_length=200, null=True, blank=True)
     name = models.CharField(max_length=160, null=True, blank=True, verbose_name=_("room name or title"))
     moderator_password = models.CharField(max_length=30, default=random_password,
                                           help_text=_("the password set to enter the room as a moderator"))
@@ -95,31 +96,55 @@ class BBBRoom(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return str(self.token)
+        return str(self.meeting_id)
 
     def end(self):
-        bbb.end_meeting(self.token, self.moderator_password)
+        bbb.end_meeting(self.meeting_id, self.moderator_password)
+
+    def join_group_members(self, group):
+        for membership in group.memberships.all():
+            if membership.status == 2:
+                # TODO fix this to reference to MEMBERSHIP_ADMIN
+                self.moderators.add(membership.user)
+            else:
+                self.attendees.add(membership.user)
+
+    @property
+    def members(self):
+        return self.moderators.all() | self.attendees.all()
 
     @classmethod
     def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=random_password(),
-               moderator_password=random_password()):
-        m_xml = bbb.start(
-            name=name,
-            meeting_id=meeting_id,
-            welcome=meeting_welcome,
-            attendee_password=attendee_password,
-            moderator_password=moderator_password
-        )
-        print(m_xml)
-        meeting_json = xml_to_json(m_xml)
+               moderator_password=random_password(), max_participants=None, voice_bridge=None):
+
+        if max_participants or voice_bridge:
+            m_xml = bbb.start_verbose(
+                name=name,
+                meeting_id=meeting_id,
+                welcome=meeting_welcome,
+                attendee_password=attendee_password,
+                moderator_password=moderator_password
+            )
+
+        else:
+            m_xml = bbb.start(
+                name=name,
+                meeting_id=meeting_id,
+                welcome=meeting_welcome,
+                attendee_password=attendee_password,
+                moderator_password=moderator_password
+            )
+
+        meeting_json = bbb.xml_to_json(m_xml)
+
         if meeting_json['returncode'] != 'SUCCESS':
             raise ValueError('Unable to create meeting!')
 
         # Now create a model for it.
-        meeting, _ = BBBRoom.objects.get_or_create(token=meeting_id)
+        meeting, _ = BBBRoom.objects.get_or_create(meeting_id=meeting_id)
         meeting.name = name
-        meeting.welcome_text = meeting_json['meetingID']
-        meeting.token = meeting_json['meetingID']
+        meeting.welcome_message = meeting_welcome
+        meeting.meeting_id = meeting_json['meetingID']
         meeting.attendee_password = meeting_json['attendeePW']
         meeting.moderator_password = meeting_json['moderatorPW']
         meeting.internal_meeting_id = meeting_json['internalMeetingID']

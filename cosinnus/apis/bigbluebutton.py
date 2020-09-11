@@ -8,7 +8,8 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext as _
 from django_bigbluebutton.bbb import BigBlueButton
-from django_bigbluebutton.utils import xml_to_json, parse_xml
+from django_bigbluebutton import utils as bbb_utils
+
 
 """ 
 This is a wrapper for django-bigbluebutton.bbb
@@ -26,8 +27,16 @@ All wrapped functions from bbb.py are called with sha1, regardless of the `BBB_H
 """
 
 
-def api_call(self, query, call):
-    prepared = '{}{}{}'.format(call, query, self.secret_key)
+def xml_to_json(xml_data):
+    return bbb_utils.xml_to_json(xml_data)
+
+
+def parse_xml(response):
+    return bbb_utils.parse_xml(response)
+
+
+def api_call(query, call):
+    prepared = '{}{}{}'.format(call, query, settings.BBB_SECRET_KEY)
 
     if settings.BBB_HASH_ALGORITHM == "SHA1":
         checksum = sha1(str(prepared).encode('utf-8')).hexdigest()
@@ -77,19 +86,19 @@ def start(name, meeting_id, welcome="Welcome to the conversation", moderator_pas
 
 
 def start_verbose(
-        meeting_name, meeting_id, welcome_message="Welcome to the conversation",
-        moderator_password="", attendee_password="", max_participants=None, dial_number=None, voice_bridge=None,
+        name, meeting_id, welcome="Welcome to the conversation",
+        moderator_password="", attendee_password="", max_participants=None, voice_bridge=None,
         parent_meeting_id=None):
     """ This function calls the BigBlueButton API directly to create a meeting with all available parameters available
         in the cosinnus-core.BBBRoom model.
 
-    :param meeting_name: Human readable name for the meeting
+    :param name: Human readable name for the meeting
     :type: str
 
     :param meeting_id: Human readable ID for the meeting
     :type: str
 
-    :param welcome_message: Welcome message when joining the meeting
+    :param welcome: Welcome message when joining the meeting
     :type: str
 
     :param moderator_password: Password for users to join with moderator privileges
@@ -112,19 +121,16 @@ def start_verbose(
     """
     call = 'create'
 
-    query = urllib.parse.urlencode(
-        ("name", meeting_name),
+    query = urllib.parse.urlencode((
+        ("name", name),
         ('meetingID', meeting_id),
-        ("welcome", welcome_message),
-    )
+        ("welcome", welcome),
+    ))
 
     if max_participants and type(max_participants, int):
         query += (("maxParticipants", max_participants),)
 
-    if dial_number and type(dial_number, int):
-        query += (("dialNumber", dial_number),)
-
-    if voice_bridge and type(dial_number, int):
+    if voice_bridge and type(voice_bridge, int):
         query += (("voiceBridge", voice_bridge),)
 
     if parent_meeting_id:
@@ -143,16 +149,7 @@ def start_verbose(
 def end_meeting(meeting_id, password):
     """ This function is a wrapper for the `end_meeting` function in bbb.py """
 
-    m_xml = BigBlueButton().end_meeting(
-        meeting_id=meeting_id, password=password
-    )
-
-    meeting_json = xml_to_json(m_xml)
-    if meeting_json['returncode'] != 'SUCCESS':
-        # TODO add logging statement
-        raise ValueError('Unable to create meeting!')
-
-    return m_xml
+    return BigBlueButton().end_meeting(meeting_id, password)
 
 
 def get_meetings():
@@ -167,8 +164,8 @@ def get_meetings():
 def meeting_info(meeting_id, password):
     """ This function is a wrapper for the `meeting_info` function in bbb.py
 
-    :return: XML representation of the API result
-    :rtype: XML
+    :return: dict representation of the API result
+    :rtype: dict
     """
     return BigBlueButton().meeting_info(meeting_id, password)
 
@@ -182,10 +179,38 @@ def is_running(self, meeting_id):
     return BigBlueButton().is_running(meeting_id)
 
 
-def join_url(self, meeting_id, name, password):
+def xml_join(name, meeting_id, password):
+    """ Returns a XML representation of the join call. !! Use only in Testing !!
+
+    :param name: Name of the user shown to other attendees in the conversation
+    :type: str
+
+    :param meeting_id: Identifier of the meeting
+    :type: str
+
+    :param password: Password for the user to join
+    :type: str
+    """
+
+    call = 'join'
+    query = urllib.parse.urlencode((
+        ('fullName', name),
+        ('meetingID', meeting_id),
+        ('password', password),
+        ('redirect', "false"),
+    ))
+
+    hashed = api_call(query, call)
+    url = settings.BBB_API_URL + call + '?' + hashed
+    result = parse_xml(requests.get(url).content.decode('utf-8'))
+
+    return result
+
+
+def join_url(meeting_id, name, password):
     """ This function is a wrapper for the `join_url` function in bbb.py
 
     :return: XML representation of the API result
     :rtype: XML
     """
-    return BigBlueButton().is_running(meeting_id)
+    return BigBlueButton().join_url(meeting_id, name, password)
