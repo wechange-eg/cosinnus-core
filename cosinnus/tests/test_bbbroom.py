@@ -37,7 +37,7 @@ class BBBRoomTest(TestCase):
         membership = CosinnusGroupMembership(group=self.group, user=self.moderator, status=2)
         membership.save()
 
-        membership = CosinnusGroupMembership(group=self.group, user=self.attendee)
+        membership = CosinnusGroupMembership(group=self.group, user=self.attendee, status=1)
         membership.save()
 
     def test_creation(self):

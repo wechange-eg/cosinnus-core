@@ -8,6 +8,8 @@ from django.contrib.postgres.fields import JSONField
 
 from cosinnus.apis import bigbluebutton as bbb
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.utils import timezone
+# from cosinnus.models.group import CosinnusGroup
 # from cosinnus.models import MEMBERSHIP_ADMIN
 
 
@@ -39,6 +41,36 @@ def random_voice_bridge():
     return random_pin
 
 
+class Conference(models.Model):
+    """ This model is a wrapper to organize conferences to bundle a bunch of BBBRooms.
+
+     :var start: Starting date of the conference
+     :type: datetime
+
+     :var end: Ending date of the conference
+     :type: datetime
+
+     :var name: Name or headline of the conference
+     :type: str
+
+     :var description: Verbose description and information of the conference
+     :type: str
+
+     :var group: The group that is associated with the conference
+     :type: CosinusGroup
+     """
+
+    start = models.DateTimeField(default=timezone.now)
+    end = models.DateTimeField(default=timezone.now)
+    name = models.CharField(max_length=300, null=True, blank=True)
+    description = models.TextField(help_text=_("verbose description of the conference"))
+    group = models.ForeignKey('CosinnusGroup', on_delete=models.CASCADE, verbose_name="conference group",
+                              help_text=_("group associated with the conference"))
+
+    def __str__(self):
+        return self.name
+
+
 class BBBRoom(models.Model):
     """ This model represents a video/audio conference call with participants and/or presenters
 
@@ -65,8 +97,6 @@ class BBBRoom(models.Model):
 
     :var max_attendees: Message that is displayed when enterin the conversation
     :type: str
-
-
     """
 
     presenter = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name="presenter",
@@ -92,6 +122,7 @@ class BBBRoom(models.Model):
     internal_meeting_id = models.CharField(max_length=100, blank=True, null=True)
     parent_meeting_id = models.CharField(max_length=100, blank=True, null=True)
     ended = models.BooleanField(default=False)
+    conference = models.ForeignKey(Conference, on_delete=models.SET_NULL, null=True, blank=True, default=None)
 
     objects = models.Manager()
 
