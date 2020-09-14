@@ -8,6 +8,7 @@ Celery==4.2.0
 django-allauth==0.42.0
 django-annoying==0.7.6
 django-appconf==1.0.3
+django-bigbluebutton==0.1.0
 django-bootstrap3-datetimepicker-3==2.6.0
 django-bootstrap3==11.0.0
 django-classy-tags==0.8.0
@@ -19,6 +20,7 @@ django-extra-views==0.6.3
 django-filter==2.0.0
 django-haystack==2.8.1
 django-honeypot==0.6.0
+django-jalali==4.0.0
 django-mailbox==4.7.1
 django-model-utils==1.5.0
 django-mptt==0.8.7

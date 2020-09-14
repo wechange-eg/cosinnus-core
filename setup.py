@@ -127,8 +127,8 @@ setup(
         'pydkim',
 
         # requirements for BigBlueButton integration
-        'django-jalali',
-        'django-bigbluebutton',
+        'django-jalali==4.0.0',
+        'django-bigbluebutton==0.1.0',
     ],
     dependency_links=[
         'git+git://github.com/wechange-eg/django-awesome-avatar.git@django2#egg=django-awesome-avatar',
