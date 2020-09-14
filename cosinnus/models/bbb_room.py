@@ -40,35 +40,35 @@ def random_voice_bridge():
 
     return random_pin
 
-
-class Conference(models.Model):
-    """ This model is a wrapper to organize conferences to bundle a bunch of BBBRooms.
-
-     :var start: Starting date of the conference
-     :type: datetime
-
-     :var end: Ending date of the conference
-     :type: datetime
-
-     :var name: Name or headline of the conference
-     :type: str
-
-     :var description: Verbose description and information of the conference
-     :type: str
-
-     :var group: The group that is associated with the conference
-     :type: CosinusGroup
-     """
-
-    start = models.DateTimeField(default=timezone.now)
-    end = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=300, null=True, blank=True)
-    description = models.TextField(help_text=_("verbose description of the conference"))
-    group = models.ForeignKey('CosinnusGroup', on_delete=models.CASCADE, verbose_name="conference group",
-                              help_text=_("group associated with the conference"))
-
-    def __str__(self):
-        return self.name
+#
+# class Conference(models.Model):
+#     """ This model is a wrapper to organize conferences to bundle a bunch of BBBRooms.
+#
+#      :var start: Starting date of the conference
+#      :type: datetime
+#
+#      :var end: Ending date of the conference
+#      :type: datetime
+#
+#      :var name: Name or headline of the conference
+#      :type: str
+#
+#      :var description: Verbose description and information of the conference
+#      :type: str
+#
+#      :var group: The group that is associated with the conference
+#      :type: CosinusGroup
+#      """
+#
+#     start = models.DateTimeField(default=timezone.now)
+#     end = models.DateTimeField(null=True, blank=True, default=None)
+#     name = models.CharField(max_length=300, null=True, blank=True)
+#     description = models.TextField(help_text=_("verbose description of the conference"))
+#     group = models.ForeignKey('CosinnusGroup', on_delete=models.CASCADE, verbose_name="conference group",
+#                               help_text=_("group associated with the conference"))
+#
+#     def __str__(self):
+#         return self.name
 
 
 class BBBRoom(models.Model):
@@ -122,7 +122,8 @@ class BBBRoom(models.Model):
     internal_meeting_id = models.CharField(max_length=100, blank=True, null=True)
     parent_meeting_id = models.CharField(max_length=100, blank=True, null=True)
     ended = models.BooleanField(default=False)
-    conference = models.ForeignKey(Conference, on_delete=models.SET_NULL, null=True, blank=True, default=None)
+    options = JSONField(blank=True, null=True, default=dict, verbose_name="room options",
+                        help_text=_("options for the room, that are represented in the bigbluebutton API"))
 
     objects = models.Manager()
 
@@ -132,13 +133,33 @@ class BBBRoom(models.Model):
     def end(self):
         bbb.end_meeting(self.meeting_id, self.moderator_password)
 
+    def get_password_for_user(self, user):
+        """ returns the room password according to the permission of a given user.
+        Returns empty string, if user is no member of the room
+
+        :return: password for the user to join the room
+        :rtype: str
+        """
+
+        if user in self.attendees:
+            return self.attendee_password
+        elif user in self.moderators:
+            return self.moderator_password
+        else:
+            return ''
+
+    def join_user(self, user, membership_status_int):
+        if membership_status_int == 2:
+            # TODO fix this to reference to MEMBERSHIP_ADMIN
+            self.moderators.add(user)
+            self.attendees.remove(user)
+        else:
+            self.attendees.add(user)
+            self.moderators.remove(user)
+
     def join_group_members(self, group):
         for membership in group.memberships.all():
-            if membership.status == 2:
-                # TODO fix this to reference to MEMBERSHIP_ADMIN
-                self.moderators.add(membership.user)
-            else:
-                self.attendees.add(membership.user)
+            self.join_user(membership.user, membership.status)
 
     @property
     def members(self):
