@@ -5,20 +5,22 @@ from django.conf.urls import include, url
 from django.urls import reverse_lazy
 from django.views.generic.base import RedirectView, TemplateView
 from rest_framework import routers, permissions
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from cosinnus_conference.api.views import ConferenceViewSet
+from cosinnus.api.views.i18n import translations
 from cosinnus.core.registries import url_registry
 from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    OrganisationViewSet, UserView, oauth_user, oauth_profile, StatisticsView
+    OrganisationViewSet, oauth_current_user, oauth_user, oauth_profile, statistics as api_statistics, current_user
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
     user_dashboard, ui_prefs, administration, user_dashboard_announcement
 from cosinnus_event.api.views import EventViewSet
-from django_otp.views import LoginView
 
 from cosinnus_note.api.views import NoteViewSet
 
@@ -235,6 +237,7 @@ urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
 router = routers.SimpleRouter()
+router.register(r'conferences', ConferenceViewSet)
 router.register(r'groups', CosinnusSocietyViewSet)
 router.register(r'projects', CosinnusProjectViewSet)
 router.register(r'organisations', OrganisationViewSet)
@@ -253,14 +256,18 @@ if getattr(settings, 'COSINNUS_EMPTY_FILE_DOWNLOAD_NAME', None):
     ]
 
 urlpatterns += [
-    url(r'^o/me/', UserView.as_view()),
+    url(r'^o/me/', oauth_current_user),
     url(r'^o/user/', oauth_user),
     url(r'^o/profile/', oauth_profile),
 ]
 
 schema_url_patterns = [
+    url(r'^api/v2/token/', obtain_jwt_token),
+    url(r'^api/v2/token/refresh/', refresh_jwt_token),
+    url(r'^api/v2/current_user/', current_user, name='api-current-user'),
+    url(r'^api/v2/statistics/', api_statistics, name='api-statistics'),
+    url(r'^api/v2/jsi18n/$', translations, name='api-jsi18n'),
     url(r'^api/v2/', include(router.urls)),
-    url(r'^api/v2/statistics/', StatisticsView.as_view(), name='api-statistics'),
 ]
 
 urlpatterns += schema_url_patterns

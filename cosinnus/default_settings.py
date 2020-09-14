@@ -203,6 +203,7 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'cosinnus_poll',
         'cosinnus_stream',
         'cosinnus_todo',
+        'cosinnus_conference',
     ]
     
     # Extra Cosinnus Apps (as defined in external project)
@@ -542,9 +543,13 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     )
 }
 
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'cosinnus.utils.jwt.jwt_response_handler'
+}
 
 SUIT_CONFIG = {
     'ADMIN_NAME': 'Wechange Admin'

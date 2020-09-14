@@ -1,20 +1,21 @@
 import json
 
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from oauth2_provider.decorators import protected_resource
-from django.views.generic.edit import FormView
 
 from cosinnus.utils.user import filter_active_users
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.tagged import BaseTagObject
-from .serializers import CosinnusSocietySerializer, CosinnusProjectSerializer, OrganisationListSerializer, \
-    OrganisationRetrieveSerializer
+from ..serializers.group import CosinnusSocietySerializer, CosinnusProjectSerializer
+from ..serializers.organisation import OrganisationListSerializer, OrganisationRetrieveSerializer
+from ..serializers.user import UserSerializer
 
 
 class PublicCosinnusGroupFilterMixin(object):
@@ -107,7 +108,7 @@ class OrganisationViewSet(PublicCosinnusGroupFilterMixin,
         return OrganisationRetrieveSerializer
 
 
-class UserView(APIView):
+class OAuthUserView(APIView):
     """
     Used by Oauth2 authentication (Rocket.Chat) to retrieve user details
     """
@@ -158,7 +159,6 @@ def oauth_profile(request):
         for field in media_tag_fields:
             media_tag_dict[field] = getattr(media_tag, field)
 
-
     return HttpResponse(json.dumps(
         {
             'avatar': profile.avatar_url,
@@ -168,6 +168,15 @@ def oauth_profile(request):
             'media_tag': media_tag_dict
         }
     ), content_type="application/json")
+
+
+@api_view(['GET'])
+def current_user(request):
+    """
+    Determine the current user by their JWT token, and return their data
+    """
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data)
 
 
 class StatisticsView(APIView):
@@ -202,3 +211,7 @@ class StatisticsView(APIView):
             pass
 
         return Response(data)
+
+
+oauth_current_user = OAuthUserView.as_view()
+statistics = StatisticsView.as_view()

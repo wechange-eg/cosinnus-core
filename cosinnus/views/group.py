@@ -5,7 +5,6 @@ import csv
 
 from builtins import zip
 from builtins import object
-from itertools import chain
 
 from django.contrib import messages
 from django.utils import timezone
@@ -32,10 +31,10 @@ from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     CosinnusGroupGalleryImage, MEMBERSHIP_INVITED_PENDING,
     CosinnusGroupCallToActionButton, CosinnusUnregisterdUserGroupInvite,
     MEMBER_STATUS)
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+from cosinnus.models.group_extra import CosinnusSociety,\
     ensure_group_type
-from cosinnus.models.serializers.group import GroupSimpleSerializer
-from cosinnus.models.serializers.profile import UserSimpleSerializer
+from cosinnus.api.serializers.group import GroupSimpleSerializer
+from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.utils.compat import atomic
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
     AjaxableFormMixin, ListAjaxableResponseMixin)
@@ -47,11 +46,11 @@ from cosinnus.views.mixins.avatar import AvatarFormMixin
 from cosinnus.core import signals
 from cosinnus.core.registries.group_models import group_model_registry
 from multiform.forms import InvalidArgument
-from extra_views import (CreateWithInlinesView, FormSetView, InlineFormSet,
-    UpdateWithInlinesView)
+from extra_views import (CreateWithInlinesView, InlineFormSet,
+                         UpdateWithInlinesView)
 
 from cosinnus.forms.tagged import get_form  # circular import
-from cosinnus.utils.urls import group_aware_reverse, get_non_cms_root_url
+from cosinnus.utils.urls import get_non_cms_root_url
 from cosinnus.models.tagged import BaseTagObject, BaseTaggableObjectReflection
 from django.shortcuts import redirect, get_object_or_404
 from django.http.response import Http404, HttpResponseNotAllowed,\
@@ -71,8 +70,7 @@ from cosinnus.utils.functions import resolve_class
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
 import logging
-from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name,\
-    textfield, has_write_access
+from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name
 from django.core.validators import validate_email
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import AnonymousUser
@@ -80,7 +78,6 @@ from django.template.loader import render_to_string
 from cosinnus import cosinnus_notifications
 import datetime
 from django.utils.timezone import now
-from django.db import transaction
 from django.utils.html import escape
 from copy import deepcopy
 from django.utils.safestring import mark_safe
@@ -966,7 +963,7 @@ group_update_api = GroupUpdateView.as_view(is_ajax_request_url=True)
 
 class GroupUserListView(ListAjaxableResponseMixin, RequireReadMixin, ListView):
 
-    serializer_class = UserSimpleSerializer
+    serializer_class = UserSerializer
     template_name = 'cosinnus/group/group_user_list.html'
 
     def get_queryset(self):
