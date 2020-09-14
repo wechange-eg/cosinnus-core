@@ -2,6 +2,7 @@
 
 {% group_url 'cosinnus:group-detail' group=group as group_detail_page %}
 {% group_url 'cosinnus:conference-management' group=group as conference_management_page %}
+{% group_url 'cosinnus:conference-room-management' group=group as conference_room_management_page %}
 {% group_url 'cosinnus:group-edit' group=group as group_edit_page %}
 {% group_url 'cosinnus:group-dashboard' group=group as group_dashboard_page %}
 {% group_url 'cosinnus:group-microsite' group=group as group_microsite_page %}
@@ -56,13 +57,20 @@
 	        </li>
         {% endfor %}
 
-        {% if user|has_write_access:group and group.is_group_and_conference %}
-        <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %}">
-            <a href="{{ conference_management_page }}">
-                <i class="fas fa-chalkboard-teacher"></i>
-                {% trans "Conference Management" %}
-            </a>
-        </li>
+        {% if user|has_write_access:group and group.group_is_conference %}
+	        <li class="app-main appnavi-listelement fine-space">
+	            <a href="{{ conference_management_page }}">
+	                <i class="fas fa-chalkboard-teacher"></i>
+	                {% trans "Conference Management" %}
+	            </a>
+	        </li>
+	        
+            <li class="app-main appnavi-listelement fine-space">
+                <a href="{{ conference_room_management_page }}">
+                    <i class="fas fa-door-open"></i>
+                    {% trans "Conference Room Management" %}
+                </a>
+            </li>
         {% endif%}
 
         <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %}">

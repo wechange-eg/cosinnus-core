@@ -6,6 +6,7 @@ from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
 from cosinnus.utils.user import assign_user_to_default_auth_group, \
     ensure_user_to_default_portal_groups
 from django.contrib.auth import get_user_model
+from django.db.models import Q
 from django.db.models.signals import post_delete, post_save, pre_save
 from django.dispatch.dispatcher import receiver
 
@@ -22,13 +23,16 @@ from django.db import transaction
 
 from cosinnus.core.middleware.login_ratelimit_middleware import login_ratelimit_triggered
 from django.utils.encoding import force_text
-
 from cosinnus.conf import settings
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.contrib.contenttypes.models import ContentType
 from annoying.functions import get_object_or_None
 from cosinnus.utils.dashboard import ensure_group_widget
 from cosinnus.models.widget import WidgetConfig
+from cosinnus.models.bbb_room import BBBRoom
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from cosinnus.utils import bigbluebutton as bbb
 
 logger = logging.getLogger('cosinnus')
 
@@ -185,6 +189,13 @@ def group_cloud_app_activated_sub(sender, group, apps, **kwargs):
     """ Whenever a group app is activated, make sure all dashboard widgets have a config instance. """
     for app_name, widget_name, options in settings.COSINNUS_INITIAL_GROUP_WIDGETS:
         ensure_group_widget(group, app_name, widget_name, WidgetConfig.TYPE_DASHBOARD, options)
+
+
+# """ Called after a CosinusGroupMembership is changed, to apply changes to BBBRoom models in conference """
+# @receiver(post_save, sender=CosinnusGroupMembership)
+# def update_bbbroom_membership(sender, instance, signal, created, *args, **kwargs):
+#     rooms = BBBRoom.objects.filter(
+#         Q(attendees__id__in=[instance.user.id]) | Q(moderators__id__in=[instance.user.id]) | Q())
 
 
 from cosinnus.apis.cleverreach import *

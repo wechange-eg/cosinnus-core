@@ -22,9 +22,11 @@ from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.http import is_safe_url
 from django.contrib.redirects.middleware import RedirectFallbackMiddleware
-from cosinnus.utils.urls import redirect_next_or
+from cosinnus.utils.urls import redirect_next_or, group_aware_reverse
 from django.contrib.sessions.middleware import SessionMiddleware
-from cosinnus.utils.permissions import check_user_superuser
+from cosinnus.utils.permissions import check_user_superuser, check_ug_membership,\
+    check_ug_admin
+from annoying.functions import get_object_or_None
 
 
 logger = logging.getLogger('cosinnus')
@@ -162,23 +164,44 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
                 from cosinnus.core.registries.group_models import group_model_registry
                 GROUP_TYPES = [url_key for url_key in group_model_registry]
             
+            # split URL into non-empty parts
             request_tokens = request.build_absolute_uri().split('/')
+            request_tokens = [token for token in request_tokens if token and not token.startswith('?')]
+            
             # if URL might be a link to a group
-            if len(request_tokens) >= 5: 
-                group_type = request_tokens[3]
-                group_slug = request_tokens[4]
+            if len(request_tokens) >= 4: 
+                group_type = request_tokens[2]
+                group_slug = request_tokens[3]
                 if group_type in GROUP_TYPES:
+                    # check permanent redirects to a group
                     to_group = CosinnusPermanentRedirect().get_group_for_pattern(CosinnusPortal().get_current(), group_type, group_slug)
                     if to_group:
                         # redirect to the redirect with HttpResponsePermanentRedirect
-                        redirect_url = ''.join((to_group.get_absolute_url(), '/'.join(request_tokens[5:])))
+                        redirect_url = ''.join((to_group.get_absolute_url(), '/'.join(request_tokens[4:])))
                         messages.success(request, _('This team no longer resides under the URL you entered. You have been redirected automatically to the current location.'))
                         return HttpResponseRedirect(redirect_url)
+                    
+                    # check user-specific redirects (forcing users out of certain group urls
+                    if request.user.is_authenticated:
+                        from cosinnus.core.registries.group_models import group_model_registry
+                        target_group_cls = group_model_registry.get(group_type) 
+                        portal = CosinnusPortal().get_current()
+                        target_group = get_object_or_None(target_group_cls, portal=portal, slug=group_slug)
+                        if target_group:
+                            # *** Conferences: force most URLs to conference page ***
+                            # if the group is a conference group, and the user is only a member, not an admin:
+                            if target_group is not None and target_group.group_is_conference and check_ug_membership(request.user, target_group):
+                                # normal users only have access to the conference page of a conference group (and the management views)
+                                print(str(len(request_tokens)) + ':: ' + str(request_tokens))
+                                is_admin = check_ug_admin(request.user, target_group) or check_user_superuser(request.user, portal)
+                                if len(request_tokens) <= 4 or (request_tokens[4] not in ['conference', 'members', 'leave'] and not is_admin):
+                                    # bounce user to the conference start page (admins get bounced on index page)
+                                    return HttpResponseRedirect(group_aware_reverse('cosinnus:conference-page-index', kwargs={'group': target_group}))
+                        
         except Exception as e:
             if settings.DEBUG:
                 raise
             logger.error('cosinnus.GroupPermanentRedirectMiddleware: Error while processing possible group redirect!', extra={'exception', force_text(e)})
-
 
 
 class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):

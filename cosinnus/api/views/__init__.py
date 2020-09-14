@@ -122,7 +122,7 @@ class OAuthUserView(APIView):
             return Response({
                 'success': True,
                 'id': user.username if user.username.isdigit() else str(user.id),
-                'email': user.email,
+                'email': user.email.lower(),
                 'name': user.get_full_name(),
                 'avatar': avatar_url,
             })

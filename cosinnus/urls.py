@@ -19,7 +19,7 @@ from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
     OrganisationViewSet, oauth_current_user, oauth_user, oauth_profile, statistics as api_statistics, current_user
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
-    user_dashboard, ui_prefs, administration, user_dashboard_announcement
+    user_dashboard, ui_prefs, administration, user_dashboard_announcement, conference
 from cosinnus_event.api.views import EventViewSet
 
 from cosinnus_note.api.views import NoteViewSet
@@ -200,10 +200,16 @@ for url_key in group_model_registry:
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/$' % url_key, 'cms.group_microsite', name=prefix+'group-microsite'),
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/edit/$' % url_key, 'cms.group_microsite_edit', name=prefix+'group-microsite-edit'),
         url(r'^%s/(?P<group>[^/]+)/members/$' % url_key, group.group_detail, name=prefix+'group-detail'),
-        url(r'^%s/(?P<group>[^/]+)/conference-management/$' % url_key, group.conference_management, name=prefix+'conference-management'),
-        url(r'^%s/(?P<group>[^/]+)/workshop-participants-upload/$' % url_key, group.workshop_participants_upload, name=prefix+'workshop-participants-upload'),
-        url(r'^%s/(?P<group>[^/]+)/workshop-participants-upload-skeleton/$' % url_key, group.workshop_participants_upload_skeleton, name=prefix+'workshop-participants-upload-skeleton'),
-        url(r'^%s/(?P<group>[^/]+)/workshop-participants-download/$' % url_key, group.workshop_participants_download, name=prefix+'workshop-participants-download'),
+        url(r'^%s/(?P<group>[^/]+)/conference-management/$' % url_key, conference.conference_management, name=prefix+'conference-management'),
+        url(r'^%s/(?P<group>[^/]+)/conference-room-management/$' % url_key, conference.conference_room_management, name=prefix+'conference-room-management'),
+        url(r'^%s/(?P<group>[^/]+)/conference-room-management/add/$' % url_key, conference.conference_room_add, name=prefix+'conference-room-add'),
+        url(r'^%s/(?P<group>[^/]+)/conference-room-management/edit/(?P<slug>[^/]+)/$' % url_key, conference.conference_room_edit, name=prefix+'conference-room-edit'),
+        url(r'^%s/(?P<group>[^/]+)/conference-room-management/delete/(?P<slug>[^/]+)/$' % url_key, conference.conference_room_delete, name=prefix+'conference-room-delete'),
+        url(r'^%s/(?P<group>[^/]+)/conference/$' % url_key, conference.conference_page, name=prefix+'conference-page-index'),
+        url(r'^%s/(?P<group>[^/]+)/conference/(?P<slug>[^/]+)/$' % url_key, conference.conference_page, name=prefix+'conference-page-room'),
+        url(r'^%s/(?P<group>[^/]+)/workshop-participants-upload/$' % url_key, conference.workshop_participants_upload, name=prefix+'workshop-participants-upload'),
+        url(r'^%s/(?P<group>[^/]+)/workshop-participants-upload-skeleton/$' % url_key, conference.workshop_participants_upload_skeleton, name=prefix+'workshop-participants-upload-skeleton'),
+        url(r'^%s/(?P<group>[^/]+)/workshop-participants-download/$' % url_key, conference.workshop_participants_download, name=prefix+'workshop-participants-download'),
         url(r'^%s/(?P<group>[^/]+)/members/recruit/$' % url_key, group.group_user_recruit, name=prefix+'group-user-recruit'),
         url(r'^%s/(?P<group>[^/]+)/members/recruitdelete/(?P<id>\d+)/$' % url_key, group.group_user_recruit_delete, name=prefix+'group-user-recruit-delete'),
         #url(r'^%s/(?P<group>[^/]+)/members/map/$' % url_key, group.group_members_map', name=prefix+'group-members-map'),
