@@ -2,11 +2,44 @@
 import uuid
 import time
 from django.test import TestCase
-from cosinnus.models.bbb_room import BBBRoom
+from cosinnus.models.bbb_room import BBBRoom, Conference
 from cosinnus.apis import bigbluebutton as bbb
 from django.contrib.auth.models import User
 from cosinnus.models import CosinnusGroup, CosinnusGroupMembership
 
+#
+# class ConferenceTest(TestCase):
+#     def setUp(self):
+#         self.moderator = User.objects.create_user(
+#             username="moderator",
+#             email="moderator@example.org",
+#             is_superuser=True,
+#             is_staff=True
+#         )
+#
+#         self.attendee = User.objects.create_user(
+#             username="attendee",
+#             email="attendee@example.org",
+#             is_superuser=True,
+#             is_staff=True
+#         )
+#
+#         self.outsider = User.objects.create_user(
+#             username="outsider",
+#             email="outsider@example.org",
+#             is_superuser=True,
+#             is_staff=True
+#         )
+#
+#         self.group = CosinnusGroup(name="BBB Test")
+#         self.group.save()
+#
+#         membership = CosinnusGroupMembership(group=self.group, user=self.moderator, status=2)
+#         membership.save()
+#
+#         membership = CosinnusGroupMembership(group=self.group, user=self.attendee, status=1)
+#         membership.save()
+#
 
 class BBBRoomTest(TestCase):
     def setUp(self):
