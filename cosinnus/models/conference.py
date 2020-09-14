@@ -128,7 +128,7 @@ class CosinnusConferenceRoom(models.Model):
     class Meta(object):
         ordering = ('sort_index', 'title')
         verbose_name = _('Conference Room')
-        verbose_name_plural = _('CConference Rooms')
+        verbose_name_plural = _('Conference Rooms')
         unique_together = ('slug', 'group', )
 
     def __init__(self, *args, **kwargs):
