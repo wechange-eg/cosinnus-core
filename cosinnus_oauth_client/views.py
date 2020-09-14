@@ -45,7 +45,7 @@ class CosinnusOauthClientAdapter(OAuth2Adapter):
 
     def complete_login(self, request, app, token, **kwargs):
         url = self.user_url
-        headers = {'Authorization': 'Bearer {0}'.format(token.token)}
+        headers = {'Authorization': 'Bearer {0}'.format(token.meeting_id)}
         resp = requests.get(url, headers=headers)
         resp.raise_for_status()
         extra_data = resp.json()
