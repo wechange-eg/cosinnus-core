@@ -150,7 +150,7 @@ class BaseTagObject(models.Model):
     likers = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         related_name='likes+')  # no reverse relation on model
 
-    bbb_room = models.ForeignKey(BBBRoom, null=True, blank=True, on_delete=models.SET_NULL,
+    bbb_room = models.ForeignKey(BBBRoom, null=True, blank=True, on_delete=models.SET_NULL, related_name="tagged_objects",
                                  verbose_name=_("BigBlueButton conversation room"))
     
     def save(self, *args, **kwargs):

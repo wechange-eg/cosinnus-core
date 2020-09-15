@@ -2,44 +2,11 @@
 import uuid
 import time
 from django.test import TestCase
-from cosinnus.models.bbb_room import BBBRoom, Conference
+from cosinnus.models.bbb_room import BBBRoom
 from cosinnus.apis import bigbluebutton as bbb
 from django.contrib.auth.models import User
 from cosinnus.models import CosinnusGroup, CosinnusGroupMembership
 
-#
-# class ConferenceTest(TestCase):
-#     def setUp(self):
-#         self.moderator = User.objects.create_user(
-#             username="moderator",
-#             email="moderator@example.org",
-#             is_superuser=True,
-#             is_staff=True
-#         )
-#
-#         self.attendee = User.objects.create_user(
-#             username="attendee",
-#             email="attendee@example.org",
-#             is_superuser=True,
-#             is_staff=True
-#         )
-#
-#         self.outsider = User.objects.create_user(
-#             username="outsider",
-#             email="outsider@example.org",
-#             is_superuser=True,
-#             is_staff=True
-#         )
-#
-#         self.group = CosinnusGroup(name="BBB Test")
-#         self.group.save()
-#
-#         membership = CosinnusGroupMembership(group=self.group, user=self.moderator, status=2)
-#         membership.save()
-#
-#         membership = CosinnusGroupMembership(group=self.group, user=self.attendee, status=1)
-#         membership.save()
-#
 
 class BBBRoomTest(TestCase):
     def setUp(self):
@@ -121,6 +88,58 @@ class BBBRoomTest(TestCase):
         # test joining with wrong credentials
         xml_result = bbb.xml_join("No Name", room.meeting_id, "abcdefg")
         self.assertEqual(xml_result, None)
+
+    def test_membership_signals(self):
+        moderator = User.objects.create_user(
+            username="signal_moderator",
+            email="signalmoderator@example.org",
+            is_superuser=True,
+            is_staff=True
+        )
+
+        attendee = User.objects.create_user(
+            username="signal_attendee",
+            email="signalattendee@example.org",
+            is_superuser=True,
+            is_staff=True
+        )
+
+        outsider = User.objects.create_user(
+            username="signal_outsider",
+            email="signaloutsider@example.org",
+            is_superuser=True,
+            is_staff=True
+        )
+
+        group = CosinnusGroup(name="BBB Test")
+        group.save()
+
+        membership1 = CosinnusGroupMembership(group=group, user=moderator, status=2)
+        membership1.save()
+
+        membership2 = CosinnusGroupMembership(group=group, user=attendee, status=1)
+        membership2.save()
+
+        room = BBBRoom.create(
+            name="SIGNAL TEST",
+            meeting_id="signal-test",
+            meeting_welcome="meant to be end",
+        )
+
+        time.sleep(2)
+        room.join_group_members(group)
+
+        membership1.status = 1
+
+        membership1.save()
+        self.assertEqual(len(room.moderators.all()), 1)
+
+        membership2.delete()
+        self.assertEqual(len(room.attendees.all()), 1)
+
+        # membership3 = CosinnusGroupMembership(group=group, user=outsider, status=1)
+        # membership3.save()
+        # self.assertEqual(len(room.attendees.all()), 2)
 
     def test_end_meeting_via_bbb(self):
         room = BBBRoom.create(

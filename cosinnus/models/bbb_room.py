@@ -40,36 +40,6 @@ def random_voice_bridge():
 
     return random_pin
 
-#
-# class Conference(models.Model):
-#     """ This model is a wrapper to organize conferences to bundle a bunch of BBBRooms.
-#
-#      :var start: Starting date of the conference
-#      :type: datetime
-#
-#      :var end: Ending date of the conference
-#      :type: datetime
-#
-#      :var name: Name or headline of the conference
-#      :type: str
-#
-#      :var description: Verbose description and information of the conference
-#      :type: str
-#
-#      :var group: The group that is associated with the conference
-#      :type: CosinusGroup
-#      """
-#
-#     start = models.DateTimeField(default=timezone.now)
-#     end = models.DateTimeField(null=True, blank=True, default=None)
-#     name = models.CharField(max_length=300, null=True, blank=True)
-#     description = models.TextField(help_text=_("verbose description of the conference"))
-#     group = models.ForeignKey('CosinnusGroup', on_delete=models.CASCADE, verbose_name="conference group",
-#                               help_text=_("group associated with the conference"))
-#
-#     def __str__(self):
-#         return self.name
-
 
 class BBBRoom(models.Model):
     """ This model represents a video/audio conference call with participants and/or presenters
@@ -160,6 +130,10 @@ class BBBRoom(models.Model):
             return self.moderator_password
         else:
             return ''
+
+    def remove_user(self, user):
+        self.moderators.remove(user)
+        self.attendees.remove(user)
 
     def join_user(self, user, membership_status_int):
         if membership_status_int == 2:
