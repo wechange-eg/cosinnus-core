@@ -124,6 +124,30 @@
                 
             </div>
         {% endblock description %}
+
+
+        {% block sdgs %}
+        {% if sdgs|length > 0 and controlView.allSDGS|length > 0 %}
+        <p>
+            <b>
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Sustainable Development Goals" %}
+            </b>
+        </p>
+        <p>
+
+        {% for sdg_id in sdgs %}
+            {% for sdg in controlView.allSDGS %}
+                {% if sdg_id == sdg.id %}
+                <img class="sdg-icon" src="{{ sdg.icon }}">
+                {% endif %}
+            {% endfor %}
+        {% endfor%}
+        </p>
+        {% endif %}
+        {% endblock %}
+
+        
         
         
         {% block related_content %}

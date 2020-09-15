@@ -40,6 +40,26 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 	            {% endfor %}
 	        </div>
         {% endif %}
+
+        {% if allSDGS|length > 0 %}
+        <h1>
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Sustainable Development Goals" %}
+        </h1>
+
+        <div class="button-list">
+            {% for sdg in allSDGS %}
+                {% if sdg.id != "" and sdg %}
+                    <a class="rounded-button button-color-topic sdg-button" data-sdg-id="{{ sdg.id }}">
+                        <span class="rounded-button-inner sdg-button-inner">
+                            {{ sdg.id }}: {{ sdg.name }}
+                            <img class="sdg-icon sdg-icon-pos-abs sdg-icon-hidden" src="{{ sdg.icon }}">
+                        </span>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
         
         <h1>
             {# Translators: __INCLUDE_JS_PO__ #}
@@ -58,7 +78,8 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
                 {% endif %}
             {% endfor %}
         </div>
-        
+
+      
         {% if splitscreen %}
 	        <h1>
 	            {# Translators: __INCLUDE_JS_PO__ #}
