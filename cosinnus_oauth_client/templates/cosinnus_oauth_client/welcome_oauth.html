@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n static cosinnus_tags djajax_tags widget_tweaks %}
 
-{% block page_title %}{% trans "Signup" %}{% endblock %}
+{% block page_title %}{% trans "Welcome" %}{% endblock %}
 
 {% block main_page %}
 
@@ -34,7 +34,7 @@
 {% endcaptureas %}
 
 {% captureas custom_button_html %}
-<button class="pull-right btn btn-emphasized btn-autosize" href="{% url 'cosinnus:user-dashboard' %}" >
+<button class="pull-right btn btn-emphasized btn-autosize" {% if SETTINGS.COSINNUS_SHOW_WELCOME_SETTINGS_PAGE %}href="{% url 'cosinnus:welcome-settings' %}" {% else %}href="{% url 'cosinnus:user-dashboard' %}" {% endif %}>
     <ul class="media-list">
         <li class="media">
             <a class="pull-left" href="#">
