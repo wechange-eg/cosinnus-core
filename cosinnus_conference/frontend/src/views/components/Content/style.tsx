@@ -2,7 +2,7 @@ import {Grid} from "@material-ui/core"
 import { styled } from "@material-ui/core/styles"
 
 export const Content = styled(Grid)(({ theme }) => ({
-  flexGrow: 1,
+  flex: 1,
   padding: "2rem",
   "& h1": {
     fontSize: "1rem",

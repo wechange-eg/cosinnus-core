@@ -4,7 +4,6 @@ export const useStyles = makeStyles((theme) => ({
   card: {
     background: theme.palette.primary.contrastText,
     width: "100%",
-    height: "6rem",
     "& > div": {
       padding: "1rem",
       paddingBottom: "1rem !important",

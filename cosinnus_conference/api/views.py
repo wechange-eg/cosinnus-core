@@ -174,6 +174,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
             {
                 "id": 1,
                 "name": "Topic of the coffee table",
+                "image_url": "/path/to/image.png",
                 "participants": [
                     {
                         "id": 1,
@@ -201,6 +202,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
             {
                 "id": 2,
                 "name": "Topic of the coffee table",
+                "image_url": "/path/to/image.png",
                 "participants": [
                     {
                         "id": 1,
@@ -228,6 +230,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
             {
                 "id": 3,
                 "name": "Topic of the coffee table",
+                "image_url": "/path/to/image.png",
                 "participants": [
                     {
                         "id": 1,
@@ -255,31 +258,31 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
         ])
 
     @action(detail=True, methods=['get'])
-    def networking_channels(self, request, pk=None):
+    def channels(self, request, pk=None):
         return Response([
             {
                 "id": 1,
-                "name": "*Completely random*",
+                "name": "Completely random",
             },
             {
                 "id": 2,
-                "name": "Someone who *you are not connected with*",
+                "name": "Someone who you are not connected with",
             },
             {
                 "id": 3,
-                "name": "Someone who *is based in another country* than you",
+                "name": "Someone who is based in another country than you",
             },
             {
                 "id": 4,
-                "name": "Someone who *is working on the same topic(s)*",
+                "name": "Someone who is working on the same topic(s)",
             },
             {
                 "id": 5,
-                "name": "Someone who *is a cat person*",
+                "name": "Someone who is a cat person",
             },
             {
                 "id":6,
-                "name": "Someone who *is a dog person*",
+                "name": "Someone who is a dog person",
             },
         ])
 
@@ -291,20 +294,23 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "name": "Organisation 1",
                 "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                 "topics": ["One", "Two", "Three"],
-                "location": "Location"
+                "location": "Location",
+                "image_url": "/path/to/image.png",
             },
             {
                 "id": 2,
                 "name": "Organisation 2",
                 "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                 "topics": ["One", "Two", "Three"],
-                "location": "Location"
+                "location": "Location",
+                "image_url": "/path/to/image.png",
             },
             {
                 "id": 3,
                 "name": "Organisation 3",
                 "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                 "topics": ["One", "Two", "Three"],
-                "location": "Location"
+                "location": "Location",
+                "image_url": "/path/to/image.png",
             },
         ])

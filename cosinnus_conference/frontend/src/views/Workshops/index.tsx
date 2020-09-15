@@ -41,7 +41,7 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
     fetchWorkshops()
   }
   const classes = useStyles()
-  const iFrameclasses = useIframeStyles()
+  const iFrameClasses = useIframeStyles()
   const currentWorkshops = workshops && workshops.filter((w) => w.isNow()) || []
   const upcomingWorkshops = workshops && workshops.filter((w) => !w.isNow()) || []
   return (
@@ -81,7 +81,7 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
           url="https://chat.wechange.de/channel/general"
           width="100%"
           height="100%"
-          className={iFrameclasses.iframe}
+          className={iFrameClasses.iframe}
         />
       )} />
     </Grid>

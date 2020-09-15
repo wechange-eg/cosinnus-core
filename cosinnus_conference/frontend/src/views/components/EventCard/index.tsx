@@ -55,6 +55,7 @@ export function EventCard(props: EventCardProps) {
             </div>
           ) || (
             <div>
+              {/*
               <Link href="#" className={classes.link}>
                 <FontAwesomeIcon icon={faUserPlus} />
               </Link>
@@ -64,6 +65,7 @@ export function EventCard(props: EventCardProps) {
               <Link href="#" className={classes.link}>
                 <FontAwesomeIcon icon={faCalendarPlus} />
               </Link>
+              */}
             </div>
           )}
         </div>

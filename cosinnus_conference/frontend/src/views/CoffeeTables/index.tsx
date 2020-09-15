@@ -62,12 +62,14 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
           || <Typography><FormattedMessage id="No current coffee tables." defaultMessage="No current coffee tables." /></Typography>
         }
         </div>
+        {/*
         <div className={classes.section}>
           <Button href="#">
             <FontAwesomeIcon icon={faPlus} />&nbsp;
             <FormattedMessage id="Start your own Coffee Table" defaultMessage="Start your own Coffee Table" />
           </Button>
         </div>
+        */}
       </Content>
       <Sidebar elements={(
         <Iframe
