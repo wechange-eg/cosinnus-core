@@ -140,6 +140,7 @@ module.exports = ContentControlView.extend({
         'focus .q': 'showFilterPanel',
         'click .reset-type-filters': 'resetTypeFiltersClicked',
         'click .reset-topic-filters': 'resetTopicFiltersClicked',
+        'click .reset-sdg-filters': 'resetSDGFiltersClicked',
         'click .reset-q': 'resetQClicked',
         'click .reset-type-and-topic-filters': 'resetAllClicked', // use this to only reset the filters box: 'resetTypeAndTopicFiltersClicked',
         'click .active-filters': 'showFilterPanel',
@@ -239,6 +240,16 @@ module.exports = ContentControlView.extend({
         event.preventDefault();
         event.stopPropagation();
         this.resetTopics();
+        this.render();
+        this.clearDetailResultCache();
+        var searchReason = 'reset-filters-search';
+        this.triggerDelayedSearch(true, false, false, searchReason);
+    },
+
+    resetSDGFiltersClicked: function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.resetSDGS();
         this.render();
         this.clearDetailResultCache();
         var searchReason = 'reset-filters-search';
@@ -1207,7 +1218,7 @@ module.exports = ContentControlView.extend({
         }
         if (this.state.activeSDGIds.length > 0) {
             _.extend(searchParams, {
-                sdgs: this.state.activeSDGIds
+                sdgs: this.state.activeSDGIds.join(',')
             });
         }
         if (this.state.pageIndex > 0) {

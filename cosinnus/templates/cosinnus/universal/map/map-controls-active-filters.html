@@ -1,6 +1,6 @@
 {% load i18n %}
 
-{% if typeFiltersActive or topicFiltersActive or q %}
+{% if typeFiltersActive or topicFiltersActive or q or sdgFiltersActive %}
     <div class="map-controls-active-filter-frame">
 
         {% if typeFiltersActive %}
@@ -64,7 +64,7 @@
                         {% endfor %}
                     {% endfor %}
                 </span>
-                <i class="fa fa-close clickable-button reset-topic-filters"></i>
+                <i class="fa fa-close clickable-button reset-sdg-filters"></i>
             </div>
         {% endif %}
         
