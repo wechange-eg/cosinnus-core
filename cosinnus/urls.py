@@ -1,28 +1,29 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from cosinnus_event.api.views import EventViewSet
+
 from django.conf.urls import include, url
 from django.urls import reverse_lazy
 from django.views.generic.base import RedirectView, TemplateView
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 from rest_framework import routers, permissions
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
 
-from cosinnus_conference.api.views import ConferenceViewSet
-from cosinnus.api.views.i18n import translations
-from cosinnus.core.registries import url_registry
-from cosinnus.conf import settings
-from cosinnus.core.registries.group_models import group_model_registry
-from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
     OrganisationViewSet, oauth_current_user, oauth_user, oauth_profile, statistics as api_statistics, current_user
-from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
-    statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
-    user_dashboard, ui_prefs, administration, user_dashboard_announcement, conference
-from cosinnus_event.api.views import EventViewSet
-
+from cosinnus.api.views.i18n import translations
+from cosinnus.conf import settings
+from cosinnus.core.registries import url_registry
+from cosinnus.core.registries.group_models import group_model_registry
+from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
+from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
+    statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
+    user_dashboard, ui_prefs, administration, user_dashboard_announcement, conference, bbb_room
+from cosinnus_conference.api.views import ConferenceViewSet
 from cosinnus_note.api.views import NoteViewSet
+
 
 app_name = 'cosinnus'
 
@@ -62,6 +63,7 @@ urlpatterns = [
     
     url(r'^likefollow/$', common.do_likefollow,  name='likefollow-view'),
     
+    url(r'^bbb/room/(?P<room_id>\d+)/$', bbb_room.bbb_room_meeting, name='bbb-room'),
     
     url(r'^invitations/$', group.group_list_invited, name='invitations', kwargs={'show_all': True}),
     url(r'^welcome/$', user.welcome_settings, name='welcome-settings'),

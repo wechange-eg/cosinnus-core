@@ -73,7 +73,10 @@ def random_voice_bridge():
 
 class BBBRoom(models.Model):
     """ This model represents a video/audio conference call with participants and/or presenters
-
+    
+    :var portal: The base portal
+    :type: group.CosinusBaseGroup
+    
     :var presenter: User that has the presenter role if any
     :type: auth.User
 
@@ -98,6 +101,8 @@ class BBBRoom(models.Model):
     :var max_attendees: Message that is displayed when enterin the conversation
     :type: str
     """
+    portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='bbb_rooms', 
+        null=False, blank=False, default=1, on_delete=models.CASCADE) # port_id 1 is created in a datamigration!
 
     presenter = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name="presenter",
                                   help_text=_("this user will enter the BBB presenter mode for this conversation"))
@@ -129,6 +134,14 @@ class BBBRoom(models.Model):
 
     def __str__(self):
         return str(self.meeting_id)
+    
+    def save(self, *args, **kwargs):
+        """ Assign current portal """
+        created = bool(self.pk is None)
+        if created and not self.portal:
+            from cosinnus.models.group import CosinnusPortal
+            self.portal = CosinnusPortal.get_current()
+        super(BBBRoom, self).save(*args, **kwargs)
 
     def end(self):
         bbb.end_meeting(self.meeting_id, self.moderator_password)
