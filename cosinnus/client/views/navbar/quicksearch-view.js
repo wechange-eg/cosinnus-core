@@ -27,6 +27,8 @@ module.exports = BaseView.extend({
     	},
     	// this will be added to the state.topicsSearchMethods for matching topics
     	topicsUrl: '/map/?topics={{t}}',
+        sdgSearchMethods: {},
+        sdgsUrl: '/map/?sdgs={{t}}',
         
         state: {
         	loading: false, // if true, a request is currently loading
@@ -128,7 +130,18 @@ module.exports = BaseView.extend({
     			topicsSearchMethods[title] = url;
     		}
     	}
-    	self.state.topicsSearchMethods = topicsSearchMethods
+
+        var sdgSearchMethods = {};
+        for (var sdg of self.options.sdgsJson) {
+            if (sdg.name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+                var title = util.iReplace(sdg.name, query, '<b>$1</b>')
+                var url = self.options.sdgsUrl.replace('{{t}}', sdg.id);
+                sdgSearchMethods[title] = url;
+            }
+        }
+
+        self.state.topicsSearchMethods = topicsSearchMethods
+    	self.state.sdgSearchMethods = sdgSearchMethods
     	
     	self.state.query = query || null;
     	self.state.quicksearchResults = [];
