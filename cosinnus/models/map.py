@@ -194,6 +194,7 @@ class HaystackMapResult(BaseMapResult):
             'description': textfield(result.description),
             'relevance': result.score,
             'topics': result.mt_topics,
+            'sdgs': result.sdgs,
             'portal': portal,
             'group_slug': result.group_slug,
             'group_name': result.group_name,

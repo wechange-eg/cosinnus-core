@@ -47,6 +47,26 @@
                 <i class="fa fa-close clickable-button reset-topic-filters"></i>
             </div>
         {% endif %}
+
+        {% if sdgFiltersActive %}
+            <div class="active-filters active-filters-sdgs">
+                <span class="active-filters-inner">
+                    <span class="caps">
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "SDGS" %}:
+                    </span>
+                    {% for sdg_id in activeSDGIds %}
+                        {% set outer_loop = loop %}
+                        {% for sdg in allSDGS %}
+                            {% if sdg and sdg_id == sdg.id %}
+                                <span>{{ sdg.name }}{% if not outer_loop.last %}, {% endif %}</span>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </span>
+                <i class="fa fa-close clickable-button reset-topic-filters"></i>
+            </div>
+        {% endif %}
         
         {% if q %}
             <div class="active-filters active-filters-q">
