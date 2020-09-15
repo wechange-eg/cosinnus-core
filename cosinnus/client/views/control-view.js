@@ -34,6 +34,7 @@ module.exports = ContentControlView.extend({
         availableFilterList: [], // contains availableFilters keys that are true, generated on initialize
         
         allTopics: {},  // the dict of all searchable topics
+        allSDGS: {},
         portalInfo: {}, // portal info by portal-id, from `get_cosinnus_portal_info()`
         controlsEnabled: true,
         filterGroup: null,
@@ -52,9 +53,11 @@ module.exports = ContentControlView.extend({
             // current query
             q: '', // URL param. 
             activeTopicIds: [],
+            activeSDGIds: [],
             filtersActive: false, // URL param.  if true, any filter is active and we display a reset-filter button
             typeFiltersActive: false, // URL param.  a result type filter is active
             topicFiltersActive: false, // URL param.  a topic filter is active
+            sdgFiltersActive: false,
             ignoreLocation: false, // if true, search ignores all geo-loc and even shows results without tagged location
             searching: false,
             searchHadErrors: false,
@@ -144,6 +147,11 @@ module.exports = ContentControlView.extend({
         
         'keyup .q': 'handleTyping',
         'keydown .q': 'handleKeyDown',
+
+        'click .sdg-button': 'toggleSDGFilterButton',
+        'mouseenter .sdg-button': 'showIcon',
+        'mouseleave .sdg-button': 'hideIcon',
+        'mouseenter .sdg-icon': 'hideIcon'
     },
 
     // Event Handlers
@@ -166,6 +174,24 @@ module.exports = ContentControlView.extend({
         // mark search box as searchable
         this.markSearchBoxSearchable();
     },
+
+    toggleSDGFilterButton: function (event) {
+        event.preventDefault();
+        var $button = $(event.currentTarget);
+        // check if all buttons of this type are selected.
+        //  if so, make this click only select this button (deselect all others)
+        if ($button.hasClass('result-filter-button') &&
+            this.$el.find('.result-filter-button').length == this.$el.find('.result-filter-button.selected').length) {
+            this.$el.find('.result-filter-button').removeClass('selected');
+        } else if ($button.hasClass('sdg-button') &&
+            this.$el.find('.sdg-button').length == this.$el.find('.sdg-button.selected').length) {
+            this.$el.find('.sdg-button').removeClass('selected');
+        }
+        // toggle the button
+        $button.toggleClass('selected');
+        // mark search box as searchable
+        this.markSearchBoxSearchable();
+    },
     
     /** Reset all types of input filters and trigger a new search */
     resetAllClicked: function (event) {
@@ -180,6 +206,7 @@ module.exports = ContentControlView.extend({
     resetAll: function () {
         this.state.q = '';
         this.resetTopics();
+        this.resetSDGS();
         this.resetTypeFilters();
         this.clearDetailResultCache();
     },
@@ -187,6 +214,10 @@ module.exports = ContentControlView.extend({
     /** Internal state reset of filtered topics */
     resetTopics: function () {
         this.state.activeTopicIds = [];
+    },
+
+    resetSDGS: function () {
+        this.state.activeSDGIds = [];
     },
     
     /** Internal state reset of filtered result types */
@@ -370,11 +401,11 @@ module.exports = ContentControlView.extend({
         this._resetMobileView();
         this.App.$el.addClass('mobile-view-idea-create-2');
     },
-    
+
     untriggerMobileIdeaCreateView: function (event) {
         this.triggerMobileDefaultView(event);
     },
-    
+
     untriggerMobileDetailView: function (event) {
         if (this.state.lastViewBeforeDetailWasListView) {
         	this.triggerMobileListView(event);
@@ -382,7 +413,19 @@ module.exports = ContentControlView.extend({
         	this.triggerMobileMapView(event);
         }
     },
-    
+
+    showIcon: function (event) {
+        var icon = $(event.target.querySelector('img'))
+        icon.removeClass('sdg-icon-hidden')
+    },
+
+    hideIcon: function (event) {
+        if (event.target.tagName == 'IMG') {
+            $(event.target).addClass('sdg-icon-hidden')
+        } else {
+            $(event.target.querySelector('img')).addClass('sdg-icon-hidden')
+        }
+    },
     /**
      * Toggles the state of the views between splitview, map-fullscreen or tile-fullscreen.
      */
@@ -992,12 +1035,19 @@ module.exports = ContentControlView.extend({
         var self = this;
         self.state.filtersActive = false;
         self.state.topicFiltersActive = false;
+        self.state.sdgFiltersActive = false;
         self.state.typeFiltersActive = false;
         
         if (self.state.activeTopicIds.length > 0) {
             self.state.filtersActive = true;
             self.state.topicFiltersActive = true;
         }
+
+        if (self.state.activeSDGIds.length > 0) {
+            self.state.filtersActive = true;
+            self.state.sdgFiltersActive = true;
+        }
+
         _.each(Object.keys(self.options.availableFilters), function(key) {
             if (self.options.availableFilters[key] != self.state.activeFilters[key]) {
                 self.state.filtersActive = true;
@@ -1124,6 +1174,7 @@ module.exports = ContentControlView.extend({
             ignoreLocation: util.ifundef(urlParams.ignore_location, this.state.ignoreLocation),
             searchResultLimit: util.ifundef(urlParams.limit, this.state.searchResultLimit),
             activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds),
+            activeSDGIds: util.ifundef(urlParams.sdgs, this.state.activeSDGIds),
             pageIndex: util.ifundef(urlParams.page, this.state.pageIndex),
             urlSelectedResultId: util.ifundef(urlParams.item, this.state.urlSelectedResultId),
         });
@@ -1152,6 +1203,11 @@ module.exports = ContentControlView.extend({
         if (this.state.activeTopicIds.length > 0) {
             _.extend(searchParams, {
                 topics: this.state.activeTopicIds.join(',')
+            });
+        }
+        if (this.state.activeSDGIds.length > 0) {
+            _.extend(searchParams, {
+                sdgs: this.state.activeSDGIds
             });
         }
         if (this.state.pageIndex > 0) {
@@ -1247,7 +1303,17 @@ module.exports = ContentControlView.extend({
         if (self.state.activeTopicIds.length >= Object.keys(self.options.allTopics).length-1) {
             self.resetTopics();
         }
-        
+
+        // SDGs
+        self.resetSDGS();
+        self.$el.find('.sdg-button.selected').each(function(){
+            var $button = $(this);
+            var bid = parseInt($button.attr('data-sdg-id'));
+            self.state.activeSDGIds.push(bid);
+        });
+        if (self.state.activeSDGIds.length >= Object.keys(self.options.allSDGS).length-1) {
+            self.resetSDGS();
+        }
     },
 
     // TODO REMOVE
