@@ -25,6 +25,7 @@ from cosinnus.core.signals import group_object_created, userprofile_created
 from django.dispatch.dispatcher import receiver
 from cosinnus.core.registries.widgets import widget_registry
 from cosinnus.models.profile import get_user_profile_model
+from cosinnus.utils.user import filter_active_users
 
 
 
@@ -237,9 +238,7 @@ class GroupMembersWidget(DashboardWidget):
         all_ids = set(admin_ids + member_ids)
         
         userprofile_table = get_user_profile_model()._meta.db_table
-        qs = get_user_model()._default_manager.filter(is_active=True) \
-            .exclude(last_login__exact=None) \
-            .filter(cosinnus_profile__settings__contains='tos_accepted') \
+        qs = filter_active_users(get_user_model().objects.all()) \
             .select_related('cosinnus_profile') \
             .extra(select={
                 'has_avatar': 'LENGTH(%s.avatar) > 0' % userprofile_table

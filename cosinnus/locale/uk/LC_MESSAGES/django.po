@@ -6529,7 +6529,7 @@ msgstr "Поки що немає жодного елементу"
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/userdashboard/group-widget.html:6
 msgid "Groups and Projects"
-msgstr "Спільноти та Проекти"
+msgstr "Групи та проекти"
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/userdashboard/group-widget.html:39
@@ -6537,25 +6537,25 @@ msgid ""
 "Here you can find an overview of your Groups and Projects once you become "
 "active in one or more of them."
 msgstr ""
-"Тут ти побачиш стан твоїх Спільнот та Проектів одразу після початку "
-"активного користування ними."
+"У майбутньому тут зможеш переглядати свої групи та проекти. Ти ще не "
+"активний/а у жодній групі чи проекті."
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/userdashboard/group-widget.html:43
 msgid "You can create Groups or Projects via the '+' button in the header."
 msgstr ""
-"Ти можеш створити Спільноту або Проект за допомогою '+' знаку нагорі "
-"сторінки."
+"Ти зможеш створити власні групи та проекти за допомогою кнопки ‘+’ у "
+"заголовку."
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/userdashboard/ideas-widget.html:6
 msgid "Ideas I like"
-msgstr "Ідеї, які я вподоба(ла)в"
+msgstr "Ідеї, які мені подобаються"
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/userdashboard/ideas-widget.html:12
 msgid "Here you can find an overview of Ideas you have liked."
-msgstr "Тут ти знайдеш огляд Ідей, які ти вподоба(ла)в."
+msgstr "У майбутньому тут зможеш переглядати ідеї, які тобі подобаються."
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/userdashboard/ideas-widget.html:16
@@ -6563,15 +6563,15 @@ msgid ""
 "You can create your own Ideas via the '+' button in the header or you can "
 "discover existing Ideas here"
 msgstr ""
-"Ти можеш додати власну Ідею натиснувши знак'+' вгорі сторінки, або ж "
-"ознайомитись з вже існуючими ідеями"
+"Ти зможеш додати власні ідеї за допомогою кнопки ‘+’ у заголовку або "
+"переглянути ідеї інших."
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/userdashboard/ideas-widget.html:19
 #: templates/cosinnus/v2/navbar/brand_links.html:3
 #: templates/cosinnus/v2/navbar/brand_links.html:4
 msgid "Discover"
-msgstr "Відкривай"
+msgstr "Відкрий"
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/userdashboard/timeline.html:18
@@ -7324,7 +7324,7 @@ msgstr "Контент"
 
 #: templates/cosinnus/v2/dashboard/user_dashboard.html:55
 msgid "Close to me"
-msgstr "Поблизу від мене"
+msgstr "Поруч"
 
 #: templates/cosinnus/v2/dashboard/user_dashboard.html:58
 msgid "Show large map"
@@ -7350,7 +7350,7 @@ msgstr ""
 msgid ""
 "What's the latest news that you would like to share with all users of the "
 "platform?"
-msgstr ""
+msgstr "У тебе є нова інформація, якою ти б хотів(ла) поділитися на платформі?"
 
 #: templates/cosinnus/v2/dashboard/user_dashboard.html:226
 msgid ""
