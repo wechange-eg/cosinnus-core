@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import uuid
 import time
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from cosinnus.models.bbb_room import BBBRoom
 from cosinnus.apis import bigbluebutton as bbb
 from django.contrib.auth.models import User
@@ -159,6 +159,19 @@ class BBBRoomTest(TestCase):
         json_result = bbb.xml_to_json(xml_result)
         self.assertEqual(json_result['returncode'], "SUCCESS")
         self.assertEqual(json_result['messageKey'], 'sentEndMeetingRequest')
+
+    # def test_join_view(self):
+    #
+    #     factory = RequestFactory()
+    #
+    #     room = BBBRoom.create(
+    #         name="VIEW TEST",
+    #         meeting_id="end-test",
+    #         meeting_welcome="join via url",
+    #     )
+    #
+    #     time.sleep(2)
+    #     room.join_group_members(self.group)
 
     def tearDown(self):
         for room in BBBRoom.objects.all():

@@ -152,6 +152,22 @@ class BBBRoom(models.Model):
     def members(self):
         return self.moderators.all() | self.attendees.all()
 
+    def restart(self):
+        m_xml = bbb.start(
+            name=self.name,
+            meeting_id=self.meeting_id,
+            welcome=self.welcome_message,
+            attendee_password=self.attendee_password,
+            moderator_password=self.moderator_password
+        )
+
+        meeting_json = bbb.xml_to_json(m_xml)
+
+        if meeting_json['returncode'] != 'SUCCESS':
+            raise ValueError('Unable to create meeting!')
+
+        return None
+
     @classmethod
     def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=random_password(),
                moderator_password=random_password(), max_participants=None, voice_bridge=None):

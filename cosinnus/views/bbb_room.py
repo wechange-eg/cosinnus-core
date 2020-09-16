@@ -9,13 +9,18 @@ from django.http.response import HttpResponseNotFound, HttpResponseNotAllowed
 from cosinnus.core.decorators.views import redirect_to_not_logged_in,\
     redirect_to_403
 from cosinnus.utils.permissions import check_user_superuser
+from cosinnus.apis import bigbluebutton as bbb
+import time
 
 logger = logging.getLogger('cosinnus')
 
 
 class BBBRoomMeetingView(RedirectView):
     """ Generates a BBB-Room join URL for a logged in user depending on their permission level. 
-        Also makes sure the room is created on the BBB server. """
+        Also makes sure the room is created on the BBB server.
+
+        if a user is a superuser,but neither attendee or moderator, they join as attendee!
+    """
     
     def get(self, *args, **kwargs):
         room_id = kwargs.get('room_id')
@@ -34,11 +39,21 @@ class BBBRoomMeetingView(RedirectView):
         return super(BBBRoomMeetingView, self).get(*args, **kwargs)
     
     def get_redirect_url(self, *args, **kwargs):
-        # TODO: check if room exists, if not: create it
-        # TODO: generate URL for the user as attendee or moderator
-        # (if a user is a superuser,but neither attendee or moderator, they join as attendee!)
-        url = 'todo'
-        return url
+        name = self.request.user.full_name
+
+        if self.room:
+            password = self.room.get_password_for_user(self.request.user) \
+                if not check_user_superuser(self.request.user) else self.room.attendee_password
+
+            if bbb.is_meeting_remote(self.room.meeting_id):
+                return bbb.join_url_tokenized(self.room.meeting_id, name, password)
+            else:
+                self.room.restart()
+                time.sleep(1)
+                return bbb.join_url_tokenized(self.room.meeting_id, name, password)
+        else:
+            url = 'todo'
+            return url
         
         
 bbb_room_meeting = BBBRoomMeetingView.as_view()
