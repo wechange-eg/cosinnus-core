@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-20 14:56+0200\n"
-"PO-Revision-Date: 2020-07-01 22:34+0200\n"
+"PO-Revision-Date: 2020-09-16 11:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
@@ -664,7 +664,7 @@ msgid "Unsubscribe"
 msgstr "Zrezygnuj z subskrypcji"
 
 msgid "My Dashboard"
-msgstr "Mój pulpit"
+msgstr "Mój Dashboard"
 
 msgid "Tiny (50 x *)"
 msgstr "Mikro (50 x *)"
@@ -3058,7 +3058,7 @@ msgstr "Nagłośnimy Twoją Ideę!"
 msgid ""
 "Ideas are a great way to inspire poeple and start a project in your region!"
 msgstr ""
-"Idee to świetny sposób, by zainspirować ludzi i wystartować z projektem w "
+"Pomysły to świetny sposób, by zainspirować ludzi i wystartować z projektem w "
 "Twoim regionie!"
 
 msgid ""
@@ -3822,15 +3822,15 @@ msgstr "Wszystkie Projekty"
 # Aren't these so-called "ideas" more like "causes"? The translation would be different in Polish too.
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas"
-msgstr "Idee"
+msgstr "Pomysły"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Ideas"
-msgstr "Moje Idee"
+msgstr "Moje Pomysły"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Ideas"
-msgstr "Wszystkie Idee"
+msgstr "Wszystkie Pomysły"
 
 msgid "Search..."
 msgstr "Szukaj..."
@@ -4417,7 +4417,7 @@ msgstr "Przejrzyj wszystkie Projekty"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
-msgstr "Idee, które śledzę"
+msgstr "Pomysły, które śledzę"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are not following any ideas yet."
@@ -4425,15 +4425,15 @@ msgstr "Nie śledzisz jeszcze żadnych idei."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Post new Idea"
-msgstr "Opublikuj nową Ideę"
+msgstr "Opublikuj nową Pomysły"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Browse all Ideas"
-msgstr "Przejrzyj wszystkie Idee"
+msgstr "Przejrzyj wszystkie Pomysły"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Ideas"
-msgstr "Szukaj Idei"
+msgstr "Szukaj Pomysły"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You have not RSVPed to any Events."
@@ -4666,23 +4666,24 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You can create Groups or Projects via the '+' button in the header."
-msgstr "Możesz stworzyć grupy i projekty poprzez przycisk \"+\" na nagłówku."
+msgstr ""
+"Możesz założyć własne grupy i projekty za pomocą przycisku \"+\" w nagłówku."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I like"
-msgstr "Idee, które lubię"
+msgstr "Pomysły, które mi się podobają"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Here you can find an overview of Ideas you have liked."
-msgstr "Tu możesz znaleźć przegląd idei, które polubiłeś/aś."
+msgstr "Tu w przyszłości znajdziesz podgląd pomysłów, które ci się podobają."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid ""
 "You can create your own Ideas via the '+' button in the header or you can "
 "discover existing Ideas here"
 msgstr ""
-"Możesz tworzyć własne idee naciskając przycisk \"+\" na nagłówku lub możesz "
-"odkrywać istniejące idee tu"
+"Możesz dodać własne pomysły za pomocą przycisku ‘+’ w nagłówku lub przejrzeć "
+"pomysły innych"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
@@ -5272,7 +5273,7 @@ msgid "Contents"
 msgstr "Treści"
 
 msgid "Close to me"
-msgstr "Zamknij dla mnie"
+msgstr "W pobliżu"
 
 msgid "Show large map"
 msgstr "Pokaż dużą mapę"
@@ -5290,6 +5291,7 @@ msgid ""
 "What's the latest news that you would like to share with all users of the "
 "platform?"
 msgstr ""
+"Masz nowe informacje, którymi chciał(a)byś się podzielić na platformie?"
 
 msgid ""
 "Your recently visited Pads, Files, Events, Todos and other content will be "
@@ -6270,119 +6272,3 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
-
-#, fuzzy
-#~| msgid "Email"
-#~ msgid "email"
-#~ msgstr "E-mail"
-
-#, fuzzy
-#~| msgid "Has Logged In"
-#~ msgid "has logged in"
-#~ msgstr "Zalogował się"
-
-#, fuzzy
-#~| msgid "Validate"
-#~ msgid "last login date"
-#~ msgstr "Ważny do"
-
-#~ msgid "New membership request"
-#~ msgstr "Nowa prośba o dołączenie"
-
-#~ msgid "Made you an admin"
-#~ msgstr "Mianował/a Cię jako administratora"
-
-#~ msgid "Revoked your admin status"
-#~ msgstr "Unieważnił Twój status administratora"
-
-#~ msgid "You were tagged by %(sender_name)s"
-#~ msgstr "Zostałeś/aś oznaczony/a przez %(sender_name)s"
-
-#~ msgid "Invited you"
-#~ msgstr "Zaprosił/a Cię"
-
-#~ msgid "Hi,"
-#~ msgstr "Cześć,"
-
-#~ msgid "What's the latest news?"
-#~ msgstr "Jaka jest najnowsza informacja?"
-
-#~ msgid "You cannot change your own admin status."
-#~ msgstr "Nie możesz zmienić swojego statusu administratora."
-
-#~ msgid ""
-#~ "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
-#~ "\n"
-#~ "Du kannst dich ab sofort unter %(domain_url)s einloggen.\n"
-#~ "\n"
-#~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten "
-#~ "Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, "
-#~ "das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das "
-#~ "Portallogo links oben.\n"
-#~ "\n"
-#~ "Eine Information schon vorab: durch deine Registrierung bist du "
-#~ "automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des "
-#~ "Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles "
-#~ "so passiert, kannst du unter \"Benachrichtigungseinstellungen\" "
-#~ "entsprechend deines Informationsbedürfnisses individuell einstellen, auf "
-#~ "welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts "
-#~ "oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails "
-#~ "bekommst, ist die Standardeinstellung bei der Option aus \"keine "
-#~ "Benachrichtigungen\" gesetzt.\n"
-#~ "\n"
-#~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die "
-#~ "Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das "
-#~ "kannst du dann natürlich ebenso anpassen.\n"
-#~ "\n"
-#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen "
-#~ "auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen "
-#~ "möchtest, kannst du dich einfach mit deinem Login von hier einloggen. "
-#~ "Wenn du in mehreren Portalen registriert bist, werden dir unter der "
-#~ "Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus "
-#~ "den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch "
-#~ "Klick auf die verschiedenen Logos kannst du zwischen den Portalen "
-#~ "wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe "
-#~ "sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
-#~ "\n"
-#~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, "
-#~ "melde dich gern den Portaladministrator_innen. \n"
-#~ "\n"
-#~ "Viele Grüße und viel Spaß hier,\n"
-#~ "das %(site_name)s Team"
-#~ msgstr ""
-#~ "Cześć %(user_name)s! Serdecznie witamy na %(site_name)s! \n"
-#~ "\n"
-#~ "Możesz natychmiast zalogować się tutaj %(domain_url)s.\n"
-#~ "\n"
-#~ "Cieszymy się, że chcesz skorzystać z naszej platformy. Jeśli chcesz "
-#~ "poznać jej najważniejsze funkcje, obejrzyj, jeśli tego jeszcze nie "
-#~ "zrobiłeś/aś, wideo na naszej stronie startowej. Dostęp uzyskasz klikając "
-#~ "logo portalu u góry po lewej stronie.\n"
-#~ "\n"
-#~ "Ważna informacja na początek: Po dokonaniu rejestracji, automatycznie "
-#~ "stajesz się członkiem grupy \"Blog\", gdzie zbierane są wszystkie "
-#~ "informacje portalu. Aby lepiej orientować się we wszystkim, co się tutaj "
-#~ "dzieje, możesz w \"ustawieniach powiadomień\" indywidualnie, zgodnie z "
-#~ "Twoim zapotrzebowaniem zdecydować, o których aktywnościach chcesz być "
-#~ "powiadamiany e-mailem (kliknij po prawej u góry na Twoje imię). Abyś nie "
-#~ "dostawał/a zbyt wielu niechcianych maili, dla tej opcji wybrano domyślne "
-#~ "ustawienie \"Brak powiadomień\".\n"
-#~ "\n"
-#~ "Dla wszystkich grup i projektów, do których dołączysz samodzielnie, "
-#~ "domyślnym ustawieniem tej opcji jest \"Wszystkie powiadomienia\". To "
-#~ "także możesz oczywiście odpowiednio dostosować do swoich potrzeb.\n"
-#~ "\n"
-#~ "I jeszcze coś, co warto wiedzieć: ten portal jest jednym z wielu na "
-#~ "wechange.de. Jeśli chcesz rozejrzeć się po innych portalach, możesz po "
-#~ "prostu zalogować się stąd Twoim loginem. Jeśli jesteś zarejestrowany/a na "
-#~ "kilku portalach, to w rubryce  \"Aktywności\" (po lewej stronie u góry w "
-#~ "menu) będą Ci się pokazywać wszystkie nowości z grup i projektów, których "
-#~ "jesteś członkiem. Klikając na różne logotypy, możesz zmieniać portale. "
-#~ "Jeśli chcesz być członkiem grupy blogowej także w innych portalach, "
-#~ "musisz w tym celu po prostu złożyć wniosek o członkostwo.\n"
-#~ "\n"
-#~ "Jeśli masz pytania, sugestie techniczne, chcesz zgłosić błąd lub "
-#~ "życzenie, zgłoś się proszę do administratorów portalu. \n"
-#~ "\n"
-#~ "Pozdrawiamy i życzymy miłej zabawy,\n"
-#~ "Zespół %(site_name)s"
