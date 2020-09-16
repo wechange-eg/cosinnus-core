@@ -70,6 +70,9 @@ module.exports = BaseView.extend({
         if (typeof json['topics'] === "number" || (typeof json['topics'] === "string" && json['topics'].length > 0)) {
             json['topics'] = json['topics'].toString().split(',');
         }
+        if (typeof json['sdgs'] === "number" || (typeof json['sdgs'] === "string" && json['sdgs'].length > 0)) {
+            json['sdgs'] = json['sdgs'].toString().split(',');
+        }
         return json;
     },
     

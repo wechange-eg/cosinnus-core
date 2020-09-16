@@ -17,7 +17,7 @@ from django.db import models
 from django.db.models import Q
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy as p_
+from django.utils.translation import ugettext as u_, ugettext_lazy as _, pgettext_lazy as p_
 
 from taggit.managers import TaggableManager
 
@@ -117,23 +117,23 @@ SDG_PEACE_JUSTICE = 16
 SDG_PARTNERSHIPS = 17
 
 SDG_CHOICES = [
-    (SDG_NO_POVERTY, _('No Poverty')),
-    (SDG_ZERO_HUNGER, _('Zero Hunger')),
-    (SDG_GOOD_HEALTH, _('Good Health and Well-being')),
-    (SDG_QUALITY_EDUCATION, _('Quality Education')),
-    (SDG_GENDER_EQUALITY, _('Gender Equality')),
-    (SDG_CLEAN_WATER, _('Clean Water and Sanitation')),
-    (SDG_AFFORDABLE_CLEAN_ENERGY, _('Affordable and Clean Energy')),
-    (SDG_DECENT_WORK, _('Decent Work and Economic Growth')),
-    (SDG_INDUSTRY_INNOVATION, _('Industry, Innovation, and Infrastructure')),
-    (SDG_REDUCING_INEQUALITY, _('Reducing Inequality')),
-    (SDG_SUSTAINABLE_CITIES, _('Sustainable Cities and Communities')),
-    (SDG_RESPONSIBLE_CONSUMPTION, _('Responsible Consumption and Production')),
-    (SDG_CLIMATE_ACTION, _('Climate Action')),
-    (SDG_LIFE_BELOW_WATER, _('Life Below Water')),
-    (SDG_LIFE_ON_LAND, _('Life On Land')),
-    (SDG_PEACE_JUSTICE, _('Peace, Justice, and Strong Institutions')),
-    (SDG_PARTNERSHIPS, _('Partnerships for the Goals')),
+    (SDG_NO_POVERTY, u_('No Poverty')),
+    (SDG_ZERO_HUNGER, u_('Zero Hunger')),
+    (SDG_GOOD_HEALTH, u_('Good Health and Well-being')),
+    (SDG_QUALITY_EDUCATION, u_('Quality Education')),
+    (SDG_GENDER_EQUALITY, u_('Gender Equality')),
+    (SDG_CLEAN_WATER, u_('Clean Water and Sanitation')),
+    (SDG_AFFORDABLE_CLEAN_ENERGY, u_('Affordable and Clean Energy')),
+    (SDG_DECENT_WORK, u_('Decent Work and Economic Growth')),
+    (SDG_INDUSTRY_INNOVATION, u_('Industry, Innovation, and Infrastructure')),
+    (SDG_REDUCING_INEQUALITY, u_('Reducing Inequality')),
+    (SDG_SUSTAINABLE_CITIES, u_('Sustainable Cities and Communities')),
+    (SDG_RESPONSIBLE_CONSUMPTION, u_('Responsible Consumption and Production')),
+    (SDG_CLIMATE_ACTION, u_('Climate Action')),
+    (SDG_LIFE_BELOW_WATER, u_('Life Below Water')),
+    (SDG_LIFE_ON_LAND, u_('Life On Land')),
+    (SDG_PEACE_JUSTICE, u_('Peace, Justice, and Strong Institutions')),
+    (SDG_PARTNERSHIPS, u_('Partnerships for the Goals')),
 ]
 
 
