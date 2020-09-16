@@ -27,6 +27,15 @@ All wrapped functions from bbb.py are called with sha1, regardless of the `BBB_H
 """
 
 
+def is_meeting_remote(meeting_id):
+    remote_rooms = BigBlueButton().get_meetings()
+    for room in remote_rooms:
+        if hasattr(room, 'meetingID') and room.get('meetingID', ''):
+            return True
+
+    return False
+
+
 def xml_to_json(xml_data):
     return bbb_utils.xml_to_json(xml_data)
 
