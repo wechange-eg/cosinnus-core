@@ -8,7 +8,7 @@ from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.http import HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
@@ -39,7 +39,8 @@ from django.db import transaction
 from cosinnus.forms.conference import CosinnusConferenceRoomForm
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.utils.permissions import check_ug_admin
-from django.http.response import Http404, HttpResponseForbidden
+from django.http.response import Http404, HttpResponseForbidden,\
+    HttpResponseNotFound
 
 
 logger = logging.getLogger('cosinnus')
@@ -363,10 +364,12 @@ class ConferencePageView(RequireReadMixin, GroupIsConferenceMixin, TemplateView)
         # hide invisible rooms from non-admins
         if not check_ug_admin(self.request.user, self.group):
             rooms = rooms.visible()
+        
         ctx = {
             'group': self.group,
             'room': self.room, # can be None
             'rooms': rooms,
+            'events': self.room.events.all() if self.room else [],
         }
         return ctx
 
@@ -450,4 +453,19 @@ class CosinnusConferenceRoomDeleteView(RequireWriteMixin, DeleteView):
 conference_room_delete = CosinnusConferenceRoomDeleteView.as_view()
 
 
+
+class FilterConferenceRoomMixin(object):
+    """
+    Sets `self.room` as CosinnusConferenceRoom for the group already set during dispatch, 
+    pulled from the `kwargs['room_slug']`, 404s if not found. Excepcts `self.group` to be set.
+    """
+
+    def dispatch(self, request, *args, **kwargs):
+        room_slug = kwargs.pop('room_slug', None)
+        if not room_slug:
+            raise ImproperlyConfigured('Room slug was not set!')
+        self.room = get_object_or_None(CosinnusConferenceRoom, group=self.group, slug=room_slug)
+        if self.room is None:
+            return HttpResponseNotFound(_('The supplied Conference Room could not be found'))
+        return super(FilterConferenceRoomMixin, self).dispatch(request, *args, **kwargs)
 

@@ -192,7 +192,6 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
                             # if the group is a conference group, and the user is only a member, not an admin:
                             if target_group is not None and target_group.group_is_conference and check_ug_membership(request.user, target_group):
                                 # normal users only have access to the conference page of a conference group (and the management views)
-                                print(str(len(request_tokens)) + ':: ' + str(request_tokens))
                                 is_admin = check_ug_admin(request.user, target_group) or check_user_superuser(request.user, portal)
                                 if len(request_tokens) <= 4 or (request_tokens[4] not in ['conference', 'members', 'leave'] and not is_admin):
                                     # bounce user to the conference start page (admins get bounced on index page)

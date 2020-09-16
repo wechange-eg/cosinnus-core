@@ -30,7 +30,7 @@
     
     <!-- a box with semi transparent background -->
     <div class="content-box large-space">
-        <h2 class="white-text large-space">{% trans "Room list" %} - {{ group.name }}</h2>
+        <h2 class="large-space">{% trans "Room list" %} - {{ group.name }}</h2>
         
         {% for room in object_list %}
             {% include 'cosinnus/conference/conference_room_list_object.html' with object=room %}

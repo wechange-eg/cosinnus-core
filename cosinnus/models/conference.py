@@ -163,6 +163,9 @@ class CosinnusConferenceRoom(models.Model):
     def get_delete_url(self):
         return group_aware_reverse('cosinnus:conference-room-delete', kwargs={'group': self.group, 'slug': self.slug})
     
+    def get_room_create_url(self):
+        return group_aware_reverse('cosinnus:event:conference-event-add', kwargs={'group': self.group, 'room_slug': self.slug})
+    
     def ensure_room_type_dependencies(self):
         """ Depending on a room type, initialize different extras like rocketchat rooms """
         if self.type in self.ROCKETCHAT_ROOM_TYPES:

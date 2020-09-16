@@ -35,10 +35,22 @@
         <br/>
         
         {% if room %}
-            <h3 class="white-text">Currently showing this room: {{ room.title }}</h3>
+            <h3 style="color: 333;">Currently showing this room: {{ room.title }}</h3>
+            <p><a href="{{ room.get_room_create_url }}">Create Conference Event in this Room</a></p>
+            
+            {% if events %}
+                <p>These events are in the room:</p>
+                {% for event in events %}
+                    <p><b>{{ event.id }}</b>: {{ event.title }} (<a href="{{ event.get_edit_url }}">Edit</a>)<p>
+                {% endfor %}
+            {% else %}
+                <p>There are no events in this room</p>
+            {% endif %}
         {% else %}
             <p>No rooms have been created yet.</p>
         {% endif %}
+        
+        <hr>
         
         <p>The room list is:</p>
         {% for list_room in rooms %}
