@@ -155,10 +155,7 @@ class BBBRoomTest(TestCase):
         # end room with bbb library
         xml_result = bbb.end_meeting(room.meeting_id, room.moderator_password)
         self.assertNotEqual(xml_result, 'error')
-
-        json_result = bbb.xml_to_json(xml_result)
-        self.assertEqual(json_result['returncode'], "SUCCESS")
-        self.assertEqual(json_result['messageKey'], 'sentEndMeetingRequest')
+        self.assertEqual(xml_result, True)
 
     # def test_join_view(self):
     #
