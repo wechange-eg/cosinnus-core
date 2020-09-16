@@ -41,7 +41,11 @@
             {% if events %}
                 <p>These events are in the room:</p>
                 {% for event in events %}
-                    <p><b>{{ event.id }}</b>: {{ event.title }} (<a href="{{ event.get_edit_url }}">Edit</a>)<p>
+                    <p>
+                        <b>{{ event.id }}</b>: {{ event.title }} 
+                        (<a href="{{ event.get_edit_url }}">Edit</a>)
+                        (<a href="{{ event.get_bbb_room_url }}">BBB-Room</a>)
+                    <p>
                 {% endfor %}
             {% else %}
                 <p>There are no events in this room</p>

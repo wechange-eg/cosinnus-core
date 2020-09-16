@@ -729,4 +729,9 @@ class CosinnusDefaultSettings(AppConf):
         'cosinnus_etherpad.Etherpad': ('title', ),
         'cosinnus_file.FileEntry': ('title', ),
     }
+    
+    """ BBB-Settings """
+    BBB_SECRET_KEY = None
+    BBB_API_URL = None
+    BBB_HASH_ALGORITHM = "SHA1"
 

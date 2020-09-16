@@ -140,7 +140,7 @@ class BBBRoom(models.Model):
             # TODO fix this to reference to MEMBERSHIP_ADMIN
             self.moderators.add(user)
             self.attendees.remove(user)
-        else:
+        elif membership_status_int == 1:
             self.attendees.add(user)
             self.moderators.remove(user)
 
@@ -169,8 +169,12 @@ class BBBRoom(models.Model):
         return None
 
     @classmethod
-    def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=random_password(),
-               moderator_password=random_password(), max_participants=None, voice_bridge=None):
+    def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=None,
+               moderator_password=None, max_participants=None, voice_bridge=None):
+        if attendee_password is None:
+            attendee_password = random_password()
+        if moderator_password is None:
+            moderator_password = random_password()
 
         if max_participants or voice_bridge:
             m_xml = bbb.start_verbose(

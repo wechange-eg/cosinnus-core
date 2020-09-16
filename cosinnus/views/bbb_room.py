@@ -11,6 +11,7 @@ from cosinnus.core.decorators.views import redirect_to_not_logged_in,\
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.apis import bigbluebutton as bbb
 import time
+from cosinnus.templatetags.cosinnus_tags import full_name
 
 logger = logging.getLogger('cosinnus')
 
@@ -28,7 +29,7 @@ class BBBRoomMeetingView(RedirectView):
         if not user.is_authenticated:
             return redirect_to_not_logged_in(self.request, view=self)
         
-        room = get_object_or_None(BBBRoom, id=room_id)
+        room = get_object_or_None(BBBRoom, id=int(room_id))
         if room is None:
             return HttpResponseNotFound('Room does not exist.')
         if not user in room.attendees.all() and not user in room.moderators.all() \
@@ -39,7 +40,7 @@ class BBBRoomMeetingView(RedirectView):
         return super(BBBRoomMeetingView, self).get(*args, **kwargs)
     
     def get_redirect_url(self, *args, **kwargs):
-        name = self.request.user.full_name
+        name = full_name(self.request.user)
 
         password = self.room.get_password_for_user(self.request.user) \
             if not check_user_superuser(self.request.user) else self.room.attendee_password

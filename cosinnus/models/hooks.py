@@ -202,7 +202,7 @@ def group_cloud_app_activated_sub(sender, group, apps, **kwargs):
 
 
 @receiver(signals.group_membership_has_changed)
-def group_membership_has_changed_sub(sender, instance, deleted):
+def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
     """ Called after a CosinusGroupMembership is changed, to apply changes to BBBRoom models in conference """
     rooms = BBBRoom.objects.filter(Q(attendees__id__in=[instance.user.id]) | Q(moderators__id__in=[instance.user.id]))
     for room in rooms:
