@@ -41,19 +41,15 @@ class BBBRoomMeetingView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         name = self.request.user.full_name
 
-        if self.room:
-            password = self.room.get_password_for_user(self.request.user) \
-                if not check_user_superuser(self.request.user) else self.room.attendee_password
+        password = self.room.get_password_for_user(self.request.user) \
+            if not check_user_superuser(self.request.user) else self.room.attendee_password
 
-            if bbb.is_meeting_remote(self.room.meeting_id):
-                return bbb.join_url_tokenized(self.room.meeting_id, name, password)
-            else:
-                self.room.restart()
-                time.sleep(1)
-                return bbb.join_url_tokenized(self.room.meeting_id, name, password)
+        if bbb.is_meeting_remote(self.room.meeting_id):
+            return bbb.join_url_tokenized(self.room.meeting_id, name, password)
         else:
-            url = 'todo'
-            return url
-        
+            self.room.restart()
+            time.sleep(1)
+            return bbb.join_url_tokenized(self.room.meeting_id, name, password)
+
         
 bbb_room_meeting = BBBRoomMeetingView.as_view()
