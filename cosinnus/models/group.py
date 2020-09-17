@@ -1395,9 +1395,9 @@ class CosinnusGroupMembership(BaseGroupMembership):
     
     def delete(self, *args, **kwargs):
         """ Checks and fires `user_left_group` signal if a user has hereby left this group """
+        signals.group_membership_has_changed.send(sender=self, instance=self, deleted=True)
         super(CosinnusGroupMembership, self).delete(*args, **kwargs)
         signals.user_left_group.send(sender=self.group, user=self.user, group=self.group)
-        signals.group_membership_has_changed.send(sender=self, instance=self, deleted=True)
 
 
 class CosinnusPortalMembership(BaseGroupMembership):

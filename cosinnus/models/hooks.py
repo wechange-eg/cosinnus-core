@@ -204,12 +204,12 @@ def group_cloud_app_activated_sub(sender, group, apps, **kwargs):
 @receiver(signals.group_membership_has_changed)
 def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
     """ Called after a CosinusGroupMembership is changed, to apply changes to BBBRoom models in conference """
-    rooms = BBBRoom.objects.filter(Q(attendees__id__in=[instance.user.id]) | Q(moderators__id__in=[instance.user.id]))
-    for room in rooms:
+    room = instance.group.media_tag.bbb_room
+    if room:
         if deleted:
             room.remove_user(instance.user)
         else:
-            room.join_user(instance.user)
+            room.join_user(instance.user, instance.status)
 
 
 from cosinnus.apis.cleverreach import *
