@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 
 from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
-    MEMBERSHIP_MEMBER, CosinnusGroupMembership, CosinnusPortal, MEMBER_STATUS
+    MEMBERSHIP_MEMBER, CosinnusGroupMembership, CosinnusPortal, MEMBER_STATUS,\
+    MEMBERSHIP_ADMIN, MEMBERSHIP_INVITED_PENDING, MEMBERSHIP_PENDING
 from cosinnus.utils.user import assign_user_to_default_auth_group, \
     ensure_user_to_default_portal_groups
 from django.contrib.auth import get_user_model
@@ -33,6 +34,7 @@ from cosinnus.models.bbb_room import BBBRoom
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from cosinnus.utils import bigbluebutton as bbb
+from cosinnus.models.conference import CosinnusConferenceRoom
 
 logger = logging.getLogger('cosinnus')
 
@@ -209,8 +211,9 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
     class MembershipUpdateHookThread(Thread):
         def run(self):
             
-            # for non-invitations:
+            # everything is only real membership changes, not for non-invitations:
             if deleted or instance.status in MEMBER_STATUS:
+                
                 # assign users to the group's BBBRoom's members if one exists
                 room = instance.group.media_tag.bbb_room
                 if room:
@@ -218,17 +221,18 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                         room.remove_user(instance.user)
                     else:
                         room.join_user(instance.user, instance.status)
-                        
-            # for non-invitations:
-            if deleted or instance.status in MEMBER_STATUS:
-                # if the group is a conference and there are any ResultProjects in any conference room,
-                # mirror the membership change to those result projects
+                
+                # For group conferences:    
                 group = instance.group
+                user = instance.user
                 if group.group_is_conference:
+                    
+                    # if the group is a conference and there are any ResultProjects in any conference room,
+                    # mirror the membership change to those result projects
                     result_groups = group.conference_group_result_projects
                     for result_group in result_groups:
                         # apply the same membership status to the result_group as it was in the conference group
-                        membership = get_object_or_None(CosinnusGroupMembership, group=result_group, user=instance.user)
+                        membership = get_object_or_None(CosinnusGroupMembership, group=result_group, user=user)
                         if deleted:
                             if membership:
                                 membership.delete()
@@ -237,7 +241,49 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                             membership.status = instance.status
                             membership.save()
                         if not membership:
-                            CosinnusGroupMembership.objects.create(group=result_group, user=instance.user, status=instance.status)
+                            CosinnusGroupMembership.objects.create(group=result_group, user=user, status=instance.status)
+            
+                    # if there are any rocketchat rooms, update the rocketchat group membership for those rooms
+                    if settings.COSINNUS_ROCKET_ENABLED:
+                        rocket_rooms = list(CosinnusConferenceRoom.objects.filter(group=group, type__in=CosinnusConferenceRoom.ROCKETCHAT_ROOM_TYPES))
+                        if len(rocket_rooms) > 0:
+                            
+                            from cosinnus_message.rocket_chat import RocketChatConnection
+                            rocket = RocketChatConnection()
+                            if instance.id:
+                                old_instance = CosinnusGroupMembership.objects.get(pk=instance.id)
+                                was_pending = old_instance.status in (MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING)
+                                is_moderator_changed = instance.is_moderator != old_instance.is_moderator
+                                is_pending = instance.status in (MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING)
+                            # add/remove member from each rocketchat room for each conference room
+                            for room in rocket_rooms:
+                                room.sync_rocketchat_room()
+                                if not room.rocket_chat_room_id:
+                                    logger.error('Wanted to sync a user membership to a conference room, but a rocketchat room for it could not be created!', 
+                                                extra={'room': room.id})
+                                    continue
+                                if not instance.id:
+                                    # new member
+                                    rocket.add_member_to_room(user, room.rocket_chat_room_id)
+                                    if instance.is_moderator: # TODO fix check in rocket listeners??
+                                        rocket.add_moderator_to_room(user, room.rocket_chat_room_id)
+                                else:
+                                    # existing member
+                                    # Invalidate old membership
+                                    if is_pending and not was_pending:
+                                        rocket.remove_member_from_room(user, room.rocket_chat_room_id)
+                                    # Create new membership
+                                    if was_pending and not is_pending:
+                                        rocket.add_member_to_room(user, room.rocket_chat_room_id)
+                        
+                                    # Update membership
+                                    if not is_pending and is_moderator_changed:
+                                        # Upgrade
+                                        if not old_instance.is_moderator and instance.is_moderator:
+                                            rocket.add_moderator_to_room(user, room.rocket_chat_room_id)
+                                        # Downgrade
+                                        elif old_instance.is_moderator and not instance.is_moderator:
+                                            rocket.remove_moderator_from_room(user, room.rocket_chat_room_id)
             
     MembershipUpdateHookThread().start()
     

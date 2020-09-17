@@ -38,6 +38,15 @@
             <h3 style="color: 333;">Currently showing this room: {{ room.title }}</h3>
             <p><a href="{{ room.get_room_create_url }}">Create Conference Event in this Room</a></p>
             
+            <p>
+                The RocketChat-Room URL for this room is:
+                {% if room.get_rocketchat_room_url %}
+                    <a href="{{ room.get_rocketchat_room_url }}">{{ room.get_rocketchat_room_url }}</a>
+                {% else %}
+                    <b>(not applicable for this room or Rocketchat room could not be created)</b>
+                {% endif %}
+            </p>
+            
             {% if events %}
                 <p>These events are in the room:</p>
                 {% for event in events %}
