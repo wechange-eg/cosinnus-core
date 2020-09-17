@@ -27,6 +27,11 @@ All wrapped functions from bbb.py are called with sha1, regardless of the `BBB_H
 """
 
 
+def join_url_tokenized(meeting_id, name, password):
+    url = join_url(meeting_id, name, password)
+    return requests.get(url).url
+
+
 def is_meeting_remote(meeting_id):
     remote_rooms = BigBlueButton().get_meetings()
     for room in remote_rooms:

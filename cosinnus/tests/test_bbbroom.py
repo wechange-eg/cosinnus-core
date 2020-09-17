@@ -2,10 +2,16 @@
 import uuid
 import time
 from django.test import TestCase, RequestFactory
+from django.contrib.auth.models import User
+from django.shortcuts import reverse
+from django.conf import settings
+from django.core.exceptions import PermissionDenied
+
 from cosinnus.models.bbb_room import BBBRoom
 from cosinnus.apis import bigbluebutton as bbb
-from django.contrib.auth.models import User
 from cosinnus.models import CosinnusGroup, CosinnusGroupMembership
+
+from cosinnus.views.bbb_room import BBBRoomMeetingView
 
 
 class BBBRoomTest(TestCase):
@@ -27,8 +33,6 @@ class BBBRoomTest(TestCase):
         self.outsider = User.objects.create_user(
             username="outsider",
             email="outsider@example.org",
-            is_superuser=True,
-            is_staff=True
         )
 
         self.group = CosinnusGroup(name="BBB Test")
@@ -157,18 +161,53 @@ class BBBRoomTest(TestCase):
         self.assertNotEqual(xml_result, 'error')
         self.assertEqual(xml_result, True)
 
-    # def test_join_view(self):
-    #
-    #     factory = RequestFactory()
-    #
-    #     room = BBBRoom.create(
-    #         name="VIEW TEST",
-    #         meeting_id="end-test",
-    #         meeting_welcome="join via url",
-    #     )
-    #
-    #     time.sleep(2)
-    #     room.join_group_members(self.group)
+    def test_join_view(self):
+
+        factory = RequestFactory()
+
+        room = BBBRoom.create(
+            name="VIEW TEST",
+            meeting_id="end-test",
+            meeting_welcome="join via url",
+        )
+
+        time.sleep(2)
+        room.join_group_members(self.group)
+
+        request = factory.get(reverse("cosinnus:bbb-room", kwargs={"room_id": room.id}))
+        request.user = self.moderator
+
+        response = BBBRoomMeetingView.as_view()(request, **{"room_id": room.id})
+
+        self.assertNotEqual(response.status_code, 404)
+        self.assertNotEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
+
+        first_token = response.url
+
+        self.assertTrue(first_token.startswith(settings.BBB_SERVER))
+
+        # another request with another user
+        request = factory.get(reverse("cosinnus:bbb-room", kwargs={"room_id": room.id}))
+        request.user = self.attendee
+
+        response = BBBRoomMeetingView.as_view()(request, **{"room_id": room.id})
+
+        self.assertNotEqual(response.status_code, 404)
+        self.assertNotEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
+
+        second_token = response.url
+
+        self.assertNotEqual(first_token, second_token)
+        self.assertTrue(second_token.startswith(settings.BBB_SERVER))
+
+        # third request as anonymous user should result in a 403
+        request = factory.get(reverse("cosinnus:bbb-room", kwargs={"room_id": room.id}))
+        request.user = self.outsider
+
+        with self.assertRaises(PermissionDenied):
+            BBBRoomMeetingView.as_view()(request, **{"room_id": room.id})
 
     def tearDown(self):
         for room in BBBRoom.objects.all():

@@ -124,9 +124,9 @@ class BBBRoom(models.Model):
         :rtype: str
         """
 
-        if user in self.attendees:
+        if user in self.attendees.all():
             return self.attendee_password
-        elif user in self.moderators:
+        elif user in self.moderators.all():
             return self.moderator_password
         else:
             return ''

@@ -42,8 +42,13 @@ class BBBRoomMeetingView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         name = full_name(self.request.user)
 
-        password = self.room.get_password_for_user(self.request.user) \
-            if not check_user_superuser(self.request.user) else self.room.attendee_password
+        # obtain password according to user permissions. Return 403 If user is not allowed to join the meeting
+        password = self.room.get_password_for_user(self.request.user)
+        if not password:
+            if check_user_superuser(self.request.user):
+                password = self.room.attendee_password
+            else:
+                return redirect_to_403(self.request, view=self)
 
         if bbb.is_meeting_remote(self.room.meeting_id):
             return bbb.join_url_tokenized(self.room.meeting_id, name, password)
