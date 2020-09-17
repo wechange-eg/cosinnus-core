@@ -50,6 +50,13 @@
             {% else %}
                 <p>There are no events in this room</p>
             {% endif %}
+            
+            {% if room.target_result_group %}
+                <div>
+                    <p>Since this is a related project room, here's the iframe:</p>
+                    <iframe width=800 height=600 src="{{ room.target_result_group.get_absolute_url }}"></iframe>
+                </div>
+            {% endif %}
         {% else %}
             <p>No rooms have been created yet.</p>
         {% endif %}

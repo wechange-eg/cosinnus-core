@@ -71,6 +71,12 @@
                 </div>
                 <div class="room-type-selector room-type-selector-5">
                     <p class="transparent">{% trans "TODO: Room Type Results description text" %}</p>
+                    <p class="transparent">
+	                    <a href="{% url 'cosinnus:group-add' %}?group={{ group.slug }}" target="_blank">
+	                        <i class="fa fa-external-link"></i>
+	                        {% trans "Add project" %}
+	                    </a>
+                    </p>
                 </div>
                 <script type="text/javascript">
                     {% comment %} show or hide a type description {% endcomment %}

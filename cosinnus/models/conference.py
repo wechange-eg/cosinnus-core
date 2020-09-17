@@ -117,8 +117,8 @@ class CosinnusConferenceRoom(models.Model):
         validators=[MinValueValidator(2), MaxValueValidator(512)])
     
     # Type: Results field only
-    target_result_group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, 
-        verbose_name=_('Result Project'), related_name='+',
+    target_result_group = models.OneToOneField(settings.COSINNUS_GROUP_OBJECT_MODEL, 
+        verbose_name=_('Result Project'), related_name='conference_room',
         null=True, blank=True, on_delete=models.SET_NULL)
     
     
