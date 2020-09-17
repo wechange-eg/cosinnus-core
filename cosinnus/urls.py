@@ -64,6 +64,7 @@ urlpatterns = [
     url(r'^likefollow/$', common.do_likefollow,  name='likefollow-view'),
     
     url(r'^bbb/room/(?P<room_id>\d+)/$', bbb_room.bbb_room_meeting, name='bbb-room'),
+    url(r'^bbb/queue/(?P<mt_id>\d+)/$', bbb_room.bbb_room_meeting_queue, name='bbb-room-queue'),
     
     url(r'^invitations/$', group.group_list_invited, name='invitations', kwargs={'show_all': True}),
     url(r'^welcome/$', user.welcome_settings, name='welcome-settings'),

@@ -5,13 +5,17 @@ import logging
 from django.views.generic.base import RedirectView
 from annoying.functions import get_object_or_None
 from cosinnus.models.bbb_room import BBBRoom
-from django.http.response import HttpResponseNotFound, HttpResponseNotAllowed
+from django.http.response import HttpResponseNotFound, HttpResponseNotAllowed,\
+    HttpResponse
 from cosinnus.core.decorators.views import redirect_to_not_logged_in,\
     redirect_to_403
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.apis import bigbluebutton as bbb
 import time
 from cosinnus.templatetags.cosinnus_tags import full_name
+from cosinnus.views.mixins.group import RequireLoggedInMixin
+from django.shortcuts import get_object_or_404, redirect
+from cosinnus.models.tagged import get_tag_object_model
 
 logger = logging.getLogger('cosinnus')
 
@@ -57,5 +61,26 @@ class BBBRoomMeetingView(RedirectView):
             time.sleep(1)
             return bbb.join_url_tokenized(self.room.meeting_id, name, password)
 
-        
 bbb_room_meeting = BBBRoomMeetingView.as_view()
+
+
+class BBBRoomMeetingQueueView(RequireLoggedInMixin, RedirectView):
+    """ An intermediate view that can be visited for a BBB-Room that 
+        is in the process of being created, without blocking the code.
+        The target object is the media_tag id. As long as the media_tag
+        has no BBBRoom, it will show a waiting page, and if the tag has a
+        room, it will redirect to the room URL """
+        
+    def get(self, *args, **kwargs):
+        media_tag_id = kwargs.get('mt_id')
+        user = self.request.user
+        if not user.is_authenticated:
+            return redirect_to_not_logged_in(self.request, view=self)
+        media_tag = get_object_or_404(get_tag_object_model(), id=media_tag_id)
+        # show waiting message (with reload) or redirect to room if it exists now
+        if media_tag.bbb_room is not None:
+            return redirect(media_tag.bbb_room.get_absolute_url())
+        else:
+            return HttpResponse('<html><head><meta http-equiv="refresh" content="5" ></head><body>Connnecting you to your room...</body></html>')
+    
+bbb_room_meeting_queue = BBBRoomMeetingQueueView.as_view()

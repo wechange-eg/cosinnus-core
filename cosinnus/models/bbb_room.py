@@ -9,6 +9,7 @@ from django.contrib.postgres.fields import JSONField
 from cosinnus.apis import bigbluebutton as bbb
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
+from django.urls.base import reverse
 # from cosinnus.models.group import CosinnusGroup
 # from cosinnus.models import MEMBERSHIP_ADMIN
 
@@ -213,3 +214,7 @@ class BBBRoom(models.Model):
         meeting.save()
 
         return meeting
+    
+    def get_absolute_url(self):
+        return reverse('cosinnus:bbb-room', kwargs={'room_id': self.id})
+    
