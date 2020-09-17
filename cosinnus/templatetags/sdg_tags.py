@@ -25,7 +25,7 @@ def render_sdg_json(context):
         sgd_json.append(
             {'id': sdg[0],
              'icon': '/static/{}'.format(get_sdg_image(lang, sdg[0])),
-             'name': sdg[1]
+             'name': str(sdg[1])
              }
         )
     return mark_safe(json.dumps(sgd_json))
