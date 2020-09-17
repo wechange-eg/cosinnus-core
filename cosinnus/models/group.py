@@ -1016,6 +1016,13 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
             return self.users.filter(cosinnus_profile__settings__contains=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
         return get_user_model().objects.none()
     
+    @property
+    def conference_group_result_projects(self):
+        """ Returns a QS of all result projects from all conference rooms, if this is a conference """
+        if not self.group_is_conference:
+            return get_cosinnus_group_model().objects.none()
+        return get_cosinnus_group_model().objects.filter(is_active=True, conference_room__group=self)
+    
     def get_additional_rocketchat_room_ids(self):
         """ A group may have additional rocketchat room IDs that it corresponds to. 
             All room ids returned here will also be managed by the rocketchat hooks for
@@ -1387,11 +1394,11 @@ class CosinnusGroupMembership(BaseGroupMembership):
         """ Checks and fires `user_joined_group` signal if a user has hereby joined this group """
         created = bool(self.pk is None)
         super(CosinnusGroupMembership, self).save(*args, **kwargs)
+        signals.group_membership_has_changed.send(sender=self, instance=self, deleted=False)
         created_as_membership = bool(created and self.status in MEMBER_STATUS)
         changed_to_membership = bool(not created and self._status not in MEMBER_STATUS and self.status in MEMBER_STATUS)
         if created_as_membership or changed_to_membership:
             signals.user_joined_group.send(sender=self, user=self.user, group=self.group)
-            signals.group_membership_has_changed.send(sender=self, instance=self, deleted=False)
     
     def delete(self, *args, **kwargs):
         """ Checks and fires `user_left_group` signal if a user has hereby left this group """

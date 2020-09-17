@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
-    MEMBERSHIP_MEMBER, CosinnusGroupMembership, CosinnusPortal
+    MEMBERSHIP_MEMBER, CosinnusGroupMembership, CosinnusPortal, MEMBER_STATUS
 from cosinnus.utils.user import assign_user_to_default_auth_group, \
     ensure_user_to_default_portal_groups
 from django.contrib.auth import get_user_model
@@ -204,12 +204,44 @@ def group_cloud_app_activated_sub(sender, group, apps, **kwargs):
 @receiver(signals.group_membership_has_changed)
 def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
     """ Called after a CosinusGroupMembership is changed, to apply changes to BBBRoom models in conference """
-    room = instance.group.media_tag.bbb_room
-    if room:
-        if deleted:
-            room.remove_user(instance.user)
-        else:
-            room.join_user(instance.user, instance.status)
+    
+    # we're Threading this entire hook as it might take a while
+    class MembershipUpdateHookThread(Thread):
+        def run(self):
+            
+            # for non-invitations:
+            if deleted or instance.status in MEMBER_STATUS:
+                # assign users to the group's BBBRoom's members if one exists
+                room = instance.group.media_tag.bbb_room
+                if room:
+                    if deleted:
+                        room.remove_user(instance.user)
+                    else:
+                        room.join_user(instance.user, instance.status)
+                        
+            # for non-invitations:
+            if deleted or instance.status in MEMBER_STATUS:
+                # if the group is a conference and there are any ResultProjects in any conference room,
+                # mirror the membership change to those result projects
+                group = instance.group
+                if group.group_is_conference:
+                    result_groups = group.conference_group_result_projects
+                    for result_group in result_groups:
+                        # apply the same membership status to the result_group as it was in the conference group
+                        membership = get_object_or_None(CosinnusGroupMembership, group=result_group, user=instance.user)
+                        if deleted:
+                            if membership:
+                                membership.delete()
+                            continue
+                        if membership and membership.status != instance.status:
+                            membership.status = instance.status
+                            membership.save()
+                        if not membership:
+                            CosinnusGroupMembership.objects.create(group=result_group, user=instance.user, status=instance.status)
+            
+    MembershipUpdateHookThread().start()
+    
+    
 
 
 from cosinnus.apis.cleverreach import *
