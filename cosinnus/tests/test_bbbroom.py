@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import uuid
 import time
+import requests
+
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
@@ -208,6 +210,27 @@ class BBBRoomTest(TestCase):
 
         with self.assertRaises(PermissionDenied):
             BBBRoomMeetingView.as_view()(request, **{"room_id": room.id})
+
+        # test view with superuser permissions
+        superuser = User.objects.create_user(
+            username="superuser",
+            email="superuser@example.org",
+            is_superuser=True,
+            is_staff=True
+        )
+        request = factory.get(reverse("cosinnus:bbb-room", kwargs={"room_id": room.id}))
+        request.user = superuser
+
+        response = BBBRoomMeetingView.as_view()(request, **{"room_id": room.id})
+
+        self.assertNotEqual(response.status_code, 404)
+        self.assertNotEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
+
+        second_token = response.url
+
+        self.assertNotEqual(first_token, second_token)
+        self.assertTrue(second_token.startswith(settings.BBB_SERVER))
 
     def tearDown(self):
         for room in BBBRoom.objects.all():
