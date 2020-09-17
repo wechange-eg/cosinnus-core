@@ -27,6 +27,14 @@
 			{% endset %}
 			{{ macros.listItem(topic_label|safe, topic_url, 'fa-filter', includeUnderdrop=true) }}
 		{% endfor %} 
+
+		{% for sdg_title, sdg_url in sdgSearchMethods %}
+			{% set sdg_label %}
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "SDG" %}: {{ sdg_title|safe }}
+			{% endset %}
+			{{ macros.listItem(sdg_label|safe, sdg_url, 'fa-filter', includeUnderdrop=true) }}
+		{% endfor %} 
 		
 		{# We use makeSafe here because we escape results' text in handleDate() #}
 		{% for item in quicksearchResults %}

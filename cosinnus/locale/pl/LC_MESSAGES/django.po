@@ -15,7 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
@@ -874,7 +874,7 @@ msgstr "Zrezygnuj z subskrypcji"
 
 #: i18n_fixture_strings.py:12
 msgid "My Dashboard"
-msgstr "Mój pulpit"
+msgstr "Mój Dashboard"
 
 #: image_formats.py:7
 msgid "Tiny (50 x *)"
@@ -4408,7 +4408,7 @@ msgstr "Nagłośnimy Twoją Ideę!"
 msgid ""
 "Ideas are a great way to inspire poeple and start a project in your region!"
 msgstr ""
-"Idee to świetny sposób, by zainspirować ludzi i wystartować z projektem w "
+"Pomysły to świetny sposób, by zainspirować ludzi i wystartować z projektem w "
 "Twoim regionie!"
 
 #: templates/cosinnus/idea/idea_form.html:93
@@ -5319,20 +5319,20 @@ msgstr "Wszystkie Projekty"
 #: templates/cosinnus/universal/include/macros.html:111
 #: templates/cosinnus/v2/dashboard/user_dashboard.html:114 views/map.py:151
 msgid "Ideas"
-msgstr "Idee"
+msgstr "Pomysły"
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/navbar_buttons_group_menus.html:87
 #: templates/cosinnus/universal/include/macros.html:23
 #: templates/cosinnus/universal/navbar/main-menu.html:132 views/map.py:149
 msgid "My Ideas"
-msgstr "Moje Idee"
+msgstr "Moje Pomysły"
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/navbar_buttons_group_menus.html:88
 #: templates/cosinnus/universal/include/macros.html:45
 msgid "All Ideas"
-msgstr "Wszystkie Idee"
+msgstr "Wszystkie Pomysły"
 
 #: templates/cosinnus/navbar_icon_buttons.html:5
 msgid "Search..."
@@ -6137,7 +6137,7 @@ msgstr "Przejrzyj wszystkie Projekty"
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/navbar/main-menu.html:107
 msgid "Ideas I am following"
-msgstr "Idee, które śledzę"
+msgstr "Pomysły, które śledzę"
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/navbar/main-menu.html:120
@@ -6149,17 +6149,17 @@ msgstr "Nie śledzisz jeszcze żadnych idei."
 #: templates/cosinnus/v2/dashboard/user_dashboard.html:120
 #: templates/cosinnus/v2/navbar/navbar.html:220
 msgid "Post new Idea"
-msgstr "Opublikuj nową Ideę"
+msgstr "Opublikuj nową Pomysły"
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/navbar/main-menu.html:149
 msgid "Browse all Ideas"
-msgstr "Przejrzyj wszystkie Idee"
+msgstr "Przejrzyj wszystkie Pomysły"
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/navbar/main-menu.html:153
 msgid "Search for Ideas"
-msgstr "Szukaj Idei"
+msgstr "Szukaj Pomysły"
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/navbar/main-menu.html:176
@@ -6461,17 +6461,18 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/userdashboard/group-widget.html:43
 msgid "You can create Groups or Projects via the '+' button in the header."
-msgstr "Możesz stworzyć grupy i projekty poprzez przycisk \"+\" na nagłówku."
+msgstr ""
+"Możesz założyć własne grupy i projekty za pomocą przycisku \"+\" w nagłówku."
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/userdashboard/ideas-widget.html:6
 msgid "Ideas I like"
-msgstr "Idee, które lubię"
+msgstr "Pomysły, które mi się podobają"
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/userdashboard/ideas-widget.html:12
 msgid "Here you can find an overview of Ideas you have liked."
-msgstr "Tu możesz znaleźć przegląd idei, które polubiłeś/aś."
+msgstr "Tu w przyszłości znajdziesz podgląd pomysłów, które ci się podobają."
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/userdashboard/ideas-widget.html:16
@@ -6479,8 +6480,8 @@ msgid ""
 "You can create your own Ideas via the '+' button in the header or you can "
 "discover existing Ideas here"
 msgstr ""
-"Możesz tworzyć własne idee naciskając przycisk \"+\" na nagłówku lub możesz "
-"odkrywać istniejące idee tu"
+"Możesz dodać własne pomysły za pomocą przycisku ‘+’ w nagłówku lub przejrzeć "
+"pomysły innych"
 
 #. Translators: __INCLUDE_JS_PO__
 #: templates/cosinnus/universal/userdashboard/ideas-widget.html:19
@@ -7227,7 +7228,7 @@ msgstr "Treści"
 
 #: templates/cosinnus/v2/dashboard/user_dashboard.html:55
 msgid "Close to me"
-msgstr "Zamknij dla mnie"
+msgstr "W pobliżu"
 
 #: templates/cosinnus/v2/dashboard/user_dashboard.html:58
 msgid "Show large map"
@@ -7252,6 +7253,7 @@ msgid ""
 "What's the latest news that you would like to share with all users of the "
 "platform?"
 msgstr ""
+"Masz nowe informacje, którymi chciał(a)byś się podzielić na platformie?"
 
 #: templates/cosinnus/v2/dashboard/user_dashboard.html:226
 msgid ""
