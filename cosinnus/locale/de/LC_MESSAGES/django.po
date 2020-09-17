@@ -1055,7 +1055,7 @@ msgstr "Klimaschutz"
 
 #: models/group.py:133
 msgid "Life Below Water"
-msgstr "'Leben unter Wasser"
+msgstr "Leben unter Wasser"
 
 #: models/group.py:134
 msgid "Life On Land"
