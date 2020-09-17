@@ -55,11 +55,11 @@ class BBBRoomMeetingView(RedirectView):
                 return redirect_to_403(self.request, view=self)
 
         if bbb.is_meeting_remote(self.room.meeting_id):
-            return bbb.join_url_tokenized(self.room.meeting_id, name, password)
+            return bbb.join_url(self.room.meeting_id, name, password)
         else:
             self.room.restart()
             time.sleep(1)
-            return bbb.join_url_tokenized(self.room.meeting_id, name, password)
+            return bbb.join_url(self.room.meeting_id, name, password)
 
 bbb_room_meeting = BBBRoomMeetingView.as_view()
 
