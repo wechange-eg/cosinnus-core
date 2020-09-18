@@ -158,6 +158,9 @@ class CosinnusConferenceRoom(models.Model):
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:conference-page-room', kwargs={'group': self.group, 'slug': self.slug})
     
+    def get_maintenance_url(self):
+        return group_aware_reverse('cosinnus:conference-page-maintenance-room', kwargs={'group': self.group, 'slug': self.slug})
+    
     def get_edit_url(self):
         return group_aware_reverse('cosinnus:conference-room-edit', kwargs={'group': self.group, 'slug': self.slug})
     

@@ -75,11 +75,15 @@
         <p>The room list is:</p>
         {% for list_room in rooms %}
             <p>
-                <a href="{{ list_room.get_absolute_url }}">
+                <a href="{{ list_room.get_maintenance_url }}">
                     {{ list_room.sort_index }}: 
                     {{ list_room.title }} 
                 </a>
                 <br>
+                <a href="{{ list_room.get_absolute_url }}">
+                    (Frontend-URL)
+                </a>
+                <br/>
                 Description: {{ list_room.description }}<br>
                 Slug: {{ list_room.slug }}<br>
                 Visible: {{ list_room.is_visible }}<br>
