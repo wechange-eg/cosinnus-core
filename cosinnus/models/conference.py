@@ -110,7 +110,7 @@ class CosinnusConferenceRoom(models.Model):
     
     # connected rocketchat room to this room. 
     # only initialized for some room types 
-    rocket_chat_room_id = models.CharField(_('RocketChat room id'), max_length=250, null=True)
+    rocket_chat_room_id = models.CharField(_('RocketChat room id'), max_length=250, null=True, blank=True)
     
     # Type: CoffeeTable field only
     allow_user_table_creation = models.BooleanField(_('Allow users to create new coffee tables'),
