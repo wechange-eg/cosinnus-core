@@ -16,7 +16,7 @@ import {EventSlot} from "../../stores/events/models"
 import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {formatTime} from "../../utils/events"
 import {Content} from "../components/Content/style"
-import {EventList} from "../components/EventList/style"
+import {EventList} from "../components/EventList"
 import {Sidebar} from "../components/Sidebar"
 import {fetchEvents} from "../../stores/events/effects"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
@@ -40,7 +40,6 @@ const mapDispatchToProps = {
 
 function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
   const { events, fetchEvents, url } = props
-  const history = useHistory()
   if (!events) {
     fetchEvents()
   }
@@ -49,48 +48,7 @@ function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
     <Grid container>
       <Content>
         <Typography component="h1"><FormattedMessage id="Agenda" defaultMessage="Agenda" /></Typography>
-        {events && events.map((slot, index) => {
-          const isNow = slot.isNow()
-          return (
-          <EventList
-            key={index}
-            className={clsx({
-              ["now"]: isNow,
-            })}
-          >
-            {!isNow && (
-              <ListItem>
-                <ListItemText primary={formatTime(slot.props.fromDate) + "-" + formatTime(slot.props.toDate)} />
-                {slot.props.title && (
-                  <ListItemText primary={slot.props.title && slot.props.title} />
-                ) || (
-                  <ListItemText primary={(
-                    <Typography component="span">
-                      {slot.props.events.length}&nbsp;
-                      <FormattedMessage id="parallel discussions" defaultMessage="parallel discussions" />
-                    </Typography>
-                  )} />
-                )}
-              </ListItem>
-            )}
-            {slot.props.events && slot.props.events.map((event, index) => (
-            <ListItem
-              button
-              key={event.props.id}
-              href="#"
-              onClick={() => history.push("/" + event.props.id)}
-            >
-              <ListItemText
-                primary={event.props.room.title}
-                secondary={isNow && <FormattedMessage id="Now" defaultMessage="Now" />}
-              />
-              <ListItemText primary={event.props.title} secondary={event.props.note} />
-            </ListItem>
-            ))}
-          </EventList>
-        )})
-        || <Typography><FormattedMessage id="No discussions planned." defaultMessage="No discussions planned." /></Typography>
-        }
+        <EventList events={events} />
         <ManageRoomButtons />
       </Content>
       {url && (

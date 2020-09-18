@@ -64,13 +64,18 @@ export interface EventJson {
   from_date: string
   to_date: string
   note: string
+  is_break: boolean
   image_url?: string
   room: Room
   url: string
   participants_count?: number
   participants?: ParticipantJson[]
+  management_urls?: {
+    create_event: string
+    update_event: string
+    delete_event: string
+  }
 }
-
 
 export interface EventProps {
   id: number
@@ -78,11 +83,17 @@ export interface EventProps {
   fromDate: Date
   toDate: Date
   note: string
+  isBreak: boolean
   imageUrl?: string
   room: Room
   url: string
   participantsCount?: number
   participants?: Participant[]
+  managementUrls?: {
+    createEvent: string
+    updateEvent: string
+    deleteEvent: string
+  }
 }
 
 export class Event {
@@ -109,11 +120,17 @@ export class Event {
       fromDate: new Date(json.from_date),
       toDate: new Date(json.to_date),
       note: json.note,
+      isBreak: json.is_break,
       imageUrl: json.image_url,
       room: json.room,
       url: json.url,
       participantsCount: json.participants_count,
       participants: participants,
+      managementUrls: {
+        createEvent: json.management_urls.create_event,
+        updateEvent: json.management_urls.update_event,
+        deleteEvent: json.management_urls.delete_event,
+      },
     }
 
     return new Event(props)
@@ -136,11 +153,17 @@ export class Event {
       from_date: props.fromDate.toUTCString(),
       to_date: props.toDate.toUTCString(),
       note: props.note,
+      is_break: props.isBreak,
       image_url: props.imageUrl,
       room: props.room,
       url: props.url,
       participants_count: props.participantsCount,
       participants: participants,
+      management_urls: {
+        create_event: props.managementUrls.createEvent,
+        update_event: props.managementUrls.updateEvent,
+        delete_event: props.managementUrls.deleteEvent,
+      },
     }
   }
 
@@ -160,7 +183,7 @@ export class Event {
    * @returns {number} minutes
    */
   getMinutesLeft() : number {
-    return (this.props.toDate.getTime() - new Date().getTime()) / 1000 / 60
+    return parseInt((this.props.toDate.getTime() - new Date().getTime()) / 1000 / 60)
   }
 }
 
@@ -168,6 +191,7 @@ export interface EventSlotJson {
   title?: string
   from_date: string
   to_date: string
+  is_break: boolean
   events: EventJson[]
 }
 
@@ -175,6 +199,7 @@ export interface EventSlotProps {
   title?: string
   fromDate: Date
   toDate: Date
+  isBreak: boolean
   events: Event[]
 }
 
@@ -196,6 +221,7 @@ export class EventSlot {
       title: json.title,
       fromDate: new Date(json.from_date),
       toDate: new Date(json.to_date),
+      isBreak: json.is_break,
       events: []
     }
     if (json.events != null) {
@@ -223,6 +249,7 @@ export class EventSlot {
       title: props.title,
       from_date: props.fromDate.toUTCString(),
       to_date: props.toDate.toUTCString(),
+      is_break: props.isBreak,
       events: events,
     }
   }

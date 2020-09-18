@@ -4,13 +4,15 @@ export const useStyles = makeStyles((theme) => ({
   card: {
     background: theme.palette.primary.contrastText,
     width: "100%",
-    height: "10rem",
-    marginBottom: "1rem",
-    "& > div": {
+    "& > button": {
       padding: "1rem",
       width: "100%",
-      height: "100%",
+      height: "10rem",
       display: "flex",
+      "& > div": {
+          width: "100%",
+          height: "100%",
+      }
     },
     "& span": {
       fontWeight: "bold",
@@ -24,6 +26,30 @@ export const useStyles = makeStyles((theme) => ({
         color: theme.palette.primary.light,
       }
     }
+  },
+  break: {
+    background: "transparent",
+    border: "2px solid " + theme.palette.primary.contrastText,
+    "& button": {
+      cursor: "default !important",
+    },
+    "&:hover": {
+      background: "transparent",
+      color: theme.palette.text.primary,
+      "& div:first-child p": {
+        color: theme.palette.text.primary,
+      },
+      "& div": {
+        background: "transparent !important",
+      }
+    }
+  },
+  actionArea: {
+    "&:hover $focusHighlight": {
+      opacity: 0
+    }
+  },
+  focusHighlight: {
   },
   left: {
     flex: "60%",

@@ -83,19 +83,17 @@ function NavConnector(props: NavProps) {
               <Badge badgeContent={navRoom.props.count} className={classes.badge} />
             </ListItem>
         ))}
+        {conference.props.managementUrl && (
+        <ListItem
+          button
+          href={conference.props.managementUrl}
+          className={classes.listItem}
+        >
+          <FontAwesomeIcon icon={faCog} />&nbsp;
+          <ListItemText primary={<FormattedMessage id="Manage" defaultMessage="Manage" />} />
+        </ListItem>
+        )}
       </List>
-      {conference.props.managementUrl && (
-      <Button
-        variant="contained"
-        color="primary"
-        disableElevation
-        href="#"
-        onClick={() => window.location.href = conference.props.managementUrl}
-      >
-        <FontAwesomeIcon icon={faCog} />&nbsp;
-        <FormattedMessage id="Manage conference" defaultMessage="Manage conference" />
-      </Button>
-      )}
     </Drawer>
   )
 }

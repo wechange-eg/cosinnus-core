@@ -17,14 +17,15 @@ import {Content} from "../components/Content/style"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
+import {Room} from "../../stores/room/models"
 
 interface ResultsProps {
-  url: string
+  room: Room
 }
 
-function mapStateToProps(state: RootState, _ownProps: ResultsProps) {
+function mapStateToProps(state: RootState) {
   return {
-    url: state.room.props.url,
+    room: state.room,
   }
 }
 
@@ -32,18 +33,18 @@ const mapDispatchToProps = {
 }
 
 function ResultsConnector (props: ResultsProps & RouteComponentProps) {
-  const { url } = props
+  const { room } = props
   const iframeClasses = iframeUseStyles()
   return (
     <Main container>
-      {url && (
+      {room && room.props.url && (
         <Content>
           <Typography component="h1">
-            <FormattedMessage id="Results" defaultMessage="Results" />
+            {room.props.title}
           </Typography>
           <div className={iframeClasses.resultsIframe}>
             <Iframe
-              url={url}
+              url={room.props.url}
               width="100%"
               height="100%"
             />

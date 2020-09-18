@@ -18,10 +18,6 @@ cosinnus_group_patterns = [
         views.conference_room_edit, name='room-edit'),
     url(r'^room-management/delete/(?P<slug>[^/]+)/$',
         views.conference_room_delete, name='room-delete'),
-    url(r'^$', views.conference_page,
-        name='page-index'),
-    url(r'^(?P<slug>[^/]+)/$', views.conference_page,
-        name='page-room'),
     url(r'^maintenance/$', views.conference_page_maintenance,
         name='page-maintenance'),
     url(r'^maintenance/(?P<slug>[^/]+)/$',
@@ -32,6 +28,12 @@ cosinnus_group_patterns = [
         views.workshop_participants_upload_skeleton, name='workshop-participants-upload-skeleton'),
     url(r'^workshop-participants-download/$', views.workshop_participants_download,
         name='workshop-participants-download'),
+
+    url(r'^$', views.conference_page,
+        name='index'),
+    url(r'^(?P<slug>[^/]+)/$', views.conference_page,
+        name='room'),
+
 ]
 
 cosinnus_root_patterns = [

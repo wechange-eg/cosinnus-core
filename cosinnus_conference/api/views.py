@@ -40,8 +40,11 @@ class ConferenceEventViewSet(RequireEventReadMixin,
     def get_queryset(self):
         queryset = super().get_queryset()
         room_id = self.request.GET.get('room_id')
+        conference_id = self.request.GET.get('conference_id')
         if room_id:
             queryset = queryset.filter(room=room_id)
+        elif conference_id:
+            queryset = queryset.filter(room__group=conference_id)
         else:
             queryset = queryset.none()
         return queryset

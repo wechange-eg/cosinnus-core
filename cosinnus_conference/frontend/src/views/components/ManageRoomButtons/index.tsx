@@ -33,30 +33,27 @@ export function ManageRoomButtonsConnector(props: ManageRoomButtonsProps) {
     <div className={classes.buttons}>
       <Button
         variant="contained"
-        color="primary"
         disableElevation
         href="#"
-        onClick={() => window.location.href = room.props.managementUrls.create}
+        onClick={() => window.location.href = room.props.managementUrls.createEvent}
       >
         <FontAwesomeIcon icon={faPlus} />&nbsp;
-        <FormattedMessage id="Create room" defaultMessage="Create room" />
+        <FormattedMessage id="Create event" defaultMessage="Create event" />
       </Button>
       <Button
         variant="contained"
-        color="primary"
         disableElevation
         href="#"
-        onClick={() => window.location.href = room.props.managementUrls.update}
+        onClick={() => window.location.href = room.props.managementUrls.updateRoom}
       >
         <FontAwesomeIcon icon={faPen} />&nbsp;
         <FormattedMessage id="Edit room" defaultMessage="Edit room" />
       </Button>
       <Button
         variant="contained"
-        color="primary"
         disableElevation
         href="#"
-        onClick={() => window.location.href = room.props.managementUrls.delete}
+        onClick={() => window.location.href = room.props.managementUrls.deleteRoom}
       >
         <FontAwesomeIcon icon={faTrashAlt} />&nbsp;
         <FormattedMessage id="Delete room" defaultMessage="Delete room" />

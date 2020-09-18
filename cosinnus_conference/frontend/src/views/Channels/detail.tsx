@@ -17,6 +17,7 @@ import {Loading} from "../components/Loading"
 import {fetchEvents} from "../../stores/events/effects"
 import {EventSlot} from "../../stores/events/models"
 import {findEventById} from "../../utils/events"
+import {ManageEventButtons} from "../components/ManageEventButtons"
 
 interface ChannelProps {
   id: number
@@ -46,7 +47,7 @@ function ChannelConnector (props: ChannelProps & RouteComponentProps) {
   return (
     <Main container>
       {event && (
-        <Content>f
+        <Content>
           <Typography component="h1">
             <FormattedMessage id="Networking" defaultMessage="Networking" />:&nbsp;
             {event.props.title}&nbsp;
@@ -58,6 +59,7 @@ function ChannelConnector (props: ChannelProps & RouteComponentProps) {
               height="100%"
             />
           </div>
+          <ManageEventButtons event={event} />
         </Content>
       ) || (
         <Content>

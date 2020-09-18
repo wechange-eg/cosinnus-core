@@ -41,7 +41,10 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
         return self.TYPE_MAP.get(obj.type)
 
     def get_count(self, obj):
-        return obj.events.all().count()
+        if obj.type == obj.TYPE_LOBBY:
+            return ConferenceEvent.objects.filter(group=obj.group).count()
+        else:
+            return obj.events.all().count()
 
     def get_url(self, obj):
         if obj.type == obj.TYPE_RESULTS and obj.target_result_group:
@@ -53,9 +56,9 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         if check_ug_admin(user, obj.group) or check_user_superuser(user):
             return {
-                'create': obj.get_room_create_url(),
-                'update': obj.get_edit_url(),
-                'delete': obj.get_delete_url(),
+                'createEvent': obj.get_room_create_url(),
+                'updateRoom': obj.get_edit_url(),
+                'deleteRoom': obj.get_delete_url(),
             }
         return {}
 
@@ -66,7 +69,7 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta(object):
         model = CosinnusGroup
-        fields = ('name', 'description', 'rooms', 'management_url')
+        fields = ('id', 'name', 'description', 'rooms', 'management_url')
 
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
@@ -110,11 +113,12 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
     participants = serializers.SerializerMethodField()
     participants_count = serializers.SerializerMethodField()
+    management_urls = serializers.SerializerMethodField()
 
     class Meta(object):
         model = ConferenceEvent
-        fields = ('id', 'title', 'note', 'from_date', 'to_date', 'room', 'url', 'image_url',
-                  'participants_count', 'participants')
+        fields = ('id', 'title', 'note', 'from_date', 'to_date', 'room', 'url', 'is_break', 'image_url',
+                  'participants_count', 'participants', 'management_urls')
     # change: title, note, from_date, to_date
 
     def get_url(self, obj):
@@ -136,6 +140,17 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
 
     def get_participants_count(self, obj):
         return 0
+
+    def get_management_urls(self, obj):
+        user = self.context['request'].user
+        if check_ug_admin(user, obj.group) or check_user_superuser(user):
+            return {
+                'createEvent': obj.room.get_room_create_url(),
+                'updateEvent': obj.get_edit_url(),
+                'deleteEvent': obj.get_delete_url(),
+            }
+        return {}
+
 """
 
             {

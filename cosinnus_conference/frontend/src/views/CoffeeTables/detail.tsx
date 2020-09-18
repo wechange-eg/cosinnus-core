@@ -19,6 +19,7 @@ import {Main} from "../components/Main/style"
 import {fetchEvents} from "../../stores/events/effects"
 import {findEventById} from "../../utils/events"
 import {Room} from "../../stores/room/reducer"
+import {ManageEventButtons} from "../components/ManageEventButtons"
 
 interface CoffeeTableProps {
   id: number
@@ -62,6 +63,7 @@ function CoffeeTableConnector (props: CoffeeTableProps & RouteComponentProps) {
               height="100%"
             />
           </div>
+          <ManageEventButtons event={event} />
         </Content>
       ) || (
         <Content>

@@ -13,9 +13,10 @@ export const groupBySlots = (events: EventJson[]) => {
   events.map((event) => {
     if (!(event.from_date in slots)) {
       slots[event.from_date] = EventSlot.fromJson({
+        title: event.title,
         from_date: event.from_date,
         to_date: event.to_date,
-        title: !event.id && event.title || null,
+        is_break: event.is_break,
         events: []
       })
     }

@@ -1,6 +1,7 @@
 import {Room, RoomJson} from "../room/models"
 
 export interface ConferenceJson {
+  id: number
   name: string
   description: string
   rooms: RoomJson[]
@@ -8,6 +9,7 @@ export interface ConferenceJson {
 }
 
 export interface ConferenceProps {
+  id: number
   name: string
   description: string
   rooms: Room[]
@@ -29,6 +31,7 @@ export class Conference {
    */
   public static fromJson(json: ConferenceJson) : Conference {
     const props: ConferenceProps = {
+      id: json.id,
       name: json.name,
       description: json.description,
       rooms: [],
@@ -50,13 +53,14 @@ export class Conference {
    */
   toJson() : ConferenceJson {
     const props = this.props
-    const rooms = []
+    const rooms: RoomJson[] = []
     if (props.rooms != null) {
       props.rooms.forEach((room: any) => {
         rooms.push(room.toJson())
       })
     }
     return {
+      id: props.id,
       name: props.name,
       description: props.description,
       rooms: rooms,

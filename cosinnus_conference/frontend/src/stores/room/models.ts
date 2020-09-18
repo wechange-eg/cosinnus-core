@@ -6,9 +6,9 @@ export interface RoomJson {
   count: number
   url: string
   management_urls: {
-    create?: string
-    update?: string
-    delete?: string
+    create_event?: string
+    update_room?: string
+    delete_room?: string
   }
 }
 
@@ -20,9 +20,9 @@ export interface RoomProps {
   count: number
   url: string
   managementUrls: {
-    create?: string
-    update?: string
-    delete?: string
+    createEvent?: string
+    updateRoom?: string
+    deleteRoom?: string
   }
 }
 
@@ -47,7 +47,11 @@ export class Room {
       type: json.type,
       count: json.count,
       url: json.url,
-      managementUrls: json.management_urls,
+      managementUrls: {
+        createEvent: json.management_urls.create_event,
+        updateRoom: json.management_urls.update_room,
+        deleteRoom: json.management_urls.delete_room,
+      },
     }
 
     return new Room(props)
@@ -67,7 +71,11 @@ export class Room {
       type: props.type,
       count: props.count,
       url: props.url,
-      management_urls: props.managementUrls,
+      management_urls: {
+        create_event: props.managementUrls.createEvent,
+        update_room: props.managementUrls.updateRoom,
+        delete_room: props.managementUrls.deleteRoom,
+      },
     }
   }
 }

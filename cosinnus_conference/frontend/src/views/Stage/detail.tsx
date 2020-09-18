@@ -17,6 +17,7 @@ import {Content} from "../components/Content/style"
 import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
+import {ManageEventButtons} from "../components/ManageEventButtons"
 
 interface StageEventProps {
   id: number
@@ -58,6 +59,7 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
               height="100%"
             />
           </div>
+          <ManageEventButtons event={event} />
         </Content>
       ) || (
         <Content>

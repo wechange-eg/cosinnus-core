@@ -1,6 +1,6 @@
 import React from "react"
 import {FormattedMessage} from "react-intl"
-import {Card, CardActionArea, CardContent, Link, Typography} from "@material-ui/core"
+import {Button, Card, CardActionArea, CardContent, Link, Typography} from "@material-ui/core"
 import {useStyles} from "./style"
 import {useHistory} from "react-router"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
@@ -8,6 +8,7 @@ import {faCalendarPlus, faHeart, faUserPlus} from "@fortawesome/free-solid-svg-i
 
 import {Event} from "../../../stores/events/models"
 import {formatTime} from "../../../utils/events"
+import clsx from "clsx"
 
 export interface EventCardProps {
   event: Event
@@ -22,8 +23,17 @@ export function EventCard(props: EventCardProps) {
   }
   const isNow = event.isNow()
   return (
-    <Card className={classes.card}>
-      <CardActionArea onClick={() => history.push("/" + event.props.id)}>
+    <Card className={clsx({
+      [classes.card]: true,
+      [classes.break]: event.props.isBreak,
+    })}>
+      <CardActionArea
+        classes={{
+          root: classes.actionArea,
+          focusHighlight: classes.focusHighlight
+        }}
+        onClick={() => !event.props.isBreak && history.push("/" + event.props.id)}
+      >
         <CardContent>
           <div className={classes.left}>
             {isNow && (

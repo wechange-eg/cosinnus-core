@@ -22,6 +22,7 @@ import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
 import {fetchEvents} from "../../stores/events/effects"
 import {findEventById} from "../../utils/events"
+import {ManageEventButtons} from "../components/ManageEventButtons"
 
 interface WorkshopsProps {
   id: number
@@ -64,6 +65,7 @@ function WorkshopConnector (props: WorkshopsProps & RouteComponentProps) {
               height="100%"
             />
           </div>
+          <ManageEventButtons event={event} />
         </Content>
       ) || (
         <Content>

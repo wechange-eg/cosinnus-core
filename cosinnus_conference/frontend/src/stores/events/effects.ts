@@ -14,10 +14,16 @@ import {RootState} from "../rootReducer"
  *
  * @returns {(dispatch: Dispatch) => Promise<void>} - return function
  */
-export const fetchEvents: ReduxThunkActionCreator<Promise<void>> = () => (dispatch: Dispatch, getState: () => RootState) => {
+export const fetchEvents: ReduxThunkActionCreator<[boolean], Promise<void>> = (fetchAll) => (dispatch: Dispatch, getState: () => RootState) => {
   const state = getState()
-  const roomId: string = state.room && state.room.props.id.toString() || ""
-  return fetch(`/api/v2/conference_events/?page_size=100&room_id=${roomId}`, {
+  const roomId = state.room && state.room.props.id || 0
+  let filterParam = ""
+  if (fetchAll && state.conference) {
+    filterParam = "conference_id=" + state.conference.props.id
+  } else {
+    filterParam = "room_id=" + roomId
+  }
+  return fetch(`/api/v2/conference_events/?page_size=100&${filterParam}`, {
     method: "GET"
   }).then(response => {
     if (response.status === 200) {
