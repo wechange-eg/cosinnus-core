@@ -24,7 +24,7 @@ interface ResultsProps {
 
 function mapStateToProps(state: RootState, _ownProps: ResultsProps) {
   return {
-    url: state.room.url,
+    url: state.room.props.url,
   }
 }
 

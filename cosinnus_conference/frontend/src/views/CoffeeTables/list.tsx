@@ -29,7 +29,7 @@ interface CoffeeTablesProps {
 function mapStateToProps(state: RootState, _ownProps: CoffeeTablesProps) {
   return {
     events: state.events[state.room.props.id],
-    url: state.room.url,
+    url: state.room.props.url,
   }
 }
 

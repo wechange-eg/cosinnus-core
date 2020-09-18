@@ -30,7 +30,7 @@ interface OrganisationsProps {
 function mapStateToProps(state: RootState) {
   return {
     organisations: state.organisations,
-    url: state.room.url,
+    url: state.room.props.url,
   }
 }
 

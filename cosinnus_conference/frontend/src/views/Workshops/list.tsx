@@ -29,7 +29,7 @@ interface WorkshopsProps {
 function mapStateToProps(state: RootState) {
   return {
     events: state.events[state.room.props.id],
-    url: state.room.url,
+    url: state.room.props.url,
   }
 }
 
