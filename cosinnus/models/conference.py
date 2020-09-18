@@ -66,6 +66,7 @@ class CosinnusConferenceRoom(models.Model):
     
     # rooms of these types will initialize a corresponding rocketchat room
     ROCKETCHAT_ROOM_TYPES = (
+        TYPE_LOBBY,
         TYPE_STAGE,
         TYPE_WORKSHOPS,
         TYPE_DISCUSSIONS,
@@ -151,9 +152,8 @@ class CosinnusConferenceRoom(models.Model):
         
         super(CosinnusConferenceRoom, self).save(*args, **kwargs)
         
-        # initialize room-type-specific extras
-        if created:
-            self.ensure_room_type_dependencies()
+        # initialize/sync room-type-specific extras
+        self.ensure_room_type_dependencies()
         
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:conference-page-room', kwargs={'group': self.group, 'slug': self.slug})
