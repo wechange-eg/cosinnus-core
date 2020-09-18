@@ -33,6 +33,9 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: ".3rem",
     padding: ".1rem .5rem",
     marginBottom: "1.2rem",
+    "& svg": {
+      width: "2rem !important",
+    },
     "& span": {
       fontWeight: 700,
       fontSize: "1rem",

@@ -15,6 +15,7 @@ cosinnus_group_patterns = [
     url(r'^coffee-tables/$', views.conference_coffee_tables, name='conference-coffee'),
     url(r'^networking/$', views.conference_networking, name='conference-networking'),
     url(r'^exhibition/$', views.conference_exhibition, name='conference-exhibition'),
+    url(r'^results/$', views.conference_results, name='conference-results'),
 ]
 
 cosinnus_root_patterns = []

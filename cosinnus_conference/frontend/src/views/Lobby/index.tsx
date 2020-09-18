@@ -14,7 +14,7 @@ import {RootState} from "../../stores/rootReducer"
 import {fetchEvents} from "../../stores/events/effects"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {EventSlot} from "../../stores/events/models"
-import {useStyles} from "../components/Iframe/style"
+import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {formatTime} from "../../utils/events"
 import {Content} from "../components/Content/style"
 import {EventList} from "../components/EventList/style"
@@ -22,26 +22,27 @@ import {Sidebar} from "../components/Sidebar"
 
 interface LobbyProps {
   events: EventSlot[]
-
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
+  url: string
 }
 
-function mapStateToProps(state: RootState) {
+function mapStateToProps(state: RootState, _ownProps: LobbyProps) {
   return {
-    events: state.events,
+    events: state.events[window.conferenceRoom],
+    url: state.conference && state.conference.rooms[window.conferenceRoom].url,
   }
 }
 
 const mapDispatchToProps = {
-  fetchEvents
+  fetchEvents: fetchEvents
 }
 
 function LobbyConnector (props: LobbyProps & RouteComponentProps) {
-  const { events, fetchEvents } = props
+  const { events, fetchEvents, url } = props
   if (!events) {
-    fetchEvents()
+    fetchEvents(window.conferenceRoom)
   }
-  const classes = useStyles()
+  const iframeClasses = iframeUseStyles()
   return (
     <Grid container>
       <Content>
@@ -90,10 +91,10 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
       </Content>
       <Sidebar elements={(
         <Iframe
-          url="https://chat.wechange.de/channel/general"
+          url={url}
           width="100%"
           height="100%"
-          className={classes.iframe}
+          className={iframeClasses.sidebarIframe}
         />
       )} />
     </Grid>

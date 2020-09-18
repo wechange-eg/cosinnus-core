@@ -12,50 +12,53 @@ import Iframe from "react-iframe"
 
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {Event} from "../../stores/events/models"
-import {useStyles as useIframeStyles} from "../components/Iframe/style"
+import {Event, EventSlot} from "../../stores/events/models"
+import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Content} from "../components/Content/style"
 import {Sidebar} from "../components/Sidebar"
-import {fetchCoffeeTables} from "../../stores/coffee_tables/effects"
 import {useStyles} from "./style"
 import {CoffeeTable} from "../components/CoffeeTable"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faPlus} from "@fortawesome/free-solid-svg-icons"
+import {fetchEvents} from "../../stores/events/effects"
 
 interface CoffeeTablesProps {
-  coffeeTables: Event[]
-
-  fetchCoffeeTables: DispatchedReduxThunkActionCreator<Promise<void>>
+  events: EventSlot[]
+  fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
+  url: string
 }
 
-function mapStateToProps(state: RootState) {
+function mapStateToProps(state: RootState, _ownProps: CoffeeTablesProps) {
   return {
-    coffeeTables: state.coffee_tables,
+    events: state.events[window.conferenceRoom],
+    url: state.conference && state.conference.rooms[window.conferenceRoom].url,
   }
 }
 
 const mapDispatchToProps = {
-  fetchCoffeeTables
+  fetchEvents: fetchEvents
 }
 
 function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) {
-  const { coffeeTables, fetchCoffeeTables } = props
-  if (!coffeeTables) {
-    fetchCoffeeTables()
+  const { events, fetchEvents, url } = props
+  if (!events) {
+    fetchEvents(window.conferenceRoom)
   }
   const classes = useStyles()
-  const iFrameClasses = useIframeStyles()
+  const iframeClasses = iframeUseStyles()
   return (
     <Grid container>
       <Content>
         <div className={classes.section}>
           <Typography component="h1"><FormattedMessage id="Happening now" defaultMessage="Happening now" /></Typography>
-          {coffeeTables && coffeeTables.length > 0 && (
+          {events && events.length > 0 && (
             <Grid container spacing={4}>
-              {coffeeTables.map((event, index) => (
-              <Grid item key={index} sm={6} className="now">
-                <CoffeeTable event={event} />
-              </Grid>
+              {events.map((slot, index) => (
+                slot.props.events.map((event, eventIndex) => (
+                <Grid item key={index + "-" + eventIndex} sm={6} className="now">
+                  <CoffeeTable event={event} />
+                </Grid>
+                ))
               ))}
             </Grid>
           )
@@ -73,10 +76,10 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
       </Content>
       <Sidebar elements={(
         <Iframe
-          url="https://chat.wechange.de/channel/general"
+          url={url}
           width="100%"
           height="100%"
-          className={iFrameClasses.iframe}
+          className={iframeClasses.sidebarIframe}
         />
       )} />
     </Grid>

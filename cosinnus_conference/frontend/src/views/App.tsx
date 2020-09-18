@@ -21,12 +21,19 @@ import {ConferenceState} from "../stores/conference/reducer"
 import {fetchConference} from "../stores/conference/effects"
 import {Nav} from "./components/Nav"
 import {Lobby} from "./Lobby"
-import {Stage} from "./Stage"
-import {Discussions} from "./Discussions"
-import {Workshops} from "./Workshops"
-import {CoffeeTables} from "./CoffeeTables"
-import {Networking} from "./Networking"
+import {Stage} from "./Stage/list"
+import {Discussions} from "./Discussions/list"
+import {Workshops} from "./Workshops/list"
+import {CoffeeTables} from "./CoffeeTables/list"
+import {Networking} from "./Networking/list"
 import {Organisations} from "./Organisations"
+import {CoffeeTable} from "./CoffeeTables/detail"
+import {Channels} from "./Channels/list"
+import {Channel} from "./Channels/detail"
+import {Workshop} from "./Workshops/detail"
+import {Discussion} from "./Discussions/detail"
+import {StageEvent} from "./Stage/detail"
+import {Results} from "./Results"
 
 interface AppProps {
   conference: ConferenceState
@@ -71,11 +78,63 @@ function AppConnector(props: AppProps) {
     fetchConference()
   }
 
-  const protRouteProps: ProtectedRouteProps = {
-    isAuthenticated: !!user
+  function getRoutes(room: string) {
+    const routeProps: ProtectedRouteProps = {
+      isAuthenticated: !!user,
+      exact: true,
+      path: "/",
+    }
+    return (room === "lobby" && (
+      <Switch>
+        <ProtectedRoute {...routeProps} component={Lobby} />
+      </Switch>
+      )) || (room === "stage" && (
+      <Switch>
+        <ProtectedRoute {...routeProps} component={Stage}/>
+        <ProtectedRoute {...routeProps} path="/:id" render={props => (
+          <StageEvent id={+props.match.params.id} {...props} />
+        )}/>
+      </Switch>
+      )) || (room === "discussions" && (
+      <Switch>
+        <ProtectedRoute {...routeProps} component={Discussions}/>
+        <ProtectedRoute {...routeProps} path="/:id" render={props => (
+          <Discussion id={+props.match.params.id} {...props} />
+        )}/>
+      </Switch>
+      )) || (room === "workshops" && (
+      <Switch>
+        <ProtectedRoute {...routeProps} component={Workshops}/>
+        <ProtectedRoute {...routeProps} path="/:id" render={props => (
+          <Workshop id={+props.match.params.id} {...props} />
+        )}/>
+      </Switch>
+      )) || (room === "coffee-tables" && (
+      <Switch>
+        <ProtectedRoute {...routeProps} component={CoffeeTables}/>
+        <ProtectedRoute {...routeProps} path="/:id" render={props => (
+          <CoffeeTable id={+props.match.params.id} {...props} />
+        )}/>
+      </Switch>
+      )) || (room === "networking" && (
+      <Switch>
+        <ProtectedRoute {...routeProps} component={Channels}/>
+        <ProtectedRoute {...routeProps} path="/:id" render={props => (
+          <Channel id={+props.match.params.id} {...props} />
+        )}/>
+      </Switch>
+      )) || (room === "exhibition" && (
+      <Switch>
+        <ProtectedRoute {...routeProps} component={Organisations}/>
+      </Switch>
+    )) || (room === "results" && (
+      <Switch>
+        <ProtectedRoute {...routeProps} component={Results}/>
+      </Switch>
+    ))
   }
 
-  const view = window.conferenceView;
+  const room = window.conferenceRoom
   return (
     <IntlProvider
       locale={translations && translations.locale || "en"}
@@ -85,23 +144,7 @@ function AppConnector(props: AppProps) {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Nav />
-          <Switch>
-            {(view === "lobby" &&
-              <ProtectedRoute {...protRouteProps} exact path="/" component={Lobby}/>)
-              || (view === "stage" &&
-              <ProtectedRoute {...protRouteProps} exact path="/" component={Stage}/>)
-              || (view === "discussions" &&
-              <ProtectedRoute {...protRouteProps} exact path="/" component={Discussions}/>)
-              || (view === "workshops" &&
-              <ProtectedRoute {...protRouteProps} exact path="/" component={Workshops}/>)
-              || (view === "coffee-tables" &&
-              <ProtectedRoute {...protRouteProps} exact path="/" component={CoffeeTables}/>)
-              || (view === "networking" &&
-              <ProtectedRoute {...protRouteProps} exact path="/" component={Networking}/>)
-              || (view === "exhibition" &&
-              <ProtectedRoute {...protRouteProps} exact path="/" component={Organisations}/>)
-            }
-          </Switch>
+          {getRoutes(room)}
         </ThemeProvider>
       </Router>
     </IntlProvider>

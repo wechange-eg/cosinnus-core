@@ -22,13 +22,14 @@ import {useStyles} from "./style"
 
 interface OrganisationsProps {
   organisations: Organisation[]
-
   fetchOrganisations: DispatchedReduxThunkActionCreator<Promise<void>>
+  url: string
 }
 
 function mapStateToProps(state: RootState) {
   return {
     organisations: state.organisations,
+    url: state.conference && state.conference.rooms[window.conferenceRoom].url,
   }
 }
 
@@ -37,12 +38,12 @@ const mapDispatchToProps = {
 }
 
 function OrganisationsConnector (props: OrganisationsProps & RouteComponentProps) {
-  const { organisations, fetchOrganisations } = props
+  const { organisations, fetchOrganisations, url } = props
   if (!organisations) {
     fetchOrganisations()
   }
   const classes = useStyles()
-  const iFrameClasses = iframeUseStyles()
+  const iframeClasses = iframeUseStyles()
   return (
     <Grid container>
       <Content>
@@ -80,10 +81,10 @@ function OrganisationsConnector (props: OrganisationsProps & RouteComponentProps
       </Content>
       <Sidebar elements={(
         <Iframe
-          url="https://chat.wechange.de/channel/general"
+          url={url}
           width="100%"
           height="100%"
-          className={iFrameClasses.iframe}
+          className={iframeClasses.sidebarIframe}
         />
       )} />
     </Grid>

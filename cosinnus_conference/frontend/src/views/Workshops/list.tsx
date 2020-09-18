@@ -12,38 +12,39 @@ import Iframe from "react-iframe"
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {EventSlot} from "../../stores/events/models"
-import {useStyles as useIframeStyles} from "../components/Iframe/style"
+import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Content} from "../components/Content/style"
 import {Sidebar} from "../components/Sidebar"
-import {fetchWorkshops} from "../../stores/workshops/effects"
 import {useStyles} from "./style"
 import {EventCard} from "../components/EventCard"
+import {fetchEvents} from "../../stores/events/effects"
 
 interface WorkshopsProps {
-  workshops: EventSlot[]
-
-  fetchWorkshops: DispatchedReduxThunkActionCreator<Promise<void>>
+  events: EventSlot[]
+  fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
+  url: string
 }
 
-function mapStateToProps(state: RootState) {
+function mapStateToProps(state: RootState, _ownProps: WorkshopsProps) {
   return {
-    workshops: state.workshops,
+    events: state.events[window.conferenceRoom],
+    url: state.conference && state.conference.rooms[window.conferenceRoom].url,
   }
 }
 
 const mapDispatchToProps = {
-  fetchWorkshops
+  fetchEvents: fetchEvents
 }
 
 function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
-  const { workshops, fetchWorkshops } = props
-  if (!workshops) {
-    fetchWorkshops()
+  const { events, fetchEvents, url } = props
+  if (!events) {
+    fetchEvents(window.conferenceRoom)
   }
   const classes = useStyles()
-  const iFrameClasses = useIframeStyles()
-  const currentWorkshops = workshops && workshops.filter((w) => w.isNow()) || []
-  const upcomingWorkshops = workshops && workshops.filter((w) => !w.isNow()) || []
+  const iframeClasses = iframeUseStyles()
+  const currentWorkshops = events && events.filter((w) => w.isNow()) || []
+  const upcomingWorkshops = events && events.filter((w) => !w.isNow()) || []
   return (
     <Grid container>
       <Content>
@@ -78,10 +79,10 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
       </Content>
       <Sidebar elements={(
         <Iframe
-          url="https://chat.wechange.de/channel/general"
+          url={url}
           width="100%"
           height="100%"
-          className={iFrameClasses.iframe}
+          className={iframeClasses.sidebarIframe}
         />
       )} />
     </Grid>

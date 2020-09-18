@@ -63,14 +63,19 @@ const muiCssBaseline = {
     },
     "body": {
       "padding-top": "50px",
-      "background": "#ffffff"
+      "background": "#ffffff",
+      "height": "100%",
     },
     ".conference": {
-      "margin-left": navWidth
+      "margin-left": navWidth,
+      "height": "100%",
     },
     "p": {
       padding: 0,
       background: "transparent",
+    },
+    "#app": {
+      "height": "100%",
     }
   }
 }

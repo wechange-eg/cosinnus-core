@@ -16,33 +16,35 @@ import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Content} from "../components/Content/style"
 import {Sidebar} from "../components/Sidebar"
-import {Channel} from "../../stores/channels/reducer"
-import {fetchChannels} from "../../stores/channels/effects"
 import {useStyles} from "./style"
+import {fetchEvents} from "../../stores/events/effects"
+import {EventSlot} from "../../stores/events/models"
+import {Channel} from "../components/Channel"
 
-interface NetworkingProps {
-  channels: Channel[]
-
-  fetchChannels: DispatchedReduxThunkActionCreator<Promise<void>>
+interface ChannelsProps {
+  events: EventSlot[]
+  fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
+  url: string
 }
 
-function mapStateToProps(state: RootState) {
+function mapStateToProps(state: RootState, _ownProps: ChannelsProps) {
   return {
-    channels: state.channels,
+    events: state.events[window.conferenceRoom],
+    url: state.conference && state.conference.rooms[window.conferenceRoom].url,
   }
 }
 
 const mapDispatchToProps = {
-  fetchChannels
+  fetchEvents: fetchEvents
 }
 
-function NetworkingConnector (props: NetworkingProps & RouteComponentProps) {
-  const { channels, fetchChannels } = props
-  if (!channels) {
-    fetchChannels()
+function ChannelsConnector (props: ChannelsProps & RouteComponentProps) {
+  const { events, fetchEvents, url } = props
+  if (!events) {
+    fetchEvents(window.conferenceRoom)
   }
   const classes = useStyles()
-  const iFrameClasses = iframeUseStyles()
+  const iframeClasses = iframeUseStyles()
   return (
     <Grid container>
       <Content>
@@ -52,16 +54,14 @@ function NetworkingConnector (props: NetworkingProps & RouteComponentProps) {
             defaultMessage="Connect with someone via videochat for 5 minutes"
           />
         </Typography>
-        {channels && channels.length > 0 && (
+        {events && events.length > 0 && (
         <Grid container spacing={2}>
-          {channels.map((channel, index) => (
-          <Grid item key={index} sm={6} className="now">
-            <Card className={classes.card}>
-              <CardContent>
-                <Typography component="span">{channel.name}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+          {events.map((slot, index) => (
+            slot.props.events.map((event, eventIndex) => (
+            <Grid item key={index + "-" + eventIndex} sm={6} className="now">
+              <Channel event={event} />
+            </Grid>
+            ))
           ))}
         </Grid>
         )
@@ -73,16 +73,16 @@ function NetworkingConnector (props: NetworkingProps & RouteComponentProps) {
       </Content>
       <Sidebar elements={(
         <Iframe
-          url="https://chat.wechange.de/channel/general"
+          url={url}
           width="100%"
           height="100%"
-          className={iFrameClasses.iframe}
+          className={iframeClasses.sidebarIframe}
         />
       )} />
     </Grid>
   )
 }
 
-export const Networking = reduxConnect(mapStateToProps, mapDispatchToProps)(
-  withRouter(NetworkingConnector)
+export const Channels = reduxConnect(mapStateToProps, mapDispatchToProps)(
+  withRouter(ChannelsConnector)
 )

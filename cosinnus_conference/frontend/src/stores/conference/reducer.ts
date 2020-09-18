@@ -1,10 +1,20 @@
 import { AnyAction } from "redux"
+
 import { ActionType } from "../../constants/actions"
+
+export interface Room {
+  name: string
+  type: string
+  count: number
+  url: string
+}
 
 export interface ConferenceState {
   name: string
   description: string
-  rooms: any
+  rooms: {
+    [r: string]: Room
+  }
 }
 
 export function ConferenceReducer(

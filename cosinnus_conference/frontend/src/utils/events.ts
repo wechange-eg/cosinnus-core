@@ -44,9 +44,22 @@ export const filterCurrentAndRoom = (slots: EventSlot[], room: string) => {
 /**
  * Format time
  *
- * @returns {(dispatch: Dispatch) => Promise<void>} - return function
+ * @returns string
  */
 export const formatTime = (datetime: Date) => {
   return moment(datetime).format("HH:mm")
 }
 
+/**
+ * Get event from event slots using ID
+ *
+ * @returns Event
+ */
+export const findEventById = (slots: EventSlot[], eventId: number): Event => {
+  let event: Event = null
+  for (let i = 0; i < slots.length; i++) {
+    event = slots[i].props.events.find((e) => e.props.id === eventId)
+    if (event) break
+  }
+  return event
+}

@@ -4,11 +4,20 @@ import {
 } from "@material-ui/core"
 import {connect} from "react-redux"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import { faCircle } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBuilding, faCheck,
+  faCircle,
+  faCoffee,
+  faComments,
+  faHandshake,
+  faHome, faUser,
+  faUsers
+} from '@fortawesome/free-solid-svg-icons'
 
 import {RootState} from "../../../stores/rootReducer"
 import {useStyles} from "./style"
 import {ConferenceState} from "../../../stores/conference/reducer"
+import {IconDefinition} from "@fortawesome/fontawesome-common-types"
 
 interface NavProps {
   conference: ConferenceState
@@ -25,10 +34,23 @@ const mapDispatchToProps = {
 
 function NavConnector(props: NavProps) {
   const { conference } = props
+  const classes = useStyles()
   if (!conference) {
     return null
   }
-  const classes = useStyles()
+  function getIconByType(type: string) {
+    const icons: { [t: string]: IconDefinition } = {
+      "lobby": faHome,
+      "stage": faUser,
+      "discussions": faComments,
+      "workshops": faUsers,
+      "coffee-tables": faCoffee,
+      "networking": faHandshake,
+      "exhibition": faBuilding,
+      "results": faCheck,
+    }
+    return icons[type] || faCircle
+  }
   return (
     <Drawer
       className={classes.drawer}
@@ -44,19 +66,22 @@ function NavConnector(props: NavProps) {
         <Typography component="h4">{conference.description}</Typography>
       </div>
       <List>
-        {conference.rooms.map((room, index) => (
-          <ListItem
-            button
-            key={room.slug}
-            href={"../" + room.slug + "/"}
-            selected={room.slug === window.conferenceView}
-            className={classes.listItem}
-          >
-            <FontAwesomeIcon icon={faCircle} />&nbsp;
-            <ListItemText primary={room.name} />
-            <Badge badgeContent={room.count} className={classes.badge} />
-          </ListItem>
-        ))}
+        {Object.keys(conference.rooms).map((key, index) => {
+          const room = conference.rooms[key]
+          return (
+            <ListItem
+              button
+              key={key}
+              href={"../" + key + "/"}
+              selected={key === window.conferenceRoom}
+              className={classes.listItem}
+            >
+              <FontAwesomeIcon icon={getIconByType(room.type)}/>&nbsp;
+              <ListItemText primary={room.name}/>
+              <Badge badgeContent={room.count} className={classes.badge} />
+            </ListItem>
+          )
+        })}
       </List>
     </Drawer>
   )

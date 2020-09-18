@@ -19,17 +19,20 @@ export interface ReduxObjectActionCreator<P> {
   }
 }
 
-export interface ReduxCaseActionCreator<T, P> {
-  (arg0: T, arg1: P): {
-    readonly type: string
-    readonly payload: P
-  }
-}
-
 export interface ReduxErrorActionCreator<P> {
   (arg0: P): {
     readonly type: string
     readonly payload: Error<P>
+    readonly error: boolean
+  }
+}
+
+export interface ReduxObjectErrorActionCreator<P> {
+  (...args: P): {
+    readonly type: string
+    readonly payload: {
+      [K: string]: Error<P>
+    }
     readonly error: boolean
   }
 }

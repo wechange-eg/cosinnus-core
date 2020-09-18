@@ -1,72 +1,63 @@
 import {
-  Badge, Box, Button, Drawer,
-  Grid, List, ListItem, ListItemText,
+  Grid, ListItem, ListItemText,
   Typography
 } from "@material-ui/core"
 import React, {useState} from "react"
 import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
-import {withRouter} from "react-router"
+import {useHistory, withRouter} from "react-router"
 import {FormattedMessage} from "react-intl";
 import Iframe from "react-iframe"
+import clsx from "clsx"
 
 import {RootState} from "../../stores/rootReducer"
 import {fetchEvents} from "../../stores/events/effects"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import clsx from "clsx"
-
 import {EventSlot} from "../../stores/events/models"
-import {filterCurrentAndRoom, formatTime} from "../../utils/events"
+import {formatTime} from "../../utils/events"
 import {Content} from "../components/Content/style"
 import {EventList} from "../components/EventList/style"
-import {Sidebar} from "../components/Sidebar/index"
-import {useStyles} from "./style"
-import {EventSlot} from "../../stores/discussions/models"
-import {fetchDiscussions} from "../../stores/discussions/effects"
+import {Sidebar} from "../components/Sidebar"
+import {useStyles as iframeUseStyles} from "./style"
 
 interface StageProps {
   events: EventSlot[]
-  discussions: EventSlot[]
-
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
-  fetchDiscussions: DispatchedReduxThunkActionCreator<Promise<void>>
+  url: string
 }
 
-function mapStateToProps(state: RootState) {
+function mapStateToProps(state: RootState, _ownProps: StageProps) {
   return {
-    events: state.events,
-    discussions: state.discussions,
+    events: state.events[window.conferenceRoom],
+    url: state.conference && state.conference.rooms[window.conferenceRoom].url,
   }
 }
 
 const mapDispatchToProps = {
-  fetchEvents,
-  fetchDiscussions
+  fetchEvents: fetchEvents
 }
 
 function StageConnector (props: StageProps & RouteComponentProps) {
-  const { events, fetchEvents } = props
-  const { discussions, fetchDiscussions } = props
+  const { events, fetchEvents, url } = props
+  const history = useHistory()
   if (!events) {
-    fetchEvents()
+    fetchEvents(window.conferenceRoom)
   }
-  if (!discussions) {
-    fetchDiscussions()
-  }
+  const discussions: Event[] = []
 
-  const classes = useStyles()
-  const eventSlot = filterCurrentAndRoom(events, window.conferenceView)
+  const iframeClasses = iframeUseStyles()
   return (
     <Grid container>
       <Content>
         <Typography component="h1"><FormattedMessage id="Agenda" defaultMessage="Agenda" /></Typography>
-        {eventSlot && (
-          <EventList className="now">
-            {eventSlot.props.events.map((event, index) => (
+        {events && events.map((slot, index) => (
+          <EventList key={index} className="now">
+            {slot.props.events.map((event, index) => (
             <ListItem
               button
               key={event.props.id}
-              href={event.props.url}
+              href="#"
+              onClick={() => history.push("/" + event.props.id)}
             >
               <ListItemText primary={event.props.roomName} />
               <ListItemText primary={event.props.name} secondary={event.props.description} />
@@ -77,7 +68,7 @@ function StageConnector (props: StageProps & RouteComponentProps) {
         || <Typography>
           <FormattedMessage id="No current events in this room." defaultMessage="No current events in this room." />
         </Typography>
-        }
+        )}
         {discussions && discussions.map((slot, index) => {
           const isNow = slot.isNow()
           return (
@@ -127,10 +118,10 @@ function StageConnector (props: StageProps & RouteComponentProps) {
       </Content>
       <Sidebar elements={(
         <Iframe
-          url="https://chat.wechange.de/channel/general"
+          url={url}
           width="100%"
           height="100%"
-          className={classes.iframe}
+          className={iframeClasses.sidebarIframe}
         />
       )} />
     </Grid>

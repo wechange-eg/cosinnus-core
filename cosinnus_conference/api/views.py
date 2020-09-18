@@ -15,7 +15,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
     serializer_class = ConferenceSerializer
 
     @action(detail=True, methods=['get'])
-    def events(self, request, pk=None):
+    def lobby(self, request, pk=None):
         return Response([
             {
                 "id": 1,
@@ -25,7 +25,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "to_time": "2020-09-14 09:15:00 UTC",
                 "room_name": "Chat LOBBY",
                 "room_slug": "lobby",
-                "url": "/lobby/"
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
             {
                 "id": 2,
@@ -35,7 +35,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "to_time": "2020-09-14 10:30:00 UTC",
                 "room_name": "Open discussions 1",
                 "room_slug": "discussions-1",
-                "url": "/discussions/1/"
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
             {
                 "id": 3,
@@ -45,7 +45,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "to_time": "2020-09-14 10:30:00 UTC",
                 "room_name": "Open discussions 2",
                 "room_slug": "discussions-2",
-                "url": "/discussions/2/"
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
             {
                 "name": "Pause",
@@ -60,7 +60,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "to_time": "2020-09-14 11:30:00 UTC",
                 "room_name": "Open discussions 3",
                 "room_slug": "discussions-3",
-                "url": "/discussions/3/"
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
             {
                 "id": 5,
@@ -70,7 +70,22 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "to_time": "2020-09-14 11:30:00 UTC",
                 "room_name": "Open discussions 4",
                 "room_slug": "discussions-4",
-                "url": "/discussions/4/"
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
+            },
+        ])
+
+    @action(detail=True, methods=['get'])
+    def stage(self, request, pk=None):
+        return Response([
+            {
+                "id": 2,
+                "name": "Offline Eco-Communities 1",
+                "description": "Ilona Gebauer, Thomas Krüger",
+                "from_time": "2020-09-14 09:15:00 UTC",
+                "to_time": "2020-09-14 10:30:00 UTC",
+                "room_name": "Stage",
+                "room_slug": "stage-1",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
         ])
 
@@ -85,7 +100,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "to_time": "2020-09-14 10:30:00 UTC",
                 "room_name": "Open discussions 1",
                 "room_slug": "discussions-1",
-                "url": "/discussions/1/"
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
             {
                 "id": 3,
@@ -95,7 +110,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "to_time": "2020-09-14 10:30:00 UTC",
                 "room_name": "Open discussions 2",
                 "room_slug": "discussions-2",
-                "url": "/discussions/2/"
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
             {
                 "id": 4,
@@ -105,7 +120,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "to_time": "2020-09-14 11:30:00 UTC",
                 "room_name": "Open discussions 3",
                 "room_slug": "discussions-3",
-                "url": "/discussions/3/"
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
             {
                 "id": 5,
@@ -115,7 +130,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "to_time": "2020-09-14 11:30:00 UTC",
                 "room_name": "Open discussions 4",
                 "room_slug": "discussions-4",
-                "url": "/discussions/4/"
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
         ])
 
@@ -130,7 +145,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "to_time": "2020-09-14 10:30:00 UTC",
                 "room_name": "Workshop 1",
                 "room_slug": "workshops-1",
-                "url": "/workshops/1/",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
                 "participants_count": 34
             },
             {
@@ -141,7 +156,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "to_time": "2020-09-14 10:30:00 UTC",
                 "room_name": "Workshop 2",
                 "room_slug": "workshops-2",
-                "url": "/workshops/2/",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
                 "participants_count": 34
             },
             {
@@ -152,7 +167,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "to_time": "2020-09-14 11:30:00 UTC",
                 "room_name": "Workshop 3",
                 "room_slug": "workshops-3",
-                "url": "/workshops/3/",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
                 "participants_count": 34
             },
             {
@@ -163,7 +178,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "to_time": "2020-09-14 11:30:00 UTC",
                 "room_name": "Workshop 4",
                 "room_slug": "workshops-4",
-                "url": "/workshops/4/",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
                 "participants_count": 34
             },
         ])
@@ -175,6 +190,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "id": 1,
                 "name": "Topic of the coffee table",
                 "image_url": "/path/to/image.png",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
                 "participants": [
                     {
                         "id": 1,
@@ -203,6 +219,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "id": 2,
                 "name": "Topic of the coffee table",
                 "image_url": "/path/to/image.png",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
                 "participants": [
                     {
                         "id": 1,
@@ -231,6 +248,7 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "id": 3,
                 "name": "Topic of the coffee table",
                 "image_url": "/path/to/image.png",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
                 "participants": [
                     {
                         "id": 1,
@@ -258,31 +276,37 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
         ])
 
     @action(detail=True, methods=['get'])
-    def channels(self, request, pk=None):
+    def networking(self, request, pk=None):
         return Response([
             {
                 "id": 1,
                 "name": "Completely random",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
             {
                 "id": 2,
                 "name": "Someone who you are not connected with",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
             {
                 "id": 3,
                 "name": "Someone who is based in another country than you",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
             {
                 "id": 4,
                 "name": "Someone who is working on the same topic(s)",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
             {
                 "id": 5,
                 "name": "Someone who is a cat person",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
             {
                 "id":6,
                 "name": "Someone who is a dog person",
+                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
             },
         ])
 

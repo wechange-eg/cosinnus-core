@@ -5,7 +5,7 @@ import {
 import React from "react"
 import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
-import {withRouter} from "react-router"
+import {withRouter, useHistory} from "react-router"
 import {FormattedMessage} from "react-intl";
 import Iframe from "react-iframe"
 import clsx from "clsx"
@@ -13,40 +13,42 @@ import clsx from "clsx"
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {EventSlot} from "../../stores/events/models"
-import {useStyles} from "../components/Iframe/style"
+import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {formatTime} from "../../utils/events"
 import {Content} from "../components/Content/style"
 import {EventList} from "../components/EventList/style"
 import {Sidebar} from "../components/Sidebar"
-import {fetchDiscussions} from "../../stores/discussions/effects"
+import {fetchEvents} from "../../stores/events/effects"
 
 interface DiscussionsProps {
-  discussions: EventSlot[]
-
-  fetchDiscussions: DispatchedReduxThunkActionCreator<Promise<void>>
+  events: EventSlot[]
+  fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
+  url: string
 }
 
-function mapStateToProps(state: RootState) {
+function mapStateToProps(state: RootState, _ownProps: DiscussionsProps) {
   return {
-    discussions: state.discussions,
+    events: state.events[window.conferenceRoom],
+    url: state.conference && state.conference.rooms[window.conferenceRoom].url,
   }
 }
 
 const mapDispatchToProps = {
-  fetchDiscussions
+  fetchEvents: fetchEvents
 }
 
 function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
-  const { discussions, fetchDiscussions } = props
-  if (!discussions) {
-    fetchDiscussions()
+  const { events, fetchEvents, url } = props
+  const history = useHistory()
+  if (!events) {
+    fetchEvents(window.conferenceRoom)
   }
-  const classes = useStyles()
+  const iframeClasses = iframeUseStyles()
   return (
     <Grid container>
       <Content>
         <Typography component="h1"><FormattedMessage id="Agenda" defaultMessage="Agenda" /></Typography>
-        {discussions && discussions.map((slot, index) => {
+        {events && events.map((slot, index) => {
           const isNow = slot.isNow()
           return (
           <EventList
@@ -74,7 +76,8 @@ function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
             <ListItem
               button
               key={event.props.id}
-              href={event.props.url}
+              href="#"
+              onClick={() => history.push("/" + event.props.id)}
             >
               <ListItemText
                 primary={event.props.roomName}
@@ -90,10 +93,10 @@ function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
       </Content>
       <Sidebar elements={(
         <Iframe
-          url="https://chat.wechange.de/channel/general"
+          url={url}
           width="100%"
           height="100%"
-          className={classes.iframe}
+          className={iframeClasses.sidebarIframe}
         />
       )} />
     </Grid>

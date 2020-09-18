@@ -1,16 +1,27 @@
-import {ReduxActionCreator, ReduxErrorActionCreator} from "../../utils/types"
+import {
+  ReduxActionCreator,
+  ReduxErrorActionCreator,
+  ReduxObjectActionCreator, ReduxObjectErrorActionCreator, ReduxRoomErrorActionCreator,
+  ReduxRoomObjectActionCreator
+} from "../../utils/types"
 import {ActionType} from "../../constants/actions"
 import {EventSlot} from "./models"
 
-export const setFetchEventsSuccess: ReduxActionCreator<EventSlot[]> = events => ({
+export const setFetchEventsSuccess: ReduxObjectActionCreator<[string, EventSlot[]]> = (room, events) => ({
   type: ActionType.FETCH_EVENTS_SUCCESS,
-  payload: events
+  payload: {
+    room: room,
+    events: events
+  }
 })
 
-export const setFetchEventsError: ReduxErrorActionCreator<string> = (
-  errorMessage: string
+export const setFetchEventsError: ReduxObjectErrorActionCreator<[string, string]> = (
+  room, errorMessage
 ) => ({
   type: ActionType.FETCH_EVENTS_ERROR,
-  payload: Error(errorMessage),
+  payload: {
+    room: room,
+    error: Error(errorMessage),
+  },
   error: true
 })

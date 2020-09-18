@@ -4,8 +4,6 @@ import {ReduxThunkActionCreator} from "../../utils/types"
 import {
   setFetchConferenceError,
   setFetchConferenceSuccess,
-  setFetchTranslationsError,
-  setFetchTranslationsSuccess
 } from "./actions"
 import {ConferenceState} from "./reducer"
 

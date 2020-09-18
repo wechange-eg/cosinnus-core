@@ -18,13 +18,13 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('name', 'description', 'rooms')
 
     def get_rooms(self, obj):
-        return [
-            {'name': 'Lobby', 'slug': 'lobby', 'count': 56},
-            {'name': 'Stage', 'slug': 'stage', 'count': 56},
-            {'name': 'Discussions', 'slug': 'discussions', 'count': 56},
-            {'name': 'Workshops', 'slug': 'workshops', 'count': 56},
-            {'name': 'Coffee Tables', 'slug': 'coffee-tables', 'count': 56},
-            {'name': 'Networking', 'slug': 'networking', 'count': 56},
-            {'name': 'Exhibition', 'slug': 'exhibition', 'count': 56},
-            {'name': 'Results', 'slug': 'results', 'count': 56},
-        ]
+        return {
+            'lobby': {'name': 'Lobby', 'type': 'lobby', 'count': 56, 'url': 'https://chat.wechange.de/group/developers'},
+            'stage': {'name': 'Stage', 'type': 'stage', 'count': 56, 'url': 'https://chat.wechange.de/group/developers'},
+            'discussions': {'name': 'Discussions', 'type': 'discussions', 'count': 56, 'url': 'https://chat.wechange.de/group/developers'},
+            'workshops': {'name': 'Workshops', 'type': 'workshops', 'count': 56, 'url': 'https://chat.wechange.de/group/developers'},
+            'coffee-tables': {'name': 'Coffee Tables', 'type': 'coffee-tables', 'count': 56, 'url': 'https://chat.wechange.de/group/developers'},
+            'networking': {'name': 'Networking', 'type': 'networking', 'count': 56, 'url': 'https://chat.wechange.de/group/developers'},
+            'exhibition': {'name': 'Exhibition', 'type': 'exhibition', 'count': 56, 'url': 'https://chat.wechange.de/group/developers'},
+            'results': {'name': 'Results', 'type': 'results', 'count': 56, 'url': 'http://dina.localhost:8000/project/testprojekt/'},
+        }

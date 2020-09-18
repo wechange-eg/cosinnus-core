@@ -1,6 +1,8 @@
 import React from "react"
 import {FormattedMessage} from "react-intl"
-import {Grid, Card, CardContent, CardMedia, Typography} from "@material-ui/core"
+import {Grid, Card, CardContent, CardActionArea, CardMedia, Typography} from "@material-ui/core"
+import {RouteComponentProps} from "react-router-dom"
+import { useHistory } from "react-router";
 
 import {Event} from "../../../stores/events/models"
 import {useStyles} from "./style"
@@ -9,15 +11,15 @@ export interface CoffeeTableProps {
   event: Event
 }
 
-export function CoffeeTable(props: CoffeeTableProps) {
+export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
   const { event } = props
   const classes = useStyles()
+  const history = useHistory()
   if (!event) {
     return null
   }
   const participants = event.props.participants
-
-  function renderParticipant(i) {
+  function renderParticipant(i: number) {
     return (
       <Grid item key={i} sm={6} className={classes.participant}>
         {participants && (participants.length > i) && (
@@ -36,24 +38,26 @@ export function CoffeeTable(props: CoffeeTableProps) {
 
   return (
     <Card className={classes.card}>
-      <CardContent>
-        <Typography component="h3">{event.props.name}</Typography>
-        <CardMedia
-          component="img"
-          alt={event.props.name}
-          height="100"
-          image={event.props.imageUrl}
-          title={event.props.name}
-        />
-        <Grid container spacing={1}>
-        {Array.from(Array((6)), (v, i) => i + 1).map((_, i) => (
-          renderParticipant(i)
-        ))}
-        </Grid>
-        <Typography component="p">
-          x <FormattedMessage id="spots left" defaultMessage="spots left" />
-        </Typography>
-      </CardContent>
+      <CardActionArea onClick={() => history.push("/" + event.props.id)}>
+        <CardContent>
+          <Typography component="h3">{event.props.name}</Typography>
+          <CardMedia
+            component="img"
+            alt={event.props.name}
+            height="100"
+            image={event.props.imageUrl}
+            title={event.props.name}
+          />
+          <Grid container spacing={1}>
+          {Array.from(Array((6)), (v, i) => i + 1).map((_, i) => (
+            renderParticipant(i)
+          ))}
+          </Grid>
+          <Typography component="p">
+            x <FormattedMessage id="spots left" defaultMessage="spots left" />
+          </Typography>
+        </CardContent>
+      </CardActionArea>
     </Card>
   )
 }

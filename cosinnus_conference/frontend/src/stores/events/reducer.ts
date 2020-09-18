@@ -3,16 +3,26 @@ import { AnyAction } from "redux"
 import { ActionType } from "../../constants/actions"
 import {EventSlot} from "./models"
 
+export interface EventsState {
+  [room: string]: EventSlot[]
+}
+
 export function EventsReducer(
-  state: EventSlot[] = null,
+  state: EventsState = {},
   action: AnyAction
-): EventSlot[] {
+): EventsState {
   switch (action.type) {
     case ActionType.FETCH_EVENTS_SUCCESS: {
-      return action.payload
+      return {
+        ...state,
+        [action.payload.room]: action.payload.events,
+      }
     }
     case ActionType.FETCH_EVENTS_ERROR: {
-      return state
+      return {
+        ...state,
+        [action.payload.room]: action.payload.events,
+      }
     }
     default: {
       return state
