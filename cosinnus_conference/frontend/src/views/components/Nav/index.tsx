@@ -1,31 +1,35 @@
 import React from "react"
 import {
-  ListItemText, Drawer, Typography, List, ListItem, Badge
+  ListItemText, Drawer, Typography, List, ListItem, Badge, Button
 } from "@material-ui/core"
 import {connect} from "react-redux"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {
   faBuilding, faCheck,
   faCircle,
-  faCoffee,
+  faCoffee, faCog,
   faComments,
   faHandshake,
   faHome, faUser,
   faUsers
 } from '@fortawesome/free-solid-svg-icons'
+import {IconDefinition} from "@fortawesome/fontawesome-common-types"
 
 import {RootState} from "../../../stores/rootReducer"
 import {useStyles} from "./style"
-import {ConferenceState} from "../../../stores/conference/reducer"
-import {IconDefinition} from "@fortawesome/fontawesome-common-types"
+import {Room} from "../../../stores/room/models"
+import {Conference} from "../../../stores/conference/models"
+import {FormattedMessage} from "react-intl"
 
 interface NavProps {
-  conference: ConferenceState
+  conference: Conference
+  room: Room
 }
 
 function mapStateToProps(state: RootState) {
   return {
-    conference: state.conference
+    conference: state.conference,
+    room: state.room,
   }
 }
 
@@ -33,7 +37,7 @@ const mapDispatchToProps = {
 }
 
 function NavConnector(props: NavProps) {
-  const { conference } = props
+  const { conference, room } = props
   const classes = useStyles()
   if (!conference) {
     return null
@@ -62,27 +66,36 @@ function NavConnector(props: NavProps) {
       }}
     >
       <div className={classes.drawerHeader}>
-        <Typography component="h3">{conference.name}</Typography>
-        <Typography component="h4">{conference.description}</Typography>
+        <Typography component="h3">{conference.props.name}</Typography>
+        <Typography component="h4">{conference.props.description}</Typography>
       </div>
       <List>
-        {Object.keys(conference.rooms).map((key, index) => {
-          const room = conference.rooms[key]
-          return (
+        {conference.props.rooms.map((navRoom) => (
             <ListItem
               button
-              key={key}
-              href={"../" + key + "/"}
-              selected={key === window.conferenceRoomSlug}
+              key={navRoom.props.id}
+              href={"../" + navRoom.props.slug + "/"}
+              selected={room && navRoom.props.id === room.props.id}
               className={classes.listItem}
             >
-              <FontAwesomeIcon icon={getIconByType(room.type)}/>&nbsp;
-              <ListItemText primary={room.title}/>
-              <Badge badgeContent={room.count} className={classes.badge} />
+              <FontAwesomeIcon icon={getIconByType(navRoom.props.type)}/>&nbsp;
+              <ListItemText primary={navRoom.props.title}/>
+              <Badge badgeContent={navRoom.props.count} className={classes.badge} />
             </ListItem>
-          )
-        })}
+        ))}
       </List>
+      {conference.props.managementUrl && (
+      <Button
+        variant="contained"
+        color="primary"
+        disableElevation
+        href="#"
+        onClick={() => window.location.href = conference.props.managementUrl}
+      >
+        <FontAwesomeIcon icon={faCog} />&nbsp;
+        <FormattedMessage id="Manage conference" defaultMessage="Manage conference" />
+      </Button>
+      )}
     </Drawer>
   )
 }

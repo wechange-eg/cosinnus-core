@@ -5,7 +5,9 @@ import {
   setFetchConferenceError,
   setFetchConferenceSuccess,
 } from "./actions"
-import {ConferenceState} from "./reducer"
+import {setRoom} from "../room/actions"
+import {Conference, ConferenceJson} from "./models"
+import {Room} from "../room/models"
 
 /**
  * Fetch conference data
@@ -18,8 +20,9 @@ export const fetchConference: ReduxThunkActionCreator<[string],
     method: "GET"
   }).then(response => {
     if (response.status === 200) {
-      response.json().then((data: ConferenceState) => {
-        dispatch(setFetchConferenceSuccess(data))
+      response.json().then((data: ConferenceJson) => {
+        dispatch(setFetchConferenceSuccess(Conference.fromJson(data)))
+        dispatch(setRoom(Room.fromJson(data.rooms.find(room => room.id === window.conferenceRoomId))))
       })
     } else {
       dispatch(setFetchConferenceError("Failed to fetch translations"))

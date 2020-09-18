@@ -29,9 +29,9 @@ interface WorkshopsProps {
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
 }
 
-function mapStateToProps(state: RootState, _ownProps: WorkshopsProps) {
+function mapStateToProps(state: RootState) {
   return {
-    events: state.events[window.conferenceRoomSlug],
+    events: state.events[state.room.props.id],
   }
 }
 
@@ -47,7 +47,7 @@ function WorkshopConnector (props: WorkshopsProps & RouteComponentProps) {
   if (events) {
     event = findEventById(events, id)
   } else {
-    fetchEvents(window.conferenceRoomId)
+    fetchEvents()
   }
   return (
     <Main container>

@@ -19,6 +19,7 @@ import {Content} from "../components/Content/style"
 import {EventList} from "../components/EventList/style"
 import {Sidebar} from "../components/Sidebar"
 import {fetchEvents} from "../../stores/events/effects"
+import {ManageRoomButtons} from "../components/ManageRoomButtons"
 
 interface DiscussionsProps {
   events: EventSlot[]
@@ -26,10 +27,10 @@ interface DiscussionsProps {
   url: string
 }
 
-function mapStateToProps(state: RootState, _ownProps: DiscussionsProps) {
+function mapStateToProps(state: RootState) {
   return {
-    events: state.events[window.conferenceRoomSlug],
-    url: state.conference && state.conference.rooms[window.conferenceRoomSlug].url,
+    events: state.events[state.room.props.id],
+    url: state.room.url,
   }
 }
 
@@ -41,7 +42,7 @@ function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
   const { events, fetchEvents, url } = props
   const history = useHistory()
   if (!events) {
-    fetchEvents(window.conferenceRoomId)
+    fetchEvents()
   }
   const iframeClasses = iframeUseStyles()
   return (
@@ -90,15 +91,18 @@ function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
         )})
         || <Typography><FormattedMessage id="No discussions planned." defaultMessage="No discussions planned." /></Typography>
         }
+        <ManageRoomButtons />
       </Content>
-      <Sidebar elements={(
-        <Iframe
-          url={url}
-          width="100%"
-          height="100%"
-          className={iframeClasses.sidebarIframe}
-        />
-      )} />
+      {url && (
+        <Sidebar elements={(
+          <Iframe
+            url={url}
+            width="100%"
+            height="100%"
+            className={iframeClasses.sidebarIframe}
+          />
+        )} />
+      )}
     </Grid>
   )
 }

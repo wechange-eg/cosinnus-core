@@ -1,5 +1,4 @@
 import {
-  Button,
   Grid,
   Typography
 } from "@material-ui/core"
@@ -12,15 +11,14 @@ import Iframe from "react-iframe"
 
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {Event, EventSlot} from "../../stores/events/models"
+import {EventSlot} from "../../stores/events/models"
 import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Content} from "../components/Content/style"
 import {Sidebar} from "../components/Sidebar"
 import {useStyles} from "./style"
 import {CoffeeTable} from "../components/CoffeeTable"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faPlus} from "@fortawesome/free-solid-svg-icons"
 import {fetchEvents} from "../../stores/events/effects"
+import {ManageRoomButtons} from "../components/ManageRoomButtons"
 
 interface CoffeeTablesProps {
   events: EventSlot[]
@@ -30,8 +28,8 @@ interface CoffeeTablesProps {
 
 function mapStateToProps(state: RootState, _ownProps: CoffeeTablesProps) {
   return {
-    events: state.events[window.conferenceRoomSlug],
-    url: state.conference && state.conference.rooms[window.conferenceRoomSlug].url,
+    events: state.events[state.room.props.id],
+    url: state.room.url,
   }
 }
 
@@ -42,7 +40,7 @@ const mapDispatchToProps = {
 function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) {
   const { events, fetchEvents, url } = props
   if (!events) {
-    fetchEvents(window.conferenceRoomId)
+    fetchEvents()
   }
   const classes = useStyles()
   const iframeClasses = iframeUseStyles()
@@ -73,15 +71,18 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
           </Button>
         </div>
         */}
+        <ManageRoomButtons />
       </Content>
-      <Sidebar elements={(
-        <Iframe
-          url={url}
-          width="100%"
-          height="100%"
-          className={iframeClasses.sidebarIframe}
-        />
-      )} />
+      {url && (
+        <Sidebar elements={(
+          <Iframe
+            url={url}
+            width="100%"
+            height="100%"
+            className={iframeClasses.sidebarIframe}
+          />
+        )} />
+      )}
     </Grid>
   )
 }

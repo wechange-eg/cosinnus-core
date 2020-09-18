@@ -42,6 +42,8 @@ class ConferenceEventViewSet(RequireEventReadMixin,
         room_id = self.request.GET.get('room_id')
         if room_id:
             queryset = queryset.filter(room=room_id)
+        else:
+            queryset = queryset.none()
         return queryset
 
 """

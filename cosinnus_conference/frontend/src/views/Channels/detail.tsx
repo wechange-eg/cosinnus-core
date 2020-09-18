@@ -24,9 +24,9 @@ interface ChannelProps {
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
 }
 
-function mapStateToProps(state: RootState, _ownProps: ChannelProps) {
+function mapStateToProps(state: RootState) {
   return {
-    events: state.events[window.conferenceRoomSlug],
+    events: state.events[state.room.props.id],
   }
 }
 
@@ -35,13 +35,13 @@ const mapDispatchToProps = {
 }
 
 function ChannelConnector (props: ChannelProps & RouteComponentProps) {
-  const { id, events, fetchEvents } = propsx
+  const { id, events, fetchEvents } = props
   const iframeClasses = iframeUseStyles()
   let event = null
   if (events) {
     event = findEventById(events, id)
   } else {
-    fetchEvents(window.conferenceRoomId)
+    fetchEvents()
   }
   return (
     <Main container>

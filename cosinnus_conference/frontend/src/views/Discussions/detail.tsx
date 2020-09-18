@@ -14,11 +14,8 @@ import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {EventSlot} from "../../stores/events/models"
 import {useStyles as iframeUseStyles, useStyles} from "../components/Iframe/style"
-import {findEventById, formatTime} from "../../utils/events"
+import {findEventById} from "../../utils/events"
 import {Content} from "../components/Content/style"
-import {EventList} from "../components/EventList/style"
-import {Sidebar} from "../components/Sidebar"
-import {fetchDiscussions} from "../../stores/discussions/effects"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
 import {fetchEvents} from "../../stores/events/effects"
@@ -29,9 +26,9 @@ interface DiscussionProps {
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
 }
 
-function mapStateToProps(state: RootState, _ownProps: DiscussionProps) {
+function mapStateToProps(state: RootState) {
   return {
-    events: state.events[window.conferenceRoomSlug],
+    events: state.events[state.room.props.id],
   }
 }
 
@@ -47,7 +44,7 @@ function DiscussionConnector (props: DiscussionProps & RouteComponentProps) {
   if (events) {
     event = findEventById(events, id)
   } else {
-    fetchEvents(window.conferenceRoomId)
+    fetchEvents()
   }
   return (
     <Main container>

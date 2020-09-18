@@ -1,6 +1,4 @@
 import {
-  Badge, Box, Button, Drawer,
-  Grid, List, ListItem, ListItemText,
   Typography
 } from "@material-ui/core"
 import React, {useState} from "react"
@@ -26,9 +24,9 @@ interface StageEventProps {
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
 }
 
-function mapStateToProps(state: RootState, _ownProps: StageEventProps) {
+function mapStateToProps(state: RootState) {
   return {
-    events: state.events[window.conferenceRoomSlug],
+    events: state.events[state.room.props.id],
   }
 }
 
@@ -43,7 +41,7 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
   if (events) {
     event = findEventById(events, id)
   } else {
-    fetchEvents(window.conferenceRoomId)
+    fetchEvents()
   }
   return (
     <Main container>

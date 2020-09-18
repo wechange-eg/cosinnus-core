@@ -19,6 +19,7 @@ import {formatTime} from "../../utils/events"
 import {Content} from "../components/Content/style"
 import {EventList} from "../components/EventList/style"
 import {Sidebar} from "../components/Sidebar"
+import {ManageRoomButtons} from "../components/ManageRoomButtons"
 
 interface LobbyProps {
   events: EventSlot[]
@@ -26,10 +27,10 @@ interface LobbyProps {
   url: string
 }
 
-function mapStateToProps(state: RootState, _ownProps: LobbyProps) {
+function mapStateToProps(state: RootState) {
   return {
-    events: state.events[window.conferenceRoomSlug],
-    url: state.conference && state.conference.rooms[window.conferenceRoomSlug].url,
+    events: state.events[state.room.props.id],
+    url: state.room.url,
   }
 }
 
@@ -40,7 +41,7 @@ const mapDispatchToProps = {
 function LobbyConnector (props: LobbyProps & RouteComponentProps) {
   const { events, fetchEvents, url } = props
   if (!events) {
-    fetchEvents(window.conferenceRoomId)
+    fetchEvents()
   }
   const iframeClasses = iframeUseStyles()
   return (
@@ -88,6 +89,7 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
         )})
         || <Typography><FormattedMessage id="No events planned." defaultMessage="No events planned." /></Typography>
         }
+        <ManageRoomButtons />
       </Content>
       <Sidebar elements={(
         <Iframe

@@ -1,6 +1,4 @@
 import {
-  Card,
-  CardContent,
   Grid,
   Typography
 } from "@material-ui/core"
@@ -19,6 +17,7 @@ import {Sidebar} from "../components/Sidebar"
 import {fetchEvents} from "../../stores/events/effects"
 import {EventSlot} from "../../stores/events/models"
 import {Channel} from "../components/Channel"
+import {ManageRoomButtons} from "../components/ManageRoomButtons"
 
 interface ChannelsProps {
   events: EventSlot[]
@@ -26,10 +25,10 @@ interface ChannelsProps {
   url: string
 }
 
-function mapStateToProps(state: RootState, _ownProps: ChannelsProps) {
+function mapStateToProps(state: RootState) {
   return {
-    events: state.events[window.conferenceRoomSlug],
-    url: state.conference && state.conference.rooms[window.conferenceRoomSlug].url,
+    events: state.events[state.room.props.id],
+    url: state.room.url,
   }
 }
 
@@ -40,7 +39,7 @@ const mapDispatchToProps = {
 function ChannelsConnector (props: ChannelsProps & RouteComponentProps) {
   const { events, fetchEvents, url } = props
   if (!events) {
-    fetchEvents(window.conferenceRoomId)
+    fetchEvents()
   }
   const iframeClasses = iframeUseStyles()
   return (
@@ -68,15 +67,18 @@ function ChannelsConnector (props: ChannelsProps & RouteComponentProps) {
           defaultMessage="No networking channels."
         /></Typography>
         }
+        <ManageRoomButtons />
       </Content>
-      <Sidebar elements={(
-        <Iframe
-          url={url}
-          width="100%"
-          height="100%"
-          className={iframeClasses.sidebarIframe}
-        />
-      )} />
+      {url && (
+        <Sidebar elements={(
+          <Iframe
+            url={url}
+            width="100%"
+            height="100%"
+            className={iframeClasses.sidebarIframe}
+          />
+        )} />
+      )}
     </Grid>
   )
 }

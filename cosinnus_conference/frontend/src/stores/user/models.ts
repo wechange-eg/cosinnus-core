@@ -3,6 +3,7 @@ export interface UserJson {
   username?: string
   first_name?: string
   last_name?: string
+  is_admin?: boolean
 }
 
 export interface UserProps {
@@ -10,6 +11,7 @@ export interface UserProps {
   username?: string
   firstName?: string
   lastName?: string
+  isAdmin?: boolean
 }
 
 export class User {
@@ -31,6 +33,7 @@ export class User {
       username: json.username,
       firstName: json.first_name,
       lastName: json.last_name,
+      isAdmin: json.is_admin,
     }
 
     return new User(props)
@@ -48,6 +51,7 @@ export class User {
       username: props.username,
       first_name: props.firstName,
       last_name: props.lastName,
+      is_admin: props.isAdmin,
     }
   }
 }

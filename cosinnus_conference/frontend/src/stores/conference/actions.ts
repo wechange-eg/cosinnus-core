@@ -1,8 +1,8 @@
 import {ReduxActionCreator, ReduxErrorActionCreator} from "../../utils/types"
 import {ActionType} from "../../constants/actions"
-import {ConferenceState} from "./reducer"
+import {Conference} from "./models"
 
-export const setFetchConferenceSuccess: ReduxActionCreator<ConferenceState> = conference => ({
+export const setFetchConferenceSuccess: ReduxActionCreator<Conference> = conference => ({
   type: ActionType.FETCH_CONFERENCE_SUCCESS,
   payload: conference
 })

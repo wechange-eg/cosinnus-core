@@ -34,13 +34,15 @@ import {Workshop} from "./Workshops/detail"
 import {Discussion} from "./Discussions/detail"
 import {StageEvent} from "./Stage/detail"
 import {Results} from "./Results"
+import {Room} from "../stores/room/reducer"
+import {Loading} from "./components/Loading"
 
 interface AppProps {
   conference: ConferenceState
+  room: Room
   theme: ThemeState
   translations: TranslationsState
   user: User
-
   fetchConference: DispatchedReduxThunkActionCreator<Promise<void>>
   fetchUser: DispatchedReduxThunkActionCreator<Promise<void>>
   fetchTranslations: DispatchedReduxThunkActionCreator<Promise<void>>
@@ -50,6 +52,7 @@ function mapStateToProps(state: RootState) {
   return {
     conference: state.conference,
     theme: state.theme,
+    room: state.room,
     translations: state.translations,
     user: state.user,
   }
@@ -65,6 +68,8 @@ function AppConnector(props: AppProps) {
   const { translations, fetchTranslations } = props
   const { user, fetchUser } = props
   const { conference, fetchConference } = props
+  const { room } = props
+
 
   if (!translations) {
     fetchTranslations()
@@ -78,63 +83,62 @@ function AppConnector(props: AppProps) {
     fetchConference()
   }
 
-  function getRoutes(room: string) {
+  function getRoutes() {
     const routeProps: ProtectedRouteProps = {
       isAuthenticated: !!user,
       exact: true,
       path: "/",
     }
-    return (room === "lobby" && (
+    return (room.props.type === "lobby" && (
       <Switch>
         <ProtectedRoute {...routeProps} component={Lobby} />
       </Switch>
-      )) || (room === "stage" && (
+      )) || (room.props.type === "stage" && (
       <Switch>
         <ProtectedRoute {...routeProps} component={Stage}/>
         <ProtectedRoute {...routeProps} path="/:id" render={props => (
           <StageEvent id={+props.match.params.id} {...props} />
         )}/>
       </Switch>
-      )) || (room === "discussions" && (
+      )) || (room.props.type === "discussions" && (
       <Switch>
         <ProtectedRoute {...routeProps} component={Discussions}/>
         <ProtectedRoute {...routeProps} path="/:id" render={props => (
           <Discussion id={+props.match.params.id} {...props} />
         )}/>
       </Switch>
-      )) || (room === "workshops" && (
+      )) || (room.props.type === "workshops" && (
       <Switch>
         <ProtectedRoute {...routeProps} component={Workshops}/>
         <ProtectedRoute {...routeProps} path="/:id" render={props => (
           <Workshop id={+props.match.params.id} {...props} />
         )}/>
       </Switch>
-      )) || (room === "coffee_tables" && (
+      )) || (room.props.type === "coffee_tables" && (
       <Switch>
         <ProtectedRoute {...routeProps} component={CoffeeTables}/>
         <ProtectedRoute {...routeProps} path="/:id" render={props => (
           <CoffeeTable id={+props.match.params.id} {...props} />
         )}/>
       </Switch>
-      )) || (room === "networking" && (
+      )) || (room.props.type === "networking" && (
       <Switch>
         <ProtectedRoute {...routeProps} component={Channels}/>
         <ProtectedRoute {...routeProps} path="/:id" render={props => (
           <Channel id={+props.match.params.id} {...props} />
         )}/>
       </Switch>
-      )) || (room === "exhibition" && (
+      )) || (room.props.type === "exhibition" && (
       <Switch>
         <ProtectedRoute {...routeProps} component={Organisations}/>
       </Switch>
-    )) || (room === "results" && (
+    )) || (room.props.type === "results" && (
       <Switch>
         <ProtectedRoute {...routeProps} component={Results}/>
       </Switch>
     ))
   }
 
-  const room = window.conferenceRoomSlug
   return (
     <IntlProvider
       locale={translations && translations.locale || "en"}
@@ -144,7 +148,7 @@ function AppConnector(props: AppProps) {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Nav />
-          {getRoutes(room)}
+          {room && getRoutes() || <Loading />}
         </ThemeProvider>
       </Router>
     </IntlProvider>

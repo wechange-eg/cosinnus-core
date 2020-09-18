@@ -18,6 +18,7 @@ import {Loading} from "../components/Loading"
 import {Main} from "../components/Main/style"
 import {fetchEvents} from "../../stores/events/effects"
 import {findEventById} from "../../utils/events"
+import {Room} from "../../stores/room/reducer"
 
 interface CoffeeTableProps {
   id: number
@@ -27,7 +28,7 @@ interface CoffeeTableProps {
 
 function mapStateToProps(state: RootState, _ownProps: CoffeeTableProps) {
   return {
-    events: state.events[window.conferenceRoomSlug],
+    events: state.events[state.room.props.id]
   }
 }
 
@@ -43,7 +44,7 @@ function CoffeeTableConnector (props: CoffeeTableProps & RouteComponentProps) {
   if (events) {
     event = findEventById(events, id)
   } else {
-    fetchEvents(window.conferenceRoomId)
+    fetchEvents()
   }
   return (
     <Main container>

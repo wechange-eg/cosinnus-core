@@ -19,6 +19,7 @@ import {Sidebar} from "../components/Sidebar"
 import {Organisation} from "../../stores/organisations/reducer"
 import {fetchOrganisations} from "../../stores/organisations/effects"
 import {useStyles} from "./style"
+import {ManageRoomButtons} from "../components/ManageRoomButtons"
 
 interface OrganisationsProps {
   organisations: Organisation[]
@@ -29,7 +30,7 @@ interface OrganisationsProps {
 function mapStateToProps(state: RootState) {
   return {
     organisations: state.organisations,
-    url: state.conference && state.conference.rooms[window.conferenceRoomSlug].url,
+    url: state.room.url,
   }
 }
 
@@ -78,6 +79,7 @@ function OrganisationsConnector (props: OrganisationsProps & RouteComponentProps
           defaultMessage="No represented organisations."
         /></Typography>
         }
+        <ManageRoomButtons />
       </Content>
       <Sidebar elements={(
         <Iframe

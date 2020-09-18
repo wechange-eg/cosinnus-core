@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     height: "100%",
     "& iframe": {
       border: "none",
+      borderLeft: "1px solid " + theme.palette.primary.main,
     }
   },
   bbbIframe: {

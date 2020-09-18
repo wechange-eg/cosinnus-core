@@ -14,14 +14,9 @@ import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {EventSlot} from "../../stores/events/models"
 import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Content} from "../components/Content/style"
-import {Sidebar} from "../components/Sidebar"
-import {fetchWorkshops} from "../../stores/workshops/effects"
-import {useStyles} from "./style"
-import {EventCard} from "../components/EventCard"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
-import {fetchEvents} from "../../stores/events/effects"
-import {findEventById} from "../../utils/events"
+import {ManageRoomButtons} from "../components/ManageRoomButtons"
 
 interface ResultsProps {
   url: string
@@ -29,7 +24,7 @@ interface ResultsProps {
 
 function mapStateToProps(state: RootState, _ownProps: ResultsProps) {
   return {
-    url: state.conference && state.conference.rooms[window.conferenceRoomSlug].url,
+    url: state.room.url,
   }
 }
 
@@ -53,6 +48,7 @@ function ResultsConnector (props: ResultsProps & RouteComponentProps) {
               height="100%"
             />
           </div>
+          <ManageRoomButtons />
         </Content>
       ) || (
         <Content>

@@ -1,17 +1,18 @@
 import { AnyAction } from "redux"
 
 import { ActionType } from "../../constants/actions"
+import {Room} from "./models"
 
-export function ConferenceReducer(
-  state: Conference = null,
+export function RoomReducer(
+  state: Room = null,
   action: AnyAction
-): Conference {
+): Room {
   switch (action.type) {
-    case ActionType.FETCH_CONFERENCE_SUCCESS: {
+    case ActionType.SET_ROOM: {
       return action.payload
     }
-    case ActionType.FETCH_CONFERENCE_ERROR: {
-      return state
+    case ActionType.RESET_ROOM: {
+      return null
     }
     default: {
       return state

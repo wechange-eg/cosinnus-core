@@ -12,6 +12,7 @@ from rest_framework_jwt.settings import api_settings
 from cosinnus.conf import settings
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.import_utils import import_from_settings
+from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
 
 User = get_user_model()
 
