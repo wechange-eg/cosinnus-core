@@ -27,8 +27,8 @@ interface WorkshopsProps {
 
 function mapStateToProps(state: RootState, _ownProps: WorkshopsProps) {
   return {
-    events: state.events[window.conferenceRoom],
-    url: state.conference && state.conference.rooms[window.conferenceRoom].url,
+    events: state.events[window.conferenceRoomSlug],
+    url: state.conference && state.conference.rooms[window.conferenceRoomSlug].url,
   }
 }
 
@@ -39,7 +39,7 @@ const mapDispatchToProps = {
 function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
   const { events, fetchEvents, url } = props
   if (!events) {
-    fetchEvents(window.conferenceRoom)
+    fetchEvents(window.conferenceRoomId)
   }
   const classes = useStyles()
   const iframeClasses = iframeUseStyles()

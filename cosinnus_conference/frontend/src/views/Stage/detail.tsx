@@ -13,16 +13,9 @@ import Iframe from "react-iframe"
 import {RootState} from "../../stores/rootReducer"
 import {fetchEvents} from "../../stores/events/effects"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import clsx from "clsx"
-
 import {EventSlot} from "../../stores/events/models"
-import {filterCurrentAndRoom, findEventById, formatTime} from "../../utils/events"
+import {findEventById} from "../../utils/events"
 import {Content} from "../components/Content/style"
-import {EventList} from "../components/EventList/style"
-import {Sidebar} from "../components/Sidebar/index"
-import {useStyles} from "./style"
-import {EventSlot} from "../../stores/discussions/models"
-import {fetchDiscussions} from "../../stores/discussions/effects"
 import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
@@ -35,7 +28,7 @@ interface StageEventProps {
 
 function mapStateToProps(state: RootState, _ownProps: StageEventProps) {
   return {
-    events: state.events[window.conferenceRoom],
+    events: state.events[window.conferenceRoomSlug],
   }
 }
 
@@ -45,13 +38,12 @@ const mapDispatchToProps = {
 
 function StageEventConnector (props: StageEventProps & RouteComponentProps) {
   const { id, events, fetchEvents } = props
-  const classes = useStyles()
   const iframeClasses = iframeUseStyles()
   let event = null
   if (events) {
     event = findEventById(events, id)
   } else {
-    fetchEvents(window.conferenceRoom)
+    fetchEvents(window.conferenceRoomId)
   }
   return (
     <Main container>
@@ -59,7 +51,7 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
         <Content>
           <Typography component="h1">
             <FormattedMessage id="Stage event" defaultMessage="Stage event" />:&nbsp;
-            {event.props.name}&nbsp;
+            {event.props.title}&nbsp;
           </Typography>
           <div className={iframeClasses.bbbIframe}>
             <Iframe

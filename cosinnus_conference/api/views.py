@@ -1,280 +1,50 @@
+from django.http import Http404
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from cosinnus_conference.api.serializers import ConferenceSerializer
-from cosinnus.api.views import CosinnusFilterQuerySetMixin, PublicCosinnusGroupFilterMixin
-from cosinnus.models.group_extra import CosinnusGroup
+from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.views.mixins.group import RequireReadMixin
+from cosinnus_conference.api.serializers import ConferenceSerializer, ConferenceEventSerializer
+from cosinnus.api.views import CosinnusFilterQuerySetMixin
+from cosinnus_event.models import ConferenceEvent
 
 
-class ConferenceViewSet(CosinnusFilterQuerySetMixin,
-                        PublicCosinnusGroupFilterMixin,
+class RequireGroupReadMixin(object):
+
+    def get_queryset(self):
+        user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(self.request.user)
+        return self.queryset.filter(id__in=user_group_ids)
+
+
+class RequireEventReadMixin(object):
+
+    def get_queryset(self):
+        user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(self.request.user)
+        return self.queryset.filter(room__group__id__in=user_group_ids)
+
+
+class ConferenceViewSet(RequireGroupReadMixin,
                         viewsets.ReadOnlyModelViewSet):
-    # FIXME: Return only Groups that are conferences
-    queryset = CosinnusGroup.objects.all()
+    queryset = get_cosinnus_group_model().objects.filter(is_conference=True, is_active=True)
     serializer_class = ConferenceSerializer
 
-    @action(detail=True, methods=['get'])
-    def lobby(self, request, pk=None):
-        return Response([
-            {
-                "id": 1,
-                "name": "Check In",
-                "description": "Try the public Chat LOBBY or ask for help: TEAM SUPPORT",
-                "from_time": "2020-09-14 08:30:00 UTC",
-                "to_time": "2020-09-14 09:15:00 UTC",
-                "room_name": "Chat LOBBY",
-                "room_slug": "lobby",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-            },
-            {
-                "id": 2,
-                "name": "Offline Eco-Communities 1",
-                "description": "Ilona Gebauer, Thomas Krüger",
-                "from_time": "2020-09-14 09:15:00 UTC",
-                "to_time": "2020-09-14 10:30:00 UTC",
-                "room_name": "Open discussions 1",
-                "room_slug": "discussions-1",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-            },
-            {
-                "id": 3,
-                "name": "Offline Eco-Communities 2",
-                "description": "Ilona Gebauer, Thomas Krüger",
-                "from_time": "2020-09-14 09:15:00 UTC",
-                "to_time": "2020-09-14 10:30:00 UTC",
-                "room_name": "Open discussions 2",
-                "room_slug": "discussions-2",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-            },
-            {
-                "name": "Pause",
-                "from_time": "2020-09-14 10:30:00 UTC",
-                "to_time": "2020-09-14 11:00:00 UTC"
-            },
-            {
-                "id": 4,
-                "name": "Offline Eco-Communities 3",
-                "description": "Ilona Gebauer, Thomas Krüger",
-                "from_time": "2020-09-14 11:000:00 UTC",
-                "to_time": "2020-09-14 11:30:00 UTC",
-                "room_name": "Open discussions 3",
-                "room_slug": "discussions-3",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-            },
-            {
-                "id": 5,
-                "name": "Offline Eco-Communities 4",
-                "description": "Ilona Gebauer, Thomas Krüger",
-                "from_time": "2020-09-14 11:000:00 UTC",
-                "to_time": "2020-09-14 11:30:00 UTC",
-                "room_name": "Open discussions 4",
-                "room_slug": "discussions-4",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-            },
-        ])
 
-    @action(detail=True, methods=['get'])
-    def stage(self, request, pk=None):
-        return Response([
-            {
-                "id": 2,
-                "name": "Offline Eco-Communities 1",
-                "description": "Ilona Gebauer, Thomas Krüger",
-                "from_time": "2020-09-14 09:15:00 UTC",
-                "to_time": "2020-09-14 10:30:00 UTC",
-                "room_name": "Stage",
-                "room_slug": "stage-1",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-            },
-        ])
+class ConferenceEventViewSet(RequireEventReadMixin,
+                              viewsets.ReadOnlyModelViewSet):
+    queryset = ConferenceEvent.objects.filter(room__group__is_conference=True, room__group__is_active=True)
+    serializer_class = ConferenceEventSerializer
 
-    @action(detail=True, methods=['get'])
-    def discussions(self, request, pk=None):
-        return Response([
-            {
-                "id": 2,
-                "name": "Offline Eco-Communities 1",
-                "description": "Ilona Gebauer, Thomas Krüger",
-                "from_time": "2020-09-14 09:15:00 UTC",
-                "to_time": "2020-09-14 10:30:00 UTC",
-                "room_name": "Open discussions 1",
-                "room_slug": "discussions-1",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-            },
-            {
-                "id": 3,
-                "name": "Offline Eco-Communities 2",
-                "description": "Ilona Gebauer, Thomas Krüger",
-                "from_time": "2020-09-14 09:15:00 UTC",
-                "to_time": "2020-09-14 10:30:00 UTC",
-                "room_name": "Open discussions 2",
-                "room_slug": "discussions-2",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-            },
-            {
-                "id": 4,
-                "name": "Offline Eco-Communities 3",
-                "description": "Ilona Gebauer, Thomas Krüger",
-                "from_time": "2020-09-14 11:000:00 UTC",
-                "to_time": "2020-09-14 11:30:00 UTC",
-                "room_name": "Open discussions 3",
-                "room_slug": "discussions-3",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-            },
-            {
-                "id": 5,
-                "name": "Offline Eco-Communities 4",
-                "description": "Ilona Gebauer, Thomas Krüger",
-                "from_time": "2020-09-14 11:000:00 UTC",
-                "to_time": "2020-09-14 11:30:00 UTC",
-                "room_name": "Open discussions 4",
-                "room_slug": "discussions-4",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-            },
-        ])
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        room_id = self.request.GET.get('room_id')
+        if room_id:
+            queryset = queryset.filter(room=room_id)
+        return queryset
 
-    @action(detail=True, methods=['get'])
-    def workshops(self, request, pk=None):
-        return Response([
-            {
-                "id": 1,
-                "name": "Workshop 1",
-                "description": "Ilona Gebauer, Thomas Krüger",
-                "from_time": "2020-09-14 09:15:00 UTC",
-                "to_time": "2020-09-14 10:30:00 UTC",
-                "room_name": "Workshop 1",
-                "room_slug": "workshops-1",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-                "participants_count": 34
-            },
-            {
-                "id": 2,
-                "name": "Workshop 2",
-                "description": "Ilona Gebauer, Thomas Krüger",
-                "from_time": "2020-09-14 09:15:00 UTC",
-                "to_time": "2020-09-14 10:30:00 UTC",
-                "room_name": "Workshop 2",
-                "room_slug": "workshops-2",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-                "participants_count": 34
-            },
-            {
-                "id": 3,
-                "name": "Workshop 3",
-                "description": "Ilona Gebauer, Thomas Krüger",
-                "from_time": "2020-09-14 11:000:00 UTC",
-                "to_time": "2020-09-14 11:30:00 UTC",
-                "room_name": "Workshop 3",
-                "room_slug": "workshops-3",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-                "participants_count": 34
-            },
-            {
-                "id": 4,
-                "name": "Workshop 4",
-                "description": "Ilona Gebauer, Thomas Krüger",
-                "from_time": "2020-09-14 11:000:00 UTC",
-                "to_time": "2020-09-14 11:30:00 UTC",
-                "room_name": "Workshop 4",
-                "room_slug": "workshops-4",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-                "participants_count": 34
-            },
-        ])
-
-    @action(detail=True, methods=['get'], url_path="coffee-tables")
-    def coffee_tables(self, request, pk=None):
-        return Response([
-            {
-                "id": 1,
-                "name": "Topic of the coffee table",
-                "image_url": "/path/to/image.png",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-                "participants": [
-                    {
-                        "id": 1,
-                        "first_name": "Vorname",
-                        "last_name": "Nachname",
-                        "organisation": "Organisation",
-                        "location": "Location",
-                    },
-                    {
-                        "id": 2,
-                        "first_name": "Vorname",
-                        "last_name": "Nachname",
-                        "organisation": "Organisation",
-                        "location": "Location",
-                    },
-                    {
-                        "id": 3,
-                        "first_name": "Vorname",
-                        "last_name": "Nachname",
-                        "organisation": "Organisation",
-                        "location": "Location",
-                    },
-                ]
-            },
-            {
-                "id": 2,
-                "name": "Topic of the coffee table",
-                "image_url": "/path/to/image.png",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-                "participants": [
-                    {
-                        "id": 1,
-                        "first_name": "Vorname",
-                        "last_name": "Nachname",
-                        "organisation": "Organisation",
-                        "location": "Location",
-                    },
-                    {
-                        "id": 2,
-                        "first_name": "Vorname",
-                        "last_name": "Nachname",
-                        "organisation": "Organisation",
-                        "location": "Location",
-                    },
-                    {
-                        "id": 3,
-                        "first_name": "Vorname",
-                        "last_name": "Nachname",
-                        "organisation": "Organisation",
-                        "location": "Location",
-                    },
-                ]
-            },
-            {
-                "id": 3,
-                "name": "Topic of the coffee table",
-                "image_url": "/path/to/image.png",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-                "participants": [
-                    {
-                        "id": 1,
-                        "first_name": "Vorname",
-                        "last_name": "Nachname",
-                        "organisation": "Organisation",
-                        "location": "Location",
-                    },
-                    {
-                        "id": 2,
-                        "first_name": "Vorname",
-                        "last_name": "Nachname",
-                        "organisation": "Organisation",
-                        "location": "Location",
-                    },
-                    {
-                        "id": 3,
-                        "first_name": "Vorname",
-                        "last_name": "Nachname",
-                        "organisation": "Organisation",
-                        "location": "Location",
-                    },
-                ]
-            },
-        ])
-
+"""
     @action(detail=True, methods=['get'])
     def networking(self, request, pk=None):
         return Response([
@@ -338,3 +108,4 @@ class ConferenceViewSet(CosinnusFilterQuerySetMixin,
                 "image_url": "/path/to/image.png",
             },
         ])
+"""

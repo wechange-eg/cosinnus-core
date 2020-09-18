@@ -29,7 +29,7 @@ interface ResultsProps {
 
 function mapStateToProps(state: RootState, _ownProps: ResultsProps) {
   return {
-    url: state.conference && state.conference.rooms[window.conferenceRoom].url,
+    url: state.conference && state.conference.rooms[window.conferenceRoomSlug].url,
   }
 }
 

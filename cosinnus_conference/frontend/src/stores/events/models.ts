@@ -52,15 +52,20 @@ export class Participant {
   }
 }
 
+export interface Room {
+  id: number
+  slug: string
+  title: string
+}
+
 export interface EventJson {
   id: number
-  name: string
-  from_time: string
-  to_time: string
-  description: string
+  title: string
+  from_date: string
+  to_date: string
+  note: string
   image_url?: string
-  room_name: string
-  room_slug: string
+  room: Room
   url: string
   participants_count?: number
   participants?: ParticipantJson[]
@@ -69,13 +74,12 @@ export interface EventJson {
 
 export interface EventProps {
   id: number
-  name: string
-  fromTime: Date
-  toTime: Date
-  description: string
+  title: string
+  fromDate: Date
+  toDate: Date
+  note: string
   imageUrl?: string
-  roomName: string
-  roomSlug: string
+  room: Room
   url: string
   participantsCount?: number
   participants?: Participant[]
@@ -101,13 +105,12 @@ export class Event {
     })
     const props: EventProps = {
       id: json.id,
-      name: json.name,
-      fromTime: new Date(json.from_time),
-      toTime: new Date(json.to_time),
-      description: json.description,
+      title: json.title,
+      fromDate: new Date(json.from_date),
+      toDate: new Date(json.to_date),
+      note: json.note,
       imageUrl: json.image_url,
-      roomName: json.room_name,
-      roomSlug: json.room_slug,
+      room: json.room,
       url: json.url,
       participantsCount: json.participants_count,
       participants: participants,
@@ -129,13 +132,12 @@ export class Event {
     })
     return {
       id: props.id,
-      name: props.name,
-      from_time: props.fromTime.toUTCString(),
-      to_time: props.toTime.toUTCString(),
-      description: props.description,
+      title: props.title,
+      from_date: props.fromDate.toUTCString(),
+      to_date: props.toDate.toUTCString(),
+      note: props.note,
       image_url: props.imageUrl,
-      room_name: props.roomName,
-      room_slug: props.roomSlug,
+      room: props.room,
       url: props.url,
       participants_count: props.participantsCount,
       participants: participants,
@@ -149,7 +151,7 @@ export class Event {
    */
   isNow() : boolean {
     const now = new Date()
-    return this.props.fromTime <= now && this.props.toTime >= now
+    return this.props.fromDate <= now && this.props.toDate >= now
   }
 
   /**
@@ -158,21 +160,21 @@ export class Event {
    * @returns {number} minutes
    */
   getMinutesLeft() : number {
-    return (this.props.toTime.getTime() - new Date().getTime()) / 1000 / 60
+    return (this.props.toDate.getTime() - new Date().getTime()) / 1000 / 60
   }
 }
 
 export interface EventSlotJson {
-  name?: string
-  from_time: string
-  to_time: string
+  title?: string
+  from_date: string
+  to_date: string
   events: EventJson[]
 }
 
 export interface EventSlotProps {
-  name?: string
-  fromTime: Date
-  toTime: Date
+  title?: string
+  fromDate: Date
+  toDate: Date
   events: Event[]
 }
 
@@ -191,9 +193,9 @@ export class EventSlot {
    */
   public static fromJson(json: EventSlotJson) : EventSlot {
     const props: EventSlotProps = {
-      name: json.name,
-      fromTime: new Date(json.from_time),
-      toTime: new Date(json.to_time),
+      title: json.title,
+      fromDate: new Date(json.from_date),
+      toDate: new Date(json.to_date),
       events: []
     }
     if (json.events != null) {
@@ -218,9 +220,9 @@ export class EventSlot {
       })
     }
     return {
-      name: props.name,
-      from_time: props.fromTime.toUTCString(),
-      to_time: props.toTime.toUTCString(),
+      title: props.title,
+      from_date: props.fromDate.toUTCString(),
+      to_date: props.toDate.toUTCString(),
       events: events,
     }
   }
@@ -232,6 +234,6 @@ export class EventSlot {
    */
   isNow() : boolean {
     const now = new Date()
-    return this.props.fromTime <= now && this.props.toTime >= now
+    return this.props.fromDate <= now && this.props.toDate >= now
   }
 }

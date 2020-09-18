@@ -109,7 +109,7 @@ function AppConnector(props: AppProps) {
           <Workshop id={+props.match.params.id} {...props} />
         )}/>
       </Switch>
-      )) || (room === "coffee-tables" && (
+      )) || (room === "coffee_tables" && (
       <Switch>
         <ProtectedRoute {...routeProps} component={CoffeeTables}/>
         <ProtectedRoute {...routeProps} path="/:id" render={props => (
@@ -134,7 +134,7 @@ function AppConnector(props: AppProps) {
     ))
   }
 
-  const room = window.conferenceRoom
+  const room = window.conferenceRoomSlug
   return (
     <IntlProvider
       locale={translations && translations.locale || "en"}

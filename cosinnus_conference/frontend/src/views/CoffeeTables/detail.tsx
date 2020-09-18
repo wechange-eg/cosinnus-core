@@ -27,7 +27,7 @@ interface CoffeeTableProps {
 
 function mapStateToProps(state: RootState, _ownProps: CoffeeTableProps) {
   return {
-    events: state.events[window.conferenceRoom],
+    events: state.events[window.conferenceRoomSlug],
   }
 }
 
@@ -43,7 +43,7 @@ function CoffeeTableConnector (props: CoffeeTableProps & RouteComponentProps) {
   if (events) {
     event = findEventById(events, id)
   } else {
-    fetchEvents(window.conferenceRoom)
+    fetchEvents(window.conferenceRoomId)
   }
   return (
     <Main container>
@@ -51,7 +51,7 @@ function CoffeeTableConnector (props: CoffeeTableProps & RouteComponentProps) {
         <Content>
           <Typography component="h1">
             <FormattedMessage id="Coffee table" defaultMessage="Coffee table" />:&nbsp;
-            {event.props.name}&nbsp;
+            {event.props.title}&nbsp;
             (<FormattedMessage id="Coffee table" defaultMessage="limited to 6 people" />)
           </Typography>
           <div className={iframeClasses.bbbIframe}>

@@ -29,7 +29,7 @@ interface OrganisationsProps {
 function mapStateToProps(state: RootState) {
   return {
     organisations: state.organisations,
-    url: state.conference && state.conference.rooms[window.conferenceRoom].url,
+    url: state.conference && state.conference.rooms[window.conferenceRoomSlug].url,
   }
 }
 

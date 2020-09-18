@@ -31,7 +31,7 @@ interface DiscussionProps {
 
 function mapStateToProps(state: RootState, _ownProps: DiscussionProps) {
   return {
-    events: state.events[window.conferenceRoom],
+    events: state.events[window.conferenceRoomSlug],
   }
 }
 
@@ -47,7 +47,7 @@ function DiscussionConnector (props: DiscussionProps & RouteComponentProps) {
   if (events) {
     event = findEventById(events, id)
   } else {
-    fetchEvents(window.conferenceRoom)
+    fetchEvents(window.conferenceRoomId)
   }
   return (
     <Main container>
@@ -55,7 +55,7 @@ function DiscussionConnector (props: DiscussionProps & RouteComponentProps) {
         <Content>
           <Typography component="h1">
             <FormattedMessage id="Discussion" defaultMessage="Discussion" />:&nbsp;
-            {event.props.name}
+            {event.props.title}
           </Typography>
           <div className={iframeClasses.bbbIframe}>
             <Iframe

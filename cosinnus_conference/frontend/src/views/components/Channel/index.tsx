@@ -22,7 +22,7 @@ export function Channel(props: ChannelProps & RouteComponentProps) {
     <Card className={classes.card}>
       <CardActionArea onClick={() => history.push("/" + event.props.id)}>
         <CardContent>
-          <Typography component="span">{event.props.name}</Typography>
+          <Typography component="span">{event.props.title}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>

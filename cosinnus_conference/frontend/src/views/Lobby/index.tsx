@@ -28,8 +28,8 @@ interface LobbyProps {
 
 function mapStateToProps(state: RootState, _ownProps: LobbyProps) {
   return {
-    events: state.events[window.conferenceRoom],
-    url: state.conference && state.conference.rooms[window.conferenceRoom].url,
+    events: state.events[window.conferenceRoomSlug],
+    url: state.conference && state.conference.rooms[window.conferenceRoomSlug].url,
   }
 }
 
@@ -40,7 +40,7 @@ const mapDispatchToProps = {
 function LobbyConnector (props: LobbyProps & RouteComponentProps) {
   const { events, fetchEvents, url } = props
   if (!events) {
-    fetchEvents(window.conferenceRoom)
+    fetchEvents(window.conferenceRoomId)
   }
   const iframeClasses = iframeUseStyles()
   return (
@@ -58,9 +58,9 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
           >
             {!isNow && (
               <ListItem>
-                <ListItemText primary={formatTime(slot.props.fromTime) + "-" + formatTime(slot.props.toTime)} />
-                {slot.props.name && (
-                  <ListItemText primary={slot.props.name && slot.props.name} />
+                <ListItemText primary={formatTime(slot.props.fromDate) + "-" + formatTime(slot.props.toDate)} />
+                {slot.props.title && (
+                  <ListItemText primary={slot.props.title && slot.props.title} />
                 ) || (
                   <ListItemText primary={(
                     <Typography component="span">
@@ -78,10 +78,10 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
               href={event.props.url}
             >
               <ListItemText
-                primary={event.props.roomName}
+                primary={event.props.room.title}
                 secondary={isNow && <FormattedMessage id="Now" defaultMessage="Now" />}
               />
-              <ListItemText primary={event.props.name} secondary={event.props.description} />
+              <ListItemText primary={event.props.title} secondary={event.props.note} />
             </ListItem>
             ))}
           </EventList>

@@ -16,7 +16,6 @@ import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Content} from "../components/Content/style"
 import {Sidebar} from "../components/Sidebar"
-import {useStyles} from "./style"
 import {fetchEvents} from "../../stores/events/effects"
 import {EventSlot} from "../../stores/events/models"
 import {Channel} from "../components/Channel"
@@ -29,8 +28,8 @@ interface ChannelsProps {
 
 function mapStateToProps(state: RootState, _ownProps: ChannelsProps) {
   return {
-    events: state.events[window.conferenceRoom],
-    url: state.conference && state.conference.rooms[window.conferenceRoom].url,
+    events: state.events[window.conferenceRoomSlug],
+    url: state.conference && state.conference.rooms[window.conferenceRoomSlug].url,
   }
 }
 
@@ -41,9 +40,8 @@ const mapDispatchToProps = {
 function ChannelsConnector (props: ChannelsProps & RouteComponentProps) {
   const { events, fetchEvents, url } = props
   if (!events) {
-    fetchEvents(window.conferenceRoom)
+    fetchEvents(window.conferenceRoomId)
   }
-  const classes = useStyles()
   const iframeClasses = iframeUseStyles()
   return (
     <Grid container>

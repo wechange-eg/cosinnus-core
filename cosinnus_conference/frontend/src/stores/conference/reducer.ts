@@ -3,7 +3,8 @@ import { AnyAction } from "redux"
 import { ActionType } from "../../constants/actions"
 
 export interface Room {
-  name: string
+  id: number
+  title: string
   type: string
   count: number
   url: string

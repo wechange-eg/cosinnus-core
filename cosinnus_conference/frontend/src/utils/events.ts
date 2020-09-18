@@ -11,15 +11,15 @@ export const groupBySlots = (events: EventJson[]) => {
     [s: string]: EventSlot
   } = {}
   events.map((event) => {
-    if (!(event.from_time in slots)) {
-      slots[event.from_time] = EventSlot.fromJson({
-        from_time: event.from_time,
-        to_time: event.to_time,
-        name: !event.id && event.name || null,
+    if (!(event.from_date in slots)) {
+      slots[event.from_date] = EventSlot.fromJson({
+        from_date: event.from_date,
+        to_date: event.to_date,
+        title: !event.id && event.title || null,
         events: []
       })
     }
-    event.id && slots[event.from_time].props.events.push(Event.fromJson(event))
+    event.id && slots[event.from_date].props.events.push(Event.fromJson(event))
   })
   return Object.keys(slots).sort().map((k) => slots[k])
 }

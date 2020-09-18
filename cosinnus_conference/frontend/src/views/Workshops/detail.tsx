@@ -31,7 +31,7 @@ interface WorkshopsProps {
 
 function mapStateToProps(state: RootState, _ownProps: WorkshopsProps) {
   return {
-    events: state.events[window.conferenceRoom],
+    events: state.events[window.conferenceRoomSlug],
   }
 }
 
@@ -47,7 +47,7 @@ function WorkshopConnector (props: WorkshopsProps & RouteComponentProps) {
   if (events) {
     event = findEventById(events, id)
   } else {
-    fetchEvents(window.conferenceRoom)
+    fetchEvents(window.conferenceRoomId)
   }
   return (
     <Main container>
@@ -55,7 +55,7 @@ function WorkshopConnector (props: WorkshopsProps & RouteComponentProps) {
         <Content>
           <Typography component="h1">
             <FormattedMessage id="Workshop" defaultMessage="Workshop" />:&nbsp;
-            {event.props.name}&nbsp;
+            {event.props.title}&nbsp;
           </Typography>
           <div className={iframeClasses.bbbIframe}>
             <Iframe
