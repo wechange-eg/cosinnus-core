@@ -578,10 +578,3 @@ SOCIALACCOUNT_ADAPTER = 'cosinnus_oauth_client.views.CosinusSocialAccountAdapter
 SOCIALACCOUNT_AUTO_SIGNUP = False
 SOCIALACCOUNT_FORMS = {'signup': 'cosinnus_oauth_client.forms.SocialSignupProfileSettingsForm'}
 SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
-
-try:
-    from .dev_settings import *
-except ImportError as e:
-    print("[ERROR] importing dev_settings: " + str(e))
-    BBB_SECRET_KEY = ""
-    BBB_API_URL = ""

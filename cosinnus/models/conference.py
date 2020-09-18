@@ -17,6 +17,9 @@ from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify
 from cosinnus.utils.urls import group_aware_reverse
 from django.utils.crypto import get_random_string
+import logging
+
+logger = logging.getLogger('cosinnus')
 
 
 class CosinnusConferenceRoomQS(models.query.QuerySet):
@@ -66,6 +69,7 @@ class CosinnusConferenceRoom(models.Model):
     
     # rooms of these types will initialize a corresponding rocketchat room
     ROCKETCHAT_ROOM_TYPES = (
+        TYPE_LOBBY,
         TYPE_STAGE,
         TYPE_WORKSHOPS,
         TYPE_DISCUSSIONS,
@@ -106,7 +110,7 @@ class CosinnusConferenceRoom(models.Model):
     
     # connected rocketchat room to this room. 
     # only initialized for some room types 
-    rocket_chat_room_id = models.CharField(_('RocketChat room id'), max_length=250, null=True)
+    rocket_chat_room_id = models.CharField(_('RocketChat room id'), max_length=250, null=True, blank=True)
     
     # Type: CoffeeTable field only
     allow_user_table_creation = models.BooleanField(_('Allow users to create new coffee tables'),
@@ -151,12 +155,14 @@ class CosinnusConferenceRoom(models.Model):
         
         super(CosinnusConferenceRoom, self).save(*args, **kwargs)
         
-        # initialize room-type-specific extras
-        if created:
-            self.ensure_room_type_dependencies()
+        # initialize/sync room-type-specific extras
+        self.ensure_room_type_dependencies()
         
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:conference-page-room', kwargs={'group': self.group, 'slug': self.slug})
+    
+    def get_maintenance_url(self):
+        return group_aware_reverse('cosinnus:conference-page-maintenance-room', kwargs={'group': self.group, 'slug': self.slug})
     
     def get_edit_url(self):
         return group_aware_reverse('cosinnus:conference-room-edit', kwargs={'group': self.group, 'slug': self.slug})
@@ -189,7 +195,12 @@ class CosinnusConferenceRoom(models.Model):
                 from cosinnus_message.rocket_chat import RocketChatConnection
                 rocket = RocketChatConnection()
                 room_name = f'{self.slug}-{self.group.slug}-{get_random_string(7)}'
-                self.rocket_chat_room_id = rocket.create_private_room(room_name, self.creator, self.group.actual_members)
-                self.save()
+                internal_room_id = rocket.create_private_room(room_name, self.creator, self.group.actual_members)
+                if internal_room_id:
+                    self.rocket_chat_room_id = room_name
+                    self.save()
+                else:
+                    logger.error('Could not create a conferenceroom rocketchat room!', 
+                                 extra={'conference-room-id': self.id, 'conference-room-slug': self.slug})
         
         
