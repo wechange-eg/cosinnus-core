@@ -6,7 +6,7 @@
 {% endblock page_title %}
 
 {% block breadcrumb %}
-    <li><a href="{% group_url 'cosinnus:conference-room-management' group=group %}">{% trans "Conference Room Management" %}</a></li>
+    <li><a href="{% group_url 'cosinnus:conference:room-management' group=group %}">{% trans "Conference Room Management" %}</a></li>
 {% endblock %}
 
 {% block leftnav %}
@@ -14,7 +14,7 @@
 {% endblock leftnav %}
 
 {% block content %}
-    <button type="button" href="{% group_url "cosinnus:conference-room-add" group=group %}" class="btn btn-emphasized btn-autosize" title="{% trans "Create Room" %}">
+    <button type="button" href="{% group_url "cosinnus:conference:room-add" group=group %}" class="btn btn-emphasized btn-autosize" title="{% trans "Create Room" %}">
         <ul class="media-list">
             <li class="media">
                 <a class="pull-left" href="#">

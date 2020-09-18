@@ -79,7 +79,7 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
     def get_management_url(self, obj):
         user = self.context['request'].user
         if check_ug_admin(user, obj) or check_user_superuser(user):
-            return group_aware_reverse('cosinnus:conference-management', kwargs={'group': obj})
+            return group_aware_reverse('cosinnus:conference:management', kwargs={'group': obj})
         return ""
 
 

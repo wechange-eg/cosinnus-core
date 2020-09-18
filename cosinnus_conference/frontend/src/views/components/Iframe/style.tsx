@@ -3,12 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   sidebarIframe: {
     border: "none",
+    borderLeft: "1px solid " + theme.palette.primary.main,
     width: "100%",
     height: "100%",
-    "& iframe": {
-      border: "none",
-      borderLeft: "1px solid " + theme.palette.primary.main,
-    }
   },
   bbbIframe: {
     height: "calc(100% - 2rem)",

@@ -8,4 +8,6 @@ class CosinnusConferenceAppConfig(AppConfig):
     verbose_name = 'Cosinnus Conference'
 
     def ready(self):
-        pass
+        from cosinnus_conference import cosinnus_app
+        cosinnus_app.register()
+

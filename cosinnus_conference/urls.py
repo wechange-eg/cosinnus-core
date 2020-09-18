@@ -2,21 +2,38 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import url
+
 from cosinnus_conference import views
 
 app_name = 'conference'
 
 cosinnus_group_patterns = [
-    url(r'^$', views.conference_redirect, name='conference'),
-    url(r'^lobby/$', views.conference_lobby, name='conference-lobby'),
-    url(r'^stage/$', views.conference_stage, name='conference-stage'),
-    url(r'^discussions/$', views.conference_discussions, name='conference-discussions'),
-    url(r'^workshops/$', views.conference_workshops, name='conference-workshops'),
-    url(r'^coffee-tables/$', views.conference_coffee_tables, name='conference-coffee'),
-    url(r'^networking/$', views.conference_networking, name='conference-networking'),
-    url(r'^exhibition/$', views.conference_exhibition, name='conference-exhibition'),
-    url(r'^results/$', views.conference_results, name='conference-results'),
+    url(r'^management/$', views.conference_management,
+        name='management'),
+    url(r'^room-management/$', views.conference_room_management,
+        name='room-management'),
+    url(r'^room-management/add/$', views.conference_room_add,
+        name='room-add'),
+    url(r'^room-management/edit/(?P<slug>[^/]+)/$',
+        views.conference_room_edit, name='room-edit'),
+    url(r'^room-management/delete/(?P<slug>[^/]+)/$',
+        views.conference_room_delete, name='room-delete'),
+    url(r'^$', views.conference_page,
+        name='page-index'),
+    url(r'^(?P<slug>[^/]+)/$', views.conference_page,
+        name='page-room'),
+    url(r'^maintenance/$', views.conference_page_maintenance,
+        name='page-maintenance'),
+    url(r'^maintenance/(?P<slug>[^/]+)/$',
+        views.conference_page_maintenance, name='page-maintenance-room'),
+    url(r'^workshop-participants-upload/$', views.workshop_participants_upload,
+        name='workshop-participants-upload'),
+    url(r'^workshop-participants-upload-skeleton/$',
+        views.workshop_participants_upload_skeleton, name='workshop-participants-upload-skeleton'),
+    url(r'^workshop-participants-download/$', views.workshop_participants_download,
+        name='workshop-participants-download'),
 ]
 
-cosinnus_root_patterns = []
+cosinnus_root_patterns = [
+]
 urlpatterns = cosinnus_group_patterns + cosinnus_root_patterns

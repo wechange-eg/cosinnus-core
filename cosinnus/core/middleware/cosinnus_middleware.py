@@ -195,7 +195,7 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
                                 is_admin = check_ug_admin(request.user, target_group) or check_user_superuser(request.user, portal)
                                 if len(request_tokens) <= 4 or (request_tokens[4] not in ['conference', 'members', 'leave'] and not is_admin):
                                     # bounce user to the conference start page (admins get bounced on index page)
-                                    return HttpResponseRedirect(group_aware_reverse('cosinnus:conference-page-index', kwargs={'group': target_group}))
+                                    return HttpResponseRedirect(group_aware_reverse('cosinnus:conference:page-index', kwargs={'group': target_group}))
                         
         except Exception as e:
             if settings.DEBUG:

@@ -24,7 +24,7 @@
 
 {% block breadcrumb %}
     {{ block.super }}
-    <li><a href="{% group_url 'cosinnus:conference-room-management' group=group %}">{% trans "Conference Room Management" %}</a></li>
+    <li><a href="{% group_url 'cosinnus:conference:room-management' group=group %}">{% trans "Conference Room Management" %}</a></li>
     {% if object %}
         <li class="active">{% trans "Edit Room" %}</li>
     {% else %}
