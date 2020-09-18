@@ -29,18 +29,18 @@ export function EventCard(props: EventCardProps) {
             {isNow && (
               <Typography component="span">
                 <FormattedMessage id="Now" defaultMessage="Now" />
-                {"-" + formatTime(event.props.toTime)}
+                {"-" + formatTime(event.props.toDate)}
               </Typography>
             ) || (
               <Typography component="span">
-                {formatTime(event.props.fromTime) + "-" + formatTime(event.props.toTime)}
+                {formatTime(event.props.fromDate) + "-" + formatTime(event.props.toDate)}
               </Typography>
             )}
             <Typography component="span">
-              {event.props.name}
+              {event.props.title}
             </Typography>
             <Typography component="p">
-              {event.props.description}
+              {event.props.note}
             </Typography>
           </div>
           <div className={classes.right}>

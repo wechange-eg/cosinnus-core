@@ -12,7 +12,6 @@ import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Content} from "../components/Content/style"
-import {useStyles} from "./style"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
 import {fetchEvents} from "../../stores/events/effects"
@@ -27,7 +26,7 @@ interface ChannelProps {
 
 function mapStateToProps(state: RootState, _ownProps: ChannelProps) {
   return {
-    events: state.events[window.conferenceRoom],
+    events: state.events[window.conferenceRoomSlug],
   }
 }
 
@@ -36,22 +35,21 @@ const mapDispatchToProps = {
 }
 
 function ChannelConnector (props: ChannelProps & RouteComponentProps) {
-  const { id, events, fetchEvents } = props
-  const classes = useStyles()
+  const { id, events, fetchEvents } = propsx
   const iframeClasses = iframeUseStyles()
   let event = null
   if (events) {
     event = findEventById(events, id)
   } else {
-    fetchEvents(window.conferenceRoom)
+    fetchEvents(window.conferenceRoomId)
   }
   return (
     <Main container>
       {event && (
-        <Content>
+        <Content>f
           <Typography component="h1">
             <FormattedMessage id="Networking" defaultMessage="Networking" />:&nbsp;
-            {event.props.name}&nbsp;
+            {event.props.title}&nbsp;
           </Typography>
           <div className={iframeClasses.bbbIframe}>
             <Iframe

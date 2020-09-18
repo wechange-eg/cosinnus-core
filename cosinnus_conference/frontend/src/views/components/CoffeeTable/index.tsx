@@ -40,13 +40,13 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
     <Card className={classes.card}>
       <CardActionArea onClick={() => history.push("/" + event.props.id)}>
         <CardContent>
-          <Typography component="h3">{event.props.name}</Typography>
+          <Typography component="h3">{event.props.title}</Typography>
           <CardMedia
             component="img"
-            alt={event.props.name}
+            alt={event.props.title}
             height="100"
             image={event.props.imageUrl}
-            title={event.props.name}
+            title={event.props.title}
           />
           <Grid container spacing={1}>
           {Array.from(Array((6)), (v, i) => i + 1).map((_, i) => (

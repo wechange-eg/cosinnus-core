@@ -5,6 +5,9 @@ export const useStyles = makeStyles((theme) => ({
     border: "none",
     width: "100%",
     height: "100%",
+    "& iframe": {
+      border: "none",
+    }
   },
   bbbIframe: {
     height: "calc(100% - 2rem)",

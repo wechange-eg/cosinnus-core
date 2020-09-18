@@ -44,7 +44,7 @@ function NavConnector(props: NavProps) {
       "stage": faUser,
       "discussions": faComments,
       "workshops": faUsers,
-      "coffee-tables": faCoffee,
+      "coffee_tables": faCoffee,
       "networking": faHandshake,
       "exhibition": faBuilding,
       "results": faCheck,
@@ -73,11 +73,11 @@ function NavConnector(props: NavProps) {
               button
               key={key}
               href={"../" + key + "/"}
-              selected={key === window.conferenceRoom}
+              selected={key === window.conferenceRoomSlug}
               className={classes.listItem}
             >
               <FontAwesomeIcon icon={getIconByType(room.type)}/>&nbsp;
-              <ListItemText primary={room.name}/>
+              <ListItemText primary={room.title}/>
               <Badge badgeContent={room.count} className={classes.badge} />
             </ListItem>
           )

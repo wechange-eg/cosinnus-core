@@ -4,20 +4,19 @@ export const useStyles = makeStyles((theme) => ({
   card: {
     background: theme.palette.primary.contrastText,
     width: "100%",
-    marginBottom: "1rem",
-    "& h3": {
-      fontSize: "1rem",
+    "& > div": {
+      padding: "1rem",
+      paddingBottom: "1rem !important",
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center"
+    },
+    "& span": {
       fontWeight: "bold",
-      marginBottom: ".5rem",
-    },
-    "& img": {
-      marginBottom: ".5rem",
-    },
-    "& > div  > div": {
-      marginBottom: "1rem",
-    },
-    "& p": {
-      textAlign: "right",
+      display: "block",
+      textTransform: "uppercase",
     },
     "&:hover": {
       background: theme.palette.primary.main,
@@ -27,24 +26,5 @@ export const useStyles = makeStyles((theme) => ({
         color: theme.palette.primary.light,
       }
     }
-  },
-  participant: {
-    height: "4.6rem",
-    "& > span": {
-      display: "block",
-      background: theme.palette.primary.light,
-      color: theme.palette.primary.main,
-      padding: ".5rem",
-      overflow: "hidden",
-      borderRadius: ".3rem",
-      height: "100%",
-      "& span": {
-        display: "block",
-        fontWeight: "bold",
-      }
-    }
-  },
-  column: {
-    flex: "50%",
   },
 }));
