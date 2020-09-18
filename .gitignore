@@ -28,3 +28,4 @@ node_modules
 
 # ignore dev_settings
 dev_settings.py
+cosinnus_conference/static/conference/
