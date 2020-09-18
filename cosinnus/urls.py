@@ -208,6 +208,7 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/conference-room-management/add/$' % url_key, conference.conference_room_add, name=prefix+'conference-room-add'),
         url(r'^%s/(?P<group>[^/]+)/conference-room-management/edit/(?P<slug>[^/]+)/$' % url_key, conference.conference_room_edit, name=prefix+'conference-room-edit'),
         url(r'^%s/(?P<group>[^/]+)/conference-room-management/delete/(?P<slug>[^/]+)/$' % url_key, conference.conference_room_delete, name=prefix+'conference-room-delete'),
+        url(r'^%s/(?P<group>[^/]+)/conference-maintenance/$' % url_key, conference.conference_page_maintenance, name=prefix+'conference-page-maintenance'),
         url(r'^%s/(?P<group>[^/]+)/conference/$' % url_key, conference.conference_page, name=prefix+'conference-page-index'),
         url(r'^%s/(?P<group>[^/]+)/conference/(?P<slug>[^/]+)/$' % url_key, conference.conference_page, name=prefix+'conference-page-room'),
         url(r'^%s/(?P<group>[^/]+)/workshop-participants-upload/$' % url_key, conference.workshop_participants_upload, name=prefix+'workshop-participants-upload'),

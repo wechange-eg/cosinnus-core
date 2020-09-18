@@ -38,7 +38,7 @@ from cosinnus.utils.urls import group_aware_reverse, redirect_with_next
 from django.db import transaction
 from cosinnus.forms.conference import CosinnusConferenceRoomForm
 from django.contrib.contenttypes.models import ContentType
-from cosinnus.utils.permissions import check_ug_admin
+from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
 from django.http.response import Http404, HttpResponseForbidden,\
     HttpResponseNotFound
 
@@ -345,7 +345,7 @@ conference_room_management = ConferenceRoomManagementView.as_view()
 
 class ConferencePageView(RequireReadMixin, GroupIsConferenceMixin, TemplateView):
     
-    template_name = 'cosinnus/conference/conference_page.html'
+    template_name = 'conference/index.html'
     
     def get(self, request, *args, **kwargs):
         # get room slug if one was in URL, else try finding the first sorted room
@@ -374,6 +374,18 @@ class ConferencePageView(RequireReadMixin, GroupIsConferenceMixin, TemplateView)
         return ctx
 
 conference_page = ConferencePageView.as_view()
+
+
+class ConferencePageMaintenanceView(ConferencePageView):
+    
+    template_name = 'cosinnus/conference/conference_page.html'
+    
+    def get(self, request, *args, **kwargs):
+        if not check_user_superuser(self.request.user):    
+            return HttpResponseForbidden()
+        return super(ConferencePageMaintenanceView, self).get(request, *args, **kwargs)
+
+conference_page_maintenance = ConferencePageMaintenanceView.as_view()
 
 
 class CosinnusConferenceRoomFormMixin(object):

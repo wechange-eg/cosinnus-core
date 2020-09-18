@@ -20,13 +20,12 @@
     </div>
 {% endblock main_page %}
 
-
 {% block extrafooter %}
-  {{ block.super }}
-  <script type="text/javascript">
-    window.conferenceId = "{{ group.id }}";
-    window.conferenceRoomId = "{{ room.id }}";
-    window.conferenceRoomSlug = "{{ room.slug }}";
-  </script>
-  <script src="{% static "conference/main.js" %}"></script>
+    {{ block.super }}
+    <script type="text/javascript">
+	    window.conferenceId = "{{ group.id }}";
+	    window.conferenceRoomId = "{{ room.id }}";
+	    window.conferenceRoomSlug = "{{ room.slug }}";
+    </script>
+    <script src="{% static "conference/main.js" %}"></script>
 {% endblock %}
