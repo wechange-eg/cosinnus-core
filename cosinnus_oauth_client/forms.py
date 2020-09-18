@@ -86,13 +86,6 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
         profile.language = lang
         profile.save(update_fields=['language'])
 
-        # add welcomepage
-        if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
-            profile.add_redirect_on_next_page(
-                redirect_with_next(reverse('cosinnus:welcome-settings'),
-                    request),
-                message=None, priority=True)
-
         copy_profile = self.cleaned_data.get('copy_profile')
         welcome_page = '{}?copy_profile={}'.format(reverse('welcome_oauth'),
                                                    copy_profile)

@@ -1,45 +1,18 @@
 # -*- coding: utf-8 -*-
 import uuid
 import time
-from django.test import TestCase
-from cosinnus.models.bbb_room import BBBRoom, Conference
-from cosinnus.apis import bigbluebutton as bbb
+from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
+from django.shortcuts import reverse
+from django.conf import settings
+from django.core.exceptions import PermissionDenied
+
+from cosinnus.models.bbb_room import BBBRoom
+from cosinnus.apis import bigbluebutton as bbb
 from cosinnus.models import CosinnusGroup, CosinnusGroupMembership
 
-#
-# class ConferenceTest(TestCase):
-#     def setUp(self):
-#         self.moderator = User.objects.create_user(
-#             username="moderator",
-#             email="moderator@example.org",
-#             is_superuser=True,
-#             is_staff=True
-#         )
-#
-#         self.attendee = User.objects.create_user(
-#             username="attendee",
-#             email="attendee@example.org",
-#             is_superuser=True,
-#             is_staff=True
-#         )
-#
-#         self.outsider = User.objects.create_user(
-#             username="outsider",
-#             email="outsider@example.org",
-#             is_superuser=True,
-#             is_staff=True
-#         )
-#
-#         self.group = CosinnusGroup(name="BBB Test")
-#         self.group.save()
-#
-#         membership = CosinnusGroupMembership(group=self.group, user=self.moderator, status=2)
-#         membership.save()
-#
-#         membership = CosinnusGroupMembership(group=self.group, user=self.attendee, status=1)
-#         membership.save()
-#
+from cosinnus.views.bbb_room import BBBRoomMeetingView
+
 
 class BBBRoomTest(TestCase):
     def setUp(self):
@@ -60,8 +33,6 @@ class BBBRoomTest(TestCase):
         self.outsider = User.objects.create_user(
             username="outsider",
             email="outsider@example.org",
-            is_superuser=True,
-            is_staff=True
         )
 
         self.group = CosinnusGroup(name="BBB Test")
@@ -122,6 +93,58 @@ class BBBRoomTest(TestCase):
         xml_result = bbb.xml_join("No Name", room.meeting_id, "abcdefg")
         self.assertEqual(xml_result, None)
 
+    def test_membership_signals(self):
+        moderator = User.objects.create_user(
+            username="signal_moderator",
+            email="signalmoderator@example.org",
+            is_superuser=True,
+            is_staff=True
+        )
+
+        attendee = User.objects.create_user(
+            username="signal_attendee",
+            email="signalattendee@example.org",
+            is_superuser=True,
+            is_staff=True
+        )
+
+        outsider = User.objects.create_user(
+            username="signal_outsider",
+            email="signaloutsider@example.org",
+            is_superuser=True,
+            is_staff=True
+        )
+
+        group = CosinnusGroup(name="BBB Test")
+        group.save()
+
+        membership1 = CosinnusGroupMembership(group=group, user=moderator, status=2)
+        membership1.save()
+
+        membership2 = CosinnusGroupMembership(group=group, user=attendee, status=1)
+        membership2.save()
+
+        room = BBBRoom.create(
+            name="SIGNAL TEST",
+            meeting_id="signal-test",
+            meeting_welcome="meant to be end",
+        )
+
+        time.sleep(2)
+        room.join_group_members(group)
+
+        membership1.status = 1
+
+        membership1.save()
+        self.assertEqual(len(room.moderators.all()), 1)
+
+        membership2.delete()
+        self.assertEqual(len(room.attendees.all()), 1)
+
+        # membership3 = CosinnusGroupMembership(group=group, user=outsider, status=1)
+        # membership3.save()
+        # self.assertEqual(len(room.attendees.all()), 2)
+
     def test_end_meeting_via_bbb(self):
         room = BBBRoom.create(
             name="END TEST",
@@ -136,10 +159,55 @@ class BBBRoomTest(TestCase):
         # end room with bbb library
         xml_result = bbb.end_meeting(room.meeting_id, room.moderator_password)
         self.assertNotEqual(xml_result, 'error')
+        self.assertEqual(xml_result, True)
 
-        json_result = bbb.xml_to_json(xml_result)
-        self.assertEqual(json_result['returncode'], "SUCCESS")
-        self.assertEqual(json_result['messageKey'], 'sentEndMeetingRequest')
+    def test_join_view(self):
+
+        factory = RequestFactory()
+
+        room = BBBRoom.create(
+            name="VIEW TEST",
+            meeting_id="end-test",
+            meeting_welcome="join via url",
+        )
+
+        time.sleep(2)
+        room.join_group_members(self.group)
+
+        request = factory.get(reverse("cosinnus:bbb-room", kwargs={"room_id": room.id}))
+        request.user = self.moderator
+
+        response = BBBRoomMeetingView.as_view()(request, **{"room_id": room.id})
+
+        self.assertNotEqual(response.status_code, 404)
+        self.assertNotEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
+
+        first_token = response.url
+
+        self.assertTrue(first_token.startswith(settings.BBB_SERVER))
+
+        # another request with another user
+        request = factory.get(reverse("cosinnus:bbb-room", kwargs={"room_id": room.id}))
+        request.user = self.attendee
+
+        response = BBBRoomMeetingView.as_view()(request, **{"room_id": room.id})
+
+        self.assertNotEqual(response.status_code, 404)
+        self.assertNotEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
+
+        second_token = response.url
+
+        self.assertNotEqual(first_token, second_token)
+        self.assertTrue(second_token.startswith(settings.BBB_SERVER))
+
+        # third request as anonymous user should result in a 403
+        request = factory.get(reverse("cosinnus:bbb-room", kwargs={"room_id": room.id}))
+        request.user = self.outsider
+
+        with self.assertRaises(PermissionDenied):
+            BBBRoomMeetingView.as_view()(request, **{"room_id": room.id})
 
     def tearDown(self):
         for room in BBBRoom.objects.all():

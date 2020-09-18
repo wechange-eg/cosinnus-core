@@ -82,3 +82,5 @@ group_apps_activated = dispatch.Signal(providing_args=["group", "apps"])
 """ Called after a CosinnusGroup, or one of its extending models had one or more of their cosinnus apps deactivated """
 group_apps_deactivated = dispatch.Signal(providing_args=["group", "apps"])
 
+""" Called after a CosinnusGroupMembership for a user has changed """
+group_membership_has_changed = dispatch.Signal(providing_args=["instance", "deleted"])

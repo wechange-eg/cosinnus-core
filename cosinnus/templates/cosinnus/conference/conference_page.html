@@ -35,10 +35,42 @@
         <br/>
         
         {% if room %}
-            <h3 class="white-text">Currently showing this room: {{ room.title }}</h3>
+            <h3 style="color: 333;">Currently showing this room: {{ room.title }}</h3>
+            <p><a href="{{ room.get_room_create_url }}">Create Conference Event in this Room</a></p>
+            
+            <p>
+                The RocketChat-Room URL for this room is:
+                {% if room.get_rocketchat_room_url %}
+                    <a href="{{ room.get_rocketchat_room_url }}">{{ room.get_rocketchat_room_url }}</a>
+                {% else %}
+                    <b>(not applicable for this room or Rocketchat room could not be created)</b>
+                {% endif %}
+            </p>
+            
+            {% if events %}
+                <p>These events are in the room:</p>
+                {% for event in events %}
+                    <p>
+                        <b>{{ event.id }}</b>: {{ event.title }} 
+                        (<a href="{{ event.get_edit_url }}">Edit</a>)
+                        (<a href="{{ event.get_bbb_room_url }}">BBB-Room</a>)
+                    <p>
+                {% endfor %}
+            {% else %}
+                <p>There are no events in this room</p>
+            {% endif %}
+            
+            {% if room.target_result_group %}
+                <div>
+                    <p>Since this is a related project room, here's the iframe:</p>
+                    <iframe width=800 height=600 src="{{ room.target_result_group.get_absolute_url }}"></iframe>
+                </div>
+            {% endif %}
         {% else %}
             <p>No rooms have been created yet.</p>
         {% endif %}
+        
+        <hr>
         
         <p>The room list is:</p>
         {% for list_room in rooms %}

@@ -16,6 +16,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify
 from cosinnus.utils.urls import group_aware_reverse
+from django.utils.crypto import get_random_string
 
 
 class CosinnusConferenceRoomQS(models.query.QuerySet):
@@ -117,8 +118,8 @@ class CosinnusConferenceRoom(models.Model):
         validators=[MinValueValidator(2), MaxValueValidator(512)])
     
     # Type: Results field only
-    target_result_group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, 
-        verbose_name=_('Result Project'), related_name='+',
+    target_result_group = models.OneToOneField(settings.COSINNUS_GROUP_OBJECT_MODEL, 
+        verbose_name=_('Result Project'), related_name='conference_room',
         null=True, blank=True, on_delete=models.SET_NULL)
     
     
@@ -163,20 +164,32 @@ class CosinnusConferenceRoom(models.Model):
     def get_delete_url(self):
         return group_aware_reverse('cosinnus:conference-room-delete', kwargs={'group': self.group, 'slug': self.slug})
     
+    def get_room_create_url(self):
+        return group_aware_reverse('cosinnus:event:conference-event-add', kwargs={'group': self.group, 'room_slug': self.slug})
+    
+    def get_rocketchat_room_url(self):
+        if not settings.COSINNUS_ROCKET_ENABLED or not self.type in self.ROCKETCHAT_ROOM_TYPES:
+            return ''
+        if not self.rocket_chat_room_id:
+            self.ensure_room_type_dependencies()
+        if not self.rocket_chat_room_id:
+            return ''
+        room_id = self.rocket_chat_room_id
+        return f'{settings.COSINNUS_CHAT_BASE_URL}/group/{room_id}/?layout=embedded'
+    
     def ensure_room_type_dependencies(self):
         """ Depending on a room type, initialize different extras like rocketchat rooms """
-        if self.type in self.ROCKETCHAT_ROOM_TYPES:
+        if settings.COSINNUS_ROCKET_ENABLED and self.type in self.ROCKETCHAT_ROOM_TYPES:
             self.sync_rocketchat_room()
     
-    def sync_rocketchat_room(self):
+    def sync_rocketchat_room(self, force=False):
+        """ Can be safely called with force=False without re-creating rooms """
         if settings.COSINNUS_ROCKET_ENABLED and self.type in self.ROCKETCHAT_ROOM_TYPES:
-            #from cosinnus_message.rocket_chat import RocketChatConnection
-            #rocket = RocketChatConnection()
-            # TODO:
-            # - put this in a Thread!
-            # - if not self.rocket_chat_room_id: create room (refactor cosinnus-message)
-            # - add hook (to general hooks) on group member update, if group_is_conference:
-            #     - (in thread) for each conference room: room.on_group_membership_update()
-            pass
+            if not self.rocket_chat_room_id or force:
+                from cosinnus_message.rocket_chat import RocketChatConnection
+                rocket = RocketChatConnection()
+                room_name = f'{self.slug}-{self.group.slug}-{get_random_string(7)}'
+                self.rocket_chat_room_id = rocket.create_private_room(room_name, self.creator, self.group.actual_members)
+                self.save()
         
         

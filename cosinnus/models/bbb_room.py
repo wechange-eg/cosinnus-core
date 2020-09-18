@@ -9,6 +9,7 @@ from django.contrib.postgres.fields import JSONField
 from cosinnus.apis import bigbluebutton as bbb
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
+from django.urls.base import reverse
 # from cosinnus.models.group import CosinnusGroup
 # from cosinnus.models import MEMBERSHIP_ADMIN
 
@@ -40,40 +41,13 @@ def random_voice_bridge():
 
     return random_pin
 
-#
-# class Conference(models.Model):
-#     """ This model is a wrapper to organize conferences to bundle a bunch of BBBRooms.
-#
-#      :var start: Starting date of the conference
-#      :type: datetime
-#
-#      :var end: Ending date of the conference
-#      :type: datetime
-#
-#      :var name: Name or headline of the conference
-#      :type: str
-#
-#      :var description: Verbose description and information of the conference
-#      :type: str
-#
-#      :var group: The group that is associated with the conference
-#      :type: CosinusGroup
-#      """
-#
-#     start = models.DateTimeField(default=timezone.now)
-#     end = models.DateTimeField(null=True, blank=True, default=None)
-#     name = models.CharField(max_length=300, null=True, blank=True)
-#     description = models.TextField(help_text=_("verbose description of the conference"))
-#     group = models.ForeignKey('CosinnusGroup', on_delete=models.CASCADE, verbose_name="conference group",
-#                               help_text=_("group associated with the conference"))
-#
-#     def __str__(self):
-#         return self.name
-
 
 class BBBRoom(models.Model):
     """ This model represents a video/audio conference call with participants and/or presenters
-
+    
+    :var portal: The base portal
+    :type: group.CosinusBaseGroup
+    
     :var presenter: User that has the presenter role if any
     :type: auth.User
 
@@ -98,6 +72,8 @@ class BBBRoom(models.Model):
     :var max_attendees: Message that is displayed when enterin the conversation
     :type: str
     """
+    portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='bbb_rooms', 
+        null=False, blank=False, default=1, on_delete=models.CASCADE) # port_id 1 is created in a datamigration!
 
     presenter = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name="presenter",
                                   help_text=_("this user will enter the BBB presenter mode for this conversation"))
@@ -129,6 +105,14 @@ class BBBRoom(models.Model):
 
     def __str__(self):
         return str(self.meeting_id)
+    
+    def save(self, *args, **kwargs):
+        """ Assign current portal """
+        created = bool(self.pk is None)
+        if created and not self.portal:
+            from cosinnus.models.group import CosinnusPortal
+            self.portal = CosinnusPortal.get_current()
+        super(BBBRoom, self).save(*args, **kwargs)
 
     def end(self):
         bbb.end_meeting(self.meeting_id, self.moderator_password)
@@ -141,19 +125,23 @@ class BBBRoom(models.Model):
         :rtype: str
         """
 
-        if user in self.attendees:
+        if user in self.attendees.all():
             return self.attendee_password
-        elif user in self.moderators:
+        elif user in self.moderators.all():
             return self.moderator_password
         else:
             return ''
+
+    def remove_user(self, user):
+        self.moderators.remove(user)
+        self.attendees.remove(user)
 
     def join_user(self, user, membership_status_int):
         if membership_status_int == 2:
             # TODO fix this to reference to MEMBERSHIP_ADMIN
             self.moderators.add(user)
             self.attendees.remove(user)
-        else:
+        elif membership_status_int == 1:
             self.attendees.add(user)
             self.moderators.remove(user)
 
@@ -165,9 +153,29 @@ class BBBRoom(models.Model):
     def members(self):
         return self.moderators.all() | self.attendees.all()
 
+    def restart(self):
+        m_xml = bbb.start(
+            name=self.name,
+            meeting_id=self.meeting_id,
+            welcome=self.welcome_message,
+            attendee_password=self.attendee_password,
+            moderator_password=self.moderator_password
+        )
+
+        meeting_json = bbb.xml_to_json(m_xml)
+
+        if meeting_json['returncode'] != 'SUCCESS':
+            raise ValueError('Unable to create meeting!')
+
+        return None
+
     @classmethod
-    def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=random_password(),
-               moderator_password=random_password(), max_participants=None, voice_bridge=None):
+    def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=None,
+               moderator_password=None, max_participants=None, voice_bridge=None):
+        if attendee_password is None:
+            attendee_password = random_password()
+        if moderator_password is None:
+            moderator_password = random_password()
 
         if max_participants or voice_bridge:
             m_xml = bbb.start_verbose(
@@ -206,3 +214,7 @@ class BBBRoom(models.Model):
         meeting.save()
 
         return meeting
+    
+    def get_absolute_url(self):
+        return reverse('cosinnus:bbb-room', kwargs={'room_id': self.id})
+    

@@ -28,3 +28,6 @@ class CosinnusConferenceRoomForm(GroupKwargModelFormMixin, UserKwargModelFormMix
         qs = get_cosinnus_group_model().objects.filter(parent_id=kwargs['group'].id)
         self.fields['target_result_group'].queryset = qs
         
+        if instance and instance.pk:
+            self.fields['type'].disabled = True
+        

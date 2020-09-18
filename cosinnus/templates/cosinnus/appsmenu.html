@@ -31,12 +31,16 @@
     
     {% if user|has_read_access:group %}
     <ul class="dropdown-menu appnavi-dropdown-menu w100" role="menu">
-        <li class="app-main appnavi-listelement fine-space">
-            <a href="{% group_url 'cosinnus:group-dashboard' group=group %}{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}{% if group.public or user.is_superuser %}?browse=true{% endif %}{% endif %}">
-                <i class="fa fa-th-large"></i>
-                {{ group.get_group_dashboard_label }}
-            </a>
-        </li>
+            <li class="app-main appnavi-listelement fine-space">
+                <a href="{% group_url 'cosinnus:group-dashboard' group=group %}{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}{% if group.public or user.is_superuser %}?browse=true{% endif %}{% endif %}">
+                    <i class="fa fa-th-large"></i>
+                    {% if group.group_is_conference %}
+	                    {% trans "Conference Page" %}
+			        {% else %}
+                        {{ group.get_group_dashboard_label }}
+			        {% endif %}
+                </a>
+            </li>
         {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
         <li class="app-main appnavi-listelement fine-space">
             <a href="{{ group_microsite_page }}">

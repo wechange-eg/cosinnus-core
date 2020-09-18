@@ -370,7 +370,17 @@
 		</div>
 		<div class="nav-flyout-backdrop"></div>
 	</div>
-	
-    
 </nav>
 
+{% comment %} Hide navbar if we're in an iframe for a conference project {% endcomment %}
+{% if group and group.conference_room %}
+	<script type="text/javascript">
+	     function inIframe () {
+	         try {return window.self !== window.top;} catch (e) {return true;}
+	     }
+	     if (inIframe()) {
+	          $('#v2-navbar').hide();
+	          $('body').css('padding-top', '30px');
+	     };
+	</script>
+{% endif %}
