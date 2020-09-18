@@ -17,6 +17,9 @@ from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify
 from cosinnus.utils.urls import group_aware_reverse
 from django.utils.crypto import get_random_string
+import logging
+
+logger = logging.getLogger('cosinnus')
 
 
 class CosinnusConferenceRoomQS(models.query.QuerySet):
@@ -192,7 +195,12 @@ class CosinnusConferenceRoom(models.Model):
                 from cosinnus_message.rocket_chat import RocketChatConnection
                 rocket = RocketChatConnection()
                 room_name = f'{self.slug}-{self.group.slug}-{get_random_string(7)}'
-                self.rocket_chat_room_id = rocket.create_private_room(room_name, self.creator, self.group.actual_members)
-                self.save()
+                internal_room_id = rocket.create_private_room(room_name, self.creator, self.group.actual_members)
+                if internal_room_id:
+                    self.rocket_chat_room_id = room_name
+                    self.save()
+                else:
+                    logger.error('Could not create a conferenceroom rocketchat room!', 
+                                 extra={'conference-room-id': self.id, 'conference-room-slug': self.slug})
         
         
