@@ -8,6 +8,7 @@ from rest_framework import serializers
 
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group import CosinnusGroup
+from django.templatetags.static import static
 
 
 __all__ = ('ConferenceSerializer', )
@@ -66,10 +67,12 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
 class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
     rooms = serializers.SerializerMethodField()
     management_url = serializers.SerializerMethodField()
+    room_management_url = serializers.SerializerMethodField()
 
     class Meta(object):
         model = CosinnusGroup
-        fields = ('id', 'name', 'description', 'rooms', 'management_url')
+        fields = ('id', 'name', 'description', 'rooms', 'management_url', 
+                  'room_management_url', 'conference_theme_color')
 
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
@@ -83,6 +86,12 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
         user = self.context['request'].user
         if check_ug_admin(user, obj) or check_user_superuser(user):
             return group_aware_reverse('cosinnus:conference:management', kwargs={'group': obj})
+        return ""
+    
+    def get_room_management_url(self, obj):
+        user = self.context['request'].user
+        if check_ug_admin(user, obj) or check_user_superuser(user):
+            return group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': obj})
         return ""
 
 
@@ -129,7 +138,7 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
         image_file = obj.attached_image.file if obj.attached_image else None
         if image_file:
             return image_thumbnail_url(image_file, (466, 112))
-        return ""
+        return static('images/conference-event-placeholder.png')
 
     def get_participants(self, obj):
         # participants = obj.participants.all()

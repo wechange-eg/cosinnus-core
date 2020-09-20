@@ -115,7 +115,19 @@
                 <li {% if request.GET.tab == 'dashboard' %}class="active"{% endif %}>
                     <a href="#dashboard" class="_group-form-tab" role="tab" data-toggle="tab">
                         <i class="fa fa-columns"></i>
-                        {{ group.get_group_dashboard_label }}
+                        {% if group_model == "CosinnusSociety" %}
+                            {% trans "Group Dashboard" %}
+                        {% else %}
+                            {% trans "Project Dashboard" %}
+                        {% endif %}
+                    </a>
+                </li>
+                {% endif %}
+                {% if group and form.forms.obj.fields.conference_theme_color %}
+                <li {% if request.GET.tab == 'conference' %}class="active"{% endif %}>
+                    <a href="#conference" class="_group-form-tab" role="tab" data-toggle="tab">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        {% trans "Conference Settings" %}
                     </a>
                 </li>
                 {% endif %}
@@ -503,7 +515,18 @@
                             {% endblock group_dashboard_tab %}
                         </div>
                     {% endif %}
-					
+                    
+                    {% if group and form.forms.obj.fields.conference_theme_color %}
+					   <div class="tab-pane {% if request.GET.tab == 'conference' %}active{% endif %}" id="conference">
+                            {% block group_conference_tab %}
+                                {# Conference Theme Color Field #}
+                                {% trans "Conference Theme Color" as conference_label %}
+                                {% trans "Hex code (example: #A2A2A2)" as conference_placeholder %}
+                                {% trans "A hex code color to use as main theme color for the conference layout (with or without leading '#')" as conference_legend %}
+                                {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.conference_theme_color label=conference_label legend=conference_legend placeholder=conference_placeholder large_field=True %}
+                            {% endblock group_conference_tab %}
+                        </div>
+                    {% endif %}
 				{% endblock group_form_tab_panes %}
 				
 			</div>

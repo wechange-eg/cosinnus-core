@@ -779,6 +779,11 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
          help_text='A field with custom HTML that will be shown to all group members on the group dashboard',
          blank=True, null=True)
     
+    conference_theme_color = models.CharField(_('Conference theme color'), 
+        help_text=_('Conference theme color for conference groups only (css hex value, with or without "#")'),
+        max_length=10, validators=[MaxLengthValidator(7)],
+        blank=True, null=True)
+    
     # a comma-seperated list of all cosinnus apps that should not be shown in the frontend, 
     # be editable, or be indexed by search indices for this group
     deactivated_apps = models.CharField(_('Deactivated Apps'), max_length=255, 
@@ -894,6 +899,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         if created and not self.portal:
             # set portal to current
             self.portal = CosinnusPortal.get_current()
+            
+        # clean color fields
+        if self.conference_theme_color:
+            self.conference_theme_color = self.conference_theme_color.replace('#', '')
         
         super(CosinnusBaseGroup, self).save(*args, **kwargs)
         
