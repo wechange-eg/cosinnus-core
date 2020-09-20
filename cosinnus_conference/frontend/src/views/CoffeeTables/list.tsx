@@ -80,6 +80,7 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
             width="100%"
             height="100%"
             className={iframeClasses.sidebarIframe}
+            allow="geolocation; microphone; camera"
           />
         )} />
       )}

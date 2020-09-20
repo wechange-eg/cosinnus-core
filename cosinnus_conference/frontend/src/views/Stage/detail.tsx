@@ -57,6 +57,7 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
               url={event.props.url}
               width="100%"
               height="100%"
+              allow="geolocation; microphone; camera"
             />
           </div>
           <ManageEventButtons event={event} />
