@@ -42,7 +42,11 @@ def is_meeting_remote(meeting_id):
 
 
 def xml_to_json(xml_data):
-    return bbb_utils.xml_to_json(xml_data)
+    """ converts a xml representation of a response to json"""
+    result = {}
+    for x in xml_data:
+        result[x.tag] = x.text if x.text != '\n' else {}
+    return result
 
 
 def parse_xml(response):
@@ -138,11 +142,11 @@ def start_verbose(
     """
     call = 'create'
 
-    query = urllib.parse.urlencode((
+    query = (
         ("name", name),
         ('meetingID', meeting_id),
         ("welcome", welcome),
-    ))
+    )
 
     if max_participants and type(max_participants, int):
         query += (("maxParticipants", max_participants),)
@@ -151,7 +155,13 @@ def start_verbose(
         query += (("voiceBridge", voice_bridge),)
 
     if parent_meeting_id:
-        query += ("parentMeetingID", parent_meeting_id)
+        query += (("parentMeetingID", parent_meeting_id),)
+
+    if options:
+        for key, value in options.items():
+            query += ((key, value),)
+
+    query = urllib.parse.urlencode(query)
 
     hashed = api_call(query, call)
     url = settings.BBB_API_URL + call + '?' + hashed
@@ -165,7 +175,6 @@ def start_verbose(
 
 def end_meeting(meeting_id, password):
     """ This function is a wrapper for the `end_meeting` function in bbb.py """
-
     return BigBlueButton().end_meeting(meeting_id, password)
 
 
@@ -185,6 +194,21 @@ def meeting_info(meeting_id, password):
     :rtype: dict
     """
     return BigBlueButton().meeting_info(meeting_id, password)
+
+
+def verbose_meeting_info(meeting_id, password):
+    call = 'getMeetingInfo'
+    query = urllib.parse.urlencode((
+        ('meetingID', meeting_id),
+        ('password', password),
+    ))
+    hashed = api_call(query, call)
+    url = settings.BBB_API_URL + call + '?' + hashed
+    response = parse_xml(requests.get(url).content)
+    if response:
+        return xml_to_json(response)
+    else:
+        return None
 
 
 def is_running(self, meeting_id):

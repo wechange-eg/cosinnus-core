@@ -64,6 +64,36 @@ class BBBRoomTest(TestCase):
         self.assertEqual(room_info['moderator_pw'], room.moderator_password)
         self.assertEqual(room_info['attendee_pw'], room.attendee_password)
 
+        room_info = bbb.verbose_meeting_info(room.meeting_id, room.moderator_password)
+        print(room_info)
+
+    def test_option_creation(self):
+
+        room_options = {
+            "autoStartRecording": False,
+            "allowStartStopRecording": False,
+            "muteOnStart": True
+        }
+
+        room = BBBRoom.create(
+            name="OptionTest",
+            meeting_id="OptionMeetingID",
+            meeting_welcome="Option Test",
+            options=room_options
+        )
+
+        self.assertEqual(room.name, "OptionTest")
+        self.assertEqual(room.meeting_id, "OptionMeetingID")
+        self.assertEqual(room.welcome_message, "Option Test")
+        self.assertEqual(room.options, room_options)
+
+        time.sleep(2)
+
+        room_info = bbb.meeting_info(room.meeting_id, room.moderator_password)
+        self.assertNotEqual(room_info, None)
+        self.assertEqual(room_info['moderator_pw'], room.moderator_password)
+        self.assertEqual(room_info['attendee_pw'], room.attendee_password)
+
     def test_user_joining(self):
         room = BBBRoom.create(
             name="JOIN TEST",
@@ -94,6 +124,11 @@ class BBBRoomTest(TestCase):
         # test joining with wrong credentials
         xml_result = bbb.xml_join("No Name", room.meeting_id, "abcdefg")
         self.assertEqual(xml_result, None)
+
+        # test meeting info participant count information
+        info = bbb.verbose_meeting_info(room.meeting_id, room.moderator_password)
+
+        self.assertEqual(info.get('participantCount', -1), 2)
 
     def test_membership_signals(self):
         moderator = User.objects.create_user(
