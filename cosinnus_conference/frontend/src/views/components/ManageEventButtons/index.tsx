@@ -19,24 +19,28 @@ export function ManageEventButtons(props: ManageRoomButtonsProps) {
   }
   return (
     <div className={classes.buttons}>
-      <Button
-        variant="contained"
-        disableElevation
-        href="#"
-        onClick={() => window.location.href = event.props.managementUrls.updateEvent}
-      >
-        <FontAwesomeIcon icon={faPen} />&nbsp;
-        <FormattedMessage id="Edit event" defaultMessage="Edit event" />
-      </Button>
-      <Button
-        variant="contained"
-        disableElevation
-        href="#"
-        onClick={() => window.location.href = event.props.managementUrls.deleteEvent}
-      >
-        <FontAwesomeIcon icon={faTrashAlt} />&nbsp;
-        <FormattedMessage id="Delete event" defaultMessage="Delete event" />
-      </Button>
+      {event.props.managementUrls.updateEvent && (
+        <Button
+          variant="contained"
+          disableElevation
+          href="#"
+          onClick={() => window.location.href = event.props.managementUrls.updateEvent}
+        >
+          <FontAwesomeIcon icon={faPen} />&nbsp;
+          <FormattedMessage id="Edit event" defaultMessage="Edit event" />
+        </Button>
+      )}
+      {event.props.managementUrls.deleteEvent && (
+        <Button
+          variant="contained"
+          disableElevation
+          href="#"
+          onClick={() => window.location.href = event.props.managementUrls.deleteEvent}
+        >
+          <FontAwesomeIcon icon={faTrashAlt} />&nbsp;
+          <FormattedMessage id="Delete event" defaultMessage="Delete event" />
+        </Button>
+      )}
     </div>
   )
 }

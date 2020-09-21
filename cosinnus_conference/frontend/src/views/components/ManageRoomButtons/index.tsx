@@ -31,33 +31,39 @@ export function ManageRoomButtonsConnector(props: ManageRoomButtonsProps) {
   }
   return (
     <div className={classes.buttons}>
-      <Button
-        variant="contained"
-        disableElevation
-        href="#"
-        onClick={() => window.location.href = room.props.managementUrls.createEvent}
-      >
-        <FontAwesomeIcon icon={faPlus} />&nbsp;
-        <FormattedMessage id="Create event" defaultMessage="Create event" />
-      </Button>
-      <Button
-        variant="contained"
-        disableElevation
-        href="#"
-        onClick={() => window.location.href = room.props.managementUrls.updateRoom}
-      >
-        <FontAwesomeIcon icon={faPen} />&nbsp;
-        <FormattedMessage id="Edit room" defaultMessage="Edit room" />
-      </Button>
-      <Button
-        variant="contained"
-        disableElevation
-        href="#"
-        onClick={() => window.location.href = room.props.managementUrls.deleteRoom}
-      >
-        <FontAwesomeIcon icon={faTrashAlt} />&nbsp;
-        <FormattedMessage id="Delete room" defaultMessage="Delete room" />
-      </Button>
+      {room.props.managementUrls.createEvent && (
+        <Button
+          variant="contained"
+          disableElevation
+          href="#"
+          onClick={() => window.location.href = room.props.managementUrls.createEvent}
+        >
+          <FontAwesomeIcon icon={faPlus} />&nbsp;
+          <FormattedMessage id="Create event" defaultMessage="Create event" />
+        </Button>
+      )}
+      {room.props.managementUrls.updateRoom && (
+        <Button
+          variant="contained"
+          disableElevation
+          href="#"
+          onClick={() => window.location.href = room.props.managementUrls.updateRoom}
+        >
+          <FontAwesomeIcon icon={faPen} />&nbsp;
+          <FormattedMessage id="Edit room" defaultMessage="Edit room" />
+        </Button>
+      )}
+      {room.props.managementUrls.deleteRoom && (
+        <Button
+          variant="contained"
+          disableElevation
+          href="#"
+          onClick={() => window.location.href = room.props.managementUrls.deleteRoom}
+        >
+          <FontAwesomeIcon icon={faTrashAlt} />&nbsp;
+          <FormattedMessage id="Delete room" defaultMessage="Delete room" />
+        </Button>
+      )}
     </div>
   )
 }

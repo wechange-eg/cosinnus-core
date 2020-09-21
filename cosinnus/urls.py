@@ -12,7 +12,8 @@ from rest_framework import routers, permissions
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    OrganisationViewSet, oauth_current_user, oauth_user, oauth_profile, statistics as api_statistics, current_user
+    OrganisationViewSet, oauth_current_user, oauth_user, oauth_profile, statistics as api_statistics, current_user, \
+    navbar
 from cosinnus.api.views.i18n import translations
 from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
@@ -287,6 +288,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns += [
+    url(r'^api/v2/navbar/$', navbar, name='api-navbar'),
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

@@ -1,5 +1,8 @@
 import json
 
+from django.conf import settings
+from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.template import Context
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -16,6 +19,7 @@ from cosinnus.models.tagged import BaseTagObject
 from ..serializers.group import CosinnusSocietySerializer, CosinnusProjectSerializer
 from ..serializers.organisation import OrganisationListSerializer, OrganisationRetrieveSerializer
 from ..serializers.user import UserSerializer
+from ...templatetags.cosinnus_tags import cosinnus_menu_v2, cosinnus_menu
 
 
 class PublicCosinnusGroupFilterMixin(object):
@@ -213,5 +217,30 @@ class StatisticsView(APIView):
         return Response(data)
 
 
+class NavBarView(APIView):
+    """
+    Returns navigation including styles to be included within Wordpress
+    """
+
+    def get(self, request):
+        context = Context({
+            'request': request
+        })
+        if settings.COSINNUS_USE_V2_NAVBAR or settings.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and request.user.is_superuser:
+            html = cosinnus_menu_v2(context)
+        else:
+            html = cosinnus_menu(context)
+        return Response({
+            'html': html,
+            'css': [
+                static('css/cosinnus.css')
+            ],
+            'js': [
+                static('js/client.js')
+            ]
+        })
+
+
 oauth_current_user = OAuthUserView.as_view()
 statistics = StatisticsView.as_view()
+navbar = NavBarView.as_view()

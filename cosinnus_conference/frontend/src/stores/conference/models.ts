@@ -5,7 +5,11 @@ export interface ConferenceJson {
   name: string
   description: string
   rooms: RoomJson[]
-  management_url: string
+  management_urls: {
+    manage_conference: string
+    manage_rooms: string
+  }
+  theme_color: string
 }
 
 export interface ConferenceProps {
@@ -13,7 +17,11 @@ export interface ConferenceProps {
   name: string
   description: string
   rooms: Room[]
-  managementUrl: string
+  managementUrls: {
+    manageConference: string
+    manageRooms: string
+  }
+  themeColor: string
 }
 
 export class Conference {
@@ -35,7 +43,11 @@ export class Conference {
       name: json.name,
       description: json.description,
       rooms: [],
-      managementUrl: json.management_url,
+      managementUrls: {
+        manageConference: json.management_urls.manage_conference,
+        manageRooms: json.management_urls.manage_rooms,
+      },
+      themeColor: json.theme_color,
     }
     if (json.rooms != null) {
       json.rooms.forEach((room: any) => {
@@ -64,7 +76,11 @@ export class Conference {
       name: props.name,
       description: props.description,
       rooms: rooms,
-      management_url: props.managementUrl,
+      management_urls: {
+        manage_conference: props.managementUrls.manageConference,
+        manage_rooms: props.managementUrls.manageRooms,
+      },
+      theme_color: props.themeColor,
     }
   }
 }

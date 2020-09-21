@@ -11,15 +11,15 @@ import {
   faComments,
   faHandshake,
   faHome, faUser,
-  faUsers
+  faUsers, faDoorClosed
 } from '@fortawesome/free-solid-svg-icons'
 import {IconDefinition} from "@fortawesome/fontawesome-common-types"
+import {FormattedMessage} from "react-intl"
 
 import {RootState} from "../../../stores/rootReducer"
 import {useStyles} from "./style"
 import {Room} from "../../../stores/room/models"
 import {Conference} from "../../../stores/conference/models"
-import {FormattedMessage} from "react-intl"
 
 interface NavProps {
   conference: Conference
@@ -83,14 +83,24 @@ function NavConnector(props: NavProps) {
               <Badge badgeContent={navRoom.props.count} className={classes.badge} />
             </ListItem>
         ))}
-        {conference.props.managementUrl && (
+        {conference.props.managementUrls.manageConference && (
         <ListItem
           button
-          href={conference.props.managementUrl}
+          href={conference.props.managementUrls.manageConference}
           className={classes.listItem}
         >
           <FontAwesomeIcon icon={faCog} />&nbsp;
-          <ListItemText primary={<FormattedMessage id="Manage" defaultMessage="Manage" />} />
+          <ListItemText primary={<FormattedMessage id="Manage Conference" defaultMessage="Manage Conference" />} />
+        </ListItem>
+        )}
+        {conference.props.managementUrls.manageRooms && (
+        <ListItem
+          button
+          href={conference.props.managementUrls.manageRooms}
+          className={classes.listItem}
+        >
+          <FontAwesomeIcon icon={faDoorClosed} />&nbsp;
+          <ListItemText primary={<FormattedMessage id="Manage Rooms" defaultMessage="Manage Rooms" />} />
         </ListItem>
         )}
       </List>

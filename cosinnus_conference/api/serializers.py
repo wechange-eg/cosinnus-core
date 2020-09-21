@@ -57,22 +57,21 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         if check_ug_admin(user, obj.group) or check_user_superuser(user):
             return {
-                'createEvent': obj.get_room_create_url(),
-                'updateRoom': obj.get_edit_url(),
-                'deleteRoom': obj.get_delete_url(),
+                'create_event': obj.get_room_create_url(),
+                'update_room': obj.get_edit_url(),
+                'delete_room': obj.get_delete_url(),
             }
         return {}
 
 
 class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
     rooms = serializers.SerializerMethodField()
-    management_url = serializers.SerializerMethodField()
-    room_management_url = serializers.SerializerMethodField()
+    management_urls = serializers.SerializerMethodField()
+    theme_color = serializers.CharField(source='conference_theme_color')
 
     class Meta(object):
         model = CosinnusGroup
-        fields = ('id', 'name', 'description', 'rooms', 'management_url', 
-                  'room_management_url', 'conference_theme_color')
+        fields = ('id', 'name', 'description', 'rooms', 'management_urls', 'theme_color')
 
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
@@ -82,16 +81,13 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
         serializer = ConferenceRoomSerializer(instance=rooms, many=True, context={'request': request})
         return serializer.data
 
-    def get_management_url(self, obj):
+    def get_management_urls(self, obj):
         user = self.context['request'].user
         if check_ug_admin(user, obj) or check_user_superuser(user):
-            return group_aware_reverse('cosinnus:conference:management', kwargs={'group': obj})
-        return ""
-    
-    def get_room_management_url(self, obj):
-        user = self.context['request'].user
-        if check_ug_admin(user, obj) or check_user_superuser(user):
-            return group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': obj})
+            return {
+                'manage_conference': group_aware_reverse('cosinnus:conference:management', kwargs={'group': obj}),
+                'manage_rooms': group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': obj})
+            }
         return ""
 
 
@@ -154,9 +150,9 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         if check_ug_admin(user, obj.group) or check_user_superuser(user):
             return {
-                'createEvent': obj.room.get_room_create_url(),
-                'updateEvent': obj.get_edit_url(),
-                'deleteEvent': obj.get_delete_url(),
+                'create_event': obj.room.get_room_create_url(),
+                'update_event': obj.get_edit_url(),
+                'delete_event': obj.get_delete_url(),
             }
         return {}
 
