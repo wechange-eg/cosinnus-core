@@ -387,6 +387,9 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
         context['group_requests_json_encoded'] = _escape_quotes(_json.dumps(membership_requests))
         context['group_requests_count'] = membership_requests_count
         
+        # conference groups
+        user_societies = CosinnusSociety.objects.get_for_user(request.user)
+        context['my_conference_groups'] = [society for society in user_societies if society.group_is_conference]
         
         attending_events = []
         try:
