@@ -1,6 +1,6 @@
 import React from "react"
 import {
-  ListItemText, Drawer, Typography, List, ListItem, Badge, Button
+  ListItemText, Drawer, Typography, List, ListItem, Badge, Button, Divider
 } from "@material-ui/core"
 import {connect} from "react-redux"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
@@ -83,6 +83,9 @@ function NavConnector(props: NavProps) {
               <Badge badgeContent={navRoom.props.count} className={classes.badge} />
             </ListItem>
         ))}
+        {(conference.props.managementUrls.manageConference || conference.props.managementUrls.manageRooms ) && (
+          <Divider />
+        )}
         {conference.props.managementUrls.manageConference && (
         <ListItem
           button
