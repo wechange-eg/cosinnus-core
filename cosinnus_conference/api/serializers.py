@@ -43,9 +43,9 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
 
     def get_count(self, obj):
         if obj.type == obj.TYPE_LOBBY:
-            return ConferenceEvent.objects.filter(group=obj.group).count()
+            return ConferenceEvent.objects.conference_upcoming().filter(group=obj.group).count()
         else:
-            return obj.events.all().count()
+            return obj.events.conference_upcoming().count()
 
     def get_url(self, obj):
         if obj.type == obj.TYPE_RESULTS and obj.target_result_group:

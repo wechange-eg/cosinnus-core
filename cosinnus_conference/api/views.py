@@ -1,8 +1,3 @@
-from datetime import time, datetime
-
-import pytz
-from django.http import Http404
-from django.utils import timezone
 from rest_framework import viewsets, pagination
 
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -38,13 +33,13 @@ class ConferenceViewSet(RequireGroupReadMixin,
 
 
 class ConferenceEventViewSet(RequireEventReadMixin,
-                              viewsets.ReadOnlyModelViewSet):
+                             viewsets.ReadOnlyModelViewSet):
     queryset = ConferenceEvent.objects.filter(room__group__is_conference=True, room__group__is_active=True)
     serializer_class = ConferenceEventSerializer
     pagination_class = DefaultPageNumberPagination
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().conference_upcoming()
 
         # Filter by room or conferencee
         room_id = self.request.GET.get('room_id')
@@ -55,16 +50,6 @@ class ConferenceEventViewSet(RequireEventReadMixin,
             queryset = queryset.filter(room__group=conference_id)
         else:
             queryset = queryset.none()
-
-        # Filter upcoming
-        queryset = queryset.filter(to_date__gte=timezone.now())
-
-        # Filter first day only
-        first_event = queryset.order_by('from_date').first()
-        if first_event:
-            first_day = first_event.from_date.date()
-            queryset = queryset.filter(from_date__gte=datetime.combine(first_day, time(0, 0), tzinfo=pytz.UTC),
-                                       from_date__lte=datetime.combine(first_day, time(23, 59), tzinfo=pytz.UTC))
 
         return queryset
 
