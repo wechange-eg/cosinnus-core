@@ -43,7 +43,8 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
 
     def get_count(self, obj):
         if obj.type == obj.TYPE_LOBBY:
-            return ConferenceEvent.objects.conference_upcoming().filter(group=obj.group).count()
+            queryset = ConferenceEvent.objects.conference_upcoming().exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
+            return queryset.filter(group=obj.group).count()
         else:
             return obj.events.conference_upcoming().count()
 

@@ -41,13 +41,13 @@ class ConferenceEventViewSet(RequireEventReadMixin,
     def get_queryset(self):
         queryset = super().get_queryset().conference_upcoming()
 
-        # Filter by room or conferencee
+        # Filter by room or conference
         room_id = self.request.GET.get('room_id')
         conference_id = self.request.GET.get('conference_id')
         if room_id:
             queryset = queryset.filter(room=room_id)
         elif conference_id:
-            queryset = queryset.filter(room__group=conference_id)
+            queryset = queryset.filter(room__group=conference_id).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
         else:
             queryset = queryset.none()
 
