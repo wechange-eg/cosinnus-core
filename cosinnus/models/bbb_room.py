@@ -117,6 +117,12 @@ class BBBRoom(models.Model):
     def end(self):
         bbb.end_meeting(self.meeting_id, self.moderator_password)
 
+    @property
+    def remote_user_count(self):
+        if bbb.is_meeting_remote(self.meeting_id):
+            meeting_info = bbb.meeting_info(self.meeting_id, self.moderator_password)
+            return meeting_info.get('participant_count', 0)
+
     def get_password_for_user(self, user):
         """ returns the room password according to the permission of a given user.
         Returns empty string, if user is no member of the room
@@ -172,6 +178,29 @@ class BBBRoom(models.Model):
     @classmethod
     def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=None,
                moderator_password=None, max_participants=None, voice_bridge=None):
+        """ Creates a new BBBRoom and crete a room on the remote bbb-server.
+
+        :param name: Name of the BBBRoom
+        :type: str
+
+        :param meeting_id: ID on the BBB-Server. Must be unique for any meeting running on the BBB-Server
+        :type: str
+
+        :param meeting_welcome: Welcome message displayed at start of the meeting
+        :type: str
+
+        :param attendee_password: Password for joining the meeting with attendee rights
+        :type: str
+
+        :param moderator_password: Password for joining the meeting with moderator rights
+        :type: str
+
+        :param max_participants: Maximum number of participants moderator + attendees allowed at the same time
+        :type: int
+
+        :param voice_bridge: Dial in PIN for joining the meeting via telephone call
+        :type: int range(10000 - 99999)
+        """
         if attendee_password is None:
             attendee_password = random_password()
         if moderator_password is None:
