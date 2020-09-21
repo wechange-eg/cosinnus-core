@@ -111,6 +111,8 @@ class CosinnusConferenceRoom(models.Model):
     # connected rocketchat room to this room. 
     # only initialized for some room types 
     rocket_chat_room_id = models.CharField(_('RocketChat room id'), max_length=250, null=True, blank=True)
+    rocket_chat_room_name = models.CharField(_('RocketChat room name'), max_length=250, null=True, blank=True,
+            help_text='The verbose room name for linking URLs')
     
     # Type: CoffeeTable field only
     allow_user_table_creation = models.BooleanField(_('Allow users to create new coffee tables'),
@@ -176,11 +178,11 @@ class CosinnusConferenceRoom(models.Model):
     def get_rocketchat_room_url(self):
         if not settings.COSINNUS_ROCKET_ENABLED or not self.type in self.ROCKETCHAT_ROOM_TYPES:
             return ''
-        if not self.rocket_chat_room_id:
+        if not self.rocket_chat_room_id or not self.rocket_chat_room_name:
             self.ensure_room_type_dependencies()
-        if not self.rocket_chat_room_id:
+        if not self.rocket_chat_room_id or not self.rocket_chat_room_name:
             return ''
-        room_id = self.rocket_chat_room_id
+        room_id = self.rocket_chat_room_name
         return f'{settings.COSINNUS_CHAT_BASE_URL}/group/{room_id}/?layout=embedded'
     
     def ensure_room_type_dependencies(self):
@@ -197,7 +199,8 @@ class CosinnusConferenceRoom(models.Model):
                 room_name = f'{self.slug}-{self.group.slug}-{get_random_string(7)}'
                 internal_room_id = rocket.create_private_room(room_name, self.creator, self.group.actual_members)
                 if internal_room_id:
-                    self.rocket_chat_room_id = room_name
+                    self.rocket_chat_room_id = internal_room_id
+                    self.rocket_chat_room_name = room_name
                     self.save()
                 else:
                     logger.error('Could not create a conferenceroom rocketchat room!', 

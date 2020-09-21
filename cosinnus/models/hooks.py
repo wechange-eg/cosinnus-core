@@ -250,11 +250,6 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                             
                             from cosinnus_message.rocket_chat import RocketChatConnection
                             rocket = RocketChatConnection()
-                            if instance.id:
-                                old_instance = CosinnusGroupMembership.objects.get(pk=instance.id)
-                                was_pending = old_instance.status in (MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING)
-                                is_moderator_changed = instance.is_moderator != old_instance.is_moderator
-                                is_pending = instance.status in (MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING)
                             # add/remove member from each rocketchat room for each conference room
                             for room in rocket_rooms:
                                 room.sync_rocketchat_room()
@@ -262,29 +257,18 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                                     logger.error('Wanted to sync a user membership to a conference room, but a rocketchat room for it could not be created!', 
                                                 extra={'room': room.id})
                                     continue
-                                if not instance.id:
+                                if deleted:
                                     # kicked member
                                     rocket.remove_member_from_room(user, room.rocket_chat_room_id)
                                 else:
-                                    # existing member
-                                    # Invalidate old membership
-                                    if is_pending and not was_pending:
-                                        rocket.remove_member_from_room(user, room.rocket_chat_room_id)
-                                        if instance.is_moderator: # TODO fix check in rocket listeners??
-                                            rocket.add_moderator_to_room(user, room.rocket_chat_room_id)
-                                        
-                                    # Create new membership
-                                    if not is_pending:
-                                        rocket.add_member_to_room(user, room.rocket_chat_room_id)
-                        
+                                    rocket.add_member_to_room(user, room.rocket_chat_room_id)
                                     # Update membership
-                                    if not is_pending and is_moderator_changed:
+                                    if instance.status == MEMBERSHIP_ADMIN:
                                         # Upgrade
-                                        if not old_instance.is_moderator and instance.is_moderator:
-                                            rocket.add_moderator_to_room(user, room.rocket_chat_room_id)
+                                        rocket.add_moderator_to_room(user, room.rocket_chat_room_id)
+                                    else:
                                         # Downgrade
-                                        elif old_instance.is_moderator and not instance.is_moderator:
-                                            rocket.remove_moderator_from_room(user, room.rocket_chat_room_id)
+                                        rocket.remove_moderator_from_room(user, room.rocket_chat_room_id)
             
     MembershipUpdateHookThread().start()
     
