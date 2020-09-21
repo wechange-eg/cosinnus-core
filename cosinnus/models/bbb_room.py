@@ -228,9 +228,12 @@ class BBBRoom(models.Model):
 
         if meeting_json['returncode'] != 'SUCCESS':
             raise ValueError('Unable to create meeting!')
-
+        
+        
+        from cosinnus.models.group import CosinnusPortal
+        current_portal = CosinnusPortal.get_current()
         # Now create a model for it.
-        meeting, _ = BBBRoom.objects.get_or_create(meeting_id=meeting_id)
+        meeting, _ = BBBRoom.objects.get_or_create(meeting_id=meeting_id, portal=current_portal)
         meeting.name = name
         meeting.welcome_message = meeting_welcome
         meeting.meeting_id = meeting_json['meetingID']
