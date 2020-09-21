@@ -227,6 +227,7 @@ class CosinnusConf(AppConf):
     
     # a list of which app checkboxes should be default-active on the create group form
     DEFAULT_ACTIVE_GROUP_APPS = [
+        'cosinnus_conference',
         'cosinnus_etherpad',
         'cosinnus_event',
         'cosinnus_file',
@@ -488,7 +489,7 @@ class CosinnusConf(AppConf):
     
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
-    HIDE_APPS = set(['cosinnus_message', 'cosinnus_notifications', 'cosinnus_stream'])
+    HIDE_APPS = set(['cosinnus_conference', 'cosinnus_message', 'cosinnus_notifications', 'cosinnus_stream'])
     
     #: How long the perm redirect cache should last (1 week, because it organizes itself)
     PERMANENT_REDIRECT_CACHE_TIMEOUT = 60 * 60 * 24 * 7

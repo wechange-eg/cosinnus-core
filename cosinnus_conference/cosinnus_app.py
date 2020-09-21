@@ -14,7 +14,7 @@ def register():
     from cosinnus.core.registries import (app_registry, url_registry)
 
     active_by_default = "cosinnus_conference" in settings.COSINNUS_DEFAULT_ACTIVE_GROUP_APPS
-    app_registry.register('cosinnus_conference', 'conference', _('Conferences'), deactivatable=True, active_by_default=active_by_default)
+    app_registry.register('cosinnus_conference', 'conference', _('Conferences'), deactivatable=False, active_by_default=active_by_default)
     url_registry.register_urlconf('cosinnus_conference', 'cosinnus_conference.urls')
     # widget_registry.register('conference', 'cosinnus_conference.dashboard.Conference')
     
