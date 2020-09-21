@@ -7,11 +7,11 @@ import {FormattedMessage} from "react-intl"
 import {Event} from "../../../stores/events/models"
 import {useStyles} from "./style"
 
-interface ManageRoomButtonsProps {
+interface ManageEventButtonsProps {
   event: Event
 }
 
-export function ManageEventButtons(props: ManageRoomButtonsProps) {
+export function ManageEventButtons(props: ManageEventButtonsProps) {
   const {event} = props
   const classes = useStyles()
   if (!event.props.managementUrls) {

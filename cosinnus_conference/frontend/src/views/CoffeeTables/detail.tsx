@@ -54,7 +54,6 @@ function CoffeeTableConnector (props: CoffeeTableProps & RouteComponentProps) {
           <Typography component="h1">
             <FormattedMessage id="Coffee table" defaultMessage="Coffee table" />:&nbsp;
             {event.props.title}&nbsp;
-            (<FormattedMessage id="Coffee table" defaultMessage="limited to 6 people" />)
           </Typography>
           <div className={iframeClasses.bbbIframe}>
             <Iframe

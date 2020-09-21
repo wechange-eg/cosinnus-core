@@ -1,13 +1,14 @@
 import React, {useState} from "react"
 import {Room} from "../../../stores/room/models"
-import {Button} from "@material-ui/core"
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faCog, faPen, faPlus, faTrashAlt} from "@fortawesome/free-solid-svg-icons"
+import {faPen, faPlus, faTrashAlt} from "@fortawesome/free-solid-svg-icons"
 import {FormattedMessage} from "react-intl"
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
 import {RootState} from "../../../stores/rootReducer"
-import {fetchEvents} from "../../../stores/events/effects"
 import {connect as reduxConnect} from "react-redux"
-import {withRouter} from "react-router"
 import {useStyles} from "./style"
 
 interface ManageRoomButtonsProps {
@@ -25,9 +26,20 @@ const mapDispatchToProps = {
 
 export function ManageRoomButtonsConnector(props: ManageRoomButtonsProps) {
   const {room} = props
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const classes = useStyles()
   if (!room.props.managementUrls) {
     return null
+  }
+  function deleteRoom() {
+    axios.post(room.props.managementUrls.deleteRoom, {},{
+      headers: {
+        'X-CSRFTOKEN': Cookies.get('csrftoken'),
+      },
+      withCredentials: true
+    }).then(res => {
+      window.location.href = "../"
+    })
   }
   return (
     <div className={classes.buttons}>
@@ -54,15 +66,40 @@ export function ManageRoomButtonsConnector(props: ManageRoomButtonsProps) {
         </Button>
       )}
       {room.props.managementUrls.deleteRoom && (
-        <Button
-          variant="contained"
-          disableElevation
-          href="#"
-          onClick={() => window.location.href = room.props.managementUrls.deleteRoom}
-        >
-          <FontAwesomeIcon icon={faTrashAlt} />&nbsp;
-          <FormattedMessage id="Delete room" defaultMessage="Delete room" />
-        </Button>
+        <span>
+          <Button
+            variant="contained"
+            disableElevation
+            href="#"
+            onClick={() => setDeleteOpen(true)}
+          >
+            <FontAwesomeIcon icon={faTrashAlt} />&nbsp;
+            <FormattedMessage id="Delete room" defaultMessage="Delete room" />
+          </Button>
+          <Dialog
+            open={deleteOpen}
+            keepMounted
+            onClose={() => setDeleteOpen(false)}
+          >
+            <DialogTitle><FormattedMessage id="Delete Room" defaultMessage="Delete Room" /></DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                <FormattedMessage
+                  id="Are you sure you want to delete this room?"
+                  defaultMessage="Are you sure you want to delete this room?"
+                />
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setDeleteOpen(false)} color="primary">
+                <FormattedMessage id="No" defaultMessage="No" />
+              </Button>
+              <Button onClick={deleteRoom} color="primary">
+                <FormattedMessage id="Yes" defaultMessage="Yes" />
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </span>
       )}
     </div>
   )

@@ -1,15 +1,20 @@
+from datetime import time, datetime
+
+import pytz
 from django.http import Http404
-from rest_framework import viewsets
-from rest_framework.decorators import action
-from rest_framework.generics import RetrieveAPIView
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from django.utils import timezone
+from rest_framework import viewsets, pagination
 
 from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus.views.mixins.group import RequireReadMixin
 from cosinnus_conference.api.serializers import ConferenceSerializer, ConferenceEventSerializer
-from cosinnus.api.views import CosinnusFilterQuerySetMixin
 from cosinnus_event.models import ConferenceEvent
+
+
+# FIXME: Make this pagination class default in REST_FRAMEWORK setting
+class DefaultPageNumberPagination(pagination.PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
 
 
 class RequireGroupReadMixin(object):
@@ -36,9 +41,12 @@ class ConferenceEventViewSet(RequireEventReadMixin,
                               viewsets.ReadOnlyModelViewSet):
     queryset = ConferenceEvent.objects.filter(room__group__is_conference=True, room__group__is_active=True)
     serializer_class = ConferenceEventSerializer
+    pagination_class = DefaultPageNumberPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
+
+        # Filter by room or conferencee
         room_id = self.request.GET.get('room_id')
         conference_id = self.request.GET.get('conference_id')
         if room_id:
@@ -47,6 +55,17 @@ class ConferenceEventViewSet(RequireEventReadMixin,
             queryset = queryset.filter(room__group=conference_id)
         else:
             queryset = queryset.none()
+
+        # Filter upcoming
+        queryset = queryset.filter(to_date__gte=timezone.now())
+
+        # Filter first day only
+        first_event = queryset.order_by('from_date').first()
+        if first_event:
+            first_day = first_event.from_date.date()
+            queryset = queryset.filter(from_date__gte=datetime.combine(first_day, time(0, 0), tzinfo=pytz.UTC),
+                                       from_date__lte=datetime.combine(first_day, time(23, 59), tzinfo=pytz.UTC))
+
         return queryset
 
 """

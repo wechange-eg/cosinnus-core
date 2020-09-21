@@ -23,7 +23,7 @@ export const fetchEvents: ReduxThunkActionCreator<[boolean], Promise<void>> = (f
   } else {
     filterParam = "room_id=" + roomId
   }
-  return fetch(`/api/v2/conference_events/?page_size=100&${filterParam}`, {
+  return fetch(`/api/v2/conference_events/?page_size=1000&${filterParam}`, {
     method: "GET"
   }).then(response => {
     if (response.status === 200) {

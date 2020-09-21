@@ -48,7 +48,7 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
             image={event.props.imageUrl}
             title={event.props.title}
           />
-          <Grid container spacing={1}>
+          {/*<Grid container spacing={1}>
           {Array.from(Array((6)), (v, i) => i + 1).map((_, i) => (
             renderParticipant(i)
           ))}
@@ -56,6 +56,7 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
           <Typography component="p">
             x <FormattedMessage id="spots left" defaultMessage="spots left" />
           </Typography>
+          */}
         </CardContent>
       </CardActionArea>
     </Card>
