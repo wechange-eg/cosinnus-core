@@ -1,11 +1,6 @@
 import React from "react"
 import {FormattedMessage} from "react-intl"
 import {
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  Link,
   List,
   ListItem,
   ListItemText,
@@ -13,12 +8,10 @@ import {
 } from "@material-ui/core"
 import {useStyles} from "./style"
 import {useHistory} from "react-router"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faCalendarPlus, faHeart, faUserPlus} from "@fortawesome/free-solid-svg-icons"
-
-import {Event, EventSlot} from "../../../stores/events/models"
-import {formatTime} from "../../../utils/events"
 import clsx from "clsx"
+
+import {EventSlot} from "../../../stores/events/models"
+import {formatTime} from "../../../utils/events"
 
 export interface EventListProps {
   events: EventSlot[]
@@ -27,6 +20,7 @@ export interface EventListProps {
 export function EventList(props: EventListProps) {
   const { events } = props
   const classes = useStyles()
+  const history = useHistory()
   if (!events) {
     return null
   }
@@ -55,11 +49,11 @@ export function EventList(props: EventListProps) {
           )}
         </ListItem>
       )}
-      {!slot.props.isBreak && slot.props.events && slot.props.events.map((event, index) => (
+      {!slot.props.isBreak && slot.props.events && slot.props.events.map((event) => (
       <ListItem
         button
         key={event.props.id}
-        href={event.props.url}
+        onClick={() => !event.props.isBreak && (window.location.href = event.getUrl())}
       >
         <ListItemText
           primary={event.props.room.title}

@@ -185,6 +185,13 @@ export class Event {
   getMinutesLeft() : number {
     return parseInt((this.props.toDate.getTime() - new Date().getTime()) / 1000 / 60)
   }
+
+  /**
+   * Get internal url
+   */
+  getUrl() : string {
+    return "../" + this.props.room.slug + "#/" + this.props.id
+  }
 }
 
 export interface EventSlotJson {
