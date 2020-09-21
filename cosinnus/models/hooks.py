@@ -263,17 +263,18 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                                                 extra={'room': room.id})
                                     continue
                                 if not instance.id:
-                                    # new member
-                                    rocket.add_member_to_room(user, room.rocket_chat_room_id)
-                                    if instance.is_moderator: # TODO fix check in rocket listeners??
-                                        rocket.add_moderator_to_room(user, room.rocket_chat_room_id)
+                                    # kicked member
+                                    rocket.remove_member_from_room(user, room.rocket_chat_room_id)
                                 else:
                                     # existing member
                                     # Invalidate old membership
                                     if is_pending and not was_pending:
                                         rocket.remove_member_from_room(user, room.rocket_chat_room_id)
+                                        if instance.is_moderator: # TODO fix check in rocket listeners??
+                                            rocket.add_moderator_to_room(user, room.rocket_chat_room_id)
+                                        
                                     # Create new membership
-                                    if was_pending and not is_pending:
+                                    if not is_pending:
                                         rocket.add_member_to_room(user, room.rocket_chat_room_id)
                         
                                     # Update membership

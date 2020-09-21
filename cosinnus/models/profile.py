@@ -330,7 +330,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
         if not username:
             username = self.get_new_rocket_username()
             self.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = username
-            self.save(update_fields=['settings'])
+            get_user_profile_model().objects.filter(id=self.id).update(settings=self.settings)
         return username
 
     @rocket_username.setter
