@@ -93,7 +93,7 @@ class BBBRoom(models.Model):
                                    help_text=_("number for dialing into the conference via telephone"),
                                    verbose_name="telephone dial in number")
     voice_bridge = models.PositiveIntegerField(help_text=_("pin to enter for telephone participants"),
-                                               unique=True, verbose_name="dial in PIN", default=random_voice_bridge,
+                                               verbose_name="dial in PIN", default=random_voice_bridge,
                                                validators=[MinValueValidator(10000), MaxValueValidator(99999)])
     internal_meeting_id = models.CharField(max_length=100, blank=True, null=True)
     parent_meeting_id = models.CharField(max_length=100, blank=True, null=True)
@@ -177,7 +177,7 @@ class BBBRoom(models.Model):
 
     @classmethod
     def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=None,
-               moderator_password=None, max_participants=None, voice_bridge=None):
+               moderator_password=None, max_participants=None, voice_bridge=None, options=None):
         """ Creates a new BBBRoom and crete a room on the remote bbb-server.
 
         :param name: Name of the BBBRoom
@@ -200,6 +200,9 @@ class BBBRoom(models.Model):
 
         :param voice_bridge: Dial in PIN for joining the meeting via telephone call
         :type: int range(10000 - 99999)
+
+        :param options: Options for the BBBRoom according to the BBB API
+        :type: dict
         """
         if attendee_password is None:
             attendee_password = random_password()

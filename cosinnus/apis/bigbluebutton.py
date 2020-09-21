@@ -102,7 +102,7 @@ def start(name, meeting_id, welcome="Welcome to the conversation", moderator_pas
 def start_verbose(
         name, meeting_id, welcome="Welcome to the conversation",
         moderator_password="", attendee_password="", max_participants=None, voice_bridge=None,
-        parent_meeting_id=None):
+        parent_meeting_id=None, options=None):
     """ This function calls the BigBlueButton API directly to create a meeting with all available parameters available
         in the cosinnus-core.BBBRoom model.
 
@@ -129,6 +129,9 @@ def start_verbose(
 
     :param parent_meeting_id: Breaking room for a running conference
     :type: str
+
+    :param options: BBBRoom options according to the listed options in the BigBlueButton API
+    :type: dict
 
     :return: XML representation of the API result
     :rtype: XML
