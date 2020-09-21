@@ -59,7 +59,7 @@ function StageConnector (props: StageProps & RouteComponentProps) {
             width="100%"
             height="100%"
             className={iframeClasses.sidebarIframe}
-            allow="geolocation; microphone; camera"
+            allow="microphone *; camera *"
           />
         )} />
       )}
