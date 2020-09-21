@@ -295,7 +295,14 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
                 self.media_tag.save()
         
         messages.success(request, self.message_success)
-        if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or \
+        
+        # conference groups
+        user_societies = CosinnusSociety.objects.get_for_user(request.user)
+        user_conferences = [society for society in user_societies if society.group_is_conference]
+        if len(user_conferences) > 0:
+            # if the user is part of a conference, redirect there after the welcome screen
+            redirect_url = user_conferences[0].get_absolute_url()
+        elif getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or \
             (getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False) and self.request.user.is_superuser):
             redirect_url = reverse('cosinnus:user-dashboard')
         else:
