@@ -132,19 +132,24 @@ class BBBRoom(models.Model):
     def remove_user(self, user):
         self.moderators.remove(user)
         self.attendees.remove(user)
+        
+    def remove_all_users(self):
+        self.moderators.clear()
+        self.attendees.clear()
 
-    def join_user(self, user, membership_status_int):
-        if membership_status_int == 2:
-            # TODO fix this to reference to MEMBERSHIP_ADMIN
+    def join_user(self, user, as_moderator=False):
+        if as_moderator:
             self.moderators.add(user)
             self.attendees.remove(user)
-        elif membership_status_int == 1:
+        else:
             self.attendees.add(user)
             self.moderators.remove(user)
 
     def join_group_members(self, group):
         for membership in group.memberships.all():
-            self.join_user(membership.user, membership.status)
+            # FIXME: reference group MEMBER_STATUS etc
+            if membership.status in (1, 2,):
+                self.join_user(membership.user, as_moderator=bool(membership.status==2))
 
     @property
     def members(self):

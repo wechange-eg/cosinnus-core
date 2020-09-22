@@ -220,7 +220,8 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                     if deleted:
                         room.remove_user(instance.user)
                     else:
-                        room.join_user(instance.user, instance.status)
+                        if instance.status in MEMBER_STATUS:
+                            room.join_user(instance.user, as_moderator=bool(instance.status==MEMBERSHIP_ADMIN))
                 
                 # For group conferences:    
                 group = instance.group
