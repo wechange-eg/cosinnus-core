@@ -623,7 +623,7 @@ if settings.COSINNUS_IDEAS_ENABLED:
 class CosinnusBBBRoomAdmin(admin.ModelAdmin):
     list_display = ('meeting_id', 'name', 'ended', 'portal')
     list_filter = ('ended', 'portal')
-    search_fields = ('slug', 'title', 'meeting_id')
+    search_fields = ('meeting_id', 'internal_meeting_id', 'name')
     
 admin.site.register(BBBRoom, CosinnusBBBRoomAdmin)
 

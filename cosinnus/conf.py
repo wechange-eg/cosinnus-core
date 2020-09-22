@@ -736,3 +736,8 @@ class CosinnusDefaultSettings(AppConf):
     BBB_API_URL = None
     BBB_HASH_ALGORITHM = "SHA1"
 
+    BBB_ROOM_DEFAULT_SETTINGS = {
+        "record": False,
+        "autoStartRecording": False,
+        "allowStartStopRecording": False
+    }
