@@ -3,6 +3,7 @@
 {% group_url 'cosinnus:group-detail' group=group as group_detail_page %}
 {% group_url 'cosinnus:conference:management' group=group as conference_management_page %}
 {% group_url 'cosinnus:conference:room-management' group=group as conference_room_management_page %}
+{% group_url 'cosinnus:event:conference-event-list' group=group as conference_event_management_page %}
 {% group_url 'cosinnus:group-edit' group=group as group_edit_page %}
 {% group_url 'cosinnus:group-dashboard' group=group as group_dashboard_page %}
 {% group_url 'cosinnus:group-microsite' group=group as group_microsite_page %}
@@ -15,7 +16,7 @@
                 <a class="pull-left" href="#">
                 </a>
                 <a class="pull-left" href="#">
-                    <i class="fa {{ group.get_icon }}"></i>
+                    <i class="fa fa-fw {{ group.get_icon }}"></i>
                 </a>
                 {% if user|has_read_access:group %}
                 <a class="pull-right" href="#">
@@ -33,7 +34,7 @@
     <ul class="dropdown-menu appnavi-dropdown-menu w100" role="menu">
             <li class="app-main appnavi-listelement fine-space">
                 <a href="{% group_url 'cosinnus:group-dashboard' group=group %}{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}{% if group.public or user.is_superuser %}?browse=true{% endif %}{% endif %}">
-                    <i class="fa fa-th-large"></i>
+                    <i class="fa fa-fw fa-th-large"></i>
                     {% if group.group_is_conference %}
 	                    {% trans "Conference Page" %}
 			        {% else %}
@@ -44,7 +45,7 @@
         {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
         <li class="app-main appnavi-listelement fine-space">
             <a href="{{ group_microsite_page }}">
-                <i class="fa fa-lightbulb-o"></i>
+                <i class="fa fa-fw fa-lightbulb-o"></i>
                 {% trans "Microsite" %}
             </a>
         </li>
@@ -55,7 +56,7 @@
 
 	        <li class="{{app_css_class}} appnavi-listelement {% if app.active %}active{% endif %}">
 	            <a href="{{ app.url }}" {% if app.app == 'cosinnus_cloud' and SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}>
-	                <i class="fa {{ app_icon }}"></i>
+	                <i class="fa fa-fw {{ app_icon }}"></i>
 	                {{ app.label }}
 	            </a>
 	        </li>
@@ -64,22 +65,29 @@
         {% if user|has_write_access:group and group.group_is_conference %}
 	        <li class="app-main appnavi-listelement fine-space">
 	            <a href="{{ conference_management_page }}">
-	                <i class="fas fa-chalkboard-teacher"></i>
+	                <i class="fas fa-fw fa-chalkboard-teacher"></i>
 	                {% trans "Conference Management" %}
 	            </a>
 	        </li>
 	        
             <li class="app-main appnavi-listelement fine-space">
                 <a href="{{ conference_room_management_page }}">
-                    <i class="fas fa-door-open"></i>
+                    <i class="fas fa-fw fa-door-open"></i>
                     {% trans "Conference Room Management" %}
+                </a>
+            </li>
+            
+            <li class="app-main appnavi-listelement fine-space">
+                <a href="{{ conference_event_management_page }}">
+                    <i class="fas fa-fw fa-calendar"></i>
+                    {% trans "Conference Event Management" %}
                 </a>
             </li>
         {% endif%}
 
         <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %}">
             <a href="{{ group_detail_page }}">
-                <i class="fa fa-group"></i>
+                <i class="fa fa-fw fa-group"></i>
                 {% trans "Members" %}
             </a>
         </li>
@@ -87,7 +95,7 @@
         {% if user|has_write_access:group %}
         <li class="app-main appnavi-listelement">
             <a href="{{ group_edit_page }}">
-                <i class="fa fa-cogs"></i>
+                <i class="fa fa-fw fa-cogs"></i>
                 {% trans "Settings" %}
             </a>
         </li>

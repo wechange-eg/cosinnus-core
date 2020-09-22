@@ -87,7 +87,8 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
         if check_ug_admin(user, obj) or check_user_superuser(user):
             return {
                 'manage_conference': group_aware_reverse('cosinnus:conference:management', kwargs={'group': obj}),
-                'manage_rooms': group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': obj})
+                'manage_rooms': group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': obj}),
+                'manage_events': group_aware_reverse('cosinnus:event:conference-event-list', kwargs={'group': obj}),
             }
         return ""
 
