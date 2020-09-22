@@ -6,8 +6,6 @@ from hashlib import sha1, sha256
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.translation import ugettext as _
-from django_bigbluebutton.bbb import BigBlueButton
 from cosinnus.utils import bigbluebutton as bbb_utils
 from cosinnus.utils.functions import is_number
 import logging
@@ -37,7 +35,7 @@ def join_url_tokenized(meeting_id, name, password):
 
 
 def is_meeting_remote(meeting_id):
-    remote_rooms = BigBlueButton().get_meetings()
+    remote_rooms = get_meetings()
     for room in remote_rooms:
         if room.get('name', '') == meeting_id:
             return True
@@ -108,6 +106,8 @@ def start(
         ('meetingID', meeting_id),
         ("welcome", welcome),
         ("voiceBridge", voice_bridge),
+        ("attendeePW", attendee_password),
+        ("moderatorPW", moderator_password),
     )
 
     if max_participants and is_number(max_participants):
@@ -130,14 +130,26 @@ def start(
     if result:
         return result
     else:
-        logger.error('BBB Room eror: Server request was not successful.',
+        logger.error('BBB Room error: Server request `start` was not successful.',
                      extra={'response_status_code': response.status_code, 'result': response.text})
         raise Exception('BBB Room exception: Server request was not successful: ' + str(response.text))
 
 
 def end_meeting(meeting_id, password):
     """ This function is a wrapper for the `end_meeting` function in bbb.py """
-    return BigBlueButton().end_meeting(meeting_id, password)
+    call = 'end'
+    query = urllib.parse.urlencode((
+        ('meetingID', meeting_id),
+        ('password', password),
+    ))
+    hashed = api_call(query, call)
+    url = settings.BBB_API_URL + call + '?' + hashed
+    req = requests.get(url)
+    result = bbb_utils.parse_xml(req.content)
+    if result:
+        return True
+    else:
+        return False
 
 
 def get_meetings():
@@ -146,19 +158,38 @@ def get_meetings():
     :return: XML representation of the API result
     :rtype: XML
     """
-    return BigBlueButton().get_meetings()
+    call = 'getMeetings'
+    query = urllib.parse.urlencode((
+        ('random', 'random'),
+    ))
+    hashed = api_call(query, call)
+    url = settings.BBB_API_URL + call + '?' + hashed
+    response = requests.get(url)
+    result = bbb_utils.parse_xml(response.content)
+    if result:
+        # Create dict of values for easy use in template
+        d = []
+        r = result[1].findall('meeting')
+        for m in r:
+            meeting_id = m.find('meetingID').text
+            password = m.find('moderatorPW').text
+            d.append({
+                'name': meeting_id,
+                'running': m.find('running').text,
+                'moderator_pw': password,
+                'attendee_pw': m.find('attendeePW').text,
+                'info': meeting_info(
+                    meeting_id,
+                    password)
+            })
+        return d
+    else:
+        logger.error('BBB Room error: Server request `getMeetings` was not successful.',
+                     extra={'response_status_code': response.status_code, 'result': response.text})
+        raise Exception("Get meetings() returned an error" + str(response.text))
 
 
 def meeting_info(meeting_id, password):
-    """ This function is a wrapper for the `meeting_info` function in bbb.py
-
-    :return: dict representation of the API result
-    :rtype: dict
-    """
-    return BigBlueButton().meeting_info(meeting_id, password)
-
-
-def verbose_meeting_info(meeting_id, password):
     call = 'getMeetingInfo'
     query = urllib.parse.urlencode((
         ('meetingID', meeting_id),
@@ -173,13 +204,23 @@ def verbose_meeting_info(meeting_id, password):
         return None
 
 
-def is_running(self, meeting_id):
+def is_running(meeting_id):
     """ This function is a wrapper for the `is_running` function in bbb.py
 
     :return: XML representation of the API result
     :rtype: XML
     """
-    return BigBlueButton().is_running(meeting_id)
+    call = 'isMeetingRunning'
+    query = urllib.parse.urlencode((
+        ('meetingID', meeting_id),
+    ))
+    hashed = api_call(query, call)
+    url = settings.BBB_API_URL + call + '?' + hashed
+    result = bbb_utils.parse_xml(requests.get(url).content)
+    if result and result.find('running').text == 'true':
+        return True
+    else:
+        return False
 
 
 def xml_join(name, meeting_id, password):
@@ -211,9 +252,26 @@ def xml_join(name, meeting_id, password):
 
 
 def join_url(meeting_id, name, password):
-    """ This function is a wrapper for the `join_url` function in bbb.py
+    """ returns the join api url with parameters and hash to join a conversation1
+
+    :param meeting_id: ID of the meeting to join
+    :type: str
+
+    :param name: Name of the user to join
+    :type: str
+
+    :param password:
+
 
     :return: XML representation of the API result
     :rtype: XML
     """
-    return BigBlueButton().join_url(meeting_id, name, password)
+    call = 'join'
+    query = urllib.parse.urlencode((
+        ('fullName', name),
+        ('meetingID', meeting_id),
+        ('password', password),
+    ))
+    hashed = api_call(query, call)
+    url = settings.BBB_API_URL + call + '?' + hashed
+    return url
