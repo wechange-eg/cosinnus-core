@@ -5,16 +5,14 @@ import {
 import React from "react"
 import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
-import {withRouter, useHistory} from "react-router"
+import {withRouter} from "react-router"
 import {FormattedMessage} from "react-intl";
 import Iframe from "react-iframe"
-import clsx from "clsx"
 
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {EventSlot} from "../../stores/events/models"
 import {useStyles as iframeUseStyles} from "../components/Iframe/style"
-import {formatTime} from "../../utils/events"
 import {Content} from "../components/Content/style"
 import {EventList} from "../components/EventList"
 import {Sidebar} from "../components/Sidebar"
@@ -49,7 +47,9 @@ function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
     <Grid container>
       <Content>
         <Typography component="h1"><FormattedMessage id="Agenda" defaultMessage="Agenda" /></Typography>
-        {room.props.description && <Typography component="p">{room.props.description}</Typography>}
+        {room.props.descriptionHtml && (
+          <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
+        )}
         <EventList events={events} />
         <ManageRoomButtons />
       </Content>

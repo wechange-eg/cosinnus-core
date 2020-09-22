@@ -41,14 +41,14 @@ export function EventList(props: EventListProps) {
           <ListItemText primary={formatTime(slot.props.fromDate) + "-" + formatTime(slot.props.toDate)} />
           {slot.props.isBreak && slot.props.title && (
             <ListItemText primary={slot.props.title} />
-          ) || (
+          ) || (slot.props.events.length > 1 && (
             <ListItemText primary={(
               <Typography component="span">
                 {slot.props.events.length}&nbsp;
                 <FormattedMessage id="parallel events" defaultMessage="parallel events" />
               </Typography>
             )} />
-          )}
+          ))}
         </ListItem>
       )}
       {!slot.props.isBreak && slot.props.events && slot.props.events.map((event) => (

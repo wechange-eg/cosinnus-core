@@ -50,7 +50,9 @@ function StageConnector (props: StageProps & RouteComponentProps) {
     <Grid container>
       <Content>
         <Typography component="h1"><FormattedMessage id="Agenda" defaultMessage="Agenda" /></Typography>
-        {room.props.description && <Typography component="p">{room.props.description}</Typography>}
+        {room.props.descriptionHtml && (
+          <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
+        )}
         <EventList events={events} />
         <ManageRoomButtons />
       </Content>

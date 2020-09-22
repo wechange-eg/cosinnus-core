@@ -2,8 +2,12 @@
 from __future__ import unicode_literals
 
 from builtins import object
+import random
 
+from cosinnus.templatetags.cosinnus_tags import textfield
+from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 from rest_framework import serializers
 
 from cosinnus.models.conference import CosinnusConferenceRoom
@@ -28,21 +32,25 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
         CosinnusConferenceRoom.TYPE_DISCUSSIONS: 'discussions',
         CosinnusConferenceRoom.TYPE_COFFEE_TABLES: 'coffee_tables',
         CosinnusConferenceRoom.TYPE_RESULTS: 'results',
+        CosinnusConferenceRoom.TYPE_PARTICIPANTS: 'participants',
     }
     type = serializers.SerializerMethodField()
     count = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
+    description_html = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
 
     class Meta(object):
         model = CosinnusConferenceRoom
-        fields = ('id', 'slug', 'title', 'description', 'type', 'count', 'url', 'management_urls', 'is_visible')
+        fields = ('id', 'slug', 'title', 'description_html', 'type', 'count', 'url', 'management_urls', 'is_visible')
 
     def get_type(self, obj):
         return self.TYPE_MAP.get(obj.type)
 
     def get_count(self, obj):
-        if obj.type == obj.TYPE_LOBBY:
+        if obj.type == obj.TYPE_PARTICIPANTS:
+            return obj.group.users.filter(is_active=True).count()
+        elif obj.type == obj.TYPE_LOBBY:
             queryset = ConferenceEvent.objects.conference_upcoming().exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
             return queryset.filter(group=obj.group).count()
         else:
@@ -63,6 +71,9 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
                 'delete_room': obj.get_delete_url(),
             }
         return {}
+
+    def get_description_html(self, obj):
+        return textfield(obj.description)
 
 
 class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
@@ -117,6 +128,36 @@ class ConferenceEventRoomSerializer(serializers.ModelSerializer):
 
     def get_type(self, obj):
         return ConferenceRoomSerializer.TYPE_MAP.get(obj.type)
+
+
+class ConferenceParticipantSerializer(serializers.ModelSerializer):
+    organisation = serializers.SerializerMethodField()
+    country = serializers.SerializerMethodField()
+    chat_url = serializers.SerializerMethodField()
+
+    class Meta(object):
+        model = get_user_model()
+        fields = ('id', 'first_name', 'last_name', 'organisation', 'country', 'chat_url')
+
+    def get_organisation(self, obj):
+        if hasattr(obj, 'cosinnus_profile'):
+            return random.choice(["A", "B", "C"])
+            # return obj.cosinnus_profile.organisation
+        return ""
+
+    def get_country(self, obj):
+        if hasattr(obj, 'cosinnus_profile'):
+            return random.choice(["Germany", "Russia", "Belarus"])
+            # return obj.cosinnus_profile.country
+        return ""
+
+    def get_chat_url(self, obj):
+        if not settings.COSINNUS_IS_INTEGRATED_PORTAL and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
+            if settings.COSINNUS_ROCKET_ENABLED:
+                return reverse('cosinnus:message-write', kwargs={'username': obj.username})
+            else:
+                return reverse('postman:write', kwargs={'recipients': obj.username})
+        return ''
 
 
 class ConferenceEventParticipantSerializer(serializers.ModelSerializer):

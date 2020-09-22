@@ -57,6 +57,7 @@ class CosinnusConferenceRoom(models.Model):
     TYPE_DISCUSSIONS = 3
     TYPE_COFFEE_TABLES = 4
     TYPE_RESULTS = 5
+    TYPE_PARTICIPANTS = 6
     
     TYPE_CHOICES = (
         (TYPE_LOBBY, _('Lobby')),
@@ -65,6 +66,7 @@ class CosinnusConferenceRoom(models.Model):
         (TYPE_DISCUSSIONS, _('Discussions')),
         (TYPE_COFFEE_TABLES, _('Coffee Tables')),
         (TYPE_RESULTS, _('Results')),
+        (TYPE_PARTICIPANTS, _('Participants')),
     )
     
     # rooms of these types will initialize a corresponding rocketchat room

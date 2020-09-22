@@ -51,7 +51,9 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
     <Grid container>
       <Content>
         <div className={classes.section}>
-          {room.props.description && <Typography component="p">{room.props.description}</Typography>}
+          {room.props.descriptionHtml && (
+            <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
+          )}
           <Typography component="h1"><FormattedMessage id="Happening now" defaultMessage="Happening now" /></Typography>
           {currentWorkshops.length > 0 && currentWorkshops.map((slot, index) => (
             <Grid container key={index} spacing={4}>

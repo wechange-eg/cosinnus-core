@@ -49,8 +49,10 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
     <Grid container>
       <Content>
         <div className={classes.section}>
-          {room.props.description && <Typography component="p">{room.props.description}</Typography>}
           <Typography component="h1"><FormattedMessage id="Happening now" defaultMessage="Happening now" /></Typography>
+          {room.props.descriptionHtml && (
+            <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
+          )}
           {events && events.length > 0 && (
             <Grid container spacing={4}>
               {events.map((slot, index) => (

@@ -1,11 +1,16 @@
+from django.contrib.auth import get_user_model
 from rest_framework import viewsets, pagination
 
 from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus_conference.api.serializers import ConferenceSerializer, ConferenceEventSerializer
+from cosinnus_conference.api.serializers import ConferenceSerializer, ConferenceEventSerializer, \
+    ConferenceParticipantSerializer
 from cosinnus_event.models import ConferenceEvent
 
 
 # FIXME: Make this pagination class default in REST_FRAMEWORK setting
+from rest_framework.decorators import action
+
+
 class DefaultPageNumberPagination(pagination.PageNumberPagination):
     page_size = 10
     page_size_query_param = 'page_size'
@@ -30,28 +35,26 @@ class ConferenceViewSet(RequireGroupReadMixin,
                         viewsets.ReadOnlyModelViewSet):
     queryset = get_cosinnus_group_model().objects.filter(is_conference=True, is_active=True)
     serializer_class = ConferenceSerializer
-
-
-class ConferenceEventViewSet(RequireEventReadMixin,
-                             viewsets.ReadOnlyModelViewSet):
-    queryset = ConferenceEvent.objects.filter(room__group__is_conference=True, room__group__is_active=True)
-    serializer_class = ConferenceEventSerializer
     pagination_class = DefaultPageNumberPagination
 
-    def get_queryset(self):
-        queryset = super().get_queryset().conference_upcoming()
-
-        # Filter by room or conference
+    @action(detail=True, methods=['get'])
+    def events(self, request, pk=None):
+        queryset = ConferenceEvent.objects.filter(room__group=pk).conference_upcoming()
         room_id = self.request.GET.get('room_id')
-        conference_id = self.request.GET.get('conference_id')
         if room_id:
             queryset = queryset.filter(room=room_id)
-        elif conference_id:
-            queryset = queryset.filter(room__group=conference_id).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
         else:
-            queryset = queryset.none()
+            queryset = queryset.exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
+        page = self.paginate_queryset(queryset)
+        serializer = ConferenceEventSerializer(page, many=True, context={"request": request})
+        return self.get_paginated_response(serializer.data)
 
-        return queryset
+    @action(detail=True, methods=['get'])
+    def participants(self, request, pk=None):
+        queryset = self.get_object().users.filter(is_active=True)
+        page = self.paginate_queryset(queryset)
+        serializer = ConferenceParticipantSerializer(page, many=True, context={"request": request})
+        return self.get_paginated_response(serializer.data)
 
 """
     @action(detail=True, methods=['get'])

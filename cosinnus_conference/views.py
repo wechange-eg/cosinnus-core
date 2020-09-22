@@ -368,8 +368,9 @@ class ConferencePageView(RequireReadMixin, GroupIsConferenceMixin, TemplateView)
             rooms = rooms.visible()
         
         ctx = {
+            'slug': self.kwargs.get('slug'), # can be None
             'group': self.group,
-            'room': self.room, # can be None
+            'room': self.room,  # can be None
             'rooms': rooms,
             'events': self.room.events.all() if self.room else [],
         }

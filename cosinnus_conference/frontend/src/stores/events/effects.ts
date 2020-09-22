@@ -10,7 +10,7 @@ import {groupBySlots} from "../../utils/events"
 import {RootState} from "../rootReducer"
 
 /**
- * Fetch conference room (events and Rocket.Chat URL)
+ * Fetch conference events
  *
  * @returns {(dispatch: Dispatch) => Promise<void>} - return function
  */
@@ -18,12 +18,10 @@ export const fetchEvents: ReduxThunkActionCreator<[boolean], Promise<void>> = (f
   const state = getState()
   const roomId = state.room && state.room.props.id || 0
   let filterParam = ""
-  if (fetchAll && state.conference) {
-    filterParam = "conference_id=" + state.conference.props.id
-  } else {
+  if (!fetchAll) {
     filterParam = "room_id=" + roomId
   }
-  return fetch(`/api/v2/conference_events/?page_size=1000&${filterParam}`, {
+  return fetch(`/api/v2/conferences/${window.conferenceId}/events/?page_size=1000&${filterParam}`, {
     method: "GET"
   }).then(response => {
     if (response.status === 200) {

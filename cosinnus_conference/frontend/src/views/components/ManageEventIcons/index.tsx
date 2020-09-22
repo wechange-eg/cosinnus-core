@@ -35,7 +35,10 @@ export function ManageEventIcons(props: ManageEventIconsProps) {
       {event.props.managementUrls.updateEvent && (
         <Link
           href="#"
-          onClick={() => window.location.href = event.props.managementUrls.updateEvent}
+          onClick={e => {
+            e.stopPropagation()
+            window.location.href = event.props.managementUrls.updateEvent
+          }}
         >
           <FontAwesomeIcon icon={faPen} />
         </Link>
@@ -44,7 +47,10 @@ export function ManageEventIcons(props: ManageEventIconsProps) {
         <span>
           <Link
             href="#"
-            onClick={() => setDeleteOpen(true)}
+            onClick={e => {
+              e.stopPropagation()
+              setDeleteOpen(true)
+            }}
           >
             <FontAwesomeIcon icon={faTrashAlt} />
           </Link>

@@ -11,7 +11,7 @@ import {
   faComments,
   faHandshake,
   faHome, faUser,
-  faUsers, faDoorClosed, faUsersCog, faCalendar
+  faUsers, faDoorClosed, faUsersCog, faCalendar, faChalkboardTeacher
 } from '@fortawesome/free-solid-svg-icons'
 import {IconDefinition} from "@fortawesome/fontawesome-common-types"
 import {FormattedMessage} from "react-intl"
@@ -20,15 +20,18 @@ import {RootState} from "../../../stores/rootReducer"
 import {useStyles} from "./style"
 import {Room} from "../../../stores/room/models"
 import {Conference} from "../../../stores/conference/models"
+import {Participant} from "../../../stores/participants/models"
 
 interface NavProps {
   conference: Conference
+  participants: Participant[]
   room: Room
 }
 
 function mapStateToProps(state: RootState) {
   return {
     conference: state.conference,
+    participants: state.participants,
     room: state.room,
   }
 }
@@ -37,7 +40,7 @@ const mapDispatchToProps = {
 }
 
 function NavConnector(props: NavProps) {
-  const { conference, room } = props
+  const { conference, participants, room } = props
   const classes = useStyles()
   if (!conference) {
     return null
@@ -47,11 +50,12 @@ function NavConnector(props: NavProps) {
       "lobby": faHome,
       "stage": faUser,
       "discussions": faComments,
-      "workshops": faUsers,
+      "workshops": faChalkboardTeacher,
       "coffee_tables": faCoffee,
       "networking": faHandshake,
       "exhibition": faBuilding,
       "results": faCheck,
+      "participants": faUsers,
     }
     return icons[type] || faCircle
   }

@@ -25,7 +25,6 @@ import {Stage} from "./Stage/list"
 import {Discussions} from "./Discussions/list"
 import {Workshops} from "./Workshops/list"
 import {CoffeeTables} from "./CoffeeTables/list"
-import {Networking} from "./Networking/list"
 import {Organisations} from "./Organisations"
 import {CoffeeTable} from "./CoffeeTables/detail"
 import {Channels} from "./Channels/list"
@@ -34,16 +33,22 @@ import {Workshop} from "./Workshops/detail"
 import {Discussion} from "./Discussions/detail"
 import {StageEvent} from "./Stage/detail"
 import {Results} from "./Results"
-import {Room} from "../stores/room/reducer"
+import {Room} from "../stores/room/models"
 import {Loading} from "./components/Loading"
+import {fetchParticipants} from "../stores/participants/effects"
+import {Participant} from "../stores/participants/models"
+import {Participants} from "./Participants/list"
+import {Participant as ParticipantView} from "./Participants/detail"
 
 interface AppProps {
   conference: ConferenceState
+  participants: Participant[]
   room: Room
   theme: ThemeState
   translations: TranslationsState
   user: User
   fetchConference: DispatchedReduxThunkActionCreator<Promise<void>>
+  fetchParticipants: DispatchedReduxThunkActionCreator<Promise<void>>
   fetchUser: DispatchedReduxThunkActionCreator<Promise<void>>
   fetchTranslations: DispatchedReduxThunkActionCreator<Promise<void>>
 }
@@ -51,6 +56,7 @@ interface AppProps {
 function mapStateToProps(state: RootState) {
   return {
     conference: state.conference,
+    participants: state.participants,
     theme: state.theme,
     room: state.room,
     translations: state.translations,
@@ -60,6 +66,7 @@ function mapStateToProps(state: RootState) {
 
 const mapDispatchToProps = {
   fetchConference,
+  fetchParticipants,
   fetchUser,
   fetchTranslations,
 }
@@ -68,20 +75,13 @@ function AppConnector(props: AppProps) {
   const { translations, fetchTranslations } = props
   const { user, fetchUser } = props
   const { conference, fetchConference } = props
+  const { participants, fetchParticipants } = props
   const { room } = props
 
-
-  if (!translations) {
-    fetchTranslations()
-  }
-
-  if (!user) {
-    fetchUser()
-  }
-
-  if (!conference) {
-    fetchConference()
-  }
+  if (!translations) fetchTranslations()
+  if (!user) fetchUser()
+  if (!conference) fetchConference()
+  if (!participants || participants.length == 0) fetchParticipants()
 
   function getRoutes() {
     const routeProps: ProtectedRouteProps = {
@@ -135,6 +135,13 @@ function AppConnector(props: AppProps) {
     )) || (room.props.type === "results" && (
       <Switch>
         <ProtectedRoute {...routeProps} component={Results}/>
+      </Switch>
+    )) || (room.props.type === "participants" && (
+      <Switch>
+        <ProtectedRoute {...routeProps} component={Participants}/>
+        <ProtectedRoute {...routeProps} path="/:id" render={props => (
+          <ParticipantView id={+props.match.params.id} {...props} />
+        )}/>
       </Switch>
     ))
   }

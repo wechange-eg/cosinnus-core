@@ -1,8 +1,5 @@
 import {
-  ReduxActionCreator,
-  ReduxErrorActionCreator,
-  ReduxObjectActionCreator, ReduxObjectErrorActionCreator, ReduxRoomErrorActionCreator,
-  ReduxRoomObjectActionCreator
+  ReduxObjectActionCreator, ReduxObjectErrorActionCreator
 } from "../../utils/types"
 import {ActionType} from "../../constants/actions"
 import {EventSlot} from "./models"
