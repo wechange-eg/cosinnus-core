@@ -36,7 +36,7 @@ export class Participant {
       lastName: json.last_name,
       organisation: json.organisation,
       country: json.country,
-      chatUrl: json.rocket_chat_url,
+      chatUrl: json.chat_url,
     }
 
     return new Participant(props)
