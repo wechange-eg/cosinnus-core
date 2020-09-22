@@ -5,11 +5,13 @@ export interface RoomJson {
   type: string
   count: number
   url: string
+  description: string
   management_urls: {
     create_event?: string
     update_room?: string
     delete_room?: string
   }
+  is_visible: boolean
 }
 
 export interface RoomProps {
@@ -19,11 +21,13 @@ export interface RoomProps {
   type: string
   count: number
   url: string
+  description: string
   managementUrls: {
     createEvent?: string
     updateRoom?: string
     deleteRoom?: string
   }
+  isVisible: boolean
 }
 
 export class Room {
@@ -47,11 +51,13 @@ export class Room {
       type: json.type,
       count: json.count,
       url: json.url,
+      description: json.description,
       managementUrls: {
         createEvent: json.management_urls.create_event,
         updateRoom: json.management_urls.update_room,
         deleteRoom: json.management_urls.delete_room,
       },
+      isVisible: json.is_visible,
     }
 
     return new Room(props)
@@ -71,11 +77,13 @@ export class Room {
       type: props.type,
       count: props.count,
       url: props.url,
+      description: props.description,
       management_urls: {
         create_event: props.managementUrls.createEvent,
         update_room: props.managementUrls.updateRoom,
         delete_room: props.managementUrls.deleteRoom,
       },
+      is_visible: props.isVisible,
     }
   }
 }

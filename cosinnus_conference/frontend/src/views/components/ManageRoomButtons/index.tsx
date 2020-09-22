@@ -4,11 +4,11 @@ import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogT
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faPen, faPlus, faTrashAlt} from "@fortawesome/free-solid-svg-icons"
 import {FormattedMessage} from "react-intl"
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import {connect as reduxConnect} from "react-redux"
+import axios from "axios"
+import Cookies from "js-cookie"
 
 import {RootState} from "../../../stores/rootReducer"
-import {connect as reduxConnect} from "react-redux"
 import {useStyles} from "./style"
 
 interface ManageRoomButtonsProps {

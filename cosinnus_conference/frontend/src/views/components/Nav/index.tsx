@@ -79,7 +79,10 @@ function NavConnector(props: NavProps) {
               className={classes.listItem}
             >
               <FontAwesomeIcon icon={getIconByType(navRoom.props.type)}/>&nbsp;
-              <ListItemText primary={navRoom.props.title}/>
+              <ListItemText
+                primary={navRoom.props.title}
+                secondary={!navRoom.props.isVisible && <FormattedMessage id="hidden" defaultMessage="hidden" />}
+              />
               <Badge badgeContent={navRoom.props.count} className={classes.badge} />
             </ListItem>
         ))}

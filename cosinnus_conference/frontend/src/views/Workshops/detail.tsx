@@ -54,10 +54,8 @@ function WorkshopConnector (props: WorkshopsProps & RouteComponentProps) {
     <Main container>
       {event && (
         <Content>
-          <Typography component="h1">
-            <FormattedMessage id="Workshop" defaultMessage="Workshop" />:&nbsp;
-            {event.props.title}&nbsp;
-          </Typography>
+          <Typography component="h1">{event.props.title}</Typography>
+          {event.props.note && <Typography component="p">{event.props.note}</Typography>}
           <div className={iframeClasses.bbbIframe}>
             <Iframe
               url={event.props.url}

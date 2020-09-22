@@ -1,4 +1,5 @@
 import {
+  Grid,
   Typography
 } from "@material-ui/core"
 import React, {useState} from "react"
@@ -18,16 +19,20 @@ import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
 import {ManageEventButtons} from "../components/ManageEventButtons"
+import {Sidebar} from "../components/Sidebar"
 
 interface StageEventProps {
   id: number
   events: EventSlot[]
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
+  url: string
 }
 
 function mapStateToProps(state: RootState) {
+  console.log(state.room.props)
   return {
     events: state.events[state.room.props.id],
+    url: state.room.props.url,
   }
 }
 
@@ -36,7 +41,7 @@ const mapDispatchToProps = {
 }
 
 function StageEventConnector (props: StageEventProps & RouteComponentProps) {
-  const { id, events, fetchEvents } = props
+  const { id, events, fetchEvents, url } = props
   const iframeClasses = iframeUseStyles()
   let event = null
   if (events) {
@@ -48,10 +53,8 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
     <Main container>
       {event && (
         <Content>
-          <Typography component="h1">
-            <FormattedMessage id="Stage event" defaultMessage="Stage event" />:&nbsp;
-            {event.props.title}&nbsp;
-          </Typography>
+          <Typography component="h1">{event.props.title}</Typography>
+          {event.props.note && <Typography component="p">{event.props.note}</Typography>}
           <div className={iframeClasses.bbbIframe}>
             <Iframe
               url={event.props.url}
@@ -66,6 +69,17 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
         <Content>
           <Loading />
         </Content>
+      )}
+      {url && (
+        <Sidebar elements={(
+          <Iframe
+            url={url}
+            width="100%"
+            height="100%"
+            className={iframeClasses.sidebarIframe}
+            allow="microphone *; camera *"
+          />
+        )} />
       )}
     </Main>
   )

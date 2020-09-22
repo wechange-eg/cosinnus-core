@@ -3,17 +3,17 @@ import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogT
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faPen, faPlus, faTrashAlt} from "@fortawesome/free-solid-svg-icons"
 import {FormattedMessage} from "react-intl"
-import axios from "axios"
-
-import {Event} from "../../../stores/events/models"
+import Cookies from "js-cookie"
 import {useStyles} from "./style"
 import axios from "axios"
 
-interface ManageEventButtonsProps {
+import {Event} from "../../../stores/events/models"
+
+interface ManageEventIconsProps {
   event: Event
 }
 
-export function ManageEventButtons(props: ManageEventButtonsProps) {
+export function ManageEventIcons(props: ManageEventIconsProps) {
   const {event} = props
   const classes = useStyles()
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -31,29 +31,23 @@ export function ManageEventButtons(props: ManageEventButtonsProps) {
     })
   }
   return (
-    <div className={classes.buttons}>
+    <div className={classes.icons}>
       {event.props.managementUrls.updateEvent && (
-        <Button
-          variant="contained"
-          disableElevation
+        <Link
           href="#"
           onClick={() => window.location.href = event.props.managementUrls.updateEvent}
         >
-          <FontAwesomeIcon icon={faPen} />&nbsp;
-          <FormattedMessage id="Edit event" defaultMessage="Edit event" />
-        </Button>
+          <FontAwesomeIcon icon={faPen} />
+        </Link>
       )}
       {event.props.managementUrls.deleteEvent && (
         <span>
-          <Button
-            variant="contained"
-            disableElevation
+          <Link
             href="#"
             onClick={() => setDeleteOpen(true)}
           >
-            <FontAwesomeIcon icon={faTrashAlt} />&nbsp;
-            <FormattedMessage id="Delete event" defaultMessage="Delete event" />
-          </Button>
+            <FontAwesomeIcon icon={faTrashAlt} />
+          </Link>
           <Dialog
             open={deleteOpen}
             keepMounted

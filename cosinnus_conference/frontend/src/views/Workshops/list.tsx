@@ -19,17 +19,18 @@ import {useStyles} from "./style"
 import {EventCard} from "../components/EventCard"
 import {fetchEvents} from "../../stores/events/effects"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
+import {Room} from "../../stores/room/models"
 
 interface WorkshopsProps {
   events: EventSlot[]
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
-  url: string
+  room: Room
 }
 
 function mapStateToProps(state: RootState) {
   return {
     events: state.events[state.room.props.id],
-    url: state.room.props.url,
+    room: state.room,
   }
 }
 
@@ -38,7 +39,7 @@ const mapDispatchToProps = {
 }
 
 function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
-  const { events, fetchEvents, url } = props
+  const { events, fetchEvents, room } = props
   if (!events) {
     fetchEvents()
   }
@@ -50,6 +51,7 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
     <Grid container>
       <Content>
         <div className={classes.section}>
+          {room.props.description && <Typography component="p">{room.props.description}</Typography>}
           <Typography component="h1"><FormattedMessage id="Happening now" defaultMessage="Happening now" /></Typography>
           {currentWorkshops.length > 0 && currentWorkshops.map((slot, index) => (
             <Grid container key={index} spacing={4}>
@@ -79,10 +81,10 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
         </div>
         <ManageRoomButtons />
       </Content>
-      {url && (
+      {room.props.url && (
         <Sidebar elements={(
           <Iframe
-            url={url}
+            url={room.props.url}
             width="100%"
             height="100%"
             className={iframeClasses.sidebarIframe}

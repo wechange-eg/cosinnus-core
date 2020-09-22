@@ -51,10 +51,8 @@ function CoffeeTableConnector (props: CoffeeTableProps & RouteComponentProps) {
     <Main container>
       {event && (
         <Content>
-          <Typography component="h1">
-            <FormattedMessage id="Coffee table" defaultMessage="Coffee table" />:&nbsp;
-            {event.props.title}&nbsp;
-          </Typography>
+          <Typography component="h1">{event.props.title}</Typography>
+          {event.props.note && <Typography component="p">{event.props.note}</Typography>}
           <div className={iframeClasses.bbbIframe}>
             <Iframe
               url={event.props.url}

@@ -20,17 +20,18 @@ import {EventList} from "../components/EventList"
 import {Sidebar} from "../components/Sidebar"
 import {fetchEvents} from "../../stores/events/effects"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
+import {Room} from "../../stores/room/models"
 
 interface DiscussionsProps {
   events: EventSlot[]
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
-  url: string
+  room: Room
 }
 
 function mapStateToProps(state: RootState) {
   return {
     events: state.events[state.room.props.id],
-    url: state.room.props.url,
+    room: state.room,
   }
 }
 
@@ -39,7 +40,7 @@ const mapDispatchToProps = {
 }
 
 function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
-  const { events, fetchEvents, url } = props
+  const { events, fetchEvents, room } = props
   if (!events) {
     fetchEvents()
   }
@@ -48,13 +49,14 @@ function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
     <Grid container>
       <Content>
         <Typography component="h1"><FormattedMessage id="Agenda" defaultMessage="Agenda" /></Typography>
+        {room.props.description && <Typography component="p">{room.props.description}</Typography>}
         <EventList events={events} />
         <ManageRoomButtons />
       </Content>
-      {url && (
+      {room.props.url && (
         <Sidebar elements={(
           <Iframe
-            url={url}
+            url={room.props.url}
             width="100%"
             height="100%"
             className={iframeClasses.sidebarIframe}

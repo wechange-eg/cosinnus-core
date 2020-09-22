@@ -36,7 +36,7 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = CosinnusConferenceRoom
-        fields = ('id', 'slug', 'title', 'description', 'type', 'count', 'url', 'management_urls')
+        fields = ('id', 'slug', 'title', 'description', 'type', 'count', 'url', 'management_urls', 'is_visible')
 
     def get_type(self, obj):
         return self.TYPE_MAP.get(obj.type)
@@ -77,7 +77,7 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
         request = self.context['request']
-        if not check_ug_admin(request.user, obj):
+        if not (check_ug_admin(request.user, obj) or check_user_superuser(request.user)):
             rooms = rooms.visible()
         serializer = ConferenceRoomSerializer(instance=rooms, many=True, context={'request': request})
         return serializer.data
@@ -108,9 +108,14 @@ class ConferenceParticipant(serializers.ModelSerializer):
 
 
 class ConferenceEventRoomSerializer(serializers.ModelSerializer):
+    type = serializers.SerializerMethodField()
+
     class Meta(object):
         model = CosinnusConferenceRoom
-        fields = ('id', 'title', 'slug')
+        fields = ('id', 'title', 'slug', 'type')
+
+    def get_type(self, obj):
+        return ConferenceRoomSerializer.TYPE_MAP.get(obj.type)
 
 
 class ConferenceEventSerializer(serializers.ModelSerializer):

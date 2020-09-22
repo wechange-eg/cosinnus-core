@@ -56,6 +56,7 @@ export interface Room {
   id: number
   slug: string
   title: string
+  type: string
 }
 
 export interface EventJson {
@@ -190,6 +191,9 @@ export class Event {
    * Get internal url
    */
   getUrl() : string {
+    if (this.props.isBreak) return ""
+    // Lobby has no event routes
+    if (this.props.room.type == "lobby") return ""
     return "../" + this.props.room.slug + "#/" + this.props.id
   }
 }

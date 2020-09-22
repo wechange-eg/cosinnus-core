@@ -19,17 +19,18 @@ import {useStyles} from "./style"
 import {CoffeeTable} from "../components/CoffeeTable"
 import {fetchEvents} from "../../stores/events/effects"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
+import {Room} from "../../stores/room/models"
 
 interface CoffeeTablesProps {
   events: EventSlot[]
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
-  url: string
+  room: Room
 }
 
 function mapStateToProps(state: RootState, _ownProps: CoffeeTablesProps) {
   return {
     events: state.events[state.room.props.id],
-    url: state.room.props.url,
+    room: state.room,
   }
 }
 
@@ -38,7 +39,7 @@ const mapDispatchToProps = {
 }
 
 function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) {
-  const { events, fetchEvents, url } = props
+  const { events, fetchEvents, room } = props
   if (!events) {
     fetchEvents()
   }
@@ -48,6 +49,7 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
     <Grid container>
       <Content>
         <div className={classes.section}>
+          {room.props.description && <Typography component="p">{room.props.description}</Typography>}
           <Typography component="h1"><FormattedMessage id="Happening now" defaultMessage="Happening now" /></Typography>
           {events && events.length > 0 && (
             <Grid container spacing={4}>
@@ -73,10 +75,10 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
         */}
         <ManageRoomButtons />
       </Content>
-      {url && (
+      {room.props.url && (
         <Sidebar elements={(
           <Iframe
-            url={url}
+            url={room.props.url}
             width="100%"
             height="100%"
             className={iframeClasses.sidebarIframe}

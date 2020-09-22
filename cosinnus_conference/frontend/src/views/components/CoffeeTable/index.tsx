@@ -4,6 +4,7 @@ import {RouteComponentProps} from "react-router-dom"
 
 import {Event} from "../../../stores/events/models"
 import {useStyles} from "./style"
+import {ManageEventIcons} from "../ManageEventIcons"
 
 export interface CoffeeTableProps {
   event: Event
@@ -36,7 +37,10 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
   return (
     <Card className={classes.card}>
       <CardActionArea
-        onClick={() => !event.props.isBreak && (window.location.href = event.getUrl())}
+        onClick={() => {
+          const url = event.getUrl()
+          if (url) window.location.href = url
+        }}
       >
         <CardContent>
           <Typography component="h3">{event.props.title}</Typography>
@@ -56,6 +60,7 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
             x <FormattedMessage id="spots left" defaultMessage="spots left" />
           </Typography>
           */}
+          <ManageEventIcons event={event} />
         </CardContent>
       </CardActionArea>
     </Card>

@@ -1,6 +1,7 @@
 import React from "react"
 import {FormattedMessage} from "react-intl"
 import {
+  CardActionArea,
   List,
   ListItem,
   ListItemText,
@@ -12,6 +13,7 @@ import clsx from "clsx"
 
 import {EventSlot} from "../../../stores/events/models"
 import {formatTime} from "../../../utils/events"
+import {ManageEventIcons} from "../ManageEventIcons"
 
 export interface EventListProps {
   events: EventSlot[]
@@ -53,13 +55,17 @@ export function EventList(props: EventListProps) {
       <ListItem
         button
         key={event.props.id}
-        onClick={() => !event.props.isBreak && (window.location.href = event.getUrl())}
+        onClick={() => {
+          const url = event.getUrl()
+          if (url) window.location.href = url
+        }}
       >
         <ListItemText
           primary={event.props.room.title}
           secondary={isNow && <FormattedMessage id="Now" defaultMessage="Now" />}
         />
         <ListItemText primary={event.props.title} secondary={event.props.note} />
+        <ManageEventIcons event={event} />
       </ListItem>
       ))}
     </List>

@@ -1,12 +1,12 @@
 import React from "react"
 import {FormattedMessage} from "react-intl"
 import {Card, CardActionArea, CardContent, Typography} from "@material-ui/core"
-import {useHistory} from "react-router"
 import clsx from "clsx"
 
 import {Event} from "../../../stores/events/models"
 import {formatTime} from "../../../utils/events"
 import {useStyles} from "./style"
+import {ManageEventIcons} from "../ManageEventIcons"
 
 export interface EventCardProps {
   event: Event
@@ -29,7 +29,10 @@ export function EventCard(props: EventCardProps) {
           root: classes.actionArea,
           focusHighlight: classes.focusHighlight
         }}
-        onClick={() => !event.props.isBreak && (window.location.href = event.getUrl())}
+        onClick={() => {
+          const url = event.getUrl()
+          if (url) window.location.href = url
+        }}
       >
         <CardContent>
           <div className={classes.left}>
@@ -79,6 +82,7 @@ export function EventCard(props: EventCardProps) {
               </div>
             )}
           </div>
+          <ManageEventIcons event={event} />
         </CardContent>
       </CardActionArea>
     </Card>

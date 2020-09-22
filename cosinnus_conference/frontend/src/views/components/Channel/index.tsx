@@ -18,7 +18,10 @@ export function Channel(props: ChannelProps & RouteComponentProps) {
   return (
     <Card className={classes.card}>
       <CardActionArea
-        onClick={() => !event.props.isBreak && (window.location.href = event.getUrl())}
+        onClick={() => {
+          const url = event.getUrl()
+          if (url) window.location.href = url
+        }}
       >
         <CardContent>
           <Typography component="span">{event.props.title}</Typography>

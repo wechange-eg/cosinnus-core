@@ -40,6 +40,9 @@ export const useStyles = makeStyles((theme) => ({
       fontWeight: 700,
       fontSize: "1rem",
     },
+    "& p": {
+      color: theme.palette.primary.light,
+    },
     "&:hover,&.Mui-selected,&.Mui-selected:hover": {
       background: "#ffffff",
       "& span": {

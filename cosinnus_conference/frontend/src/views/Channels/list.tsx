@@ -18,17 +18,18 @@ import {fetchEvents} from "../../stores/events/effects"
 import {EventSlot} from "../../stores/events/models"
 import {Channel} from "../components/Channel"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
+import {Room} from "../../stores/room/models"
 
 interface ChannelsProps {
   events: EventSlot[]
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
-  url: string
+  room: Room
 }
 
 function mapStateToProps(state: RootState) {
   return {
     events: state.events[state.room.props.id],
-    url: state.room.props.url,
+    room: state.room,
   }
 }
 
@@ -37,7 +38,7 @@ const mapDispatchToProps = {
 }
 
 function ChannelsConnector (props: ChannelsProps & RouteComponentProps) {
-  const { events, fetchEvents, url } = props
+  const { events, fetchEvents, room } = props
   if (!events) {
     fetchEvents()
   }
@@ -51,6 +52,7 @@ function ChannelsConnector (props: ChannelsProps & RouteComponentProps) {
             defaultMessage="Connect with someone via videochat for 5 minutes"
           />
         </Typography>
+        {room.props.description && <Typography component="p">{room.props.description}</Typography>}
         {events && events.length > 0 && (
         <Grid container spacing={2}>
           {events.map((slot, index) => (
@@ -69,10 +71,10 @@ function ChannelsConnector (props: ChannelsProps & RouteComponentProps) {
         }
         <ManageRoomButtons />
       </Content>
-      {url && (
+      {room.props.url && (
         <Sidebar elements={(
           <Iframe
-            url={url}
+            url={room.props.url}
             width="100%"
             height="100%"
             className={iframeClasses.sidebarIframe}
