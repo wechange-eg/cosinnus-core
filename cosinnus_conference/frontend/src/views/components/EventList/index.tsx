@@ -42,13 +42,13 @@ export function EventList(props: EventListProps) {
           {slot.props.isBreak && slot.props.title && (
             <ListItemText primary={slot.props.title} />
           ) || (
-            <ListItemText primary={(slot.props.events.length > 1 && (
+            <ListItemText primary={slot.props.events.length > 1 && (
               <Typography component="span">
                 {slot.props.events.length}&nbsp;
                 <FormattedMessage id="parallel events" defaultMessage="parallel events" />
               </Typography>
             )} />
-          ))}
+          )}
         </ListItem>
       )}
       {!slot.props.isBreak && slot.props.events && slot.props.events.map((event) => (
