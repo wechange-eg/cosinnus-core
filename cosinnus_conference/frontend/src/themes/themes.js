@@ -76,6 +76,9 @@ const muiCssBaseline = {
     },
     "#app": {
       "height": "100%",
+    },
+    "h1 + p.MuiTypography-body1": {
+      "margin-bottom": "2rem",
     }
   }
 }

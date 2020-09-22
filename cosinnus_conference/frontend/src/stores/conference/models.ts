@@ -8,6 +8,7 @@ export interface ConferenceJson {
   management_urls: {
     manage_conference: string
     manage_rooms: string
+    manage_events: string
   }
   theme_color: string
 }
@@ -20,6 +21,7 @@ export interface ConferenceProps {
   managementUrls: {
     manageConference: string
     manageRooms: string
+    manageEvents: string
   }
   themeColor: string
 }
@@ -46,6 +48,7 @@ export class Conference {
       managementUrls: {
         manageConference: json.management_urls.manage_conference,
         manageRooms: json.management_urls.manage_rooms,
+        manageEvents: json.management_urls.manage_events,
       },
       themeColor: json.theme_color,
     }
@@ -79,6 +82,7 @@ export class Conference {
       management_urls: {
         manage_conference: props.managementUrls.manageConference,
         manage_rooms: props.managementUrls.manageRooms,
+        manage_events: props.managementUrls.manageEvents,
       },
       theme_color: props.themeColor,
     }

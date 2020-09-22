@@ -11,7 +11,7 @@ import {
   faComments,
   faHandshake,
   faHome, faUser,
-  faUsers, faDoorClosed
+  faUsers, faDoorClosed, faUsersCog, faCalendar
 } from '@fortawesome/free-solid-svg-icons'
 import {IconDefinition} from "@fortawesome/fontawesome-common-types"
 import {FormattedMessage} from "react-intl"
@@ -107,6 +107,16 @@ function NavConnector(props: NavProps) {
         >
           <FontAwesomeIcon icon={faDoorClosed} />&nbsp;
           <ListItemText primary={<FormattedMessage id="Manage Rooms" defaultMessage="Manage Rooms" />} />
+        </ListItem>
+        )}
+        {conference.props.managementUrls.manageEvents && (
+        <ListItem
+          button
+          href={conference.props.managementUrls.manageEvents}
+          className={classes.listItem}
+        >
+          <FontAwesomeIcon icon={faCalendar} />&nbsp;
+          <ListItemText primary={<FormattedMessage id="Manage Events" defaultMessage="Manage Events" />} />
         </ListItem>
         )}
       </List>
