@@ -9,6 +9,10 @@ from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext as _
 from django_bigbluebutton.bbb import BigBlueButton
 from django_bigbluebutton import utils as bbb_utils
+from cosinnus.utils.functions import is_number
+import logging
+
+logger = logging.getLogger('cosinnus')
 
 
 """ 
@@ -148,11 +152,11 @@ def start_verbose(
         ("welcome", welcome),
     )
 
-    if max_participants and type(max_participants, int):
-        query += (("maxParticipants", max_participants),)
+    if max_participants and is_number(max_participants):
+        query += (("maxParticipants", int(max_participants)),)
 
-    if voice_bridge and type(voice_bridge, int):
-        query += (("voiceBridge", voice_bridge),)
+    if voice_bridge and is_number(voice_bridge):
+        query += (("voiceBridge", int(voice_bridge)),)
 
     if parent_meeting_id:
         query += (("parentMeetingID", parent_meeting_id),)
@@ -165,12 +169,15 @@ def start_verbose(
 
     hashed = api_call(query, call)
     url = settings.BBB_API_URL + call + '?' + hashed
-    result = parse_xml(requests.get(url).content.decode('utf-8'))
+    response = requests.get(url)
+    result = parse_xml(response.content.decode('utf-8'))
 
     if result:
         return result
     else:
-        raise
+        logger.error('BBB Room eror: Server request was not successful.', 
+                     extra={'response_status_code': response.status_code, 'result': response.text})
+        raise Exception('BBB Room exception: Server request was not successful: ' + str(response.text))
 
 
 def end_meeting(meeting_id, password):
