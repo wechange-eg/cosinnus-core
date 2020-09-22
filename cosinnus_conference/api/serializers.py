@@ -119,10 +119,18 @@ class ConferenceEventRoomSerializer(serializers.ModelSerializer):
         return ConferenceRoomSerializer.TYPE_MAP.get(obj.type)
 
 
+class ConferenceEventParticipantSerializer(serializers.ModelSerializer):
+
+    class Meta(object):
+        model = get_user_model()
+        fields = ('first_name', 'last_name')
+
+
 class ConferenceEventSerializer(serializers.ModelSerializer):
     room = ConferenceEventRoomSerializer()
     url = serializers.SerializerMethodField()
     image_url = serializers.SerializerMethodField()
+    presenters = ConferenceEventParticipantSerializer(many=True)
     participants = serializers.SerializerMethodField()
     participants_count = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
@@ -130,7 +138,7 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = ConferenceEvent
         fields = ('id', 'title', 'note', 'from_date', 'to_date', 'room', 'url', 'is_break', 'image_url',
-                  'participants_count', 'participants', 'management_urls')
+                  'presenters', 'participants_count', 'participants', 'management_urls')
     # change: title, note, from_date, to_date
 
     def get_url(self, obj):

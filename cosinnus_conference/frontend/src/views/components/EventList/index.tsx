@@ -64,7 +64,7 @@ export function EventList(props: EventListProps) {
           primary={event.props.room.title}
           secondary={isNow && <FormattedMessage id="Now" defaultMessage="Now" />}
         />
-        <ListItemText primary={event.props.title} secondary={event.props.note} />
+        <ListItemText primary={event.props.title} secondary={event.getNoteOrPresenters()} />
         <ManageEventIcons event={event} />
       </ListItem>
       ))}

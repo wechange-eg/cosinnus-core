@@ -50,7 +50,7 @@ export function EventCard(props: EventCardProps) {
               {event.props.title}
             </Typography>
             <Typography component="p">
-              {event.props.note}
+              {event.getNoteOrPresenters()}
             </Typography>
           </div>
           <div className={classes.right}>

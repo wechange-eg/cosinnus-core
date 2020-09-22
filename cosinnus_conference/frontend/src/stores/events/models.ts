@@ -1,15 +1,15 @@
 export interface ParticipantJson {
   first_name: string
   last_name: string
-  organisation: string
-  location: string
+  organisation?: string
+  location?: string
 }
 
 export interface ParticipantProps {
   firstName: string
   lastName: string
-  organisation: string
-  location: string
+  organisation?: string
+  location?: string
 }
 
 export class Participant {
@@ -50,6 +50,18 @@ export class Participant {
       location: props.location,
     }
   }
+
+  /**
+   * Get full name
+   *
+   * @returns {ParticipantJson} - object in JSON format
+   */
+  getFullName() : string {
+    if (this.props.firstName && this.props.lastName) {
+      return this.props.firstName + " " + this.props.lastName
+    }
+    return this.props.firstName || this.props.lastName || ""
+  }
 }
 
 export interface Room {
@@ -69,6 +81,7 @@ export interface EventJson {
   image_url?: string
   room: Room
   url: string
+  presenters: ParticipantJson[]
   participants_count?: number
   participants?: ParticipantJson[]
   management_urls?: {
@@ -88,6 +101,7 @@ export interface EventProps {
   imageUrl?: string
   room: Room
   url: string
+  presenters: Participant[]
   participantsCount?: number
   participants?: Participant[]
   managementUrls?: {
@@ -111,10 +125,11 @@ export class Event {
    * @returns {User} - Event object
    */
   public static fromJson(json: EventJson) : Event {
+    const presenters: Participant[] = []
+    json.presenters && json.presenters.forEach(json => presenters.push(Participant.fromJson(json)))
     const participants: Participant[] = []
-    json.participants && json.participants.forEach((json) => {
-      participants.push(Participant.fromJson(json))
-    })
+    json.participants && json.participants.forEach(
+      (json) => participants.push(Participant.fromJson(json)))
     const props: EventProps = {
       id: json.id,
       title: json.title,
@@ -125,6 +140,7 @@ export class Event {
       imageUrl: json.image_url,
       room: json.room,
       url: json.url,
+      presenters: presenters,
       participantsCount: json.participants_count,
       participants: participants,
       managementUrls: {
@@ -144,10 +160,10 @@ export class Event {
    */
   toJson() : EventJson {
     const props = this.props
+    const presenters: ParticipantJson[] = []
+    props.presenters && props.presenters.forEach(p => presenters.push(p.toJson()))
     const participants: ParticipantJson[] = []
-    props.participants && props.participants.forEach((participant) => {
-      participants.push(participant.toJson())
-    })
+    props.participants && props.participants.forEach(p => participants.push(p.toJson()))
     return {
       id: props.id,
       title: props.title,
@@ -158,6 +174,7 @@ export class Event {
       image_url: props.imageUrl,
       room: props.room,
       url: props.url,
+      presenters: presenters,
       participants_count: props.participantsCount,
       participants: participants,
       management_urls: {
@@ -195,6 +212,20 @@ export class Event {
     // Lobby has no event routes
     if (this.props.room.type == "lobby") return ""
     return "../" + this.props.room.slug + "#/" + this.props.id
+  }
+
+  /**
+   * Get note or comma separated list of presenters
+   *
+   * @returns {boolean} true if slot happens now
+   */
+  getNoteOrPresenters() : string {
+    if (this.props.note) {
+      return this.props.note
+    } else if (this.props.presenters && this.props.presenters.length > 0) {
+      return this.props.presenters.map(p => p.getFullName()).join(", ")
+    }
+    return ""
   }
 }
 
