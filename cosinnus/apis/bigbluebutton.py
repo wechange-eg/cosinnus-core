@@ -8,7 +8,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext as _
 from django_bigbluebutton.bbb import BigBlueButton
-from django_bigbluebutton import utils as bbb_utils
+from cosinnus.utils import bigbluebutton as bbb_utils
 from cosinnus.utils.functions import is_number
 import logging
 
@@ -39,22 +39,10 @@ def join_url_tokenized(meeting_id, name, password):
 def is_meeting_remote(meeting_id):
     remote_rooms = BigBlueButton().get_meetings()
     for room in remote_rooms:
-        if hasattr(room, 'meetingID') and room.get('meetingID', ''):
+        if room.get('name', '') == meeting_id:
             return True
 
     return False
-
-
-def xml_to_json(xml_data):
-    """ converts a xml representation of a response to json"""
-    result = {}
-    for x in xml_data:
-        result[x.tag] = x.text if x.text != '\n' else {}
-    return result
-
-
-def parse_xml(response):
-    return bbb_utils.parse_xml(response)
 
 
 def api_call(query, call):
@@ -71,43 +59,7 @@ def api_call(query, call):
     return result
 
 
-def start(name, meeting_id, welcome="Welcome to the conversation", moderator_password="",
-          attendee_password=""):
-    """ This function is a wrapper for bbb.start() with all its parameters
-
-    :param name: Human readable name for the meeting
-    :type: str
-
-    :param meeting_id: Human readable ID for the meeting
-    :type: str
-
-    :param welcome: Welcome message when joining the meeting
-    :type: str
-
-    :param moderator_password: Password for users to join with moderator privileges
-    :type: str
-
-    :param attendee_password: Password for users to join with default attendee privileges
-    :type: str
-
-    :return: XML representation of the API result
-    :rtype: XML
-    """
-
-    m_xml = BigBlueButton().start(
-        name=name, meeting_id=meeting_id, welcome=welcome, attendee_password=attendee_password,
-        moderator_password=moderator_password
-    )
-
-    meeting_json = xml_to_json(m_xml)
-    if meeting_json['returncode'] != 'SUCCESS':
-        # TODO add logging statement
-        raise ValueError('Unable to create meeting!')
-
-    return m_xml
-
-
-def start_verbose(
+def start(
         name, meeting_id, welcome="Welcome to the conversation",
         moderator_password="", attendee_password="", max_participants=None, voice_bridge=None,
         parent_meeting_id=None, options=None):
@@ -146,17 +98,20 @@ def start_verbose(
     """
     call = 'create'
 
+    # set default values
+    voice_bridge = voice_bridge if voice_bridge and is_number(voice_bridge) else bbb_utils.random_voice_bridge()
+    attendee_password = attendee_password if attendee_password else bbb_utils.random_password()
+    moderator_password = moderator_password if moderator_password else bbb_utils.random_password()
+
     query = (
         ("name", name),
         ('meetingID', meeting_id),
         ("welcome", welcome),
+        ("voiceBridge", voice_bridge),
     )
 
     if max_participants and is_number(max_participants):
         query += (("maxParticipants", int(max_participants)),)
-
-    if voice_bridge and is_number(voice_bridge):
-        query += (("voiceBridge", int(voice_bridge)),)
 
     if parent_meeting_id:
         query += (("parentMeetingID", parent_meeting_id),)
@@ -170,12 +125,12 @@ def start_verbose(
     hashed = api_call(query, call)
     url = settings.BBB_API_URL + call + '?' + hashed
     response = requests.get(url)
-    result = parse_xml(response.content.decode('utf-8'))
+    result = bbb_utils.parse_xml(response.content.decode('utf-8'))
 
     if result:
         return result
     else:
-        logger.error('BBB Room eror: Server request was not successful.', 
+        logger.error('BBB Room eror: Server request was not successful.',
                      extra={'response_status_code': response.status_code, 'result': response.text})
         raise Exception('BBB Room exception: Server request was not successful: ' + str(response.text))
 
@@ -211,9 +166,9 @@ def verbose_meeting_info(meeting_id, password):
     ))
     hashed = api_call(query, call)
     url = settings.BBB_API_URL + call + '?' + hashed
-    response = parse_xml(requests.get(url).content)
+    response = bbb_utils.parse_xml(requests.get(url).content)
     if response:
-        return xml_to_json(response)
+        return bbb_utils.xml_to_json(response)
     else:
         return None
 
@@ -250,7 +205,7 @@ def xml_join(name, meeting_id, password):
 
     hashed = api_call(query, call)
     url = settings.BBB_API_URL + call + '?' + hashed
-    result = parse_xml(requests.get(url).content.decode('utf-8'))
+    result = bbb_utils.parse_xml(requests.get(url).content.decode('utf-8'))
 
     return result
 
