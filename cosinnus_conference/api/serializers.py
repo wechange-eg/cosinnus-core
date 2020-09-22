@@ -7,7 +7,6 @@ import random
 from cosinnus.templatetags.cosinnus_tags import textfield
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.urls import reverse
 from rest_framework import serializers
 
 from cosinnus.models.conference import CosinnusConferenceRoom
@@ -152,12 +151,10 @@ class ConferenceParticipantSerializer(serializers.ModelSerializer):
         return ""
 
     def get_chat_url(self, obj):
-        if not settings.COSINNUS_IS_INTEGRATED_PORTAL and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
-            if settings.COSINNUS_ROCKET_ENABLED:
-                return reverse('cosinnus:message-write', kwargs={'username': obj.username})
-            else:
-                return reverse('postman:write', kwargs={'recipients': obj.username})
-        return ''
+        if hasattr(obj, 'cosinnus_profile'):
+            return f'{settings.COSINNUS_CHAT_BASE_URL}/direct/{obj.cosinnus_profile.rocket_username}/'
+        else:
+            return settings.COSINNUS_CHAT_BASE_URL
 
 
 class ConferenceEventParticipantSerializer(serializers.ModelSerializer):
