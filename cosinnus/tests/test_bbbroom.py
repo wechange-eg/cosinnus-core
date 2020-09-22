@@ -62,11 +62,10 @@ class BBBRoomTest(TestCase):
 
         room_info = bbb.meeting_info(room.meeting_id, room.moderator_password)
         self.assertNotEqual(room_info, None)
-        self.assertEqual(room_info['moderator_pw'], room.moderator_password)
-        self.assertEqual(room_info['attendee_pw'], room.attendee_password)
+        self.assertEqual(room_info['moderatorPW'], room.moderator_password)
+        self.assertEqual(room_info['attendeePW'], room.attendee_password)
 
-        room_info = bbb.verbose_meeting_info(room.meeting_id, room.moderator_password)
-        print(room_info)
+        room_info = bbb.meeting_info(room.meeting_id, room.moderator_password)
 
     def test_option_creation(self):
         room_options = {
@@ -94,8 +93,8 @@ class BBBRoomTest(TestCase):
 
         room_info = bbb.meeting_info(room.meeting_id, room.moderator_password)
         self.assertNotEqual(room_info, None)
-        self.assertEqual(room_info['moderator_pw'], room.moderator_password)
-        self.assertEqual(room_info['attendee_pw'], room.attendee_password)
+        self.assertEqual(room_info['moderatorPW'], room.moderator_password)
+        self.assertEqual(room_info['attendeePW'], room.attendee_password)
 
     def test_user_joining(self):
         room = BBBRoom.create(
@@ -129,9 +128,35 @@ class BBBRoomTest(TestCase):
         self.assertEqual(xml_result, None)
 
         # test meeting info participant count information
-        info = bbb.verbose_meeting_info(room.meeting_id, room.moderator_password)
+        info = bbb.meeting_info(room.meeting_id, room.moderator_password)
 
         # self.assertEqual(info.get('participantCount', -1), 2)
+
+    def test_room_restart(self):
+        room = BBBRoom.create(
+            name="RESTART TEST",
+            meeting_id="restart-test",
+            meeting_welcome="restart the meeting",
+        )
+
+        time.sleep(2)
+        room.join_group_members(self.group)
+
+        room_info = bbb.meeting_info(room.meeting_id, room.moderator_password)
+        self.assertNotEqual(room_info, None)
+        self.assertEqual(room_info['moderatorPW'], room.moderator_password)
+        self.assertEqual(room_info['attendeePW'], room.attendee_password)
+
+        room.end()
+        time.sleep(2)
+        room.restart()
+
+        room_info = bbb.meeting_info(room.meeting_id, room.moderator_password)
+        self.assertNotEqual(room_info, None)
+        self.assertEqual(room_info['moderatorPW'], room.moderator_password)
+        self.assertEqual(room_info['attendeePW'], room.attendee_password)
+
+        room.end()
 
     def test_membership_signals(self):
         moderator = User.objects.create_user(
