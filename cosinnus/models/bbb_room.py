@@ -79,7 +79,7 @@ class BBBRoom(models.Model):
                                   help_text=_("this user will enter the BBB presenter mode for this conversation"))
     attendees = models.ManyToManyField(User, related_name="attendees")
     moderators = models.ManyToManyField(User)
-    meeting_id = models.CharField(max_length=200, null=True, blank=True)
+    meeting_id = models.CharField(max_length=200, unique=True, default=random_meeting_id)
     name = models.CharField(max_length=160, null=True, blank=True, verbose_name=_("room name or title"))
     moderator_password = models.CharField(max_length=30, default=random_password,
                                           help_text=_("the password set to enter the room as a moderator"))
@@ -93,7 +93,7 @@ class BBBRoom(models.Model):
                                    help_text=_("number for dialing into the conference via telephone"),
                                    verbose_name="telephone dial in number")
     voice_bridge = models.PositiveIntegerField(help_text=_("pin to enter for telephone participants"),
-                                               unique=True, verbose_name="dial in PIN", default=random_voice_bridge,
+                                               verbose_name="dial in PIN", default=random_voice_bridge,
                                                validators=[MinValueValidator(10000), MaxValueValidator(99999)])
     internal_meeting_id = models.CharField(max_length=100, blank=True, null=True)
     parent_meeting_id = models.CharField(max_length=100, blank=True, null=True)
@@ -116,6 +116,8 @@ class BBBRoom(models.Model):
 
     def end(self):
         bbb.end_meeting(self.meeting_id, self.moderator_password)
+        self.ended = True
+        self.save()
 
     @property
     def remote_user_count(self):
@@ -160,12 +162,15 @@ class BBBRoom(models.Model):
         return self.moderators.all() | self.attendees.all()
 
     def restart(self):
-        m_xml = bbb.start(
+        m_xml = bbb.start_verbose(
             name=self.name,
             meeting_id=self.meeting_id,
             welcome=self.welcome_message,
             attendee_password=self.attendee_password,
-            moderator_password=self.moderator_password
+            moderator_password=self.moderator_password,
+            voice_bridge=self.voice_bridge,
+            max_participants=self.max_participants,
+            options=self.options
         )
 
         meeting_json = bbb.xml_to_json(m_xml)
@@ -177,7 +182,7 @@ class BBBRoom(models.Model):
 
     @classmethod
     def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=None,
-               moderator_password=None, max_participants=None, voice_bridge=None):
+               moderator_password=None, max_participants=None, voice_bridge=None, options=None):
         """ Creates a new BBBRoom and crete a room on the remote bbb-server.
 
         :param name: Name of the BBBRoom
@@ -200,29 +205,28 @@ class BBBRoom(models.Model):
 
         :param voice_bridge: Dial in PIN for joining the meeting via telephone call
         :type: int range(10000 - 99999)
+
+        :param options: Options for the BBBRoom according to the BBB API
+        :type: dict
         """
         if attendee_password is None:
             attendee_password = random_password()
         if moderator_password is None:
             moderator_password = random_password()
 
-        if max_participants or voice_bridge:
-            m_xml = bbb.start_verbose(
-                name=name,
-                meeting_id=meeting_id,
-                welcome=meeting_welcome,
-                attendee_password=attendee_password,
-                moderator_password=moderator_password
-            )
+        if options and type(options) is not dict:
+            raise ValueError("Options parameter should be from type dict!")
 
-        else:
-            m_xml = bbb.start(
-                name=name,
-                meeting_id=meeting_id,
-                welcome=meeting_welcome,
-                attendee_password=attendee_password,
-                moderator_password=moderator_password
-            )
+        m_xml = bbb.start_verbose(
+            name=name,
+            meeting_id=meeting_id,
+            welcome=meeting_welcome,
+            attendee_password=attendee_password,
+            moderator_password=moderator_password,
+            max_participants=max_participants,
+            voice_bridge=voice_bridge,
+            options=options
+        )
 
         meeting_json = bbb.xml_to_json(m_xml)
 
@@ -233,7 +237,7 @@ class BBBRoom(models.Model):
         from cosinnus.models.group import CosinnusPortal
         current_portal = CosinnusPortal.get_current()
         # Now create a model for it.
-        meeting, _ = BBBRoom.objects.get_or_create(meeting_id=meeting_id, portal=current_portal)
+        meeting, created = BBBRoom.objects.get_or_create(meeting_id=meeting_id, portal=current_portal)
         meeting.name = name
         meeting.welcome_message = meeting_welcome
         meeting.meeting_id = meeting_json['meetingID']
@@ -243,10 +247,10 @@ class BBBRoom(models.Model):
         meeting.parent_meeting_id = meeting_json['parentMeetingID']
         meeting.voice_bridge = meeting_json['voiceBridge']
         meeting.dial_number = meeting_json['dialNumber']
+        meeting.options = options
         meeting.save()
 
         return meeting
     
     def get_absolute_url(self):
         return reverse('cosinnus:bbb-room', kwargs={'room_id': self.id})
-    
