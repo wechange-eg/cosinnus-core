@@ -19,6 +19,8 @@ import {useStyles} from "./style"
 import {Room} from "../../stores/room/models"
 import {fetchParticipants} from "../../stores/participants/effects"
 import {Participant} from "../../stores/participants/models"
+import {EventList} from "../components/EventList"
+import {ManageRoomButtons} from "../components/ManageRoomButtons"
 
 interface ParticipantsProps {
   participants: Participant[]
@@ -121,6 +123,7 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
           </Select>
         </FormControl>
         <ParticipantsTable participants={filteredParticipants} />
+        <ManageRoomButtons />
       </Content>
     </Grid>
   )
