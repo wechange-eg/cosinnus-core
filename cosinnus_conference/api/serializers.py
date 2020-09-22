@@ -152,7 +152,7 @@ class ConferenceParticipantSerializer(serializers.ModelSerializer):
 
     def get_chat_url(self, obj):
         if hasattr(obj, 'cosinnus_profile'):
-            return f'{settings.COSINNUS_CHAT_BASE_URL}/direct/{obj.cosinnus_profile.rocket_username}/'
+            return f'{settings.COSINNUS_CHAT_BASE_URL}/direct/{obj.cosinnus_profile.rocket_username}/?layout=embedded'
         else:
             return settings.COSINNUS_CHAT_BASE_URL
 
