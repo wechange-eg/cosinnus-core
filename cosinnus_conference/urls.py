@@ -33,6 +33,8 @@ cosinnus_group_patterns = [
         name='index'),
     url(r'^(?P<slug>[^/]+)/$', views.conference_page,
         name='room'),
+    url(r'^(?P<slug>[^/]+)/#/(?P<event_id>[^/]+)$', views.conference_page,
+        name='room-event'),
 
 ]
 

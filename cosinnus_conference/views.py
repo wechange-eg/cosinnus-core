@@ -350,6 +350,8 @@ class ConferencePageView(RequireReadMixin, GroupIsConferenceMixin, TemplateView)
         # get room slug if one was in URL, else try finding the first sorted room
         # self.room can be None!
         self.room = None
+        # discard the event_id kwarg, it is only for the frontend
+        kwargs.pop('event_id', None)
         if not 'slug' in kwargs:
             first_room = self.group.rooms.visible().first()
             if first_room:
