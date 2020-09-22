@@ -293,7 +293,10 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
                 if len(added_persons) > 0:
                     obj.on_save_added_tagged_persons(added_persons)
                 
-                
+                # call `after_save(obj)` on the object form
+                if hasattr(self.forms['obj'], 'after_save'):
+                    self.forms['obj'].after_save(obj)
+                    
             # We do not really care about the media tag as a return value.
             # We can access it through the object.
             return obj
