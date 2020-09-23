@@ -14,6 +14,10 @@ from django.conf import settings
 from cosinnus.apis import bigbluebutton as bbb
 from cosinnus.utils import bigbluebutton as bbb_utils
 # from cosinnus.models import MEMBERSHIP_ADMIN
+import logging
+from django.core.cache import cache
+
+logger = logging.getLogger('cosinnus')
 
 
 def random_meeting_id():
@@ -91,6 +95,9 @@ class BBBRoom(models.Model):
                         help_text=_("options for the room, that are represented in the bigbluebutton API"))
 
     objects = models.Manager()
+    
+    # cache key for each rooms participants
+    PARTICIPANT_COUNT_CACHE_KEY = 'cosinnus/core/bbbroom/%d/participants' # bbb-room-id
 
     def __str__(self):
         return str(self.meeting_id)
@@ -107,12 +114,31 @@ class BBBRoom(models.Model):
         bbb.end_meeting(self.meeting_id, self.moderator_password)
         self.ended = True
         self.save()
-
+    
+    def retrieve_remote_user_count(self):
+        """ Non-cached function to retrieve the remote user count for this meeting """
+        try:
+            meeting_info = bbb.meeting_info(self.meeting_id, self.moderator_password)
+            if not meeting_info:
+                return 0
+            return meeting_info.get('participantCount', 0)
+        except Exception as e:
+            if settings.DEBUG:
+                raise
+            logger.exception(e)
+            return 0
+    
     @property
     def remote_user_count(self):
-        if bbb.is_meeting_remote(self.meeting_id):
-            meeting_info = bbb.meeting_info(self.meeting_id, self.moderator_password)
-            return meeting_info.get('participant_count', 0)
+        """ Cached function that can be called often, to get the very-recent
+            user count for this meeting """
+        if not self.id:
+            return 0
+        count = cache.get(self.PARTICIPANT_COUNT_CACHE_KEY % self.id)
+        if count is None:
+            count = self.retrieve_remote_user_count()
+            cache.set(self.PARTICIPANT_COUNT_CACHE_KEY % self.id, count, settings.BBB_ROOM_PARTICIPANTS_CACHE_TIMEOUT_SECONDS)
+        return count
 
     def get_password_for_user(self, user):
         """ returns the room password according to the permission of a given user.
@@ -170,7 +196,7 @@ class BBBRoom(models.Model):
         meeting_json = bbb_utils.xml_to_json(m_xml)
 
         if not meeting_json:
-            raise ValueError('Unable to restart meeting!')
+            raise ValueError('Unable to restart meeting %s!' % self.meeting_id)
 
         return None
 

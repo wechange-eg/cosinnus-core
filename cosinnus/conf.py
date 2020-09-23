@@ -741,3 +741,6 @@ class CosinnusDefaultSettings(AppConf):
         "autoStartRecording": False,
         "allowStartStopRecording": False
     }
+    # cache timeout for retrieval of participants
+    BBB_ROOM_PARTICIPANTS_CACHE_TIMEOUT_SECONDS = 20
+    
