@@ -172,6 +172,8 @@ class BBBRoom(models.Model):
         if not meeting_json:
             raise ValueError('Unable to restart meeting!')
 
+        self.ended = False
+
         return None
 
     @classmethod

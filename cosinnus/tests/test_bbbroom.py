@@ -226,8 +226,32 @@ class BBBRoomTest(TestCase):
         self.assertNotEqual(xml_result, 'error')
         self.assertEqual(xml_result, True)
 
-    def test_join_view(self):
+    # THERE IS CURRENTLY NO FUNCTION TO JOIN A USER TO A ROOM AND EMULATE A RUNNING MEETING
+    # def test_remote_running(self):
+    #     room = BBBRoom.create(
+    #         name="REMOTE TEST",
+    #         meeting_id="remote-test",
+    #         meeting_welcome="meant to be run remote",
+    #     )
+    #
+    #     time.sleep(2)
+    #
+    #     room2 = BBBRoom.create(
+    #         name="RUNNING TEST",
+    #         meeting_id="running-test",
+    #         meeting_welcome="meant to be run remote",
+    #     )
+    #     time.sleep(2)
+    #
+    #     room.join_group_members(self.group)
+    #     room2.join_group_members(self.group)
+    #
+    #     room.end()
+    #
+    #     join_url = bbb.xml_join("USER NAME", room2.meeting_id, room2.attendee_password)
+    #     print(join_url)
 
+    def test_join_view(self):
         factory = RequestFactory()
 
         room = BBBRoom.create(
