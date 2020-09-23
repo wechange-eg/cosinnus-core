@@ -3,12 +3,12 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import { hot } from "react-hot-loader"
 import { connect } from "react-redux"
 import { HashRouter as Router, Switch } from "react-router-dom"
-import { CssBaseline } from "@material-ui/core"
-import { IntlProvider } from "react-intl"
+import {CssBaseline, Grid, Typography} from "@material-ui/core"
+import {FormattedMessage, IntlProvider} from "react-intl"
 
 import { RootState } from "../stores/rootReducer"
 import { ProtectedRoute, ProtectedRouteProps } from "./routes/ProtectedRoute"
-import { theme } from "../themes/themes"
+import { getTheme } from "../themes/themes"
 import {
   fetchTranslations
 } from "../stores/translations/effects"
@@ -17,7 +17,7 @@ import {ThemeState} from "../stores/theme/reducer"
 import {fetchUser} from "../stores/user/effects"
 import {User} from "../stores/user/models"
 import {DispatchedReduxThunkActionCreator} from "../utils/types"
-import {ConferenceState} from "../stores/conference/reducer"
+import {Conference} from "../stores/conference/models"
 import {fetchConference} from "../stores/conference/effects"
 import {Nav} from "./components/Nav"
 import {Lobby} from "./Lobby"
@@ -39,9 +39,10 @@ import {fetchParticipants} from "../stores/participants/effects"
 import {Participant} from "../stores/participants/models"
 import {Participants} from "./Participants/list"
 import {Participant as ParticipantView} from "./Participants/detail"
+import {Content} from "./components/Content/style"
 
 interface AppProps {
-  conference: ConferenceState
+  conference: Conference
   participants: Participant[]
   room: Room
   theme: ThemeState
@@ -152,10 +153,26 @@ function AppConnector(props: AppProps) {
       messages={translations && translations.catalog || {}}
     >
       <Router>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={getTheme(conference && conference.getThemeColor() || undefined)}>
           <CssBaseline />
           <Nav />
-          {room && getRoutes() || <Loading />}
+          {(room && getRoutes())
+          || (window.conferenceRoomId && <Loading />)
+          || (
+          <Grid container>
+            <Content>
+              <Typography component="h1">
+                <FormattedMessage id="Conference is being prepared" defaultMessage="Conference is being prepared" />
+              </Typography>
+              <Typography component="p">
+                <FormattedMessage
+                  id="The conference is being prepared, please try again at a later date."
+                  defaultMessage="The conference is being prepared, please try again at a later date."
+                />
+              </Typography>
+            </Content>
+          </Grid>
+          )}
         </ThemeProvider>
       </Router>
     </IntlProvider>

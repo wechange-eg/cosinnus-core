@@ -87,4 +87,13 @@ export class Conference {
       theme_color: props.themeColor,
     }
   }
+
+  /**
+   * Get theme color
+   *
+   * @returns {string} Color including # or undefined if none
+   */
+  getThemeColor() : string {
+    return this.props.themeColor && '#' + this.props.themeColor || undefined
+  }
 }

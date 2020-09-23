@@ -1,10 +1,8 @@
-import { createMuiTheme, lighten, darken } from "@material-ui/core"
+import { createMuiTheme, lighten } from "@material-ui/core"
 
 import BrandonTextRegular from "./fonts/brandon-text-regular.ttf"
 import BrandonTextItalic from "./fonts/brandon-text-italic.ttf"
 import BrandonTextBold from "./fonts/brandon-text-bold.ttf"
-import GramatikaMedium from "./fonts/gramatika-medium.woff"
-import logo from "./images/logo.svg"
 
 const brandonTextRegular = {
   fontFamily: "Brandon Text",
@@ -33,16 +31,6 @@ const brandonTextBold = {
   fontWeight: 700,
   src: `
     url(${BrandonTextBold}) format("ttf")
-  `
-}
-
-const gramatikaMedium = {
-  fontFamily: "Gramatika Medium",
-  fontStyle: "normal",
-  fontDisplay: "swap",
-  fontWeight: 400,
-  src: `
-    url(${GramatikaMedium}) format("otf")
   `
 }
 
@@ -88,13 +76,13 @@ const muiCssBaseline = {
   }
 }
 
-export const theme = createMuiTheme({
+export const getTheme = (primaryColor= "#7062b3") => createMuiTheme({
   palette: {
     type: "light",
     primary: {
-      main: "#7062b3",
-      light: lighten("#7062b3", 0.5),
-      contrastText: lighten("#7062b3", 0.75),
+      main: primaryColor,
+      light: lighten(primaryColor, 0.5),
+      contrastText: lighten(primaryColor, 0.75),
     },
     text: {
       primary: "#4a4a4a",
@@ -129,3 +117,4 @@ export const theme = createMuiTheme({
   },
   shadows: Array(25).fill("none")
 })
+

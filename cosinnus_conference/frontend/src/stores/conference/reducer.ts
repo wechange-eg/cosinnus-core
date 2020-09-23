@@ -1,6 +1,7 @@
 import { AnyAction } from "redux"
 
 import { ActionType } from "../../constants/actions"
+import {Conference} from "./models"
 
 export function ConferenceReducer(
   state: Conference = null,
