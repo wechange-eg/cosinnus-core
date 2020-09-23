@@ -198,6 +198,8 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
         return []
 
     def get_participants_count(self, obj):
+        if obj.media_tag and obj.media_tag.bbb_room:
+            return obj.media_tag.bbb_room.remote_user_count
         return 0
 
     def get_management_urls(self, obj):

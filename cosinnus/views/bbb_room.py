@@ -57,8 +57,11 @@ class BBBRoomMeetingView(RedirectView):
         if bbb.is_meeting_remote(self.room.meeting_id):
             return bbb.join_url(self.room.meeting_id, name, password)
         else:
-            self.room.restart()
-            time.sleep(1)
+            try:
+                self.room.restart()
+                time.sleep(1)
+            except Exception as e:
+                logger.exception(e)
             return bbb.join_url(self.room.meeting_id, name, password)
 
 bbb_room_meeting = BBBRoomMeetingView.as_view()
