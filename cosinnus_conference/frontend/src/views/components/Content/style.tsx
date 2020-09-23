@@ -12,4 +12,7 @@ export const Content = styled(Grid)(({ theme }) => ({
     color: theme.palette.primary.main,
     marginBottom: "1rem",
   },
+  [theme.breakpoints.down('sm')]: {
+    width: "100%",
+  },
 }))

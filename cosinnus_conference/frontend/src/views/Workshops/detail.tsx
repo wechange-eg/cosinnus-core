@@ -23,8 +23,9 @@ import {Loading} from "../components/Loading"
 import {fetchEvents} from "../../stores/events/effects"
 import {findEventById} from "../../utils/events"
 import {ManageEventButtons} from "../components/ManageEventButtons"
+import {IframeContent} from "../components/IframeContent"
 
-interface WorkshopsProps {
+interface WorkshopProps {
   id: number
   events: EventSlot[]
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
@@ -40,7 +41,7 @@ const mapDispatchToProps = {
   fetchEvents
 }
 
-function WorkshopConnector (props: WorkshopsProps & RouteComponentProps) {
+function WorkshopConnector (props: WorkshopProps & RouteComponentProps) {
   const { id, events, fetchEvents } = props
   const classes = useStyles()
   const iframeClasses = iframeUseStyles()
@@ -56,14 +57,7 @@ function WorkshopConnector (props: WorkshopsProps & RouteComponentProps) {
         <Content>
           <Typography component="h1">{event.props.title}</Typography>
           {event.props.note && <Typography component="p">{event.props.note}</Typography>}
-          <div className={iframeClasses.bbbIframe}>
-            <Iframe
-              url={event.props.url}
-              width="100%"
-              height="100%"
-              allow="microphone *; camera *"
-            />
-          </div>
+          <IframeContent url={event.props.url} />
           <ManageEventButtons event={event} />
         </Content>
       ) || (

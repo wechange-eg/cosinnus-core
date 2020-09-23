@@ -50,8 +50,8 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
         if obj.type == obj.TYPE_PARTICIPANTS:
             return obj.group.users.filter(is_active=True).count()
         elif obj.type == obj.TYPE_LOBBY:
-            queryset = ConferenceEvent.objects.conference_upcoming().exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
-            return queryset.filter(group=obj.group).count()
+            queryset = ConferenceEvent.objects.filter(group=obj.group).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
+            return queryset.conference_upcoming().count()
         else:
             return obj.events.conference_upcoming().count()
 
@@ -137,6 +137,7 @@ class ConferenceParticipantSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = get_user_model()
         fields = ('id', 'first_name', 'last_name', 'organisation', 'country', 'chat_url')
+        order_by = ('first_name', 'last_name')
 
     def get_organisation(self, obj):
         if hasattr(obj, 'cosinnus_profile'):

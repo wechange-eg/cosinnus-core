@@ -58,5 +58,11 @@ export const useStyles = makeStyles((theme) => ({
     "&:hover": {
       background: theme.palette.primary.light,
     }
-  }
+  },
+  iframe: {
+    border: "none",
+    borderLeft: "2px solid " + theme.palette.primary.main,
+    width: "100%",
+    height: "100%",
+  },
 }))

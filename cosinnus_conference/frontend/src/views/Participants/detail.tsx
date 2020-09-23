@@ -22,6 +22,7 @@ import {fetchEvents} from "../../stores/events/effects"
 import {ManageEventButtons} from "../components/ManageEventButtons"
 import {Participant} from "../../stores/participants/models"
 import {fetchParticipants} from "../../stores/participants/effects"
+import {IframeContent} from "../components/IframeContent"
 
 interface ParticipantProps {
   id: number
@@ -55,14 +56,7 @@ function ParticipantConnector (props: ParticipantProps & RouteComponentProps) {
         <Content>
           <Typography component="h1">{participant.getFullName()}</Typography>
           <Typography component="p">{participant.props.organisation}, {participant.props.country}</Typography>
-          <div className={iframeClasses.bbbIframe}>
-            <Iframe
-              url={participant.props.chatUrl}
-              width="100%"
-              height="100%"
-              allow="microphone *; camera *"
-            />
-          </div>
+          <IframeContent url={participant.props.chatUrl} />
         </Content>
       ) || (
         <Content>

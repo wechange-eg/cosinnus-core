@@ -1,18 +1,19 @@
 import React, {useState} from "react"
 import clsx from "clsx"
-import {Button, Drawer} from "@material-ui/core"
+import {Button, Drawer, Grid} from "@material-ui/core"
 import {FormattedMessage} from "react-intl"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faChevronRight, faChevronLeft} from "@fortawesome/free-solid-svg-icons"
 
 import {useStyles} from "./style"
+import Iframe from "react-iframe"
 
 interface SidebarProps {
-  elements: any
+  url: string
 }
 
 export function Sidebar(props: SidebarProps) {
-  const {elements} = props
+  const {url} = props
   const [open, setOpen] = useState(true)
   const classes = useStyles()
 
@@ -35,7 +36,13 @@ export function Sidebar(props: SidebarProps) {
         <FontAwesomeIcon icon={open && faChevronRight || faChevronLeft} />&nbsp;
         <FormattedMessage id="Chats" defaultMessage="Chats" />
       </Button>
-      {elements}
+      <Iframe
+        url={url}
+        width="100%"
+        height="100%"
+        className={classes.iframe}
+        allow="microphone *; camera *"
+      />
     </Drawer>
   )
 }

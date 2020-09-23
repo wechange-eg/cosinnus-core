@@ -5,6 +5,10 @@ import {navWidth} from "../../../themes/themes"
 export const useStyles = makeStyles((theme) => ({
   drawer: {
     width: navWidth,
+    [theme.breakpoints.down('sm')]: {
+      width: "100%",
+      flexBasis: "100%",
+    },
   },
   drawerPaper: {
     backgroundColor: theme.palette.primary.main,
@@ -14,6 +18,11 @@ export const useStyles = makeStyles((theme) => ({
     width: navWidth,
     zIndex: 1,
     padding: "1.5rem 1rem 1.5rem 1.5rem",
+    [theme.breakpoints.down('sm')]: {
+      width: "100%",
+      position: "static",
+      marginTop: 0,
+    },
   },
   drawerHeader: {
     marginBottom: "2rem",
@@ -67,5 +76,19 @@ export const useStyles = makeStyles((theme) => ({
       right: ".5rem",
       color: theme.palette.primary.light
     }
+  },
+  toggleMenuButton: {
+    fontSize: "1rem",
+    color: theme.palette.primary.light,
+    marginTop: "1rem",
+    display: "block",
+    [theme.breakpoints.up('sm')]: {
+      display: "none"
+    },
+  },
+  collapsed: {
+    [theme.breakpoints.down('sm')]: {
+      display: "none"
+    },
   }
 }));

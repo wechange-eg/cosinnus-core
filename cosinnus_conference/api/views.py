@@ -39,12 +39,13 @@ class ConferenceViewSet(RequireGroupReadMixin,
 
     @action(detail=True, methods=['get'])
     def events(self, request, pk=None):
-        queryset = ConferenceEvent.objects.filter(room__group=pk).conference_upcoming()
+        queryset = ConferenceEvent.objects
         room_id = self.request.GET.get('room_id')
         if room_id:
             queryset = queryset.filter(room=room_id)
         else:
-            queryset = queryset.exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
+            queryset = queryset.filter(room__group=pk).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
+        queryset = queryset.conference_upcoming()
         page = self.paginate_queryset(queryset)
         serializer = ConferenceEventSerializer(page, many=True, context={"request": request})
         return self.get_paginated_response(serializer.data)

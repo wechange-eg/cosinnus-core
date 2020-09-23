@@ -20,6 +20,7 @@ import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
 import {ManageEventButtons} from "../components/ManageEventButtons"
 import {Sidebar} from "../components/Sidebar"
+import {IframeContent} from "../components/IframeContent"
 
 interface StageEventProps {
   id: number
@@ -42,7 +43,6 @@ const mapDispatchToProps = {
 
 function StageEventConnector (props: StageEventProps & RouteComponentProps) {
   const { id, events, fetchEvents, url } = props
-  const iframeClasses = iframeUseStyles()
   let event = null
   if (events) {
     event = findEventById(events, id)
@@ -55,14 +55,7 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
         <Content>
           <Typography component="h1">{event.props.title}</Typography>
           {event.props.note && <Typography component="p">{event.props.note}</Typography>}
-          <div className={iframeClasses.bbbIframe}>
-            <Iframe
-              url={event.props.url}
-              width="100%"
-              height="100%"
-              allow="microphone *; camera *"
-            />
-          </div>
+          <IframeContent url={event.props.url} />
           <ManageEventButtons event={event} />
         </Content>
       ) || (
@@ -70,17 +63,7 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
           <Loading />
         </Content>
       )}
-      {url && (
-        <Sidebar elements={(
-          <Iframe
-            url={url}
-            width="100%"
-            height="100%"
-            className={iframeClasses.sidebarIframe}
-            allow="microphone *; camera *"
-          />
-        )} />
-      )}
+      {url && <Sidebar url={url} />}
     </Main>
   )
 }

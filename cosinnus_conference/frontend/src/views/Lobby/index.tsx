@@ -43,7 +43,6 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
   if (!events) {
     fetchEvents(true)
   }
-  const iframeClasses = iframeUseStyles()
   return (
     <Grid container>
       <Content>
@@ -51,15 +50,7 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
         <EventList events={events} />
         <ManageRoomButtons />
       </Content>
-      <Sidebar elements={(
-        <Iframe
-          url={url}
-          width="100%"
-          height="100%"
-          className={iframeClasses.sidebarIframe}
-          allow="microphone *; camera *"
-        />
-      )} />
+      {url && <Sidebar url={url} />}
     </Grid>
   )
 }

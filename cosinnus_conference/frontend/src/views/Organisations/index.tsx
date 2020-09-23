@@ -44,7 +44,6 @@ function OrganisationsConnector (props: OrganisationsProps & RouteComponentProps
     fetchOrganisations()
   }
   const classes = useStyles()
-  const iframeClasses = iframeUseStyles()
   return (
     <Grid container>
       <Content>
@@ -81,15 +80,7 @@ function OrganisationsConnector (props: OrganisationsProps & RouteComponentProps
         }
         <ManageRoomButtons />
       </Content>
-      <Sidebar elements={(
-        <Iframe
-          url={url}
-          width="100%"
-          height="100%"
-          className={iframeClasses.sidebarIframe}
-          allow="microphone *; camera *"
-        />
-      )} />
+      {url && <Sidebar url={url} />}
     </Grid>
   )
 }

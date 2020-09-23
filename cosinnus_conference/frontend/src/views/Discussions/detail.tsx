@@ -1,14 +1,10 @@
 import {
-  Grid, ListItem, ListItemText,
   Typography
 } from "@material-ui/core"
 import React from "react"
 import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
 import {withRouter} from "react-router"
-import {FormattedMessage} from "react-intl";
-import Iframe from "react-iframe"
-import clsx from "clsx"
 
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
@@ -20,6 +16,7 @@ import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
 import {fetchEvents} from "../../stores/events/effects"
 import {ManageEventButtons} from "../components/ManageEventButtons"
+import {IframeContent} from "../components/IframeContent"
 
 interface DiscussionProps {
   id: number
@@ -40,7 +37,6 @@ const mapDispatchToProps = {
 function DiscussionConnector (props: DiscussionProps & RouteComponentProps) {
   const { id, events, fetchEvents } = props
   const classes = useStyles()
-  const iframeClasses = iframeUseStyles()
   let event = null
   if (events) {
     event = findEventById(events, id)
@@ -53,14 +49,7 @@ function DiscussionConnector (props: DiscussionProps & RouteComponentProps) {
         <Content>
           <Typography component="h1">{event.props.title}</Typography>
           {event.props.note && <Typography component="p">{event.props.note}</Typography>}
-          <div className={iframeClasses.bbbIframe}>
-            <Iframe
-              url={event.props.url}
-              width="100%"
-              height="100%"
-              allow="microphone *; camera *"
-            />
-          </div>
+          <IframeContent url={event.props.url} />
           <ManageEventButtons event={event} />
         </Content>
       ) || (

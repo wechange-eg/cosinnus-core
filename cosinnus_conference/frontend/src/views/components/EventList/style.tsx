@@ -50,9 +50,16 @@ export const useStyles = makeStyles((theme) => ({
             color: theme.palette.primary.light,
           }
         }
-      }
+      },
+      [theme.breakpoints.down('sm')]: {
+        height: "auto",
+        padding: "1rem",
+      },
     },
     "& > li, & > div": {
+      [theme.breakpoints.down('sm')]: {
+        flexWrap: "wrap",
+      },
       "& div:first-child": {
         flexBasis: "20%",
         "& span, & p": {
@@ -60,11 +67,20 @@ export const useStyles = makeStyles((theme) => ({
           textTransform: "uppercase",
           fontWeight: 700,
           paddingRight: "1.5rem",
-        }
+          [theme.breakpoints.down('sm')]: {
+            textAlign: "left",
+          },
+        },
+        [theme.breakpoints.down('sm')]: {
+          flexBasis: "100%",
+        },
       },
       "& div": {
         flexBasis: "80%",
         margin: "0.2rem",
+        [theme.breakpoints.down('sm')]: {
+          flexBasis: "100%",
+        },
       },
     },
     "&.now > div": {

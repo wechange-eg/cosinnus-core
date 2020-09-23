@@ -1,6 +1,6 @@
-import React from "react"
+import React, {useState} from "react"
 import {
-  ListItemText, Drawer, Typography, List, ListItem, Badge, Button, Divider
+  ListItemText, Drawer, Typography, List, ListItem, Badge, Button, Divider, Link, Card
 } from "@material-ui/core"
 import {connect} from "react-redux"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
@@ -11,7 +11,7 @@ import {
   faComments,
   faHandshake,
   faHome, faUser,
-  faUsers, faDoorClosed, faUsersCog, faCalendar, faChalkboardTeacher
+  faUsers, faDoorClosed, faUsersCog, faCalendar, faChalkboardTeacher, faBars
 } from '@fortawesome/free-solid-svg-icons'
 import {IconDefinition} from "@fortawesome/fontawesome-common-types"
 import {FormattedMessage} from "react-intl"
@@ -21,6 +21,7 @@ import {useStyles} from "./style"
 import {Room} from "../../../stores/room/models"
 import {Conference} from "../../../stores/conference/models"
 import {Participant} from "../../../stores/participants/models"
+import clsx from "clsx"
 
 interface NavProps {
   conference: Conference
@@ -41,6 +42,7 @@ const mapDispatchToProps = {
 
 function NavConnector(props: NavProps) {
   const { conference, participants, room } = props
+  const [open, setOpen] = useState(false)
   const classes = useStyles()
   if (!conference) {
     return null
@@ -72,8 +74,17 @@ function NavConnector(props: NavProps) {
       <div className={classes.drawerHeader}>
         <Typography component="h3">{conference.props.name}</Typography>
         <Typography component="h4">{conference.props.description}</Typography>
+        <Link
+          className={classes.toggleMenuButton}
+          href="#"
+          onClick={() => setOpen(!open)}
+        >
+          <FontAwesomeIcon icon={faBars} />
+        </Link>
       </div>
-      <List>
+      <List className={clsx({
+        [classes.collapsed]: !open,
+      })}>
         {conference.props.rooms.map((navRoom) => (
             <ListItem
               button

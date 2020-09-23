@@ -71,17 +71,7 @@ function ChannelsConnector (props: ChannelsProps & RouteComponentProps) {
         }
         <ManageRoomButtons />
       </Content>
-      {room.props.url && (
-        <Sidebar elements={(
-          <Iframe
-            url={room.props.url}
-            width="100%"
-            height="100%"
-            className={iframeClasses.sidebarIframe}
-            allow="microphone *; camera *"
-          />
-        )} />
-      )}
+      {room.props.url && <Sidebar url={room.props.url} />}
     </Grid>
   )
 }

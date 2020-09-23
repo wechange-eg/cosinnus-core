@@ -47,7 +47,7 @@ function ParticipantsTable (props: ParticipantsTableProps) {
   const { participants } = props
   const classes = useStyles()
   return (participants && participants.length > 0 && (
-    <TableContainer>
+    <TableContainer className={classes.tableContainer}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -112,7 +112,7 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
         <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label"><FormattedMessage id="Filter by country" defaultMessage="Filter by country" /></InputLabel>
+          <InputLabel><FormattedMessage id="Filter by country" defaultMessage="Filter by country" /></InputLabel>
           <Select
             value={country}
             onChange={handleCountryChange}

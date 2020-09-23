@@ -44,7 +44,6 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
     fetchEvents()
   }
   const classes = useStyles()
-  const iframeClasses = iframeUseStyles()
   const currentWorkshops = events && events.filter((w) => w.isNow()) || []
   const upcomingWorkshops = events && events.filter((w) => !w.isNow()) || []
   return (
@@ -58,7 +57,7 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
           {currentWorkshops.length > 0 && currentWorkshops.map((slot, index) => (
             <Grid container key={index} spacing={4}>
               {slot.props.events && slot.props.events.map((event, index) => (
-              <Grid item key={index} sm={6} className="now">
+              <Grid container item key={index} sm={6} className="now">
                 <EventCard event={event} />
               </Grid>
               ))}
@@ -72,7 +71,7 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
           {upcomingWorkshops.length > 0 && upcomingWorkshops.map((slot, index) => (
             <Grid container key={index} spacing={4}>
               {slot.props.events && slot.props.events.map((event, index) => (
-              <Grid item key={index} sm={6}>
+              <Grid container item key={index} sm={6}>
                 <EventCard event={event} />
               </Grid>
               ))}
@@ -83,17 +82,7 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
         </div>
         <ManageRoomButtons />
       </Content>
-      {room.props.url && (
-        <Sidebar elements={(
-          <Iframe
-            url={room.props.url}
-            width="100%"
-            height="100%"
-            className={iframeClasses.sidebarIframe}
-            allow="microphone *; camera *"
-          />
-        )} />
-      )}
+      {room.props.url && <Sidebar url={room.props.url} />}
     </Grid>
   )
 }

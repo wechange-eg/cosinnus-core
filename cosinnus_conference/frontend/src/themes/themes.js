@@ -71,14 +71,19 @@ const muiCssBaseline = {
       "height": "100%",
     },
     "p": {
-      padding: 0,
-      background: "transparent",
+      "padding": 0,
+      "background": "transparent",
     },
     "#app": {
       "height": "100%",
     },
     "h1 + p.MuiTypography-body1": {
       "margin-bottom": "2rem",
+    },
+    "@media only screen and (max-width: 959.95px)": {
+      ".conference": {
+        "margin-left": 0,
+      }
     }
   }
 }
