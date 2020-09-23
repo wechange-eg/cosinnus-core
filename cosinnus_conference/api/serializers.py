@@ -170,15 +170,14 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
     url = serializers.SerializerMethodField()
     image_url = serializers.SerializerMethodField()
     presenters = ConferenceEventParticipantSerializer(many=True)
-    participants = serializers.SerializerMethodField()
+    participants_limit = serializers.IntegerField(source='max_participants')
     participants_count = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
 
     class Meta(object):
         model = ConferenceEvent
         fields = ('id', 'title', 'note', 'from_date', 'to_date', 'room', 'url', 'is_break', 'image_url',
-                  'presenters', 'participants_count', 'participants', 'management_urls')
-    # change: title, note, from_date, to_date
+                  'presenters', 'participants_limit', 'participants_count', 'management_urls')
 
     def get_url(self, obj):
         # FIXME: Maybe smarter filtering for URL
@@ -189,13 +188,6 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
         if image_file:
             return image_thumbnail_url(image_file, (466, 112))
         return static('images/conference-event-placeholder.png')
-
-    def get_participants(self, obj):
-        # participants = obj.participants.all()
-        # serializer = ConferenceParticipant(instance=participants, many=True,
-        #                                    context={'request': self.context['request']})
-        # return serializer.data
-        return []
 
     def get_participants_count(self, obj):
         if obj.media_tag and obj.media_tag.bbb_room:

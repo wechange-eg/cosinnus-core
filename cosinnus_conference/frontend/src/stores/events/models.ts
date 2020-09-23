@@ -18,8 +18,8 @@ export interface EventJson {
   room: Room
   url: string
   presenters: ParticipantJson[]
-  participants_count?: number
-  participants?: ParticipantJson[]
+  participants_limit: number
+  participants_count: number
   management_urls?: {
     create_event: string
     update_event: string
@@ -38,8 +38,8 @@ export interface EventProps {
   room: Room
   url: string
   presenters: Participant[]
-  participantsCount?: number
-  participants?: Participant[]
+  participantsLimit: number
+  participantsCount: number
   managementUrls?: {
     createEvent: string
     updateEvent: string
@@ -63,9 +63,6 @@ export class Event {
   public static fromJson(json: EventJson) : Event {
     const presenters: Participant[] = []
     json.presenters && json.presenters.forEach(json => presenters.push(Participant.fromJson(json)))
-    const participants: Participant[] = []
-    json.participants && json.participants.forEach(
-      (json) => participants.push(Participant.fromJson(json)))
     const props: EventProps = {
       id: json.id,
       title: json.title,
@@ -77,8 +74,8 @@ export class Event {
       room: json.room,
       url: json.url,
       presenters: presenters,
+      participantsLimit: json.participants_limit,
       participantsCount: json.participants_count,
-      participants: participants,
       managementUrls: {
         createEvent: json.management_urls.create_event,
         updateEvent: json.management_urls.update_event,
@@ -98,8 +95,6 @@ export class Event {
     const props = this.props
     const presenters: ParticipantJson[] = []
     props.presenters && props.presenters.forEach(p => presenters.push(p.toJson()))
-    const participants: ParticipantJson[] = []
-    props.participants && props.participants.forEach(p => participants.push(p.toJson()))
     return {
       id: props.id,
       title: props.title,
@@ -111,8 +106,8 @@ export class Event {
       room: props.room,
       url: props.url,
       presenters: presenters,
+      participants_limit: props.participantsLimit,
       participants_count: props.participantsCount,
-      participants: participants,
       management_urls: {
         create_event: props.managementUrls.createEvent,
         update_event: props.managementUrls.updateEvent,
@@ -162,6 +157,18 @@ export class Event {
       return this.props.presenters.map(p => p.getFullName()).join(", ")
     }
     return ""
+  }
+
+  /**
+   * Get available places left
+   *
+   * @returns {number} Number of places left, null if no limit
+   */
+  getAvailablePlaces() : number {
+    if (this.props.participantsLimit) {
+      return this.props.participantsLimit - this.props.participantsCount
+    }
+    return null
   }
 }
 

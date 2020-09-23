@@ -5,6 +5,7 @@ import {RouteComponentProps} from "react-router-dom"
 import {Event} from "../../../stores/events/models"
 import {useStyles} from "./style"
 import {ManageEventIcons} from "../ManageEventIcons"
+import {FormattedMessage} from "react-intl"
 
 export interface CoffeeTableProps {
   event: Event
@@ -33,7 +34,7 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
       </Grid>
     )
   }
-
+  const availablePlaces = event.getAvailablePlaces()
   return (
     <Card className={classes.card}>
       <CardActionArea
@@ -56,10 +57,16 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
             renderParticipant(i)
           ))}
           </Grid>
-          <Typography component="p">
-            x <FormattedMessage id="spots left" defaultMessage="spots left" />
-          </Typography>
           */}
+          {availablePlaces === null && (
+            <Typography component="p">
+              {event.props.participantsCount} <FormattedMessage id="participants" defaultMessage="participants" />
+            </Typography>
+          ) || (
+            <Typography component="p">
+              {availablePlaces} <FormattedMessage id="places left" defaultMessage="places left" />
+            </Typography>
+          )}
           <ManageEventIcons event={event} />
         </CardContent>
       </CardActionArea>
