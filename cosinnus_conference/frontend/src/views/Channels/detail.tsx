@@ -5,12 +5,9 @@ import React from "react"
 import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
 import {withRouter} from "react-router"
-import {FormattedMessage} from "react-intl";
-import Iframe from "react-iframe"
 
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Content} from "../components/Content/style"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
@@ -38,7 +35,6 @@ const mapDispatchToProps = {
 
 function ChannelConnector (props: ChannelProps & RouteComponentProps) {
   const { id, events, fetchEvents } = props
-  const iframeClasses = iframeUseStyles()
   let event = null
   if (events) {
     event = findEventById(events, id)

@@ -9,7 +9,6 @@ import {withRouter} from "react-router"
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {EventSlot} from "../../stores/events/models"
-import {useStyles as iframeUseStyles, useStyles} from "../components/Iframe/style"
 import {findEventById} from "../../utils/events"
 import {Content} from "../components/Content/style"
 import {Main} from "../components/Main/style"
@@ -36,7 +35,6 @@ const mapDispatchToProps = {
 
 function DiscussionConnector (props: DiscussionProps & RouteComponentProps) {
   const { id, events, fetchEvents } = props
-  const classes = useStyles()
   let event = null
   if (events) {
     event = findEventById(events, id)

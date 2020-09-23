@@ -7,12 +7,10 @@ import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
 import {withRouter} from "react-router"
 import {FormattedMessage} from "react-intl";
-import Iframe from "react-iframe"
 
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {EventSlot} from "../../stores/events/models"
-import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Content} from "../components/Content/style"
 import {Sidebar} from "../components/Sidebar"
 import {useStyles} from "./style"
@@ -44,7 +42,6 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
     fetchEvents()
   }
   const classes = useStyles()
-  const iframeClasses = iframeUseStyles()
   return (
     <Grid container>
       <Content>

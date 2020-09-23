@@ -7,11 +7,9 @@ import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
 import {withRouter} from "react-router"
 import {FormattedMessage} from "react-intl";
-import Iframe from "react-iframe"
 
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Content} from "../components/Content/style"
 import {Sidebar} from "../components/Sidebar"
 import {fetchEvents} from "../../stores/events/effects"
@@ -42,7 +40,6 @@ function ChannelsConnector (props: ChannelsProps & RouteComponentProps) {
   if (!events) {
     fetchEvents()
   }
-  const iframeClasses = iframeUseStyles()
   return (
     <Grid container>
       <Content>

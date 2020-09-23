@@ -9,7 +9,6 @@ import {withRouter} from "react-router"
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {EventSlot} from "../../stores/events/models"
-import {useStyles as iframeUseStyles} from "../components/Iframe/style"
 import {Content} from "../components/Content/style"
 import {useStyles} from "./style"
 import {Loading} from "../components/Loading"
@@ -39,7 +38,6 @@ const mapDispatchToProps = {
 function CoffeeTableConnector (props: CoffeeTableProps & RouteComponentProps) {
   const { id, events, fetchEvents } = props
   const classes = useStyles()
-  const iframeClasses = iframeUseStyles()
   let event = null
   if (events) {
     event = findEventById(events, id)
