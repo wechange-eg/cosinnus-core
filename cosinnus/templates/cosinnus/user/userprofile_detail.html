@@ -197,6 +197,14 @@
 					            </p>
 				            {% endif %}
 				            
+			                {% comment %} 
+			                    If a portal defines dynamic user profile form fields with the 
+			                    `COSINNUS_USERPROFILE_EXTRA_FIELDS` setting, you can to use
+			                    this block to define the detail view display of those feels, if wished.
+			                {% endcomment %}
+				            {% block portal_specific_userprofile_extra_fields %}
+				            {% endblock %}
+				            
 				            {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
 			            {% endblock userprofile_content %}
 			        </div><!-- content-box -->
