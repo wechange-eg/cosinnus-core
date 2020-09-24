@@ -743,4 +743,6 @@ class CosinnusDefaultSettings(AppConf):
     }
     # cache timeout for retrieval of participants
     BBB_ROOM_PARTICIPANTS_CACHE_TIMEOUT_SECONDS = 20
-    
+    # should we monkeypatch for BBB appearently allowing one less persons to enter a room
+    # than provided in max_participants during room creation
+    BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = True
