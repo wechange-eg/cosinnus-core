@@ -10,7 +10,7 @@ import {FormattedMessage} from "react-intl";
 
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {EventSlot} from "../../stores/events/models"
+import {Event} from "../../stores/events/models"
 import {Content} from "../components/Content/style"
 import {Sidebar} from "../components/Sidebar"
 import {useStyles} from "./style"
@@ -20,7 +20,7 @@ import {ManageRoomButtons} from "../components/ManageRoomButtons"
 import {Room} from "../../stores/room/models"
 
 interface CoffeeTablesProps {
-  events: EventSlot[]
+  events: Event[]
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
   room: Room
 }
@@ -56,12 +56,10 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
           )}
           {events && events.length > 0 && (
             <Grid container spacing={4}>
-              {events.map((slot, index) => (
-                slot.props.events.map((event, eventIndex) => (
-                <Grid item key={index + "-" + eventIndex} sm={6} className="now">
+              {events.map((event, index) => (
+                <Grid item key={index} sm={6} className="now">
                   <CoffeeTable event={event} />
                 </Grid>
-                ))
               ))}
             </Grid>
           )

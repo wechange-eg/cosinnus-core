@@ -1,10 +1,10 @@
 import { AnyAction } from "redux"
 
 import { ActionType } from "../../constants/actions"
-import {EventSlot} from "./models"
+import {Event} from "./models"
 
 export interface EventsState {
-  [room: string]: EventSlot[]
+  [room: string]: Event[]
 }
 
 export function EventsReducer(

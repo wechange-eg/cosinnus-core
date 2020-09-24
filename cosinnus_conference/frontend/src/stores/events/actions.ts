@@ -2,9 +2,9 @@ import {
   ReduxObjectActionCreator, ReduxObjectErrorActionCreator
 } from "../../utils/types"
 import {ActionType} from "../../constants/actions"
-import {EventSlot} from "./models"
+import {Event} from "./models"
 
-export const setFetchEventsSuccess: ReduxObjectActionCreator<[string, EventSlot[]]> = (room, events) => ({
+export const setFetchEventsSuccess: ReduxObjectActionCreator<[string, Event[]]> = (room, events) => ({
   type: ActionType.FETCH_EVENTS_SUCCESS,
   payload: {
     room: room,

@@ -11,14 +11,14 @@ import {FormattedMessage} from "react-intl";
 import {RootState} from "../../stores/rootReducer"
 import {fetchEvents} from "../../stores/events/effects"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {EventSlot} from "../../stores/events/models"
+import {Event} from "../../stores/events/models"
 import {Content} from "../components/Content/style"
 import {EventList} from "../components/EventList"
 import {Sidebar} from "../components/Sidebar"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
 
 interface LobbyProps {
-  events: EventSlot[]
+  events: Event[]
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
   url: string
 }
@@ -48,7 +48,10 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
         <Typography component="h1">
           <FormattedMessage id="Agenda" />
         </Typography>
-        <EventList events={events} />
+        {events && events.length > 0 && (
+          <EventList events={events} />
+        ) || <Typography><FormattedMessage id="No events." /></Typography>
+        }
         <ManageRoomButtons />
       </Content>
       {url && <Sidebar url={url} />}

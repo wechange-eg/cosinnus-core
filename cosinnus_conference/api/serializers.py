@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from datetime import timedelta
 from builtins import object
 import random
 
 from cosinnus.templatetags.cosinnus_tags import textfield
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.db.models import Max, Min
 from rest_framework import serializers
 
 from cosinnus.models.conference import CosinnusConferenceRoom
@@ -79,10 +80,11 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
     rooms = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
     theme_color = serializers.CharField(source='conference_theme_color')
+    dates = serializers.SerializerMethodField()
 
     class Meta(object):
         model = CosinnusGroup
-        fields = ('id', 'name', 'description', 'rooms', 'management_urls', 'theme_color')
+        fields = ('id', 'name', 'description', 'rooms', 'management_urls', 'theme_color', 'dates')
 
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
@@ -101,6 +103,12 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
                 'manage_events': group_aware_reverse('cosinnus:event:conference-event-list', kwargs={'group': obj}),
             }
         return ""
+
+    def get_dates(self, obj):
+        queryset = ConferenceEvent.objects.filter(room__group=obj)
+        queryset = queryset.aggregate(Min('from_date'), Max('to_date'))
+        from_date, to_date = queryset['from_date__min'].date(), queryset['to_date__max'].date()
+        return [from_date + timedelta(days=i) for i in range((to_date - from_date).days + 1)]
 
 
 class ConferenceParticipant(serializers.ModelSerializer):

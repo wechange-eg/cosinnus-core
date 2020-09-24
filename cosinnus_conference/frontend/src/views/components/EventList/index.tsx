@@ -1,54 +1,46 @@
-import React from "react"
-import {FormattedMessage} from "react-intl"
+import React, {useState} from "react"
 import {
+  Grid,
   List,
   ListItem,
-  ListItemText,
+  ListItemText, Tab,
   Typography
 } from "@material-ui/core"
-import {useStyles} from "./style"
+import {FormattedMessage} from "react-intl"
 import clsx from "clsx"
 
-import {EventSlot} from "../../../stores/events/models"
-import {formatTime} from "../../../utils/events"
+import {Event, EventDay} from "../../../stores/events/models"
+import {formatTime, groupByDaysAndSlots} from "../../../utils/events"
 import {ManageEventIcons} from "../ManageEventIcons"
+import {useStyles} from "./style"
+import moment from "moment"
+import {TabContext, TabList} from "@material-ui/lab"
+import TabPanel from "@material-ui/lab/TabPanel"
 
 export interface EventListProps {
-  events: EventSlot[]
+  events: Event[]
 }
 
 export function EventList(props: EventListProps) {
   const { events } = props
   const classes = useStyles()
+  const days = groupByDaysAndSlots(events)
+  const [ currentDay, setCurrentDay] = useState(days[0].props.date)
   if (!events) {
     return null
   }
-  return (events && events.map((slot, index) => {
-    const isNow = slot.isNow()
+
+  function getDayLabel(day: EventDay) {
     return (
-    <List
-      key={index}
-      className={clsx({
-        [classes.list]: true,
-        ["now"]: isNow,
-      })}
-    >
-      {!isNow && (
-        <ListItem>
-          <ListItemText primary={formatTime(slot.props.fromDate) + "-" + formatTime(slot.props.toDate)} />
-          {slot.props.isBreak && slot.props.title && (
-            <ListItemText primary={slot.props.title} />
-          ) || (
-            <ListItemText primary={slot.props.events.length > 1 && (
-              <Typography component="span">
-                {slot.props.events.length}&nbsp;
-                <FormattedMessage id="parallel events" />
-              </Typography>
-            )} />
-          )}
-        </ListItem>
-      )}
-      {!slot.props.isBreak && slot.props.events && slot.props.events.map((event) => (
+      (day.isToday() && <FormattedMessage id="Today" />)
+      || (day.isTomorrow() && <FormattedMessage id="Tomorrow" />)
+      || moment(day.props.date).format('DD.MM.')
+    )
+  }
+
+  function renderEventListItem(event: Event) {
+    const isNow = event.isNow()
+    return (
       <ListItem
         button
         key={event.props.id}
@@ -57,17 +49,76 @@ export function EventList(props: EventListProps) {
           if (url) window.location.href = url
         }}
       >
-        <ListItemText
-          primary={event.props.room.title}
-          secondary={isNow && <FormattedMessage id="Now" />}
-        />
-        <ListItemText primary={event.props.title} secondary={event.getNoteOrPresenters()} />
-        <ManageEventIcons event={event} />
+        <ListItemText primary={event.props.room.title} />
+        <ListItemText primary={event.props.title} secondary={event.getNoteOrPresenters()}/>
+        <ManageEventIcons event={event}/>
       </ListItem>
-      ))}
-    </List>
-  )
-  })
-  || <Typography><FormattedMessage id="No events planned." /></Typography>
+    )
+  }
+  return (
+    <TabContext value={currentDay}>
+      <TabList onChange={(e, day: string) => setCurrentDay(day)} className={classes.tabList}>
+        {days.map(day => (
+          <Tab
+            key={day.props.date}
+            value={day.props.date}
+            label={getDayLabel(day)}
+          />
+        ))}
+      </TabList>
+      {days.map(day => {
+        const currentSlots = day.getCurrentSlots()
+        const upcomingSlots = day.getUpcomingSlots()
+        return (
+          <TabPanel key={day.props.date} value={day.props.date} className={classes.tabPanel}>
+            {currentSlots && currentSlots.length > 0 && (
+              <div className={classes.section}>
+                <Typography component="h1"><FormattedMessage id="Happening now"/></Typography>
+                {currentSlots.map((slot, index) => (
+                  <List
+                    key={index}
+                    className={clsx({
+                      [classes.list]: true,
+                      ["now"]: true,
+                    })}
+                  >
+                    {!slot.props.isBreak && slot.props.events && slot.props.events.map((event) => (
+                      renderEventListItem(event)
+                    ))}
+                  </List>
+                ))}
+              </div>
+            )}
+            {upcomingSlots && upcomingSlots.length > 0 && (
+              <div className={classes.section}>
+                {upcomingSlots.map((slot, index) => (
+                  <List
+                    key={index}
+                    className={classes.list}
+                  >
+                    <ListItem>
+                      <ListItemText primary={formatTime(slot.props.fromDate) + "-" + formatTime(slot.props.toDate)} />
+                      {slot.props.isBreak && slot.props.title && (
+                        <ListItemText primary={slot.props.title} />
+                      ) || (
+                        <ListItemText primary={slot.props.events.length > 1 && (
+                          <Typography component="span">
+                            {slot.props.events.length}&nbsp;
+                            <FormattedMessage id="parallel events" />
+                          </Typography>
+                        )} />
+                      )}
+                    </ListItem>
+                    {!slot.props.isBreak && slot.props.events && slot.props.events.map((event) => (
+                      renderEventListItem(event)
+                    ))}
+                  </List>
+                ))}
+              </div>
+            )}
+          </TabPanel>
+        )
+      })}
+    </TabContext>
   )
 }

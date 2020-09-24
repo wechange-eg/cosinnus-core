@@ -12,14 +12,13 @@ import {Content} from "../components/Content/style"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
 import {fetchEvents} from "../../stores/events/effects"
-import {EventSlot} from "../../stores/events/models"
-import {findEventById} from "../../utils/events"
+import {Event} from "../../stores/events/models"
 import {ManageEventButtons} from "../components/ManageEventButtons"
 import {IframeContent} from "../components/IframeContent"
 
 interface ChannelProps {
   id: number
-  events: EventSlot[]
+  events: Event[]
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
 }
 
@@ -37,7 +36,7 @@ function ChannelConnector (props: ChannelProps & RouteComponentProps) {
   const { id, events, fetchEvents } = props
   let event = null
   if (events) {
-    event = findEventById(events, id)
+    event = events.find((e) => e.props.id === id)
   } else {
     fetchEvents()
   }

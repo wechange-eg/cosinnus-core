@@ -11,7 +11,7 @@ import Iframe from "react-iframe"
 
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {EventSlot} from "../../stores/events/models"
+import {Event} from "../../stores/events/models"
 import {Content} from "../components/Content/style"
 import {EventList} from "../components/EventList"
 import {Sidebar} from "../components/Sidebar"
@@ -20,7 +20,7 @@ import {ManageRoomButtons} from "../components/ManageRoomButtons"
 import {Room} from "../../stores/room/models"
 
 interface DiscussionsProps {
-  events: EventSlot[]
+  events: Event[]
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
   room: Room
 }
@@ -52,7 +52,10 @@ function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
-        <EventList events={events} />
+        {events && events.length > 0 && (
+          <EventList events={events} />
+        ) || <Typography><FormattedMessage id="No discussions." /></Typography>
+        }
         <ManageRoomButtons />
       </Content>
       {room.props.url && <Sidebar url={room.props.url} />}

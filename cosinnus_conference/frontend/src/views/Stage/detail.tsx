@@ -10,8 +10,7 @@ import {withRouter} from "react-router"
 import {RootState} from "../../stores/rootReducer"
 import {fetchEvents} from "../../stores/events/effects"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {EventSlot} from "../../stores/events/models"
-import {findEventById} from "../../utils/events"
+import {Event} from "../../stores/events/models"
 import {Content} from "../components/Content/style"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
@@ -21,7 +20,7 @@ import {IframeContent} from "../components/IframeContent"
 
 interface StageEventProps {
   id: number
-  events: EventSlot[]
+  events: Event[]
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
   url: string
 }
@@ -42,7 +41,7 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
   const { id, events, fetchEvents, url } = props
   let event = null
   if (events) {
-    event = findEventById(events, id)
+    event = events.find((e) => e.props.id === id)
   } else {
     fetchEvents()
   }

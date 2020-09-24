@@ -1,28 +1,44 @@
-import {EventJson, Event, EventSlot} from "../stores/events/models"
 import moment from "moment"
 
+import {Event, EventDay, EventDayProps, EventSlot, EventSlotProps} from "../stores/events/models"
+
 /**
- * Group events by event slots (using only their starting time)
+ * Group events by days and slots (using only their starting time)
  *
- * @returns EventSlot[]
+ * @returns EventDay[]
  */
-export const groupBySlots = (events: EventJson[]) => {
-  const slots: {
-    [s: string]: EventSlot
+export const groupByDaysAndSlots = (events: Event[]) => {
+  // Group days and slots
+  const days: {
+    [s: string]: {
+      [s: string]: Event[]
+    }
   } = {}
   events.map((event) => {
-    if (!(event.from_date in slots)) {
-      slots[event.from_date] = EventSlot.fromJson({
-        title: event.title,
-        from_date: event.from_date,
-        to_date: event.to_date,
-        is_break: event.is_break,
-        events: []
-      })
-    }
-    event.id && slots[event.from_date].props.events.push(Event.fromJson(event))
+    const dayKey = moment(event.props.fromDate).format("YYYY-MM-DD")
+    const slotKey = event.props.fromDate.toUTCString()
+    if (!(dayKey in days)) days[dayKey] = {}
+    if (!(slotKey in days[dayKey])) days[dayKey][slotKey] = []
+    days[dayKey][slotKey].push(event)
   })
-  return Object.keys(slots).sort().map((k) => slots[k])
+  // Create EventDay and EventSlot objects
+  return Object.keys(days).sort().map((dayKey) => {
+    const day = days[dayKey]
+    const slots: EventSlot[] = Object.keys(day).sort().map((slotKey) => {
+      const events = day[slotKey]
+      return new EventSlot({
+        title: events[0].props.title,
+        fromDate: events[0].props.fromDate,
+        toDate: events[0].props.toDate,
+        isBreak: events[0].props.isBreak,
+        events: events
+      })
+    })
+    return new EventDay({
+      date: dayKey,
+      slots: slots
+    })
+  })
 }
 
 /**

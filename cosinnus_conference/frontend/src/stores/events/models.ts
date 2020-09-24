@@ -1,4 +1,5 @@
 import {Participant, ParticipantJson} from "../participants/models"
+import moment from "moment"
 
 export interface Room {
   id: number
@@ -58,7 +59,7 @@ export class Event {
    * Convert JSON response data into an object
    *
    * @param json - response data in JSON format
-   * @returns {User} - Event object
+   * @returns {Event} - Event object
    */
   public static fromJson(json: EventJson) : Event {
     const presenters: Participant[] = []
@@ -202,7 +203,7 @@ export class EventSlot {
    * Convert JSON response data into an object
    *
    * @param json - response data in JSON format
-   * @returns {User} - EventSlot object
+   * @returns {EventSlot} - EventSlot object
    */
   public static fromJson(json: EventSlotJson) : EventSlot {
     const props: EventSlotProps = {
@@ -213,7 +214,7 @@ export class EventSlot {
       events: []
     }
     if (json.events != null) {
-      json.events.forEach((event: any) => {
+      json.events.forEach((event: EventJson) => {
         props.events.push(Event.fromJson(event))
       })
     }
@@ -227,7 +228,7 @@ export class EventSlot {
    */
   toJson() : EventSlotJson {
     const props = this.props
-    const events = []
+    const events: EventJson[] = []
     if (props.events != null) {
       props.events.forEach((event: any) => {
         events.push(event.toJson())
@@ -250,5 +251,97 @@ export class EventSlot {
   isNow() : boolean {
     const now = new Date()
     return this.props.fromDate <= now && this.props.toDate >= now
+  }
+}
+
+export interface EventDayJson {
+  date: string
+  slots: EventSlotJson[]
+}
+
+export interface EventDayProps {
+  date: string
+  slots: EventSlot[]
+}
+
+export class EventDay {
+  props: EventDayProps
+
+  public constructor(props: EventDayProps) {
+    this.props = props
+  }
+
+  /**
+   * Convert JSON response data into an object
+   *
+   * @param json - response data in JSON format
+   * @returns {EventDay} - EventDay object
+   */
+  public static fromJson(json: EventDayJson) : EventDay {
+    const props: EventDayProps = {
+      date: json.date,
+      slots: []
+    }
+    if (json.slots != null) {
+      json.slots.forEach((slot: EventSlotJson) => {
+        props.slots.push(EventSlot.fromJson(slot))
+      })
+    }
+    return new EventDay(props)
+  }
+
+  /**
+   * Convert an object into JSON
+   *
+   * @returns {EventDayJson} - object in JSON format
+   */
+  toJson() : EventDayJson {
+    const props = this.props
+    const slots: EventSlotJson[] = []
+    if (props.slots != null) {
+      props.slots.forEach((slot: EventSlot) => {
+        slots.push(slot.toJson())
+      })
+    }
+    return {
+      date: props.date,
+      slots: slots,
+    }
+  }
+
+  /**
+   * Check if date is today
+   *
+   * @returns {boolean} true if today
+   */
+  isToday() : boolean {
+    return this.props.date == moment().format("YYYY-MM-DD")
+  }
+
+  /**
+   * Check if date is tomorrow
+   *
+   * @returns {boolean} true if tomorrow
+   */
+  isTomorrow() : boolean {
+    return this.props.date == moment().add(1, 'days').format("YYYY-MM-DD")
+  }
+
+  /**
+   * Return current event slots
+   *
+   * @returns {EventSlot[]} current slots
+   */
+  getCurrentSlots() : EventSlot[] {
+    return this.props.slots.filter(s => s.isNow())
+  }
+
+  /**
+   * Return upcoming event slots
+   *
+   * @returns {EventSlot[]} upcoming slots
+   */
+  getUpcomingSlots() : EventSlot[] {
+    return this.props.slots.filter(s => !s.isNow())
   }
 }

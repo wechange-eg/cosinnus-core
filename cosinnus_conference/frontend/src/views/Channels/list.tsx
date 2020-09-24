@@ -13,13 +13,13 @@ import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {Content} from "../components/Content/style"
 import {Sidebar} from "../components/Sidebar"
 import {fetchEvents} from "../../stores/events/effects"
-import {EventSlot} from "../../stores/events/models"
+import {Event} from "../../stores/events/models"
 import {Channel} from "../components/Channel"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
 import {Room} from "../../stores/room/models"
 
 interface ChannelsProps {
-  events: EventSlot[]
+  events: Event[]
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
   room: Room
 }
@@ -55,12 +55,10 @@ function ChannelsConnector (props: ChannelsProps & RouteComponentProps) {
         )}
         {events && events.length > 0 && (
         <Grid container spacing={2}>
-          {events.map((slot, index) => (
-            slot.props.events.map((event, eventIndex) => (
-            <Grid item key={index + "-" + eventIndex} sm={6} className="now">
+          {events.map((event, index) => (
+            <Grid item key={index} sm={6} className="now">
               <Channel event={event} />
             </Grid>
-            ))
           ))}
         </Grid>
         )

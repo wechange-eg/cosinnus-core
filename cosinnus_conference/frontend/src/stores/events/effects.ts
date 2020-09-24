@@ -5,8 +5,7 @@ import {
   setFetchEventsError,
   setFetchEventsSuccess
 } from "./actions"
-import {EventJson} from "./models"
-import {groupBySlots} from "../../utils/events"
+import {EventJson, Event} from "./models"
 import {RootState} from "../rootReducer"
 
 /**
@@ -27,7 +26,7 @@ export const fetchEvents: ReduxThunkActionCreator<[boolean], Promise<void>> = (f
   }).then(response => {
     if (response.status === 200) {
       response.json().then((data: {results: EventJson[]}) => {
-        dispatch(setFetchEventsSuccess(roomId, groupBySlots(data.results)))
+        dispatch(setFetchEventsSuccess(roomId, data.results.map(json => Event.fromJson(json))))
       })
     } else {
       dispatch(setFetchEventsError(roomId, "Failed to fetch events"))
