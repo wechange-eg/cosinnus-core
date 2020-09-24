@@ -80,8 +80,8 @@ class BBBRoom(models.Model):
                                          help_text=_("the password set to enter the room as a attendee"))
     welcome_message = models.CharField(max_length=300, null=True, blank=True, verbose_name=_("the rooms welcome message"),
                                        help_text=_("the welcome message, that is displayed to attendees"))
-    max_participants = models.PositiveIntegerField(null=True, default=None, verbose_name="maximum number of users",
-                                                   help_text=_("maximum number in the conference at the same time"))
+    max_participants = models.PositiveIntegerField(blank=True, null=True, default=None, verbose_name="maximum number of users",
+                                                   help_text="Maximum number in the conference at the same time. NOTE: Seems this needs to be +1 more the number that you actually want for BBB to allow!")
     dial_number = models.CharField(blank=True, null=True, default="", max_length=20,
                                    help_text=_("number for dialing into the conference via telephone"),
                                    verbose_name="telephone dial in number")
@@ -279,6 +279,7 @@ class BBBRoom(models.Model):
         meeting.parent_meeting_id = meeting_json['parentMeetingID']
         meeting.voice_bridge = meeting_json['voiceBridge']
         meeting.dial_number = meeting_json['dialNumber']
+        meeting.max_participants = max_participants
         meeting.options = default_options
 
         if not meeting_json:
