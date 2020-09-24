@@ -40,6 +40,8 @@ export const useStyles = makeStyles((theme) => ({
       width: "100% !important",
       position: "static",
       marginTop: 0,
+      height: "100vh",
+      padding: 0,
     },
   },
   drawerPaperOpen: {
@@ -70,7 +72,7 @@ export const useStyles = makeStyles((theme) => ({
       background: theme.palette.primary.light,
     },
     [theme.breakpoints.down('sm')]: {
-      top: 0,
+      top: "-.4rem",
       left: "2rem",
       "& svg": {
         display: "none",
@@ -85,5 +87,8 @@ export const useStyles = makeStyles((theme) => ({
     borderLeft: "2px solid " + theme.palette.primary.main,
     width: "100%",
     height: "100%",
+    [theme.breakpoints.down('sm')]: {
+      border: "2px solid " + theme.palette.primary.main,
+    }
   },
 }))

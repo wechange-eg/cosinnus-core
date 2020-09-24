@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, {Component, useRef} from "react"
 import { ThemeProvider } from "@material-ui/core/styles"
 import { hot } from "react-hot-loader"
 import { connect } from "react-redux"
@@ -57,7 +57,6 @@ interface AppProps {
 function mapStateToProps(state: RootState) {
   return {
     conference: state.conference,
-    participants: state.participants,
     theme: state.theme,
     room: state.room,
     translations: state.translations,
@@ -67,24 +66,25 @@ function mapStateToProps(state: RootState) {
 
 const mapDispatchToProps = {
   fetchConference,
-  fetchParticipants,
   fetchUser,
   fetchTranslations,
 }
 
-function AppConnector(props: AppProps) {
-  const { translations, fetchTranslations } = props
-  const { user, fetchUser } = props
-  const { conference, fetchConference } = props
-  const { participants, fetchParticipants } = props
-  const { room } = props
 
-  if (!translations) fetchTranslations()
-  if (!user) fetchUser()
-  if (!conference) fetchConference()
-  if (!participants || participants.length == 0) fetchParticipants()
+class AppConnector extends Component<AppProps> {
+  constructor(props: AppProps) {
+    const {translations, fetchTranslations} = props
+    const {user, fetchUser} = props
+    const {conference, fetchConference} = props
+    const {room} = props
 
-  function getRoutes() {
+    if (!translations) fetchTranslations()
+    if (!user) fetchUser()
+    if (!conference) fetchConference()
+  }
+
+  getRoutes() {
+    const { room, user } = this.props
     const routeProps: ProtectedRouteProps = {
       isAuthenticated: !!user,
       exact: true,
@@ -147,40 +147,43 @@ function AppConnector(props: AppProps) {
     ))
   }
 
-  return (
-    <IntlProvider
-      locale={translations && translations.locale || "en"}
-      messages={translations && translations.catalog || {}}
-      onError={(err) => {
-        if (err.code === "MISSING_TRANSLATION") {
-          // console.warn("Missing translation", err.message);
-          return;
-        }
-        throw err;
-      }}
-    >
-      <Router>
-        <ThemeProvider theme={getTheme(conference && conference.getThemeColor() || undefined)}>
-          <CssBaseline />
-          <Nav />
-          {(room && getRoutes())
-          || (window.conferenceRoomId && <Loading />)
-          || (
-          <Grid container>
-            <Content>
-              <Typography component="h1">
-                <FormattedMessage id="Conference is being prepared" />
-              </Typography>
-              <Typography component="p">
-                <FormattedMessage id="The conference is being prepared, please try again at a later date." />
-              </Typography>
-            </Content>
-          </Grid>
-          )}
-        </ThemeProvider>
-      </Router>
-    </IntlProvider>
-  )
+  render() {
+    const { translations, conference, room } = this.props
+    return (
+      <IntlProvider
+        locale={translations && translations.locale || "en"}
+        messages={translations && translations.catalog || {}}
+        onError={(err) => {
+          if (err.code === "MISSING_TRANSLATION") {
+            // console.warn("Missing translation", err.message);
+            return;
+          }
+          throw err;
+        }}
+      >
+        <Router>
+          <ThemeProvider theme={getTheme(conference && conference.getThemeColor() || undefined)}>
+            <CssBaseline/>
+            <Nav/>
+            {(room && this.getRoutes())
+            || (window.conferenceRoomId && <Loading/>)
+            || (
+              <Grid container>
+                <Content>
+                  <Typography component="h1">
+                    <FormattedMessage id="Conference is being prepared"/>
+                  </Typography>
+                  <Typography component="p">
+                    <FormattedMessage id="The conference is being prepared, please try again at a later date."/>
+                  </Typography>
+                </Content>
+              </Grid>
+            )}
+          </ThemeProvider>
+        </Router>
+      </IntlProvider>
+    )
+  }
 }
 
 export const App = hot(module)(

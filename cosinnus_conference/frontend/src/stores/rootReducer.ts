@@ -4,7 +4,7 @@ import { ThemeReducer, ThemeState } from "./theme/reducer"
 import { UserReducer } from "./user/reducer"
 import {User} from "./user/models"
 import {TranslationsReducer, TranslationsState} from "./translations/reducer"
-import {ConferenceReducer, Room} from "./conference/reducer"
+import {ConferenceReducer} from "./conference/reducer"
 import {EventsReducer, EventsState} from "./events/reducer"
 import {OrganisationsReducer} from "./organisations/reducer"
 import {Organisation} from "./organisations/models"
@@ -12,6 +12,7 @@ import {RoomReducer} from "./room/reducer"
 import {Conference} from "./conference/models"
 import {Participant} from "./participants/models"
 import {ParticipantsReducer} from "./participants/reducer"
+import {Room} from "./room/models"
 
 export interface RootState {
   events: EventsState,

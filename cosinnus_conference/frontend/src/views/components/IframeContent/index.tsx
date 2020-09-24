@@ -41,7 +41,7 @@ export function IframeContent(props: IframeProps) {
         url={url}
         width="100%"
         height="100%"
-        allow="microphone *; camera *"
+        allow="display-capture; geolocation; microphone *; camera *"
       />
     </div>
   )

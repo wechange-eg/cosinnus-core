@@ -14,9 +14,10 @@ import {RootState} from "../rootReducer"
  *
  * @returns {(dispatch: Dispatch) => Promise<void>} - return function
  */
-export const fetchEvents: ReduxThunkActionCreator<[boolean], Promise<void>> = (fetchAll) => (dispatch: Dispatch, getState: () => RootState) => {
+export const fetchEvents: ReduxThunkActionCreator<[boolean], Promise<void>> = (fetchAll) => (
+  dispatch: Dispatch, getState: () => RootState) => {
   const state = getState()
-  const roomId = state.room && state.room.props.id || 0
+  const roomId = state.room && state.room.props.id.toString() || "0"
   let filterParam = ""
   if (!fetchAll) {
     filterParam = "room_id=" + roomId

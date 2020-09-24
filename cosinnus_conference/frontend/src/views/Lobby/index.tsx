@@ -2,7 +2,7 @@ import {
   Grid,
   Typography
 } from "@material-ui/core"
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
 import {withRouter} from "react-router"
@@ -36,6 +36,9 @@ const mapDispatchToProps = {
 
 function LobbyConnector (props: LobbyProps & RouteComponentProps) {
   const { events, fetchEvents, url } = props
+  // Rerender every minute
+  const [time, setTime] = useState(new Date())
+  useEffect(() => { setInterval(() => setTime(new Date()), 60000) })
   if (!events) {
     fetchEvents(true)
   }

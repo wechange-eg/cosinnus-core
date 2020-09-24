@@ -1,14 +1,12 @@
 import React from "react"
 import {FormattedMessage} from "react-intl"
 import {
-  CardActionArea,
   List,
   ListItem,
   ListItemText,
   Typography
 } from "@material-ui/core"
 import {useStyles} from "./style"
-import {useHistory} from "react-router"
 import clsx from "clsx"
 
 import {EventSlot} from "../../../stores/events/models"
@@ -22,7 +20,6 @@ export interface EventListProps {
 export function EventList(props: EventListProps) {
   const { events } = props
   const classes = useStyles()
-  const history = useHistory()
   if (!events) {
     return null
   }

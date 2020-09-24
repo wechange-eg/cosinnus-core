@@ -8,6 +8,7 @@ import {
 import {resetRoom, setRoom} from "../room/actions"
 import {Conference, ConferenceJson} from "./models"
 import {Room} from "../room/models"
+import {fetchParticipants} from "../participants/effects"
 
 /**
  * Fetch conference data
