@@ -635,6 +635,21 @@ class CosinnusConf(AppConf):
     # receive a newsletter
     USERPROFILE_ENABLE_NEWSLETTER_OPT_IN = False
     
+    # extra fields for the user profile.
+    # usage: 
+    # {
+    #    field_name: {
+    #         'type': <str type of `UserProfileFormExtraFieldsMixin.EXTRA_FIELD_TYPES`>,
+    #         'label': i18n str,
+    #         'legend': i18n str,
+    #         'placeholder': i18n str,
+    #         'required': bool, # whether to be required in forms
+    #         'in_signup': bool, # whether to show up in the signup form
+    #     }, ...
+    # } 
+    # example: {'organisation': {'type': 'text', 'required': True}}
+    USERPROFILE_EXTRA_FIELDS = {}
+    
     # if True, payment urls and views will be enabled
     PAYMENTS_ENABLED = False
     # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins

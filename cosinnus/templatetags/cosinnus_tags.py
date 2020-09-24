@@ -1179,3 +1179,28 @@ def context_id_do_translate(parser, token):
 def context_id_do_block_translate(parser, token):
     block_translate_node = do_block_translate(parser, token)
     return ContextIdBlockTranslateNode(block_translate_node)
+
+
+@register.filter
+def get_attr(obj, attr_name):
+    """ Returns the given attribute object instead of trying to resolve
+        it in the template using __getitem__ """
+    return getattr(obj, attr_name)
+
+@register.filter
+def get_item(obj, attr_name):
+    """ Returns the given attribute by trying to resolve
+        it in the template using __getitem__ """
+    return obj[attr_name]
+
+_country_dict = None
+@register.filter
+def get_country_name(country_code):
+    """ Returns the verbose country name for a ISO 3166-1 country code """
+    global _country_dict
+    if _country_dict is None:
+        from django_countries import countries
+        _country_dict = dict(countries)
+    return _country_dict.get(country_code, '(unknown)')
+
+

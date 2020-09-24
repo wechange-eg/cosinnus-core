@@ -19,6 +19,7 @@ from django.utils.timezone import now
 from cosinnus.utils.user import accept_user_tos_for_portal
 
 import logging
+from cosinnus.models.profile import UserCreationFormExtraFieldsMixin
 logger = logging.getLogger('cosinnus')
 
 
@@ -52,7 +53,7 @@ class TermsOfServiceFormFields(forms.Form):
         newsletter_opt_in = forms.BooleanField(label='newsletter_opt_in', required=False)
         
 
-class UserCreationForm(TermsOfServiceFormFields, DjUserCreationForm):
+class UserCreationForm(UserCreationFormExtraFieldsMixin, TermsOfServiceFormFields, DjUserCreationForm):
     # Inherit from UserCreationForm for proper password hashing!
 
     class Meta(object):

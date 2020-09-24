@@ -4,7 +4,7 @@ from datetime import timedelta
 from builtins import object
 import random
 
-from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.templatetags.cosinnus_tags import textfield, get_country_name
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models import Max, Min
@@ -149,14 +149,14 @@ class ConferenceParticipantSerializer(serializers.ModelSerializer):
 
     def get_organisation(self, obj):
         if hasattr(obj, 'cosinnus_profile'):
-            return random.choice(["A", "B", "C"])
-            # return obj.cosinnus_profile.organisation
+            return obj.cosinnus_profile.extra_fields.get('organisation', "")
         return ""
 
     def get_country(self, obj):
         if hasattr(obj, 'cosinnus_profile'):
-            return random.choice(["Germany", "Russia", "Belarus"])
-            # return obj.cosinnus_profile.country
+            country_code = obj.cosinnus_profile.extra_fields.get('country', "")
+            if country_code:
+                return get_country_name(country_code)
         return ""
 
     def get_chat_url(self, obj):
