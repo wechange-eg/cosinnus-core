@@ -12,7 +12,7 @@ export interface EventJson {
   title: string
   from_date: string
   to_date: string
-  note: string
+  note_html: string
   is_break: boolean
   image_url?: string
   room: Room
@@ -32,7 +32,7 @@ export interface EventProps {
   title: string
   fromDate: Date
   toDate: Date
-  note: string
+  noteHtml: string
   isBreak: boolean
   imageUrl?: string
   room: Room
@@ -68,7 +68,7 @@ export class Event {
       title: json.title,
       fromDate: new Date(json.from_date),
       toDate: new Date(json.to_date),
-      note: json.note,
+      noteHtml: json.note_html,
       isBreak: json.is_break,
       imageUrl: json.image_url,
       room: json.room,
@@ -100,7 +100,7 @@ export class Event {
       title: props.title,
       from_date: props.fromDate.toUTCString(),
       to_date: props.toDate.toUTCString(),
-      note: props.note,
+      note_html: props.noteHtml,
       is_break: props.isBreak,
       image_url: props.imageUrl,
       room: props.room,
@@ -142,6 +142,8 @@ export class Event {
     if (this.props.isBreak) return ""
     // Lobby has no event routes
     if (this.props.room.type == "lobby") return ""
+    // No places left
+    if (this.getAvailablePlaces() === 0) return ""
     return "../" + this.props.room.slug + "#/" + this.props.id
   }
 
@@ -166,7 +168,8 @@ export class Event {
    */
   getAvailablePlaces() : number {
     if (this.props.participantsLimit) {
-      return this.props.participantsLimit - this.props.participantsCount
+      const availablePlaces = this.props.participantsLimit - this.props.participantsCount
+      return availablePlaces > 0 && availablePlaces || 0
     }
     return null
   }

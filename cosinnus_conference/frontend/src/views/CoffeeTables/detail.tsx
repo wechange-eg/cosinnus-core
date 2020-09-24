@@ -49,7 +49,9 @@ function CoffeeTableConnector (props: CoffeeTableProps & RouteComponentProps) {
       {event && (
         <Content>
           <Typography component="h1">{event.props.title}</Typography>
-          {event.props.note && <Typography component="p">{event.props.note}</Typography>}
+          {event.props.noteHtml && (
+            <div className="description" dangerouslySetInnerHTML={{__html: event.props.noteHtml}} />
+          )}
           <IframeContent url={event.props.url} />
           <ManageEventButtons event={event} />
         </Content>

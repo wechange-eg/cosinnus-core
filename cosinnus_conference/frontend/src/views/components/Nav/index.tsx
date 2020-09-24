@@ -96,7 +96,9 @@ function NavConnector(props: NavProps) {
               <FontAwesomeIcon icon={getIconByType(navRoom.props.type)}/>&nbsp;
               <ListItemText
                 primary={navRoom.props.title}
-                secondary={!navRoom.props.isVisible && <FormattedMessage id="hidden" defaultMessage="hidden" />}
+                secondary={!navRoom.props.isVisible && (
+                  <FormattedMessage id="hidden" />
+                )}
               />
               <Badge badgeContent={navRoom.props.count} className={classes.badge} />
             </ListItem>
@@ -111,7 +113,9 @@ function NavConnector(props: NavProps) {
           className={classes.listItem}
         >
           <FontAwesomeIcon icon={faCog} />&nbsp;
-          <ListItemText primary={<FormattedMessage id="Manage Conference" defaultMessage="Manage Conference" />} />
+          <ListItemText primary={
+            <FormattedMessage id="Manage conference" />
+          } />
         </ListItem>
         )}
         {conference.props.managementUrls.manageRooms && (
@@ -121,7 +125,7 @@ function NavConnector(props: NavProps) {
           className={classes.listItem}
         >
           <FontAwesomeIcon icon={faDoorClosed} />&nbsp;
-          <ListItemText primary={<FormattedMessage id="Manage Rooms" defaultMessage="Manage Rooms" />} />
+          <ListItemText primary={<FormattedMessage id="Manage rooms" />} />
         </ListItem>
         )}
         {conference.props.managementUrls.manageEvents && (
@@ -131,7 +135,7 @@ function NavConnector(props: NavProps) {
           className={classes.listItem}
         >
           <FontAwesomeIcon icon={faCalendar} />&nbsp;
-          <ListItemText primary={<FormattedMessage id="Manage Events" defaultMessage="Manage Events" />} />
+          <ListItemText primary={<FormattedMessage id="Manage events" />} />
         </ListItem>
         )}
       </List>

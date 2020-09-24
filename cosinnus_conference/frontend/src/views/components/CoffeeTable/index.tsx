@@ -60,11 +60,11 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
           */}
           {availablePlaces === null && (
             <Typography component="p">
-              {event.props.participantsCount} <FormattedMessage id="participants" defaultMessage="participants" />
+              {event.props.participantsCount} <FormattedMessage id="participants" />
             </Typography>
           ) || (
             <Typography component="p">
-              {availablePlaces} <FormattedMessage id="places left" defaultMessage="places left" />
+              {availablePlaces} <FormattedMessage id="places left" />
             </Typography>
           )}
           <ManageEventIcons event={event} />

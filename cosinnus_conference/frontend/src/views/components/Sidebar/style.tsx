@@ -8,6 +8,12 @@ export const useStyles = makeStyles((theme) => ({
     border: "none",
     paddingTop: "100px",
     overflow: "visible",
+    [theme.breakpoints.down('sm')]: {
+      width: "100% !important",
+      flexBasis: "100% !important",
+      position: "relative",
+      padding: "2rem",
+    },
   },
   drawerOpen: {
     flexBasis: sidebarWidth,
@@ -30,6 +36,11 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: 1,
     overflow: "visible",
     background: theme.palette.primary.main,
+    [theme.breakpoints.down('sm')]: {
+      width: "100% !important",
+      position: "static",
+      marginTop: 0,
+    },
   },
   drawerPaperOpen: {
     width: sidebarWidth,
@@ -57,7 +68,17 @@ export const useStyles = makeStyles((theme) => ({
     },
     "&:hover": {
       background: theme.palette.primary.light,
-    }
+    },
+    [theme.breakpoints.down('sm')]: {
+      top: 0,
+      left: "2rem",
+      "& svg": {
+        display: "none",
+      },
+      "&:hover": {
+        background: theme.palette.primary.main,
+      },
+    },
   },
   iframe: {
     border: "none",

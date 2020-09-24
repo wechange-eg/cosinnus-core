@@ -173,10 +173,11 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
     participants_limit = serializers.IntegerField(source='max_participants')
     participants_count = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
+    note_html = serializers.SerializerMethodField()
 
     class Meta(object):
         model = ConferenceEvent
-        fields = ('id', 'title', 'note', 'from_date', 'to_date', 'room', 'url', 'is_break', 'image_url',
+        fields = ('id', 'title', 'note_html', 'from_date', 'to_date', 'room', 'url', 'is_break', 'image_url',
                   'presenters', 'participants_limit', 'participants_count', 'management_urls')
 
     def get_url(self, obj):
@@ -203,6 +204,9 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
                 'delete_event': obj.get_delete_url(),
             }
         return {}
+
+    def get_note_html(self, obj):
+        return textfield(obj.note)
 
 """
 

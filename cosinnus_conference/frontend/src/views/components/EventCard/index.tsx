@@ -38,7 +38,7 @@ export function EventCard(props: EventCardProps) {
           <div className={classes.left}>
             {isNow && (
               <Typography component="span">
-                <FormattedMessage id="Now" defaultMessage="Now" />
+                <FormattedMessage id="Now" />
                 {"-" + formatTime(event.props.toDate)}
               </Typography>
             ) || (
@@ -58,11 +58,11 @@ export function EventCard(props: EventCardProps) {
               <div>
                 <Typography component="span">
                   {event.getMinutesLeft()}&nbsp;
-                  <FormattedMessage id="minutes left" defaultMessage="minutes left" />
+                  <FormattedMessage id="minutes left" />
                 </Typography>
                 <Typography component="p">
                   {event.props.participantsCount}&nbsp;
-                  <FormattedMessage id="participants" defaultMessage="participants" />
+                  <FormattedMessage id="participants" />
                 </Typography>
                 <Typography component="p"> </Typography>
               </div>

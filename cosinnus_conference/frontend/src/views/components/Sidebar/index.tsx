@@ -4,9 +4,9 @@ import {Button, Drawer, Grid} from "@material-ui/core"
 import {FormattedMessage} from "react-intl"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faChevronRight, faChevronLeft} from "@fortawesome/free-solid-svg-icons"
+import Iframe from "react-iframe"
 
 import {useStyles} from "./style"
-import Iframe from "react-iframe"
 
 interface SidebarProps {
   url: string
@@ -34,7 +34,7 @@ export function Sidebar(props: SidebarProps) {
     >
       <Button onClick={() => setOpen(!open)} className={classes.button}>
         <FontAwesomeIcon icon={open && faChevronRight || faChevronLeft} />&nbsp;
-        <FormattedMessage id="Chats" defaultMessage="Chats" />
+        <FormattedMessage id="Chats" />
       </Button>
       <Iframe
         url={url}

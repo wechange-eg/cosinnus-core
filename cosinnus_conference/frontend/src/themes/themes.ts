@@ -34,7 +34,7 @@ const brandonTextBold = {
   `
 }
 
-export const navWidth = "12vw"
+export const navWidth = "14vw"
 export const sidebarWidth = "30vw"
 export const miniSidebarWidth = "5vw"
 
@@ -65,7 +65,7 @@ const muiCssBaseline = {
     "#app": {
       "height": "100%",
     },
-    "h1 + p.MuiTypography-body1": {
+    "h1 + .description": {
       "margin-bottom": "2rem",
     },
     "@media only screen and (max-width: 959.95px)": {

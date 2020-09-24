@@ -42,6 +42,11 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: ".3rem",
     padding: ".1rem .5rem",
     marginBottom: "1.2rem",
+    "& div": {
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+    },
     "& svg": {
       width: "2rem !important",
     },
@@ -70,6 +75,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   badge: {
+    minWidth: "1rem",
     "& span": {
       fontWeight: 300,
       fontSize: ".8rem",

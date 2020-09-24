@@ -11,13 +11,13 @@ import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {Content} from "../components/Content/style"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
-import {Participant} from "../../stores/participants/models"
+import {Participant as ParticipantModel} from "../../stores/participants/models"
 import {fetchParticipants} from "../../stores/participants/effects"
 import {IframeContent} from "../components/IframeContent"
 
 interface ParticipantProps {
   id: number
-  participants: Participant[]
+  participants: ParticipantModel[]
   fetchParticipants: DispatchedReduxThunkActionCreator<Promise<void>>
 }
 
@@ -33,7 +33,7 @@ const mapDispatchToProps = {
 
 function ParticipantConnector (props: ParticipantProps & RouteComponentProps) {
   const { id, participants, fetchParticipants } = props
-  let participant: Participant = null
+  let participant: ParticipantModel = null
   if (participants) {
     participant = participants.find(p => p.props.id === id)
   } else {

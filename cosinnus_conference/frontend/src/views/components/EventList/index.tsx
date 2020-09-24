@@ -45,7 +45,7 @@ export function EventList(props: EventListProps) {
             <ListItemText primary={slot.props.events.length > 1 && (
               <Typography component="span">
                 {slot.props.events.length}&nbsp;
-                <FormattedMessage id="parallel events" defaultMessage="parallel events" />
+                <FormattedMessage id="parallel events" />
               </Typography>
             )} />
           )}
@@ -62,7 +62,7 @@ export function EventList(props: EventListProps) {
       >
         <ListItemText
           primary={event.props.room.title}
-          secondary={isNow && <FormattedMessage id="Now" defaultMessage="Now" />}
+          secondary={isNow && <FormattedMessage id="Now" />}
         />
         <ListItemText primary={event.props.title} secondary={event.getNoteOrPresenters()} />
         <ManageEventIcons event={event} />
@@ -71,6 +71,6 @@ export function EventList(props: EventListProps) {
     </List>
   )
   })
-  || <Typography><FormattedMessage id="No events planned." defaultMessage="No events planned." /></Typography>
+  || <Typography><FormattedMessage id="No events planned." /></Typography>
   )
 }

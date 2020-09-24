@@ -46,7 +46,7 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
     <Grid container>
       <Content>
         <div className={classes.section}>
-          <Typography component="h1"><FormattedMessage id="Happening now" defaultMessage="Happening now" /></Typography>
+          <Typography component="h1"><FormattedMessage id="Happening now" /></Typography>
           {room.props.descriptionHtml && (
             <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
           )}
@@ -61,17 +61,9 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
               ))}
             </Grid>
           )
-          || <Typography><FormattedMessage id="No current coffee tables." defaultMessage="No current coffee tables." /></Typography>
+          || <Typography><FormattedMessage id="No current coffee tables." /></Typography>
         }
         </div>
-        {/*
-        <div className={classes.section}>
-          <Button href="#">
-            <FontAwesomeIcon icon={faPlus} />&nbsp;
-            <FormattedMessage id="Start your own Coffee Table" defaultMessage="Start your own Coffee Table" />
-          </Button>
-        </div>
-        */}
         <ManageRoomButtons />
       </Content>
       {room.props.url && <Sidebar url={room.props.url} />}

@@ -59,21 +59,18 @@ export function ManageEventIcons(props: ManageEventIconsProps) {
             keepMounted
             onClose={() => setDeleteOpen(false)}
           >
-            <DialogTitle><FormattedMessage id="Delete Event" defaultMessage="Delete Event" /></DialogTitle>
+            <DialogTitle><FormattedMessage id="Delete event" /></DialogTitle>
             <DialogContent>
               <DialogContentText>
-                <FormattedMessage
-                  id="Are you sure you want to delete this event?"
-                  defaultMessage="Are you sure you want to delete this event?"
-                />
+                <FormattedMessage id="Are you sure you want to delete this event?" />
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button onClick={() => setDeleteOpen(false)} color="primary">
-                <FormattedMessage id="No" defaultMessage="No" />
+                <FormattedMessage id="No" />
               </Button>
               <Button onClick={deleteEvent} color="primary">
-                <FormattedMessage id="Yes" defaultMessage="Yes" />
+                <FormattedMessage id="Yes" />
               </Button>
             </DialogActions>
           </Dialog>

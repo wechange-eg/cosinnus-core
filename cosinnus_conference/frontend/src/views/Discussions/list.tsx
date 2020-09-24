@@ -44,7 +44,7 @@ function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
   return (
     <Grid container>
       <Content>
-        <Typography component="h1"><FormattedMessage id="Agenda" defaultMessage="Agenda" /></Typography>
+        <Typography component="h1"><FormattedMessage id="Agenda" /></Typography>
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}

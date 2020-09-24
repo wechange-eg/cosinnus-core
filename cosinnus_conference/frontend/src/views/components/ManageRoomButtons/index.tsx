@@ -51,7 +51,7 @@ export function ManageRoomButtonsConnector(props: ManageRoomButtonsProps) {
           onClick={() => window.location.href = room.props.managementUrls.createEvent}
         >
           <FontAwesomeIcon icon={faPlus} />&nbsp;
-          <FormattedMessage id="Create event" defaultMessage="Create event" />
+          <FormattedMessage id="Create event" />
         </Button>
       )}
       {room.props.managementUrls.updateRoom && (
@@ -62,7 +62,7 @@ export function ManageRoomButtonsConnector(props: ManageRoomButtonsProps) {
           onClick={() => window.location.href = room.props.managementUrls.updateRoom}
         >
           <FontAwesomeIcon icon={faPen} />&nbsp;
-          <FormattedMessage id="Edit room" defaultMessage="Edit room" />
+          <FormattedMessage id="Edit room" />
         </Button>
       )}
       {room.props.managementUrls.deleteRoom && (
@@ -74,28 +74,25 @@ export function ManageRoomButtonsConnector(props: ManageRoomButtonsProps) {
             onClick={() => setDeleteOpen(true)}
           >
             <FontAwesomeIcon icon={faTrashAlt} />&nbsp;
-            <FormattedMessage id="Delete room" defaultMessage="Delete room" />
+            <FormattedMessage id="Delete room" />
           </Button>
           <Dialog
             open={deleteOpen}
             keepMounted
             onClose={() => setDeleteOpen(false)}
           >
-            <DialogTitle><FormattedMessage id="Delete Room" defaultMessage="Delete Room" /></DialogTitle>
+            <DialogTitle><FormattedMessage id="Delete room" /></DialogTitle>
             <DialogContent>
               <DialogContentText>
-                <FormattedMessage
-                  id="Are you sure you want to delete this room?"
-                  defaultMessage="Are you sure you want to delete this room?"
-                />
+                <FormattedMessage id="Are you sure you want to delete this room?" />
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button onClick={() => setDeleteOpen(false)} color="primary">
-                <FormattedMessage id="No" defaultMessage="No" />
+                <FormattedMessage id="No" />
               </Button>
               <Button onClick={deleteRoom} color="primary">
-                <FormattedMessage id="Yes" defaultMessage="Yes" />
+                <FormattedMessage id="Yes" />
               </Button>
             </DialogActions>
           </Dialog>

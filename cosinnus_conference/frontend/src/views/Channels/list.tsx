@@ -44,12 +44,11 @@ function ChannelsConnector (props: ChannelsProps & RouteComponentProps) {
     <Grid container>
       <Content>
         <Typography component="h1">
-          <FormattedMessage
-            id="Connect with someone via videochat for 5 minutes"
-            defaultMessage="Connect with someone via videochat for 5 minutes"
-          />
+          <FormattedMessage id="Connect with someone via videochat for 5 minutes" />
         </Typography>
-        {room.props.description && <Typography component="p">{room.props.description}</Typography>}
+        {room.props.descriptionHtml && (
+          <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
+        )}
         {events && events.length > 0 && (
         <Grid container spacing={2}>
           {events.map((slot, index) => (
@@ -61,10 +60,7 @@ function ChannelsConnector (props: ChannelsProps & RouteComponentProps) {
           ))}
         </Grid>
         )
-        || <Typography><FormattedMessage
-          id="No networking channels."
-          defaultMessage="No networking channels."
-        /></Typography>
+        || <Typography><FormattedMessage id="No networking channels." /></Typography>
         }
         <ManageRoomButtons />
       </Content>

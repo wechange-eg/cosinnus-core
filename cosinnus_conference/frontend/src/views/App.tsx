@@ -151,6 +151,13 @@ function AppConnector(props: AppProps) {
     <IntlProvider
       locale={translations && translations.locale || "en"}
       messages={translations && translations.catalog || {}}
+      onError={(err) => {
+        if (err.code === "MISSING_TRANSLATION") {
+          // console.warn("Missing translation", err.message);
+          return;
+        }
+        throw err;
+      }}
     >
       <Router>
         <ThemeProvider theme={getTheme(conference && conference.getThemeColor() || undefined)}>
@@ -162,13 +169,10 @@ function AppConnector(props: AppProps) {
           <Grid container>
             <Content>
               <Typography component="h1">
-                <FormattedMessage id="Conference is being prepared" defaultMessage="Conference is being prepared" />
+                <FormattedMessage id="Conference is being prepared" />
               </Typography>
               <Typography component="p">
-                <FormattedMessage
-                  id="The conference is being prepared, please try again at a later date."
-                  defaultMessage="The conference is being prepared, please try again at a later date."
-                />
+                <FormattedMessage id="The conference is being prepared, please try again at a later date." />
               </Typography>
             </Content>
           </Grid>

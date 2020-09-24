@@ -9,6 +9,7 @@ class Translations(JSONCatalog):
 
     def render_to_response(self, context, **response_kwargs):
         context['locale'] = get_language()
+
         return JsonResponse(context)
 
 

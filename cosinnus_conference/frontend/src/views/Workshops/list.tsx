@@ -51,7 +51,7 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
           {room.props.descriptionHtml && (
             <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
           )}
-          <Typography component="h1"><FormattedMessage id="Happening now" defaultMessage="Happening now" /></Typography>
+          <Typography component="h1"><FormattedMessage id="Happening now" /></Typography>
           {currentWorkshops.length > 0 && currentWorkshops.map((slot, index) => (
             <Grid container key={index} spacing={4}>
               {slot.props.events && slot.props.events.map((event, index) => (
@@ -61,11 +61,11 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
               ))}
             </Grid>
             ))
-            || <Typography><FormattedMessage id="No current workshops." defaultMessage="No current workshops." /></Typography>
+            || <Typography><FormattedMessage id="No current workshops." /></Typography>
           }
         </div>
         <div className={classes.section}>
-          <Typography component="h1"><FormattedMessage id="Upcoming workshops" defaultMessage="Upcoming workshops" /></Typography>
+          <Typography component="h1"><FormattedMessage id="Upcoming workshops" /></Typography>
           {upcomingWorkshops.length > 0 && upcomingWorkshops.map((slot, index) => (
             <Grid container key={index} spacing={4}>
               {slot.props.events && slot.props.events.map((event, index) => (
@@ -75,7 +75,7 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
               ))}
             </Grid>
           ))
-          || <Typography><FormattedMessage id="No upcoming workshops." defaultMessage="No upcoming workshops." /></Typography>
+          || <Typography><FormattedMessage id="No upcoming workshops." /></Typography>
           }
         </div>
         <ManageRoomButtons />

@@ -51,9 +51,9 @@ function ParticipantsTable (props: ParticipantsTableProps) {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell><FormattedMessage id="Name" defaultMessage="Name" /></TableCell>
-            <TableCell><FormattedMessage id="Organisation" defaultMessage="Organisation" /></TableCell>
-            <TableCell><FormattedMessage id="Country" defaultMessage="Country" /></TableCell>
+            <TableCell><FormattedMessage id="Name" /></TableCell>
+            <TableCell><FormattedMessage id="Organisation" /></TableCell>
+            <TableCell><FormattedMessage id="Country" /></TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
@@ -74,7 +74,7 @@ function ParticipantsTable (props: ParticipantsTableProps) {
                   }}
                 >
                   <FontAwesomeIcon icon={faCommentDots} />&nbsp;
-                  <FormattedMessage id="Contact" defaultMessage="Contact" />
+                  <FormattedMessage id="Contact" />
                 </Button>
               </TableCell>
             </TableRow>
@@ -83,7 +83,7 @@ function ParticipantsTable (props: ParticipantsTableProps) {
       </Table>
     </TableContainer>
     )
-    || <Typography><FormattedMessage id="No participants." defaultMessage="No participants." /></Typography>
+    || <Typography><FormattedMessage id="No participants." /></Typography>
   )
 }
 
@@ -112,7 +112,7 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
         <FormControl className={classes.formControl}>
-          <InputLabel><FormattedMessage id="Filter by country" defaultMessage="Filter by country" /></InputLabel>
+          <InputLabel><FormattedMessage id="Filter by country" /></InputLabel>
           <Select
             value={country}
             onChange={handleCountryChange}

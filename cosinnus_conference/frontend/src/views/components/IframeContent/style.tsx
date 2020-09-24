@@ -19,14 +19,19 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: 100,
     "& > a": {
       position: "fixed",
-      top: "1rem",
-      right: "1rem",
+      top: "4rem",
+      right: "6rem",
       zIndex: 101,
+      color: theme.palette.primary.main,
     }
   },
   fullScreenLink: {
     float: "right",
     marginTop: "-2.6rem",
     fontSize: "1.6rem",
+    color: theme.palette.primary.main,
+    "&:hover": {
+      color: theme.palette.primary.light,
+    }
   },
 }));

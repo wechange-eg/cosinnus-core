@@ -46,7 +46,7 @@ function OrganisationsConnector (props: OrganisationsProps & RouteComponentProps
     <Grid container>
       <Content>
         <Typography component="h1">
-          <FormattedMessage id="Represented organisations" defaultMessage="Represented organisations" />
+          <FormattedMessage id="Represented organisations" />
         </Typography>
         {organisations && organisations.length > 0 && (
         <Grid container spacing={2}>
@@ -71,10 +71,7 @@ function OrganisationsConnector (props: OrganisationsProps & RouteComponentProps
           ))}
         </Grid>
         )
-        || <Typography><FormattedMessage
-          id="No represented organisations."
-          defaultMessage="No represented organisations."
-        /></Typography>
+        || <Typography><FormattedMessage id="No represented organisations."/></Typography>
         }
         <ManageRoomButtons />
       </Content>

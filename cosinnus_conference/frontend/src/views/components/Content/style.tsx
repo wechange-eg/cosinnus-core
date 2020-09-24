@@ -14,5 +14,6 @@ export const Content = styled(Grid)(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     width: "100%",
+    flexBasis: "100%",
   },
 }))
