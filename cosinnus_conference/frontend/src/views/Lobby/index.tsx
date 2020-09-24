@@ -51,7 +51,7 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
         <EventList events={events} />
         <ManageRoomButtons />
       </Content>
-      {!url && <Sidebar url={url} />}
+      {url && <Sidebar url={url} />}
     </Grid>
   )
 }
