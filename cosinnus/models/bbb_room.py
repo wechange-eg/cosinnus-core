@@ -247,7 +247,11 @@ class BBBRoom(models.Model):
         # default BBBRoom settings with given options
         default_options = settings.BBB_ROOM_DEFAULT_SETTINGS
         default_options.update(options)
-
+        
+        # monkeypatch for BBB appearently allowing one less persons to enter a room
+        if max_participants is not None and settings.BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE:
+            max_participants += 1
+        
         m_xml = bbb.start(
             name=name,
             meeting_id=meeting_id,
