@@ -198,6 +198,10 @@ class BBBRoom(models.Model):
         if not meeting_json:
             raise ValueError('Unable to restart meeting %s!' % self.meeting_id)
 
+        if self.ended:
+            self.ended = False
+            self.save(update_fields=['ended'])
+
         return None
 
     @classmethod
@@ -226,7 +230,8 @@ class BBBRoom(models.Model):
         :param voice_bridge: Dial in PIN for joining the meeting via telephone call
         :type: int range(10000 - 99999)
 
-        :param options: Options for the BBBRoom according to the BBB API
+        :param options: Options for the BBBRoom according to the BBB API.
+                         See https://docs.bigbluebutton.org/dev/api.html#create
         :type: dict
         """
         if attendee_password is None:
