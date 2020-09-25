@@ -180,6 +180,19 @@ class BBBRoom(models.Model):
     @property
     def members(self):
         return self.moderators.all() | self.attendees.all()
+    
+    @property
+    def is_running(self):
+        """ Checks if a meeting is currently running on the server
+            (as opposed to never started or suspended) """
+        if self.meeting_id and self.attendee_password:
+            try:
+                meeting_info = bbb.meeting_info(self.meeting_id, self.attendee_password) 
+                if meeting_info and meeting_info.get('running', False) == 'true':
+                    return True
+            except Exception as e:
+                logger.exception(e)
+        return False
 
     def restart(self):
         m_xml = bbb.start(

@@ -34,15 +34,6 @@ def join_url_tokenized(meeting_id, name, password):
     return requests.get(url).url
 
 
-def is_meeting_remote(meeting_id):
-    remote_rooms = get_meetings()
-    for room in remote_rooms:
-        if room.get('name', '') == meeting_id:
-            return True
-
-    return False
-
-
 def api_call(query, call):
     prepared = '{}{}{}'.format(call, query, settings.BBB_SECRET_KEY)
 
