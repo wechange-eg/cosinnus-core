@@ -95,7 +95,13 @@ class BBBRoom(models.Model):
     ended = models.BooleanField(default=False)
     options = JSONField(blank=True, null=True, default=dict, verbose_name="room options",
                         help_text=_("options for the room, that are represented in the bigbluebutton API"))
-
+    
+    # type of the room. this determines which extra join call parameters are given
+    # along for the user join link. see `settings.BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS`
+    room_type = models.PositiveSmallIntegerField(_('Room Type'), blank=False,
+        default=settings.BBB_ROOM_TYPE_DEFAULT, choices=settings.BBB_ROOM_TYPE_CHOICES)
+    
+    
     objects = models.Manager()
     
     # cache key for each rooms participants
@@ -226,7 +232,8 @@ class BBBRoom(models.Model):
 
     @classmethod
     def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=None,
-               moderator_password=None, max_participants=None, voice_bridge=None, options=None):
+               moderator_password=None, max_participants=None, voice_bridge=None, options=None,
+               room_type=None):
         """ Creates a new BBBRoom and crete a room on the remote bbb-server.
 
         :param name: Name of the BBBRoom
@@ -252,6 +259,10 @@ class BBBRoom(models.Model):
 
         :param options: Options for the BBBRoom according to the BBB API.
                          See https://docs.bigbluebutton.org/dev/api.html#create
+        
+        :param room_type: The type of the rooms, as choice of `settings.BBB_ROOM_TYPE_CHOICES` 
+                or None for `BBB_ROOM_TYPE_DEFAULT`
+        
         :type: dict
         """
         if attendee_password is None:
@@ -301,6 +312,7 @@ class BBBRoom(models.Model):
         meeting.dial_number = meeting_json['dialNumber']
         meeting.max_participants = max_participants
         meeting.options = default_options
+        meeting.room_type = room_type if room_type is not None else settings.BBB_ROOM_TYPE_DEFAULT
 
         if not meeting_json:
             meeting.ended = True
@@ -308,13 +320,23 @@ class BBBRoom(models.Model):
 
         return meeting
     
+    def build_extra_join_parameters(self):
+        """ Builds a parameter set fo the join API call for the join
+            link for the user, from the default room parameters and the
+            given room type's extra parameters """
+        params = {}
+        params.update(settings.BBB_DEFAULT_EXTRA_JOIN_PARAMETER)
+        params.update(settings.BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS.get(self.room_type))
+        return params
+    
     def get_join_url(self, user):
         """ Returns the actual BBB-Server URL with tokens for a given user
             to join this room """
         password = self.get_password_for_user(user)
         username = full_name(user)
         if self.meeting_id and password:
-            return bbb.join_url(self.meeting_id, username, password)
+            extra_join_parameters = self.build_extra_join_parameters()
+            return bbb.join_url(self.meeting_id, username, password, extra_parameter_dict=extra_join_parameters)
         return ''
 
     def get_absolute_url(self):

@@ -761,3 +761,32 @@ class CosinnusDefaultSettings(AppConf):
     # should we monkeypatch for BBB appearently allowing one less persons to enter a room
     # than provided in max_participants during room creation
     BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = True
+    
+    # the default parameters added to every BBB room join
+    # see https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
+    BBB_DEFAULT_EXTRA_JOIN_PARAMETER = {
+        'userdata-bbb_mirror_own_webcam': 'true',
+        
+    }
+    BBB_ROOM_TYPE_DEFAULT = 0
+    BBB_ROOM_TYPE_CHOICES = (
+        (0, _('General')),
+        (1, _('Active')),
+        (2, _('Restricted')),
+        (3, _('Premium')),
+    )
+    # a map for variable room types
+    BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS = {
+        0: {},
+        1: {
+            'userdata-bbb_skip_check_audio': 'true',
+            'userdata-bbb_auto_join_audio': 'true',
+            'userdata-bbb_listen_only_mode': 'false',
+            'userdata-bbb_auto_share_webcam': 'true',
+            'userdata-bbb_skip_video_preview': 'true',
+            'userdata-bbb_auto_swap_layout': 'true', #  keine Präsentation zeigen
+        },
+        2: {},
+        3: {},
+    }
+    
