@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from cosinnus.models import BBBRoom
-from cosinnus.apis import bigbluebutton as bbb
 
 
 def bbb_meetings(request, group_id):
@@ -13,8 +12,7 @@ def join_meeting(request, meeting_id):
     if request.user:
         try:
             room = BBBRoom.objects.get(meeting_id=meeting_id)
-            password = room.get_password_for_user(request.user)
-            redirect_url = bbb.join_url(room.meeting_id, request.user.full_name, password)
+            redirect_url = room.get_join_url(request.user)
             return redirect_url
         except ObjectDoesNotExist:
             return HttpResponse("Room not found")

@@ -16,6 +16,8 @@ from cosinnus.utils import bigbluebutton as bbb_utils
 # from cosinnus.models import MEMBERSHIP_ADMIN
 import logging
 from django.core.cache import cache
+from cosinnus.templatetags.cosinnus_tags import full_name
+from cosinnus.utils.permissions import check_user_superuser
 
 logger = logging.getLogger('cosinnus')
 
@@ -147,13 +149,18 @@ class BBBRoom(models.Model):
         :return: password for the user to join the room
         :rtype: str
         """
-
         if user in self.attendees.all():
             return self.attendee_password
         elif user in self.moderators.all():
             return self.moderator_password
+        elif check_user_superuser(user):
+            return self.attendee_password
         else:
             return ''
+    
+    def check_user_can_enter_room(self, user):
+        """ Checks if a user has the neccessary permissions to enter this room """
+        return bool(user.is_authenticated and self.get_password_for_user(user))
 
     def remove_user(self, user):
         self.moderators.remove(user)
@@ -300,6 +307,15 @@ class BBBRoom(models.Model):
         meeting.save()
 
         return meeting
+    
+    def get_join_url(self, user):
+        """ Returns the actual BBB-Server URL with tokens for a given user
+            to join this room """
+        password = self.get_password_for_user(user)
+        username = full_name(user)
+        if self.meeting_id and password:
+            return bbb.join_url(self.meeting_id, username, password)
+        return ''
 
     def get_absolute_url(self):
         return reverse('cosinnus:bbb-room', kwargs={'room_id': self.id})

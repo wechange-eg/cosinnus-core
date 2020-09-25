@@ -37,7 +37,6 @@ from django.core.validators import validate_comma_separated_integer_list
 from django.contrib.postgres.fields.jsonb import JSONField
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
-from cosinnus.models.bbb_room import BBBRoom
 
 import logging
 from cosinnus.utils.dates import timestamp_from_datetime
@@ -150,7 +149,7 @@ class BaseTagObject(models.Model):
     likers = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         related_name='likes+')  # no reverse relation on model
 
-    bbb_room = models.ForeignKey(BBBRoom, null=True, blank=True, on_delete=models.SET_NULL, related_name="tagged_objects",
+    bbb_room = models.ForeignKey('cosinnus.BBBRoom', null=True, blank=True, on_delete=models.SET_NULL, related_name="tagged_objects",
                                  verbose_name=_("BigBlueButton conversation room"))
     
     def save(self, *args, **kwargs):
