@@ -52,8 +52,8 @@ class ConferenceViewSet(RequireGroupReadMixin,
 
     @action(detail=True, methods=['get'])
     def participants(self, request, pk=None):
-        queryset = self.get_object().users.filter(is_active=True)
-        page = self.paginate_queryset(queryset).order_by('first_name', 'last_name')
+        queryset = self.get_object().users.filter(is_active=True).order_by('first_name', 'last_name')
+        page = self.paginate_queryset(queryset)
         serializer = ConferenceParticipantSerializer(page, many=True, context={"request": request})
         return self.get_paginated_response(serializer.data)
 
