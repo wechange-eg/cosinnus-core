@@ -19,13 +19,14 @@ export const useStyles = makeStyles((theme) => ({
       padding: "1rem",
       width: "100%",
       height: "10rem",
-      display: "flex",
       "& > div": {
-          width: "100%",
-          height: "100%",
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "row",
       }
     },
-    "& span": {
+    "& span:first-child": {
       fontWeight: "bold",
       display: "block",
     },
@@ -63,16 +64,14 @@ export const useStyles = makeStyles((theme) => ({
   focusHighlight: {
   },
   left: {
-    flex: "60%",
-    margin: "auto 0 0",
+    flex: "0 0 60%",
     "& p": {
       color: theme.palette.text.secondary,
     },
   },
   right: {
-    flex: "40%",
+    flex: "0 0 40%",
     textAlign: "right",
-    margin: "auto 0 0",
   },
   link: {
     color: theme.palette.text.secondary,

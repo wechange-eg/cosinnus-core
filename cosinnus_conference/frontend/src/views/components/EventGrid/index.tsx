@@ -69,9 +69,7 @@ export function EventGrid(props: EventGridProps) {
               <Typography component="span">
                 {event.props.title}
               </Typography>
-              <Typography component="p">
-                {event.getNoteOrPresenters()}
-              </Typography>
+              <Typography component="span" dangerouslySetInnerHTML={{__html: event.getNoteOrPresenters()}} />
             </div>
             <div className={classes.right}>
               {isNow && (

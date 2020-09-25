@@ -32,6 +32,7 @@ interface WorkshopsProps {
 function mapStateToProps(state: RootState) {
   return {
     events: state.events[state.room.props.id],
+    eventParticipants: state.eventParticipants[state.room.props.id],
     room: state.room,
   }
 }
