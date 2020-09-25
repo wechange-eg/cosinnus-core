@@ -44,7 +44,11 @@ function ParticipantConnector (props: ParticipantProps & RouteComponentProps) {
       {participant && (
         <Content>
           <Typography component="h1">{participant.getFullName()}</Typography>
-          <Typography component="p">{participant.props.organisation}, {participant.props.country}</Typography>
+          {(participant.props.organisation || participant.props.country) && (
+            <div className="description">
+              <Typography component="p">{participant.props.organisation}, {participant.props.country}</Typography>
+            </div>
+          )}
           <IframeContent url={participant.props.chatUrl} />
         </Content>
       ) || (
