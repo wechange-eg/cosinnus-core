@@ -10,19 +10,19 @@ import {Event, EventDay} from "../../../stores/events/models"
 import {formatTime, groupByDaysAndSlots} from "../../../utils/events"
 import {ManageEventIcons} from "../ManageEventIcons"
 import {useStyles} from "./style"
+import {EventParticipants} from "../../../stores/eventParticipants/reducer"
 
-export interface EventCardProps {
+export interface EventGridProps {
   events: Event[]
+  eventParticipants: EventParticipants
 }
 
-export function EventGrid(props: EventCardProps) {
-  const { events } = props
+export function EventGrid(props: EventGridProps) {
+  const { events, eventParticipants } = props
   const classes = useStyles()
   const days = groupByDaysAndSlots(events)
   const [ currentDay, setCurrentDay] = useState(days[0].props.date)
-  if (!events) {
-    return null
-  }
+  if (!events) return null
 
   function getDayLabel(day: EventDay) {
     return (
@@ -32,8 +32,13 @@ export function EventGrid(props: EventCardProps) {
     )
   }
 
+  function getEventParticipantCount(event: Event) {
+    return eventParticipants && eventParticipants[event.props.id]
+  }
+
   function renderEventCard(event: Event) {
     const isNow = event.isNow()
+    const participantsCount = getEventParticipantCount(event)
     return (
       <Card className={clsx({
         [classes.card]: true,
@@ -75,10 +80,12 @@ export function EventGrid(props: EventCardProps) {
                     {event.getMinutesLeft()}&nbsp;
                     <FormattedMessage id="minutes left" />
                   </Typography>
-                  <Typography component="p">
-                    {event.props.participantsCount}&nbsp;
-                    <FormattedMessage id="participants" />
-                  </Typography>
+                  {participantsCount !== undefined && (
+                    <Typography component="p">
+                      {participantsCount}&nbsp;
+                      <FormattedMessage id="participants" />
+                    </Typography>
+                  )}
                   <Typography component="p"> </Typography>
                 </div>
               ) || (

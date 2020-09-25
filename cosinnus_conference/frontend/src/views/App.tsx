@@ -73,10 +73,10 @@ const mapDispatchToProps = {
 
 class AppConnector extends Component<AppProps> {
   constructor(props: AppProps) {
+    super(props)
     const {translations, fetchTranslations} = props
     const {user, fetchUser} = props
     const {conference, fetchConference} = props
-    const {room} = props
 
     if (!translations) fetchTranslations()
     if (!user) fetchUser()

@@ -13,9 +13,11 @@ import {Conference} from "./conference/models"
 import {Participant} from "./participants/models"
 import {ParticipantsReducer} from "./participants/reducer"
 import {Room} from "./room/models"
+import {EventParticipantsReducer, EventParticipantsState} from "./eventParticipants/reducer"
 
 export interface RootState {
   events: EventsState,
+  eventParticipants: EventParticipantsState,
   organisations: Organisation[],
   conference: Conference,
   participants: Participant[],
@@ -28,6 +30,7 @@ export interface RootState {
 export const rootReducer = combineReducers({
   conference: ConferenceReducer,
   events: EventsReducer,
+  eventParticipants: EventParticipantsReducer,
   organisations: OrganisationsReducer,
   participants: ParticipantsReducer,
   room: RoomReducer,

@@ -25,9 +25,7 @@ export function EventList(props: EventListProps) {
   const classes = useStyles()
   const days = groupByDaysAndSlots(events)
   const [ currentDay, setCurrentDay] = useState(days[0].props.date)
-  if (!events) {
-    return null
-  }
+  if (!events) return null
 
   function getDayLabel(day: EventDay) {
     return (

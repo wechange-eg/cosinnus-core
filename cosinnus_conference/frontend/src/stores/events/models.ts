@@ -21,7 +21,6 @@ export interface EventJson {
   url: string
   presenters: ParticipantJson[]
   participants_limit: number
-  participants_count: number
   management_urls?: {
     create_event: string
     update_event: string
@@ -41,7 +40,6 @@ export interface EventProps {
   url: string
   presenters: Participant[]
   participantsLimit: number
-  participantsCount: number
   managementUrls?: {
     createEvent: string
     updateEvent: string
@@ -77,7 +75,6 @@ export class Event {
       url: json.url,
       presenters: presenters,
       participantsLimit: json.participants_limit,
-      participantsCount: json.participants_count,
       managementUrls: {
         createEvent: json.management_urls.create_event,
         updateEvent: json.management_urls.update_event,
@@ -109,7 +106,6 @@ export class Event {
       url: props.url,
       presenters: presenters,
       participants_limit: props.participantsLimit,
-      participants_count: props.participantsCount,
       management_urls: {
         create_event: props.managementUrls.createEvent,
         update_event: props.managementUrls.updateEvent,
@@ -168,9 +164,9 @@ export class Event {
    *
    * @returns {number} Number of places left, null if no limit
    */
-  getAvailablePlaces() : number {
+  getAvailablePlaces(participantsCount: number) : number {
     if (this.props.participantsLimit) {
-      const availablePlaces = this.props.participantsLimit - this.props.participantsCount
+      const availablePlaces = this.props.participantsLimit - participantsCount
       return availablePlaces > 0 && availablePlaces || 0
     }
     return null

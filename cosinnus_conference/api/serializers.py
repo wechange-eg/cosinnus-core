@@ -179,14 +179,13 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
     presenters = ConferenceEventParticipantSerializer(many=True)
     participants_limit = serializers.IntegerField(source='max_participants')
-    participants_count = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
     note_html = serializers.SerializerMethodField()
 
     class Meta(object):
         model = ConferenceEvent
         fields = ('id', 'title', 'note_html', 'from_date', 'to_date', 'room', 'url', 'is_break', 'image_url',
-                  'presenters', 'participants_limit', 'participants_count', 'management_urls')
+                  'presenters', 'participants_limit', 'management_urls')
 
     def get_url(self, obj):
         # FIXME: Maybe smarter filtering for URL
@@ -197,11 +196,6 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
         if image_file:
             return image_thumbnail_url(image_file, (466, 112))
         return static('images/conference-event-placeholder.png')
-
-    def get_participants_count(self, obj):
-        if obj.media_tag and obj.media_tag.bbb_room:
-            return obj.media_tag.bbb_room.remote_user_count
-        return 0
 
     def get_management_urls(self, obj):
         user = self.context['request'].user
@@ -216,17 +210,15 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
     def get_note_html(self, obj):
         return textfield(obj.note)
 
-"""
 
-            {
-                "id": 1,
-                "name": "Check In",
-                "description": "Try the public Chat LOBBY or ask for help: TEAM SUPPORT",
-                "from_time": "2020-09-14 08:30:00 UTC",
-                "to_time": "2020-09-14 09:15:00 UTC",
-                "room_name": "Chat LOBBY",
-                "room_slug": "lobby",
-                "url": "https://bbb.wechange.de/b/mar-fq2-kud",
-            },
-            {
-"""
+class ConferenceEventParticipantsSerializer(serializers.ModelSerializer):
+    participants_count = serializers.SerializerMethodField()
+
+    class Meta(object):
+        model = ConferenceEvent
+        fields = ('id', 'participants_count')
+
+    def get_participants_count(self, obj):
+        if obj.media_tag and obj.media_tag.bbb_room:
+            return obj.media_tag.bbb_room.remote_user_count
+        return 0

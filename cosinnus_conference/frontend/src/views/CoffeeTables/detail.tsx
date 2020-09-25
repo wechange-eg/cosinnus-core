@@ -39,7 +39,7 @@ function CoffeeTableConnector (props: CoffeeTableProps & RouteComponentProps) {
   let event = null
   if (events && events.events) {
     event = events.events.find((e) => e.props.id === id)
-  } else if (!(events && events.loading)) {
+  } else if (!events && !(events && events.loading)) {
     fetchEvents()
   }
   return (

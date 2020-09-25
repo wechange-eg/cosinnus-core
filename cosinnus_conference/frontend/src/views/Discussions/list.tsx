@@ -43,9 +43,8 @@ function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
   const [time, setTime] = useState(new Date())
   useEffect(() => { setInterval(() => setTime(new Date()), 60000) })
 
-  if (!events) {
-    fetchEvents()
-  }
+  if (!events && !(events && events.loading)) fetchEvents()
+
   return (
     <Grid container>
       <Content>

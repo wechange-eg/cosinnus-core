@@ -1,18 +1,19 @@
 import React from "react"
 import {Grid, Card, CardContent, CardActionArea, CardMedia, Typography} from "@material-ui/core"
 import {RouteComponentProps} from "react-router-dom"
+import {FormattedMessage} from "react-intl"
 
 import {Event} from "../../../stores/events/models"
 import {useStyles} from "./style"
 import {ManageEventIcons} from "../ManageEventIcons"
-import {FormattedMessage} from "react-intl"
 
 export interface CoffeeTableProps {
   event: Event
+  participantsCount: number
 }
 
 export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
-  const { event } = props
+  const { event, participantsCount } = props
   const classes = useStyles()
   if (!event) {
     return null
@@ -34,7 +35,7 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
       </Grid>
     )
   }
-  const availablePlaces = event.getAvailablePlaces()
+  const availablePlaces = participantsCount !== undefined && event.getAvailablePlaces(participantsCount)
   return (
     <Card className={classes.card}>
       <CardActionArea
@@ -58,14 +59,17 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
           ))}
           </Grid>
           */}
-          {availablePlaces === null && (
-            <Typography component="p">
-              {event.props.participantsCount} <FormattedMessage id="participants" />
-            </Typography>
-          ) || (
-            <Typography component="p">
-              {availablePlaces} <FormattedMessage id="places left" />
-            </Typography>
+          {participantsCount !== undefined && (
+            (availablePlaces === null && (
+              <Typography component="p">
+                {participantsCount} <FormattedMessage id="participants" />
+              </Typography>
+            ))
+            || (
+              <Typography component="p">
+                {availablePlaces} <FormattedMessage id="places left" />
+              </Typography>
+            )
           )}
           <ManageEventIcons event={event} />
         </CardContent>

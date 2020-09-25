@@ -44,9 +44,9 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
   // Rerender every minute
   const [time, setTime] = useState(new Date())
   useEffect(() => { setInterval(() => setTime(new Date()), 60000) })
-  if (!events) {
-    fetchEvents(true)
-  }
+
+  if (!events && !(events && events.loading)) fetchEvents(true)
+
   return (
     <Grid container>
       <Content>

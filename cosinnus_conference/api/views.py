@@ -3,7 +3,7 @@ from rest_framework import viewsets, pagination
 
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_conference.api.serializers import ConferenceSerializer, ConferenceEventSerializer, \
-    ConferenceParticipantSerializer
+    ConferenceParticipantSerializer, ConferenceEventParticipantsSerializer
 from cosinnus_event.models import ConferenceEvent
 
 
@@ -56,6 +56,19 @@ class ConferenceViewSet(RequireGroupReadMixin,
         page = self.paginate_queryset(queryset)
         serializer = ConferenceParticipantSerializer(page, many=True, context={"request": request})
         return self.get_paginated_response(serializer.data)
+
+    @action(detail=True, methods=['get'])
+    def event_participants(self, request, pk=None):
+        queryset = ConferenceEvent.objects
+        room_id = self.request.GET.get('room_id')
+        if room_id:
+            queryset = queryset.filter(room=room_id)
+        else:
+            queryset = queryset.filter(room__group=pk).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
+        queryset = queryset.conference_upcoming().order_by('from_date')
+        page = self.paginate_queryset(queryset)
+        serializer = ConferenceEventParticipantsSerializer(page, many=True, context={"request": request})
+        return self.get_paginated_response({p['id']: p['participants_count'] for p in serializer.data})
 
 """
     @action(detail=True, methods=['get'])
