@@ -45,7 +45,7 @@ class ConferenceViewSet(RequireGroupReadMixin,
             queryset = queryset.filter(room=room_id)
         else:
             queryset = queryset.filter(room__group=pk).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
-        queryset = queryset.conference_upcoming()
+        queryset = queryset.conference_upcoming().order_by('from_date')
         page = self.paginate_queryset(queryset)
         serializer = ConferenceEventSerializer(page, many=True, context={"request": request})
         return self.get_paginated_response(serializer.data)
@@ -53,7 +53,7 @@ class ConferenceViewSet(RequireGroupReadMixin,
     @action(detail=True, methods=['get'])
     def participants(self, request, pk=None):
         queryset = self.get_object().users.filter(is_active=True)
-        page = self.paginate_queryset(queryset)
+        page = self.paginate_queryset(queryset).order_by('first_name', 'last_name')
         serializer = ConferenceParticipantSerializer(page, many=True, context={"request": request})
         return self.get_paginated_response(serializer.data)
 
