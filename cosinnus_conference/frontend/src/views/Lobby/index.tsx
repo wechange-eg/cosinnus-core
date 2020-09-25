@@ -17,9 +17,11 @@ import {EventList} from "../components/EventList"
 import {Sidebar} from "../components/Sidebar"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
 import {Room} from "../../stores/room/models"
+import {EventRoomState} from "../../stores/events/reducer"
+import {Loading} from "../components/Loading"
 
 interface LobbyProps {
-  events: Event[]
+  events: EventRoomState
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
   room: Room
   url: string
@@ -54,13 +56,13 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
-        {events && events.length > 0 && (
-          <EventList events={events} />
-        ) || <Typography><FormattedMessage id="No events." /></Typography>
+        {(events && events.events && events.events.length > 0 && <EventList events={events.events} />)
+          || (events && events.loading && <Loading />)
+          || <Typography><FormattedMessage id="No events." /></Typography>
         }
         <ManageRoomButtons />
       </Content>
-      {url && <Sidebar url={url} />}
+      {!url && <Sidebar url={url} />}
     </Grid>
   )
 }

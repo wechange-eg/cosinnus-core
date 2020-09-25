@@ -41,8 +41,8 @@ function ParticipantConnector (props: ParticipantProps & RouteComponentProps) {
   }
   return (
     <Main container>
-      {participant && (
-        <Content>
+      {(participant && (
+        <Content className="fullheight">
           <Typography component="h1">{participant.getFullName()}</Typography>
           {(participant.props.organisation || participant.props.country) && (
             <div className="description">
@@ -51,11 +51,9 @@ function ParticipantConnector (props: ParticipantProps & RouteComponentProps) {
           )}
           <IframeContent url={participant.props.chatUrl} />
         </Content>
-      ) || (
-        <Content>
-          <Loading />
-        </Content>
-      )}
+      ))
+      || <Content className="fullheight"><Loading /></Content>
+      }
     </Main>
   )
 }

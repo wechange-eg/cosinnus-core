@@ -1,5 +1,6 @@
-import {Participant, ParticipantJson} from "../participants/models"
 import moment from "moment"
+
+import {Participant, ParticipantJson} from "../participants/models"
 
 export interface Room {
   id: number
@@ -154,8 +155,8 @@ export class Event {
    * @returns {boolean} true if slot happens now
    */
   getNoteOrPresenters() : string {
-    if (this.props.note) {
-      return this.props.note
+    if (this.props.noteHtml) {
+      return this.props.noteHtml
     } else if (this.props.presenters && this.props.presenters.length > 0) {
       return this.props.presenters.map(p => p.getFullName()).join(", ")
     }

@@ -17,16 +17,16 @@ import {Loading} from "../components/Loading"
 import {ManageEventButtons} from "../components/ManageEventButtons"
 import {Sidebar} from "../components/Sidebar"
 import {IframeContent} from "../components/IframeContent"
+import {EventRoomState} from "../../stores/events/reducer"
 
 interface StageEventProps {
   id: number
-  events: Event[]
+  events: EventRoomState
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
   url: string
 }
 
 function mapStateToProps(state: RootState) {
-  console.log(state.room.props)
   return {
     events: state.events[state.room.props.id],
     url: state.room.props.url,
@@ -40,15 +40,16 @@ const mapDispatchToProps = {
 function StageEventConnector (props: StageEventProps & RouteComponentProps) {
   const { id, events, fetchEvents, url } = props
   let event = null
-  if (events) {
-    event = events.find((e) => e.props.id === id)
-  } else {
+  if (events && events.events) {
+    event = events.events.find((e) => e.props.id === id)
+  } else if (!(events && events.loading)) {
+
     fetchEvents()
   }
   return (
     <Main container>
-      {event && (
-        <Content>
+      {(event && (
+        <Content className="fullheight">
           <Typography component="h1">{event.props.title}</Typography>
           {event.props.noteHtml && (
             <div className="description" dangerouslySetInnerHTML={{__html: event.props.noteHtml}} />
@@ -56,11 +57,9 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
           <IframeContent url={event.props.url} />
           <ManageEventButtons event={event} />
         </Content>
-      ) || (
-        <Content>
-          <Loading />
-        </Content>
-      )}
+      ))
+      || <Content className="fullheight"><Loading /></Content>
+      }
       {url && <Sidebar url={url} />}
     </Main>
   )

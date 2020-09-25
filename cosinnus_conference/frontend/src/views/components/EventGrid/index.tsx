@@ -3,13 +3,13 @@ import {FormattedMessage} from "react-intl"
 import {Card, CardActionArea, CardContent, Grid, Tab, Tabs, Typography} from "@material-ui/core"
 import TabPanel from "@material-ui/lab/TabPanel"
 import clsx from "clsx"
+import {TabContext, TabList} from "@material-ui/lab"
+import moment from "moment"
 
 import {Event, EventDay} from "../../../stores/events/models"
 import {formatTime, groupByDaysAndSlots} from "../../../utils/events"
 import {ManageEventIcons} from "../ManageEventIcons"
 import {useStyles} from "./style"
-import {TabContext, TabList} from "@material-ui/lab"
-import moment from "moment"
 
 export interface EventCardProps {
   events: Event[]

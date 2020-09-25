@@ -15,13 +15,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import {IconDefinition} from "@fortawesome/fontawesome-common-types"
 import {FormattedMessage} from "react-intl"
+import clsx from "clsx"
 
 import {RootState} from "../../../stores/rootReducer"
 import {useStyles} from "./style"
 import {Room} from "../../../stores/room/models"
 import {Conference} from "../../../stores/conference/models"
 import {Participant} from "../../../stores/participants/models"
-import clsx from "clsx"
 
 interface NavProps {
   conference: Conference

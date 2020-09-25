@@ -4,6 +4,14 @@ import {
 import {ActionType} from "../../constants/actions"
 import {Event} from "./models"
 
+export const setFetchEventsLoading: ReduxObjectActionCreator<[string]> = (room) => ({
+  type: ActionType.FETCH_EVENTS_LOADING,
+  payload: {
+    room: room
+  }
+})
+
+
 export const setFetchEventsSuccess: ReduxObjectActionCreator<[string, Event[]]> = (room, events) => ({
   type: ActionType.FETCH_EVENTS_SUCCESS,
   payload: {

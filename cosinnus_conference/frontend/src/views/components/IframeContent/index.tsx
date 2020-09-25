@@ -29,6 +29,7 @@ export function IframeContent(props: IframeProps) {
     <div className={clsx({
       [classes.iframe]: true,
       [classes.fullscreen]: fullscreen,
+      "iframe": true,
     })}>
       <Link
         className={classes.fullScreenLink}

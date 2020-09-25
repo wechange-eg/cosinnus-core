@@ -11,15 +11,16 @@ import {FormattedMessage} from "react-intl";
 import {RootState} from "../../stores/rootReducer"
 import {fetchEvents} from "../../stores/events/effects"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {Event} from "../../stores/events/models"
 import {Content} from "../components/Content/style"
 import {EventList} from "../components/EventList"
 import {Sidebar} from "../components/Sidebar"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
 import {Room} from "../../stores/room/models"
+import {EventRoomState} from "../../stores/events/reducer"
+import {Loading} from "../components/Loading"
 
 interface StageProps {
-  events: Event[]
+  events: EventRoomState
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
   room: Room
 }
@@ -51,9 +52,9 @@ function StageConnector (props: StageProps & RouteComponentProps) {
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
-        {events && events.length > 0 && (
-          <EventList events={events} />
-        ) || <Typography><FormattedMessage id="No stage events." /></Typography>
+        {(events && events.events && events.events.length > 0 && <EventList events={events.events} />)
+        || (events && events.loading && <Loading />)
+        || <Typography><FormattedMessage id="No stage events." /></Typography>
         }
         <ManageRoomButtons />
       </Content>

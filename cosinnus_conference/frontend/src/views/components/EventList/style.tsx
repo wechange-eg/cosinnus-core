@@ -29,17 +29,18 @@ export const useStyles = makeStyles((theme) => ({
       borderRadius: ".3rem",
       marginBottom: "1rem",
       padding: 0,
-      "& div:first-child": {
+      "& div.room-title": {
         "& span, & p": {
+          fontWeight: 700,
           color: theme.palette.text.secondary
         }
       },
-      "& div": {
-        "& span": {
+      "& div.event-title": {
+        "& span:first-child": {
           fontWeight: 700,
           lineHeight: "1.3",
         },
-        "& p": {
+        "& span:last-child, span:last-child *": {
           background: "transparent",
           color: theme.palette.text.secondary,
           padding: 0,
@@ -48,16 +49,16 @@ export const useStyles = makeStyles((theme) => ({
       },
       "&:hover": {
         background: theme.palette.primary.main,
-        "& div:first-child": {
+        "& div.room-title": {
           "& span, & p": {
             color: theme.palette.primary.light
           }
         },
-        "& div": {
-          "& span": {
+        "& div.event-title": {
+          "& span:first-child": {
             color: "#ffffff"
           },
-          "& p": {
+          "& span:last-child, span:last-child *": {
             color: theme.palette.primary.light,
           }
         }

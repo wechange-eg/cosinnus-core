@@ -1,21 +1,20 @@
 import React, {useState} from "react"
 import {
-  Grid,
   List,
   ListItem,
   ListItemText, Tab,
   Typography
 } from "@material-ui/core"
+import {TabContext, TabList} from "@material-ui/lab"
+import TabPanel from "@material-ui/lab/TabPanel"
 import {FormattedMessage} from "react-intl"
 import clsx from "clsx"
+import moment from "moment"
 
 import {Event, EventDay} from "../../../stores/events/models"
 import {formatTime, groupByDaysAndSlots} from "../../../utils/events"
 import {ManageEventIcons} from "../ManageEventIcons"
 import {useStyles} from "./style"
-import moment from "moment"
-import {TabContext, TabList} from "@material-ui/lab"
-import TabPanel from "@material-ui/lab/TabPanel"
 
 export interface EventListProps {
   events: Event[]
@@ -39,7 +38,6 @@ export function EventList(props: EventListProps) {
   }
 
   function renderEventListItem(event: Event) {
-    const isNow = event.isNow()
     return (
       <ListItem
         button
@@ -49,8 +47,12 @@ export function EventList(props: EventListProps) {
           if (url) window.location.href = url
         }}
       >
-        <ListItemText primary={event.props.room.title} />
-        <ListItemText primary={event.props.title} secondary={event.getNoteOrPresenters()}/>
+        <ListItemText primary={event.props.room.title} className="room-title" />
+        <ListItemText
+          className="event-title"
+          primary={event.props.title}
+          secondary={<Typography component="span" dangerouslySetInnerHTML={{__html: event.getNoteOrPresenters()}} />}
+        />
         <ManageEventIcons event={event}/>
       </ListItem>
     )

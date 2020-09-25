@@ -17,9 +17,11 @@ import {Event} from "../../stores/events/models"
 import {Channel} from "../components/Channel"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
 import {Room} from "../../stores/room/models"
+import {EventRoomState} from "../../stores/events/reducer"
+import {Loading} from "../components/Loading"
 
 interface ChannelsProps {
-  events: Event[]
+  events: EventRoomState
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
   room: Room
 }
@@ -53,15 +55,16 @@ function ChannelsConnector (props: ChannelsProps & RouteComponentProps) {
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
-        {events && events.length > 0 && (
+        {(events && events.events && events.events.length > 0 && (
         <Grid container spacing={2}>
-          {events.map((event, index) => (
+          {events.events.map((event, index) => (
             <Grid item key={index} sm={6} className="now">
               <Channel event={event} />
             </Grid>
           ))}
         </Grid>
-        )
+        ))
+        || (events && events.loading && <Loading />)
         || <Typography><FormattedMessage id="No networking channels." /></Typography>
         }
         <ManageRoomButtons />

@@ -2,7 +2,7 @@ import {Dispatch} from "redux"
 
 import {ReduxThunkActionCreator} from "../../utils/types"
 import {
-  setFetchEventsError,
+  setFetchEventsError, setFetchEventsLoading,
   setFetchEventsSuccess
 } from "./actions"
 import {EventJson, Event} from "./models"
@@ -17,6 +17,7 @@ export const fetchEvents: ReduxThunkActionCreator<[boolean], Promise<void>> = (f
   dispatch: Dispatch, getState: () => RootState) => {
   const state = getState()
   const roomId = state.room && state.room.props.id.toString() || "0"
+  dispatch(setFetchEventsLoading(roomId))
   let filterParam = ""
   if (!fetchAll) {
     filterParam = "room_id=" + roomId

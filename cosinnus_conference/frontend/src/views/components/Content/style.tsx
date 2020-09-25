@@ -12,6 +12,16 @@ export const Content = styled(Grid)(({ theme }) => ({
     color: theme.palette.primary.main,
     marginBottom: "1rem",
   },
+  "&.fullheight": {
+    display: "flex",
+    flexDirection: "column",
+    "& > *": {
+      flex: "0"
+    },
+    "& > .iframe": {
+      flex: "1"
+    }
+  },
   [theme.breakpoints.down('sm')]: {
     width: "100%",
     flexBasis: "100%",

@@ -1,13 +1,12 @@
 import {
-  Grid, ListItem, ListItemText,
+  Grid,
   Typography
 } from "@material-ui/core"
 import React, {useEffect, useState} from "react"
 import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
 import {withRouter} from "react-router"
-import {FormattedMessage} from "react-intl";
-import Iframe from "react-iframe"
+import {FormattedMessage} from "react-intl"
 
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
@@ -18,9 +17,11 @@ import {Sidebar} from "../components/Sidebar"
 import {fetchEvents} from "../../stores/events/effects"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
 import {Room} from "../../stores/room/models"
+import {EventRoomState} from "../../stores/events/reducer"
+import {Loading} from "../components/Loading"
 
 interface DiscussionsProps {
-  events: Event[]
+  events: EventRoomState
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
   room: Room
 }
@@ -52,9 +53,9 @@ function DiscussionsConnector (props: DiscussionsProps & RouteComponentProps) {
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
-        {events && events.length > 0 && (
-          <EventList events={events} />
-        ) || <Typography><FormattedMessage id="No discussions." /></Typography>
+        {(events && events.events && events.events.length > 0 && <EventList events={events.events} />)
+        || (events && events.loading && <Loading />)
+        || <Typography><FormattedMessage id="No discussions." /></Typography>
         }
         <ManageRoomButtons />
       </Content>

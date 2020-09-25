@@ -10,7 +10,6 @@ import {FormattedMessage} from "react-intl";
 
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {Event} from "../../stores/events/models"
 import {Content} from "../components/Content/style"
 import {Sidebar} from "../components/Sidebar"
 import {useStyles} from "./style"
@@ -18,9 +17,11 @@ import {CoffeeTable} from "../components/CoffeeTable"
 import {fetchEvents} from "../../stores/events/effects"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
 import {Room} from "../../stores/room/models"
+import {Loading} from "../components/Loading"
+import {EventRoomState} from "../../stores/events/reducer"
 
 interface CoffeeTablesProps {
-  events: Event[]
+  events: EventRoomState
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
   room: Room
 }
@@ -54,16 +55,17 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
           {room.props.descriptionHtml && (
             <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
           )}
-          {events && events.length > 0 && (
+          {(events && events.events && events.events.length > 0 && (
             <Grid container spacing={4}>
-              {events.map((event, index) => (
+              {events.events.map((event, index) => (
                 <Grid item key={index} sm={6} className="now">
                   <CoffeeTable event={event} />
                 </Grid>
               ))}
             </Grid>
-          )
-          || <Typography><FormattedMessage id="No current coffee tables." /></Typography>
+          ))
+          || (events && events.loading && <Loading />)
+          || <Typography><FormattedMessage id="No coffee tables." /></Typography>
         }
         </div>
         <ManageRoomButtons />

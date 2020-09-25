@@ -31,7 +31,7 @@ export const groupByDaysAndSlots = (events: Event[]) => {
         fromDate: events[0].props.fromDate,
         toDate: events[0].props.toDate,
         isBreak: events[0].props.isBreak,
-        events: events
+        events: events.sort((a, b) => (a.props.title > b.props.title) ? 1 : -1)
       })
     })
     return new EventDay({

@@ -57,6 +57,9 @@ export const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    "& iframe": {
+      display: "none !important"
+    }
   },
   button: {
     background: theme.palette.primary.main,

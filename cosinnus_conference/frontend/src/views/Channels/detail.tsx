@@ -15,10 +15,11 @@ import {fetchEvents} from "../../stores/events/effects"
 import {Event} from "../../stores/events/models"
 import {ManageEventButtons} from "../components/ManageEventButtons"
 import {IframeContent} from "../components/IframeContent"
+import {EventRoomState} from "../../stores/events/reducer"
 
 interface ChannelProps {
   id: number
-  events: Event[]
+  events: EventRoomState
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
 }
 
@@ -35,15 +36,15 @@ const mapDispatchToProps = {
 function ChannelConnector (props: ChannelProps & RouteComponentProps) {
   const { id, events, fetchEvents } = props
   let event = null
-  if (events) {
-    event = events.find((e) => e.props.id === id)
-  } else {
+  if (events && events.events) {
+    event = events.events.find((e) => e.props.id === id)
+  } else if (!(events && events.loading)) {
     fetchEvents()
   }
   return (
     <Main container>
-      {event && (
-        <Content>
+      {(events && events.events && events.events.length > 0 && (
+        <Content className="fullheight">
           <Typography component="h1">{event.props.title}</Typography>
           {event.props.noteHtml && (
             <div className="description" dangerouslySetInnerHTML={{__html: event.props.noteHtml}} />
@@ -51,11 +52,9 @@ function ChannelConnector (props: ChannelProps & RouteComponentProps) {
           <IframeContent url={event.props.url} />
           <ManageEventButtons event={event} />
         </Content>
-      ) || (
-        <Content>
-          <Loading />
-        </Content>
-      )}
+      ))
+      || <Content className="fullheight"><Loading /></Content>
+      }
     </Main>
   )
 }
