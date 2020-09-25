@@ -16,16 +16,19 @@ import {Content} from "../components/Content/style"
 import {EventList} from "../components/EventList"
 import {Sidebar} from "../components/Sidebar"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
+import {Room} from "../../stores/room/models"
 
 interface LobbyProps {
   events: Event[]
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
+  room: Room
   url: string
 }
 
 function mapStateToProps(state: RootState) {
   return {
     events: state.events[state.room.props.id],
+    room: state.room,
     url: state.room.props.url,
   }
 }
@@ -35,7 +38,7 @@ const mapDispatchToProps = {
 }
 
 function LobbyConnector (props: LobbyProps & RouteComponentProps) {
-  const { events, fetchEvents, url } = props
+  const { events, fetchEvents, room, url } = props
   // Rerender every minute
   const [time, setTime] = useState(new Date())
   useEffect(() => { setInterval(() => setTime(new Date()), 60000) })
@@ -48,6 +51,9 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
         <Typography component="h1">
           <FormattedMessage id="Agenda" />
         </Typography>
+        {room.props.descriptionHtml && (
+          <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
+        )}
         {events && events.length > 0 && (
           <EventList events={events} />
         ) || <Typography><FormattedMessage id="No events." /></Typography>

@@ -75,7 +75,7 @@ export class Participant {
    * Get internal url
    */
   getUrl() : string {
-    if (this.props.chatUrl) return ""
+    if (!this.props.chatUrl) return ""
     return "./#/" + this.props.id
   }
 }
