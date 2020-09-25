@@ -242,7 +242,7 @@ def xml_join(name, meeting_id, password):
     return result
 
 
-def join_url(meeting_id, name, password):
+def join_url(meeting_id, name, password, extra_parameter_dict=None):
     """ returns the join api url with parameters and hash to join a conversation1
 
     :param meeting_id: ID of the meeting to join
@@ -252,17 +252,24 @@ def join_url(meeting_id, name, password):
     :type: str
 
     :param password:
+    
+    :param extra_parameter_dict: Any extra parameters for the user join link.
+            See https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
+    :type dict
 
 
     :return: XML representation of the API result
     :rtype: XML
     """
     call = 'join'
-    query = urllib.parse.urlencode((
-        ('fullName', name),
-        ('meetingID', meeting_id),
-        ('password', password),
-    ))
+    params_dict = {
+        'fullName': name,
+        'meetingID': meeting_id,
+        'password': password,
+    }
+    if extra_parameter_dict:
+        params_dict.update(extra_parameter_dict)
+    query = urllib.parse.urlencode(params_dict)
     hashed = api_call(query, call)
     url = settings.BBB_API_URL + call + '?' + hashed
     return url
