@@ -62,7 +62,7 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
         }
         <ManageRoomButtons />
       </Content>
-      {url && <Sidebar url={url} />}
+      {!url && <Sidebar url={url} />}
     </Grid>
   )
 }

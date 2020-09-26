@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     "& > div": {
       background: theme.palette.background.paper,
-      height: "3rem",
+      minHeight: "3rem",
       borderRadius: ".3rem",
       marginBottom: "1rem",
       padding: 0,
