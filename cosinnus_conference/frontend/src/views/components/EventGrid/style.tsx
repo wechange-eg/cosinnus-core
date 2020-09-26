@@ -5,6 +5,9 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: "2rem"
   },
   tabList: {
+    "& > div > div": {
+      flexWrap: "wrap",
+    },
     "& > div > span": {
       backgroundColor: theme.palette.primary.main
     }
