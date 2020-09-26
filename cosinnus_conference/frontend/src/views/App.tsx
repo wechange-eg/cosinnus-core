@@ -158,6 +158,10 @@ class AppConnector extends Component<AppProps> {
             // console.warn("Missing translation", err.message);
             return;
           }
+          if (err.code === "MISSING_DATA") {
+            // console.warn("Missing data", err.message);
+            return;
+          }
           throw err;
         }}
       >
