@@ -40,7 +40,7 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
     <Card className={classes.card}>
       <CardActionArea
         onClick={() => {
-          if (participantsCount === 0) return
+          if (availablePlaces === 0) return
           const url = event.getUrl()
           if (url) window.location.href = url
         }}
