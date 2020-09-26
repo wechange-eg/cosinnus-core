@@ -5,7 +5,7 @@ module.exports = {
    * This is the main entry point for your application, it's the first file
    * that runs in the main process.
    */
-  mode: 'development',
+  mode: 'production',
   entry: './src/index.tsx',
   output: {
     filename: '[name].js',
