@@ -198,21 +198,14 @@ msgstr "Нет"
 #. [conference.coffeeTables.noResults]
 #. defaultMessage is:
 #. No current coffee tables.
-msgid "No current coffee tables."
+msgid "No coffee tables."
 msgstr "Нет текущих кофейных столиков."
-
-#: locale/src/views/Workshops/list.json
-#. [conference.workshops.noCurrentResults]
-#. defaultMessage is:
-#. No current workshops.
-msgid "No current workshops."
-msgstr "Никаких текущих семинаров."
 
 #: locale/src/views/components/EventList/index.json
 #. [conference.events.noResults]
 #. defaultMessage is:
 #. No events planned.
-msgid "No events planned."
+msgid "No events."
 msgstr "События не планируются."
 
 #: locale/src/views/Channels/list.json
@@ -240,7 +233,7 @@ msgstr "Нет представленных организаций."
 #. [conference.workshops.noUpcomingResults]
 #. defaultMessage is:
 #. No upcoming workshops.
-msgid "No upcoming workshops."
+msgid "No workshops."
 msgstr "Никаких предстоящих семинаров."
 
 #: locale/src/views/components/EventCard/index.json
@@ -335,3 +328,9 @@ msgstr "участники"
 #. places left
 msgid "places left"
 msgstr "оставшиеся места"
+
+msgid "Today"
+msgstr "Сегодня"
+
+msgid "Tomorrow"
+msgstr "Завтра"
