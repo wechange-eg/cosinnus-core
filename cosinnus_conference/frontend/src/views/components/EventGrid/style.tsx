@@ -26,9 +26,11 @@ export const useStyles = makeStyles((theme) => ({
         flexDirection: "row",
       }
     },
+    "& span": {
+      display: "block",
+    },
     "& span:first-child": {
       fontWeight: "bold",
-      display: "block",
     },
     "&:hover": {
       background: theme.palette.primary.main,
