@@ -140,8 +140,6 @@ export class Event {
     if (this.props.isBreak) return ""
     // Lobby has no event routes
     if (this.props.room.type == "lobby") return ""
-    // No places left
-    if (this.getAvailablePlaces() === 0) return ""
     return "../" + this.props.room.slug + "#/" + this.props.id
   }
 
