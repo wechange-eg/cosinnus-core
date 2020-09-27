@@ -46,7 +46,10 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
   const { events, eventParticipants, fetchEvents, fetchEventParticipants, room } = props
   // Rerender every minute
   const [time, setTime] = useState(new Date())
-  useEffect(() => { setInterval(() => setTime(new Date()), 60000) })
+  useEffect(() => {
+    const intervalId = setInterval(() => setTime(new Date()), 60000)
+    return () => clearInterval(intervalId)
+  }, [])
 
   if (!events && !(events && events.loading)) fetchEvents()
   if (!eventParticipants && !(eventParticipants && eventParticipants.loading)) fetchEventParticipants()
