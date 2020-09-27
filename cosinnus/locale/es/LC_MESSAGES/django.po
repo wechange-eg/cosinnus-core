@@ -621,7 +621,7 @@ msgstr "Română"
 
 #: default_settings.py:262
 msgid "Belarussian--NATIVE-LANGUAGE"
-msgstr "Русский"
+msgstr "Беларуская"
 
 #: default_settings.py:263
 msgid "Dutch--NATIVE-LANGUAGE"
