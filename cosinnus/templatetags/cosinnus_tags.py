@@ -1193,14 +1193,10 @@ def get_item(obj, attr_name):
         it in the template using __getitem__ """
     return obj[attr_name]
 
-_country_dict = None
 @register.filter
 def get_country_name(country_code):
     """ Returns the verbose country name for a ISO 3166-1 country code """
-    global _country_dict
-    if _country_dict is None:
-        from django_countries import countries
-        _country_dict = dict(countries)
-    return _country_dict.get(country_code, '(unknown)')
+    from django_countries import countries
+    return dict(countries).get(country_code, '(unknown)')
 
 
