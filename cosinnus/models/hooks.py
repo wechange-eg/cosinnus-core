@@ -253,24 +253,27 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                             rocket = RocketChatConnection()
                             # add/remove member from each rocketchat room for each conference room
                             for room in rocket_rooms:
-                                room.sync_rocketchat_room()
-                                if not room.rocket_chat_room_id:
-                                    logger.error('Wanted to sync a user membership to a conference room, but a rocketchat room for it could not be created!', 
-                                                extra={'room': room.id})
-                                    continue
-                                if deleted:
-                                    # kicked member
-                                    rocket.remove_member_from_room(user, room.rocket_chat_room_id)
-                                else:
-                                    rocket.add_member_to_room(user, room.rocket_chat_room_id)
-                                    # Update membership
-                                    if instance.status == MEMBERSHIP_ADMIN:
-                                        # Upgrade
-                                        rocket.add_moderator_to_room(user, room.rocket_chat_room_id)
+                                try:
+                                    room.sync_rocketchat_room()
+                                    if not room.rocket_chat_room_id:
+                                        logger.error('Wanted to sync a user membership to a conference room, but a rocketchat room for it could not be created!', 
+                                                    extra={'room': room.id})
+                                        continue
+                                    if deleted:
+                                        # kicked member
+                                        rocket.remove_member_from_room(user, room.rocket_chat_room_id)
                                     else:
-                                        # Downgrade
-                                        rocket.remove_moderator_from_room(user, room.rocket_chat_room_id)
-            
+                                        rocket.add_member_to_room(user, room.rocket_chat_room_id)
+                                        # Update membership
+                                        if instance.status == MEMBERSHIP_ADMIN:
+                                            # Upgrade
+                                            rocket.add_moderator_to_room(user, room.rocket_chat_room_id)
+                                        else:
+                                            # Downgrade
+                                            rocket.remove_moderator_from_room(user, room.rocket_chat_room_id)
+                                except Exception as e:
+                                    logger.exception(e)
+                                    
     MembershipUpdateHookThread().start()
     
     
