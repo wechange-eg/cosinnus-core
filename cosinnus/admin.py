@@ -526,7 +526,7 @@ class UserAdmin(DjangoUserAdmin):
             rocket = RocketChatConnection()
             for user in queryset:
                 rocket.users_update(user, force_user_update=True, update_password=True)
-                delete_cached_rocket_connection(user)
+                delete_cached_rocket_connection(user.cosinnus_profile.rocket_username)
                 count += 1
             message = _('%d Users were synchronized successfully.') % count
             self.message_user(request, message)
