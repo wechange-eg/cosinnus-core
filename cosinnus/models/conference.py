@@ -199,7 +199,8 @@ class CosinnusConferenceRoom(models.Model):
                 from cosinnus_message.rocket_chat import RocketChatConnection
                 rocket = RocketChatConnection()
                 room_name = f'{self.slug}-{self.group.slug}-{get_random_string(7)}'
-                internal_room_id = rocket.create_private_room(room_name, self.creator, self.group.actual_members)
+                internal_room_id = rocket.create_private_room(room_name, self.creator, 
+                      member_users=self.group.actual_members, additional_admin_users=self.group.actual_admins)
                 if internal_room_id:
                     self.rocket_chat_room_id = internal_room_id
                     self.rocket_chat_room_name = room_name
