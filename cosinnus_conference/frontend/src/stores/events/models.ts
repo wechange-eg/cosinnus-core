@@ -120,8 +120,9 @@ export class Event {
    * @returns {boolean} true if slot happens now
    */
   isNow() : boolean {
-    const thirtyMinutesAgo = new Date(new Date().getTime() - (1000 * 60 * 30))
-    return this.props.fromDate <= thirtyMinutesAgo && this.props.toDate >= thirtyMinutesAgo
+    const now = new Date()
+    const thirtyMinutesAgo = new Date(now.getTime() - (1000 * 60 * 30))
+    return this.props.fromDate <= now && this.props.toDate >= thirtyMinutesAgo
   }
 
   /**
@@ -244,8 +245,9 @@ export class EventSlot {
    * @returns {boolean} true if slot happens now
    */
   isNow() : boolean {
-    const thirtyMinutesAgo = new Date(new Date().getTime() - (1000 * 60 * 30))
-    return this.props.fromDate <= thirtyMinutesAgo && this.props.toDate >= thirtyMinutesAgo
+    const now = new Date()
+    const thirtyMinutesAgo = new Date(now.getTime() - (1000 * 60 * 30))
+    return this.props.fromDate <= now && this.props.toDate >= thirtyMinutesAgo
   }
 }
 
