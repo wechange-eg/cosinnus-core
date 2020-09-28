@@ -121,8 +121,8 @@ export class Event {
    */
   isNow() : boolean {
     const now = new Date()
-    const thirtyMinutesAgo = new Date(now.getTime() - (1000 * 60 * 30))
-    return this.props.fromDate <= now && this.props.toDate >= thirtyMinutesAgo
+    const tenMinutesAgo = new Date(now.getTime() - (1000 * 60 * 10))
+    return this.props.fromDate <= now && this.props.toDate >= tenMinutesAgo
   }
 
   /**
@@ -246,8 +246,8 @@ export class EventSlot {
    */
   isNow() : boolean {
     const now = new Date()
-    const thirtyMinutesAgo = new Date(now.getTime() - (1000 * 60 * 30))
-    return this.props.fromDate <= now && this.props.toDate >= thirtyMinutesAgo
+    const tenMinutesAgo = new Date(now.getTime() - (1000 * 60 * 10))
+    return this.props.fromDate <= now && this.props.toDate >= tenMinutesAgo
   }
 }
 

@@ -3,6 +3,7 @@ import json
 from django.conf import settings
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.template import Context
+from django.template.loader import render_to_string
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -224,7 +225,8 @@ class NavBarView(APIView):
 
     def get(self, request):
         context = Context({
-            'request': request
+            'request': request,
+            'user': request.user,
         })
         if settings.COSINNUS_USE_V2_NAVBAR or settings.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and request.user.is_superuser:
             html = cosinnus_menu_v2(context)
@@ -233,10 +235,20 @@ class NavBarView(APIView):
         return Response({
             'html': html,
             'css': [
-                static('css/cosinnus.css')
+                static('css/all.min.css'),
+                static('css/bootstrap3-cosinnus.css'),
+                static('css/vendor/font-awesome-5/css/all.css'),
+                static('css/vendor/select2.css'),
+                static('css/cosinnus.css'),
             ],
+            'js_settings': render_to_string('cosinnus/v2/navbar/js_settings.html', context.flatten()),
             'js': [
-                static('js/client.js')
+                static('js/vendor/jquery-2.1.0.min.js'),
+                static('js/vendor/bootstrap.min.js'),
+                static('js/cosinnus.js') + '?v=0.47',
+                static('js/vendor/underscore-1.8.3.js'),
+                static('js/vendor/backbone-1.3.3.js'),
+                static('js/client.js'),
             ]
         })
 
