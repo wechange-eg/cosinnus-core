@@ -4,7 +4,7 @@ import Iframe from "react-iframe"
 import {useStyles} from "./style"
 import {Link} from "@material-ui/core"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faArrowsAlt, faCompressArrowsAlt} from "@fortawesome/free-solid-svg-icons"
+import {faArrowsAlt, faCompressArrowsAlt, faExternalLinkAlt, faLink} from "@fortawesome/free-solid-svg-icons"
 import clsx from "clsx"
 
 interface IframeProps {
@@ -31,13 +31,22 @@ export function IframeContent(props: IframeProps) {
       [classes.fullscreen]: fullscreen,
       "iframe": true,
     })}>
-      <Link
-        className={classes.fullScreenLink}
-        href="#"
-        onClick={() => setFullscreen(!fullscreen)}
-      >
-        <FontAwesomeIcon icon={fullscreen && faCompressArrowsAlt || faArrowsAlt} />
-      </Link>
+      <div className={classes.buttons}>
+        <Link
+          className={classes.newTabLink}
+          href={url}
+          target="_blank"
+        >
+          <FontAwesomeIcon icon={faExternalLinkAlt} />
+        </Link>
+        <Link
+          className={classes.fullScreenLink}
+          href="#"
+          onClick={() => setFullscreen(!fullscreen)}
+        >
+          <FontAwesomeIcon icon={fullscreen && faCompressArrowsAlt || faArrowsAlt} />
+        </Link>
+      </div>
       <Iframe
         url={url}
         width="100%"

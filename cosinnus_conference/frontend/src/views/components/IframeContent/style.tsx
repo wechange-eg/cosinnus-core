@@ -17,7 +17,10 @@ export const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
     zIndex: 100,
-    "& > a": {
+    "& > div > a:first-child": {
+      display: "none"
+    },
+    "& > div > a": {
       position: "fixed",
       top: "4rem",
       right: "6rem",
@@ -25,13 +28,23 @@ export const useStyles = makeStyles((theme) => ({
       color: theme.palette.primary.main,
     }
   },
-  fullScreenLink: {
+  buttons: {
     float: "right",
     marginTop: "-2.6rem",
     fontSize: "1.6rem",
     color: theme.palette.primary.main,
-    "&:hover": {
-      color: theme.palette.primary.light,
+    width: "4rem",
+    display: "flex",
+    alignItems: "right",
+    "& > a": {
+      flex: 1,
+      "&:hover": {
+        color: theme.palette.primary.light,
+      }
     }
+  },
+  newTabLink: {
+  },
+  fullScreenLink: {
   },
 }));
