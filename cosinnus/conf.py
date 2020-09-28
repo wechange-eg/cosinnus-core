@@ -641,7 +641,9 @@ class CosinnusConf(AppConf):
     
     # whether to enable the cosinnus cloud app
     CLOUD_ENABLED = False
-        
+    # whether to show the cosinnus cloud dashboard widget
+    CLOUD_DASHBOARD_WIDGET_ENABLED = False 
+    
     # base url of the nextcloud service, without trailing slash
     CLOUD_NEXTCLOUD_URL = None
     # admin user for the nextcloud api
