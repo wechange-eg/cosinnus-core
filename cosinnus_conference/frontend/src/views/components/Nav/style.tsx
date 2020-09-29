@@ -59,7 +59,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     "&:hover,&.Mui-selected,&.Mui-selected:hover": {
       background: "#ffffff",
-      "& span": {
+      "& span,svg": {
         color: theme.palette.primary.main,
       },
       "&::after": {

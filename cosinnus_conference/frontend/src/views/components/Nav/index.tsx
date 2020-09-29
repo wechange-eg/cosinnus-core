@@ -89,6 +89,7 @@ function NavConnector(props: NavProps) {
             <ListItem
               button
               key={navRoom.props.id}
+              component="a"
               href={"../" + navRoom.props.slug + "/"}
               selected={room && navRoom.props.id === room.props.id}
               className={classes.listItem}

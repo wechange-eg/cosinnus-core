@@ -37,7 +37,7 @@ export function ManageRoomButtonsConnector(props: ManageRoomButtonsProps) {
         'X-CSRFTOKEN': Cookies.get('csrftoken'),
       },
       withCredentials: true
-    }).then(res => {
+    }).then(_res => {
       window.location.href = "../"
     })
   }

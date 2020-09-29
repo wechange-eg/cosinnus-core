@@ -20,7 +20,8 @@ export function ManageEventButtons(props: ManageEventButtonsProps) {
   if (!event.props.managementUrls) {
     return null
   }
-  function deleteEvent() {
+  function deleteEvent(e) {
+    e.stopPropagation()
     axios.post(event.props.managementUrls.deleteEvent, {},{
       headers: {
         'X-CSRFTOKEN': Cookies.get('csrftoken'),
@@ -49,7 +50,10 @@ export function ManageEventButtons(props: ManageEventButtonsProps) {
             variant="contained"
             disableElevation
             href="#"
-            onClick={() => setDeleteOpen(true)}
+            onClick={(e) => {
+              e.stopPropagation()
+              setDeleteOpen(true)
+            }}
           >
             <FontAwesomeIcon icon={faTrashAlt} />&nbsp;
             <FormattedMessage id="Delete event" />
@@ -68,7 +72,13 @@ export function ManageEventButtons(props: ManageEventButtonsProps) {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => setDeleteOpen(false)} color="primary">
+              <Button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setDeleteOpen(false)
+                }}
+                color="primary"
+              >
                 <FormattedMessage id="No" />
               </Button>
               <Button onClick={deleteEvent} color="primary">

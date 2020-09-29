@@ -1,14 +1,13 @@
 import React, {useState} from "react"
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link} from "@material-ui/core"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faPen, faPlus, faTrashAlt} from "@fortawesome/free-solid-svg-icons"
+import {faPen, faTrashAlt} from "@fortawesome/free-solid-svg-icons"
 import {FormattedMessage} from "react-intl"
 import Cookies from "js-cookie"
 import axios from "axios"
 
-import {useStyles} from "./style"
-
 import {Event} from "../../../stores/events/models"
+import {useStyles} from "./style"
 
 interface ManageEventIconsProps {
   event: Event
@@ -21,14 +20,15 @@ export function ManageEventIcons(props: ManageEventIconsProps) {
   if (!event.props.managementUrls) {
     return null
   }
-  function deleteEvent() {
+  function deleteEvent(e) {
+    e.stopPropagation()
     axios.post(event.props.managementUrls.deleteEvent, {},{
       headers: {
         'X-CSRFTOKEN': Cookies.get('csrftoken'),
       },
       withCredentials: true
     }).then(res => {
-      window.location.href = "../"
+      window.location.href = "./"
     })
   }
   return (
@@ -67,7 +67,13 @@ export function ManageEventIcons(props: ManageEventIconsProps) {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => setDeleteOpen(false)} color="primary">
+              <Button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setDeleteOpen(false)
+                }}
+                color="primary"
+              >
                 <FormattedMessage id="No" />
               </Button>
               <Button onClick={deleteEvent} color="primary">
