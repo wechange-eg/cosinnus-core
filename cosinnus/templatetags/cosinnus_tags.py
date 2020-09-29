@@ -334,7 +334,7 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
 
 
 @register.simple_tag(takes_context=True)
-def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
+def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request=None):
     """ Renders the new style navbar """
     if 'request' not in context:
         raise ImproperlyConfigured("Current request missing in rendering "
@@ -404,7 +404,7 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
         
         # TODO cache the dumped JSON strings?
         
-    return render_to_string(template, context.flatten())
+    return render_to_string(template, context.flatten(), request=request)
 
 
 @register.simple_tag(takes_context=True)

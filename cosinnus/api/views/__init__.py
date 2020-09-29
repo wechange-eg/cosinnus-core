@@ -224,16 +224,9 @@ class NavBarView(APIView):
     """
 
     def get(self, request):
-        context = Context({
-            'request': request,
-            'user': request.user,
-        })
-        if settings.COSINNUS_USE_V2_NAVBAR or settings.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and request.user.is_superuser:
-            html = cosinnus_menu_v2(context)
-        else:
-            html = cosinnus_menu(context)
+        context = Context({'request': request})
         return Response({
-            'html': html,
+            'html': cosinnus_menu_v2(context, request=request),
             'css': [
                 static('css/all.min.css'),
                 static('css/bootstrap3-cosinnus.css'),
@@ -241,7 +234,7 @@ class NavBarView(APIView):
                 static('css/vendor/select2.css'),
                 static('css/cosinnus.css'),
             ],
-            'js_settings': render_to_string('cosinnus/v2/navbar/js_settings.html', context.flatten()),
+            'js_settings': render_to_string('cosinnus/v2/navbar/js_settings.html', context.flatten(), request=request),
             'js': [
                 static('js/vendor/jquery-2.1.0.min.js'),
                 static('js/vendor/bootstrap.min.js'),
