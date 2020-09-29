@@ -464,53 +464,67 @@ msgstr ""
 "%(portal_name)s من فكرة تتابعها! <br/> <br/> للتحقق من ذلك، يرجى النقر فوق "
 "الراتباط أدناه. هناك يمكنك معرفة ما إذا كنت ترغب في الانضمام إلى المشروع."
 
+#: default_settings.py:252
 msgid "Deutsch--NATIVE-LANGUAGE"
-msgstr "الألمانية--اللغة-الأم"
+msgstr "Deutsch"
 
+#: default_settings.py:253
 msgid "English--NATIVE-LANGUAGE"
-msgstr "الإنجليزية--اللغة-الأم"
+msgstr "English"
 
+#: default_settings.py:254
 msgid "Russian--NATIVE-LANGUAGE"
-msgstr "الروسية--اللغة-الأم"
+msgstr "Русский"
 
+#: default_settings.py:255
 msgid "Ukrainian--NATIVE-LANGUAGE"
-msgstr "الأوكرانية--اللغة-الأم"
+msgstr "Українська"
 
+#: default_settings.py:258
 msgid "French--NATIVE-LANGUAGE"
-msgstr "الفرنسية--اللغة-الأم"
+msgstr "Français"
 
+#: default_settings.py:259
 msgid "Polish--NATIVE-LANGUAGE"
-msgstr "البولندية--اللغة-الأم"
+msgstr "Polski"
 
+#: default_settings.py:260
 msgid "Spanish--NATIVE-LANGUAGE"
-msgstr "الإسبانية--اللغة-الأم"
+msgstr "Español"
 
+#: default_settings.py:261
 msgid "Romanian--NATIVE-LANGUAGE"
-msgstr "الرومانية--اللغة-الأم"
+msgstr "Română"
 
+#: default_settings.py:262
 msgid "Belarussian--NATIVE-LANGUAGE"
-msgstr "البيلاروسية--اللغة-الأم"
+msgstr "Беларуская"
 
+#: default_settings.py:263
 msgid "Dutch--NATIVE-LANGUAGE"
-msgstr "الهولندية--اللغة-الأم"
+msgstr "Nederlands"
 
+#: default_settings.py:265
 msgid "Azerbaijani--NATIVE-LANGUAGE"
-msgstr "الأزربيجانية--اللغة-الأم"
+msgstr "Azerbaycan dili"
 
+#: default_settings.py:266
 msgid "Armenian--NATIVE-LANGUAGE"
-msgstr "الأرمنية--اللغة-الأم"
+msgstr "Հայոց լեզու"
 
+#: default_settings.py:267
 msgid "Georgian--NATIVE-LANGUAGE"
-msgstr "الجورجية--اللغة-الأم"
+msgstr "ქართული ენა"
 
+#: default_settings.py:268
 msgid "Kazakh--NATIVE-LANGUAGE"
-msgstr "القازاقية--اللغة-الأم"
+msgstr "Қазақ тілі"
 
-msgid "Attachments"
-msgstr "الملحقات"
+msgid "Arabic--NATIVE-LANGUAGE"
+msgstr "العربية"
 
-msgid "Type the title and/or type of attachment"
-msgstr "اكتب العنوان و/أو نوع المرفق"
+msgid "Hebrew--NATIVE-LANGUAGE"
+msgstr "עברית"
 
 #, fuzzy
 msgid "Sort_field"

@@ -424,47 +424,67 @@ msgstr ""
 "מרעיון שאתה עוקב אחריו! <br/><br/> על מנת לבדוק אותו לחץ על הלינק שלהלן. שם "
 "תוכל להחליט האם אתה מעוניין להצטרך לפרויקט."
 
+#: default_settings.py:252
 msgid "Deutsch--NATIVE-LANGUAGE"
-msgstr "גרמנית--שפת אם"
+msgstr "Deutsch"
 
+#: default_settings.py:253
 msgid "English--NATIVE-LANGUAGE"
-msgstr "אנגלית--שפת אם"
+msgstr "English"
 
+#: default_settings.py:254
 msgid "Russian--NATIVE-LANGUAGE"
-msgstr "רוסית--שפת אם"
+msgstr "Русский"
 
+#: default_settings.py:255
 msgid "Ukrainian--NATIVE-LANGUAGE"
-msgstr "אוקראינית--שפת אם"
+msgstr "Українська"
 
+#: default_settings.py:258
 msgid "French--NATIVE-LANGUAGE"
-msgstr "צרפתית--שפת אם"
+msgstr "Français"
 
+#: default_settings.py:259
 msgid "Polish--NATIVE-LANGUAGE"
-msgstr "פולנית--שפת אם"
+msgstr "Polski"
 
+#: default_settings.py:260
 msgid "Spanish--NATIVE-LANGUAGE"
-msgstr "ספרדית--שפת אם"
+msgstr "Español"
 
+#: default_settings.py:261
 msgid "Romanian--NATIVE-LANGUAGE"
-msgstr "רומנית--שפת אם"
+msgstr "Română"
 
+#: default_settings.py:262
 msgid "Belarussian--NATIVE-LANGUAGE"
-msgstr "בלארוסית--שפת אם"
+msgstr "Беларуская"
 
+#: default_settings.py:263
 msgid "Dutch--NATIVE-LANGUAGE"
-msgstr "הולנדית--שפת אם"
+msgstr "Nederlands"
 
+#: default_settings.py:265
 msgid "Azerbaijani--NATIVE-LANGUAGE"
-msgstr "אזרבייג'נית--שפת אם"
+msgstr "Azerbaycan dili"
 
+#: default_settings.py:266
 msgid "Armenian--NATIVE-LANGUAGE"
-msgstr "ארמנית---שפת אם"
+msgstr "Հայոց լեզու"
 
+#: default_settings.py:267
 msgid "Georgian--NATIVE-LANGUAGE"
-msgstr "גאורגית--שפת אם"
+msgstr "ქართული ენა"
 
+#: default_settings.py:268
 msgid "Kazakh--NATIVE-LANGUAGE"
-msgstr "קזחית--שפת אם"
+msgstr "Қазақ тілі"
+
+msgid "Arabic--NATIVE-LANGUAGE"
+msgstr "العربية"
+
+msgid "Hebrew--NATIVE-LANGUAGE"
+msgstr "עברית"
 
 msgid "Attachments"
 msgstr "קבצים מצורפים"

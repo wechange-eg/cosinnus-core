@@ -656,6 +656,12 @@ msgstr "ქართული ენა"
 msgid "Kazakh--NATIVE-LANGUAGE"
 msgstr "Қазақ тілі"
 
+msgid "Arabic--NATIVE-LANGUAGE"
+msgstr "العربية"
+
+msgid "Hebrew--NATIVE-LANGUAGE"
+msgstr "עברית"
+
 #: forms/attached_object.py:70 forms/dashboard.py:66
 msgid "Attachments"
 msgstr "Atașamente"

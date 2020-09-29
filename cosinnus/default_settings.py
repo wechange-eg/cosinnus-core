@@ -267,7 +267,7 @@ LANGUAGES = [
     ('ka', _('Georgian--NATIVE-LANGUAGE')),
     ('kk', _('Kazakh--NATIVE-LANGUAGE')),
     
-    ('ar', _('Arabian--NATIVE-LANGUAGE')),
+    ('ar', _('Arabic--NATIVE-LANGUAGE')),
     ('he', _('Hebrew--NATIVE-LANGUAGE')),
 ]
 
