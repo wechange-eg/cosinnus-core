@@ -266,6 +266,9 @@ LANGUAGES = [
     ('hy', _('Armenian--NATIVE-LANGUAGE')),
     ('ka', _('Georgian--NATIVE-LANGUAGE')),
     ('kk', _('Kazakh--NATIVE-LANGUAGE')),
+    
+    ('ar', _('Arabian--NATIVE-LANGUAGE')),
+    ('he', _('Hebrew--NATIVE-LANGUAGE')),
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
