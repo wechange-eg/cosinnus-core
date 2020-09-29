@@ -1,8 +1,9 @@
 import React, {useState} from "react"
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link} from "@material-ui/core"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faPen, faPlus, faTrashAlt} from "@fortawesome/free-solid-svg-icons"
+import {faPen, faTrashAlt} from "@fortawesome/free-solid-svg-icons"
 import {FormattedMessage} from "react-intl"
+import Cookies from "js-cookie"
 import axios from "axios"
 
 import {Event} from "../../../stores/events/models"

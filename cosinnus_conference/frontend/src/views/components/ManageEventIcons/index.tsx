@@ -4,8 +4,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faPen, faPlus, faTrashAlt} from "@fortawesome/free-solid-svg-icons"
 import {FormattedMessage} from "react-intl"
 import Cookies from "js-cookie"
-import {useStyles} from "./style"
 import axios from "axios"
+
+import {useStyles} from "./style"
 
 import {Event} from "../../../stores/events/models"
 

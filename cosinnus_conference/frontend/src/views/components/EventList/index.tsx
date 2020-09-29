@@ -73,7 +73,9 @@ export function EventList(props: EventListProps) {
           <TabPanel key={day.props.date} value={day.props.date} className={classes.tabPanel}>
             {currentSlots && currentSlots.length > 0 && (
               <div className={classes.section}>
-                <Typography component="h1"><FormattedMessage id="Happening now"/></Typography>
+                <Typography component="h1">
+                  <FormattedMessage id="Happening now"/>
+                </Typography>
                 {currentSlots.map((slot, index) => (
                   <List
                     key={index}
@@ -82,6 +84,19 @@ export function EventList(props: EventListProps) {
                       ["now"]: true,
                     })}
                   >
+                    <ListItem>
+                      <ListItemText primary={formatTime(slot.props.fromDate) + "-" + formatTime(slot.props.toDate)} />
+                      {slot.props.isBreak && slot.props.title && (
+                        <ListItemText primary={slot.props.title} />
+                      ) || (
+                        <ListItemText primary={slot.props.events.length > 1 && (
+                          <Typography component="span">
+                            {slot.props.events.length}&nbsp;
+                            <FormattedMessage id="parallel events" />
+                          </Typography>
+                        )} />
+                      )}
+                    </ListItem>
                     {!slot.props.isBreak && slot.props.events && slot.props.events.map((event) => (
                       renderEventListItem(event)
                     ))}
