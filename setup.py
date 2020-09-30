@@ -56,12 +56,13 @@ setup(
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
         'Django>=2.1.5,<2.2',
-        'MarkupSafe==0.23',
+        'MarkupSafe==1.1',
         'Pillow==6.2.0',
         'Celery==4.2.0',
         
+        'django-allauth==0.42.0',
         'django-annoying==0.7.6',
-        'django-appconf==1.0.2',
+        'django-appconf==1.0.3',
         'django-bootstrap3-datetimepicker-3==2.6.0',
         'django-bootstrap3==11.0.0',
         'django-classy-tags==0.8.0',
@@ -102,7 +103,7 @@ setup(
         'requests==2.20.0',
         'requests-oauthlib==0.8.0',
         'rocketchat-API==0.6.26',
-        'six==1.11.0',
+        'six==1.12.0',
         'sqlparse==0.1.10',
         'python-dateutil==2.4.1',
         'urllib3==1.24.2',

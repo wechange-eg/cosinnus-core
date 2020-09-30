@@ -167,7 +167,13 @@
     		            <h2>{{ announcement.category_text }}</h2>
     		        {% endif %}
     		        {% if announcement.image %}
-    		            <img class="image" src="{{ announcement.static_image_url }}" />
+    		            {% if announcement.url %}
+    		            <a href="{{ announcement.url }}">
+    		            {% endif %}
+    		                <img class="image" src="{{ announcement.static_image_url }}" />
+    		            {% if announcement.url %}
+                        </a>
+                        {% endif %}
     		        {% endif %}
 		            <div class="v2-textfield transparent">
                         {{ announcement.text|textfield }}

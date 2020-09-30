@@ -332,7 +332,17 @@ class LastVisitedMixin(object):
         except Exception as e:
             logger.exception('An unknown error occured while saving the last_visited visit! Exception in extra.', extra={'exception': force_text(e)})
             return None
-    
+
+    def delete_mark_visited(self):
+        """ Deletes all `LastVisited` objects for this object """
+        ct = self.get_content_type_for_last_visited()
+        LastVisitedObject.objects.filter(content_type_id=ct.id, object_id=self.id).delete()
+        return None
+
+    def delete(self, *args, **kwargs):
+        self.delete_mark_visited()
+        super().delete(*args, **kwargs)
+
     def get_content_type_for_last_visited(self):
         return ContentType.objects.get_for_model(self)
 

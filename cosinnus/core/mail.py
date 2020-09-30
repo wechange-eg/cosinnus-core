@@ -169,9 +169,31 @@ def send_html_mail_threaded(to_user, subject, html_content):
         The given `html_content` will be placed inside the notification html template,
         and the style will be a "from-portal" style (instead of a "from-group" style. """
     
-    from cosinnus.templatetags.cosinnus_tags import full_name    
     template = '/cosinnus/html_mail/notification.html'
+    data = get_html_mail_data(to_user, subject, html_content)
+    send_mail_or_fail_threaded(to_user.email, subject, template, data, is_html=True)
+
+
+def render_html_mail(to_user, subject, html_content):
+    """ Renders the HTML that would be used to send an email given the content.
+        Can be used for testing an email. """
     
+    template = '/cosinnus/html_mail/notification.html'
+    data = get_html_mail_data(to_user, subject, html_content)
+    return render_to_string(template, data)
+
+
+def render_notification_item_html_mail(to_user, subject, notification_item_html):
+    """ Renders the HTML that would be used to send an email given the content.
+        Can be used for testing an email. """
+    
+    template = '/cosinnus/html_mail/notification.html'
+    data = get_html_mail_data(to_user, subject, notification_item_html, use_notification_item_html=True)
+    return render_to_string(template, data)
+
+
+def get_html_mail_data(to_user, subject, html_content, use_notification_item_html=False):
+    """ Collects all data needed to fill the HTML email template """
     portal = CosinnusPortal.get_current()
     domain = portal.get_domain()
     portal_image_url = '%s%s' % (domain, static('img/email-header.png'))
@@ -192,12 +214,15 @@ def send_html_mail_threaded(to_user, subject, html_content):
         'origin_url': domain,
         'origin_image_url': portal_image_url,
         
-        'notification_raw_html': mark_safe(replace_non_portal_urls(html_content)), # this is raw-html pastable section
+        'notification_raw_html': None, # this is raw-html pastable section
         'notification_item_html': None,
     }
-    
-    send_mail_or_fail_threaded(to_user.email, subject, template, data, is_html=True)
-    
+    if use_notification_item_html:
+        data['notification_item_html'] = mark_safe(replace_non_portal_urls(html_content))
+    else:
+        data['notification_raw_html'] = mark_safe(replace_non_portal_urls(html_content))
+    return data
+
 
 def get_common_mail_context(request, group=None, user=None):
     """ Collects common context variables for Email templates """
@@ -221,7 +246,6 @@ def get_common_mail_context(request, group=None, user=None):
             'user': user,
         })
     return context
-
 
 
 class MailThread(Thread):

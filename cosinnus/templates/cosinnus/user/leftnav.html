@@ -1,4 +1,4 @@
-{% load i18n static cosinnus_tags %}
+{% load i18n static socialaccount cosinnus_tags %}
 
 {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 	<button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:profile-detail' %}">
@@ -26,7 +26,7 @@
 	        </li>
 	    </ul>
 	</button>
-	
+
 	{% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
 		<button type="button" class="btn w100 btn-{% if view == "edit_profile" %}extra-{% endif %}emphasized fine-space" href="{% url 'cosinnus:profile-edit' %}">
 		    <ul class="media-list">
@@ -66,7 +66,9 @@
     </ul>
 </button>
 
+
 {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL and not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+	{% if request.user.has_usable_password %}
 	<button type="button" class="btn w100 btn-{% if view == "change_password" %}extra-{% endif %}emphasized regular-space" href="{% url 'password_change' %}">
 	    <ul class="media-list">
 	        <li class="media">
@@ -84,47 +86,66 @@
 	        </li>
 	    </ul>
 	</button>
-	
+	{% endif %}
+
 	{% if view == "edit_profile" or view == "delete_profile" %}
-	{% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED and request.user.cosinnus_profile.get_facebook_user_id %}
-		{% captureas label %}{% blocktrans with name=request.user.cosinnus_profile.get_facebook_username %}Your account is currently connected with the Facebook account "{{ name }}". Do you really want to disconnect your Facebook account? This will also revoke all permissions you granted us to your Facebook account.{% endblocktrans %}{% endcaptureas %}
-	    {% captureas title %}{% trans "Disconnect Facebook Account" %}{% endcaptureas %}
-	    {% captureas action %}{% url 'cosinnus:facebook-remove-association' %}{% endcaptureas %}
-	    {% include "cosinnus/modal_box.html" with id="remove-facebook-modal" label=label title=title form_action=action disable_on_submit='true' %}
-	    
-		
-		<button type="button" class="btn w100 btn-emphasized regular-space" data-toggle="modal" data-target="#remove-facebook-modal">
-		    <ul class="media-list">
-		        <li class="media">
-		           <a class="pull-left">
-		                <i class="fa fa-facebook-official"></i>
-		            </a>
-		            <div class="media-body">
-		                {% trans "Disconnect Facebook" %}
-		            </div>
-		        </li>
-		    </ul>
-		</button>
+		{% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED and request.user.cosinnus_profile.get_facebook_user_id %}
+			{% captureas label %}{% blocktrans with name=request.user.cosinnus_profile.get_facebook_username %}Your account is currently connected with the Facebook account "{{ name }}". Do you really want to disconnect your Facebook account? This will also revoke all permissions you granted us to your Facebook account.{% endblocktrans %}{% endcaptureas %}
+		    {% captureas title %}{% trans "Disconnect Facebook Account" %}{% endcaptureas %}
+		    {% captureas action %}{% url 'cosinnus:facebook-remove-association' %}{% endcaptureas %}
+		    {% include "cosinnus/modal_box.html" with id="remove-facebook-modal" label=label title=title form_action=action disable_on_submit='true' %}
+
+			<button type="button" class="btn w100 btn-emphasized regular-space" data-toggle="modal" data-target="#remove-facebook-modal">
+			    <ul class="media-list">
+			        <li class="media">
+			           <a class="pull-left">
+			                <i class="fa fa-facebook-official"></i>
+			            </a>
+			            <div class="media-body">
+			                {% trans "Disconnect Facebook" %}
+			            </div>
+			        </li>
+			    </ul>
+			</button>
+		{% endif %}
 	{% endif %}
-	{% endif %}
-	
-	{% if view == "edit_profile" or view == "delete_profile" %}
-	<button type="button" class="btn w100 btn-{% if view == "delete_profile" %}extra-{% endif %}emphasized regular-space" href="{% url 'cosinnus:profile-delete' %}">
-	    <ul class="media-list">
-	        <li class="media">
-	           <a class="pull-left">
-	                <i class="fa fa-times"></i>
-	            </a>
-	            {% if view == "delete_profile" %}
-	                <a class="pull-right" href="#">
-	                    <i class="fa fa-caret-right"></i>
-	                </a>
-	            {% endif %}
-	            <div class="media-body">
-	                {% trans "Delete profile" %}
-	            </div>
-	        </li>
-	    </ul>
-	</button>
-	{% endif %}
+{% endif %}
+
+
+{% if SETTINGS.COSINNUS_IS_OAUTH_CLIENT %}
+{% get_providers as socialaccount_providers %}
+{% for provider in socialaccount_providers %}
+<button type="button" class="btn w100 btn-{% if view == "socialaccount_connections" %}extra-{% endif %}emphasized regular-space" href="{% url 'socialaccount_connections' %}?provider={{ provider.id }}">
+    <ul class="media-list">
+        <li class="media">
+           <a class="pull-left">
+                <i class="fas fa-lock"></i>
+            </a>
+            <div class="media-body">
+            	{% blocktrans with provider=provider.id|upper %}{{ provider}}-Account{% endblocktrans%}
+            </div>
+        </li>
+    </ul>
+</button>
+{% endfor %}
+{% endif %}
+
+{% if view == "edit_profile" or view == "delete_profile" %}
+<button type="button" class="btn w100 btn-{% if view == "delete_profile" %}extra-{% endif %}emphasized regular-space" href="{% url 'cosinnus:profile-delete' %}">
+    <ul class="media-list">
+        <li class="media">
+           <a class="pull-left">
+                <i class="fa fa-times"></i>
+            </a>
+            {% if view == "delete_profile" %}
+                <a class="pull-right" href="#">
+                    <i class="fa fa-caret-right"></i>
+                </a>
+            {% endif %}
+            <div class="media-body">
+                {% trans "Delete profile" %}
+            </div>
+        </li>
+    </ul>
+</button>
 {% endif %}

@@ -1,3 +1,5 @@
+@import 'variables';
+@import 'extra_variables';
 @import 'settings';
 @import 'foundation-emails';
 @import 'wechange_variables';
@@ -12,7 +14,7 @@
 @import 'notification';
 @import 'summary_group';
 @import 'summary_item';
-@import 'nested_summary_item';
+@import 'extra_scss';
 
 // Global Styles
 // -------------

@@ -60,6 +60,7 @@ from cosinnus.models.tagged import LikeableObjectMixin, LastVisitedMixin
 import datetime
 from django.contrib.contenttypes.models import ContentType
 
+
 logger = logging.getLogger('cosinnus')
 
 # this reads the environment and inits the right locale
@@ -763,6 +764,14 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     nextcloud_groupfolder_id = models.PositiveIntegerField(_('Nextcloud Groupfolder ID'),
         unique=True, blank=True, null=True,
         help_text='The boolean internal nextcloud id for the groupfolder. Only set once a groupfolder is created.')
+
+    is_conference = models.BooleanField(_('Is conference'),
+        help_text=_('If a group is marked as conference it is possible to auto-generate accounts for workshop participants'),
+        default=False)
+    conference_is_running = models.BooleanField(_('Conference is running'),
+        help_text=_('Determins whether a group that is marked as conference is running'),
+        default=False)
+
     
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
@@ -954,7 +963,18 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         qs = get_user_model().objects.filter(id__in=self.invited_pendings)
         qs = filter_active_users(qs)
         return qs
-    
+
+    @property
+    def is_group_and_conference(self):
+        return self.type == self.TYPE_SOCIETY and self.is_conference
+
+    @property
+    def conference_members(self):
+        from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
+        if self.is_group_and_conference:
+            return self.users.filter(cosinnus_profile__settings__contains=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
+        return []
+
     def get_admin_contact_url(self):
         if 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
             return ''
@@ -1126,6 +1146,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
                     'size': size,
                 })
             except (InvalidImageFormatError, OSError, Exception):
+                thumbnail = None
                 if settings.DEBUG:
                     raise
             

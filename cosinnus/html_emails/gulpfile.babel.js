@@ -18,9 +18,6 @@ const $ = plugins();
 // Look for the --production flag
 const PRODUCTION = !!(yargs.argv.production);
 
-// Declar var so that both AWS and Litmus task can use it.
-var CONFIG;
-
 var replace = require('gulp-replace');
 
 // Build the "dist" folder by running all of the above tasks
@@ -29,11 +26,11 @@ gulp.task('build',
 
 // Build emails, run the server, and watch for file changes
 gulp.task('default',
-  gulp.series('build', server, watch));
-
-// Build emails, then send to litmus
-gulp.task('litmus',
-  gulp.series('build', creds, aws, litmus));
+  gulp.series('build'));
+  
+// Build emails, run the server, and watch for file changes
+gulp.task('dev',
+  gulp.series('build', exportTemplates, server, watch));
 
 // Build emails, then zip
 gulp.task('zip',
@@ -86,7 +83,7 @@ function images() {
 // Inline CSS and minify HTML
 function inline() {
   return gulp.src('dist/**/*.html')
-    .pipe($.if(PRODUCTION, inliner('dist/css/app.css')))
+    .pipe(inliner('dist/css/app.css'))
     .pipe(gulp.dest('dist'));
 }
 
@@ -101,7 +98,24 @@ function cellspaceClasses() {
     
     .pipe(replace(/\s+</gim, '\n<'))  // remove whitespaces between tags for newlines
     .pipe(replace(/<style>[\s\S]+<\/style>/gim, ''))
+    
+    // there two lines are used to abuse the inliner to print out the content of a SCSS class inline anywhere into the HTML
+    // example usage:     </style><inlinemagicreplacer class="primary-color"></inlinemagicreplacer><style no-scrub="1">
+    .pipe(replace(/<\/style><inlinemagicreplacer[\s\S]+?style="/gim, '')) 
+    .pipe(replace('"></inlinemagicreplacer><style no-scrub="1">', ''))
+    
     .pipe(gulp.dest('dist'));
+}
+
+// add cellspacing/cellpadding onto tables that have padding classes to support Outlook
+function exportTemplates() {
+  return gulp.src([
+        'dist/summary_group.html',
+        'dist/summary_item.html',
+        'dist/notification.html',
+        'dist/digest.html'
+    ])
+    .pipe(gulp.dest('./../templates/cosinnus/html_mail/'));
 }
 
 // Start a server with LiveReload to preview the site in
@@ -114,9 +128,8 @@ function server(done) {
 
 // Watch for file changes
 function watch() {
-  gulp.watch('src/pages/**/*.html').on('change', gulp.series(pages, inline, cellspaceClasses, browser.reload));
-  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(resetPages, pages, inline, cellspaceClasses, browser.reload));
-  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(resetPages, sass, pages, inline, cellspaceClasses, browser.reload));
+  gulp.watch('src/**/*.html').on('change', gulp.series(clean, pages, sass, images, inline, cellspaceClasses, exportTemplates, browser.reload));
+  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(clean, pages, sass, images, inline, cellspaceClasses, exportTemplates, browser.reload));
   gulp.watch('src/assets/img/**/*').on('change', gulp.series(images, browser.reload));
 }
 
@@ -138,47 +151,6 @@ function inliner(css) {
     });
 
   return pipe();
-}
-
-// Ensure creds for Litmus are at least there.
-function creds(done) {
-  var configPath = './config.json';
-  try { CONFIG = JSON.parse(fs.readFileSync(configPath)); }
-  catch(e) {
-    beep();
-    console.log('[AWS]'.bold.red + ' Sorry, there was an issue locating your config.json. Please see README.md');
-    process.exit();
-  }
-  done();
-}
-
-// Post images to AWS S3 so they are accessible to Litmus test
-function aws() {
-  var publisher = !!CONFIG.aws ? $.awspublish.create(CONFIG.aws) : $.awspublish.create();
-  var headers = {
-    'Cache-Control': 'max-age=315360000, no-transform, public'
-  };
-
-  return gulp.src('./dist/assets/img/*')
-    // publisher will add Content-Length, Content-Type and headers specified above
-    // If not specified it will set x-amz-acl to public-read by default
-    .pipe(publisher.publish(headers))
-
-    // create a cache file to speed up consecutive uploads
-    //.pipe(publisher.cache())
-
-    // print upload updates to console
-    .pipe($.awspublish.reporter());
-}
-
-// Send email to Litmus for testing. If no AWS creds then do not replace img urls.
-function litmus() {
-  var awsURL = !!CONFIG && !!CONFIG.aws && !!CONFIG.aws.url ? CONFIG.aws.url : false;
-
-  return gulp.src('dist/**/*.html')
-    .pipe($.if(!!awsURL, $.replace(/=('|")(\/?assets\/img)/g, "=$1"+ awsURL)))
-    .pipe($.litmus(CONFIG.litmus))
-    .pipe(gulp.dest('dist'));
 }
 
 // Copy and compress into Zip

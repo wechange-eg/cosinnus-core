@@ -12,7 +12,7 @@ from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    OrganisationViewSet, UserView
+    OrganisationViewSet, UserView, oauth_user, oauth_profile
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
     user_dashboard, ui_prefs, administration, organization, user_dashboard_announcement
@@ -107,6 +107,7 @@ urlpatterns = [
     url(r'^housekeeping/create_map_test_entities/(?P<count>\d+)/', housekeeping.create_map_test_entities, name='housekeeping-create-map-test-entities'),
     url(r'^housekeeping/reset_user_tos_flags/', housekeeping.reset_user_tos_flags, name='housekeeping-reset-user-tos-flags'),
     url(r'^housekeeping/send_testmail/', housekeeping.send_testmail, name='housekeeping-send-testmail'),
+    url(r'^housekeeping/print_testmail/', housekeeping.print_testmail, name='housekeeping-print-testmail'),
     url(r'^housekeeping/print_settings/', housekeeping.print_settings, name='housekeeping-print-settings'),
     url(r'^housekeeping/group_storage_info/', housekeeping.group_storage_info, name='housekeeping-group-storage-info'),
     url(r'^housekeeping/group_storage_report/', housekeeping.group_storage_report_csv, name='housekeeping-group-storage-report'),
@@ -207,6 +208,10 @@ for url_key in group_model_registry:
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/$' % url_key, 'cms.group_microsite', name=prefix+'group-microsite'),
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/edit/$' % url_key, 'cms.group_microsite_edit', name=prefix+'group-microsite-edit'),
         url(r'^%s/(?P<group>[^/]+)/members/$' % url_key, group.group_detail, name=prefix+'group-detail'),
+        url(r'^%s/(?P<group>[^/]+)/conference-management/$' % url_key, group.conference_management, name=prefix+'conference-management'),
+        url(r'^%s/(?P<group>[^/]+)/workshop-participants-upload/$' % url_key, group.workshop_participants_upload, name=prefix+'workshop-participants-upload'),
+        url(r'^%s/(?P<group>[^/]+)/workshop-participants-upload-skeleton/$' % url_key, group.workshop_participants_upload_skeleton, name=prefix+'workshop-participants-upload-skeleton'),
+        url(r'^%s/(?P<group>[^/]+)/workshop-participants-download/$' % url_key, group.workshop_participants_download, name=prefix+'workshop-participants-download'),
         url(r'^%s/(?P<group>[^/]+)/members/recruit/$' % url_key, group.group_user_recruit, name=prefix+'group-user-recruit'),
         url(r'^%s/(?P<group>[^/]+)/members/recruitdelete/(?P<id>\d+)/$' % url_key, group.group_user_recruit_delete, name=prefix+'group-user-recruit-delete'),
         #url(r'^%s/(?P<group>[^/]+)/members/map/$' % url_key, group.group_members_map', name=prefix+'group-members-map'),
@@ -251,8 +256,15 @@ if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
         url(r'api/v2/rocket-export/', MessageExportView.as_view()),
     ]
 
+if getattr(settings, 'COSINNUS_EMPTY_FILE_DOWNLOAD_NAME', None):
+    urlpatterns += [
+        url(f'{settings.COSINNUS_EMPTY_FILE_DOWNLOAD_NAME}', common.empty_file_download),
+    ]
+
 urlpatterns += [
     url(r'^o/me/', UserView.as_view()),
+    url(r'^o/user/', oauth_user),
+    url(r'^o/profile/', oauth_profile),
     url(r'api/v2/docs/', get_swagger_view()),
     url(r'api/v2/', include(router.urls)),
 ]

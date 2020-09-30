@@ -82,7 +82,10 @@ STATICFILES_FINDERS = (
 
 MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
-    'cosinnus.core.middleware.cosinnus_middleware.PreventAnonymousUserCookieSessionMiddleware',
+     # enable this middleware to prevent all cookies for non-logged in users. this breaks
+     # language switching while not logged in!
+     #'cosinnus.core.middleware.cosinnus_middleware.PreventAnonymousUserCookieSessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.MovedTemporarilyRedirectFallbackMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     
@@ -188,6 +191,8 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     
     _INSTALLED_APPS += [
         'cosinnus',
+        'cosinnus_oauth_client',
+        'cosinnus_cloud',
         'cosinnus_etherpad',
         'cosinnus_event',
         'cosinnus_file',
@@ -206,6 +211,11 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     _INSTALLED_APPS += [
         'announcements',
         'ajax_forms',
+      
+        # SSO
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
         
         # 'django_extensions',
         'django_filters',
@@ -367,7 +377,7 @@ WAGTAIL_ENABLE_UPDATE_CHECK = False
     For cosinnus-specific internal default settings, check cosinnus/conf.py!
 """
 
-AUTHENTICATION_BACKENDS = ['cosinnus.backends.EmailAuthBackend',]
+AUTHENTICATION_BACKENDS = ['cosinnus.backends.EmailAuthBackend', 'allauth.account.auth_backends.AuthenticationBackend']
 
 # select2 render static files
 AUTO_RENDER_SELECT2_STATICS = False
@@ -520,7 +530,7 @@ PIWIK_SITE_ID = None
 # Cookie settings. We will let cookies expire browser-session-based for anonymous users, and keep them
 # for 30 days for logged in users
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS = 60 * 60 * 24 * 60 # 60 days
+COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS = 30 * 60 * 24 * 60 # 30 days
 
 # honeypot field name shouldn't be too obvious, but also not trigger browsers' autofill
 HONEYPOT_FIELD_NAME = 'phnoenumber_8493'
@@ -578,5 +588,18 @@ CAPTCHA_CHALLENGE_FUNCT = 'cosinnus.utils.captcha.dissimilar_random_char_challen
 CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
 CAPTCHA_TIMEOUT = 30
 
+# enables rocketchat if True
 COSINNUS_ROCKET_ENABLED = False
 COSINNUS_ROCKET_EXPORT_ENABLED = False
+
+# enables the read-only mode for the legacy postman messages system if True
+# and shows an "archived messages button" in the user profile
+COSINNUS_POSTMAN_ARCHIVE_MODE = False 
+
+# SSO default settings for any client portal
+ACCOUNT_ADAPTER = 'cosinnus_oauth_client.views.CosinusAccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'cosinnus_oauth_client.views.CosinusSocialAccountAdapter'
+SOCIALACCOUNT_AUTO_SIGNUP = False
+SOCIALACCOUNT_FORMS = {'signup': 'cosinnus_oauth_client.forms.SocialSignupProfileSettingsForm'}
+SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
+

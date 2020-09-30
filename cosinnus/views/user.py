@@ -646,13 +646,23 @@ def logout_api(request):
     return JSONResponse({})
 
 
+class CosinnusPasswordChangeView(PasswordChangeView):
+    """ Overridden view that sends a password changed signal """
+    
+    def form_valid(self, form):
+        ret = super().form_valid(form)
+        # send a password changed signal
+        signals.user_password_changed.send(sender=self, user=self.request.user)
+        return ret
+
+
 def password_change_proxy(request, *args, **kwargs):
     """ Proxies the django.contrib.auth view. Only lets a user see the form or POST to it
         if the user is not a member of an integrated portal. """
     user = request.user
     if user.is_authenticated and check_user_integrated_portal_member(user):
         return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_changed_page.html')
-    return PasswordChangeView.as_view(*args, **kwargs)(request)
+    return CosinnusPasswordChangeView.as_view(*args, **kwargs)(request)
 
 
 class CosinnusPasswordResetForm(PasswordResetForm):

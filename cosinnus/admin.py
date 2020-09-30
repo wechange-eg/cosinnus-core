@@ -140,10 +140,11 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
                 'move_groups_to_current_portal', 'move_groups_to_current_portal_and_message_users']
     list_display = ('name', 'slug', 'portal', 'public', 'is_active',)
     list_filter = ('portal', 'public', 'is_active',)
-    search_fields = ('name', )
+    search_fields = ('name', 'slug', 'id',)
     prepopulated_fields = {'slug': ('name', )}
     readonly_fields = ('created', 'last_modified')
     raw_id_fields = ('parent',)
+    exclude = ('is_conference', 'conference_is_running')
     
     def convert_to_society(self, request, queryset):
         """ Converts this CosinnusGroup's type """
@@ -296,6 +297,7 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
     
     actions = ['convert_to_project', 'move_society_and_subprojects_to_portal', 
                 'move_society_and_subprojects_to_portal_and_message_users']
+    exclude = None
     
     def get_actions(self, request):
         actions = super(CosinnusSocietyAdmin, self).get_actions(request)
@@ -475,6 +477,8 @@ class UserHasLoggedInFilter(admin.SimpleListFilter):
 class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
     actions = ['deactivate_users', 'export_as_csv', 'log_in_as_user']
+    if settings.COSINNUS_ROCKET_ENABLED:
+        actions += ['force_sync_rocket_user', 'make_user_rocket_admin']
     list_display = ('email', 'is_active', 'date_joined', 'has_logged_in', 'tos_accepted', 'username', 'first_name', 'last_name', 'is_staff', )
     list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,]
     
@@ -514,6 +518,30 @@ class UserAdmin(DjangoUserAdmin):
         user.backend = 'cosinnus.backends.EmailAuthBackend'
         django_login(request, user)
     
+    if settings.COSINNUS_ROCKET_ENABLED:
+        def force_sync_rocket_user(self, request, queryset):
+            count = 0
+            from cosinnus_message.rocket_chat import RocketChatConnection, delete_cached_rocket_connection
+            rocket = RocketChatConnection()
+            for user in queryset:
+                rocket.users_update(user, force_user_update=True, update_password=True)
+                delete_cached_rocket_connection(user)
+                count += 1
+            message = _('%d Users were synchronized successfully.') % count
+            self.message_user(request, message)
+        force_sync_rocket_user.short_description = _('Re-synchronize RocketChat user-account (will log users out of RocketChat!)')
+        
+        def make_user_rocket_admin(self, request, queryset):
+            count = 0
+            from cosinnus_message.rocket_chat import RocketChatConnection
+            rocket = RocketChatConnection()
+            for user in queryset:
+                rocket.rocket.users_update(user_id=rocket.get_user_id(user), roles=['user', 'admin'])
+                count += 1
+            message = _('%d Users were made RocketChat admins.') % count
+            self.message_user(request, message)
+        make_user_rocket_admin.short_description = _('Make user RocketChat admin')
+        
 
 admin.site.unregister(USER_MODEL)
 admin.site.register(USER_MODEL, UserAdmin)

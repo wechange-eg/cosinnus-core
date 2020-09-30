@@ -1,0 +1,121 @@
+{% load i18n socialaccount cosinnus_tags %}
+{% get_social_accounts request.user as accounts %}
+
+{% if form.accounts and provider in accounts %}
+    {% for base_account in form.accounts %}
+        {% if base_account.provider == provider %}
+        <div class="content-box">
+            <legend>{% blocktrans with provider=provider|upper %}Edit {{ provider }} account {% endblocktrans %}</legend>
+            <div class="textfield transparent">
+                <p>{% blocktrans with provider=provider|upper %} You connected your account with your account on {{ provider }}. To change {{ provider }} account data (e.g. password or email address) you have to visit the account settings on the {{ provider }} website. {% endblocktrans %}</p>
+            </div>
+            {% if provider == SETTINGS.COSINNUS_OAUTH_SERVER_PROVIDER_NAME %}
+            <button class="pull-right btn btn-emphasized btn-autosize" target="_blank" href="{{ SETTINGS.COSINNUS_OAUTH_SERVER_BASEURL }}/profile/edit/" >
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <div class="media-body">
+                            {% blocktrans with provider=provider|upper %}Go to {{ provider }} account settings{% endblocktrans %}
+                        </div>
+                    </li>
+                 </ul>
+            </button>
+            {% endif %}
+        </div>
+
+        <div class="content-box">
+            <legend>{% trans 'Remove Connection' %}</legend>
+            <div class="textfield transparent">
+
+                {% if request.user.has_usable_password %}
+                <p>{% blocktrans with provider=provider %}When you remove the connection you cannot login to this website via {{ provider }}. Instead you have to use your email address and password. {% endblocktrans %}</p>
+                {% captureas modal_disconnect_provider %}userModal_disconnect_{{ provider }}{% endcaptureas %}
+
+                <button type="button" class="pull-right btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#{{modal_disconnect_provider}}">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                    <i class="fas fa-unlink"></i>
+                                </a>
+                            <div class="media-body">
+                                {% trans "Disconnect Accounts" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+
+                {% captureas label %}
+                {% trans "Do you really want to disconnect your account account ?" %}
+                {% if form.non_field_errors %}
+                <div id="errorMsg">{{ form.non_field_errors }}</div>
+                {% endif %}
+                <input type="hidden" id="provider" name="provider" value="{{ provider }}">
+                {% endcaptureas %}
+                {% captureas title %}{% trans "Disconnect Accounts" %}{% endcaptureas %}
+                {% captureas action %}{% url 'socialaccount_connections' %}{% endcaptureas %}
+                {% include "cosinnus/modal_box.html" with id=modal_disconnect_provider title_icon="fas fa-unlink" label=label form_action=action submit_name="account" submit_value=base_account.id %}
+
+                {% else %}
+                <p>{% blocktrans with provider=provider|upper portal_name=SETTINGS.COSINNUS_PORTAL_NAME %}Do you want to remove the connection between {{ portal_name }} and {{ provider }}? To do that you have to set a password for your {{ portal_name }} account first.{% endblocktrans %}</p>
+                <button class="pull-right btn btn-emphasized btn-autosize" href="{% url 'account_set_password' %}?provider={{ provider }}" >
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fas fa-key"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans 'Set Password' %}
+                            </div>
+                        </li>
+                     </ul>
+                </button>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+{% else %}
+     <div class="content-box">
+        <legend>{% blocktrans with provider=provider|upper %}Connect your Account with {{ provider }}{% endblocktrans %}</legend>
+        <div class="textfield transparent">
+        {% blocktrans with provider=provider|upper %} If you already have an account on {{ provider }} you can connect both accounts here. After that you only have to login on {{ provider }} and are also logged in here.{% endblocktrans %}
+        </div>
+        {% captureas modal_connect_provider %}userModal_connect_{{ provider }}{% endcaptureas %}
+        <button type="button" class="pull-right btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#{{modal_connect_provider}}">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                            <i class="fas fa-link"></i>
+                        </a>
+                    <div class="media-body">
+                        {% trans "Connect Accounts" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+    </div>
+    {% captureas title %}
+    {% blocktrans with provider=provider|upper %}Connect Account with {{ provider }}{% endblocktrans %}
+    {% endcaptureas %}
+    {% captureas label %}
+    {% blocktrans with provider=provider|upper %} Do you really want to connect your account with the one on {{ provider }} ? {% endblocktrans %}
+    {% endcaptureas %}
+    {% captureas custom_button_html%}
+    <button type="button" class="btn btn-emphasized" data-dismiss="modal" href="{% provider_login_url provider process="connect" %}&next={{request.path}}?provider={{ provider }}">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fas fa-link"></i>
+                </a>
+                <div class="media-body">
+                    {% trans 'Connect Accounts' %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    {% endcaptureas %}
+    {% include "cosinnus/modal_box.html" with id=modal_connect_provider label=label custom_button_html=custom_button_html title=title title_icon="fas fa-link" hide_submit_button=True hide_cancel_button=True %}
+{% endif %}
+

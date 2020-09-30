@@ -10,7 +10,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured
 from django.http.response import  HttpResponseNotFound, \
     HttpResponseForbidden, HttpResponseServerError, HttpResponseNotAllowed, \
-    HttpResponseBadRequest, JsonResponse
+    HttpResponseBadRequest, JsonResponse, HttpResponse
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _, LANGUAGE_SESSION_KEY
@@ -101,6 +101,12 @@ switch_language = SwitchLanguageView.as_view()
 
 def cosinnus_login(request, **kwargs):
     """ Wraps the django login view to set the "wp_user_logged_in" cookie on logins """
+    
+    # use the sso login form on SSO redirect-logins
+    if getattr(settings, 'COSINNUS_IS_OAUTH_PROVIDER', False) \
+            and request.GET.get('next', '').startswith('/o/authorize/'):
+        kwargs['template_name'] = 'cosinnus/registration/login_sso_provider.html'
+    
     response = LoginView.as_view(**kwargs)(request)  #login(request, **kwargs)
     if request.method == 'POST' and request.user.is_authenticated:
         response.set_cookie('wp_user_logged_in', 1, 60*60*24*30) # 30 day expiry
@@ -328,6 +334,11 @@ def get_metadata_from_url(request):
     return JsonResponse(data)
     
 
-
+def empty_file_download(request, **kwargs):
+    """ Serves an empty file with the filename given as `COSINNUS_EMPTY_FILE_DOWNLOAD_NAME`.
+        Can be used to quickly make a file available for a DNS server check, e.g. for Mailjet. """
+    response = HttpResponse('', content_type="application/text")
+    response['Content-Disposition'] = 'attachment; filename="%s"' % settings.COSINNUS_EMPTY_FILE_DOWNLOAD_NAME
+    return response
 
         

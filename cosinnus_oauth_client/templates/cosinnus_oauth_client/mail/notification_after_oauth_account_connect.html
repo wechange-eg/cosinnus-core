@@ -1,0 +1,8 @@
+{% load i18n cosinnus_tags %}{% blocktrans with user_name=user|full_name_force %}Hi {{ user_name }},
+
+Your {{ site_name }} account has been connected with your {{ provider }} Account. Now you can login on {{ site_name }} with just one click.
+
+If you connected your accounts you don't need to do anything. If not please contact the support.
+
+
+Your {{ site_name }} Team{% endblocktrans %}

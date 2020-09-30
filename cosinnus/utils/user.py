@@ -24,6 +24,7 @@ from dateutil import parser
 import datetime
 import pytz
 
+
 _CosinnusPortal = None
 
 logger = logging.getLogger('cosinnus')
@@ -161,7 +162,60 @@ def get_user_query_filter_for_search_terms(terms):
         
     return q
         
-        
+
+# very similar to create_user but uses UserCreateForm from django.contrib.auth as the one from cosinnus.forms.user requires a captcha
+def create_base_user(email, username=None, password=None, first_name=None, last_name=None):
+
+    from django.contrib.auth.forms import UserCreationForm
+    from cosinnus.models.profile import get_user_profile_model
+    from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal, MEMBERSHIP_MEMBER
+    from django.contrib.auth import get_user_model
+    from django.core.exceptions import ObjectDoesNotExist
+
+    try:
+        user_model = get_user_model()
+        user_model.objects.get(email=email)
+        logger.warning('Manual user creation failed because email already exists!')
+        return False
+    except ObjectDoesNotExist:
+        pass
+
+    if not password:
+        password = get_random_string()
+
+    user_data = {
+        'username': username or get_random_string(),
+        'password1': password,
+        'password2': password
+    }
+
+    form = UserCreationForm(user_data)
+    if form.is_valid():
+        user = form.save()
+    else:
+        logger.warning('Manual user creation failed because of form errors!', extra={'data': data, 'form-errors': form.errors})
+        return False
+
+    user.email = email
+    if not username:
+        user.username = user.id
+    if first_name:
+        user.first_name = first_name
+    if last_name:
+        user.last_name = last_name
+    user.backend = 'cosinnus.backends.EmailAuthBackend'
+    user.save()
+
+    CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(),
+                                                   user=user, defaults={'status': MEMBERSHIP_MEMBER})
+
+    profile = get_user_profile_model()._default_manager.get_for_user(user)
+    profile.settings['tos_accepted'] = False
+    profile.save()
+
+    return user
+
+
 def create_user(email, username=None, first_name=None, last_name=None, tos_checked=True):
     """ Creates a user with a random password, and adds proper PortalMemberships for this portal.
         @param email: Email is required because it's basically our pk
@@ -169,7 +223,7 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
         @param tos_checked: Set to False if the user should have to check the Terms of Services upon first login.
         @return: A <USER_MODEL> instance if creation successful, False if failed to create (was the username taken?)
     """
-    from cosinnus.forms.user import UserCreationForm 
+    from cosinnus.forms.user import UserCreationForm
     from cosinnus.models.profile import get_user_profile_model # leave here because of cyclic imports
     
     pwd = get_random_string()

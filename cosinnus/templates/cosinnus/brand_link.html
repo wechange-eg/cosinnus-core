@@ -3,3 +3,13 @@
 <a class="navbar-brand" title="{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}" href="{% if SETTINGS.COSINNUS_ROOT_URL %}{{ SETTINGS.COSINNUS_ROOT_URL }}{% else %}/{% endif %}">
     {% include 'cosinnus/brand.html' %}
 </a>
+
+{% comment %}  
+
+This is a button many portals wish to have in their navbar, add it in your base repo.
+
+<a class="nav-button nav-header-textlink hidden-during-search" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "My Dashboard" %}">
+    {% trans "My Dashboard" %}
+</a>
+
+{% endcomment %}

@@ -14,7 +14,13 @@
                 </button>
                 {% endif %}
                 <h4 class="modal-title no-select" id="{{ id }}Label">
-                    <i class="fa {% if title_icon %}{{ title_icon }}{% else %}fa-eraser{% endif %}"></i>
+                    {% if title_icon_full_class %}
+                    <i class="{{ title_icon_full_class }}"></i>
+                    {% elif title_icon %}
+                    <i class="fa {{ title_icon }}"></i>
+                    {% else %}
+                    <i class="fa fa-eraser"></i>
+                    {% endif %}
                     {{ title }}
                 </h4>
             </div>
@@ -29,7 +35,7 @@
             {% if not hide_footer %}
             <div class="modal-footer">
                 {% if not hide_submit_button %}
-                <button type="submit" id="{{ id }}_btnsubmit" class="submit-btn-x btn btn-emphasized {% if large_buttons %}btn-autosize{% endif %}" {% if not form_action %}data-dismiss="modal"{% endif %} {% if disable_on_submit %}onclick="setTimeout(function(){$('#{{ id }}_btnsubmit').attr('disabled', true);},50);"{% endif %}>
+                <button type="submit" id="{{ id }}_btnsubmit" class="submit-btn-x btn btn-emphasized {% if large_buttons %}btn-autosize{% endif %}" {% if not form_action %}data-dismiss="modal"{% endif %} {% if disable_on_submit %}onclick="setTimeout(function(){$('#{{ id }}_btnsubmit').attr('disabled', true);},50);"{% endif %} {% if submit_name %}name="{{ submit_name }}"{% endif%} {% if submit_value %}value="{{ submit_value }}"{% endif%}>
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#">

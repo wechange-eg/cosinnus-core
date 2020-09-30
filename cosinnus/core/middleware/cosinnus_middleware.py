@@ -256,12 +256,12 @@ class MovedTemporarilyRedirectFallbackMiddleware(RedirectFallbackMiddleware):
 class PreventAnonymousUserCookieSessionMiddleware(SessionMiddleware):
     """ Replace this with django's SessionMiddleware to prevent anonymous users
         from receiving a session cookie. """
-    
+
     def process_response(self, request, response):
         response = super(PreventAnonymousUserCookieSessionMiddleware, self).process_response(request, response)
         # exempt the password reset views, as they require an anonymous user session to work
         if not request.path.startswith('/reset/') and not request.path.startswith('/password_reset/') \
-                and not request.path.startswith('/administration/'):
+                and not request.path.startswith('/administration/') and not request.path.startswith('/accounts/'):
             if not request.user.is_authenticated and settings.SESSION_COOKIE_NAME in response.cookies:
                 del response.cookies[settings.SESSION_COOKIE_NAME]
         return response

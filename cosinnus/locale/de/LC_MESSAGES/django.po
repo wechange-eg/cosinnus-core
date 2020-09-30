@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-08 15:24+0200\n"
-"PO-Revision-Date: 2020-06-08 15:25+0100\n"
+"POT-Creation-Date: 2020-08-20 10:39+0200\n"
+"PO-Revision-Date: 2020-06-23 13:18+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -406,7 +406,6 @@ msgid "View invitation"
 msgstr "Einladung ansehen"
 
 #, python-format
-#| msgid "%(sender_name)s tagged you in"
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s hat dich eingeladen"
 
@@ -596,6 +595,27 @@ msgstr ""
 msgid "Users"
 msgstr "Benutzer_innen"
 
+msgid "Please remove the whitespace from '{}'"
+msgstr "Bitte entferne die Leerzeichen aus '{}'"
+
+msgid ""
+"Names must be unique. You added '{}' more then once to your CSV. Please "
+"change the name."
+msgstr ""
+"Die Namen müssen eindeutig sein. '{}' erscheint mehrfach vergeben zu sein. "
+"Bitte ändern sie den Namen."
+
+msgid "Can't find workshop with slug '{}'"
+msgstr "Ein Workshop mit dem Slug '{}' existiert nicht."
+
+msgid "This is not a valid CSV File"
+msgstr "Die ist keine valide CSV-Datei."
+
+msgid "CSV could not be parsed. Please use ',' or ';' as delimiter."
+msgstr ""
+"Das CSV konnte nicht verarbeitet werden. Bitte benutzen Sie ',' oder ';' als "
+"Trennzeichen."
+
 msgid "Name"
 msgstr "Name"
 
@@ -655,6 +675,9 @@ msgstr "Klicke den folgenden Link, um keine E-Mails mehr von uns zu erhalten:"
 
 msgid "Unsubscribe"
 msgstr "Abbestellen"
+
+msgid "My Dashboard"
+msgstr "Mein Dashboard"
 
 msgid "Tiny (50 x *)"
 msgstr "Tiny (50 x *)"
@@ -957,6 +980,22 @@ msgstr "Nextcloud Gruppenordner-Name"
 msgid "Nextcloud Groupfolder ID"
 msgstr "Nextcloud Gruppenordner-ID"
 
+msgid "Is conference"
+msgstr "Ist Tagung"
+
+msgid ""
+"If a group is marked as conference it is possible to auto-generate accounts "
+"for workshop participants"
+msgstr ""
+"Wenn ein Gruppe als Tagung makiert wurde, ist es möglich Accounts für alle "
+"Teilnehmer automatisch zu generieren."
+
+msgid "Conference is running"
+msgstr "Die Tagung läuft gerade"
+
+msgid "Determins whether a group that is marked as conference is running"
+msgstr "Entscheidet darüber ob eine Tagung als 'gerade laufend' makiert wird."
+
 msgid "Parent Group"
 msgstr "Übergeordnete Gruppe"
 
@@ -1248,7 +1287,7 @@ msgid "Announcement"
 msgstr "Ankündigung"
 
 msgid "Maintenance"
-msgstr "Wartunsarbeiten"
+msgstr "Wartungsarbeiten"
 
 msgid "Update"
 msgstr "Update"
@@ -1636,6 +1675,9 @@ msgstr "Aktueller Willkommens-E-Mail Text"
 
 msgid "Send yourself a Test-Mail"
 msgstr "Schicke eine Test-Mail an dich selbst"
+
+msgid "Conference Management"
+msgstr "Tagungsmanagement"
 
 #
 #. Translators: __INCLUDE_JS_PO__
@@ -2072,6 +2114,9 @@ msgstr "In Projekten angezeigt..."
 msgid "Show in my projects..."
 msgstr "In Projekten anzeigen..."
 
+msgid "Disable editor"
+msgstr "Editor deaktivieren"
+
 msgid "Rearrange"
 msgstr "Umsortieren"
 
@@ -2196,12 +2241,6 @@ msgstr "beantragen"
 msgid "View on Facebook"
 msgstr "Auf Facebook ansehen"
 
-msgid "Group:"
-msgstr "Gruppe:"
-
-msgid "No Description set"
-msgstr "Keine Beschreibung erstellt"
-
 msgid ""
 "You will now receive notifications whenever public content is posted in this "
 "project."
@@ -2215,6 +2254,12 @@ msgid ""
 msgstr ""
 "Du wirst jetzt Benachrichtigungen erhalten wenn öffentliche Inhalte in "
 "dieser Gruppe erstellt werden."
+
+msgid "Group:"
+msgstr "Gruppe:"
+
+msgid "No Description set"
+msgstr "Keine Beschreibung erstellt"
 
 msgid "more"
 msgstr "mehr"
@@ -2266,6 +2311,78 @@ msgstr "Gib einen Ort oder Adresse ein."
 
 msgid "Choose and upload a gallery image"
 msgstr "Wähle ein Galeriebild zum Hochladen aus"
+
+msgid "Conference is not running"
+msgstr "Tagung läuft gerade nicht"
+
+msgid "Accounts from CSV Upload"
+msgstr "Nutzerkonten aus CSV-Upload"
+
+msgid "Upload Participants"
+msgstr "Teilnehmerliste hochladen"
+
+msgid "last login"
+msgstr "letzer login"
+
+msgid "no login yet"
+msgstr "bisher kein login"
+
+msgid "Admin"
+msgstr "Administratot"
+
+msgid "Member"
+msgstr "Mitglied"
+
+msgid "active"
+msgstr "aktiv"
+
+msgid "not active"
+msgstr "inaktiv"
+
+msgid "User participates in the following workshops:"
+msgstr "Benutzer_in nimmt an folgenden Workshops teil:"
+
+msgid "deactivate member"
+msgstr "Teilnehmer deaktivieren"
+
+msgid "activate member"
+msgstr "Teilnehmer aktivieren"
+
+msgid "remove user"
+msgstr "Teilnehmer entfernen"
+
+msgid "Do you really want to deactivate the member's user account ?"
+msgstr "Möchten sie wirkich dieses Nutzerkonto deaktivieren?"
+
+msgid "Deactivate Member"
+msgstr "Mitglied deaktivieren"
+
+msgid "Do you really want to activate the member's user account ?"
+msgstr "Möchten sie wirkich dieses Nutzerkonto aktivieren?"
+
+msgid "Activate Member"
+msgstr "Teilnehmer aktivieren"
+
+msgid "Do you really want to remove the user?"
+msgstr "Möchtest du wirklich den Teilnehmer entfernen?"
+
+msgid "Remove User"
+msgstr "Teilnehmer entfernen"
+
+msgid "Finish conference and deactivate user accounts"
+msgstr "Tagung beenden und Teilnehmerkonten deaktivieren"
+
+msgid "Start conference and activate user accounts"
+msgstr "Tagung beginnen und Teilnehmerkonten aktivieren"
+
+msgid "Download Statistics"
+msgstr "Statistiken herunterladen"
+
+msgid "Workshops"
+msgstr "Workshops"
+
+msgid "Add workshop"
+msgstr "Workshop hinzufügen"
 
 msgid "Re-Activate Project/Group"
 msgstr "Projekt/Gruppe reaktivieren"
@@ -2434,13 +2551,6 @@ msgstr "Nachricht an alle Mitglieder"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
 msgstr "Nachricht schicken"
-
-msgid "Admin"
-msgstr "Administratot"
-
-#
-msgid "Member"
-msgstr "Mitglied"
 
 msgid "Kick"
 msgstr "Entfernen"
@@ -2989,6 +3099,49 @@ msgstr "Projekt deaktivieren"
 
 msgid "Withdraw Request"
 msgstr "Anfrage zurückziehen"
+
+msgid "Workshop Participant File Upload"
+msgstr "Workshop Teilnehmer Datei Upload"
+
+#, python-format
+msgid ""
+"Please upload a CSV with the following columns: unique user identifier, "
+"first name, last name and one column for each workshop identified by the "
+"workshop's slug. For Help you can download a template <a href="
+"\"%(workshop_participants_upload_skeleton)s\">here</a>"
+msgstr ""
+"Bitte laden sie ein CSV mit den folgenden Spalten hoch: eindeutiger "
+"Nutzer_innen-Name, Vorname, Nachname und eine Spalte für jeden Workshop "
+"(bitte den Slug angeben). Als Hilfe können Sie <a href="
+"\"%(workshop_participants_upload_skeleton)s\">hier</a> ein entsprechendes "
+"Template herunterladen.."
+
+msgid ""
+"Then add a row for each account that you want to add. You have to add a "
+"unique user identifier but first and last name can be blank. Then add a 1 to "
+"all workshop columns where the user should be a normal member or a 2 if that "
+"user should be workshop admin."
+msgstr ""
+"Bitte fügen sie für jeden Teilnehmer eine Zeile in der Tabelle. Zuerst kommt "
+"der eindeutige Nutzername, dann der Vorname (Feld kann leer bleiben), dann "
+"der Nachname (Feld kann ebenfalls leer bleiben). Danach fügen Sie bitte in "
+"den Workshop-Spalten für jeden Teilnehmer der normaler Teilnehmer sein soll "
+"eine 1 ein, Workshop-Administratoren erhalten eine 2."
+
+msgid ""
+"The CSV upload will trigger the creation of the accounts and account "
+"workshop memberships and results in a direct CSV download with the newly "
+"created accounts and passwords. The passwords will only be included when the "
+"account is created. Please refresh the page after the download."
+msgstr ""
+"Der CSV Upload löst die Erstellung der Nutzerkonten für die Teilnehmer_innen "
+"aus und fügt alle Teilnehmer_innen den entsprechenden Workshops hinzu. Wenn "
+"alles fertig ist, wird direkt ein Download ausgelöst. Sie erhalten eine "
+"neues CSV, in dem die Passwörter und Email-Adressen der neu erstellen "
+"Nutzerkonten enthalten sind. Bitte laden Sie die Seite nach dem Download neu."
+
+msgid "Upload File"
+msgstr "Lade eine Datei hoch."
 
 msgid "Add container"
 msgstr "Zusammenstellung hinzufügen"
@@ -3604,6 +3757,24 @@ msgstr ""
 "\n"
 "%(domain_url)s"
 
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"Someone has just registered on %(site_name)s with your %(provider)s Account. "
+"We are sending you this email to make sure that this was you.\n"
+"\n"
+"If it was you, then you don't have to do anything. Otherwise, please contact "
+"the support.\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "Someone registered on %(site_name)s with your %(provider)s account "
+msgstr ""
+
 msgid "Additional options"
 msgstr "Zusätzliche Optionen"
 
@@ -3833,6 +4004,12 @@ msgstr "Passwort vergessen?"
 msgid "Logged out"
 msgstr "Abgemeldet"
 
+#, python-format
+msgid ""
+"In order to use your %(portal_name)s account to login to another platform "
+"you need to login on %(portal_name)s first."
+msgstr ""
+
 msgid ""
 "Your account was registered successfully. The account will need to be "
 "approved by an administrator before you can log in. We will send an email to "
@@ -3853,6 +4030,20 @@ msgstr ""
 
 msgid "Password"
 msgstr "Passwort"
+
+#, fuzzy, python-format
+#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+#| msgid "to %(portal_name)s"
+msgid "Log in with %(portal_name)s"
+msgstr "auf %(portal_name)s"
+
+#, python-format
+msgid "Sign in now using your %(portal_name)s account."
+msgstr ""
+
+#, python-format
+msgid "You don't have a %(portal_name)s account yet?"
+msgstr ""
 
 msgid "Password change"
 msgstr "Passwort ändern"
@@ -4857,9 +5048,6 @@ msgstr "von"
 msgid "Open Preview"
 msgstr "Vorschau öffnen"
 
-msgid "active"
-msgstr "aktiv"
-
 msgid "displayed right now"
 msgstr "wird aktuell angezeigt"
 
@@ -5384,6 +5572,119 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups or Users"
+msgstr "Meine Projekte und Gruppen"
+
+msgid "Import from a CSV File"
+msgstr ""
+
+msgid ""
+"Upload either a CSV-file to import projects and groups or a CSV-file to "
+"import Users. Only one import can happen simultaneously. The format must be "
+"the one that has been agreed on. If the format changes (more/less/different "
+"columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group CSV File"
+msgstr "Projekte/Gruppen"
+
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "User CSV File"
+msgstr "Projekte/Gruppen"
+
+#, fuzzy
+#| msgid "Proportions"
+msgid "Options"
+msgstr "Proportionen"
+
+msgid ""
+"The default settings for the CSV file. Only change these if you absolutely "
+"know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Upload and Import..."
+msgstr "Lade ein Bild hoch."
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups"
+msgstr "Meine Projekte und Gruppen"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+msgid "CSV Import Results"
+msgstr ""
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Read errors:"
+msgstr "Fehler!"
+
+msgid ""
+"These rows in your CSV file had errors or an incorrect number of columns and "
+"were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Messages"
+msgid "Important messages:"
+msgstr "Nachrichten"
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Errors:"
+msgstr "Fehler!"
+
+#, fuzzy
+#| msgid "Messages"
+msgid "Info messages:"
+msgstr "Nachrichten"
+
+msgid ""
+"The CSV file was read successfully and the import is currently running on "
+"the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take "
+"from a few seconds to a few minutes. You do not have to keep this page open. "
+"We will send you an email to your address <b>\"%(email)s\"</b> as soon as "
+"the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Weitere Projekte anzeigen"
 
@@ -5621,6 +5922,45 @@ msgstr "%(team_type)s \"%(group)s\" wurde erfolgreich erstellt."
 
 msgid "Create"
 msgstr "Erstellen"
+
+msgid "Conference successfully started and user accounts activated"
+msgstr "Tagung erfolgreich gestartet und Nutzerkonten aktiviert"
+
+msgid "Conference successfully finished and user accounts deactivated"
+msgstr "Tagung erfolgreich beendet und Nutzerkonten deaktiviert"
+
+#
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Successfully deactivated user account"
+msgstr "Benutzer_innen-Konto löschen"
+
+#
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Successfully activated user account"
+msgstr "Benutzer_innen-Konto löschen"
+
+msgid "Successfully removed user"
+msgstr "Nutzer erfolgreich entfernt."
+
+#, fuzzy
+#| msgid "Has created"
+msgid "User was not created"
+msgstr "Hat erstellt"
+
+msgid "Workshop username"
+msgstr ""
+
+#, fuzzy
+#| msgid "First name"
+msgid "First Name"
+msgstr "Vorname"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "Last Name"
+msgstr "Nachname"
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -6140,6 +6480,21 @@ msgstr ""
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#, fuzzy
+#~| msgid "Email"
+#~ msgid "email"
+#~ msgstr "E-Mail"
+
+#, fuzzy
+#~| msgid "Has Logged In"
+#~ msgid "has logged in"
+#~ msgstr "Jemals eingeloggt"
+
+#, fuzzy
+#~| msgid "Validate"
+#~ msgid "last login date"
+#~ msgstr "Authentifizieren"
+
 #~ msgid "New membership request"
 #~ msgstr "Neuer Mitgliedschaftsantrag"
 
@@ -6154,9 +6509,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Invited you"
 #~ msgstr "Hat dich eingeladen"
-
-#~ msgid "Has created"
-#~ msgstr "Hat erstellt"
 
 #~ msgid "Hi,"
 #~ msgstr "Hi,"

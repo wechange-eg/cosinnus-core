@@ -12,7 +12,7 @@
                     <a href="{{ group.get_absolute_url }}">{{ group.name }}</a>
                     <div class="group-annotation">
                             <i class="fa fa-users"></i>
-                            {{ group.members|length }} {% if group.members|length == 1 %}{% trans "Member" %}{% else %}{% trans "Members" %}{% endif %}
+                            {{ group.member_count }} {% if group.member_count == 1 %}{% trans "Member" %}{% else %}{% trans "Members" %}{% endif %}
                     </div>
                 </div>
             </li>

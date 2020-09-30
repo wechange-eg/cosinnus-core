@@ -109,6 +109,9 @@ module.exports = ContentControlView.extend({
             	self.options.availableFilterList.push(type); 
             }
         });
+        if (COSINNUS_MAP_OPTIONS['filter_panel_default_visible']) {
+            self.state.filterPanelVisible = true;
+        }
         
         if (!self.collection) {
             self.collection = new ResultCollection();
@@ -665,7 +668,7 @@ module.exports = ContentControlView.extend({
         if (event) {
             event.preventDefault();
         }
-        if (this.filterPanelVisible) {
+        if (this.state.filterPanelVisible) {
             this.hideFilterPanel(event);
         } else {
             this.showFilterPanel(event);
@@ -677,7 +680,7 @@ module.exports = ContentControlView.extend({
         if (event) {
             event.preventDefault();
         }
-        this.filterPanelVisible = true;
+        this.state.filterPanelVisible = true;
         this.$el.find('.map-controls-filters').slideDown(250);
         this.$el.find('.icon-filters').addClass('open');
     },
@@ -687,7 +690,7 @@ module.exports = ContentControlView.extend({
         if (event) {
             event.preventDefault();
         }
-        this.filterPanelVisible = false;
+        this.state.filterPanelVisible = false;
         this.$el.find('.map-controls-filters').slideUp(250);
         this.$el.find('.icon-filters').removeClass('open');
         

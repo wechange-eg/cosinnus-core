@@ -1,0 +1,6 @@
+{% load i18n cosinnus_tags %}{% blocktrans with user_name=user|full_name_force %}Hi {{ user_name }},
+
+The connection with your {{ provider }} Account on {{ site_name }} has been removed. Now you can't login with your {{ provider }} Account on {{ site_name }} anymore.
+
+
+Your {{ site_name }} Team{% endblocktrans %}

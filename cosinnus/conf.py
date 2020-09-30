@@ -236,6 +236,10 @@ class CosinnusConf(AppConf):
         'cosinnus_todo',
     ]
     
+    # If set, will enable a download under / of an empty text file with the given name.
+    # Can be used to quickly make a file available for a DNS server check, e.g. for Mailjet.
+    EMPTY_FILE_DOWNLOAD_NAME = None
+    
     # should the facebook integration scripts and templates be loaded?
     FACEBOOK_INTEGRATION_ENABLED = False
     # Facebook app id to use
@@ -461,6 +465,7 @@ class CosinnusConf(AppConf):
             'sw_lon': 5.01, # west,
         },
         'geojson_region': None,
+        'filter_panel_default_visible': False,
     }
     
     # dimensions of the images for map images
@@ -651,7 +656,9 @@ class CosinnusConf(AppConf):
     
     # whether to enable the cosinnus cloud app
     CLOUD_ENABLED = False
-        
+    # whether to show the cosinnus cloud dashboard widget
+    CLOUD_DASHBOARD_WIDGET_ENABLED = False 
+    
     # base url of the nextcloud service, without trailing slash
     CLOUD_NEXTCLOUD_URL = None
     # admin user for the nextcloud api
@@ -664,13 +671,24 @@ class CosinnusConf(AppConf):
     # URL for the iframe/tab leading to a specific group folder (with leading slash)
     CLOUD_GROUP_FOLDER_IFRAME_URL = '/apps/files/?dir=/%(group_folder_name)s'
     # whether all cloud links should open with target="_blank"
-    CLOUD_OPEN_IN_NEW_TAB = True
+    CLOUD_OPEN_IN_NEW_TAB = False
     # whether to prefix all nextcloud group folders with "Projekt" or "Gruppe"
     CLOUD_PREFIX_GROUP_FOLDERS = True
     # the quota for groupfolders, in bytes. -3 is the default for "unlimited"
-    CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA = -3
+    # currently set to 1GB
+    CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA = 1024 * 1024 * 1024
     # timeout for nextcloud webdav requests in seconds
     CLOUD_NEXTCLOUD_REQUEST_TIMEOUT = 15
+    
+    CLOUD_NEXTCLOUD_SETTINGS = {
+        'DEFAULT_USER_QUOTA': '100 MB', # in human readable nextcloud format
+        'ALLOW_PUBLIC_UPLOADS': 'no', # "yes" or "no"
+        'ALLOW_AUTOCOMPLETE_USERS': 'no', # "yes" or "no"
+        'SEND_EMAIL_TO_NEW_USERS': 'no', # "yes" or "no"
+        'ENABLE_APP_IDS': ["groupfolders", "onlyoffice", "sociallogin", "wechangecsp"], # list of string app ids
+        'DISABLE_APP_IDS': ["theming", "photos", "activity", "systemtags"], # list of string app ids
+        # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
+    }
     
     # if set to a hex color string,
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
@@ -689,6 +707,16 @@ class CosinnusConf(AppConf):
     # if enabled, this allows all portal-admins to download user emails, this might be
     # *VERY* risky, so use cautiously
     ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS = False
+
+    # set to True if you want to use this instance as oauth provider for other platforms
+    IS_OAUTH_PROVIDER = False
+    
+    # set to True if you want to enable oauth2 social login with another instance (this other
+    # instance then has to have IS_OAUTH_PROVIDER to True). Add the url of the other instane as
+    # OAUTH_SERVER_BASEURL
+    IS_OAUTH_CLIENT = False
+    OAUTH_SERVER_BASEURL = None
+    OAUTH_SERVER_PROVIDER_NAME = 'wechange'
     
 
 class CosinnusDefaultSettings(AppConf):

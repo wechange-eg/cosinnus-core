@@ -18,6 +18,9 @@ from captcha.fields import CaptchaField
 from django.utils.timezone import now
 from cosinnus.utils.user import accept_user_tos_for_portal
 
+import logging
+logger = logging.getLogger('cosinnus')
+
 
 class UserKwargModelFormMixin(object):
     """
@@ -87,7 +90,17 @@ class UserCreationForm(TermsOfServiceFormFields, DjUserCreationForm):
     
     def save(self, commit=True):
         """ Set the username equal to the userid """
-        user = super(UserCreationForm, self).save(commit=True)
+        try:
+            user = None
+            user = super(UserCreationForm, self).save(commit=True)
+        except Exception as e:
+            if user is None or not user.id:
+                # bubble up exception if user wasn't saved
+                raise 
+            else:
+                # if user was saved, but a hook caused an exception, carry on
+                logger.error('Non-critical error during user creation, continuing.', e)
+        
         user.username = str(user.id)
         user.save()
         

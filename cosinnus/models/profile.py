@@ -50,6 +50,9 @@ PROFILE_SETTING_REDIRECT_NEXT_VISIT = 'redirect_next'
 PROFILE_SETTING_FIRST_LOGIN = 'first_login'
 PROFILE_SETTING_ROCKET_CHAT_ID = 'rocket_chat_id'
 PROFILE_SETTING_ROCKET_CHAT_USERNAME = 'rocket_chat_username'
+PROFILE_SETTING_WORKSHOP_PARTICIPANT = 'is_workshop_participant'
+PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME = 'workshop_participant_name'
+PROFILE_SETTING_COSINUS_OAUTH_LOGIN = 'has_logged_in_with_cosinnus_oauth'
 
 
 class BaseUserProfileManager(models.Manager):
@@ -334,6 +337,19 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
     def rocket_username(self, username):
         """ Sets new username for Rocket.Chat """
         self.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = username
+
+    @property
+    def workshop_user_name(self):
+        return self.settings.get(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME)
+
+    @property
+    def readable_workshop_user_name(self):
+        settings_name = self.settings.get(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME)
+        return settings_name.split('__')[-1]
+
+    @property
+    def is_workshop_participant(self):
+        return self.settings.get(PROFILE_SETTING_WORKSHOP_PARTICIPANT, False)
 
 
 class UserProfile(BaseUserProfile):
