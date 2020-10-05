@@ -41,6 +41,7 @@ MODEL_ALIASES = {
 
 VISIBLE_PORTAL_IDS = None  # global
 
+
 def filter_searchqueryset_for_read_access(sqs, user):
     """
     Given a SearchQuerySet, this function adds a filter that limits the
@@ -92,6 +93,7 @@ def filter_searchqueryset_for_read_access(sqs, user):
         
     return sqs
 
+
 def get_visible_portal_ids():
     global VISIBLE_PORTAL_IDS
     if VISIBLE_PORTAL_IDS is None:
@@ -99,6 +101,7 @@ def get_visible_portal_ids():
         portals = [current_portal] + getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
         VISIBLE_PORTAL_IDS = list(set(portals))
     return VISIBLE_PORTAL_IDS
+
 
 def filter_searchqueryset_for_portal(sqs, portals=None, restrict_multiportals_to_current=False, external=False):
     """ Filters a searchqueryset by which portal the objects belong to.
