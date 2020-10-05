@@ -130,7 +130,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
     
     # UI and other preferences and extra settings for the user account
     settings = JSONField(default={})
-    extra_fields = JSONField(default={},
+    extra_fields = JSONField(default={}, blank=True,
                 help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
     
     objects = BaseUserProfileManager()
