@@ -361,19 +361,24 @@ class ConferencePageView(RequireReadMixin, GroupIsConferenceMixin, TemplateView)
             self.room = get_object_or_None(CosinnusConferenceRoom, group=self.group, slug=room_slug)
         if self.room and not self.room.is_visible:    
             return HttpResponseForbidden()
+        
+        self.rooms = self.group.rooms.all()
+        if self.rooms.count() == 0 and (check_ug_admin(request.user, self.group) or check_user_superuser(request.user)):
+            # if no rooms have been created, redirect group admins to room management
+            return redirect(group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': self.group}))
+        
         return super(ConferencePageView, self).get(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
-        rooms = self.group.rooms.all()
         # hide invisible rooms from non-admins
         if not check_ug_admin(self.request.user, self.group):
-            rooms = rooms.visible()
+            self.rooms = self.rooms.visible()
         
         ctx = {
             'slug': self.kwargs.get('slug'), # can be None
             'group': self.group,
             'room': self.room,  # can be None
-            'rooms': rooms,
+            'rooms': self.rooms,
             'events': self.room.events.all() if self.room else [],
         }
         return ctx

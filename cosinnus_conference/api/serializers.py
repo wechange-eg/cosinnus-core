@@ -13,6 +13,7 @@ from rest_framework import serializers
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group import CosinnusGroup
 from django.templatetags.static import static
+from django.utils.timezone import now
 
 
 __all__ = ('ConferenceSerializer', )
@@ -106,8 +107,11 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_dates(self, obj):
         queryset = ConferenceEvent.objects.filter(room__group=obj)
-        queryset = queryset.aggregate(Min('from_date'), Max('to_date'))
-        from_date, to_date = queryset['from_date__min'].date(), queryset['to_date__max'].date()
+        if queryset.count() > 0:
+            queryset = queryset.aggregate(Min('from_date'), Max('to_date'))
+            from_date, to_date = queryset['from_date__min'].date(), queryset['to_date__max'].date()
+        else:
+            from_date, to_date = now(), now()
         return [from_date + timedelta(days=i) for i in range((to_date - from_date).days + 1)]
 
 
