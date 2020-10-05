@@ -20,7 +20,7 @@
             </p>
             
             {% for group in invite_groups %}
-                {% include 'cosinnus/group/single_group.html' with group=group target_blank=True spaced=True %}
+                {% include 'cosinnus/group/single_group.html' with group=group target_blank=True spaced=True disabled=True %}
             {% endfor %}
         {% endcaptureas %}
         {% captureas title %}
@@ -33,7 +33,7 @@
         {% trans "Join all now!" as submit_button_label %}
         
         {% if user.is_authenticated %}
-            {% include "cosinnus/modal_box.html" with id="modal-recruit-users" label=label submit_button_label=submit_button_label title=title form_action="." title_icon="fa-ticket" show_inline=True hide_cancel_button=True large_buttons=True %}
+            {% include "cosinnus/modal_box.html" with id="modal-recruit-users" label=label submit_button_label=submit_button_label submit_button_icon="fa-sign-in" title=title form_action="." title_icon="fa-ticket" show_inline=True hide_cancel_button=True large_buttons=True %}
         {% else %}        
             {% captureas custom_button_html %}
                 <div class="pull-left white-content" href="#">
@@ -47,9 +47,9 @@
                 <button href="{% url 'cosinnus:user-add' %}?invite_token={{ invite.token }}" class="submit-btn-x btn btn-emphasized btn-autosize" >
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="#">
-                                <i class="fa fa-check"></i>
-                            </a>
+                            <span class="pull-left">
+                                <i class="fa fa-sign-in"></i>
+                            </span>
                             <div class="media-body">
                                 {% trans "Create account and join" %}
                             </div>
