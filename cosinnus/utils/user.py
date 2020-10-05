@@ -97,7 +97,8 @@ def assign_user_to_default_auth_group(sender, **kwargs):
 def ensure_user_to_default_portal_groups(sender, created, **kwargs):
     """ Whenever a portal membership changes, make sure the user is in the default groups for this Portal """
     try:
-        from cosinnus.models.group import CosinnusGroupMembership, MEMBERSHIP_MEMBER
+        from cosinnus.models.group import CosinnusGroupMembership
+        from cosinnus.models.membership import MEMBERSHIP_MEMBER
         membership = kwargs.get('instance')
         CosinnusGroup = get_cosinnus_group_model()
         for group_slug in get_default_user_group_slugs():
@@ -168,7 +169,8 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
 
     from django.contrib.auth.forms import UserCreationForm
     from cosinnus.models.profile import get_user_profile_model
-    from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal, MEMBERSHIP_MEMBER
+    from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
+    from cosinnus.models.membership import MEMBERSHIP_MEMBER
     from django.contrib.auth import get_user_model
     from django.core.exceptions import ObjectDoesNotExist
 

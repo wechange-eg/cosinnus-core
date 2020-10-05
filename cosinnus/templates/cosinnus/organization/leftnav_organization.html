@@ -1,0 +1,45 @@
+{% load i18n cosinnus_tags %}
+
+{% if current_page != "addorganization" %}
+    {% if user|has_write_access:object %}
+        {% captureas href %}{% url 'cosinnus:organization-edit' organization=object.slug %}{% endcaptureas %}
+        {% captureas label %}{% trans "Edit Organization" %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with active=is_editorganization extra_classes="fine-space" icon="fa-info-circle" label=label href=href  %}
+    {% endif %}
+
+    {% captureas href %}{% url 'cosinnus:organization-members' organization=object.slug %}{% endcaptureas %}
+    {% captureas label %}{% trans "Admins" %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with active=is_organizationdetails extra_classes="large-space" icon="fa-users" label=label href=href  %}
+
+    {% if user.pk in object.admins %}
+        {% captureas label %}{% trans "Leave" %}{% endcaptureas %}
+        {% captureas extra_atts %}data-toggle="modal" data-target="#leave_join_organization_modal"{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-out" label=label href="#"  %}
+
+        {% captureas label %}{% blocktrans with title=object.name %}Do you really want to leave „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+        {% captureas title %}{% trans "Leave" %}{% endcaptureas %}
+        {% captureas action %}{% url 'cosinnus:organization-user-leave' organization=object.slug %}{% endcaptureas %}
+
+        {% include "cosinnus/modal_box.html" with id="leave_join_organization_modal" label=label title=title form_action=action %}
+    {% elif user.pk in object.pendings %}
+        {% captureas label %}{% trans "Withdraw Request" %}{% endcaptureas %}
+        {% captureas extra_atts %}data-toggle="modal" data-target="#leave_join_organization_modal"{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-out" label=label href="#"  %}
+
+        {% captureas label %}{% blocktrans with title=object.name %}Do you really want to withdraw your join request to „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+        {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
+        {% captureas action %}{% url 'cosinnus:organization-user-withdraw' organization=object.slug %}{% endcaptureas %}
+
+        {% include "cosinnus/modal_box.html" with id="leave_join_organization_modal" label=label title=title form_action=action %}
+    {% elif object.admins %}
+        {% captureas label %}{% trans "Joins" %}{% endcaptureas %}
+        {% captureas extra_atts %}data-toggle="modal" data-target="#leave_join_organization_modal"{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-in" label=label href="#"  %}
+
+        {% captureas label %}{% blocktrans with title=object.name %}Do you wish to request to join „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+        {% captureas title %}{% trans "Join" %}{% endcaptureas %}
+        {% captureas action %}{% url 'cosinnus:organization-user-join' organization=object.slug %}{% endcaptureas %}
+
+        {% include "cosinnus/modal_box.html" with id="leave_join_organization_modal" label=label title=title form_action=action %}
+    {% endif %}
+{% endif %}

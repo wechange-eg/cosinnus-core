@@ -7,16 +7,21 @@ import locale
 
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
+from django.db.models import Q
 from django.urls import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 import six
+from jsonfield import JSONField
+from osm_field.fields import OSMField, LatitudeField, LongitudeField
 
 from cosinnus.conf import settings
+from cosinnus.core import signals
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.models import BaseMembership, MEMBER_STATUS, MembersManagerMixin, MEMBERSHIP_ADMIN
 from cosinnus.utils.files import image_thumbnail_url, \
-    image_thumbnail, get_organization_image_filename
+    image_thumbnail, get_organization_avatar_filename, get_organization_wallpaper_filename, get_image_url_for_icon
 from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify, sort_key_strcoll_attr
 from cosinnus.utils.urls import get_domain_for_portal
@@ -33,6 +38,7 @@ except:
 
 class CosinnusOrganizationQS(models.query.QuerySet):
     pass
+
 
 class OrganizationManager(models.Manager):
     
@@ -143,25 +149,120 @@ class OrganizationManager(models.Manager):
             return qs[0]
         except self.model.DoesNotExist:
             return None
-        
     
     def get_queryset(self):
         return CosinnusOrganizationQS(self.model, using=self._db).select_related('portal')
-    
+
+    def get_for_user_pks(self, user, include_public=False, member_status_in=MEMBER_STATUS, includeInactive=False):
+        """
+        :returns: a list of primary keys to :class:`CosinnusOrganization` the given
+            user is a member or admin of, and not a pending member!.
+        """
+        qs = self.get_queryset()
+        if not includeInactive:
+            qs = qs.filter(is_active=True)
+        if include_public:
+            return qs.filter(Q(public__exact=True) | Q(memberships__user_id=user.pk) & Q(memberships__status__in=member_status_in)) \
+                .values_list('id', flat=True).distinct()
+        return qs.filter(Q(memberships__user_id=user.pk) & Q(memberships__status__in=member_status_in)) \
+            .values_list('id', flat=True).distinct()
+
+    def get_for_user_group_admin_pks(self, user, include_public=False, member_status_in=MEMBER_STATUS, includeInactive=False):
+        """
+        :returns: a list of primary keys to :class:`CosinnusOrganization` the given
+            user is an admin of, and not a pending member!.
+        """
+        return self.get_for_user_pks(user, include_public, member_status_in=[MEMBERSHIP_ADMIN, ], includeInactive=includeInactive)
+
+
+class CosinnusOrganizationMembership(BaseMembership):
+    group = models.ForeignKey('cosinnus.CosinnusOrganization', related_name='memberships', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='organization_memberships',
+                             on_delete=models.CASCADE)
+
+    CACHE_KEY_MODEL = 'CosinnusOrganization'
+
+    class Meta(BaseMembership.Meta):
+        verbose_name = _('Organization membership')
+        verbose_name_plural = _('Organization memberships')
+
+    def __str__(self):
+        return "<user: %(user)s, group: %(group)s, status: %(status)d>" % {
+            'user': getattr(self, 'user', None),
+            'group': getattr(self, 'group', None),
+            'status': self.status,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(CosinnusOrganizationMembership, self).__init__(*args, **kwargs)
+        self._status = self.status
+
+
+class CosinnusUnregisteredUserOrganizationInvite(BaseMembership):
+    """ A placeholder for an organizations invite of person's who has been invited via email to join.
+        Used to imprint a real `CosinnusOrganizationMembership` once that user registers.
+        The ``status`` field is ignored because it would always be on pending anyways. """
+
+    group = models.ForeignKey('cosinnus.CosinnusOrganization', related_name='unregistered_user_invites',
+                              on_delete=models.CASCADE)
+    email = models.EmailField(_('email address'))
+    invited_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True,
+                                   related_name='cosinnus_organization_invitations', on_delete=models.SET_NULL)
+    last_modified = models.DateTimeField(_('Last modified'), auto_now=True, editable=False)
+
+    CACHE_KEY_MODEL = 'CosinnusUnregisteredUserOrganizationInvite'
+
+    class Meta(object):
+        app_label = 'cosinnus'
+        verbose_name = _('Organization Invite for Unregistered User')
+        verbose_name_plural = _('Organization Invites for Unregistered Users')
+        unique_together = (('email', 'group'),)
+
 
 @python_2_unicode_compatible
-class CosinnusOrganization(IndexingUtilsMixin, models.Model):
+class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model):
     """
-    Organisation model.
+    Organization model.
     """
-    
-    portal = models.ForeignKey(CosinnusPortal, verbose_name=_('Portal'), related_name='organizations', 
+    TYPE_OTHER = 0
+    TYPE_CIVIL_SOCIETY_ORGANISATION = 1
+    TYPE_COMPANY = 2
+    TYPE_PUBLIC_INSTITUTION = 3
+    TYPE_CHOICES = (
+        (TYPE_CIVIL_SOCIETY_ORGANISATION, _('Civil society organization (e.g. club, association, foundation, party)')),
+        (TYPE_COMPANY, _('Company (commercial)')),
+        (TYPE_PUBLIC_INSTITUTION, _('Public institution (e.g. educational institution, library, swimming pool)')),
+        (TYPE_OTHER, _('Other')),
+    )
+
+    portal = models.ForeignKey(CosinnusPortal, verbose_name=_('Portal'), related_name='organizations',
         null=False, blank=False, default=1, on_delete=models.CASCADE) # port_id 1 is created in a datamigration!
     
-    title = models.CharField(_('Title'), max_length=250) # removed validators=[group_name_validator])
+    name = models.CharField(_('Name of the organization'), max_length=250)  # removed validators=[group_name_validator])
     slug = models.SlugField(_('Slug'), 
         help_text=_('Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'), 
         max_length=50)
+    type = models.PositiveSmallIntegerField(_('Organization type'), blank=False, choices=TYPE_CHOICES)
+    type_other = models.CharField(_('Organization type'), max_length=255, blank=True)
+    description = models.TextField(verbose_name=_('Short Description'),
+         help_text=_('Short Description. Internal, will not be shown publicly.'), blank=True)
+    avatar = models.ImageField(_("Logo"), null=True, blank=True,
+        upload_to=get_organization_avatar_filename,
+        max_length=250)
+    wallpaper = models.ImageField(_("Wallpaper image"),
+        help_text=_('Shown as large banner image on the Microsite (1140 x 240 px)'),
+        null=True, blank=True,
+        upload_to=get_organization_wallpaper_filename,
+        max_length=250)
+    website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
+    email = models.EmailField(_('Email Address'), null=True, blank=True)
+    phone_number = PhoneNumberField(('Phone Number'), blank=True, null=True)
+
+    media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
+        blank=True, null=True, editable=False, on_delete=models.SET_NULL)
+    is_active = models.BooleanField(_('Is active'),
+        help_text='If an organization is not active, it counts as non-existent for all purposes and views on the website.',
+        default=True)
     created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL,
         verbose_name=_('Creator'),
@@ -172,46 +273,18 @@ class CosinnusOrganization(IndexingUtilsMixin, models.Model):
         verbose_name=_('Last modified'),
         editable=False,
         auto_now=True)
-    
-    description = models.TextField(verbose_name=_('Short Description'),
-         help_text=_('Short Description. Internal, will not be shown publicly.'), blank=True)
-    
-    image = models.ImageField(_("Image"), 
-        help_text='Shown as large banner image',
-        null=True, blank=True,
-        upload_to=get_organization_image_filename,
-        max_length=250)
-    
-    public = models.BooleanField(_('Public'), default=False)
-    synced = models.BooleanField(_('Synced'), default=False,
-        help_text='Should this organization be allowed to be synched into external databases?')
-    media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
-        blank=True, null=True, editable=False, on_delete=models.SET_NULL)
-    is_active = models.BooleanField(_('Is active'),
-        help_text='If an organization is not active, it counts as non-existent for all purposes and views on the website.',
-        default=True)
-    
-    version = models.PositiveIntegerField(_('Version'), default=0)
-    license = models.CharField(_('License'), max_length=250, blank=True, null=True)
-    
-    place_type = models.PositiveIntegerField(_('Version'), null=True, blank=True)
-    address = models.CharField(_('Address'), max_length=255, blank=True, null=True)
-    website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
-    email = models.EmailField(_('Email Address'), null=True, blank=True)
-    phone_number = PhoneNumberField(('Phone Number'), blank=True, null=True)
-    
-    related_groups = models.ManyToManyField(settings.COSINNUS_GROUP_OBJECT_MODEL, 
-        verbose_name=_('Related Teams'),
-        blank=True, related_name='related_organizations')
-    
-    # TODO:
-    # categories = ???
-    
-    # this indicates that objects of this model are in some way always visible by registered users
-    # on the platform, no matter their visibility settings, and thus subject to moderation 
-    cosinnus_always_visible_by_users_moderator_flag = True
-    
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
+                                   related_name='cosinnus_organizations', through='cosinnus.CosinnusOrganizationMembership')
+
+    extra_fields = JSONField(default={})
     objects = OrganizationManager()
+
+    # this indicates that objects of this model are in some way always visible by registered users
+    # on the platform, no matter their visibility settings, and thus subject to moderation
+    cosinnus_always_visible_by_users_moderator_flag = True
+    # Required for require_read_access check
+    public = True
+    membership_class = CosinnusOrganizationMembership
     
     class Meta(object):
         ordering = ('created',)
@@ -225,15 +298,15 @@ class CosinnusOrganization(IndexingUtilsMixin, models.Model):
         self._slug = self.slug
 
     def __str__(self):
-        return '%s (Portal %d)' % (self.title, self.portal_id)
+        return '%s (Portal %d)' % (self.name, self.portal_id)
     
     def save(self, *args, **kwargs):
         created = bool(self.pk is None)
         slugs = [self.slug] if self.slug else []
-        self.title = clean_single_line_text(self.title)
+        self.name = clean_single_line_text(self.name)
         
         current_portal = self.portal or CosinnusPortal.get_current()
-        unique_aware_slugify(self, 'title', 'slug', portal_id=current_portal)
+        unique_aware_slugify(self, 'name', 'slug', portal_id=current_portal)
         
         if not self.slug:
             raise ValidationError(_('Slug must not be empty.'))
@@ -257,7 +330,6 @@ class CosinnusOrganization(IndexingUtilsMixin, models.Model):
         self._portal_id = self.portal_id
         self._slug = self.slug
 
-    
     def delete(self, *args, **kwargs):
         self._clear_cache(slug=self.slug)
         super(CosinnusOrganization, self).delete(*args, **kwargs)
@@ -275,7 +347,13 @@ class CosinnusOrganization(IndexingUtilsMixin, models.Model):
         
     def clear_cache(self):
         self._clear_cache(slug=self.slug)
-        
+
+    def get_type(self):
+        if self.type == self.TYPE_OTHER:
+            return self.type_other
+        else:
+            return self.get_type_display()
+
     @property
     def image_url(self):
         return self.image.url if self.image else None
@@ -285,9 +363,16 @@ class CosinnusOrganization(IndexingUtilsMixin, models.Model):
 
     def get_image_thumbnail_url(self, size=(500, 275)):
         return image_thumbnail_url(self.image, size)
-    
+
+    def get_icon(self):
+        """ Returns the font-awesome icon"""
+        return 'fa-building'
+
+    def get_image_field_for_icon(self):
+        return self.avatar or get_image_url_for_icon(self.get_icon(), large=True)
+
     def get_image_field_for_background(self):
-        return self.image
+        return self.wallpaper
     
     def is_foreign_portal(self):
         return CosinnusPortal.get_current().id != self.portal_id
@@ -303,8 +388,68 @@ class CosinnusOrganization(IndexingUtilsMixin, models.Model):
         return get_domain_for_portal(self.portal) + reverse('cosinnus:map') + '?item=' + item_id
     
     def get_edit_url(self):
-        return reverse('cosinnus:organization-edit', kwargs={'slug': self.slug})
+        return reverse('cosinnus:organization-edit', kwargs={'organization': self.slug})
     
     def get_delete_url(self):
-        return reverse('cosinnus:organization-delete', kwargs={'slug': self.slug})
-    
+        return reverse('cosinnus:organization-delete', kwargs={'organization': self.slug})
+
+
+class CosinnusOrganizationSocialMedia(models.Model):
+    url = models.URLField(_('URL'), max_length=100)
+
+    organization = models.ForeignKey(
+        CosinnusOrganization,
+        verbose_name=_('Organization'),
+        on_delete=models.CASCADE,
+        related_name='social_media',
+    )
+
+    class Meta(object):
+        verbose_name = _('CosinnusOrganizationSocialMedia')
+        verbose_name_plural = _('CosinnusOrganizationSocialMedia')
+
+    @property
+    def icon(self):
+        """Guess font awesome icon from URL"""
+        url = self.url.lower()
+        if 'facebook' in url:
+            return 'facebook'
+        elif 'twitter' in url:
+            return 'twitter'
+        elif 'instagram' in url:
+            return 'instagram'
+        elif 'linkedin' in url:
+            return 'linkedin'
+        elif 'xing' in url:
+            return 'xing'
+        elif 'youtube' in url:
+            return 'youtube'
+        elif 'vimeo' in url:
+            return 'vimeo'
+        elif 'google' in url:
+            return 'google'
+        else:
+            return 'external-link'
+
+
+class CosinnusOrganizationLocation(models.Model):
+    location = OSMField(_('Location'), blank=True, null=True)
+    location_lat = LatitudeField(_('Latitude'), blank=True, null=True)
+    location_lon = LongitudeField(_('Longitude'), blank=True, null=True)
+
+    organization = models.ForeignKey(
+        CosinnusOrganization,
+        verbose_name=_('Organization'),
+        on_delete=models.CASCADE,
+        related_name='locations',
+    )
+
+    class Meta(object):
+        verbose_name = _('CosinnusOrganizationLocation')
+        verbose_name_plural = _('CosinnusOrganizationLocations')
+
+    @property
+    def location_url(self):
+        if not self.location_lat or not self.location_lon:
+            return None
+        return 'http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)

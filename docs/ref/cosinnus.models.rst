@@ -6,7 +6,7 @@ Subpackages
 
 .. toctree::
 
-    cosinnus.models.serializers
+    cosinnus.api.serializers
 
 Submodules
 ----------

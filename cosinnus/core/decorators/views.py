@@ -9,6 +9,7 @@ from django.http import HttpResponseForbidden, HttpResponseNotFound
 from django.utils.decorators import available_attrs
 from django.utils.translation import ugettext_lazy as _
 
+from cosinnus.models import CosinnusOrganization
 from cosinnus.utils.permissions import check_object_write_access,\
     check_group_create_objects_access, check_object_read_access, get_user_token,\
     check_user_superuser
@@ -68,7 +69,10 @@ def get_group_for_request(group_name, request):
         A CosinnusGroup will not be returned if it is requested by an URL
         path with a different group_model_key than the one it got registered with. """
     group_url_key = request.path.split('/')[1]
-    group_class = group_model_registry.get(group_url_key, None)
+    if group_url_key == 'organizations':
+        group_class = CosinnusOrganization
+    else:
+        group_class = group_model_registry.get(group_url_key, None)
     
     if group_class:
         try:
@@ -90,7 +94,7 @@ def get_group_for_request(group_name, request):
             # this happens during a regular 404 when users navigate to a group URL that no longer exists
             pass
     else:
-        logger.warn('Cosinnus.core.decorators: Failed to retrieve group because no group class was found! The exception was: "%s"' % str(e), 
+        logger.warn('Cosinnus.core.decorators: Failed to retrieve group because no group class was found!',
                      extra={'team_name': group_name, 'url': request.path, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
     
     raise Http404
@@ -126,7 +130,7 @@ def _check_deactivated_app_access(view, group, request):
     """ Will check if a view is being accessed within a cosinnus app that 
     has been deactivated for this group. """
     app_name = view.__module__.split('.')[0]
-    if group.is_app_deactivated(app_name):
+    if hasattr(group, 'is_app_deactivated') and group.is_app_deactivated(app_name):
         messages.error(request, _("The page you tried to access belongs to an app that has been deactivated for this %(team_type)s. If you feel this is in error, ask the %(team_type)s's administrator to reactivate the app.") % {'team_type': group._meta.verbose_name})
         return HttpResponseRedirect(group.get_absolute_url())
     return None
@@ -230,7 +234,7 @@ def dispatch_group_access(group_url_kwarg='group', group_attr='group'):
     return decorator
 
 
-def require_admin_access(group_url_kwarg='group', group_attr='group'):
+def require_admin_access(group_url_kwarg=None, group_attr=None):
     """A method decorator that takes the group name from the kwargs of a
     dispatch function in CBVs and checks that the requesting user is allowed to
     perform administrative operations.
@@ -248,7 +252,9 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
     def decorator(function):
         @functools.wraps(function, assigned=available_attrs(function))
         def wrapper(self, request, *args, **kwargs):
-            group_name = kwargs.get(group_url_kwarg, None)
+            url_kwarg = group_url_kwarg or getattr(self, 'group_url_kwarg', 'group')
+            attr = group_attr or getattr(self, 'group_attr', 'group')
+            group_name = kwargs.get(url_kwarg, None)
             if not group_name:
                 return HttpResponseNotFound(_("No team provided"))
 
@@ -263,7 +269,7 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
                 return redirect_to_not_logged_in(request, view=self, group=group)
 
             if check_object_write_access(group, user):
-                setattr(self, group_attr, group)
+                setattr(self, attr, group)
                 return function(self, request, *args, **kwargs)
 
             # Access denied, redirect to 403 page and and display an error message
@@ -273,7 +279,7 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
     return decorator
 
 
-def require_read_access(group_url_kwarg='group', group_attr='group'):
+def require_read_access(group_url_kwarg=None, group_attr=None):
     """A method decorator that takes the group name from the kwargs of a
     dispatch function in CBVs and checks that the requesting user is allowed to
     perform read operations.
@@ -291,18 +297,19 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
     def decorator(function):
         @functools.wraps(function, assigned=available_attrs(function))
         def wrapper(self, request, *args, **kwargs):
-            group_name = kwargs.get(group_url_kwarg, None)
+            url_kwarg = group_url_kwarg or getattr(self, 'group_url_kwarg', 'group')
+            attr = group_attr or getattr(self, 'group_attr', 'group')
+            group_name = kwargs.get(url_kwarg, None)
             if not group_name:
                 return HttpResponseNotFound(_("No team provided"))
-
             group = get_group_for_request(group_name, request)
             user = request.user
-            
+
             # this is why almost every BaseTaggableObject's View has a .group attribute:
-            setattr(self, group_attr, group)
+            setattr(self, attr, group)
             
             # record visit to group for this user
-            if user.is_authenticated:
+            if user.is_authenticated and hasattr(group, 'mark_visited'):
                 group.mark_visited(user)
             
             requested_object = None
@@ -318,7 +325,7 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             
             obj_public = requested_object and getattr(requested_object, 'media_tag', None) \
                     and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
-            # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
+            # catch anyonymous users trying to navigate to private groups (else self.get_object() throws a Http404!)
             if not (obj_public or group.public or user.is_authenticated):
                 return redirect_to_not_logged_in(request, view=self, group=group)
             
@@ -340,7 +347,7 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
     return decorator
 
 
-def require_write_access(group_url_kwarg='group', group_attr='group'):
+def require_write_access(group_url_kwarg=None, group_attr=None):
     """A method decorator that takes the group name from the kwargs of a
     dispatch function in CBVs and checks that the requesting user is allowed to
     perform write operations.
@@ -358,7 +365,9 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
     def decorator(function):
         @functools.wraps(function, assigned=available_attrs(function))
         def wrapper(self, request, *args, **kwargs):
-            group_name = kwargs.get(group_url_kwarg, None)
+            url_kwarg = group_url_kwarg or getattr(self, 'group_url_kwarg', 'group')
+            attr = group_attr or getattr(self, 'group_attr', 'group')
+            group_name = kwargs.get(url_kwarg, None)
             if not group_name:
                 return HttpResponseNotFound(_("No team provided"))
             
@@ -366,7 +375,7 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             user = request.user
             
             # set the group attr    
-            setattr(self, group_attr, group)
+            setattr(self, attr, group)
             
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
             if not group.public and not user.is_authenticated:
@@ -402,7 +411,6 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
     return decorator
 
 
-
 def require_write_access_groupless():
     """A method decorator that takes the requested object of i.e. an edit or delete view in the
     dispatch function and checks that the requesting user is allowed to
@@ -428,7 +436,7 @@ def require_write_access_groupless():
                 # editing/deleting an object, check if we are owner or staff member or group admin or site admin
                 if check_object_write_access(requested_object, user):
                     return function(self, request, *args, **kwargs)
-            
+
             # Access denied, redirect to 403 page and and display an error message
             return redirect_to_403(request, self)
             

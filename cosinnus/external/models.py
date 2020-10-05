@@ -152,20 +152,19 @@ class ExternalBaseGroup(ExternalObjectBaseModel):
     def __init__(self, *args, **kwargs):
         super(ExternalBaseGroup, self).__init__(*args, **kwargs)
         self.type = self.GROUP_MODEL_TYPE
- 
+
+
 class ExternalProject(ExternalBaseGroup):
     
     GROUP_MODEL_TYPE = CosinnusBaseGroup.TYPE_PROJECT
     
     class Meta(object):
         managed = False
-        
-        
+
+
 class ExternalSociety(ExternalBaseGroup):
     
     GROUP_MODEL_TYPE = CosinnusBaseGroup.TYPE_SOCIETY
     
     class Meta(object):
         managed = False
-        
-        

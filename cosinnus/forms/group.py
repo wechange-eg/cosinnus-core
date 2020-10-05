@@ -14,10 +14,13 @@ from django.utils.translation import ugettext_lazy as _
 
 from awesome_avatar import forms as avatar_forms
 
+from cosinnus.forms.mixins import AdditionalFormsMixin
+from cosinnus.models import CosinnusOrganization
 from cosinnus.models.group import (CosinnusGroupMembership,
-    MEMBERSHIP_MEMBER, CosinnusPortal,
+                                   CosinnusPortal,
     CosinnusLocation, RelatedGroups, CosinnusGroupGalleryImage,
     CosinnusGroupCallToActionButton)
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.conf import settings
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
@@ -95,7 +98,7 @@ class AsssignPortalMixin(object):
         return super(AsssignPortalMixin, self).save(**kwargs)
 
 
-class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, forms.ModelForm):
+class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, AdditionalFormsMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), disable_preview=True)
     website = forms.URLField(widget=forms.TextInput, required=False)
@@ -205,7 +208,9 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
                 
                 
 class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
-    
+
+    extra_forms_setting = 'COSINNUS_PROJECT_ADDITIONAL_FORMS'
+
     class Meta(object):
         fields = CosinnusBaseGroupForm.Meta.fields + ['parent',]
         model = CosinnusProject
@@ -220,8 +225,11 @@ class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
             qs = qs.exclude(slug=forum_slug)
         self.fields['parent'].queryset = qs
 
+
 class _CosinnusSocietyForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
-    
+
+    extra_forms_setting = 'COSINNUS_GROUP_ADDITIONAL_FORMS'
+
     class Meta(object):
         fields = CosinnusBaseGroupForm.Meta.fields
         model = CosinnusSociety
@@ -249,10 +257,7 @@ class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):
 class MultiUserSelectForm(forms.Form):
     """ The form to select users in a select2 field """
     
-    base_data_url = 'cosinnus:group-member-invite-select2'
-    
     # specify help_text only to avoid the possible default 'Enter text to search.' of ajax_select v1.2.5
-    # data_url will be set to a group_aware version of `self.base_data_url` in __init__
     users = UserSelect2MultipleChoiceField(label=_("Users"), data_url='/stub/')
     
     class Meta(object):
@@ -296,10 +301,14 @@ class MultiUserSelectForm(forms.Form):
         # we need to cheat our way around select2's annoying way of clearing initial data fields
         self.fields['users'].choices = preresults
         self.fields['users'].initial = [key for key,__ in preresults]
-        self.fields['users'].widget.options['ajax']['url'] = group_aware_reverse(self.base_data_url, kwargs={'group': self.group})
+        self.fields['users'].widget.options['ajax']['url'] = self.get_ajax_url()
         self.initial['users'] = self.fields['users'].initial
-    
-    
+
+    def get_ajax_url(self):
+        if isinstance(self.group, CosinnusOrganization):
+            return reverse('cosinnus:organization-member-invite-select2', kwargs={'organization': self.group.slug})
+        return group_aware_reverse('cosinnus:group-member-invite-select2', kwargs={'group': self.group})
+
 
 class CosinnusLocationForm(forms.ModelForm):
 
@@ -310,15 +319,15 @@ class CosinnusLocationForm(forms.ModelForm):
             'location_lat': forms.HiddenInput(),
             'location_lon': forms.HiddenInput(),
         }
-        
-        
+
+
 class CosinnusGroupGalleryImageForm(forms.ModelForm):
 
     class Meta(object):
         model = CosinnusGroupGalleryImage
         fields = ('group', 'image', )
-        
-        
+
+
 class CosinnusGroupCallToActionButtonForm(forms.ModelForm):
     
     url = forms.URLField(widget=forms.TextInput, required=False)

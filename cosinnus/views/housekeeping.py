@@ -4,9 +4,9 @@ from __future__ import print_function
 from builtins import str
 from builtins import range
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
-    CosinnusPermanentRedirect, CosinnusPortal, MEMBERSHIP_MEMBER,\
-    MEMBERSHIP_PENDING, CosinnusPortalMembership, CosinnusLocation,\
-    MEMBERSHIP_ADMIN
+    CosinnusPermanentRedirect, CosinnusPortal, CosinnusPortalMembership, CosinnusLocation
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
+from cosinnus.models import MEMBERSHIP_PENDING, MEMBERSHIP_ADMIN
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from django.http.response import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import get_user_model

@@ -9,6 +9,7 @@ from django.http import Http404
 from django_select2 import Select2View, NO_ERR_RESP
 from taggit.models import Tag
 
+from cosinnus.models import CosinnusOrganization
 from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.permissions import check_ug_membership
@@ -17,7 +18,6 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import filter_active_users,\
     get_user_query_filter_for_search_terms, get_user_select2_pills
 from cosinnus.models.profile import get_user_profile_model
-
 
 
 class GroupMembersView(RequireGroupMember, Select2View):
@@ -52,7 +52,10 @@ class GroupMembersView(RequireGroupMember, Select2View):
 
         return (NO_ERR_RESP, has_more, results)
 
-group_members = GroupMembersView.as_view()
+
+class OrganizationMembersView(GroupMembersView):
+    group_slug_field = 'organization'
+    group_class = CosinnusOrganization
 
 
 class AllMembersView(RequireLoggedIn, Select2View):
@@ -79,8 +82,6 @@ class AllMembersView(RequireLoggedIn, Select2View):
 
         return (NO_ERR_RESP, has_more, results)
 
-all_members = AllMembersView.as_view()
-
 
 class TagsView(Select2View):
     
@@ -98,9 +99,6 @@ class TagsView(Select2View):
         tags = list(Tag.objects.filter(q).values_list('name', 'name').all()[start:end])
 
         return (NO_ERR_RESP, has_more, tags)
-
-tags_view = TagsView.as_view()
-
 
 
 class GroupsView(Select2View):
@@ -138,6 +136,9 @@ class GroupsView(Select2View):
             
         return (NO_ERR_RESP, has_more, groups)
 
+
+group_members = GroupMembersView.as_view()
+organization_members = OrganizationMembersView.as_view()
+all_members = AllMembersView.as_view()
+tags_view = TagsView.as_view()
 groups_view = GroupsView.as_view()
-
-

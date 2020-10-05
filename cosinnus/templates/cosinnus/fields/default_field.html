@@ -43,7 +43,7 @@
 	{% endif %}
 	
 	{% if legend %}
-	    <div class="field-description no-select">{{ legend }}</div>
+	    <div class="field-description no-select">{{ legend|safe }}</div>
 	{% endif %}
 	
 	{% if field and field.errors %}

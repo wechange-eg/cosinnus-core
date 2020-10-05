@@ -2,7 +2,7 @@ from builtins import object
 from datetime import datetime
 
 import pytz
-from cosinnus.models import MEMBERSHIP_ADMIN
+from cosinnus.models import MEMBERSHIP_ADMIN, CosinnusGroup, CosinnusOrganization
 from rest_framework import serializers
 
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
@@ -44,7 +44,7 @@ class CosinnusProjectSerializer(CosinnusSocietySerializer):
         model = CosinnusProject
 
 
-class OrganisationListSerializer(serializers.HyperlinkedModelSerializer):
+class OrganizationListSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.URLField(source='get_absolute_url', read_only=True)
     timestamp = serializers.DateTimeField(source='last_modified')
 
@@ -67,7 +67,7 @@ class CosinnusLocationSerializer(serializers.HyperlinkedModelSerializer):
         return None
 
 
-class OrganisationRetrieveSerializer(serializers.HyperlinkedModelSerializer):
+class OrganizationRetrieveSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.URLField(source='get_absolute_url', read_only=True)
     timestamp = serializers.DateTimeField(source='last_modified')
     slogan = serializers.SerializerMethodField()
@@ -167,3 +167,15 @@ class CosinnusProjectGoodDBSerializer(serializers.HyperlinkedModelSerializer):
                 'title': obj.avatar.name
             }]
         return images
+
+
+class GroupSimpleSerializer(serializers.ModelSerializer):
+    class Meta(object):
+        model = CosinnusGroup
+        fields = ('id', 'name', 'slug', 'public', 'description')
+
+
+class OrganizationSimpleSerializer(serializers.ModelSerializer):
+    class Meta(object):
+        model = CosinnusOrganization
+        fields = ('id', 'name', 'slug', 'description')

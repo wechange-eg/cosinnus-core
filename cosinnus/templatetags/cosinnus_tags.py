@@ -368,7 +368,7 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
 
         if settings.COSINNUS_ORGANIZATIONS_ENABLED:
             # "My Organizations"
-            my_organizations = CosinnusOrganization.objects.all_in_portal().filter(creator=user).order_by(Lower('title'))
+            my_organizations = CosinnusOrganization.objects.all_in_portal().filter(creator=user).order_by(Lower('name'))
             context['my_organizations_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(organization) for organization in my_organizations]))
 
 

@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('created', models.DateTimeField(auto_now_add=True, verbose_name='Created')),
                 ('last_modified', models.DateTimeField(auto_now=True, verbose_name='Last modified')),
                 ('description', models.TextField(blank=True, help_text='Short Description. Internal, will not be shown publicly.', verbose_name='Short Description')),
-                ('image', models.ImageField(blank=True, help_text='Shown as large banner image', max_length=250, null=True, upload_to=cosinnus.utils.files.get_organization_image_filename, verbose_name='Image')),
+                ('image', models.ImageField(blank=True, help_text='Shown as large banner image', max_length=250, null=True, upload_to=cosinnus.utils.files.get_organization_avatar_filename, verbose_name='Image')),
                 ('public', models.BooleanField(default=False, verbose_name='Public')),
                 ('synced', models.BooleanField(default=False, help_text='Should this organization be allowed to be synched into external databases?', verbose_name='Synced')),
                 ('is_active', models.BooleanField(default=True, help_text='If an organization is not active, it counts as non-existent for all purposes and views on the website.', verbose_name='Is active')),

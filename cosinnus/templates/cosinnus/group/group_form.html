@@ -3,6 +3,9 @@
 
 {% block extrahead %}
     {{ block.super }}
+    {% if not object and request.GET.description %}
+	    {% captureas description_value %}{{ request.GET.description }}{% endcaptureas %}
+	{% endif %}
     {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
     {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 %}
 {% endblock %}
@@ -95,6 +98,15 @@
 						{% trans "General" %}
 					</a>
 				</li>
+				{% for form in form.forms.obj.extra_forms %}
+				<li {% if request.GET.tab|add:"0" == forloop.counter %}class="active"{% endif %}>
+					<a href="#{{ forloop.counter }}" class="_group-form-tab" role="tab" data-toggle="tab"
+					   onclick="$('#submit').text('{% trans 'Save' %}')">
+						<i class="fa fa-{{ form.icon }}"></i>
+						{{ form.label }}
+					</a>
+				</li>
+				{% endfor %}
 				{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
 				<li {% if request.GET.tab == 'microsite' %}class="active"{% endif %}>
 					<a href="#microsite" class="_group-form-tab" role="tab" data-toggle="tab">
@@ -296,10 +308,14 @@
                                 <option {% if object and object.public %}selected{% endif %} value="true">{% trans "Public (visible without login)" %}</option>
                             </select>
 		                {% endcaptureas %}
-		                
 		                {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html field=form.forms.media_tag.visibility field_id="group-public-field" label=visibility_label legend=visibility_legend extra_html=visibility_warning_html %}
-		                
-		            
+
+						{# public Field #}
+						{% trans "Visibility on other platforms" as public_label %}
+						{% blocktrans asvar public_legend with url="/cms/partner-platforms/" %}Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href="#" target="_blank">partner platforms</a> by WECHANGE.{% endblocktrans %}
+						{% trans "This project shall be made publicly findable via other platforms." as public_box_label %}
+						{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.media_tag.public label=public_label legend=public_legend checkbox_label=public_box_label %}
+
                         {# Apps selector fields #}			                
 		                {% trans "Which apps should be activated?" as apps_label %}
 		                {% captureas apps_html %}
@@ -498,7 +514,16 @@
                             {% endblock group_dashboard_tab %}
                         </div>
                     {% endif %}
-					
+
+					{% block extra_forms %}
+					{% for form in form.forms.obj.extra_forms %}
+						<div class="tab-pane {% if request.GET.tab == forloop.counter %}active{% endif %}" id="{{ forloop.counter }}">
+							{% for field in form %}
+								{% include 'cosinnus/fields/default_field.html' with field=field label=field.label first=forloop.first %}
+							{% endfor %}
+						</div>
+					{% endfor %}
+					{% endblock extra_forms %}
 				{% endblock group_form_tab_panes %}
 				
 			</div>

@@ -4,10 +4,6 @@ from datetime import datetime, timedelta
 from importlib import import_module
 
 import requests
-from cosinnus.api.serializers import CosinnusProjectGoodDBSerializer
-from cosinnus.models.group_extra import CosinnusProject
-from cosinnus_event.api.serializers import EventGoodDBSerializer
-from cosinnus_event.models import Event
 from django.conf import settings
 from django.apps import apps
 

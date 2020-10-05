@@ -37,7 +37,7 @@
             <div class="row">
                 {% for organization in organizations %}
                     <div class="col-sm-6">
-                        {{ macros.itemCard(organization.portal, organization.slug, organization.title, organization.type, organization.iconImageUrl, organization.address, "fa-map-marker") }}
+                        {{ macros.itemCard(organization.portal, organization.slug, organization.name, organization.type, organization.iconImageUrl, organization.address, "fa-map-marker") }}
                     </div>
                 {% endfor %}
             </div>

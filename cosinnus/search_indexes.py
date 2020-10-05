@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from haystack import indexes
 
-from cosinnus.conf import settings
+from django.contrib.auth import get_user_model
+from django.urls import reverse
+from django.contrib.auth.models import AnonymousUser
+from django.utils.timezone import now
+
 from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgramField,\
     TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin,\
     DocumentBoostMixin, CommaSeperatedIntegerMultiValueField,\
@@ -11,19 +14,10 @@ from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgram
 from cosinnus.utils.user import filter_active_users, filter_portal_users
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
-from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.contrib.auth import get_user_model
 from cosinnus.utils.functions import normalize_within_stddev, resolve_class
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_ids
-from django.urls import reverse
-from django.utils.functional import cached_property
-from django.contrib.auth.models import AnonymousUser
 from cosinnus.models.idea import CosinnusIdea
-from cosinnus.models.tagged import LikeObject
-from django.contrib.contenttypes.models import ContentType
-from django.db import models
-from django.utils.timezone import now
 from cosinnus.models.organization import CosinnusOrganization
     
 
@@ -190,12 +184,12 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     user_visibility_mode = indexes.BooleanField(default=True) # switch to filter differently on mt_visibility
     membership_groups = indexes.MultiValueField() # ids of all groups the user is member/admin of
     admin_groups = indexes.MultiValueField() # ids of all groups the user is member/admin of
+    admin_organizations = indexes.MultiValueField() # ids of all organizations the user is member/admin of
     portals = indexes.MultiValueField()
     location = indexes.LocationField(null=True)
     user_id = indexes.IntegerField(model_attr='user__id')
     created = indexes.DateTimeField(model_attr='user__date_joined')
-    
-    
+
     local_cached_attrs = ['_memberships_count']
     
     def prepare_portals(self, obj):
@@ -233,7 +227,10 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     
     def prepare_admin_groups(self, obj):
         return list(get_cosinnus_group_model().objects.get_for_user_group_admin_pks(obj.user))
-    
+
+    def prepare_admin_organizations(self, obj):
+        return list(CosinnusOrganization.objects.get_for_user_group_admin_pks(obj.user))
+
     def get_model(self):
         return get_user_profile_model()
 
@@ -360,15 +357,17 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
           StoredDataIndexMixin, indexes.Indexable):
     
     text = TemplateResolveNgramField(document=True, use_template=True)
-    boosted = indexes.NgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
+    boosted = indexes.NgramField(model_attr='name', boost=BOOSTED_FIELD_BOOST)
 
-    public = indexes.BooleanField(model_attr='public')
     visible_for_all_authenticated_users = indexes.BooleanField()
+    public = indexes.BooleanField()
     creator = indexes.IntegerField(null=True)
     portal = indexes.IntegerField(model_attr='portal_id')
-    related_groups = indexes.MultiValueField() # ids of all groups that belong to the organization
-    location = indexes.LocationField(null=True)
-    
+    social_media = indexes.MultiValueField()
+    type = indexes.IntegerField()
+    type_other = indexes.CharField()
+    group_members = indexes.MultiValueField(indexed=False)
+
     def get_model(self):
         return CosinnusOrganization
     
@@ -381,33 +380,67 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
             for models in subqueries, so we set this indexed flag to be
             able to filter on for permissions """
         return True
-    
-    def prepare_liked_user_ids(self, obj):
-        return obj.get_liked_user_ids()
-    
-    def prepare_content_count(self, obj):
-        return obj.related_groups.filter(is_active=True).count()
-    
+
     def prepare_location(self, obj):
-        if obj.media_tag and obj.media_tag.location_lat and obj.media_tag.location_lon:
+        locations = obj.locations.all()
+        if locations and locations[0].location_lat and locations[0].location_lon:
             # this expects (lat,lon)!
-            return "%s,%s" % (obj.media_tag.location_lat, obj.media_tag.location_lon)
+            ret = "%s,%s" % (locations[0].location_lat, locations[0].location_lon)
+            return ret
         return None
 
-    def get_image_field_for_background(self, obj):
-        return obj.image
-    
+    def prepare_mt_location(self, obj):
+        """ Groups have save their location in related model GroupLocation and not in media_tag """
+        locations = obj.locations.all()
+        if locations:
+            return locations[0].location
+        return None
+
+    def prepare_mt_location_lat(self, obj):
+        """ Groups have save their location in related model GroupLocation and not in media_tag """
+        locations = obj.locations.all()
+        if locations:
+            return locations[0].location_lat
+        return None
+
+    def prepare_mt_location_lon(self, obj):
+        """ Groups have save their location in related model GroupLocation and not in media_tag """
+        locations = obj.locations.all()
+        if locations:
+            return locations[0].location_lon
+        return None
+
+    def prepare_title(self, obj):
+        return obj.name
+
+    def prepare_url(self, obj):
+        return obj.get_absolute_url()
+
     def get_image_field_for_icon(self, obj):
-        return obj.image
-    
-    def prepare_related_groups(self, obj):
-        return list(obj.related_groups.all().values_list('id', flat=True))
-    
+        return obj.get_image_field_for_icon()
+
+    def get_image_field_for_background(self, obj):
+        return obj.get_image_field_for_background()
+
+    def prepare_liked_user_ids(self, obj):
+        return obj.get_liked_user_ids()
+
+    def prepare_social_media(self, obj):
+        return list(obj.social_media.values_list('url', flat=True))
+
+    def prepare_public(self, obj):
+        return True
+
+    def prepare_group_members(self, obj):
+        if not hasattr(obj, '_group_members'):
+            obj._group_members = obj.members
+        return obj._group_members
+
     def index_queryset(self, using=None):
         qs = self.get_model().objects.active()
         qs = qs.select_related('media_tag')
         return qs
-    
+
     def boost_model(self, obj, indexed_data):
         """ We boost a single measure of 1 factor: newness (100%). """
         age_timedelta = now() - obj.created
@@ -421,6 +454,7 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
         if not self.get_image_field_for_background(obj):
             return DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
         return 1.0
+
 
 # also import all external search indexes
 from cosinnus.external.search_indexes import * #noqa

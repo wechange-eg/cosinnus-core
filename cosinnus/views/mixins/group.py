@@ -95,6 +95,8 @@ class RequireReadMixin(object):
           cause, then redirect to a login page or a permission denied page. If the second query also fails to
           match anything, we let the Http404 bubble up.
     """
+    group_url_kwarg = 'group'
+    group_attr = 'group'
 
     @require_read_access()
     def dispatch(self, request, *args, **kwargs):
@@ -114,7 +116,7 @@ class RequireReadMixin(object):
             visibility tags
         """
         qs = super(RequireReadMixin, self).get_queryset(**kwargs)
-        
+
         # only use this filter on querysets of media_tagged models
         # alternatively, we could check if qs.model is CosinnusGroup or BaseTaggableObjectModel subclass, 
         # or BaseUserProfileModel subclass, but this is more elegant:
@@ -147,8 +149,7 @@ class RequireReadMixin(object):
         
         self.object = obj
         return obj
-        
-    
+
     
 class RequireReadOrRedirectMixin(RequireReadMixin):
     """ Works exactly as :class:`RequireReadMixin`, but offers additional actions when

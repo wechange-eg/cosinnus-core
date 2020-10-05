@@ -13,9 +13,8 @@ from collections import defaultdict
 
 from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusPortal, CosinnusPortalMembership,\
-    CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING,\
-    CosinnusPermanentRedirect, MEMBERSHIP_ADMIN,\
-    CosinnusUnregisterdUserGroupInvite, RelatedGroups, CosinnusGroupInviteToken
+    CosinnusGroup, CosinnusPermanentRedirect, CosinnusUnregisterdUserGroupInvite, RelatedGroups, CosinnusGroupInviteToken
+from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN
 from cosinnus.models.profile import get_user_profile_model,\
     GlobalBlacklistedEmail, GlobalUserNotificationSetting
 from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
@@ -622,9 +621,9 @@ if settings.COSINNUS_IDEAS_ENABLED:
 if settings.COSINNUS_ORGANIZATIONS_ENABLED:
     
     class CosinnusOrganizationAdmin(admin.ModelAdmin):
-        list_display = ('title', 'created', 'creator', 'portal')
+        list_display = ('name', 'created', 'creator', 'portal')
         list_filter = ('created', 'portal')
-        search_fields = ('slug', 'title', 'creator__first_name', 'creator__last_name', 'creator__email') 
+        search_fields = ('slug', 'name', 'creator__first_name', 'creator__last_name', 'creator__email')
         readonly_fields = ('created',)
         raw_id_fields = ('creator',)
     

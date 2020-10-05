@@ -491,33 +491,24 @@ class DetailedOrganizationMapResult(DetailedMapResult):
     })
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
-        # collect group's created visible projects
-        projects_sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['projects'])
-        projects_sqs = projects_sqs.filter_and(id__in=obj.related_groups.all().values_list('id', flat=True))
-        # collect group's created visible groups
-        groups_sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['groups'])
-        groups_sqs = groups_sqs.filter_and(id__in=obj.related_groups.all().values_list('id', flat=True))
-        
-        # the preview for projects and groups is always visible for everyone!
-        #sqs = filter_searchqueryset_for_read_access(sqs, user)
-        projects_sqs = projects_sqs.order_by('title')
-        groups_sqs = groups_sqs.order_by('title')
-        
         kwargs.update({
-            'projects': [HaystackProjectMapCard(result) for result in projects_sqs],
-            'groups': [HaystackProjectMapCard(result) for result in groups_sqs],
-            'creator_name': obj.creator.get_full_name(),
-            'creator_slug': obj.creator.username,
-            'postal_address': obj.address,
+            'is_member': check_ug_membership(user, obj),
+            'is_pending': check_ug_pending(user, obj),
+            'is_invited': check_ug_invited_pending(user, obj),
+            'creator_name': obj.creator and obj.creator.get_full_name(),
+            'creator_slug': obj.creator and obj.creator.username,
+            'title': obj.name,
+            'organization_type': obj.get_type(),
             'website_url': obj.website,
             'email': obj.email,
             'phone_number': obj.phone_number.as_international if obj.phone_number else None,
+            'social_media': [{'url': sm.url, 'icon': sm.icon} for sm in obj.social_media.all()],
+            'edit_url': obj.get_edit_url(),
         })
-        
-        
+
         # collect administrator users. these are *not* filtered by visibility, as project admins are always visible!
         sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['people'])
-        sqs = sqs.filter_and(id=obj.creator_id)
+        sqs = sqs.filter_and(admin_organizations=obj.id)
         #sqs = filter_searchqueryset_for_read_access(sqs, user)
         # private users are not visible to anonymous users, BUT they are visible to logged in users!
         # because if a user chose to make his group visible, he has to take authorship responsibilities
@@ -529,7 +520,6 @@ class DetailedOrganizationMapResult(DetailedMapResult):
         
         ret = super(DetailedOrganizationMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
         return ret
-
 
 
 SHORTENED_ID_MAP = {

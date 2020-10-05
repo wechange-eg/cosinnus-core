@@ -59,6 +59,7 @@ class ExternalBaseIndexMixin(indexes.SearchIndex):
             return "%s,%s" % (obj.mt_location_lat, obj.mt_location_lon)
         return None
 
+
 class ExternalBaseGroupIndex(ExternalBaseIndexMixin, indexes.SearchIndex):
     # for filtering on this model
     is_group_model = indexes.BooleanField(default=True)
@@ -76,5 +77,3 @@ class ExternalSocietyIndex(ExternalBaseGroupIndex, indexes.Indexable):
     
     def get_model(self):
         return ExternalSociety
-
-    

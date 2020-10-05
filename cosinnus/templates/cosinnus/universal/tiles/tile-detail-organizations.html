@@ -1,52 +1,58 @@
-{% extends 'tiles/tile-detail-base' %}
+{% extends 'tiles/tile-detail-base-group' %}
 {% import "include/macros.html" as macros %}
 
-{% block header_image %}
-    <div class="single-tile-image {% if not iconImageUrl %}image-placeholder-background image-placeholder-background-{{ type }}{% endif %}">
-    	{% if iconImageUrl %}
-        	<img class="framed-tile-image" src="{{ iconImageUrl }}" />
+
+{% block title %}
+    <div class="tile-section title">
+        {% if is_member and edit_url %}
+        <a href="{{ edit_url }}" target="_blank" class="uncolored-link">
+            <h1>
+                {{ title }}
+                <i class="fa fa-pencil"></i>
+            </h1>
+        </a>
+        {% else %}
+        <h1>
+            {{ title }}
+        </h1>
         {% endif %}
     </div>
-{% endblock header_image %}
+{% endblock title %}
 
-{% block topic_line %}
-	{{ super() }}
-	
-    {% if may_be_contacted == true %}
-		<div class="top-line extra-space extra-space-top">
-            <i class="fa fa-fw fa-commenting-o"></i>
-            {# Translators: __INCLUDE_JS_PO__ #}
-            {% trans "Open to be contacted about potential collaboration opportunities" %}
-        </div>
-	{% elif may_be_contacted == false %}
-		<div class="top-line extra-space extra-space-top">
-            <i class="fa fa-fw fa-ban"></i>
-            {# Translators: __INCLUDE_JS_PO__ #}
-            {% trans "Does NOT wish to be contacted for potential collaboration!" %}
-        </div>
-	{% endif %}
-	
-{% endblock topic_line %}
-
+{% block top_line_group %}
+    <div class="tile-section topic-line one-line">
+        {{ organization_type }}
+    </div>
+{% endblock top_line_group %}
 
 {% block action_buttons %}
     <div class="tile-section tile-section-button-list">
-        {% if COSINNUS_SHOW_SUPERUSER_CONTROLS or cosinnus_active_user and cosinnus_active_user.username == creator_slug %}
-            <a href="/organizations/{{ slug }}/edit/" class="rounded-button button-action">
+        {% if is_member %}
+            <a class="rounded-button button-action disabled">
                 <span class="rounded-button-inner">
+                    <i clasS="fa fa-check"></i>
                     {# Translators: __INCLUDE_JS_PO__ #}
-                    {% trans "Edit your Organization" %}
+                    {% trans "You are a Admin" %}
+                </span>
+            </a>
+        {% elif is_invited or is_pending %}
+           <a href="{{ action_url_1 }}" target="_blank" class="rounded-button button-action">
+                <span class="rounded-button-inner">
+                    {% if is_invited %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "You are invited!" %}
+                    {% elif is_pending %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Membership request pending..." %}
+                    {% endif %}
                 </span>
             </a>
         {% endif %}
-        
-        {{ super() }}
     </div>
-{% endblock %}
+{% endblock action_buttons %}
 
 
 {% block contact %}
-
     <div class="tile-section tile-section-divided">
         <div class="row">
             <div class="col-xs-6">
@@ -54,113 +60,59 @@
                     {# Translators: __INCLUDE_JS_PO__ #}
                     {% trans "Contact" %}
                 </div>
-                {% if not postal_address and not website_url and not email and not phone_number %}
-                    <p class="pale-color">
-                        <i>
-                            {# Translators: __INCLUDE_JS_PO__ #}
-                            {% trans "No info." %}
-                        </i>
-                    </p>
-                {% else %}
-                    <div class="tile-section tile-section-compact">
-	                    {% if website_url %}
-	                        <div class="tile-section-header">
-	                            <a href="{{ website_url }}" target="_blank" class="compact-link">
-	                                <i class="fa fa-globe"></i>{{ website_url }}
-	                            </a>
-	                        </div>
-	                    {% endif %}
-	                    {% if email %}
-	                        <div class="tile-section-header">
-	                            <a href="mailto:{{ email }}" target="_blank" class="compact-link">
-	                                <i class="fa fa-envelope"></i>{{ email }}
-	                            </a>
-	                        </div>
-	                    {% endif %}
-	                    {% if phone_number %}
-	                        <div class="tile-section-header">
-	                            <a href="tel:{{ phone_number }}" target="_blank" class="compact-link">
-	                                <i class="fa fa-phone"></i>{{ phone_number }}
-	                            </a>
-	                        </div>
-	                    {% endif %}
-	                    {% if postal_address %}
-	                        <div class="tile-section-header">
-	                            <i class="fa fa-home"></i>{{ postal_address }}
-	                        </div>
-	                    {% endif %}
+                {% if website_url %}
+                    <div class="tile-section one-line no-space">
+                        <a href="{{ website_url }}" target="_blank" class="compact-link">
+                            <i class="fa fa-globe"></i>{{ website_url }}
+                        </a>
                     </div>
                 {% endif %}
-                
+                {% for sm in social_media %}
+                    <div class="tile-section one-line no-space">
+                        <a href="{{ sm.url }}" target="_blank" class="compact-link">
+                            <i class="fa fa-{{ sm.icon }}"></i>{{ sm.url }}
+                        </a>
+                    </div>
+                {% endfor %}
+                {% if email %}
+                    <div class="tile-section one-line no-space">
+                        <a href="mailto:{{ email }}" target="_blank" class="compact-link">
+                            <i class="fa fa-envelope"></i>{{ email }}
+                        </a>
+                    </div>
+                {% endif %}
+                {% if phone_number %}
+                    <div class="tile-section one-line no-space">
+                        <a href="tel:{{ phone_number }}" target="_blank" class="compact-link">
+                            <i class="fa fa-phone"></i>{{ phone_number }}
+                        </a>
+                    </div>
+                {% endif %}
             </div>
-            
-            {% if False %}
-	            {# TODO: contact person hidden for now, until ownership can be transferred #}
-	            <div class="col-xs-6">
-	                <div class="subheading">
-	                    {# Translators: __INCLUDE_JS_PO__ #}
-	                    {% trans "Contact Person" %}
-	                </div>
-	                <div class="tile-section">
-	                    {% if admins|length > 0 %}
-	                        {% for admin in admins %}
-	                            {{ macros.itemCard(admin.portal, admin.slug, admin.title, admin.type, admin.iconImageUrl, admin.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
-	                        {% endfor %}
-	                    {% else %}
-	                        {# Translators: __INCLUDE_JS_PO__ #}
-	                        </i>{% trans "Contact Persons unknown" %}</i>
-	                    {% endif %}
-	                </div>
-	            </div>
-            {% endif %}
+            <div class="col-xs-6">
+                <div class="subheading">
+                    {% if admins|length > 1 %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Administrator" %}
+                    {% else %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Administrators" %}
+                    {% endif %}
+                </div>
+                <div class="tile-section">
+                    {% if admins|length > 0 %}
+                        {% for admin in admins %}
+                            {{ macros.itemCard(admin.portal, admin.slug, admin.title, admin.type, admin.iconImageUrl, admin.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
+                        {% endfor %}
+                    {% else %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        </i>{% trans "Administrators unknown" %}</i>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-    
+
     </div>
-    
+
+
 {% endblock contact %}
-
-
-{% block related_content %}
-    
-    <div class="clearfix"></div>
-    
-    {% if groups|length > 0 %}
-    
-        <div class="tile-section tile-section-divided">
-            <div class="subheading">
-                <i class="fa fa-sitemap"></i>
-                {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "Groups" %} ({{ groups|length }})
-            </div>
-        </div>
-        <div class="tile-section">
-            <div class="row">
-                {% for group in groups %}
-                    <div class="col-sm-6">
-                        {{ macros.itemCard(group.portal, group.slug, group.title, group.type, group.iconImageUrl, group.address, "fa-map-marker", group.dataSlot1, "fa-group", cosinnus_active_user=cosinnus_active_user) }}
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
-
-    {% if projects|length > 0 %}
-        <div class="tile-section tile-section-divided">
-            <div class="subheading">
-                <i class="fa fa-group"></i>
-                {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "Projects" %} ({{ projects|length }})
-            </div>
-        </div>
-        <div class="tile-section">
-            <div class="row">
-                {% for project in projects %}
-                    <div class="col-sm-6">
-                        {{ macros.itemCard(project.portal, project.slug, project.title, project.type, project.iconImageUrl, project.address, "fa-map-marker", project.dataSlot1, "fa-group", cosinnus_active_user=cosinnus_active_user) }}
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
-    
-{% endblock related_content %}

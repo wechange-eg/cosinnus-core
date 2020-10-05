@@ -52,7 +52,7 @@ class DashboardItem(dict):
                 self['url'] = obj.get_absolute_url()
             elif type(obj) is CosinnusOrganization:
                 self['icon'] = 'fa-building'
-                self['text'] = escape(obj.title)
+                self['text'] = escape(obj.name)
                 self['url'] = obj.get_absolute_url()
             elif obj._meta.model.__name__ == 'Message' and not settings.COSINNUS_ROCKET_ENABLED and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
                 self['icon'] = 'fa-envelope'
@@ -79,5 +79,3 @@ class DashboardItem(dict):
                 if obj.__class__.__name__ == 'Event':
                     if obj.state != 2:
                         self['subtext'] = {'is_date': True, 'date': django_date_filter(obj.from_date, 'Y-m-d')}
-
-

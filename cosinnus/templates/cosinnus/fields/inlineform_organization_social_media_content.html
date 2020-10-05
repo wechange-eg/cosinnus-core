@@ -1,0 +1,7 @@
+{% load i18n widget_tweaks %}
+
+{{ inlineform.social_media.errors }}
+{% trans "Example: https://twitter.com/myaccount" as placeholder %}
+{% render_field inlineform.url placeholder=placeholder %}
+{{ inlineform.organization }}
+{{ inlineform.id }}

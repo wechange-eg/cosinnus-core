@@ -27,9 +27,10 @@ from cosinnus.models.profile import get_user_profile_model,\
     GlobalUserNotificationSetting
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusPortal,\
-    CosinnusUnregisterdUserGroupInvite, CosinnusGroupMembership,\
-    MEMBERSHIP_INVITED_PENDING, CosinnusGroupInviteToken, MEMBERSHIP_MEMBER,\
-    MEMBER_STATUS
+    CosinnusUnregisterdUserGroupInvite, CosinnusGroupMembership, \
+    CosinnusGroupInviteToken
+from cosinnus.models import MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
     send_mail_or_fail_threaded, send_html_mail_threaded
 from django.template.loader import render_to_string

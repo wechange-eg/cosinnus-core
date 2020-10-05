@@ -10,7 +10,7 @@ from rest_framework import serializers
 
 from cosinnus.conf import settings
 from cosinnus.models.profile import get_user_profile_model
-from cosinnus.models.serializers.group import GroupSimpleSerializer
+from cosinnus.api.serializers.group import GroupSimpleSerializer
 from cosinnus.utils.import_utils import import_from_settings
 
 

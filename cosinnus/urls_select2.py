@@ -18,6 +18,7 @@ for url_key in group_model_registry:
 
 # IMPORTANT: this must be the last URLs matched, otherwise they will cover the group-specific ones
 urlpatterns += [
+    url(r'organization/(?P<organization>[^/]+)/members/$', select2.organization_members, name='organization-members'),
     url(r'members/$', select2.all_members, name='all-members'),
     url(r'tags/$', select2.tags_view, name='tags'),
     url(r'groups/$', select2.groups_view, name='groups'),

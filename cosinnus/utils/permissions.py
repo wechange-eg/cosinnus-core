@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 from builtins import str
 from django.db.models import Q
 
-from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership,\
-    MEMBERSHIP_ADMIN
+from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
+from cosinnus.models import MEMBERSHIP_ADMIN
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject,\
     BaseHierarchicalTaggableObjectModel
 from cosinnus.models.profile import BaseUserProfile, GlobalBlacklistedEmail,\
@@ -96,8 +96,8 @@ def check_object_read_access(obj, user):
         # ideas are only either public or visible by any logged in user, no private setting
         return obj.public or user.is_authenticated
     elif type(obj) is CosinnusOrganization:
-        # organizations are only either public or visible by any logged in user, no private setting
-        return obj.public or user.is_authenticated
+        # organizations are visible by any logged in user, no private setting
+        return user.is_authenticated
     elif issubclass(obj.__class__, BaseUserProfile):
         return check_user_can_see_user(user, obj.user)
     else:

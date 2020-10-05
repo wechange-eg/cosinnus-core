@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.urls import reverse, resolve, Resolver404
+from django.urls import resolve, Resolver404
 from django.utils.formats import get_format
 from django.utils.translation import get_language
 
 from cosinnus.conf import settings as SETTINGS
 from cosinnus.core.registries import app_registry
-from cosinnus.models.serializers.profile import UserSimpleSerializer
+from cosinnus.api.serializers.profile import UserSimpleSerializer
 import json
-from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.forms.user import TermsOfServiceFormFields
 
@@ -55,7 +54,7 @@ def cosinnus(request):
     
     ``COSINNUS_USER``
         If ``request.user`` is logged in, its a serialized version of
-        :class:`~cosinnus.models.serializers.profile.UserSimpleSerializer`. If
+        :class:`~cosinnus.api.serializers.profile.UserSimpleSerializer`. If
         not authenticated it is ``False``. Both serialized to JSON.
     """
     base_url = CosinnusPortal.get_current().get_domain() 

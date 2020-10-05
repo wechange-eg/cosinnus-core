@@ -16,17 +16,20 @@ class RequireLoggedIn(object):
 
 
 class RequireGroupMember(RequireLoggedIn):
+
+    group_slug_field = 'group'
+    group_class = CosinnusGroup
     
     def check_all_permissions(self, request, *args, **kwargs):
         super(RequireGroupMember, self).check_all_permissions(request, *args, **kwargs)
 
-        group_slug = kwargs.get('group', None)
+        group_slug = kwargs.get(self.group_slug_field, None)
         if group_slug is None:
             raise PermissionDenied
 
         try:
-            self.group = CosinnusGroup.objects.get(slug=group_slug)
-        except CosinnusGroup.DoesNotExist:
+            self.group = self.group_class.objects.get(slug=group_slug)
+        except self.group_class.DoesNotExist:
             raise PermissionDenied
 
         user = request.user

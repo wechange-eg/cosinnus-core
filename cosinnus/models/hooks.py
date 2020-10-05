@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 
 from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
-    MEMBERSHIP_MEMBER, CosinnusGroupMembership, CosinnusPortal
+    CosinnusGroupMembership, CosinnusPortal
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.utils.user import assign_user_to_default_auth_group, \
     ensure_user_to_default_portal_groups
 from django.contrib.auth import get_user_model

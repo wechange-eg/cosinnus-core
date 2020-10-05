@@ -1,37 +1,37 @@
-cosinnus.models.serializers package
+cosinnus.api.serializers package
 ===================================
 
 Submodules
 ----------
 
-cosinnus.models.serializers.base module
+cosinnus.api.serializers.base module
 ---------------------------------------
 
-.. automodule:: cosinnus.models.serializers.base
+.. automodule:: cosinnus.api.serializers.base
     :members:
     :undoc-members:
     :show-inheritance:
 
-cosinnus.models.serializers.group module
+cosinnus.api.serializers.group module
 ----------------------------------------
 
-.. automodule:: cosinnus.models.serializers.group
+.. automodule:: cosinnus.api.serializers.group
     :members:
     :undoc-members:
     :show-inheritance:
 
-cosinnus.models.serializers.profile module
+cosinnus.api.serializers.profile module
 ------------------------------------------
 
-.. automodule:: cosinnus.models.serializers.profile
+.. automodule:: cosinnus.api.serializers.profile
     :members:
     :undoc-members:
     :show-inheritance:
 
-cosinnus.models.serializers.tagged module
+cosinnus.api.serializers.tagged module
 -----------------------------------------
 
-.. automodule:: cosinnus.models.serializers.tagged
+.. automodule:: cosinnus.api.serializers.tagged
     :members:
     :undoc-members:
     :show-inheritance:
@@ -40,7 +40,7 @@ cosinnus.models.serializers.tagged module
 Module contents
 ---------------
 
-.. automodule:: cosinnus.models.serializers
+.. automodule:: cosinnus.api.serializers
     :members:
     :undoc-members:
     :show-inheritance:

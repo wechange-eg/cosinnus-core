@@ -21,7 +21,7 @@ from cosinnus.views.widget import DashboardWidgetMixin
 
 class GroupMicrosite(DashboardWidgetMixin, TemplateView):
     """ TODO: Refactor-merge and unify this view to a mixin with DashboardMixin for groups,
-        after this view has been generalized to allow Organisations instead of Groups.
+        after this view has been generalized to allow Organizations instead of Groups.
     """
     template_name = 'cosinnus/microsite.html'
     group_url_kwarg = 'group'
