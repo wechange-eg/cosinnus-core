@@ -410,7 +410,8 @@ def print_settings(request):
     setts = ''
     for key in dir(settings):
         val = force_text(getattr(settings, key))
-        if 'password' in key.lower() or 'password' in val.lower():
+        if 'password' in key.lower() or 'password' in val.lower() or  \
+                'secret' in key.lower() or 'secret' in val.lower():
             val = '***'
         setts += '%s = %s<br/>' % (key, val)
     return HttpResponse('Settings are:<br/>' + setts)

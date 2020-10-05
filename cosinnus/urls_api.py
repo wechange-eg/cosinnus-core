@@ -6,13 +6,15 @@ from django.conf.urls import url
 from cosinnus.conf import settings
 from cosinnus.utils.url_patterns import api_patterns
 from cosinnus.core.registries.group_models import group_model_registry
-from cosinnus.views import group, user, statistics, common
+from cosinnus.views import group, user, common
+from cosinnus.api.views import StatisticsView
+
 
 urlpatterns = api_patterns(1, None, False,
     url(r'^login/$', user.login_api, name='login'),
     url(r'^logout/$', user.logout_api, name='logout'),
     
-    url(r'^statistics/general/$', statistics.general,  name='statistics-general'),
+    url(r'^statistics/general/$', StatisticsView.as_view(),  name='statistics-general'),
     url(r'^user/me/$', user.user_api_me,  name='user-api-me'),
     url(r'^common/get-metadata/$', common.get_metadata_from_url,  name='api-get-metadata'),
 )

@@ -67,7 +67,7 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
             preresults = self.instance.tags.values_list('name', 'name').all()
         elif self.group:
             preresults = self.group.media_tag.tags.values_list('name', 'name').all()
-
+        
         if preresults:
             self.fields['tags'].choices = preresults
             self.fields['tags'].initial = [key for key,val in preresults]#[tag.name for tag in self.instance.tags.all()]
@@ -142,10 +142,17 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         # since the widget currently ignores the allowClear setting we have
         # to use this hack to remove the clear-button
         self.fields['visibility'].widget.is_required = True
-            
+        
+        # save BBB room
+        if self.instance.pk and self.instance.bbb_room:
+            self.initial['bbb_room'] = self.instance.bbb_room
         
     def save(self, commit=True):
         self.instance = super(BaseTagObjectForm, self).save(commit=False)
+        
+        # restore BBB room
+        if 'bbb_room' in self.initial:
+            self.instance.bbb_room = self.initial['bbb_room']
         
         # set default visibility tag to correspond to group visibility
         # GOTCHA: since BaseTagObject.VISIBILITY_USER == 0, we cannot simply check for ``if not <property``
@@ -286,7 +293,10 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
                 if len(added_persons) > 0:
                     obj.on_save_added_tagged_persons(added_persons)
                 
-                
+                # call `after_save(obj)` on the object form
+                if hasattr(self.forms['obj'], 'after_save'):
+                    self.forms['obj'].after_save(obj)
+                    
             # We do not really care about the media tag as a return value.
             # We can access it through the object.
             return obj

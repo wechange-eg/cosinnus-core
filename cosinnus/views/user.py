@@ -58,7 +58,8 @@ from cosinnus.conf import settings
 from cosinnus.utils.tokens import email_blacklist_token_generator
 from cosinnus.utils.functions import is_email_valid
 from django.views.generic.base import TemplateView
-from cosinnus.utils.urls import redirect_with_next, redirect_next_or
+from cosinnus.utils.urls import redirect_with_next, redirect_next_or,\
+    group_aware_reverse
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_slugs
 from django.template import loader
@@ -242,6 +243,14 @@ class UserCreateView(CreateView):
                     messages.success(self.request, _('Token invitations applied. You are now a member of the associated projects/groups!'))
                 else:
                     messages.error(self.request, _('There was an error while processing your invites. Some of your invites may not have been applied.'))
+                # also add a welcome-redirect to the first invite group for the user
+                # (non-prio so the welcome page shows first!)
+                try:
+                    first_invite_group = invite.invite_groups.first()
+                    user.cosinnus_profile.add_redirect_on_next_page(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': first_invite_group}), message=None, priority=False)
+                except Exception as e:
+                    logger.error('Error while applying a welcome-redirect from invite token to a freshly signed up user profile', 
+                                 extra={'exception': e, 'reason': str(e)})
         
         if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
             # add redirect to the welcome-settings page, with priority so that it is shown as first one
@@ -286,7 +295,14 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
                 self.media_tag.save()
         
         messages.success(request, self.message_success)
-        if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or \
+        
+        # conference groups
+        user_societies = CosinnusSociety.objects.get_for_user(request.user)
+        user_conferences = [society for society in user_societies if society.group_is_conference]
+        if len(user_conferences) > 0:
+            # if the user is part of a conference, redirect there after the welcome screen
+            redirect_url = user_conferences[0].get_absolute_url()
+        elif getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or \
             (getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False) and self.request.user.is_superuser):
             redirect_url = reverse('cosinnus:user-dashboard')
         else:

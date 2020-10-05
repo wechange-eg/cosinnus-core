@@ -140,9 +140,9 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
         return profile
 
     def fetch_profile_data(self):
-        token = self.sociallogin.token
+        token = self.sociallogin.meeting_id
         profile_url = '{}/o/profile/'.format(settings.COSINNUS_OAUTH_SERVER_BASEURL)
-        headers = {'Authorization': 'Bearer {0}'.format(token.token)}
+        headers = {'Authorization': 'Bearer {0}'.format(token.meeting_id)}
         resp = requests.get(profile_url, headers=headers)
         resp.raise_for_status()
         return resp.json()

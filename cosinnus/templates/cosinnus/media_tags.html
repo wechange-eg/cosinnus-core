@@ -115,7 +115,7 @@
     </div>
 {% endif %}
 
-{% if not show_all %}
+{% if not show_all and not disable_more_button %}
 	<div class="media_tag_initial_visible">
 	    {% include 'cosinnus/fields/default_field.html' with legend=media_tags_legend label=media_tags_label %}
 	    <div class="btn btn-emphasized btn-small btn-no-float regular-space w100" onclick="display_media_tags();">

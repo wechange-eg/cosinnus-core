@@ -1,0 +1,325 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2020-09-23T22:34:56.198Z\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"MIME-Version: 1.0\n"
+"X-Generator: react-intl-po\n"
+
+
+#: locale/src/views/Discussions/list.json
+#. [Agenda]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Lobby/index.json
+#. [Agenda]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Stage/list.json
+#. [Agenda]
+#. defaultMessage is:
+#. undefined
+msgid "Agenda"
+msgstr ""
+
+#: locale/src/views/components/ManageEventButtons/index.json
+#. [Are you sure you want to delete this event?]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageEventIcons/index.json
+#. [Are you sure you want to delete this event?]
+#. defaultMessage is:
+#. undefined
+msgid "Are you sure you want to delete this event?"
+msgstr ""
+
+#: locale/src/views/components/ManageRoomButtons/index.json
+#. [Are you sure you want to delete this room?]
+#. defaultMessage is:
+#. undefined
+msgid "Are you sure you want to delete this room?"
+msgstr ""
+
+#: locale/src/views/components/Sidebar/index.json
+#. [Chats]
+#. defaultMessage is:
+#. undefined
+msgid "Chats"
+msgstr ""
+
+#: locale/src/views/App.json
+#. [Conference is being prepared]
+#. defaultMessage is:
+#. undefined
+msgid "Conference is being prepared"
+msgstr ""
+
+#: locale/src/views/Channels/list.json
+#. [Connect with someone via videochat for 5 minutes]
+#. defaultMessage is:
+#. undefined
+msgid "Connect with someone via videochat for 5 minutes"
+msgstr ""
+
+#: locale/src/views/Participants/list.json
+#. [Contact]
+#. defaultMessage is:
+#. undefined
+msgid "Contact"
+msgstr ""
+
+#: locale/src/views/Participants/list.json
+#. [Country]
+#. defaultMessage is:
+#. undefined
+msgid "Country"
+msgstr ""
+
+#: locale/src/views/components/ManageRoomButtons/index.json
+#. [Create event]
+#. defaultMessage is:
+#. undefined
+msgid "Create event"
+msgstr ""
+
+#: locale/src/views/components/ManageEventButtons/index.json
+#. [Delete event]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageEventIcons/index.json
+#. [Delete event]
+#. defaultMessage is:
+#. undefined
+msgid "Delete event"
+msgstr ""
+
+#: locale/src/views/components/ManageRoomButtons/index.json
+#. [Delete room]
+#. defaultMessage is:
+#. undefined
+msgid "Delete room"
+msgstr ""
+
+#: locale/src/views/components/ManageEventButtons/index.json
+#. [Edit event]
+#. defaultMessage is:
+#. undefined
+msgid "Edit event"
+msgstr ""
+
+#: locale/src/views/components/ManageRoomButtons/index.json
+#. [Edit room]
+#. defaultMessage is:
+#. undefined
+msgid "Edit room"
+msgstr ""
+
+#: locale/src/views/Participants/list.json
+#. [Filter by country]
+#. defaultMessage is:
+#. undefined
+msgid "Filter by country"
+msgstr ""
+
+#: locale/src/views/CoffeeTables/list.json
+#. [Happening now]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Workshops/list.json
+#. [Happening now]
+#. defaultMessage is:
+#. undefined
+msgid "Happening now"
+msgstr ""
+
+#: locale/src/views/components/Loading/index.json
+#. [Loading]
+#. defaultMessage is:
+#. undefined
+msgid "Loading"
+msgstr ""
+
+#: locale/src/views/components/Nav/index.json
+#. [Manage conference]
+#. defaultMessage is:
+#. undefined
+msgid "Manage conference"
+msgstr ""
+
+#: locale/src/views/components/Nav/index.json
+#. [Manage events]
+#. defaultMessage is:
+#. undefined
+msgid "Manage events"
+msgstr ""
+
+#: locale/src/views/components/Nav/index.json
+#. [Manage rooms]
+#. defaultMessage is:
+#. undefined
+msgid "Manage rooms"
+msgstr ""
+
+#: locale/src/views/Participants/list.json
+#. [Name]
+#. defaultMessage is:
+#. undefined
+msgid "Name"
+msgstr ""
+
+#: locale/src/views/components/ManageEventButtons/index.json
+#. [No]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageEventIcons/index.json
+#. [No]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageRoomButtons/index.json
+#. [No]
+#. defaultMessage is:
+#. undefined
+msgid "No"
+msgstr ""
+
+#: locale/src/views/CoffeeTables/list.json
+#. [No current coffee tables.]
+#. defaultMessage is:
+#. undefined
+msgid "No current coffee tables."
+msgstr ""
+
+#: locale/src/views/Workshops/list.json
+#. [No current workshops.]
+#. defaultMessage is:
+#. undefined
+msgid "No current workshops."
+msgstr ""
+
+#: locale/src/views/components/EventList/index.json
+#. [No events planned.]
+#. defaultMessage is:
+#. undefined
+msgid "No events planned."
+msgstr ""
+
+#: locale/src/views/Channels/list.json
+#. [No networking channels.]
+#. defaultMessage is:
+#. undefined
+msgid "No networking channels."
+msgstr ""
+
+#: locale/src/views/Participants/list.json
+#. [No participants.]
+#. defaultMessage is:
+#. undefined
+msgid "No participants."
+msgstr ""
+
+#: locale/src/views/Organisations/index.json
+#. [No represented organisations.]
+#. defaultMessage is:
+#. undefined
+msgid "No represented organisations."
+msgstr ""
+
+#: locale/src/views/Workshops/list.json
+#. [No upcoming workshops.]
+#. defaultMessage is:
+#. undefined
+msgid "No upcoming workshops."
+msgstr ""
+
+#: locale/src/views/components/EventCard/index.json
+#. [Now]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/EventList/index.json
+#. [Now]
+#. defaultMessage is:
+#. undefined
+msgid "Now"
+msgstr ""
+
+#: locale/src/views/Participants/list.json
+#. [Organisation]
+#. defaultMessage is:
+#. undefined
+msgid "Organisation"
+msgstr ""
+
+#: locale/src/views/Organisations/index.json
+#. [Represented organisations]
+#. defaultMessage is:
+#. undefined
+msgid "Represented organisations"
+msgstr ""
+
+#: locale/src/views/App.json
+#. [The conference is being prepared, please try again at a later date.]
+#. defaultMessage is:
+#. undefined
+msgid "The conference is being prepared, please try again at a later date."
+msgstr ""
+
+#: locale/src/views/Workshops/list.json
+#. [Upcoming workshops]
+#. defaultMessage is:
+#. undefined
+msgid "Upcoming workshops"
+msgstr ""
+
+#: locale/src/views/components/ManageEventButtons/index.json
+#. [Yes]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageEventIcons/index.json
+#. [Yes]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageRoomButtons/index.json
+#. [Yes]
+#. defaultMessage is:
+#. undefined
+msgid "Yes"
+msgstr ""
+
+#: locale/src/views/components/Nav/index.json
+#. [hidden]
+#. defaultMessage is:
+#. undefined
+msgid "hidden"
+msgstr ""
+
+#: locale/src/views/components/EventCard/index.json
+#. [minutes left]
+#. defaultMessage is:
+#. undefined
+msgid "minutes left"
+msgstr ""
+
+#: locale/src/views/components/EventList/index.json
+#. [parallel events]
+#. defaultMessage is:
+#. undefined
+msgid "parallel events"
+msgstr ""
+
+#: locale/src/views/components/CoffeeTable/index.json
+#. [participants]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/EventCard/index.json
+#. [participants]
+#. defaultMessage is:
+#. undefined
+msgid "participants"
+msgstr ""
+
+#: locale/src/views/components/CoffeeTable/index.json
+#. [places left]
+#. defaultMessage is:
+#. undefined
+msgid "places left"
+msgstr ""

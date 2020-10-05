@@ -779,6 +779,11 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
          help_text='A field with custom HTML that will be shown to all group members on the group dashboard',
          blank=True, null=True)
     
+    conference_theme_color = models.CharField(_('Conference theme color'), 
+        help_text=_('Conference theme color for conference groups only (css hex value, with or without "#")'),
+        max_length=10, validators=[MaxLengthValidator(7)],
+        blank=True, null=True)
+    
     # a comma-seperated list of all cosinnus apps that should not be shown in the frontend, 
     # be editable, or be indexed by search indices for this group
     deactivated_apps = models.CharField(_('Deactivated Apps'), max_length=255, 
@@ -894,6 +899,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         if created and not self.portal:
             # set portal to current
             self.portal = CosinnusPortal.get_current()
+            
+        # clean color fields
+        if self.conference_theme_color:
+            self.conference_theme_color = self.conference_theme_color.replace('#', '')
         
         super(CosinnusBaseGroup, self).save(*args, **kwargs)
         
@@ -1004,16 +1013,37 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         return qs
 
     @property
-    def is_group_and_conference(self):
+    def group_is_conference(self):
+        """ Check if this is a proper conference (a type society with conference flag) """
         return self.type == self.TYPE_SOCIETY and self.is_conference
 
     @property
     def conference_members(self):
+        """ Returns a User QS of conference members of this group if it is a conference, an empty QS else """
         from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
-        if self.is_group_and_conference:
+        if self.group_is_conference:
             return self.users.filter(cosinnus_profile__settings__contains=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
-        return []
-
+        return get_user_model().objects.none()
+    
+    @property
+    def conference_group_result_projects(self):
+        """ Returns a QS of all result projects from all conference rooms, if this is a conference """
+        if not self.group_is_conference:
+            return get_cosinnus_group_model().objects.none()
+        return get_cosinnus_group_model().objects.filter(is_active=True, conference_room__group=self)
+    
+    def get_additional_rocketchat_room_ids(self):
+        """ A group may have additional rocketchat room IDs that it corresponds to. 
+            All room ids returned here will also be managed by the rocketchat hooks for
+            members joining/leaving, etc. """
+        room_ids = []
+        # add all conference rooms with a rocketchat room type 
+        if self.group_is_conference:
+            for room in self.rooms:
+                if room.type in room.ROCKETCHAT_ROOM_TYPES and room.rocket_chat_room_id:
+                    room_ids.append(room.rocket_chat_room_id)
+        return list(set(room_ids))
+        
     def get_admin_contact_url(self):
         if 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
             return ''
@@ -1373,6 +1403,7 @@ class CosinnusGroupMembership(BaseGroupMembership):
         """ Checks and fires `user_joined_group` signal if a user has hereby joined this group """
         created = bool(self.pk is None)
         super(CosinnusGroupMembership, self).save(*args, **kwargs)
+        signals.group_membership_has_changed.send(sender=self, instance=self, deleted=False)
         created_as_membership = bool(created and self.status in MEMBER_STATUS)
         changed_to_membership = bool(not created and self._status not in MEMBER_STATUS and self.status in MEMBER_STATUS)
         if created_as_membership or changed_to_membership:
@@ -1380,9 +1411,10 @@ class CosinnusGroupMembership(BaseGroupMembership):
     
     def delete(self, *args, **kwargs):
         """ Checks and fires `user_left_group` signal if a user has hereby left this group """
+        signals.group_membership_has_changed.send(sender=self, instance=self, deleted=True)
         super(CosinnusGroupMembership, self).delete(*args, **kwargs)
         signals.user_left_group.send(sender=self.group, user=self.user, group=self.group)
-    
+
 
 class CosinnusPortalMembership(BaseGroupMembership):
     group = models.ForeignKey(CosinnusPortal, related_name='memberships',

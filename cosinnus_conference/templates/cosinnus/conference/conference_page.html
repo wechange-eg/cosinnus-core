@@ -1,0 +1,94 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n thumbnail cosinnus_tags static %}
+
+{% block html_attributes %}style="overflow: hidden;"{% endblock html_attributes %}
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block og_meta_attributes %}
+    {% include 'cosinnus/group/group_og_meta_attributes.html' with group=group %}
+{% endblock %}
+
+{% block js_app_dependencies %}
+    {% comment %} Put JS dependencies here {% endcomment %}
+{% endblock js_app_dependencies %}
+
+
+{% block main_page %}
+    <div class="row">
+        {% include 'cosinnus/common/internet_explorer_not_supported.html' %}
+    
+        {% comment %} Some settings for this map are initialized in the extraheader, and passed in a router.js, and uses a lot of
+                       the default settings defined in map.js.  
+                      We don't pass a `settings param here because we use all the default ones.`      
+        {% endcomment %}
+        
+        <h2 class="white-text">TODO: conference main page (react) shows here</h2>
+        
+        <p>
+            <a href="{% group_url 'cosinnus:conference:management' group=group %}">Conference management</a>
+            |
+			<a href="{% group_url 'cosinnus:conference:room-management' group=group %}">Room management</a>
+			|
+			<a href="{% group_url 'cosinnus:group-edit' group=group %}">Conference settings</a>
+        </p>
+        <br/>
+        
+        {% if room %}
+            <h3 style="color: 333;">Currently showing this room: {{ room.title }}</h3>
+            <p><a href="{{ room.get_room_create_url }}">Create Conference Event in this Room</a></p>
+            
+            <p>
+                The RocketChat-Room URL for this room is:
+                {% if room.get_rocketchat_room_url %}
+                    <a href="{{ room.get_rocketchat_room_url }}">{{ room.get_rocketchat_room_url }}</a>
+                {% else %}
+                    <b>(not applicable for this room or Rocketchat room could not be created)</b>
+                {% endif %}
+            </p>
+            
+            {% if events %}
+                <p>These events are in the room:</p>
+                {% for event in events %}
+                    <p>
+                        <b>{{ event.id }}</b>: {{ event.title }} 
+                        (<a href="{{ event.get_edit_url }}">Edit</a>)
+                        (<a href="{{ event.get_bbb_room_url }}">BBB-Room</a>)
+                    <p>
+                {% endfor %}
+            {% else %}
+                <p>There are no events in this room</p>
+            {% endif %}
+            
+            {% if room.target_result_group %}
+                <div>
+                    <p>Since this is a related project room, here's the iframe:</p>
+                    <iframe width=800 height=600 src="{{ room.target_result_group.get_absolute_url }}"></iframe>
+                </div>
+            {% endif %}
+        {% else %}
+            <p>No rooms have been created yet.</p>
+        {% endif %}
+        
+        <hr>
+        
+        <p>The room list is:</p>
+        {% for list_room in rooms %}
+            <p>
+                <a href="{{ list_room.get_maintenance_url }}">
+                    {{ list_room.sort_index }}: 
+                    {{ list_room.title }} 
+                </a>
+                <br>
+                <a href="{{ list_room.get_absolute_url }}">
+                    (Frontend-URL)
+                </a>
+                <br/>
+                Description: {{ list_room.description }}<br>
+                Slug: {{ list_room.slug }}<br>
+                Visible: {{ list_room.is_visible }}<br>
+            </p>
+        {% endfor %}
+    </div>
+
+{% endblock main_page %}

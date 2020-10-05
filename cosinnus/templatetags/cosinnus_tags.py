@@ -334,7 +334,7 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
 
 
 @register.simple_tag(takes_context=True)
-def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
+def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request=None):
     """ Renders the new style navbar """
     if 'request' not in context:
         raise ImproperlyConfigured("Current request missing in rendering "
@@ -387,6 +387,9 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
         context['group_requests_json_encoded'] = _escape_quotes(_json.dumps(membership_requests))
         context['group_requests_count'] = membership_requests_count
         
+        # conference groups
+        user_societies = CosinnusSociety.objects.get_for_user(request.user)
+        context['my_conference_groups'] = [society for society in user_societies if society.group_is_conference]
         
         attending_events = []
         try:
@@ -401,7 +404,7 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
         
         # TODO cache the dumped JSON strings?
         
-    return render_to_string(template, context.flatten())
+    return render_to_string(template, context.flatten(), request=request)
 
 
 @register.simple_tag(takes_context=True)
@@ -1176,3 +1179,24 @@ def context_id_do_translate(parser, token):
 def context_id_do_block_translate(parser, token):
     block_translate_node = do_block_translate(parser, token)
     return ContextIdBlockTranslateNode(block_translate_node)
+
+
+@register.filter
+def get_attr(obj, attr_name):
+    """ Returns the given attribute object instead of trying to resolve
+        it in the template using __getitem__ """
+    return getattr(obj, attr_name)
+
+@register.filter
+def get_item(obj, attr_name):
+    """ Returns the given attribute by trying to resolve
+        it in the template using __getitem__ """
+    return obj[attr_name]
+
+@register.filter
+def get_country_name(country_code):
+    """ Returns the verbose country name for a ISO 3166-1 country code """
+    from django_countries import countries
+    return dict(countries).get(country_code, '(unknown)')
+
+

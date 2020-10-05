@@ -203,6 +203,7 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'cosinnus_poll',
         'cosinnus_stream',
         'cosinnus_todo',
+        'cosinnus_conference',
     ]
     
     # Extra Cosinnus Apps (as defined in external project)
@@ -243,8 +244,9 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'oauth2_provider',
         'corsheaders',
         'rest_framework',
-        'rest_framework_swagger',
+        'drf_yasg',
         'taggit',
+        'django_bigbluebutton',
     ]
     return _INSTALLED_APPS
 
@@ -526,6 +528,14 @@ COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE = False
 # Default country code to assume when none is entered for django-phonenumber-field
 PHONENUMBER_DEFAULT_REGION = 'DE'
 
+# django_countries settings
+COUNTRIES_FIRST = ['de', 'at' 'ru', 'ua']
+COUNTRIES_FIRST_REPEAT = True
+# single out i18n country strings to differently translate them
+COUNTRIES_OVERRIDE = {
+    'BY': _('Belarus'),
+}
+
 # PIWIK settings. set individually for each portal. won't load if PIWIK_SITE_ID is not set
 PIWIK_SERVER_URL = '//stats.wechange.de/'
 PIWIK_SITE_ID = None
@@ -545,20 +555,12 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     )
 }
-SWAGGER_SETTINGS = {
-    'api_version': '2',
-    'api_path': '/api/v2/',
-    'api_key': 'wechange',
-    'info': {
-        'contact': 'support@wechange.de',
-        'description': '',
-        'license': 'AGPL 3.0',
-        'licenseUrl': 'https://www.gnu.org/licenses/agpl-3.0.de.html',
-        #'termsOfServiceUrl': 'http://helloreverb.com/terms/',
-        'title': 'WECHANGE API',
-    },
+
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'cosinnus.utils.jwt.jwt_response_handler'
 }
 
 SUIT_CONFIG = {
@@ -587,4 +589,3 @@ SOCIALACCOUNT_ADAPTER = 'cosinnus_oauth_client.views.CosinusSocialAccountAdapter
 SOCIALACCOUNT_AUTO_SIGNUP = False
 SOCIALACCOUNT_FORMS = {'signup': 'cosinnus_oauth_client.forms.SocialSignupProfileSettingsForm'}
 SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
-

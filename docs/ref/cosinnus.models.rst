@@ -1,13 +1,6 @@
 cosinnus.models package
 =======================
 
-Subpackages
------------
-
-.. toctree::
-
-    cosinnus.models.serializers
-
 Submodules
 ----------
 
