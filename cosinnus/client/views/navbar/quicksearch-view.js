@@ -133,7 +133,7 @@ module.exports = BaseView.extend({
 
         if (self.options.sdgsJson.length > 0) {
             var sdgSearchMethods = {};
-            for (var sdg of self.options.sdgsJson) {
+            for (var sdg in self.options.sdgsJson) {
                 if (sdg.name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
                     var title = util.iReplace(sdg.name, query, '<b>$1</b>')
                     var url = self.options.sdgsUrl.replace('{{t}}', sdg.id);
