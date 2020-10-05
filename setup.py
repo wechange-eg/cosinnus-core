@@ -113,6 +113,7 @@ setup(
         'python-memcached==1.59',
         'qrcode==6.1',
         'Unidecode==0.4.21',
+        'django-countries==5.3.3',
         
         # wagtail
         'wagtail==2.3',
