@@ -373,13 +373,13 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         
         membership_requests = []
         membership_requests_count = 0
-        admined_group_ids = CosinnusGroup.objects.get_for_user_group_admin_pks(request.user)
-        admined_groups = CosinnusGroup.objects.get_cached(pks=admined_group_ids)
+        admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(request.user)
+        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
         for admined_group in admined_groups:
             pending_ids = CosinnusGroupMembership.objects.get_pendings(group=admined_group)
             if len(pending_ids) > 0:
                 membership_request_item = DashboardItem()
-                membership_request_item['icon'] = 'fa-sitemap' if admined_group.type == CosinnusGroup.TYPE_SOCIETY else 'fa-group'
+                membership_request_item['icon'] = 'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_SOCIETY else 'fa-group'
                 membership_request_item['text'] = escape('%s (%d)' % (admined_group.name, len(pending_ids)))
                 membership_request_item['url'] = group_aware_reverse('cosinnus:group-detail', kwargs={'group': admined_group}) + '?requests=1#requests'
                 membership_requests.append(membership_request_item)
