@@ -5,6 +5,7 @@ from django.conf.urls import url
 
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.views import select2
+from cosinnus_organization.views import organization_members_select2
 
 app_name = 'select2'
 
@@ -18,7 +19,7 @@ for url_key in group_model_registry:
 
 # IMPORTANT: this must be the last URLs matched, otherwise they will cover the group-specific ones
 urlpatterns += [
-    url(r'organization/(?P<organization>[^/]+)/members/$', select2.organization_members, name='organization-members'),
+    url(r'organization/(?P<organization>[^/]+)/members/$', organization_members_select2, name='organization-members'),
     url(r'members/$', select2.all_members, name='all-members'),
     url(r'tags/$', select2.tags_view, name='tags'),
     url(r'groups/$', select2.groups_view, name='groups'),

@@ -2,22 +2,17 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth import get_user_model
-from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.http import Http404
 
 from django_select2 import Select2View, NO_ERR_RESP
 from taggit.models import Tag
 
-from cosinnus.models import CosinnusOrganization
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal
-from cosinnus.templatetags.cosinnus_tags import full_name
-from cosinnus.utils.permissions import check_ug_membership
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.views.mixins.select2 import RequireGroupMember, RequireLoggedIn
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import filter_active_users,\
     get_user_query_filter_for_search_terms, get_user_select2_pills
-from cosinnus.models.profile import get_user_profile_model
 
 
 class GroupMembersView(RequireGroupMember, Select2View):
@@ -51,11 +46,6 @@ class GroupMembersView(RequireGroupMember, Select2View):
         results = get_user_select2_pills(users)
 
         return (NO_ERR_RESP, has_more, results)
-
-
-class OrganizationMembersView(GroupMembersView):
-    group_slug_field = 'organization'
-    group_class = CosinnusOrganization
 
 
 class AllMembersView(RequireLoggedIn, Select2View):
@@ -138,7 +128,6 @@ class GroupsView(Select2View):
 
 
 group_members = GroupMembersView.as_view()
-organization_members = OrganizationMembersView.as_view()
 all_members = AllMembersView.as_view()
 tags_view = TagsView.as_view()
 groups_view = GroupsView.as_view()

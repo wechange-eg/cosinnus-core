@@ -2,16 +2,11 @@
 from __future__ import unicode_literals
 
 import inspect
-import logging
 
 from django.template.defaultfilters import date as django_date_filter
-from django.urls.base import reverse
-from django.utils.html import escape
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.idea import CosinnusIdea
-from cosinnus.models.profile import BaseUserProfile
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from cosinnus.utils.group import get_cosinnus_group_model, \
     get_default_user_group_slugs
@@ -21,7 +16,7 @@ from cosinnus.models.idea import CosinnusIdea
 from django.urls.base import reverse
 from cosinnus.models.profile import BaseUserProfile
 from django.utils.html import escape
-from cosinnus.models.organization import CosinnusOrganization
+from cosinnus_organization.models import CosinnusOrganization
 
 logger = logging.getLogger('cosinnus')
 

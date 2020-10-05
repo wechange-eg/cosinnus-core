@@ -15,7 +15,7 @@ from django.utils.translation import ugettext_lazy as _
 from awesome_avatar import forms as avatar_forms
 
 from cosinnus.forms.mixins import AdditionalFormsMixin
-from cosinnus.models import CosinnusOrganization
+from cosinnus_organization.models import CosinnusOrganization
 from cosinnus.models.group import (CosinnusGroupMembership,
                                    CosinnusPortal,
     CosinnusLocation, RelatedGroups, CosinnusGroupGalleryImage,

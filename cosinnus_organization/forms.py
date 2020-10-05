@@ -10,7 +10,7 @@ from cosinnus.conf import settings
 from cosinnus.forms.group import AsssignPortalMixin
 from cosinnus.forms.mixins import AdditionalFormsMixin
 from cosinnus.forms.tagged import get_form
-from cosinnus.models.organization import CosinnusOrganization, CosinnusOrganizationLocation, \
+from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationLocation, \
     CosinnusOrganizationSocialMedia
 
 

@@ -16,45 +16,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='CosinnusOrganization',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=250, verbose_name='Title')),
-                ('slug', models.SlugField(help_text='Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!', verbose_name='Slug')),
-                ('created', models.DateTimeField(auto_now_add=True, verbose_name='Created')),
-                ('last_modified', models.DateTimeField(auto_now=True, verbose_name='Last modified')),
-                ('description', models.TextField(blank=True, help_text='Short Description. Internal, will not be shown publicly.', verbose_name='Short Description')),
-                ('image', models.ImageField(blank=True, help_text='Shown as large banner image', max_length=250, null=True, upload_to=cosinnus.utils.files.get_organization_avatar_filename, verbose_name='Image')),
-                ('public', models.BooleanField(default=False, verbose_name='Public')),
-                ('synced', models.BooleanField(default=False, help_text='Should this organization be allowed to be synched into external databases?', verbose_name='Synced')),
-                ('is_active', models.BooleanField(default=True, help_text='If an organization is not active, it counts as non-existent for all purposes and views on the website.', verbose_name='Is active')),
-                ('version', models.PositiveIntegerField(default=0, verbose_name='Version')),
-                ('license', models.CharField(blank=True, max_length=250, null=True, verbose_name='License')),
-                ('place_type', models.PositiveIntegerField(blank=True, null=True, verbose_name='Version')),
-                ('address', models.CharField(blank=True, max_length=255, null=True, verbose_name='Address')),
-                ('website', models.URLField(blank=True, max_length=100, null=True, verbose_name='Website')),
-                ('email', models.EmailField(blank=True, max_length=254, null=True, verbose_name='Email Address')),
-                ('phone_number', phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, null=True, verbose_name='Phone Number')),
-                ('creator', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='organizations', to=settings.AUTH_USER_MODEL, verbose_name='Creator')),
-                ('media_tag', models.OneToOneField(blank=True, editable=False, null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.COSINNUS_TAG_OBJECT_MODEL)),
-                ('portal', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='organizations', to='cosinnus.CosinnusPortal', verbose_name='Portal')),
-                ('related_groups', models.ManyToManyField(blank=True, related_name='related_organizations', to=settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name='Related Teams')),
-            ],
-            options={
-                'verbose_name': 'Cosinnus Organization',
-                'verbose_name_plural': 'Cosinnus Organizations',
-                'ordering': ('created',),
-            },
-            bases=(cosinnus.models.mixins.indexes.IndexingUtilsMixin, models.Model),
-        ),
         migrations.AlterField(
             model_name='userprofile',
             name='language',
             field=models.CharField(choices=[('de', 'Deutsch--NATIVE-LANGUAGE'), ('en', 'English--NATIVE-LANGUAGE'), ('ru', 'Russian--NATIVE-LANGUAGE'), ('uk', 'Ukrainian--NATIVE-LANGUAGE'), ('fr', 'French--NATIVE-LANGUAGE'), ('pl', 'Polish--NATIVE-LANGUAGE'), ('be', 'Belarussian--NATIVE-LANGUAGE')], default='de', max_length=2, verbose_name='Language'),
-        ),
-        migrations.AlterUniqueTogether(
-            name='cosinnusorganization',
-            unique_together={('slug', 'portal')},
         ),
     ]

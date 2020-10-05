@@ -12,11 +12,12 @@ from django.views.generic import DeleteView
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
 from ajax_forms.ajax_forms import AjaxFormsDeleteViewMixin
-from cosinnus.api.serializers.group import OrganizationSimpleSerializer
+from cosinnus.views.select2 import GroupMembersView
+from cosinnus_organization.api.serializers import OrganizationSimpleSerializer
 from cosinnus.conf import settings
-from cosinnus.forms.organization import CosinnusOrganizationForm, CosinnusOrganizationLocationInlineFormset, \
+from cosinnus_organization.forms import CosinnusOrganizationForm, CosinnusOrganizationLocationInlineFormset, \
     CosinnusOrganizationSocialMediaInlineFormset
-from cosinnus.models.organization import CosinnusOrganization, CosinnusOrganizationMembership, \
+from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationMembership, \
     CosinnusUnregisteredUserOrganizationInvite
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.views.group import SamePortalGroupMixin, GroupDetailView, GroupUserListView, GroupConfirmMixin, \
@@ -221,6 +222,11 @@ class UserOrganizationMemberInviteSelect2View(UserGroupMemberInviteSelect2View):
     group_url_kwarg = 'organization'
 
 
+class OrganizationMembersSelect2View(GroupMembersView):
+    group_slug_field = 'organization'
+    group_class = CosinnusOrganization
+
+
 organization_create = OrganizationCreateView.as_view()
 organization_edit = OrganizationEditView.as_view()
 organization_delete = OrganizationDeleteView.as_view()
@@ -241,3 +247,4 @@ organization_user_update_api = OrganizationUserUpdateView.as_view(is_ajax_reques
 organization_user_delete = OrganizationUserDeleteView.as_view()
 organization_user_delete_api = OrganizationUserDeleteView.as_view(is_ajax_request_url=True)
 user_organization_member_invite_select2 = UserOrganizationMemberInviteSelect2View.as_view()
+organization_members_select2 = OrganizationMembersSelect2View.as_view()

@@ -9,5 +9,4 @@ from cosinnus.models.feedback import *  # noqa
 from cosinnus.models.profile import *  # noqa
 from cosinnus.models.widget import *  # noqa
 from cosinnus.models.idea import *  # noqa
-from cosinnus.models.organization import *  # noqa
 

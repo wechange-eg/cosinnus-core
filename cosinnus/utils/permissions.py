@@ -16,7 +16,7 @@ from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_ids
 from cosinnus.models.idea import CosinnusIdea
 from annoying.functions import get_object_or_None
-from cosinnus.models.organization import CosinnusOrganization
+from cosinnus_organization.models import CosinnusOrganization
 
 
 def check_ug_admin(user, group):

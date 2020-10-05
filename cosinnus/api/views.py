@@ -10,8 +10,7 @@ from django.http import HttpResponse
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.tagged import BaseTagObject
-from cosinnus.api.serializers.group import CosinnusSocietySerializer, CosinnusProjectSerializer, OrganizationListSerializer, \
-    OrganizationRetrieveSerializer
+from cosinnus.api.serializers.group import CosinnusSocietySerializer, CosinnusProjectSerializer
 
 
 class PublicCosinnusGroupFilterMixin(object):
@@ -77,20 +76,6 @@ class CosinnusProjectViewSet(CosinnusSocietyViewSet):
 
     queryset = CosinnusProject.objects.all()
     serializer_class = CosinnusProjectSerializer
-
-
-class OrganizationViewSet(PublicCosinnusGroupFilterMixin,
-                          viewsets.ReadOnlyModelViewSet):
-
-    queryset = CosinnusProject.objects.all()
-    serializer_class = OrganizationListSerializer
-
-    def get_serializer_class(self):
-        if self.action == 'list':
-            return OrganizationListSerializer
-        if self.action == 'retrieve':
-            return OrganizationRetrieveSerializer
-        return OrganizationRetrieveSerializer
 
 
 class UserView(APIView):

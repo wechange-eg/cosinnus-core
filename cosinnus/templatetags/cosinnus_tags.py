@@ -39,10 +39,10 @@ import logging
 import markdown2
 import json as _json
 from django.utils.encoding import force_text
-from django.utils.html import escape, urlize
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.template.defaultfilters import linebreaksbr, urlizetrunc
+from django.template.defaultfilters import linebreaksbr
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from wagtail.core.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
@@ -54,7 +54,7 @@ from django.core.serializers import serialize
 from cosinnus.models.idea import CosinnusIdea
 from django.db.models.functions import Lower
 from django.contrib.contenttypes.models import ContentType
-from cosinnus.models.organization import CosinnusOrganization
+from cosinnus_organization.models import CosinnusOrganization
 
 from cosinnus.utils.user import check_user_has_accepted_portal_tos
 from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
@@ -1032,7 +1032,8 @@ def debug_context(context, obj=None):
     else:
         context = context
         logger.warn(context)
-        import ipdb; ipdb.set_trace(); from pprint import pprint as pp;
+        import ipdb; ipdb.set_trace();
+
 
 @register.filter
 def debugthis(obj):
@@ -1041,7 +1042,8 @@ def debugthis(obj):
         return ''
     else:
         obj = obj
-        import ipdb; ipdb.set_trace(); from pprint import pprint as pp;
+        import ipdb; ipdb.set_trace();
+
 
 @register.filter
 def printthis(obj):

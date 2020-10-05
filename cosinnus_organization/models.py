@@ -17,7 +17,6 @@ from jsonfield import JSONField
 from osm_field.fields import OSMField, LatitudeField, LongitudeField
 
 from cosinnus.conf import settings
-from cosinnus.core import signals
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models import BaseMembership, MEMBER_STATUS, MembersManagerMixin, MEMBERSHIP_ADMIN
 from cosinnus.utils.files import image_thumbnail_url, \
@@ -33,7 +32,6 @@ try:
     locale.setlocale(locale.LC_ALL, ("de_DE", "utf8"))
 except:
     locale.setlocale(locale.LC_ALL, "")
-
 
 
 class CosinnusOrganizationQS(models.query.QuerySet):
@@ -176,13 +174,14 @@ class OrganizationManager(models.Manager):
 
 
 class CosinnusOrganizationMembership(BaseMembership):
-    group = models.ForeignKey('cosinnus.CosinnusOrganization', related_name='memberships', on_delete=models.CASCADE)
+    group = models.ForeignKey('cosinnus_organization.CosinnusOrganization', related_name='memberships', on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='organization_memberships',
                              on_delete=models.CASCADE)
 
     CACHE_KEY_MODEL = 'CosinnusOrganization'
 
     class Meta(BaseMembership.Meta):
+        app_label = 'cosinnus_organization'
         verbose_name = _('Organization membership')
         verbose_name_plural = _('Organization memberships')
 
@@ -203,7 +202,7 @@ class CosinnusUnregisteredUserOrganizationInvite(BaseMembership):
         Used to imprint a real `CosinnusOrganizationMembership` once that user registers.
         The ``status`` field is ignored because it would always be on pending anyways. """
 
-    group = models.ForeignKey('cosinnus.CosinnusOrganization', related_name='unregistered_user_invites',
+    group = models.ForeignKey('cosinnus_organization.CosinnusOrganization', related_name='unregistered_user_invites',
                               on_delete=models.CASCADE)
     email = models.EmailField(_('email address'))
     invited_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True,
@@ -213,7 +212,7 @@ class CosinnusUnregisteredUserOrganizationInvite(BaseMembership):
     CACHE_KEY_MODEL = 'CosinnusUnregisteredUserOrganizationInvite'
 
     class Meta(object):
-        app_label = 'cosinnus'
+        app_label = 'cosinnus_organization'
         verbose_name = _('Organization Invite for Unregistered User')
         verbose_name_plural = _('Organization Invites for Unregistered Users')
         unique_together = (('email', 'group'),)
@@ -274,7 +273,7 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
         editable=False,
         auto_now=True)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
-                                   related_name='cosinnus_organizations', through='cosinnus.CosinnusOrganizationMembership')
+                                   related_name='cosinnus_organizations', through=CosinnusOrganizationMembership)
 
     extra_fields = JSONField(default={}, blank=True)
     objects = OrganizationManager()

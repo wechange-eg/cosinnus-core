@@ -528,7 +528,7 @@ SHORTENED_ID_MAP = {
     'cosinnus.userprofile': 3,
     'cosinnus_event.event': 4,
     'cosinnus.cosinnusidea': 5,
-    'cosinnus.cosinnusorganization': 6,
+    'cosinnus_organization.CosinnusOrganization': 6,
 }
 
 SEARCH_MODEL_NAMES = {
@@ -676,7 +676,7 @@ except:
 
 
 if settings.COSINNUS_ORGANIZATIONS_ENABLED:
-    from cosinnus.models.organization import CosinnusOrganization
+    from cosinnus_organization.models import CosinnusOrganization
     SEARCH_MODEL_NAMES.update({
         CosinnusOrganization: 'organizations',                       
     })

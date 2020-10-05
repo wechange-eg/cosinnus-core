@@ -12,12 +12,13 @@ from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    OrganizationViewSet, UserView, oauth_user, oauth_profile
+    UserView, oauth_user, oauth_profile
+from cosinnus_organization.api.views import OrganizationViewSet
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
-    user_dashboard, ui_prefs, administration, organization, user_dashboard_announcement
+    user_dashboard, ui_prefs, administration, user_dashboard_announcement
+from cosinnus_organization import views
 from cosinnus_event.api.views import EventViewSet
-from django_otp.views import LoginView
 
 schema_view = get_swagger_view(title='WECHANGE API')
 
@@ -183,23 +184,23 @@ if settings.COSINNUS_ORGANIZATIONS_ENABLED:
     urlpatterns += [
         url(r'^organizations/$', map.tile_view, name='organization-list', kwargs={'types': ['organizations']}),
         url(r'^organizations/mine/$', map.tile_view, name='organization-list-mine', kwargs={'types': ['organizations'], 'show_mine': True}),
-        url(r'^organizations/add/$', organization.organization_create, name='organization-create'),
-        url(r'^organizations/(?P<organization>[^/]+)/edit/$', organization.organization_edit, name='organization-edit'),
-        url(r'^organizations/(?P<organization>[^/]+)/delete/$', organization.organization_delete, name='organization-delete'),
-        url(r'^organizations/(?P<organization>[^/]+)/members/$', organization.organization_members, name='organization-members'),
-        url(r'^organizations/(?P<organization>[^/]+)/join/$', organization.organization_user_join, name='organization-user-join'),
-        url(r'^organizations/(?P<organization>[^/]+)/auto-join/$', organization.organization_user_join_csrf_exempt, name='organization-user-join-nocsrf'),
-        url(r'^organizations/(?P<organization>[^/]+)/leave/$', organization.organization_user_leave, name='organization-user-leave'),
-        url(r'^organizations/(?P<organization>[^/]+)/withdraw/$', organization.organization_user_withdraw, name='organization-user-withdraw'),
-        url(r'^organizations/(?P<organization>[^/]+)/decline/$', organization.organization_user_invitation_decline, name='organization-user-decline'),
-        url(r'^organizations/(?P<organization>[^/]+)/accept/$', organization.organization_user_invitation_accept, name='organization-user-accept'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/$', organization.organization_user_list, name='organization-user-list'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/add/$', organization.organization_user_add, name='organization-user-add-generic'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/add-multiple/$', organization.organization_user_add_multiple, name='organization-user-add-multiple'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/add/(?P<username>[^/]+)/$', organization.organization_user_add, name='organization-user-add'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/delete/(?P<username>[^/]+)/$', organization.organization_user_delete, name='organization-user-delete'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/edit/(?P<username>[^/]+)/$', organization.organization_user_update, name='organization-user-edit'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/member-invite-select2/$', organization.user_organization_member_invite_select2, name='organization-member-invite-select2'),
+        url(r'^organizations/add/$', views.organization_create, name='organization-create'),
+        url(r'^organizations/(?P<organization>[^/]+)/edit/$', views.organization_edit, name='organization-edit'),
+        url(r'^organizations/(?P<organization>[^/]+)/delete/$', views.organization_delete, name='organization-delete'),
+        url(r'^organizations/(?P<organization>[^/]+)/members/$', views.organization_members, name='organization-members'),
+        url(r'^organizations/(?P<organization>[^/]+)/join/$', views.organization_user_join, name='organization-user-join'),
+        url(r'^organizations/(?P<organization>[^/]+)/auto-join/$', views.organization_user_join_csrf_exempt, name='organization-user-join-nocsrf'),
+        url(r'^organizations/(?P<organization>[^/]+)/leave/$', views.organization_user_leave, name='organization-user-leave'),
+        url(r'^organizations/(?P<organization>[^/]+)/withdraw/$', views.organization_user_withdraw, name='organization-user-withdraw'),
+        url(r'^organizations/(?P<organization>[^/]+)/decline/$', views.organization_user_invitation_decline, name='organization-user-decline'),
+        url(r'^organizations/(?P<organization>[^/]+)/accept/$', views.organization_user_invitation_accept, name='organization-user-accept'),
+        url(r'^organizations/(?P<organization>[^/]+)/users/$', views.organization_user_list, name='organization-user-list'),
+        url(r'^organizations/(?P<organization>[^/]+)/users/add/$', views.organization_user_add, name='organization-user-add-generic'),
+        url(r'^organizations/(?P<organization>[^/]+)/users/add-multiple/$', views.organization_user_add_multiple, name='organization-user-add-multiple'),
+        url(r'^organizations/(?P<organization>[^/]+)/users/add/(?P<username>[^/]+)/$', views.organization_user_add, name='organization-user-add'),
+        url(r'^organizations/(?P<organization>[^/]+)/users/delete/(?P<username>[^/]+)/$', views.organization_user_delete, name='organization-user-delete'),
+        url(r'^organizations/(?P<organization>[^/]+)/users/edit/(?P<username>[^/]+)/$', views.organization_user_update, name='organization-user-edit'),
+        url(r'^organizations/(?P<organization>[^/]+)/users/member-invite-select2/$', views.user_organization_member_invite_select2, name='organization-member-invite-select2'),
     ]
 
 

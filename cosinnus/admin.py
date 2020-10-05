@@ -9,8 +9,6 @@ from django.db.models import Q
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 
-from collections import defaultdict
-
 from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusPortal, CosinnusPortalMembership,\
     CosinnusGroup, CosinnusPermanentRedirect, CosinnusUnregisterdUserGroupInvite, RelatedGroups, CosinnusGroupInviteToken
@@ -30,12 +28,9 @@ from django.contrib.auth import login as django_login
 
 from cosinnus.conf import settings
 from cosinnus.models.idea import CosinnusIdea
-from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.core import signals
-from copy import deepcopy, copy
 from django import forms
 from django.core.exceptions import ValidationError
-from cosinnus.models.organization import CosinnusOrganization
 
 
 class SingleDeleteActionMixin(object):
@@ -616,20 +611,6 @@ if settings.COSINNUS_IDEAS_ENABLED:
         raw_id_fields = ('creator',)
     
     admin.site.register(CosinnusIdea, CosinnusIdeaAdmin)
-
-
-if settings.COSINNUS_ORGANIZATIONS_ENABLED:
-    
-    class CosinnusOrganizationAdmin(admin.ModelAdmin):
-        list_display = ('name', 'created', 'creator', 'portal')
-        list_filter = ('created', 'portal')
-        search_fields = ('slug', 'name', 'creator__first_name', 'creator__last_name', 'creator__email')
-        readonly_fields = ('created',)
-        raw_id_fields = ('creator',)
-    
-    admin.site.register(CosinnusOrganization, CosinnusOrganizationAdmin)
-
-
 
 
 ## TODO: FIXME: re-enable after 1.8 migration
