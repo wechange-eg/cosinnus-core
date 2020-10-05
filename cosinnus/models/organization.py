@@ -276,7 +276,7 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
                                    related_name='cosinnus_organizations', through='cosinnus.CosinnusOrganizationMembership')
 
-    extra_fields = JSONField(default={})
+    extra_fields = JSONField(default={}, blank=True)
     objects = OrganizationManager()
 
     # this indicates that objects of this model are in some way always visible by registered users

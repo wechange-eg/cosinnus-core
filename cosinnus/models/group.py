@@ -704,7 +704,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     # on the platform, no matter their visibility settings, and thus subject to moderation
     cosinnus_always_visible_by_users_moderator_flag = True
 
-    extra_fields = JSONField(default={})
+    extra_fields = JSONField(default={}, blank=True)
     settings = PostgresJSONField(default=dict, blank=True, null=True)
 
     objects = CosinnusGroupManager()
