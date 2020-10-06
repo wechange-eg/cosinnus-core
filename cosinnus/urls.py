@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from cosinnus_event.api.views import EventViewSet
-
 from django.conf.urls import include, url
 from django.urls import reverse_lazy
 from django.views.generic.base import RedirectView, TemplateView
@@ -12,27 +10,23 @@ from rest_framework import routers, permissions
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    OrganisationViewSet, oauth_current_user, oauth_user, oauth_profile, statistics as api_statistics, current_user, \
+    oauth_user, oauth_profile
+from cosinnus.api.views import oauth_current_user, statistics as api_statistics, current_user, \
     navbar
 from cosinnus.api.views.i18n import translations
 from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
+from cosinnus.views import bbb_room
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
-    user_dashboard, ui_prefs, administration, user_dashboard_announcement, bbb_room
-from cosinnus_conference.api.views import ConferenceViewSet
-from cosinnus_note.api.views import NoteViewSet
-from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    UserView, oauth_user, oauth_profile
-from cosinnus_organization.api.views import OrganizationViewSet
-from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
-    statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
     user_dashboard, ui_prefs, administration, user_dashboard_announcement
-from cosinnus_organization import views
+from cosinnus_conference.api.views import ConferenceViewSet
 from cosinnus_event.api.views import EventViewSet
-
+from cosinnus_note.api.views import NoteViewSet
+from cosinnus_organization import views
+from cosinnus_organization.api.views import OrganizationViewSet
 
 app_name = 'cosinnus'
 

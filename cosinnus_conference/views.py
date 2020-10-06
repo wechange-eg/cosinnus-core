@@ -23,8 +23,8 @@ import six
 
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
 from cosinnus.models.conference import CosinnusConferenceRoom
-from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
-    MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER)
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_ADMIN
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME
 from cosinnus.models.profile import UserProfile
