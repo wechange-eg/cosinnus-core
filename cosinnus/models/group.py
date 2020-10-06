@@ -44,7 +44,6 @@ from easy_thumbnails.exceptions import InvalidImageFormatError
 from django.contrib.auth import get_user_model
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_slugs
-from cosinnus.utils.user import filter_active_users
 from cosinnus.models.mixins.images import ThumbnailableImageMixin
 from cosinnus.views.mixins.media import VideoEmbedFieldMixin,\
     FlickrEmbedFieldMixin

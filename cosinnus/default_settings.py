@@ -608,3 +608,11 @@ SOCIALACCOUNT_ADAPTER = 'cosinnus_oauth_client.views.CosinusSocialAccountAdapter
 SOCIALACCOUNT_AUTO_SIGNUP = False
 SOCIALACCOUNT_FORMS = {'signup': 'cosinnus_oauth_client.forms.SocialSignupProfileSettingsForm'}
 SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
+
+# Organizations
+COSINNUS_ORGANIZATIONS_ENABLED = False
+
+# Additional fields (List of form pathes, required form fields are: label and icon)
+COSINNUS_ORGANIZATION_ADDITIONAL_FORMS = []
+COSINNUS_GROUP_ADDITIONAL_FORMS = []
+COSINNUS_PROJECT_ADDITIONAL_FORMS = []
