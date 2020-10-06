@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2020-09-23T22:34:56.198Z\n"
+"POT-Creation-Date: 2020-10-06T13:53:05.285Z\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,10 @@ msgstr ""
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Stage/list.json
+#. [Agenda]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Workshops/list.json
 #. [Agenda]
 #. defaultMessage is:
 #. undefined
@@ -125,18 +129,15 @@ msgstr ""
 #. [Happening now]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Workshops/list.json
+#: locale/src/views/components/EventGrid/index.json
+#. [Happening now]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/EventList/index.json
 #. [Happening now]
 #. defaultMessage is:
 #. undefined
 msgid "Happening now"
-msgstr ""
-
-#: locale/src/views/components/Loading/index.json
-#. [Loading]
-#. defaultMessage is:
-#. undefined
-msgid "Loading"
 msgstr ""
 
 #: locale/src/views/components/Nav/index.json
@@ -183,24 +184,24 @@ msgid "No"
 msgstr ""
 
 #: locale/src/views/CoffeeTables/list.json
-#. [No current coffee tables.]
+#. [No coffee tables.]
 #. defaultMessage is:
 #. undefined
-msgid "No current coffee tables."
+msgid "No coffee tables."
 msgstr ""
 
-#: locale/src/views/Workshops/list.json
-#. [No current workshops.]
+#: locale/src/views/Discussions/list.json
+#. [No discussions.]
 #. defaultMessage is:
 #. undefined
-msgid "No current workshops."
+msgid "No discussions."
 msgstr ""
 
-#: locale/src/views/components/EventList/index.json
-#. [No events planned.]
+#: locale/src/views/Lobby/index.json
+#. [No events.]
 #. defaultMessage is:
 #. undefined
-msgid "No events planned."
+msgid "No events."
 msgstr ""
 
 #: locale/src/views/Channels/list.json
@@ -224,18 +225,21 @@ msgstr ""
 msgid "No represented organisations."
 msgstr ""
 
-#: locale/src/views/Workshops/list.json
-#. [No upcoming workshops.]
+#: locale/src/views/Stage/list.json
+#. [No stage events.]
 #. defaultMessage is:
 #. undefined
-msgid "No upcoming workshops."
+msgid "No stage events."
 msgstr ""
 
-#: locale/src/views/components/EventCard/index.json
-#. [Now]
+#: locale/src/views/Workshops/list.json
+#. [No workshops.]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/EventList/index.json
+msgid "No workshops."
+msgstr ""
+
+#: locale/src/views/components/EventGrid/index.json
 #. [Now]
 #. defaultMessage is:
 #. undefined
@@ -263,11 +267,33 @@ msgstr ""
 msgid "The conference is being prepared, please try again at a later date."
 msgstr ""
 
-#: locale/src/views/Workshops/list.json
-#. [Upcoming workshops]
+#: locale/src/views/components/EventGrid/index.json
+#. [Today]
 #. defaultMessage is:
 #. undefined
-msgid "Upcoming workshops"
+#: locale/src/views/components/EventList/index.json
+#. [Today]
+#. defaultMessage is:
+#. undefined
+msgid "Today"
+msgstr ""
+
+#: locale/src/views/components/EventGrid/index.json
+#. [Tomorrow]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/EventList/index.json
+#. [Tomorrow]
+#. defaultMessage is:
+#. undefined
+msgid "Tomorrow"
+msgstr ""
+
+#: locale/src/views/components/EventGrid/index.json
+#. [Upcoming]
+#. defaultMessage is:
+#. undefined
+msgid "Upcoming"
 msgstr ""
 
 #: locale/src/views/components/ManageEventButtons/index.json
@@ -292,7 +318,7 @@ msgstr ""
 msgid "hidden"
 msgstr ""
 
-#: locale/src/views/components/EventCard/index.json
+#: locale/src/views/components/EventGrid/index.json
 #. [minutes left]
 #. defaultMessage is:
 #. undefined
@@ -310,7 +336,7 @@ msgstr ""
 #. [participants]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/EventCard/index.json
+#: locale/src/views/components/EventGrid/index.json
 #. [participants]
 #. defaultMessage is:
 #. undefined
