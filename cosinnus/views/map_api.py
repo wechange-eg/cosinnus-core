@@ -83,6 +83,7 @@ MAP_SEARCH_PARAMETERS = {
     'limit': 20, # result count limit, integer or None
     'page': 0,
     'topics': None,
+    'sdgs': None,
     'item': None,
     'ignore_location': False, # if True, we completely ignore locs, and even return results without location
     'mine': False, # if True, we only show items of the current user. ignored if user not authenticated
@@ -149,8 +150,11 @@ def map_search_endpoint(request, filter_group_id=None):
             
     # filter topics
     topics = ensure_list_of_ints(params.get('topics', ''))
-    if topics: 
+    if topics:
         sqs = sqs.filter_and(mt_topics__in=topics)
+    sdgs = ensure_list_of_ints(params.get('sdgs', ''))
+    if sdgs:
+        sqs = sqs.filter_and(sdgs__in=sdgs)
     # filter for portal visibility
     sqs = filter_searchqueryset_for_portal(sqs, restrict_multiportals_to_current=prefer_own_portal, external=external)
     # filter for read access by this user

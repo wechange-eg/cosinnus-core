@@ -38,9 +38,9 @@
                 <button type="submit" id="{{ id }}_btnsubmit" class="submit-btn-x btn btn-emphasized {% if large_buttons %}btn-autosize{% endif %}" {% if not form_action %}data-dismiss="modal"{% endif %} {% if disable_on_submit %}onclick="setTimeout(function(){$('#{{ id }}_btnsubmit').attr('disabled', true);},50);"{% endif %} {% if submit_name %}name="{{ submit_name }}"{% endif%} {% if submit_value %}value="{{ submit_value }}"{% endif%}>
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="#">
-                                <i class="fa fa-check"></i>
-                            </a>
+                            <span class="pull-left">
+                                <i class="fa {% if submit_button_icon %}{{ submit_button_icon }}{% else %}fa-check{% endif %}"></i>
+                            </span>
                             <div class="media-body">
                                 {% if submit_button_label %}{{ submit_button_label }}{% else %}{% trans "OK" %}{% endif %}
                             </div>
@@ -52,9 +52,9 @@
 	                <button type="button" class="btn btn-emphasized {% if large_buttons %}btn-autosize{% endif %}" data-dismiss="modal">
 	                    <ul class="media-list">
 	                        <li class="media">
-	                            <a class="pull-left" href="#">
-	                                <i class="fa fa-times"></i>
-	                            </a>
+	                            <span class="pull-left">
+	                                <i class="fa {% if cancel_button_icon %}{{ cancel_button_icon }}{% else %}fa-times{% endif %}"></i>
+	                            </span>
 	                            <div class="media-body">
 	                                {% if cancel_button_label %}{{ cancel_button_label }}{% else %}{% trans "Cancel" %}{% endif %}
 	                            </div>

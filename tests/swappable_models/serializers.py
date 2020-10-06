@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from rest_framework import serializers
 
-from cosinnus.api.serializers.profile import BaseUserProfileSerializer
+from cosinnus.api.serializers.user import BaseUserProfileSerializer
 
 from tests.swappable_models.models import CustomUserProfile
 

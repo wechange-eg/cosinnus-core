@@ -68,13 +68,52 @@ except:
     locale.setlocale(locale.LC_ALL, "")
 
 
+SDG_NO_POVERTY = 1
+SDG_ZERO_HUNGER = 2
+SDG_GOOD_HEALTH = 3
+SDG_QUALITY_EDUCATION = 4
+SDG_GENDER_EQUALITY = 5
+SDG_CLEAN_WATER = 6
+SDG_AFFORDABLE_CLEAN_ENERGY = 7
+SDG_DECENT_WORK = 8
+SDG_INDUSTRY_INNOVATION = 9
+SDG_REDUCING_INEQUALITY = 10
+SDG_SUSTAINABLE_CITIES = 11
+SDG_RESPONSIBLE_CONSUMPTION = 12
+SDG_CLIMATE_ACTION = 13
+SDG_LIFE_BELOW_WATER = 14
+SDG_LIFE_ON_LAND = 15
+SDG_PEACE_JUSTICE = 16
+SDG_PARTNERSHIPS = 17
+
+SDG_CHOICES = [
+    (SDG_NO_POVERTY, _('No Poverty')),
+    (SDG_ZERO_HUNGER, _('Zero Hunger')),
+    (SDG_GOOD_HEALTH, _('Good Health and Well-being')),
+    (SDG_QUALITY_EDUCATION, _('Quality Education')),
+    (SDG_GENDER_EQUALITY, _('Gender Equality')),
+    (SDG_CLEAN_WATER, _('Clean Water and Sanitation')),
+    (SDG_AFFORDABLE_CLEAN_ENERGY, _('Affordable and Clean Energy')),
+    (SDG_DECENT_WORK, _('Decent Work and Economic Growth')),
+    (SDG_INDUSTRY_INNOVATION, _('Industry, Innovation, and Infrastructure')),
+    (SDG_REDUCING_INEQUALITY, _('Reducing Inequality')),
+    (SDG_SUSTAINABLE_CITIES, _('Sustainable Cities and Communities')),
+    (SDG_RESPONSIBLE_CONSUMPTION, _('Responsible Consumption and Production')),
+    (SDG_CLIMATE_ACTION, _('Climate Action')),
+    (SDG_LIFE_BELOW_WATER, _('Life Below Water')),
+    (SDG_LIFE_ON_LAND, _('Life On Land')),
+    (SDG_PEACE_JUSTICE, _('Peace, Justice, and Strong Institutions')),
+    (SDG_PARTNERSHIPS, _('Partnerships for the Goals')),
+]
+
+
 def group_name_validator(value):
     RegexValidator(
         re.compile('^[^/]+$'),
         _('Enter a valid name. Forward slash is not allowed.'),
         'invalid'
     )(value)
-    
+
 
 class CosinnusGroupQS(models.query.QuerySet):
 
@@ -334,10 +373,10 @@ class CosinnusGroupManager(models.Manager):
 class RelatedGroups(models.Model):
     """ Need to have this through model for CosinnusGroup.related_groups so django doesn't mix up model names
         in apps that have swapped out the CosinnusGroup model """
-        
+
     class Meta(object):
-        unique_together = (('from_group', 'to_group'),)  
-        
+        unique_together = (('from_group', 'to_group'),)
+
     from_group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, on_delete=models.CASCADE, related_name='+')
     to_group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, on_delete=models.CASCADE, related_name='+')
 
@@ -349,15 +388,15 @@ class CosinnusGroupMembership(BaseMembership):
         related_name='cosinnus_memberships', on_delete=models.CASCADE)
     
     CACHE_KEY_MODEL = 'CosinnusGroup'
-    
+
     class Meta(BaseMembership.Meta):
         verbose_name = _('Team membership')
-        verbose_name_plural = _('Team memberships')  
-        
+        verbose_name_plural = _('Team memberships')
+
     def __init__(self, *args, **kwargs):
         super(CosinnusGroupMembership, self).__init__(*args, **kwargs)
         self._status = self.status
-        
+
     def save(self, *args, **kwargs):
         """ Checks and fires `user_joined_group` signal if a user has hereby joined this group """
         created = bool(self.pk is None)
@@ -366,7 +405,7 @@ class CosinnusGroupMembership(BaseMembership):
         changed_to_membership = bool(not created and self._status not in MEMBER_STATUS and self.status in MEMBER_STATUS)
         if created_as_membership or changed_to_membership:
             signals.user_joined_group.send(sender=self, user=self.user, group=self.group)
-    
+
     def delete(self, *args, **kwargs):
         """ Checks and fires `user_left_group` signal if a user has hereby left this group """
         super(CosinnusGroupMembership, self).delete(*args, **kwargs)
@@ -399,9 +438,9 @@ class CosinnusPortalMembership(BaseMembership):
         on_delete=models.CASCADE, verbose_name=_('Portal'))
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
         related_name='cosinnus_portal_memberships', on_delete=models.CASCADE)
-    
+
     CACHE_KEY_MODEL = 'CosinnusPortal'
-    
+
     class Meta(BaseMembership.Meta):
         verbose_name = _('Portal membership')
         verbose_name_plural = _('Portal memberships')
@@ -653,8 +692,13 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
 
     # a field that can contain HTML to be embedded into the group dashboard (visible for members only)
     embedded_dashboard_html = models.TextField(verbose_name=_('Embedded Dashboard HTML'),
-                                               help_text='A field with custom HTML that will be shown to all group members on the group dashboard',
-                                               blank=True, null=True)
+         help_text='A field with custom HTML that will be shown to all group members on the group dashboard',
+         blank=True, null=True)
+    
+    conference_theme_color = models.CharField(_('Conference theme color'),
+        help_text=_('Conference theme color for conference groups only (css hex value, with or without "#")'),
+        max_length=10, validators=[MaxLengthValidator(7)],
+        blank=True, null=True)
 
     # a comma-seperated list of all cosinnus apps that should not be shown in the frontend,
     # be editable, or be indexed by search indices for this group
@@ -706,6 +750,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
 
     extra_fields = JSONField(default={}, blank=True)
     settings = PostgresJSONField(default=dict, blank=True, null=True)
+    sdgs = PostgresJSONField(default=list, blank=True, null=True)
 
     objects = CosinnusGroupManager()
 
@@ -779,6 +824,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
             # set portal to current
             self.portal = CosinnusPortal.get_current()
 
+        # clean color fields
+        if self.conference_theme_color:
+            self.conference_theme_color = self.conference_theme_color.replace('#', '')
+
         super(CosinnusBaseGroup, self).save(*args, **kwargs)
 
         # check if a redirect should be created AFTER SAVING!
@@ -816,16 +865,36 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         super(CosinnusBaseGroup, self).delete(*args, **kwargs)
 
     @property
-    def is_group_and_conference(self):
+    def group_is_conference(self):
+        """ Check if this is a proper conference (a type society with conference flag) """
         return self.type == self.TYPE_SOCIETY and self.is_conference
 
     @property
     def conference_members(self):
+        """ Returns a User QS of conference members of this group if it is a conference, an empty QS else """
         from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
-        if self.is_group_and_conference:
-            return self.users.filter(
-                cosinnus_profile__settings__contains=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
-        return []
+        if self.group_is_conference:
+            return self.users.filter(cosinnus_profile__settings__contains=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
+        return get_user_model().objects.none()
+
+    @property
+    def conference_group_result_projects(self):
+        """ Returns a QS of all result projects from all conference rooms, if this is a conference """
+        if not self.group_is_conference:
+            return get_cosinnus_group_model().objects.none()
+        return get_cosinnus_group_model().objects.filter(is_active=True, conference_room__group=self)
+
+    def get_additional_rocketchat_room_ids(self):
+        """ A group may have additional rocketchat room IDs that it corresponds to.
+            All room ids returned here will also be managed by the rocketchat hooks for
+            members joining/leaving, etc. """
+        room_ids = []
+        # add all conference rooms with a rocketchat room type
+        if self.group_is_conference:
+            for room in self.rooms:
+                if room.type in room.ROCKETCHAT_ROOM_TYPES and room.rocket_chat_room_id:
+                    room_ids.append(room.rocket_chat_room_id)
+        return list(set(room_ids))
 
     def get_admin_contact_url(self):
         if 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:

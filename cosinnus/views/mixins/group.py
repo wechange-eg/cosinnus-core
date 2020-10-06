@@ -347,8 +347,11 @@ class EndlessPaginationMixin(object):
 
 
 class GroupIsConferenceMixin:
+    """ View mixin that makes it required for the view's group to be a conference.
+        If not, redirects to the group dashboard. 
+        Needs to be in MRO *after* the group-applying `RequireReadMixin` (or similar).  """
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.group.is_group_and_conference:
+        if not self.group.group_is_conference:
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
         return super().dispatch(request, *args, **kwargs)

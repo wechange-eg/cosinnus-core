@@ -1,6 +1,6 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags thumbnail %}
-{% load static from staticfiles %}
+{% load static staticfiles sdg_tags %}
 
 {% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
 
@@ -48,7 +48,7 @@
             
 
 {% block main_page %}
-    
+
     {% if user.is_authenticated and user.pk in group.admins %}
 	    <div class="alert alert-warning alert-dismissable">
             <i class="fa fa-heart fa-3x"></i>
@@ -370,7 +370,7 @@
 			        {% endif %}
 			        </div>
 			        
-			        		{% comment %}  
+			        		{% comment %}
 			        <div class="row">
 			        	<div class="col-xs-12">
 			        			https://www.flickr.com/photos/moopus/sets/72157601996566901
@@ -386,7 +386,7 @@
 			        	</div>
 			        </div>
 			        		{% endcomment %}
-			        
+
 			        {% with gallery_images=group.gallery_images.all  %}
 			        	{% if group.video or gallery_images %} {# todo: check for video #}
 					        <div class="row" style="padding: 0 15px;">
@@ -470,6 +470,19 @@
 						></a>&nbsp;
 					</p>
 					
+					{% if SETTINGS.COSINNUS_ENABLE_SDGS %}
+					<p>
+						<b>{% trans "Sustainable Development Goals" %}:</b>&nbsp;
+					</p>
+					<p>
+						{% if group.sdgs %}
+						{% for sdg in group.sdgs %}
+						{% get_sdg_image request.LANGUAGE_CODE sdg as images_path %}
+						<img class="sdg-icon" src="{% static images_path %}">
+						{% endfor %}
+						{% endif %}
+					</p>
+					{% endif %}
 				{% endblock microsite_group_description %}
 	        </div>
 		</div> <!-- col-xs-12 -->

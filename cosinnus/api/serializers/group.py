@@ -1,11 +1,25 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from builtins import object
 from datetime import datetime
-
 import pytz
-from cosinnus.models import MEMBERSHIP_ADMIN, CosinnusGroup
 from rest_framework import serializers
 
+from cosinnus.models import MEMBERSHIP_ADMIN, CosinnusGroup
+from cosinnus.models.group import CosinnusGroup
+
+
+__all__ = ('GroupSimpleSerializer', 'CosinnusSocietySerializer', 'CosinnusProjectSerializer')
+
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
+
+
+class GroupSimpleSerializer(serializers.ModelSerializer):
+
+    class Meta(object):
+        model = CosinnusGroup
+        fields = ('id', 'name', 'slug', 'public', 'description', )
 
 
 class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):

@@ -1,16 +1,29 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from cosinnus_event.api.views import EventViewSet
+
 from django.conf.urls import include, url
 from django.urls import reverse_lazy
 from django.views.generic.base import RedirectView, TemplateView
-from rest_framework import routers
-from rest_framework_swagger.views import get_swagger_view
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import routers, permissions
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
-from cosinnus.core.registries import url_registry
+from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
+    OrganisationViewSet, oauth_current_user, oauth_user, oauth_profile, statistics as api_statistics, current_user, \
+    navbar
+from cosinnus.api.views.i18n import translations
 from cosinnus.conf import settings
+from cosinnus.core.registries import url_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
+from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
+    statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
+    user_dashboard, ui_prefs, administration, user_dashboard_announcement, bbb_room
+from cosinnus_conference.api.views import ConferenceViewSet
+from cosinnus_note.api.views import NoteViewSet
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
     UserView, oauth_user, oauth_profile
 from cosinnus_organization.api.views import OrganizationViewSet
@@ -20,7 +33,6 @@ from cosinnus.views import map, map_api, user, profile, common, widget, search, 
 from cosinnus_organization import views
 from cosinnus_event.api.views import EventViewSet
 
-schema_view = get_swagger_view(title='WECHANGE API')
 
 app_name = 'cosinnus'
 
@@ -60,7 +72,9 @@ urlpatterns = [
     
     url(r'^likefollow/$', common.do_likefollow,  name='likefollow-view'),
     
-    
+    url(r'^bbb/room/(?P<room_id>\d+)/$', bbb_room.bbb_room_meeting, name='bbb-room'),
+    url(r'^bbb/queue/(?P<mt_id>\d+)/$', bbb_room.bbb_room_meeting_queue, name='bbb-room-queue'),
+
     url(r'^invitations/$', group.group_list_invited, name='invitations', kwargs={'show_all': True}),
     url(r'^welcome/$', user.welcome_settings, name='welcome-settings'),
     url(r'^join/$', user.group_invite_token_enter_view, name='group-invite-token-enter'),
@@ -223,10 +237,6 @@ for url_key in group_model_registry:
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/$' % url_key, 'cms.group_microsite', name=prefix+'group-microsite'),
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/edit/$' % url_key, 'cms.group_microsite_edit', name=prefix+'group-microsite-edit'),
         url(r'^%s/(?P<group>[^/]+)/members/$' % url_key, group.group_detail, name=prefix+'group-detail'),
-        url(r'^%s/(?P<group>[^/]+)/conference-management/$' % url_key, group.conference_management, name=prefix+'conference-management'),
-        url(r'^%s/(?P<group>[^/]+)/workshop-participants-upload/$' % url_key, group.workshop_participants_upload, name=prefix+'workshop-participants-upload'),
-        url(r'^%s/(?P<group>[^/]+)/workshop-participants-upload-skeleton/$' % url_key, group.workshop_participants_upload_skeleton, name=prefix+'workshop-participants-upload-skeleton'),
-        url(r'^%s/(?P<group>[^/]+)/workshop-participants-download/$' % url_key, group.workshop_participants_download, name=prefix+'workshop-participants-download'),
         url(r'^%s/(?P<group>[^/]+)/members/recruit/$' % url_key, group.group_user_recruit, name=prefix+'group-user-recruit'),
         url(r'^%s/(?P<group>[^/]+)/members/recruitdelete/(?P<id>\d+)/$' % url_key, group.group_user_recruit_delete, name=prefix+'group-user-recruit-delete'),
         #url(r'^%s/(?P<group>[^/]+)/members/map/$' % url_key, group.group_members_map', name=prefix+'group-members-map'),
@@ -260,10 +270,12 @@ urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
 router = routers.SimpleRouter()
+router.register(r'conferences', ConferenceViewSet)
 router.register(r'groups', CosinnusSocietyViewSet)
 router.register(r'projects', CosinnusProjectViewSet)
-router.register(r'organization', OrganizationViewSet)
-router.register(r'event', EventViewSet)
+router.register(r'organizations', OrganizationViewSet)
+router.register(r'events', EventViewSet)
+router.register(r'notes', NoteViewSet)
 
 if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
     from cosinnus_message.api.views import MessageExportView
@@ -277,9 +289,40 @@ if getattr(settings, 'COSINNUS_EMPTY_FILE_DOWNLOAD_NAME', None):
     ]
 
 urlpatterns += [
-    url(r'^o/me/', UserView.as_view()),
+    url(r'^o/me/', oauth_current_user),
     url(r'^o/user/', oauth_user),
     url(r'^o/profile/', oauth_profile),
-    url(r'api/v2/docs/', get_swagger_view()),
-    url(r'api/v2/', include(router.urls)),
+]
+
+schema_url_patterns = [
+    url(r'^api/v2/token/', obtain_jwt_token),
+    url(r'^api/v2/token/refresh/', refresh_jwt_token),
+    url(r'^api/v2/current_user/', current_user, name='api-current-user'),
+    url(r'^api/v2/statistics/', api_statistics, name='api-statistics'),
+    url(r'^api/v2/jsi18n/$', translations, name='api-jsi18n'),
+    url(r'^api/v2/', include(router.urls)),
+]
+
+urlpatterns += schema_url_patterns
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="WECHANGE API",
+        default_version='v2',
+        description="WECHANGE API (in progress)",
+        terms_of_service="https://wechange.de/cms/nutzungsbedingungen/",
+        contact=openapi.Contact(email="support@wechange.de"),
+        license=openapi.License(name="AGPL 3.0"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+    patterns=schema_url_patterns,
+)
+
+urlpatterns += [
+    url(r'^api/v2/navbar/$', navbar, name='api-navbar'),
+    url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    url(r'^api/v2/docs/$', RedirectView.as_view(url='/swagger/', permanent=False)),
 ]

@@ -36,6 +36,7 @@ from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.templatetags.cosinnus_tags import is_superuser
 from django.core.exceptions import ObjectDoesNotExist
 from cosinnus.models.group import CosinnusGroup
+from cosinnus.models.group import SDG_CHOICES
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -104,20 +105,22 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
     website = forms.URLField(widget=forms.TextInput, required=False)
     # we want a textarea without character limit here so HTML can be pasted (will be cleaned)
     twitter_widget_id = forms.CharField(widget=forms.Textarea, required=False)
+    sdgs = forms.MultipleChoiceField(choices=SDG_CHOICES, required=False)
     
     
     related_groups = forms.ModelMultipleChoiceField(queryset=get_cosinnus_group_model().objects.none())
     
     class Meta(object):
-        fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
+        fields = ['name', 'public', 'description', 'description_long', 'contact_info', 'sdgs',
                         'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
                          'twitter_widget_id', 'flickr_url', 'deactivated_apps', 'microsite_public_apps',
-                         'call_to_action_active', 'call_to_action_title', 'call_to_action_description'] \
+                         'call_to_action_active', 'call_to_action_title', 'call_to_action_description',
+                         'conference_theme_color'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else []) \
                         + (['embedded_dashboard_html',] if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED else [])
 
-    def __init__(self, instance, *args, **kwargs):    
+    def __init__(self, instance, *args, **kwargs):
         if 'request' in kwargs:
             self.request = kwargs.pop('request')
         super(CosinnusBaseGroupForm, self).__init__(instance=instance, *args, **kwargs)
@@ -130,11 +133,18 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
              )
         if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED and not is_superuser(self.request.user):
             self.fields['embedded_dashboard_html'].disabled = True
+        if not settings.COSINNUS_ENABLE_SDGS:
+            del self.fields['sdgs']
         
         # use select2 widgets for m2m fields
         for field in list(self.fields.values()):
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
+                
+        # for conference groups, add additional form fields
+        if instance is None or not instance.pk or not instance.group_is_conference:
+            del self.fields['conference_theme_color']
+    
     
     def clean(self):
         if not self.cleaned_data.get('name', None):
@@ -153,6 +163,10 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
             if not parsed_video or 'error' in parsed_video:
                 raise forms.ValidationError(_('This doesn\'t seem to be a valid Youtube or Vimeo link!'))
         return data
+
+    def clean_sdgs(self):
+        if self.cleaned_data['sdgs'] and len(self.cleaned_data) > 0:
+            return [int(sdg) for sdg in self.cleaned_data['sdgs']]
     
     def clean_twitter_username(self):
         """ check username and enforce '@' """

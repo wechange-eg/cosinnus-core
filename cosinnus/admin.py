@@ -31,6 +31,8 @@ from cosinnus.models.idea import CosinnusIdea
 from cosinnus.core import signals
 from django import forms
 from django.core.exceptions import ValidationError
+from cosinnus.models.bbb_room import BBBRoom
+from cosinnus.models.conference import CosinnusConferenceRoom
 
 
 class SingleDeleteActionMixin(object):
@@ -519,7 +521,7 @@ class UserAdmin(DjangoUserAdmin):
             rocket = RocketChatConnection()
             for user in queryset:
                 rocket.users_update(user, force_user_update=True, update_password=True)
-                delete_cached_rocket_connection(user)
+                delete_cached_rocket_connection(user.cosinnus_profile.rocket_username)
                 count += 1
             message = _('%d Users were synchronized successfully.') % count
             self.message_user(request, message)
@@ -611,6 +613,22 @@ if settings.COSINNUS_IDEAS_ENABLED:
         raw_id_fields = ('creator',)
     
     admin.site.register(CosinnusIdea, CosinnusIdeaAdmin)
+
+
+class CosinnusBBBRoomAdmin(admin.ModelAdmin):
+    list_display = ('meeting_id', 'name', 'ended', 'portal')
+    list_filter = ('ended', 'portal')
+    search_fields = ('meeting_id', 'internal_meeting_id', 'name')
+
+admin.site.register(BBBRoom, CosinnusBBBRoomAdmin)
+
+
+class CosinnusConferenceRoomAdmin(admin.ModelAdmin):
+    list_display = ('title', 'type', 'group', 'sort_index')
+    list_filter = ('group', 'group__portal')
+    search_fields = ('slug', 'title',)
+
+admin.site.register(CosinnusConferenceRoom, CosinnusConferenceRoomAdmin)
 
 
 ## TODO: FIXME: re-enable after 1.8 migration

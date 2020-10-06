@@ -227,6 +227,7 @@ class CosinnusConf(AppConf):
     
     # a list of which app checkboxes should be default-active on the create group form
     DEFAULT_ACTIVE_GROUP_APPS = [
+        'cosinnus_conference',
         'cosinnus_etherpad',
         'cosinnus_event',
         'cosinnus_file',
@@ -262,19 +263,19 @@ class CosinnusConf(AppConf):
     
     #: How long an idea should at most stay in cache until it will be removed
     ORGANIZATION_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
-    
+
     # TODO: add here all values for new instances of organizations that should
     # be set as default for each new organization instance on create
     ORGANIZATION_DEFAULT_VALUES = {
         'place_type': 0, # TODO should always be 'initiative'
     }
-    
+
     # should CosinnusOrganizations be enabled for this Portal?
     ORGANIZATIONS_ENABLED = False
-    
+
     # is the external content (GoodDB for example) enabled?
     EXTERNAL_CONTENT_ENABLED = False
-    
+
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
 
@@ -503,7 +504,7 @@ class CosinnusConf(AppConf):
     
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
-    HIDE_APPS = set(['cosinnus_message', 'cosinnus_notifications', 'cosinnus_stream'])
+    HIDE_APPS = set(['cosinnus_conference', 'cosinnus_message', 'cosinnus_notifications', 'cosinnus_stream'])
     
     #: How long the perm redirect cache should last (1 week, because it organizes itself)
     PERMANENT_REDIRECT_CACHE_TIMEOUT = 60 * 60 * 24 * 7
@@ -586,7 +587,7 @@ class CosinnusConf(AppConf):
     )
 
     #: The serializer used for the user profile
-    USER_PROFILE_SERIALIZER = 'cosinnus.api.serializers.profile.UserProfileSerializer'
+    USER_PROFILE_SERIALIZER = 'cosinnus.api.serializers.user.UserProfileSerializer'
     
     # when users newly register, are their profiles marked as visible rather than private on the site?
     USER_DEFAULT_VISIBLE_WHEN_CREATED = True
@@ -649,6 +650,21 @@ class CosinnusConf(AppConf):
     # receive a newsletter
     USERPROFILE_ENABLE_NEWSLETTER_OPT_IN = False
     
+    # extra fields for the user profile.
+    # usage:
+    # {
+    #    field_name: {
+    #         'type': <str type of `UserProfileFormExtraFieldsMixin.EXTRA_FIELD_TYPES`>,
+    #         'label': i18n str,
+    #         'legend': i18n str,
+    #         'placeholder': i18n str,
+    #         'required': bool, # whether to be required in forms
+    #         'in_signup': bool, # whether to show up in the signup form
+    #     }, ...
+    # }
+    # example: {'organisation': {'type': 'text', 'required': True}}
+    USERPROFILE_EXTRA_FIELDS = {}
+
     # if True, payment urls and views will be enabled
     PAYMENTS_ENABLED = False
     # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins
@@ -718,6 +734,16 @@ class CosinnusConf(AppConf):
     OAUTH_SERVER_BASEURL = None
     OAUTH_SERVER_PROVIDER_NAME = 'wechange'
     
+    # whether SDGs should be shown in group/project forms and detail templates
+    ENABLE_SDGS = False
+
+    # default value for form field for how many coffee table
+    # participants should be allowed
+    CONFERENCE_COFFEETABLES_MAX_PARTICIPANTS_DEFAULT = 6
+
+    # default value for form field for if to allow user creation of coffee tables
+    CONFERENCE_COFFEETABLES_ALLOW_USER_CREATION_DEFAULT = False
+
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
@@ -737,3 +763,46 @@ class CosinnusDefaultSettings(AppConf):
         'cosinnus_file.FileEntry': ('title', ),
     }
 
+    """ BBB-Settings """
+    BBB_SECRET_KEY = None
+    BBB_API_URL = None
+    BBB_HASH_ALGORITHM = "SHA1"
+
+    BBB_ROOM_DEFAULT_SETTINGS = {
+        "record": False,
+        "autoStartRecording": False,
+        "allowStartStopRecording": False
+    }
+    # cache timeout for retrieval of participants
+    BBB_ROOM_PARTICIPANTS_CACHE_TIMEOUT_SECONDS = 20
+    # should we monkeypatch for BBB appearently allowing one less persons to enter a room
+    # than provided in max_participants during room creation
+    BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = True
+
+    # the default parameters added to every BBB room join
+    # see https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
+    BBB_DEFAULT_EXTRA_JOIN_PARAMETER = {
+        'userdata-bbb_mirror_own_webcam': 'true',
+
+    }
+    BBB_ROOM_TYPE_DEFAULT = 0
+    BBB_ROOM_TYPE_CHOICES = (
+        (0, _('General')),
+        (1, _('Active')),
+        (2, _('Restricted')),
+        (3, _('Premium')),
+    )
+    # a map for variable room types
+    BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS = {
+        0: {},
+        1: {
+            'userdata-bbb_skip_check_audio': 'true',
+            'userdata-bbb_auto_join_audio': 'true',
+            'userdata-bbb_listen_only_mode': 'false',
+            'userdata-bbb_auto_share_webcam': 'true',
+            'userdata-bbb_skip_video_preview': 'true',
+            'userdata-bbb_auto_swap_layout': 'true', #  keine Präsentation zeigen
+        },
+        2: {},
+        3: {},
+    }

@@ -27,7 +27,7 @@ def skipUnlessCustomUserProfile(test_func):
 
 
 def _is_custom_userprofileserializer():
-    return (settings.COSINNUS_USER_PROFILE_SERIALIZER != 'cosinnus.api.serializers.profile.UserProfileSerializer')
+    return (settings.COSINNUS_USER_PROFILE_SERIALIZER != 'cosinnus.api.serializers.user.UserProfileSerializer')
 
 
 def skipIfCustomUserProfileSerializer(test_func):

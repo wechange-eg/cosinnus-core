@@ -127,7 +127,19 @@
                 <li {% if request.GET.tab == 'dashboard' %}class="active"{% endif %}>
                     <a href="#dashboard" class="_group-form-tab" role="tab" data-toggle="tab">
                         <i class="fa fa-columns"></i>
-                        {{ group.get_group_dashboard_label }}
+                        {% if group_model == "CosinnusSociety" %}
+                            {% trans "Group Dashboard" %}
+                        {% else %}
+                            {% trans "Project Dashboard" %}
+                        {% endif %}
+                    </a>
+                </li>
+                {% endif %}
+                {% if group and form.forms.obj.fields.conference_theme_color %}
+                <li {% if request.GET.tab == 'conference' %}class="active"{% endif %}>
+                    <a href="#conference" class="_group-form-tab" role="tab" data-toggle="tab">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        {% trans "Conference Settings" %}
                     </a>
                 </li>
                 {% endif %}
@@ -236,33 +248,38 @@
 	                                {% endif %}
 		                    {% endcaptureas %}
 							{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label field_html=wallpaper_html extra_html=wallpaper_extra_html first=True large_field=True %}
-							
-                        
-                        
+
+
                         {# Website Field #}
                         {% trans "Website" as website_label %}
                         {% trans "Example: http://mywebsite.com" as website_placeholder %}
                         {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.website label=website_label placeholder=website_placeholder %}
-                        
-                        
-                        {% include "cosinnus/media_tags_group.html"%} 
-                        
-                        
+
+
+                        {% include "cosinnus/media_tags_group.html"%}
+
+                        {% if SETTINGS.COSINNUS_ENABLE_SDGS %}
+                        {# Large Field #}
+                        {% trans "Which sustainable development goals (SDG) does your project contribute to?" as sdg_label %}
+                        {% trans "Select sustainable development goals" as sdg_placeholder %}
+                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.sdgs label=sdg_label placeholder=sdg_placeholder large_field=True %}
+                        {% endif %}
+
+
                         {# Locations Inlineform #}
                         {% trans "Where are you active?" as locations_label %}
                         {% trans "Remove location" as loc_rm_label %}
-                        {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}                
+                        {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}
                         {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=locations_label   content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
-                        
-                        
-                        
+
+
                         {% if form.forms.obj.parent %}
 	                        {# Parent Field #}
                             {% trans "Which Group does the group belong to?" as parent_label %}
 						    {% trans "Select Group" as parent_placeholder %}
                             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.parent label=parent_label placeholder=parent_placeholder %}
                         {% endif %}
-                        
+
                         {% if form.forms.obj.related_groups %}
                             {# Related Groups Field #}
                             {% trans "Are there any projects/groups related to this one?" as related_label %}
@@ -524,6 +541,18 @@
 						</div>
 					{% endfor %}
 					{% endblock extra_forms %}
+
+                    {% if group and form.forms.obj.fields.conference_theme_color %}
+					   <div class="tab-pane {% if request.GET.tab == 'conference' %}active{% endif %}" id="conference">
+                            {% block group_conference_tab %}
+                                {# Conference Theme Color Field #}
+                                {% trans "Conference Theme Color" as conference_label %}
+                                {% trans "Hex code (example: #A2A2A2)" as conference_placeholder %}
+                                {% trans "A hex code color to use as main theme color for the conference layout (with or without leading '#')" as conference_legend %}
+                                {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.conference_theme_color label=conference_label legend=conference_legend placeholder=conference_placeholder large_field=True %}
+                            {% endblock group_conference_tab %}
+                        </div>
+                    {% endif %}
 				{% endblock group_form_tab_panes %}
 				
 			</div>

@@ -7,30 +7,25 @@ from functools import partial
 from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
+from rest_framework_jwt.settings import api_settings
 
 from cosinnus.conf import settings
 from cosinnus.models.profile import get_user_profile_model
-from cosinnus.api.serializers.group import GroupSimpleSerializer
 from cosinnus.utils.import_utils import import_from_settings
+from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
+
+User = get_user_model()
+
+__all__ = ('UserProfileSerializer', 'UserSerializer', 'UserSerializerWithToken',)
 
 
-__all__ = ('BaseUserProfileSerializer', 'UserProfileSerializer',
-    'UserDetailSerializer', 'UserSimpleSerializer', )
-
-
-class BaseUserProfileSerializer(serializers.ModelSerializer):
-
-    class Meta(object):
-        fields = ('id', )
-
-
-class UserProfileSerializer(BaseUserProfileSerializer):
+class UserProfileSerializer(serializers.ModelSerializer):
 
     avatar = serializers.CharField(source="avatar_url")
 
-    class Meta(BaseUserProfileSerializer.Meta):
+    class Meta(object):
         model = get_user_profile_model()
-        fields = BaseUserProfileSerializer.Meta.fields + ('avatar', )
+        fields = ('id', 'avatar')
 
     def __init__(self, *args, **kwargs):
         super(UserProfileSerializer, self).__init__(*args, **kwargs)
@@ -58,7 +53,7 @@ def get_user_profile_serializer():
 _UserProfileSerializer = get_user_profile_serializer()
 
 
-class UserSimpleSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
 
     username = serializers.CharField(source='get_username', read_only=True)
     first_name = serializers.CharField(read_only=True)
@@ -67,13 +62,31 @@ class UserSimpleSerializer(serializers.ModelSerializer):
     profile = _UserProfileSerializer(source='cosinnus_profile', many=False, read_only=True)
 
     class Meta(object):
-        model = get_user_model()
-        fields = ('id', 'username', 'first_name', 'last_name', 'profile', )
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name', 'profile')
 
 
-class UserDetailSerializer(UserSimpleSerializer):
+class UserSerializerWithToken(serializers.ModelSerializer):
 
-    cosinnus_groups = GroupSimpleSerializer(many=True, read_only=True)
+    token = serializers.SerializerMethodField()
+    password = serializers.CharField(write_only=True)
 
-    class Meta(UserSimpleSerializer.Meta):
-        fields = UserSimpleSerializer.Meta.fields + ('cosinnus_groups', )
+    def get_token(self, obj):
+        jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+        jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+        payload = jwt_payload_handler(obj)
+        token = jwt_encode_handler(payload)
+        return token
+
+    def create(self, validated_data):
+        password = validated_data.pop('password', None)
+        instance = self.Meta.model(**validated_data)
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = User
+        fields = ('token', 'username', 'password')

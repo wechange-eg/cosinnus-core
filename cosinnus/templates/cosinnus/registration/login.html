@@ -92,7 +92,7 @@
 	
 	{% endif %}
 	
-	{% if SETTINGS.COSINNUS_IS_OAUTH_CLIENT %}
+	{% if SETTINGS.COSINNUS_IS_OAUTH_CLIENT and not request.GET.hidesso  %}
 	     {% include "socialaccount/snippets/provider_list.html" with process="login" type="login" %}
 	{% endif %}
 

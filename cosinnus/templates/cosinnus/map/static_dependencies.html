@@ -1,4 +1,4 @@
-{% load static sekizai_tags cosinnus_tags cosinnus_map_tags %}
+{% load static sekizai_tags cosinnus_tags cosinnus_map_tags sdg_tags %}
 
 {% addtoblock "js" %}
 <script src="{% static 'js/vendor/underscore-1.8.3.js' %}"></script>
@@ -29,6 +29,9 @@
     
 <script type="text/javascript">
     var COSINNUS_MAP_TOPICS_JSON = {% render_cosinnus_topics_json %};
+    {% if SETTINGS.COSINNUS_ENABLE_SDGS %}
+    var COSINNUS_MAP_SDGS_JSON = {% render_sdg_json %};
+    {% endif %}
 	var COSINNUS_MAP_OPTIONS = {{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }};
     var COSINNUS_PORTAL_INFOS = {% render_cosinnus_portal_info_json %};
     var COSINNUS_IDEAS_ENABLED = {% if SETTINGS.COSINNUS_IDEAS_ENABLED %}true{% else %}false{% endif %};

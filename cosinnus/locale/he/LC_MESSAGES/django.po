@@ -1,0 +1,5876 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-27 09:46+0200\n"
+"PO-Revision-Date: 2020-09-29 18:04+0100\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#, python-format
+msgid "1 %(object)s was deleted successfully"
+msgstr "1 %(object)s נמחק בהצלחה"
+
+#, python-format
+msgid "%(number)d %(objects)s were deleted successfully"
+msgstr "%(number)d %(objects)s נמחקו בהצלחה"
+
+msgid "Delete selected entries"
+msgstr "מחק ערכים נבחרים"
+
+#, fuzzy
+msgid ""
+"A token with the same code already exists! Please choose a different string "
+"for your token."
+msgstr "אסימון עם אותו קוד כבר קיים! בחר מחרוזת אחרת עבור האסימון שלך."
+
+msgid "The following Projects were converted to Groups:"
+msgstr "הפרויקטים הבאים הומרו לקבוצות:"
+
+msgid "Convert selected Projects to Groups"
+msgstr "המר פרויקטים נבחרים לקבוצות"
+
+msgid "The following Users were added to this portal:"
+msgstr "המשתמשים הבאים נוספו לפורטל זה:"
+
+msgid "Add all members to current Portal"
+msgstr "הוסף את כל החברים לפורטל הנוכחי"
+
+msgid "Move selected teams to current portal"
+msgstr "העבר צוותים נבחרים לפורטל הנוכחי"
+
+msgid "Move selected teams to current portal and message members"
+msgstr "העבר צוותים נבחרים לפורטל הנוכחי ושלח התראה לחברים"
+
+msgid "In addition, the members were removed from all other Portals."
+msgstr "בנוסף, החברים הוצאו מכל שאר הפורטלים."
+
+msgid "Move all members to current Portal (removes all other memberships!)"
+msgstr "העבר את כל החברים לפורטל הנוכחי (מסיר את כל שאר החברויות!)"
+
+msgid "Move selected groups and their subprojects to current portal"
+msgstr "העבר את הקבוצות שנבחרו ותוכניות המשנה שלהן לפורטל הנוכחי"
+
+msgid ""
+"Move selected groups and their subprojects to current portal and message "
+"members"
+msgstr "העבר קבוצות נבחרות ותכניות המשנה שלהן לפורטל הנוכחי ושלח התראה לחברים"
+
+msgid "The following Groups were converted to Projects:"
+msgstr "הקבוצות הבאות הוסבו לפרויקטים:"
+
+msgid "Convert selected Groups to Projects"
+msgstr "הסב את הקבוצות הנבחרות לפרויקטים"
+
+msgid "ToS Accepted"
+msgstr "תנאי השימוש אושרו"
+
+msgid "ToS not Accepted"
+msgstr "תנאי השימוש לא אושרו"
+
+msgid "User Logged In"
+msgstr "משתמש מחובר"
+
+msgid "Logged in before"
+msgstr "התחברתי בעבר"
+
+msgid "Never logged in"
+msgstr "לא התחברתי בעבר"
+
+msgid "Has Logged In"
+msgstr "מחובר"
+
+msgid "ToS accepted?"
+msgstr "תנאי השימוש אושרו?"
+
+#, python-format
+msgid "%d Users were deactivated successfully."
+msgstr "%d משתמשים הושבתו בהצלחה."
+
+msgid "Deactivate users (will keep all all items they created on the site)"
+msgstr "השבת משתמשים (ישמור את כל הפריטים שנוצרו באתר)"
+
+msgid ""
+"The email address for the account you are trying to use needs to be "
+"activated before you can log in."
+msgstr "יש להפעיל את כתובת הדוא\"ל של החשבון על מנת להתחבר."
+
+#, python-format
+msgid ""
+"If you have not received an activation email yet, please try signing up "
+"again or contact our support at %(email)s!"
+msgstr ""
+"אם טרם קיבלת דוא\"ל להפעלת החשבון, נסה להירשם מחדש או צור קשר עם התמיכה שלנו "
+"בכתובת %(email)s!"
+
+#, python-format
+msgid ""
+"If you have not received an activation email from %(portal_name)s within a "
+"few minutes please look in your spam folder or try signing up again!"
+msgstr ""
+"אם לא קיבלת דוא\"ל להפעלת החשבון מ-%(portal_name)s בתוך מס' דקות אנא בדוק "
+"בתיקיית ספאם או נסה להירשם מחדש!"
+
+#, python-format
+msgid ""
+"%(sender_name)s would like you to come join the project \"%(team_name)s\" on "
+"%(portal_name)s! Click the project's name below to check it out and "
+"collaborate!"
+msgstr ""
+"%(sender_name)s רוצה שתצטרף לפרויקט \"%(team_name)s\" ב-%(portal_name)s! לחץ "
+"על שם הפרויקט שלמטה כדי לבדוק אותו ולשתף פעולה!"
+
+msgid "Mobilität"
+msgstr "ניידות"
+
+msgid "Energie"
+msgstr "אנרגיה"
+
+msgid "Umwelt"
+msgstr "סביבה"
+
+msgid "Bildung"
+msgstr "חינוך"
+
+msgid "Gesundheit"
+msgstr "בריאות"
+
+msgid "Ernährung und Konsum"
+msgstr "תזונה וצריכה"
+
+msgid "Kunst und Kultur"
+msgstr "אמנות ותרבות"
+
+msgid "Geld und Finanzen"
+msgstr "כסף ופיננסים"
+
+msgid "Arbeit und Recht"
+msgstr "חוק ועבודה"
+
+msgid "Bauen und Wohnen"
+msgstr "בנייה ומגורים"
+
+msgid "Klimaschutz"
+msgstr "הגנה על האקלים"
+
+msgid ""
+"Only team members can see the content you requested. Apply to become a "
+"member now!"
+msgstr "רק חברי הצוות יכולים לראות את התוכן המבוקש. הגש בקשה להצטרף עכשיו!"
+
+msgid ""
+"Only registered members can see the content you requested! Log in or create "
+"an account now!"
+msgstr ""
+"רק חברים רשומים יכולים לראות את התוכן המבוקש! התחבר או צור חשבון עכשיו!"
+
+msgid "Please log in to access this page."
+msgstr "התחבר על מנת לעבור לדף המבוקש."
+
+#, python-format
+msgid ""
+"The page you tried to access belongs to an app that has been deactivated for "
+"this %(team_type)s. If you feel this is in error, ask the %(team_type)s's "
+"administrator to reactivate the app."
+msgstr ""
+"הדף שניסית לגשת אליו שייך לאפליקציה שהושבתה עבור %(team_type)s. אם אתה חושב "
+"שזאת טעות, בקש ממנהל הצוות %(team_type)s's להפעיל מחדש את האפליקציה."
+
+msgid "No team provided"
+msgstr "לא הוקצה צוות"
+
+msgid ""
+"This team no longer resides under the URL you entered. You have been "
+"redirected automatically to the current location."
+msgstr ""
+"צוות זה אינו פועל יותר תחת כתובת ה-URL שהזנת. הופנית אוטומטית למיקום הנוכחי."
+
+msgid "This account is no longer active. You have been logged out."
+msgstr "חשבון זה אינו פעיל יותר. נותקת מהמערכת."
+
+#, python-format
+msgid ""
+"You have tried to log in too many times. You may try to log in again in: "
+"%(duration)s."
+msgstr ""
+"ניסית להתחבר ללא הצלחה יותר מדי פעמים. תהיה רשאי לנסות להתחבר שוב בעוד: "
+"%(duration)s."
+
+msgid "A user requested to become a member of this team (admins only)"
+msgstr "משתמש ביקש להיות חבר בצוות זה (למנהלים בלבד)"
+
+#, python-format
+msgid "%(sender_name)s requested to become a member"
+msgstr "%(sender_name)s ביקש להפוך לחבר צוות"
+
+#, python-format
+msgid ""
+"%(sender_name)s and %(count_minus_one)d other requested to become a member"
+msgid_plural ""
+"%(sender_name)s and %(count_minus_one)d others requested to become a member"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר ביקש חברות"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים ביקשו להיות חברים"
+
+msgid "You are an admin of this team"
+msgstr "אתה מנהל בצוות זה"
+
+#, python-format
+msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
+msgstr "\"%(sender_name)s\" ביקש להפוך לחבר הצוות %(team_name)s."
+
+msgid "Your membership request was accepted"
+msgstr "בקשת החברות שלך אושרה"
+
+msgid "Membership request accepted"
+msgstr "בקשת החברות אושרה"
+
+#, python-format
+msgid "Your membership request for %(team_name)s was accepted!"
+msgstr "בקשת החברות שלך לצוות %(team_name)s אושרה!"
+
+msgid "Your membership request was declined"
+msgstr "בקשה החברות שלך נדחתה"
+
+msgid "Membership request declined"
+msgstr "בקשת החברות נדחתה"
+
+#, python-format
+msgid ""
+"We're sorry, but your membership request for %(team_name)s was declined."
+msgstr "אנחנו מצטערים, אבל בקשת החברות שלך לצוות %(team_name)s נדחתה."
+
+#, python-format
+msgid "Your membership request for %(team_name)s was declined."
+msgstr "בקשת החברות שלך לצוות %(team_name)s נדחתה."
+
+msgid "A user has accepted the invitation to this team (admins only)"
+msgstr "משתמש אישר את ההזמנה לצוות זה (מנהלים בלבד)"
+
+#, python-format
+msgid "%(sender_name)s accepted the invitation"
+msgstr "%(sender_name)s אישר את ההזמנה"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other accepted the invitation"
+msgid_plural ""
+"%(sender_name)s and %(count_minus_one)d others accepted the invitation"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר קיבלו את ההזמנה"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים קיבלו את ההזמנה"
+
+#, python-format
+msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
+msgstr "\"%(sender_name)s\" אישר את ההזמנה לצוות %(team_name)s."
+
+msgid "A user has declined the invitation to this team (admins only)"
+msgstr "משתמש דחה את ההזמנה לצוות זה (מנהלים בלבד)"
+
+#, python-format
+msgid "%(sender_name)s declined the invitation"
+msgstr "%(sender_name)s דחה את ההזמנה"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other declined the invitation"
+msgid_plural ""
+"%(sender_name)s and %(count_minus_one)d others declined the invitation"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר דחו את ההזמנה"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים דחו את ההזמנה"
+
+#, python-format
+msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
+msgstr "\"%(sender_name)s\" דחה את ההזמנה לצוות %(team_name)s."
+
+msgid "You were made an admin of this team"
+msgstr "מונית למנהל בצוות זה"
+
+#, python-format
+msgid "%(sender_name)s made you an admin"
+msgstr "%(sender_name)s מינה אותך למנהל"
+
+#, python-format
+msgid ""
+"%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgstr ""
+"%(sender_name)s מינה אותך למנהל של \"%(team_name)s\" ב-%(portal_name)s!"
+
+msgid "Your admin status for this team was revoked"
+msgstr "סטטוס המנהל עבור צוות זה בוטל"
+
+#, python-format
+msgid "%(sender_name)s revoked your admin status"
+msgstr "%(sender_name)s ביטל את סטטוס המנהל שלך"
+
+#, python-format
+msgid ""
+"%(sender_name)s revoked your admin status of \"%(team_name)s\" on "
+"%(portal_name)s!"
+msgstr ""
+"%(sender_name)s ביטל את סטטוס המנהל של \"%(team_name)s\" ב-%(portal_name)s!"
+
+msgid "You were tagged in a post, document or other item"
+msgstr "תויגת בפוסט, מסמך או פריט אחר"
+
+#, python-format
+msgid "%(sender_name)s tagged you in %(object_name)s"
+msgstr "%(sender_name)s תייג אותך ב-%(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s tagged you in %(count)d items"
+msgstr "%(sender_name)s תייג אותך ב-%(count)d פריטים"
+
+#, python-format
+msgid "%(sender_name)s tagged you in"
+msgstr "%(sender_name)s תייג אותך ב-"
+
+#, python-format
+msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
+msgstr "תויגת ב-\"%(object_name)s\" בצוות %(team_name)s."
+
+#, python-format
+msgid "%(sender_name)s invited you to join %(team_name)s"
+msgstr "%(sender_name)s הזמין אותך להצטרף לצוות %(team_name)s"
+
+#, python-format
+msgid ""
+"%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! "
+"<br/><br/> To join, please click on the link below. You will be redirected "
+"to the portal, where you can view and accept the invitation."
+msgstr ""
+"%(sender_name)s הזמין אותך להצטרף ל-\"%(team_name)s\" ב-%(portal_name)s!\n"
+"<br/><br/> על מנת להצטרך, לחץ על הקישור שלהלן. תקושר ישירות לפורטל בו תוכל "
+"לצפות ולאשר את ההזמנה."
+
+#, python-format
+msgid ""
+"%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgstr ""
+"%(sender_name)s הזמין אותך להצטרף ל-\"%(team_name)s\" ב-%(portal_name)s!"
+
+msgid "Accept invitation"
+msgstr "אשר הזמנה"
+
+msgid "View invitation"
+msgstr "צפה בהזמנה"
+
+#, python-format
+msgid "%(sender_name)s invited you"
+msgstr "%(sender_name)s הזמין אותך"
+
+msgid "New link to the moved project/group"
+msgstr "קישור חדש לקבוצה/פרויקט שהועברו"
+
+#, python-format
+msgid ""
+"One of your projects/groups were moved to the portal \"%(portal_name)s\"! "
+"<br/><br/> Your user account for this portal is the same as for the old one "
+"- you do not need to register a new account! <br/><br/>All of your old URLs "
+"will continue to work and redirect you to the correct page on the new portal."
+msgstr ""
+"אחד הפרויקטים/קבוצות שלך הועברו לפורטל \"%(portal_name)s\"! <br/><br/> חשבון "
+"המשתמש שלך לפורטל זה זהה לישן. אינך צריך ליצור חשבון חדש! <br/><br/> כל "
+"כתובות ה-URL הישנות שלך ימשיכו לעבוד ולקשר אותך לדף הנכון בפורטל החדש."
+
+#, python-format
+msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
+msgstr "\"%(team_name)s\" הועבר ל-%(portal_name)s!"
+
+#, python-format
+msgid ""
+"%(sender_name)s just created the project/group \"%(team_name)s\" on "
+"%(portal_name)s!"
+msgstr ""
+"%(sender_name)s יצר כרגע את הפרויקט/קבוצה \"%(team_name)s\" ב-"
+"%(portal_name)s!"
+
+#, python-format
+msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
+msgstr "%(sender_name)s יצר כרגע חשבון משתמש חדש ב-%(portal_name)s!"
+
+#, python-format
+msgid ""
+"%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgstr ""
+"%(sender_name)s יצר כרגע את הרעיון \"%(object_name)s\" ב-%(portal_name)s!"
+
+#, python-format
+msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
+msgstr "%(sender_name)s יצר כרגע את הרעיון \"%(object_name)s\"!"
+
+#, python-format
+msgid ""
+"%(sender_name)s just created the project \"%(team_name)s\" from an idea you "
+"follow!"
+msgstr ""
+"%(sender_name)s יצר את הפרויקט \"%(team_name)s\" מרעיון שאתה עוקב אחריו!"
+
+#, python-format
+msgid ""
+"%(sender_name)s just created the project \"%(team_name)s\" on "
+"%(portal_name)s from an idea you follow! <br/><br/> To check it out, please "
+"click on the link below. There you can see if you would like to join the "
+"project."
+msgstr ""
+"%(sender_name)s יצר כרגע את הפרויקט \"%(team_name)s\" ב-%(portal_name)s "
+"מרעיון שאתה עוקב אחריו! <br/><br/> על מנת לבדוק אותו לחץ על הלינק שלהלן. שם "
+"תוכל להחליט האם אתה מעוניין להצטרך לפרויקט."
+
+#: default_settings.py:252
+msgid "Deutsch--NATIVE-LANGUAGE"
+msgstr "Deutsch"
+
+#: default_settings.py:253
+msgid "English--NATIVE-LANGUAGE"
+msgstr "English"
+
+#: default_settings.py:254
+msgid "Russian--NATIVE-LANGUAGE"
+msgstr "Русский"
+
+#: default_settings.py:255
+msgid "Ukrainian--NATIVE-LANGUAGE"
+msgstr "Українська"
+
+#: default_settings.py:258
+msgid "French--NATIVE-LANGUAGE"
+msgstr "Français"
+
+#: default_settings.py:259
+msgid "Polish--NATIVE-LANGUAGE"
+msgstr "Polski"
+
+#: default_settings.py:260
+msgid "Spanish--NATIVE-LANGUAGE"
+msgstr "Español"
+
+#: default_settings.py:261
+msgid "Romanian--NATIVE-LANGUAGE"
+msgstr "Română"
+
+#: default_settings.py:262
+msgid "Belarussian--NATIVE-LANGUAGE"
+msgstr "Беларуская"
+
+#: default_settings.py:263
+msgid "Dutch--NATIVE-LANGUAGE"
+msgstr "Nederlands"
+
+#: default_settings.py:265
+msgid "Azerbaijani--NATIVE-LANGUAGE"
+msgstr "Azerbaycan dili"
+
+#: default_settings.py:266
+msgid "Armenian--NATIVE-LANGUAGE"
+msgstr "Հայոց լեզու"
+
+#: default_settings.py:267
+msgid "Georgian--NATIVE-LANGUAGE"
+msgstr "ქართული ენა"
+
+#: default_settings.py:268
+msgid "Kazakh--NATIVE-LANGUAGE"
+msgstr "Қазақ тілі"
+
+msgid "Arabic--NATIVE-LANGUAGE"
+msgstr "العربية"
+
+msgid "Hebrew--NATIVE-LANGUAGE"
+msgstr "עברית"
+
+msgid "Attachments"
+msgstr "קבצים מצורפים"
+
+msgid "Type the title and/or type of attachment"
+msgstr "הקלד את הכותרת ו/או סוג הקובץ המצורף"
+
+msgid "Sort_field"
+msgstr "שדה מיון"
+
+msgid "Enter a number for sort order"
+msgstr "הזן מספר עבור סדר מיון"
+
+msgid "Widget label"
+msgstr "תווית יישומון"
+
+msgid "Enter a title for the widget"
+msgstr "הזן כותרת עבור יישומון"
+
+msgid "Widget icon"
+msgstr "סמל יישומון"
+
+#, fuzzy
+msgid "A font-awesome icon for the widget"
+msgstr "סמל גופן מדהים עבור יישומון"
+
+msgid "Link label"
+msgstr "תווית קישור"
+
+msgid "Enter a label for the widget-button"
+msgstr "הזן תווית עבור לחצן היישומון"
+
+msgid "Text"
+msgstr "טקסט"
+
+msgid "Enter a description"
+msgstr "הזן תיאור"
+
+msgid "All"
+msgstr "הכל"
+
+msgid "Not assigned"
+msgstr "לא הוקצה"
+
+msgid "Any date"
+msgstr "כל תאריך"
+
+msgid "Today"
+msgstr "היום"
+
+msgid "This week"
+msgstr "השבוע"
+
+msgid "Next week"
+msgstr "שבוע הבא"
+
+msgid "Next month"
+msgstr "בחודש הבא"
+
+msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
+msgstr "זה לא נראה כמו קישור Youtube או Vimeo תקף!"
+
+msgid "This doesn't seem to be a Twitter username!"
+msgstr "זה לא נראה כמו שם משתמש בטוויטר!"
+
+msgid ""
+"This doesn't seem to be a valid widget ID or embed HTML code from Twitter!"
+msgstr "זה לא נראה כמו מזהה יישומון חוקי או הטבעת קוד HTML מטוויטר!"
+
+msgid ""
+"This doesn't seem to be a valid Flickr Gallery link! It should be in the "
+"form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
+msgstr ""
+"זה לא נראה כמו קישור חוקי של גלריית Flickr! כך נראה קישור תקף \"https://www."
+"flickr.com/photos/username/sets/1234567890\"!"
+
+msgid "Users"
+msgstr "משתמשים"
+
+msgid "Please remove the whitespace from '{}'"
+msgstr "נא הסר את המרחב הלבן מ- '{}'"
+
+msgid ""
+"Names must be unique. You added '{}' more then once to your CSV. Please "
+"change the name."
+msgstr ""
+"שמות חייבים להיות ייחודיים. הוספת את '{}' יותר מפעם אחת ל- CSV שלך. נא שנה "
+"את השם."
+
+msgid "Can't find workshop with slug '{}'"
+msgstr "לא נמצאה סדנה עם הסמן '{}'."
+
+msgid "This is not a valid CSV File"
+msgstr "קובץ CSV זה אינו חוקי"
+
+msgid "CSV could not be parsed. Please use ',' or ';' as delimiter."
+msgstr ""
+
+msgid "Name"
+msgstr "שם"
+
+msgid "Limit to teams"
+msgstr "הגבל לצוותים"
+
+msgid "My teams"
+msgstr "הצוותים שלי"
+
+msgid "Other teams"
+msgstr "צוותים אחרים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Like"
+msgstr "אהבתי"
+
+msgid "Persons"
+msgstr "אנשים"
+
+msgid "email address"
+msgstr "כתובת דוא\"ל"
+
+msgid "first name"
+msgstr "שם פרטי"
+
+msgid "This email address already has a registered user!"
+msgstr "לכתובת דוא\"ל זו כבר יש משתמש רשום!"
+
+#, fuzzy
+msgid ""
+"Please enter a correct email and password. Note that both fields may be case-"
+"sensitive."
+msgstr "נא הזן כתובת דוא\"ל וסיסמא נכונים. "
+
+msgid ""
+"Your Web browser doesn't appear to have cookies enabled. Cookies are "
+"required for logging in."
+msgstr ""
+"נראה שדפדפן האינטרנט שלך לא מאפשר קבצי קוקיס. קבצי קוקיס נדרשים על מנת "
+"להתחבר."
+
+msgid "This account is inactive."
+msgstr "חשבון זה אינו פעיל."
+
+msgid "Hello"
+msgstr "שלום"
+
+msgid "Click the following link to change which emails you receive:"
+msgstr "לחץ על הקישור הבא כדי לשנות את הודעות הדואר האלקטרוני שאתה מקבל:"
+
+msgid "Notification Preferences"
+msgstr "העדפות התראה"
+
+msgid "Click the following link to never receive any more emails from us:"
+msgstr "לחץ על הקישור הבא כדי לא לקבל מאיתנו הודעות דוא\"ל נוספות:"
+
+msgid "Unsubscribe"
+msgstr "בטל הרשמה"
+
+msgid "My Dashboard"
+msgstr "לוח הבקרה שלי"
+
+msgid "Tiny (50 x *)"
+msgstr "זעיר (50 x *)"
+
+msgid "Very Small (100 x *)"
+msgstr "קטן מאוד (100 x *)"
+
+msgid "Smaller (150 x *)"
+msgstr "קטן יותר (150 x *)"
+
+msgid "Small (200 x *)"
+msgstr "קטן (200 x *)"
+
+msgid "Medium-small (250 x *)"
+msgstr "בינוני-קטן (250 x *)"
+
+msgid "Medium (300 x *)"
+msgstr "בינוני (300 x *)"
+
+msgid "Large (400 x *)"
+msgstr "גדול (400 x *)"
+
+msgid "Larger (500 x *)"
+msgstr "גדול יותר (500 x *)"
+
+msgid "Very large (650 x *)"
+msgstr "גדול מאוד (650 x *)"
+
+msgid "Extra large (800 x *)"
+msgstr "גדול במיוחד (800 x *)"
+
+msgid "XXL (1200 x *)"
+msgstr "XXL (1200 x *)"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Title"
+msgstr "כותרת"
+
+msgid "Last edited"
+msgstr "נערך לאחרונה"
+
+msgid "Last edited by"
+msgstr "נערך לאחרונה על ידי"
+
+msgid "Cosinnus CMS Micropage"
+msgstr ""
+
+msgid "Cosinnus Micropages"
+msgstr ""
+
+msgid "Complaint Text"
+msgstr "טקסט תלונה"
+
+msgid "Creator"
+msgstr "יוצר"
+
+msgid "Created"
+msgstr "נוצר"
+
+msgid "Reported object"
+msgstr "אובייקט שדווח"
+
+msgid "Reported objects"
+msgstr "אובייקטים מדווחים"
+
+msgid "Email"
+msgstr "אימייל"
+
+msgid "Notification ID"
+msgstr "פרטי זיהוי התראה"
+
+msgid "Portal"
+msgstr "פורטל"
+
+msgid "Enter a valid name. Forward slash is not allowed."
+msgstr "הזן שם חוקי. קו נטוי קדמי אינו מותר."
+
+msgid "Portals"
+msgstr "פורטלים"
+
+msgid "Slug"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Description"
+msgstr "תיאור"
+
+msgid "Support Email"
+msgstr "דואר אלקטרוני לתמיכה"
+
+msgid "This email is shown to users as contact address on many pages"
+msgstr "הודעת דואר אלקטרוני זו מוצגת למשתמשים ככתובת איש קשר בדפים רבים"
+
+msgid "Website"
+msgstr "אתר"
+
+msgid "Welcome-Email sending enabled"
+msgstr "הודעת ברכה למצטרפים חדשים זמינה ומופעלת"
+
+msgid "Welcome-Email Text"
+msgstr "טקסט הודעות ברכת הצטרפות"
+
+msgid ""
+"If set and enabled, this text will be sent to all new users after their "
+"registration is complete."
+msgstr ""
+"אם הוגדר ויהיה זמין, טקסט זה יישלח לכל המשתמשים החדשים לאחר השלמת הרישום "
+"שלהם."
+
+msgid "Public"
+msgstr "ציבורי"
+
+msgid "Associated Site"
+msgstr "אתר משויך"
+
+msgid "Http/Https Protocol (overrides settings)"
+msgstr "פרוטוקול Http/https (עוקף הגדרות)"
+
+msgid "Users Need Activation"
+msgstr "חשבונות משתמשים זקוקים להפעלה"
+
+msgid ""
+"If activated, newly registered users need to be approved by a portal admin "
+"before being able to log in."
+msgstr ""
+"אם הופעלו, חשבונות משתמשים חדשים צריכים להיות מאושרים על ידי מנהל פורטל על "
+"מנת שיוכלו להתחבר."
+
+msgid "Emails Need Verification"
+msgstr "הודעות דואר אלקטרוני זקוקות לאימות"
+
+msgid ""
+"If activated, newly registered users and users who change their email "
+"address will need to confirm their email by clicking a link in a mail sent "
+"to them."
+msgstr ""
+"אם הופעלו, רשומים חדשים ומשתמשים ששינו את כתובת הדוא\"ל שלהם יצטרכו לאמת את "
+"כתובתם החדשה על ידי לחיצה על קישור שישלח אליהם."
+
+msgid "ToS Version"
+msgstr "גירסת ToS"
+
+msgid "Background Image"
+msgstr "תמונת רקע"
+
+msgid "Used for the background of the landing and CMS-pages"
+msgstr "משמש לרקע הנחיתה ודפי CMS"
+
+msgid "Logo Image"
+msgstr "תמונת לוגו"
+
+msgid ""
+"Used as a small logo in the navigation bar and for external links to this "
+"portal"
+msgstr "משמש כסמל קטן בסרגל הניווט וקישורים חיצוניים לפורטל זה"
+
+msgid "Main color"
+msgstr "צבע ראשי"
+
+msgid "Main background color (css hex value, with or without \"#\")"
+msgstr "צבע רקע ראשי (ערך css hex, עם או בלי \"#\")"
+
+msgid "Gradient color"
+msgstr ""
+
+msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
+msgstr ""
+
+msgid "Extra CSS"
+msgstr ""
+
+msgid "Extra CSS for this portal, will be applied after all other styles."
+msgstr ""
+
+msgid "Video Conference Server"
+msgstr "שרת ועידות וידאו"
+
+msgid ""
+"If entered, will enable video conference functionality across the site. "
+"Needs to be a URL up to the point where any random room name can be appended."
+msgstr ""
+"אם הוזן, תתאפשר ועידת וידאו ברחבי האתר. צריכה להיות כתובת URL עד לנקודה שבה "
+"ניתן לצרף כל חדר אקראי."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Project"
+msgstr "פרויקט"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "קבוצה"
+
+#, fuzzy
+msgid ""
+"Be extremely careful when changing this slug manually! There can be many "
+"side-effects (redirects breaking e.g.)!"
+msgstr ""
+"היה זהיר במיוחד בעת שינוי הסמן באופן ידני! יכולות להיות תופעות לוואי רבות "
+"(ניתוב שוברים e.g.)!"
+
+msgid "Project Type"
+msgstr "סוג פרויקט"
+
+msgid "Last modified"
+msgstr "שונה לאחרונה"
+
+msgid "Short Description"
+msgstr "תיאור קצר"
+
+msgid "Short Description. Internal, will not be shown publicly."
+msgstr "תיאור קצר. פנימי, לא יוצג בפומבי."
+
+msgid "Detailed Description"
+msgstr "תיאור מפורט"
+
+msgid "Detailed, public description."
+msgstr "תיאור מפורט ופומבי."
+
+msgid "Contact Information"
+msgstr "פרטי יצירת קשר"
+
+msgid "How you can be contacted - addresses, social media, etc."
+msgstr "כיצד ניתן ליצור עמך קשר - כתובות, מדיה חברתית וכו'."
+
+msgid "Avatar"
+msgstr "תמונת פרופיל"
+
+msgid "Wallpaper image"
+msgstr "תמונת טפט"
+
+msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
+msgstr ""
+
+msgid "Microsite Video"
+msgstr ""
+
+msgid "Microsite Twitter Timeline Username"
+msgstr ""
+
+msgid "Microsite Twitter Timeline Custom Widget ID"
+msgstr ""
+
+msgid "Flickr Gallery URL"
+msgstr ""
+
+msgid "Call to Action Microsite Box active"
+msgstr ""
+
+msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgstr ""
+
+msgid "Call to Action Box title"
+msgstr ""
+
+msgid "Call to Action Box Description"
+msgstr ""
+
+msgid "Embedded Dashboard HTML"
+msgstr ""
+
+msgid "Deactivated Apps"
+msgstr "אפליקציות לא פעילות"
+
+msgid "Microsite Public Apps"
+msgstr "אפליקציות ציבוריות במיקרו-אתר"
+
+msgid "Is active"
+msgstr "פעיל"
+
+msgid ""
+"If a team is not active, it counts as non-existent for all purposes and "
+"views on the website."
+msgstr ""
+"אם צוות אינו פעיל, הוא נחשב כאינו קיים לכל המטרות והתצוגות באתר האינטרנט."
+
+msgid "Facebook Group ID"
+msgstr ""
+
+msgid "Facebook Page ID"
+msgstr ""
+
+msgid "Nextcloud Group ID"
+msgstr ""
+
+msgid "Nextcloud Groupfolder Name"
+msgstr ""
+
+msgid "Nextcloud Groupfolder ID"
+msgstr ""
+
+msgid "Is conference"
+msgstr ""
+
+msgid ""
+"If a group is marked as conference it is possible to auto-generate accounts "
+"for workshop participants"
+msgstr ""
+"אם קבוצה מסומנת ככנס, ניתן ליצור חשבונות באופן אוטומטי עבור משתתפי הסדנה"
+
+msgid "Conference is running"
+msgstr "הוועידה פועלת"
+
+msgid "Determins whether a group that is marked as conference is running"
+msgstr ""
+
+msgid "Parent Group"
+msgstr ""
+
+msgid "Related Teams"
+msgstr "צוותים קשורים"
+
+msgid "Cosinnus project"
+msgstr ""
+
+msgid "Cosinnus projects"
+msgstr ""
+
+msgid "Slug must not be empty."
+msgstr ""
+
+msgid ""
+"The URL for this team has changed. A redirect from all existing URLs has "
+"automatically been created!"
+msgstr ""
+
+#, python-format
+msgid "Request about your project \"%(group_name)s\""
+msgstr "בקשה אודות הפרויקט שלך \"%(group_name)s\""
+
+#, python-format
+msgid "Request about your group \"%(group_name)s\""
+msgstr "בקשה אודות הקבוצה שלך \"%(group_name)s\""
+
+msgid "Project Menu"
+msgstr "תפריט פרוייקט"
+
+msgid "Group Menu"
+msgstr "תפריט קבוצה"
+
+msgid "Project Dashboard"
+msgstr "לוח כלים של הפרויקט"
+
+msgid "Group Dashboard"
+msgstr "לוח כלים של הקבוצה"
+
+msgid "Is Moderator"
+msgstr ""
+
+msgid "Team membership"
+msgstr "חברות בצוות"
+
+msgid "Team memberships"
+msgstr "חברויות בצוות"
+
+msgid "Portal membership"
+msgstr "חברות בפורטל"
+
+msgid "Portal memberships"
+msgstr "חברויות בפורטל"
+
+msgid "Team Invite for Unregistered User"
+msgstr "הזמנת צוות עבור משתמש לא רשום"
+
+msgid "Team Invites for Unregistered Users"
+msgstr "הזמנות צוות עבור משתמשים לא רשומים"
+
+msgid "Token"
+msgstr "אסימון גישה"
+
+msgid ""
+"The token string. It will be displayed as it is, but when users enter it, "
+"upper/lower-case do not matter. Can contain letters and numbers, but no "
+"spaces, and can be as long or short as you want."
+msgstr ""
+
+msgid "Short Description (optional). Will be shown on the token page."
+msgstr "תיאור קצר (אופציונלי). יוצג בדף האסימון."
+
+msgid "Valid until"
+msgstr "בתוקף עד"
+
+msgid "Invite-Groups"
+msgstr ""
+
+msgid "Cosinnus Group Invite Token"
+msgstr ""
+
+msgid "Cosinnus Group Invite Tokens"
+msgstr ""
+
+msgid "Token must not be empty."
+msgstr "האסימון אינו יכול להיות ריק."
+
+msgid "From Portal"
+msgstr ""
+
+msgid "From Team Type"
+msgstr ""
+
+msgid "From Slug"
+msgstr ""
+
+msgid "Permanent Team Redirects"
+msgstr ""
+
+msgid "Permanent Team Redirect"
+msgstr ""
+
+msgid "Location"
+msgstr "מיקום"
+
+msgid "Latitude"
+msgstr "קו רוחב"
+
+msgid "Longitude"
+msgstr "קו אורך"
+
+msgid "Team"
+msgstr "צוות"
+
+msgid "CosinnusLocation"
+msgstr ""
+
+msgid "CosinnusLocations"
+msgstr ""
+
+msgid "Group Image"
+msgstr "תמונת קבוצה"
+
+msgid "CosinnusGroup GalleryImage"
+msgstr ""
+
+msgid "CosinnusGroup GalleryImages"
+msgstr ""
+
+msgid "URL"
+msgstr "URL"
+
+msgid "CosinnusGroup CallToAction Button"
+msgstr ""
+
+msgid "CosinnusGroup CallToAction Buttons"
+msgstr ""
+
+msgid "Cosinnus group"
+msgstr ""
+
+msgid "Cosinnus groups"
+msgstr ""
+
+msgid "Image"
+msgstr "תמונה"
+
+msgid "Created Projects"
+msgstr "פרויקטים שנוצרו"
+
+msgid "Cosinnus Idea"
+msgstr ""
+
+msgid "Cosinnus Ideas"
+msgstr ""
+
+msgid "Language"
+msgstr "שפה"
+
+msgid "May be contacted"
+msgstr "ניתן ליצור קשר"
+
+msgid "Terms of Service"
+msgstr "תנאי שימוש"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Never (we will not send you any emails)"
+msgstr "לעולם לא (לא נשלח לך דוא\"ל)"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Immediately (an individual email per event)"
+msgstr "מיד (דוא\"ל בודד לכל אירוע)"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "In a Daily Report"
+msgstr "בדו\"ח יומי"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "In a Weekly Report"
+msgstr "בדו\"ח שבועי"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Individual settings for each Project/Group..."
+msgstr "הגדרות ייחודיות עבור כל פרויקט/קבוצה.."
+
+msgid "Name (EN)"
+msgstr ""
+
+msgid "Name (RU)"
+msgstr ""
+
+msgid "Name (UK)"
+msgstr ""
+
+msgid "Only me"
+msgstr "רק אני"
+
+msgid "Team members only"
+msgstr "חברי צוות בלבד"
+
+msgid "Public (visible without login)"
+msgstr "ציבורי (גלוי ללא כניסה)"
+
+msgid "Tags"
+msgstr "תגיות"
+
+msgid "Permissions"
+msgstr "הרשאות"
+
+msgid "Place"
+msgstr "מקום"
+
+msgid "Valid from"
+msgstr "בתוקף מ"
+
+msgid "Valid to"
+msgstr "חוקי ל-"
+
+msgid "Approach"
+msgstr "גישה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Topics"
+msgstr "נושאים"
+
+msgid "Text Topics"
+msgstr "נושאי טקסט"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Likes"
+msgstr "לייקים"
+
+msgid "Attached object"
+msgstr "פריט מצורף"
+
+msgid "Attached objects"
+msgstr "פריטים מצורפים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "משתמש"
+
+msgid "Visited"
+msgstr ""
+
+msgid "LastVisited"
+msgstr ""
+
+msgid "LastVisiteds"
+msgstr ""
+
+msgid "Path"
+msgstr "נתיב"
+
+msgid "Reflected Object"
+msgstr ""
+
+msgid "Reflected Objects"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Liked"
+msgstr "אהבתי"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Following"
+msgstr "עוקב"
+
+msgid "Text Editor"
+msgstr "עורך טקסט"
+
+msgid "Raw HTML"
+msgstr "HTML גולמי"
+
+msgid "(none displayed)"
+msgstr "(אף אחד לא מוצג)"
+
+msgid "Announcement"
+msgstr "הודעה"
+
+msgid "Maintenance"
+msgstr "תחזוקה"
+
+msgid "Update"
+msgstr "עדכון"
+
+msgid "Technical Issues"
+msgstr "בעיות טכניות"
+
+msgid "Miscellaneous"
+msgstr "שונות"
+
+msgid "Announcement Display Type"
+msgstr "סוג תצוגת הודעה"
+
+msgid "Valid From"
+msgstr "בתוקף מ"
+
+msgid "Announcement Category"
+msgstr "קטגוריית הודעה"
+
+msgid "Main text of this announcement."
+msgstr "הטקסט הראשי של הודעה זו."
+
+msgid "Raw HTML for this announcement."
+msgstr "HTML גולמי עבור הודעה זו."
+
+msgid "Create-Project or Group Button"
+msgstr "צור כפתור פרויקט/קבוצה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Events"
+msgstr "אירועים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Projects"
+msgstr "פרוייקטים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "קבוצות"
+
+msgid "At least one type of Map object must be chosen!"
+msgstr "יש לבחור לפחות סוג אחד של פריט מפה!"
+
+msgid "Proportions"
+msgstr "פרופורציות"
+
+msgid "1/2 + 1/2"
+msgstr ""
+
+msgid "2/3 + 1/3"
+msgstr ""
+
+msgid "1/3 + 2/3"
+msgstr ""
+
+msgid "1/3 + 1/3 + 1/3"
+msgstr ""
+
+msgid "1/2 + 1/4 + 1/4"
+msgstr ""
+
+msgid "1/4 + 1/2 + 1/4"
+msgstr ""
+
+msgid "1/4 + 1/4 + 1/2"
+msgstr ""
+
+msgid "Medium News Widget"
+msgstr ""
+
+msgid "Large News Widget"
+msgstr ""
+
+msgid "4 Random Projects Widget"
+msgstr "יישומון 4 פרוייקטים אקראיים"
+
+msgid "8 Random Projects Widget"
+msgstr "יישומון 8 פרוייקטים אקראיים"
+
+msgid "Content"
+msgstr "תוכן"
+
+msgid "Portal Root Page"
+msgstr "דף בסיס של פורטל"
+
+msgid "Assigned Portal"
+msgstr "פורטל מוקצה"
+
+msgid "Footer"
+msgstr ""
+
+msgid ""
+"Will be displayed as a footer on EVERY page on this website (not only "
+"dashboard pages!)"
+msgstr ""
+
+msgid "Show Register Button"
+msgstr "הצג לחצן רישום"
+
+msgid "Redirect Logged in Users"
+msgstr "ניתוב מחדש של משתמשים מחוברים"
+
+msgid ""
+"If active, this page will only be visible to non-logged-in users. All others "
+"will be redirected to the activities page."
+msgstr ""
+"אם פעיל, דף זה יהיה גלוי רק למשתמשים לא מחוברים. כל האחרים ינותבו מחדש לדפי "
+"הפעילויות."
+
+msgid "Left banner (top)"
+msgstr "כרזה שמאלית (למעלה)"
+
+msgid "Right banner (top)"
+msgstr "כרזה ימנית (למעלה)"
+
+msgid "Header"
+msgstr "כותרת"
+
+msgid "Left footer"
+msgstr "כותרת תחתונה שמאלית"
+
+msgid "Right footer"
+msgstr "כותרת תחתונה ימנית"
+
+msgid "1-Column Dashboard Page"
+msgstr ""
+
+msgid "2-Column Dashboard Page"
+msgstr ""
+
+msgid "Content (left column)"
+msgstr ""
+
+msgid "Content (right column)"
+msgstr ""
+
+msgid "3-Column Dashboard Page"
+msgstr ""
+
+msgid "Content (center column)"
+msgstr ""
+
+msgid "Simple One-Column Page"
+msgstr ""
+
+msgid "Simple Page with Left Navigation"
+msgstr ""
+
+msgid "Left Sidebar"
+msgstr ""
+
+msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+msgstr ""
+
+msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+msgstr ""
+
+msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+msgstr ""
+
+msgid "Simple One-Column Page (Modular)"
+msgstr ""
+
+msgid "Simple Page with Left Navigation (Modular)"
+msgstr ""
+
+msgid "Start Page (Modular)"
+msgstr ""
+
+msgid "Header image"
+msgstr ""
+
+msgid "Header Title"
+msgstr ""
+
+msgid "Header Text"
+msgstr ""
+
+msgid "Additional Header content"
+msgstr ""
+
+msgid "Site Widgets"
+msgstr "יישומונים לאתר"
+
+msgid "Bottom content (gray background)"
+msgstr "תוכן תחתון (רקע אפור)"
+
+msgid "Dashboard"
+msgstr "לוח כלים"
+
+msgid "Microsite"
+msgstr "מיקרו-אתר"
+
+msgid "Application name"
+msgstr "שם יישום"
+
+msgid "Widget name"
+msgstr "שם יישומון"
+
+msgid "Widget Type"
+msgstr "סוג יישומון"
+
+msgid "Sort field"
+msgstr "שדה מיון"
+
+msgid "Widget configuration"
+msgstr "תצורת יישומון"
+
+msgid "Widget configurations"
+msgstr "תצורות יישומון"
+
+msgid "Either team or user must be defined."
+msgstr "יש להגדיר צוות או משתמש."
+
+msgid "key"
+msgstr "מפתח"
+
+msgid "value"
+msgstr "ערך"
+
+msgid "Widget configuration item"
+msgstr "פריט תצורת יישומון"
+
+msgid "Widget configuration items"
+msgstr "פריטי תצורת יישומון"
+
+msgid "select this page"
+msgstr "בחר דף זה"
+
+msgid "edit this page"
+msgstr "ערוך דף זה"
+
+msgid "edit"
+msgstr "עריכה"
+
+msgid "insert above"
+msgstr "הוסף למעלה"
+
+msgid "insert below"
+msgstr "הוסף למטה"
+
+msgid "insert inside"
+msgstr "הכנס פנימה"
+
+msgid "softroot"
+msgstr ""
+
+msgid "home"
+msgstr "דף הבית"
+
+#, python-format
+msgid "Edit this page in %(language)s "
+msgstr "ערוך דף זה בשפה %(language)s "
+
+msgid "Cut"
+msgstr "גזור"
+
+msgid "cut"
+msgstr "לגזור"
+
+msgid "Copy"
+msgstr "העתקה"
+
+msgid "copy"
+msgstr "העתק"
+
+msgid "Add Child"
+msgstr "הוסף ילד"
+
+msgid "add"
+msgstr "הוסף"
+
+msgid "Delete"
+msgstr "מחק"
+
+msgid "delete"
+msgstr "מחק"
+
+msgid "Unpublish"
+msgstr "לבטל פרסום"
+
+msgid "Publish"
+msgstr "פרסם"
+
+msgid "View on page"
+msgstr "הצג בדף"
+
+msgid "view"
+msgstr "תצוגה"
+
+msgid "View reported item..."
+msgstr "הצגת פריט שדווח..."
+
+msgid "Edit reported item..."
+msgstr "עריכת פריט שדווח..."
+
+msgid "Delete reported item..."
+msgstr "מחיקת פריט שדווח..."
+
+msgid "(The reported item has been deleted.)"
+msgstr "(הפריט המדווח נמחק.)"
+
+msgid "Enter the 4 capital letters in the scrambled image"
+msgstr "הזן את 4 האותיות הגדולות בתמונה המטושטשת"
+
+msgid ""
+"This page is a preview of many good things to come! It is heavily under "
+"development and many features are incomplete or may not work properly yet!"
+msgstr ""
+"דף זה הוא תצוגה מקדימה לדברים טובים רבים שבדרך! זה כרגע תחת פיתוח מסיבי "
+"ומאפיינים רבים טרם הושלמו או יתכן שלא יעבדו כראוי עדיין!"
+
+msgid "Done"
+msgstr "בוצע"
+
+msgid "Configure"
+msgstr "הגדר"
+
+msgid "Withdraw request"
+msgstr "משוך בקשה"
+
+msgid "Join"
+msgstr "הצטרף"
+
+#, python-format
+msgid "Do you really want to withdraw your join request to „%(title)s“?"
+msgstr "האם אתה בטוח שברצונך להסיר את בקשת ההצטרפות שלך ל- „%(title)s“?"
+
+msgid "Withdraw Join Request"
+msgstr "הסר בקשת ההצטרפות"
+
+#, python-format
+msgid "Do you wish to request to join „%(title)s“?"
+msgstr "האם ברצונך לבקש להצטרף ל-„%(title)s“?"
+
+msgid "Add widget"
+msgstr "הוסף יישומון"
+
+msgid "Informations"
+msgstr "מידע"
+
+msgid "No informations set"
+msgstr ""
+
+msgid "Back to Project Overview"
+msgstr "חזרה אל מבט כולל על הפרוייקט"
+
+msgid "Administration"
+msgstr "ניהול מערכת"
+
+msgid "Select a page on the left side."
+msgstr "בחר עמוד בצד שמאל."
+
+msgid "Simple Statistics"
+msgstr "סטטיסטיקה פשוטה"
+
+msgid "User Welcome Email"
+msgstr "דוא\"ל ברכת הצטרפות"
+
+msgid "User Dashboard Announcements"
+msgstr "הודעות לוח של כלים של המשתמש"
+
+msgid "Edit"
+msgstr "ערוך"
+
+msgid ""
+"There was an error in one of the fields you entered. Please correct it "
+"before saving!"
+msgstr "אירעה שגיאה באחד השדות שהזנת. אנא תקן אותו לפני השמירה!"
+
+msgid "You may use the following variables:"
+msgstr "באפשרותך להשתמש במשתנים הבאים:"
+
+msgid "Save"
+msgstr "שמור"
+
+msgid "Currently set Welcome-Email Text"
+msgstr "טקסט ברכת הצטרפות שמוגדר כרגע"
+
+msgid "Send yourself a Test-Mail"
+msgstr "בדיקת אימות: שלח לעצמך דוא\"ל"
+
+msgid "Conference Management"
+msgstr "ניהול כנסים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Members"
+msgstr "חברים"
+
+msgid "Settings"
+msgstr "הגדרות"
+
+msgid "Attach existing Files..."
+msgstr "צירוף קבצים קיימים..."
+
+msgid "Drag and Drop files here..."
+msgstr "גרור ושחרר קבצים כאן..."
+
+msgid "Drag and Drop files or folders here..."
+msgstr "גרור ושחרר קבצים או תיקיות כאן..."
+
+msgid ""
+"Click to upload a new file/image. You can also drag & drop a file from your "
+"computer."
+msgstr "לחץ כדי להעלות קובץ/תמונה חדשים. באפשרותך גם לגרור ולשחרר קובץ מהמחשב."
+
+msgid "Browse..."
+msgstr "עיון..."
+
+msgid ""
+"Drag and drop one or more files into this area to upload them to this folder."
+msgstr "גרור ושחרר קובץ אחד או יותר לאזור זה כדי להעלות אותם לתיקיה זו."
+
+msgid ""
+"You can also upload a whole folder, including all files and subfolders, by "
+"dragging it here. The new folders will be created automatically, with the "
+"same folder structure as on your computer."
+msgstr ""
+"באפשרותך גם להעלות תיקיה שלמה, כולל כל הקבצים ותיקיות המשנה, על-ידי גרירתה "
+"לכאן. התיקיות החדשות ייווצרו באופן אוטומטי, עם מבנה תיקיות זהה למבנה במחשב "
+"שלך."
+
+msgid ""
+"Unfortunately, the folder upload feature is only available on some browsers. "
+"This is because some browsers will not provide the file path information "
+"that is needed for the upload. If your browser doesn't support this, you may "
+"wish to switch to a different browser for your upload."
+msgstr ""
+"למרבה הצער, תכונת העלאת התיקיה זמינה רק בדפדפנים מסוימים. הסיבה לכך היא "
+"שדפדפנים מסוימים לא יספקו את נתב המידע הדרוש להעלאה. אם הדפדפן שלך אינו תומך "
+"בכך, יתכן שתרצה להחליף לדפדפן אחר על מנת להשלים את ההעלאה."
+
+msgid "Currently, the Browsers supporting folder upload are:"
+msgstr "נכון לכרגע, הדפדפנים שתומכים בהעלאת התיקייה הם:"
+
+msgid "File and Folder Upload"
+msgstr "העלאת קבצים ותיקיות"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "2-factor access only"
+msgstr ""
+
+msgid "OTP Device:"
+msgstr ""
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr ""
+
+msgid "Forgotten your password or username?"
+msgstr "שכחת את הסיסמה או את שם המשתמש שלך?"
+
+msgid "Validate"
+msgstr "אימות"
+
+msgid "Log out"
+msgstr "התנתק"
+
+msgid "You are logged in as"
+msgstr "אתה מחובר כ"
+
+msgid ""
+"It appears that no authentication device is attached to your account. Please "
+"ask another admin to set one up and send you the QR code!"
+msgstr ""
+"נראה כי לא מצורף לחשבון שלך התקן אימות. נא בקש ממנהל אחר להגדיר זאת ולשלוח "
+"לך את קוד ה-QR!"
+
+msgid "Services"
+msgstr "שירותים"
+
+msgid "Access denied!"
+msgstr "הגישה נדחתה!"
+
+msgid "You don't have permission to access this site."
+msgstr "אין לך הרשאה לגשת לאתר זה."
+
+msgid "Page expired!"
+msgstr "פג תוקפו של הדף!"
+
+msgid ""
+"Your request seems to have come from an outdated version of this page. "
+"Please reload the page and try again!"
+msgstr ""
+"נראה שהבקשה שלך הגיעה מגירסה מיושנת של דף זה. נא טען מחדש את הדף ונסה שוב!"
+
+msgid "Page not found!"
+msgstr "הדף לא נמצא!"
+
+msgid "The page you requested was not found on the server."
+msgstr "הדף שביקשת לא נמצא בשרת."
+
+msgid "Server Error"
+msgstr "שגיאת שרת"
+
+msgid "Sorry! Something went wrong..."
+msgstr "סליחה, משהו השתבש..."
+
+msgid ""
+"Looks like we had an internal problem while processing your request. The "
+"error has been recorded, and we will try to fix it as soon as possible!"
+msgstr ""
+"נראה שהייתה לנו בעיה פנימית בזמן שעיבדנו את בקשתך. השגיאה נרשמה, ואנחנו ננסה "
+"לתקן את זה בהקדם האפשרי!"
+
+#, python-format
+msgid "+%(num_pictures)s more..."
+msgstr ""
+
+msgid "Mark All"
+msgstr "סמן הכל"
+
+msgid "Deselect All"
+msgstr "בטל בחירה להכל"
+
+msgid "Delete elements"
+msgstr "מחיקת רכיבים"
+
+msgid "Are you sure you want to delete all selected elements?"
+msgstr "האם אתה בטוח שברצונך למחוק את כל הרכיבים הנבחרים?"
+
+msgid ""
+"There was an error while trying to submit your report. Please try again in a "
+"moment."
+msgstr "אירעה שגיאה בעת ניסיון להגיש את הדו\"ח. נא נסה שוב בעוד רגע."
+
+msgid "Cancel"
+msgstr "ביטול"
+
+msgid "Deleting..."
+msgstr "מוחק..."
+
+msgid "Error embedding a Flickr gallery"
+msgstr "שגיאה בהטבעת גלריית Flickr"
+
+msgid "Error embedding a twitter timeline"
+msgstr "שגיאה בהטבעת ציר הזמן של טוויטר"
+
+msgid "Click to activate video"
+msgstr "לחץ כדי להפעיל וידאו"
+
+msgid "Error embedding a video"
+msgstr "שגיאה בהטבעת וידאו"
+
+msgid "Help and Assistance for this page"
+msgstr "עזרה וסיוע עבור דף זה"
+
+msgid "Help"
+msgstr "עזרה"
+
+msgid "Help for this page"
+msgstr "עזרה עבור דף זה"
+
+msgid "Root Folder"
+msgstr "קשר תיקייה"
+
+msgid "We're sorry. The Map is not supported in Internet Explorer."
+msgstr "אנחנו מצטערים. המפה אינה נתמכת ב- Internet Explorer."
+
+msgid "Consider using an alternate browser!"
+msgstr "שקול להשתמש בדפדפן חלופי!"
+
+msgid "I want to like this"
+msgstr ""
+
+msgid "I want to follow this"
+msgstr "אני רוצה לעקוב אחרי זה"
+
+msgid "Yes"
+msgstr "כן"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Follow"
+msgstr "עקוב"
+
+msgid ""
+"You will now receive notifications for comments or when this content is "
+"updated."
+msgstr "כעת תקבל התראות עבור תגובות או כאשר התוכן יעודכן."
+
+msgid "You are following this item"
+msgstr "אתה עוקב אחר פריט זה"
+
+msgid "Expand"
+msgstr "הרחב"
+
+msgid "Shrink"
+msgstr "כווץ"
+
+msgid ""
+"Check the projects/groups where you wish to show this item in. It will be "
+"shown in all lists, but will still remain in this group."
+msgstr ""
+"בדוק את הפרויקטים/הקבוצות שבהם ברצונך להציג פריט זה. הוא יוצג בכל הרשימות, "
+"אך עדיין ישאר בקבוצה זו."
+
+msgid "Items from the Forum can be shown in any of your projects/groups."
+msgstr "ניתן להציג פריטים מהפורום בכל אחד מהפרויקטים/קבוצות שלך."
+
+msgid "Items from this group can be shown in any of the group's subprojects."
+msgstr "ניתן להציג פריטים מקבוצה זו בכל אחד מתתי הפרויקטים של הקבוצה."
+
+msgid "Show in other projects/groups"
+msgstr "הצג בפרויקטים/קבוצות אחרים"
+
+msgid "Apply"
+msgstr "החל"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_1_group"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_2_project"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_3_marketplace"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_4_profile"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_5_password"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_6_microsite"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_7_notes"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_8_poll"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_9_todo"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_10_documentsetting"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_11_document"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_12_projectadministration"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_13_groupadministration"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_50_profileprivacy"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_51_objectprivacy"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_52_profilelastname"
+msgstr ""
+
+msgid ""
+"Enter the email addresses of people you wish to invite to join the platform."
+msgstr ""
+"הזן את כתובות הדואר האלקטרוני של אנשים שברצונך להזמין להצטרף לפלטפורמה."
+
+#, python-format
+msgid ""
+"We will send them an email asking them to sign up and join %(group_name)s."
+msgstr "אנו נשלח להם הודעת דוא\"ל המבקשת מהם להירשם ולהצטרף ל-%(group_name)s."
+
+msgid "E-Mail Addresses"
+msgstr "כתובות דואר אלקטרוני"
+
+msgid "(one per line or comma-seperated)"
+msgstr ""
+
+msgid "Personal Message (optional)"
+msgstr "הודעה אישית (אופציונלי)"
+
+msgid "Include a personal message (optional)"
+msgstr "כלול הודעה אישית (אופציונלי)"
+
+msgid "Invite new Members"
+msgstr "הזמן חברים חדשים"
+
+msgid "Invite"
+msgstr "הזמן"
+
+msgid "Shown in my projects..."
+msgstr "מוצג בפרויקטים שלי..."
+
+msgid "Show in my projects..."
+msgstr "הצג בפרויקטים שלי..."
+
+msgid "Disable editor"
+msgstr "הפוך את העורך ללא זמין"
+
+msgid "Rearrange"
+msgstr "סידור מחדש"
+
+msgid "Saving..."
+msgstr "שומר..."
+
+msgid "You are now editing the dashboard's layout"
+msgstr "כעת אתה עורך את פריסת לוח הכלים"
+
+#, python-format
+msgid ""
+"The layout you choose will be the layout for all members of %(team_name)s! "
+"Click save to apply your changes."
+msgstr ""
+"פריסת לוח הכלים שתבחר תהיה הפריסה עבור כל החברים ב-%(team_name)s! לחץ על "
+"שמור כדי להחיל את השינויים."
+
+msgid ""
+"Drag and drop individual widgets to rearrange their order. Please note that "
+"the order you give is only an approximate prioritization for the widgets. "
+"After saving, the actual order on the page might differ depending on the "
+"widgets' current size and the overall page layout."
+msgstr ""
+"גרור ושחרר יישומונים בודדים כדי לארגן מחדש את הסדר שלהם. שים לב כי הסדר שאתה "
+"נותן הוא רק עדיפות משוערת עבור יישומונים. לאחר השמירה, הסדר בפועל בדף עשוי "
+"להשתנות בהתאם לגודל הנוכחי של היישומונים ולפריסה הכוללת של הדף."
+
+msgid "Your Microsite needs some love!"
+msgstr "המיקרו-אתר שלך זקוק לאהבה!"
+
+msgid ""
+"The Microsite is your projects's welcome page for everyone checking it out. "
+"Make it awesome so they want to join you!"
+msgstr ""
+"המיקרו-אתר הוא דף הנחיתה של הפרויקט שלך עבור כל מי שבודק אותו. עשה אותו "
+"מדהים כדי שיצרו להצטרף אליך!"
+
+msgid ""
+"The Microsite is your group's welcome page for everyone checking it out. "
+"Make it awesome so they want to join you!"
+msgstr ""
+"המיקרו-אתר הוא דף הנחיתה של הקבוצה שלך עבור כל מי שבודק אותו. תעשה את זה "
+"מדהים כדי שהם ירצו להצטרף אליך!"
+
+msgid "Access it from the top menu or"
+msgstr "גש אליו מהתפריט העליון או"
+
+msgid "get started here..."
+msgstr "התחל כאן..."
+
+msgid "Activate Cloud"
+msgstr "הפעל ענן"
+
+msgid "Cloud"
+msgstr "ענן"
+
+msgid "File"
+msgstr "קובץ"
+
+msgid "Files"
+msgstr "קבצים"
+
+msgid "Etherpad"
+msgstr ""
+
+msgid "Etherpads"
+msgstr ""
+
+msgid "Poll"
+msgstr "משאל"
+
+msgid "Polls"
+msgstr "משאלים"
+
+msgid "Todo"
+msgstr "מטלה"
+
+msgid "Todos"
+msgstr "רשימת מטלות"
+
+msgid "Marketplace"
+msgstr ""
+
+msgctxt "Calendar"
+msgid "Event"
+msgstr "אירוע"
+
+msgctxt "Calendar"
+msgid "Events"
+msgstr "אירועים"
+
+msgid "News"
+msgstr "חדשות"
+
+msgctxt "withdraw join team button first item"
+msgid "Withdraw"
+msgstr ""
+
+msgctxt "withdraw join team button second item"
+msgid "Request"
+msgstr ""
+
+msgctxt "join request pending team button first item"
+msgid "Join"
+msgstr ""
+
+msgctxt "join request pending team button second item"
+msgid "Requested"
+msgstr ""
+
+msgctxt "join team button first item"
+msgid "Join"
+msgstr ""
+
+msgctxt "join team button second item"
+msgid "Now"
+msgstr ""
+
+msgid "View on Facebook"
+msgstr "צפה בפייסבוק"
+
+msgid ""
+"You will now receive notifications whenever public content is posted in this "
+"project."
+msgstr "כעת תקבל הודעות בכל פעם שתוכן ציבורי יפורסם בפרויקט זה."
+
+msgid ""
+"You will now receive notifications whenever public content is posted in this "
+"group."
+msgstr "כעת תקבל הודעות בכל פעם שתוכן ציבורי יפורסם בקבוצה זו."
+
+msgid "Group:"
+msgstr "קבוצה:"
+
+msgid "No Description set"
+msgstr "לא הוגדר תיאור"
+
+msgid "more"
+msgstr "עוד"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Report offensive content"
+msgstr "דווח על תוכן פוגעני"
+
+msgid "Please enter a description of why you are reporting this content!"
+msgstr "נא הזן תיאור של הסיבה לדיווח על תוכן זה!"
+
+msgid "(required)"
+msgstr "(נדרש)"
+
+msgid ""
+"Thank you! Your report has been received and we will review the items in "
+"question as soon as possible."
+msgstr "תודה! הדו\"ח שלך התקבל ואנחנו נבחן את הפריטים המדוברים בהקדם האפשרי."
+
+msgid "Send"
+msgstr "שלח"
+
+msgid "Submitting..."
+msgstr "נשלח..."
+
+msgid "Close"
+msgstr "סגור"
+
+msgid "Avatar will be deleted once you save."
+msgstr ""
+
+msgctxt "written next to optional form fields"
+msgid "optional"
+msgstr ""
+
+msgid "Call to Action Button"
+msgstr ""
+
+msgid "Label of the Button"
+msgstr ""
+
+msgid "Link URL"
+msgstr ""
+
+msgid "Enter a place or address."
+msgstr "הזן מקום או כתובת."
+
+msgid "Choose and upload a gallery image"
+msgstr "בחירה והעלאה של תמונת גלריה"
+
+msgid "Conference is not running"
+msgstr "הוועידה אינה פועלת"
+
+msgid "Accounts from CSV Upload"
+msgstr "חשבונות מהעלאת CSV"
+
+msgid "Upload Participants"
+msgstr "העלאת משתתפים"
+
+msgid "last login"
+msgstr "פעילות אחרונה"
+
+msgid "no login yet"
+msgstr ""
+
+msgid "Admin"
+msgstr "מנהל מערכת"
+
+msgid "Member"
+msgstr "חבר"
+
+msgid "active"
+msgstr "פעיל"
+
+msgid "not active"
+msgstr "לא פעיל"
+
+msgid "User participates in the following workshops:"
+msgstr "המשתמש משתתף בסדנאות הבאות:"
+
+msgid "deactivate member"
+msgstr "השבת חבר"
+
+msgid "activate member"
+msgstr "הפעל חברות"
+
+msgid "remove user"
+msgstr "הסר משתמש"
+
+msgid "Do you really want to deactivate the member's user account ?"
+msgstr "האם שאתה בטוח שברצונך להשבית את חשבון המשתמש של החבר?"
+
+msgid "Deactivate Member"
+msgstr "השבת חבר"
+
+msgid "Do you really want to activate the member's user account ?"
+msgstr "האם אתה בטוח שברצונך להפעיל את חשבון המשתמש של החבר ?"
+
+msgid "Activate Member"
+msgstr "הפעל חברות"
+
+msgid "Do you really want to remove the user?"
+msgstr "האם אתה בטוח שברצונך להסיר את המשתמש?"
+
+msgid "Remove User"
+msgstr "הסר משתמש"
+
+msgid "Finish conference and deactivate user accounts"
+msgstr "סיים ועידה ובטל הפעלה של חשבונות משתמשים"
+
+msgid "Start conference and activate user accounts"
+msgstr "התחל שיחת ועידה והפעל חשבונות משתמשים"
+
+msgid "Download Statistics"
+msgstr "הורד סטטיסטיקה"
+
+msgid "Workshops"
+msgstr "סדנאות"
+
+msgid "Add workshop"
+msgstr "הוסף סדנה"
+
+msgid "Re-Activate Project/Group"
+msgstr "הפעל מחדש פרוייקט/קבוצה"
+
+msgid "Deactivate Project/Group"
+msgstr "השבת פרויקט/קבוצה"
+
+msgid "Deactivated Projects and Groups"
+msgstr "השבת פרויקטים וקבוצות"
+
+msgid "Warning!"
+msgstr "אזהרה!"
+
+msgid "You are about to deactivate this project/group!"
+msgstr "אתה עומד להשבית פרויקט/קבוצה זו!"
+
+msgid ""
+"You are about to re-activate this project/group. It and all of its content "
+"will be visible on the website again."
+msgstr ""
+"אתה עומד להפעיל מחדש פרויקט/קבוצה אלה. הוא וכל התוכן שלו יהיה גלוי באתר שוב."
+
+msgid ""
+"You are about to deactivate this project/group. It and all of its content "
+"will be hidden on the website and invisible to everyone, including you."
+msgstr ""
+"אתה עומד להשבית פרוייקט/קבוצה זו. הוא וכל התוכן שלו יהיה מוסתר באתר ובלתי "
+"נראה לכולם, כולל אותך."
+
+msgid ""
+"This process is reversible. You can reactivate the project/group from your "
+"user profile at any time."
+msgstr ""
+"תהליך זה הפיך. באפשרותך להפעיל מחדש את הפרויקט/קבוצה מפרופיל המשתמש שלך בכל "
+"עת."
+
+msgid "Re-Activate"
+msgstr "הפעל מחדש"
+
+msgid "Deactivate"
+msgstr "השבת"
+
+#, python-format
+msgid "Delete team “%(team_name)s”"
+msgstr "מחק את הצוות “%(team_name)s”"
+
+msgid "Are you sure you want to delete this team?"
+msgstr "האם אתה בטוח שברצונך למחוק צוות זה?"
+
+#, python-format
+msgid "%(team_name)s - Members"
+msgstr "%(team_name)s - חברים"
+
+msgid "Invite registered users..."
+msgstr "הזמן משתמשים רשומים..."
+
+msgid "Invite a member"
+msgstr "הזמן חבר"
+
+msgid "Enter a user name or email to find users to invite..."
+msgstr "הזן שם משתמש או דואר אלקטרוני כדי למצוא משתמשים להזמין..."
+
+msgid "Invite users"
+msgstr "הזמן משתמשים"
+
+msgid "Invited Members"
+msgstr "חברים מוזמנים"
+
+msgid "Revoke Invitation"
+msgstr "בטל הזמנה"
+
+msgid "Decline Invitation"
+msgstr "דחה הזמנה"
+
+msgid "Accept Invitation"
+msgstr "קבל הזמנה"
+
+msgid "Invited to be a member"
+msgstr "מוזמן להיות חבר"
+
+#, python-format
+msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgstr "האם אתה בטוח שברצונך לבטל את ההזמנה עבור החבר „%(name)s“?"
+
+msgid "Revoke Invitation for Member"
+msgstr "בטל הזמנה לחבר"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "האם אתה בטוח שברצונך לדחות את ההזמנה?"
+
+msgid "There are no pending invitations."
+msgstr "אין הזמנות ממתינות."
+
+msgid "Invite unregistered users..."
+msgstr "הזמנת משתמשים לא רשומים..."
+
+msgid "Invite People to Register and Join"
+msgstr "הזמן אנשים להירשם ולהצטרף"
+
+msgid "Invite people"
+msgstr "הזמן אנשים"
+
+msgid ""
+"The email was added to the invite list. Click \"Invite people\" to resend "
+"the invitations!"
+msgstr ""
+"הודעת הדואר האלקטרוני נוספה לרשימת המוזמנים. לחץ על \"הזמן אנשים\" כדי לשלוח "
+"מחדש את ההזמנות!"
+
+msgid "All currently invited people"
+msgstr "כל האנשים המוזמנים כרגע"
+
+msgid "People currently invited by you"
+msgstr "אנשים שהוזמנו כרגע על ידך"
+
+msgid "Delete invitation"
+msgstr "מחק הזמנה"
+
+msgid "Resend invitation"
+msgstr "שלח הזמנה שוב"
+
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr "על ידי"
+
+#, python-format
+msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgstr "האם אתה בטוח שברצונך למחוק את ההזמנה עבור \"%(title)s\"?"
+
+msgid "Membership requests"
+msgstr "בקשות חברות"
+
+msgid "Decline User"
+msgstr "דחה משתמש"
+
+msgid "Accept User"
+msgstr "אשר משתמש"
+
+msgid "Membership requested"
+msgstr "בקשות חברות שנשלחו"
+
+#, python-format
+msgid "Do you really want to accept user „%(name)s“ as a member?"
+msgstr "האם אתה בטוח שברצונך לקבל את המשתמש „%(name)s“ כחבר?"
+
+msgid "Accept Member"
+msgstr "אשר חברות"
+
+#, python-format
+msgid "Do you really want to decline member „%(name)s“?"
+msgstr "האם אתה בטוח שברצונך לבטל את החברות של „%(name)s“?"
+
+msgid "Decline Member"
+msgstr "בטל חברות"
+
+msgid "There are no new membership requests."
+msgstr "אין בקשות חברות חדשות."
+
+msgid "Current Members"
+msgstr "חברים פעילים כעת"
+
+msgid "Message all members"
+msgstr "שלח הודעה לכל החברים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "שלח הודעה"
+
+msgid "Kick"
+msgstr ""
+
+msgid "Make Member"
+msgstr "הפוך לחבר"
+
+msgid "Make Admin"
+msgstr "מנה למנהל"
+
+#, python-format
+msgid "Do you really want to demote administrator „%(name)s“ to member?"
+msgstr "האם אתה בטוח שברצונך להפוך את מנהל המערכת „%(name)s“ לחבר בלבד?"
+
+msgid "Demote Admin"
+msgstr "הסר מתפקיד מנהל"
+
+#, python-format
+msgid "Do you really want to promote member „%(name)s“ to administrator?"
+msgstr "האם אתה בטוח שברצונך למנות את החבר „%(name)s“ למנהל מערכת?"
+
+msgid "Promote Member"
+msgstr "קדם חבר למנהל מערכת"
+
+#, python-format
+msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgstr "האם אתה בטוח שברצונך להסיר את החבר „%(name)s“ מהצוות?"
+
+msgid "Remove Member"
+msgstr "הסר חברות"
+
+#, python-format
+msgid "And %(hidden_count)s private users..."
+msgstr "ו-%(hidden_count)s משתמשים פרטיים.."
+
+#, python-format
+msgid "Show all of the other %(more_count)s users..."
+msgstr "הצג את כל %(more_count)s המשתמשים האחרים..."
+
+#, python-format
+msgid "Export Team “%(team_name)s”"
+msgstr "יצא את הצוות “%(team_name)s”"
+
+#, python-format
+msgid "Export %(app_label)s"
+msgstr "יצא %(app_label)s"
+
+msgctxt "the verb"
+msgid "Export"
+msgstr "יצא"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "ערוך את “%(team_name)s”"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Group"
+msgstr "צור קבוצה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Project"
+msgstr "צור פרויקט"
+
+msgid "Help about groups"
+msgstr "עזרה אודות קבוצות"
+
+msgid "Help about projects"
+msgstr "עזרה אודות פרויקטים"
+
+msgid "Help about the microsite"
+msgstr "עזרה אודות המיקרו-אתר"
+
+msgid "Edit Group"
+msgstr "עריכת קבוצה"
+
+msgid "Edit Project"
+msgstr "עריכת פרויקט"
+
+msgid "Let's bring this idea to life!"
+msgstr "בואו נביא את הרעיון הזה לחיים!"
+
+#, python-format
+msgid "Great to see you're creating a project from the idea \"%(idea_name)s\"!"
+msgstr "נהדר לראות שאתה יוצר פרויקט מהרעיון \"%(idea_name)s\"!"
+
+msgid ""
+"Once you have created your project, everyone who liked (and followed) the "
+"idea will receive a notification! They can then jump in and become a member "
+"of your new project. Don't worry - you still have to approve who may join "
+"and who can't when they request a membership."
+msgstr ""
+"מרגע שיצרת את הפרויקט, כל מי שאהב (ועקב) אחר הרעיון יקבל התראה! לאחר מכן הם "
+"יכולים להצטרף כחברי הפרויקט החדש שלך. אל תדאג-עדיין עליך לאשר מי רשאי להצטרף "
+"ומי לא כאשר ישלחו בקשות חברות."
+
+msgid ""
+"Your new project will also be displayed on the idea itself, so that everyone "
+"can see it and join in later on."
+msgstr ""
+"הפרויקט החדש יוצג על הרעיון עצמו, כך שכולם יוכלו לראותו ולהצטרף מאוחר יותר."
+
+msgid ""
+"Of course you can also create a project without a connection to the idea - "
+"just click \"Create Project\" on the left side to do so."
+msgstr ""
+"כמובן שניתן גם ליצור פרוייקט ללא חיבור לרעיון - פשוט לחץ על \"צור פרויקט\" "
+"בצד שמאל כדי לעשות זאת."
+
+msgid "General"
+msgstr "כללי"
+
+msgid "Facebook-Integration"
+msgstr ""
+
+msgid "Group name"
+msgstr "שם הקבוצה"
+
+msgid "Project name"
+msgstr "שם הפרויקט"
+
+msgid "Enter a name for the group."
+msgstr "הזן שם עבור הקבוצה."
+
+msgid "Enter a name for the project."
+msgstr "הזן שם עבור הפרויקט."
+
+msgid "Short description"
+msgstr "תיאור קצר"
+
+msgid "Describe the group in a few sentences."
+msgstr "תאר את הקבוצה בכמה משפטים."
+
+msgid "Describe the project in a few sentences."
+msgstr "תאר את הפרויקט בכמה משפטים."
+
+msgid "This description will be publicly visible."
+msgstr "תיאור זה יהיה גלוי לציבור."
+
+msgid "A picture for better recognition."
+msgstr "תמונה להכרה טובה יותר."
+
+msgid "File Size"
+msgstr "גודל הקובץ"
+
+msgid "max. 10 MB"
+msgstr "מקסימום 10 MB"
+
+msgid "Upload an image."
+msgstr "העלה תמונה."
+
+msgid "Reset"
+msgstr "איפוס"
+
+msgid "Example: http://mywebsite.com"
+msgstr "דוגמה: http://mywebsite.com"
+
+msgid "Where are you active?"
+msgstr "איפה אתה פעיל?"
+
+msgid "Remove location"
+msgstr "הסר מיקום"
+
+msgid "Add location"
+msgstr "הוסף מיקום"
+
+msgid "Which Group does the group belong to?"
+msgstr "לאיזה קבוצה הקבוצה שייכת?"
+
+msgid "Select Group"
+msgstr "בחר קבוצה"
+
+msgid "Are there any projects/groups related to this one?"
+msgstr "האם יש פרויקטים/קבוצות הקשורים לקבוצה זו?"
+
+msgid "Select related Projects/Groups"
+msgstr "בחירת פרויקטים/קבוצות קשורים"
+
+msgid "Privacy settings"
+msgstr "הגדרות פרטיות"
+
+msgid "This will be the default setting for all content created by members."
+msgstr "זו תהיה הגדרת ברירת המחדל עבור כל התוכן שנוצר על-ידי חברים."
+
+msgid "This group will be set to be publicly visible!"
+msgstr "קבוצה זו תוגדר כנראית לציבור!"
+
+msgid "This project will be set to be publicly visible!"
+msgstr "פרויקט זה יוגדר כנראה לציבור!"
+
+msgid ""
+"This means that any registered user can access and see it, although only "
+"members can create content. In addition, all content will be set to be "
+"publicly visible by default (this can be changed for each item on creation). "
+"Publicly visible content can be seen by ANYONE on the internet and it may "
+"potentially be included in search engine results!"
+msgstr ""
+"משמעות הדבר היא שכל משתמש רשום יכול לגשת לתוכן, למרות שרק חברים יכולים ליצור "
+"תוכן. בנוסף, כל תוכן יוגדר ציבורי כברירת מחדל (ניתן לשנות זאת עבור כל פריט "
+"בעת היצירה). תוכן שנגיש לציבור יכול להיראות על ידי כל אחד ברשת ואף עשוי "
+"להיכלל בתוצאות מנוע חיפוש!"
+
+msgid ""
+"As administrator of a group or project, it is your responsibility to ensure "
+"that the content posted by its members does not infringe any copyright or "
+"other laws. Please keep this in mind, especially when enabling the public "
+"visibility setting!"
+msgstr ""
+"כמנהל מערכת קבוצה/פרויקט, באחריותך לוודא כי התוכן המפורסם על ידי חברים אינו "
+"מפר זכויות יוצרים או חוקים אחרים. זכור זאת, במיוחד בעת הפעלת הגדרת הנראות "
+"הציבורית!"
+
+msgid "If you do not wish this, you can change the visibility setting above."
+msgstr "אם אינך רוצה בכך, באפשרותך לשנות את הגדרות הנראות למעלה."
+
+msgid "Which apps should be activated?"
+msgstr "אילו אפליקציות יש להפעיל?"
+
+msgid "This App can only be activated for a Group, but not for a Project!"
+msgstr "אפליקציה זו זמינה רק עבור קבוצה, ולא בעבור פרויקט!"
+
+msgid "Description and Infos"
+msgstr "תיאור ומידע"
+
+msgid ""
+"This is a public description that can be seen by anyone and will be shown on "
+"the microsite."
+msgstr "זהו תיאור ציבורי שניתן לראות על ידי כל אחד ויהיה מוצג במיקרו-אתר."
+
+msgid "Contact info"
+msgstr "פרטי יצירת קשר"
+
+msgid "How you can be reached, addresses, social media, etc..."
+msgstr "איך ניתן להגיע אליך, כתובות, מדיה חברתית, וכו '..."
+
+msgid "From which apps should public items be shown on the microsite?"
+msgstr "מאילו אפליקציות יש להציג פריטים ציבוריים במיקרו-אתר?"
+
+msgid "Video"
+msgstr "וידאו"
+
+msgid "Youtube or Vimeo URL"
+msgstr "Youtube או Vimeo URL"
+
+msgid "https://www.youtube.com/watch?v=example-video"
+msgstr "https://www.youtube.com/watch?v=example-video"
+
+msgid "Twitter: Embedded User Timeline"
+msgstr "טוויטר: הטבעת ציר הזמן של המשתמש"
+
+msgid "Twitter Username (example: @username)"
+msgstr "שם משתמש של טוויטר (לדוגמה: @username)"
+
+msgid "Twitter: Embedded Hashtag or Custom Timeline"
+msgstr "טוויטר: האשטאג מוטבע או ציר זמן מותאם אישית"
+
+msgid "You can create a custom twitter timeline here:"
+msgstr "באפשרותך ליצור ציר זמן מותאם של טוויטר כאן:"
+
+msgid "Widget-id (example: 744907261810618721) or embed-code (HTML)"
+msgstr "יישומון-id (לדוגמה: 744907261810618721) או הטבעת קוד (HTML)"
+
+msgid "Embed Flickr Gallery"
+msgstr "הטבע גלריית Flickr"
+
+msgid ""
+"Flickr Gallery URL (example: \"https://www.flickr.com/photos/username/"
+"sets/1234567890\")"
+msgstr ""
+"כתובת URL של גלריית Flickr (לדוגמא: \"https://www.flickr.com/photos/username/"
+"sets/1234567890\")"
+
+msgid "Microsite Gallery Images"
+msgstr "גלריית תמונות של מיקרו-אתר"
+
+msgid "Remove gallery image"
+msgstr "הסר גלריית תמונות"
+
+msgid "Add gallery image"
+msgstr "הוסף גלריית תמונות"
+
+msgid "Show Microsite Call to Action Box"
+msgstr "הצג תיבת הפעלה למיקרו-אתר"
+
+msgid ""
+"A box shown on the microsite that contains buttons to your external "
+"campaigns or websites"
+msgstr "תיבה המוצגת במיקרו אתר- המכילה לחצנים לקמפיינים החיצוניים או אתרים"
+
+msgid "Show Call to Action Box"
+msgstr "הצג תיבת פקודת הפעלה"
+
+msgid "Call to Action Box Title"
+msgstr "כותרת לתיבת פקודת הפעלה"
+
+msgid "Title of the box header"
+msgstr "כותרת לראש התיבה"
+
+msgid "Description text inside the box"
+msgstr "טקסט תיאור בתוך התיבה"
+
+msgid "Remove button"
+msgstr "הסר לחצן"
+
+msgid "Add button"
+msgstr "הוסף לחצן"
+
+msgid "Facebook integration is available after you created the group!"
+msgstr "שילוב פייסבוק זמין לאחר שיצרת את הקבוצה!"
+
+msgid "Facebook integration is available after you created the project!"
+msgstr "שילוב פייסבוק זמין לאחר שיצרת את הפרוייקט!"
+
+msgid ""
+"The HTML entered here will be displayed on the group/project dashboard (only "
+"for members)"
+msgstr "ה- HTML שהוזן כאן יוצג בלוח הכלים של הקבוצה/פרויקט (לחברים בלבד)"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "הזמנות"
+
+msgid "About me"
+msgstr "כמה מילים עלי"
+
+msgid "Related to"
+msgstr "משויך ל"
+
+msgid "Your Profile"
+msgstr "הפרופיל שלך"
+
+msgid "Overview"
+msgstr "סקירה כללית"
+
+msgid "To the Forum"
+msgstr "לפורום"
+
+msgctxt "Group"
+msgid "Public"
+msgstr "ציבורית"
+
+msgid "Not a member"
+msgstr "לא חבר"
+
+msgid "(Inactive)"
+msgstr "(לא פעיל)"
+
+msgid "Leave"
+msgstr "עזוב"
+
+msgid "Withdraw"
+msgstr "הסר"
+
+msgid "Details"
+msgstr "פרטים"
+
+#, python-format
+msgid "Do you really want to leave „%(title)s“?"
+msgstr "האם אתה בטוח שברצונך להשאיר את „%(title)s“?"
+
+msgid "There are no groups."
+msgstr "אין קבוצות."
+
+msgid "There are no projects."
+msgstr "אין פרויקטים."
+
+msgid "There are no invitations."
+msgstr "אין הזמנות."
+
+msgid "Map"
+msgstr "מפה"
+
+msgid "Not happy with how your Microsite looks?"
+msgstr "לא מרוצה מאיך שהמיקרו-אתר שלך נראה?"
+
+msgid "Change it here..."
+msgstr "שנה זאת כאן..."
+
+msgid "You have been invited to collaborate!"
+msgstr "הוזמנת לשתף פעולה!"
+
+msgid "Register and join!"
+msgstr "הירשם והצטרף!"
+
+msgid "Join now and collaborate!"
+msgstr "הצטרף עכשיו ושתף פעולה!"
+
+msgid "Register"
+msgstr "הירשם"
+
+msgid "Log in"
+msgstr "התחבר"
+
+msgid "You are a member!"
+msgstr "אתה חבר!"
+
+msgid "View Project"
+msgstr "צפה בפרויקט"
+
+msgid "View Group"
+msgstr "צפה בקבוצה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership request pending..."
+msgstr "בקשת חברות ממתינה..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are invited!"
+msgstr "הוזמנת!"
+
+msgid "Collaborate!"
+msgstr "שתף פעולה!"
+
+msgid "Join now!"
+msgstr "הצטרף עכשיו!"
+
+msgid "Browse"
+msgstr "דפדף"
+
+msgid "Public Project"
+msgstr "פרויקט ציבורי"
+
+msgid "Public Group"
+msgstr "קבוצה ציבורית"
+
+msgid "News posts"
+msgstr ""
+
+msgid "About the Project"
+msgstr "על הפרויקט"
+
+msgid "About the Group"
+msgstr "אודות הקבוצה"
+
+msgid "There is no description for this project yet."
+msgstr "אין עדיין תיאור עבור פרויקט זה."
+
+msgid "There is no description for this group yet."
+msgstr "אין עדיין תיאור עבור קבוצה זו."
+
+msgid "Related Projects/Groups"
+msgstr "פרויקטים/קבוצות קשורים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications for content posted in this project."
+msgstr "כעת תקבל הודעות עבור תוכן שפורסם בפרויקט זה."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications for content posted in this group."
+msgstr "כעת תקבל הודעות עבור תוכן שפורסם בקבוצה זו."
+
+msgid "Share"
+msgstr "שתף"
+
+msgid "Share on Facebook"
+msgstr "שתף בפייסבוק"
+
+msgid "Share on Twitter"
+msgstr "שתף בטוויטר"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact"
+msgstr "פרטי יצירת קשר"
+
+msgid "No contact data has been added yet."
+msgstr "עדיין לא נוספו נתוני איש קשר."
+
+msgid "Project Administrator"
+msgstr "מנהל פרויקט"
+
+msgid "Group Administrator"
+msgstr "מנהל קבוצה"
+
+msgid "Tweets"
+msgstr "ציוצים"
+
+msgid "Flickr Gallery"
+msgstr "גלריית Flickr"
+
+msgid "Call to Action"
+msgstr "פקודת הפעלה"
+
+#, python-format
+msgid "Users in team %(group)s"
+msgstr "משתמשים בצוות %(group)s"
+
+msgid "Add user"
+msgstr "הוסף משתמש"
+
+msgid "There are no visible users."
+msgstr "אין משתמשים גלויים."
+
+msgid "All projects"
+msgstr "כל הפרויקטים"
+
+msgid "All groups"
+msgstr "כל הקבוצות"
+
+msgid "All users"
+msgstr "כל המשתמשים"
+
+msgid "Portal Administrators"
+msgstr "מנהלי מערכת פורטל"
+
+msgid "All societies"
+msgstr "כל החברות"
+
+msgid "Re-activate Group"
+msgstr "הפעל מחדש קבוצה"
+
+msgid "Deactivate Group"
+msgstr "השבת קבוצה"
+
+msgid "Activate Project"
+msgstr "הפעל פרוייקט"
+
+msgid "Deactivate Project"
+msgstr "השבת פרויקט"
+
+msgid "Withdraw Request"
+msgstr "הסר בקשה"
+
+msgid "Workshop Participant File Upload"
+msgstr "העלאת קובץ המשתתף בסדנה"
+
+#, python-format
+msgid ""
+"Please upload a CSV with the following columns: unique user identifier, "
+"first name, last name and one column for each workshop identified by the "
+"workshop's slug. For Help you can download a template <a href="
+"\"%(workshop_participants_upload_skeleton)s\">here</a>"
+msgstr ""
+
+msgid ""
+"Then add a row for each account that you want to add. You have to add a "
+"unique user identifier but first and last name can be blank. Then add a 1 to "
+"all workshop columns where the user should be a normal member or a 2 if that "
+"user should be workshop admin."
+msgstr ""
+
+msgid ""
+"The CSV upload will trigger the creation of the accounts and account "
+"workshop memberships and results in a direct CSV download with the newly "
+"created accounts and passwords. The passwords will only be included when the "
+"account is created. Please refresh the page after the download."
+msgstr ""
+
+msgid "Upload File"
+msgstr "העלה קובץ"
+
+msgid "Add container"
+msgstr "הוסף קונטיינר"
+
+msgid "Add"
+msgstr "הוסף"
+
+msgid "Move to another Folder"
+msgstr "העבר לתיקייה אחרת"
+
+msgid "Move"
+msgstr "העבר"
+
+#, python-format
+msgid "A message from %(sender_full_name)s"
+msgstr "הודעה מ-%(sender_full_name)s"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Idea"
+msgstr "צור רעיון"
+
+msgid "Delete this idea"
+msgstr "מחק רעיון זה"
+
+#, python-format
+msgid "Do you really want to delete idea „%(title)s“?"
+msgstr "האם אתה בטוח שברצונך למחוק את הרעיון „%(title)s“?"
+
+msgid "Delete Idea"
+msgstr "מחק רעיון"
+
+msgid "Edit Idea"
+msgstr "עריכת רעיון"
+
+msgid "We make your ideas heard!"
+msgstr "אנחנו משמיעים את הרעיונות שלך!"
+
+msgid ""
+"Ideas are a great way to inspire poeple and start a project in your region!"
+msgstr "רעיונות הם דרך נהדרת לעורר השראה באנשים ולהתחיל פרויקט באזור שלך!"
+
+msgid ""
+"Anyone can create a project based on your idea and there is no limit on how "
+"many projects can be created. Your idea will remain visible and will even "
+"show a list of all the projects inspired by it!"
+msgstr ""
+"כל אחד יכול ליצור פרוייקט בהתבסס על הרעיון שלך ואין הגבלה על מספר הפרויקטים "
+"שניתן ליצור. הרעיון שלך יישאר גלוי ואפילו יראה רשימה של כל הפרויקטים בהשראתו!"
+
+msgid ""
+"You and anyone who like (and follow) your idea will be notified when a new "
+"project gets created from it. This way, everyone who is interested can jump "
+"right into it and become active in the new project (they still have to ask "
+"permission to become a member)."
+msgstr ""
+"אתה וכל מי שאוהב (ועוקב) אחר הרעיון שלך תקבלו הודעה כאשר פרוייקט חדש ייווצר "
+"ממנו. בדרך זו, כל מי שמעוניין יכול לקפוץ ישר לתוכו ולהיות פעיל בפרויקט החדש "
+"(הוא עדיין צריך לבקש רשות להיות חבר)."
+
+msgid "Enter a descriptive title for your idea"
+msgstr "הזן כותרת תיאורית עבור הרעיון שלך"
+
+msgid "The description for your idea. Explain your vision and your goals."
+msgstr "התיאור של הרעיון שלך. הסבר את החזון שלך ואת המטרות שלך."
+
+msgid ""
+"We could not find an address for your location. Please enter an address "
+"manually!"
+msgstr "לא היתה לנו כתובת למיקום שלך. נא הזן כתובת באופן ידני!"
+
+msgid "This will determine who can see your idea."
+msgstr "פעולה זו תקבע מי יכול לראות את הרעיון שלך."
+
+msgid "This idea will be set to be publicly visible!"
+msgstr "רעיון זה יוגדר כפומבי!"
+
+msgid ""
+"Publicly visible content can be seen by ANYONE on the internet and it may "
+"potentially be included in search engine results!"
+msgstr ""
+"תוכן גלוי לציבור ניתן לראות על ידי כל אחד באינטרנט וזה עשוי להיכלל בתוצאות "
+"מנוע החיפוש!"
+
+msgid "Registered users only"
+msgstr "משתמשים רשומים בלבד"
+
+msgid "Edit folder"
+msgstr "ערוך תיקייה"
+
+msgid "Folder name"
+msgstr "שם התיקייה"
+
+msgid "Delete folder"
+msgstr "מחק תיקייה"
+
+msgid "Download"
+msgstr "הורד"
+
+msgid ""
+"Do you really want to delete this folder and ALL folders and items it "
+"contains? This actions CANNOT be reversed!"
+msgstr ""
+"האם אתה בטוח שברצונך למחוק תיקיה זו ואת כל התיקיות והפריטים שהיא מכילה? אין "
+"אפשרות לבטל פעולות אלה!"
+
+msgid "Gesendet"
+msgstr ""
+
+msgid "Archiv"
+msgstr "ארכיון"
+
+msgid "Papierkorb"
+msgstr ""
+
+msgid "Verfassen"
+msgstr ""
+
+msgid "Back"
+msgstr "חזור"
+
+msgid "Back to"
+msgstr "חזרה ל"
+
+msgid "New folder name"
+msgstr "שם תיקיה חדשה"
+
+msgid "Create folder"
+msgstr "צור תיקייה חדשה"
+
+#, python-format
+msgid ""
+"%(site_name)s CSV import failed!\n"
+"\n"
+"Here is a summary: %(msg)s"
+msgstr ""
+"ייבוא CSV מהאתר %(site_name)s נכשל!\n"
+"\n"
+"הנה דו\"ח סיכום: %(msg)s"
+
+#, python-format
+msgid ""
+"The CSV import on %(site_name)s failed.\n"
+"\n"
+"Here is why: %(msg)s"
+msgstr ""
+"ייבוא CSV ב-%(site_name)s נכשל.\n"
+"\n"
+"הנה הסיבה: %(msg)s"
+
+#, python-format
+msgid ""
+"The CSV import on %(site_name)s was successful.\n"
+"\n"
+"Here is a summary: %(msg)s"
+msgstr ""
+"ייבוא CSV מ-%(site_name)s הצליח.\n"
+"\n"
+"הנה דו\"ח סיכום: %(msg)s"
+
+#, python-format
+msgid "%(site_name)s CSV import was successful"
+msgstr "ייבוא CSV של %(site_name)s הצליח"
+
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has reported the item \"%(object_name)s\" to be "
+"offensive.\n"
+"\n"
+"The reason, as written by the reporter:\n"
+"\"%(report_text)s\"\n"
+"\n"
+"\n"
+"You can view the item in question here:\n"
+"%(object_url)s\n"
+"\n"
+"Please go to the following page to respond to the report:\n"
+"%(domain_url)s%(report_admin_url)s\n"
+"\n"
+"\n"
+"(You're receiving this email because you are an administrator of this "
+"portal.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"המשתמש \"%(sender_name)s\" דיווח על הפריט \"%(object_name)s\" כתוכן פוגעני.\n"
+"\n"
+"הסיבה כפי שנכתבה על ידי המדווח:\n"
+"\"%(report_text)s\"\n"
+"\n"
+"\n"
+"אתה יכול לצפות בפריט החשוד כאן:\n"
+"%(object_url)s\n"
+"\n"
+"נא עבור לדף הבא על מנת להגיב לדו\"ח:\n"
+"%(domain_url)s%(report_admin_url)s\n"
+"\n"
+"\n"
+"אתה מקבל הודעת דוא\"ל זו מכיוון שאתה מנהל מערכת פורטל זה\n"
+"\n"
+"\n"
+"שלך, צוות %(site_name)s"
+
+#, python-format
+msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
+msgstr "דווח תוכן פוגעני: \"%(object_name)s\" ב-%(site_name)s!"
+
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"you have just registered an account at %(site_name)s. We're happy to see "
+"you!\n"
+"\n"
+"You will need to verify your email %(user_email)s before you can log in. \n"
+"\n"
+"\n"
+"Please click on the following link to verify your email address (or copy and "
+"paste the link it in your browser):\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
+"\n"
+"\n"
+"\n"
+"Thank you and see you soon!\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"שלום %(user_name)s,\n"
+"\n"
+"בדיוק נרשמת ב-%(site_name)s. אנחנו שמחים לראותך!\n"
+"\n"
+"עליך לאמת את כתובת הדוא\"ל שלך לפני שתוכל להתחבר %(user_email)s.\n"
+"\n"
+"\n"
+"נא לחץ על הקישור הבא כדי לאמת את הכתובת (או העתק והדבק את הקישור לדפדפן "
+"שלך):\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
+"\n"
+"\n"
+"\n"
+"תודה... נתראה בקרוב!\n"
+"\n"
+"שלך, צוות %(site_name)s"
+
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"you have just changed your email address at %(site_name)s.\n"
+"\n"
+"You will need to verify your email %(user_email)s before the changes take "
+"effect. \n"
+"\n"
+"\n"
+"Please click on the following link to verify your email address (or copy and "
+"paste the link it in your browser):\n"
+"%(domain_url)s%(user_verification_url)s\n"
+"\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"שלום %(user_name)s,\n"
+"\n"
+"שינית זה עתה את כתובת הדוא\"ל ב-%(site_name)s.\n"
+"\n"
+"עליך לבצע אימות לכתובת הדוא\"ל %(user_email)s לפני שהשינויים יכנסו לתוקף.\n"
+"\n"
+"\n"
+"נא לחץ על הקישור הבא על מנת לאמת את הכתובת (או העתק והדבק את הקישור לדפדפן "
+"שלך):\n"
+"%(domain_url)s%(user_verification_url)s \n"
+"\n"
+"\n"
+"\n"
+"שלך, צוות %(site_name)s"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr "נא אמת את כתובת הדוא\"ל שלך עבור %(site_name)s!"
+
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has accepted the invitation to join \"%(team_name)s"
+"\".\n"
+"\n"
+"You're receiving this email because you are an administrator of this team.\n"
+"\n"
+"(Follow this link to edit your notification preferences: "
+"%(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"המשתמש \"%(sender_name)s\" קיבל את ההזמנה להצטרף ל-\"%(team_name)s\".\n"
+"\n"
+"אתה מקבל הודעת דוא\"ל זו מכיוון שאתה מנהל מערכת של צוות זה.\n"
+"\n"
+"(עקוב אחר קישור זה על מנת לערוך את הגדרות ההתראה שלך: "
+"%(notification_settings_url)s )\n"
+"\n"
+"\n"
+"שלך, צוות %(site_name)s"
+
+#, python-format
+msgid ""
+"%(sender_name)s has accepted the invitation to %(team_name)s on "
+"%(site_name)s!"
+msgstr "%(sender_name)s קיבל את ההזמנה ל-%(team_name)s ב-%(site_name)s!"
+
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has declined the invitation to join \"%(team_name)s"
+"\".\n"
+"\n"
+"You're receiving this email because you are an administrator of this team.\n"
+"\n"
+"(Follow this link to edit your notification preferences: "
+"%(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"המשתמש \"%(sender_name)s\" דחה את ההזמנה להצטרך ל-\"%(team_name)s\".\n"
+"\n"
+"אתה מקבל הודעת דוא\"ל זו מכיוון שאתה מנהל מערכת של צוות זה.\n"
+"\n"
+"(עקוב אחר קישור זה על מנת לערוך את הגדרות ההתראה שלך: "
+"%(notification_settings_url)s ) )\n"
+"\n"
+"\n"
+"שלך, צוות %(site_name)s"
+
+#, python-format
+msgid ""
+"%(sender_name)s has declined the invitation to %(team_name)s on "
+"%(site_name)s!"
+msgstr "%(sender_name)s דחה את ההזמנה ל-%(team_name)s ב-%(site_name)s!"
+
+#, python-format
+msgid ""
+"Hi, %(user_name)s!\n"
+"\n"
+"\n"
+"You have been invited to join \"%(team_name)s\"! Follow the link below to "
+"join and get active!"
+msgstr ""
+"שלום, %(user_name)s !\n"
+"\n"
+"\n"
+"הוזמנת להצטרך ל- \"%(team_name)s\"! עקוב אחר הקישור שלמטה כדי להצטרף להיות "
+"פעיל!"
+
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "צוות %(site_name)s"
+
+#, python-format
+msgid ""
+"Hi, %(user_name)s!\n"
+"\n"
+"Your membership request for %(team_name)s has been accepted!"
+msgstr ""
+"שלום, %(user_name)s !\n"
+"\n"
+"בקשת החברות שלך עבור %(team_name)s אושרה!"
+
+msgid "Follow this link to get active:"
+msgstr "עקוב אחר הקישור כדי להיות פעיל:"
+
+#, python-format
+msgid ""
+"Hi, %(user_name)s!\n"
+"\n"
+"We're sorry, but your membership request for %(team_name)s has been declined."
+msgstr ""
+"שלום, %(user_name)s !\n"
+"\n"
+"אנחנו מצטערים, אבל בקשת החברות שלך ל-%(team_name)s לא אושרה."
+
+msgid ""
+"If you feel this is unfair, we suggest you contact one of the team's "
+"administrators for further information:"
+msgstr ""
+"אם אתה מרגיש שזה לא הוגן, אנו מציעים לך ליצור קשר עם אחד ממנהלי הצוות לקבלת "
+"מידע נוסף:"
+
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has requested to join %(team_name)s.\n"
+"\n"
+"Please go to the following page to accept or decline the request:\n"
+"%(domain_url)s%(group_page_url)s\n"
+"\n"
+"You're receiving this email because you are an administrator of this team.\n"
+"\n"
+"(Follow this link to edit your notification preferences: "
+"%(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"המשתמש \"%(sender_name)s\" ביקש להצטרף ל-%(team_name)s.\n"
+"\n"
+"נא עבור לדף הבא כדי לאשר או לדחות את הבקשה:\n"
+"%(domain_url)s%(group_page_url)s \n"
+"\n"
+"אתה מקבל הודעת דוא\"ל זו מכיון שאתה מנהל מערכת של צוות זה.\n"
+"\n"
+"(עקוב אחר קישור זה על מנת לערוך את הגדרות ההתראה שלך: "
+"%(notification_settings_url)s ) )\n"
+")\n"
+"\n"
+"\n"
+"שלך, צוות %(site_name)s"
+
+#, python-format
+msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+msgstr "%(sender_name)s רוצה להצטרף ל-%(team_name)s ב-%(site_name)s!"
+
+#, python-format
+msgid ""
+"User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
+"\n"
+"The user won't be able to log in until you (or another Portal-Admin) "
+"approves of his request.\n"
+"\n"
+"If you wish to approve the user's join request click the following link:\n"
+"%(domain_url)s%(user_approve_url)s\n"
+"\n"
+"\n"
+"Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
+"\n"
+"\n"
+"You're receiving this email because you are a portal-administrator.\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"המשתמש \"%(user_name)s\" (%(user_mail)s) ביקש להצטרף ל-%(site_name)s. \n"
+"\n"
+"המשתמש לא יוכל להתחבר עד שאתה או מנהל פורטל אחר תאשרו את בקשתו.\n"
+"\n"
+"אם ברצונך לאשר את בקשת ההצטרפות לחץ על הקישור הבא:\n"
+"%(domain_url)s%(user_approve_url)s\n"
+"\n"
+"\n"
+"לחץ כאן כדי לדחות את הבקשה: %(domain_url)s%(user_deny_url)s\n"
+"\n"
+"\n"
+"אתה מקבל הודעת דואל\"ל זו מכיוון שאתה מנהל מערכת פורטל.\n"
+"\n"
+"שלך, צוות %(site_name)s"
+
+#, python-format
+msgid "New user request: %(user_name)s wants to join %(site_name)s!"
+msgstr "בקשת משתמש חדשה: %(user_name)s רוצה להצטרף ל-%(site_name)s!"
+
+#, python-format
+msgid ""
+"Hello, %(user_name)s! \n"
+"\n"
+"Welcome to %(site_name)s! Your user account was approved.\n"
+"\n"
+"You can now log in at %(domain_url)s.\n"
+"\n"
+"\n"
+"Best regards,\n"
+"\n"
+"the %(site_name)s Team"
+msgstr ""
+"שלום, %(user_name)s!\n"
+"\n"
+"ברוכים הבאים ל-%(site_name)s! חשבון המשתמש שלך אושר.\n"
+"\n"
+"כעת, באפשרותך להתחבר %(domain_url)s. \n"
+"\n"
+"\n"
+"שא ברכה, \n"
+"\n"
+"צוות האתר %(site_name)s"
+
+#, python-format
+msgid "Your request to join %(site_name)s was approved!"
+msgstr "בקשתך להצטרף ל- %(site_name)s אושרה!"
+
+#, python-format
+msgid ""
+"Your request to become a member of %(site_name)s was denied.\n"
+"\n"
+"If you have any questions, please contact one of your site administrators, "
+"as listed below.\n"
+"\n"
+"Your %(site_name)s Team:"
+msgstr ""
+"בקשתך להיות חבר ב-%(site_name)s נדחתה.\n"
+"\n"
+"אם יש לך שאלות, פנה לאחד ממנהלי האתר שלך, כמפורט להלן.\n"
+"\n"
+"שלך, צוות %(site_name)s."
+
+#, python-format
+msgid "Your request to join %(site_name)s was denied."
+msgstr "בקשתך להצטרף ל-%(site_name)s נדחתה."
+
+#, python-format
+msgid ""
+"Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+"\n"
+"Out administrators will review your request and approve your user account "
+"soon!\n"
+"\n"
+"Until then, with warm greetings, \n"
+"your %(site_name)s Team"
+msgstr ""
+"היי! אנו שמחים לדעת שברצונך להיות חבר ב-%(site_name)s\n"
+"\n"
+"מנהלי המערכת יבחנו בקשתך ויאשרו חשבונך בקרוב! \n"
+"\n"
+"עד אז, שא ברכה,\n"
+"שלך, צוות %(site_name)s"
+
+#, python-format
+msgid "You have requested to become a member of %(site_name)s!"
+msgstr "ביקשת להיות חבר ב-%(site_name)s!"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"you were tagged in \"%(object_name)s\" in %(team_name)s by "
+"%(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: "
+"%(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"היי %(receiver_name)s, \n"
+"\n"
+"תויגת ב-\"%(object_name)s\" ב-%(team_name)s על ידי %(sender_name)s. \n"
+"\n"
+"לחץ על קישור זה כדי לראות %(object_url)s \n"
+"\n"
+"\n"
+"\n"
+"(עקוב אחר קישור זה כדי לערוך העדפות התראה: %(notification_settings_url)s) \n"
+"\n"
+"שלך, צוות %(site_name)s."
+
+#, python-format
+msgid "You were tagged in: \"%(object_name)s\", in %(team_name)s"
+msgstr "תויגת ב:\"%(object_name)s\", ב-%(team_name)s"
+
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"you have just accepted the Terms of Services at %(site_name)s. Here is a "
+"copy for your records.\n"
+"\n"
+"\n"
+"%(tos_content)s\n"
+"\n"
+"\n"
+"Your %(site_name)s Team \n"
+"\n"
+"%(domain_url)s"
+msgstr ""
+"היי %(user_name)s, \n"
+"\n"
+"הרגע אישרת את תנאי השירות ב-%(site_name)s. הנה עותק עבור הרשומות שלך. \n"
+"\n"
+"\n"
+"%(tos_content)s \n"
+"\n"
+"\n"
+"שלך, צוות %(site_name)s \n"
+"\n"
+"%(domain_url)s"
+
+msgid "Additional options"
+msgstr "אפשרויות נוספות"
+
+msgid ""
+"Attach files, add a location, mark topics and adjust visibility settings"
+msgstr "צירוף קבצים, הוספת מיקום, סימון נושאים והתאמת הגדרות נראות"
+
+msgid "Tag persons"
+msgstr "תייג אנשים"
+
+msgid "Select tags"
+msgstr "בחר תגיות"
+
+msgid "Place or adress"
+msgstr "מקום או כתובת"
+
+msgid "Upload a file or image or attach an existing one"
+msgstr "העלאת קובץ או תמונה או צירוף קובץ קיים"
+
+msgid "Select topic"
+msgstr "בחר נושא"
+
+msgid "Visibility"
+msgstr "נראות"
+
+msgid ""
+"This item will be posted as publicly visible! This means that anyone on the "
+"internet can access and see it, and it may potentially be included in search "
+"engine results."
+msgstr ""
+"פריט זה יפורסם כפריט גלוי לציבור! משמעות הדבר היא שכל מי שברשת יכול לגשת "
+"ולראות אותו, וייתכן שהוא עשוי להיכלל בתוצאות מנוע החיפוש."
+
+msgid ""
+"If you do not wish this, you can change this item's visibility setting below."
+msgstr "אם אינך רוצה בכך, באפשרותך לשנות את הגדרות הנראות למטה."
+
+msgid "Show more options..."
+msgstr "הצג אפשרויות נוספות..."
+
+msgid "Which topics are you involved with?"
+msgstr "באילו נושאים אתה מעורב?"
+
+msgid "Select topics"
+msgstr "בחר נושאים"
+
+msgid "Which tags further describe your activities?"
+msgstr "אילו תגיות נוספות מתארות את הפעילויות שלך?"
+
+msgid "Select or create tags"
+msgstr "בחר או צור תגיות"
+
+msgid "Topics we are involved with"
+msgstr "נושאים בהם אנו מעורבים"
+
+msgid "Activities and interests"
+msgstr "פעילויות ותחומי עניין"
+
+msgid "Where would your idea be realized?"
+msgstr "איפה הרעיון שלך יתממש?"
+
+msgid "Enter a place or address and then choose a point on the map."
+msgstr "הזן מקום או כתובת ולאחר מכן בחר נקודה במפה."
+
+msgid "Which topics fit your idea?"
+msgstr "אילו נושאים מתאימים לרעיון שלך?"
+
+msgid "Where do you live?"
+msgstr "איפה אתה גר?"
+
+msgid ""
+"Set your location to let other users find your profile on the map (as long "
+"as your privacy setting permits it). You will also start out there when you "
+"open the map."
+msgstr ""
+"הגדר את המיקום שלך כך שתאפשר למשתמשים אחרים למצוא את הפרופיל שלך במפה (כל "
+"עוד הגדרת הפרטיות שלך מאפשרת זאת). אתה גם תתחיל שם כאשר תפתח את המפה."
+
+msgid "Which topics are you interested in?"
+msgstr "באיזה נושאים אתה מתעניין?"
+
+msgid "What would you like to learn?"
+msgstr "מה היית רוצה ללמוד?"
+
+msgid "Who may see your plattform profile?"
+msgstr "מי יכול לראות את פרופיל הפלטפורמה שלך?"
+
+msgid "Your profile will be set to be publicly visible!"
+msgstr "הפרופיל שלך יוגדר כפומבי!"
+
+msgid ""
+"This means that your name, avatar and user profile can be seen by ANYONE on "
+"the internet and may potentially be included in search engine results!"
+msgstr ""
+"משמעות הדבר היא כי השם שלך, אווטאר ופרופיל המשתמש שלך ניתן לראות על ידי כל "
+"אחד באינטרנט ועשוי להיכלל בתוצאות מנוע החיפוש!"
+
+msgid ""
+"Please note that changes in this setting will not have an immediate effect "
+"on search engine results! Depending on the search provider, it might take "
+"days or weeks until this setting is reflected in their results."
+msgstr ""
+"שים לב כי לשינויים בהגדרה זו לא תהיה השפעה מיידית על תוצאות מנוע החיפוש! "
+"בהתאם לספק החיפוש, ייתכן שיקח ימים או שבועות עד שהגדרה זו תשתקף בתוצאות שלהם."
+
+msgid "Privacy"
+msgstr "פרטיות"
+
+msgid "My location"
+msgstr "המיקום שלי"
+
+msgid "Topics I am interested in"
+msgstr "נושאים שאני מתעניין בהם"
+
+msgid "What I wish to learn"
+msgstr "מה הייתי רוצה ללמוד"
+
+msgid "Logged in Members only"
+msgstr "חברים מחוברים בלבד"
+
+msgid "Everybody"
+msgstr "כולם"
+
+msgid "OK"
+msgstr "אישור"
+
+msgid "Toggle navigation"
+msgstr "החלף מצב ניווט"
+
+msgid "My Profile"
+msgstr "הפרופיל שלי"
+
+msgid "Your Contribution"
+msgstr "התרומה שלך"
+
+msgid "Logout"
+msgstr "התנתק"
+
+msgid "Forum"
+msgstr "פורום"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "People"
+msgstr "אנשים"
+
+msgid "Invited Groups"
+msgstr "קבוצות מוזמנות"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Groups"
+msgstr "הקבוצות שלי"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Groups"
+msgstr "כל הקבוצות"
+
+msgid "Invited Projects"
+msgstr "פרויקטים מוזמנים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Projects"
+msgstr "הפרויקטים שלי"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Projects"
+msgstr "כל הפרויקטים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas"
+msgstr "רעיונות"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Ideas"
+msgstr "הרעיונות שלי"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Ideas"
+msgstr "כל הרעיונות"
+
+msgid "Search..."
+msgstr "חיפוש..."
+
+msgid "Search"
+msgstr "חיפוש"
+
+msgid "Messages"
+msgstr "הודעות"
+
+msgid "My Stream"
+msgstr "השידור שלי"
+
+msgid "Not logged in."
+msgstr "לא מחובר."
+
+msgid "You cannot create or edit events until you are logged in!"
+msgstr "אין באפשרותך ליצור או לערוך אירועים כשאינך מחובר!"
+
+msgid "No anonymous access!"
+msgstr "אין גישה אנונימית!"
+
+msgid "This website allows no anonymous access."
+msgstr "אתר אינטרנט זה אינו מאפשר גישה אנונימית."
+
+msgid "Log in..."
+msgstr "התחבר.."
+
+msgctxt "read and accept the [Terms of Services]"
+msgid "I have read and accept the"
+msgstr "קראתי והסכמתי לתנאי השימוש"
+
+msgid "Terms and Services"
+msgstr "תנאי שימוש ושירות"
+
+msgid "Forgot password?"
+msgstr "שכחת סיסמא?"
+
+msgid "Logged out"
+msgstr "מנותק"
+
+#, python-format
+msgid ""
+"In order to use your %(portal_name)s account to login to another platform "
+"you need to login on %(portal_name)s first."
+msgstr ""
+"על מנת להשתמש בחשבון %(portal_name)s שלך כדי להתחבר לפלטפורמה נוספת עליך "
+"להתחבר ב-%(portal_name)s תחילה."
+
+msgid ""
+"Your account was registered successfully. The account will need to be "
+"approved by an administrator before you can log in. We will send an email to "
+"your address when this happens."
+msgstr ""
+"החשבון שלך נרשם בהצלחה. מנהל מערכת יצטרך לאשר את החשבון לפני שתוכל להתחבר. "
+"אנו נשלח הודעת דוא\"ל לכתובת שלך כאשר הדבר יקרה."
+
+msgid ""
+"Your account was registered successfully. You will receive an activation "
+"email from us in a few minutes. You need to confirm the email address before "
+"you can log in."
+msgstr ""
+"החשבון שלך נרשם בהצלחה. תקבל מאיתנו דוא\"ל הפעלה בעוד כמה דקות. עליך לאמת את "
+"כתובת הדואר האלקטרוני לפני שתוכל להתחבר."
+
+msgid "Password"
+msgstr "סיסמה"
+
+#, python-format
+msgid "Log in with %(portal_name)s"
+msgstr "התחבר באמצעות %(portal_name)s"
+
+#, python-format
+msgid "Sign in now using your %(portal_name)s account."
+msgstr "התחבר כעת באמצעות חשבון %(portal_name)s שלך."
+
+#, python-format
+msgid "You don't have a %(portal_name)s account yet?"
+msgstr "אין לך עדיין חשבון %(portal_name)s?"
+
+msgid "Password change"
+msgstr "שינוי סיסמה"
+
+msgid "Change password"
+msgstr "שנה סיסמה"
+
+msgid "Password cannot be changed!"
+msgstr "אין אפשרות לשנות את הסיסמה!"
+
+msgid ""
+"Sorry, but your account is associated with an integrated Portal! This means "
+"that neither your email, nor your password cannot be changed."
+msgstr ""
+"מצטערים, אך החשבון שלך משויך לפורטל משולב! משמעות הדבר היא שלא ניתן לשנות את "
+"כתובת הדוא\"ל שלך או את הסיסמה שלך."
+
+msgid "Please contact an administrator if this is an issue for you."
+msgstr "נא פנה למנהל מערכת אם זוהי בעיה עבורך."
+
+msgid "Password reset"
+msgstr "איפוס סיסמה"
+
+msgid "Your password has been changed successfully!"
+msgstr "סיסמתך שונתה בהצלחה!"
+
+msgid "Enter old password"
+msgstr "הזן סיסמה ישנה"
+
+msgid "We need to make sure it's really you"
+msgstr "אנחנו צריכים לוודא שזה באמת אתה"
+
+msgid "Old password"
+msgstr "סיסמה ישנה"
+
+msgid "New Password"
+msgstr "סיסמה חדשה"
+
+msgid "Enter a password you don't use anywhere else. The longer the better!"
+msgstr "הזן סיסמה שאינך משתמש בה בשום מקום אחר. כמה שיותר ארוכה יותר טוב!"
+
+msgid "Repeat your password just to make sure"
+msgstr "חזור על סיסמתך רק על מנת לוודא"
+
+msgid "Repeat new Password"
+msgstr "חזור על הסיסמה החדשה"
+
+msgid "Change my password"
+msgstr "שנה את הסיסמה שלי"
+
+msgid "Password reset complete"
+msgstr "איפוס הסיסמה הושלם"
+
+msgid "Reset password"
+msgstr "איפוס סיסמה"
+
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr "סיסמתך הוגדרה. אתה רשאי להמשיך ולהתחבר כעת."
+
+msgid "Login"
+msgstr "התחבר"
+
+msgid "Enter new password"
+msgstr "הכנס סיסמה חדשה"
+
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr "הזן את הסיסמה החדשה שלך פעמיים כדי שנוכל לאמת שהקלדת אותה כהלכה."
+
+msgid "New password"
+msgstr "סיסמה חדשה"
+
+msgid "New password confirmation"
+msgstr "אישור סיסמה חדשה"
+
+msgid "Password reset unsuccessful"
+msgstr "איפוס הסיסמה נכשל"
+
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+"הקישור לאיפוס הסיסמה אינו חוקי, יתכן שכבר נעשה בו שימוש. נא בקש איפוס סיסמה "
+"מחדש."
+
+msgid "Password reset successful"
+msgstr "הסיסמה שונתה בהצלחה"
+
+msgid ""
+"We've emailed you instructions for setting your password. You should be "
+"receiving them shortly."
+msgstr "שלחנו לך בדוא\"ל הוראות להגדרת הסיסמה שלך. אתה אמור לקבלם בקרוב."
+
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+"אם אתה לא מקבל הודעת דוא\"ל, אנא וודא כי בדקת את התיבה שעם כתובתה נרשמת, "
+"ובדוק את תיבת הספאם."
+
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+"אתה מקבל הודעת דוא\"ל זו מכיוון שביקשת איפוס סיסמה עבור חשבון המשתמש שלך ב-"
+"%(site_name)s."
+
+msgid "Please go to the following page and choose a new password:"
+msgstr "נא עבור לדף הבא ובחר סיסמה חדשה:"
+
+msgid "Your username, in case you've forgotten:"
+msgstr "שם המשתמש שלך, למקרה ששכחת:"
+
+msgid "Thanks for using our site!"
+msgstr "תודה על השימוש באתר שלנו!"
+
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr ""
+"שכחת את הסיסמה שלך? הזן את כתובת הדואר האלקטרוני שלך להלן, ואנחנו נשלח "
+"הוראות להגדרת סיסמה חדשה לחשבונך."
+
+msgid ""
+"The email you used to register your account. This is the one you receive "
+"email notifications on"
+msgstr "כתובת הדוא\"ל שהשתמשת בה כדי ליצור חשבון היא אותה כתובת בה תקבל התראות"
+
+msgid "Example: mymail@example.com"
+msgstr "דוגמה: mymail@example.com"
+
+msgid "Sign up"
+msgstr "הרשם עכשיו"
+
+msgid "Create account"
+msgstr "צור חשבון"
+
+msgid "Welcome to the Community!"
+msgstr "ברוכים הבאים לקהילה!"
+
+msgid "You need a user account to join projects and become active!"
+msgstr "אתה צריך חשבון משתמש כדי להצטרף לפרויקטים ולהיות פעיל!"
+
+msgid "You need a user account to continue!"
+msgstr "אתה צריך חשבון משתמש כדי להמשיך!"
+
+msgid ""
+"Signing up is easy and fast. Just fill out these fields and you're all set!"
+msgstr "ההרשמה היא קלה ומהירה. פשוט מלא את השדות האלה ואתה מוכן!"
+
+msgid "Already have an account?"
+msgstr "כבר יש לך חשבון משתמש?"
+
+msgid "Log in here"
+msgstr "התחבר כאן"
+
+msgid "You are signing up using this invite token:"
+msgstr "אתה נרשם באמצעות אסימון הזמנה זה:"
+
+msgid ""
+"After signup, you will automatically become a member of the associated "
+"projects and groups."
+msgstr "לאחר ההרשמה, תהפוך באופן אוטומטי לחבר בפרויקטים ובקבוצות המקושרים."
+
+msgid "Email address"
+msgstr "כתובת דוא\"ל"
+
+msgid ""
+"This will be used as your login. Notification emails will be sent to this "
+"address (if you want to receive them)."
+msgstr ""
+"כתובת הדוא\"ל תשמש אותך בחיבור למערכת. הודעות התראה ישלחו לכתובת זו (אם "
+"ברצונך לקבלן)."
+
+msgid "Repeat Password"
+msgstr "חזור על הסיסמה"
+
+msgid "Your name"
+msgstr "השם שלך"
+
+msgid "This name will be displayed to other users on the site"
+msgstr "שם זה יוצג למשתמשים אחרים באתר"
+
+msgid "First name"
+msgstr "שם פרטי"
+
+msgid "Last name"
+msgstr "שם משפחה"
+
+msgid "You can supply your last name to be displayed as well"
+msgstr "אתה יכול לספק את שם המשפחה שלך שיוצג גם כן"
+
+msgid "Captcha"
+msgstr "אימות"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "אנחנו צריכים לוודא שאתה אדם אמיתי"
+
+msgid "Generate a new captcha"
+msgstr "צור קוד אימות חדש"
+
+msgid "Search options..."
+msgstr "אפשרויות חיפוש..."
+
+msgid "Search in Apps"
+msgstr "חיפוש באפליקציות"
+
+msgid "Ethercalcs"
+msgstr ""
+
+msgid "Offers"
+msgstr "הצעות"
+
+msgid "Search in Cloud files (seperate)"
+msgstr "חיפוש בקבצי ענן (נפרד)"
+
+msgid ""
+"Search results from the Cloud app can currently only be displayed in the "
+"Cloud app itself."
+msgstr ""
+"תוצאות חיפוש מאפליקציית ענן יכולות להיות מוצגות כעת רק באפליקציית הענן עצמה."
+
+msgid ""
+"To search for Cloud files, please visit the Cloud app and use the integrated "
+"search function there."
+msgstr ""
+"כדי לחפש קבצי ענן, בקר באפליקציה Cloud והשתמש בפונקציית החיפוש המשולבת שם."
+
+msgid "Searching in Cloud files"
+msgstr "מחפש בקבצי ענן"
+
+msgid "Search in Cloud files"
+msgstr "חפש בקבצי ענן"
+
+msgid "Search in teams"
+msgstr "חפש בצוותים"
+
+msgid "All Projects and Groups"
+msgstr "כל הפרויקטים והקבוצות"
+
+msgid "My Projects and Groups"
+msgstr "הפרויקטים והקבוצות שלי"
+
+msgid "Other Projects and Groups"
+msgstr "פרויקטים וקבוצות אחרים"
+
+msgid "Search for Users"
+msgstr "חפש משתמשים"
+
+msgid "Ordering"
+msgstr "מסדר"
+
+msgid "Newest"
+msgstr "חדש ביותר"
+
+msgid "Relevance"
+msgstr "רלוונטיות"
+
+#, python-format
+msgid ""
+"Showing %(end)s of %(total)s results for your query \"%(query)s\" with "
+"topics:"
+msgstr ""
+"מציג %(end)s של %(total)s תוצאות חיפוש עבור הערך \"%(query)s\" עם נושאים:"
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\""
+msgstr "מציג %(end)s של %(total)s תוצאות חיפוש עבור הערך \"%(query)s\""
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results with topics:"
+msgstr "מציג %(end)s של %(total)s תוצאות עם נושאים:"
+
+msgid "or"
+msgstr "או"
+
+msgid "We could not find any results matching your search query."
+msgstr "לא היתה לנו אפשרות למצוא תוצאות התואמות למילות החיפוש שלך."
+
+msgid "previous"
+msgstr "הקודם"
+
+msgid "next"
+msgstr "הבא"
+
+msgid "Enter one or more search terms or select a topic to search."
+msgstr "הזן מונח חיפוש אחד או יותר או בחר נושא לחיפוש."
+
+msgid "CSV Downloads"
+msgstr "הורדות CSV"
+
+msgid "HD space used by groups"
+msgstr "שטח HD המשמש קבוצות"
+
+msgid "HD space used by projects"
+msgstr "שטח HD המשמש פרוייקטים"
+
+msgid "User statistics (min 1x logged in)"
+msgstr "סטטיסטיקת משתמשים (מינימום 1x מחובר)"
+
+msgid "E-Mails of all newsletter subcribers"
+msgstr "דוא\"ל של כל מנויי הניוזלטר"
+
+msgid "E-Mails of ALL active users"
+msgstr "דוא\"ל של כל המשתמשים הפעילים"
+
+msgid "Date"
+msgstr "תאריך"
+
+msgid "From"
+msgstr "מ"
+
+msgid "Start date."
+msgstr "תאריך התחלה."
+
+msgid "Time"
+msgstr "זמן"
+
+msgid "Until"
+msgstr "עד"
+
+msgid "End date."
+msgstr "תאריך סיום."
+
+msgid "Ok"
+msgstr "אישור"
+
+msgid "The WE-Cloud is here!"
+msgstr "ה-WE-Cloud כאן!"
+
+msgid ""
+"With the Cloud, we offer your team a new file repository with extensive "
+"office functions to work together on documents, tables and presentations. It "
+"is based on Nextcloud and OnlyOffice. So you have two apps at your disposal "
+"with which you can use the cloud on the road and synchronize files with your "
+"desktop! As administrator you can activate the cloud for your project/group "
+"and transfer data from files and pads."
+msgstr ""
+"באמצעות הענן, אנו מציעים לצוות שלך מאגר קבצים חדש עם פונקציות משרדיות נרחבות "
+"כדי לעבוד יחד על מסמכים, טבלאות ומצגות. הוא מבוסס על Nextcloud ו-OnlyOffice. "
+"אז יש לך שתי אפליקציות לרשותך בהן אתה יכול להשתמש בענן על הדרך ולסנכרן קבצים "
+"עם שולחן העבודה שלך! כמנהל מערכת באפשרותך להפעיל את הענן עבור הפרויקט/קבוצה "
+"שלך ולהעביר נתונים מקבצים ומשטחים."
+
+msgid "Learn more"
+msgstr "למד עוד"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Users"
+msgstr "המשתמשים שלי"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Events"
+msgstr "האירועים שלי"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Users"
+msgstr "כל המשתמשים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Events"
+msgstr "כל האירועים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "אירוע"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Idea"
+msgstr "רעיון"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create User"
+msgstr "צור משתמש"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Event"
+msgstr "צור אירוע"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names, Topics and Places..."
+msgstr "חיפוש שמות, נושאים ומקומות..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names and Topics..."
+msgstr "חיפוש שמות ונושאים..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Where"
+msgstr "איפה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "In map area"
+msgstr "באזור המפה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If active, searching will be restricted to the visible map area."
+msgstr "אם האפשרות זמינה, החיפוש יהיה מוגבל לאיזור הגלוי במפה."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Apply Filters"
+msgstr "החל מסננים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Clear Filters"
+msgstr "איפוס מסננים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Street"
+msgstr "רחוב"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create idea"
+msgstr "צור רעיון"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Next"
+msgstr "הבא"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging the marker!"
+msgstr "בחר מיקום עבור הרעיון שלך על-ידי גרירת הסמן!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "of"
+msgstr "מתוך"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Results"
+msgstr "תוצאות"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No results found."
+msgstr "לא נמצאו תוצאות."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not complete the search due to an error."
+msgstr "לא היתה אפשרות להשלים את החיפוש עקב שגיאה."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search when moving the map"
+msgstr "חיפוש בעת הזזת המפה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search this area"
+msgstr "חפש באזור זה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership Requests"
+msgstr "בקשות חברות"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Groups and Projects"
+msgstr "הקבוצות והפרויקטים שלי"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show more Projects of this Group"
+msgstr "הצג פרויקטים נוספים של קבוצה זו"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are not in any groups or projects yet"
+msgstr "אתה עדיין לא נמצא באף קבוצות או פרויקטים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create new Group"
+msgstr "צור קבוצה חדשה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create new Project"
+msgstr "צור פרויקט חדש"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Browse all Groups"
+msgstr "עיין בכל הקבוצות"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Browse all Projects"
+msgstr "עיין בכל הפרויקטים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas I am following"
+msgstr "רעיונות שאני עוקב אחריהם"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are not following any ideas yet."
+msgstr "אתה עדיין לא עוקב אחרי רעיונות."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Post new Idea"
+msgstr "פרסם רעיון חדש"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Browse all Ideas"
+msgstr "עיין בכל הרעיונות"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Ideas"
+msgstr "חפש רעיונות"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You have not RSVPed to any Events."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Add Event"
+msgstr "הוסף אירוע"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Go to Calendar"
+msgstr "עבור אל לוח שנה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "There was an error loading the widget"
+msgstr "אירעה שגיאה בטעינת היישומון"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Notifications"
+msgstr "התראות"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show more"
+msgstr "הראה יותר"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No current notifications"
+msgstr "אין התראות"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Entire Network"
+msgstr "הרשת כולה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "On the Map"
+msgstr "על המפה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "In my Groups and Projects"
+msgstr "בקבוצות ובפרויקטים שלי"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Topic"
+msgstr "נושא"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You"
+msgstr "את/ה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Participants"
+msgstr "משתתפים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Projects/Groups"
+msgstr "פרויקטים/קבוצות"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No info."
+msgstr "אין מידע."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Administrator"
+msgstr "מנהל מערכת"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Administrators"
+msgstr "מנהלי מערכת"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Administrators unknown"
+msgstr "מנהלי מערכת לא ידועים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No description yet."
+msgstr "טרם הוזן תיאור."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid ""
+"Choose a location for your idea by dragging & dropping the marker. You can "
+"still change this location later on."
+msgstr ""
+"בחר מיקום עבור הרעיון שלך על-ידי גרירה ושחרור הסמן. באפשרותך עדיין לשנות "
+"מיקום זה מאוחר יותר."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Back to location selection"
+msgstr "חזרה לבחירת מיקום"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Protected Content"
+msgstr "תוכן מוגן"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Sorry, but you cannot view details for this content."
+msgstr "מצטערים, אך אין באפשרותך לראות פרטי תוכן זה."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This can happen when its visibility settings have changed recently."
+msgstr "זה יכול להתרחש כאשר הגדרות הניראות שלו השתנו לאחרונה."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Please register or log in to continue!"
+msgstr "הירשם או התחבר על מנת להמשיך!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Error!"
+msgstr "שגיאה!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid ""
+"Sorry, but the requested content could not be retrieved from the server."
+msgstr "מצטערים, אך לא היתה אפשרות לאחזר את התוכן המבוקש מהשרת."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Visit Event Page"
+msgstr "בקר בדף האירוע"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid ""
+"You will now receive notifications for comments or when this event is "
+"updated or its details change."
+msgstr "כעת תקבל התראות אודות תגובות, שינויים ועדכונים שיעלו באירוע."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If you do not want notifications, click the unfollow button!"
+msgstr "אם אינך מעוניין בקבלת התראות, לחץ על לחצן בטל עוקב!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr "לא היתה אפשרות לשמור את הגדרת ה-like שלך עקב שגיאה."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr "לא היתה אפשרות לשמור את הגדרת העוקב עקב שגיאה."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Hidden Users"
+msgstr "משתמשים מוסתרים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Hidden User"
+msgstr "משתמש מוסתר"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are a Member"
+msgstr "אתה חבר"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Join Group"
+msgstr "הצטרף לקבוצה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Message Group"
+msgstr "שלח הודעה לקבוצה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Author"
+msgstr "מחבר"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Project from Idea"
+msgstr "צור פרוייקט מרעיון"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Edit your Idea"
+msgstr "ערוך את הרעיון שלך"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid ""
+"You will receive a notification when a project is created from your liked "
+"idea."
+msgstr "תתקבל התראה כאשר פרויקט נוצר מרעיון שאהבת."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Projects - Created from this Idea"
+msgstr "פרויקטים שנוצרו מרעיון זה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Open to be contacted about potential collaboration opportunities"
+msgstr "פתוח ליצירת קשר לגבי הזדמנויות פוטנציאליות לשיתוף פעולה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Does NOT wish to be contacted for potential collaboration!"
+msgstr "לא מעוניין ביצירת קשר לגבי הזדמנויות פוטנציאליות לשיתוף פעולה!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Join Project"
+msgstr "הצטרף לפרוייקט"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Message Project"
+msgstr "שלח/י הודעה לפרויקט"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Move up"
+msgstr "עבור למעלה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Move down"
+msgstr "עבור למטה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "There are no items yet"
+msgstr "אין עדיין פריטים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups and Projects"
+msgstr "קבוצות ופרוייקטים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid ""
+"Here you can find an overview of your Groups and Projects once you become "
+"active in one or more of them."
+msgstr ""
+"כאן תוכל למצוא מבט כולל על הקבוצות והפרוייקטים שלך כשתהפוך לפעיל באחד או "
+"יותר מהם."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You can create Groups or Projects via the '+' button in the header."
+msgstr "באפשרותך ליצור קבוצות או פרוייקטים באמצעות לחצן '+' בכותרת העליונה."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas I like"
+msgstr "רעיונות שאני אוהב/ת"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can find an overview of Ideas you have liked."
+msgstr "כאן ניתן למצוא סקירה כללית של רעיונות שאהבת."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid ""
+"You can create your own Ideas via the '+' button in the header or you can "
+"discover existing Ideas here"
+msgstr ""
+"באפשרותך ליצור רעיונות משלך באמצעות לחצן '+' בכותרת העליונה או לגלות רעיונות "
+"קיימים כאן"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "גלה/י"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Only content from my Groups and Projects"
+msgstr "תוכן מהקבוצות והפרויקטים שלי בלבד"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "We could not load more data at this time."
+msgstr "לא היתה לנו אפשרות לטעון נתונים נוספים בשלב זה."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Retry"
+msgstr "נסה שנית"
+
+msgid "Quick Join"
+msgstr "הצטרפות מהירה"
+
+msgid ""
+"Using this token, you can automatically join the following projects and "
+"groups"
+msgstr ""
+"באמצעות אסימון זה, באפשרותך להצטרף באופן אוטומטי לפרוייקטים ולקבוצות הבאים"
+
+msgid "Team up quickly using an invite token"
+msgstr "התחברו במהירות באמצעות אסימון הזמנה"
+
+msgid "Join all now!"
+msgstr "הצטרף/י לכולם עכשיו!"
+
+msgid "Create account and join"
+msgstr "צור חשבון והצטרף"
+
+msgid ""
+"If you know an invite token, you can automatically join groups and projects, "
+"no matter if you have a user account yet or not."
+msgstr ""
+"אם ידוע לך אסימון הזמנה, באפשרותך להצטרף באופן אוטומטי לקבוצות ולפרוייקטים, "
+"ללא קשר אם עדיין יש לך חשבון משתמש או לא."
+
+msgid "Enter a token:"
+msgstr "הזן אסימון:"
+
+msgid "For example"
+msgstr "לדוגמה"
+
+msgid "Edit Profile"
+msgstr "ערוך פרופיל"
+
+#, python-format
+msgid ""
+"Your account is currently connected with the Facebook account \"%(name)s\". "
+"Do you really want to disconnect your Facebook account? This will also "
+"revoke all permissions you granted us to your Facebook account."
+msgstr ""
+"החשבון שלך מחובר כעת לחשבון הפייסבוק \"%(name)s\". האם אתה בטוח שברצונך "
+"להתנתק מחשבון הפייסבוק? פעולה זו תבטל את ההרשאות שנתת לחשבון הפייסבוק שלך."
+
+msgid "Disconnect Facebook Account"
+msgstr "נתק חשבון פייסבוק"
+
+msgid "Disconnect Facebook"
+msgstr "נתק את פייסבוק"
+
+#, python-format
+msgid "%(provider)s-Account"
+msgstr "חשבון - %(provider)s"
+
+msgid "Delete profile"
+msgstr "מחק פרופיל"
+
+msgid "User overview"
+msgstr "סקירה כללית של המשתמש"
+
+msgid "Members of your projects and groups only"
+msgstr "חברים בפרוייקטים ובקבוצות שלך בלבד"
+
+msgid "Everybody (public profile)"
+msgstr "כולם (פרופיל ציבורי)"
+
+msgid "Delete user profile"
+msgstr "מחק פרופיל משתמש"
+
+msgid "Delete Profile"
+msgstr "מחק פרופיל"
+
+msgid "You are about to delete your user account from the site!"
+msgstr "אתה עומד למחוק את חשבון המשתמש שלך מהאתר!"
+
+msgid ""
+"By clicking the button below, you will irrevocably delete your user account, "
+"profile and personal information from this site."
+msgstr ""
+"על-ידי לחיצה על הלחצן שלהלן, תמחק באופן בלתי הפיך את חשבון המשתמש, הפרופיל "
+"והמידע האישי שלך מאתר זה."
+
+msgid ""
+"Your created documents, news posts, uploaded files, and other content will "
+"be retained on the site. However this content will no longer bear your name "
+"or be connected to you."
+msgstr ""
+"המסמכים שנוצרו, הפוסטים, הקבצים שהועלו ותוכן אחר ישמר באתר. עם זאת, התוכן זה "
+"לא יישא עוד את שמך או יהיה מחובר אליך."
+
+msgid ""
+"If you wish to delete any of your content, please go back and do so now. "
+"Once you delete your profile, you will no longer have any access to anything "
+"you have created with this account."
+msgstr ""
+"אם ברצונך למחוק את התוכן שלך, חזור אחורה ועשה זאת כעת. לאחר שתמחק את הפרופיל "
+"שלך, לא תהיה לך עוד גישה לכל דבר שיצרת באמצעות חשבון זה."
+
+msgid "Delete Account"
+msgstr "מחיקת חשבון"
+
+msgid ""
+"I have understood that any content created by me will be retained on the "
+"website. I wish to irrevocably delete my user account:"
+msgstr ""
+"הבנתי שכל תוכן שנוצר על ידי יישמר באתר. ברצוני למחוק באופן בלתי הפיך את "
+"חשבון המשתמש שלי:"
+
+msgid "Delete user account"
+msgstr "מחק חשבון משתמש"
+
+#, python-format
+msgid "User profile: %(username)s"
+msgstr "פרופיל משתמש: %(username)s"
+
+msgid "Legacy Messages Archive"
+msgstr ""
+
+msgid "Cooperation requests"
+msgstr "בקשות לשיתוף פעולה"
+
+msgid "I am open to be contacted about potential collaboration opportunities!"
+msgstr "אני פתוח ליצירת קשר לגבי הזדמנויות שיתוף פעולה פוטנציאליות!"
+
+msgid "I do NOT wish to be contacted for potential collaboration!"
+msgstr "אני לא מעוניין שיצרו איתי קשר לגבי שיתופי פעולה פוטנציאליים!"
+
+msgid "My Website"
+msgstr "האתר שלי"
+
+msgid "Edit Your Profile"
+msgstr "ערוך את הפרופיל שלך"
+
+msgid "Basic data"
+msgstr "נתונים בסיסיים"
+
+msgid "E-Mail"
+msgstr "דואר אלקטרוני"
+
+msgid "Profile avatar"
+msgstr "אווטאר פרופיל"
+
+msgid "Who are you and what motivates you?"
+msgstr "מי אתה ומה מניע אותך?"
+
+msgid "Tell others something about you!"
+msgstr "ספר לאחרים משהו עליך!"
+
+msgid "Cooperation requests for you"
+msgstr "בקשות לשיתוף פעולה עבורך"
+
+msgid ""
+"Signals your willingness to be contacted by other users who wish to "
+"collaborate with you"
+msgstr "מאותת על נכונותך ליצור קשר עם משתמשים אחרים המעוניינים לשתף איתך פעולה"
+
+msgid "I am open for cooperation requests"
+msgstr "אני פתוח לבקשות לשיתוף פעולה"
+
+msgid "Welcome!"
+msgstr "ברוכים הבאים!"
+
+msgid ""
+"We give you full control over what people can see of you on the platform and "
+"what you hear from us!"
+msgstr ""
+"אנחנו נותנים לך שליטה מלאה על מה שאנשים יכולים לראות ממך בפלטפורמה זו ומה "
+"שאתה שומע מאיתנו!"
+
+msgid "Who is allowed to see you on the platform?"
+msgstr "מי רשאי לראותך בפלטפורמה זו?"
+
+msgid "You can change this setting later in your profile settings"
+msgstr "באפשרותך לשנות הגדרה זו מאוחר יותר בהגדרות הפרופיל שלך"
+
+msgid "in the top right menu"
+msgstr "בתפריט הימני העליון"
+
+msgid "When may we send you email notifications?"
+msgstr "מתי נוכל לשלוח לך הודעות בדוא\"ל?"
+
+msgid ""
+"You can change or customize this setting later in your notification settings"
+msgstr "באפשרותך לשנות או להתאים אישית הגדרה זו מאוחר יותר בהגדרות ההודעות שלך"
+
+msgid "Your privacy: You are in control!"
+msgstr "הפרטיות שלך: אתה בשליטה!"
+
+msgid "by"
+msgstr "מאת"
+
+msgid "Open Preview"
+msgstr "פתח תצוגה מקדימה"
+
+msgid "displayed right now"
+msgstr "מוצג כעת"
+
+msgid "not displayed right now"
+msgstr "לא מוצג כעת"
+
+msgid "inactive"
+msgstr "לא פעיל"
+
+msgid "Activate"
+msgstr "הפעל"
+
+#, python-format
+msgid "Do you really want to delete announcement \"%(title)s\"?"
+msgstr "האם אתה בטוח שברצונך למחוק את ההודעה \"%(title)s\"?"
+
+msgid "Delete announcement"
+msgstr "מחק הודעה"
+
+msgid "Edit Announcement"
+msgstr "ערוך הודעה"
+
+msgid "Create Announcement"
+msgstr "צור הודעה"
+
+msgid "Announcement is enabled"
+msgstr "ההודעה זמינה"
+
+msgid "Announcement Title (internal only)"
+msgstr "כותרת ההודעה (פנימי בלבד)"
+
+msgid "Internal Title"
+msgstr "כותרת פנימית"
+
+msgid "Category for the Announcement"
+msgstr "קטגורייה עבור ההודעה"
+
+msgid "Will be displayed as a small first header in the announcement"
+msgstr "יוצג ככותרת ראשונה קטנה בהודעה"
+
+msgid "Timeframe to display announcement"
+msgstr "מסגרת זמן להצגת ההודעה"
+
+msgid "Display type"
+msgstr "סוג תצוגה"
+
+msgid ""
+"Choose between a markdown editor, or insert your own raw HTML (it is "
+"recommended to have a designer create the HTML!)"
+msgstr ""
+"בחר בין עורך סימון, או הוסף HTML גולמי משלך (מומלץ שמעצבת תיצור את ה-HTML!)"
+
+msgid "The main text of the announcement."
+msgstr "הטקסט הראשי של הודעה זו."
+
+msgid ""
+"Use \"# Big Header\" as main title and \"## Small Header\" as in-between "
+"header. They will be styled appropriately on the dashboard!"
+msgstr ""
+
+msgid "Raw HTML. Should contain a Dismiss-button"
+msgstr "HTML גולמי. צריך להכיל לחצן ביטול"
+
+msgid "External Link for a \"Read more\" link"
+msgstr "קישור חיצוני עבור קישור \"קרא עוד\""
+
+msgid "requires a Save before"
+msgstr "דורש שמירה לפני"
+
+msgid ""
+"User Dashboard Announcements are sticky posts that appear on top of each "
+"user's personal Dashboard."
+msgstr ""
+"הודעות לוח כלים של משתמש מופיעות כתווית דביקה על לוח כלים אישי של כל משתמש."
+
+msgid "An announcement will only appear during its valid-time frame."
+msgstr "הודעה תופיע רק במסגרת הזמן החוקית שלה."
+
+msgid "Only one announcement at a time will ever be shown to a user."
+msgstr "רק הודעה אחת בכל פעם תוצג למשתמש."
+
+msgid ""
+"If the user still has not hidden their introduction-message on the "
+"dashboard, they will not see any announcements."
+msgstr ""
+"אם המשתמש עדיין לא הסתיר את הודעת המבוא שלו בלוח הכלים, הוא לא יראה הודעות."
+
+msgid ""
+"A user can dismiss an announcement, in which case it will disappear and "
+"never be shown again. On the next visit to their Dashboard, another valid "
+"announcement they have not yet hidden may be shown."
+msgstr ""
+"משתמש יכול להסתיר הודעה, במקרה זה היא תיעלם ולעולם לא תוצג שוב. בביקור הבא "
+"בלוח הכלים שלהם, ייתכן שהודעה חוקית נוספת שטרם הוסתרה תהיה מוצגת."
+
+msgid "There are no announcements yet."
+msgstr "אין הודעות עדיין."
+
+msgid "Enable posting to Facebook"
+msgstr "אפשר פרסום בפייסבוק"
+
+msgid "Loading Facebook-Scripts..."
+msgstr ""
+
+msgid ""
+"If nothing happens please disable any addons like Ghostery or NoScript..."
+msgstr ""
+
+msgid "Connect Facebook Account"
+msgstr "חיבור חשבון פייסבוק"
+
+msgctxt "Facebook connect explanation box"
+msgid "Why connect?"
+msgstr "למה להתחבר לפייסבוק?"
+
+msgctxt "Facebook connect explanation box"
+msgid ""
+"When you connect your Facebook account you can easily publish your news "
+"posts on your Facebook timeline. You can also connect your projects/groups "
+"to a Facebook Group or Fan-Site to enable members to publish their news "
+"posts there, too."
+msgstr ""
+"כשאתה מחבר את חשבון הפייסבוק שלך אתה יכול לפרסם בקלות את הפוסטים שלך בציר "
+"הזמן שלך בפייסבוק. באפשרותך גם לחבר את הפרויקטים/קבוצות שלך לקבוצת פייסבוק "
+"או לדף האוהדים כדי לאפשר לחברים לפרסם את הפוסטים שלהם גם שם."
+
+msgctxt "Facebook connect explanation box"
+msgid "For that, we need your permission to publish on Facebook in your name."
+msgstr "לשם כך, אנו זקוקים לאישורך כדי לפרסם בפייסבוק בשמך."
+
+msgctxt "Facebook connect explanation box list header"
+msgid "We guarantee:"
+msgstr "אנו מבטיחים:"
+
+msgctxt "Facebook connect explanation box list items"
+msgid "We will only post exactly what you have written"
+msgstr "אנו נפרסם רק בדיוק את מה שכתבת"
+
+msgctxt "Facebook connect explanation box list items"
+msgid ""
+"We will only post with your explicit consent for every news post, and never "
+"automatically"
+msgstr "אנו נפרסם רק בהסכמתך המפורשת לכל פוסט, ולעולם לא באופן אוטומטי"
+
+msgctxt "Facebook connect explanation box list items"
+msgid ""
+"Except for your name and profile picture, we will obtain absolutely no other "
+"data from your Facebook account"
+msgstr ""
+"מלבד שמך ותמונת הפרופיל שלך, לא יהיה לנו נתונים אחרים מחשבון הפייסבוק שלך"
+
+#, python-format
+msgctxt "Facebook connect explanation box list items"
+msgid ""
+"You can revoke your permission at any time from your %(site_name)s profile "
+"settings"
+msgstr "באפשרותך לבטל את ההרשאה בכל עת דרך הגדרות הפרופיל שלך ב-%(site_name)s"
+
+msgid "Log in with Facebook"
+msgstr "התחבר/י עם פייסבוק"
+
+msgid "Also post this to my Facebook timeline"
+msgstr "פרסם זאת גם בציר הזמן שלי בפייסבוק"
+
+msgid ""
+"When you submit this post, it will be posted on your Facebook timeline "
+"exactly as seen."
+msgstr ""
+"כשתעלה פוסט זה, הוא יפורסם בציר הזמן שלך בפייסבוק בדיוק כפי שניתן לראות."
+
+msgid "Also post this to this project/group's Facebook Fan-Page"
+msgstr "כמו כן פרסם זאת בדף האוהדים של פרוייקט/קבוצה זו בפייסבוק"
+
+msgid ""
+"Also post this as a visitor's post to this project/group's Facebook Fan-Page"
+msgstr ""
+"כמו כן פרסם זאת כפוסט של מבקר בדף האוהדים של הפייסבוק של פרוייקט/קבוצה זו"
+
+msgid ""
+"If you are an Editor of the Fan-Page on Facebook, confirm your Editor access "
+"to post in the voice of that Fan-Page!"
+msgstr ""
+"אם אתה עורך של דף האוהדים בפייסבוק, אשר את גישתך על מנת לפרסם בשם העמוד!"
+
+msgctxt "a link to click on"
+msgid "You can do this here"
+msgstr "אתה יכול לעשות את זה כאן"
+
+msgid "Also post this to this project/group's Facebook Group"
+msgstr "כמו כן פרסם זאת בקבוצת הפייסבוק של פרוייקט/קבוצה זו"
+
+msgid ""
+"When you submit this post, it will be posted to the Facebook Fan-Page of "
+"this project/group, in the voice of that Fan-Page."
+msgstr ""
+"כשתעלה פוסט זה, הוא יפורסם בדף האוהדים בפייסבוק של פרויקט/קבוצה זו, בשמו של "
+"הדף."
+
+msgid ""
+"When you submit this post, it will be posted from your Facebook Account as a "
+"visitor's post to the Facebook Fan-Page of this project/group."
+msgstr ""
+"כשתעלה פוסט זה, הוא יפורסם מחשבון הפייסבוק שלך כמבקר בדף האוהדים של הפרויקט/"
+"קבוצה."
+
+msgid ""
+"When you submit this post, it will be posted from your Facebook Account, "
+"exactly as seen, on the Facebook Group of this project/group."
+msgstr ""
+"כשתעלה פוסט זה הוא יפורסם מחשבון הפייסבוק שלך, בדיוק כפי שנראה כעת, בעמוד "
+"הפייסבוק של הקבוצה/הפרויקט."
+
+msgid ""
+"Connect a Facebook Group or Fan-Page to enable members to publish their news "
+"posts there, too!"
+msgstr ""
+"חבר קבוצת פייסבוק או דף אוהדים כדי לאפשר לחברים לפרסם את הפוסטים שלהם גם שם!"
+
+msgid ""
+"You need to connect your user account to Facebook before you can link this "
+"group/project!"
+msgstr ""
+"עליך לחבר את חשבון המשתמש שלך לפייסבוק לפני שתוכל לקשר קבוצה/פרוייקט זו!"
+
+msgid "Connect a Facebook Group"
+msgstr "חיבור קבוצת פייסבוק"
+
+#, python-format
+msgid ""
+"You can connect your projects and groups to a Facebook Group. Once "
+"connected, your members can choose to share the news posts they write on "
+"%(site_name)s to the Facebook Group. (They need to connect their accounts to "
+"Facebook, as well!)"
+msgstr ""
+"אתה יכול לחבר את הפרויקטים והקבוצות שלך לקבוצת פייסבוק. לאחר ההתחברות, "
+"החברים שלך יכולים לבחור לשתף את הפוסטים שלהם ב-%(site_name)s גם בקבוצת "
+"הפייסבוק. (הם צריכים לחבר את החשבונות שלהם לפייסבוק גם כן)"
+
+msgid ""
+"Please be aware that users can only post to your Group if they would also be "
+"permitted post in it on Facebook!"
+msgstr ""
+"שים לב שמשתמשים יכולים לפרסם בקבוצה שלך רק אם הם יורשו גם לפרסם בה בפייסבוק!"
+
+msgid ""
+"You can find the ID of your Facebook Group on the Info-page in the About tab "
+"of the Group on Facebook."
+msgstr ""
+"באפשרותך למצוא את הפייסבוק ID של הקבוצה בעמוד המידע אודות הקבוצה בפייסבוק."
+
+msgid "Facebook Group to link to"
+msgstr "קבוצת פייסבוק לקישור"
+
+msgid "Group Id or name (example: 1172392116092353)"
+msgstr "פייסבוק ID או שם (לדוגמא: 1172392116092353)"
+
+msgid "Connect a Facebook Fan-Page"
+msgstr "קשר דף אוהדים בפייסבוק"
+
+#, python-format
+msgid ""
+"You can connect your projects and groups to a Facebook Fan-Page. Once "
+"connected, you can publish the posts you write on %(site_name)s directly on "
+"that Fan-Page, if you are one of its administrators on Facebook."
+msgstr ""
+"באפשרותך לחבר את הפרויקטים והקבוצות שלך לדף אוהדים בפייסבוק. לאחר ההתחברות, "
+"אתה יכול לפרסם את הפוסטים שלך ב-%(site_name)s ישרות לדף האוהדים בפייסבוק אם "
+"אתה אחד ממנהלי המערכת בפייסבוק."
+
+msgid ""
+"All other members of your project/group can publish their posts as visitor's "
+"posts on the Fan-Page. (They need to connect their accounts to Facebook, as "
+"well!)"
+msgstr ""
+"כל שאר החברים בפרוייקט/קבוצה שלך יכולים לפרסם את הפוסטים שלהם כפוסטים של "
+"מבקרים בדף האוהדים. (הם צריכים לחבר את החשבונות שלהם לפייסבוק גם כן)"
+
+msgid ""
+"If you wish for other members to be able to post directly to the Fan-Page, "
+"you can make them co-administrators of your project/group (and you must make "
+"them Editors of the Fan-Page on Facebook!). They will be asked to confirm "
+"their Editor access of the Fan-Page, and then will be able to publish to it."
+msgstr ""
+"אם ברצונך שחברים אחרים יוכלו לפרסם ישירות בדף האוהדים, תוכל להפוך אותם "
+"לשותפים בניהול של הפרויקט/קבוצה שלך (ועליך להפוך אותם לעורכים של דף האוהדים "
+"בפייסבוק!). הם יתבקשו לאשר את גישתם כעורך לדף האוהדים ולאחר מכן יוכלו לפרסם "
+"אותו."
+
+msgid ""
+"The unique name of your Fan-Page is the name of the Fan-Page in the URL on "
+"Facebook (example: https://www.facebook.com/myfanpage/)"
+msgstr ""
+"השם הייחודי של דף האוהדים הוא השם של דף האוהדים ב-URL של פייסבוק (לדוגמא:"
+"example: https://www.facebook.com/myfanpage/)"
+
+msgid "Facebook Fan-Page link to"
+msgstr "קישור לדף האוהדים בפייסבוק"
+
+msgid "Fan-Page unique name (example: myfanpage)"
+msgstr "שם ייחודי לקבוצות אוהדים (לדוגמא: myfanpage)"
+
+msgid "Choose from your Pages..."
+msgstr "בחר מתוך הדפים שלך..."
+
+msgid ""
+"You have Editor access to this Fan-Page and can publish your posts directly "
+"to it."
+msgstr "יש לך גישת עורך לדף אוהדים זה ובאפשרותך לפרסם פוסטים שלך ישירות אליו."
+
+msgid ""
+"Editor access of your Facebook-account for this Fan-Page has not been "
+"confirmed. This is required before you can publish your posts in the voice "
+"of the Fan-Page!"
+msgstr ""
+"גישת עורך לחשבון הפייסבוק שלך עבור דף אוהדים זה טרם אושרה. ההרשאה נדרשת כדי "
+"שתוכל לפרסם בשם דף האוהדים!"
+
+msgid "Confirm now!"
+msgstr "אשר עכשיו!"
+
+msgid "Select one of your Facebook pages to connect to"
+msgstr "בחר אחד מדפי הפייסבוק שלך להתחבר אליו"
+
+msgid "You do not seem to be Editor or Admin of any pages."
+msgstr "נראה שאינך עורך או מנהל של דפים כלשהם."
+
+msgid ""
+"We could not retrieve your groups from Facebook because of an error. Please "
+"contact an administrator!"
+msgstr ""
+"לא היתה לנו אפשרות לאחזר את הקבוצות שלך מפייסבוק עקב שגיאה. נא פנה למנהל "
+"מערכת!"
+
+msgid "Are you sure you want to delete the item?"
+msgstr "האם אתה בטוח שברצונך למחוק את הפריט?"
+
+msgid "Delete comment"
+msgstr "מחק תגובה"
+
+msgid "Report offensive comment"
+msgstr "דווח על תגובה פוגענית"
+
+msgid "Write comment..."
+msgstr "כתוב תגובה..."
+
+#, python-format
+msgid "Show all %(count)s comments"
+msgstr "הראה את כל %(count)s התגובות"
+
+msgid "Timeline"
+msgstr "ציר זמן"
+
+msgid "Contents"
+msgstr "תוכן העניינים"
+
+msgid "Close to me"
+msgstr "קרוב אליי"
+
+msgid "Show large map"
+msgstr "הראה מפה גדולה"
+
+msgid "Do not show this again"
+msgstr "אל תראה זאת שוב"
+
+msgid "Preview"
+msgstr "תצוגה מקדימה"
+
+msgid "Continue reading"
+msgstr "המשך לקרוא"
+
+msgid ""
+"What's the latest news that you would like to share with all users of the "
+"platform?"
+msgstr "מהן החדשות האחרונות שאתה רוצה לשתף עם כל משתמשי הפלטפורמה?"
+
+msgid ""
+"Your recently visited Pads, Files, Events, Todos and other content will be "
+"shown here."
+msgstr ""
+"לוחות העריכה, קבצים, אירועים, מטלות ותוכן אחר שביקרת בו לאחרונה יופיע כאן."
+
+msgid "You created an idea"
+msgstr "יצרת רעיון חדש"
+
+msgctxt ""
+"This appears next to new items in the timeline, as in '<Jane> created a new "
+"item'"
+msgid "created an idea"
+msgstr "יצר/ה רעיון"
+
+msgid "Menu"
+msgstr "תפריט"
+
+msgid "Quick Search"
+msgstr "חיפוש מהיר"
+
+msgid "Create content"
+msgstr "יצירת תוכן"
+
+msgid "Home"
+msgstr "דף הבית"
+
+msgid "Rocket.Chat"
+msgstr "Rocket.Chat"
+
+msgid "Change language"
+msgstr "שנה שפה"
+
+msgid "Register a new account"
+msgstr "רישום חשבון חדש"
+
+msgid "Offer"
+msgstr "הצעה"
+
+msgid "Post new Offer"
+msgstr "פרסם הצעה חדשה"
+
+msgid "Edit My Profile"
+msgstr "ערוך את הפרופיל שלי"
+
+msgid "What's happening where and when? What's to discover? Where to meet?"
+msgstr "מה קורה איפה ומתי? מה יש לגלות? איפה להיפגש?"
+
+msgid ""
+"Groups help improve communication and collaboration in large networks or "
+"organisations. Within a Group you can bring together several smaller "
+"projects or workgroups."
+msgstr ""
+"קבוצות מסייעות לשפר את התקשורת ושיתוף הפעולה ברשתות או ארגונים גדולים. בתוך "
+"קבוצה באפשרותך לאחד מספר פרויקטים קטנים יותר או קבוצות עבודה."
+
+msgid ""
+"What will our region look like in the future? What is your idea for an "
+"environmentally friendly and sustainable region? Find co-campaigners for "
+"your project ideas."
+msgstr ""
+"איך יראה האזור שלנו בעתיד? מה הרעיון שלך לאזור ידידותי לסביבה ובר קיימא? חפש "
+"שותפים לקידום רעיונות הפרויקט שלך."
+
+msgid ""
+"Do you have something to share, sell or give away? Are you searching for "
+"something?"
+msgstr "האם יש לך משהו לשתף, למכור או לתת? האם אתה מחפש משהו?"
+
+msgid ""
+"Organize your projects or initiatives efficiently with your fellow "
+"campaigners. All important tools for collaborating in one place: News, Pads, "
+"Events, Todos, and more."
+msgstr ""
+"ארגן את הפרויקטים או היוזמות שלך ביעילות עם שותפיך. כל הכלים החשובים לשיתוף "
+"פעולה במקום אחד: חדשות, לוחות עריכה משותפת, אירועים, מטלות, ועוד."
+
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "Welcome"
+msgstr "ברוכים הבאים ל"
+
+#, python-format
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "to %(portal_name)s"
+msgstr "ל-%(portal_name)s"
+
+#, python-format
+msgid ""
+"Good to see you! At %(portal_name)s you can collaborate with others in "
+"Projects and Groups. Whether Initiative, Organisation, or Network - "
+"%(portal_name)s offers all the necessary tools for your online collaboration."
+msgstr ""
+"טוב לראותך! ב-%(portal_name)s אתה יכול ליצור שיתוף פעולה עם אחרים בפרויקטים "
+"וקבוצות. בים אם יוזמה, ארגון או רשת- %(portal_name)s מציע לך כלים הדרושים לשת"
+"\"פ מקוון."
+
+msgid "Jetzt anmelden und mitgestalten"
+msgstr ""
+
+msgid "Show more Projects"
+msgstr "הצג פרוייקטים נוספים"
+
+msgid "Add Widget"
+msgstr "הוסף יישומון"
+
+msgid "Edit Widget"
+msgstr "ערוך יישומון"
+
+msgid "More"
+msgstr "עוד"
+
+msgid "Widget title"
+msgstr "כותרת יישומון"
+
+msgid "Widget Icon (FA)"
+msgstr "סמל יישומון"
+
+msgid "Font-awesome Widget Icon"
+msgstr ""
+
+msgid "Delete widget"
+msgstr "מחיקת יישומון"
+
+msgid "(This widget has no additional options)"
+msgstr "(ליישומון זה אין אפשרויות נוספות)"
+
+msgid "All members"
+msgstr "כל החברים"
+
+msgid "There are no projects in this group yet."
+msgstr "אין פרויקטים בקבוצה זו עדיין."
+
+msgid "Add project"
+msgstr "הוספת פרויקט"
+
+msgid "Attach Images/Files"
+msgstr "צירוף תמונות/קבצים"
+
+msgid "Attach image/file"
+msgstr "צרף תמונה/קובץ"
+
+msgid "You cannot put this widget on a team dashboard."
+msgstr "אין באפשרותך למקם יישומון זה על לוח כלים של הצוות."
+
+msgid "You cannot put this widget on a user dashboard."
+msgstr "אין באפשרותך למקם יישומון זה בלוח כלים למשתמש."
+
+msgid "Widget not found."
+msgstr "יישומון לא נמצא."
+
+msgid "No related projects/groups"
+msgstr "אין פרויקטים/קבוצות קשורים"
+
+msgid "Assign"
+msgstr "שייך"
+
+msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
+msgstr ""
+
+msgid "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
+msgstr ""
+
+msgid "Change of Terms of Services and Privacy Policy"
+msgstr "שינוי תנאי השירות ומדיניות הפרטיות"
+
+msgid "Our Terms of Services and Privacy Policy"
+msgstr "תנאי שירות ומדיניות הפרטיות שלנו"
+
+msgid ""
+"We prioritise the protection of your data, so we updated our privacy policy "
+"and terms of services. To continue enjoying an optimal use of our plattform, "
+"we encourage you to read and accept the modifications."
+msgstr ""
+"הגנה על הנתונים שלך היא בראש סדר העדיפויות שלנו, לכן עדכנו את מדיניות "
+"הפרטיות ותנאי השימוש שלנו. כדי להמשיך להנות משימוש אופטימלי בפלטפורמה שלנו, "
+"אנו ממליצים לך לקרוא ולאשר את השינויים."
+
+msgid ""
+"We prioritise the protection of your data, which is reflected in our privacy "
+"policy and terms of services. We encourage you to read and accept the terms."
+msgstr ""
+"הגנה על הנתונים שלך היא בראש סדר העדיפויות שלנו, וכך משתקף בתנאי השירות "
+"שלנו. אנו ממליצים לך לקרוא ולאשר את התנאים."
+
+#, python-format
+msgid ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join %(team_name)s."
+msgstr ""
+"שלום %(admin_name)s,\n"
+"\n"
+"המשתמש %(user_name)s רוצה להצטרף ל-%(team_name)s."
+
+msgid "Nutzungsbedingungen"
+msgstr ""
+
+msgid "(Deleted User)"
+msgstr "(משתמש שנמחק)"
+
+#, python-format
+msgid "<i>Renderer for %(model_name)s not found!</i>"
+msgstr ""
+
+msgid "Team Description"
+msgstr "תיאור צוות"
+
+msgid "About Us"
+msgstr "אודותנו"
+
+msgid "Question about"
+msgstr "שאלה על"
+
+msgid "Test email sent!"
+msgstr "בדיקת אימות נשלחה לדוא\"ל!"
+
+#, python-format
+msgid "The language \"%s\" is not supported"
+msgstr "השפה \"%s\" אינה נתמכת"
+
+msgid "No model given to export data from."
+msgstr "לא ניתן מודל לייצוא נתונים מ.."
+
+msgid "Your news post was also posted on your Facebook timeline."
+msgstr "הפוסט שלך פורסם גם בציר הזמן שלך בפייסבוק."
+
+msgid ""
+"We could not post this news post on your Facebook timeline. If this problem "
+"persists, please make sure you have granted us all required Facebook "
+"permissions, or try disconnecting and re-connecting your Facebook account!"
+msgstr ""
+"לא היתה אפשרות לפרסם פוסט זה בציר הזמן שלך בפייסבוק. אם בעיה זו נמשכת וודא "
+"כי נתת לנו את כל ההרשאות הנדרשות, או נסה להתנתק ולהתחבר מחדש לחשבון הפייסבוק "
+"שלך!"
+
+msgid "Your news post was also posted to the Facebook Fan-Page."
+msgstr "הפוסט שלך פורסם גם בדף האוהדים בפייסבוק."
+
+msgid ""
+"Your news post was also posted on the Facebook Fan-Page as a visitor's post."
+msgstr "הפוסט שלך פורסם בדף האוהדים של פייסבוק כפוסט של אורח."
+
+msgid "Your news post was also posted in the Facebook Group."
+msgstr "הפוסט שלך פורסם גם בקבוצת הפייסבוק."
+
+msgid ""
+"We could not post this news post on the Facebook Group/Fan-Page. If this "
+"problem persists, please try disconnecting and re-connecting your Facebook "
+"account and make sure you allow us to post with a visibility of at least "
+"\"Friends\". If you are trying to post as a Fan-Page, make sure you accept "
+"the necessary permissions for us to post there, and make sure you are an "
+"Editor of the Fan-Page! If this doesn't work, contact this project/group's "
+"administrator!"
+msgstr ""
+"לא יכולנו לפרסם פוסט זה בעמוד הקבוצה/אוהדים. אם בעיה זו נמשכת, נא נסה להתנתק "
+"ולהתחבר מחדש לחשבון הפייסבוק שלך ולוודא כי הרשאת הנראות של הפוסט היא ל\"חברים"
+"\" לפחות. אם אתה מנסה לפרסם מתוף דף האוהדים, וודא שאתה מאשר את ההרשאות "
+"הנחוצות לנו על מנת לגשת לשם, וכי אתה עורך בעמוד המעריצים! אם זה לא עובד, צור "
+"קשר עם מנהל מערכת הפרויקט/קבוצה!"
+
+msgid ""
+"You can only connect to either a Facebook Group or a Fan-Page, but not both!"
+msgstr "אתה יכול להתחבר רק לקבוצת פייסבוק או לדף מעריצים, אבל לא לשניהם!"
+
+msgid "Please enter a numeric Facebook Group-ID only!"
+msgstr "נא הזן ID מספרי בלבד לקבוצת פייסבוק!"
+
+msgid ""
+"The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make "
+"sure you have entered the correct ID for your Group/Fan-Page!"
+msgstr ""
+"ID של דף האוהדים או עמוד הקבוצה בפייסבוק לא נמצא! וודא שהכנסת את ה-ID התואם "
+"לקבוצה/דף!"
+
+msgid ""
+"We could not obtain access to the Fan-Page for your connected Facebook "
+"Account. Please check that you entered the correct Fan-Page name, and that "
+"you are an Editor of that Fan-Page!"
+msgstr ""
+"לא הצלחנו להשיג גישה לדף האוהדים לחשבון הפייסבוק שמחובר. נא וודא כי הזנת את "
+"השם הנכון ושאתה אכן עורך של דף זה!"
+
+msgid "This group does not have a Facebook Fan-Page associated with it!"
+msgstr "לקבוצה זו אין דף אוהדים המקושר אליה!"
+
+msgid "Your Editor access for the linked Facebook Fan-Page was confirmed!"
+msgstr "גישתך כעורך של דף האוהדים המקושר אושרה!"
+
+msgid ""
+"An error occured when trying to disconnect your facebook account! Please "
+"contact an administrator!"
+msgstr "אירעה שגיאה בעת ניסיון לנתק את חשבון הפייסבוק שלך! נא פנה למנהל מערכת!"
+
+msgid "Your Facebook account was successfully disconnected from this account."
+msgstr "חשבון הפייסבוק שלך נותק בהצלחה מחשבון זה."
+
+msgid "Sorry, only portal administrators can create projects and groups!"
+msgstr "מצטערים, רק מנהלי פורטל יכולים ליצור פרויקטים וקבוצות!"
+
+msgid ""
+"Sorry, only portal administrators can create Groups! You can either create a "
+"Project, or write a message to one of the administrators to create a Group "
+"for you. Below you can find a listing of all administrators."
+msgstr ""
+"מצטערים, רק מנהלי פורטל יכולים ליצור קבוצות! באפשרותך ליצור פרוייקט, או "
+"לכתוב הודעה לאחד המנהלים כדי ליצור קבוצה עבורך. להלן ניתן למצוא רשימה של כל "
+"מנהלי המערכת."
+
+#, python-format
+msgid "%(team_type)s \"%(group)s\" was created successfully."
+msgstr "%(team_type)s  \"%(group)s\" נוצר בהצלחה."
+
+msgid "Create"
+msgstr "צור"
+
+msgid "Conference successfully started and user accounts activated"
+msgstr "הוועידה הופעלה בהצלחה וחשבונות משתמשים הופעלו"
+
+msgid "Conference successfully finished and user accounts deactivated"
+msgstr "הוועידה הסתיימה בהצלחה וחשבונות משתמשים הושבתו"
+
+msgid "Successfully deactivated user account"
+msgstr "חשבון משתמש הושבת בהצלחה"
+
+msgid "Successfully activated user account"
+msgstr "חשבון משתמש הופעל בהצלחה"
+
+msgid "Successfully removed user"
+msgstr "משתמש הוסר בהצלחה"
+
+msgid "User was not created"
+msgstr "המשתמש לא נוצר"
+
+msgid "Workshop username"
+msgstr "שם משתמש לסדנה"
+
+msgid "First Name"
+msgstr "שם פרטי"
+
+msgid "Last Name"
+msgstr "שם משפחה"
+
+#, python-format
+msgid "The %(team_type)s was changed successfully."
+msgstr "ה-%(team_type)s השתנה בהצלחה."
+
+msgid "This action is not available directly!"
+msgstr "פעולה זו אינה זמינה ישירות!"
+
+#, python-format
+msgid ""
+"You have requested to join the %(team_type)s “%(team_name)s”. You will "
+"receive an email as soon as a team administrator responds to your request."
+msgstr ""
+"ביקשת להצטרף ל-%(team_type)s “%(team_name)s”. אתה תקבל הודעת דואר אלקטרוני "
+"ברגע שמנהל צוות יגיב לבקשתך."
+
+#, python-format
+msgid ""
+"You had already been invited to \"%(team_name)s\" and have now been made a "
+"member immediately!"
+msgstr "כבר הוזמנת ל-\"%(team_name)s\" וכעת הפכת לחבר באופן מיידי!"
+
+#, python-format
+msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgstr "כעת אתה חבר ב-%(team_type)s “%(team_name)s”. ברוך הבא!"
+
+#, python-format
+msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
+msgstr "חברותך מ- %(team_type)s “%(team_name)s” הוסרה."
+
+#, python-format
+msgid ""
+"You cannot leave this %(team_type)s. You are the only administrator left."
+msgstr "אין באפשרותך לעזוב את %(team_type)s. אתה מנהל המערכת היחיד שנותר."
+
+#, python-format
+msgid ""
+"Your join request was withdrawn from %(team_type)s “%(team_name)s” "
+"successfully."
+msgstr "בקשת ההצטרפות שלך ל-%(team_type)s  “%(team_name)s” בוטלה בהצלחה."
+
+#, python-format
+msgid ""
+"Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
+msgstr "ההזמנה שלך ל-%(team_type)s “%(team_name)s” נדחתה בהצלחה."
+
+#, python-format
+msgid ""
+"User %(username)s had already requested membership and has now been made a "
+"member immediately!"
+msgstr "המשתמש %(username)s כבר ביקש חברות וכעת הפך לחבר באופן מיידי!"
+
+#, python-format
+msgid "I invited you to join \"%(team_name)s\"!"
+msgstr "הזמנתי אותך להצטרף ל-\"%(team_name)s\"!"
+
+#, python-format
+msgid "User %(username)s was successfully invited!"
+msgstr "המשתמש %(username)s הוזמן בהצלחה!"
+
+#, python-format
+msgid "You cannot remove “%(username)s” form this team. Only one admin left."
+msgstr ""
+"אין באפשרותך להסיר את המשתמש “%(username)s” מצוות זה. נותר רק מנהל אחד."
+
+#, python-format
+msgid "You cannot remove yourself from a %(team_type)s."
+msgstr "אין באפשרותך להסיר עצמך מ-%(team_type)s."
+
+#, python-format
+msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
+msgstr "אין באפשרותך להסיר את \"%(username)s\" מצוות זה. נותר רק מנהל אחד."
+
+#, python-format
+msgid ""
+"Your join request was withdrawn from %(team_type)s \"%(team_name)s\" "
+"successfully."
+msgstr "בקשת ההצטרפות שלך ל-%(team_type)s \"%(team_name)s\" הוסרה בהצלחה."
+
+#, python-format
+msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
+msgstr "הזמנתך למשתמש \"%(username)s\" הוסרה בהצלחה."
+
+#, python-format
+msgid "User \"%(username)s\" is no longer a member."
+msgstr "המשתמש \"%(username)s\" אינו חבר יותר."
+
+#, python-format
+msgid "%(team_name)s was re-activated successfully!"
+msgstr "%(team_name)s הופעל מחדש בהצלחה!"
+
+#, python-format
+msgid "%(team_name)s was deactivated successfully!"
+msgstr "%(team_name)s הושבת בהצלחה!"
+
+msgid ""
+"Sorry, only portal administrators can deactivate Groups! You can write a "
+"message to one of the administrators to deactivate it for you. Below you can "
+"find a listing of all administrators."
+msgstr ""
+"מצטערים, רק מנהלי מערכת פורטל יכולים להשבית קבוצות! אתה יכול לשלוח הודעה "
+"לאחד המנהלים שיבצע פעולה זו עבורך. להלן רשימת מנהלי המערכת."
+
+msgid "This project/group is already active!"
+msgstr "פרויקט/קבוצה זו כבר פעילים!"
+
+msgid "This project/group is already inactive!"
+msgstr "פרויקט/קבוצה זו כבר לא פעילים!"
+
+msgid "Only group/project members have permission to do this!"
+msgstr "רק לחברי הקבוצה/פרויקט יש הרשאה לעשות זאת!"
+
+#, python-format
+msgid ""
+"You may only invite %(maximum_number)d people at once. Any emails above that "
+"number have been ignored."
+msgstr ""
+"באפשרותך להזמין רק %(maximum_number)d אנשים בו זמנית. המערכת התעלמה מכתובות "
+"דוא\"ל שמעל למספר זה."
+
+#, python-format
+msgid "Sorry, these did not seem to be valid email addresses: %s"
+msgstr "מצטערים, נראה כי כתובת הדוא\"ל אינה תקפה: %s"
+
+#, python-format
+msgid ""
+"These people have been sent an email invite only recently. You can send them "
+"an invite again tomorrow: %s"
+msgstr ""
+"הזמנת דוא\"ל נשלחה לאנשים אלו לאחרונה. תוכל לשלוח להם הזמנה נוספת מחר: %s"
+
+#, python-format
+msgid "Good news! The people with these addresses are already members: %s"
+msgstr "חדשות טובות! האנשים עם כתובות אלו כבר חברים: %s"
+
+#, python-format
+msgid ""
+"The people with these addresses already have a user account and already have "
+"a pending invitation: %s"
+msgstr "לאנשים תחת כתובות אלו כבר יש חשבון משתמש והזמנה: %s"
+
+#, python-format
+msgid ""
+"The people with these addresses already have a registered user account and "
+"have been invited directly: %s"
+msgstr "לאנשים תחת כתובות אלו יש כבר חשבון משתמש רשום וכבר הוזמנו: %s"
+
+#, python-format
+msgid ""
+"Success! We are now sending out invitations to these email addresses: %s"
+msgstr "הצלחה! אנו שולחים כעת הזמנות לכתובות דוא\"ל הבאות: %s"
+
+msgid "There was an error when trying to delete the invitation."
+msgstr "אירעה שגיאה בעת ניסיון למחוק את ההזמנה."
+
+msgid "The invitation was successfully deleted."
+msgstr "ההזמנה נמחקה בהצלחה."
+
+msgid "Your selection for showing this item in projects/groups was updated."
+msgstr "בחירתך להציג פריט זה בפרויקטים/קבוצות עודכנה."
+
+#, python-format
+msgid "This item is now being shown in these projects/groups: %(group_names)s"
+msgstr "פריט זה מוצג כעת בפרויקטים/קבוצות אלה: %(group_names)s"
+
+#, python-format
+msgid "The %s-app was activated!"
+msgstr "היישומון %s הופעל!"
+
+msgid "No appname given for adding containers."
+msgstr "לא הוגדר שם אפלירציה על מנת להוסיך קונטיינרים."
+
+msgid "Your idea was deleted successfully."
+msgstr "הרעיון שלך נמחק בהצלחה."
+
+msgid ""
+"There was an error while processing your avatar. Please make sure you "
+"selected a large enough part of the image!"
+msgstr ""
+"אירעה שגיאה בעת עיבוד האווטאר שלך. נא ודא שבחרת חלק גדול מספיק של התמונה!"
+
+msgid ""
+"There was an error while processing your avatar. The image file might be "
+"broken or the file transfer was interrupted."
+msgstr ""
+"אירעה שגיאה בעת עיבוד האווטאר שלך. ייתכן שקובץ התמונה אינו שלם או שהעברת "
+"הקובץ הופסקה באמצע."
+
+msgid "<Root folder>"
+msgstr "<Root folder>"
+
+#, python-format
+msgid ""
+"You are now located in %(group_name)s. You were redirected here from another "
+"project or group that links to this item."
+msgstr ""
+"אתה ממקום כעת ב- %(group_name)s. נותבת לכאן מפרויקט או קבוצה אחרת שמקושר "
+"לפריט זה."
+
+#, python-format
+msgid ""
+"Container \"%(title)s\" could not be deleted because it contained objects "
+"that could not be deleted."
+msgstr ""
+"לא היתה אפשרות למחוק את הקונטיינר \"%(title)s\" מאחר שהכיל אובייקטים שלא "
+"ניתן למחוק."
+
+#, python-format
+msgid "You do not have permissions to delete \"%(title)s\"."
+msgstr "אין לך הרשאה למחוק את \"%(title)s\"."
+
+#, python-format
+msgid "Object \"%(title)s\" could not be deleted."
+msgstr "לא היתה אפשרות למחוק את הפריט \"%(title)s\"."
+
+#, python-format
+msgid "%(numobjects)d objects were deleted successfully."
+msgstr "%(numobjects)d פריטים נמחק בהצלחה."
+
+#, python-format
+msgid "Object \"%(title)s\" was deleted successfully."
+msgstr "הפריט \"%(title)s\" נמחק בהצלחה."
+
+#, python-format
+msgid "%(numobjects)d other objects were deleted."
+msgstr "%(numobjects)d פריטים אחרים נמחקו."
+
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr "לא נמצאו %(verbose_name)s התואמים לשאלה"
+
+msgid "Your profile was edited successfully."
+msgstr "הפרופיל שלך נערך בהצלחה."
+
+msgid ""
+"Your user account is associated with an integrated Portal. This account's "
+"email address is fixed and therefore was left unchanged."
+msgstr ""
+"חשבון המשתמש שלך משויך לפורטל משולב. כתובת הדואר האלקטרוני של חשבון זה תוקנה "
+"ולכן נותרה ללא שינוי."
+
+msgid ""
+"You have changed your email address. We will soon send you an email to that "
+"address with a confirmation link. Until you click on that link, your profile "
+"will retain your old email address!"
+msgstr ""
+"שינית את כתובת הדואר האלקטרוני שלך. בקרוב נשלח לך דוא\"ל לכתובת החדשה עם "
+"קישור לאימות. עד שתלחץ על הקישור, הפרופיל שלך ישמור על כתובת הדוא\"ל הישנה "
+"שלך!"
+
+msgid ""
+"Sorry, your profile could not be saved because there was an error while "
+"processing the avatar!"
+msgstr "מצטערים, הפרופיל שלך לא יכל להשמר מאחר שאירעה שגיאה בעת עיבוד האווטאר!"
+
+msgid "Sorry, something went wrong while saving your profile!"
+msgstr "מצטערים, משהו השתבש בזמן שמירת הפרופיל שלך!"
+
+msgid ""
+"Your profile was deleted successfully. We're sorry you are no longer with us."
+msgstr "הפרופיל שלך נמחק בהצלחה. אנחנו מצטערים שאתה כבר לא איתנו."
+
+#, python-format
+msgid ""
+"You are the only administrator left for \"%s\". Please appoint a different "
+"administrator or delete it first."
+msgstr ""
+"אתה מנהל המערכת היחיד שנותר עבור \"%s\". נא מנה מנהל מערכת אחר או מחק אותו "
+"תחילה."
+
+msgid ""
+"Sorry, we could not connect your user account because of an internal error. "
+"Please contact a system administrator!"
+msgstr ""
+"מצטערים, לא היתה אפשרות לחבר את חשבון המשתמש שלך עקב שגיאה פנימית. נא פנה "
+"למנהל מערכת!"
+
+msgid ""
+"Sorry, we could not connect your user account, because we could not retrieve "
+"important user account infos. Please contact a system administrator!"
+msgstr ""
+"מצטערים, לא היתה לנו אפשרות לחבר את חשבון המשתמש שלך, מכיוון שלא היתה אפשרות "
+"לאחזר פרטי חשבון משתמש חשובים. נא פנה למנהל מערכת!"
+
+msgid ""
+"Sorry, you cannot log in because your account is suspended. Please contact a "
+"system administrator!"
+msgstr ""
+"מצטערים, אין באפשרותך להיכנס מאחר שהחשבון שלך מושעה. נא פנה למנהל מערכת!"
+
+#, python-format
+msgid ""
+"Your account \"%(user)s\" was registered successfully. Welcome to the "
+"community!"
+msgstr "החשבון שלך \"%(user)s\" נרשם בהצלחה. ברוכים הבאים לקהילה!"
+
+#, python-format
+msgid ""
+"User \"%(user)s\" was registered successfully. The account will need to be "
+"approved before you can log in. We will send an email to your address "
+"\"%(email)s\" when this happens."
+msgstr ""
+"המשתמש \"%(user)s\" נרשם בהצלחה. החשבון יצטרך להיות מאושר בטרם תורשה להתחבר. "
+"אנו נשלח מייל לכתובתך \"%(email)s\" כאשר זה קורה."
+
+#, python-format
+msgid ""
+"User \"%(email)s\" was registered successfully. You will receive an "
+"activation email from us in a few minutes. You need to confirm the email "
+"address before you can log in."
+msgstr ""
+"המשתמש \"%(email)s\" נרשם בהצלחה. בעוד כמה דק' תקבל דוא\"ל הפעלה מאיתנו. יש "
+"לאמת את כתובת הדוא\"ל לפני שתוכל להתחבר."
+
+msgid "The invite token you have used does not exist!"
+msgstr "אסימון ההזמנה שהשתמשת בו אינו קיים!"
+
+msgid ""
+"Sorry, but the invite token you have used is not active yet or not active "
+"anymore!"
+msgstr "מצטערים, אך אסימון ההזמנה שהשתמשת בו אינו פעיל עדיין או אינו פעיל עוד!"
+
+msgid ""
+"Token invitations applied. You are now a member of the associated projects/"
+"groups!"
+msgstr "אסימון ההזמנות הוחל. אתה כעת חבר בקבוצות והפרויקטים המקושרים!"
+
+msgid ""
+"There was an error while processing your invites. Some of your invites may "
+"not have been applied."
+msgstr "אירעה שגיאה בעת עיבוד ההזמנות שלך. יתכן שחלק מההזמנות שלך לא הוזנו."
+
+msgid "You are already logged in!"
+msgstr "אתה כבר מחובר!"
+
+msgid "Please enter a token!"
+msgstr "אנא הכנס אסימון!"
+
+msgid "Sorry, but the invite token you have used does not seem to be valid!"
+msgstr "מצטערים, אך נראה כי אסימון ההזמנה בו השתמשת אינו תקף!"
+
+#, python-format
+msgid "Welcome to %(portal_name)s!"
+msgstr "ברוכים הבאים אל %(portal_name)s!"
+
+msgid ""
+"The user account you were looking for does not exist! Their registration was "
+"probably already denied."
+msgstr "חשבון המשתמש שחיפשת אינו קיים! הרישום שלהם כנראה כבר נדחה."
+
+msgid "The user account was already approved, but thank you anyway!"
+msgstr "חשבון המשתמש כבר אושר, אבל תודה בכל מקרה!"
+
+#, python-format
+msgid ""
+"Thank you for approving user %(username)s (%(email)s)! An introduction-email "
+"was sent out to them and they can now log in to the site."
+msgstr ""
+"תודה על אישור המשתמש %(username)s (%(email)s)! הודעת דוא\"ל היכרות נשלחה "
+"וכעת ניתן לו להתחבר לאתר."
+
+#, python-format
+msgid ""
+"The user account %(username)s (%(email)s) was already approved, so you "
+"cannot deny the registration! If this is a problem, you may want to "
+"deactivate the user manually from the admin interface."
+msgstr ""
+"חשבון המשתמש %(username)s (%(email)s) כבר אושר, כך שאין באפשרותך לדחות את "
+"הרישום! אם זוהי בעיה, יתכן שתרצה להשבית את המשתמש באופן ידני מממשק המנהל."
+
+#, python-format
+msgid ""
+"You have denied the join request of %(username)s (%(email)s)! An email was "
+"sent to let them know."
+msgstr ""
+"דחית את בקשת ההצטרפות של המשתמש %(username)s (%(email)s)! הודעת דוא\"ל נשלחה "
+"על מנת ליידעם."
+
+msgid ""
+"The user account you were looking for does not exist! Your registration was "
+"probably already denied or the email token has expired."
+msgstr ""
+"חשבון המשתמש שחיפשת אינו קיים! סביר להניח שהרישום שלך כבר נדחה או שפג תוקפו "
+"של האסימון."
+
+msgid "The email for this account seems to already have been confirmed!"
+msgstr "נראה שהודעת הדוא\"ל עבור חשבון זה כבר אושרה!"
+
+msgid "The link you supplied for the email confirmation is no longer valid!"
+msgstr "הקישור שסיפקת לאישור הדוא\"ל אינו חוקי עוד!"
+
+msgid ""
+"The email you are trying to confirm has already been confirmed or belongs to "
+"another user!"
+msgstr "כתובת הדוא\"ל שאתה מנסה לאמת כבר אומתה בעבר או שייכת למשתמש אחר!"
+
+#, python-format
+msgid ""
+"Your email address %(email)s was successfully confirmed! Welcome to the "
+"community!"
+msgstr "כתובת הדוא\"ל שלך %(email)s אומתה בהצלחה! ברוכים הבאים לקהילה!"
+
+#, python-format
+msgid ""
+"Your email address %(email)s was successfully confirmed! However, you "
+"account is not active yet and will have to be approved by an administrator "
+"before you can log in. We will send you an email as soon as that happens!"
+msgstr ""
+"כתובת הדוא\"ל שלך %(email)s אומתה בהצלחה!, עם זאת, חשבונך עדיין לא פעיל "
+"וצריך להיות מאושר על ידי מנהל המערכת בטרם תוכל להתחבר. אנו נשלח לך דוא\"ל "
+"ברגע שזה יקרה!"
+
+msgid "The unsubscribe link you have clicked does not seem to be valid!"
+msgstr "הקישור להסרת כתובת הדוא\"ל מרשימת התפוצה שלחצת עליו אינו חוקי יותר!"
+
+#, python-format
+msgid ""
+"We have unsubscribed your email \"%(email)s\" from our mailing list. You "
+"will not receive any more emails from us!"
+msgstr ""
+"כתובת הדוא\"ל שלך \"%(email)s\" הוסרה מרשימת התפוצה שלנו. לא תקבל עוד מיילים "
+"מאיתנו!"
+
+msgid ""
+"Welcome! You were invited to the following projects and groups. Please click "
+"the dropdown button to accept or decline the invitation for each of them!"
+msgstr ""
+"ברוך הבא! הוזמנת לפרויקטים והקבוצות הבאות. אנא לחץ על הלחצן הנפתח על מנת "
+"לאשר או לדחות כל אחד מהם!"
+
+msgid "Your Announcement was created successfully."
+msgstr "ההודעה שלך נוצרה בהצלחה."
+
+msgid "Your Announcement was saved successfully."
+msgstr "ההודעה שלך נשמרה בהצלחה."
+
+msgid "Your Announcement was deleted successfully."
+msgstr "ההודעה שלך נמחקה בהצלחה."
+
+msgid "Your Announcement was activated successfully."
+msgstr "ההודעה שלך הופעלה בהצלחה."
+
+msgid "Your Announcement was deactivated successfully."
+msgstr "ההודעה שלך הושבתה בהצלחה."
+
+#, python-format
+msgid ""
+"You are not currently a member of %s! If you wish you can request to become "
+"a member below."
+msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש להיות חבר בלחצן שלמטה."
+
+msgid "Your changes have been saved."
+msgstr "השינויים שביצעת נשמרו בהצלחה."

@@ -1,0 +1,7 @@
+{% load i18n %}
+
+{% for group in my_conference_groups %}
+	<a class="nav-button nav-header-textlink hidden-during-search highlighted" href="{{ group.get_absolute_url }}" title="{{ group.name }}">
+		{{ group.name|truncatechars:30 }}
+	</a>
+{% endfor %}

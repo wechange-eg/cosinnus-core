@@ -30,6 +30,14 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
     last_name = forms.CharField(widget=forms.HiddenInput(), required=False)
     copy_profile = forms.BooleanField(required=False)
 
+    error_messages = {
+        'email_taken':
+        _("An account already exists with this e-mail address."
+          " To make sure that you are the owner of this account"
+          " please sign in to that account first, then connect"
+          " your {} account.")
+    }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if not self.sociallogin.account.provider == 'wechange':
@@ -58,6 +66,15 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
                              messages.SUCCESS,
                              _('Successfully signed in as {}.').format(user.get_full_name()))
 
+    def validate_unique_email(self, value):
+        try:
+            return super().validate_unique_email(value)
+        except forms.ValidationError:
+            provider = self.sociallogin.account.get_provider()
+            raise forms.ValidationError(
+                self.error_messages['email_taken'].format(provider.name)
+            )
+
     def setup_profile(self, user):
         if not user.cosinnus_profile:
             return get_user_profile_model()._default_manager.get_for_user(user)
@@ -74,13 +91,6 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
                                                    copy_profile)
         profile.add_redirect_on_next_page(redirect_with_next(welcome_page, request),
             message=None, priority=True)
-
-        # add welcomepage
-        if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
-            profile.add_redirect_on_next_page(
-                redirect_with_next(reverse('cosinnus:welcome-settings'),
-                    request),
-                message=None, priority=True)
 
         # set visibility
         if settings.COSINNUS_USER_DEFAULT_VISIBLE_WHEN_CREATED:
@@ -130,9 +140,9 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
         return profile
 
     def fetch_profile_data(self):
-        token = self.sociallogin.token
+        token = self.sociallogin.meeting_id
         profile_url = '{}/o/profile/'.format(settings.COSINNUS_OAUTH_SERVER_BASEURL)
-        headers = {'Authorization': 'Bearer {0}'.format(token.token)}
+        headers = {'Authorization': 'Bearer {0}'.format(token.meeting_id)}
         resp = requests.get(profile_url, headers=headers)
         resp.raise_for_status()
         return resp.json()

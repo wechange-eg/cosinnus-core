@@ -6,7 +6,7 @@ import six
 import django
 
 from django.apps import apps
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.urls import reverse
 from django.core.cache import cache
 from django.db import models, transaction
@@ -37,6 +37,8 @@ from annoying.functions import get_object_or_None
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 
 import logging
+from django import forms
+from django_countries.fields import CountryField
 
 logger = logging.getLogger('cosinnus')
 
@@ -126,8 +128,11 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
     # display and inclusion in forms is dependent on setting `COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD`
     may_be_contacted = models.BooleanField(_('May be contacted'), default=False)
     
+    # UI and other preferences and extra settings for the user account
     settings = JSONField(default={})
-
+    extra_fields = JSONField(default={}, blank=True,
+                help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
+    
     objects = BaseUserProfileManager()
 
     SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings']\
@@ -137,7 +142,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
     # on the platform, no matter their visibility settings, and thus subject to moderation 
     cosinnus_always_visible_by_users_moderator_flag = True
     
-    _settings = None                
+    _settings = None
+    
     
     class Meta(object):
         abstract = True
@@ -330,7 +336,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
         if not username:
             username = self.get_new_rocket_username()
             self.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = username
-            self.save(update_fields=['settings'])
+            get_user_profile_model().objects.filter(id=self.id).update(settings=self.settings)
         return username
 
     @rocket_username.setter
@@ -517,4 +523,115 @@ class GlobalBlacklistedEmail(models.Model):
         entry = get_object_or_None(cls, email=email, portal=CosinnusPortal.get_current())
         if entry:
             entry.delete()
+
+
+def _make_country_formfield(**kwargs):
+    return CountryField(
+        blank=True,
+        blank_label=_('--- No country selected ---')
+    ).formfield(**kwargs)
+
+
+class _UserProfileFormExtraFieldsBaseMixin(object):
+    """ Base for the Mixins for the UserProfile or User modelforms that
+        add functionality for by-portal configured extra profile form fields """
+    
+    # a choice of field types for the settings dict values of `COSINNUS_USERPROFILE_EXTRA_FIELDS`
+    # these will be initialized as variable form fields for the fields in `self.extra_fields`
+    EXTRA_FIELD_TYPES = {
+        'text': forms.CharField,
+        'boolean': forms.BooleanField,
+        'country': _make_country_formfield,
+    }
+    # if set to a string, will only include such fields in the form
+    # that have the given option name set to True in `COSINNUS_USERPROFILE_EXTRA_FIELDS`
+    filter_included_fields_by_option_name = None
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.prepare_extra_fields_initial()
+        self.prepare_extra_fields()
+        if 'extra_fields' in self.fields:
+            del self.fields['extra_fields']
+            
+    def prepare_extra_fields_initial(self):
+        """ Stub for settting the initial data for `self.extra_fields` as defined in
+            `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`.
+            Only a form with an UpdateView needs to implement this.  """
+        pass
+    
+    def prepare_extra_fields(self):
+        """ Creates extra fields for `self.extra_fields` as defined in
+            `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` """
+        field_map = {}
+        for field_name, options in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.items():
+            if field_name in self.fields:
+                raise ImproperlyConfigured(f'COSINNUS_USERPROFILE_EXTRA_FIELDS: {field_name} clashes with an existing UserProfile field!')
+            if not 'type' in options:
+                raise ImproperlyConfigured(f'COSINNUS_USERPROFILE_EXTRA_FIELDS: {field_name} does not define a "type" attribute of {self.__class__.__name__}.EXTRA_FIELD_TYPES!')
+            if not options['type'] in self.EXTRA_FIELD_TYPES:
+                raise ImproperlyConfigured(f'COSINNUS_USERPROFILE_EXTRA_FIELDS: {field_name}\'s "type" attribute was not found in {self.__class__.__name__}.EXTRA_FIELD_TYPES!')
+            # filter by whether a given option is set
+            if self.filter_included_fields_by_option_name \
+                    and not options.get(self.filter_included_fields_by_option_name, False):
+                continue
+            
+            formfield_class = self.EXTRA_FIELD_TYPES[options['type']]
+            self.fields[field_name] = formfield_class(
+                label=options.get('label', None),
+                initial=self.initial.get(field_name, None),
+                required=options.get('required', False),
+            )
+            setattr(self.fields[field_name], 'label', options.get('label', None))
+            setattr(self.fields[field_name], 'legend', options.get('legend', None))
+            setattr(self.fields[field_name], 'placeholder', options.get('placeholder', None))
+            
+            # "register" the extra field additionally
+            field_map[field_name] = self.fields[field_name]
+            
+        setattr(self, 'extra_field_list', field_map.keys())
+        setattr(self, 'extra_field_items', field_map.items())
+    
+    
+class UserProfileFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
+    """ Mixin for the UserProfile modelform that
+        adds functionality for by-portal configured extra profile form fields """
+    
+    def prepare_extra_fields_initial(self):
+        """ Set the initial data for `self.extra_fields` as defined in
+            `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` """
+        for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
+            if field_name in self.instance.extra_fields:
+                self.initial[field_name] = self.instance.extra_fields[field_name]
+        
+    def full_clean(self):
+        """ Assign the extra fields to the `extra_fields` the userprofile JSON field
+            instead of model fields, during regular form saving """
+        super().full_clean()
+        if hasattr(self, 'cleaned_data'):
+            for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
+                self.instance.extra_fields[field_name] = self.cleaned_data.get(field_name, None)
+
+
+class UserCreationFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
+    """ Like UserProfileFormExtraFieldsMixin, but works with the user signup form """
+    
+    # only show fields with option `in_signup` set to True
+    filter_included_fields_by_option_name = 'in_signup'
+    
+    def save(self, commit=True):
+        """ Assign the extra fields to the user's cosinnus_profile's `extra_fields` 
+        JSON field instead of model fields, after user form save """
+        ret = super().save(commit=commit)
+        if commit:
+            if hasattr(self, 'cleaned_data'):
+                # sanity check, retrieve the user's profile (will create it if it doesnt exist)
+                if not self.instance.cosinnus_profile:
+                    get_user_profile_model()._default_manager.get_for_user(self.instance)
+                
+                profile = self.instance.cosinnus_profile
+                for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
+                    profile.extra_fields[field_name] = self.cleaned_data.get(field_name, None)
+                    profile.save()
+        return ret
     

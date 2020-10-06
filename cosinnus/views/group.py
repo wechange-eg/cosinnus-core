@@ -2,63 +2,39 @@
 from __future__ import unicode_literals
 
 import csv
-import datetime
-import logging
-from builtins import object
 from builtins import zip
+from builtins import object
 from copy import deepcopy
 
 import six
-from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import AnonymousUser
-from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured, ValidationError, \
     PermissionDenied
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
-from django.core.validators import validate_email
 from django.db import transaction
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.http.response import Http404, HttpResponseNotAllowed, \
-    HttpResponseBadRequest
-from django.shortcuts import redirect, get_object_or_404
-from django.template.defaultfilters import linebreaksbr
-from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy, NoReverseMatch
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
-from django.utils.html import escape
-from django.utils.safestring import mark_safe
-from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.generic import (CreateView, DeleteView, DetailView,
                                   ListView, UpdateView, TemplateView)
 from django.views.generic.base import View
-from django.views.generic.edit import FormView
 from django_select2.views import NO_ERR_RESP, Select2View
-from extra_views import (CreateWithInlinesView, InlineFormSet,
-                         UpdateWithInlinesView)
-from multiform.forms import InvalidArgument
-
-from cosinnus import cosinnus_notifications
-from cosinnus.core import signals
 from cosinnus.core.decorators.views import membership_required, redirect_to_403, \
     dispatch_group_access, get_group_for_request
 from cosinnus.core.registries import app_registry
-from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
 from cosinnus.forms.group import MembershipForm, CosinnusLocationForm, \
     CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm, \
     MultiUserSelectForm
-from cosinnus.forms.tagged import get_form  # circular import
 from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_ADMIN, MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS, \
     MembershipClassMixin
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
@@ -77,7 +53,30 @@ from cosinnus.api.serializers.profile import UserSimpleSerializer
 from cosinnus.models.tagged import BaseTagObject, BaseTaggableObjectReflection
 from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
 from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name
+from cosinnus.api.serializers.group import GroupSimpleSerializer
+from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.utils.compat import atomic
+from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
+    AjaxableFormMixin, ListAjaxableResponseMixin)
+from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin,\
+    RequireLoggedInMixin, EndlessPaginationMixin, RequireWriteMixin
+from cosinnus.views.mixins.user import UserFormKwargsMixin
+
+from cosinnus.views.mixins.avatar import AvatarFormMixin
+from cosinnus.core import signals
+from cosinnus.core.registries.group_models import group_model_registry
+from multiform.forms import InvalidArgument
+from extra_views import (CreateWithInlinesView, InlineFormSet,
+                         UpdateWithInlinesView)
+
+from cosinnus.forms.tagged import get_form  # circular import
+from cosinnus.utils.urls import get_non_cms_root_url
+from cosinnus.models.tagged import BaseTagObject, BaseTaggableObjectReflection
+from django.shortcuts import redirect, get_object_or_404
+from django.http.response import Http404, HttpResponseNotAllowed,\
+    HttpResponseBadRequest
+from cosinnus.utils.permissions import check_ug_admin, check_user_superuser,\
+    check_object_read_access, check_ug_membership, check_object_write_access,\
 from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser, \
     check_object_read_access, check_ug_membership, check_object_write_access, \
@@ -91,6 +90,24 @@ from cosinnus.views.microsite import GroupMicrositeView
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
                                         AjaxableFormMixin, ListAjaxableResponseMixin)
 from cosinnus.views.mixins.avatar import AvatarFormMixin
+from cosinnus.utils.functions import resolve_class
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+
+import logging
+from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name
+from django.core.validators import validate_email
+from annoying.functions import get_object_or_None
+from django.contrib.auth.models import AnonymousUser
+from django.template.loader import render_to_string
+from cosinnus import cosinnus_notifications
+import datetime
+from django.utils.timezone import now
+from django.utils.html import escape
+from copy import deepcopy
+from django.utils.safestring import mark_safe
+from django.template.defaultfilters import linebreaksbr
+from django.contrib.contenttypes.models import ContentType
+from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
 from cosinnus.views.mixins.group import GroupIsConferenceMixin
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin, \
     RequireLoggedInMixin, EndlessPaginationMixin, RequireWriteMixin
@@ -98,6 +115,16 @@ from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 from cosinnus.views.profile import delete_userprofile
 from cosinnus.views.widget import GroupDashboard
+from django.utils.crypto import get_random_string
+from django.http import HttpResponse
+from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME
+from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
+from cosinnus.models.profile import UserProfile
+from cosinnus.utils.user import create_base_user
+from django.views.generic.edit import FormView
+from django.db import transaction
+from cosinnus.utils.urls import redirect_with_next, group_aware_reverse
+from cosinnus.models.conference import CosinnusConferenceRoom
 
 logger = logging.getLogger('cosinnus')
 
@@ -268,7 +295,7 @@ class GroupMembershipMixin(MembershipClassMixin):
     invite_class = CosinnusUnregisterdUserGroupInvite
 
 
-class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin, 
+class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       CreateWithInlinesView):
 
     #form_class = 
@@ -930,7 +957,7 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, AvatarFormMi
 
 class GroupUserListView(ListAjaxableResponseMixin, RequireReadMixin, ListView):
 
-    serializer_class = UserSimpleSerializer
+    serializer_class = UserSerializer
     template_name = 'cosinnus/group/group_user_list.html'
 
     def get_queryset(self):
@@ -1187,7 +1214,7 @@ class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
     template_name = 'cosinnus/group/group_detail.html'
     invite_subject = _('I invited you to join "%(team_name)s"!')
     invite_template_name = 'cosinnus/mail/user_group_invited_direct_message.txt'
-    
+
     def form_valid(self, form):
         user = form.cleaned_data.get('user')
         try:
@@ -1233,7 +1260,7 @@ class GroupUserInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormV
     template_name = 'cosinnus/group/group_detail.html'
     invite_subject = _('I invited you to join "%(team_name)s"!')
     invite_template_name = 'cosinnus/mail/user_group_invited_direct_message.txt'
-    
+
     def get(self, *args, **kwargs):
         messages.error(self.request, _('This action is not available directly!'))
         return redirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': kwargs.get('group', '<NOGROUPKWARG>')}))

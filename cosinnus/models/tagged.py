@@ -148,6 +148,9 @@ class BaseTagObject(models.Model):
     likes = models.PositiveSmallIntegerField(_('Likes'), blank=True, default=0)
     likers = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         related_name='likes+')  # no reverse relation on model
+
+    bbb_room = models.ForeignKey('cosinnus.BBBRoom', null=True, blank=True, on_delete=models.SET_NULL, related_name="tagged_objects",
+                                 verbose_name=_("BigBlueButton conversation room"))
     
     def save(self, *args, **kwargs):
         # update like count
