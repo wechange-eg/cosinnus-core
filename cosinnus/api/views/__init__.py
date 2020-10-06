@@ -1,26 +1,23 @@
 import json
 
-from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.http import HttpResponse
 from django.template import Context
 from django.template.loader import render_to_string
+from oauth2_provider.decorators import protected_resource
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from django.contrib.auth import get_user_model
-from django.http import HttpResponse
-from oauth2_provider.decorators import protected_resource
-
-from cosinnus.utils.user import filter_active_users
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.tagged import BaseTagObject
+from cosinnus.utils.user import filter_active_users
 from ..serializers.group import CosinnusSocietySerializer, CosinnusProjectSerializer
-from ..serializers.organisation import OrganisationListSerializer, OrganisationRetrieveSerializer
 from ..serializers.user import UserSerializer
-from ...templatetags.cosinnus_tags import cosinnus_menu_v2, cosinnus_menu
+from ...templatetags.cosinnus_tags import cosinnus_menu_v2
 
 
 class PublicCosinnusGroupFilterMixin(object):
@@ -99,21 +96,7 @@ class CosinnusProjectViewSet(CosinnusSocietyViewSet):
     serializer_class = CosinnusProjectSerializer
 
 
-class OrganisationViewSet(PublicCosinnusGroupFilterMixin,
-                          viewsets.ReadOnlyModelViewSet):
-
-    queryset = CosinnusProject.objects.all()
-    serializer_class = OrganisationListSerializer
-
-    def get_serializer_class(self):
-        if self.action == 'list':
-            return OrganisationListSerializer
-        if self.action == 'retrieve':
-            return OrganisationRetrieveSerializer
-        return OrganisationRetrieveSerializer
-
-
-class UserView(APIView):
+class OAuthUserView(APIView):
     """
     Used by Oauth2 authentication (Rocket.Chat) to retrieve user details
     """

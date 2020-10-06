@@ -1,42 +1,35 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
-    CosinnusGroupMembership, CosinnusPortal
-from cosinnus.models.membership import MEMBERSHIP_MEMBER
-    MEMBERSHIP_MEMBER, CosinnusGroupMembership, CosinnusPortal, MEMBER_STATUS,\
-    MEMBERSHIP_ADMIN, MEMBERSHIP_INVITED_PENDING, MEMBERSHIP_PENDING
-from cosinnus.utils.user import assign_user_to_default_auth_group, \
-    ensure_user_to_default_portal_groups
-from django.contrib.auth import get_user_model
-from django.db.models import Q
-from django.db.models.signals import post_delete, post_save, pre_save
-from django.dispatch.dispatcher import receiver
-
-from cosinnus.models.tagged import ensure_container, LikeObject
-from cosinnus.core.registries.group_models import group_model_registry
-from cosinnus.core import signals
-
 import logging
+
+from annoying.functions import get_object_or_None
+from django.contrib.auth import get_user_model
 from django.contrib.auth.signals import user_logged_in, user_logged_out
+from django.contrib.contenttypes.models import ContentType
+from django.db import transaction
+from django.db.models.signals import post_delete, pre_save
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+from cosinnus.conf import settings
+from cosinnus.core import signals
+from cosinnus.core.middleware.login_ratelimit_middleware import login_ratelimit_triggered
+from cosinnus.core.registries.group_models import group_model_registry
+from cosinnus.models.conference import CosinnusConferenceRoom
+from cosinnus.models.feedback import CosinnusFailedLoginRateLimitLog
+from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
+    CosinnusGroupMembership
+from cosinnus.models.membership import MEMBERSHIP_MEMBER, MEMBER_STATUS, \
+    MEMBERSHIP_ADMIN
 from cosinnus.models.profile import GlobalBlacklistedEmail, \
     GlobalUserNotificationSetting
-from cosinnus.models.feedback import CosinnusFailedLoginRateLimitLog
-from django.db import transaction
-
-from cosinnus.core.middleware.login_ratelimit_middleware import login_ratelimit_triggered
-from django.utils.encoding import force_text
-from cosinnus.conf import settings
-from cosinnus.utils.group import get_cosinnus_group_model
-from django.contrib.contenttypes.models import ContentType
-from annoying.functions import get_object_or_None
-from cosinnus.utils.dashboard import ensure_group_widget
+from cosinnus.models.tagged import ensure_container, LikeObject
 from cosinnus.models.widget import WidgetConfig
-from cosinnus.models.bbb_room import BBBRoom
-from django.dispatch import receiver
-from django.db.models.signals import post_save
-from cosinnus.utils import bigbluebutton as bbb
-from cosinnus.models.conference import CosinnusConferenceRoom
+from cosinnus.utils.dashboard import ensure_group_widget
+from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.user import assign_user_to_default_auth_group, \
+    ensure_user_to_default_portal_groups
 
 logger = logging.getLogger('cosinnus')
 
