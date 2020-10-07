@@ -190,8 +190,8 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     _INSTALLED_APPS += internal_apps
     
     _INSTALLED_APPS += [
-        'cosinnus_organization',
         'cosinnus',
+        'cosinnus_organization',
         'cosinnus_oauth_client',
         'cosinnus_cloud',
         'cosinnus_etherpad',

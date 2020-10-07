@@ -12,6 +12,8 @@ from django.views.generic import DeleteView
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
 from ajax_forms.ajax_forms import AjaxFormsDeleteViewMixin
+from cosinnus.forms.mixins import AdditionalFormsMixin
+from cosinnus.models import MEMBERSHIP_ADMIN
 from cosinnus.views.select2 import GroupMembersView
 from cosinnus_organization.api.serializers import OrganizationSimpleSerializer
 from cosinnus.conf import settings
@@ -72,7 +74,7 @@ class CosinnusOrganizationFormMixin(object):
 
 
 class OrganizationCreateView(RequireLoggedInMixin, AvatarFormMixin, CosinnusOrganizationFormMixin,
-                             CreateWithInlinesView):
+                             AdditionalFormsMixin, CreateWithInlinesView):
     """ Create View for Organizations """
 
     form_view = 'add'
@@ -95,7 +97,7 @@ class OrganizationCreateView(RequireLoggedInMixin, AvatarFormMixin, CosinnusOrga
 
 
 class OrganizationEditView(RequireWriteGrouplessMixin, AvatarFormMixin, CosinnusOrganizationFormMixin,
-                           UpdateWithInlinesView):
+                           AdditionalFormsMixin, UpdateWithInlinesView):
     form_view = 'edit'
     slug_url_kwarg = 'organization'
 
@@ -141,32 +143,41 @@ class OrganizationConfirmMixin(GroupConfirmMixin):
     success_url = reverse_lazy('cosinnus:organization-list')
     group_url_kwarg = 'organization'
 
+    def get(self, *args, **kwargs):
+        # FIXME: Workaround to allow accepting invitations in map tile view
+        return self.post(*args, **kwargs)
 
-class OrganizationUserJoinView(GroupUserJoinView):
+    def get_error_url(self, **kwargs):
+        return self.request.META.get('HTTP_REFERER', reverse('cosinnus:map'))
+
+
+class OrganizationUserJoinView(GroupUserJoinView, OrganizationConfirmMixin):
     membership_class = CosinnusOrganizationMembership
     model = CosinnusOrganization
-    success_url = reverse_lazy('cosinnus:group-list')
+    success_url = reverse_lazy('map')
+    group_url_kwarg = 'organization'
+    membership_status = MEMBERSHIP_ADMIN
+
+
+class CSRFExemptOrganizationJoinView(CSRFExemptGroupJoinView, OrganizationConfirmMixin):
+    membership_class = CosinnusOrganizationMembership
+    model = CosinnusOrganization
+    success_url = reverse_lazy('cosinnus:organization-list')
+    group_url_kwarg = 'organization'
+    membership_status = MEMBERSHIP_ADMIN
+
+
+class OrganizationUserLeaveView(GroupUserLeaveView, OrganizationConfirmMixin):
+    membership_class = CosinnusOrganizationMembership
+    model = CosinnusOrganization
+    success_url = reverse_lazy('cosinnus:organization-list')
     group_url_kwarg = 'organization'
 
 
-class CSRFExemptOrganizationJoinView(CSRFExemptGroupJoinView):
+class OrganizationUserWithdrawView(GroupUserWithdrawView, OrganizationConfirmMixin):
     membership_class = CosinnusOrganizationMembership
     model = CosinnusOrganization
-    success_url = reverse_lazy('cosinnus:group-list')
-    group_url_kwarg = 'organization'
-
-
-class OrganizationUserLeaveView(GroupUserLeaveView):
-    membership_class = CosinnusOrganizationMembership
-    model = CosinnusOrganization
-    success_url = reverse_lazy('cosinnus:group-list')
-    group_url_kwarg = 'organization'
-
-
-class OrganizationUserWithdrawView(GroupUserWithdrawView):
-    membership_class = CosinnusOrganizationMembership
-    model = CosinnusOrganization
-    success_url = reverse_lazy('cosinnus:group-list')
+    success_url = reverse_lazy('cosinnus:organization-list')
     group_url_kwarg = 'organization'
 
 
@@ -176,11 +187,12 @@ class OrganizationUserInvitationDeclineView(GroupUserInvitationDeclineView):
     group_url_kwarg = 'organization'
 
 
-class OrganizationUserInvitationAcceptView(GroupUserInvitationAcceptView):
+class OrganizationUserInvitationAcceptView(GroupUserInvitationAcceptView, OrganizationConfirmMixin):
     model = CosinnusOrganization
     slug_url_kwarg = 'organization'
     membership_class = CosinnusOrganizationMembership
     group_url_kwarg = 'organization'
+    membership_status = MEMBERSHIP_ADMIN
 
 
 class OrganizationUserInviteView(GroupUserInviteView):
@@ -188,6 +200,7 @@ class OrganizationUserInviteView(GroupUserInviteView):
     template_name = 'cosinnus/organization/organization_detail.html'
     membership_class = CosinnusOrganizationMembership
     group_url_kwarg = 'organization'
+    membership_status = MEMBERSHIP_ADMIN
 
     def get_success_url(self):
         return reverse('cosinnus:organization-members', kwargs={'organization': self.group.slug})
@@ -198,12 +211,17 @@ class OrganizationUserInviteMultipleView(GroupUserInviteMultipleView):
     template_name = 'cosinnus/organization/organization_detail.html'
     membership_class = CosinnusOrganizationMembership
     group_url_kwarg = 'organization'
+    membership_status = MEMBERSHIP_ADMIN
+
+    def get_success_url(self):
+        return reverse('cosinnus:organization-members', kwargs={'organization': self.group.slug})
 
 
 class OrganizationUserUpdateView(GroupUserUpdateView):
     model = CosinnusOrganizationMembership
     membership_class = CosinnusOrganizationMembership
     group_url_kwarg = 'organization'
+    membership_status = MEMBERSHIP_ADMIN
 
     def get_success_url(self):
         return reverse('cosinnus:organization-members', kwargs={'organization': self.group.slug})
@@ -213,6 +231,7 @@ class OrganizationUserDeleteView(GroupUserDeleteView):
     model = CosinnusOrganizationMembership
     membership_class = CosinnusOrganizationMembership
     group_url_kwarg = 'organization'
+    membership_status = MEMBERSHIP_ADMIN
 
     def get_success_url(self):
         return reverse('cosinnus:organization-members', kwargs={'organization': self.group.slug})

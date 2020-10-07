@@ -142,7 +142,7 @@
 
 				                                    <div class="media-body">
 				                                        <span class="annotation mobile-hidden">
-				                                            {% trans "Invited to be a member" %}
+				                                            {% trans "Invited to be an admin" %}
 				                                            &nbsp;
 				                                            <span class="moment-data-date" data-date="{{ member.membership_status_date|date:'c' }}"></span>
 				                                        </span>
@@ -266,7 +266,7 @@
 		                                        {% endif %}
 				                                <div class="media-body">
 				                                    <span class="annotation mobile-hidden">
-				                                        {% trans "Invited to be a member" %}
+				                                        {% trans "Invited to be an admin" %}
 				                                        &nbsp;
 				                                        <span class="moment-data-date" data-date="{{ recruitation.last_modified|date:'c' }}"></span>
 				                                    </span>
@@ -354,24 +354,12 @@
 
                                                 {% if user|has_write_access:object %}
                                                     {% captureas modal_kick_id %}userModal_kick_{{member.pk}}{% endcaptureas %}
-                                                    {% captureas modal_promote_id %}userModal_promote_{{member.pk}}{% endcaptureas %}
                                                     <button type="button" class="btn btn-emphasized btn-icon-only pull-right"
                                                              data-toggle="modal" data-target="#{{modal_kick_id}}" title="{% trans "Decline User" %}">
                                                         <ul class="media-list">
                                                             <li class="media">
                                                                 <a class="pull-left" href="#">
                                                                     <i class="fa fa-close"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </button>
-
-                                                    <button type="button" class="btn btn-emphasized btn-icon-only pull-right"
-                                                             data-toggle="modal" data-target="#{{modal_promote_id}}" title="{% trans "Accept User" %}">
-                                                        <ul class="media-list">
-                                                            <li class="media">
-                                                                <a class="pull-left" href="#">
-                                                                    <i class="fa fa-check"></i>
                                                                 </a>
                                                             </li>
                                                         </ul>
@@ -394,12 +382,6 @@
                                 </div>
 
                                 {% if user|has_write_access:object %}
-                                    {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to accept user „{{ name }}“ as a member?{% endblocktrans %}{% endcaptureas %}
-                                    {% captureas title %}{% trans "Accept Admin" %}{% endcaptureas %}
-                                    {% captureas action %}{% url 'cosinnus:organization-user-edit' organization=object.slug username=member.username %}{% endcaptureas %}
-                                    {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="1" />{% endcaptureas %}
-                                    {% include "cosinnus/modal_box.html" with id=modal_promote_id label=label title=title form_action=action form_extra_fields=extra_fields %}
-
                                     {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to decline member „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
                                     {% captureas title %}{% trans "Decline Admin" %}{% endcaptureas %}
                                     {% captureas action %}{% url 'cosinnus:organization-user-delete' organization=object.slug username=member.username %}{% endcaptureas %}
@@ -462,13 +444,6 @@
                                         {% endif %}
 				                        {% endif %}
 			                            <div class="media-body">
-			                                    <span class="annotation">
-			                                        {% if member in admins %}
-			                                            {% trans "Admin" %}
-			                                        {% elif member in members %}
-			                                            {% trans "Member" %}
-			                                        {% endif %}
-			                                    </span>
 			                                <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
 			                                    {{ member|full_name }}
 			                                </a>
@@ -480,7 +455,6 @@
 			                <div>
 				                {% if user|has_write_access:object %}
 				                    {% captureas modal_kick_id %}userModal_kick_{{member.pk}}{% endcaptureas %}
-				                    {% captureas modal_promote_id %}userModal_promote_{{member.pk}}{% endcaptureas %}
 				                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_kick_id}}">
 				                        <ul class="media-list">
 				                            <li class="media">
@@ -493,23 +467,6 @@
 				                            </li>
 				                        </ul>
 				                    </button>
-
-				                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_promote_id}}">
-				                        <ul class="media-list">
-				                            <li class="media">
-				                                <a class="pull-left" href="#">
-				                                    <i class="fa fa-organization"></i>
-				                                </a>
-				                                <div class="media-body">
-				                                    {% if member in admins %}
-				                                        {% trans "Make Member" %}
-				                                    {% else %}
-				                                        {% trans "Make Admin" %}
-				                                    {% endif %}
-				                                </div>
-				                            </li>
-				                        </ul>
-				                    </button>
 				                {% endif %}
 
 				                {% include 'cosinnus/feedback/report_button_btn.html' with object=member %}
@@ -518,19 +475,6 @@
 			            </div><!-- fadedown -->
 
 			            {% if user|has_write_access:object %}
-			                {% if member in admins %}
-			                    {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to demote administrator „{{ name }}“ to member?{% endblocktrans %}{% endcaptureas %}
-			                    {% captureas title %}{% trans "Demote Admin" %}{% endcaptureas %}
-			                    {% captureas action %}{% url 'cosinnus:organization-user-edit' organization=object.slug username=member.username %}{% endcaptureas %}
-			                    {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="1" />{% endcaptureas %}
-			                {% else %}
-			                    {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to promote member „{{ name }}“ to administrator?{% endblocktrans %}{% endcaptureas %}
-			                    {% captureas title %}{% trans "Promote Admin" %}{% endcaptureas %}
-			                    {% captureas action %}{% url 'cosinnus:organization-user-edit' organization=object.slug username=member.username %}{% endcaptureas %}
-			                    {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="2" />{% endcaptureas %}
-			                {% endif %}
-			                {% include "cosinnus/modal_box.html" with id=modal_promote_id label=label title=title form_action=action form_extra_fields=extra_fields %}
-
 			                {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to remove member „{{ name }}“ from the team?{% endblocktrans %}{% endcaptureas %}
 			                {% captureas title %}{% trans "Remove Admin" %}{% endcaptureas %}
 			                {% captureas action %}{% url 'cosinnus:organization-user-delete' organization=object.slug username=member.username %}{% endcaptureas %}

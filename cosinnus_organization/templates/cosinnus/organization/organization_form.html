@@ -11,7 +11,7 @@
 
 {% block page_title %}
 	{% if object %}
-	   {% blocktrans with organization_name=object.title %}Edit "{{ organization_name }}"{% endblocktrans %}
+	   {% blocktrans with organization_name=object.name %}Edit "{{ organization_name }}"{% endblocktrans %}
 	{% else %}
 	   {% trans "Create Organization" %}
     {% endif %}
@@ -37,7 +37,7 @@
 	            </ul>
 	        </div>
 	    </div>
-        {% captureas label %}{% blocktrans with title=object.title %}Do you really want to delete organization „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+        {% captureas label %}{% blocktrans with title=object.name %}Do you really want to delete organization „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
         {% captureas title %}{% trans "Delete Organization" %}{% endcaptureas %}
         {% trans "Yes" as submit_button_label %}
         {% url "cosinnus:organization-delete" slug=object.slug as delete_url %}
@@ -102,13 +102,13 @@
 			<!-- Tab panes -->
 			<div class="tab-content">
                 <div class="tab-pane {% if not request.GET.tab %}active{% endif %}" id="general">
-                    {# title Field #}
-                    {% trans "Name of the organization" as title_label %}
-                    {% captureas title_placeholder %}{% trans "Enter the name of your organization" %}{% endcaptureas %}
-                    {% if request.GET.title %}
-                        {% captureas title_val %}{{ request.GET.title }}{% endcaptureas %}
+                    {# name Field #}
+                    {% trans "Name of the organization" as name_label %}
+                    {% captureas name_placeholder %}{% trans "Enter the name of your organization" %}{% endcaptureas %}
+                    {% if request.GET.name %}
+                        {% captureas name_val %}{{ request.GET.name }}{% endcaptureas %}
                     {% endif %}
-                    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title placeholder=title_placeholder label=title_label field_value=title_val first=True %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=name_placeholder label=name_label field_value=name_val first=True %}
 
                     {# type field #}
                     {% trans "Type of your organization" as type_label %}
