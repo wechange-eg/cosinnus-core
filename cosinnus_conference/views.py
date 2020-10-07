@@ -31,7 +31,7 @@ from cosinnus.models.profile import UserProfile
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.user import create_base_user
 from cosinnus.views.group import SamePortalGroupMixin
-from cosinnus.views.mixins.group import GroupIsConferenceMixin
+from cosinnus.views.mixins.group import GroupIsConferenceMixin, FilterGroupMixin
 from cosinnus.views.mixins.group import RequireReadMixin, RequireWriteMixin
 from cosinnus.views.profile import delete_userprofile
 from cosinnus.utils.urls import group_aware_reverse, redirect_with_next
@@ -443,7 +443,7 @@ class CosinnusConferenceRoomCreateView(RequireWriteMixin, CosinnusConferenceRoom
 conference_room_add = CosinnusConferenceRoomCreateView.as_view()
 
 
-class CosinnusConferenceRoomEditView(RequireWriteMixin, CosinnusConferenceRoomFormMixin, UpdateView):
+class CosinnusConferenceRoomEditView(RequireWriteMixin, CosinnusConferenceRoomFormMixin, FilterGroupMixin, UpdateView):
 
     form_view = 'edit'
     message_success = _('The room was saved successfully.')
@@ -463,7 +463,7 @@ class CosinnusConferenceRoomEditView(RequireWriteMixin, CosinnusConferenceRoomFo
 conference_room_edit = CosinnusConferenceRoomEditView.as_view()
 
 
-class CosinnusConferenceRoomDeleteView(RequireWriteMixin, DeleteView):
+class CosinnusConferenceRoomDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
 
     model = CosinnusConferenceRoom
     message_success = _('The room was deleted successfully.')
