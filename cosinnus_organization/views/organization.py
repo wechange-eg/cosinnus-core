@@ -7,14 +7,16 @@ from django.views.generic import DeleteView, DetailView
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
 from ajax_forms.ajax_forms import AjaxFormsDeleteViewMixin
+from cosinnus import cosinnus_notifications
 from cosinnus.forms.mixins import AdditionalFormsMixin
+from cosinnus.models import CosinnusGroupMembership, MEMBERSHIP_ADMIN
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.views.group import SamePortalGroupMixin
 from cosinnus.views.mixins.avatar import AvatarFormMixin
 from cosinnus.views.mixins.group import RequireLoggedInMixin, RequireWriteGrouplessMixin
 from cosinnus_organization.forms import CosinnusOrganizationForm, CosinnusOrganizationLocationInlineFormset, \
     CosinnusOrganizationSocialMediaInlineFormset
-from cosinnus_organization.models import CosinnusOrganization
+from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationMembership
 
 
 class OrganizationDetailView(DetailView):
@@ -47,13 +49,13 @@ class CosinnusOrganizationFormMixin(object):
     def dispatch(self, *args, **kwargs):
         """ Find out which type of CosinnusOrganization (project/society), we're dealing with here. """
         # special check, if group/project creation is limited to admins, deny regular users creating groups/projects
-        if getattr(settings, 'COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS', False) \
+        if getattr(settings, 'COSINNUS_LIMIT_ORGANIZATION_CREATION_TO_ADMINS', False) \
                 and not check_user_superuser(self.request.user) and self.form_view == 'add':
             messages.warning(self.request, _('Sorry, only portal administrators can create projects and groups!'))
             return redirect(reverse('cosinnus:portal-admin-list'))
 
         # special check: only portal admins can create groups
-        if not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False) \
+        if not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_ORGANIZATIONS', False) \
                 and self.form_view == 'add':
             if not check_user_superuser(self.request.user):
 
@@ -74,6 +76,7 @@ class OrganizationCreateView(RequireLoggedInMixin, AvatarFormMixin, CosinnusOrga
 
     form_view = 'add'
     slug_url_kwarg = 'organization'
+    message_success = _('Organization "%(name)s" was created successfully.')
 
     def get_context_data(self, **kwargs):
         context = super(OrganizationCreateView, self).get_context_data(**kwargs)
@@ -89,6 +92,21 @@ class OrganizationCreateView(RequireLoggedInMixin, AvatarFormMixin, CosinnusOrga
             if tab < len(self.extra_forms):
                 return reverse('cosinnus:organization-edit', kwargs={'organization': self.object.slug}) + f"./?tab={tab + 1}"
         return self.object.get_absolute_url() + '&action=create'
+
+    def forms_valid(self, form, inlines):
+        ret = super(OrganizationCreateView, self).forms_valid(form, inlines)
+        membership = CosinnusOrganizationMembership.objects.create(user=self.request.user,
+                                                                   group=self.object, status=MEMBERSHIP_ADMIN)
+
+        # clear cache and manually refill because race conditions can make the group memberships be cached as empty
+        membership._clear_cache()
+        self.object.members  # this refills the group's member cache immediately
+        self.object.admins  # this refills the group's member cache immediately
+
+        cosinnus_notifications.organization_created.send(sender=self, user=self.request.user, obj=self.object,
+                                                         audience=[])
+        messages.success(self.request, self.message_success % {'name': self.object.name})
+        return ret
 
 
 class OrganizationEditView(RequireWriteGrouplessMixin, AvatarFormMixin, CosinnusOrganizationFormMixin,
