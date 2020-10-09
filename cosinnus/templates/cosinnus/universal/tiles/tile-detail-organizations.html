@@ -28,7 +28,6 @@
 {% block action_buttons %}
 {% endblock action_buttons %}
 
-
 {% block contact %}
     <div class="tile-section tile-section-divided">
         <div class="row">
@@ -114,5 +113,27 @@
 
     </div>
 
-
+    {% if groups|length > 0 %}
+        <div class="tile-section tile-section-divided">
+            <div class="subheading">
+                <i class="fa fa-group"></i>
+                {% if organizations|length > 1 %}
+                	{# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Projects and groups" %}
+                {% else %}
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Project/group" %}
+	            {% endif %}
+            </div>
+        </div>
+        <div class="tile-section">
+            <div class="row">
+                {% for group in groups %}
+                    <div class="col-sm-6">
+                        {{ macros.itemCard(group.portal, group.slug, group.title, group.type, group.iconImageUrl, group.location, "fa-map-marker") }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
 {% endblock contact %}

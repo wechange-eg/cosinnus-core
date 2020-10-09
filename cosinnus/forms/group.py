@@ -29,9 +29,9 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from django.urls import reverse
 from cosinnus.views.facebook_integration import FacebookIntegrationGroupFormMixin
 from cosinnus.utils.lanugages import MultiLanguageFieldValidationFormMixin
-from cosinnus.fields import UserSelect2MultipleChoiceField
+from cosinnus.fields import UserSelect2MultipleChoiceField, GroupSelect2MultipleChoiceField
 from django.contrib.auth import get_user_model
-from cosinnus.utils.user import get_user_select2_pills, filter_active_users
+from cosinnus.utils.user import get_user_select2_pills, filter_active_users, get_group_select2_pills
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.templatetags.cosinnus_tags import is_superuser
 from django.core.exceptions import ObjectDoesNotExist
@@ -266,11 +266,63 @@ class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):
         obj.group = self.group
         obj.save()
         return obj
-    
 
-class MultiUserSelectForm(forms.Form):
+
+class MultiSelectForm(forms.Form):
+    """ The form to select items in a select2 field """
+    select_field = ''
+
+    def __init__(self, *args, **kwargs):
+        super(MultiSelectForm, self).__init__(*args, **kwargs)
+        self.init_items(**kwargs)
+
+    def init_items(self, **kwargs):
+        # Retrieve the attached objects ids to select them in the update view
+        items, item_list, results = [], [], []
+        initial = kwargs.get('initial', {}).get(self.select_field, None)
+        use_ids = False
+
+        if initial:
+            item_list = initial.split(', ')
+            # delete the initial data or our select2 field initials will be overwritten by django
+            if self.select_field in kwargs['initial']:
+                del kwargs['initial'][self.select_field]
+            if self.select_field in self.initial:
+                del self.initial[self.select_field]
+        elif 'data' in kwargs and kwargs['data'].getlist(self.select_field):
+            item_list = kwargs['data'].getlist(self.select_field)
+            use_ids = True
+
+        if item_list:
+            ids = self.fields[self.select_field].get_ids_for_value(item_list, intify=use_ids)
+            ids_type = self.select_field[:-1]
+            queryset = self.get_queryset()
+            if use_ids:
+                items = queryset.filter(id__in=ids[ids_type])
+            else:
+                items = queryset.filter(username__in=ids[ids_type])
+            results = self.get_select2_pills(items, text_only=False)
+
+        # we need to cheat our way around select2's annoying way of clearing initial data fields
+        self.fields[self.select_field].choices = results
+        self.fields[self.select_field].initial = [key for key, __ in results]
+        self.fields[self.select_field].widget.options['ajax']['url'] = self.get_ajax_url()
+        self.initial[self.select_field] = self.fields[self.select_field].initial
+
+    def get_queryset(self):
+        return NotImplementedError
+
+    def get_select2_pills(self, items, text_only=False):
+        return NotImplementedError
+
+    def get_ajax_url(self):
+        return NotImplementedError
+
+
+class MultiUserSelectForm(MultiSelectForm):
     """ The form to select users in a select2 field """
-    
+    select_field = 'users'
+
     # specify help_text only to avoid the possible default 'Enter text to search.' of ajax_select v1.2.5
     users = UserSelect2MultipleChoiceField(label=_("Users"), data_url='/stub/')
     
@@ -280,48 +332,47 @@ class MultiUserSelectForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.group = kwargs.pop('group')
         super(MultiUserSelectForm, self).__init__(*args, **kwargs)
-        
+
+    def get_queryset(self):
         include_uids = CosinnusPortal.get_current().members
         exclude_uids = self.group.members
-        user_qs = filter_active_users(get_user_model().objects.filter(id__in=include_uids).exclude(id__in=exclude_uids))
-        
-        # retrieve the attached objects ids to select them in the update view
-        users = []
-        initial_users = kwargs.get('initial', {}).get('users', None)
-        preresults = []
-        use_ids = False
-        user_list = []
-        
-        if initial_users:
-            user_list = initial_users.split(', ')
-            # delete the initial data or our select2 field initials will be overwritten by django
-            if 'users' in kwargs['initial']:
-                del kwargs['initial']['users']
-            if 'users' in self.initial:
-                del self.initial['users']
-        elif 'data' in kwargs and kwargs['data'].getlist('users'):
-            user_list = kwargs['data'].getlist('users')
-            use_ids = True
-            
-        if user_list:
-            user_tokens, __ = self.fields['users'].get_user_and_group_ids_for_value(user_list, intify=use_ids)
-            if use_ids:
-                users = user_qs.filter(id__in=user_tokens)
-            else:
-                users = user_qs.filter(username__in=user_tokens)
-            
-            preresults = get_user_select2_pills(users, text_only=False)
-            
-        # we need to cheat our way around select2's annoying way of clearing initial data fields
-        self.fields['users'].choices = preresults
-        self.fields['users'].initial = [key for key,__ in preresults]
-        self.fields['users'].widget.options['ajax']['url'] = self.get_ajax_url()
-        self.initial['users'] = self.fields['users'].initial
+        return filter_active_users(get_user_model().objects.filter(id__in=include_uids).exclude(id__in=exclude_uids))
+
+    def get_select2_pills(self, items, text_only=False):
+        return get_user_select2_pills(items, text_only=text_only)
 
     def get_ajax_url(self):
         if isinstance(self.group, CosinnusOrganization):
             return reverse('cosinnus:organization-member-invite-select2', kwargs={'organization': self.group.slug})
         return group_aware_reverse('cosinnus:group-member-invite-select2', kwargs={'group': self.group})
+
+
+class MultiGroupSelectForm(MultiSelectForm):
+    select_field = 'groups'
+
+    # specify help_text only to avoid the possible default 'Enter text to search.' of ajax_select v1.2.5
+    groups = GroupSelect2MultipleChoiceField(label=_("Groups"), data_url='/stub/')
+
+    class Meta(object):
+        fields = ('groups',)
+
+    def __init__(self, *args, **kwargs):
+        self.organization = kwargs.pop('organization')
+        super(MultiGroupSelectForm, self).__init__(*args, **kwargs)
+
+    def get_queryset(self):
+        include_uids = CosinnusPortal.get_current().groups.values_list('id', flat=True)
+        queryset = get_cosinnus_group_model().objects.filter(id__in=include_uids)
+        if self.organization:
+            exclude_uids = self.organization.groups.values_list('id', flat=True)
+            queryset = queryset.exclude(id__in=exclude_uids)
+        return queryset
+
+    def get_select2_pills(self, items, text_only=False):
+        return get_group_select2_pills(items, text_only=text_only)
+
+    def get_ajax_url(self):
+        return reverse('cosinnus:organization-group-invite-select2', kwargs={'organization': self.organization.slug})
 
 
 class CosinnusLocationForm(forms.ModelForm):

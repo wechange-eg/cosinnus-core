@@ -16,7 +16,7 @@
 {% block override_leftnav %}
 <div class="col-lg-3 col-md-3"><!-- left column -->
 	{% block leftnav %}
-		{% include "cosinnus/organization/leftnav_organization.html" with current_page="organizationdetails" %}
+		{% include "cosinnus/organization/leftnav_organization.html" with current_page="members" %}
 	{% endblock leftnav %}
 	<div class="clearfix regular-space"></div>
 </div><!-- left column -->
@@ -142,7 +142,7 @@
 
 				                                    <div class="media-body">
 				                                        <span class="annotation mobile-hidden">
-				                                            {% trans "Invited to be an admin" %}
+				                                            {% trans "Invited" %}
 				                                            &nbsp;
 				                                            <span class="moment-data-date" data-date="{{ member.membership_status_date|date:'c' }}"></span>
 				                                        </span>
@@ -266,7 +266,7 @@
 		                                        {% endif %}
 				                                <div class="media-body">
 				                                    <span class="annotation mobile-hidden">
-				                                        {% trans "Invited to be an admin" %}
+				                                        {% trans "Invited" %}
 				                                        &nbsp;
 				                                        <span class="moment-data-date" data-date="{{ recruitation.last_modified|date:'c' }}"></span>
 				                                    </span>

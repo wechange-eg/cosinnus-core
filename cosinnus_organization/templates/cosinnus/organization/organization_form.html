@@ -92,7 +92,6 @@
 	    {% csrf_token %}
 	    {{ form.forms.obj.media }}
 	    {{ form.forms.obj.non_field_errors }}
-        {{ form.forms.media_tag.media }}
 	    {{ form.forms.media_tag.non_field_errors }}
 
 	    
@@ -189,7 +188,7 @@
                     {% trans "Address(es) of your organisation" as locations_label %}
                     {% trans "Remove location" as loc_rm_label %}
                     {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}
-                    {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=locations_label content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
+                    {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=locations_label content_template='cosinnus/fields/inlineform_organization_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
 
                     {% include "cosinnus/media_tags_group.html"%}
 

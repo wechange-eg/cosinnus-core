@@ -209,6 +209,7 @@ def check_user_can_see_user(user, target_user):
         return True
     return False
 
+
 def check_user_superuser(user, portal=None):
     """ Main function to determine whether a user has superuser rights to access and change almost
             any view and object on the site.

@@ -107,22 +107,22 @@
 				{# Translators: __INCLUDE_JS_PO__ #}
 				{% trans "My Organizations" %}
 			</h2>
+		    <ul class="item-list">
 			{% if my_organizations|length %}
-				<ul class="item-list">
-					{% for item in my_organizations %}
-						{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
-					{% endfor %}
-				</ul>
+				{% for item in my_organizations %}
+					{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+				{% endfor %}
 			{% else %}
 				<li>
-					<span class="list-item list-item-link no-select" href="#" role="button" titledby=".item-text"> 
-			    		<div class="item-text">
-			                {# Translators: __INCLUDE_JS_PO__ #}
+					<span class="list-item list-item-link no-select" href="#" role="button" titledby=".item-text">
+						<div class="item-text">
+							{# Translators: __INCLUDE_JS_PO__ #}
 							{% trans "You have not created any organizations yet." %}
-			    		</div>
+						</div>
 					</span>
 				</li>
 			{% endif %}
+			</ul>
 			<hr>
 			
 			<div class="main-menu-links">

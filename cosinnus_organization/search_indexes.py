@@ -20,6 +20,7 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
     type = indexes.IntegerField()
     type_other = indexes.CharField()
     group_members = indexes.MultiValueField(indexed=False)
+    groups = indexes.MultiValueField(indexed=False)
 
     def get_model(self):
         return CosinnusOrganization
@@ -88,6 +89,11 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
         if not hasattr(obj, '_group_members'):
             obj._group_members = obj.members
         return obj._group_members
+
+    def prepare_groups(self, obj):
+        if not hasattr(obj, '_groups'):
+            obj._groups = list(obj.groups.active_groups().values_list('group_id', flat=True))
+        return obj._groups
 
     def index_queryset(self, using=None):
         qs = self.get_model().objects.active()

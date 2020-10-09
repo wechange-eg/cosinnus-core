@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from __future__ import print_function
 
 from django.apps import apps
+from django.db.models import Q
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_text
@@ -89,3 +90,19 @@ def get_default_user_group_ids():
     default_user_groups = get_cosinnus_group_model().objects.filter(slug__in=get_default_user_group_slugs())
     return list(default_user_groups.values_list('id', flat=True))
 
+
+def get_group_query_filter_for_search_terms(terms):
+    """ Returns a django Q filter for use on GROUP_MODEL that returns all projects/groups with matching
+        names, given an array of search terms. Each search term needs to be matched (AND)
+        on at least one of the groups'/projects' name fields (OR). Case is insensitive.
+        @param terms: An array of string search terms.
+        @return: A django Q object.
+    """
+    first_term, other_terms = terms[0], terms[1:]
+
+    q = Q(name__icontains=terms[0])
+    for other_term in other_terms:
+        add_q = Q(name__icontains=other_term)
+        q &= add_q
+
+    return q

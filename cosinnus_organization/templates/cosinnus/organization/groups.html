@@ -1,0 +1,339 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags cosinnus_map_tags static %}
+
+{% block page_title %}
+  {% blocktrans with team_name=object.name %}{{ team_name }} - Assigned projects/groups{% endblocktrans %}
+{% endblock %}
+
+{% block js_app_dependencies %}
+	{% include 'cosinnus/map/static_dependencies.html' %}
+{% endblock js_app_dependencies %}
+
+{% block og_meta_attributes %}
+	{% include 'cosinnus/group/group_og_meta_attributes.html' with group=object %}
+{% endblock og_meta_attributes %}
+
+{% block override_leftnav %}
+<div class="col-lg-3 col-md-3"><!-- left column -->
+	{% block leftnav %}
+		{% include "cosinnus/organization/leftnav_organization.html" with current_page="groups" %}
+	{% endblock leftnav %}
+	<div class="clearfix regular-space"></div>
+</div><!-- left column -->
+{% endblock override_leftnav %}
+
+
+{% block breadcrumb %}
+        <li><a href="{% url 'cosinnus:organization-edit' organization=object.slug %}">{{ object.name }}</a></li>
+        <li class="active">{% trans "Assigned projects/groups" %}</li>
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+
+        {% comment %}  leave this here, the jump is what we want always  {% endcomment %}
+        <a class="anchor" id="invite"></a>
+
+
+        {% if user|has_write_access:object or user in invited %}
+	        <div class="panel panel-default large-space">
+	            <div class="panel-heading">
+	                <h4 class="panel-title {% if not request.GET.invite %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseOne">
+	                    <i class="fa fa-chevron-down panel-collapsed"></i>
+	                    <i class="fa fa-chevron-up panel-open"></i>
+	                    {% trans "Invite groups/projects..." %} {% if invited|length > 0 %}({{ invited|length }}){% endif %}
+	                </h4>
+	            </div>
+		        <div id="collapseOne" class="panel-collapse {% if not request.GET.invite %}collapse{% else %}in{% endif %}">
+		            <div class="panel-body">
+
+			            {% if user|has_write_access:object %}
+				            <legend>{% trans "Invite project/group" %}</legend>
+
+				            <form action="{% url 'cosinnus:organization-group-invite' organization=object.slug %}" method="post" class="cosinnus-form">
+				                {% csrf_token %}
+                                {{ invite_form.non_field_errors }}
+
+				                {{ invite_form.groups.errors }}
+				                {% trans "Enter a name to find project/groups to invite..." as inv_placeholder %}
+                                {% include 'cosinnus/fields/default_field.html' with field=invite_form.groups placeholder=inv_placeholder first=True %}
+
+				                <button type="submit" class="btn btn-emphasized btn-autosize large-space">
+				                    <ul class="media-list">
+				                        <li class="media">
+				                            <a class="pull-left" href="#">
+				                                <i class="fa fa-check"></i>
+				                            </a>
+				                            <div class="media-body">
+				                                {% trans "Invite projects/groups" %}
+				                            </div>
+				                        </li>
+				                    </ul>
+				                </button>
+				            </form>
+				        {% endif %}
+
+
+				        {% if user|has_write_access:object or user in invited %}
+
+				            <legend>{% trans "Invited groups/projects" %}</legend>
+
+				            {% for member in invited %}
+				               {% comment %} In public organizations, we enable the logged in user to see himself as pending user {% endcomment %}
+								<div class="regular-space">
+									<div class="btn btn-default w100">
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="{{ member|profile_url }}">
+													{% include "cosinnus/user/user_avatar_image.html" with user=member %}
+												</a>
+
+
+												{% if user|has_write_access:object %}
+														{% captureas modal_revoke_id %}memberModal_revoke_{{member.pk}}{% endcaptureas %}
+
+														<button type="button" class="btn btn-emphasized btn-icon-only pull-right"
+																 data-toggle="modal" data-target="#{{modal_revoke_id}}" title="{% trans "Revoke Invitation" %}">
+															<ul class="media-list">
+																<li class="media">
+																	<a class="pull-left" href="#">
+																		<i class="fa fa-close"></i>
+																	</a>
+																</li>
+															</ul>
+														</button>
+												{% endif %}
+
+												{% if user|is_group_admin:member.group %}
+													<div>
+														{% captureas modal_decline_invitation_id %}memberModal_decline_invitation_{{member.pk}}{% endcaptureas %}
+														<button type="button" class="btn btn-emphasized btn-icon-only pull-right"
+																 data-toggle="modal" data-target="#{{modal_decline_invitation_id}}" title="{% trans "Decline Invitation" %}">
+															<ul class="media-list">
+																<li class="media">
+																	<a class="pull-left" href="#">
+																		<i class="fa fa-close"></i>
+																	</a>
+																</li>
+															</ul>
+														</button>
+
+														<form action="{% url 'cosinnus:organization-group-accept' organization=object.slug group=member.group.slug %}" method="post">{% csrf_token %}
+															<button type="submit" class="btn btn-emphasized">
+																<ul class="media-list">
+																	<li class="media">
+																		<a class="pull-left" href="#">
+																			<i class="fa fa-sign-in"></i>
+																		</a>
+																		<div class="media-body">
+																			{% trans "Accept Invitation" %}
+																		</div>
+																	</li>
+																</ul>
+															</button>
+														</form>
+													</div>
+												{% endif %}
+
+
+												<div class="media-body">
+													<span class="annotation mobile-hidden">
+														{% trans "Invited" %}
+														&nbsp;
+														<span class="moment-data-date" data-date="{{ member.membership_status_date|date:'c' }}"></span>
+													</span>
+													<a href="{% url 'cosinnus:group-detail' group=member.group.slug %}">
+														{{ member.group.name }}
+													</a>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+
+								{% if user|has_write_access:object %}
+									{% captureas label %}{% blocktrans with name=member.group.name %}Do you really want to revoke the invitation for „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
+									{% captureas title %}{% trans "Revoke invitation for project/group" %}{% endcaptureas %}
+									{% captureas action %}{% url 'cosinnus:organization-group-delete' organization=object.slug group=member.group.slug %}{% endcaptureas %}
+									{% include "cosinnus/modal_box.html" with id=modal_revoke_id label=label title=title form_action=action %}
+								{% endif %}
+								{% if user|is_group_admin:member.group %}
+									{% captureas label %}{% blocktrans %}Do you really want to decline the invitation?{% endblocktrans %}{% endcaptureas %}
+									{% captureas title %}{% trans "Decline invitation" %}{% endcaptureas %}
+									{% captureas action %}{% url 'cosinnus:organization-group-decline' organization=object.slug group=member.group.slug %}{% endcaptureas %}
+									{% include "cosinnus/modal_box.html" with id=modal_decline_invitation_id label=label title=title form_action=action %}
+								{% endif %}
+
+				            {% empty %}
+				                <!-- {% trans "There are no pending invitations." %} -->
+				                {% include 'cosinnus/common/empty_button.html' with message="There are no pending project/group invitations." %}
+				            {% endfor %}
+
+				        {% endif %}
+
+
+
+	                </div> {% comment %} panel-body {% endcomment %}
+	            </div> {% comment %} panel-collapse {% endcomment %}
+	        </div> {% comment %} panel {% endcomment %}
+        {% endif %}
+
+
+        {% if user|has_write_access:object or user in pendings %}
+
+	        <div class="panel panel-default large-space">
+	            <div class="panel-heading">
+	                <h4 class="panel-title {% if not pendings|length > 0 and not request.GET.requests %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseFour">
+	                    <i class="fa fa-chevron-down panel-collapsed"></i>
+	                    <i class="fa fa-chevron-up panel-open"></i>
+	                    {% trans "Project/group requests" %} {% if pendings|length > 0 %}({{ pendings|length }}){% endif %}
+	                </h4>
+	            </div>
+	            <div id="collapseFour" class="panel-collapse {% if not pendings|length > 0 and not request.GET.requests %}collapse{% else %}in{% endif %}">
+	                <div class="panel-body">
+                        {% for member in pendings %}
+
+                           {% comment %} In public organizations, we enable the logged in user to see himself as pending user {% endcomment %}
+                           {% if not user in pendings or user == member %}
+                                <div class="regular-space">
+                                    <div class="btn btn-default w100">
+                                        <ul class="media-list">
+                                            <li class="media">
+                                                <a class="pull-left" href="{{ member|profile_url }}">
+                                                    {% include "cosinnus/user/user_avatar_image.html" with user=member %}
+                                                </a>
+
+                                                {% if user|has_write_access:object %}
+                                                    {% captureas modal_kick_id %}memberModal_kick_{{member.pk}}{% endcaptureas %}
+                                                    <button type="button" class="btn btn-emphasized btn-icon-only pull-right"
+                                                             data-toggle="modal" data-target="#{{modal_kick_id}}" title="{% trans "Decline User" %}">
+                                                        <ul class="media-list">
+                                                            <li class="media">
+                                                                <a class="pull-left" href="#">
+                                                                    <i class="fa fa-close"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </button>
+                                                {% endif %}
+
+                                                <div class="media-body">
+                                                    <span class="annotation mobile-hidden">
+                                                        {% trans "Requested" %}
+                                                        &nbsp;
+                                                        <span class="moment-data-date" data-date="{{ member.membership_status_date|date:'c' }}"></span>
+                                                    </span>
+                                                    <a href="{% url 'cosinnus:group-detail' group=member.group.slug %}">
+                                                        {{ member.group.name }}
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                {% if user|has_write_access:object %}
+                                    {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to decline member „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
+                                    {% captureas title %}{% trans "Decline Admin" %}{% endcaptureas %}
+                                    {% captureas action %}{% url 'cosinnus:organization-group-decline' organization=object.slug group=member.group.slug %}{% endcaptureas %}
+                                    {% include "cosinnus/modal_box.html" with id=modal_kick_id label=label title=title form_action=action %}
+                                {% endif %}
+
+                            {% endif %}
+
+                        {% empty %}
+                            <!-- {% trans "There are no new membership requests." %} -->
+                            {% include 'cosinnus/common/empty_button.html' with message="There are no project/group requests." %}
+                        {% endfor %}
+
+                        <div class="clearfix"></div>
+
+
+                    </div> {% comment %} panel-body {% endcomment %}
+                </div> {% comment %} panel-collapse {% endcomment %}
+            </div> {% comment %} panel {% endcomment %}
+
+        {% endif %}
+
+
+        <div class="panel panel-default large-space">
+            <div class="panel-heading">
+                <h4 class="panel-title {% if request.GET.invite %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseThree">
+                    <i class="fa fa-chevron-down panel-collapsed"></i>
+                    <i class="fa fa-chevron-up panel-open"></i>
+                    {% trans "Assigned projects/groups" %} ({{ members|length }})
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse {% if request.GET.invite %}collapse{% else %}in{% endif %}">
+                <div class="panel-body">
+
+			        {% for member in members %}
+			            <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
+			                <div class="btn btn-emphasized w100">
+			                    <ul class="media-list">
+			                        <li class="media">
+			                            <span class="pull-left" href="{{ member|profile_url }}">
+			                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
+			                            </span>
+			                            {% if user|has_write_access:object %}
+			                            <a class="pull-right fadedown-clickarea" href="#">
+			                                <i class="fa fa-chevron-down"></i>
+			                            </a>
+			                            {% endif %}
+			                            <div class="media-body">
+			                                <a href="{% url 'cosinnus:group-detail' group=member.group.slug %}">
+			                                    {{ member.group.name }}
+			                                </a>
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </div>
+
+			                <div>
+				                {% if user|has_write_access:object %}
+				                    {% captureas modal_kick_id %}memberModal_kick_{{member.pk}}{% endcaptureas %}
+				                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_kick_id}}">
+				                        <ul class="media-list">
+				                            <li class="media">
+				                                <a class="pull-left" href="#">
+				                                    <i class="fa fa-eraser"></i>
+				                                </a>
+				                                <div class="media-body">
+				                                    {% trans "Kick" %}
+				                                </div>
+				                            </li>
+				                        </ul>
+				                    </button>
+				                {% endif %}
+
+				                {% include 'cosinnus/feedback/report_button_btn.html' with object=member %}
+			                </div>
+
+			            </div><!-- fadedown -->
+
+			            {% if user|has_write_access:object %}
+			                {% captureas label %}{% blocktrans with name=member.group.name %}Do you really want to remove „{{ name }}“ from the organization?{% endblocktrans %}{% endcaptureas %}
+			                {% captureas title %}{% trans "Remove project/group" %}{% endcaptureas %}
+			                {% captureas action %}{% url 'cosinnus:organization-group-delete' organization=object.slug group=member.group.slug %}{% endcaptureas %}
+			                {% include "cosinnus/modal_box.html" with id=modal_kick_id label=label title=title form_action=action %}
+
+			            {% endif %}
+
+					{% empty %}
+						<!-- {% trans "There are no new membership requests." %} -->
+						{% include 'cosinnus/common/empty_button.html' with message="There are no assigned projects/groups." %}
+			        {% endfor %}
+
+                </div> {% comment %} panel-body {% endcomment %}
+            </div> {% comment %} panel-collapse {% endcomment %}
+        </div> {% comment %} panel {% endcomment %}
+
+    </div>
+
+
+
+
+{% endblock %}

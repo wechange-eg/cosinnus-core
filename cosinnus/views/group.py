@@ -56,10 +56,8 @@ from cosinnus.core.decorators.views import membership_required, redirect_to_403,
     dispatch_group_access, get_group_for_request
 from cosinnus.core.registries import app_registry
 from cosinnus.core.registries.group_models import group_model_registry
-from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
-from cosinnus.forms.group import MembershipForm, CosinnusLocationForm, \
-    CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm, \
-    MultiUserSelectForm
+from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm, MembershipForm, CosinnusLocationForm, \
+    CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm, MultiUserSelectForm, MultiGroupSelectForm
 from cosinnus.forms.tagged import get_form  # circular import
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
                                    CosinnusPortal, CosinnusLocation,
@@ -78,13 +76,13 @@ from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
 from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name
 from cosinnus.utils.compat import atomic
 from cosinnus.utils.functions import resolve_class
+from cosinnus.utils.group import get_group_query_filter_for_search_terms, get_cosinnus_group_model
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser, \
     check_object_read_access, check_ug_membership, check_object_write_access, \
     check_user_can_see_user
 from cosinnus.utils.urls import get_non_cms_root_url
 from cosinnus.utils.urls import redirect_with_next, group_aware_reverse
-from cosinnus.utils.user import create_base_user
-from cosinnus.utils.user import filter_active_users, get_user_select2_pills, \
+from cosinnus.utils.user import create_base_user, filter_active_users, get_user_select2_pills, \
     get_user_query_filter_for_search_terms, get_user_by_email_safe
 from cosinnus.views.microsite import GroupMicrositeView
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
@@ -97,6 +95,9 @@ from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 from cosinnus.views.profile import delete_userprofile
 from cosinnus.views.widget import GroupDashboard
+from cosinnus_organization.forms import MultiOrganizationSelectForm
+from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationGroup
+from cosinnus_organization.utils import get_organization_select2_pills
 
 logger = logging.getLogger('cosinnus')
 
@@ -1827,6 +1828,96 @@ class GroupActivateAppView(SamePortalGroupMixin, AjaxableFormMixin, RequireAdmin
         return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
 
 
+class GroupOrganizationsView(DetailView):
+    template_name = 'cosinnus/group/organizations.html'
+    model = get_cosinnus_group_model()
+    slug_url_kwarg = 'group'
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupOrganizationsView, self).get_context_data(**kwargs)
+        queryset = self.object.organizations
+        context.update({
+            'requested': queryset.filter(status=MEMBERSHIP_PENDING),
+            'invited': queryset.filter(status=MEMBERSHIP_INVITED_PENDING),
+            'members': queryset.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN)),
+            'request_form': MultiOrganizationSelectForm(group=self.object),
+            'group': self.object,
+        })
+        return context
+
+
+class GroupOrganizationRequestView(RequireAdminMixin, GroupMembershipMixin, FormView):
+    form_class = MultiOrganizationSelectForm
+    template_name = 'cosinnus/group/group_detail.html'
+    message_success = _(
+        'You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request.')
+
+    def get(self, *args, **kwargs):
+        messages.error(self.request, _('This action is not available directly!'))
+        return redirect(
+            group_aware_reverse('cosinnus:group-organizations', kwargs={'group': kwargs.get('group', '<NOGROUPKWARG>')}))
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:group-organizations', kwargs={'group': self.group})
+
+    def get_form_kwargs(self):
+        kwargs = super(GroupOrganizationRequestView, self).get_form_kwargs()
+        kwargs['group'] = self.group
+        return kwargs
+
+    def form_valid(self, form):
+        organizations = form.cleaned_data.get('organizations')
+        for organization in organizations:
+            self.invite(organization, form)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def invite(self, organization, form):
+        try:
+            m = CosinnusOrganizationGroup.objects.get(organization=organization, group=self.group)
+            # if the group has already been invited when we try to request, assign it immediately
+            if m.status == MEMBERSHIP_INVITED_PENDING:
+                m.status = MEMBERSHIP_MEMBER
+                m.save()
+                # update index for the group
+                # typed_group = ensure_group_type(self.group)
+                # typed_group.update_index()
+                signals.organization_group_invitation_accepted.send(sender=self, organization=organization, group=self.group)
+                messages.success(self.request, _(
+                    'Project/group %(group)s had already been invited and has now been assigned immediately!') % {
+                                     'name': self.group.name})
+                # trigger signal for accepting that user's join request
+        except CosinnusOrganizationGroup.DoesNotExist:
+            CosinnusOrganizationGroup.objects.create(organization=organization, group=self.group, status=MEMBERSHIP_PENDING)
+            signals.organization_group_requested.send(sender=self, organization=organization, group=self.group)
+
+            messages.success(self.request, self.message_success % {'name': organization.name})
+
+
+class GroupOrganizationRequestSelect2View(RequireReadMixin, Select2View):
+    """
+    This view is used as API backend to serve the suggestions for the organization field.
+    """
+
+    def check_all_permissions(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            raise PermissionDenied
+
+    def get_results(self, request, term, page, context):
+        terms = term.strip().lower().split(' ')
+        q = get_group_query_filter_for_search_terms(terms)
+
+        organizations = CosinnusOrganization.objects.filter(q)
+        organizations = organizations.filter(portal_id=CosinnusPortal.get_current().id, is_active=True)
+        organizations = organizations.exclude(groups__group=self.group)
+        organizations = [org for org in organizations if check_object_read_access(org, request.user)]
+        organizations = sorted(organizations, key=lambda org: org.name.lower())
+
+        results = get_organization_select2_pills(organizations)
+
+        # Any error response, Has more results, options list
+        return (NO_ERR_RESP, False, results)
+
+
 group_create = GroupCreateView.as_view()
 group_create_api = GroupCreateView.as_view(is_ajax_request_url=True)
 group_delete = GroupDeleteView.as_view()
@@ -1867,3 +1958,6 @@ activate_or_deactivate = ActivateOrDeactivateGroupView.as_view()
 group_startpage = GroupStartpage.as_view()
 user_group_member_invite_select2 = UserGroupMemberInviteSelect2View.as_view()
 group_activate_app = GroupActivateAppView.as_view()
+group_organizations = GroupOrganizationsView.as_view()
+group_organization_request = GroupOrganizationRequestView.as_view()
+group_organization_request_select2 = GroupOrganizationRequestSelect2View.as_view()

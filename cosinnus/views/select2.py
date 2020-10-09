@@ -13,6 +13,7 @@ from cosinnus.views.mixins.select2 import RequireGroupMember, RequireLoggedIn
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import filter_active_users,\
     get_user_query_filter_for_search_terms, get_user_select2_pills
+from cosinnus.views.user import UserSelect2View
 
 
 class GroupMembersView(RequireGroupMember, Select2View):
@@ -105,13 +106,14 @@ class GroupsView(Select2View):
                 q = q | Q(**{lookup_field+'__icontains':term})
         
         qs = get_cosinnus_group_model().objects.filter(q).filter(portal_id=CosinnusPortal.get_current().id, is_active=True)
-        
+
         if request.GET.get('is_member', None) == '1':
             user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(request.user)
             qs = qs.filter(id__in=user_group_ids)
         
         if request.GET.get('except', None):
             qs = qs.exclude(id=int(request.GET.get('except')))
+
         # TODO: also search russian/other extension fields of name, make a good interface to generically grab those
         
         count = qs.count()

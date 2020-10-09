@@ -325,7 +325,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
         
         if settings.COSINNUS_ORGANIZATIONS_ENABLED:
             sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['organizations'])
-            sqs = sqs.filter_and(related_groups=obj.id)
+            sqs = sqs.filter_and(groups=obj.id)
             sqs = filter_searchqueryset_for_read_access(sqs, user)
             sqs = sqs.order_by('title')
             
@@ -519,6 +519,15 @@ class DetailedOrganizationMapResult(DetailedMapResult):
             sqs = filter_searchqueryset_for_read_access(sqs, user)
         kwargs.update({
             'admins': [HaystackUserMapCard(result) for result in sqs]
+        })
+
+        # Groups
+        sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['projects'], SEARCH_MODEL_NAMES_REVERSE['groups'])
+        sqs = sqs.filter_and(id__in=haystack_result.groups)
+        sqs = filter_searchqueryset_for_read_access(sqs, user)
+        sqs = sqs.order_by('title')
+        kwargs.update({
+            'groups': [HaystackGroupMapCard(result) for result in sqs]
         })
         
         ret = super(DetailedOrganizationMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)

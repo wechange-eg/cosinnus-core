@@ -11,6 +11,7 @@ from django.db.models import Q
 from django.urls import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 import six
 from jsonfield import JSONField
@@ -18,7 +19,8 @@ from osm_field.fields import OSMField, LatitudeField, LongitudeField
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models import BaseMembership, MEMBER_STATUS, MembersManagerMixin, MEMBERSHIP_ADMIN
+from cosinnus.models import BaseMembership, MEMBER_STATUS, MembersManagerMixin, MEMBERSHIP_ADMIN, MEMBERSHIP_STATUSES, \
+    MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_INVITED_PENDING
 from cosinnus.utils.files import image_thumbnail_url, \
     image_thumbnail, get_organization_avatar_filename, get_organization_wallpaper_filename, get_image_url_for_icon
 from cosinnus.utils.functions import clean_single_line_text, \
@@ -452,3 +454,45 @@ class CosinnusOrganizationLocation(models.Model):
         if not self.location_lat or not self.location_lon:
             return None
         return 'http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
+
+
+class CosinnusOrganizationGroupQuerySet(models.QuerySet):
+
+    def active_groups(self):
+        return self.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN), group__is_active=True)
+
+    def active_organizations(self):
+        return self.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN), organization__is_active=True)
+
+
+class CosinnusOrganizationGroup(models.Model):
+    organization = models.ForeignKey('cosinnus_organization.CosinnusOrganization', related_name='groups', on_delete=models.CASCADE)
+    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, related_name='organizations', on_delete=models.CASCADE)
+    status = models.PositiveSmallIntegerField(choices=MEMBERSHIP_STATUSES, db_index=True, default=MEMBERSHIP_PENDING)
+    date = models.DateTimeField(auto_now_add=True, editable=False)
+
+    objects = CosinnusOrganizationGroupQuerySet.as_manager()
+
+    class Meta:
+        verbose_name = _('Organization group')
+        verbose_name_plural = _('Organization groups')
+        unique_together = (('organization', 'group'),)
+
+    def __init__(self, *args, **kwargs):
+        super(CosinnusOrganizationGroup, self).__init__(*args, **kwargs)
+        self._old_current_status = self.status
+
+    def __str__(self):
+        return "<organization: %(organization)s, group: %(group)s, status: %(status)d>" % {
+            'organization': getattr(self, 'organization', None),
+            'group': getattr(self, 'group', None),
+            'status': self.status,
+        }
+
+    def save(self, *args, **kwargs):
+        # Only update the date if the the state changes from pending to member
+        # or admin
+        if (self._old_current_status == MEMBERSHIP_PENDING or self._old_current_status == MEMBERSHIP_INVITED_PENDING) and \
+                (self.status == MEMBERSHIP_ADMIN or self.status == MEMBERSHIP_MEMBER):
+            self.date = now()
+        return super(CosinnusOrganizationGroup, self).save(*args, **kwargs)

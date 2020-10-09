@@ -219,6 +219,9 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/decline/$' % url_key, group.group_user_invitation_decline, name=prefix+'group-user-decline'),
         url(r'^%s/(?P<group>[^/]+)/accept/$' % url_key, group.group_user_invitation_accept, name=prefix+'group-user-accept'),
         url(r'^%s/(?P<group>[^/]+)/activate-app/$' % url_key, group.group_activate_app, name=prefix+'group-activate-app'),
+        url(r'^%s/(?P<group>[^/]+)/organizations/$' % url_key, group.group_organizations, name=prefix+'group-organizations'),
+        url(r'^%s/(?P<group>[^/]+)/organizations/request/$' % url_key, group.group_organization_request, name=prefix+'group-organization-request'),
+        url(r'^%s/(?P<group>[^/]+)/organizations/organization-request-select2/$' % url_key, group.group_organization_request_select2, name=prefix+'group-organization-request-select2'),
 
         url(r'^%s/(?P<group>[^/]+)/users/$' % url_key, group.group_user_list, name=prefix+'group-user-list'),
         url(r'^%s/(?P<group>[^/]+)/users/add/$' % url_key, group.group_user_add, name=prefix+'group-user-add-generic'),
