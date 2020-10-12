@@ -47,7 +47,7 @@ from annoying.functions import get_object_or_None
 logger = logging.getLogger('cosinnus')
 
 
-def housekeeping(request=None):
+def ensure_group_widgets(request=None):
     """ Do some integrity checks and corrections. 
         Currently doing:
             - Checking all groups and projects for missing widgets versus the default widget
@@ -56,7 +56,7 @@ def housekeeping(request=None):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     
-    groups = CosinnusGroup.objects.all()
+    groups = get_cosinnus_group_model().objects.all()
     ret = ""
     for group in groups:
         ret += "Checked group %s\n<br/>" % group.slug
