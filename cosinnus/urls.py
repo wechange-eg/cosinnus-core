@@ -99,7 +99,7 @@ urlpatterns = [
 
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     
-    #url(r'^housekeeping/$', housekeeping.housekeeping, name='housekeeping'),
+    url(r'^housekeeping/ensure_group_widgets/$', housekeeping.ensure_group_widgets, name='housekeeping-ensure-group-widgets'),
     url(r'^housekeeping/fillexternaldata/$', housekeeping.fill_external_data, name='housekeeping-fill-external-data'),
     url(r'^housekeeping/newsletterusers/$', housekeeping.newsletter_users, name='housekeeping-newsletter-user-emails'),
     url(r'^housekeeping/activeuseremails/$', housekeeping.active_user_emails, name='housekeeping-active-user-emails'),
