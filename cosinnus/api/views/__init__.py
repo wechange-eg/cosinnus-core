@@ -16,6 +16,7 @@ from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.utils.user import filter_active_users
 from ..serializers.group import CosinnusSocietySerializer, CosinnusProjectSerializer
+from ..serializers.portal import PortalSettingsSerializer
 from ..serializers.user import UserSerializer
 from ...templatetags.cosinnus_tags import cosinnus_menu_v2
 
@@ -229,6 +230,17 @@ class NavBarView(APIView):
         })
 
 
+class SettingsView(APIView):
+    """
+    Returns portal settings
+    """
+
+    def get(self, request):
+        serializer = PortalSettingsSerializer(CosinnusPortal.get_current())
+        return Response(serializer.data)
+
+
 oauth_current_user = OAuthUserView.as_view()
 statistics = StatisticsView.as_view()
 navbar = NavBarView.as_view()
+settings = SettingsView.as_view()

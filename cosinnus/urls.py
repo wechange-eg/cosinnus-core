@@ -12,7 +12,7 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
     oauth_user, oauth_profile
 from cosinnus.api.views import oauth_current_user, statistics as api_statistics, current_user, \
-    navbar
+    navbar, settings as api_settings
 from cosinnus.api.views.i18n import translations
 from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
@@ -292,6 +292,7 @@ schema_url_patterns = [
     url(r'^api/v2/token/', obtain_jwt_token),
     url(r'^api/v2/token/refresh/', refresh_jwt_token),
     url(r'^api/v2/current_user/', current_user, name='api-current-user'),
+    url(r'^api/v2/settings/$', api_settings, name='api-settings'),
     url(r'^api/v2/statistics/', api_statistics, name='api-statistics'),
     url(r'^api/v2/jsi18n/$', translations, name='api-jsi18n'),
     url(r'^api/v2/', include(router.urls)),
