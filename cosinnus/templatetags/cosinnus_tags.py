@@ -195,8 +195,7 @@ def full_name(value):
 
 @register.filter
 def full_name_force(value):
-    """ Like ``full_name()``, this tag will always print the user name, even if the user is inactive
-    """
+    """ Like ``full_name()``, this tag will always print the user name, even if the user is inactive """
     from django.contrib.auth.models import AbstractBaseUser
     if isinstance(value, AbstractBaseUser):
         return value.get_full_name() or value.get_username()
@@ -222,27 +221,23 @@ def profile_url(value):
 
 @register.filter
 def url_target_blank(link):
-    """ Template filter that turns any html link into a target="_blank" link.
-    """
+    """ Template filter that turns any html link into a target="_blank" link. """
     return mark_safe(link.replace('<a ', '<a target="_blank" rel="nofollow noopener noreferrer" '))
 
 
 @register.filter
 def multiply(value, arg):
-    """Template filter to multiply two numbers
-    """
+    """Template filter to multiply two numbers """
     return value * arg
 
 @register.filter
 def add_num(value, arg):
-    """Template filter to add two numbers
-    """
+    """Template filter to add two numbers """
     return value + arg
 
 @register.filter
 def subtract(value, arg):
-    """Template filter to subtract two numbers
-    """
+    """Template filter to subtract two numbers """
     return value - arg
 
 @register.filter
@@ -253,9 +248,14 @@ def intify(value):
 
 @register.filter
 def stringify(value):
-    """Template filter to stringify a value
-    """
+    """Template filter to stringify a value """
     return str(value)
+
+@register.filter
+def contains(iterable, item):
+    """Template filter to check if an iterable contains an item, just like the `in` keyword """
+    return bool(iterable is not None and item in iterable)
+
 
 @register.simple_tag(takes_context=True)
 def cosinnus_group_url_path(context, group=None):

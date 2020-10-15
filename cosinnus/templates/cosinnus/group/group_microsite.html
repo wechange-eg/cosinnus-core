@@ -447,6 +447,22 @@
 		        		{% endif %}
 		        	{% endwith %}
 		        	
+		        	{% comment %}  
+                        For portals that have COSINNUS_MANAGED_TAGS_ENABLED enabled, show the tags here
+                    {% endcomment %}
+                    {% block managed_tag_microsite_field %}
+                        {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED %}
+                            {% with managed_tags=group.get_managed_tags %}
+                                {% if managed_tags %}
+                                    <b>{{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_NAME }}</b>
+                                    {% for tag in managed_tags %}
+                                        {% include 'cosinnus/fields/managed_tag_field_readonly.html' with tag=tag visible=True %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        {% endif %}
+                    {% endblock %}
+		        	
 	        	    <br/>
 	        	    <div>
 	        	        {% if group.type == 0 %}

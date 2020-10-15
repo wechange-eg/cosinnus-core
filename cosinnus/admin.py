@@ -33,6 +33,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from cosinnus.models.bbb_room import BBBRoom
 from cosinnus.models.conference import CosinnusConferenceRoom
+from cosinnus.models.managed_tags import CosinnusManagedTag,\
+    CosinnusManagedTagAssignment
 
 
 class SingleDeleteActionMixin(object):
@@ -629,6 +631,24 @@ class CosinnusConferenceRoomAdmin(admin.ModelAdmin):
     search_fields = ('slug', 'title',)
 
 admin.site.register(CosinnusConferenceRoom, CosinnusConferenceRoomAdmin)
+
+
+class CosinnusManagedTagAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'portal', 'paired_group')
+    list_filter = ('portal',)
+    search_fields = ('slug', 'name',)
+
+admin.site.register(CosinnusManagedTag, CosinnusManagedTagAdmin)
+
+
+class CosinnusManagedTagAssignmentAdmin(admin.ModelAdmin):
+    list_display = ('managed_tag', 'content_type', 'object_id', 'approved',)
+    list_filter = ('managed_tag__portal',)
+    search_fields = ('managed_tag__slug', 'managed_tag__name',)
+
+admin.site.register(CosinnusManagedTagAssignment, CosinnusManagedTagAssignmentAdmin)
+
+
 
 
 ## TODO: FIXME: re-enable after 1.8 migration

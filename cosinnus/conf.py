@@ -743,7 +743,17 @@ class CosinnusConf(AppConf):
 
     # default value for form field for if to allow user creation of coffee tables
     CONFERENCE_COFFEETABLES_ALLOW_USER_CREATION_DEFAULT = False
-
+    
+    # enable display and forms for managed tags
+    MANAGED_TAGS_ENABLED = False
+    # str path to a drop-in class for managed tags containing strings 
+    MANAGED_TAGS_LABEL_CLASS_DROPIN = None
+    MANAGED_TAGS_USERS_MAY_ASSIGN_SELF = False
+    MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS = False
+    MANAGED_TAGS_USER_TAGS_REQUIRE_APPROVAL = False
+    MANAGED_TAGS_SHOW_FORMFIELD_SELECTED_TAG_DETAILS = True
+    
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.

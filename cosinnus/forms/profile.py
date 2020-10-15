@@ -9,12 +9,13 @@ from multiform.forms import InvalidArgument
 
 from cosinnus.models.profile import get_user_profile_model,\
     UserProfileFormExtraFieldsMixin
-from cosinnus.forms.tagged import get_form  
+from cosinnus.forms.tagged import get_form
 from cosinnus.forms.user import UserChangeForm
 from cosinnus.conf import settings
+from cosinnus.forms.managed_tags import ManagedTagFormMixin
 
 
-class _UserProfileForm(UserProfileFormExtraFieldsMixin, forms.ModelForm):
+class _UserProfileForm(UserProfileFormExtraFieldsMixin, ManagedTagFormMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     website = forms.URLField(widget=forms.TextInput, required=False)
@@ -22,6 +23,8 @@ class _UserProfileForm(UserProfileFormExtraFieldsMixin, forms.ModelForm):
     
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
         newsletter_opt_in = forms.BooleanField(label='newsletter_opt_in', required=False)
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+        managed_tag_field = forms.CharField(required=False)
     
     class Meta(object):
         model = get_user_profile_model()
@@ -31,7 +34,6 @@ class _UserProfileForm(UserProfileFormExtraFieldsMixin, forms.ModelForm):
         super(_UserProfileForm, self).__init__(*args, **kwargs)
         if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
             self.initial['newsletter_opt_in'] = self.instance.settings.get('newsletter_opt_in', False)
-    
     
     def save(self, commit=True):
         """ Set the username equal to the userid """
@@ -43,6 +45,7 @@ class _UserProfileForm(UserProfileFormExtraFieldsMixin, forms.ModelForm):
             profile.save(update_fields=['settings'])
                 
         return profile
+
 
 class UserProfileForm(get_form(_UserProfileForm, attachable=False, extra_forms={'user': UserChangeForm})):
     

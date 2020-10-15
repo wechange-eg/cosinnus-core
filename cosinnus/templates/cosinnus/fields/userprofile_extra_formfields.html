@@ -1,0 +1,8 @@
+{% load i18n  cosinnus_tags  %}
+
+{% for extra_field_name, extra_field in form|get_attr:'extra_field_items' %}
+    {% with bound_extra_field=form|get_item:extra_field_name %}
+        {# Regular Field #}
+        {% include 'cosinnus/fields/default_field.html' with field=bound_extra_field label=extra_field.label legend=extra_field.legend placeholder=extra_field.placeholder %}
+    {% endwith %}
+{% endfor %}

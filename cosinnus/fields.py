@@ -6,7 +6,6 @@ from cosinnus.models.group import CosinnusGroup
 from django_select2.util import JSFunction
 from django.contrib.auth import get_user_model
 from cosinnus.utils.user import filter_active_users
-from cosinnus.views.user import UserSelect2View
 
 User = get_user_model()
 
@@ -14,11 +13,13 @@ class UserSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
     
     queryset = User.objects
     search_fields = ['username__icontains', ]
-    data_view = UserSelect2View
+    data_view = None # set at init time
     
     def __init__(self, *args, **kwargs):
         """ Enable returning HTML formatted results in django-select2 return views!
             Note: You are responsible for cleaning the content, i.e. with  django.utils.html.escape()! """
+        from cosinnus.views.user import UserSelect2View
+        self.data_view = UserSelect2View
         super(UserSelect2MultipleChoiceField, self).__init__(*args, **kwargs)
         self.widget.options['escapeMarkup'] = JSFunction('function(m) { return m; }')
         # this doesn't seem to help in removing the <div> tags

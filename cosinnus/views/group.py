@@ -282,7 +282,17 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
     @atomic
     def dispatch(self, *args, **kwargs):
         return super(GroupCreateView, self).dispatch(*args, **kwargs)
-
+    
+    def get_initial(self):
+        """ Allow pre-populating managed tags on group creation from the user's profile tags """
+        initial = super().get_initial()
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS:
+            # check if the user is assigned to any tags, and if so, add their comma-seperated slugs
+            assigned_tags = list(self.request.user.cosinnus_profile.get_managed_tags())
+            if assigned_tags:
+                initial['managed_tag_field'] = ','.join([tag.slug for tag in assigned_tags])
+        return initial
+    
     def forms_valid(self, form, inlines):
         ret = super(GroupCreateView, self).forms_valid(form, inlines)
         membership = CosinnusGroupMembership.objects.create(user=self.request.user,

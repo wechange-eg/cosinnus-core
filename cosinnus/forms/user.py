@@ -20,6 +20,7 @@ from cosinnus.utils.user import accept_user_tos_for_portal
 
 import logging
 from cosinnus.models.profile import UserCreationFormExtraFieldsMixin
+from cosinnus.forms.managed_tags import ManagedTagFormMixin
 logger = logging.getLogger('cosinnus')
 
 
@@ -53,24 +54,29 @@ class TermsOfServiceFormFields(forms.Form):
         newsletter_opt_in = forms.BooleanField(label='newsletter_opt_in', required=False)
         
 
-class UserCreationForm(UserCreationFormExtraFieldsMixin, TermsOfServiceFormFields, DjUserCreationForm):
+class UserCreationForm(UserCreationFormExtraFieldsMixin, TermsOfServiceFormFields, ManagedTagFormMixin, DjUserCreationForm):
     # Inherit from UserCreationForm for proper password hashing!
 
     class Meta(object):
         model = get_user_model()
-        fields = (
+        fields = [
             'username', 'email', 'password1', 'password2', 'first_name',
-            'last_name', 'tos_check',
-        )
+            'last_name', 'tos_check'
+        ]
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+            fields = fields + ['managed_tag_field']
     
     # email maxlength 220 instead of 254, to accomodate hashes to scramble them 
     email = forms.EmailField(label=_('email address'), required=True, validators=[MaxLengthValidator(220)]) 
     first_name = forms.CharField(label=_('first name'), required=True)  
     
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+        managed_tag_field = forms.CharField(required=False)
+        managed_tag_assignment_attribute_name = 'cosinnus_profile' 
     if not settings.COSINNUS_IS_INTEGRATED_PORTAL and not settings.COSINNUS_IS_SSO_PORTAL: 
         captcha = CaptchaField()
-    
-    
+        
+        
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].required = True

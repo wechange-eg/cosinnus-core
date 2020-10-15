@@ -146,7 +146,7 @@ class IdeaManager(models.Manager):
     
     def active(self):
         """ Returns active Ideas """
-        qs = qs = self.get_queryset()
+        qs = self.get_queryset()
         return qs.filter(is_active=True)
     
     def get_by_shortid(self, shortid):

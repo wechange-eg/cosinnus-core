@@ -15,6 +15,7 @@ from cosinnus.forms.user import TermsOfServiceFormFields
 import logging
 from cosinnus.utils.user import get_user_tos_accepted_date,\
     check_user_has_accepted_portal_tos
+from cosinnus.models.managed_tags import CosinnusManagedTag
 logger = logging.getLogger('cosinnus')
 
 
@@ -110,6 +111,7 @@ def cosinnus(request):
         'COSINNUS_STREAM_UNSEEN_COUNT': stream_unseen_count,
         'COSINNUS_CURRENT_LANGUAGE': get_language(),
         'COSINNUS_CURRENT_PORTAL': CosinnusPortal.get_current(),
+        'COSINNUS_MANAGED_TAG_LABELS': CosinnusManagedTag.labels,
     }
 
 

@@ -1,0 +1,25 @@
+{% load i18n cosinnus_tags  %}
+
+<div class="row managed-tag-detail" data-tag-slug="{{ tag.slug }}" {% if not visible %}style="display: none;"{% endif %}>
+    <div class="col-xs-10 tag-content transparent">
+        <div class="pull-left tag-image">
+		    {% if tag.image %}
+	            <img class="image forms-managed-tags detail-image" src="{{ tag.get_image_thumbnail_url }}">
+		    {% else %}
+	            <i class="fa fa-3x {{ COSINNUS_MANAGED_TAG_LABELS.ICON }}"></i>
+		    {% endif %}
+	    </div>  
+	    <div>
+	        <p class="transparent forms-managed-tags detail-name">
+	            <a target="_blank" {% if tag.get_absolute_url %}href="{{ tag.get_absolute_url}}"{% else %}disabled{% endif %}>
+	                {{ tag.name }}
+	            </a>
+	        </p>
+	        {% if tag.description %}
+	            <p class="transparent forms-managed-tags detail-description">
+	                {{ tag.description }}
+	            </p>
+	        {% endif %}
+	    </div>
+    </div>
+</div>  
