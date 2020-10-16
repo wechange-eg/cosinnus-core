@@ -30,7 +30,9 @@ from cosinnus.utils.dashboard import ensure_group_widget
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import assign_user_to_default_auth_group, \
     ensure_user_to_default_portal_groups
-from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignment,\
+    CosinnusManagedTag
+from cosinnus.models.group_extra import ensure_group_type
 
 logger = logging.getLogger('cosinnus')
 
@@ -308,6 +310,38 @@ def managed_tag_sync_paired_group_memebership_deletion(sender, instance, **kwarg
                 membership = get_object_or_None(CosinnusGroupMembership, group=tag.paired_group, user=target_object.user)
                 if membership and not membership.status == MEMBERSHIP_ADMIN:
                     membership.delete()
+    except Exception as e:
+        logger.exception(e)
+        
+
+@receiver(post_save, sender=CosinnusManagedTagAssignment)
+@receiver(post_delete, sender=CosinnusManagedTagAssignment)
+def managed_tag_assignment_update(sender, instance, created=False, **kwargs):
+    """ Update the target object's index on managed tag assignment """
+    try:
+        target_object = instance.target_object
+        if target_object and hasattr(target_object, 'update_index'):
+            target_object.update_index()
+    except Exception as e:
+        logger.exception(e)
+        
+
+@receiver(post_save, sender=CosinnusManagedTag)
+@receiver(post_delete, sender=CosinnusManagedTag)
+def managed_tag_cache_clear_triggers(sender, instance, created=False, **kwargs):
+    """ Clears the cache for tags when saved/deleted """
+    try:
+        CosinnusManagedTag.objects.clear_cache()
+    except Exception as e:
+        logger.exception(e)
+        
+
+@receiver(post_save, sender=CosinnusGroupMembership)
+@receiver(post_delete, sender=CosinnusGroupMembership)
+def group_membership_cache_clear_triggers(sender, instance, created=False, **kwargs):
+    """ Clears the cache for CosinnusGroupMembership when saved/deleted """
+    try:
+        CosinnusGroupMembership.clear_member_cache_for_group(instance.group)
     except Exception as e:
         logger.exception(e)
 

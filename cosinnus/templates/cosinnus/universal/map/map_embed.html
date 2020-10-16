@@ -1,10 +1,17 @@
-{% load static cosinnus_tags cosinnus_map_tags %}
+{% load static cosinnus_tags cosinnus_map_tags sdg_tags %}
 
 <html>
     <head>
         <script type="text/javascript">
             var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
             var COSINNUS_MAP_TOPICS_JSON = {% render_cosinnus_topics_json %};
+            {% if SETTINGS.COSINNUS_ENABLE_SDGS %}
+		    var COSINNUS_MAP_SDGS_JSON = {% render_sdg_json %};
+		    {% endif %}
+		    {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED %}
+		    var COSINNUS_MANAGED_TAGS_JSON = {% render_managed_tags_json %};
+		    var COSINNUS_MANAGED_TAGS_LABELS_JSON = {{ COSINNUS_MANAGED_TAG_LABELS.get_labels_dict|json|safe }};
+		    {% endif %}
             var COSINNUS_MAP_OPTIONS = {{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }};
             var COSINNUS_PORTAL_INFOS = {% render_cosinnus_portal_info_json %};
             var COSINNUS_IDEAS_ENABLED = {% if SETTINGS.COSINNUS_IDEAS_ENABLED %}true{% else %}false{% endif %};

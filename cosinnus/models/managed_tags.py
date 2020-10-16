@@ -13,7 +13,7 @@ from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
+from django.utils.encoding import python_2_unicode_compatible, force_text
 from django.utils.translation import ugettext_lazy as _
 import six
 
@@ -21,6 +21,7 @@ from cosinnus.conf import settings
 from cosinnus.utils.files import get_managed_tag_image_filename, image_thumbnail, \
     image_thumbnail_url
 from cosinnus.utils.functions import clean_single_line_text, resolve_class
+from django.urls.base import reverse
 
 
 logger = logging.getLogger('cosinnus')
@@ -56,6 +57,12 @@ class CosinnusManagedTagLabels(object):
     # in the select list, this is the "none chosen" choice string
     MANAGED_TAG_FIELD_EMPTY_CHOICE = _('No Tag selected')
     
+    @classmethod
+    def get_labels_dict(cls):
+        """ Returns a dict of all labels.
+            Note: lazy translation objects will be resolved here! """
+        return dict([(key, force_text(val)) for (key, val) in cls.__dict__.items() if not key.startswith('_')])
+    
 
 # allow dropin of labels class
 MANAGED_TAG_LABELS = CosinnusManagedTagLabels
@@ -65,11 +72,31 @@ if getattr(settings, 'COSINNUS_MANAGED_TAGS_LABEL_CLASS_DROPIN', None):
 
 class CosinnusManagedTagManager(models.Manager):
     
+    # a list of all CosinnusManagedTags
+    _MANAGED_TAG_ALL_LIST_CACHE_KEY = 'cosinnus/core/portal/%d/managed_tags/all' # portal_id
+    # a dict of *both* mappings from int and slug to CosinnusManagedTags. contains duplicate tags!
+    _MANAGED_TAG_DICT_CACHE_KEY = 'cosinnus/core/portal/%d/managed_tags/dict' # portal_id
+    
     def all_in_portal(self):
-        """ Returns all groups within the current portal only """
-        # TODO: cache!
+        """ Returns all managed tags within the current portal only """
         return self.get_queryset().filter(portal=CosinnusPortal().get_current())
     
+    def all_in_portal_cached(self):
+        """ Returns a cached list of all managed tags within the current portal only """
+        cache_key = self._MANAGED_TAG_ALL_LIST_CACHE_KEY % CosinnusPortal().get_current().id
+        all_tag_list = cache.get(cache_key)
+        if all_tag_list is None:
+            all_tag_list = list(self.all_in_portal())
+            cache.set(cache_key, all_tag_list, settings.COSINNUS_MANAGED_TAG_CACHE_TIMEOUT)
+        return all_tag_list
+    
+    def clear_cache(self):
+        """ Clears all cached managed tags """ 
+        cache.delete_many([
+            self._MANAGED_TAG_ALL_LIST_CACHE_KEY % CosinnusPortal().get_current().id,
+            self._MANAGED_TAG_DICT_CACHE_KEY % CosinnusPortal().get_current().id,
+        ])
+        
     def get_cached(self, pk_or_id_or_list):
         """ Returns one or many cached tags, by any given combination of a single int pk,
             str slug or a list of both combinations.
@@ -81,9 +108,12 @@ class CosinnusManagedTagManager(models.Manager):
         if single:
             pk_or_id_or_list = [pk_or_id_or_list]
         
-        # TODO cache the dicts!
-        all_tags = self.all_in_portal()
-        tag_dict = dict([(tag.id, tag) for tag in all_tags] + [(tag.slug, tag) for tag in all_tags])
+        cache_key = self._MANAGED_TAG_DICT_CACHE_KEY % CosinnusPortal().get_current().id
+        tag_dict = cache.get(cache_key)
+        if tag_dict is None:
+            all_tags = self.all_in_portal_cached()
+            tag_dict = dict([(tag.id, tag) for tag in all_tags] + [(tag.slug, tag) for tag in all_tags])
+            cache.set(cache_key, tag_dict, settings.COSINNUS_MANAGED_TAG_CACHE_TIMEOUT)
         
         tags = []
         for pk_or_slug in pk_or_id_or_list:
@@ -91,91 +121,6 @@ class CosinnusManagedTagManager(models.Manager):
         if single:
             return tags[0]
         return tags
-        
-    
-#     # main pk to object key
-#     _MANAGED_TAGS_PK_CACHE_KEY = 'cosinnus/core/portal/%d/managedtags/pks/%d' # portal_id, slug -> idea
-#     # (pk -> slug) dict
-#     _MANAGED_TAGS_SLUG_TO_PK_CACHE_KEY = 'cosinnus/core/portal/%d/managedtags/slugs' # portal_id -> {(slug, pk), ...} 
-#     
-#     def get_cached(self, slugs=None, pks=None, select_related_media_tag=True, portal_id=None):
-#         """
-#         Gets all ideas defined by either `slugs` or `pks`.
-# 
-#         `slugs` and `pks` may be a list or tuple of identifiers to use for
-#         request where the elements are of type string / unicode or int,
-#         respectively. You may provide a single string / unicode or int directly
-#         to query only one object.
-# 
-#         :returns: An instance or a list of instances of :class:`CosinnusGroup`.
-#         :raises: If a single object is defined a `CosinnusGroup.DoesNotExist`
-#             will be raised in case the requested object does not exist.
-#         """
-#         if portal_id is None:
-#             portal_id = CosinnusPortal().get_current().id
-#             
-#         # Check that at most one of slugs and pks is set
-#         assert not (slugs and pks)
-#         assert not (slugs or pks)
-#             
-#         if slugs is not None:
-#             if isinstance(slugs, six.string_types):
-#                 # We request a single idea
-#                 slugs = [slugs]
-#                 
-#             # We request multiple ideas by slugs
-#             keys = [self._IDEAS_SLUG_CACHE_KEY % (portal_id, s) for s in slugs]
-#             ideas = cache.get_many(keys)
-#             missing = [key.split('/')[-1] for key in keys if key not in ideas]
-#             if missing:
-#                 # we can only find ideas via this function that are in the same portal we run in
-#                 query = self.get_queryset().filter(portal__id=portal_id, is_active=True, slug__in=missing)
-#                 if select_related_media_tag:
-#                     query = query.select_related('media_tag')
-#                 
-#                 for idea in query:
-#                     ideas[self._IDEAS_SLUG_CACHE_KEY % (portal_id, idea.slug)] = idea
-#                 cache.set_many(ideas, settings.COSINNUS_IDEA_CACHE_TIMEOUT)
-#             
-#             # sort by a good sorting function that acknowldges umlauts, etc, case insensitive
-#             idea_list = list(ideas.values())
-#             idea_list = sorted(idea_list, key=sort_key_strcoll_attr('name'))
-#             return idea_list
-#             
-#         elif pks is not None:
-#             if isinstance(pks, int):
-#                 pks = [pks]
-#             else:
-#                 # We request multiple ideas
-#                 cached_pks = self.get_pks(portal_id=portal_id)
-#                 slugs = [_f for _f in (cached_pks.get(pk, []) for pk in pks) if _f]
-#                 if slugs:
-#                     return self.get_cached(slugs=slugs, portal_id=portal_id)
-#                 return []  # We rely on the slug and id maps being up to date
-#         return []
-#     
-#     
-#     def get_pks(self, portal_id=None, force=True):
-#         """
-#         Gets the (pks -> slug) :class:`OrderedDict` from the cache or, if the can has not been filled,
-#         gets the pks and slugs from the database and fills the cache.
-#         
-#         @param force: if True, forces a rebuild of the pk and slug cache for this group type
-#         :returns: A :class:`OrderedDict` with a `pk => slug` mapping of all
-#             groups
-#         """
-#         if portal_id is None:
-#             portal_id = CosinnusPortal().get_current().id
-#             
-#         pks = cache.get(self._IDEAS_PK_TO_SLUG_CACHE_KEY % (portal_id))
-#         if force or pks is None:
-#             # we can only find groups via this function that are in the same portal we run in
-#             pks = OrderedDict(self.filter(portal__id=portal_id, is_active=True).values_list('id', 'slug').all())
-#             cache.set(self._IDEAS_PK_TO_SLUG_CACHE_KEY % (portal_id), pks,
-#                 settings.COSINNUS_IDEA_CACHE_TIMEOUT)
-#         return pks
-
-    
     
 
 class CosinnusManagedTagAssignmentQS(models.query.QuerySet):
@@ -254,8 +199,7 @@ class CosinnusManagedTagAssignment(models.Model):
             ).delete()
         # add wanted non-existant tags
         for slug in slugs_to_assign:
-            # todo: cache!
-            managed_tag = get_object_or_None(CosinnusManagedTag, portal=CosinnusPortal().get_current(), slug=slug)
+            managed_tag = CosinnusManagedTag.objects.get_cached(slug)
             if managed_tag:
                 approve = not bool(settings.COSINNUS_MANAGED_TAGS_USER_TAGS_REQUIRE_APPROVAL)
                 cls.objects.create(content_type=content_type, object_id=obj.id, managed_tag=managed_tag, approved=approve)
@@ -336,35 +280,14 @@ class CosinnusManagedTag(models.Model):
             self.portal = current_portal
             
         super(CosinnusManagedTag, self).save(*args, **kwargs)
-        
-        # todo: caching
-        # self._clear_cache(slugs=slugs)
-        # force rebuild the pk --> slug cache. otherwise when we query that, this group might not be in it
-        # self.__class__.objects.get_pks(force=True)
-        
-        self._portal_id = self.portal_id
-        self._slug = self.slug
+        self.clear_cache()
     
     def delete(self, *args, **kwargs):
-        # todo: caching
-        #self._clear_cache(slug=self.slug)
+        self.clear_cache()
         super(CosinnusManagedTag, self).delete(*args, **kwargs)
         
-    @classmethod
-    def _clear_cache(self, slug=None, slugs=None):
-        # todo: caching
-        slugs = set([s for s in slugs]) if slugs else set()
-        if slug: slugs.add(slug)
-        keys = [
-            self.objects._IDEAS_PK_TO_SLUG_CACHE_KEY % (CosinnusPortal().get_current().id),
-        ]
-        if slugs:
-            keys.extend([self.objects._IDEAS_SLUG_CACHE_KEY % (CosinnusPortal().get_current().id, s) for s in slugs])
-        cache.delete_many(keys)
-        
     def clear_cache(self):
-        # todo: caching
-        self._clear_cache(slug=self.slug)
+        CosinnusManagedTag.objects.clear_cache()
         
     @property
     def image_url(self):
@@ -382,8 +305,7 @@ class CosinnusManagedTag(models.Model):
     
     def get_search_url(self):
         """ Returns the filtered search view for this tag """
-        # todo
-        return '???'
+        return reverse('cosinnus:map') + f'?managed_tags={self.id}'
     
 
 class CosinnusManagedTagAssignmentModelMixin(object):
@@ -392,8 +314,12 @@ class CosinnusManagedTagAssignmentModelMixin(object):
         `managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')` 
         to your model. """
     
+    def get_managed_tag_ids(self):
+        """ Returns all ids of approved assigned managed tags for this object """
+        return list(self.managed_tag_assignments.all().filter(approved=True).values_list('managed_tag', flat=True))
+    
     def get_managed_tags(self):
-        """ Returns all managed tags approved for this profile """
-        tag_ids = self.managed_tag_assignments.all().filter(approved=True).values_list('managed_tag', flat=True)
+        """ Returns all approved assigned managed tags for this object """
+        tag_ids = self.get_managed_tag_ids()
         return CosinnusManagedTag.objects.get_cached(list(tag_ids))
 

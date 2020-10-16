@@ -32,7 +32,7 @@ if getattr(settings, 'COSINNUS_MANAGED_TAGS_ENABLED', False):
         def __init__(self, *args, **kwargs):
             super(_ManagedTagFormMixin, self).__init__(*args, **kwargs)
             if 'managed_tag_field' in self.fields:
-                setattr(self.fields['managed_tag_field'], 'all_managed_tags', CosinnusManagedTag.objects.all_in_portal())
+                setattr(self.fields['managed_tag_field'], 'all_managed_tags', CosinnusManagedTag.objects.all_in_portal_cached())
                 # set initial tag
                 if 'managed_tag_field' in self.initial:
                     self.fields['managed_tag_field'].initial = self.initial['managed_tag_field']

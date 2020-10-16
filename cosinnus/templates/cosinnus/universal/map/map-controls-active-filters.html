@@ -1,6 +1,6 @@
 {% load i18n %}
 
-{% if typeFiltersActive or topicFiltersActive or q or sdgFiltersActive %}
+{% if typeFiltersActive or topicFiltersActive or q or sdgFiltersActive or managedTagsFiltersActive %}
     <div class="map-controls-active-filter-frame">
 
         {% if typeFiltersActive %}
@@ -69,6 +69,27 @@
                 <i class="fa fa-close clickable-button reset-sdg-filters"></i>
             </div>
         {% endif %}
+        
+        {% if managedTagsFiltersActive %}
+            <div class="active-filters active-filters-managed-tags">
+                <span class="active-filters-inner">
+                    <span class="caps">
+                        {{ managedTagsLabels.MANAGED_TAG_NAME_PLURAL }}:
+                    </span>
+                    {% for managed_tag_id in activeManagedTagsIds %}
+                        {% set outer_loop = loop %}
+                        {% for managed_tag in allManagedTags %}
+                            {% if managed_tag and managed_tag_id == managed_tag.id %}
+                                <span>{{ managed_tag.name }}{% if not outer_loop.last %}, {% endif %}</span>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </span>
+                <i class="fa fa-close clickable-button reset-managed-tag-filters"></i>
+            </div>
+        {% endif %}
+        
+        
         
         {% if q %}
             <div class="active-filters active-filters-q">
