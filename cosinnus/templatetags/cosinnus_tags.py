@@ -382,6 +382,10 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         groups_invited += [DashboardItem(group) for group in projects_invited]
         context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         context['groups_invited_count'] = len(groups_invited)
+
+        # conferences        
+        my_conferences = [society for society in CosinnusSociety.objects.get_for_user(request.user) if society.group_is_conference]
+        context['my_conferences_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(conference) for conference in my_conferences]))
         
         membership_requests = []
         membership_requests_count = 0
