@@ -1,0 +1,56 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block page_title %}{% trans "Newsletter for groups" %} - {% trans "Edit" %}{% endblock %}
+
+{% block leftnav %}
+	{% include 'cosinnus/administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li class="active">{% trans "Newsletter for groups" %}</li>
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.email_text.id_for_label %}
+{% endblock %}
+
+{% block content %}
+<div class="content-box">
+    <h2 class="white-text large-space">{% trans 'Newsletters' %}</h2>
+    {% if object_list %}
+    <table class="table table-striped white-content">
+        <thead>
+            <tr>
+                <th>{% trans "Newsletter" %}</th>
+                <th>{% trans "Sent at:" %}</th>
+            </tr>
+        </thead>
+        {% for newsletter in object_list %}
+        <tr>
+            <th><a href="{% url 'cosinnus:administration-group-newsletter-update' newsletter_id=newsletter.id %}">{{ newsletter.subject }}</a></th>
+            <th>{% if newsletter.sent %}{{ newsletter.sent }}{% else %}{% trans 'This newsletter has not been sent' %}{% endif %}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        {% trans "There are no newsletters yet." %}
+    {% endif %}
+</div>
+<div class="fadedown pull-right">
+    <button class="btn btn-emphasized">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="{% url 'cosinnus:administration-group-newsletter-create' %}">
+                    <i class="fa fa-plus"></i>
+                </a>
+                <div class="media-body">
+                    <a href="{% url 'cosinnus:administration-group-newsletter-create' %}">{% trans 'Add newsletter'%}</a>
+                </div>
+            </li>
+        </ul>
+    </button>
+</div>
+{% endblock %}
