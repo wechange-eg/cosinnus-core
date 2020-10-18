@@ -12,7 +12,7 @@ from django.core.exceptions import PermissionDenied
 from django.views.generic.base import TemplateView
 from cosinnus.forms.administration import UserWelcomeEmailForm, NewsletterForGroupForm
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.newsletter import  Newsletter
+from cosinnus.models.newsletter import Newsletter
 from django.urls.base import reverse
 from cosinnus.views.user import _send_user_welcome_email_if_enabled
 from django.shortcuts import redirect
@@ -145,6 +145,16 @@ class GroupNewsletterUpdateView(GroupNewsletterMixin, UpdateView):
             text = textfield(render_html_with_variables(recipient, text))
             send_html_mail_threaded(recipient, subject, text)
 
+    def _copy_newsletter(self):
+        subject = '{} (copy)'.format(self.object.subject)
+        body = self.object.body
+        recipients_source = self.object.recipients_source
+        Newsletter.objects.create(
+            subject=subject,
+            body=body,
+            recipients_source=recipients_source
+        )
+
     def form_valid(self, form):
         self.object = form.save()
         if 'send_newsletter' in self.request.POST:
@@ -156,6 +166,9 @@ class GroupNewsletterUpdateView(GroupNewsletterMixin, UpdateView):
         elif 'send_test_mail' in self.request.POST:
             self._send_newsletter([self.request.user])
             messages.add_message(self.request, messages.SUCCESS, _('Test email sent.'))
+        elif 'copy_newsletter' in self.request.POST:
+            self._copy_newsletter()
+            messages.add_message(self.request, messages.SUCCESS, _('Newsletter has been copied.'))
         return HttpResponseRedirect(self.get_success_url())
 
     def get_form_kwargs(self):

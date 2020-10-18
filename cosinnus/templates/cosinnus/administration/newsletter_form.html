@@ -25,7 +25,13 @@
 {% block content %}
 
 <form method="post" class="cosinnus-form form-horizontal">{% csrf_token %}
+
     <div class="content-box">
+
+        {% if form.instance.sent %}
+        <p class="transparent"><i class="fas fa-info-circle"></i> {% trans 'This newsletter has already been sent. If you want to send it again, please copy it and send the copy.' %}</p>
+        {% endif %}
+
         {% trans "Subject" as newsletter_subject_label %}
         {% trans "Subject" as newsletter_subject_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.subject label=newsletter_subject_label placeholder=newsletter_subject_placeholder large_field=True %}
@@ -40,38 +46,50 @@
     </div>
 
     {% if form.instance.id %}
-    {% captureas modal_send_newsletter %}send_newsletter_{{ form.instance.id }}{% endcaptureas %}
-    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{ modal_send_newsletter }}">
-        <ul class="media-list">
-            <li class="media">
-                <a class="pull-left" href="#">
+        {% if not form.instance.sent %}
+        {% captureas modal_send_newsletter %}send_newsletter_{{ form.instance.id }}{% endcaptureas %}
+        <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{ modal_send_newsletter }}">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    <div class="media-body">
+                        {% trans "Send newsletter to group" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+
+        <button type="submit" name="send_test_mail" class="btn btn-emphasized">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
                         <i class="fa fa-envelope"></i>
                     </a>
-                <div class="media-body">
-                    {% trans "Send newsletter to group" %}
-                </div>
-            </li>
-        </ul>
-    </button>
-    {% captureas label %}{% trans "Do you really want to send the newsletter?" %}{% endcaptureas %}
-    {% captureas title %}{% trans "Send newsletter" %}{% endcaptureas %}
-    {% captureas action %}{% url 'cosinnus:administration-group-newsletter-update' newsletter_id=form.instance.id %}{% endcaptureas %}
-    {% include "cosinnus/modal_box.html" with id=modal_send_newsletter label=label title=title form_action=action submit_name="send_newsletter" title_icon='fa fa-envelope' %}
+                    <div class="media-body">
+                        {% trans "Send yourself a Test-Mail" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+        {% else %}
+        <button type="submit" name="copy_newsletter" class="btn btn-emphasized">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fas fa-copy"></i>
+                    </a>
+                    <div class="media-body">
+                        {% trans "Copy this newsletter" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+        {% endif  %}
+    {% endif  %}
 
-    <button type="submit" name="send_test_mail" class="btn btn-emphasized">
-        <ul class="media-list">
-            <li class="media">
-                <a class="pull-left" href="#">
-                    <i class="fa fa-envelope"></i>
-                </a>
-                <div class="media-body">
-                    {% trans "Send yourself a Test-Mail" %}
-                </div>
-            </li>
-        </ul>
-    </button>
-    {% endif %}
-
+    {% if not form.instance.id %}
     <button type="submit" name="save_draft" class="btn btn-emphasized">
         <ul class="media-list">
             <li class="media">
@@ -84,7 +102,14 @@
             </li>
         </ul>
     </button>
+    {% endif %}
 
+    {% if form.instance.id %}
+    {% captureas label %}{% trans "Do you really want to send the newsletter?" %}{% endcaptureas %}
+    {% captureas title %}{% trans "Send newsletter" %}{% endcaptureas %}
+    {% captureas action %}{% url 'cosinnus:administration-group-newsletter-update' newsletter_id=form.instance.id %}{% endcaptureas %}
+    {% include "cosinnus/modal_box.html" with id=modal_send_newsletter label=label title=title form_action=action submit_name="send_newsletter" title_icon='fa fa-envelope' %}
+    {% endif %}
 </form>
 
 {% endblock %}
