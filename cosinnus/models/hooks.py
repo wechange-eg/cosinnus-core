@@ -23,13 +23,16 @@ from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
 from cosinnus.models.membership import MEMBERSHIP_MEMBER, MEMBER_STATUS, \
     MEMBERSHIP_ADMIN
 from cosinnus.models.profile import GlobalBlacklistedEmail, \
-    GlobalUserNotificationSetting
+    GlobalUserNotificationSetting, get_user_profile_model
 from cosinnus.models.tagged import ensure_container, LikeObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.dashboard import ensure_group_widget
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import assign_user_to_default_auth_group, \
     ensure_user_to_default_portal_groups
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignment,\
+    CosinnusManagedTag
+from cosinnus.models.group_extra import ensure_group_type
 
 logger = logging.getLogger('cosinnus')
 
@@ -272,7 +275,76 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
     MembershipUpdateHookThread().start()
 
 
+@receiver(post_save, sender=CosinnusManagedTagAssignment)
+def managed_tag_sync_paired_group_memebership_creation(sender, instance, created, **kwargs):
+    """ If a managed tag has a paired group and has been assigned (and approved) to a user profile,
+        create the user's group membership in the paired group if it doesn't exist yet """
+    try:
+        target_object = instance.target_object
+        if instance.approved and target_object and isinstance(target_object, get_user_profile_model()):
+            tag = instance.managed_tag
+            if tag.paired_group:
+                membership = get_object_or_None(CosinnusGroupMembership, group=tag.paired_group, user=target_object.user)
+                if membership and not membership.status in MEMBER_STATUS:
+                    membership.status = MEMBERSHIP_MEMBER
+                    membership.save()
+                elif not membership:
+                    CosinnusGroupMembership.objects.create(
+                        group=tag.paired_group, 
+                        user=target_object.user,
+                        status=MEMBERSHIP_MEMBER
+                    )
+    except Exception as e:
+        logger.exception(e)
 
 
-from cosinnus.apis.cleverreach import *
+@receiver(post_delete, sender=CosinnusManagedTagAssignment)
+def managed_tag_sync_paired_group_memebership_deletion(sender, instance, **kwargs):
+    """ If a managed tag has a paired group and has been unassigned from a user profile,
+        delete the user's group membership in the paired group (unless the user is a group admin) """
+    try:
+        target_object = instance.target_object
+        if target_object and type(target_object) is get_user_profile_model():
+            tag = instance.managed_tag
+            if tag.paired_group:
+                membership = get_object_or_None(CosinnusGroupMembership, group=tag.paired_group, user=target_object.user)
+                if membership and not membership.status == MEMBERSHIP_ADMIN:
+                    membership.delete()
+    except Exception as e:
+        logger.exception(e)
+        
+
+@receiver(post_save, sender=CosinnusManagedTagAssignment)
+@receiver(post_delete, sender=CosinnusManagedTagAssignment)
+def managed_tag_assignment_update(sender, instance, created=False, **kwargs):
+    """ Update the target object's index on managed tag assignment """
+    try:
+        target_object = instance.target_object
+        if target_object and hasattr(target_object, 'update_index'):
+            target_object.update_index()
+    except Exception as e:
+        logger.exception(e)
+        
+
+@receiver(post_save, sender=CosinnusManagedTag)
+@receiver(post_delete, sender=CosinnusManagedTag)
+def managed_tag_cache_clear_triggers(sender, instance, created=False, **kwargs):
+    """ Clears the cache for tags when saved/deleted """
+    try:
+        CosinnusManagedTag.objects.clear_cache()
+    except Exception as e:
+        logger.exception(e)
+        
+
+@receiver(post_save, sender=CosinnusGroupMembership)
+@receiver(post_delete, sender=CosinnusGroupMembership)
+def group_membership_cache_clear_triggers(sender, instance, created=False, **kwargs):
+    """ Clears the cache for CosinnusGroupMembership when saved/deleted """
+    try:
+        CosinnusGroupMembership.clear_member_cache_for_group(instance.group)
+    except Exception as e:
+        logger.exception(e)
+
+
+from cosinnus.apis.cleverreach import * # noqa
 from cosinnus.models.wagtail_models import *  # noqa

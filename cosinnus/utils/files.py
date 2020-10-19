@@ -63,6 +63,9 @@ def get_group_wallpaper_filename(instance, filename):
 def get_idea_image_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'images', base_folder='idea_images')
 
+def get_managed_tag_image_filename(instance, filename):
+    return _get_avatar_filename(instance, filename, 'images', base_folder='managed_tag_images')
+
 
 def get_organization_avatar_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'images', base_folder='organization_images')

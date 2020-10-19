@@ -55,6 +55,8 @@ from django.apps import apps
 from cosinnus.models.tagged import LikeableObjectMixin, LastVisitedMixin
 import datetime
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericRelation
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
 
 
 logger = logging.getLogger('cosinnus')
@@ -612,7 +614,8 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
 
 @python_2_unicode_compatible
 class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
-                        VideoEmbedFieldMixin, MembersManagerMixin, models.Model):
+                        CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin,
+                        models.Model):
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1
 
@@ -750,6 +753,8 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     extra_fields = JSONField(default={}, blank=True)
     settings = PostgresJSONField(default=dict, blank=True, null=True)
     sdgs = PostgresJSONField(default=list, blank=True, null=True)
+    
+    managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
 
     objects = CosinnusGroupManager()
 
@@ -968,7 +973,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def update_index_for_all_group_objects(self):
         """ Adds all of this group's BaseTaggableObjects to the search index """
         for instance in self.get_all_objects_for_group():
-            instance.remove_index()
+            instance.update_index()
 
     def get_icon(self):
         """ Returns the font-awesome icon specific to the group type """

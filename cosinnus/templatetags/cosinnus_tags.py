@@ -60,6 +60,7 @@ from cosinnus.utils.user import check_user_has_accepted_portal_tos
 from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
 from django.templatetags.i18n import do_translate, do_block_translate, TranslateNode, BlockTranslateNode
 from cosinnus.utils.html import render_html_with_variables
+from cosinnus.models.managed_tags import CosinnusManagedTag
 
 logger = logging.getLogger('cosinnus')
 
@@ -195,8 +196,7 @@ def full_name(value):
 
 @register.filter
 def full_name_force(value):
-    """ Like ``full_name()``, this tag will always print the user name, even if the user is inactive
-    """
+    """ Like ``full_name()``, this tag will always print the user name, even if the user is inactive """
     from django.contrib.auth.models import AbstractBaseUser
     if isinstance(value, AbstractBaseUser):
         return value.get_full_name() or value.get_username()
@@ -222,27 +222,23 @@ def profile_url(value):
 
 @register.filter
 def url_target_blank(link):
-    """ Template filter that turns any html link into a target="_blank" link.
-    """
+    """ Template filter that turns any html link into a target="_blank" link. """
     return mark_safe(link.replace('<a ', '<a target="_blank" rel="nofollow noopener noreferrer" '))
 
 
 @register.filter
 def multiply(value, arg):
-    """Template filter to multiply two numbers
-    """
+    """Template filter to multiply two numbers """
     return value * arg
 
 @register.filter
 def add_num(value, arg):
-    """Template filter to add two numbers
-    """
+    """Template filter to add two numbers """
     return value + arg
 
 @register.filter
 def subtract(value, arg):
-    """Template filter to subtract two numbers
-    """
+    """Template filter to subtract two numbers """
     return value - arg
 
 @register.filter
@@ -253,9 +249,14 @@ def intify(value):
 
 @register.filter
 def stringify(value):
-    """Template filter to stringify a value
-    """
+    """Template filter to stringify a value """
     return str(value)
+
+@register.filter
+def contains(iterable, item):
+    """Template filter to check if an iterable contains an item, just like the `in` keyword """
+    return bool(iterable is not None and item in iterable)
+
 
 @register.simple_tag(takes_context=True)
 def cosinnus_group_url_path(context, group=None):
@@ -381,6 +382,10 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         groups_invited += [DashboardItem(group) for group in projects_invited]
         context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         context['groups_invited_count'] = len(groups_invited)
+
+        # conferences        
+        my_conferences = [society for society in CosinnusSociety.objects.get_for_user(request.user) if society.group_is_conference]
+        context['my_conferences_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(conference) for conference in my_conferences]))
         
         membership_requests = []
         membership_requests_count = 0
@@ -1101,6 +1106,22 @@ def render_cosinnus_topics_json():
     """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
     topic_choices = dict([(top_id, force_text(val)) for top_id, val in TAG_OBJECT.TOPIC_CHOICES])
     return mark_safe(_json.dumps(topic_choices))
+
+@register.simple_tag()
+def render_managed_tags_json():
+    """ Returns all managed tags as JSON array of objects"""
+    all_managed_tags = CosinnusManagedTag.objects.all_in_portal_cached()
+    managed_tags_json = [
+        {
+            'id': tag.id,
+            'icon': tag.labels.ICON,
+            'image': tag.get_image_thumbnail_url(),
+            'name': tag.name,
+            'description': tag.description,
+            'url': tag.url,
+        } for tag in all_managed_tags
+    ]
+    return mark_safe(_json.dumps(managed_tags_json))
 
 @register.simple_tag()
 def get_non_cms_root_url():

@@ -178,6 +178,14 @@ class HaystackMapResult(BaseMapResult):
         'relevance': 0,
         'type': 'CompactMapResult',
     })
+    if settings.COSINNUS_ENABLE_SDGS:
+        fields.update({
+            'sdgs': [],
+        })
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED:
+        fields.update({
+            'managed_tags': [],
+        })
 
     def __init__(self, result, user=None, *args, **kwargs):
         if result.portals:
@@ -205,7 +213,6 @@ class HaystackMapResult(BaseMapResult):
             'description': textfield(result.description),
             'relevance': result.score,
             'topics': result.mt_topics,
-            'sdgs': result.sdgs,
             'portal': portal,
             'group_slug': result.group_slug,
             'group_name': result.group_name,
@@ -214,6 +221,15 @@ class HaystackMapResult(BaseMapResult):
             'content_count': result.content_count,
             'liked': user.id in result.liked_user_ids if (user and getattr(result, 'liked_user_ids', [])) else False,
         }
+        if settings.COSINNUS_ENABLE_SDGS:
+            fields.update({
+                'sdgs': result.sdgs,
+            })
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED:
+            fields.update({
+                'managed_tags': result.managed_tags,
+            })
+        
         fields.update(**kwargs)
         
         return super(HaystackMapResult, self).__init__(*args, **fields)

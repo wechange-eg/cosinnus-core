@@ -16,11 +16,10 @@ from cosinnus.forms.select2 import TagSelect2Field
 from django.urls import reverse_lazy
 from django.http.request import QueryDict
 
-from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from django_select2.fields import HeavySelect2MultipleChoiceField, Select2ChoiceField
+from django_select2.fields import Select2ChoiceField
 
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
 
@@ -29,7 +28,6 @@ from django.forms.widgets import SelectMultiple
 from django_select2.widgets import Select2MultipleWidget, Select2Widget
 from cosinnus.utils.user import get_user_select2_pills
 from cosinnus.fields import UserSelect2MultipleChoiceField
-from cosinnus.templatetags.cosinnus_tags import full_name
 
 
 TagObject = get_tag_object_model()
@@ -260,7 +258,7 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}, init_func
             """
             Save both forms and attach the media_tag to the taggable object.
             """
-            instances = super(TaggableObjectForm, self).save(commit=False)
+            instances = super(TaggableObjectForm, self).save(commit=commit )
 
             # For easy access
             obj = instances['obj']
@@ -336,3 +334,5 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}, init_func
     
 
     return TaggableObjectForm
+
+    

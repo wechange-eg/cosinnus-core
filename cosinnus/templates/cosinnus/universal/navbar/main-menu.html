@@ -99,8 +99,23 @@
 		</div>
 	</div>
 	
-	{% if COSINNUS_IDEAS_ENABLED or COSINNUS_ORGANIZATIONS_ENABLED %}
+	{% if COSINNUS_IDEAS_ENABLED or COSINNUS_ORGANIZATIONS_ENABLED or my_conferences|length > 0 %}
 	<div class="nav-column">
+	    
+        {% if my_conferences|length > 0 %}
+            <h2 class="headline headline-condensed">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "My Conferences" %}
+            </h2>
+        
+            <ul class="item-list">
+                {% for item in my_conferences %}
+                    {{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+                {% endfor %}
+            </ul>
+            
+            <hr>
+        {% endif %}
 	
 		{% if COSINNUS_ORGANIZATIONS_ENABLED %}
 			<h2 class="headline headline-condensed">

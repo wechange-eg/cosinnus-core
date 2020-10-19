@@ -157,6 +157,7 @@
 		        Backbone.mediator.publish('init:module-navbar-main-menu', {
 	            	el: '#nav-main-menu',
 	            	contextDataJSON: {
+                        'my_conferences': "{{ my_conferences_json_encoded }}",
 	            		'group_clusters': "{{ group_clusters_json_encoded }}",
 	            		'groups_invited': "{{ groups_invited_json_encoded }}",
 	            		'group_requests': "{{ group_requests_json_encoded }}",

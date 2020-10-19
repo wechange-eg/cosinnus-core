@@ -333,6 +333,24 @@
 	                            </p>
 		                    {% endif %}
 	                    {% endwith %}
+	                    
+	                    {% comment %}  
+	                        For portals that have COSINNUS_MANAGED_TAGS_ENABLED enabled, show the tags here
+	                    {% endcomment %}
+                        {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED %}
+                            {% with managed_tags=group.get_managed_tags %}
+                                {% if managed_tags %}
+                                    <p>
+                                        {{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_NAME }}:
+	                                    {% for tag in managed_tags %}
+	                                        <a target="_blank" href="{{ tag.get_absolute_url }}" {% if not tag.get_absolute_url %}disabled{% endif %}>
+	                                            {{ tag.name }}</b>{% if not forloop.last %}, {% endif %}
+	                                        </a>
+	                                    {% endfor %}
+                                    </p>
+                                {% endif %}
+                            {% endwith %}
+                        {% endif %}
                     {% endblock group_metadata %}
                     
                     </div>

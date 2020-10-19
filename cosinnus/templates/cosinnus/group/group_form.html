@@ -249,12 +249,10 @@
 		                    {% endcaptureas %}
 							{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label field_html=wallpaper_html extra_html=wallpaper_extra_html first=True large_field=True %}
 
-
                         {# Website Field #}
                         {% trans "Website" as website_label %}
                         {% trans "Example: http://mywebsite.com" as website_placeholder %}
                         {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.website label=website_label placeholder=website_placeholder %}
-
 
                         {% include "cosinnus/media_tags_group.html"%}
 
@@ -265,13 +263,11 @@
                         {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.sdgs label=sdg_label placeholder=sdg_placeholder large_field=True %}
                         {% endif %}
 
-
                         {# Locations Inlineform #}
                         {% trans "Where are you active?" as locations_label %}
                         {% trans "Remove location" as loc_rm_label %}
                         {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}
                         {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=locations_label   content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
-
 
                         {% if form.forms.obj.parent %}
 	                        {# Parent Field #}
@@ -287,6 +283,11 @@
                             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder large_field=True %}
                         {% endif %}
                         
+		                {% block managed_tag_field %}
+		                    {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS %}
+		                        {% include 'cosinnus/fields/managed_tag_formfield.html' with form=form.forms.obj legend=COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_CONTENT %}
+		                    {% endif %}
+		                {% endblock managed_tag_field %}
                         
                         {# Group Visibility Field #}
 		                {% trans "Privacy settings" as visibility_label %}

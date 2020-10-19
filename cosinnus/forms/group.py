@@ -37,6 +37,7 @@ from cosinnus.templatetags.cosinnus_tags import is_superuser
 from django.core.exceptions import ObjectDoesNotExist
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.group import SDG_CHOICES
+from cosinnus.forms.managed_tags import ManagedTagFormMixin
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -99,7 +100,8 @@ class AsssignPortalMixin(object):
         return super(AsssignPortalMixin, self).save(**kwargs)
 
 
-class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, AdditionalFormsMixin, forms.ModelForm):
+class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, 
+                ManagedTagFormMixin, AdditionalFormsMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), disable_preview=True)
     website = forms.URLField(widget=forms.TextInput, required=False)
@@ -107,8 +109,10 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
     twitter_widget_id = forms.CharField(widget=forms.Textarea, required=False)
     sdgs = forms.MultipleChoiceField(choices=SDG_CHOICES, required=False)
     
-    
     related_groups = forms.ModelMultipleChoiceField(queryset=get_cosinnus_group_model().objects.none())
+    
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS:
+        managed_tag_field = forms.CharField(required=False)
     
     class Meta(object):
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 'sdgs',
@@ -118,7 +122,9 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
                          'conference_theme_color'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else []) \
-                        + (['embedded_dashboard_html',] if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED else [])
+                        + (['embedded_dashboard_html',] if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED else []) \
+                        + (['managed_tag_field',] if (settings.COSINNUS_MANAGED_TAGS_ENABLED \
+                                                      and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS) else [])
 
     def __init__(self, instance, *args, **kwargs):
         if 'request' in kwargs:
@@ -218,6 +224,9 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
         if commit:
             self.instance.save()
             self.save_m2m()
+            # since we didn't call super().save with commit=True, call this for certain forms to catch up
+            if hasattr(self, 'post_uncommitted_save'):
+                self.post_uncommitted_save(self.instance)
         return self.instance
                 
                 

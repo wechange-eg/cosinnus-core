@@ -26,11 +26,16 @@
 <link href="{% static 'css/vendor/leaflet.markercluster.default-0.7.css' %}" rel="stylesheet">
 <link href="{% static 'css/vendor/spinkit-double-bounce.css' %}" rel="stylesheet">
 {% endaddtoblock %}
+
     
 <script type="text/javascript">
     var COSINNUS_MAP_TOPICS_JSON = {% render_cosinnus_topics_json %};
     {% if SETTINGS.COSINNUS_ENABLE_SDGS %}
     var COSINNUS_MAP_SDGS_JSON = {% render_sdg_json %};
+    {% endif %}
+    {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED %}
+    var COSINNUS_MANAGED_TAGS_JSON = {% render_managed_tags_json %};
+    var COSINNUS_MANAGED_TAGS_LABELS_JSON = {{ COSINNUS_MANAGED_TAG_LABELS.get_labels_dict|json|safe }};
     {% endif %}
 	var COSINNUS_MAP_OPTIONS = {{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }};
     var COSINNUS_PORTAL_INFOS = {% render_cosinnus_portal_info_json %};

@@ -1,0 +1,31 @@
+{% load i18n cosinnus_tags  %}
+
+<div class="managed-tag-detail" data-tag-slug="{{ tag.slug }}" {% if not visible %}style="display: none;"{% endif %}>
+    <div class="tag-content transparent">
+        <div class="pull-left tag-image">
+		    {% if tag.image %}
+	            <img class="image forms-managed-tags detail-image" src="{{ tag.get_image_thumbnail_url }}">
+		    {% else %}
+	            <i class="fa fa-3x {{ COSINNUS_MANAGED_TAG_LABELS.ICON }}"></i>
+		    {% endif %}
+	    </div>  
+	    <div>
+	        <p class="transparent forms-managed-tags detail-name">
+	            <a target="_blank" href="{{ tag.get_search_url }}">
+	                {{ tag.name }}</a>
+	            {% if tag.get_absolute_url %}
+		            <a target="_blank" href="{{ tag.get_absolute_url}}">
+	                    (<i class="fa fa-external-link"></i>
+	                    {% trans "website" %})
+	                </a>
+                {% endif %}
+	        </p>
+	        {% if tag.description %}
+	            <p class="transparent forms-managed-tags detail-description">
+	                {{ tag.description }}
+	            </p>
+	        {% endif %}
+	    </div>
+    </div>
+    <div class="clearfix"></div>
+</div>  
