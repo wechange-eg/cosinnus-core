@@ -4056,28 +4056,24 @@ msgid "Browse all Projects"
 msgstr "Alle Projekte anzeigen"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
 #| msgid "You have not RSVPed to any Events."
 msgid "You have not created any organizations yet."
-msgstr "Du hast bei keinen aktuellen Veranstaltungen zugesagt"
+msgstr "Du bist keinen Organisationen zugeordnet."
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
 #| msgid "Create new Group"
 msgid "Create new Organization"
-msgstr "Neue Gruppe anlegen"
+msgstr "Neue Organisation anlegen"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
 #| msgid "Browse all Groups"
 msgid "Browse all Organizations"
-msgstr "Alle Gruppen anzeigen"
+msgstr "Alle Organisationen anzeigen"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
 #| msgid "Search for Users"
 msgid "Search for Organizations"
-msgstr "Nach Benutzern suchen"
+msgstr "Nach Organisationen suchen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"
