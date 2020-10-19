@@ -258,6 +258,9 @@ class CosinnusConf(AppConf):
     #: How long an idea should at most stay in cache until it will be removed
     IDEA_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
+    # how long managed tags by portal should stay in cache until they will be removed
+    MANAGED_TAG_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
+    
     # should CosinnusIdeas be enabled for this Portal?
     IDEAS_ENABLED = False
     

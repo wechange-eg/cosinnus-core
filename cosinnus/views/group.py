@@ -965,8 +965,7 @@ class GroupConfirmMixin(object):
         self.object = self.get_object()
         self.confirm_action()
         # update index for the group
-        typed_group = ensure_group_type(self.object)
-        typed_group.update_index()
+        self.object.update_index()
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
@@ -1207,8 +1206,7 @@ class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
                 m.status = MEMBERSHIP_MEMBER
                 m.save()
                 # update index for the group
-                typed_group = ensure_group_type(self.group)
-                typed_group.update_index()
+                self.group.update_index()
                 signals.user_group_join_accepted.send(sender=self, obj=self.group, user=user, audience=[user])
                 messages.success(self.request, _('User %(username)s had already requested membership and has now been made a member immediately!') % {'username': user.get_full_name()})
                 # trigger signal for accepting that user's join request
@@ -1272,8 +1270,7 @@ class GroupUserInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormV
                 m.status = MEMBERSHIP_MEMBER
                 m.save()
                 # update index for the group
-                typed_group = ensure_group_type(self.group)
-                typed_group.update_index()
+                self.group.update_index()
                 signals.user_group_join_accepted.send(sender=self, obj=self.group, user=user, audience=[user])
                 messages.success(self.request, _('User %(username)s had already requested membership and has now been made a member immediately!') % {'username': user.get_full_name()})
                 # trigger signal for accepting that user's join request
@@ -1323,8 +1320,7 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
                 cosinnus_notifications.user_group_admin_demoted.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
             ret = super(GroupUserUpdateView, self).form_valid(form)
             # update index for the group
-            typed_group = ensure_group_type(self.object.group)
-            typed_group.update_index()
+            self.object.group.update_index()
             return ret
         return HttpResponseRedirect(self.get_success_url())
 

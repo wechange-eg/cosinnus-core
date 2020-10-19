@@ -28,7 +28,8 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     
     portal = indexes.IntegerField(model_attr='portal_id')
     group_members = indexes.MultiValueField(indexed=False)
-    sdgs = indexes.MultiValueField(model_attr='sdgs')
+    sdgs = indexes.MultiValueField(model_attr='sdgs', null=True)
+    managed_tags = indexes.MultiValueField()
     public = indexes.BooleanField(model_attr='public')
     always_visible = indexes.BooleanField(default=True)
     created = indexes.DateTimeField(model_attr='created')
@@ -83,6 +84,9 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     def prepare_description(self, obj):
         """ TODO: this should actually reflect the group['description'] language-sensitive magic! """
         return obj.description_long or obj.description
+    
+    def prepare_managed_tags(self, obj):
+        return obj.get_managed_tag_ids()
     
     def prepare_group_members(self, obj):
         if not hasattr(obj, '_group_members'):
@@ -188,6 +192,7 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     admin_organizations = indexes.MultiValueField() # ids of all organizations the user is member/admin of
     portals = indexes.MultiValueField()
     location = indexes.LocationField(null=True)
+    managed_tags = indexes.MultiValueField()
     user_id = indexes.IntegerField(model_attr='user__id')
     created = indexes.DateTimeField(model_attr='user__date_joined')
 
@@ -210,6 +215,9 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     
     def get_image_field_for_icon(self, obj):
         return obj.get_image_field_for_icon()
+    
+    def prepare_managed_tags(self, obj):
+        return obj.get_managed_tag_ids()
     
     def prepare_url(self, obj):
         """ NOTE: UserProfiles always contain a relative URL! """

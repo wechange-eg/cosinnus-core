@@ -60,6 +60,7 @@ from cosinnus.utils.user import check_user_has_accepted_portal_tos
 from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
 from django.templatetags.i18n import do_translate, do_block_translate, TranslateNode, BlockTranslateNode
 from cosinnus.utils.html import render_html_with_variables
+from cosinnus.models.managed_tags import CosinnusManagedTag
 
 logger = logging.getLogger('cosinnus')
 
@@ -381,6 +382,10 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         groups_invited += [DashboardItem(group) for group in projects_invited]
         context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         context['groups_invited_count'] = len(groups_invited)
+
+        # conferences        
+        my_conferences = [society for society in CosinnusSociety.objects.get_for_user(request.user) if society.group_is_conference]
+        context['my_conferences_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(conference) for conference in my_conferences]))
         
         membership_requests = []
         membership_requests_count = 0
@@ -1101,6 +1106,22 @@ def render_cosinnus_topics_json():
     """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
     topic_choices = dict([(top_id, force_text(val)) for top_id, val in TAG_OBJECT.TOPIC_CHOICES])
     return mark_safe(_json.dumps(topic_choices))
+
+@register.simple_tag()
+def render_managed_tags_json():
+    """ Returns all managed tags as JSON array of objects"""
+    all_managed_tags = CosinnusManagedTag.objects.all_in_portal_cached()
+    managed_tags_json = [
+        {
+            'id': tag.id,
+            'icon': tag.labels.ICON,
+            'image': tag.get_image_thumbnail_url(),
+            'name': tag.name,
+            'description': tag.description,
+            'url': tag.url,
+        } for tag in all_managed_tags
+    ]
+    return mark_safe(_json.dumps(managed_tags_json))
 
 @register.simple_tag()
 def get_non_cms_root_url():

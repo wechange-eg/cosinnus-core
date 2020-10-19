@@ -172,34 +172,89 @@ class StatisticsView(APIView):
     """
     Returns a JSON dict of common statistics for this portal
     """
-
-    def get(self, request):
-        all_users_qs = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members)
+    
+    def get_user_qs(self):
+        return get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members)
+    
+    def get_society_qs(self):
+        return CosinnusSociety.objects.all_in_portal()
+    
+    def get_project_qs(self):
+        return CosinnusProject.objects.all_in_portal()
+    
+    def get_event_qs(self):
+        from cosinnus_event.models import Event
+        return Event.get_current_for_portal()
+    
+    def get_note_qs(self):
+        from cosinnus_note.models import Note
+        return Note.get_current_for_portal()
+    
+    def get(self, request, *args, **kwargs):
+        all_users_qs = self.get_user_qs()
         data = {
-            'groups': CosinnusSociety.objects.all_in_portal().count(),
-            'projects': CosinnusProject.objects.all_in_portal().count(),
+            'groups': self.get_society_qs().count(),
+            'projects': self.get_project_qs().count(),
             'users_registered': all_users_qs.count(),
             'users_active': filter_active_users(all_users_qs).count(),
         }
         try:
-            from cosinnus_event.models import Event
-            upcoming_event_count = Event.get_current_for_portal().count()
             data.update({
-                'events_upcoming': upcoming_event_count,
+                'events_upcoming': self.get_event_qs().count(),
             })
         except:
             pass
 
         try:
-            from cosinnus_note.models import Note
-            note_count = Note.get_current_for_portal().count()
             data.update({
-                'notes': note_count,
+                'notes': self.get_note_qs().count(),
             })
         except:
             pass
 
         return Response(data)
+
+
+class StatisticsManagedTagFilteredView(StatisticsView):
+    """
+    Returns a JSON dict of common statistics for this portal, filtered for a managed tag
+    """
+    
+    tag_slug = None
+    
+    def get(self, request, *args, **kwargs):
+        self.tag_slug = kwargs.pop('slug', None)
+        return super(StatisticsManagedTagFilteredView, self).get(request, *args, **kwargs)
+    
+    def get_user_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_user_qs()
+        if self.tag_slug:
+            qs = qs.filter(cosinnus_profile__managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs 
+    
+    def get_society_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_society_qs()
+        if self.tag_slug:
+            qs = qs.filter(managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs 
+    
+    def get_project_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_project_qs()
+        if self.tag_slug:
+            qs = qs.filter(managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs 
+    
+    def get_event_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_event_qs()
+        if self.tag_slug:
+            qs = qs.filter(group__managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs 
+    
+    def get_note_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_note_qs()
+        if self.tag_slug:
+            qs = qs.filter(group__managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs 
 
 
 class NavBarView(APIView):

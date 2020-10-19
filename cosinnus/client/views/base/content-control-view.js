@@ -68,10 +68,13 @@ module.exports = BaseView.extend({
             }
         });
         if (typeof json['topics'] === "number" || (typeof json['topics'] === "string" && json['topics'].length > 0)) {
-            json['topics'] = json['topics'].toString().split(',');
+            json['topics'] = json['topics'].toString().split(',').map(Number);
         }
         if (typeof json['sdgs'] === "number" || (typeof json['sdgs'] === "string" && json['sdgs'].length > 0)) {
-            json['sdgs'] = json['sdgs'].toString().split(',');
+            json['sdgs'] = json['sdgs'].toString().split(',').map(Number);
+        }
+        if (typeof json['managed_tags'] === "number" || (typeof json['managed_tags'] === "string" && json['managed_tags'].length > 0)) {
+            json['managed_tags'] = json['managed_tags'].toString().split(',').map(Number);
         }
         return json;
     },

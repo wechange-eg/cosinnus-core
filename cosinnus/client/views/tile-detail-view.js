@@ -29,6 +29,7 @@ module.exports = BaseView.extend({
         'click .result-link': 'onResultLinkClicked',
         'click .tile-close-button': 'onDeselectClicked',
         'click .topic-filter-link': 'onTopicLinkClicked',
+        'click .managed-tag-filter-link': 'onManagedTagLinkClicked',
         'click .button-like': 'onLikeButtonClicked',
         'click .button-follow': 'onFollowButtonClicked',
         'click .button-report-object': 'onReportButtonClicked',
@@ -103,6 +104,13 @@ module.exports = BaseView.extend({
         // make sure to close
         this.App.controlView.displayDetailResult(null);
         this.App.controlView.onTopicLinkClicked(event);
+    },
+    
+    /** Called when a managed tag link is clicked to filter for that topic only */
+    onManagedTagLinkClicked: function(event) {
+        // make sure to close
+        this.App.controlView.displayDetailResult(null);
+        this.App.controlView.onManagedTagLinkClicked(event);
     },
     
     /**

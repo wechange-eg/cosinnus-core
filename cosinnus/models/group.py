@@ -973,7 +973,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def update_index_for_all_group_objects(self):
         """ Adds all of this group's BaseTaggableObjects to the search index """
         for instance in self.get_all_objects_for_group():
-            instance.remove_index()
+            instance.update_index()
 
     def get_icon(self):
         """ Returns the font-awesome icon specific to the group type """
