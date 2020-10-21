@@ -752,11 +752,20 @@ class CosinnusConf(AppConf):
     MANAGED_TAGS_ENABLED = False
     # str path to a drop-in class for managed tags containing strings 
     MANAGED_TAGS_LABEL_CLASS_DROPIN = None
+    # will the managed tag show up in the user profile form for the users to assign themselves?
     MANAGED_TAGS_USERS_MAY_ASSIGN_SELF = False
+    # will the managed tag show up in the group form for the users to assign their groups?
     MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS = False
+    # is approval by an admin needed on user created tags?
+    # (setting this to true makes managed tags get created with approved=False)
     MANAGED_TAGS_USER_TAGS_REQUIRE_APPROVAL = False
+    # makes a popout info panel appear on tags in formfields
     MANAGED_TAGS_SHOW_FORMFIELD_SELECTED_TAG_DETAILS = True
-    
+    # whether formfields are required=True
+    MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED = False
+    MANAGED_TAGS_GROUP_FORMFIELD_REQUIRED = False
+    # the default slug for pre-filled managed tags
+    MANAGED_TAGS_DEFAULT_INITIAL_SLUG = None
     
 
 class CosinnusDefaultSettings(AppConf):

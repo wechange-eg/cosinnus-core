@@ -71,7 +71,7 @@ class UserCreationForm(UserCreationFormExtraFieldsMixin, TermsOfServiceFormField
     first_name = forms.CharField(label=_('first name'), required=True)  
     
     if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
-        managed_tag_field = forms.CharField(required=False)
+        managed_tag_field = forms.CharField(required=settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED)
         managed_tag_assignment_attribute_name = 'cosinnus_profile' 
     if not settings.COSINNUS_IS_INTEGRATED_PORTAL and not settings.COSINNUS_IS_SSO_PORTAL: 
         captcha = CaptchaField()

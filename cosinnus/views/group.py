@@ -291,6 +291,8 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
             assigned_tags = list(self.request.user.cosinnus_profile.get_managed_tags())
             if assigned_tags:
                 initial['managed_tag_field'] = ','.join([tag.slug for tag in assigned_tags])
+            elif settings.COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG is not None:
+                initial['managed_tag_field'] = settings.COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG
         return initial
     
     def forms_valid(self, form, inlines):
@@ -916,6 +918,14 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, AvatarFormMi
     
     def get_object(self, queryset=None):
         return self.group
+    
+    def get_initial(self):
+        """ Allow pre-populating managed tags on group edit from initial default tags """
+        initial = super().get_initial()
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS:
+            if settings.COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG is not None:
+                initial['managed_tag_field'] = settings.COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG
+        return initial
 
     def get_context_data(self, **kwargs):
         context = super(GroupUpdateView, self).get_context_data(**kwargs)

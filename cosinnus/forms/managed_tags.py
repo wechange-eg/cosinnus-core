@@ -34,14 +34,14 @@ if getattr(settings, 'COSINNUS_MANAGED_TAGS_ENABLED', False):
             if 'managed_tag_field' in self.fields:
                 setattr(self.fields['managed_tag_field'], 'all_managed_tags', CosinnusManagedTag.objects.all_in_portal_cached())
                 # set initial tag
-                if 'managed_tag_field' in self.initial:
-                    self.fields['managed_tag_field'].initial = self.initial['managed_tag_field']
-                elif self.instance and self.instance.pk:
+                if self.instance and self.instance.pk:
                     tag_assignment_instance = self._get_tag_assignment_instance(self.instance)
                     qs = tag_assignment_instance.managed_tag_assignments.all()
                     managed_tag_slugs = qs.filter(approved=True).values_list('managed_tag__slug', flat=True)
                     if managed_tag_slugs:
                         self.fields['managed_tag_field'].initial = ','.join(list(managed_tag_slugs))
+                if not self.fields['managed_tag_field'].initial and 'managed_tag_field' in self.initial:
+                    self.fields['managed_tag_field'].initial = self.initial['managed_tag_field']
                 
         def clean_managed_tag_field(self):
             """ Todo: This method supports only single-tag cleaning for now! """

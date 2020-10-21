@@ -1,5 +1,9 @@
 {% load i18n cosinnus_tags  %}
 
+{% comment %}  
+    - additional incoming attrs: type (str)
+{% endcomment %}
+
 {% if "managed_tag_field" in form.fields %}
 	{% captureas managed_tag_extra_html %}
 	    {% if SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_FORMFIELD_SELECTED_TAG_DETAILS %}
@@ -25,7 +29,10 @@
 	{% endcaptureas %}
 	{% captureas managed_tag_field_html %}
 	    <select name="managed_tag_field" id="managed-tag-field">
-	        <option default value="">- {{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_EMPTY_CHOICE }} -</option>
+	        {% if type == "user" and not SETTINGS.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED or type == "group" and not SETTINGS.COSINNUS_MANAGED_TAGS_GROUP_FORMFIELD_REQUIRED %}
+    	        <option default value="">- {{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_EMPTY_CHOICE }} -</option>
+	        {% endif %}
+	        
 	        {% for tag in form.fields.managed_tag_field.all_managed_tags %}
 	            <option {% if tag.slug in form.fields.managed_tag_field.initial %}selected{% endif %} value="{{ tag.slug }}">
 	                {{ tag.name }}
