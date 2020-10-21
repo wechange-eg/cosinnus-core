@@ -7,7 +7,8 @@ from cosinnus.core.decorators.views import (require_read_access,
     require_create_objects_in_access, redirect_to_not_logged_in,
     dispatch_group_access, require_logged_in, require_write_access_groupless,
     superuser_required, require_superuser)
-from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
+from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
+    check_object_write_access, check_object_read_access
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from django.core.exceptions import PermissionDenied, ImproperlyConfigured
@@ -284,6 +285,19 @@ class GroupFormKwargsMixin(object):
         kwargs['group'] = self.group
         return kwargs
 
+
+class ModelInheritsGroupReadWritePermissionsMixin(object):
+    """
+    Mixin for models whose objects should inherit the read/write permissions
+    from the group they are in (need a `group` ForeignKey).
+    """
+    
+    def grant_extra_write_permissions(self, user, fields=None):
+        return check_object_write_access(self.group, user)
+    
+    def grant_extra_read_permissions(self, user, fields=None):
+        return check_object_read_access(self.group, user)
+    
 
 class GroupObjectCountMixin(object):
     """ Adds an ``object_counts`` dict to the context containing the counts of all 
