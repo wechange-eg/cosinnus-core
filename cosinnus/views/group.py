@@ -1287,20 +1287,22 @@ class GroupUserInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormV
         except self.membership_class.DoesNotExist:
             self.membership_class.objects.create(user=user, group=self.group, status=MEMBERSHIP_INVITED_PENDING)
             signals.user_group_invited.send(sender=self, obj=self.group, user=self.request.user, audience=[user])
-            
+
+            # sends a direct message about the invitation to the user (non-rocketchat only)            
             #TODONEXT: refactor messages into one!
             # we will also send out an internal direct message about the invitation to the user
-            try:
-                from cosinnus_message.utils.utils import write_postman_message
-                subject = self.invite_subject % {'team_name': self.group.name}
-                data = {
-                    'user': user,
-                    'group': self.group,
-                }
-                text = render_to_string(self.invite_template_name, data)
-                write_postman_message(user, self.request.user, subject, text)
-            except ImportError:
-                pass
+            if not settings.COSINNUS_ROCKET_ENABLED:
+                try:
+                    from cosinnus_message.utils.utils import write_postman_message
+                    subject = self.invite_subject % {'team_name': self.group.name}
+                    data = {
+                        'user': user,
+                        'group': self.group,
+                    }
+                    text = render_to_string(self.invite_template_name, data)
+                    write_postman_message(user, self.request.user, subject, text)
+                except ImportError:
+                    pass
         
             messages.success(self.request, _('User %(username)s was successfully invited!') % {'username': user.get_full_name()})
             return HttpResponseRedirect(self.get_success_url())
