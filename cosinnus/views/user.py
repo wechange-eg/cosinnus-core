@@ -17,7 +17,7 @@ from django.http import Http404
 from cosinnus.core.decorators.views import staff_required, superuser_required,\
     redirect_to_not_logged_in, redirect_to_403
 from cosinnus.forms.user import UserCreationForm, UserChangeForm,\
-    TermsOfServiceFormFields
+    TermsOfServiceFormFields, ValidatedPasswordChangeForm
 from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.utils.http import JSONResponse
 from django.contrib import messages
@@ -76,6 +76,8 @@ from django_select2.views import Select2View, NO_ERR_RESP
 from django.core.exceptions import PermissionDenied
 from cosinnus import cosinnus_notifications
 from cosinnus.utils.html import render_html_with_variables
+# from cosinnus.forms.profile import ValidatedPasswordChangeForm
+
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -722,6 +724,7 @@ def logout_api(request):
 
 class CosinnusPasswordChangeView(PasswordChangeView):
     """ Overridden view that sends a password changed signal """
+    form_class = ValidatedPasswordChangeForm
     
     def form_valid(self, form):
         ret = super().form_valid(form)

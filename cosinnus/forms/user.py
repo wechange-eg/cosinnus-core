@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 from builtins import str
 from builtins import object
 from django import forms
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm,\
-    AuthenticationForm
+    AuthenticationForm, PasswordChangeForm
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
@@ -161,3 +161,22 @@ class UserEmailLoginForm(AuthenticationForm):
                         "enabled. Cookies are required for logging in."),
         'inactive': _("This account is inactive."),
     }
+
+
+class ValidatedPasswordChangeForm(PasswordChangeForm):
+    """ For some reason the Django default SetPasswordForm does not use the default password validators.
+        Therefore this form includes the default password validators.
+    """
+    def clean_new_password2(self):
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+        if password1 and password2:
+            if password1 != password2:
+                raise forms.ValidationError(
+                    self.error_messages['password_mismatch'],
+                    code='password_mismatch',
+                )
+
+        validators = password_validation.get_default_password_validators()
+        password_validation.validate_password(password2, self.user, password_validators=validators)
+        return password2
