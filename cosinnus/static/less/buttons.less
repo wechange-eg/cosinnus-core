@@ -661,6 +661,18 @@ a.light-link:hover i { display: inherit; }
     }
 }
 
+.no-padding {
+	padding: 0;
+}
+
+.no-hover {
+	&:hover {
+        background-color: transparent;
+		border-radius: 0px;
+		outline: none;
+    }
+}
+
 .apply-color-liked {
     color: @map-liked-color;
 }
