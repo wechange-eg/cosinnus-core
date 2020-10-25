@@ -25,7 +25,7 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token,
     check_user_portal_admin, check_user_superuser,
-    check_object_likefollow_access, filter_tagged_object_queryset_for_user)
+    check_object_likefollowstar_access, filter_tagged_object_queryset_for_user)
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
 from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
     LikeObject
@@ -132,11 +132,11 @@ def can_create_groups(user):
     return user.is_authenticated
 
 @register.filter
-def can_likefollow(user, obj):
+def can_likefollowstar(user, obj):
     """
     Template filter to check if a user can create like/follow an object.
     """
-    return user.is_authenticated and check_object_likefollow_access(obj, user)
+    return user.is_authenticated and check_object_likefollowstar_access(obj, user)
 
 @register.filter
 def is_superuser(user):

@@ -63,7 +63,7 @@ urlpatterns = [
     url(r'^map/search/(?P<filter_group_id>\d+)/$', map_api.map_search_endpoint, name='map-search-endpoint-filtered'),
     url(r'^map/detail/$', map_api.map_detail_endpoint, name='map-detail-endpoint'),
     
-    url(r'^likefollow/$', common.do_likefollow,  name='likefollow-view'),
+    url(r'^likefollowstar/$', common.do_likefollowstar,  name='likefollowstar-view'),
     
     url(r'^bbb/room/(?P<room_id>\d+)/$', bbb_room.bbb_room_meeting, name='bbb-room'),
     url(r'^bbb/queue/(?P<mt_id>\d+)/$', bbb_room.bbb_room_meeting_queue, name='bbb-room-queue'),

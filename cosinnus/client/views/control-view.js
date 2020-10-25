@@ -633,7 +633,7 @@ module.exports = ContentControlView.extend({
     /** Will like/unlike a given result, depending on the current liked status */
     triggerResultLikeOrUnlike: function (result) {
     	var self = this;
-    	var url = '/likefollow/'
+    	var url = '/likefollowstar/'
     		
     	var data = util.getAPIDataForDirectItemId(result.get('id'));
     	if (data == null || !(result.get('type') == 'ideas' || result.get('type') == 'events')) {
@@ -697,7 +697,7 @@ module.exports = ContentControlView.extend({
     /** Will follow/unfollow a given result, depending on the current followed status */
     triggerResultFollowOrUnfollow: function (result) {
     	var self = this;
-    	var url = '/likefollow/'
+    	var url = '/likefollowstar/'
     		
     	var data = util.getAPIDataForDirectItemId(result.get('id'));
     	if (data == null) {

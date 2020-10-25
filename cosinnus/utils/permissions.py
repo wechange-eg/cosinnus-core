@@ -173,7 +173,7 @@ def check_group_create_objects_access(group, user):
     is_admin = check_ug_admin(user, group)
     return is_member or is_admin or check_user_superuser(user)
 
-def check_object_likefollow_access(obj, user):
+def check_object_likefollowstar_access(obj, user):
     """ Checks permissions of a user to like/follow an object.
         This permission may behave differently depending on the object model.
     """
