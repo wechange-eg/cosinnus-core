@@ -6,6 +6,7 @@ import six
 import django
 
 from django.apps import apps
+from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.urls import reverse
 from django.core.cache import cache
@@ -24,6 +25,7 @@ from cosinnus.utils.files import get_avatar_filename, image_thumbnail,\
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core import signals
+from cosinnus.models.tagged import LikeableObjectMixin
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
@@ -86,7 +88,8 @@ class BaseUserProfileManager(models.Manager):
 
 @python_2_unicode_compatible
 class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
-                      CosinnusManagedTagAssignmentModelMixin, models.Model):
+                      LikeableObjectMixin, CosinnusManagedTagAssignmentModelMixin,
+                      models.Model):
     """
     This is a base user profile used within cosinnus. To use it, create your
     own model inheriting from this model.
@@ -141,7 +144,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     
     objects = BaseUserProfileManager()
 
-    SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings', 'managed_tag_assignments']\
+    SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings', 'managed_tag_assignments', 'likes']\
                     + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
     
     # this indicates that objects of this model are in some way always visible by registered users
