@@ -629,7 +629,7 @@ class LikeObject(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     target_object = GenericForeignKey('content_type', 'object_id')
-    
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
         verbose_name=_('User'),
         on_delete=models.CASCADE,
@@ -637,6 +637,7 @@ class LikeObject(models.Model):
         related_name='likes')
     liked = models.BooleanField(_('Liked'), default=True)
     followed = models.BooleanField(_('Following'), default=True)
+    starred = models.BooleanField(_('Starred'), default=True)
 
     class Meta(object):
         app_label = 'cosinnus'
