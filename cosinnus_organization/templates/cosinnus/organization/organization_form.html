@@ -192,11 +192,13 @@
 
                     {% include "cosinnus/media_tags_group.html"%}
 
+                    {% if SETTINGS.COSINNUS_DATA_EXCHANGE_ENABLED %}
                     {# public Field #}
                     {% trans "Visibility on other platforms" as public_label %}
                     {% blocktrans asvar public_legend with url="/cms/partner-platforms/" %}Projects are always transferred to <a href="{{ url }}" target="_blank">partner platforms</a> of WECHANGE. These are only organizational data and not personal data.{% endblocktrans %}
                     {% trans "This organization should be made publicly findable via other platforms." as public_box_label %}
                     {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.media_tag.public label=public_label legend=public_legend checkbox_label=public_box_label %}
+                    {% endif %}
 
                 </div>
                 {% block extra_forms %}

@@ -571,24 +571,6 @@ SUIT_CONFIG = {
 # 2-factor authentication issuer name for admin backend
 OTP_TOTP_ISSUER = 'WECHANGE eG'
 
-COSINNUS_GOODDB_BASE_URL = "https://virtserver.swaggerhub.com/WECHANGE-eG/GoodDB/0.0.9"
-COSINNUS_GOODDB_USER = "user"
-COSINNUS_GOODDB_PASSWORD = "password"
-COSINNUS_GOODDB_PUSH = {
-    'events': {
-        'path': '/events/batch',
-        'model': 'cosinnus_event.Event',
-        'serializer': 'cosinnus_event.api.serializers.EventGoodDBSerializer'
-    },
-}
-COSINNUS_GOODDB_PULL = {
-    'events': {
-        'path': '/events/',
-        'model': 'cosinnus.ExternalEvent',
-        'serializer': 'cosinnus.external.serializers.ExternalEventGoodDBSerializer'
-    },
-}
-
 # django-simple captcha settings
 CAPTCHA_CHALLENGE_FUNCT = 'cosinnus.utils.captcha.dissimilar_random_char_challenge'
 CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
@@ -616,3 +598,23 @@ COSINNUS_ORGANIZATIONS_ENABLED = False
 COSINNUS_ORGANIZATION_ADDITIONAL_FORMS = []
 COSINNUS_GROUP_ADDITIONAL_FORMS = []
 COSINNUS_PROJECT_ADDITIONAL_FORMS = []
+
+# Organizations
+COSINNUS_DATA_EXCHANGE_ENABLED = False
+COSINNUS_GOODDB_BASE_URL = "https://virtserver.swaggerhub.com/WECHANGE-eG/GoodDB/0.0.9"
+COSINNUS_GOODDB_USER = "user"
+COSINNUS_GOODDB_PASSWORD = "password"
+COSINNUS_GOODDB_PUSH = {
+    'events': {
+        'path': '/events/batch',
+        'model': 'cosinnus_event.Event',
+        'serializer': 'cosinnus_event.api.serializers.EventGoodDBSerializer'
+    },
+}
+COSINNUS_GOODDB_PULL = {
+    'events': {
+        'path': '/events/',
+        'model': 'cosinnus.ExternalEvent',
+        'serializer': 'cosinnus.external.serializers.ExternalEventGoodDBSerializer'
+    },
+}
