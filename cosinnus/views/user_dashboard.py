@@ -23,6 +23,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.map import SEARCH_MODEL_NAMES_REVERSE
+from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import LikeObject, BaseTaggableObjectModel, \
     BaseHierarchicalTaggableObjectModel, BaseTagObject, LastVisitedObject
 from cosinnus.models.user_dashboard import DashboardItem
@@ -195,6 +196,20 @@ class LikedIdeasWidgetView(BaseUserDashboardWidgetView):
         return {'items': ideas}
 
 api_user_liked_ideas = LikedIdeasWidgetView.as_view()
+
+
+class StarredUsersWidgetView(BaseUserDashboardWidgetView):
+    """ Shows all unlimited (for now) ideas the user likes. """
+
+    def get_data(self, *kwargs):
+        profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
+        likeobjects = LikeObject.objects.filter(user=self.request.user, content_type=profile_ct, starred=True)
+        liked_users_ids = likeobjects.values_list('object_id', flat=True)
+        liked_users = get_user_profile_model().objects.filter(id__in=liked_users_ids)
+        users = [DashboardItem(user) for user in liked_users]
+        return {'items': users}
+
+api_user_starred_users = StarredUsersWidgetView.as_view()
 
 
 class ModelRetrievalMixin(object):

@@ -1,0 +1,22 @@
+{% extends 'userdashboard/base-widget' %}
+{% import "include/macros.html" as macros %}
+
+{% block title %}
+    {# Translators: __INCLUDE_JS_PO__ #}
+	{% trans "Users you want to remember" %}
+{% endblock %}
+
+{% block empty_content %}
+	<div class="widget-info-box no-select">
+        {# Translators: __INCLUDE_JS_PO__ #}
+		{% trans "Here you can find an overview users you want to remember." %}
+		<br/>
+		<br/>
+        {# Translators: __INCLUDE_JS_PO__ #}
+		{% trans "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here" %}:
+		<a href="/map/?people=false&events=false&projects=false&groups=false&ideas=true&organizations=false">
+		    {# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "Discover" %}
+		</a>
+	</div>
+{% endblock %}

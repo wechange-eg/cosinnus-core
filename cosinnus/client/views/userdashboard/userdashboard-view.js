@@ -5,6 +5,7 @@ var BaseView = require('views/base/view');
 var TimelineView = require('views/userdashboard/timeline-view');
 var GroupWidgetView = require('views/userdashboard/group-widget-view');
 var IdeasWidgetView = require('views/userdashboard/ideas-widget-view');
+var StarredUsersWidgetView = require('views/userdashboard/starred-users-widget-view');
 var TypedContentWidgetView = require('views/userdashboard/typed-content-widget-view');
 var UiPrefsView = require('views/userdashboard/ui-prefs-view');
 
@@ -26,7 +27,8 @@ module.exports = BaseView.extend({
     timelineView: null,
     
     groupWidgetView: null,
-    ideasWidgetView: null,
+	ideasWidgetView: null,
+	starredUsersWidgetView: null,
     uiPrefsView: null,
     
     typedContentWidgetTypes: ['pads', 'files']
@@ -86,7 +88,11 @@ module.exports = BaseView.extend({
                 el: self.$el.find('.ideas-widget-root'),
             }, self.app);
     		leftBarPromises.push(self.ideasWidgetView.load());
-    	}
+		}
+		self.starredUsersWidgetView = new StarredUsersWidgetView({
+			el: self.$el.find('.starred-users-widget-root'),
+		}, self.app);
+		leftBarPromises.push(self.starredUsersWidgetView.load());
     	Promise.all(leftBarPromises).then(function(){
     		self.$leftBar.show();
     	});
