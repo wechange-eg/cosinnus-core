@@ -19,7 +19,7 @@ from django.views.generic.base import View
 import six
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.group import CosinnusPortal, CosinnusGroup
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.map import SEARCH_MODEL_NAMES_REVERSE
@@ -189,7 +189,7 @@ class LikedIdeasWidgetView(BaseUserDashboardWidgetView):
     
     def get_data(self, *kwargs):
         idea_ct = ContentType.objects.get_for_model(CosinnusIdea)
-        likeobjects = LikeObject.objects.filter(user=self.request.user, content_type=idea_ct, liked=True) 
+        likeobjects = LikeObject.objects.filter(user=self.request.user, content_type=idea_ct, liked=True)
         liked_ideas_ids = likeobjects.values_list('object_id', flat=True)
         liked_ideas = CosinnusIdea.objects.all_in_portal().filter(id__in=liked_ideas_ids)
         ideas = [DashboardItem(idea) for idea in liked_ideas]
@@ -210,6 +210,25 @@ class StarredUsersWidgetView(BaseUserDashboardWidgetView):
         return {'items': users}
 
 api_user_starred_users = StarredUsersWidgetView.as_view()
+
+
+class StarredObjectsWidgetView(BaseUserDashboardWidgetView):
+    """ Shows all unlimited (for now) ideas the user likes. """
+
+    def get_data(self, *kwargs):
+        profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
+        group_ct = ContentType.objects.get_for_model(CosinnusGroup)
+        exclude_ids = [profile_ct.id, group_ct.id]
+        liked = LikeObject.objects.filter(user=self.request.user, starred=True).exclude(content_type_id__in=exclude_ids)
+        like_objects = []
+        for like in liked:
+            ct = ContentType.objects.get_for_id(like.content_type.id)
+            obj = ct.get_object_for_this_type(pk=like.object_id)
+            like_objects.append(obj)
+        objects = [DashboardItem(object) for object in like_objects]
+        return {'items': objects}
+
+api_user_starred_objects = StarredObjectsWidgetView.as_view()
 
 
 class ModelRetrievalMixin(object):

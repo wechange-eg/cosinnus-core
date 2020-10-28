@@ -6,6 +6,7 @@ var TimelineView = require('views/userdashboard/timeline-view');
 var GroupWidgetView = require('views/userdashboard/group-widget-view');
 var IdeasWidgetView = require('views/userdashboard/ideas-widget-view');
 var StarredUsersWidgetView = require('views/userdashboard/starred-users-widget-view');
+var StarredObjectsWidgetView = require('views/userdashboard/starred-objects-widget-view');
 var TypedContentWidgetView = require('views/userdashboard/typed-content-widget-view');
 var UiPrefsView = require('views/userdashboard/ui-prefs-view');
 
@@ -29,6 +30,7 @@ module.exports = BaseView.extend({
     groupWidgetView: null,
 	ideasWidgetView: null,
 	starredUsersWidgetView: null,
+	starredObjectsWidgetView: null,
     uiPrefsView: null,
     
     typedContentWidgetTypes: ['pads', 'files']
@@ -93,10 +95,15 @@ module.exports = BaseView.extend({
 			el: self.$el.find('.starred-users-widget-root'),
 		}, self.app);
 		leftBarPromises.push(self.starredUsersWidgetView.load());
-    	Promise.all(leftBarPromises).then(function(){
+
+    	self.starredObjectsWidgetView = new StarredObjectsWidgetView({
+			el: self.$el.find('.starred-objects-widget-root'),
+		}, self.app);
+		leftBarPromises.push(self.starredObjectsWidgetView.load());
+
+		Promise.all(leftBarPromises).then(function(){
     		self.$leftBar.show();
     	});
-    	
     },
     
     /** Loads all widgets on the right bar and only then displays it */
