@@ -8,11 +8,11 @@
         data-type="star" data-ct="{{ object.get_content_type }}" data-id="{{ object.id }}"
         {% if not user|can_likefollowstar:object %}href="{% url 'login' %}?next={{ object.get_absolute_follow_url|urlencode }}"{% endif %}>
     <span class="show-unselected">
-        <i class="far fa-star"></i>
+        <i class="far fa-star prevent-click"></i>
         {% trans "Mark" %}
     </span>
     <span class="show-selected">
-        <i class="fas fa-star apply-color-followed"></i>
+        <i class="fas fa-star prevent-click"></i>
         {% trans "Marked" %}
     </span>
 </a>
