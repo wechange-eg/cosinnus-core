@@ -139,6 +139,7 @@ if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'C
         url(r'^dashboard/api/user_liked_ideas/$', user_dashboard.api_user_liked_ideas, name='user-dashboard-api-liked-ideas'),
         url(r'^dashboard/api/user_starred_users/$', user_dashboard.api_user_starred_users, name='user-dashboard-api-starred-users'),
         url(r'^dashboard/api/user_starred_objects/$', user_dashboard.api_user_starred_objects, name='user-dashboard-api-starred-objects'),
+        url(r'^dashboard/api/user_followed_objects/$', user_dashboard.api_user_followed_objects, name='user-dashboard-api-followed-objects'),
         url(r'^dashboard/api/user_typed_content/(?P<content>[^/]+)/$', user_dashboard.api_user_typed_content, name='user-dashboard-api-typed-content'),
         url(r'^dashboard/api/user_typed_content/recent/(?P<content>[^/]+)/$', user_dashboard.api_user_typed_content, name='user-dashboard-api-typed-content', kwargs={'show_recent':True}),
         url(r'^dashboard/api/timeline/(?P<content>[^/]+)/$', user_dashboard.api_timeline, name='user-dashboard-api-timeline-filtered'),

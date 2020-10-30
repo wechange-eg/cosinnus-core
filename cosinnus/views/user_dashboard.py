@@ -231,6 +231,25 @@ class StarredObjectsWidgetView(BaseUserDashboardWidgetView):
 api_user_starred_objects = StarredObjectsWidgetView.as_view()
 
 
+class FollowedObjectsWidgetView(BaseUserDashboardWidgetView):
+    """ Shows all unlimited (for now) ideas the user likes. """
+
+    def get_data(self, *kwargs):
+        profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
+        group_ct = ContentType.objects.get_for_model(CosinnusGroup)
+        exclude_ids = [profile_ct.id, group_ct.id]
+        liked = LikeObject.objects.filter(user=self.request.user, followed=True).exclude(content_type_id__in=exclude_ids)
+        like_objects = []
+        for like in liked:
+            ct = ContentType.objects.get_for_id(like.content_type.id)
+            obj = ct.get_object_for_this_type(pk=like.object_id)
+            like_objects.append(obj)
+        objects = [DashboardItem(object) for object in like_objects]
+        return {'items': objects}
+
+api_user_followed_objects = FollowedObjectsWidgetView.as_view()
+
+
 class ModelRetrievalMixin(object):
     """ Mixin for all dashboard views requiring content data """
     

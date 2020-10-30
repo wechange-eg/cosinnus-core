@@ -1,0 +1,16 @@
+{% extends 'userdashboard/base-widget' %}
+{% import "include/macros.html" as macros %}
+
+{% block title %}
+    {# Translators: __INCLUDE_JS_PO__ #}
+	{% trans "Items you follow" %}
+{% endblock %}
+
+{% block empty_content %}
+	<div class="widget-info-box no-select">
+        {# Translators: __INCLUDE_JS_PO__ #}
+		{% trans "Here you can find an overview of items you follow." %}
+		<br/>
+		<br/>
+	</div>
+{% endblock %}
