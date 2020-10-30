@@ -40,6 +40,7 @@ class BSISafePasswordValidator(object):
                 code='password_no_special_character'
             )
 
+    @staticmethod
     def contains_special_character(self, password):
         for char in password.split():
             if not char.isalnum():
