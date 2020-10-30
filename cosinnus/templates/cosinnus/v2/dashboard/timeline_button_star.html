@@ -13,10 +13,12 @@
 	        data-type="star" data-ct="{{ item.get_content_type }}" data-id="{{ item.id }}"
 	        {% if not user|can_likefollowstar:item %}href="{% url 'login' %}?next={{ item.get_absolute_like_url|urlencode }}"{% endif %}>
 	    <span class="show-unselected">
-	        <i class="far fa-star prevent-click"></i>
+			<i class="far fa-star prevent-click"></i>
+			{% trans "Mark" %}
 	    </span>
 	    <span class="show-selected">
-	        <i class="fas fa-star prevent-click"></i>
+			<i class="fas fa-star prevent-click"></i>
+			{% trans "Unmark" %}
 	    </span>
 	</a>
 </div>
