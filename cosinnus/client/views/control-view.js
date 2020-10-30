@@ -15,7 +15,7 @@ module.exports = ContentControlView.extend({
     
     template: require('map/map-controls'),
     
-    activeFiltersTemplate: require('map/map-controls-active-filters'), 
+    activeFiltersTemplate: require('map/map-controls-active-filters'),
     
     // will be set to self.options during initialization
     defaults: {
@@ -699,7 +699,8 @@ module.exports = ContentControlView.extend({
     	var self = this;
     	var url = '/likefollowstar/'
     		
-    	var data = util.getAPIDataForDirectItemId(result.get('id'));
+        var data = util.getAPIDataForDirectItemId(result.get('id'));
+
     	if (data == null) {
     		util.log('Following cancelled - invalid result type for liking: ' + result.get('type'));
     		return;
@@ -733,7 +734,7 @@ module.exports = ContentControlView.extend({
             },
             complete: function (xhr, textStatus) {
                 util.log('control-view.js: Follow complete: ' + textStatus);
-                
+
                 if (textStatus !== 'success') {
                 	followHadErrors = true;
                 }
@@ -746,9 +747,9 @@ module.exports = ContentControlView.extend({
 
     triggerResultStarOrUnstar: function (result) {
         var self = this;
-    	var url = '/likefollowstar/'
+        var url = '/likefollowstar/'
 
-    	var data = util.getAPIDataForDirectItemId(result.get('id'));
+        var data = util.getAPIDataForDirectItemId(result.get('id'));
     	if (data == null) {
     		util.log('Marking cancelled - invalid result type for starring: ' + result.get('type'));
     		return;

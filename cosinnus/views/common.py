@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from annoying.functions import get_object_or_None
 from bs4 import BeautifulSoup
 from django.apps import apps
+from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.contenttypes.models import ContentType
@@ -222,20 +223,29 @@ def do_likefollowstar(request, **kwargs):
     
     if ct is None or (id is None and slug is None) or (like is UNSPECIFIED and follow is UNSPECIFIED and star is UNSPECIFIED):
         return HttpResponseBadRequest('Incomplete data submitted.')
-
-    app_label, model = ct.split('.')
-    model_cls = apps.get_model(app_label, model)
+    
+    model_cls = None
+    if ct == 'people':
+        model_cls = get_user_model()
+    else:
+        app_label, model = ct.split('.')
+        model_cls = apps.get_model(app_label, model)
     
     obj = None
-    if obj_id is None and slug and '*' in slug:
-        # the map api may provide a slug argument in the form of "forum*tolles-event".
-        # in this case, the object belongs to a group and needs both slugs to be identified
-        group_slug, obj_slug = slug.split('*', 1)
-        obj = get_object_or_None(model_cls, slug=obj_slug, group__slug=group_slug, group__portal=CosinnusPortal.get_current())
-    elif obj_id is None and slug:
-        obj = get_object_or_None(model_cls, slug=slug, portal=CosinnusPortal.get_current())
+    if not ct == 'people':
+        if obj_id is None and slug and '*' in slug:
+            # the map api may provide a slug argument in the form of "forum*tolles-event".
+            # in this case, the object belongs to a group and needs both slugs to be identified
+            group_slug, obj_slug = slug.split('*', 1)
+            obj = get_object_or_None(model_cls, slug=obj_slug, group__slug=group_slug, group__portal=CosinnusPortal.get_current())
+        elif obj_id is None and slug:
+            obj = get_object_or_None(model_cls, slug=slug, portal=CosinnusPortal.get_current())
+        else:
+            obj = get_object_or_None(model_cls, id=obj_id)
     else:
-        obj = get_object_or_None(model_cls, id=obj_id)
+        user = model_cls.objects.get(username=slug)
+        obj = user.cosinnus_profile
+
     if obj is None:
         return HttpResponseNotFound('Target object not found on server.')
     
