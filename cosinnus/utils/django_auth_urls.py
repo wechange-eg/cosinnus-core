@@ -14,9 +14,7 @@ from django.contrib.auth.views import PasswordChangeDoneView,\
 
 # regular auth URLs, disabled for integrated portals
 if not is_integrated_portal():
-
-    # app_name = "cosinnus-auth"
-
+    
     urlpatterns = [
         url(r'^login/$',
             common.cosinnus_login,
