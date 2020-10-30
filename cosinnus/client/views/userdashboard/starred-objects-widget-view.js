@@ -25,7 +25,7 @@ module.exports = DelegatedWidgetView.extend({
 
     /** Overriding base function for unique widget ID. */
     getWidgetId: function() {
-        return 'starred-users-widget';
+        return 'starred-objects-widget';
     },
     
     /** Overriding params for request */
