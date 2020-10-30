@@ -286,6 +286,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
         'admins': [],
         'organizations': [],
         'followed': False,
+        'starred': False
     })
          
     background_image_field = 'wallpaper'
@@ -311,6 +312,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
             'website_url': obj.website,
             'contact': linebreaksbr(escape(obj.contact_info)),
             'followed': obj.is_user_following(user),
+            'starred': obj.is_user_starring(user)
         })
         """ TODO: check all read permissions on related objects! """
         

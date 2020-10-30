@@ -217,8 +217,8 @@ class StarredObjectsWidgetView(BaseUserDashboardWidgetView):
 
     def get_data(self, *kwargs):
         profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
-        group_ct = ContentType.objects.get_for_model(CosinnusGroup)
-        exclude_ids = [profile_ct.id, group_ct.id]
+        #group_ct = ContentType.objects.get_for_model(CosinnusGroup)
+        exclude_ids = [profile_ct.id]
         liked = LikeObject.objects.filter(user=self.request.user, starred=True).exclude(content_type_id__in=exclude_ids)
         like_objects = []
         for like in liked:

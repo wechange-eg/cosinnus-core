@@ -758,9 +758,6 @@ module.exports = ContentControlView.extend({
         var to_star = result.get('starred') ? '0' : 1;
         data['star'] = to_star;
 
-        console.log(result.get('starred'))
-        console.log(to_star)
-
         util.log('Sending star request for slug "' + result.get('slug') + '" and star: ' + to_star);
 
         var starHadErrors = false;
