@@ -69,7 +69,7 @@ from honeypot.decorators import check_honeypot
 from annoying.functions import get_object_or_None
 
 import logging
-from django.contrib.auth.views import PasswordChangeView, PasswordResetView
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetConfirmView
 from django.utils.timezone import now
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from django_select2.views import Select2View, NO_ERR_RESP
@@ -692,6 +692,25 @@ def password_change_proxy(request, *args, **kwargs):
         return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_changed_page.html')
     return CosinnusPasswordChangeView.as_view(*args, **kwargs)(request)
 
+# =============== set a password from a only by token logged in user =========================== #
+
+class CosinnusSetInitialPasswordView(PasswordResetConfirmView):
+    """ Overridden view that sends a password changed signal """
+
+    def form_valid(self, form):
+        ret = super().form_valid(form)
+        # send a password changed signal
+        signals.user_password_changed.send(sender=self, user=self.request.user)
+        return ret
+
+
+def password_set_initial_proxy(request, *args, **kwargs):
+    user = request.user
+    if user.is_authenticated and check_user_integrated_portal_member(user):
+        return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_changed_page.html')
+    return CosinnusSetInitialPasswordView.as_view(*args, **kwargs)(request)
+
+# ================================================================================================= #
 
 class CosinnusPasswordResetForm(PasswordResetForm):
     

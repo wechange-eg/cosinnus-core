@@ -66,6 +66,13 @@ if not is_integrated_portal():
                 name='password_reset_complete'),
         ]
 
+        # set initial password
+        urlpatterns += [
+            url(r'password_set_initial/$',
+                PasswordResetConfirmView.as_view(template_name='cosinnus/registration/password_set_initial_form.html'),
+                name='password_set_initial'),
+        ]
+
 # integrated portal auth patterns
 if is_integrated_portal():
     urlpatterns = [
