@@ -32,6 +32,7 @@ module.exports = BaseView.extend({
         'click .managed-tag-filter-link': 'onManagedTagLinkClicked',
         'click .button-like': 'onLikeButtonClicked',
         'click .button-follow': 'onFollowButtonClicked',
+        'click .button-star': 'onStarButtonClicked',
         'click .button-report-object': 'onReportButtonClicked',
     },
     
@@ -77,7 +78,8 @@ module.exports = BaseView.extend({
 
         this.model.on({
         	'change:liked': self.thisContext(self.render),
-        	'change:followed': self.thisContext(self.render),
+            'change:followed': self.thisContext(self.render),
+            'change:starred': self.thisContext(self.render),
         });
         this.fitTemplate();
         this.render();
@@ -144,6 +146,9 @@ module.exports = BaseView.extend({
     
     onFollowButtonClicked: function (event) {
     	this.App.controlView.triggerResultFollowOrUnfollow(this.model);
+    },
+    onStarButtonClicked: function (event) {
+    	this.App.controlView.triggerResultStarOrUnstar(this.model);
     },
     
     /** report the currently open detail view object */

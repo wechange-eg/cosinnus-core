@@ -475,6 +475,7 @@ class DetailedIdeaMapResult(DetailedMapResult):
     fields.update({
         'projects': [],
         'followed': False,
+        'starred': False
     })
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -491,6 +492,7 @@ class DetailedIdeaMapResult(DetailedMapResult):
             'creator_name': obj.creator.get_full_name(),
             'creator_slug': obj.creator.username,
             'followed': obj.is_user_following(user),
+            'starred': obj.is_user_starring(user)
         })
         ret = super(DetailedIdeaMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
         return ret

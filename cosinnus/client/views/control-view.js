@@ -743,7 +743,59 @@ module.exports = ContentControlView.extend({
             }
         });
     },
-    
+
+    triggerResultStarOrUnstar: function (result) {
+        var self = this;
+    	var url = '/likefollowstar/'
+
+    	var data = util.getAPIDataForDirectItemId(result.get('id'));
+    	if (data == null) {
+    		util.log('Marking cancelled - invalid result type for starring: ' + result.get('type'));
+    		return;
+        }
+
+        var to_star = result.get('starred') ? '0' : 1;
+        data['star'] = to_star;
+
+        console.log(result.get('starred'))
+        console.log(to_star)
+
+        util.log('Sending star request for slug "' + result.get('slug') + '" and star: ' + to_star);
+
+        var starHadErrors = false;
+        self.currentDetailHttpRequest = $.ajax(url, {
+            type: 'POST',
+            timeout: self.searchXHRTimeout,
+            data: data,
+            success: function (data, textStatus) {
+
+                util.log('got resultssss for star')
+                util.log(data)
+                util.log(textStatus)
+
+                if ('starred' in data) {
+                    result.set('starred', data.starred);
+                }
+
+            },
+            error: function (xhr, textStatus) {
+                util.log('control-view.js: Star XHR failed.')
+                starHadErrors = true;
+            },
+            complete: function (xhr, textStatus) {
+                util.log('control-view.js: Star complete: ' + textStatus);
+
+                if (textStatus !== 'success') {
+                	starHadErrors  = true;
+                }
+                if (starHadErrors) {
+                    $('.star-button-error').show();
+                }
+            }
+        });
+
+
+    },
     /** Called manually or deferredly after loading a Result from the server,
      *  to be shown as the Detail View.
      *  @param result: This must be *a detailed* Result model, or null!

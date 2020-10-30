@@ -64,6 +64,19 @@
                 </span>
             </a>
             {% if liked %}
+                <a class="rounded-button button-action button-star">
+                    <span class="rounded-button-inner">
+                        {% if starred %}
+                            <i class="fas fa-star"></i>
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Marked" %}
+                        {% else %}
+                            <i class="far fa-star"></i>
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Mark" %}
+                        {% endif %}
+                    </span>
+                </a>
                 <a class="rounded-button button-action button-follow">
                     <span class="rounded-button-inner">
                         {% if followed %}
@@ -111,6 +124,10 @@
             {% trans "Could not save your like setting because of an error." %}
         </div>
         <div class="follow-button-error message-error extra-space-top" style="display: none;">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Could not save your follow setting because of an error." %}
+        </div>
+        <div class="star-button-error message-error extra-space-top" style="display: none;">
             {# Translators: __INCLUDE_JS_PO__ #}
             {% trans "Could not save your follow setting because of an error." %}
         </div>

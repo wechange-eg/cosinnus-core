@@ -704,7 +704,7 @@ class LikeableObjectMixin(models.Model):
             self._followed_obj_ids = user_ids
         return user_ids
 
-    def get_stared_user_ids(self):
+    def get_starred_user_ids(self):
         """ Returns a list of int user ids for users that are following this object. """
         if self._starred_obj_ids is not None:
             return self._starred_obj_ids
@@ -758,6 +758,10 @@ class LikeableObjectMixin(models.Model):
     def is_user_following(self, user):
         """ Returns True is the user follows this object, else False. """
         return user.id in self.get_followed_user_ids()
+
+    def is_user_starring(self, user):
+        """ Returns True is the user follows this object, else False. """
+        return user.id in self.get_starred_user_ids()
     
     def _get_likefollowstar_url_params(self, like_or_follow):
         return {
