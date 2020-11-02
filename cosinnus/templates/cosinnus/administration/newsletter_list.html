@@ -40,14 +40,14 @@
     {% endif %}
 </div>
 <div class="fadedown pull-right">
-    <button class="btn btn-emphasized">
+    <button class="btn btn-emphasized btn-autosize" href="{% url 'cosinnus:administration-group-newsletter-create' %}">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="{% url 'cosinnus:administration-group-newsletter-create' %}">
+                <a class="pull-left">
                     <i class="fa fa-plus"></i>
                 </a>
                 <div class="media-body">
-                    <a href="{% url 'cosinnus:administration-group-newsletter-create' %}">{% trans 'Add newsletter'%}</a>
+                    {% trans 'Add newsletter'%}
                 </div>
             </li>
         </ul>

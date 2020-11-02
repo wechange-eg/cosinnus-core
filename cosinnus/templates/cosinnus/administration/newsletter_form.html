@@ -48,7 +48,7 @@
     {% if form.instance.id %}
         {% if not form.instance.sent %}
         {% captureas modal_send_newsletter %}send_newsletter_{{ form.instance.id }}{% endcaptureas %}
-        <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{ modal_send_newsletter }}">
+        <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#{{ modal_send_newsletter }}">
             <ul class="media-list">
                 <li class="media">
                     <a class="pull-left" href="#">
@@ -61,7 +61,7 @@
             </ul>
         </button>
 
-        <button type="submit" name="send_test_mail" class="btn btn-emphasized">
+        <button type="submit" name="send_test_mail" class="btn btn-emphasized btn-autosize">
             <ul class="media-list">
                 <li class="media">
                     <a class="pull-left" href="#">
@@ -74,7 +74,7 @@
             </ul>
         </button>
         {% else %}
-        <button type="submit" name="copy_newsletter" class="btn btn-emphasized">
+        <button type="submit" name="copy_newsletter" class="btn btn-emphasized btn-autosize">
             <ul class="media-list">
                 <li class="media">
                     <a class="pull-left" href="#">
@@ -90,7 +90,7 @@
     {% endif  %}
 
     {% if not form.instance.sent %}
-    <button type="submit" name="save_draft" class="btn btn-emphasized">
+    <button type="submit" name="save_draft" class="btn btn-emphasized btn-autosize">
         <ul class="media-list">
             <li class="media">
                 <a class="pull-left" href="#">
