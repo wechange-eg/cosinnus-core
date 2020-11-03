@@ -448,6 +448,7 @@ class DetailedEventResult(DetailedMapResult):
         'participants': [],
         'participant_count': 0,
         'followed': False,
+        'starred': False
     })
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -465,6 +466,7 @@ class DetailedEventResult(DetailedMapResult):
             'participants': [HaystackUserMapCard(result) for result in sqs],
             'participant_count': haystack_result.participant_count,
             'followed': obj.is_user_following(user),
+            'starred': obj.is_user_starring(user)
         })
         return super(DetailedEventResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
