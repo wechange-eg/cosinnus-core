@@ -46,6 +46,7 @@ module.exports = DelegatedWidgetView.extend({
     getTemplateData: function () {
         var self = this;
         var data = DelegatedWidgetView.prototype.getTemplateData.call(self);
+        data.title = COSINNUS_STARRED_OBJECTS_LIST
         return data;
     },
     

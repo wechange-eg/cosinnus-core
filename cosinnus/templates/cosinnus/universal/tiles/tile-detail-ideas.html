@@ -68,12 +68,10 @@
                     <span class="rounded-button-inner">
                         {% if starred %}
                             <i class="fas fa-star"></i>
-                            {# Translators: __INCLUDE_JS_PO__ #}
-                            {% trans "Marked" %}
+                            {{ starringLabel }}
                         {% else %}
                             <i class="far fa-star"></i>
-                            {# Translators: __INCLUDE_JS_PO__ #}
-                            {% trans "Mark" %}
+                            {{ starLabel }}
                         {% endif %}
                     </span>
                 </a>

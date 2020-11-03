@@ -54,6 +54,8 @@ module.exports = BaseView.extend({
             self.App.controlView.options,
             self.App.controlView.state
         );
+        data['starLabel'] = COSINNUS_STARRED_STAR_LABEL
+        data['starringLabel'] = COSINNUS_STARRED_STARRING_LABEL
         return data;
     },
 

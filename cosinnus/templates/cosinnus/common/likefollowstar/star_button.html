@@ -9,10 +9,10 @@
         {% if not user|can_likefollowstar:object %}href="{% url 'login' %}?next={{ object.get_absolute_follow_url|urlencode }}"{% endif %}>
     <span class="show-unselected">
         <i class="far fa-star prevent-click"></i>
-        {% trans "Mark" %}
+        {% get_setting "COSINNUS_STARRED_STAR_LABEL" %}
     </span>
     <span class="show-selected">
         <i class="fas fa-star {% if filled %}apply-color-followed{% endif %} prevent-click"></i>
-        {% trans "Marked" %}
+        {% get_setting "COSINNUS_STARRED_STARRING_LABEL" %}
     </span>
 </a>

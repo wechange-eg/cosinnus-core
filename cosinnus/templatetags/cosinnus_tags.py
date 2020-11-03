@@ -1233,4 +1233,6 @@ def get_country_name(country_code):
     from django_countries import countries
     return dict(countries).get(country_code, '(unknown)')
 
-
+@register.simple_tag
+def get_setting(name):
+    return getattr(settings, name, "")
