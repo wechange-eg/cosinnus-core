@@ -34,7 +34,9 @@ module.exports = ContentControlView.extend({
         availableFilterList: [], // contains availableFilters keys that are true, generated on initialize
         
         allTopics: {},  // the dict of all searchable topics
-        allSDGS: {},
+        allSDGS: {}, // the dict of all searchable SDGs
+        allManagedTags: {}, // the dict of all searchable CosinnusManagedTags
+        managedTagsLabels: {}, // the labels dict for CosinnusManagedTags
         portalInfo: {}, // portal info by portal-id, from `get_cosinnus_portal_info()`
         controlsEnabled: true,
         filterGroup: null,
@@ -54,10 +56,12 @@ module.exports = ContentControlView.extend({
             q: '', // URL param. 
             activeTopicIds: [],
             activeSDGIds: [],
+            activeManagedTagsIds: [],
             filtersActive: false, // URL param.  if true, any filter is active and we display a reset-filter button
             typeFiltersActive: false, // URL param.  a result type filter is active
             topicFiltersActive: false, // URL param.  a topic filter is active
             sdgFiltersActive: false,
+            managedTagsFiltersActive: false,
             ignoreLocation: false, // if true, search ignores all geo-loc and even shows results without tagged location
             searching: false,
             searchHadErrors: false,
@@ -98,6 +102,11 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_IDEAS_ENABLED) {
         	self.defaults.availableFilters['ideas'] = true;
         	self.defaults.activeFilters['ideas'] = true;
+        }
+        // add organization models if active
+        if (COSINNUS_ORGANIZATIONS_ENABLED) {
+        	self.defaults.availableFilters['organizations'] = true;
+        	self.defaults.activeFilters['organizations'] = true;
         }
         
         ContentControlView.prototype.initialize.call(self, options, app, collection);
@@ -141,6 +150,7 @@ module.exports = ContentControlView.extend({
         'click .reset-type-filters': 'resetTypeFiltersClicked',
         'click .reset-topic-filters': 'resetTopicFiltersClicked',
         'click .reset-sdg-filters': 'resetSDGFiltersClicked',
+        'click .reset-managed-tag-filters': 'resetManagedTagsFiltersClicked',
         'click .reset-q': 'resetQClicked',
         'click .reset-type-and-topic-filters': 'resetAllClicked', // use this to only reset the filters box: 'resetTypeAndTopicFiltersClicked',
         'click .active-filters': 'showFilterPanel',
@@ -150,9 +160,10 @@ module.exports = ContentControlView.extend({
         'keydown .q': 'handleKeyDown',
 
         'click .sdg-button': 'toggleSDGFilterButton',
-        'mouseenter .sdg-button': 'showIcon',
-        'mouseleave .sdg-button': 'hideIcon',
-        'mouseenter .sdg-icon': 'hideIcon'
+        'click .managed-tag-button': 'toggleManagedTagsFilterButton',
+        'mouseenter .hover-image-button': 'showHoverIcon',
+        'mouseleave .hover-image-button': 'hideHoverIcon',
+        'mouseenter .hover-image-icon': 'hideHoverIcon'
     },
 
     // Event Handlers
@@ -194,6 +205,24 @@ module.exports = ContentControlView.extend({
         this.markSearchBoxSearchable();
     },
     
+    toggleManagedTagsFilterButton: function (event) {
+        event.preventDefault();
+        var $button = $(event.currentTarget);
+        // check if all buttons of this type are selected.
+        //  if so, make this click only select this button (deselect all others)
+        if ($button.hasClass('result-filter-button') &&
+            this.$el.find('.result-filter-button').length == this.$el.find('.result-filter-button.selected').length) {
+            this.$el.find('.result-filter-button').removeClass('selected');
+        } else if ($button.hasClass('managedTags-button') &&
+            this.$el.find('.managedTags-button').length == this.$el.find('.managedTags-button.selected').length) {
+            this.$el.find('.managedTags-button').removeClass('selected');
+        }
+        // toggle the button
+        $button.toggleClass('selected');
+        // mark search box as searchable
+        this.markSearchBoxSearchable();
+    },
+    
     /** Reset all types of input filters and trigger a new search */
     resetAllClicked: function (event) {
         event.preventDefault();
@@ -208,6 +237,7 @@ module.exports = ContentControlView.extend({
         this.state.q = '';
         this.resetTopics();
         this.resetSDGS();
+        this.resetManagedTags();
         this.resetTypeFilters();
         this.clearDetailResultCache();
     },
@@ -219,6 +249,10 @@ module.exports = ContentControlView.extend({
 
     resetSDGS: function () {
         this.state.activeSDGIds = [];
+    },
+    
+    resetManagedTags: function () {
+        this.state.activeManagedTagsIds = [];
     },
     
     /** Internal state reset of filtered result types */
@@ -255,6 +289,16 @@ module.exports = ContentControlView.extend({
         var searchReason = 'reset-filters-search';
         this.triggerDelayedSearch(true, false, false, searchReason);
     },
+    
+    resetManagedTagsFiltersClicked: function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.resetManagedTags();
+        this.render();
+        this.clearDetailResultCache();
+        var searchReason = 'reset-filters-search';
+        this.triggerDelayedSearch(true, false, false, searchReason);
+    },
 
     resetQClicked: function (event) {
         event.preventDefault();
@@ -286,6 +330,19 @@ module.exports = ContentControlView.extend({
         var topicId = $link.attr('data-topic-id');
         this.resetAll();
         this.state.activeTopicIds = [parseInt(topicId)];
+        this.clearDetailResultCache();
+        this.triggerDelayedSearch(true);
+    },
+    
+    /** This doesn't listen to events in this view, but rather is the target for 
+     *     delegated events from tile-view and tile-detail-view */
+    onManagedTagLinkClicked: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var $link = $(event.target);
+        var managedTagId = $link.attr('data-managed-tag-id');
+        this.resetAll();
+        this.state.activeManagedTagsIds = [parseInt(managedTagId)];
         this.clearDetailResultCache();
         this.triggerDelayedSearch(true);
     },
@@ -425,16 +482,16 @@ module.exports = ContentControlView.extend({
         }
     },
 
-    showIcon: function (event) {
+    showHoverIcon: function (event) {
         var icon = $(event.target.querySelector('img'))
-        icon.removeClass('sdg-icon-hidden')
+        icon.removeClass('hover-image-icon-hidden')
     },
 
-    hideIcon: function (event) {
+    hideHoverIcon: function (event) {
         if (event.target.tagName == 'IMG') {
-            $(event.target).addClass('sdg-icon-hidden')
+            $(event.target).addClass('hover-image-icon-hidden')
         } else {
-            $(event.target.querySelector('img')).addClass('sdg-icon-hidden')
+            $(event.target.querySelector('img')).addClass('hover-image-icon-hidden')
         }
     },
     /**
@@ -1047,16 +1104,20 @@ module.exports = ContentControlView.extend({
         self.state.filtersActive = false;
         self.state.topicFiltersActive = false;
         self.state.sdgFiltersActive = false;
+        self.state.managedTagsFiltersActive = false;
         self.state.typeFiltersActive = false;
         
         if (self.state.activeTopicIds.length > 0) {
             self.state.filtersActive = true;
             self.state.topicFiltersActive = true;
         }
-
         if (self.state.activeSDGIds.length > 0) {
             self.state.filtersActive = true;
             self.state.sdgFiltersActive = true;
+        }
+        if (self.state.activeManagedTagsIds.length > 0) {
+            self.state.filtersActive = true;
+            self.state.managedTagsFiltersActive = true;
         }
 
         _.each(Object.keys(self.options.availableFilters), function(key) {
@@ -1186,11 +1247,15 @@ module.exports = ContentControlView.extend({
             searchResultLimit: util.ifundef(urlParams.limit, this.state.searchResultLimit),
             activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds),
             activeSDGIds: util.ifundef(urlParams.sdgs, this.state.activeSDGIds),
+            activeManagedTagsIds: util.ifundef(urlParams.managed_tags, this.state.activeManagedTagsIds),
             pageIndex: util.ifundef(urlParams.page, this.state.pageIndex),
             urlSelectedResultId: util.ifundef(urlParams.item, this.state.urlSelectedResultId),
         });
         if (COSINNUS_IDEAS_ENABLED) {
         	this.state.activeFilters['ideas'] = this.options.availableFilters.ideas ? util.ifundef(urlParams.ideas, this.options.activeFilters.ideas) : false;
+        }
+        if (COSINNUS_ORGANIZATIONS_ENABLED) {
+        	this.state.activeFilters['organizations'] = this.options.availableFilters.organizations ? util.ifundef(urlParams.organizations, this.options.activeFilters.organizations) : false;
         }
         if (cosinnus_active_user) {
         	this.options.showMine = util.ifundef(urlParams.mine, this.options.showMine);
@@ -1211,6 +1276,11 @@ module.exports = ContentControlView.extend({
                 ideas: this.state.activeFilters.ideas
             });
         }
+        if (COSINNUS_ORGANIZATIONS_ENABLED) {
+        	_.extend(searchParams, {
+        		organizations: this.state.activeFilters.organizations
+            });
+        }
         if (this.state.activeTopicIds.length > 0) {
             _.extend(searchParams, {
                 topics: this.state.activeTopicIds.join(',')
@@ -1219,6 +1289,11 @@ module.exports = ContentControlView.extend({
         if (this.state.activeSDGIds.length > 0) {
             _.extend(searchParams, {
                 sdgs: this.state.activeSDGIds.join(',')
+            });
+        }
+        if (this.state.activeManagedTagsIds.length > 0) {
+            _.extend(searchParams, {
+                managed_tags: this.state.activeManagedTagsIds.join(',')
             });
         }
         if (this.state.pageIndex > 0) {
@@ -1309,11 +1384,6 @@ module.exports = ContentControlView.extend({
             var bid = parseInt($button.attr('data-topic-id'));
             self.state.activeTopicIds.push(bid);
         });
-        // if we select all topics, drop the filter (select all is default). 
-        // -1 because allTopics contains the empty choice
-        if (self.state.activeTopicIds.length >= Object.keys(self.options.allTopics).length-1) {
-            self.resetTopics();
-        }
 
         // SDGs
         self.resetSDGS();
@@ -1322,9 +1392,14 @@ module.exports = ContentControlView.extend({
             var bid = parseInt($button.attr('data-sdg-id'));
             self.state.activeSDGIds.push(bid);
         });
-        if (self.state.activeSDGIds.length >= Object.keys(self.options.allSDGS).length-1) {
-            self.resetSDGS();
-        }
+        
+        // ManagedTags
+        self.resetManagedTags();
+        self.$el.find('.managed-tag-button.selected').each(function(){
+            var $button = $(this);
+            var bid = parseInt($button.attr('data-managed-tag-id'));
+            self.state.activeManagedTagsIds.push(bid);
+        });
     },
 
     // TODO REMOVE

@@ -191,6 +191,7 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     
     _INSTALLED_APPS += [
         'cosinnus',
+        'cosinnus_organization',
         'cosinnus_oauth_client',
         'cosinnus_cloud',
         'cosinnus_etherpad',
@@ -589,3 +590,31 @@ SOCIALACCOUNT_ADAPTER = 'cosinnus_oauth_client.views.CosinusSocialAccountAdapter
 SOCIALACCOUNT_AUTO_SIGNUP = False
 SOCIALACCOUNT_FORMS = {'signup': 'cosinnus_oauth_client.forms.SocialSignupProfileSettingsForm'}
 SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
+
+# Organizations
+COSINNUS_ORGANIZATIONS_ENABLED = False
+
+# Additional fields (List of form pathes, required form fields are: label and icon)
+COSINNUS_ORGANIZATION_ADDITIONAL_FORMS = []
+COSINNUS_GROUP_ADDITIONAL_FORMS = []
+COSINNUS_PROJECT_ADDITIONAL_FORMS = []
+
+# Organizations
+COSINNUS_DATA_EXCHANGE_ENABLED = False
+COSINNUS_GOODDB_BASE_URL = "https://virtserver.swaggerhub.com/WECHANGE-eG/GoodDB/0.0.9"
+COSINNUS_GOODDB_USER = "user"
+COSINNUS_GOODDB_PASSWORD = "password"
+COSINNUS_GOODDB_PUSH = {
+    'events': {
+        'path': '/events/batch',
+        'model': 'cosinnus_event.Event',
+        'serializer': 'cosinnus_event.api.serializers.EventGoodDBSerializer'
+    },
+}
+COSINNUS_GOODDB_PULL = {
+    'events': {
+        'path': '/events/',
+        'model': 'cosinnus.ExternalEvent',
+        'serializer': 'cosinnus.external.serializers.ExternalEventGoodDBSerializer'
+    },
+}

@@ -3,6 +3,9 @@
 
 {% block extrahead %}
     {{ block.super }}
+    {% if not object and request.GET.description %}
+	    {% captureas description_value %}{{ request.GET.description }}{% endcaptureas %}
+	{% endif %}
     {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
     {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 %}
 {% endblock %}
@@ -95,6 +98,15 @@
 						{% trans "General" %}
 					</a>
 				</li>
+				{% for form in form.forms.obj.extra_forms %}
+				<li {% if request.GET.tab|add:"0" == forloop.counter %}class="active"{% endif %}>
+					<a href="#{{ forloop.counter }}" class="_group-form-tab" role="tab" data-toggle="tab"
+					   onclick="$('#submit').text('{% trans 'Save' %}')">
+						<i class="fa fa-{{ form.icon }}"></i>
+						{{ form.label }}
+					</a>
+				</li>
+				{% endfor %}
 				{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
 				<li {% if request.GET.tab == 'microsite' %}class="active"{% endif %}>
 					<a href="#microsite" class="_group-form-tab" role="tab" data-toggle="tab">
@@ -237,12 +249,10 @@
 		                    {% endcaptureas %}
 							{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label field_html=wallpaper_html extra_html=wallpaper_extra_html first=True large_field=True %}
 
-
                         {# Website Field #}
                         {% trans "Website" as website_label %}
                         {% trans "Example: http://mywebsite.com" as website_placeholder %}
                         {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.website label=website_label placeholder=website_placeholder %}
-
 
                         {% include "cosinnus/media_tags_group.html"%}
 
@@ -253,13 +263,11 @@
                         {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.sdgs label=sdg_label placeholder=sdg_placeholder large_field=True %}
                         {% endif %}
 
-
                         {# Locations Inlineform #}
                         {% trans "Where are you active?" as locations_label %}
                         {% trans "Remove location" as loc_rm_label %}
                         {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}
                         {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=locations_label   content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
-
 
                         {% if form.forms.obj.parent %}
 	                        {# Parent Field #}
@@ -275,6 +283,11 @@
                             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder large_field=True %}
                         {% endif %}
                         
+		                {% block managed_tag_field %}
+		                    {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS %}
+		                        {% include 'cosinnus/fields/managed_tag_formfield.html' with form=form.forms.obj legend=COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_CONTENT type="group" %}
+		                    {% endif %}
+		                {% endblock managed_tag_field %}
                         
                         {# Group Visibility Field #}
 		                {% trans "Privacy settings" as visibility_label %}
@@ -313,10 +326,16 @@
                                 <option {% if object and object.public %}selected{% endif %} value="true">{% trans "Public (visible without login)" %}</option>
                             </select>
 		                {% endcaptureas %}
-		                
 		                {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html field=form.forms.media_tag.visibility field_id="group-public-field" label=visibility_label legend=visibility_legend extra_html=visibility_warning_html %}
-		                
-		            
+
+						{% if SETTINGS.COSINNUS_DATA_EXCHANGE_ENABLED %}
+						{# public Field #}
+						{% trans "Visibility on other platforms" as public_label %}
+						{% blocktrans asvar public_legend with url="/cms/partner-platforms/" %}Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href="#" target="_blank">partner platforms</a> by WECHANGE.{% endblocktrans %}
+						{% trans "This project shall be made publicly findable via other platforms." as public_box_label %}
+						{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.media_tag.public label=public_label legend=public_legend checkbox_label=public_box_label %}
+						{% endif %}
+
                         {# Apps selector fields #}			                
 		                {% trans "Which apps should be activated?" as apps_label %}
 		                {% captureas apps_html %}
@@ -515,7 +534,17 @@
                             {% endblock group_dashboard_tab %}
                         </div>
                     {% endif %}
-                    
+
+					{% block extra_forms %}
+					{% for form in form.forms.obj.extra_forms %}
+						<div class="tab-pane {% if request.GET.tab == forloop.counter %}active{% endif %}" id="{{ forloop.counter }}">
+							{% for field in form %}
+								{% include 'cosinnus/fields/default_field.html' with field=field label=field.label first=forloop.first %}
+							{% endfor %}
+						</div>
+					{% endfor %}
+					{% endblock extra_forms %}
+
                     {% if group and form.forms.obj.fields.conference_theme_color %}
 					   <div class="tab-pane {% if request.GET.tab == 'conference' %}active{% endif %}" id="conference">
                             {% block group_conference_tab %}

@@ -27,9 +27,10 @@ from cosinnus.models.profile import get_user_profile_model,\
     GlobalUserNotificationSetting
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusPortal,\
-    CosinnusUnregisterdUserGroupInvite, CosinnusGroupMembership,\
-    MEMBERSHIP_INVITED_PENDING, CosinnusGroupInviteToken, MEMBERSHIP_MEMBER,\
-    MEMBER_STATUS
+    CosinnusUnregisterdUserGroupInvite, CosinnusGroupMembership, \
+    CosinnusGroupInviteToken
+from cosinnus.models import MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
     send_mail_or_fail_threaded, send_html_mail_threaded
 from django.template.loader import render_to_string
@@ -162,6 +163,17 @@ class UserCreateView(CreateView):
     message_success = _('Your account "%(user)s" was registered successfully. Welcome to the community!')
     message_success_inactive = _('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')
     message_success_email_verification = _('User "%(email)s" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in.')
+    
+    def get_initial(self):
+        """ Allow pre-populating managed tags on signup using URL params /signup/?mtag=tag1,tag2 """
+        initial = super().get_initial()
+        # match managed tag param and set it as comma-seperated initial
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+            if self.request.GET.get('mtag', None):
+                initial['managed_tag_field'] = self.request.GET.get('mtag')
+            elif settings.COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG is not None:
+                initial['managed_tag_field'] = settings.COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG
+        return initial
     
     def get_success_url(self):
         return redirect_with_next(reverse('login'), self.request)

@@ -10,6 +10,7 @@ var templates = {
     'people': require('tiles/tile-detail-people'),
     'events': require('tiles/tile-detail-events'),
     'ideas': require('tiles/tile-detail-ideas'),
+    'organizations': require('tiles/tile-detail-organizations'),
     'error-403': require('tiles/tile-detail-error-403'),
     'error': require('tiles/tile-detail-error'),
 };
@@ -28,6 +29,7 @@ module.exports = BaseView.extend({
         'click .result-link': 'onResultLinkClicked',
         'click .tile-close-button': 'onDeselectClicked',
         'click .topic-filter-link': 'onTopicLinkClicked',
+        'click .managed-tag-filter-link': 'onManagedTagLinkClicked',
         'click .button-like': 'onLikeButtonClicked',
         'click .button-follow': 'onFollowButtonClicked',
         'click .button-report-object': 'onReportButtonClicked',
@@ -57,7 +59,7 @@ module.exports = BaseView.extend({
     /** Adjust this view's template based on the result type it displays (and other states) */
     fitTemplate: function () {
         var self = this;
-        if (self.model.get('type') == 'people') {
+        if (self.model.get('type') == 'people' || self.model.get('type') == 'organizations') {
             self.state.isSmall = true;
         } 
         self.state.isYou = self.model.get('type') == 'people' && cosinnus_active_user && self.model.get('slug') == cosinnus_active_user.username;
@@ -102,6 +104,13 @@ module.exports = BaseView.extend({
         // make sure to close
         this.App.controlView.displayDetailResult(null);
         this.App.controlView.onTopicLinkClicked(event);
+    },
+    
+    /** Called when a managed tag link is clicked to filter for that topic only */
+    onManagedTagLinkClicked: function(event) {
+        // make sure to close
+        this.App.controlView.displayDetailResult(null);
+        this.App.controlView.onManagedTagLinkClicked(event);
     },
     
     /**

@@ -16,10 +16,24 @@ class IndexingUtilsMixin(object):
     
     def update_index(self):
         """ Updates self in the proper search index depending on model """
-        self.signal_processor.handle_save(self.__class__, self)
+        from cosinnus.models.group_extra import ensure_group_type
+        from cosinnus.utils.group import get_cosinnus_group_model
+        obj = self
+        # for groups make sure to update the correct CosinnusProject/CosinnusSociety index
+        # instead of CosinnusGroup
+        if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
+            obj = ensure_group_type(obj)
+        obj.signal_processor.handle_save(obj.__class__, obj)
         
     def remove_index(self):
         """ Removes self from the proper search index depending on model """
-        self.signal_processor.handle_delete(self.__class__, self)
+        from cosinnus.models.group_extra import ensure_group_type
+        from cosinnus.utils.group import get_cosinnus_group_model
+        obj = self
+        # for groups make sure to update the correct CosinnusProject/CosinnusSociety index
+        # instead of CosinnusGroup
+        if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
+            obj = ensure_group_type(obj)
+        obj.signal_processor.handle_delete(obj.__class__, obj)
         
     

@@ -21,14 +21,17 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 # delegate import to avoid cyclic dependencies
 _CosinnusPortal = None
 
+
 def CosinnusPortal():
     global _CosinnusPortal
     if _CosinnusPortal is None: 
         _CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
     return _CosinnusPortal
 
+
 def get_cosinnus_all_portals_folder():
     return path.join('cosinnus_portals', 'all_portals')
+
 
 def get_cosinnus_media_file_folder():
     """ Returns the prefix-folder path for this portal, 
@@ -40,23 +43,41 @@ def get_cosinnus_media_file_folder():
     else:
         return get_cosinnus_all_portals_folder()
 
+
 def get_avatar_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'user')
+
 
 def get_group_avatar_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'group')
 
+
 def get_group_gallery_image_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'gallery_images', base_folder='group_images')
+
 
 def get_group_wallpaper_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'group_wallpapers', base_folder='group_images')
 
+
 def get_idea_image_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'images', base_folder='idea_images')
 
+def get_managed_tag_image_filename(instance, filename):
+    return _get_avatar_filename(instance, filename, 'images', base_folder='managed_tag_images')
+
+
+def get_organization_avatar_filename(instance, filename):
+    return _get_avatar_filename(instance, filename, 'images', base_folder='organization_images')
+
+
+def get_organization_wallpaper_filename(instance, filename):
+    return _get_avatar_filename(instance, filename, 'organization_wallpapers', base_folder='organization_images')
+
+
 def get_user_dashboard_announcement_image_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'images', base_folder='announcement_images')
+
 
 def _get_avatar_filename(instance, filename, folder_type, base_folder='avatars'):
     _, ext = path.splitext(filename)
@@ -66,8 +87,10 @@ def _get_avatar_filename(instance, filename, folder_type, base_folder='avatars')
     newfilename = hashlib.sha1(name.encode('utf-8')).hexdigest() + ext
     return path.join(filedir, newfilename)
 
+
 def get_portal_background_image_filename(instance, filename):
     return _get_all_portals_filename(instance, filename, 'portal_background_images')
+
 
 def _get_all_portals_filename(instance, filename, sub_folder='images'):
     _, ext = path.splitext(filename)
@@ -76,6 +99,7 @@ def _get_all_portals_filename(instance, filename, sub_folder='images'):
     name = '%s%s%s' % (settings.SECRET_KEY, my_uuid , filename)
     newfilename = hashlib.sha1(name.encode('utf-8')).hexdigest() + ext
     return path.join(filedir, newfilename)
+
 
 def create_zip_file(files):
     missing = []
@@ -108,6 +132,7 @@ def create_zip_from_files(file_list):
     
     return io
 
+
 def append_string_to_filename(file_path, string_to_append):
     """ Appends a string to *the base file name*, before the file extension, of a given file with path """
     dir_name, file_name = os.path.split(file_path)
@@ -134,6 +159,7 @@ def image_thumbnail(image, size):
         pass
     return None
 
+
 def image_thumbnail_url(image, size):
     """ Returns the static image URL for a thumbnail to a given image field in the required size, 
         or None if no image is provided 
@@ -141,9 +167,9 @@ def image_thumbnail_url(image, size):
     thumbnail = image_thumbnail(image, size)
     return thumbnail.url if thumbnail else None
 
+
 def get_image_url_for_icon(icon_name, large=False):
     """ Returns the static URL for an image of a font-awesome icon.
         @param icon_name: e.g. "fa-user" """
     file_path =  'images/fa-icons/%s/%s.png' % ('large' if large else 'small', icon_name)
     return static(file_path)
-    

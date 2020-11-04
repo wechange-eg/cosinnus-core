@@ -24,6 +24,7 @@ user_group_admin_demoted = dispatch.Signal(providing_args=["user", "obj", "audie
 project_created_from_idea = dispatch.Signal(providing_args=["user", "obj", "audience"])
 idea_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 group_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
+organization_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_account_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 

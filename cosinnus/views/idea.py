@@ -15,18 +15,10 @@ from cosinnus.views.mixins.group import RequireLoggedInMixin, RequireWriteGroupl
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from ajax_forms.ajax_forms import AjaxFormsDeleteViewMixin
+from cosinnus.views.group import SamePortalGroupMixin
 
 
 logger = logging.getLogger('cosinnus')
-
-
-class SamePortalGroupMixin(object):
-
-    def get_queryset(self):
-        """
-        Filter the queryset for this portal only!
-        """
-        return super(SamePortalGroupMixin, self).get_queryset().filter(portal=CosinnusPortal.get_current())
 
 
 class CosinnusIdeaFormMixin(object):

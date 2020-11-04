@@ -80,3 +80,18 @@ export const findEventById = (slots: EventSlot[], eventId: number): Event => {
   }
   return event
 }
+
+/**
+ * Get current day for tab navigation (current, next or first in this order)
+ *
+ * @returns string
+ */
+export const getCurrentDay = (days: EventDay[]): string => {
+  const today = moment().format("YYYY-MM-DD")
+  const day = days.find((d) => d.props.date >= today)
+  if (day) {
+    return day.props.date
+  } else {
+    return days[0].props.date
+  }
+}

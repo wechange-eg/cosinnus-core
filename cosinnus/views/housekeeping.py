@@ -4,9 +4,9 @@ from __future__ import print_function
 from builtins import str
 from builtins import range
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
-    CosinnusPermanentRedirect, CosinnusPortal, MEMBERSHIP_MEMBER,\
-    MEMBERSHIP_PENDING, CosinnusPortalMembership, CosinnusLocation,\
-    MEMBERSHIP_ADMIN
+    CosinnusPermanentRedirect, CosinnusPortal, CosinnusPortalMembership, CosinnusLocation
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
+from cosinnus.models import MEMBERSHIP_PENDING, MEMBERSHIP_ADMIN
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from django.http.response import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import get_user_model
@@ -46,6 +46,11 @@ from annoying.functions import get_object_or_None
 
 logger = logging.getLogger('cosinnus')
 
+import logging
+from cosinnus.external.models import ExternalProject
+from haystack.query import SearchQuerySet
+logger = logging.getLogger('cosinnus')
+
 
 def ensure_group_widgets(request=None):
     """ Do some integrity checks and corrections. 
@@ -66,6 +71,32 @@ def ensure_group_widgets(request=None):
     else:
         return ret
 
+
+def fill_external_data(request): 
+    if not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    project = ExternalProject(
+        external_id='https://my.item/item1',
+        source='https://my.item/',
+        title='My Item',
+        url='https://my.item/1item1',
+        mt_location='Location String',
+        mt_location_lat=52.526806,
+        mt_location_lon=11.313272,
+        description='A test description',
+        icon_image_url='/media/cosinnus_portals/portal_default/organization_images/images/wDnx8TQS0Ful.jpg',
+        contact_info='saschanarr@gmail.com',
+        tags=['Loltag', 'Tagtag'],
+        topics=[1,6],
+    )
+    project.save()
+    logger.warn('Check proj: %s' % project.slug)
+    sqs = SearchQuerySet().models(ExternalProject).all()
+    haystack_project = sqs[len(sqs)-1]
+    ret = '<br/>Count: %d<br/>URL of -1: %s<br/>Title of -1: %s<br/>ID of -1: %s<br/>Loc: %s,%s' % \
+     (len(sqs), haystack_project.url, haystack_project.title, haystack_project.id, haystack_project.mt_location_lat, haystack_project.mt_location_lon) 
+    return HttpResponse(ret)
 
 def delete_spam_users(request):
     if not request.user.is_superuser:

@@ -19,9 +19,10 @@ from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import message_group_admins_url
-from cosinnus.utils.permissions import check_ug_membership, check_ug_pending,\
-    check_ug_invited_pending
+from cosinnus.utils.permissions import check_ug_membership, check_ug_pending, \
+    check_ug_invited_pending, check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.external.models import ExternalProject, ExternalSociety
 
 
 def _prepend_url(user, portal=None):
@@ -62,6 +63,10 @@ class BaseMapCard(DictResult):
     
 
 class HaystackMapCard(BaseMapCard):
+    """ Serialization class for small item cards on
+        detailed search results. For example, a list of admins
+        for a project on that project's detail view would
+        be modeled as a `HaystackUserMapCard` """
     
     def __init__(self, result, *args, **kwargs):
         if result.portals:
@@ -117,6 +122,12 @@ class HaystackGroupMapCard(HaystackMapCard):
             'dataSlot2': result.participant_count, # subproject count
         })
         return super(HaystackGroupMapCard, self).__init__(result, *args, **kwargs)
+
+
+class HaystackOrganizationMapCard(HaystackMapCard):
+    
+    def __init__(self, result, *args, **kwargs):
+        return super(HaystackOrganizationMapCard, self).__init__(result, *args, **kwargs)
     
     
 class HaystackEventMapCard(HaystackMapCard):
@@ -167,6 +178,14 @@ class HaystackMapResult(BaseMapResult):
         'relevance': 0,
         'type': 'CompactMapResult',
     })
+    if settings.COSINNUS_ENABLE_SDGS:
+        fields.update({
+            'sdgs': [],
+        })
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED:
+        fields.update({
+            'managed_tags': [],
+        })
 
     def __init__(self, result, user=None, *args, **kwargs):
         if result.portals:
@@ -194,7 +213,6 @@ class HaystackMapResult(BaseMapResult):
             'description': textfield(result.description),
             'relevance': result.score,
             'topics': result.mt_topics,
-            'sdgs': result.sdgs,
             'portal': portal,
             'group_slug': result.group_slug,
             'group_name': result.group_name,
@@ -203,6 +221,15 @@ class HaystackMapResult(BaseMapResult):
             'content_count': result.content_count,
             'liked': user.id in result.liked_user_ids if (user and getattr(result, 'liked_user_ids', [])) else False,
         }
+        if settings.COSINNUS_ENABLE_SDGS:
+            fields.update({
+                'sdgs': result.sdgs,
+            })
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED:
+            fields.update({
+                'managed_tags': result.managed_tags,
+            })
+        
         fields.update(**kwargs)
         
         return super(HaystackMapResult, self).__init__(*args, **fields)
@@ -257,6 +284,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
     fields.update({
         'events': [],
         'admins': [],
+        'organizations': [],
         'followed': False,
     })
          
@@ -310,6 +338,16 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
         kwargs.update({
             'admins': [HaystackUserMapCard(result) for result in sqs]
         })
+        
+        if settings.COSINNUS_ORGANIZATIONS_ENABLED:
+            sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['organizations'])
+            sqs = sqs.filter_and(groups=obj.id)
+            sqs = filter_searchqueryset_for_read_access(sqs, user)
+            sqs = sqs.order_by('title')
+            
+            kwargs.update({
+                'organizations': [HaystackOrganizationMapCard(result) for result in sqs]
+            })
         
         return super(DetailedBaseGroupMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
@@ -458,6 +496,59 @@ class DetailedIdeaMapResult(DetailedMapResult):
         return ret
 
 
+class DetailedOrganizationMapResult(DetailedMapResult):
+    """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
+         into a proper MapResult """
+    
+    fields = copy(DetailedMapResult.fields)
+    fields.update({
+        'projects': [],
+        'groups': [],
+        'admins': [],
+    })
+    
+    def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        kwargs.update({
+            'is_superuser': check_user_superuser(user),
+            'is_member': check_ug_membership(user, obj),
+            'is_pending': check_ug_pending(user, obj),
+            'is_invited': check_ug_invited_pending(user, obj),
+            'creator_name': obj.creator and obj.creator.get_full_name(),
+            'creator_slug': obj.creator and obj.creator.username,
+            'title': obj.name,
+            'organization_type': obj.get_type(),
+            'website_url': obj.website,
+            'email': obj.email,
+            'phone_number': obj.phone_number.as_international if obj.phone_number else None,
+            'social_media': [{'url': sm.url, 'icon': sm.icon} for sm in obj.social_media.all()],
+            'edit_url': obj.get_edit_url(),
+            'accept_url': reverse('cosinnus:organization-user-accept', kwargs={'organization': obj.slug}),
+        })
+
+        # collect administrator users. these are *not* filtered by visibility, as project admins are always visible!
+        sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['people'])
+        sqs = sqs.filter_and(admin_organizations=obj.id)
+        #sqs = filter_searchqueryset_for_read_access(sqs, user)
+        # private users are not visible to anonymous users, BUT they are visible to logged in users!
+        # because if a user chose to make his group visible, he has to take authorship responsibilities
+        if not user.is_authenticated:
+            sqs = filter_searchqueryset_for_read_access(sqs, user)
+        kwargs.update({
+            'admins': [HaystackUserMapCard(result) for result in sqs]
+        })
+
+        # Groups
+        sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['projects'], SEARCH_MODEL_NAMES_REVERSE['groups'])
+        sqs = sqs.filter_and(id__in=haystack_result.groups)
+        sqs = filter_searchqueryset_for_read_access(sqs, user)
+        sqs = sqs.order_by('title')
+        kwargs.update({
+            'groups': [HaystackGroupMapCard(result) for result in sqs]
+        })
+        
+        ret = super(DetailedOrganizationMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
+        return ret
+
 
 SHORTENED_ID_MAP = {
     'cosinnus.cosinnusproject': 1,
@@ -465,6 +556,7 @@ SHORTENED_ID_MAP = {
     'cosinnus.userprofile': 3,
     'cosinnus_event.event': 4,
     'cosinnus.cosinnusidea': 5,
+    'cosinnus_organization.CosinnusOrganization': 6,
 }
 
 SEARCH_MODEL_NAMES = {
@@ -507,7 +599,6 @@ if settings.COSINNUS_IDEAS_ENABLED:
     SEARCH_RESULT_DETAIL_TYPE_MAP.update({
         'ideas': DetailedIdeaMapResult,
     })
-    
     
 """ pads, files, messages, todos, polls """
 try:
@@ -610,7 +701,20 @@ try:
     #})
 except:
     Offer = None
-    
+
+
+if settings.COSINNUS_ORGANIZATIONS_ENABLED:
+    from cosinnus_organization.models import CosinnusOrganization
+    SEARCH_MODEL_NAMES.update({
+        CosinnusOrganization: 'organizations',                       
+    })
+    SHORT_MODEL_MAP.update({
+        13: CosinnusOrganization,
+    })
+    SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+        'organizations': DetailedOrganizationMapResult,
+    })
+
     
 SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
 # these can always be read by any user (returned fields still vary)
@@ -619,6 +723,13 @@ SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS = [
     'groups',
 ]
 
+if settings.COSINNUS_EXTERNAL_CONTENT_ENABLED:
+    EXTERNAL_SEARCH_MODEL_NAMES = {
+        ExternalProject: 'projects',
+        ExternalSociety: 'groups'
+    }
+    SEARCH_MODEL_NAMES.update(EXTERNAL_SEARCH_MODEL_NAMES)
+    EXTERNAL_SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(EXTERNAL_SEARCH_MODEL_NAMES.items())])
 
 
 

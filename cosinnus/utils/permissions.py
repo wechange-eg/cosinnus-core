@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 from builtins import str
 from django.db.models import Q
 
-from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership,\
-    MEMBERSHIP_ADMIN
+from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
+from cosinnus.models import MEMBERSHIP_ADMIN
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject,\
     BaseHierarchicalTaggableObjectModel
 from cosinnus.models.profile import BaseUserProfile, GlobalBlacklistedEmail,\
@@ -16,6 +16,7 @@ from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_ids
 from cosinnus.models.idea import CosinnusIdea
 from annoying.functions import get_object_or_None
+from cosinnus_organization.models import CosinnusOrganization
 
 
 def check_ug_admin(user, group):
@@ -94,6 +95,9 @@ def check_object_read_access(obj, user):
     elif type(obj) is CosinnusIdea:
         # ideas are only either public or visible by any logged in user, no private setting
         return obj.public or user.is_authenticated
+    elif type(obj) is CosinnusOrganization:
+        # organizations are visible by any logged in user, no private setting
+        return user.is_authenticated
     elif issubclass(obj.__class__, BaseUserProfile):
         return check_user_can_see_user(user, obj.user)
     else:
@@ -149,10 +153,10 @@ def check_object_write_access(obj, user, fields=None):
             or obj.grant_extra_write_permissions(user, fields=fields) or folder_for_group_member
     elif issubclass(obj.__class__, BaseUserProfile):
         return obj.user == user or check_user_superuser(user)
-    elif hasattr(obj, 'creator'):
-        return obj.creator == user or check_user_superuser(user)
     elif hasattr(obj, 'grant_extra_write_permissions'):
         return obj.grant_extra_write_permissions(user, fields=fields) or check_user_superuser(user)
+    elif hasattr(obj, 'creator'):
+        return obj.creator == user or check_user_superuser(user)
     
     raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup " +\
             "or a BaseTaggableObject or an object with a ``creator`` property  " +\
@@ -204,6 +208,7 @@ def check_user_can_see_user(user, target_user):
     if any([(user_group_pk in target_user_groups) for user_group_pk in user_groups]):
         return True
     return False
+
 
 def check_user_superuser(user, portal=None):
     """ Main function to determine whether a user has superuser rights to access and change almost

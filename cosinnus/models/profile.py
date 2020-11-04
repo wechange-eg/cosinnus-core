@@ -39,6 +39,9 @@ from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 import logging
 from django import forms
 from django_countries.fields import CountryField
+from django.contrib.contenttypes.fields import GenericRelation
+from cosinnus.models.managed_tags import CosinnusManagedTag,\
+    CosinnusManagedTagAssignmentModelMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -82,7 +85,8 @@ class BaseUserProfileManager(models.Manager):
 
 
 @python_2_unicode_compatible
-class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, models.Model):
+class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
+                      CosinnusManagedTagAssignmentModelMixin, models.Model):
     """
     This is a base user profile used within cosinnus. To use it, create your
     own model inheriting from this model.
@@ -133,9 +137,11 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
     extra_fields = JSONField(default={}, blank=True,
                 help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
     
+    managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
+    
     objects = BaseUserProfileManager()
 
-    SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings']\
+    SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings', 'managed_tag_assignments']\
                     + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
     
     # this indicates that objects of this model are in some way always visible by registered users

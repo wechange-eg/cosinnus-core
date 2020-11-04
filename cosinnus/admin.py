@@ -9,13 +9,10 @@ from django.db.models import Q
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 
-from collections import defaultdict
-
 from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusPortal, CosinnusPortalMembership,\
-    CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING,\
-    CosinnusPermanentRedirect, MEMBERSHIP_ADMIN,\
-    CosinnusUnregisterdUserGroupInvite, RelatedGroups, CosinnusGroupInviteToken
+    CosinnusGroup, CosinnusPermanentRedirect, CosinnusUnregisterdUserGroupInvite, RelatedGroups, CosinnusGroupInviteToken
+from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN
 from cosinnus.models.profile import get_user_profile_model,\
     GlobalBlacklistedEmail, GlobalUserNotificationSetting
 from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
@@ -31,13 +28,13 @@ from django.contrib.auth import login as django_login
 
 from cosinnus.conf import settings
 from cosinnus.models.idea import CosinnusIdea
-from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.core import signals
-from copy import deepcopy, copy
 from django import forms
 from django.core.exceptions import ValidationError
 from cosinnus.models.bbb_room import BBBRoom
 from cosinnus.models.conference import CosinnusConferenceRoom
+from cosinnus.models.managed_tags import CosinnusManagedTag,\
+    CosinnusManagedTagAssignment
 
 
 class SingleDeleteActionMixin(object):
@@ -611,7 +608,7 @@ admin.site.register(TagObject, TagObjectAdmin)
 if settings.COSINNUS_IDEAS_ENABLED:
     
     class CosinnusIdeaAdmin(admin.ModelAdmin):
-        list_display = ('created', 'title', 'creator', 'portal')
+        list_display = ('title', 'created', 'creator', 'portal')
         list_filter = ('created', 'portal')
         search_fields = ('slug', 'title', 'creator__first_name', 'creator__last_name', 'creator__email') 
         readonly_fields = ('created', 'created_groups')
@@ -624,16 +621,34 @@ class CosinnusBBBRoomAdmin(admin.ModelAdmin):
     list_display = ('meeting_id', 'name', 'ended', 'portal')
     list_filter = ('ended', 'portal')
     search_fields = ('meeting_id', 'internal_meeting_id', 'name')
-    
+
 admin.site.register(BBBRoom, CosinnusBBBRoomAdmin)
 
 
 class CosinnusConferenceRoomAdmin(admin.ModelAdmin):
     list_display = ('title', 'type', 'group', 'sort_index')
     list_filter = ('group', 'group__portal')
-    search_fields = ('slug', 'title',) 
-    
+    search_fields = ('slug', 'title',)
+
 admin.site.register(CosinnusConferenceRoom, CosinnusConferenceRoomAdmin)
+
+
+class CosinnusManagedTagAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'portal', 'paired_group')
+    list_filter = ('portal',)
+    search_fields = ('slug', 'name',)
+
+admin.site.register(CosinnusManagedTag, CosinnusManagedTagAdmin)
+
+
+class CosinnusManagedTagAssignmentAdmin(admin.ModelAdmin):
+    list_display = ('managed_tag', 'content_type', 'object_id', 'approved',)
+    list_filter = ('managed_tag__portal',)
+    search_fields = ('managed_tag__slug', 'managed_tag__name',)
+
+admin.site.register(CosinnusManagedTagAssignment, CosinnusManagedTagAssignmentAdmin)
+
+
 
 
 ## TODO: FIXME: re-enable after 1.8 migration

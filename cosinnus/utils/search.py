@@ -384,7 +384,8 @@ class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObje
         group_member_count = group.actual_members.count()
         members_rank = normalize_within_stddev(group_member_count, mean, stddev, stddev_factor=1.0)
         return members_rank
-        
+
+
 class BaseHierarchicalTaggableObjectIndex(BaseTaggableObjectIndex):
     
     def index_queryset(self, using=None):

@@ -9,7 +9,11 @@
     
         {% block type_area %}
             <div class="tile-section-header one-line">
-               {{ macros.typeLabel(type, singular=1) }}
+                {{ macros.typeLabel(type, singular=1) }}
+                {% if portal == 99999 %}
+                	{# Translators: __INCLUDE_JS_PO__ #}
+	                ({% trans "External" %})
+                {% endif %}
                 
                 {% if not isSmall and controlView.portalInfo.current != portal %}
                     <span class="inline-spacer"></span>
@@ -23,7 +27,7 @@
         
         {% block header_image %}
             <div class="tile-section header-image">
-                <div class="dual-tile-image {% if not backgroundImageLargeUrl %}image-placeholder-background-{{ type }}{% endif %}">
+                <div class="dual-tile-image {% if not backgroundImageLargeUrl %}image-placeholder-background image-placeholder-background-{{ type }}{% endif %}">
                     {% if backgroundImageLargeUrl %}
                         <img class="tile-image tile-image-background" src="{{ backgroundImageLargeUrl }}" /> 
                     {% endif %}
@@ -93,11 +97,36 @@
                         {% trans "Topics" %}:
                     </span> 
                     {% for topic in topics %}
-                        <a class="topic-filter-link " data-topic-id="{{ topic }}">{{ controlView.allTopics[topic] }}</a>{% if not loop.last %},{% endif %}
+                        <a class="topic-filter-link" data-topic-id="{{ topic }}">{{ controlView.allTopics[topic] }}</a>{% if not loop.last %},{% endif %}
                     {% endfor %}
                 </div>
             {% endif %}
         {% endblock topic_line %}
+        
+        {% block managed_tags %}
+            {% if managed_tags|length > 0 and controlView.allManagedTags|length > 0 %}
+                <div class="tile-section topic-line">
+                    <span class="pale-color">
+                        {{ controlView.managedTagsLabels.MANAGED_TAG_NAME_PLURAL }}:
+                    </span> 
+                    {% for managed_tag_id in managed_tags %}
+                        {% set outer_loop = loop %}
+		                {% for managed_tag in controlView.allManagedTags %}
+		                    {% if managed_tag_id == managed_tag.id %}
+		                        <a class="managed-tag-filter-link" data-managed-tag-id="{{ managed_tag_id }}">
+		                          {{ managed_tag.name }}</a>
+		                          {% if managed_tag.url %}
+		                            <a target="_blank" href="{{ managed_tag.url }}">
+				                        (<i class="fa fa-external-link"></i>
+				                        {# Translators: __INCLUDE_JS_PO__ #}
+				                        {% trans "website" %})
+		                            </a>{% endif %}{% if not outer_loop.last %},{% endif %}
+		                    {% endif %}
+		                {% endfor %}
+		            {% endfor%}
+                </div>
+            {% endif %}
+        {% endblock %}
         
         
         {% block action_buttons %}
@@ -127,28 +156,25 @@
 
 
         {% block sdgs %}
-        {% if sdgs|length > 0 and controlView.allSDGS|length > 0 %}
-        <p>
-            <b>
-            {# Translators: __INCLUDE_JS_PO__ #}
-            {% trans "Sustainable Development Goals" %}
-            </b>
-        </p>
-        <p>
-
-        {% for sdg_id in sdgs %}
-            {% for sdg in controlView.allSDGS %}
-                {% if sdg_id == sdg.id %}
-                <img class="sdg-icon" src="{{ sdg.icon }}">
-                {% endif %}
-            {% endfor %}
-        {% endfor%}
-        </p>
-        {% endif %}
+            {% if sdgs|length > 0 and controlView.allSDGS|length > 0 %}
+            <p>
+                <b>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Sustainable Development Goals" %}
+                </b>
+            </p>
+            <p>
+    
+            {% for sdg_id in sdgs %}
+                {% for sdg in controlView.allSDGS %}
+                    {% if sdg_id == sdg.id %}
+                        <img class="sdg-icon" src="{{ sdg.icon }}">
+                    {% endif %}
+                {% endfor %}
+            {% endfor%}
+            </p>
+            {% endif %}
         {% endblock %}
-
-        
-        
         
         {% block related_content %}
         {% endblock related_content %}

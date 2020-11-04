@@ -30,6 +30,7 @@ from cosinnus.utils.permissions import check_object_read_access
 from django.utils.html import escape
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_slugs
+from cosinnus.external.search_indexes import EXTERNAL_CONTENT_PORTAL_ID
 
 
 try:
@@ -82,14 +83,26 @@ MAP_SEARCH_PARAMETERS = {
     'limit': 20, # result count limit, integer or None
     'page': 0,
     'topics': None,
-    'sdgs': None,
     'item': None,
     'ignore_location': False, # if True, we completely ignore locs, and even return results without location
     'mine': False, # if True, we only show items of the current user. ignored if user not authenticated
+    'external': False,
 }
+if settings.COSINNUS_MANAGED_TAGS_ENABLED:
+    MAP_SEARCH_PARAMETERS.update({
+        'managed_tags': None,
+    })
+if settings.COSINNUS_ENABLE_SDGS:
+    MAP_SEARCH_PARAMETERS.update({
+        'sdgs': None,
+    })
 if settings.COSINNUS_IDEAS_ENABLED:
     MAP_SEARCH_PARAMETERS.update({
         'ideas': True,
+    })
+if settings.COSINNUS_ORGANIZATIONS_ENABLED:
+    MAP_SEARCH_PARAMETERS.update({
+        'organizations': True,
     })
 
 
@@ -106,6 +119,10 @@ def map_search_endpoint(request, filter_group_id=None):
     limit = params['limit']
     page = params['page']
     item_id = params['item']
+    
+    # TODO: set to  params['external'] after the external switch button is in frontend!
+    external = settings.COSINNUS_EXTERNAL_CONTENT_ENABLED
+    
     prefer_own_portal = getattr(settings, 'MAP_API_HACKS_PREFER_OWN_PORTAL', False)
     
     if not is_number(limit) or limit < 0:
@@ -115,7 +132,8 @@ def map_search_endpoint(request, filter_group_id=None):
         return HttpResponseBadRequest('``page`` param must be a positive number or 0!')
     
     # filter for requested model types
-    model_list = [klass for klass,param_name in list(SEARCH_MODEL_NAMES.items()) if params.get(param_name, False)]
+    model_list = [klass for klass, param_name in list(SEARCH_MODEL_NAMES.items()) if params.get(param_name, False)]
+        
     sqs = SearchQuerySet().models(*model_list)
     # filter for map bounds (Points are constructed ith (lon, lat)!!!)
     if not params['ignore_location'] and not implicit_ignore_location:
@@ -127,6 +145,7 @@ def map_search_endpoint(request, filter_group_id=None):
     # filter for search terms
     if query:
         sqs = sqs.auto_query(query)
+    
     # group-filtered-map view for on-group pages
     if filter_group_id:
         group = get_object_or_None(get_cosinnus_group_model(), id=filter_group_id)
@@ -135,15 +154,21 @@ def map_search_endpoint(request, filter_group_id=None):
             # get child projects of this group
             filtered_groups += [subproject.id for subproject in group.get_children() if subproject.is_active]
             sqs = sqs.filter_and(Q(membership_groups__in=filtered_groups) | Q(group__in=filtered_groups))
+            
     # filter topics
     topics = ensure_list_of_ints(params.get('topics', ''))
     if topics:
         sqs = sqs.filter_and(mt_topics__in=topics)
-    sdgs = ensure_list_of_ints(params.get('sdgs', ''))
-    if sdgs:
-        sqs = sqs.filter_and(sdgs__in=sdgs)
+    if settings.COSINNUS_ENABLE_SDGS:
+        sdgs = ensure_list_of_ints(params.get('sdgs', ''))
+        if sdgs:
+            sqs = sqs.filter_and(sdgs__in=sdgs)
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED:
+        managed_tags = ensure_list_of_ints(params.get('managed_tags', ''))
+        if managed_tags:
+            sqs = sqs.filter_and(managed_tags__in=managed_tags)
     # filter for portal visibility
-    sqs = filter_searchqueryset_for_portal(sqs, restrict_multiportals_to_current=prefer_own_portal)
+    sqs = filter_searchqueryset_for_portal(sqs, restrict_multiportals_to_current=prefer_own_portal, external=external)
     # filter for read access by this user
     sqs = filter_searchqueryset_for_read_access(sqs, request.user)
     # filter events by upcoming status
@@ -160,7 +185,7 @@ def map_search_endpoint(request, filter_group_id=None):
             sqs = sqs.order_by('-portal', '-local_boost')
         else:
             sqs = sqs.order_by('-local_boost')
-        
+    
     # sort results into one list per model
     total_count = sqs.count()
     sqs = sqs[limit*page:limit*(page+1)]
@@ -233,30 +258,36 @@ def map_detail_endpoint(request):
     if model is None:
         return HttpResponseBadRequest('``type`` param indicated an invalid data model type!')
     
-    # TODO: for groups/projects we should really use the cache here.
-    if model_type == 'people':
-        # UserProfiles are retrieved independent of the portal
-        obj = get_object_or_None(get_user_profile_model(), user__username=slug)
-    elif model_type == 'events':
-        group_slug, event_slug = slug.split('*', 1)
-        obj = get_object_or_None(model, group__portal__id=portal, group__slug=group_slug, slug=event_slug)
+    # for internal DB based objects:
+    if portal != EXTERNAL_CONTENT_PORTAL_ID:
+        # TODO: for groups/projects we should really use the cache here.
+        if model_type == 'people':
+            # UserProfiles are retrieved independent of the portal
+            obj = get_object_or_None(get_user_profile_model(), user__username=slug)
+        elif model_type == 'events':
+            group_slug, event_slug = slug.split('*', 1)
+            obj = get_object_or_None(model, group__portal__id=portal, group__slug=group_slug, slug=event_slug)
+        else:
+            obj = get_object_or_None(model, portal__id=portal, slug=slug)
+        if obj is None:
+            return HttpResponseNotFound('No item found that matches the requested type and slug (obj: %s, %s, %s).' % (escape(force_text(model)), portal, slug))
+        
+        # check read permission
+        if not model_type in SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS and not check_object_read_access(obj, request.user):
+            return HttpResponseForbidden('You do not have permission to access this item.')
+        # get the basic result data from the search index (as it is already prepared and faster to access there)
+        haystack_result = get_searchresult_by_args(portal, model_type, slug)
+        if not haystack_result:
+            return HttpResponseNotFound('No item found that matches the requested type and slug (index: %s, %s, %s).' % (portal, model_type, slug))
+        # format data
+        result_model = SEARCH_RESULT_DETAIL_TYPE_MAP[model_type]
+        result = result_model(haystack_result, obj, request.user)
     else:
-        obj = get_object_or_None(model, portal__id=portal, slug=slug)
-    if obj is None:
-        return HttpResponseNotFound('No item found that matches the requested type and slug (obj: %s, %s, %s).' % (escape(force_text(model)), portal, slug))
-    
-    # check read permission
-    if not model_type in SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS and not check_object_read_access(obj, request.user):
-        return HttpResponseForbidden('You do not have permission to access this item.')
-    
-    # get the basic result data from the search index (as it is already prepared and faster to access there)
-    haystack_result = get_searchresult_by_args(portal, model_type, slug)
-    if not haystack_result:
-        return HttpResponseNotFound('No item found that matches the requested type and slug (index: %s, %s, %s).' % (portal, model_type, slug))
-    
-    # format data
-    result_model = SEARCH_RESULT_DETAIL_TYPE_MAP[model_type]
-    result = result_model(haystack_result, obj, request.user)
+        # for external, api based objects:
+        haystack_result = get_searchresult_by_args(portal, model_type, slug)
+        if not haystack_result:
+            return HttpResponseNotFound('No item found that matches the requested type and slug (external: %s, %s, %s).' % (portal, model_type, slug))
+        result = HaystackMapResult(haystack_result, request.user)
     
     data = {
         'result': result,
@@ -264,14 +295,20 @@ def map_detail_endpoint(request):
     return JsonResponse(data)
 
 def get_searchresult_by_itemid(itemid, user=None):
-    portal, model_type, slug = itemid.split('.')
+    portal, model_type, slug = itemid.split('.', 2)
     return get_searchresult_by_args(portal, model_type, slug, user=user)
 
 def get_searchresult_by_args(portal, model_type, slug, user=None):
     """ Retrieves a HaystackMapResult just as the API would, for a given shortid
         in the form of `<classid>.<instanceid>` (see `itemid_from_searchresult()`). """
-        
-    model = SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
+    
+    # monkey-hack: if the portal id is 0, we have an external item, so look up the external models
+    if settings.COSINNUS_EXTERNAL_CONTENT_ENABLED and portal == EXTERNAL_CONTENT_PORTAL_ID:
+        from cosinnus.models.map import EXTERNAL_SEARCH_MODEL_NAMES_REVERSE
+        model = EXTERNAL_SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
+    else:
+        model = SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
+    
     if model_type == 'people':
         sqs = SearchQuerySet().models(model).filter_and(slug=slug)
     elif model_type == 'events':
@@ -282,7 +319,7 @@ def get_searchresult_by_args(portal, model_type, slug, user=None):
     if user:
         # filter for read access by this user
         sqs = filter_searchqueryset_for_read_access(sqs, user)
-        
+    
     # hack: haystack seems to be unable to filter *exact* on `slug` (even when using __exact). 
     # this affects slugs like `my-slug` vs `my-slug-2`.
     # so we manually post-filter on slug to get an exact match

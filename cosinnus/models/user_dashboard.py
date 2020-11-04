@@ -2,20 +2,21 @@
 from __future__ import unicode_literals
 
 import inspect
-import logging
 
 from django.template.defaultfilters import date as django_date_filter
-from django.urls.base import reverse
-from django.utils.html import escape
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.idea import CosinnusIdea
-from cosinnus.models.profile import BaseUserProfile
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from cosinnus.utils.group import get_cosinnus_group_model, \
     get_default_user_group_slugs
 
+import logging
+from cosinnus.models.idea import CosinnusIdea
+from django.urls.base import reverse
+from cosinnus.models.profile import BaseUserProfile
+from django.utils.html import escape
+from cosinnus_organization.models import CosinnusOrganization
 
 logger = logging.getLogger('cosinnus')
 
@@ -44,6 +45,10 @@ class DashboardItem(dict):
                 self['icon'] = obj.get_icon()
                 self['text'] = escape(obj.title)
                 self['url'] = obj.get_absolute_url()
+            elif type(obj) is CosinnusOrganization:
+                self['icon'] = 'fa-building'
+                self['text'] = escape(obj.name)
+                self['url'] = obj.get_absolute_url()
             elif obj._meta.model.__name__ == 'Message' and not settings.COSINNUS_ROCKET_ENABLED and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
                 self['icon'] = 'fa-envelope'
                 self['text'] = escape(obj.subject)
@@ -69,5 +74,3 @@ class DashboardItem(dict):
                 if obj.__class__.__name__ == 'Event':
                     if obj.state != 2:
                         self['subtext'] = {'is_date': True, 'date': django_date_filter(obj.from_date, 'Y-m-d')}
-
-

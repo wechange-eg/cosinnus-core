@@ -12,8 +12,9 @@ from django.http import QueryDict
 from django.test import Client, SimpleTestCase, TestCase, RequestFactory
 from django.utils.encoding import force_text
 
-from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
-    MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING)
+from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership)
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
+from cosinnus.models import MEMBERSHIP_PENDING, MEMBERSHIP_ADMIN
 
 from cosinnus.views.mixins.ajax import patch_body_json_data
 

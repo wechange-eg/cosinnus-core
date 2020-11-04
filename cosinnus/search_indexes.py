@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from haystack import indexes
 
-from cosinnus.conf import settings
+from django.contrib.auth import get_user_model
+from django.urls import reverse
+from django.contrib.auth.models import AnonymousUser
+from django.utils.timezone import now
+
 from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgramField,\
     TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin,\
     DocumentBoostMixin, CommaSeperatedIntegerMultiValueField,\
@@ -11,19 +14,11 @@ from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgram
 from cosinnus.utils.user import filter_active_users, filter_portal_users
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
-from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.contrib.auth import get_user_model
 from cosinnus.utils.functions import normalize_within_stddev, resolve_class
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_ids
-from django.urls import reverse
-from django.utils.functional import cached_property
-from django.contrib.auth.models import AnonymousUser
 from cosinnus.models.idea import CosinnusIdea
-from cosinnus.models.tagged import LikeObject
-from django.contrib.contenttypes.models import ContentType
-from django.db import models
-from django.utils.timezone import now
+from cosinnus_organization.models import CosinnusOrganization
     
 
 class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
@@ -33,7 +28,8 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     
     portal = indexes.IntegerField(model_attr='portal_id')
     group_members = indexes.MultiValueField(indexed=False)
-    sdgs = indexes.MultiValueField(model_attr='sdgs')
+    sdgs = indexes.MultiValueField(model_attr='sdgs', null=True)
+    managed_tags = indexes.MultiValueField()
     public = indexes.BooleanField(model_attr='public')
     always_visible = indexes.BooleanField(default=True)
     created = indexes.DateTimeField(model_attr='created')
@@ -88,6 +84,9 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     def prepare_description(self, obj):
         """ TODO: this should actually reflect the group['description'] language-sensitive magic! """
         return obj.description_long or obj.description
+    
+    def prepare_managed_tags(self, obj):
+        return obj.get_managed_tag_ids()
     
     def prepare_group_members(self, obj):
         if not hasattr(obj, '_group_members'):
@@ -190,12 +189,13 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     user_visibility_mode = indexes.BooleanField(default=True) # switch to filter differently on mt_visibility
     membership_groups = indexes.MultiValueField() # ids of all groups the user is member/admin of
     admin_groups = indexes.MultiValueField() # ids of all groups the user is member/admin of
+    admin_organizations = indexes.MultiValueField() # ids of all organizations the user is member/admin of
     portals = indexes.MultiValueField()
     location = indexes.LocationField(null=True)
+    managed_tags = indexes.MultiValueField()
     user_id = indexes.IntegerField(model_attr='user__id')
     created = indexes.DateTimeField(model_attr='user__date_joined')
-    
-    
+
     local_cached_attrs = ['_memberships_count']
     
     def prepare_portals(self, obj):
@@ -216,6 +216,9 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     def get_image_field_for_icon(self, obj):
         return obj.get_image_field_for_icon()
     
+    def prepare_managed_tags(self, obj):
+        return obj.get_managed_tag_ids()
+    
     def prepare_url(self, obj):
         """ NOTE: UserProfiles always contain a relative URL! """
         return reverse('cosinnus:profile-detail', kwargs={'username': obj.user.username})
@@ -233,7 +236,10 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     
     def prepare_admin_groups(self, obj):
         return list(get_cosinnus_group_model().objects.get_for_user_group_admin_pks(obj.user))
-    
+
+    def prepare_admin_organizations(self, obj):
+        return list(CosinnusOrganization.objects.get_for_user_group_admin_pks(obj.user))
+
     def get_model(self):
         return get_user_profile_model()
 
@@ -354,4 +360,7 @@ class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearch
         if not self.get_image_field_for_background(obj):
             return DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
         return 1.0
-    
+
+
+# also import all external search indexes
+from cosinnus.external.search_indexes import * #noqa

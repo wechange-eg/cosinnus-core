@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from cosinnus_event.api.views import EventViewSet
-
 from django.conf.urls import include, url
 from django.urls import reverse_lazy
 from django.views.generic.base import RedirectView, TemplateView
@@ -12,19 +10,22 @@ from rest_framework import routers, permissions
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    OrganisationViewSet, oauth_current_user, oauth_user, oauth_profile, statistics as api_statistics, current_user, \
-    navbar
+    oauth_user, oauth_profile
+from cosinnus.api.views import oauth_current_user, statistics as api_statistics, current_user, \
+    navbar, settings as api_settings
 from cosinnus.api.views.i18n import translations
 from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
+from cosinnus.views import bbb_room
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
-    user_dashboard, ui_prefs, administration, user_dashboard_announcement, bbb_room
+    user_dashboard, ui_prefs, administration, user_dashboard_announcement
 from cosinnus_conference.api.views import ConferenceViewSet
+from cosinnus_event.api.views import EventViewSet
 from cosinnus_note.api.views import NoteViewSet
-
+from cosinnus_organization.api.views import OrganizationViewSet
 
 app_name = 'cosinnus'
 
@@ -66,7 +67,7 @@ urlpatterns = [
     
     url(r'^bbb/room/(?P<room_id>\d+)/$', bbb_room.bbb_room_meeting, name='bbb-room'),
     url(r'^bbb/queue/(?P<mt_id>\d+)/$', bbb_room.bbb_room_meeting_queue, name='bbb-room-queue'),
-    
+
     url(r'^invitations/$', group.group_list_invited, name='invitations', kwargs={'show_all': True}),
     url(r'^welcome/$', user.welcome_settings, name='welcome-settings'),
     url(r'^join/$', user.group_invite_token_enter_view, name='group-invite-token-enter'),
@@ -94,10 +95,11 @@ urlpatterns = [
     url(r'^administration/announcement/(?P<slug>[^/]+)/edit/$', user_dashboard_announcement.user_dashboard_announcement_edit, name='user-dashboard-announcement-edit'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/delete/$', user_dashboard_announcement.user_dashboard_announcement_delete, name='user-dashboard-announcement-delete'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/activate-toggle/$', user_dashboard_announcement.user_dashboard_announcement_activate, name='user-dashboard-announcement-activate'),
-    
+
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     
     url(r'^housekeeping/ensure_group_widgets/$', housekeeping.ensure_group_widgets, name='housekeeping-ensure-group-widgets'),
+    url(r'^housekeeping/fillexternaldata/$', housekeeping.fill_external_data, name='housekeeping-fill-external-data'),
     url(r'^housekeeping/newsletterusers/$', housekeeping.newsletter_users, name='housekeeping-newsletter-user-emails'),
     url(r'^housekeeping/activeuseremails/$', housekeeping.active_user_emails, name='housekeeping-active-user-emails'),
     url(r'^housekeeping/deletespamusers/$', housekeeping.delete_spam_users, name='housekeeping_delete_spam_users'),
@@ -120,7 +122,7 @@ urlpatterns = [
     url(r'^housekeeping/project_storage_report/', housekeeping.project_storage_report_csv, name='housekeeping-project-storage-report'),
     url(r'^housekeeping/user_activity_info/', housekeeping.user_activity_info, name='housekeeping-user-activity-info'),
     url(r'^housekeeping/group_admin_emails/(?P<slugs>[^/]+)/', housekeeping.group_admin_emails, name='housekeeping-group-admin-emails'),
-    
+
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
 
@@ -184,7 +186,8 @@ if settings.COSINNUS_IDEAS_ENABLED:
         url(r'^ideas/(?P<slug>[^/]+)/edit/$', idea.idea_edit, name='idea-edit'),
         url(r'^ideas/(?P<slug>[^/]+)/delete/$', idea.idea_delete, name='idea-delete'),
     ]
-    
+
+
 if settings.COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED:
     urlpatterns += [
         url(r'^portal/supporters/$', TemplateView.as_view(template_name='premium_info_page.html'), name='premium-info-page'),
@@ -216,7 +219,10 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/decline/$' % url_key, group.group_user_invitation_decline, name=prefix+'group-user-decline'),
         url(r'^%s/(?P<group>[^/]+)/accept/$' % url_key, group.group_user_invitation_accept, name=prefix+'group-user-accept'),
         url(r'^%s/(?P<group>[^/]+)/activate-app/$' % url_key, group.group_activate_app, name=prefix+'group-activate-app'),
-        
+        url(r'^%s/(?P<group>[^/]+)/organizations/$' % url_key, group.group_organizations, name=prefix+'group-organizations'),
+        url(r'^%s/(?P<group>[^/]+)/organizations/request/$' % url_key, group.group_organization_request, name=prefix+'group-organization-request'),
+        url(r'^%s/(?P<group>[^/]+)/organizations/organization-request-select2/$' % url_key, group.group_organization_request_select2, name=prefix+'group-organization-request-select2'),
+
         url(r'^%s/(?P<group>[^/]+)/users/$' % url_key, group.group_user_list, name=prefix+'group-user-list'),
         url(r'^%s/(?P<group>[^/]+)/users/add/$' % url_key, group.group_user_add, name=prefix+'group-user-add-generic'),
         url(r'^%s/(?P<group>[^/]+)/users/add-multiple/$' % url_key, group.group_user_add_multiple, name=prefix+'group-user-add-multiple'),
@@ -240,7 +246,7 @@ router = routers.SimpleRouter()
 router.register(r'conferences', ConferenceViewSet)
 router.register(r'groups', CosinnusSocietyViewSet)
 router.register(r'projects', CosinnusProjectViewSet)
-router.register(r'organisations', OrganisationViewSet)
+router.register(r'organizations', OrganizationViewSet)
 router.register(r'events', EventViewSet)
 router.register(r'notes', NoteViewSet)
 
@@ -265,6 +271,7 @@ schema_url_patterns = [
     url(r'^api/v2/token/', obtain_jwt_token),
     url(r'^api/v2/token/refresh/', refresh_jwt_token),
     url(r'^api/v2/current_user/', current_user, name='api-current-user'),
+    url(r'^api/v2/settings/$', api_settings, name='api-settings'),
     url(r'^api/v2/statistics/', api_statistics, name='api-statistics'),
     url(r'^api/v2/jsi18n/$', translations, name='api-jsi18n'),
     url(r'^api/v2/', include(router.urls)),

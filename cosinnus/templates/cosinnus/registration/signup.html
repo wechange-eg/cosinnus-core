@@ -113,6 +113,12 @@
             {% include 'cosinnus/user/userprofile_extra_formfields.html' with form=form %}
         {% endblock %}
         
+        {% block managed_tag_field %}
+            {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF %}
+                {% include 'cosinnus/fields/managed_tag_formfield.html' with form=form legend=COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_PROFILE type="user" %}
+            {% endif %}
+        {% endblock managed_tag_field %}
+        
         {# Regular Field #}
         {% trans "Captcha" as captcha_label %}
         {% captureas captcha_legend %}

@@ -16,11 +16,10 @@ from cosinnus.forms.select2 import TagSelect2Field
 from django.urls import reverse_lazy
 from django.http.request import QueryDict
 
-from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from django_select2.fields import HeavySelect2MultipleChoiceField, Select2ChoiceField
+from django_select2.fields import Select2ChoiceField
 
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
 
@@ -29,7 +28,6 @@ from django.forms.widgets import SelectMultiple
 from django_select2.widgets import Select2MultipleWidget, Select2Widget
 from cosinnus.utils.user import get_user_select2_pills
 from cosinnus.fields import UserSelect2MultipleChoiceField
-from cosinnus.templatetags.cosinnus_tags import full_name
 
 
 TagObject = get_tag_object_model()
@@ -208,12 +206,13 @@ class BaseTaggableObjectForm(forms.ModelForm):
     
 
             
-def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
+def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}, init_func=None):
     """
     Factory function that creates a class of type
     class:`multiform.MultiModelForm` with the given TaggableObjectFormClass
     and a class of type :class:`TagObjectForm` (default) or whatever
     :data:`settings.COSINNUS_TAG_OBJECT_FORM` defines.
+    @param init_func: a function that gets passed the TaggableObjectForm after it has been inited
     """
 
     class TaggableObjectForm(MultiModelForm):
@@ -244,18 +243,22 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
             if self.instance.pk:
                 if self.is_valid() and 'tags' in self.forms['media_tag'].initial:
                     del self.forms['media_tag'].initial['tags']
-                    
+            
+            # execute the on init function
+            if init_func:
+                init_func(self)
+            
             
         # attach any extra form classes
         for form_name, form_class in list(base_extra_forms.items()):
             base_forms[form_name] = form_class
-            
+        
         
         def save(self, commit=True):
             """
             Save both forms and attach the media_tag to the taggable object.
             """
-            instances = super(TaggableObjectForm, self).save(commit=False)
+            instances = super(TaggableObjectForm, self).save(commit=commit )
 
             # For easy access
             obj = instances['obj']
@@ -331,3 +334,5 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
     
 
     return TaggableObjectForm
+
+    

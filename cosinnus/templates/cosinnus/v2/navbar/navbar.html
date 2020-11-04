@@ -157,6 +157,7 @@
 		        Backbone.mediator.publish('init:module-navbar-main-menu', {
 	            	el: '#nav-main-menu',
 	            	contextDataJSON: {
+                        'my_conferences': "{{ my_conferences_json_encoded }}",
 	            		'group_clusters': "{{ group_clusters_json_encoded }}",
 	            		'groups_invited': "{{ groups_invited_json_encoded }}",
 	            		'group_requests': "{{ group_requests_json_encoded }}",
@@ -164,6 +165,9 @@
 	            		{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
 	            		'followed_ideas': "{{ followed_ideas_json_encoded }}",
 	            		'my_ideas': "{{ my_ideas_json_encoded }}",
+	            		{% endif %}
+	            		{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
+	            		'my_organizations': "{{ my_organizations_json_encoded }}",
 	            		{% endif %}
 	            		'attending_events': "{{ attending_events_json_encoded }}",
 	            	},
@@ -176,6 +180,9 @@
 	            		{% if SETTINGS.NEWW_EVENTS_GROUP_SLUG %}
 	            		'event_add_url': '{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}',
 	            		'event_calendar_url': '{% group_url "cosinnus:event:list" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}',
+	            		{% endif %}
+						{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
+	            		'organization_add_url': '{% url "cosinnus:organization-create" %}',
 	            		{% endif %}
 	            	}
 		        });
@@ -206,6 +213,18 @@
 					{% trans "Create new Group" %}
 				</div>
 			</a>
+			{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
+			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url "cosinnus:organization-create" %}"
+					class="create-menu-link flex-grow">
+				<h2 class="headline margin-regular">{% trans "Organization" %}</h2>
+				<div class="description">
+					{% trans "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!" %}
+				</div>
+				<div class="action text-bold">
+					{% trans "Create new Organization" %}
+				</div>
+			</a>
+			{% endif %}
 			{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
 			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url "cosinnus:idea-create" %}"
 					class="create-menu-link flex-grow">

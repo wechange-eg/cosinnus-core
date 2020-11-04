@@ -14,10 +14,13 @@ from django.utils.translation import ugettext_lazy as _
 
 from awesome_avatar import forms as avatar_forms
 
+from cosinnus.forms.mixins import AdditionalFormsMixin
+from cosinnus_organization.models import CosinnusOrganization
 from cosinnus.models.group import (CosinnusGroupMembership,
-    MEMBERSHIP_MEMBER, CosinnusPortal,
+                                   CosinnusPortal,
     CosinnusLocation, RelatedGroups, CosinnusGroupGalleryImage,
     CosinnusGroupCallToActionButton)
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.conf import settings
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
@@ -26,14 +29,15 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from django.urls import reverse
 from cosinnus.views.facebook_integration import FacebookIntegrationGroupFormMixin
 from cosinnus.utils.lanugages import MultiLanguageFieldValidationFormMixin
-from cosinnus.fields import UserSelect2MultipleChoiceField
+from cosinnus.fields import UserSelect2MultipleChoiceField, GroupSelect2MultipleChoiceField
 from django.contrib.auth import get_user_model
-from cosinnus.utils.user import get_user_select2_pills, filter_active_users
+from cosinnus.utils.user import get_user_select2_pills, filter_active_users, get_group_select2_pills
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.templatetags.cosinnus_tags import is_superuser
 from django.core.exceptions import ObjectDoesNotExist
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.group import SDG_CHOICES
+from cosinnus.forms.managed_tags import ManagedTagFormMixin
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -96,7 +100,8 @@ class AsssignPortalMixin(object):
         return super(AsssignPortalMixin, self).save(**kwargs)
 
 
-class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, forms.ModelForm):
+class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, 
+                ManagedTagFormMixin, AdditionalFormsMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), disable_preview=True)
     website = forms.URLField(widget=forms.TextInput, required=False)
@@ -104,8 +109,10 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
     twitter_widget_id = forms.CharField(widget=forms.Textarea, required=False)
     sdgs = forms.MultipleChoiceField(choices=SDG_CHOICES, required=False)
     
-    
     related_groups = forms.ModelMultipleChoiceField(queryset=get_cosinnus_group_model().objects.none())
+    
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS:
+        managed_tag_field = forms.CharField(required=settings.COSINNUS_MANAGED_TAGS_GROUP_FORMFIELD_REQUIRED)
     
     class Meta(object):
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 'sdgs',
@@ -115,7 +122,9 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
                          'conference_theme_color'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else []) \
-                        + (['embedded_dashboard_html',] if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED else [])
+                        + (['embedded_dashboard_html',] if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED else []) \
+                        + (['managed_tag_field',] if (settings.COSINNUS_MANAGED_TAGS_ENABLED \
+                                                      and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS) else [])
 
     def __init__(self, instance, *args, **kwargs):
         if 'request' in kwargs:
@@ -215,11 +224,16 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
         if commit:
             self.instance.save()
             self.save_m2m()
+            # since we didn't call super().save with commit=True, call this for certain forms to catch up
+            if hasattr(self, 'post_uncommitted_save'):
+                self.post_uncommitted_save(self.instance)
         return self.instance
                 
                 
 class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
-    
+
+    extra_forms_setting = 'COSINNUS_PROJECT_ADDITIONAL_FORMS'
+
     class Meta(object):
         fields = CosinnusBaseGroupForm.Meta.fields + ['parent',]
         model = CosinnusProject
@@ -234,8 +248,11 @@ class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
             qs = qs.exclude(slug=forum_slug)
         self.fields['parent'].queryset = qs
 
+
 class _CosinnusSocietyForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
-    
+
+    extra_forms_setting = 'COSINNUS_GROUP_ADDITIONAL_FORMS'
+
     class Meta(object):
         fields = CosinnusBaseGroupForm.Meta.fields
         model = CosinnusSociety
@@ -258,15 +275,64 @@ class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):
         obj.group = self.group
         obj.save()
         return obj
-    
 
-class MultiUserSelectForm(forms.Form):
+
+class MultiSelectForm(forms.Form):
+    """ The form to select items in a select2 field """
+    select_field = ''
+
+    def __init__(self, *args, **kwargs):
+        super(MultiSelectForm, self).__init__(*args, **kwargs)
+        self.init_items(**kwargs)
+
+    def init_items(self, **kwargs):
+        # Retrieve the attached objects ids to select them in the update view
+        items, item_list, results = [], [], []
+        initial = kwargs.get('initial', {}).get(self.select_field, None)
+        use_ids = False
+
+        if initial:
+            item_list = initial.split(', ')
+            # delete the initial data or our select2 field initials will be overwritten by django
+            if self.select_field in kwargs['initial']:
+                del kwargs['initial'][self.select_field]
+            if self.select_field in self.initial:
+                del self.initial[self.select_field]
+        elif 'data' in kwargs and kwargs['data'].getlist(self.select_field):
+            item_list = kwargs['data'].getlist(self.select_field)
+            use_ids = True
+
+        if item_list:
+            ids = self.fields[self.select_field].get_ids_for_value(item_list, intify=use_ids)
+            ids_type = self.select_field[:-1]
+            queryset = self.get_queryset()
+            if use_ids:
+                items = queryset.filter(id__in=ids[ids_type])
+            else:
+                items = queryset.filter(username__in=ids[ids_type])
+            results = self.get_select2_pills(items, text_only=False)
+
+        # we need to cheat our way around select2's annoying way of clearing initial data fields
+        self.fields[self.select_field].choices = results
+        self.fields[self.select_field].initial = [key for key, __ in results]
+        self.fields[self.select_field].widget.options['ajax']['url'] = self.get_ajax_url()
+        self.initial[self.select_field] = self.fields[self.select_field].initial
+
+    def get_queryset(self):
+        return NotImplementedError
+
+    def get_select2_pills(self, items, text_only=False):
+        return NotImplementedError
+
+    def get_ajax_url(self):
+        return NotImplementedError
+
+
+class MultiUserSelectForm(MultiSelectForm):
     """ The form to select users in a select2 field """
-    
-    base_data_url = 'cosinnus:group-member-invite-select2'
-    
+    select_field = 'users'
+
     # specify help_text only to avoid the possible default 'Enter text to search.' of ajax_select v1.2.5
-    # data_url will be set to a group_aware version of `self.base_data_url` in __init__
     users = UserSelect2MultipleChoiceField(label=_("Users"), data_url='/stub/')
     
     class Meta(object):
@@ -275,45 +341,48 @@ class MultiUserSelectForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.group = kwargs.pop('group')
         super(MultiUserSelectForm, self).__init__(*args, **kwargs)
-        
+
+    def get_queryset(self):
         include_uids = CosinnusPortal.get_current().members
         exclude_uids = self.group.members
-        user_qs = filter_active_users(get_user_model().objects.filter(id__in=include_uids).exclude(id__in=exclude_uids))
-        
-        # retrieve the attached objects ids to select them in the update view
-        users = []
-        initial_users = kwargs.get('initial', {}).get('users', None)
-        preresults = []
-        use_ids = False
-        user_list = []
-        
-        if initial_users:
-            user_list = initial_users.split(', ')
-            # delete the initial data or our select2 field initials will be overwritten by django
-            if 'users' in kwargs['initial']:
-                del kwargs['initial']['users']
-            if 'users' in self.initial:
-                del self.initial['users']
-        elif 'data' in kwargs and kwargs['data'].getlist('users'):
-            user_list = kwargs['data'].getlist('users')
-            use_ids = True
-            
-        if user_list:
-            user_tokens, __ = self.fields['users'].get_user_and_group_ids_for_value(user_list, intify=use_ids)
-            if use_ids:
-                users = user_qs.filter(id__in=user_tokens)
-            else:
-                users = user_qs.filter(username__in=user_tokens)
-            
-            preresults = get_user_select2_pills(users, text_only=False)
-            
-        # we need to cheat our way around select2's annoying way of clearing initial data fields
-        self.fields['users'].choices = preresults
-        self.fields['users'].initial = [key for key,__ in preresults]
-        self.fields['users'].widget.options['ajax']['url'] = group_aware_reverse(self.base_data_url, kwargs={'group': self.group})
-        self.initial['users'] = self.fields['users'].initial
-    
-    
+        return filter_active_users(get_user_model().objects.filter(id__in=include_uids).exclude(id__in=exclude_uids))
+
+    def get_select2_pills(self, items, text_only=False):
+        return get_user_select2_pills(items, text_only=text_only)
+
+    def get_ajax_url(self):
+        if isinstance(self.group, CosinnusOrganization):
+            return reverse('cosinnus:organization-member-invite-select2', kwargs={'organization': self.group.slug})
+        return group_aware_reverse('cosinnus:group-member-invite-select2', kwargs={'group': self.group})
+
+
+class MultiGroupSelectForm(MultiSelectForm):
+    select_field = 'groups'
+
+    # specify help_text only to avoid the possible default 'Enter text to search.' of ajax_select v1.2.5
+    groups = GroupSelect2MultipleChoiceField(label=_("Groups"), data_url='/stub/')
+
+    class Meta(object):
+        fields = ('groups',)
+
+    def __init__(self, *args, **kwargs):
+        self.organization = kwargs.pop('organization')
+        super(MultiGroupSelectForm, self).__init__(*args, **kwargs)
+
+    def get_queryset(self):
+        include_uids = CosinnusPortal.get_current().groups.values_list('id', flat=True)
+        queryset = get_cosinnus_group_model().objects.filter(id__in=include_uids)
+        if self.organization:
+            exclude_uids = self.organization.groups.values_list('id', flat=True)
+            queryset = queryset.exclude(id__in=exclude_uids)
+        return queryset
+
+    def get_select2_pills(self, items, text_only=False):
+        return get_group_select2_pills(items, text_only=text_only)
+
+    def get_ajax_url(self):
+        return reverse('cosinnus:organization-group-invite-select2', kwargs={'organization': self.organization.slug})
+
 
 class CosinnusLocationForm(forms.ModelForm):
 
@@ -324,15 +393,15 @@ class CosinnusLocationForm(forms.ModelForm):
             'location_lat': forms.HiddenInput(),
             'location_lon': forms.HiddenInput(),
         }
-        
-        
+
+
 class CosinnusGroupGalleryImageForm(forms.ModelForm):
 
     class Meta(object):
         model = CosinnusGroupGalleryImage
         fields = ('group', 'image', )
-        
-        
+
+
 class CosinnusGroupCallToActionButtonForm(forms.ModelForm):
     
     url = forms.URLField(widget=forms.TextInput, required=False)

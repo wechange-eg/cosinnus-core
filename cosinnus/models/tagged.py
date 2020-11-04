@@ -108,12 +108,13 @@ class BaseTagObject(models.Model):
 
     visibility = models.PositiveSmallIntegerField(_('Permissions'), blank=True,
         default=VISIBILITY_GROUP, choices=VISIBILITY_CHOICES)
-    
+
+    public = models.BooleanField(_('Publicly available via other platforms'), default=False)
     
     #: Choices for :attr:`approach`: ``(str, str)``
     # Empty first choice must be included for select2 placeholder compatibility!
     APPROACH_CHOICES = (
-        ('',''),
+        ('', ''),
         ('zivilgesellschaft', 'Zivilgesellschaft'),
         ('politik', 'Politik'),
         ('forschung', 'Forschung'),
@@ -143,8 +144,7 @@ class BaseTagObject(models.Model):
     
     text_topics = models.ManyToManyField(CosinnusTopicCategory, verbose_name=_('Text Topics'), 
         related_name='tagged_objects', blank=True)
-    
-                                    
+
     likes = models.PositiveSmallIntegerField(_('Likes'), blank=True, default=0)
     likers = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         related_name='likes+')  # no reverse relation on model

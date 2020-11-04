@@ -1,0 +1,25 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% blocktrans %}Users in organization {{ group }}{% endblocktrans %}{% endblock %}
+
+{% block content %}
+    <a href="{% url 'cosinnus:user-add' %}">{% trans "Add user" %}</a>
+
+    {% if object_list %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{% trans "User" %}</th>
+            </tr>
+        </thead>
+        {% for user in object_list %}
+        <tr>
+            <th><a href="{% url 'cosinnus:profile-detail' username=user.username %}">{{ user.username }}</a></th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        {% trans "There are no visible users." %}
+    {% endif %}
+{% endblock %}

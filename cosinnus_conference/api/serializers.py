@@ -53,9 +53,9 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
             return obj.group.users.filter(is_active=True).count()
         elif obj.type == obj.TYPE_LOBBY:
             queryset = ConferenceEvent.objects.filter(group=obj.group).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
-            return queryset.conference_upcoming().count()
+            return queryset.count()
         else:
-            return obj.events.conference_upcoming().count()
+            return obj.events.count()
 
     def get_url(self, obj):
         if obj.type == obj.TYPE_RESULTS and obj.target_result_group:
@@ -109,7 +109,8 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
         queryset = ConferenceEvent.objects.filter(room__group=obj)
         if queryset.count() > 0:
             queryset = queryset.aggregate(Min('from_date'), Max('to_date'))
-            from_date, to_date = queryset['from_date__min'].date(), queryset['to_date__max'].date()
+            from_date = queryset['from_date__min'].date() if queryset['from_date__min'] else now()
+            to_date = queryset['to_date__max'].date() if queryset['to_date__max'] else from_date
         else:
             from_date, to_date = now(), now()
         return [from_date + timedelta(days=i) for i in range((to_date - from_date).days + 1)]

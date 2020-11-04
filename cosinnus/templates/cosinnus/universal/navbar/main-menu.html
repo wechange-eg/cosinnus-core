@@ -99,60 +99,120 @@
 		</div>
 	</div>
 	
-	{% if COSINNUS_IDEAS_ENABLED %}
+	{% if COSINNUS_IDEAS_ENABLED or COSINNUS_ORGANIZATIONS_ENABLED or my_conferences|length > 0 %}
 	<div class="nav-column">
-		
-		<h2 class="headline headline-condensed">
-			{# Translators: __INCLUDE_JS_PO__ #}
-			{% trans "Ideas I am following" %}
-		</h2>
-		
-		<ul class="item-list">
-			{% if followed_ideas|length > 0 %}
-				{% for item in followed_ideas %}
+	    
+        {% if my_conferences|length > 0 %}
+            <h2 class="headline headline-condensed">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "My Conferences" %}
+            </h2>
+        
+            <ul class="item-list">
+                {% for item in my_conferences %}
+                    {{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+                {% endfor %}
+            </ul>
+            
+            <hr>
+        {% endif %}
+	
+		{% if COSINNUS_ORGANIZATIONS_ENABLED %}
+			<h2 class="headline headline-condensed">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "My Organizations" %}
+			</h2>
+		    <ul class="item-list">
+			{% if my_organizations|length %}
+				{% for item in my_organizations %}
 					{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
 				{% endfor %}
 			{% else %}
 				<li>
-					<span class="list-item list-item-link no-select" href="#" role="button" titledby=".item-text"> 
-			    		<div class="item-text">
-			                {# Translators: __INCLUDE_JS_PO__ #}
-							{% trans "You are not following any ideas yet." %}
-			    		</div>
+					<span class="list-item list-item-link no-select" href="#" role="button" titledby=".item-text">
+						<div class="item-text">
+							{# Translators: __INCLUDE_JS_PO__ #}
+							{% trans "You have not created any organizations yet." %}
+						</div>
 					</span>
 				</li>
 			{% endif %}
-		</ul>
-		
-		<hr>
-		
-		{% if my_ideas|length %}
-			<h2 class="headline headline-condensed">
-				{# Translators: __INCLUDE_JS_PO__ #}
-				{% trans "My Ideas" %}
-			</h2>
-			<ul class="item-list">
-				{% for item in my_ideas %}
-					{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
-				{% endfor %}
 			</ul>
 			<hr>
+			
+			<div class="main-menu-links">
+				<div><a href="{{ organization_add_url }}">
+					{# Translators: __INCLUDE_JS_PO__ #}
+					{% trans "Create new Organization" %} 
+				</a></div>
+				<div><a href="/organizations/">
+					{# Translators: __INCLUDE_JS_PO__ #}
+					{% trans "Browse all Organizations" %} 
+				</a></div>
+				<div style="display:none;"><a href="/map/?people=false&events=false&projects=false&groups=false&ideas=false&organizations=true">
+					{# Translators: __INCLUDE_JS_PO__ #}
+					{% trans "Search for Organizations" %} 
+				</a></div>
+			</div>
+			
+			{% if COSINNUS_IDEAS_ENABLED %}
+			<hr>
+			{% endif %}
 		{% endif %}
 		
-		<div class="main-menu-links">
-			<div><a href="{{ idea_add_url }}">
+		{% if COSINNUS_IDEAS_ENABLED %}
+			<h2 class="headline headline-condensed">
 				{# Translators: __INCLUDE_JS_PO__ #}
-				{% trans "Post new Idea" %} 
-			</a></div>
-			<div><a href="/ideas/">
-				{# Translators: __INCLUDE_JS_PO__ #}
-				{% trans "Browse all Ideas" %} 
-			</a></div>
-			<div style="display:none;"><a href="/map/?people=false&events=false&projects=false&groups=false&ideas=true">
-				{# Translators: __INCLUDE_JS_PO__ #}
-				{% trans "Search for Ideas" %} 
-			</a></div>
-		</div>
+				{% trans "Ideas I am following" %}
+			</h2>
+			
+			<ul class="item-list">
+				{% if followed_ideas|length > 0 %}
+					{% for item in followed_ideas %}
+						{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+					{% endfor %}
+				{% else %}
+					<li>
+						<span class="list-item list-item-link no-select" href="#" role="button" titledby=".item-text"> 
+				    		<div class="item-text">
+				                {# Translators: __INCLUDE_JS_PO__ #}
+								{% trans "You are not following any ideas yet." %}
+				    		</div>
+						</span>
+					</li>
+				{% endif %}
+			</ul>
+			
+			<hr>
+			
+			{% if my_ideas|length %}
+				<h2 class="headline headline-condensed">
+					{# Translators: __INCLUDE_JS_PO__ #}
+					{% trans "My Ideas" %}
+				</h2>
+				<ul class="item-list">
+					{% for item in my_ideas %}
+						{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+					{% endfor %}
+				</ul>
+				<hr>
+			{% endif %}
+			
+			<div class="main-menu-links">
+				<div><a href="{{ idea_add_url }}">
+					{# Translators: __INCLUDE_JS_PO__ #}
+					{% trans "Post new Idea" %} 
+				</a></div>
+				<div><a href="/ideas/">
+					{# Translators: __INCLUDE_JS_PO__ #}
+					{% trans "Browse all Ideas" %} 
+				</a></div>
+				<div style="display:none;"><a href="/map/?people=false&events=false&projects=false&groups=false&ideas=true&organizations=false">
+					{# Translators: __INCLUDE_JS_PO__ #}
+					{% trans "Search for Ideas" %} 
+				</a></div>
+			</div>
+		{% endif %}
 		
 	</div>
 	{% endif %}

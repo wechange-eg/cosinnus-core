@@ -12,7 +12,7 @@ import clsx from "clsx"
 import moment from "moment"
 
 import {Event, EventDay} from "../../../stores/events/models"
-import {formatTime, groupByDaysAndSlots} from "../../../utils/events"
+import {formatTime, getCurrentDay, groupByDaysAndSlots} from "../../../utils/events"
 import {ManageEventIcons} from "../ManageEventIcons"
 import {useStyles} from "./style"
 
@@ -24,7 +24,7 @@ export function EventList(props: EventListProps) {
   const { events } = props
   const classes = useStyles()
   const days = groupByDaysAndSlots(events)
-  const [ currentDay, setCurrentDay] = useState(days[0].props.date)
+  const [ currentDay, setCurrentDay] = useState(getCurrentDay(days))
   if (!events) return null
 
   function getDayLabel(day: EventDay) {

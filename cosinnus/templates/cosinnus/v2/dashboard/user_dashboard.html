@@ -54,7 +54,7 @@
 							<h2 class="headline">{% trans "Close to me" %}</h2>
 						</div>
 						<a href="/map/" class="square-content hover-link">
-							{% trans "Show large map" %} 
+							{% trans "Show large map" %}
 						</a>
 				</div>
 			{% endblock %}
@@ -67,7 +67,7 @@
 	</div>
 		
 	<div class="dashboard-center-bar dashboard-column visible-panel-2">
-	
+
 	    {% if show_welcome_screen %}
 			<div class="dashboard-welcome-frame" style="display: none">
 				<div class="aside-link text-small">
@@ -92,7 +92,7 @@
 						</div>
 						<br/>
 						<a href="{% url 'cosinnus:group-add' %}" class="pale-color pale-with-highlight">
-							{% trans "Create new Project" %} 
+							{% trans "Create new Project" %}
 						</a>
 					</div>
 					<div class="flex-grow margin-extra-large">
@@ -102,7 +102,7 @@
 						</div>
 						<br/>
 						<a href="{% url 'cosinnus:group__group-add' %}" class="pale-color pale-with-highlight">
-							{% trans "Create new Group" %} 
+							{% trans "Create new Group" %}
 						</a>
 					</div>
 				</div>
@@ -116,7 +116,7 @@
 						</div>
 						<br/>
 						<a href="{% url "cosinnus:idea-create" %}" class="pale-color pale-with-highlight">
-							{% trans "Post new Idea" %} 
+							{% trans "Post new Idea" %}
 						</a>
 					</div>
 					{% endif %}
@@ -128,14 +128,26 @@
 							</div>
 							<br/>
 							<a href="{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" class="pale-color pale-with-highlight">
-								{% trans "Add Event" %} 
+								{% trans "Add Event" %}
 							</a>
 						</div>
+					{% endif %}
+					{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
+					<div class="flex-grow margin-extra-large">
+						<h2 class="headline no-side-margin">{% trans "Organizations" %}</h2>
+						<div class="description">
+							{% trans "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!" %}
+						</div>
+						<br/>
+						<a href="{% url "cosinnus:organization-create" %}" class="pale-color pale-with-highlight">
+							{% trans "Create new Organization" %}
+						</a>
+					</div>
 					{% endif %}
 				</div>
 			</div> {% comment %} end dashboard-welcome-frame {% endcomment %}
 		{% endif %}
-		
+
 		{% if announcement %}
 			<div class="dashboard-announcement-frame" style="display: none">
 			    {% if announcement_is_preview %}
@@ -185,7 +197,7 @@
 		            {% render_announcement_html announcement %}
 		        {% endif %}
 	        </div> {% comment %} end dashboard-announcement-frame {% endcomment %}
-        {% endif %}        
+        {% endif %}
 		
 		<div class="dashboard-news-create-frame">
 		    {% block news_form_headline %}

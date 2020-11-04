@@ -34,6 +34,10 @@ def _generate_type_settings(types=[]):
     if settings.COSINNUS_IDEAS_ENABLED:
         options['availableFilters']['ideas'] = 'ideas' in types
         options['activeFilters']['ideas'] = 'ideas' in types
+    if settings.COSINNUS_ORGANIZATIONS_ENABLED:
+        options['availableFilters']['organizations'] = 'organizations' in types
+        options['activeFilters']['organizations'] = 'organizations' in types
+    
     return options
         
     
@@ -149,6 +153,11 @@ class TileView(BaseMapView):
                 return _('My Ideas')
             else:
                 return _('Ideas')
+        if self.types == ['organizations']:
+            if self.show_mine: 
+                return _('My Organizations')
+            else:
+                return _('Organizations')
         if self.types == ['people']:
             return _('People')
         

@@ -77,6 +77,7 @@ module.exports = Backbone.View.extend({
             {
                 'cosinnus_active_user': cosinnus_active_user,
                 'COSINNUS_IDEAS_ENABLED': COSINNUS_IDEAS_ENABLED,
+                'COSINNUS_ORGANIZATIONS_ENABLED': COSINNUS_ORGANIZATIONS_ENABLED,
                 'COSINNUS_SHOW_PROJECT_AND_GROUP_CREATE_BUTTONS': COSINNUS_SHOW_PROJECT_AND_GROUP_CREATE_BUTTONS,
                 'COSINNUS_SHOW_SUPERUSER_CONTROLS': COSINNUS_SHOW_SUPERUSER_CONTROLS,
             }

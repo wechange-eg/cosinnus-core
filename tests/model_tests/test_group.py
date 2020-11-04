@@ -8,7 +8,8 @@ from django.core.cache import cache
 from django.test import TestCase
 
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
-    MEMBERSHIP_MEMBER, CosinnusGroupManager)
+                                   CosinnusGroupManager)
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
 
 _GROUP_CACHE_KEY = CosinnusGroupManager._GROUP_CACHE_KEY % ('group', '%s')
 _GROUPS_PK_CACHE_KEY = CosinnusGroupManager._GROUPS_PK_CACHE_KEY % 'group'

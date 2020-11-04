@@ -8,6 +8,7 @@ from django.apps import apps
 from cosinnus.conf import settings
 from django.core.cache import cache
 from django.utils.http import is_safe_url
+
 from cosinnus.utils.group import get_cosinnus_group_model
 import re
 import urllib.parse
@@ -49,7 +50,7 @@ def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=N
             kwargs['group'] = group.slug
         else:
             group = kwargs['group']
-        
+
         viewname = _group_aware_url_name(viewname, group, portal_id=portal_id)
     else:
         global _CosinnusPortal

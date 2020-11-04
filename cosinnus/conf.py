@@ -258,9 +258,27 @@ class CosinnusConf(AppConf):
     #: How long an idea should at most stay in cache until it will be removed
     IDEA_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
+    # how long managed tags by portal should stay in cache until they will be removed
+    MANAGED_TAG_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
+    
     # should CosinnusIdeas be enabled for this Portal?
     IDEAS_ENABLED = False
     
+    #: How long an idea should at most stay in cache until it will be removed
+    ORGANIZATION_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
+
+    # TODO: add here all values for new instances of organizations that should
+    # be set as default for each new organization instance on create
+    ORGANIZATION_DEFAULT_VALUES = {
+        'place_type': 0, # TODO should always be 'initiative'
+    }
+
+    # should CosinnusOrganizations be enabled for this Portal?
+    ORGANIZATIONS_ENABLED = False
+
+    # is the external content (GoodDB for example) enabled?
+    EXTERNAL_CONTENT_ENABLED = False
+
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
 
@@ -489,7 +507,8 @@ class CosinnusConf(AppConf):
     
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
-    HIDE_APPS = set(['cosinnus_conference', 'cosinnus_message', 'cosinnus_notifications', 'cosinnus_stream'])
+    HIDE_APPS = set(['cosinnus_organization', 'cosinnus_conference', 'cosinnus_message', 'cosinnus_notifications',
+                     'cosinnus_stream'])
     
     #: How long the perm redirect cache should last (1 week, because it organizes itself)
     PERMANENT_REDIRECT_CACHE_TIMEOUT = 60 * 60 * 24 * 7
@@ -636,7 +655,7 @@ class CosinnusConf(AppConf):
     USERPROFILE_ENABLE_NEWSLETTER_OPT_IN = False
     
     # extra fields for the user profile.
-    # usage: 
+    # usage:
     # {
     #    field_name: {
     #         'type': <str type of `UserProfileFormExtraFieldsMixin.EXTRA_FIELD_TYPES`>,
@@ -646,10 +665,10 @@ class CosinnusConf(AppConf):
     #         'required': bool, # whether to be required in forms
     #         'in_signup': bool, # whether to show up in the signup form
     #     }, ...
-    # } 
+    # }
     # example: {'organisation': {'type': 'text', 'required': True}}
     USERPROFILE_EXTRA_FIELDS = {}
-    
+
     # if True, payment urls and views will be enabled
     PAYMENTS_ENABLED = False
     # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins
@@ -721,13 +740,32 @@ class CosinnusConf(AppConf):
     
     # whether SDGs should be shown in group/project forms and detail templates
     ENABLE_SDGS = False
-    
-    # default value for form field for how many coffee table 
+
+    # default value for form field for how many coffee table
     # participants should be allowed
     CONFERENCE_COFFEETABLES_MAX_PARTICIPANTS_DEFAULT = 6
-    
+
     # default value for form field for if to allow user creation of coffee tables
     CONFERENCE_COFFEETABLES_ALLOW_USER_CREATION_DEFAULT = False
+    
+    # enable display and forms for managed tags
+    MANAGED_TAGS_ENABLED = False
+    # str path to a drop-in class for managed tags containing strings 
+    MANAGED_TAGS_LABEL_CLASS_DROPIN = None
+    # will the managed tag show up in the user profile form for the users to assign themselves?
+    MANAGED_TAGS_USERS_MAY_ASSIGN_SELF = False
+    # will the managed tag show up in the group form for the users to assign their groups?
+    MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS = False
+    # is approval by an admin needed on user created tags?
+    # (setting this to true makes managed tags get created with approved=False)
+    MANAGED_TAGS_USER_TAGS_REQUIRE_APPROVAL = False
+    # makes a popout info panel appear on tags in formfields
+    MANAGED_TAGS_SHOW_FORMFIELD_SELECTED_TAG_DETAILS = True
+    # whether formfields are required=True
+    MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED = False
+    MANAGED_TAGS_GROUP_FORMFIELD_REQUIRED = False
+    # the default slug for pre-filled managed tags
+    MANAGED_TAGS_DEFAULT_INITIAL_SLUG = None
     
 
 class CosinnusDefaultSettings(AppConf):
@@ -747,7 +785,7 @@ class CosinnusDefaultSettings(AppConf):
         'cosinnus_etherpad.Etherpad': ('title', ),
         'cosinnus_file.FileEntry': ('title', ),
     }
-    
+
     """ BBB-Settings """
     BBB_SECRET_KEY = None
     BBB_API_URL = None
@@ -763,12 +801,12 @@ class CosinnusDefaultSettings(AppConf):
     # should we monkeypatch for BBB appearently allowing one less persons to enter a room
     # than provided in max_participants during room creation
     BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = True
-    
+
     # the default parameters added to every BBB room join
     # see https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
     BBB_DEFAULT_EXTRA_JOIN_PARAMETER = {
         'userdata-bbb_mirror_own_webcam': 'true',
-        
+
     }
     BBB_ROOM_TYPE_DEFAULT = 0
     BBB_ROOM_TYPE_CHOICES = (
@@ -791,4 +829,3 @@ class CosinnusDefaultSettings(AppConf):
         2: {},
         3: {},
     }
-    

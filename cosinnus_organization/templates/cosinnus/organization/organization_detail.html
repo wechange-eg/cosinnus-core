@@ -1,0 +1,529 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags cosinnus_map_tags static %}
+
+{% block page_title %}
+  {% blocktrans with team_name=object.name %}{{ team_name }} - Admins{% endblocktrans %}
+{% endblock %}
+
+{% block js_app_dependencies %}
+	{% include 'cosinnus/map/static_dependencies.html' %}
+{% endblock js_app_dependencies %}
+
+{% block og_meta_attributes %}
+	{% include 'cosinnus/group/group_og_meta_attributes.html' with group=object %}
+{% endblock og_meta_attributes %}
+
+{% block override_leftnav %}
+<div class="col-lg-3 col-md-3"><!-- left column -->
+	{% block leftnav %}
+		{% include "cosinnus/organization/leftnav_organization.html" with current_page="members" %}
+	{% endblock leftnav %}
+	<div class="clearfix regular-space"></div>
+</div><!-- left column -->
+{% endblock override_leftnav %}
+
+
+{% block breadcrumb %}
+        <li><a href="{% url 'cosinnus:organization-edit' organization=group.slug %}">{{ group.name }}</a></li>
+        <li class="active">{% trans "Admins" %}</li>
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+
+        {% comment %}  leave this here, the jump is what we want always  {% endcomment %}
+        <a class="anchor" id="invite"></a>
+
+
+        {% if user|has_write_access:object or user in invited %}
+	        <div class="panel panel-default large-space">
+	            <div class="panel-heading">
+	                <h4 class="panel-title {% if not request.GET.invite %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseOne">
+	                    <i class="fa fa-chevron-down panel-collapsed"></i>
+	                    <i class="fa fa-chevron-up panel-open"></i>
+	                    {% trans "Invite registered users..." %} {% if invited|length > 0 %}({{ invited|length }}){% endif %}
+	                </h4>
+	            </div>
+		        <div id="collapseOne" class="panel-collapse {% if not request.GET.invite %}collapse{% else %}in{% endif %}">
+		            <div class="panel-body">
+
+			            {% if user|has_write_access:object %}
+				            <legend>{% trans "Invite a member" %}</legend>
+
+				            <form action="{% url 'cosinnus:organization-user-add-multiple' organization=object.slug %}" method="post" class="cosinnus-form">
+				                {% csrf_token %}
+                                {{ member_invite_form.non_field_errors }}
+
+				                {{ member_invite_form.users.errors }}
+				                {% trans "Enter a user name or email to find users to invite..." as inv_placeholder %}
+                                {% include 'cosinnus/fields/default_field.html' with field=member_invite_form.users placeholder=inv_placeholder first=True %}
+
+				                <button type="submit" class="btn btn-emphasized btn-autosize large-space">
+				                    <ul class="media-list">
+				                        <li class="media">
+				                            <a class="pull-left" href="#">
+				                                <i class="fa fa-check"></i>
+				                            </a>
+				                            <div class="media-body">
+				                                {% trans "Invite users" %}
+				                            </div>
+				                        </li>
+				                    </ul>
+				                </button>
+				            </form>
+				        {% endif %}
+
+
+				        {% if user|has_write_access:object or user in invited %}
+
+				            <legend>{% trans "Invited Admins" %}</legend>
+
+				            {% for member in invited %}
+				               {% comment %} In public organizations, we enable the logged in user to see himself as pending user {% endcomment %}
+				               {% if user|has_write_access:object or user == member %}
+				                    <div class="regular-space">
+				                        <div class="btn btn-default w100">
+				                            <ul class="media-list">
+				                                <li class="media">
+				                                    <a class="pull-left" href="{{ member|profile_url }}">
+				                                        {% include "cosinnus/user/user_avatar_image.html" with user=member %}
+				                                    </a>
+
+
+			                                        {% if user|has_write_access:object %}
+			                                                {% captureas modal_revoke_id %}userModal_revoke_{{member.pk}}{% endcaptureas %}
+
+			                                                <button type="button" class="btn btn-emphasized btn-icon-only pull-right"
+			                                                         data-toggle="modal" data-target="#{{modal_revoke_id}}" title="{% trans "Revoke Invitation" %}">
+			                                                    <ul class="media-list">
+			                                                        <li class="media">
+			                                                            <a class="pull-left" href="#">
+			                                                                <i class="fa fa-close"></i>
+			                                                            </a>
+			                                                        </li>
+			                                                    </ul>
+			                                                </button>
+			                                        {% endif %}
+
+			                                        {% if user == member %}
+			                                            <div>
+			                                                {% captureas modal_decline_invitation_id %}userModal_decline_invitation_{{member.pk}}{% endcaptureas %}
+			                                                <button type="button" class="btn btn-emphasized btn-icon-only pull-right"
+			                                                         data-toggle="modal" data-target="#{{modal_decline_invitation_id}}" title="{% trans "Decline Invitation" %}">
+			                                                    <ul class="media-list">
+			                                                        <li class="media">
+			                                                            <a class="pull-left" href="#">
+			                                                                <i class="fa fa-close"></i>
+			                                                            </a>
+			                                                        </li>
+			                                                    </ul>
+			                                                </button>
+
+			                                                <form action="{% url 'cosinnus:organization-user-accept' organization=object.slug %}" method="post">{% csrf_token %}
+			                                                    <button type="submit" class="btn btn-emphasized">
+			                                                        <ul class="media-list">
+			                                                            <li class="media">
+			                                                                <a class="pull-left" href="#">
+			                                                                    <i class="fa fa-sign-in"></i>
+			                                                                </a>
+			                                                                <div class="media-body">
+			                                                                    {% trans "Accept Invitation" %}
+			                                                                </div>
+			                                                            </li>
+			                                                        </ul>
+			                                                    </button>
+			                                                </form>
+			                                            </div>
+			                                        {% endif %}
+
+
+				                                    <div class="media-body">
+				                                        <span class="annotation mobile-hidden">
+				                                            {% trans "Invited" %}
+				                                            &nbsp;
+				                                            <span class="moment-data-date" data-date="{{ member.membership_status_date|date:'c' }}"></span>
+				                                        </span>
+				                                        <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
+				                                            {{ member|full_name }}
+				                                        </a>
+				                                    </div>
+				                                </li>
+				                            </ul>
+				                        </div>
+				                    </div>
+
+				                    {% if user|has_write_access:object %}
+				                        {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to revoke the invitation for member „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
+				                        {% captureas title %}{% trans "Revoke Invitation for Admin" %}{% endcaptureas %}
+				                        {% captureas action %}{% url 'cosinnus:organization-user-delete' organization=object.slug username=member.username %}{% endcaptureas %}
+				                        {% include "cosinnus/modal_box.html" with id=modal_revoke_id label=label title=title form_action=action %}
+				                    {% endif %}
+				                    {% if user == member %}
+				                        {% captureas label %}{% blocktrans %}Do you really want to decline the invitation?{% endblocktrans %}{% endcaptureas %}
+				                        {% captureas title %}{% trans "Decline Invitation" %}{% endcaptureas %}
+				                        {% captureas action %}{% url 'cosinnus:organization-user-decline' organization=object.slug %}{% endcaptureas %}
+				                        {% include "cosinnus/modal_box.html" with id=modal_decline_invitation_id label=label title=title form_action=action %}
+				                    {% endif %}
+
+				                {% endif %}
+
+				            {% empty %}
+				                <!-- {% trans "There are no pending invitations." %} -->
+				                {% include 'cosinnus/common/empty_button.html' with message="There are no pending invitations." %}
+				            {% endfor %}
+
+				        {% endif %}
+
+
+
+	                </div> {% comment %} panel-body {% endcomment %}
+	            </div> {% comment %} panel-collapse {% endcomment %}
+	        </div> {% comment %} panel {% endcomment %}
+        {% endif %}
+
+        {% if user in admins or user|is_superuser or recruited %}
+
+	        <div class="panel panel-default large-space">
+	            <div class="panel-heading">
+	                <h4 class="panel-title {% if not request.GET.invite %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseTwo">
+	                    <i class="fa fa-chevron-down panel-collapsed"></i>
+	                    <i class="fa fa-chevron-up panel-open"></i>
+	                    {% trans "Invite unregistered users..." %} {% if recruited|length > 0 %}({{ recruited|length }}){% endif %}
+	                </h4>
+	            </div>
+	            <div id="collapseTwo" class="panel-collapse {% if not request.GET.invite %}collapse{% else %}in{% endif %}">
+	                <div class="panel-body">
+
+				        {% comment %} -------- Recruit Box and list of recruitees -------- {% endcomment %}
+
+				        {% if user in admins or user|is_superuser %}
+				            <div class="clearfix large-space"></div>
+
+				            <legend>{% trans "Invite People to Register and Join" %}</legend>
+
+				            <button type="submit" class="btn btn-emphasized btn-autosize btn-left" data-toggle="modal" data-target="#modal-recruit-users">
+				                <ul class="media-list">
+				                    <li class="media">
+				                        <a class="pull-left" href="#">
+				                            <i class="fa fa-user-plus"></i>
+				                        </a>
+				                        <div class="media-body">
+				                            {% trans "Invite people" %}
+				                        </div>
+				                    </li>
+				                </ul>
+				            </button>
+
+				            <div class="clearfix large-space"></div>
+				            <div class="alert alert-warning alert-dismissable" id="label-invite-email-added" style="display: none; min-height: 48px;">
+                                <i class="fa fa-arrow-up" style="font-size: 18px;"></i>
+				                {% trans 'The email was added to the invite list. Click "Invite people" to resend the invitations!' %}
+				            </div>
+
+				            {#% include 'cosinnus/common/modal_box_recruit_users.html' %#}
+
+				            <div class="clearfix"></div>
+				        {% endif %}
+
+				        {% if recruited %}
+				            {% if user in admins or user|is_superuser %}
+				                <legend>{% trans "All currently invited people" %}</legend>
+				            {% else %}
+				                <legend>{% trans "People currently invited by you" %}</legend>
+				            {% endif %}
+
+					            {% for recruitation in recruited %}
+					                {% captureas modal_id %}deleteModal_{{recruitation.id}}{% endcaptureas %}
+
+					                <div class="btn btn-default w100 regular-space">
+				                        <ul class="media-list">
+				                            <li class="media">
+		                                        {% if user == recruitation.invited_by or user in admins or user|is_superuser %}
+		                                            <button type="button" class="btn btn-emphasized btn-icon-only pull-right"
+                                                             data-toggle="modal" data-target="#{{modal_id}}" title="{% trans "Delete invitation" %}">
+                                                        <ul class="media-list">
+                                                            <li class="media">
+                                                                <a class="pull-left" href="#">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </button>
+
+                                                    <button data-email="{{ recruitation.email }}" type="button" class="btn btn-emphasized btn-icon-only pull-right button-add-email" title="{% trans "Resend invitation" %}">
+                                                        <ul class="media-list">
+                                                            <li class="media">
+                                                                <a class="pull-left" href="#">
+                                                                    <i class="fa fa-refresh"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </button>
+
+		                                        {% endif %}
+				                                <div class="media-body">
+				                                    <span class="annotation mobile-hidden">
+				                                        {% trans "Invited" %}
+				                                        &nbsp;
+				                                        <span class="moment-data-date" data-date="{{ recruitation.last_modified|date:'c' }}"></span>
+				                                    </span>
+				                                    <span>
+				                                        {{ recruitation.email }}
+				                                    </span>
+				                                    {% if recruitation.invited_by and not recruitation.invited_by == user %}
+								                        <i>
+								                           ({% trans "by" context "an action done *by* <username>" %}
+								                           <a href="{% url 'cosinnus:profile-detail' username=recruitation.invited_by.username %}">{{ recruitation.invited_by|full_name }}</a>)
+								                        </i>
+								                    {% endif %}
+				                                </div>
+				                            </li>
+				                        </ul>
+				                    </div>
+				                    {% if user == recruitation.invited_by or user in admins or user|is_superuser %}
+				                        {% captureas label %}{% blocktrans with title=recruitation.email %}Do you really want to delete the invitation for "{{ title }}"?{% endblocktrans %}{% endcaptureas %}
+				                        {% captureas title %}{% trans "Delete invitation" %}{% endcaptureas %}
+				                        {% captureas action %}{% url 'cosinnus:organization-user-recruit-delete' slug=object.slug id=recruitation.id %}{% endcaptureas %}
+				                        {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=action %}
+				                    {% endif %}
+					            {% endfor %}
+
+					            {% comment %} Adds the recruitee's email to the recruit recipient box and shows a message {% endcomment %}
+					            <script type="text/javascript">
+                                   $('.button-add-email').click(function(){
+                                       var $this = $(this);
+                                       var disabled = $this.attr('disabled');
+                                       if (typeof disabled !== typeof undefined && disabled !== false) {
+                                           return;
+                                       };
+                                       // add email to recruitee box
+                                       var textarea = $('#recruit-user-emails');
+                                       textarea.val($this.attr('data-email') + '\n' + textarea.val());
+                                       // disable button and show message
+                                       $this
+                                           .attr('disabled', 'disabled')
+                                           .removeClass('btn-emphasized')
+                                           .addClass('btn-default')
+                                           .find('i.fa')
+                                               .removeClass('fa-refresh')
+                                               .addClass('fa-plus');
+                                       $('#label-invite-email-added').fadeIn();
+                                   });
+                                </script>
+
+					        <div class="clearfix"></div>
+				        {% endif %}
+
+	                </div> {% comment %} panel-body {% endcomment %}
+	            </div> {% comment %} panel-collapse {% endcomment %}
+	        </div> {% comment %} panel {% endcomment %}
+
+        {% endif %}
+
+
+        {% if user|has_write_access:object or user in pendings %}
+
+	        <div class="panel panel-default large-space">
+	            <div class="panel-heading">
+	                <h4 class="panel-title {% if not pendings|length > 0 and not request.GET.requests %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseFour">
+	                    <i class="fa fa-chevron-down panel-collapsed"></i>
+	                    <i class="fa fa-chevron-up panel-open"></i>
+	                    {% trans "Admin requests" %} {% if pendings|length > 0 %}({{ pendings|length }}){% endif %}
+	                </h4>
+	            </div>
+	            <div id="collapseFour" class="panel-collapse {% if not pendings|length > 0 and not request.GET.requests %}collapse{% else %}in{% endif %}">
+	                <div class="panel-body">
+
+
+                        <legend id="requests">{% trans "Admin requests" %}</legend>
+
+                        {% for member in pendings %}
+
+                           {% comment %} In public organizations, we enable the logged in user to see himself as pending user {% endcomment %}
+                           {% if not user in pendings or user == member %}
+                                <div class="regular-space">
+                                    <div class="btn btn-default w100">
+                                        <ul class="media-list">
+                                            <li class="media">
+                                                <a class="pull-left" href="{{ member|profile_url }}">
+                                                    {% include "cosinnus/user/user_avatar_image.html" with user=member %}
+                                                </a>
+
+                                                {% if user|has_write_access:object %}
+                                                    {% captureas modal_kick_id %}userModal_kick_{{member.pk}}{% endcaptureas %}
+                                                    <button type="button" class="btn btn-emphasized btn-icon-only pull-right"
+                                                             data-toggle="modal" data-target="#{{modal_kick_id}}" title="{% trans "Decline User" %}">
+                                                        <ul class="media-list">
+                                                            <li class="media">
+                                                                <a class="pull-left" href="#">
+                                                                    <i class="fa fa-close"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </button>
+                                                {% endif %}
+
+                                                <div class="media-body">
+                                                    <span class="annotation mobile-hidden">
+                                                        {% trans "Admin requested" %}
+                                                        &nbsp;
+                                                        <span class="moment-data-date" data-date="{{ member.membership_status_date|date:'c' }}"></span>
+                                                    </span>
+                                                    <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
+                                                        {{ member|full_name }}
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                {% if user|has_write_access:object %}
+                                    {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to decline member „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
+                                    {% captureas title %}{% trans "Decline Admin" %}{% endcaptureas %}
+                                    {% captureas action %}{% url 'cosinnus:organization-user-delete' organization=object.slug username=member.username %}{% endcaptureas %}
+                                    {% include "cosinnus/modal_box.html" with id=modal_kick_id label=label title=title form_action=action %}
+                                {% endif %}
+
+                            {% endif %}
+
+                        {% empty %}
+                            <!-- {% trans "There are no new membership requests." %} -->
+                            {% include 'cosinnus/common/empty_button.html' with message="There are no new membership requests." %}
+                        {% endfor %}
+
+                        <div class="clearfix"></div>
+
+
+                    </div> {% comment %} panel-body {% endcomment %}
+                </div> {% comment %} panel-collapse {% endcomment %}
+            </div> {% comment %} panel {% endcomment %}
+
+        {% endif %}
+
+
+        <div class="panel panel-default large-space">
+            <div class="panel-heading">
+                <h4 class="panel-title {% if request.GET.invite %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseThree">
+                    <i class="fa fa-chevron-down panel-collapsed"></i>
+                    <i class="fa fa-chevron-up panel-open"></i>
+                    {% trans "Current Admins" %} ({{ members|length }})
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse {% if request.GET.invite %}collapse{% else %}in{% endif %}">
+                <div class="panel-body">
+
+			        {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+			        <div class="large-space">
+				        <legend>{% trans "Admins" %}{% if member_count %} ({{ member_count }}){% endif %}</legend>
+			        </div>
+			        <div class="clearfix"></div>
+			        {% endif %}
+
+			        {% for member in members %}
+			            <div class="fadedown {% if not forloop.last or hidden_user_count > 0 %}regular-space{% endif %}">
+			                <div class="btn btn-emphasized w100">
+			                    <ul class="media-list">
+			                        <li class="media">
+			                            <span class="pull-left" href="{{ member|profile_url }}">
+			                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
+			                            </span>
+			                            {% if user|has_write_access:object %}
+			                            <a class="pull-right fadedown-clickarea" href="#">
+			                                <i class="fa fa-chevron-down"></i>
+			                            </a>
+			                            {% endif %}
+			                            {% if not member == user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+					                    {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+			                            <a class="pull-right" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=member.username %}" title="{% trans "Send Message" %}{% else %}{% url 'postman:write' recipients=member.username %}{% endif %}" title="{% trans "Send Message" %}">
+				                            <i class="fa fa-envelope"></i>
+				                        </a>
+                                        {% endif %}
+				                        {% endif %}
+			                            <div class="media-body">
+			                                <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
+			                                    {{ member|full_name }}
+			                                </a>
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </div>
+
+			                <div>
+				                {% if user|has_write_access:object %}
+				                    {% captureas modal_kick_id %}userModal_kick_{{member.pk}}{% endcaptureas %}
+				                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_kick_id}}">
+				                        <ul class="media-list">
+				                            <li class="media">
+				                                <a class="pull-left" href="#">
+				                                    <i class="fa fa-eraser"></i>
+				                                </a>
+				                                <div class="media-body">
+				                                    {% trans "Kick" %}
+				                                </div>
+				                            </li>
+				                        </ul>
+				                    </button>
+				                {% endif %}
+
+				                {% include 'cosinnus/feedback/report_button_btn.html' with object=member %}
+			                </div>
+
+			            </div><!-- fadedown -->
+
+			            {% if user|has_write_access:object %}
+			                {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to remove member „{{ name }}“ from the team?{% endblocktrans %}{% endcaptureas %}
+			                {% captureas title %}{% trans "Remove Admin" %}{% endcaptureas %}
+			                {% captureas action %}{% url 'cosinnus:organization-user-delete' organization=object.slug username=member.username %}{% endcaptureas %}
+			                {% include "cosinnus/modal_box.html" with id=modal_kick_id label=label title=title form_action=action %}
+
+			            {% endif %}
+
+			        {% endfor %}
+
+			        {% if hidden_user_count > 0 %}
+			            <div class="btn btn-default w100">
+			                <ul class="media-list">
+			                    <li class="media">
+			                        <a class="pull-left" href="#">
+			                            <img src="{% static 'images/jane-doe.png' %}" />
+			                        </a>
+			                        <div class="media-body">
+			                            {% blocktrans with hidden_count=hidden_user_count %}And {{ hidden_count }} private users...{% endblocktrans %}
+			                        </div>
+			                    </li>
+			                </ul>
+			            </div>
+			        {% endif %}
+
+			        {% if more_user_count > 0 %}
+			        	<br/>
+			            <div class="btn btn-default w100" href="?show=all">
+			                <ul class="media-list">
+			                    <li class="media">
+			                        <a class="pull-left">
+			                            <i class="fa fa-chevron-down"></i>
+			                        </a>
+			                        <div class="media-body">
+			                            <a href="?show=all">
+			                                {% blocktrans with more_count=more_user_count %}Show all of the other {{ more_count }} users...{% endblocktrans %}
+			                            </a>
+			                        </div>
+			                    </li>
+			                </ul>
+			            </div>
+			        {% endif %}
+
+                </div> {% comment %} panel-body {% endcomment %}
+            </div> {% comment %} panel-collapse {% endcomment %}
+        </div> {% comment %} panel {% endcomment %}
+
+    </div>
+
+
+
+
+{% endblock %}

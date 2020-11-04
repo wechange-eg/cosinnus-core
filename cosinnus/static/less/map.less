@@ -93,10 +93,13 @@
     .apply-color-ideas {
         color: @map-ideas-color;
     }
+    .apply-color-organizations {
+        color: @map-organizations-color;
+    }
     .apply-color-liked {
         color: @map-liked-color;
     }
-    
+
     .inline-spacer {
         display: inline-block;
         margin-left: 20px;
@@ -184,6 +187,7 @@
     .placemark(events, event);
     .placemark(groups, group);
     .placemark(ideas, idea);
+    .placemark(organizations, organization);
     .placemark(people, person);
     .placemark(projects, project);
     
@@ -405,7 +409,14 @@
         background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-ideas-color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-ideas-color', GradientType=0); /* IE6-9 */
     }
-    
+    .image-placeholder-background-organizations {
+        background: @map-ideas-color; /* Old browsers */
+        background: -moz-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-organizations-color', GradientType=0); /* IE6-9 */
+    }
+
     .one-line {
         white-space: nowrap;
         overflow: hidden;
@@ -455,6 +466,12 @@
         margin: 0 15px 15px 0;
         position: relative;
         outline: 1px solid @map-frame-color;
+
+        &.image-placeholder-background {
+        	height: 0;
+        	padding-top: 25%;
+        	outline: none;
+        }
     }
     .framed-tile-image {
         width: 100%;
@@ -1011,6 +1028,27 @@
             color: @map-clickable-icon-hover-color;
         }
     }
+    .hover-image-button {
+        .hover-image-icon {
+            width: 134px;
+            padding-right: 5px;
+            padding-bottom: 5px;
+        }
+        
+        .hover-image-button-inner {
+            position: relative;
+        }
+        
+        .hover-image-icon-pos-abs {
+            position: absolute;
+            left: 25%;
+            bottom: 35px;
+        }
+        
+        .hover-image-icon-hidden {
+            visibility: hidden;
+        }
+    }
     
     .map-controls-active-filter-frame {
         min-height: 54px;
@@ -1185,7 +1223,7 @@
             border-radius: 34px;
             
             .rounded-button-inner {
-                padding: 10px;
+                padding: 0 10px;
             }
         }
         

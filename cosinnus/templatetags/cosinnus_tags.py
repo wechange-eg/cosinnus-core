@@ -39,10 +39,10 @@ import logging
 import markdown2
 import json as _json
 from django.utils.encoding import force_text
-from django.utils.html import escape, urlize
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.template.defaultfilters import linebreaksbr, urlizetrunc
+from django.template.defaultfilters import linebreaksbr
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from wagtail.core.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
@@ -54,10 +54,13 @@ from django.core.serializers import serialize
 from cosinnus.models.idea import CosinnusIdea
 from django.db.models.functions import Lower
 from django.contrib.contenttypes.models import ContentType
+from cosinnus_organization.models import CosinnusOrganization
+
 from cosinnus.utils.user import check_user_has_accepted_portal_tos
 from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
 from django.templatetags.i18n import do_translate, do_block_translate, TranslateNode, BlockTranslateNode
 from cosinnus.utils.html import render_html_with_variables
+from cosinnus.models.managed_tags import CosinnusManagedTag
 
 logger = logging.getLogger('cosinnus')
 
@@ -193,8 +196,7 @@ def full_name(value):
 
 @register.filter
 def full_name_force(value):
-    """ Like ``full_name()``, this tag will always print the user name, even if the user is inactive
-    """
+    """ Like ``full_name()``, this tag will always print the user name, even if the user is inactive """
     from django.contrib.auth.models import AbstractBaseUser
     if isinstance(value, AbstractBaseUser):
         return value.get_full_name() or value.get_username()
@@ -220,27 +222,23 @@ def profile_url(value):
 
 @register.filter
 def url_target_blank(link):
-    """ Template filter that turns any html link into a target="_blank" link.
-    """
+    """ Template filter that turns any html link into a target="_blank" link. """
     return mark_safe(link.replace('<a ', '<a target="_blank" rel="nofollow noopener noreferrer" '))
 
 
 @register.filter
 def multiply(value, arg):
-    """Template filter to multiply two numbers
-    """
+    """Template filter to multiply two numbers """
     return value * arg
 
 @register.filter
 def add_num(value, arg):
-    """Template filter to add two numbers
-    """
+    """Template filter to add two numbers """
     return value + arg
 
 @register.filter
 def subtract(value, arg):
-    """Template filter to subtract two numbers
-    """
+    """Template filter to subtract two numbers """
     return value - arg
 
 @register.filter
@@ -251,9 +249,14 @@ def intify(value):
 
 @register.filter
 def stringify(value):
-    """Template filter to stringify a value
-    """
+    """Template filter to stringify a value """
     return str(value)
+
+@register.filter
+def contains(iterable, item):
+    """Template filter to check if an iterable contains an item, just like the `in` keyword """
+    return bool(iterable is not None and item in iterable)
+
 
 @register.simple_tag(takes_context=True)
 def cosinnus_group_url_path(context, group=None):
@@ -287,7 +290,10 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
         if settings.COSINNUS_IDEAS_ENABLED:
             # TODO: cache
             context['my_ideas_count'] = CosinnusIdea.objects.all_in_portal().filter(creator=user).count()
-    
+        if settings.COSINNUS_ORGANIZATIONS_ENABLED:
+            # TODO: cache
+            context['my_organizations_count'] = CosinnusOrganization.objects.all_in_portal().filter(creator=user).count()
+
     try:
         current_app = resolve(request.path).app_name.replace(':', '_')
     except Resolver404:
@@ -360,7 +366,13 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
             my_followed_ideas = CosinnusIdea.objects.all_in_portal().filter(id__in=my_followed_ids).order_by(Lower('title'))
             my_followed_ideas = my_followed_ideas.exclude(creator=user)
             context['followed_ideas_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(idea) for idea in my_followed_ideas]))
-            
+
+        if settings.COSINNUS_ORGANIZATIONS_ENABLED:
+            # "My Organizations"
+            my_organizations = CosinnusOrganization.objects.all_in_portal().filter(creator=user).order_by(Lower('name'))
+            context['my_organizations_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(organization) for organization in my_organizations]))
+
+
         # "My Groups and Projects"
         context['group_clusters_json_encoded'] = _escape_quotes(_json.dumps(MyGroupsClusteredMixin().get_group_clusters(user)))
         # "Invitations"
@@ -370,6 +382,10 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         groups_invited += [DashboardItem(group) for group in projects_invited]
         context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         context['groups_invited_count'] = len(groups_invited)
+
+        # conferences        
+        my_conferences = [society for society in CosinnusSociety.objects.get_for_user(request.user) if society.group_is_conference]
+        context['my_conferences_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(conference) for conference in my_conferences]))
         
         membership_requests = []
         membership_requests_count = 0
@@ -724,6 +740,9 @@ class GroupURLNode(URLNode):
         elif not isinstance(group_arg, six.string_types):
             if ignoreErrors:
                 return ''
+            if not settings.DEBUG:
+                logger.error('TemplateSyntaxError: `group_url` tag requires a group kwarg that is a group or a slug! Returning empty URL.', extra={'group_arg': group_arg})
+                return ''
             raise TemplateSyntaxError("'group_url' tag requires a group kwarg that is a group or a slug! Have you passed one? (You passed: 'group=%s')" % group_arg)
         else:
             group_slug = group_arg
@@ -871,7 +890,7 @@ def textfield(text, arg=''):
     for m in reversed([it for it in BETTER_URL_RE.finditer(text)]):
         if (m.start() == 0 or text[m.start()-2:m.start()] != '](') and (m.start() == 0 or text[m.start()-1] != '@') and (m.end() == len(text) or text[m.end():m.end()+2] != ']('):
             short = (m.group()[:47] + '...') if len(m.group()) > 50 else m.group()
-            text = text[:m.start()] + ('[%s](%s%s)' % (short, 'https://' if not short.startswith('http') else '', m.group())) + text[m.end():] 
+            text = text[:m.start()] + ('[%s](%s%s)' % (short, 'https://' if not short.startswith('http') else '', m.group())) + text[m.end():]
     
     
     text = escape(text.strip())
@@ -1024,7 +1043,8 @@ def debug_context(context, obj=None):
     else:
         context = context
         logger.warn(context)
-        import ipdb; ipdb.set_trace(); from pprint import pprint as pp;
+        import ipdb; ipdb.set_trace();
+
 
 @register.filter
 def debugthis(obj):
@@ -1033,7 +1053,8 @@ def debugthis(obj):
         return ''
     else:
         obj = obj
-        import ipdb; ipdb.set_trace(); from pprint import pprint as pp;
+        import ipdb; ipdb.set_trace();
+
 
 @register.filter
 def printthis(obj):
@@ -1090,6 +1111,22 @@ def render_cosinnus_topics_json():
     return mark_safe(_json.dumps(topic_choices))
 
 @register.simple_tag()
+def render_managed_tags_json():
+    """ Returns all managed tags as JSON array of objects"""
+    all_managed_tags = CosinnusManagedTag.objects.all_in_portal_cached()
+    managed_tags_json = [
+        {
+            'id': tag.id,
+            'icon': tag.labels.ICON,
+            'image': tag.get_image_thumbnail_url(),
+            'name': tag.name,
+            'description': tag.description,
+            'url': tag.url,
+        } for tag in all_managed_tags
+    ]
+    return mark_safe(_json.dumps(managed_tags_json))
+
+@register.simple_tag()
 def get_non_cms_root_url():
     """ Returns the root URL for this portal that isn't the cms page """
     return _get_non_cms_root_url()
@@ -1128,7 +1165,7 @@ class RenderContextIdMixin(object):
 
     def render(self, context, **kwargs):
         rendered_text = super(RenderContextIdMixin, self).render(context, **kwargs)
-        
+
         request = context.get('request', None)
         ids_enabled = bool(getattr(settings, 'COSINNUS_SHOW_TRANSLATED_CONTEXT_IDS', False) or \
                            (request and request.GET.get('show_translation_ids', None) == '1'))
@@ -1144,7 +1181,7 @@ class RenderContextIdMixin(object):
 
 
 class ContextIdTranslateNode(RenderContextIdMixin, TranslateNode):
-    
+
     def __init__(self, translate_node):
         self.noop = translate_node.noop
         self.asvar = translate_node.asvar
@@ -1153,7 +1190,7 @@ class ContextIdTranslateNode(RenderContextIdMixin, TranslateNode):
 
 
 class ContextIdBlockTranslateNode(RenderContextIdMixin, BlockTranslateNode):
-    
+
     def __init__(self, block_translate_node):
         self.extra_context = block_translate_node.extra_context
         self.singular = block_translate_node.singular
@@ -1163,7 +1200,7 @@ class ContextIdBlockTranslateNode(RenderContextIdMixin, BlockTranslateNode):
         self.message_context = block_translate_node.message_context
         self.trimmed = block_translate_node.trimmed
         self.asvar = block_translate_node.asvar
-    
+
 
 @register.tag("trans")
 def context_id_do_translate(parser, token):
