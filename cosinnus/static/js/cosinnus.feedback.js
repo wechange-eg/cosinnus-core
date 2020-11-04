@@ -145,18 +145,20 @@ $.cosinnus.Feedback = {
   
   cosinnus_register_likefollowstar: function() {
 	  $('body').on('click', '.likefollowstar-button.action-do-likefollowstar', function(event){
+          event.preventDefault();
 		  var $this = $(this);
 		  var ct = $this.data('ct');
 		  var id = $this.data('id');
 		  var type = $this.data('type');
 		  var selected = $this.hasClass('selected');
 		  selected = !selected;
-		  var $button = $('.'+type+'-button[data-ct="'+ct+'"][data-id="'+id+'"]')
-		  $button.toggleClass('selected', selected);
+          var $button = $('.'+type+'-button[data-ct="'+ct+'"][data-id="'+id+'"]')
 		  if (selected) {
+              $this.addClass('selected');
 			  $button.next('.likefollowstar-button-success-message').fadeIn(function(){ $(this).addClass('hide-on-click'); });
 		  } else {
-			  $button.next('.likefollowstar-button-success-message').hide().removeClass('hide-on-click');
+            $this.removeClass('selected');
+			$button.next('.likefollowstar-button-success-message').hide().removeClass('hide-on-click');
 		  }
 		  
 		  var params = {};

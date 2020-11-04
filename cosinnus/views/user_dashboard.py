@@ -206,7 +206,13 @@ class StarredUsersWidgetView(BaseUserDashboardWidgetView):
         likeobjects = LikeObject.objects.filter(user=self.request.user, content_type=profile_ct, starred=True)
         liked_users_ids = likeobjects.values_list('object_id', flat=True)
         liked_users = get_user_profile_model().objects.filter(id__in=liked_users_ids)
-        users = [DashboardItem(user) for user in liked_users]
+        users = []
+        for user in liked_users:
+            dashboard_item = DashboardItem(user)
+            dashboard_item['id'] = user.id
+            dashboard_item['ct'] = user.get_content_type()
+            users.append(dashboard_item)
+        #users = [DashboardItem(user) for user in liked_users]
         return {'items': users}
 
 api_user_starred_users = StarredUsersWidgetView.as_view()
@@ -217,15 +223,16 @@ class StarredObjectsWidgetView(BaseUserDashboardWidgetView):
 
     def get_data(self, *kwargs):
         profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
-        #group_ct = ContentType.objects.get_for_model(CosinnusGroup)
         exclude_ids = [profile_ct.id]
         liked = LikeObject.objects.filter(user=self.request.user, starred=True).exclude(content_type_id__in=exclude_ids)
-        like_objects = []
+        objects = []
         for like in liked:
             ct = ContentType.objects.get_for_id(like.content_type.id)
             obj = ct.get_object_for_this_type(pk=like.object_id)
-            like_objects.append(obj)
-        objects = [DashboardItem(object) for object in like_objects]
+            dashboard_item = DashboardItem(obj)
+            dashboard_item['id'] = obj.id
+            dashboard_item['ct'] = obj.get_content_type()
+            objects.append(dashboard_item)
         return {'items': objects}
 
 api_user_starred_objects = StarredObjectsWidgetView.as_view()

@@ -6,11 +6,12 @@
 	{% trans "Users you want to remember" %}
 {% endblock %}
 
-{% block empty_content %}
-	<div class="widget-info-box no-select">
-        {# Translators: __INCLUDE_JS_PO__ #}
-		{% trans "Here you can find an overview of users you want to remember." %}
-		<br/>
-		<br/>
-	</div>
+{% block content %}
+    {% if items|length > 0 %}
+        <ul class="item-list">
+            {% for item in items %}
+            {{ macros.starredlistItem(item) }}
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}

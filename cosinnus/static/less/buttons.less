@@ -630,6 +630,22 @@ a.light-link:hover i { display: inherit; }
     color: @app-neutral-color;
 }
 
+.likefollowstar-button-simple {
+	.show-selected {
+        display: none;
+	}
+	
+    &.selected {
+        .show-unselected {
+            display: none;
+        }
+        .show-selected {
+            display: inherit;
+        }
+    }
+}
+
+
 .likefollowstar-button-style  {
     cursor: pointer;
     margin-right: 20px;
