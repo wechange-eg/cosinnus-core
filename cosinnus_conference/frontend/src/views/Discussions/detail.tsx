@@ -15,6 +15,7 @@ import {Loading} from "../components/Loading"
 import {fetchEvents} from "../../stores/events/effects"
 import {ManageEventButtons} from "../components/ManageEventButtons"
 import {IframeContent} from "../components/IframeContent"
+import {FormattedMessage} from "react-intl"
 
 interface DiscussionProps {
   id: number
@@ -52,7 +53,13 @@ function DiscussionConnector (props: DiscussionProps & RouteComponentProps) {
           <ManageEventButtons event={event} />
         </Content>
       ))
-      || <Content className="fullheight"><Loading /></Content>}
+      || (events && events.loading) && (
+        <Content className="fullheight"><Loading /></Content>
+      ) || (
+        <Content className="fullheight">
+          <Typography><FormattedMessage id="Event not found."/></Typography>
+        </Content>
+      )}
     </Main>
   )
 }

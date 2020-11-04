@@ -328,11 +328,13 @@
 		                {% endcaptureas %}
 		                {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html field=form.forms.media_tag.visibility field_id="group-public-field" label=visibility_label legend=visibility_legend extra_html=visibility_warning_html %}
 
+						{% if SETTINGS.COSINNUS_DATA_EXCHANGE_ENABLED %}
 						{# public Field #}
 						{% trans "Visibility on other platforms" as public_label %}
 						{% blocktrans asvar public_legend with url="/cms/partner-platforms/" %}Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href="#" target="_blank">partner platforms</a> by WECHANGE.{% endblocktrans %}
 						{% trans "This project shall be made publicly findable via other platforms." as public_box_label %}
 						{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.media_tag.public label=public_label legend=public_legend checkbox_label=public_box_label %}
+						{% endif %}
 
                         {# Apps selector fields #}			                
 		                {% trans "Which apps should be activated?" as apps_label %}

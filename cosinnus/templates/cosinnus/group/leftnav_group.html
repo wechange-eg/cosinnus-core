@@ -42,13 +42,11 @@
 {% captureas label %}{% trans "Members" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_groupdetails extra_classes="fine-space" icon="fa-users" label=label href=href  %}
 
+{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
 {% captureas href %}{% group_url 'cosinnus:group-organizations' group=group %}{% endcaptureas %}
 {% captureas label %}{% trans "Organizations" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_organizations extra_classes="large-space" icon="fa-building" label=label href=href  %}
-
-
-
-
+{% endif %}
 
 {% if user|is_group_admin:group or user|is_superuser %}
 	{% captureas href %}{% if activate %}{% url 'cosinnus:group-activate' group_id=group.id %}{% else %}{% url 'cosinnus:group-deactivate' group_id=group.id %}{% endif %}{% endcaptureas %}

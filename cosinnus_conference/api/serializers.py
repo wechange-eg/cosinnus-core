@@ -53,9 +53,9 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
             return obj.group.users.filter(is_active=True).count()
         elif obj.type == obj.TYPE_LOBBY:
             queryset = ConferenceEvent.objects.filter(group=obj.group).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
-            return queryset.conference_upcoming().count()
+            return queryset.count()
         else:
-            return obj.events.conference_upcoming().count()
+            return obj.events.count()
 
     def get_url(self, obj):
         if obj.type == obj.TYPE_RESULTS and obj.target_result_group:

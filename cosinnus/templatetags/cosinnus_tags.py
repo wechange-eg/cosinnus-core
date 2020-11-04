@@ -740,6 +740,9 @@ class GroupURLNode(URLNode):
         elif not isinstance(group_arg, six.string_types):
             if ignoreErrors:
                 return ''
+            if not settings.DEBUG:
+                logger.error('TemplateSyntaxError: `group_url` tag requires a group kwarg that is a group or a slug! Returning empty URL.', extra={'group_arg': group_arg})
+                return ''
             raise TemplateSyntaxError("'group_url' tag requires a group kwarg that is a group or a slug! Have you passed one? (You passed: 'group=%s')" % group_arg)
         else:
             group_slug = group_arg
