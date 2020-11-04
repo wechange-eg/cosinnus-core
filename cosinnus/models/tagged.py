@@ -637,7 +637,7 @@ class LikeObject(models.Model):
         related_name='likes')
     liked = models.BooleanField(_('Liked'), default=True)
     followed = models.BooleanField(_('Following'), default=True)
-    starred = models.BooleanField(_('Starred'), default=True)
+    starred = models.BooleanField(_('Starred'), default=False)
 
     class Meta(object):
         app_label = 'cosinnus'

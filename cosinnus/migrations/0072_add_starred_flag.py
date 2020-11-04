@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='likeobject',
             name='starred',
-            field=models.BooleanField(default=True, verbose_name='Starred'),
+            field=models.BooleanField(default=False, verbose_name='Starred'),
         )
     ]
