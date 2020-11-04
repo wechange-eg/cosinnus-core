@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-06 16:06+0200\n"
+"POT-Creation-Date: 2020-11-04 18:33+0100\n"
 "PO-Revision-Date: 2020-04-07 15:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -175,6 +175,15 @@ msgid "Restricted"
 msgstr ""
 
 msgid "Premium"
+msgstr ""
+
+msgid "Bookmark"
+msgstr ""
+
+msgid "Bookmarked"
+msgstr ""
+
+msgid "Bookmark list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -504,6 +513,10 @@ msgstr "Flickr Gallery ბმული სავარაუდოდ მოქ�
 msgid "Users"
 msgstr "მოხმარებლები"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "ჯგუფები"
+
 msgid "Please remove the whitespace from '{}'"
 msgstr ""
 
@@ -521,6 +534,9 @@ msgstr ""
 
 msgid "Name"
 msgstr "სახელი"
+
+msgid "The selected choice was not found or invalid! Please choose a different value!"
+msgstr ""
 
 msgid "Limit to teams"
 msgstr "გუნდებამდე დაყვანა"
@@ -1171,6 +1187,60 @@ msgstr "კოსინუს იდეა"
 msgid "Cosinnus Ideas"
 msgstr "კოსინუს იდეები"
 
+msgid "Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Idea"
+msgid "Create Managed Tag"
+msgstr "იდეის შექმნა"
+
+msgid "Edit Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Idea"
+msgid "Delete Managed Tag"
+msgstr "იდეის წაშლა"
+
+msgid "Managed Tag Assignment"
+msgstr ""
+
+msgid "Managed Tag Assignments"
+msgstr ""
+
+msgid "No Tag selected"
+msgstr ""
+
+#, fuzzy
+#| msgid "Approach"
+msgid "Approved"
+msgstr "მიახლოება"
+
+msgid "Color"
+msgstr ""
+
+#, fuzzy
+#| msgid "Main background color (css hex value, with or without \"#\")"
+msgid "Optional color code (css hex value, with or without \"#\")"
+msgstr "ფონის ძირითადი ფერი (css hex value, with or without \"#\")"
+
+#, fuzzy
+#| msgid "Parent Group"
+msgid "Paired Group"
+msgstr "მშობლის ჯგუფი"
+
+msgid "A paired group will automatically be joined by all users assigned to this object."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search Synonyms"
+msgstr "ძიება საგნებში"
+
+msgid "Comma-seperated list of phrases for which auto-complete matches, even partial, will return this object."
+msgstr ""
+
 msgid "Is Moderator"
 msgstr "არის მოდერატორი"
 
@@ -1295,6 +1365,9 @@ msgstr "მოწონებული"
 msgid "Following"
 msgstr "მომდევნო"
 
+msgid "Starred"
+msgstr ""
+
 msgid "Text Editor"
 msgstr "ტექსტის რედაქტორი"
 
@@ -1344,10 +1417,6 @@ msgstr "ღონისძიებები"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "პროექტები"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Groups"
-msgstr "ჯგუფები"
 
 msgid "At least one type of Map object must be chosen!"
 msgstr "სულ ცოტა ერთი სახის Map ობიექტი უნდა აირჩეს !"
@@ -1935,6 +2004,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
 msgstr "helptext_13_groupadministration"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_13_groupadministration"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_15_organization"
+msgstr "helptext_13_groupadministration"
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
 msgstr "helptext_50_profileprivacy"
@@ -2148,6 +2224,12 @@ msgstr "აარჩიეთ და ატვირთეთ ალბომი
 #| msgid "Example: http://mywebsite.com"
 msgid "Example: https://twitter.com/myaccount"
 msgstr "მაგალითი: http://mywebsite.com"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Website"
+msgid "website"
+msgstr "ვებ-საიტი"
 
 msgid "Re-Activate Project/Group"
 msgstr "პროექტის/ჯგუფის ხელახლა აქტივაცია"
@@ -2808,6 +2890,12 @@ msgstr "პორტალის ადმინისტრატორებ�
 msgid "All societies"
 msgstr "ყველა საზოგადოება"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organizations"
+msgstr "მოწვევები"
+
 msgid "Re-activate Group"
 msgstr "ჯგუფის ხელახლა გააქტიურება"
 
@@ -2822,6 +2910,103 @@ msgstr "პროექტის აქტივაციის გაუქმ�
 
 msgid "Withdraw Request"
 msgstr "მოთხოვნის გამოთხოვა"
+
+#, fuzzy, python-format
+#| msgid "%(team_name)s - Members"
+msgid "%(team_name)s - Assigned organizations"
+msgstr "%(team_name)s -წევრები"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Assigned organizations"
+msgstr "მოწვევები"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organizations..."
+msgstr "მოწვევის წაშლა"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organization"
+msgstr "მოწვევის წაშლა"
+
+#, fuzzy
+#| msgid "Enter a user name or email to find users to invite..."
+msgid "Enter a name to find organizations to request..."
+msgstr "მომხმარებლის სახელის ან ელ-ფოსტის შეყვანა მომხმარებლის მოძებნისა და მოწვევისათვის."
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Request organizations"
+msgstr "მოწვევები"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Requested organizations"
+msgstr "მოწვევის წაშლა"
+
+#, fuzzy
+#| msgctxt "withdraw join team button second item"
+#| msgid "Request"
+msgid "Revoke request"
+msgstr "მოთხოვნა"
+
+#, fuzzy
+#| msgid "Decline Member"
+msgid "Decline request"
+msgstr "წევრისათვის უარის თქმა"
+
+#, fuzzy
+#| msgid "Accept Member"
+msgid "Accept request"
+msgstr "წევრისათვის დათანხმება"
+
+#, fuzzy
+#| msgctxt "join request pending team button second item"
+#| msgid "Requested"
+msgid "Requested"
+msgstr "მოთხოვნილი"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to revoke the request for „%(name)s“?"
+msgstr "ნამდვილად გსურთ მოწვევის გაუქმება წევრისათვის„%(name)s“?"
+
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Revoke request for organization"
+msgstr "ძიება მომხმარებლებში"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to decline the request?"
+msgstr "ნამდვილად გსურთ მოწვევაზე უარის თქმა?"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organization invitations"
+msgstr "მოწვევები"
+
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Decline invitation"
+msgstr "მოწვევაზე უარის თქმა"
+
+#, fuzzy
+#| msgid "Invite"
+msgid "Invited"
+msgstr "მოწვევა"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove „%(name)s“ from the organization?"
+msgstr "ნამდვილად გსურთ წევრ „%(name)s-ის“ გუნდიდან ამოშლა?"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove organization"
+msgstr "ლოკაციის ამოშლა"
 
 msgid "Workshop Participant File Upload"
 msgstr ""
@@ -3520,12 +3705,6 @@ msgid "All Ideas"
 msgstr "ყველა იდეა"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Invitations"
-msgid "Organizations"
-msgstr "მოწვევები"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "My Organizations"
 msgstr ""
 
@@ -4052,6 +4231,12 @@ msgstr "ყველა პროექტის დათვალიერე�
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Video Conference Server"
+msgid "My Conferences"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "You have not RSVPed to any Events."
 msgid "You have not created any organizations yet."
 msgstr "თქვენ არ გაქვთ RSVPed არცერთი ღონისძიებებისთვის."
@@ -4273,6 +4458,24 @@ msgid "You are a Admin"
 msgstr "თქვენ ხართ წევრი"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Membership request pending..."
+msgid "Ownership request pending..."
+msgstr "წევრობაზე მოთხოვნა პროცესშია..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Projects and groups"
+msgstr "ჩემი პროექტები და ჯგუფები"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group"
+msgstr "პროექტები/ჯგუფები"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Open to be contacted about potential collaboration opportunities"
 msgstr "გახსენით, რომ მოხდეს პოტენციურ თანამშრომლებთან თქვენი დაკავშირება"
 
@@ -4301,6 +4504,18 @@ msgid "There are no items yet"
 msgstr "საგნები ჯერ არ არის"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Ideas I am following"
+msgid "Items you follow"
+msgstr "თქვენ მიერ გაყოლილი იდეები"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find an overview of items you follow."
+msgstr "აქ შეგიძლიათ ნახოთ თქვენ მიერ მოწონებული იდეების მიმოხილვა."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
 msgstr "ჯგუფები და პროექტები"
 
@@ -4327,6 +4542,14 @@ msgstr "თქვენ შეგიძლიათ შექმნათ ჯგ
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "ძებნა"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Nothing here yet."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Users you want to remember"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -5186,6 +5409,16 @@ msgstr "საგანი ნაჩვენებია ამ პროექ
 #| msgid "Which apps should be activated?"
 msgid "The %s-app was activated!"
 msgstr "რომელი აპლიკაციები უნდა იქნეს გააქტიურებული?"
+
+#, fuzzy, python-format
+#| msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+msgstr "თქვენ მოითხოვეთ %(team_type)s “%(team_name)s” ჩართვა. თქვენ მიიღებთ ელ-ფოსტას, როგორც კი გუნდის ადმინისტრატორი რეაგირებას მოახდენს თქვენს მოთხოვნაზე."
+
+#, fuzzy, python-format
+#| msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
+msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgstr "თქვენ უკვე მოწვეული ხართ \"%(team_name)s\" -ში და ახალხან გახდით წევრი!"
 
 msgid "No appname given for adding containers."
 msgstr "No appname given for adding containers."

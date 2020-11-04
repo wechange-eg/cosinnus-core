@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-06 16:06+0200\n"
+"POT-Creation-Date: 2020-11-04 18:33+0100\n"
 "PO-Revision-Date: 2020-04-22 12:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -175,6 +175,15 @@ msgid "Restricted"
 msgstr ""
 
 msgid "Premium"
+msgstr ""
+
+msgid "Bookmark"
+msgstr ""
+
+msgid "Bookmarked"
+msgstr ""
+
+msgid "Bookmark list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -523,6 +532,10 @@ msgstr ""
 msgid "Users"
 msgstr "Usarios"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "Grupos"
+
 msgid "Please remove the whitespace from '{}'"
 msgstr ""
 
@@ -540,6 +553,9 @@ msgstr ""
 
 msgid "Name"
 msgstr "Nombre"
+
+msgid "The selected choice was not found or invalid! Please choose a different value!"
+msgstr ""
 
 msgid "Limit to teams"
 msgstr "Límite de equipos"
@@ -1192,6 +1208,60 @@ msgstr "Cosinnus Idea"
 msgid "Cosinnus Ideas"
 msgstr "Cosinnus Ideas"
 
+msgid "Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Idea"
+msgid "Create Managed Tag"
+msgstr "Crear idea"
+
+msgid "Edit Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Idea"
+msgid "Delete Managed Tag"
+msgstr "Eliminar idea"
+
+msgid "Managed Tag Assignment"
+msgstr ""
+
+msgid "Managed Tag Assignments"
+msgstr ""
+
+msgid "No Tag selected"
+msgstr ""
+
+#, fuzzy
+#| msgid "Approach"
+msgid "Approved"
+msgstr "Aprobar"
+
+msgid "Color"
+msgstr ""
+
+#, fuzzy
+#| msgid "Main background color (css hex value, with or without \"#\")"
+msgid "Optional color code (css hex value, with or without \"#\")"
+msgstr "Color principal del fondo (con o sin \"#\")"
+
+#, fuzzy
+#| msgid "Parent Group"
+msgid "Paired Group"
+msgstr "Grupo de padres"
+
+msgid "A paired group will automatically be joined by all users assigned to this object."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search Synonyms"
+msgstr "Buscar en equipos"
+
+msgid "Comma-seperated list of phrases for which auto-complete matches, even partial, will return this object."
+msgstr ""
+
 msgid "Is Moderator"
 msgstr "Es moderador"
 
@@ -1324,6 +1394,9 @@ msgstr "Gustado"
 msgid "Following"
 msgstr "Siguiendo"
 
+msgid "Starred"
+msgstr ""
+
 msgid "Text Editor"
 msgstr ""
 
@@ -1375,10 +1448,6 @@ msgstr "Eventos"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Proyectos"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Groups"
-msgstr "Grupos"
 
 msgid "At least one type of Map object must be chosen!"
 msgstr "Por lo menos un tipo de objeto de mapa tiene que ser elegido!"
@@ -1985,6 +2054,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
 msgstr "texto de ayuda_6_administración de grupo"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_13_groupadministration"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_15_organization"
+msgstr "texto de ayuda_6_administración de grupo"
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
 msgstr "texto de ayuda_50_privacidad del perfil"
@@ -2201,6 +2277,12 @@ msgstr "Ahora rescibirarás notificaciones siempre que contenidp público será 
 #| msgid "Example: http://mywebsite.com"
 msgid "Example: https://twitter.com/myaccount"
 msgstr "Ejemplo: http://mywebsite.com"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Website"
+msgid "website"
+msgstr "Página web"
 
 msgid "Re-Activate Project/Group"
 msgstr "Escoge y sube una imagen de la galería"
@@ -2875,6 +2957,12 @@ msgstr "Administratores del portal"
 msgid "All societies"
 msgstr "Todas las sociedades"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organizations"
+msgstr "Invitaciones"
+
 msgid "Re-activate Group"
 msgstr "Reactivar grupo"
 
@@ -2889,6 +2977,101 @@ msgstr "Desactivar proyecto"
 
 msgid "Withdraw Request"
 msgstr "Retirar solicitud"
+
+#, fuzzy, python-format
+#| msgid "%(team_name)s - Members"
+msgid "%(team_name)s - Assigned organizations"
+msgstr "%(team_name)s - miembros"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Assigned organizations"
+msgstr "Invitaciones"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organizations..."
+msgstr "Eliminar invitación"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organization"
+msgstr "Eliminar invitación"
+
+msgid "Enter a name to find organizations to request..."
+msgstr ""
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Request organizations"
+msgstr "Invitaciones"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Requested organizations"
+msgstr "Eliminar invitación"
+
+#, fuzzy
+#| msgctxt "withdraw join team button second item"
+#| msgid "Request"
+msgid "Revoke request"
+msgstr "Solicitar"
+
+#, fuzzy
+#| msgid "Decline Member"
+msgid "Decline request"
+msgstr "Rechazar miembro"
+
+#, fuzzy
+#| msgid "Accept Member"
+msgid "Accept request"
+msgstr "Aceptar miembro"
+
+#, fuzzy
+#| msgctxt "join request pending team button second item"
+#| msgid "Requested"
+msgid "Requested"
+msgstr "Pedido"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to revoke the request for „%(name)s“?"
+msgstr "Estas seguro de que quieres revocar la invitación para el miembro „%(name)s“?"
+
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Revoke request for organization"
+msgstr "Buscar usarios"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to decline the request?"
+msgstr "Estas seguro de que quieres rechazar la invitación?"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organization invitations"
+msgstr "Invitaciones"
+
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Decline invitation"
+msgstr "Rechazar invitación"
+
+#, fuzzy
+#| msgid "Invite"
+msgid "Invited"
+msgstr "Invitar"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove „%(name)s“ from the organization?"
+msgstr "Estas seguro de que quieres eliminar al miembro „%(name)s“ del equipo?"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove organization"
+msgstr "Eliminar localización"
 
 msgid "Workshop Participant File Upload"
 msgstr ""
@@ -3588,12 +3771,6 @@ msgid "All Ideas"
 msgstr "Todas la ideas"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Invitations"
-msgid "Organizations"
-msgstr "Invitaciones"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "My Organizations"
 msgstr ""
 
@@ -4131,6 +4308,10 @@ msgid "Browse all Projects"
 msgstr "Todos los proyectos"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "My Conferences"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "You are following this item"
 msgid "You have not created any organizations yet."
@@ -4376,6 +4557,24 @@ msgid "You are a Admin"
 msgstr "Eres un miembro"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Membership request pending..."
+msgid "Ownership request pending..."
+msgstr "Solicitud de participación pendiente..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Projects and groups"
+msgstr "Mis proyectos y grupos"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group"
+msgstr "Proyectos/grupos"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Open to be contacted about potential collaboration opportunities"
 msgstr ""
 
@@ -4410,6 +4609,14 @@ msgid "There are no items yet"
 msgstr "No hay usuarios visibles."
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Items you follow"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can find an overview of items you follow."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Created Projects"
 msgid "Groups and Projects"
@@ -4437,6 +4644,14 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Nothing here yet."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Users you want to remember"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5353,6 +5568,16 @@ msgstr "Este punto se muestra ahora en estos proyectos/grupos: %(group_names)s"
 #| msgid "Which apps should be activated?"
 msgid "The %s-app was activated!"
 msgstr "Qué aplicaciones debería ser activadas?"
+
+#, fuzzy, python-format
+#| msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+msgstr "Has solicitado unirte al %(team_type)s \"%(team_name)s\". Recibirás un correo electrónico cuando un administrador del equipo responda a tu solicitud."
+
+#, fuzzy, python-format
+#| msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
+msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgstr "¡Ya te habían invitado a \"%(team_name)s\" y ahora te han hecho miembro immediatamente!"
 
 #, fuzzy
 msgid "No appname given for adding containers."

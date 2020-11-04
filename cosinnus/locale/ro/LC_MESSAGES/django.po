@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-06 16:06+0200\n"
+"POT-Creation-Date: 2020-11-04 18:33+0100\n"
 "PO-Revision-Date: 2020-10-12 00:20+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -169,6 +169,15 @@ msgstr "Restrâns"
 
 msgid "Premium"
 msgstr "Premium"
+
+msgid "Bookmark"
+msgstr ""
+
+msgid "Bookmarked"
+msgstr ""
+
+msgid "Bookmark list"
+msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Numai membrii echipei pot vedea conținutul pe care l-ați solicitat. Aplicați pentru a deveni membru acum!"
@@ -498,6 +507,10 @@ msgstr "Aceasta nu pare să fie o legătură Galeria Flickr validă! Ar trebui s
 msgid "Users"
 msgstr "Utilizatorii"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "Grupuri"
+
 msgid "Please remove the whitespace from '{}'"
 msgstr "Vă rugăm să eliminați spațiul alb din '{}'"
 
@@ -515,6 +528,9 @@ msgstr "Norul CSV nu trebuie analizat. Vă rugăm să utilizați ',' sau ';' ca 
 
 msgid "Name"
 msgstr "Nume"
+
+msgid "The selected choice was not found or invalid! Please choose a different value!"
+msgstr ""
 
 msgid "Limit to teams"
 msgstr "Limita de echipe"
@@ -1131,6 +1147,60 @@ msgstr "Cosinnus Ideea"
 msgid "Cosinnus Ideas"
 msgstr "Cosinnus Idei"
 
+msgid "Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Idea"
+msgid "Create Managed Tag"
+msgstr "Crea Idee"
+
+msgid "Edit Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Idea"
+msgid "Delete Managed Tag"
+msgstr "Șterge Ideea"
+
+msgid "Managed Tag Assignment"
+msgstr ""
+
+msgid "Managed Tag Assignments"
+msgstr ""
+
+msgid "No Tag selected"
+msgstr ""
+
+#, fuzzy
+#| msgid "Approach"
+msgid "Approved"
+msgstr "Abordare"
+
+msgid "Color"
+msgstr ""
+
+#, fuzzy
+#| msgid "Main background color (css hex value, with or without \"#\")"
+msgid "Optional color code (css hex value, with or without \"#\")"
+msgstr "Culoarea principală a fundalului (css hex valoarea, cu sau fără ”#”)"
+
+#, fuzzy
+#| msgid "Parent Group"
+msgid "Paired Group"
+msgstr "Grup de Părinți"
+
+msgid "A paired group will automatically be joined by all users assigned to this object."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search Synonyms"
+msgstr "Căutare în Echipe"
+
+msgid "Comma-seperated list of phrases for which auto-complete matches, even partial, will return this object."
+msgstr ""
+
 msgid "Is Moderator"
 msgstr "Este Moderator"
 
@@ -1255,6 +1325,9 @@ msgstr "Plăcut"
 msgid "Following"
 msgstr "Ca urmare"
 
+msgid "Starred"
+msgstr ""
+
 msgid "Text Editor"
 msgstr "Editor de Text"
 
@@ -1304,10 +1377,6 @@ msgstr "Evenimente"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Proiecte"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Groups"
-msgstr "Grupuri"
 
 msgid "At least one type of Map object must be chosen!"
 msgstr "Trebuie ales cel puțin un tip de obiect sau Map!"
@@ -1895,6 +1964,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
 msgstr "helptext_13_groupadministration"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_13_groupadministration"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_15_organization"
+msgstr "helptext_13_groupadministration"
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
 msgstr "helptext_50_profileprivacy"
@@ -2104,6 +2180,12 @@ msgstr "Alegeți și încărcați o imagine de galerie"
 
 msgid "Example: https://twitter.com/myaccount"
 msgstr "Exemplu: http://twitter.com/myaccount"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Website"
+msgid "website"
+msgstr "Website"
 
 msgid "Re-Activate Project/Group"
 msgstr "Re-Activează Proiectul/Grupul"
@@ -2756,6 +2838,10 @@ msgstr "Administratorii Portalului"
 msgid "All societies"
 msgstr "Toate societățiile"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Organizations"
+msgstr "Organizații"
+
 msgid "Re-activate Group"
 msgstr "Re-activează Grupul"
 
@@ -2770,6 +2856,103 @@ msgstr "Dezactivă Proiectul"
 
 msgid "Withdraw Request"
 msgstr "Cerere de retragere"
+
+#, fuzzy, python-format
+#| msgid "%(team_name)s - Members"
+msgid "%(team_name)s - Assigned organizations"
+msgstr "%(team_name)s - Membrii"
+
+#, fuzzy
+#| msgid "All Organizations"
+msgid "Assigned organizations"
+msgstr "Toate Organizațiile"
+
+#, fuzzy
+#| msgid "Create Organization"
+msgid "Request organizations..."
+msgstr "Creează Organizarea"
+
+#, fuzzy
+#| msgid "Create Organization"
+msgid "Request organization"
+msgstr "Creează Organizarea"
+
+#, fuzzy
+#| msgid "Enter a user name or email to find users to invite..."
+msgid "Enter a name to find organizations to request..."
+msgstr "Introduceți un nume de utilizator s-au un e-mail pentru a găsi utilizatori de invitat..."
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Request organizations"
+msgstr "Organizații"
+
+#, fuzzy
+#| msgid "Create Organization"
+msgid "Requested organizations"
+msgstr "Creează Organizarea"
+
+#, fuzzy
+#| msgctxt "withdraw join team button second item"
+#| msgid "Request"
+msgid "Revoke request"
+msgstr "Cerere"
+
+#, fuzzy
+#| msgid "Decline Member"
+msgid "Decline request"
+msgstr "Declină membru"
+
+#, fuzzy
+#| msgid "Accept Member"
+msgid "Accept request"
+msgstr "Accept membru"
+
+#, fuzzy
+#| msgctxt "join request pending team button second item"
+#| msgid "Requested"
+msgid "Requested"
+msgstr "Solicitat"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to revoke the request for „%(name)s“?"
+msgstr "Doriți cu adevărat să revocați invitația pentru membru „%(name)s”?"
+
+#, fuzzy
+#| msgid "Search for Organizations"
+msgid "Revoke request for organization"
+msgstr "Căutați organizații"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to decline the request?"
+msgstr "Chiar vrei să refuzi invitația?"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization invitations"
+msgstr "Organizații"
+
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Decline invitation"
+msgstr "Refuză Invitația"
+
+#, fuzzy
+#| msgid "Invite"
+msgid "Invited"
+msgstr "Invita"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove „%(name)s“ from the organization?"
+msgstr "Vrei cu adevărat să eliminați membru „%(name)s” din echipă?"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove organization"
+msgstr "Eliminați locația"
 
 msgid "Workshop Participant File Upload"
 msgstr "Încărcarea Fișierului Participant la Atelier"
@@ -3475,10 +3658,6 @@ msgid "All Ideas"
 msgstr "Toate Ideile"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Organizations"
-msgstr "Organizații"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "My Organizations"
 msgstr "Organizațiile Mele"
 
@@ -3987,6 +4166,12 @@ msgid "Browse all Projects"
 msgstr "Răsfoiți toate Proiectele"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Is conference"
+msgid "My Conferences"
+msgstr "Este conferință"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You have not created any organizations yet."
 msgstr "Nu ați creat încă nicio organizație."
 
@@ -4199,6 +4384,24 @@ msgid "You are a Admin"
 msgstr "Sunteți un Administrator"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Membership request pending..."
+msgid "Ownership request pending..."
+msgstr "Cerere de membru în așteptare..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Projects and groups"
+msgstr "Proiectele și Grupurile mele"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group"
+msgstr "Proiecte/Grupuri"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Open to be contacted about potential collaboration opportunities"
 msgstr "Deschis pentru a fi contactat cu privire la oportunitățile de colaborare potențiale"
 
@@ -4227,6 +4430,18 @@ msgid "There are no items yet"
 msgstr "Nu există articole încă"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Ideas I am following"
+msgid "Items you follow"
+msgstr "Idei pe care le urmăresc"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find an overview of items you follow."
+msgstr "Aici puteți găsi o imagine o imagine de ansamblu a Ideilor care v-au plăcut."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
 msgstr "Grupuri și Proiecte"
 
@@ -4253,6 +4468,14 @@ msgstr "Puteți să vă creați propriile Idei cu ajutorul butonului '+' din ant
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "Descoperi"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Nothing here yet."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Users you want to remember"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -5099,6 +5322,16 @@ msgstr "Acest articol este acum prezentat în aceste proiecte/grupuri: %(group_n
 #, python-format
 msgid "The %s-app was activated!"
 msgstr "Aplicația %s a fost activată!"
+
+#, fuzzy, python-format
+#| msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+msgstr "Ați solicitat să vă alăturați %(team_type)s ”%(team_name)s”. Veți primi un e-mail imediat ce un administrator al echipei răspunde la solicitarea dvs."
+
+#, fuzzy, python-format
+#| msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
+msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgstr "Ai fost deja invitat ”%(team_name)s” și acum au fost făcuți membrii imediat!"
 
 msgid "No appname given for adding containers."
 msgstr "Nu este dat niciun nume de aplicație pentru adăugarea containerelor."
