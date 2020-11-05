@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-04 18:33+0100\n"
+"POT-Creation-Date: 2020-11-05 15:35+0100\n"
 "PO-Revision-Date: 2020-09-29 17:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1428,10 +1428,6 @@ msgstr "أحداث"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "مشاريع"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Groups"
-msgstr "مجموعات"
 
 msgid "At least one type of Map object must be chosen!"
 msgstr "يجب اختيار نوع واحد على الأقل من موضع الخريطة!"
@@ -2910,10 +2906,8 @@ msgid "All societies"
 msgstr "كل المجتمعات"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Invitations"
 msgid "Organizations"
-msgstr "دعوات"
+msgstr "منظمات"
 
 msgid "Re-activate Group"
 msgstr "أعد تنشيط المجموعة"
@@ -3732,10 +3726,6 @@ msgid "All Ideas"
 msgstr "كل الأفكار"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Organizations"
-msgstr "منظمات"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "My Organizations"
 msgstr "منظمتي"
 
@@ -4242,6 +4232,12 @@ msgstr "تصفح كل المجموعات"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Browse all Projects"
 msgstr "تصفح كل المشاريع"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Is conference"
+msgid "My Conferences"
+msgstr "هو مؤتمر"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You have not created any organizations yet."
