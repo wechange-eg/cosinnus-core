@@ -26,6 +26,19 @@
     </ul>
 </div>
 
+<div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-group-newsletter' %}">
+    <ul class="media-list">
+        <li class="media">
+           <a class="pull-left">
+                <i class="fa fa-envelope"></i>
+            </a>
+            <div class="media-body">
+                {% trans "Newsletter for groups" %}
+            </div>
+        </li>
+    </ul>
+</div>
+
 <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:user-dashboard-announcement-list' %}">
     <ul class="media-list">
         <li class="media">

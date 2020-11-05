@@ -35,7 +35,7 @@ from cosinnus.models.bbb_room import BBBRoom
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.managed_tags import CosinnusManagedTag,\
     CosinnusManagedTagAssignment
-
+from cosinnus.models.newsletter import Newsletter
 
 class SingleDeleteActionMixin(object):
     
@@ -631,6 +631,12 @@ class CosinnusConferenceRoomAdmin(admin.ModelAdmin):
     search_fields = ('slug', 'title',)
 
 admin.site.register(CosinnusConferenceRoom, CosinnusConferenceRoomAdmin)
+
+class CosinnusNewsletterAdmin(admin.ModelAdmin):
+    list_display = ('subject', 'sent')
+
+admin.site.register(Newsletter, CosinnusNewsletterAdmin)
+
 
 
 class CosinnusManagedTagAdmin(admin.ModelAdmin):
