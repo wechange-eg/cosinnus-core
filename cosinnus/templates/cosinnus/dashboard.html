@@ -305,8 +305,9 @@
                         {% else %}
                             {% trans "You will now receive notifications whenever public content is posted in this group." as follow_success_message %}
                         {% endif %}
-                        {% include 'cosinnus/common/likefollow/follow_button.html' with object=group success_message=follow_success_message %}
-                        {% include 'cosinnus/common/likefollow/confirm_likefollow_modal.html' with object=group %}
+                        {% include 'cosinnus/common/likefollowstar/star_button.html' with object=group filled=True %}
+                        {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=group success_message=follow_success_message %}
+                        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=group %}
                     </div>
                     
                     {% with society=group.get_parent_typed %}

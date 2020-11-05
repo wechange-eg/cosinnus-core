@@ -5,6 +5,9 @@ var BaseView = require('views/base/view');
 var TimelineView = require('views/userdashboard/timeline-view');
 var GroupWidgetView = require('views/userdashboard/group-widget-view');
 var IdeasWidgetView = require('views/userdashboard/ideas-widget-view');
+var StarredUsersWidgetView = require('views/userdashboard/starred-users-widget-view');
+var StarredObjectsWidgetView = require('views/userdashboard/starred-objects-widget-view');
+var FollowedObjectsWidgetView = require('views/userdashboard/followed-objects-widget-view');
 var TypedContentWidgetView = require('views/userdashboard/typed-content-widget-view');
 var UiPrefsView = require('views/userdashboard/ui-prefs-view');
 
@@ -26,7 +29,10 @@ module.exports = BaseView.extend({
     timelineView: null,
     
     groupWidgetView: null,
-    ideasWidgetView: null,
+	ideasWidgetView: null,
+	starredUsersWidgetView: null,
+	starredObjectsWidgetView: null,
+	followedObjectsWidgetView: null,
     uiPrefsView: null,
     
     typedContentWidgetTypes: ['pads', 'files']
@@ -86,11 +92,25 @@ module.exports = BaseView.extend({
                 el: self.$el.find('.ideas-widget-root'),
             }, self.app);
     		leftBarPromises.push(self.ideasWidgetView.load());
-    	}
-    	Promise.all(leftBarPromises).then(function(){
+		}
+		self.starredUsersWidgetView = new StarredUsersWidgetView({
+			el: self.$el.find('.starred-users-widget-root'),
+		}, self.app);
+		leftBarPromises.push(self.starredUsersWidgetView.load());
+
+    	self.starredObjectsWidgetView = new StarredObjectsWidgetView({
+			el: self.$el.find('.starred-objects-widget-root'),
+		}, self.app);
+		leftBarPromises.push(self.starredObjectsWidgetView.load());
+
+		self.followedObjectsWidgetView = new FollowedObjectsWidgetView({
+			el: self.$el.find('.followed-objects-widget-root'),
+		}, self.app);
+		leftBarPromises.push(self.followedObjectsWidgetView.load());
+
+		Promise.all(leftBarPromises).then(function(){
     		self.$leftBar.show();
     	});
-    	
     },
     
     /** Loads all widgets on the right bar and only then displays it */

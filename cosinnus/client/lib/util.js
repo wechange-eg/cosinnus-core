@@ -92,7 +92,7 @@ module.exports = {
     
     getAPIDataForDirectItemId: function (directItemId) {
     	var data = this.parseDirectItemId(directItemId);
-    	var apiData = {};
+        var apiData = {};
     	if (data.type == 'ideas') {
     		apiData = {
     			ct: 'cosinnus.CosinnusIdea',
@@ -117,6 +117,11 @@ module.exports = {
     		apiData = {
 				ct: 'cosinnus.CosinnusSociety',
 				slug: data.slug,
+            };
+        } else if (data.type == 'people') {
+    		apiData = {
+                slug: data.slug,
+                ct: 'people'
     		};
     	} else {
     		return null;

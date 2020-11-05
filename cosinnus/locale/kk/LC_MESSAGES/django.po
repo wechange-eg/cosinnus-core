@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-06 16:06+0200\n"
+"POT-Creation-Date: 2020-11-04 18:33+0100\n"
 "PO-Revision-Date: 2020-04-14 13:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -175,6 +175,15 @@ msgid "Restricted"
 msgstr ""
 
 msgid "Premium"
+msgstr ""
+
+msgid "Bookmark"
+msgstr ""
+
+msgid "Bookmarked"
+msgstr ""
+
+msgid "Bookmark list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -504,6 +513,10 @@ msgstr "Бұл Flickr галереясының жарамды сілтемесі
 msgid "Users"
 msgstr "Пайдаланушылар"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "Топтар"
+
 msgid "Please remove the whitespace from '{}'"
 msgstr ""
 
@@ -521,6 +534,9 @@ msgstr ""
 
 msgid "Name"
 msgstr "Аты"
+
+msgid "The selected choice was not found or invalid! Please choose a different value!"
+msgstr ""
 
 msgid "Limit to teams"
 msgstr "Топтар үшін шектеулер"
@@ -1171,6 +1187,60 @@ msgstr "Cosinnus Идея"
 msgid "Cosinnus Ideas"
 msgstr "Cosinnus Идеялар"
 
+msgid "Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Idea"
+msgid "Create Managed Tag"
+msgstr "Идея құрыңыз"
+
+msgid "Edit Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Idea"
+msgid "Delete Managed Tag"
+msgstr "Идеяны жою"
+
+msgid "Managed Tag Assignment"
+msgstr ""
+
+msgid "Managed Tag Assignments"
+msgstr ""
+
+msgid "No Tag selected"
+msgstr ""
+
+#, fuzzy
+#| msgid "Approach"
+msgid "Approved"
+msgstr "Тәсіл"
+
+msgid "Color"
+msgstr ""
+
+#, fuzzy
+#| msgid "Main background color (css hex value, with or without \"#\")"
+msgid "Optional color code (css hex value, with or without \"#\")"
+msgstr "Негізгі фон түсі (Css hex мәні, „#“ немесе онсыз)"
+
+#, fuzzy
+#| msgid "Parent Group"
+msgid "Paired Group"
+msgstr "Бас топ"
+
+msgid "A paired group will automatically be joined by all users assigned to this object."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search Synonyms"
+msgstr "Топтарда іздеу"
+
+msgid "Comma-seperated list of phrases for which auto-complete matches, even partial, will return this object."
+msgstr ""
+
 msgid "Is Moderator"
 msgstr "Модератор"
 
@@ -1295,6 +1365,9 @@ msgstr "Ұнатылған"
 msgid "Following"
 msgstr "Келесілер"
 
+msgid "Starred"
+msgstr ""
+
 msgid "Text Editor"
 msgstr "Мәтіндік редактор"
 
@@ -1344,10 +1417,6 @@ msgstr "Оқиғалар"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Жобалар"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Groups"
-msgstr "Топтар"
 
 msgid "At least one type of Map object must be chosen!"
 msgstr "Карта объектісінің кем дегенде бір түрін таңдау керек!"
@@ -1936,6 +2005,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
 msgstr "helptext_13_groupadministration"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_13_groupadministration"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_15_organization"
+msgstr "helptext_13_groupadministration"
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
 msgstr "helptext_50_profileprivacy"
@@ -2149,6 +2225,12 @@ msgstr "Галерея суретін таңдаңыз және жүктеңіз
 #| msgid "Example: http://mywebsite.com"
 msgid "Example: https://twitter.com/myaccount"
 msgstr "Мысал: http://mywebsite.com"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Website"
+msgid "website"
+msgstr "Веб сайт"
 
 msgid "Re-Activate Project/Group"
 msgstr "Жобаны / топты қайта белсендіру"
@@ -2809,6 +2891,12 @@ msgstr "Портал әкімшілері"
 msgid "All societies"
 msgstr "Барлық қоғамдар"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organizations"
+msgstr "Шақырулар"
+
 msgid "Re-activate Group"
 msgstr "Топтық реакция"
 
@@ -2823,6 +2911,103 @@ msgstr "Жобаны ажыратыңыз"
 
 msgid "Withdraw Request"
 msgstr "Қаражатты қайтарып алу туралы өтініш"
+
+#, fuzzy, python-format
+#| msgid "%(team_name)s - Members"
+msgid "%(team_name)s - Assigned organizations"
+msgstr "%(team_name)s – мүшелер"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Assigned organizations"
+msgstr "Шақырулар"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organizations..."
+msgstr "Шақыруды жою"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organization"
+msgstr "Шақыруды жою"
+
+#, fuzzy
+#| msgid "Enter a user name or email to find users to invite..."
+msgid "Enter a name to find organizations to request..."
+msgstr "Шақырылатын пайдаланушыларды табу үшін пайдаланушы атын немесе электрондық поштаны енгізіңіз."
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Request organizations"
+msgstr "Шақырулар"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Requested organizations"
+msgstr "Шақыруды жою"
+
+#, fuzzy
+#| msgctxt "withdraw join team button second item"
+#| msgid "Request"
+msgid "Revoke request"
+msgstr "Өтініш"
+
+#, fuzzy
+#| msgid "Decline Member"
+msgid "Decline request"
+msgstr "Бас тарту"
+
+#, fuzzy
+#| msgid "Accept Member"
+msgid "Accept request"
+msgstr "Мүшені қабылдау"
+
+#, fuzzy
+#| msgctxt "join request pending team button second item"
+#| msgid "Requested"
+msgid "Requested"
+msgstr "Сұралған"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to revoke the request for „%(name)s“?"
+msgstr "„%(name)s“ шақыруын қайтарып алғыңыз келе ме?"
+
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Revoke request for organization"
+msgstr "Пайдаланушыларды іздеу"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to decline the request?"
+msgstr "Шақыруды қабылдамайсыз ба?"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organization invitations"
+msgstr "Шақырулар"
+
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Decline invitation"
+msgstr "Шақырудан бас тарту"
+
+#, fuzzy
+#| msgid "Invite"
+msgid "Invited"
+msgstr "Шақыру"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove „%(name)s“ from the organization?"
+msgstr "Шынымен „%(name)s“ мүшелер командасынан жойғыңыз келе ме?"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove organization"
+msgstr "Орынды жою"
 
 msgid "Workshop Participant File Upload"
 msgstr ""
@@ -3520,12 +3705,6 @@ msgid "All Ideas"
 msgstr "Барлық идеялар"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Invitations"
-msgid "Organizations"
-msgstr "Шақырулар"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "My Organizations"
 msgstr ""
 
@@ -4051,6 +4230,12 @@ msgstr "Барлық жобаларды қараңыз"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Video Conference Server"
+msgid "My Conferences"
+msgstr "Бейне конференциялар сервері"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "You have not RSVPed to any Events."
 msgid "You have not created any organizations yet."
 msgstr "Сіз ешқандай шараға шақыруды қабылдамадыңыз."
@@ -4272,6 +4457,24 @@ msgid "You are a Admin"
 msgstr "Сіз мүшесіз"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Membership request pending..."
+msgid "Ownership request pending..."
+msgstr "Мүшелікке сұраныс қаралуда."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Projects and groups"
+msgstr "Менің Жобаларым мен Топтары"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group"
+msgstr "Жобалар/Топтар"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Open to be contacted about potential collaboration opportunities"
 msgstr "Ықтимал ынтымақтастық мүмкіндіктері туралы хабарламаларға ашық"
 
@@ -4300,6 +4503,18 @@ msgid "There are no items yet"
 msgstr "Әзірге бұл жерде ештеңе жоқ"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Ideas I am following"
+msgid "Items you follow"
+msgstr "Мені қызықтыратын тақырыптар"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find an overview of items you follow."
+msgstr "Мұнда сіз ұнаған идеялардың шолуын таба аласыз."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
 msgstr "Жобалар мен Топтар"
 
@@ -4326,6 +4541,14 @@ msgstr "Жоғарыдағы ‘+’ батырмасы арқылы сіз ид
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "Шолу жасау"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Nothing here yet."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Users you want to remember"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -5185,6 +5408,16 @@ msgstr "Бұл элемент қазір мына жобаларда/топта�
 #| msgid "Which apps should be activated?"
 msgid "The %s-app was activated!"
 msgstr "Қандай қосымшаларды іске қосу керек?"
+
+#, fuzzy, python-format
+#| msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+msgstr "Сіз %(team_type)s “%(team_name)s” қосылуды сұрадыңыз. Топ әкімшісі сіздің сұранысыңызға жауап берген кезде сізге электрондық хат жіберіледі."
+
+#, fuzzy, python-format
+#| msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
+msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgstr "Сіз әлдеқайда “%(team_name)s” сайтына шақырылып, қазір бірден мүше болдыңыз!"
 
 msgid "No appname given for adding containers."
 msgstr "Контейнерлерді қосуға арналған атау жоқ."

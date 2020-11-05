@@ -233,3 +233,30 @@
 	</li>
 {% endmacro %}
 
+{% macro starredlistItem(item) %}
+<li>
+    <a class="list-item" href="{{ item.url }}" titledby=".item-text">
+        <div class="item-icon">
+            {% if item.icon and '/' in item.icon %}
+                <img src="{{ item.icon }}"></img>
+            {% else %}
+                <i class="fas fa-fw {{ item.icon }}"></i>
+            {% endif %}
+        </div>
+        <div class="item-text">
+            {{ item.text }}
+        </div>
+        <div class="right-side-annotation truncated-oneline">
+            <div class="likefollowstar-button action-do-likefollowstar likefollowstar-button-simple selected" data-type="star" data-ct="{{ item.ct }}" data-id="{{ item.id }}">
+                <span class="show-unselected">
+                    <i class="far fa-star prevent-click"></i>
+                </span>
+                <span class="show-selected">
+                    <i class="fas fa-star prevent-click"></i>
+                </span>
+            </div>
+        </div>
+    </a>
+</li>
+{% endmacro %}
+

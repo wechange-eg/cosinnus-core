@@ -4282,6 +4282,18 @@ msgstr "Nach unten"
 msgid "There are no items yet"
 msgstr "Noch keine Inhalte vorhanden."
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Ideas I am following"
+msgid "Items you follow"
+msgstr "Ideen, die mir gefallen"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find an overview of items you follow."
+msgstr "Hier findest du in Zukunft eine Übersicht über Ideen, die dir gefallen."
+
 #
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"

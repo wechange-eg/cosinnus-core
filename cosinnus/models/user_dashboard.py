@@ -30,7 +30,7 @@ class DashboardItem(dict):
     is_emphasized = False
     group = None # group name of item if it has one
     group_icon = None # group type icon
-    
+
     def __init__(self, obj=None, is_emphasized=False, user=None):
         if obj:
             from cosinnus.templatetags.cosinnus_tags import full_name
@@ -63,7 +63,7 @@ class DashboardItem(dict):
                 self['text'] = escape(obj.title)
                 self['url'] = obj.get_absolute_url()
                 self['subtext'] = escape(obj.group.name)
-                
+
                 if hasattr(obj, 'get_icon'):
                     self['icon'] = obj.get_icon()
                 if obj.group.slug in get_default_user_group_slugs():

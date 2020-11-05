@@ -1,0 +1,17 @@
+{% extends 'userdashboard/base-widget' %}
+{% import "include/macros.html" as macros %}
+
+{% block title %}
+    {# Translators: __INCLUDE_JS_PO__ #}
+	{% trans "Users you want to remember" %}
+{% endblock %}
+
+{% block content %}
+    {% if items|length > 0 %}
+        <ul class="item-list">
+            {% for item in items %}
+            {{ macros.starredlistItem(item) }}
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

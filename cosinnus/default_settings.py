@@ -618,3 +618,8 @@ COSINNUS_GOODDB_PULL = {
         'serializer': 'cosinnus.external.serializers.ExternalEventGoodDBSerializer'
     },
 }
+
+COSINNUS_STARRED_STAR_LABEL = _('Bookmark')
+COSINNUS_STARRED_STARRING_LABEL = _('Bookmarked')
+COSINNUS_STARRED_OBJECTS_LIST = _('Bookmark list')
+

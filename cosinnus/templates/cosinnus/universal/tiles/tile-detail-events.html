@@ -42,7 +42,18 @@
                     {% endif %}
                 </span>
             </a>
-            <a class="rounded-button button-action 
+            <a class="rounded-button button-action button-star">
+                <span class="rounded-button-inner">
+                    {% if starred %}
+                        <i class="fas fa-star"></i>
+                        {{ starringLabel }}
+                    {% else %}
+                        <i class="far fa-star"></i>
+                        {{ starLabel }}
+                    {% endif %}
+                </span>
+            </a>
+            <a class="rounded-button button-action
                     {% if cosinnus_active_user %}button-follow" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
                 <span class="rounded-button-inner">
                     {% if followed %}

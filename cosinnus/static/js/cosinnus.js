@@ -607,19 +607,20 @@
         },
 
         todosSelect : function() {
-            $('body').on('click','.fa-star-o',function() {
+            $('body').on('click','.fa-star-o',function(event) {
                 $(this).removeClass('fa-star-o');
                 $(this).addClass('fa-star');
             });
-            $('body').on('click','.fa-star',function() {
-                $(this).removeClass('fa-star');
-                $(this).addClass(' fa-star-half-o');
+            $('body').on('click','.fa-star',function(event) {
+                if (!event.currentTarget.className.includes('prevent-click')){
+                    $(this).removeClass('fa-star');
+                    $(this).addClass(' fa-star-half-o');
+                }
             });
-            $('body').on('click','.fa-star-half-o',function() {
+            $('body').on('click','.fa-star-half-o',function(event) {
                 $(this).removeClass(' fa-star-half-o');
                 $(this).addClass('fa-star-o');
             });
-
         },
 
         datePicker : function() {

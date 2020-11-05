@@ -629,7 +629,7 @@ class LikeObject(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     target_object = GenericForeignKey('content_type', 'object_id')
-    
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
         verbose_name=_('User'),
         on_delete=models.CASCADE,
@@ -637,6 +637,7 @@ class LikeObject(models.Model):
         related_name='likes')
     liked = models.BooleanField(_('Liked'), default=True)
     followed = models.BooleanField(_('Following'), default=True)
+    starred = models.BooleanField(_('Starred'), default=False)
 
     class Meta(object):
         app_label = 'cosinnus'
@@ -665,9 +666,12 @@ class LikeableObjectMixin(models.Model):
     _LIKED_OBJECT_USER_IDS_CACHE_KEY = 'cosinnus/core/like_user_ids/model/%s/obj_id/%d' # modelclass_name, id -> [user_id, user_id, ...]
     # key storing all user ids that are following an object
     _FOLLOWED_OBJECT_USER_IDS_CACHE_KEY = 'cosinnus/core/follow_user_ids/model/%s/obj_id/%d' # modelclass_name, id -> [user_id, user_id, ...]
+    # key storing all user ids that are starring an object
+    _STARRED_OBJECT_USER_IDS_CACHE_KEY = 'cosinnus/core/star_user_ids/model/%s/obj_id/%d' # modelclass_name, id -> [user_id, user_id, ...]
     # local caches
     _liked_obj_ids = None
     _followed_obj_ids = None
+    _starred_obj_ids = None
     
     class Meta(object):
         abstract = True
@@ -699,6 +703,17 @@ class LikeableObjectMixin(models.Model):
             cache.set(self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id), user_ids, settings.COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT)
             self._followed_obj_ids = user_ids
         return user_ids
+
+    def get_starred_user_ids(self):
+        """ Returns a list of int user ids for users that are following this object. """
+        if self._starred_obj_ids is not None:
+            return self._starred_obj_ids
+        user_ids = cache.get(self._STARRED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id))
+        if user_ids is None:
+            user_ids = list(self.likes.filter(starred=True).values_list('user__id', flat=True))
+            cache.set(self._STARRED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id), user_ids, settings.COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT)
+            self._starred_obj_ids = user_ids
+        return user_ids
     
     def get_followed_users(self):
         return get_user_model().objects.filter(id__in=self.get_followed_user_ids(), is_active=True)
@@ -708,10 +723,12 @@ class LikeableObjectMixin(models.Model):
         keys = [
             self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id),
             self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id),
+            self._STARRED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id),
         ]
         cache.delete_many(keys)
         self._liked_obj_ids = None
         self._followed_obj_ids = None
+        self._starred_obj_ids = None
     
     def save(self, *args, **kwargs):
         super(LikeableObjectMixin, self).save(*args, **kwargs)
@@ -741,8 +758,12 @@ class LikeableObjectMixin(models.Model):
     def is_user_following(self, user):
         """ Returns True is the user follows this object, else False. """
         return user.id in self.get_followed_user_ids()
+
+    def is_user_starring(self, user):
+        """ Returns True is the user follows this object, else False. """
+        return user.id in self.get_starred_user_ids()
     
-    def _get_likefollow_url_params(self, like_or_follow):
+    def _get_likefollowstar_url_params(self, like_or_follow):
         return {
             like_or_follow: '1',
             'ct': self.get_content_type(),
@@ -751,13 +772,13 @@ class LikeableObjectMixin(models.Model):
         
     def get_absolute_like_url(self):
         """ Returns the absolute URL to this item with GET params that will trigger
-            the automatic like modal popup `confirm_likefollow_modal.html` """
-        return self.get_absolute_url() + '?%s' % urlencode(self._get_likefollow_url_params('like'))
+            the automatic like modal popup `confirm_likefollowstar_modal.html` """
+        return self.get_absolute_url() + '?%s' % urlencode(self._get_likefollowstar_url_params('like'))
 
     def get_absolute_follow_url(self):
         """ Returns the absolute URL to this item with GET params that will trigger
-            the automatic follow modal popup `confirm_likefollow_modal.html` """
-        return self.get_absolute_url() + '?%s' % urlencode(self._get_likefollow_url_params('follow'))
+            the automatic follow modal popup `confirm_likefollowstar_modal.html` """
+        return self.get_absolute_url() + '?%s' % urlencode(self._get_likefollowstar_url_params('follow'))
     
     
 def ensure_container(sender, **kwargs):

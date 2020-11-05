@@ -286,6 +286,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
         'admins': [],
         'organizations': [],
         'followed': False,
+        'starred': False
     })
          
     background_image_field = 'wallpaper'
@@ -311,6 +312,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
             'website_url': obj.website,
             'contact': linebreaksbr(escape(obj.contact_info)),
             'followed': obj.is_user_following(user),
+            'starred': obj.is_user_starring(user)
         })
         """ TODO: check all read permissions on related objects! """
         
@@ -446,6 +448,7 @@ class DetailedEventResult(DetailedMapResult):
         'participants': [],
         'participant_count': 0,
         'followed': False,
+        'starred': False
     })
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -463,6 +466,7 @@ class DetailedEventResult(DetailedMapResult):
             'participants': [HaystackUserMapCard(result) for result in sqs],
             'participant_count': haystack_result.participant_count,
             'followed': obj.is_user_following(user),
+            'starred': obj.is_user_starring(user)
         })
         return super(DetailedEventResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
@@ -475,6 +479,7 @@ class DetailedIdeaMapResult(DetailedMapResult):
     fields.update({
         'projects': [],
         'followed': False,
+        'starred': False
     })
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -491,6 +496,7 @@ class DetailedIdeaMapResult(DetailedMapResult):
             'creator_name': obj.creator.get_full_name(),
             'creator_slug': obj.creator.username,
             'followed': obj.is_user_following(user),
+            'starred': obj.is_user_starring(user)
         })
         ret = super(DetailedIdeaMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
         return ret

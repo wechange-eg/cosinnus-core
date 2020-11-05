@@ -48,6 +48,9 @@
     var COSINNUS_CLOUD_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}true{% else %}false{% endif %};
     var COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED and SETTINGS.COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED %}true{% else %}false{% endif %};
     var COSINNUS_SHOW_SUPERUSER_CONTROLS = {% if user|is_superuser %}true{% else %}false{% endif %};
+    var COSINNUS_STARRED_STAR_LABEL = "{% get_setting 'COSINNUS_STARRED_STAR_LABEL' %}";
+    var COSINNUS_STARRED_STARRING_LABEL = "{% get_setting 'COSINNUS_STARRED_STARRING_LABEL' %}";
+    var COSINNUS_STARRED_OBJECTS_LIST = "{% get_setting 'COSINNUS_STARRED_OBJECTS_LIST' %}";
 </script>
 
 {% include 'cosinnus/map/extra_head_map.html' %}

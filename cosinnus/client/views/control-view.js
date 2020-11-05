@@ -15,7 +15,7 @@ module.exports = ContentControlView.extend({
     
     template: require('map/map-controls'),
     
-    activeFiltersTemplate: require('map/map-controls-active-filters'), 
+    activeFiltersTemplate: require('map/map-controls-active-filters'),
     
     // will be set to self.options during initialization
     defaults: {
@@ -633,7 +633,7 @@ module.exports = ContentControlView.extend({
     /** Will like/unlike a given result, depending on the current liked status */
     triggerResultLikeOrUnlike: function (result) {
     	var self = this;
-    	var url = '/likefollow/'
+    	var url = '/likefollowstar/'
     		
     	var data = util.getAPIDataForDirectItemId(result.get('id'));
     	if (data == null || !(result.get('type') == 'ideas' || result.get('type') == 'events')) {
@@ -697,9 +697,10 @@ module.exports = ContentControlView.extend({
     /** Will follow/unfollow a given result, depending on the current followed status */
     triggerResultFollowOrUnfollow: function (result) {
     	var self = this;
-    	var url = '/likefollow/'
+    	var url = '/likefollowstar/'
     		
-    	var data = util.getAPIDataForDirectItemId(result.get('id'));
+        var data = util.getAPIDataForDirectItemId(result.get('id'));
+
     	if (data == null) {
     		util.log('Following cancelled - invalid result type for liking: ' + result.get('type'));
     		return;
@@ -733,7 +734,7 @@ module.exports = ContentControlView.extend({
             },
             complete: function (xhr, textStatus) {
                 util.log('control-view.js: Follow complete: ' + textStatus);
-                
+
                 if (textStatus !== 'success') {
                 	followHadErrors = true;
                 }
@@ -743,7 +744,56 @@ module.exports = ContentControlView.extend({
             }
         });
     },
-    
+
+    triggerResultStarOrUnstar: function (result) {
+        var self = this;
+        var url = '/likefollowstar/'
+
+        var data = util.getAPIDataForDirectItemId(result.get('id'));
+    	if (data == null) {
+    		util.log('Marking cancelled - invalid result type for starring: ' + result.get('type'));
+    		return;
+        }
+
+        var to_star = result.get('starred') ? '0' : 1;
+        data['star'] = to_star;
+
+        util.log('Sending star request for slug "' + result.get('slug') + '" and star: ' + to_star);
+
+        var starHadErrors = false;
+        self.currentDetailHttpRequest = $.ajax(url, {
+            type: 'POST',
+            timeout: self.searchXHRTimeout,
+            data: data,
+            success: function (data, textStatus) {
+
+                util.log('got resultssss for star')
+                util.log(data)
+                util.log(textStatus)
+
+                if ('starred' in data) {
+                    result.set('starred', data.starred);
+                }
+
+            },
+            error: function (xhr, textStatus) {
+                util.log('control-view.js: Star XHR failed.')
+                starHadErrors = true;
+            },
+            complete: function (xhr, textStatus) {
+                util.log('control-view.js: Star complete: ' + textStatus);
+
+                if (textStatus !== 'success') {
+                	starHadErrors  = true;
+                }
+                if (starHadErrors) {
+                    $('.star-button-error').show();
+                }
+            }
+        });
+
+
+    },
     /** Called manually or deferredly after loading a Result from the server,
      *  to be shown as the Detail View.
      *  @param result: This must be *a detailed* Result model, or null!
