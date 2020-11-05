@@ -93,7 +93,7 @@ class UserCreationForm(UserCreationFormExtraFieldsMixin, TermsOfServiceFormField
         username = self.cleaned_data.get('username')
         if email and UserCreationForm.Meta.model.objects.filter(email__iexact=email).exclude(username=username).count():
             raise forms.ValidationError(_('This email address already has a registered user!'))
-        return email
+        return email.lower()
     
     def save(self, commit=True):
         """ Set the username equal to the userid """
