@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-06 16:06+0200\n"
-"PO-Revision-Date: 2020-09-29 18:04+0100\n"
+"PO-Revision-Date: 2020-11-05 11:57+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -103,7 +103,7 @@ msgid "%d Users were synchronized successfully."
 msgstr "%d משתמשים הושבתו בהצלחה."
 
 msgid "Re-synchronize RocketChat user-account (will log users out of RocketChat!)"
-msgstr ""
+msgstr "סנכרן/י מחדש חשבון משתמש RocketChat (המשתתפים יצאו ממערכת RocketChat!)"
 
 #, fuzzy, python-format
 #| msgid "%d Users were deactivated successfully."
@@ -111,7 +111,7 @@ msgid "%d Users were made RocketChat admins."
 msgstr "%d משתמשים הושבתו בהצלחה."
 
 msgid "Make user RocketChat admin"
-msgstr ""
+msgstr "הפוך/י את המשתמש למנהל RocketChat"
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "יש להפעיל את כתובת הדוא\"ל של החשבון על מנת להתחבר."
@@ -170,10 +170,10 @@ msgid "Active"
 msgstr "הפעל"
 
 msgid "Restricted"
-msgstr ""
+msgstr "מוגבל"
 
 msgid "Premium"
-msgstr ""
+msgstr "פרמיום"
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "רק חברי הצוות יכולים לראות את התוכן המבוקש. הגש בקשה להצטרף עכשיו!"
@@ -428,7 +428,7 @@ msgid "Hebrew--NATIVE-LANGUAGE"
 msgstr "עברית"
 
 msgid "Belarus"
-msgstr ""
+msgstr "בלרוס"
 
 msgid "Attachments"
 msgstr "קבצים מצורפים"
@@ -516,7 +516,7 @@ msgid "This is not a valid CSV File"
 msgstr "קובץ CSV זה אינו חוקי"
 
 msgid "CSV could not be parsed. Please use ',' or ';' as delimiter."
-msgstr ""
+msgstr "לא ניתן היה לנתח את הCSV. אנא השתמש/י ב-',' או ';' כתוחם."
 
 msgid "Name"
 msgstr "שם"
@@ -611,34 +611,34 @@ msgid "Portal"
 msgstr "פורטל"
 
 msgid "this user will enter the BBB presenter mode for this conversation"
-msgstr ""
+msgstr "משתמש זה ייכנס את מצב הצגת BBB עבור שיחה זו"
 
 msgid "room name or title"
-msgstr ""
+msgstr "שם או כותרת חדר"
 
 msgid "the password set to enter the room as a moderator"
-msgstr ""
+msgstr "הסיסמה אשר נקבעה להיכנס אל החדר כמנהל פורום"
 
 msgid "the password set to enter the room as a attendee"
-msgstr ""
+msgstr "הסיסמה אשר נקבעה להיכנס אל החדר כמנהל פורום"
 
 msgid "the rooms welcome message"
-msgstr ""
+msgstr "הודעת ברוכים הבאים של החדרים"
 
 msgid "the welcome message, that is displayed to attendees"
-msgstr ""
+msgstr "הודעת ברוכים הבאים, המוצגת עבור הנוכחים"
 
 msgid "number for dialing into the conference via telephone"
-msgstr ""
+msgstr "מספר להתקשרות אל תוך הוועידה דרך הטלפון"
 
 msgid "pin to enter for telephone participants"
-msgstr ""
+msgstr "מספר פין לכניסה עבור משתתפי טלפון"
 
 msgid "options for the room, that are represented in the bigbluebutton API"
-msgstr ""
+msgstr "אופציות עבור החדר, המיוצגות ב- bigbluebutton API\\"
 
 msgid "Room Type"
-msgstr ""
+msgstr "סוג חדר"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Title"
@@ -651,16 +651,16 @@ msgid "Last edited by"
 msgstr "נערך לאחרונה על ידי"
 
 msgid "Cosinnus CMS Micropage"
-msgstr ""
+msgstr "  CMS Micropageקוסינוס "
 
 msgid "Cosinnus Micropages"
-msgstr ""
+msgstr "Micropages קוסינוס"
 
 msgid "Lobby"
-msgstr ""
+msgstr "לובי"
 
 msgid "Stage"
-msgstr ""
+msgstr "במה"
 
 msgid "Workshops"
 msgstr "סדנאות"
@@ -671,7 +671,7 @@ msgid "Discussions"
 msgstr "הרשאות"
 
 msgid "Coffee Tables"
-msgstr ""
+msgstr "שולחנות קפה"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Results"
@@ -685,7 +685,7 @@ msgid "Team"
 msgstr "צוות"
 
 msgid "Slug"
-msgstr ""
+msgstr "שורת סדר"
 
 #, fuzzy
 msgid "Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!"
@@ -700,7 +700,7 @@ msgid "Conference Room Type"
 msgstr "ניהול כנסים"
 
 msgid "Is visible"
-msgstr ""
+msgstr "נראית"
 
 #, fuzzy
 #| msgid "Sort field"
@@ -727,10 +727,10 @@ msgid "RocketChat room name"
 msgstr "Rocket.Chat"
 
 msgid "Allow users to create new coffee tables"
-msgstr ""
+msgstr "אפשר/י למשתמשים ליצור שולחנות קפה חדשים"
 
 msgid "Maximum Coffee Table Participants"
-msgstr ""
+msgstr "מספר משתתפים מקסימלי לשולחן קפה "
 
 #, fuzzy
 #| msgid "Create Project"
@@ -748,7 +748,7 @@ msgid "Conference Rooms"
 msgstr "הוועידה פועלת"
 
 msgid "Slug must not be empty."
-msgstr ""
+msgstr "שורת הסדר לא יכולה להיות ריקה."
 
 msgid "Complaint Text"
 msgstr "טקסט תלונה"
@@ -766,19 +766,19 @@ msgid "Notification ID"
 msgstr "פרטי זיהוי התראה"
 
 msgid "No Poverty"
-msgstr ""
+msgstr "אין עוני"
 
 msgid "Zero Hunger"
-msgstr ""
+msgstr "ללא רעב"
 
 msgid "Good Health and Well-being"
-msgstr ""
+msgstr "בריאות טובה ורווחה"
 
 msgid "Quality Education"
-msgstr ""
+msgstr "חינוך איכותי"
 
 msgid "Gender Equality"
-msgstr ""
+msgstr "שוויון מגדרי"
 
 #, fuzzy
 #| msgid "Delete invitation"
@@ -786,22 +786,22 @@ msgid "Clean Water and Sanitation"
 msgstr "מחק הזמנה"
 
 msgid "Affordable and Clean Energy"
-msgstr ""
+msgstr "אנרגיה ברת השגה ונקייה"
 
 msgid "Decent Work and Economic Growth"
-msgstr ""
+msgstr "עבודה מכובדת וצמיחה כלכלית"
 
 msgid "Industry, Innovation, and Infrastructure"
-msgstr ""
+msgstr "תעשייה, חידוש ותשתית"
 
 msgid "Reducing Inequality"
-msgstr ""
+msgstr "הפחתה של חוסר שוויון"
 
 msgid "Sustainable Cities and Communities"
-msgstr ""
+msgstr "ערים וקהילות ברות קיימה"
 
 msgid "Responsible Consumption and Production"
-msgstr ""
+msgstr "צריכה ויצור אחראיים"
 
 #, fuzzy
 #| msgid "Call to Action"
@@ -809,16 +809,16 @@ msgid "Climate Action"
 msgstr "פקודת הפעלה"
 
 msgid "Life Below Water"
-msgstr ""
+msgstr "החיים מתחת למים"
 
 msgid "Life On Land"
-msgstr ""
+msgstr "החיים על פני היבשה"
 
 msgid "Peace, Justice, and Strong Institutions"
-msgstr ""
+msgstr "שלום, צדק ומוסדות חזקים"
 
 msgid "Partnerships for the Goals"
-msgstr ""
+msgstr "שותפים ליעדים"
 
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "הזן שם חוקי. קו נטוי קדמי אינו מותר."
@@ -909,16 +909,16 @@ msgid "Main background color (css hex value, with or without \"#\")"
 msgstr "צבע רקע ראשי (ערך css hex, עם או בלי \"#\")"
 
 msgid "Gradient color"
-msgstr ""
+msgstr "צבע מדרוני"
 
 msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
-msgstr ""
+msgstr "הצבע התחתון עבור המדרון (ערך HEX עבור CSS, עם או ללא \"#\")"
 
 msgid "Extra CSS"
-msgstr ""
+msgstr "CSS נוסף"
 
 msgid "Extra CSS for this portal, will be applied after all other styles."
-msgstr ""
+msgstr "CSS נוסף עבור פורטל זה, ייושם לאחר כל הסגנונות האחרים."
 
 msgid "Video Conference Server"
 msgstr "שרת ועידות וידאו"
@@ -959,34 +959,34 @@ msgid "Wallpaper image"
 msgstr "תמונת טפט"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
-msgstr ""
+msgstr "מוצג כתמונת מודעה גדולה על ה- Microsite (1140 x 240 px)"
 
 msgid "Microsite Video"
-msgstr ""
+msgstr "סרטון Microsite"
 
 msgid "Microsite Twitter Timeline Username"
-msgstr ""
+msgstr "שם משתמש עבור ציר זמן טוויטר Microsite"
 
 msgid "Microsite Twitter Timeline Custom Widget ID"
-msgstr ""
+msgstr "מזהה ווידג'ט מותאם אישית עבור ציר זמן טוויטר Microsite"
 
 msgid "Flickr Gallery URL"
-msgstr ""
+msgstr "כתובת גלריית Flickr"
 
 msgid "Call to Action Microsite Box active"
-msgstr ""
+msgstr "קריאה לפעולת תיבת Microsite פעילה"
 
 msgid "If this is active, a Call to Action box will be shown on the microsite."
-msgstr ""
+msgstr "אם היא פעילה, הקריאה לפעולת תיבה פעילה תוצג על גבי Microsite זה."
 
 msgid "Call to Action Box title"
-msgstr ""
+msgstr "קריאה לפעולת כותרת תיבה"
 
 msgid "Call to Action Box Description"
-msgstr ""
+msgstr "קריאה לפעולת תיאור תיבה"
 
 msgid "Embedded Dashboard HTML"
-msgstr ""
+msgstr "לוח מחוונים משובץ HTML"
 
 #, fuzzy
 #| msgid "Conference Management"
@@ -1011,22 +1011,22 @@ msgid "If a team is not active, it counts as non-existent for all purposes and v
 msgstr "אם צוות אינו פעיל, הוא נחשב כאינו קיים לכל המטרות והתצוגות באתר האינטרנט."
 
 msgid "Facebook Group ID"
-msgstr ""
+msgstr "מזהה קבוצת פייסבוק"
 
 msgid "Facebook Page ID"
-msgstr ""
+msgstr "מזהה עמוד פייסבוק"
 
 msgid "Nextcloud Group ID"
-msgstr ""
+msgstr "מזהה קבוצת Nextcloud"
 
 msgid "Nextcloud Groupfolder Name"
-msgstr ""
+msgstr "שם תיקיית קבוצת Nextcloud"
 
 msgid "Nextcloud Groupfolder ID"
-msgstr ""
+msgstr "מזהה תיקיית קבוצת Nextcloud"
 
 msgid "Is conference"
-msgstr ""
+msgstr "היא וועידה"
 
 msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
 msgstr "אם קבוצה מסומנת ככנס, ניתן ליצור חשבונות באופן אוטומטי עבור משתתפי הסדנה"
@@ -1035,22 +1035,22 @@ msgid "Conference is running"
 msgstr "הוועידה פועלת"
 
 msgid "Determins whether a group that is marked as conference is running"
-msgstr ""
+msgstr "קובע האם קבוצה המסומנת כוועידה מריצה"
 
 msgid "Parent Group"
-msgstr ""
+msgstr "קבוצת הורים"
 
 msgid "Related Teams"
 msgstr "צוותים קשורים"
 
 msgid "Cosinnus project"
-msgstr ""
+msgstr "פרויקט קוסינוס"
 
 msgid "Cosinnus projects"
-msgstr ""
+msgstr "פרויקטים קוסינוס"
 
 msgid "The URL for this team has changed. A redirect from all existing URLs has automatically been created!"
-msgstr ""
+msgstr "הכתובת עבור צוות זה שונתה. כיוון מחדש מכל הכתובת הקיימות נוצר באופן אוטומטי!"
 
 #, python-format
 msgid "Request about your project \"%(group_name)s\""
@@ -1076,7 +1076,7 @@ msgid "Token"
 msgstr "אסימון גישה"
 
 msgid "The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want."
-msgstr ""
+msgstr "מחרוזת הסמל. היא תוצג כפי שהיא, אבל כאשר משתמשים נכנסים אליה, אותיות קטנות/גדולות אינן משנות. יכולה להכיל אותיות ומספרים, אך לא רווחים, יכולה להיות ארוכה או קצרה ככל שתרצה/י."
 
 msgid "Short Description (optional). Will be shown on the token page."
 msgstr "תיאור קצר (אופציונלי). יוצג בדף האסימון."
@@ -1085,31 +1085,31 @@ msgid "Valid until"
 msgstr "בתוקף עד"
 
 msgid "Invite-Groups"
-msgstr ""
+msgstr "הזמן/י קבוצות"
 
 msgid "Cosinnus Group Invite Token"
-msgstr ""
+msgstr "קבוצת קוסינוס הזמן/י סמל"
 
 msgid "Cosinnus Group Invite Tokens"
-msgstr ""
+msgstr "קבוצת קוסינוס הזמן/י סמלים"
 
 msgid "Token must not be empty."
 msgstr "האסימון אינו יכול להיות ריק."
 
 msgid "From Portal"
-msgstr ""
+msgstr "מן הפורטל"
 
 msgid "From Team Type"
-msgstr ""
+msgstr "מסוג הצוות"
 
 msgid "From Slug"
-msgstr ""
+msgstr "משורת הסדר"
 
 msgid "Permanent Team Redirects"
-msgstr ""
+msgstr "כיוונים מחדש לצוות קבוע"
 
 msgid "Permanent Team Redirect"
-msgstr ""
+msgstr "כיוון מחדש לצוות קבוע"
 
 msgid "Location"
 msgstr "מיקום"
@@ -1121,34 +1121,34 @@ msgid "Longitude"
 msgstr "קו אורך"
 
 msgid "CosinnusLocation"
-msgstr ""
+msgstr "מיקום קוסינוס"
 
 msgid "CosinnusLocations"
-msgstr ""
+msgstr "מיקומי קוסינוס"
 
 msgid "Group Image"
 msgstr "תמונת קבוצה"
 
 msgid "CosinnusGroup GalleryImage"
-msgstr ""
+msgstr "תמונת גלריה לקבוצת קוסינוס"
 
 msgid "CosinnusGroup GalleryImages"
-msgstr ""
+msgstr "תמונות גלריה לקבוצת קוסינוס"
 
 msgid "URL"
 msgstr "URL"
 
 msgid "CosinnusGroup CallToAction Button"
-msgstr ""
+msgstr "לחצן קריאה לפעולה לקבוצת קוסינוס"
 
 msgid "CosinnusGroup CallToAction Buttons"
-msgstr ""
+msgstr "לחצני קריאה לפעולה לקבוצת קוסינוס"
 
 msgid "Cosinnus group"
-msgstr ""
+msgstr "קבוצת קוסינוס"
 
 msgid "Cosinnus groups"
-msgstr ""
+msgstr "קבוצות קוסינוס"
 
 msgid "Image"
 msgstr "תמונה"
@@ -1157,13 +1157,13 @@ msgid "Created Projects"
 msgstr "פרויקטים שנוצרו"
 
 msgid "Cosinnus Idea"
-msgstr ""
+msgstr "רעיון קוסינוס"
 
 msgid "Cosinnus Ideas"
-msgstr ""
+msgstr "רעיונות קוסינוס"
 
 msgid "Is Moderator"
-msgstr ""
+msgstr "הוא מנהל פורום"
 
 msgid "Language"
 msgstr "שפה"
@@ -1195,16 +1195,16 @@ msgid "Individual settings for each Project/Group..."
 msgstr "הגדרות ייחודיות עבור כל פרויקט/קבוצה.."
 
 msgid "--- No country selected ---"
-msgstr ""
+msgstr "--- לא נבחרה כל מדינה ---"
 
 msgid "Name (EN)"
-msgstr ""
+msgstr "שם (EN)"
 
 msgid "Name (RU)"
-msgstr ""
+msgstr "שם (RU)"
 
 msgid "Name (UK)"
-msgstr ""
+msgstr "שם (UK)"
 
 msgid "Only me"
 msgstr "רק אני"
@@ -1222,7 +1222,7 @@ msgid "Permissions"
 msgstr "הרשאות"
 
 msgid "Publicly available via other platforms"
-msgstr ""
+msgstr "זמין באופן ציבורי דרך פלטפורמות אחרות"
 
 msgid "Place"
 msgstr "מקום"
@@ -1248,7 +1248,7 @@ msgid "Likes"
 msgstr "לייקים"
 
 msgid "BigBlueButton conversation room"
-msgstr ""
+msgstr "חדר שיחות BigBlueButton"
 
 msgid "Attached object"
 msgstr "פריט מצורף"
@@ -1261,22 +1261,22 @@ msgid "User"
 msgstr "משתמש"
 
 msgid "Visited"
-msgstr ""
+msgstr "ביקרו בו"
 
 msgid "LastVisited"
-msgstr ""
+msgstr "ביקור אחרון"
 
 msgid "LastVisiteds"
-msgstr ""
+msgstr "ביקורים אחרונים"
 
 msgid "Path"
 msgstr "נתיב"
 
 msgid "Reflected Object"
-msgstr ""
+msgstr "עצם משתקף"
 
 msgid "Reflected Objects"
-msgstr ""
+msgstr "עצמים משתקפים"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Liked"
@@ -1347,31 +1347,31 @@ msgid "Proportions"
 msgstr "פרופורציות"
 
 msgid "1/2 + 1/2"
-msgstr ""
+msgstr "1/2 + ½"
 
 msgid "2/3 + 1/3"
-msgstr ""
+msgstr "2/3 + 1/3"
 
 msgid "1/3 + 2/3"
-msgstr ""
+msgstr "1/3 + 2/3"
 
 msgid "1/3 + 1/3 + 1/3"
-msgstr ""
+msgstr "1/3 + 1/3 + 1/3"
 
 msgid "1/2 + 1/4 + 1/4"
-msgstr ""
+msgstr "1/2 + 1/4 + ¼"
 
 msgid "1/4 + 1/2 + 1/4"
-msgstr ""
+msgstr "1/4 + 1/2 + ¼"
 
 msgid "1/4 + 1/4 + 1/2"
-msgstr ""
+msgstr "1/4 + 1/4 + ½"
 
 msgid "Medium News Widget"
-msgstr ""
+msgstr "ווידג'ט חדשות בינוני"
 
 msgid "Large News Widget"
-msgstr ""
+msgstr "ווידג'ט חדשות גדול"
 
 msgid "4 Random Projects Widget"
 msgstr "יישומון 4 פרוייקטים אקראיים"
@@ -1389,10 +1389,12 @@ msgid "Assigned Portal"
 msgstr "פורטל מוקצה"
 
 msgid "Footer"
-msgstr ""
+msgstr "סיומת עמוד"
 
 msgid "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
 msgstr ""
+"תוצג כסיומת עמוד על כל עמוד של אתר זה\n"
+"(לא רק על עמודי לוח מחוונים!)"
 
 msgid "Show Register Button"
 msgstr "הצג לחצן רישום"
@@ -1419,58 +1421,58 @@ msgid "Right footer"
 msgstr "כותרת תחתונה ימנית"
 
 msgid "1-Column Dashboard Page"
-msgstr ""
+msgstr "עמוד לוח מחוונים בעל עמודה אחת"
 
 msgid "2-Column Dashboard Page"
-msgstr ""
+msgstr "עמוד לוח מחוונים בעל 2 עמודות"
 
 msgid "Content (left column)"
-msgstr ""
+msgstr "תוכן (עמודה שמאלית)"
 
 msgid "Content (right column)"
-msgstr ""
+msgstr "תוכן (עמודה ימנית)"
 
 msgid "3-Column Dashboard Page"
-msgstr ""
+msgstr "עמוד לוח מחוונים בעל 3 עמודות"
 
 msgid "Content (center column)"
-msgstr ""
+msgstr "תוכן (עמודה מרכזית)"
 
 msgid "Simple One-Column Page"
-msgstr ""
+msgstr "עמוד פשוט בעל עמודה אחת"
 
 msgid "Simple Page with Left Navigation"
-msgstr ""
+msgstr "עמוד פשוט בעל ניווט שמאלי"
 
 msgid "Left Sidebar"
-msgstr ""
+msgstr "סרגל כלים שמאלי"
 
 msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr ""
+msgstr "עמוד לוח מחוונים בעל עמודה אחת (מודולרי, אין להשתמש יותר!)"
 
 msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr ""
+msgstr "עמוד לוח מחוונים בעל 2 עמודות (מודולרי, אין להשתמש יותר!)"
 
 msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr ""
+msgstr "עמוד לוח מחוונים בעל 3 עמודות (מודולרי, אין להשתמש יותר!)"
 
 msgid "Simple One-Column Page (Modular)"
-msgstr ""
+msgstr "עמוד פשוט בעל עמודה אחת (מודולרי)"
 
 msgid "Simple Page with Left Navigation (Modular)"
-msgstr ""
+msgstr "עמוד פשוט בעל ניווט שמאלי (מודולרי)"
 
 msgid "Start Page (Modular)"
-msgstr ""
+msgstr "עמוד התחלה (מודולרי)"
 
 msgid "Header image"
-msgstr ""
+msgstr "תמונת כותרת"
 
 msgid "Header Title"
-msgstr ""
+msgstr "טקסט כותרת"
 
 msgid "Header Text"
-msgstr ""
+msgstr "תוכן כותרת נוסף"
 
 msgid "Additional Header content"
 msgstr ""
@@ -1539,7 +1541,7 @@ msgid "insert inside"
 msgstr "הכנס פנימה"
 
 msgid "softroot"
-msgstr ""
+msgstr "Softroot"
 
 msgid "home"
 msgstr "דף הבית"
@@ -1632,7 +1634,7 @@ msgid "Informations"
 msgstr "מידע"
 
 msgid "No informations set"
-msgstr ""
+msgstr "לא נקבע כל מידע"
 
 msgid "Back to Project Overview"
 msgstr "חזרה אל מבט כולל על הפרוייקט"
@@ -1727,17 +1729,17 @@ msgstr "העלאת קבצים ותיקיות"
 
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
-msgstr[0] ""
+msgstr[0] "אנא תקן/י את השגיאה למטה."
 msgstr[1] ""
 
 msgid "2-factor access only"
-msgstr ""
+msgstr "גישת שני גורמים בלבד"
 
 msgid "OTP Device:"
-msgstr ""
+msgstr "מכשיר OTP:"
 
 msgid "Enter the generated number code from your authenticator app"
-msgstr ""
+msgstr "הזן/י את קוד המספר אשר נוצר מאפליקציית האימות שלך"
 
 msgid "Forgotten your password or username?"
 msgstr "שכחת את הסיסמה או את שם המשתמש שלך?"
@@ -1786,7 +1788,7 @@ msgstr "נראה שהייתה לנו בעיה פנימית בזמן שעיבדנ
 
 #, python-format
 msgid "+%(num_pictures)s more..."
-msgstr ""
+msgstr "יותר +%(num_pictures)s..."
 
 msgid "Mark All"
 msgstr "סמן הכל"
@@ -1840,7 +1842,7 @@ msgid "Consider using an alternate browser!"
 msgstr "שקול להשתמש בדפדפן חלופי!"
 
 msgid "I want to like this"
-msgstr ""
+msgstr "אני רוצה לאהוב את זה"
 
 msgid "I want to follow this"
 msgstr "אני רוצה לעקוב אחרי זה"
@@ -1881,67 +1883,67 @@ msgstr "החל"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_1_group"
-msgstr ""
+msgstr "helptext_1_group"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_2_project"
-msgstr ""
+msgstr "helptext_2_project"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_3_marketplace"
-msgstr ""
+msgstr "helptext_3_marketplace"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_4_profile"
-msgstr ""
+msgstr "helptext_4_profile"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_5_password"
-msgstr ""
+msgstr "helptext_5_password"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_6_microsite"
-msgstr ""
+msgstr "helptext_6_microsite"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_7_notes"
-msgstr ""
+msgstr "helptext_7_notes"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_8_poll"
-msgstr ""
+msgstr "helptext_8_poll"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_9_todo"
-msgstr ""
+msgstr "helptext_9_todo"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_10_documentsetting"
-msgstr ""
+msgstr "helptext_10_documentsetting"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_11_document"
-msgstr ""
+msgstr "helptext_11_document"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_12_projectadministration"
-msgstr ""
+msgstr "helptext_12_projectadministration"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
-msgstr ""
+msgstr "helptext_13_groupadministration"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
-msgstr ""
+msgstr "helptext_50_profileprivacy"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
-msgstr ""
+msgstr "helptext_51_objectprivacy"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_52_profilelastname"
-msgstr ""
+msgstr "helptext_52_profilelastname"
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "הזן את כתובות הדואר האלקטרוני של אנשים שברצונך להזמין להצטרף לפלטפורמה."
@@ -2021,10 +2023,10 @@ msgid "Files"
 msgstr "קבצים"
 
 msgid "Etherpad"
-msgstr ""
+msgstr "עורך רשת Etherpad"
 
 msgid "Etherpads"
-msgstr ""
+msgstr "עורכי רשת Etherpad"
 
 msgid "Poll"
 msgstr "משאל"
@@ -2039,7 +2041,7 @@ msgid "Todos"
 msgstr "רשימת מטלות"
 
 msgid "Marketplace"
-msgstr ""
+msgstr "שוק"
 
 msgctxt "Calendar"
 msgid "Event"
@@ -2054,27 +2056,27 @@ msgstr "חדשות"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
-msgstr ""
+msgstr "משיכה"
 
 msgctxt "withdraw join team button second item"
 msgid "Request"
-msgstr ""
+msgstr "בקשה"
 
 msgctxt "join request pending team button first item"
 msgid "Join"
-msgstr ""
+msgstr "הצטרפות"
 
 msgctxt "join request pending team button second item"
 msgid "Requested"
-msgstr ""
+msgstr "התבקש"
 
 msgctxt "join team button first item"
 msgid "Join"
-msgstr ""
+msgstr "הצטרפות"
 
 msgctxt "join team button second item"
 msgid "Now"
-msgstr ""
+msgstr "כעת"
 
 msgid "View on Facebook"
 msgstr "צפה בפייסבוק"
@@ -2117,20 +2119,20 @@ msgid "Close"
 msgstr "סגור"
 
 msgid "Avatar will be deleted once you save."
-msgstr ""
+msgstr "האווטאר יימחק לאחר שתשמור/י."
 
 msgctxt "written next to optional form fields"
 msgid "optional"
-msgstr ""
+msgstr "אופציונאלי"
 
 msgid "Call to Action Button"
-msgstr ""
+msgstr "לחצן קריאה לפעולה"
 
 msgid "Label of the Button"
-msgstr ""
+msgstr "תגית הלחצן"
 
 msgid "Link URL"
-msgstr ""
+msgstr "כתובת קישור"
 
 msgid "Enter a place or address."
 msgstr "הזן מקום או כתובת."
@@ -2302,7 +2304,7 @@ msgid "Member"
 msgstr "חבר"
 
 msgid "Kick"
-msgstr ""
+msgstr "בעיטה"
 
 msgid "Make Member"
 msgstr "הפוך לחבר"
@@ -2395,7 +2397,7 @@ msgid "Of course you can also create a project without a connection to the idea 
 msgstr "כמובן שניתן גם ליצור פרוייקט ללא חיבור לרעיון - פשוט לחץ על \"צור פרויקט\" בצד שמאל כדי לעשות זאת."
 
 msgid "Facebook-Integration"
-msgstr ""
+msgstr "אינטגרציית פייסבוק"
 
 #, fuzzy
 #| msgid "Conference is running"
@@ -2445,10 +2447,10 @@ msgid "Example: http://mywebsite.com"
 msgstr "דוגמה: http://mywebsite.com"
 
 msgid "Which sustainable development goals (SDG) does your project contribute to?"
-msgstr ""
+msgstr "לאילו יעדי התפתחות ברת קיימה (SDG) הפרויקט שלך תורם?"
 
 msgid "Select sustainable development goals"
-msgstr ""
+msgstr "בחר/י יעדי התפתחות ברת קיימה"
 
 msgid "Where are you active?"
 msgstr "איפה אתה פעיל?"
@@ -2493,10 +2495,10 @@ msgid "If you do not wish this, you can change the visibility setting above."
 msgstr "אם אינך רוצה בכך, באפשרותך לשנות את הגדרות הנראות למעלה."
 
 msgid "Visibility on other platforms"
-msgstr ""
+msgstr "נראות על גבי הפלטפורמה"
 
 msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-msgstr ""
+msgstr "כאן את/ה יכול/ה לשלוט האם המידע הנראה באופן ציבורי אודות הפרויקט שלך, כגון שם וכתובת, מועבר אל <a href=\"#\" target=\"_blank\">partner platforms</a> באמצעות WECHANGE."
 
 #, fuzzy
 #| msgid "This project will be set to be publicly visible!"
@@ -2602,10 +2604,10 @@ msgid "Conference Theme Color"
 msgstr "ניהול כנסים"
 
 msgid "Hex code (example: #A2A2A2)"
-msgstr ""
+msgstr "קוד HEX (דוגמה: #A2A2A2)"
 
 msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
-msgstr ""
+msgstr "צבע קוד HEX לשימוש כצבע נושא מרכזי עבור מתווה הוועידה (עם או ללא \"#\" בהתחלה("
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
@@ -2715,7 +2717,7 @@ msgid "Public Group"
 msgstr "קבוצה ציבורית"
 
 msgid "News posts"
-msgstr ""
+msgstr "פוסטים חדשים"
 
 msgid "About the Project"
 msgstr "על הפרויקט"
@@ -2751,7 +2753,7 @@ msgstr "שתף בטוויטר"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
-msgstr ""
+msgstr "יעדי התפתחות ברת קיימה"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Contact"
@@ -2821,12 +2823,16 @@ msgstr "העלאת קובץ המשתתף בסדנה"
 #, python-format
 msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 msgstr ""
+"אנא העלה/י CSV עם העמודות הבאות: מזהה משתמש ייחודי, שם פרטי, שם משפחה ועמודה אחת עבור כל סדנה המזוהה על ידי שורת הסדר של הסדנה. לעזרה תוכל/י להוריד תבנית \n"
+"<a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 
 msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
 msgstr ""
+"לאחר מכן הוסף/י שורה עבור כל חשבון אותו תרצה/י להוסיף.\\n\n"
+"עליך להוסיף מזהה משתמש ייחודי אבל השם הפרטי ושם המשפחה יכולים להיות ריקים. לאחר מכן הוסף/י 1 לכל עמודות הסדנה היכן שהמשתמש צריך להיות חבר נורמלי או 2 אם המשתמש המסוים צריך להיות מנהל סדנה."
 
 msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr ""
+msgstr "העלאת ה-CSV תגרום ליצירת החשבונות וליצירה של חברות בסנדת החשבונות והתוצאה תהיה הורדה ישירה של ה-CSV עם החשבונות והסיסמאות החדשים שנוצרו. הסיסמה תוכלל רק בעת יצירת החשבון. אנא רענן/י את העמוד לאחר ההורדה."
 
 msgid "Upload File"
 msgstr "העלה קובץ"
@@ -3526,11 +3532,11 @@ msgstr "הזמנות"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Organizations"
-msgstr ""
+msgstr "הארגונים שלי"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Organizations"
-msgstr ""
+msgstr "כל הארגונים"
 
 msgid "Search..."
 msgstr "חיפוש..."
@@ -3773,7 +3779,7 @@ msgid "Search in Apps"
 msgstr "חיפוש באפליקציות"
 
 msgid "Ethercalcs"
-msgstr ""
+msgstr "Ethercalcs"
 
 msgid "Offers"
 msgstr "הצעות"
@@ -3938,7 +3944,7 @@ msgstr "מחק הזמנה"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
-msgstr ""
+msgstr "יעדי התפתחות ברת קיימה"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names, Topics and Places..."
@@ -4082,7 +4088,7 @@ msgstr "חפש רעיונות"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You have not RSVPed to any Events."
-msgstr ""
+msgstr "אין לך RSVPed לאף אירוע."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Add Event"
@@ -4126,11 +4132,11 @@ msgstr "נושא"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDG"
-msgstr ""
+msgstr "יעד התפתחות ברת קיימה"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "External"
-msgstr ""
+msgstr "חיצוני"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You"
@@ -4411,7 +4417,7 @@ msgid "User profile: %(username)s"
 msgstr "פרופיל משתמש: %(username)s"
 
 msgid "Legacy Messages Archive"
-msgstr ""
+msgstr "ארכיון הודעות מורשת"
 
 msgid "Cooperation requests"
 msgstr "בקשות לשיתוף פעולה"
@@ -4538,7 +4544,7 @@ msgid "The main text of the announcement."
 msgstr "הטקסט הראשי של הודעה זו."
 
 msgid "Use \"# Big Header\" as main title and \"## Small Header\" as in-between header. They will be styled appropriately on the dashboard!"
-msgstr ""
+msgstr "השתמש ב-\"# Big Header\"  ככותרת ראשית וב-\"## Small Header\"  ככותרת בינונית. הן תסוגננה באופן מתאים על גבי לוח המחוונים!"
 
 msgid "Raw HTML. Should contain a Dismiss-button"
 msgstr "HTML גולמי. צריך להכיל לחצן ביטול"
@@ -4571,10 +4577,10 @@ msgid "Enable posting to Facebook"
 msgstr "אפשר פרסום בפייסבוק"
 
 msgid "Loading Facebook-Scripts..."
-msgstr ""
+msgstr "מעלה תסריטי פייסבוק..."
 
 msgid "If nothing happens please disable any addons like Ghostery or NoScript..."
-msgstr ""
+msgstr "אם לא קורה דבר אנא נטרל/י כל תוספים שיש לך כגון Ghostery או NoScript..."
 
 msgid "Connect Facebook Account"
 msgstr "חיבור חשבון פייסבוק"
@@ -4746,7 +4752,7 @@ msgid "Do not show this again"
 msgstr "אל תראה זאת שוב"
 
 msgid "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!"
-msgstr ""
+msgstr "האם את/ה חלק מחברה מעניינת, ארגון לא ממשלתי או אגודה? הבא/י את הארגון שלך אל המפה וצור/י נראות!"
 
 msgid "Preview"
 msgstr "תצוגה מקדימה"
@@ -4847,7 +4853,7 @@ msgid "Widget Icon (FA)"
 msgstr "סמל יישומון"
 
 msgid "Font-awesome Widget Icon"
-msgstr ""
+msgstr "Font-awesome Widget Icon"
 
 msgid "Delete widget"
 msgstr "מחיקת יישומון"

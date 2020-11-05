@@ -86,6 +86,15 @@ class CosinnusFilterQuerySetMixin:
                 VALUE_MAP = self.FILTER_CONDITION_MAP.get(key)
                 if value in VALUE_MAP:
                     queryset = queryset.filter(*VALUE_MAP.get(value))
+            else:
+                key = self.FILTER_KEY_MAP.get(key, key)
+                value = self.FILTER_VALUE_MAP.get(value, value)
+                if value is None:
+                    continue
+                if key.startswith('exclude_'):
+                    queryset = queryset.exclude(**{key[8:]: value})
+                else:
+                    queryset = queryset.filter(**{key: value})
         return queryset
 
 
