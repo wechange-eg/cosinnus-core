@@ -151,7 +151,6 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
         if instance is None or not instance.pk or not instance.group_is_conference:
             del self.fields['conference_theme_color']
     
-    
     def clean(self):
         if not self.cleaned_data.get('name', None):
             name = self.get_cleaned_name_from_other_languages()
