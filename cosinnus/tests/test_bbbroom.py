@@ -19,6 +19,11 @@ from cosinnus.views.bbb_room import BBBRoomMeetingView
 
 class BBBRoomTest(TestCase):
     def setUp(self):
+
+        if not hasattr(settings, "BBB_SECRET_KEY") or not getattr(settings, "BBB_SECRET_KEY", None):
+            self.skipTest("BBB module is not configured properly. Please enter a valid secret key.")
+            return
+
         self.moderator = User.objects.create_user(
             username="moderator",
             email="moderator@example.org",
