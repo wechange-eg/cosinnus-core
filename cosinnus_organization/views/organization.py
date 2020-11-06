@@ -9,7 +9,7 @@ from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 from ajax_forms.ajax_forms import AjaxFormsDeleteViewMixin
 from cosinnus import cosinnus_notifications
 from cosinnus.forms.mixins import AdditionalFormsMixin
-from cosinnus.models import CosinnusGroupMembership, MEMBERSHIP_ADMIN
+from cosinnus.models import MEMBERSHIP_ADMIN
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.views.group import SamePortalGroupMixin
 from cosinnus.views.mixins.avatar import AvatarFormMixin
@@ -39,13 +39,6 @@ class CosinnusOrganizationFormMixin(object):
         kwargs['request'] = self.request
         return kwargs
 
-    def forms_valid(self, form, inlines):
-        if form.instance.pk is None:
-            form.instance.creator = self.request.user
-        ret = super(CosinnusOrganizationFormMixin, self).forms_valid(form, inlines)
-        self.object.update_index()
-        return ret
-
     def dispatch(self, *args, **kwargs):
         """ Find out which type of CosinnusOrganization (project/society), we're dealing with here. """
         # special check, if group/project creation is limited to admins, deny regular users creating groups/projects
@@ -69,8 +62,15 @@ class CosinnusOrganizationFormMixin(object):
 
         return super(CosinnusOrganizationFormMixin, self).dispatch(*args, **kwargs)
 
+    def forms_valid(self, form, inlines):
+        if form.instance.pk is None:
+            form.instance.creator = self.request.user
+        ret = super(CosinnusOrganizationFormMixin, self).forms_valid(form, inlines)
+        self.object.update_index()
+        return ret
 
-class OrganizationCreateView(RequireLoggedInMixin, AvatarFormMixin, CosinnusOrganizationFormMixin,
+
+class OrganizationCreateView(RequireLoggedInMixin, CosinnusOrganizationFormMixin, AvatarFormMixin,
                              AdditionalFormsMixin, CreateWithInlinesView):
     """ Create View for Organizations """
 

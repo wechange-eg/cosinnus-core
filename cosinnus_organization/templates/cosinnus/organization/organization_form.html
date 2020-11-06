@@ -111,37 +111,7 @@
 
                     {# type field #}
                     {% trans "Type of your organization" as type_label %}
-                    {% captureas type_html %}
-                        {{ form.forms.obj.type.errors }}
-                        <div class="input-area" style="padding: 5px;">
-                            {% for option_value, option_label in form.forms.obj.instance.TYPE_CHOICES %}
-                                <span class="pull-left inline-list nowrap">
-                                    <a class="app-background small-padding">
-                                        <input
-                                                id="radio_type_{{ option_value }}"
-                                                type="radio"
-                                                name="type"
-                                                {% if option_value == form.forms.obj.instance.type %}checked="true"{% endif %}
-                                                value="{{ option_value }}"
-                                                onchange="$('#id_type_other').parent().toggleClass('hidden', !$('#radio_type_{{ form.forms.obj.instance.TYPE_OTHER }}').prop('checked'))"
-                                        />
-                                    </a>
-                                    <span
-                                            class="app-background-light dark-color small-padding"
-                                            onclick="
-                                                $('#radio_type_{{ option_value }}').prop('checked', !($('#radio_type_{{ option_value }}').prop('checked')));
-                                                $('#id_type_other').parent().toggleClass('hidden', !$('#radio_type_{{ form.forms.obj.instance.TYPE_OTHER }}').prop('checked'));
-                                            "
-                                    >
-                                        {{ option_label }}
-                                    </span>
-                                </span>
-                            {% endfor %}
-                        </div>
-                    {% endcaptureas %}
-                    <div class="cosinnus-field">
-                    {% include 'cosinnus/fields/default_field.html' with extra_html=type_html label=type_label large_field=True %}
-                    </div>
+                    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.type label=type_label %}
 
                     {# type_other Field #}
                     {% captureas type_other_placeholder %}{% trans "If none of the options apply, specify the type of your organization here" %}{% endcaptureas %}

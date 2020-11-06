@@ -657,14 +657,14 @@ class CosinnusConf(AppConf):
     # extra fields for the user profile.
     # usage:
     # {
-    #    field_name: {
-    #         'type': <str type of `UserProfileFormExtraFieldsMixin.EXTRA_FIELD_TYPES`>,
-    #         'label': i18n str,
-    #         'legend': i18n str,
-    #         'placeholder': i18n str,
-    #         'required': bool, # whether to be required in forms
-    #         'in_signup': bool, # whether to show up in the signup form
-    #     }, ...
+    #    field_name: dynamic_fields.CosinnusDynamicField(
+    #         type=dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT,
+    #         label=_('Institution'),
+    #         legend=None,
+    #         placeholder=_('Institution'),
+    #         required=False, # whether to be required in forms
+    #         in_signup=True, # whether to show up in the signup form
+    #     ), ...
     # }
     # example: {'organisation': {'type': 'text', 'required': True}}
     USERPROFILE_EXTRA_FIELDS = {}
