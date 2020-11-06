@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 15:35+0100\n"
+"POT-Creation-Date: 2020-11-06 17:04+0100\n"
 "PO-Revision-Date: 2020-04-27 12:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -177,6 +177,9 @@ msgid "Bookmarked"
 msgstr ""
 
 msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -1739,10 +1742,70 @@ msgstr ""
 msgid "User Welcome Email"
 msgstr ""
 
+msgid "Newsletter for groups"
+msgstr ""
+
 msgid "User Dashboard Announcements"
 msgstr ""
 
 msgid "Edit"
+msgstr ""
+
+msgid "update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Project"
+msgid "create Newsletter"
+msgstr "Create Project"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Send newsletter to group"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr ""
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to send the newsletter?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+msgid "Send newsletter"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "There are no newsletters yet."
+msgstr "There are no groups."
+
+msgid "Add newsletter"
 msgstr ""
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
@@ -1755,9 +1818,6 @@ msgid "Save"
 msgstr ""
 
 msgid "Currently set Welcome-Email Text"
-msgstr ""
-
-msgid "Send yourself a Test-Mail"
 msgstr ""
 
 msgid "Conference Page"
@@ -4478,7 +4538,7 @@ msgid "Items you follow"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Here you can find an overview of items you follow."
+msgid "Nothing here yet."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -4509,14 +4569,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Nothing here yet."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Users you want to remember"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5174,6 +5226,15 @@ msgstr ""
 msgid "Test email sent!"
 msgstr ""
 
+msgid "Newsletter sent."
+msgstr ""
+
+msgid "Test email sent."
+msgstr ""
+
+msgid "Newsletter has been copied."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr ""
@@ -5626,11 +5687,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Activate Member"
 #~ msgstr "Create Project"
-
-#, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "Do you really want to leave project „%(title)s“?"
 
 #, fuzzy
 #~| msgid "Create Project"

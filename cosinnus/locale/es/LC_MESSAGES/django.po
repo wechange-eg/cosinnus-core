@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 15:35+0100\n"
+"POT-Creation-Date: 2020-11-06 17:04+0100\n"
 "PO-Revision-Date: 2020-04-22 12:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -184,6 +184,9 @@ msgid "Bookmarked"
 msgstr ""
 
 msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -1762,6 +1765,9 @@ msgstr "Estadísticas simples"
 msgid "User Welcome Email"
 msgstr "Texto de bienvenida-email"
 
+msgid "Newsletter for groups"
+msgstr ""
+
 #, fuzzy
 #| msgid "User Dashboard"
 msgid "User Dashboard Announcements"
@@ -1769,6 +1775,65 @@ msgstr "Página del panel del usario"
 
 msgid "Edit"
 msgstr "Editar"
+
+msgid "update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "create Newsletter"
+msgstr "Crear usario"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Send newsletter to group"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr ""
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to send the newsletter?"
+msgstr "Estas seguro de que quieres dejar „%(title)s“?"
+
+msgid "Send newsletter"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no visible users."
+msgid "There are no newsletters yet."
+msgstr "No hay usuarios visibles."
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Add newsletter"
+msgstr "Añadir usario"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "Se ha producido un error en uno de las casillas insertadas. ¡Por favor, corrígelo antes de guardar!"
@@ -1785,9 +1850,6 @@ msgstr "Guardar"
 #| msgid "Welcome-Email Text"
 msgid "Currently set Welcome-Email Text"
 msgstr "Texto de bienvenida-email"
-
-msgid "Send yourself a Test-Mail"
-msgstr ""
 
 msgid "Conference Page"
 msgstr ""
@@ -4613,7 +4675,7 @@ msgid "Items you follow"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Here you can find an overview of items you follow."
+msgid "Nothing here yet."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -4644,14 +4706,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Nothing here yet."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Users you want to remember"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5331,6 +5385,15 @@ msgstr "Pregunta sobre"
 msgid "Test email sent!"
 msgstr ""
 
+msgid "Newsletter sent."
+msgstr ""
+
+msgid "Test email sent."
+msgstr ""
+
+msgid "Newsletter has been copied."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "La idioma \"%s\" no es apollada"
@@ -5824,11 +5887,6 @@ msgstr "Se han guardado los cambios."
 #~| msgid "Accept Member"
 #~ msgid "Activate Member"
 #~ msgstr "Aceptar miembro"
-
-#, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "Estas seguro de que quieres dejar „%(title)s“?"
 
 #, fuzzy
 #~| msgid "Remove Member"

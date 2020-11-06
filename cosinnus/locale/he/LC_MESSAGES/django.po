@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 15:35+0100\n"
+"POT-Creation-Date: 2020-11-06 17:04+0100\n"
 "PO-Revision-Date: 2020-09-29 18:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -182,6 +182,9 @@ msgid "Bookmarked"
 msgstr ""
 
 msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -1720,11 +1723,73 @@ msgstr "סטטיסטיקה פשוטה"
 msgid "User Welcome Email"
 msgstr "דוא\"ל ברכת הצטרפות"
 
+msgid "Newsletter for groups"
+msgstr ""
+
 msgid "User Dashboard Announcements"
 msgstr "הודעות לוח של כלים של המשתמש"
 
 msgid "Edit"
 msgstr "ערוך"
+
+msgid "update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "create Newsletter"
+msgstr "צור משתמש"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Send newsletter to group"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr "בדיקת אימות: שלח לעצמך דוא\"ל"
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to remove the user?"
+msgid "Do you really want to send the newsletter?"
+msgstr "האם אתה בטוח שברצונך להסיר את המשתמש?"
+
+msgid "Send newsletter"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no newsletters yet."
+msgstr "אין עדיין פריטים"
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Add newsletter"
+msgstr "הוסף משתמש"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "אירעה שגיאה באחד השדות שהזנת. אנא תקן אותו לפני השמירה!"
@@ -1737,9 +1802,6 @@ msgstr "שמור"
 
 msgid "Currently set Welcome-Email Text"
 msgstr "טקסט ברכת הצטרפות שמוגדר כרגע"
-
-msgid "Send yourself a Test-Mail"
-msgstr "בדיקת אימות: שלח לעצמך דוא\"ל"
 
 #, fuzzy
 #| msgid "Conference Management"
@@ -4497,10 +4559,8 @@ msgid "Items you follow"
 msgstr "רעיונות שאני עוקב אחריהם"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Here you can find an overview of Ideas you have liked."
-msgid "Here you can find an overview of items you follow."
-msgstr "כאן ניתן למצוא סקירה כללית של רעיונות שאהבת."
+msgid "Nothing here yet."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
@@ -4529,14 +4589,6 @@ msgstr "באפשרותך ליצור רעיונות משלך באמצעות לח�
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "גלה/י"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Nothing here yet."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Users you want to remember"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -5159,6 +5211,17 @@ msgstr "שאלה על"
 msgid "Test email sent!"
 msgstr "בדיקת אימות נשלחה לדוא\"ל!"
 
+msgid "Newsletter sent."
+msgstr ""
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "Test email sent."
+msgstr "בדיקת אימות נשלחה לדוא\"ל!"
+
+msgid "Newsletter has been copied."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "השפה \"%s\" אינה נתמכת"
@@ -5579,6 +5642,11 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
 
+#, fuzzy
+#~| msgid "Here you can find an overview of Ideas you have liked."
+#~ msgid "Here you can find an overview of items you follow."
+#~ msgstr "כאן ניתן למצוא סקירה כללית של רעיונות שאהבת."
+
 #~ msgid "Conference is not running"
 #~ msgstr "הוועידה אינה פועלת"
 
@@ -5617,9 +5685,6 @@ msgstr "השינויים שביצעת נשמרו בהצלחה."
 
 #~ msgid "Activate Member"
 #~ msgstr "הפעל חברות"
-
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "האם אתה בטוח שברצונך להסיר את המשתמש?"
 
 #~ msgid "Remove User"
 #~ msgstr "הסר משתמש"

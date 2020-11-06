@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 15:35+0100\n"
+"POT-Creation-Date: 2020-11-06 17:04+0100\n"
 "PO-Revision-Date: 2020-09-29 17:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -177,6 +177,9 @@ msgid "Bookmarked"
 msgstr ""
 
 msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -1739,11 +1742,73 @@ msgstr "إحصائيات بسيطة"
 msgid "User Welcome Email"
 msgstr "البريد الإلكتروني الترحيبي للمستخدم"
 
+msgid "Newsletter for groups"
+msgstr ""
+
 msgid "User Dashboard Announcements"
 msgstr "إعلانات لوحة تحكم المستخدم"
 
 msgid "Edit"
 msgstr "تعديل"
+
+msgid "update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "create Newsletter"
+msgstr "إنشاء مستخدم"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Send newsletter to group"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr "أرسل لنفسك بريدًا تجريبيًا"
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to remove the user?"
+msgid "Do you really want to send the newsletter?"
+msgstr "هل تريد حقًا إزالة المستخدم؟"
+
+msgid "Send newsletter"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no newsletters yet."
+msgstr "لا توجد عناصر حتى الآن"
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Add newsletter"
+msgstr "إضافة مستخدم"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "حدث خطأ في أحد الحقول التي أدخلتها. يرجى تصحيحها قبل الحفظ!"
@@ -1756,9 +1821,6 @@ msgstr "حفظ"
 
 msgid "Currently set Welcome-Email Text"
 msgstr "نص البريد الإلكتروني الترحيبي المعين حاليًا"
-
-msgid "Send yourself a Test-Mail"
-msgstr "أرسل لنفسك بريدًا تجريبيًا"
 
 msgid "Conference Page"
 msgstr "صفحة المؤتمر"
@@ -4504,10 +4566,8 @@ msgid "Items you follow"
 msgstr "الأفكار التي أتابعها"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Here you can find an overview of Ideas you have liked."
-msgid "Here you can find an overview of items you follow."
-msgstr "هنا يمكنك أن تجد نظرة عامة على الأفكار التي أعجبتك."
+msgid "Nothing here yet."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
@@ -4536,14 +4596,6 @@ msgstr "يمكنك إنشاء الأفكار الخاصة بك عبر الزر \
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "اكتشف"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Nothing here yet."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Users you want to remember"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -5166,6 +5218,17 @@ msgstr "سؤال عن"
 msgid "Test email sent!"
 msgstr "تم إرسال بريد الكتروني تجريبي!"
 
+msgid "Newsletter sent."
+msgstr ""
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "Test email sent."
+msgstr "تم إرسال بريد الكتروني تجريبي!"
+
+msgid "Newsletter has been copied."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "هذه اللغة \"%s\" غير مدعومة"
@@ -5586,6 +5649,11 @@ msgstr "أنت لست عضوًا حاليًا في %s! إذا كنت ترغب ف
 msgid "Your changes have been saved."
 msgstr "تم حفظ التغييرات."
 
+#, fuzzy
+#~| msgid "Here you can find an overview of Ideas you have liked."
+#~ msgid "Here you can find an overview of items you follow."
+#~ msgstr "هنا يمكنك أن تجد نظرة عامة على الأفكار التي أعجبتك."
+
 #~ msgid "Conference is not running"
 #~ msgstr "المؤتمر لا يعمل"
 
@@ -5628,9 +5696,6 @@ msgstr "تم حفظ التغييرات."
 
 #~ msgid "Activate Member"
 #~ msgstr "تفعيل العضو"
-
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "هل تريد حقًا إزالة المستخدم؟"
 
 #~ msgid "Remove User"
 #~ msgstr "إزالة المستخدم"
