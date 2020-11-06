@@ -14,7 +14,7 @@
         {% else %}
             {% if object.like_count > 0 %}{{ object.like_count }}{% endif %}
         {% endif %}
-        <i class="fa fa-heart"></i>
+        <i class="far fa-heart"></i>
         {% trans "Like" %}
     </span>
     <span class="show-selected">
@@ -23,7 +23,7 @@
         {% else %}
             {% if object.like_count|add:1 > 0 %}{{ object.like_count|add:1 }}{% endif %}
         {% endif %}
-        <i class="fa fa-heart apply-color-liked"></i>
+        <i class="fa fa-heart"></i>
         {% trans "Liked" %}
     </span>
 </a>
