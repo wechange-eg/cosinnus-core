@@ -1,7 +1,6 @@
 import datetime as dt
 from collections.abc import Sequence
 from dataclasses import dataclass
-from tkinter.constants import PAGES
 
 from cosinnus.conf import settings
 from cosinnus_cloud.utils.nextcloud import perform_fulltext_search
