@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from copy import copy
 import datetime
+from cosinnus.models.cloud import NextcloudFileProxy
 
 from django.urls import reverse
 from django.db.models import Q

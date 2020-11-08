@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from cosinnus.models.cloud import NextcloudFulltextSearchQuerySet
 from haystack.views import SearchView, search_view_factory
 
 from cosinnus.forms.search import TaggableModelSearchForm
@@ -46,8 +46,6 @@ search = search_view_factory(TaggableSearchView,
     form_class=TaggableModelSearchForm,
 )
 
-
-
 class QuickSearchAPIView(ModelRetrievalMixin, View):
     
     http_method_names = ['get',]
@@ -56,8 +54,12 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
     content_types = ['polls', 'todos', 'files', 'pads', 'ideas', 'events', 'projects', 'groups',]
     
     if settings.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE:
-        content_types += ['offers']
+        content_types.append('offers')
     
+    if settings.COSINNUS_CLOUD_ENABLED:
+        # cloudfiles are a special case in QuicksearchAPIView.get_items
+        content_types.append('cloudfiles')
+
     # which fields should be filtered for the query for each model
     content_type_filter_fields = {
         'polls': 'title',
@@ -71,7 +73,7 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
     }
     if settings.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE:
         content_type_filter_fields['offers'] = 'title'
-    
+
     
     # the key by which the timeline stream is ordered. must be present on *all* models
     sort_key = '-created'
@@ -95,8 +97,9 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
                 Default: `self.default_page_size`
         """
         self.user = request.user
-        
+
         query = self.request.GET.get('q', '').strip()
+
         if not query:
             return HttpResponseBadRequest('Missing parameter: "q"!')
         self.query = query
@@ -134,12 +137,18 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
         """ Returns a paginated list of items as mixture of different models, in sorted order """
         single_querysets = []
         for content_type in self.content_types:
+            if content_type == 'cloudfiles':
+                single_querysets.append(
+                    NextcloudFulltextSearchQuerySet("admin", self.query, page_size=self.page_size)
+                )
+                continue
+
             content_model = SEARCH_MODEL_NAMES_REVERSE.get(content_type, None)
             if content_model is None:
                 if settings.DEBUG:
                     logger.warn('Could not find content model for timeline content type "%s"' % content_type)
-                continue
-            single_querysets.append(self._get_queryset_for_model(content_model, self.content_type_filter_fields[content_type]))
+            else:
+                single_querysets.append(self._get_queryset_for_model(content_model, self.content_type_filter_fields[content_type]))
                 
         items = self._mix_items_from_querysets(*single_querysets)
         return items

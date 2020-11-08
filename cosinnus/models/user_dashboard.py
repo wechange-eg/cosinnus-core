@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 import inspect
+import logging
+from cosinnus.models.cloud import NextcloudFileProxy
 
 from django.template.defaultfilters import date as django_date_filter
 
@@ -49,6 +51,11 @@ class DashboardItem(dict):
                 self['icon'] = 'fa-building'
                 self['text'] = escape(obj.name)
                 self['url'] = obj.get_absolute_url()
+            elif isinstance(obj, NextcloudFileProxy):
+                self['icon'] = 'fa-file'
+                self['text'] = obj.name
+                self['url'] = obj.url
+                self['subtext'] = obj.excerpt
             elif obj._meta.model.__name__ == 'Message' and not settings.COSINNUS_ROCKET_ENABLED and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
                 self['icon'] = 'fa-envelope'
                 self['text'] = escape(obj.subject)

@@ -124,7 +124,7 @@ class QuerysetLazyCombiner:
                     
         # buffers are now refilled, or removed if their queryset was exhausted
         # if no buffers remain, the iterator is exhausted
-        if len(self.buffer_map) == 0:
+        if not self.buffer_map:
             raise StopIteration
         
         # make a set of candidates and sort it by the sort_key, select from all buffers' first elements

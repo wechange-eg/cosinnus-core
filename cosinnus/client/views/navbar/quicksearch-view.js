@@ -36,7 +36,8 @@ module.exports = BaseView.extend({
             hadErrors: false,
             
             quicksearchResults: [],
-            
+			
+			fireQuicksearchTimeout: null
         }
     },
     
@@ -103,8 +104,13 @@ module.exports = BaseView.extend({
     
     /** Searchbox text input */
     onSearchBoxTyped: function (event) {
+		var self = this;
     	if (!event.shiftKey && !event.ctrlKey) {
-    		this.updateSearchSuggestions();
+			if (self.state.fireQuicksearchTimeout !== null) {
+				// prevent the quicksearch request from being started
+				clearTimeout(self.state.fireQuicksearchTimeout);
+			}
+			this.updateSearchSuggestions();
     	}
     },
     
@@ -151,7 +157,10 @@ module.exports = BaseView.extend({
     	self.render();
     	
     	if (self.state.query && self.state.query.length > 2) {
-    		self.loadQuickResults(self.state.query);
+			// wait a short time before issuing a HTTP request, 
+			// in case the user types more stuff in the meantime;
+			// in that case, the timeout will be cleared/cancelled.
+    		self.state.fireQuicksearchTimeout = setTimeout(self.loadQuickResults, 300, self, self.state.query);
     	}
     },
 
@@ -212,11 +221,12 @@ module.exports = BaseView.extend({
     
     /** Loads a new set of quicksearch results for the given query.
      *  Calling this will cancel the currently running request, if existing. */
-    loadQuickResults: function (query) {
-    	var self = this;
+    loadQuickResults: function (self, query) {
     	if (self.state.loading) {
-    		self.state.currentRequest.abort();
-    		self.state.currentRequest = null;
+			if (self.state.currentRequest !== null) {
+				self.state.currentRequest.abort();
+				self.state.currentRequest = null;
+			}
     		self.state.loading = false;
     	}
     	
@@ -273,16 +283,25 @@ module.exports = BaseView.extend({
         
         // display items if any
         if (data['count'] > 0) {
+			util.log("XXXXX");
+			console.log("ASDASD");
         	self.state.quicksearchResults = data['items'];
         	$.each(self.state.quicksearchResults, function(itemIdx, item) {
         		// we expect escaped text here! 
         		// otherwise, we could make it safe using: var text = $('<div>').text(item['text']).html();
-        		var text = item['text'];
+				var text = item['text'];
         		$.each(self.state.query.split(' '), function(queryTermIdx, queryTerm) {
         			text = util.iReplace(text, queryTerm, '<b>$1</b>');
         		});
-    			item['text'] = text;
-        	});
+				item['text'] = text;
+				if (typeof(item.subtext) === "string") {
+					var subtext = item.subtext;
+					$.each(self.state.query.split(' '), function(queryTermIdx, queryTerm) {
+						subtext = util.iReplace(subtext, queryTerm, '<b>$1</b>');
+					});
+					item.subtext = subtext;
+				}
+	      	});
 			self.render();
         }
     },
