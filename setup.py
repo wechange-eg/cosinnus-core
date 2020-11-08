@@ -59,7 +59,8 @@ setup(
         'MarkupSafe==1.1',
         'Pillow==6.2.0',
         'Celery==4.2.0',
-        
+        'dataclasses',
+
         'django-allauth==0.42.0',
         'django-annoying==0.7.6',
         'django-appconf==1.0.3',
@@ -114,11 +115,11 @@ setup(
         'qrcode==6.1',
         'Unidecode==0.4.21',
         'django-countries==5.3.3',
-        
+
         # wagtail
         'wagtail==2.3',
         'django-compressor',
-        
+
         # requirements loaded in from github
         'django-awesome-avatar',
         'django-filer',
