@@ -549,16 +549,31 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
     # a choice of field types for the settings dict values of `COSINNUS_USERPROFILE_EXTRA_FIELDS`
     # these will be initialized as variable form fields for the fields in `self.extra_fields`
     EXTRA_FIELD_TYPE_FORMFIELDS = {
-        dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT: forms.CharField,
-        dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: forms.BooleanField,
-        dynamic_fields.DYNAMIC_FIELD_TYPE_COUNTRY: _make_country_formfield,
+        dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT: (forms.CharField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT_AREA: (forms.CharField, {'widget': forms.Textarea}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_INT: (forms.CharField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: (forms.BooleanField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: (forms.CharField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_COUNTRY: (_make_country_formfield, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_PHONE: (forms.CharField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_URL: (forms.CharField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_PREDEFINED_CHOICES_TEXT: (forms.CharField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT: (forms.CharField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD: (forms.CharField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT: (forms.CharField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_MULTI_ADDRESS: (forms.CharField, {}),
     }
     # if set to a string, will only include such fields in the form
     # that have the given option name set to True in `COSINNUS_USERPROFILE_EXTRA_FIELDS`
     filter_included_fields_by_option_name = None
     
+    # if set to True, hidden dynamic fields will be shown, e.g. to display them to admins
+    show_hidden_dynamic_fields = False
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # TODO: pass `show_hidden_dynamic_fields` to form in admin backend mode!
+        self.show_hidden_dynamic_fields = kwargs.pop('show_hidden_dynamic_fields', False)
         self.prepare_extra_fields_initial()
         self.prepare_extra_fields()
         if 'extra_fields' in self.fields:
@@ -583,16 +598,26 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
             if self.filter_included_fields_by_option_name \
                     and not getattr(field_options, self.filter_included_fields_by_option_name, False):
                 continue
+            if field_options.hidden and not self.show_hidden_dynamic_fields:
+                continue
             
-            formfield_class = self.EXTRA_FIELD_TYPE_FORMFIELDS[field_options.type]
+            formfield_class, formfield_extra_kwargs = self.EXTRA_FIELD_TYPE_FORMFIELDS[field_options.type]
+            formfield_kwargs = {
+                'label': field_options.label,
+                'initial': self.initial.get(field_name, None),
+                'required': field_options.required,
+                'disabled': field_options.readonly,
+            }
+            if formfield_extra_kwargs:
+                formfield_kwargs.update(formfield_extra_kwargs)
+            # initialze formfield
             self.fields[field_name] = formfield_class(
-                label=field_options.label,
-                initial=self.initial.get(field_name, None),
-                required=field_options.required,
+                **formfield_kwargs
             )
             setattr(self.fields[field_name], 'label', field_options.label)
             setattr(self.fields[field_name], 'legend', field_options.legend)
             setattr(self.fields[field_name], 'placeholder', field_options.placeholder)
+            setattr(self.fields[field_name], 'large_field', bool(formfield_extra_kwargs.get('widget', None) == forms.Textarea)) 
             
             # "register" the extra field additionally
             field_map[field_name] = self.fields[field_name]
