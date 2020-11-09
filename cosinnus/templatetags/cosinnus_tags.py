@@ -1231,6 +1231,12 @@ def get_item(obj, attr_name):
     return obj[attr_name]
 
 @register.filter
+def get_item_or_none(obj, attr_name):
+    """ Returns the given attribute by trying to resolve
+        it in the template using __getitem__ """
+    return obj.get('attr_name', None)
+
+@register.filter
 def get_country_name(country_code):
     """ Returns the verbose country name for a ISO 3166-1 country code """
     from django_countries import countries

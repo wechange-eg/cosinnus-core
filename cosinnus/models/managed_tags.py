@@ -41,6 +41,9 @@ class CosinnusManagedTagLabels(object):
     MANAGED_TAG_NAME = _('Managed Tag')
     MANAGED_TAG_NAME_PLURAL = _('Managed Tag')
     
+    MANAGED_TAG_TYPE_NAME = _('Managed Tag Type')
+    MANAGED_TAG_TYPE_NAME_PLURAL = _('Managed Tag Types')
+    
     CREATE_MANAGED_TAG = _('Create Managed Tag')
     EDIT_MANAGED_TAG = _('Edit Managed Tag')
     DELETE_MANAGED_TAG = _('Delete Managed Tag')
@@ -206,6 +209,31 @@ class CosinnusManagedTagAssignment(models.Model):
 
 
 @python_2_unicode_compatible
+class CosinnusManagedTagType(models.Model):
+    
+    # don't worry, the default Portal with id 1 is created in a datamigration
+    # there was no other way to generate completely runnable migrations 
+    # (with a get_default function, or any other way)
+    portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='managed_tag_types', 
+        null=False, blank=False, default=1, on_delete=models.CASCADE) # port_id 1 is created in a datamigration!
+    
+    name = models.CharField(_('Name'), max_length=250)
+    prefix_label = models.CharField(_('Prefix label'), max_length=250,
+        help_text=_('The label that will be prepended before Managed Tags of this type, instead of `name`'),
+        blank=True, null=True)
+    color = models.CharField(_('Color'),
+         max_length=10, validators=[MaxLengthValidator(7)],
+         help_text=_('Optional color code (css hex value, with or without "#")'),
+         blank=True, null=True)
+
+    class Meta(object):
+        ordering = ('name',)
+        verbose_name = MANAGED_TAG_LABELS.MANAGED_TAG_TYPE_NAME
+        verbose_name_plural = MANAGED_TAG_LABELS.MANAGED_TAG_TYPE_NAME_PLURAL
+        unique_together = (('name', 'portal'), )
+
+
+@python_2_unicode_compatible
 class CosinnusManagedTag(models.Model):
     
     # don't worry, the default Portal with id 1 is created in a datamigration
@@ -213,6 +241,9 @@ class CosinnusManagedTag(models.Model):
     # (with a get_default function, or any other way)
     portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='managed_tags', 
         null=False, blank=False, default=1, on_delete=models.CASCADE) # port_id 1 is created in a datamigration!
+    
+    type = models.ForeignKey('cosinnus.CosinnusManagedTagType', verbose_name=MANAGED_TAG_LABELS.MANAGED_TAG_TYPE_NAME, 
+        related_name='managed_tags', null=True, blank=True, on_delete=models.SET_NULL)
     
     name = models.CharField(_('Name'), max_length=250) 
     slug = models.SlugField(_('Slug'), 
@@ -226,10 +257,6 @@ class CosinnusManagedTag(models.Model):
         upload_to=get_managed_tag_image_filename,
         max_length=250)
     url = models.URLField(_('URL'), max_length=200, blank=True, null=True, validators=[MaxLengthValidator(200)])
-    color = models.CharField(_('Color'),
-         max_length=10, validators=[MaxLengthValidator(7)],
-         help_text=_('Optional color code (css hex value, with or without "#")'),
-         blank=True, null=True)
     
     paired_group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, 
         verbose_name=_('Paired Group'),
