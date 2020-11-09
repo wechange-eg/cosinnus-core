@@ -41,7 +41,7 @@ class DictResult(dict):
     def __init__(self, *args, **kwargs):
         for key in list(self.fields.keys()):
             val = kwargs.get(key, self.fields.get(key))
-            if val == REQUIRED:
+            if val is REQUIRED:
                 raise Exception('MAP API Error: Expected required key "%s" for MapResult!' % key)
         return super(DictResult, self).__init__(*args, **kwargs)
 
