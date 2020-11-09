@@ -28,7 +28,6 @@ class NextcloudFulltextSearchQuerySet(Sequence):
         return self
 
     def _execute_query(self):
-        print("EXECUTING!!!!!!")
         self._results = []
         try:
             response = perform_fulltext_search(self.user, self.query, page=self.page, page_size=self.page_size)
