@@ -279,12 +279,9 @@ module.exports = BaseView.extend({
     handleData: function (data) {
         var self = this;
         util.log('# # Fetched data for quicksearch');
-        util.log(data)
 
         // display items if any
         if (data['count'] > 0) {
-            util.log("XXXXX");
-            console.log("ASDASD");
             self.state.quicksearchResults = data['items'];
             $.each(self.state.quicksearchResults, function (itemIdx, item) {
                 // we expect escaped text here! 

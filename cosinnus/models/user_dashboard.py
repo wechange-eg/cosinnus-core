@@ -52,7 +52,7 @@ class DashboardItem(dict):
                 self['text'] = escape(obj.name)
                 self['url'] = obj.get_absolute_url()
             elif isinstance(obj, NextcloudFileProxy):
-                self['icon'] = 'fa-file'
+                self['icon'] = 'fa-cloud'
                 self['text'] = obj.name
                 self['url'] = obj.url
                 self['subtext'] = obj.excerpt
