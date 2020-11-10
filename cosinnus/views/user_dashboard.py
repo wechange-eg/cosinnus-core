@@ -243,8 +243,7 @@ class FollowedObjectsWidgetView(BaseUserDashboardWidgetView):
     def get_data(self, *kwargs):
         profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
         group_ct = ContentType.objects.get_for_model(CosinnusGroup)
-        exclude_ids = [profile_ct.id, group_ct.id]
-        followed = LikeObject.objects.filter(user=self.request.user, followed=True).exclude(content_type_id__in=exclude_ids)
+        followed = LikeObject.objects.filter(user=self.request.user, followed=True)
         objects = []
         for follow in followed:
             ct = ContentType.objects.get_for_id(follow.content_type.id)
