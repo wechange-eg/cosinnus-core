@@ -3,7 +3,9 @@
 
 {% block extrahead %}
     {{ block.super }}
-    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
+    {% if not "description" in SETTINGS.COSINNUS_USERPROFILE_HIDDEN_FIELDS %}
+        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
+    {% endif %}
 {% endblock %}
 
 {% block page_title %}
@@ -84,11 +86,13 @@
 
                 {% block userprofile_about_fields %}
                     
-                    {# SimpleMDE Description Field (gets initialized in extrahead) #}
-                    {# Large Field #}
-					{% trans "Who are you and what motivates you?" as description_label %}
-					{% trans "Tell others something about you!" as  description_placeholder %}
-					{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description label=description_label placeholder=description_placeholder large_field=True %}
+                    {% if not "description" in SETTINGS.COSINNUS_USERPROFILE_HIDDEN_FIELDS %}
+	                    {# SimpleMDE Description Field (gets initialized in extrahead) #}
+	                    {# Large Field #}
+						{% trans "Who are you and what motivates you?" as description_label %}
+						{% trans "Tell others something about you!" as  description_placeholder %}
+						{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description label=description_label placeholder=description_placeholder large_field=True %}
+					{% endif %}
 					                    
                     {# Regular Field #}
 					{% trans "Website" as website_label %}

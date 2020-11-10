@@ -14,6 +14,8 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import filter_active_users,\
     get_user_query_filter_for_search_terms, get_user_select2_pills
 from cosinnus.views.user import UserSelect2View
+from django.core.exceptions import PermissionDenied
+from cosinnus.models.profile import get_user_profile_model
 
 
 class GroupMembersView(RequireGroupMember, Select2View):
@@ -92,6 +94,41 @@ class TagsView(Select2View):
         return (NO_ERR_RESP, has_more, tags)
 
 
+class DynamicFreetextChoicesView(Select2View):
+    
+    field_name = None
+    
+    def dispatch(self, request, *args, **kwargs):
+        if 'field_name' in kwargs:
+            self.field_name = kwargs.pop('field_name')
+            return super(DynamicFreetextChoicesView, self).dispatch(request, *args, **kwargs)
+    
+    def check_all_permissions(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            raise PermissionDenied('Only authenticated users have access to this endpoint')
+    
+    def get_results(self, request, term, page, context):
+        term = term.lower()
+        start = (page - 1) * 10
+        end = page * 10
+        
+        # TODO NEXT: actual filtering!
+        return (NO_ERR_RESP, False, [('ha','ha'), ('LOl', 'LOl')])
+        
+        q = Q(**{f'extra_fields__{self.field_name}__icontains': term})
+        qs = get_user_profile_model().objects.filter(q)
+        
+        count = qs.count()
+        if count < start:
+            raise Http404
+        has_more = count > end
+        
+        matches = qs.values_list(f'extra_fields__{self.field_name}', f'extra_fields__{self.field_name}')
+        text_choices = list(matches.all()[start:end])
+
+        return (NO_ERR_RESP, has_more, text_choices)
+
+
 class GroupsView(Select2View):
     
     def get_results(self, request, term, page, context):
@@ -132,4 +169,5 @@ class GroupsView(Select2View):
 group_members = GroupMembersView.as_view()
 all_members = AllMembersView.as_view()
 tags_view = TagsView.as_view()
+dynamic_freetext_choices_view = DynamicFreetextChoicesView.as_view()
 groups_view = GroupsView.as_view()

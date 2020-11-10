@@ -58,7 +58,6 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         
         # needs to be initialized here because using reverser_lazy() at model instantiation time causes problems
         self.fields['tags'] = TagSelect2Field(required=False, data_url=reverse_lazy('cosinnus:select2:tags'))
-        
         # inherit tags from group for new TaggableObjects
         preresults = []
         if self.instance.pk:
@@ -70,7 +69,7 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
             self.fields['tags'].choices = preresults
             self.fields['tags'].initial = [key for key,val in preresults]#[tag.name for tag in self.instance.tags.all()]
             self.initial['tags'] = self.fields['tags'].initial
-            
+        
         # if no media tag data was supplied the object was created directly and not through a frontend form
         # we then manually inherit the group's media_tag topics by adding them to the data 
         # (usually they would have been added into the form's initial data)

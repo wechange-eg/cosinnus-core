@@ -459,6 +459,13 @@ class CosinnusConf(AppConf):
     # default number of days offers in the Marketplace stay active
     MARKETPLACE_OFFER_ACTIVITY_DURATION_DAYS = 30
     
+    # if True, form fields will show a Required label for required fields
+    # instead of showing an Optional label for optional fields
+    FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL = False
+    
+    # label for required fields
+    FIELDS_REQUIRED_LABEL = '*'
+    
     # Default starting map coordinates if no coordinates have been specified
     # currently: central europe with germany centered
     COSINNUS_MAP_OPTIONS = {
@@ -653,6 +660,9 @@ class CosinnusConf(AppConf):
     # opt-in checkbox will be shown to let the user choose if they wish to 
     # receive a newsletter
     USERPROFILE_ENABLE_NEWSLETTER_OPT_IN = False
+    
+    # base fields of the user profile form to hide in form and detail view
+    USERPROFILE_HIDDEN_FIELDS = []
     
     # extra fields for the user profile.
     # usage:

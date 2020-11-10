@@ -174,10 +174,26 @@ body div {
 			}
 		}
 	}
+	&.select2-with-searchbox {
+	    margin-top: -40px;
+	    
+	    .select2-search {
+	        padding-left: 0;
+	        padding-right: 0;
+	    }
+        input {
+            border: none;
+            height: 40px !important;
+            padding-left: 10px;
+            padding-right: 10px;
+        }	    
+	}
 }
 
-.select2-input {
-    font-family: Verdana, Geneva, sans-serif !important;
+.select2-input,
+.select2-with-searchbox input {
+    font-family: @font-regular !important;
+    font-size: 14px !important;
 }
 
 .error a.select2-choice {

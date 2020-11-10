@@ -20,5 +20,6 @@ for url_key in group_model_registry:
 urlpatterns += [
     url(r'members/$', select2.all_members, name='all-members'),
     url(r'tags/$', select2.tags_view, name='tags'),
+    url(r'freetext_choices/(?P<field_name>[^/]+)/$', select2.dynamic_freetext_choices_view, name='dynamic-freetext-choices'),
     url(r'groups/$', select2.groups_view, name='groups'),
 ]

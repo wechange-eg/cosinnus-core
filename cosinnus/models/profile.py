@@ -2,49 +2,53 @@
 from __future__ import unicode_literals
 
 from builtins import object
-import six
-import django
+import copy
+from django_select2.fields import Select2ChoiceField
+from django_select2.widgets import Select2Widget
+import logging
 
+from annoying.functions import get_object_or_None
+from django import forms
+import django
 from django.apps import apps
+from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
-from django.urls import reverse
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.cache import cache
+from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.db import models, transaction
 from django.db.models.signals import post_save, class_prepared
+from django.template.loader import render_to_string
+from django.urls import reverse
+from django.urls.base import reverse_lazy
 from django.utils.encoding import python_2_unicode_compatible, force_text
+from django.utils.html import strip_tags
+from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
-
+from django_countries.fields import CountryField
 from jsonfield import JSONField
+from phonenumber_field.formfields import PhoneNumberField
+import six
 
 from cosinnus.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
-from cosinnus.utils.files import get_avatar_filename, image_thumbnail,\
-    image_thumbnail_url
-from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
-from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core import signals
-from cosinnus.models.tagged import LikeableObjectMixin
-from cosinnus.utils.group import get_cosinnus_group_model
-from django.contrib.staticfiles.templatetags.staticfiles import static
-from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
-import copy
 from cosinnus.core.mail import send_mail_or_fail_threaded
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-from django.utils.safestring import mark_safe
-from cosinnus.utils.user import get_newly_registered_user_email
-from annoying.functions import get_object_or_None
-from cosinnus.models.mixins.indexes import IndexingUtilsMixin
-
-import logging
-from django import forms
-from django_countries.fields import CountryField
-from django.contrib.contenttypes.fields import GenericRelation
-from cosinnus.models.managed_tags import CosinnusManagedTag,\
-    CosinnusManagedTagAssignmentModelMixin
 from cosinnus.dynamic_fields import dynamic_fields
+from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField, \
+    HeavySelect2FreeTextChoiceWidget, HeavySelect2MultipleFreeTextChoiceWidget
+from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
+from cosinnus.models.mixins.indexes import IndexingUtilsMixin
+from cosinnus.models.tagged import LikeableObjectMixin
+from cosinnus.utils.files import get_avatar_filename, image_thumbnail, \
+    image_thumbnail_url
+from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.utils.user import get_newly_registered_user_email
+from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
+
 
 logger = logging.getLogger('cosinnus')
 
@@ -546,22 +550,27 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
     """ Base for the Mixins for the UserProfile or User modelforms that
         add functionality for by-portal configured extra profile form fields """
     
+    CHOICE_FIELD_PLACEHOLDER = object()
+    
     # a choice of field types for the settings dict values of `COSINNUS_USERPROFILE_EXTRA_FIELDS`
     # these will be initialized as variable form fields for the fields in `self.extra_fields`
     EXTRA_FIELD_TYPE_FORMFIELDS = {
         dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT: (forms.CharField, {}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT_AREA: (forms.CharField, {'widget': forms.Textarea}),
-        dynamic_fields.DYNAMIC_FIELD_TYPE_INT: (forms.CharField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_INT: (forms.IntegerField, {}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: (forms.BooleanField, {}),
-        dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: (forms.CharField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: (forms.DateField, {}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_COUNTRY: (_make_country_formfield, {}),
-        dynamic_fields.DYNAMIC_FIELD_TYPE_PHONE: (forms.CharField, {}),
-        dynamic_fields.DYNAMIC_FIELD_TYPE_URL: (forms.CharField, {}),
-        dynamic_fields.DYNAMIC_FIELD_TYPE_PREDEFINED_CHOICES_TEXT: (forms.CharField, {}),
-        dynamic_fields.DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT: (forms.CharField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_PHONE: (PhoneNumberField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_URL: (forms.URLField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_PREDEFINED_CHOICES_TEXT: (CHOICE_FIELD_PLACEHOLDER, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT: (CHOICE_FIELD_PLACEHOLDER, {}),
+        # TODO: a choice field of user id of a user list given by the managed tag chosen by admins
         dynamic_fields.DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD: (forms.CharField, {}),
-        dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT: (forms.CharField, {}),
-        dynamic_fields.DYNAMIC_FIELD_TYPE_MULTI_ADDRESS: (forms.CharField, {}),
+        # TODO: make this a select 2 tag field with space-tag support
+        dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT: (CHOICE_FIELD_PLACEHOLDER, {}), 
+        # TODO: make this a custom field with value parsing and template
+        dynamic_fields.DYNAMIC_FIELD_TYPE_MULTI_ADDRESS: (forms.CharField, {'widget': forms.Textarea}),
     }
     # if set to a string, will only include such fields in the form
     # that have the given option name set to True in `COSINNUS_USERPROFILE_EXTRA_FIELDS`
@@ -608,8 +617,39 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
                 'required': field_options.required,
                 'disabled': field_options.readonly,
             }
+            # add extra kwargs from definitions
             if formfield_extra_kwargs:
                 formfield_kwargs.update(formfield_extra_kwargs)
+            is_large_field = bool(formfield_extra_kwargs.get('widget', None) == forms.Textarea)
+            # for choice fields, determine if multiple is used and add choices
+            if formfield_class == self.CHOICE_FIELD_PLACEHOLDER:
+                # check for multiple
+                if field_options.multiple:
+                    formfield_class = CommaSeparatedSelect2MultipleChoiceField
+                else:
+                    formfield_class = Select2ChoiceField
+                    formfield_kwargs['widget'] = Select2Widget(select2_options={'allowClear': False})
+                # pre-fill choices
+                if field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_PREDEFINED_CHOICES_TEXT:
+                    formfield_kwargs['choices'] = field_options.choices
+                elif field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT:
+                    choices = [('', _('(No choice)'))] if field_options.required else []
+                    predefined_choices = CosinnusPortal.get_current().dynamic_field_choices.get(field_name, None)
+                    if predefined_choices:
+                        choices += [(val, val) for val in predefined_choices]
+                    formfield_kwargs['choices'] = choices
+                elif field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT:
+                    formfield_class = forms.CharField
+                    data_url = reverse_lazy('cosinnus:select2:dynamic-freetext-choices', kwargs={'field_name': field_name})
+                    if field_options.multiple:
+                        formfield_kwargs['widget'] = HeavySelect2MultipleFreeTextChoiceWidget(data_url=data_url)
+                    else:
+                        formfield_kwargs['widget'] = HeavySelect2FreeTextChoiceWidget(data_url=data_url)
+                    is_large_field = True
+                    # TODO NEXT: proper initial value initialisation
+                    if False and self.initial[field_name]:
+                        formfield_kwargs['choices'] = [(val, val) for val in self.initial[field_name]]
+                    
             # initialze formfield
             self.fields[field_name] = formfield_class(
                 **formfield_kwargs
@@ -617,7 +657,8 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
             setattr(self.fields[field_name], 'label', field_options.label)
             setattr(self.fields[field_name], 'legend', field_options.legend)
             setattr(self.fields[field_name], 'placeholder', field_options.placeholder)
-            setattr(self.fields[field_name], 'large_field', bool(formfield_extra_kwargs.get('widget', None) == forms.Textarea)) 
+            setattr(self.fields[field_name], 'large_field', is_large_field) 
+            setattr(self.fields[field_name], 'dynamic_field_type', field_options.type) 
             
             # "register" the extra field additionally
             field_map[field_name] = self.fields[field_name]
