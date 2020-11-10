@@ -165,7 +165,10 @@ def get_user_query_filter_for_search_terms(terms):
         
 
 # very similar to create_user but uses UserCreateForm from django.contrib.auth as the one from cosinnus.forms.user requires a captcha
-def create_base_user(email, username=None, password=None, first_name=None, last_name=None):
+def create_base_user(email, username=None, password=None, first_name=None, last_name=None, no_generated_password=False):
+    """ :param no_generated_password: set password generation behaviour. If False Password will be kept with None
+        :type no_generated_password: bool | default False
+    """
 
     from django.contrib.auth.forms import UserCreationForm
     from cosinnus.models.profile import get_user_profile_model
@@ -182,21 +185,30 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
     except ObjectDoesNotExist:
         pass
 
-    if not password:
+    if not password and no_generated_password:
+        # special handling for user without password
+        user_model = get_user_model()
+
+        # check if user with that password already exist
+        user, created = user_model.objects.get_or_create(username=username)
+        if not created:
+            logger.error('Manual user creation failed. A user with tha username already exists!')
+
+    else:
         password = get_random_string()
 
-    user_data = {
-        'username': username or get_random_string(),
-        'password1': password,
-        'password2': password
-    }
+        user_data = {
+            'username': username or get_random_string(),
+            'password1': password,
+            'password2': password
+        }
 
-    form = UserCreationForm(user_data)
-    if form.is_valid():
-        user = form.save()
-    else:
-        logger.warning('Manual user creation failed because of form errors!', extra={'data': data, 'form-errors': form.errors})
-        return False
+        form = UserCreationForm(user_data)
+        if form.is_valid():
+            user = form.save()
+        else:
+            logger.warning('Manual user creation failed because of form errors!', extra={'data': user_data, 'form-errors': form.errors})
+            return False
 
     user.email = email
     if not username:
