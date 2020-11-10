@@ -1,0 +1,45 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block page_title %}{% trans "Create new User" %} - {% trans "Edit" %}{% endblock %}
+
+{% block leftnav %}
+{% include 'cosinnus/administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+<li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+<li><a href="{% url 'cosinnus:administration-users' %}">{% trans "User Management" %}</a></li>
+<li class="active">{% trans "User" %}</li>
+{% endblock %}
+
+{% block content %}
+<form method="post" class="cosinnus-form form-horizontal">{% csrf_token %}
+    <div class="content-box">
+        {% trans "Email" as email_label %}
+        {% trans "Email" as email_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.email label=email_label placeholder=email_placeholder large_field=True %}
+
+        {% trans "Firstname" as first_name_label %}
+        {% trans "Firstname" as first_name_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.first_name label=first_name_label placeholder=first_name_placeholder large_field=True %}
+
+        {% trans "Lastname" as last_name_label %}
+        {% trans "Lastname" as last_name_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.last_name label=last_name_label placeholder=last_name_placeholder large_field=True %}
+    </div>
+
+    <button type="submit" class="btn btn-emphasized btn-autosize">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-floppy-o"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Save" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+</form>
+{% endblock %}

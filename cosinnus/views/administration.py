@@ -10,7 +10,8 @@ from django.views.generic.list import ListView
 from cosinnus.utils.permissions import check_user_superuser
 from django.core.exceptions import PermissionDenied
 from django.views.generic.base import TemplateView
-from cosinnus.forms.administration import UserWelcomeEmailForm, NewsletterForGroupForm
+from cosinnus.forms.administration import (UserWelcomeEmailForm,
+NewsletterForGroupForm, UserAdminForm)
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.newsletter import Newsletter
 from django.urls.base import reverse
@@ -19,6 +20,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import get_user_model
 
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.html import render_html_with_variables
@@ -180,3 +182,43 @@ class GroupNewsletterUpdateView(GroupNewsletterMixin, UpdateView):
         return kwargs
 
 group_newsletter_update = GroupNewsletterUpdateView.as_view()
+
+
+class UserListView(GroupNewsletterMixin, ListView):
+    model = get_user_model()
+    template_name = 'cosinnus/administration/user_list.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not check_user_superuser(request.user):
+            raise PermissionDenied('You do not have permission to access this page.')
+        return super().dispatch(request, *args, **kwargs)
+
+user_list = UserListView.as_view()
+
+class UserUpdateView(UpdateView):
+    model = get_user_model()
+    form_class = UserAdminForm
+    template_name = 'cosinnus/administration/user_form.html'
+    pk_url_kwarg = 'user_id'
+    success_url = reverse_lazy('cosinnus:administration-users')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not check_user_superuser(request.user):
+            raise PermissionDenied('You do not have permission to access this page.')
+        return super().dispatch(request, *args, **kwargs)
+
+user_update = UserUpdateView.as_view()
+
+
+class UserCreateView(CreateView):
+    model = get_user_model()
+    form_class = UserAdminForm
+    template_name = 'cosinnus/administration/user_form.html'
+    success_url = reverse_lazy('cosinnus:administration-users')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not check_user_superuser(request.user):
+            raise PermissionDenied('You do not have permission to access this page.')
+        return super().dispatch(request, *args, **kwargs)
+
+user_add = UserCreateView.as_view()
