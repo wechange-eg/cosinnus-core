@@ -24,7 +24,7 @@ from django.contrib import messages
 from cosinnus.models.profile import get_user_profile_model,\
     PROFILE_SETTING_EMAIL_TO_VERIFY, PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN,\
     PROFILE_SETTING_FIRST_LOGIN, GlobalBlacklistedEmail,\
-    GlobalUserNotificationSetting
+    GlobalUserNotificationSetting, PROFILE_SETTING_PASSWORD_NOT_SET
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusPortal,\
     CosinnusUnregisterdUserGroupInvite, CosinnusGroupMembership, \
@@ -49,7 +49,7 @@ from cosinnus.utils.user import filter_active_users,\
     get_newly_registered_user_email, accept_user_tos_for_portal,\
     get_user_query_filter_for_search_terms, get_user_select2_pills,\
     get_group_select2_pills
-from uuid import uuid1
+from uuid import uuid1, uuid4
 from django.utils.encoding import force_text
 from cosinnus.core import signals
 from django.dispatch.dispatcher import receiver
@@ -780,6 +780,34 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
         subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
         send_mail_or_fail_threaded(new_email, subj_user, None, data)
         
+
+def email_first_login_token_to_user(user, request=None, user_has_just_registered=True):
+    """ Sets the profile variables for a user to login without a set password,
+        and sends out an email with a verification URL to the user.
+    """
+
+    # the verification param for the URL consists of <user-id>-<uuid>, where the uuid is saved to the user's profile
+    a_uuid = uuid4()
+    login_url_param = '%d-%s' % (user.id, a_uuid)
+    user.cosinnus_profile.settings[PROFILE_SETTING_PASSWORD_NOT_SET] = a_uuid
+    user.cosinnus_profile.save()
+
+    # message user for email verification
+    if request:
+        data = get_common_mail_context(request)
+        data.update({
+            'user': user,
+            'user_email': user.email,
+            'verification_url_param': login_url_param,
+            'next': redirect_with_next('', request),
+        })
+        template = 'cosinnus/mail/user_email_verification%s.html' % ('_onchange' if not user_has_just_registered else '')
+
+        data.update({
+            'content': render_to_string(template, data),
+        })
+        subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
+        send_mail_or_fail_threaded(user.email, subj_user, None, data)
 
 
 def user_api_me(request):

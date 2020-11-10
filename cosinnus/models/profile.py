@@ -52,6 +52,9 @@ logger = logging.getLogger('cosinnus')
 # address and this long is bound to his old email (or to a scrambled, unusable one if they just registered)
 PROFILE_SETTING_EMAIL_TO_VERIFY = 'email_to_verify'
 PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN = 'email_verification_pwd'
+# a user with the following settings has not set an initial password yet.
+# the user can only loginwith the given token and is redirected to the `set password view`
+PROFILE_SETTING_PASSWORD_NOT_SET = 'password_not_set'
 # a list of urls to redirect the user to on next page hit (only first in list), enforced by middleware
 PROFILE_SETTING_REDIRECT_NEXT_VISIT = 'redirect_next'
 # first login datetime, used to determine if user first logged in
