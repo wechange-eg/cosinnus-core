@@ -129,6 +129,10 @@
                 {% if showIcon == 1 %}<i class="fa fa-building"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Organizations" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "cloudfiles" %}
+                {% if showIcon == 1 %}<i class="fa fa-cloud"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Cloud Files" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% endif %}
     </span>

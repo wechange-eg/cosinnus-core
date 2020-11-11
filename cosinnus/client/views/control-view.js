@@ -108,6 +108,11 @@ module.exports = ContentControlView.extend({
         	self.defaults.availableFilters['organizations'] = true;
         	self.defaults.activeFilters['organizations'] = true;
         }
+
+        if (COSINNUS_CLOUD_ENABLED) {
+            self.defaults.availableFilterList['cloudfiles'] = true;
+            self.defaults.activeFilters['cloudfiles'] = true;
+        }
         
         ContentControlView.prototype.initialize.call(self, options, app, collection);
         
@@ -553,7 +558,10 @@ module.exports = ContentControlView.extend({
             var data = util.parseDirectItemId(directItemId);
         }
         util.log('tile-view.js: got a select click event! data: ' + JSON.stringify(data));
-        
+        if (data.type == "cloudfile") {
+            window.open(data.slug);
+            return;
+        }
         // check if this item is in the local detail Result cache
         var result = null;
         if (directItemId in self.detailResultCache) {
@@ -1257,6 +1265,10 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_ORGANIZATIONS_ENABLED) {
         	this.state.activeFilters['organizations'] = this.options.availableFilters.organizations ? util.ifundef(urlParams.organizations, this.options.activeFilters.organizations) : false;
         }
+        if (COSINNUS_CLOUD_ENABLED) {
+            this.state.activeFilters['cloudfiles'] = this.options.availableFilterList.cloudfiles ? util.ifundef(urlParams.cloudfiles, this.options.activeFilters.cloudfiles) : false;
+        }
+
         if (cosinnus_active_user) {
         	this.options.showMine = util.ifundef(urlParams.mine, this.options.showMine);
         }
@@ -1279,6 +1291,11 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_ORGANIZATIONS_ENABLED) {
         	_.extend(searchParams, {
         		organizations: this.state.activeFilters.organizations
+            });
+        }
+        if (COSINNUS_CLOUD_ENABLED) {
+            _.extend(searchParams, {
+                cloudfiles: this.state.activeFilters.cloudfiles
             });
         }
         if (this.state.activeTopicIds.length > 0) {

@@ -37,6 +37,9 @@ def _generate_type_settings(types=[]):
     if settings.COSINNUS_ORGANIZATIONS_ENABLED:
         options['availableFilters']['organizations'] = 'organizations' in types
         options['activeFilters']['organizations'] = 'organizations' in types
+    if settings.COSINNUS_CLOUD_ENABLED:
+        options['availableFilters']['cloudfiles'] = 'cloudfiles' in types
+        options['activeFilters']['cloudfiles'] = 'cloudfiles' in types
     
     return options
         
@@ -160,6 +163,8 @@ class TileView(BaseMapView):
                 return _('Organizations')
         if self.types == ['people']:
             return _('People')
+        if self.types == ['cloudfiles']:
+            return _('Cloud Files')
         
         return None
     

@@ -546,9 +546,36 @@ class DetailedOrganizationMapResult(DetailedMapResult):
             'groups': [HaystackGroupMapCard(result) for result in sqs]
         })
         
-        ret = super(DetailedOrganizationMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
-        return ret
+        super(DetailedOrganizationMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
+
+
+class CloudfileMapCard(BaseMapCard):
+    fields = BaseMapCard.fields.copy()
+    fields.update({
+        "mtime": None,
+        "mime": None,
+        "size": None,
+        "excerpt": None,
+    })
+
+    def __init__(self, document, *args, **kwargs):
+        try:
+            excerpt = document['excerpts'][0]['excerpt']
+        except LookupError:
+            excerpt = None
+
+        super().__init__(
+            id=document['id'],
+            type="cloudfile",
+            slug=f"{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}{document['link']}",
+            title=document['title'],
+            mime=document['info']['mime'],
+            size=document['info']['size'],
+            mtime=document['info']['mtime'],
+            excerpt=f"<b>{excerpt}</b>",
+            **kwargs
+        )
 
 SHORTENED_ID_MAP = {
     'cosinnus.cosinnusproject': 1,

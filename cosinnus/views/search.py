@@ -18,7 +18,7 @@ from cosinnus.utils.pagination import QuerysetLazyCombiner
 import math
 import logging
 from django.db.models.query_utils import Q
-import _functools
+import functools
 import operator
 
 logger = logging.getLogger('cosinnus')
@@ -165,7 +165,7 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
         
         # filter the queryset to contain all of the query terms in their main title/name field
         expressions = [Q(**{'%s__icontains' % filter_field: term}) for term in self.query_terms]
-        anded_expressions = _functools.reduce(operator.and_, expressions)
+        anded_expressions = functools.reduce(operator.and_, expressions)
         queryset = queryset.filter(anded_expressions)
         return queryset
     

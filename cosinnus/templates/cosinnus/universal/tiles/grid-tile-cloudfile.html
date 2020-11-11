@@ -1,0 +1,14 @@
+{% extends 'tiles/grid-tile-base' %}
+{% import "include/macros.html" as macros %}
+
+{% block description_area %}
+    <h1>
+    {{title}}
+    </h1>
+    {% if excerpt %}
+        <div class="tile-section tile-description">{{excerpt}}</div>
+    {% endif %}
+{% endblock %}
+
+{% block icon_area %}
+{% endblock %}

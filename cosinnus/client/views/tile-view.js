@@ -6,6 +6,10 @@ var util = require('lib/util');
 
 var tileTemplateDefault = require('tiles/grid-tile-default');
 
+if (COSINNUS_CLOUD_ENABLED) {
+    var tileTemplateCloudfile = require('tiles/grid-tile-cloudfile');
+}
+
 module.exports = BaseView.extend({
     
     // reference back to the main App
@@ -38,6 +42,9 @@ module.exports = BaseView.extend({
     /** Adjust this view's template based on the result type it displays (and other states) */
     fitTemplate: function () {
         var self = this;
+        if (self.model.get('type') == 'cloudfile') {
+            self.template = tileTemplateCloudfile;
+        }
         if (self.model.get('type') == 'people') {
             self.state.isSmall = true;
         } 
