@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 from django.http import HttpResponseRedirect
 from django.utils import timezone
@@ -195,12 +196,13 @@ class UserListView(GroupNewsletterMixin, ListView):
 
 user_list = UserListView.as_view()
 
-class UserUpdateView(UpdateView):
+class UserUpdateView(SuccessMessageMixin, UpdateView):
     model = get_user_model()
     form_class = UserAdminForm
     template_name = 'cosinnus/administration/user_form.html'
     pk_url_kwarg = 'user_id'
     success_url = reverse_lazy('cosinnus:administration-users')
+    success_message = _("User successfully updated!")
 
     def dispatch(self, request, *args, **kwargs):
         if not check_user_superuser(request.user):
@@ -210,11 +212,12 @@ class UserUpdateView(UpdateView):
 user_update = UserUpdateView.as_view()
 
 
-class UserCreateView(CreateView):
+class UserCreateView(SuccessMessageMixin, CreateView):
     model = get_user_model()
     form_class = UserAdminForm
     template_name = 'cosinnus/administration/user_form.html'
     success_url = reverse_lazy('cosinnus:administration-users')
+    success_message = _("User successfully created!")
 
     def dispatch(self, request, *args, **kwargs):
         if not check_user_superuser(request.user):
