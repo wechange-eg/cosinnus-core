@@ -21,6 +21,7 @@ module.exports = BaseView.extend({
             'default': '/search/?q={{q}}',
             'map': '/map/?q={{q}}',
             'groups': '/search/?groups=mine&q={{q}}',
+            'cloudfiles': '/search/cloudfiles/?q={{q}}'
         },
         topicsSearchMethods: {
             // <title>: <url>,

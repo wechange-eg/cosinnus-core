@@ -126,6 +126,10 @@ class TileView(BaseMapView):
         _settings.update({
             'showMine': self.show_mine,
         })
+        if 'cloudfiles' in self.types:
+            _settings.update({
+                'hideTopics': True,
+            })
         options.update({
             'settings': _settings,
             'display': {

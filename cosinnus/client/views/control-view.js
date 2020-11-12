@@ -43,6 +43,7 @@ module.exports = ContentControlView.extend({
         fullscreen: false,
         splitscreen: false,
         showMine: false, // URL param. if true, only the current user's own results will be shown. ignored away if user is not logged in.
+        hideTopics: false,
         
         paginationControlsEnabled: true, 
         paginationControlsUseInfiniteScroll: false, // if true, the pagination controls will be hidden and infinite scroll will be used
@@ -111,7 +112,7 @@ module.exports = ContentControlView.extend({
 
         if (COSINNUS_CLOUD_ENABLED) {
             self.defaults.availableFilterList['cloudfiles'] = true;
-            self.defaults.activeFilters['cloudfiles'] = true;
+            self.defaults.activeFilters['cloudfiles'] = false;
         }
         
         ContentControlView.prototype.initialize.call(self, options, app, collection);

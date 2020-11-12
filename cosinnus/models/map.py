@@ -573,7 +573,7 @@ class CloudfileMapCard(BaseMapCard):
             mime=document['info']['mime'],
             size=document['info']['size'],
             mtime=document['info']['mtime'],
-            excerpt=f"<b>{excerpt}</b>",
+            excerpt=excerpt,
             **kwargs
         )
 
