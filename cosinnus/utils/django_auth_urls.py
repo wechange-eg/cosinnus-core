@@ -7,6 +7,7 @@ from django.conf.urls import url
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal,\
     is_sso_portal
 from cosinnus.forms.user import UserEmailLoginForm
+from cosinnus.views.user import SetInitialPasswordView
 from cosinnus.views import common, sso, user, integrated
 from django.contrib.auth.views import PasswordChangeDoneView,\
     PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
@@ -68,8 +69,8 @@ if not is_integrated_portal():
 
         # set initial password
         urlpatterns += [
-            url(r'password_set_initial/$',
-                PasswordResetConfirmView.as_view(template_name='cosinnus/registration/password_set_initial_form.html'),
+            url(r'password_set_initial/(?P<token>[0-9A-Za-z_\-]+)$',
+                SetInitialPasswordView.as_view(template_name='cosinnus/registration/password_set_initial_form.html'),
                 name='password_set_initial'),
         ]
 
