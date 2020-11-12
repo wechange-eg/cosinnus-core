@@ -19,6 +19,7 @@ import {ManageRoomButtons} from "../components/ManageRoomButtons"
 import {Room} from "../../stores/room/models"
 import {EventRoomState} from "../../stores/events/reducer"
 import {Loading} from "../components/Loading"
+import {Header} from "../components/Header"
 
 interface LobbyProps {
   events: EventRoomState
@@ -53,6 +54,7 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
   return (
     <Grid container>
       <Content>
+        <Header />
         <Typography component="h1">
           <FormattedMessage id="Agenda" />
         </Typography>

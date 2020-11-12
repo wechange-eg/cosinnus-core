@@ -12,6 +12,9 @@ export interface ConferenceJson {
   }
   theme_color: string
   dates: string[]
+  avatar: string
+  wallpaper: string
+  images: string[]
 }
 
 export interface ConferenceProps {
@@ -26,6 +29,9 @@ export interface ConferenceProps {
   }
   themeColor: string
   dates: string[]
+  avatar: string
+  wallpaper: string
+  images: string[]
 }
 
 export class Conference {
@@ -54,6 +60,9 @@ export class Conference {
       },
       themeColor: json.theme_color,
       dates: json.dates,
+      avatar: json.avatar,
+      wallpaper: json.wallpaper,
+      images: json.images,
     }
     if (json.rooms != null) {
       json.rooms.forEach((room: any) => {
@@ -89,6 +98,9 @@ export class Conference {
       },
       theme_color: props.themeColor,
       dates: props.dates,
+      avatar: props.avatar,
+      wallpaper: props.wallpaper,
+      images: props.images,
     }
   }
 

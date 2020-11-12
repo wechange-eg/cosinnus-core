@@ -72,6 +72,13 @@ function NavConnector(props: NavProps) {
       }}
     >
       <div className={classes.drawerHeader}>
+        {conference.props.avatar && (
+          <img
+            src={conference.props.avatar}
+            alt={conference.props.name}
+            className={classes.logo}
+          />
+        )}
         <Typography component="h3">{conference.props.name}</Typography>
         <Typography component="h4">{conference.props.description}</Typography>
         <Link
