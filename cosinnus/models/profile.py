@@ -641,14 +641,17 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
                 elif field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT:
                     formfield_class = forms.CharField
                     data_url = reverse_lazy('cosinnus:select2:dynamic-freetext-choices', kwargs={'field_name': field_name})
+                    # use single/multi choice pre-selections of existing values, this is just for initial values
+                    choices = []
                     if field_options.multiple:
-                        formfield_kwargs['widget'] = HeavySelect2MultipleFreeTextChoiceWidget(data_url=data_url)
+                        if self.initial[field_name]:
+                            choices = [(val, val) for val in self.initial[field_name]]
+                        formfield_kwargs['widget'] = HeavySelect2MultipleFreeTextChoiceWidget(data_url=data_url, choices=choices)
                     else:
-                        formfield_kwargs['widget'] = HeavySelect2FreeTextChoiceWidget(data_url=data_url)
+                        if self.initial[field_name]:
+                            choices = [(self.initial[field_name], self.initial[field_name])]
+                        formfield_kwargs['widget'] = HeavySelect2FreeTextChoiceWidget(data_url=data_url, choices=choices)
                     is_large_field = True
-                    # TODO NEXT: proper initial value initialisation
-                    if False and self.initial[field_name]:
-                        formfield_kwargs['choices'] = [(val, val) for val in self.initial[field_name]]
                     
             # initialze formfield
             self.fields[field_name] = formfield_class(
