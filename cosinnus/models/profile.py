@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from builtins import object
 import copy
-from django_select2.fields import Select2ChoiceField
+from django_select2.fields import Select2ChoiceField, Select2MultipleChoiceField
 from django_select2.widgets import Select2Widget
 import logging
 
@@ -36,8 +36,7 @@ from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.core import signals
 from cosinnus.core.mail import send_mail_or_fail_threaded
 from cosinnus.dynamic_fields import dynamic_fields
-from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField, \
-    HeavySelect2FreeTextChoiceWidget, HeavySelect2MultipleFreeTextChoiceWidget
+from cosinnus.forms.select2 import HeavySelect2FreeTextChoiceWidget, HeavySelect2MultipleFreeTextChoiceWidget
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
@@ -625,7 +624,7 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
             if formfield_class == self.CHOICE_FIELD_PLACEHOLDER:
                 # check for multiple
                 if field_options.multiple:
-                    formfield_class = CommaSeparatedSelect2MultipleChoiceField
+                    formfield_class = Select2MultipleChoiceField
                 else:
                     formfield_class = Select2ChoiceField
                     formfield_kwargs['widget'] = Select2Widget(select2_options={'allowClear': False})
@@ -639,18 +638,23 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
                         choices += [(val, val) for val in predefined_choices]
                     formfield_kwargs['choices'] = choices
                 elif field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT:
-                    formfield_class = forms.CharField
                     data_url = reverse_lazy('cosinnus:select2:dynamic-freetext-choices', kwargs={'field_name': field_name})
-                    # use single/multi choice pre-selections of existing values, this is just for initial values
+                    # use single/multi choice pre-selections of initial and entered values, so choices are always valid
                     choices = []
                     if field_options.multiple:
-                        if self.initial[field_name]:
-                            choices = [(val, val) for val in self.initial[field_name]]
+                        if self.initial[field_name] is not None:
+                            choices += [(val, val) for val in self.initial[field_name]]
+                        if self.data is not None and field_name in self.data:
+                            choices += [(val, val) for val in self.data.getlist(field_name)]
                         formfield_kwargs['widget'] = HeavySelect2MultipleFreeTextChoiceWidget(data_url=data_url, choices=choices)
+                        formfield_kwargs['choices'] = choices
                     else:
-                        if self.initial[field_name]:
-                            choices = [(self.initial[field_name], self.initial[field_name])]
+                        if self.initial[field_name] is not None:
+                            choices += [(self.initial[field_name], self.initial[field_name])]
+                        if self.data is not None and field_name in self.data:
+                            choices += [(self.data.get(field_name), self.data.get(field_name))]
                         formfield_kwargs['widget'] = HeavySelect2FreeTextChoiceWidget(data_url=data_url, choices=choices)
+                        formfield_kwargs['choices'] = choices
                     is_large_field = True
                     
             # initialze formfield
@@ -662,6 +666,9 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
             setattr(self.fields[field_name], 'placeholder', field_options.placeholder)
             setattr(self.fields[field_name], 'large_field', is_large_field) 
             setattr(self.fields[field_name], 'dynamic_field_type', field_options.type) 
+            
+            # TODO NEXT: multi dynamic field ("arbeitgeber") saves itself as string of array, 
+            # not the array itself
             
             # "register" the extra field additionally
             field_map[field_name] = self.fields[field_name]
