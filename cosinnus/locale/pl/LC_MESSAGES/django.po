@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 15:35+0100\n"
+"POT-Creation-Date: 2020-11-06 17:04+0100\n"
 "PO-Revision-Date: 2020-10-13 13:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -177,6 +177,9 @@ msgid "Bookmarked"
 msgstr ""
 
 msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -1688,11 +1691,73 @@ msgstr "Proste Statystyki"
 msgid "User Welcome Email"
 msgstr "Tekst powitalny e-mail użytkownika"
 
+msgid "Newsletter for groups"
+msgstr ""
+
 msgid "User Dashboard Announcements"
 msgstr "Panel Ogłoszenia Użytkownika"
 
 msgid "Edit"
 msgstr "Edytuj"
+
+msgid "update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "create Newsletter"
+msgstr "Utwórz folder"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Send newsletter to group"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr "Wyślij próbną wiadomość do siebie"
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to send the newsletter?"
+msgstr "Czy na pewno chcesz opuścić „%(title)s“?"
+
+msgid "Send newsletter"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no newsletters yet."
+msgstr "Nie ma widocznych elementów"
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Add newsletter"
+msgstr "Dodaj użytkownika"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "W jednym z wypełnionych pól jest błąd. Popraw go przed zapisaniem!"
@@ -1705,9 +1770,6 @@ msgstr "Zapisz"
 
 msgid "Currently set Welcome-Email Text"
 msgstr "Aktualne ustawienia tekstu powitalnego e-mail"
-
-msgid "Send yourself a Test-Mail"
-msgstr "Wyślij próbną wiadomość do siebie"
 
 msgid "Conference Page"
 msgstr "Strona konferencji"
@@ -4444,10 +4506,8 @@ msgid "Items you follow"
 msgstr "Pomysły, które śledzę"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Here you can find an overview of Ideas you have liked."
-msgid "Here you can find an overview of items you follow."
-msgstr "Tu w przyszłości znajdziesz podgląd pomysłów, które ci się podobają."
+msgid "Nothing here yet."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
@@ -4476,14 +4536,6 @@ msgstr "Możesz dodać własne pomysły za pomocą przycisku ‘+’ w nagłówk
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "Odkryj"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Nothing here yet."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Users you want to remember"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -5106,6 +5158,17 @@ msgstr "Pytania"
 msgid "Test email sent!"
 msgstr "Wiadomość testowa wysłana!"
 
+msgid "Newsletter sent."
+msgstr ""
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "Test email sent."
+msgstr "Wiadomość testowa wysłana!"
+
+msgid "Newsletter has been copied."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Język \"%s\" nie jest wspierany"
@@ -5529,6 +5592,11 @@ msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
 
 #, fuzzy
+#~| msgid "Here you can find an overview of Ideas you have liked."
+#~ msgid "Here you can find an overview of items you follow."
+#~ msgstr "Tu w przyszłości znajdziesz podgląd pomysłów, które ci się podobają."
+
+#, fuzzy
 #~| msgid "Participants"
 #~ msgid "Upload Participants"
 #~ msgstr "Uczestnicy"
@@ -5572,11 +5640,6 @@ msgstr "Twoje zmiany zostały zapisane."
 #~| msgid "Accept Member"
 #~ msgid "Activate Member"
 #~ msgstr "Zaakceptuj Członka"
-
-#, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "Czy na pewno chcesz opuścić „%(title)s“?"
 
 #, fuzzy
 #~| msgid "Remove Member"

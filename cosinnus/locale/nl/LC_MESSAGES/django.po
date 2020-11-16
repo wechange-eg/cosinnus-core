@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 15:35+0100\n"
+"POT-Creation-Date: 2020-11-06 17:04+0100\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -185,6 +185,9 @@ msgid "Bookmarked"
 msgstr ""
 
 msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -1741,11 +1744,73 @@ msgstr "Simpele Statistiek"
 msgid "User Welcome Email"
 msgstr "Welkomst-e-mail voor Gebruikers"
 
+msgid "Newsletter for groups"
+msgstr ""
+
 msgid "User Dashboard Announcements"
 msgstr ""
 
 msgid "Edit"
 msgstr "Wijzig"
+
+msgid "update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "create Newsletter"
+msgstr "Gebruiker aanmaken"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Send newsletter to group"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr "Verzend een Test-mail naar jezelf"
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to send the newsletter?"
+msgstr "Weet u zeker dat je „%(title)s“ wilt verlaten?"
+
+msgid "Send newsletter"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no newsletters yet."
+msgstr "Er zijn nog geen items"
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Add newsletter"
+msgstr "Voeg gebruiker toe"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "Er is een fout opgetreden in een van de velden die u heeft ingevoerd. Corrigeer dit voordat u opslaat!"
@@ -1760,9 +1825,6 @@ msgstr "Opslaan"
 
 msgid "Currently set Welcome-Email Text"
 msgstr "Momenteel ingestelde welkmost-e-mailtekst"
-
-msgid "Send yourself a Test-Mail"
-msgstr "Verzend een Test-mail naar jezelf"
 
 msgid "Conference Page"
 msgstr ""
@@ -4541,10 +4603,8 @@ msgid "Items you follow"
 msgstr "Ideeën die ik volg"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Here you can find an overview of Ideas you have liked."
-msgid "Here you can find an overview of items you follow."
-msgstr "Hier vindt u een overzicht van ideeën die u leuk vindt."
+msgid "Nothing here yet."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
@@ -4573,14 +4633,6 @@ msgstr "U kunt uw eigen ideeën maken via de knop ‘+’ in de koptekst of u ku
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "Ontdekken"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Nothing here yet."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Users you want to remember"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -5229,6 +5281,15 @@ msgstr "Vragen over"
 msgid "Test email sent!"
 msgstr ""
 
+msgid "Newsletter sent."
+msgstr ""
+
+msgid "Test email sent."
+msgstr ""
+
+msgid "Newsletter has been copied."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "De taal “%s” wordt niet ondersteund"
@@ -5675,6 +5736,11 @@ msgid "Your changes have been saved."
 msgstr "Uw veranderingen zijn bewaard."
 
 #, fuzzy
+#~| msgid "Here you can find an overview of Ideas you have liked."
+#~ msgid "Here you can find an overview of items you follow."
+#~ msgstr "Hier vindt u een overzicht van ideeën die u leuk vindt."
+
+#, fuzzy
 #~| msgid "Participants"
 #~ msgid "Upload Participants"
 #~ msgstr "Deelnemers"
@@ -5718,11 +5784,6 @@ msgstr "Uw veranderingen zijn bewaard."
 #~| msgid "Accept Member"
 #~ msgid "Activate Member"
 #~ msgstr "Accepteer lid"
-
-#, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "Weet u zeker dat je „%(title)s“ wilt verlaten?"
 
 #, fuzzy
 #~| msgid "Remove Member"

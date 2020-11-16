@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 15:35+0100\n"
+"POT-Creation-Date: 2020-11-06 17:04+0100\n"
 "PO-Revision-Date: 2020-10-14 09:35+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -177,6 +177,9 @@ msgid "Bookmarked"
 msgstr ""
 
 msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -1687,11 +1690,73 @@ msgstr "Проста Статистика"
 msgid "User Welcome Email"
 msgstr "Текст привітального листа"
 
+msgid "Newsletter for groups"
+msgstr ""
+
 msgid "User Dashboard Announcements"
 msgstr "Оголошення інформаційної панелі користувача"
 
 msgid "Edit"
 msgstr "Редагувати"
+
+msgid "update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "create Newsletter"
+msgstr "Створити Користувача"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Send newsletter to group"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr "Надішліть собі тест-лист"
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to send the newsletter?"
+msgstr "Ви дійсно бажаєте залишити проект «%(title)s»?"
+
+msgid "Send newsletter"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no newsletters yet."
+msgstr "Поки що немає жодного елементу"
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Add newsletter"
+msgstr "Додати користувача(-ку)"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "В одному із заповнюваних Вами полів сталася помилка. Будь ласка, виправте його перед збереженням!"
@@ -1704,9 +1769,6 @@ msgstr "Зберегти"
 
 msgid "Currently set Welcome-Email Text"
 msgstr "Поточний встановлений текст-привітання"
-
-msgid "Send yourself a Test-Mail"
-msgstr "Надішліть собі тест-лист"
 
 msgid "Conference Page"
 msgstr "Сторінка Конференції"
@@ -4441,10 +4503,8 @@ msgid "Items you follow"
 msgstr "Ідеї, за якими я стежу"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Here you can find an overview of Ideas you have liked."
-msgid "Here you can find an overview of items you follow."
-msgstr "У майбутньому Ви зможете переглядати тут ідеї, які Ви вподобали."
+msgid "Nothing here yet."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
@@ -4473,14 +4533,6 @@ msgstr "Ви можете додати власні Ідеї за допомог
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "Дізнатися"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Nothing here yet."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Users you want to remember"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -5103,6 +5155,17 @@ msgstr "Питання щодо"
 msgid "Test email sent!"
 msgstr "Тестовий лист було відправлено!"
 
+msgid "Newsletter sent."
+msgstr ""
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "Test email sent."
+msgstr "Тестовий лист було відправлено!"
+
+msgid "Newsletter has been copied."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Мова «%s» не підтримується"
@@ -5524,6 +5587,11 @@ msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
 
 #, fuzzy
+#~| msgid "Here you can find an overview of Ideas you have liked."
+#~ msgid "Here you can find an overview of items you follow."
+#~ msgstr "У майбутньому Ви зможете переглядати тут ідеї, які Ви вподобали."
+
+#, fuzzy
 #~| msgid "Participants"
 #~ msgid "Upload Participants"
 #~ msgstr "Учасники"
@@ -5567,11 +5635,6 @@ msgstr "Ваші зміни були збережені."
 #~| msgid "Accept Member"
 #~ msgid "Activate Member"
 #~ msgstr "Долучити члена"
-
-#, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "Ви дійсно бажаєте залишити проект «%(title)s»?"
 
 #, fuzzy
 #~| msgid "Remove Member"

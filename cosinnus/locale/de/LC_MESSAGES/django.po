@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 15:35+0100\n"
+"POT-Creation-Date: 2020-11-06 17:04+0100\n"
 "PO-Revision-Date: 2020-11-05 15:37+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -184,6 +184,9 @@ msgstr "Gemerkt"
 
 msgid "Bookmark list"
 msgstr "Merkliste"
+
+msgid "Bookmarked Users list"
+msgstr "Gemerkte Personen"
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Gruppe/Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
@@ -1696,11 +1699,73 @@ msgstr "Simple Statistiken"
 msgid "User Welcome Email"
 msgstr "Willkommens-E-Mail für neue Benutzer"
 
+msgid "Newsletter for groups"
+msgstr ""
+
 msgid "User Dashboard Announcements"
 msgstr "Benutzerdashboard-Ankündigungen"
 
 msgid "Edit"
 msgstr "Bearbeiten"
+
+msgid "update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "create Newsletter"
+msgstr "Benutzer_in erstellen"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Send newsletter to group"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr "Schicke eine Test-Mail an dich selbst"
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to remove the user?"
+msgid "Do you really want to send the newsletter?"
+msgstr "Möchtest du wirklich den Teilnehmer entfernen?"
+
+msgid "Send newsletter"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no newsletters yet."
+msgstr "Noch keine Inhalte vorhanden."
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Add newsletter"
+msgstr "Benutzer_in hinzufügen"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "In einem der eingegebenen Felder trat ein Fehler auf. Bitte korrigiere ihn vor dem Speichern!"
@@ -1713,9 +1778,6 @@ msgstr "Speichern"
 
 msgid "Currently set Welcome-Email Text"
 msgstr "Aktueller Willkommens-E-Mail Text"
-
-msgid "Send yourself a Test-Mail"
-msgstr "Schicke eine Test-Mail an dich selbst"
 
 #, fuzzy
 #| msgid "Conference Management"
@@ -4486,16 +4548,12 @@ msgid "There are no items yet"
 msgstr "Noch keine Inhalte vorhanden."
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Ideas I am following"
 msgid "Items you follow"
-msgstr "Ideen, die mir gefallen"
+msgstr "Objekte, denen ich folge"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Here you can find an overview of Ideas you have liked."
-msgid "Here you can find an overview of items you follow."
-msgstr "Hier findest du in Zukunft eine Übersicht über Ideen, die dir gefallen."
+msgid "Nothing here yet."
+msgstr "Keine Einträge bisher"
 
 #
 #. Translators: __INCLUDE_JS_PO__
@@ -4525,14 +4583,6 @@ msgstr "Du kannst eigene Ideen über den '+'-Button im Header anlegen oder beste
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "Entdecken"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Nothing here yet."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Users you want to remember"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -5162,6 +5212,17 @@ msgstr "Frage zu"
 msgid "Test email sent!"
 msgstr "Test email wurde gesendet!"
 
+msgid "Newsletter sent."
+msgstr ""
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "Test email sent."
+msgstr "Test email wurde gesendet!"
+
+msgid "Newsletter has been copied."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Die Sprache \"%s\" wird nicht unterstützt."
@@ -5590,6 +5651,11 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#, fuzzy
+#~| msgid "Here you can find an overview of Ideas you have liked."
+#~ msgid "Here you can find an overview of items you follow."
+#~ msgstr "Hier findest du in Zukunft eine Übersicht über Ideen, die dir gefallen."
+
 #~ msgid "Conference is not running"
 #~ msgstr "Tagung läuft gerade nicht"
 
@@ -5631,9 +5697,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Activate Member"
 #~ msgstr "Teilnehmer aktivieren"
-
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "Möchtest du wirklich den Teilnehmer entfernen?"
 
 #~ msgid "Remove User"
 #~ msgstr "Teilnehmer entfernen"

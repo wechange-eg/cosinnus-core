@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 15:35+0100\n"
+"POT-Creation-Date: 2020-11-06 17:04+0100\n"
 "PO-Revision-Date: 2020-04-07 15:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -184,6 +184,9 @@ msgid "Bookmarked"
 msgstr ""
 
 msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -1727,11 +1730,73 @@ msgstr "უბრალო სტატისტიკა"
 msgid "User Welcome Email"
 msgstr "მომხმარებლის მისასალმებელი ელ-ფოსტა"
 
+msgid "Newsletter for groups"
+msgstr ""
+
 msgid "User Dashboard Announcements"
 msgstr "მომხმარებლის ხელსაწყოთა პანელის განცხადება"
 
 msgid "Edit"
 msgstr "რედაქტირება"
+
+msgid "update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "create Newsletter"
+msgstr "მომხმარებლის შექმნა"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Send newsletter to group"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr "საკუთარი თავისთვის ტესტური ელ-ფოსტის გაგზავნა"
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to send the newsletter?"
+msgstr "ნამდვილად გსურთ დატოვოთ  „%(title)s“?"
+
+msgid "Send newsletter"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no newsletters yet."
+msgstr "საგნები ჯერ არ არის"
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Add newsletter"
+msgstr "მომხმარებლის დამატება"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "შეცდომა დაფიქსირდა ერთ-ერთ გრაფაში, რომელშიც ინფორმაცია შეიყვანეთ. გთხოვთ შეასწოროთ შენახვამდე!"
@@ -1744,9 +1809,6 @@ msgstr "შენახვა"
 
 msgid "Currently set Welcome-Email Text"
 msgstr "ამჟამად დაყენებული მისასალმებელი ელ-ფოსტის ტექსტი"
-
-msgid "Send yourself a Test-Mail"
-msgstr "საკუთარი თავისთვის ტესტური ელ-ფოსტის გაგზავნა"
 
 #, fuzzy
 #| msgid "Video Conference Server"
@@ -4510,10 +4572,8 @@ msgid "Items you follow"
 msgstr "თქვენ მიერ გაყოლილი იდეები"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Here you can find an overview of Ideas you have liked."
-msgid "Here you can find an overview of items you follow."
-msgstr "აქ შეგიძლიათ ნახოთ თქვენ მიერ მოწონებული იდეების მიმოხილვა."
+msgid "Nothing here yet."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
@@ -4542,14 +4602,6 @@ msgstr "თქვენ შეგიძლიათ შექმნათ ჯგ
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "ძებნა"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Nothing here yet."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Users you want to remember"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -5172,6 +5224,15 @@ msgstr "კითხვა"
 msgid "Test email sent!"
 msgstr ""
 
+msgid "Newsletter sent."
+msgstr ""
+
+msgid "Test email sent."
+msgstr ""
+
+msgid "Newsletter has been copied."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "\"%s\" ენა არ არის მხარდაჭერილი"
@@ -5607,6 +5668,11 @@ msgid "Your changes have been saved."
 msgstr "თქვენი ცვლილებები შენახულია."
 
 #, fuzzy
+#~| msgid "Here you can find an overview of Ideas you have liked."
+#~ msgid "Here you can find an overview of items you follow."
+#~ msgstr "აქ შეგიძლიათ ნახოთ თქვენ მიერ მოწონებული იდეების მიმოხილვა."
+
+#, fuzzy
 #~| msgid "Participants"
 #~ msgid "Upload Participants"
 #~ msgstr "მონაწილეები"
@@ -5650,11 +5716,6 @@ msgstr "თქვენი ცვლილებები შენახულ�
 #~| msgid "Accept Member"
 #~ msgid "Activate Member"
 #~ msgstr "წევრისათვის დათანხმება"
-
-#, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "ნამდვილად გსურთ დატოვოთ  „%(title)s“?"
 
 #, fuzzy
 #~| msgid "Remove Member"

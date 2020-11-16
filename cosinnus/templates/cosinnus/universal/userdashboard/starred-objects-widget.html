@@ -5,15 +5,6 @@
     {{ title }}
 {% endblock %}
 
-{% block empty_content %}
-	<div class="widget-info-box no-select">
-        {# Translators: __INCLUDE_JS_PO__ #}
-		{% trans "Nothing here yet." %}
-		<br/>
-		<br/>
-	</div>
-{% endblock %}
-
 {% block content %}
     {% if items|length > 0 %}
         <ul class="item-list">
@@ -21,5 +12,12 @@
             {{ macros.starredlistItem(item) }}
             {% endfor %}
         </ul>
+    {% else %}
+    <div class="widget-info-box no-select">
+        {# Translators: __INCLUDE_JS_PO__ #}
+		{% trans "Nothing here yet." %}
+		<br/>
+		<br/>
+	</div>
     {% endif %}
 {% endblock %}
