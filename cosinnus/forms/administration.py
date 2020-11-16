@@ -4,7 +4,10 @@ from __future__ import unicode_literals
 from django.core.validators import MaxLengthValidator
 from django.db.models.fields import BLANK_CHOICE_DASH
 from django import forms
+from django.forms.widgets import CheckboxSelectMultiple
+from django.forms.models import ModelMultipleChoiceField
 from django.contrib.auth import get_user_model
+from django.utils.translation import ngettext
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models.managed_tags import CosinnusManagedTag
@@ -16,11 +19,16 @@ class UserWelcomeEmailForm(forms.Form):
     email_text = forms.CharField(required=False, strip=False, widget=forms.Textarea)
 
 
+class CustomSelectMultiple(ModelMultipleChoiceField):
+
+    def label_from_instance(self, obj):
+        return obj.name
+
 class NewsletterForManagedTagsForm(forms.ModelForm):
-    managed_tags = forms.ModelMultipleChoiceField(
+    managed_tags = CustomSelectMultiple(
             queryset=CosinnusManagedTag.objects.all(),
-            widget=forms.CheckboxSelectMultiple,
-            required=True)
+            widget=forms.CheckboxSelectMultiple
+        )
 
     class Meta(object):
         model = Newsletter
