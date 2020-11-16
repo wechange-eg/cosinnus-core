@@ -90,9 +90,9 @@ urlpatterns = [
     # these URLs belong to the frontend administration area for superusers
     url(r'^administration/$', administration.administration, name='administration'),
     url(r'^administration/welcome_email/$', administration.welcome_email_edit, name='administration-welcome-email'),
-    url(r'^administration/group_newsletter/$', administration.group_newsletters, name='administration-group-newsletter'),
-    url(r'^administration/group_newsletter/add$', administration.group_newsletter_create, name='administration-group-newsletter-create'),
-    url(r'^administration/group_newsletter/(?P<newsletter_id>\d+)/edit$', administration.group_newsletter_update, name='administration-group-newsletter-update'),
+    url(r'^administration/group_newsletter/$', administration.managed_tags_newsletters, name='administration-managed-tags-newsletter'),
+    url(r'^administration/group_newsletter/add$', administration.managed_tags_newsletter_create, name='administration-managed-tags-newsletter-create'),
+    url(r'^administration/group_newsletter/(?P<newsletter_id>\d+)/edit$', administration.managed_tags_newsletter_update, name='administration-managed-tags-newsletter-update'),
     url(r'^administration/announcements/$', user_dashboard_announcement.list_view, name='user-dashboard-announcement-list'),
     url(r'^administration/announcements/add/$', user_dashboard_announcement.user_dashboard_announcement_create, name='user-dashboard-announcement-create'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/edit/$', user_dashboard_announcement.user_dashboard_announcement_edit, name='user-dashboard-announcement-edit'),
