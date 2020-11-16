@@ -165,7 +165,9 @@ class SetInitialPasswordView(TemplateView):
     form_class = SetPasswordForm
 
     def get(self, request, *args, **kwargs):
-        token = kwargs.get('token', '')
+        token = kwargs['token'] if kwargs.get('token', '') else request.COOKIES.get(PROFILE_SETTING_PASSWORD_NOT_SET)
+
+        # token = kwargs.get('token', '') if 'token' in kwargs else request.META.get('password_not_set', '')
         user = get_user_from_set_password_token(token)
 
         if user and not request.user.is_authenticated and not user.password:
