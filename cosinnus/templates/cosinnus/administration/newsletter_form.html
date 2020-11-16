@@ -50,6 +50,14 @@
         {% trans "Body" as newsletter_body_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.body label=newsletter_body_label placeholder=newsletter_body_placeholder large_field=True %}
 
+        {% if form.instance.id %}
+        <div class="large-space">
+            <div class="content-box white-content">
+                <h2>{% trans "Currently set Email Text" %}:</h2>
+                <div class="textfield">{{ form.instance.body|textfield }}</div>
+            </div>
+        </div>
+        {% endif %}
     </div>
 
     {% if form.instance.id %}
