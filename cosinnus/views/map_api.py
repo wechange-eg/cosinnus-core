@@ -236,7 +236,7 @@ def map_cloudfiles_endpoint(request, query, limit, page):
     from cosinnus_cloud.utils.nextcloud import perform_fulltext_search
     from cosinnus_cloud.hooks import get_nc_user_id
 
-    result = perform_fulltext_search(get_nc_user_id(request.user), query, page=page-1, page_size=limit)
+    result = perform_fulltext_search(get_nc_user_id(request.user), query, page=page+1, page_size=limit)
 
     if result['documents']:
         total_count = result['meta']['total']
