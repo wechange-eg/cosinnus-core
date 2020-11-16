@@ -7,20 +7,24 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
+from cosinnus.models.managed_tags import CosinnusManagedTag
 from cosinnus.models.newsletter import Newsletter
 from cosinnus.utils.user import create_base_user
-
 
 class UserWelcomeEmailForm(forms.Form):
     is_active = forms.BooleanField(required=False)
     email_text = forms.CharField(required=False, strip=False, widget=forms.Textarea)
 
 
-class NewsletterForGroupForm(forms.ModelForm):
+class NewsletterForManagedTagsForm(forms.ModelForm):
+    managed_tags = forms.ModelMultipleChoiceField(
+            queryset=CosinnusManagedTag.objects.all(),
+            widget=forms.CheckboxSelectMultiple,
+            required=True)
 
     class Meta(object):
         model = Newsletter
-        fields = ['subject', 'body']
+        fields = ['subject', 'body', 'managed_tags']
 
     def __init__(self, *args, **kwargs):
         self.groups = kwargs.pop('groups')

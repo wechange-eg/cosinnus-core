@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags %}
 
-{% block page_title %}{% trans "Newsletter for groups" %} - {% trans "Edit" %}{% endblock %}
+{% block page_title %}{% trans "Newsletters" %} - {% trans "Edit" %}{% endblock %}
 
 {% block leftnav %}
 	{% include 'cosinnus/administration/leftnav.html' %}
@@ -9,7 +9,7 @@
 
 {% block breadcrumb %}
     <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
-    <li class="active">{% trans "Newsletter for groups" %}</li>
+    <li class="active">{% trans "Newsletters" %}</li>
 {% endblock %}
 
 {% block extrahead %}
@@ -30,7 +30,7 @@
         </thead>
         {% for newsletter in object_list %}
         <tr>
-            <th><a href="{% url 'cosinnus:administration-group-newsletter-update' newsletter_id=newsletter.id %}">{{ newsletter.subject }}</a></th>
+            <th><a href="{% url 'cosinnus:administration-managed-tags-newsletter-update' newsletter_id=newsletter.id %}">{{ newsletter.subject }}</a></th>
             <th>{% if newsletter.sent %}{{ newsletter.sent }}{% else %}{% trans 'This newsletter has not been sent' %}{% endif %}</th>
         </tr>
         {% endfor %}
@@ -40,7 +40,7 @@
     {% endif %}
 </div>
 <div class="fadedown pull-right">
-    <button class="btn btn-emphasized btn-autosize" href="{% url 'cosinnus:administration-group-newsletter-create' %}">
+    <button class="btn btn-emphasized btn-autosize" href="{% url 'cosinnus:administration-managed-tags-newsletter-create' %}">
         <ul class="media-list">
             <li class="media">
                 <a class="pull-left">

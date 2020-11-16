@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 
@@ -12,7 +13,7 @@ from cosinnus.utils.permissions import check_user_superuser
 from django.core.exceptions import PermissionDenied
 from django.views.generic.base import TemplateView
 from cosinnus.forms.administration import (UserWelcomeEmailForm,
-NewsletterForGroupForm, UserAdminForm)
+NewsletterForManagedTagsForm, UserAdminForm)
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.newsletter import Newsletter
 from django.urls.base import reverse
@@ -85,17 +86,7 @@ class UserWelcomeEmailEditView(FormView):
 welcome_email_edit = UserWelcomeEmailEditView.as_view()
 
 
-class GroupNewsletterMixin:
-
-    def get_groups_as_options(self):
-        portal = CosinnusPortal.get_current()
-        groups = portal.groups.all()
-        return [(group.id, group) for group in groups]
-
-    def get_form_kwargs(self):
-        form_kwargs = super().get_form_kwargs()
-        form_kwargs['groups'] = self.get_groups_as_options()
-        return form_kwargs
+class ManagedTagsNewsletterMixin:
 
     def dispatch(self, request, *args, **kwargs):
         if not check_user_superuser(request.user):
@@ -103,7 +94,7 @@ class GroupNewsletterMixin:
         return super().dispatch(request, *args, **kwargs)
 
 
-class GroupNewsletterListView(GroupNewsletterMixin, ListView):
+class ManagedTagsNewsletterListView(ManagedTagsNewsletterMixin, ListView):
     model = Newsletter
     template_name = 'cosinnus/administration/newsletter_list.html'
 
@@ -111,35 +102,41 @@ class GroupNewsletterListView(GroupNewsletterMixin, ListView):
         qs = super().get_queryset()
         return qs.order_by('-sent')
 
-group_newsletters = GroupNewsletterListView.as_view()
+managed_tags_newsletters = ManagedTagsNewsletterListView.as_view()
 
 
-class GroupNewsletterCreateView(GroupNewsletterMixin, CreateView):
+class ManagedTagsNewsletterCreateView(ManagedTagsNewsletterMixin, CreateView):
     model = Newsletter
-    form_class = NewsletterForGroupForm
+    form_class = NewsletterForManagedTagsForm
     template_name = 'cosinnus/administration/newsletter_form.html'
-    success_url = reverse_lazy('cosinnus:administration-group-newsletter')
+    success_url = reverse_lazy('cosinnus:administration-managed-tags-newsletter')
 
-group_newsletter_create = GroupNewsletterCreateView.as_view()
+managed_tags_newsletter_create = ManagedTagsNewsletterCreateView.as_view()
 
 
-class GroupNewsletterUpdateView(GroupNewsletterMixin, UpdateView):
+class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin, UpdateView):
     model = Newsletter
-    form_class = NewsletterForGroupForm
+    form_class = NewsletterForManagedTagsForm
     template_name = 'cosinnus/administration/newsletter_form.html'
     pk_url_kwarg = 'newsletter_id'
-    success_url = reverse_lazy('cosinnus:administration-group-newsletter')
+    success_url = reverse_lazy('cosinnus:administration-managed-tags-newsletter')
 
-    def _get_recipients_from_group(self):
-        source = self.object.recipients_source
-        if source.startswith('group'):
-            group_id = int(source.split('@')[1])
-            try:
-                group = CosinnusGroup.objects.get(id=group_id)
-                return group.actual_members
-            except CosinnusGroup.DoesNotExist:
-                return []
-        return []
+    def _get_recipients_from_tags(self):
+        managed_tags = self.object.managed_tags.all()
+        group_type = ContentType.objects.get(app_label='cosinnus', model='cosinnusgroup')
+        profile_type = ContentType.objects.get(app_label='cosinnus', model='userprofile')
+        users = []
+        for tag in managed_tags:
+            group_tags = tag.assignments.filter(content_type=group_type)
+            for group_tag in group_tags:
+                for user in group_tag.target_object.users.all():
+                    users.append(user)
+
+            profile_tags = tag.assignments.filter(content_type=profile_type)
+            for profile_tag in profile_tags:
+                users.append(profile_tag.target_object.user)
+        user_set = set(users)
+        return list(user_set)
 
     def _send_newsletter(self, recipients):
         subject = self.object.subject
@@ -151,17 +148,17 @@ class GroupNewsletterUpdateView(GroupNewsletterMixin, UpdateView):
     def _copy_newsletter(self):
         subject = '{} (copy)'.format(self.object.subject)
         body = self.object.body
-        recipients_source = self.object.recipients_source
-        Newsletter.objects.create(
+        copy = Newsletter.objects.create(
             subject=subject,
-            body=body,
-            recipients_source=recipients_source
+            body=body
         )
+        for managed_tag in self.object.managed_tags.all():
+            copy.managed_tags.add(managed_tag)
 
     def form_valid(self, form):
         self.object = form.save()
         if 'send_newsletter' in self.request.POST:
-            recipients = self._get_recipients_from_group()
+            recipients = self._get_recipients_from_tags()
             self._send_newsletter(recipients)
             self.object.sent = timezone.now()
             self.object.save()
@@ -173,7 +170,7 @@ class GroupNewsletterUpdateView(GroupNewsletterMixin, UpdateView):
             self._copy_newsletter()
             messages.add_message(self.request, messages.SUCCESS, _('Newsletter has been copied.'))
         return HttpResponseRedirect(self.get_success_url())
-
+      
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         source = self.object.recipients_source
@@ -182,7 +179,7 @@ class GroupNewsletterUpdateView(GroupNewsletterMixin, UpdateView):
             kwargs['group'] = group_id
         return kwargs
 
-group_newsletter_update = GroupNewsletterUpdateView.as_view()
+managed_tags_newsletter_update = ManagedTagsNewsletterUpdateView.as_view()
 
 
 class UserListView(GroupNewsletterMixin, ListView):
