@@ -40,9 +40,12 @@
         {% trans "Body" as newsletter_body_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.body label=newsletter_body_label placeholder=newsletter_body_placeholder large_field=True %}
 
-        {% trans "Group" as newsletter_group_label %}
-        {% trans "Group" as newsletter_group_placeholder %}
-        {% include 'cosinnus/fields/default_field.html' with field=form.group label=newsletter_group_label placeholder=newsletter_group_placeholder large_field=True %}
+        <div class="cosinnus-field">
+            <label>{% trans 'Recipients' %}</label>
+            <div class="checkbox-multiple">
+                {{ form.managed_tags }}
+            </div>
+        </div>
     </div>
 
     {% if form.instance.id %}
