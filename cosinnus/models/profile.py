@@ -48,6 +48,7 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import get_newly_registered_user_email
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
+from django.utils.timezone import now
 
 
 logger = logging.getLogger('cosinnus')
@@ -558,11 +559,13 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
     # these will be initialized as variable form fields for the fields in `self.dynamic_fields`
     EXTRA_FIELD_TYPE_FORMFIELDS = {
         dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT: (forms.CharField, {}),
-        dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT_AREA: (forms.CharField, {'widget': forms.Textarea}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT_AREA: (forms.CharField, {'widget': forms.Textarea, 'is_large_field': True}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_INT: (forms.IntegerField, {}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: (forms.BooleanField, {}),
         # todo make this a date field
-        dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: (forms.DateField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: (forms.DateField, {
+            'widget': forms.SelectDateWidget(years=[x for x in range(1900, now().year + 1)]), 'is_large_field': True
+        }),
         dynamic_fields.DYNAMIC_FIELD_TYPE_COUNTRY: (_make_country_formfield, {}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_PHONE: (PhoneNumberField, {}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_URL: (forms.URLField, {}),
@@ -573,7 +576,7 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
         # a select 2 tag field with space-tag support
         dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT: (CHOICE_FIELD_PLACEHOLDER, {}), 
         # TODO: make this a custom field with value parsing and template
-        dynamic_fields.DYNAMIC_FIELD_TYPE_MULTI_ADDRESS: (forms.CharField, {'widget': forms.Textarea}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_MULTI_ADDRESS: (forms.CharField, {'widget': forms.Textarea, 'is_large_field': True}),
     }
     # if set to a string, will only include such fields in the form
     # that have the given option name set to True in `COSINNUS_USERPROFILE_EXTRA_FIELDS`
@@ -625,7 +628,7 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
             # add extra kwargs from definitions
             if formfield_extra_kwargs:
                 formfield_kwargs.update(formfield_extra_kwargs)
-            is_large_field = bool(formfield_extra_kwargs.get('widget', None) == forms.Textarea)
+            is_large_field = formfield_kwargs.pop('is_large_field', False)
             # for choice fields, determine if multiple is used and add choices
             if formfield_class == self.CHOICE_FIELD_PLACEHOLDER:
                 # check for multiple
