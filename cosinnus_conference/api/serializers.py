@@ -156,12 +156,12 @@ class ConferenceParticipantSerializer(serializers.ModelSerializer):
         if hasattr(obj, 'cosinnus_profile'):
             # Temporary hack: Allow the organisation field to come from a different attribute
             att_name = getattr(settings, 'COSINNUS_TEMPHACK_CONFERENCE_ORGANISATION_SOURCE_FIELD_NAME', 'organisation')
-            return obj.cosinnus_profile.extra_fields.get(att_name, "")
+            return obj.cosinnus_profile.dynamic_fields.get(att_name, "")
         return ""
 
     def get_country(self, obj):
         if hasattr(obj, 'cosinnus_profile'):
-            country_code = obj.cosinnus_profile.extra_fields.get('country', "")
+            country_code = obj.cosinnus_profile.dynamic_fields.get('country', "")
             if country_code:
                 return get_country_name(country_code)
         return ""

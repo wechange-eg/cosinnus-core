@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from builtins import object
 import copy
-from django_select2.fields import Select2ChoiceField
+from django_select2.fields import Select2ChoiceField, Select2MultipleChoiceField
 from django_select2.widgets import Select2Widget
 import logging
 
@@ -28,6 +28,7 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from django_countries.fields import CountryField
 from jsonfield import JSONField
+from django.contrib.postgres.fields import JSONField as PostgresJSONField
 from phonenumber_field.formfields import PhoneNumberField
 import six
 
@@ -36,8 +37,7 @@ from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.core import signals
 from cosinnus.core.mail import send_mail_or_fail_threaded
 from cosinnus.dynamic_fields import dynamic_fields
-from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField, \
-    HeavySelect2FreeTextChoiceWidget, HeavySelect2MultipleFreeTextChoiceWidget
+from cosinnus.forms.select2 import HeavySelect2FreeTextChoiceWidget, HeavySelect2MultipleFreeTextChoiceWidget
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
@@ -48,6 +48,7 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import get_newly_registered_user_email
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
+from django.utils.timezone import now
 
 
 logger = logging.getLogger('cosinnus')
@@ -143,8 +144,10 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     # UI and other preferences and extra settings for the user account
     settings = JSONField(default={})
     extra_fields = JSONField(default={}, blank=True,
-                help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
-    
+                help_text='NO LONGER USED! Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
+    dynamic_fields = PostgresJSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
+                help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')                       
+
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     
     objects = BaseUserProfileManager()
@@ -553,13 +556,16 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
     CHOICE_FIELD_PLACEHOLDER = object()
     
     # a choice of field types for the settings dict values of `COSINNUS_USERPROFILE_EXTRA_FIELDS`
-    # these will be initialized as variable form fields for the fields in `self.extra_fields`
+    # these will be initialized as variable form fields for the fields in `self.dynamic_fields`
     EXTRA_FIELD_TYPE_FORMFIELDS = {
         dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT: (forms.CharField, {}),
-        dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT_AREA: (forms.CharField, {'widget': forms.Textarea}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT_AREA: (forms.CharField, {'widget': forms.Textarea, 'is_large_field': True}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_INT: (forms.IntegerField, {}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: (forms.BooleanField, {}),
-        dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: (forms.DateField, {}),
+        # todo make this a date field
+        dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: (forms.DateField, {
+            'widget': forms.SelectDateWidget(years=[x for x in range(1900, now().year + 1)]), 'is_large_field': True
+        }),
         dynamic_fields.DYNAMIC_FIELD_TYPE_COUNTRY: (_make_country_formfield, {}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_PHONE: (PhoneNumberField, {}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_URL: (forms.URLField, {}),
@@ -567,10 +573,10 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
         dynamic_fields.DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT: (CHOICE_FIELD_PLACEHOLDER, {}),
         # TODO: a choice field of user id of a user list given by the managed tag chosen by admins
         dynamic_fields.DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD: (forms.CharField, {}),
-        # TODO: make this a select 2 tag field with space-tag support
+        # a select 2 tag field with space-tag support
         dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT: (CHOICE_FIELD_PLACEHOLDER, {}), 
         # TODO: make this a custom field with value parsing and template
-        dynamic_fields.DYNAMIC_FIELD_TYPE_MULTI_ADDRESS: (forms.CharField, {'widget': forms.Textarea}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_MULTI_ADDRESS: (forms.CharField, {'widget': forms.Textarea, 'is_large_field': True}),
     }
     # if set to a string, will only include such fields in the form
     # that have the given option name set to True in `COSINNUS_USERPROFILE_EXTRA_FIELDS`
@@ -587,15 +593,17 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
         self.prepare_extra_fields()
         if 'extra_fields' in self.fields:
             del self.fields['extra_fields']
+        if 'dynamic_fields' in self.fields:
+            del self.fields['dynamic_fields']
             
     def prepare_extra_fields_initial(self):
-        """ Stub for settting the initial data for `self.extra_fields` as defined in
+        """ Stub for settting the initial data for `self.dynamic_fields` as defined in
             `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`.
             Only a form with an UpdateView needs to implement this.  """
         pass
     
     def prepare_extra_fields(self):
-        """ Creates extra fields for `self.extra_fields` as defined in
+        """ Creates extra fields for `self.dynamic_fields` as defined in
             `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` """
         field_map = {}
         for field_name, field_options in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.items():
@@ -620,12 +628,12 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
             # add extra kwargs from definitions
             if formfield_extra_kwargs:
                 formfield_kwargs.update(formfield_extra_kwargs)
-            is_large_field = bool(formfield_extra_kwargs.get('widget', None) == forms.Textarea)
+            is_large_field = formfield_kwargs.pop('is_large_field', False)
             # for choice fields, determine if multiple is used and add choices
             if formfield_class == self.CHOICE_FIELD_PLACEHOLDER:
                 # check for multiple
                 if field_options.multiple:
-                    formfield_class = CommaSeparatedSelect2MultipleChoiceField
+                    formfield_class = Select2MultipleChoiceField
                 else:
                     formfield_class = Select2ChoiceField
                     formfield_kwargs['widget'] = Select2Widget(select2_options={'allowClear': False})
@@ -639,16 +647,31 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
                         choices += [(val, val) for val in predefined_choices]
                     formfield_kwargs['choices'] = choices
                 elif field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT:
-                    formfield_class = forms.CharField
                     data_url = reverse_lazy('cosinnus:select2:dynamic-freetext-choices', kwargs={'field_name': field_name})
+                    # use single/multi choice pre-selections of initial and entered values, so choices are always valid
+                    choices = []
                     if field_options.multiple:
-                        formfield_kwargs['widget'] = HeavySelect2MultipleFreeTextChoiceWidget(data_url=data_url)
+                        if field_name in self.initial and self.initial[field_name] is not None:
+                            initial = self.initial[field_name]
+                            choices += initial if isinstance(initial, list) else [initial]
+                        if self.data is not None and field_name in self.data:
+                            choices += self.data.getlist(field_name)
+                        if not '' in choices:
+                            choices += ['']
+                        choices = [(val, val) for val in choices if val is not None]
+                        formfield_kwargs['widget'] = HeavySelect2MultipleFreeTextChoiceWidget(data_url=data_url, choices=choices)
+                        formfield_kwargs['choices'] = choices
                     else:
-                        formfield_kwargs['widget'] = HeavySelect2FreeTextChoiceWidget(data_url=data_url)
+                        if field_name in self.initial and self.initial[field_name] is not None:
+                            choices += [self.initial[field_name]]
+                        if self.data is not None and field_name in self.data:
+                            choices += [self.data.get(field_name)]
+                        if not '' in choices:
+                            choices += ['']
+                        choices = [(val, val) for val in choices if val is not None]
+                        formfield_kwargs['widget'] = HeavySelect2FreeTextChoiceWidget(data_url=data_url, choices=choices)
+                        formfield_kwargs['choices'] = choices
                     is_large_field = True
-                    # TODO NEXT: proper initial value initialisation
-                    if False and self.initial[field_name]:
-                        formfield_kwargs['choices'] = [(val, val) for val in self.initial[field_name]]
                     
             # initialze formfield
             self.fields[field_name] = formfield_class(
@@ -659,6 +682,13 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
             setattr(self.fields[field_name], 'placeholder', field_options.placeholder)
             setattr(self.fields[field_name], 'large_field', is_large_field) 
             setattr(self.fields[field_name], 'dynamic_field_type', field_options.type) 
+            
+            # TODO NEXT: multi dynamic field ("arbeitgeber") saves itself as string of array, 
+            # not the array itself
+            
+            # todo date field
+            # todo user id field
+            # todo multi address field
             
             # "register" the extra field additionally
             field_map[field_name] = self.fields[field_name]
@@ -672,11 +702,11 @@ class UserProfileFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
         adds functionality for by-portal configured extra profile form fields """
     
     def prepare_extra_fields_initial(self):
-        """ Set the initial data for `self.extra_fields` as defined in
+        """ Set the initial data for `self.dynamic_fields` as defined in
             `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` """
         for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
-            if field_name in self.instance.extra_fields:
-                self.initial[field_name] = self.instance.extra_fields[field_name]
+            if field_name in self.instance.dynamic_fields:
+                self.initial[field_name] = self.instance.dynamic_fields[field_name]
         
     def full_clean(self):
         """ Assign the extra fields to the `extra_fields` the userprofile JSON field
@@ -684,7 +714,7 @@ class UserProfileFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
         super().full_clean()
         if hasattr(self, 'cleaned_data'):
             for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
-                self.instance.extra_fields[field_name] = self.cleaned_data.get(field_name, None)
+                self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
 
 
 class UserCreationFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
@@ -694,7 +724,7 @@ class UserCreationFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
     filter_included_fields_by_option_name = 'in_signup'
     
     def save(self, commit=True):
-        """ Assign the extra fields to the user's cosinnus_profile's `extra_fields` 
+        """ Assign the extra fields to the user's cosinnus_profile's `dynamic_fields` 
         JSON field instead of model fields, after user form save """
         ret = super().save(commit=commit)
         if commit:
@@ -705,7 +735,7 @@ class UserCreationFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
                 
                 profile = self.instance.cosinnus_profile
                 for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
-                    profile.extra_fields[field_name] = self.cleaned_data.get(field_name, None)
+                    profile.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
                     profile.save()
         return ret
     

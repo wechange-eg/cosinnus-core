@@ -11,9 +11,9 @@
 <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
 <li><a href="{% url 'cosinnus:administration-managed-tags-newsletter' %}">{% trans "Newsletters" %}</a></li>
 {% if object %}
-<li class="active">{% trans "update Newsletter" %}</li>
+<li class="active">{% trans "Update Newsletter" %}</li>
 {% else %}
-<li class="active">{% trans "create Newsletter" %}</li>
+<li class="active">{% trans "Create Newsletter" %}</li>
 {% endif %}
 {% endblock %}
 
@@ -25,9 +25,11 @@
 {% block content %}
 
 <form method="post" class="cosinnus-form form-horizontal">{% csrf_token %}
-
+    
     <div class="content-box">
-
+        {{ form.non_field_errors }}
+    
+    
         {% if form.instance.sent %}
         <p class="transparent"><i class="fas fa-info-circle"></i> {% trans 'This newsletter has already been sent. If you want to send it again, please copy it and send the copy.' %}</p>
         {% endif %}
@@ -36,16 +38,17 @@
         {% trans "Subject" as newsletter_subject_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.subject label=newsletter_subject_label placeholder=newsletter_subject_placeholder large_field=True %}
 
-        {% trans "Body" as newsletter_body_label %}
-        {% trans "Body" as newsletter_body_placeholder %}
-        {% include 'cosinnus/fields/default_field.html' with field=form.body label=newsletter_body_label placeholder=newsletter_body_placeholder large_field=True %}
-
         <div class="cosinnus-field">
             <label>{% trans 'Recipients' %}</label>
+            {{ field.errors }}
             <div class="checkbox-multiple">
                 {{ form.managed_tags }}
             </div>
         </div>
+        
+        {% trans "Body" as newsletter_body_label %}
+        {% trans "Body" as newsletter_body_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.body label=newsletter_body_label placeholder=newsletter_body_placeholder large_field=True %}
 
     </div>
 

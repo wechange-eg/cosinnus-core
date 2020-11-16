@@ -26,24 +26,6 @@ class NewsletterForManagedTagsForm(forms.ModelForm):
         model = Newsletter
         fields = ['subject', 'body', 'managed_tags']
 
-    def __init__(self, *args, **kwargs):
-        self.groups = kwargs.pop('groups')
-        if 'group' in kwargs:
-            self.selected_group = kwargs.pop('group')
-        super().__init__(*args, **kwargs)
-        if hasattr(self, 'selected_group') and self.selected_group:
-            self.fields['group'] = forms.ChoiceField(
-                choices=BLANK_CHOICE_DASH + self.groups, initial=self.selected_group)
-        else:
-            self.fields['group'] = forms.ChoiceField(choices=BLANK_CHOICE_DASH + self.groups)
-
-    def save(self, commit=True):
-        newsletter = super().save()
-        group_id = self.cleaned_data.get('group')
-        newsletter.recipients_source = 'group@{}'.format(str(group_id))
-        newsletter.save()
-        return newsletter
-
 
 class UserAdminForm(forms.ModelForm):
     email = forms.EmailField(label=_('email address'), required=True, validators=[MaxLengthValidator(220)])

@@ -171,18 +171,10 @@ class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin, UpdateView):
             messages.add_message(self.request, messages.SUCCESS, _('Newsletter has been copied.'))
         return HttpResponseRedirect(self.get_success_url())
       
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        source = self.object.recipients_source
-        if source.startswith('group'):
-            group_id = int(source.split('@')[1])
-            kwargs['group'] = group_id
-        return kwargs
-
 managed_tags_newsletter_update = ManagedTagsNewsletterUpdateView.as_view()
 
 
-class UserListView(GroupNewsletterMixin, ListView):
+class UserListView(ManagedTagsNewsletterMixin, ListView):
     model = get_user_model()
     template_name = 'cosinnus/administration/user_list.html'
 

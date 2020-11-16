@@ -34,7 +34,7 @@ from django.core.exceptions import ValidationError
 from cosinnus.models.bbb_room import BBBRoom
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.managed_tags import CosinnusManagedTag,\
-    CosinnusManagedTagAssignment
+    CosinnusManagedTagAssignment, CosinnusManagedTagType
 from cosinnus.models.newsletter import Newsletter
 
 class SingleDeleteActionMixin(object):
@@ -638,13 +638,20 @@ class CosinnusNewsletterAdmin(admin.ModelAdmin):
 admin.site.register(Newsletter, CosinnusNewsletterAdmin)
 
 
-
 class CosinnusManagedTagAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'portal', 'paired_group')
     list_filter = ('portal',)
     search_fields = ('slug', 'name',)
 
 admin.site.register(CosinnusManagedTag, CosinnusManagedTagAdmin)
+
+
+class CosinnusManagedTagTypeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'color', 'portal',)
+    list_filter = ('portal',)
+    search_fields = ('name',)
+
+admin.site.register(CosinnusManagedTagType, CosinnusManagedTagTypeAdmin)
 
 
 class CosinnusManagedTagAssignmentAdmin(admin.ModelAdmin):
