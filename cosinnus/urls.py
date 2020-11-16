@@ -90,6 +90,9 @@ urlpatterns = [
     # these URLs belong to the frontend administration area for superusers
     url(r'^administration/$', administration.administration, name='administration'),
     url(r'^administration/welcome_email/$', administration.welcome_email_edit, name='administration-welcome-email'),
+    url(r'^administration/users/$', administration.user_list, name='administration-users'),
+    url(r'^administration/users/add$', administration.user_add, name='administration-user-create'),
+    url(r'^administration/users/(?P<user_id>\d+)/edit$', administration.user_update, name='administration-user-update'),
     url(r'^administration/group_newsletter/$', administration.group_newsletters, name='administration-group-newsletter'),
     url(r'^administration/group_newsletter/add$', administration.group_newsletter_create, name='administration-group-newsletter-create'),
     url(r'^administration/group_newsletter/(?P<newsletter_id>\d+)/edit$', administration.group_newsletter_update, name='administration-group-newsletter-update'),
