@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 15:35+0100\n"
+"POT-Creation-Date: 2020-11-06 17:04+0100\n"
 "PO-Revision-Date: 2020-10-12 00:20+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -177,6 +177,9 @@ msgid "Bookmarked"
 msgstr ""
 
 msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -1687,11 +1690,73 @@ msgstr "Statistici Simple"
 msgid "User Welcome Email"
 msgstr "Utilizator Bun Venit pe E-mail"
 
+msgid "Newsletter for groups"
+msgstr ""
+
 msgid "User Dashboard Announcements"
 msgstr "Anunțuri pentru Tabloul de Bord al Utilizatorului"
 
 msgid "Edit"
 msgstr "Editați"
+
+msgid "update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "create Newsletter"
+msgstr "Creează Utilizator"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Send newsletter to group"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr "Trimiteți-vă un E-mail de Testare"
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to send the newsletter?"
+msgstr "Chiar vrei să lași „%(title)s”?"
+
+msgid "Send newsletter"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no newsletters yet."
+msgstr "Nu există articole încă"
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Add newsletter"
+msgstr "Adăugați utilizator"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "A existat o eroare într-unul din câmpurile pe care le-ați introdus. Vă rugăm să o corectați înainte de a o salva!"
@@ -1704,9 +1769,6 @@ msgstr "Salvați"
 
 msgid "Currently set Welcome-Email Text"
 msgstr "Setează în prezent Textul Bun Venit pe E-mail"
-
-msgid "Send yourself a Test-Mail"
-msgstr "Trimiteți-vă un E-mail de Testare"
 
 msgid "Conference Page"
 msgstr "Pagina Conferinței"
@@ -4436,10 +4498,8 @@ msgid "Items you follow"
 msgstr "Idei pe care le urmăresc"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Here you can find an overview of Ideas you have liked."
-msgid "Here you can find an overview of items you follow."
-msgstr "Aici puteți găsi o imagine o imagine de ansamblu a Ideilor care v-au plăcut."
+msgid "Nothing here yet."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
@@ -4468,14 +4528,6 @@ msgstr "Puteți să vă creați propriile Idei cu ajutorul butonului '+' din ant
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "Descoperi"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Nothing here yet."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Users you want to remember"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -5098,6 +5150,17 @@ msgstr "Întrebare despre"
 msgid "Test email sent!"
 msgstr "Test de e-mail trimis!"
 
+msgid "Newsletter sent."
+msgstr ""
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "Test email sent."
+msgstr "Test de e-mail trimis!"
+
+msgid "Newsletter has been copied."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Limba ”%s” nu este acceptat"
@@ -5519,6 +5582,11 @@ msgid "Your changes have been saved."
 msgstr "Schimbările tale au fost salvate."
 
 #, fuzzy
+#~| msgid "Here you can find an overview of Ideas you have liked."
+#~ msgid "Here you can find an overview of items you follow."
+#~ msgstr "Aici puteți găsi o imagine o imagine de ansamblu a Ideilor care v-au plăcut."
+
+#, fuzzy
 #~| msgid "Participants"
 #~ msgid "Upload Participants"
 #~ msgstr "Participanți"
@@ -5562,11 +5630,6 @@ msgstr "Schimbările tale au fost salvate."
 #~| msgid "Accept Member"
 #~ msgid "Activate Member"
 #~ msgstr "Accept membru"
-
-#, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "Chiar vrei să lași „%(title)s”?"
 
 #, fuzzy
 #~| msgid "Remove Member"

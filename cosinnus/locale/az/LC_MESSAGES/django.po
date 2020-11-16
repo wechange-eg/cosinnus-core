@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 15:35+0100\n"
+"POT-Creation-Date: 2020-11-06 17:04+0100\n"
 "PO-Revision-Date: 2020-05-10 13:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -184,6 +184,9 @@ msgid "Bookmarked"
 msgstr ""
 
 msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -1727,11 +1730,73 @@ msgstr "Sadə Statistika"
 msgid "User Welcome Email"
 msgstr "İstifadəçinin Salamlama E-poçtu"
 
+msgid "Newsletter for groups"
+msgstr ""
+
 msgid "User Dashboard Announcements"
 msgstr "İstifadəçinin İdarə Paneli Elanları"
 
 msgid "Edit"
 msgstr "Redaktə edin"
+
+msgid "update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "create Newsletter"
+msgstr "İstifadəçi Yaradın"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Send newsletter to group"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr "Özünüzə Test-Məktub göndərin"
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to send the newsletter?"
+msgstr "Siz həqiqətən \"%(title)s\"-u tərk etmək istəyirsiniz?"
+
+msgid "Send newsletter"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no newsletters yet."
+msgstr "Hələlik əşyalar yoxdur"
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Add newsletter"
+msgstr "İstifadəçi əlavə edin"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "Daxil etdiyiniz xanalardan birində xəta oldu. Xahiş edirəm, yaddaşa verməzdən əvvəl düzəldin!"
@@ -1744,9 +1809,6 @@ msgstr "Yadda saxla"
 
 msgid "Currently set Welcome-Email Text"
 msgstr "Hazırda Xoş gəlmisiniz deyə tənzimləndi-E-poçt yazısı"
-
-msgid "Send yourself a Test-Mail"
-msgstr "Özünüzə Test-Məktub göndərin"
 
 #, fuzzy
 #| msgid "Video Conference Server"
@@ -4511,10 +4573,8 @@ msgid "Items you follow"
 msgstr "İzlədiyim İdeyalar"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Here you can find an overview of Ideas you have liked."
-msgid "Here you can find an overview of items you follow."
-msgstr "Burada bəyəndiyiniz ideyaların ümumi icmalını tapa bilərsiniz."
+msgid "Nothing here yet."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
@@ -4543,14 +4603,6 @@ msgstr "Başlıqdakı '+' düyməsinə ilə öz İdeyalarınızı yarada bilərs
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "Aşkar etmək"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Nothing here yet."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Users you want to remember"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -5173,6 +5225,15 @@ msgstr "Haqqında sual"
 msgid "Test email sent!"
 msgstr ""
 
+msgid "Newsletter sent."
+msgstr ""
+
+msgid "Test email sent."
+msgstr ""
+
+msgid "Newsletter has been copied."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "\"%s\" dili dəstəklənmir"
@@ -5608,6 +5669,11 @@ msgid "Your changes have been saved."
 msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 
 #, fuzzy
+#~| msgid "Here you can find an overview of Ideas you have liked."
+#~ msgid "Here you can find an overview of items you follow."
+#~ msgstr "Burada bəyəndiyiniz ideyaların ümumi icmalını tapa bilərsiniz."
+
+#, fuzzy
 #~| msgid "Participants"
 #~ msgid "Upload Participants"
 #~ msgstr "İştirakçılar"
@@ -5651,11 +5717,6 @@ msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 #~| msgid "Accept Member"
 #~ msgid "Activate Member"
 #~ msgstr "İstifadəçini qəbul edin"
-
-#, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "Siz həqiqətən \"%(title)s\"-u tərk etmək istəyirsiniz?"
 
 #, fuzzy
 #~| msgid "Remove Member"

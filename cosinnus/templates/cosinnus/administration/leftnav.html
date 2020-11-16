@@ -39,6 +39,19 @@
     </ul>
 </div>
 
+<div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-users' %}">
+    <ul class="media-list">
+        <li class="media">
+           <a class="pull-left">
+                <i class="fas fa-user"></i>
+            </a>
+            <div class="media-body">
+                {% trans "User Management" %}
+            </div>
+        </li>
+    </ul>
+</div>
+
 <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:user-dashboard-announcement-list' %}">
     <ul class="media-list">
         <li class="media">

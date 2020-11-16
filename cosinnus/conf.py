@@ -843,3 +843,4 @@ class CosinnusDefaultSettings(AppConf):
     STARRED_STAR_LABEL = _('Bookmark')
     STARRED_STARRING_LABEL = _('Bookmarked')
     STARRED_OBJECTS_LIST = _('Bookmark list')
+    STARRED_USERS_LIST = _('Bookmarked Users list')

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 15:35+0100\n"
+"POT-Creation-Date: 2020-11-06 17:04+0100\n"
 "PO-Revision-Date: 2020-04-01 13:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -184,6 +184,9 @@ msgid "Bookmarked"
 msgstr ""
 
 msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -1727,11 +1730,73 @@ msgstr "Պարզ վիճակագրություն"
 msgid "User Welcome Email"
 msgstr "Օգտատիրոջ Ողջույնի էլ․ նամակ"
 
+msgid "Newsletter for groups"
+msgstr ""
+
 msgid "User Dashboard Announcements"
 msgstr "Օգտատիրոջ կառավարման վահանակի հայտարարություններ"
 
 msgid "Edit"
 msgstr "Խմբագրել"
+
+msgid "update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "create Newsletter"
+msgstr "Ստեղծել Օգտատեր"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Send newsletter to group"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr "Ուղարկել ձեզ թեստային նամակ"
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to send the newsletter?"
+msgstr "Արդյո՞ք ցանկանում եք լքել „%(title)s“-ը?"
+
+msgid "Send newsletter"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no newsletters yet."
+msgstr "Դեռ նյութեր չկան"
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Add newsletter"
+msgstr "Ավելացնել օգտատեր"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "Ձեր մուտքագրված դաշտերից մեկում առկա է սխալ: Խնդրում ենք ուղղել այն նախքան պահպանելը!"
@@ -1744,9 +1809,6 @@ msgstr "Պահպանել"
 
 msgid "Currently set Welcome-Email Text"
 msgstr "Ներկայումս սահմանված Ողջույնի նամակի տեքստը"
-
-msgid "Send yourself a Test-Mail"
-msgstr "Ուղարկել ձեզ թեստային նամակ"
 
 #, fuzzy
 #| msgid "Video Conference Server"
@@ -4509,10 +4571,8 @@ msgid "Items you follow"
 msgstr "Գաղափարներ, որոնց ես հետևում եմ"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Here you can find an overview of Ideas you have liked."
-msgid "Here you can find an overview of items you follow."
-msgstr "Այստեղ կարող եք գտնել ձեր հավանած գաղափարների ակնարկը."
+msgid "Nothing here yet."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
@@ -4541,14 +4601,6 @@ msgstr "Դուք կարող եք ստեղծել ձեր սեփական գաղափ
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "Բացահայտել"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Nothing here yet."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Users you want to remember"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -5171,6 +5223,15 @@ msgstr "Հարց"
 msgid "Test email sent!"
 msgstr ""
 
+msgid "Newsletter sent."
+msgstr ""
+
+msgid "Test email sent."
+msgstr ""
+
+msgid "Newsletter has been copied."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "\"%s\" լեզուն չի մատուցվում"
@@ -5606,6 +5667,11 @@ msgid "Your changes have been saved."
 msgstr "Ձեր փոփոխությունները պահպանվել են."
 
 #, fuzzy
+#~| msgid "Here you can find an overview of Ideas you have liked."
+#~ msgid "Here you can find an overview of items you follow."
+#~ msgstr "Այստեղ կարող եք գտնել ձեր հավանած գաղափարների ակնարկը."
+
+#, fuzzy
 #~| msgid "Participants"
 #~ msgid "Upload Participants"
 #~ msgstr "Մասնակիցներ"
@@ -5649,11 +5715,6 @@ msgstr "Ձեր փոփոխությունները պահպանվել են."
 #~| msgid "Accept Member"
 #~ msgid "Activate Member"
 #~ msgstr "Ընդունել Անդամ"
-
-#, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "Արդյո՞ք ցանկանում եք լքել „%(title)s“-ը?"
 
 #, fuzzy
 #~| msgid "Remove Member"
