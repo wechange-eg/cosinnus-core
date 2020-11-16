@@ -648,17 +648,24 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
                     # use single/multi choice pre-selections of initial and entered values, so choices are always valid
                     choices = []
                     if field_options.multiple:
-                        if self.initial[field_name] is not None:
-                            choices += [(val, val) for val in self.initial[field_name]]
+                        if field_name in self.initial and self.initial[field_name] is not None:
+                            initial = self.initial[field_name]
+                            choices += initial if isinstance(initial, list) else [initial]
                         if self.data is not None and field_name in self.data:
-                            choices += [(val, val) for val in self.data.getlist(field_name)]
+                            choices += self.data.getlist(field_name)
+                        if not '' in choices:
+                            choices += ['']
+                        choices = [(val, val) for val in choices if val is not None]
                         formfield_kwargs['widget'] = HeavySelect2MultipleFreeTextChoiceWidget(data_url=data_url, choices=choices)
                         formfield_kwargs['choices'] = choices
                     else:
-                        if self.initial[field_name] is not None:
-                            choices += [(self.initial[field_name], self.initial[field_name])]
+                        if field_name in self.initial and self.initial[field_name] is not None:
+                            choices += [self.initial[field_name]]
                         if self.data is not None and field_name in self.data:
-                            choices += [(self.data.get(field_name), self.data.get(field_name))]
+                            choices += [self.data.get(field_name)]
+                        if not '' in choices:
+                            choices += ['']
+                        choices = [(val, val) for val in choices if val is not None]
                         formfield_kwargs['widget'] = HeavySelect2FreeTextChoiceWidget(data_url=data_url, choices=choices)
                         formfield_kwargs['choices'] = choices
                     is_large_field = True

@@ -90,7 +90,6 @@ class TagsView(Select2View):
         has_more = count > end
 
         tags = list(Tag.objects.filter(q).values_list('name', 'name').all()[start:end])
-
         return (NO_ERR_RESP, has_more, tags)
 
 
@@ -112,20 +111,22 @@ class DynamicFreetextChoicesView(Select2View):
         start = (page - 1) * 10
         end = page * 10
         
-        # TODO NEXT: actual filtering!
-        return (NO_ERR_RESP, False, [('ha','ha'), ('LOl', 'LOl')])
-        
-        q = Q(**{f'extra_fields__{self.field_name}__icontains': term})
-        qs = get_user_profile_model().objects.filter(q)
+        filt = Q(**{f'dynamic_fields__{self.field_name}__icontains': term})
+        qs = get_user_profile_model().objects.all().filter(filt)
         
         count = qs.count()
         if count < start:
             raise Http404
         has_more = count > end
         
-        matches = qs.values_list(f'extra_fields__{self.field_name}', f'extra_fields__{self.field_name}')
-        text_choices = list(matches.all()[start:end])
-
+        all_values = qs.values_list(f'dynamic_fields__{self.field_name}', flat=True)
+        # flatten values as some returned values might be items, and some might be lists
+        flat_values = []
+        for val in all_values:
+            flat_values += val if isinstance(val, list) else [val]
+        # return only matched values
+        matches = [item for item in flat_values if item and term in item.lower()]
+        text_choices = [(match, match) for match in matches[start:end]]
         return (NO_ERR_RESP, has_more, text_choices)
 
 
