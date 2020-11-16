@@ -630,16 +630,30 @@ a.light-link:hover i { display: inherit; }
     color: @app-neutral-color;
 }
 
-.likefollowstar-button-simple {
-	.show-selected {
+.likefollowstar-button-simple:not(:hover) {
+    .show-selected {
         display: none;
-	}
-	
+    }
+    
     &.selected {
         .show-unselected {
             display: none;
         }
         .show-selected {
+            display: inherit;
+        }
+    }
+}
+.likefollowstar-button-simple:hover {
+    .show-unselected {
+        display: none;
+    }
+    
+    &.selected {
+        .show-selected {
+            display: none;
+        }
+        .show-unselected {
             display: inherit;
         }
     }

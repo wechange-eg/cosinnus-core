@@ -182,7 +182,7 @@ class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin, UpdateView):
 managed_tags_newsletter_update = ManagedTagsNewsletterUpdateView.as_view()
 
 
-class UserListView(GroupNewsletterMixin, ListView):
+class UserListView(ManagedTagsNewsletterMixin, ListView):
     model = get_user_model()
     template_name = 'cosinnus/administration/user_list.html'
 
