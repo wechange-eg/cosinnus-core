@@ -6,11 +6,19 @@
 	{% trans "Items you follow" %}
 {% endblock %}
 
-{% block empty_content %}
+{% block content %}
+    {% if items|length > 0 %}
+        <ul class="item-list">
+            {% for item in items %}
+            {{ macros.followedlistItem(item) }}
+            {% endfor %}
+		</ul>
+	{% else %}
 	<div class="widget-info-box no-select">
         {# Translators: __INCLUDE_JS_PO__ #}
-		{% trans "Here you can find an overview of items you follow." %}
+		{% trans "Nothing here yet." %}
 		<br/>
 		<br/>
 	</div>
+    {% endif %}
 {% endblock %}

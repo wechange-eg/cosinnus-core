@@ -2,8 +2,7 @@
 {% import "include/macros.html" as macros %}
 
 {% block title %}
-    {# Translators: __INCLUDE_JS_PO__ #}
-	{% trans "Users you want to remember" %}
+    {{ title }}
 {% endblock %}
 
 {% block content %}
@@ -13,5 +12,12 @@
             {{ macros.starredlistItem(item) }}
             {% endfor %}
         </ul>
+    {% else %}
+    <div class="widget-info-box no-select">
+        {# Translators: __INCLUDE_JS_PO__ #}
+		{% trans "Nothing here yet." %}
+		<br/>
+		<br/>
+	</div>
     {% endif %}
 {% endblock %}

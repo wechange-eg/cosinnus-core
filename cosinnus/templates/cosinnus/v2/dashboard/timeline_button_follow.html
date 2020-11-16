@@ -17,7 +17,7 @@
 	            No counter in follow buttons!
 		        {% if user.id in item.get_followed_user_ids %}{{ item.follow_count|subtract:1 }}{% else %}{{ item.follow_count }}{% endif %}
 	        {% endcomment %}
-	        <i class="fa fa-bell"></i>
+	        <i class="far fa-bell"></i>
 	        {% trans "Follow" %}
 	    </span>
 	    <span class="show-selected">
@@ -25,7 +25,7 @@
 	            No counter in follow buttons!
 		        {% if user.id in item.get_followed_user_ids %}{{ item.follow_count }}{% else %}{{ item.follow_count|add:1 }}{% endif %}
 	        {% endcomment %}
-	        <i class="fa fa-bell"></i>
+	        <i class="fas fa-bell"></i>
 	        {% trans "Following" %}
 	    </span>
 	</a>

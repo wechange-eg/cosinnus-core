@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags %}
 
-{% block page_title %}{% trans "Newsletter for groups" %} - {% trans "Edit" %}{% endblock %}
+{% block page_title %}{% trans "Newsletters" %} - {% trans "Edit" %}{% endblock %}
 
 {% block leftnav %}
 {% include 'cosinnus/administration/leftnav.html' %}
@@ -9,7 +9,7 @@
 
 {% block breadcrumb %}
 <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
-<li><a href="{% url 'cosinnus:administration-group-newsletter' %}">{% trans "Newsletter for groups" %}</a></li>
+<li><a href="{% url 'cosinnus:administration-managed-tags-newsletter' %}">{% trans "Newsletters" %}</a></li>
 {% if object %}
 <li class="active">{% trans "update Newsletter" %}</li>
 {% else %}
@@ -40,9 +40,13 @@
         {% trans "Body" as newsletter_body_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.body label=newsletter_body_label placeholder=newsletter_body_placeholder large_field=True %}
 
-        {% trans "Group" as newsletter_group_label %}
-        {% trans "Group" as newsletter_group_placeholder %}
-        {% include 'cosinnus/fields/default_field.html' with field=form.group label=newsletter_group_label placeholder=newsletter_group_placeholder large_field=True %}
+        <div class="cosinnus-field">
+            <label>{% trans 'Recipients' %}</label>
+            <div class="checkbox-multiple">
+                {{ form.managed_tags }}
+            </div>
+        </div>
+
     </div>
 
     {% if form.instance.id %}
@@ -55,7 +59,7 @@
                             <i class="fa fa-envelope"></i>
                         </a>
                     <div class="media-body">
-                        {% trans "Send newsletter to group" %}
+                        {% trans "Send newsletter" %}
                     </div>
                 </li>
             </ul>
@@ -107,7 +111,7 @@
     {% if form.instance.id %}
     {% captureas label %}{% trans "Do you really want to send the newsletter?" %}{% endcaptureas %}
     {% captureas title %}{% trans "Send newsletter" %}{% endcaptureas %}
-    {% captureas action %}{% url 'cosinnus:administration-group-newsletter-update' newsletter_id=form.instance.id %}{% endcaptureas %}
+    {% captureas action %}{% url 'cosinnus:administration-managed-tags-newsletter-update' newsletter_id=form.instance.id %}{% endcaptureas %}
     {% include "cosinnus/modal_box.html" with id=modal_send_newsletter label=label title=title form_action=action submit_name="send_newsletter" title_icon='fa fa-envelope' %}
     {% endif %}
 </form>

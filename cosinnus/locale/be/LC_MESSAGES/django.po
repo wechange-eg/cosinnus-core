@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-05 15:35+0100\n"
+"POT-Creation-Date: 2020-11-06 17:04+0100\n"
 "PO-Revision-Date: 2020-01-14 19:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -183,6 +183,9 @@ msgid "Bookmarked"
 msgstr ""
 
 msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -1761,6 +1764,9 @@ msgstr "Простая статыстыка"
 msgid "User Welcome Email"
 msgstr "Тэкст вітальнага ліста"
 
+msgid "Newsletter for groups"
+msgstr ""
+
 #, fuzzy
 #| msgid "User Dashboard"
 msgid "User Dashboard Announcements"
@@ -1768,6 +1774,65 @@ msgstr "Панэль карыстальніка(-цы)"
 
 msgid "Edit"
 msgstr "Рэдагаваць"
+
+msgid "update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "create Newsletter"
+msgstr "Стварыць карыстальніка(-цу)"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Send newsletter to group"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr ""
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to send the newsletter?"
+msgstr "Вы сапраўды хочаце выйсці з „%(title)s“?"
+
+msgid "Send newsletter"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no visible users."
+msgid "There are no newsletters yet."
+msgstr "Бачных карыстальнікаў(-ц) няма."
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Add newsletter"
+msgstr "Дадаць карыстальніка(-цу)"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "У адным з палёў, якія вы запоўнілі, ёсць памылка. Калі ласка, выпраўце яе перш чым захаваць старонку!"
@@ -1784,9 +1849,6 @@ msgstr "Захаваць"
 #| msgid "Welcome-Email Text"
 msgid "Currently set Welcome-Email Text"
 msgstr "Тэкст вітальнага ліста"
-
-msgid "Send yourself a Test-Mail"
-msgstr ""
 
 msgid "Conference Page"
 msgstr ""
@@ -4616,7 +4678,7 @@ msgid "Items you follow"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Here you can find an overview of items you follow."
+msgid "Nothing here yet."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -4647,14 +4709,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Nothing here yet."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Users you want to remember"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5333,6 +5387,15 @@ msgstr "Пытанне пра"
 msgid "Test email sent!"
 msgstr ""
 
+msgid "Newsletter sent."
+msgstr ""
+
+msgid "Test email sent."
+msgstr ""
+
+msgid "Newsletter has been copied."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Мова \"%s\" не падтрымліваецца"
@@ -5824,11 +5887,6 @@ msgstr "Вашы змены захаваныя."
 #~| msgid "Accept Member"
 #~ msgid "Activate Member"
 #~ msgstr "Прыняць чальца"
-
-#, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "Вы сапраўды хочаце выйсці з „%(title)s“?"
 
 #, fuzzy
 #~| msgid "Remove Member"
