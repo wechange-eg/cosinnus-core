@@ -107,6 +107,7 @@ MIDDLEWARE = [
     'cosinnus.core.middleware.cosinnus_middleware.AddRequestToModelSaveMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
     'cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware',
+    'cosinnus.middleware.set_password.SetPasswordMiddleware',
 ]
 
 
