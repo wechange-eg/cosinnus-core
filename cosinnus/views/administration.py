@@ -93,6 +93,9 @@ class ManagedTagsNewsletterMixin:
             raise PermissionDenied('You do not have permission to access this page.')
         return super().dispatch(request, *args, **kwargs)
 
+    def get_success_url(self):
+        return reverse('cosinnus:administration-managed-tags-newsletter-update',args=(self.object.id,))
+
 
 class ManagedTagsNewsletterListView(ManagedTagsNewsletterMixin, ListView):
     model = Newsletter
@@ -105,21 +108,29 @@ class ManagedTagsNewsletterListView(ManagedTagsNewsletterMixin, ListView):
 managed_tags_newsletters = ManagedTagsNewsletterListView.as_view()
 
 
-class ManagedTagsNewsletterCreateView(ManagedTagsNewsletterMixin, CreateView):
+class ManagedTagsNewsletterCreateView(SuccessMessageMixin,
+                                     ManagedTagsNewsletterMixin,
+                                     CreateView):
     model = Newsletter
     form_class = NewsletterForManagedTagsForm
     template_name = 'cosinnus/administration/newsletter_form.html'
-    success_url = reverse_lazy('cosinnus:administration-managed-tags-newsletter')
+    success_message = _("Newsletter successfully created!")
+
 
 managed_tags_newsletter_create = ManagedTagsNewsletterCreateView.as_view()
 
 
-class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin, UpdateView):
+class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin,
+                                      UpdateView):
     model = Newsletter
     form_class = NewsletterForManagedTagsForm
     template_name = 'cosinnus/administration/newsletter_form.html'
     pk_url_kwarg = 'newsletter_id'
-    success_url = reverse_lazy('cosinnus:administration-managed-tags-newsletter')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['receipients'] = len(self._get_recipients_from_tags())
+        return context
 
     def _get_recipients_from_tags(self):
         managed_tags = self.object.managed_tags.all()
@@ -154,6 +165,7 @@ class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin, UpdateView):
         )
         for managed_tag in self.object.managed_tags.all():
             copy.managed_tags.add(managed_tag)
+        return copy
 
     def form_valid(self, form):
         self.object = form.save()
@@ -167,10 +179,12 @@ class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin, UpdateView):
             self._send_newsletter([self.request.user])
             messages.add_message(self.request, messages.SUCCESS, _('Test email sent.'))
         elif 'copy_newsletter' in self.request.POST:
-            self._copy_newsletter()
+            self.object = self._copy_newsletter()
             messages.add_message(self.request, messages.SUCCESS, _('Newsletter has been copied.'))
+        else:
+            messages.add_message(self.request, messages.SUCCESS, _('Newsletter has been updated.'))
         return HttpResponseRedirect(self.get_success_url())
-      
+
 managed_tags_newsletter_update = ManagedTagsNewsletterUpdateView.as_view()
 
 
