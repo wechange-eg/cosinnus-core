@@ -295,7 +295,7 @@ var App = function App () {
         var sdgsJson = typeof COSINNUS_MAP_SDGS_JSON !== 'undefined' ? COSINNUS_MAP_SDGS_JSON : {};
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
         var cloudEnabled = COSINNUS_CLOUD_ENABLED || false;
-        
+
         if (self.navbarQuickSearchView == null) {
         	self.navbarQuickSearchView = new NavbarQuickSearchView({
         		model: null,

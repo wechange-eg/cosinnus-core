@@ -125,7 +125,7 @@ def map_search_endpoint(request, filter_group_id=None):
     item_id = params['item']
     
     if params.get('cloudfiles', False):
-        return map_cloudfiles_endpoint(request, query)
+        return map_cloudfiles_endpoint(request, query, limit, page)
 
     # TODO: set to  params['external'] after the external switch button is in frontend!
     external = settings.COSINNUS_EXTERNAL_CONTENT_ENABLED
@@ -232,12 +232,31 @@ def map_search_endpoint(request, filter_group_id=None):
     }
     return JsonResponse(data)
 
-def map_cloudfiles_endpoint(request, query):
+def map_cloudfiles_endpoint(request, query, limit, page):
     from cosinnus_cloud.utils.nextcloud import perform_fulltext_search
     from cosinnus_cloud.hooks import get_nc_user_id
 
     result = perform_fulltext_search(get_nc_user_id(request.user), query)
-    return JsonResponse({"results": [CloudfileMapCard(doc) for doc in result["documents"]], "query": query, "user": get_nc_user_id(request.user)})
+
+    if result['documents']:
+        total_count = result['meta']['total']
+        count = result['meta']['count']
+        page_obj = {
+            'index': page,
+            'count': count,
+            'total_count': total_count,
+            'start': (limit * page) + 1,
+            'end': (limit * page) + count,
+            'has_next': total_count > (limit * (page + 1)),
+            'has_previous': page > 0,
+        }
+    else:
+        page_obj = None
+
+    return JsonResponse({
+        "results": [CloudfileMapCard(doc) for doc in result["documents"]],
+        "page": page_obj
+    })
 
 
 MAP_DETAIL_PARAMETERS = {
