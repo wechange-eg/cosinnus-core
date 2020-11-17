@@ -65,6 +65,21 @@ class MembershipAdmin(admin.ModelAdmin):
     list_filter = ('status',)
     search_fields = ('user__first_name', 'user__last_name', 'user__email', 'group__name')
     raw_id_fields = ('user',)
+    actions = ['make_admin', 'make_member']
+    
+    def make_admin(self, request, queryset):
+        """ Converts the memberships' statuses """
+        queryset.update(status=MEMBERSHIP_ADMIN)
+        self.message_user(request, f'Made {len(queryset)} users an Admin', messages.SUCCESS)
+    
+    make_admin.short_description = _("Convert memberships to Admin status")
+        
+    def make_member(self, request, queryset):
+        """ Converts the memberships' statuses """
+        queryset.update(status=MEMBERSHIP_MEMBER)
+        self.message_user(request, f'Made {len(queryset)} users a Member', messages.SUCCESS)
+        
+    make_member.short_description = _("Convert memberships to Member status")
     
 admin.site.register(CosinnusGroupMembership, MembershipAdmin)
 
@@ -122,6 +137,21 @@ class PortalMembershipAdmin(admin.ModelAdmin):
     list_filter = ('group', 'status',)
     search_fields = ('user__first_name', 'user__last_name', 'user__email', 'group__name')
     raw_id_fields = ('user',)
+    actions = ['make_admin', 'make_member']
+    
+    def make_admin(self, request, queryset):
+        """ Converts the memberships' statuses """
+        queryset.update(status=MEMBERSHIP_ADMIN)
+        self.message_user(request, f'Made {len(queryset)} users an Admin', messages.SUCCESS)
+    
+    make_admin.short_description = _("Convert memberships to Admin status")
+        
+    def make_member(self, request, queryset):
+        """ Converts the memberships' statuses """
+        queryset.update(status=MEMBERSHIP_MEMBER)
+        self.message_user(request, f'Made {len(queryset)} users a Member', messages.SUCCESS)
+        
+    make_member.short_description = _("Convert memberships to Member status")
 
 admin.site.register(CosinnusPortalMembership, PortalMembershipAdmin)
 
@@ -626,7 +656,7 @@ admin.site.register(BBBRoom, CosinnusBBBRoomAdmin)
 
 
 class CosinnusConferenceRoomAdmin(admin.ModelAdmin):
-    list_display = ('title', 'type', 'group', 'sort_index')
+    list_display = ('title', 'id', 'type', 'group', 'sort_index')
     list_filter = ('group', 'group__portal')
     search_fields = ('slug', 'title',)
 

@@ -47,7 +47,8 @@ class CosinnusGroupMembershipQS(models.query.QuerySet):
 
     def update(self, **kwargs):
         ret = super(CosinnusGroupMembershipQS, self).update(**kwargs)
-        self.model._clear_cache()
+        for membership in self:
+            membership._clear_cache()
         return ret
 
 
