@@ -22,6 +22,7 @@ from cosinnus.utils.files import get_managed_tag_image_filename, image_thumbnail
     image_thumbnail_url
 from cosinnus.utils.functions import clean_single_line_text, resolve_class
 from django.urls.base import reverse
+from django.utils.text import slugify
 
 
 logger = logging.getLogger('cosinnus')
@@ -334,6 +335,45 @@ class CosinnusManagedTag(models.Model):
         """ Returns the filtered search view for this tag """
         return reverse('cosinnus:map') + f'?managed_tags={self.id}'
     
+    @classmethod
+    def create_managed_tag_and_paired_group(cls, name, creator, managed_tag_type=None):
+        """ Creates a managed tag if it doesn't exist and a paired group 
+            @param name: The name for both the managed tag and the paired group
+            @param creator: user that is set as creator of the tag and group
+            @param managed_tag_type: optional, the CosinnusManagedTagType for the tag
+            @return: False if a managed tag of the given `name` already existed, the tag otherwise
+        """
+        tag_slug = slugify(name)
+        existing_tag = get_object_or_None(CosinnusManagedTag, name__iexact=name)
+        existing_tag_by_slug = get_object_or_None(CosinnusManagedTag, slug__iexact=tag_slug)
+        if existing_tag or existing_tag_by_slug:
+            logger.warn('Did not create a new managed tag because an existing tag has the same name or slug', extra={'new_tag_name': name})
+            return False
+        
+        # create group
+        try:
+            from cosinnus.models.group_extra import CosinnusSociety
+            group_name = f'{settings.COSINNUS_MANAGED_TAGS_PAIRED_GROUPS_PREFIX}{name}'
+            paired_group = CosinnusSociety.create_group_for_user(group_name, creator)
+        except Exception as e:
+            logger.error('Error when creating a new managed tag, could not create paired group, but continuing tag creation!', extra={'exception': e})
+            
+        # create tag
+        try:
+            managed_tag = CosinnusManagedTag.objects.create(
+                name=name,
+                slug=tag_slug,
+                creator=creator,
+                type=managed_tag_type,
+                paired_group=paired_group,
+                portal=CosinnusPortal().get_current()
+            )
+        except Exception as e:
+            logger.error('Error when creating a new managed tag, during paired group creation', extra={'exception': e})
+            return False
+        return managed_tag
+        
+    
 
 class CosinnusManagedTagAssignmentModelMixin(object):
     """ Mixin for models that can have CosinnusManagedTagAssignments assigned. 
@@ -349,4 +389,5 @@ class CosinnusManagedTagAssignmentModelMixin(object):
         """ Returns all approved assigned managed tags for this object """
         tag_ids = self.get_managed_tag_ids()
         return CosinnusManagedTag.objects.get_cached(list(tag_ids))
+
 

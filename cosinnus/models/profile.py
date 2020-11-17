@@ -644,6 +644,7 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
                     choices = [('', _('(No choice)'))] if field_options.required else []
                     predefined_choices = CosinnusPortal.get_current().dynamic_field_choices.get(field_name, None)
                     if predefined_choices:
+                        predefined_choices = sorted(predefined_choices)
                         choices += [(val, val) for val in predefined_choices]
                     formfield_kwargs['choices'] = choices
                 elif field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT:

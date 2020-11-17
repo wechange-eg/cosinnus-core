@@ -776,6 +776,8 @@ class CosinnusConf(AppConf):
     MANAGED_TAGS_GROUP_FORMFIELD_REQUIRED = False
     # the default slug for pre-filled managed tags
     MANAGED_TAGS_DEFAULT_INITIAL_SLUG = None
+    # the prefix for any automatically created paired groups
+    MANAGED_TAGS_PAIRED_GROUPS_PREFIX = None
     
 
 class CosinnusDefaultSettings(AppConf):

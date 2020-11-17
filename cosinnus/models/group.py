@@ -872,7 +872,25 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def delete(self, *args, **kwargs):
         self._clear_cache(slug=self.slug)
         super(CosinnusBaseGroup, self).delete(*args, **kwargs)
-
+    
+    @classmethod
+    def create_group_for_user(cls, name, user):
+        """ Creates a new group and sets the given user as admin """
+        current_portal = CosinnusPortal.get_current()
+        group = cls.objects.create(
+            name=name,
+            type=cls.GROUP_MODEL_TYPE,
+            portal=current_portal
+        )
+        membership = CosinnusGroupMembership.objects.create(user=user,
+            group=group, status=MEMBERSHIP_ADMIN)
+        # clear cache and manually refill because race conditions can make the group memberships be cached as empty
+        membership._clear_cache() 
+        group.members # this refills the group's member cache immediately
+        group.admins # this refills the group's member cache immediately
+        group.update_index()
+        return group
+    
     @property
     def group_is_conference(self):
         """ Check if this is a proper conference (a type society with conference flag) """
