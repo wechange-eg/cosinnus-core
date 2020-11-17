@@ -167,7 +167,6 @@ class SetInitialPasswordView(TemplateView):
     def get(self, request, *args, **kwargs):
         token = kwargs['token'] if kwargs.get('token', '') else request.COOKIES.get(PROFILE_SETTING_PASSWORD_NOT_SET)
 
-        # token = kwargs.get('token', '') if 'token' in kwargs else request.META.get('password_not_set', '')
         user = get_user_from_set_password_token(token)
 
         if user and not request.user.is_authenticated and not user.password:
@@ -187,6 +186,14 @@ class SetInitialPasswordView(TemplateView):
             if form.is_valid():
                 form.save()
                 messages.success(self.request, _("Your password was set successfully!"))
+
+                try:
+                    # removing the key from the cosinnus_profile settings to prevent double usage
+                    user.cosinnus_profile.settings.pop(PROFILE_SETTING_PASSWORD_NOT_SET)
+                except KeyError as e:
+                    logger.error(
+                        'Error while deleting key %s from cosinnus_profile settings of user %s. This key is supposed to be present. Password was set anyway',
+                        extra={'exception': e, 'reason': str(e)})
                 # TODO redirect to intented view
             return render(request, template_name=self.template_name, context={'form': form})
         else:
