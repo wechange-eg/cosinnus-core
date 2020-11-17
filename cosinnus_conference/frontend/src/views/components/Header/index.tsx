@@ -46,7 +46,7 @@ function HeaderConnector(props: HeaderProps) {
     return null
   }
   return (
-    <div>
+    <div className={classes.header}>
       {conference.props.wallpaper && (
         <img
           src={conference.props.wallpaper}

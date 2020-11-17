@@ -1,5 +1,6 @@
 import React, {useState} from "react"
 import {
+  Link,
   List,
   ListItem,
   ListItemText, Tab,
@@ -13,15 +14,16 @@ import moment from "moment"
 
 import {Event, EventDay} from "../../../stores/events/models"
 import {formatTime, getCurrentDay, groupByDaysAndSlots} from "../../../utils/events"
-import {ManageEventIcons} from "../ManageEventIcons"
+import {EventIcons} from "../EventIcons"
 import {useStyles} from "./style"
 
 export interface EventListProps {
   events: Event[]
+  showLinks: boolean
 }
 
 export function EventList(props: EventListProps) {
-  const { events } = props
+  const { events, showLinks } = props
   const classes = useStyles()
   const days = groupByDaysAndSlots(events)
   const [ currentDay, setCurrentDay] = useState(getCurrentDay(days))
@@ -51,7 +53,7 @@ export function EventList(props: EventListProps) {
           primary={event.props.title}
           secondary={<Typography component="span" dangerouslySetInnerHTML={{__html: event.getNoteOrPresenters()}} />}
         />
-        <ManageEventIcons event={event}/>
+        <EventIcons event={event} showLinks={showLinks} />
       </ListItem>
     )
   }

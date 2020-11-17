@@ -4,6 +4,8 @@ from datetime import timedelta
 from builtins import object
 import random
 
+from django.urls import reverse
+
 from cosinnus.templatetags.cosinnus_tags import textfield, get_country_name
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -200,11 +202,12 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
     participants_limit = serializers.IntegerField(source='max_participants')
     management_urls = serializers.SerializerMethodField()
     note_html = serializers.SerializerMethodField()
+    feed_url = serializers.SerializerMethodField()
 
     class Meta(object):
         model = ConferenceEvent
         fields = ('id', 'title', 'note_html', 'from_date', 'to_date', 'room', 'url', 'is_break', 'image_url',
-                  'presenters', 'participants_limit', 'management_urls')
+                  'presenters', 'participants_limit', 'feed_url', 'management_urls')
 
     def get_url(self, obj):
         # FIXME: Maybe smarter filtering for URL
@@ -215,6 +218,10 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
         if image_file:
             return image_thumbnail_url(image_file, (466, 112))
         return static('images/conference-event-placeholder.png')
+
+    def get_feed_url(self, obj):
+        return group_aware_reverse('cosinnus:event:conference-event-entry', kwargs={'group': obj.group.slug,
+                                                                                    'slug': obj.slug})
 
     def get_management_urls(self, obj):
         user = self.context['request'].user

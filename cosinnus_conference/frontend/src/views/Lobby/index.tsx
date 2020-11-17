@@ -61,7 +61,7 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
-        {(events && events.events && events.events.length > 0 && <EventList events={events.events} />)
+        {(events && events.events && events.events.length > 0 && <EventList events={events.events} showLinks={true} />)
           || (events && events.loading && <Loading />)
           || <Typography><FormattedMessage id="No events." /></Typography>
         }

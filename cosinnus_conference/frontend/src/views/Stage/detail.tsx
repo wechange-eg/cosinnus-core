@@ -14,7 +14,7 @@ import {Event} from "../../stores/events/models"
 import {Content} from "../components/Content/style"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
-import {ManageEventButtons} from "../components/ManageEventButtons"
+import {EventButtons} from "../components/EventButtons"
 import {Sidebar} from "../components/Sidebar"
 import {IframeContent} from "../components/IframeContent"
 import {EventRoomState} from "../../stores/events/reducer"
@@ -55,7 +55,7 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
             <div className="description" dangerouslySetInnerHTML={{__html: event.props.noteHtml}} />
           )}
           <IframeContent url={event.props.url} />
-          <ManageEventButtons event={event} />
+          <EventButtons event={event} />
         </Content>
       ))
       || (events && events.loading) && (

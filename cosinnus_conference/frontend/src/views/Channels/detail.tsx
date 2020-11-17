@@ -13,7 +13,7 @@ import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
 import {fetchEvents} from "../../stores/events/effects"
 import {Event} from "../../stores/events/models"
-import {ManageEventButtons} from "../components/ManageEventButtons"
+import {EventButtons} from "../components/EventButtons"
 import {IframeContent} from "../components/IframeContent"
 import {EventRoomState} from "../../stores/events/reducer"
 import {FormattedMessage} from "react-intl"
@@ -51,7 +51,7 @@ function ChannelConnector (props: ChannelProps & RouteComponentProps) {
             <div className="description" dangerouslySetInnerHTML={{__html: event.props.noteHtml}} />
           )}
           <IframeContent url={event.props.url} />
-          <ManageEventButtons event={event} />
+          <EventButtons event={event} />
         </Content>
       ))
       || (events && events.loading) && (

@@ -13,7 +13,7 @@ import {Content} from "../components/Content/style"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
 import {fetchEvents} from "../../stores/events/effects"
-import {ManageEventButtons} from "../components/ManageEventButtons"
+import {EventButtons} from "../components/EventButtons"
 import {IframeContent} from "../components/IframeContent"
 import {FormattedMessage} from "react-intl"
 
@@ -50,7 +50,7 @@ function DiscussionConnector (props: DiscussionProps & RouteComponentProps) {
             <div className="description" dangerouslySetInnerHTML={{__html: event.props.noteHtml}} />
           )}
           <IframeContent url={event.props.url} />
-          <ManageEventButtons event={event} />
+          <EventButtons event={event} />
         </Content>
       ))
       || (events && events.loading) && (

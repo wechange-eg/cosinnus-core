@@ -8,7 +8,7 @@ import moment from "moment"
 
 import {Event, EventDay} from "../../../stores/events/models"
 import {formatTime, getCurrentDay, groupByDaysAndSlots} from "../../../utils/events"
-import {ManageEventIcons} from "../ManageEventIcons"
+import {EventIcons} from "../EventIcons"
 import {useStyles} from "./style"
 import {EventParticipants} from "../../../stores/eventParticipants/reducer"
 
@@ -102,7 +102,7 @@ export function EventGrid(props: EventGridProps) {
                 </div>
               )}
             </div>
-            <ManageEventIcons event={event} />
+            <EventIcons event={event} />
           </CardContent>
         </CardActionArea>
       </Card>

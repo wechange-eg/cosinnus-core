@@ -136,10 +136,10 @@ function NavConnector(props: NavProps) {
           <ListItemText primary={<FormattedMessage id="Manage rooms" />} />
         </ListItem>
         )}
-        {conference.props.managementUrls.manageEvents && (
+        {conference.props.managementUrls.Events && (
         <ListItem
           button
-          href={conference.props.managementUrls.manageEvents}
+          href={conference.props.managementUrls.Events}
           className={classes.listItem}
         >
           <FontAwesomeIcon icon={faCalendar} />&nbsp;

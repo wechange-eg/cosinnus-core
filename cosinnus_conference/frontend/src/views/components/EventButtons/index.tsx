@@ -9,11 +9,11 @@ import axios from "axios"
 import {Event} from "../../../stores/events/models"
 import {useStyles} from "./style"
 
-interface ManageEventButtonsProps {
+interface EventButtonsProps {
   event: Event
 }
 
-export function ManageEventButtons(props: ManageEventButtonsProps) {
+export function EventButtons(props: EventButtonsProps) {
   const {event} = props
   const classes = useStyles()
   const [deleteOpen, setDeleteOpen] = useState(false);

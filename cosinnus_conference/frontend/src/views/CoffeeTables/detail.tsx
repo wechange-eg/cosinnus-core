@@ -14,7 +14,7 @@ import {useStyles} from "./style"
 import {Loading} from "../components/Loading"
 import {Main} from "../components/Main/style"
 import {fetchEvents} from "../../stores/events/effects"
-import {ManageEventButtons} from "../components/ManageEventButtons"
+import {EventButtons} from "../components/EventButtons"
 import {IframeContent} from "../components/IframeContent"
 import {EventRoomState} from "../../stores/events/reducer"
 import {FormattedMessage} from "react-intl"
@@ -52,7 +52,7 @@ function CoffeeTableConnector (props: CoffeeTableProps & RouteComponentProps) {
             <div className="description" dangerouslySetInnerHTML={{__html: event.props.noteHtml}} />
           )}
           <IframeContent url={event.props.url} />
-          <ManageEventButtons event={event} />
+          <EventButtons event={event} />
         </Content>
       ))
       || (events && events.loading) && (

@@ -38,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "right",
     "& > a": {
       flex: 1,
-      "&:hover": {
+      "&:hover,&:focus,&:active": {
         color: theme.palette.primary.light,
       }
     }

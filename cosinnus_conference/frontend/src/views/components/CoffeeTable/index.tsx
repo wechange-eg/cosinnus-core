@@ -5,7 +5,7 @@ import {FormattedMessage} from "react-intl"
 
 import {Event} from "../../../stores/events/models"
 import {useStyles} from "./style"
-import {ManageEventIcons} from "../ManageEventIcons"
+import {EventIcons} from "../EventIcons"
 
 export interface CoffeeTableProps {
   event: Event
@@ -50,7 +50,7 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
           <CardMedia
             component="img"
             alt={event.props.title}
-            height="100"
+            height="auto"
             image={event.props.imageUrl}
             title={event.props.title}
           />
@@ -72,7 +72,7 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
               </Typography>
             )
           )}
-          <ManageEventIcons event={event} />
+          <EventIcons event={event} />
         </CardContent>
       </CardActionArea>
     </Card>

@@ -41,6 +41,9 @@ export const useStyles = makeStyles((theme) => ({
       color: "#ffffff",
       "& div:first-child p": {
         color: theme.palette.primary.light,
+      },
+      "& a": {
+        color: "#ffffff"
       }
     }
   },
@@ -64,7 +67,7 @@ export const useStyles = makeStyles((theme) => ({
   actionArea: {
     "&:hover $focusHighlight": {
       opacity: 0
-    }
+    },
   },
   focusHighlight: {
   },

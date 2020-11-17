@@ -21,6 +21,7 @@ export interface EventJson {
   url: string
   presenters: ParticipantJson[]
   participants_limit: number
+  feed_url: string
   management_urls?: {
     create_event: string
     update_event: string
@@ -40,6 +41,7 @@ export interface EventProps {
   url: string
   presenters: Participant[]
   participantsLimit: number
+  feedUrl: string
   managementUrls?: {
     createEvent: string
     updateEvent: string
@@ -75,6 +77,7 @@ export class Event {
       url: json.url,
       presenters: presenters,
       participantsLimit: json.participants_limit,
+      feedUrl: json.feed_url,
       managementUrls: {
         createEvent: json.management_urls.create_event,
         updateEvent: json.management_urls.update_event,
@@ -106,6 +109,7 @@ export class Event {
       url: props.url,
       presenters: presenters,
       participants_limit: props.participantsLimit,
+      feed_url: props.feedUrl,
       management_urls: {
         create_event: props.managementUrls.createEvent,
         update_event: props.managementUrls.updateEvent,
