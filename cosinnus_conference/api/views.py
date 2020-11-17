@@ -34,7 +34,7 @@ class RequireEventReadMixin(object):
         queryset = self.queryset
         if not check_user_superuser(self.request.user):
             user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(self.request.user)
-            queryset = queryset.filter(room__group__id__in=user_group_ids)
+            queryset = queryset.filter(room__group__id__in=user_group_ids, room__is_visible=True)
         return queryset
 
 
@@ -51,7 +51,9 @@ class ConferenceViewSet(RequireGroupReadMixin,
         if room_id:
             queryset = queryset.filter(room=room_id)
         else:
-            queryset = queryset.filter(room__group=pk).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
+            queryset = queryset.filter(room__group=pk)\
+                .exclude(type__in=ConferenceEvent.TIMELESS_TYPES)\
+                .filter(room__is_visible=True)
         queryset = queryset.order_by('from_date', 'title')
         page = self.paginate_queryset(queryset)
         serializer = ConferenceEventSerializer(page, many=True, context={"request": request})

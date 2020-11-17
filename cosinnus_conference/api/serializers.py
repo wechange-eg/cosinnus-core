@@ -52,7 +52,9 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
         if obj.type == obj.TYPE_PARTICIPANTS:
             return obj.group.users.filter(is_active=True).count()
         elif obj.type == obj.TYPE_LOBBY:
-            queryset = ConferenceEvent.objects.filter(group=obj.group).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
+            queryset = ConferenceEvent.objects.filter(group=obj.group)\
+                .exclude(type__in=ConferenceEvent.TIMELESS_TYPES)\
+                .filter(room__is_visible=True)
             return queryset.count()
         else:
             return obj.events.count()

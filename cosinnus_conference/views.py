@@ -360,8 +360,9 @@ class ConferencePageView(RequireReadMixin, GroupIsConferenceMixin, TemplateView)
         else:
             room_slug = kwargs.pop('slug')
             self.room = get_object_or_None(CosinnusConferenceRoom, group=self.group, slug=room_slug)
-        if self.room and not self.room.is_visible:    
-            return HttpResponseForbidden()
+        if self.room and not self.room.is_visible:
+            if not check_user_superuser(request.user) and not check_ug_admin(request.user, self.group):
+                return HttpResponseForbidden()
         
         self.rooms = self.group.rooms.all()
         if self.rooms.count() == 0 and (check_ug_admin(request.user, self.group) or check_user_superuser(request.user)):
