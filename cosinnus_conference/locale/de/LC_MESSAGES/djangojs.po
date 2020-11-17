@@ -351,3 +351,14 @@ msgstr "Teilnehmer"
 #: locale/src/views/components/CoffeeTable/index.json
 msgid "places left"
 msgstr "Plätze frei"
+
+msgid "Are you sure you want to leave this event?"
+msgstr "Sind Sie sicher, dass Sie diese Veranstaltung verlassen wollen?"
+
+msgid ""
+"You're currently attending an event. Are you sure you want to leave? "
+"Tip: You can open a new tab or window instead."
+msgstr ""
+"Sie nehmen derzeit an einer Veranstaltung teil. Sind Sie sicher, dass Sie "
+"gehen möchten? Tipp: Sie können stattdessen eine neue Registerkarte oder "
+"ein neues Fenster öffnen."

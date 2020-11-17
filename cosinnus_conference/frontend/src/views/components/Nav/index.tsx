@@ -1,6 +1,18 @@
 import React, {useState} from "react"
 import {
-  ListItemText, Drawer, Typography, List, ListItem, Badge, Button, Divider, Link, Card
+  ListItemText,
+  Drawer,
+  Typography,
+  List,
+  ListItem,
+  Badge,
+  Button,
+  Divider,
+  Link,
+  Card,
+  Dialog,
+  DialogTitle,
+  DialogContent, DialogContentText, DialogActions
 } from "@material-ui/core"
 import {connect} from "react-redux"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
@@ -22,6 +34,7 @@ import {useStyles} from "./style"
 import {Room} from "../../../stores/room/models"
 import {Conference} from "../../../stores/conference/models"
 import {Participant} from "../../../stores/participants/models"
+import Iframe from "react-iframe"
 
 interface NavProps {
   conference: Conference
@@ -43,6 +56,8 @@ const mapDispatchToProps = {
 function NavConnector(props: NavProps) {
   const { conference, participants, room } = props
   const [open, setOpen] = useState(false)
+  const [leaveOpen, setLeaveOpen] = useState(false)
+  const [leaveUrl, setLeaveUrl] = useState("")
   const classes = useStyles()
   if (!conference) {
     return null
@@ -98,6 +113,20 @@ function NavConnector(props: NavProps) {
               key={navRoom.props.id}
               component="a"
               href={"../" + navRoom.props.slug + "/"}
+              onClick={(e) => {
+                // Don't prompt if link is opened in a new tab
+                if (e.ctrlKey || e.shiftKey || e.metaKey || (e.button && e.button == 1)) {
+                  return
+                }
+                // Don't prompt if not a detail view
+                if (document.getElementsByClassName("iframe").length == 0) {
+                  return
+                }
+                e.preventDefault()
+                setLeaveUrl("../" + navRoom.props.slug + "/")
+                setLeaveOpen(true)
+                return false
+              }}
               selected={room && navRoom.props.id === room.props.id}
               className={classes.listItem}
             >
@@ -147,6 +176,27 @@ function NavConnector(props: NavProps) {
         </ListItem>
         )}
       </List>
+      <Dialog
+        open={leaveOpen}
+        onClose={() => setLeaveOpen(false)}
+        aria-labelledby="leave-dialog-title"
+        aria-describedby="leave-dialog-description"
+      >
+        <DialogTitle id="leave-dialog-title"><FormattedMessage id="Are you sure you want to leave this event?" /></DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <FormattedMessage id="You're currently attending an event. Are you sure you want to leave? Tip: You can open a new tab or window instead." />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => window.location.href = leaveUrl} color="primary">
+            <FormattedMessage id="Yes" />
+          </Button>
+          <Button onClick={() => setLeaveOpen(false)} color="primary" autoFocus>
+            <FormattedMessage id="No" />
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Drawer>
   )
 }

@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect, useState} from "react"
+import {faArrowsAlt, faCompressArrowsAlt, faExternalLinkAlt} from "@fortawesome/free-solid-svg-icons"
 import Iframe from "react-iframe"
+import {Link} from "@material-ui/core"
 
 import {useStyles} from "./style"
-import {Link} from "@material-ui/core"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faArrowsAlt, faCompressArrowsAlt, faExternalLinkAlt, faLink} from "@fortawesome/free-solid-svg-icons"
 import clsx from "clsx"
 
 interface IframeProps {
