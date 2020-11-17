@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.views.generic.edit import CreateView, FormView, UpdateView
@@ -25,9 +25,11 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 
 from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.core.mail import send_html_mail_threaded
 from cosinnus.models.group import CosinnusGroup
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 
 
 class AdministrationView(TemplateView):
@@ -133,21 +135,28 @@ class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin,
         return context
 
     def _get_recipients_from_tags(self):
-        managed_tags = self.object.managed_tags.all()
-        group_type = ContentType.objects.get(app_label='cosinnus', model='cosinnusgroup')
-        profile_type = ContentType.objects.get(app_label='cosinnus', model='userprofile')
-        users = []
-        for tag in managed_tags:
-            group_tags = tag.assignments.filter(content_type=group_type)
-            for group_tag in group_tags:
-                for user in group_tag.target_object.users.all():
-                    users.append(user)
+        tags = self.object.managed_tags.all()
+        assignments = CosinnusManagedTagAssignment.objects.filter(managed_tag__in=tags)
 
-            profile_tags = tag.assignments.filter(content_type=profile_type)
-            for profile_tag in profile_tags:
-                users.append(profile_tag.target_object.user)
-        user_set = set(users)
-        return list(user_set)
+        group_type = ContentType.objects.get(
+            app_label='cosinnus', model='cosinnusgroup')
+        profile_type = ContentType.objects.get(
+            app_label='cosinnus', model='userprofile')
+        group_ids = assignments.filter(
+            content_type=group_type).values_list('object_id', flat=True)
+        profile_ids = assignments.filter(
+            content_type=profile_type).values_list('object_id', flat=True)
+
+        tag_users = get_user_model().objects.filter(
+            Q(cosinnus_groups__id__in=group_ids) | Q(cosinnus_profile__id__in=profile_ids)).distinct()
+
+        users = []
+        for user in tag_users:
+            if (check_user_can_receive_emails(user) and
+                    user.cosinnus_profile.settings.get('newsletter_opt_in', False)):
+                users.append(user)
+
+        return users
 
     def _send_newsletter(self, recipients):
         subject = self.object.subject
