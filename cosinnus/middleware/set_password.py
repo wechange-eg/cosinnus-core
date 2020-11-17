@@ -15,12 +15,15 @@ class SetPasswordMiddleware:
         Display of 403 or 404 pages respectively is provided by the set_password view.
 
         Logout view will not be redirected,
-
         """
     def __init__(self, get_repsonse):
         self.get_response = get_repsonse
 
     def requested_initial_password(self, func):
+        """ Checks if the view function of the resolved request path matches the view meant to set the initial
+            password for a user without an initial password
+        """
+
         if not hasattr(func, 'view_class'):
             return False
         elif func.view_class == SetInitialPasswordView:
@@ -36,15 +39,9 @@ class SetPasswordMiddleware:
             return response
 
         elif self.requested_initial_password(func) and token:
-            # request.COOKIES[PROFILE_SETTING_PASSWORD_NOT_SET] = token
-
             response = self.get_response(request)
             if not request.COOKIES.get(PROFILE_SETTING_PASSWORD_NOT_SET):
                 response.set_cookie(PROFILE_SETTING_PASSWORD_NOT_SET, token)
             return response
         else:
             return HttpResponseRedirect(reverse('password_set_initial'))
-
-    def process_request(self, request, response):
-        return request
-        pass
