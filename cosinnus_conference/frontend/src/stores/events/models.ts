@@ -19,6 +19,7 @@ export interface EventJson {
   image_url?: string
   room: Room
   url: string
+  raw_html: string
   presenters: ParticipantJson[]
   participants_limit: number
   feed_url: string
@@ -39,6 +40,7 @@ export interface EventProps {
   imageUrl?: string
   room: Room
   url: string
+  rawHtml: string
   presenters: Participant[]
   participantsLimit: number
   feedUrl: string
@@ -75,6 +77,7 @@ export class Event {
       imageUrl: json.image_url,
       room: json.room,
       url: json.url,
+      rawHtml: json.raw_html,
       presenters: presenters,
       participantsLimit: json.participants_limit,
       feedUrl: json.feed_url,
@@ -107,6 +110,7 @@ export class Event {
       image_url: props.imageUrl,
       room: props.room,
       url: props.url,
+      raw_html: props.rawHtml,
       presenters: presenters,
       participants_limit: props.participantsLimit,
       feed_url: props.feedUrl,

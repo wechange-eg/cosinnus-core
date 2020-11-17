@@ -36,6 +36,7 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
         CosinnusConferenceRoom.TYPE_COFFEE_TABLES: 'coffee_tables',
         CosinnusConferenceRoom.TYPE_RESULTS: 'results',
         CosinnusConferenceRoom.TYPE_PARTICIPANTS: 'participants',
+        CosinnusConferenceRoom.TYPE_HTML: 'html',
     }
     type = serializers.SerializerMethodField()
     count = serializers.SerializerMethodField()
@@ -45,7 +46,8 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = CosinnusConferenceRoom
-        fields = ('id', 'slug', 'title', 'description_html', 'type', 'count', 'url', 'management_urls', 'is_visible')
+        fields = ('id', 'slug', 'title', 'description_html', 'type', 'count', 'url', 'management_urls', 'is_visible',
+                  'show_chat')
 
     def get_type(self, obj):
         return self.TYPE_MAP.get(obj.type)
@@ -206,8 +208,8 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = ConferenceEvent
-        fields = ('id', 'title', 'note_html', 'from_date', 'to_date', 'room', 'url', 'is_break', 'image_url',
-                  'presenters', 'participants_limit', 'feed_url', 'management_urls')
+        fields = ('id', 'title', 'note_html', 'from_date', 'to_date', 'room', 'url', 'raw_html', 'is_break',
+                  'image_url', 'presenters', 'participants_limit', 'feed_url', 'management_urls')
 
     def get_url(self, obj):
         # FIXME: Maybe smarter filtering for URL

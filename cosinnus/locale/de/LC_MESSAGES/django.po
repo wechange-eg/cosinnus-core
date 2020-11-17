@@ -5357,6 +5357,15 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+msgid "HTML code"
+msgstr "HTML-Code"
+
+msgid "Show chat"
+msgstr "Chat anzeigen"
+
+msgid "Check this to show rocket chat in the sidebar."
+msgstr "Rocket.Chat in der Seitenleiste anzeigen"
+
 #~ msgid "Conference is not running"
 #~ msgstr "Tagung läuft gerade nicht"
 

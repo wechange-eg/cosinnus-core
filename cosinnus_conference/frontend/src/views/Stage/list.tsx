@@ -60,7 +60,7 @@ function StageConnector (props: StageProps & RouteComponentProps) {
         }
         <ManageRoomButtons />
       </Content>
-      {room.props.url && <Sidebar url={room.props.url} />}
+      {room.props.showChat && room.props.url && <Sidebar url={room.props.url} />}
     </Grid>
   )
 }

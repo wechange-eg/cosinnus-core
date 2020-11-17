@@ -5301,6 +5301,12 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
+msgid "Show chat"
+msgstr "Показать чат"
+
+msgid "Check this to show rocket chat in the sidebar."
+msgstr "Проверьте это, чтобы показать ракетный чат на боковой панели"
+
 #, fuzzy
 #~| msgid "Participants"
 #~ msgid "Upload Participants"

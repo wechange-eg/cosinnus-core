@@ -59,6 +59,7 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
     TYPE_COFFEE_TABLES = 4
     TYPE_RESULTS = 5
     TYPE_PARTICIPANTS = 6
+    TYPE_HTML = 6
     
     TYPE_CHOICES = (
         (TYPE_LOBBY, _('Lobby')),
@@ -116,7 +117,12 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
     rocket_chat_room_id = models.CharField(_('RocketChat room id'), max_length=250, null=True, blank=True)
     rocket_chat_room_name = models.CharField(_('RocketChat room name'), max_length=250, null=True, blank=True,
             help_text='The verbose room name for linking URLs')
-    
+
+    # flag to enable/disable rocket chat
+    show_chat = models.BooleanField(_('Show chat'),
+        help_text='Show rocket chat in sidebar',
+        default=True)
+
     # Type: CoffeeTable field only
     allow_user_table_creation = models.BooleanField(_('Allow users to create new coffee tables'),
         help_text='Otherwise, only organisers can create new tables',
@@ -130,7 +136,6 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
     target_result_group = models.OneToOneField(settings.COSINNUS_GROUP_OBJECT_MODEL, 
         verbose_name=_('Result Project'), related_name='conference_room',
         null=True, blank=True, on_delete=models.SET_NULL)
-    
     
     objects = CosinnusConferenceRoomManager()
     

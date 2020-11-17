@@ -50,7 +50,7 @@ function ChannelConnector (props: ChannelProps & RouteComponentProps) {
           {event.props.noteHtml && (
             <div className="description" dangerouslySetInnerHTML={{__html: event.props.noteHtml}} />
           )}
-          <IframeContent url={event.props.url} />
+          <IframeContent url={event.props.url} html={event.props.rawHtml} />
           <EventButtons event={event} />
         </Content>
       ))

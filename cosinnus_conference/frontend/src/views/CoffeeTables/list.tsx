@@ -83,7 +83,7 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
         </div>
         <ManageRoomButtons />
       </Content>
-      {room.props.url && <Sidebar url={room.props.url} />}
+      {room.props.showChat && room.props.url && <Sidebar url={room.props.url} />}
     </Grid>
   )
 }
