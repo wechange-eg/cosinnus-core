@@ -513,6 +513,10 @@ class CosinnusConf(AppConf):
     #: How long the perm redirect cache should last (1 week, because it organizes itself)
     PERMANENT_REDIRECT_CACHE_TIMEOUT = 60 * 60 * 24 * 7
     
+    # if True, no notification message will be shown to the user when they get redirected
+    # with a CosinnusPermanentRedirect
+    PERMANENT_REDIRECT_HIDE_USER_MESSAGE = False
+    
     # the body text for the non-signed-up user invitation mail, of notification `user_group_recruited`
     RECRUIT_EMAIL_BODY_TEXT = _('%(sender_name)s would like you to come join the project "%(team_name)s" '
         'on %(portal_name)s! Click the project\'s name below to check it out and collaborate!')
