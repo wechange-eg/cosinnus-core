@@ -43,7 +43,7 @@
             {{ form.managed_tags.errors }}
             <div class="checkbox-multiple">
                 {{ form.managed_tags }}
-                {% if receipients and not form.managed_tags.errors %}
+                {% if form.instance.id and not form.managed_tags.errors %}
                 <div class="extra-text">
                     {% blocktrans count counter=receipients %}
                     With the current selection the newsletter will be sent to {{ counter }} receipient.
