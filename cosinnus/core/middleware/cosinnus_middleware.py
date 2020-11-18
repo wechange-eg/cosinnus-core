@@ -238,8 +238,18 @@ class DenyAnonymousAccessMiddleware(MiddlewareMixin):
         if not request.user.is_authenticated:
             if request.path not in LOGIN_URLS:
                 return TemplateResponse(request, 'cosinnus/portal/no_anonymous_access_page.html').render()
-            
-            
+
+
+class RedirectAnonymousUserToLoginMiddleware(MiddlewareMixin):
+    """ This middleware will show an error page on any anonymous request,
+        unless the request is directed at a login URL. """
+
+    def process_request(self, request):
+        if not request.user.is_authenticated:
+            if request.path not in LOGIN_URLS:
+                return HttpResponseRedirect('/login/')
+
+
 class ConditionalRedirectMiddleware(MiddlewareMixin):
     """ A collection of redirects based on some requirements we want to put it,
         usually to force some routing behaviour, like logged-in users being redirected off /login """
