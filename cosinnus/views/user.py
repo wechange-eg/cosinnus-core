@@ -839,21 +839,19 @@ def email_first_login_token_to_user(user, request=None, user_has_just_registered
     user.cosinnus_profile.save()
 
     # message user for email verification
-    if request:
-        data = get_common_mail_context(request)
-        data.update({
-            'user': user,
-            'user_email': user.email,
-            'verification_url_param': login_url_param,
-            'next': redirect_with_next('', request),
-        })
-        template = 'cosinnus/mail/user_email_verification%s.html' % ('_onchange' if not user_has_just_registered else '')
+    data = get_common_mail_context(None)
+    data.update({
+        'user': user,
+        'user_email': user.email,
+        'verification_url_param': login_url_param,
+    })
+    template = 'cosinnus/mail/user_email_verification%s.html' % ('_onchange' if not user_has_just_registered else '')
 
-        data.update({
-            'content': render_to_string(template, data),
-        })
-        subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
-        send_mail_or_fail_threaded(user.email, subj_user, None, data)
+    data.update({
+        'content': render_to_string(template, data),
+    })
+    subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
+    send_mail_or_fail_threaded(user.email, subj_user, None, data)
 
 
 def user_api_me(request):

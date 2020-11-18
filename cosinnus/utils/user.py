@@ -188,10 +188,10 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
     if not password and no_generated_password:
         # special handling for user without password
         user_model = get_user_model()
-        username = email if not username else username
+        temp_username = email if not username else username
 
         # check if user with that password already exist
-        user, created = user_model.objects.get_or_create(username=username)
+        user, created = user_model.objects.get_or_create(username=temp_username, email=email)
 
         email_first_login_token_to_user(user=user)
         if not created:

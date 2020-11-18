@@ -44,4 +44,6 @@ class SetPasswordMiddleware:
                 response.set_cookie(PROFILE_SETTING_PASSWORD_NOT_SET, token)
             return response
         else:
-            return HttpResponseRedirect(reverse('password_set_initial'))
+            #return HttpResponseRedirect(reverse('password_set_initial'))
+            response = self.get_response(request)
+            return response
