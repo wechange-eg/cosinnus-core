@@ -569,14 +569,14 @@ class CloudfileMapCard(BaseMapCard):
         except LookupError:
             excerpt = None
         else:
-            excerpt = re.sub(query_regexp, r"<b>\g<0></b>", excerpt, re.IGNORECASE)
+            excerpt = re.sub(query_regexp, r"<b>\g<0></b>", excerpt, flags=re.IGNORECASE)
 
 
         super().__init__(
             id=document['id'],
             type="cloudfile",
             slug=f"{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}{document['link']}",
-            title=re.sub(query_regexp, r"<b>\g<0></b>", escape(document['title']), re.IGNORECASE),
+            title=re.sub(query_regexp, r"<b>\g<0></b>", escape(document['title']), flags=re.IGNORECASE),
             mime=document['info']['mime'],
             size=document['info']['size'],
             mtime=document['info']['mtime'],
