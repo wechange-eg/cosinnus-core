@@ -289,6 +289,7 @@ module.exports = BaseView.extend({
                 // otherwise, we could make it safe using: var text = $('<div>').text(item['text']).html();
                 var text = item['text'];
                 $.each(self.state.query.split(' '), function (queryTermIdx, queryTerm) {
+
                     text = util.iReplace(text, queryTerm, '<b>$1</b>');
                 });
                 item['text'] = text;

@@ -44,8 +44,8 @@ module.exports = BaseView.extend({
         var self = this;
         if (self.model.get('type') == 'cloudfile') {
             self.template = tileTemplateCloudfile;
-        }
-        if (self.model.get('type') == 'people') {
+            self.state.isSmall = true;
+        } else if (self.model.get('type') == 'people') {
             self.state.isSmall = true;
         } 
         self.state.isYou = self.model.get('type') == 'people' && cosinnus_active_user && self.model.get('slug') == cosinnus_active_user.username;

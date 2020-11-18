@@ -46,7 +46,12 @@
 		
 		{# We use makeSafe here because we escape results' text in handleDate() #}
 		{% for item in quicksearchResults %}
-			{{ macros.listItem(item.text, item.url, item.icon, subtext=(item.subtext or ""), annotation=item.group, annotationIcon=item.group_icon, includeUnderdrop=true) }}
+			{# cloudfiles should show the subtext, others should not #}
+			{% if item.icon == "fa-cloud" %}
+				{{ macros.listItem(item.text, item.url, item.icon, subtext=item.subtext, annotation=item.group, annotationIcon=item.group_icon, includeUnderdrop=true) }}
+			{% else %}
+				{{ macros.listItem(item.text, item.url, item.icon, annotation=item.group, annotationIcon=item.group_icon, includeUnderdrop=true) }}
+			{% endif %}
 		{% endfor %} 
 		
 		

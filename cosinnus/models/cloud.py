@@ -2,6 +2,8 @@ import datetime as dt
 from collections.abc import Sequence
 from dataclasses import dataclass
 
+from django.utils.html import escape
+
 from cosinnus.conf import settings
 from cosinnus_cloud.utils.nextcloud import perform_fulltext_search
 
@@ -36,12 +38,12 @@ class NextcloudFulltextSearchQuerySet(Sequence):
         else:
             for doc in response["documents"]:
                 try:
-                    excerpt = doc["excerpts"][0]["excerpt"]
+                    excerpt = escape(doc["excerpts"][0]["excerpt"])
                 except LookupError:
                     excerpt = ""
                 self._results.append(
                     NextcloudFileProxy(
-                        name=doc["info"]["path"],
+                        name=escape(doc["info"]["path"]),
                         url=f"{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}{doc['link']}",
                         created=dt.datetime.fromtimestamp(doc["info"]["mtime"], dt.timezone.utc),
                         excerpt=excerpt,

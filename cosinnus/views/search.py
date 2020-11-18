@@ -139,6 +139,7 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
         for content_type in self.content_types:
             if content_type == 'cloudfiles':
                 from cosinnus_cloud.hooks import get_nc_user_id
+
                 single_querysets.append(
                     NextcloudFulltextSearchQuerySet(get_nc_user_id(self.request.user), self.query, page_size=self.page_size)
                 )

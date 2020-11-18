@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from copy import copy
 import datetime
+import re
 
 from django.urls import reverse
 from django.db.models import Q
@@ -559,17 +560,23 @@ class CloudfileMapCard(BaseMapCard):
         "excerpt": None,
     })
 
-    def __init__(self, document, *args, **kwargs):
+    def __init__(self, document, query, *args, **kwargs):
+
+        query_regexp = "|".join(re.escape(word) for word in query.split())
+
         try:
-            excerpt = document['excerpts'][0]['excerpt']
+            excerpt = escape(document['excerpts'][0]['excerpt'])
         except LookupError:
             excerpt = None
+        else:
+            excerpt = re.sub(query_regexp, r"<b>\g<0></b>", excerpt, re.IGNORECASE)
+
 
         super().__init__(
             id=document['id'],
             type="cloudfile",
             slug=f"{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}{document['link']}",
-            title=document['title'],
+            title=re.sub(query_regexp, r"<b>\g<0></b>", escape(document['title']), re.IGNORECASE),
             mime=document['info']['mime'],
             size=document['info']['size'],
             mtime=document['info']['mtime'],

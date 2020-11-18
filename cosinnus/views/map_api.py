@@ -254,7 +254,7 @@ def map_cloudfiles_endpoint(request, query, limit, page):
         page_obj = None
 
     return JsonResponse({
-        "results": [CloudfileMapCard(doc) for doc in result["documents"]],
+        "results": [CloudfileMapCard(doc, query) for doc in result["documents"]],
         "page": page_obj
     })
 

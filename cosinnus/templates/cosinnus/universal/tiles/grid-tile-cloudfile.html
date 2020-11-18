@@ -3,10 +3,10 @@
 
 {% block description_area %}
     <h1>
-    {{title}}
+    {{title|safe}}
     </h1>
     {% if excerpt %}
-        <div class="tile-section tile-description">{{excerpt}}</div>
+        <div class="tile-section tile-description">{{excerpt|safe}}</div>
     {% endif %}
 {% endblock %}
 
