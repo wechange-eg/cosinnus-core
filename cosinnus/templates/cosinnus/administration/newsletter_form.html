@@ -25,11 +25,11 @@
 {% block content %}
 
 <form method="post" class="cosinnus-form form-horizontal">{% csrf_token %}
-    
+
     <div class="content-box">
         {{ form.non_field_errors }}
-    
-    
+
+
         {% if form.instance.sent %}
         <p class="transparent"><i class="fas fa-info-circle"></i> {% trans 'This newsletter has already been sent. If you want to send it again, please copy it and send the copy.' %}</p>
         {% endif %}
@@ -40,16 +40,34 @@
 
         <div class="cosinnus-field">
             <label>{% trans 'Recipients' %}</label>
-            {{ field.errors }}
+            {{ form.managed_tags.errors }}
             <div class="checkbox-multiple">
                 {{ form.managed_tags }}
+                {% if form.instance.id and not form.managed_tags.errors %}
+                <div class="extra-text">
+                    {% blocktrans count counter=receipients %}
+                    With the current selection the newsletter will be sent to {{ counter }} receipient.
+                    {% plural %}
+                    With the current selection the newsletter will be sent to {{ counter }} receipients.
+                    {% endblocktrans %}
+                </div>
+                {% endif %}
             </div>
+
         </div>
-        
+
         {% trans "Body" as newsletter_body_label %}
         {% trans "Body" as newsletter_body_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.body label=newsletter_body_label placeholder=newsletter_body_placeholder large_field=True %}
 
+        {% if form.instance.id %}
+        <div class="large-space">
+            <div class="content-box white-content">
+                <h2>{% trans "Currently set Email Text" %}:</h2>
+                <div class="textfield">{{ form.instance.body|textfield }}</div>
+            </div>
+        </div>
+        {% endif %}
     </div>
 
     {% if form.instance.id %}
