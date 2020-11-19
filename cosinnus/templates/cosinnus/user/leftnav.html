@@ -1,50 +1,54 @@
 {% load i18n static socialaccount cosinnus_tags %}
 
 {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-	<button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:profile-detail' %}">
-	    <ul class="media-list">
-	        <li class="media">
-	            {% if view == "my_profile" %}
-	                <a class="pull-left">
-	                    <i class="fa fa-user"></i>
-	                </a>
-	                <a class="pull-right" href="#">
-	                    <i class="fa fa-caret-right"></i>
-	                </a>
-	            {% elif view == "edit_profile" %}
-	               <a class="pull-left">
-	                    <i class="fa fa-reply"></i>
-	                </a>
-	            {% else %}
-	                <a class="pull-left">
-	                    <i class="fa fa-user"></i>
-	                </a>
-	            {% endif %}
-	            <div class="media-body">
-	                {% trans "About me" %}
-	            </div>
-	        </li>
-	    </ul>
-	</button>
-
-	{% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
-		<button type="button" class="btn w100 btn-{% if view == "edit_profile" %}extra-{% endif %}emphasized fine-space" href="{% url 'cosinnus:profile-edit' %}">
+    {% block header_button %}
+		<button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:profile-detail' %}">
 		    <ul class="media-list">
 		        <li class="media">
-		           <a class="pull-left">
-		                <i class="fa fa-pencil"></i>
-		            </a>
-		            {% if view == "edit_profile" %}
+		            {% if view == "my_profile" %}
+		                <a class="pull-left">
+		                    <i class="fa fa-user"></i>
+		                </a>
 		                <a class="pull-right" href="#">
 		                    <i class="fa fa-caret-right"></i>
 		                </a>
+		            {% elif view == "edit_profile" %}
+		               <a class="pull-left">
+		                    <i class="fa fa-reply"></i>
+		                </a>
+		            {% else %}
+		                <a class="pull-left">
+		                    <i class="fa fa-user"></i>
+		                </a>
 		            {% endif %}
 		            <div class="media-body">
-		                {% trans "Edit Profile" %}
+		                {% trans "About me" %}
 		            </div>
 		        </li>
 		    </ul>
 		</button>
+	{% endblock %}
+
+	{% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+	    {% block userprofile_edit_buttons %}
+			<button type="button" class="btn w100 btn-{% if view == "edit_profile" %}extra-{% endif %}emphasized fine-space" href="{% url 'cosinnus:profile-edit' %}">
+			    <ul class="media-list">
+			        <li class="media">
+			           <a class="pull-left">
+			                <i class="fa fa-pencil"></i>
+			            </a>
+			            {% if view == "edit_profile" %}
+			                <a class="pull-right" href="#">
+			                    <i class="fa fa-caret-right"></i>
+			                </a>
+			            {% endif %}
+			            <div class="media-body">
+			                {% trans "Edit Profile" %}
+			            </div>
+			        </li>
+			    </ul>
+			</button>
+		{% endblock %}
 	{% endif %}
 {% endif %}
 

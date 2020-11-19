@@ -80,9 +80,12 @@
             &.missing, &.error {
             	background-color: #ffcccc !important;
             }
-            &:disabled {
-                background-color: @app-neutral-color-light !important;
-            }
+        }
+        input:disabled,
+        textarea:disabled,
+        select:disabled,
+        .select2-container-disabled, .select2-container-disabled .select2-choice, .select2-container-disabled input {
+            background-color: @app-neutral-color-light !important;
         }
         
         input, select {

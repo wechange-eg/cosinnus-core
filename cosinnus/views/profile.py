@@ -31,6 +31,7 @@ from cosinnus.templatetags.cosinnus_tags import cosinnus_setting
 from uuid import uuid1
 from cosinnus.views.user import set_user_email_to_verify
 from cosinnus.core import signals
+from django.forms.fields import CharField
 
 
 def delete_userprofile(user):
@@ -232,6 +233,26 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
                 messages.error(self.request, _('Sorry, something went wrong while saving your profile!'))
             ret = HttpResponseRedirect(reverse('cosinnus:profile-edit'))
         return ret
+    
+    def get_form(self, *args, **kwargs):
+        form = super(UserProfileUpdateView, self).get_form(*args, **kwargs)
+        # note: we have a django-multiforms form here with 'user', 'obj' (CosinnusProfile) and 'media_tag'!
+        for form_name, formfield_list in settings.COSINNUS_USERPROFILE_DISABLED_FIELDS.items():
+            sub_form = form.forms[form_name]
+            # disable profile formfields from settings
+            # we also need to remove any validation errors from required later-disabled fields
+            for field_name in formfield_list:
+                if field_name in sub_form.fields:
+                    field = sub_form.fields[field_name]
+                    field.disabled = True
+                    if field.required and self.request.method == 'POST':
+                        if field_name in sub_form.errors:
+                            # delete validation error for this field (its initial value is used anyways)
+                            del sub_form.errors[field_name]
+                            # check if the parent form's error list is now empty, if so, delete
+                            if form_name in form.errors and not form.errors[form_name]:
+                                del form.errors[form_name]
+        return form
 
 update_view = UserProfileUpdateView.as_view()
 

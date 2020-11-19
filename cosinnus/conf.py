@@ -678,7 +678,12 @@ class CosinnusConf(AppConf):
     # }
     # example: {'organisation': {'type': 'text', 'required': True}}
     USERPROFILE_EXTRA_FIELDS = {}
-
+    
+    # a dict of <form-name> -> list of formfield names that will be disabled in the user profile forms 
+    # for the current portal. can be dynamic and regular fields
+    # multiforms choosable are 'obj' (CosinnusProfile), 'user', 'media_tag'
+    USERPROFILE_DISABLED_FIELDS = {}
+    
     # if True, payment urls and views will be enabled
     PAYMENTS_ENABLED = False
     # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins
