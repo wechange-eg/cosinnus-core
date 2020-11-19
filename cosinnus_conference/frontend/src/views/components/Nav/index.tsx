@@ -9,7 +9,6 @@ import {
   Button,
   Divider,
   Link,
-  Card,
   Dialog,
   DialogTitle,
   DialogContent, DialogContentText, DialogActions
@@ -34,7 +33,6 @@ import {useStyles} from "./style"
 import {Room} from "../../../stores/room/models"
 import {Conference} from "../../../stores/conference/models"
 import {Participant} from "../../../stores/participants/models"
-import Iframe from "react-iframe"
 
 interface NavProps {
   conference: Conference
@@ -119,7 +117,7 @@ function NavConnector(props: NavProps) {
                   return
                 }
                 // Don't prompt if not a detail view
-                if (document.getElementsByClassName("iframe").length == 0) {
+                if (document.getElementsByClassName("detail-view").length == 0) {
                   return
                 }
                 e.preventDefault()

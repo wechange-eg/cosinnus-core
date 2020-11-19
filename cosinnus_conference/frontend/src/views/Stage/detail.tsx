@@ -50,7 +50,7 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
   return (
     <Main container>
       {(event && (
-        <Content className="fullheight">
+        <Content className="fullheight detail-view">
           <Typography component="h1">{event.props.title}</Typography>
           {event.props.noteHtml && (
             <div className="description" dangerouslySetInnerHTML={{__html: event.props.noteHtml}} />
