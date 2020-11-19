@@ -46,15 +46,3 @@ class BSISafePasswordValidator(object):
             if not char.isalnum():
                 return True
         return False
-
-    def get_help_text(self):
-        return _(
-            "Your password must contain at least: "
-            "{upper_case} upper case character, "
-            "{lower_case} lower case character, "
-            "{special_character} non alpha numerical character.".format(
-                upper_case=self.MIN_CAPITAL_LETTERS,
-                lower_case=self.MIN_LOWER_CASE,
-                special_character=self.MIN_SPECIAL_CHARACTERS
-            )
-        )
