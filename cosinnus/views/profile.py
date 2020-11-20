@@ -245,13 +245,7 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
                 if field_name in sub_form.fields:
                     field = sub_form.fields[field_name]
                     field.disabled = True
-                    if field.required and self.request.method == 'POST':
-                        if field_name in sub_form.errors:
-                            # delete validation error for this field (its initial value is used anyways)
-                            del sub_form.errors[field_name]
-                            # check if the parent form's error list is now empty, if so, delete
-                            if form_name in form.errors and not form.errors[form_name]:
-                                del form.errors[form_name]
+                    field.required = False
         return form
 
 update_view = UserProfileUpdateView.as_view()
