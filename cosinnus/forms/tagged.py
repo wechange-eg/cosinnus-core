@@ -225,33 +225,33 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}, init_func
         def __init__(self, *args, **kwargs):
             super(TaggableObjectForm, self).__init__(*args, **kwargs)
             
-            # we reset newly added tags if we ran into a validation error
-            # these would have to be re-added in some weird way I can't figure out, but
-            # simply letting the validation re-fill the form with them causes an error
-            # because their strings are being filled into the field that requires an id
-            # because the tag string has not actually been made a tag, and so has no id            
-            if isinstance(self.data, QueryDict) and not self.is_valid() and \
-                 any([(datatag not in self.forms['media_tag'].initial.get('tags', [])) \
-                               for datatag in self.data.getlist('media_tag-tags')]):
-                self.data._mutable = True
-                del self.data['media_tag-tags']
-                self.data.setlist('media_tag-tags', copy(self.forms['media_tag'].initial.get('tags', [])))
-            
-            # we need to do this here ~again~ on top of in the media tag form, to prevent
-            # the select2 field's values from being overwritten 
-            if self.instance.pk:
-                if self.is_valid() and 'tags' in self.forms['media_tag'].initial:
-                    del self.forms['media_tag'].initial['tags']
-            
             # execute the on init function
             if init_func:
                 init_func(self)
-            
             
         # attach any extra form classes
         for form_name, form_class in list(base_extra_forms.items()):
             base_forms[form_name] = form_class
         
+        def is_valid(self, *args, **kwargs):
+            is_valid = super(TaggableObjectForm, self).is_valid(*args, **kwargs)
+            
+            # on an invalid form, when the view bounces back to the form,
+            # the choice list for the tags-field aren't updated with the currently-edited but yet-unsaved
+            # tags. so we make the choices equal to the entered values. 
+            # this is safe as it is only done on a an invalid form and not before the instance would be saved             
+            if isinstance(self.data, QueryDict) and not is_valid and \
+                 any([(datatag not in self.forms['media_tag'].initial.get('tags', [])) \
+                               for datatag in self.data.getlist('media_tag-tags')]):
+                self.forms['media_tag'].fields['tags'].choices = [(val, val) for val in self.data.getlist('media_tag-tags')]
+            
+            # we need to do this here ~again~ on top of in the media tag form, to prevent
+            # the select2 field's values from being overwritten 
+            if self.instance.pk:
+                if is_valid and 'tags' in self.forms['media_tag'].initial:
+                    del self.forms['media_tag'].initial['tags']
+            
+            return is_valid
         
         def save(self, commit=True):
             """
