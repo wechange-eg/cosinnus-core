@@ -233,7 +233,7 @@ class BBBRoom(models.Model):
     @classmethod
     def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=None,
                moderator_password=None, max_participants=None, voice_bridge=None, options=None,
-               room_type=None):
+               room_type=None, presentation_url=None):
         """ Creates a new BBBRoom and crete a room on the remote bbb-server.
 
         :param name: Name of the BBBRoom
@@ -262,7 +262,10 @@ class BBBRoom(models.Model):
         
         :param room_type: The type of the rooms, as choice of `settings.BBB_ROOM_TYPE_CHOICES` 
                 or None for `BBB_ROOM_TYPE_DEFAULT`
-        
+
+        :param presentation_url: Publicly available URL of presentation file to be pre-uploaded as slides to BBB room
+        :type: str
+
         :type: dict
         """
         if attendee_password is None:
@@ -291,7 +294,8 @@ class BBBRoom(models.Model):
             moderator_password=moderator_password,
             max_participants=max_participants,
             voice_bridge=voice_bridge,
-            options=default_options
+            options=default_options,
+            presentation_url=presentation_url,
         )
 
         meeting_json = bbb_utils.xml_to_json(m_xml)
