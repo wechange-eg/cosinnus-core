@@ -78,7 +78,16 @@ class UserSelect2MultipleChoiceField(Select2MultipleChoiceField):
             recipients.update(filter_active_users(User.objects.filter(id__in=ids['user'])))
 
         return list(recipients)
-
+    
+    
+class UserIDSelect2MultipleChoiceField(UserSelect2MultipleChoiceField):
+    """ Like UserSelect2MultipleChoiceField, but persists values as list of int ids instead of
+        list of users """
+    
+    def clean(self, *args, **kwargs):
+        user_list = super(UserIDSelect2MultipleChoiceField, self).clean(*args, **kwargs)
+        return [user.id for user in user_list]
+    
 
 class GroupSelect2MultipleChoiceField(Select2MultipleChoiceField):
     model = get_cosinnus_group_model()

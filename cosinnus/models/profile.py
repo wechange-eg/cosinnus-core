@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from builtins import object
 import copy
 from django_select2.fields import Select2ChoiceField, Select2MultipleChoiceField
-from django_select2.widgets import Select2Widget
+from django_select2.widgets import Select2Widget, HeavySelect2MultipleWidget
 import logging
 
 from annoying.functions import get_object_or_None
@@ -46,9 +46,11 @@ from cosinnus.utils.files import get_avatar_filename, image_thumbnail, \
     image_thumbnail_url
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.utils.user import get_newly_registered_user_email
+from cosinnus.utils.user import get_newly_registered_user_email,\
+    get_user_select2_pills
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
 from django.utils.timezone import now
+from django.contrib.auth import get_user_model
 
 
 logger = logging.getLogger('cosinnus')
@@ -575,7 +577,7 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
         dynamic_fields.DYNAMIC_FIELD_TYPE_PREDEFINED_CHOICES_TEXT: (CHOICE_FIELD_PLACEHOLDER, {}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT: (CHOICE_FIELD_PLACEHOLDER, {}),
         # TODO: a choice field of user id of a user list given by the managed tag chosen by admins
-        dynamic_fields.DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD: (forms.CharField, {}),
+        dynamic_fields.DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD: (CHOICE_FIELD_PLACEHOLDER, {}),
         # a select 2 tag field with space-tag support
         dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT: (CHOICE_FIELD_PLACEHOLDER, {}), 
         # TODO: make this a custom field with value parsing and template
@@ -636,6 +638,7 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
             if formfield_class == self.CHOICE_FIELD_PLACEHOLDER:
                 # check for multiple
                 if field_options.multiple:
+                    is_large_field = True
                     formfield_class = Select2MultipleChoiceField
                 else:
                     formfield_class = Select2ChoiceField
@@ -650,7 +653,26 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
                         predefined_choices = sorted(predefined_choices)
                         choices += [(val, val) for val in predefined_choices]
                     formfield_kwargs['choices'] = choices
+                elif field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD:
+                    from cosinnus.fields import UserIDSelect2MultipleChoiceField
+                    is_large_field = True
+                    formfield_class = UserIDSelect2MultipleChoiceField
+                    data_url = reverse('cosinnus:select2:all-members')
+                    formfield_kwargs['data_url'] = data_url
+                    
+                    if formfield_kwargs['initial']:
+                        initial_user_ids = get_user_model().objects.filter(id__in=formfield_kwargs['initial'])
+                    else:
+                        initial_user_ids = get_user_model().objects.none()
+#                    initial_user_ids = self.instance.persons.all()
+                    preresults = get_user_select2_pills(initial_user_ids, text_only=False)
+                    formfield_kwargs['widget'] = HeavySelect2MultipleWidget(data_url=data_url, choices=preresults)
+                    formfield_kwargs['choices'] = preresults
+                    formfield_kwargs['initial'] = [key for key,val in preresults]
+                    self.initial[field_name] = formfield_kwargs['initial']
+                    
                 elif field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT:
+                    is_large_field = True
                     data_url = reverse_lazy('cosinnus:select2:dynamic-freetext-choices', kwargs={'field_name': field_name})
                     # use single/multi choice pre-selections of initial and entered values, so choices are always valid
                     choices = []
@@ -675,7 +697,6 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
                         choices = [(val, val) for val in choices if val is not None]
                         formfield_kwargs['widget'] = HeavySelect2FreeTextChoiceWidget(data_url=data_url, choices=choices)
                         formfield_kwargs['choices'] = choices
-                    is_large_field = True
                     
             # initialze formfield
             self.fields[field_name] = formfield_class(

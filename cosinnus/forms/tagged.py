@@ -96,7 +96,7 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
           
         if self.instance.pk:
             # choices and initial must be set so pre-existing form fields can be prepopulated
-            preresults = get_user_select2_pills(self.instance.persons.all(), text_only=True)
+            preresults = get_user_select2_pills(self.instance.persons.all(), text_only=False)
             self.fields['persons'].choices = preresults
             self.fields['persons'].initial = [key for key,val in preresults]
             self.initial['persons'] = self.fields['persons'].initial
