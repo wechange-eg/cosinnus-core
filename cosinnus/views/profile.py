@@ -247,6 +247,15 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
                     field.disabled = True
                     field.required = False
         return form
+    
+    def get_form_kwargs(self, *args, **kwargs):
+        form_kwargs = super(UserProfileUpdateView, self).get_form_kwargs(*args, **kwargs)
+        is_superuser = check_user_superuser(self.request.user)
+        form_kwargs.update({
+            'obj__hidden_dynamic_fields_shown': is_superuser,
+            'obj__readonly_dynamic_fields_enabled': is_superuser,
+        })
+        return form_kwargs
 
 update_view = UserProfileUpdateView.as_view()
 

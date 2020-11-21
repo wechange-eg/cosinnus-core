@@ -567,7 +567,6 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
         dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT_AREA: (forms.CharField, {'widget': forms.Textarea, 'is_large_field': True}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_INT: (forms.IntegerField, {}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: (forms.BooleanField, {}),
-        # todo make this a date field
         dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: (forms.DateField, {
             'widget': forms.SelectDateWidget(years=[x for x in range(1900, now().year + 1)]), 'is_large_field': True
         }),
@@ -576,7 +575,7 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
         dynamic_fields.DYNAMIC_FIELD_TYPE_URL: (forms.URLField, {}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_PREDEFINED_CHOICES_TEXT: (CHOICE_FIELD_PLACEHOLDER, {}),
         dynamic_fields.DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT: (CHOICE_FIELD_PLACEHOLDER, {}),
-        # TODO: a choice field of user id of a user list given by the managed tag chosen by admins
+        # (TODO: add managed-tag-dependent-filter!) a choice field of user id of a user list given by the managed tag chosen by admins
         dynamic_fields.DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD: (CHOICE_FIELD_PLACEHOLDER, {}),
         # a select 2 tag field with space-tag support
         dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT: (CHOICE_FIELD_PLACEHOLDER, {}), 
@@ -587,13 +586,18 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
     # that have the given option name set to True in `COSINNUS_USERPROFILE_EXTRA_FIELDS`
     filter_included_fields_by_option_name = None
     
-    # if set to True, hidden dynamic fields will be shown, e.g. to display them to admins
-    show_hidden_dynamic_fields = False
+    # (passed in kwargs) if set to True, hidden dynamic fields will be shown, e.g. to display them to admins
+    hidden_dynamic_fields_shown = False
+    
+    # (passed in kwargs) if set to True, enable readonly dynamic fields will be enabled instead of disabled, e.g. to display them to admins
+    readonly_dynamic_fields_enabled = False
     
     def __init__(self, *args, **kwargs):
+        self.hidden_dynamic_fields_shown = kwargs.pop('hidden_dynamic_fields_shown', False)
+        self.readonly_dynamic_fields_enabled = kwargs.pop('readonly_dynamic_fields_enabled', False)
+        
         super().__init__(*args, **kwargs)
-        # TODO: pass `show_hidden_dynamic_fields` to form in admin backend mode!
-        self.show_hidden_dynamic_fields = kwargs.pop('show_hidden_dynamic_fields', False)
+        
         self.prepare_extra_fields_initial()
         self.prepare_extra_fields()
         if 'extra_fields' in self.fields:
@@ -620,7 +624,7 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
             if self.filter_included_fields_by_option_name \
                     and not getattr(field_options, self.filter_included_fields_by_option_name, False):
                 continue
-            if field_options.hidden and not self.show_hidden_dynamic_fields:
+            if field_options.hidden and not self.hidden_dynamic_fields_shown:
                 continue
             
             formfield_class, formfield_extra_kwargs = self.EXTRA_FIELD_TYPE_FORMFIELDS[field_options.type]
@@ -628,7 +632,7 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
                 'label': field_options.label,
                 'initial': self.initial.get(field_name, None),
                 'required': field_options.required,
-                'disabled': field_options.readonly,
+                'disabled': field_options.readonly and not self.readonly_dynamic_fields_enabled,
             }
             # add extra kwargs from definitions
             if formfield_extra_kwargs:
@@ -708,11 +712,6 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
             setattr(self.fields[field_name], 'large_field', is_large_field) 
             setattr(self.fields[field_name], 'dynamic_field_type', field_options.type) 
             
-            # TODO NEXT: multi dynamic field ("arbeitgeber") saves itself as string of array, 
-            # not the array itself
-            
-            # todo date field
-            # todo user id field
             # todo multi address field
             
             # "register" the extra field additionally
