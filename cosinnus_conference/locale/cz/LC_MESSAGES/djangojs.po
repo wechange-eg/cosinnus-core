@@ -9,7 +9,7 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: he\n"
+"Language: cz\n"
 
 #. [Agenda]
 #. defaultMessage is:
@@ -26,7 +26,7 @@ msgstr ""
 #: locale/src/views/Discussions/list.json locale/src/views/Lobby/index.json
 #: locale/src/views/Stage/list.json locale/src/views/Workshops/list.json
 msgid "Agenda"
-msgstr "יומן"
+msgstr ""
 
 #. [Are you sure you want to delete this event?]
 #. defaultMessage is:
@@ -37,56 +37,56 @@ msgstr "יומן"
 #: locale/src/views/components/ManageEventButtons/index.json
 #: locale/src/views/components/ManageEventIcons/index.json
 msgid "Are you sure you want to delete this event?"
-msgstr "האם את/ה בטוח/ה שברצונך למחוק אירוע זה?"
+msgstr ""
 
 #. [Are you sure you want to delete this room?]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Are you sure you want to delete this room?"
-msgstr "האם את/ה בטוח/ה שברצונך למחוק חדר זה?"
+msgstr ""
 
 #. [Chats]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/Sidebar/index.json
 msgid "Chats"
-msgstr "צ'טים"
+msgstr ""
 
 #. [Conference is being prepared]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/App.json
 msgid "Conference is being prepared"
-msgstr "אנו מכינים את הוועידה"
+msgstr ""
 
 #. [Connect with someone via videochat for 5 minutes]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Channels/list.json
 msgid "Connect with someone via videochat for 5 minutes"
-msgstr "התחבר/י עם מישהו דרך הוידאו-צ'ט ל-5 דקות"
+msgstr ""
 
 #. [Contact]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
 msgid "Contact"
-msgstr "חיבור"
+msgstr ""
 
 #. [Country]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
 msgid "Country"
-msgstr "מדינה"
+msgstr ""
 
 #. [Create event]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Create event"
-msgstr "צור/י אירוע"
+msgstr ""
 
 #. [Delete event]
 #. defaultMessage is:
@@ -97,35 +97,35 @@ msgstr "צור/י אירוע"
 #: locale/src/views/components/ManageEventButtons/index.json
 #: locale/src/views/components/ManageEventIcons/index.json
 msgid "Delete event"
-msgstr "מחק/י אירוע"
+msgstr ""
 
 #. [Delete room]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Delete room"
-msgstr "מחק/י חדר"
+msgstr ""
 
 #. [Edit event]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/ManageEventButtons/index.json
 msgid "Edit event"
-msgstr "ערוך/י אירוע"
+msgstr ""
 
 #. [Edit room]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Edit room"
-msgstr "ערוך/י חדר"
+msgstr ""
 
 #. [Filter by country]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
 msgid "Filter by country"
-msgstr "מיון בהתאם למדינה"
+msgstr ""
 
 #. [Happening now]
 #. defaultMessage is:
@@ -140,35 +140,35 @@ msgstr "מיון בהתאם למדינה"
 #: locale/src/views/components/EventGrid/index.json
 #: locale/src/views/components/EventList/index.json
 msgid "Happening now"
-msgstr "קורה עכשיו"
+msgstr ""
 
 #. [Manage conference]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/Nav/index.json
 msgid "Manage conference"
-msgstr "נהל/י וועידה"
+msgstr ""
 
 #. [Manage events]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/Nav/index.json
 msgid "Manage events"
-msgstr "נהל/י אירועים"
+msgstr ""
 
 #. [Manage rooms]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/Nav/index.json
 msgid "Manage rooms"
-msgstr "נהל/י חדרים"
+msgstr ""
 
 #. [Name]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
 msgid "Name"
-msgstr "שם"
+msgstr ""
 
 #. [No]
 #. defaultMessage is:
@@ -183,91 +183,91 @@ msgstr "שם"
 #: locale/src/views/components/ManageEventIcons/index.json
 #: locale/src/views/components/ManageRoomButtons/index.json
 msgid "No"
-msgstr "לא"
+msgstr ""
 
 #. [No coffee tables.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/CoffeeTables/list.json
 msgid "No coffee tables."
-msgstr "אין שולחנות קפה."
+msgstr ""
 
 #. [No discussions.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Discussions/list.json
 msgid "No discussions."
-msgstr "אין שיחות."
+msgstr ""
 
 #. [No events.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Lobby/index.json
 msgid "No events."
-msgstr "אין אירועים."
+msgstr ""
 
 #. [No networking channels.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Channels/list.json
 msgid "No networking channels."
-msgstr "אין אפיקי רשת."
+msgstr ""
 
 #. [No participants.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
 msgid "No participants."
-msgstr "אין משתתפים."
+msgstr ""
 
 #. [No represented organisations.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Organisations/index.json
 msgid "No represented organisations."
-msgstr "אין ארגונים מיוצגים."
+msgstr ""
 
 #. [No stage events.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Stage/list.json
 msgid "No stage events."
-msgstr "אין אירועי במה."
+msgstr ""
 
 #. [No workshops.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Workshops/list.json
 msgid "No workshops."
-msgstr "אין סדנאות."
+msgstr ""
 
 #. [Now]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/EventGrid/index.json
 msgid "Now"
-msgstr "עכשיו"
+msgstr ""
 
 #. [Organisation]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
 msgid "Organisation"
-msgstr "ארגון"
+msgstr ""
 
 #. [Represented organisations]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Organisations/index.json
 msgid "Represented organisations"
-msgstr "ארגונים מיוצגים"
+msgstr ""
 
 #. [The conference is being prepared, please try again at a later date.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/App.json
 msgid "The conference is being prepared, please try again at a later date."
-msgstr "אנו מכינים את הוועידה, אנא נסה/י שנית בתאריך מאוחר יותר."
+msgstr ""
 
 #. [Today]
 #. defaultMessage is:
@@ -278,7 +278,7 @@ msgstr "אנו מכינים את הוועידה, אנא נסה/י שנית בת�
 #: locale/src/views/components/EventGrid/index.json
 #: locale/src/views/components/EventList/index.json
 msgid "Today"
-msgstr "היום"
+msgstr ""
 
 #. [Tomorrow]
 #. defaultMessage is:
@@ -289,14 +289,14 @@ msgstr "היום"
 #: locale/src/views/components/EventGrid/index.json
 #: locale/src/views/components/EventList/index.json
 msgid "Tomorrow"
-msgstr "מחר"
+msgstr ""
 
 #. [Upcoming]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/EventGrid/index.json
 msgid "Upcoming"
-msgstr "ממשמש ובא"
+msgstr ""
 
 #. [Yes]
 #. defaultMessage is:
@@ -311,28 +311,28 @@ msgstr "ממשמש ובא"
 #: locale/src/views/components/ManageEventIcons/index.json
 #: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Yes"
-msgstr "כן"
+msgstr ""
 
 #. [hidden]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/Nav/index.json
 msgid "hidden"
-msgstr "חבוי"
+msgstr ""
 
 #. [minutes left]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/EventGrid/index.json
 msgid "minutes left"
-msgstr "דקות שנותרו"
+msgstr ""
 
 #. [parallel events]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/EventList/index.json
 msgid "parallel events"
-msgstr "אירועים מקבילים"
+msgstr ""
 
 #. [participants]
 #. defaultMessage is:
@@ -343,21 +343,21 @@ msgstr "אירועים מקבילים"
 #: locale/src/views/components/CoffeeTable/index.json
 #: locale/src/views/components/EventGrid/index.json
 msgid "participants"
-msgstr "משתתפים"
+msgstr ""
 
 #. [places left]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/CoffeeTable/index.json
 msgid "places left"
-msgstr "מקומות שנותרו"
+msgstr ""
 
 msgid "Are you sure you want to leave this event?"
-msgstr "האם אתה בטוח שברצונך לעזוב את האירוע הזה?"
+msgstr "Opravdu chcete z této události odejít?"
 
 msgid ""
 "You're currently attending an event. Are you sure you want to leave? "
 "Tip: You can open a new tab or window instead."
 msgstr ""
-"אתה משתתף כרגע באירוע. אתה בטוח שאתה רוצה לעזוב? "
-"טיפ: במקום זאת תוכלו לפתוח כרטיסייה או חלון חדשים."
+"Právě se účastníte události. Opravdu chcete odejít? "
+"Tip: Místo toho můžete otevřít novou kartu nebo okno."
