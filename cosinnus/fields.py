@@ -1,4 +1,4 @@
-from django_select2 import (HeavyModelSelect2MultipleChoiceField)
+from django_select2.fields import HeavySelect2MultipleChoiceField
 from django.core.exceptions import ValidationError
 from cosinnus.models.group import CosinnusGroup
 from django_select2.util import JSFunction
@@ -10,7 +10,7 @@ from cosinnus.utils.user import filter_active_users
 User = get_user_model()
 
 
-class Select2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
+class Select2MultipleChoiceField(HeavySelect2MultipleChoiceField):
 
     select_type = 'user'
     model = None
