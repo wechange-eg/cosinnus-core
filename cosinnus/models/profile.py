@@ -550,11 +550,6 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
         dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: forms.BooleanField,
         dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: forms.DateField,
         dynamic_fields.DYNAMIC_FIELD_TYPE_COUNTRY: _make_country_formfield,
-    EXTRA_FIELD_TYPES = {
-        'text': forms.CharField,
-        'boolean': forms.BooleanField,
-        'date': forms.DateField,
-        'country': _make_country_formfield,
     }
     # if set to a string, will only include such fields in the form
     # that have the given option name set to True in `COSINNUS_USERPROFILE_EXTRA_FIELDS`

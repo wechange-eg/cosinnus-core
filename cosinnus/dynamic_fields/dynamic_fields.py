@@ -6,11 +6,13 @@ from django.core.exceptions import ImproperlyConfigured
 
 DYNAMIC_FIELD_TYPE_TEXT = 'text'
 DYNAMIC_FIELD_TYPE_BOOLEAN = 'boolean'
+DYNAMIC_FIELD_TYPE_DATE = 'date'
 DYNAMIC_FIELD_TYPE_COUNTRY = 'country'
 
 DYNAMIC_FIELD_TYPES = [
     DYNAMIC_FIELD_TYPE_TEXT,
     DYNAMIC_FIELD_TYPE_BOOLEAN,
+    DYNAMIC_FIELD_TYPE_DATE,
     DYNAMIC_FIELD_TYPE_COUNTRY,
 ]
 
@@ -40,6 +42,3 @@ class CosinnusDynamicField(object):
         # sanity check
         if not self.type or not self.type in DYNAMIC_FIELD_TYPES:
             raise ImproperlyConfigured(f'`CosinnusDynamicField` was initialized with no or unknown type "{self.type}" {self.__dict__} ++ {str(kwargs.items())})')
-        
-
-
