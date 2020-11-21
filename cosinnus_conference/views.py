@@ -31,7 +31,8 @@ from cosinnus.models.profile import UserProfile
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.user import create_base_user
 from cosinnus.views.group import SamePortalGroupMixin
-from cosinnus.views.mixins.group import GroupIsConferenceMixin, FilterGroupMixin
+from cosinnus.views.mixins.group import GroupIsConferenceMixin, FilterGroupMixin,\
+    RequireAdminMixin
 from cosinnus.views.mixins.group import RequireReadMixin, RequireWriteMixin
 from cosinnus.views.profile import delete_userprofile
 from cosinnus.utils.urls import group_aware_reverse, redirect_with_next
@@ -322,7 +323,7 @@ workshop_participants_upload_skeleton = WorkshopParticipantsUploadSkeletonView.a
 
 
 
-class ConferenceRoomManagementView(RequireWriteMixin, GroupIsConferenceMixin, ListView):
+class ConferenceRoomManagementView(RequireAdminMixin, GroupIsConferenceMixin, ListView):
     
     model = CosinnusConferenceRoom
     ordering = ('sort_index', 'title')
@@ -418,7 +419,7 @@ class CosinnusConferenceRoomFormMixin(object):
         return context
     
 
-class CosinnusConferenceRoomCreateView(RequireWriteMixin, CosinnusConferenceRoomFormMixin, CreateView):
+class CosinnusConferenceRoomCreateView(RequireAdminMixin, CosinnusConferenceRoomFormMixin, CreateView):
     """ Create View for CosinnusConferenceRooms """
     
     form_view = 'add'

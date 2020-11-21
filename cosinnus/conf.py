@@ -258,6 +258,9 @@ class CosinnusConf(AppConf):
     #: How long an idea should at most stay in cache until it will be removed
     IDEA_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
+    # how long managed tags by portal should stay in cache until they will be removed
+    MANAGED_TAG_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
+    
     # should CosinnusIdeas be enabled for this Portal?
     IDEAS_ENABLED = False
     
@@ -504,7 +507,8 @@ class CosinnusConf(AppConf):
     
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
-    HIDE_APPS = set(['cosinnus_conference', 'cosinnus_message', 'cosinnus_notifications', 'cosinnus_stream'])
+    HIDE_APPS = set(['cosinnus_organization', 'cosinnus_conference', 'cosinnus_message', 'cosinnus_notifications',
+                     'cosinnus_stream'])
     
     #: How long the perm redirect cache should last (1 week, because it organizes itself)
     PERMANENT_REDIRECT_CACHE_TIMEOUT = 60 * 60 * 24 * 7
@@ -653,14 +657,14 @@ class CosinnusConf(AppConf):
     # extra fields for the user profile.
     # usage:
     # {
-    #    field_name: {
-    #         'type': <str type of `UserProfileFormExtraFieldsMixin.EXTRA_FIELD_TYPES`>,
-    #         'label': i18n str,
-    #         'legend': i18n str,
-    #         'placeholder': i18n str,
-    #         'required': bool, # whether to be required in forms
-    #         'in_signup': bool, # whether to show up in the signup form
-    #     }, ...
+    #    field_name: dynamic_fields.CosinnusDynamicField(
+    #         type=dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT,
+    #         label=_('Institution'),
+    #         legend=None,
+    #         placeholder=_('Institution'),
+    #         required=False, # whether to be required in forms
+    #         in_signup=True, # whether to show up in the signup form
+    #     ), ...
     # }
     # example: {'organisation': {'type': 'text', 'required': True}}
     USERPROFILE_EXTRA_FIELDS = {}
@@ -748,11 +752,20 @@ class CosinnusConf(AppConf):
     MANAGED_TAGS_ENABLED = False
     # str path to a drop-in class for managed tags containing strings 
     MANAGED_TAGS_LABEL_CLASS_DROPIN = None
+    # will the managed tag show up in the user profile form for the users to assign themselves?
     MANAGED_TAGS_USERS_MAY_ASSIGN_SELF = False
+    # will the managed tag show up in the group form for the users to assign their groups?
     MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS = False
+    # is approval by an admin needed on user created tags?
+    # (setting this to true makes managed tags get created with approved=False)
     MANAGED_TAGS_USER_TAGS_REQUIRE_APPROVAL = False
+    # makes a popout info panel appear on tags in formfields
     MANAGED_TAGS_SHOW_FORMFIELD_SELECTED_TAG_DETAILS = True
-    
+    # whether formfields are required=True
+    MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED = False
+    MANAGED_TAGS_GROUP_FORMFIELD_REQUIRED = False
+    # the default slug for pre-filled managed tags
+    MANAGED_TAGS_DEFAULT_INITIAL_SLUG = None
     
 
 class CosinnusDefaultSettings(AppConf):

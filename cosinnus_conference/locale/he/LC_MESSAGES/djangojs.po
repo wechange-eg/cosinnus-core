@@ -1,0 +1,353 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2020-10-06T13:53:05.285Z\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 2.0.6\n"
+"Project-Id-Version: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he\n"
+
+#. [Agenda]
+#. defaultMessage is:
+#. undefined
+#. [Agenda]
+#. defaultMessage is:
+#. undefined
+#. [Agenda]
+#. defaultMessage is:
+#. undefined
+#. [Agenda]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Discussions/list.json locale/src/views/Lobby/index.json
+#: locale/src/views/Stage/list.json locale/src/views/Workshops/list.json
+msgid "Agenda"
+msgstr "יומן"
+
+#. [Are you sure you want to delete this event?]
+#. defaultMessage is:
+#. undefined
+#. [Are you sure you want to delete this event?]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageEventButtons/index.json
+#: locale/src/views/components/ManageEventIcons/index.json
+msgid "Are you sure you want to delete this event?"
+msgstr "האם את/ה בטוח/ה שברצונך למחוק אירוע זה?"
+
+#. [Are you sure you want to delete this room?]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageRoomButtons/index.json
+msgid "Are you sure you want to delete this room?"
+msgstr "האם את/ה בטוח/ה שברצונך למחוק חדר זה?"
+
+#. [Chats]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Sidebar/index.json
+msgid "Chats"
+msgstr "צ'טים"
+
+#. [Conference is being prepared]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/App.json
+msgid "Conference is being prepared"
+msgstr "אנו מכינים את הוועידה"
+
+#. [Connect with someone via videochat for 5 minutes]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Channels/list.json
+msgid "Connect with someone via videochat for 5 minutes"
+msgstr "התחבר/י עם מישהו דרך הוידאו-צ'ט ל-5 דקות"
+
+#. [Contact]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Participants/list.json
+msgid "Contact"
+msgstr "חיבור"
+
+#. [Country]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Participants/list.json
+msgid "Country"
+msgstr "מדינה"
+
+#. [Create event]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageRoomButtons/index.json
+msgid "Create event"
+msgstr "צור/י אירוע"
+
+#. [Delete event]
+#. defaultMessage is:
+#. undefined
+#. [Delete event]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageEventButtons/index.json
+#: locale/src/views/components/ManageEventIcons/index.json
+msgid "Delete event"
+msgstr "מחק/י אירוע"
+
+#. [Delete room]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageRoomButtons/index.json
+msgid "Delete room"
+msgstr "מחק/י חדר"
+
+#. [Edit event]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageEventButtons/index.json
+msgid "Edit event"
+msgstr "ערוך/י אירוע"
+
+#. [Edit room]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageRoomButtons/index.json
+msgid "Edit room"
+msgstr "ערוך/י חדר"
+
+#. [Filter by country]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Participants/list.json
+msgid "Filter by country"
+msgstr "מיון בהתאם למדינה"
+
+#. [Happening now]
+#. defaultMessage is:
+#. undefined
+#. [Happening now]
+#. defaultMessage is:
+#. undefined
+#. [Happening now]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/CoffeeTables/list.json
+#: locale/src/views/components/EventGrid/index.json
+#: locale/src/views/components/EventList/index.json
+msgid "Happening now"
+msgstr "קורה עכשיו"
+
+#. [Manage conference]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Manage conference"
+msgstr "נהל/י וועידה"
+
+#. [Manage events]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Manage events"
+msgstr "נהל/י אירועים"
+
+#. [Manage rooms]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Manage rooms"
+msgstr "נהל/י חדרים"
+
+#. [Name]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Participants/list.json
+msgid "Name"
+msgstr "שם"
+
+#. [No]
+#. defaultMessage is:
+#. undefined
+#. [No]
+#. defaultMessage is:
+#. undefined
+#. [No]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageEventButtons/index.json
+#: locale/src/views/components/ManageEventIcons/index.json
+#: locale/src/views/components/ManageRoomButtons/index.json
+msgid "No"
+msgstr "לא"
+
+#. [No coffee tables.]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/CoffeeTables/list.json
+msgid "No coffee tables."
+msgstr "אין שולחנות קפה."
+
+#. [No discussions.]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Discussions/list.json
+msgid "No discussions."
+msgstr "אין שיחות."
+
+#. [No events.]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Lobby/index.json
+msgid "No events."
+msgstr "אין אירועים."
+
+#. [No networking channels.]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Channels/list.json
+msgid "No networking channels."
+msgstr "אין אפיקי רשת."
+
+#. [No participants.]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Participants/list.json
+msgid "No participants."
+msgstr "אין משתתפים."
+
+#. [No represented organisations.]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Organisations/index.json
+msgid "No represented organisations."
+msgstr "אין ארגונים מיוצגים."
+
+#. [No stage events.]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Stage/list.json
+msgid "No stage events."
+msgstr "אין אירועי במה."
+
+#. [No workshops.]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Workshops/list.json
+msgid "No workshops."
+msgstr "אין סדנאות."
+
+#. [Now]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/EventGrid/index.json
+msgid "Now"
+msgstr "עכשיו"
+
+#. [Organisation]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Participants/list.json
+msgid "Organisation"
+msgstr "ארגון"
+
+#. [Represented organisations]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/Organisations/index.json
+msgid "Represented organisations"
+msgstr "ארגונים מיוצגים"
+
+#. [The conference is being prepared, please try again at a later date.]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/App.json
+msgid "The conference is being prepared, please try again at a later date."
+msgstr "אנו מכינים את הוועידה, אנא נסה/י שנית בתאריך מאוחר יותר."
+
+#. [Today]
+#. defaultMessage is:
+#. undefined
+#. [Today]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/EventGrid/index.json
+#: locale/src/views/components/EventList/index.json
+msgid "Today"
+msgstr "היום"
+
+#. [Tomorrow]
+#. defaultMessage is:
+#. undefined
+#. [Tomorrow]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/EventGrid/index.json
+#: locale/src/views/components/EventList/index.json
+msgid "Tomorrow"
+msgstr "מחר"
+
+#. [Upcoming]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/EventGrid/index.json
+msgid "Upcoming"
+msgstr "ממשמש ובא"
+
+#. [Yes]
+#. defaultMessage is:
+#. undefined
+#. [Yes]
+#. defaultMessage is:
+#. undefined
+#. [Yes]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/ManageEventButtons/index.json
+#: locale/src/views/components/ManageEventIcons/index.json
+#: locale/src/views/components/ManageRoomButtons/index.json
+msgid "Yes"
+msgstr "כן"
+
+#. [hidden]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "hidden"
+msgstr "חבוי"
+
+#. [minutes left]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/EventGrid/index.json
+msgid "minutes left"
+msgstr "דקות שנותרו"
+
+#. [parallel events]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/EventList/index.json
+msgid "parallel events"
+msgstr "אירועים מקבילים"
+
+#. [participants]
+#. defaultMessage is:
+#. undefined
+#. [participants]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/CoffeeTable/index.json
+#: locale/src/views/components/EventGrid/index.json
+msgid "participants"
+msgstr "משתתפים"
+
+#. [places left]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/CoffeeTable/index.json
+msgid "places left"
+msgstr "מקומות שנותרו"

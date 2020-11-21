@@ -1,6 +1,16 @@
 {% load i18n cosinnus_tags %}
 
 {% if current_page == "addorganization" %}
+    {% captureas is_addorganization %}True{% endcaptureas %}
+{% elif current_page == "editorganization" %}
+    {% captureas is_editorganization %}True{% endcaptureas %}
+{% elif current_page == "members" %}
+    {% captureas is_members %}True{% endcaptureas %}
+{% elif current_page == "groups" %}
+    {% captureas is_groups %}True{% endcaptureas %}
+{% endif %}
+
+{% if current_page == "addorganization" %}
     {% captureas href %}{% url 'cosinnus:organization-create' %}{% endcaptureas %}
     {% captureas label %}{% trans "Add Organization" %}{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with active=is_addorganization extra_classes="fine-space" icon="fa-info-circle" label=label href=href  %}
@@ -14,7 +24,11 @@
 
     {% captureas href %}{% url 'cosinnus:organization-members' organization=object.slug %}{% endcaptureas %}
     {% captureas label %}{% trans "Admins" %}{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with active=is_organizationdetails extra_classes="large-space" icon="fa-users" label=label href=href  %}
+    {% include "cosinnus/leftnav_button.html" with active=is_members extra_classes="fine-space" icon="fa-users" label=label href=href  %}
+
+    {% captureas href %}{% url 'cosinnus:organization-groups' organization=object.slug %}{% endcaptureas %}
+    {% captureas label %}{% trans "Assigned projects/groups" %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with active=is_groups extra_classes="large-space" icon="fa-users" label=label href=href  %}
 
     {% if user.pk in object.admins %}
         {% captureas label %}{% trans "Leave" %}{% endcaptureas %}
@@ -48,3 +62,6 @@
         {% include "cosinnus/modal_box.html" with id="leave_join_organization_modal" label=label title=title form_action=action %}
     {% endif %}
 {% endif %}
+
+{% trans "Help about organizations" as help_label %}
+{% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_15_organization" label=help_label %}

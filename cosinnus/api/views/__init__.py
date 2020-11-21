@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth import get_user_model
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.db.models import Q
 from django.http import HttpResponse
 from django.template import Context
 from django.template.loader import render_to_string
@@ -45,15 +46,20 @@ class PublicTaggableObjectFilterMixin(object):
 
 class CosinnusFilterQuerySetMixin:
     FILTER_CONDITION_MAP = {
+        'avatar': {
+            'true': [~Q(avatar="")],
+            'false': [Q(avatar="")],
+        }
     }
     FILTER_KEY_MAP = {
-        'tags': 'media_tag__tags__name'
+        'tags': 'media_tag__tags__name',
     }
     FILTER_VALUE_MAP = {
         'false': False,
         'true': True
     }
     FILTER_DEFAULT_ORDER = ['-created', ]
+    MANAGED_TAGS_KEY = 'managed_tags'
 
     def get_queryset(self):
         """
@@ -65,6 +71,12 @@ class CosinnusFilterQuerySetMixin:
         query_params = self.request.query_params.copy()
         order_by = query_params.pop('order_by', self.FILTER_DEFAULT_ORDER)
         queryset = queryset.order_by(*order_by)
+        # Managed tag filters
+        if self.MANAGED_TAGS_KEY in query_params:
+            managed_tags = query_params.getlist(self.MANAGED_TAGS_KEY)
+            queryset = queryset.filter(managed_tag_assignments__managed_tag__slug__in=managed_tags,
+                                       managed_tag_assignments__approved=True)
+            query_params.pop(self.MANAGED_TAGS_KEY)
         # Overwrite ugly but commonly used filters
         for key, value in list(query_params.items()):
             if key in (self.pagination_class.limit_query_param,
@@ -73,10 +85,12 @@ class CosinnusFilterQuerySetMixin:
             if key in self.FILTER_CONDITION_MAP:
                 VALUE_MAP = self.FILTER_CONDITION_MAP.get(key)
                 if value in VALUE_MAP:
-                    (key, value), *rest = VALUE_MAP.get(value).items()
-            key = self.FILTER_KEY_MAP.get(key, key)
-            value = self.FILTER_VALUE_MAP.get(value, value)
-            if value is not None:
+                    queryset = queryset.filter(*VALUE_MAP.get(value))
+            else:
+                key = self.FILTER_KEY_MAP.get(key, key)
+                value = self.FILTER_VALUE_MAP.get(value, value)
+                if value is None:
+                    continue
                 if key.startswith('exclude_'):
                     queryset = queryset.exclude(**{key[8:]: value})
                 else:
@@ -172,34 +186,89 @@ class StatisticsView(APIView):
     """
     Returns a JSON dict of common statistics for this portal
     """
-
-    def get(self, request):
-        all_users_qs = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members)
+    
+    def get_user_qs(self):
+        return get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members)
+    
+    def get_society_qs(self):
+        return CosinnusSociety.objects.all_in_portal()
+    
+    def get_project_qs(self):
+        return CosinnusProject.objects.all_in_portal()
+    
+    def get_event_qs(self):
+        from cosinnus_event.models import Event
+        return Event.get_current_for_portal()
+    
+    def get_note_qs(self):
+        from cosinnus_note.models import Note
+        return Note.get_current_for_portal()
+    
+    def get(self, request, *args, **kwargs):
+        all_users_qs = self.get_user_qs()
         data = {
-            'groups': CosinnusSociety.objects.all_in_portal().count(),
-            'projects': CosinnusProject.objects.all_in_portal().count(),
+            'groups': self.get_society_qs().count(),
+            'projects': self.get_project_qs().count(),
             'users_registered': all_users_qs.count(),
             'users_active': filter_active_users(all_users_qs).count(),
         }
         try:
-            from cosinnus_event.models import Event
-            upcoming_event_count = Event.get_current_for_portal().count()
             data.update({
-                'events_upcoming': upcoming_event_count,
+                'events_upcoming': self.get_event_qs().count(),
             })
         except:
             pass
 
         try:
-            from cosinnus_note.models import Note
-            note_count = Note.get_current_for_portal().count()
             data.update({
-                'notes': note_count,
+                'notes': self.get_note_qs().count(),
             })
         except:
             pass
 
         return Response(data)
+
+
+class StatisticsManagedTagFilteredView(StatisticsView):
+    """
+    Returns a JSON dict of common statistics for this portal, filtered for a managed tag
+    """
+    
+    tag_slug = None
+    
+    def get(self, request, *args, **kwargs):
+        self.tag_slug = kwargs.pop('slug', None)
+        return super(StatisticsManagedTagFilteredView, self).get(request, *args, **kwargs)
+    
+    def get_user_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_user_qs()
+        if self.tag_slug:
+            qs = qs.filter(cosinnus_profile__managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs 
+    
+    def get_society_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_society_qs()
+        if self.tag_slug:
+            qs = qs.filter(managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs 
+    
+    def get_project_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_project_qs()
+        if self.tag_slug:
+            qs = qs.filter(managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs 
+    
+    def get_event_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_event_qs()
+        if self.tag_slug:
+            qs = qs.filter(group__managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs 
+    
+    def get_note_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_note_qs()
+        if self.tag_slug:
+            qs = qs.filter(group__managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs 
 
 
 class NavBarView(APIView):

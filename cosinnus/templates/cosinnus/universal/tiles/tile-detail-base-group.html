@@ -18,18 +18,17 @@
             {% endfor %}
         </div>
     {% endif %}
-    
-    
+
     {% if organizations|length > 0 %}
         <div class="tile-section tile-section-divided">
             <div class="subheading">
                 <i class="fa fa-building"></i>
                 {% if organizations|length > 1 %}
                 	{# Translators: __INCLUDE_JS_PO__ #}
-	                {% trans "Organizations" %} 
+	                {% trans "Organizations" %}
                 {% else %}
 	                {# Translators: __INCLUDE_JS_PO__ #}
-	                {% trans "Organization" %} 
+	                {% trans "Organization" %}
 	            {% endif %}
             </div>
         </div>
@@ -37,7 +36,7 @@
             <div class="row">
                 {% for organization in organizations %}
                     <div class="col-sm-6">
-                        {{ macros.itemCard(organization.portal, organization.slug, organization.name, organization.type, organization.iconImageUrl, organization.address, "fa-map-marker") }}
+                        {{ macros.itemCard(organization.portal, organization.slug, organization.title, organization.type, organization.iconImageUrl, organization.location, "fa-map-marker") }}
                     </div>
                 {% endfor %}
             </div>

@@ -16,6 +16,7 @@ import {Event} from "../../stores/events/models"
 import {ManageEventButtons} from "../components/ManageEventButtons"
 import {IframeContent} from "../components/IframeContent"
 import {EventRoomState} from "../../stores/events/reducer"
+import {FormattedMessage} from "react-intl"
 
 interface ChannelProps {
   id: number
@@ -53,8 +54,13 @@ function ChannelConnector (props: ChannelProps & RouteComponentProps) {
           <ManageEventButtons event={event} />
         </Content>
       ))
-      || <Content className="fullheight"><Loading /></Content>
-      }
+      || (events && events.loading) && (
+        <Content className="fullheight"><Loading /></Content>
+      ) || (
+        <Content className="fullheight">
+          <Typography><FormattedMessage id="Event not found."/></Typography>
+        </Content>
+      )}
     </Main>
   )
 }

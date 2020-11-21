@@ -84,3 +84,22 @@ group_apps_deactivated = dispatch.Signal(providing_args=["group", "apps"])
 
 """ Called after a CosinnusGroupMembership for a user has changed """
 group_membership_has_changed = dispatch.Signal(providing_args=["instance", "deleted"])
+
+
+""" Called when a group was invited to an organization """
+organization_group_invited = dispatch.Signal(providing_args=["organization", "group"])
+
+""" Called when an group accepts an organization invitation """
+organization_group_invitation_accepted = dispatch.Signal(providing_args=["organization", "group"])
+
+""" Called when a group declines an organization invitation """
+organization_group_invitation_declined = dispatch.Signal(providing_args=["organization", "group"])
+
+""" Called when a group requested an organization assignment """
+organization_group_requested = dispatch.Signal(providing_args=["organization", "group"])
+
+""" Called when an organization accepts a groups request """
+organization_group_request_accepted = dispatch.Signal(providing_args=["organization", "group"])
+
+""" Called when an organization declines a groups request """
+organization_group_request_declined = dispatch.Signal(providing_args=["organization", "group"])

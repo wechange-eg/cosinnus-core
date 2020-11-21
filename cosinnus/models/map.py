@@ -19,8 +19,8 @@ from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import message_group_admins_url
-from cosinnus.utils.permissions import check_ug_membership, check_ug_pending,\
-    check_ug_invited_pending
+from cosinnus.utils.permissions import check_ug_membership, check_ug_pending, \
+    check_ug_invited_pending, check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.external.models import ExternalProject, ExternalSociety
 
@@ -178,6 +178,14 @@ class HaystackMapResult(BaseMapResult):
         'relevance': 0,
         'type': 'CompactMapResult',
     })
+    if settings.COSINNUS_ENABLE_SDGS:
+        fields.update({
+            'sdgs': [],
+        })
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED:
+        fields.update({
+            'managed_tags': [],
+        })
 
     def __init__(self, result, user=None, *args, **kwargs):
         if result.portals:
@@ -205,7 +213,6 @@ class HaystackMapResult(BaseMapResult):
             'description': textfield(result.description),
             'relevance': result.score,
             'topics': result.mt_topics,
-            'sdgs': result.sdgs,
             'portal': portal,
             'group_slug': result.group_slug,
             'group_name': result.group_name,
@@ -214,6 +221,15 @@ class HaystackMapResult(BaseMapResult):
             'content_count': result.content_count,
             'liked': user.id in result.liked_user_ids if (user and getattr(result, 'liked_user_ids', [])) else False,
         }
+        if settings.COSINNUS_ENABLE_SDGS:
+            fields.update({
+                'sdgs': result.sdgs,
+            })
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED:
+            fields.update({
+                'managed_tags': result.managed_tags,
+            })
+        
         fields.update(**kwargs)
         
         return super(HaystackMapResult, self).__init__(*args, **fields)
@@ -325,7 +341,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
         
         if settings.COSINNUS_ORGANIZATIONS_ENABLED:
             sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['organizations'])
-            sqs = sqs.filter_and(related_groups=obj.id)
+            sqs = sqs.filter_and(groups=obj.id)
             sqs = filter_searchqueryset_for_read_access(sqs, user)
             sqs = sqs.order_by('title')
             
@@ -493,6 +509,7 @@ class DetailedOrganizationMapResult(DetailedMapResult):
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
         kwargs.update({
+            'is_superuser': check_user_superuser(user),
             'is_member': check_ug_membership(user, obj),
             'is_pending': check_ug_pending(user, obj),
             'is_invited': check_ug_invited_pending(user, obj),
@@ -505,6 +522,7 @@ class DetailedOrganizationMapResult(DetailedMapResult):
             'phone_number': obj.phone_number.as_international if obj.phone_number else None,
             'social_media': [{'url': sm.url, 'icon': sm.icon} for sm in obj.social_media.all()],
             'edit_url': obj.get_edit_url(),
+            'accept_url': reverse('cosinnus:organization-user-accept', kwargs={'organization': obj.slug}),
         })
 
         # collect administrator users. these are *not* filtered by visibility, as project admins are always visible!
@@ -517,6 +535,15 @@ class DetailedOrganizationMapResult(DetailedMapResult):
             sqs = filter_searchqueryset_for_read_access(sqs, user)
         kwargs.update({
             'admins': [HaystackUserMapCard(result) for result in sqs]
+        })
+
+        # Groups
+        sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['projects'], SEARCH_MODEL_NAMES_REVERSE['groups'])
+        sqs = sqs.filter_and(id__in=haystack_result.groups)
+        sqs = filter_searchqueryset_for_read_access(sqs, user)
+        sqs = sqs.order_by('title')
+        kwargs.update({
+            'groups': [HaystackGroupMapCard(result) for result in sqs]
         })
         
         ret = super(DetailedOrganizationMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)

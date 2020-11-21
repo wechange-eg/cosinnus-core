@@ -11,7 +11,7 @@
 
 {% block page_title %}
 	{% if object %}
-	   {% blocktrans with organization_name=object.title %}Edit "{{ organization_name }}"{% endblocktrans %}
+	   {% blocktrans with organization_name=object.name %}Edit "{{ organization_name }}"{% endblocktrans %}
 	{% else %}
 	   {% trans "Create Organization" %}
     {% endif %}
@@ -37,7 +37,7 @@
 	            </ul>
 	        </div>
 	    </div>
-        {% captureas label %}{% blocktrans with title=object.title %}Do you really want to delete organization „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+        {% captureas label %}{% blocktrans with title=object.name %}Do you really want to delete organization „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
         {% captureas title %}{% trans "Delete Organization" %}{% endcaptureas %}
         {% trans "Yes" as submit_button_label %}
         {% url "cosinnus:organization-delete" slug=object.slug as delete_url %}
@@ -92,7 +92,6 @@
 	    {% csrf_token %}
 	    {{ form.forms.obj.media }}
 	    {{ form.forms.obj.non_field_errors }}
-        {{ form.forms.media_tag.media }}
 	    {{ form.forms.media_tag.non_field_errors }}
 
 	    
@@ -102,47 +101,17 @@
 			<!-- Tab panes -->
 			<div class="tab-content">
                 <div class="tab-pane {% if not request.GET.tab %}active{% endif %}" id="general">
-                    {# title Field #}
-                    {% trans "Name of the organization" as title_label %}
-                    {% captureas title_placeholder %}{% trans "Enter the name of your organization" %}{% endcaptureas %}
-                    {% if request.GET.title %}
-                        {% captureas title_val %}{{ request.GET.title }}{% endcaptureas %}
+                    {# name Field #}
+                    {% trans "Name of the organization" as name_label %}
+                    {% captureas name_placeholder %}{% trans "Enter the name of your organization" %}{% endcaptureas %}
+                    {% if request.GET.name %}
+                        {% captureas name_val %}{{ request.GET.name }}{% endcaptureas %}
                     {% endif %}
-                    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title placeholder=title_placeholder label=title_label field_value=title_val first=True %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=name_placeholder label=name_label field_value=name_val first=True %}
 
                     {# type field #}
                     {% trans "Type of your organization" as type_label %}
-                    {% captureas type_html %}
-                        {{ form.forms.obj.type.errors }}
-                        <div class="input-area" style="padding: 5px;">
-                            {% for option_value, option_label in form.forms.obj.instance.TYPE_CHOICES %}
-                                <span class="pull-left inline-list nowrap">
-                                    <a class="app-background small-padding">
-                                        <input
-                                                id="radio_type_{{ option_value }}"
-                                                type="radio"
-                                                name="type"
-                                                {% if option_value == form.forms.obj.instance.type %}checked="true"{% endif %}
-                                                value="{{ option_value }}"
-                                                onchange="$('#id_type_other').parent().toggleClass('hidden', !$('#radio_type_{{ form.forms.obj.instance.TYPE_OTHER }}').prop('checked'))"
-                                        />
-                                    </a>
-                                    <span
-                                            class="app-background-light dark-color small-padding"
-                                            onclick="
-                                                $('#radio_type_{{ option_value }}').prop('checked', !($('#radio_type_{{ option_value }}').prop('checked')));
-                                                $('#id_type_other').parent().toggleClass('hidden', !$('#radio_type_{{ form.forms.obj.instance.TYPE_OTHER }}').prop('checked'));
-                                            "
-                                    >
-                                        {{ option_label }}
-                                    </span>
-                                </span>
-                            {% endfor %}
-                        </div>
-                    {% endcaptureas %}
-                    <div class="cosinnus-field">
-                    {% include 'cosinnus/fields/default_field.html' with extra_html=type_html label=type_label large_field=True %}
-                    </div>
+                    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.type label=type_label %}
 
                     {# type_other Field #}
                     {% captureas type_other_placeholder %}{% trans "If none of the options apply, specify the type of your organization here" %}{% endcaptureas %}
@@ -189,15 +158,17 @@
                     {% trans "Address(es) of your organisation" as locations_label %}
                     {% trans "Remove location" as loc_rm_label %}
                     {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}
-                    {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=locations_label content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
+                    {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=locations_label content_template='cosinnus/fields/inlineform_organization_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
 
                     {% include "cosinnus/media_tags_group.html"%}
 
+                    {% if SETTINGS.COSINNUS_DATA_EXCHANGE_ENABLED %}
                     {# public Field #}
                     {% trans "Visibility on other platforms" as public_label %}
                     {% blocktrans asvar public_legend with url="/cms/partner-platforms/" %}Projects are always transferred to <a href="{{ url }}" target="_blank">partner platforms</a> of WECHANGE. These are only organizational data and not personal data.{% endblocktrans %}
                     {% trans "This organization should be made publicly findable via other platforms." as public_box_label %}
                     {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.media_tag.public label=public_label legend=public_legend checkbox_label=public_box_label %}
+                    {% endif %}
 
                 </div>
                 {% block extra_forms %}

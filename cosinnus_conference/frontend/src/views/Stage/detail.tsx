@@ -18,6 +18,7 @@ import {ManageEventButtons} from "../components/ManageEventButtons"
 import {Sidebar} from "../components/Sidebar"
 import {IframeContent} from "../components/IframeContent"
 import {EventRoomState} from "../../stores/events/reducer"
+import {FormattedMessage} from "react-intl"
 
 interface StageEventProps {
   id: number
@@ -43,7 +44,6 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
   if (events && events.events) {
     event = events.events.find((e) => e.props.id === id)
   } else if (!events && !(events && events.loading)) {
-
     fetchEvents()
   }
   return (
@@ -58,8 +58,13 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
           <ManageEventButtons event={event} />
         </Content>
       ))
-      || <Content className="fullheight"><Loading /></Content>
-      }
+      || (events && events.loading) && (
+        <Content className="fullheight"><Loading /></Content>
+      ) || (
+        <Content className="fullheight">
+          <Typography><FormattedMessage id="Event not found."/></Typography>
+        </Content>
+      )}
       {url && <Sidebar url={url} />}
     </Main>
   )

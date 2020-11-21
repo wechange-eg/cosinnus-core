@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-06 16:06+0200\n"
-"PO-Revision-Date: 2020-10-05 13:32+0100\n"
+"PO-Revision-Date: 2020-11-05 11:52+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -634,10 +634,8 @@ msgstr ""
 msgid "options for the room, that are represented in the bigbluebutton API"
 msgstr ""
 
-#, fuzzy
-#| msgid "From Team Type"
 msgid "Room Type"
-msgstr "Von Gruppentyp"
+msgstr "Raumtyp"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Title"
@@ -656,29 +654,27 @@ msgid "Cosinnus Micropages"
 msgstr "Cosinnus Micropages"
 
 msgid "Lobby"
-msgstr ""
+msgstr "Lobby"
 
 msgid "Stage"
-msgstr ""
+msgstr "Bühne"
 
 msgid "Workshops"
 msgstr "Workshops"
 
-#, fuzzy
-#| msgid "Permissions"
 msgid "Discussions"
-msgstr "Berechtigungen"
+msgstr "Diskussionen"
 
 msgid "Coffee Tables"
-msgstr ""
+msgstr "Café"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Results"
-msgstr "Resultaten"
+msgstr "Ergebnisse"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Participants"
-msgstr "Teilnehmer"
+msgstr "Teilnehmerliste"
 
 msgid "Team"
 msgstr "Team"
@@ -692,16 +688,12 @@ msgstr "Be extremely careful when changing this slug manually! There can be many
 msgid "Short Description"
 msgstr "Kurze Beschreibung"
 
-#, fuzzy
-#| msgid "Conference Management"
 msgid "Conference Room Type"
-msgstr "Tagungsmanagement"
+msgstr "Konferenzraum Typ"
 
 msgid "Is visible"
-msgstr ""
+msgstr "Ist sichtbar"
 
-#, fuzzy
-#| msgid "Sort field"
 msgid "Sorting index"
 msgstr "Sortierfeld"
 
@@ -714,37 +706,27 @@ msgstr "Ersteller"
 msgid "Last modified"
 msgstr "Zuletzt editiert"
 
-#, fuzzy
-#| msgid "Rocket.Chat"
 msgid "RocketChat room id"
-msgstr "Rocket.Chat"
+msgstr "Rocket.Chat Raum ID"
 
-#, fuzzy
-#| msgid "Rocket.Chat"
 msgid "RocketChat room name"
-msgstr "Rocket.Chat"
+msgstr "Rocket.Chat Raum Name"
 
 msgid "Allow users to create new coffee tables"
-msgstr ""
+msgstr "Teilnehmenden erlauben, eigene Café-Tische zu erstellen"
 
 msgid "Maximum Coffee Table Participants"
-msgstr ""
+msgstr "Max. Teilnehmendenzahl pro Café-Tisch"
 
 #
-#, fuzzy
-#| msgid "Create Project"
 msgid "Result Project"
-msgstr "Projekt erstellen"
+msgstr "Ergebnisprojekt"
 
-#, fuzzy
-#| msgid "Conference Management"
 msgid "Conference Room"
-msgstr "Tagungsmanagement"
+msgstr "Konferenzraum"
 
-#, fuzzy
-#| msgid "Conference is running"
 msgid "Conference Rooms"
-msgstr "Die Tagung läuft gerade"
+msgstr "Konferenzräume"
 
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
@@ -1674,15 +1656,11 @@ msgstr "Tagungsmanagement"
 msgid "Conference Management"
 msgstr "Tagungsmanagement"
 
-#, fuzzy
-#| msgid "Conference Management"
 msgid "Conference Room Management"
-msgstr "Tagungsmanagement"
+msgstr "Konferenzräume verwalten"
 
-#, fuzzy
-#| msgid "Conference Management"
 msgid "Conference Event Management"
-msgstr "Tagungsmanagement"
+msgstr "Konferenzveranstaltungen verwalten"
 
 #
 #. Translators: __INCLUDE_JS_PO__
@@ -2170,7 +2148,7 @@ msgid "You are about to deactivate this project/group!"
 msgstr "Du bist dabei dieses Projekt/Gruppe zu deaktivieren!"
 
 msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
-msgstr "Du bist dabei dieses Projekt/Gruppe zu reaktivieren. Es und all sein Inhalt  wird auf der Webseite wieder sichtbar sein."
+msgstr "Du bist dabei dieses Projekt/Gruppe zu reaktivieren. Es und all sein Inhalt  wird auf der Webseite wieder sichtbar sein.R"
 
 msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
 msgstr "Du bist dabei dieses Projekt/Gruppe zu deaktivieren. Es und all sein Inhalt  wird auf der Webseite unsichtbar sein."
@@ -2409,10 +2387,8 @@ msgstr "Natürlich kannst du auch ein Projekt ohne diese Verbindung zur Idee ers
 msgid "Facebook-Integration"
 msgstr "Facebook-Integration"
 
-#, fuzzy
-#| msgid "Conference is running"
 msgid "Conference Settings"
-msgstr "Die Tagung läuft gerade"
+msgstr "Konferenz-Einstellungen"
 
 msgid "Group name"
 msgstr "Gruppenname"
@@ -2608,16 +2584,14 @@ msgstr "Die Facebook-Integration wird verfügbar sobald du das Projekt erstellt 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Das hier eingegebene HTML wird auf dem Gruppen/Projektdashboard dargestellt (nur für Mitglieder)"
 
-#, fuzzy
-#| msgid "Conference Management"
 msgid "Conference Theme Color"
-msgstr "Tagungsmanagement"
+msgstr "Konferenzfarbe"
 
 msgid "Hex code (example: #A2A2A2)"
-msgstr ""
+msgstr "Hex-Code (Beispiel: #A2A2A2)"
 
 msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
-msgstr ""
+msgstr "Farbe im Hex-Code, die als primäre Farbe für die Konferenzumgebung verwendet wird (mit oder ohne führendes '#')"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
@@ -5056,13 +5030,9 @@ msgstr "Hat erstellt"
 msgid "Workshop username"
 msgstr ""
 
-#, fuzzy
-#| msgid "First name"
 msgid "First Name"
 msgstr "Vorname"
 
-#, fuzzy
-#| msgid "Last name"
 msgid "Last Name"
 msgstr "Nachname"
 

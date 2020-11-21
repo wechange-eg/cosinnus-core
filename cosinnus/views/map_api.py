@@ -83,12 +83,19 @@ MAP_SEARCH_PARAMETERS = {
     'limit': 20, # result count limit, integer or None
     'page': 0,
     'topics': None,
-    'sdgs': None,
     'item': None,
     'ignore_location': False, # if True, we completely ignore locs, and even return results without location
     'mine': False, # if True, we only show items of the current user. ignored if user not authenticated
     'external': False,
 }
+if settings.COSINNUS_MANAGED_TAGS_ENABLED:
+    MAP_SEARCH_PARAMETERS.update({
+        'managed_tags': None,
+    })
+if settings.COSINNUS_ENABLE_SDGS:
+    MAP_SEARCH_PARAMETERS.update({
+        'sdgs': None,
+    })
 if settings.COSINNUS_IDEAS_ENABLED:
     MAP_SEARCH_PARAMETERS.update({
         'ideas': True,
@@ -152,9 +159,14 @@ def map_search_endpoint(request, filter_group_id=None):
     topics = ensure_list_of_ints(params.get('topics', ''))
     if topics:
         sqs = sqs.filter_and(mt_topics__in=topics)
-    sdgs = ensure_list_of_ints(params.get('sdgs', ''))
-    if sdgs:
-        sqs = sqs.filter_and(sdgs__in=sdgs)
+    if settings.COSINNUS_ENABLE_SDGS:
+        sdgs = ensure_list_of_ints(params.get('sdgs', ''))
+        if sdgs:
+            sqs = sqs.filter_and(sdgs__in=sdgs)
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED:
+        managed_tags = ensure_list_of_ints(params.get('managed_tags', ''))
+        if managed_tags:
+            sqs = sqs.filter_and(managed_tags__in=managed_tags)
     # filter for portal visibility
     sqs = filter_searchqueryset_for_portal(sqs, restrict_multiportals_to_current=prefer_own_portal, external=external)
     # filter for read access by this user

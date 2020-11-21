@@ -1028,6 +1028,27 @@
             color: @map-clickable-icon-hover-color;
         }
     }
+    .hover-image-button {
+        .hover-image-icon {
+            width: 134px;
+            padding-right: 5px;
+            padding-bottom: 5px;
+        }
+        
+        .hover-image-button-inner {
+            position: relative;
+        }
+        
+        .hover-image-icon-pos-abs {
+            position: absolute;
+            left: 25%;
+            bottom: 35px;
+        }
+        
+        .hover-image-icon-hidden {
+            visibility: hidden;
+        }
+    }
     
     .map-controls-active-filter-frame {
         min-height: 54px;
@@ -1202,7 +1223,7 @@
             border-radius: 34px;
             
             .rounded-button-inner {
-                padding: 10px;
+                padding: 0 10px;
             }
         }
         

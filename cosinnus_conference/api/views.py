@@ -9,6 +9,7 @@ from cosinnus_event.models import ConferenceEvent
 
 # FIXME: Make this pagination class default in REST_FRAMEWORK setting
 from rest_framework.decorators import action
+from cosinnus.utils.permissions import check_user_superuser
 
 
 class DefaultPageNumberPagination(pagination.PageNumberPagination):
@@ -20,15 +21,21 @@ class DefaultPageNumberPagination(pagination.PageNumberPagination):
 class RequireGroupReadMixin(object):
 
     def get_queryset(self):
-        user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(self.request.user)
-        return self.queryset.filter(id__in=user_group_ids)
+        queryset = self.queryset
+        if not check_user_superuser(self.request.user):
+            user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(self.request.user)
+            queryset = queryset.filter(id__in=user_group_ids)
+        return queryset
 
 
 class RequireEventReadMixin(object):
 
     def get_queryset(self):
-        user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(self.request.user)
-        return self.queryset.filter(room__group__id__in=user_group_ids)
+        queryset = self.queryset
+        if not check_user_superuser(self.request.user):
+            user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(self.request.user)
+            queryset = queryset.filter(room__group__id__in=user_group_ids)
+        return queryset
 
 
 class ConferenceViewSet(RequireGroupReadMixin,
@@ -45,7 +52,7 @@ class ConferenceViewSet(RequireGroupReadMixin,
             queryset = queryset.filter(room=room_id)
         else:
             queryset = queryset.filter(room__group=pk).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
-        queryset = queryset.conference_upcoming().order_by('from_date', 'title')
+        queryset = queryset.order_by('from_date', 'title')
         page = self.paginate_queryset(queryset)
         serializer = ConferenceEventSerializer(page, many=True, context={"request": request})
         return self.get_paginated_response(serializer.data)
@@ -65,7 +72,7 @@ class ConferenceViewSet(RequireGroupReadMixin,
             queryset = queryset.filter(room=room_id)
         else:
             queryset = queryset.filter(room__group=pk).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
-        queryset = queryset.conference_upcoming().order_by('from_date')
+        queryset = queryset.order_by('from_date')
         page = self.paginate_queryset(queryset)
         serializer = ConferenceEventParticipantsSerializer(page, many=True, context={"request": request})
         return self.get_paginated_response({p['id']: p['participants_count'] for p in serializer.data})

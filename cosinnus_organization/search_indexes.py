@@ -9,17 +9,20 @@ from cosinnus_organization.models import CosinnusOrganization
 class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
           StoredDataIndexMixin, indexes.Indexable):
 
-    text = TemplateResolveNgramField(document=True, use_template=True)
+    text = TemplateResolveNgramField(document=True, model_attr='name')
     boosted = indexes.NgramField(model_attr='name', boost=BOOSTED_FIELD_BOOST)
+    location = indexes.LocationField(null=True)
 
     visible_for_all_authenticated_users = indexes.BooleanField()
-    public = indexes.BooleanField()
+    public = indexes.BooleanField(default=True)
     creator = indexes.IntegerField(null=True)
     portal = indexes.IntegerField(model_attr='portal_id')
     social_media = indexes.MultiValueField()
-    type = indexes.IntegerField()
-    type_other = indexes.CharField()
-    group_members = indexes.MultiValueField(indexed=False)
+    type = indexes.IntegerField(model_attr='type')
+    type_other = indexes.CharField(model_attr='type_other')
+    group_members = indexes.MultiValueField()
+    groups = indexes.MultiValueField()
+    always_visible = indexes.BooleanField(default=True)
 
     def get_model(self):
         return CosinnusOrganization
@@ -81,13 +84,15 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
     def prepare_social_media(self, obj):
         return list(obj.social_media.values_list('url', flat=True))
 
-    def prepare_public(self, obj):
-        return True
-
     def prepare_group_members(self, obj):
         if not hasattr(obj, '_group_members'):
             obj._group_members = obj.members
         return obj._group_members
+
+    def prepare_groups(self, obj):
+        if not hasattr(obj, '_groups'):
+            obj._groups = list(obj.groups.active_groups().values_list('group_id', flat=True))
+        return obj._groups
 
     def index_queryset(self, using=None):
         qs = self.get_model().objects.active()

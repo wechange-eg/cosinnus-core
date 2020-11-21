@@ -402,6 +402,7 @@ class CosinnusGroupMembership(BaseMembership):
         """ Checks and fires `user_joined_group` signal if a user has hereby joined this group """
         created = bool(self.pk is None)
         super(CosinnusGroupMembership, self).save(*args, **kwargs)
+        signals.group_membership_has_changed.send(sender=self, instance=self, deleted=False)
         created_as_membership = bool(created and self.status in MEMBER_STATUS)
         changed_to_membership = bool(not created and self._status not in MEMBER_STATUS and self.status in MEMBER_STATUS)
         if created_as_membership or changed_to_membership:
@@ -409,6 +410,7 @@ class CosinnusGroupMembership(BaseMembership):
 
     def delete(self, *args, **kwargs):
         """ Checks and fires `user_left_group` signal if a user has hereby left this group """
+        signals.group_membership_has_changed.send(sender=self, instance=self, deleted=True)
         super(CosinnusGroupMembership, self).delete(*args, **kwargs)
         signals.user_left_group.send(sender=self.group, user=self.user, group=self.group)
 
@@ -973,7 +975,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def update_index_for_all_group_objects(self):
         """ Adds all of this group's BaseTaggableObjects to the search index """
         for instance in self.get_all_objects_for_group():
-            instance.remove_index()
+            instance.update_index()
 
     def get_icon(self):
         """ Returns the font-awesome icon specific to the group type """

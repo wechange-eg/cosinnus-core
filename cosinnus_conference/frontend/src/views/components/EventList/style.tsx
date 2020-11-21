@@ -35,7 +35,8 @@ export const useStyles = makeStyles((theme) => ({
       "& div.room-title": {
         "& span, & p": {
           fontWeight: 700,
-          color: theme.palette.text.secondary
+          color: theme.palette.text.secondary,
+          wordBreak: "break-word",
         }
       },
       "& div.event-title": {

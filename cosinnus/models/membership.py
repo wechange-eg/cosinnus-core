@@ -47,7 +47,8 @@ class CosinnusGroupMembershipQS(models.query.QuerySet):
 
     def update(self, **kwargs):
         ret = super(CosinnusGroupMembershipQS, self).update(**kwargs)
-        self.model._clear_cache()
+        for membership in self:
+            membership._clear_cache()
         return ret
 
 
@@ -198,12 +199,13 @@ class BaseMembership(models.Model):
 
     @classmethod
     def clear_member_cache_for_group(cls, group):
-        cache.delete_many([
+        keys = [
             _MEMBERSHIP_ADMINS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
             _MEMBERSHIP_MEMBERS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
             _MEMBERSHIP_PENDINGS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
             _MEMBERSHIP_INVITED_PENDINGS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
-        ])
+        ]
+        cache.delete_many(keys)
         group._clear_local_cache()
 
     def user_email(self):

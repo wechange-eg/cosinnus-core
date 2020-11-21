@@ -99,30 +99,45 @@
 		</div>
 	</div>
 	
-	{% if COSINNUS_IDEAS_ENABLED or COSINNUS_ORGANIZATIONS_ENABLED %}
+	{% if COSINNUS_IDEAS_ENABLED or COSINNUS_ORGANIZATIONS_ENABLED or my_conferences|length > 0 %}
 	<div class="nav-column">
+	    
+        {% if my_conferences|length > 0 %}
+            <h2 class="headline headline-condensed">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "My Conferences" %}
+            </h2>
+        
+            <ul class="item-list">
+                {% for item in my_conferences %}
+                    {{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+                {% endfor %}
+            </ul>
+            
+            <hr>
+        {% endif %}
 	
 		{% if COSINNUS_ORGANIZATIONS_ENABLED %}
 			<h2 class="headline headline-condensed">
 				{# Translators: __INCLUDE_JS_PO__ #}
 				{% trans "My Organizations" %}
 			</h2>
+		    <ul class="item-list">
 			{% if my_organizations|length %}
-				<ul class="item-list">
-					{% for item in my_organizations %}
-						{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
-					{% endfor %}
-				</ul>
+				{% for item in my_organizations %}
+					{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+				{% endfor %}
 			{% else %}
 				<li>
-					<span class="list-item list-item-link no-select" href="#" role="button" titledby=".item-text"> 
-			    		<div class="item-text">
-			                {# Translators: __INCLUDE_JS_PO__ #}
+					<span class="list-item list-item-link no-select" href="#" role="button" titledby=".item-text">
+						<div class="item-text">
+							{# Translators: __INCLUDE_JS_PO__ #}
 							{% trans "You have not created any organizations yet." %}
-			    		</div>
+						</div>
 					</span>
 				</li>
 			{% endif %}
+			</ul>
 			<hr>
 			
 			<div class="main-menu-links">

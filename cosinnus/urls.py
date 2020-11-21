@@ -25,7 +25,6 @@ from cosinnus.views import map, map_api, user, profile, common, widget, search, 
 from cosinnus_conference.api.views import ConferenceViewSet
 from cosinnus_event.api.views import EventViewSet
 from cosinnus_note.api.views import NoteViewSet
-from cosinnus_organization import views
 from cosinnus_organization.api.views import OrganizationViewSet
 
 app_name = 'cosinnus'
@@ -188,29 +187,6 @@ if settings.COSINNUS_IDEAS_ENABLED:
         url(r'^ideas/(?P<slug>[^/]+)/delete/$', idea.idea_delete, name='idea-delete'),
     ]
 
-if settings.COSINNUS_ORGANIZATIONS_ENABLED:
-    urlpatterns += [
-        url(r'^organizations/$', map.tile_view, name='organization-list', kwargs={'types': ['organizations']}),
-        url(r'^organizations/mine/$', map.tile_view, name='organization-list-mine', kwargs={'types': ['organizations'], 'show_mine': True}),
-        url(r'^organizations/add/$', views.organization_create, name='organization-create'),
-        url(r'^organizations/(?P<organization>[^/]+)/edit/$', views.organization_edit, name='organization-edit'),
-        url(r'^organizations/(?P<organization>[^/]+)/delete/$', views.organization_delete, name='organization-delete'),
-        url(r'^organizations/(?P<organization>[^/]+)/members/$', views.organization_members, name='organization-members'),
-        url(r'^organizations/(?P<organization>[^/]+)/join/$', views.organization_user_join, name='organization-user-join'),
-        url(r'^organizations/(?P<organization>[^/]+)/auto-join/$', views.organization_user_join_csrf_exempt, name='organization-user-join-nocsrf'),
-        url(r'^organizations/(?P<organization>[^/]+)/leave/$', views.organization_user_leave, name='organization-user-leave'),
-        url(r'^organizations/(?P<organization>[^/]+)/withdraw/$', views.organization_user_withdraw, name='organization-user-withdraw'),
-        url(r'^organizations/(?P<organization>[^/]+)/decline/$', views.organization_user_invitation_decline, name='organization-user-decline'),
-        url(r'^organizations/(?P<organization>[^/]+)/accept/$', views.organization_user_invitation_accept, name='organization-user-accept'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/$', views.organization_user_list, name='organization-user-list'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/add/$', views.organization_user_add, name='organization-user-add-generic'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/add-multiple/$', views.organization_user_add_multiple, name='organization-user-add-multiple'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/add/(?P<username>[^/]+)/$', views.organization_user_add, name='organization-user-add'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/delete/(?P<username>[^/]+)/$', views.organization_user_delete, name='organization-user-delete'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/edit/(?P<username>[^/]+)/$', views.organization_user_update, name='organization-user-edit'),
-        url(r'^organizations/(?P<organization>[^/]+)/users/member-invite-select2/$', views.user_organization_member_invite_select2, name='organization-member-invite-select2'),
-    ]
-
 
 if settings.COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED:
     urlpatterns += [
@@ -243,6 +219,9 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/decline/$' % url_key, group.group_user_invitation_decline, name=prefix+'group-user-decline'),
         url(r'^%s/(?P<group>[^/]+)/accept/$' % url_key, group.group_user_invitation_accept, name=prefix+'group-user-accept'),
         url(r'^%s/(?P<group>[^/]+)/activate-app/$' % url_key, group.group_activate_app, name=prefix+'group-activate-app'),
+        url(r'^%s/(?P<group>[^/]+)/organizations/$' % url_key, group.group_organizations, name=prefix+'group-organizations'),
+        url(r'^%s/(?P<group>[^/]+)/organizations/request/$' % url_key, group.group_organization_request, name=prefix+'group-organization-request'),
+        url(r'^%s/(?P<group>[^/]+)/organizations/organization-request-select2/$' % url_key, group.group_organization_request_select2, name=prefix+'group-organization-request-select2'),
 
         url(r'^%s/(?P<group>[^/]+)/users/$' % url_key, group.group_user_list, name=prefix+'group-user-list'),
         url(r'^%s/(?P<group>[^/]+)/users/add/$' % url_key, group.group_user_add, name=prefix+'group-user-add-generic'),

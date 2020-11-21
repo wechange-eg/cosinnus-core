@@ -15,10 +15,9 @@ def register():
     from cosinnus.core.registries import (app_registry, url_registry)
 
     active_by_default = "cosinnus_organization" in settings.COSINNUS_DEFAULT_ACTIVE_GROUP_APPS
-    app_registry.register('cosinnus_organization', 'organization', _('Conferences'), deactivatable=False,
+    app_registry.register('cosinnus_organization', 'organization', _('Organizations'), deactivatable=False,
                           active_by_default=active_by_default)
     url_registry.register_urlconf('cosinnus_organization', 'cosinnus_organization.urls')
-    # widget_registry.register('organization', 'cosinnus_organization.dashboard.Conference')
 
     # makemessages replacement protection
     name = pgettext_lazy("the_app", "organization")

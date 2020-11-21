@@ -18,6 +18,7 @@ from cosinnus.utils.functions import clean_single_line_text, \
 from cosinnus.utils.urls import group_aware_reverse
 from django.utils.crypto import get_random_string
 import logging
+from cosinnus.views.mixins.group import ModelInheritsGroupReadWritePermissionsMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -46,7 +47,7 @@ class CosinnusConferenceRoomManager(models.Manager):
     
 
 @python_2_unicode_compatible
-class CosinnusConferenceRoom(models.Model):
+class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models.Model):
     """ A model for rooms inside a conference group object.
         Each room will be displayed as a list in the conference main page
         and can be displayed in different ways, depending on its type """

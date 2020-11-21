@@ -42,6 +42,7 @@ from django_countries.fields import CountryField
 from django.contrib.contenttypes.fields import GenericRelation
 from cosinnus.models.managed_tags import CosinnusManagedTag,\
     CosinnusManagedTagAssignmentModelMixin
+from cosinnus.dynamic_fields import dynamic_fields
 
 logger = logging.getLogger('cosinnus')
 
@@ -544,6 +545,11 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
     
     # a choice of field types for the settings dict values of `COSINNUS_USERPROFILE_EXTRA_FIELDS`
     # these will be initialized as variable form fields for the fields in `self.extra_fields`
+    EXTRA_FIELD_TYPE_FORMFIELDS = {
+        dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT: forms.CharField,
+        dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: forms.BooleanField,
+        dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: forms.DateField,
+        dynamic_fields.DYNAMIC_FIELD_TYPE_COUNTRY: _make_country_formfield,
     EXTRA_FIELD_TYPES = {
         'text': forms.CharField,
         'boolean': forms.BooleanField,
@@ -571,27 +577,25 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
         """ Creates extra fields for `self.extra_fields` as defined in
             `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` """
         field_map = {}
-        for field_name, options in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.items():
+        for field_name, field_options in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.items():
             if field_name in self.fields:
                 raise ImproperlyConfigured(f'COSINNUS_USERPROFILE_EXTRA_FIELDS: {field_name} clashes with an existing UserProfile field!')
-            if not 'type' in options:
-                raise ImproperlyConfigured(f'COSINNUS_USERPROFILE_EXTRA_FIELDS: {field_name} does not define a "type" attribute of {self.__class__.__name__}.EXTRA_FIELD_TYPES!')
-            if not options['type'] in self.EXTRA_FIELD_TYPES:
-                raise ImproperlyConfigured(f'COSINNUS_USERPROFILE_EXTRA_FIELDS: {field_name}\'s "type" attribute was not found in {self.__class__.__name__}.EXTRA_FIELD_TYPES!')
+            if not field_options.type in self.EXTRA_FIELD_TYPE_FORMFIELDS:
+                raise ImproperlyConfigured(f'COSINNUS_USERPROFILE_EXTRA_FIELDS: {field_name}\'s "type" attribute was not found in {self.__class__.__name__}.EXTRA_FIELD_TYPE_FORMFIELDS!')
             # filter by whether a given option is set
             if self.filter_included_fields_by_option_name \
-                    and not options.get(self.filter_included_fields_by_option_name, False):
+                    and not getattr(field_options, self.filter_included_fields_by_option_name, False):
                 continue
             
-            formfield_class = self.EXTRA_FIELD_TYPES[options['type']]
+            formfield_class = self.EXTRA_FIELD_TYPE_FORMFIELDS[field_options.type]
             self.fields[field_name] = formfield_class(
-                label=options.get('label', None),
+                label=field_options.label,
                 initial=self.initial.get(field_name, None),
-                required=options.get('required', False),
+                required=field_options.required,
             )
-            setattr(self.fields[field_name], 'label', options.get('label', None))
-            setattr(self.fields[field_name], 'legend', options.get('legend', None))
-            setattr(self.fields[field_name], 'placeholder', options.get('placeholder', None))
+            setattr(self.fields[field_name], 'label', field_options.label)
+            setattr(self.fields[field_name], 'legend', field_options.legend)
+            setattr(self.fields[field_name], 'placeholder', field_options.placeholder)
             
             # "register" the extra field additionally
             field_map[field_name] = self.fields[field_name]

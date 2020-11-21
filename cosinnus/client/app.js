@@ -163,7 +163,8 @@ var App = function App () {
         
         var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
         var sdgsJson = typeof COSINNUS_MAP_SDGS_JSON !== 'undefined' ? COSINNUS_MAP_SDGS_JSON : {};
-
+        var allManagedTags = typeof COSINNUS_MANAGED_TAGS_JSON !== 'undefined' ? COSINNUS_MANAGED_TAGS_JSON : {};
+        var managedTagsLabels = typeof COSINNUS_MANAGED_TAGS_LABELS_JSON !== 'undefined' ? COSINNUS_MANAGED_TAGS_LABELS_JSON : {};
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
 
         self.controlView = new ControlView({
@@ -172,6 +173,8 @@ var App = function App () {
                 activeFilters: self.settings.activeFilters,
                 allTopics: topicsJson,
                 allSDGS: sdgsJson,
+                allManagedTags: allManagedTags,
+                managedTagsLabels: managedTagsLabels,
                 portalInfo: portalInfo,
                 controlsEnabled: self.displayOptions.showControls,
                 scrollControlsEnabled: self.displayOptions.showControls && self.displayOptions.showMap,
