@@ -548,6 +548,7 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
     EXTRA_FIELD_TYPE_FORMFIELDS = {
         dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT: forms.CharField,
         dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: forms.BooleanField,
+        dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: forms.DateField,
         dynamic_fields.DYNAMIC_FIELD_TYPE_COUNTRY: _make_country_formfield,
     }
     # if set to a string, will only include such fields in the form
