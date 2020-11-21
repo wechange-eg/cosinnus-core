@@ -547,6 +547,7 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
     EXTRA_FIELD_TYPES = {
         'text': forms.CharField,
         'boolean': forms.BooleanField,
+        'date': forms.DateField,
         'country': _make_country_formfield,
     }
     # if set to a string, will only include such fields in the form
