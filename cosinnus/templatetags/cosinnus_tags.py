@@ -257,6 +257,11 @@ def contains(iterable, item):
     """Template filter to check if an iterable contains an item, just like the `in` keyword """
     return bool(iterable is not None and item in iterable)
 
+@register.filter
+def negate(value):
+    """Template filter that returns the negation of the passed value
+    """
+    return not value
 
 @register.simple_tag(takes_context=True)
 def cosinnus_group_url_path(context, group=None):

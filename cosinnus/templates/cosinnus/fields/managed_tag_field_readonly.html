@@ -21,9 +21,11 @@
                 {% endif %}
 	        </p>
 	        {% if tag.description %}
-	            <p class="transparent forms-managed-tags detail-description">
-	                {{ tag.description }}
-	            </p>
+	            {% if on_editable_form or not SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_DESCRIPTION_IN_FORMS_ONLY %}
+		            <p class="transparent forms-managed-tags detail-description">
+		                {{ tag.description }}
+		            </p>
+	            {% endif %}
 	        {% endif %}
 	    </div>
     </div>

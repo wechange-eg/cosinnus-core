@@ -15,7 +15,7 @@
 	    {% if SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_FORMFIELD_SELECTED_TAG_DETAILS %}
 		    <div class="managed-tags-form-detail-frame" id="managed-tags-detail-frame" {% if not form.fields.managed_tag_field.initial %}style="display: none;"{% endif %}>
 		        {% for tag in form.fields.managed_tag_field.all_managed_tags %}
-	                {% include 'cosinnus/fields/managed_tag_field_readonly.html' with tag=tag visible=form.fields.managed_tag_field.initial|contains:tag.slug %}
+	                {% include 'cosinnus/fields/managed_tag_field_readonly.html' with tag=tag visible=form.fields.managed_tag_field.initial|contains:tag.slug on_editable_form=True %}
 		        {% endfor %}
 		    </div>
 		    <script type="text/javascript">
