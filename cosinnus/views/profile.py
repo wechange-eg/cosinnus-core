@@ -246,6 +246,11 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
                     field = sub_form.fields[field_name]
                     field.disabled = True
                     field.required = False
+        # disable the userprofile visibility field if it is locked
+        if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
+            field = form.forms['media_tag'].fields['visibility']
+            field.disabled = True
+            field.required = False
         return form
     
     def get_form_kwargs(self, *args, **kwargs):

@@ -115,10 +115,18 @@ class UserCreationForm(UserCreationFormExtraFieldsMixin, TermsOfServiceFormField
         CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user, defaults={
             'status': 1,
         })
+        default_visibility = None
+        
         # set the user's visibility to public if the setting says so
         if settings.COSINNUS_USER_DEFAULT_VISIBLE_WHEN_CREATED:
+            default_visibility = BaseTagObject.VISIBILITY_ALL
+        # set the user's visibility to the locked value if the setting says so
+        if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
+            default_visibility = settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED
+        
+        if default_visibility is not None:
             media_tag = user.cosinnus_profile.media_tag
-            media_tag.visibility = BaseTagObject.VISIBILITY_ALL
+            media_tag.visibility = default_visibility
             media_tag.save()
         
         # set the user's tos_accepted flag to true and date to now

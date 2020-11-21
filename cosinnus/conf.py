@@ -664,6 +664,10 @@ class CosinnusConf(AppConf):
     # base fields of the user profile form to hide in form and detail view
     USERPROFILE_HIDDEN_FIELDS = []
     
+    # if set to any value other than None, the userprofile visibility field will be disabled
+    # and locked to the value set here
+    USERPROFILE_VISIBILITY_SETTINGS_LOCKED = None
+    
     # extra fields for the user profile.
     # usage:
     # {
