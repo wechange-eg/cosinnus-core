@@ -765,6 +765,8 @@ class CosinnusConf(AppConf):
     
     # enable display and forms for managed tags
     MANAGED_TAGS_ENABLED = False
+    # allows assigning multiple managed tags to objects
+    MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED = False
     # str path to a drop-in class for managed tags containing strings 
     MANAGED_TAGS_LABEL_CLASS_DROPIN = None
     # will the managed tag show up in the user profile form for the users to assign themselves?

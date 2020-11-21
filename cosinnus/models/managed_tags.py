@@ -316,7 +316,12 @@ class CosinnusManagedTag(models.Model):
         
     def clear_cache(self):
         CosinnusManagedTag.objects.clear_cache()
-        
+    
+    @property
+    def sort_key(self):
+        """ A sort key with prefixed ManagedTagType name, usable as grouped sort key """
+        return ((self.type.name if self.type else 'zzzzzz__NO-TYPE') + ' - '+ self.name).lower()
+    
     @property
     def image_url(self):
         return self.image.url if self.image else None

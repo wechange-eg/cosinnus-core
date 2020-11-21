@@ -32,7 +32,9 @@ if getattr(settings, 'COSINNUS_MANAGED_TAGS_ENABLED', False):
         def __init__(self, *args, **kwargs):
             super(_ManagedTagFormMixin, self).__init__(*args, **kwargs)
             if 'managed_tag_field' in self.fields:
-                setattr(self.fields['managed_tag_field'], 'all_managed_tags', CosinnusManagedTag.objects.all_in_portal_cached())
+                all_managed_tags = list(CosinnusManagedTag.objects.all_in_portal_cached())
+                all_managed_tags = sorted(all_managed_tags, key=lambda tag: tag.sort_key)
+                setattr(self.fields['managed_tag_field'], 'all_managed_tags', all_managed_tags)
                 # set initial tag
                 if self.instance and self.instance.pk:
                     tag_assignment_instance = self._get_tag_assignment_instance(self.instance)
@@ -46,13 +48,16 @@ if getattr(settings, 'COSINNUS_MANAGED_TAGS_ENABLED', False):
         def clean_managed_tag_field(self):
             """ Todo: This method supports only single-tag cleaning for now! """
             self.save_managed_tags = []
-            tag_value = self.cleaned_data['managed_tag_field']
+            if settings.COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED:
+                tag_values = self.data.getlist('managed_tag_field')
+            else:
+                tag_values = [self.cleaned_data['managed_tag_field']] if self.cleaned_data['managed_tag_field'] else []
                 
-            if tag_value:
+            for tag_value in tag_values:
                 found_tag = get_object_or_None(CosinnusManagedTag, portal=CosinnusPortal.get_current(), slug=tag_value)
                 if not found_tag:
                     raise forms.ValidationError(_('The selected choice was not found or invalid! Please choose a different value!'))
-                self.save_managed_tags = [tag_value]
+                self.save_managed_tags.append(tag_value)
             return tag_value
         
         def save(self, commit=True):
