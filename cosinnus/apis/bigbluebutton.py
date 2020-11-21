@@ -124,10 +124,10 @@ def start(
     if presentation_url:
         headers = {'Content-Type': 'application/xml'}
         xml = "<?xml version='1.0' encoding='UTF-8'?><modules><module name='presentation'>"
-        url = get_domain_for_portal(CosinnusPortal.get_current()) + presentation_url
-        xml += f"<document url='{url}' />"
+        absolute_url = get_domain_for_portal(CosinnusPortal.get_current()) + presentation_url
+        xml += f"<document url='{absolute_url}' />"
         xml += "</module></modules>"
-        response = requests.post(url, data=xml, header=headers)
+        response = requests.post(url, data=xml, headers=headers)
     else:
         response = requests.get(url)
     result = bbb_utils.parse_xml(response.content.decode('utf-8'))
