@@ -58,7 +58,7 @@ if getattr(settings, 'COSINNUS_MANAGED_TAGS_ENABLED', False):
                 if not found_tag:
                     raise forms.ValidationError(_('The selected choice was not found or invalid! Please choose a different value!'))
                 self.save_managed_tags.append(tag_value)
-            return tag_value
+            return tag_values
         
         def save(self, commit=True):
             """ Assign the selected managed tags to the assignment target object """
