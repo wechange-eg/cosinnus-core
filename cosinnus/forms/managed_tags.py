@@ -86,7 +86,7 @@ if getattr(settings, 'COSINNUS_MANAGED_TAGS_ENABLED', False):
         
         def _save_assignment(self, obj):
             """ Saves the assigned tags. Call after the form instance has been committed. """
-            if 'managed_tag_field' in self.fields:
+            if 'managed_tag_field' in self.fields and not self.fields['managed_tag_field'].disabled:
                 tag_assignment_instance = self._get_tag_assignment_instance(obj)
                 # create new managed tag assignments and delete old ones
                 CosinnusManagedTagAssignment.update_assignments_for_object(tag_assignment_instance, self.save_managed_tags)
