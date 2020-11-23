@@ -40,6 +40,7 @@ from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import get_newly_registered_user_email
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
 from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 logger = logging.getLogger('cosinnus')
@@ -140,7 +141,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     extra_fields = JSONField(default={}, blank=True,
                 help_text='NO LONGER USED! Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
     dynamic_fields = PostgresJSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
-                help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')                       
+                help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`',
+                encoder=DjangoJSONEncoder)                       
 
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     

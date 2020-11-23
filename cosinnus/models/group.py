@@ -57,6 +57,7 @@ import datetime
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericRelation
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 logger = logging.getLogger('cosinnus')
@@ -534,7 +535,8 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
                                                   'If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended.'))
 
     dynamic_field_choices = PostgresJSONField(default=dict, verbose_name=_('Dynamic choice field choices'), blank=True,
-        help_text='A dict storage for all choice lists for the dynamic fields of type `DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT`')
+        help_text='A dict storage for all choice lists for the dynamic fields of type `DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT`',
+        encoder=DjangoJSONEncoder)
 
     # exact time when last digest was sent out for each of the period settings
     SAVED_INFO_LAST_DIGEST_SENT = 'last_digest_sent_for_period_%d'
