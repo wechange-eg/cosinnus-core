@@ -1,14 +1,23 @@
 import re
+
 from django import forms
-from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
 
 
 class BSISafePasswordValidator(object):
+    """ Password validator to ensure at least the BSI conditions for a chosen password.
+
+    conditions:
+    1 symbol character
+    1 lowercase character
+    1 uppercase character
+    1 digit
+    """
+
     MIN_SPECIAL_CHARACTERS = 1
     MIN_CAPITAL_LETTERS = 1
     MIN_LOWER_CASE = 1
-    
+
     def validate(self, password, user=None):
         if not re.findall('\d', password):
             raise forms.ValidationError(
@@ -31,20 +40,9 @@ class BSISafePasswordValidator(object):
                 code='password_no_special_character'
             )
 
-    def contains_special_character(self, password):
+    @staticmethod
+    def contains_special_character(password):
         for char in password.split():
             if not char.isalnum():
                 return True
         return False
-
-    def get_help_text(self):
-        return _(
-            "Your password must contain at least: "
-            "{upper_case} upper case character, "
-            "{lower_case} lower case character, "
-            "{special_character} non alpha numerical character.".format(
-                upper_case=self.MIN_CAPITAL_LETTERS,
-                lower_case=self.MIN_LOWER_CASE,
-                special_character=self.MIN_SPECIAL_CHARACTERS
-            )
-        )

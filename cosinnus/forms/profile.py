@@ -58,3 +58,4 @@ class UserProfileForm(get_form(_UserProfileForm, attachable=False, extra_forms={
         if name == 'media_tag':
             return user
         return InvalidArgument
+
