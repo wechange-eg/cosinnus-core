@@ -70,6 +70,37 @@
     </ul>
 </button>
 
+{% if SETTINGS.COSINNUS_POSTMAN_ARCHIVE_MODE %}
+    <button type="button" class="btn w100 btn-emphasized fine-space" 
+            title="{% trans "Legacy Messages Archive" %}" 
+            href="{% url 'postman:index' %}">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-envelope"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Legacy Messages Archive" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+{% endif %}
+
+<button type="button" class="btn w100 btn-emphasized fine-space" 
+        title="{% trans "Deactivated Projects and Groups" %}" 
+        {% if has_deactivated_groups %}href="{% url 'cosinnus:deactivated-groups' %}"{% else %}disabled="true"{% endif %}>
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-flash"></i>
+            </a>
+            <div class="media-body">
+                {% trans "Deactivated Projects and Groups" %}
+            </div>
+        </li>
+    </ul>
+</button>
 
 {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL and not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
 	{% if request.user.has_usable_password %}
