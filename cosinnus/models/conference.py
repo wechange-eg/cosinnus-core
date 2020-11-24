@@ -59,7 +59,6 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
     TYPE_COFFEE_TABLES = 4
     TYPE_RESULTS = 5
     TYPE_PARTICIPANTS = 6
-    TYPE_HTML = 6
     
     TYPE_CHOICES = (
         (TYPE_LOBBY, _('Lobby')),

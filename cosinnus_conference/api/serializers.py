@@ -36,7 +36,6 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
         CosinnusConferenceRoom.TYPE_COFFEE_TABLES: 'coffee_tables',
         CosinnusConferenceRoom.TYPE_RESULTS: 'results',
         CosinnusConferenceRoom.TYPE_PARTICIPANTS: 'participants',
-        CosinnusConferenceRoom.TYPE_HTML: 'html',
     }
     type = serializers.SerializerMethodField()
     count = serializers.SerializerMethodField()
