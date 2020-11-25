@@ -1,13 +1,15 @@
 from datetime import datetime
-from django.http import HttpResponseRedirect
-from django.shortcuts import reverse
+from django.shortcuts import reverse, redirect
 from django.conf import settings
+from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import logout
 
 
 class InactiveLogoutMiddleware:
     """ Logs out users automatically, who are not triggering requests from user interactions in the frontend
 
-        INACTIVE_LOGOUT_TIME settings variable is required to be set in seconds.
+        COSINNUS_INACTIVE_LOGOUT_TIME_SECONDS settings variable is required to be set in seconds.
 
         datetime.utcnow() is used because of a simpler conversion from string to datetime object. %z did not work
     """
@@ -15,7 +17,6 @@ class InactiveLogoutMiddleware:
     def __init__(self, get_repsonse):
         self.API_INTERFACES = ["api", "select2"]
         self.COOKIE_NAME = 'LAST_ACTIVITY'
-        self.DEFAULT_LOGOUT_TIME = settings.INACTIVE_LOGOUT_TIME if hasattr(settings, 'INACTIVE_LOGOUT_TIME') else 10*60
 
         self.get_response = get_repsonse
 
@@ -35,7 +36,8 @@ class InactiveLogoutMiddleware:
     def logout_time_passed(self, last_activity):
         last_activity = datetime.strptime(last_activity, '%Y-%m-%d %H:%M:%S.%f') if type(last_activity) is str else last_activity
         difference = datetime.utcnow() - last_activity
-        if difference.total_seconds() > self.DEFAULT_LOGOUT_TIME:
+        seconds_difference = difference.total_seconds()
+        if seconds_difference > getattr(settings, 'COSINNUS_INACTIVE_LOGOUT_TIME_SECONDS', 10*60):
             return True
         return False
 
@@ -44,8 +46,9 @@ class InactiveLogoutMiddleware:
             last_activity = request.COOKIES.get(self.COOKIE_NAME, None) or datetime.utcnow()
             if self.logout_time_passed(last_activity):
                 # redirecting to logout with deleting time cookie
-
-                response = reverse('logout')
+                logout(request)
+                messages.warning(request, _('You have been automatically logged out after being inactive for some time.'))
+                response = redirect(reverse('login')) 
                 response.delete_cookie(self.COOKIE_NAME)
                 return response
 

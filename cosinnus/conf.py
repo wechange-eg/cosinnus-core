@@ -736,6 +736,9 @@ class CosinnusConf(AppConf):
     # if set to True, will hide some UI elements in navbar and dashboard and change some redirects
     FORUM_DISABLED = False
     
+    # if`InactiveLogoutMiddleware` is active, this is the time after which a user is logged out
+    INACTIVE_LOGOUT_TIME_SECONDS = 60 * 60
+    
     # if set to True, will hide the userdashboard timeline controls and force the 
     # "only show content from my projects and groups" option 
     USERDASHBOARD_FORCE_ONLY_MINE = False

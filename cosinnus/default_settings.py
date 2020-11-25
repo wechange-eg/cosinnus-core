@@ -102,13 +102,12 @@ MIDDLEWARE = [
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     
     'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
-    #'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.AddRequestToModelSaveMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
     'cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware',
     'cosinnus.core.middleware.set_password.SetPasswordMiddleware',
-    'cosinnus.core.middleware.inactive_logout_middleware.InactiveLogoutMiddleware',
 ]
 
 
@@ -626,4 +625,3 @@ COSINNUS_STARRED_STARRING_LABEL = _('Bookmarked')
 COSINNUS_STARRED_OBJECTS_LIST = _('Bookmark list')
 COSINNUS_STARRED_USERS_LIST = _('Bookmarked Users list')
 
-INACTIVE_LOGOUT_TIME = 15 * 60
