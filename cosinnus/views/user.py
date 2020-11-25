@@ -848,12 +848,12 @@ def email_first_login_token_to_user(user, request=None, user_has_just_registered
             'verification_url_param': login_url_param,
             'next': redirect_with_next('', request),
         })
-        template = 'cosinnus/mail/user_email_verification%s.html' % ('_onchange' if not user_has_just_registered else '')
+        template = 'cosinnus/mail/user_email_first_token.html'
 
         data.update({
             'content': render_to_string(template, data),
         })
-        subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
+        subj_user = render_to_string('cosinnus/mail/user_email_first_token_subj.txt', data)
         send_mail_or_fail_threaded(user.email, subj_user, None, data)
 
 
