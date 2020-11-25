@@ -34,16 +34,20 @@ class SetPasswordMiddleware:
         func, args, kwargs = resolve(request.path)
         token = kwargs.get('token', '') if 'token' in kwargs else request.COOKIES.get(PROFILE_SETTING_PASSWORD_NOT_SET, '')
 
-        if request.path == reverse('logout') or request.path == '/':
-            response = self.get_response(request)
-            return response
+        if not request.user.is_authenticated:
+            # section for anonymous users
+            if (request.path == reverse('logout') and token) or (request.path == reverse('login') and token):
+                response = self.get_response(request)
+                return response
 
-        elif self.requested_initial_password(func) and token:
-            response = self.get_response(request)
-            if not request.COOKIES.get(PROFILE_SETTING_PASSWORD_NOT_SET):
-                response.set_cookie(PROFILE_SETTING_PASSWORD_NOT_SET, token)
-            return response
+            elif self.requested_initial_password(func) and token:
+                response = self.get_response(request)
+                if not request.COOKIES.get(PROFILE_SETTING_PASSWORD_NOT_SET):
+                    response.set_cookie(PROFILE_SETTING_PASSWORD_NOT_SET, token)
+                return response
+            else:
+                return HttpResponseRedirect(reverse('password_set_initial'))
         else:
-            #return HttpResponseRedirect(reverse('password_set_initial'))
+            # requests from logged in users are passed through
             response = self.get_response(request)
             return response

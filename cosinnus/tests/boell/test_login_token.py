@@ -47,8 +47,7 @@ class EmailTestCase(TestCase):
         # login the other user to ensure a proper session setup
         client.force_login(self.other_user)
 
-        with self.assertRaises(PermissionDenied):
-            response = client.get(reverse('password_set_initial', kwargs={'token': self.token}))
+        self.assertRaises(PermissionDenied, client.get(reverse('password_set_initial', kwargs={'token': self.token})))
 
     def test_redirected_by_middleware(self):
         client = Client()
