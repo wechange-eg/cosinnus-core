@@ -29,7 +29,7 @@ class DynamicFieldFormFieldGenerator(object):
         for kwarg, val in kwargs.items():
             setattr(self, kwarg, val)
         self._dynamic_field_options = dynamic_field_options or {}
-        self._dynamic_field_initial = dynamic_field_initial or {}
+        self._dynamic_field_initial = dynamic_field_initial
         self._dynamic_field_name = dynamic_field_name
         formfield_extra_kwargs = self.get_formfield_kwargs()
         formfield_kwargs = {
