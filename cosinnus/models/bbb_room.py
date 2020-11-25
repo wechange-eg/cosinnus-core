@@ -207,7 +207,12 @@ class BBBRoom(models.Model):
                 logger.exception(e)
         return False
 
+    @property
+    def event(self):
+        return self.tagged_objects.first()
+
     def restart(self):
+        event = self.event
         m_xml = bbb.start(
             name=self.name,
             meeting_id=self.meeting_id,
@@ -216,7 +221,8 @@ class BBBRoom(models.Model):
             moderator_password=self.moderator_password,
             voice_bridge=self.voice_bridge,
             max_participants=self.max_participants,
-            options=self.options
+            options=self.options,
+            presentation_url=event.presentation_file.url if event and event.presentation_file else None,
         )
 
         meeting_json = bbb_utils.xml_to_json(m_xml)

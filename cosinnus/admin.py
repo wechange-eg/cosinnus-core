@@ -647,11 +647,22 @@ if settings.COSINNUS_IDEAS_ENABLED:
     admin.site.register(CosinnusIdea, CosinnusIdeaAdmin)
 
 
+def restart_bbb_rooms(modeladmin, request, queryset):
+    for bbb_room in queryset.all():
+        try:
+            bbb_room.restart()
+        except:
+            pass
+
+
+restart_bbb_rooms.short_description = _('Restart')
+
+
 class CosinnusBBBRoomAdmin(admin.ModelAdmin):
     list_display = ('meeting_id', 'name', 'ended', 'portal')
     list_filter = ('ended', 'portal')
     search_fields = ('meeting_id', 'internal_meeting_id', 'name')
-
+    actions = (restart_bbb_rooms, )
 admin.site.register(BBBRoom, CosinnusBBBRoomAdmin)
 
 
