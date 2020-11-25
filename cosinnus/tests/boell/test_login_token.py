@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import reverse
 from django.test import TestCase, Client
-from cosinnus.utils.user import create_base_user
 from cosinnus.models.profile import PROFILE_SETTING_PASSWORD_NOT_SET
+from django.test import TestCase, RequestFactory, override_settings
+from cosinnus.utils.user import create_base_user
 
 
 class EmailTestCase(TestCase):
