@@ -780,6 +780,8 @@ class CosinnusConf(AppConf):
     MANAGED_TAGS_USERS_MAY_ASSIGN_SELF = False
     # will the managed tag show up in the group form for the users to assign their groups?
     MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS = False
+    
+    MANAGED_TAGS_IN_SIGNUP_FORM = True
     # if set to True, managed tag descriptions will only be shown in form fields
     MANAGED_TAGS_SHOW_DESCRIPTION_IN_FORMS_ONLY = False
     # is approval by an admin needed on user created tags?

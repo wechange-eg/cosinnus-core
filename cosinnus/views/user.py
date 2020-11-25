@@ -214,7 +214,8 @@ class UserCreateView(CreateView):
         """ Allow pre-populating managed tags on signup using URL params /signup/?mtag=tag1,tag2 """
         initial = super().get_initial()
         # match managed tag param and set it as comma-seperated initial
-        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF \
+                and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:
             if self.request.GET.get('mtag', None):
                 initial['managed_tag_field'] = self.request.GET.get('mtag')
             elif settings.COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG is not None:

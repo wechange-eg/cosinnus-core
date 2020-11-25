@@ -248,6 +248,17 @@ class RedirectAnonymousUserToLoginMiddleware(MiddlewareMixin):
         if not request.user.is_authenticated:
             if request.path not in LOGIN_URLS:
                 return HttpResponseRedirect('/login/')
+            
+            
+class RedirectAnonymousUserToLoginAllowSignupMiddleware(MiddlewareMixin):
+    """ This middleware will show an error page on any anonymous request,
+        unless the request is directed at a login URL. """
+
+    def process_request(self, request):
+        if not request.user.is_authenticated:
+            if request.path not in LOGIN_URLS \
+                    and not any([request.path.startswith(prefix) for prefix in ['/signup/', '/captcha/']]):
+                return HttpResponseRedirect('/login/')
 
 
 class ConditionalRedirectMiddleware(MiddlewareMixin):
