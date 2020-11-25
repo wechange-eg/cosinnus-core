@@ -18,6 +18,7 @@ import logging
 from django.core.cache import cache
 from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.permissions import check_user_superuser
+from annoying.functions import get_object_or_None
 
 logger = logging.getLogger('cosinnus')
 
@@ -209,7 +210,11 @@ class BBBRoom(models.Model):
 
     @property
     def event(self):
-        return self.tagged_objects.first()
+        """ Tries to get a conference event for this bbb room, or returns None else """
+        from cosinnus_event.models import ConferenceEvent # noqa
+        media_tag = self.tagged_objects.first()
+        event = get_object_or_None(ConferenceEvent, media_tag=media_tag)
+        return event
 
     def restart(self):
         event = self.event
