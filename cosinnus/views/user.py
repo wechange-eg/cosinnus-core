@@ -76,8 +76,6 @@ from django_select2.views import Select2View, NO_ERR_RESP
 from django.core.exceptions import PermissionDenied
 from cosinnus import cosinnus_notifications
 from cosinnus.utils.html import render_html_with_variables
-# from cosinnus.forms.profile import ValidatedPasswordChangeForm
-
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -725,7 +723,7 @@ def logout_api(request):
 class CosinnusPasswordChangeView(PasswordChangeView):
     """ Overridden view that sends a password changed signal """
     form_class = ValidatedPasswordChangeForm
-    
+
     def form_valid(self, form):
         ret = super().form_valid(form)
         # send a password changed signal
@@ -842,19 +840,21 @@ def email_first_login_token_to_user(user, request=None, user_has_just_registered
     user.cosinnus_profile.save()
 
     # message user for email verification
-    data = get_common_mail_context(None)
-    data.update({
-        'user': user,
-        'user_email': user.email,
-        'verification_url_param': login_url_param,
-    })
-    template = 'cosinnus/mail/user_email_verification%s.html' % ('_onchange' if not user_has_just_registered else '')
+    if request:
+        data = get_common_mail_context(request)
+        data.update({
+            'user': user,
+            'user_email': user.email,
+            'verification_url_param': login_url_param,
+            'next': redirect_with_next('', request),
+        })
+        template = 'cosinnus/mail/user_email_first_token.html'
 
-    data.update({
-        'content': render_to_string(template, data),
-    })
-    subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
-    send_mail_or_fail_threaded(user.email, subj_user, None, data)
+        data.update({
+            'content': render_to_string(template, data),
+        })
+        subj_user = render_to_string('cosinnus/mail/user_email_first_token_subj.txt', data)
+        send_mail_or_fail_threaded(user.email, subj_user, None, data)
 
 
 def user_api_me(request):
@@ -1064,3 +1064,5 @@ def cleanup_user_after_first_login(sender, user, request, **kwargs):
     """ Cleans up pre-registration objects and settings """
     CosinnusUnregisterdUserGroupInvite.objects.filter(email=user.email).delete()
 
+
+    
