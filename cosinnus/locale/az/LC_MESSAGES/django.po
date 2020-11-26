@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-06 16:06+0200\n"
+"POT-Creation-Date: 2020-11-26 09:08+0100\n"
 "PO-Revision-Date: 2020-05-10 13:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,6 +28,12 @@ msgstr "%(number)d %(objects)s müvəffəqiyyətlə silindi"
 
 msgid "Delete selected entries"
 msgstr "Seçilmiş daxiledilmələri silin"
+
+msgid "Convert memberships to Admin status"
+msgstr ""
+
+msgid "Convert memberships to Member status"
+msgstr ""
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr "Eyni kodlu əlamət artıq mövcuddur! Zəhmət olmasa, əlamətiniz üçün fərqli sətir seçəsiniz."
@@ -113,6 +119,9 @@ msgstr "%d İstifadəçilər uğurla de aktivasiya edildi."
 #| msgid "Made you an admin"
 msgid "Make user RocketChat admin"
 msgstr "Sizi admin etdi"
+
+msgid "Restart"
+msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "İstifadə etməyə çalışdığınız hesabın e-poçt ünvanı, giriş etməzdən əvvəl aktivləşdirilməlidir."
@@ -411,6 +420,9 @@ msgstr "Беларуская"
 msgid "Dutch--NATIVE-LANGUAGE"
 msgstr "Nederlands"
 
+msgid "Czech--NATIVE-LANGUAGE"
+msgstr "Čeština"
+
 msgid "Azerbaijani--NATIVE-LANGUAGE"
 msgstr "Azerbaycan dili"
 
@@ -504,6 +516,10 @@ msgstr "Bu bir etibarlı Flickr Qalereya linki kimi görünmür! Bu bu formada \
 msgid "Users"
 msgstr "İstifadəçilər"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "Qruplar"
+
 msgid "Please remove the whitespace from '{}'"
 msgstr ""
 
@@ -521,6 +537,9 @@ msgstr ""
 
 msgid "Name"
 msgstr "Ad"
+
+msgid "The selected choice was not found or invalid! Please choose a different value!"
+msgstr ""
 
 msgid "Limit to teams"
 msgstr "Komandalara məhdudiyyət"
@@ -726,6 +745,9 @@ msgstr "Rocket.Çat"
 #| msgid "Rocket.Chat"
 msgid "RocketChat room name"
 msgstr "Rocket.Çat"
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Allow users to create new coffee tables"
 msgstr ""
@@ -1171,6 +1193,60 @@ msgstr "Kosinus İdeyası"
 msgid "Cosinnus Ideas"
 msgstr "Kosinus İdeyaları"
 
+msgid "Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Idea"
+msgid "Create Managed Tag"
+msgstr "İdea Yaradın"
+
+msgid "Edit Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Idea"
+msgid "Delete Managed Tag"
+msgstr "İdeanı silin"
+
+msgid "Managed Tag Assignment"
+msgstr ""
+
+msgid "Managed Tag Assignments"
+msgstr ""
+
+msgid "No Tag selected"
+msgstr ""
+
+#, fuzzy
+#| msgid "Approach"
+msgid "Approved"
+msgstr "Yanaşma"
+
+msgid "Color"
+msgstr ""
+
+#, fuzzy
+#| msgid "Main background color (css hex value, with or without \"#\")"
+msgid "Optional color code (css hex value, with or without \"#\")"
+msgstr "Əsas fon rəngi (css hex dəyəri, \"#\" ilə və ya olmadan)"
+
+#, fuzzy
+#| msgid "Parent Group"
+msgid "Paired Group"
+msgstr "Valdeyn Kimliyi"
+
+msgid "A paired group will automatically be joined by all users assigned to this object."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search Synonyms"
+msgstr "Komandalarda axtarın"
+
+msgid "Comma-seperated list of phrases for which auto-complete matches, even partial, will return this object."
+msgstr ""
+
 msgid "Is Moderator"
 msgstr "Moderatordur"
 
@@ -1344,10 +1420,6 @@ msgstr "Tədbirlər"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Layihələr"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Groups"
-msgstr "Qruplar"
 
 msgid "At least one type of Map object must be chosen!"
 msgstr "Xəritə obyektinin ən azı bir növü seçilməlidir!"
@@ -1936,6 +2008,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
 msgstr "helptext_13_groupadministration"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_13_groupadministration"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_15_organization"
+msgstr "helptext_13_groupadministration"
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
 msgstr "helptext_50_profileprivacy"
@@ -2149,6 +2228,12 @@ msgstr "Qalereya şəkli seçin və yükləyin"
 #| msgid "Example: http://mywebsite.com"
 msgid "Example: https://twitter.com/myaccount"
 msgstr "Nümunə: http://mywebsite.com"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Website"
+msgid "website"
+msgstr "Vebsayt"
 
 msgid "Re-Activate Project/Group"
 msgstr "Layihə/Qrupu yenidən aktiv edin"
@@ -2809,6 +2894,12 @@ msgstr "Portal Adminləri"
 msgid "All societies"
 msgstr "Bütün cəmiyyətlər"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organizations"
+msgstr "Dəvətlər"
+
 msgid "Re-activate Group"
 msgstr "Qrupu yenidən-aktiv edin"
 
@@ -2823,6 +2914,103 @@ msgstr "Layihəni deaktiv edin"
 
 msgid "Withdraw Request"
 msgstr "Tələbi geri çək"
+
+#, fuzzy, python-format
+#| msgid "%(team_name)s - Members"
+msgid "%(team_name)s - Assigned organizations"
+msgstr "%(team_name)s - Üzvlər"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Assigned organizations"
+msgstr "Dəvətlər"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organizations..."
+msgstr "Dəvəti ləğv edin"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organization"
+msgstr "Dəvəti ləğv edin"
+
+#, fuzzy
+#| msgid "Enter a user name or email to find users to invite..."
+msgid "Enter a name to find organizations to request..."
+msgstr "İstifadəçi adını daxil edin və ya dəvət ediləcək istifadəçiləri tapmaq üçün e-poçt göndər..."
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Request organizations"
+msgstr "Dəvətlər"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Requested organizations"
+msgstr "Dəvəti ləğv edin"
+
+#, fuzzy
+#| msgctxt "withdraw join team button second item"
+#| msgid "Request"
+msgid "Revoke request"
+msgstr "Tələb"
+
+#, fuzzy
+#| msgid "Decline Member"
+msgid "Decline request"
+msgstr "Üzvdən imtina edin"
+
+#, fuzzy
+#| msgid "Accept Member"
+msgid "Accept request"
+msgstr "İstifadəçini qəbul edin"
+
+#, fuzzy
+#| msgctxt "join request pending team button second item"
+#| msgid "Requested"
+msgid "Requested"
+msgstr "Tələb edildi"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to revoke the request for „%(name)s“?"
+msgstr "Siz həqiqətən „%(name)s“ üzvü üçün dəvəti geri götürmək istəyirsiniz?"
+
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Revoke request for organization"
+msgstr "İstifadəçilər üçün axtarış"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to decline the request?"
+msgstr "Siz həqiqətən də dəvəti rədd etmək istəyirsiniz?"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organization invitations"
+msgstr "Dəvətlər"
+
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Decline invitation"
+msgstr "Dəvətdən imtina edin"
+
+#, fuzzy
+#| msgid "Invite"
+msgid "Invited"
+msgstr "Dəvət edin"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove „%(name)s“ from the organization?"
+msgstr "Siz həqiqətən „%(name)s“ adlı üzvü komandadan çıxarmaq istəyirsiniz?"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove organization"
+msgstr "Yerləşməni ləğv edin"
 
 msgid "Workshop Participant File Upload"
 msgstr ""
@@ -3522,12 +3710,6 @@ msgid "All Ideas"
 msgstr "Bütün İdeyalar"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Invitations"
-msgid "Organizations"
-msgstr "Dəvətlər"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "My Organizations"
 msgstr ""
 
@@ -4053,6 +4235,12 @@ msgstr "Bütün Layihələri göstərin"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Video Conference Server"
+msgid "My Conferences"
+msgstr "Video konfrans Serveri"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "You have not RSVPed to any Events."
 msgid "You have not created any organizations yet."
 msgstr "Heç bir Tədbir dəvətinə cavab verməmisiniz."
@@ -4272,6 +4460,24 @@ msgstr "Layihələr - Bu İdeyadan yaradılıb"
 #| msgid "You are a Member"
 msgid "You are a Admin"
 msgstr "Siz Üzvsünüz"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Membership request pending..."
+msgid "Ownership request pending..."
+msgstr "Üzvlük tələbi gözləyir..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Projects and groups"
+msgstr "Layihələrim və qruplarım"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group"
+msgstr "Layihələr/Qruplar"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Open to be contacted about potential collaboration opportunities"
@@ -5187,6 +5393,16 @@ msgstr "Bu maddə indi bu layihələrdə/qruplarda göstərilir: %(group_names)s
 #| msgid "Which apps should be activated?"
 msgid "The %s-app was activated!"
 msgstr "Hansı tətbiqləri aktivləşdirmək lazımdır?"
+
+#, fuzzy, python-format
+#| msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+msgstr "Siz %(team_type)s “%(team_name)s” komandasına qoşulmağı xahiş etdiniz. Bir komanda admini istəyinizə cavab verdikdən sonra bir e-poçt alacaqsınız."
+
+#, fuzzy, python-format
+#| msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
+msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgstr "Siz artıq \"%(team_name)s\" komandasına dəvət edilmişdiniz və indi dərhal üzv oldunuz!"
 
 msgid "No appname given for adding containers."
 msgstr "Konteyner əlavə etmək üçün ad verilmədi."
