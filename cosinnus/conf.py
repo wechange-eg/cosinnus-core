@@ -833,3 +833,5 @@ class CosinnusDefaultSettings(AppConf):
         2: {},
         3: {},
     }
+    # limit visit creation for (user, bbb_room) pairs to a time window
+    BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
