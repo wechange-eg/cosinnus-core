@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-06 16:06+0200\n"
+"POT-Creation-Date: 2020-11-26 09:08+0100\n"
 "PO-Revision-Date: 2020-04-27 12:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -26,6 +26,12 @@ msgid "%(number)d %(objects)s were deleted successfully"
 msgstr ""
 
 msgid "Delete selected entries"
+msgstr ""
+
+msgid "Convert memberships to Admin status"
+msgstr ""
+
+msgid "Convert memberships to Member status"
 msgstr ""
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
@@ -107,6 +113,9 @@ msgid "%d Users were made RocketChat admins."
 msgstr ""
 
 msgid "Make user RocketChat admin"
+msgstr ""
+
+msgid "Restart"
 msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
@@ -417,6 +426,9 @@ msgstr "Беларуская"
 msgid "Dutch--NATIVE-LANGUAGE"
 msgstr "Nederlands"
 
+msgid "Czech--NATIVE-LANGUAGE"
+msgstr "Čeština"
+
 msgid "Azerbaijani--NATIVE-LANGUAGE"
 msgstr "Azerbaycan dili"
 
@@ -510,6 +522,10 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "Groups"
+
 msgid "Please remove the whitespace from '{}'"
 msgstr ""
 
@@ -526,6 +542,9 @@ msgid "CSV could not be parsed. Please use ',' or ';' as delimiter."
 msgstr ""
 
 msgid "Name"
+msgstr ""
+
+msgid "The selected choice was not found or invalid! Please choose a different value!"
 msgstr ""
 
 msgid "Limit to teams"
@@ -722,6 +741,9 @@ msgid "RocketChat room id"
 msgstr ""
 
 msgid "RocketChat room name"
+msgstr ""
+
+msgid "Show chat"
 msgstr ""
 
 msgid "Allow users to create new coffee tables"
@@ -1183,6 +1205,54 @@ msgstr "Project"
 msgid "Cosinnus Ideas"
 msgstr "Projects"
 
+msgid "Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Project"
+msgid "Create Managed Tag"
+msgstr "Create Project"
+
+msgid "Edit Managed Tag"
+msgstr ""
+
+msgid "Delete Managed Tag"
+msgstr ""
+
+msgid "Managed Tag Assignment"
+msgstr ""
+
+msgid "Managed Tag Assignments"
+msgstr ""
+
+msgid "No Tag selected"
+msgstr ""
+
+msgid "Approved"
+msgstr ""
+
+msgid "Color"
+msgstr ""
+
+msgid "Optional color code (css hex value, with or without \"#\")"
+msgstr ""
+
+#, fuzzy
+#| msgid "Edit Group"
+msgid "Paired Group"
+msgstr "Edit Project"
+
+msgid "A paired group will automatically be joined by all users assigned to this object."
+msgstr ""
+
+#, fuzzy
+#| msgid "Other Projects"
+msgid "Search Synonyms"
+msgstr "Other Projects"
+
+msgid "Comma-seperated list of phrases for which auto-complete matches, even partial, will return this object."
+msgstr ""
+
 msgid "Is Moderator"
 msgstr ""
 
@@ -1360,10 +1430,6 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Groups"
-msgstr "Groups"
 
 msgid "At least one type of Map object must be chosen!"
 msgstr ""
@@ -1956,6 +2022,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
 msgstr "The administration of Groups begins with managing its membership. Here you can decide who can join your Group and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal. "
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_13_groupadministration"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_15_organization"
+msgstr "The administration of Groups begins with managing its membership. Here you can decide who can join your Group and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal. "
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
 msgstr ""
@@ -2181,6 +2254,10 @@ msgid "Choose and upload a gallery image"
 msgstr ""
 
 msgid "Example: https://twitter.com/myaccount"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "website"
 msgstr ""
 
 msgid "Re-Activate Project/Group"
@@ -2878,6 +2955,10 @@ msgstr ""
 msgid "All societies"
 msgstr "All projects"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Organizations"
+msgstr ""
+
 #, fuzzy
 msgid "Re-activate Group"
 msgstr "Create Project"
@@ -2896,6 +2977,91 @@ msgstr "Create Project"
 
 msgid "Withdraw Request"
 msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(team_name)s - Members"
+msgid "%(team_name)s - Assigned organizations"
+msgstr "%(team_name)s - Members"
+
+#, fuzzy
+#| msgid "List all groups"
+msgid "Assigned organizations"
+msgstr "List all projects"
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "Request organizations..."
+msgstr "There are no groups."
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "Request organization"
+msgstr "There are no groups."
+
+msgid "Enter a name to find organizations to request..."
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "Request organizations"
+msgstr "There are no groups."
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "Requested organizations"
+msgstr "There are no groups."
+
+msgid "Revoke request"
+msgstr ""
+
+msgid "Decline request"
+msgstr ""
+
+msgid "Accept request"
+msgstr ""
+
+msgid "Requested"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to revoke the request for „%(name)s“?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+#| msgid "Create Project"
+msgid "Revoke request for organization"
+msgstr "Create Project"
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to decline the request?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "Organization invitations"
+msgstr "There are no groups."
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "Decline invitation"
+msgstr "There are no groups."
+
+#, fuzzy
+#| msgid "Edit Group"
+msgid "Invited"
+msgstr "Edit Project"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to remove „%(name)s“ from the organization?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "Remove organization"
+msgstr "There are no groups."
 
 msgid "Workshop Participant File Upload"
 msgstr ""
@@ -3470,10 +3636,6 @@ msgid "All Ideas"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Organizations"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "My Organizations"
 msgstr ""
 
@@ -4019,6 +4181,10 @@ msgid "Browse all Projects"
 msgstr "My Projects"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "My Conferences"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You have not created any organizations yet."
 msgstr ""
 
@@ -4259,6 +4425,22 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Admin"
 msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ownership request pending..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Projects and groups"
+msgstr "Convert selected Projects to Groups"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Project/group"
+msgstr "Convert selected Projects to Groups"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Open to be contacted about potential collaboration opportunities"
@@ -5205,6 +5387,14 @@ msgstr ""
 
 #, python-format
 msgid "The %s-app was activated!"
+msgstr ""
+
+#, python-format
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+msgstr ""
+
+#, python-format
+msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
 msgstr ""
 
 msgid "No appname given for adding containers."
