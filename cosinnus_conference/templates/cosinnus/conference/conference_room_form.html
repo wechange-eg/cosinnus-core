@@ -105,9 +105,11 @@
                 {% include 'cosinnus/fields/default_field.html' with field=form.max_coffeetable_participants label=max_label legend=max_legend %}
                 
                 {% comment %} Allow user Field {% endcomment %}
+                {% comment %} Disabled this option as the frontend isn't implemented
                 {% trans "Allow users to create new coffee tables" as allow_label %}
                 {% trans "Enable this to allow users to create their own coffee tables" as allow_legend %}
                 {% include 'cosinnus/fields/checkbox_field.html' with field=form.allow_user_table_creation label=allow_label legend=allow_legend checkbox_label=allow_label %}
+                 {% endcomment %}
             </div>
             
             <div class="room-type-selector room-type-selector-5">
