@@ -17,7 +17,7 @@
 
 {% block content %}
 <div class="content-box">
-    {% group_url 'cosinnus:workshop-participants-upload-skeleton' group=group as workshop_participants_upload_skeleton %}
+    {% group_url 'cosinnus:conference:workshop-participants-upload-skeleton' group=group as workshop_participants_upload_skeleton %}
     <p>{% blocktrans %}Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href="{{ workshop_participants_upload_skeleton }}">here</a>{% endblocktrans %}</p>
 
     <p>{% trans "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin." %}</p>
