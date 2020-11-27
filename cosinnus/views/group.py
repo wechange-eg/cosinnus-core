@@ -1094,7 +1094,7 @@ class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembershi
                 membership = self.membership_class.objects.get(
                     user=self.request.user,
                     group=self.object,
-                    status=self.membership_status if self.request.user.pk not in admins else MEMBERSHIP_ADMIN
+                    status=MEMBERSHIP_MEMBER if self.request.user.pk not in admins else MEMBERSHIP_ADMIN
                 )
                 membership.delete()
             except self.membership_class.DoesNotExist:
