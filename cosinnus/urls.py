@@ -93,7 +93,7 @@ urlpatterns = [
 
     url(r'^administration/users/$', administration.user_list, name='administration-users'),
     url(r'^administration/users/add$', administration.user_add, name='administration-user-create'),
-    url(r'^administration/users/(?P<user_id>\d+)/edit$', administration.user_update, name='administration-user-update'),
+    url(r'^administration/users/(?P<pk>\d+)/edit$', administration.user_update, name='administration-user-update'),
     url(r'^administration/group_newsletter/$', administration.managed_tags_newsletters, name='administration-managed-tags-newsletter'),
     url(r'^administration/group_newsletter/add$', administration.managed_tags_newsletter_create, name='administration-managed-tags-newsletter-create'),
     url(r'^administration/group_newsletter/(?P<newsletter_id>\d+)/edit$', administration.managed_tags_newsletter_update, name='administration-managed-tags-newsletter-update'),
