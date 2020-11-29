@@ -235,7 +235,7 @@ user_update = AdminUserUpdateView.as_view()
 class UserCreateView(SuccessMessageMixin, CreateView):
     model = get_user_model()
     form_class = UserAdminForm
-    template_name = 'cosinnus/administration/user_form.html'
+    template_name = 'cosinnus/administration/user_create_form.html'
     success_url = reverse_lazy('cosinnus:administration-users')
     success_message = _("User successfully created!")
 
