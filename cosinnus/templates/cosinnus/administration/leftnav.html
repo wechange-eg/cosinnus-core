@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n cosinnus_tags %}
 
 <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url "cosinnus:simple-statistics" %}">
     <ul class="media-list">
@@ -39,6 +39,7 @@
     </ul>
 </div>
 
+{% if SETTINGS.COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES %}
 <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-users' %}">
     <ul class="media-list">
         <li class="media">
@@ -51,6 +52,8 @@
         </li>
     </ul>
 </div>
+{% endif %}
+
 
 <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:user-dashboard-announcement-list' %}">
     <ul class="media-list">
