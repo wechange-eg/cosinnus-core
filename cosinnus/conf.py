@@ -864,3 +864,5 @@ class CosinnusDefaultSettings(AppConf):
     STARRED_STARRING_LABEL = _('Bookmarked')
     STARRED_OBJECTS_LIST = _('Bookmark list')
     STARRED_USERS_LIST = _('Bookmarked Users list')
+
+    PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
