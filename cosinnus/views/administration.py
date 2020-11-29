@@ -24,6 +24,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 
+from cosinnus.views.profile import UserProfileUpdateView
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.utils.html import render_html_with_variables
@@ -208,20 +209,27 @@ class UserListView(ManagedTagsNewsletterMixin, ListView):
 
 user_list = UserListView.as_view()
 
-class UserUpdateView(SuccessMessageMixin, UpdateView):
-    model = get_user_model()
-    form_class = UserAdminForm
-    template_name = 'cosinnus/administration/user_form.html'
-    pk_url_kwarg = 'user_id'
-    success_url = reverse_lazy('cosinnus:administration-users')
-    success_message = _("User successfully updated!")
+class AdminUserUpdateView(UserProfileUpdateView):
+    template_name = 'cosinnus/administration/user_update_form.html'
+    message_success = _('Die Änderungen wurden erfolgreich gespeichert.')
 
     def dispatch(self, request, *args, **kwargs):
         if not check_user_superuser(request.user):
             raise PermissionDenied('You do not have permission to access this page.')
         return super().dispatch(request, *args, **kwargs)
 
-user_update = UserUpdateView.as_view()
+    def get_form(self, *args, **kwargs):
+        form = super(UserProfileUpdateView, self).get_form(*args, **kwargs)
+        for field_name in form.forms['obj'].fields:
+            field = form.forms['obj'].fields[field_name]
+            field.required = False
+        return form
+
+
+    def get_success_url(self):
+        return reverse('cosinnus:administration-users')
+
+user_update = AdminUserUpdateView.as_view()
 
 
 class UserCreateView(SuccessMessageMixin, CreateView):
