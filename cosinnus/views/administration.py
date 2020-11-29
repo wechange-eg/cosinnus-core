@@ -31,6 +31,7 @@ from cosinnus.utils.html import render_html_with_variables
 from cosinnus.core.mail import send_html_mail_threaded
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
+from cosinnus.views.user import email_first_login_token_to_user
 
 
 class AdministrationView(TemplateView):
@@ -201,11 +202,22 @@ managed_tags_newsletter_update = ManagedTagsNewsletterUpdateView.as_view()
 class UserListView(ManagedTagsNewsletterMixin, ListView):
     model = get_user_model()
     template_name = 'cosinnus/administration/user_list.html'
+    ordering = '-date_joined'
 
     def dispatch(self, request, *args, **kwargs):
         if not check_user_superuser(request.user):
             raise PermissionDenied('You do not have permission to access this page.')
         return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if 'send_login_token' in self.request.POST:
+            user_id = self.request.POST.get('send_login_token')
+            user = get_user_model().objects.get(id=user_id)
+            email_first_login_token_to_user(user)
+            user.cosinnus_profile.settings['login_token_send'] = timezone.now()
+            user.cosinnus_profile.save()
+            messages.add_message(self.request, messages.SUCCESS, _('Login token was sent.'))
+        return HttpResponseRedirect(request.path_info)
 
 user_list = UserListView.as_view()
 
@@ -225,6 +237,17 @@ class AdminUserUpdateView(UserProfileUpdateView):
             field.required = False
         return form
 
+    def post(self, request, *args, **kwargs):
+        if 'send_login_token' in self.request.POST:
+            user_id = self.request.POST.get('send_login_token')
+            user = get_user_model().objects.get(id=user_id)
+            email_first_login_token_to_user(user)
+            user.cosinnus_profile.settings['login_token_send'] = timezone.now()
+            user.cosinnus_profile.save()
+            messages.add_message(self.request, messages.SUCCESS, _('Login token was sent.'))
+            return HttpResponseRedirect(request.path_info)
+        else:
+            return super().post(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse('cosinnus:administration-users')

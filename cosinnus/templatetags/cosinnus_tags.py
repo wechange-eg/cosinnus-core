@@ -4,6 +4,7 @@ from __future__ import print_function
 from builtins import str
 from collections import defaultdict
 
+import dateutil.parser
 import six
 from six.moves.urllib.parse import parse_qsl
 from copy import copy, deepcopy
@@ -1250,3 +1251,7 @@ def get_country_name(country_code):
 @register.simple_tag
 def get_setting(name):
     return getattr(settings, name, "")
+
+@register.filter
+def stringformat(value, args):
+    return dateutil.parser.parse(value)
