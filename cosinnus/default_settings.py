@@ -265,6 +265,7 @@ LANGUAGES = [
     ('be', _('Belarussian--NATIVE-LANGUAGE')),
     ('nl', _('Dutch--NATIVE-LANGUAGE')),
     
+    ('cs', _('Czech--NATIVE-LANGUAGE')),
     ('az', _('Azerbaijani--NATIVE-LANGUAGE')),
     ('hy', _('Armenian--NATIVE-LANGUAGE')),
     ('ka', _('Georgian--NATIVE-LANGUAGE')),

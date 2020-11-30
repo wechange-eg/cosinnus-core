@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-06 16:06+0200\n"
+"POT-Creation-Date: 2020-11-26 09:08+0100\n"
 "PO-Revision-Date: 2020-10-12 20:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -27,6 +27,12 @@ msgstr "%(number)d %(objects)s успешно удалены"
 
 msgid "Delete selected entries"
 msgstr "Удалить выделенные объекты"
+
+msgid "Convert memberships to Admin status"
+msgstr ""
+
+msgid "Convert memberships to Member status"
+msgstr ""
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr "Токен с таким кодом уже существует! Пожалуйста, выберите другую строку для вашего токена."
@@ -108,6 +114,11 @@ msgstr "%d Пользователей сделали администратор�
 
 msgid "Make user RocketChat admin"
 msgstr "Сделал вас администратором"
+
+#, fuzzy
+#| msgid "Restricted"
+msgid "Restart"
+msgstr "Ограниченный"
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Электронный адрес, что ты пытаешься использовать для входа в аккаунт необходимо активировать."
@@ -404,6 +415,9 @@ msgstr "Беларуская"
 msgid "Dutch--NATIVE-LANGUAGE"
 msgstr "Nederlands"
 
+msgid "Czech--NATIVE-LANGUAGE"
+msgstr "Čeština"
+
 msgid "Azerbaijani--NATIVE-LANGUAGE"
 msgstr "Azerbaycan dili"
 
@@ -499,6 +513,10 @@ msgstr "Это кажется, не действительная ссылка н
 msgid "Users"
 msgstr "Пользователи"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "Группы"
+
 msgid "Please remove the whitespace from '{}'"
 msgstr "Пожалуйста, удалите пробел в '{}'"
 
@@ -516,6 +534,9 @@ msgstr "CSV не может быть интепретирован. Пожалу�
 
 msgid "Name"
 msgstr "Название"
+
+msgid "The selected choice was not found or invalid! Please choose a different value!"
+msgstr ""
 
 msgid "Limit to teams"
 msgstr "Только для проектов"
@@ -712,6 +733,9 @@ msgstr "RocketChat id комнаты"
 
 msgid "RocketChat room name"
 msgstr "RocketChat название комнаты"
+
+msgid "Show chat"
+msgstr "Показать чат"
 
 msgid "Allow users to create new coffee tables"
 msgstr "Разрешить пользователям создавать новые кофейные столики"
@@ -1138,6 +1162,60 @@ msgstr "Cosinnus идея"
 msgid "Cosinnus Ideas"
 msgstr "Cosinnus идеи"
 
+msgid "Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Idea"
+msgid "Create Managed Tag"
+msgstr "Создать идею"
+
+msgid "Edit Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Idea"
+msgid "Delete Managed Tag"
+msgstr "Удалить идею"
+
+msgid "Managed Tag Assignment"
+msgstr ""
+
+msgid "Managed Tag Assignments"
+msgstr ""
+
+msgid "No Tag selected"
+msgstr ""
+
+#, fuzzy
+#| msgid "Approach"
+msgid "Approved"
+msgstr "Подход"
+
+msgid "Color"
+msgstr ""
+
+#, fuzzy
+#| msgid "Main background color (css hex value, with or without \"#\")"
+msgid "Optional color code (css hex value, with or without \"#\")"
+msgstr "Основной цвет фона (цвета hex, по необходимости с „#“)"
+
+#, fuzzy
+#| msgid "Parent Group"
+msgid "Paired Group"
+msgstr "Исходная группа"
+
+msgid "A paired group will automatically be joined by all users assigned to this object."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search Synonyms"
+msgstr "Поиск в группах"
+
+msgid "Comma-seperated list of phrases for which auto-complete matches, even partial, will return this object."
+msgstr ""
+
 msgid "Is Moderator"
 msgstr "Является модератором"
 
@@ -1311,10 +1389,6 @@ msgstr "События"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Проекты"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Groups"
-msgstr "Группы"
 
 msgid "At least one type of Map object must be chosen!"
 msgstr "Должен быть выбран, по крайней мере, один тип объекта на карте!"
@@ -1903,6 +1977,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
 msgstr "helptext_13_администрация группы"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_13_groupadministration"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_15_organization"
+msgstr "helptext_13_администрация группы"
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
 msgstr "helptext_50_приватность профиля"
@@ -2113,6 +2194,12 @@ msgstr "Выбрать и загрузить изображение галере
 
 msgid "Example: https://twitter.com/myaccount"
 msgstr "Пример: https://twitter.com/myaccount"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Website"
+msgid "website"
+msgstr "Сайт"
 
 msgid "Re-Activate Project/Group"
 msgstr "Заново активировать проект или группу"
@@ -2767,6 +2854,10 @@ msgstr "Администраторы портала"
 msgid "All societies"
 msgstr "Все сообщества"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Organizations"
+msgstr "Организации"
+
 msgid "Re-activate Group"
 msgstr "Восстановить группу"
 
@@ -2781,6 +2872,103 @@ msgstr "Деактивировать проект"
 
 msgid "Withdraw Request"
 msgstr "Отозвать запрос"
+
+#, fuzzy, python-format
+#| msgid "%(team_name)s - Members"
+msgid "%(team_name)s - Assigned organizations"
+msgstr "%(team_name)s - Члены"
+
+#, fuzzy
+#| msgid "All Organizations"
+msgid "Assigned organizations"
+msgstr "Все организации"
+
+#, fuzzy
+#| msgid "Create Organization"
+msgid "Request organizations..."
+msgstr "Создать организацию"
+
+#, fuzzy
+#| msgid "Create Organization"
+msgid "Request organization"
+msgstr "Создать организацию"
+
+#, fuzzy
+#| msgid "Enter a user name or email to find users to invite..."
+msgid "Enter a name to find organizations to request..."
+msgstr "Введите имя пользователя или емейл для поиска пользователей, чтобы пригласить..."
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Request organizations"
+msgstr "Организации"
+
+#, fuzzy
+#| msgid "Create Organization"
+msgid "Requested organizations"
+msgstr "Создать организацию"
+
+#, fuzzy
+#| msgctxt "withdraw join team button second item"
+#| msgid "Request"
+msgid "Revoke request"
+msgstr "Отправить запрос"
+
+#, fuzzy
+#| msgid "Decline Member"
+msgid "Decline request"
+msgstr "Отклонить заявку"
+
+#, fuzzy
+#| msgid "Accept Member"
+msgid "Accept request"
+msgstr "Принять пользователя"
+
+#, fuzzy
+#| msgctxt "join request pending team button second item"
+#| msgid "Requested"
+msgid "Requested"
+msgstr "Запрос отправлен"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to revoke the request for „%(name)s“?"
+msgstr "Вы действительно хотите отозвать приглашение на членство для пользователя „%(name)s“?"
+
+#, fuzzy
+#| msgid "Search for Organizations"
+msgid "Revoke request for organization"
+msgstr "Поиск организаций"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to decline the request?"
+msgstr "Вы действительно хотите отклонить приглашение?"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization invitations"
+msgstr "Организации"
+
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Decline invitation"
+msgstr "Отклонить приглашение"
+
+#, fuzzy
+#| msgid "Invite"
+msgid "Invited"
+msgstr "Пригласить"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove „%(name)s“ from the organization?"
+msgstr "Вы действительно хотите удалить „%(name)s“ из проекта?"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove organization"
+msgstr "Убрать местоположение"
 
 msgid "Workshop Participant File Upload"
 msgstr "Загрузить файлы участников воркшопа"
@@ -3487,10 +3675,6 @@ msgid "All Ideas"
 msgstr "Все идеи"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Organizations"
-msgstr "Организации"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "My Organizations"
 msgstr "Мои организации"
 
@@ -4000,6 +4184,12 @@ msgid "Browse all Projects"
 msgstr "Просмотреть все проекти"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Is conference"
+msgid "My Conferences"
+msgstr "Конференция"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You have not created any organizations yet."
 msgstr "Вы еще не создали ни одной организации."
 
@@ -4210,6 +4400,24 @@ msgstr "Проекты - созданные на основе этой идеи"
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Admin"
 msgstr "Вы являетесь администратором"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Membership request pending..."
+msgid "Ownership request pending..."
+msgstr "Заявка на членство в ожидании..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Projects and groups"
+msgstr "Мои проекты и группы"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group"
+msgstr "Проекты/группы"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Open to be contacted about potential collaboration opportunities"
@@ -5114,6 +5322,16 @@ msgstr "Этот элемент сейчас демонстрируется в �
 msgid "The %s-app was activated!"
 msgstr "%s-app были активированы!"
 
+#, fuzzy, python-format
+#| msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+msgstr "Вы пожелали присоединиться к %(team_type)s “%(team_name)s”. Вы получите письмо, как только администратор группы ответит на Ваш запрос."
+
+#, fuzzy, python-format
+#| msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
+msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgstr "Вы уже были приглашены в \"%(team_name)s\" и поэтому Вы сразу приняты в члены группы/проекта!"
+
 # ???
 msgid "No appname given for adding containers."
 msgstr "Не указано название приложения для добавления контейнеров."
@@ -5301,11 +5519,8 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
-msgid "Show chat"
-msgstr "Показать чат"
-
-msgid "Check this to show rocket chat in the sidebar."
-msgstr "Проверьте это, чтобы показать ракетный чат на боковой панели"
+#~ msgid "Check this to show rocket chat in the sidebar."
+#~ msgstr "Проверьте это, чтобы показать ракетный чат на боковой панели"
 
 #, fuzzy
 #~| msgid "Participants"

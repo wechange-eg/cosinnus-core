@@ -2,20 +2,24 @@ from __future__ import unicode_literals
 
 from builtins import object
 import logging
-from django.views.generic.base import RedirectView
-from annoying.functions import get_object_or_None
-from cosinnus.models.bbb_room import BBBRoom
-from django.http.response import HttpResponseNotFound, HttpResponseNotAllowed,\
-    HttpResponse
-from cosinnus.core.decorators.views import redirect_to_not_logged_in,\
-    redirect_to_403
-from cosinnus.utils.permissions import check_user_superuser
-from cosinnus.apis import bigbluebutton as bbb
 import time
-from cosinnus.templatetags.cosinnus_tags import full_name
-from cosinnus.views.mixins.group import RequireLoggedInMixin
+
+from annoying.functions import get_object_or_None
+from django.http.response import HttpResponseNotFound, HttpResponseNotAllowed, \
+    HttpResponse
 from django.shortcuts import get_object_or_404, redirect
+from django.views.generic.base import RedirectView
+
+from cosinnus.apis import bigbluebutton as bbb
+from cosinnus.conf import settings
+from cosinnus.core.decorators.views import redirect_to_not_logged_in, \
+    redirect_to_403
+from cosinnus.models.bbb_room import BBBRoom, BBBRoomVisitStatistics
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.templatetags.cosinnus_tags import full_name
+from cosinnus.utils.permissions import check_user_superuser
+from cosinnus.views.mixins.group import RequireLoggedInMixin
+
 
 logger = logging.getLogger('cosinnus')
 
@@ -55,6 +59,17 @@ class BBBRoomMeetingView(RedirectView):
                 self.room.restart()
             except Exception as e:
                 logger.exception(e)
+        
+        # add statistics visit
+        try:
+            room_event = self.room.event
+            event_group = room_event and room_event.group or None
+            BBBRoomVisitStatistics.create_user_visit_for_bbb_room(self.request.user, self.room, group=event_group)
+        except Exception as e:
+            if settings.DEBUG:
+                raise
+            logger.error('Error creating a statistic BBBRoom visit entry.', extra={'exception': e})
+        
         return self.room.get_join_url(self.request.user)
 
 bbb_room_meeting = BBBRoomMeetingView.as_view()

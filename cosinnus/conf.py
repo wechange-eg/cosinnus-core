@@ -798,7 +798,7 @@ class CosinnusDefaultSettings(AppConf):
     BBB_ROOM_DEFAULT_SETTINGS = {
         "record": False,
         "autoStartRecording": False,
-        "allowStartStopRecording": False
+        "allowStartStopRecording": True
     }
     # cache timeout for retrieval of participants
     BBB_ROOM_PARTICIPANTS_CACHE_TIMEOUT_SECONDS = 20
@@ -833,3 +833,5 @@ class CosinnusDefaultSettings(AppConf):
         2: {},
         3: {},
     }
+    # limit visit creation for (user, bbb_room) pairs to a time window
+    BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
