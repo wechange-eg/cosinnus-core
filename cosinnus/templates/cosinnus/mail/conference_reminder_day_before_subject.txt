@@ -1,1 +1,1 @@
-{% load i18n %}{% blocktrans %}Conference starts tomorrow: {{ conference.name }}{% endblocktrans %}
+{% load i18n %}{% blocktrans %}Conference starts tomorrow: %(group.name){% endblocktrans %}
