@@ -33,27 +33,32 @@
             <th>{{ user.last_name }}</th>
             <th>{% if user.last_login %}{{ user.last_login }}{% else %}-{% endif %}</th>
             <th>
-                {% if not user.cosinnus_profile.settings.login_token_send %}
+                {% if not user.last_login %}
                 <form method="post">{% csrf_token %}
                     <div class="fadedown pull-right">
-                        <button type="submit" name="send_login_token" value="{{ user.id }}" class="btn btn-emphasized btn-autosize">
+                        <button type="submit" name="send_login_token" value="{{ user.id }}" class="btn btn-emphasized btn-autosize btn-small">
                             <ul class="media-list">
                                 <li class="media">
                                     <a class="pull-left">
                                         <i class="fa fa-plus"></i>
                                     </a>
                                     <div class="media-body">
-                                        {% trans 'send login token'%}
+						                {% if user.cosinnus_profile.settings.login_token_send %}
+						                    {% trans 'Resend login token'%}
+						                {% else %}
+                                            {% trans 'Send login token'%}
+						                {% endif %}
                                     </div>
                                 </li>
                             </ul>
                         </button>
                     </div>
                 </form>
-                {% else %}
-                <div class="pull-right">
-                    {% trans 'sent on: ' %} {{ user.cosinnus_profile.settings.login_token_send |stringformat:"%Y-%m-%dT%H:%M:%SZ"|date:"SHORT_DATETIME_FORMAT"}}
-                </div>
+                {% endif %}
+                {% if user.cosinnus_profile.settings.login_token_send %}
+	                <div class="pull-right">
+	                    {% trans 'Last sent on: ' %} {{ user.cosinnus_profile.settings.login_token_send |stringformat:"%Y-%m-%dT%H:%M:%SZ"|date:"SHORT_DATETIME_FORMAT"}}
+	                </div>
                 {% endif %}
             </th>
         </tr>
