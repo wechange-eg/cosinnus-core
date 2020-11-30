@@ -28,6 +28,8 @@ cosinnus_group_patterns = [
         views.workshop_participants_upload_skeleton, name='workshop-participants-upload-skeleton'),
     url(r'^workshop-participants-download/$', views.workshop_participants_download,
         name='workshop-participants-download'),
+    url(r'^reminders/$', views.conference_reminders,
+        name='reminders'),
 
     url(r'^$', views.conference_page,
         name='index'),

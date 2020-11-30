@@ -43,6 +43,8 @@ from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
 from django.http.response import Http404, HttpResponseForbidden,\
     HttpResponseNotFound
 
+from cosinnus_conference.forms import ConferenceRemindersForm
+from cosinnus_conference.utils import send_conference_reminder
 
 logger = logging.getLogger('cosinnus')
 
@@ -126,8 +128,6 @@ class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsC
         context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
 
         return context
-
-conference_management = ConferenceManagementView.as_view()
 
 
 class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, FormView):
@@ -256,8 +256,6 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
             else:
                 continue
 
-workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
-
 
 class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
 
@@ -295,8 +293,6 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, 
 
         return [has_logged_in, logged_in_date]
 
-workshop_participants_download = WorkshopParticipantsDownloadView.as_view()
-
 
 class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
 
@@ -319,9 +315,6 @@ class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin, RequireWriteM
             writer.writerow(row)
         return response
 
-workshop_participants_upload_skeleton = WorkshopParticipantsUploadSkeletonView.as_view()
-
-
 
 class ConferenceRoomManagementView(RequireAdminMixin, GroupIsConferenceMixin, ListView):
     
@@ -339,8 +332,6 @@ class ConferenceRoomManagementView(RequireAdminMixin, GroupIsConferenceMixin, Li
         context['group'] = self.group
         context['object'] = self.group
         return context
-
-conference_room_management = ConferenceRoomManagementView.as_view()
 
 
 class ConferencePageView(RequireReadMixin, GroupIsConferenceMixin, TemplateView):
@@ -385,8 +376,6 @@ class ConferencePageView(RequireReadMixin, GroupIsConferenceMixin, TemplateView)
         }
         return ctx
 
-conference_page = ConferencePageView.as_view()
-
 
 class ConferencePageMaintenanceView(ConferencePageView):
     
@@ -396,8 +385,6 @@ class ConferencePageMaintenanceView(ConferencePageView):
         if not check_user_superuser(self.request.user):    
             return HttpResponseForbidden()
         return super(ConferencePageMaintenanceView, self).get(request, *args, **kwargs)
-
-conference_page_maintenance = ConferencePageMaintenanceView.as_view()
 
 
 class CosinnusConferenceRoomFormMixin(object):
@@ -441,8 +428,6 @@ class CosinnusConferenceRoomCreateView(RequireAdminMixin, CosinnusConferenceRoom
     def get_success_url(self):
         messages.success(self.request, self.message_success)
         return group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': self.group})
-    
-conference_room_add = CosinnusConferenceRoomCreateView.as_view()
 
 
 class CosinnusConferenceRoomEditView(RequireWriteMixin, CosinnusConferenceRoomFormMixin, FilterGroupMixin, UpdateView):
@@ -460,9 +445,6 @@ class CosinnusConferenceRoomEditView(RequireWriteMixin, CosinnusConferenceRoomFo
     def get_success_url(self):
         messages.success(self.request, self.message_success)
         return group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': self.group})
-    
-
-conference_room_edit = CosinnusConferenceRoomEditView.as_view()
 
 
 class CosinnusConferenceRoomDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
@@ -473,9 +455,6 @@ class CosinnusConferenceRoomDeleteView(RequireWriteMixin, FilterGroupMixin, Dele
     def get_success_url(self):
         messages.success(self.request, self.message_success)
         return group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': self.group})
-
-conference_room_delete = CosinnusConferenceRoomDeleteView.as_view()
-
 
 
 class FilterConferenceRoomMixin(object):
@@ -493,3 +472,47 @@ class FilterConferenceRoomMixin(object):
             return HttpResponseNotFound(_('The supplied Conference Room could not be found'))
         return super(FilterConferenceRoomMixin, self).dispatch(request, *args, **kwargs)
 
+
+class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, FormView):
+
+    template_name = 'cosinnus/conference/conference_reminders.html'
+    form_class = ConferenceRemindersForm
+    message_success = _('Conference reminder settings have been successfully updated.')
+
+    def get_object(self, queryset=None):
+        return self.group
+
+    def get_context_data(self, **kwargs):
+        kwargs['object'] = self.group
+        return super(ConferenceRemindersView, self).get_context_data(**kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['instance'] = self.group
+        return kwargs
+
+    def form_valid(self, form):
+        form.save()
+        # Send test email to logged in user?
+        if 'test' in form.data:
+            send_conference_reminder(conference=self, recipients=[self.request.user],
+                                     field_name=form.data.get('test'), update_setting=False)
+            messages.success(self.request, _('A test email has been sent to your email address.'))
+        return super(ConferenceRemindersView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, self.message_success)
+        return group_aware_reverse('cosinnus:conference:reminders', kwargs={'group': self.group})
+
+
+conference_management = ConferenceManagementView.as_view()
+workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
+workshop_participants_download = WorkshopParticipantsDownloadView.as_view()
+workshop_participants_upload_skeleton = WorkshopParticipantsUploadSkeletonView.as_view()
+conference_room_management = ConferenceRoomManagementView.as_view()
+conference_page = ConferencePageView.as_view()
+conference_page_maintenance = ConferencePageMaintenanceView.as_view()
+conference_room_add = CosinnusConferenceRoomCreateView.as_view()
+conference_room_edit = CosinnusConferenceRoomEditView.as_view()
+conference_room_delete = CosinnusConferenceRoomDeleteView.as_view()
+conference_reminders = ConferenceRemindersView.as_view()

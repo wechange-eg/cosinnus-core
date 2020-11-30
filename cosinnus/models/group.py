@@ -3,17 +3,20 @@ from __future__ import unicode_literals
 
 from builtins import object
 from collections import OrderedDict
+import datetime
 import os
 import re
 import six
 
-from django.contrib.postgres.fields.jsonb import JSONField as PostgresJSONField
+from django.contrib.postgres.fields.jsonb import JSONField as PostgresJSONField, KeyTextTransform
 from django.contrib.sites.models import Site
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator, MaxLengthValidator
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, Max, Min, F
+from django.db.models.functions import Cast
+from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
@@ -53,11 +56,9 @@ from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.core.registries.attached_objects import attached_object_registry
 from django.apps import apps
 from cosinnus.models.tagged import LikeableObjectMixin, LastVisitedMixin
-import datetime
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericRelation
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
-
 
 logger = logging.getLogger('cosinnus')
 
@@ -369,6 +370,34 @@ class CosinnusGroupManager(models.Manager):
         for group in self.get_cached():
             if group.public:
                 yield group
+
+    def to_be_reminded(self, field_name='week_before'):
+        """
+        Returns conferences with due reminders 1 week/day/hour before the start date
+        """
+        # Prepare query: Mark due conferences
+        key = f'reminder_{field_name}'
+        queryset = get_cosinnus_group_model().objects.annotate(extra_fields_json=Cast(F('extra_fields'),
+                                                                                      PostgresJSONField(default={})))
+        queryset = queryset.annotate(to_be_reminded=KeyTextTransform(key, 'extra_fields_json'))
+        # Prepare query: Mark conferences already notified
+        queryset = queryset.annotate(settings_json=Cast(F('settings'), PostgresJSONField(default={})))
+        queryset = queryset.annotate(already_reminded=KeyTextTransform(f'{key}_sent', 'settings_json'))
+        # Prepare query: Start date
+        queryset = queryset.prefetch_related('rooms__events').annotate(start_date=Min('rooms__events__from_date'))
+        period_map = {
+            # Send time frame: start & duration
+            'week_before': [datetime.timedelta(days=7), datetime.timedelta(hours=24)],
+            'day_before': [datetime.timedelta(days=1), datetime.timedelta(hours=12)],
+            'hour_before': [datetime.timedelta(hours=1), datetime.timedelta(minutes=30)],
+        }
+        period = period_map.get(field_name)
+        now = timezone.now()
+        queryset = queryset.filter(is_active=True, to_be_reminded='true', already_reminded__isnull=True)
+        queryset = queryset.filter(start_date__gt=now,
+                                   start_date__lte=now + period[0],
+                                   start_date__gte=now + period[0] - period[1])
+        return queryset
 
 
 class RelatedGroups(models.Model):
@@ -1156,6 +1185,22 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def get_content_type_for_last_visited(self):
         """ Overriding from `LastVisitedMixin` to always use the same group ct """
         return ContentType.objects.get_for_model(get_cosinnus_group_model())
+
+    @property
+    def from_date(self):
+        from cosinnus_event.models import ConferenceEvent
+        queryset = ConferenceEvent.objects.filter(room__group=self)
+        if queryset.count() > 0:
+            return queryset.aggregate(Min('from_date'))['from_date__min']
+        return None
+
+    @property
+    def to_date(self):
+        from cosinnus_event.models import ConferenceEvent
+        queryset = ConferenceEvent.objects.filter(room__group=self)
+        if queryset.count() > 0:
+            return queryset.aggregate(Max('to_date'))['to_date__max']
+        return None
 
 
 class CosinnusGroup(CosinnusBaseGroup):

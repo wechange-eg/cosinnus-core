@@ -5,6 +5,7 @@ from builtins import str
 from collections import defaultdict
 
 import six
+from django.utils import dateparse
 from six.moves.urllib.parse import parse_qsl
 from copy import copy, deepcopy
 
@@ -1236,4 +1237,6 @@ def get_country_name(country_code):
     from django_countries import countries
     return dict(countries).get(country_code, '(unknown)')
 
-
+@register.filter
+def parse_datetime(value):
+    return dateparse.parse_datetime(value)
