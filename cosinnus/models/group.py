@@ -393,7 +393,8 @@ class CosinnusGroupManager(models.Manager):
         }
         period = period_map.get(field_name)
         now = timezone.now()
-        queryset = queryset.filter(is_active=True, to_be_reminded='true', already_reminded__isnull=True)
+        queryset = queryset.filter(is_active=True, is_conference=True)
+        queryset = queryset.filtr(to_be_reminded='true', already_reminded__isnull=True)
         queryset = queryset.filter(start_date__gt=now,
                                    start_date__lte=now + period[0],
                                    start_date__gte=now + period[0] - period[1])
