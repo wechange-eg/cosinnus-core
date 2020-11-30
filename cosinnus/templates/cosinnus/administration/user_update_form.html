@@ -1,0 +1,14 @@
+{% extends "cosinnus/user/userprofile_form.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}{% trans "Create new User" %} - {% trans "Edit" %}{% endblock %}
+
+{% block leftnav %}
+{% include 'cosinnus/administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+<li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+<li><a href="{% url 'cosinnus:administration-users' %}">{% trans "User Management" %}</a></li>
+<li class="active">{% trans "User" %}</li>
+{% endblock %}

@@ -93,7 +93,6 @@ urlpatterns = [
 
     url(r'^administration/users/$', administration.user_list, name='administration-users'),
     url(r'^administration/users/add$', administration.user_add, name='administration-user-create'),
-    url(r'^administration/users/(?P<user_id>\d+)/edit$', administration.user_update, name='administration-user-update'),
     url(r'^administration/group_newsletter/$', administration.managed_tags_newsletters, name='administration-managed-tags-newsletter'),
     url(r'^administration/group_newsletter/add$', administration.managed_tags_newsletter_create, name='administration-managed-tags-newsletter-create'),
     url(r'^administration/group_newsletter/(?P<newsletter_id>\d+)/edit$', administration.managed_tags_newsletter_update, name='administration-managed-tags-newsletter-update'),
@@ -105,7 +104,7 @@ urlpatterns = [
     url(r'^administration/announcement/(?P<slug>[^/]+)/activate-toggle/$', user_dashboard_announcement.user_dashboard_announcement_activate, name='user-dashboard-announcement-activate'),
 
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
-    
+
     url(r'^housekeeping/ensure_group_widgets/$', housekeeping.ensure_group_widgets, name='housekeeping-ensure-group-widgets'),
     url(r'^housekeeping/fillexternaldata/$', housekeeping.fill_external_data, name='housekeeping-fill-external-data'),
     url(r'^housekeeping/newsletterusers/$', housekeeping.newsletter_users, name='housekeeping-newsletter-user-emails'),
@@ -133,6 +132,11 @@ urlpatterns = [
 
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
+
+if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
+    urlpatterns += [
+        url(r'^administration/users/(?P<pk>\d+)/edit$', administration.user_update, name='administration-user-update'),
+    ]
 
 if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False):
     if getattr(settings, 'COSINNUS_CLOUD_ENABLED', False):

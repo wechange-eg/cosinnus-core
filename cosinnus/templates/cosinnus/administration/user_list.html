@@ -22,13 +22,40 @@
                 <th>{% trans "Email" %}</th>
                 <th>{% trans "Firstname" %}</th>
                 <th>{% trans "Lastname" %}</th>
+                <th>{% trans "Last Login" %}</th>
+                <th><div class="pull-right">{% trans "User token" %}</div></th>
             </tr>
         </thead>
         {% for user in object_list %}
         <tr>
-            <th><a href="{% url 'cosinnus:administration-user-update' user_id=user.id %}">{{ user.email }}</a></th>
+            <th><a href="{% url 'cosinnus:administration-user-update' pk=user.id %}">{{ user.email }}</a></th>
             <th>{{ user.first_name }}</th>
             <th>{{ user.last_name }}</th>
+            <th>{% if user.last_login %}{{ user.last_login }}{% else %}-{% endif %}</th>
+            <th>
+                {% if not user.cosinnus_profile.settings.login_token_send %}
+                <form method="post">{% csrf_token %}
+                    <div class="fadedown pull-right">
+                        <button type="submit" name="send_login_token" value="{{ user.id }}" class="btn btn-emphasized btn-autosize">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        {% trans 'send login token'%}
+                                    </div>
+                                </li>
+                            </ul>
+                        </button>
+                    </div>
+                </form>
+                {% else %}
+                <div class="pull-right">
+                    {% trans 'sent on: ' %} {{ user.cosinnus_profile.settings.login_token_send |stringformat:"%Y-%m-%dT%H:%M:%SZ"|date:"SHORT_DATETIME_FORMAT"}}
+                </div>
+                {% endif %}
+            </th>
         </tr>
         {% endfor %}
     </table>
