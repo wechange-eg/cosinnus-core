@@ -10,6 +10,7 @@ from six.moves.urllib.parse import parse_qsl
 from copy import copy, deepcopy
 
 from django import template
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ImproperlyConfigured
 from django.urls import resolve, reverse, Resolver404
 from django.http import HttpRequest
@@ -1222,6 +1223,13 @@ def context_id_do_translate(parser, token):
 def context_id_do_block_translate(parser, token):
     block_translate_node = do_block_translate(parser, token)
     return ContextIdBlockTranslateNode(block_translate_node)
+
+@register.filter
+def get_user_from_id(id):
+    try:
+        return get_user_model().objects.get(id=id)
+    except get_user_model().DoesNotExist:
+        pass
 
 
 @register.filter
