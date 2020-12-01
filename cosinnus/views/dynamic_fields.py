@@ -2,7 +2,7 @@ from django.views.generic.base import TemplateView
 from django.shortcuts import redirect, render
 from django.utils.translation import ugettext as _
 
-from cosinnus.forms.field_choice import *
+from cosinnus.forms.dynamic_fields import *
 from cosinnus.models import CosinnusPortal
 
 
