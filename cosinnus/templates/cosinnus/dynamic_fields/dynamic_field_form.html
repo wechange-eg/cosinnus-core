@@ -21,35 +21,37 @@
 
 {% block content %}
 
-<form action="" method="post">
-  {% csrf_token %}
-  
-    <!-- a box with semi transparent background -->
-    <div class="content-box">
-        {{ form.non_field_errors }}
+{% for form in forms %}
+    <form id={{form.id}} action="" method="post">
+      {% csrf_token %}
 
-        {# Regular Field #}
-		{% trans "Enter your choices as comma separated values" as options_label %}
-		{% trans "Enter your choices" as options_placeholder %}
-		{% include 'cosinnus/fields/default_field.html' with field=form.options label=options_label placeholder=options_placeholder %}
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
 
-    </div><!-- content-box -->
-        
-  
-    <button type="submit" class="btn btn-emphasized">
-        <ul class="media-list">
-            <li class="media">
-                <span class="pull-left" href="#" tabindex="-1">
-                    <i class="fa fa-hand-o-right"></i>
-                </span>
-                <div class="media-body">
-                    {% trans 'Save' %}
-                </div>
-            </li>
-        </ul>
-    </button>
-  
-</form>
+            {{ form.id }}
+            {{ form.non_field_errors }}
 
+            {# Regular Field #}
+            {% trans "Enter your choices as comma separated values" as options_label %}
+            {% trans "Enter your choices" as options_placeholder %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.options label=options_label placeholder=options_placeholder %}
+
+        </div><!-- content-box -->
+
+        <button type="submit" class="btn btn-emphasized">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left" href="#" tabindex="-1">
+                        <i class="fa fa-hand-o-right"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans 'Save' %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+
+    </form>
+{% endfor %}
 
 {% endblock %}

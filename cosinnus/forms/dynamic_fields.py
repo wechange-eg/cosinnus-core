@@ -15,8 +15,34 @@ def get_dynamic_admin_field_namess():
     return field_list
 
 
+class DynamicFieldFormGenerator:
+    def __init__(self, cosinnus_portal, *args, **kwargs):
+
+        self._cosinnus_portal = cosinnus_portal
+        self._forms = []
+
+        self.saved = False
+
+        for field_name in get_dynamic_admin_field_namess():
+            # if 'data' in kwargs:
+            #     # piping the request.POST to the right forms
+            #     if
+            form = DynamicFieldForm(self._cosinnus_portal, field_name, prefix=field_name, *args, **kwargs)
+            self._forms.append(form)
+
+    def try_save(self):
+        for form in self._forms:
+            if form.is_valid():
+                form.save()
+                self.saved = True
+
+    def get_forms(self):
+        return self._forms
+
+
 class DynamicFieldForm(forms.Form):
     options = forms.CharField(max_length=1000)
+    option_name = forms.CharField(widget=forms.HiddenInput)
 
     def clean_options(self):
         options = self.cleaned_data['options']
@@ -27,6 +53,10 @@ class DynamicFieldForm(forms.Form):
             option_list.append(option.strip())
 
         return option_list
+
+    @property
+    def id(self):
+        return self._dynamic_field_name
 
     def save(self):
         self._cosinnus_portal.dynamic_field_choices[self._dynamic_field_name] = self.cleaned_data['options']
@@ -40,6 +70,7 @@ class DynamicFieldForm(forms.Form):
         self._field_choices = cosinnus_portal.dynamic_field_choices.get(dynamic_field_name, [])
 
         self.fields['options'].initial = ", ".join(self._field_choices)
+        self.fields['option_name'].initial = ", ".join(self._dynamic_field_name)
 
     def get_cosinnus_dynamic_field(self, field_name):
         field = BOELL_USERPROFILE_EXTRA_FIELDS.get(field_name, "")
