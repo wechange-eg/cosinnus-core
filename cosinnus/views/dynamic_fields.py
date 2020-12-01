@@ -14,11 +14,11 @@ class DynamicFieldFormView(TemplateView):
     default_portal = CosinnusPortal.objects.first()
 
     def get(self, request, *args, **kwargs):
-        form = self.form_class()
+        form = self.form_class(cosinnus_portal=self.default_portal, dynamic_field_name='faechergruppe')
         return render(request, template_name=self.template_name, context={'form': form})
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(data=request.POST)
+        form = self.form_class(cosinnus_portal=self.default_portal, dynamic_field_name='faechergruppe', data=request.POST)
 
         if form.is_valid():
             form.save()
