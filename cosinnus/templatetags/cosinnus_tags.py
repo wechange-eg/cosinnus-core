@@ -1255,3 +1255,9 @@ def get_setting(name):
 @register.filter
 def stringformat(value, args):
     return dateutil.parser.parse(value)
+
+@register.filter
+def listformat(value):
+    if isinstance(value, list):
+        return ', '.join(value)
+    return value
