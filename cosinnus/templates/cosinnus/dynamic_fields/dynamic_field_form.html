@@ -1,0 +1,55 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n  cosinnus_tags widget_tweaks %}
+
+{% block page_title %}{% trans 'Password change' %}{% endblock %}
+
+{% block jshead %}
+    {% comment %} This page deals with authentication data and loads only the most necessary vendor scripts! {% endcomment %}
+{% endblock jshead %}
+
+{% block leftnav %}
+    {% include "cosinnus/user/leftnav.html"  with view="change_password" %}
+    
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_5_password" %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
+        <li class="active">{% trans "Change password" %}</li>
+{% endblock %}
+
+{% block content %}
+
+<form action="" method="post">
+  {% csrf_token %}
+  
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+        {{ form.non_field_errors }}
+
+        {# Regular Field #}
+		{% trans "Enter your choices as comma separated values" as options_label %}
+		{% trans "Enter your choices" as options_placeholder %}
+		{% include 'cosinnus/fields/default_field.html' with field=form.options label=options_label placeholder=options_placeholder %}
+
+    </div><!-- content-box -->
+        
+  
+    <button type="submit" class="btn btn-emphasized">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left" href="#" tabindex="-1">
+                    <i class="fa fa-hand-o-right"></i>
+                </span>
+                <div class="media-body">
+                    {% trans 'Save' %}
+                </div>
+            </li>
+        </ul>
+    </button>
+  
+</form>
+
+
+{% endblock %}
