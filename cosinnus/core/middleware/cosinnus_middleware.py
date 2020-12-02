@@ -60,6 +60,7 @@ NEVER_REDIRECT_URLS = [
     '/media/',
     '/static/',
     '/language',
+    '/api/',
 ]
 
 LOGIN_URLS = NEVER_REDIRECT_URLS + [
@@ -246,7 +247,7 @@ class RedirectAnonymousUserToLoginMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
         if not request.user.is_authenticated:
-            if request.path not in LOGIN_URLS:
+            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS]):
                 return HttpResponseRedirect('/login/')
             
             
@@ -256,8 +257,7 @@ class RedirectAnonymousUserToLoginAllowSignupMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
         if not request.user.is_authenticated:
-            if request.path not in LOGIN_URLS \
-                    and not any([request.path.startswith(prefix) for prefix in ['/signup/', '/captcha/']]):
+            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]):
                 return HttpResponseRedirect('/login/')
 
 
