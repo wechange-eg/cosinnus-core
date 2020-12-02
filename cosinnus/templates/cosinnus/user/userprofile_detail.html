@@ -33,6 +33,8 @@
 	    </div>
 	    <div class="col-sm-9 bottom-align large-space">
 			<legend class="large-space userprofile-title ">{{ this_user.cosinnus_profile.get_extended_full_name }}</legend>
+
+			{% block buttons %}
 			{% if not this_user == request.user %}
 			{% include 'cosinnus/common/likefollowstar/star_button_btn.html' with user=request.user object=this_user.cosinnus_profile %}
 			{% endif %}
@@ -94,7 +96,8 @@
 	            
 	            {% include 'cosinnus/feedback/report_button_btn.html' with object=this_user %}
 	            
-	        {% endif %} 
+			{% endif %}
+			{% endblock %}
 	    </div>
 	
 	
@@ -104,6 +107,7 @@
 	<div class="row">
 	    <div class="col-md-6 col-lg-4 large-space">
 	
+			{% block left_column %}
 	        <div type="button" class="btn btn-emphasized btn-headline btn-no-interact">
 	            <ul class="media-list">
 	                <li class="media">
@@ -152,7 +156,7 @@
 	                    `COSINNUS_USERPROFILE_EXTRA_FIELDS` setting, you can to use
 	                    this block to define the detail view display of those feels, if wished.
 	                {% endcomment %}
-		            {% block portal_specific_userprofile_extra_fields %}
+					{% block portal_specific_userprofile_extra_fields %}
 		            {% endblock %}
 		            
 		            {% comment %}  
@@ -173,11 +177,12 @@
 		            
 		            {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
 	            {% endblock userprofile_content %}
-	        </div><!-- content-box -->
+			</div><!-- content-box -->
+			{% endblock %}
 	    </div><!-- column -->
 	
 	    <div class="col-md-6 col-lg-4 large-space">
-	
+			{% block middle_column %}
 	        <div type="button" class="btn btn-emphasized btn-headline btn-no-interact fine-space">
 	            <ul class="media-list">
 	                <li class="media">
@@ -227,13 +232,14 @@
 	                </li>
 	            </ul>
 	        </button>
-	         {% endcomment %}
+			{% endcomment %}
+			{% endblock %}
 	
 	
 	    </div><!-- column -->
 	    
 	    <div class="col-md-6 col-lg-4 large-space">
-    
+			{% block right_column %}
             <div type="button" class="btn btn-emphasized btn-headline btn-no-interact fine-space">
                 <ul class="media-list">
                     <li class="media">
@@ -281,7 +287,8 @@
                     </li>
                 </ul>
             </button>
-             {% endcomment %}
+			 {% endcomment %}
+			{% endblock %}
     
     
         </div><!-- column -->
