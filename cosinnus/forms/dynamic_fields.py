@@ -41,36 +41,53 @@ class DynamicFieldFormGenerator:
 
 
 class DynamicFieldForm(forms.Form):
-    options = forms.CharField(max_length=1000)
+    options = forms.CharField(max_length=1000, required=False)
     option_name = forms.CharField(widget=forms.HiddenInput)
 
-    def clean_options(self):
-        options = self.cleaned_data['options']
-        option_list = []
-
-        for option in options.split(","):
-            # removing whitespaces from options
-            option_list.append(option.strip())
-
-        return option_list
-
-    @property
-    def id(self):
-        return self._dynamic_field_name
-
-    def save(self):
-        self._cosinnus_portal.dynamic_field_choices[self._dynamic_field_name] = self.cleaned_data['options']
-        self._cosinnus_portal.save()
-
     def __init__(self, cosinnus_portal, dynamic_field_name, *args, **kwargs):
+        if hasattr(self, 'data') and self.prefix+'-'+dynamic_field_name not in self.data:
+            self.data = {}
+
         super(DynamicFieldForm, self).__init__(*args, **kwargs)
 
         self._dynamic_field_name = dynamic_field_name
         self._cosinnus_portal = cosinnus_portal
         self._field_choices = cosinnus_portal.dynamic_field_choices.get(dynamic_field_name, [])
 
-        self.fields['options'].initial = ", ".join(self._field_choices)
+        self._initial_options = ", ".join(self._field_choices)
+        self._cleaned_options = None
+
+        self.fields['options'].initial = self._initial_options
         self.fields['option_name'].initial = ", ".join(self._dynamic_field_name)
+
+    def clean_options(self):
+        if self.cleaned_data['options']:
+            options = self.cleaned_data['options']
+            option_list = []
+
+            for option in options.split(","):
+                # removing whitespaces from options
+                option_list.append(option.strip())
+
+            self._cleaned_options = option_list
+            return option_list
+        else:
+            return self._field_choices
+
+    def is_valid(self):
+        is_valid = super(DynamicFieldForm, self).is_valid()
+        if not is_valid and self._cleaned_options:
+            return True
+        return False
+
+    @property
+    def id(self):
+        return self._dynamic_field_name
+
+    def save(self):
+        new_data = self._cleaned_options if self._cleaned_options else self._initial_options
+        self._cosinnus_portal.dynamic_field_choices[self._dynamic_field_name] = new_data
+        self._cosinnus_portal.save()
 
     def get_cosinnus_dynamic_field(self, field_name):
         field = BOELL_USERPROFILE_EXTRA_FIELDS.get(field_name, "")
