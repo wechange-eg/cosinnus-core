@@ -24,9 +24,6 @@ class DynamicFieldFormGenerator:
         self.saved = False
 
         for field_name in get_dynamic_admin_field_namess():
-            # if 'data' in kwargs:
-            #     # piping the request.POST to the right forms
-            #     if
             form = DynamicFieldForm(self._cosinnus_portal, field_name, prefix=field_name, *args, **kwargs)
             self._forms.append(form)
 
@@ -45,9 +42,6 @@ class DynamicFieldForm(forms.Form):
     option_name = forms.CharField(widget=forms.HiddenInput)
 
     def __init__(self, cosinnus_portal, dynamic_field_name, *args, **kwargs):
-        if hasattr(self, 'data') and self.prefix+'-'+dynamic_field_name not in self.data:
-            self.data = {}
-
         super(DynamicFieldForm, self).__init__(*args, **kwargs)
 
         self._dynamic_field_name = dynamic_field_name
