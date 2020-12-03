@@ -1,0 +1,164 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags cosinnus_map_tags static thumbnail %}
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block leftnav %}
+    {% include "cosinnus/user_import/leftnav.html"  with current_page="import" %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block content %}
+
+   <div class="content-box">
+        {% trans "Delete uploaded data and upload a new CSV file" as reset_button_label %}
+	
+        {% if form_view == "import-ready" or form_view == "invalid" or form_view == "failed" %}
+            <div class="large-space">
+		        <form action="" method="post" enctype="multipart/form-data">
+	                {% csrf_token %}
+	                
+	                <input type="hidden" name="action" value="scrap" />
+	                
+					<button type="submit" class="btn btn-emphasized btn-autosize">
+					    <ul class="media-list">
+					        <li class="media">
+					            <a class="pull-left" href="#">
+					                <i class="fa fa-refresh"></i>
+					            </a>
+					            <div class="media-body">
+					                {{ reset_button_label }}
+					            </div>
+					        </li>
+					    </ul>
+					</button>
+	            </form>
+	            <div class="clearfix"></div>
+	        </div>
+	    {% endif %}
+	
+		<form action="" method="post" enctype="multipart/form-data">
+		    {% csrf_token %}
+            {{ form.non_field_errors }}
+		    
+		    {% if form_view == "upload" %}
+		        <h2>{% trans "Upload a user CSV file to import user profiles" %}</h2>
+			    <p class="textfield transparent">
+			        {% trans "Please upload a CSV with the following columns (in any order)" %}:
+			        {{ required_columns }}
+		        </p>
+		        {% for field in form %}
+			        <div class="cosinnus-field">
+			            {% include 'cosinnus/fields/default_field.html' with field=field %}
+			        </div>
+		        {% endfor %}
+		        <p class="textfield transparent">
+                    {% trans "No data will be imported at this point." %}<br/><br/>
+                    {% trans "The uploaded file will be validated and a report of the data it contains will be shown." %}<br/>
+                    {% trans "You can then start the import from the report page." %}
+                </p>
+                <input type="hidden" name="action" value="upload" />
+                {% trans "Upload CSV File" as submit_button_label %}
+				
+			{% elif form_view == "dry-run-running" or form_view == "import-running" %}
+			    {% if form_view == "dry-run-running" %}
+                    <h2>{% trans "The CSV is currently being validated..." %}</h2>
+                {% endif %}
+                {% if form_view == "import-running" %}
+                    <h2>{% trans "The import is currently running..." %}</h2>
+                {% endif %}
+                
+			    <p class="textfield transparent">{% trans "This page will automatically refresh when the process is done." %}</p>
+			    {% comment %} Refresh every 10 seconds {% endcomment %}
+			    <script type="text/javascript">
+				    setTimeout(function () { location.reload(); }, 10000);
+				</script>
+	        
+	        {% elif form_view == "import-ready" %}
+                <p class="textfield import-warning">
+                    {% trans "No data has been imported yet." %}<br/>
+                </p>
+	            <h2>{% trans "The uploaded data is valid and ready to be imported! Please review carefully!" %}</h2>
+                <input type="hidden" name="action" value="import" />
+                {% trans "Import the shown data now" as submit_button_label %}
+                
+                <p class="textfield transparent">
+                    {% trans "The uploaded data is valid and is ready to be imported." %}<br/>
+                    {% trans "Please review the data carefully below. Everything that will be imported is shown in the table." %}
+                </p>
+                <br/>
+                <p class="textfield transparent">
+                    <b>{% trans "If any data is missing in the report that you think should have been included in the CSV, please do not start the import yet!" %}</b><br/>
+                    {% trans "In this case review the uploaded CSV, and if the data is contained there, but not in the report, please contact the support!" %}
+                </p>
+                <p class="textfield transparent">
+                    {% blocktrans with submit_button_label=submit_button_label %}Once you are ready to begin the import, please click "{{ submit_button_label }}" at the bottom of the page.{% endblocktrans %}
+                </p>
+                
+            {% elif form_view == "invalid" %}
+                <p class="textfield import-warning">
+                    {% trans "No data has been imported yet." %}<br/>
+                </p>
+                <h2>{% trans "The uploaded data is invalid!" %}</h2>
+                <p class="textfield transparent">
+                    {% trans "Please review the errors encountered, and correct them in the CSV. If you have questions, contact our support for help." %}
+                </p>
+                <p class="textfield transparent">    
+                    {% blocktrans with reset_button_label=reset_button_label %}Click "{{ reset_button_label }}" at the top of the page to start another upload.{% endblocktrans %}
+                </p>
+                
+            {% elif form_view == "failed" %}
+                <h2>{% trans "There was a critical unexpected error during the import" %}</h2>
+                <p class="textfield transparent">
+                    {% trans "Some data may have been imported already, so please do not restart the import at this time!" %}<br/>
+                    {% trans "The error has been logged in the system, please contact our support for help!" %}
+                </p>
+                <p class="textfield transparent"> 
+                    {% blocktrans with reset_button_label=reset_button_label %}Click "{{ reset_button_label }}" at the top of the page to start another upload.{% endblocktrans %}
+                </p>
+                
+	        
+	        {% elif form_view == "finished" %}
+                <p class="textfield import-success">
+                    {% trans "The uploaded data has been successfully imported!" %}
+                </p>
+                <h2>{% trans "Import successful!" %}</h2>
+                <input type="hidden" name="action" value="archive" />
+                {% trans "Archive Import Report" as submit_button_label %}
+                
+                <p class="textfield transparent">
+                    {% trans "Below you will find a report of everything that was imported." %}
+                </p>
+                <p class="textfield transparent"> 
+                    {% blocktrans with submit_button_label=submit_button_label %}Click "{{ submit_button_label }}" to archive the report. You can access the report later from the left side navigation of this page.{% endblocktrans %}
+                </p>
+			{% endif %}
+			
+			
+			{% if form_view == "import-ready" or form_view == "invalid" or form_view == "finished" %}
+                {% include 'cosinnus/user_import/user_import_report_snippet.html' with object=object %}
+			{% endif %}
+		
+            {% if form_view == "upload" or form_view == "import-ready" or form_view == "finished" %}
+				<button type="submit" class="btn btn-emphasized btn-autosize">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <a class="pull-left" href="#">
+		                        <i class="fa fa-upload"></i>
+		                    </a>
+		                    <div class="media-body">
+		                        {{ submit_button_label }}
+		                    </div>
+		                </li>
+		            </ul>
+		        </button>
+	        {% endif %}
+			
+		</form>
+		
+	</div>
+	
+{% endblock content %}
+

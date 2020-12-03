@@ -1,0 +1,24 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags cosinnus_map_tags static thumbnail %}
+
+{% block page_title %}{% trans "User Import Archive" %}{% endblock page_title %}
+
+{% block leftnav %}
+    {% include "cosinnus/user_import/leftnav.html"  with current_page="archive" %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block content %}
+    <!-- a box with semi transparent background -->
+    <div class="content-box large-space">
+        
+        Archive:
+        
+        {% include 'cosinnus/user_import/user_import_report_snippet.html' with object=object %}
+        
+    </div><!-- content-box -->
+    
+{% endblock content %}
+

@@ -18,7 +18,7 @@ from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
-from cosinnus.views import bbb_room
+from cosinnus.views import bbb_room, user_import
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
     user_dashboard, ui_prefs, administration, user_dashboard_announcement
@@ -102,7 +102,7 @@ urlpatterns = [
     url(r'^administration/announcement/(?P<slug>[^/]+)/edit/$', user_dashboard_announcement.user_dashboard_announcement_edit, name='user-dashboard-announcement-edit'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/delete/$', user_dashboard_announcement.user_dashboard_announcement_delete, name='user-dashboard-announcement-delete'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/activate-toggle/$', user_dashboard_announcement.user_dashboard_announcement_activate, name='user-dashboard-announcement-activate'),
-
+    
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
 
     url(r'^housekeeping/ensure_group_widgets/$', housekeeping.ensure_group_widgets, name='housekeeping-ensure-group-widgets'),
@@ -132,6 +132,13 @@ urlpatterns = [
 
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
+
+if getattr(settings, 'COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED', False):
+    urlpatterns += [
+        url(r'^administration/user_import/$', user_import.user_import_view, name='administration-user-import'),
+        url(r'^administration/user_import/archived/$', user_import.archived_user_import_list_view, name='administration-archived-user-import-list'),
+        url(r'^administration/user_import/archived/(?P<pk>\d+)/$', user_import.archived_user_import_detail_view, name='administration-archived-user-import-detail'),
+    ]
 
 if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
     urlpatterns += [

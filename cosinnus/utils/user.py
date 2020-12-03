@@ -179,7 +179,7 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
 
     try:
         user_model = get_user_model()
-        user_model.objects.get(email=email)
+        user_model.objects.get(email__iexact=email)
         logger.warning('Manual user creation failed because email already exists!')
         return False
     except ObjectDoesNotExist:

@@ -1,0 +1,10 @@
+<div class="import-report-item {% if is_sub_report_item %}import-report-sub-item{% endif %} import-report-color-{{ report_class }}">
+    {% if report_class == "error" %}
+        <i class="fa fa-times-circle"></i>
+    {% elif report_class == "warning" %}
+        <i class="fa fa-exclamation-circle"></i>
+    {% elif report_class == "info" %}
+        <i class="fa fa-info-circle "></i>
+    {% endif %}        
+    {{ text }}
+</div>

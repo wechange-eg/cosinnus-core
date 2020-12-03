@@ -67,3 +67,19 @@
         </li>
     </ul>
 </div>
+
+{% if SETTINGS.COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED %}
+	<div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-user-import' %}">
+	    <ul class="media-list">
+	        <li class="media">
+	           <a class="pull-left">
+	                <i class="fa fa-upload"></i>
+	            </a>
+	            <div class="media-body">
+	                {% trans "User Import" %}
+	            </div>
+	        </li>
+	    </ul>
+	</div>
+{% endif %}
+

@@ -171,7 +171,7 @@ class OrganizationGroupWithdrawView(OrganzationConfirmMixin, DetailView):
 
 class OrganizationGroupDeclineView(OrganizationGroupWithdrawView):
 
-    message_success = _('Your invitation to organization “%(name)s” was declined successfully.')
+    message_success = _('You have declined the invitation to organization “%(name)s”.')
 
     def confirm_action(self):
         try:

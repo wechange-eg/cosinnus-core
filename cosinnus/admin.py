@@ -36,6 +36,7 @@ from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.managed_tags import CosinnusManagedTag,\
     CosinnusManagedTagAssignment, CosinnusManagedTagType
 from cosinnus.models.newsletter import Newsletter
+from cosinnus.models.user_import import CosinnusUserImport
 
 class SingleDeleteActionMixin(object):
     
@@ -692,6 +693,11 @@ class CosinnusManagedTagAssignmentAdmin(admin.ModelAdmin):
 admin.site.register(CosinnusManagedTagAssignment, CosinnusManagedTagAssignmentAdmin)
 
 
+class CosinnusUserImportAdmin(admin.ModelAdmin):
+    list_display = ('state', 'creator', 'last_modified')
+    readonly_fields = ('import_data', 'import_report_html')
+
+admin.site.register(CosinnusUserImport, CosinnusUserImportAdmin)
 
 
 ## TODO: FIXME: re-enable after 1.8 migration

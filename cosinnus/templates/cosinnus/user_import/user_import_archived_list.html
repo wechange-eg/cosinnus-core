@@ -1,0 +1,41 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags cosinnus_map_tags static thumbnail %}
+
+{% block page_title %}{% trans "User Import Archive" %}{% endblock page_title %}
+
+{% block leftnav %}
+    {% include "cosinnus/user_import/leftnav.html"  with current_page="archive" %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block content %}
+    <!-- a box with semi transparent background -->
+    <div class="content-box large-space">
+    
+        {% for object in object_list %}
+            <div class="btn btn-emphasized w100" href="{{ object.get_absolute_url }}">
+		        <ul class="media-list">
+		            <li class="media">
+		                <div class="media-body">
+		                    {% with creator=object.creator %}
+		                        <span class="annotation mobile-hidden">{% trans "by" %} 
+		                            <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>
+		                        </span>
+		                    {% endwith %}
+		                    <a href="{{ object.get_absolute_url }}">
+		                        <span class="moment-data-date" data-date="{{ object.last_modified|date:'c' }}" title="{{ object.last_modified|date:'r' }}"></span>
+		                    </a>
+		                </div>
+		            </li>
+		        </ul>
+		    </div>
+        {% empty %}
+            {% trans "There are no archived imports yet." as empty_message %}
+            {% include 'cosinnus/common/empty_button.html' with message=empty_message %}
+        {% endfor %}
+        
+    </div><!-- content-box -->
+    
+{% endblock content %}

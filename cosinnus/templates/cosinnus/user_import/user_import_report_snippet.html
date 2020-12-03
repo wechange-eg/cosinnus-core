@@ -1,0 +1,19 @@
+{% load i18n cosinnus_tags cosinnus_map_tags static thumbnail %}
+
+
+<div class="import-report-wrapper">
+	<h3>
+	    {% if object.state <= 2 %}
+	        {% trans "Report for CSV validation performed" %}:
+	    {% elif object.state <= 6 %}
+	        {% trans "Report for CSV Import performed" %}:
+	    {% else %}
+	        ???
+	    {% endif %}
+	    <span class="moment-data-date" data-date="{{ object.last_modified|date:'c' }}" title="{{ object.last_modified|date:'r' }}"></span>
+	    {% trans "by" %}
+	    {{ object.creator|full_name }}
+	</h3>
+	
+    {{ object.import_report_html|safe }}
+</div>

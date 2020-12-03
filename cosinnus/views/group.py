@@ -1138,7 +1138,7 @@ class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, GroupMember
 
 class GroupUserInvitationDeclineView(GroupUserWithdrawView):
 
-    message_success = _('Your invitation to %(team_type)s “%(team_name)s” was declined successfully.')
+    message_success = _('You have declined the invitation to %(team_type)s “%(team_name)s”.')
     
     def confirm_action(self):
         try:

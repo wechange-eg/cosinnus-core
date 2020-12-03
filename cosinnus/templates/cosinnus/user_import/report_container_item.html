@@ -1,0 +1,36 @@
+{% load cosinnus_tags %}
+{% captureas uuid %}{{ "accordion-"|add_uuid }}{% endcaptureas %}
+
+<div class="panel panel-default large-space import-report-container-item {{ report_class }}">
+    <div class="panel-heading">
+        <h4 class="panel-title collapsed import-report-background-color-{{ report_class }}" data-toggle="collapse" data-target="#{{ uuid}}">
+            <i class="fa fa-chevron-down panel-collapsed pull-right"></i>
+            <i class="fa fa-chevron-up panel-open pull-right"></i>
+            
+            {% if report_class == "error" %}
+		        <i class="fa fa-times-circle"></i>
+		    {% elif report_class == "warning" %}
+		        <i class="fa fa-question-circle"></i>
+		    {% elif report_class == "info" %}
+		        <i class="fa fa-check-circle import-report-color-success"></i>
+		    {% endif %}  
+            
+            {{ header_text|safe }}
+            {% for symbol in symbol_classes %}
+                {% if symbol == "error" %}
+                    <i class="fa fa-times-circle import-report-color-{{ symbol }}"></i>
+                {% elif symbol == "warning" %}
+                    <i class="fa fa-exclamation-circle import-report-color-{{ symbol }}"></i>
+                {% elif symbol == "info" %}
+                    <i class="fa fa-info-circle import-report-color-{{ symbol }}"></i>
+                {% endif %}        
+            {% endfor %}
+        </h4>
+    </div>
+    <div id="{{ uuid}}" class="panel-collapse collapse">
+        <div class="panel-body">
+            {{ report_item_html|safe }}
+        </div>
+    </div>
+</div>
+        

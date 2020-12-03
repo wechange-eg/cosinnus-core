@@ -47,10 +47,10 @@ class UserAdminForm(forms.ModelForm):
         email = self.cleaned_data.get('email')
         if not self.instance.pk:
             email_exists = get_user_model().objects.filter(
-                email=email).exists()
+                email__iexact=email).exists()
         else:
             email_exists = get_user_model().objects.filter(
-                email=email).exclude(pk=self.instance.pk).exists()
+                email__iexact=email).exclude(pk=self.instance.pk).exists()
         if email_exists:
             raise forms.ValidationError(_('This email address already has a registered user!'))
         else:
