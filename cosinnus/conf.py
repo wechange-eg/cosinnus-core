@@ -786,6 +786,9 @@ class CosinnusConf(AppConf):
     MANAGED_TAGS_LABEL_CLASS_DROPIN = None
     # will the managed tag show up in the user profile form for the users to assign themselves?
     MANAGED_TAGS_USERS_MAY_ASSIGN_SELF = False
+    # users cannot assign the managed tags in their profiles,
+    # but admins can assign them in the userprofile admin update view
+    MANAGED_TAGS_ASSIGNABLE_IN_USER_ADMIN_FORM = False
     # will the managed tag show up in the group form for the users to assign their groups?
     MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS = False
     

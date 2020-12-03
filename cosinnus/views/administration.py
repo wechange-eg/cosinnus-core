@@ -251,6 +251,15 @@ class AdminUserUpdateView(UserProfileUpdateView):
 
     def get_success_url(self):
         return reverse('cosinnus:administration-users')
+    
+    def get_form_kwargs(self, *args, **kwargs):
+        form_kwargs = super(UserProfileUpdateView, self).get_form_kwargs(*args, **kwargs)
+        form_kwargs.update({
+            'obj__hidden_dynamic_fields_shown': True,
+            'obj__readonly_dynamic_fields_enabled': True,
+            'obj__user_admin_form_managed_tag_enabled': True,
+        })
+        return form_kwargs
 
 user_update = AdminUserUpdateView.as_view()
 

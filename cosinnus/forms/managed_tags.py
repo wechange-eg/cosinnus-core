@@ -30,20 +30,27 @@ if getattr(settings, 'COSINNUS_MANAGED_TAGS_ENABLED', False):
         managed_tag_assignment_attribute_name = None
         
         def __init__(self, *args, **kwargs):
+            user_admin_form_managed_tag_enabled = kwargs.pop('user_admin_form_managed_tag_enabled', False)
             super(_ManagedTagFormMixin, self).__init__(*args, **kwargs)
             if 'managed_tag_field' in self.fields:
-                all_managed_tags = list(CosinnusManagedTag.objects.all_in_portal_cached())
-                all_managed_tags = sorted(all_managed_tags, key=lambda tag: tag.sort_key)
-                setattr(self.fields['managed_tag_field'], 'all_managed_tags', all_managed_tags)
-                # set initial tag
-                if self.instance and self.instance.pk:
-                    tag_assignment_instance = self._get_tag_assignment_instance(self.instance)
-                    qs = tag_assignment_instance.managed_tag_assignments.all()
-                    managed_tag_slugs = qs.filter(approved=True).values_list('managed_tag__slug', flat=True)
-                    if managed_tag_slugs:
-                        self.fields['managed_tag_field'].initial = ','.join(list(managed_tag_slugs))
-                if not self.fields['managed_tag_field'].initial and 'managed_tag_field' in self.initial:
-                    self.fields['managed_tag_field'].initial = self.initial['managed_tag_field']
+                if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_ASSIGNABLE_IN_USER_ADMIN_FORM \
+                        and not settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF and not user_admin_form_managed_tag_enabled:
+                    # if this form was not initialized for the user admin view and user assignable managed tags are disabled
+                    # we throw out the field as it should not be displayed in this view
+                    del self.fields['managed_tag_field']
+                else:
+                    all_managed_tags = list(CosinnusManagedTag.objects.all_in_portal_cached())
+                    all_managed_tags = sorted(all_managed_tags, key=lambda tag: tag.sort_key)
+                    setattr(self.fields['managed_tag_field'], 'all_managed_tags', all_managed_tags)
+                    # set initial tag
+                    if self.instance and self.instance.pk:
+                        tag_assignment_instance = self._get_tag_assignment_instance(self.instance)
+                        qs = tag_assignment_instance.managed_tag_assignments.all()
+                        managed_tag_slugs = qs.filter(approved=True).values_list('managed_tag__slug', flat=True)
+                        if managed_tag_slugs:
+                            self.fields['managed_tag_field'].initial = ','.join(list(managed_tag_slugs))
+                    if not self.fields['managed_tag_field'].initial and 'managed_tag_field' in self.initial:
+                        self.fields['managed_tag_field'].initial = self.initial['managed_tag_field']
                 
         def clean_managed_tag_field(self):
             """ Todo: This method supports only single-tag cleaning for now! """

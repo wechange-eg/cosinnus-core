@@ -189,7 +189,8 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
     def get_initial(self):
         """ Allow pre-populating managed tags on userprofile edit from initial default tags """
         initial = super().get_initial()
-        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and \
+                (settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF or settings.COSINNUS_MANAGED_TAGS_ASSIGNABLE_IN_USER_ADMIN_FORM):
             if settings.COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG is not None:
                 initial['managed_tag_field'] = settings.COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG
         return initial
@@ -253,14 +254,6 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
             field.required = False
         return form
     
-    def get_form_kwargs(self, *args, **kwargs):
-        form_kwargs = super(UserProfileUpdateView, self).get_form_kwargs(*args, **kwargs)
-        is_superuser = check_user_superuser(self.request.user)
-        form_kwargs.update({
-            'obj__hidden_dynamic_fields_shown': is_superuser,
-            'obj__readonly_dynamic_fields_enabled': is_superuser,
-        })
-        return form_kwargs
 
 update_view = UserProfileUpdateView.as_view()
 

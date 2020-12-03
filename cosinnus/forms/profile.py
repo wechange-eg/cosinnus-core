@@ -23,7 +23,8 @@ class _UserProfileForm(UserProfileFormExtraFieldsMixin, ManagedTagFormMixin, for
     
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
         newsletter_opt_in = forms.BooleanField(label='newsletter_opt_in', required=False)
-    if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED and \
+            (settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF or settings.COSINNUS_MANAGED_TAGS_ASSIGNABLE_IN_USER_ADMIN_FORM):
         managed_tag_field = forms.CharField(required=settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED)
     
     class Meta(object):
