@@ -1,7 +1,5 @@
-import json
 from django.views.generic.base import TemplateView
-from django.shortcuts import redirect, render, reverse
-from django.http import HttpResponse
+from django.shortcuts import redirect, render
 from django.utils.translation import ugettext as _
 from django.contrib import messages
 
@@ -22,14 +20,12 @@ class DynamicFieldFormView(TemplateView):
 
         return render(request, template_name=self.template_name, context={'forms': forms})
 
-    def post(self, request, field_name="", *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         generator = self.form_generator_class(cosinnus_portal=self.default_portal, data=request.POST)
         forms = generator.get_forms()
 
         generator.try_save()
         if generator.saved:
-            return HttpResponse(json.dumps({"success": _("data was saved successfully")}), content_type="application/json")
-        elif not generator.saved:
-            return HttpResponse(json.dumps({"error": _("error savin")}), content_type="application/json")
-        else:
-            return render(request, template_name=self.template_name, context={'forms': forms})
+            messages.success(self.request, _("Your data was set successfully!"))
+
+        return render(request, template_name=self.template_name, context={'forms': forms})

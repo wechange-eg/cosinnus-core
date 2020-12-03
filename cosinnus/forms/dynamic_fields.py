@@ -1,7 +1,5 @@
 from cosinnus.dynamic_fields.dynamic_formfields import DynamicFieldFormFieldGenerator
 from django import forms
-from django.shortcuts import reverse
-
 from cosinnus.dynamic_fields.quick_import import BOELL_USERPROFILE_EXTRA_FIELDS
 from cosinnus.dynamic_fields.dynamic_fields import DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT
 
