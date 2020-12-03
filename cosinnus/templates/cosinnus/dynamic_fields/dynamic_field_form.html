@@ -15,6 +15,23 @@
         }
 
         {% for form in forms %}
+
+            var frm = $('#FORM-ID');
+            frm.submit(function () {
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (data) {
+                        $("#SOME-DIV").html(data);
+                    },
+                    error: function(data) {
+                        $("#MESSAGE-DIV").html("Something went wrong!");
+                    }
+                });
+                return false;
+            });
+
             var {{form.id}} = false;
             $("form#{{form.id}}").mouseleave(function() {
                 if ({{form.id}}) {
@@ -53,7 +70,7 @@
 {% block content %}
 
 {% for form in forms %}
-    <form id="{{form.id}}" action="" method="post">
+    <form id="{{ form.id }}" action="" method="post">
       {% csrf_token %}
 
         <!-- a box with semi transparent background -->
