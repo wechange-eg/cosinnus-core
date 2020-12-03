@@ -61,6 +61,7 @@
                 </p>
                 <input type="hidden" name="action" value="upload" />
                 {% trans "Upload CSV File" as submit_button_label %}
+                {% captureas submit_button_icon %}fa-upload{% endcaptureas %}
 				
 			{% elif form_view == "dry-run-running" or form_view == "import-running" %}
 			    {% if form_view == "dry-run-running" %}
@@ -83,6 +84,7 @@
 	            <h2>{% trans "The uploaded data is valid and ready to be imported! Please review carefully!" %}</h2>
                 <input type="hidden" name="action" value="import" />
                 {% trans "Import the shown data now" as submit_button_label %}
+                {% captureas submit_button_icon %}fa-floppy-o{% endcaptureas %}
                 
                 <p class="textfield transparent">
                     {% trans "The uploaded data is valid and is ready to be imported." %}<br/>
@@ -127,6 +129,7 @@
                 <h2>{% trans "Import successful!" %}</h2>
                 <input type="hidden" name="action" value="archive" />
                 {% trans "Archive Import Report" as submit_button_label %}
+                {% captureas submit_button_icon %}fa-archive{% endcaptureas %}
                 
                 <p class="textfield transparent">
                     {% trans "Below you will find a report of everything that was imported." %}
@@ -141,12 +144,12 @@
                 {% include 'cosinnus/user_import/user_import_report_snippet.html' with object=object %}
 			{% endif %}
 		
-            {% if form_view == "upload" or form_view == "import-ready" or form_view == "finished" %}
+            {% if form_view == "upload" or form_view == "finished" %}
 				<button type="submit" class="btn btn-emphasized btn-autosize">
 		            <ul class="media-list">
 		                <li class="media">
 		                    <a class="pull-left" href="#">
-		                        <i class="fa fa-upload"></i>
+		                        <i class="fa {{ submit_button_icon }}"></i>
 		                    </a>
 		                    <div class="media-body">
 		                        {{ submit_button_label }}
@@ -154,7 +157,31 @@
 		                </li>
 		            </ul>
 		        </button>
+		    {% elif form_view == "import-ready" %}
+		        <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#modal_start_import">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <a class="pull-left" href="#">
+		                            <i class="fa {{ submit_button_icon }}"></i>
+		                        </a>
+		                    <div class="media-body">
+		                        {{ submit_button_label }}
+		                    </div>
+		                </li>
+		            </ul>
+		        </button>
+		        {% captureas label %}
+		            {% trans "Do you really want to perform the import of the shown data?" %}
+		            <br/><br/>
+                    {% trans "Make sure you have double checked all the data that will be imported, as a second import with the same data will not be possible!" %}
+                {% endcaptureas %}
+			    {% captureas title %}{% trans "Start the Import?" %}{% endcaptureas %}
+                {% captureas modal_submit_button_label %}{% trans "Import Now!" %}{% endcaptureas %}
+			    {% include "cosinnus/modal_box.html" with id="modal_start_import" label=label title=title form_action="." title_icon='fa fa-floppy-o' submit_button_label=modal_submit_button_label %}
+			    
 	        {% endif %}
+			
+			
 			
 		</form>
 		
