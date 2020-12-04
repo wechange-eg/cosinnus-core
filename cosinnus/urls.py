@@ -27,6 +27,8 @@ from cosinnus_event.api.views import EventViewSet
 from cosinnus_note.api.views import NoteViewSet
 from cosinnus_organization.api.views import OrganizationViewSet
 
+from cosinnus.views.dynamic_fields import DynamicFieldFormView
+
 app_name = 'cosinnus'
 
 urlpatterns = [
@@ -129,6 +131,8 @@ urlpatterns = [
     url(r'^housekeeping/project_storage_report/', housekeeping.project_storage_report_csv, name='housekeeping-project-storage-report'),
     url(r'^housekeeping/user_activity_info/', housekeeping.user_activity_info, name='housekeeping-user-activity-info'),
     url(r'^housekeeping/group_admin_emails/(?P<slugs>[^/]+)/', housekeeping.group_admin_emails, name='housekeeping-group-admin-emails'),
+
+    url(r'admin_dynamic_fields/edit', DynamicFieldFormView.as_view(), name="admin_dynamic_fields"),
 
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
