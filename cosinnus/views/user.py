@@ -836,7 +836,7 @@ def email_first_login_token_to_user(user):
 
     # the verification param for the URL consists of <user-id>-<uuid>, where the uuid is saved to the user's profile
     a_uuid = uuid4()
-    login_url_param = '%d-%s' % (user.id, a_uuid)
+    login_url_param = '%s' % a_uuid
     user.cosinnus_profile.settings[PROFILE_SETTING_PASSWORD_NOT_SET] = str(a_uuid)
     user.cosinnus_profile.save()
 
@@ -845,7 +845,7 @@ def email_first_login_token_to_user(user):
     data.update({
         'user': user,
         'user_email': user.email,
-        'verification_url_param': login_url_param,
+        'verification_token': reverse('password_set_initial', kwargs={'token': str(a_uuid)}),
     })
     template = 'cosinnus/mail/user_email_first_token.html'
 
