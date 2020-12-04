@@ -252,6 +252,16 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
             field = form.forms['media_tag'].fields['visibility']
             field.disabled = True
             field.required = False
+        
+        user_managed_tag_slugs = [tag.slug for tag in self.object.get_managed_tags()]
+        for tag_slug, field_list in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS.items():
+            if not tag_slug in user_managed_tag_slugs:
+                for field_name in field_list:
+                    if field_name in form.forms['obj'].fields:
+                        field = form.forms['obj'].fields[field_name]
+                        field.disabled = True
+                        field.required = False
+        
         return form
     
 

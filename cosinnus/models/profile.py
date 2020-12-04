@@ -639,7 +639,9 @@ class UserProfileFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
         super().full_clean()
         if hasattr(self, 'cleaned_data'):
             for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
-                self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
+                # skip saving disabled fields
+                if field_name in self.fields and not self.fields[field_name].disabled:
+                    self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
 
 
 class UserCreationFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):

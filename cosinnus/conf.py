@@ -700,6 +700,10 @@ class CosinnusConf(AppConf):
     # in the admin
     DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED = False
     
+    # a map of managed tag slugs to profile extra field names
+    # that become disabled unless the user has the managed tag
+    USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS = {}
+    
     # if True, payment urls and views will be enabled
     PAYMENTS_ENABLED = False
     # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins

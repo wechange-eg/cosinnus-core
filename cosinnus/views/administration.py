@@ -231,7 +231,7 @@ class AdminUserUpdateView(UserProfileUpdateView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_form(self, *args, **kwargs):
-        form = super(UserProfileUpdateView, self).get_form(*args, **kwargs)
+        form = super(AdminUserUpdateView, self).get_form(*args, **kwargs)
         for field_name in form.forms['obj'].fields:
             field = form.forms['obj'].fields[field_name]
             field.required = False
@@ -253,7 +253,7 @@ class AdminUserUpdateView(UserProfileUpdateView):
         return reverse('cosinnus:administration-users')
     
     def get_form_kwargs(self, *args, **kwargs):
-        form_kwargs = super(UserProfileUpdateView, self).get_form_kwargs(*args, **kwargs)
+        form_kwargs = super(AdminUserUpdateView, self).get_form_kwargs(*args, **kwargs)
         form_kwargs.update({
             'obj__hidden_dynamic_fields_shown': True,
             'obj__readonly_dynamic_fields_enabled': True,
