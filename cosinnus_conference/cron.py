@@ -14,7 +14,7 @@ class SendConferenceReminders(CosinnusCronJobBase):
     Send conference reminder emails 1 week/day/hour before conference
     """
 
-    RUN_EVERY_MINS = 60
+    RUN_EVERY_MINS = 10
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
 
     cosinnus_code = 'cosinnus_conference.send_conference_reminders'

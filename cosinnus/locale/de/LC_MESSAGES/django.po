@@ -9570,3 +9570,6 @@ msgstr "Eine Test-Mail wurde an deine E-Mailadresse versendet."
 
 msgid "Conference reminder settings have been successfully updated."
 msgstr "Versandeinstellungen wurden erfolgreich gespeichert."
+
+msgid "Go to conference"
+msgstr "Zur Konferenz"
