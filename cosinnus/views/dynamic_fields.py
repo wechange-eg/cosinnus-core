@@ -14,18 +14,25 @@ class DynamicFieldFormView(TemplateView):
     
     def get(self, request, *args, **kwargs):
         generator = self.form_generator_class(cosinnus_portal=CosinnusPortal.get_current())
-        forms = generator.get_forms()
-
-        return render(request, template_name=self.template_name, context={'forms': forms})
+        self.forms = generator.get_forms()
+        
+        return self.render_to_response(self.get_context_data())
 
     def post(self, request, *args, **kwargs):
         generator = self.form_generator_class(cosinnus_portal=CosinnusPortal.get_current(), data=request.POST)
-        forms = generator.get_forms()
+        self.forms = generator.get_forms()
 
         generator.try_save()
         if generator.saved:
-            messages.success(self.request, _("Your data was set successfully!"))
-
-        return render(request, template_name=self.template_name, context={'forms': forms})
+            messages.success(self.request, _("Your data was saved successfully!"))
+            return redirect(self.request.path)
+        return self.render_to_response(self.get_context_data())
+    
+    def get_context_data(self, **kwargs):
+        context = super(DynamicFieldFormView, self).get_context_data(**kwargs)
+        context.update({
+            'forms': self.forms,
+        })
+        return context
 
 dynamic_field_form_view = DynamicFieldFormView.as_view()

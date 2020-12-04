@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n  cosinnus_tags widget_tweaks %}
 
-{% block page_title %}{% trans 'Password change' %}{% endblock %}
+{% block page_title %}{% trans "Change User Profile Field Choices" %}{% endblock %}
 
 {% block jshead %}
     {% comment %} This is the JS functionality to mark unsaved form data. {% endcomment %}
@@ -51,38 +51,43 @@
 {% endblock %}
 
 {% block content %}
+    
+    <h1>{% trans "Change User Profile Field Choices" %}</h1>
+    
+    <h3>WIP: Diese Felder sind aktuell semikolon-getrennt, werden bald aber richtige Multi-auswahlfelder sein!</h3>
 
-{% for form in forms %}
-    <form id="{{form.id}}" action="" method="post">
-      {% csrf_token %}
-
-        <!-- a box with semi transparent background -->
-        <div class="content-box">
-            <label class=""></label>
-
-            {{ form.non_field_errors }}
-
-            {# Regular Field #}
-            {% trans "Enter your choices as comma separated values" as options_label %}
-            {% trans "Enter your choices" as options_placeholder %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.options label=options_label placeholder=options_placeholder %}
-
-        </div><!-- content-box -->
-
-        <button type="submit" class="btn btn-emphasized">
-            <ul class="media-list">
-                <li class="media">
-                    <span class="pull-left" href="#" tabindex="-1">
-                        <i class="fa fa-hand-o-right"></i>
-                    </span>
-                    <div class="media-body">
-                        {% trans 'Save' %}
-                    </div>
-                </li>
-            </ul>
-        </button>
-
-    </form>
-{% endfor %}
+	{% for form in forms %}
+	    <form id="{{form.id}}" action="" method="post" class="cosinnus-form form-horizontal" role="form">
+	      {% csrf_token %}
+	
+	        <!-- a box with semi transparent background -->
+	        <div class="content-box">
+	            <label class=""></label>
+	
+	            {{ form.non_field_errors }}
+	            {{ form.option_name }}
+	
+	            {# Regular Field #}
+	            {% trans "Enter your choices as comma separated values" as options_legend %}
+	            {% trans "Enter your choices" as options_placeholder %}
+	            {% include 'cosinnus/fields/default_field.html' with field=form.options label=form.fields.options.label legend=options_legend placeholder=options_placeholder large_field=True %}
+	
+	        </div><!-- content-box -->
+	
+	        <button type="submit" class="btn btn-emphasized">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <span class="pull-left" href="#" tabindex="-1">
+	                        <i class="fa fa-hand-o-right"></i>
+	                    </span>
+	                    <div class="media-body">
+	                        {% trans 'Save' %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button>
+	
+	    </form>
+	{% endfor %}
 
 {% endblock %}
