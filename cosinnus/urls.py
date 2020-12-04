@@ -21,13 +21,11 @@ from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_por
 from cosinnus.views import bbb_room, user_import
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
-    user_dashboard, ui_prefs, administration, user_dashboard_announcement
+    user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields
 from cosinnus_conference.api.views import ConferenceViewSet
 from cosinnus_event.api.views import EventViewSet
 from cosinnus_note.api.views import NoteViewSet
 from cosinnus_organization.api.views import OrganizationViewSet
-
-from cosinnus.views.dynamic_fields import DynamicFieldFormView
 
 app_name = 'cosinnus'
 
@@ -132,7 +130,6 @@ urlpatterns = [
     url(r'^housekeeping/user_activity_info/', housekeeping.user_activity_info, name='housekeeping-user-activity-info'),
     url(r'^housekeeping/group_admin_emails/(?P<slugs>[^/]+)/', housekeeping.group_admin_emails, name='housekeeping-group-admin-emails'),
 
-    url(r'admin_dynamic_fields/edit', DynamicFieldFormView.as_view(), name="admin_dynamic_fields"),
 
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
@@ -142,6 +139,11 @@ if getattr(settings, 'COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED', False)
         url(r'^administration/user_import/$', user_import.user_import_view, name='administration-user-import'),
         url(r'^administration/user_import/archived/$', user_import.archived_user_import_list_view, name='administration-archived-user-import-list'),
         url(r'^administration/user_import/archived/(?P<pk>\d+)/$', user_import.archived_user_import_detail_view, name='administration-archived-user-import-detail'),
+    ]
+
+if getattr(settings, 'COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED', False): 
+    urlpatterns += [
+        url(r'^administration/admin_dynamic_fields/edit', dynamic_fields.dynamic_field_form_view, name='administration-dynamic-fields'),
     ]
 
 if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):

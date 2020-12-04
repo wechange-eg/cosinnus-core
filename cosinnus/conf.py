@@ -696,6 +696,10 @@ class CosinnusConf(AppConf):
     # multiforms choosable are 'obj' (CosinnusProfile), 'user', 'media_tag'
     USERPROFILE_DISABLED_FIELDS = {}
     
+    # should the form view for admin-defined dynamic fields be shown
+    # in the admin
+    DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED = False
+    
     # if True, payment urls and views will be enabled
     PAYMENTS_ENABLED = False
     # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins
