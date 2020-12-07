@@ -1,7 +1,15 @@
-{% load i18n static cosinnus_tags %}
-
-<div style="display: inline-block;border: 2px solid #333;padding:5px;">
-    TODO: User-Profile readonly card userprofile_readonly_card.html for user:
-    <br/>
-    <b>{{ user|full_name }}</b>
+<div class="contact-box">
+    <img {% if user.cosinnus_profile.avatar_url %}src="{{ user.cosinnus_profile.avatar_url }}" {% endif %}>
+    <div class="contact-box-content">
+        <div>
+            <div class="contact-name">{{ user.cosinnus_profile.get_full_name }}</div>
+            <div><small>{{ title }}</small></div>
+        </div>
+        <div>
+            <small>
+                <span><i class="fas fa-comment-dots"></i> Nachricht TODO</span>&nbsp;&nbsp;
+                <span><i class="fas fa-phone"></i> TODO</span>
+            </small>
+        </div>
+    </div>
 </div>
