@@ -209,14 +209,25 @@ class UserListView(ManagedTagsNewsletterMixin, ListView):
             raise PermissionDenied('You do not have permission to access this page.')
         return super().dispatch(request, *args, **kwargs)
 
+    def send_login_token(self, user):
+        email_first_login_token_to_user(user)
+        user.cosinnus_profile.settings['login_token_send'] = timezone.now()
+        user.cosinnus_profile.save()
+
+
     def post(self, request, *args, **kwargs):
         if 'send_login_token' in self.request.POST:
-            user_id = self.request.POST.get('send_login_token')
-            user = get_user_model().objects.get(id=user_id)
-            email_first_login_token_to_user(user)
-            user.cosinnus_profile.settings['login_token_send'] = timezone.now()
-            user.cosinnus_profile.save()
-            messages.add_message(self.request, messages.SUCCESS, _('Login token was sent.'))
+            if self.request.POST.get('send_login_token') == '__all__':
+                all_users = get_user_model().objects.filter(is_active=False, last_login__isnull=True)
+                for user in all_users:
+                    if not 'login_token_send' in user.cosinnus_profile.settings:
+                        self.send_login_token(user)
+                messages.add_message(self.request, messages.SUCCESS, _('Login tokens were sent.'))
+            else:
+                user_id = self.request.POST.get('send_login_token')
+                user = get_user_model().objects.get(id=user_id)
+                self.send_login_token(user)
+                messages.add_message(self.request, messages.SUCCESS, _('Login token was sent.'))
         return HttpResponseRedirect(request.path_info)
 
 user_list = UserListView.as_view()
@@ -251,7 +262,7 @@ class AdminUserUpdateView(UserProfileUpdateView):
 
     def get_success_url(self):
         return reverse('cosinnus:administration-users')
-    
+
     def get_form_kwargs(self, *args, **kwargs):
         form_kwargs = super(AdminUserUpdateView, self).get_form_kwargs(*args, **kwargs)
         form_kwargs.update({

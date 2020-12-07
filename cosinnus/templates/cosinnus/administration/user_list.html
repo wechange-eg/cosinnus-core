@@ -14,6 +14,22 @@
 
 {% block content %}
 <div class="content-box">
+    <form method="post">{% csrf_token %}
+        <div class="fadedown pull-right">
+            <button type="submit" name="send_login_token" value="__all__" class="btn btn-emphasized btn-autosize">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans 'send login token to all inactive users'%}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+        </div>
+    </form>
     <h2 class="white-text large-space">{% trans 'Users' %}</h2>
     {% if object_list %}
     <table class="table table-striped white-content">
@@ -40,7 +56,7 @@
                             <ul class="media-list">
                                 <li class="media">
                                     <a class="pull-left">
-                                        <i class="fa fa-plus"></i>
+                                        <i class="fa fa-envelope"></i>
                                     </a>
                                     <div class="media-body">
 						                {% if user.cosinnus_profile.settings.login_token_send %}
