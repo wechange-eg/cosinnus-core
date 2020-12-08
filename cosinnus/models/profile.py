@@ -295,12 +295,13 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
                              i18n u_gettext will be applied *later, at redirect time* to this string! 
             @param priority: if set to `True`, will insert the redirect as first URL, so it will be the next one in queue """
         redirects = self.settings.get(PROFILE_SETTING_REDIRECT_NEXT_VISIT, [])
-        if priority:
-            redirects.insert(0, (resolved_url, message))
-        else:
-            redirects.append((resolved_url, message))
-        self.settings[PROFILE_SETTING_REDIRECT_NEXT_VISIT] = redirects
-        self.save(update_fields=['settings'])
+        if not resolved_url in redirects:
+            if priority:
+                redirects.insert(0, (resolved_url, message))
+            else:
+                redirects.append((resolved_url, message))
+            self.settings[PROFILE_SETTING_REDIRECT_NEXT_VISIT] = redirects
+            self.save(update_fields=['settings'])
     
     def pop_next_redirect(self):
         """ Tries to remove the first redirect URL in the user's setting's redirect list, and return it.

@@ -316,27 +316,29 @@
 
 		<div class="nav-flyout-section padded">
 			<ul class="item-list">
-				<li>
-					<a href="{% url 'cosinnus:profile-detail' %}" class="list-item" role="button" titledby=".item-text">
-			    		<div class="item-text">
-			    			{% trans "My Profile" %}
-			    		</div>
-					</a>
-				</li>
-				<li>
-					<a href="{% url 'cosinnus:profile-edit' %}" class="list-item" role="button" titledby=".item-text">
-			    		<div class="item-text">
-			    			{% trans "Edit My Profile" %}
-			    		</div>
-					</a>
-				</li>
-				<li>
-					<a href="{% url 'cosinnus:notifications' %}" class="list-item" role="button" titledby=".item-text">
-			    		<div class="item-text">
-			    			{% trans "Notification Preferences" %}
-			    		</div>
-					</a>
-				</li>
+			    {% block profile_menu_links %}
+					<li>
+						<a href="{% url 'cosinnus:profile-detail' %}" class="list-item" role="button" titledby=".item-text">
+				    		<div class="item-text">
+				    			{% trans "My Profile" %}
+				    		</div>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'cosinnus:profile-edit' %}" class="list-item" role="button" titledby=".item-text">
+				    		<div class="item-text">
+				    			{% trans "Edit My Profile" %}
+				    		</div>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'cosinnus:notifications' %}" class="list-item" role="button" titledby=".item-text">
+				    		<div class="item-text">
+				    			{% trans "Notification Preferences" %}
+				    		</div>
+						</a>
+					</li>
+				{% endblock %}
 				<li>
 					<a rel="toggle" class="list-item" role="button" titledby=".item-text" title="{% trans "Change language" %}
 							aria-expanded="false" aria-controls="language-menu-collapse"

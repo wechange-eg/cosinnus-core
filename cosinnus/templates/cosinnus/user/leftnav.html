@@ -52,7 +52,7 @@
 	{% endif %}
 {% endif %}
 
-<button type="button" class="btn w100 btn-{% if view == "edit_notifications" %}extra-{% endif %}emphasized {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL and not SETTINGS.COSINNUS_IS_SSO_PORTAL %}fine-space{% endif %}" href="{% url 'cosinnus:notifications' %}">
+<button type="button" class="btn w100 btn-{% if view == "edit_notifications" %}extra-{% endif %}emphasized regular-space" href="{% url 'cosinnus:notifications' %}">
     <ul class="media-list">
         <li class="media">
            <a class="pull-left">
@@ -87,7 +87,7 @@
     </button>
 {% endif %}
 
-<button type="button" class="btn w100 btn-emphasized fine-space" 
+<button type="button" class="btn w100 btn-emphasized regular-space" 
         title="{% trans "Deactivated Projects and Groups" %}" 
         {% if has_deactivated_groups %}href="{% url 'cosinnus:deactivated-groups' %}"{% else %}disabled="true"{% endif %}>
     <ul class="media-list">
@@ -104,7 +104,7 @@
 
 {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL and not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
 	{% if request.user.has_usable_password %}
-	<button type="button" class="btn w100 btn-{% if view == "change_password" %}extra-{% endif %}emphasized regular-space" href="{% url 'password_change' %}">
+	<button type="button" class="btn w100 btn-{% if view == "change_password" %}extra-{% endif %}emphasized fine-space" href="{% url 'password_change' %}">
 	    <ul class="media-list">
 	        <li class="media">
 	           <a class="pull-left">

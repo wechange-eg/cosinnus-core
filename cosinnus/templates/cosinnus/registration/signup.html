@@ -86,7 +86,13 @@
         
         {# Regular Field #}
         {% trans "Password" as pass1_label %}
-        {% trans "Enter a password you don't use anywhere else. The longer the better!" as pass1_legend %}
+        {% captureas pass1_legend %}
+            {% if SETTINGS.COSINNUS_USER_PASSWORD_FIELD_ADDITIONAL_HINT_TRANS %}
+                {{ SETTINGS.COSINNUS_USER_PASSWORD_FIELD_ADDITIONAL_HINT_TRANS|textfield }}
+            {% else %}
+                {% trans "Enter a password you don't use anywhere else. The longer the better!" %}
+            {% endif %}
+        {% endcaptureas %}
         {% trans "Password" as pass1_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.password1 legend=pass1_legend label=pass1_label placeholder=pass1_placeholder %}
         

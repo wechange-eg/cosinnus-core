@@ -69,6 +69,9 @@ LOGIN_URLS = NEVER_REDIRECT_URLS + [
     '/integrated/login/',
     '/integrated/logout/',
     '/integrated/create_user/',
+    '/password_reset/',
+    '/reset/',
+    '/password_set_initial/',
 ]
 
 EXEMPTED_URLS_FOR_2FA = [url for url in LOGIN_URLS if url != '/admin/']

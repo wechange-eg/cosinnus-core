@@ -181,6 +181,10 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
     template_name = 'cosinnus/user/userprofile_form.html'
     message_success = _('Your profile was edited successfully.')
     
+    # if set to True, all fields will always be kept enabled
+    # if set to False, disables some fields depending on settings variables
+    disable_conditional_field_locking = False
+    
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(UserProfileObjectMixin, self).dispatch(
@@ -238,20 +242,22 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
     def get_form(self, *args, **kwargs):
         form = super(UserProfileUpdateView, self).get_form(*args, **kwargs)
         # note: we have a django-multiforms form here with 'user', 'obj' (CosinnusProfile) and 'media_tag'!
-        for form_name, formfield_list in settings.COSINNUS_USERPROFILE_DISABLED_FIELDS.items():
-            sub_form = form.forms[form_name]
-            # disable profile formfields from settings
-            # we also need to remove any validation errors from required later-disabled fields
-            for field_name in formfield_list:
-                if field_name in sub_form.fields:
-                    field = sub_form.fields[field_name]
-                    field.disabled = True
-                    field.required = False
-        # disable the userprofile visibility field if it is locked
-        if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
-            field = form.forms['media_tag'].fields['visibility']
-            field.disabled = True
-            field.required = False
+        
+        if not self.disable_conditional_field_locking:
+            for form_name, formfield_list in settings.COSINNUS_USERPROFILE_DISABLED_FIELDS.items():
+                sub_form = form.forms[form_name]
+                # disable profile formfields from settings
+                # we also need to remove any validation errors from required later-disabled fields
+                for field_name in formfield_list:
+                    if field_name in sub_form.fields:
+                        field = sub_form.fields[field_name]
+                        field.disabled = True
+                        field.required = False
+            # disable the userprofile visibility field if it is locked
+            if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
+                field = form.forms['media_tag'].fields['visibility']
+                field.disabled = True
+                field.required = False
         
         user_managed_tag_slugs = [tag.slug for tag in self.object.get_managed_tags()]
         for tag_slug, field_list in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS.items():

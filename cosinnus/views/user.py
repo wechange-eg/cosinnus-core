@@ -185,7 +185,7 @@ class SetInitialPasswordView(TemplateView):
             form = self.form_class(user=user, data=request.POST)
             if form.is_valid():
                 form.save()
-                messages.success(self.request, _("Your password was set successfully!"))
+                messages.success(self.request, _("Your password was set successfully! You may now log in using your e-mail address and the password you just set."))
 
                 try:
                     # removing the key from the cosinnus_profile settings to prevent double usage
@@ -194,7 +194,12 @@ class SetInitialPasswordView(TemplateView):
                     logger.error(
                         'Error while deleting key %s from cosinnus_profile settings of user %s. This key is supposed to be present. Password was set anyway',
                         extra={'exception': e, 'reason': str(e)})
-                # TODO redirect to intented view
+                
+                # add redirect to the welcome-settings page, with priority so that it is shown as first one
+                if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
+                    user.cosinnus_profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), self.request), message=None, priority=True)
+                
+                return redirect('login')
             return render(request, template_name=self.template_name, context={'form': form})
         else:
             raise PermissionDenied()

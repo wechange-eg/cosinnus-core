@@ -704,6 +704,11 @@ class CosinnusConf(AppConf):
     # that become disabled unless the user has the managed tag
     USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS = {}
     
+    # a i18n str that explains the special password rules to the user,
+    # can be markdown.
+    # will display default field legend if None
+    USER_PASSWORD_FIELD_ADDITIONAL_HINT_TRANS = None
+    
     # if True, payment urls and views will be enabled
     PAYMENTS_ENABLED = False
     # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins

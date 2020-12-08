@@ -231,7 +231,7 @@ def get_common_mail_context(request, group=None, user=None):
     site = portal.site
     context = {
         'site': site,
-        'site_name': site.name,
+        'site_name': portal.name,
         'protocol': protocol,
         'domain_url': portal.get_domain(),
     }
