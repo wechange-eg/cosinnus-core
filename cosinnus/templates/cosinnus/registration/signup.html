@@ -94,7 +94,7 @@
             {% endif %}
         {% endcaptureas %}
         {% trans "Password" as pass1_placeholder %}
-        {% include 'cosinnus/fields/default_field.html' with field=form.password1 legend=pass1_legend label=pass1_label placeholder=pass1_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.password1 legend=pass1_legend label=pass1_label placeholder=pass1_placeholder legend_class="textfield transparent" %}
         
         {# Regular Field #}
         {% trans "Repeat your password just to make sure" as pass2_label %}

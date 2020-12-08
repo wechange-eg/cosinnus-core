@@ -260,8 +260,8 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
                 field.required = False
         
         user_managed_tag_slugs = [tag.slug for tag in self.object.get_managed_tags()]
-        for tag_slug, field_list in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS.items():
-            if not tag_slug in user_managed_tag_slugs:
+        for tag_slug_list, field_list in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS:
+            if not any([tag_slug in user_managed_tag_slugs for tag_slug in tag_slug_list]):
                 for field_name in field_list:
                     if field_name in form.forms['obj'].fields:
                         field = form.forms['obj'].fields[field_name]

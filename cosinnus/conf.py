@@ -700,9 +700,9 @@ class CosinnusConf(AppConf):
     # in the admin
     DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED = False
     
-    # a map of managed tag slugs to profile extra field names
+    # a list of tuples of a <LIST of managed tag slugs> and <LIST of profile extra field names>
     # that become disabled unless the user has the managed tag
-    USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS = {}
+    USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS = []
     
     # a i18n str that explains the special password rules to the user,
     # can be markdown.
