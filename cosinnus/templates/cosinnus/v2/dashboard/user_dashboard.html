@@ -46,9 +46,9 @@
 		<div class="dashboard-left-bar-content" style="display: none;">
 			<div class="group-widget-root">
 			</div>
+			{% block extra_dashboard_content %}{% endblock %}
 			<div class="ideas-widget-root">
 			</div>
-			{% block extra_dashboard_content %}{% endblock %}
 			<div class="starred-users-widget-root"></div>
 			<div class="starred-objects-widget-root"></div>
 			<div class="followed-objects-widget-root"></div>
