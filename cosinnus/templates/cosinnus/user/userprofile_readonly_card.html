@@ -1,5 +1,6 @@
+{% load static %}
 <div class="contact-box">
-    <img {% if user.cosinnus_profile.avatar_url %}src="{{ user.cosinnus_profile.avatar_url }}" {% endif %}>
+    <img {% if user.cosinnus_profile.avatar_url %}src="{{ user.cosinnus_profile.avatar_url }}" {% else %} src="{% static 'images/jane-doe.png' %}" {% endif %}>
     <div class="contact-box-content">
         <div>
             <div class="contact-name">{{ user.cosinnus_profile.get_full_name }}</div>
