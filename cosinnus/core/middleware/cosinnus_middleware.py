@@ -61,6 +61,7 @@ NEVER_REDIRECT_URLS = [
     '/static/',
     '/language',
     '/api/',
+    '/o/',
 ]
 
 LOGIN_URLS = NEVER_REDIRECT_URLS + [
