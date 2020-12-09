@@ -250,7 +250,7 @@ def check_user_can_receive_emails(user):
     if not user.is_authenticated:
         return not GlobalBlacklistedEmail.is_email_blacklisted(user.email)
     else:
-        return GlobalUserNotificationSetting.objects.get_for_user(user) > GlobalUserNotificationSetting.SETTING_NEVER
+        return user.is_active and GlobalUserNotificationSetting.objects.get_for_user(user) > GlobalUserNotificationSetting.SETTING_NEVER
 
 
 def filter_tagged_object_queryset_for_user(qs, user):

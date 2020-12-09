@@ -32,6 +32,7 @@ from cosinnus.core.mail import send_html_mail_threaded
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.views.user import email_first_login_token_to_user
+from cosinnus.conf import settings
 
 
 class AdministrationView(TemplateView):
@@ -133,13 +134,13 @@ class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin,
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['receipients'] = len(self._get_recipients_from_tags())
+        context['receipients'] = self._get_recipients_from_tags()
         return context
 
     def _get_recipients_from_tags(self):
         tags = self.object.managed_tags.all()
         assignments = CosinnusManagedTagAssignment.objects.filter(managed_tag__in=tags)
-
+        
         group_type = ContentType.objects.get(
             app_label='cosinnus', model='cosinnusgroup')
         profile_type = ContentType.objects.get(
@@ -148,14 +149,18 @@ class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin,
             content_type=group_type).values_list('object_id', flat=True)
         profile_ids = assignments.filter(
             content_type=profile_type).values_list('object_id', flat=True)
-
+        
         tag_users = get_user_model().objects.filter(
             Q(cosinnus_groups__id__in=group_ids) | Q(cosinnus_profile__id__in=profile_ids)).distinct()
 
         users = []
         for user in tag_users:
-            if (check_user_can_receive_emails(user) and
-                    user.cosinnus_profile.settings.get('newsletter_opt_in', False)):
+            if (check_user_can_receive_emails(user)):
+                # if the newsletter opt-in is enabled, only send the newsletter to users
+                # who have the option enabled in their profiles
+                if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN and not \
+                        user.cosinnus_profile.settings.get('newsletter_opt_in', False):
+                    continue
                 users.append(user)
 
         return users
