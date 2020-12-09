@@ -1248,7 +1248,7 @@ def get_item(obj, attr_name):
 def get_item_or_none(obj, attr_name):
     """ Returns the given attribute by trying to resolve
         it in the template using __getitem__ """
-    return obj.get('attr_name', None)
+    return obj.get(attr_name, None)
 
 @register.filter
 def get_country_name(country_code):
@@ -1269,3 +1269,27 @@ def listformat(value):
     if isinstance(value, list):
         return ', '.join(value)
     return value
+
+# a map of {dynamic_field_names: [managed_tag_slugs,]} 
+_DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP = None
+
+@register.filter
+def has_managed_tag_requirement_for_dynamic_field(user, dynamic_field_name):
+    """ Will return True if a user has any of the managed tags assigned 
+        that are required to enable the given dynamic field, as defined in
+        setting `COSINNUS_USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS` """
+    global _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP
+    if _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP is None:
+        field_map = defaultdict(list)
+        for tag_slug_list, field_list in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS:
+            for field_name in field_list:
+                field_map[field_name].extend(tag_slug_list)
+        for field_name in field_map.keys():
+            field_map[field_name] = list(set(field_map[field_name]))
+        _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP = field_map
+    
+    user_managed_tag_slugs = [tag.slug for tag in user.cosinnus_profile.get_managed_tags()]
+    required_tag_slugs = _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP.get(dynamic_field_name, [])
+    return any([user_tag_slug in required_tag_slugs for user_tag_slug in user_managed_tag_slugs])
+
+

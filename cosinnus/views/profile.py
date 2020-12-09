@@ -259,6 +259,8 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
                 field.disabled = True
                 field.required = False
         
+        # disable all fields that require a certain managed_tag to be assigned to the user
+        # that this user doesn't have
         user_managed_tag_slugs = [tag.slug for tag in self.object.get_managed_tags()]
         for tag_slug_list, field_list in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS:
             if not any([tag_slug in user_managed_tag_slugs for tag_slug in tag_slug_list]):
