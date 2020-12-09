@@ -39,15 +39,12 @@
 {% endblock jshead %}
 
 {% block leftnav %}
-    {% include "cosinnus/user/leftnav.html"  with view="change_password" %}
-    
-    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_5_password" %}
+    {% include 'cosinnus/administration/leftnav.html' %}
 {% endblock leftnav %}
 
 {% block breadcrumb %}
-        {{ block.super }}
-        <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
-        <li class="active">{% trans "Change password" %}</li>
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li class="active">{% trans "Change User Profile Field Choices" %}</li>
 {% endblock %}
 
 {% block content %}
