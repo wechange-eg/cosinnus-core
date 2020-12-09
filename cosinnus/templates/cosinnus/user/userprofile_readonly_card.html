@@ -1,16 +1,32 @@
-{% load static %}
-<div class="contact-box">
-    <img {% if user.cosinnus_profile.avatar_url %}src="{{ user.cosinnus_profile.avatar_url }}" {% else %} src="{% static 'images/jane-doe.png' %}" {% endif %}>
-    <div class="contact-box-content">
-        <div>
-            <div class="contact-name">{{ user.cosinnus_profile.get_full_name }}</div>
-            <div><small>{{ title }}</small></div>
-        </div>
-        <div>
-            <small>
-                <span><i class="fas fa-comment-dots"></i> Nachricht TODO</span>&nbsp;&nbsp;
-                <span><i class="fas fa-phone"></i> TODO</span>
-            </small>
-        </div>
+{% load static i18n %}
+
+{% with profile=user.cosinnus_profile %}
+    <div class="contact-box">
+	    <img {% if user.cosinnus_profile.avatar_url %}src="{{ profile.avatar_url }}" {% else %} src="{% static 'images/jane-doe.png' %}" {% endif %}>
+	    <div class="contact-box-content">
+	        <div>
+	            <div class="contact-name">
+	                <a href="{{ profile.get_absolute_url }}">
+                       {{ profile.get_full_name }}
+                    </a>
+                </div>
+	            {% if title %}
+                   <div><small>{{ title }}</small></div>
+                {% endif %}
+	        </div>
+	        <div>
+	            <small>
+                    <a href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=user.username %}{% else %}{% url 'postman:write' recipients=user.username %}?next={% url 'postman:sent' %}{% endif %}">
+                        <i class="fas fa-comment-dots"></i>
+                        {% trans "Message" %}
+                    </a>
+                    &nbsp;&nbsp;
+                    <span>
+                        <i class="fas fa-phone"></i>
+                        TODO
+                    </span>
+                </small>
+	        </div>
+	    </div>
     </div>
-</div>
+{% endwith %}
