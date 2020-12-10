@@ -268,7 +268,7 @@ class AdminUserUpdateView(UserProfileUpdateView):
             return super().post(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('cosinnus:administration-users')
+        return self.request.path
 
     def get_form_kwargs(self, *args, **kwargs):
         form_kwargs = super(AdminUserUpdateView, self).get_form_kwargs(*args, **kwargs)
