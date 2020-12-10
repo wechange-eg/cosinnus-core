@@ -5,9 +5,11 @@
     <h1>
     {{title|safe}}
     </h1>
-    {% if excerpt %}
-        <div class="tile-section tile-description">{{excerpt|safe}}</div>
-    {% endif %}
+    <div class="tile-section tile-description">
+        {% if excerpt %}
+            {{excerpt|safe}}
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block icon_area %}

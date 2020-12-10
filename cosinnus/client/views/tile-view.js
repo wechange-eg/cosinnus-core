@@ -45,6 +45,7 @@ module.exports = BaseView.extend({
         if (self.model.get('type') == 'cloudfile') {
             self.template = tileTemplateCloudfile;
             self.state.isSmall = true;
+            self.state.noImage = true;
         } else if (self.model.get('type') == 'people') {
             self.state.isSmall = true;
         } 
