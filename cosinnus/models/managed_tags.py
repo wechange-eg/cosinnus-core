@@ -249,7 +249,7 @@ class CosinnusManagedTag(models.Model):
     name = models.CharField(_('Name'), max_length=250) 
     slug = models.SlugField(_('Slug'), 
         help_text=_('Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'), 
-        max_length=50)
+        max_length=250)
     
     description = models.TextField(verbose_name=_('Short Description'), blank=True)
     
