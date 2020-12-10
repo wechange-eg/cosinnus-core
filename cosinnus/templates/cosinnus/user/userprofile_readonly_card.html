@@ -17,13 +17,11 @@
 	        <div>
 	            <small>
                     <a href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=user.username %}{% else %}{% url 'postman:write' recipients=user.username %}?next={% url 'postman:sent' %}{% endif %}">
-                        <i class="fas fa-comment-dots"></i>
-                        {% trans "Message" %}
+                        <i class="fas fa-comment-dots"></i>&nbsp;{% trans "Message" %}
                     </a>
                     &nbsp;&nbsp;
                     <span>
-                        <i class="fas fa-phone"></i>
-                        TODO
+                        <i class="fas fa-phone"></i>&nbsp;TODO
                     </span>
                 </small>
 	        </div>
