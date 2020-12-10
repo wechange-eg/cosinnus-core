@@ -44,7 +44,14 @@
         </thead>
         {% for user in object_list %}
         <tr>
-            <th><a href="{% url 'cosinnus:administration-user-update' pk=user.id %}">{{ user.email }}</a></th>
+            <th>
+                <a href="{% url 'cosinnus:administration-user-update' pk=user.id %}">
+                {{ user.email }}
+                </a>
+                {% if not user.is_active %}
+                    ({% trans "Account deactivated" %})
+                {% endif %}
+            </th>
             <th>{{ user.first_name }}</th>
             <th>{{ user.last_name }}</th>
             <th>{% if user.last_login %}{{ user.last_login }}{% else %}-{% endif %}</th>

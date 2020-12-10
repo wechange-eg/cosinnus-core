@@ -128,11 +128,13 @@
 				    {% include "cosinnus/user/user_avatar_image.html" with user=request.user image_size="mini" show_v2_icon_on_missing=True %}
 				</a>
 			{% else %}
+			    {% if not SETTINGS.COSINNUS_LANGUAGE_SELECT_DISABLED %}
 				<a class="nav-button nav-header-textlink" rel="toggle" role="button" title="{% trans "Change language" %}"
 			    		aria-expanded="false" aria-controls="language-menu-collapse"
 			    		data-toggle="collapse" data-target="#language-menu-collapse">
 	            	{{ request.LANGUAGE_CODE|upper }}
 	            </a>
+	            {% endif %}
 	            <a class="nav-button nav-header-textlink" href="{% url 'login' %}" title="{% trans "Log in" %}">
 	            	{% trans "Log in" %}
 	            </a>
@@ -282,7 +284,8 @@
         });
     </script>
     {% endif %}
-
+    
+    {% if not SETTINGS.COSINNUS_LANGUAGE_SELECT_DISABLED %}
 	<div class="collapse nav-flyout text-right" id="language-menu-collapse">
 
 		<div class="nav-flyout-section padded">
@@ -303,6 +306,7 @@
 		</div>
 		<div class="nav-flyout-backdrop"></div>
 	</div>
+	{% endif %}
 
 
 	<div class="collapse nav-flyout text-right" id="user-menu-collapse">
@@ -339,6 +343,7 @@
 						</a>
 					</li>
 				{% endblock %}
+				{% if not SETTINGS.COSINNUS_LANGUAGE_SELECT_DISABLED %}
 				<li>
 					<a rel="toggle" class="list-item" role="button" titledby=".item-text" title="{% trans "Change language" %}
 							aria-expanded="false" aria-controls="language-menu-collapse"
@@ -349,6 +354,7 @@
 			    		</div>
 					</a>
 				</li>
+				{% endif %}
 				{% if SETTINGS.COSINNUS_PAYMENTS_ENABLED or SETTINGS.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY and user.is_superuser %}
 				<li>
 					<a href="{% url 'wechange-payments:overview' %}" class="list-item" role="button" titledby=".item-text-title">

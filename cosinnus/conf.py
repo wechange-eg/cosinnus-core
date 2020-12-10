@@ -275,7 +275,10 @@ class CosinnusConf(AppConf):
 
     # should CosinnusOrganizations be enabled for this Portal?
     ORGANIZATIONS_ENABLED = False
-
+    
+    # disables the navbar language select menus
+    LANGUAGE_SELECT_DISABLED = False
+    
     # is the external content (GoodDB for example) enabled?
     EXTERNAL_CONTENT_ENABLED = False
 
