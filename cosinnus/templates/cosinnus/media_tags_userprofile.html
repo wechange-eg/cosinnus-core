@@ -60,6 +60,6 @@
 	        {% include 'cosinnus/user/user_visibility_formfield_options.html' with visibility=object.media_tag.visibility %}
 	    </select>
 	{% endcaptureas %}
-{% endif %}
 
-{% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html label=visibility_label legend=visibility_legend extra_html=visibility_warning_html help_popup="helptext_50_profileprivacy" %}
+    {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html label=visibility_label legend=visibility_legend extra_html=visibility_warning_html help_popup="helptext_50_profileprivacy" %}
+{% endif %}

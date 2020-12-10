@@ -48,7 +48,7 @@ class InactiveLogoutMiddleware:
                 # redirecting to logout with deleting time cookie
                 logout(request)
                 messages.warning(request, _('You have been automatically logged out after being inactive for some time.'))
-                response = redirect(reverse('login')) 
+                response = redirect(reverse('login') + f'?next={request.path}') 
                 response.delete_cookie(self.COOKIE_NAME)
                 return response
 
