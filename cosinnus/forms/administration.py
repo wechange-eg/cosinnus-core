@@ -61,7 +61,7 @@ class UserAdminForm(forms.ModelForm):
             self.instance.username = self.cleaned_data.get('email')[:150]
             user = super().save()
             user.username = str(user.id)
-            user.is_active = False
+            user.is_active = True
             user.save()
         else:
             user = super().save()
