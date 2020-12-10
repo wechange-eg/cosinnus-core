@@ -8,7 +8,7 @@
             {% if SETTINGS.COSINNUS_ENABLE_SDGS %}
 		    var COSINNUS_MAP_SDGS_JSON = {% render_sdg_json %};
 		    {% endif %}
-		    {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED %}
+		    {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP %}
 		    var COSINNUS_MANAGED_TAGS_JSON = {% render_managed_tags_json %};
 		    var COSINNUS_MANAGED_TAGS_LABELS_JSON = {{ COSINNUS_MANAGED_TAG_LABELS.get_labels_dict|json|safe }};
 		    {% endif %}

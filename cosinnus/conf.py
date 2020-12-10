@@ -823,6 +823,8 @@ class CosinnusConf(AppConf):
     MANAGED_TAGS_DEFAULT_INITIAL_SLUG = None
     # the prefix for any automatically created paired groups
     MANAGED_TAGS_PAIRED_GROUPS_PREFIX = None
+    # whether to show the managed tags as a filter on the map
+    MANAGED_TAGS_SHOW_FILTER_ON_MAP = True
     
 
 class CosinnusDefaultSettings(AppConf):
