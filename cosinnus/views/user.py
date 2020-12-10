@@ -199,6 +199,9 @@ class SetInitialPasswordView(TemplateView):
                 if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
                     user.cosinnus_profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), self.request), message=None, priority=True)
                 
+                # send welcome email if enabled
+                _send_user_welcome_email_if_enabled(user)
+                
                 return redirect('login')
             return render(request, template_name=self.template_name, context={'form': form})
         else:
@@ -754,6 +757,7 @@ class CosinnusSetInitialPasswordView(PasswordResetConfirmView):
         ret = super().form_valid(form)
         # send a password changed signal
         signals.user_password_changed.send(sender=self, user=self.request.user)
+        _send_user_welcome_email_if_enabled(self.request.user)
         return ret
 
 
