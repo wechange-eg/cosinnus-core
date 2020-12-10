@@ -65,7 +65,7 @@
 	            {{ form.option_name }}
 	
 	            {# Regular Field #}
-	            {% trans "Enter your choices as comma separated values" as options_legend %}
+	            {% trans "Enter your choices as semicolon separated values" as options_legend %}
 	            {% trans "Enter your choices" as options_placeholder %}
 	            {% include 'cosinnus/fields/default_field.html' with field=form.options label=form.fields.options.label legend=options_legend placeholder=options_placeholder large_field=True %}
 	
