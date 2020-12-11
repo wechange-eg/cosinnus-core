@@ -469,7 +469,8 @@ class CosinnusConf(AppConf):
             'sw_lon': 5.01, # west,
         },
         'geojson_region': None,
-        'filter_panel_default_visible': False,
+        'filter_panel_default_visible': False, # whether the dropdown filter panel should be visible on load
+        'ignore_location_default_activated': False, # whether the "In map area" button should be off on load
     }
     
     # dimensions of the images for map images
