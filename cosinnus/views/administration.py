@@ -208,6 +208,7 @@ class UserListView(ManagedTagsNewsletterMixin, ListView):
     model = get_user_model()
     template_name = 'cosinnus/administration/user_list.html'
     ordering = '-date_joined'
+    paginate_by = 10
 
     def dispatch(self, request, *args, **kwargs):
         if not check_user_superuser(request.user):
@@ -219,8 +220,23 @@ class UserListView(ManagedTagsNewsletterMixin, ListView):
         user.cosinnus_profile.settings['login_token_send'] = timezone.now()
         user.cosinnus_profile.save()
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if self.request.GET.get('search'):
+            search_string = self.request.GET.get('search')
+            qs = qs.filter(email__contains=search_string)
+        return qs
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['total'] = self.get_queryset().count()
+        return context
+
 
     def post(self, request, *args, **kwargs):
+        search_string = ''
+        if 'search' in self.request.POST and request.POST.get('search'):
+            search_string = '?search={}'.format(request.POST.get('search'))
         if 'send_login_token' in self.request.POST:
             if self.request.POST.get('send_login_token') == '__all__':
                 all_users = get_user_model().objects.filter(is_active=False, last_login__isnull=True)
@@ -233,14 +249,15 @@ class UserListView(ManagedTagsNewsletterMixin, ListView):
                 user = get_user_model().objects.get(id=user_id)
                 self.send_login_token(user)
                 messages.add_message(self.request, messages.SUCCESS, _('Login token was sent.'))
-        return HttpResponseRedirect(request.path_info)
+        redirect_path = '{}{}'.format(request.path_info, search_string)
+        return HttpResponseRedirect(redirect_path)
 
 user_list = UserListView.as_view()
 
 class AdminUserUpdateView(UserProfileUpdateView):
     template_name = 'cosinnus/administration/user_update_form.html'
     message_success = _('Die Änderungen wurden erfolgreich gespeichert.')
-    
+
     disable_conditional_field_locking = True
 
     def dispatch(self, request, *args, **kwargs):
