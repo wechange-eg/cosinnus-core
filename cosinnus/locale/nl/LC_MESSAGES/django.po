@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-06 16:06+0200\n"
+"POT-Creation-Date: 2020-11-26 09:08+0100\n"
 "PO-Revision-Date: 2019-09-22 20:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,6 +28,12 @@ msgstr "%(number)d %(objects)s zijn succesvol verwijderd"
 
 msgid "Delete selected entries"
 msgstr "Verwijder geselecteerde items"
+
+msgid "Convert memberships to Admin status"
+msgstr ""
+
+msgid "Convert memberships to Member status"
+msgstr ""
 
 # what do you mean with “string”?
 msgid "A token with the same code already exists! Please choose a different string for your token."
@@ -114,6 +120,9 @@ msgstr "%d Gebruikers zijn succesvol gedeactiveerd."
 #| msgid "Made you an admin"
 msgid "Make user RocketChat admin"
 msgstr "Heeft u een beheerder gemaakt"
+
+msgid "Restart"
+msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Het e-mailadres voor het account dat u probeert te gebruiken, moet worden geactiveerd voordat u kunt inloggen."
@@ -427,6 +436,9 @@ msgstr "Беларуская"
 msgid "Dutch--NATIVE-LANGUAGE"
 msgstr "Nederlands"
 
+msgid "Czech--NATIVE-LANGUAGE"
+msgstr "Čeština"
+
 msgid "Azerbaijani--NATIVE-LANGUAGE"
 msgstr "Azerbaycan dili"
 
@@ -520,6 +532,10 @@ msgstr "Dit lijkt geen geldige Flickr Gallery-link te zijn! Het moet de vorm heb
 msgid "Users"
 msgstr "Gebruikers"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "Groepen"
+
 msgid "Please remove the whitespace from '{}'"
 msgstr ""
 
@@ -537,6 +553,9 @@ msgstr ""
 
 msgid "Name"
 msgstr "Naam"
+
+msgid "The selected choice was not found or invalid! Please choose a different value!"
+msgstr ""
 
 msgid "Limit to teams"
 msgstr "Beperken tot teams"
@@ -737,6 +756,9 @@ msgid "RocketChat room id"
 msgstr ""
 
 msgid "RocketChat room name"
+msgstr ""
+
+msgid "Show chat"
 msgstr ""
 
 msgid "Allow users to create new coffee tables"
@@ -1183,6 +1205,60 @@ msgstr "Cosinnus Idee"
 msgid "Cosinnus Ideas"
 msgstr "Cosinnus Ideeën"
 
+msgid "Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Idea"
+msgid "Create Managed Tag"
+msgstr "Maak idee"
+
+msgid "Edit Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Idea"
+msgid "Delete Managed Tag"
+msgstr "Verwijder idee"
+
+msgid "Managed Tag Assignment"
+msgstr ""
+
+msgid "Managed Tag Assignments"
+msgstr ""
+
+msgid "No Tag selected"
+msgstr ""
+
+#, fuzzy
+#| msgid "Approach"
+msgid "Approved"
+msgstr "Benadering"
+
+msgid "Color"
+msgstr ""
+
+#, fuzzy
+#| msgid "Main background color (css hex value, with or without \"#\")"
+msgid "Optional color code (css hex value, with or without \"#\")"
+msgstr "Hoofdkleur achtergrond (css hex value, with or without “#”)"
+
+#, fuzzy
+#| msgid "Parent Group"
+msgid "Paired Group"
+msgstr "Ouder Groep"
+
+msgid "A paired group will automatically be joined by all users assigned to this object."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search Synonyms"
+msgstr "Zoek in teams"
+
+msgid "Comma-seperated list of phrases for which auto-complete matches, even partial, will return this object."
+msgstr ""
+
 msgid "Is Moderator"
 msgstr "Is Moderator"
 
@@ -1358,10 +1434,6 @@ msgstr "Evenementen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Projecten"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Groups"
-msgstr "Groepen"
 
 msgid "At least one type of Map object must be chosen!"
 msgstr "Er moet ten minste één type Kaartobject worden gekozen!"
@@ -1950,6 +2022,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
 msgstr "helptext_13_groupadministration"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_13_groupadministration"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_15_organization"
+msgstr "helptext_13_groupadministration"
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
 msgstr "helptext_50_profileprivacy"
@@ -2166,6 +2245,12 @@ msgstr "Kies en upload een galerij afbeelding"
 #| msgid "Example: http://mywebsite.com"
 msgid "Example: https://twitter.com/myaccount"
 msgstr "Voorbeeld: http://mywebsite.com"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Website"
+msgid "website"
+msgstr "Website"
 
 msgid "Re-Activate Project/Group"
 msgstr "Re-activeer Project/Groep"
@@ -2836,6 +2921,12 @@ msgstr "Portaalbeheerders"
 msgid "All societies"
 msgstr "Alle samenlevingen"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organizations"
+msgstr "Uitnodigingen"
+
 msgid "Re-activate Group"
 msgstr "Re-activeer Groep"
 
@@ -2850,6 +2941,101 @@ msgstr "Deactiveer Project"
 
 msgid "Withdraw Request"
 msgstr "Verzoek intrekken"
+
+#, fuzzy, python-format
+#| msgid "%(team_name)s - Members"
+msgid "%(team_name)s - Assigned organizations"
+msgstr "%(team_name)s - Leden"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Assigned organizations"
+msgstr "Uitnodigingen"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organizations..."
+msgstr "Verwijder uitnodiging"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organization"
+msgstr "Verwijder uitnodiging"
+
+msgid "Enter a name to find organizations to request..."
+msgstr ""
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Request organizations"
+msgstr "Uitnodigingen"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Requested organizations"
+msgstr "Verwijder uitnodiging"
+
+#, fuzzy
+#| msgctxt "withdraw join team button second item"
+#| msgid "Request"
+msgid "Revoke request"
+msgstr "Aanvragen"
+
+#, fuzzy
+#| msgid "Decline Member"
+msgid "Decline request"
+msgstr "Lid weigeren"
+
+#, fuzzy
+#| msgid "Accept Member"
+msgid "Accept request"
+msgstr "Accepteer lid"
+
+#, fuzzy
+#| msgctxt "join request pending team button second item"
+#| msgid "Requested"
+msgid "Requested"
+msgstr "Aangevraagd"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to revoke the request for „%(name)s“?"
+msgstr "Wilt u de uitnodiging voor lid “%(name)s” echt intrekken?"
+
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Revoke request for organization"
+msgstr "Zoek naar Gebruikers"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to decline the request?"
+msgstr "Wilt u de uitnodiging echt weigeren?"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organization invitations"
+msgstr "Uitnodigingen"
+
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Decline invitation"
+msgstr "Uitnodiging afwijzen"
+
+#, fuzzy
+#| msgid "Invite"
+msgid "Invited"
+msgstr "Uitnodigen"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove „%(name)s“ from the organization?"
+msgstr "Wilt u echt lid “%(name)s” uit het team verwijderen?"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove organization"
+msgstr "Verwijder locatie"
 
 msgid "Workshop Participant File Upload"
 msgstr ""
@@ -3550,12 +3736,6 @@ msgid "All Ideas"
 msgstr "Alle ideeën"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Invitations"
-msgid "Organizations"
-msgstr "Uitnodigingen"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "My Organizations"
 msgstr ""
 
@@ -4080,6 +4260,10 @@ msgid "Browse all Projects"
 msgstr "Blader door alle projecten"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "My Conferences"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "You have not RSVPed to any Events."
 msgid "You have not created any organizations yet."
@@ -4306,6 +4490,24 @@ msgstr "Projecten - Gemaakt van dit idee"
 #| msgid "You are a Member"
 msgid "You are a Admin"
 msgstr "U bent een lid"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Membership request pending..."
+msgid "Ownership request pending..."
+msgstr "Lidmaatschapsverzoek in behandeling…"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Projects and groups"
+msgstr "Mijn Projecten en Groepen"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group"
+msgstr "Projecten/Groepen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Open to be contacted about potential collaboration opportunities"
@@ -5247,6 +5449,16 @@ msgstr "Deze item wordt nu weergegeven in deze projecten/groepen: %(group_names)
 #| msgid "Which apps should be activated?"
 msgid "The %s-app was activated!"
 msgstr "Welke apps moeten worden geactiveerd?"
+
+#, fuzzy, python-format
+#| msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+msgstr "U heeft gevraagd om lid te worden van de %(team_type)s“%(team_name)s”. U ontvangt een e-mail zodra een van de teambeheerder op uw verzoek reageert."
+
+#, fuzzy, python-format
+#| msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
+msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgstr "U bent al uitgenodigd voor “%(team_name)s” en nu bent u lid geworden!"
 
 msgid "No appname given for adding containers."
 msgstr "Geen appnaam gegeven voor het toevoegen van containers."
