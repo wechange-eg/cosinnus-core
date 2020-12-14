@@ -31,8 +31,70 @@
         </div>
     </form>
     <h2 class="white-text large-space">{% trans 'Users' %}</h2>
+    <form method="post">{% csrf_token %}
+        <div class="row">
+            <div class="col-md-10">
+                <div type="button" class="btn btn-default w100">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-search"></i>
+                            </a>
+                            <div class="media-body media-body-form-control">
+                                <input class="form-control"
+                                    placeholder="{% trans 'Search for email' %}"
+                                    name="search" {% if request.GET.search %}value="{{ request.GET.search }}"{% endif %}>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-emphasized large-space" title="{% trans 'search' %}">
+                    <ul class="media-list">
+                        <li class="media">
+                            <div class="media-body">
+                                {% trans 'search' %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            </div>
+
+        </div>
+    </form>
+
+
     {% if object_list %}
-    <table class="table table-striped white-content">
+
+    {% if request.GET.search %}
+        <div class="user-management-search-result large-space">
+            <div>
+                {% blocktrans with search_string=request.GET.search count total=total %}
+                Found {{ total }} user with an email that contains: '{{ search_string }}'
+                {% plural %}
+                Found {{ total }} users with an email that contains: '{{ search_string }}'
+                {% endblocktrans %}
+            </div>
+
+            <button class="btn btn-small" href="{% url 'cosinnus:administration-users' %}">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left">
+                            <i class="fas fa-times"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans 'clear search' %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+
+        </div>
+    {% endif %}
+
+    <table class="table table-striped white-content user-management-user-list">
         <thead>
             <tr>
                 <th>{% trans "Email" %}</th>
@@ -88,9 +150,52 @@
         {% endfor %}
     </table>
     {% else %}
+        <div class="user-management-search-result large-space">
+        {% if request.GET.search %}
+        <div>{% blocktrans with search_string=request.GET.search%}Could not find any users with an email that contains '{{ search_string }}.'{% endblocktrans %}</div>
+
+        <button class="btn btn-small" href="{% url 'cosinnus:administration-users' %}">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="media-body">
+                        {% trans 'clear search' %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+        {% else %}
         {% trans "There are no users yet." %}
+        {% endif %}
+        </div>
+    {% endif %}
+
+    {% if object_list %}
+    <div class="user-management-search-pagination row">
+        <class class="col-xs-4">
+            {% if page_obj.has_previous %}
+                <a href="?page=1{% if request.GET.search %}&search={{ request.GET.search}}{% endif %}">&laquo; {% trans 'to first page' %}</a>
+                <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search}}{% endif %}">{% trans 'previous' %}</a>
+            {% endif %}
+        </class>
+
+        <div class="col-xs-4 current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </div>
+
+        <div class="col-xs-4 next">
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search}}{% endif %}">{% trans 'next' %} &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
     {% endif %}
 </div>
+
+
+
 <div class="fadedown pull-right">
     <button class="btn btn-emphasized btn-autosize" href="{% url 'cosinnus:administration-user-create' %}">
         <ul class="media-list">
