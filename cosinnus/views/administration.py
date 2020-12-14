@@ -208,7 +208,7 @@ class UserListView(ManagedTagsNewsletterMixin, ListView):
     model = get_user_model()
     template_name = 'cosinnus/administration/user_list.html'
     ordering = '-date_joined'
-    paginate_by = 10
+    paginate_by = 50
 
     def dispatch(self, request, *args, **kwargs):
         if not check_user_superuser(request.user):
