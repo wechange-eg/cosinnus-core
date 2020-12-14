@@ -429,6 +429,9 @@ msgstr "Беларуская"
 msgid "Dutch--NATIVE-LANGUAGE"
 msgstr "Nederlands"
 
+msgid "Czech--NATIVE-LANGUAGE"
+msgstr "Čeština"
+
 msgid "Azerbaijani--NATIVE-LANGUAGE"
 msgstr "Azerbaycan dili"
 
@@ -4456,6 +4459,10 @@ msgid "Create Organization"
 msgstr "Sauberes Wasser und sanitäre Anlagen"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Cloud Files"
+msgstr " Cloud-Dateien"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
 msgstr ""
 
@@ -4646,6 +4653,10 @@ msgstr "Auf der Karte"
 #. Translators: __INCLUDE_JS_PO__
 msgid "In my Groups and Projects"
 msgstr "In meinen Gruppen und Projekten"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "In my Cloud Files"
+msgstr "In meinen Cloud-Dateien"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Topic"

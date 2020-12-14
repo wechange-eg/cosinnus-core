@@ -29,6 +29,12 @@ msgstr "%(number)d %(objects)s ont été supprimés avec succès"
 msgid "Delete selected entries"
 msgstr "Supprimer les entrées sélectionnées"
 
+msgid "Convert memberships to Admin status"
+msgstr ""
+
+msgid "Convert memberships to Member status"
+msgstr ""
+
 msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr "Un jeton avec le même code existe déjà! choisissez une chaîne différente pour votre jeton."
 
@@ -440,6 +446,9 @@ msgstr "Беларуская"
 
 msgid "Dutch--NATIVE-LANGUAGE"
 msgstr "Nederlands"
+
+msgid "Czech--NATIVE-LANGUAGE"
+msgstr "Čeština"
 
 msgid "Azerbaijani--NATIVE-LANGUAGE"
 msgstr "Azerbaycan dili"
@@ -4271,6 +4280,12 @@ msgid "Create Organization"
 msgstr "Supprimer l'invitation"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Cloud Files"
+msgstr "Télécharger une image."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
 msgstr "SDGS"
 
@@ -4491,6 +4506,12 @@ msgstr "Sur la carte"
 #| msgid "Convert selected Groups to Projects"
 msgid "In my Groups and Projects"
 msgstr "Convertir les groupes sélectionnés en projets"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Search in teams"
+msgid "In my Cloud Files"
+msgstr "Rechercher dans les équipes"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -5865,6 +5886,11 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#, fuzzy
+#~| msgid "Restricted"
+#~ msgid "Restart"
+#~ msgstr "Restreint"
 
 #, fuzzy
 #~| msgid "Participants"

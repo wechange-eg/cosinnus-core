@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from copy import copy
 import datetime
+import re
 
 from django.urls import reverse
 from django.db.models import Q
@@ -40,7 +41,7 @@ class DictResult(dict):
     def __init__(self, *args, **kwargs):
         for key in list(self.fields.keys()):
             val = kwargs.get(key, self.fields.get(key))
-            if val == REQUIRED:
+            if val is REQUIRED:
                 raise Exception('MAP API Error: Expected required key "%s" for MapResult!' % key)
         return super(DictResult, self).__init__(*args, **kwargs)
 
@@ -552,9 +553,42 @@ class DetailedOrganizationMapResult(DetailedMapResult):
             'groups': [HaystackGroupMapCard(result) for result in sqs]
         })
         
-        ret = super(DetailedOrganizationMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
-        return ret
+        super(DetailedOrganizationMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
+
+
+class CloudfileMapCard(BaseMapCard):
+    fields = BaseMapCard.fields.copy()
+    fields.update({
+        "mtime": None,
+        "mime": None,
+        "size": None,
+        "excerpt": None,
+    })
+
+    def __init__(self, document, query, *args, **kwargs):
+
+        query_regexp = "|".join(re.escape(word) for word in query.split())
+
+        try:
+            excerpt = escape(document['excerpts'][0]['excerpt'])
+        except LookupError:
+            excerpt = None
+        else:
+            excerpt = re.sub(query_regexp, r"<b>\g<0></b>", excerpt, flags=re.IGNORECASE)
+
+
+        super().__init__(
+            id=document['id'],
+            type="cloudfile",
+            slug=f"{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}{document['link']}",
+            title=re.sub(query_regexp, r"<b>\g<0></b>", escape(document['title']), flags=re.IGNORECASE),
+            mime=document['info']['mime'],
+            size=document['info']['size'],
+            mtime=document['info']['mtime'],
+            excerpt=excerpt,
+            **kwargs
+        )
 
 SHORTENED_ID_MAP = {
     'cosinnus.cosinnusproject': 1,

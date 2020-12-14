@@ -19,7 +19,7 @@ from cosinnus.conf import settings
 from cosinnus.forms.search import filter_searchqueryset_for_read_access, \
     filter_searchqueryset_for_portal
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.map import HaystackMapResult, \
+from cosinnus.models.map import CloudfileMapCard, HaystackMapResult, \
     SEARCH_MODEL_NAMES, SEARCH_MODEL_NAMES_REVERSE, \
     SEARCH_RESULT_DETAIL_TYPE_MAP, \
     SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS, \
@@ -104,6 +104,10 @@ if settings.COSINNUS_ORGANIZATIONS_ENABLED:
     MAP_SEARCH_PARAMETERS.update({
         'organizations': True,
     })
+if settings.COSINNUS_CLOUD_ENABLED:
+    MAP_SEARCH_PARAMETERS.update({
+        'cloudfiles': True,
+    })
 
 
 def map_search_endpoint(request, filter_group_id=None):
@@ -120,6 +124,9 @@ def map_search_endpoint(request, filter_group_id=None):
     page = params['page']
     item_id = params['item']
     
+    if params.get('cloudfiles', False):
+        return map_cloudfiles_endpoint(request, query, limit, page)
+
     # TODO: set to  params['external'] after the external switch button is in frontend!
     external = settings.COSINNUS_EXTERNAL_CONTENT_ENABLED
     
@@ -224,6 +231,32 @@ def map_search_endpoint(request, filter_group_id=None):
         'page': page_obj,
     }
     return JsonResponse(data)
+
+def map_cloudfiles_endpoint(request, query, limit, page):
+    from cosinnus_cloud.utils.nextcloud import perform_fulltext_search
+    from cosinnus_cloud.hooks import get_nc_user_id
+
+    result = perform_fulltext_search(get_nc_user_id(request.user), query, page=page+1, page_size=limit)
+
+    if result['documents']:
+        total_count = result['meta']['total']
+        count = result['meta']['count']
+        page_obj = {
+            'index': page,
+            'count': count,
+            'total_count': total_count,
+            'start': (limit * page) + 1,
+            'end': (limit * page) + count,
+            'has_next': total_count > (limit * (page + 1)),
+            'has_previous': page > 0,
+        }
+    else:
+        page_obj = None
+
+    return JsonResponse({
+        "results": [CloudfileMapCard(doc, query) for doc in result["documents"]],
+        "page": page_obj
+    })
 
 
 MAP_DETAIL_PARAMETERS = {

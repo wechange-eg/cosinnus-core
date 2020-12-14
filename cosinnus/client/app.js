@@ -166,7 +166,6 @@ var App = function App () {
         var allManagedTags = typeof COSINNUS_MANAGED_TAGS_JSON !== 'undefined' ? COSINNUS_MANAGED_TAGS_JSON : {};
         var managedTagsLabels = typeof COSINNUS_MANAGED_TAGS_LABELS_JSON !== 'undefined' ? COSINNUS_MANAGED_TAGS_LABELS_JSON : {};
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
-
         self.controlView = new ControlView({
                 el: null, // will only be set if attached to tile-view
                 availableFilters: self.settings.availableFilters,
@@ -186,6 +185,7 @@ var App = function App () {
                 fullscreen: self.displayOptions.fullscreen,
                 splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles,
                 searchResultLimit: self.settings.searchResultLimit || 20,
+                hideTopics: self.settings.hideTopics || false,
             }, 
             self, 
             null
@@ -294,14 +294,16 @@ var App = function App () {
         var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
         var sdgsJson = typeof COSINNUS_MAP_SDGS_JSON !== 'undefined' ? COSINNUS_MAP_SDGS_JSON : {};
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
-        
+        var cloudEnabled = COSINNUS_CLOUD_ENABLED || false;
+
         if (self.navbarQuickSearchView == null) {
         	self.navbarQuickSearchView = new NavbarQuickSearchView({
         		model: null,
         		el: el,
         		topicsJson: topicsJson,
                 sdgsJson: sdgsJson,
-        		portalInfo: portalInfo,
+                portalInfo: portalInfo,
+                cloudEnabled: cloudEnabled,
         	}, 
         	self
         	).render();

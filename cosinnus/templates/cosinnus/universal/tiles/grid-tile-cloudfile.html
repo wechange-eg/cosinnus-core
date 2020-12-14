@@ -1,0 +1,17 @@
+{% extends 'tiles/grid-tile-base' %}
+{% import "include/macros.html" as macros %}
+
+{% block description_area %}
+    <h1>
+    {{title|safe}}
+    </h1>
+    <div class="tile-section tile-description">
+        {% if excerpt %}
+            {{excerpt|safe}}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block icon_area %}
+    <i class="fa fa-cloud"></i>
+{% endblock %}

@@ -29,6 +29,12 @@ msgstr "%(number)d %(objects)s נמחקו בהצלחה"
 msgid "Delete selected entries"
 msgstr "מחק ערכים נבחרים"
 
+msgid "Convert memberships to Admin status"
+msgstr ""
+
+msgid "Convert memberships to Member status"
+msgstr ""
+
 #, fuzzy
 msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr "אסימון עם אותו קוד כבר קיים! בחר מחרוזת אחרת עבור האסימון שלך."
@@ -420,6 +426,9 @@ msgstr "Беларуская"
 
 msgid "Dutch--NATIVE-LANGUAGE"
 msgstr "Nederlands"
+
+msgid "Czech--NATIVE-LANGUAGE"
+msgstr "Čeština"
 
 msgid "Azerbaijani--NATIVE-LANGUAGE"
 msgstr "Azerbaycan dili"
@@ -4179,6 +4188,12 @@ msgid "Create Organization"
 msgstr "מחק הזמנה"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Upload File"
+msgid "Cloud Files"
+msgstr "העלה קובץ"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
 msgstr "יעדי התפתחות ברת קיימה"
 
@@ -4367,6 +4382,12 @@ msgstr "על המפה"
 #. Translators: __INCLUDE_JS_PO__
 msgid "In my Groups and Projects"
 msgstr "בקבוצות ובפרויקטים שלי"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Searching in Cloud files"
+msgid "In my Cloud Files"
+msgstr "מחפש בקבצי ענן"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
