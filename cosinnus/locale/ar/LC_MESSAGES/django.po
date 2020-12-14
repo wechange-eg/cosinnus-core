@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 09:08+0100\n"
+"POT-Creation-Date: 2020-12-14 14:38+0100\n"
 "PO-Revision-Date: 2020-11-26 08:58+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -122,9 +122,6 @@ msgid "%d Users were made RocketChat admins."
 msgstr "%d تم إلغاء تنشيط المستخدمين بنجاح."
 
 msgid "Make user RocketChat admin"
-msgstr ""
-
-msgid "Restart"
 msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
@@ -795,9 +792,6 @@ msgstr "دردشة.Rocket"
 #| msgid "Rocket.Chat"
 msgid "RocketChat room name"
 msgstr "دردشة.Rocket"
-
-msgid "Show chat"
-msgstr ""
 
 msgid "Allow users to create new coffee tables"
 msgstr ""
@@ -4229,6 +4223,12 @@ msgid "Create Organization"
 msgstr "حذف الدعوة"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Upload File"
+msgid "Cloud Files"
+msgstr "تحميل ملف"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
 msgstr ""
 
@@ -4416,6 +4416,12 @@ msgstr "على الخارطة"
 #. Translators: __INCLUDE_JS_PO__
 msgid "In my Groups and Projects"
 msgstr "في مجموعاتي ومشاريعي"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Searching in Cloud files"
+msgid "In my Cloud Files"
+msgstr "البحث في ملفات السحابة"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Topic"

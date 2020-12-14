@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 09:08+0100\n"
-"PO-Revision-Date: 2020-11-26 09:21+0100\n"
+"POT-Creation-Date: 2020-12-14 14:38+0100\n"
+"PO-Revision-Date: 2020-12-14 14:41+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -119,9 +119,6 @@ msgstr "%d Benutzer wurden erfolgreich deaktiviert."
 #| msgid "Made you an admin"
 msgid "Make user RocketChat admin"
 msgstr "Hat dich zum Administrator befördert"
-
-msgid "Restart"
-msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Die E-Mail-Adresse des Accounts, mit dem du versuchst einzuloggen, muss erst bestätigt werden."
@@ -4107,6 +4104,10 @@ msgid "Create Organization"
 msgstr "Sauberes Wasser und sanitäre Anlagen"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Cloud Files"
+msgstr " Cloud-Dateien"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
 msgstr ""
 
@@ -4297,6 +4298,10 @@ msgstr "Auf der Karte"
 #. Translators: __INCLUDE_JS_PO__
 msgid "In my Groups and Projects"
 msgstr "In meinen Gruppen und Projekten"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "In my Cloud Files"
+msgstr "In meinen Cloud-Dateien"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
@@ -5570,14 +5575,14 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
-msgid "HTML code"
-msgstr "HTML-Code"
+#~ msgid "HTML code"
+#~ msgstr "HTML-Code"
 
-msgid "Show chat"
-msgstr "Chat anzeigen"
+#~ msgid "Show chat"
+#~ msgstr "Chat anzeigen"
 
-msgid "Check this to show rocket chat in the sidebar."
-msgstr "Rocket.Chat in der Seitenleiste anzeigen"
+#~ msgid "Check this to show rocket chat in the sidebar."
+#~ msgstr "Rocket.Chat in der Seitenleiste anzeigen"
 
 #~ msgid "Conference is not running"
 #~ msgstr "Tagung läuft gerade nicht"

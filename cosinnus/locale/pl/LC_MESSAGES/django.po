@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 09:08+0100\n"
+"POT-Creation-Date: 2020-12-14 14:38+0100\n"
 "PO-Revision-Date: 2020-10-13 13:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -115,11 +115,6 @@ msgstr "%d Użytkowników stało się adminami RocketChat."
 
 msgid "Make user RocketChat admin"
 msgstr "Zrób użytkownika RocketChat administratorem"
-
-#, fuzzy
-#| msgid "Restricted"
-msgid "Restart"
-msgstr "Ograniczony"
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Adres E-mail dla konta, które chcesz użyć wymaga aktywacji zanim będziesz mógł/mogła się zalogować."
@@ -730,9 +725,6 @@ msgstr "ID pokoju RocketChat"
 
 msgid "RocketChat room name"
 msgstr "Nazwa pokoju Rocket.Chat"
-
-msgid "Show chat"
-msgstr ""
 
 msgid "Allow users to create new coffee tables"
 msgstr "Pozwól użytkownikom na utworzenie nowych coffee tables"
@@ -4076,6 +4068,12 @@ msgid "Create Organization"
 msgstr "Stwórz Organizację"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Upload File"
+msgid "Cloud Files"
+msgstr "Prześlij obraz"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
 msgstr "SDGS"
 
@@ -4256,6 +4254,12 @@ msgstr "Na mapie"
 #. Translators: __INCLUDE_JS_PO__
 msgid "In my Groups and Projects"
 msgstr "W moich Grupach i Projektach"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Searching in Cloud files"
+msgid "In my Cloud Files"
+msgstr "Wyszukiwanie w plikach Chmury"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
@@ -5512,6 +5516,11 @@ msgstr "Obecnie nie jesteś członkiem %s! Jeśli chcesz nim zostać, możesz wy
 
 msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
+
+#, fuzzy
+#~| msgid "Restricted"
+#~ msgid "Restart"
+#~ msgstr "Ograniczony"
 
 #, fuzzy
 #~| msgid "Participants"

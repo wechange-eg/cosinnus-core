@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 09:08+0100\n"
+"POT-Creation-Date: 2020-12-14 14:38+0100\n"
 "PO-Revision-Date: 2020-01-14 19:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -119,9 +119,6 @@ msgstr "%d карыстальнікаў(-ц) паспяхова дэактыва
 #| msgid "Made you an admin"
 msgid "Make user RocketChat admin"
 msgstr "Зрабіў(-ла) Вас адміністратарам"
-
-msgid "Restart"
-msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr ""
@@ -762,9 +759,6 @@ msgid "RocketChat room id"
 msgstr ""
 
 msgid "RocketChat room name"
-msgstr ""
-
-msgid "Show chat"
 msgstr ""
 
 msgid "Allow users to create new coffee tables"
@@ -4201,6 +4195,12 @@ msgid "Create Organization"
 msgstr "Выдаліць запрашэнне"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Cloud Files"
+msgstr "Зацягніце выяву."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
 msgstr ""
 
@@ -4421,6 +4421,12 @@ msgstr ""
 #| msgid "Convert selected Groups to Projects"
 msgid "In my Groups and Projects"
 msgstr "Ператварыць выбраныя групы ў праекты"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Search in teams"
+msgid "In my Cloud Files"
+msgstr "Шукаць ў камандах"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy

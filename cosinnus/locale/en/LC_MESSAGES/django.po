@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 09:08+0100\n"
+"POT-Creation-Date: 2020-12-14 14:38+0100\n"
 "PO-Revision-Date: 2020-04-27 12:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -113,9 +113,6 @@ msgid "%d Users were made RocketChat admins."
 msgstr ""
 
 msgid "Make user RocketChat admin"
-msgstr ""
-
-msgid "Restart"
 msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
@@ -741,9 +738,6 @@ msgid "RocketChat room id"
 msgstr ""
 
 msgid "RocketChat room name"
-msgstr ""
-
-msgid "Show chat"
 msgstr ""
 
 msgid "Allow users to create new coffee tables"
@@ -4067,6 +4061,10 @@ msgid "Create Organization"
 msgstr "There are no groups."
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Cloud Files"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
 msgstr ""
 
@@ -4279,6 +4277,10 @@ msgstr ""
 #| msgid "My Projects"
 msgid "In my Groups and Projects"
 msgstr "My Projects"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "In my Cloud Files"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Topic"

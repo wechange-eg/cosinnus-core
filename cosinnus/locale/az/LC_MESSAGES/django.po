@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 09:08+0100\n"
+"POT-Creation-Date: 2020-12-14 14:38+0100\n"
 "PO-Revision-Date: 2020-05-10 13:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -119,9 +119,6 @@ msgstr "%d İstifadəçilər uğurla de aktivasiya edildi."
 #| msgid "Made you an admin"
 msgid "Make user RocketChat admin"
 msgstr "Sizi admin etdi"
-
-msgid "Restart"
-msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "İstifadə etməyə çalışdığınız hesabın e-poçt ünvanı, giriş etməzdən əvvəl aktivləşdirilməlidir."
@@ -745,9 +742,6 @@ msgstr "Rocket.Çat"
 #| msgid "Rocket.Chat"
 msgid "RocketChat room name"
 msgstr "Rocket.Çat"
-
-msgid "Show chat"
-msgstr ""
 
 msgid "Allow users to create new coffee tables"
 msgstr ""
@@ -4134,6 +4128,12 @@ msgid "Create Organization"
 msgstr "Dəvəti ləğv edin"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Cloud Files"
+msgstr "Şəkil yükləyin."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
 msgstr ""
 
@@ -4322,6 +4322,12 @@ msgstr "Xəritədə"
 #. Translators: __INCLUDE_JS_PO__
 msgid "In my Groups and Projects"
 msgstr "In my Groups and Projects"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Search in teams"
+msgid "In my Cloud Files"
+msgstr "Komandalarda axtarın"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Topic"

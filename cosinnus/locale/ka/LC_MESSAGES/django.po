@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 09:08+0100\n"
+"POT-Creation-Date: 2020-12-14 14:38+0100\n"
 "PO-Revision-Date: 2020-04-07 15:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -119,9 +119,6 @@ msgstr "%d მომხმარებლების დეაქტივა�
 #| msgid "Made you an admin"
 msgid "Make user RocketChat admin"
 msgstr "მოახდინა თქვენი ადმინისტრატორად დასმა"
-
-msgid "Restart"
-msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "ელექტრონული ფოსტა, რომელსაც ანგარიშში შესასვლელად იყენებთ, შესვლამდე უნდა გააქტიუროთ."
@@ -745,9 +742,6 @@ msgstr "Rocket.Chat"
 #| msgid "Rocket.Chat"
 msgid "RocketChat room name"
 msgstr "Rocket.Chat"
-
-msgid "Show chat"
-msgstr ""
 
 msgid "Allow users to create new coffee tables"
 msgstr ""
@@ -4132,6 +4126,12 @@ msgid "Create Organization"
 msgstr "მოწვევის წაშლა"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Cloud Files"
+msgstr "გამოსახულების ატვირთვა."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
 msgstr ""
 
@@ -4321,6 +4321,12 @@ msgstr "რუკაზე"
 #. Translators: __INCLUDE_JS_PO__
 msgid "In my Groups and Projects"
 msgstr "ჩემს ჯგუფებში და პროექტებში"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Search in teams"
+msgid "In my Cloud Files"
+msgstr "ძიება საგნებში"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
