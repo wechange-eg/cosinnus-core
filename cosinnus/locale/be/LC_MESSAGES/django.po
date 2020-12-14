@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-06 16:06+0200\n"
+"POT-Creation-Date: 2020-11-26 09:08+0100\n"
 "PO-Revision-Date: 2020-01-14 19:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,6 +28,12 @@ msgstr "%(number)d %(objects)s паспяхова выдаленыя"
 
 msgid "Delete selected entries"
 msgstr "Выдаліць абраныя запісы"
+
+msgid "Convert memberships to Admin status"
+msgstr ""
+
+msgid "Convert memberships to Member status"
+msgstr ""
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr "Маркер з такім жа кодам ужо існуе! Калі ласка, абярыце іншы радок для вашага маркера."
@@ -113,6 +119,9 @@ msgstr "%d карыстальнікаў(-ц) паспяхова дэактыва
 #| msgid "Made you an admin"
 msgid "Make user RocketChat admin"
 msgstr "Зрабіў(-ла) Вас адміністратарам"
+
+msgid "Restart"
+msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr ""
@@ -431,6 +440,9 @@ msgstr "Беларуская"
 msgid "Dutch--NATIVE-LANGUAGE"
 msgstr "Nederlands"
 
+msgid "Czech--NATIVE-LANGUAGE"
+msgstr "Čeština"
+
 msgid "Azerbaijani--NATIVE-LANGUAGE"
 msgstr "Azerbaycan dili"
 
@@ -524,6 +536,10 @@ msgstr "Выглядае, што гэта несапраўдная спасыл�
 msgid "Users"
 msgstr "Карыстальнікі(-цы)"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "Групы"
+
 msgid "Please remove the whitespace from '{}'"
 msgstr ""
 
@@ -541,6 +557,9 @@ msgstr ""
 
 msgid "Name"
 msgstr "Імя"
+
+msgid "The selected choice was not found or invalid! Please choose a different value!"
+msgstr ""
 
 msgid "Limit to teams"
 msgstr "Абмежаваць камандамі"
@@ -743,6 +762,9 @@ msgid "RocketChat room id"
 msgstr ""
 
 msgid "RocketChat room name"
+msgstr ""
+
+msgid "Show chat"
 msgstr ""
 
 msgid "Allow users to create new coffee tables"
@@ -1193,6 +1215,60 @@ msgstr "Cosinnus-ідэя"
 msgid "Cosinnus Ideas"
 msgstr "Cosinnus-ідэі"
 
+msgid "Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Idea"
+msgid "Create Managed Tag"
+msgstr "Стварыць ідэю"
+
+msgid "Edit Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Idea"
+msgid "Delete Managed Tag"
+msgstr "Выдаліць ідэю"
+
+msgid "Managed Tag Assignment"
+msgstr ""
+
+msgid "Managed Tag Assignments"
+msgstr ""
+
+msgid "No Tag selected"
+msgstr ""
+
+#, fuzzy
+#| msgid "Approach"
+msgid "Approved"
+msgstr "Падыход"
+
+msgid "Color"
+msgstr ""
+
+#, fuzzy
+#| msgid "Main background color (css hex value, with or without \"#\")"
+msgid "Optional color code (css hex value, with or without \"#\")"
+msgstr "Галоўны фонавы колер (шаснаццатковае значэнне css, з ці без \"#\")"
+
+#, fuzzy
+#| msgid "Parent Group"
+msgid "Paired Group"
+msgstr "Бацькоўская група"
+
+msgid "A paired group will automatically be joined by all users assigned to this object."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search Synonyms"
+msgstr "Шукаць ў камандах"
+
+msgid "Comma-seperated list of phrases for which auto-complete matches, even partial, will return this object."
+msgstr ""
+
 msgid "Is Moderator"
 msgstr "З'яўляецца мадэратарам"
 
@@ -1374,10 +1450,6 @@ msgstr "Падзеі"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Праекты"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Groups"
-msgstr "Групы"
 
 msgid "At least one type of Map object must be chosen!"
 msgstr "Трэба абраць хаця б адзін тып аб'екта на карце!"
@@ -1984,6 +2056,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
 msgstr "helptext_1_адміністрацыя_групы"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_13_groupadministration"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_15_organization"
+msgstr "helptext_1_адміністрацыя_групы"
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
 msgstr "helptext_1_прыватнасць_профіля"
@@ -2200,6 +2279,12 @@ msgstr "Выберыце і зацягніце выяву галерэі"
 #| msgid "Example: http://mywebsite.com"
 msgid "Example: https://twitter.com/myaccount"
 msgstr "Прыклад: http://mywebsite.com"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Website"
+msgid "website"
+msgstr "Вэбсайт"
 
 msgid "Re-Activate Project/Group"
 msgstr "Узнавіць праект/групу"
@@ -2872,6 +2957,12 @@ msgstr "Адміністратары партала"
 msgid "All societies"
 msgstr "Усе аб'яднанні"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organizations"
+msgstr "Запрашэнні"
+
 msgid "Re-activate Group"
 msgstr "Узнавіць групу"
 
@@ -2886,6 +2977,101 @@ msgstr "Пазначыць праект як неактыўны"
 
 msgid "Withdraw Request"
 msgstr "Адклікаць запыт"
+
+#, fuzzy, python-format
+#| msgid "%(team_name)s - Members"
+msgid "%(team_name)s - Assigned organizations"
+msgstr "%(team_name)s - чальцы"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Assigned organizations"
+msgstr "Запрашэнні"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organizations..."
+msgstr "Выдаліць запрашэнне"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organization"
+msgstr "Выдаліць запрашэнне"
+
+msgid "Enter a name to find organizations to request..."
+msgstr ""
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Request organizations"
+msgstr "Запрашэнні"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Requested organizations"
+msgstr "Выдаліць запрашэнне"
+
+#, fuzzy
+#| msgctxt "withdraw join team button second item"
+#| msgid "Request"
+msgid "Revoke request"
+msgstr "запыт"
+
+#, fuzzy
+#| msgid "Decline Member"
+msgid "Decline request"
+msgstr "Адмовіць кандыдату(-цы)"
+
+#, fuzzy
+#| msgid "Accept Member"
+msgid "Accept request"
+msgstr "Прыняць чальца"
+
+#, fuzzy
+#| msgctxt "join request pending team button second item"
+#| msgid "Requested"
+msgid "Requested"
+msgstr "адпраўлены"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to revoke the request for „%(name)s“?"
+msgstr "Вы сапраўды хочаце адклікаць запрашэнне чальца „%(name)s“?"
+
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Revoke request for organization"
+msgstr "Шукаць карыстальнікаў(-ц)"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to decline the request?"
+msgstr "Вы сапраўды хочаце адхіліць запрашэнне?"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organization invitations"
+msgstr "Запрашэнні"
+
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Decline invitation"
+msgstr "Адхіліць запрашэнне"
+
+#, fuzzy
+#| msgid "Invite"
+msgid "Invited"
+msgstr "Запрасіць"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove „%(name)s“ from the organization?"
+msgstr "Вы сапраўды хочаце выдаліць чальца „%(name)s“ з каманды?"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove organization"
+msgstr "Выдаліць месцазнаходжанне"
 
 msgid "Workshop Participant File Upload"
 msgstr ""
@@ -3591,12 +3777,6 @@ msgid "All Ideas"
 msgstr "Усе ідэі"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Invitations"
-msgid "Organizations"
-msgstr "Запрашэнні"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "My Organizations"
 msgstr ""
 
@@ -4135,6 +4315,10 @@ msgid "Browse all Projects"
 msgstr "Усе праекты"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "My Conferences"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "You are following this item"
 msgid "You have not created any organizations yet."
@@ -4377,6 +4561,24 @@ msgstr "Праекты, створаныя з гэтай ідэі"
 #| msgid "You are a Member"
 msgid "You are a Admin"
 msgstr "Вы з'яўляецеся чальцом"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Membership request pending..."
+msgid "Ownership request pending..."
+msgstr "Запыт на членства чакае прыняцця рашэння..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Projects and groups"
+msgstr "Мае праекты і групы"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group"
+msgstr "Праекты/групы"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Open to be contacted about potential collaboration opportunities"
@@ -5355,6 +5557,16 @@ msgstr "Гэты элемент цяпер адлюстроўваецца ў г�
 #| msgid "Which apps should be activated?"
 msgid "The %s-app was activated!"
 msgstr "Якія прыкладанні трэба актываваць?"
+
+#, fuzzy, python-format
+#| msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+msgstr "Вы даслалі запыт на далучэнне да %(team_type)s “%(team_name)s”. Вы атрымаеце электронны ліст, як толькі адміністратар каманды адкажа на Ваш запыт."
+
+#, fuzzy, python-format
+#| msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
+msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgstr "Вы ўжо былі запрошаны ў \"%(team_name)s\", і цяпер адразу сталі чальцом!"
 
 msgid "No appname given for adding containers."
 msgstr "Для дабаўлення кантэйнераў не пазначана імя прыкладання."

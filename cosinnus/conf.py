@@ -469,7 +469,8 @@ class CosinnusConf(AppConf):
             'sw_lon': 5.01, # west,
         },
         'geojson_region': None,
-        'filter_panel_default_visible': False,
+        'filter_panel_default_visible': False, # whether the dropdown filter panel should be visible on load
+        'ignore_location_default_activated': False, # whether the "In map area" button should be off on load
     }
     
     # dimensions of the images for map images
@@ -512,6 +513,10 @@ class CosinnusConf(AppConf):
     
     #: How long the perm redirect cache should last (1 week, because it organizes itself)
     PERMANENT_REDIRECT_CACHE_TIMEOUT = 60 * 60 * 24 * 7
+    
+    # if True, no notification message will be shown to the user when they get redirected
+    # with a CosinnusPermanentRedirect
+    PERMANENT_REDIRECT_HIDE_USER_MESSAGE = False
     
     # the body text for the non-signed-up user invitation mail, of notification `user_group_recruited`
     RECRUIT_EMAIL_BODY_TEXT = _('%(sender_name)s would like you to come join the project "%(team_name)s" '
@@ -657,14 +662,14 @@ class CosinnusConf(AppConf):
     # extra fields for the user profile.
     # usage:
     # {
-    #    field_name: {
-    #         'type': <str type of `UserProfileFormExtraFieldsMixin.EXTRA_FIELD_TYPES`>,
-    #         'label': i18n str,
-    #         'legend': i18n str,
-    #         'placeholder': i18n str,
-    #         'required': bool, # whether to be required in forms
-    #         'in_signup': bool, # whether to show up in the signup form
-    #     }, ...
+    #    field_name: dynamic_fields.CosinnusDynamicField(
+    #         type=dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT,
+    #         label=_('Institution'),
+    #         legend=None,
+    #         placeholder=_('Institution'),
+    #         required=False, # whether to be required in forms
+    #         in_signup=True, # whether to show up in the signup form
+    #     ), ...
     # }
     # example: {'organisation': {'type': 'text', 'required': True}}
     USERPROFILE_EXTRA_FIELDS = {}

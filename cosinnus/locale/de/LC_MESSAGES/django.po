@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-06 16:06+0200\n"
-"PO-Revision-Date: 2020-11-05 11:52+0100\n"
+"POT-Creation-Date: 2020-11-26 09:08+0100\n"
+"PO-Revision-Date: 2020-11-26 09:21+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -28,6 +28,12 @@ msgstr "%(number)d %(objects)s wurden erfolgreich gelöscht."
 
 msgid "Delete selected entries"
 msgstr "Ausgewählte Objekte löschen"
+
+msgid "Convert memberships to Admin status"
+msgstr ""
+
+msgid "Convert memberships to Member status"
+msgstr ""
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr "Ein token mit dem selben Code existiert bereits. Bitte wähle eine andere Zeichenfolge für das Token."
@@ -113,6 +119,9 @@ msgstr "%d Benutzer wurden erfolgreich deaktiviert."
 #| msgid "Made you an admin"
 msgid "Make user RocketChat admin"
 msgstr "Hat dich zum Administrator befördert"
+
+msgid "Restart"
+msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Die E-Mail-Adresse des Accounts, mit dem du versuchst einzuloggen, muss erst bestätigt werden."
@@ -408,6 +417,9 @@ msgstr "Беларуская"
 msgid "Dutch--NATIVE-LANGUAGE"
 msgstr "Nederlands"
 
+msgid "Czech--NATIVE-LANGUAGE"
+msgstr "Čeština"
+
 msgid "Azerbaijani--NATIVE-LANGUAGE"
 msgstr "Azerbaycan dili"
 
@@ -501,6 +513,10 @@ msgstr "Dies scheint keine gültige Flickr-Galerie oder Slideshow URL zu sein! E
 msgid "Users"
 msgstr "Benutzer_innen"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "Gruppen"
+
 msgid "Please remove the whitespace from '{}'"
 msgstr "Bitte entferne die Leerzeichen aus '{}'"
 
@@ -518,6 +534,9 @@ msgstr "Das CSV konnte nicht verarbeitet werden. Bitte benutzen Sie ',' oder ';'
 
 msgid "Name"
 msgstr "Name"
+
+msgid "The selected choice was not found or invalid! Please choose a different value!"
+msgstr ""
 
 msgid "Limit to teams"
 msgstr "Auf Projekte beschränken"
@@ -1140,6 +1159,60 @@ msgstr "Cosinnus Idee"
 msgid "Cosinnus Ideas"
 msgstr "Cosinnus Ideen"
 
+msgid "Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Idea"
+msgid "Create Managed Tag"
+msgstr "Idee erstellen"
+
+msgid "Edit Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Idea"
+msgid "Delete Managed Tag"
+msgstr "Idee löschen"
+
+msgid "Managed Tag Assignment"
+msgstr ""
+
+msgid "Managed Tag Assignments"
+msgstr ""
+
+msgid "No Tag selected"
+msgstr ""
+
+#, fuzzy
+#| msgid "Approach"
+msgid "Approved"
+msgstr "Ansatz"
+
+msgid "Color"
+msgstr ""
+
+#, fuzzy
+#| msgid "Main background color (css hex value, with or without \"#\")"
+msgid "Optional color code (css hex value, with or without \"#\")"
+msgstr "Hauptfarbe des Seitenhintergrunds (Hex-Wert, optional mit \"#\")"
+
+#, fuzzy
+#| msgid "Parent Group"
+msgid "Paired Group"
+msgstr "Übergeordnete Gruppe"
+
+msgid "A paired group will automatically be joined by all users assigned to this object."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search Synonyms"
+msgstr "In Gruppen und Projekten suchen"
+
+msgid "Comma-seperated list of phrases for which auto-complete matches, even partial, will return this object."
+msgstr ""
+
 msgid "Is Moderator"
 msgstr "Ist Moderator"
 
@@ -1313,10 +1386,6 @@ msgstr "Veranstaltungen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Projekte"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Groups"
-msgstr "Gruppen"
 
 msgid "At least one type of Map object must be chosen!"
 msgstr "Es muss mindestens ein Typ von Kartenobjekten ausgewählt werden!"
@@ -1908,6 +1977,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
 msgstr "Die Administration von Gruppen beginnt mit der Mitgliederverwaltung. Hier kannst Du entscheiden, wer Deiner Gruppe beitreten darf und wer Administrator sein soll. Du kannst Mitglieder aus dem Portal einladen oder Menschen über die Eingabe ihrer E-Mail-Adressen einladen sich auf dem Portal und in Deiner Gruppe zu registrieren. "
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_13_groupadministration"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_15_organization"
+msgstr "Die Administration von Gruppen beginnt mit der Mitgliederverwaltung. Hier kannst Du entscheiden, wer Deiner Gruppe beitreten darf und wer Administrator sein soll. Du kannst Mitglieder aus dem Portal einladen oder Menschen über die Eingabe ihrer E-Mail-Adressen einladen sich auf dem Portal und in Deiner Gruppe zu registrieren. "
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
 msgstr ""
@@ -2131,6 +2207,12 @@ msgstr "Wähle ein Galeriebild zum Hochladen aus"
 #| msgid "Example: http://mywebsite.com"
 msgid "Example: https://twitter.com/myaccount"
 msgstr "Beispiel: http://mywebsite.com"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Website"
+msgid "website"
+msgstr "Webseite"
 
 msgid "Re-Activate Project/Group"
 msgstr "Projekt/Gruppe reaktivieren"
@@ -2787,6 +2869,12 @@ msgstr "Portal-Administrator_innen"
 msgid "All societies"
 msgstr "Alle Gruppen"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organizations"
+msgstr "Einladungen"
+
 msgid "Re-activate Group"
 msgstr "Gruppe reaktivieren"
 
@@ -2801,6 +2889,103 @@ msgstr "Projekt deaktivieren"
 
 msgid "Withdraw Request"
 msgstr "Anfrage zurückziehen"
+
+#, fuzzy, python-format
+#| msgid "%(team_name)s - Members"
+msgid "%(team_name)s - Assigned organizations"
+msgstr "%(team_name)s - Mitglieder"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Assigned organizations"
+msgstr "Einladungen"
+
+#, fuzzy
+#| msgid "Clean Water and Sanitation"
+msgid "Request organizations..."
+msgstr "Sauberes Wasser und sanitäre Anlagen"
+
+#, fuzzy
+#| msgid "Clean Water and Sanitation"
+msgid "Request organization"
+msgstr "Sauberes Wasser und sanitäre Anlagen"
+
+#, fuzzy
+#| msgid "Enter a user name or email to find users to invite..."
+msgid "Enter a name to find organizations to request..."
+msgstr "Gib einen Benutzernamen oder E-Mail zum Einladen ein..."
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Request organizations"
+msgstr "Einladungen"
+
+#, fuzzy
+#| msgid "Clean Water and Sanitation"
+msgid "Requested organizations"
+msgstr "Sauberes Wasser und sanitäre Anlagen"
+
+#, fuzzy
+#| msgctxt "withdraw join team button second item"
+#| msgid "Request"
+msgid "Revoke request"
+msgstr "rückziehen"
+
+#, fuzzy
+#| msgid "Decline Member"
+msgid "Decline request"
+msgstr "Mitglied ablehen"
+
+#, fuzzy
+#| msgid "Accept Member"
+msgid "Accept request"
+msgstr "Mitglied aufnehmen"
+
+#, fuzzy
+#| msgctxt "join request pending team button second item"
+#| msgid "Requested"
+msgid "Requested"
+msgstr "gestellt"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to revoke the request for „%(name)s“?"
+msgstr "Möchtest du „%(name)s“'s Einladung wirklich zurückziehen?"
+
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Revoke request for organization"
+msgstr "Nach Benutzern suchen"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to decline the request?"
+msgstr "Möchtest du die Einladung wirklich ablehnen?"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organization invitations"
+msgstr "Einladungen"
+
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Decline invitation"
+msgstr "Einladung ablehnen"
+
+#, fuzzy
+#| msgid "Invite"
+msgid "Invited"
+msgstr "Einladen"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove „%(name)s“ from the organization?"
+msgstr "Möchtest du wirklich Mitglied „%(name)s“ entfernen?"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove organization"
+msgstr "Ort entfernen"
 
 msgid "Workshop Participant File Upload"
 msgstr "Workshop Teilnehmer Datei Upload"
@@ -3506,12 +3691,6 @@ msgid "All Ideas"
 msgstr "Alle Ideen"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Invitations"
-msgid "Organizations"
-msgstr "Einladungen"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "My Organizations"
 msgstr ""
 
@@ -4031,6 +4210,12 @@ msgstr "Alle Projekte anzeigen"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Is conference"
+msgid "My Conferences"
+msgstr "Ist Tagung"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "You have not RSVPed to any Events."
 msgid "You have not created any organizations yet."
 msgstr "Du hast bei keinen aktuellen Veranstaltungen zugesagt"
@@ -4252,6 +4437,24 @@ msgstr "Projekte - entstanden aus dieser Idee"
 #| msgid "You are a Member"
 msgid "You are a Admin"
 msgstr "Du bist Mitglied!"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Membership request pending..."
+msgid "Ownership request pending..."
+msgstr "Mitgliedschaft wurde beantragt..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Projects and groups"
+msgstr "Meine Projekte und Gruppen"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group"
+msgstr "Projekte/Gruppen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Open to be contacted about potential collaboration opportunities"
@@ -5172,6 +5375,16 @@ msgstr "Dieser Inhalt wird jetzt in folgenden Projekten/Gruppen angezeigt: %(gro
 msgid "The %s-app was activated!"
 msgstr "Die %s-App wurde aktiviert!"
 
+#, fuzzy, python-format
+#| msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+msgstr "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde gestellt. Du erhältst eine E-Mail sobald ein Projektadministrator den Antrag bearbeitet."
+
+#, fuzzy, python-format
+#| msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
+msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgstr "Du wurdest bereits zu \"%(team_name)s\" eingeladen und bist deswegen direkt Mitglied geworden!"
+
 msgid "No appname given for adding containers."
 msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."
 
@@ -5356,6 +5569,15 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+msgid "HTML code"
+msgstr "HTML-Code"
+
+msgid "Show chat"
+msgstr "Chat anzeigen"
+
+msgid "Check this to show rocket chat in the sidebar."
+msgstr "Rocket.Chat in der Seitenleiste anzeigen"
 
 #~ msgid "Conference is not running"
 #~ msgstr "Tagung läuft gerade nicht"

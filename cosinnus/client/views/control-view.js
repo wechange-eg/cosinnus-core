@@ -125,6 +125,9 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_MAP_OPTIONS['filter_panel_default_visible']) {
             self.state.filterPanelVisible = true;
         }
+        if (COSINNUS_MAP_OPTIONS['ignore_location_default_activated']) {
+            self.state.ignoreLocation = true;
+        }
         
         if (!self.collection) {
             self.collection = new ResultCollection();

@@ -178,7 +178,8 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
                     if to_group:
                         # redirect to the redirect with HttpResponsePermanentRedirect
                         redirect_url = ''.join((to_group.get_absolute_url(), '/'.join(request_tokens[4:])))
-                        messages.success(request, _('This team no longer resides under the URL you entered. You have been redirected automatically to the current location.'))
+                        if not getattr(settings, 'COSINNUS_PERMANENT_REDIRECT_HIDE_USER_MESSAGE', False):
+                            messages.success(request, _('This team no longer resides under the URL you entered. You have been redirected automatically to the current location.'))
                         return HttpResponseRedirect(redirect_url)
                     
                     # check user-specific redirects (forcing users out of certain group urls

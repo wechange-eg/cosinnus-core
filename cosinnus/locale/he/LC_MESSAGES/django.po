@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-06 16:06+0200\n"
+"POT-Creation-Date: 2020-11-26 09:08+0100\n"
 "PO-Revision-Date: 2020-11-05 11:57+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,6 +28,12 @@ msgstr "%(number)d %(objects)s נמחקו בהצלחה"
 
 msgid "Delete selected entries"
 msgstr "מחק ערכים נבחרים"
+
+msgid "Convert memberships to Admin status"
+msgstr ""
+
+msgid "Convert memberships to Member status"
+msgstr ""
 
 #, fuzzy
 msgid "A token with the same code already exists! Please choose a different string for your token."
@@ -112,6 +118,11 @@ msgstr "%d משתמשים הושבתו בהצלחה."
 
 msgid "Make user RocketChat admin"
 msgstr "הפוך/י את המשתמש למנהל RocketChat"
+
+#, fuzzy
+#| msgid "Restricted"
+msgid "Restart"
+msgstr "מוגבל"
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "יש להפעיל את כתובת הדוא\"ל של החשבון על מנת להתחבר."
@@ -409,6 +420,9 @@ msgstr "Беларуская"
 msgid "Dutch--NATIVE-LANGUAGE"
 msgstr "Nederlands"
 
+msgid "Czech--NATIVE-LANGUAGE"
+msgstr "Čeština"
+
 msgid "Azerbaijani--NATIVE-LANGUAGE"
 msgstr "Azerbaycan dili"
 
@@ -503,6 +517,10 @@ msgstr "זה לא נראה כמו קישור חוקי של גלריית Flickr! 
 msgid "Users"
 msgstr "משתמשים"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "קבוצות"
+
 msgid "Please remove the whitespace from '{}'"
 msgstr "נא הסר את המרחב הלבן מ- '{}'"
 
@@ -520,6 +538,9 @@ msgstr "לא ניתן היה לנתח את הCSV. אנא השתמש/י ב-',' א
 
 msgid "Name"
 msgstr "שם"
+
+msgid "The selected choice was not found or invalid! Please choose a different value!"
+msgstr ""
 
 msgid "Limit to teams"
 msgstr "הגבל לצוותים"
@@ -725,6 +746,9 @@ msgstr "Rocket.Chat"
 #| msgid "Rocket.Chat"
 msgid "RocketChat room name"
 msgstr "Rocket.Chat"
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Allow users to create new coffee tables"
 msgstr "אפשר/י למשתמשים ליצור שולחנות קפה חדשים"
@@ -1162,6 +1186,60 @@ msgstr "רעיון קוסינוס"
 msgid "Cosinnus Ideas"
 msgstr "רעיונות קוסינוס"
 
+msgid "Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Idea"
+msgid "Create Managed Tag"
+msgstr "צור רעיון"
+
+msgid "Edit Managed Tag"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Idea"
+msgid "Delete Managed Tag"
+msgstr "מחק רעיון"
+
+msgid "Managed Tag Assignment"
+msgstr ""
+
+msgid "Managed Tag Assignments"
+msgstr ""
+
+msgid "No Tag selected"
+msgstr ""
+
+#, fuzzy
+#| msgid "Approach"
+msgid "Approved"
+msgstr "גישה"
+
+msgid "Color"
+msgstr ""
+
+#, fuzzy
+#| msgid "Main background color (css hex value, with or without \"#\")"
+msgid "Optional color code (css hex value, with or without \"#\")"
+msgstr "צבע רקע ראשי (ערך css hex, עם או בלי \"#\")"
+
+#, fuzzy
+#| msgid "Parent Group"
+msgid "Paired Group"
+msgstr "קבוצת הורים"
+
+msgid "A paired group will automatically be joined by all users assigned to this object."
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search Synonyms"
+msgstr "חפש בצוותים"
+
+msgid "Comma-seperated list of phrases for which auto-complete matches, even partial, will return this object."
+msgstr ""
+
 msgid "Is Moderator"
 msgstr "הוא מנהל פורום"
 
@@ -1335,10 +1413,6 @@ msgstr "אירועים"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "פרוייקטים"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Groups"
-msgstr "קבוצות"
 
 msgid "At least one type of Map object must be chosen!"
 msgstr "יש לבחור לפחות סוג אחד של פריט מפה!"
@@ -1933,6 +2007,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
 msgstr "helptext_13_groupadministration"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_13_groupadministration"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_15_organization"
+msgstr "helptext_13_groupadministration"
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
 msgstr "helptext_50_profileprivacy"
@@ -2144,6 +2225,12 @@ msgstr "בחירה והעלאה של תמונת גלריה"
 #| msgid "Example: http://mywebsite.com"
 msgid "Example: https://twitter.com/myaccount"
 msgstr "דוגמה: http://mywebsite.com"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Website"
+msgid "website"
+msgstr "אתר"
 
 msgid "Re-Activate Project/Group"
 msgstr "הפעל מחדש פרוייקט/קבוצה"
@@ -2802,6 +2889,12 @@ msgstr "מנהלי מערכת פורטל"
 msgid "All societies"
 msgstr "כל החברות"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organizations"
+msgstr "הזמנות"
+
 msgid "Re-activate Group"
 msgstr "הפעל מחדש קבוצה"
 
@@ -2816,6 +2909,103 @@ msgstr "השבת פרויקט"
 
 msgid "Withdraw Request"
 msgstr "הסר בקשה"
+
+#, fuzzy, python-format
+#| msgid "%(team_name)s - Members"
+msgid "%(team_name)s - Assigned organizations"
+msgstr "%(team_name)s - חברים"
+
+#, fuzzy
+#| msgid "All Organizations"
+msgid "Assigned organizations"
+msgstr "כל הארגונים"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organizations..."
+msgstr "מחק הזמנה"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Request organization"
+msgstr "מחק הזמנה"
+
+#, fuzzy
+#| msgid "Enter a user name or email to find users to invite..."
+msgid "Enter a name to find organizations to request..."
+msgstr "הזן שם משתמש או דואר אלקטרוני כדי למצוא משתמשים להזמין..."
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Request organizations"
+msgstr "הזמנות"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "Requested organizations"
+msgstr "מחק הזמנה"
+
+#, fuzzy
+#| msgctxt "withdraw join team button second item"
+#| msgid "Request"
+msgid "Revoke request"
+msgstr "בקשה"
+
+#, fuzzy
+#| msgid "Decline Member"
+msgid "Decline request"
+msgstr "בטל חברות"
+
+#, fuzzy
+#| msgid "Accept Member"
+msgid "Accept request"
+msgstr "אשר חברות"
+
+#, fuzzy
+#| msgctxt "join request pending team button second item"
+#| msgid "Requested"
+msgid "Requested"
+msgstr "התבקש"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to revoke the request for „%(name)s“?"
+msgstr "האם אתה בטוח שברצונך לבטל את ההזמנה עבור החבר „%(name)s“?"
+
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Revoke request for organization"
+msgstr "חפש משתמשים"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to decline the request?"
+msgstr "האם אתה בטוח שברצונך לדחות את ההזמנה?"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Organization invitations"
+msgstr "הזמנות"
+
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Decline invitation"
+msgstr "דחה הזמנה"
+
+#, fuzzy
+#| msgid "Invite"
+msgid "Invited"
+msgstr "הזמן"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove „%(name)s“ from the organization?"
+msgstr "האם אתה בטוח שברצונך להסיר את החבר „%(name)s“ מהצוות?"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove organization"
+msgstr "הסר מיקום"
 
 msgid "Workshop Participant File Upload"
 msgstr "העלאת קובץ המשתתף בסדנה"
@@ -3525,12 +3715,6 @@ msgid "All Ideas"
 msgstr "כל הרעיונות"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Invitations"
-msgid "Organizations"
-msgstr "הזמנות"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "My Organizations"
 msgstr "הארגונים שלי"
 
@@ -4044,6 +4228,12 @@ msgstr "עיין בכל הפרויקטים"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Is conference"
+msgid "My Conferences"
+msgstr "היא וועידה"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "You are not following any ideas yet."
 msgid "You have not created any organizations yet."
 msgstr "אתה עדיין לא עוקב אחרי רעיונות."
@@ -4263,6 +4453,24 @@ msgstr "פרויקטים שנוצרו מרעיון זה"
 #| msgid "You are a Member"
 msgid "You are a Admin"
 msgstr "אתה חבר"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Membership request pending..."
+msgid "Ownership request pending..."
+msgstr "בקשת חברות ממתינה..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Projects and groups"
+msgstr "הפרויקטים והקבוצות שלי"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Projects/Groups"
+msgid "Project/group"
+msgstr "פרויקטים/קבוצות"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Open to be contacted about potential collaboration opportunities"
@@ -5165,6 +5373,16 @@ msgstr "פריט זה מוצג כעת בפרויקטים/קבוצות אלה: %(
 #, python-format
 msgid "The %s-app was activated!"
 msgstr "היישומון %s הופעל!"
+
+#, fuzzy, python-format
+#| msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+msgstr "ביקשת להצטרף ל-%(team_type)s “%(team_name)s”. אתה תקבל הודעת דואר אלקטרוני ברגע שמנהל צוות יגיב לבקשתך."
+
+#, fuzzy, python-format
+#| msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
+msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgstr "כבר הוזמנת ל-\"%(team_name)s\" וכעת הפכת לחבר באופן מיידי!"
 
 msgid "No appname given for adding containers."
 msgstr "לא הוגדר שם אפלירציה על מנת להוסיך קונטיינרים."
