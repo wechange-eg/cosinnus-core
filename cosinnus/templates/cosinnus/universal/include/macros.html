@@ -25,6 +25,10 @@
                 {% if showIcon == 1 %}<i class="fa fa-building"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "My Organizations" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "cloudfiles" %}
+                {% if showIcon == 1 %}<i class="fa fa-cloud"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "My Cloud Files" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% elif all %}
             {% if type == "people" %}
@@ -51,6 +55,10 @@
                 {% if showIcon == 1 %}<i class="fa fa-building"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "All Organizations" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "cloudfiles" %}
+                {% if showIcon == 1 %}<i class="fa fa-cloud"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Cloud Files" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% elif singular %}
             {% if type == "people" %}
@@ -77,6 +85,10 @@
                 {% if showIcon == 1 %}<i class="fa fa-building"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Organization" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "cloudfiles" %}
+                {% if showIcon == 1 %}<i class="fa fa-cloud"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Cloud File" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% elif create %}
             {% if type == "people" %}
