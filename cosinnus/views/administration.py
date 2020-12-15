@@ -224,7 +224,9 @@ class UserListView(ManagedTagsNewsletterMixin, ListView):
         qs = super().get_queryset()
         if self.request.GET.get('search'):
             search_string = self.request.GET.get('search')
-            qs = qs.filter(email__contains=search_string)
+            qs = qs.filter(Q(email__icontains=search_string) |
+                           Q(first_name__icontains=search_string) |
+                           Q(last_name__icontains=search_string) )
         return qs
 
     def get_context_data(self):
