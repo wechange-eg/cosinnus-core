@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags cosinnus_map_tags static thumbnail %}
 
-{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+{% block page_title %}{% trans "User Import" %} {{ block.super }}{% endblock page_title %}
 
 {% block leftnav %}
     {% include "cosinnus/user_import/leftnav.html"  with current_page="import" %}

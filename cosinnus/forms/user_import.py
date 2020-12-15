@@ -32,7 +32,7 @@ class CosinusUserImportCSVForm(forms.Form):
         mismatched_rows = []
         for i, row in enumerate(rows):
             if len(row) != len(processed_header):
-                mismatched_rows.append(i)
+                mismatched_rows.append(str(i + 2)) # one-off for 0-index and one-off for header row
         if mismatched_rows:
             raise forms.ValidationError(_(f'Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {", ".join(mismatched_rows)}!'))
         
