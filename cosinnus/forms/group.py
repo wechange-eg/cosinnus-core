@@ -23,7 +23,8 @@ from cosinnus.models.group import (CosinnusGroupMembership,
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.conf import settings
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+    CosinnusConference
 from django_select2.fields import HeavyModelSelect2MultipleChoiceField
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.urls import reverse
@@ -230,7 +231,8 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
                 
                 
 class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
-
+    """ Specific form implementation for CosinnusProject objects (used through `registration.group_models`)  """
+    
     extra_forms_setting = 'COSINNUS_PROJECT_ADDITIONAL_FORMS'
 
     class Meta(object):
@@ -249,12 +251,23 @@ class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
 
 
 class _CosinnusSocietyForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
-
+    """ Specific form implementation for CosinnusSociety objects (used through `registration.group_models`)  """
+    
     extra_forms_setting = 'COSINNUS_GROUP_ADDITIONAL_FORMS'
 
     class Meta(object):
         fields = CosinnusBaseGroupForm.Meta.fields
         model = CosinnusSociety
+
+
+class _CosinnusConferenceForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
+    """ Specific form implementation for CosinnusConference objects (used through `registration.group_models`)  """
+    
+    extra_forms_setting = 'COSINNUS_CONFERENCE_ADDITIONAL_FORMS'
+
+    class Meta(object):
+        fields = CosinnusBaseGroupForm.Meta.fields
+        model = CosinnusConference
         
 
 class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):

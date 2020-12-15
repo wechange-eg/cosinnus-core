@@ -87,6 +87,13 @@ class CosinnusSocietyManager(CosinnusGroupManager):
         return super(CosinnusSocietyManager, self).get_queryset().filter(type=CosinnusGroup.TYPE_SOCIETY)
 
     get_query_set = get_queryset
+    
+    
+class CosinnusConferenceManager(CosinnusGroupManager):
+    def get_queryset(self):
+        return super(CosinnusConferenceManager, self).get_queryset().filter(type=CosinnusGroup.TYPE_CONFERENCE)
+
+    get_query_set = get_queryset
 
 
 @python_2_unicode_compatible
@@ -113,6 +120,30 @@ class CosinnusSociety(get_cosinnus_group_model()):
         # FIXME: better caching for .portal.name
         return '%s (%s)' % (self.name, self.portal.name)
 
+
+class CosinnusConference(get_cosinnus_group_model()):
+    
+    class Meta(object):
+        """ For some reason, the Meta isn't inherited automatically from CosinnusGroup here """
+        proxy = True        
+        app_label = 'cosinnus'
+        ordering = ('name',)
+        verbose_name = _('Cosinnus conference')
+        verbose_name_plural = _('Cosinnus conferences')
+    
+    GROUP_MODEL_TYPE = CosinnusGroup.TYPE_CONFERENCE
+    
+    objects = CosinnusConferenceManager()
+    
+    def save(self, allow_type_change=False, *args, **kwargs):
+        if not allow_type_change:
+            self.type = CosinnusGroup.TYPE_CONFERENCE
+        super(CosinnusConference, self).save(*args, **kwargs)
+    
+    def __str__(self):
+        # FIXME: better caching for .portal.name
+        return '%s (%s)' % (self.name, self.portal.name)
+
     
 CosinnusGroup = get_cosinnus_group_model()
 
@@ -122,6 +153,11 @@ def ensure_group_type(group):
         returns it as either a CosinnusProject or CosinnusSociety,
         depending on group type """
     if group.__class__ == get_cosinnus_group_model():
-        klass = CosinnusProject if group.type == group.TYPE_PROJECT else CosinnusSociety
+        klass_map = {
+            group.TYPE_PROJECT: CosinnusProject,
+            group.TYPE_SOCIETY: CosinnusSociety,
+            group.TYPE_CONFERENCE: CosinnusConference,
+        }
+        klass = klass_map.get(group.type)
         group = klass.objects.get_cached(pks=group.id)
     return group

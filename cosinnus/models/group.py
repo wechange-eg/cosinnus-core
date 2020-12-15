@@ -655,11 +655,13 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
                         models.Model):
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1
+    TYPE_CONFERENCE = 2
 
     #: Choices for :attr:`visibility`: ``(int, str)``
     TYPE_CHOICES = (
         (TYPE_PROJECT, _('Project')),
         (TYPE_SOCIETY, _('Group')),
+        (TYPE_CONFERENCE, _('Conference')),
     )
 
     GROUP_MODEL_TYPE = TYPE_PROJECT
@@ -926,7 +928,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     @property
     def group_is_conference(self):
         """ Check if this is a proper conference (a type society with conference flag) """
-        return self.type == self.TYPE_SOCIETY and self.is_conference
+        return self.type == self.TYPE_CONFERENCE
 
     @property
     def conference_members(self):
