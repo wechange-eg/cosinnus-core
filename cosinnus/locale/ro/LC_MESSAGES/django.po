@@ -3,8 +3,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "MIME-Version: 1.0\n"
 "Language: ro\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
-"2:1));\n"
 
 #, python-format
 msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
@@ -3865,6 +3863,10 @@ msgstr "Resetarea parolei"
 msgid "Responsible Consumption and Production"
 msgstr "Consum și Producție Responsabilă"
 
+#, fuzzy
+msgid "Restart"
+msgstr "Restrâns"
+
 msgid "Restricted"
 msgstr "Restrâns"
 
@@ -4100,6 +4102,9 @@ msgstr "Arătați  toate %(count)s comentariile"
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
 msgstr "Arată toți ceilalți  %(more_count)s utilizatori..."
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Show in my projects..."
 msgstr "Arată în proiectele mele..."
@@ -6739,11 +6744,6 @@ msgstr "Website"
 #, fuzzy
 #~ msgid "Remove User"
 #~ msgstr "Eliminați Membru"
-
-#, fuzzy
-#~| msgid "Restricted"
-#~ msgid "Restart"
-#~ msgstr "Restrâns"
 
 #~ msgid "Revoked your admin status"
 #~ msgstr "A revocat starea dvs. de admin"

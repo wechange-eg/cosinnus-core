@@ -4,6 +4,8 @@ from datetime import timedelta
 from builtins import object
 import random
 
+from django.urls import reverse
+
 from cosinnus.templatetags.cosinnus_tags import textfield, get_country_name
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -43,7 +45,8 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = CosinnusConferenceRoom
-        fields = ('id', 'slug', 'title', 'description_html', 'type', 'count', 'url', 'management_urls', 'is_visible')
+        fields = ('id', 'slug', 'title', 'description_html', 'type', 'count', 'url', 'management_urls', 'is_visible',
+                  'show_chat')
 
     def get_type(self, obj):
         return self.TYPE_MAP.get(obj.type)
@@ -52,7 +55,9 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
         if obj.type == obj.TYPE_PARTICIPANTS:
             return obj.group.users.filter(is_active=True).count()
         elif obj.type == obj.TYPE_LOBBY:
-            queryset = ConferenceEvent.objects.filter(group=obj.group).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
+            queryset = ConferenceEvent.objects.filter(group=obj.group)\
+                .exclude(type__in=ConferenceEvent.TIMELESS_TYPES)\
+                .filter(room__is_visible=True)
             return queryset.count()
         else:
             return obj.events.count()
@@ -82,10 +87,14 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
     management_urls = serializers.SerializerMethodField()
     theme_color = serializers.CharField(source='conference_theme_color')
     dates = serializers.SerializerMethodField()
+    avatar = serializers.CharField(source='avatar_url')
+    wallpaper = serializers.SerializerMethodField()
+    images = serializers.SerializerMethodField()
 
     class Meta(object):
         model = CosinnusGroup
-        fields = ('id', 'name', 'description', 'rooms', 'management_urls', 'theme_color', 'dates')
+        fields = ('id', 'name', 'description', 'rooms', 'management_urls', 'theme_color', 'dates', 'avatar',
+                  'wallpaper', 'images')
 
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
@@ -114,6 +123,12 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
         else:
             from_date, to_date = now(), now()
         return [from_date + timedelta(days=i) for i in range((to_date - from_date).days + 1)]
+
+    def get_wallpaper(self, obj):
+        return obj.wallpaper.url if obj.wallpaper else None
+
+    def get_images(self, obj):
+        return [img.image.url for img in obj.gallery_images.all()]
 
 
 class ConferenceParticipant(serializers.ModelSerializer):
@@ -188,11 +203,12 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
     participants_limit = serializers.IntegerField(source='max_participants')
     management_urls = serializers.SerializerMethodField()
     note_html = serializers.SerializerMethodField()
+    feed_url = serializers.SerializerMethodField()
 
     class Meta(object):
         model = ConferenceEvent
-        fields = ('id', 'title', 'note_html', 'from_date', 'to_date', 'room', 'url', 'is_break', 'image_url',
-                  'presenters', 'participants_limit', 'management_urls')
+        fields = ('id', 'title', 'note_html', 'from_date', 'to_date', 'room', 'url', 'raw_html', 'is_break',
+                  'image_url', 'presenters', 'participants_limit', 'feed_url', 'management_urls')
 
     def get_url(self, obj):
         # FIXME: Maybe smarter filtering for URL
@@ -203,6 +219,10 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
         if image_file:
             return image_thumbnail_url(image_file, (466, 112))
         return static('images/conference-event-placeholder.png')
+
+    def get_feed_url(self, obj):
+        return group_aware_reverse('cosinnus:event:conference-event-entry', kwargs={'group': obj.group.slug,
+                                                                                    'slug': obj.slug})
 
     def get_management_urls(self, obj):
         user = self.context['request'].user

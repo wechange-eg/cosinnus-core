@@ -6,6 +6,6 @@ export const useStyles = makeStyles((theme) => ({
   buttons: {
     '& > *': {
       margin: theme.spacing(1),
-    },
-  },
+    }
+  }
 }))

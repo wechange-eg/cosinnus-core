@@ -65,6 +65,9 @@ export const useStyles = makeStyles((theme) => ({
           "& span:last-child, span:last-child *": {
             color: theme.palette.primary.light,
           }
+        },
+        "& a": {
+          color: "#ffffff"
         }
       },
       [theme.breakpoints.down('sm')]: {
@@ -102,5 +105,8 @@ export const useStyles = makeStyles((theme) => ({
     "&.now > div": {
       background: theme.palette.primary.contrastText,
     },
+  },
+  classes: {
+    padding: "0 2rem 0 0"
   }
 }))

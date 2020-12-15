@@ -14,23 +14,24 @@ import {Event} from "../../stores/events/models"
 import {Content} from "../components/Content/style"
 import {Main} from "../components/Main/style"
 import {Loading} from "../components/Loading"
-import {ManageEventButtons} from "../components/ManageEventButtons"
+import {EventButtons} from "../components/EventButtons"
 import {Sidebar} from "../components/Sidebar"
 import {IframeContent} from "../components/IframeContent"
 import {EventRoomState} from "../../stores/events/reducer"
 import {FormattedMessage} from "react-intl"
+import {Room} from "../../stores/room/models"
 
 interface StageEventProps {
   id: number
   events: EventRoomState
   fetchEvents: DispatchedReduxThunkActionCreator<Promise<void>>
-  url: string
+  room: Room
 }
 
 function mapStateToProps(state: RootState) {
   return {
     events: state.events[state.room.props.id],
-    url: state.room.props.url,
+    room: state.room,
   }
 }
 
@@ -39,7 +40,7 @@ const mapDispatchToProps = {
 }
 
 function StageEventConnector (props: StageEventProps & RouteComponentProps) {
-  const { id, events, fetchEvents, url } = props
+  const { id, events, fetchEvents, room } = props
   let event = null
   if (events && events.events) {
     event = events.events.find((e) => e.props.id === id)
@@ -49,13 +50,13 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
   return (
     <Main container>
       {(event && (
-        <Content className="fullheight">
+        <Content className="fullheight detail-view">
           <Typography component="h1">{event.props.title}</Typography>
           {event.props.noteHtml && (
             <div className="description" dangerouslySetInnerHTML={{__html: event.props.noteHtml}} />
           )}
-          <IframeContent url={event.props.url} />
-          <ManageEventButtons event={event} />
+          <IframeContent url={event.props.url} html={event.props.rawHtml} />
+          <EventButtons event={event} />
         </Content>
       ))
       || (events && events.loading) && (
@@ -65,7 +66,7 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
           <Typography><FormattedMessage id="Event not found."/></Typography>
         </Content>
       )}
-      {url && <Sidebar url={url} />}
+      {room.props.showChat && room.props.url && <Sidebar url={room.props.url} />}
     </Main>
   )
 }

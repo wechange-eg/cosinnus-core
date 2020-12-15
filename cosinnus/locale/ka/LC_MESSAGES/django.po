@@ -3835,6 +3835,9 @@ msgstr "პაროლის გადაყენება"
 msgid "Responsible Consumption and Production"
 msgstr ""
 
+msgid "Restart"
+msgstr ""
+
 msgid "Restricted"
 msgstr ""
 
@@ -4076,6 +4079,9 @@ msgstr "ყველა %(count)s კომენტარის ჩვენე
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
 msgstr "სხვა დანარჩენი %(more_count)s მომხმარებლების გამოჩენა..."
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Show in my projects..."
 msgstr "ჩემს პროექტებში ჩვენება..."

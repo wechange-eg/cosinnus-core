@@ -3875,6 +3875,9 @@ msgstr "Reiniciar contraseña"
 msgid "Responsible Consumption and Production"
 msgstr ""
 
+msgid "Restart"
+msgstr ""
+
 msgid "Restricted"
 msgstr ""
 
@@ -4113,6 +4116,9 @@ msgstr ""
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
 msgstr "Mostrar todos los otros %(more_count)s usario..."
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Show in my projects..."
 msgstr "Mostrar en mis proyectos..."

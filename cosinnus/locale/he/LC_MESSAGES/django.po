@@ -119,6 +119,11 @@ msgstr "%d משתמשים הושבתו בהצלחה."
 msgid "Make user RocketChat admin"
 msgstr "הפוך/י את המשתמש למנהל RocketChat"
 
+#, fuzzy
+#| msgid "Restricted"
+msgid "Restart"
+msgstr "מוגבל"
+
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "יש להפעיל את כתובת הדוא\"ל של החשבון על מנת להתחבר."
 
@@ -753,6 +758,9 @@ msgstr "Rocket.Chat"
 #| msgid "Rocket.Chat"
 msgid "RocketChat room name"
 msgstr "Rocket.Chat"
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Allow users to create new coffee tables"
 msgstr "אפשר/י למשתמשים ליצור שולחנות קפה חדשים"

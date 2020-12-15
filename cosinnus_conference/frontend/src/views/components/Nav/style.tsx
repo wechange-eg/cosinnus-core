@@ -96,5 +96,14 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       display: "none"
     },
+  },
+  logo: {
+    display: "block",
+    width: "100%",
+    marginBottom: "1rem",
+    [theme.breakpoints.down('sm')]: {
+      width: "50%",
+      margin: "0 auto 1rem"
+    },
   }
 }));

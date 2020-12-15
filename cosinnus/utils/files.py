@@ -101,6 +101,10 @@ def _get_all_portals_filename(instance, filename, sub_folder='images'):
     return path.join(filedir, newfilename)
 
 
+def get_presentation_filename(instance, filename):
+    return _get_all_portals_filename(instance, filename, 'presentations')
+
+
 def create_zip_file(files):
     missing = []
     with tempfile.NamedTemporaryFile(delete=False) as tf:

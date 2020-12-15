@@ -105,9 +105,11 @@
                 {% include 'cosinnus/fields/default_field.html' with field=form.max_coffeetable_participants label=max_label legend=max_legend %}
                 
                 {% comment %} Allow user Field {% endcomment %}
+                {% comment %} Disabled this option as the frontend isn't implemented
                 {% trans "Allow users to create new coffee tables" as allow_label %}
                 {% trans "Enable this to allow users to create their own coffee tables" as allow_legend %}
                 {% include 'cosinnus/fields/checkbox_field.html' with field=form.allow_user_table_creation label=allow_label legend=allow_legend checkbox_label=allow_label %}
+                 {% endcomment %}
             </div>
             
             <div class="room-type-selector room-type-selector-5">
@@ -132,12 +134,17 @@
             {% trans "Description" as description_label %}
             {% captureas description_placeholder %}{% trans "A short description or topic for your room. Will be shown on top of the room page." %}{% endcaptureas %}
             {% include 'cosinnus/fields/default_field.html' with field=form.description label=description_label legend=description_placeholder placeholder=description_placeholder large_field=True %}
-            
+
             {% comment %} Visibility Field {% endcomment %}
             {% trans "Room is visible" as vis_label %}
             {% trans "Uncheck this to hide the room for participants (you will still be able to see it)" as vis_legend %}
             {% include 'cosinnus/fields/checkbox_field.html' with field=form.is_visible label=vis_label legend=vis_legend checkbox_label=vis_label %}
-	    </div>
+
+            {% comment %} Show chat {% endcomment %}
+	        {% trans "Show chat" as show_chat_label %}
+	        {% trans "Check this to show rocket chat in the sidebar." as show_chat_legend %}
+            {% include 'cosinnus/fields/checkbox_field.html' with field=form.show_chat label=show_chat_label legend=show_chat_legend checkbox_label=show_chat_label %}
+        </div>
 	    
 	    <button type="submit" class="btn btn-emphasized">
 	        <ul class="media-list">

@@ -3,8 +3,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "MIME-Version: 1.0\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
 
 #, python-format
 msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
@@ -3851,6 +3849,10 @@ msgstr "Zresetuj hasło"
 msgid "Responsible Consumption and Production"
 msgstr "Odpowiedzialna konsumpcja i produkcja"
 
+#, fuzzy
+msgid "Restart"
+msgstr "Ograniczony"
+
 msgid "Restricted"
 msgstr "Ograniczony"
 
@@ -4086,6 +4088,9 @@ msgstr "Pokaż wszystkie %(count)s komentarze"
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
 msgstr "Pokaż wszystkich pozostastałych %(more_count)s użytkowników..."
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Show in my projects..."
 msgstr "Pokaż w moich projektach..."
@@ -6765,11 +6770,6 @@ msgstr "Strona internetowa"
 #, fuzzy
 #~ msgid "Remove User"
 #~ msgstr "Usuń Członka"
-
-#, fuzzy
-#~| msgid "Restricted"
-#~ msgid "Restart"
-#~ msgstr "Ograniczony"
 
 #~ msgid "Revoked your admin status"
 #~ msgstr "Unieważnił Twój status administratora"

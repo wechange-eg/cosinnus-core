@@ -120,6 +120,11 @@ msgstr "%d utilisateurs ont été désactivés."
 msgid "Make user RocketChat admin"
 msgstr "T'a rendu administrateur"
 
+#, fuzzy
+#| msgid "Restricted"
+msgid "Restart"
+msgstr "Restreint"
+
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "L'adresse électronique du compte que vous tentez d'utiliser doit être activée avant que vous puissiez vous connecter."
 
@@ -768,6 +773,9 @@ msgstr "Identité de l’espace de discussion RocketChat"
 
 msgid "RocketChat room name"
 msgstr "Nom de la salle de discussion RocketChat"
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Allow users to create new coffee tables"
 msgstr "Permettre aux utilisateurs de créer de nouvelles tables basses"
@@ -4402,6 +4410,12 @@ msgstr "Projets créés"
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Conferences"
 msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Is conference"
+msgid "My Conferences"
+msgstr "Est la conférence"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy

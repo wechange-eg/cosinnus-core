@@ -1,0 +1,7 @@
+{% load i18n %}{% blocktrans %}The conference "%(group.name)" starts soon.
+Start of the event is %(group.from_date|date:"SHORT_DATETIME_FORMAT").
+
+Under the following link you can already get an overview of the conference events.
+
+Best regards,
+Your conference team{% endblocktrans %}

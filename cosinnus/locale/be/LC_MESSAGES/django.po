@@ -3,8 +3,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "MIME-Version: 1.0\n"
 "Language: be\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #, python-format
 msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
@@ -3869,6 +3867,9 @@ msgstr "Скінуць пароль"
 msgid "Responsible Consumption and Production"
 msgstr ""
 
+msgid "Restart"
+msgstr ""
+
 msgid "Restricted"
 msgstr ""
 
@@ -4107,6 +4108,9 @@ msgstr ""
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
 msgstr "Паказаць усіх іншых %(more_count)s карыстальнікаў(-ц)..."
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Show in my projects..."
 msgstr "Паказваць у маіх праектах..."

@@ -3854,6 +3854,9 @@ msgstr "Şifrə sıfırlama"
 msgid "Responsible Consumption and Production"
 msgstr ""
 
+msgid "Restart"
+msgstr ""
+
 msgid "Restricted"
 msgstr ""
 
@@ -4095,6 +4098,9 @@ msgstr "Bütün %(count)s şərhi göstər"
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
 msgstr "Digər %(more_count)s istifadəçinin hamısını göstər..."
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Show in my projects..."
 msgstr "Mənim layihərimdə göstərin..."

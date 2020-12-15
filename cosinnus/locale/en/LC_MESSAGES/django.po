@@ -3632,6 +3632,9 @@ msgstr ""
 msgid "Responsible Consumption and Production"
 msgstr ""
 
+msgid "Restart"
+msgstr ""
+
 msgid "Restricted"
 msgstr ""
 
@@ -3866,6 +3869,9 @@ msgstr ""
 
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
+msgstr ""
+
+msgid "Show chat"
 msgstr ""
 
 #, fuzzy

@@ -1,24 +1,29 @@
-import string
+import logging
 import random
+import string
 
-from django.db import models
-from django.contrib.auth.models import User
-from django.db.models import Q
-from django.utils.translation import ugettext as _
-from django.contrib.postgres.fields import JSONField
-from django.core.validators import MaxValueValidator, MinValueValidator
-from django.utils import timezone
-from django.urls.base import reverse
+from annoying.functions import get_object_or_None
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields.jsonb import JSONField as PostgresJSONField
+from django.core.cache import cache
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
+from django.db.models import Q
+from django.urls.base import reverse
+from django.utils import timezone
+from django.utils.translation import ugettext as _
 
 from cosinnus.apis import bigbluebutton as bbb
-from cosinnus.utils import bigbluebutton as bbb_utils
-# from cosinnus.models import MEMBERSHIP_ADMIN
-import logging
-from django.core.cache import cache
 from cosinnus.templatetags.cosinnus_tags import full_name
+from cosinnus.utils import bigbluebutton as bbb_utils
 from cosinnus.utils.permissions import check_user_superuser
+from datetime import timedelta
+from django.utils.timezone import now
 
+
+# from cosinnus.models import MEMBERSHIP_ADMIN
 logger = logging.getLogger('cosinnus')
 
 
@@ -207,7 +212,16 @@ class BBBRoom(models.Model):
                 logger.exception(e)
         return False
 
+    @property
+    def event(self):
+        """ Tries to get a conference event for this bbb room, or returns None else """
+        from cosinnus_event.models import ConferenceEvent # noqa
+        media_tag = self.tagged_objects.first()
+        event = get_object_or_None(ConferenceEvent, media_tag=media_tag)
+        return event
+
     def restart(self):
+        event = self.event
         m_xml = bbb.start(
             name=self.name,
             meeting_id=self.meeting_id,
@@ -216,7 +230,8 @@ class BBBRoom(models.Model):
             moderator_password=self.moderator_password,
             voice_bridge=self.voice_bridge,
             max_participants=self.max_participants,
-            options=self.options
+            options=self.options,
+            presentation_url=event.presentation_file.url if event and event.presentation_file else None,
         )
 
         meeting_json = bbb_utils.xml_to_json(m_xml)
@@ -233,7 +248,7 @@ class BBBRoom(models.Model):
     @classmethod
     def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=None,
                moderator_password=None, max_participants=None, voice_bridge=None, options=None,
-               room_type=None):
+               room_type=None, presentation_url=None):
         """ Creates a new BBBRoom and crete a room on the remote bbb-server.
 
         :param name: Name of the BBBRoom
@@ -262,7 +277,10 @@ class BBBRoom(models.Model):
         
         :param room_type: The type of the rooms, as choice of `settings.BBB_ROOM_TYPE_CHOICES` 
                 or None for `BBB_ROOM_TYPE_DEFAULT`
-        
+
+        :param presentation_url: Publicly available URL of presentation file to be pre-uploaded as slides to BBB room
+        :type: str
+
         :type: dict
         """
         if attendee_password is None:
@@ -291,7 +309,8 @@ class BBBRoom(models.Model):
             moderator_password=moderator_password,
             max_participants=max_participants,
             voice_bridge=voice_bridge,
-            options=default_options
+            options=default_options,
+            presentation_url=presentation_url,
         )
 
         meeting_json = bbb_utils.xml_to_json(m_xml)
@@ -342,6 +361,95 @@ class BBBRoom(models.Model):
     def get_absolute_url(self):
         return reverse('cosinnus:bbb-room', kwargs={'room_id': self.id})
 
+
+
+class BBBRoomVisitStatistics(models.Model):
+    """ This model represents a video/audio conference call with participants and/or presenters """
+    
+    bbb_room = models.ForeignKey('cosinnus.BBBRoom', verbose_name=_('BBB ROOM'), related_name='visits', 
+        null=True, blank=True, on_delete=models.SET_NULL) 
+    user = models.ForeignKey(User, verbose_name=_('Visitor'), related_name='bbb_room_visits', 
+        null=True, blank=True, on_delete=models.SET_NULL)
+    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Group'), related_name='+', 
+        null=True, blank=True, on_delete=models.SET_NULL) 
+    
+    visit_datetime = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
+    
+    # this field contains additional infos and backups of the stats that might be lost because
+    # the related objects were deleted, EXCEPT any user info that has to honor the deletion!
+    # attribute names are listed in `ALL_DATA_SETTINGS`
+    data = PostgresJSONField(default=dict, blank=True, null=True)
+    
+    DATA_DATA_SETTING_ROOM_NAME = 'room_name'
+    DATA_DATA_SETTING_GROUP_NAME = 'group_name'
+    DATA_DATA_SETTING_GROUP_MANAGED_TAG_IDS = 'group_managed_tag_ids'
+    DATA_DATA_SETTING_GROUP_MANAGED_TAG_SLUGS = 'group_managed_tag_slugs'
+    DATA_DATA_SETTING_USER_MANAGED_TAG_IDS = 'group_managed_tag_ids'
+    DATA_DATA_SETTING_USER_MANAGED_TAG_SLUGS = 'group_managed_tag_slugs'
+    
+    ALL_DATA_SETTINGS = [
+        DATA_DATA_SETTING_ROOM_NAME,
+        DATA_DATA_SETTING_GROUP_NAME,
+        DATA_DATA_SETTING_GROUP_MANAGED_TAG_IDS,
+        DATA_DATA_SETTING_GROUP_MANAGED_TAG_SLUGS,
+        DATA_DATA_SETTING_USER_MANAGED_TAG_IDS,
+        DATA_DATA_SETTING_USER_MANAGED_TAG_SLUGS,
+    ]
+    
+    objects = models.Manager()
+    
+    def __str__(self):
+        return f'<BBBRoomVisitStatistics for User: {self.user} and Room {self.bbb_room}'
+    
+    @classmethod
+    def create_user_visit_for_bbb_room(cls, user, bbb_room, group=None):
+        """ Helper function to create a visit statistic entry for when a user
+            visits a room.
+            Limits visits logging to no more than once per hour """
+        if not bbb_room:
+            return None
+        if not user.is_authenticated:
+            user = None
+            
+        # limit visit creation for (user, bbb_room) pairs to a time window
+        a_short_time_ago = now() - timedelta(seconds=getattr(settings, 'BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS', 60))
+        recent_user_room_visits = cls.objects.filter(
+            bbb_room=bbb_room,
+            user=user,
+            visit_datetime__gte=a_short_time_ago
+        )
+        if recent_user_room_visits.count() > 0:
+            return None
+        
+        data = {
+            cls.DATA_DATA_SETTING_ROOM_NAME: bbb_room.name,
+        }
+        if user:
+            user_managed_tags = user.cosinnus_profile.get_managed_tags()
+            if user_managed_tags:
+                data.update({
+                    cls.DATA_DATA_SETTING_USER_MANAGED_TAG_IDS: [tag.id for tag in user_managed_tags],
+                    cls.DATA_DATA_SETTING_USER_MANAGED_TAG_SLUGS: [tag.slug for tag in user_managed_tags],
+                })
+        if group:
+            data.update({
+                cls.DATA_DATA_SETTING_GROUP_NAME: group.name,
+            })
+            group_managed_tags = group.get_managed_tags()
+            if group_managed_tags:
+                data.update({
+                    cls.DATA_DATA_SETTING_GROUP_MANAGED_TAG_IDS: [tag.id for tag in group_managed_tags],
+                    cls.DATA_DATA_SETTING_GROUP_MANAGED_TAG_SLUGS: [tag.slug for tag in group_managed_tags],
+                })
+        
+        visit = BBBRoomVisitStatistics.objects.create(
+            bbb_room=bbb_room,
+            user=user,
+            group=group,
+            data=data,
+        )
+        return visit
+        
 
 def update_bbbroom_membership(sender, instance, signal, created, *args, **kwargs):
     rooms = BBBRoom.objects.filter(

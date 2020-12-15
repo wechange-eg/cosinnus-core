@@ -3851,6 +3851,9 @@ msgstr "Վերականգնել գաղտնաբառը"
 msgid "Responsible Consumption and Production"
 msgstr ""
 
+msgid "Restart"
+msgstr ""
+
 msgid "Restricted"
 msgstr ""
 
@@ -4093,6 +4096,9 @@ msgstr "Ցույց տալ բոլոր %(count)s մեկնաբանությունն�
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
 msgstr "Ցուցադրել մնացած բոլոր %(more_count)s օգտատերերին..."
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Show in my projects..."
 msgstr "Ցուցադրել իմ նախագծերում ..."

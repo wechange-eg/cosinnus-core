@@ -3841,6 +3841,9 @@ msgstr "Reset wachtwoord"
 msgid "Responsible Consumption and Production"
 msgstr ""
 
+msgid "Restart"
+msgstr ""
+
 msgid "Restricted"
 msgstr ""
 
@@ -4079,6 +4082,9 @@ msgstr "Toon alle %(count)s reacties"
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
 msgstr "Toon alle andere %(more_count)s gebruikers…"
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Show in my projects..."
 msgstr "Laat in mijn projecten zien..."

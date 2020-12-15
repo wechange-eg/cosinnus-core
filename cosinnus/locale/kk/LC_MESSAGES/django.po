@@ -3823,6 +3823,9 @@ msgstr "Парольді қалпына келтіру"
 msgid "Responsible Consumption and Production"
 msgstr ""
 
+msgid "Restart"
+msgstr ""
+
 msgid "Restricted"
 msgstr ""
 
@@ -4064,6 +4067,9 @@ msgstr "Барлық %(count)s пікірлерді көрсету"
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
 msgstr "Барлық басқа пайдаланушыларды көрсету %(more_count)s."
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Show in my projects..."
 msgstr "Менің жобаларымда көрсету …."

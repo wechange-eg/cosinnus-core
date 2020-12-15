@@ -6,6 +6,8 @@ from hashlib import sha1, sha256
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+
+from cosinnus.models import CosinnusPortal, get_domain_for_portal
 from cosinnus.utils import bigbluebutton as bbb_utils
 from cosinnus.utils.functions import is_number
 import logging
@@ -51,7 +53,7 @@ def api_call(query, call):
 def start(
         name, meeting_id, welcome="Welcome to the conversation",
         moderator_password="", attendee_password="", max_participants=None, voice_bridge=None,
-        parent_meeting_id=None, options=None):
+        parent_meeting_id=None, options=None, presentation_url=""):
     """ This function calls the BigBlueButton API directly to create a meeting with all available parameters available
         in the cosinnus-core.BBBRoom model.
 
@@ -81,6 +83,9 @@ def start(
 
     :param options: BBBRoom options according to the listed options in the BigBlueButton API
     :type: dict
+
+    :param presentation_url: Publicly available URL of presentation file to be pre-uploaded as slides to BBB room
+    :type: str
 
     :return: XML representation of the API result
     :rtype: XML
@@ -115,7 +120,16 @@ def start(
 
     hashed = api_call(query, call)
     url = settings.BBB_API_URL + call + '?' + hashed
-    response = requests.get(url)
+    # Presentation file has to be sent via POST request with XML body
+    if presentation_url:
+        headers = {'Content-Type': 'application/xml'}
+        xml = "<?xml version='1.0' encoding='UTF-8'?><modules><module name='presentation'>"
+        absolute_url = get_domain_for_portal(CosinnusPortal.get_current()) + presentation_url
+        xml += f"<document url='{absolute_url}' />"
+        xml += "</module></modules>"
+        response = requests.post(url, data=xml, headers=headers)
+    else:
+        response = requests.get(url)
     result = bbb_utils.parse_xml(response.content.decode('utf-8'))
 
     if result:

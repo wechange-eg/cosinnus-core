@@ -6,6 +6,7 @@ from collections import defaultdict
 
 import dateutil.parser
 import six
+from django.utils import dateparse
 from six.moves.urllib.parse import parse_qsl
 from copy import copy, deepcopy
 
@@ -1259,6 +1260,10 @@ def get_country_name(country_code):
 @register.simple_tag
 def get_setting(name):
     return getattr(settings, name, "")
+    
+@register.filter
+def parse_datetime(value):
+    return dateparse.parse_datetime(value)
 
 @register.filter
 def stringformat(value, args):

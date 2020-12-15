@@ -124,6 +124,9 @@ msgstr "%d تم إلغاء تنشيط المستخدمين بنجاح."
 msgid "Make user RocketChat admin"
 msgstr ""
 
+msgid "Restart"
+msgstr ""
+
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "يجب تنشيط عنوان البريد الإلكتروني للحساب الذي تحاول استخدامه قبل أن تتمكن من تسجيل الدخول."
 
@@ -803,6 +806,9 @@ msgstr "دردشة.Rocket"
 #| msgid "Rocket.Chat"
 msgid "RocketChat room name"
 msgstr "دردشة.Rocket"
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Allow users to create new coffee tables"
 msgstr ""

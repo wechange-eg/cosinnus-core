@@ -3,8 +3,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "MIME-Version: 1.0\n"
 "Language: uk_UA\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #, python-format
 msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
@@ -3871,6 +3869,10 @@ msgstr "Змінити пароль"
 msgid "Responsible Consumption and Production"
 msgstr "Відповідальне споживання та виробництво"
 
+#, fuzzy
+msgid "Restart"
+msgstr "Обмежений"
+
 msgid "Restricted"
 msgstr "Обмежений"
 
@@ -4107,6 +4109,9 @@ msgstr "Показати всі %(count)s коментарі"
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
 msgstr "Відобразити всіх інших %(more_count)s користувачів..."
+
+msgid "Show chat"
+msgstr ""
 
 msgid "Show in my projects..."
 msgstr "Показати в моїх проєктах…"
@@ -6818,11 +6823,6 @@ msgstr "Веб-сайт"
 #, fuzzy
 #~ msgid "Remove User"
 #~ msgstr "Видалити члена"
-
-#, fuzzy
-#~| msgid "Restricted"
-#~ msgid "Restart"
-#~ msgstr "Обмежений"
 
 #~ msgid "Revoked your admin status"
 #~ msgstr "Відмінено Ваш статус адміністратора"

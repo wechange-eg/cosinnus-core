@@ -1,25 +1,24 @@
 import React, {useState} from "react"
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link} from "@material-ui/core"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faPen, faTrashAlt} from "@fortawesome/free-solid-svg-icons"
+import {faCalendarPlus, faPen, faTrashAlt} from "@fortawesome/free-solid-svg-icons"
 import {FormattedMessage} from "react-intl"
 import Cookies from "js-cookie"
 import axios from "axios"
+import classNames from "classnames"
 
 import {Event} from "../../../stores/events/models"
 import {useStyles} from "./style"
 
-interface ManageEventIconsProps {
+interface EventIconsProps {
   event: Event
+  showLinks?: boolean
 }
 
-export function ManageEventIcons(props: ManageEventIconsProps) {
-  const {event} = props
+export function EventIcons(props: EventIconsProps) {
+  const {event, showLinks} = props
   const classes = useStyles()
   const [deleteOpen, setDeleteOpen] = useState(false);
-  if (!event.props.managementUrls) {
-    return null
-  }
   function deleteEvent(e) {
     e.stopPropagation()
     axios.post(event.props.managementUrls.deleteEvent, {},{
@@ -33,6 +32,17 @@ export function ManageEventIcons(props: ManageEventIconsProps) {
   }
   return (
     <div className={classes.icons}>
+      {showLinks && event.props.feedUrl && (
+        <Link
+          href="#"
+          onClick={e => {
+            e.stopPropagation()
+            window.location.href = event.props.feedUrl
+          }}
+        >
+          <FontAwesomeIcon icon={faCalendarPlus} />
+        </Link>
+      )}
       {event.props.managementUrls.updateEvent && (
         <Link
           href="#"

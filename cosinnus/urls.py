@@ -105,6 +105,9 @@ urlpatterns = [
     
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
 
+    url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
+    url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),
+    
     url(r'^housekeeping/ensure_group_widgets/$', housekeeping.ensure_group_widgets, name='housekeeping-ensure-group-widgets'),
     url(r'^housekeeping/fillexternaldata/$', housekeeping.fill_external_data, name='housekeeping-fill-external-data'),
     url(r'^housekeeping/newsletterusers/$', housekeeping.newsletter_users, name='housekeeping-newsletter-user-emails'),
