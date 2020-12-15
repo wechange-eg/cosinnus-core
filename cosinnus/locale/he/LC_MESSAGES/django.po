@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-06 17:04+0100\n"
+"POT-Creation-Date: 2020-12-15 14:46+0100\n"
 "PO-Revision-Date: 2020-09-29 18:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -219,6 +219,9 @@ msgstr "צוות זה אינו פועל יותר תחת כתובת ה-URL שהז
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "חשבון זה אינו פעיל יותר. נותקת מהמערכת."
+
+msgid "You have been automatically logged out after being inactive for some time."
+msgstr ""
 
 #, python-format
 msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
@@ -456,6 +459,18 @@ msgstr "עברית"
 msgid "Belarus"
 msgstr "בלרוס"
 
+msgid "(No choice)"
+msgstr ""
+
+msgid "email address"
+msgstr "כתובת דוא\"ל"
+
+msgid "first name"
+msgstr "שם פרטי"
+
+msgid "This email address already has a registered user!"
+msgstr "לכתובת דוא\"ל זו כבר יש משתמש רשום!"
+
 msgid "Attachments"
 msgstr "קבצים מצורפים"
 
@@ -570,15 +585,6 @@ msgstr "אהבתי"
 msgid "Persons"
 msgstr "אנשים"
 
-msgid "email address"
-msgstr "כתובת דוא\"ל"
-
-msgid "first name"
-msgstr "שם פרטי"
-
-msgid "This email address already has a registered user!"
-msgstr "לכתובת דוא\"ל זו כבר יש משתמש רשום!"
-
 #, fuzzy
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
 msgstr "נא הזן כתובת דוא\"ל וסיסמא נכונים. "
@@ -588,6 +594,16 @@ msgstr "נראה שדפדפן האינטרנט שלך לא מאפשר קבצי �
 
 msgid "This account is inactive."
 msgstr "חשבון זה אינו פעיל."
+
+#, python-brace-format
+msgid "Some required columns are not present in the CSV: {missing_headers}!"
+msgstr ""
+
+msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
+msgstr ""
+
+msgid "Some CSV headers did not have a name!"
+msgstr ""
 
 msgid "Hello"
 msgstr "שלום"
@@ -673,6 +689,21 @@ msgstr "אופציות עבור החדר, המיוצגות ב- bigbluebutton API
 msgid "Room Type"
 msgstr "סוג חדר"
 
+msgid "BBB ROOM"
+msgstr ""
+
+#, fuzzy
+#| msgid "Visited"
+msgid "Visitor"
+msgstr "ביקרו בו"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "קבוצה"
+
+msgid "Created"
+msgstr "נוצר"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Title"
 msgstr "כותרת"
@@ -739,9 +770,6 @@ msgstr "נראית"
 #| msgid "Sort field"
 msgid "Sorting index"
 msgstr "שדה מיון"
-
-msgid "Created"
-msgstr "נוצר"
 
 msgid "Creator"
 msgstr "יוצר"
@@ -962,13 +990,12 @@ msgstr "שרת ועידות וידאו"
 msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
 msgstr "אם הוזן, תתאפשר ועידת וידאו ברחבי האתר. צריכה להיות כתובת URL עד לנקודה שבה ניתן לצרף כל חדר אקראי."
 
+msgid "Dynamic choice field choices"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "פרויקט"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "קבוצה"
 
 msgid "Project Type"
 msgstr "סוג פרויקט"
@@ -1203,6 +1230,16 @@ msgstr ""
 
 #, fuzzy
 #| msgid "Create Idea"
+msgid "Managed Tag Type"
+msgstr "צור רעיון"
+
+#, fuzzy
+#| msgid "Create Idea"
+msgid "Managed Tag Types"
+msgstr "צור רעיון"
+
+#, fuzzy
+#| msgid "Create Idea"
 msgid "Create Managed Tag"
 msgstr "צור רעיון"
 
@@ -1227,6 +1264,14 @@ msgstr ""
 #| msgid "Approach"
 msgid "Approved"
 msgstr "גישה"
+
+#, fuzzy
+#| msgid "Link label"
+msgid "Prefix label"
+msgstr "תווית קישור"
+
+msgid "The label that will be prepended before Managed Tags of this type, instead of `name`"
+msgstr ""
 
 msgid "Color"
 msgstr ""
@@ -1260,6 +1305,9 @@ msgstr "שפה"
 
 msgid "May be contacted"
 msgstr "ניתן ליצור קשר"
+
+msgid "Dynamic extra fields"
+msgstr ""
 
 msgid "Terms of Service"
 msgstr "תנאי שימוש"
@@ -1417,6 +1465,85 @@ msgstr "הטקסט הראשי של הודעה זו."
 
 msgid "Raw HTML for this announcement."
 msgstr "HTML גולמי עבור הודעה זו."
+
+msgid "Dry run in progress"
+msgstr ""
+
+msgid "Dry run finished, errors in CSV that prevent import"
+msgstr ""
+
+msgid "Dry run finished, waiting to start import"
+msgstr ""
+
+msgid "Import running"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sort field"
+msgid "Import finished"
+msgstr "שדה מיון"
+
+#, fuzzy
+#| msgid "Sort field"
+msgid "Import failed"
+msgstr "שדה מיון"
+
+msgid "Import archived"
+msgstr ""
+
+msgid "Import state"
+msgstr ""
+
+msgid "Import Data"
+msgstr ""
+
+msgid "Import Report HTML"
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus project"
+msgid "Cosinnus User Import"
+msgstr "פרויקט קוסינוס"
+
+#, fuzzy
+#| msgid "Cosinnus projects"
+msgid "Cosinnus User Imports"
+msgstr "פרויקטים קוסינוס"
+
+#, python-format
+msgid "CSV row did not contain data for required columns: \"%(fields)s\""
+msgstr ""
+
+msgid "Import for a user item has failed, cancelling the import process! TODO: has data been written?"
+msgstr ""
+
+msgid "Total Items"
+msgstr ""
+
+msgid "Items for Import"
+msgstr ""
+
+msgid "Ignored/Failed Items"
+msgstr ""
+
+msgid "An unexpected system error has occured while processing the data. This should not have happened. Please contact the support!"
+msgstr ""
+
+#, fuzzy
+#| msgid "This email address already has a registered user!"
+msgid "The email-address already has an existing user account in the system!"
+msgstr "לכתובת דוא\"ל זו כבר יש משתמש רשום!"
+
+msgid "The email-address is duplicated and already contained in the CSV!"
+msgstr ""
+
+msgid "The email address was not a valid email address!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete user account"
+msgid "New user account: "
+msgstr "מחק חשבון משתמש"
 
 msgid "Create-Project or Group Button"
 msgstr "צור כפתור פרויקט/קבוצה"
@@ -1740,7 +1867,18 @@ msgstr "סטטיסטיקה פשוטה"
 msgid "User Welcome Email"
 msgstr "דוא\"ל ברכת הצטרפות"
 
-msgid "Newsletter for groups"
+msgid "Newsletters"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference Management"
+msgid "User Management"
+msgstr "ניהול כנסים"
+
+msgid "User Import"
+msgstr ""
+
+msgid "User Profile Field Choices"
 msgstr ""
 
 msgid "User Dashboard Announcements"
@@ -1749,12 +1887,14 @@ msgstr "הודעות לוח של כלים של המשתמש"
 msgid "Edit"
 msgstr "ערוך"
 
-msgid "update Newsletter"
-msgstr ""
+#, fuzzy
+#| msgid "Create User"
+msgid "Update Newsletter"
+msgstr "צור משתמש"
 
 #, fuzzy
 #| msgid "Create User"
-msgid "create Newsletter"
+msgid "Create Newsletter"
 msgstr "צור משתמש"
 
 msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
@@ -1763,10 +1903,33 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
+msgid "Recipients"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                With the current selection the newsletter will be sent to %(counter)s recipients.\n"
+"                "
+msgid_plural ""
+"\n"
+"                With the current selection the newsletter will be sent to %(counter)s recipients.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
+msgstr ""
+
 msgid "Body"
 msgstr ""
 
-msgid "Send newsletter to group"
+#, fuzzy
+#| msgid "Currently set Welcome-Email Text"
+msgid "Currently set Email Text"
+msgstr "טקסט ברכת הצטרפות שמוגדר כרגע"
+
+msgid "Send newsletter"
 msgstr ""
 
 msgid "Send yourself a Test-Mail"
@@ -1782,12 +1945,6 @@ msgstr ""
 #| msgid "Do you really want to remove the user?"
 msgid "Do you really want to send the newsletter?"
 msgstr "האם אתה בטוח שברצונך להסיר את המשתמש?"
-
-msgid "Send newsletter"
-msgstr ""
-
-msgid "Newsletters"
-msgstr ""
 
 msgid "Newsletter"
 msgstr ""
@@ -1808,14 +1965,111 @@ msgstr "אין עדיין פריטים"
 msgid "Add newsletter"
 msgstr "הוסף משתמש"
 
+#, fuzzy
+#| msgid "Create User"
+msgid "Create new User"
+msgstr "צור משתמש"
+
+#, fuzzy
+#| msgid "First name"
+msgid "Firstname"
+msgstr "שם פרטי"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "Lastname"
+msgstr "שם משפחה"
+
+msgid "Save"
+msgstr "שמור"
+
+#, fuzzy
+#| msgid "Administration"
+msgid "User Administration"
+msgstr "ניהול מערכת"
+
+msgid "send login token to all inactive users"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search for Ideas"
+msgid "Search for email"
+msgstr "חפש רעיונות"
+
+#, fuzzy
+#| msgid "Search"
+msgid "search"
+msgstr "חיפוש"
+
+#, python-format
+msgid ""
+"\n"
+"                Found %(total)s user with an email that contains: '%(search_string)s'\n"
+"                "
+msgid_plural ""
+"\n"
+"                Found %(total)s users with an email that contains: '%(search_string)s'\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "clear search"
+msgstr ""
+
+#, fuzzy
+#| msgid "last login"
+msgid "Last Login"
+msgstr "פעילות אחרונה"
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "User token"
+msgstr "הזן אסימון:"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "Account deactivated"
+msgstr "השבת"
+
+#, fuzzy
+#| msgid "Resend invitation"
+msgid "Resend login token"
+msgstr "שלח הזמנה שוב"
+
+msgid "Send login token"
+msgstr ""
+
+msgid "Last sent on: "
+msgstr ""
+
+#, python-format
+msgid "Could not find any users with an email that contains '%(search_string)s.'"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no users yet."
+msgstr "אין עדיין פריטים"
+
+#, fuzzy
+#| msgid "first name"
+msgid "to first page"
+msgstr "שם פרטי"
+
+msgid "previous"
+msgstr "הקודם"
+
+msgid "next"
+msgstr "הבא"
+
+msgid "Add user"
+msgstr "הוסף משתמש"
+
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "אירעה שגיאה באחד השדות שהזנת. אנא תקן אותו לפני השמירה!"
 
 msgid "You may use the following variables:"
 msgstr "באפשרותך להשתמש במשתנים הבאים:"
-
-msgid "Save"
-msgstr "שמור"
 
 msgid "Currently set Welcome-Email Text"
 msgstr "טקסט ברכת הצטרפות שמוגדר כרגע"
@@ -2133,6 +2387,214 @@ msgstr "הצג בפרויקטים שלי..."
 msgid "Disable editor"
 msgstr "הפוך את העורך ללא זמין"
 
+msgid "Conference is not running"
+msgstr "הוועידה אינה פועלת"
+
+msgid "Accounts from CSV Upload"
+msgstr "חשבונות מהעלאת CSV"
+
+msgid "Upload Participants"
+msgstr "העלאת משתתפים"
+
+msgid "last login"
+msgstr "פעילות אחרונה"
+
+msgid "no login yet"
+msgstr ""
+
+msgid "Admin"
+msgstr "מנהל מערכת"
+
+msgid "Member"
+msgstr "חבר"
+
+msgid "active"
+msgstr "פעיל"
+
+msgid "not active"
+msgstr "לא פעיל"
+
+msgid "User participates in the following workshops:"
+msgstr "המשתמש משתתף בסדנאות הבאות:"
+
+msgid "deactivate member"
+msgstr "השבת חבר"
+
+msgid "activate member"
+msgstr "הפעל חברות"
+
+msgid "remove user"
+msgstr "הסר משתמש"
+
+msgid "Do you really want to deactivate the member's user account ?"
+msgstr "האם שאתה בטוח שברצונך להשבית את חשבון המשתמש של החבר?"
+
+msgid "Deactivate Member"
+msgstr "השבת חבר"
+
+msgid "Do you really want to activate the member's user account ?"
+msgstr "האם אתה בטוח שברצונך להפעיל את חשבון המשתמש של החבר ?"
+
+msgid "Activate Member"
+msgstr "הפעל חברות"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to remove the user?"
+msgstr "האם אתה בטוח שברצונך לדחות את ההזמנה?"
+
+msgid "Remove User"
+msgstr "הסר משתמש"
+
+msgid "Finish conference and deactivate user accounts"
+msgstr "סיים ועידה ובטל הפעלה של חשבונות משתמשים"
+
+msgid "Start conference and activate user accounts"
+msgstr "התחל שיחת ועידה והפעל חשבונות משתמשים"
+
+msgid "Download Statistics"
+msgstr "הורד סטטיסטיקה"
+
+msgid "Add workshop"
+msgstr "הוסף סדנה"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conference reminders"
+msgstr "הוועידה פועלת"
+
+msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
+msgstr ""
+
+msgid "Send 1 week before conference"
+msgstr ""
+
+#, python-format
+msgid "Status info: sent %(sent_date)s"
+msgstr ""
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Invitation subject"
+msgstr "הזמנות"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Invitation text"
+msgstr "הזמנות"
+
+msgid "Send test to myself"
+msgstr ""
+
+msgid "Send 1 day before conference"
+msgstr ""
+
+msgid "Send 1 hour before conference"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgid "Edit Room “%(title)s”"
+msgstr "ערוך את “%(team_name)s”"
+
+#, fuzzy
+#| msgid "Create"
+msgid "Create Room"
+msgstr "צור"
+
+#, fuzzy
+#| msgid "Edit Group"
+msgid "Edit Room"
+msgstr "עריכת קבוצה"
+
+#, fuzzy
+#| msgid "Room Type"
+msgid "Room type"
+msgstr "סוג חדר"
+
+msgid "TODO: Room Type Lobby description text"
+msgstr ""
+
+msgid "TODO: Room Type Stage description text"
+msgstr ""
+
+msgid "TODO: Room Type Workshops description text"
+msgstr ""
+
+msgid "TODO: Room Type Discussions description text"
+msgstr ""
+
+msgid "TODO: Room Type Coffee Tables description text"
+msgstr ""
+
+msgid "TODO: Room Type Results description text"
+msgstr ""
+
+msgid "Add project"
+msgstr "הוספת פרויקט"
+
+msgid "TODO: Room Type Participants description text"
+msgstr ""
+
+msgid "How many participants should can join one coffee table before it is full"
+msgstr ""
+
+msgid "Choose one of the sub-projects of this group to display as nested results-project for participants"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sort field"
+msgid "Sort index"
+msgstr "שדה מיון"
+
+msgid "Number by which rooms are sorted in ascending order in the conference room navigation list"
+msgstr ""
+
+#, fuzzy
+#| msgid "Short Description (optional). Will be shown on the token page."
+msgid "A short description or topic for your room. Will be shown on top of the room page."
+msgstr "תיאור קצר (אופציונלי). יוצג בדף האסימון."
+
+#, fuzzy
+#| msgid "Is visible"
+msgid "Room is visible"
+msgstr "נראית"
+
+msgid "Uncheck this to hide the room for participants (you will still be able to see it)"
+msgstr ""
+
+msgid "Check this to show rocket chat in the sidebar."
+msgstr ""
+
+msgid "Go to Room"
+msgstr ""
+
+msgid "hidden"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Create Conference Event"
+msgstr "צור אירוע"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete announcement \"%(title)s\"?"
+msgid "Do you really want to delete room \"%(title)s\"?"
+msgstr "האם אתה בטוח שברצונך למחוק את ההודעה \"%(title)s\"?"
+
+#, fuzzy
+#| msgid "Delete profile"
+msgid "Delete room"
+msgstr "מחק פרופיל"
+
+msgid "Room list"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no rooms yet."
+msgstr "אין עדיין פריטים"
+
 msgid "Rearrange"
 msgstr "סידור מחדש"
 
@@ -2249,6 +2711,15 @@ msgstr "לא הוגדר תיאור"
 
 msgid "more"
 msgstr "עוד"
+
+msgid "Change User Profile Field Choices"
+msgstr ""
+
+msgid "Enter your choices as semicolon separated values"
+msgstr ""
+
+msgid "Enter your choices"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
@@ -2456,12 +2927,6 @@ msgstr "שלח הודעה לכל החברים"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
 msgstr "שלח הודעה"
-
-msgid "Admin"
-msgstr "מנהל מערכת"
-
-msgid "Member"
-msgstr "חבר"
 
 msgid "Kick"
 msgstr "בעיטה"
@@ -2941,9 +3406,6 @@ msgstr "פקודת הפעלה"
 msgid "Users in team %(group)s"
 msgstr "משתמשים בצוות %(group)s"
 
-msgid "Add user"
-msgstr "הוסף משתמש"
-
 msgid "There are no visible users."
 msgstr "אין משתמשים גלויים."
 
@@ -2961,6 +3423,9 @@ msgstr "מנהלי מערכת פורטל"
 
 msgid "All societies"
 msgstr "כל החברות"
+
+msgid "Reminder emails"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3076,26 +3541,6 @@ msgstr "האם אתה בטוח שברצונך להסיר את החבר „%(name
 msgid "Remove organization"
 msgstr "הסר מיקום"
 
-msgid "Workshop Participant File Upload"
-msgstr "העלאת קובץ המשתתף בסדנה"
-
-#, python-format
-msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr ""
-"אנא העלה/י CSV עם העמודות הבאות: מזהה משתמש ייחודי, שם פרטי, שם משפחה ועמודה אחת עבור כל סדנה המזוהה על ידי שורת הסדר של הסדנה. לעזרה תוכל/י להוריד תבנית \n"
-"<a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-
-msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr ""
-"לאחר מכן הוסף/י שורה עבור כל חשבון אותו תרצה/י להוסיף.\\n\n"
-"עליך להוסיף מזהה משתמש ייחודי אבל השם הפרטי ושם המשפחה יכולים להיות ריקים. לאחר מכן הוסף/י 1 לכל עמודות הסדנה היכן שהמשתמש צריך להיות חבר נורמלי או 2 אם המשתמש המסוים צריך להיות מנהל סדנה."
-
-msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr "העלאת ה-CSV תגרום ליצירת החשבונות וליצירה של חברות בסנדת החשבונות והתוצאה תהיה הורדה ישירה של ה-CSV עם החשבונות והסיסמאות החדשים שנוצרו. הסיסמה תוכלל רק בעת יצירת החשבון. אנא רענן/י את העמוד לאחר ההורדה."
-
-msgid "Upload File"
-msgstr "העלה קובץ"
-
 msgid "Add container"
 msgstr "הוסף קונטיינר"
 
@@ -3203,6 +3648,51 @@ msgstr "צור תיקייה חדשה"
 
 #, python-format
 msgid ""
+"The conference \"%%(group.name)\" starts tomorrow.\n"
+"Start of the event is %%(group.from_date|date:\"SHORT_DATETIME_FORMAT\").\n"
+"\n"
+"Under the following link you can already get an overview of the conference events.\n"
+"\n"
+"Best regards,\n"
+"Your conference team"
+msgstr ""
+
+#, python-format
+msgid "Conference starts tomorrow: %%(group.name)"
+msgstr ""
+
+#, python-format
+msgid ""
+"The conference \"%%(group.name)\" starts soon.\n"
+"Start of the event is %%(group.from_date|date:\"SHORT_DATETIME_FORMAT\").\n"
+"\n"
+"Under the following link you can already get an overview of the conference events.\n"
+"\n"
+"Best regards,\n"
+"Your conference team"
+msgstr ""
+
+#, python-format
+msgid "Conference starts soon: %%(group.name)"
+msgstr ""
+
+#, python-format
+msgid ""
+"The conference \"%%(group.name)\" starts in a week.\n"
+"Start of the event is %%(group.from_date|date:\"SHORT_DATETIME_FORMAT\").\n"
+"\n"
+"Under the following link you can already get an overview of the conference events.\n"
+"\n"
+"Best regards,\n"
+"Your conference team"
+msgstr ""
+
+#, python-format
+msgid "Conference starts next week: %%(group.name)"
+msgstr ""
+
+#, python-format
+msgid ""
 "%(site_name)s CSV import failed!\n"
 "\n"
 "Here is a summary: %(msg)s"
@@ -3276,6 +3766,60 @@ msgstr ""
 #, python-format
 msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
 msgstr "דווח תוכן פוגעני: \"%(object_name)s\" ב-%(site_name)s!"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi %(user_name)s,\n"
+#| "\n"
+#| "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#| "\n"
+#| "You will need to verify your email %(user_email)s before you can log in. \n"
+#| "\n"
+#| "\n"
+#| "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#| "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#| "\n"
+#| "\n"
+#| "\n"
+#| "Thank you and see you soon!\n"
+#| "\n"
+#| "Your %(site_name)s Team"
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"an account was just created for you on %(site_name)s. We're happy to see you!\n"
+"\n"
+"In order to start using your account, you need to first set a password for it.\n"
+"\n"
+"\n"
+"Please click on the following link to set your initial password (or copy and paste the link it in your browser):\n"
+"%(domain_url)s%(verification_token)s\n"
+"\n"
+"\n"
+"Thank you and see you soon!\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"שלום %(user_name)s,\n"
+"\n"
+"בדיוק נרשמת ב-%(site_name)s. אנחנו שמחים לראותך!\n"
+"\n"
+"עליך לאמת את כתובת הדוא\"ל שלך לפני שתוכל להתחבר %(user_email)s.\n"
+"\n"
+"\n"
+"נא לחץ על הקישור הבא כדי לאמת את הכתובת (או העתק והדבק את הקישור לדפדפן שלך):\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
+"\n"
+"\n"
+"\n"
+"תודה... נתראה בקרוב!\n"
+"\n"
+"שלך, צוות %(site_name)s"
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please set yout initial password for %(site_name)s!"
+msgstr "נא אמת את כתובת הדוא\"ל שלך עבור %(site_name)s!"
 
 #, python-format
 msgid ""
@@ -3962,6 +4506,37 @@ msgstr "כתובת הדוא\"ל שהשתמשת בה כדי ליצור חשבון
 msgid "Example: mymail@example.com"
 msgstr "דוגמה: mymail@example.com"
 
+#, fuzzy
+#| msgid "Reset password"
+msgid "Set your password"
+msgstr "איפוס סיסמה"
+
+msgid "Set a password to start using your account"
+msgstr ""
+
+msgid "Before you begin using your account, you first need to set a password. Afterwards, you may log in using this password and your e-mail address."
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter old password"
+msgid "Enter a password"
+msgstr "הזן סיסמה ישנה"
+
+#, fuzzy
+#| msgid "Repeat your password just to make sure"
+msgid "Repeat the password just to make sure"
+msgstr "חזור על סיסמתך רק על מנת לוודא"
+
+#, fuzzy
+#| msgid "Repeat new Password"
+msgid "Repeat the Password"
+msgstr "חזור על הסיסמה החדשה"
+
+#, fuzzy
+#| msgid "Change my password"
+msgid "Set my password"
+msgstr "שנה את הסיסמה שלי"
+
 msgid "Sign up"
 msgstr "הרשם עכשיו"
 
@@ -4094,12 +4669,6 @@ msgstr "או"
 msgid "We could not find any results matching your search query."
 msgstr "לא היתה לנו אפשרות למצוא תוצאות התואמות למילות החיפוש שלך."
 
-msgid "previous"
-msgstr "הקודם"
-
-msgid "next"
-msgstr "הבא"
-
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "הזן מונח חיפוש אחד או יותר או בחר נושא לחיפוש."
 
@@ -4114,6 +4683,9 @@ msgstr "שטח HD המשמש פרוייקטים"
 
 msgid "User statistics (min 1x logged in)"
 msgstr "סטטיסטיקת משתמשים (מינימום 1x מחובר)"
+
+msgid "BBB Room Visits"
+msgstr ""
 
 msgid "E-Mails of all newsletter subcribers"
 msgstr "דוא\"ל של כל מנויי הניוזלטר"
@@ -4160,12 +4732,24 @@ msgid "My Events"
 msgstr "האירועים שלי"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Upload File"
+msgid "My Cloud Files"
+msgstr "העלה קובץ"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Users"
 msgstr "כל המשתמשים"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Events"
 msgstr "כל האירועים"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Upload File"
+msgid "Cloud Files"
+msgstr "העלה קובץ"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Event"
@@ -4182,6 +4766,12 @@ msgid "Organization"
 msgstr "הזמנות"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Upload File"
+msgid "Cloud File"
+msgstr "העלה קובץ"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create User"
 msgstr "צור משתמש"
 
@@ -4194,12 +4784,6 @@ msgstr "צור אירוע"
 #| msgid "Delete invitation"
 msgid "Create Organization"
 msgstr "מחק הזמנה"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Upload File"
-msgid "Cloud Files"
-msgstr "העלה קובץ"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -4658,6 +5242,9 @@ msgstr "לדוגמה"
 msgid "Edit Profile"
 msgstr "ערוך פרופיל"
 
+msgid "Legacy Messages Archive"
+msgstr "ארכיון הודעות מורשת"
+
 #, python-format
 msgid "Your account is currently connected with the Facebook account \"%(name)s\". Do you really want to disconnect your Facebook account? This will also revoke all permissions you granted us to your Facebook account."
 msgstr "החשבון שלך מחובר כעת לחשבון הפייסבוק \"%(name)s\". האם אתה בטוח שברצונך להתנתק מחשבון הפייסבוק? פעולה זו תבטל את ההרשאות שנתת לחשבון הפייסבוק שלך."
@@ -4715,9 +5302,6 @@ msgstr "מחק חשבון משתמש"
 msgid "User profile: %(username)s"
 msgstr "פרופיל משתמש: %(username)s"
 
-msgid "Legacy Messages Archive"
-msgstr "ארכיון הודעות מורשת"
-
 msgid "Cooperation requests"
 msgstr "בקשות לשיתוף פעולה"
 
@@ -4757,6 +5341,11 @@ msgstr "מאותת על נכונותך ליצור קשר עם משתמשים א�
 msgid "I am open for cooperation requests"
 msgstr "אני פתוח לבקשות לשיתוף פעולה"
 
+#, fuzzy
+#| msgid "Messages"
+msgid "Message"
+msgstr "הודעות"
+
 msgid "Welcome!"
 msgstr "ברוכים הבאים!"
 
@@ -4786,9 +5375,6 @@ msgstr "מאת"
 
 msgid "Open Preview"
 msgstr "פתח תצוגה מקדימה"
-
-msgid "active"
-msgstr "פעיל"
 
 msgid "displayed right now"
 msgstr "מוצג כעת"
@@ -4871,6 +5457,135 @@ msgstr "משתמש יכול להסתיר הודעה, במקרה זה היא תי
 
 msgid "There are no announcements yet."
 msgstr "אין הודעות עדיין."
+
+msgid "User Import Archive"
+msgstr ""
+
+msgid "Archived User Imports"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no archived imports yet."
+msgstr "אין עדיין פריטים"
+
+msgid "Delete uploaded data and upload a new CSV file"
+msgstr ""
+
+msgid "Upload a user CSV file to import user profiles"
+msgstr ""
+
+msgid "Please upload a CSV with the following columns (in any order)"
+msgstr ""
+
+msgid "No data will be imported at this point."
+msgstr ""
+
+msgid "The uploaded file will be validated and a report of the data it contains will be shown."
+msgstr ""
+
+msgid "You can then start the import from the report page."
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload File"
+msgid "Upload CSV File"
+msgstr "העלה קובץ"
+
+msgid "The CSV is currently being validated..."
+msgstr ""
+
+msgid "The import is currently running..."
+msgstr ""
+
+msgid "This page will automatically refresh when the process is done."
+msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "No data has been imported yet."
+msgstr "עדיין לא נוספו נתוני איש קשר."
+
+msgid "The uploaded data is valid and ready to be imported! Please review carefully!"
+msgstr ""
+
+msgid "Import the shown data now"
+msgstr ""
+
+msgid "The uploaded data is valid and is ready to be imported."
+msgstr ""
+
+msgid "Please review the data carefully below. Everything that will be imported is shown in the table."
+msgstr ""
+
+msgid "If any data is missing in the report that you think should have been included in the CSV, please do not start the import yet!"
+msgstr ""
+
+msgid "In this case review the uploaded CSV, and if the data is contained there, but not in the report, please contact the support!"
+msgstr ""
+
+#, python-format
+msgid "Once you are ready to begin the import, please click \"%(submit_button_label)s\" at the bottom of the page."
+msgstr ""
+
+msgid "The uploaded data is invalid!"
+msgstr ""
+
+msgid "Please review the errors encountered, and correct them in the CSV. If you have questions, contact our support for help."
+msgstr ""
+
+#, python-format
+msgid "Click \"%(reset_button_label)s\" at the top of the page to start another upload."
+msgstr ""
+
+#, fuzzy
+#| msgid "There was an error loading the widget"
+msgid "There was a critical unexpected error during the import"
+msgstr "אירעה שגיאה בטעינת היישומון"
+
+msgid "Some data may have been imported already, so please do not restart the import at this time!"
+msgstr ""
+
+msgid "The error has been logged in the system, please contact our support for help!"
+msgstr ""
+
+msgid "The uploaded data has been successfully imported!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Password reset successful"
+msgid "Import successful!"
+msgstr "הסיסמה שונתה בהצלחה"
+
+msgid "Archive Import Report"
+msgstr ""
+
+msgid "Below you will find a report of everything that was imported."
+msgstr ""
+
+#, python-format
+msgid "Click \"%(submit_button_label)s\" to archive the report. You can access the report later from the left side navigation of this page."
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to perform the import of the shown data?"
+msgstr "האם אתה בטוח שברצונך לדחות את ההזמנה?"
+
+msgid "Make sure you have double checked all the data that will be imported, as a second import with the same data will not be possible!"
+msgstr ""
+
+msgid "Start the Import?"
+msgstr ""
+
+msgid "Import Now!"
+msgstr ""
+
+msgid "Report for CSV validation performed"
+msgstr ""
+
+msgid "Report for CSV Import performed"
+msgstr ""
 
 msgid "Enable posting to Facebook"
 msgstr "אפשר פרסום בפייסבוק"
@@ -5166,9 +5881,6 @@ msgstr "כל החברים"
 msgid "There are no projects in this group yet."
 msgstr "אין פרויקטים בקבוצה זו עדיין."
 
-msgid "Add project"
-msgstr "הוספת פרויקט"
-
 msgid "Attach Images/Files"
 msgstr "צירוף תמונות/קבצים"
 
@@ -5237,8 +5949,27 @@ msgstr "אודותנו"
 msgid "Question about"
 msgstr "שאלה על"
 
+msgid "The password must contain at least 1 digit, 0-9."
+msgstr ""
+
+msgid "The password must contain at least one upper case character A...Z"
+msgstr ""
+
+msgid "The password must contain at least one lower case character A...Z"
+msgstr ""
+
+msgid "The password must contain at least one special character (e.g.: $ § % & ? ! )"
+msgstr ""
+
+#, python-brace-format
+msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr "בדיקת אימות נשלחה לדוא\"ל!"
+
+msgid "Newsletter successfully created!"
+msgstr ""
 
 msgid "Newsletter sent."
 msgstr ""
@@ -5251,9 +5982,33 @@ msgstr "בדיקת אימות נשלחה לדוא\"ל!"
 msgid "Newsletter has been copied."
 msgstr ""
 
+#, fuzzy
+#| msgid "(The reported item has been deleted.)"
+msgid "Newsletter has been updated."
+msgstr "(הפריט המדווח נמחק.)"
+
+msgid "Login tokens were sent."
+msgstr ""
+
+msgid "Login token was sent."
+msgstr ""
+
+msgid "Die Änderungen wurden erfolgreich gespeichert."
+msgstr ""
+
+#, fuzzy
+#| msgid "User %(username)s was successfully invited!"
+msgid "User successfully created!"
+msgstr "המשתמש %(username)s הוזמן בהצלחה!"
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "השפה \"%s\" אינה נתמכת"
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your data was saved successfully!"
+msgstr "הרעיון שלך נמחק בהצלחה."
 
 msgid "No model given to export data from."
 msgstr "לא ניתן מודל לייצוא נתונים מ.."
@@ -5371,9 +6126,10 @@ msgstr "אין באפשרותך לעזוב את %(team_type)s. אתה מנהל �
 msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
 msgstr "בקשת ההצטרפות שלך ל-%(team_type)s  “%(team_name)s” בוטלה בהצלחה."
 
-#, python-format
-msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
-msgstr "ההזמנה שלך ל-%(team_type)s “%(team_name)s” נדחתה בהצלחה."
+#, fuzzy, python-format
+#| msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
+msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
+msgstr "חברותך מ- %(team_type)s “%(team_name)s” הוסרה."
 
 #, python-format
 msgid "I invited you to join \"%(team_name)s\"!"
@@ -5564,6 +6320,9 @@ msgstr "מצטערים, לא היתה לנו אפשרות לחבר את חשבו
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "מצטערים, אין באפשרותך להיכנס מאחר שהחשבון שלך מושעה. נא פנה למנהל מערכת!"
 
+msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
+msgstr ""
+
 #, python-format
 msgid "Your account \"%(user)s\" was registered successfully. Welcome to the community!"
 msgstr "החשבון שלך \"%(user)s\" נרשם בהצלחה. ברוכים הבאים לקהילה!"
@@ -5664,6 +6423,30 @@ msgstr "ההודעה שלך הופעלה בהצלחה."
 msgid "Your Announcement was deactivated successfully."
 msgstr "ההודעה שלך הושבתה בהצלחה."
 
+#, fuzzy
+#| msgid "This action is not available directly!"
+msgid "This action is not allowed right now"
+msgstr "פעולה זו אינה זמינה ישירות!"
+
+msgid "Another import is currently running!"
+msgstr ""
+
+msgid "No validated CSV upload found to start the import from!"
+msgstr ""
+
+msgid "Unknown POST action!"
+msgstr ""
+
+#, fuzzy
+#| msgid "The following Groups were converted to Projects:"
+msgid "The following columns were not recognized and were ignored"
+msgstr "הקבוצות הבאות הוסבו לפרויקטים:"
+
+#, fuzzy
+#| msgid "The invitation was successfully deleted."
+msgid "The import was successfully archived."
+msgstr "ההזמנה נמחקה בהצלחה."
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש להיות חבר בלחצן שלמטה."
@@ -5671,61 +6454,26 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
 
+#~ msgid "Workshop Participant File Upload"
+#~ msgstr "העלאת קובץ המשתתף בסדנה"
+
+#~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
+#~ msgstr ""
+#~ "אנא העלה/י CSV עם העמודות הבאות: מזהה משתמש ייחודי, שם פרטי, שם משפחה ועמודה אחת עבור כל סדנה המזוהה על ידי שורת הסדר של הסדנה. לעזרה תוכל/י להוריד תבנית \n"
+#~ "<a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
+
+#~ msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
+#~ msgstr ""
+#~ "לאחר מכן הוסף/י שורה עבור כל חשבון אותו תרצה/י להוסיף.\\n\n"
+#~ "עליך להוסיף מזהה משתמש ייחודי אבל השם הפרטי ושם המשפחה יכולים להיות ריקים. לאחר מכן הוסף/י 1 לכל עמודות הסדנה היכן שהמשתמש צריך להיות חבר נורמלי או 2 אם המשתמש המסוים צריך להיות מנהל סדנה."
+
+#~ msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
+#~ msgstr "העלאת ה-CSV תגרום ליצירת החשבונות וליצירה של חברות בסנדת החשבונות והתוצאה תהיה הורדה ישירה של ה-CSV עם החשבונות והסיסמאות החדשים שנוצרו. הסיסמה תוכלל רק בעת יצירת החשבון. אנא רענן/י את העמוד לאחר ההורדה."
+
+#~ msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
+#~ msgstr "ההזמנה שלך ל-%(team_type)s “%(team_name)s” נדחתה בהצלחה."
+
 #, fuzzy
 #~| msgid "Here you can find an overview of Ideas you have liked."
 #~ msgid "Here you can find an overview of items you follow."
 #~ msgstr "כאן ניתן למצוא סקירה כללית של רעיונות שאהבת."
-
-#~ msgid "Conference is not running"
-#~ msgstr "הוועידה אינה פועלת"
-
-#~ msgid "Accounts from CSV Upload"
-#~ msgstr "חשבונות מהעלאת CSV"
-
-#~ msgid "Upload Participants"
-#~ msgstr "העלאת משתתפים"
-
-#~ msgid "last login"
-#~ msgstr "פעילות אחרונה"
-
-#~ msgid "not active"
-#~ msgstr "לא פעיל"
-
-#~ msgid "User participates in the following workshops:"
-#~ msgstr "המשתמש משתתף בסדנאות הבאות:"
-
-#~ msgid "deactivate member"
-#~ msgstr "השבת חבר"
-
-#~ msgid "activate member"
-#~ msgstr "הפעל חברות"
-
-#~ msgid "remove user"
-#~ msgstr "הסר משתמש"
-
-#~ msgid "Do you really want to deactivate the member's user account ?"
-#~ msgstr "האם שאתה בטוח שברצונך להשבית את חשבון המשתמש של החבר?"
-
-#~ msgid "Deactivate Member"
-#~ msgstr "השבת חבר"
-
-#~ msgid "Do you really want to activate the member's user account ?"
-#~ msgstr "האם אתה בטוח שברצונך להפעיל את חשבון המשתמש של החבר ?"
-
-#~ msgid "Activate Member"
-#~ msgstr "הפעל חברות"
-
-#~ msgid "Remove User"
-#~ msgstr "הסר משתמש"
-
-#~ msgid "Finish conference and deactivate user accounts"
-#~ msgstr "סיים ועידה ובטל הפעלה של חשבונות משתמשים"
-
-#~ msgid "Start conference and activate user accounts"
-#~ msgstr "התחל שיחת ועידה והפעל חשבונות משתמשים"
-
-#~ msgid "Download Statistics"
-#~ msgstr "הורד סטטיסטיקה"
-
-#~ msgid "Add workshop"
-#~ msgstr "הוסף סדנה"
