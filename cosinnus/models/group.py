@@ -60,6 +60,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericRelation
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
 from django.core.serializers.json import DjangoJSONEncoder
+from cosinnus.trans.group import get_group_trans_by_type
 
 logger = logging.getLogger('cosinnus')
 
@@ -906,6 +907,22 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def delete(self, *args, **kwargs):
         self._clear_cache(slug=self.slug)
         super(CosinnusBaseGroup, self).delete(*args, **kwargs)
+    
+    @property
+    def trans(self):
+        """ Returns the typed group trans object containing translations for all 
+            type-dependent strings for this group's type.
+            This property only works on instances.
+            See `CosinnusProjectTransBase`. """
+        return get_group_trans_by_type(self.group)
+    
+    @classmethod
+    def get_trans(cls):
+        """ Returns the typed group trans object containing translations for all 
+            type-dependent strings for this group's type.
+            This method only works on classes.
+            See `CosinnusProjectTransBase`. """
+        return get_group_trans_by_type(cls.GROUP_MODEL_TYPE)
     
     @classmethod
     def create_group_for_user(cls, name, user):

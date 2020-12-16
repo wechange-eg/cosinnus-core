@@ -22,7 +22,8 @@ from cosinnus.models.feedback import CosinnusReportedObject,\
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.models.tagged import TagObject
 from cosinnus.models.widget import WidgetConfig
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+    CosinnusConference
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.contrib.auth import login as django_login
 
@@ -165,7 +166,7 @@ class MembershipInline(admin.StackedInline):
 
 
 class CosinnusProjectAdmin(admin.ModelAdmin):
-    actions = ['convert_to_society', 'add_members_to_current_portal', 'move_members_to_current_portal',
+    actions = ['convert_to_society', 'convert_to_conference', 'add_members_to_current_portal', 'move_members_to_current_portal',
                 'move_groups_to_current_portal', 'move_groups_to_current_portal_and_message_users']
     list_display = ('name', 'slug', 'portal', 'public', 'is_active',)
     list_filter = ('portal', 'public', 'is_active',)
@@ -175,7 +176,9 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     raw_id_fields = ('parent',)
     exclude = ('is_conference', 'conference_is_running')
     
-    def convert_to_society(self, request, queryset):
+    ALL_TYPES_CLASSES = [CosinnusProject, CosinnusSociety, CosinnusConference]
+    
+    def _convert_to_type(self, request, queryset, to_group_type, to_group_klass):
         """ Converts this CosinnusGroup's type """
         converted_names = []
         refused_portal_names = []
@@ -183,21 +186,33 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             if group.portal_id != CosinnusPortal.get_current().id:
                 refused_portal_names.append(group.name)
                 continue
+            # don't change type to same type
+            if group.type == to_group_type:
+                continue
             
             # remove haystack index for this group, re-index after
             group.remove_index()
             # swap types
-            group.type = CosinnusGroup.TYPE_SOCIETY
+            old_type = group.type
+            group.type = to_group_type
             # clear parent group if the project had one (societies cannot have parents!)
             group.parent = None
             group.save(allow_type_change=True)
-            if group.type == CosinnusGroup.TYPE_SOCIETY:
+            if group.type == to_group_type:
                 converted_names.append(group.name)
-                CosinnusPermanentRedirect.create_for_pattern(group.portal, CosinnusGroup.TYPE_PROJECT, group.slug, group)
+                CosinnusPermanentRedirect.create_for_pattern(group.portal, old_type, group.slug, group)
+                if old_type == CosinnusGroup.TYPE_SOCIETY:
+                    # all projects that had this group as parent, get set their parent=None and set this as related project
+                    # and all of those former child projects are also added as related to this newly-converted project
+                    for project in get_cosinnus_group_model().objects.filter(parent=group):
+                        project.parent = None
+                        project.save(update_fields=['parent'])
+                        RelatedGroups.objects.get_or_create(from_group=project, to_group=group)
+                        RelatedGroups.objects.get_or_create(from_group=group, to_group=project)
                 
             # we beat the cache with a hammer on all class models, to be sure
-            CosinnusProject._clear_cache(group=group)
-            CosinnusSociety._clear_cache(group=group)
+            for klass in self.ALL_TYPES_CLASSES:
+                klass._clear_cache(group=group)
             get_cosinnus_group_model()._clear_cache(group=group)
             CosinnusGroupMembership.clear_member_cache_for_group(group)
             
@@ -207,17 +222,27 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             
             # re-index haystack for this group after getting a properly classed, fresh object
             group.remove_index()
-            group = CosinnusSociety.objects.get(id=group.id)
+            group = to_group_klass.objects.get(id=group.id)
             group.update_index()
         
         if converted_names:
-            message = _('The following Projects were converted to Groups:') + '\n' + ", ".join(converted_names)
+            message = _('The following items were converted to %s:') % to_group_klass.trans.VERBOSE_NAME_PLURAL + '\n' + ", ".join(converted_names)
             self.message_user(request, message, messages.SUCCESS)
         if refused_portal_names:
-            message_error = 'These Projects could not be converted because they do not belong to this portal:' + '\n' + ", ".join(refused_portal_names)
+            message_error = 'These items could not be converted because they do not belong to this portal:' + '\n' + ", ".join(refused_portal_names)
             self.message_user(request, message_error, messages.ERROR)
+    
+    def convert_to_project(self, request, queryset):
+        self._convert_to_type(request, queryset, CosinnusGroup.TYPE_PROJECT, CosinnusProject)
+    convert_to_project.short_description = _("Convert selected items to %s") % CosinnusProject.get_trans().VERBOSE_NAME_PLURAL
         
-    convert_to_society.short_description = _("Convert selected Projects to Groups")
+    def convert_to_society(self, request, queryset):
+        self._convert_to_type(request, queryset, CosinnusGroup.TYPE_SOCIETY, CosinnusSociety)
+    convert_to_society.short_description = _("Convert selected items to %s") % CosinnusSociety.get_trans().VERBOSE_NAME_PLURAL
+    
+    def convert_to_conference(self, request, queryset):
+        self._convert_to_type(request, queryset, CosinnusGroup.TYPE_CONFERENCE, CosinnusConference)
+    convert_to_conference.short_description = _("Convert selected items to %s") % CosinnusConference.get_trans().VERBOSE_NAME_PLURAL
     
     
     def add_members_to_current_portal(self, request, queryset, remove_all_other_memberships=False):
@@ -324,7 +349,7 @@ admin.site.register(CosinnusProject, CosinnusProjectAdmin)
 
 class CosinnusSocietyAdmin(CosinnusProjectAdmin):
     
-    actions = ['convert_to_project', 'move_society_and_subprojects_to_portal', 
+    actions = ['convert_to_project', 'convert_to_conference', 'move_society_and_subprojects_to_portal', 
                 'move_society_and_subprojects_to_portal_and_message_users']
     exclude = None
     
@@ -346,60 +371,24 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
         self.move_society_and_subprojects_to_portal(request, queryset, message_members=True)
     move_society_and_subprojects_to_portal_and_message_users.short_description = _("Move selected groups and their subprojects to current portal and message members")
     
-    
-    def convert_to_project(self, request, queryset):
-        """ Converts this CosinnusGroup's type """
-        converted_names = []
-        refused_portal_names = []
-        for group in queryset:
-            if group.portal_id != CosinnusPortal.get_current().id:
-                refused_portal_names.append(group.name)
-                continue
-            # remove haystack index for this group, re-index after
-            group.remove_index()
-            # swap types
-            group.type = CosinnusGroup.TYPE_PROJECT
-            group.save(allow_type_change=True)
-            
-            if group.type == CosinnusGroup.TYPE_PROJECT:
-                converted_names.append(group.name)
-                CosinnusPermanentRedirect.create_for_pattern(group.portal, CosinnusGroup.TYPE_SOCIETY, group.slug, group)
-                # all projects that had this group as parent, get set their parent=None and set this as related project
-                # and all of those former child projects are also added as related to this newly-converted project
-                for project in get_cosinnus_group_model().objects.filter(parent=group):
-                    project.parent = None
-                    project.save(update_fields=['parent'])
-                    RelatedGroups.objects.get_or_create(from_group=project, to_group=group)
-                    RelatedGroups.objects.get_or_create(from_group=group, to_group=project)
-                    
-            # we beat the cache with a hammer on all class models, to be sure
-            CosinnusProject._clear_cache(group=group)
-            CosinnusSociety._clear_cache(group=group)
-            get_cosinnus_group_model()._clear_cache(group=group)
-            CosinnusGroupMembership.clear_member_cache_for_group(group)
-            # delete and recreate all group widgets (there might be different ones for group than for porject)
-            WidgetConfig.objects.filter(group_id=group.pk).delete()
-            create_initial_group_widgets(group, group)
-            
-            # re-index haystack for this group after getting a properly classed, fresh object
-            group.remove_index()
-            group = CosinnusProject.objects.get(id=group.id)
-            group.update_index()
-        
-        if converted_names:
-            message = _('The following Groups were converted to Projects:') + '\n' + ", ".join(converted_names)
-            self.message_user(request, message, messages.SUCCESS)
-        if refused_portal_names:
-            message_error = 'These Groups could not be converted because they do not belong to this portal:' + '\n' + ", ".join(refused_portal_names)
-            self.message_user(request, message_error, messages.ERROR)
-        
-    convert_to_project.short_description = _("Convert selected Groups to Projects")
-    
     def get_form(self, request, obj=None, **kwargs):
         self.exclude = ("parent", )
         return super(CosinnusSocietyAdmin, self).get_form(request, obj, **kwargs)
 
 admin.site.register(CosinnusSociety, CosinnusSocietyAdmin)
+
+
+class CosinnusConferenceAdmin(CosinnusProjectAdmin):
+    
+    actions = ['convert_to_project', 'convert_to_society',]
+    exclude = None
+    
+    def get_actions(self, request):
+        actions = super(CosinnusSocietyAdmin, self).get_actions(request)
+        del actions['convert_to_conference']
+        return actions
+
+admin.site.register(CosinnusConference, CosinnusConferenceAdmin)
 
 
 class CosinnusPortalAdmin(admin.ModelAdmin):

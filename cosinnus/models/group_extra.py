@@ -47,13 +47,26 @@ from cosinnus.models.group import CosinnusGroupManager, CosinnusGroup,\
 
 logger = logging.getLogger('cosinnus')
 
+
 class CosinnusProjectManager(CosinnusGroupManager):
     def get_queryset(self):
         return super(CosinnusProjectManager, self).get_queryset().filter(type=CosinnusGroup.TYPE_PROJECT)
 
     get_query_set = get_queryset
 
+    
+class CosinnusSocietyManager(CosinnusGroupManager):
+    def get_queryset(self):
+        return super(CosinnusSocietyManager, self).get_queryset().filter(type=CosinnusGroup.TYPE_SOCIETY)
 
+    get_query_set = get_queryset
+    
+    
+class CosinnusConferenceManager(CosinnusGroupManager):
+    def get_queryset(self):
+        return super(CosinnusConferenceManager, self).get_queryset().filter(type=CosinnusGroup.TYPE_CONFERENCE)
+
+    get_query_set = get_queryset
 
 
 @python_2_unicode_compatible
@@ -79,22 +92,13 @@ class CosinnusProject(get_cosinnus_group_model()):
     def __str__(self):
         # FIXME: better caching for .portal.name
         return '%s (%s)' % (self.name, self.portal.name)
-
+    
+    @classmethod
+    def get_trans(cls):
+        """ Added this for IDEs and parsers to not mark the unknown `get_trans()` property everywhere the subtypes are 
+            called using this directly. """
+        return super(CosinnusProject, cls).get_trans()
         
-    
-class CosinnusSocietyManager(CosinnusGroupManager):
-    def get_queryset(self):
-        return super(CosinnusSocietyManager, self).get_queryset().filter(type=CosinnusGroup.TYPE_SOCIETY)
-
-    get_query_set = get_queryset
-    
-    
-class CosinnusConferenceManager(CosinnusGroupManager):
-    def get_queryset(self):
-        return super(CosinnusConferenceManager, self).get_queryset().filter(type=CosinnusGroup.TYPE_CONFERENCE)
-
-    get_query_set = get_queryset
-
 
 @python_2_unicode_compatible
 class CosinnusSociety(get_cosinnus_group_model()):
@@ -120,6 +124,12 @@ class CosinnusSociety(get_cosinnus_group_model()):
         # FIXME: better caching for .portal.name
         return '%s (%s)' % (self.name, self.portal.name)
 
+    @classmethod
+    def get_trans(cls):
+        """ Added this for IDEs and parsers to not mark the unknown `get_trans()` property everywhere the subtypes are 
+            called using this directly. """
+        return super(CosinnusSociety, cls).get_trans()
+    
 
 class CosinnusConference(get_cosinnus_group_model()):
     
@@ -143,6 +153,12 @@ class CosinnusConference(get_cosinnus_group_model()):
     def __str__(self):
         # FIXME: better caching for .portal.name
         return '%s (%s)' % (self.name, self.portal.name)
+
+    @classmethod
+    def get_trans(cls):
+        """ Added this for IDEs and parsers to not mark the unknown `get_trans()` property everywhere the subtypes are 
+            called using this directly. """
+        return super(CosinnusConference, cls).get_trans()
 
     
 CosinnusGroup = get_cosinnus_group_model()

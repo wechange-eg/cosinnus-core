@@ -345,6 +345,13 @@ class CosinnusConf(AppConf):
         
     ]
     
+    
+    # a map of class dropins for the typed group trans classes
+    # status (int) --> class (str classpath)
+    GROUP_TRANS_TYPED_CLASSES_DROPINS = {
+    }
+    
+    
     # all uploaded cosinnus images are scaled down on the website  (except direct downloads)
     # this is the maximum scale (at least one dimension fits) for any image
     IMAGE_MAXIMUM_SIZE_SCALE = (800, 800) 
