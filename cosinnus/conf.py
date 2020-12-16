@@ -622,6 +622,15 @@ class CosinnusConf(AppConf):
     # if False, users can only create Projects 
     USERS_CAN_CREATE_GROUPS = False
     
+    # should regular, non-admin users be allowed to create CosinnusConferences as well?
+    # if False, users can only create Projects 
+    USERS_CAN_CREATE_CONFERENCES = False
+    
+    # should the "Create Conference" Main menu entry under the "+" menu be shown?
+    # (this is safe with use of `USERS_CAN_CREATE_CONFERENCES`, 
+    #  as non-permitted users will be redirected to an explanation page)  
+    SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON = False
+    
     # if set to True, regular non-portal admin users can not create projects and groups by themselves
     # and some elements like the "+" button in the navbar is hidden
     LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS = False

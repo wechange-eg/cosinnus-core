@@ -14,7 +14,7 @@
 	{% if object %}
 	   {% blocktrans with team_name=object.name %}Edit “{{ team_name }}”{% endblocktrans %}
 	{% else %}
-	   {% if group_model == "CosinnusSociety" %}{% trans "Create Group" %}{% else %}{% trans "Create Project" %}{% endif %}
+	   {{ group_model_class.get_trans.CREATE }}
     {% endif %}
 {% endblock %}
 

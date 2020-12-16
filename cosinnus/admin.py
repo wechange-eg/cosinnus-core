@@ -226,7 +226,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             group.update_index()
         
         if converted_names:
-            message = _('The following items were converted to %s:') % to_group_klass.trans.VERBOSE_NAME_PLURAL + '\n' + ", ".join(converted_names)
+            message = _('The following items were converted to %s:') % to_group_klass.get_trans().VERBOSE_NAME_PLURAL + '\n' + ", ".join(converted_names)
             self.message_user(request, message, messages.SUCCESS)
         if refused_portal_names:
             message_error = 'These items could not be converted because they do not belong to this portal:' + '\n' + ", ".join(refused_portal_names)
@@ -234,15 +234,15 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     
     def convert_to_project(self, request, queryset):
         self._convert_to_type(request, queryset, CosinnusGroup.TYPE_PROJECT, CosinnusProject)
-    convert_to_project.short_description = _("Convert selected items to %s") % CosinnusProject.get_trans().VERBOSE_NAME_PLURAL
+    convert_to_project.short_description = CosinnusProject.get_trans().CONVERT_ITEMS_TO
         
     def convert_to_society(self, request, queryset):
         self._convert_to_type(request, queryset, CosinnusGroup.TYPE_SOCIETY, CosinnusSociety)
-    convert_to_society.short_description = _("Convert selected items to %s") % CosinnusSociety.get_trans().VERBOSE_NAME_PLURAL
+    convert_to_society.short_description = CosinnusSociety.get_trans().CONVERT_ITEMS_TO
     
     def convert_to_conference(self, request, queryset):
         self._convert_to_type(request, queryset, CosinnusGroup.TYPE_CONFERENCE, CosinnusConference)
-    convert_to_conference.short_description = _("Convert selected items to %s") % CosinnusConference.get_trans().VERBOSE_NAME_PLURAL
+    convert_to_conference.short_description = CosinnusConference.get_trans().CONVERT_ITEMS_TO
     
     
     def add_members_to_current_portal(self, request, queryset, remove_all_other_memberships=False):

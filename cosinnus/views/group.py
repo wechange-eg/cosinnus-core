@@ -64,7 +64,7 @@ from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
                                    CosinnusGroupGalleryImage, CosinnusGroupCallToActionButton,
                                    CosinnusUnregisterdUserGroupInvite)
 from cosinnus.models.group_extra import CosinnusSociety, \
-    ensure_group_type
+    ensure_group_type, CosinnusConference
 from cosinnus.models.membership import MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, MEMBERSHIP_ADMIN, \
     MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS, MembershipClassMixin
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
@@ -164,13 +164,14 @@ class CosinnusGroupFormMixin(object):
             return redirect(reverse('cosinnus:portal-admin-list'))
         
         # special check: only portal admins can create groups
-        if not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False) and self.form_view == 'add' and model_class == CosinnusSociety:
+        if (not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False) and self.form_view == 'add' and model_class == CosinnusSociety) or \
+                (not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_CONFERENCES', False) and self.form_view == 'add' and model_class == CosinnusConference):
             if not check_user_superuser(self.request.user):
                 
                 if getattr(settings, 'COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED', False):
                     redirect_url = reverse('cosinnus:premium-info-page')
                 else:
-                    messages.warning(self.request, _('Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators.'))
+                    messages.warning(self.request, model_class.get_trans().MESSAGE_ONLY_ADMINS_MAY_CREATE)
                     redirect_url = reverse('cosinnus:portal-admin-list')
                 return redirect(redirect_url) 
         
@@ -1421,10 +1422,12 @@ class ActivateOrDeactivateGroupView(TemplateView):
         # only admins and group admins may deactivate groups/projects
         if not (is_admin or check_ug_admin(request.user, group)):
             redirect_to_403(request, self)
-        # special check: only portal admins can create/deactivate CosinnusSocieties
-        if group.type == CosinnusGroup.TYPE_SOCIETY and not is_admin and \
-                not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False):
-            messages.warning(self.request, _('Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.'))
+        # special check: only portal admins can create/deactivate CosinnusSocieties/Conferences
+        if (group.type == CosinnusGroup.TYPE_SOCIETY and not is_admin and \
+                not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False)) or \
+                (group.type == CosinnusGroup.TYPE_CONFERENCE and not is_admin and \
+                not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_CONFERENCES', False)):
+            messages.warning(self.request, group.trans.MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE)
             return redirect(reverse('cosinnus:portal-admin-list'))
         
         if group.is_active and self.activate or (not group.is_active and not self.activate):
