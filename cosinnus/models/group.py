@@ -914,7 +914,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
             type-dependent strings for this group's type.
             This property only works on instances.
             See `CosinnusProjectTransBase`. """
-        return get_group_trans_by_type(self.group)
+        return get_group_trans_by_type(self.type)
     
     @classmethod
     def get_trans(cls):
@@ -1051,19 +1051,19 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
 
     def get_icon(self):
         """ Returns the font-awesome icon specific to the group type """
-        return 'fa-group' if self.type == self.TYPE_PROJECT else 'fa-sitemap'
+        return self.trans.ICON
 
     def get_group_label(self):
         """ Returns the vocal name of the group, depending on type """
-        return _('Project') if self.type == self.TYPE_PROJECT else _('Group')
+        return self.trans.VERBOSE_NAME
 
     def get_group_menu_label(self):
         """ Returns the vocal name of the group menu, depending on type """
-        return _('Project Menu') if self.type == self.TYPE_PROJECT else _('Group Menu')
+        return self.trans.MENU_LABEL
 
     def get_group_dashboard_label(self):
         """ Returns the vocal name of the group dashboard, depending on type """
-        return _('Project Dashboard') if self.type == self.TYPE_PROJECT else _('Group Dashboard')
+        return self.trans.DASHBOARD_LABEL
 
     @property
     def avatar_url(self):

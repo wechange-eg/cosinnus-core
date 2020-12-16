@@ -15,8 +15,21 @@ class CosinnusProjectTransBase(object):
         Always inherit at least the base class `CosinnusProjectTransBase` to make sure no 
         class members are missing! """
     
+    ICON = 'fa-group'
+    
     VERBOSE_NAME = _('Project')
     VERBOSE_NAME_PLURAL = _('Projects')
+    
+    MENU_LABEL = _('Project Menu')
+    DASHBOARD_LABEL = _('Project Dashboard')
+    CREATE = _('Create Project')
+    EDIT = _('Edit Project')
+    ACTIVATE = _('Activate Project')
+    REACTIVATE = _('Re-activate Project')
+    DEACTIVATE = _('Deactivate Project')
+    
+    FORMFIELD_NAME = _('Project name')
+    
 
 
 class CosinnusSocietyTransBase(CosinnusProjectTransBase):
@@ -26,8 +39,20 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
         to vary the names of i.e. "Conferences" to "Expos".
     """
     
+    ICON = 'fa-sitemap'
+    
     VERBOSE_NAME = _('Group')
     VERBOSE_NAME_PLURAL = _('Groups')
+    
+    MENU_LABEL = _('Group Menu')
+    DASHBOARD_LABEL = _('Group Dashboard')
+    CREATE = _('Create Group')
+    EDIT = _('Edit Group')
+    ACTIVATE = _('Activate Group')
+    REACTIVATE = _('Re-activate Group')
+    DEACTIVATE = _('Deactivate Group')
+    
+    FORMFIELD_NAME = _('Group name')
     
     
 class CosinnusConferenceTransBase(CosinnusProjectTransBase):
@@ -37,8 +62,20 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
         to vary the names of i.e. "Conferences" to "Expos".
     """
     
+    ICON = 'fa-television'
+    
     VERBOSE_NAME = _('Conference')
     VERBOSE_NAME_PLURAL = _('Conferences')
+    
+    MENU_LABEL = _('Conference Menu')
+    DASHBOARD_LABEL = _('Conference Dashboard')
+    CREATE = _('Create Conference')
+    EDIT = _('Edit Conference')
+    ACTIVATE = _('Activate Conference')
+    REACTIVATE = _('Re-activate Conference')
+    DEACTIVATE = _('Deactivate Conference')
+    
+    FORMFIELD_NAME = _('Conference name')
         
 
 # allow dropin of trans classes

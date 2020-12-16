@@ -227,6 +227,7 @@ class CosinnusGroupFormMixin(object):
             
         context.update({
             'group_model': self.group_model_class.__name__,
+            'group_model_class': self.group_model_class,
             'deactivated_app_selection': deactivated_app_selection,
             'microsite_public_apps_selection': microsite_public_apps_selection,
         })

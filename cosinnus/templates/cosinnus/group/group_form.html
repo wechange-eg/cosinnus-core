@@ -44,9 +44,9 @@
 {% block breadcrumb %}
         {{ block.super }}
         {% if object %}
-            <li class="active">{% if group_model == "CosinnusSociety" %}{% trans "Edit Group" %}{% else %}{% trans "Edit Project" %}{% endif %}</li>
+            <li class="active">{{ group_model_class.get_trans.EDIT }}</li>
         {% else %}
-            <li class="active">{% if group_model == "CosinnusSociety" %}{% trans "Create Group" %}{% else %}{% trans "Create Project" %}{% endif %}</li>
+            <li class="active">{{ group_model_class.get_trans.CREATE }}</li>
         {% endif %}
 {% endblock %}
 
@@ -164,8 +164,7 @@
 				{% block group_form_tab_panes %}
 					<div class="tab-pane {% if not SETTINGS.COSINNUS_MICROSITES_ENABLED or not request.GET.tab %}active{% endif %}" id="general">
 						
-                        {% captureas name_label %}{% if group_model == "CosinnusSociety" %}{% trans "Group name" %}{% else %}{% trans "Project name" %}{% endif %}{% endcaptureas %}
-                        {% include 'cosinnus/fields/default_field.html' with label=name_label field_id=form.forms.obj.name.id_for_label first=True %}
+                        {% include 'cosinnus/fields/default_field.html' with label=group_model_class.get_trans.FORMFIELD_NAME field_id=form.forms.obj.name.id_for_label first=True %}
                         
                         {# Name Field #}
 						{% block group_form_name_field %}

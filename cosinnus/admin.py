@@ -384,7 +384,7 @@ class CosinnusConferenceAdmin(CosinnusProjectAdmin):
     exclude = None
     
     def get_actions(self, request):
-        actions = super(CosinnusSocietyAdmin, self).get_actions(request)
+        actions = super(CosinnusConferenceAdmin, self).get_actions(request)
         del actions['convert_to_conference']
         return actions
 

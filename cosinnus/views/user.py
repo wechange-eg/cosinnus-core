@@ -71,7 +71,8 @@ from annoying.functions import get_object_or_None
 import logging
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetConfirmView
 from django.utils.timezone import now
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+    CosinnusConference
 from django_select2.views import Select2View, NO_ERR_RESP
 from django.core.exceptions import PermissionDenied
 from cosinnus import cosinnus_notifications
@@ -364,8 +365,7 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
         messages.success(request, self.message_success)
         
         # conference groups
-        user_societies = CosinnusSociety.objects.get_for_user(request.user)
-        user_conferences = [society for society in user_societies if society.group_is_conference]
+        user_conferences = CosinnusConference.objects.get_for_user(request.user)
         if len(user_conferences) > 0:
             # if the user is part of a conference, redirect there after the welcome screen
             redirect_url = user_conferences[0].get_absolute_url()

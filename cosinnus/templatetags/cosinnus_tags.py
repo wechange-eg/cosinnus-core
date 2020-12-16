@@ -46,7 +46,8 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.template.defaultfilters import linebreaksbr
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+    CosinnusConference
 from wagtail.core.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
 from annoying.functions import get_object_or_None
@@ -392,7 +393,7 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         context['groups_invited_count'] = len(groups_invited)
 
         # conferences        
-        my_conferences = [society for society in CosinnusSociety.objects.get_for_user(request.user) if society.group_is_conference]
+        my_conferences = CosinnusConference.objects.get_for_user(request.user)
         context['my_conferences_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(conference) for conference in my_conferences]))
         
         membership_requests = []
@@ -412,8 +413,7 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         context['group_requests_count'] = membership_requests_count
         
         # conference groups
-        user_societies = CosinnusSociety.objects.get_for_user(request.user)
-        context['my_conference_groups'] = [society for society in user_societies if society.group_is_conference]
+        context['my_conference_groups'] = my_conferences
         
         attending_events = []
         try:

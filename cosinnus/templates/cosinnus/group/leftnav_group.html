@@ -22,8 +22,7 @@
 
 {% if user|has_write_access:object %}
 	{% captureas href %}{% group_url 'cosinnus:group-edit' group=group %}{% endcaptureas %}
-	{% captureas label %}{% if group and group.type == 1 or group_model == "CosinnusSociety" %}{% trans "Edit Group" %}{% else %}{% trans "Edit Project" %}{% endif %}{% endcaptureas %}
-	{% include "cosinnus/leftnav_button.html" with active=is_editgroup extra_classes="fine-space" icon="fa-info-circle" label=label href=href  %}
+	{% include "cosinnus/leftnav_button.html" with active=is_editgroup extra_classes="fine-space" icon="fa-pencil" label=group.trans.EDIT href=href  %}
 {% endif %}
 
 {% if group.group_is_conference and user|has_write_access:object %}
@@ -57,7 +56,7 @@
 
 {% if user|is_group_admin:group or user|is_superuser %}
 	{% captureas href %}{% if activate %}{% url 'cosinnus:group-activate' group_id=group.id %}{% else %}{% url 'cosinnus:group-deactivate' group_id=group.id %}{% endif %}{% endcaptureas %}
-	{% captureas label %}{% if group and group.type == 1 or group_model == "CosinnusSociety" %}{% if activate %}{% trans "Re-activate Group" %}{% else %}{% trans "Deactivate Group" %}{% endif %}{% else %}{% if activate %}{% trans "Activate Project" %}{% else %}{% trans "Deactivate Project" %}{% endif %}{% endif %}{% endcaptureas %}
+	{% captureas label %}{% if activate %}{{ group.trans.REACTIVATE }}{% else %}{{ group.trans.DEACTIVATE }}{% endif %}{% endcaptureas %}
 	{% captureas icon %}{% if activate %}fa-flash{% else %}fa-times{% endif %}{% endcaptureas %}
 	{% include "cosinnus/leftnav_button.html" with active=is_deactivategroup extra_classes="large-space" icon=icon label=label href=href  %}
 {% else %}
