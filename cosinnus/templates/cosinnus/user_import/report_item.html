@@ -6,5 +6,5 @@
     {% elif report_class == "info" %}
         <i class="fa fa-info-circle "></i>
     {% endif %}        
-    {{ text }}
+    {{ text|safe }}
 </div>
