@@ -28,6 +28,8 @@
                 {{ form.application_start.errors }}
                 {{ form.application_end.errors }}
                 <ol class="input-area">
+
+                    <!-- application start date -->
                     <li class="calendar-date-time-chooser">
                         {% trans "From" %} <i class="fa fa-calendar"></i>
                         <input
@@ -43,6 +45,8 @@
                         >
                         <div class="small-calendar"></div>
                     </li>
+
+                    <!-- application end date -->
                     <li class="calendar-date-time-chooser">
                         {% trans "Until" %} <i class="fa fa-calendar"></i>
                         <input
@@ -62,11 +66,11 @@
             {% endcaptureas %}
             {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label label=date_label large_field=True %}
 
-            {% trans "Conditions for participitation" as conditions_label %}
+            {% trans "Conditions for participation" as conditions_label %}
             {% include 'cosinnus/fields/default_field.html' with field=form.application_conditions label=conditions_label large_field=True%}
 
             {% if form.application_options %}
-            {% trans "Options for participitation" as options_label %}
+            {% trans "Options for participation" as options_label %}
             {% include 'cosinnus/fields/default_field.html' with field=form.application_options label=options_label large_field=True%}
             {% endif %}
 
