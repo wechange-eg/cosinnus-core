@@ -19,6 +19,7 @@ class CosinnusProjectTransBase(object):
     
     VERBOSE_NAME = _('Project')
     VERBOSE_NAME_PLURAL = _('Projects')
+    ALL_LIST = _('All Projects')
     
     MENU_LABEL = _('Project Menu')
     DASHBOARD_LABEL = _('Project Dashboard')
@@ -48,6 +49,7 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     
     VERBOSE_NAME = _('Group')
     VERBOSE_NAME_PLURAL = _('Groups')
+    ALL_LIST = _('All Groups')
     
     MENU_LABEL = _('Group Menu')
     DASHBOARD_LABEL = _('Group Dashboard')
@@ -77,6 +79,7 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     
     VERBOSE_NAME = _('Conference')
     VERBOSE_NAME_PLURAL = _('Conferences')
+    ALL_LIST = _('All Conferences')
     
     MENU_LABEL = _('Conference Menu')
     DASHBOARD_LABEL = _('Conference Dashboard')

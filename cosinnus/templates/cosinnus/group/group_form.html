@@ -24,14 +24,13 @@
         {% captureas current_page %}editgroup{% endcaptureas %}
         {% include "cosinnus/group/leftnav_group.html"  with current_page=current_page %}
     {% else %}
-        {% captureas current_page %}{% if group_model == "CosinnusSociety" %}addsociety{% else %}addgroup{% endif %}{% endcaptureas %}
-        {% include "cosinnus/group/leftnav_all_groups.html"  with current_page=current_page %}
+        {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="add"|addstr:group_model %}
     {% endif %}
     
     {% if group_model == "CosinnusSociety" %}
         {% trans "Help about groups" as help_label %}
         {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_1_group" label=help_label %}
-    {% else %}
+    {% elif group_model == "CosinnusProject" %}
         {% trans "Help about projects" as help_label %}
         {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_2_project" label=help_label %}
     {% endif %}

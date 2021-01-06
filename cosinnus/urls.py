@@ -55,6 +55,7 @@ urlpatterns = [
     
     url(r'^projects/$', map.tile_view, name='group-list', kwargs={'types': ['projects']}),
     url(r'^groups/$', map.tile_view, name='group__group-list', kwargs={'types': ['groups']}),
+    url(r'^conferences/$', map.tile_view, name='conference__group-list', kwargs={'types': ['conferences']}),
     url(r'^projects/mine/$', map.tile_view, name='group-list-mine', kwargs={'types': ['projects'], 'show_mine': True}),
     url(r'^groups/mine/$', map.tile_view, name='group__group-list-mine', kwargs={'types': ['groups'], 'show_mine': True}),
     
