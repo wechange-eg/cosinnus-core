@@ -36,6 +36,7 @@ UI_PREF_DASHBOARD_WIDGET_SORT_KEY_TODOS = 'dashboard_widgets_sort_key__todos'
 UI_PREF_DASHBOARD_WIDGET_SORT_KEY_POLLS = 'dashboard_widgets_sort_key__polls'
 UI_PREF_DASHBOARD_WIDGET_SORT_KEY_OFFERS = 'dashboard_widgets_sort_key__offers'
 UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS = 'dashboard_announcements__hidden'
+UI_PREF_GLOBAL_HIDE_FOOTER = 'global_footer__hidden'
 
 
 ALL_UI_PREFS = {
@@ -50,6 +51,7 @@ ALL_UI_PREFS = {
     UI_PREF_DASHBOARD_WIDGET_SORT_KEY_POLLS: forms.IntegerField(initial=6, validators=[MinValueValidator(0), MaxValueValidator(100)]),
     UI_PREF_DASHBOARD_WIDGET_SORT_KEY_OFFERS: forms.IntegerField(initial=7, validators=[MinValueValidator(0), MaxValueValidator(100)]),
     UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS: UiPrefIntegerListField(initial=[]),
+    UI_PREF_GLOBAL_HIDE_FOOTER: forms.BooleanField(initial=False, required=False),
 }
 
 
