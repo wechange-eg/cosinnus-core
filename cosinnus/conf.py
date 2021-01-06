@@ -918,3 +918,9 @@ class CosinnusDefaultSettings(AppConf):
     STARRED_USERS_LIST = _('Bookmarked Users list')
 
     PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
+
+    CONFERENCE_PARTICIPATION_OPTIONS = [
+        (1, _('Vegan cuisine')),
+        (2, _('Vegetarian cuisine')),
+        (3, _('Hotelroom needed'))
+    ]

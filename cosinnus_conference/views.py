@@ -9,7 +9,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 from django.utils.crypto import get_random_string
@@ -43,7 +43,7 @@ from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
 from django.http.response import Http404, HttpResponseForbidden,\
     HttpResponseNotFound
 
-from cosinnus_conference.forms import ConferenceRemindersForm
+from cosinnus_conference.forms import ConferenceRemindersForm, ConferenceParticipationManagement
 from cosinnus_conference.utils import send_conference_reminder
 
 logger = logging.getLogger('cosinnus')
@@ -501,10 +501,45 @@ class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsCo
         return super(ConferenceRemindersView, self).form_valid(form)
 
     def get_success_url(self):
-        messages.success(self.request, self.message_success)
         return group_aware_reverse('cosinnus:conference:reminders', kwargs={'group': self.group})
 
 
+class ConferenceParticipationManagementView(SamePortalGroupMixin,
+                                            RequireWriteMixin,
+                                            GroupIsConferenceMixin,
+                                            FormView):
+    form_class = ConferenceParticipationManagement
+    template_name = 'cosinnus/conference/conference_participation_management.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'group': self.group,
+        })
+        return context
+
+    def get_form_kwargs(self):
+        form_kwargs = super().get_form_kwargs()
+        if self.group.participation_management:
+            form_kwargs['instance'] = self.group.participation_management.first()
+        return form_kwargs
+
+    def form_valid(self, form):
+        if not form.instance.id:
+            management = form.save(commit=False)
+            management.conference = self.group
+            management.save()
+        else:
+            form.save()
+        messages.success(self.request, _('Participation configurations have been updated.'))
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:conference:participation-management',
+                                   kwargs={'group': self.group})
+
+
+conference_participation_management = ConferenceParticipationManagementView.as_view()
 conference_management = ConferenceManagementView.as_view()
 workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
 workshop_participants_download = WorkshopParticipantsDownloadView.as_view()

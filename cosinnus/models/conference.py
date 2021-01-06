@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from builtins import object
 import locale
 
+from django.contrib.postgres.fields import JSONField as PostgresJSONField
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
@@ -213,5 +214,16 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
                 else:
                     logger.error('Could not create a conferenceroom rocketchat room!', 
                                  extra={'conference-room-id': self.id, 'conference-room-slug': self.slug})
-        
-        
+
+
+class ParticipationManagement(models.Model):
+
+    participants_limit = models.IntegerField(blank=True, null=True)
+    application_start = models.DateTimeField(blank=True, null=True)
+    application_end = models.DateTimeField(blank=True, null=True)
+    application_conditions = models.TextField(blank=True)
+    application_options = PostgresJSONField(default=list, blank=True, null=True)
+    conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
+                                           verbose_name=_('Participation Management'),
+                                           related_name='participation_management',
+                                           on_delete=models.CASCADE)

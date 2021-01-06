@@ -16,6 +16,8 @@
     {% captureas is_conferencemanagement %}True{% endcaptureas %}
 {% elif current_page == "conferenceroommanagement" %}
     {% captureas is_conferenceroommanagement %}True{% endcaptureas %}
+{% elif current_page == "conference_participation_manangement" %}
+    {% captureas is_conference_participation_manangement %}True{% endcaptureas %}
 {% elif current_page == "conferenceeventmanagement" %}
     {% captureas is_conferenceeventmanagement %}True{% endcaptureas %}
 {% endif %}
@@ -29,6 +31,10 @@
 	{% captureas href %}{% group_url 'cosinnus:conference:management' group=group %}{% endcaptureas %}
 	{% captureas label %}{% trans "Conference Management" %}{% endcaptureas %}
 	{% include "cosinnus/leftnav_button.html" with active=is_conferencemanagement extra_classes="fine-space" icon_full_class="fas fa-chalkboard-teacher" label=label href=href  %}
+
+    {% captureas href %}{% group_url 'cosinnus:conference:participation-management' group=group %}{% endcaptureas %}
+	{% captureas label %}{% trans "Conference Participation Management" %}{% endcaptureas %}
+	{% include "cosinnus/leftnav_button.html" with active=is_conference_participation_manangement extra_classes="fine-space" icon_full_class="fas fa-user-friends" label=label href=href  %}
 
 	{% captureas href %}{% group_url 'cosinnus:conference:room-management' group=group %}{% endcaptureas %}
     {% captureas label %}{% trans "Conference Room Management" %}{% endcaptureas %}
