@@ -2,6 +2,13 @@ from django import forms
 
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_conference.utils import get_initial_template
+from cosinnus.models.conference import ParticipationManagement
+from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
+
+from django.forms.widgets import SelectMultiple
+from django_select2.widgets import Select2MultipleWidget
+from cosinnus.forms.widgets import SplitHiddenDateWidget
 
 
 class ConferenceRemindersForm(forms.ModelForm):
@@ -45,3 +52,32 @@ class ConferenceRemindersForm(forms.ModelForm):
             elif self.instance.extra_fields and key in self.instance.extra_fields:
                 del self.instance.extra_fields[key]
         return super(ConferenceRemindersForm, self).save(commit)
+
+
+class ConferenceParticipationManagement(forms.ModelForm):
+    application_options = forms.MultipleChoiceField(
+        choices=settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS, required=False)
+    application_start = forms.SplitDateTimeField(required=False,
+                                                 widget=SplitHiddenDateWidget())
+    application_end = forms.SplitDateTimeField(required=False,
+                                               widget=SplitHiddenDateWidget())
+
+    class Meta:
+        model = ParticipationManagement
+        exclude = ['conference']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in list(self.fields.values()):
+            if type(field.widget) is SelectMultiple:
+                field.widget = Select2MultipleWidget(choices=field.choices)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        application_start = cleaned_data.get('application_start')
+        application_end = cleaned_data.get('application_end')
+        if application_end and application_start and application_end <= application_start:
+            msg = _('Enddate must be before startdate')
+            self.add_error('application_end', msg)
+        return cleaned_data

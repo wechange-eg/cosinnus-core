@@ -22,6 +22,8 @@ cosinnus_group_patterns = [
         name='page-maintenance'),
     url(r'^maintenance/(?P<slug>[^/]+)/$',
         views.conference_page_maintenance, name='page-maintenance-room'),
+    url(r'^participation-manangement/$', views.conference_participation_management,
+        name='participation-management'),
     url(r'^workshop-participants-upload/$', views.workshop_participants_upload,
         name='workshop-participants-upload'),
     url(r'^workshop-participants-upload-skeleton/$',

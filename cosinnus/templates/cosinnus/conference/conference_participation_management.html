@@ -1,0 +1,84 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">{% trans "Conference participation management" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_group.html" with current_page="conference_participation_manangement" object=group %}
+{% endblock leftnav %}
+
+{% block content %}
+
+    <form method="POST" action="" class="cosinnus-form">
+        {% csrf_token %}
+        {{ form.media }}
+	    {{ form.non_field_errors }}
+	    {{ form.non_field_errors }}
+        <div class="content-box">
+            {% trans "Maximal Number of participants" as limits_label %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.participants_limit label=limits_label large_field=True %}
+
+            {% trans "Application allowed" as date_label %}
+            {% captureas date_html %}
+                {{ form.application_start.errors }}
+                {{ form.application_end.errors }}
+                <ol class="input-area">
+                    <li class="calendar-date-time-chooser">
+                        {% trans "From" %} <i class="fa fa-calendar"></i>
+                        <input
+                            placeholder="{% trans "Date" %}"
+                            readonly ="readonly"
+                            class="calendar-date-time-chooser-date" />
+                        <input class="calendar-date-time-chooser-hiddendate" id="id_application_start_0" name="application_start_0"
+                            placeholder="{% trans "Start date." %}" type="hidden" value="{{ form.application_start.value|date:"Y-m-d" }}" "
+                        >
+                        <input class="calendar-date-time-chooser-time" id="id_application_start_1" name="application_start_1"
+                            placeholder="00:00" type="text"
+                            value="{{ form.application_start.value|date:"H:i" }}"
+                        >
+                        <div class="small-calendar"></div>
+                    </li>
+                    <li class="calendar-date-time-chooser">
+                        {% trans "Until" %} <i class="fa fa-calendar"></i>
+                        <input
+                            placeholder="{% trans "Date" %}"
+                            readonly ="readonly"
+                            class="calendar-date-time-chooser-date" />
+                        <input class="calendar-date-time-chooser-hiddendate" id="id_application_end_0" name="application_end_0"
+                            placeholder="{% trans "End date." %}" type="hidden" value="{{ form.application_end.value|date:"Y-m-d" }}"
+                        >
+                        <input class="calendar-date-time-chooser-time" id="id_application_end_1" name="application_end_1"
+                            placeholder="00:00" type="text"
+                            value="{{ form.application_end.value|date:"H:i" }}"
+                        >
+                        <div class="small-calendar"></div>
+                    </li>
+                </ol>
+            {% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label label=date_label large_field=True %}
+
+            {% trans "Conditions for participitation" as conditions_label %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.application_conditions label=conditions_label large_field=True%}
+
+            {% trans "Options for participitation" as options_label %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.application_options label=options_label large_field=True%}
+        </div>
+        <button type="submit" class="btn btn-emphasized">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-check"></i>
+	                </a>
+	                <div class="media-body">
+                        {% trans "Save" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    </form>
+{% endblock %}
