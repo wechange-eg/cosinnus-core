@@ -815,6 +815,12 @@ class CosinnusConf(AppConf):
     # default value for form field for if to allow user creation of coffee tables
     CONFERENCE_COFFEETABLES_ALLOW_USER_CREATION_DEFAULT = False
     
+    CONFERENCE_PARTICIPATION_OPTIONS = [
+        (1, _('Vegan cuisine')),
+        (2, _('Vegetarian cuisine')),
+        (3, _('Hotelroom needed'))
+    ]
+    
     # enable display and forms for managed tags
     MANAGED_TAGS_ENABLED = False
     # allows assigning multiple managed tags to objects
@@ -919,8 +925,3 @@ class CosinnusDefaultSettings(AppConf):
 
     PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
 
-    CONFERENCE_PARTICIPATION_OPTIONS = [
-        (1, _('Vegan cuisine')),
-        (2, _('Vegetarian cuisine')),
-        (3, _('Hotelroom needed'))
-    ]
