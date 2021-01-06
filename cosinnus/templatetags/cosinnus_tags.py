@@ -65,6 +65,7 @@ from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
 from django.templatetags.i18n import do_translate, do_block_translate, TranslateNode, BlockTranslateNode
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.models.managed_tags import CosinnusManagedTag
+from cosinnus.views.ui_prefs import get_ui_prefs_for_user
 
 logger = logging.getLogger('cosinnus')
 
@@ -1297,4 +1298,9 @@ def has_managed_tag_requirement_for_dynamic_field(user, dynamic_field_name):
     required_tag_slugs = _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP.get(dynamic_field_name, [])
     return any([user_tag_slug in required_tag_slugs for user_tag_slug in user_managed_tag_slugs])
 
+
+@register.filter
+def get_ui_pref_for_user(user, ui_pref_name):
+    """ Returns for a user the value of the given ui pref """
+    return get_ui_prefs_for_user(user).get(ui_pref_name, None)
 
