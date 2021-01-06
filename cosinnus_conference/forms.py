@@ -82,7 +82,18 @@ class ConferenceParticipationManagement(forms.ModelForm):
         cleaned_data = super().clean()
         application_start = cleaned_data.get('application_start')
         application_end = cleaned_data.get('application_end')
-        if application_end and application_start and application_end <= application_start:
-            msg = _('Enddate must be before startdate')
+
+        if application_end and application_end:
+            if application_end <= application_start:
+                msg = _('End date must be before start date')
+                self.add_error('application_end', msg)
+
+        elif application_end and not application_start:
+            msg = _('Please also provide a start date')
+            self.add_error('application_start', msg)
+
+        elif application_start and not application_end:
+            msg = _('Please also provide a end date')
             self.add_error('application_end', msg)
+
         return cleaned_data
