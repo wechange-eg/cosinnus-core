@@ -34,6 +34,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from cosinnus.models.bbb_room import BBBRoom, BBBRoomVisitStatistics
 from cosinnus.models.conference import CosinnusConferenceRoom
+from cosinnus.models.conference import ParticipationManagement
 from cosinnus.models.managed_tags import CosinnusManagedTag,\
     CosinnusManagedTagAssignment, CosinnusManagedTagType
 from cosinnus.models.newsletter import Newsletter
@@ -662,6 +663,11 @@ class CosinnusConferenceRoomAdmin(admin.ModelAdmin):
     search_fields = ('slug', 'title',)
 
 admin.site.register(CosinnusConferenceRoom, CosinnusConferenceRoomAdmin)
+
+class CosinnusParticipationManagementAdmin(admin.ModelAdmin):
+    list_display = ('conference', 'application_start', 'application_end')
+
+admin.site.register(ParticipationManagement, CosinnusParticipationManagementAdmin)
 
 class BBBRoomVisitStatisticsAdmin(admin.ModelAdmin):
     list_display = ('user', 'bbb_room', 'group', 'visit_datetime')
