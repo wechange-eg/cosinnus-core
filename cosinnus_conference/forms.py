@@ -55,8 +55,10 @@ class ConferenceRemindersForm(forms.ModelForm):
 
 
 class ConferenceParticipationManagement(forms.ModelForm):
-    application_options = forms.MultipleChoiceField(
-        choices=settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS, required=False)
+    if hasattr(settings, 'COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS'):
+        application_options = forms.MultipleChoiceField(
+            choices=settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS,
+            required=False)
     application_start = forms.SplitDateTimeField(required=False,
                                                  widget=SplitHiddenDateWidget())
     application_end = forms.SplitDateTimeField(required=False,
@@ -68,6 +70,9 @@ class ConferenceParticipationManagement(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        if not hasattr(settings, 'COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS'):
+            del self.fields['application_options']
 
         for field in list(self.fields.values()):
             if type(field.widget) is SelectMultiple:

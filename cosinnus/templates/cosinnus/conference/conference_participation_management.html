@@ -65,8 +65,11 @@
             {% trans "Conditions for participitation" as conditions_label %}
             {% include 'cosinnus/fields/default_field.html' with field=form.application_conditions label=conditions_label large_field=True%}
 
+            {% if form.application_options %}
             {% trans "Options for participitation" as options_label %}
             {% include 'cosinnus/fields/default_field.html' with field=form.application_options label=options_label large_field=True%}
+            {% endif %}
+
         </div>
         <button type="submit" class="btn btn-emphasized">
 	        <ul class="media-list">
