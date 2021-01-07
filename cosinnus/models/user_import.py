@@ -7,7 +7,7 @@ from threading import Thread
 
 from django.contrib.postgres.fields.jsonb import JSONField as PostgresJSONField
 from django.core.serializers.json import DjangoJSONEncoder
-from django.db import models
+from django.db import models, transaction
 from django.urls.base import reverse
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -227,66 +227,90 @@ class CosinnusUserImportProcessorBase(object):
         total_items = len(user_import_item.import_data)
         imported_items = 0
         failed_items = 0
+        
         try:
-            for item_data in user_import_item.import_data:
-                # clear user item reports
-                user_import_item.clear_user_report_items()
-                # sanity check: all absolutely required fields must exist:
-                missing_fields = [self.field_name_map[req_field] for req_field in self.REQUIRED_FIELDS_FOR_IMPORT if not item_data.get(self.field_name_map[req_field], None)]
-                if missing_fields:
-                    import_successful = False
-                    user_import_item.add_user_report_item(
-                            _('CSV row did not contain data for required columns: "%(fields)s"') % {'fields': '", "'.join(missing_fields), 'row_num': item_data['ROW_NUM']+1},
-                            report_class="error"
-                        )
-                else:
-                    import_successful = self._do_single_user_import(item_data, user_import_item, dry_run=dry_run)
-                    
-                report_class = "info" if import_successful else "error"
-                user_import_item.generate_and_append_user_report(self.get_user_report_title(item_data), report_class)
-                if import_successful:
-                    imported_items += 1
-                else:
-                    failed_items += 1
+            # main atomic wrapper, a dry run will this to rollback at the very end
+            with transaction.atomic():
                 
-                # instantly fail a real import when a single user could not be imported. this should have been
-                # caught by the dry-run validation (which wouldve disabled the real import), or hints at a serious
-                # relational problem that should be looked into
-                if not import_successful:
-                    import_failed_overall = True
-                    if not dry_run:
-                        # prepend the error message
-                        user_import_item.import_report_html = CosinnusUserImportReportItems(
-                            _("Import for a user item has failed, cancelling the import process! TODO: has data been written?"), 
-                            "error"
-                            ).to_string() + user_import_item.import_report_html
-                        break
+                for item_data in user_import_item.import_data:
+                    # clear user item reports
+                    user_import_item.clear_user_report_items()
+                    # sanity check: all absolutely required fields must exist:
+                    missing_fields = [self.field_name_map[req_field] for req_field in self.REQUIRED_FIELDS_FOR_IMPORT if not item_data.get(self.field_name_map[req_field], None)]
+                    if missing_fields:
+                        import_successful = False
+                        user_import_item.add_user_report_item(
+                                _('CSV row did not contain data for required columns: "%(fields)s"') % {'fields': '", "'.join(missing_fields), 'row_num': item_data['ROW_NUM']+1},
+                                report_class="error"
+                            )
+                    else:
+                        # TODO: supplying dry_run=False here, will catch or rollback!
+                        import_successful = self._do_single_user_import(item_data, user_import_item, dry_run=False)
+                        
+                    report_class = "info" if import_successful else "error"
+                    user_import_item.generate_and_append_user_report(self.get_user_report_title(item_data), report_class)
+                    if import_successful:
+                        imported_items += 1
+                    else:
+                        failed_items += 1
                     
-            # after loop: prepend summary message
-            summary_message = \
-                str(_("Total Items")) + f': {total_items}, ' +\
-                str(_("Items for Import")) + f': {imported_items}, ' +\
-                str(_("Ignored/Failed Items")) + f': {failed_items}, '
-            user_import_item.import_report_html = CosinnusUserImportReportItems(
-                summary_message, "info"
-                ).to_string() + user_import_item.import_report_html 
+                    # instantly fail a real import when a single user could not be imported. this should have been
+                    # caught by the dry-run validation (which wouldve disabled the real import), or hints at a serious
+                    # relational problem that should be looked into
+                    if not import_successful:
+                        import_failed_overall = True
+                        if not dry_run:
+                            # prepend the error message
+                            user_import_item.import_report_html = CosinnusUserImportReportItems(
+                                _("Import for a user item has failed, cancelling the import process! TODO: has data been written?"), 
+                                "error"
+                                ).to_string() + user_import_item.import_report_html
+                            break
+                
+                if dry_run or not import_failed_overall:
+                    # add additional relational import logic which could not be assigned without the main 
+                    # import items existing
+                    self._import_second_round_relations(user_import_item.import_data, user_import_item)
+                    
+                    # later in _import_second_round_relations in boell:
+                    # add mtag assignments per user:
+                    user_import_item.add_user_report_item(str(_('Rollenzuordnung: ') + str(user_kwargs)), report_class="info")
+                    # add the mtag line
+                    user_import_item.generate_and_append_user_report(f'Benutzer-Rollenzuordnungen ({len(items})', report_class)
+                    
+                # after loop: prepend summary message
+                summary_message = \
+                    str(_("Total Items")) + f': {total_items}, ' +\
+                    str(_("Items for Import")) + f': {imported_items}, ' +\
+                    str(_("Ignored/Failed Items")) + f': {failed_items}, '
+                user_import_item.import_report_html = CosinnusUserImportReportItems(
+                    summary_message, "info"
+                    ).to_string() + user_import_item.import_report_html 
+                
+                # trigger a rollback for finished dry-runs
+                if dry_run:
+                    raise DryRunFinishedException()
                 
         except Exception as e:
-            # if this outside exception happens, the import will be declared as "no data has been imported" and the errors will be shown
-            logger.error(f'User Import: Critical failure during import (dry-run: {dry_run})', extra={'exception': e})
-            import_failed_overall = True
-            # prepend the error message
-            user_import_item.import_report_html = CosinnusUserImportReportItems(
-                _("An unexpected system error has occured while processing the data. This should not have happened. Please contact the support!"), 
-                "error"
-                ).to_string() + user_import_item.import_report_html
-            if settings.DEBUG:
-                if dry_run:
-                    user_import_item.state = CosinnusUserImport.STATE_DRY_RUN_FINISHED_INVALID
-                else:
-                    user_import_item.state = CosinnusUserImport.STATE_IMPORT_FAILED
-                user_import_item.save()
-                raise e
+            if type(e) is DryRunFinishedException:
+                # this means the dry-run finished properly and DB transactions have been rolled back
+                pass
+            else:
+                # if this outside exception happens, the import will be declared as "no data has been imported" and the errors will be shown
+                logger.error(f'User Import: Critical failure during import (dry-run: {dry_run})', extra={'exception': e})
+                import_failed_overall = True
+                # prepend the error message
+                user_import_item.import_report_html = CosinnusUserImportReportItems(
+                    _("An unexpected system error has occured while processing the data. This should not have happened. Please contact the support!"), 
+                    "error"
+                    ).to_string() + user_import_item.import_report_html
+                if settings.DEBUG:
+                    if dry_run:
+                        user_import_item.state = CosinnusUserImport.STATE_DRY_RUN_FINISHED_INVALID
+                    else:
+                        user_import_item.state = CosinnusUserImport.STATE_IMPORT_FAILED
+                    user_import_item.save()
+                    raise e
             
         if import_failed_overall:
             if dry_run:
@@ -358,10 +382,22 @@ class CosinnusUserImportProcessorBase(object):
         user_import_item.add_user_report_item(str(_('New user account: ') + str(user_kwargs)), report_class="info")
         return user
     
+    def _import_second_round_relations(self, item_data_list, user_import_item):
+        """ Stub to support an additional, second import round for CSV items,
+            run after the main import has been processed and all items have been created.
+            Mainly enables things like group membership or tag assignments, which
+            wouldn't work on a single pass of the imported data because they may
+            reference data that follows further on in the CSV. """
+        pass
+    
     def get_user_report_title(self, item_data):
         return 'Row: #' + str(item_data['ROW_NUM']+1) + ' <b>' + item_data.get(self.field_name_map['first_name'], '(no name)') + '</b> <i>' + item_data.get(self.field_name_map['email'], '(no email)') + '</i>'
         
-        
+
+class DryRunFinishedException(Exception):    
+    """ An exception that rolls back an atomic block for a dry run when it has finished successfully. """
+    pass
+
 
 # allow dropin of labels class
 CosinnusUserImportProcessor = CosinnusUserImportProcessorBase
