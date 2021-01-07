@@ -227,3 +227,32 @@ class ParticipationManagement(models.Model):
                                            verbose_name=_('Participation Management'),
                                            related_name='participation_management',
                                            on_delete=models.CASCADE)
+
+
+class CosinnusConferenceApplication(models.Model):
+
+    APPLICATION_INVALID = 1
+    APPLICATION_SUBMITTED = 2
+    APPLICATION_WAITLIST = 3
+    APPLICATION_ACCEPTED = 4
+    APPLICATION_DECLINED = 5
+
+    APPLICATION_STATES = [
+        (APPLICATION_INVALID, _('Invalid')),
+        (APPLICATION_SUBMITTED, _('Submitted')),
+        (APPLICATION_WAITLIST, _('Waitlist')),
+        (APPLICATION_ACCEPTED, _('Accepted')),
+        (APPLICATION_DECLINED, _('Declined')),
+    ]
+
+    conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
+                                           verbose_name=_('Confernence Application'),
+                                           related_name='conference_applications',
+                                           on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+        related_name='user_applications', on_delete=models.CASCADE)
+    status = models.PositiveSmallIntegerField(choices=APPLICATION_STATES,
+                                              default=APPLICATION_SUBMITTED)
+    options = PostgresJSONField(default=list, blank=True, null=True)
+    priorities = PostgresJSONField(default=dict, blank=True, null=True)
+
