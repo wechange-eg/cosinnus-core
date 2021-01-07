@@ -93,10 +93,10 @@ urlpatterns = [
     url(r'^administration/welcome_email/$', administration.welcome_email_edit, name='administration-welcome-email'),
 
     url(r'^administration/users/$', administration.user_list, name='administration-users'),
-    url(r'^administration/users/add$', administration.user_add, name='administration-user-create'),
+    url(r'^administration/users/add/$', administration.user_add, name='administration-user-create'),
     url(r'^administration/group_newsletter/$', administration.managed_tags_newsletters, name='administration-managed-tags-newsletter'),
-    url(r'^administration/group_newsletter/add$', administration.managed_tags_newsletter_create, name='administration-managed-tags-newsletter-create'),
-    url(r'^administration/group_newsletter/(?P<newsletter_id>\d+)/edit$', administration.managed_tags_newsletter_update, name='administration-managed-tags-newsletter-update'),
+    url(r'^administration/group_newsletter/add/$', administration.managed_tags_newsletter_create, name='administration-managed-tags-newsletter-create'),
+    url(r'^administration/group_newsletter/(?P<newsletter_id>\d+)/edit/$', administration.managed_tags_newsletter_update, name='administration-managed-tags-newsletter-update'),
 
     url(r'^administration/announcements/$', user_dashboard_announcement.list_view, name='user-dashboard-announcement-list'),
     url(r'^administration/announcements/add/$', user_dashboard_announcement.user_dashboard_announcement_create, name='user-dashboard-announcement-create'),
@@ -152,7 +152,7 @@ if getattr(settings, 'COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED', Fals
 
 if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
     urlpatterns += [
-        url(r'^administration/users/(?P<pk>\d+)/edit$', administration.user_update, name='administration-user-update'),
+        url(r'^administration/users/(?P<pk>\d+)/edit/$', administration.user_update, name='administration-user-update'),
     ]
 
 if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False):

@@ -100,15 +100,14 @@
 	    </button>
     {% endif %}
     
-	
-	
-	
-
 {% endblock leftnav %}
 
 
 {% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li class="active">{% trans "Simple Statistics" %}</li>
 {% endblock %}
+
 
 {% block content %}
     
