@@ -466,9 +466,6 @@ class CosinnusConf(AppConf):
     # URL if they try to visit the register or login pages
     LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET = '/map/'
     
-    # default number of days offers in the Marketplace stay active
-    MARKETPLACE_OFFER_ACTIVITY_DURATION_DAYS = 30
-    
     # if True, form fields will show a Required label for required fields
     # instead of showing an Optional label for optional fields
     FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL = False
