@@ -852,6 +852,10 @@ class CosinnusConf(AppConf):
     MANAGED_TAGS_PAIRED_GROUPS_PREFIX = None
     # whether to show the managed tags as a filter on the map
     MANAGED_TAGS_SHOW_FILTER_ON_MAP = True
+    # if set to a str managed tag slugs, the user choices for
+    # DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD fields will be 
+    # filtered on users tagged with this tag
+    MANAGED_TAG_DYNAMIC_USER_FIELD_FILTER_ON_TAG_SLUG = None
     
 
 class CosinnusDefaultSettings(AppConf):

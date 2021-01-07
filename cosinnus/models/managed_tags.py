@@ -149,6 +149,10 @@ class CosinnusManagedTagAssignmentManager(models.Manager):
     def all_approved(self):
         return self.get_queryset().filter(approved=True)
     
+    def get_for_model(self, model):
+        model_type = ContentType.objects.get_for_model(model)
+        return self.get_queryset().filter(content_type__pk=model_type.id)
+    
     
 class CosinnusManagedTagAssignment(models.Model):
     """ The assignment intermediate-Model for CosinnusManagedTag """

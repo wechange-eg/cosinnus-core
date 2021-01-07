@@ -1,17 +1,21 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from cosinnus.dynamic_fields import dynamic_fields
-from django import forms
-from django.utils.timezone import now
-from phonenumber_field.formfields import PhoneNumberField
+
 from django_select2.fields import Select2MultipleChoiceField, Select2ChoiceField
 from django_select2.widgets import Select2Widget, HeavySelect2MultipleWidget
-from django.urls.base import reverse, reverse_lazy
+
+from django import forms
 from django.contrib.auth import get_user_model
-from cosinnus.utils.user import get_user_select2_pills
-from cosinnus.forms.select2 import HeavySelect2MultipleFreeTextChoiceWidget,\
-    HeavySelect2FreeTextChoiceWidget
+from django.urls.base import reverse, reverse_lazy
+from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
+from phonenumber_field.formfields import PhoneNumberField
+
+from cosinnus.conf import settings
+from cosinnus.dynamic_fields import dynamic_fields
+from cosinnus.forms.select2 import HeavySelect2MultipleFreeTextChoiceWidget, \
+    HeavySelect2FreeTextChoiceWidget
+from cosinnus.utils.user import get_user_select2_pills
 
 
 class DynamicFieldFormFieldGenerator(object):
@@ -151,7 +155,10 @@ class ManagedTagUserChoiceDynamicFieldFormFieldGenerator(_BaseSelect2DynamicFiel
         return UserIDSelect2MultipleChoiceField
     
     def get_formfield_kwargs(self):
-        data_url = reverse('cosinnus:select2:all-members')
+        if settings.COSINNUS_MANAGED_TAG_DYNAMIC_USER_FIELD_FILTER_ON_TAG_SLUG:
+            data_url = reverse('cosinnus:select2:managed-tag-members', kwargs={'tag_slug': settings.COSINNUS_MANAGED_TAG_DYNAMIC_USER_FIELD_FILTER_ON_TAG_SLUG})
+        else:
+            data_url = reverse('cosinnus:select2:all-members')
         
         if self._dynamic_field_initial:
             initial_user_ids = get_user_model().objects.filter(id__in=self._dynamic_field_initial)

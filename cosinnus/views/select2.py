@@ -16,6 +16,7 @@ from cosinnus.utils.user import filter_active_users,\
 from cosinnus.views.user import UserSelect2View
 from django.core.exceptions import PermissionDenied
 from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 
 
 class GroupMembersView(RequireGroupMember, Select2View):
@@ -53,6 +54,11 @@ class GroupMembersView(RequireGroupMember, Select2View):
 
 class AllMembersView(RequireLoggedIn, Select2View):
     
+    def filter_user_qs(self, user_qs, terms):
+        q = get_user_query_filter_for_search_terms(terms)
+        user_qs = filter_active_users(user_qs.filter(id__in=CosinnusPortal.get_current().members).filter(q))
+        return user_qs
+    
     def get_results(self, request, term, page, context):
         start = (page - 1) * 10
         end = page * 10
@@ -60,9 +66,9 @@ class AllMembersView(RequireLoggedIn, Select2View):
         User = get_user_model()
         
         terms = term.strip().lower().split(' ')
-        q = get_user_query_filter_for_search_terms(terms)
         
-        user_qs = filter_active_users(User.objects.filter(id__in=CosinnusPortal.get_current().members).filter(q))
+        user_qs = User.objects.all()
+        user_qs = self.filter_user_qs(user_qs, terms)
         
         count = user_qs.count()
         if count < start:
@@ -74,6 +80,23 @@ class AllMembersView(RequireLoggedIn, Select2View):
         results = get_user_select2_pills(users)
 
         return (NO_ERR_RESP, has_more, results)
+
+
+class ManagedTagsMembersView(AllMembersView):
+    
+    managed_tag_slug = None
+    
+    def dispatch(self, request, *args, **kwargs):
+        self.managed_tag_slug = kwargs.pop('tag_slug', None)
+        return super(ManagedTagsMembersView, self).dispatch(request, *args, **kwargs)
+    
+    def filter_user_qs(self, user_qs, terms):
+        user_qs = super(ManagedTagsMembersView, self).filter_user_qs(user_qs, terms)
+        if self.managed_tag_slug:
+            profile_assignments_qs = CosinnusManagedTagAssignment.objects.get_for_model(get_user_profile_model())
+            assigned_profile_ids = profile_assignments_qs.filter(managed_tag__slug=self.managed_tag_slug).values_list('object_id', flat=True)
+            user_qs = user_qs.filter(cosinnus_profile__id__in=assigned_profile_ids)
+        return user_qs
 
 
 class TagsView(Select2View):
@@ -169,6 +192,7 @@ class GroupsView(Select2View):
 
 group_members = GroupMembersView.as_view()
 all_members = AllMembersView.as_view()
+managed_tagged_members = ManagedTagsMembersView.as_view()
 tags_view = TagsView.as_view()
 dynamic_freetext_choices_view = DynamicFreetextChoicesView.as_view()
 groups_view = GroupsView.as_view()
