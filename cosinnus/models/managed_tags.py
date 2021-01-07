@@ -212,6 +212,28 @@ class CosinnusManagedTagAssignment(models.Model):
                 approve = not bool(settings.COSINNUS_MANAGED_TAGS_USER_TAGS_REQUIRE_APPROVAL)
                 cls.objects.create(content_type=content_type, object_id=obj.id, managed_tag=managed_tag, approved=approve)
 
+        
+    @classmethod
+    def assign_managed_tag_to_object(cls, obj, tag_slug_to_assign):
+        """ Will assign a given CosinnusManagedTag to the given object and keep all other assigned tags.
+            @param obj: Any object to assign the managed tag to
+            @param tag_slug_to_assign: A slug of a CosinnusManagedTag. Only those slugs that actually
+                exist will be assigned. """
+        if not obj.pk:
+            logger.error('Could not save CosinnusManagedTags assignment: target object has not been saved yet!', extra={obj})
+            return
+        content_type = ContentType.objects.get_for_model(obj._meta.model)
+        assigned_slugs = list(cls.objects.filter(
+                content_type=content_type, object_id=obj.id
+            ).values_list('managed_tag__slug', flat=True))
+        
+        # add wanted non-assigned tag
+        if not tag_slug_to_assign in assigned_slugs:
+            managed_tag = CosinnusManagedTag.objects.get_cached(tag_slug_to_assign)
+            if managed_tag:
+                approve = not bool(settings.COSINNUS_MANAGED_TAGS_USER_TAGS_REQUIRE_APPROVAL)
+                cls.objects.create(content_type=content_type, object_id=obj.id, managed_tag=managed_tag, approved=approve)
+
 
 @python_2_unicode_compatible
 class CosinnusManagedTagType(models.Model):
@@ -357,7 +379,7 @@ class CosinnusManagedTag(models.Model):
         existing_tag_by_slug = get_object_or_None(CosinnusManagedTag, slug__iexact=tag_slug)
         if existing_tag or existing_tag_by_slug:
             logger.info('`create_managed_tag_and_paired_group` Did not create a new managed tag because an existing tag has the same name or slug', extra={'new_tag_name': name})
-            return False
+            return existing_tag or existing_tag_by_slug
         
         # create group
         try:

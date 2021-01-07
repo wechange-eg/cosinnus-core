@@ -144,14 +144,14 @@ class CosinnusUserImportView(RequireSuperuserMixin, TemplateView):
                 import_object.append_to_report(str(_("The following columns were not recognized and were ignored") + ' "' + '", "'.join(ignored_columns)) + '"', "warning")
             import_object.save()
             # start-dry-run threaded
-            CosinnusUserImportProcessor().do_import(import_object, dry_run=True)
+            CosinnusUserImportProcessor().do_import(import_object, dry_run=True, import_creator=self.request.user)
         else:
             return self.render_to_response(self.get_context_data())
             
     def do_start_import_from_dryrun(self, import_object):
         # start import threaded from the object
         import_object.clear_report()
-        CosinnusUserImportProcessor().do_import(import_object, dry_run=False)
+        CosinnusUserImportProcessor().do_import(import_object, dry_run=False, import_creator=self.request.user)
     
     def do_archive_import(self, import_object):
         import_object.state = CosinnusUserImport.STATE_ARCHIVED

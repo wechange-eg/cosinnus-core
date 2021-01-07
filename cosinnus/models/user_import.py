@@ -192,16 +192,22 @@ class CosinnusUserImportProcessorBase(object):
     # a list of django.auth.Users created already during the run
     created_users = None # dict
     
+    # the user performing the import, or None
+    import_creator = None
     
     def __init__(self):
         # init the reverse map here in case the header map gets changed in the cls 
         self.field_name_map = dict([(val, key) for key, val in self.CSV_HEADERS_TO_FIELD_MAP.items()])
         self.created_users = []
     
-    def do_import(self, user_import_item, dry_run=True, threaded=True):
+    def do_import(self, user_import_item, dry_run=True, threaded=True, import_creator=None):
         """ Does a threaded user import, either as a dry-run or real one.
             Will update the import object's state when done or failed.
-            @property user_import_item: class `CosinnusUserImport` containing import_data """
+            @property user_import_item: class `CosinnusUserImport` containing import_data 
+            @property import_creator: the user performing the import, or None. 
+                Needed for some import actions that require setting a creator
+                (for example when creating groups) """
+        self.import_creator = import_creator
         if settings.DEBUG:
             threaded = False # never thread in dev
             
@@ -271,12 +277,6 @@ class CosinnusUserImportProcessorBase(object):
                     # add additional relational import logic which could not be assigned without the main 
                     # import items existing
                     self._import_second_round_relations(user_import_item.import_data, user_import_item)
-                    
-                    # later in _import_second_round_relations in boell:
-                    # add mtag assignments per user:
-                    user_import_item.add_user_report_item(str(_('Rollenzuordnung: ') + str(user_kwargs)), report_class="info")
-                    # add the mtag line
-                    user_import_item.generate_and_append_user_report(f'Benutzer-Rollenzuordnungen ({len(items})', report_class)
                     
                 # after loop: prepend summary message
                 summary_message = \
