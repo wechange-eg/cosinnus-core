@@ -24,7 +24,8 @@ from django.contrib import messages
 from cosinnus.models.profile import get_user_profile_model,\
     PROFILE_SETTING_EMAIL_TO_VERIFY, PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN,\
     PROFILE_SETTING_FIRST_LOGIN, GlobalBlacklistedEmail,\
-    GlobalUserNotificationSetting, PROFILE_SETTING_PASSWORD_NOT_SET
+    GlobalUserNotificationSetting, PROFILE_SETTING_PASSWORD_NOT_SET,\
+    PROFILE_SETTING_LOGIN_TOKEN_SENT
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusPortal,\
     CosinnusUnregisterdUserGroupInvite, CosinnusGroupMembership, \
@@ -77,6 +78,7 @@ from django_select2.views import Select2View, NO_ERR_RESP
 from django.core.exceptions import PermissionDenied
 from cosinnus import cosinnus_notifications
 from cosinnus.utils.html import render_html_with_variables
+from django.utils import timezone
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -845,7 +847,6 @@ def email_first_login_token_to_user(user):
 
     # the verification param for the URL consists of <user-id>-<uuid>, where the uuid is saved to the user's profile
     a_uuid = uuid4()
-    login_url_param = '%s' % a_uuid
     user.cosinnus_profile.settings[PROFILE_SETTING_PASSWORD_NOT_SET] = str(a_uuid)
     user.cosinnus_profile.save()
 
@@ -863,6 +864,9 @@ def email_first_login_token_to_user(user):
     })
     subj_user = render_to_string('cosinnus/mail/user_email_first_token_subj.txt', data)
     send_mail_or_fail_threaded(user.email, subj_user, None, data)
+    
+    user.cosinnus_profile.settings[PROFILE_SETTING_LOGIN_TOKEN_SENT] = timezone.now()
+    user.cosinnus_profile.save()
 
 
 def user_api_me(request):

@@ -52,6 +52,8 @@ PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN = 'email_verification_pwd'
 # a user with the following settings has not set an initial password yet.
 # the user can only loginwith the given token and is redirected to the `set password view`
 PROFILE_SETTING_PASSWORD_NOT_SET = 'password_not_set'
+# a datetime for when the last initial login token was sent for a user account without a password
+PROFILE_SETTING_LOGIN_TOKEN_SENT = 'login_token_sent'
 # a list of urls to redirect the user to on next page hit (only first in list), enforced by middleware
 PROFILE_SETTING_REDIRECT_NEXT_VISIT = 'redirect_next'
 # first login datetime, used to determine if user first logged in
@@ -370,6 +372,10 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     @property
     def is_workshop_participant(self):
         return self.settings.get(PROFILE_SETTING_WORKSHOP_PARTICIPANT, False)
+    
+    @property
+    def get_last_login_token_sent(self):
+        return self.settings.get(PROFILE_SETTING_LOGIN_TOKEN_SENT, None)
 
 
 class UserProfile(BaseUserProfile):

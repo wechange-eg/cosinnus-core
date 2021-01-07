@@ -128,7 +128,7 @@
                                         <i class="fa fa-envelope"></i>
                                     </a>
                                     <div class="media-body">
-						                {% if user.cosinnus_profile.settings.login_token_send %}
+						                {% if user.cosinnus_profile.get_last_login_token_sent %}
 						                    {% trans 'Resend login token'%}
 						                {% else %}
                                             {% trans 'Send login token'%}
@@ -140,9 +140,9 @@
                     </div>
                 </form>
                 {% endif %}
-                {% if user.cosinnus_profile.settings.login_token_send %}
+                {% if user.cosinnus_profile.get_last_login_token_sent %}
 	                <div class="pull-right">
-	                    {% trans 'Last sent on: ' %} {{ user.cosinnus_profile.settings.login_token_send |stringformat:"%Y-%m-%dT%H:%M:%SZ"|date:"SHORT_DATETIME_FORMAT"}}
+	                    {% trans 'Last sent on: ' %} {{ user.cosinnus_profile.get_last_login_token_sent |stringformat:"%Y-%m-%dT%H:%M:%SZ"|date:"SHORT_DATETIME_FORMAT"}}
 	                </div>
                 {% endif %}
             </th>

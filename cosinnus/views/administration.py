@@ -33,6 +33,7 @@ from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.views.user import email_first_login_token_to_user
 from cosinnus.conf import settings
+from cosinnus.models.profile import PROFILE_SETTING_LOGIN_TOKEN_SENT
 
 
 class AdministrationView(TemplateView):
@@ -217,8 +218,6 @@ class UserListView(ManagedTagsNewsletterMixin, ListView):
 
     def send_login_token(self, user):
         email_first_login_token_to_user(user)
-        user.cosinnus_profile.settings['login_token_send'] = timezone.now()
-        user.cosinnus_profile.save()
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -243,7 +242,7 @@ class UserListView(ManagedTagsNewsletterMixin, ListView):
             if self.request.POST.get('send_login_token') == '__all__':
                 all_users = get_user_model().objects.filter(is_active=False, last_login__isnull=True)
                 for user in all_users:
-                    if not 'login_token_send' in user.cosinnus_profile.settings:
+                    if not PROFILE_SETTING_LOGIN_TOKEN_SENT in user.cosinnus_profile.settings:
                         self.send_login_token(user)
                 messages.add_message(self.request, messages.SUCCESS, _('Login tokens were sent.'))
             else:
@@ -279,8 +278,6 @@ class AdminUserUpdateView(UserProfileUpdateView):
             user_id = self.request.POST.get('send_login_token')
             user = get_user_model().objects.get(id=user_id)
             email_first_login_token_to_user(user)
-            user.cosinnus_profile.settings['login_token_send'] = timezone.now()
-            user.cosinnus_profile.save()
             messages.add_message(self.request, messages.SUCCESS, _('Login token was sent.'))
             return HttpResponseRedirect(request.path_info)
         else:
