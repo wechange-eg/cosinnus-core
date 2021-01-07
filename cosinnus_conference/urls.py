@@ -32,6 +32,9 @@ cosinnus_group_patterns = [
         name='workshop-participants-download'),
     url(r'^reminders/$', views.conference_reminders,
         name='reminders'),
+    url(r'^apply/$', views.conference_application,
+        name='application'),
+
 
     url(r'^$', views.conference_page,
         name='index'),

@@ -1,0 +1,52 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block breadcrumb %}{% endblock %}
+{% block leftnav %}{% endblock %}
+
+{% block content %}
+
+
+<form method="POST" action="" class="cosinnus-form">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.non_field_errors }}
+    {{ form.non_field_errors }}
+    <div class="content-box">
+
+        {% if form.options %}
+        {% trans "Please pick your preferences" as options_label %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.options label=options_label large_field=True %}
+        {% endif %}
+
+        {% if form.priorities %}
+        {% trans "Please pick your priorities" as priorities_label %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.priorities label=priorities_label large_field=True %}
+        {% endif %}
+
+
+
+        {% if form.conditions_accepted %}
+        {% trans "Conditions" as conditions_label %}
+        {% trans "Please accept the conditions" as conditions_box_label %}
+        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_label legend=participation_management.application_conditions checkbox_label=conditions_box_label %}
+        {% endif %}
+
+
+
+
+    </div>
+    <button type="submit" class="btn btn-emphasized">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-check"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Save" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+</form>
+{% endblock %}

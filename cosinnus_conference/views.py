@@ -43,7 +43,9 @@ from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
 from django.http.response import Http404, HttpResponseForbidden,\
     HttpResponseNotFound
 
-from cosinnus_conference.forms import ConferenceRemindersForm, ConferenceParticipationManagement
+from cosinnus_conference.forms import (ConferenceRemindersForm,
+                                       ConferenceParticipationManagement,
+                                       ConferenceApplicationForm)
 from cosinnus_conference.utils import send_conference_reminder
 
 logger = logging.getLogger('cosinnus')
@@ -539,6 +541,56 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
                                    kwargs={'group': self.group})
 
 
+class ConferenceApplicationView(SamePortalGroupMixin,
+                                RequireReadMixin,
+                                GroupIsConferenceMixin,
+                                FormView):
+    form_class = ConferenceApplicationForm
+    template_name = 'cosinnus/conference/conference_application.html'
+
+    @property
+    def participation_management(self):
+        return self.group.participation_management.first()
+
+    @property
+    def application(self):
+        user = self.request.user
+        return self.group.conference_applications.all().filter(user=user).first()
+
+    def get_form_kwargs(self):
+        form_kwargs = super().get_form_kwargs()
+        if self.participation_management:
+            form_kwargs['participation_management'] = self.participation_management
+        if self.application:
+            form_kwargs['instance'] = self.application
+        return form_kwargs
+
+    def form_valid(self, form):
+        if not form.instance.id:
+            application = form.save(commit=False)
+            application.conference = self.group
+            application.user = self.request.user
+            application.save()
+            messages.success(self.request, _('Application has been sent.'))
+        else:
+            messages.success(self.request, _('Application has been updated.'))
+            form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:conference:application',
+                                   kwargs={'group': self.group})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'group': self.group,
+            'participation_management': self.participation_management
+        })
+        return context
+
+
+conference_application = ConferenceApplicationView.as_view()
 conference_participation_management = ConferenceParticipationManagementView.as_view()
 conference_management = ConferenceManagementView.as_view()
 workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
