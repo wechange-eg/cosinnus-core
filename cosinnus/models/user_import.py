@@ -250,8 +250,10 @@ class CosinnusUserImportProcessorBase(object):
                                 report_class="error"
                             )
                     else:
-                        # TODO: supplying dry_run=False here, will catch or rollback!
-                        import_successful = self._do_single_user_import(item_data, user_import_item, dry_run=False)
+                        # NOTE: supplying dry_run=False here will still do an effective dry run because we 
+                        # rollback the transaction at the end!
+                        # it will have some negative effects though, like rocketchat hooks triggering
+                        import_successful = self._do_single_user_import(item_data, user_import_item, dry_run=dry_run)
                         
                     report_class = "info" if import_successful else "error"
                     user_import_item.generate_and_append_user_report(self.get_user_report_title(item_data), report_class)
