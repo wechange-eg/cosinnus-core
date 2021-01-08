@@ -68,12 +68,6 @@
 
     {% block nav_buttons %}
 	    <div class="nav-section nav-buttons">
-	        {% block mobile_brand_links %}
-		    	<div class="brand-links mobile-only">
-		        	{% include 'cosinnus/v2/navbar/brand_links.html' %}
-		        </div>
-	        {% endblock %}
-
 	        {% block create_icon_button %}
 	            {% if not SETTINGS.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS or user|is_superuser %}
 					<a class="nav-button nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Create content" %}"
@@ -143,6 +137,12 @@
 	            </a>
 			{% endif %}
 	    </div>
+	    
+        {% block mobile_brand_links %}
+            <div class="brand-links mobile-only mobile-triple-dots-only">
+                {% include 'cosinnus/v2/navbar/brand_links.html' %}
+            </div>
+        {% endblock %}
     {% endblock %}
 
     {% if request.user.is_authenticated %}
