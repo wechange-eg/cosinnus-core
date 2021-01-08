@@ -12,18 +12,34 @@
     {{ form.media }}
     {{ form.non_field_errors }}
     {{ form.non_field_errors }}
+    {{ priority_formset.management_form }}
     <div class="content-box">
 
         {% if form.options %}
-        {% trans "Please pick your preferences" as options_label %}
+        {% trans "My individual needs" as options_label %}
         {% include 'cosinnus/fields/default_field.html' with field=form.options label=options_label large_field=True %}
         {% endif %}
 
-        {% if form.priorities %}
-        {% trans "Please pick your priorities" as priorities_label %}
-        {% include 'cosinnus/fields/default_field.html' with field=form.priorities label=priorities_label large_field=True %}
-        {% endif %}
 
+        {% if priority_formset.forms %}
+        <table class="table table-striped white-content priority-form">
+            <thead>
+                <tr>
+                    <th>{% trans "Programm" %}</th>
+                    <th>{% trans "Priority" %}</th>
+                </tr>
+            </thead>
+
+        {% for form in priority_formset %}
+        {{ form.event_id }}
+        <tr>
+            <td>{{ form.event_name.value }}</td>
+            <td>{{ form.priority }}</td>
+        </tr>
+
+        {% endfor %}
+        </table>
+        {% endif %}
 
 
         {% if form.conditions_accepted %}
@@ -31,8 +47,6 @@
         {% trans "Please accept the conditions" as conditions_box_label %}
         {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_label legend=participation_management.application_conditions checkbox_label=conditions_box_label %}
         {% endif %}
-
-
 
 
     </div>

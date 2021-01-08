@@ -8,6 +8,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from django.forms.widgets import SelectMultiple
+from django.forms import formset_factory
 from django_select2.widgets import Select2MultipleWidget
 from cosinnus.forms.widgets import SplitHiddenDateWidget
 
@@ -107,6 +108,10 @@ class ConferenceParticipationManagement(forms.ModelForm):
 class ConferenceApplicationForm(forms.ModelForm):
     conditions_accepted = forms.BooleanField(required = True)
 
+    class Meta:
+        model = CosinnusConferenceApplication
+        exclude = ['conference', 'user', 'status', 'priorities']
+
     def get_options(self):
         all_options = settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS
         picked_options = self.participation_management.application_options
@@ -134,9 +139,17 @@ class ConferenceApplicationForm(forms.ModelForm):
         if self.cleaned_data['options'] and len(self.cleaned_data) > 0:
             return [int(option) for option in self.cleaned_data['options']]
 
+class ConferenceApplicationEventPrioForm(forms.Form):
+    event_id = forms.CharField(widget=forms.HiddenInput())
+    event_name = forms.CharField(required=False)
+    priority = forms.ChoiceField(
+        initial=0,
+        choices=[(0, _('No Interest')), (1, _('First Choice')), (2, ('Second Choice'))],
+        widget=forms.RadioSelect)
 
-    class Meta:
-        model = CosinnusConferenceApplication
-        exclude = ['conference', 'user', 'status']
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['event_name'].widget.attrs['readonly'] = True
 
 
+PriorityFormSet = formset_factory(ConferenceApplicationEventPrioForm, extra=0)

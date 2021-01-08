@@ -45,8 +45,11 @@ from django.http.response import Http404, HttpResponseForbidden,\
 
 from cosinnus_conference.forms import (ConferenceRemindersForm,
                                        ConferenceParticipationManagement,
-                                       ConferenceApplicationForm)
+                                       ConferenceApplicationForm,
+                                       PriorityFormSet
+                                       )
 from cosinnus_conference.utils import send_conference_reminder
+from cosinnus_event.models import Event
 
 logger = logging.getLogger('cosinnus')
 
@@ -549,6 +552,10 @@ class ConferenceApplicationView(SamePortalGroupMixin,
     template_name = 'cosinnus/conference/conference_application.html'
 
     @property
+    def events(self):
+        return Event.objects.filter(group=self.group).order_by('id')
+
+    @property
     def participation_management(self):
         return self.group.participation_management.first()
 
@@ -565,27 +572,55 @@ class ConferenceApplicationView(SamePortalGroupMixin,
             form_kwargs['instance'] = self.application
         return form_kwargs
 
+    def _get_prioritydict(self):
+        formset = PriorityFormSet(self.request.POST)
+        priority_dict = {}
+        if formset.is_valid():
+            for form in formset.forms:
+                data = form.cleaned_data
+                priority_dict[data.get('event_id')] = int(data.get('priority'))
+        return priority_dict
+
     def form_valid(self, form):
+        priorities = self._get_prioritydict()
         if not form.instance.id:
             application = form.save(commit=False)
             application.conference = self.group
             application.user = self.request.user
+            application.priorities = priorities
             application.save()
             messages.success(self.request, _('Application has been sent.'))
         else:
+            application = form.save()
+            application.priorities = priorities
+            application.save()
             messages.success(self.request, _('Application has been updated.'))
-            form.save()
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return group_aware_reverse('cosinnus:conference:application',
                                    kwargs={'group': self.group})
 
+    def _get_initial_priorities(self):
+        if not self.application:
+            return [{'event_id': event.id,
+                     'event_name': event.title} for event in self.events]
+        else:
+            return [{'event_id': event.id,
+                     'event_name': event.title,
+                     'priority' : self.application.priorities.get(str(event.id))}
+                     for event in self.events]
+
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        priority_formset = PriorityFormSet(
+            initial = self._get_initial_priorities()
+        )
         context.update({
             'group': self.group,
-            'participation_management': self.participation_management
+            'participation_management': self.participation_management,
+            'priority_formset': priority_formset
         })
         return context
 
