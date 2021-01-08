@@ -48,6 +48,9 @@ class CosinusUserImportCSVForm(forms.Form):
         
     def process_and_validate_header(self, header):
         """ Cleans and validates header for no unnamed columns """
+        if len(header) > 0 and header[0]:
+            # drop Byte-Order-Mark
+            header[0] = header[0].replace(u'\ufeff', '')
         cleaned_header = self.clean_row_data(header)
         processed_header = []
         for item in cleaned_header:

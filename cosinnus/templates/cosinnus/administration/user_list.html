@@ -108,11 +108,12 @@
         <tr>
             <th>
                 <a href="{% url 'cosinnus:administration-user-update' pk=user.id %}">
-                {{ user.email }}
+                    {{ user.email }}
                 </a>
                 {% if not user.is_active %}
                     ({% trans "Account deactivated" %})
                 {% endif %}
+                {% block extra_user_data %}{% endblock %}
             </th>
             <th>{{ user.first_name }}</th>
             <th>{{ user.last_name }}</th>
