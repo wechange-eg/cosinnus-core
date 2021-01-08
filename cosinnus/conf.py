@@ -674,6 +674,9 @@ class CosinnusConf(AppConf):
     # in v2, the footer is disabled by default. set this to True to enable it!
     V2_FORCE_SITE_FOOTER = False
     
+    # whether the regular user signup method is enabled for this portal
+    USER_SIGNUP_ENABLED = True
+    
     # if true, an additional signup form field will be present
     SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK = False
     

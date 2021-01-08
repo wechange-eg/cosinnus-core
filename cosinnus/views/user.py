@@ -331,6 +331,9 @@ class UserCreateView(CreateView):
         if self.request.user.is_authenticated:
             messages.info(self.request, _('You are already logged in!'))
             return redirect('/')
+        if not settings.COSINNUS_USER_SIGNUP_ENABLED:
+            messages.error(self.request, _('User signup is currently disabled!'))
+            return redirect('/')
         return super(UserCreateView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):

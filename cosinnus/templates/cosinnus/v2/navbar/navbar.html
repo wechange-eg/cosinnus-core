@@ -132,9 +132,11 @@
 	            <a class="nav-button nav-header-textlink" href="{% url 'login' %}" title="{% trans "Log in" %}">
 	            	{% trans "Log in" %}
 	            </a>
-	            <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
-	            	{% trans "Register" %}
-	            </a>
+                {% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
+		            <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
+		            	{% trans "Register" %}
+		            </a>
+	            {% endif %}
 			{% endif %}
 	    </div>
 	    
