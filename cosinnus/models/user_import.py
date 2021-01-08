@@ -278,7 +278,7 @@ class CosinnusUserImportProcessorBase(object):
                 if dry_run or not import_failed_overall:
                     # add additional relational import logic which could not be assigned without the main 
                     # import items existing
-                    self._import_second_round_relations(user_import_item.import_data, user_import_item)
+                    self._import_second_round_relations(user_import_item.import_data, user_import_item, dry_run=dry_run)
                     
                 # after loop: prepend summary message
                 summary_message = \
@@ -303,9 +303,14 @@ class CosinnusUserImportProcessorBase(object):
                 import_failed_overall = True
                 # prepend the error message
                 user_import_item.import_report_html = CosinnusUserImportReportItems(
-                    _("An unexpected system error has occured while processing the data. This should not have happened. Please contact the support!"), 
+                    str(e),
                     "error"
                     ).to_string() + user_import_item.import_report_html
+                user_import_item.import_report_html = CosinnusUserImportReportItems(
+                    _("An unexpected system error has occured while processing the data. This should not have happened. Please contact the support! Technical Details follow:"), 
+                    "error"
+                    ).to_string() + user_import_item.import_report_html
+                    
                 if settings.DEBUG:
                     if dry_run:
                         user_import_item.state = CosinnusUserImport.STATE_DRY_RUN_FINISHED_INVALID
@@ -384,7 +389,7 @@ class CosinnusUserImportProcessorBase(object):
         user_import_item.add_user_report_item(str(_('New user account: ') + str(user_kwargs)), report_class="info")
         return user
     
-    def _import_second_round_relations(self, item_data_list, user_import_item):
+    def _import_second_round_relations(self, item_data_list, user_import_item, dry_run=True):
         """ Stub to support an additional, second import round for CSV items,
             run after the main import has been processed and all items have been created.
             Mainly enables things like group membership or tag assignments, which
