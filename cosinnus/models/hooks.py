@@ -213,7 +213,12 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
             if deleted or instance.status in MEMBER_STATUS:
 
                 # assign users to the group's BBBRoom's members if one exists
-                room = instance.group.media_tag.bbb_room
+                try:
+                    room = instance.group.media_tag.bbb_room
+                except Exception as e:
+                    logger.debug('Could not access a group\'s media_tag or the tag\'s BBBRoom in MembershipUpdateHookThread. Most likely a race condition.', extra={'exception': e})
+                    room = None
+                    
                 if room:
                     if deleted:
                         room.remove_user(instance.user)
