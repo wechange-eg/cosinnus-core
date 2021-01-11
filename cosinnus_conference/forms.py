@@ -113,10 +113,13 @@ class ConferenceApplicationForm(forms.ModelForm):
         exclude = ['conference', 'user', 'status', 'priorities']
 
     def get_options(self):
-        all_options = settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS
-        picked_options = self.participation_management.application_options
-        result = [option for option in all_options if option[0] in picked_options]
-        return result
+        if (hasattr(self, 'participation_management') and
+            self.participation_management.application_options):
+            all_options = settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS
+            picked_options = self.participation_management.application_options
+            result = [option for option in all_options if option[0] in picked_options]
+            return result
+        return []
 
     def __init__(self, *args, **kwargs):
         if 'participation_management' in kwargs:
@@ -134,6 +137,9 @@ class ConferenceApplicationForm(forms.ModelForm):
             or not self.participation_management.application_conditions or
             self.instance.id):
             del self.fields['conditions_accepted']
+        if (not hasattr(self, 'participation_management')
+            or not self.participation_management.application_options):
+            del self.fields['options']
 
     def clean_options(self):
         if self.cleaned_data['options'] and len(self.cleaned_data) > 0:

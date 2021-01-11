@@ -5,8 +5,7 @@
 {% block leftnav %}{% endblock %}
 
 {% block content %}
-
-
+{% if is_active %}
 <form method="POST" action="" class="cosinnus-form">
     {% csrf_token %}
     {{ form.media }}
@@ -57,10 +56,11 @@
                     <i class="fa fa-check"></i>
                 </a>
                 <div class="media-body">
-                    {% trans "Save" %}
+                    {% trans "Register" %}
                 </div>
             </li>
         </ul>
     </button>
 </form>
+{% endif %}
 {% endblock %}

@@ -9,10 +9,11 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 from django.utils.crypto import get_random_string
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from django.views.generic import (DetailView,
     ListView, TemplateView)
@@ -597,6 +598,26 @@ class ConferenceApplicationView(SamePortalGroupMixin,
             messages.success(self.request, _('Application has been updated.'))
         return HttpResponseRedirect(self.get_success_url())
 
+    def get(self, request, *args, **kwargs):
+        if not self._is_active():
+            now = timezone.now()
+            if now < self.participation_management.application_start:
+                messages.error(self.request, _('Application time has not started yet.'))
+            else:
+                messages.error(self.request, _('Application time is over.'))
+        return self.render_to_response(self.get_context_data())
+
+    def post(self, request, *args, **kwargs):
+        if not self._is_active():
+            return HttpResponseForbidden()
+        else:
+            form = self.get_form()
+            if form.is_valid():
+                return self.form_valid(form)
+            else:
+                return self.form_invalid(form)
+
+
     def get_success_url(self):
         return group_aware_reverse('cosinnus:conference:application',
                                    kwargs={'group': self.group})
@@ -611,17 +632,30 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                      'priority' : self.application.priorities.get(str(event.id))}
                      for event in self.events]
 
+    def _is_active(self):
+        pm = self.participation_management
+        if pm and pm.application_start and pm.application_end:
+            now = timezone.now()
+            return now >= pm.application_start and now <= pm.application_end
+        return True
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        priority_formset = PriorityFormSet(
-            initial = self._get_initial_priorities()
-        )
-        context.update({
-            'group': self.group,
-            'participation_management': self.participation_management,
-            'priority_formset': priority_formset
-        })
+
+        if self._is_active():
+            priority_formset = PriorityFormSet(
+                initial = self._get_initial_priorities()
+            )
+            context.update({
+                'is_active': True,
+                'group': self.group,
+                'participation_management': self.participation_management,
+                'priority_formset': priority_formset
+            })
+        else:
+            context.update({
+                'is_active': False
+            })
         return context
 
 
