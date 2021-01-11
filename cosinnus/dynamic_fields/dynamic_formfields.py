@@ -8,7 +8,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.urls.base import reverse, reverse_lazy
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy as p_
 from phonenumber_field.formfields import PhoneNumberField
 
 from cosinnus.conf import settings
@@ -16,6 +16,7 @@ from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.forms.select2 import HeavySelect2MultipleFreeTextChoiceWidget, \
     HeavySelect2FreeTextChoiceWidget
 from cosinnus.utils.user import get_user_select2_pills
+from django.forms.boundfield import BoundField
 
 
 class DynamicFieldFormFieldGenerator(object):
@@ -104,11 +105,42 @@ class PhoneDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
 class URLDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     formfield_class = forms.URLField
 
+
+class MultiAddressDynamicBoundField(BoundField):
+    @property
+    def get_subfields_name_and_label(self):
+        """ Return a list of (subfield_name, subfield_label) pairs  """
+        return self.field.get_subfields_name_and_label()
+
+class MultiAddressDynamicField(forms.CharField):
+    """  """
+    def prepare_value(self, value):
+        print(f'>>> go me {value}')
+        return value
+    
+    def get_subfields_name_and_label(self):
+        """ Field definition for subfields hardcoded right now """
+        return (
+            ('title', p_('Multi-Address Field Subfield', 'Title')),
+            ('line1', p_('Multi-Address Field Subfield', 'Address Line 1')),
+            ('line2', p_('Multi-Address Field Subfield', 'Address Line 2')),
+            ('line3', p_('Multi-Address Field Subfield', 'Address Line 3')),
+            ('street', p_('Multi-Address Field Subfield', 'Street and Number')),
+            ('state', p_('Multi-Address Field Subfield', 'State')),
+            ('country', p_('Multi-Address Field Subfield', 'Country')),
+            ('phone', p_('Multi-Address Field Subfield', 'Phone Number')),
+            ('mobile', p_('Multi-Address Field Subfield', 'Mobile Phone Number')),
+        )
+    
+    def get_bound_field(self, form, field_name):
+        return MultiAddressDynamicBoundField(form, self, field_name)
+    
+
 class MultiAddressDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
-    formfield_class = forms.CharField
+    formfield_class = MultiAddressDynamicField
     widget_class = forms.Textarea
     is_large_field = True
-
+    
 
 class _BaseSelect2DynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     """ Base for the dynamic field that uses a select2 widget """

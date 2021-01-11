@@ -12,6 +12,9 @@
 {% elif extra_field.dynamic_field_type == 'date' %}
     {% comment %} Regular Field {% endcomment %}   
     {% include 'cosinnus/fields/default_field.html' with field=bound_extra_field label=extra_field.label legend=extra_field.legend placeholder=extra_field.placeholder large_field=True field_classes="triplet-date-field" %}       
+{% elif extra_field.dynamic_field_type == 'multi_address' %}
+    {% comment %} Regular Field {% endcomment %}   
+    {% include 'cosinnus/fields/multi_address_field.html' with field=bound_extra_field label=extra_field.label legend=extra_field.legend placeholder=extra_field.placeholder large_field=True %}       
 {% else %}
     {% comment %} Regular Field {% endcomment %}   
     {% include 'cosinnus/fields/default_field.html' with field=bound_extra_field label=extra_field.label legend=extra_field.legend placeholder=extra_field.placeholder large_field=extra_field.large_field %}
