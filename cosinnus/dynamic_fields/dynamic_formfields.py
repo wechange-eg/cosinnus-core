@@ -117,13 +117,17 @@ class MultiAddressDynamicBoundField(BoundField):
         return self.field.get_subfields_name_and_label()
 
 class MultiAddressDynamicField(forms.Field):
-    """  """
+    """ A dynamic-field implementation for a multi value address field """
     def __init__(self, *args, **kwargs):
         self.form = kwargs.pop('form')
         super(MultiAddressDynamicField, self).__init__(*args, **kwargs)
     
     def prepare_value(self, value):
-        """ Sanity-check address dict """
+        # during validation errors, we need to re-format the POSt data to a usuable value
+        # to keep data that has been entered in the address fields
+        if self.form.is_bound:
+            return self.to_python(value)
+        # Sanity-check: make sure address dict is well-formed
         if not value or not type(value) is dict or not \
             ('current_address' in value and 'addresses' in value): 
             value = {}
@@ -131,8 +135,7 @@ class MultiAddressDynamicField(forms.Field):
     
     def to_python(self, value):
         """ Build a python dictionary from all address subfields """
-        print(f'TO_PYTHON {value}')
-        # stupidly check each field set from 0 to 99
+        # stupidly check if we contain each field set from 0 to 99
         addresses = {}
         for i in range(100):
             address = {}
@@ -145,19 +148,14 @@ class MultiAddressDynamicField(forms.Field):
         # make sure the selected value is an existing key of the address dict
         selected_value = self.form.data.get(f'{self.field_name}-selector', None)
         try:
-            addresses.get(selected_value)
+            addresses[selected_value]
         except Exception:
-            print(f'>>>>>> GOT A NONY! {selected_value} - {addresses.keys()}')
             selected_value = None
             
         field_value = {
             'current_address': selected_value,
             'addresses': addresses,
         }
-        
-        print(f'>>> FINAL field value:')
-        from pprint import pprint
-        pprint(field_value)
         return field_value
     
     def get_subfields_name_and_label(self):
