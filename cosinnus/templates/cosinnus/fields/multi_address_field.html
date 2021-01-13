@@ -158,7 +158,11 @@
                 $("#{{ field.id_for_label }}-selector-" + initId).attr('checked', true);
             {% endif %}
             {% for subfield_name, subfield_label in field.get_subfields_name_and_label %}
-                $("#{{ field.id_for_label }}-{{ subfield_name }}-" + initId).val("{{ address|get_item:subfield_name }}");
+                {% with subfield_value=address|get_item_or_none:subfield_name %}
+                    {% if subfield_value %}
+                        $("#{{ field.id_for_label }}-{{ subfield_name }}-" + initId).val("{{ subfield_value }}");
+                    {% endif %}
+                {% endwith %}
             {% endfor %}
         {% endfor %}
     {% else %}
