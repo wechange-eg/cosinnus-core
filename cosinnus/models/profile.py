@@ -607,9 +607,11 @@ class _UserProfileFormExtraFieldsBaseMixin(object):
                 field_options,
                 dynamic_field_initial=self.initial.get(field_name, None),
                 readonly_dynamic_fields_enabled=self.readonly_dynamic_fields_enabled,
-                data=self.data
+                data=self.data,
+                form=self
             )
             self.fields[field_name] = formfield
+            setattr(self.fields[field_name], 'field_name', field_name)
             setattr(self.fields[field_name], 'label', field_options.label)
             setattr(self.fields[field_name], 'legend', field_options.legend)
             setattr(self.fields[field_name], 'placeholder', field_options.placeholder)

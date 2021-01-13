@@ -21,6 +21,9 @@
         - hide_optional: forces hiding the "(Optional)" label for non-required fields
 {% endcomment %}
 
+{% comment %} Include the actual field name to show that the field is included in POST {% endcomment %}
+<input type="hidden" name="{{ field.html_name }}" value="1">
+
 {% if label %}
 	<div class="cosinnus-field">
 	    <label>
@@ -49,47 +52,88 @@
 			    </div>
 			    <div class="cosinnus-field-input regular-field">
 			        <input type="text" id="{{ field.id_for_label }}-{{ subfield_name }}" 
-		                 name="{{ field.html_name }}-{{ subfield_name }}" placeholder="{{ subfield_label }}">
+		                 name="{{ field.html_name }}-{{ subfield_name }}" placeholder="{{ subfield_label }}" disabled>
 			    </div>
 			</div>
 		{% endfor %}
 		<div class="cosinnus-field">
-		    <div class="cosinnus-field-input regular-field">
-		        <input type="radio" id="{{ field.id_for_label }}-selector" name="{{ field.html_name }}-selector" value="">
+		    <div class="cosinnus-field-input regular-field checkbox-field checkbox-field-no-label">
+		        <input type="radio" id="{{ field.id_for_label }}-selector" name="{{ field.html_name }}-selector" value="" disabled>
 		        <label for="{{ field.id_for_label }}-selector">
-		            {{ subfield_label }}
+		            {% trans "This is the current address" %}
 				</label>
 		    </div>
 	    </div>
 	    <div class="cosinnus-field">
-	        <a href="#" class="multi-address-field-remove">{% trans "Remove this Address" %}</a>
+	        <div class="btn btn-emphasized btn-autosize btn-small multi-address-field-remove">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left">
+                            <i class="fa fa-minus"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans "Remove this Address" %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
 	    </div>
+	    
 	</div>
 </div>
 
 <div id="multi-address-field-spawn-anchor"></div>
-<div class="cosinnus-field">
-    <a href="#" class="multi-address-field-add">{% trans "Add an Address" %}</a>
-</div>
+<div class="clearfix"></div>
+
+        <div class="cosinnus-field">
+		    <div class="cosinnus-field-input regular-field checkbox-field checkbox-field-no-label">
+		        <input type="radio" id="{{ field.id_for_label }}-selector-nochoice" name="{{ field.html_name }}-selector" value="-1" checked>
+		        <label for="{{ field.id_for_label }}-selector">
+		            {% trans "No current address selected" %}
+		        </label>
+		    </div>
+		</div>
+        <div class="cosinnus-field">
+		    <div class="btn btn-emphasized btn-autosize pull-left multi-address-field-add">
+		        <ul class="media-list">
+		            <li class="media">
+		                <a class="pull-left">
+		                    <i class="fa fa-plus"></i>
+		                </a>
+		                <div class="media-body">
+		                    {% trans "Add an Address" %}
+		                </div>
+		            </li>
+		        </ul>
+		    </div>
+		</div>
+
 
 <script type="text/javascript">
     var multiAddressFieldCounter = 0;
+    var cloned_fields = null;
     
     var addMultiAddressField = function() {
-        var cloned_fields = $("#{{ field.id_for_label }}-protofields").clone();
+        cloned_fields = $("#{{ field.id_for_label }}-protofields").clone();
         cloned_fields
             .removeAttr('id')
             .attr('data-counter', multiAddressFieldCounter)
             .removeClass('protofields');
-        cloned_fields.children('input[type="text"]').each(function(){
+        cloned_fields.find('input[type="text"]').each(function(){
             var me = $(this);
             me.attr('id', me.attr('id') + '-' + String(multiAddressFieldCounter));
             me.attr('name', me.attr('name') + '-' + String(multiAddressFieldCounter));
+            me.removeAttr('disabled');
         });
-        cloned_fields.children('input[type="radio"]').each(function(){
+        cloned_fields.find('input[type="radio"]').each(function(){
             var me = $(this);
-            me.attr('id', me.attr('id') + '-' + str(multiAddressFieldCounter));
+            me.attr('id', me.attr('id') + '-' + String(multiAddressFieldCounter));
             me.attr('value', String(multiAddressFieldCounter));
+            me.removeAttr('disabled');
+        });
+        cloned_fields.find('label[for]').each(function(){
+            var me = $(this);
+            me.attr('for', me.attr('for') + '-' + String(multiAddressFieldCounter));
         });
         cloned_fields.show().insertBefore('#multi-address-field-spawn-anchor');
         multiAddressFieldCounter += 1;
@@ -101,6 +145,25 @@
     $('body').on('click', '.multi-address-field-remove', function(){
         $(this).parents('.multi-address-field:not(.protofields)').remove();
     });
+    
+    {% comment %} For each address entry, create a new set of fields and fill their values {% endcomment %}
+    {% if field.value and field.value.addresses %}
+        var initId = 0;
+        {% for address_id, address in field.value.addresses.items %}
+            initId = multiAddressFieldCounter;
+            addMultiAddressField();
+            // {{ field.value.current_address }} + {{ address_id }}
+            {% if field.value.current_address == address_id %}
+                // yeah
+                $("#{{ field.id_for_label }}-selector-" + initId).attr('checked', true);
+            {% endif %}
+            {% for subfield_name, subfield_label in field.get_subfields_name_and_label %}
+                $("#{{ field.id_for_label }}-{{ subfield_name }}-" + initId).val("{{ address|get_item:subfield_name }}");
+            {% endfor %}
+        {% endfor %}
+    {% else %}
+        addMultiAddressField();
+    {% endif %}
 </script>
 
 
