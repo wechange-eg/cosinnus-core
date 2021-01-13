@@ -64,12 +64,12 @@
 
 	<div class="group-microsite-header">
 
-		{% if group.type == 2 %}
+		{% if group.type == 2 and group.participation_management.count > 0 %}
 		<div class="group-microsite-login-box overlay-box-gray">
 
 			{% if not user.is_authenticated %}
 			<span class="app-calendar"> {# Hacky green color #}
-				<button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}join/?direct=1" style="width: 100% !important;" type="button" class="btn btn-emphasized">
+				<button href="{% url 'cosinnus:user-add' %}?next={% group_url 'cosinnus:conference:application' group=group.slug %}" style="width: 100% !important;" type="button" class="btn btn-emphasized">
 					<ul class="media-list">
 						<li class="media">
 							<a class="pull-left" href="#">
@@ -83,6 +83,13 @@
 				</button>
 			</span>
 			{% else %}
+
+				{% conference_application group as application %}
+				{% if application %}
+				<h2>{% trans 'status: ' %}{{ application.get_status_display }}</h2>
+				{% endif %}
+
+				{% if group.participation_management.first.is_active %}
 				<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
 					<ul class="media-list">
 						<li class="media">
@@ -90,24 +97,42 @@
 								<i class="fa fa-sign-in"></i>
 							</a>
 							<div class="media-body">
-								{% trans "Apply for Conference" %}
+								{% if  application %}
+								{% trans "Edit Application" %}
+								{% else %}
+								{% trans "Add Application" %}
+								{% endif %}
 							</div>
 						</li>
 					</ul>
 				</button>
+				{% else %}
+				<button type="button" class="btn btn-emphasized btn-autosize disabled">
+					<ul class="media-list">
+						<li class="media">
+							<a class="pull-left" href="#">
+								<i class="fa fa-sign-in"></i>
+							</a>
+							<div class="media-body">
+								{{ group.participation_management.first.application_time_string }}
+							</div>
+						</li>
+					</ul>
+				</button>
+				{% endif %}
 			</div>
 		{% endif %}
 
-	
+
 		{% else %}
 		<div class="group-microsite-login-box overlay-box-gray">
-		
+
 			{% if not user.is_authenticated %}
 				{% if request.GET.invited == "1" %}
 					<h2>{% trans "You have been invited to collaborate!" %}</h2> {#  Jetzt anmelden und mitgestalten #}
 					{% if SETTINGS.COSINNUS_IS_SSO_PORTAL %}
                         {% include 'cosinnus/registration/sso_login_button.html' with next=group.get_absolute_url|addstr:'join/?direct=1' %}
-                    {% else %}   
+                    {% else %}
 						<span class="app-calendar"> {# Hacky green color #}
 			                <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}join/?direct=1" style="width: 100% !important;" type="button" class="btn btn-emphasized">
 			                    <ul class="media-list">
@@ -126,7 +151,7 @@
 				{% else %}
 					<h2>{% trans "Join now and collaborate!" %}</h2> {#  Jetzt anmelden und mitgestalten #}
 					{% if SETTINGS.COSINNUS_IS_SSO_PORTAL %}
-                        {% include 'cosinnus/registration/sso_login_button.html' with next=group.get_absolute_url %}   
+                        {% include 'cosinnus/registration/sso_login_button.html' with next=group.get_absolute_url %}
                     {% else %}
 						<span class="app-calendar"> {# Hacky green color #}
 			                <button href="{% url 'cosinnus:user-add' %}?next={% if request.GET.next %}{{ request.GET.next }}{% else %}{{ group.get_absolute_url }}{% endif %}" type="button" class="btn btn-emphasized">

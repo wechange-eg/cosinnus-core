@@ -11,7 +11,6 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import redirect, get_object_or_404
-from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
@@ -600,11 +599,7 @@ class ConferenceApplicationView(SamePortalGroupMixin,
 
     def get(self, request, *args, **kwargs):
         if not self._is_active():
-            now = timezone.now()
-            if now < self.participation_management.application_start:
-                messages.error(self.request, _('Application time has not started yet.'))
-            else:
-                messages.error(self.request, _('Application time is over.'))
+            messages.error(self.request, self.participation_management.application_time_string )
         return self.render_to_response(self.get_context_data())
 
     def post(self, request, *args, **kwargs):
@@ -619,7 +614,7 @@ class ConferenceApplicationView(SamePortalGroupMixin,
 
 
     def get_success_url(self):
-        return group_aware_reverse('cosinnus:conference:application',
+        return group_aware_reverse('cosinnus:group-microsite',
                                    kwargs={'group': self.group})
 
     def _get_initial_priorities(self):
@@ -634,9 +629,8 @@ class ConferenceApplicationView(SamePortalGroupMixin,
 
     def _is_active(self):
         pm = self.participation_management
-        if pm and pm.application_start and pm.application_end:
-            now = timezone.now()
-            return now >= pm.application_start and now <= pm.application_end
+        if pm:
+            return pm.is_active
         return True
 
     def get_context_data(self, **kwargs):

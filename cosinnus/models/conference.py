@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 import six
 
@@ -227,6 +228,24 @@ class ParticipationManagement(models.Model):
                                            verbose_name=_('Participation Management'),
                                            related_name='participation_management',
                                            on_delete=models.CASCADE)
+
+    @property
+    def is_active(self):
+        if self.application_start and self.application_end:
+            now = timezone.now()
+            return now >= self.application_start and now <= self.application_end
+        return True
+
+    @property
+    def application_time_string(self):
+        if self.is_active:
+            return _('Applications open')
+        else:
+            now = timezone.now()
+            if now < self.application_start:
+                return _('Application has not started yet.')
+            elif now > self.application_end:
+                return _('Application ist over.')
 
 
 class CosinnusConferenceApplication(models.Model):
