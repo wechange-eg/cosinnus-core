@@ -118,6 +118,20 @@ class MultiAddressDynamicBoundField(BoundField):
 
 class MultiAddressDynamicField(forms.Field):
     """ A dynamic-field implementation for a multi value address field """
+    
+    MULTI_ADDRESS_SUBFIELD_MAP = (
+        ('title', p_('Multi-Address Field Subfield', 'Address Title')),
+        ('line1', p_('Multi-Address Field Subfield', 'Address Line 1')),
+        ('line2', p_('Multi-Address Field Subfield', 'Address Line 2')),
+        ('line3', p_('Multi-Address Field Subfield', 'Address Line 3')),
+        ('street', p_('Multi-Address Field Subfield', 'Street and Number')),
+        ('city', p_('Multi-Address Field Subfield', 'City')),
+        ('state', p_('Multi-Address Field Subfield', 'State')),
+        ('country', p_('Multi-Address Field Subfield', 'Country')),
+        ('phone', p_('Multi-Address Field Subfield', 'Phone Number')),
+        ('mobile', p_('Multi-Address Field Subfield', 'Mobile Phone Number')),
+    )
+    
     def __init__(self, *args, **kwargs):
         self.form = kwargs.pop('form')
         super(MultiAddressDynamicField, self).__init__(*args, **kwargs)
@@ -160,17 +174,7 @@ class MultiAddressDynamicField(forms.Field):
     
     def get_subfields_name_and_label(self):
         """ Field definition for subfields hardcoded right now """
-        return (
-            ('title', p_('Multi-Address Field Subfield', 'Address Title')),
-            ('line1', p_('Multi-Address Field Subfield', 'Address Line 1')),
-            ('line2', p_('Multi-Address Field Subfield', 'Address Line 2')),
-            ('line3', p_('Multi-Address Field Subfield', 'Address Line 3')),
-            ('street', p_('Multi-Address Field Subfield', 'Street and Number')),
-            ('state', p_('Multi-Address Field Subfield', 'State')),
-            ('country', p_('Multi-Address Field Subfield', 'Country')),
-            ('phone', p_('Multi-Address Field Subfield', 'Phone Number')),
-            ('mobile', p_('Multi-Address Field Subfield', 'Mobile Phone Number')),
-        )
+        return self.MULTI_ADDRESS_SUBFIELD_MAP
     
     def get_bound_field(self, form, field_name):
         return MultiAddressDynamicBoundField(form, self, field_name)
