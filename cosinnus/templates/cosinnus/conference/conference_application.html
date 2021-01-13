@@ -62,6 +62,21 @@
             </li>
         </ul>
     </button>
+
+    {% if form.instance.id %}
+    <button type="submit" name="withdraw" class="btn btn-emphasized">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-trash"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Withdraw" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    {% endif %}
 </form>
 {% endif %}
 {% endblock %}

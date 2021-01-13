@@ -605,6 +605,10 @@ class ConferenceApplicationView(SamePortalGroupMixin,
     def post(self, request, *args, **kwargs):
         if not self._is_active():
             return HttpResponseForbidden()
+        if 'withdraw' in request.POST:
+            self.application.delete()
+            messages.success(self.request, _('Application has been withdrawn.'))
+            return HttpResponseRedirect(self.get_success_url())
         else:
             form = self.get_form()
             if form.is_valid():
