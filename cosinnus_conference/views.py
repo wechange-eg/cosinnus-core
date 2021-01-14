@@ -46,7 +46,8 @@ from django.http.response import Http404, HttpResponseForbidden,\
 from cosinnus_conference.forms import (ConferenceRemindersForm,
                                        ConferenceParticipationManagement,
                                        ConferenceApplicationForm,
-                                       PriorityFormSet
+                                       PriorityFormSet,
+                                       ApplicationFormSet
                                        )
 from cosinnus_conference.utils import send_conference_reminder
 from cosinnus_event.models import Event
@@ -657,6 +658,29 @@ class ConferenceApplicationView(SamePortalGroupMixin,
         return context
 
 
+class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
+                                                        RequireWriteMixin,
+                                                        GroupIsConferenceMixin,
+                                                        FormView):
+    form_class = ApplicationFormSet
+    template_name = 'cosinnus/conference/conference_participation_management_applications.html'
+
+    def get_form_kwargs(self):
+        form_kwargs = super().get_form_kwargs()
+        form_kwargs['queryset'] = self.group.conference_applications.all()
+        return form_kwargs
+
+    def form_valid(self, form):
+        for application in form:
+            application.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:conference:participation-management-applications',
+                                   kwargs={'group': self.group})
+
+
+conference_participation_management_applications = ConferenceParticipationManagementApplicationsView.as_view()
 conference_application = ConferenceApplicationView.as_view()
 conference_participation_management = ConferenceParticipationManagementView.as_view()
 conference_management = ConferenceManagementView.as_view()

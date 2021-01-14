@@ -8,7 +8,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from django.forms.widgets import SelectMultiple
-from django.forms import formset_factory
+from django.forms import formset_factory, modelformset_factory
 from django_select2.widgets import Select2MultipleWidget
 from cosinnus.forms.widgets import SplitHiddenDateWidget
 
@@ -159,3 +159,20 @@ class ConferenceApplicationEventPrioForm(forms.Form):
 
 
 PriorityFormSet = formset_factory(ConferenceApplicationEventPrioForm, extra=0)
+
+
+class ApplicationForm(forms.ModelForm):
+
+    class Meta:
+        model = CosinnusConferenceApplication
+        exclude = ['options', 'priorities']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        choices = self.fields['status'].choices
+        self.fields['status'].widget = forms.RadioSelect(choices=choices)
+        self.fields['user'].widget = forms.HiddenInput()
+        self.fields['conference'].widget = forms.HiddenInput()
+
+
+ApplicationFormSet = modelformset_factory(CosinnusConferenceApplication, form=ApplicationForm, extra=0)

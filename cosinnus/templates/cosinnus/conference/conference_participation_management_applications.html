@@ -1,0 +1,54 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">{% trans "Conference participation management" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_group.html" with current_page="conference_participation_manangement" object=group %}
+{% endblock leftnav %}
+
+{% block content %}
+<form method="POST" action="" class="cosinnus-form">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.non_field_errors }}
+    {{ form.non_field_errors }}
+    {{ form.management_form }}
+    <div class="content-box">
+        <table class="table table-striped white-content priority-form">
+            <thead>
+                <tr>
+                    <th>{% trans "Name" %}</th>
+                    <th>{% trans "Status" %}</th>
+                </tr>
+            </thead>
+            {% for application in form %}
+            <tr>
+                {{ application.conference }}
+                {{ application.user }}
+                {{ application.id }}
+                <td>{{ application.instance.user|full_name }}</td>
+                <td>{{ application.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <button type="submit" class="btn btn-emphasized">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-check"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Save" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+</form>
+{% endblock %}
