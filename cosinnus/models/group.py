@@ -942,6 +942,18 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         group.update_index()
         return group
     
+    @classmethod
+    def create_group_without_member(cls, name):
+        """ Creates a new group with no members in it """
+        current_portal = CosinnusPortal.get_current()
+        group = cls.objects.create(
+            name=name,
+            type=cls.GROUP_MODEL_TYPE,
+            portal=current_portal
+        )
+        group.update_index()
+        return group
+        
     @property
     def group_is_conference(self):
         """ Check if this is a proper conference (a type society with conference flag) """

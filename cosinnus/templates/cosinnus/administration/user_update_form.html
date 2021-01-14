@@ -1,7 +1,7 @@
 {% extends "cosinnus/user/userprofile_form.html" %}
 {% load i18n static cosinnus_tags widget_tweaks %}
 
-{% block page_title %}{% trans "Create new User" %} - {% trans "Edit" %}{% endblock %}
+{% block page_title %}{% trans "Update User" %} {{ object.user|full_name }}{% endblock %}
 
 {% block leftnav %}
 {% include 'cosinnus/administration/leftnav.html' %}

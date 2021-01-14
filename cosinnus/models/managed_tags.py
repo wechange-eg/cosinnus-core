@@ -388,7 +388,10 @@ class CosinnusManagedTag(models.Model):
         try:
             from cosinnus.models.group_extra import CosinnusSociety
             group_name = f'{settings.COSINNUS_MANAGED_TAGS_PAIRED_GROUPS_PREFIX}{name}'
-            paired_group = CosinnusSociety.create_group_for_user(group_name, creator)
+            if creator is None or not creator.is_authenticated:
+                paired_group = CosinnusSociety.create_group_without_member(group_name)
+            else:
+                paired_group = CosinnusSociety.create_group_for_user(group_name, creator)
             
         except Exception as e:
             logger.error('Error when creating a new managed tag, could not create paired group, but continuing tag creation!', extra={'exception': e})

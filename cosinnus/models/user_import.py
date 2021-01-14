@@ -19,6 +19,8 @@ from django.contrib.auth import get_user_model
 from django.template.loader import render_to_string
 from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
+from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
 
 logger = logging.getLogger('cosinnus')
 
@@ -384,6 +386,7 @@ class CosinnusUserImportProcessorBase(object):
             user.save()
             user.username = str(user.id)
             user.save()
+            CosinnusPortalMembership.objects.create(group=CosinnusPortal.get_current(), user=user, status=MEMBERSHIP_MEMBER)
             
         del user_kwargs['username']
         user_import_item.add_user_report_item(str(_('New user account: ') + str(user_kwargs)), report_class="info")

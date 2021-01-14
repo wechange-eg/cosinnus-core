@@ -518,10 +518,10 @@ class UserAdmin(DjangoUserAdmin):
             del actions['delete_selected']
         return actions
     
-    def has_delete_permission(self, request, obj=None):
-        """ We never allow users to be deleted, only deactivated! """
-        return False
-    
+#     def has_delete_permission(self, request, obj=None):
+#         """ We never allow users to be deleted, only deactivated! """
+#         return False
+     
     def deactivate_users(self, request, queryset):
         count = 0
         for user in queryset:
