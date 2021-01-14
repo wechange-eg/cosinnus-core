@@ -684,9 +684,9 @@ admin.site.register(Newsletter, CosinnusNewsletterAdmin)
 
 
 class CosinnusManagedTagAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'portal', 'paired_group')
-    list_filter = ('portal',)
-    search_fields = ('slug', 'name',)
+    list_display = ('name', 'slug', 'portal', 'type', 'paired_group')
+    list_filter = ('portal', 'type')
+    search_fields = ('slug', 'name', 'paired_group__slug', 'paired_group__name')
 
 admin.site.register(CosinnusManagedTag, CosinnusManagedTagAdmin)
 

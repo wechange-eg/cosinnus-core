@@ -258,6 +258,9 @@ class CosinnusManagedTagType(models.Model):
         verbose_name = MANAGED_TAG_LABELS.MANAGED_TAG_TYPE_NAME
         verbose_name_plural = MANAGED_TAG_LABELS.MANAGED_TAG_TYPE_NAME_PLURAL
         unique_together = (('name', 'portal'), )
+        
+    def __str__(self):
+        return f'Type: %s (Portal %d)' % (self.name, self.portal_id)
 
 
 @python_2_unicode_compatible
