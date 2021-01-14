@@ -69,21 +69,33 @@ class MembershipAdmin(admin.ModelAdmin):
     search_fields = ('user__first_name', 'user__last_name', 'user__email', 'group__name')
     raw_id_fields = ('user',)
     actions = ['make_admin', 'make_member']
+    if settings.COSINNUS_ROCKET_ENABLED:
+        actions += ['force_redo_user_room_membership',]
     
     def make_admin(self, request, queryset):
         """ Converts the memberships' statuses """
         queryset.update(status=MEMBERSHIP_ADMIN)
         self.message_user(request, f'Made {len(queryset)} users an Admin', messages.SUCCESS)
-    
     make_admin.short_description = _("Convert memberships to Admin status")
         
     def make_member(self, request, queryset):
         """ Converts the memberships' statuses """
         queryset.update(status=MEMBERSHIP_MEMBER)
         self.message_user(request, f'Made {len(queryset)} users a Member', messages.SUCCESS)
-        
     make_member.short_description = _("Convert memberships to Member status")
     
+    if settings.COSINNUS_ROCKET_ENABLED:
+        def force_redo_user_room_membership(self, request, queryset):
+            count = 0
+            from cosinnus_message.rocket_chat import RocketChatConnection
+            rocket = RocketChatConnection()
+            for membership in queryset:
+                rocket.invite_or_kick_for_membership(membership)
+                count += 1
+            message = _('%d Users\' rocketchat room memberships were re-done.') % count
+            self.message_user(request, message)
+        force_redo_user_room_membership.short_description = _('Rocket: Fix missing RocketChat room membership for users')
+        
 admin.site.register(CosinnusGroupMembership, MembershipAdmin)
 
 
@@ -497,7 +509,8 @@ class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
     actions = ['deactivate_users', 'export_as_csv', 'log_in_as_user']
     if settings.COSINNUS_ROCKET_ENABLED:
-        actions += ['force_sync_rocket_user', 'make_user_rocket_admin']
+        actions += ['force_sync_rocket_user', 'make_user_rocket_admin', 'force_redo_user_room_memberships',
+                    'ensure_user_account_sanity']
     list_display = ('email', 'is_active', 'date_joined', 'has_logged_in', 'tos_accepted', 'username', 'first_name', 'last_name', 'is_staff', )
     list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,]
     
@@ -518,9 +531,9 @@ class UserAdmin(DjangoUserAdmin):
             del actions['delete_selected']
         return actions
     
-#     def has_delete_permission(self, request, obj=None):
-#         """ We never allow users to be deleted, only deactivated! """
-#         return False
+    def has_delete_permission(self, request, obj=None):
+        """ We never allow users to be deleted, only deactivated! """
+        return False
      
     def deactivate_users(self, request, queryset):
         count = 0
@@ -548,7 +561,7 @@ class UserAdmin(DjangoUserAdmin):
                 count += 1
             message = _('%d Users were synchronized successfully.') % count
             self.message_user(request, message)
-        force_sync_rocket_user.short_description = _('Re-synchronize RocketChat user-account (will log users out of RocketChat!)')
+        force_sync_rocket_user.short_description = _('Rocket: Re-synchronize RocketChat user-account connection (will log users out of RocketChat!)')
         
         def make_user_rocket_admin(self, request, queryset):
             count = 0
@@ -559,7 +572,29 @@ class UserAdmin(DjangoUserAdmin):
                 count += 1
             message = _('%d Users were made RocketChat admins.') % count
             self.message_user(request, message)
-        make_user_rocket_admin.short_description = _('Make user RocketChat admin')
+        make_user_rocket_admin.short_description = _('Rocket: Make user RocketChat admin')
+        
+        def ensure_user_account_sanity(self, request, queryset):
+            count = 0
+            from cosinnus_message.rocket_chat import RocketChatConnection
+            rocket = RocketChatConnection()
+            for user in queryset:
+                rocket.ensure_user_account_sanity(user)
+                count += 1
+            message = _('%d Users rocketchat accounts were checked.') % count
+            self.message_user(request, message)
+        ensure_user_account_sanity.short_description = _('Rocket: Repair/create missing users\' rocketchat accounts')
+        
+        def force_redo_user_room_memberships(self, request, queryset):
+            count = 0
+            from cosinnus_message.rocket_chat import RocketChatConnection
+            rocket = RocketChatConnection()
+            for user in queryset:
+                rocket.force_redo_user_room_memberships(user)
+                count += 1
+            message = _('%d Users\' rocketchat room memberships were re-done.') % count
+            self.message_user(request, message)
+        force_redo_user_room_memberships.short_description = _('Rocket: Fix missing RocketChat room memberships for users')
         
 
 admin.site.unregister(USER_MODEL)
