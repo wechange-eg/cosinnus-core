@@ -47,8 +47,8 @@ from cosinnus_conference.forms import (ConferenceRemindersForm,
                                        ConferenceParticipationManagement,
                                        ConferenceApplicationForm,
                                        PriorityFormSet,
-                                       ApplicationFormSet
-                                       )
+                                       ApplicationFormSet,
+                                       AsignUserToEventForm)
 from cosinnus_conference.utils import send_conference_reminder
 from cosinnus_event.models import Event
 
@@ -665,15 +665,43 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
     form_class = ApplicationFormSet
     template_name = 'cosinnus/conference/conference_participation_management_applications.html'
 
+    @property
+    def events(self):
+        return Event.objects.filter(group=self.group).order_by('id')
+
+    @property
+    def applications(self):
+        return self.group.conference_applications.all()
+
     def get_form_kwargs(self):
         form_kwargs = super().get_form_kwargs()
-        form_kwargs['queryset'] = self.group.conference_applications.all()
+        form_kwargs['queryset'] = self.applications
         return form_kwargs
 
     def form_valid(self, form):
         for application in form:
             application.save()
         return HttpResponseRedirect(self.get_success_url())
+
+    def _get_applicants_for_workshop(self):
+        accepted_applications = self.applications.filter(status=4)
+        user_list = [(application.user.id, application.user.get_full_name()) for application in accepted_applications]
+        return user_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        users = self._get_applicants_for_workshop()
+        initial = [{
+            'event_id': event.id,
+            'event_name': event.title
+            } for event in self.events]
+        assignment_formset = AsignUserToEventForm(initial=initial)
+        for form in assignment_formset:
+            form.fields['users'].choices = users
+        context.update({
+            'assignment_formset': assignment_formset
+        })
+        return context
 
     def get_success_url(self):
         return group_aware_reverse('cosinnus:conference:participation-management-applications',

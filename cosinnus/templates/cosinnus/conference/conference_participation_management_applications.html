@@ -20,7 +20,7 @@
     {{ form.non_field_errors }}
     {{ form.management_form }}
     <div class="content-box">
-        <table class="table table-striped white-content priority-form">
+        <table class="table white-content priority-form">
             <thead>
                 <tr>
                     <th>{% trans "Name" %}</th>
@@ -37,6 +37,11 @@
             </tr>
             {% endfor %}
         </table>
+
+    {% for form in assignment_formset %}
+    {{ form.event_id }}
+    {% include 'cosinnus/fields/default_field.html' with field=form.users label=form.event_name.value large_field=True %}
+    {% endfor %}
     </div>
     <button type="submit" class="btn btn-emphasized">
         <ul class="media-list">

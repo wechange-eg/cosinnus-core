@@ -176,3 +176,18 @@ class ApplicationForm(forms.ModelForm):
 
 
 ApplicationFormSet = modelformset_factory(CosinnusConferenceApplication, form=ApplicationForm, extra=0)
+
+
+class AsignUserToEventForm(forms.Form):
+    event_id = forms.CharField(widget=forms.HiddenInput())
+    event_name = forms.CharField(required=False)
+    users = forms.MultipleChoiceField(choices=[], required=False)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in list(self.fields.values()):
+            if type(field.widget) is SelectMultiple:
+                field.widget = Select2MultipleWidget(choices=field.choices)
+
+AsignUserToEventForm = formset_factory(AsignUserToEventForm, extra=0)
