@@ -378,8 +378,8 @@ class CosinnusManagedTag(models.Model):
             @return: False if a managed tag of the given `name` already existed, the tag otherwise
         """
         tag_slug = slugify(name)
-        existing_tag = get_object_or_None(CosinnusManagedTag, name__iexact=name)
-        existing_tag_by_slug = get_object_or_None(CosinnusManagedTag, slug__iexact=tag_slug)
+        existing_tag = get_object_or_None(CosinnusManagedTag, name__iexact=name, portal=CosinnusPortal().get_current())
+        existing_tag_by_slug = get_object_or_None(CosinnusManagedTag, slug__iexact=tag_slug, portal=CosinnusPortal().get_current())
         if existing_tag or existing_tag_by_slug:
             logger.info('`create_managed_tag_and_paired_group` Did not create a new managed tag because an existing tag has the same name or slug', extra={'new_tag_name': name})
             return existing_tag or existing_tag_by_slug

@@ -115,7 +115,7 @@ class CosinnusUserImportView(RequireSuperuserMixin, TemplateView):
             if not self.import_object or not self.import_object.state == CosinnusUserImport.STATE_IMPORT_FINISHED:
                 return self.redirect_with_error()
             self.do_archive_import(self.import_object)
-            return redirect(self.import_object.get_absolute_url())
+            return redirect(self.redirect_view)
         elif self.action == 'scrap':
             if not self.import_object or not self.import_object.state in \
                     [CosinnusUserImport.STATE_DRY_RUN_FINISHED_INVALID, CosinnusUserImport.STATE_DRY_RUN_FINISHED_VALID,\
