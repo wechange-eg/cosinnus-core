@@ -24,6 +24,8 @@
             <thead>
                 <tr>
                     <th>{% trans "Name" %}</th>
+                    <th>{% trans "First Choice" %}</th>
+                    <th>{% trans "Second Choice" %}</th>
                     <th>{% trans "Status" %}</th>
                 </tr>
             </thead>
@@ -33,6 +35,8 @@
                 {{ application.user }}
                 {{ application.id }}
                 <td>{{ application.instance.user|full_name }}</td>
+                <td>{{ application.instance.first_priority.title }}</td>
+                <td>{{ application.instance.second_priority.title }}</td>
                 <td>{{ application.status }}</td>
             </tr>
             {% endfor %}

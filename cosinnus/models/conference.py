@@ -275,3 +275,18 @@ class CosinnusConferenceApplication(models.Model):
     options = PostgresJSONField(default=list, blank=True, null=True)
     priorities = PostgresJSONField(default=dict, blank=True, null=True)
 
+    @property
+    def first_priority(self):
+        from cosinnus_event.models import Event
+        for key,value in self.priorities.items():
+            if value == 1:
+                return Event.objects.get(id=int(key))
+
+    @property
+    def second_priority(self):
+        from cosinnus_event.models import Event
+        for key,value in self.priorities.items():
+            if value == 2:
+                return Event.objects.get(id=int(key))
+
+
