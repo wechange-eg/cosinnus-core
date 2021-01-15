@@ -204,7 +204,7 @@
                     {% include 'cosinnus/v2/texts/create_projects_description.html' %}
 				</div>
 				<div class="action text-bold">
-					{{ COSINNUS_SOCIETY_TRANS.CREATE_NEW }}
+					{{ COSINNUS_PROJECT_TRANS.CREATE_NEW }}
 				</div>
 			</a>
 			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:group__group-add' %}"
@@ -214,7 +214,7 @@
                     {% include 'cosinnus/v2/texts/create_groups_description.html' %}
                 </div>
                 <div class="action text-bold">
-                    {{ COSINNUS_PROJECT_TRANS.CREATE_NEW }}
+                    {{ COSINNUS_SOCIETY_TRANS.CREATE_NEW }}
                 </div>
             </a>
             {% if SETTINGS.COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON %}

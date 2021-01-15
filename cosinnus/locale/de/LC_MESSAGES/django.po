@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-15 14:46+0100\n"
-"PO-Revision-Date: 2020-12-15 14:44+0100\n"
+"PO-Revision-Date: 2021-01-15 14:42+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -3572,7 +3572,7 @@ msgid "Publicly visible content can be seen by ANYONE on the internet and it may
 msgstr "Das bedeutet, dass jeder im Internet darauf Zugriff hat und es lesen kann, und es möglicherweise in Suchmaschinenergebnissen erscheint!"
 
 msgid "Registered users only"
-msgstr "Nur registrierte Benutzer"
+msgstr "Nur registrierte Benutzer/innen"
 
 msgid "Edit folder"
 msgstr "Ordner bearbeiten"
@@ -5825,7 +5825,7 @@ msgid "Do you have something to share, sell or give away? Are you searching for 
 msgstr "Hast du etwas, das du teilen, verkaufen oder verschenken möchtest? Suchst du nach etwas Bestimmtem?"
 
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
-msgstr "Organisiere dich effizient mit MitstreiterInnen aus deinem Projekt oder deiner Initiative. Alle wichtigen Tools für eine gute Zusammenarbeit, wie Neuigkeiten, Pads, Kalender, Aufageben, etc. an einem Ort."
+msgstr "Organisiere dich effizient mit MitstreiterInnen aus deinem Projekt oder deiner Initiative. Alle wichtigen Tools für eine gute Zusammenarbeit, wie Neuigkeiten, Pads, Kalender, Aufgaben, etc. an einem Ort."
 
 msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "Welcome"
