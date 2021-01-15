@@ -61,6 +61,7 @@ from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
 from django.templatetags.i18n import do_translate, do_block_translate, TranslateNode, BlockTranslateNode
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.models.managed_tags import CosinnusManagedTag
+from cosinnus.views.ui_prefs import get_ui_prefs_for_user
 
 logger = logging.getLogger('cosinnus')
 
@@ -1236,4 +1237,8 @@ def get_country_name(country_code):
     from django_countries import countries
     return dict(countries).get(country_code, '(unknown)')
 
+@register.filter
+def get_ui_pref_for_user(user, ui_pref_name):
+    """ Returns for a user the value of the given ui pref """
+    return get_ui_prefs_for_user(user).get(ui_pref_name, None)
 
