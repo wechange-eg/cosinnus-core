@@ -722,6 +722,9 @@ class CosinnusConf(AppConf):
     # if set to True, will hide some UI elements in navbar and dashboard and change some redirects
     FORUM_DISABLED = False
     
+    # if set to True, will hide some UI elements in navbar and dashboard and change some redirects
+    POST_TO_FORUM_FROM_DASHBOARD_DISABLED = False
+    
     # if set to True, will hide the userdashboard timeline controls and force the 
     # "only show content from my projects and groups" option 
     USERDASHBOARD_FORCE_ONLY_MINE = False
