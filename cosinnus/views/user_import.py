@@ -16,6 +16,8 @@ from cosinnus.models.user_import import CosinnusUserImport,\
     CosinnusUserImportProcessor
 from cosinnus.forms.user_import import CosinusUserImportCSVForm
 from cosinnus.views.mixins.group import RequireSuperuserMixin
+from django.views.generic.edit import DeleteView
+from django.urls.base import reverse
 
 
 logger = logging.getLogger('cosinnus')
@@ -40,6 +42,17 @@ class ArchivedCosinnusUserImportDetailView(RequireSuperuserMixin, DetailView):
 
 archived_user_import_detail_view = ArchivedCosinnusUserImportDetailView.as_view()
 
+
+class ArchivedCosinnusUserImportDeleteView(RequireSuperuserMixin, DeleteView):
+
+    model = CosinnusUserImport
+    message_success = _('The Archived User Import Entry was deleted successfully.')
+    
+    def get_success_url(self):
+        messages.success(self.request, self.message_success)
+        return reverse('cosinnus:administration-archived-user-import-list')
+
+archived_user_import_delete_view = ArchivedCosinnusUserImportDeleteView.as_view()
 
 
 class CosinnusUserImportView(RequireSuperuserMixin, TemplateView):
@@ -154,8 +167,11 @@ class CosinnusUserImportView(RequireSuperuserMixin, TemplateView):
         CosinnusUserImportProcessor().do_import(import_object, dry_run=False, import_creator=self.request.user)
     
     def do_archive_import(self, import_object):
+        before_last_modified = import_object.last_modified
         import_object.state = CosinnusUserImport.STATE_ARCHIVED
         import_object.save()
+        # force previous timestamp
+        CosinnusUserImport.objects.filter(pk=import_object.pk).update(last_modified=before_last_modified)
         messages.success(self.request, _('The import was successfully archived.'))
     
     def get_context_data(self, **kwargs):

@@ -165,7 +165,10 @@ class CosinnusUserImport(models.Model):
         
     def get_absolute_url(self):
         return reverse('cosinnus:administration-archived-user-import-detail', kwargs={'pk': self.id})
-
+    
+    def get_delete_url(self):
+        return reverse('cosinnus:administration-archived-user-import-delete', kwargs={'pk': self.id})
+    
 
 class CosinnusUserImportProcessorBase(object):
     
