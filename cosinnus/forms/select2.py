@@ -104,6 +104,7 @@ class HeavySelect2FreeTextChoiceWidget(HeavySelect2Widget):
         self.options['minimumInputLength'] = 1
         self.options['tokenSeparators'] = [","]
         self.options['createSearchChoice'] = JSFunctionInContext('django_select2.createSearchChoice')
+        self.options['selectOnBlur'] = True
         
 
 class HeavySelect2MultipleFreeTextChoiceWidget(HeavySelect2MultipleWidget):
@@ -115,5 +116,6 @@ class HeavySelect2MultipleFreeTextChoiceWidget(HeavySelect2MultipleWidget):
         self.options['tags'] = True
         self.options['tokenSeparators'] = [","]
         self.options['createSearchChoice'] = JSFunctionInContext('django_select2.createSearchChoice')
+        self.options['selectOnBlur'] = True
         
         
