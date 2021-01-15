@@ -44,7 +44,7 @@
 {% if field or field_id %}{% captureas for_id %}{% if field %}{{ field.id_for_label }}{% else %}{{ field_id }}{% endif %}{% endcaptureas %}{% endif %}
 
 <div class="row">
-	<div id="{{ field.id_for_label }}-protofields" class="multi-address-field protofields col-md-6" data-counter="-1" style="display: none;">
+	<div id="{{ field.id_for_label }}-protofields" class="multi-address-field protofields col-md-6 large-space" data-counter="-1" style="display: none;">
 	    {% for subfield_name, subfield_label in field.get_subfields_name_and_label %}
 			<div class="cosinnus-field">
 			    <div class="field-description no-select {{ legend_class }}">
@@ -84,15 +84,19 @@
 
 <div id="multi-address-field-spawn-anchor"></div>
 <div class="clearfix"></div>
-
-        <div class="cosinnus-field">
-		    <div class="cosinnus-field-input regular-field checkbox-field checkbox-field-no-label">
-		        <input type="radio" id="{{ field.id_for_label }}-selector-nochoice" name="{{ field.html_name }}-selector" value="-1" checked>
-		        <label for="{{ field.id_for_label }}-selector-nochoice">
-		            {% trans "No current address selected" %}
-		        </label>
-		    </div>
-		</div>
+        
+        {% comment %} 
+	        To make it possible to select no address, comment in this additional radio button.
+	        
+	        <div class="cosinnus-field">
+			    <div class="cosinnus-field-input regular-field checkbox-field checkbox-field-no-label">
+			        <input type="radio" id="{{ field.id_for_label }}-selector-nochoice" name="{{ field.html_name }}-selector" value="-1" checked>
+			        <label for="{{ field.id_for_label }}-selector-nochoice">
+			            {% trans "No current address selected" %}
+			        </label>
+			    </div>
+			</div>
+        {% endcomment %}
         <div class="cosinnus-field">
 		    <div class="btn btn-emphasized btn-autosize pull-left multi-address-field-add">
 		        <ul class="media-list">
