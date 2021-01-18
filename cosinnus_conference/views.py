@@ -678,9 +678,19 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
         form_kwargs['queryset'] = self.applications
         return form_kwargs
 
+    def _set_workshop_assignments(self):
+        formset = AsignUserToEventForm(self.request.POST, prefix='assignment')
+
+        # at the moment this is False because the picked choices are validated as not valid
+        if formset.is_valid():
+            for form in formset.forms:
+                data = form.cleaned_data
+
+
     def form_valid(self, form):
         for application in form:
             application.save()
+        self._set_workshop_assignments()
         return HttpResponseRedirect(self.get_success_url())
 
     def _get_applicants_for_workshop(self):
@@ -695,7 +705,9 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
             'event_id': event.id,
             'event_name': event.title
             } for event in self.events]
-        assignment_formset = AsignUserToEventForm(initial=initial)
+        assignment_formset = AsignUserToEventForm(initial=initial, prefix='assignment')
+
+        # adding the choices to the field here seems to be too late
         for form in assignment_formset:
             form.fields['users'].choices = users
         context.update({

@@ -19,6 +19,7 @@
     {{ form.non_field_errors }}
     {{ form.non_field_errors }}
     {{ form.management_form }}
+    {{ assignment_formset.management_form }}
     <div class="content-box">
         <table class="table white-content priority-form">
             <thead>
@@ -41,6 +42,7 @@
             </tr>
             {% endfor %}
         </table>
+
 
     {% for form in assignment_formset %}
     {{ form.event_id }}
