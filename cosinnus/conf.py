@@ -655,6 +655,9 @@ class CosinnusConf(AppConf):
     # whether to use the new style user-dashboard
     USE_V2_DASHBOARD = False    
     
+    # the URL fragment for the user-dashboard on this portal
+    V2_DASHBOARD_URL_FRAGMENT = 'dashboard'
+    
     # whether to use the new style user-dashboard ONLY for admins 
     # does not need `USE_V2_DASHBOARD` to be enabled
     USE_V2_DASHBOARD_ADMIN_ONLY = False    

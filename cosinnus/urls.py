@@ -158,15 +158,16 @@ if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
     ]
 
 if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False):
+    dashboard_url = getattr(settings, 'COSINNUS_V2_DASHBOARD_URL_FRAGMENT', 'dashboard')
     if getattr(settings, 'COSINNUS_CLOUD_ENABLED', False):
         import cosinnus_cloud.views as cosinnus_cloud_views # noqa
         urlpatterns += [
-            url(r'^dashboard/api/user_typed_content/cloud_files/$', cosinnus_cloud_views.api_user_cloud_files_content, name='user-dashboard-api-typed-content-cloud'),
+            url(fr'^dashboard/api/user_typed_content/cloud_files/$', cosinnus_cloud_views.api_user_cloud_files_content, name='user-dashboard-api-typed-content-cloud'),
             url(r'^dashboard/api/user_typed_content/recent/cloud_files/$', cosinnus_cloud_views.api_user_cloud_files_content, name='user-dashboard-api-typed-content-cloud', kwargs={'show_recent':True}),
             url(r'^search/cloudfiles/$', map.tile_view, name='cloudfiles-search', kwargs={'types': ['cloudfiles']}),
         ]
     urlpatterns += [
-        url(r'^dashboard/$', user_dashboard.user_dashboard_view, name='user-dashboard'),
+        url(fr'^{dashboard_url}/$', user_dashboard.user_dashboard_view, name='user-dashboard'),
         url(r'^dashboard/api/user_groups/$', user_dashboard.api_user_groups, name='user-dashboard-api-groups'),
         url(r'^dashboard/api/user_liked_ideas/$', user_dashboard.api_user_liked_ideas, name='user-dashboard-api-liked-ideas'),
         url(r'^dashboard/api/user_starred_users/$', user_dashboard.api_user_starred_users, name='user-dashboard-api-starred-users'),
