@@ -33,7 +33,7 @@
     	</div>
     </div>
 
-
+    {% block quicksearch %}
     <div class="nav-section nav-search" id="nav-quicksearch">
     	<div class="">
 			<a class="nav-button nav-button-search show-active" title="{% trans "Search" %}">
@@ -59,6 +59,7 @@
 	        });
 	    });
 	</script>
+	{% endblock quicksearch %}
 
 	<div class="nav-section nav-mobile-triple-dots mobile-only">
 		<a class="nav-button" role="button" onclick="$('body').toggleClass('mobile-triple-dots-active');">
