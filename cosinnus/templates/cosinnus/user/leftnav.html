@@ -89,7 +89,7 @@
 
 <button type="button" class="btn w100 btn-emphasized regular-space" 
         title="{% trans "Deactivated Projects and Groups" %}" 
-        {% if has_deactivated_groups %}href="{% url 'cosinnus:deactivated-groups' %}"{% else %}disabled="true"{% endif %}>
+        {% if request.user.cosinnus_profile and request.user.cosinnus_profile.has_deactivated_groups %}href="{% url 'cosinnus:deactivated-groups' %}"{% else %}disabled="true"{% endif %}>
     <ul class="media-list">
         <li class="media">
             <a class="pull-left" href="#">

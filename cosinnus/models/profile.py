@@ -271,6 +271,15 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         from cosinnus.models.group_extra import CosinnusSociety
         return CosinnusSociety.objects.get_for_user(self.user)
     
+    def get_deactivated_groups(self):
+        """ Returns a QS of all (untyped) deactivated groups for this user """
+        return get_cosinnus_group_model().objects.get_deactivated_for_user(self.user)
+    
+    @property
+    def has_deactivated_groups(self):
+        """ Returns True if the user has any deactivated groups they can re-activate """
+        return self.get_deactivated_groups().count() > 0
+    
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
