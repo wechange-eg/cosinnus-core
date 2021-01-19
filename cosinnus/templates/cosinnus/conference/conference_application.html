@@ -1,0 +1,82 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block breadcrumb %}{% endblock %}
+{% block leftnav %}{% endblock %}
+
+{% block content %}
+{% if is_active %}
+<form method="POST" action="" class="cosinnus-form">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.non_field_errors }}
+    {{ form.non_field_errors }}
+    {{ priority_formset.management_form }}
+    <div class="content-box">
+
+        {% if form.options %}
+        {% trans "My individual needs" as options_label %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.options label=options_label large_field=True %}
+        {% endif %}
+
+
+        {% if priority_formset.forms %}
+        <table class="table table-striped white-content priority-form">
+            <thead>
+                <tr>
+                    <th>{% trans "Programm" %}</th>
+                    <th>{% trans "Priority" %}</th>
+                </tr>
+            </thead>
+
+        {% for form in priority_formset %}
+        {{ form.event_id }}
+        <tr>
+            <td>{{ form.event_name.value }}</td>
+            <td>{{ form.priority }}</td>
+        </tr>
+
+        {% endfor %}
+        </table>
+        {% endif %}
+
+
+        {% if form.conditions_accepted %}
+        {% trans "Conditions" as conditions_label %}
+        {% trans "Please accept the conditions" as conditions_box_label %}
+        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_label legend=participation_management.application_conditions checkbox_label=conditions_box_label %}
+        {% endif %}
+
+
+    </div>
+
+    <button type="submit" class="btn btn-emphasized">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-check"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Save" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+
+    {% if form.instance.id %}
+    <button type="submit" name="withdraw" class="btn btn-emphasized">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-trash"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Withdraw" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    {% endif %}
+</form>
+{% endif %}
+{% endblock %}

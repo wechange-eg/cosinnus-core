@@ -9,10 +9,10 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import redirect, get_object_or_404
-from django.utils import timezone
 from django.utils.crypto import get_random_string
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from django.views.generic import (DetailView,
     ListView, TemplateView)
@@ -43,8 +43,14 @@ from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
 from django.http.response import Http404, HttpResponseForbidden,\
     HttpResponseNotFound
 
-from cosinnus_conference.forms import ConferenceRemindersForm, ConferenceParticipationManagement
+from cosinnus_conference.forms import (ConferenceRemindersForm,
+                                       ConferenceParticipationManagement,
+                                       ConferenceApplicationForm,
+                                       PriorityFormSet,
+                                       ApplicationFormSet,
+                                       AsignUserToEventForm)
 from cosinnus_conference.utils import send_conference_reminder
+from cosinnus_event.models import Event
 
 logger = logging.getLogger('cosinnus')
 
@@ -539,6 +545,171 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
                                    kwargs={'group': self.group})
 
 
+class ConferenceApplicationView(SamePortalGroupMixin,
+                                RequireReadMixin,
+                                GroupIsConferenceMixin,
+                                FormView):
+    form_class = ConferenceApplicationForm
+    template_name = 'cosinnus/conference/conference_application.html'
+
+    @property
+    def events(self):
+        return Event.objects.filter(group=self.group).order_by('id')
+
+    @property
+    def participation_management(self):
+        return self.group.participation_management.first()
+
+    @property
+    def application(self):
+        user = self.request.user
+        return self.group.conference_applications.all().filter(user=user).first()
+
+    def get_form_kwargs(self):
+        form_kwargs = super().get_form_kwargs()
+        if self.participation_management:
+            form_kwargs['participation_management'] = self.participation_management
+        if self.application:
+            form_kwargs['instance'] = self.application
+        return form_kwargs
+
+    def _get_prioritydict(self):
+        formset = PriorityFormSet(self.request.POST)
+        priority_dict = {}
+        if formset.is_valid():
+            for form in formset.forms:
+                data = form.cleaned_data
+                priority_dict[data.get('event_id')] = int(data.get('priority'))
+        return priority_dict
+
+    def form_valid(self, form):
+        priorities = self._get_prioritydict()
+        if not form.instance.id:
+            application = form.save(commit=False)
+            application.conference = self.group
+            application.user = self.request.user
+            application.priorities = priorities
+            application.save()
+            messages.success(self.request, _('Application has been sent.'))
+        else:
+            application = form.save()
+            application.priorities = priorities
+            application.save()
+            messages.success(self.request, _('Application has been updated.'))
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get(self, request, *args, **kwargs):
+        if not self._is_active():
+            messages.error(self.request, self.participation_management.application_time_string )
+        return self.render_to_response(self.get_context_data())
+
+    def post(self, request, *args, **kwargs):
+        if not self._is_active():
+            return HttpResponseForbidden()
+        if 'withdraw' in request.POST:
+            self.application.delete()
+            messages.success(self.request, _('Application has been withdrawn.'))
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            form = self.get_form()
+            if form.is_valid():
+                return self.form_valid(form)
+            else:
+                return self.form_invalid(form)
+
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:group-microsite',
+                                   kwargs={'group': self.group})
+
+    def _get_initial_priorities(self):
+        if not self.application:
+            return [{'event_id': event.id,
+                     'event_name': event.title} for event in self.events]
+        else:
+            return [{'event_id': event.id,
+                     'event_name': event.title,
+                     'priority' : self.application.priorities.get(str(event.id))}
+                     for event in self.events]
+
+    def _is_active(self):
+        pm = self.participation_management
+        if pm:
+            return pm.is_active
+        return True
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if self._is_active():
+            priority_formset = PriorityFormSet(
+                initial = self._get_initial_priorities()
+            )
+            context.update({
+                'is_active': True,
+                'group': self.group,
+                'participation_management': self.participation_management,
+                'priority_formset': priority_formset
+            })
+        else:
+            context.update({
+                'is_active': False
+            })
+        return context
+
+
+class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
+                                                        RequireWriteMixin,
+                                                        GroupIsConferenceMixin,
+                                                        FormView):
+    form_class = ApplicationFormSet
+    template_name = 'cosinnus/conference/conference_participation_management_applications.html'
+
+    @property
+    def events(self):
+        return Event.objects.filter(group=self.group).order_by('id')
+
+    @property
+    def applications(self):
+        return self.group.conference_applications.all()
+
+    def get_form_kwargs(self):
+        form_kwargs = super().get_form_kwargs()
+        form_kwargs['queryset'] = self.applications
+        return form_kwargs
+
+    def form_valid(self, form):
+        for application in form:
+            application.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def _get_applicants_for_workshop(self):
+        accepted_applications = self.applications.filter(status=4)
+        user_list = [(application.user.id, application.user.get_full_name()) for application in accepted_applications]
+        return user_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        users = self._get_applicants_for_workshop()
+        initial = [{
+            'event_id': event.id,
+            'event_name': event.title
+            } for event in self.events]
+        assignment_formset = AsignUserToEventForm(initial=initial)
+        for form in assignment_formset:
+            form.fields['users'].choices = users
+        context.update({
+            'assignment_formset': assignment_formset
+        })
+        return context
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:conference:participation-management-applications',
+                                   kwargs={'group': self.group})
+
+
+conference_participation_management_applications = ConferenceParticipationManagementApplicationsView.as_view()
+conference_application = ConferenceApplicationView.as_view()
 conference_participation_management = ConferenceParticipationManagementView.as_view()
 conference_management = ConferenceManagementView.as_view()
 workshop_participants_upload = WorkshopParticipantsUploadView.as_view()

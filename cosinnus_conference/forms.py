@@ -3,10 +3,12 @@ from django import forms
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_conference.utils import get_initial_template
 from cosinnus.models.conference import ParticipationManagement
+from cosinnus.models.conference import CosinnusConferenceApplication
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from django.forms.widgets import SelectMultiple
+from django.forms import formset_factory, modelformset_factory
 from django_select2.widgets import Select2MultipleWidget
 from cosinnus.forms.widgets import SplitHiddenDateWidget
 
@@ -78,6 +80,10 @@ class ConferenceParticipationManagement(forms.ModelForm):
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
 
+    def clean_application_options(self):
+        if self.cleaned_data['application_options'] and len(self.cleaned_data) > 0:
+            return [int(option) for option in self.cleaned_data['application_options']]
+
     def clean(self):
         cleaned_data = super().clean()
         application_start = cleaned_data.get('application_start')
@@ -97,3 +103,91 @@ class ConferenceParticipationManagement(forms.ModelForm):
             self.add_error('application_end', msg)
 
         return cleaned_data
+
+
+class ConferenceApplicationForm(forms.ModelForm):
+    conditions_accepted = forms.BooleanField(required = True)
+
+    class Meta:
+        model = CosinnusConferenceApplication
+        exclude = ['conference', 'user', 'status', 'priorities']
+
+    def get_options(self):
+        if (hasattr(self, 'participation_management') and
+            self.participation_management.application_options):
+            all_options = settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS
+            picked_options = self.participation_management.application_options
+            result = [option for option in all_options if option[0] in picked_options]
+            return result
+        return []
+
+    def __init__(self, *args, **kwargs):
+        if 'participation_management' in kwargs:
+            self.participation_management = kwargs.pop('participation_management')
+        super().__init__(*args, **kwargs)
+        self.fields['options'] = forms.MultipleChoiceField(
+            choices=self.get_options(),
+            required=False)
+
+        for field in list(self.fields.values()):
+            if type(field.widget) is SelectMultiple:
+                field.widget = Select2MultipleWidget(choices=field.choices)
+
+        if (not hasattr(self, 'participation_management')
+            or not self.participation_management.application_conditions or
+            self.instance.id):
+            del self.fields['conditions_accepted']
+        if (not hasattr(self, 'participation_management')
+            or not self.participation_management.application_options):
+            del self.fields['options']
+
+    def clean_options(self):
+        if self.cleaned_data['options'] and len(self.cleaned_data) > 0:
+            return [int(option) for option in self.cleaned_data['options']]
+
+class ConferenceApplicationEventPrioForm(forms.Form):
+    event_id = forms.CharField(widget=forms.HiddenInput())
+    event_name = forms.CharField(required=False)
+    priority = forms.ChoiceField(
+        initial=0,
+        choices=[(0, _('No Interest')), (1, _('First Choice')), (2, ('Second Choice'))],
+        widget=forms.RadioSelect)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['event_name'].widget.attrs['readonly'] = True
+
+
+PriorityFormSet = formset_factory(ConferenceApplicationEventPrioForm, extra=0)
+
+
+class ApplicationForm(forms.ModelForm):
+
+    class Meta:
+        model = CosinnusConferenceApplication
+        exclude = ['options', 'priorities']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        choices = self.fields['status'].choices
+        self.fields['status'].widget = forms.RadioSelect(choices=choices)
+        self.fields['user'].widget = forms.HiddenInput()
+        self.fields['conference'].widget = forms.HiddenInput()
+
+
+ApplicationFormSet = modelformset_factory(CosinnusConferenceApplication, form=ApplicationForm, extra=0)
+
+
+class AsignUserToEventForm(forms.Form):
+    event_id = forms.CharField(widget=forms.HiddenInput())
+    event_name = forms.CharField(required=False)
+    users = forms.MultipleChoiceField(choices=[], required=False)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in list(self.fields.values()):
+            if type(field.widget) is SelectMultiple:
+                field.widget = Select2MultipleWidget(choices=field.choices)
+
+AsignUserToEventForm = formset_factory(AsignUserToEventForm, extra=0)

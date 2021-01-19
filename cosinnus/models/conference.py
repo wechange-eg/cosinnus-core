@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 import six
 
@@ -227,3 +228,65 @@ class ParticipationManagement(models.Model):
                                            verbose_name=_('Participation Management'),
                                            related_name='participation_management',
                                            on_delete=models.CASCADE)
+
+    @property
+    def is_active(self):
+        if self.application_start and self.application_end:
+            now = timezone.now()
+            return now >= self.application_start and now <= self.application_end
+        return True
+
+    @property
+    def application_time_string(self):
+        if self.is_active:
+            return _('Applications open')
+        else:
+            now = timezone.now()
+            if now < self.application_start:
+                return _('Application has not started yet.')
+            elif now > self.application_end:
+                return _('Application ist over.')
+
+
+class CosinnusConferenceApplication(models.Model):
+
+    APPLICATION_INVALID = 1
+    APPLICATION_SUBMITTED = 2
+    APPLICATION_WAITLIST = 3
+    APPLICATION_ACCEPTED = 4
+    APPLICATION_DECLINED = 5
+
+    APPLICATION_STATES = [
+        (APPLICATION_INVALID, _('Invalid')),
+        (APPLICATION_SUBMITTED, _('Submitted')),
+        (APPLICATION_WAITLIST, _('Waitlist')),
+        (APPLICATION_ACCEPTED, _('Accepted')),
+        (APPLICATION_DECLINED, _('Declined')),
+    ]
+
+    conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
+                                           verbose_name=_('Confernence Application'),
+                                           related_name='conference_applications',
+                                           on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+        related_name='user_applications', on_delete=models.CASCADE)
+    status = models.PositiveSmallIntegerField(choices=APPLICATION_STATES,
+                                              default=APPLICATION_SUBMITTED)
+    options = PostgresJSONField(default=list, blank=True, null=True)
+    priorities = PostgresJSONField(default=dict, blank=True, null=True)
+
+    @property
+    def first_priority(self):
+        from cosinnus_event.models import Event
+        for key,value in self.priorities.items():
+            if value == 1:
+                return Event.objects.get(id=int(key))
+
+    @property
+    def second_priority(self):
+        from cosinnus_event.models import Event
+        for key,value in self.priorities.items():
+            if value == 2:
+                return Event.objects.get(id=int(key))
+
+

@@ -48,6 +48,7 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.template.defaultfilters import linebreaksbr
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
     CosinnusConference
+from cosinnus.models.conference import CosinnusConferenceApplication
 from wagtail.core.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
 from annoying.functions import get_object_or_None
@@ -1294,7 +1295,7 @@ def has_managed_tag_requirement_for_dynamic_field(user, dynamic_field_name):
         for field_name in field_map.keys():
             field_map[field_name] = list(set(field_map[field_name]))
         _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP = field_map
-    
+
     user_managed_tag_slugs = [tag.slug for tag in user.cosinnus_profile.get_managed_tags()]
     required_tag_slugs = _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP.get(dynamic_field_name, [])
     return any([user_tag_slug in required_tag_slugs for user_tag_slug in user_managed_tag_slugs])
@@ -1304,4 +1305,14 @@ def has_managed_tag_requirement_for_dynamic_field(user, dynamic_field_name):
 def get_ui_pref_for_user(user, ui_pref_name):
     """ Returns for a user the value of the given ui pref """
     return get_ui_prefs_for_user(user).get(ui_pref_name, None)
+
+
+@register.simple_tag(takes_context=True)
+def conference_application(context, conference):
+    request = context['request']
+    user = request.user
+    applications = CosinnusConferenceApplication.objects.filter(user=user, conference=conference)
+    if applications:
+        return applications.first()
+
 
