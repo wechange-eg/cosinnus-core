@@ -8,6 +8,8 @@
 {% endblock leftnav %}
 
 {% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li class="active">{% trans "User Import" %}</li>
 {% endblock %}
 
 {% block content %}
@@ -79,7 +81,7 @@
 	        
 	        {% elif form_view == "import-ready" %}
                 <p class="textfield import-warning">
-                    {% trans "No data has been imported yet." %}<br/>
+                    {% trans "No data has been imported yet. Ready to import!" %}<br/>
                 </p>
 	            <h2>{% trans "The uploaded data is valid and ready to be imported! Please review carefully!" %}</h2>
                 <input type="hidden" name="action" value="import" />
@@ -178,6 +180,12 @@
 			    {% captureas title %}{% trans "Start the Import?" %}{% endcaptureas %}
                 {% captureas modal_submit_button_label %}{% trans "Import Now!" %}{% endcaptureas %}
 			    {% include "cosinnus/modal_box.html" with id="modal_start_import" label=label title=title form_action="." title_icon='fa fa-floppy-o' submit_button_label=modal_submit_button_label %}
+			    
+			    <script type="text/javascript">
+			         $('#modal_start_import_btnsubmit').on('mouseup', function(){
+			             setTimeout(function(){$('#modal_start_import_btnsubmit').attr('disabled', 'disabled');}, 5);
+			         });
+			    </script>
 			    
 	        {% endif %}
 			

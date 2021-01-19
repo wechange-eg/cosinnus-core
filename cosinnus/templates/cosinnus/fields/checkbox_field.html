@@ -1,6 +1,8 @@
 {% load i18n cosinnus_tags widget_tweaks %}
 
 {% captureas checkbox_html %}
+    {% comment %} Add an additional hidden "off" checkbox, so that the field is always included in the POST {% endcomment %}
+    <input type="hidden" value="false" name={{ field.html_name }}>
     {% render_field field %}
     <label for="{{ field.auto_id }}" {% if label_class %}class="{{ label_class }}"{% endif %}>
         {{ checkbox_label }}

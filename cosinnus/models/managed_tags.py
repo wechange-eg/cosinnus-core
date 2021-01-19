@@ -212,6 +212,28 @@ class CosinnusManagedTagAssignment(models.Model):
                 approve = not bool(settings.COSINNUS_MANAGED_TAGS_USER_TAGS_REQUIRE_APPROVAL)
                 cls.objects.create(content_type=content_type, object_id=obj.id, managed_tag=managed_tag, approved=approve)
 
+        
+    @classmethod
+    def assign_managed_tag_to_object(cls, obj, tag_slug_to_assign):
+        """ Will assign a given CosinnusManagedTag to the given object and keep all other assigned tags.
+            @param obj: Any object to assign the managed tag to
+            @param tag_slug_to_assign: A slug of a CosinnusManagedTag. Only those slugs that actually
+                exist will be assigned. """
+        if not obj.pk:
+            logger.error('Could not save CosinnusManagedTags assignment: target object has not been saved yet!', extra={obj})
+            return
+        content_type = ContentType.objects.get_for_model(obj._meta.model)
+        assigned_slugs = list(cls.objects.filter(
+                content_type=content_type, object_id=obj.id
+            ).values_list('managed_tag__slug', flat=True))
+        
+        # add wanted non-assigned tag
+        if not tag_slug_to_assign in assigned_slugs:
+            managed_tag = CosinnusManagedTag.objects.get_cached(tag_slug_to_assign)
+            if managed_tag:
+                approve = not bool(settings.COSINNUS_MANAGED_TAGS_USER_TAGS_REQUIRE_APPROVAL)
+                cls.objects.create(content_type=content_type, object_id=obj.id, managed_tag=managed_tag, approved=approve)
+
 
 @python_2_unicode_compatible
 class CosinnusManagedTagType(models.Model):
@@ -236,6 +258,9 @@ class CosinnusManagedTagType(models.Model):
         verbose_name = MANAGED_TAG_LABELS.MANAGED_TAG_TYPE_NAME
         verbose_name_plural = MANAGED_TAG_LABELS.MANAGED_TAG_TYPE_NAME_PLURAL
         unique_together = (('name', 'portal'), )
+        
+    def __str__(self):
+        return f'Type: %s (Portal %d)' % (self.name, self.portal_id)
 
 
 @python_2_unicode_compatible
@@ -353,17 +378,20 @@ class CosinnusManagedTag(models.Model):
             @return: False if a managed tag of the given `name` already existed, the tag otherwise
         """
         tag_slug = slugify(name)
-        existing_tag = get_object_or_None(CosinnusManagedTag, name__iexact=name)
-        existing_tag_by_slug = get_object_or_None(CosinnusManagedTag, slug__iexact=tag_slug)
+        existing_tag = get_object_or_None(CosinnusManagedTag, name__iexact=name, portal=CosinnusPortal().get_current())
+        existing_tag_by_slug = get_object_or_None(CosinnusManagedTag, slug__iexact=tag_slug, portal=CosinnusPortal().get_current())
         if existing_tag or existing_tag_by_slug:
             logger.info('`create_managed_tag_and_paired_group` Did not create a new managed tag because an existing tag has the same name or slug', extra={'new_tag_name': name})
-            return False
+            return existing_tag or existing_tag_by_slug
         
         # create group
         try:
             from cosinnus.models.group_extra import CosinnusSociety
             group_name = f'{settings.COSINNUS_MANAGED_TAGS_PAIRED_GROUPS_PREFIX}{name}'
-            paired_group = CosinnusSociety.create_group_for_user(group_name, creator)
+            if creator is None or not creator.is_authenticated:
+                paired_group = CosinnusSociety.create_group_without_member(group_name)
+            else:
+                paired_group = CosinnusSociety.create_group_for_user(group_name, creator)
             
         except Exception as e:
             logger.error('Error when creating a new managed tag, could not create paired group, but continuing tag creation!', extra={'exception': e})

@@ -97,6 +97,11 @@ class BaseTagObject(models.Model):
         (VISIBILITY_GROUP, _('Team members only')), 
         (VISIBILITY_ALL, _('Public (visible without login)')), 
     )
+    VISIBILITY_VALID_VALUES = (
+        VISIBILITY_USER,
+        VISIBILITY_GROUP,
+        VISIBILITY_ALL
+    )
 
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Team'),
         related_name='+', null=True, on_delete=models.CASCADE)

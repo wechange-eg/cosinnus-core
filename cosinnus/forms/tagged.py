@@ -28,6 +28,8 @@ from django.forms.widgets import SelectMultiple
 from django_select2.widgets import Select2MultipleWidget, Select2Widget
 from cosinnus.utils.user import get_user_select2_pills
 from cosinnus.fields import UserSelect2MultipleChoiceField
+from cosinnus.utils.permissions import get_inherited_visibility_from_group
+from cosinnus.utils.functions import get_int_or_None
 
 
 TagObject = get_tag_object_model()
@@ -79,10 +81,7 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         
         if self.group and not self.instance.pk:
             # for new TaggableObjects (not groups), set the default visibility corresponding to the group's public status
-            if self.group.public:
-                self.fields['visibility'].initial = BaseTagObject.VISIBILITY_ALL
-            else:
-                self.fields['visibility'].initial = BaseTagObject.VISIBILITY_GROUP
+            self.fields['visibility'].initial = get_inherited_visibility_from_group(self.group)
         
         if self.group:
             data_url = group_aware_reverse('cosinnus:select2:group-members',
@@ -122,10 +121,8 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
                 # the default visibility corresponds to group's public setting
                 if 'visibility' in old_initial:
                     self.initial['visibility'] = old_initial['visibility']
-                elif self.group.public:
-                    self.initial['visibility'] = BaseTagObject.VISIBILITY_ALL
                 else:
-                    self.initial['visibility'] = BaseTagObject.VISIBILITY_GROUP
+                    self.initial['visibility'] = get_inherited_visibility_from_group(self.group)
             
         if (self.user and self.instance.pk and
                 self.instance.likers.filter(id=self.user.id).exists()):
@@ -151,14 +148,13 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         if 'bbb_room' in self.initial:
             self.instance.bbb_room = self.initial['bbb_room']
         
-        # set default visibility tag to correspond to group visibility
-        # GOTCHA: since BaseTagObject.VISIBILITY_USER == 0, we cannot simply check for ``if not <property``
-        if not self.instance.visibility and self.instance.visibility is not BaseTagObject.VISIBILITY_USER:
+        # the tag inherits the visibility default from the instance's group
+        # if no or no valid visibility has been selected in the form, 
+        visibility_data_value = get_int_or_None(self.cleaned_data.get('visibility', None))
+        if visibility_data_value not in BaseTagObject.VISIBILITY_VALID_VALUES:
             # check if our tag object belongs to a group (i.e: isn't itself a group, or a user):
-            if hasattr(self.instance, 'group') and self.instance.group and self.instance.group.public:
-                self.instance.visibility = BaseTagObject.VISIBILITY_ALL
-            else:
-                self.instance.visibility = BaseTagObject.VISIBILITY_GROUP
+            if hasattr(self.instance, 'group') and self.instance.group:
+                self.instance.visibility = get_inherited_visibility_from_group(self.instance.group)
         
         if self.user:
             if not self.instance.pk:

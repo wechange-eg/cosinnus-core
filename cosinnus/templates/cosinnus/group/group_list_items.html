@@ -145,20 +145,18 @@
 	                </span>
 	                
 	                {% captureas modal_decline_invitation_id %}userModal_decline_invitation_{{group.id}}{% endcaptureas %}
-	                <span class="app-etherpad">
-	                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
-	                        <ul class="media-list">
-	                            <li class="media">
-	                                <a class="pull-left" href="#">
-	                                    <i class="fa fa-close"></i>
-	                                </a>
-	                                <div class="media-body">
-	                                    {% trans "Decline Invitation" %}</span>
-	                                </div>
-	                            </li>
-	                        </ul>
-	                    </button>
-	                </span>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-close"></i>
+                                </a>
+                                <div class="media-body">
+                                    {% trans "Decline Invitation" %}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
 	                
 	                {# hidden form, triggered by accept-button JS #}
 	                <form id="accept-group-invitation-form" action="{% group_url 'cosinnus:group-user-accept' group=group %}" method="post" style="display: none;" >{% csrf_token %}

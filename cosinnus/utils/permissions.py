@@ -299,3 +299,13 @@ def get_user_token(user, token_name):
         user.cosinnus_profile.settings['token:%s' % token_name] = token
         user.cosinnus_profile.save()
     return token
+
+
+def get_inherited_visibility_from_group(group):
+    """ Returns the proper visibility for a BaseTagged content object
+        depending on the public status of its given group
+        @param return: An int value from `BaseTagObject.VISIBILITY_CHOICES` """
+    if group.public:
+        return BaseTagObject.VISIBILITY_ALL
+    else:
+        return BaseTagObject.VISIBILITY_GROUP

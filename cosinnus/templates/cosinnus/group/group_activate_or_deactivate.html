@@ -52,20 +52,18 @@
     </div>
     
     <form method="POST" action=".">{% csrf_token %}
-	    <div class="{% if activate %}app-calendar{% else %}app-etherpad{% endif %}">
-		    <button type="submit" class="btn btn-emphasized">
-		        <ul class="media-list">
-		            <li class="media">
-		                <a class="pull-left" href="#">
-		                    <i class="fa {% if activate %}fa-check{% else %}fa-times{% endif %}"></i>
-		                </a>
-		                <div class="media-body">
-	                        {% if activate %}{% trans "Re-Activate" %}{% else %}{% trans "Deactivate" %}{% endif %}
-		                </div>
-		            </li>
-		        </ul>
-		    </button>
-	    </div>
+	    <button type="submit" class="btn btn-{% if activate %}emphasized{% else %}default{% endif %}">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa {% if activate %}fa-check{% else %}fa-times{% endif %}"></i>
+	                </a>
+	                <div class="media-body">
+                        {% if activate %}{% trans "Re-Activate" %}{% else %}{% trans "Deactivate" %}{% endif %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
     </form>
 
 {% endblock %}

@@ -15,8 +15,11 @@
 {% block content %}
 <div class="content-box">
     <form method="post">{% csrf_token %}
+        {% if request.GET.search %}
+            <input type="hidden" name="search" value="{{ request.GET.search }}">
+        {% endif %}
         <div class="fadedown pull-right">
-            <button type="submit" name="send_login_token" value="__all__" class="btn btn-emphasized btn-autosize">
+            <button id="start_send_all_tokens" type="submit" name="send_login_token" value="__all__" class="btn btn-emphasized btn-autosize">
                 <ul class="media-list">
                     <li class="media">
                         <a class="pull-left">
@@ -28,6 +31,11 @@
                     </li>
                 </ul>
             </button>
+	        <script type="text/javascript">
+	             $('#start_send_all_tokens').on('mouseup', function(){
+	                 setTimeout(function(){$('#start_send_all_tokens').attr('disabled', 'disabled');}, 5);
+	             });
+	        </script>
         </div>
     </form>
     <h2 class="white-text large-space">{% trans 'Users' %}</h2>
@@ -108,18 +116,22 @@
         <tr>
             <th>
                 <a href="{% url 'cosinnus:administration-user-update' pk=user.id %}">
-                {{ user.email }}
+                    {{ user.email }}
                 </a>
                 {% if not user.is_active %}
                     ({% trans "Account deactivated" %})
                 {% endif %}
+                {% block extra_user_data %}{% endblock %}
             </th>
             <th>{{ user.first_name }}</th>
             <th>{{ user.last_name }}</th>
             <th>{% if user.last_login %}{{ user.last_login }}{% else %}-{% endif %}</th>
             <th>
-                {% if not user.last_login %}
+                {% if not user.last_login and not user.password %}
                 <form method="post">{% csrf_token %}
+                    {% if request.GET.search %}
+                        <input type="hidden" name="search" value="{{ request.GET.search }}">
+                    {% endif %}
                     <div class="fadedown pull-right">
                         <button type="submit" name="send_login_token" value="{{ user.id }}" class="btn btn-emphasized btn-autosize btn-small">
                             <ul class="media-list">

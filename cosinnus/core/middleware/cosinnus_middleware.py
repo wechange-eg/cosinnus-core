@@ -118,8 +118,8 @@ class OTPMiddleware(MiddlewareMixin):
         if not getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED', False):
             return None
         
-        # regular mode covers only the admin area
-        filter_path = '/admin/'
+        # regular mode covers the django-admin and administration area
+        filter_path = '/admin'
         # strict mode covers the entire page
         if getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_STRICT_MODE', False):
             filter_path = '/'

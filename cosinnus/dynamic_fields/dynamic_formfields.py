@@ -8,7 +8,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.urls.base import reverse, reverse_lazy
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy as p_
 from phonenumber_field.formfields import PhoneNumberField
 
 from cosinnus.conf import settings
@@ -16,6 +16,8 @@ from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.forms.select2 import HeavySelect2MultipleFreeTextChoiceWidget, \
     HeavySelect2FreeTextChoiceWidget
 from cosinnus.utils.user import get_user_select2_pills
+from django.forms.boundfield import BoundField
+from cosinnus.utils.functions import is_number
 
 
 class DynamicFieldFormFieldGenerator(object):
@@ -24,17 +26,20 @@ class DynamicFieldFormFieldGenerator(object):
     formfield_class = None
     formfield_kwargs = None
     widget_class = None
+    form = None
     is_large_field = None
     _dynamic_field_options = {}
     _new_initial_after_formfield_creation = None
     
-    def get_formfield(self, dynamic_field_name, dynamic_field_options=None, dynamic_field_initial=None, readonly_dynamic_fields_enabled=False, **kwargs):
+    def get_formfield(self, dynamic_field_name, dynamic_field_options=None, dynamic_field_initial=None, 
+                        readonly_dynamic_fields_enabled=False, form=None, **kwargs):
         # channel through kwargs
         for kwarg, val in kwargs.items():
             setattr(self, kwarg, val)
         self._dynamic_field_options = dynamic_field_options or {}
         self._dynamic_field_initial = dynamic_field_initial
         self._dynamic_field_name = dynamic_field_name
+        self.form = form
         formfield_extra_kwargs = self.get_formfield_kwargs()
         formfield_kwargs = {
             'label': self._dynamic_field_options.label,
@@ -104,11 +109,85 @@ class PhoneDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
 class URLDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     formfield_class = forms.URLField
 
+
+class MultiAddressDynamicBoundField(BoundField):
+    @property
+    def get_subfields_name_and_label(self):
+        """ Return a list of (subfield_name, subfield_label) pairs  """
+        return self.field.get_subfields_name_and_label()
+
+class MultiAddressDynamicField(forms.Field):
+    """ A dynamic-field implementation for a multi value address field """
+    
+    MULTI_ADDRESS_SUBFIELD_MAP = (
+        ('title', p_('Multi-Address Field Subfield', 'Address Title')),
+        ('line1', p_('Multi-Address Field Subfield', 'Address Line 1')),
+        ('line2', p_('Multi-Address Field Subfield', 'Address Line 2')),
+        ('line3', p_('Multi-Address Field Subfield', 'Address Line 3')),
+        ('street', p_('Multi-Address Field Subfield', 'Street and Number')),
+        ('city', p_('Multi-Address Field Subfield', 'City')),
+        ('state', p_('Multi-Address Field Subfield', 'State')),
+        ('country', p_('Multi-Address Field Subfield', 'Country')),
+        ('phone', p_('Multi-Address Field Subfield', 'Phone Number')),
+        ('mobile', p_('Multi-Address Field Subfield', 'Mobile Phone Number')),
+    )
+    
+    def __init__(self, *args, **kwargs):
+        self.form = kwargs.pop('form')
+        super(MultiAddressDynamicField, self).__init__(*args, **kwargs)
+    
+    def prepare_value(self, value):
+        # during validation errors, we need to re-format the POSt data to a usuable value
+        # to keep data that has been entered in the address fields
+        if self.form.is_bound:
+            return self.to_python(value)
+        # Sanity-check: make sure address dict is well-formed
+        if not value or not type(value) is dict or not \
+            ('current_address' in value and 'addresses' in value): 
+            value = {}
+        return value
+    
+    def to_python(self, value):
+        """ Build a python dictionary from all address subfields """
+        # stupidly check if we contain each field set from 0 to 99
+        addresses = {}
+        for i in range(100):
+            address = {}
+            # collect all subfield values. if ANY value is not null, the address "exists" and gets added
+            for subfield_name, __ in self.get_subfields_name_and_label():
+                address[subfield_name] = self.form.data.get(f'{self.field_name}-{subfield_name}-{i}', '').strip()
+            if any( (bool(val) for val in address.values()) ):
+                addresses[str(i)] = address
+            
+        # make sure the selected value is an existing key of the address dict
+        selected_value = self.form.data.get(f'{self.field_name}-selector', None)
+        try:
+            addresses[selected_value]
+        except Exception:
+            selected_value = None
+            
+        field_value = {
+            'current_address': selected_value,
+            'addresses': addresses,
+        }
+        return field_value
+    
+    def get_subfields_name_and_label(self):
+        """ Field definition for subfields hardcoded right now """
+        return self.MULTI_ADDRESS_SUBFIELD_MAP
+    
+    def get_bound_field(self, form, field_name):
+        return MultiAddressDynamicBoundField(form, self, field_name)
+    
+
 class MultiAddressDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
-    formfield_class = forms.CharField
+    formfield_class = MultiAddressDynamicField
     widget_class = forms.Textarea
     is_large_field = True
-
+    
+    def get_formfield_kwargs(self):
+        return {'form': self.form}
+    
 
 class _BaseSelect2DynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     """ Base for the dynamic field that uses a select2 widget """

@@ -240,16 +240,18 @@ class UserListView(ManagedTagsNewsletterMixin, ListView):
             search_string = '?search={}'.format(request.POST.get('search'))
         if 'send_login_token' in self.request.POST:
             if self.request.POST.get('send_login_token') == '__all__':
-                all_users = get_user_model().objects.filter(is_active=False, last_login__isnull=True)
-                for user in all_users:
+                non_tokened_users = get_user_model().objects.filter(password__isnull=True, last_login__isnull=True)
+                count = 0
+                for user in non_tokened_users:
                     if not PROFILE_SETTING_LOGIN_TOKEN_SENT in user.cosinnus_profile.settings:
                         self.send_login_token(user)
-                messages.add_message(self.request, messages.SUCCESS, _('Login tokens were sent.'))
+                        count += 1
+                messages.add_message(self.request, messages.SUCCESS, _('Login tokens to %(count)s users were sent.') % {'count': count})
             else:
                 user_id = self.request.POST.get('send_login_token')
                 user = get_user_model().objects.get(id=user_id)
                 self.send_login_token(user)
-                messages.add_message(self.request, messages.SUCCESS, _('Login token was sent.'))
+                messages.add_message(self.request, messages.SUCCESS, _('Login token was sent to %(email)s.') % {'email': user.email})
         redirect_path = '{}{}'.format(request.path_info, search_string)
         return HttpResponseRedirect(redirect_path)
 

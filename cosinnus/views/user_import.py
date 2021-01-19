@@ -16,6 +16,8 @@ from cosinnus.models.user_import import CosinnusUserImport,\
     CosinnusUserImportProcessor
 from cosinnus.forms.user_import import CosinusUserImportCSVForm
 from cosinnus.views.mixins.group import RequireSuperuserMixin
+from django.views.generic.edit import DeleteView
+from django.urls.base import reverse
 
 
 logger = logging.getLogger('cosinnus')
@@ -40,6 +42,17 @@ class ArchivedCosinnusUserImportDetailView(RequireSuperuserMixin, DetailView):
 
 archived_user_import_detail_view = ArchivedCosinnusUserImportDetailView.as_view()
 
+
+class ArchivedCosinnusUserImportDeleteView(RequireSuperuserMixin, DeleteView):
+
+    model = CosinnusUserImport
+    message_success = _('The Archived User Import Entry was deleted successfully.')
+    
+    def get_success_url(self):
+        messages.success(self.request, self.message_success)
+        return reverse('cosinnus:administration-archived-user-import-list')
+
+archived_user_import_delete_view = ArchivedCosinnusUserImportDeleteView.as_view()
 
 
 class CosinnusUserImportView(RequireSuperuserMixin, TemplateView):
@@ -115,7 +128,7 @@ class CosinnusUserImportView(RequireSuperuserMixin, TemplateView):
             if not self.import_object or not self.import_object.state == CosinnusUserImport.STATE_IMPORT_FINISHED:
                 return self.redirect_with_error()
             self.do_archive_import(self.import_object)
-            return redirect(self.import_object.get_absolute_url())
+            return redirect(self.redirect_view)
         elif self.action == 'scrap':
             if not self.import_object or not self.import_object.state in \
                     [CosinnusUserImport.STATE_DRY_RUN_FINISHED_INVALID, CosinnusUserImport.STATE_DRY_RUN_FINISHED_VALID,\
@@ -144,18 +157,21 @@ class CosinnusUserImportView(RequireSuperuserMixin, TemplateView):
                 import_object.append_to_report(str(_("The following columns were not recognized and were ignored") + ' "' + '", "'.join(ignored_columns)) + '"', "warning")
             import_object.save()
             # start-dry-run threaded
-            CosinnusUserImportProcessor().do_import(import_object, dry_run=True)
+            CosinnusUserImportProcessor().do_import(import_object, dry_run=True, import_creator=self.request.user)
         else:
             return self.render_to_response(self.get_context_data())
             
     def do_start_import_from_dryrun(self, import_object):
         # start import threaded from the object
         import_object.clear_report()
-        CosinnusUserImportProcessor().do_import(import_object, dry_run=False)
+        CosinnusUserImportProcessor().do_import(import_object, dry_run=False, import_creator=self.request.user)
     
     def do_archive_import(self, import_object):
+        before_last_modified = import_object.last_modified
         import_object.state = CosinnusUserImport.STATE_ARCHIVED
         import_object.save()
+        # force previous timestamp
+        CosinnusUserImport.objects.filter(pk=import_object.pk).update(last_modified=before_last_modified)
         messages.success(self.request, _('The import was successfully archived.'))
     
     def get_context_data(self, **kwargs):

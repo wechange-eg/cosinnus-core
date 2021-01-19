@@ -1,0 +1,177 @@
+{% load i18n widget_tweaks cosinnus_tags %}
+
+{% comment %}  
+    Cosinnus Multi Address Field template. For use with the dynamic_fields type DYNAMIC_FIELD_TYPE_MULTI_ADDRESS.
+    
+    Parameters:
+        - field: supply the formfield you want to render
+        - *or* field_html: supply some html to be displayed inside the field. ``field`` can additionally be passed, but will only be used
+                for error and optional status display
+        - label: the <label> for the field
+        - legend: a descriptive text, shown as an explanation for the field
+        - placeholder: the field placeholder content
+        
+    Extra Options:
+        - first: indicates this is the first field in the form, removing the top margin
+        - large-field: removes the 40px height constraint and wraps around the content. used for larger (or smaller) fields
+        - unstyled: will apply no styles to field-input, so that custom ``field_html`` is not affected by the default styles
+        - field_classes: extra CSS classes to apply to the input area
+        - extra_html: extra HTML that will be placed after the field
+        - help_popup: if supplied, add a Help-Button next to the label which will popup a help field using the supplied id string
+        - hide_optional: forces hiding the "(Optional)" label for non-required fields
+{% endcomment %}
+
+{% comment %} Include the actual field name to show that the field is included in POST {% endcomment %}
+<input type="hidden" name="{{ field.html_name }}" value="1">
+
+{% if label %}
+	<div class="cosinnus-field">
+	    <label>
+	        {{ label }}
+	        {% if field and not field.field.required and not required and not hide_optional and not SETTINGS.COSINNUS_FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL %}
+	            ({% trans "optional" context "written next to optional form fields" %})
+	        {% endif %}
+	        {% if show_required or SETTINGS.COSINNUS_FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL and required or SETTINGS.COSINNUS_FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL and field.field.required %}
+	            <span class="required-label">{{ SETTINGS.COSINNUS_FIELDS_REQUIRED_LABEL }}</span>
+	        {% endif %}
+	        {% if help_popup %}
+	            {% include 'cosinnus/common/help_button_for_popup.html' with help_text_id=help_popup %}
+	        {% endif %}
+	    </label>
+	</div>
+{% endif %}
+    
+{% if field or field_id %}{% captureas for_id %}{% if field %}{{ field.id_for_label }}{% else %}{{ field_id }}{% endif %}{% endcaptureas %}{% endif %}
+
+<div class="row">
+	<div id="{{ field.id_for_label }}-protofields" class="multi-address-field protofields col-md-6 large-space" data-counter="-1" style="display: none;">
+	    {% for subfield_name, subfield_label in field.get_subfields_name_and_label %}
+			<div class="cosinnus-field">
+			    <div class="field-description no-select {{ legend_class }}">
+			        {{ subfield_label }}
+			    </div>
+			    <div class="cosinnus-field-input regular-field">
+			        <input type="text" id="{{ field.id_for_label }}-{{ subfield_name }}" 
+		                 name="{{ field.html_name }}-{{ subfield_name }}" placeholder="{{ subfield_label }}" disabled>
+			    </div>
+			</div>
+		{% endfor %}
+		<div class="cosinnus-field">
+		    <div class="cosinnus-field-input regular-field checkbox-field checkbox-field-no-label">
+		        <input type="radio" id="{{ field.id_for_label }}-selector" name="{{ field.html_name }}-selector" value="" disabled>
+		        <label for="{{ field.id_for_label }}-selector">
+		            {% trans "This is the current address" %}
+				</label>
+		    </div>
+	    </div>
+	    <div class="cosinnus-field">
+	        <div class="btn btn-emphasized btn-autosize btn-small multi-address-field-remove">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left">
+                            <i class="fa fa-minus"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans "Remove this Address" %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+	    </div>
+	    
+	</div>
+</div>
+
+<div id="multi-address-field-spawn-anchor"></div>
+<div class="clearfix"></div>
+        
+        {% comment %} 
+	        To make it possible to select no address, comment in this additional radio button.
+	        
+	        <div class="cosinnus-field">
+			    <div class="cosinnus-field-input regular-field checkbox-field checkbox-field-no-label">
+			        <input type="radio" id="{{ field.id_for_label }}-selector-nochoice" name="{{ field.html_name }}-selector" value="-1" checked>
+			        <label for="{{ field.id_for_label }}-selector-nochoice">
+			            {% trans "No current address selected" %}
+			        </label>
+			    </div>
+			</div>
+        {% endcomment %}
+        <div class="cosinnus-field">
+		    <div class="btn btn-emphasized btn-autosize pull-left multi-address-field-add">
+		        <ul class="media-list">
+		            <li class="media">
+		                <a class="pull-left">
+		                    <i class="fa fa-plus"></i>
+		                </a>
+		                <div class="media-body">
+		                    {% trans "Add an Address" %}
+		                </div>
+		            </li>
+		        </ul>
+		    </div>
+		</div>
+
+
+<script type="text/javascript">
+    var multiAddressFieldCounter = 0;
+    var cloned_fields = null;
+    
+    var addMultiAddressField = function() {
+        cloned_fields = $("#{{ field.id_for_label }}-protofields").clone();
+        cloned_fields
+            .removeAttr('id')
+            .attr('data-counter', multiAddressFieldCounter)
+            .removeClass('protofields');
+        cloned_fields.find('input[type="text"]').each(function(){
+            var me = $(this);
+            me.attr('id', me.attr('id') + '-' + String(multiAddressFieldCounter));
+            me.attr('name', me.attr('name') + '-' + String(multiAddressFieldCounter));
+            me.removeAttr('disabled');
+        });
+        cloned_fields.find('input[type="radio"]').each(function(){
+            var me = $(this);
+            me.attr('id', me.attr('id') + '-' + String(multiAddressFieldCounter));
+            me.attr('value', String(multiAddressFieldCounter));
+            me.removeAttr('disabled');
+        });
+        cloned_fields.find('label[for]').each(function(){
+            var me = $(this);
+            me.attr('for', me.attr('for') + '-' + String(multiAddressFieldCounter));
+        });
+        cloned_fields.show().insertBefore('#multi-address-field-spawn-anchor');
+        multiAddressFieldCounter += 1;
+    }
+    
+    $('.multi-address-field-add').on('click', function(){
+        addMultiAddressField();
+    });
+    $('body').on('click', '.multi-address-field-remove', function(){
+        $(this).parents('.multi-address-field:not(.protofields)').remove();
+    });
+    
+    {% comment %} For each address entry, create a new set of fields and fill their values {% endcomment %}
+    {% if field.value and field.value.addresses %}
+        var initId = 0;
+        {% for address_id, address in field.value.addresses.items %}
+            initId = multiAddressFieldCounter;
+            addMultiAddressField();
+            // {{ field.value.current_address }} + {{ address_id }}
+            {% if field.value.current_address == address_id %}
+                // yeah
+                $("#{{ field.id_for_label }}-selector-" + initId).attr('checked', true);
+            {% endif %}
+            {% for subfield_name, subfield_label in field.get_subfields_name_and_label %}
+                {% with subfield_value=address|get_item_or_none:subfield_name %}
+                    {% if subfield_value %}
+                        $("#{{ field.id_for_label }}-{{ subfield_name }}-" + initId).val("{{ subfield_value }}");
+                    {% endif %}
+                {% endwith %}
+            {% endfor %}
+        {% endfor %}
+    {% else %}
+        addMultiAddressField();
+    {% endif %}
+</script>
+
+

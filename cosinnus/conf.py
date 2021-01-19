@@ -655,6 +655,9 @@ class CosinnusConf(AppConf):
     # whether to use the new style user-dashboard
     USE_V2_DASHBOARD = False    
     
+    # the URL fragment for the user-dashboard on this portal
+    V2_DASHBOARD_URL_FRAGMENT = 'dashboard'
+    
     # whether to use the new style user-dashboard ONLY for admins 
     # does not need `USE_V2_DASHBOARD` to be enabled
     USE_V2_DASHBOARD_ADMIN_ONLY = False    
@@ -673,6 +676,9 @@ class CosinnusConf(AppConf):
     
     # in v2, the footer is disabled by default. set this to True to enable it!
     V2_FORCE_SITE_FOOTER = False
+    
+    # whether the regular user signup method is enabled for this portal
+    USER_SIGNUP_ENABLED = True
     
     # if true, an additional signup form field will be present
     SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK = False
@@ -781,6 +787,9 @@ class CosinnusConf(AppConf):
     # if`InactiveLogoutMiddleware` is active, this is the time after which a user is logged out
     INACTIVE_LOGOUT_TIME_SECONDS = 60 * 60
     
+    # if set to True, will hide some UI elements in navbar and dashboard and change some redirects
+    POST_TO_FORUM_FROM_DASHBOARD_DISABLED = False
+    
     # if set to True, will hide the userdashboard timeline controls and force the 
     # "only show content from my projects and groups" option 
     USERDASHBOARD_FORCE_ONLY_MINE = False
@@ -846,7 +855,7 @@ class CosinnusConf(AppConf):
     # the default slug for pre-filled managed tags
     MANAGED_TAGS_DEFAULT_INITIAL_SLUG = None
     # the prefix for any automatically created paired groups
-    MANAGED_TAGS_PAIRED_GROUPS_PREFIX = None
+    MANAGED_TAGS_PAIRED_GROUPS_PREFIX = ''
     # whether to show the managed tags as a filter on the map
     MANAGED_TAGS_SHOW_FILTER_ON_MAP = True
     # if set to a str managed tag slugs, the user choices for

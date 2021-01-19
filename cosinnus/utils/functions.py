@@ -182,6 +182,20 @@ def is_number(s):
         return True
     except (ValueError, TypeError):
         return False
+    
+def get_float_or_None(s):
+    """ Attempts to return the value coerced to a float, or returns None """
+    try:
+        return float(s)
+    except (ValueError, TypeError):
+        return None
+    
+def get_int_or_None(s):
+    """ Attempts to return the value coerced to a float, or returns None """
+    try:
+        return int(s)
+    except (ValueError, TypeError):
+        return None
 
 
 def resolve_attributes(obj, attr_or_function, default=None, func_args=[]):    

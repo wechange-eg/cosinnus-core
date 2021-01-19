@@ -1251,7 +1251,8 @@ def get_item(obj, attr_name):
 def get_item_or_none(obj, attr_name):
     """ Returns the given attribute by trying to resolve
         it in the template using __getitem__ """
-    return obj.get(attr_name, None)
+    ret = obj.get(attr_name, None)
+    return ret
 
 @register.filter
 def get_country_name(country_code):
