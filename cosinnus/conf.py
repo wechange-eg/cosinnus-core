@@ -680,6 +680,8 @@ class CosinnusConf(AppConf):
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True
     
+    USER_EXTERNAL_USERS_FORBIDDEN = False
+    
     # if true, an additional signup form field will be present
     SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK = False
     

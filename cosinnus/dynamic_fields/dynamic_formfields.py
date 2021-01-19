@@ -96,7 +96,7 @@ class DateDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     is_large_field = True
     
     def get_widget(self):
-        return forms.SelectDateWidget(years=[x for x in range(1900, now().year + 1)])
+        return forms.SelectDateWidget(years=reversed([x for x in range(1900, now().year + 10)]))
 
 class CountryDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     def get_formfield_class(self):

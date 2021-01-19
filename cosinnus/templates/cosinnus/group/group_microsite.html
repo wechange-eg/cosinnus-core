@@ -68,7 +68,6 @@
 		<div class="group-microsite-login-box overlay-box-gray">
 
 			{% if not user.is_authenticated %}
-			<span class="app-calendar"> {# Hacky green color #}
 				<button href="{% url 'cosinnus:user-add' %}?next={% group_url 'cosinnus:conference:application' group=group.slug %}" style="width: 100% !important;" type="button" class="btn btn-emphasized">
 					<ul class="media-list">
 						<li class="media">
@@ -81,7 +80,6 @@
 						</li>
 					</ul>
 				</button>
-			</span>
 			{% else %}
 
 				{% conference_application group as application %}

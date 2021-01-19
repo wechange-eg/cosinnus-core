@@ -194,145 +194,146 @@
 	        </div> {% comment %} panel {% endcomment %}
         {% endif %}
         
-        {% if user in admins or user|is_superuser or recruited %}
-
-	        <div class="panel panel-default large-space">
-	            <div class="panel-heading">
-	                <h4 class="panel-title {% if not request.GET.invite %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseTwo">
-	                    <i class="fa fa-chevron-down panel-collapsed"></i>
-	                    <i class="fa fa-chevron-up panel-open"></i>
-	                    {% trans "Invite unregistered users..." %} {% if recruited|length > 0 %}({{ recruited|length }}){% endif %}
-	                </h4>
-	            </div>
-	            <div id="collapseTwo" class="panel-collapse {% if not request.GET.invite %}collapse{% else %}in{% endif %}">
-	                <div class="panel-body">
-	        
-				        {% comment %} -------- Recruit Box and list of recruitees -------- {% endcomment %}
-				        
-				        {% if user in admins or user|is_superuser %}
-				            <div class="clearfix large-space"></div>
-				        
-				            <legend>{% trans "Invite People to Register and Join" %}</legend>
-				            
-				            <button type="submit" class="btn btn-emphasized btn-autosize btn-left" data-toggle="modal" data-target="#modal-recruit-users">
-				                <ul class="media-list">
-				                    <li class="media">
-				                        <a class="pull-left" href="#">
-				                            <i class="fa fa-user-plus"></i>
-				                        </a>
-				                        <div class="media-body">
-				                            {% trans "Invite people" %}
-				                        </div>
-				                    </li>
-				                </ul>
-				            </button>
-				            
-				            <div class="clearfix large-space"></div>
-				            <div class="alert alert-warning alert-dismissable" id="label-invite-email-added" style="display: none; min-height: 48px;">
-                                <i class="fa fa-arrow-up" style="font-size: 18px;"></i>
-				                {% trans 'The email was added to the invite list. Click "Invite people" to resend the invitations!' %}
-				            </div>
-				            
-				            {% include 'cosinnus/common/modal_box_recruit_users.html' %}
-				            
-				            <div class="clearfix"></div>
-				        {% endif %}
-				        
-				        {% if recruited %}
-				            {% if user in admins or user|is_superuser %}        
-				                <legend>{% trans "All currently invited people" %}</legend>
-				            {% else %}
-				                <legend>{% trans "People currently invited by you" %}</legend>
-				            {% endif %}
-				            
-					            {% for recruitation in recruited %}
-					                {% captureas modal_id %}deleteModal_{{recruitation.id}}{% endcaptureas %}
-					                
-					                <div class="btn btn-default w100 regular-space">
-				                        <ul class="media-list">
-				                            <li class="media">
-		                                        {% if user == recruitation.invited_by or user in admins or user|is_superuser %}
-		                                            <button type="button" class="btn btn-emphasized btn-icon-only pull-right" 
-                                                             data-toggle="modal" data-target="#{{modal_id}}" title="{% trans "Delete invitation" %}">
-                                                        <ul class="media-list">
-                                                            <li class="media">
-                                                                <a class="pull-left" href="#">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </button>
-                                                    
-                                                    <button data-email="{{ recruitation.email }}" type="button" class="btn btn-emphasized btn-icon-only pull-right button-add-email" title="{% trans "Resend invitation" %}">
-                                                        <ul class="media-list">
-                                                            <li class="media">
-                                                                <a class="pull-left" href="#">
-                                                                    <i class="fa fa-refresh"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </button>
-                                                    
-		                                        {% endif %}
-				                                <div class="media-body">
-				                                    <span class="annotation mobile-hidden">
-				                                        {% trans "Invited to be a member" %}
-				                                        &nbsp;
-				                                        <span class="moment-data-date" data-date="{{ recruitation.last_modified|date:'c' }}"></span>
-				                                    </span>
-				                                    <span>
-				                                        {{ recruitation.email }}
-				                                    </span>
-				                                    {% if recruitation.invited_by and not recruitation.invited_by == user %}
-								                        <i>
-								                           ({% trans "by" context "an action done *by* <username>" %}
-								                           <a href="{% url 'cosinnus:profile-detail' username=recruitation.invited_by.username %}">{{ recruitation.invited_by|full_name }}</a>)
-								                        </i>
-								                    {% endif %}
-				                                </div>
-				                            </li>
-				                        </ul>
-				                    </div>
-				                    {% if user == recruitation.invited_by or user in admins or user|is_superuser %}
-				                        {% captureas label %}{% blocktrans with title=recruitation.email %}Do you really want to delete the invitation for "{{ title }}"?{% endblocktrans %}{% endcaptureas %}
-				                        {% captureas title %}{% trans "Delete invitation" %}{% endcaptureas %}
-				                        {% captureas action %}{% group_url 'cosinnus:group-user-recruit-delete' group=group id=recruitation.id %}{% endcaptureas %}
-				                        {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=action %}
-				                    {% endif %}
-					            {% endfor %}
-					            
-					            {% comment %} Adds the recruitee's email to the recruit recipient box and shows a message {% endcomment %}
-					            <script type="text/javascript">
-                                   $('.button-add-email').click(function(){
-                                       var $this = $(this);
-                                       var disabled = $this.attr('disabled');
-                                       if (typeof disabled !== typeof undefined && disabled !== false) {
-                                           return;
-                                       };
-                                       // add email to recruitee box
-                                       var textarea = $('#recruit-user-emails');
-                                       textarea.val($this.attr('data-email') + '\n' + textarea.val());
-                                       // disable button and show message
-                                       $this
-                                           .attr('disabled', 'disabled')
-                                           .removeClass('btn-emphasized')
-                                           .addClass('btn-default')
-                                           .find('i.fa')
-                                               .removeClass('fa-refresh')
-                                               .addClass('fa-plus');
-                                       $('#label-invite-email-added').fadeIn();
-                                   });
-                                </script>
-				            
-					        <div class="clearfix"></div>
-				        {% endif %}
+        {% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
+	        {% if user in admins or user|is_superuser or recruited %}
 	
-	                </div> {% comment %} panel-body {% endcomment %}
-	            </div> {% comment %} panel-collapse {% endcomment %}
-	        </div> {% comment %} panel {% endcomment %}
-        
+		        <div class="panel panel-default large-space">
+		            <div class="panel-heading">
+		                <h4 class="panel-title {% if not request.GET.invite %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseTwo">
+		                    <i class="fa fa-chevron-down panel-collapsed"></i>
+		                    <i class="fa fa-chevron-up panel-open"></i>
+		                    {% trans "Invite unregistered users..." %} {% if recruited|length > 0 %}({{ recruited|length }}){% endif %}
+		                </h4>
+		            </div>
+		            <div id="collapseTwo" class="panel-collapse {% if not request.GET.invite %}collapse{% else %}in{% endif %}">
+		                <div class="panel-body">
+		        
+					        {% comment %} -------- Recruit Box and list of recruitees -------- {% endcomment %}
+					        
+					        {% if user in admins or user|is_superuser %}
+					            <div class="clearfix large-space"></div>
+					        
+					            <legend>{% trans "Invite People to Register and Join" %}</legend>
+					            
+					            <button type="submit" class="btn btn-emphasized btn-autosize btn-left" data-toggle="modal" data-target="#modal-recruit-users">
+					                <ul class="media-list">
+					                    <li class="media">
+					                        <a class="pull-left" href="#">
+					                            <i class="fa fa-user-plus"></i>
+					                        </a>
+					                        <div class="media-body">
+					                            {% trans "Invite people" %}
+					                        </div>
+					                    </li>
+					                </ul>
+					            </button>
+					            
+					            <div class="clearfix large-space"></div>
+					            <div class="alert alert-warning alert-dismissable" id="label-invite-email-added" style="display: none; min-height: 48px;">
+	                                <i class="fa fa-arrow-up" style="font-size: 18px;"></i>
+					                {% trans 'The email was added to the invite list. Click "Invite people" to resend the invitations!' %}
+					            </div>
+					            
+					            {% include 'cosinnus/common/modal_box_recruit_users.html' %}
+					            
+					            <div class="clearfix"></div>
+					        {% endif %}
+					        
+					        {% if recruited %}
+					            {% if user in admins or user|is_superuser %}        
+					                <legend>{% trans "All currently invited people" %}</legend>
+					            {% else %}
+					                <legend>{% trans "People currently invited by you" %}</legend>
+					            {% endif %}
+					            
+						            {% for recruitation in recruited %}
+						                {% captureas modal_id %}deleteModal_{{recruitation.id}}{% endcaptureas %}
+						                
+						                <div class="btn btn-default w100 regular-space">
+					                        <ul class="media-list">
+					                            <li class="media">
+			                                        {% if user == recruitation.invited_by or user in admins or user|is_superuser %}
+			                                            <button type="button" class="btn btn-emphasized btn-icon-only pull-right" 
+	                                                             data-toggle="modal" data-target="#{{modal_id}}" title="{% trans "Delete invitation" %}">
+	                                                        <ul class="media-list">
+	                                                            <li class="media">
+	                                                                <a class="pull-left" href="#">
+	                                                                    <i class="fa fa-trash"></i>
+	                                                                </a>
+	                                                            </li>
+	                                                        </ul>
+	                                                    </button>
+	                                                    
+	                                                    <button data-email="{{ recruitation.email }}" type="button" class="btn btn-emphasized btn-icon-only pull-right button-add-email" title="{% trans "Resend invitation" %}">
+	                                                        <ul class="media-list">
+	                                                            <li class="media">
+	                                                                <a class="pull-left" href="#">
+	                                                                    <i class="fa fa-refresh"></i>
+	                                                                </a>
+	                                                            </li>
+	                                                        </ul>
+	                                                    </button>
+	                                                    
+			                                        {% endif %}
+					                                <div class="media-body">
+					                                    <span class="annotation mobile-hidden">
+					                                        {% trans "Invited to be a member" %}
+					                                        &nbsp;
+					                                        <span class="moment-data-date" data-date="{{ recruitation.last_modified|date:'c' }}"></span>
+					                                    </span>
+					                                    <span>
+					                                        {{ recruitation.email }}
+					                                    </span>
+					                                    {% if recruitation.invited_by and not recruitation.invited_by == user %}
+									                        <i>
+									                           ({% trans "by" context "an action done *by* <username>" %}
+									                           <a href="{% url 'cosinnus:profile-detail' username=recruitation.invited_by.username %}">{{ recruitation.invited_by|full_name }}</a>)
+									                        </i>
+									                    {% endif %}
+					                                </div>
+					                            </li>
+					                        </ul>
+					                    </div>
+					                    {% if user == recruitation.invited_by or user in admins or user|is_superuser %}
+					                        {% captureas label %}{% blocktrans with title=recruitation.email %}Do you really want to delete the invitation for "{{ title }}"?{% endblocktrans %}{% endcaptureas %}
+					                        {% captureas title %}{% trans "Delete invitation" %}{% endcaptureas %}
+					                        {% captureas action %}{% group_url 'cosinnus:group-user-recruit-delete' group=group id=recruitation.id %}{% endcaptureas %}
+					                        {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=action %}
+					                    {% endif %}
+						            {% endfor %}
+						            
+						            {% comment %} Adds the recruitee's email to the recruit recipient box and shows a message {% endcomment %}
+						            <script type="text/javascript">
+	                                   $('.button-add-email').click(function(){
+	                                       var $this = $(this);
+	                                       var disabled = $this.attr('disabled');
+	                                       if (typeof disabled !== typeof undefined && disabled !== false) {
+	                                           return;
+	                                       };
+	                                       // add email to recruitee box
+	                                       var textarea = $('#recruit-user-emails');
+	                                       textarea.val($this.attr('data-email') + '\n' + textarea.val());
+	                                       // disable button and show message
+	                                       $this
+	                                           .attr('disabled', 'disabled')
+	                                           .removeClass('btn-emphasized')
+	                                           .addClass('btn-default')
+	                                           .find('i.fa')
+	                                               .removeClass('fa-refresh')
+	                                               .addClass('fa-plus');
+	                                       $('#label-invite-email-added').fadeIn();
+	                                   });
+	                                </script>
+					            
+						        <div class="clearfix"></div>
+					        {% endif %}
+		
+		                </div> {% comment %} panel-body {% endcomment %}
+		            </div> {% comment %} panel-collapse {% endcomment %}
+		        </div> {% comment %} panel {% endcomment %}
+	        
+	        {% endif %}
         {% endif %}
-        
         
         {% if user|has_write_access:object or user in pendings %}
         
