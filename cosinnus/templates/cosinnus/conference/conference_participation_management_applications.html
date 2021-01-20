@@ -5,7 +5,8 @@
 
 {% block breadcrumb %}
         {{ block.super }}
-        <li class="active">{% trans "Conference participation management" %}</li>
+        <li><a href="{% group_url 'cosinnus:conference:participation-management' group=group %}">{% trans "Conference participation management" %}</a></li>
+        <li class="active">{% trans "Applications" %}</li>
 {% endblock %}
 
 {% block leftnav %}
@@ -13,6 +14,7 @@
 {% endblock leftnav %}
 
 {% block content %}
+
 <form method="POST" action="" class="cosinnus-form">
     {% csrf_token %}
     {{ form.media }}
@@ -21,6 +23,9 @@
     {{ form.management_form }}
     {{ assignment_formset.management_form }}
     <div class="content-box">
+        {% if max_number %}
+        <div>{% trans 'The maximum number of participants is ' %} {{ max_number }} ({% blocktrans count counter=places_left %} 1 place left {% plural %} {{ counter }} places left {% endblocktrans %}) </div>
+        {% endif %}
         <table class="table white-content priority-form">
             <thead>
                 <tr>

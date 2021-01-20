@@ -666,6 +666,10 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
     template_name = 'cosinnus/conference/conference_participation_management_applications.html'
 
     @property
+    def participation_management(self):
+        return self.group.participation_management.first()
+
+    @property
     def events(self):
         return Event.objects.filter(group=self.group).order_by('id')
 
@@ -700,7 +704,7 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
         return HttpResponseRedirect(self.get_success_url())
 
     def _get_applicants_for_workshop(self):
-        accepted_applications = self.applications.filter(status=4)
+        accepted_applications = self.applications
         user_list = [(application.user.id, application.user.get_full_name()) for application in accepted_applications]
         return user_list
 
@@ -721,6 +725,18 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
         context.update({
             'assignment_formset': assignment_formset
         })
+
+        if self.participation_management and self.participation_management.participants_limit:
+
+            places_left = 0
+            accepted_applications = self.applications.filter(status=4).count()
+            if accepted_applications < self.participation_management.participants_limit:
+                places_left = self.participation_management.participants_limit - accepted_applications
+
+            context.update({
+            'max_number': self.participation_management.participants_limit,
+            'places_left': places_left
+            })
         return context
 
     def get_success_url(self):
