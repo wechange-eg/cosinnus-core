@@ -1091,12 +1091,10 @@
                             });
                         }
                         
-                    } else if (data.result.status == 'denied') {
-                        alert('Die Datei die hochgeladen wurde war zu groß oder nicht für den Upload zugelassen!');
-                    } else if (data.result.status == 'invalid') {
-                        alert('Die Datei die hochgeladen wurde war zu groß oder nicht für den Upload zugelassen!');
+                    } else if (data.result.status == 'error' && data.result.message) {
+                        alert(data.result.message);
                     } else {
-                        alert('Es gab einen unbekannten Fehler beim hochladen. Wir werden das Problem umgehend beheben!');
+                        alert('Es gab einen unbekannten Fehler beim hochladen!');
                     }
 
                     data.context.remove(); // remove progress bar

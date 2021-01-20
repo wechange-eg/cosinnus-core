@@ -13,11 +13,12 @@ from cosinnus.forms.tagged import get_form
 from cosinnus.forms.user import UserChangeForm
 from cosinnus.conf import settings
 from cosinnus.forms.managed_tags import ManagedTagFormMixin
+from cosinnus.utils.validators import validate_file_infection
 
 
 class _UserProfileForm(UserProfileFormExtraFieldsMixin, ManagedTagFormMixin, forms.ModelForm):
     
-    avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
+    avatar = avatar_forms.AvatarField(required=False, disable_preview=True, validators=[validate_file_infection])
     website = forms.URLField(widget=forms.TextInput, required=False)
     language = forms.CharField(required=False)
     

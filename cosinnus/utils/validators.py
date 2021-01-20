@@ -1,7 +1,14 @@
+import logging
 import re
 
 from django import forms
 from django.utils.translation import ugettext as _
+from django_clamd.validators import validate_file_infection as clamd_validate_file_infection
+
+from cosinnus.conf import settings
+from django.core.exceptions import ValidationError
+
+logger = logging.getLogger('cosinnus')
 
 
 class BSISafePasswordValidator(object):
@@ -58,3 +65,13 @@ class BSISafePasswordValidator(object):
                 special_character=self.MIN_SPECIAL_CHARACTERS
             )
         )
+
+
+def validate_file_infection(file):
+    if getattr(settings, 'COSINNUS_VIRUS_SCAN_UPLOADED_FILES', False):
+        try:
+            return clamd_validate_file_infection(file)
+        except ValidationError:
+            raise 
+        except Exception as e:
+            logger.error('Error during file upload: django-clamd infection validation failed for uploaded file!', extra={'uploaded-file': str(file), 'exception': e})

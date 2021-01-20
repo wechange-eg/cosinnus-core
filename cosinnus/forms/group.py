@@ -39,6 +39,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.group import SDG_CHOICES
 from cosinnus.forms.managed_tags import ManagedTagFormMixin
+from cosinnus.utils.validators import validate_file_infection
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -104,7 +105,8 @@ class AsssignPortalMixin(object):
 class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, 
                 ManagedTagFormMixin, AdditionalFormsMixin, forms.ModelForm):
     
-    avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), disable_preview=True)
+    avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 
+                  disable_preview=True, validators=[validate_file_infection])
     website = forms.URLField(widget=forms.TextInput, required=False)
     # we want a textarea without character limit here so HTML can be pasted (will be cleaned)
     twitter_widget_id = forms.CharField(widget=forms.Textarea, required=False)

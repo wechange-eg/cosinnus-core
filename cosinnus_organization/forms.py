@@ -19,6 +19,7 @@ from cosinnus_organization.fields import OrganizationSelect2MultipleChoiceField
 from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationLocation, \
     CosinnusOrganizationSocialMedia, CosinnusOrganizationGroup
 from cosinnus_organization.utils import get_organization_select2_pills
+from cosinnus.utils.validators import validate_file_infection
 
 
 class CosinnusOrganizationSocialMediaForm(forms.ModelForm):
@@ -55,7 +56,8 @@ class _CosinnusOrganizationForm(AsssignPortalMixin, AdditionalFormsMixin, forms.
 
     extra_forms_setting = 'COSINNUS_ORGANIZATION_ADDITIONAL_FORMS'
 
-    avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), disable_preview=True)
+    avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 
+                      disable_preview=True, validators=[validate_file_infection])
     
     class Meta(object):
         model = CosinnusOrganization

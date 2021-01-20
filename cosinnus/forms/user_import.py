@@ -7,11 +7,12 @@ import io
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from cosinnus.models.user_import import CosinnusUserImportProcessor
+from cosinnus.utils.validators import validate_file_infection
 
 
 class CosinusUserImportCSVForm(forms.Form):
 
-    csv = forms.FileField()
+    csv = forms.FileField(validators=[validate_file_infection])
 
     def clean_csv(self):
         csv_file = self.cleaned_data['csv']

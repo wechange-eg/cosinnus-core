@@ -865,6 +865,10 @@ class CosinnusConf(AppConf):
     # filtered on users tagged with this tag
     MANAGED_TAG_DYNAMIC_USER_FIELD_FILTER_ON_TAG_SLUG = None
     
+    # set to True to enable virusscan. the clamd daeomon needs to be running!
+    # see https://pypi.org/project/django-clamd/
+    VIRUS_SCAN_UPLOADED_FILES = False
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.

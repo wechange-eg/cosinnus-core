@@ -248,7 +248,9 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'drf_yasg',
         'taggit',
         'django_bigbluebutton',
+        'django_clamd',
     ]
+    
     return _INSTALLED_APPS
 
 LANGUAGES = [
