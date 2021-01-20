@@ -573,30 +573,36 @@ class ConferenceApplicationView(SamePortalGroupMixin,
             form_kwargs['instance'] = self.application
         return form_kwargs
 
-    def _get_prioritydict(self):
+    def _get_prioritydict(self, form):
         formset = PriorityFormSet(self.request.POST)
         priority_dict = {}
         if formset.is_valid():
             for form in formset.forms:
                 data = form.cleaned_data
                 priority_dict[data.get('event_id')] = int(data.get('priority'))
-        return priority_dict
+            return priority_dict
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
 
     def form_valid(self, form):
-        priorities = self._get_prioritydict()
-        if not form.instance.id:
-            application = form.save(commit=False)
-            application.conference = self.group
-            application.user = self.request.user
-            application.priorities = priorities
-            application.save()
-            messages.success(self.request, _('Application has been sent.'))
+        formset = PriorityFormSet(self.request.POST)
+        if formset.is_valid():
+            priorities = self._get_prioritydict(form)
+            if not form.instance.id:
+                application = form.save(commit=False)
+                application.conference = self.group
+                application.user = self.request.user
+                application.priorities = priorities
+                application.save()
+                messages.success(self.request, _('Application has been sent.'))
+            else:
+                application = form.save()
+                application.priorities = priorities
+                application.save()
+                messages.success(self.request, _('Application has been updated.'))
+            return HttpResponseRedirect(self.get_success_url())
         else:
-            application = form.save()
-            application.priorities = priorities
-            application.save()
-            messages.success(self.request, _('Application has been updated.'))
-        return HttpResponseRedirect(self.get_success_url())
+            return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
     def get(self, request, *args, **kwargs):
         if not self._is_active():
@@ -642,9 +648,12 @@ class ConferenceApplicationView(SamePortalGroupMixin,
         context = super().get_context_data(**kwargs)
 
         if self._is_active():
-            priority_formset = PriorityFormSet(
-                initial = self._get_initial_priorities()
-            )
+            if 'formset' in kwargs:
+                priority_formset = kwargs.pop('formset')
+            else:
+                priority_formset = PriorityFormSet(
+                    initial = self._get_initial_priorities()
+                )
             context.update({
                 'is_active': True,
                 'group': self.group,

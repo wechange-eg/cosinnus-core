@@ -10,8 +10,8 @@
     {% csrf_token %}
     {{ form.media }}
     {{ form.non_field_errors }}
-    {{ form.non_field_errors }}
     {{ priority_formset.management_form }}
+    {{ priority_formset.non_form_errors }}
     <div class="content-box">
 
         {% if form.options %}
