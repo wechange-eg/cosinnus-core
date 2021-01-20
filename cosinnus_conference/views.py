@@ -679,13 +679,19 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
         return form_kwargs
 
     def _set_workshop_assignments(self):
+        users = self._get_applicants_for_workshop()
         formset = AsignUserToEventForm(self.request.POST, prefix='assignment')
+        for form in formset:
+            form.fields['users'].choices = users
 
-        # at the moment this is False because the picked choices are validated as not valid
         if formset.is_valid():
             for form in formset.forms:
                 data = form.cleaned_data
-
+                event = Event.objects.get(id=data.get('event_id'))
+                event.media_tag.persons.clear()
+                users = get_user_model().objects.filter(id__in=data.get('users'))
+                for user in users:
+                    event.media_tag.persons.add(user)
 
     def form_valid(self, form):
         for application in form:
@@ -698,16 +704,18 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
         user_list = [(application.user.id, application.user.get_full_name()) for application in accepted_applications]
         return user_list
 
+    def _get_users_for_event(self, event):
+        return list(event.media_tag.persons.all().values_list('id', flat=True))
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         users = self._get_applicants_for_workshop()
         initial = [{
             'event_id': event.id,
-            'event_name': event.title
+            'event_name': event.title,
+            'users': self._get_users_for_event(event)
             } for event in self.events]
         assignment_formset = AsignUserToEventForm(initial=initial, prefix='assignment')
-
-        # adding the choices to the field here seems to be too late
         for form in assignment_formset:
             form.fields['users'].choices = users
         context.update({
