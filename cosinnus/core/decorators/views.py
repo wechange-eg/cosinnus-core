@@ -191,7 +191,7 @@ def require_superuser():
             if not user.is_authenticated:
                 return redirect_to_not_logged_in(request, view=self)
             if not check_user_superuser(user):
-                return HttpResponseForbidden()
+                raise PermissionDenied('You do not have permission to access this page.')
             
             return function(self, request, *args, **kwargs)
             

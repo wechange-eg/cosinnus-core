@@ -5,9 +5,10 @@ from django.contrib import messages
 
 from cosinnus.models import CosinnusPortal
 from cosinnus.forms.dynamic_fields import DynamicFieldFormGenerator
+from cosinnus.views.mixins.group import RequireSuperuserMixin
 
 
-class DynamicFieldFormView(TemplateView):
+class DynamicFieldFormView(RequireSuperuserMixin, TemplateView):
     
     template_name = 'cosinnus/dynamic_fields/dynamic_field_form.html'
     form_generator_class = DynamicFieldFormGenerator
