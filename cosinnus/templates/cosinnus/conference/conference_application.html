@@ -47,6 +47,11 @@
         {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_label legend=participation_management.application_conditions checkbox_label=conditions_box_label %}
         {% endif %}
 
+        {% if not form.options and priority_formset.forms|length_is:0 and not form.conditions_accepted %}
+        <h2>{% trans 'Apply for participation in ' %}<i>{{ group.name }}</i></h2>
+        <div>{{ group.description }}</div>
+        {% endif %}
+
 
     </div>
 
@@ -57,7 +62,11 @@
                     <i class="fa fa-check"></i>
                 </a>
                 <div class="media-body">
+                    {% if not form.options and priority_formset.forms|length_is:0 and not form.conditions_accepted %}
+                    {% trans "Apply for conference participation" %}
+                    {% else %}
                     {% trans "Save" %}
+                    {% endif %}
                 </div>
             </li>
         </ul>

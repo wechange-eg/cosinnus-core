@@ -777,6 +777,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
                                                     'Determins whether a group that is marked as conference is running'),
                                                 default=False)
 
+    use_conference_applications = models.BooleanField(_('Determins if application management is visible in conference administration.'),
+                                                      default=True
+                                                     )
+
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
                                related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
     related_groups = models.ManyToManyField("self",

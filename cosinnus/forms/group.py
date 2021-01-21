@@ -266,7 +266,7 @@ class _CosinnusConferenceForm(CleanAppSettingsMixin, AsssignPortalMixin, Cosinnu
     extra_forms_setting = 'COSINNUS_CONFERENCE_ADDITIONAL_FORMS'
 
     class Meta(object):
-        fields = CosinnusBaseGroupForm.Meta.fields
+        fields = CosinnusBaseGroupForm.Meta.fields + ['use_conference_applications']
         model = CosinnusConference
         
 
