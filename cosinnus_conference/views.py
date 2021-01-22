@@ -684,7 +684,7 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
 
     @property
     def applications(self):
-        return self.group.conference_applications.all()
+        return self.group.conference_applications.exclude(status=1)
 
     def get_form_kwargs(self):
         form_kwargs = super().get_form_kwargs()
