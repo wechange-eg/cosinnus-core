@@ -274,6 +274,7 @@ class CosinnusConferenceApplication(models.Model):
                                               default=APPLICATION_SUBMITTED)
     options = PostgresJSONField(default=list, blank=True, null=True)
     priorities = PostgresJSONField(default=dict, blank=True, null=True)
+    information = models.TextField(blank=True)
 
     @property
     def first_priority(self):
