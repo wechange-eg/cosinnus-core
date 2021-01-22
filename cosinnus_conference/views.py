@@ -607,10 +607,12 @@ class ConferenceApplicationView(SamePortalGroupMixin,
     def get(self, request, *args, **kwargs):
         if not self._is_active():
             messages.error(self.request, self.participation_management.application_time_string )
+        if self.application and not self.application.status == 2:
+            messages.error(self.request, _('You cannot change your application anymore.') )
         return self.render_to_response(self.get_context_data())
 
     def post(self, request, *args, **kwargs):
-        if not self._is_active():
+        if not self._is_active() or (self.application and not self.application.status == 2):
             return HttpResponseForbidden()
         if 'withdraw' in request.POST:
             self.application.delete()
@@ -644,10 +646,15 @@ class ConferenceApplicationView(SamePortalGroupMixin,
             return pm.is_active
         return True
 
+    def _user_can_edit_application(self):
+        if not self.application:
+            return True
+        return self.application.status == 2
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        if self._is_active():
+        if self._is_active() and self._user_can_edit_application():
             if 'formset' in kwargs:
                 priority_formset = kwargs.pop('formset')
             else:
