@@ -373,7 +373,12 @@ class CosinnusGroupManager(models.Manager):
 
     def to_be_reminded(self, field_name='week_before'):
         """
-        Returns conferences with due reminders 1 week/day/hour before the start date
+        Returns conferences with due reminders inside a short time-period that is
+        1 week/day/hour before the start date of *the first ConferenceEvent in any ConferenceRoom*. 
+        Currently:
+            - week: in the 24h between 7-6 days before the first event
+            - day: in the 12h between 24h-12h before the first event
+            - hour: in the 30min between 60min-30min before the first event
         """
         # Prepare query: Mark due conferences
         key = f'reminder_{field_name}'
