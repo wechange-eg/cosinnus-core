@@ -7,7 +7,7 @@ import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {fetchEvents} from "../../stores/events/effects"
 import {EventRoomState} from "../../stores/events/reducer"
-import {Event} from "../components/event"
+import {Event} from "../components/Event"
 
 interface DiscussionProps {
   id: number

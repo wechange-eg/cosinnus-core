@@ -25,19 +25,21 @@ export function Event(props: EventProps) {
   const [url, setUrl] = useState('')
 
   function fetchEventUrl() {
-    fetch(event.props.url, {
-      method: "GET"
-    }).then(response => {
-      if (response.status === 200) {
-        response.json().then((data: EventResponse) => {
-          if (data.status === 'DONE') {
-            setUrl(data.url);
-          } else {
-            setTimeout(fetchEventUrl, 1000);
-          }
-        })
-      }
-    })
+    if (!url) {
+      fetch(event.props.url, {
+        method: "GET"
+      }).then(response => {
+        if (response.status === 200) {
+          response.json().then((data: EventResponse) => {
+            if (data.status === 'DONE') {
+              setUrl(data.url);
+            } else {
+              setTimeout(fetchEventUrl, 3000);
+            }
+          })
+        }
+      })
+    }
   }
   // Not loading events anymore and events URL given (instead of HTML)?
   if (events && !events.loading && events.events && event && event.props.url) {

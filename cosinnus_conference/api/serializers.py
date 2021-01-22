@@ -212,7 +212,7 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
 
     def get_url(self, obj):
         # FIXME: Maybe smarter filtering for URL
-        return obj.url or obj.get_bbb_room_url()
+        return obj.url or obj.get_bbb_room_queue_api_url()
 
     def get_image_url(self, obj):
         image_file = obj.attached_image.file if obj.attached_image else None

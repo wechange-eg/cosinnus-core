@@ -5,10 +5,10 @@ import logging
 import time
 
 from annoying.functions import get_object_or_None
-from django.http.response import HttpResponseNotFound, HttpResponseNotAllowed, \
-    HttpResponse
+from django.http.response import HttpResponseNotFound, \
+    HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic.base import RedirectView
+from django.views.generic.base import RedirectView, View
 
 from cosinnus.apis import bigbluebutton as bbb
 from cosinnus.conf import settings
@@ -50,27 +50,8 @@ class BBBRoomMeetingView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         """ Checks whether a room is running and restarts it if not,
             then returns the rooms join URL for the current user """
+        return self.room.get_direct_room_url_for_user(self.request.user)
         
-        if not self.room.check_user_can_enter_room(self.request.user):
-            return redirect_to_403(self.request, view=self)
-
-        if not self.room.is_running:
-            try:
-                self.room.restart()
-            except Exception as e:
-                logger.exception(e)
-        
-        # add statistics visit
-        try:
-            room_event = self.room.event
-            event_group = room_event and room_event.group or None
-            BBBRoomVisitStatistics.create_user_visit_for_bbb_room(self.request.user, self.room, group=event_group)
-        except Exception as e:
-            if settings.DEBUG:
-                raise
-            logger.error('Error creating a statistic BBBRoom visit entry.', extra={'exception': e})
-        
-        return self.room.get_join_url(self.request.user)
 
 bbb_room_meeting = BBBRoomMeetingView.as_view()
 
@@ -93,5 +74,35 @@ class BBBRoomMeetingQueueView(RequireLoggedInMixin, RedirectView):
             return redirect(media_tag.bbb_room.get_absolute_url())
         else:
             return HttpResponse('<html><head><meta http-equiv="refresh" content="5" ></head><body>Connnecting you to your room...</body></html>')
-    
+
 bbb_room_meeting_queue = BBBRoomMeetingQueueView.as_view()
+
+
+class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
+    """ An intermediate view that can be visited for a BBB-Room that 
+        is in the process of being created, without blocking the code.
+        The target object is the media_tag id. As long as the media_tag
+        has no BBBRoom, it will show a waiting page, and if the tag has a
+        room, it will redirect to the room URL """
+        
+    def get(self, *args, **kwargs):
+        media_tag_id = kwargs.get('mt_id')
+        user = self.request.user
+        if not user.is_authenticated:
+            return redirect_to_not_logged_in(self.request, view=self)
+        media_tag = get_object_or_404(get_tag_object_model(), id=media_tag_id)
+        
+        # return a waiting status or the concrete room URL on the BBB server wrapped in a result object
+        if media_tag.bbb_room is not None:
+            room_url = media_tag.bbb_room.get_direct_room_url_for_user(user=user)
+            data = {
+                'status': "DONE", 
+                'url': room_url,
+            }
+        else:
+            data = {
+                'status': "WAITING",
+            }
+        return JsonResponse(data)
+    
+bbb_room_meeting_queue_api = BBBRoomMeetingQueueAPIView.as_view()

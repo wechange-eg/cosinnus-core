@@ -21,6 +21,7 @@ from cosinnus.utils import bigbluebutton as bbb_utils
 from cosinnus.utils.permissions import check_user_superuser
 from datetime import timedelta
 from django.utils.timezone import now
+from django.http.response import HttpResponseForbidden
 
 
 # from cosinnus.models import MEMBERSHIP_ADMIN
@@ -359,8 +360,35 @@ class BBBRoom(models.Model):
         return ''
 
     def get_absolute_url(self):
+        """ Returns an on-portal-server URL that returns a redirect to the BBB-server URL """
         return reverse('cosinnus:bbb-room', kwargs={'room_id': self.id})
 
+    def get_direct_room_url_for_user(self, user):
+        """ Returns the direct BBB-server URL. This logic is also used by the 
+            proxy-view used by `get_absolute_url`.
+            This should be used as the boilerplate for the room-URL getter for a user,
+            as it also handles creating statistics.
+            @param request: (optional)  """
+        if not self.check_user_can_enter_room(user):
+            return HttpResponseForbidden()
+
+        if not self.is_running:
+            try:
+                self.restart()
+            except Exception as e:
+                logger.exception(e)
+        
+        # add statistics visit
+        try:
+            room_event = self.event
+            event_group = room_event and room_event.group or None
+            BBBRoomVisitStatistics.create_user_visit_for_bbb_room(user, self, group=event_group)
+        except Exception as e:
+            if settings.DEBUG:
+                raise
+            logger.error('Error creating a statistic BBBRoom visit entry.', extra={'exception': e})
+        
+        return self.get_join_url(user)
 
 
 class BBBRoomVisitStatistics(models.Model):

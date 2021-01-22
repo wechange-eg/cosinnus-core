@@ -5,7 +5,7 @@ import {withRouter} from "react-router"
 
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {Event} from "../components/event"
+import {Event} from "../components/Event"
 import {fetchEvents} from "../../stores/events/effects"
 import {EventRoomState} from "../../stores/events/reducer"
 

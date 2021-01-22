@@ -6,7 +6,7 @@ import {withRouter} from "react-router"
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {fetchEvents} from "../../stores/events/effects"
-import {Event} from "../components/event"
+import {Event} from "../components/Event"
 import {EventRoomState} from "../../stores/events/reducer"
 
 interface ChannelProps {
