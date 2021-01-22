@@ -573,30 +573,36 @@ class ConferenceApplicationView(SamePortalGroupMixin,
             form_kwargs['instance'] = self.application
         return form_kwargs
 
-    def _get_prioritydict(self):
+    def _get_prioritydict(self, form):
         formset = PriorityFormSet(self.request.POST)
         priority_dict = {}
         if formset.is_valid():
             for form in formset.forms:
                 data = form.cleaned_data
                 priority_dict[data.get('event_id')] = int(data.get('priority'))
-        return priority_dict
+            return priority_dict
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
 
     def form_valid(self, form):
-        priorities = self._get_prioritydict()
-        if not form.instance.id:
-            application = form.save(commit=False)
-            application.conference = self.group
-            application.user = self.request.user
-            application.priorities = priorities
-            application.save()
-            messages.success(self.request, _('Application has been sent.'))
+        formset = PriorityFormSet(self.request.POST)
+        if formset.is_valid():
+            priorities = self._get_prioritydict(form)
+            if not form.instance.id:
+                application = form.save(commit=False)
+                application.conference = self.group
+                application.user = self.request.user
+                application.priorities = priorities
+                application.save()
+                messages.success(self.request, _('Application has been sent.'))
+            else:
+                application = form.save()
+                application.priorities = priorities
+                application.save()
+                messages.success(self.request, _('Application has been updated.'))
+            return HttpResponseRedirect(self.get_success_url())
         else:
-            application = form.save()
-            application.priorities = priorities
-            application.save()
-            messages.success(self.request, _('Application has been updated.'))
-        return HttpResponseRedirect(self.get_success_url())
+            return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
     def get(self, request, *args, **kwargs):
         if not self._is_active():
@@ -642,9 +648,12 @@ class ConferenceApplicationView(SamePortalGroupMixin,
         context = super().get_context_data(**kwargs)
 
         if self._is_active():
-            priority_formset = PriorityFormSet(
-                initial = self._get_initial_priorities()
-            )
+            if 'formset' in kwargs:
+                priority_formset = kwargs.pop('formset')
+            else:
+                priority_formset = PriorityFormSet(
+                    initial = self._get_initial_priorities()
+                )
             context.update({
                 'is_active': True,
                 'group': self.group,
@@ -666,6 +675,10 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
     template_name = 'cosinnus/conference/conference_participation_management_applications.html'
 
     @property
+    def participation_management(self):
+        return self.group.participation_management.first()
+
+    @property
     def events(self):
         return Event.objects.filter(group=self.group).order_by('id')
 
@@ -678,29 +691,61 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
         form_kwargs['queryset'] = self.applications
         return form_kwargs
 
+    def _set_workshop_assignments(self):
+        users = self._get_applicants_for_workshop()
+        formset = AsignUserToEventForm(self.request.POST, prefix='assignment')
+        for form in formset:
+            form.fields['users'].choices = users
+
+        if formset.is_valid():
+            for form in formset.forms:
+                data = form.cleaned_data
+                event = Event.objects.get(id=data.get('event_id'))
+                event.media_tag.persons.clear()
+                users = get_user_model().objects.filter(id__in=data.get('users'))
+                for user in users:
+                    event.media_tag.persons.add(user)
+
     def form_valid(self, form):
         for application in form:
             application.save()
+        self._set_workshop_assignments()
         return HttpResponseRedirect(self.get_success_url())
 
     def _get_applicants_for_workshop(self):
-        accepted_applications = self.applications.filter(status=4)
+        accepted_applications = self.applications
         user_list = [(application.user.id, application.user.get_full_name()) for application in accepted_applications]
         return user_list
+
+    def _get_users_for_event(self, event):
+        return list(event.media_tag.persons.all().values_list('id', flat=True))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         users = self._get_applicants_for_workshop()
         initial = [{
             'event_id': event.id,
-            'event_name': event.title
+            'event_name': event.title,
+            'users': self._get_users_for_event(event)
             } for event in self.events]
-        assignment_formset = AsignUserToEventForm(initial=initial)
+        assignment_formset = AsignUserToEventForm(initial=initial, prefix='assignment')
         for form in assignment_formset:
             form.fields['users'].choices = users
         context.update({
             'assignment_formset': assignment_formset
         })
+
+        if self.participation_management and self.participation_management.participants_limit:
+
+            places_left = 0
+            accepted_applications = self.applications.filter(status=4).count()
+            if accepted_applications < self.participation_management.participants_limit:
+                places_left = self.participation_management.participants_limit - accepted_applications
+
+            context.update({
+            'max_number': self.participation_management.participants_limit,
+            'places_left': places_left
+            })
         return context
 
     def get_success_url(self):

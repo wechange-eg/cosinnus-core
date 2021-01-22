@@ -14,12 +14,27 @@
 
 {% block content %}
 
+    <button type="button" href="{% group_url "cosinnus:conference:participation-management-applications" group=group %}" class="btn btn-emphasized btn-autosize" title="{% trans "View all applications" %}">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-eye"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "View all applications" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    <div class="clearfix"></div>
+
     <form method="POST" action="" class="cosinnus-form">
         {% csrf_token %}
         {{ form.media }}
 	    {{ form.non_field_errors }}
 	    {{ form.non_field_errors }}
-        <div class="content-box">
+
+            <div class="content-box">
             {% trans "Maximal Number of participants" as limits_label %}
             {% include 'cosinnus/fields/default_field.html' with field=form.participants_limit label=limits_label large_field=True %}
 

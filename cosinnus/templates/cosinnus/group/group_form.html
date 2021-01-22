@@ -41,7 +41,7 @@
 
 
 {% block breadcrumb %}
-        {{ block.super }}
+		{{ block.super }}
         {% if object %}
             <li class="active">{{ group_model_class.get_trans.EDIT }}</li>
         {% else %}
@@ -172,10 +172,9 @@
 	                            {% captureas name_val %}{{ request.GET.name }}{% endcaptureas %}
 	                        {% endif %}
                             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=name_placeholder field_value=name_val %}
-					    {% endblock group_form_name_field %}
-					
+						{% endblock group_form_name_field %}
 				
-                        {# SimpleMDE Description Field (gets initialized in extrahead) #}					                
+                        {# SimpleMDE Description Field (gets initialized in extrahead) #}
                         
                         {% trans "Short description" as desc_label %}
                         {% captureas group_legend %}
@@ -188,11 +187,17 @@
 	                        {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="group" %}
 	                    {% endcaptureas %}
                         {% include 'cosinnus/fields/default_field.html' with label=desc_label legend=group_legend field_id=form.forms.obj.description.id_for_label %}
-                        
+
+						
 		                {% block group_form_description_field %}
 					        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label %}
-                        {% endblock group_form_description_field %}
-                        
+						{% endblock group_form_description_field %}
+
+						{% if form.forms.obj.use_conference_applications %}
+						{% captureas use_conference_applications_label %}{% trans 'Use participation management for this conference' %}{% endcaptureas %}
+						{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_conference_applications checkbox_label=use_conference_applications_label %}
+						{% endif %}
+
                         
                         {# Avatar Field #}
                         {% trans "Avatar" as avatar_label %}

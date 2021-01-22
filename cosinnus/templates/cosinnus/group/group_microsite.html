@@ -64,7 +64,7 @@
 
 	<div class="group-microsite-header">
 
-		{% if group.type == 2 and group.participation_management.count > 0 %}
+		{% if group.type == 2 and group.use_conference_applications %}
 		<div class="group-microsite-login-box overlay-box-gray">
 
 			{% if not user.is_authenticated %}
@@ -87,7 +87,7 @@
 				<h2>{% trans 'status: ' %}{{ application.get_status_display }}</h2>
 				{% endif %}
 
-				{% if group.participation_management.first.is_active %}
+				{% if group.participation_management.all.count == 0 or group.participation_management.first.is_active %}
 				<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
 					<ul class="media-list">
 						<li class="media">
