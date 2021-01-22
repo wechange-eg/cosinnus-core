@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.forms.widgets import SelectMultiple
 from django.forms import formset_factory, modelformset_factory
+from django.forms import BaseFormSet
 from django_select2.widgets import Select2MultipleWidget
 from cosinnus.forms.widgets import SplitHiddenDateWidget
 
@@ -145,6 +146,29 @@ class ConferenceApplicationForm(forms.ModelForm):
         if self.cleaned_data['options'] and len(self.cleaned_data) > 0:
             return [int(option) for option in self.cleaned_data['options']]
 
+class BaseConferenceApplicationEventPrioFormSet(BaseFormSet):
+
+    def clean(self):
+        """Checks first and second choice are only picked once."""
+        if any(self.errors):
+            return
+        first_priority_count = 0
+        second_priority_count = 0
+        for form in self.forms:
+            priority = form.cleaned_data['priority']
+
+            if priority == '1':
+                if first_priority_count == 1:
+                    raise forms.ValidationError(_("You can only pick one workshop as first priority."))
+                else:
+                    first_priority_count = 1
+
+            if priority == '2':
+                if second_priority_count == 1:
+                    raise forms.ValidationError(_("You can only pick one workshop as second priority."))
+                else:
+                    second_priority_count = 1
+
 class ConferenceApplicationEventPrioForm(forms.Form):
     event_id = forms.CharField(widget=forms.HiddenInput())
     event_name = forms.CharField(required=False)
@@ -158,7 +182,8 @@ class ConferenceApplicationEventPrioForm(forms.Form):
         self.fields['event_name'].widget.attrs['readonly'] = True
 
 
-PriorityFormSet = formset_factory(ConferenceApplicationEventPrioForm, extra=0)
+PriorityFormSet = formset_factory(ConferenceApplicationEventPrioForm,
+                                  formset=BaseConferenceApplicationEventPrioFormSet, extra=0)
 
 
 class ApplicationForm(forms.ModelForm):
@@ -181,13 +206,9 @@ ApplicationFormSet = modelformset_factory(CosinnusConferenceApplication, form=Ap
 class AsignUserToEventForm(forms.Form):
     event_id = forms.CharField(widget=forms.HiddenInput())
     event_name = forms.CharField(required=False)
-    users = forms.MultipleChoiceField(choices=[], required=False)
+    users = forms.MultipleChoiceField(widget=Select2MultipleWidget(), required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        for field in list(self.fields.values()):
-            if type(field.widget) is SelectMultiple:
-                field.widget = Select2MultipleWidget(choices=field.choices)
 
 AsignUserToEventForm = formset_factory(AsignUserToEventForm, extra=0)
