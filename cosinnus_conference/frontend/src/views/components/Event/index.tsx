@@ -34,10 +34,12 @@ export function Event(props: EventProps) {
             if (data.status === 'DONE') {
               setUrl(data.url);
             } else {
-              setTimeout(fetchEventUrl, 3000);
+              setTimeout(fetchEventUrl, 2000);
             }
           })
         }
+      }).catch(respnse => {
+        setTimeout(fetchEventUrl, 5000);
       })
     }
   }
@@ -58,9 +60,10 @@ export function Event(props: EventProps) {
           <EventButtons event={event} />
         </Content>
       ))
-      || (events && events.loading) && (
+      || ((events && events.loading) || (events && !events.loading && events.events && event && event.props.url)) && (
         <Content className="fullheight"><Loading /></Content>
-      ) || (
+      ) 
+      || (
         <Content className="fullheight">
           <Typography><FormattedMessage id="Event not found."/></Typography>
         </Content>

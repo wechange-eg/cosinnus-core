@@ -92,6 +92,9 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
             return redirect_to_not_logged_in(self.request, view=self)
         media_tag = get_object_or_404(get_tag_object_model(), id=media_tag_id)
         
+        data = {
+            'status': "WAITING",
+        }
         # return a waiting status or the concrete room URL on the BBB server wrapped in a result object
         if media_tag.bbb_room is not None:
             room_url = media_tag.bbb_room.get_direct_room_url_for_user(user=user)
@@ -99,10 +102,14 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
                 'status': "DONE", 
                 'url': room_url,
             }
-        else:
-            data = {
-                'status': "WAITING",
-            }
+        elif media_tag.bbb_room is None and settings.COSINNUS_TRIGGER_BBB_ROOM_CREATION_IN_QUEUE:
+            # if the media_tag is attached to a conference event, but no room has been created yet,
+            # create one
+            from cosinnus_event.models import ConferenceEvent #noqa
+            conference_event = get_object_or_None(ConferenceEvent, media_tag__id=media_tag_id)
+            if conference_event and conference_event.can_have_bbb_room() and not conference_event.media_tag.bbb_room:
+                conference_event.check_and_create_bbb_room(threaded=True)
+            
         return JsonResponse(data)
     
 bbb_room_meeting_queue_api = BBBRoomMeetingQueueAPIView.as_view()

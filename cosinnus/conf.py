@@ -771,6 +771,11 @@ class CosinnusConf(AppConf):
     # the default slug for pre-filled managed tags
     MANAGED_TAGS_DEFAULT_INITIAL_SLUG = None
     
+    # if this is True, then the bbb-room create call
+    # will be triggered every time the queue request hits
+    # if False, it will be triggered on requesting of the queue-URL (should happen less often)
+    TRIGGER_BBB_ROOM_CREATION_IN_QUEUE = True
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
