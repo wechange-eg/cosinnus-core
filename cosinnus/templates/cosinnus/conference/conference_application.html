@@ -19,6 +19,9 @@
         {% include 'cosinnus/fields/default_field.html' with field=form.options label=options_label large_field=True %}
         {% endif %}
 
+        {% trans "Message to organizer" as information_label %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.information label=information_label large_field=True %}
+
 
         {% if priority_formset.forms %}
         <table class="table table-striped white-content priority-form">

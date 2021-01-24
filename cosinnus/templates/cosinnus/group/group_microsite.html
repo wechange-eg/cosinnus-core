@@ -88,15 +88,19 @@
 				{% endif %}
 
 				{% if group.participation_management.all.count == 0 or group.participation_management.first.is_active %}
-				<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
+				<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize {% if application and not application.status == 2 %} disabled {% endif %}">
 					<ul class="media-list">
 						<li class="media">
 							<a class="pull-left" href="#">
 								<i class="fa fa-sign-in"></i>
 							</a>
 							<div class="media-body">
-								{% if  application %}
-								{% trans "Edit Application" %}
+								{% if application %}
+									{% if application.status == 2 %}
+									{% trans "Edit Application" %}
+									{% else %}
+									{% trans "You can't change your application anymore." %}
+									{% endif %}
 								{% else %}
 								{% trans "Add Application" %}
 								{% endif %}

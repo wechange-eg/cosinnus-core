@@ -4,6 +4,7 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_conference.utils import get_initial_template
 from cosinnus.models.conference import ParticipationManagement
 from cosinnus.models.conference import CosinnusConferenceApplication
+from cosinnus.models.conference import APPLICATION_STATES_VISIBLE
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
@@ -194,8 +195,7 @@ class ApplicationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        choices = self.fields['status'].choices
-        self.fields['status'].widget = forms.RadioSelect(choices=choices)
+        self.fields['status'].widget = forms.RadioSelect(choices=APPLICATION_STATES_VISIBLE)
         self.fields['user'].widget = forms.HiddenInput()
         self.fields['conference'].widget = forms.HiddenInput()
 
