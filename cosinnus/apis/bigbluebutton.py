@@ -1,16 +1,15 @@
-import argparse
+from hashlib import sha1, sha256
+import logging
 import urllib
+
+from django.core.exceptions import ImproperlyConfigured
 import requests
 
-from hashlib import sha1, sha256
-
-from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
-
+from cosinnus.conf import settings
 from cosinnus.models import CosinnusPortal, get_domain_for_portal
 from cosinnus.utils import bigbluebutton as bbb_utils
 from cosinnus.utils.functions import is_number
-import logging
+
 
 logger = logging.getLogger('cosinnus')
 
@@ -30,6 +29,29 @@ global settings in `BBB_HASH_ALGORITHM`.
 All wrapped functions from bbb.py are called with sha1, regardless of the `BBB_HASH_ALGORITHM` setting.
 """
 
+def get_current_bbb_server_auth_pair():
+    """ Central helper function to retrieve the currently
+        selected BBB-server API URL and Secret.
+        
+        @return: tuple of (str: BBB_API_URL, str: BBB_SECRET_KEY) if a server is set, 
+                    or (None, None) if no server is set """
+    portal = CosinnusPortal.get_current()
+    try:
+        auth_pair = dict(settings.COSINNUS_BBB_SERVER_AUTH_PAIRS).get(portal.bbb_server)
+        ret = (auth_pair[0], auth_pair[1]) # force fail on improper tuple
+        return ret
+    except Exception as e:
+        logger.error('Misconfigured: Either COSINNUS_BBB_SERVER_CHOICES or COSINNUS_BBB_SERVER_AUTH_PAIRS are not properly set up!',
+            extra={'exception': e})
+    return (None, None)
+
+
+def get_current_bbb_server_auth_pair_or_raise():
+    api_url, secret = get_current_bbb_server_auth_pair()
+    if not api_url or not secret:
+        raise ImproperlyConfigured("No valid BBB server auth is currently configured or selected as active for this portal!")
+    return (api_url, secret)
+
 
 def join_url_tokenized(meeting_id, name, password):
     url = join_url(meeting_id, name, password)
@@ -37,7 +59,8 @@ def join_url_tokenized(meeting_id, name, password):
 
 
 def api_call(query, call):
-    prepared = '{}{}{}'.format(call, query, settings.BBB_SECRET_KEY)
+    __, secret = get_current_bbb_server_auth_pair_or_raise()
+    prepared = '{}{}{}'.format(call, query, secret)
 
     if settings.BBB_HASH_ALGORITHM == "SHA1":
         checksum = sha1(str(prepared).encode('utf-8')).hexdigest()
@@ -90,6 +113,8 @@ def start(
     :return: XML representation of the API result
     :rtype: XML
     """
+    
+    api_url = get_current_bbb_server_auth_pair_or_raise()[0]
     call = 'create'
 
     # set default values
@@ -119,7 +144,7 @@ def start(
     query = urllib.parse.urlencode(query)
 
     hashed = api_call(query, call)
-    url = settings.BBB_API_URL + call + '?' + hashed
+    url = api_url + call + '?' + hashed
     # Presentation file has to be sent via POST request with XML body
     if presentation_url:
         headers = {'Content-Type': 'application/xml'}
@@ -142,13 +167,14 @@ def start(
 
 def end_meeting(meeting_id, password):
     """ This function is a wrapper for the `end_meeting` function in bbb.py """
+    api_url = get_current_bbb_server_auth_pair_or_raise()[0]
     call = 'end'
     query = urllib.parse.urlencode((
         ('meetingID', meeting_id),
         ('password', password),
     ))
     hashed = api_call(query, call)
-    url = settings.BBB_API_URL + call + '?' + hashed
+    url = api_url + call + '?' + hashed
     req = requests.get(url)
     result = bbb_utils.parse_xml(req.content)
     if result:
@@ -163,12 +189,13 @@ def get_meetings():
     :return: XML representation of the API result
     :rtype: XML
     """
+    api_url = get_current_bbb_server_auth_pair_or_raise()[0]
     call = 'getMeetings'
     query = urllib.parse.urlencode((
         ('random', 'random'),
     ))
     hashed = api_call(query, call)
-    url = settings.BBB_API_URL + call + '?' + hashed
+    url = api_url + call + '?' + hashed
     response = requests.get(url)
     result = bbb_utils.parse_xml(response.content)
     if result:
@@ -195,13 +222,14 @@ def get_meetings():
 
 
 def meeting_info(meeting_id, password):
+    api_url = get_current_bbb_server_auth_pair_or_raise()[0]
     call = 'getMeetingInfo'
     query = urllib.parse.urlencode((
         ('meetingID', meeting_id),
         ('password', password),
     ))
     hashed = api_call(query, call)
-    url = settings.BBB_API_URL + call + '?' + hashed
+    url = api_url + call + '?' + hashed
     response = bbb_utils.parse_xml(requests.get(url).content)
     if response:
         return bbb_utils.xml_to_json(response)
@@ -215,12 +243,13 @@ def is_running(meeting_id):
     :return: XML representation of the API result
     :rtype: XML
     """
+    api_url = get_current_bbb_server_auth_pair_or_raise()[0]
     call = 'isMeetingRunning'
     query = urllib.parse.urlencode((
         ('meetingID', meeting_id),
     ))
     hashed = api_call(query, call)
-    url = settings.BBB_API_URL + call + '?' + hashed
+    url = api_url + call + '?' + hashed
     result = bbb_utils.parse_xml(requests.get(url).content)
     if result and result.find('running').text == 'true':
         return True
@@ -240,7 +269,8 @@ def xml_join(name, meeting_id, password):
     :param password: Password for the user to join
     :type: str
     """
-
+    
+    api_url = get_current_bbb_server_auth_pair_or_raise()[0]
     call = 'join'
     query = urllib.parse.urlencode((
         ('fullName', name),
@@ -250,7 +280,7 @@ def xml_join(name, meeting_id, password):
     ))
 
     hashed = api_call(query, call)
-    url = settings.BBB_API_URL + call + '?' + hashed
+    url = api_url + call + '?' + hashed
     result = bbb_utils.parse_xml(requests.get(url).content.decode('utf-8'))
 
     return result
@@ -275,6 +305,7 @@ def join_url(meeting_id, name, password, extra_parameter_dict=None):
     :return: XML representation of the API result
     :rtype: XML
     """
+    api_url = get_current_bbb_server_auth_pair_or_raise()[0]
     call = 'join'
     params_dict = {
         'fullName': name,
@@ -285,5 +316,5 @@ def join_url(meeting_id, name, password, extra_parameter_dict=None):
         params_dict.update(extra_parameter_dict)
     query = urllib.parse.urlencode(params_dict)
     hashed = api_call(query, call)
-    url = settings.BBB_API_URL + call + '?' + hashed
+    url = api_url + call + '?' + hashed
     return url

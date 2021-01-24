@@ -776,6 +776,17 @@ class CosinnusConf(AppConf):
     # if False, it will be triggered on requesting of the queue-URL (should happen less often)
     TRIGGER_BBB_ROOM_CREATION_IN_QUEUE = True
     
+    BBB_SERVER_CHOICES = (
+        (0, '(None)'),
+    )
+    
+    # map of the authentication data for the server choices
+    # in `COSINNUS_BBB_SERVER_CHOICES`
+    # { <int>: (BBB_API_URL, BBB_SECRET_KEY), ... }  
+    BBB_SERVER_AUTH_PAIRS = {
+        0: (None, None),
+    }
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.

@@ -33,12 +33,16 @@ export function Event(props: EventProps) {
           response.json().then((data: EventResponse) => {
             if (data.status === 'DONE') {
               setUrl(data.url);
+            } else if (data.status === 'ERROR') {
+              setUrl('ERROR');
             } else {
               setTimeout(fetchEventUrl, 2000);
             }
           })
+        } else {
+          setUrl('ERROR');
         }
-      }).catch(respnse => {
+      }).catch(response => {
         setTimeout(fetchEventUrl, 5000);
       })
     }
@@ -50,7 +54,12 @@ export function Event(props: EventProps) {
 
   return (
     <Main container>
-      {(event && (url || event.props.rawHtml) && (
+      {(event && (url && url === 'ERROR') && (
+        <Content className="fullheight">
+          <Typography><FormattedMessage id="Event could not be loaded because of a server error."/></Typography>
+        </Content>
+      ))
+      || (event && (url || event.props.rawHtml) && (
         <Content className="fullheight detail-view">
           <Typography component="h1">{event.props.title}</Typography>
           {event.props.noteHtml && (

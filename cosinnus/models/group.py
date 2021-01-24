@@ -565,9 +565,13 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
                                  blank=True, null=True)
 
     video_conference_server = models.URLField(_('Video Conference Server'), max_length=250, blank=True, null=True,
-                                              help_text=_(
-                                                  'If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended.'))
-
+        help_text=_('For old-style events meeting popups only! If entered, will enable Jitsi-like video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended.'))
+    
+    bbb_server = models.PositiveSmallIntegerField(_('BBB Server'), blank=False,
+        default=0, choices=settings.COSINNUS_BBB_SERVER_CHOICES,
+        help_text='The chosen BBB-Server/Cluster for the entire portal. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
+    
+    
     # exact time when last digest was sent out for each of the period settings
     SAVED_INFO_LAST_DIGEST_SENT = 'last_digest_sent_for_period_%d'
     membership_class = CosinnusPortalMembership
