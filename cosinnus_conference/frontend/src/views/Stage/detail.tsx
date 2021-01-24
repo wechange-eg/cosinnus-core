@@ -1,8 +1,4 @@
-import {
-  Grid,
-  Typography
-} from "@material-ui/core"
-import React, {useState} from "react"
+import React from "react"
 import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
 import {withRouter} from "react-router"
@@ -10,15 +6,8 @@ import {withRouter} from "react-router"
 import {RootState} from "../../stores/rootReducer"
 import {fetchEvents} from "../../stores/events/effects"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {Event} from "../../stores/events/models"
-import {Content} from "../components/Content/style"
-import {Main} from "../components/Main/style"
-import {Loading} from "../components/Loading"
-import {EventButtons} from "../components/EventButtons"
-import {Sidebar} from "../components/Sidebar"
-import {IframeContent} from "../components/IframeContent"
+import {Event} from "../components/Event"
 import {EventRoomState} from "../../stores/events/reducer"
-import {FormattedMessage} from "react-intl"
 import {Room} from "../../stores/room/models"
 
 interface StageEventProps {
@@ -47,28 +36,7 @@ function StageEventConnector (props: StageEventProps & RouteComponentProps) {
   } else if (!events && !(events && events.loading)) {
     fetchEvents()
   }
-  return (
-    <Main container>
-      {(event && (
-        <Content className="fullheight detail-view">
-          <Typography component="h1">{event.props.title}</Typography>
-          {event.props.noteHtml && (
-            <div className="description" dangerouslySetInnerHTML={{__html: event.props.noteHtml}} />
-          )}
-          <IframeContent url={event.props.url} html={event.props.rawHtml} />
-          <EventButtons event={event} />
-        </Content>
-      ))
-      || (events && events.loading) && (
-        <Content className="fullheight"><Loading /></Content>
-      ) || (
-        <Content className="fullheight">
-          <Typography><FormattedMessage id="Event not found."/></Typography>
-        </Content>
-      )}
-      {room.props.showChat && room.props.url && <Sidebar url={room.props.url} />}
-    </Main>
-  )
+  return <Event events={events} event={event} />
 }
 
 export const StageEvent = reduxConnect(mapStateToProps, mapDispatchToProps)(

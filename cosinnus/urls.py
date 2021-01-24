@@ -68,7 +68,8 @@ urlpatterns = [
     
     url(r'^bbb/room/(?P<room_id>\d+)/$', bbb_room.bbb_room_meeting, name='bbb-room'),
     url(r'^bbb/queue/(?P<mt_id>\d+)/$', bbb_room.bbb_room_meeting_queue, name='bbb-room-queue'),
-
+    url(r'^bbb/queue-api/(?P<mt_id>\d+)/$', bbb_room.bbb_room_meeting_queue_api, name='bbb-room-queue-api'),
+    
     url(r'^invitations/$', group.group_list_invited, name='invitations', kwargs={'show_all': True}),
     url(r'^welcome/$', user.welcome_settings, name='welcome-settings'),
     url(r'^join/$', user.group_invite_token_enter_view, name='group-invite-token-enter'),

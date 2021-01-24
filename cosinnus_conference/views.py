@@ -501,7 +501,7 @@ class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsCo
         form.save()
         # Send test email to logged in user?
         if 'test' in form.data:
-            send_conference_reminder(conference=self.group, recipients=[self.request.user],
+            send_conference_reminder(self.group, recipients=[self.request.user],
                                      field_name=form.data.get('test'), update_setting=False)
             messages.success(self.request, _('A test email has been sent to your email address.'))
         return super(ConferenceRemindersView, self).form_valid(form)

@@ -11,6 +11,9 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.core.mail import get_common_mail_context
 from cosinnus.utils.files import get_image_url_for_icon
 from cosinnus.utils.mail import send_notification_item_html_threaded
+from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.permissions import check_user_can_receive_emails
 
 
 def get_initial_template(field_name):
@@ -31,9 +34,14 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
         template = template or get_initial_template(f'{field_name}_{field_type}')
         template = re.sub('\%\(([^\)]+)\)', r'{{\1}}', template)
         return Template(template).render(Context(context))
+    
     if not recipients:
-        recipients = group.users.filter(is_active=True)
+        recipients = group.actual_members
+    
     for recipient in recipients:
+        if not check_user_can_receive_emails(recipient):
+            continue
+        
         # switch language to user's preference language
         cur_language = translation.get_language()
         try:
@@ -44,7 +52,7 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
             context = get_common_mail_context(request=None, group=group, user=recipient)
 
             subject = render_template(extra_fields, field_name, 'subject', context)
-            content = render_template(extra_fields, field_name, 'content', context)
+            content = textfield(render_template(extra_fields, field_name, 'content', context))
 
             portal_url = group.portal.get_domain()
             group_icon_url = portal_url + (group.get_avatar_thumbnail_url() or get_image_url_for_icon(group.get_icon()))
