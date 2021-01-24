@@ -1497,8 +1497,13 @@ class GroupStartpage(View):
                 return False
             else:
                 return True
+        # if the group is not accessible, redirect to microsite
         if not check_object_read_access(self.group, request.user):
             return True
+        # grant access to superusers but notifiy them
+        if check_user_superuser(request.user):
+            messages.info(request, _('You are not a member, but have access because you are an Administrator.'))
+            return False
         
         # check if this session user has clicked on "browse" for this group before
         # and if so, never let him see that groups microsite again
