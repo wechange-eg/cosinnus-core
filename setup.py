@@ -119,6 +119,10 @@ setup(
         # wagtail
         'wagtail==2.3',
         'django-compressor',
+        
+        # virus file scan validator
+        'clamd==1.0.2',
+        'django-clamd==0.4.0',
 
         # requirements loaded in from github
         'django-awesome-avatar',
