@@ -32,7 +32,8 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.user import create_base_user
 from cosinnus.views.group import SamePortalGroupMixin
 from cosinnus.views.mixins.group import GroupIsConferenceMixin, FilterGroupMixin,\
-    RequireAdminMixin
+    RequireAdminMixin, RequireLoggedInMixin, GroupFormKwargsMixin,\
+    DipatchGroupURLMixin
 from cosinnus.views.mixins.group import RequireReadMixin, RequireWriteMixin
 from cosinnus.views.profile import delete_userprofile
 from cosinnus.utils.urls import group_aware_reverse, redirect_with_next
@@ -546,7 +547,8 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
 
 
 class ConferenceApplicationView(SamePortalGroupMixin,
-                                RequireReadMixin,
+                                RequireLoggedInMixin,
+                                DipatchGroupURLMixin,
                                 GroupIsConferenceMixin,
                                 FormView):
     form_class = ConferenceApplicationForm
@@ -627,8 +629,7 @@ class ConferenceApplicationView(SamePortalGroupMixin,
 
 
     def get_success_url(self):
-        return group_aware_reverse('cosinnus:group-microsite',
-                                   kwargs={'group': self.group})
+        return self.group.get_absolute_url()
 
     def _get_initial_priorities(self):
         if not self.application:

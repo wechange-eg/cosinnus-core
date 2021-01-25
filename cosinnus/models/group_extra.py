@@ -44,6 +44,7 @@ from easy_thumbnails.exceptions import InvalidImageFormatError
 from django.contrib.auth import get_user_model
 from cosinnus.models.group import CosinnusGroupManager, CosinnusGroup,\
     get_cosinnus_group_model
+from cosinnus.trans.group import get_group_trans_by_type
 
 logger = logging.getLogger('cosinnus')
 
@@ -138,8 +139,8 @@ class CosinnusConference(get_cosinnus_group_model()):
         proxy = True        
         app_label = 'cosinnus'
         ordering = ('name',)
-        verbose_name = _('Cosinnus conference')
-        verbose_name_plural = _('Cosinnus conferences')
+        verbose_name = get_group_trans_by_type(CosinnusGroup.TYPE_CONFERENCE).VERBOSE_NAME
+        verbose_name_plural = get_group_trans_by_type(CosinnusGroup.TYPE_CONFERENCE).VERBOSE_NAME_PLURAL
     
     GROUP_MODEL_TYPE = CosinnusGroup.TYPE_CONFERENCE
     
