@@ -187,6 +187,12 @@ PriorityFormSet = formset_factory(ConferenceApplicationEventPrioForm,
                                   formset=BaseConferenceApplicationEventPrioFormSet, extra=0)
 
 
+class RadioSelectInRowWidget(forms.RadioSelect):
+    input_type = 'radio'
+    template_name = 'cosinnus/conference/radio_buttons_row.html'
+    option_template_name = 'cosinnus/conference/radio_option.html'
+
+
 class ApplicationForm(forms.ModelForm):
 
     class Meta:
@@ -195,7 +201,7 @@ class ApplicationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['status'].widget = forms.RadioSelect(choices=APPLICATION_STATES_VISIBLE)
+        self.fields['status'].widget = RadioSelectInRowWidget(choices=APPLICATION_STATES_VISIBLE)
         self.fields['user'].widget = forms.HiddenInput()
         self.fields['conference'].widget = forms.HiddenInput()
 

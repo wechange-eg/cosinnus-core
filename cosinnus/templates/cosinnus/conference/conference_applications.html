@@ -32,7 +32,15 @@
                     <th>{% trans "Name" %}</th>
                     <th>{% trans "First Choice" %}</th>
                     <th>{% trans "Second Choice" %}</th>
-                    <th>{% trans "Status" %}</th>
+                    {% for value, text in form.0.status.field.widget.choices %}
+                    {% if value == 3 %}
+                    <th><i class="fas fa-clock"></i></th>
+                    {% elif value == 4 %}
+                    <th><i class="fas fa-check"></i></th>
+                    {% elif value == 5 %}
+                    <th><i class="fas fa-times"></i></th>
+                    {% endif %}
+                    {% endfor %}
                 </tr>
             </thead>
             {% for application in form %}
@@ -43,7 +51,7 @@
                 <td>{{ application.instance.user|full_name }}</td>
                 <td>{{ application.instance.first_priority.title }}</td>
                 <td>{{ application.instance.second_priority.title }}</td>
-                <td>{{ application.status }}</td>
+                {{ application.status }}
             </tr>
             {% endfor %}
         </table>
