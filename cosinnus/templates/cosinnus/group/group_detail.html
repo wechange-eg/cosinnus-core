@@ -49,7 +49,42 @@
         {% comment %}  leave this here, the jump is what we want always  {% endcomment %} 
         <a class="anchor" id="invite"></a>
         
-        {% if not object.slug == SETTINGS.NEWW_FORUM_GROUP_SLUG and not object.slug in SETTINGS.NEWW_DEFAULT_USER_GROUPS %}
+        
+        {% if group.group_is_conference and group.use_conference_applications %}
+            <div class="panel panel-default large-space">
+                <div class="panel-heading">
+                    <h4 class="panel-title" data-toggle="collapse" data-target="#collapseFive">
+                        <i class="fa fa-chevron-down panel-collapsed"></i>
+                        <i class="fa fa-chevron-up panel-open"></i>
+                        {% trans "Membership requests" %} {% if pendings|length > 0 %}({{ pendings|length }}){% endif %}
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse in">
+                    <div class="panel-body">
+                        <div class="textfield transparent">
+                            <p>
+                                {% trans "Since the conference participation management is active, please manage members via the applications page. You can disable the participation management in the conference settings." %}
+                            </p>
+                        </div>
+    
+		                <button type="button" href="{% group_url "cosinnus:conference:participation-management-applications" group=group %}" 
+		                         class="btn btn-emphasized btn-autosize no-margin pull-left" title="{% trans "Manage applications" %}">
+					        <ul class="media-list">
+					            <li class="media">
+					                <a class="pull-left" href="#">
+					                    <i class="fas fa-user-friends"></i>
+					                </a>
+					                <div class="media-body">
+					                    {% trans "Manage applications" %}
+					                </div>
+					            </li>
+					        </ul>
+					    </button>
+					    <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        {% elif not object.slug == SETTINGS.NEWW_FORUM_GROUP_SLUG and not object.slug in SETTINGS.NEWW_DEFAULT_USER_GROUPS %}
 	        {% if user|has_write_access:object or user in invited %}
 		        <div class="panel panel-default large-space">
 		            <div class="panel-heading">

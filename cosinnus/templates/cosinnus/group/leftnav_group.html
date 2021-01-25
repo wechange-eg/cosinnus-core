@@ -18,6 +18,8 @@
     {% captureas is_conferenceroommanagement %}True{% endcaptureas %}
 {% elif current_page == "conference_participation_manangement" %}
     {% captureas is_conference_participation_manangement %}True{% endcaptureas %}
+{% elif current_page == "conference_applications" %}
+    {% captureas is_conference_applications %}True{% endcaptureas %}
 {% elif current_page == "conferenceeventmanagement" %}
     {% captureas is_conferenceeventmanagement %}True{% endcaptureas %}
 {% endif %}
@@ -28,19 +30,27 @@
 {% endif %}
 
 {% if group.group_is_conference and user|has_write_access:object %}
-	{% captureas href %}{% group_url 'cosinnus:conference:management' group=group %}{% endcaptureas %}
-	{% captureas label %}{% trans "Conference Management" %}{% endcaptureas %}
-	{% include "cosinnus/leftnav_button.html" with active=is_conferencemanagement extra_classes="fine-space" icon_full_class="fas fa-chalkboard-teacher" label=label href=href  %}
-
-    {% if group.use_conference_applications %}
-    {% captureas href %}{% group_url 'cosinnus:conference:participation-management' group=group %}{% endcaptureas %}
-	{% captureas label %}{% trans "Conference Participation Management" %}{% endcaptureas %}
-	{% include "cosinnus/leftnav_button.html" with active=is_conference_participation_manangement extra_classes="fine-space" icon_full_class="fas fa-user-friends" label=label href=href  %}
+    {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+		{% captureas href %}{% group_url 'cosinnus:conference:management' group=group %}{% endcaptureas %}
+		{% captureas label %}{% trans "Conference Management" %}{% endcaptureas %}
+		{% include "cosinnus/leftnav_button.html" with active=is_conferencemanagement extra_classes="fine-space" icon_full_class="fas fa-chalkboard-teacher" label=label href=href  %}
     {% endif %}
-
-	{% captureas href %}{% group_url 'cosinnus:conference:room-management' group=group %}{% endcaptureas %}
-    {% captureas label %}{% trans "Conference Room Management" %}{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with active=is_conferenceroommanagement extra_classes="fine-space" icon_full_class="fas fa-door-open" label=label href=href  %}
+    
+    {% if group.use_conference_applications %}
+	    {% captureas href %}{% group_url 'cosinnus:conference:participation-management' group=group %}{% endcaptureas %}
+        {% captureas label %}{% trans "Conference Participation Management" %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with active=is_conference_participation_manangement extra_classes="fine-space" icon_full_class="fas fa-user-friends" label=label href=href  %}
+        
+        {% captureas href %}{% group_url 'cosinnus:conference:participation-management-applications' group=group %}{% endcaptureas %}
+        {% captureas label %}{% trans "Conference Applications" %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with active=is_conference_applications extra_classes="fine-space" icon_full_class="fas fa-user-friends" label=label href=href  %}
+    {% endif %}
+    
+    {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+		{% captureas href %}{% group_url 'cosinnus:conference:room-management' group=group %}{% endcaptureas %}
+	    {% captureas label %}{% trans "Conference Room Management" %}{% endcaptureas %}
+	    {% include "cosinnus/leftnav_button.html" with active=is_conferenceroommanagement extra_classes="fine-space" icon_full_class="fas fa-door-open" label=label href=href  %}
+    {% endif %}
 
     {% captureas href %}{% group_url 'cosinnus:event:conference-event-list' group=group %}{% endcaptureas %}
     {% captureas label %}{% trans "Conference Event Management" %}{% endcaptureas %}

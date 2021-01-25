@@ -121,8 +121,7 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 'sdgs',
                         'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
                          'twitter_widget_id', 'flickr_url', 'deactivated_apps', 'microsite_public_apps',
-                         'call_to_action_active', 'call_to_action_title', 'call_to_action_description',
-                         'conference_theme_color'] \
+                         'call_to_action_active', 'call_to_action_title', 'call_to_action_description',] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else []) \
                         + (['embedded_dashboard_html',] if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED else []) \
@@ -150,10 +149,6 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
                 
-        # for conference groups, add additional form fields
-        if instance is None or not instance.pk or not instance.group_is_conference:
-            del self.fields['conference_theme_color']
-    
     def clean(self):
         if not self.cleaned_data.get('name', None):
             name = self.get_cleaned_name_from_other_languages()
@@ -268,7 +263,10 @@ class _CosinnusConferenceForm(CleanAppSettingsMixin, AsssignPortalMixin, Cosinnu
     extra_forms_setting = 'COSINNUS_CONFERENCE_ADDITIONAL_FORMS'
 
     class Meta(object):
-        fields = CosinnusBaseGroupForm.Meta.fields + ['use_conference_applications']
+        fields = CosinnusBaseGroupForm.Meta.fields + [
+                    'use_conference_applications', 
+                    'conference_theme_color'
+                ]
         model = CosinnusConference
         
 

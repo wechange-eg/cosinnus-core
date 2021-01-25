@@ -98,6 +98,7 @@ from cosinnus.views.widget import GroupDashboard
 from cosinnus_organization.forms import MultiOrganizationSelectForm
 from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationGroup
 from cosinnus_organization.utils import get_organization_select2_pills
+from cosinnus.models.conference import CosinnusConferenceRoom
 
 logger = logging.getLogger('cosinnus')
 
@@ -163,9 +164,14 @@ class CosinnusGroupFormMixin(object):
             messages.warning(self.request, _('Sorry, only portal administrators can create projects and groups!'))
             return redirect(reverse('cosinnus:portal-admin-list'))
         
-        # special check: only portal admins can create groups
-        if (not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False) and self.form_view == 'add' and model_class == CosinnusSociety) or \
-                (not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_CONFERENCES', False) and self.form_view == 'add' and model_class == CosinnusConference):
+        _user_managed_tag_slugs = [tag.slug for tag in self.request.user.cosinnus_profile.get_managed_tags()]
+        society_allowed = self.form_view == 'add' and model_class == CosinnusSociety and \
+                        getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False)
+        conference_allowed = self.form_view == 'add' and model_class == CosinnusConference and \
+                            (getattr(settings, 'COSINNUS_USERS_CAN_CREATE_CONFERENCES', False) or \
+                            any(tag_slug in settings.COSINNUS_USERS_WITH_MANAGED_TAG_SLUGS_CAN_CREATE_CONFERENCES for tag_slug in _user_managed_tag_slugs))
+        # special check: only portal admins can create groups/conferences
+        if not (society_allowed or conference_allowed):
             if not check_user_superuser(self.request.user):
                 
                 if getattr(settings, 'COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED', False):
@@ -327,6 +333,17 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
                 cosinnus_notifications.project_created_from_idea.send(sender=self, obj=self.object, user=self.request.user, audience=idea_followers)
             else:
                 logger.error('Could not attach an idea to a project on project creatiion because the idea was not found!', extra={'idea_shortid': shortid})
+        
+        # for conferences, always create a default "Workshops" room
+        if self.object.group_is_conference:
+            CosinnusConferenceRoom.objects.create(
+                group=self.object,
+                type=CosinnusConferenceRoom.TYPE_WORKSHOPS,
+                title="Workshops",
+                show_chat=not settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE,
+                sort_index=2,
+                creator=self.request.user
+            )
         
         messages.success(self.request, self.message_success % {'group':self.object.name, 'team_type':self.object._meta.verbose_name})
         return ret
@@ -1524,6 +1541,10 @@ class GroupStartpage(View):
     
     @dispatch_group_access()
     def dispatch(self, request, *args, **kwargs):
+        # lock conference groups to microsite if setting enabled
+        if self.group.group_is_conference and settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
+            return self.microsite_view(request, *args, **kwargs)
+        
         redirect_result = self.check_redirect_to_microsite(request)
         if isinstance(redirect_result, six.string_types):
             return redirect(redirect_result)

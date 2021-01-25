@@ -193,12 +193,21 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
                         target_group_cls = group_model_registry.get(group_type) 
                         portal = CosinnusPortal().get_current()
                         target_group = get_object_or_None(target_group_cls, portal=portal, slug=group_slug)
-                        if target_group:
-                            # *** Conferences: force most URLs to conference page ***
-                            # if the group is a conference group, and the user is only a member, not an admin:
-                            if target_group is not None and target_group.group_is_conference and check_ug_membership(request.user, target_group):
+                        
+                        # *** Conferences: redirect most URLs to conference page ***
+                        # if the group is a conference group, and the user is only a member, not an admin:
+                        if target_group and target_group.group_is_conference:
+                            is_admin = check_ug_admin(request.user, target_group) or check_user_superuser(request.user, portal)
+                            
+                            if settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
+                                # in a special setting, normal users are locked to the microsite, 
+                                # except for the conference application view and any event views
+                                if len(request_tokens) > 4 and not (is_admin or \
+                                                                    (len(request_tokens) >= 6 and request_tokens[5] in ['apply',]) or \
+                                                                    (len(request_tokens) >= 5 and request_tokens[4] in ['event',])):
+                                    return HttpResponseRedirect(target_group.get_absolute_url())
+                            elif check_ug_membership(request.user, target_group):
                                 # normal users only have access to the conference page of a conference group (and the management views)
-                                is_admin = check_ug_admin(request.user, target_group) or check_user_superuser(request.user, portal)
                                 if len(request_tokens) <= 4 or (request_tokens[4] not in ['conference', 'members', 'leave'] and not is_admin):
                                     # bounce user to the conference start page (admins get bounced on index page)
                                     return HttpResponseRedirect(group_aware_reverse('cosinnus:conference:index', kwargs={'group': target_group}))

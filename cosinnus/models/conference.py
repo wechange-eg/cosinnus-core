@@ -185,7 +185,8 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
         return group_aware_reverse('cosinnus:event:conference-event-add', kwargs={'group': self.group, 'room_slug': self.slug})
     
     def get_rocketchat_room_url(self):
-        if not settings.COSINNUS_ROCKET_ENABLED or not self.type in self.ROCKETCHAT_ROOM_TYPES:
+        if not settings.COSINNUS_ROCKET_ENABLED or not self.type in self.ROCKETCHAT_ROOM_TYPES \
+                or settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
             return ''
         if not self.rocket_chat_room_id or not self.rocket_chat_room_name:
             self.ensure_room_type_dependencies()
@@ -196,12 +197,14 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
     
     def ensure_room_type_dependencies(self):
         """ Depending on a room type, initialize different extras like rocketchat rooms """
-        if settings.COSINNUS_ROCKET_ENABLED and self.type in self.ROCKETCHAT_ROOM_TYPES:
+        if settings.COSINNUS_ROCKET_ENABLED and self.type in self.ROCKETCHAT_ROOM_TYPES \
+                and not settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
             self.sync_rocketchat_room()
     
     def sync_rocketchat_room(self, force=False):
         """ Can be safely called with force=False without re-creating rooms """
-        if settings.COSINNUS_ROCKET_ENABLED and self.type in self.ROCKETCHAT_ROOM_TYPES:
+        if settings.COSINNUS_ROCKET_ENABLED and self.type in self.ROCKETCHAT_ROOM_TYPES \
+                and not settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
             if not self.rocket_chat_room_id or force:
                 from cosinnus_message.rocket_chat import RocketChatConnection
                 rocket = RocketChatConnection()

@@ -61,6 +61,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
 from django.core.serializers.json import DjangoJSONEncoder
 from cosinnus.trans.group import get_group_trans_by_type
+from annoying.functions import get_object_or_None
 
 logger = logging.getLogger('cosinnus')
 
@@ -965,7 +966,33 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         )
         group.update_index()
         return group
-        
+    
+    def add_member_to_group(self, user, membership_status):
+        """ "Makes the user a group member". 
+            Safely adds a membership for the given user with the given status for this group.
+            If the membership existed, does nothing. If it existed with a different status, will
+            change the status. If none existed, creates it. 
+            This will also convert membership requests/invitations to actual memberships! """
+        membership = get_object_or_None(CosinnusGroupMembership, group=self, user=user)
+        if membership and membership.status != membership_status:
+            membership.status = membership_status
+            membership.save()
+        elif not membership:
+            CosinnusGroupMembership.objects.create(
+                group=self, 
+                user=user,
+                status=membership_status
+            )
+                
+    def remove_member_from_group(self, user):
+        """ "Kicks a user from the group." 
+            Safely removes a membership for the given user from the group.
+            If the user wasn't a member of the group,  does nothing. 
+            This will also remove membership requests/invitations! """
+        membership = get_object_or_None(CosinnusGroupMembership, group=self, user=user)
+        if membership:
+            membership.delete()
+    
     @property
     def group_is_conference(self):
         """ Check if this is a proper conference (a type society with conference flag) """
@@ -973,7 +1000,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
 
     @property
     def conference_members(self):
-        """ Returns a User QS of conference members of this group if it is a conference, an empty QS else """
+        """ Returns a User QS of *AUTO-INVITED* (!) conference member accounts of this group if it is a conference, an empty QS else """
         from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
         if self.group_is_conference:
             return self.users.filter(cosinnus_profile__settings__contains=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
@@ -1255,6 +1282,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
 
     @property
     def from_date(self):
+        # TODO: Sascha change once group.from_date exists!
         from cosinnus_event.models import ConferenceEvent
         queryset = ConferenceEvent.objects.filter(room__group=self)
         if queryset.count() > 0:
@@ -1263,6 +1291,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
 
     @property
     def to_date(self):
+        # TODO: Sascha change once group.from_date exists!
         from cosinnus_event.models import ConferenceEvent
         queryset = ConferenceEvent.objects.filter(room__group=self)
         if queryset.count() > 0:

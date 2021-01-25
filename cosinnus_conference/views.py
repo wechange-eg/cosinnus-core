@@ -22,7 +22,8 @@ from django.views.generic.edit import FormView, CreateView, UpdateView,\
 import six
 
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
-from cosinnus.models.conference import CosinnusConferenceRoom
+from cosinnus.models.conference import CosinnusConferenceRoom,\
+    CosinnusConferenceApplication, APPLICATION_ACCEPTED, APPLICATION_WAITLIST
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_ADMIN
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
@@ -32,7 +33,8 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.user import create_base_user
 from cosinnus.views.group import SamePortalGroupMixin
 from cosinnus.views.mixins.group import GroupIsConferenceMixin, FilterGroupMixin,\
-    RequireAdminMixin
+    RequireAdminMixin, RequireLoggedInMixin, GroupFormKwargsMixin,\
+    DipatchGroupURLMixin
 from cosinnus.views.mixins.group import RequireReadMixin, RequireWriteMixin
 from cosinnus.views.profile import delete_userprofile
 from cosinnus.utils.urls import group_aware_reverse, redirect_with_next
@@ -51,6 +53,7 @@ from cosinnus_conference.forms import (ConferenceRemindersForm,
                                        AsignUserToEventForm)
 from cosinnus_conference.utils import send_conference_reminder
 from cosinnus_event.models import Event
+from cosinnus.templatetags.cosinnus_tags import full_name
 
 logger = logging.getLogger('cosinnus')
 
@@ -546,7 +549,8 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
 
 
 class ConferenceApplicationView(SamePortalGroupMixin,
-                                RequireReadMixin,
+                                RequireLoggedInMixin,
+                                DipatchGroupURLMixin,
                                 GroupIsConferenceMixin,
                                 FormView):
     form_class = ConferenceApplicationForm
@@ -627,8 +631,7 @@ class ConferenceApplicationView(SamePortalGroupMixin,
 
 
     def get_success_url(self):
-        return group_aware_reverse('cosinnus:group-microsite',
-                                   kwargs={'group': self.group})
+        return self.group.get_absolute_url()
 
     def _get_initial_priorities(self):
         if not self.application:
@@ -679,7 +682,11 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
                                                         GroupIsConferenceMixin,
                                                         FormView):
     form_class = ApplicationFormSet
-    template_name = 'cosinnus/conference/conference_participation_management_applications.html'
+    template_name = 'cosinnus/conference/conference_applications.html'
+    # for printing out what happened to what users
+    _users_accepted = None # array
+    _users_declined = None # array
+    _users_waitlisted = None # array
 
     @property
     def participation_management(self):
@@ -699,6 +706,7 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
         return form_kwargs
 
     def _set_workshop_assignments(self):
+        """ Handle tagging the conference events with the participants selected """
         users = self._get_applicants_for_workshop()
         formset = AsignUserToEventForm(self.request.POST, prefix='assignment')
         for form in formset:
@@ -712,11 +720,40 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
                 users = get_user_model().objects.filter(id__in=data.get('users'))
                 for user in users:
                     event.media_tag.persons.add(user)
-
+    
+    def _handle_application_changed_for_status(self, application):
+        """ Performs all triggers for a given changed application (accepted, declined, etc), 
+            like sending mail, creating a group membership for the conference, etc. """
+        if application.status == APPLICATION_ACCEPTED:
+            self.group.add_member_to_group(application.user, MEMBERSHIP_MEMBER)
+            self._users_accepted.append(application.user)
+        else:
+            self.group.remove_member_from_group(application.user)
+            if application.status == APPLICATION_WAITLIST:
+                self._users_waitlisted.append(application.user)
+            else:
+                self._users_declined.append(application.user)
+        # TODO: send email notification depending on application status
+    
     def form_valid(self, form):
-        for application in form:
-            application.save()
+        self._users_accepted = []
+        self._users_declined = []
+        self._users_waitlisted = []
+        
+        for application_form in form:
+            application_before = CosinnusConferenceApplication.objects.get(id=application_form.instance.id)
+            application_form.save()
+            if application_before.status != application_form.instance.status:
+                self._handle_application_changed_for_status(application_form.instance)
         self._set_workshop_assignments()
+        
+        if len(self._users_accepted) > 0:
+            messages.success(self.request, _('The following users were accepted and added as members: %s') % ', '.join(full_name(user) for user in self._users_accepted))
+        if len(self._users_waitlisted) > 0:
+            messages.success(self.request, _('The following users were put on the wait list: %s') % ', '.join(full_name(user) for user in self._users_waitlisted))
+        if len(self._users_declined) > 0:
+            messages.success(self.request, _('The following users were declined: %s') % ', '.join(full_name(user) for user in self._users_declined))
+            
         return HttpResponseRedirect(self.get_success_url())
 
     def _get_applicants_for_workshop(self):
@@ -760,7 +797,7 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
                                    kwargs={'group': self.group})
 
 
-conference_participation_management_applications = ConferenceParticipationManagementApplicationsView.as_view()
+conference_applications = ConferenceParticipationManagementApplicationsView.as_view()
 conference_application = ConferenceApplicationView.as_view()
 conference_participation_management = ConferenceParticipationManagementView.as_view()
 conference_management = ConferenceManagementView.as_view()

@@ -623,10 +623,18 @@ class CosinnusConf(AppConf):
     # if False, users can only create Projects 
     USERS_CAN_CREATE_CONFERENCES = False
     
+    # any users with any of these managed_tag_slugs
+    # supersedes `USERS_CAN_CREATE_CONFERENCES`
+    USERS_WITH_MANAGED_TAG_SLUGS_CAN_CREATE_CONFERENCES = []
+    
     # should the "Create Conference" Main menu entry under the "+" menu be shown?
     # (this is safe with use of `USERS_CAN_CREATE_CONFERENCES`, 
     #  as non-permitted users will be redirected to an explanation page)  
     SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON = False
+    
+    # For conferences, disables the react conference interface, locks non-admin members 
+    # to the microsite, removes most group-like elements like apps andremoves room management
+    CONFERENCES_USE_COMPACT_MODE = False
     
     # if set to True, regular non-portal admin users can not create projects and groups by themselves
     # and some elements like the "+" button in the navbar is hidden
