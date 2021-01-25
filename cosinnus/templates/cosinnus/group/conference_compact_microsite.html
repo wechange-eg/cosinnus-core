@@ -1,0 +1,46 @@
+{% extends "cosinnus/group/group_microsite.html" %}
+{% load i18n cosinnus_tags static %}
+
+{% block microsite_content %}
+    
+    <div class="row">
+        <div class="col-xs-12">
+            
+            {# About Project box #}
+            <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left btn-extra-emphasized" href="#"></a>
+                        <div class="media-body">
+                            {% trans "About the conference" %}
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- btn -->
+            
+            <div class="white-content">
+                <div class="textfield">
+                    <h2>WIP: This is the extending conference_compact_microsite.html microsite template!</h2>
+                
+                    <p>
+                        TODO: conference group description etc
+                    </p>
+                    
+                    {% for room in group.rooms.all %}
+                        {% for event in room.events.all %}
+                            {% trans "Event" %}: 
+                            <b>{{ event.title }}</b>
+                            {% if event.from_date %}
+	                            <i>
+                                    {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
+                                </i>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+{% endblock microsite_content %}
