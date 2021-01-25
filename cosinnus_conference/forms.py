@@ -170,13 +170,18 @@ class BaseConferenceApplicationEventPrioFormSet(BaseFormSet):
                 else:
                     second_priority_count = 1
 
+class RadioSelectInRowWidget(forms.RadioSelect):
+    input_type = 'radio'
+    template_name = 'cosinnus/conference/radio_buttons_row.html'
+    option_template_name = 'cosinnus/conference/radio_option.html'
+
 class ConferenceApplicationEventPrioForm(forms.Form):
     event_id = forms.CharField(widget=forms.HiddenInput())
     event_name = forms.CharField(required=False)
     priority = forms.ChoiceField(
         initial=0,
         choices=[(0, _('No Interest')), (1, _('First Choice')), (2, ('Second Choice'))],
-        widget=forms.RadioSelect)
+        widget=RadioSelectInRowWidget)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -185,12 +190,6 @@ class ConferenceApplicationEventPrioForm(forms.Form):
 
 PriorityFormSet = formset_factory(ConferenceApplicationEventPrioForm,
                                   formset=BaseConferenceApplicationEventPrioFormSet, extra=0)
-
-
-class RadioSelectInRowWidget(forms.RadioSelect):
-    input_type = 'radio'
-    template_name = 'cosinnus/conference/radio_buttons_row.html'
-    option_template_name = 'cosinnus/conference/radio_option.html'
 
 
 class ApplicationForm(forms.ModelForm):
