@@ -24,34 +24,49 @@
     {{ assignment_formset.management_form }}
     <div class="content-box">
         {% if max_number %}
-        <div>{% trans 'The maximum number of participants is ' %} {{ max_number }} ({% blocktrans count counter=places_left %} 1 place left {% plural %} {{ counter }} places left {% endblocktrans %}) </div>
+        <div class="large-space">{% trans 'The maximum number of participants is ' %} {{ max_number }} ({% blocktrans count counter=places_left %} 1 place left {% plural %} {{ counter }} places left {% endblocktrans %}) </div>
         {% endif %}
-        <table class="table white-content priority-form">
+        <table class="table priority-form">
             <thead>
                 <tr>
                     <th>{% trans "Name" %}</th>
                     <th>{% trans "First Choice" %}</th>
                     <th>{% trans "Second Choice" %}</th>
-                    <th>{% trans "Status" %}</th>
+                    {% for value, text in form.0.status.field.widget.choices %}
+                    {% if value == 3 %}
+                    <th><i class="fas fa-clock"></i></th>
+                    {% elif value == 4 %}
+                    <th><i class="fas fa-check"></i></th>
+                    {% elif value == 5 %}
+                    <th><i class="fas fa-times"></i></th>
+                    {% endif %}
+                    {% endfor %}
                 </tr>
             </thead>
             {% for application in form %}
-            <tr>
+            <tr class="white-content">
                 {{ application.conference }}
                 {{ application.user }}
                 {{ application.id }}
                 <td>{{ application.instance.user|full_name }}</td>
                 <td>{{ application.instance.first_priority.title }}</td>
                 <td>{{ application.instance.second_priority.title }}</td>
-                <td>{{ application.status }}</td>
+                {{ application.status }}
             </tr>
             {% endfor %}
         </table>
 
 
     {% for form in assignment_formset %}
-    {{ form.event_id }}
-    {% include 'cosinnus/fields/default_field.html' with field=form.users label=form.event_name.value large_field=True %}
+        {{ form.event_id }}
+        {% if forloop.first %}
+        <div class="row">
+        {% endif %}
+            <div class="col-md-6">
+                {% include 'cosinnus/fields/default_field.html' with field=form.users label=form.event_name.value large_field=True %}
+            </div>
+        {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
+        {% if forloop.last %}</div>{% endif %}
     {% endfor %}
     </div>
     <button type="submit" class="btn btn-emphasized">

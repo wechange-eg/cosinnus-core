@@ -28,7 +28,9 @@
             <thead>
                 <tr>
                     <th>{% trans "Programm" %}</th>
-                    <th>{% trans "Priority" %}</th>
+                    {% for value, text in priority_formset.0.priority.field.widget.choices %}
+                    <th>{{ text }}</th>
+                    {% endfor %}
                 </tr>
             </thead>
 
@@ -36,7 +38,7 @@
         {{ form.event_id }}
         <tr>
             <td>{{ form.event_name.value }}</td>
-            <td>{{ form.priority }}</td>
+            {{ form.priority }}
         </tr>
 
         {% endfor %}
