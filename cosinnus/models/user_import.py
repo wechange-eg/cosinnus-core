@@ -266,6 +266,7 @@ class CosinnusUserImportProcessorBase(object):
                         imported_items += 1
                     else:
                         failed_items += 1
+                    print(f'>>> Import item, imported: {imported_items}. Failed: {failed_items}')
                     
                     # instantly fail a real import when a single user could not be imported. this should have been
                     # caught by the dry-run validation (which wouldve disabled the real import), or hints at a serious

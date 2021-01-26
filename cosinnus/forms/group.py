@@ -40,6 +40,7 @@ from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.group import SDG_CHOICES
 from cosinnus.forms.managed_tags import ManagedTagFormMixin
 from cosinnus.utils.validators import validate_file_infection
+from cosinnus.forms.widgets import SplitHiddenDateWidget
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -260,12 +261,17 @@ class _CosinnusSocietyForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
 class _CosinnusConferenceForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
     """ Specific form implementation for CosinnusConference objects (used through `registration.group_models`)  """
     
+    from_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='00:00'))
+    to_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='23:59'))
+    
     extra_forms_setting = 'COSINNUS_CONFERENCE_ADDITIONAL_FORMS'
-
+    
     class Meta(object):
         fields = CosinnusBaseGroupForm.Meta.fields + [
                     'use_conference_applications', 
-                    'conference_theme_color'
+                    'conference_theme_color',
+                    'from_date',
+                    'to_date',
                 ]
         model = CosinnusConference
         

@@ -3,7 +3,7 @@
 
 {% block microsite_content %}
     
-    <div class="row">
+    <div class="row microsite-conference-content">
         <div class="col-xs-12">
             
             {# About Project box #}
@@ -21,22 +21,46 @@
             <div class="white-content">
                 <div class="textfield">
                     <h2>WIP: This is the extending conference_compact_microsite.html microsite template!</h2>
-                
+                    
+                    {% if group.from_date %}
+	                    <h3>
+	                        {% include 'cosinnus_event/common/humanized_event_time.html' with event=group from_date_only=True %}
+	                    </h3>
+                        <div class="textfield transparent">
+                           <p>
+                               {{ group.from_date|date:"SHORT_DATE_FORMAT" }}, {{ group.from_date|date:"H:i" }} 
+                               {% trans "o'clock" context "time" %}
+                               {% if group.to_date %}
+                                   - {{ group.to_date|date:"SHORT_DATE_FORMAT" }}, {{ group.to_date|date:"H:i" }}
+                                   {% trans "o'clock" context "time" %}
+                               {% endif %}
+                           </p>
+                        </div>
+                    {% endif %}
+                    
                     <p>
                         TODO: conference group description etc
                     </p>
                     
-                    {% for room in group.rooms.all %}
-                        {% for event in room.events.all %}
-                            {% trans "Event" %}: 
-                            <b>{{ event.title }}</b>
-                            {% if event.from_date %}
-	                            <i>
-                                    {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
-                                </i>
-                            {% endif %}
-                        {% endfor %}
-                    {% endfor %}                    
+                    {% trans "Workshops" %}
+                    <ul class="microsite-conference-workshop-list">
+	                    {% for room in group.rooms.all %}
+	                        {% for event in room.events.all %}
+	                            {% if not event.is_break %}
+		                            <li>
+		                                <a href="{{ event.get_absolute_url }}">
+				                            {{ event.title }}
+			                            </a>
+			                            {% if event.from_date %}
+				                            <i>
+			                                    {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
+			                                </i>
+			                            {% endif %}
+		                            </li>
+		                        {% endif %}
+	                        {% endfor %}
+	                    {% endfor %}                    
+                    </ul>
                 </div>
             </div>
         </div>
