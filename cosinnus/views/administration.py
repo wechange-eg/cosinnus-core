@@ -240,7 +240,9 @@ class UserListView(ManagedTagsNewsletterMixin, ListView):
             search_string = '?search={}'.format(request.POST.get('search'))
         if 'send_login_token' in self.request.POST:
             if self.request.POST.get('send_login_token') == '__all__':
-                non_tokened_users = get_user_model().objects.filter(password__isnull=True, last_login__isnull=True)
+                non_tokened_users = get_user_model().objects.\
+                                        filter(last_login__isnull=True).\
+                                        filter(Q(password__isnull=True) | Q(password__exact=''))
                 count = 0
                 for user in non_tokened_users:
                     if not PROFILE_SETTING_LOGIN_TOKEN_SENT in user.cosinnus_profile.settings:
