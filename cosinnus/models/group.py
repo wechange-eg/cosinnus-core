@@ -1246,6 +1246,12 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self})
 
+    def get_edit_url(self):
+        return group_aware_reverse('cosinnus:group-edit', kwargs={'group': self})
+
+    def get_delete_url(self):
+        return group_aware_reverse('cosinnus:group-delete', kwargs={'group': self})
+
     def get_member_page_url(self):
         return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self})
 
