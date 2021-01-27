@@ -165,15 +165,18 @@ class CosinnusGroupFormMixin(object):
             return redirect(reverse('cosinnus:portal-admin-list'))
         
         society_forbidden = self.form_view == 'add' and model_class == CosinnusSociety and \
-                        getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False)
+                        not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False)
         conference_forbidden = self.form_view == 'add' and model_class == CosinnusConference and \
-                            getattr(settings, 'COSINNUS_USERS_CAN_CREATE_CONFERENCES', False)
+                            not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_CONFERENCES', False)
+        # check if user is of a managed tag that would allow him to create a conference
+        if conference_forbidden:
+            _user_managed_tag_slugs = [tag.slug for tag in self.request.user.cosinnus_profile.get_managed_tags()]
+            conference_forbidden = conference_forbidden and not \
+                    any(tag_slug in settings.COSINNUS_USERS_WITH_MANAGED_TAG_SLUGS_CAN_CREATE_CONFERENCES for tag_slug in _user_managed_tag_slugs)
+            
         # special check: only portal admins can create groups/conferences
         if society_forbidden or conference_forbidden:
-            _user_managed_tag_slugs = [tag.slug for tag in self.request.user.cosinnus_profile.get_managed_tags()]
-            managed_tags_allows_creation = model_class == CosinnusConference and \
-                    any(tag_slug in settings.COSINNUS_USERS_WITH_MANAGED_TAG_SLUGS_CAN_CREATE_CONFERENCES for tag_slug in _user_managed_tag_slugs)
-            if not check_user_superuser(self.request.user) and not managed_tags_allows_creation:
+            if not check_user_superuser(self.request.user):
                 if getattr(settings, 'COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED', False):
                     redirect_url = reverse('cosinnus:premium-info-page')
                 else:

@@ -6,11 +6,11 @@
     {% if not object and request.GET.description %}
 	    {% captureas description_value %}{{ request.GET.description }}{% endcaptureas %}
 	{% endif %}
-    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
+    {% if not group_model == "CosinnusConference" or not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
+    {% endif %}
     {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
-        {% if not group_model == "CosinnusConference" or not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
-	       {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 %}
-	    {% endif %}
+       {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 %}
     {% endif %}
 {% endblock %}
 
@@ -171,47 +171,78 @@
 	                        {% endif %}
                             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=name_placeholder field_value=name_val %}
 						{% endblock group_form_name_field %}
-				
-                        {# SimpleMDE Description Field (gets initialized in extrahead) #}
-                        
-                        {% trans "Short description" as desc_label %}
-                        {% captureas group_legend %}
-		                    {% if group_model == "CosinnusSociety" %}
-		                        {% trans "Describe the group in a few sentences." %} 
-	                        {% else %}
-	                            {% trans "Describe the project in a few sentences." %}
-	                        {% endif %}
-	                        {% trans "This description will be publicly visible." %}
-	                        {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="group" %}
-	                    {% endcaptureas %}
-                        {% include 'cosinnus/fields/default_field.html' with label=desc_label legend=group_legend field_id=form.forms.obj.description.id_for_label %}
-
-						
-		                {% block group_form_description_field %}
-					        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label %}
-						{% endblock group_form_description_field %}
-                        
+				        
                         {% comment %} Date picker for from_date - to_date {% endcomment %}
                         {% if form.forms.obj.fields.from_date and form.forms.obj.fields.to_date %}
                              {% captureas date_label %}{% trans "Conference start and end date and time" %}{% endcaptureas %}
                              {% captureas date_legend %}{% trans "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days." %}{% endcaptureas %}
-					         {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.forms.obj.from_date to_date_field=form.forms.obj.to_date date_label=date_label %}
-				        {% endif %}
-				        
-						{% if form.forms.obj.use_conference_applications %}
-							{% captureas use_conference_applications_label %}{% trans 'Application method' %}{% endcaptureas %}
+                             {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.forms.obj.from_date to_date_field=form.forms.obj.to_date date_label=date_label %}
+                        {% endif %}
+                        
+                        {% if form.forms.obj.use_conference_applications %}
+                            {% captureas use_conference_applications_label %}{% trans 'Application method' %}{% endcaptureas %}
                             {% captureas use_conference_applications_checkbox_label %}{% trans 'Require participation applications for this conference' %}{% endcaptureas %}
-							{% captureas use_conference_applications_legend %}{% trans "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area." %}{% endcaptureas %}
-							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_conference_applications label=use_conference_applications_label checkbox_label=use_conference_applications_checkbox_label legend=use_conference_applications_legend %}
-						{% endif %}
+                            {% captureas use_conference_applications_legend %}{% trans "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area." %}{% endcaptureas %}
+                            {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_conference_applications label=use_conference_applications_label checkbox_label=use_conference_applications_checkbox_label legend=use_conference_applications_legend %}
+                        {% endif %}
+				        
+				        {% if group_model == "CosinnusConference"%}
+                            {% if form.forms.obj.related_groups %}
+                                {# Related Groups Field #}
+                                {% trans "In which projects' or groups' calendars should this be shown?" as related_label %}
+                                {% trans "Select related Projects/Groups" as related_placeholder %}
+                                {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder large_field=True %}
+                            {% endif %}
+                        {% endif %}
+				        
+				        {% comment %} Show long description and contact infos here for compact conferences {% endcomment %}
+				        {% if group_model == "CosinnusConference" and SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+                            {# SimpleMDE Description Long Field (gets initialized in extrahead) #}                                   
+                            {% trans "Description and Infos" as description_long_label %}
+                            {% captureas description_long_legend %}
+                                {% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
+                                {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+                                {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
+                            {% endcaptureas %}
+                            {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True %}
+                            
+                            {# Contact Info Field #}
+                            {% trans "Contact info" as contact_info_label %}
+                            {% captureas contact_info_legend %}
+                                {% trans "How you can be reached, addresses, social media, etc..." %}
+                                {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+                                {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
+                            {% endcaptureas %}
+                            {% trans "Contact Information" as contact_info_placeholder %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.contact_info label=contact_info_label legend=contact_info_legend placeholder=contact_info_placeholder large_field=True %}
+                        {% else %}
+	                        {# SimpleMDE Description Field (gets initialized in extrahead) #}
+	                        {% trans "Short description" as desc_label %}
+	                        {% captureas group_legend %}
+			                    {% if group_model == "CosinnusSociety" %}
+			                        {% trans "Describe the group in a few sentences." %} 
+		                        {% else %}
+		                            {% trans "Describe the project in a few sentences." %}
+		                        {% endif %}
+		                        {% trans "This description will be publicly visible." %}
+		                        {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="group" %}
+		                    {% endcaptureas %}
+	                        {% include 'cosinnus/fields/default_field.html' with label=desc_label legend=group_legend field_id=form.forms.obj.description.id_for_label %}
+			                {% block group_form_description_field %}
+						        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label %}
+							{% endblock group_form_description_field %}
+                        {% endif %}
 						
-                        {% if form.forms.obj.fields.conference_theme_color %}
-	                        {# Conference Theme Color Field #}
-	                        {% trans "Conference Theme Color" as conference_label %}
-	                        {% trans "Hex code (example: #A2A2A2)" as conference_placeholder %}
-	                        {% trans "A hex code color to use as main theme color for the conference layout (with or without leading '#')" as conference_legend %}
-	                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.conference_theme_color label=conference_label legend=conference_legend placeholder=conference_placeholder large_field=True %}
-	                    {% endif %}
+						{% if not group_model == "CosinnusConference" or not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+	                        {% if form.forms.obj.fields.conference_theme_color %}
+		                        {# Conference Theme Color Field #}
+		                        {% trans "Conference Theme Color" as conference_label %}
+		                        {% trans "Hex code (example: #A2A2A2)" as conference_placeholder %}
+		                        {% trans "A hex code color to use as main theme color for the conference layout (with or without leading '#')" as conference_legend %}
+		                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.conference_theme_color label=conference_label legend=conference_legend placeholder=conference_placeholder large_field=True %}
+		                    {% endif %}
+		                {% endif %}
                         
                         {# Avatar Field #}
                         {% trans "Avatar" as avatar_label %}
@@ -274,10 +305,10 @@
                         {% include "cosinnus/media_tags_group.html"%}
 
                         {% if SETTINGS.COSINNUS_ENABLE_SDGS %}
-                        {# Large Field #}
-                        {% trans "Which sustainable development goals (SDG) does your project contribute to?" as sdg_label %}
-                        {% trans "Select sustainable development goals" as sdg_placeholder %}
-                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.sdgs label=sdg_label placeholder=sdg_placeholder large_field=True %}
+	                        {# Large Field #}
+	                        {% trans "Which sustainable development goals (SDG) does your project contribute to?" as sdg_label %}
+	                        {% trans "Select sustainable development goals" as sdg_placeholder %}
+	                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.sdgs label=sdg_label placeholder=sdg_placeholder large_field=True %}
                         {% endif %}
 
                         {# Locations Inlineform #}
@@ -292,16 +323,14 @@
 						    {% trans "Select Group" as parent_placeholder %}
                             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.parent label=parent_label placeholder=parent_placeholder %}
                         {% endif %}
-
-                        {% if form.forms.obj.related_groups %}
-                            {# Related Groups Field #}
-                            {% if group_model == "CosinnusConference" %}
-                                {% trans "In which projects' or groups' calendars should this be shown?" as related_label %}
-                            {% else %}
+                        
+                        {% if not group_model == "CosinnusConference" %}
+	                        {% if form.forms.obj.related_groups %}
+	                            {# Related Groups Field #}
                                 {% trans "Are there any projects/groups related to this one?" as related_label %}
-                            {% endif %}
-                            {% trans "Select related Projects/Groups" as related_placeholder %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder large_field=True %}
+	                            {% trans "Select related Projects/Groups" as related_placeholder %}
+	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder large_field=True %}
+	                        {% endif %}
                         {% endif %}
                         
 		                {% block managed_tag_field %}
@@ -396,30 +425,31 @@
 							
 							{% block group_form_microsite_tab %}
 								
-	                            {# SimpleMDE Description Long Field (gets initialized in extrahead) #}                                   
-	                            {% trans "Description and Infos" as description_long_label %}
-	                            {% captureas description_long_legend %}
-	                                {% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
-	                                {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
-	                                {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
-	                            {% endcaptureas %}
-	                            {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
-	                            
-								{% block group_form_microsite_description_field %}
-		                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True %}
-			                    {% endblock group_form_microsite_description_field %}
-			                    
-			                    
-		                        {# Contact Info Field #}
-		                        {% trans "Contact info" as contact_info_label %}
-			                    {% captureas contact_info_legend %}
-			                    	{% trans "How you can be reached, addresses, social media, etc..." %}
-			                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
-			                    	{% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
-			                    {% endcaptureas %}
-	                        	{% trans "Contact Information" as contact_info_placeholder %}
-		                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.contact_info label=contact_info_label legend=contact_info_legend placeholder=contact_info_placeholder large_field=True %}
-		                        
+								{% if not group_model == "CosinnusConference" or not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+		                            {# SimpleMDE Description Long Field (gets initialized in extrahead) #}                                   
+		                            {% trans "Description and Infos" as description_long_label %}
+		                            {% captureas description_long_legend %}
+		                                {% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
+		                                {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+		                                {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
+		                            {% endcaptureas %}
+		                            {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
+		                            
+									{% block group_form_microsite_description_field %}
+			                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True %}
+				                    {% endblock group_form_microsite_description_field %}
+				                    
+				                    
+			                        {# Contact Info Field #}
+			                        {% trans "Contact info" as contact_info_label %}
+				                    {% captureas contact_info_legend %}
+				                    	{% trans "How you can be reached, addresses, social media, etc..." %}
+				                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+				                    	{% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
+				                    {% endcaptureas %}
+		                        	{% trans "Contact Information" as contact_info_placeholder %}
+			                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.contact_info label=contact_info_label legend=contact_info_legend placeholder=contact_info_placeholder large_field=True %}
+		                        {% endif %}
 	
 			                    {# Microsite Public Apps Field #}
 				                {% trans "From which apps should public items be shown on the microsite?" as microsite_apps_label %}
