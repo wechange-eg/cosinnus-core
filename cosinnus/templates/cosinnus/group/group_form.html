@@ -132,11 +132,7 @@
                 <li {% if request.GET.tab == 'dashboard' %}class="active"{% endif %}>
                     <a href="#dashboard" class="_group-form-tab" role="tab" data-toggle="tab">
                         <i class="fa fa-columns"></i>
-                        {% if group_model == "CosinnusSociety" %}
-                            {% trans "Group Dashboard" %}
-                        {% else %}
-                            {% trans "Project Dashboard" %}
-                        {% endif %}
+                        {{ group_model_class.get_trans.DASHBOARD_LABEL }}
                     </a>
                 </li>
                 {% endif %}
@@ -165,11 +161,10 @@
                         
                         {# Name Field #}
 						{% block group_form_name_field %}
-	                        {% captureas name_placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the group." %}{% else %}{% trans "Enter a name for the project." %}{% endif %}{% endcaptureas %}
 	                        {% if request.GET.name %}
 	                            {% captureas name_val %}{{ request.GET.name }}{% endcaptureas %}
 	                        {% endif %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=name_placeholder field_value=name_val %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=group_model_class.get_trans.FORMFIELD_NAME_PLACEHOLDER field_value=name_val %}
 						{% endblock group_form_name_field %}
 				        
                         {% comment %} Date picker for from_date - to_date {% endcomment %}
@@ -190,7 +185,7 @@
                             {% if form.forms.obj.related_groups %}
                                 {# Related Groups Field #}
                                 {% trans "In which projects' or groups' calendars should this be shown?" as related_label %}
-                                {% trans "Select related Projects/Groups" as related_placeholder %}
+                                {% trans "Select Projects/Groups" as related_placeholder %}
                                 {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder large_field=True %}
                             {% endif %}
                         {% endif %}
@@ -200,7 +195,7 @@
                             {# SimpleMDE Description Long Field (gets initialized in extrahead) #}                                   
                             {% trans "Description and Infos" as description_long_label %}
                             {% captureas description_long_legend %}
-                                {% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
+                                {{ group_model_class.get_trans.FORMFIELD_DESCRIPTION_LEGEND }}
                                 {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
                                 {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
                             {% endcaptureas %}
@@ -312,10 +307,9 @@
                         {% endif %}
 
                         {# Locations Inlineform #}
-                        {% trans "Where are you active?" as locations_label %}
                         {% trans "Remove location" as loc_rm_label %}
                         {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}
-                        {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=locations_label   content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
+                        {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=group_model_class.get_trans.FORMFIELD_LOCATION_LABEL   content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
 
                         {% if form.forms.obj.parent %}
 	                        {# Parent Field #}
@@ -373,13 +367,12 @@
 			                {% endcaptureas %}
 			                {% captureas visibility_field_html %}
 			                    <select name="public" id="group-public-field">
-	                                <option default value="false">{% trans "Team members only" %}</option>
+	                                <option default value="false">{{ group_model_class.get_trans.FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY }}</option>
 	                                <option {% if object and object.public %}selected{% endif %} value="true">{% trans "Public (visible without login)" %}</option>
 	                            </select>
 			                {% endcaptureas %}
 			                {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html field=form.forms.media_tag.visibility field_id="group-public-field" label=visibility_label legend=visibility_legend extra_html=visibility_warning_html %}
                         {% endblock visibility_field %}
-                        
                         
 						{% if SETTINGS.COSINNUS_DATA_EXCHANGE_ENABLED %}
 						{# public Field #}

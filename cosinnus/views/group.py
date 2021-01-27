@@ -250,15 +250,16 @@ class CosinnusGroupFormMixin(object):
         else:
             self._old_deactivated_apps = []
         ret = super(CosinnusGroupFormMixin, self).post(*args, **kwargs)
-        new_apps = self.object.get_deactivated_apps()
-        
-        # check if any group apps were activated or deactivated
-        deactivated_apps = [app for app in new_apps if not app in self._old_deactivated_apps]
-        activated_apps = [app for app in self._old_deactivated_apps if not app in new_apps]
-        if activated_apps:
-            signals.group_apps_activated.send(sender=self, group=self.object, apps=activated_apps)
-        if deactivated_apps:
-            signals.group_apps_deactivated.send(sender=self, group=self.object, apps=deactivated_apps)
+        if self.object:
+            new_apps = self.object.get_deactivated_apps()
+            
+            # check if any group apps were activated or deactivated
+            deactivated_apps = [app for app in new_apps if not app in self._old_deactivated_apps]
+            activated_apps = [app for app in self._old_deactivated_apps if not app in new_apps]
+            if activated_apps:
+                signals.group_apps_activated.send(sender=self, group=self.object, apps=activated_apps)
+            if deactivated_apps:
+                signals.group_apps_deactivated.send(sender=self, group=self.object, apps=deactivated_apps)
         return ret
     
     def forms_valid(self, form, inlines):
@@ -277,7 +278,6 @@ class CosinnusGroupFormMixin(object):
 
     def get_success_url(self):
         # form save chains to participation options form if this is a conference and has applications enabled
-        print(f'>>>> FFF {self.object.group_is_conference} {self.object.use_conference_applications}')
         if self.object.group_is_conference and self.object.use_conference_applications:
             return group_aware_reverse('cosinnus:conference:participation-management', kwargs={'group': self.object})
         return self.object.get_absolute_url()

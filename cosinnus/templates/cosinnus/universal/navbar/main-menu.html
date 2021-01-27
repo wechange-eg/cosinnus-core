@@ -101,11 +101,9 @@
 	
 	{% if COSINNUS_IDEAS_ENABLED or COSINNUS_ORGANIZATIONS_ENABLED or my_conferences|length > 0 %}
 	<div class="nav-column">
-	    
         {% if my_conferences|length > 0 %}
             <h2 class="headline headline-condensed">
-                {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "My Conferences" %}
+			    {{ COSINNUS_TRANS_MY_CONFERENCES }}
             </h2>
         
             <ul class="item-list">

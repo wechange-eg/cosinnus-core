@@ -20,6 +20,7 @@ class CosinnusProjectTransBase(object):
     VERBOSE_NAME = _('Project')
     VERBOSE_NAME_PLURAL = _('Projects')
     ALL_LIST = _('All Projects')
+    MY_LIST = _('My Projects')
     
     MENU_LABEL = _('Project Menu')
     DASHBOARD_LABEL = _('Project Dashboard')
@@ -33,6 +34,10 @@ class CosinnusProjectTransBase(object):
     CONVERT_ITEMS_TO = _('Convert selected items to Projects')
     
     FORMFIELD_NAME = _('Project name')
+    FORMFIELD_NAME_PLACEHOLDER = _('Enter a name for the project.')
+    FORMFIELD_DESCRIPTION_LEGEND = _('Describe the project in a few sentences.')
+    FORMFIELD_LOCATION_LABEL = _('Where is the project active?')
+    FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Project members only')
     
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _('Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators.')
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _('Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.')
@@ -50,6 +55,7 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     VERBOSE_NAME = _('Group')
     VERBOSE_NAME_PLURAL = _('Groups')
     ALL_LIST = _('All Groups')
+    MY_LIST = _('My Groups')
     
     MENU_LABEL = _('Group Menu')
     DASHBOARD_LABEL = _('Group Dashboard')
@@ -63,6 +69,10 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     CONVERT_ITEMS_TO = _('Convert selected items to Groups')
     
     FORMFIELD_NAME = _('Group name')
+    FORMFIELD_NAME_PLACEHOLDER = _('Enter a name for the group.')
+    FORMFIELD_DESCRIPTION_LEGEND = _('Describe the group in a few sentences.')
+    FORMFIELD_LOCATION_LABEL = _('Where is the group active?')
+    FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Group members only')
     
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _('Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators.')
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _('Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.')
@@ -80,6 +90,7 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     VERBOSE_NAME = _('Conference')
     VERBOSE_NAME_PLURAL = _('Conferences')
     ALL_LIST = _('All Conferences')
+    MY_LIST = _('My Conferences')
     
     MENU_LABEL = _('Conference Menu')
     DASHBOARD_LABEL = _('Conference Dashboard')
@@ -93,11 +104,16 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     CONVERT_ITEMS_TO = _('Convert selected items to Conferences')
     
     FORMFIELD_NAME = _('Conference name')
+    FORMFIELD_NAME_PLACEHOLDER = _('Enter a name for the conference.')
+    FORMFIELD_DESCRIPTION_LEGEND = _('Describe the conference in a few sentences.')
+    FORMFIELD_LOCATION_LABEL = _('Where is the conference active?')
+    FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Conference members only')
+    
     
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _('Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators.')
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _('Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.')
     
-
+    
 # allow dropin of trans classes
 CosinnusProjectTrans = CosinnusProjectTransBase
 if getattr(settings, 'COSINNUS_GROUP_TRANS_TYPED_CLASSES_DROPINS', {}).get(0, None):
