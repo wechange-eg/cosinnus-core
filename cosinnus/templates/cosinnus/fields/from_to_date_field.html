@@ -28,10 +28,10 @@
                 class="calendar-date-time-chooser-date" />
             <input class="calendar-date-time-chooser-hiddendate" id="id_from_date_0" name="from_date_0" 
                 placeholder="{% trans "Start date." %}" type="hidden" 
-                {% if form_view == "add" and request.GET.start %}
-                value="{{ request.GET.start }}" 
-                {% elif form_view == "edit" %}
+                {% if from_date_field.value %}
                 value="{{ from_date_field.value|date:"Y-m-d" }}" 
+                {% elif form_view == "add" and request.GET.start %}
+                value="{{ request.GET.start }}" 
                 {% else %}
                 value="{% now "Y-m-d" %}" 
                 {% endif %}
@@ -50,10 +50,10 @@
                 class="calendar-date-time-chooser-date" />
             <input class="calendar-date-time-chooser-hiddendate" id="id_to_date_0" name="to_date_0" 
                 placeholder="{% trans "End date." %}" type="hidden" 
-                {% if form_view == "add" and request.GET.end %}
-                value="{{ request.GET.end }}" 
-                {% elif form_view == "edit" %}
+                {% if to_date_field.value %}
                 value="{{ to_date_field.value|date:"Y-m-d" }}" 
+                {% elif form_view == "add" and request.GET.end %}
+                value="{{ request.GET.end }}" 
                 {% else %}
                 value="{% now "Y-m-d" %}" 
                 {% endif %}

@@ -53,7 +53,6 @@ from cosinnus_conference.forms import (ConferenceRemindersForm,
                                        ApplicationFormSet,
                                        AsignUserToEventForm)
 from cosinnus_conference.utils import send_conference_reminder
-from cosinnus_event.models import Event
 from cosinnus.templatetags.cosinnus_tags import full_name
 
 logger = logging.getLogger('cosinnus')
@@ -559,7 +558,8 @@ class ConferenceApplicationView(SamePortalGroupMixin,
 
     @property
     def events(self):
-        return Event.objects.filter(group=self.group).order_by('id')
+        from cosinnus_event.models import ConferenceEvent # noqa
+        return ConferenceEvent.objects.filter(group=self.group).order_by('id')
 
     @property
     def participation_management(self):
@@ -700,7 +700,8 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
 
     @property
     def events(self):
-        return Event.objects.filter(group=self.group).order_by('id')
+        from cosinnus_event.models import ConferenceEvent # noqa
+        return ConferenceEvent.objects.filter(group=self.group).order_by('id')
 
     @property
     def applications(self):
@@ -713,6 +714,8 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
 
     def _set_workshop_assignments(self):
         """ Handle tagging the conference events with the participants selected """
+        from cosinnus_event.models import ConferenceEvent # noqa
+        
         users = self._get_applicants_for_workshop()
         formset = AsignUserToEventForm(self.request.POST, prefix='assignment')
         for form in formset:
@@ -721,7 +724,7 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
         if formset.is_valid():
             for form in formset.forms:
                 data = form.cleaned_data
-                event = Event.objects.get(id=data.get('event_id'))
+                event = ConferenceEvent.objects.get(id=data.get('event_id'))
                 event.media_tag.persons.clear()
                 users = get_user_model().objects.filter(id__in=data.get('users'))
                 for user in users:

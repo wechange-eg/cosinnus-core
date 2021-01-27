@@ -623,7 +623,17 @@ class BaseTaggableObjectReflection(models.Model):
             given object is being reflected into. """
         group_ids = cls.get_group_ids_for_object(obj)
         return get_cosinnus_group_model().objects.get_cached(pks=group_ids)
-
+    
+    def save(self, *args, **kwargs):
+        """ Sanity checks that the creator of this reflection has write permissions on the target
+            group, and if not *deletes* this reflection! """
+        ret = super(BaseTaggableObjectReflection, self).save(*args, **kwargs)
+        from cosinnus.utils.permissions import check_object_write_access
+        if not check_object_write_access(self.group, self.creator):
+            logger.warn('Deleted a BaseTaggableObjectReflection after saving it for sanity - user did not have write permissions on the group!',
+                        extra={'group': self.group, 'user': self.creator.id})
+            self.delete()
+        return ret
 
 @python_2_unicode_compatible
 class LikeObject(models.Model):

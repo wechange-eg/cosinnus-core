@@ -164,16 +164,16 @@ class CosinnusGroupFormMixin(object):
             messages.warning(self.request, _('Sorry, only portal administrators can create projects and groups!'))
             return redirect(reverse('cosinnus:portal-admin-list'))
         
-        _user_managed_tag_slugs = [tag.slug for tag in self.request.user.cosinnus_profile.get_managed_tags()]
-        society_allowed = self.form_view == 'add' and model_class == CosinnusSociety and \
+        society_forbidden = self.form_view == 'add' and model_class == CosinnusSociety and \
                         getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False)
-        conference_allowed = self.form_view == 'add' and model_class == CosinnusConference and \
-                            (getattr(settings, 'COSINNUS_USERS_CAN_CREATE_CONFERENCES', False) or \
-                            any(tag_slug in settings.COSINNUS_USERS_WITH_MANAGED_TAG_SLUGS_CAN_CREATE_CONFERENCES for tag_slug in _user_managed_tag_slugs))
+        conference_forbidden = self.form_view == 'add' and model_class == CosinnusConference and \
+                            getattr(settings, 'COSINNUS_USERS_CAN_CREATE_CONFERENCES', False)
         # special check: only portal admins can create groups/conferences
-        if not (society_allowed or conference_allowed):
-            if not check_user_superuser(self.request.user):
-                
+        if society_forbidden or conference_forbidden:
+            _user_managed_tag_slugs = [tag.slug for tag in self.request.user.cosinnus_profile.get_managed_tags()]
+            managed_tags_allows_creation = model_class == CosinnusConference and \
+                    any(tag_slug in settings.COSINNUS_USERS_WITH_MANAGED_TAG_SLUGS_CAN_CREATE_CONFERENCES for tag_slug in _user_managed_tag_slugs)
+            if not check_user_superuser(self.request.user) and not managed_tags_allows_creation:
                 if getattr(settings, 'COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED', False):
                     redirect_url = reverse('cosinnus:premium-info-page')
                 else:
@@ -267,7 +267,9 @@ class CosinnusGroupFormMixin(object):
             group_index = CosinnusProjectIndex()
         else:
             group_index = CosinnusSocietyIndex()
+            
         group_index.update_object(self.object)
+        signals.group_saved_in_form.send(sender=self, group=self.object, user=self.request.user)
         return ret
 
 

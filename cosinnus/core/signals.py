@@ -10,6 +10,11 @@ all_cosinnus_apps_loaded = dispatch.Signal()
 """ Called after a CosinnusGroup, or one of its extending models is freshly created """
 group_object_created = dispatch.Signal(providing_args=["group"])
 
+""" Called after a CosinnusGroup, or one of its extending models are saved (create and update) 
+        in the frontend's group form by one of the group admins
+    Note: This does *not* trigger after any other model update or save! """
+group_saved_in_form = dispatch.Signal(providing_args=["group", "user"])
+
 """ Called after a CosinnusIdea is freshly created """
 idea_object_created = dispatch.Signal(providing_args=["idea"])
 
