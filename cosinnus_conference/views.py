@@ -25,7 +25,8 @@ from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
 from cosinnus.models.conference import CosinnusConferenceRoom,\
     CosinnusConferenceApplication, APPLICATION_ACCEPTED, APPLICATION_WAITLIST
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_ADMIN
-from cosinnus.models.membership import MEMBERSHIP_MEMBER
+from cosinnus.models.membership import MEMBERSHIP_MEMBER,\
+    MEMBERSHIP_INVITED_PENDING
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME
 from cosinnus.models.profile import UserProfile
@@ -52,7 +53,6 @@ from cosinnus_conference.forms import (ConferenceRemindersForm,
                                        ApplicationFormSet,
                                        AsignUserToEventForm)
 from cosinnus_conference.utils import send_conference_reminder
-from cosinnus_event.models import Event
 from cosinnus.templatetags.cosinnus_tags import full_name
 
 logger = logging.getLogger('cosinnus')
@@ -558,7 +558,8 @@ class ConferenceApplicationView(SamePortalGroupMixin,
 
     @property
     def events(self):
-        return Event.objects.filter(group=self.group).order_by('id')
+        from cosinnus_event.models import ConferenceEvent # noqa
+        return ConferenceEvent.objects.filter(group=self.group).order_by('id')
 
     @property
     def participation_management(self):
@@ -604,6 +605,11 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                 application.priorities = priorities
                 application.save()
                 messages.success(self.request, _('Application has been updated.'))
+            
+            # delete any invitation on application submits
+            invitation = get_object_or_None(CosinnusGroupMembership, group=self.group, user=self.request.user, status=MEMBERSHIP_INVITED_PENDING)
+            if invitation:
+                invitation.delete()
             return HttpResponseRedirect(self.get_success_url())
         else:
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
@@ -694,7 +700,8 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
 
     @property
     def events(self):
-        return Event.objects.filter(group=self.group).order_by('id')
+        from cosinnus_event.models import ConferenceEvent # noqa
+        return ConferenceEvent.objects.filter(group=self.group).order_by('id')
 
     @property
     def applications(self):
@@ -707,6 +714,8 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
 
     def _set_workshop_assignments(self):
         """ Handle tagging the conference events with the participants selected """
+        from cosinnus_event.models import ConferenceEvent # noqa
+        
         users = self._get_applicants_for_workshop()
         formset = AsignUserToEventForm(self.request.POST, prefix='assignment')
         for form in formset:
@@ -715,7 +724,7 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
         if formset.is_valid():
             for form in formset.forms:
                 data = form.cleaned_data
-                event = Event.objects.get(id=data.get('event_id'))
+                event = ConferenceEvent.objects.get(id=data.get('event_id'))
                 event.media_tag.persons.clear()
                 users = get_user_model().objects.filter(id__in=data.get('users'))
                 for user in users:

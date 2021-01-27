@@ -778,9 +778,14 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
                                                            help_text='The boolean internal nextcloud id for the groupfolder. Only set once a groupfolder is created.')
 
     is_conference = models.BooleanField(_('Is conference'),
-                                        help_text=_(
-                                            'If a group is marked as conference it is possible to auto-generate accounts for workshop participants'),
+                                        help_text='Note: DEPRECATED, use group.type=2 now. Delete once all portals have been migrated and checked. If a group is marked as conference it is possible to auto-generate accounts for workshop participants',
                                         default=False)
+    
+    from_date = models.DateTimeField(_('Start Datetime'), default=None, blank=True, null=True,
+                                     help_text='Used for conferences to determine overall running time period.')
+    to_date = models.DateTimeField(_('End Datetime'), default=None, blank=True, null=True,
+                                     help_text='Used for conferences to determine overall running time period.')
+    
     conference_is_running = models.BooleanField(_('Conference is running'),
                                                 help_text=_(
                                                     'Determins whether a group that is marked as conference is running'),
@@ -1241,6 +1246,12 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self})
 
+    def get_edit_url(self):
+        return group_aware_reverse('cosinnus:group-edit', kwargs={'group': self})
+
+    def get_delete_url(self):
+        return group_aware_reverse('cosinnus:group-delete', kwargs={'group': self})
+
     def get_member_page_url(self):
         return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self})
 
@@ -1281,18 +1292,18 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         return ContentType.objects.get_for_model(get_cosinnus_group_model())
 
     @property
-    def from_date(self):
+    def get_or_guess_from_date(self):
         # TODO: Sascha change once group.from_date exists!
-        from cosinnus_event.models import ConferenceEvent
+        from cosinnus_event.models import ConferenceEvent # noqa
         queryset = ConferenceEvent.objects.filter(room__group=self)
         if queryset.count() > 0:
             return queryset.aggregate(Min('from_date'))['from_date__min']
         return None
 
     @property
-    def to_date(self):
+    def get_or_guess_to_date(self):
         # TODO: Sascha change once group.from_date exists!
-        from cosinnus_event.models import ConferenceEvent
+        from cosinnus_event.models import ConferenceEvent # noqa
         queryset = ConferenceEvent.objects.filter(room__group=self)
         if queryset.count() > 0:
             return queryset.aggregate(Max('to_date'))['to_date__max']

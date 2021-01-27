@@ -190,7 +190,14 @@
 		                {% block group_form_description_field %}
 					        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label %}
 						{% endblock group_form_description_field %}
-
+                        
+                        {% comment %} Date picker for from_date - to_date {% endcomment %}
+                        {% if form.forms.obj.fields.from_date and form.forms.obj.fields.to_date %}
+                             {% captureas date_label %}{% trans "Conference start and end date and time" %}{% endcaptureas %}
+                             {% captureas date_legend %}{% trans "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days." %}{% endcaptureas %}
+					         {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.forms.obj.from_date to_date_field=form.forms.obj.to_date date_label=date_label %}
+				        {% endif %}
+				        
 						{% if form.forms.obj.use_conference_applications %}
 							{% captureas use_conference_applications_label %}{% trans 'Application method' %}{% endcaptureas %}
                             {% captureas use_conference_applications_checkbox_label %}{% trans 'Require participation applications for this conference' %}{% endcaptureas %}
@@ -198,14 +205,13 @@
 							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_conference_applications label=use_conference_applications_label checkbox_label=use_conference_applications_checkbox_label legend=use_conference_applications_legend %}
 						{% endif %}
 						
-						{% if form.forms.obj.fields.conference_theme_color %}
+                        {% if form.forms.obj.fields.conference_theme_color %}
 	                        {# Conference Theme Color Field #}
 	                        {% trans "Conference Theme Color" as conference_label %}
 	                        {% trans "Hex code (example: #A2A2A2)" as conference_placeholder %}
 	                        {% trans "A hex code color to use as main theme color for the conference layout (with or without leading '#')" as conference_legend %}
 	                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.conference_theme_color label=conference_label legend=conference_legend placeholder=conference_placeholder large_field=True %}
 	                    {% endif %}
-
                         
                         {# Avatar Field #}
                         {% trans "Avatar" as avatar_label %}
@@ -289,7 +295,11 @@
 
                         {% if form.forms.obj.related_groups %}
                             {# Related Groups Field #}
-                            {% trans "Are there any projects/groups related to this one?" as related_label %}
+                            {% if group_model == "CosinnusConference" %}
+                                {% trans "In which projects' or groups' calendars should this be shown?" as related_label %}
+                            {% else %}
+                                {% trans "Are there any projects/groups related to this one?" as related_label %}
+                            {% endif %}
                             {% trans "Select related Projects/Groups" as related_placeholder %}
                             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder large_field=True %}
                         {% endif %}
