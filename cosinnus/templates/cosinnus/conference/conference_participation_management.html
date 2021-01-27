@@ -21,7 +21,9 @@
 
             <div class="content-box">
             {% trans "Maximal Number of participants" as limits_label %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.participants_limit label=limits_label large_field=True %}
+            {% trans "This is not an enforced limit and serves only as a display for guests." as limits_legend %}
+            {% trans "(no limit selected)" as limits_placeholder %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.participants_limit label=limits_label legend=limits_legend placeholder=limits_placeholder large_field=True %}
 
             {% trans "Application allowed" as date_label %}
             {% captureas date_html %}
@@ -67,11 +69,15 @@
             {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label label=date_label large_field=True %}
 
             {% trans "Conditions for participation" as conditions_label %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.application_conditions label=conditions_label large_field=True%}
+            {% trans "If set, applicants will have to agree to these conditions by checking a checkbox" as conditions_legend %}
+            {% trans "(no conditions selected)" as conditions_placeholder %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.application_conditions label=conditions_label legend=conditions_legend placeholder=conditions_placeholder large_field=True %}
 
             {% if form.application_options %}
             {% trans "Options for participation" as options_label %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.application_options label=options_label large_field=True%}
+            {% trans "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application." as options_legend %}
+            {% trans "(no options chosen)" as options_placeholder %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.application_options label=options_label legend=options_legend placeholder=options_placeholder large_field=True %}
             {% endif %}
 
         </div>

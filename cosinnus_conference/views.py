@@ -544,8 +544,7 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return group_aware_reverse('cosinnus:conference:participation-management',
-                                   kwargs={'group': self.group})
+        return self.group.get_absolute_url()
 
 
 class ConferenceApplicationView(SamePortalGroupMixin,

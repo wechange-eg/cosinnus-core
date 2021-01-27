@@ -275,6 +275,13 @@ class CosinnusGroupFormMixin(object):
         signals.group_saved_in_form.send(sender=self, group=self.object, user=self.request.user)
         return ret
 
+    def get_success_url(self):
+        # form save chains to participation options form if this is a conference and has applications enabled
+        print(f'>>>> FFF {self.object.group_is_conference} {self.object.use_conference_applications}')
+        if self.object.group_is_conference and self.object.use_conference_applications:
+            return group_aware_reverse('cosinnus:conference:participation-management', kwargs={'group': self.object})
+        return self.object.get_absolute_url()
+    
 
 class GroupMembershipMixin(MembershipClassMixin):
     membership_class = CosinnusGroupMembership
@@ -378,9 +385,6 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
         kwargs = super(GroupCreateView, self).get_form_kwargs()
         kwargs['group'] = self.object
         return kwargs
-    
-    def get_success_url(self):
-        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.object})
 
 
 class GroupDeleteView(SamePortalGroupMixin, AjaxableFormMixin, RequireAdminMixin, DeleteView):
@@ -967,9 +971,6 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, AvatarFormMi
     def forms_valid(self, form, inlines):
         messages.success(self.request, self.message_success % {'team_type':self.object._meta.verbose_name})
         return super(GroupUpdateView, self).forms_valid(form, inlines)
-
-    def get_success_url(self):
-        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group})
 
 
 class GroupUserListView(ListAjaxableResponseMixin, RequireReadMixin, ListView):
