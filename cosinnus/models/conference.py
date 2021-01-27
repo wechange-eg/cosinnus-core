@@ -276,9 +276,9 @@ APPLICATION_STATES_MESSAGES = [
 ]
 
 APPLICATION_STATES_VISIBLE = [
+    (APPLICATION_DECLINED, _('Declined')),
     (APPLICATION_WAITLIST, _('Waitlist')),
     (APPLICATION_ACCEPTED, _('Accepted')),
-    (APPLICATION_DECLINED, _('Declined')),
 ]
 
 class CosinnusConferenceApplication(models.Model):
