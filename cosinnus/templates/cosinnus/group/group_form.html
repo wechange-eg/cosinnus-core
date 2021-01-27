@@ -195,7 +195,7 @@
                         {% if form.forms.obj.fields.from_date and form.forms.obj.fields.to_date %}
                              {% captureas date_label %}{% trans "Conference start and end date and time" %}{% endcaptureas %}
                              {% captureas date_legend %}{% trans "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days." %}{% endcaptureas %}
-					         {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.forms.obj.fields.from_date to_date_field=form.forms.obj.fields.to_date date_label=date_label %}
+					         {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.forms.obj.from_date to_date_field=form.forms.obj.to_date date_label=date_label %}
 				        {% endif %}
 				        
 						{% if form.forms.obj.use_conference_applications %}

@@ -25,7 +25,8 @@ from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
 from cosinnus.models.conference import CosinnusConferenceRoom,\
     CosinnusConferenceApplication, APPLICATION_ACCEPTED, APPLICATION_WAITLIST
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_ADMIN
-from cosinnus.models.membership import MEMBERSHIP_MEMBER
+from cosinnus.models.membership import MEMBERSHIP_MEMBER,\
+    MEMBERSHIP_INVITED_PENDING
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME
 from cosinnus.models.profile import UserProfile
@@ -604,6 +605,11 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                 application.priorities = priorities
                 application.save()
                 messages.success(self.request, _('Application has been updated.'))
+            
+            # delete any invitation on application submits
+            invitation = get_object_or_None(CosinnusGroupMembership, group=self.group, user=self.request.user, status=MEMBERSHIP_INVITED_PENDING)
+            if invitation:
+                invitation.delete()
             return HttpResponseRedirect(self.get_success_url())
         else:
             return self.render_to_response(self.get_context_data(form=form, formset=formset))

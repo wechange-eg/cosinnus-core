@@ -1028,6 +1028,11 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
         return super(GroupUserJoinView, self).dispatch(request, *args, **kwargs)
     
     def post(self, request, *args, **kwargs):
+        # do not allow this for conferences with application management, because
+        # invitations are done via the application form
+        self.object = self.get_object()
+        if self.object.group_is_conference and self.object.use_conference_applications:
+            raise PermissionDenied()
         self.referer = request.META.get('HTTP_REFERER', self.referer_url)
         return super(GroupUserJoinView, self).post(request, *args, **kwargs)
     
@@ -1176,6 +1181,14 @@ class GroupUserInvitationAcceptView(GroupUserWithdrawView):
 
     message_success = _('You are now a member of %(team_type)s “%(team_name)s”. Welcome!')
     membership_status = MEMBERSHIP_MEMBER
+    
+    def post(self, request, *args, **kwargs):
+        # do not allow this for conferences with application management, because
+        # invitations are done via the application form
+        self.object = self.get_object()
+        if self.object.group_is_conference and self.object.use_conference_applications:
+            raise PermissionDenied()
+        return super(GroupUserInvitationAcceptView, self).post(request, *args, **kwargs)
     
     def confirm_action(self):
         try:
