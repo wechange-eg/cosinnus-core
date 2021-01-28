@@ -227,7 +227,7 @@ class CosinnusUserImportProcessorBase(object):
                 (for example when creating groups) """
         self.import_creator = import_creator
         if settings.DEBUG:
-            threaded = False # never thread in dev
+            threaded = True # never thread in dev
             
         if dry_run:
             user_import_item.state = CosinnusUserImport.STATE_DRY_RUN_RUNNING

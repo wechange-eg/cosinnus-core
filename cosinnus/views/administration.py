@@ -171,7 +171,8 @@ class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin,
         text = self.object.body
         for recipient in recipients:
             text = textfield(render_html_with_variables(recipient, text))
-            send_html_mail_threaded(recipient, subject, text)
+            # omitt the topic line after "Hello user," by passing topic_instead_of_subject=' '
+            send_html_mail_threaded(recipient, subject, text, topic_instead_of_subject=' ')
 
     def _copy_newsletter(self):
         subject = '{} (copy)'.format(self.object.subject)

@@ -34,8 +34,8 @@
         <p class="transparent"><i class="fas fa-info-circle"></i> {% trans 'This newsletter has already been sent. If you want to send it again, please copy it and send the copy.' %}</p>
         {% endif %}
 
-        {% trans "Subject" as newsletter_subject_label %}
-        {% trans "Subject" as newsletter_subject_placeholder %}
+        {% trans "Subject" context "subject of an E-Mail" as newsletter_subject_label %}
+        {% trans "Subject" context "subject of an E-Mail" as newsletter_subject_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.subject label=newsletter_subject_label placeholder=newsletter_subject_placeholder large_field=True %}
 
         <div class="cosinnus-field">
