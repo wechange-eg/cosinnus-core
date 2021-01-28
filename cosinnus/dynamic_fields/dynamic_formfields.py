@@ -8,7 +8,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.urls.base import reverse, reverse_lazy
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy as p_
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from phonenumber_field.formfields import PhoneNumberField
 
 from cosinnus.conf import settings
@@ -120,16 +120,16 @@ class MultiAddressDynamicField(forms.Field):
     """ A dynamic-field implementation for a multi value address field """
     
     MULTI_ADDRESS_SUBFIELD_MAP = (
-        ('title', p_('Multi-Address Field Subfield', 'Address Title')),
-        ('line1', p_('Multi-Address Field Subfield', 'Address Line 1')),
-        ('line2', p_('Multi-Address Field Subfield', 'Address Line 2')),
-        ('line3', p_('Multi-Address Field Subfield', 'Address Line 3')),
-        ('street', p_('Multi-Address Field Subfield', 'Street and Number')),
-        ('city', p_('Multi-Address Field Subfield', 'City')),
-        ('state', p_('Multi-Address Field Subfield', 'State')),
-        ('country', p_('Multi-Address Field Subfield', 'Country')),
-        ('phone', p_('Multi-Address Field Subfield', 'Phone Number')),
-        ('mobile', p_('Multi-Address Field Subfield', 'Mobile Phone Number')),
+        ('title',   pgettext_lazy('Multi-Address Field Subfield', 'Address Title')),
+        ('line1',   pgettext_lazy('Multi-Address Field Subfield', 'Address Line 1')),
+        ('line2',   pgettext_lazy('Multi-Address Field Subfield', 'Address Line 2')),
+        ('line3',   pgettext_lazy('Multi-Address Field Subfield', 'Address Line 3')),
+        ('street',  pgettext_lazy('Multi-Address Field Subfield', 'Street and Number')),
+        ('city',    pgettext_lazy('Multi-Address Field Subfield', 'City')),
+        ('state',   pgettext_lazy('Multi-Address Field Subfield', 'State')),
+        ('country', pgettext_lazy('Multi-Address Field Subfield', 'Country')),
+        ('phone',   pgettext_lazy('Multi-Address Field Subfield', 'Phone Number')),
+        ('mobile',  pgettext_lazy('Multi-Address Field Subfield', 'Mobile Phone Number')),
     )
     
     def __init__(self, *args, **kwargs):

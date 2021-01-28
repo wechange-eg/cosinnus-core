@@ -832,9 +832,13 @@ class CosinnusConf(AppConf):
     CONFERENCE_COFFEETABLES_ALLOW_USER_CREATION_DEFAULT = False
     
     CONFERENCE_PARTICIPATION_OPTIONS = [
-        (1, _('Vegan cuisine')),
-        (2, _('Vegetarian cuisine')),
-        (3, _('Hotelroom needed'))
+        (1, _('Overnight stay required')),
+        (2, _('Barrier-free access required')),
+        (3, _('Interpreter required')),
+        (4, _('Vegetarian cuisine')),
+        (5, _('Vegan cuisine')),
+        (6, _('Lactose-free cuisine')),
+        (7, _('Gluten-free cuisine')),
     ]
     
     # enable display and forms for managed tags

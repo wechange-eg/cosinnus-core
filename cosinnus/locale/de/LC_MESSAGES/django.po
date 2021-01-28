@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-27 19:15+0100\n"
-"PO-Revision-Date: 2021-01-27 19:37+0100\n"
+"POT-Creation-Date: 2021-01-28 14:43+0100\n"
+"PO-Revision-Date: 2021-01-28 14:43+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -176,14 +176,26 @@ msgstr "Bauen und Wohnen"
 msgid "Klimaschutz"
 msgstr "Klimaschutz"
 
-msgid "Vegan cuisine"
-msgstr "Vegane Verpflegung"
+msgid "Overnight stay required"
+msgstr "Übernachtung benötigt"
+
+msgid "Barrier-free access required"
+msgstr "Barrierefreier Zugang benötigt"
+
+msgid "Interpreter required"
+msgstr "Dolmetscher benötigt"
 
 msgid "Vegetarian cuisine"
 msgstr "Vegetarische Verpflegung"
 
-msgid "Hotelroom needed"
-msgstr "Hotelzimmer benötigt"
+msgid "Vegan cuisine"
+msgstr "Vegane Verpflegung"
+
+msgid "Lactose-free cuisine"
+msgstr "Laktosefreie Verpflegung"
+
+msgid "Gluten-free cuisine"
+msgstr "Glutenfreie Verpflegung"
 
 msgid "General"
 msgstr "Allgemein"
@@ -467,6 +479,46 @@ msgstr "עברית"
 
 msgid "Belarus"
 msgstr "Belarus"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Title"
+msgstr "Adressenbezeichnung"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 1"
+msgstr "Adresszeile 1"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 2"
+msgstr "Adresszeile 2"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 3"
+msgstr "Adresszeile 3"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Street and Number"
+msgstr "Straße und Hausnummer"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "City"
+msgstr "Stadt"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "State"
+msgstr "Region/Bundesland"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Country"
+msgstr "Land"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Phone Number"
+msgstr "Telefonnummer"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Mobile Phone Number"
+msgstr "Mobiltelefonnummer"
 
 msgid "(No choice)"
 msgstr "(Keine Auswahl)"
@@ -806,8 +858,8 @@ msgstr "Slug darf nicht leer sein."
 msgid "Participation Management"
 msgstr "Teilnehmendenmanagement"
 
-msgid "Applications open"
-msgstr "Anmeldung offen"
+msgid "Applications are open"
+msgstr "Antragsstellungen sind offen"
 
 msgid "Application has not started yet."
 msgstr "Die Anmeldung hat noch nicht begonnen."
@@ -829,6 +881,21 @@ msgstr "ToS angenommen"
 
 msgid "Declined"
 msgstr "Abgelehnt"
+
+msgid "Your application is invalid."
+msgstr "Dein Antrag ist ungültig."
+
+msgid "Your application has been submitted. You will be notified when it is processed."
+msgstr "Dein Teilnahmeantrag wurde eingereicht. Du wirst benachrichtigt, wenn er bearbeitet wurde."
+
+msgid "Your application has been added to the waitlist."
+msgstr "Dein Antrag wurde auf die Warteliste gesetzt."
+
+msgid "Congratulations. Your application has been accepted!"
+msgstr "Glückwünsch. Dein Teilnahmeantrag wurde angenommen!"
+
+msgid "We are sorry, but your application has been declined."
+msgstr "Tut uns leid, aber dein Teilnahmeantrag wurde abgelehnt."
 
 msgid "Confernence Application"
 msgstr "Konferenz Anmeldung"
@@ -1878,8 +1945,9 @@ msgstr "Newsletter erstellen"
 msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
 msgstr "Dieser Newsletter wurde bereits abgeschickt. Wenn du ihn erneut senden möchtest, kopiere ihn bitte und schicke die Kopie ab."
 
+msgctxt "subject of an E-Mail"
 msgid "Subject"
-msgstr "Thema"
+msgstr "Betreff"
 
 msgid "Recipients"
 msgstr "Empfänger"
@@ -2046,10 +2114,8 @@ msgstr "Konferenzveranstaltungen verwalten"
 msgid "Edit Conditions of Participation"
 msgstr "Teilnahmebedingungen bearbeiten"
 
-#, fuzzy
-#| msgid "Confernence Application"
 msgid "Conference Applications"
-msgstr "Konferenz Anmeldung"
+msgstr "Konferenz-Teilnahmeanträge"
 
 #
 #. Translators: __INCLUDE_JS_PO__
@@ -2476,10 +2542,8 @@ msgstr "Maximale Anzahl von Teilnehmenden"
 msgid "This is not an enforced limit and serves only as a display for guests."
 msgstr "Dies ist kein forciertes Limit, sondern dient nur zur Orientierung für die Gäste."
 
-#, fuzzy
-#| msgid "No Tag selected"
 msgid "(no limit selected)"
-msgstr "Kein Tag ausgewählt"
+msgstr "(keine Begrenzung ausgewählt)"
 
 msgid "Application allowed"
 msgstr "Bewerbung zulässig"
@@ -2812,16 +2876,33 @@ msgid "Remove this Address"
 msgstr "Diese Adresse entfernen"
 
 msgid "Add an Address"
-msgstr "Hinzufügen einer Adresse"
+msgstr "Adresse hinzufügen"
 
-#, fuzzy
-#| msgid "Go to conference"
+msgid "Maximum Number of Participants"
+msgstr "Maximale Anzahl von Teilnehmenden"
+
 msgid "About the conference"
-msgstr "Zur Konferenz"
+msgstr "Über die Konferenz"
 
 msgctxt "time"
 msgid "o'clock"
 msgstr "Uhr"
+
+msgid "You will now receive notifications for content posted in this conference."
+msgstr "Du wirst jetzt Benachrichtigungen für Inhalte in dieser Konferenz erhalten."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "No contact data has been added yet."
+msgstr "Es wurden noch keine Kontaktdaten eingetragen."
+
+msgid "Project Administrator"
+msgstr "Projekt-Administrator"
+
+msgid "Group Administrator"
+msgstr "Gruppen-Administrator"
 
 msgid "Re-Activate Project/Group"
 msgstr "Projekt/Gruppe reaktivieren"
@@ -2855,7 +2936,7 @@ msgstr "Deaktivieren"
 
 #, python-format
 msgid "Delete team “%(team_name)s”"
-msgstr "Projekt “%(team_name)s” löschen"
+msgstr "“%(team_name)s” löschen"
 
 msgid "Are you sure you want to delete this team?"
 msgstr "Sind sie sicher dass sie dieses Projekt löschen wollen?"
@@ -3036,7 +3117,7 @@ msgstr "Exportieren"
 
 #, python-format
 msgid "Edit “%(team_name)s”"
-msgstr "Projekt “%(team_name)s” bearbeiten"
+msgstr "“%(team_name)s” bearbeiten"
 
 msgid "Help about groups"
 msgstr "Hilfe zu Gruppen"
@@ -3066,10 +3147,8 @@ msgstr "Natürlich kannst du auch ein Projekt ohne diese Verbindung zur Idee ers
 msgid "Facebook-Integration"
 msgstr "Facebook-Integration"
 
-#, fuzzy
-#| msgid "Conference successfully started and user accounts activated"
 msgid "Conference start and end date and time"
-msgstr "Tagung erfolgreich gestartet und Nutzerkonten aktiviert"
+msgstr "Konferenz Start-und Endzeit"
 
 msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgstr "Die Start- und Endzeit werden für Erinnerungs-E-Mails benutzt (wenn eingesetllt). Kann mehrere Tage beinhalten."
@@ -3077,10 +3156,8 @@ msgstr "Die Start- und Endzeit werden für Erinnerungs-E-Mails benutzt (wenn ein
 msgid "Application method"
 msgstr "Art des Teilnahmeantrags"
 
-#, fuzzy
-#| msgid "Use participation management for this conference"
 msgid "Require participation applications for this conference"
-msgstr "Teilnahmeverwaltung für diese Konferenz verwenden"
+msgstr "Teilnahmeanträge für diese Konferenz erforderlich"
 
 msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
 msgstr "Anstelle der regulären Mitgliedschaftsantragsstellung kann hier die Antragsstellung per Anmeldeformular aktiviert werden. Die Konferenzadministratoren können alle Anträge sehen und auf der Teilnahmeantragsseite annehmen/ablehnen."
@@ -3088,10 +3165,8 @@ msgstr "Anstelle der regulären Mitgliedschaftsantragsstellung kann hier die Ant
 msgid "In which projects' or groups' calendars should this be shown?"
 msgstr "In welchen Projekt- oder Gruppenkalendern soll dies angezeigt werden?"
 
-#, fuzzy
-#| msgid "Select related Projects/Groups"
 msgid "Select Projects/Groups"
-msgstr "Verwandte Projekte/Gruppen auswählen"
+msgstr "Projekte/Gruppen auswählen"
 
 msgid "Description and Infos"
 msgstr "Beschreibung und Infos"
@@ -3343,17 +3418,14 @@ msgstr "Registrieren und beitreten!"
 msgid "You are have been invited to apply!"
 msgstr "Du wurdest eingeladen, die Teilnahme zu beantragen!"
 
-msgid "status: "
-msgstr "Status: "
+msgid "Applications are open. Apply now!"
+msgstr "Antragsstellungen sind offen. Bewirb dich jetzt!"
 
 msgid "Edit Application"
 msgstr "Anmeldung bearbeiten"
 
-msgid "You can't change your application anymore."
-msgstr "Du kannst deine Anmeldung nicht mehr ändern."
-
-msgid "Add Application"
-msgstr "Anmeldung hinzufügen"
+msgid "Apply for Participation"
+msgstr "Teilnahme beantragen"
 
 msgid "You have been invited to collaborate!"
 msgstr "Du wurdest zum Mitmachen eingeladen!"
@@ -3437,19 +3509,6 @@ msgstr "Auf Twitter teilen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Ziele für nachhaltige Entwicklung"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Contact"
-msgstr "Kontakt"
-
-msgid "No contact data has been added yet."
-msgstr "Es wurden noch keine Kontaktdaten eingetragen."
-
-msgid "Project Administrator"
-msgstr "Projekt-Administrator"
-
-msgid "Group Administrator"
-msgstr "Gruppen-Administrator"
 
 msgid "Tweets"
 msgstr "Tweets"
@@ -5931,15 +5990,11 @@ msgstr "Projektname"
 msgid "Enter a name for the project."
 msgstr "Gib einen Namen für das Projekt ein."
 
-#, fuzzy
-#| msgid "Where are you active?"
 msgid "Where is the project active?"
-msgstr "Wo bist du aktiv?"
+msgstr "Wo ist das Projekt aktiv?"
 
-#, fuzzy
-#| msgid "Team members only"
 msgid "Project members only"
-msgstr "Nur Gruppen/Projekt-Mitglieder"
+msgstr "Nur Projektmitglieder"
 
 msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
 msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie für dich eine Gruppe erstellen. Unten findest du eine Liste aller Administrator_innen."
@@ -5977,15 +6032,11 @@ msgstr "Gruppenname"
 msgid "Enter a name for the group."
 msgstr "Gib einen Namen für die Gruppe ein."
 
-#, fuzzy
-#| msgid "Where are you active?"
 msgid "Where is the group active?"
-msgstr "Wo bist du aktiv?"
+msgstr "Wo ist die Gruppe aktiv?"
 
-#, fuzzy
-#| msgid "Team members only"
 msgid "Group members only"
-msgstr "Nur Gruppen/Projekt-Mitglieder"
+msgstr "Nur GruppenMitglieder"
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie für dich eine Gruppe erstellen. Unten findest du eine Liste aller Administrator_innen."
@@ -6041,15 +6092,11 @@ msgstr "Gib einen Namen für die Konferenz ein."
 msgid "Describe the conference in a few sentences."
 msgstr "Beschreibe die Konferenz in ein paar Sätzen."
 
-#, fuzzy
-#| msgid "Where are you active?"
 msgid "Where is the conference active?"
-msgstr "Wo bist du aktiv?"
+msgstr "Wo ist die Konferenz aktiv?"
 
-#, fuzzy
-#| msgid "Conference theme color"
 msgid "Conference members only"
-msgstr "Konferenzthemenfarbe"
+msgstr "Nur Konferenzmitglieder"
 
 msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
 msgstr "Entschuldige, nur Portal-Administrator_innen können Konferenzen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie die Konferenz für dich erstellen. Unten findest du eine Liste aller Administrator_innen."
@@ -6564,6 +6611,18 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#~ msgid "Add Application"
+#~ msgstr "Anmeldung hinzufügen"
+
+#~ msgid "Hotelroom needed"
+#~ msgstr "Hotelzimmer benötigt"
+
+#~ msgid "status: "
+#~ msgstr "Status: "
+
+#~ msgid "You can't change your application anymore."
+#~ msgstr "Du kannst deine Anmeldung nicht mehr ändern."
+
 #~ msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
 #~ msgstr "Wenn ein Gruppe als Tagung markiert wurde, ist es möglich Accounts für alle Teilnehmer automatisch zu generieren"
 
@@ -6581,9 +6640,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "View all applications"
 #~ msgstr "Alle Bewerbungen anzeigen"
-
-#~ msgid "Status"
-#~ msgstr "Status"
 
 #~ msgid "Conference Settings"
 #~ msgstr "Konferenz-Einstellungen"
