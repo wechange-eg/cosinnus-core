@@ -73,11 +73,19 @@
                     <h2>{% trans "The import is currently running..." %}</h2>
                 {% endif %}
                 
-			    <p class="textfield transparent">{% trans "This page will automatically refresh when the process is done." %}</p>
+			    <p class="textfield transparent">
+			     {% trans "This page will automatically refresh when the process is done." %}
+			    </p>
 			    {% comment %} Refresh every 10 seconds {% endcomment %}
 			    <script type="text/javascript">
 				    setTimeout(function () { location.reload(); }, 10000);
 				</script>
+				
+                {% if progress_string %}
+	                <p class="textfield transparent">
+	                    {{ progress_string }}
+	                </p>
+                {% endif %}
 	        
 	        {% elif form_view == "import-ready" %}
                 <p class="textfield import-warning">

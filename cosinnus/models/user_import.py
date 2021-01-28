@@ -22,6 +22,8 @@ from django.core.exceptions import ValidationError
 from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 
+from django.core.cache import cache
+
 logger = logging.getLogger('cosinnus')
 
 
@@ -109,6 +111,9 @@ class CosinnusUserImport(models.Model):
     
     user_report_items = None
     
+    IMPORT_PROGRESS_CACHE_KEY = 'cosinnus/core/portal/%d/import/progress' 
+    
+    
     class Meta(object):
         ordering = ('-last_modified',)
         verbose_name = _('Cosinnus User Import')
@@ -151,6 +156,14 @@ class CosinnusUserImport(models.Model):
     
     def clear_report(self):
         self.import_report_html = ""
+        
+    def set_import_progress_cache(self, progress_string):
+        """ Sets the cache progress string """
+        cache.set(self.IMPORT_PROGRESS_CACHE_KEY % CosinnusPortal.get_current().id, progress_string, 60*60)
+        
+    def get_import_progress_cache(self):
+        """ Returns the cache progress string """
+        return cache.get(self.IMPORT_PROGRESS_CACHE_KEY % CosinnusPortal.get_current().id)
     
     def save(self, *args, **kwargs):
         # sanity check: if the to-be-saved state isn't STATE_ARCHIVED, make sure no other import exists that isn't archived
@@ -244,6 +257,8 @@ class CosinnusUserImportProcessorBase(object):
             with transaction.atomic():
                 
                 for item_data in user_import_item.import_data:
+                    user_import_item.set_import_progress_cache(f'{imported_items+failed_items}/{total_items}')
+                    
                     # clear user item reports
                     user_import_item.clear_user_report_items()
                     # sanity check: all absolutely required fields must exist:
@@ -266,7 +281,6 @@ class CosinnusUserImportProcessorBase(object):
                         imported_items += 1
                     else:
                         failed_items += 1
-                    print(f'>>> Import item, imported: {imported_items}. Failed: {failed_items}')
                     
                     # instantly fail a real import when a single user could not be imported. this should have been
                     # caught by the dry-run validation (which wouldve disabled the real import), or hints at a serious
@@ -298,6 +312,8 @@ class CosinnusUserImportProcessorBase(object):
                 # trigger a rollback for finished dry-runs
                 if dry_run:
                     raise DryRunFinishedException()
+                
+                user_import_item.set_import_progress_cache(None)
                 
         except Exception as e:
             if type(e) is DryRunFinishedException:

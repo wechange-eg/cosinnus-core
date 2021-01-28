@@ -178,6 +178,7 @@ class CosinnusUserImportView(RequireSuperuserMixin, TemplateView):
         context = super(CosinnusUserImportView, self).get_context_data(**kwargs)
         context.update({
             'object': self.import_object,
+            'progress_string': self.import_object.get_import_progress_cache() if self.import_object else None,
             'form_view': self.form_view,
             'required_columns': 'TODO: required_columns',
             'form': getattr(self, 'form', CosinusUserImportCSVForm())
