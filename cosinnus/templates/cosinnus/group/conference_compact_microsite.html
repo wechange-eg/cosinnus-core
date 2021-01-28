@@ -44,27 +44,27 @@
             </div><!-- btn -->
             <div class="white-content">
                 <div class="textfield">
-                    {% if group.from_date %}
-	                    <h3>
+	                {% if group.from_date %}
+	                    <h4>
 	                        {% include 'cosinnus_event/common/humanized_event_time.html' with event=group from_date_only=True %}
-	                    </h3>
-                        <div class="textfield transparent">
-                           <p>
-                               {{ group.from_date|date:"SHORT_DATE_FORMAT" }}, {{ group.from_date|date:"H:i" }} 
-                               {% trans "o'clock" context "time" %}
-                               {% if group.to_date %}
-                                   - {{ group.to_date|date:"SHORT_DATE_FORMAT" }}, {{ group.to_date|date:"H:i" }}
-                                   {% trans "o'clock" context "time" %}
-                               {% endif %}
-                           </p>
-                        </div>
-                    {% endif %}
+	                    </h4>
+	                    <div class="textfield transparent">
+	                       <p>
+	                           {{ group.from_date|date:"SHORT_DATE_FORMAT" }}, {{ group.from_date|date:"H:i" }} 
+	                           {% trans "o'clock" context "time" %}
+	                           {% if group.to_date %}
+	                               - {{ group.to_date|date:"SHORT_DATE_FORMAT" }}, {{ group.to_date|date:"H:i" }}
+	                               {% trans "o'clock" context "time" %}
+	                           {% endif %}
+	                       </p>
+	                    </div>
+	                {% endif %}
 
                     <p>
                         {{ group.description_long }}
                     </p>
 
-                    {% trans "Workshops" %}
+                    {% trans "Workshops" %}:
                     <ul class="microsite-conference-workshop-list">
 	                    {% for room in group.rooms.all %}
 	                        {% for event in room.events.all %}

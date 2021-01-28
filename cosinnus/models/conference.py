@@ -269,7 +269,7 @@ APPLICATION_STATES = [
 
 APPLICATION_STATES_MESSAGES = [
     (APPLICATION_INVALID, _('Your application is invalid.')),
-    (APPLICATION_SUBMITTED, _('Your application has been submitted.')),
+    (APPLICATION_SUBMITTED, _('Your application has been submitted. You will be notified when it is processed.')),
     (APPLICATION_WAITLIST, _('Your application has been added to the waitlist.')),
     (APPLICATION_ACCEPTED, _('Congratulations. Your application has been accepted!')),
     (APPLICATION_DECLINED, _('We are sorry, but your application has been declined.')),

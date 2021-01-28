@@ -109,38 +109,42 @@
 				
 	
 					{% conference_application group as application %}
-					{% if application %}
-					    <div {% if application.status == 2 %}class="large-space"{% endif %}>{{ application.application_status_string }}</div>
-					{% endif %}
+					<h2>
+					    {% if application and application.application_status_string %}
+						    {{ application.application_status_string }}
+					    {% else %}
+					        {% trans "Applications are open. Apply now!" %}
+					    {% endif %}
+					</h2> 
 	
 					{% if group.participation_management.all.count == 0 or group.participation_management.first.is_active %}
 						{% if application and application.status == 2 %}
-						<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
-							<ul class="media-list">
-								<li class="media">
-									<a class="pull-left" href="#">
-										<i class="fa fa-sign-in"></i>
-									</a>
-									<div class="media-body">
-										{% trans "Edit Application" %}
-									</div>
-								</li>
-							</ul>
-						</button>
+							<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
+								<ul class="media-list">
+									<li class="media">
+										<a class="pull-left" href="#">
+											<i class="fa fa-pencil"></i>
+										</a>
+										<div class="media-body">
+											{% trans "Edit Application" %}
+										</div>
+									</li>
+								</ul>
+							</button>
 						{% endif %}
 						{% if not application %}
-						<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
-							<ul class="media-list">
-								<li class="media">
-									<a class="pull-left" href="#">
-										<i class="fa fa-sign-in"></i>
-									</a>
-									<div class="media-body">
-										{% trans "Add Application" %}
-									</div>
-								</li>
-							</ul>
-						</button>
+							<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
+								<ul class="media-list">
+									<li class="media">
+										<a class="pull-left" href="#">
+											<i class="fa fa-sign-in"></i>
+										</a>
+										<div class="media-body">
+											{% trans "Add Application" %}
+										</div>
+									</li>
+								</ul>
+							</button>
 						{% endif %}
 					{% else %}
 						{% if not application %}
