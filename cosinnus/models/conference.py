@@ -242,13 +242,15 @@ class ParticipationManagement(models.Model):
     @property
     def application_time_string(self):
         if self.is_active:
-            return _('Applications open')
+            return _('Applications are open')
         else:
             now = timezone.now()
             if now < self.application_start:
                 return _('Application has not started yet.')
             elif now > self.application_end:
                 return _('Application ist over.')
+
+
 
 
 APPLICATION_INVALID = 1
@@ -265,10 +267,18 @@ APPLICATION_STATES = [
     (APPLICATION_DECLINED, _('Declined')),
 ]
 
+APPLICATION_STATES_MESSAGES = [
+    (APPLICATION_INVALID, _('Your application is invalid.')),
+    (APPLICATION_SUBMITTED, _('Your application has been submitted.')),
+    (APPLICATION_WAITLIST, _('Your application has been added to the waitlist.')),
+    (APPLICATION_ACCEPTED, _('Congratulations. Your application has been accepted!')),
+    (APPLICATION_DECLINED, _('We are sorry, but your application has been declined.')),
+]
+
 APPLICATION_STATES_VISIBLE = [
+    (APPLICATION_DECLINED, _('Declined')),
     (APPLICATION_WAITLIST, _('Waitlist')),
     (APPLICATION_ACCEPTED, _('Accepted')),
-    (APPLICATION_DECLINED, _('Declined')),
 ]
 
 class CosinnusConferenceApplication(models.Model):
@@ -298,5 +308,11 @@ class CosinnusConferenceApplication(models.Model):
         for key,value in self.priorities.items():
             if value == 2:
                 return Event.objects.get(id=int(key))
+
+    @property
+    def application_status_string(self):
+        for message in APPLICATION_STATES_MESSAGES:
+            if message[0] == self.status:
+                return message[1]
 
 

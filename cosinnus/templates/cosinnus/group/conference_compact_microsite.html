@@ -1,11 +1,36 @@
 {% extends "cosinnus/group/group_microsite.html" %}
 {% load i18n cosinnus_tags static %}
 
+{% block teaser %}{% endblock %}
+
+{% block microsite_subheader %}
+	<div class="group-microsite-subheader">
+		<div class="group-microsite-subheader-container">
+		    {% if group.member_count > 0 %}
+				<div class="group-microsite-subheader-item">
+					<header>{% trans "Participants" %}</header>
+					<div class="group-microsite-subheader-item-value">{{ group.member_count }}</div>
+				</div>
+            {% endif %}
+            {% if group.participation_management.all.first.participants_limit %}
+				<div class="group-microsite-subheader-item">
+					<header>{% trans "Maximum Number of Participants" %}</header>
+					<div class="group-microsite-subheader-item-value">{{ group.participation_management.all.first.participants_limit }}</div>
+				</div>
+		    {% endif %}
+			{% if object_counts.event %}
+				<div class="group-microsite-subheader-item">
+					<header>{% trans "Workshops" %}</header>
+					<div class="group-microsite-subheader-item-value">{{ object_counts.event }}</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock microsite_subheader %}
+
 {% block microsite_content %}
-    
     <div class="row microsite-conference-content">
         <div class="col-xs-12">
-            
             {# About Project box #}
             <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
                 <ul class="media-list">
@@ -17,11 +42,8 @@
                     </li>
                 </ul>
             </div><!-- btn -->
-            
             <div class="white-content">
                 <div class="textfield">
-                    <h2>WIP: This is the extending conference_compact_microsite.html microsite template!</h2>
-                    
                     {% if group.from_date %}
 	                    <h3>
 	                        {% include 'cosinnus_event/common/humanized_event_time.html' with event=group from_date_only=True %}
@@ -37,11 +59,11 @@
                            </p>
                         </div>
                     {% endif %}
-                    
+
                     <p>
-                        TODO: conference group description etc
+                        {{ group.description_long }}
                     </p>
-                    
+
                     {% trans "Workshops" %}
                     <ul class="microsite-conference-workshop-list">
 	                    {% for room in group.rooms.all %}
@@ -59,12 +81,96 @@
 		                            </li>
 		                        {% endif %}
 	                        {% endfor %}
-	                    {% endfor %}                    
+	                    {% endfor %}
                     </ul>
                 </div>
+                {% trans "You will now receive notifications for content posted in this conference." as follow_success_message %}
+                {% include 'cosinnus/common/likefollowstar/star_button.html' with object=group %}
+                {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=group success_message=follow_success_message %}
+                {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=group %}
             </div>
         </div>
     </div>
-    
-    
+
+    <div class="row">
+		<div class="col-md-6">
+            {% if not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS %}
+                {# Contact box #}
+                <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left btn-extra-emphasized" href="#"></a>
+                            <div class="media-body">
+                                {% trans "Contact" %}
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- btn -->
+            {% endif %}
+
+            {# Little hack to show an empty message, because a render-time empty check is complex due to extendable blocks #}
+            <script type="text/javascript">
+                $(function() {
+                    var box = $('#microsite_contact_content');
+                    if (box.text().replace(/\s/g, '').length == 0) {
+                        box.html("<p><i>{% trans "No contact data has been added yet." %}</i></p>");
+                    }
+                });
+            </script>
+            <div id="microsite_contact_content" class="white-content">
+                {% if group.contact_info and group.contact_info|length > 0 %}
+                    <div class="textfield">
+                        {{ group.contact_info|textfield }}
+                    </div>
+                {% endif %}
+                <p>
+                    {% if group.website %}
+                        <b>{% trans "Website" %}:</b>
+                        <a href="{{ group.website }}" target="_blank">{{ group.website }}</a>
+                        <br/>
+                    {% endif %}
+                    {% with group_locations=group.locations.all %}
+                        {% if group_locations %}
+                            <b>{% trans "Location" %}:</b>
+                            {% for group_location in group.locations.all %}
+                                <a href="{{ group_location.location_url }}" target="_blank">{{ group_location.location }}</a>{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                            <br/>
+                        {% endif %}
+                    {% endwith %}
+                </p>
+            </div>
+            {% with group_admins=group.actual_admins %}
+                {% if group_admins %}
+                    <div class="white-content">
+                        <p>
+                            <b>{% if group.type == 0 %}{% trans "Project Administrator" %}{% else %}{% trans "Group Administrator" %}{% endif %}:</b>&nbsp;
+                            {% for admin in group_admins %}
+                                <a href="{{ admin|profile_url }}" >{{ admin|full_name }}</a>
+                                {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                        {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+                            {% with contact_url=group.get_admin_contact_url %}
+                                <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized" style="float: none; margin-left: 0px;">
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <a class="pull-left" href="#">
+                                                <i class="fa fa-envelope"></i>
+                                            </a>
+                                            <div class="media-body">
+                                                {% trans "Contact" %}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </button>
+                            {% endwith %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+			{% endwith %}
+        </div>
+    </div>
+
+
 {% endblock microsite_content %}

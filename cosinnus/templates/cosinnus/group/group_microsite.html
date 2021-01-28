@@ -49,6 +49,7 @@
 
 {% block main_page %}
 
+	{% block teaser %}
     {% if user.is_authenticated and user.pk in group.admins %}
 	    <div class="alert alert-warning alert-dismissable">
             <i class="fa fa-heart fa-3x"></i>
@@ -58,7 +59,8 @@
 	        	<a href="{% group_url 'cosinnus:group-edit' group=group %}?tab=microsite">{% trans "Change it here..." %}</a>
 	        </p>
 	    </div>
-    {% endif %}
+	{% endif %}
+	{% endblock %}
 
 	{% block microsite_header %}
 
@@ -108,43 +110,42 @@
 	
 					{% conference_application group as application %}
 					{% if application %}
-					    <h2>{% trans 'status: ' %}{{ application.get_status_display }}</h2>
+					    <div {% if application.status == 2 %}class="large-space"{% endif %}>{{ application.application_status_string }}</div>
 					{% endif %}
 	
 					{% if group.participation_management.all.count == 0 or group.participation_management.first.is_active %}
-						<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize {% if application and not application.status == 2 %} disabled {% endif %}">
+						{% if application and application.status == 2 %}
+						<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
 							<ul class="media-list">
 								<li class="media">
 									<a class="pull-left" href="#">
 										<i class="fa fa-sign-in"></i>
 									</a>
 									<div class="media-body">
-										{% if application %}
-											{% if application.status == 2 %}
-											{% trans "Edit Application" %}
-											{% else %}
-											{% trans "You can't change your application anymore." %}
-											{% endif %}
-										{% else %}
+										{% trans "Edit Application" %}
+									</div>
+								</li>
+							</ul>
+						</button>
+						{% endif %}
+						{% if not application %}
+						<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
+							<ul class="media-list">
+								<li class="media">
+									<a class="pull-left" href="#">
+										<i class="fa fa-sign-in"></i>
+									</a>
+									<div class="media-body">
 										{% trans "Add Application" %}
-										{% endif %}
 									</div>
 								</li>
 							</ul>
 						</button>
+						{% endif %}
 					{% else %}
-						<button type="button" class="btn btn-emphasized btn-autosize disabled">
-							<ul class="media-list">
-								<li class="media">
-									<a class="pull-left" href="#">
-										<i class="fa fa-sign-in"></i>
-									</a>
-									<div class="media-body">
-										{{ group.participation_management.first.application_time_string }}
-									</div>
-								</li>
-							</ul>
-						</button>
+						{% if not application %}
+						<div>{{ group.participation_management.first.application_time_string }}</div>
+						{% endif %}
 					{% endif %}
 				</div>
 			{% endif %}
