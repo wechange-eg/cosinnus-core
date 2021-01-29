@@ -383,16 +383,17 @@ class CosinnusGroupManager(models.Manager):
             - day: in the 12h between 24h-12h before the first event
             - hour: in the 30min between 60min-30min before the first event
         """
+        from cosinnus.models.group_extra import CosinnusConference # noqa
         # Prepare query: Mark due conferences
         key = f'reminder_{field_name}'
-        queryset = get_cosinnus_group_model().objects.annotate(extra_fields_json=Cast(F('extra_fields'),
+        queryset = CosinnusConference.objects.annotate(extra_fields_json=Cast(F('extra_fields'),
                                                                                       PostgresJSONField(default={})))
         queryset = queryset.annotate(to_be_reminded=KeyTextTransform(key, 'extra_fields_json'))
         # Prepare query: Mark conferences already notified
         queryset = queryset.annotate(settings_json=Cast(F('settings'), PostgresJSONField(default={})))
         queryset = queryset.annotate(already_reminded=KeyTextTransform(f'{key}_sent', 'settings_json'))
         # Prepare query: Start date
-        queryset = queryset.prefetch_related('rooms__events').annotate(start_date=Min('rooms__events__from_date'))
+        queryset = queryset.prefetch_related('rooms__events')
         period_map = {
             # Send time frame: start & duration
             'week_before': [datetime.timedelta(days=7), datetime.timedelta(hours=24)],
@@ -401,11 +402,11 @@ class CosinnusGroupManager(models.Manager):
         }
         period = period_map.get(field_name)
         now = timezone.now()
-        queryset = queryset.filter(is_active=True, is_conference=True)
+        queryset = queryset.filter(is_active=True, from_date__isnull=False)
         queryset = queryset.filter(to_be_reminded='true', already_reminded__isnull=True)
-        queryset = queryset.filter(start_date__gt=now,
-                                   start_date__lte=now + period[0],
-                                   start_date__gte=now + period[0] - period[1])
+        queryset = queryset.filter(from_date__gt=now,
+                                   from_date__lte=now + period[0],
+                                   from_date__gte=now + period[0] - period[1])
         return queryset
 
 
@@ -1292,8 +1293,9 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         return ContentType.objects.get_for_model(get_cosinnus_group_model())
 
     @property
-    def get_or_guess_from_date(self):
-        # TODO: Sascha change once group.from_date exists!
+    def get_or_infer_from_date(self):
+        """ Gets the (conference) group's `from_date` or if not set, 
+            infers it from the starting time of the earliest conference event """
         from cosinnus_event.models import ConferenceEvent # noqa
         queryset = ConferenceEvent.objects.filter(room__group=self)
         if queryset.count() > 0:
@@ -1301,8 +1303,9 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         return None
 
     @property
-    def get_or_guess_to_date(self):
-        # TODO: Sascha change once group.from_date exists!
+    def get_or_infer_to_date(self):
+        """ Gets the (conference) group's `to_date` or if not set, 
+            infers it from the ending time of the earliest conference event """
         from cosinnus_event.models import ConferenceEvent # noqa
         queryset = ConferenceEvent.objects.filter(room__group=self)
         if queryset.count() > 0:

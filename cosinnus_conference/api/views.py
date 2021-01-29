@@ -10,6 +10,7 @@ from cosinnus_event.models import ConferenceEvent
 # FIXME: Make this pagination class default in REST_FRAMEWORK setting
 from rest_framework.decorators import action
 from cosinnus.utils.permissions import check_user_superuser
+from cosinnus.models.group_extra import CosinnusConference
 
 
 class DefaultPageNumberPagination(pagination.PageNumberPagination):
@@ -40,7 +41,7 @@ class RequireEventReadMixin(object):
 
 class ConferenceViewSet(RequireGroupReadMixin,
                         viewsets.ReadOnlyModelViewSet):
-    queryset = get_cosinnus_group_model().objects.filter(is_conference=True, is_active=True)
+    queryset = CosinnusConference.objects.filter(is_active=True)
     serializer_class = ConferenceSerializer
     pagination_class = DefaultPageNumberPagination
 
