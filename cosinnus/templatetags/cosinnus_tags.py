@@ -61,7 +61,8 @@ from django.db.models.functions import Lower
 from django.contrib.contenttypes.models import ContentType
 from cosinnus_organization.models import CosinnusOrganization
 
-from cosinnus.utils.user import check_user_has_accepted_portal_tos
+from cosinnus.utils.user import check_user_has_accepted_portal_tos,\
+    is_user_active as utils_is_user_active
 from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
 from django.templatetags.i18n import do_translate, do_block_translate, TranslateNode, BlockTranslateNode
 from cosinnus.utils.html import render_html_with_variables
@@ -1314,5 +1315,11 @@ def conference_application(context, conference):
     applications = CosinnusConferenceApplication.objects.filter(user=user, conference=conference)
     if applications:
         return applications.first()
+
+@register.filter
+def is_user_active(user):
+    """ Returns for a user the value of the given ui pref """
+    return utils_is_user_active(user)
+
 
 

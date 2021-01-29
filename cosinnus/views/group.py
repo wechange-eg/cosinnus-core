@@ -429,7 +429,8 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         # users in other portals
         # we also exclude users who have never logged in
         _q = get_user_model().objects.all()
-        _q = filter_active_users(_q)
+        if not check_user_superuser(self.request.user):
+            _q = filter_active_users(_q)
         _q = _q.order_by('first_name', 'last_name').select_related('cosinnus_profile')
         
         admins = _q.filter(id__in=admin_ids)

@@ -111,6 +111,11 @@ def ensure_user_to_default_portal_groups(sender, created, **kwargs):
         # We fail silently, because we never want to 500 here unexpectedly
         logger.error("Error while trying to add User Membership for newly created user.")
 
+def is_user_active(user):
+    """ Similar to `filter_active_users`, returns True if 
+        the user account is considered active in the portal """
+    return user.is_active and user.last_login and user.cosinnus_profile.settings.get('tos_accepted', False)
+
 def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
     """ Filters a QS of ``get_user_model()`` so that all users are removed that are either of
             - inactive
