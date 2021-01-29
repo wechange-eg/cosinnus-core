@@ -147,29 +147,6 @@ class ConferenceApplicationForm(forms.ModelForm):
         if self.cleaned_data['options'] and len(self.cleaned_data) > 0:
             return [int(option) for option in self.cleaned_data['options']]
 
-class BaseConferenceApplicationEventPrioFormSet(BaseFormSet):
-
-    def clean(self):
-        """Checks first and second choice are only picked once."""
-        if any(self.errors):
-            return
-        first_priority_count = 0
-        second_priority_count = 0
-        for form in self.forms:
-            priority = form.cleaned_data['priority']
-
-            if priority == '1':
-                if first_priority_count == 1:
-                    raise forms.ValidationError(_("You can only pick one workshop as first priority."))
-                else:
-                    first_priority_count = 1
-
-            if priority == '2':
-                if second_priority_count == 1:
-                    raise forms.ValidationError(_("You can only pick one workshop as second priority."))
-                else:
-                    second_priority_count = 1
-
 class RadioSelectInRowWidget(forms.RadioSelect):
     input_type = 'radio'
     template_name = 'cosinnus/conference/radio_buttons_row.html'
@@ -188,8 +165,7 @@ class ConferenceApplicationEventPrioForm(forms.Form):
         self.fields['event_name'].widget.attrs['readonly'] = True
 
 
-PriorityFormSet = formset_factory(ConferenceApplicationEventPrioForm,
-                                  formset=BaseConferenceApplicationEventPrioFormSet, extra=0)
+PriorityFormSet = formset_factory(ConferenceApplicationEventPrioForm, extra=0)
 
 
 class ApplicationForm(forms.ModelForm):

@@ -49,8 +49,8 @@
                 {{ application.user }}
                 {{ application.id }}
                 <td>{{ application.instance.user|full_name }}</td>
-                <td>{{ application.instance.first_priority.title }}</td>
-                <td>{{ application.instance.second_priority.title }}</td>
+                <td>{{ application.instance.first_priorities_string }}</td>
+                <td>{{ application.instance.second_priorities_string }}</td>
                 {{ application.status }}
             </tr>
             {% endfor %}

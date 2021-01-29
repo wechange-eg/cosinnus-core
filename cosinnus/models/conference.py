@@ -296,18 +296,24 @@ class CosinnusConferenceApplication(models.Model):
     information = models.TextField(blank=True)
 
     @property
-    def first_priority(self):
+    def first_priorities(self):
         from cosinnus_event.models import Event
-        for key,value in self.priorities.items():
-            if value == 1:
-                return Event.objects.get(id=int(key))
+        return [Event.objects.get(id=int(key))
+                for key,value in self.priorities.items() if value == 1]
 
     @property
-    def second_priority(self):
+    def second_priorities(self):
         from cosinnus_event.models import Event
-        for key,value in self.priorities.items():
-            if value == 2:
-                return Event.objects.get(id=int(key))
+        return [Event.objects.get(id=int(key))
+                for key,value in self.priorities.items() if value == 2]
+
+    @property
+    def first_priorities_string(self):
+        return ', '.join(event.title for event in self.first_priorities)
+
+    @property
+    def second_priorities_string(self):
+        return ', '.join(event.title for event in self.second_priorities)
 
     @property
     def application_status_string(self):
