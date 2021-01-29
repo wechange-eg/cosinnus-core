@@ -216,7 +216,7 @@ class AdminDefinedChoicesTextDynamicFieldFormFieldGenerator(_BaseSelect2DynamicF
     
     def get_formfield_kwargs(self):
         from cosinnus.models.group import CosinnusPortal
-        choices = [('', _('(No choice)'))] if self._dynamic_field_options.required else []
+        choices = [('', _('(No choice)'))] if not self._dynamic_field_options.required else []
         predefined_choices = CosinnusPortal.get_current().dynamic_field_choices.get(self._dynamic_field_name, None)
         if predefined_choices:
             predefined_choices = sorted(predefined_choices)
