@@ -1,8 +1,12 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
 
-{% block breadcrumb %}{% endblock %}
 {% block leftnav %}{% endblock %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">{% trans "Application" %}</li>
+{% endblock %}
 
 {% block content %}
 {% if is_active %}
