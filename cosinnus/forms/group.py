@@ -214,9 +214,6 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
             old_save_m2m()
             self.instance.related_groups.clear()
             for related_group in self.cleaned_data['related_groups']:
-                # do not accept the forum group
-                if related_group.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None):
-                    continue
                 #self.instance.related_groups.add(related_group)
                 # add() is disabled for a self-referential models, so we create an instance of the through-model
                 RelatedGroups.objects.get_or_create(to_group=self.instance, from_group=related_group) 

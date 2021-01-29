@@ -185,9 +185,9 @@ class GroupsView(Select2View):
         
         groups = []
         for group in qs[start:end]:
-            # do not return the forum group
-            if group.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None):
-                continue
+            # do/do not return the forum group
+            #if group.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None):
+            #    continue
             # access group.name by its dict lookup to support translation magic
             groups.append((group.id, group['name']))
             
