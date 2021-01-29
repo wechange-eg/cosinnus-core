@@ -47,18 +47,21 @@
 		        
 		        <!-- a box with semi transparent background -->
 		        <div class="content-box">
-		            <h2>{% trans "Log in" %}</h2>
-		        
-		            {# Regular Field #}
-		    		{% trans "Email" as login_label %}
-		    		{% trans "Email" as login_placeholder %}
-		    		{% include 'cosinnus/fields/default_field.html' with field=form.username label=login_label placeholder=login_placeholder first=True %}
-		    	        
-		    	    {# Regular Field #}
-		    		{% trans "Password" as password_label %}
-		    		{% trans "Password" as password_placeholder %}
-		    		{% include 'cosinnus/fields/default_field.html' with field=form.password label=password_label placeholder=password_placeholder %}
-		    	        
+    		        {% block login_fields %}
+			            <h2>{% trans "Log in" %}</h2>
+			        
+			            {# Regular Field #}
+			    		{% trans "Email" as login_label %}
+			    		{% trans "Email" as login_placeholder %}
+			    		{% include 'cosinnus/fields/default_field.html' with field=form.username label=login_label placeholder=login_placeholder first=True %}
+			    	        
+			    	    {# Regular Field #}
+			    		{% trans "Password" as password_label %}
+			    		{% trans "Password" as password_placeholder %}
+			    		{% include 'cosinnus/fields/default_field.html' with field=form.password label=password_label placeholder=password_placeholder %}
+			    	    
+	                    {% include 'cosinnus/fields/mandatory_field_legend.html' %}
+	                {% endblock %}		        
 		        </div><!-- content-box -->
 		
 		        <button type="submit" class="btn btn-emphasized">

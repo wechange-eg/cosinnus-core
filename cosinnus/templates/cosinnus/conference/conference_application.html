@@ -56,8 +56,8 @@
         <h2>{% trans 'Apply for participation in ' %}<i>{{ group.name }}</i></h2>
         <div>{{ group.description }}</div>
         {% endif %}
-
-
+        
+        {% include 'cosinnus/fields/mandatory_field_legend.html' %}
     </div>
 
     <button type="submit" class="btn btn-emphasized">
