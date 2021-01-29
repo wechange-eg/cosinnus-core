@@ -275,6 +275,14 @@ APPLICATION_STATES_MESSAGES = [
     (APPLICATION_DECLINED, _('We are sorry, but your application has been declined.')),
 ]
 
+APPLICATION_STATES_ICONS = [
+    (APPLICATION_INVALID, 'fas fa-times'),
+    (APPLICATION_SUBMITTED, 'fas fa-spinner'),
+    (APPLICATION_WAITLIST, 'fas fa-clock'),
+    (APPLICATION_ACCEPTED, 'fas fa-check'),
+    (APPLICATION_DECLINED, 'fas fa-times'),
+]
+
 APPLICATION_STATES_VISIBLE = [
     (APPLICATION_DECLINED, _('Declined')),
     (APPLICATION_WAITLIST, _('Waitlist')),
@@ -320,5 +328,11 @@ class CosinnusConferenceApplication(models.Model):
         for message in APPLICATION_STATES_MESSAGES:
             if message[0] == self.status:
                 return message[1]
+
+    @property
+    def application_status_icon(self):
+        for icon in APPLICATION_STATES_ICONS:
+            if icon[0] == self.status:
+                return icon[1]
 
 
