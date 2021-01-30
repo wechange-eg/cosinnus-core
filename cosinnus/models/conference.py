@@ -307,6 +307,8 @@ class CosinnusConferenceApplication(models.Model):
     options = PostgresJSONField(default=list, blank=True, null=True)
     priorities = PostgresJSONField(default=dict, blank=True, null=True)
     information = models.TextField(blank=True)
+    reason_for_rejection = models.TextField(blank=True)
+    last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
 
     objects = CosinnusConferenceApplicationQuerySet.as_manager()
 
