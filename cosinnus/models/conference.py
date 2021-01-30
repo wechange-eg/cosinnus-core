@@ -294,6 +294,14 @@ class CosinnusConferenceApplicationQuerySet(models.QuerySet):
     def order_by_conference_startdate(self):
         return self.order_by('conference__from_date')
 
+    def accepted_in_future(self):
+        now = timezone.now()
+        rejected = [APPLICATION_INVALID, APPLICATION_DECLINED]
+        return self.filter(conference__from_date__gte=now)\
+                   .exclude(status__in=rejected)\
+                   .order_by('conference__from_date')
+
+
 class CosinnusConferenceApplication(models.Model):
 
     conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
