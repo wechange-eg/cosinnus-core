@@ -289,6 +289,11 @@ APPLICATION_STATES_VISIBLE = [
     (APPLICATION_ACCEPTED, _('Accepted')),
 ]
 
+class CosinnusConferenceApplicationQuerySet(models.QuerySet):
+
+    def order_by_conference_startdate(self):
+        return self.order_by('conference__from_date')
+
 class CosinnusConferenceApplication(models.Model):
 
     conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
@@ -302,6 +307,8 @@ class CosinnusConferenceApplication(models.Model):
     options = PostgresJSONField(default=list, blank=True, null=True)
     priorities = PostgresJSONField(default=dict, blank=True, null=True)
     information = models.TextField(blank=True)
+
+    objects = CosinnusConferenceApplicationQuerySet.as_manager()
 
     @property
     def first_priorities(self):
