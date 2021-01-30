@@ -1309,6 +1309,11 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
             return queryset.aggregate(Max('to_date'))['to_date__max']
         return None
 
+    @property
+    def conference_events(self):
+        from cosinnus_event.models import ConferenceEvent # noqa
+        return ConferenceEvent.objects.filter(group=self)
+
 
 class CosinnusGroup(CosinnusBaseGroup):
     class Meta(CosinnusBaseGroup.Meta):
