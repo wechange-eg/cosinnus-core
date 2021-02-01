@@ -26,35 +26,57 @@
         {% if max_number %}
             <div class="large-space">{% trans 'The maximum number of participants is ' %} {{ max_number }} ({% blocktrans count counter=places_left %} 1 place left {% plural %} {{ counter }} places left {% endblocktrans %}) </div>
         {% endif %}
-        <table class="table priority-form">
-            <thead>
-                <tr>
-                    <th>{% trans "Name" %}</th>
-                    <th>{% trans "First Choice" %}</th>
-                    <th>{% trans "Second Choice" %}</th>
+        <div class="applications-form">
+            <div class="row">
+                <div class="col-md-3"><b>{% trans "Name" %}</b></div>
+                <div class="col-md-3"><b>{% trans "First Choice" %}</b></div>
+                <div class="col-md-3"><b>{% trans "Second Choice" %}</b></div>
+                <div class="col-md-3">
+                    <div class="row">
                     {% for value, text in form.0.status.field.widget.choices %}
 	                    {% if value == 3 %}
-	                       <th><i class="fas fa-clock"></i></th>
+	                       <div class="col-md-4"><i class="fas fa-clock"></i></div>
 	                    {% elif value == 4 %}
-	                       <th><i class="fas fa-check"></i></th>
+	                       <div class="col-md-4"><i class="fas fa-check"></i></div>
 	                    {% elif value == 5 %}
-	                       <th><i class="fas fa-times"></i></th>
+	                       <div class="col-md-4"><i class="fas fa-times"></i></div>
 	                    {% endif %}
                     {% endfor %}
-                </tr>
-            </thead>
+                    </div>
+                </div>
+            </div>
+
+            <div class="large-space">
             {% for application in form %}
-	            <tr class="white-content">
-	                {{ application.conference }}
-	                {{ application.user }}
-	                {{ application.id }}
-	                <td>{{ application.instance.user|full_name }}</td>
-	                <td>{{ application.instance.first_priorities_string }}</td>
-	                <td>{{ application.instance.second_priorities_string }}</td>
-	                {{ application.status }}
-	            </tr>
+                <div>
+                    {{ application.conference }}
+                    {{ application.user }}
+                    {{ application.id }}
+                    <div class="row collapsed application-row" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}">
+                        <div class="col-md-3 white-content">{{ application.instance.user|full_name }}</div>
+                        <div class="col-md-3 white-content">{{ application.instance.first_priorities_string }}</div>
+                        <div class="col-md-3 white-content">{{ application.instance.second_priorities_string }}</div>
+                        <div class="col-md-3 status-row">
+                            <div class="row">{{ application.status }}</div>
+                        </div>
+                    </div>
+                    <div id="collapse{{ forloop.counter }}" class="collapse">
+                        <div class="">
+                            <div class="row application-information">
+                                <div class="col-md-6">
+                                    <p>{{ application.instance.information }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    {% include 'cosinnus/fields/default_field.html' with field=application.reason_for_rejection %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
-        </table>
+            </div>
+
+        </div>
 
         <div class="large-space">
             {% for form in assignment_formset %}

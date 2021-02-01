@@ -147,6 +147,11 @@ class ConferenceApplicationForm(forms.ModelForm):
         if self.cleaned_data['options'] and len(self.cleaned_data) > 0:
             return [int(option) for option in self.cleaned_data['options']]
 
+class RadioSelectInTableRowWidget(forms.RadioSelect):
+    input_type = 'radio'
+    template_name = 'cosinnus/conference/radio_buttons_table_row.html'
+    option_template_name = 'cosinnus/conference/radio_option.html'
+
 class RadioSelectInRowWidget(forms.RadioSelect):
     input_type = 'radio'
     template_name = 'cosinnus/conference/radio_buttons_row.html'
@@ -158,7 +163,7 @@ class ConferenceApplicationEventPrioForm(forms.Form):
     priority = forms.ChoiceField(
         initial=0,
         choices=[(0, _('No Interest')), (1, _('First Choice')), (2, ('Second Choice'))],
-        widget=RadioSelectInRowWidget)
+        widget=RadioSelectInTableRowWidget)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
