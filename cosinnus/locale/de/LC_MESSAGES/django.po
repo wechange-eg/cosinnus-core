@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-28 14:43+0100\n"
-"PO-Revision-Date: 2021-01-28 14:43+0100\n"
+"POT-Creation-Date: 2021-02-01 16:57+0100\n"
+"PO-Revision-Date: 2021-02-01 16:58+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -858,27 +858,32 @@ msgstr "Slug darf nicht leer sein."
 msgid "Participation Management"
 msgstr "Teilnehmendenmanagement"
 
-msgid "Applications are open"
-msgstr "Antragsstellungen sind offen"
+msgid "Participation applications are open."
+msgstr "Teilnahmeantragsstellungen sind offen."
 
-msgid "Application has not started yet."
-msgstr "Die Anmeldung hat noch nicht begonnen."
+msgid "Participation application has not started yet."
+msgstr "Die Teilnahmeantragsstellung hat noch nicht begonnen."
 
-msgid "Application ist over."
-msgstr "Die Anmeldung ist beendet."
+msgid "Participation application is over."
+msgstr "Die Teilnahmeantragsstellung ist vorbei."
 
+msgctxt "a conference application status"
 msgid "Invalid"
 msgstr "Ungültig"
 
+msgctxt "a conference application status"
 msgid "Submitted"
-msgstr "Übertragen"
+msgstr "Eingereicht"
 
+msgctxt "a conference application status"
 msgid "Waitlist"
 msgstr "Warteliste"
 
+msgctxt "a conference application status"
 msgid "Accepted"
-msgstr "ToS angenommen"
+msgstr "Akzeptiert"
 
+msgctxt "a conference application status"
 msgid "Declined"
 msgstr "Abgelehnt"
 
@@ -896,6 +901,15 @@ msgstr "Glückwünsch. Dein Teilnahmeantrag wurde angenommen!"
 
 msgid "We are sorry, but your application has been declined."
 msgstr "Tut uns leid, aber dein Teilnahmeantrag wurde abgelehnt."
+
+msgid "Declined"
+msgstr "Abgelehnt"
+
+msgid "Waitlist"
+msgstr "Warteliste"
+
+msgid "Accepted"
+msgstr "ToS angenommen"
 
 msgid "Confernence Application"
 msgstr "Konferenz Anmeldung"
@@ -2425,6 +2439,9 @@ msgstr "In Projekten anzeigen..."
 msgid "Disable editor"
 msgstr "Editor deaktivieren"
 
+msgid "Application"
+msgstr "Antrag"
+
 msgid "My individual needs"
 msgstr "Meine individuellen Bedürfnisse"
 
@@ -2466,6 +2483,12 @@ msgstr "Erste Wahl"
 
 msgid "Second Choice"
 msgstr "Zweite Wahl"
+
+msgid "Export details and addresses"
+msgstr "Details uns Adressen exportieren"
+
+msgid "Export signature list"
+msgstr "Unterschriftenliste exportieren"
 
 msgid "Conference is not running"
 msgstr "Tagung läuft gerade nicht"
@@ -2869,6 +2892,9 @@ msgstr "Beispiel: https://twitter.com/myaccount"
 msgid "website"
 msgstr "Webseite"
 
+msgid "indicates a mandatory field"
+msgstr "bezeichnet ein Pflichtfeld"
+
 msgid "This is the current address"
 msgstr "Dies ist die aktuelle Adresse"
 
@@ -2883,6 +2909,10 @@ msgstr "Maximale Anzahl von Teilnehmenden"
 
 msgid "About the conference"
 msgstr "Über die Konferenz"
+
+msgctxt "as in: starts at a certain date"
+msgid "Starts"
+msgstr "Beginnt"
 
 msgctxt "time"
 msgid "o'clock"
@@ -3064,6 +3094,9 @@ msgstr "Nachricht an alle Mitglieder"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
 msgstr "Nachricht schicken"
+
+msgid "User account inactive"
+msgstr "Benutzerkonto inaktiv"
 
 msgid "Kick"
 msgstr "Entfernen"
@@ -3415,11 +3448,11 @@ msgstr "Ändere sie hier..."
 msgid "Register and join!"
 msgstr "Registrieren und beitreten!"
 
+msgid "Application period"
+msgstr "Antragsstellungszeitraum"
+
 msgid "You have been invited to apply!"
 msgstr "Du wurdest eingeladen, die Teilnahme zu beantragen!"
-
-msgid "Applications are open. Apply now!"
-msgstr "Antragsstellungen sind offen. Bewirb dich jetzt!"
 
 msgid "Edit Application"
 msgstr "Anmeldung bearbeiten"
@@ -5781,6 +5814,9 @@ msgstr "Aktivitäten"
 msgid "Contents"
 msgstr "Inhalte"
 
+msgid "My Conferences"
+msgstr "Meine Konferenzen"
+
 msgid "Close to me"
 msgstr "In meiner Nähe"
 
@@ -6049,9 +6085,6 @@ msgstr "Konferenzen"
 
 msgid "All Conferences"
 msgstr "Alle Konferenzen"
-
-msgid "My Conferences"
-msgstr "Meine Konferenzen"
 
 msgid "Conference Menu"
 msgstr "Konferenzmenü"
@@ -6610,6 +6643,17 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#, fuzzy
+#~| msgid "Conference Applications"
+#~ msgid "a conference application status"
+#~ msgstr "Konferenz-Teilnahmeanträge"
+
+#~ msgid "Application ist over."
+#~ msgstr "Die Anmeldung ist beendet."
+
+#~ msgid "Applications are open. Apply now!"
+#~ msgstr "Antragsstellungen sind offen. Bewirb dich jetzt!"
 
 #~ msgid "Add Application"
 #~ msgstr "Anmeldung hinzufügen"

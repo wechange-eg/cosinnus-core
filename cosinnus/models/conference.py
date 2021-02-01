@@ -10,7 +10,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 import six
 
 from cosinnus.conf import settings
@@ -267,11 +267,11 @@ APPLICATION_ACCEPTED = 4
 APPLICATION_DECLINED = 5
 
 APPLICATION_STATES = [
-    (APPLICATION_INVALID, _('Invalid')),
-    (APPLICATION_SUBMITTED, _('Submitted')),
-    (APPLICATION_WAITLIST, _('Waitlist')),
-    (APPLICATION_ACCEPTED, _('Accepted')),
-    (APPLICATION_DECLINED, _('Declined')),
+    (APPLICATION_INVALID, pgettext_lazy('a conference application status', 'Invalid')),
+    (APPLICATION_SUBMITTED, pgettext_lazy('a conference application status', 'Submitted')),
+    (APPLICATION_WAITLIST, pgettext_lazy('a conference application status', 'Waitlist')),
+    (APPLICATION_ACCEPTED, pgettext_lazy('a conference application status', 'Accepted')),
+    (APPLICATION_DECLINED, pgettext_lazy('a conference application status', 'Declined')),
 ]
 
 APPLICATION_STATES_MESSAGES = [
