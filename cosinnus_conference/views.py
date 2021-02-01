@@ -577,7 +577,7 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                                 GroupIsConferenceMixin,
                                 FormView):
     form_class = ConferenceApplicationForm
-    template_name = 'cosinnus/conference/conference_application.html'
+    template_name = 'cosinnus/conference/conference_application_form.html'
 
     @property
     def events(self):
@@ -638,14 +638,14 @@ class ConferenceApplicationView(SamePortalGroupMixin,
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
     def get(self, request, *args, **kwargs):
-        if not self._is_active():
+        if not self._applications_are_active():
             messages.error(self.request, self.participation_management.application_time_string )
         if self.application and not self.application.status == 2:
             messages.error(self.request, _('You cannot change your application anymore.') )
         return self.render_to_response(self.get_context_data())
 
     def post(self, request, *args, **kwargs):
-        if not self._is_active() or (self.application and not self.application.status == 2):
+        if not self._applications_are_active() or (self.application and not self.application.status == 2):
             return HttpResponseForbidden()
         if 'withdraw' in request.POST:
             self.application.delete()
@@ -672,10 +672,10 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                      'priority' : self.application.priorities.get(str(event.id))}
                      for event in self.events]
 
-    def _is_active(self):
+    def _applications_are_active(self):
         pm = self.participation_management
         if pm:
-            return pm.is_active
+            return pm.applications_are_active
         return True
 
     def _user_can_edit_application(self):
@@ -686,7 +686,7 @@ class ConferenceApplicationView(SamePortalGroupMixin,
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        if self._is_active() and self._user_can_edit_application():
+        if self._applications_are_active() and self._user_can_edit_application():
             if 'formset' in kwargs:
                 priority_formset = kwargs.pop('formset')
             else:
@@ -694,7 +694,7 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                     initial = self._get_initial_priorities()
                 )
             context.update({
-                'is_active': True,
+                'applications_are_active': True,
                 'group': self.group,
                 'participation_management': self.participation_management,
                 'priority_formset': priority_formset
@@ -711,7 +711,7 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
                                                         GroupIsConferenceMixin,
                                                         FormView):
     form_class = ApplicationFormSet
-    template_name = 'cosinnus/conference/conference_applications.html'
+    template_name = 'cosinnus/conference/conference_application_management_form.html'
     # for printing out what happened to what users
     _users_accepted = None # array
     _users_declined = None # array

@@ -233,7 +233,7 @@ class ParticipationManagement(models.Model):
                                            on_delete=models.CASCADE)
 
     @property
-    def is_active(self):
+    def applications_are_active(self):
         if self.application_start and self.application_end:
             now = timezone.now()
             return now >= self.application_start and now <= self.application_end
@@ -241,14 +241,14 @@ class ParticipationManagement(models.Model):
 
     @property
     def application_time_string(self):
-        if self.is_active:
-            return _('Applications are open')
+        if self.applications_are_active:
+            return _('Participation applications are open.')
         else:
             now = timezone.now()
             if now < self.application_start:
-                return _('Application has not started yet.')
+                return _('Participation application has not started yet.')
             elif now > self.application_end:
-                return _('Application ist over.')
+                return _('Participation application is over.')
 
 
 

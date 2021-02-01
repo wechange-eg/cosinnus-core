@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-{% if is_active %}
+{% if applications_are_active %}
 <form method="POST" action="" class="cosinnus-form">
     {% csrf_token %}
     {{ form.media }}

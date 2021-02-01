@@ -119,7 +119,7 @@
 						</h2> 
 					{% endif %}
 	
-					{% if group.participation_management.all.count == 0 or group.participation_management.first.is_active %}
+					{% if group.participation_management.all.count == 0 or group.participation_management.first.applications_are_active %}
 						{% if application and application.status == 2 %}
 							<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
 								<ul class="media-list">
@@ -150,7 +150,7 @@
 						{% endif %}
 					{% else %}
 						{% if not application %}
-						<div>{{ group.participation_management.first.application_time_string }}</div>
+						    <div>{{ group.participation_management.first.application_time_string }}</div>
 						{% endif %}
 					{% endif %}
 				</div>
