@@ -49,25 +49,51 @@
                 {{ application.user }}
                 {{ application.id }}
                 <td>{{ application.instance.user|full_name }}</td>
-                <td>{{ application.instance.first_priority.title }}</td>
-                <td>{{ application.instance.second_priority.title }}</td>
+                <td>{{ application.instance.first_priorities_string }}</td>
+                <td>{{ application.instance.second_priorities_string }}</td>
                 {{ application.status }}
             </tr>
             {% endfor %}
         </table>
 
+        <div class="large-space">
+            {% for form in assignment_formset %}
+                {{ form.event_id }}
+                {% if forloop.first %}
+                <div class="row">
+                {% endif %}
+                    <div class="col-md-6">
+                        {% include 'cosinnus/fields/default_field.html' with field=form.users label=form.event_name.value large_field=True %}
+                    </div>
+                {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
+                {% if forloop.last %}</div>{% endif %}
+            {% endfor %}
+        </div>
 
-    {% for form in assignment_formset %}
-        {{ form.event_id }}
-        {% if forloop.first %}
-        <div class="row">
-        {% endif %}
-            <div class="col-md-6">
-                {% include 'cosinnus/fields/default_field.html' with field=form.users label=form.event_name.value large_field=True %}
-            </div>
-        {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
-        {% if forloop.last %}</div>{% endif %}
-    {% endfor %}
+        <button class="btn btn-left btn-emphasized">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="{% group_url 'cosinnus:conference:participants-details-download' group=group %}">
+                        <i class="fas fa-download"></i>
+                    </a>
+                    <div class="media-body">
+                        <a href="{% group_url 'cosinnus:conference:participants-details-download' group=group %}">{% trans "Export details and addresses" %}</a>
+                    </div>
+                </li>
+            </ul>
+        </button>
+        <button class="btn btn-left btn-emphasized">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="{% group_url 'cosinnus:conference:participants-details-download' group=group %}">
+                        <i class="fas fa-download"></i>
+                    </a>
+                    <div class="media-body">
+                        <a href="{% group_url 'cosinnus:conference:participants-details-download' group=group %}">{% trans "Export signature list" %}</a>
+                    </div>
+                </li>
+            </ul>
+        </button>
     </div>
     <button type="submit" class="btn btn-emphasized">
         <ul class="media-list">

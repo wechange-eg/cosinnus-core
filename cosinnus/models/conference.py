@@ -275,11 +275,32 @@ APPLICATION_STATES_MESSAGES = [
     (APPLICATION_DECLINED, _('We are sorry, but your application has been declined.')),
 ]
 
+APPLICATION_STATES_ICONS = [
+    (APPLICATION_INVALID, 'fas fa-times'),
+    (APPLICATION_SUBMITTED, 'fas fa-spinner'),
+    (APPLICATION_WAITLIST, 'fas fa-clock'),
+    (APPLICATION_ACCEPTED, 'fas fa-check'),
+    (APPLICATION_DECLINED, 'fas fa-times'),
+]
+
 APPLICATION_STATES_VISIBLE = [
     (APPLICATION_DECLINED, _('Declined')),
     (APPLICATION_WAITLIST, _('Waitlist')),
     (APPLICATION_ACCEPTED, _('Accepted')),
 ]
+
+class CosinnusConferenceApplicationQuerySet(models.QuerySet):
+
+    def order_by_conference_startdate(self):
+        return self.order_by('conference__from_date')
+
+    def accepted_in_future(self):
+        now = timezone.now()
+        rejected = [APPLICATION_INVALID, APPLICATION_DECLINED]
+        return self.filter(conference__from_date__gte=now)\
+                   .exclude(status__in=rejected)\
+                   .order_by('conference__from_date')
+
 
 class CosinnusConferenceApplication(models.Model):
 
@@ -294,25 +315,41 @@ class CosinnusConferenceApplication(models.Model):
     options = PostgresJSONField(default=list, blank=True, null=True)
     priorities = PostgresJSONField(default=dict, blank=True, null=True)
     information = models.TextField(blank=True)
+    reason_for_rejection = models.TextField(blank=True)
+    last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
+
+    objects = CosinnusConferenceApplicationQuerySet.as_manager()
 
     @property
-    def first_priority(self):
+    def first_priorities(self):
         from cosinnus_event.models import Event
-        for key,value in self.priorities.items():
-            if value == 1:
-                return Event.objects.get(id=int(key))
+        return [Event.objects.get(id=int(key))
+                for key,value in self.priorities.items() if value == 1]
 
     @property
-    def second_priority(self):
+    def second_priorities(self):
         from cosinnus_event.models import Event
-        for key,value in self.priorities.items():
-            if value == 2:
-                return Event.objects.get(id=int(key))
+        return [Event.objects.get(id=int(key))
+                for key,value in self.priorities.items() if value == 2]
+
+    @property
+    def first_priorities_string(self):
+        return ', '.join(event.title for event in self.first_priorities)
+
+    @property
+    def second_priorities_string(self):
+        return ', '.join(event.title for event in self.second_priorities)
 
     @property
     def application_status_string(self):
         for message in APPLICATION_STATES_MESSAGES:
             if message[0] == self.status:
                 return message[1]
+
+    @property
+    def application_status_icon(self):
+        for icon in APPLICATION_STATES_ICONS:
+            if icon[0] == self.status:
+                return icon[1]
 
 

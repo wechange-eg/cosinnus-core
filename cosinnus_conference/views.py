@@ -325,6 +325,30 @@ class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin, RequireWriteM
         return response
 
 
+class ConferenceParticipantsDetailsDownloadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
+
+    def get(self, request, *args, **kwars):
+        filename = '{}_participants_details.csv'.format(self.group.slug)
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
+        writer = csv.writer(response)
+        header = ['column1', 'column2', 'column3']
+        writer.writerow(header)
+        return response
+
+
+class ConferenceParticipantsSignaturesDownloadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
+
+    def get(self, request, *args, **kwars):
+        filename = '{}_participants_signatures.csv'.format(self.group.slug)
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
+        writer = csv.writer(response)
+        header = ['column1', 'column2', 'column3']
+        writer.writerow(header)
+        return response
+
+
 class ConferenceRoomManagementView(RequireAdminMixin, GroupIsConferenceMixin, ListView):
     
     model = CosinnusConferenceRoom
@@ -809,6 +833,8 @@ conference_applications = ConferenceParticipationManagementApplicationsView.as_v
 conference_application = ConferenceApplicationView.as_view()
 conference_participation_management = ConferenceParticipationManagementView.as_view()
 conference_management = ConferenceManagementView.as_view()
+conference_participants_details_download = ConferenceParticipantsDetailsDownloadView.as_view()
+conference_participants_signatures_download = ConferenceParticipantsSignaturesDownloadView.as_view()
 workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
 workshop_participants_download = WorkshopParticipantsDownloadView.as_view()
 workshop_participants_upload_skeleton = WorkshopParticipantsUploadSkeletonView.as_view()
