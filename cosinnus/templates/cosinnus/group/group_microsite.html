@@ -83,43 +83,52 @@
 						</ul>
 					</button>
 				{% else %}
-				
-				    {% if user.pk in group.invited_pendings %}
-	                    <h2>{% trans "You are have been invited to apply!" %}</h2>
-	                    
-	                    {% captureas modal_decline_invitation_id %}userModal_decline_invitation_{{member.pk}}{% endcaptureas %}
-	                    <button type="button" class="btn btn-default btn-autosize" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
-	                        <ul class="media-list">
-	                            <li class="media">
-	                                <a class="pull-left" href="#">
-	                                    <i class="fa fa-close"></i>
-	                                </a>
-	                                <div class="media-body">
-	                                    {% trans "Decline Invitation" %}</span>
-	                                </div>
-	                            </li>
-	                        </ul>
-	                    </button>
-	                    
-	                    {% captureas label %}{% blocktrans %}Do you really want to decline the invitation?{% endblocktrans %}{% endcaptureas %}
-	                    {% captureas title %}{% trans "Decline Invitation" %}{% endcaptureas %}
-	                    {% captureas action %}{% group_url 'cosinnus:group-user-decline' group=group %}{% endcaptureas %}
-	                    {% include "cosinnus/modal_box.html" with id=modal_decline_invitation_id label=label title=title form_action=action %}
-	                {% endif %}
-				
-	
 					{% conference_application group as application %}
-					{% if not user.pk in group.invited_pendings %}
-						<h2>
-						    {% if application and application.application_status_string %}
-							    {{ application.application_status_string }}
-						    {% else %}
-						        {% trans "Applications are open. Apply now!" %}
-						    {% endif %}
-						</h2> 
-					{% endif %}
-	
+					<h2>
+					    {% if application and application.application_status_string %}
+						    {{ application.application_status_string }}
+						{% elif group.participation_management.count > 0 %}
+					        {{ group.participation_management.first.application_time_string }}
+					    {% else %}
+					        {% trans "Participation applications are open." %}
+						{% endif %}
+					</h2> 
+					{% if group.participation_management.all.count == 1 %}
+                        <div class="textfield transparent">
+                            <p>
+							    {% trans "Application period" %}:
+							    <br/>
+							    {% include 'cosinnus_event/common/humanized_event_time.html' with event=group.participation_management.first %}
+                            </p>
+                        </div>
+                    {% endif %}
 					{% if group.participation_management.all.count == 0 or group.participation_management.first.applications_are_active %}
+						{% if user.pk in group.invited_pendings and not application %}
+						    <div class="textfield transparent">
+						        <p>
+					                {% trans "You have been invited to apply!" %}
+						        </p>
+						    </div>
+						    
+						    {% captureas modal_decline_invitation_id %}userModal_decline_invitation_{{member.pk}}{% endcaptureas %}
+	                        <button type="button" class="btn btn-default btn-autosize" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
+	                            <ul class="media-list">
+	                                <li class="media">
+	                                    <a class="pull-left" href="#">
+	                                        <i class="fa fa-close"></i>
+	                                    </a>
+	                                    <div class="media-body">
+	                                        {% trans "Decline Invitation" %}</span>
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </button>
+	                        {% captureas label %}{% blocktrans %}Do you really want to decline the invitation?{% endblocktrans %}{% endcaptureas %}
+	                        {% captureas title %}{% trans "Decline Invitation" %}{% endcaptureas %}
+	                        {% captureas action %}{% group_url 'cosinnus:group-user-decline' group=group %}{% endcaptureas %}
+	                        {% include "cosinnus/modal_box.html" with id=modal_decline_invitation_id label=label title=title form_action=action %}
+                        {% endif %}
+					    
 						{% if application and application.status == 2 %}
 							<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
 								<ul class="media-list">
@@ -133,8 +142,7 @@
 									</li>
 								</ul>
 							</button>
-						{% endif %}
-						{% if not application %}
+						{% elif not application %}
 							<button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
 								<ul class="media-list">
 									<li class="media">
@@ -147,10 +155,6 @@
 									</li>
 								</ul>
 							</button>
-						{% endif %}
-					{% else %}
-						{% if not application %}
-						    <div>{{ group.participation_management.first.application_time_string }}</div>
 						{% endif %}
 					{% endif %}
 				</div>

@@ -3415,7 +3415,7 @@ msgstr "Ändere sie hier..."
 msgid "Register and join!"
 msgstr "Registrieren und beitreten!"
 
-msgid "You are have been invited to apply!"
+msgid "You have been invited to apply!"
 msgstr "Du wurdest eingeladen, die Teilnahme zu beantragen!"
 
 msgid "Applications are open. Apply now!"

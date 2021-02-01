@@ -249,7 +249,14 @@ class ParticipationManagement(models.Model):
                 return _('Participation application has not started yet.')
             elif now > self.application_end:
                 return _('Participation application is over.')
-
+    
+    @property
+    def from_date(self):
+        return self.application_start
+    
+    @property
+    def to_date(self):
+        return self.application_end
 
 
 
