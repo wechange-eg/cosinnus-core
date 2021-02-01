@@ -204,8 +204,8 @@ class CosinnusGroupFormMixin(object):
     def get_form(self, *args, **kwargs):
         form = super(CosinnusGroupFormMixin, self).get_form(*args, **kwargs)
         # disable the userprofile visibility field and set the initial to its value if its locked
-        if settings.COSINNUS_CONFERENCES_VISIBILITY_SETTINGS_LOCKED is not None:
-            field = form.forms['media_tag'].fields['visibility']
+        if settings.COSINNUS_CONFERENCES_PUBLIC_SETTING_LOCKED is not None:
+            field = form.forms['obj'].fields['public']
             field.disabled = True
             field.required = False
         return form

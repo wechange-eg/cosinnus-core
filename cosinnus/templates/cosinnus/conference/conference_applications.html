@@ -24,7 +24,7 @@
     {{ assignment_formset.management_form }}
     <div class="content-box">
         {% if max_number %}
-        <div class="large-space">{% trans 'The maximum number of participants is ' %} {{ max_number }} ({% blocktrans count counter=places_left %} 1 place left {% plural %} {{ counter }} places left {% endblocktrans %}) </div>
+            <div class="large-space">{% trans 'The maximum number of participants is ' %} {{ max_number }} ({% blocktrans count counter=places_left %} 1 place left {% plural %} {{ counter }} places left {% endblocktrans %}) </div>
         {% endif %}
         <table class="table priority-form">
             <thead>
@@ -33,26 +33,26 @@
                     <th>{% trans "First Choice" %}</th>
                     <th>{% trans "Second Choice" %}</th>
                     {% for value, text in form.0.status.field.widget.choices %}
-                    {% if value == 3 %}
-                    <th><i class="fas fa-clock"></i></th>
-                    {% elif value == 4 %}
-                    <th><i class="fas fa-check"></i></th>
-                    {% elif value == 5 %}
-                    <th><i class="fas fa-times"></i></th>
-                    {% endif %}
+	                    {% if value == 3 %}
+	                       <th><i class="fas fa-clock"></i></th>
+	                    {% elif value == 4 %}
+	                       <th><i class="fas fa-check"></i></th>
+	                    {% elif value == 5 %}
+	                       <th><i class="fas fa-times"></i></th>
+	                    {% endif %}
                     {% endfor %}
                 </tr>
             </thead>
             {% for application in form %}
-            <tr class="white-content">
-                {{ application.conference }}
-                {{ application.user }}
-                {{ application.id }}
-                <td>{{ application.instance.user|full_name }}</td>
-                <td>{{ application.instance.first_priorities_string }}</td>
-                <td>{{ application.instance.second_priorities_string }}</td>
-                {{ application.status }}
-            </tr>
+	            <tr class="white-content">
+	                {{ application.conference }}
+	                {{ application.user }}
+	                {{ application.id }}
+	                <td>{{ application.instance.user|full_name }}</td>
+	                <td>{{ application.instance.first_priorities_string }}</td>
+	                <td>{{ application.instance.second_priorities_string }}</td>
+	                {{ application.status }}
+	            </tr>
             {% endfor %}
         </table>
 
@@ -70,30 +70,30 @@
             {% endfor %}
         </div>
 
-        <button class="btn btn-left btn-emphasized">
+        <a class="btn btn-left btn-emphasized" href="{% group_url 'cosinnus:conference:participants-details-download' group=group %}">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left" href="{% group_url 'cosinnus:conference:participants-details-download' group=group %}">
+                    <span class="pull-left" >
                         <i class="fas fa-download"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
-                        <a href="{% group_url 'cosinnus:conference:participants-details-download' group=group %}">{% trans "Export details and addresses" %}</a>
+                        {% trans "Export details and addresses" %}
                     </div>
                 </li>
             </ul>
-        </button>
-        <button class="btn btn-left btn-emphasized">
+        </a>
+        <a class="btn btn-left btn-emphasized" href="{% group_url 'cosinnus:conference:participants-details-download' group=group %}">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left" href="{% group_url 'cosinnus:conference:participants-details-download' group=group %}">
+                    <span class="pull-left">
                         <i class="fas fa-download"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
-                        <a href="{% group_url 'cosinnus:conference:participants-details-download' group=group %}">{% trans "Export signature list" %}</a>
+                        {% trans "Export signature list" %}
                     </div>
                 </li>
             </ul>
-        </button>
+        </a>
     </div>
     <button type="submit" class="btn btn-emphasized">
         <ul class="media-list">

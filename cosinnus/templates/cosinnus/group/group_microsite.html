@@ -109,13 +109,15 @@
 				
 	
 					{% conference_application group as application %}
-					<h2>
-					    {% if application and application.application_status_string %}
-						    {{ application.application_status_string }}
-					    {% else %}
-					        {% trans "Applications are open. Apply now!" %}
-					    {% endif %}
-					</h2> 
+					{% if not user.pk in group.invited_pendings %}
+						<h2>
+						    {% if application and application.application_status_string %}
+							    {{ application.application_status_string }}
+						    {% else %}
+						        {% trans "Applications are open. Apply now!" %}
+						    {% endif %}
+						</h2> 
+					{% endif %}
 	
 					{% if group.participation_management.all.count == 0 or group.participation_management.first.is_active %}
 						{% if application and application.status == 2 %}

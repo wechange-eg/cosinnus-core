@@ -297,7 +297,7 @@ class CosinnusConferenceApplicationQuerySet(models.QuerySet):
     def accepted_in_future(self):
         now = timezone.now()
         rejected = [APPLICATION_INVALID, APPLICATION_DECLINED]
-        return self.filter(conference__from_date__gte=now)\
+        return self.filter(conference__to_date__gte=now)\
                    .exclude(status__in=rejected)\
                    .order_by('conference__from_date')
 

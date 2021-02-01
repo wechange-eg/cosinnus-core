@@ -390,8 +390,10 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         # "Invitations"
         societies_invited = CosinnusSociety.objects.get_for_user_invited(request.user)
         projects_invited = CosinnusProject.objects.get_for_user_invited(request.user)
+        conferences_invited = CosinnusConference.objects.get_for_user_invited(request.user)
         groups_invited = [DashboardItem(group) for group in societies_invited]
         groups_invited += [DashboardItem(group) for group in projects_invited]
+        groups_invited += [DashboardItem(group) for group in conferences_invited]
         context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         context['groups_invited_count'] = len(groups_invited)
 

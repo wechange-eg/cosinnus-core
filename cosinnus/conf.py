@@ -636,9 +636,9 @@ class CosinnusConf(AppConf):
     # to the microsite, removes most group-like elements like apps andremoves room management
     CONFERENCES_USE_COMPACT_MODE = False
     
-    # if set to any value other than None, the conference visibility field will be disabled
+    # if set to any value other than None, the conference public field will be disabled
     # and locked to the value set here
-    CONFERENCES_VISIBILITY_SETTINGS_LOCKED = None
+    CONFERENCES_PUBLIC_SETTING_LOCKED = None
     
     # if set to True, regular non-portal admin users can not create projects and groups by themselves
     # and some elements like the "+" button in the navbar is hidden

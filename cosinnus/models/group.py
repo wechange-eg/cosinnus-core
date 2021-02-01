@@ -884,9 +884,8 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
             self.media_tag = media_tag
         
         # set the group's visibility to the locked value if the setting says so
-        if created and self.type == self.TYPE_CONFERENCE and settings.COSINNUS_CONFERENCES_VISIBILITY_SETTINGS_LOCKED is not None:
-            self.media_tag.visibility = settings.COSINNUS_CONFERENCES_VISIBILITY_SETTINGS_LOCKED
-            self.media_tag.save()
+        if created and self.type == self.TYPE_CONFERENCE and settings.COSINNUS_CONFERENCES_PUBLIC_SETTING_LOCKED is not None:
+            self.public = settings.COSINNUS_CONFERENCES_PUBLIC_SETTING_LOCKED
 
         if created and not self.portal:
             # set portal to current

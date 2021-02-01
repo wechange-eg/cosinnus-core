@@ -46,6 +46,7 @@
                 <div class="textfield">
 	                {% if group.from_date %}
 	                    <h4>
+	                        {% trans "Scheduled" context "as in: starts at a certain date" %}:
 	                        {% include 'cosinnus_event/common/humanized_event_time.html' with event=group from_date_only=True %}
 	                    </h4>
 	                    <div class="textfield transparent">
@@ -59,32 +60,42 @@
 	                       </p>
 	                    </div>
 	                {% endif %}
-
-                    <p>
-                        {{ group.description_long }}
-                    </p>
-
-                    {% trans "Workshops" %}:
-                    <ul class="microsite-conference-workshop-list">
-	                    {% for room in group.rooms.all %}
-	                        {% for event in room.events.all %}
-	                            {% if not event.is_break %}
-		                            <li>
-		                                <a href="{{ event.get_absolute_url }}">
-				                            {{ event.title }}
-			                            </a>
-			                            {% if event.from_date %}
-				                            <i>
-			                                    {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
-			                                </i>
-			                            {% endif %}
-		                            </li>
-		                        {% endif %}
-	                        {% endfor %}
-	                    {% endfor %}
-                    </ul>
+                    
+                    {% if group.description_long %}
+                        <hr class="invisible"/>
+                        <div class="textfield transparent">
+	                        {{ group.description_long|textfield }}
+	                    </div>
+                    {% endif %}
+                    
+                    {% if group.conference_events.count > 0 %}
+                        <hr class="invisible"/>
+	                    <h4>
+	                        {% trans "Workshops" %}:
+	                    </h4>
+	                    <ul class="microsite-conference-workshop-list large-space">
+		                    {% for room in group.rooms.all %}
+		                        {% for event in room.events.all %}
+		                            {% if not event.is_break %}
+			                            <li>
+			                                <a href="{{ event.get_absolute_url }}">
+					                            {{ event.title }} - {{ event.media_tag.visibility }}
+				                            </a>
+				                            {% if event.from_date %}
+				                                &nbsp;&nbsp;
+					                            <i>
+				                                    {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
+				                                </i>
+				                            {% endif %}
+			                            </li>
+			                        {% endif %}
+		                        {% endfor %}
+		                    {% endfor %}
+	                    </ul>
+	                {% endif %}
                 </div>
                 {% trans "You will now receive notifications for content posted in this conference." as follow_success_message %}
+                {% include 'cosinnus/common/likefollowstar/like_button.html' with object=group %}
                 {% include 'cosinnus/common/likefollowstar/star_button.html' with object=group %}
                 {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=group success_message=follow_success_message %}
                 {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=group %}

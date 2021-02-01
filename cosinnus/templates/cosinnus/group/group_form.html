@@ -334,7 +334,7 @@
 		                {% endblock managed_tag_field %}
                         
                         {% block visibility_field %}
-                            {% if not group_model == "CosinnusConference" or not SETTINGS.COSINNUS_CONFERENCES_VISIBILITY_SETTINGS_LOCKED %}
+                            {% if not group_model == "CosinnusConference" or SETTINGS.COSINNUS_CONFERENCES_PUBLIC_SETTING_LOCKED is None %}
 		                        {# Group Visibility Field #}
 				                {% trans "Privacy settings" as visibility_label %}
 				                {% trans "This will be the default setting for all content created by members." as visibility_legend %}
