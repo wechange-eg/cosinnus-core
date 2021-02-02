@@ -79,7 +79,7 @@ from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.group import get_group_query_filter_for_search_terms, get_cosinnus_group_model
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser, \
     check_object_read_access, check_ug_membership, check_object_write_access, \
-    check_user_can_see_user
+    check_user_can_see_user, check_user_can_create_conferences
 from cosinnus.utils.urls import get_non_cms_root_url
 from cosinnus.utils.urls import redirect_with_next, group_aware_reverse
 from cosinnus.utils.user import create_base_user, filter_active_users, get_user_select2_pills, \
@@ -170,9 +170,7 @@ class CosinnusGroupFormMixin(object):
                             not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_CONFERENCES', False)
         # check if user is of a managed tag that would allow him to create a conference
         if conference_forbidden:
-            _user_managed_tag_slugs = [tag.slug for tag in self.request.user.cosinnus_profile.get_managed_tags()]
-            conference_forbidden = conference_forbidden and not \
-                    any(tag_slug in settings.COSINNUS_USERS_WITH_MANAGED_TAG_SLUGS_CAN_CREATE_CONFERENCES for tag_slug in _user_managed_tag_slugs)
+            conference_forbidden = not check_user_can_create_conferences(self.request.user)
             
         # special check: only portal admins can create groups/conferences
         if society_forbidden or conference_forbidden:

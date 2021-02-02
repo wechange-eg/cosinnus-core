@@ -1300,6 +1300,8 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def get_or_infer_from_date(self):
         """ Gets the (conference) group's `from_date` or if not set, 
             infers it from the starting time of the earliest conference event """
+        if self.from_date:
+            return self.from_date
         from cosinnus_event.models import ConferenceEvent # noqa
         queryset = ConferenceEvent.objects.filter(room__group=self)
         if queryset.count() > 0:
@@ -1310,6 +1312,8 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def get_or_infer_to_date(self):
         """ Gets the (conference) group's `to_date` or if not set, 
             infers it from the ending time of the earliest conference event """
+        if self.to_date:
+            return self.to_date
         from cosinnus_event.models import ConferenceEvent # noqa
         queryset = ConferenceEvent.objects.filter(room__group=self)
         if queryset.count() > 0:

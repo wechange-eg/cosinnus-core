@@ -309,3 +309,18 @@ def get_inherited_visibility_from_group(group):
         return BaseTagObject.VISIBILITY_ALL
     else:
         return BaseTagObject.VISIBILITY_GROUP
+    
+
+def check_user_can_create_conferences(user):    
+    """ Checks if a user has the necessary permissions to create a CosinnusConference """
+    if not user.is_authenticated:
+        return False
+    if check_user_superuser(user):
+        return True
+    if getattr(settings, 'COSINNUS_USERS_CAN_CREATE_CONFERENCES', False):
+        return True
+    _user_managed_tag_slugs = [tag.slug for tag in user.cosinnus_profile.get_managed_tags()]
+    if any(tag_slug in settings.COSINNUS_USERS_WITH_MANAGED_TAG_SLUGS_CAN_CREATE_CONFERENCES for tag_slug in _user_managed_tag_slugs):
+        return True
+    return False
+    

@@ -28,7 +28,8 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token,
     check_user_portal_admin, check_user_superuser,
-    check_object_likefollowstar_access, filter_tagged_object_queryset_for_user)
+    check_object_likefollowstar_access, filter_tagged_object_queryset_for_user,
+    check_user_can_create_conferences)
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
 from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
     LikeObject
@@ -397,8 +398,9 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         context['groups_invited_count'] = len(groups_invited)
 
-        # conferences        
+        # conferences    
         my_conferences = CosinnusConference.objects.get_for_user(request.user)
+        context['my_conference_groups'] = my_conferences
         context['my_conferences_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(conference) for conference in my_conferences]))
         
         membership_requests = []
@@ -416,9 +418,6 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
                 membership_requests_count += len(pending_ids)
         context['group_requests_json_encoded'] = _escape_quotes(_json.dumps(membership_requests))
         context['group_requests_count'] = membership_requests_count
-        
-        # conference groups
-        context['my_conference_groups'] = my_conferences
         
         attending_events = []
         try:
@@ -1323,5 +1322,8 @@ def is_user_active(user):
     """ Returns for a user the value of the given ui pref """
     return utils_is_user_active(user)
 
-
+@register.filter
+def user_can_create_conferences(user):
+    """ Checks if a user has the necessary permissions to create a CosinnusConference"""
+    return check_user_can_create_conferences(user)
 

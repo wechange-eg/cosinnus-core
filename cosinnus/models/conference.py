@@ -283,11 +283,11 @@ APPLICATION_STATES_MESSAGES = [
 ]
 
 APPLICATION_STATES_ICONS = [
-    (APPLICATION_INVALID, 'fas fa-times'),
-    (APPLICATION_SUBMITTED, 'fas fa-spinner'),
-    (APPLICATION_WAITLIST, 'fas fa-clock'),
-    (APPLICATION_ACCEPTED, 'fas fa-check'),
-    (APPLICATION_DECLINED, 'fas fa-times'),
+    (APPLICATION_INVALID, 'fa-times'),
+    (APPLICATION_SUBMITTED, 'fa-spinner'),
+    (APPLICATION_WAITLIST, 'fa-clock'),
+    (APPLICATION_ACCEPTED, 'fa-check'),
+    (APPLICATION_DECLINED, 'fa-times'),
 ]
 
 APPLICATION_STATES_VISIBLE = [
@@ -297,11 +297,19 @@ APPLICATION_STATES_VISIBLE = [
 ]
 
 class CosinnusConferenceApplicationQuerySet(models.QuerySet):
-
+    
     def order_by_conference_startdate(self):
         return self.order_by('conference__from_date')
+    
+    def pending_current(self):
+        """ Returns all pending applications with conference to_date in the future """
+        now = timezone.now()
+        pending = [APPLICATION_SUBMITTED, APPLICATION_WAITLIST]
+        return self.filter(conference__to_date__gte=now)\
+                   .filter(status__in=pending)\
+                   .order_by('conference__from_date')
 
-    def accepted_in_future(self):
+    def accepted_current(self):
         now = timezone.now()
         rejected = [APPLICATION_INVALID, APPLICATION_DECLINED]
         return self.filter(conference__to_date__gte=now)\
@@ -329,13 +337,13 @@ class CosinnusConferenceApplication(models.Model):
 
     @property
     def first_priorities(self):
-        from cosinnus_event.models import Event
+        from cosinnus_event.models import Event # noqa
         return [Event.objects.get(id=int(key))
                 for key,value in self.priorities.items() if value == 1]
 
     @property
     def second_priorities(self):
-        from cosinnus_event.models import Event
+        from cosinnus_event.models import Event # noqa
         return [Event.objects.get(id=int(key))
                 for key,value in self.priorities.items() if value == 2]
 
@@ -353,10 +361,10 @@ class CosinnusConferenceApplication(models.Model):
             if message[0] == self.status:
                 return message[1]
 
-    @property
-    def application_status_icon(self):
+    def get_icon(self):
+        """ Returns the icon depending on the status of the application """
         for icon in APPLICATION_STATES_ICONS:
             if icon[0] == self.status:
                 return icon[1]
-
+    
 

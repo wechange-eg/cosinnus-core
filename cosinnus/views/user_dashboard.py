@@ -20,7 +20,8 @@ import six
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal, CosinnusGroup
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+    CosinnusConference
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.map import SEARCH_MODEL_NAMES_REVERSE
 from cosinnus.models.profile import get_user_profile_model
@@ -98,6 +99,12 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
             'announcement_is_preview': announcement_is_preview,
             'show_welcome_screen': welcome_screen_enabled and not welcome_screen_expired,
         }
+        if settings.COSINNUS_CONFERENCES_ENABLED:
+            _now = now()
+            my_conferences = CosinnusConference.objects.get_for_user(self.request.user)
+            my_current_conferences = [(conf, conf.get_icon()) for conf in my_conferences if conf.get_or_infer_to_date > _now]
+            my_pending_conference_applications = [(appl.conference, appl.get_icon()) for appl in self.request.user.user_applications.pending_current()]
+            ctx['my_conferences_with_icons'] = my_pending_conference_applications + my_current_conferences
         return ctx
 
 
