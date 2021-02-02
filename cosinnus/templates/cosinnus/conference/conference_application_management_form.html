@@ -48,34 +48,57 @@
 
             <div class="large-space">
             {% for application in form %}
-                <div>
-                    {{ application.conference }}
-                    {{ application.user }}
-                    {{ application.id }}
-                    <div class="row collapsed application-row" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}">
-                        <div class="col-md-3 white-content">{{ application.instance.user|full_name }}</div>
+                {{ application.conference }}
+                {{ application.user }}
+                {{ application.id }}
+                {{ application.information }}
+                <div class="application-row">
+                    <div class="row">
+                        <div class="col-md-3 white-content">
+                            {{ application.instance.user|full_name }} {% if application.information.value %}<i class="fas fa-exclamation"></i> {% endif %}
+                        </div>
                         <div class="col-md-3 white-content">{{ application.instance.first_priorities_string }}</div>
                         <div class="col-md-3 white-content">{{ application.instance.second_priorities_string }}</div>
                         <div class="col-md-3 status-row">
                             <div class="row">{{ application.status }}</div>
                         </div>
                     </div>
-                    <div id="collapse{{ forloop.counter }}" class="collapse">
-                        <div class="">
-                            <div class="row application-information">
+
+                    <div class="row">
+                        <div role="tab">
+                            <a role="button" data-toggle="collapse" href="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                <div class="application-row">
+                                    <div class="white-content row">
+                                        <div class="col-md-offset-10 col-md-2"> {% trans 'show more ...' %}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div id="collapse{{ forloop.counter }}" class="collapse large-space" role="tabpanel">
+                            <div class="row">
                                 <div class="col-md-6">
-                                    <p>{{ application.instance.information }}</p>
+                                    {% if application.information.value %}
+                                    <div class="cosinnus-field ">
+                                        <label>
+                                            {% trans 'message to organizer' %}
+                                        </label>
+                                        <div>
+                                            {{ application.information.value }}
+                                        </div>
+                                    </div>
+                                    {% endif %}
                                 </div>
                                 <div class="col-md-6">
-                                    {% include 'cosinnus/fields/default_field.html' with field=application.reason_for_rejection %}
+                                    {% captureas label %}{% trans 'Reason for rejection' %}{% endcaptureas %}
+                                    {% include 'cosinnus/fields/default_field.html' with field=application.reason_for_rejection label=label large_field=True %}
                                 </div>
                             </div>
-                        </div>
+                       </div>
                     </div>
                 </div>
             {% endfor %}
-            </div>
 
+            </div>
         </div>
 
         <div class="large-space">

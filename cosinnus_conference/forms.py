@@ -184,6 +184,8 @@ class ApplicationForm(forms.ModelForm):
         self.fields['status'].widget = RadioSelectInRowWidget(choices=APPLICATION_STATES_VISIBLE)
         self.fields['user'].widget = forms.HiddenInput()
         self.fields['conference'].widget = forms.HiddenInput()
+        self.fields['information'].widget = forms.HiddenInput()
+        self.fields['reason_for_rejection'].widget = forms.TextInput()
 
 
 ApplicationFormSet = modelformset_factory(CosinnusConferenceApplication, form=ApplicationForm, extra=0)
