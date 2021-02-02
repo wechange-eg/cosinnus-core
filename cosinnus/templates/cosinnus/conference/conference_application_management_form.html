@@ -53,12 +53,12 @@
                 {{ application.id }}
                 {{ application.information }}
                 <div class="application-row">
-                    <div class="row">
-                        <div class="col-md-3 white-content">
+                    <div class="row white-content">
+                        <div class="col-md-3">
                             {{ application.instance.user|full_name }} {% if application.information.value %}<i class="fas fa-exclamation"></i> {% endif %}
                         </div>
-                        <div class="col-md-3 white-content">{{ application.instance.first_priorities_string }}</div>
-                        <div class="col-md-3 white-content">{{ application.instance.second_priorities_string }}</div>
+                        <div class="col-md-3">{{ application.instance.first_priorities_string }}</div>
+                        <div class="col-md-3">{{ application.instance.second_priorities_string }}</div>
                         <div class="col-md-3 status-row">
                             <div class="row">{{ application.status }}</div>
                         </div>
