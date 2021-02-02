@@ -804,8 +804,13 @@ def password_reset_proxy(request, *args, **kwargs):
                 user = USER_MODEL.objects.get(email=email, is_active=True)
             except USER_MODEL.DoesNotExist:
                 pass
+        # disallow integrated users to reset their password
         if user and check_user_integrated_portal_member(user):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_page.html')
+        # silently disallow imported/created users without a password to reset their password
+        if user and not user.password:
+            return redirect(PasswordResetView().get_success_url())
+            
     kwargs.update({
         'form_class': CosinnusPasswordResetForm,
     })
