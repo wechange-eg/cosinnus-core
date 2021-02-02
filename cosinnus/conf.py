@@ -822,7 +822,11 @@ class CosinnusConf(AppConf):
     # if enabled, this allows all portal-admins to download user emails, this might be
     # *VERY* risky, so use cautiously
     ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS = False
-
+    
+    # if True administration newsletters ignore check_user_can_receive_emails`
+    # (will ignore any blacklisting, but will still not send to inactive accounts)
+    NEWSLETTER_SENDING_IGNORES_NOTIFICATION_SETTINGS = False
+    
     # set to True if you want to use this instance as oauth provider for other platforms
     IS_OAUTH_PROVIDER = False
     

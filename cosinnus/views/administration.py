@@ -156,7 +156,9 @@ class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin,
 
         users = []
         for user in tag_users:
-            if (check_user_can_receive_emails(user)):
+            if settings.COSINNUS_NEWSLETTER_SENDING_IGNORES_NOTIFICATION_SETTINGS and user.is_active:
+                users.append(user)
+            elif (check_user_can_receive_emails(user)):
                 # if the newsletter opt-in is enabled, only send the newsletter to users
                 # who have the option enabled in their profiles
                 if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN and not \
