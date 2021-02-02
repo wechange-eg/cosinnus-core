@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags sekizai_tags %}
 
 {% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
 
@@ -87,7 +87,7 @@
 
                     <div class="row">
                         <div role="tab">
-                            <a role="button" data-toggle="collapse" href="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                            <a role="button" data-toggle="collapse" href="#collapse{{ forloop.counter0 }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter0 }}">
                                 <div class="application-row">
                                     <div class="white-content row dropdown-row">
                                         <div class="btn btn-primary dropdown-button">{% if application.information.value %}<i class="fas fa-exclamation"></i> {% endif %} {% trans 'show more ...' %}</div>
@@ -95,7 +95,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div id="collapse{{ forloop.counter }}" class="collapse large-space" role="tabpanel">
+                        <div id="collapse{{ forloop.counter0 }}" class="collapse large-space" role="tabpanel">
                             <div class="application-row">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -177,3 +177,11 @@
     </button>
 </form>
 {% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% addtoblock "js" %}
+        <script src="{% static 'js/reason_for_reject.js' %}" charset="utf-8"></script>
+    {% endaddtoblock %}
+{% endblock extrahead %}
+
