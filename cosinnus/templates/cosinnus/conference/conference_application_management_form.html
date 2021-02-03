@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags sekizai_tags %}
 
 {% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
 
@@ -26,35 +26,103 @@
         {% if max_number %}
             <div class="large-space">{% trans 'The maximum number of participants is ' %} {{ max_number }} ({% blocktrans count counter=places_left %} 1 place left {% plural %} {{ counter }} places left {% endblocktrans %}) </div>
         {% endif %}
-        <table class="table priority-form">
-            <thead>
-                <tr>
-                    <th>{% trans "Name" %}</th>
-                    <th>{% trans "First Choice" %}</th>
-                    <th>{% trans "Second Choice" %}</th>
-                    {% for value, text in form.0.status.field.widget.choices %}
-	                    {% if value == 3 %}
-	                       <th><i class="fas fa-clock"></i></th>
-	                    {% elif value == 4 %}
-	                       <th><i class="fas fa-check"></i></th>
-	                    {% elif value == 5 %}
-	                       <th><i class="fas fa-times"></i></th>
-	                    {% endif %}
-                    {% endfor %}
-                </tr>
-            </thead>
+        <div class="applications-form">
+            <div class="application-row">
+                <div class="row header-row">
+                    <div class="col-md-4 col-md-offset-8">
+                        <div class="row">
+                        {% for value, text in form.0.status.field.widget.choices %}
+                            {% if value == 3 %}
+                            <div class="col-md-4"><i class="fas fa-clock"></i></div>
+                            {% elif value == 4 %}
+                            <div class="col-md-4"><i class="fas fa-check"></i></div>
+                            {% elif value == 5 %}
+                            <div class="col-md-4"><i class="fas fa-times"></i></div>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="large-space">
             {% for application in form %}
-	            <tr class="white-content">
-	                {{ application.conference }}
-	                {{ application.user }}
-	                {{ application.id }}
-	                <td>{{ application.instance.user|full_name }}</td>
-	                <td>{{ application.instance.first_priorities_string }}</td>
-	                <td>{{ application.instance.second_priorities_string }}</td>
-	                {{ application.status }}
-	            </tr>
+                {{ application.conference }}
+                {{ application.user }}
+                {{ application.id }}
+                {{ application.information }}
+                <div class="application-row">
+                    <div class="row white-content">
+                        <div class="col-md-2">
+                            <b>{% trans "Name" %}</b> <br/> {{ application.instance.user|full_name }}
+                        </div>
+                        <div class="col-md-2">
+                            <b> {% trans "Location" %} </b> <br/>
+                                {% if application.instance.user.cosinnus_profile.media_tag.location %}
+                                    {{ application.instance.user.cosinnus_profile.media_tag.location }}
+                                {% else %}
+                                -
+                                {% endif %}
+                        </div>
+                        <div class="col-md-2">
+                            <b>{% trans "First Choice" %}</b> <br/>
+                            {% if application.instance.first_priorities_string %}
+                                {{ application.instance.first_priorities_string }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
+                        <div class="col-md-2">
+                            <b>{% trans "Second Choice" %}</b> <br/>
+                            {% if application.instance.second_priorities_string %}
+                                {{ application.instance.second_priorities_string }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">{{ application.status }}</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div role="tab">
+                            <a role="button" data-toggle="collapse" href="#collapse{{ forloop.counter0 }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter0 }}">
+                                <div class="application-row">
+                                    <div class="white-content row dropdown-row">
+                                        <div class="btn btn-primary dropdown-button">{% if application.information.value %}<i class="fas fa-exclamation"></i> {% endif %} {% trans 'show more ...' %}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div id="collapse{{ forloop.counter0 }}" class="collapse large-space" role="tabpanel">
+                            <div class="application-row">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {% if application.information.value %}
+                                        <div class="cosinnus-field ">
+                                            <label>
+                                                {% trans 'Message to organizer' %}
+                                            </label>
+                                            <div>
+                                                {{ application.information.value }}
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {% captureas label %}{% trans 'Reason for rejection' %}{% endcaptureas %}
+                                        {% include 'cosinnus/fields/default_field.html' with field=application.reason_for_rejection label=label large_field=True %}
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                </div>
             {% endfor %}
-        </table>
+
+            </div>
+        </div>
 
         <div class="large-space">
             {% for form in assignment_formset %}
@@ -109,3 +177,11 @@
     </button>
 </form>
 {% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% addtoblock "js" %}
+        <script src="{% static 'js/reason_for_reject.js' %}" charset="utf-8"></script>
+    {% endaddtoblock %}
+{% endblock extrahead %}
+

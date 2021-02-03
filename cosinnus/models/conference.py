@@ -316,6 +316,14 @@ class CosinnusConferenceApplicationQuerySet(models.QuerySet):
                    .exclude(status__in=rejected)\
                    .order_by('conference__from_date')
 
+    def accepted_in_past(self):
+        now = timezone.now()
+        return self.filter(conference__to_date__lte=now, status=APPLICATION_ACCEPTED)
+
+    def pending(self):
+        pending = [APPLICATION_SUBMITTED, APPLICATION_WAITLIST]
+        return self.filter(status__in=pending)
+
 
 class CosinnusConferenceApplication(models.Model):
 
