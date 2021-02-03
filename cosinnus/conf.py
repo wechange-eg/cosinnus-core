@@ -787,6 +787,8 @@ class CosinnusConf(AppConf):
         0: (None, None),
     }
     
+    BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: url.startswith('https://bbbatscale')
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.

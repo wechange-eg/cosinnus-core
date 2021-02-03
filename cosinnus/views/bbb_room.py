@@ -19,6 +19,7 @@ from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.views.mixins.group import RequireLoggedInMixin
+import requests
 
 
 logger = logging.getLogger('cosinnus')
@@ -83,7 +84,10 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
         is in the process of being created, without blocking the code.
         The target object is the media_tag id. As long as the media_tag
         has no BBBRoom, it will show a waiting page, and if the tag has a
-        room, it will redirect to the room URL """
+        room, it will redirect to the room URL.
+        Very useful as a waiting-function to retrieve the final BBB room URL
+        to insert into an iFrame (instead of relying on in-iframe redirects that
+        break permission functionality in browsers). """
         
     def get(self, *args, **kwargs):
         media_tag_id = kwargs.get('mt_id')
@@ -98,6 +102,18 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
         # return a waiting status or the concrete room URL on the BBB server wrapped in a result object
         if media_tag.bbb_room is not None:
             room_url = media_tag.bbb_room.get_direct_room_url_for_user(user=user)
+            
+            # if the URL matches a cluster URL, we check if the room_url returns a http redirect
+            # and if so, return the redirect target.
+            # this way, we peel the cluster gateway from the URL to be able to insert
+            # the real server's URL into the iframe
+            url_match_func = settings.COSINNUS_BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES
+            if url_match_func and url_match_func(room_url):
+                response = requests.get(room_url, allow_redirects=False)
+                if response.status_code == 302 and 'Location' in response.headers:
+                    room_url = response.headers['Location']
+                elif not response.status_code == 200:
+                    logger.error('BBB Queue final step did not receive a 200/302 response!', extra={'response': response.json()})
             data = {
                 'status': "DONE", 
                 'url': room_url,
