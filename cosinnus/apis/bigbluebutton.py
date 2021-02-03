@@ -37,11 +37,11 @@ def get_current_bbb_server_auth_pair():
                     or (None, None) if no server is set """
     portal = CosinnusPortal.get_current()
     try:
-        auth_pair = dict(settings.COSINNUS_BBB_SERVER_AUTH_PAIRS).get(portal.bbb_server)
+        auth_pair = dict(settings.COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS).get(portal.bbb_server)
         ret = (auth_pair[0], auth_pair[1]) # force fail on improper tuple
         return ret
     except Exception as e:
-        logger.error('Misconfigured: Either COSINNUS_BBB_SERVER_CHOICES or COSINNUS_BBB_SERVER_AUTH_PAIRS are not properly set up!',
+        logger.error('Misconfigured: Either COSINNUS_BBB_SERVER_CHOICES or COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS are not properly set up!',
             extra={'exception': e})
     return (None, None)
 

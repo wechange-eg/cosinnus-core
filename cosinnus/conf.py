@@ -783,7 +783,7 @@ class CosinnusConf(AppConf):
     # map of the authentication data for the server choices
     # in `COSINNUS_BBB_SERVER_CHOICES`
     # { <int>: (BBB_API_URL, BBB_SECRET_KEY), ... }  
-    BBB_SERVER_AUTH_PAIRS = {
+    BBB_SERVER_AUTH_AND_SECRET_PAIRS = {
         0: (None, None),
     }
     
