@@ -658,6 +658,8 @@ class UserProfileFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
         if hasattr(self, 'cleaned_data'):
             for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
                 # skip saving fields that weren't included in the POST
+                # this is important, do not add exceptions here.
+                # if you need an exception, add a hidden field with the field name and any value!
                 if not field_name in self.data.keys():
                     continue
                 # skip saving disabled fields

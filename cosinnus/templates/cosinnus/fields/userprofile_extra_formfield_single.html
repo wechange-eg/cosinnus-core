@@ -10,7 +10,10 @@
     {% comment %} Checkbox Field {% endcomment %}   
     {% include 'cosinnus/fields/checkbox_field.html' with field=bound_extra_field label=extra_field.label checkbox_label=extra_field.label legend=extra_field.legend placeholder=extra_field.placeholder %}        
 {% elif extra_field.dynamic_field_type == 'date' %}
-    {% comment %} Regular Field {% endcomment %}   
+    {% comment %} Regular Field {% endcomment %}
+    {% comment %} Add the regular field-name here to mark its presence, as the field-values are split and 
+        missing the field name in the POST would make the field be skipped on saving the dynamic fields {% endcomment %}
+    <input type="hidden" name="{{ bound_extra_field.html_name }}" value="present-in-form" />
     {% include 'cosinnus/fields/default_field.html' with field=bound_extra_field label=extra_field.label legend=extra_field.legend placeholder=extra_field.placeholder large_field=True field_classes="triplet-date-field" %}       
 {% elif extra_field.dynamic_field_type == 'multi_address' %}
     {% comment %} Regular Field {% endcomment %}   
