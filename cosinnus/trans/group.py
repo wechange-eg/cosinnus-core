@@ -32,6 +32,7 @@ class CosinnusProjectTransBase(object):
     REACTIVATE = _('Re-activate Project')
     DEACTIVATE = _('Deactivate Project')
     CONVERT_ITEMS_TO = _('Convert selected items to Projects')
+    CONTACT_PERSON = _('Project administrator')
     
     FORMFIELD_NAME = _('Project name')
     FORMFIELD_NAME_PLACEHOLDER = _('Enter a name for the project.')
@@ -67,6 +68,7 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     REACTIVATE = _('Re-activate Group')
     DEACTIVATE = _('Deactivate Group')
     CONVERT_ITEMS_TO = _('Convert selected items to Groups')
+    CONTACT_PERSON = _('Group administrator')
     
     FORMFIELD_NAME = _('Group name')
     FORMFIELD_NAME_PLACEHOLDER = _('Enter a name for the group.')
@@ -102,6 +104,7 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     REACTIVATE = _('Re-activate Conference')
     DEACTIVATE = _('Deactivate Conference')
     CONVERT_ITEMS_TO = _('Convert selected items to Conferences')
+    CONTACT_PERSON = _('Conference contact person')
     
     FORMFIELD_NAME = _('Conference name')
     FORMFIELD_NAME_PLACEHOLDER = _('Enter a name for the conference.')

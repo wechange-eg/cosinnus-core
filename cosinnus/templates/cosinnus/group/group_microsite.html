@@ -651,7 +651,7 @@
 				    {% if group_admins %}
 						<div class="white-content">
 						    <p>
-						        <b>{% if group.type == 0 %}{% trans "Project Administrator" %}{% else %}{% trans "Group Administrator" %}{% endif %}:</b>&nbsp;
+						        <b>{{ group.trans.CONTACT_PERSON }}:</b>&nbsp;
 						        {% for admin in group_admins %}
 						            <a href="{{ admin|profile_url }}" >{{ admin|full_name }}</a>
 						            {% if not forloop.last %}, {% endif %}
