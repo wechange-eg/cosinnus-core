@@ -33,11 +33,23 @@
                         <div class="row">
                         {% for value, text in form.0.status.field.widget.choices %}
                             {% if value == 3 %}
-                            <div class="col-md-4"><i class="fas fa-clock"></i></div>
+	                            <div class="col-md-4 centered">
+	                                <i class="fas fa-clock"></i>
+	                                <br/>
+	                                {% trans "Decline" %}
+	                            </div>
                             {% elif value == 4 %}
-                            <div class="col-md-4"><i class="fas fa-check"></i></div>
+	                            <div class="col-md-4 centered">
+	                                <i class="fas fa-check"></i>
+	                                <br/>
+	                                {% trans "Put on waitlist" %}
+	                            </div>
                             {% elif value == 5 %}
-                            <div class="col-md-4"><i class="fas fa-times"></i></div>
+	                            <div class="col-md-4 centered">
+	                                <i class="fas fa-times"></i>
+	                                <br/>
+	                                {% trans "Accept" %}
+	                            </div>
                             {% endif %}
                         {% endfor %}
                         </div>
@@ -53,10 +65,13 @@
 	                {{ application.information }}
 	                
                     <div class="row application-row white-content">
-                        <div class="col-md-2">
-                            <b>{% trans "Name" %}</b> <br/> {{ application.instance.user|full_name }}
+                        <div class="col-md-2 textfield transparent no-margin">
+                            <b>{% trans "Name" %}</b> <br/> 
+                            <a href="{{ application.instance.user.cosinnus_profile.get_absolute_url }}" target="_blank">
+                                {{ application.instance.user|full_name }}
+                            </a>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 textfield transparent no-margin">
                             <b> {% trans "Location" %} </b> <br/>
                                 {% if application.instance.user.cosinnus_profile.media_tag.location %}
                                     {{ application.instance.user.cosinnus_profile.media_tag.location }}
@@ -64,7 +79,7 @@
                                 -
                                 {% endif %}
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 textfield transparent no-margin">
                             <b>{% trans "First Choice" %}</b> <br/>
                             {% if application.instance.first_priorities_string %}
                                 {{ application.instance.first_priorities_string }}
@@ -72,7 +87,7 @@
                                 -
                             {% endif %}
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 textfield transparent no-margin">
                             <b>{% trans "Second Choice" %}</b> <br/>
                             {% if application.instance.second_priorities_string %}
                                 {{ application.instance.second_priorities_string }}
@@ -80,19 +95,19 @@
                                 -
                             {% endif %}
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 textfield transparent no-margin">
                             <div class="row">{{ application.status }}</div>
                         </div>
                     </div>
                     <div id="collapse{{ forloop.counter0 }}" class="collapse {% if application.reason_for_rejection.value and application.status.value != 4  %}in{% endif %}" role="tabpanel">
                         <div class="row">
 	                        {% captureas rejection_placeholder %}{% trans 'Reason for rejection' %}({% trans "optional" %}){% endcaptureas %}
-                            <div class="col-md-8">
+                            <div class="col-md-4">
                                  <div class="pull-right">
                                      {% include 'cosinnus/fields/default_field.html' with label=rejection_placeholder %}
                                  </div>
                             </div>
-	                        <div class="col-md-4">
+	                        <div class="col-md-8">
 	                        {% include 'cosinnus/fields/default_field.html' with field=application.reason_for_rejection placeholder=rejection_placeholder %}
 	                        </div>
                         </div>
@@ -101,7 +116,7 @@
                     <div class="row large-space application-row">
                         {% block application_info_row %}
                             {% if application.information.value %}
-                                <div class="col-xs-12">
+                                <div class="col-xs-12 textfield transparent no-margin">
 							        <b>{% trans 'Message to organizer' %}:</b>
                                     {{ application.information.value }}
 							    </div>
