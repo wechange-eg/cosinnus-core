@@ -173,7 +173,7 @@ class ConferenceApplicationEventPrioForm(forms.Form):
 PriorityFormSet = formset_factory(ConferenceApplicationEventPrioForm, extra=0)
 
 
-class ApplicationForm(forms.ModelForm):
+class ConferenceApplicationManagementForm(forms.ModelForm):
 
     class Meta:
         model = CosinnusConferenceApplication
@@ -182,13 +182,14 @@ class ApplicationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['status'].widget = RadioSelectInRowWidget(choices=APPLICATION_STATES_VISIBLE)
+        self.fields['status'].required = False
         self.fields['user'].widget = forms.HiddenInput()
         self.fields['conference'].widget = forms.HiddenInput()
         self.fields['information'].widget = forms.HiddenInput()
         self.fields['reason_for_rejection'].widget = forms.TextInput()
 
 
-ApplicationFormSet = modelformset_factory(CosinnusConferenceApplication, form=ApplicationForm, extra=0)
+ConferenceApplicationManagementFormSet = modelformset_factory(CosinnusConferenceApplication, form=ConferenceApplicationManagementForm, extra=0)
 
 
 class AsignUserToEventForm(forms.Form):

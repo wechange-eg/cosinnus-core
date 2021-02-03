@@ -50,7 +50,7 @@ from cosinnus_conference.forms import (ConferenceRemindersForm,
                                        ConferenceParticipationManagement,
                                        ConferenceApplicationForm,
                                        PriorityFormSet,
-                                       ApplicationFormSet,
+                                       ConferenceApplicationManagementFormSet,
                                        AsignUserToEventForm)
 from cosinnus_conference.utils import send_conference_reminder
 from cosinnus.templatetags.cosinnus_tags import full_name
@@ -710,7 +710,7 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
                                                         RequireWriteMixin,
                                                         GroupIsConferenceMixin,
                                                         FormView):
-    form_class = ApplicationFormSet
+    form_class = ConferenceApplicationManagementFormSet
     template_name = 'cosinnus/conference/conference_application_management_form.html'
     # for printing out what happened to what users
     _users_accepted = None # array
@@ -785,7 +785,8 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
             messages.success(self.request, _('The following users were put on the wait list: %s') % ', '.join(full_name(user) for user in self._users_waitlisted))
         if len(self._users_declined) > 0:
             messages.success(self.request, _('The following users were declined: %s') % ', '.join(full_name(user) for user in self._users_declined))
-            
+        
+        messages.success(self.request, _('Your changes were saved.'))
         return HttpResponseRedirect(self.get_success_url())
 
     def _get_applicants_for_workshop(self):

@@ -1,7 +1,9 @@
 $( document ).ready(function() {
     $('input[type=radio]').change(function() {
-        if(this.value !== 4){
-            var currentId = this.name.split('-')[1]
+        var currentId = this.name.split('-')[1];
+        if (this.value == 4) {
+            $('#collapse' + currentId).collapse('hide');
+        } else {
             $('#collapse' + currentId).collapse('show');
         }
     });
