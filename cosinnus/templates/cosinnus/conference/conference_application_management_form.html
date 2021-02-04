@@ -121,6 +121,10 @@
                                     {{ application.information.value }}
 							    </div>
                             {% endif %}
+                            <div class="col-xs-12 textfield transparent no-margin">
+                                <b>{% trans 'Application submitted' %}:</b>
+	                            {{ application.created|date:"DATETIME_FORMAT" }}
+                            </div>
                             {% comment %} 
                             <div class="btn btn-primary dropdown-button">
                                 {% if application.information.value %}

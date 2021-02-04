@@ -21,8 +21,9 @@
 		    <div class="content-box">
 		
 		        {% if form.options %}
-		        {% trans "My individual needs" as options_label %}
-		        {% include 'cosinnus/fields/default_field.html' with field=form.options label=options_label large_field=True %}
+			        {% trans "My individual needs" as options_label %}
+			        {% trans "(no options chosen)" as options_placeholder %}
+			        {% include 'cosinnus/fields/default_field.html' with field=form.options label=options_label placeholder=options_placeholder large_field=True %}
 		        {% endif %}
 		
 		        {% trans "Message to organizer" as information_label %}
@@ -30,53 +31,53 @@
 		
 		
 		        {% if priority_formset.forms %}
-		        <table class="table table-striped white-content priority-form">
-		            <thead>
-		                <tr>
-		                    <th>{% trans "Programm" %}</th>
-		                    {% for value, text in priority_formset.0.priority.field.widget.choices %}
-		                    <th>{{ text }}</th>
-		                    {% endfor %}
-		                </tr>
-		            </thead>
-		
-		        {% for form in priority_formset %}
-		        {{ form.event_id }}
-		        <tr>
-		            <td>{{ form.event_name.value }}</td>
-		            {{ form.priority }}
-		        </tr>
-		
-		        {% endfor %}
-		        </table>
+			        <table class="table table-striped white-content priority-form">
+			            <thead>
+			                <tr>
+			                    <th>{% trans "Programm" %}</th>
+			                    {% for value, text in priority_formset.0.priority.field.widget.choices %}
+			                    <th>{{ text }}</th>
+			                    {% endfor %}
+			                </tr>
+			            </thead>
+			
+			        {% for form in priority_formset %}
+				        {{ form.event_id }}
+				        <tr>
+				            <td>{{ form.event_name.value }}</td>
+				            {{ form.priority }}
+				        </tr>
+				
+			        {% endfor %}
+			        </table>
 		        {% endif %}
 		
 		
 		        {% if form.conditions_accepted %}
-		        {% trans "Conditions" as conditions_label %}
-		        {% trans "Please accept the conditions" as conditions_box_label %}
-		        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_label legend=participation_management.application_conditions checkbox_label=conditions_box_label %}
+			        {% trans "Conditions" as conditions_label %}
+			        {% trans "Please accept the conditions" as conditions_box_label %}
+			        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_label legend=participation_management.application_conditions checkbox_label=conditions_box_label %}
 		        {% endif %}
 		
 		        {% if not form.options and priority_formset.forms|length_is:0 and not form.conditions_accepted %}
-		        <h2>{% trans 'Apply for participation in ' %}<i>{{ group.name }}</i></h2>
-		        <div>{{ group.description }}</div>
+			        <h2>{% trans 'Apply for participation in ' %}<i>{{ group.name }}</i></h2>
+			        <div>{{ group.description }}</div>
 		        {% endif %}
 		        
 		        {% include 'cosinnus/fields/mandatory_field_legend.html' %}
 		    </div>
 		
-		    <button type="submit" class="btn btn-emphasized">
+		    <button type="submit" class="btn btn-emphasized btn-autosize">
 		        <ul class="media-list">
 		            <li class="media">
 		                <a class="pull-left" href="#">
 		                    <i class="fa fa-check"></i>
 		                </a>
 		                <div class="media-body">
-		                    {% if not form.options and priority_formset.forms|length_is:0 and not form.conditions_accepted %}
-		                    {% trans "Apply for conference participation" %}
+		                    {% if form.instance.id %}
+		                        {% trans "Save changes" %}
 		                    {% else %}
-		                    {% trans "Save" %}
+		                        {% trans "Apply for conference participation" %}
 		                    {% endif %}
 		                </div>
 		            </li>
@@ -84,18 +85,18 @@
 		    </button>
 		
 		    {% if form.instance.id %}
-		    <button type="submit" name="withdraw" class="btn btn-emphasized">
-		        <ul class="media-list">
-		            <li class="media">
-		                <a class="pull-left" href="#">
-		                    <i class="fa fa-trash"></i>
-		                </a>
-		                <div class="media-body">
-		                    {% trans "Withdraw" %}
-		                </div>
-		            </li>
-		        </ul>
-		    </button>
+			    <button type="submit" name="withdraw" class="btn btn-emphasized">
+			        <ul class="media-list">
+			            <li class="media">
+			                <a class="pull-left" href="#">
+			                    <i class="fa fa-trash"></i>
+			                </a>
+			                <div class="media-body">
+			                    {% trans "Withdraw" %}
+			                </div>
+			            </li>
+			        </ul>
+			    </button>
 		    {% endif %}
 		</form>
 	{% endif %}

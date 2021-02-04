@@ -64,9 +64,9 @@ class ConferenceParticipationManagement(forms.ModelForm):
             choices=settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS,
             required=False)
     application_start = forms.SplitDateTimeField(required=False,
-                                                 widget=SplitHiddenDateWidget())
+                                                 widget=SplitHiddenDateWidget(default_time='00:00'))
     application_end = forms.SplitDateTimeField(required=False,
-                                               widget=SplitHiddenDateWidget())
+                                               widget=SplitHiddenDateWidget(default_time='23:59'))
 
     class Meta:
         model = ParticipationManagement
@@ -108,7 +108,7 @@ class ConferenceParticipationManagement(forms.ModelForm):
 
 
 class ConferenceApplicationForm(forms.ModelForm):
-    conditions_accepted = forms.BooleanField(required = True)
+    conditions_accepted = forms.BooleanField(required=True)
 
     class Meta:
         model = CosinnusConferenceApplication
@@ -187,6 +187,7 @@ class ConferenceApplicationManagementForm(forms.ModelForm):
         self.fields['conference'].widget = forms.HiddenInput()
         self.fields['information'].widget = forms.HiddenInput()
         self.fields['reason_for_rejection'].widget = forms.TextInput()
+        setattr(self, 'created', kwargs['instance'].created)
 
 
 ConferenceApplicationManagementFormSet = modelformset_factory(CosinnusConferenceApplication, form=ConferenceApplicationManagementForm, extra=0)

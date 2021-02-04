@@ -342,10 +342,16 @@ class CosinnusConferenceApplication(models.Model):
     priorities = PostgresJSONField(default=dict, blank=True, null=True)
     information = models.TextField(blank=True)
     reason_for_rejection = models.TextField(blank=True)
+    created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
     last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
 
     objects = CosinnusConferenceApplicationQuerySet.as_manager()
-
+    
+    class Meta(object):
+        ordering = ('created',)
+        verbose_name = _('Cosinnus conference application')
+        verbose_name_plural = _('Cosinnus conference applications')
+    
     @property
     def first_priorities(self):
         from cosinnus_event.models import Event # noqa
