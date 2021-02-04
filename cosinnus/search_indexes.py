@@ -13,7 +13,8 @@ from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgram
     LocalCachedIndexMixin, DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
 from cosinnus.utils.user import filter_active_users, filter_portal_users
 from cosinnus.models.profile import get_user_profile_model
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+    CosinnusConference
 from cosinnus.utils.functions import normalize_within_stddev, resolve_class
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_ids
@@ -177,6 +178,34 @@ class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
     def prepare_participant_count(self, obj):
         """ child projects for groups """ 
         return obj.groups.count()
+
+    
+class CosinnusConferenceIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexes.Indexable):
+    
+    text = TemplateResolveNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
+    rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
+    
+    from_date = indexes.DateTimeField(model_attr='from_date', null=True)
+    to_date = indexes.DateTimeField(model_attr='to_date', null=True)
+    humanized_event_time_html = indexes.CharField(stored=True, indexed=False)
+    participants_limit_count = indexes.IntegerField(stored=True, indexed=False)
+    
+    def get_model(self):
+        return CosinnusConference
+
+    def prepare_participant_count(self, obj):
+        """ Mirrored the member count for simplicity """
+        return self.prepare_member_count(obj)
+    
+    def prepare_participants_limit_count(self, obj):
+        """ Mirrored the member count for simplicity """
+        participation_managements = obj.participation_management.all()
+        if len(participation_managements) > 0:
+            return participation_managements[0].participants_limit
+        return 0
+    
+    def prepare_humanized_event_time_html(self, obj):
+        return obj.get_humanized_event_time_html()
 
 
 class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataIndexMixin, 

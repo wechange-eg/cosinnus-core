@@ -106,8 +106,13 @@ module.exports = ContentControlView.extend({
         }
         // add organization models if active
         if (COSINNUS_ORGANIZATIONS_ENABLED) {
-        	self.defaults.availableFilters['organizations'] = true;
-        	self.defaults.activeFilters['organizations'] = true;
+            self.defaults.availableFilters['organizations'] = true;
+            self.defaults.activeFilters['organizations'] = true;
+        }
+        // add conferences models if active
+        if (COSINNUS_CONFERENCES_ENABLED) {
+            self.defaults.availableFilters['conferences'] = true;
+            self.defaults.activeFilters['conferences'] = true;
         }
 
         if (COSINNUS_CLOUD_ENABLED) {
@@ -1317,7 +1322,10 @@ module.exports = ContentControlView.extend({
         	this.state.activeFilters['ideas'] = this.options.availableFilters.ideas ? util.ifundef(urlParams.ideas, this.options.activeFilters.ideas) : false;
         }
         if (COSINNUS_ORGANIZATIONS_ENABLED) {
-        	this.state.activeFilters['organizations'] = this.options.availableFilters.organizations ? util.ifundef(urlParams.organizations, this.options.activeFilters.organizations) : false;
+            this.state.activeFilters['organizations'] = this.options.availableFilters.organizations ? util.ifundef(urlParams.organizations, this.options.activeFilters.organizations) : false;
+        }
+        if (COSINNUS_CONFERENCES_ENABLED) {
+            this.state.activeFilters['conferences'] = this.options.availableFilters.conferences ? util.ifundef(urlParams.conferences, this.options.activeFilters.conferences) : false;
         }
         if (COSINNUS_CLOUD_ENABLED) {
             this.state.activeFilters['cloudfiles'] = this.options.availableFilterList.cloudfiles ? util.ifundef(urlParams.cloudfiles, this.options.activeFilters.cloudfiles) : false;
@@ -1343,8 +1351,13 @@ module.exports = ContentControlView.extend({
             });
         }
         if (COSINNUS_ORGANIZATIONS_ENABLED) {
-        	_.extend(searchParams, {
-        		organizations: this.state.activeFilters.organizations
+            _.extend(searchParams, {
+                organizations: this.state.activeFilters.organizations
+            });
+        }
+        if (COSINNUS_CONFERENCES_ENABLED) {
+            _.extend(searchParams, {
+                conferences: this.state.activeFilters.conferences
             });
         }
         if (COSINNUS_CLOUD_ENABLED) {

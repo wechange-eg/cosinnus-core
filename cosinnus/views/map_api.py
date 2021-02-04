@@ -104,6 +104,10 @@ if settings.COSINNUS_ORGANIZATIONS_ENABLED:
     MAP_SEARCH_PARAMETERS.update({
         'organizations': True,
     })
+if settings.COSINNUS_CONFERENCES_ENABLED:
+    MAP_SEARCH_PARAMETERS.update({
+        'conferences': True,
+    })
 if settings.COSINNUS_CLOUD_ENABLED:
     MAP_SEARCH_PARAMETERS.update({
         'cloudfiles': True,
@@ -142,6 +146,7 @@ def map_search_endpoint(request, filter_group_id=None):
     model_list = [klass for klass, param_name in list(SEARCH_MODEL_NAMES.items()) if params.get(param_name, False)]
         
     sqs = SearchQuerySet().models(*model_list)
+    
     # filter for map bounds (Points are constructed ith (lon, lat)!!!)
     if not params['ignore_location'] and not implicit_ignore_location:
         sqs = sqs.within('location', Point(params['sw_lon'], params['sw_lat']), Point(params['ne_lon'], params['ne_lat']))
@@ -178,9 +183,9 @@ def map_search_endpoint(request, filter_group_id=None):
     sqs = filter_searchqueryset_for_portal(sqs, restrict_multiportals_to_current=prefer_own_portal, external=external)
     # filter for read access by this user
     sqs = filter_searchqueryset_for_read_access(sqs, request.user)
-    # filter events by upcoming status
+    # filter events by upcoming status and exclude hidden proxies
     if params['events'] and Event is not None:
-        sqs = filter_event_searchqueryset_by_upcoming(sqs)
+        sqs = filter_event_searchqueryset_by_upcoming(sqs).exclude(is_hidden_group_proxy=True)
     
     # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't shown)
     if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):

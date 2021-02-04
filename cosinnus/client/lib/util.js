@@ -114,9 +114,14 @@ module.exports = {
 				slug: data.slug,
     		};
     	} else if (data.type == 'groups') {
-    		apiData = {
-				ct: 'cosinnus.CosinnusSociety',
-				slug: data.slug,
+            apiData = {
+                ct: 'cosinnus.CosinnusSociety',
+                slug: data.slug,
+            };
+        } else if (data.type == 'conferences') {
+            apiData = {
+                ct: 'cosinnus.CosinnusConference',
+                slug: data.slug,
             };
         } else if (data.type == 'people') {
     		apiData = {

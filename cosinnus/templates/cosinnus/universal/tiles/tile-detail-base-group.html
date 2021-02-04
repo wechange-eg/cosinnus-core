@@ -3,21 +3,23 @@
 
 
 {% block related_content %}
-
-    {% if events|length > 0 %}
-        <div class="tile-section tile-section-divided">
-            <div class="subheading">
-                <i class="fa fa-calendar"></i>
-                {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "Events" %} ({{ events|length }})
-            </div>
-        </div>
-        <div class="tile-section">
-            {% for event in events %}
-                {{ macros.itemCard(event.portal, event.slug, event.title, event.type, null, event.dataSlot1|safe, "fa-clock-o", event.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user, group_slug=slug) }}
-            {% endfor %}
-        </div>
-    {% endif %}
+    
+    {% block group_events %}
+	    {% if events|length > 0 %}
+	        <div class="tile-section tile-section-divided">
+	            <div class="subheading">
+	                <i class="fa fa-calendar"></i>
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Events" %} ({{ events|length }})
+	            </div>
+	        </div>
+	        <div class="tile-section">
+	            {% for event in events %}
+	                {{ macros.itemCard(event.portal, event.slug, event.title, event.type, null, event.dataSlot1|safe, "fa-clock-o", event.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user, group_slug=slug) }}
+	            {% endfor %}
+	        </div>
+	    {% endif %}
+    {% endblock %}
 
     {% if organizations|length > 0 %}
         <div class="tile-section tile-section-divided">

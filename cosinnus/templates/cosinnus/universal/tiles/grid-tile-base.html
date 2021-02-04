@@ -12,7 +12,7 @@
     
         {% block type_area %}
             <div class="tile-header-section">
-                {{ macros.typeLabel(type, singular=1) }}
+                {{ macros.typeLabel(type, singular=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
                 {% if portal == 99999 %}
                 	{# Translators: __INCLUDE_JS_PO__ #}
 	                ({% trans "External" %})

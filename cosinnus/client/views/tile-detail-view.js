@@ -7,6 +7,7 @@ var util = require('lib/util');
 var templates = {
     'projects': require('tiles/tile-detail-projects'),
     'groups': require('tiles/tile-detail-groups'),
+    'conferences': require('tiles/tile-detail-conferences'),
     'people': require('tiles/tile-detail-people'),
     'events': require('tiles/tile-detail-events'),
     'ideas': require('tiles/tile-detail-ideas'),

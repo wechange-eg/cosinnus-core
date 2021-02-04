@@ -1,4 +1,4 @@
-{% macro typeLabel(type, classes="", singular=0, button=0, useStyles=1, colon=0, showIcon=1, mine=false, all=false, create=false) %}
+{% macro typeLabel(type, classes="", singular=0, button=0, useStyles=1, colon=0, showIcon=1, mine=false, all=false, create=false, COSINNUS_TRANS={}) %}
     <span class="{% if useStyles == 1 %}result-type-span {% if button %}button{% else %}apply{% endif %}-color-{{ type }}{% endif %} {{ classes }}">
         {% if mine %}
             {% if type == "people" %}
@@ -17,6 +17,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "My Groups" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "conferences" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                xxxmyconf{{ COSINNUS_TRANS.COSINNUS_TRANS_MY_CONFERENCES }}{% if colon == 1 %}:{% endif %}
             {% elif type == "ideas" %}
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -47,6 +50,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "All Groups" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "conferences" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_ALL_CONFERENCES }}{% if colon == 1 %}:{% endif %}
             {% elif type == "ideas" %}
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -77,6 +83,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Group" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "conferences" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_CONFERENCE }}{% if colon == 1 %}:{% endif %}
             {% elif type == "ideas" %}
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -107,6 +116,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Create Group" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "conferences" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_CREATE_CONFERENCE }}{% if colon == 1 %}:{% endif %}
             {% elif type == "ideas" %}
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -133,6 +145,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Groups" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "conferences" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_CONFERENCE }}{% if colon == 1 %}:{% endif %}
             {% elif type == "ideas" %}
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}

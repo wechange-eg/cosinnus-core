@@ -35,7 +35,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 	        <div class="button-list">
 	            {% for filter_type in availableFilterList %}
 	                <a class="rounded-button button-color-{{ filter_type }} result-filter-button {% if typeFiltersActive and activeFilters[filter_type] %}selected{% endif %}" data-result-filter-type="{{ filter_type }}">
-	                    {{ macros.typeLabel(filter_type, "rounded-button-inner", button=1) }}
+	                    {{ macros.typeLabel(filter_type, "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
 	                </a>
 	            {% endfor %}
 	        </div>

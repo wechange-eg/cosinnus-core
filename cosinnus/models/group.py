@@ -62,6 +62,7 @@ from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
 from django.core.serializers.json import DjangoJSONEncoder
 from cosinnus.trans.group import get_group_trans_by_type
 from annoying.functions import get_object_or_None
+from django.utils.safestring import mark_safe
 
 logger = logging.getLogger('cosinnus')
 
@@ -1050,6 +1051,11 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
                 subject,
                 reverse('postman:sent')
             )
+    
+    def get_humanized_event_time_html(self):
+        if not self.from_date:
+            return ''
+        return mark_safe(render_to_string('cosinnus_event/common/humanized_event_time.html', {'event': self})).strip()
 
     @classmethod
     def _clear_cache(self, slug=None, slugs=None, group=None):
