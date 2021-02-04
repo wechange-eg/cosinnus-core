@@ -93,13 +93,16 @@
 		                    {% endfor %}
 	                    </ul>
 	                {% endif %}
-                </div>
+                </div> {% comment %} end div[textfield] {% endcomment %}
+                
+                <hr class="invisible" />
                 {% trans "You will now receive notifications for content posted in this conference." as follow_success_message %}
                 {% include 'cosinnus/common/likefollowstar/like_button.html' with object=group %}
                 {% include 'cosinnus/common/likefollowstar/star_button.html' with object=group %}
                 {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=group success_message=follow_success_message %}
                 {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=group %}
             </div>
+            
         </div>
     </div>
 
@@ -181,6 +184,19 @@
                 {% endif %}
 			{% endwith %}
         </div>
+        <div class="col-md-6">
+            <hr class="invisible"/>
+            {% if group.attached_objects.exists or group.attached_images %}
+                {% if group.attached_images %}
+                        {% include 'cosinnus/common/attached_images_gallery.html' with object=group max_images=12 %}
+                {% endif %}
+                {% if group.attached_objects.exists %}
+                    {% cosinnus_render_attached_objects group %}
+                {% endif %}
+            {% endif %}
+        </div>
+        
+        
     </div>
 
 

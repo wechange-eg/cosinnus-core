@@ -41,6 +41,7 @@ from cosinnus.models.group import SDG_CHOICES
 from cosinnus.forms.managed_tags import ManagedTagFormMixin
 from cosinnus.utils.validators import validate_file_infection
 from cosinnus.forms.widgets import SplitHiddenDateWidget
+from cosinnus.forms.attached_object import FormAttachableMixin
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -104,7 +105,7 @@ class AsssignPortalMixin(object):
 
 
 class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, 
-                ManagedTagFormMixin, AdditionalFormsMixin, forms.ModelForm):
+                ManagedTagFormMixin, FormAttachableMixin, AdditionalFormsMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 
                   disable_preview=True, validators=[validate_file_infection])

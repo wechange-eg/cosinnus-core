@@ -252,46 +252,52 @@
                         {% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
                         
                         
-						    {# Microsite Wallpaper Field #}
-		                    {% captureas wallpaper_label %}{% trans "Background Image" %} (1140px x 240px, {% trans "max. 10 MB" %}){% endcaptureas %}
-		                    {% captureas wallpaper_html %}
-									{{ form.forms.obj.wallpaper.errors }}
-									
-									{% if object.wallpaper %}
-								        <div class="row">
-								            <div class="col-xs-4 col-sm-2">
-								                <img class="image" style="width: 120px;" src="{% thumbnail object.wallpaper 120x120 crop=1 upscale=1 %}"></img>
-								            </div>
-								            <div class="col-xs-8 col-sm-10">
-								    {% endif %} 
-								    <div class="file-input">
-		                                <input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file" {% if not object.wallpaper and form.forms.obj.wallpaper.field.required %}required{% endif %}>
-								    </div>
-								    {% if object.wallpaper %}
-								            </div>
-								        </div>
-								    {% endif %}
-									
-	                        {% endcaptureas %}
-                            {% captureas wallpaper_extra_html %}
-			                        {% if object.wallpaper and not form.forms.obj.wallpaper.field.required %}
-					                    <div class="btn btn-emphasized btn-small btn-no-float regular-space">
-					                        <ul class="media-list">
-					                            <li class="media">
-					                                <a class="pull-left" href="#">
-					                                    <i class="fa fa-square-o"></i>
-	                                                    <input type="hidden" id="wallpaper-clear_id" name="wallpaper-clear"> 
-					                                </a>
-					                                <div class="media-body click-previous-a">
-					                                    {% trans "Reset" %}
-					                                </div>
-					                            </li>
-					                        </ul>
-					                    </div>
-	                                {% endif %}
-		                    {% endcaptureas %}
-							{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label field_html=wallpaper_html extra_html=wallpaper_extra_html first=True large_field=True %}
-
+					    {# Microsite Wallpaper Field #}
+	                    {% captureas wallpaper_label %}{% trans "Background Image" %} (1140px x 240px, {% trans "max. 10 MB" %}){% endcaptureas %}
+	                    {% captureas wallpaper_html %}
+								{{ form.forms.obj.wallpaper.errors }}
+								
+								{% if object.wallpaper %}
+							        <div class="row">
+							            <div class="col-xs-4 col-sm-2">
+							                <img class="image" style="width: 120px;" src="{% thumbnail object.wallpaper 120x120 crop=1 upscale=1 %}"></img>
+							            </div>
+							            <div class="col-xs-8 col-sm-10">
+							    {% endif %} 
+							    <div class="file-input">
+	                                <input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file" {% if not object.wallpaper and form.forms.obj.wallpaper.field.required %}required{% endif %}>
+							    </div>
+							    {% if object.wallpaper %}
+							            </div>
+							        </div>
+							    {% endif %}
+								
+                        {% endcaptureas %}
+                        {% captureas wallpaper_extra_html %}
+		                        {% if object.wallpaper and not form.forms.obj.wallpaper.field.required %}
+				                    <div class="btn btn-emphasized btn-small btn-no-float regular-space">
+				                        <ul class="media-list">
+				                            <li class="media">
+				                                <a class="pull-left" href="#">
+				                                    <i class="fa fa-square-o"></i>
+                                                    <input type="hidden" id="wallpaper-clear_id" name="wallpaper-clear"> 
+				                                </a>
+				                                <div class="media-body click-previous-a">
+				                                    {% trans "Reset" %}
+				                                </div>
+				                            </li>
+				                        </ul>
+				                    </div>
+                                {% endif %}
+	                    {% endcaptureas %}
+						{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label field_html=wallpaper_html extra_html=wallpaper_extra_html first=True large_field=True %}
+                        
+                        {% if group_model == "CosinnusConference" %}
+	                        {# Attachable File upload Field #}
+	                        {% trans "Uploaded files will be available for download and images will be shown in a gallery." as files_legend %}
+					        {% include 'cosinnus/media_tags.html' with show_all=True files_label=files_label files_legend=files_legend disable_persons=True disable_tags=True disable_location=True disable_topics=True disable_visibility=True hide_intro=True %}
+				        {% endif %}
+                        
                         {# Website Field #}
                         {% trans "Website" as website_label %}
                         {% trans "Example: http://mywebsite.com" as website_placeholder %}

@@ -99,6 +99,7 @@ from cosinnus_organization.forms import MultiOrganizationSelectForm
 from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationGroup
 from cosinnus_organization.utils import get_organization_select2_pills
 from cosinnus.models.conference import CosinnusConferenceRoom
+from cosinnus.views.attached_object import AttachableViewMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -196,6 +197,15 @@ class CosinnusGroupFormMixin(object):
                 if name == 'media_tag':
                     return user
                 return InvalidArgument
+            
+            def dispatch_init_attached_objects_querysets(self, name, qs):
+                if name == 'obj':
+                    return qs
+                return InvalidArgument
+
+            @property
+            def save_attachable(self):
+                return self.forms['obj'].save_attachable
 
         return CosinnusGroupForm
     
@@ -295,7 +305,7 @@ class GroupMembershipMixin(MembershipClassMixin):
     invite_class = CosinnusUnregisterdUserGroupInvite
 
 
-class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
+class GroupCreateView(CosinnusGroupFormMixin, AttachableViewMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       CreateWithInlinesView):
 
     #form_class = 
@@ -942,7 +952,8 @@ class GroupMapListView(GroupListView):
     template_name = 'cosinnus/group/group_list_map.html'
 
 
-class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
+class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, 
+                      AttachableViewMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       RequireAdminMixin, UpdateWithInlinesView):
 
     #form_class = 

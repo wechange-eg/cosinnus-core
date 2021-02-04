@@ -55,7 +55,8 @@ from django.templatetags.static import static
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.core.registries.attached_objects import attached_object_registry
 from django.apps import apps
-from cosinnus.models.tagged import LikeableObjectMixin, LastVisitedMixin
+from cosinnus.models.tagged import LikeableObjectMixin, LastVisitedMixin,\
+    AttachableObjectModel
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericRelation
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
@@ -664,7 +665,7 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
 @python_2_unicode_compatible
 class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
                         CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin,
-                        models.Model):
+                        AttachableObjectModel):
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1
     TYPE_CONFERENCE = 2
