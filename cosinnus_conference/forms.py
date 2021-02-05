@@ -187,7 +187,8 @@ class ConferenceApplicationManagementForm(forms.ModelForm):
         self.fields['conference'].widget = forms.HiddenInput()
         self.fields['information'].widget = forms.HiddenInput()
         self.fields['reason_for_rejection'].widget = forms.TextInput()
-        setattr(self, 'created', kwargs['instance'].created)
+        if 'instance' in kwargs:
+            setattr(self, 'created', kwargs['instance'].created)
 
 
 ConferenceApplicationManagementFormSet = modelformset_factory(CosinnusConferenceApplication, form=ConferenceApplicationManagementForm, extra=0)

@@ -25,7 +25,7 @@
             {% trans "(no limit selected)" as limits_placeholder %}
             {% include 'cosinnus/fields/default_field.html' with field=form.participants_limit label=limits_label legend=limits_legend placeholder=limits_placeholder large_field=True %}
 
-            {% trans "Application allowed" as date_label %}
+            {% trans "Application period" as date_label %}
             {% captureas date_html %}
                 {{ form.application_start.errors }}
                 {{ form.application_end.errors }}

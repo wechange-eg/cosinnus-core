@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-01 16:57+0100\n"
-"PO-Revision-Date: 2021-02-04 14:12+0100\n"
+"POT-Creation-Date: 2021-02-05 14:55+0100\n"
+"PO-Revision-Date: 2021-02-05 14:56+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -783,6 +783,7 @@ msgstr "Lobby"
 msgid "Stage"
 msgstr "Bühne"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Workshops"
 msgstr "Workshops"
 
@@ -859,7 +860,7 @@ msgid "Participation Management"
 msgstr "Teilnehmendenmanagement"
 
 msgid "Participation applications are open."
-msgstr "Teilnahmeantragsstellungen sind offen."
+msgstr "Anmeldung geöffnet."
 
 msgid "Participation application has not started yet."
 msgstr "Die Teilnahmeantragsstellung hat noch nicht begonnen."
@@ -893,11 +894,11 @@ msgstr "Dein Antrag ist ungültig."
 msgid "Your application has been submitted. You will be notified when it is processed."
 msgstr "Dein Teilnahmeantrag wurde eingereicht. Du wirst benachrichtigt, wenn er bearbeitet wurde."
 
-msgid "Your application has been added to the waitlist."
-msgstr "Dein Antrag wurde auf die Warteliste gesetzt."
+msgid "Your application is currently on the waiting list."
+msgstr "Dein Antrag befindet sich aktuell auf der Warteliste."
 
-msgid "Congratulations. Your application has been accepted!"
-msgstr "Glückwünsch. Dein Teilnahmeantrag wurde angenommen!"
+msgid "Your application has been accepted!"
+msgstr "Dein Teilnahmeantrag wurde angenommen!"
 
 msgid "We are sorry, but your application has been declined."
 msgstr "Tut uns leid, aber dein Teilnahmeantrag wurde abgelehnt."
@@ -913,6 +914,12 @@ msgstr "ToS angenommen"
 
 msgid "Confernence Application"
 msgstr "Konferenz Anmeldung"
+
+msgid "Cosinnus conference application"
+msgstr "Cosinnus Konferenz-Teilnahmeantrag"
+
+msgid "Cosinnus conference applications"
+msgstr "Cosinnus Konferenz-Teilnahmeanträge"
 
 msgid "Complaint Text"
 msgstr "Beschwerdetext"
@@ -2445,20 +2452,26 @@ msgstr "Antrag"
 msgid "My individual needs"
 msgstr "Meine individuellen Bedürfnisse"
 
+msgid "(no options chosen)"
+msgstr "(keine Bedingungen gewählt)"
+
 msgid "Message to organizer"
 msgstr "Nachricht an den Veranstalter"
 
 msgid "Programm"
 msgstr "Programm"
 
-msgid "Conditions"
-msgstr "Nutzungsbedingungen"
+msgid "Application conditions"
+msgstr "Anmeldebedingungen"
 
 msgid "Please accept the conditions"
 msgstr "Bitte akzeptiere die Nutzungsbedingungen"
 
 msgid "Apply for participation in "
-msgstr "Bewerbe dich für die Teilnahme an "
+msgstr "Bewirb dich für die Teilnahme an "
+
+msgid "Save changes"
+msgstr "Änderungen speichern"
 
 msgid "Apply for conference participation"
 msgstr "Anmeldung zur Konferenzteilnahme"
@@ -2466,17 +2479,29 @@ msgstr "Anmeldung zur Konferenzteilnahme"
 msgid "Withdraw"
 msgstr "Zurückziehen"
 
-msgid "Applications"
-msgstr "Bewerbung"
+msgid "Manage participation applications"
+msgstr "Teilnahmeanträge bearbeiten"
+
+msgid "There are no participation applications yet."
+msgstr "Es gibt noch keine Teilnahmeanträge."
 
 msgid "The maximum number of participants is "
-msgstr "Die maximale Anzahl der Teilnehmer ist "
+msgstr "Die maximale Anzahl der Teilnehmenden ist "
 
 #, python-format
 msgid " 1 place left "
 msgid_plural " %(counter)s places left "
 msgstr[0] " 1 Platz übrig "
-msgstr[1] " %(counter)s Stellen übrig "
+msgstr[1] " %(counter)s Plätze übrig "
+
+msgid "Decline"
+msgstr "Ablehnen"
+
+msgid "Put on waitlist"
+msgstr "Auf die Warteliste"
+
+msgid "Accept"
+msgstr "Akzeptieren"
 
 msgid "First Choice"
 msgstr "Erste Wahl"
@@ -2484,11 +2509,26 @@ msgstr "Erste Wahl"
 msgid "Second Choice"
 msgstr "Zweite Wahl"
 
-msgid "Export details and addresses"
-msgstr "Details uns Adressen exportieren"
+msgid "Reason for rejection"
+msgstr "Ablehnungsgrund"
 
-msgid "Export signature list"
-msgstr "Unterschriftenliste exportieren"
+msgid "optional"
+msgstr "optional"
+
+msgid "Application submitted"
+msgstr "Teilnahmeantrag eingereicht"
+
+msgid "Workshop Assignments"
+msgstr "Workshop-Zuweisungen"
+
+msgid "Choose users to assign to this workshop"
+msgstr "Wähle Benutzer/innen für diesen Workshop"
+
+msgid "List of applications"
+msgstr "Anmeldeliste"
+
+msgid "Signature list"
+msgstr "Unterschriftenliste"
 
 msgid "Conference is not running"
 msgstr "Tagung läuft gerade nicht"
@@ -2568,8 +2608,8 @@ msgstr "Dies ist kein forciertes Limit, sondern dient nur zur Orientierung für 
 msgid "(no limit selected)"
 msgstr "(keine Begrenzung ausgewählt)"
 
-msgid "Application allowed"
-msgstr "Bewerbung zulässig"
+msgid "Application period"
+msgstr "Anmeldefrist"
 
 msgid "From"
 msgstr "Von"
@@ -2600,9 +2640,6 @@ msgstr "Möglichkeiten zur Teilnahme"
 
 msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
 msgstr "Wähle eine oder mehr Bedingungen die auf dem Anmeldeformular angezeigt werden sollen. Benutzer können bei der Antragsstellung aus diesen Optionen Beliebige auswählen."
-
-msgid "(no options chosen)"
-msgstr "(keine Bedingungen gewählt)"
 
 msgid "Conference reminders"
 msgstr "Erinnerungs-Mails"
@@ -2928,12 +2965,6 @@ msgstr "Kontakt"
 msgid "No contact data has been added yet."
 msgstr "Es wurden noch keine Kontaktdaten eingetragen."
 
-msgid "Project Administrator"
-msgstr "Projekt-Administrator"
-
-msgid "Group Administrator"
-msgstr "Gruppen-Administrator"
-
 msgid "Re-Activate Project/Group"
 msgstr "Projekt/Gruppe reaktivieren"
 
@@ -3195,8 +3226,8 @@ msgstr "Teilnahmeanträge für diese Konferenz erforderlich"
 msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
 msgstr "Anstelle der regulären Mitgliedschaftsantragsstellung kann hier die Antragsstellung per Anmeldeformular aktiviert werden. Die Konferenzadministratoren können alle Anträge sehen und auf der Teilnahmeantragsseite annehmen/ablehnen."
 
-msgid "In which projects' or groups' calendars should this be shown?"
-msgstr "In welchen Projekt- oder Gruppenkalendern soll dies angezeigt werden?"
+msgid "In which projects' or groups' calendars should the conference be shown?"
+msgstr "In welchen Projekt- oder Gruppenkalendern soll die Konferenz angezeigt werden?"
 
 msgid "Select Projects/Groups"
 msgstr "Projekte/Gruppen auswählen"
@@ -3234,6 +3265,9 @@ msgstr "Hex-Code (Beispiel: #A2A2A2)"
 msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
 msgstr "Farbe im Hex-Code, die als primäre Farbe für die Konferenzumgebung verwendet wird (mit oder ohne führendes '#')"
 
+msgid "Icon"
+msgstr "Icon"
+
 msgid "A picture for better recognition."
 msgstr "Ein Bild für die schnellere Wiedererkennung."
 
@@ -3248,6 +3282,9 @@ msgstr "Lade ein Bild hoch."
 
 msgid "Reset"
 msgstr "Zurücksetzen"
+
+msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgstr "Hochgeladene Dateien werden zum Download zur Verfügung gestellt und Bilder werden in einer Gallerie angezeigt."
 
 msgid "Example: http://mywebsite.com"
 msgstr "Beispiel: http://mywebsite.com"
@@ -3447,9 +3484,6 @@ msgstr "Ändere sie hier..."
 
 msgid "Register and join!"
 msgstr "Registrieren und beitreten!"
-
-msgid "Application period"
-msgstr "Antragsstellungszeitraum"
 
 msgid "You have been invited to apply!"
 msgstr "Du wurdest eingeladen, die Teilnahme zu beantragen!"
@@ -4579,11 +4613,14 @@ msgstr "Der Link zum Passwort ändern war ungültig. Dies kann daran liegen, das
 msgid "Password reset successful"
 msgstr "Passwort erfolgreich geändert"
 
-msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
-msgstr "Wir haben ihnen Anweisungen zum Zurücksetzen ihres Passworts per E-Mail geschickt. Sie sollten sie in Kürze erhalten."
+msgid "Password reset request received."
+msgstr "Anforderung zum Zurücksetzen des Passworts erhalten."
 
-msgid "If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder."
-msgstr "Falls sie keine E-Mail erhalten, stellen sie bitte sicher dass sie die E-Mail-Addresse eingegeben haben mit der sie sich registriert haben und überprüfen sie ihren Spam-Ordner."
+msgid "If there is an account registered with the email address you entered, we will email you instructions for resetting the account password shortly."
+msgstr "Falls es ein Benutzerkonto mit der E-Mail-Adresse gibt, die du eingegeben hast, werden wir in Kürze an diese E-Mail-Adresse Anweisungen zum Zurücksetzen deines Passworts schicken."
+
+msgid "If you don't receive an email, please make sure you entered the correct email address associated with your account, and check your spam folder."
+msgstr "Falls du keine E-Mail erhältst, stelle bitte sicher dass du die E-Mail-Adresse eingegeben hast, die in deinem Benutzerkonto angegeben ist und überprüfe deinen Spam-Ordner."
 
 #, python-format
 msgid "You're receiving this email because you requested a password reset for your user account at %(site_name)s."
@@ -4598,11 +4635,11 @@ msgstr "Ihr Benutzer_innen-Name:"
 msgid "Thanks for using our site!"
 msgstr "Danke dass sie unsere Webseite benutzen!"
 
-msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
-msgstr "Passwort vergessen? Wenn sie unten ihre E-Mail-Addresse eintragen, schicken wir ihnen Anweisungen wie sie ein neues Passwort vergeben können."
+msgid "Forgotten your password? Enter your account's email address below, and we'll email instructions for setting a new one."
+msgstr "Passwort vergessen? Wenn du unten die E-Mail-Addresse deines Benutzerkontos einträgst, schicken wir dir Anweisungen wie du ein neues Passwort vergeben kannst."
 
-msgid "The email you used to register your account. This is the one you receive email notifications on"
-msgstr "Die E-Mail-Adresse, mit der du dein Benutzerkonto registriert hast. Das ist auch die Adresse, auf der E-Mail-Benachrichtigungen bei dir ankommen"
+msgid "The email associated with your account. This should the email address you receive email notifications on."
+msgstr "Die E-Mail-Adresse, die in deinem Benutzerkonto eingetragen ist. Das ist auch die Adresse, auf der E-Mail-Benachrichtigungen bei dir ankommen."
 
 msgid "Example: mymail@example.com"
 msgstr "Beispiel: meinemail@beispiel.de"
@@ -5085,6 +5122,42 @@ msgid "No description yet."
 msgstr "Noch keine Beschreibung erstellt."
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "max."
+msgstr "max."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are participating"
+msgstr "Du nimmst teil"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Participation request pending..."
+msgstr "Teilnahmeantrag läuft..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Participate"
+msgstr "Teilnehmen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact organizers"
+msgstr "Veranstalter/innen kontaktieren"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications for content posted."
+msgstr "Du wirst jetzt Benachrichtigungen für neue Inhalte erhalten."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If you do not want notifications, click the unfollow button!"
+msgstr "Wenn du das nicht möchtest, klicke oben den Entfolgen-Button!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr "Konnte deine \"Gefällt mir\"-Angabe aufgrund eines Fehlers nicht speichern."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr "Konnte deine Folgen-Einstellung aufgrund eines Fehlers nicht speichern."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
 msgstr "Wähle einen Ort für deine Idee indem du die Markierung in der Karte verschiebst. Du kannst diesen Ort später ändern."
 
@@ -5123,18 +5196,6 @@ msgstr "Event-Seite besuchen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for comments or when this event is updated or its details change."
 msgstr "Du wirst jetzt Benachrichtigungen für Kommentare erhalten und wenn dieser Inhalt geändert wird."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "If you do not want notifications, click the unfollow button!"
-msgstr "Wenn du das nicht möchtest, klicke oben den Entfolgen-Button!"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your like setting because of an error."
-msgstr "Konnte deine \"Gefällt mir\"-Angabe aufgrund eines Fehlers nicht speichern."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your follow setting because of an error."
-msgstr "Konnte deine Folgen-Einstellung aufgrund eines Fehlers nicht speichern."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Hidden Users"
@@ -5814,9 +5875,6 @@ msgstr "Aktivitäten"
 msgid "Contents"
 msgstr "Inhalte"
 
-msgid "My Conferences"
-msgstr "Meine Konferenzen"
-
 msgid "Close to me"
 msgstr "In meiner Nähe"
 
@@ -5996,6 +6054,9 @@ msgstr "(Gelöschter Nutzer)"
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
 
+msgid "You are not currently in any Projects"
+msgstr "Du bist noch in keinen Projekten Mitglied"
+
 msgid "Project Menu"
 msgstr "Projektmenü"
 
@@ -6020,6 +6081,9 @@ msgstr "Projekt deaktivieren"
 msgid "Convert selected items to Projects"
 msgstr "Ausgewählte Gruppen in Projekte umwandeln"
 
+msgid "Project administrator"
+msgstr "Projekt-Administrator"
+
 msgid "Project name"
 msgstr "Projektname"
 
@@ -6037,6 +6101,9 @@ msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen erstellen! 
 
 msgid "Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen deaktivieren! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie die Gruppe für dich deaktiveren. Unten findest du eine Liste aller Administrator_innen."
+
+msgid "You are not currently in any Groups"
+msgstr "Du bist noch in keinen Gruppen Mitglied"
 
 msgid "Group Menu"
 msgstr "Gruppenmenü"
@@ -6062,6 +6129,9 @@ msgstr "Gruppe deaktivieren"
 msgid "Convert selected items to Groups"
 msgstr "Ausgewählte Projekte in Gruppen umwandeln"
 
+msgid "Group administrator"
+msgstr "Gruppen-Administrator"
+
 msgid "Group name"
 msgstr "Gruppenname"
 
@@ -6086,11 +6156,20 @@ msgstr "Konferenzen"
 msgid "All Conferences"
 msgstr "Alle Konferenzen"
 
+msgid "My Conferences"
+msgstr "Meine Konferenzen"
+
+msgid "You are not currently attending any Conferences"
+msgstr "Du nimmst aktuell noch noch an keinen Konferenzen teil"
+
 msgid "Conference Menu"
 msgstr "Konferenzmenü"
 
 msgid "Conference Dashboard"
 msgstr "Konferenz Dashboard"
+
+msgid "Browse all Conferences"
+msgstr "Alle Konferenzen anzeigen"
 
 msgid "Create Conference"
 msgstr "Konferenz erstellen"
@@ -6115,6 +6194,9 @@ msgstr "Konferenz deaktivieren"
 
 msgid "Convert selected items to Conferences"
 msgstr "Ausgewählte Elemente in Konferenzen umwandeln"
+
+msgid "Conference contact person"
+msgstr "Konferenz-Kontaktperson"
 
 msgid "Conference name"
 msgstr "Konferenzname"
@@ -6644,6 +6726,18 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#~ msgid "Conditions"
+#~ msgstr "Nutzungsbedingungen"
+
+#~ msgid "Application allowed"
+#~ msgstr "Bewerbung zulässig"
+
+#~ msgid "Export details and addresses"
+#~ msgstr "Details uns Adressen exportieren"
+
+#~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
+#~ msgstr "Wir haben ihnen Anweisungen zum Zurücksetzen ihres Passworts per E-Mail geschickt. Sie sollten sie in Kürze erhalten."
+
 #, fuzzy
 #~| msgid "Conference Applications"
 #~ msgid "a conference application status"
@@ -6681,9 +6775,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Conference participation management"
 #~ msgstr "Verwaltung von Konferenzteilnahmen"
-
-#~ msgid "View all applications"
-#~ msgstr "Alle Bewerbungen anzeigen"
 
 #~ msgid "Conference Settings"
 #~ msgstr "Konferenz-Einstellungen"

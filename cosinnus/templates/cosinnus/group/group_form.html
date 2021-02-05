@@ -93,51 +93,53 @@
     {% endif %}
     
     	
-        <ul class="nav nav-tabs" role="tablist">
-        	{% block group_form_navtabs %}
-				<li {% if not request.GET.tab %}class="active"{% endif %}>
-					<a href="#general" class="_group-form-tab _group-form-tab-awesome-avatar" role="tab" data-toggle="tab">
-						<i class="fa fa-cogs"></i>
-						{% trans "General" %}
-					</a>
-				</li>
-				{% for form in form.forms.obj.extra_forms %}
-				<li {% if request.GET.tab|add:"0" == forloop.counter %}class="active"{% endif %}>
-					<a href="#{{ forloop.counter }}" class="_group-form-tab" role="tab" data-toggle="tab"
-					   onclick="$('#submit').text('{% trans 'Save' %}')">
-						<i class="fa fa-{{ form.icon }}"></i>
-						{{ form.label }}
-					</a>
-				</li>
-				{% endfor %}
-				{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
-					{% if not group_model == "CosinnusConference" or not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
-					<li {% if request.GET.tab == 'microsite' %}class="active"{% endif %}>
-						<a href="#microsite" class="_group-form-tab" role="tab" data-toggle="tab">
-							<i class="fa fa-lightbulb-o"></i>
-							{% trans "Microsite" %}
+	    {% if not group_model == "CosinnusConference" %}
+	        <ul class="nav nav-tabs" role="tablist">
+	        	{% block group_form_navtabs %}
+					<li {% if not request.GET.tab %}class="active"{% endif %}>
+						<a href="#general" class="_group-form-tab _group-form-tab-awesome-avatar" role="tab" data-toggle="tab">
+							<i class="fa fa-cogs"></i>
+							{% trans "General" %}
+						</a>
+					</li>
+					{% for form in form.forms.obj.extra_forms %}
+						<li {% if request.GET.tab|add:"0" == forloop.counter %}class="active"{% endif %}>
+							<a href="#{{ forloop.counter }}" class="_group-form-tab" role="tab" data-toggle="tab"
+							   onclick="$('#submit').text('{% trans 'Save' %}')">
+								<i class="fa fa-{{ form.icon }}"></i>
+								{{ form.label }}
+							</a>
+						</li>
+					{% endfor %}
+					{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
+						{% if not group_model == "CosinnusConference" or not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+						<li {% if request.GET.tab == 'microsite' %}class="active"{% endif %}>
+							<a href="#microsite" class="_group-form-tab" role="tab" data-toggle="tab">
+								<i class="fa fa-lightbulb-o"></i>
+								{% trans "Microsite" %}
+							</a>
+						</li>
+						{% endif %}
+					{% endif %}
+					{% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED %}
+					<li {% if request.GET.tab == 'facebook' %}class="active"{% endif %}>
+						<a href="#facebook" class="_group-form-tab" role="tab" data-toggle="tab">
+							<i class="fa fa-facebook"></i>
+							{% trans "Facebook-Integration" %}
 						</a>
 					</li>
 					{% endif %}
-				{% endif %}
-				{% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED %}
-				<li {% if request.GET.tab == 'facebook' %}class="active"{% endif %}>
-					<a href="#facebook" class="_group-form-tab" role="tab" data-toggle="tab">
-						<i class="fa fa-facebook"></i>
-						{% trans "Facebook-Integration" %}
-					</a>
-				</li>
-				{% endif %}
-				{% if SETTINGS.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED and user|is_superuser  %}
-                <li {% if request.GET.tab == 'dashboard' %}class="active"{% endif %}>
-                    <a href="#dashboard" class="_group-form-tab" role="tab" data-toggle="tab">
-                        <i class="fa fa-columns"></i>
-                        {{ group_model_class.get_trans.DASHBOARD_LABEL }}
-                    </a>
-                </li>
-                {% endif %}
-			{% endblock group_form_navtabs %}
-		</ul>
+					{% if SETTINGS.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED and user|is_superuser  %}
+	                <li {% if request.GET.tab == 'dashboard' %}class="active"{% endif %}>
+	                    <a href="#dashboard" class="_group-form-tab" role="tab" data-toggle="tab">
+	                        <i class="fa fa-columns"></i>
+	                        {{ group_model_class.get_trans.DASHBOARD_LABEL }}
+	                    </a>
+	                </li>
+	                {% endif %}
+				{% endblock group_form_navtabs %}
+			</ul>
+        {% endif %}
 		
 	<form action="" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
 	    {% csrf_token %}
@@ -167,24 +169,28 @@
                             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=group_model_class.get_trans.FORMFIELD_NAME_PLACEHOLDER field_value=name_val %}
 						{% endblock group_form_name_field %}
 				        
-                        {% comment %} Date picker for from_date - to_date {% endcomment %}
-                        {% if form.forms.obj.fields.from_date and form.forms.obj.fields.to_date %}
-                             {% captureas date_label %}{% trans "Conference start and end date and time" %}{% endcaptureas %}
-                             {% captureas date_legend %}{% trans "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days." %}{% endcaptureas %}
-                             {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.forms.obj.from_date to_date_field=form.forms.obj.to_date date_label=date_label %}
-                        {% endif %}
+				        {% block from_to_date_fields %}
+	                        {% comment %} Date picker for from_date - to_date {% endcomment %}
+	                        {% if form.forms.obj.fields.from_date and form.forms.obj.fields.to_date %}
+	                             {% captureas date_label %}{% trans "Conference start and end date and time" %}{% endcaptureas %}
+	                             {% captureas date_legend %}{% trans "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days." %}{% endcaptureas %}
+	                             {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.forms.obj.from_date to_date_field=form.forms.obj.to_date date_label=date_label %}
+	                        {% endif %}
+                        {% endblock %}
                         
-                        {% if form.forms.obj.use_conference_applications %}
-                            {% captureas use_conference_applications_label %}{% trans 'Application method' %}{% endcaptureas %}
-                            {% captureas use_conference_applications_checkbox_label %}{% trans 'Require participation applications for this conference' %}{% endcaptureas %}
-                            {% captureas use_conference_applications_legend %}{% trans "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area." %}{% endcaptureas %}
-                            {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_conference_applications label=use_conference_applications_label checkbox_label=use_conference_applications_checkbox_label legend=use_conference_applications_legend %}
-                        {% endif %}
+                        {% block use_conference_applications_field %}
+	                        {% if form.forms.obj.use_conference_applications %}
+	                            {% captureas use_conference_applications_label %}{% trans 'Application method' %}{% endcaptureas %}
+	                            {% captureas use_conference_applications_checkbox_label %}{% trans 'Require participation applications for this conference' %}{% endcaptureas %}
+	                            {% captureas use_conference_applications_legend %}{% trans "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area." %}{% endcaptureas %}
+	                            {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_conference_applications label=use_conference_applications_label checkbox_label=use_conference_applications_checkbox_label legend=use_conference_applications_legend %}
+	                        {% endif %}
+                        {% endblock %}
 				        
 				        {% if group_model == "CosinnusConference"%}
                             {% if form.forms.obj.related_groups %}
                                 {# Related Groups Field #}
-                                {% trans "In which projects' or groups' calendars should this be shown?" as related_label %}
+                                {% trans "In which projects' or groups' calendars should the conference be shown?" as related_label %}
                                 {% trans "Select Projects/Groups" as related_placeholder %}
                                 {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder large_field=True %}
                             {% endif %}

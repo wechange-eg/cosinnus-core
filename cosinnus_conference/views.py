@@ -542,7 +542,7 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
                                             GroupIsConferenceMixin,
                                             FormView):
     form_class = ConferenceParticipationManagement
-    template_name = 'cosinnus/conference/conference_participation_management.html'
+    template_name = 'cosinnus/conference/conference_participation_management_form.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-24 15:34+0100\n"
-"PO-Revision-Date: 2021-01-27 08:40+0100\n"
+"POT-Creation-Date: 2021-02-05 14:01+0100\n"
+"PO-Revision-Date: 2021-02-05 14:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -33,12 +33,6 @@ msgstr "Bitte gib auch ein Startdatum an"
 
 msgid "Please also provide a end date"
 msgstr "Bitte gib auch ein Enddatum an"
-
-msgid "You can only pick one workshop as first priority."
-msgstr "Du kannst nur einen Workshop als erste Priorität auswählen."
-
-msgid "You can only pick one workshop as second priority."
-msgstr "Du kannst nur einen Workshop als zweite Priorität auswählen."
 
 msgid "No Interest"
 msgstr "Kein Interesse"
@@ -127,6 +121,27 @@ msgstr "Du kannst deine Anmeldung nicht mehr ändern."
 
 msgid "Application has been withdrawn."
 msgstr "Die Anmeldung wurde zurückgezogen."
+
+#, python-format
+msgid "The following users were accepted and added as members: %s"
+msgstr "Die folgenden Nutzer/innen wurden akzeptiert und als Teilnehmende bestätigt: %s"
+
+#, python-format
+msgid "The following users were put on the wait list: %s"
+msgstr "Die folgenden Nutzer/innen wurden auf die Warteliste gesetzt: %s"
+
+#, python-format
+msgid "The following users were declined: %s"
+msgstr "Die folgenden Nutzer/innen wurden abgelehnt: %s"
+
+msgid "Your changes were saved."
+msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "You can only pick one workshop as first priority."
+#~ msgstr "Du kannst nur einen Workshop als erste Priorität auswählen."
+
+#~ msgid "You can only pick one workshop as second priority."
+#~ msgstr "Du kannst nur einen Workshop als zweite Priorität auswählen."
 
 #~ msgid "Conference is running"
 #~ msgstr "Die Tagung läuft gerade"

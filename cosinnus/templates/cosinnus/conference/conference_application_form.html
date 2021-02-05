@@ -54,7 +54,7 @@
 		
 		
 		        {% if form.conditions_accepted %}
-			        {% trans "Conditions" as conditions_label %}
+			        {% trans "Application conditions" as conditions_label %}
 			        {% trans "Please accept the conditions" as conditions_box_label %}
 			        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_label legend=participation_management.application_conditions checkbox_label=conditions_box_label %}
 		        {% endif %}
