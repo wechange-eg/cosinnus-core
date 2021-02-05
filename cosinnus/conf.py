@@ -909,9 +909,11 @@ class CosinnusConf(AppConf):
     # map of the authentication data for the server choices
     # in `COSINNUS_BBB_SERVER_CHOICES`
     # { <int>: (BBB_API_URL, BBB_SECRET_KEY), ... }  
-    BBB_SERVER_AUTH_PAIRS = {
+    BBB_SERVER_AUTH_AND_SECRET_PAIRS = {
         0: (None, None),
     }
+    
+    BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: url.startswith('https://bbbatscale')
     
 
 class CosinnusDefaultSettings(AppConf):
