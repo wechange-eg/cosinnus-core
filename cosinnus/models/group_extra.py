@@ -45,6 +45,7 @@ from django.contrib.auth import get_user_model
 from cosinnus.models.group import CosinnusGroupManager, CosinnusGroup,\
     get_cosinnus_group_model
 from cosinnus.trans.group import get_group_trans_by_type
+from annoying.functions import get_object_or_None
 
 logger = logging.getLogger('cosinnus')
 
@@ -176,5 +177,5 @@ def ensure_group_type(group):
             group.TYPE_CONFERENCE: CosinnusConference,
         }
         klass = klass_map.get(group.type)
-        group = klass.objects.get_cached(pks=group.id)
+        group = get_object_or_None(klass, id=group.id)
     return group

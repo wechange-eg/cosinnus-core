@@ -1490,7 +1490,7 @@ class ActivateOrDeactivateGroupView(TemplateView):
                 messages.warning(self.request, _('This project/group is already active!'))
             else:
                 messages.warning(self.request, _('This project/group is already inactive!'))
-            return redirect(get_non_cms_root_url(self.request))
+            return redirect(reverse('cosinnus:profile-detail'))
             
         self.group = group
         return super(ActivateOrDeactivateGroupView, self).dispatch(request, *args, **kwargs)
@@ -1516,14 +1516,15 @@ class ActivateOrDeactivateGroupView(TemplateView):
         else:
             messages.success(request, self.message_success_deactivate % {'team_name': self.group.name})
             signals.group_deactivated.send(sender=typed_group.__class__, group=typed_group)
-            return redirect(get_non_cms_root_url(self.request))
+            return redirect(reverse('cosinnus:profile-detail'))
     
     def get_context_data(self, **kwargs):
         context = super(ActivateOrDeactivateGroupView, self).get_context_data(**kwargs)
         context.update({
-            'target_group': self.group,
+            'target_group': ensure_group_type(self.group),
             'activate': self.activate,
         })
+        print(f'>>> tar {ensure_group_type(self.group)}')
         return context
 
 
