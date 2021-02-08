@@ -22,7 +22,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.membership import BaseMembership, MEMBERSHIP_ADMIN, \
-    MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS, MembersManagerMixin
+    MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS, MembersManagerMixin,\
+    MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER
 from cosinnus.utils.functions import unique_aware_slugify,\
     clean_single_line_text, sort_key_strcoll_attr
 from cosinnus.utils.files import get_group_avatar_filename,\
@@ -983,12 +984,16 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         """ "Makes the user a group member". 
             Safely adds a membership for the given user with the given status for this group.
             If the membership existed, does nothing. If it existed with a different status, will
-            change the status. If none existed, creates it. 
+            change the status (unless it would demote the user). If none existed, creates it. 
             This will also convert membership requests/invitations to actual memberships! """
         membership = get_object_or_None(CosinnusGroupMembership, group=self, user=user)
         if membership and membership.status != membership_status:
-            membership.status = membership_status
-            membership.save()
+            # upgrade the membership, or do nothing
+            if (membership.status in [MEMBERSHIP_INVITED_PENDING, MEMBERSHIP_PENDING] and \
+                    membership_status in MEMBER_STATUS) or \
+                    (membership.status == MEMBERSHIP_MEMBER and membership_status == MEMBERSHIP_ADMIN): 
+                membership.status = membership_status
+                membership.save()
         elif not membership:
             CosinnusGroupMembership.objects.create(
                 group=self, 

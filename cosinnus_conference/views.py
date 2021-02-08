@@ -757,10 +757,14 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
         """ Performs all triggers for a given changed application (accepted, declined, etc), 
             like sending mail, creating a group membership for the conference, etc. """
         if application.status == APPLICATION_ACCEPTED:
-            self.group.add_member_to_group(application.user, MEMBERSHIP_MEMBER)
+            # do not apply group membership changes to admins
+            if not application.user.pk in self.group.admins:
+                self.group.add_member_to_group(application.user, MEMBERSHIP_MEMBER)
             self._users_accepted.append(application.user)
         else:
-            self.group.remove_member_from_group(application.user)
+            # do not apply group membership changes to admins
+            if not application.user.pk in self.group.admins:
+                self.group.remove_member_from_group(application.user)
             if application.status == APPLICATION_WAITLIST:
                 self._users_waitlisted.append(application.user)
             else:
