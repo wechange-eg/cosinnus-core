@@ -62,6 +62,14 @@ NEVER_REDIRECT_URLS = [
     '/language',
     '/api/',
     '/o/',
+    # these deprecated URLs can be removed from the filter list once the URLs are removed
+    # and their /account/ URL-path equivalents are the only remaining version of the view URL
+    '/administration/list-unsubscribe/',
+    '/administration/list-unsubscribe-result/',
+    '/administration/deactivated/',
+    '/administration/activate/',
+    '/administration/deactivate/',
+    '/administration/verify_email/',
 ]
 
 LOGIN_URLS = NEVER_REDIRECT_URLS + [

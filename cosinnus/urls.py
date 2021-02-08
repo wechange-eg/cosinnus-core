@@ -78,19 +78,30 @@ urlpatterns = [
     url(r'^account/report/$', feedback.report_object, name='report-object'),
     url(r'^account/accept_tos/$', user.accept_tos, name='accept-tos'),
     url(r'^account/accept_updated_tos/$', user.accept_updated_tos, name='accept-updated-tos'),
+    url(r'^account/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', user.add_email_to_blacklist, name='user-add-email-blacklist'),
+    url(r'^account/list-unsubscribe-result/$', user.add_email_to_blacklist_result, name='user-add-email-blacklist-result'),
+    url(r'^account/deactivated/$', group.group_list_mine_deactivated, name='deactivated-groups'),
+    url(r'^account/activate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-activate', kwargs={'activate': True}),
+    url(r'^account/deactivate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-deactivate', kwargs={'activate': False}),
+    url(r'^account/verify_email/(?P<email_verification_param>[^/]+)/$', user.verifiy_user_email, name='user-verifiy-email'),
     
-    url(r'^administration/approve_user/(?P<user_id>\d+)/$', user.approve_user, name='user-approve'),
-    url(r'^administration/deny_user/(?P<user_id>\d+)/$', user.deny_user, name='user-deny'),
-    url(r'^administration/verify_email/(?P<email_verification_param>[^/]+)/$', user.verifiy_user_email, name='user-verifiy-email'),
-    url(r'^administration/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', user.add_email_to_blacklist, name='user-add-email-blacklist'),
-    url(r'^administration/list-unsubscribe-result/$', user.add_email_to_blacklist_result, name='user-add-email-blacklist-result'),
-    url(r'^administration/deactivated/$', group.group_list_mine_deactivated, name='deactivated-groups'),
-    url(r'^administration/activate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-activate', kwargs={'activate': True}),
-    url(r'^administration/deactivate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-deactivate', kwargs={'activate': False}),
-    url(r'^administration/login-2fa/$', authentication.admin_only_otp_token_validation, name='login-2fa'),
+    # --- DEPERECATED -----
+    # these URL paths are deprecated and have been replaced by the /account/ prefix
+    # they should be kept until mid-2021 so old sent-out emails do not point to a 404
+    url(r'^administration/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', user.add_email_to_blacklist, name='OLD-user-add-email-blacklist'),
+    url(r'^administration/list-unsubscribe-result/$', user.add_email_to_blacklist_result, name='OLD-user-add-email-blacklist-result'),
+    url(r'^administration/deactivated/$', group.group_list_mine_deactivated, name='OLD-deactivated-groups'),
+    url(r'^administration/activate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='OLD-group-activate', kwargs={'activate': True}),
+    url(r'^administration/deactivate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='OLD-group-deactivate', kwargs={'activate': False}),
+    url(r'^administration/verify_email/(?P<email_verification_param>[^/]+)/$', user.verifiy_user_email, name='OLD-user-verifiy-email'),
+    # ---- END DEPRECATED ---
     
     # these URLs belong to the frontend administration area for superusers
     url(r'^administration/$', administration.administration, name='administration'),
+    url(r'^administration/login-2fa/$', authentication.admin_only_otp_token_validation, name='login-2fa'),
+    url(r'^administration/approve_user/(?P<user_id>\d+)/$', user.approve_user, name='user-approve'),
+    url(r'^administration/deny_user/(?P<user_id>\d+)/$', user.deny_user, name='user-deny'),
+    
     url(r'^administration/welcome_email/$', administration.welcome_email_edit, name='administration-welcome-email'),
 
     url(r'^administration/users/$', administration.user_list, name='administration-users'),
@@ -105,8 +116,6 @@ urlpatterns = [
     url(r'^administration/announcement/(?P<slug>[^/]+)/delete/$', user_dashboard_announcement.user_dashboard_announcement_delete, name='user-dashboard-announcement-delete'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/activate-toggle/$', user_dashboard_announcement.user_dashboard_announcement_activate, name='user-dashboard-announcement-activate'),
     
-    url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
-
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),
     

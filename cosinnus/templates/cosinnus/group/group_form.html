@@ -257,27 +257,28 @@
                         {% endcaptureas %}
                         {% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
                         
-                        
 					    {# Microsite Wallpaper Field #}
-	                    {% captureas wallpaper_label %}{% trans "Background Image" %} (1140px x 240px, {% trans "max. 10 MB" %}){% endcaptureas %}
+                        {% if group_model == "CosinnusConference" %}
+                            {% captureas wallpaper_label %}{% trans "Banner Image" %} (1140px x 240px, {% trans "max. 10 MB" %}){% endcaptureas %}
+                        {% else %}
+                            {% captureas wallpaper_label %}{% trans "Background Image" %} (1140px x 240px, {% trans "max. 10 MB" %}){% endcaptureas %}
+                        {% endif %}
 	                    {% captureas wallpaper_html %}
-								{{ form.forms.obj.wallpaper.errors }}
-								
-								{% if object.wallpaper %}
-							        <div class="row">
-							            <div class="col-xs-4 col-sm-2">
-							                <img class="image" style="width: 120px;" src="{% thumbnail object.wallpaper 120x120 crop=1 upscale=1 %}"></img>
-							            </div>
-							            <div class="col-xs-8 col-sm-10">
-							    {% endif %} 
-							    <div class="file-input">
-	                                <input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file" {% if not object.wallpaper and form.forms.obj.wallpaper.field.required %}required{% endif %}>
-							    </div>
-							    {% if object.wallpaper %}
-							            </div>
-							        </div>
-							    {% endif %}
-								
+							{{ form.forms.obj.wallpaper.errors }}
+							{% if object.wallpaper %}
+						        <div class="row">
+						            <div class="col-xs-4 col-sm-2">
+						                <img class="image" style="width: 120px;" src="{% thumbnail object.wallpaper 120x120 crop=1 upscale=1 %}"></img>
+						            </div>
+						            <div class="col-xs-8 col-sm-10">
+						    {% endif %} 
+						    <div class="file-input">
+                                <input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file" {% if not object.wallpaper and form.forms.obj.wallpaper.field.required %}required{% endif %}>
+						    </div>
+						    {% if object.wallpaper %}
+						            </div>
+						        </div>
+						    {% endif %}
                         {% endcaptureas %}
                         {% captureas wallpaper_extra_html %}
 		                        {% if object.wallpaper and not form.forms.obj.wallpaper.field.required %}
