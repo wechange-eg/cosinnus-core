@@ -44,7 +44,7 @@
         <li class="active">{% trans "Invitations" %}</li>
     {% elif is_deactivated_groups_view %}
         <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
-    	<li class="active">{% trans "Deactivated Projects and Groups" %}</li>
+    	<li class="active">{% trans "Your Deactivated Content" %}</li>
     {% else %}
         <li class="active">{% trans "Overview" %}</li>
     {% endif %}

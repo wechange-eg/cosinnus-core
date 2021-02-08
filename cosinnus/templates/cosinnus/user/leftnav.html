@@ -88,7 +88,7 @@
 {% endif %}
 
 <button type="button" class="btn w100 btn-emphasized regular-space" 
-        title="{% trans "Deactivated Projects and Groups" %}" 
+        title="{% trans "Your Deactivated Content" %}" 
         {% if request.user.cosinnus_profile and request.user.cosinnus_profile.has_deactivated_groups %}href="{% url 'cosinnus:deactivated-groups' %}"{% else %}disabled="true"{% endif %}>
     <ul class="media-list">
         <li class="media">
@@ -96,7 +96,7 @@
                 <i class="fa fa-flash"></i>
             </a>
             <div class="media-body">
-                {% trans "Deactivated Projects and Groups" %}
+                {% trans "Your Deactivated Content" %}
             </div>
         </li>
     </ul>

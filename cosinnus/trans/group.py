@@ -33,6 +33,10 @@ class CosinnusProjectTransBase(object):
     ACTIVATE = _('Activate Project')
     REACTIVATE = _('Re-activate Project')
     DEACTIVATE = _('Deactivate Project')
+    DEACTIVATE_WARNING = _('You are about to deactivate this project!')
+    DEACTIVATE_EXPLANATION = _('You are about to re-activate this project. It and all of its content will be visible on the website again.')
+    REACTIVATE_EXPLANATION_1 = _('You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you.')
+    REACTIVATE_EXPLANATION_2 = _('This process is reversible. You can reactivate the project from your user profile page at any time.')
     CONVERT_ITEMS_TO = _('Convert selected items to Projects')
     CONTACT_PERSON = _('Project administrator')
     
@@ -76,6 +80,10 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     ACTIVATE = _('Activate Group')
     REACTIVATE = _('Re-activate Group')
     DEACTIVATE = _('Deactivate Group')
+    DEACTIVATE_WARNING = _('You are about to deactivate this group!')
+    DEACTIVATE_EXPLANATION = _('You are about to re-activate this group. It and all of its content will be visible on the website again.')
+    REACTIVATE_EXPLANATION_1 = _('You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you.')
+    REACTIVATE_EXPLANATION_2 = _('This process is reversible. You can reactivate the group from your user profile page at any time.')
     CONVERT_ITEMS_TO = _('Convert selected items to Groups')
     CONTACT_PERSON = _('Group administrator')
     
@@ -119,6 +127,10 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     ACTIVATE = _('Activate Conference')
     REACTIVATE = _('Re-activate Conference')
     DEACTIVATE = _('Deactivate Conference')
+    DEACTIVATE_WARNING = _('You are about to deactivate this conference!')
+    DEACTIVATE_EXPLANATION = _('You are about to re-activate this conference. It and all of its content will be visible on the website again.')
+    REACTIVATE_EXPLANATION_1 = _('You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you.')
+    REACTIVATE_EXPLANATION_2 = _('This process is reversible. You can reactivate the conference from your user profile page at any time.')
     CONVERT_ITEMS_TO = _('Convert selected items to Conferences')
     CONTACT_PERSON = _('Conference contact person')
     
