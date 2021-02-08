@@ -61,37 +61,62 @@
 	                    </div>
 	                {% endif %}
                     
-                    {% if group.description_long %}
+                    {% if group.description_long or group.description %}
                         <hr class="invisible"/>
                         <div class="textfield transparent">
-	                        {{ group.description_long|textfield }}
+                            {% if group.description_long %}
+	                            {{ group.description_long|textfield }}
+	                        {% else %}
+	                            {{ group.description|textfield }}
+	                        {% endif %}
 	                    </div>
                     {% endif %}
                     
                     {% if group.conference_events.count > 0 %}
                         <hr class="invisible"/>
-	                    <h4>
-	                        {% trans "Workshops" %}:
-	                    </h4>
-	                    <ul class="microsite-conference-workshop-list large-space">
-		                    {% for room in group.rooms.all %}
-		                        {% for event in room.events.all %}
-		                            {% if not event.is_break %}
-			                            <li>
-			                                <a href="{{ event.get_absolute_url }}">
-					                            {{ event.title }} - {{ event.media_tag.visibility }}
-				                            </a>
-				                            {% if event.from_date %}
-				                                &nbsp;&nbsp;
-					                            <i>
-				                                    {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
-				                                </i>
-				                            {% endif %}
-			                            </li>
-			                        {% endif %}
-		                        {% endfor %}
-		                    {% endfor %}
-	                    </ul>
+                        <h2>{% trans "Events" %}</h2>
+	                    {% for room in group.rooms.all %}
+	                        {% with room_events=room.events.all %}
+	                            {% if room_events %}
+				                    <h4>
+		                                {{ room.title }}:		                        
+				                        {% comment %}  
+					                        {% trans "Workshops" %}:
+				                        {% endcomment %} 
+				                    </h4>
+				                    <div class="microsite-conference-workshop-list large-space">
+				                        {% for event in room_events %}
+				                            {% if not event.is_break %}
+				                                <div class="indented fadedown">
+				                                   <div>
+						                                <a href="{{ event.get_absolute_url }}">
+								                            {{ event.title }} - {{ event.media_tag.visibility }}
+							                            </a>
+							                            {% if event.from_date %}
+							                                &nbsp;&nbsp;
+								                            <i>
+							                                    {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
+							                                </i>
+							                            {% endif %}
+							                            {% if event.note %}
+								                            <a href="#" class="fadedown-clickarea">
+								                                {% trans "More infos..." %}
+								                                <i class="fa fa-chevron-down"></i>
+								                            </a>
+							                            {% endif %}
+					                                </div>
+					                                {% if event.note %}
+							                            <div class="textfield transparent">
+							                                {{ event.note|textfield }}
+							                            </div>
+						                            {% endif %}
+					                            </div>
+					                        {% endif %}
+					                    {% endfor %}
+				                    </div>
+				                {% endif %}
+				            {% endwith %}
+                        {% endfor %}
 	                {% endif %}
                 </div> {% comment %} end div[textfield] {% endcomment %}
                 

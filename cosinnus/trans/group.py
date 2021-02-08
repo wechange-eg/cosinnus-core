@@ -42,8 +42,13 @@ class CosinnusProjectTransBase(object):
     FORMFIELD_LOCATION_LABEL = _('Where is the project active?')
     FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Project members only')
     
+    CALL_TO_JOIN = _('Collaborate!')
+    CALL_TO_REGISTER_AND_JOIN = _('Join now and collaborate!')
+    INVITED_TO_JOIN = _('You have been invited to collaborate!')
+    
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _('Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators.')
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _('Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.')
+    MESSAGE_MEMBERS_ONLY = _('Only project members can see the content you requested. Apply to become a member now!')
     
 
 class CosinnusSocietyTransBase(CosinnusProjectTransBase):
@@ -80,8 +85,13 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     FORMFIELD_LOCATION_LABEL = _('Where is the group active?')
     FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Group members only')
     
+    CALL_TO_JOIN = _('Collaborate!')
+    CALL_TO_REGISTER_AND_JOIN = _('Join now and collaborate!')
+    INVITED_TO_JOIN = _('You have been invited to collaborate!')
+    
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _('Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators.')
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _('Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.')
+    MESSAGE_MEMBERS_ONLY = _('Only group members can see the content you requested. Apply to become a member now!')
     
     
 class CosinnusConferenceTransBase(CosinnusProjectTransBase):
@@ -118,9 +128,13 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     FORMFIELD_LOCATION_LABEL = _('Where is the conference active?')
     FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Conference members only')
     
+    CALL_TO_JOIN = _('Participate!')
+    CALL_TO_REGISTER_AND_JOIN = _('Join now and participate!')
+    INVITED_TO_JOIN = _('You have been invited to participate!')
     
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _('Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators.')
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _('Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.')
+    MESSAGE_MEMBERS_ONLY = _('Only conference members can see the content you requested. Apply to become a member now!')
     
     
 # allow dropin of trans classes

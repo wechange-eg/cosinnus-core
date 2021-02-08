@@ -28,7 +28,7 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
     def get_template_names(self):
         """ Return the extending compact-conference microsite if this is a conference
             and conferences are shown in compact mode """
-        if self.group.group_is_conference and settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
+        if self.group.group_is_conference:
             return ['cosinnus/group/conference_compact_microsite.html']
         return ['cosinnus/group/group_microsite.html']
     

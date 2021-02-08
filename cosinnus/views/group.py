@@ -1570,6 +1570,10 @@ class GroupStartpage(View):
             return True
         
         if not request.user.pk in self.group.members:
+            # non-members never see the dashboard, but always the microsite
+            if self.group.group_is_conference:
+                return True
+            
             # grant access to superusers but notifiy them
             if check_user_superuser(request.user):
                 messages.info(request, _('You are not a member, but have access because you are an Administrator.'))

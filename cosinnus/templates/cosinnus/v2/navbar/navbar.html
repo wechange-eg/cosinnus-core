@@ -218,7 +218,7 @@
                     {{ COSINNUS_SOCIETY_TRANS.CREATE_NEW }}
                 </div>
             </a>
-            {% if SETTINGS.COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON %}
+            {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
                 {% if not SETTINGS.COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED or user|user_can_create_conferences %}
 		            <a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:conference__group-add' %}"
 		                    class="create-menu-link flex-grow">

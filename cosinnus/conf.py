@@ -627,18 +627,13 @@ class CosinnusConf(AppConf):
     # supersedes `USERS_CAN_CREATE_CONFERENCES`
     USERS_WITH_MANAGED_TAG_SLUGS_CAN_CREATE_CONFERENCES = []
     
-    # should the "Create Conference" Main menu entry under the "+" menu be shown?
-    # (this is safe with use of `USERS_CAN_CREATE_CONFERENCES`, 
-    #  as non-permitted users will be redirected to an explanation page)  
-    SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON = False
+    # whether to show conferences on the site
+    CONFERENCES_ENABLED = False
     
-    # if `SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON` is True, setting this to 
+    # if `CONFERENCES_ENABLED` is True, setting this to 
     # True will only show the conference button if the current user actually
     # has permission to create a conference
     SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED = False
-    
-    # whether to show conferences on the site
-    CONFERENCES_ENABLED = False
     
     # For conferences, disables the react conference interface, locks non-admin members 
     # to the microsite, removes most group-like elements like apps andremoves room management
