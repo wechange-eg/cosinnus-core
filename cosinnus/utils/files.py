@@ -60,6 +60,10 @@ def get_group_wallpaper_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'group_wallpapers', base_folder='group_images')
 
 
+def get_conference_conditions_filename(instance, filename):
+    return _get_avatar_filename(instance, filename, 'conference_conditions', base_folder='group_conferences')
+
+
 def get_idea_image_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'images', base_folder='idea_images')
 
