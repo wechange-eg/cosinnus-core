@@ -198,6 +198,7 @@ class ConferenceEventParticipantSerializer(serializers.ModelSerializer):
 class ConferenceEventSerializer(serializers.ModelSerializer):
     room = ConferenceEventRoomSerializer()
     url = serializers.SerializerMethodField()
+    is_queue_url = serializers.SerializerMethodField() 
     image_url = serializers.SerializerMethodField()
     presenters = ConferenceEventParticipantSerializer(many=True)
     participants_limit = serializers.IntegerField(source='max_participants')
@@ -207,12 +208,17 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = ConferenceEvent
-        fields = ('id', 'title', 'note_html', 'from_date', 'to_date', 'room', 'url', 'raw_html', 'is_break',
+        fields = ('id', 'title', 'note_html', 'from_date', 'to_date', 'room', 'url', 'is_queue_url', 'raw_html', 'is_break',
                   'image_url', 'presenters', 'participants_limit', 'feed_url', 'management_urls')
 
     def get_url(self, obj):
         # FIXME: Maybe smarter filtering for URL
         return obj.url or obj.get_bbb_room_queue_api_url()
+    
+    def get_is_queue_url(self, obj):
+        """ See `get_url` logic. If we have a direct URL in the event, this is False,
+            so the url is set directly into the iFrame. """
+        return not bool(obj.url)
 
     def get_image_url(self, obj):
         image_file = obj.attached_image.file if obj.attached_image else None
