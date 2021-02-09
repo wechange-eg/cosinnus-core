@@ -54,8 +54,16 @@
 		
 		
 		        {% if form.conditions_accepted %}
+					{% captureas conditions_box_label %}
+					{% if participation_management.application_conditions_upload %}
+					{% blocktrans with url=participation_management.application_conditions_upload.url %}
+					Please accept the <a href="{{ url }}">conditions</a>
+					{% endblocktrans %}
+					{% else %}
+					{% trans "Please accept the conditions" %}
+					{% endif %}
+					{% endcaptureas %}
 			        {% trans "Application conditions" as conditions_label %}
-			        {% trans "Please accept the conditions" as conditions_box_label %}
 			        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_label legend=participation_management.application_conditions checkbox_label=conditions_box_label %}
 		        {% endif %}
 		

@@ -14,6 +14,8 @@ from django.forms import BaseFormSet
 from django_select2.widgets import Select2MultipleWidget
 from cosinnus.forms.widgets import SplitHiddenDateWidget
 
+from cosinnus.utils.validators import validate_file_infection
+
 
 class ConferenceRemindersForm(forms.ModelForm):
 
@@ -67,6 +69,7 @@ class ConferenceParticipationManagement(forms.ModelForm):
                                                  widget=SplitHiddenDateWidget(default_time='00:00'))
     application_end = forms.SplitDateTimeField(required=False,
                                                widget=SplitHiddenDateWidget(default_time='23:59'))
+    application_conditions_upload = forms.FileField(required=False, validators=[validate_file_infection])
 
     class Meta:
         model = ParticipationManagement
@@ -136,7 +139,8 @@ class ConferenceApplicationForm(forms.ModelForm):
                 field.widget = Select2MultipleWidget(choices=field.choices)
 
         if (not hasattr(self, 'participation_management')
-            or not self.participation_management.application_conditions or
+            or (not self.participation_management.application_conditions
+            and not self.participation_management.application_conditions_upload) or
             self.instance.id):
             del self.fields['conditions_accepted']
         if (not hasattr(self, 'participation_management')
