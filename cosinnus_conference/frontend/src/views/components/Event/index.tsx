@@ -26,25 +26,29 @@ export function Event(props: EventProps) {
 
   function fetchEventUrl() {
     if (!url) {
-      fetch(event.props.url, {
-        method: "GET"
-      }).then(response => {
-        if (response.status === 200) {
-          response.json().then((data: EventResponse) => {
-            if (data.status === 'DONE') {
-              setUrl(data.url);
-            } else if (data.status === 'ERROR') {
-              setUrl('ERROR');
-            } else {
-              setTimeout(fetchEventUrl, 2000);
-            }
-          })
-        } else {
-          setUrl('ERROR');
-        }
-      }).catch(response => {
-        setTimeout(fetchEventUrl, 5000);
-      })
+      if (!event.props.isQueueUrl) {
+        setUrl(event.props.url);
+      } else {
+        fetch(event.props.url, {
+          method: "GET"
+        }).then(response => {
+          if (response.status === 200) {
+            response.json().then((data: EventResponse) => {
+              if (data.status === 'DONE') {
+                setUrl(data.url);
+              } else if (data.status === 'ERROR') {
+                setUrl('ERROR');
+              } else {
+                setTimeout(fetchEventUrl, 2000);
+              }
+            })
+          } else {
+            setUrl('ERROR');
+          }
+        }).catch(response => {
+          setTimeout(fetchEventUrl, 5000);
+        })
+      }
     }
   }
   // Not loading events anymore and events URL given (instead of HTML)?
