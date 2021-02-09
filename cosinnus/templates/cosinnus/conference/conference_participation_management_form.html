@@ -68,15 +68,25 @@
             {% endcaptureas %}
             {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label label=date_label large_field=True %}
 
-            {% trans "Conditions for participation" as conditions_label %}
-            {% trans "If set, applicants will have to agree to these conditions by checking a checkbox" as conditions_legend %}
-            {% trans "(no conditions selected)" as conditions_placeholder %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.application_conditions label=conditions_label legend=conditions_legend placeholder=conditions_placeholder large_field=True %}
+            <div class="cosinnus-field ">
+                <label>{% trans 'Conditions for participation' %}</label>
+            </div>
 
-            {% trans "Conditions for participation file upload" as conditions_file_label %}
-            {% trans "If uploade, applicants will have to agree to these conditions by checking a checkbox" as conditions_legend %}
-            {% trans "(no file uploaded)" as conditions_placeholder %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.application_conditions_upload label=conditions_label legend=conditions_legend placeholder=conditions_placeholder large_field=True %}
+            <div class="row">
+                <div class="col-md-6">
+                    {% trans "If set, applicants will have to agree to these conditions by checking a checkbox" as conditions_legend %}
+                    {% trans "(no conditions selected)" as conditions_placeholder %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.application_conditions legend=conditions_legend placeholder=conditions_placeholder large_field=True %}
+                </div>
+                <div class="col-md-6">
+                    <div class="cosinnus-field ">
+                        <div class="field-description">
+                            {% trans 'If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox' %}
+                        </div>
+                    </div>
+                    {{ form.application_conditions_upload }}
+                </div>
+            </div>
 
             {% if form.application_options %}
             {% trans "Options for participation" as options_label %}
