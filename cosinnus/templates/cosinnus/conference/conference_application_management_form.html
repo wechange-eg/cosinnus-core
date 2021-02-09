@@ -113,7 +113,7 @@
 		                            <div class="row">{{ application.status }}</div>
 		                        </div>
 		                    </div>
-		                    <div id="collapse{{ forloop.counter0 }}" class="collapse {% if application.reason_for_rejection.value and application.status.value != 4  %}in{% endif %}" role="tabpanel">
+		                    <div id="collapse{{ forloop.counter0 }}" {% if application.reason_for_rejection.value and application.status.value != 4  %}class="in"{% else %}class="collapse" style="height: 0px;"{% endif %}" role="tabpanel">
 		                        <div class="row">
 			                        {% captureas rejection_placeholder %}{% trans 'Reason for rejection' %}({% trans "optional" %}){% endcaptureas %}
 		                            <div class="col-md-4">

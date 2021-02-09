@@ -40,7 +40,7 @@
     {% if group.use_conference_applications %}
 	    {% captureas href %}{% group_url 'cosinnus:conference:participation-management' group=group %}{% endcaptureas %}
         {% captureas label %}{% trans "Edit Conditions of Participation" %}{% endcaptureas %}
-        {% include "cosinnus/leftnav_button.html" with active=is_conference_participation_manangement extra_classes="fine-space" icon_full_class="fas fa-user-friends" label=label href=href  %}
+        {% include "cosinnus/leftnav_button.html" with active=is_conference_participation_manangement extra_classes="fine-space" icon_full_class="fas fa-user-cog" label=label href=href  %}
     {% endif %}
     
     <div class="small-space">&nbsp;</div>
@@ -58,7 +58,7 @@
     {% if group.use_conference_applications %}
         {% captureas href %}{% group_url 'cosinnus:conference:participation-management-applications' group=group %}{% endcaptureas %}
         {% captureas label %}{% trans "Manage participation applications" %}{% endcaptureas %}
-        {% include "cosinnus/leftnav_button.html" with active=is_conference_applications extra_classes="fine-space" icon_full_class="fas fa-user-friends" label=label href=href  %}
+        {% include "cosinnus/leftnav_button.html" with active=is_conference_applications extra_classes="fine-space" icon_full_class="fas fa-user-plus" label=label href=href  %}
     {% endif %}
 {% endif %}
 

@@ -54,6 +54,7 @@ from cosinnus_conference.forms import (ConferenceRemindersForm,
                                        AsignUserToEventForm)
 from cosinnus_conference.utils import send_conference_reminder
 from cosinnus.templatetags.cosinnus_tags import full_name
+from cosinnus import cosinnus_notifications
 
 logger = logging.getLogger('cosinnus')
 
@@ -756,20 +757,30 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
     def _handle_application_changed_for_status(self, application):
         """ Performs all triggers for a given changed application (accepted, declined, etc), 
             like sending mail, creating a group membership for the conference, etc. """
+        notification_kwargs = {
+            'sender': self,
+            'obj': application, 
+            'user': self.request.user,
+            'audience': [application.user],
+        }
         if application.status == APPLICATION_ACCEPTED:
-            # do not apply group membership changes to admins
+            # add user to conference
             if not application.user.pk in self.group.admins:
+                # do not apply group membership changes to admins
                 self.group.add_member_to_group(application.user, MEMBERSHIP_MEMBER)
             self._users_accepted.append(application.user)
+            cosinnus_notifications.user_conference_application_accepted.send(**notification_kwargs)
         else:
-            # do not apply group membership changes to admins
+            # remove/leave user out of conference
             if not application.user.pk in self.group.admins:
+                # do not apply group membership changes to admins!
                 self.group.remove_member_from_group(application.user)
             if application.status == APPLICATION_WAITLIST:
                 self._users_waitlisted.append(application.user)
+                cosinnus_notifications.user_conference_application_waitlisted.send(**notification_kwargs)
             else:
                 self._users_declined.append(application.user)
-        # TODO: send email notification depending on application status
+                cosinnus_notifications.user_conference_application_declined.send(**notification_kwargs)
     
     def form_valid(self, form):
         self._users_accepted = []

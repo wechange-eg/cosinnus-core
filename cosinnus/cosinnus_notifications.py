@@ -26,6 +26,12 @@ idea_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 group_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 organization_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_account_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
+user_conference_application_accepted = dispatch.Signal(providing_args=["user", "obj", "audience"])
+user_conference_application_declined = dispatch.Signal(providing_args=["user", "obj", "audience"])
+user_conference_application_waitlisted = dispatch.Signal(providing_args=["user", "obj", "audience"])
+user_conference_applied = None
+user_conference_invited_to_apply = None
+user_conference_created_in_group = None
 
 
 """ Notification definitions.
@@ -173,7 +179,71 @@ notifications = {
             'sub_object_icon': 'get_icon',
         },
        'notification_reason': 'admin',
-    },    
+    },
+    'user_conference_application_accepted': {
+        'label': '<hidden-user_conference_application_accepted>', 
+        'signals': [user_conference_application_accepted],
+        'default': True,
+        'hidden': True,
+        
+        'alert_text': _('Your participation application was accepted'),
+        'alert_reason': _('You submitted an application'),
+        
+        'is_html': True,
+        'event_text': _('Your participation application was accepted'),
+        'topic': _('Your participation application for %(team_name)s was accepted!'),
+        'subject_text': _('Your participation application for %(team_name)s was accepted!'),
+        'data_attributes': {
+            'object_name': 'conference.name',
+            'object_url': 'conference.get_absolute_url',
+            'object_text': 'email_notification_body',
+            'object_icon': 'conference.get_icon',
+        },
+       'notification_reason': 'none',
+    },
+    'user_conference_application_declined': {
+        'label': '<hidden-user_conference_application_declined>', 
+        'signals': [user_conference_application_declined],
+        'default': True,
+        'hidden': True,
+        
+        'alert_text': _('Your participation application was declined'),
+        'alert_reason': _('You submitted an application'),
+        
+        'is_html': True,
+        'event_text': _('Your participation application was declined'),
+        'topic': _('Your participation application for %(team_name)s was declined!'),
+        'subject_text': _('Your participation application for %(team_name)s was declined!'),
+        'data_attributes': {
+            'object_name': 'conference.name',
+            'object_url': 'conference.get_absolute_url',
+            'object_text': 'email_notification_body',
+            'object_icon': 'conference.get_icon',
+        },
+       'notification_reason': 'none',
+    },
+    'user_conference_application_waitlisted': {
+        'label': '<hidden-user_conference_application_waitlisted>', 
+        'signals': [user_conference_application_waitlisted],
+        'default': True,
+        'hidden': True,
+        
+        'alert_text': _('Your participation application was waitlisted'),
+        'alert_reason': _('You submitted an application'),
+        
+        'is_html': True,
+        'event_text': _('Your participation application was waitlisted'),
+        'topic': _('Your participation application for %(team_name)s was waitlisted!'),
+        'subject_text': _('Your participation application for %(team_name)s was waitlisted!'),
+        'data_attributes': {
+            'object_name': 'conference.name',
+            'object_url': 'conference.get_absolute_url',
+            'object_text': 'email_notification_body',
+            'object_icon': 'conference.get_icon',
+        },
+       'notification_reason': 'none',
+    },
+    
     'user_group_made_admin': {
         'label': _('You were made an admin of this team'), 
         'mail_template': '<html-only>',

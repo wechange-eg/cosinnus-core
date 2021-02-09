@@ -92,13 +92,20 @@
 					    {% else %}
 					        {% trans "Participation applications are open." %}
 						{% endif %}
-					</h2> 
+					</h2>
+					{% if application and application.reason_for_rejection %}
+					    {% if application.status == 3 or application.status == 5 %}
+	                        <div class="textfield transparent">
+	                            <b>{% trans "Note from the organizers" %}:</b>
+							    {{ application.reason_for_rejection|textfield }}
+	                        </div>
+                        {% endif %}
+                    {% endif %}
 					{% if group.participation_management.all.count == 1 %}
                         <div class="textfield transparent">
                             <p>
-							    {% trans "Application period" %}:
-							    <br/>
-							    {% include 'cosinnus_event/common/humanized_event_time.html' with event=group.participation_management.first %}
+	                            <b>{% trans "Application period" %}:</b>
+                                {% include 'cosinnus_event/common/humanized_event_time.html' with event=group.participation_management.first %}
                             </p>
                         </div>
                     {% endif %}

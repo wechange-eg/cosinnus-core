@@ -21,6 +21,7 @@ from cosinnus.utils.urls import group_aware_reverse
 from django.utils.crypto import get_random_string
 import logging
 from cosinnus.views.mixins.group import ModelInheritsGroupReadWritePermissionsMixin
+from cosinnus.utils.permissions import check_user_superuser
 
 logger = logging.getLogger('cosinnus')
 
@@ -383,5 +384,24 @@ class CosinnusConferenceApplication(models.Model):
         for icon in APPLICATION_STATES_ICONS:
             if icon[0] == self.status:
                 return icon[1]
+    
+    @property
+    def email_notification_body(self):
+        """ The description text for a notification email for this application
+            for the application's user. The body text of the notification item
+            that the user receives when their application is accepted/declined/waitlisted. """
+        reason_markdown = ''
+        if self.status in [APPLICATION_WAITLIST, APPLICATION_DECLINED] and self.reason_for_rejection:
+            note_string = _('Note from the organizers')
+            reason_markdown = f'**{note_string}:**\n\n{self.reason_for_rejection}'
+        return reason_markdown or self.conference.description_long or self.conference.description or ''
+    
+    @property
+    def group(self):
+        """ Needed for notifications to know the group of this item """
+        return self.conference
+    
+    def grant_extra_read_permissions(self, user):
+        return self.user == user or check_user_superuser(user)
     
 
