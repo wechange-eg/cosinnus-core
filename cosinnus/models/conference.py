@@ -256,6 +256,10 @@ class ParticipationManagement(models.Model):
                 return _('Participation application has not started yet.')
             elif now > self.application_end:
                 return _('Participation application is over.')
+
+    @property
+    def has_conditions(self):
+        return bool(self.application_conditions_upload or self.application_conditions)
     
     @property
     def from_date(self):
