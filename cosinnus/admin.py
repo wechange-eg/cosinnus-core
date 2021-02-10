@@ -623,7 +623,7 @@ class BaseHierarchicalTaggableAdminMixin(BaseTaggableAdminMixin):
 
 
 class GlobalUserNotificationSettingAdmin(admin.ModelAdmin):
-    list_display = ('user', 'setting', 'portal',)
+    list_display = ('user_email', 'setting', 'portal',)
     list_filter = ('setting', 'portal',)
     search_fields = ('user__first_name', 'user__last_name', 'user__email',) 
     
@@ -705,7 +705,8 @@ class CosinnusParticipationManagementAdmin(admin.ModelAdmin):
 admin.site.register(ParticipationManagement, CosinnusParticipationManagementAdmin)
 
 class CosinnusConferenceApplicationAdmin(admin.ModelAdmin):
-    list_display = ('user', 'conference', 'status')
+    list_display = ('user_email', 'conference', 'status')
+    search_fields = ('conference__name',)
 
 admin.site.register(CosinnusConferenceApplication, CosinnusConferenceApplicationAdmin)
 

@@ -19,7 +19,8 @@
 		    {{ priority_formset.management_form }}
 		    {{ priority_formset.non_form_errors }}
 		    <div class="content-box">
-		
+		        <h2>{% trans "Apply for" %} {{ group.name }}</h2>  
+		        
 		        {% if form.options %}
 			        {% trans "My individual needs" as options_label %}
 			        {% trans "(no options chosen)" as options_placeholder %}
@@ -54,20 +55,25 @@
 		
 		
 		        {% if form.conditions_accepted %}
-					{% captureas legend %}
+		            <br/>
+		            <h4>{% trans "Application conditions" %}:</h4>
+					<div class="large-space textfield transparent">
+					    {% if participation_management.application_conditions %}
+    						{{ participation_management.application_conditions|textfield }}
+						{% endif %}
 						{% if participation_management.application_conditions_upload %}
-							<div class="large-space">
-								<a href="{{ participation_management.application_conditions_upload.url }}">
+						    <br/>
+							<p>
+								<a href="{{ participation_management.application_conditions_upload.url }}" target="_blank">
 									<i class="fas fa-download"></i>
 									{% trans 'Download the conditions' %}
 								</a>
-							</div>
+							</p>
 						{% endif %}
-						{{ participation_management.application_conditions }}
-					{% endcaptureas %}
-			        {% trans "Application conditions" as conditions_label %}
-					{% trans "Please accept the conditions" as conditions_box_label %}
-			        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_label legend=legend checkbox_label=conditions_box_label %}
+					</div>
+			        {% trans "You need to accept the conditions to apply" as conditions_label %}
+					{% trans "I accept the conditions" as conditions_checkbox_label %}
+			        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_label legend=legend checkbox_label=conditions_checkbox_label %}
 		        {% endif %}
 		
 		        {% if not form.options and priority_formset.forms|length_is:0 and not form.conditions_accepted %}

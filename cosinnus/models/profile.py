@@ -509,6 +509,10 @@ class GlobalUserNotificationSetting(models.Model):
     def save(self, *args, **kwargs):
         super(GlobalUserNotificationSetting, self).save(*args, **kwargs)
         self._meta.model.objects.clear_cache_for_user(self.user)
+            
+    def user_email(self):
+        """ Needed for django-admin """
+        return self.user.email
     
 
 class GlobalBlacklistedEmail(models.Model):
