@@ -282,6 +282,7 @@ class _CosinnusConferenceForm(CleanAppSettingsMixin, AsssignPortalMixin, Cosinnu
     
     from_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='00:00'))
     to_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='23:59'))
+    use_conference_applications = forms.BooleanField(initial=settings.COSINNUS_CONFERENCES_USE_APPLICATIONS_CHOICE_DEFAULT, required=False)
     
     extra_forms_setting = 'COSINNUS_CONFERENCE_ADDITIONAL_FORMS'
     

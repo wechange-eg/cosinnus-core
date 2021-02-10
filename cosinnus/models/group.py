@@ -796,7 +796,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
                                                 default=False)
 
     use_conference_applications = models.BooleanField(_('Determins if application management is visible in conference administration.'),
-                                                      default=True
+                                                      default=False
                                                      )
 
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),

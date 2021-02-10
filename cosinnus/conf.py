@@ -639,6 +639,8 @@ class CosinnusConf(AppConf):
     # to the microsite, removes most group-like elements like apps andremoves room management
     CONFERENCES_USE_COMPACT_MODE = False
     
+    CONFERENCES_USE_APPLICATIONS_CHOICE_DEFAULT = False
+    
     # if set to any value other than None, the conference public field will be disabled
     # and locked to the value set here
     CONFERENCES_PUBLIC_SETTING_LOCKED = None

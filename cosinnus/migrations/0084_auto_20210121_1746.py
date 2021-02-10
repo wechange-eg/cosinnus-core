@@ -20,6 +20,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cosinnusgroup',
             name='use_conference_applications',
-            field=models.BooleanField(default=True, verbose_name='Determins if application management is visible in conference administration.'),
+            field=models.BooleanField(default=False, verbose_name='Determins if application management is visible in conference administration.'),
         )
     ]
