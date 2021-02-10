@@ -356,11 +356,7 @@
 				<div class="group-microsite-details">
 					
 					<p class="transparent">
-		            	{% if group.public %}
-		            		<i>{% if group.type == 0 %}{% trans "Public Project" %}{% else %}{% trans "Public Group" %}{% endif %}</i>
-		            	{% else %}
-		            		<i>{% if group.type == 0 %}{% trans "Project" %}{% else %}{% trans "Group" %}{% endif %}</i> 
-		            	{% endif %}
+		            	{{ group.trans.VERBOSE_NAME }}
 		            </p>
 		            
 		            {% with parent=group.get_parent_typed %}
