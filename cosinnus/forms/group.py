@@ -42,6 +42,8 @@ from cosinnus.forms.managed_tags import ManagedTagFormMixin
 from cosinnus.utils.validators import validate_file_infection
 from cosinnus.forms.widgets import SplitHiddenDateWidget
 from cosinnus.forms.attached_object import FormAttachableMixin
+from annoying.functions import get_object_or_None
+from cosinnus.utils.permissions import check_user_superuser
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -213,12 +215,26 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
         old_save_m2m = self.save_m2m
         def save_m2m():
             old_save_m2m()
-            self.instance.related_groups.clear()
+            
+            new_group_slugs = [new_group.slug for new_group in self.cleaned_data['related_groups']]
+            old_related_group_slugs = self.instance.related_groups.all().values_list('slug', flat=True)
+            # remove no longer wanted related_groups
+            for old_slug in old_related_group_slugs:
+                if old_slug not in new_group_slugs:
+                    old_group_rel = get_object_or_None(RelatedGroups, to_group=self.instance, from_group__slug=old_slug)
+                    old_group_rel.delete()
+            # add new related_groups
+            user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(self.request.user)
+            user_superuser = check_user_superuser(self.request.user)
             for related_group in self.cleaned_data['related_groups']:
-                #self.instance.related_groups.add(related_group)
-                # add() is disabled for a self-referential models, so we create an instance of the through-model
-                RelatedGroups.objects.get_or_create(to_group=self.instance, from_group=related_group) 
-                
+                # non-superuser users can only tag groups they are in
+                if not user_superuser and related_group.id not in user_group_ids:
+                    continue
+                # only create group rel if it didn't exist
+                existing_group_rel = get_object_or_None(RelatedGroups, to_group=self.instance, from_group=related_group)
+                if not existing_group_rel:
+                    RelatedGroups.objects.create(to_group=self.instance, from_group=related_group) 
+        
         self.save_m2m = save_m2m
         if commit:
             self.instance.save()

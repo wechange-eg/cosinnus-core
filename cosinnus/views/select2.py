@@ -18,6 +18,7 @@ from django.core.exceptions import PermissionDenied
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.conf import settings
+from cosinnus.utils.permissions import check_user_superuser
 
 
 class GroupMembersView(RequireGroupMember, Select2View):
@@ -169,7 +170,8 @@ class GroupsView(Select2View):
         
         qs = get_cosinnus_group_model().objects.filter(q).filter(portal_id=CosinnusPortal.get_current().id, is_active=True)
 
-        if request.GET.get('is_member', None) == '1':
+        # non-superusers may only select groups they are in
+        if not check_user_superuser(request.user):
             user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(request.user)
             qs = qs.filter(id__in=user_group_ids)
         

@@ -625,12 +625,12 @@ class BaseTaggableObjectReflection(models.Model):
         return get_cosinnus_group_model().objects.get_cached(pks=group_ids)
     
     def save(self, *args, **kwargs):
-        """ Sanity checks that the creator of this reflection has write permissions on the target
+        """ Sanity checks that the creator of this reflection has create-objects permissions on the target
             group, and if not *deletes* this reflection! """
         ret = super(BaseTaggableObjectReflection, self).save(*args, **kwargs)
-        from cosinnus.utils.permissions import check_object_write_access
-        if not check_object_write_access(self.group, self.creator):
-            logger.warn('Deleted a BaseTaggableObjectReflection after saving it for sanity - user did not have write permissions on the group!',
+        from cosinnus.utils.permissions import check_group_create_objects_access
+        if not check_group_create_objects_access(self.group, self.creator):
+            logger.warn('Deleted a BaseTaggableObjectReflection after saving it for sanity - user did not have create objects permissions on the group!',
                         extra={'group': self.group, 'user': self.creator.id})
             self.delete()
         return ret
