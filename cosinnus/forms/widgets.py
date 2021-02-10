@@ -85,8 +85,10 @@ class CosinnusSplitDateTimeWidget(SplitDateTimeWidget):
         
     def value_from_datadict(self, data, files, name):
         """ If no time value is given, patch in the default time if it is given """
+        date_name = "%s_0" % name
         time_name = "%s_1" % name
-        if self.default_time and not data.get(time_name):
+        # set a default time if a date is set
+        if self.default_time and data.get(date_name) and not data.get(time_name):
             data._mutable = True
             data[time_name] = self.default_time
         return super(CosinnusSplitDateTimeWidget, self).value_from_datadict(data, files, name)
