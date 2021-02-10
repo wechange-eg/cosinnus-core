@@ -68,6 +68,7 @@ setup(
         'django-bootstrap3==11.0.0',
         'django-classy-tags==0.8.0',
         'django-cors-middleware==1.3.1',
+        'django-countries==5.3.3',
         'django-cron==0.5.0',
         'django-embed-video==0.6',
         'django-el-pagination==2.1.2',
@@ -114,7 +115,7 @@ setup(
         'python-memcached==1.59',
         'qrcode==6.1',
         'Unidecode==0.4.21',
-        'django-countries==5.3.3',
+        'XlsxWriter==1.3.7',
 
         # wagtail
         'wagtail==2.3',

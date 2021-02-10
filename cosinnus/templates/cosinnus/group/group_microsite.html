@@ -101,7 +101,7 @@
 	                        </div>
                         {% endif %}
                     {% endif %}
-					{% if group.participation_management.all.count == 1 %}
+					{% if group.participation_management.all.count == 1 and group.participation_management.first.from_date %}
                         <div class="textfield transparent">
                             <p>
 	                            <b>{% trans "Application period" %}:</b>
