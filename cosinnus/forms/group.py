@@ -44,6 +44,8 @@ from cosinnus.forms.widgets import SplitHiddenDateWidget
 from cosinnus.forms.attached_object import FormAttachableMixin
 from annoying.functions import get_object_or_None
 from cosinnus.utils.permissions import check_user_superuser
+from cosinnus import cosinnus_notifications
+from uuid import uuid1
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -226,6 +228,9 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
             # add new related_groups
             user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(self.request.user)
             user_superuser = check_user_superuser(self.request.user)
+            
+            
+            conference_notification_pairs = []
             for related_group in self.cleaned_data['related_groups']:
                 # non-superuser users can only tag groups they are in
                 if not user_superuser and related_group.id not in user_group_ids:
@@ -233,7 +238,28 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
                 # only create group rel if it didn't exist
                 existing_group_rel = get_object_or_None(RelatedGroups, to_group=self.instance, from_group=related_group)
                 if not existing_group_rel:
+                    # create a new related group link
                     RelatedGroups.objects.create(to_group=self.instance, from_group=related_group) 
+                    # if the current group is a conference, and the related group is a society or project,
+                    # the conference will be reflected into the group, so we send a notification
+                    non_conference_group_types = [get_cosinnus_group_model().TYPE_PROJECT, get_cosinnus_group_model().TYPE_SOCIETY]
+                    if self.instance.group_is_conference and related_group.type in non_conference_group_types:
+                        audience_except_creator = [member for member in related_group.actual_members if member.id != self.request.user.id]
+                        # set the target group for the notification onto the group instance
+                        setattr(self.instance, 'notification_target_group', related_group)
+                        conference_notification_pairs.append((self.instance, audience_except_creator))
+            
+            # send notifications in a session to avoid duplicate messages to any user
+            session_id = uuid1().int     
+            for i, pair in enumerate(conference_notification_pairs):
+                cosinnus_notifications.conference_created_in_group.send(
+                    sender=self,
+                    user=self.request.user,
+                    obj=pair[0],
+                    audience=pair[1],
+                    session_id=session_id,
+                    end_session=bool(i == len(conference_notification_pairs)-1)
+                )
         
         self.save_m2m = save_m2m
         if commit:

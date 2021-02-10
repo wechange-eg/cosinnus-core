@@ -1062,7 +1062,11 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         if not self.from_date:
             return ''
         return mark_safe(render_to_string('cosinnus_event/common/humanized_event_time.html', {'event': self})).strip()
-
+    
+    @property
+    def description_long_or_short(self):
+        return self.description_long or self.description
+    
     @classmethod
     def _clear_cache(self, slug=None, slugs=None, group=None):
         slugs = set([s for s in slugs]) if slugs else set()

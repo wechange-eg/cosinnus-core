@@ -242,7 +242,7 @@ class MembersManagerMixin(object):
 
     @property
     def actual_members(self):
-        """ Returns a QS of users that are members of this group and are actually active and visible on the site """
+        """ Returns a QS of users that are members of this group (admins and members) and are actually active and visible on the site """
         qs = get_user_model().objects.filter(id__in=self.members)
         qs = filter_active_users(qs)
         return qs

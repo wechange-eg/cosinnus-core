@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import django.dispatch as dispatch
-from django.utils.translation import ugettext_lazy as _, ngettext_lazy
+from django.utils.translation import ugettext_lazy as _, ngettext_lazy, pgettext_lazy
 from cosinnus.conf import settings
 
 
@@ -29,9 +29,8 @@ user_account_created = dispatch.Signal(providing_args=["user", "obj", "audience"
 user_conference_application_accepted = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_conference_application_declined = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_conference_application_waitlisted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-user_conference_applied = None
+conference_created_in_group = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_conference_invited_to_apply = None
-user_conference_created_in_group = None
 
 
 """ Notification definitions.
@@ -389,6 +388,29 @@ notifications = {
         },
         'notification_reason': 'none',
     },
+    'conference_created_in_group': {
+        'label': _('A user created a new conference'), 
+        'signals': [conference_created_in_group],
+        'default': True,
+        'moderatable_content': True,
+        
+        'alert_text': _('%(sender_name)s created the conference %(object_name)s'),
+        'alert_text_multi': _('%(sender_name)s created %(count)d conferences'),
+        'alert_multi_type': 2,
+        
+        'is_html': True,
+        'event_text': _('%(sender_name)s created the conference %(object_name)s'),
+        'subject_text': _('A new conference: "%(object_name)s" was announced in %(team_name)s.'),
+        'data_attributes': {
+            'object_name': 'name', 
+            'object_url': 'get_absolute_url', 
+            'object_text': 'description_long_or_short',
+            'image_url': 'get_avatar_thumbnail_url',
+            'event_meta': 'from_date',
+        },
+        'action_button_text': pgettext_lazy('email campaign button label to apply for a conference', 'Apply now!'),
+    },
+    
     'group_created': {
         'label': '<hidden-group_created>', 
         'mail_template': '<html-only>',
@@ -429,6 +451,7 @@ notifications = {
         },
         'notification_reason': 'none',
     },
+    
 }
 
 if settings.COSINNUS_IDEAS_ENABLED:
