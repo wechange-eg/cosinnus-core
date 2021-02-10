@@ -410,6 +410,10 @@ class CosinnusConferenceApplication(models.Model):
     def grant_extra_read_permissions(self, user):
         return self.user == user or check_user_superuser(user)
     
+    def special_alert_check(self, user):
+        """ Users want alerts for conference they applied to """
+        return self.user == user
+    
     def user_email(self):
         """ Needed for django-admin """
         return self.user.email
