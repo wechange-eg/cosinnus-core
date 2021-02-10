@@ -14,6 +14,7 @@ from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 import six
 
 from cosinnus.conf import settings
+from cosinnus.utils.files import get_conference_conditions_filename
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify
@@ -227,6 +228,11 @@ class ParticipationManagement(models.Model):
     application_start = models.DateTimeField(blank=True, null=True)
     application_end = models.DateTimeField(blank=True, null=True)
     application_conditions = models.TextField(blank=True)
+    application_conditions_upload = models.FileField(_("Conditiions for participation"),
+                                  help_text=_('Shown as a download link near the checkbox to accept the conditions.'),
+                                  null=True, blank=True,
+                                  upload_to=get_conference_conditions_filename,
+                                  max_length=250)
     application_options = PostgresJSONField(default=list, blank=True, null=True)
     conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
                                            verbose_name=_('Participation Management'),

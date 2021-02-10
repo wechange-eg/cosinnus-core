@@ -54,9 +54,20 @@
 		
 		
 		        {% if form.conditions_accepted %}
+					{% captureas legend %}
+						{% if participation_management.application_conditions_upload %}
+							<div class="large-space">
+								<a href="{{ participation_management.application_conditions_upload.url }}">
+									<i class="fas fa-download"></i>
+									{% trans 'Download the conditions' %}
+								</a>
+							</div>
+						{% endif %}
+						{{ participation_management.application_conditions }}
+					{% endcaptureas %}
 			        {% trans "Application conditions" as conditions_label %}
-			        {% trans "Please accept the conditions" as conditions_box_label %}
-			        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_label legend=participation_management.application_conditions checkbox_label=conditions_box_label %}
+					{% trans "Please accept the conditions" as conditions_box_label %}
+			        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_label legend=legend checkbox_label=conditions_box_label %}
 		        {% endif %}
 		
 		        {% if not form.options and priority_formset.forms|length_is:0 and not form.conditions_accepted %}
