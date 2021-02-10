@@ -177,30 +177,8 @@
 		        </div>
 		
 		    </div>
-		    <a class="btn btn-left btn-emphasized btn-autosize" href="{% group_url 'cosinnus:conference:participants-details-download' group=group %}">
-		        <ul class="media-list">
-		            <li class="media">
-		                <span class="pull-left" >
-		                    <i class="fas fa-download"></i>
-		                </span>
-		                <div class="media-body">
-		                    {% trans "List of applications" %}
-		                </div>
-		            </li>
-		        </ul>
-		    </a>
-		    <a class="btn btn-left btn-emphasized btn-autosize" href="{% group_url 'cosinnus:conference:participants-details-download' group=group %}">
-		        <ul class="media-list">
-		            <li class="media">
-		                <span class="pull-left">
-		                    <i class="fas fa-download"></i>
-		                </span>
-		                <div class="media-body">
-		                    {% trans "Signature list" %}
-		                </div>
-		            </li>
-		        </ul>
-		    </a>
+
+			{% block extra_buttons %}{% endblock %}
 		    
 		    <button type="submit" class="btn btn-emphasized">
 		        <ul class="media-list">
