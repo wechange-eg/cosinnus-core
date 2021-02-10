@@ -238,7 +238,9 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
         self.save_m2m = save_m2m
         if commit:
             self.instance.save()
-            self.save_m2m()
+            # we skip the call to `save_m2m` here, because the django-multiform `MultiModelForm` already calls it!
+            # self.save_m2m()
+            
             # since we didn't call super().save with commit=True, call this for certain forms to catch up
             if hasattr(self, 'post_uncommitted_save'):
                 self.post_uncommitted_save(self.instance)
