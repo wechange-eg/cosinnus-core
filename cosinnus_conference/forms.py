@@ -171,8 +171,9 @@ class ConferenceApplicationEventPrioForm(forms.Form):
     event_id = forms.CharField(widget=forms.HiddenInput())
     event_name = forms.CharField(required=False)
     priority = forms.ChoiceField(
-        initial=0,
-        choices=[(0, _('No Interest')), (1, _('First Choice')), (2, ('Second Choice'))],
+        required=True,
+        initial=2,
+        choices=[(1, _('First Choice')), (2, ('Second Choice'))], #(0, _('No Interest')),removed
         widget=RadioSelectInTableRowWidget)
 
     def __init__(self, *args, **kwargs):
