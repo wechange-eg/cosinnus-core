@@ -331,6 +331,10 @@ class CosinnusConferenceApplicationQuerySet(models.QuerySet):
         now = timezone.now()
         return self.filter(conference__to_date__lte=now, status=APPLICATION_ACCEPTED)
     
+    def declined_in_past(self):
+        now = timezone.now()
+        return self.filter(conference__to_date__lte=now, status=APPLICATION_DECLINED)
+    
     def applied(self):
         return self.filter(status=APPLICATION_SUBMITTED)
 

@@ -74,7 +74,7 @@ class UserWelcomeEmailEditView(FormView):
     def get_context_data(self, *args, **kwargs):
         context = super(UserWelcomeEmailEditView, self).get_context_data(*args, **kwargs)
         context.update({
-            'email_text': self.portal.welcome_email_text,
+            'email_text': render_html_with_variables(self.request.user, self.portal.welcome_email_text),
         })
         return context
     
