@@ -205,6 +205,12 @@ class SetInitialPasswordView(TemplateView):
                 # send welcome email if enabled
                 _send_user_welcome_email_if_enabled(user)
                 
+                # log the user in
+                user.backend = 'cosinnus.backends.EmailAuthBackend'
+                login(self.request, user)
+                
+                # redirect to login page 
+                #(which will redirect to whatever the portal settings for logged in users are)
                 return redirect('login')
             return render(request, template_name=self.template_name, context={'form': form})
         else:
