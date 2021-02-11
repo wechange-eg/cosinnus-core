@@ -68,18 +68,13 @@ def _collect_parameters(param_dict, parameter_list):
             results[key] = value
     return results
 
-
 # supported map search query parameters, and their default values (as python data after a json.loads()!) if not present
-MAP_SEARCH_PARAMETERS = {
+MAP_NON_CONTENT_TYPE_SEARCH_PARAMETERS = {
     'q': '', # search query, wildcard if empty
     'sw_lat': -90, # SW latitude, max southwest
     'sw_lon': -180, # SW longitude, max southwest
     'ne_lat': 90, # NE latitude, max northeast
     'ne_lon': 180, # NE latitude, max northeast
-    'people': True,
-    'events': True,
-    'projects': True,
-    'groups': True,
     'limit': 20, # result count limit, integer or None
     'page': 0,
     'topics': None,
@@ -88,30 +83,44 @@ MAP_SEARCH_PARAMETERS = {
     'mine': False, # if True, we only show items of the current user. ignored if user not authenticated
     'external': False,
 }
+# supported map search query parameters for selecting content models, and their default values (as python data after a json.loads()!) if not present
+MAP_CONTENT_TYPE_SEARCH_PARAMETERS = {
+    'people': True,
+    'events': True,
+    'projects': True,
+    'groups': True,
+}
+
 if settings.COSINNUS_MANAGED_TAGS_ENABLED:
-    MAP_SEARCH_PARAMETERS.update({
+    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update({
         'managed_tags': None,
     })
 if settings.COSINNUS_ENABLE_SDGS:
-    MAP_SEARCH_PARAMETERS.update({
+    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update({
         'sdgs': None,
     })
 if settings.COSINNUS_IDEAS_ENABLED:
-    MAP_SEARCH_PARAMETERS.update({
+    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update({
         'ideas': True,
     })
 if settings.COSINNUS_ORGANIZATIONS_ENABLED:
-    MAP_SEARCH_PARAMETERS.update({
+    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update({
         'organizations': True,
     })
 if settings.COSINNUS_CONFERENCES_ENABLED:
-    MAP_SEARCH_PARAMETERS.update({
+    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update({
         'conferences': True,
     })
 if settings.COSINNUS_CLOUD_ENABLED:
-    MAP_SEARCH_PARAMETERS.update({
+    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update({
         'cloudfiles': True,
     })
+
+# supported map search query parameters, and their default values (as python data after a json.loads()!) if not present
+MAP_SEARCH_PARAMETERS = {}
+MAP_SEARCH_PARAMETERS.update(MAP_NON_CONTENT_TYPE_SEARCH_PARAMETERS)
+MAP_SEARCH_PARAMETERS.update(MAP_CONTENT_TYPE_SEARCH_PARAMETERS)
+
 
 
 def map_search_endpoint(request, filter_group_id=None):
@@ -191,20 +200,36 @@ def map_search_endpoint(request, filter_group_id=None):
     if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
         sqs = sqs.exclude(is_group_model=True,slug__in=get_default_user_group_slugs())
     
+    # kip score sorting and only rely on natural ordering?
+    skip_score_sorting = False
     # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
     if not query:
+        sort_args = ['-local_boost']
+        # if we only look at conferences, order them by their from_date, future first!
         if prefer_own_portal:
-            sqs = sqs.order_by('-portal', '-local_boost')
-        else:
-            sqs = sqs.order_by('-local_boost')
+            sort_args = ['-portal'] + sort_args
+        
+        """
+        # this would be the way to force-sort a content type by a natural ordering instead of score if its the only type being shown
+        if params.get('conferences', False) and sum([1 if params.get(content_key, False) else 0 for content_key in MAP_CONTENT_TYPE_SEARCH_PARAMETERS.keys()]) == 1:
+            sort_args = ['-from_date'] + sort_args
+            skip_score_sorting = True
+        sqs = sqs.order_by(*sort_args)
+        """
     
     # sort results into one list per model
     total_count = sqs.count()
     sqs = sqs[limit*page:limit*(page+1)]
     results = []
-    for result in sqs:
-        # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
-        if not query:
+    
+            
+        
+    for i, result in enumerate(sqs):
+        if skip_score_sorting:
+            # if we skip score sorting and only rely on the natural ordering, we make up fake high scores
+            result.score = 100000 - (limit*page) - i
+        elif not query:
+            # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
             result.score = result.local_boost
             if prefer_own_portal and is_number(result.portal) and int(result.portal) == CosinnusPortal.get_current().id:
                 result.score += 100.0
