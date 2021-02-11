@@ -10,52 +10,57 @@
     {% include 'cosinnus/messages.html' %}
     
 	{% captureas label %}
-	    <p class="no-horizontal-padding no-vertical-padding large-space">
-            {% trans "We give you full control over what people can see of you on the platform and what you hear from us!" %}
-        </p>
+	    {% block description %}
+		    <p class="no-horizontal-padding no-vertical-padding large-space">
+	            {% trans "We give you full control over what people can see of you on the platform and what you hear from us!" %}
+	        </p>
+        {% endblock description %}
+	    {% block visibility_setting %}
+	        <h3>
+	            {% trans "Who is allowed to see you on the platform?" %}
+	            {% include 'cosinnus/common/help_button_for_popup.html' with help_text_id="helptext_50_profileprivacy" %}
+	        </h3>
+	        <select id="id_visibility_setting" name="visibility_setting" class="form-control form-control-heavy">
+	            {% include 'cosinnus/user/user_visibility_formfield_options.html' with visibility=visibility_setting %}
+	        </select>
+	        
+	        <div class="group-public-warning-area" {% if not visibility_setting == 2 %}style="display: none;"{% endif %} id="user-visibility-warning">
+		        <i class="fa fa-fw fa-globe"></i>
+		        {% trans "Your profile will be set to be publicly visible!" %}
+		        <br/><br/>
+		        {% trans "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!" %}
+		    </div>
+		    <script type="text/javascript">
+		        {# show or hide a visibility warning #}
+		        $(function(){
+		            $('#id_visibility_setting').on('change', function(){
+	                    if ($(this).val() == 2) {
+	                        $('#user-visibility-warning').show();
+	                    } else {
+	                        $('#user-visibility-warning').hide();
+	                    } 
+	                });
+		        });
+		    </script>
+	        
+	        <em class="small">
+	           {% trans "You can change this setting later in your profile settings" %}
+	           ({% trans "in the top right menu" %})
+	        </em>
+	    {% endblock visibility_setting %}
         
-        <h3>
-            {% trans "Who is allowed to see you on the platform?" %}
-            {% include 'cosinnus/common/help_button_for_popup.html' with help_text_id="helptext_50_profileprivacy" %}
-        </h3>
-        <select id="id_visibility_setting" name="visibility_setting" class="form-control form-control-heavy">
-            {% include 'cosinnus/user/user_visibility_formfield_options.html' with visibility=visibility_setting %}
-        </select>
-        
-        <div class="group-public-warning-area" {% if not visibility_setting == 2 %}style="display: none;"{% endif %} id="user-visibility-warning">
-	        <i class="fa fa-fw fa-globe"></i>
-	        {% trans "Your profile will be set to be publicly visible!" %}
-	        <br/><br/>
-	        {% trans "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!" %}
-	    </div>
-	    <script type="text/javascript">
-	        {# show or hide a visibility warning #}
-	        $(function(){
-	            $('#id_visibility_setting').on('change', function(){
-                    if ($(this).val() == 2) {
-                        $('#user-visibility-warning').show();
-                    } else {
-                        $('#user-visibility-warning').hide();
-                    } 
-                });
-	        });
-	    </script>
-        
-        <em class="small">
-           {% trans "You can change this setting later in your profile settings" %}
-           ({% trans "in the top right menu" %})
-        </em>
-        
-	    <h3>{% trans "When may we send you email notifications?" %}</h3>
-        <select id="id_notification_setting" name="notification_setting" class="form-control form-control-heavy">
-            {% for choice, label in notification_choices %}
-                <option {% if notification_setting == choice %}selected{% endif %} value="{{ choice }}">{{ label }}</option>
-            {% endfor %}
-        </select>
-	    <em class="small">
-	       {% trans "You can change or customize this setting later in your notification settings" %}
-	       ({% trans "in the top right menu" %})
-	    </em>
+        {% block notification_setting %}
+		    <h3>{% trans "When may we send you email notifications?" %}</h3>
+	        <select id="id_notification_setting" name="notification_setting" class="form-control form-control-heavy">
+	            {% for choice, label in notification_choices %}
+	                <option {% if notification_setting == choice %}selected{% endif %} value="{{ choice }}">{{ label }}</option>
+	            {% endfor %}
+	        </select>
+		    <em class="small">
+		       {% trans "You can change or customize this setting later in your notification settings" %}
+		       ({% trans "in the top right menu" %})
+		    </em>
+	    {% endblock notification_setting %}
 	{% endcaptureas %}
 	
 	{% captureas submit_button_html %}
