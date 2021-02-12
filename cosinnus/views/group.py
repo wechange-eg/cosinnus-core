@@ -83,7 +83,7 @@ from cosinnus.utils.permissions import check_ug_admin, check_user_superuser, \
 from cosinnus.utils.urls import get_non_cms_root_url
 from cosinnus.utils.urls import redirect_with_next, group_aware_reverse
 from cosinnus.utils.user import create_base_user, filter_active_users, get_user_select2_pills, \
-    get_user_query_filter_for_search_terms, get_user_by_email_safe
+    get_user_query_filter_for_search_terms, get_user_by_email_safe, get_group_select2_pills
 from cosinnus.views.microsite import GroupMicrositeView
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
                                         AjaxableFormMixin, ListAjaxableResponseMixin)
@@ -516,7 +516,13 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             setattr(user, 'membership_status_date', dates_dict[user.id])
         invited = sorted(invited, key=lambda u: u.membership_status_date, reverse=True)
         pendings = sorted(pendings, key=lambda u: u.membership_status_date, reverse=True)
-        
+
+        invited_groups = []
+        if 'invited_groups' in self.group.settings:
+            group_ids = self.group.settings.get('invited_groups')
+            invited_groups = CosinnusGroup.objects.filter(id__in=group_ids)
+
+
         context.update({
             'admins': admins,
             'members': members,
@@ -528,6 +534,8 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             'hidden_user_count': hidden_members,
             'more_user_count': more_user_count,
             'member_invite_form': MultiUserSelectForm(group=self.group),
+            'group_invite_form': MultiGroupSelectForm(group=self.group),
+            'invited_groups': invited_groups
         })
         return context
 
@@ -1310,6 +1318,50 @@ class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
         return get_user_model()._default_manager.exclude(id__in=uids)
 
 
+class GroupInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormView):
+    form_class = MultiGroupSelectForm
+
+    def get(self, *args, **kwargs):
+        messages.error(self.request, _('This action is not available directly!'))
+        return redirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': kwargs.get('group', '<NOGROUPKWARG>')}))
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group})
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['group'] = self.group
+        return kwargs
+
+    def form_valid(self, form):
+        groups = form.cleaned_data.get('groups')
+        invited_users = []
+        if 'invited_users' in self.group.settings:
+            invited_users = self.group.settings.get('invited_users')
+        else:
+            self.group.settings['invited_users'] = invited_users
+
+        group_ids = [group.id for group in groups]
+
+        if 'invited_groups' in self.group.settings:
+            invited_groups = self.group.settings.get('invited_groups')
+            for group_id in group_ids:
+                if not group_id in invited_groups:
+                    invited_groups.append(group_id)
+        else:
+            self.group.settings['invited_groups'] = group_ids
+
+        memberships = CosinnusGroupMembership.objects.get_members(groups=group_ids)
+        for group_id, userlist in memberships.items():
+            for user in userlist:
+                if not user in invited_users:
+                    # send invitations
+                    invited_users.append(user)
+
+        self.group.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
 class GroupUserInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormView):
     
     form_class = MultiUserSelectForm
@@ -1852,6 +1904,36 @@ def group_assign_reflected_object(request, group):
     return redirect(redirect_url)
 
 
+class GroupInviteSelect2View(RequireReadMixin, Select2View):
+    """
+    This view is used as API backend to serve the suggestions for the group invite field.
+    """
+
+    def check_all_permissions(self, request, *args, **kwargs):
+        user = request.user
+        if not user.is_authenticated:
+            raise PermissionDenied
+
+    def get_results(self, request, term, page, context):
+        terms = term.strip().lower().split(' ')
+        q = get_group_query_filter_for_search_terms(terms)
+        groups = get_cosinnus_group_model().objects.filter(q)
+        groups = groups.filter(portal_id=CosinnusPortal.get_current().id, is_active=True)
+        if 'group' in self.kwargs and self.kwargs.get('group'):
+            group = CosinnusGroup.objects.get(slug=self.kwargs.get('group'))
+            exclude_ids = [group.id]
+            if 'invited_groups' in group.settings:
+                exclude_ids = exclude_ids + group.settings.get('invited_groups')
+            groups = groups.exclude(id__in=exclude_ids)
+
+        groups = [group for group in groups if check_object_read_access(group, request.user)]
+
+        results = get_group_select2_pills(groups)
+
+        # Any error response, Has more results, options list
+        return (NO_ERR_RESP, False, results)
+
+
 class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
     """
     This view is used as API backend to serve the suggestions for the group member invite field.
@@ -2010,6 +2092,21 @@ class GroupOrganizationRequestSelect2View(RequireReadMixin, Select2View):
         return (NO_ERR_RESP, False, results)
 
 
+class RemoveGroupInviteFromGroup(RequireReadMixin, FormView):
+
+    def post(self, request, *args, **kwargs):
+        if 'remove-group-invitation' in request.POST:
+            group_id = int(request.POST.get('remove-group-invitation'))
+            if 'invited_groups' in self.group.settings:
+                invited_groups = self.group.settings.get('invited_groups')
+                if group_id in invited_groups:
+                    invited_groups.remove(group_id)
+                    self.group.save()
+        return HttpResponseRedirect(group_aware_reverse(
+            'cosinnus:group-detail', kwargs={'group': self.group}))
+
+
+group_group_invite_delete = RemoveGroupInviteFromGroup.as_view()
 group_create = GroupCreateView.as_view()
 group_create_api = GroupCreateView.as_view(is_ajax_request_url=True)
 group_delete = GroupDeleteView.as_view()
@@ -2041,6 +2138,7 @@ group_user_invitation_accept = GroupUserInvitationAcceptView.as_view()
 group_user_add = GroupUserInviteView.as_view()
 group_user_add_api = GroupUserInviteView.as_view(is_ajax_request_url=True)
 group_user_add_multiple = GroupUserInviteMultipleView.as_view()
+group_add_multiple = GroupInviteMultipleView.as_view()
 group_user_update = GroupUserUpdateView.as_view()
 group_user_update_api = GroupUserUpdateView.as_view(is_ajax_request_url=True)
 group_user_delete = GroupUserDeleteView.as_view()
@@ -2049,6 +2147,7 @@ group_export = GroupExportView.as_view()
 activate_or_deactivate = ActivateOrDeactivateGroupView.as_view()
 group_startpage = GroupStartpage.as_view()
 user_group_member_invite_select2 = UserGroupMemberInviteSelect2View.as_view()
+group_invite_select2 = GroupInviteSelect2View.as_view()
 group_activate_app = GroupActivateAppView.as_view()
 group_organizations = GroupOrganizationsView.as_view()
 group_organization_request = GroupOrganizationRequestView.as_view()
