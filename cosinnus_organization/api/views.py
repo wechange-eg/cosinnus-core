@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
 from cosinnus_organization.api.serializers import OrganizationListSerializer, OrganizationRetrieveSerializer
-from cosinnus.api.views import PublicCosinnusGroupFilterMixin
+from cosinnus.api.views.mixins import PublicCosinnusGroupFilterMixin
 from cosinnus.models.group_extra import CosinnusProject
 
 

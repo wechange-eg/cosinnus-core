@@ -3,12 +3,10 @@ from __future__ import unicode_literals
 
 from django.conf.urls import url
 
-from cosinnus.conf import settings
 from cosinnus.utils.url_patterns import api_patterns
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.views import group, user, common
-from cosinnus.api.views import StatisticsView, StatisticsManagedTagFilteredView
-
+from cosinnus.api.views.portal import StatisticsView, StatisticsManagedTagFilteredView
 
 urlpatterns = api_patterns(1, None, False,
     url(r'^login/$', user.login_api, name='login'),
