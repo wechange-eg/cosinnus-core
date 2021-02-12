@@ -417,7 +417,7 @@ class MultiUserSelectForm(MultiSelectForm):
     def get_ajax_url(self):
         if isinstance(self.group, CosinnusOrganization):
             return reverse('cosinnus:organization-member-invite-select2', kwargs={'organization': self.group.slug})
-        return group_aware_reverse('cosinnus:group-invite-select2', kwargs={'group': self.group})
+        return group_aware_reverse('cosinnus:group-member-invite-select2', kwargs={'group': self.group})
 
 
 class MultiGroupSelectForm(MultiSelectForm):
