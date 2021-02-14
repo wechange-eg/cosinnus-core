@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 14:55+0100\n"
-"PO-Revision-Date: 2021-02-05 14:56+0100\n"
+"POT-Creation-Date: 2021-02-14 14:09+0100\n"
+"PO-Revision-Date: 2021-02-14 14:40+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -221,9 +221,6 @@ msgstr "Merkliste"
 msgid "Bookmarked Users list"
 msgstr "Gemerkte Personen"
 
-msgid "Only team members can see the content you requested. Apply to become a member now!"
-msgstr "Nur Mitglieder dieser Gruppe/Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
-
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Nur registrierte Benutzer  können diesen Inhalt sehen! Log dich ein oder erstelle jetzt ein Benutzerkonto!"
 
@@ -328,6 +325,30 @@ msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben die Ei
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgstr "%(sender_name)s hat die Einladung zu %(team_name)s abgelehnt."
 
+msgid "Your participation application was accepted"
+msgstr "Dein Teilnahmeantrag wurde akzeptiert"
+
+msgid "You submitted an application"
+msgstr "Du hast einen Teilnahmeantrag eingereicht"
+
+#, python-format
+msgid "Your participation application for %(team_name)s was accepted!"
+msgstr "Dein Teilnahmeantrag für %(team_name)s wurde angenommen!"
+
+msgid "Your participation application was declined"
+msgstr "Dein Teilnahmeantrag wurde abgelehnt"
+
+#, python-format
+msgid "Your participation application for %(team_name)s was declined!"
+msgstr "Dein Teilnahmeantrag für %(team_name)s wurde abgelehnt!"
+
+msgid "Your participation application was waitlisted"
+msgstr "Dein Teilnahmeantrag wurde auf die Wartelist gesetzt"
+
+#, python-format
+msgid "Your participation application for %(team_name)s was waitlisted!"
+msgstr "Dein Teilnahmeantrag für %(team_name)s wurde auf die Warteliste gesetzt!"
+
 msgid "You were made an admin of this team"
 msgstr "Du wurdest in dieser Gruppe/Projekt zum Administrator befördert"
 
@@ -401,6 +422,40 @@ msgstr "Eins deiner Projekte/Gruppen wurde ins Portal \"%(portal_name)s\" versch
 #, python-format
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "\"%(team_name)s\" wurde nach %(portal_name)s verschoben!"
+
+msgid "A user created a new conference"
+msgstr "Ein/e Benutzer/in hat eine neue Konferenz erstellt"
+
+#, python-format
+msgid "%(sender_name)s created the conference %(object_name)s"
+msgstr "%(sender_name)s hat die Konferenz \"%(object_name)s\" erstellt"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d conferences"
+msgstr "%(sender_name)s hat %(count)d Konferenzen erstellt"
+
+#, python-format
+msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgstr "Eine neue Konferenz: \"%(object_name)s\" wurde in %(team_name)s eingetragen."
+
+msgctxt "email campaign button label to apply for a conference"
+msgid "Apply now!"
+msgstr "Jetzt Teilnahme beantragen!"
+
+msgid "View conference"
+msgstr "Konferenz ansehen"
+
+#, python-format
+msgid "%(sender_name)s invited you to apply for the conference %(team_name)s"
+msgstr "%(sender_name)s hat dich eingeladen, bei der Konferenz %(team_name)s Teilnahme zu beantragen"
+
+#, python-format
+msgid "%(sender_name)s invited you to apply for \"%(team_name)s\" on %(portal_name)s! <br/><br/> To apply, please click on the link below."
+msgstr "%(sender_name)s hat dich eingeladen, bei \"%(team_name)s\" auf %(portal_name)s Teilnahme zu beantragen! <br/><br/> Um dich anzumelden, klicke bitte auf den unten stehenden Link."
+
+#, python-format
+msgid "%(sender_name)s invited you to apply for %(team_name)s"
+msgstr "%(sender_name)s hat dich eingeladen, bei %(team_name)s Teilnahme zu beantragen"
 
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
@@ -856,6 +911,12 @@ msgstr "Konferenzräume"
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
+msgid "Conditiions for participation"
+msgstr "Bedingungen für die Teilnahme"
+
+msgid "Shown as a download link near the checkbox to accept the conditions."
+msgstr "Als Download-Link neben dem Häkchen zum Akzeptieren der Bedingungen angezeigt."
+
 msgid "Participation Management"
 msgstr "Teilnehmendenmanagement"
 
@@ -920,6 +981,9 @@ msgstr "Cosinnus Konferenz-Teilnahmeantrag"
 
 msgid "Cosinnus conference applications"
 msgstr "Cosinnus Konferenz-Teilnahmeanträge"
+
+msgid "Note from the organizers"
+msgstr "Nachricht der Veranstalter/innen"
 
 msgid "Complaint Text"
 msgstr "Beschwerdetext"
@@ -2135,8 +2199,8 @@ msgstr "Konferenzveranstaltungen verwalten"
 msgid "Edit Conditions of Participation"
 msgstr "Teilnahmebedingungen bearbeiten"
 
-msgid "Conference Applications"
-msgstr "Konferenz-Teilnahmeanträge"
+msgid "Manage Participation Applications"
+msgstr "Teilnahmeanträge bearbeiten"
 
 #
 #. Translators: __INCLUDE_JS_PO__
@@ -2446,8 +2510,14 @@ msgstr "In Projekten anzeigen..."
 msgid "Disable editor"
 msgstr "Editor deaktivieren"
 
+msgid "Current File"
+msgstr "Aktuelle Datei"
+
 msgid "Application"
 msgstr "Antrag"
+
+msgid "Apply for"
+msgstr "Teilnahme beantragen"
 
 msgid "My individual needs"
 msgstr "Meine individuellen Bedürfnisse"
@@ -2458,14 +2528,20 @@ msgstr "(keine Bedingungen gewählt)"
 msgid "Message to organizer"
 msgstr "Nachricht an den Veranstalter"
 
-msgid "Programm"
-msgstr "Programm"
+msgid "Workshop"
+msgstr "Workshop"
 
 msgid "Application conditions"
 msgstr "Anmeldebedingungen"
 
-msgid "Please accept the conditions"
-msgstr "Bitte akzeptiere die Nutzungsbedingungen"
+msgid "Download the conditions"
+msgstr "Bedingungen herunterladen"
+
+msgid "You need to accept the conditions to apply"
+msgstr "Du musst die Bedingungen akzeptieren, um Teilnahme zu beantragen"
+
+msgid "I accept the conditions"
+msgstr "Ich akzeptiere die Bedingungen"
 
 msgid "Apply for participation in "
 msgstr "Bewirb dich für die Teilnahme an "
@@ -2478,6 +2554,9 @@ msgstr "Anmeldung zur Konferenzteilnahme"
 
 msgid "Withdraw"
 msgstr "Zurückziehen"
+
+msgid "Conference Applications"
+msgstr "Konferenz-Teilnahmeanträge"
 
 msgid "Manage participation applications"
 msgstr "Teilnahmeanträge bearbeiten"
@@ -2494,14 +2573,14 @@ msgid_plural " %(counter)s places left "
 msgstr[0] " 1 Platz übrig "
 msgstr[1] " %(counter)s Plätze übrig "
 
-msgid "Decline"
-msgstr "Ablehnen"
-
 msgid "Put on waitlist"
 msgstr "Auf die Warteliste"
 
 msgid "Accept"
 msgstr "Akzeptieren"
+
+msgid "Decline"
+msgstr "Ablehnen"
 
 msgid "First Choice"
 msgstr "Erste Wahl"
@@ -2523,12 +2602,6 @@ msgstr "Workshop-Zuweisungen"
 
 msgid "Choose users to assign to this workshop"
 msgstr "Wähle Benutzer/innen für diesen Workshop"
-
-msgid "List of applications"
-msgstr "Anmeldeliste"
-
-msgid "Signature list"
-msgstr "Unterschriftenliste"
 
 msgid "Conference is not running"
 msgstr "Tagung läuft gerade nicht"
@@ -2596,9 +2669,6 @@ msgstr "Tagung beginnen und Teilnehmerkonten aktivieren"
 msgid "Download Statistics"
 msgstr "Statistiken herunterladen"
 
-msgid "Add workshop"
-msgstr "Workshop hinzufügen"
-
 msgid "Maximal Number of participants"
 msgstr "Maximale Anzahl von Teilnehmenden"
 
@@ -2635,6 +2705,9 @@ msgstr "Wenn ein Text hinterlegt wird, muss dieser von allen Benutzern bei der A
 msgid "(no conditions selected)"
 msgstr "(keine Bedingungen ausgewählt)"
 
+msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
+msgstr "Wenn eine Datei mit Bedingungen hochgeladen wird, müssen diese von allen Benutzern bei der Antragsstellung per Häkchen akzeptiert werden"
+
 msgid "Options for participation"
 msgstr "Möglichkeiten zur Teilnahme"
 
@@ -2654,6 +2727,9 @@ msgstr "1 Woche vor Konferenz versenden"
 msgid "Status info: sent %(sent_date)s"
 msgstr "Status-Info: wurde versendet am %(sent_date)s"
 
+msgid "This e-mail will be sent out 7 days before and at the same time of day as the conference start date."
+msgstr "Diese E-Mail wird 7 Tage vor und zur selben Uhrzeit des Konferenz-Startdatums verschickt."
+
 msgid "Invitation subject"
 msgstr "Einladungsbetreff"
 
@@ -2665,6 +2741,9 @@ msgstr "Test-Mail an mich"
 
 msgid "Send 1 day before conference"
 msgstr "1 Tag vor Konferenz versenden"
+
+msgid "This e-mail will be sent out 24 hours before the conference start date."
+msgstr "Diese E-Mail wird 24 Stunden vor dem Konferenz-Startdatum verschickt."
 
 msgid "Send 1 hour before conference"
 msgstr "1 Stunde vor Konferenz versenden"
@@ -2955,6 +3034,9 @@ msgctxt "time"
 msgid "o'clock"
 msgstr "Uhr"
 
+msgid "More infos..."
+msgstr "Mehr Informationen..."
+
 msgid "You will now receive notifications for content posted in this conference."
 msgstr "Du wirst jetzt Benachrichtigungen für Inhalte in dieser Konferenz erhalten."
 
@@ -2965,29 +3047,11 @@ msgstr "Kontakt"
 msgid "No contact data has been added yet."
 msgstr "Es wurden noch keine Kontaktdaten eingetragen."
 
-msgid "Re-Activate Project/Group"
-msgstr "Projekt/Gruppe reaktivieren"
-
-msgid "Deactivate Project/Group"
-msgstr "Projekt/Gruppe deaktivieren"
-
-msgid "Deactivated Projects and Groups"
-msgstr "Deaktivierte Projekte und Gruppen"
+msgid "Your Deactivated Content"
+msgstr "Deine deaktivierten Inhalte"
 
 msgid "Warning!"
 msgstr "Achtung!"
-
-msgid "You are about to deactivate this project/group!"
-msgstr "Du bist dabei dieses Projekt/Gruppe zu deaktivieren!"
-
-msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
-msgstr "Du bist dabei dieses Projekt/Gruppe zu reaktivieren. Es und all sein Inhalt  wird auf der Webseite wieder sichtbar sein."
-
-msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "Du bist dabei dieses Projekt/Gruppe zu deaktivieren. Es und all sein Inhalt  wird auf der Webseite unsichtbar sein."
-
-msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-msgstr "Diese Aktion kann rückgängig gemacht werden. Du kannst das Projekt/Gruppe jederzeit von deinem Benutzerprofil aus reaktivieren."
 
 msgid "Re-Activate"
 msgstr "Reaktivieren"
@@ -3014,6 +3078,18 @@ msgstr "Bitte bearbeite Teilnahmeanträge auf der Teilnahmeantragsseite. Du kann
 
 msgid "Manage applications"
 msgstr "Teilnahmeanträge bearbeiten"
+
+msgid "Invite members of groups/projects to apply..."
+msgstr "Mitglieder/innen von Gruppen/Projekten zur Antragsstellung einladen..."
+
+msgid "Select one or more groups/projects..."
+msgstr "Wähle eine oder mehrere Gruppe/Projekte..."
+
+msgid "Invite groups"
+msgstr "Gruppen einladen"
+
+msgid "Invited group/project members"
+msgstr "Eingeladene Gruppen/Projektmitglieder/innen"
 
 msgid "Invite users to apply..."
 msgstr "Benutzer zur Antragsstellung einladen..."
@@ -3277,6 +3353,9 @@ msgstr "Dateigröße"
 msgid "max. 10 MB"
 msgstr "max. 10 MB"
 
+msgid "Banner Image"
+msgstr "Bannerbild"
+
 msgid "Upload an image."
 msgstr "Lade ein Bild hoch."
 
@@ -3494,12 +3573,6 @@ msgstr "Anmeldung bearbeiten"
 msgid "Apply for Participation"
 msgstr "Teilnahme beantragen"
 
-msgid "You have been invited to collaborate!"
-msgstr "Du wurdest zum Mitmachen eingeladen!"
-
-msgid "Join now and collaborate!"
-msgstr "Jetzt anmelden und mitgestalten!"
-
 msgid "Register"
 msgstr "Registrieren"
 
@@ -3523,20 +3596,11 @@ msgstr "Mitgliedschaft wurde beantragt..."
 msgid "You are invited!"
 msgstr "Du bist eingeladen worden!"
 
-msgid "Collaborate!"
-msgstr "Mitmachen!"
-
 msgid "Join now!"
 msgstr "Jetzt beitreten!"
 
 msgid "Browse"
 msgstr "Ansehen"
-
-msgid "Public Project"
-msgstr "Öffentliches Projekt"
-
-msgid "Public Group"
-msgstr "Öffentliche Gruppe"
 
 msgid "News posts"
 msgstr "Neuigkeiten-Posts"
@@ -6078,6 +6142,18 @@ msgstr "Projekt reaktivieren"
 msgid "Deactivate Project"
 msgstr "Projekt deaktivieren"
 
+msgid "You are about to deactivate this project!"
+msgstr "Du bist dabei dieses Projekt zu deaktivieren!"
+
+msgid "You are about to re-activate this project. It and all of its content will be visible on the website again."
+msgstr "Du bist dabei dieses Projekt zu reaktivieren. Es und all sein Inhalt wird auf der Webseite wieder sichtbar sein."
+
+msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr "Du bist dabei dieses Projekt zu deaktivieren. Es und all sein Inhalt wird auf der Webseite unsichtbar sein."
+
+msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+msgstr "Diese Aktion kann rückgängig gemacht werden. Du kannst das Projekt jederzeit von deinem Benutzerprofil aus reaktivieren."
+
 msgid "Convert selected items to Projects"
 msgstr "Ausgewählte Gruppen in Projekte umwandeln"
 
@@ -6096,11 +6172,23 @@ msgstr "Wo ist das Projekt aktiv?"
 msgid "Project members only"
 msgstr "Nur Projektmitglieder"
 
+msgid "Collaborate!"
+msgstr "Mitmachen!"
+
+msgid "Join now and collaborate!"
+msgstr "Jetzt anmelden und mitgestalten!"
+
+msgid "You have been invited to collaborate!"
+msgstr "Du wurdest zum Mitmachen eingeladen!"
+
 msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
 msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie für dich eine Gruppe erstellen. Unten findest du eine Liste aller Administrator_innen."
 
 msgid "Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen deaktivieren! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie die Gruppe für dich deaktiveren. Unten findest du eine Liste aller Administrator_innen."
+
+msgid "Only project members can see the content you requested. Apply to become a member now!"
+msgstr "Nur Mitglieder dieses Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
 msgid "You are not currently in any Groups"
 msgstr "Du bist noch in keinen Gruppen Mitglied"
@@ -6126,6 +6214,18 @@ msgstr "Gruppe reaktivieren"
 msgid "Deactivate Group"
 msgstr "Gruppe deaktivieren"
 
+msgid "You are about to deactivate this group!"
+msgstr "Du bist dabei diese Gruppe zu deaktivieren!"
+
+msgid "You are about to re-activate this group. It and all of its content will be visible on the website again."
+msgstr "Du bist dabei diese Gruppe zu reaktivieren. Sie und all ihr Inhalt wird auf der Webseite wieder sichtbar sein."
+
+msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr "Du bist dabei diese Gruppe zu deaktivieren. Sie und all ihr Inhalt wird auf der Webseite unsichtbar sein."
+
+msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+msgstr "Diese Aktion kann rückgängig gemacht werden. Du kannst die Gruppe jederzeit von deinem Benutzerprofil aus reaktivieren."
+
 msgid "Convert selected items to Groups"
 msgstr "Ausgewählte Projekte in Gruppen umwandeln"
 
@@ -6149,6 +6249,9 @@ msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen erstellen! 
 
 msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen deaktivieren! Du kannst den Administrator_innen eine Nachricht schreiben damit sie die Gruppe für dich deaktiveren. Unten findest du eine Liste aller Administrator_innen."
+
+msgid "Only group members can see the content you requested. Apply to become a member now!"
+msgstr "Nur Mitglieder dieser Gruppe können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
 msgid "Conferences"
 msgstr "Konferenzen"
@@ -6192,6 +6295,18 @@ msgstr "Konferenz reaktivieren"
 msgid "Deactivate Conference"
 msgstr "Konferenz deaktivieren"
 
+msgid "You are about to deactivate this conference!"
+msgstr "Du bist dabei diese Konferenz zu deaktivieren!"
+
+msgid "You are about to re-activate this conference. It and all of its content will be visible on the website again."
+msgstr "Du bist dabei diese Konferenz zu reaktivieren. Sie und all ihr Inhalt wird auf der Webseite wieder sichtbar sein."
+
+msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr "Du bist dabei diese Konferenz zu deaktivieren. Sie und all ihr Inhalt wird auf der Webseite unsichtbar sein."
+
+msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+msgstr "Diese Aktion kann rückgängig gemacht werden. Du kannst die Konferenz jederzeit von deinem Benutzerprofil aus reaktivieren."
+
 msgid "Convert selected items to Conferences"
 msgstr "Ausgewählte Elemente in Konferenzen umwandeln"
 
@@ -6213,11 +6328,23 @@ msgstr "Wo ist die Konferenz aktiv?"
 msgid "Conference members only"
 msgstr "Nur Konferenzmitglieder"
 
+msgid "Participate!"
+msgstr "Teilnehmen!"
+
+msgid "Join now and participate!"
+msgstr "Jetzt anmelden und teilnehmen!"
+
+msgid "You have been invited to participate!"
+msgstr "Du wurdest eingeladen, teilzunehmen!"
+
 msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
 msgstr "Entschuldige, nur Portal-Administrator_innen können Konferenzen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie die Konferenz für dich erstellen. Unten findest du eine Liste aller Administrator_innen."
 
 msgid "Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgstr "Entschuldige, nur Portal-Administrator_innen können Konferenzen deaktivieren! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie die Konferenz für dich deaktiveren. Unten findest du eine Liste aller Administrator_innen."
+
+msgid "Only conference members can see the content you requested. Apply to become a member now!"
+msgstr "Nur Mitglieder dieser Konferenz können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
 msgid "Team Description"
 msgstr "Projektbeschreibung"
@@ -6416,6 +6543,13 @@ msgstr "Benutzer \"%(username)s\" hatte bereits einen Antrag auf Mitgliedschaft 
 #, python-format
 msgid "User %(username)s was successfully invited!"
 msgstr "Benutzer %(username)s wurde erfolgreich eingeladen!"
+
+#, python-format
+msgid "The following users were invited to apply: %s"
+msgstr "Die folgenden Benutzer/innen wurden eingeladen, Teilnahme zu beantragen: %s"
+
+msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
+msgstr "Alle Mitglieder/innen der ausgewählten Gruppen/Projekte wurden bereits eingeladen oder haben sich bereits angemeldet. Es wurden keine neuen Einladungen verschickt."
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
@@ -6725,6 +6859,30 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Programm"
+#~ msgstr "Programm"
+
+#~ msgid "Signature list"
+#~ msgstr "Unterschriftenliste"
+
+#~ msgid "Add workshop"
+#~ msgstr "Workshop hinzufügen"
+
+#~ msgid "Re-Activate Project/Group"
+#~ msgstr "Projekt/Gruppe reaktivieren"
+
+#~ msgid "Deactivate Project/Group"
+#~ msgstr "Projekt/Gruppe deaktivieren"
+
+#~ msgid "Deactivated Projects and Groups"
+#~ msgstr "Deaktivierte Projekte und Gruppen"
+
+#~ msgid "Public Project"
+#~ msgstr "Öffentliches Projekt"
+
+#~ msgid "Public Group"
+#~ msgstr "Öffentliche Gruppe"
 
 #~ msgid "Conditions"
 #~ msgstr "Nutzungsbedingungen"

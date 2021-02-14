@@ -1597,7 +1597,6 @@ class ActivateOrDeactivateGroupView(TemplateView):
             'target_group': ensure_group_type(self.group),
             'activate': self.activate,
         })
-        print(f'>>> tar {ensure_group_type(self.group)}')
         return context
 
 

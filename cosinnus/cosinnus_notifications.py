@@ -424,7 +424,7 @@ notifications = {
         'event_text': _('%(sender_name)s invited you to apply for the conference %(team_name)s'),
         'topic': _('%(sender_name)s invited you to apply for "%(team_name)s" on %(portal_name)s! <br/><br/>' 
                            ' To apply, please click on the link below.'),
-        'subject_text': _('%(sender_name)s invited you to apply for %(team_name)s'),
+        'subject_text': _('%(sender_name)s invited you to apply for the conference %(team_name)s'),
         'data_attributes': {
             'object_name': 'name',
             'object_url': 'get_absolute_url',

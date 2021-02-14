@@ -173,7 +173,7 @@ class ConferenceApplicationEventPrioForm(forms.Form):
     priority = forms.ChoiceField(
         required=True,
         initial=2,
-        choices=[(1, _('First Choice')), (2, ('Second Choice'))], #(0, _('No Interest')),removed
+        choices=[(1, _('First Choice')), (2, _('Second Choice'))], #(0, _('No Interest')),removed
         widget=RadioSelectInTableRowWidget)
 
     def __init__(self, *args, **kwargs):
