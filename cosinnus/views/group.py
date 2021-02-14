@@ -1350,15 +1350,36 @@ class GroupInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormView)
                     invited_groups.append(group_id)
         else:
             self.group.settings['invited_groups'] = group_ids
-
+            
+        # get all users of the selected groups
         memberships = CosinnusGroupMembership.objects.get_members(groups=group_ids)
-        for group_id, userlist in memberships.items():
-            for user in userlist:
-                if not user in invited_users:
-                    # send invitations
-                    invited_users.append(user)
-
+        member_id_list = list(set([user for sub_list in memberships.values() for user in sub_list]))
+        
+        # get users who already got invitations or have applied
+        already_applied_id_list = list(self.group.conference_applications.all().values_list('user__id', flat=True))
+        currently_notified_id_list = list(set(self.group.members + self.group.invited_pendings + already_applied_id_list))
+        
+        member_list = filter_active_users(get_user_model().objects.filter(id__in=member_id_list).exclude(id__in=currently_notified_id_list))
+        newly_invited_users = []
+        for user in member_list:
+            if not user.id in invited_users and not user.id == self.request.user.id:
+                # send conference invitations to all users who haven't been invited, and never to self
+                self.group.add_member_to_group(user, MEMBERSHIP_INVITED_PENDING)
+                cosinnus_notifications.user_conference_invited_to_apply.send(
+                    sender=self,
+                    obj=self.group,
+                    user=self.request.user,
+                    audience=[user]
+                )
+                invited_users.append(user.id)
+                newly_invited_users.append(user)
+        
+        # save the invited users and groups
         self.group.save()
+        if newly_invited_users:
+            messages.success(self.request, _('The following users were invited to apply: %s') % ', '.join(full_name(user) for user in newly_invited_users))
+        else:
+            messages.info(self.request, _('All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent.'))
         return HttpResponseRedirect(self.get_success_url())
 
 
@@ -1919,13 +1940,18 @@ class GroupInviteSelect2View(RequireReadMixin, Select2View):
         q = get_group_query_filter_for_search_terms(terms)
         groups = get_cosinnus_group_model().objects.filter(q)
         groups = groups.filter(portal_id=CosinnusPortal.get_current().id, is_active=True)
+        # do/do not return the forum group
+        forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        if forum_slug:
+            groups = groups.exclude(slug=forum_slug)
+            
         if 'group' in self.kwargs and self.kwargs.get('group'):
             group = CosinnusGroup.objects.get(slug=self.kwargs.get('group'))
             exclude_ids = [group.id]
             if 'invited_groups' in group.settings:
                 exclude_ids = exclude_ids + group.settings.get('invited_groups')
             groups = groups.exclude(id__in=exclude_ids)
-
+            
         groups = [group for group in groups if check_object_read_access(group, request.user)]
 
         results = get_group_select2_pills(groups)

@@ -30,7 +30,7 @@ user_conference_application_accepted = dispatch.Signal(providing_args=["user", "
 user_conference_application_declined = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_conference_application_waitlisted = dispatch.Signal(providing_args=["user", "obj", "audience"])
 conference_created_in_group = dispatch.Signal(providing_args=["user", "obj", "audience"])
-user_conference_invited_to_apply = None
+user_conference_invited_to_apply = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
 """ Notification definitions.
@@ -409,8 +409,34 @@ notifications = {
             'event_meta': 'from_date',
         },
         'action_button_text': pgettext_lazy('email campaign button label to apply for a conference', 'Apply now!'),
+        'action_button_alternate_text': _('View conference'),
     },
-    
+    'user_conference_invited_to_apply': {
+        'label': '<hidden-user_group_invited>', 
+        'signals': [user_conference_invited_to_apply],
+        'default': True,
+        'hidden': True,
+        
+        'alert_text': _('%(sender_name)s invited you to apply for the conference %(team_name)s'),
+        'alert_reason': '',
+        
+        'is_html': True,
+        'event_text': _('%(sender_name)s invited you to apply for the conference %(team_name)s'),
+        'topic': _('%(sender_name)s invited you to apply for "%(team_name)s" on %(portal_name)s! <br/><br/>' 
+                           ' To apply, please click on the link below.'),
+        'subject_text': _('%(sender_name)s invited you to apply for %(team_name)s'),
+        'data_attributes': {
+            'object_name': 'name',
+            'object_url': 'get_absolute_url',
+            'object_text': 'description_long_or_short', 
+            'sub_object_name': '_sender_name', 
+            'sub_object_text': '_sender.cosinnus_profile.description',
+            'sub_object_url': '_sender.cosinnus_profile.get_absolute_url',
+            'sub_object_icon': '_sender.cosinnus_profile.get_icon',
+        },
+        'action_button_text': _('View invitation'),
+        'notification_reason': 'none',
+    }, 
     'group_created': {
         'label': '<hidden-group_created>', 
         'mail_template': '<html-only>',
