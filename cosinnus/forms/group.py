@@ -430,13 +430,16 @@ class MultiGroupSelectForm(MultiSelectForm):
         fields = ('groups',)
 
     def __init__(self, *args, **kwargs):
-        self.organization = kwargs.pop('organization')
-        super(MultiGroupSelectForm, self).__init__(*args, **kwargs)
+        if 'organization' in kwargs:
+            self.organization = kwargs.pop('organization')
+        if 'group' in kwargs:
+            self.group = kwargs.pop('group')
+        super().__init__(*args, **kwargs)
 
     def get_queryset(self):
         include_uids = CosinnusPortal.get_current().groups.values_list('id', flat=True)
         queryset = get_cosinnus_group_model().objects.filter(id__in=include_uids)
-        if self.organization:
+        if hasattr(self, 'organization') and self.organization:
             exclude_uids = self.organization.groups.values_list('id', flat=True)
             queryset = queryset.exclude(id__in=exclude_uids)
         return queryset
@@ -445,7 +448,10 @@ class MultiGroupSelectForm(MultiSelectForm):
         return get_group_select2_pills(items, text_only=text_only)
 
     def get_ajax_url(self):
-        return reverse('cosinnus:organization-group-invite-select2', kwargs={'organization': self.organization.slug})
+        if hasattr(self, 'organization') and self.organization:
+            return reverse('cosinnus:organization-group-invite-select2', kwargs={'organization': self.organization.slug})
+        if hasattr(self, 'group') and self.group:
+            return group_aware_reverse('cosinnus:group-invite-select2', kwargs={'group': self.group.slug})
 
 
 class CosinnusLocationForm(forms.ModelForm):

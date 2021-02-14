@@ -87,6 +87,86 @@
         {% endif %}
         
         {% if not object.slug == SETTINGS.NEWW_FORUM_GROUP_SLUG and not object.slug in SETTINGS.NEWW_DEFAULT_USER_GROUPS %}
+
+			{% if user|has_write_access:object and group.group_is_conference and group.use_conference_applications %}
+			<div class="panel panel-default large-space">
+				<div class="panel-heading">
+					<h4 class="panel-title collapsed" data-toggle="collapse" data-target="#collapseGroupsInvite">
+						<i class="fa fa-chevron-down panel-collapsed"></i>
+						<i class="fa fa-chevron-up panel-open"></i>
+						{% trans "Invite groups to apply..." %}
+						{% if invited_groups|length > 0 %}({{ invited_groups|length }}){% endif %}
+					</h4>
+				</div>
+				<div id="collapseGroupsInvite" class="panel-collapse collapse">
+					<div class="panel-body">
+						<legend>{% trans "Invite a group" %}</legend>
+						<form action="{% group_url 'cosinnus:group-add-multiple' group=object %}" method="post" class="cosinnus-form">
+							{% csrf_token %}
+							{{ group_invite_form.non_field_errors }}
+
+							{{ group_invite_form.groups.errors }}
+							{% trans "Enter a group name to find groups to invite..." as inv_placeholder %}
+							{% include 'cosinnus/fields/default_field.html' with field=group_invite_form.groups placeholder=inv_placeholder first=True %}
+
+							<button type="submit" class="btn btn-emphasized btn-autosize large-space">
+								<ul class="media-list">
+									<li class="media">
+										<a class="pull-left" href="#">
+											<i class="fa fa-check"></i>
+										</a>
+										<div class="media-body">
+											{% trans "Invite groups" %}
+										</div>
+									</li>
+								</ul>
+							</button>
+						</form>
+					</div>
+				</div>
+			{% endif %}
+
+			{% if user|has_write_access:object and invited_groups|length > 0 %}
+			<legend>{% trans "Invited Groups" %}</legend>
+
+				{% for group in invited_groups %}
+					<div class="regular-space">
+						<div class="btn btn-default w100">
+							<ul class="media-list">
+								<li class="media">
+									<a class="pull-left" href="{{ group.get_absolute_url }}">
+										<i class="fas fa-fw fa-group"></i>
+									</a>
+									{% captureas modal_group_revoke_id %}groupModal_revoke_{{group.pk}}{% endcaptureas %}
+									<button type="button" class="btn btn-emphasized btn-icon-only pull-right"
+											data-toggle="modal" data-target="#{{modal_group_revoke_id}}" title="{% trans "Revoke Invitation" %}">
+											<ul class="media-list">
+												<li class="media">
+													<a class="pull-left" href="#">
+														<i class="fa fa-close"></i>
+													</a>
+												</li>
+											</ul>
+									</button>
+									<div class="media-body">
+										<a href="{{ group.get_absolute_url }}">
+											{{ group.name }}
+										</a>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					{% captureas label %}{% blocktrans with name=group.name %}Do you really want to revoke the invitation for member „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
+					{% captureas title %}{% trans "Revoke Invitation for Group" %}{% endcaptureas %}
+					{% captureas action %}{% group_url 'cosinnus:group-group-invite-delete' group=object %}{% endcaptureas %}
+					{% captureas group_id %}{{ group.id }}{% endcaptureas %}
+					{% include "cosinnus/modal_box.html" with id=modal_group_revoke_id label=label title=title form_action=action submit_name="remove-group-invitation" submit_value=group_id %}
+				{% endfor %}
+			{% endif %}
+
+
+
 	        {% if user|has_write_access:object or user in invited %}
 		        <div class="panel panel-default large-space">
 		            <div class="panel-heading">

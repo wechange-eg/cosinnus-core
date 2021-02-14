@@ -271,10 +271,13 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/users/$' % url_key, group.group_user_list, name=prefix+'group-user-list'),
         url(r'^%s/(?P<group>[^/]+)/users/add/$' % url_key, group.group_user_add, name=prefix+'group-user-add-generic'),
         url(r'^%s/(?P<group>[^/]+)/users/add-multiple/$' % url_key, group.group_user_add_multiple, name=prefix+'group-user-add-multiple'),
+        url(r'^%s/(?P<group>[^/]+)/add-multiple/$' % url_key, group.group_add_multiple, name=prefix+'group-add-multiple'),
         url(r'^%s/(?P<group>[^/]+)/users/add/(?P<username>[^/]+)/$' % url_key, group.group_user_add, name=prefix+'group-user-add'),
         url(r'^%s/(?P<group>[^/]+)/users/delete/(?P<username>[^/]+)/$' % url_key, group.group_user_delete, name=prefix+'group-user-delete'),
         url(r'^%s/(?P<group>[^/]+)/users/edit/(?P<username>[^/]+)/$' % url_key, group.group_user_update, name=prefix+'group-user-edit'),
         url(r'^%s/(?P<group>[^/]+)/users/member-invite-select2/$' % url_key, group.user_group_member_invite_select2, name=prefix+'group-member-invite-select2'),
+        url(r'^%s/(?P<group>[^/]+)/group-invite-select2/$' % url_key, group.group_invite_select2, name=prefix+'group-invite-select2'),
+        url(r'^%s/(?P<group>[^/]+)/group-group-invite-delete/$' % url_key, group.group_group_invite_delete, name=prefix+'group-group-invite-delete'),
         url(r'^%s/(?P<group>[^/]+)/export/$' % url_key, group.group_export, name=prefix+'group-export'),
     
         url(r'^%s/(?P<group>[^/]+)/widgets/add/$' % url_key, widget.widget_add_group, name=prefix+'widget-add-group-empty'),
