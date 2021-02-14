@@ -1939,6 +1939,10 @@ class GroupInviteSelect2View(RequireReadMixin, Select2View):
         q = get_group_query_filter_for_search_terms(terms)
         groups = get_cosinnus_group_model().objects.filter(q)
         groups = groups.filter(portal_id=CosinnusPortal.get_current().id, is_active=True)
+        # non-superusers can only invite groups they are a member of
+        if not check_user_superuser(request.user):
+            user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(request.user)
+            groups = groups.filter(id__in=user_group_ids)
         # do/do not return the forum group
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         if forum_slug:
@@ -1950,8 +1954,7 @@ class GroupInviteSelect2View(RequireReadMixin, Select2View):
             if 'invited_groups' in group.settings:
                 exclude_ids = exclude_ids + group.settings.get('invited_groups')
             groups = groups.exclude(id__in=exclude_ids)
-            
-        groups = [group for group in groups if check_object_read_access(group, request.user)]
+        
 
         results = get_group_select2_pills(groups)
 
