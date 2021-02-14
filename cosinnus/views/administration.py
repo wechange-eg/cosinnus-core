@@ -265,7 +265,8 @@ user_list = UserListView.as_view()
 class AdminUserUpdateView(UserProfileUpdateView):
     template_name = 'cosinnus/administration/user_update_form.html'
     message_success = _('Die Änderungen wurden erfolgreich gespeichert.')
-
+    
+    is_admin_elevated_view = True
     disable_conditional_field_locking = True
 
     def dispatch(self, request, *args, **kwargs):

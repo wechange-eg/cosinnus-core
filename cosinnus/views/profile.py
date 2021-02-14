@@ -176,6 +176,10 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
     template_name = 'cosinnus/user/userprofile_form.html'
     message_success = _('Your profile was edited successfully.')
     
+    # for extending views, changes some behaviour with the mode that an admin is doing direct changes
+    # (e.g. no validation for e-mail changes)
+    is_admin_elevated_view = False
+    
     # if set to True, all fields will always be kept enabled
     # if set to False, disables some fields depending on settings variables
     disable_conditional_field_locking = False
@@ -207,7 +211,7 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
             messages.warning(request, _('Your user account is associated with an integrated Portal. This account\'s email address is fixed and therefore was left unchanged.'))
             request.POST._mutable = True
             request.POST['user-email'] = user.email
-        elif request.POST.get('user-email', user.email) != user.email and CosinnusPortal.get_current().email_needs_verification:
+        elif not self.is_admin_elevated_view and request.POST.get('user-email', user.email) != user.email and CosinnusPortal.get_current().email_needs_verification:
             # set flags to be changed if form submit is successful
             self.target_email_to_confirm = request.POST['user-email']
             self.user = user

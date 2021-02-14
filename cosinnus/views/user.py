@@ -656,7 +656,7 @@ def verifiy_user_email(request, email_verification_param):
         setattr(user_profile, 'group', forum_group) 
         cosinnus_notifications.user_account_created.send(sender=user, user=user, obj=user_profile, audience=[])
         login(request, user)
-        return redirect(reverse('cosinnus:map'))
+        return redirect(reverse('cosinnus:profile-detail'))
     else:
         messages.success(request, _('Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!') % {'email': user.email})
         return redirect(reverse('login'))
