@@ -30,7 +30,7 @@
 
 {% block microsite_content %}
     <div class="row microsite-conference-content">
-        <div class="col-xs-12">
+        <div class="col-md-6">
             {# About Project box #}
             <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
                 <ul class="media-list">
@@ -45,25 +45,21 @@
             <div class="white-content">
                 <div class="textfield">
 	                {% if group.from_date %}
-	                    <h4>
-	                        {% trans "Starts" context "as in: starts at a certain date" %}:
-	                        {% include 'cosinnus_event/common/humanized_event_time.html' with event=group from_date_only=True %}
-	                    </h4>
-	                    <div class="textfield transparent">
-	                       <p>
+	                    <div class="large-space">
+	                       <b>
 	                           {{ group.from_date|date:"SHORT_DATE_FORMAT" }}, {{ group.from_date|date:"H:i" }} 
 	                           {% trans "o'clock" context "time" %}
 	                           {% if group.to_date %}
-	                               - {{ group.to_date|date:"SHORT_DATE_FORMAT" }}, {{ group.to_date|date:"H:i" }}
+	                               {% trans "until" context "time" %}
+	                               {{ group.to_date|date:"SHORT_DATE_FORMAT" }}, {{ group.to_date|date:"H:i" }}
 	                               {% trans "o'clock" context "time" %}
 	                           {% endif %}
-	                       </p>
+	                       </b>
 	                    </div>
 	                {% endif %}
                     
                     {% if group.description_long or group.description %}
-                        <hr class="invisible"/>
-                        <div class="textfield transparent">
+                        <div class="textfield transparent large-space">
                             {% if group.description_long %}
 	                            {{ group.description_long|textfield }}
 	                        {% else %}
@@ -74,50 +70,51 @@
                     
                     {% if group.conference_events.count > 0 %}
                         <hr class="invisible"/>
-                        <h2>{% trans "Events" %}</h2>
-	                    {% for room in group.rooms.all %}
-	                        {% with room_events=room.events.all %}
-	                            {% if room_events %}
-				                    <h4>
-		                                {{ room.title }}:		                        
-				                        {% comment %}  
-					                        {% trans "Workshops" %}:
-				                        {% endcomment %} 
-				                    </h4>
-				                    <div class="microsite-conference-workshop-list large-space">
-				                        {% for event in room_events %}
-				                            {% if not event.is_break %}
-				                                <div class="indented fadedown">
-				                                   <div>
-						                                <a href="{{ event.get_absolute_url }}">
-								                            {{ event.title }} - {{ event.media_tag.visibility }}
-							                            </a>
-							                            {% if event.from_date %}
-							                                &nbsp;&nbsp;
-								                            <i>
-							                                    {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
-							                                </i>
-							                            {% endif %}
-							                            {% if event.note %}
-						                                    &nbsp;
-								                            <a href="#" class="fadedown-clickarea">
-								                                {% trans "More infos..." %}
-								                                <i class="fa fa-chevron-down"></i>
+                        <div class="large-space">
+                            <b>{% trans "Events" %}:</b>
+                        </div>
+                        
+                        <div class="indented">
+		                    {% for room in group.rooms.all %}
+		                        {% with room_events=room.events.all %}
+		                            {% if room_events %}
+					                    <div class="regular-space">
+				                            <b>{{ room.title }}:</b>
+				                        </div>
+					                    <div class="microsite-conference-workshop-list large-space">
+					                        {% for event in room_events %}
+					                            {% if not event.is_break %}
+					                                <div class="fadedown regular-space">
+					                                   <div class="small-space">
+							                                <a href="{{ event.get_absolute_url }}">
+									                            {{ event.title }} - {{ event.media_tag.visibility }}
 								                            </a>
+								                            
+								                            {% if event.from_date %}
+                                                                <br/>
+                                                                {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
+                                                                {% if event.note %}
+                                                                &nbsp;
+                                                                <a href="#" class="fadedown-clickarea">
+                                                                    {% trans "More infos..." %}
+                                                                    <i class="fa fa-chevron-down"></i>
+                                                                </a>
+                                                            {% endif %}
+                                                            {% endif %}
+						                                </div>
+						                                {% if event.note %}
+								                            <div class="textfield transparent">
+								                                {{ event.note|textfield }}
+								                            </div>
 							                            {% endif %}
-					                                </div>
-					                                {% if event.note %}
-							                            <div class="textfield transparent">
-							                                {{ event.note|textfield }}
-							                            </div>
-						                            {% endif %}
-					                            </div>
-					                        {% endif %}
-					                    {% endfor %}
-				                    </div>
-				                {% endif %}
-				            {% endwith %}
-                        {% endfor %}
+						                            </div>
+						                        {% endif %}
+						                    {% endfor %}
+					                    </div>
+					                {% endif %}
+					            {% endwith %}
+	                        {% endfor %}
+	                    </div> <!-- end indented -->
 	                {% endif %}
                 </div> {% comment %} end div[textfield] {% endcomment %}
                 
@@ -130,9 +127,7 @@
             </div>
             
         </div>
-    </div>
-
-    <div class="row">
+        
 		<div class="col-md-6">
             {% if not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS %}
                 {# Contact box #}
@@ -209,17 +204,19 @@
                     </div>
                 {% endif %}
 			{% endwith %}
-        </div>
-        <div class="col-md-6">
+			
             <hr class="invisible"/>
-            {% if group.attached_objects.exists or group.attached_images %}
-                {% if group.attached_images %}
-                        {% include 'cosinnus/common/attached_images_gallery.html' with object=group max_images=12 %}
-                {% endif %}
-                {% if group.attached_objects.exists %}
-                    {% cosinnus_render_attached_objects group %}
-                {% endif %}
-            {% endif %}
+            
+            <div class="no-indent">
+	            {% if group.attached_objects.exists or group.attached_images %}
+	                {% if group.attached_images %}
+	                        {% include 'cosinnus/common/attached_images_gallery.html' with object=group max_images=12 %}
+	                {% endif %}
+	                {% if group.attached_objects.exists %}
+	                    {% cosinnus_render_attached_objects group with %}
+	                {% endif %}
+	            {% endif %}
+	        </div>
         </div>
         
         

@@ -335,11 +335,17 @@ ul.errorlist {
 .comment-background, .comment-background p {
 	background-color: @comment-background-color !important;
 }
+
 .indented {
-	padding-left: 40px;
+    padding-left: 40px;
 }
 .extra-indented {
   padding-left: 50px;
+}
+.no-indent {
+    .indented, .extra-indented {
+    	padding-left: 0;
+    }
 }
 .underlined {
 	text-decoration: underline !important;

@@ -20,16 +20,9 @@
 		    {{ priority_formset.non_form_errors }}
 		    <div class="content-box">
 		        <h2>{% trans "Apply for" %}: {{ group.name }}</h2>  
-		        
-		        {% if form.options %}
-			        {% trans "My individual needs" as options_label %}
-			        {% trans "(no options chosen)" as options_placeholder %}
-			        {% include 'cosinnus/fields/default_field.html' with field=form.options label=options_label placeholder=options_placeholder large_field=True %}
-		        {% endif %}
 		
 		        {% trans "Message to organizer" as information_label %}
 		        {% include 'cosinnus/fields/default_field.html' with field=form.information label=information_label large_field=True %}
-		
 		
 		        {% if priority_formset.forms %}
 			        <table class="table table-striped white-content priority-form">
@@ -52,17 +45,21 @@
 			        {% endfor %}
 			        </table>
 		        {% endif %}
-		
+		        
+                {% if form.options %}
+                    {% trans "My individual needs" as options_label %}
+                    {% trans "(no options chosen)" as options_placeholder %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.options label=options_label placeholder=options_placeholder large_field=True %}
+                {% endif %}
 		
 		        {% if form.conditions_accepted %}
-		            <br/>
-		            <h4>{% trans "Application conditions" %}:</h4>
+		            {% trans "Application conditions" as conditions_label %}
+		            {% include 'cosinnus/fields/default_field.html' with label=conditions_label %}
 					<div class="large-space textfield transparent">
 					    {% if participation_management.application_conditions %}
     						{{ participation_management.application_conditions|textfield }}
 						{% endif %}
 						{% if participation_management.application_conditions_upload %}
-						    <br/>
 							<p>
 								<a href="{{ participation_management.application_conditions_upload.url }}" target="_blank">
 									<i class="fas fa-download"></i>
@@ -71,17 +68,14 @@
 							</p>
 						{% endif %}
 					</div>
-			        {% trans "You need to accept the conditions to apply" as conditions_label %}
-					{% trans "I accept the conditions" as conditions_checkbox_label %}
-			        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_label legend=legend checkbox_label=conditions_checkbox_label %}
+					{% trans "I accept the conditions in order to submit my application" as conditions_checkbox_label %}
+			        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_checkbox_label legend=legend checkbox_label=conditions_checkbox_label %}
 		        {% endif %}
 		
 		        {% if not form.options and priority_formset.forms|length_is:0 and not form.conditions_accepted %}
 			        <h2>{% trans 'Apply for participation in ' %}<i>{{ group.name }}</i></h2>
 			        <div>{{ group.description }}</div>
 		        {% endif %}
-		        
-		        {% include 'cosinnus/fields/mandatory_field_legend.html' %}
 		    </div>
 		
 		    <button type="submit" class="btn btn-emphasized btn-autosize">

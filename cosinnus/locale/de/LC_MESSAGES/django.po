@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-15 15:33+0100\n"
-"PO-Revision-Date: 2021-02-15 15:35+0100\n"
+"POT-Creation-Date: 2021-02-15 16:29+0100\n"
+"PO-Revision-Date: 2021-02-15 16:29+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -2503,17 +2503,17 @@ msgstr "Antrag"
 msgid "Apply for"
 msgstr "Teilnahme beantragen"
 
-msgid "My individual needs"
-msgstr "Meine individuellen Bedürfnisse"
-
-msgid "(no options chosen)"
-msgstr "(keine Bedingungen gewählt)"
-
 msgid "Message to organizer"
 msgstr "Nachricht an den Veranstalter"
 
 msgid "Workshop"
 msgstr "Workshop"
+
+msgid "My individual needs"
+msgstr "Meine individuellen Bedürfnisse"
+
+msgid "(no options chosen)"
+msgstr "(keine Bedingungen gewählt)"
 
 msgid "Application conditions"
 msgstr "Anmeldebedingungen"
@@ -2521,11 +2521,8 @@ msgstr "Anmeldebedingungen"
 msgid "Download the conditions"
 msgstr "Bedingungen herunterladen"
 
-msgid "You need to accept the conditions to apply"
-msgstr "Du musst die Bedingungen akzeptieren, um Teilnahme zu beantragen"
-
-msgid "I accept the conditions"
-msgstr "Ich akzeptiere die Bedingungen"
+msgid "I accept the conditions in order to submit my application"
+msgstr "Ich akzeptiere die Bedingungen, um Teilnahme zu beantragen"
 
 msgid "Apply for participation in "
 msgstr "Bewirb dich für die Teilnahme an "
@@ -3019,13 +3016,13 @@ msgstr "Maximale Anzahl von Teilnehmenden"
 msgid "About the conference"
 msgstr "Über die Konferenz"
 
-msgctxt "as in: starts at a certain date"
-msgid "Starts"
-msgstr "Beginnt"
-
 msgctxt "time"
 msgid "o'clock"
 msgstr "Uhr"
+
+msgctxt "time"
+msgid "until"
+msgstr "bis"
 
 msgid "More infos..."
 msgstr "Mehr Informationen..."
@@ -6852,6 +6849,13 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "I accept the conditions"
+#~ msgstr "Ich akzeptiere die Bedingungen"
+
+#~ msgctxt "as in: starts at a certain date"
+#~ msgid "Starts"
+#~ msgstr "Beginnt"
 
 #, fuzzy
 #~| msgid ""
