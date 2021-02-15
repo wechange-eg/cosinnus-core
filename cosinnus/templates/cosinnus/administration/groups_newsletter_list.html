@@ -1,0 +1,5 @@
+{% extends "cosinnus/administration/managed_tags_newsletter_list.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block update_url %}{% url 'cosinnus:administration-groups-newsletter-update' newsletter_id=newsletter.id %}{% endblock %}
+{% block create_url %}{% url 'cosinnus:administration-groups-newsletter-create' %}{% endblock %}

@@ -106,9 +106,13 @@ urlpatterns = [
 
     url(r'^administration/users/$', administration.user_list, name='administration-users'),
     url(r'^administration/users/add/$', administration.user_add, name='administration-user-create'),
-    url(r'^administration/group_newsletter/$', administration.managed_tags_newsletters, name='administration-managed-tags-newsletter'),
-    url(r'^administration/group_newsletter/add/$', administration.managed_tags_newsletter_create, name='administration-managed-tags-newsletter-create'),
-    url(r'^administration/group_newsletter/(?P<newsletter_id>\d+)/edit/$', administration.managed_tags_newsletter_update, name='administration-managed-tags-newsletter-update'),
+    
+    url(r'^administration/group_newsletter/$', administration.groups_newsletters, name='administration-groups-newsletter'),
+    url(r'^administration/group_newsletter/add/$', administration.groups_newsletter_create, name='administration-groups-newsletter-create'),
+    url(r'^administration/group_newsletter/(?P<newsletter_id>\d+)/edit/$', administration.groups_newsletter_update, name='administration-groups-newsletter-update'),
+    url(r'^administration/tag_newsletter/$', administration.managed_tags_newsletters, name='administration-managed-tags-newsletter'),
+    url(r'^administration/tag_newsletter/add/$', administration.managed_tags_newsletter_create, name='administration-managed-tags-newsletter-create'),
+    url(r'^administration/tag_newsletter/(?P<newsletter_id>\d+)/edit/$', administration.managed_tags_newsletter_update, name='administration-managed-tags-newsletter-update'),
 
     url(r'^administration/announcements/$', user_dashboard_announcement.list_view, name='user-dashboard-announcement-list'),
     url(r'^administration/announcements/add/$', user_dashboard_announcement.user_dashboard_announcement_create, name='user-dashboard-announcement-create'),

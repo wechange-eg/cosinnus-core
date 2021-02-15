@@ -13,9 +13,9 @@ from cosinnus.utils.permissions import check_user_superuser
 from django.core.exceptions import PermissionDenied
 from django.views.generic.base import TemplateView
 from cosinnus.forms.administration import (UserWelcomeEmailForm,
-NewsletterForManagedTagsForm, UserAdminForm)
-from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.newsletter import Newsletter
+NewsletterForManagedTagsForm, UserAdminForm, NewsletterForGroupsForm)
+from cosinnus.models.group import CosinnusPortal, CosinnusGroupMembership
+from cosinnus.models.newsletter import Newsletter, GroupsNewsletter
 from django.urls.base import reverse
 from cosinnus.views.user import _send_user_welcome_email_if_enabled
 from django.shortcuts import redirect
@@ -92,7 +92,7 @@ class UserWelcomeEmailEditView(FormView):
 welcome_email_edit = UserWelcomeEmailEditView.as_view()
 
 
-class ManagedTagsNewsletterMixin:
+class NewsletterMixin(object):
 
     def dispatch(self, request, *args, **kwargs):
         if not check_user_superuser(request.user):
@@ -100,97 +100,63 @@ class ManagedTagsNewsletterMixin:
         return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('cosinnus:administration-managed-tags-newsletter-update',args=(self.object.id,))
+        return reverse(f'cosinnus:administration-{self.url_fragment}-newsletter-update',args=(self.object.id,))
 
 
-class ManagedTagsNewsletterListView(ManagedTagsNewsletterMixin, ListView):
-    model = Newsletter
-    template_name = 'cosinnus/administration/newsletter_list.html'
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.order_by('-sent')
-
-managed_tags_newsletters = ManagedTagsNewsletterListView.as_view()
-
-
-class ManagedTagsNewsletterCreateView(SuccessMessageMixin,
-                                     ManagedTagsNewsletterMixin,
-                                     CreateView):
-    model = Newsletter
+class ManagedTagsNewsletterMixin(NewsletterMixin):
+    
+    url_fragment = 'managed-tags'
     form_class = NewsletterForManagedTagsForm
-    template_name = 'cosinnus/administration/newsletter_form.html'
-    success_message = _("Newsletter successfully created!")
-
-
-managed_tags_newsletter_create = ManagedTagsNewsletterCreateView.as_view()
-
-
-class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin,
-                                      UpdateView):
     model = Newsletter
-    form_class = NewsletterForManagedTagsForm
-    template_name = 'cosinnus/administration/newsletter_form.html'
+
+class GroupsNewsletterMixin(NewsletterMixin):
+    
+    url_fragment = 'groups'
+    form_class = NewsletterForGroupsForm
+    model = GroupsNewsletter
+
+
+class BaseNewsletterUpdateView(UpdateView):
+    
     pk_url_kwarg = 'newsletter_id'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['receipients'] = self._get_recipients_from_tags()
+        context['receipients'] = self._filter_valid_recipients(self._get_recipients_from_choices())
         return context
 
-    def _get_recipients_from_tags(self):
-        tags = self.object.managed_tags.all()
-        assignments = CosinnusManagedTagAssignment.objects.filter(managed_tag__in=tags)
-        
-        group_type = ContentType.objects.get(
-            app_label='cosinnus', model='cosinnusgroup')
-        profile_type = ContentType.objects.get(
-            app_label='cosinnus', model='userprofile')
-        group_ids = assignments.filter(
-            content_type=group_type).values_list('object_id', flat=True)
-        profile_ids = assignments.filter(
-            content_type=profile_type).values_list('object_id', flat=True)
-        
-        tag_users = get_user_model().objects.filter(
-            Q(cosinnus_groups__id__in=group_ids) | Q(cosinnus_profile__id__in=profile_ids)).distinct()
-
-        users = []
-        for user in tag_users:
+    def _get_recipients_from_choices(self):
+        """ Stub for the extending views, should return the recipients depending on
+            tags/groups selected """
+        pass
+    
+    def _filter_valid_recipients(self, users):
+        filtered_users = []
+        for user in users:
             if settings.COSINNUS_NEWSLETTER_SENDING_IGNORES_NOTIFICATION_SETTINGS and user.is_active:
-                users.append(user)
+                filtered_users.append(user)
             elif (check_user_can_receive_emails(user)):
                 # if the newsletter opt-in is enabled, only send the newsletter to users
                 # who have the option enabled in their profiles
                 if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN and not \
                         user.cosinnus_profile.settings.get('newsletter_opt_in', False):
                     continue
-                users.append(user)
-
-        return users
-
+                filtered_users.append(user)
+        return filtered_users
+    
     def _send_newsletter(self, recipients):
         subject = self.object.subject
         text = self.object.body
         for recipient in recipients:
-            text = textfield(render_html_with_variables(recipient, text))
+            user_text = textfield(render_html_with_variables(recipient, text))
             # omitt the topic line after "Hello user," by passing topic_instead_of_subject=' '
-            send_html_mail_threaded(recipient, subject, text, topic_instead_of_subject=' ')
-
-    def _copy_newsletter(self):
-        subject = '{} (copy)'.format(self.object.subject)
-        body = self.object.body
-        copy = Newsletter.objects.create(
-            subject=subject,
-            body=body
-        )
-        for managed_tag in self.object.managed_tags.all():
-            copy.managed_tags.add(managed_tag)
-        return copy
+            send_html_mail_threaded(recipient, subject, user_text, topic_instead_of_subject=' ')
 
     def form_valid(self, form):
         self.object = form.save()
         if 'send_newsletter' in self.request.POST:
-            recipients = self._get_recipients_from_tags()
+            recipients = self._get_recipients_from_choices()
+            recipients = self._filter_valid_recipients(recipients)
             self._send_newsletter(recipients)
             self.object.sent = timezone.now()
             self.object.save()
@@ -205,10 +171,111 @@ class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin,
             messages.add_message(self.request, messages.SUCCESS, _('Newsletter has been updated.'))
         return HttpResponseRedirect(self.get_success_url())
 
+
+class ManagedTagsNewsletterListView(ManagedTagsNewsletterMixin, ListView):
+    template_name = 'cosinnus/administration/managed_tags_newsletter_list.html'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.order_by('-sent')
+
+managed_tags_newsletters = ManagedTagsNewsletterListView.as_view()
+
+
+class ManagedTagsNewsletterCreateView(SuccessMessageMixin,
+                                     ManagedTagsNewsletterMixin,
+                                     CreateView):
+
+    template_name = 'cosinnus/administration/managed_tags_newsletter_form.html'
+    success_message = _("Newsletter successfully created!")
+
+
+managed_tags_newsletter_create = ManagedTagsNewsletterCreateView.as_view()
+
+
+class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin, BaseNewsletterUpdateView):
+    
+    template_name = 'cosinnus/administration/managed_tags_newsletter_form.html'
+
+    def _get_recipients_from_choices(self):
+        tags = self.object.managed_tags.all()
+        assignments = CosinnusManagedTagAssignment.objects.filter(managed_tag__in=tags)
+        
+        group_type = ContentType.objects.get(
+            app_label='cosinnus', model='cosinnusgroup')
+        profile_type = ContentType.objects.get(
+            app_label='cosinnus', model='userprofile')
+        group_ids = assignments.filter(
+            content_type=group_type).values_list('object_id', flat=True)
+        profile_ids = assignments.filter(
+            content_type=profile_type).values_list('object_id', flat=True)
+        
+        tag_users = get_user_model().objects.filter(
+            Q(cosinnus_groups__id__in=group_ids) | Q(cosinnus_profile__id__in=profile_ids)).distinct()
+        return tag_users
+    
+    def _copy_newsletter(self):
+        subject = '{} (copy)'.format(self.object.subject)
+        body = self.object.body
+        copy = self.model.objects.create(
+            subject=subject,
+            body=body
+        )
+        for managed_tag in self.object.managed_tags.all():
+            copy.managed_tags.add(managed_tag)
+        return copy
+
+
 managed_tags_newsletter_update = ManagedTagsNewsletterUpdateView.as_view()
 
 
-class UserListView(ManagedTagsNewsletterMixin, ListView):
+class GroupsNewsletterListView(GroupsNewsletterMixin, ListView):
+    template_name = 'cosinnus/administration/groups_newsletter_list.html'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.order_by('-sent')
+
+groups_newsletters = GroupsNewsletterListView.as_view()
+
+
+class GroupsNewsletterCreateView(SuccessMessageMixin,
+                                     GroupsNewsletterMixin,
+                                     CreateView):
+
+    template_name = 'cosinnus/administration/groups_newsletter_form.html'
+    success_message = _("Newsletter successfully created!")
+
+
+groups_newsletter_create = GroupsNewsletterCreateView.as_view()
+
+
+class GroupsNewsletterUpdateView(GroupsNewsletterMixin, BaseNewsletterUpdateView):
+    
+    template_name = 'cosinnus/administration/groups_newsletter_form.html'
+
+    def _get_recipients_from_choices(self):
+        groups = self.object.groups.all()
+        member_dict = CosinnusGroupMembership.objects.get_members(groups=groups)
+        member_ids = list(set([user_id for sub_list in member_dict.values() for user_id in sub_list]))
+        users = get_user_model().objects.filter(id__in=member_ids)
+        return users
+    
+    def _copy_newsletter(self):
+        subject = '{} (copy)'.format(self.object.subject)
+        body = self.object.body
+        copy = self.model.objects.create(
+            subject=subject,
+            body=body
+        )
+        for group in self.object.groups.all():
+            copy.groups.add(group)
+        return copy
+
+groups_newsletter_update = GroupsNewsletterUpdateView.as_view()
+
+
+class UserListView(ListView):
     model = get_user_model()
     template_name = 'cosinnus/administration/user_list.html'
     ordering = '-date_joined'

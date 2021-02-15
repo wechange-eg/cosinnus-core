@@ -820,6 +820,12 @@ class CosinnusConf(AppConf):
     # *VERY* risky, so use cautiously
     ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS = False
     
+    # should the "send newsletter to groups" admin view be enabled?
+    ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED = True
+    
+    # should the "send newsletter to managed tags" admin view be enabled?
+    ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED = False
+    
     # if True administration newsletters ignore check_user_can_receive_emails`
     # (will ignore any blacklisting, but will still not send to inactive accounts)
     NEWSLETTER_SENDING_IGNORES_NOTIFICATION_SETTINGS = False

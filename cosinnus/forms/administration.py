@@ -11,8 +11,9 @@ from django.utils.translation import ngettext
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models.managed_tags import CosinnusManagedTag
-from cosinnus.models.newsletter import Newsletter
+from cosinnus.models.newsletter import Newsletter, GroupsNewsletter
 from cosinnus.utils.user import create_base_user
+from cosinnus.utils.group import get_cosinnus_group_model
 
 class UserWelcomeEmailForm(forms.Form):
     is_active = forms.BooleanField(required=False)
@@ -33,6 +34,16 @@ class NewsletterForManagedTagsForm(forms.ModelForm):
     class Meta(object):
         model = Newsletter
         fields = ['subject', 'body', 'managed_tags']
+
+class NewsletterForGroupsForm(forms.ModelForm):
+    groups = CustomSelectMultiple(
+        queryset=get_cosinnus_group_model().objects.all_in_portal(),
+        widget=forms.CheckboxSelectMultiple
+    )
+
+    class Meta(object):
+        model = GroupsNewsletter
+        fields = ['subject', 'body', 'groups']
 
 
 class UserAdminForm(forms.ModelForm):
