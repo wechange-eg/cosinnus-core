@@ -62,13 +62,13 @@
 			                
 		                    <div class="row application-row first">
 		                        {% comment %} Name {% endcomment %}
-		                        <div class="col-md-3 textfield transparent">
+		                        <div class="col-md-3 textfield transparent no-margin">
 		                            <a href="{{ application.instance.user.cosinnus_profile.get_absolute_url }}" target="_blank">
 		                                {{ application.instance.user|full_name }}
 		                            </a>
 		                        </div>
 		                        {% comment %} Location {% endcomment %}
-		                        <div class="col-md-3 textfield transparent">
+		                        <div class="col-md-3 textfield transparent no-margin">
 		                            <b><i class="fa fa-fw fa-map-marker"></i></b>
 	                                {% if application.instance.user.cosinnus_profile.media_tag.location %}
 	                                    <a href="{{ application.instance.user.cosinnus_profile.media_tag.location_url }}" target="_blank">
@@ -79,7 +79,7 @@
 	                                {% endif %}
 		                        </div>
 		                        {% comment %} Controls {% endcomment %}
-		                        <div class="col-md-6 textfield transparent">
+		                        <div class="col-md-6">
 		                            <a class="application-toggle-button" data-toggle="collapse" href="#collapse-application-details-{{ forloop.counter0 }}" title="{% trans 'show more ...' %}" aria-expanded="true" aria-controls="collapse-application-details-{{ forloop.counter0 }}">
 		                                <i class="fas fa-chevron-up toggle-button-state show-open"></i>
                                         <i class="fas fa-chevron-down toggle-button-state show-collapsed"></i>
@@ -139,9 +139,10 @@
 			                    
 			                    <div class="row application-row">
                                     {% comment %} Message to organizers {% endcomment %}
-                                    <div class="col-md-3 textfield transparent">
+                                    <div class="col-xs-12 textfield transparent">
                                         {% if application.information.value %}
                                             <b>{% trans 'Message to the organizers' %}:</b>
+                                            <br/>
                                             {{ application.information.value }}
                                         {% endif %}
                                     </div>
