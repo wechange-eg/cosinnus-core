@@ -789,15 +789,20 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
                                      help_text='Used for conferences to determine overall running time period.')
     to_date = models.DateTimeField(_('End Datetime'), default=None, blank=True, null=True,
                                      help_text='Used for conferences to determine overall running time period.')
-    
-    conference_is_running = models.BooleanField(_('Conference is running'),
-                                                help_text=_(
-                                                    'Determins whether a group that is marked as conference is running'),
-                                                default=False)
 
     use_conference_applications = models.BooleanField(_('Determins if application management is visible in conference administration.'),
                                                       default=False
                                                      )
+    
+    allow_conference_temporary_users = models.BooleanField(_('Allow temporary users accounts for this conference.'),
+                                                          default=False,
+                                                          help_text=_('If enabled, conference admins can create temporary user accounts that can be activated and deactivated.')
+                                                         )
+    
+    conference_is_running = models.BooleanField(_('Conference accounts active'),
+                                                help_text=_('If enabled, temporary user accounts for this conference are active and can log in.'),
+                                                default=False
+                                                )
 
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
                                related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)

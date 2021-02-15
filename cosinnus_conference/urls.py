@@ -8,8 +8,8 @@ from cosinnus_conference import views
 app_name = 'conference'
 
 cosinnus_group_patterns = [
-    url(r'^management/$', views.conference_management,
-        name='management'),
+    url(r'^user-accounts/$', views.conference_temporary_users,
+        name='temporary-users'),
     url(r'^room-management/$', views.conference_room_management,
         name='room-management'),
     url(r'^room-management/add/$', views.conference_room_add,

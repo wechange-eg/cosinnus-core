@@ -35,7 +35,7 @@ from cosinnus.utils.user import create_base_user
 from cosinnus.views.group import SamePortalGroupMixin
 from cosinnus.views.mixins.group import GroupIsConferenceMixin, FilterGroupMixin,\
     RequireAdminMixin, RequireLoggedInMixin, GroupFormKwargsMixin,\
-    DipatchGroupURLMixin
+    DipatchGroupURLMixin, RequireExtraDispatchCheckMixin
 from cosinnus.views.mixins.group import RequireReadMixin, RequireWriteMixin
 from cosinnus.views.profile import delete_userprofile
 from cosinnus.utils.urls import group_aware_reverse, redirect_with_next
@@ -59,10 +59,16 @@ from cosinnus import cosinnus_notifications
 logger = logging.getLogger('cosinnus')
 
 
-class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, DetailView):
+class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin,
+                                     RequireExtraDispatchCheckMixin, DetailView):
 
-    template_name = 'cosinnus/conference/conference_management.html'
-
+    template_name = 'cosinnus/conference/conference_temporary_users.html'
+    
+    def extra_dispatch_check(self):
+        if not self.group.allow_conference_temporary_users:
+            messages.warning(self.request, _('This function is not enabled for this conference.'))
+            return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
+    
     def get_object(self, queryset=None):
         return self.group
 
@@ -824,7 +830,7 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
 conference_applications = ConferenceParticipationManagementApplicationsView.as_view()
 conference_application = ConferenceApplicationView.as_view()
 conference_participation_management = ConferenceParticipationManagementView.as_view()
-conference_management = ConferenceManagementView.as_view()
+conference_temporary_users = ConferenceTemporaryUserView.as_view()
 workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
 workshop_participants_download = WorkshopParticipantsDownloadView.as_view()
 workshop_participants_upload_skeleton = WorkshopParticipantsUploadSkeletonView.as_view()
