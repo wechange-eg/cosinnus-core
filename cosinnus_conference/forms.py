@@ -164,7 +164,7 @@ class RadioSelectInTableRowWidget(forms.RadioSelect):
 
 class RadioSelectInRowWidget(forms.RadioSelect):
     input_type = 'radio'
-    template_name = 'cosinnus/conference/radio_buttons_row.html'
+    template_name = 'cosinnus/conference/radio_buttons_line.html'
     option_template_name = 'cosinnus/conference/radio_option.html'
 
 class ConferenceApplicationEventPrioForm(forms.Form):

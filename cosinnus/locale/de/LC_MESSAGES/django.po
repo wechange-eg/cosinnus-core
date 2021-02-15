@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-14 14:09+0100\n"
-"PO-Revision-Date: 2021-02-14 14:40+0100\n"
+"POT-Creation-Date: 2021-02-15 15:33+0100\n"
+"PO-Revision-Date: 2021-02-15 15:35+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -452,10 +452,6 @@ msgstr "%(sender_name)s hat dich eingeladen, bei der Konferenz %(team_name)s Tei
 #, python-format
 msgid "%(sender_name)s invited you to apply for \"%(team_name)s\" on %(portal_name)s! <br/><br/> To apply, please click on the link below."
 msgstr "%(sender_name)s hat dich eingeladen, bei \"%(team_name)s\" auf %(portal_name)s Teilnahme zu beantragen! <br/><br/> Um dich anzumelden, klicke bitte auf den unten stehenden Link."
-
-#, python-format
-msgid "%(sender_name)s invited you to apply for %(team_name)s"
-msgstr "%(sender_name)s hat dich eingeladen, bei %(team_name)s Teilnahme zu beantragen"
 
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
@@ -1994,6 +1990,33 @@ msgstr "Administration"
 msgid "Select a page on the left side."
 msgstr "Wähle links eine Seite aus."
 
+msgid "Newsletters"
+msgstr "Newsletter"
+
+msgid "Update Newsletter"
+msgstr "Newsletter bearbeiten"
+
+msgid "Create Newsletter"
+msgstr "Newsletter erstellen"
+
+msgid "Recipients"
+msgstr "Empfänger"
+
+#, python-format
+msgid "With the current selection the newsletter will be sent to %(counter)s recipients."
+msgid_plural "With the current selection the newsletter will be sent to %(counter)s recipients."
+msgstr[0] "Mit der aktuellen Auswahl wird der Newsletter an %(counter)s Empfänger verschickt."
+msgstr[1] "Mit der aktuellen Auswahl wird der Newsletter an %(counter)s Empfänger verschickt."
+
+msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
+msgstr "Nur Nutzende, die das Newsletter-Opt-In in ihrem Profil aktiviert haben, erhalten den Newsletter."
+
+msgid "Do you really want to send the newsletter?"
+msgstr "Möchtest du den Newsletter wirklich abschicken?"
+
+msgid "Send newsletter"
+msgstr "Newsletter abschicken"
+
 msgid "Send Newsletter"
 msgstr "Newsletter abschicken"
 
@@ -2015,17 +2038,8 @@ msgstr "Willkommens-E-Mail für neue Benutzer"
 msgid "Simple Statistics"
 msgstr "Simple Statistiken"
 
-msgid "Newsletters"
-msgstr "Newsletter"
-
 msgid "Edit"
 msgstr "Bearbeiten"
-
-msgid "Update Newsletter"
-msgstr "Newsletter bearbeiten"
-
-msgid "Create Newsletter"
-msgstr "Newsletter erstellen"
 
 msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
 msgstr "Dieser Newsletter wurde bereits abgeschickt. Wenn du ihn erneut senden möchtest, kopiere ihn bitte und schicke die Kopie ab."
@@ -2034,38 +2048,11 @@ msgctxt "subject of an E-Mail"
 msgid "Subject"
 msgstr "Betreff"
 
-msgid "Recipients"
-msgstr "Empfänger"
-
-#, python-format
-msgid ""
-"\n"
-"                With the current selection the newsletter will be sent to %(counter)s recipients.\n"
-"                "
-msgid_plural ""
-"\n"
-"                With the current selection the newsletter will be sent to %(counter)s recipients.\n"
-"                "
-msgstr[0] ""
-"\n"
-"Mit der aktuellen Auswahl wird der Newsletter an %(counter)s Empfänger verschickt.\n"
-"                "
-msgstr[1] ""
-"\n"
-"Mit der aktuellen Auswahl wird der Newsletter an %(counter)s Empfänger verschickt.\n"
-"                "
-
-msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
-msgstr "Nur Nutzende, die das Newsletter-Opt-In in ihrem Profil aktiviert haben, erhalten den Newsletter."
-
 msgid "Body"
 msgstr "Nachrichtentext"
 
 msgid "Currently set Email Text"
 msgstr "Aktueller E-Mail Text"
-
-msgid "Send newsletter"
-msgstr "Newsletter abschicken"
 
 msgid "Send yourself a Test-Mail"
 msgstr "Schicke eine Test-Mail an dich selbst"
@@ -2075,9 +2062,6 @@ msgstr "Diesen Newsletter kopieren"
 
 msgid "Save draft"
 msgstr "Entwurf speichern"
-
-msgid "Do you really want to send the newsletter?"
-msgstr "Möchtest du den Newsletter wirklich abschicken?"
 
 msgid "Newsletter"
 msgstr "Newsletter"
@@ -2573,20 +2557,14 @@ msgid_plural " %(counter)s places left "
 msgstr[0] " 1 Platz übrig "
 msgstr[1] " %(counter)s Plätze übrig "
 
-msgid "Put on waitlist"
-msgstr "Auf die Warteliste"
+msgid "Collapse all processed applications"
+msgstr "Alle bereits bearbeiteten Anträge einklappen"
 
-msgid "Accept"
-msgstr "Akzeptieren"
+msgid "not specified"
+msgstr "nicht angegeben"
 
-msgid "Decline"
-msgstr "Ablehnen"
-
-msgid "First Choice"
-msgstr "Erste Wahl"
-
-msgid "Second Choice"
-msgstr "Zweite Wahl"
+msgid "show more ..."
+msgstr "mehr anzeigen..."
 
 msgid "Reason for rejection"
 msgstr "Ablehnungsgrund"
@@ -2594,8 +2572,17 @@ msgstr "Ablehnungsgrund"
 msgid "optional"
 msgstr "optional"
 
+msgid "First Choice"
+msgstr "Erste Wahl"
+
+msgid "Second Choice"
+msgstr "Zweite Wahl"
+
 msgid "Application submitted"
 msgstr "Teilnahmeantrag eingereicht"
+
+msgid "Message to the organizers"
+msgstr "Nachricht an die Veranstalter/innen"
 
 msgid "Workshop Assignments"
 msgstr "Workshop-Zuweisungen"
@@ -2830,6 +2817,12 @@ msgstr "Raumliste"
 
 msgid "There are no rooms yet."
 msgstr "Es sind noch keine Räume vorhanden."
+
+msgid "Accept"
+msgstr "Akzeptieren"
+
+msgid "Decline"
+msgstr "Ablehnen"
 
 msgid "Rearrange"
 msgstr "Umsortieren"
@@ -6374,9 +6367,6 @@ msgstr "Dein Passwort muss mindestens enthalten: : {upper_case} Großbuchstaben,
 msgid "Test email sent!"
 msgstr "Test email wurde gesendet!"
 
-msgid "Newsletter successfully created!"
-msgstr "Newsletter erfolgreich erstellt!"
-
 msgid "Newsletter sent."
 msgstr "Der Newsletter wurde abgeschickt."
 
@@ -6388,6 +6378,9 @@ msgstr "Der Newsletter wurde kopiert."
 
 msgid "Newsletter has been updated."
 msgstr "Der Newsletter wurde aktualisiert."
+
+msgid "Newsletter successfully created!"
+msgstr "Newsletter erfolgreich erstellt!"
 
 #, python-format
 msgid "Login tokens to %(count)s users were sent."
@@ -6859,6 +6852,42 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                With the current selection the newsletter will be sent to %(counter)s recipients.\n"
+#~| "                "
+#~| msgid_plural ""
+#~| "\n"
+#~| "                With the current selection the newsletter will be sent to %(counter)s recipients.\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "\t                With the current selection the newsletter will be sent to %(counter)s recipients.\n"
+#~ "\t                "
+#~ msgid_plural ""
+#~ "\n"
+#~ "\t                With the current selection the newsletter will be sent to %(counter)s recipients.\n"
+#~ "\t                "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "Mit der aktuellen Auswahl wird der Newsletter an %(counter)s Empfänger verschickt.\n"
+#~ "                "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "Mit der aktuellen Auswahl wird der Newsletter an %(counter)s Empfänger verschickt.\n"
+#~ "                "
+
+#~ msgctxt "a verb"
+#~ msgid "Waitlist"
+#~ msgstr "Warteliste"
+
+#~ msgid "%(sender_name)s invited you to apply for %(team_name)s"
+#~ msgstr "%(sender_name)s hat dich eingeladen, bei %(team_name)s Teilnahme zu beantragen"
+
+#~ msgid "Put on waitlist"
+#~ msgstr "Auf die Warteliste"
 
 #~ msgid "Programm"
 #~ msgstr "Programm"

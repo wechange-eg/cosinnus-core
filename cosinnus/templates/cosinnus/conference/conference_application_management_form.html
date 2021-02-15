@@ -38,124 +38,122 @@
                 <h2>{% trans "Manage participation applications" %}</h2>
 		    
 		        {% if max_number %}
-		            <div class="large-space">{% trans 'The maximum number of participants is ' %} {{ max_number }} ({% blocktrans count counter=places_left %} 1 place left {% plural %} {{ counter }} places left {% endblocktrans %}) </div>
+		            <div class="large-space">
+		              {% trans 'The maximum number of participants is ' %} {{ max_number }} 
+		              ({% blocktrans count counter=places_left %} 1 place left {% plural %} {{ counter }} places left {% endblocktrans %})
+	                </div>
 		        {% endif %}
-		        <div class="applications-form">
-		            <div class="application-row">
-		                <div class="row header-row">
-		                    <div class="col-md-4 col-md-offset-8">
-		                        <div class="row">
-		                        {% for value, text in form.0.status.field.widget.choices %}
-		                            {% if value == 3 %}
-			                            <div class="col-md-4 centered">
-			                                <i class="fas fa-clock"></i>
-			                                <br/>
-                                            {% trans "Put on waitlist" %}
-			                            </div>
-		                            {% elif value == 4 %}
-			                            <div class="col-md-4 centered">
-			                                <i class="fas fa-check"></i>
-			                                <br/>
-                                            {% trans "Accept" %}
-			                            </div>
-		                            {% elif value == 5 %}
-			                            <div class="col-md-4 centered">
-			                                <i class="fas fa-times"></i>
-			                                <br/>
-                                            {% trans "Decline" %}
-			                            </div>
-		                            {% endif %}
-		                        {% endfor %}
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
+		        
+		        <div class="large-space">
+		            <a class="conference-collapse-link collapse-unedited-applications pull-right">
+		                {% trans "Collapse all processed applications" %}
+		            </a>
+			        <div class="clearfix"></div>
+		        </div>
+		        
+		        <div class="application-form">
 		
 		            {% for application in form %}
-		                <div class="application">
+		                <div class="white-content application application-open">
 			                {{ application.conference }}
 			                {{ application.user }}
 			                {{ application.id }}
 			                {{ application.information }}
 			                
-		                    <div class="row application-row white-content">
-		                        <div class="col-md-2 textfield transparent no-margin">
-		                            <b>{% trans "Name" %}</b> <br/> 
+		                    <div class="row application-row first">
+		                        {% comment %} Name {% endcomment %}
+		                        <div class="col-md-3 textfield transparent">
 		                            <a href="{{ application.instance.user.cosinnus_profile.get_absolute_url }}" target="_blank">
 		                                {{ application.instance.user|full_name }}
 		                            </a>
 		                        </div>
-		                        <div class="col-md-2 textfield transparent no-margin">
-		                            <b> {% trans "Location" %} </b> <br/>
-		                                {% if application.instance.user.cosinnus_profile.media_tag.location %}
-		                                    {{ application.instance.user.cosinnus_profile.media_tag.location }}
-		                                {% else %}
-		                                -
-		                                {% endif %}
+		                        {% comment %} Location {% endcomment %}
+		                        <div class="col-md-3 textfield transparent">
+		                            <b><i class="fa fa-fw fa-map-marker"></i></b>
+	                                {% if application.instance.user.cosinnus_profile.media_tag.location %}
+	                                    <a href="{{ application.instance.user.cosinnus_profile.media_tag.location_url }}" target="_blank">
+	                                    {{ application.instance.user.cosinnus_profile.media_tag.location }}
+	                                    </a>
+	                                {% else %}
+	                                    <i>{% trans "not specified" %}</i>
+	                                {% endif %}
 		                        </div>
-		                        <div class="col-md-2 textfield transparent no-margin">
-		                            <b>{% trans "First Choice" %}</b> <br/>
-		                            {% if application.instance.first_priorities_string %}
-		                                {{ application.instance.first_priorities_string }}
-		                            {% else %}
-		                                -
-		                            {% endif %}
-		                        </div>
-		                        <div class="col-md-2 textfield transparent no-margin">
-		                            <b>{% trans "Second Choice" %}</b> <br/>
-		                            {% if application.instance.second_priorities_string %}
-		                                {{ application.instance.second_priorities_string }}
-		                            {% else %}
-		                                -
-		                            {% endif %}
-		                        </div>
-		                        <div class="col-md-4 textfield transparent no-margin">
-		                            <div class="row">{{ application.status }}</div>
-		                        </div>
-		                    </div>
-		                    <div id="collapse{{ forloop.counter0 }}" {% if application.reason_for_rejection.value and application.status.value != 4  %}class="in"{% else %}class="collapse" style="height: 0px;"{% endif %}" role="tabpanel">
-		                        <div class="row">
-			                        {% captureas rejection_placeholder %}{% trans 'Reason for rejection' %} ({% trans "optional" %}){% endcaptureas %}
-		                            <div class="col-md-4">
-		                                 <div class="pull-right">
-		                                     {% include 'cosinnus/fields/default_field.html' with label=rejection_placeholder %}
-		                                 </div>
+		                        {% comment %} Controls {% endcomment %}
+		                        <div class="col-md-6 textfield transparent">
+		                            <a class="application-toggle-button" data-toggle="collapse" href="#collapse-application-details-{{ forloop.counter0 }}" title="{% trans 'show more ...' %}" aria-expanded="true" aria-controls="collapse-application-details-{{ forloop.counter0 }}">
+		                                <i class="fas fa-chevron-up toggle-button-state show-open"></i>
+                                        <i class="fas fa-chevron-down toggle-button-state show-collapsed"></i>
+		                            </a>
+		                            <div class="application-status-controls">
+		                                <div class="row">
+		                                    {{ application.status }}
+	                                    </div>
 		                            </div>
-			                        <div class="col-md-8">
-			                        {% include 'cosinnus/fields/default_field.html' with field=application.reason_for_rejection placeholder=rejection_placeholder %}
-			                        </div>
 		                        </div>
-		                   </div>
 		                    
-		                    <div class="row large-space application-row">
-		                        {% block application_info_row %}
-		                            {% if application.information.value %}
-		                                <div class="col-xs-12 textfield transparent no-margin">
-									        <b>{% trans 'Message to organizer' %}:</b>
-		                                    {{ application.information.value }}
-									    </div>
-		                            {% endif %}
-		                            <div class="col-xs-12 textfield transparent no-margin">
-		                                <b>{% trans 'Application submitted' %}:</b>
-			                            {{ application.created|date:"DATETIME_FORMAT" }}
-		                            </div>
-		                            {% comment %} 
-		                            <div class="btn btn-primary dropdown-button">
-		                                {% if application.information.value %}
-		                                    <i class="fas fa-exclamation"></i> 
-		                                {% endif %} 
-			                            <a role="button" data-toggle="collapse" href="#collapse{{ forloop.counter0 }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter0 }}">
-		                                    {% trans 'show more ...' %}
-			                            </a>
-		                            </div>
-		                             {% endcomment %}
-		                        {% endblock %}
-		                    </div>
-		                </div>
+		                    </div> <!-- end row 1 -->
+		                    
+		                    <div id="collapse-application-details-{{ forloop.counter0 }}" class="collapse-application-details in" class="collapse" role="tabpanel">
+		                    
+                                <div id="collapse-rejection-reason-{{ forloop.counter0 }}" {% if application.reason_for_rejection.value and application.status.value != 4  %}class="in"{% else %}class="collapse" style="height: 0px;"{% endif %}" role="tabpanel">
+                                    <div class="row application-row">
+	                                    <div class="col-xs-12 textfield transparent">
+	                                        {% trans 'Reason for rejection' as rejection_placeholder %}
+	                                        <b>{{ rejection_placeholder }} ({% trans "optional" %})</b>
+	                                        {% include 'cosinnus/fields/default_field.html' with field=application.reason_for_rejection placeholder=rejection_placeholder %}
+	                                    </div>
+	                                </div>
+                                </div> <!-- end rejection-reason collapse row-->
+		                    
+			                    <div class="row application-row">
+			                        {% comment %} First Choice {% endcomment %}
+			                        <div class="col-md-3 textfield transparent">
+			                            <b>{% trans "First Choice" %}:</b> 
+			                            <br/>
+			                            {% if application.instance.first_priorities_string %}
+			                                {{ application.instance.first_priorities_string }}
+			                            {% else %}
+			                                <i>{% trans "not specified" %}</i>
+			                            {% endif %}
+			                        </div>
+			                        {% comment %} Second choice {% endcomment %}
+			                        <div class="col-md-3 textfield transparent no-margin">
+			                            <b>{% trans "Second Choice" %}:</b> 
+			                            <br/>
+			                            {% if application.instance.second_priorities_string %}
+			                                {{ application.instance.second_priorities_string }}
+			                            {% else %}
+			                                <i>{% trans "not specified" %}</i>
+			                            {% endif %}
+			                        </div>
+			                        {% comment %} Full Details {% endcomment %}
+			                        <div class="col-md-6 textfield transparent application-details">
+			                            {% block application_info_row %}
+		                                    <div>
+		                                        <b>{% trans 'Application submitted' %}:</b>
+		                                        {{ application.created|date:"DATETIME_FORMAT" }}
+                                        	</div>                                    
+		                                {% endblock %}
+			                        </div>
+			                    </div> <!-- end row 2 -->
+			                    
+			                    <div class="row application-row">
+                                    {% comment %} Message to organizers {% endcomment %}
+                                    <div class="col-md-3 textfield transparent">
+                                        {% if application.information.value %}
+                                            <b>{% trans 'Message to the organizers' %}:</b>
+                                            {{ application.information.value }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+			                    
+                            </div> <!-- end details-collapse -->
+		                </div> <!-- end application -->
+		                    
 		            {% endfor %}
 		        </div>
 		        
-		        <hr/>
+		        <hr class="invisible"/>
 		        
 		        <div class="large-space">
 		            {% for form in assignment_formset %}

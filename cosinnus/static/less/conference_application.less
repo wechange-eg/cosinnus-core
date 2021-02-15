@@ -6,32 +6,77 @@
     }
 }
 
-.applications-form {
-    .application {
-        margin-left: 15px;
-        margin-right: 15px;
-    }
-    .application-row {
-        padding-left: 15px;
-        padding-right: 15px;
-        border-bottom: 2px solid @color-light-medium-gray;
-
-        .application-information {
-            min-height: 100px;
-        }
-    }
-
-    .header-row {
-        margin-bottom: 10px;
-    }
-
-    .dropdown-row {
-        position: relative;
-    }
-
-    .dropdown-button {
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
+.conference-collapse-link {
+    &, &:hover {
+        color: @app-main-color-dark;
+        cursor: pointer;
     }
 }
+
+.application-form {
+    .application {
+        padding: 0 15px;
+        margin-bottom: 8px;
+        
+        .application-row {
+            padding: 5px 15px 0 15px;
+            &.first {
+                padding: 20px 15px 5px 15px;
+            }
+        }
+        .application-details {
+            line-height: 18px;
+        }
+        .application-toggle-button {
+            position: absolute;
+            right: 6px;
+            top: 6px;
+            z-index: 1;
+            cursor: pointer;
+            color: @text-color;
+            text-decoration: none;
+        }
+        
+        .radio-group {
+            margin-right: 20px;
+        }
+        .application-radio-option {
+            white-space: nowrap;
+            &:not(:last-child) {
+                margin-right: 18px;
+            }
+            &, & label, & input {
+                color: @app-main-color-dark;
+                cursor: pointer;
+            }
+            & label, & i {
+                padding-left: 5px;
+            }
+            input:checked + label {
+                font-weight: bold;
+            }
+        }
+        
+        .cosinnus-field {
+            border: 1px solid @color-medium-gray;
+        }
+        
+        .toggle-button-state {
+            display: none;
+        }
+        .application-toggle-button.collapsed {
+            .toggle-button-state.show-collapsed {
+                display: inherit;
+            }
+        }
+        .application-toggle-button:not(.collapsed) {
+            .toggle-button-state.show-open {
+                display: inherit;
+            }
+        }
+        
+    }
+    
+}
+
+
