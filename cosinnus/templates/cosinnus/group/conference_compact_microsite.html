@@ -9,19 +9,25 @@
 		    {% if group.member_count > 0 %}
 				<div class="group-microsite-subheader-item">
 					<header>{% trans "Participants" %}</header>
-					<div class="group-microsite-subheader-item-value">{{ group.member_count }}</div>
+					<div class="group-microsite-subheader-item-value">
+					    {{ group.member_count }}
+				    </div>
 				</div>
             {% endif %}
             {% if group.participation_management.all.first.participants_limit %}
 				<div class="group-microsite-subheader-item">
 					<header>{% trans "Maximum Number of Participants" %}</header>
-					<div class="group-microsite-subheader-item-value">{{ group.participation_management.all.first.participants_limit }}</div>
+					<div class="group-microsite-subheader-item-value">
+					    {{ group.participation_management.all.first.participants_limit }}
+				    </div>
 				</div>
 		    {% endif %}
 			{% if group.conference_events.all %}
 				<div class="group-microsite-subheader-item">
 					<header>{% trans "Workshops" %}</header>
-					<div class="group-microsite-subheader-item-value">{{ group.conference_events.count }}</div>
+					<div class="group-microsite-subheader-item-value">
+					    {{ group.conference_events.count }}
+				    </div>
 				</div>
 			{% endif %}
 		</div>
