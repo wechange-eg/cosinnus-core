@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-15 16:29+0100\n"
-"PO-Revision-Date: 2021-02-15 16:29+0100\n"
+"PO-Revision-Date: 2021-02-16 17:43+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -343,7 +343,7 @@ msgid "Your participation application for %(team_name)s was declined!"
 msgstr "Dein Teilnahmeantrag für %(team_name)s wurde abgelehnt!"
 
 msgid "Your participation application was waitlisted"
-msgstr "Dein Teilnahmeantrag wurde auf die Wartelist gesetzt"
+msgstr "Dein Teilnahmeantrag wurde auf die Warteliste gesetzt"
 
 #, python-format
 msgid "Your participation application for %(team_name)s was waitlisted!"
