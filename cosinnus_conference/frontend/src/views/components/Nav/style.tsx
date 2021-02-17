@@ -43,7 +43,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: ".1rem .5rem",
     marginBottom: "1.2rem",
     "& div": {
-      whiteSpace: "nowrap",
+      whiteSpace: "normal",
       overflow: "hidden",
       textOverflow: "ellipsis",
     },
