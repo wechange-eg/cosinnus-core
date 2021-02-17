@@ -33,12 +33,15 @@ from cosinnus.core import signals
 from django import forms
 from django.core.exceptions import ValidationError
 from cosinnus.models.bbb_room import BBBRoom, BBBRoomVisitStatistics
-from cosinnus.models.conference import CosinnusConferenceRoom
+from cosinnus.models.conference import CosinnusConferenceRoom,\
+    CosinnusConferenceSettings
 from cosinnus.models.conference import ParticipationManagement, CosinnusConferenceApplication
 from cosinnus.models.managed_tags import CosinnusManagedTag,\
     CosinnusManagedTagAssignment, CosinnusManagedTagType
 from cosinnus.models.newsletter import Newsletter
 from cosinnus.models.user_import import CosinnusUserImport
+from django.contrib.contenttypes.admin import GenericTabularInline,\
+    GenericStackedInline
 
 class SingleDeleteActionMixin(object):
     
@@ -132,6 +135,12 @@ class CosinnusGroupInviteTokenAdmin(admin.ModelAdmin):
 admin.site.register(CosinnusGroupInviteToken, CosinnusGroupInviteTokenAdmin)
 
 
+class CosinnusConferenceSettingsInline(GenericStackedInline):
+    model = CosinnusConferenceSettings
+    template = 'cosinnus/admin/conference_setting_help_text_stacked_inline.html'
+    extra = 0
+    max_num = 1
+
 class PermanentRedirectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
     list_display = ('to_group', 'from_slug', 'from_type', 'from_portal',)
     list_filter = ('from_portal', 'from_slug', 'to_group')
@@ -188,6 +197,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     readonly_fields = ('created', 'last_modified')
     raw_id_fields = ('parent',)
     exclude = ('is_conference', 'conference_is_running')
+    inlines = [CosinnusConferenceSettingsInline]
     
     ALL_TYPES_CLASSES = [CosinnusProject, CosinnusSociety, CosinnusConference]
     
@@ -408,6 +418,7 @@ class CosinnusPortalAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'site', 'public')
     prepopulated_fields = {'slug': ('name', )}
     readonly_fields = ('saved_infos',)
+    inlines = [CosinnusConferenceSettingsInline]
     
     def queryset(self, request):
         """ Allow portals to be accessed only by superusers and Portal-Admins """
@@ -696,6 +707,7 @@ class CosinnusConferenceRoomAdmin(admin.ModelAdmin):
     list_display = ('title', 'id', 'type', 'group', 'sort_index')
     list_filter = ('group', 'group__portal')
     search_fields = ('slug', 'title',)
+    inlines = [CosinnusConferenceSettingsInline]
 
 admin.site.register(CosinnusConferenceRoom, CosinnusConferenceRoomAdmin)
 

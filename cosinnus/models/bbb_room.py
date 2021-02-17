@@ -15,7 +15,7 @@ from django.urls.base import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
-from cosinnus.apis import bigbluebutton as bbb
+from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
 from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils import bigbluebutton as bbb_utils
 from cosinnus.utils.permissions import check_user_superuser
@@ -112,9 +112,19 @@ class BBBRoom(models.Model):
     
     # cache key for each rooms participants
     PARTICIPANT_COUNT_CACHE_KEY = 'cosinnus/core/bbbroom/%d/participants' # bbb-room-id
+    
+    # the BigBlueButtonAPI instance for this room
+    _bbb_api = None
 
     def __str__(self):
         return str(self.meeting_id)
+    
+    @property
+    def bbb_api(self):
+        if self._bbb_api is None:
+            # initialize bbb api instance with this room
+            self._bbb_api = BigBlueButtonAPI(source_object=self)
+        return self._bbb_api
     
     def save(self, *args, **kwargs):
         """ Assign current portal """
@@ -125,14 +135,14 @@ class BBBRoom(models.Model):
         super(BBBRoom, self).save(*args, **kwargs)
 
     def end(self):
-        bbb.end_meeting(self.meeting_id, self.moderator_password)
+        self.bbb_api.end_meeting(self.meeting_id, self.moderator_password)
         self.ended = True
         self.save()
     
     def retrieve_remote_user_count(self):
         """ Non-cached function to retrieve the remote user count for this meeting """
         try:
-            meeting_info = bbb.meeting_info(self.meeting_id, self.moderator_password)
+            meeting_info = self.bbb_api.meeting_info(self.meeting_id, self.moderator_password)
             if not meeting_info:
                 return 0
             return meeting_info.get('participantCount', 0)
@@ -206,7 +216,7 @@ class BBBRoom(models.Model):
             (as opposed to never started or suspended) """
         if self.meeting_id and self.attendee_password:
             try:
-                meeting_info = bbb.meeting_info(self.meeting_id, self.attendee_password) 
+                meeting_info = self.bbb_api.meeting_info(self.meeting_id, self.attendee_password) 
                 if meeting_info and meeting_info.get('running', False) == 'true':
                     return True
             except Exception as e:
@@ -223,7 +233,7 @@ class BBBRoom(models.Model):
 
     def restart(self):
         event = self.event
-        m_xml = bbb.start(
+        m_xml = self.bbb_api.start(
             name=self.name,
             meeting_id=self.meeting_id,
             welcome=self.welcome_message,
@@ -249,7 +259,7 @@ class BBBRoom(models.Model):
     @classmethod
     def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=None,
                moderator_password=None, max_participants=None, voice_bridge=None, options=None,
-               room_type=None, presentation_url=None):
+               room_type=None, presentation_url=None, source_object=None):
         """ Creates a new BBBRoom and crete a room on the remote bbb-server.
 
         :param name: Name of the BBBRoom
@@ -281,6 +291,8 @@ class BBBRoom(models.Model):
 
         :param presentation_url: Publicly available URL of presentation file to be pre-uploaded as slides to BBB room
         :type: str
+        
+        :param source_object: The object the room is attached to. Check `CosinnusConferenceSettings.get_for_object()` for valid arguments.
 
         :type: dict
         """
@@ -302,7 +314,8 @@ class BBBRoom(models.Model):
         if max_participants is not None and settings.BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE:
             max_participants += 1
         
-        m_xml = bbb.start(
+        bbb_api = BigBlueButtonAPI(source_object=source_object)
+        m_xml = bbb_api.start(
             name=name,
             meeting_id=meeting_id,
             welcome=meeting_welcome,
@@ -337,7 +350,9 @@ class BBBRoom(models.Model):
         if not meeting_json:
             meeting.ended = True
         meeting.save()
-
+        
+        # set cached meeting api settings
+        meeting._bbb_api = bbb_api
         return meeting
     
     def build_extra_join_parameters(self):
@@ -356,7 +371,7 @@ class BBBRoom(models.Model):
         username = full_name(user)
         if self.meeting_id and password:
             extra_join_parameters = self.build_extra_join_parameters()
-            return bbb.join_url(self.meeting_id, username, password, extra_parameter_dict=extra_join_parameters)
+            return self.bbb_api.join_url(self.meeting_id, username, password, extra_parameter_dict=extra_join_parameters)
         return ''
 
     def get_absolute_url(self):

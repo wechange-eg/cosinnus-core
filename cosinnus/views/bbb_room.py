@@ -10,7 +10,6 @@ from django.http.response import HttpResponseNotFound, \
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.base import RedirectView, View
 
-from cosinnus.apis import bigbluebutton as bbb
 from cosinnus.conf import settings
 from cosinnus.core.decorators.views import redirect_to_not_logged_in, \
     redirect_to_403

@@ -578,10 +578,8 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
         help_text='A dict storage for all choice lists for the dynamic fields of type `DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT`',
         encoder=DjangoJSONEncoder)
 
-    bbb_server = models.PositiveSmallIntegerField(_('BBB Server'), blank=False,
-        default=0, choices=settings.COSINNUS_BBB_SERVER_CHOICES,
-        help_text='The chosen BBB-Server/Cluster for the entire portal. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
-    
+    conference_settings_assignments = GenericRelation('cosinnus.CosinnusConferenceSettings')
+
     # exact time when last digest was sent out for each of the period settings
     SAVED_INFO_LAST_DIGEST_SENT = 'last_digest_sent_for_period_%d'
     membership_class = CosinnusPortalMembership
@@ -822,7 +820,8 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     sdgs = PostgresJSONField(default=list, blank=True, null=True)
     
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
-
+    conference_settings_assignments = GenericRelation('cosinnus.CosinnusConferenceSettings')
+    
     objects = CosinnusGroupManager()
 
     _portal_id = None

@@ -23,8 +23,101 @@ from django.utils.crypto import get_random_string
 import logging
 from cosinnus.views.mixins.group import ModelInheritsGroupReadWritePermissionsMixin
 from cosinnus.utils.permissions import check_user_superuser
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey,\
+    GenericRelation
+from cosinnus.models.tagged import get_tag_object_model
+from annoying.functions import get_object_or_None
 
 logger = logging.getLogger('cosinnus')
+
+
+class CosinnusConferenceSettings(models.Model):
+    """ A BBB settings container able to be attached to various objects to provide
+        a granular hierarchy on settings. 
+        Each level in the chain of the hierarchy for a BBBRoom object will be
+        checked for this settings object, and if not found, the next higher level
+        settings will be inherited. """
+    
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey("content_type", "object_id")
+    
+    bbb_server_choice = models.PositiveSmallIntegerField(_('BBB Server'), blank=False,
+        default=0, choices=settings.COSINNUS_BBB_SERVER_CHOICES,
+        help_text='The chosen BBB-Server/Cluster setting for the generic object. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
+    
+    class Meta(object):
+        app_label = 'cosinnus'
+        verbose_name = _('Cosinnus Conference Setting')
+        verbose_name_plural = _('Cosinnus Conference Settings')
+        unique_together = (('content_type', 'object_id',),)
+    
+    @classmethod
+    def get_for_object(cls, source_object=None):
+        """ Given any object in the BBB settings hierarchy chain,
+            checks if there is a settings object attached and returns it,
+            or checks the next higher object in the chain.
+            If arrived at CosinnusPortal, and no setings object is found,
+            None is returned.
+            
+            The currently supported source_object attachment points for CosinnusConferenceSettings are, 
+            in order of the hierarchy chain:
+                - cosinnus_event.ConferenceEvent 
+                - cosinnus.CosinnusConferenceRoom
+                - cosinnus.CosinnusGroup
+                - cosinnus.CosinnusPortal
+            
+            Furthermore, this function will accept these models as source_object 
+            and use the resolved cosinnus_event.ConferenceEvent as chain starting point, if there is one:
+                - cosinnus.BBBRoom 
+            
+            @param source_object: Any object. If it matches a model valid for the chain, we check the chain.
+                                    If None is supplied, the portal default settings will be returned.
+            .
+        """
+        from cosinnus.models.bbb_room import BBBRoom
+        try:
+            from cosinnus_event.models import ConferenceEvent # noqa
+        except ImportError:
+            ConferenceEvent = None
+            
+        # resolve model types that can be in the hierarchy chain, but not be an attachment point
+        # for conference settings
+        if source_object is not None:
+            # BBBRoom: get the tagged object for this room if there is one
+            if type(source_object) is BBBRoom and ConferenceEvent is not None:
+                source_object = get_object_or_None(ConferenceEvent, media_tag__bbb_room=source_object)
+        
+        # if no object is given, use the portal as default
+        obj = source_object or CosinnusPortal.get_current()
+        
+        # find and return conference settings if attached to our current object
+        conference_settings = None
+        try:
+            conference_settings = obj.conference_settings_assignments.all()[0]
+        except:
+            pass
+        if conference_settings:
+            return conference_settings
+        
+        # no settings found; handle next object in chain:
+        
+        # CosinnusPortal --> (End of chain - no settings seem to be configured anywhere)
+        if source_object is None or type(obj) is CosinnusPortal:
+            return None
+        # ConferenceEvent --> CosinnusConferenceRoom
+        if ConferenceEvent is not None and type(obj) is ConferenceEvent:
+            return cls.get_for_object(obj.room)
+        # ConferenceRoom --> CosinnusGroup
+        if type(obj) is CosinnusConferenceRoom:
+            return cls.get_for_object(obj.group)
+        # CoinnusGroup --> CosinnusPortal
+        if type(obj) is CosinnusConferenceRoom:
+            return cls.get_for_object(obj.portal)
+        
+        # if no models matched the chain, return the default settings
+        return cls.get_for_object(None)
 
 
 class CosinnusConferenceRoomQS(models.query.QuerySet):
@@ -139,6 +232,8 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
     target_result_group = models.OneToOneField(settings.COSINNUS_GROUP_OBJECT_MODEL, 
         verbose_name=_('Result Project'), related_name='conference_room',
         null=True, blank=True, on_delete=models.SET_NULL)
+    
+    conference_settings_assignments = GenericRelation('cosinnus.CosinnusConferenceSettings')
     
     objects = CosinnusConferenceRoomManager()
     
