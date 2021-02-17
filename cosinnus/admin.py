@@ -15,7 +15,8 @@ from cosinnus.models.group import CosinnusGroupMembership,\
 from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN
 from cosinnus.models.profile import get_user_profile_model,\
     GlobalBlacklistedEmail, GlobalUserNotificationSetting
-from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
+from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory,\
+    get_tag_object_model, BaseTagObject
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.feedback import CosinnusReportedObject,\
     CosinnusSentEmailLog, CosinnusFailedLoginRateLimitLog
@@ -42,6 +43,7 @@ from cosinnus.models.newsletter import Newsletter
 from cosinnus.models.user_import import CosinnusUserImport
 from django.contrib.contenttypes.admin import GenericTabularInline,\
     GenericStackedInline
+from django_reverse_admin import ReverseModelAdmin
 
 class SingleDeleteActionMixin(object):
     
@@ -618,7 +620,8 @@ class CosinnusTopicCategoryAdmin(admin.ModelAdmin):
 admin.site.register(CosinnusTopicCategory, CosinnusTopicCategoryAdmin)
 
 
-class BaseTaggableAdminMixin(object):
+
+class BaseTaggableAdmin(ReverseModelAdmin):
     """ Base mixin for the common properties for a BaseTaggableObject admin  """
     list_display = ['title', 'group', 'creator', 'created']
     list_filter = ['group__portal',]
@@ -626,11 +629,21 @@ class BaseTaggableAdminMixin(object):
     readonly_fields = ['media_tag', 'attached_objects']
     inlines = []
     raw_id_fields = ['group', 'creator']
+    inline_type = 'stacked'
+    inline_reverse = [
+        ('media_tag', {'fields': [
+                'visibility',
+                'location',
+                'topics',
+                'text_topics',
+                'bbb_room',
+            ]}),
+    ]
 
 
-class BaseHierarchicalTaggableAdminMixin(BaseTaggableAdminMixin):
-    list_display = BaseTaggableAdminMixin.list_display + ['path', 'is_container']
-    list_filter = BaseTaggableAdminMixin.list_filter + ['is_container']
+class BaseHierarchicalTaggableAdmin(BaseTaggableAdmin):
+    list_display = BaseTaggableAdmin.list_display + ['path', 'is_container']
+    list_filter = BaseTaggableAdmin.list_filter + ['is_container']
 
 
 class GlobalUserNotificationSettingAdmin(admin.ModelAdmin):

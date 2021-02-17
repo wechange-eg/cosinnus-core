@@ -83,6 +83,7 @@ setup(
         'django-otp==0.5.2',
         'django-phonenumber-field==1.1.0',
         'django-polymorphic==0.7.2',
+        'django-reverse-admin==2.9.4',
         'django-sekizai==0.10.0',
         'django-simple-captcha==0.5.7',
         'django-suit==0.2.26',
