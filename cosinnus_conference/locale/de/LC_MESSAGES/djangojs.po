@@ -58,7 +58,7 @@ msgstr "Chats"
 #. undefined
 #: locale/src/views/App.json
 msgid "Conference is being prepared"
-msgstr "Die Konferenzumgebung ist noch nicht eingerichtet"
+msgstr "Die Tagungsumgebung ist noch nicht eingerichtet"
 
 #. [Connect with someone via videochat for 5 minutes]
 #. defaultMessage is:
@@ -147,7 +147,7 @@ msgstr "Findet gerade statt"
 #. undefined
 #: locale/src/views/components/Nav/index.json
 msgid "Manage conference"
-msgstr "Konferenz bearbeiten"
+msgstr "Tagung bearbeiten"
 
 #. [Manage events]
 #. defaultMessage is:
@@ -267,7 +267,7 @@ msgstr "Repräsentierte Organisationen"
 #. undefined
 #: locale/src/views/App.json
 msgid "The conference is being prepared, please try again at a later date."
-msgstr "Die Konferenzumgebung wird noch gepflegt, bitte versuchen Sie es später erneut."
+msgstr "Die Tagungsumgebung wird noch gepflegt, bitte versuchen Sie es später erneut."
 
 #. [Today]
 #. defaultMessage is:
@@ -356,9 +356,9 @@ msgid "Are you sure you want to leave this event?"
 msgstr "Sind Sie sicher, dass Sie diese Veranstaltung verlassen wollen?"
 
 msgid ""
-"You're currently attending an event. Are you sure you want to leave? "
-"Tip: You can open a new tab or window instead."
+"You're currently attending an event. Are you sure you want to leave? Tip: You can "
+"open a new tab or window instead."
 msgstr ""
-"Sie nehmen derzeit an einer Veranstaltung teil. Sind Sie sicher, dass Sie "
-"gehen möchten? Tipp: Sie können stattdessen eine neue Registerkarte oder "
-"ein neues Fenster öffnen."
+"Sie nehmen derzeit an einer Veranstaltung teil. Sind Sie sicher, dass Sie gehen "
+"möchten? Tipp: Sie können stattdessen eine neue Registerkarte oder ein neues "
+"Fenster öffnen."

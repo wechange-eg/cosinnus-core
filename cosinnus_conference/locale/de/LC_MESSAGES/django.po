@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-05 14:01+0100\n"
-"PO-Revision-Date: 2021-02-05 14:03+0100\n"
+"PO-Revision-Date: 2021-02-17 14:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -19,11 +19,11 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 msgid "Conferences"
-msgstr "Konferenzen"
+msgstr "Tagungen"
 
 msgctxt "the_app"
 msgid "conference"
-msgstr "Konferenz"
+msgstr "Tagung"
 
 msgid "End date must be before start date"
 msgstr "Enddatum muss vor dem Startdatum liegen"
@@ -60,7 +60,7 @@ msgid "Upload File"
 msgstr "Datei hochladen"
 
 msgid "Go to conference"
-msgstr "Zur Konferenz"
+msgstr "Zur Tagung"
 
 msgid "Conference successfully started and user accounts activated"
 msgstr "Tagung erfolgreich gestartet und Nutzerkonten aktiviert"
@@ -99,10 +99,10 @@ msgid "The room was deleted successfully."
 msgstr "Raum erfolgreich gelöscht."
 
 msgid "The supplied Conference Room could not be found"
-msgstr "Gewünschter Konferenzraum nicht gefunden"
+msgstr "Gewünschter Tagungsraum nicht gefunden"
 
 msgid "Conference reminder settings have been successfully updated."
-msgstr "Die Einstellungen für die Erinnerung an die Konferenz wurden erfolgreich aktualisiert."
+msgstr "Die Einstellungen für die Erinnerung an die Tagung wurden erfolgreich aktualisiert."
 
 msgid "A test email has been sent to your email address."
 msgstr "Es wurde eine Test-E-Mail an deine E-Mail-Adresse gesendet."
@@ -222,10 +222,10 @@ msgstr "Deine Änderungen wurden übernommen."
 #~ msgstr "Raum \"%(title)s\" bearbeiten"
 
 #~ msgid "Create Room"
-#~ msgstr "Konferenzraum erstellen"
+#~ msgstr "Tagungsraum erstellen"
 
 #~ msgid "Conference Room Management"
-#~ msgstr "Konferenzräume verwalten"
+#~ msgstr "Tagungsräume verwalten"
 
 #~ msgid "Edit Room"
 #~ msgstr "Raum bearbeiten"
@@ -237,7 +237,7 @@ msgstr "Deine Änderungen wurden übernommen."
 #~ msgstr "Raumtyp"
 
 #~ msgid "TODO: Room Type Lobby description text"
-#~ msgstr "Die Lobby ist der zentrale Einstiegspunkt für Teilnehmenden. Hier erscheint die Agenda der Konferenz"
+#~ msgstr "Die Lobby ist der zentrale Einstiegspunkt für Teilnehmenden. Hier erscheint die Agenda der Tagung"
 
 #~ msgid "TODO: Room Type Stage description text"
 #~ msgstr "Die Bühne dient dazu, einen Stream einzubinden, z.B. aus YouTube oder Vimeo. Daneben erscheint ein Chat"
@@ -249,7 +249,7 @@ msgstr "Deine Änderungen wurden übernommen."
 #~ msgstr "In Diskussions-Räumen erhält jede Veranstaltung eine Videokonferenz. Diese können die Präsentierenden auch moderieren. Unterscheidet sich von den Workshop-Räumen bislang ausschließlich in der Darstellung der Agenda. Workshop: Kacheln, Diskussionen: Liste"
 
 #~ msgid "TODO: Room Type Coffee Tables description text"
-#~ msgstr "Im Café kannst du beliebig viele Café-Tische erstellen. Dort können sich die Teilnehmenden begegnen und eine Videokonferenz direkt mit Webcam und Mikrofon starten"
+#~ msgstr "Im Café kannst du beliebig viele Café-Tische erstellen. Dort können sich die Teilnehmenden begegnen und eine VideoTagung direkt mit Webcam und Mikrofon starten"
 
 #~ msgid "TODO: Room Type Results description text"
 #~ msgstr "Binde ein Projekt ein, das du als Ergebnisspeicher bzw. zu Dokumentationszwecken nutzt"
@@ -315,7 +315,7 @@ msgstr "Deine Änderungen wurden übernommen."
 #~ msgstr "Bearbeiten"
 
 #~ msgid "Create Conference Event"
-#~ msgstr "Konferenzveranstaltung erstellen"
+#~ msgstr "Tagungsveranstaltung erstellen"
 
 #~ msgid "Do you really want to delete room \"%(title)s\"?"
 #~ msgstr "Soll der Raum \"%(title)s\" wirklich gelöscht werden?"

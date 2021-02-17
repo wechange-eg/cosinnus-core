@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-15 16:29+0100\n"
-"PO-Revision-Date: 2021-02-16 17:43+0100\n"
+"PO-Revision-Date: 2021-02-17 14:28+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -424,30 +424,30 @@ msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "\"%(team_name)s\" wurde nach %(portal_name)s verschoben!"
 
 msgid "A user created a new conference"
-msgstr "Ein/e Benutzer/in hat eine neue Konferenz erstellt"
+msgstr "Ein/e Benutzer/in hat eine neue Tagung erstellt"
 
 #, python-format
 msgid "%(sender_name)s created the conference %(object_name)s"
-msgstr "%(sender_name)s hat die Konferenz \"%(object_name)s\" erstellt"
+msgstr "%(sender_name)s hat die Tagung \"%(object_name)s\" erstellt"
 
 #, python-format
 msgid "%(sender_name)s created %(count)d conferences"
-msgstr "%(sender_name)s hat %(count)d Konferenzen erstellt"
+msgstr "%(sender_name)s hat %(count)d Tagungen erstellt"
 
 #, python-format
 msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgstr "Eine neue Konferenz: \"%(object_name)s\" wurde in %(team_name)s eingetragen."
+msgstr "Eine neue Tagung: \"%(object_name)s\" wurde in %(team_name)s eingetragen."
 
 msgctxt "email campaign button label to apply for a conference"
 msgid "Apply now!"
 msgstr "Jetzt Teilnahme beantragen!"
 
 msgid "View conference"
-msgstr "Konferenz ansehen"
+msgstr "Tagung ansehen"
 
 #, python-format
 msgid "%(sender_name)s invited you to apply for the conference %(team_name)s"
-msgstr "%(sender_name)s hat dich eingeladen, bei der Konferenz %(team_name)s Teilnahme zu beantragen"
+msgstr "%(sender_name)s hat dich eingeladen, bei der Tagung %(team_name)s Teilnahme zu beantragen"
 
 #, python-format
 msgid "%(sender_name)s invited you to apply for \"%(team_name)s\" on %(portal_name)s! <br/><br/> To apply, please click on the link below."
@@ -788,7 +788,7 @@ msgid "the welcome message, that is displayed to attendees"
 msgstr "die Begrüßungsmeldung, die den Teilnehmern angezeigt wird"
 
 msgid "number for dialing into the conference via telephone"
-msgstr "Nummer zur Einwahl in die Konferenz per Telefon"
+msgstr "Nummer zur Einwahl in die Tagung per Telefon"
 
 msgid "pin to enter for telephone participants"
 msgstr "Pin zur Eingabe für Telefonteilnehmer"
@@ -865,7 +865,7 @@ msgid "Short Description"
 msgstr "Kurze Beschreibung"
 
 msgid "Conference Room Type"
-msgstr "Konferenzraum Typ"
+msgstr "Tagungsraum Typ"
 
 msgid "Is visible"
 msgstr "Ist sichtbar"
@@ -899,10 +899,10 @@ msgid "Result Project"
 msgstr "Ergebnisprojekt"
 
 msgid "Conference Room"
-msgstr "Konferenzraum"
+msgstr "Tagungsraum"
 
 msgid "Conference Rooms"
-msgstr "Konferenzräume"
+msgstr "Tagungsräume"
 
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
@@ -970,13 +970,13 @@ msgid "Accepted"
 msgstr "ToS angenommen"
 
 msgid "Confernence Application"
-msgstr "Konferenz Anmeldung"
+msgstr "Tagung Anmeldung"
 
 msgid "Cosinnus conference application"
-msgstr "Cosinnus Konferenz-Teilnahmeantrag"
+msgstr "Cosinnus Tagungs-Teilnahmeantrag"
 
 msgid "Cosinnus conference applications"
-msgstr "Cosinnus Konferenz-Teilnahmeanträge"
+msgstr "Cosinnus Tagungs-Teilnahmeanträge"
 
 msgid "Note from the organizers"
 msgstr "Nachricht der Veranstalter/innen"
@@ -1148,10 +1148,10 @@ msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Wird vorgezogen gegenüber sämtlichem anderen CSS."
 
 msgid "Video Conference Server"
-msgstr "Videokonferenz-Server"
+msgstr "VideoTagungs-Server"
 
 msgid "For old-style events meeting popups only! If entered, will enable Jitsi-like video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
-msgstr "Nur für Meeting-Popups für Veranstaltungen im alten Stil! Wenn eingegeben, ermöglicht es Jitsi-ähnliche Videokonferenz-Funktionalitäten auf der gesamten Plattform. Es muss bis zu dem Punkt eine URL sein, ab dem beliebige Raumnamen an die URL angehängt werden können."
+msgstr "Nur für Meeting-Popups für Veranstaltungen im alten Stil! Wenn eingegeben, ermöglicht es Jitsi-ähnliche VideoTagungs-Funktionalitäten auf der gesamten Plattform. Es muss bis zu dem Punkt eine URL sein, ab dem beliebige Raumnamen an die URL angehängt werden können."
 
 msgid "Dynamic choice field choices"
 msgstr "Dynamische Auswahlfeld Wahlmöglichkeiten"
@@ -1221,10 +1221,10 @@ msgid "Embedded Dashboard HTML"
 msgstr "Eingebettetes Dashboard-HTML"
 
 msgid "Conference theme color"
-msgstr "Konferenzthemenfarbe"
+msgstr "Tagungsthemenfarbe"
 
 msgid "Conference theme color for conference groups only (css hex value, with or without \"#\")"
-msgstr "Konferenzthemenfarbe nur für Konferenzgruppen (css-Hex-Wert, mit oder ohne \"#\")"
+msgstr "Tagungsthemenfarbe nur für Tagungsgruppen (css-Hex-Wert, mit oder ohne \"#\")"
 
 msgid "Deactivated Apps"
 msgstr "Deaktivierte Apps"
@@ -1269,7 +1269,7 @@ msgid "Determins whether a group that is marked as conference is running"
 msgstr "Entscheidet darüber ob eine Tagung als 'gerade laufend' makiert wird"
 
 msgid "Determins if application management is visible in conference administration."
-msgstr "Legt fest, ob die Anwendungsverwaltung in der Konferenzverwaltung sichtbar ist."
+msgstr "Legt fest, ob die Anwendungsverwaltung in der Tagungsverwaltung sichtbar ist."
 
 msgid "Parent Group"
 msgstr "Übergeordnete Gruppe"
@@ -2175,10 +2175,10 @@ msgid "Conference Management"
 msgstr "Tagungsmanagement"
 
 msgid "Conference Room Management"
-msgstr "Konferenzräume verwalten"
+msgstr "Tagungsräume verwalten"
 
 msgid "Conference Event Management"
-msgstr "Konferenzveranstaltungen verwalten"
+msgstr "Tagungsveranstaltungen verwalten"
 
 msgid "Edit Conditions of Participation"
 msgstr "Teilnahmebedingungen bearbeiten"
@@ -2531,13 +2531,13 @@ msgid "Save changes"
 msgstr "Änderungen speichern"
 
 msgid "Apply for conference participation"
-msgstr "Anmeldung zur Konferenzteilnahme"
+msgstr "Anmeldung zur Tagungsteilnahme"
 
 msgid "Withdraw"
 msgstr "Zurückziehen"
 
 msgid "Conference Applications"
-msgstr "Konferenz-Teilnahmeanträge"
+msgstr "Tagungs-Teilnahmeanträge"
 
 msgid "Manage participation applications"
 msgstr "Teilnahmeanträge bearbeiten"
@@ -2702,17 +2702,17 @@ msgid "Conference reminders"
 msgstr "Erinnerungs-Mails"
 
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
-msgstr "Hier gibt es die Möglichkeit, einen Informationstext für alle Mitglieder der Konferenz vorzubereiten. Dieser wird automatisch 1 Woche, 1 Tag und / oder 1 Stunde vor Konferenzbeginn automatisch versendet. Die Benachrichtigungsmail enthält immer einen Link auf die Konferenz"
+msgstr "Hier gibt es die Möglichkeit, einen Informationstext für alle Mitglieder der Tagung vorzubereiten. Dieser wird automatisch 1 Woche, 1 Tag und / oder 1 Stunde vor Tagungsbeginn automatisch versendet. Die Benachrichtigungsmail enthält immer einen Link auf die Tagung"
 
 msgid "Send 1 week before conference"
-msgstr "1 Woche vor Konferenz versenden"
+msgstr "1 Woche vor Tagung versenden"
 
 #, python-format
 msgid "Status info: sent %(sent_date)s"
 msgstr "Status-Info: wurde versendet am %(sent_date)s"
 
 msgid "This e-mail will be sent out 7 days before and at the same time of day as the conference start date."
-msgstr "Diese E-Mail wird 7 Tage vor und zur selben Uhrzeit des Konferenz-Startdatums verschickt."
+msgstr "Diese E-Mail wird 7 Tage vor und zur selben Uhrzeit des Tagungs-Startdatums verschickt."
 
 msgid "Invitation subject"
 msgstr "Einladungsbetreff"
@@ -2724,13 +2724,13 @@ msgid "Send test to myself"
 msgstr "Test-Mail an mich"
 
 msgid "Send 1 day before conference"
-msgstr "1 Tag vor Konferenz versenden"
+msgstr "1 Tag vor Tagung versenden"
 
 msgid "This e-mail will be sent out 24 hours before the conference start date."
-msgstr "Diese E-Mail wird 24 Stunden vor dem Konferenz-Startdatum verschickt."
+msgstr "Diese E-Mail wird 24 Stunden vor dem Tagungs-Startdatum verschickt."
 
 msgid "Send 1 hour before conference"
-msgstr "1 Stunde vor Konferenz versenden"
+msgstr "1 Stunde vor Tagung versenden"
 
 #, python-format
 msgid "Edit Room “%(title)s”"
@@ -2779,7 +2779,7 @@ msgid "Sort index"
 msgstr "Sortierindex"
 
 msgid "Number by which rooms are sorted in ascending order in the conference room navigation list"
-msgstr "Nummer, nach der Räume in der Navigationsliste der Konferenzräume aufsteigend sortiert werden"
+msgstr "Nummer, nach der Räume in der Navigationsliste der Tagungsräume aufsteigend sortiert werden"
 
 msgid "A short description or topic for your room. Will be shown on top of the room page."
 msgstr "Eine kurze Beschreibung oder ein Thema für deinen Raum. Wird oben auf der Raumseite angezeigt."
@@ -2800,7 +2800,7 @@ msgid "hidden"
 msgstr "versteckt"
 
 msgid "Create Conference Event"
-msgstr "Konferenzveranstaltung erstellen"
+msgstr "Tagungsveranstaltung erstellen"
 
 #, python-format
 msgid "Do you really want to delete room \"%(title)s\"?"
@@ -3014,7 +3014,7 @@ msgid "Maximum Number of Participants"
 msgstr "Maximale Anzahl von Teilnehmenden"
 
 msgid "About the conference"
-msgstr "Über die Konferenz"
+msgstr "Über die Tagung"
 
 msgctxt "time"
 msgid "o'clock"
@@ -3028,7 +3028,7 @@ msgid "More infos..."
 msgstr "Mehr Informationen..."
 
 msgid "You will now receive notifications for content posted in this conference."
-msgstr "Du wirst jetzt Benachrichtigungen für Inhalte in dieser Konferenz erhalten."
+msgstr "Du wirst jetzt Benachrichtigungen für Inhalte in dieser Tagung erhalten."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Contact"
@@ -3064,7 +3064,7 @@ msgid "Membership requests"
 msgstr "Mitglieder-Anträge"
 
 msgid "Please manage participation applications via the applications page. You can disable the participation management in the conference settings."
-msgstr "Bitte bearbeite Teilnahmeanträge auf der Teilnahmeantragsseite. Du kannst die Antragsstellung in den Konferenz-Einstellungen deaktivieren."
+msgstr "Bitte bearbeite Teilnahmeanträge auf der Teilnahmeantragsseite. Du kannst die Antragsstellung in den Tagungs-Einstellungen deaktivieren."
 
 msgid "Manage applications"
 msgstr "Teilnahmeanträge bearbeiten"
@@ -3278,7 +3278,7 @@ msgid "Facebook-Integration"
 msgstr "Facebook-Integration"
 
 msgid "Conference start and end date and time"
-msgstr "Konferenz Start-und Endzeit"
+msgstr "Tagung Start-und Endzeit"
 
 msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgstr "Die Start- und Endzeit werden für Erinnerungs-E-Mails benutzt (wenn eingesetllt). Kann mehrere Tage beinhalten."
@@ -3287,13 +3287,13 @@ msgid "Application method"
 msgstr "Art des Teilnahmeantrags"
 
 msgid "Require participation applications for this conference"
-msgstr "Teilnahmeanträge für diese Konferenz erforderlich"
+msgstr "Teilnahmeanträge für diese Tagung erforderlich"
 
 msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
-msgstr "Anstelle der regulären Mitgliedschaftsantragsstellung kann hier die Antragsstellung per Anmeldeformular aktiviert werden. Die Konferenzadministratoren können alle Anträge sehen und auf der Teilnahmeantragsseite annehmen/ablehnen."
+msgstr "Anstelle der regulären Mitgliedschaftsantragsstellung kann hier die Antragsstellung per Anmeldeformular aktiviert werden. Die Tagungsadministratoren können alle Anträge sehen und auf der Teilnahmeantragsseite annehmen/ablehnen."
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
-msgstr "In welchen Projekt- oder Gruppenkalendern soll die Konferenz angezeigt werden?"
+msgstr "In welchen Projekt- oder Gruppenkalendern soll die Tagung angezeigt werden?"
 
 msgid "Select Projects/Groups"
 msgstr "Projekte/Gruppen auswählen"
@@ -3323,13 +3323,13 @@ msgid "This description will be publicly visible."
 msgstr "Diese Beschreibung wird öffentlich sichtbar sein."
 
 msgid "Conference Theme Color"
-msgstr "Konferenzfarbe"
+msgstr "Tagungsfarbe"
 
 msgid "Hex code (example: #A2A2A2)"
 msgstr "Hex-Code (Beispiel: #A2A2A2)"
 
 msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
-msgstr "Farbe im Hex-Code, die als primäre Farbe für die Konferenzumgebung verwendet wird (mit oder ohne führendes '#')"
+msgstr "Farbe im Hex-Code, die als primäre Farbe für die Tagungsumgebung verwendet wird (mit oder ohne führendes '#')"
 
 msgid "Icon"
 msgstr "Icon"
@@ -3844,16 +3844,16 @@ msgid ""
 "Best regards,\n"
 "Your conference team"
 msgstr ""
-"Die Konferenz \"%%(group.name)\" beginnt morgen.\n"
+"Die Tagung \"%%(group.name)\" beginnt morgen.\n"
 "Beginn der Veranstaltung ist %%(group.from_date|date:\"SHORT_DATETIME_FORMAT\").\n"
-"Du kannst dir bereits unter dem folgenden Link einen Überblick über die Veranstaltungen während der Konferenz verschaffen.\n"
+"Du kannst dir bereits unter dem folgenden Link einen Überblick über die Veranstaltungen während der Tagung verschaffen.\n"
 "\n"
 "Herzliche Grüße\n"
-"Dein Konferenz-Team"
+"Dein Tagungs-Team"
 
 #, python-format
 msgid "Conference starts tomorrow: %%(group.name)"
-msgstr "Konferenz findet morgen statt: %%(group.name)"
+msgstr "Tagung findet morgen statt: %%(group.name)"
 
 #, python-format
 msgid ""
@@ -3865,16 +3865,16 @@ msgid ""
 "Best regards,\n"
 "Your conference team"
 msgstr ""
-"Die Konferenz \"%%(group.name)\" beginnt gleich.\n"
+"Die Tagung \"%%(group.name)\" beginnt gleich.\n"
 "Beginn der Veranstaltung ist %%(group.from_date|date:\"SHORT_DATETIME_FORMAT\").\n"
-"Du kannst dir bereits unter dem folgenden Link einen Überblick über die Veranstaltungen während der Konferenz verschaffen.\n"
+"Du kannst dir bereits unter dem folgenden Link einen Überblick über die Veranstaltungen während der Tagung verschaffen.\n"
 "\n"
 "Herzliche Grüße\n"
-"Dein Konferenz-Team"
+"Dein Tagungs-Team"
 
 #, python-format
 msgid "Conference starts soon: %%(group.name)"
-msgstr "Konferenz findet gleich statt: %%(group.name)"
+msgstr "Tagung findet gleich statt: %%(group.name)"
 
 #, python-format
 msgid ""
@@ -3886,16 +3886,16 @@ msgid ""
 "Best regards,\n"
 "Your conference team"
 msgstr ""
-"Die Konferenz \"%%(group.name)\" beginnt in einer Woche.\n"
+"Die Tagung \"%%(group.name)\" beginnt in einer Woche.\n"
 "Beginn der Veranstaltung ist %%(group.from_date|date:\"SHORT_DATETIME_FORMAT\").\n"
-"Du kannst dir bereits unter dem folgenden Link einen Überblick über die Veranstaltungen während der Konferenz verschaffen.\n"
+"Du kannst dir bereits unter dem folgenden Link einen Überblick über die Veranstaltungen während der Tagung verschaffen.\n"
 "\n"
 "Herzliche Grüße\n"
-"Dein Konferenz-Team"
+"Dein Tagungs-Team"
 
 #, python-format
 msgid "Conference starts next week: %%(group.name)"
-msgstr "Konferenz findet nächste Woche statt: %%(group.name)"
+msgstr "Tagung findet nächste Woche statt: %%(group.name)"
 
 #, python-format
 msgid ""
@@ -6244,79 +6244,79 @@ msgid "Only group members can see the content you requested. Apply to become a m
 msgstr "Nur Mitglieder dieser Gruppe können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
 msgid "Conferences"
-msgstr "Konferenzen"
+msgstr "Tagungen"
 
 msgid "All Conferences"
-msgstr "Alle Konferenzen"
+msgstr "Alle Tagungen"
 
 msgid "My Conferences"
-msgstr "Meine Konferenzen"
+msgstr "Meine Tagungen"
 
 msgid "You are not currently attending any Conferences"
-msgstr "Du nimmst aktuell noch noch an keinen Konferenzen teil"
+msgstr "Du nimmst aktuell noch noch an keinen Tagungen teil"
 
 msgid "Conference Menu"
-msgstr "Konferenzmenü"
+msgstr "Tagungsmenü"
 
 msgid "Conference Dashboard"
-msgstr "Konferenz Dashboard"
+msgstr "Tagung Dashboard"
 
 msgid "Browse all Conferences"
-msgstr "Alle Konferenzen anzeigen"
+msgstr "Alle Tagungen anzeigen"
 
 msgid "Create Conference"
-msgstr "Konferenz erstellen"
+msgstr "Tagung erstellen"
 
 msgid "Create new Conference"
-msgstr "Neue Konferenz erstellen"
+msgstr "Neue Tagung erstellen"
 
 msgid "Conferences let you set up and host workshops and events over multiple days, complete with video messaging, stage stream integration, breakout rooms and lobby chats."
-msgstr "Mit Konferenzen kannst du Workshops und Veranstaltungen über mehrere Tage hinweg einrichten und durchführen und diese mit Videonachrichten, einer Stage-Stream-Integration, Breakout-Räumen und Lobby-Chats ausstatten."
+msgstr "Mit Tagungen kannst du Workshops und Veranstaltungen über mehrere Tage hinweg einrichten und durchführen und diese mit Videonachrichten, einer Stage-Stream-Integration, Breakout-Räumen und Lobby-Chats ausstatten."
 
 msgid "Edit Conference"
-msgstr "Konferenz bearbeiten"
+msgstr "Tagung bearbeiten"
 
 msgid "Activate Conference"
-msgstr "Konferenz aktivieren"
+msgstr "Tagung aktivieren"
 
 msgid "Re-activate Conference"
-msgstr "Konferenz reaktivieren"
+msgstr "Tagung reaktivieren"
 
 msgid "Deactivate Conference"
-msgstr "Konferenz deaktivieren"
+msgstr "Tagung deaktivieren"
 
 msgid "You are about to deactivate this conference!"
-msgstr "Du bist dabei diese Konferenz zu deaktivieren!"
+msgstr "Du bist dabei diese Tagung zu deaktivieren!"
 
 msgid "You are about to re-activate this conference. It and all of its content will be visible on the website again."
-msgstr "Du bist dabei diese Konferenz zu reaktivieren. Sie und all ihr Inhalt wird auf der Webseite wieder sichtbar sein."
+msgstr "Du bist dabei diese Tagung zu reaktivieren. Sie und all ihr Inhalt wird auf der Webseite wieder sichtbar sein."
 
 msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "Du bist dabei diese Konferenz zu deaktivieren. Sie und all ihr Inhalt wird auf der Webseite unsichtbar sein."
+msgstr "Du bist dabei diese Tagung zu deaktivieren. Sie und all ihr Inhalt wird auf der Webseite unsichtbar sein."
 
 msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
-msgstr "Diese Aktion kann rückgängig gemacht werden. Du kannst die Konferenz jederzeit von deinem Benutzerprofil aus reaktivieren."
+msgstr "Diese Aktion kann rückgängig gemacht werden. Du kannst die Tagung jederzeit von deinem Benutzerprofil aus reaktivieren."
 
 msgid "Convert selected items to Conferences"
-msgstr "Ausgewählte Elemente in Konferenzen umwandeln"
+msgstr "Ausgewählte Elemente in Tagungen umwandeln"
 
 msgid "Conference contact person"
-msgstr "Konferenz-Kontaktperson"
+msgstr "Tagungs-Kontaktperson"
 
 msgid "Conference name"
-msgstr "Konferenzname"
+msgstr "Tagungsname"
 
 msgid "Enter a name for the conference."
-msgstr "Gib einen Namen für die Konferenz ein."
+msgstr "Gib einen Namen für die Tagung ein."
 
 msgid "Describe the conference in a few sentences."
-msgstr "Beschreibe die Konferenz in ein paar Sätzen."
+msgstr "Beschreibe die Tagung in ein paar Sätzen."
 
 msgid "Where is the conference active?"
-msgstr "Wo ist die Konferenz aktiv?"
+msgstr "Wo ist die Tagung aktiv?"
 
 msgid "Conference members only"
-msgstr "Nur Konferenzmitglieder"
+msgstr "Nur Tagungsmitglieder"
 
 msgid "Participate!"
 msgstr "Teilnehmen!"
@@ -6328,13 +6328,13 @@ msgid "You have been invited to participate!"
 msgstr "Du wurdest eingeladen, teilzunehmen!"
 
 msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
-msgstr "Entschuldige, nur Portal-Administrator_innen können Konferenzen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie die Konferenz für dich erstellen. Unten findest du eine Liste aller Administrator_innen."
+msgstr "Entschuldige, nur Portal-Administrator_innen können Tagungen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie die Tagung für dich erstellen. Unten findest du eine Liste aller Administrator_innen."
 
 msgid "Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
-msgstr "Entschuldige, nur Portal-Administrator_innen können Konferenzen deaktivieren! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie die Konferenz für dich deaktiveren. Unten findest du eine Liste aller Administrator_innen."
+msgstr "Entschuldige, nur Portal-Administrator_innen können Tagungen deaktivieren! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie die Tagung für dich deaktiveren. Unten findest du eine Liste aller Administrator_innen."
 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
-msgstr "Nur Mitglieder dieser Konferenz können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
+msgstr "Nur Mitglieder dieser Tagung können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
 msgid "Team Description"
 msgstr "Projektbeschreibung"
@@ -6932,7 +6932,7 @@ msgstr "Deine Änderungen wurden übernommen."
 #, fuzzy
 #~| msgid "Conference Applications"
 #~ msgid "a conference application status"
-#~ msgstr "Konferenz-Teilnahmeanträge"
+#~ msgstr "Tagungs-Teilnahmeanträge"
 
 #~ msgid "Application ist over."
 #~ msgstr "Die Anmeldung ist beendet."
@@ -6956,22 +6956,22 @@ msgstr "Deine Änderungen wurden übernommen."
 #~ msgstr "Wenn ein Gruppe als Tagung markiert wurde, ist es möglich Accounts für alle Teilnehmer automatisch zu generieren"
 
 #~ msgid "Cosinnus conference"
-#~ msgstr "Konferenz"
+#~ msgstr "Tagung"
 
 #~ msgid "Cosinnus conferences"
-#~ msgstr "Konferenzen"
+#~ msgstr "Tagungen"
 
 #~ msgid "Priority"
 #~ msgstr "Priorität"
 
 #~ msgid "Conference participation management"
-#~ msgstr "Verwaltung von Konferenzteilnahmen"
+#~ msgstr "Verwaltung von Tagungsteilnahmen"
 
 #~ msgid "Conference Settings"
-#~ msgstr "Konferenz-Einstellungen"
+#~ msgstr "Tagungs-Einstellungen"
 
 #~ msgid "Conference Participation Management"
-#~ msgstr "Konferenzteilnahme-Management"
+#~ msgstr "Tagungsteilnahme-Management"
 
 #~ msgid "The following Groups were converted to Projects:"
 #~ msgstr "Die folgenden Gruppen wurden in Projekte umgewandelt:"
