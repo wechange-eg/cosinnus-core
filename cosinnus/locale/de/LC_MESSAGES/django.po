@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-15 16:29+0100\n"
-"PO-Revision-Date: 2021-02-17 14:28+0100\n"
+"POT-Creation-Date: 2021-02-18 15:31+0100\n"
+"PO-Revision-Date: 2021-02-18 15:47+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -828,6 +828,15 @@ msgstr "Cosinnus Micropage"
 msgid "Cosinnus Micropages"
 msgstr "Cosinnus Micropages"
 
+msgid "BBB Server"
+msgstr "BBB Server"
+
+msgid "Cosinnus Conference Setting"
+msgstr "Cosinnus Tagungs-Einstellung"
+
+msgid "Cosinnus Conference Settings"
+msgstr "Cosinnus Tagungs-Einstellungen"
+
 msgid "Lobby"
 msgstr "Lobby"
 
@@ -916,6 +925,15 @@ msgstr "Als Download-Link neben dem Häkchen zum Akzeptieren der Bedingungen ang
 msgid "Participation Management"
 msgstr "Teilnehmendenmanagement"
 
+msgid "Request user information"
+msgstr "Benutzerinfos anfragen"
+
+msgid "Pre-filled content for the information field"
+msgstr "Vorausgefüllter Inhalt für das Informationsfeld"
+
+msgid "Priority choice enabled"
+msgstr "Prioritätswahl aktiviert"
+
 msgid "Participation applications are open."
 msgstr "Anmeldung geöffnet."
 
@@ -971,6 +989,9 @@ msgstr "ToS angenommen"
 
 msgid "Confernence Application"
 msgstr "Tagung Anmeldung"
+
+msgid "Contact E-Mail Address"
+msgstr "Kontakt-E-Mail Adresse"
 
 msgid "Cosinnus conference application"
 msgstr "Cosinnus Tagungs-Teilnahmeantrag"
@@ -1156,9 +1177,6 @@ msgstr "Nur für Meeting-Popups für Veranstaltungen im alten Stil! Wenn eingege
 msgid "Dynamic choice field choices"
 msgstr "Dynamische Auswahlfeld Wahlmöglichkeiten"
 
-msgid "BBB Server"
-msgstr "BBB Server"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Projekt"
@@ -1262,14 +1280,20 @@ msgstr "Anfangsdatum"
 msgid "End Datetime"
 msgstr "Enddatum"
 
-msgid "Conference is running"
-msgstr "Die Tagung läuft gerade"
-
-msgid "Determins whether a group that is marked as conference is running"
-msgstr "Entscheidet darüber ob eine Tagung als 'gerade laufend' makiert wird"
-
 msgid "Determins if application management is visible in conference administration."
 msgstr "Legt fest, ob die Anwendungsverwaltung in der Tagungsverwaltung sichtbar ist."
+
+msgid "Allow temporary users accounts for this conference."
+msgstr "Temporäre Benutzerkonten für diese Tagung zulassen"
+
+msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+msgstr "Wenn aktiviert, können Tagungsveranstalter temporäre Benutzerkonten erstellen, die aktiviert und deaktiviert werden können."
+
+msgid "Conference accounts active"
+msgstr "Tagungs-Benutzerkonten aktiv"
+
+msgid "If enabled, temporary user accounts for this conference are active and can log in."
+msgstr "Wenn aktiv, sind temporäre Benutzerkonten für diese Tagung aktiv und können einloggen."
 
 msgid "Parent Group"
 msgstr "Übergeordnete Gruppe"
@@ -1984,6 +2008,9 @@ msgstr "Keine Beschreibung verfasst"
 msgid "Back to Project Overview"
 msgstr "Zurück zur Übersicht"
 
+msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
+msgstr "Du kannst Tagungseinstellungen auf dieser Ebene festlegen. Alle Inhalte in der Hierarchie unter dieser Ebene werden die Einstellungen erben, falls für sie keine eigenen Einstellungen festgelegt sind."
+
 msgid "Administration"
 msgstr "Administration"
 
@@ -2500,11 +2527,17 @@ msgstr "Aktuelle Datei"
 msgid "Application"
 msgstr "Antrag"
 
-msgid "Apply for"
-msgstr "Teilnahme beantragen"
+msgid "Apply for participation in"
+msgstr "Bewirb dich für die Teilnahme an"
 
-msgid "Message to organizer"
-msgstr "Nachricht an den Veranstalter"
+msgid "Edit your application for"
+msgstr "Deine Anmeldung bearbeiten für"
+
+msgid "Please provide your motivation for applying"
+msgstr "Bitte gib deine Motivation für die Teilnahme an"
+
+msgid "Describe why you wish to participate"
+msgstr "Beschreibe, warum du teilnehmen möchtest"
 
 msgid "Workshop"
 msgstr "Workshop"
@@ -2523,9 +2556,6 @@ msgstr "Bedingungen herunterladen"
 
 msgid "I accept the conditions in order to submit my application"
 msgstr "Ich akzeptiere die Bedingungen, um Teilnahme zu beantragen"
-
-msgid "Apply for participation in "
-msgstr "Bewirb dich für die Teilnahme an "
 
 msgid "Save changes"
 msgstr "Änderungen speichern"
@@ -2578,89 +2608,14 @@ msgstr "Zweite Wahl"
 msgid "Application submitted"
 msgstr "Teilnahmeantrag eingereicht"
 
-msgid "Message to the organizers"
-msgstr "Nachricht an die Veranstalter/innen"
+msgid "Motivation for applying"
+msgstr "Motivation für die Teilnahme"
 
 msgid "Workshop Assignments"
 msgstr "Workshop-Zuweisungen"
 
 msgid "Choose users to assign to this workshop"
 msgstr "Wähle Benutzer/innen für diesen Workshop"
-
-msgid "Conference is not running"
-msgstr "Tagung läuft gerade nicht"
-
-msgid "Accounts from CSV Upload"
-msgstr "Nutzerkonten aus CSV-Upload"
-
-msgid "Upload Participants"
-msgstr "Teilnehmerliste hochladen"
-
-msgid "last login"
-msgstr "letzer login"
-
-msgid "no login yet"
-msgstr "bisher kein login"
-
-msgid "Admin"
-msgstr "Administratot"
-
-msgid "Member"
-msgstr "Mitglied"
-
-msgid "active"
-msgstr "aktiv"
-
-msgid "not active"
-msgstr "inaktiv"
-
-msgid "User participates in the following workshops:"
-msgstr "Benutzer_in nimmt an folgenden Workshops teil:"
-
-msgid "deactivate member"
-msgstr "Teilnehmer deaktivieren"
-
-msgid "activate member"
-msgstr "Teilnehmer aktivieren"
-
-msgid "remove user"
-msgstr "Teilnehmer entfernen"
-
-msgid "Do you really want to deactivate the member's user account ?"
-msgstr "Möchten sie wirkich dieses Nutzerkonto deaktivieren?"
-
-msgid "Deactivate Member"
-msgstr "Mitglied deaktivieren"
-
-msgid "Do you really want to activate the member's user account ?"
-msgstr "Möchten sie wirkich dieses Nutzerkonto aktivieren?"
-
-msgid "Activate Member"
-msgstr "Teilnehmer aktivieren"
-
-msgid "Do you really want to remove the user?"
-msgstr "Möchtest du wirklich den Teilnehmer entfernen?"
-
-msgid "Remove User"
-msgstr "Teilnehmer entfernen"
-
-msgid "Finish conference and deactivate user accounts"
-msgstr "Tagung beenden und Teilnehmerkonten deaktivieren"
-
-msgid "Start conference and activate user accounts"
-msgstr "Tagung beginnen und Teilnehmerkonten aktivieren"
-
-msgid "Download Statistics"
-msgstr "Statistiken herunterladen"
-
-msgid "Maximal Number of participants"
-msgstr "Maximale Anzahl von Teilnehmenden"
-
-msgid "This is not an enforced limit and serves only as a display for guests."
-msgstr "Dies ist kein forciertes Limit, sondern dient nur zur Orientierung für die Gäste."
-
-msgid "(no limit selected)"
-msgstr "(keine Begrenzung ausgewählt)"
 
 msgid "Application period"
 msgstr "Anmeldefrist"
@@ -2680,6 +2635,40 @@ msgstr "Bis"
 msgid "End date."
 msgstr "Enddatum."
 
+msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
+msgstr "Wenn aktiv, können Teilnahmeanträge nur während dieses Zeitraums eingereicht und bearbeitet werden. Du kannst diesen Zeitraum jederzeit ändern, um die Antragsstellung zu schließen oder zu verlängern."
+
+msgid "Maximal Number of participants"
+msgstr "Maximale Anzahl von Teilnehmenden"
+
+msgid "This is not an enforced limit and serves only as a display for guests."
+msgstr "Dies ist kein forciertes Limit, sondern dient nur zur Orientierung für die Gäste."
+
+msgid "(no limit selected)"
+msgstr "(keine Begrenzung ausgewählt)"
+
+msgid "Require applicants to submit a text about their motivation for applying"
+msgstr "Antragssteller müssen einen Text über ihre Motiviation für die Teilnahme angeben"
+
+msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+msgstr "Das Motivations-Textfeld wird mit dem Text vorausgefüllt, den du hier eingibst. Du kannst dies nutzen, um einen Hilfetext für das Verfassen des Motivationstextes zu hinterlegen oder eine Frageliste angeben, die die Antragssteller beantworten sollen."
+
+#, python-format
+msgid "Only applicable if \"%(other_option)s\" is enabled."
+msgstr "Nur relevant, wenn \"%(other_option)s\" aktiviert ist."
+
+msgid "Enter text to pre-fill or leave empty"
+msgstr "Text zum Vorausfüllen eingeben oder frei lassen"
+
+msgid "Options for participation"
+msgstr "Möglichkeiten zur Teilnahme"
+
+msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
+msgstr "Wähle eine oder mehr Bedingungen die auf dem Anmeldeformular angezeigt werden sollen. Benutzer können bei der Antragsstellung aus diesen Optionen Beliebige auswählen."
+
+msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
+msgstr "Workshopauswahl: Antragssteller können Workshops priorisieren, an denen sie teilnehmen möchten"
+
 msgid "Conditions for participation"
 msgstr "Bedingungen für die Teilnahme"
 
@@ -2691,12 +2680,6 @@ msgstr "(keine Bedingungen ausgewählt)"
 
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr "Wenn eine Datei mit Bedingungen hochgeladen wird, müssen diese von allen Benutzern bei der Antragsstellung per Häkchen akzeptiert werden"
-
-msgid "Options for participation"
-msgstr "Möglichkeiten zur Teilnahme"
-
-msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
-msgstr "Wähle eine oder mehr Bedingungen die auf dem Anmeldeformular angezeigt werden sollen. Benutzer können bei der Antragsstellung aus diesen Optionen Beliebige auswählen."
 
 msgid "Conference reminders"
 msgstr "Erinnerungs-Mails"
@@ -2814,6 +2797,75 @@ msgstr "Raumliste"
 
 msgid "There are no rooms yet."
 msgstr "Es sind noch keine Räume vorhanden."
+
+msgid "Conference is running"
+msgstr "Die Tagung läuft gerade"
+
+msgid "Conference is not running"
+msgstr "Tagung läuft gerade nicht"
+
+msgid "Accounts from CSV Upload"
+msgstr "Nutzerkonten aus CSV-Upload"
+
+msgid "Upload Participants"
+msgstr "Teilnehmerliste hochladen"
+
+msgid "last login"
+msgstr "letzer login"
+
+msgid "no login yet"
+msgstr "bisher kein login"
+
+msgid "Admin"
+msgstr "Administratot"
+
+msgid "Member"
+msgstr "Mitglied"
+
+msgid "active"
+msgstr "aktiv"
+
+msgid "not active"
+msgstr "inaktiv"
+
+msgid "User participates in the following workshops:"
+msgstr "Benutzer_in nimmt an folgenden Workshops teil:"
+
+msgid "deactivate member"
+msgstr "Teilnehmer deaktivieren"
+
+msgid "activate member"
+msgstr "Teilnehmer aktivieren"
+
+msgid "remove user"
+msgstr "Teilnehmer entfernen"
+
+msgid "Do you really want to deactivate the member's user account ?"
+msgstr "Möchten sie wirkich dieses Nutzerkonto deaktivieren?"
+
+msgid "Deactivate Member"
+msgstr "Mitglied deaktivieren"
+
+msgid "Do you really want to activate the member's user account ?"
+msgstr "Möchten sie wirkich dieses Nutzerkonto aktivieren?"
+
+msgid "Activate Member"
+msgstr "Teilnehmer aktivieren"
+
+msgid "Do you really want to remove the user?"
+msgstr "Möchtest du wirklich den Teilnehmer entfernen?"
+
+msgid "Remove User"
+msgstr "Teilnehmer entfernen"
+
+msgid "Finish conference and deactivate user accounts"
+msgstr "Tagung beenden und Teilnehmerkonten deaktivieren"
+
+msgid "Start conference and activate user accounts"
+msgstr "Tagung beginnen und Teilnehmerkonten aktivieren"
+
+msgid "Download Statistics"
+msgstr "Statistiken herunterladen"
 
 msgid "Accept"
 msgstr "Akzeptieren"
@@ -3037,6 +3089,24 @@ msgstr "Kontakt"
 msgid "No contact data has been added yet."
 msgstr "Es wurden noch keine Kontaktdaten eingetragen."
 
+msgid "Register and join!"
+msgstr "Registrieren und beitreten!"
+
+msgid "You have been invited to apply!"
+msgstr "Du wurdest eingeladen, die Teilnahme zu beantragen!"
+
+msgid "Decline Invitation"
+msgstr "Einladung ablehnen"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Möchtest du die Einladung wirklich ablehnen?"
+
+msgid "Edit Application"
+msgstr "Anmeldung bearbeiten"
+
+msgid "Apply for Participation"
+msgstr "Teilnahme beantragen"
+
 msgid "Your Deactivated Content"
 msgstr "Deine deaktivierten Inhalte"
 
@@ -3102,9 +3172,6 @@ msgstr "Eingeladene Mitglieder"
 msgid "Revoke Invitation"
 msgstr "Einladung zurückziehen"
 
-msgid "Decline Invitation"
-msgstr "Einladung ablehnen"
-
 msgid "Accept Invitation"
 msgstr "Einladung annehmen"
 
@@ -3117,9 +3184,6 @@ msgstr "Möchtest du „%(name)s“'s Einladung wirklich zurückziehen?"
 
 msgid "Revoke Invitation for Member"
 msgstr "Einladung für Benutzer zurückziehen"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "Möchtest du die Einladung wirklich ablehnen?"
 
 msgid "There are no pending invitations."
 msgstr "Es gibt aktuell keine eingeladenen Mitglieder."
@@ -3551,47 +3615,6 @@ msgstr "Nicht zufrieden mit eurer Microsite?"
 msgid "Change it here..."
 msgstr "Ändere sie hier..."
 
-msgid "Register and join!"
-msgstr "Registrieren und beitreten!"
-
-msgid "You have been invited to apply!"
-msgstr "Du wurdest eingeladen, die Teilnahme zu beantragen!"
-
-msgid "Edit Application"
-msgstr "Anmeldung bearbeiten"
-
-msgid "Apply for Participation"
-msgstr "Teilnahme beantragen"
-
-msgid "Register"
-msgstr "Registrieren"
-
-msgid "Log in"
-msgstr "Einloggen"
-
-msgid "You are a member!"
-msgstr "Du bist Mitglied!"
-
-msgid "View Project"
-msgstr "Projekt ansehen"
-
-msgid "View Group"
-msgstr "Gruppe ansehen"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership request pending..."
-msgstr "Mitgliedschaft wurde beantragt..."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "You are invited!"
-msgstr "Du bist eingeladen worden!"
-
-msgid "Join now!"
-msgstr "Jetzt beitreten!"
-
-msgid "Browse"
-msgstr "Ansehen"
-
 msgid "News posts"
 msgstr "Neuigkeiten-Posts"
 
@@ -3640,6 +3663,35 @@ msgstr "Flickr Galerie"
 msgid "Call to Action"
 msgstr "Aufruf zum Handeln"
 
+msgid "Register"
+msgstr "Registrieren"
+
+msgid "Log in"
+msgstr "Einloggen"
+
+msgid "You are a member!"
+msgstr "Du bist Mitglied!"
+
+msgid "View Project"
+msgstr "Projekt ansehen"
+
+msgid "View Group"
+msgstr "Gruppe ansehen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership request pending..."
+msgstr "Mitgliedschaft wurde beantragt..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are invited!"
+msgstr "Du bist eingeladen worden!"
+
+msgid "Join now!"
+msgstr "Jetzt beitreten!"
+
+msgid "Browse"
+msgstr "Ansehen"
+
 #, python-format
 msgid "Users in team %(group)s"
 msgstr "Benutzer_in in Projekt %(group)s"
@@ -3658,6 +3710,9 @@ msgstr "Alle Gruppen"
 
 msgid "All projects"
 msgstr "Alle Projekte"
+
+msgid "Temporary User Accounts"
+msgstr "Temporäre Benutzerkonten"
 
 msgid "Reminder emails"
 msgstr "Erinnerungs-E-Mails"
@@ -6850,6 +6905,18 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#~ msgid "Determins whether a group that is marked as conference is running"
+#~ msgstr "Entscheidet darüber ob eine Tagung als 'gerade laufend' makiert wird"
+
+#~ msgid "Apply for"
+#~ msgstr "Teilnahme beantragen"
+
+#~ msgid "Message to organizer"
+#~ msgstr "Nachricht an den Veranstalter"
+
+#~ msgid "Message to the organizers"
+#~ msgstr "Nachricht an die Veranstalter/innen"
+
 #~ msgid "I accept the conditions"
 #~ msgstr "Ich akzeptiere die Bedingungen"
 
@@ -6966,9 +7033,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Conference participation management"
 #~ msgstr "Verwaltung von Tagungsteilnahmen"
-
-#~ msgid "Conference Settings"
-#~ msgstr "Tagungs-Einstellungen"
 
 #~ msgid "Conference Participation Management"
 #~ msgstr "Tagungsteilnahme-Management"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 14:01+0100\n"
-"PO-Revision-Date: 2021-02-17 14:28+0100\n"
+"POT-Creation-Date: 2021-02-18 15:31+0100\n"
+"PO-Revision-Date: 2021-02-18 15:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -34,11 +34,11 @@ msgstr "Bitte gib auch ein Startdatum an"
 msgid "Please also provide a end date"
 msgstr "Bitte gib auch ein Enddatum an"
 
-msgid "No Interest"
-msgstr "Kein Interesse"
-
 msgid "First Choice"
 msgstr "Erste Wahl"
+
+msgid "Second Choice"
+msgstr "Zweite Wahl"
 
 msgid "Conference Management"
 msgstr "Tagungsmanagement"
@@ -61,6 +61,9 @@ msgstr "Datei hochladen"
 
 msgid "Go to conference"
 msgstr "Zur Tagung"
+
+msgid "This function is not enabled for this conference."
+msgstr "Diese Funktion ist für diese Tagung nicht aktiviert."
 
 msgid "Conference successfully started and user accounts activated"
 msgstr "Tagung erfolgreich gestartet und Nutzerkonten aktiviert"
@@ -110,11 +113,11 @@ msgstr "Es wurde eine Test-E-Mail an deine E-Mail-Adresse gesendet."
 msgid "Participation configurations have been updated."
 msgstr "Die Teilnahmekonfigurationen wurden aktualisiert."
 
-msgid "Application has been sent."
-msgstr "Anmeldung wurde gesendet."
+msgid "Your application has been submitted."
+msgstr "Deine Anmeldung wurde eingereicht."
 
-msgid "Application has been updated."
-msgstr "Anmeldung wurde aktualisiert."
+msgid "Your application has been updated."
+msgstr "Deine Anmeldung wurde aktualisiert."
 
 msgid "You cannot change your application anymore."
 msgstr "Du kannst deine Anmeldung nicht mehr ändern."
@@ -136,6 +139,9 @@ msgstr "Die folgenden Nutzer/innen wurden abgelehnt: %s"
 
 msgid "Your changes were saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "No Interest"
+#~ msgstr "Kein Interesse"
 
 #~ msgid "You can only pick one workshop as first priority."
 #~ msgstr "Du kannst nur einen Workshop als erste Priorität auswählen."

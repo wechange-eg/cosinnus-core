@@ -1,6 +1,14 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
 
+{% block extrahead %}
+    {{ block.super }}
+    {% if form.information_field_initial_text %}
+        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.information_field_initial_text.id_for_label %}
+    {% endif %}
+{% endblock %}
+
+
 {% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
 
 {% block breadcrumb %}
@@ -19,12 +27,9 @@
 	    {{ form.non_field_errors }}
 	    {{ form.non_field_errors }}
 
-            <div class="content-box">
-            {% trans "Maximal Number of participants" as limits_label %}
-            {% trans "This is not an enforced limit and serves only as a display for guests." as limits_legend %}
-            {% trans "(no limit selected)" as limits_placeholder %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.participants_limit label=limits_label legend=limits_legend placeholder=limits_placeholder large_field=True %}
-
+        <div class="content-box">
+            <h2>{% trans "Edit Conditions of Participation" %}</h2>  
+        
             {% trans "Application period" as date_label %}
             {% captureas date_html %}
                 {{ form.application_start.errors }}
@@ -66,8 +71,36 @@
                     </li>
                 </ol>
             {% endcaptureas %}
-            {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label label=date_label large_field=True %}
-
+            {% trans "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications." as date_legend %}
+            {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label legend=date_legend large_field=True %}
+            
+            {% trans "Maximal Number of participants" as limits_label %}
+            {% trans "This is not an enforced limit and serves only as a display for guests." as limits_legend %}
+            {% trans "(no limit selected)" as limits_placeholder %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.participants_limit label=limits_label legend=limits_legend placeholder=limits_placeholder large_field=True %}
+            
+            <div class="regular-space"></div>
+            {% trans "Require applicants to submit a text about their motivation for applying" as information_checkbox_label %}
+            {% include 'cosinnus/fields/checkbox_field.html' with field=form.information_field_enabled label=information_checkbox_label checkbox_label=information_checkbox_label %}
+            
+            {% captureas infotemplate_legend %}
+                {% trans "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer." %}
+                {% blocktrans with other_option=information_checkbox_label %}Only applicable if "{{ other_option }}" is enabled.{% endblocktrans %}
+            {% endcaptureas %}
+            {% trans "Enter text to pre-fill or leave empty" as infotemplate_placeholder %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.information_field_initial_text legend=infotemplate_legend placeholder=infotemplate_placeholder large_field=True %}
+        
+            {% if form.application_options %}
+                {% trans "Options for participation" as options_label %}
+                {% trans "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application." as options_legend %}
+                {% trans "(no options chosen)" as options_placeholder %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.application_options label=options_label legend=options_legend placeholder=options_placeholder large_field=True %}
+            {% endif %}
+            
+            {% trans "Workshop selection: Enable applicants to choose preferred workshops to attend" as priority_checkbox_label %}
+            {% include 'cosinnus/fields/checkbox_field.html' with field=form.priority_choice_enabled label=priority_checkbox_label checkbox_label=priority_checkbox_label %}
+            
+            <div class="regular-space"></div>
             <div class="cosinnus-field ">
                 <label>{% trans 'Conditions for participation' %}</label>
             </div>
@@ -87,13 +120,7 @@
                     {{ form.application_conditions_upload }}
                 </div>
             </div>
-
-            {% if form.application_options %}
-            {% trans "Options for participation" as options_label %}
-            {% trans "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application." as options_legend %}
-            {% trans "(no options chosen)" as options_placeholder %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.application_options label=options_label legend=options_legend placeholder=options_placeholder large_field=True %}
-            {% endif %}
+            
 
         </div>
         <button type="submit" class="btn btn-emphasized">

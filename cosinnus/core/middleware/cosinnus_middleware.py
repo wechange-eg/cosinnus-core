@@ -27,6 +27,7 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from cosinnus.utils.permissions import check_user_superuser, check_ug_membership,\
     check_ug_admin
 from annoying.functions import get_object_or_None
+from cosinnus.core.decorators.views import redirect_to_not_logged_in
 
 
 logger = logging.getLogger('cosinnus')
@@ -270,7 +271,7 @@ class RedirectAnonymousUserToLoginMiddleware(MiddlewareMixin):
     def process_request(self, request):
         if not request.user.is_authenticated:
             if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS]):
-                return HttpResponseRedirect('/login/')
+                return redirect_to_not_logged_in(request)
             
             
 class RedirectAnonymousUserToLoginAllowSignupMiddleware(MiddlewareMixin):
@@ -280,7 +281,7 @@ class RedirectAnonymousUserToLoginAllowSignupMiddleware(MiddlewareMixin):
     def process_request(self, request):
         if not request.user.is_authenticated:
             if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]):
-                return HttpResponseRedirect('/login/')
+                return redirect_to_not_logged_in(request)
 
 
 class ConditionalRedirectMiddleware(MiddlewareMixin):

@@ -106,26 +106,30 @@
                                 </div> <!-- end rejection-reason collapse row-->
 		                    
 			                    <div class="row application-row">
-			                        {% comment %} First Choice {% endcomment %}
-			                        <div class="col-md-3 textfield transparent">
-			                            <b>{% trans "First Choice" %}:</b> 
-			                            <br/>
-			                            {% if application.instance.first_priorities_string %}
-			                                {{ application.instance.first_priorities_string }}
-			                            {% else %}
-			                                <i>{% trans "not specified" %}</i>
-			                            {% endif %}
-			                        </div>
-			                        {% comment %} Second choice {% endcomment %}
-			                        <div class="col-md-3 textfield transparent no-margin">
-			                            <b>{% trans "Second Choice" %}:</b> 
-			                            <br/>
-			                            {% if application.instance.second_priorities_string %}
-			                                {{ application.instance.second_priorities_string }}
-			                            {% else %}
-			                                <i>{% trans "not specified" %}</i>
-			                            {% endif %}
-			                        </div>
+			                        {% if priority_choice_enabled %}
+				                        {% comment %} First Choice {% endcomment %}
+				                        <div class="col-md-3 textfield transparent">
+				                            <b>{% trans "First Choice" %}:</b> 
+				                            <br/>
+				                            {% if application.instance.first_priorities_string %}
+				                                {{ application.instance.first_priorities_string }}
+				                            {% else %}
+				                                <i>{% trans "not specified" %}</i>
+				                            {% endif %}
+				                        </div>
+				                        {% comment %} Second choice {% endcomment %}
+				                        <div class="col-md-3 textfield transparent no-margin">
+				                            <b>{% trans "Second Choice" %}:</b> 
+				                            <br/>
+				                            {% if application.instance.second_priorities_string %}
+				                                {{ application.instance.second_priorities_string }}
+				                            {% else %}
+				                                <i>{% trans "not specified" %}</i>
+				                            {% endif %}
+				                        </div>
+				                    {% else %}
+				                        <div class="col-md-6 hidden-xs hidden-sm"></div>
+				                    {% endif %}
 			                        {% comment %} Full Details {% endcomment %}
 			                        <div class="col-md-6 textfield transparent application-details">
 			                            {% block application_info_row %}
@@ -139,11 +143,11 @@
 			                    
 			                    <div class="row application-row">
                                     {% comment %} Message to organizers {% endcomment %}
-                                    <div class="col-xs-12 textfield transparent">
+                                    <div class="col-xs-12 textfield flat-h transparent">
                                         {% if application.information.value %}
-                                            <b>{% trans 'Message to the organizers' %}:</b>
+                                            <b>{% trans 'Motivation for applying' %}:</b>
                                             <br/>
-                                            {{ application.information.value }}
+                                            {{ application.information.value|textfield }}
                                         {% endif %}
                                     </div>
                                 </div>

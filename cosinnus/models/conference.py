@@ -28,6 +28,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey,\
     GenericRelation
 from cosinnus.models.tagged import get_tag_object_model
 from annoying.functions import get_object_or_None
+from phonenumber_field.modelfields import PhoneNumberField
 
 logger = logging.getLogger('cosinnus')
 
@@ -333,6 +334,12 @@ class ParticipationManagement(models.Model):
                                            verbose_name=_('Participation Management'),
                                            related_name='participation_management',
                                            on_delete=models.CASCADE)
+    
+    information_field_enabled = models.BooleanField(_('Request user information'), default=True)
+    information_field_initial_text = models.TextField(_('Pre-filled content for the information field'), blank=True, null=True)
+    
+    priority_choice_enabled = models.BooleanField(_('Priority choice enabled'), default=True)
+    
 
     @property
     def applications_are_active(self):
@@ -451,7 +458,11 @@ class CosinnusConferenceApplication(models.Model):
     options = PostgresJSONField(default=list, blank=True, null=True)
     priorities = PostgresJSONField(default=dict, blank=True, null=True)
     information = models.TextField(blank=True)
+    contact_email = models.EmailField(_('Contact E-Mail Address'), blank=True, null=True)
+    contact_phone = PhoneNumberField(('Contact Phone Number'), blank=True, null=True)
+    
     reason_for_rejection = models.TextField(blank=True)
+    
     created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
     last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
 

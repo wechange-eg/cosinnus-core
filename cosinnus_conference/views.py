@@ -605,12 +605,12 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                 application.user = self.request.user
                 application.priorities = priorities
                 application.save()
-                messages.success(self.request, _('Application has been sent.'))
+                messages.success(self.request, _('Your application has been submitted.'))
             else:
                 application = form.save()
                 application.priorities = priorities
                 application.save()
-                messages.success(self.request, _('Application has been updated.'))
+                messages.success(self.request, _('Your application has been updated.'))
             
             # delete any invitation on application submits
             invitation = get_object_or_None(CosinnusGroupMembership, group=self.group, user=self.request.user, status=MEMBERSHIP_INVITED_PENDING)
@@ -670,12 +670,15 @@ class ConferenceApplicationView(SamePortalGroupMixin,
         context = super().get_context_data(**kwargs)
 
         if self._applications_are_active() and self._user_can_edit_application():
-            if 'formset' in kwargs:
-                priority_formset = kwargs.pop('formset')
+            if self.participation_management and self.participation_management.priority_choice_enabled:
+                if 'formset' in kwargs:
+                    priority_formset = kwargs.pop('formset')
+                else:
+                    priority_formset = PriorityFormSet(
+                        initial = self._get_initial_priorities()
+                    )
             else:
-                priority_formset = PriorityFormSet(
-                    initial = self._get_initial_priorities()
-                )
+                priority_formset = PriorityFormSet()
             context.update({
                 'applications_are_active': True,
                 'group': self.group,
@@ -817,8 +820,9 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
                 places_left = self.participation_management.participants_limit - accepted_applications
 
             context.update({
-            'max_number': self.participation_management.participants_limit,
-            'places_left': places_left
+                'max_number': self.participation_management.participants_limit,
+                'places_left': places_left,
+                'priority_choice_enabled': self.participation_management.priority_choice_enabled,
             })
         return context
 

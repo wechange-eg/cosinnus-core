@@ -152,6 +152,19 @@ class ConferenceApplicationForm(forms.ModelForm):
         if (not hasattr(self, 'participation_management')
             or not self.participation_management.application_options):
             del self.fields['options']
+        if (not hasattr(self, 'participation_management')
+            or not self.participation_management.information_field_enabled):
+            del self.fields['information']
+        else:
+            self.fields['information'].required = True
+        
+        if ('information' in self.fields and hasattr(self, 'participation_management')
+            and self.participation_management.information_field_initial_text):
+            self.fields['information'].initial = self.participation_management.information_field_initial_text
+        
+        # information_field_enabled
+        # information_field_initial_text
+        # priority_choice_enabled
 
     def clean_options(self):
         if self.cleaned_data['options'] and len(self.cleaned_data) > 0:
