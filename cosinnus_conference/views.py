@@ -984,7 +984,7 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         return []
 
     def get_filename(self):
-        return '{} - {}.xlsx'.format(_('Application List'), self.group.slug)
+        return '{} - {}.xlsx'.format(_('List of Applicants'), self.group.slug)
 
 
 
