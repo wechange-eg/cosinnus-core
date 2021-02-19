@@ -458,14 +458,14 @@ USER_MODEL = get_user_model()
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    readonly_fields = ('settings',)
+    pass
 
 admin.site.register(get_user_profile_model(), UserProfileAdmin)
 
 
 class UserProfileInline(admin.StackedInline):
     model = USER_PROFILE_MODEL
-    readonly_fields = ('settings',)
+    pass
 
 class PortalMembershipInline(admin.TabularInline):
     model = CosinnusPortalMembership
