@@ -178,14 +178,15 @@
 			            
 		                {{ form.event_id }}
 		                {% if forloop.first %}
-		                <div class="row">
+		                    <div class="row">
 		                {% endif %}
-		                    <div class="col-md-6">
-		                        {% trans "Choose users to assign to this workshop" as workshop_placeholder %}
-		                        {% include 'cosinnus/fields/default_field.html' with field=form.users label=form.event_name.value placeholder=workshop_placeholder large_field=True %}
+			                    <div class="col-md-6">
+			                        {% trans "Choose users to assign to this workshop" as workshop_placeholder %}
+			                        {% include 'cosinnus/fields/default_field.html' with field=form.users label=form.event_name.value placeholder=workshop_placeholder large_field=True %}
+			                    </div>
+		                {% if forloop.last %}
 		                    </div>
-		                {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
-		                {% if forloop.last %}</div>{% endif %}
+		                {% endif %}
 		            {% endfor %}
 		        </div>
 		

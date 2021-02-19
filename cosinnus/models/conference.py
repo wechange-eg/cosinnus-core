@@ -316,7 +316,12 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
                 else:
                     logger.error('Could not create a conferenceroom rocketchat room!', 
                                  extra={'conference-room-id': self.id, 'conference-room-slug': self.slug})
-
+    @property
+    def non_table_events_qs(self):
+        from cosinnus_event.models import ConferenceEvent # noqa
+        return self.events.filter(is_break=False)\
+                .exclude(type=ConferenceEvent.TYPE_COFFEE_TABLE)\
+                .order_by('from_date')
 
 class ParticipationManagement(models.Model):
 

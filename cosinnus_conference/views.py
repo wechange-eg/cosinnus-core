@@ -557,11 +557,27 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
         return self.group.get_absolute_url()
 
 
+class ConferencePropertiesMixin(object):
+    """ Common properties accessed on conferences by application-related views. """
+        
+    @property
+    def events(self):
+        from cosinnus_event.models import ConferenceEvent # noqa
+        return ConferenceEvent.objects.filter(group=self.group, is_break=False)\
+                .exclude(type=ConferenceEvent.TYPE_COFFEE_TABLE)\
+                .order_by('from_date')
+
+    @property
+    def participation_management(self):
+        return self.group.participation_management.first()
+
+
 class ConferenceApplicationView(SamePortalGroupMixin,
                                 RequireLoggedInMixin,
                                 DipatchGroupURLMixin,
                                 GroupIsConferenceMixin,
                                 RequireExtraDispatchCheckMixin,
+                                ConferencePropertiesMixin,
                                 FormView):
     form_class = ConferenceApplicationForm
     template_name = 'cosinnus/conference/conference_application_form.html'
@@ -570,15 +586,6 @@ class ConferenceApplicationView(SamePortalGroupMixin,
         if not self.group.use_conference_applications:
             messages.warning(self.request, _('This function is not enabled for this conference.'))
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
-    
-    @property
-    def events(self):
-        from cosinnus_event.models import ConferenceEvent # noqa
-        return ConferenceEvent.objects.filter(group=self.group).order_by('id')
-
-    @property
-    def participation_management(self):
-        return self.group.participation_management.first()
 
     @property
     def application(self):
@@ -706,6 +713,7 @@ class ConferenceApplicationView(SamePortalGroupMixin,
 class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
                                                         RequireWriteMixin,
                                                         GroupIsConferenceMixin,
+                                                        ConferencePropertiesMixin,
                                                         FormView):
     form_class = ConferenceApplicationManagementFormSet
     template_name = 'cosinnus/conference/conference_application_management_form.html'
@@ -713,15 +721,6 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
     _users_accepted = None # array
     _users_declined = None # array
     _users_waitlisted = None # array
-
-    @property
-    def participation_management(self):
-        return self.group.participation_management.first()
-
-    @property
-    def events(self):
-        from cosinnus_event.models import ConferenceEvent # noqa
-        return ConferenceEvent.objects.filter(group=self.group).order_by('id')
 
     @property
     def applications(self):
