@@ -34,6 +34,7 @@ from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.views.user import email_first_login_token_to_user
 from cosinnus.conf import settings
 from cosinnus.models.profile import PROFILE_SETTING_LOGIN_TOKEN_SENT
+from threading import Thread
 
 
 class AdministrationView(TemplateView):
@@ -313,12 +314,15 @@ class UserListView(ListView):
                 non_tokened_users = get_user_model().objects.\
                                         filter(last_login__isnull=True).\
                                         filter(Q(password__isnull=True) | Q(password__exact=''))
-                count = 0
-                for user in non_tokened_users:
-                    if not PROFILE_SETTING_LOGIN_TOKEN_SENT in user.cosinnus_profile.settings:
-                        self.send_login_token(user)
-                        count += 1
-                messages.add_message(self.request, messages.SUCCESS, _('Login tokens to %(count)s users were sent.') % {'count': count})
+                view = self
+                class UserLoginTokenThread(Thread):
+                    def run(self):
+                        for user in non_tokened_users:
+                            if not PROFILE_SETTING_LOGIN_TOKEN_SENT in user.cosinnus_profile.settings:
+                                view.send_login_token(user)
+                UserLoginTokenThread().start()
+                    
+                messages.add_message(self.request, messages.SUCCESS, _('Login tokens to all previously uninvited users are now being sent.'))
             else:
                 user_id = self.request.POST.get('send_login_token')
                 user = get_user_model().objects.get(id=user_id)
