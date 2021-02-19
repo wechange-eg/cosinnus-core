@@ -318,7 +318,10 @@ class UserListView(ListView):
                 class UserLoginTokenThread(Thread):
                     def run(self):
                         for user in non_tokened_users:
-                            if not PROFILE_SETTING_LOGIN_TOKEN_SENT in user.cosinnus_profile.settings:
+                            # avoid sending duplicate mails when two users click at the same time
+                            profile = user.cosinnus_profile
+                            profile.refresh_from_db()
+                            if not PROFILE_SETTING_LOGIN_TOKEN_SENT in profile.settings:
                                 view.send_login_token(user)
                 UserLoginTokenThread().start()
                     
