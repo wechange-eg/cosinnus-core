@@ -15,10 +15,7 @@
 {% block content %}
 <div class="content-box">
     
-    {% comment %} 
-    TODO: remove on launch
     <form method="post">{% csrf_token %}
-    {% endcomment %}
         {% if request.GET.search %}
             <input type="hidden" name="search" value="{{ request.GET.search }}">
         {% endif %}
@@ -37,16 +34,11 @@
             </button>
 	        <script type="text/javascript">
 	             $('#start_send_all_tokens').on('mouseup', function(){
-	                 {% comment %} TODO: remove on launch {% endcomment %}
-	                 alert('Diese Funktion ist bis zum Live launch deaktiviert!');
 	                 setTimeout(function(){$('#start_send_all_tokens').attr('disabled', 'disabled');}, 5);
 	             });
 	        </script>
         </div>
-    {% comment %} 
-    TODO: remove on launch
     </form>
-    {% endcomment %}
     
     <h2 class="white-text large-space">{% trans 'Users' %}</h2>
     <form method="post">{% csrf_token %}
