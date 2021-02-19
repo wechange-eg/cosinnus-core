@@ -457,8 +457,8 @@ class CosinnusConferenceApplication(models.Model):
     status = models.PositiveSmallIntegerField(choices=APPLICATION_STATES,
                                               default=APPLICATION_SUBMITTED)
     options = PostgresJSONField(default=list, blank=True, null=True)
-    priorities = PostgresJSONField(default=dict, blank=True, null=True)
-    information = models.TextField(blank=True)
+    priorities = PostgresJSONField(_('Priorities'), default=dict, blank=True, null=True)
+    information = models.TextField(_('Motivation for applying'), blank=True)
     contact_email = models.EmailField(_('Contact E-Mail Address'), blank=True, null=True)
     contact_phone = PhoneNumberField(('Contact Phone Number'), blank=True, null=True)
     

@@ -23,7 +23,8 @@ import six
 
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
 from cosinnus.models.conference import CosinnusConferenceRoom,\
-    CosinnusConferenceApplication, APPLICATION_ACCEPTED, APPLICATION_WAITLIST
+    CosinnusConferenceApplication, APPLICATION_ACCEPTED, APPLICATION_WAITLIST,\
+    APPLICATION_STATES
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_ADMIN
 from cosinnus.models.membership import MEMBERSHIP_MEMBER,\
     MEMBERSHIP_INVITED_PENDING
@@ -55,6 +56,8 @@ from cosinnus_conference.forms import (ConferenceRemindersForm,
 from cosinnus_conference.utils import send_conference_reminder
 from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus import cosinnus_notifications
+from django.utils.functional import cached_property
+import xlsxwriter
 
 logger = logging.getLogger('cosinnus')
 
@@ -652,14 +655,16 @@ class ConferenceApplicationView(SamePortalGroupMixin,
         return self.group.get_absolute_url()
 
     def _get_initial_priorities(self):
-        if not self.application:
-            return [{'event_id': event.id,
-                     'event_name': event.title} for event in self.events]
-        else:
-            return [{'event_id': event.id,
-                     'event_name': event.title,
-                     'priority' : self.application.priorities.get(str(event.id))}
-                     for event in self.events]
+        priorities = []
+        for event in self.events:
+            priority = {
+                'event_id': event.id,
+                'event_name': event.title
+            }
+            if self.application and self.application.priorities.get(str(event.id)):
+                priority['priority'] = self.application.priorities.get(str(event.id))
+            priorities.append(priority)
+        return priorities
 
     def _applications_are_active(self):
         pm = self.participation_management
@@ -837,6 +842,154 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
                                    kwargs={'group': self.group})
 
 
+class CSVDownloadMixin(object):
+
+    @property
+    def applications(self):
+        """ This view shows applications of *all* statuses """
+        return self.group.conference_applications.filter(status__in=[state for state, __ in APPLICATION_STATES])\
+                .order_by('created')
+                
+    def get(self, request, *args, **kwars):
+        response = HttpResponse(
+            content_type='application/vnd.openxmlformats-officedocument'
+                         '.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename="{}"'.format(self.get_filename())
+
+        workbook = xlsxwriter.Workbook(response, {
+            'in_memory': True,
+            'strings_to_formulas': False
+        })
+        worksheet = workbook.add_worksheet()
+
+        row = 0
+        col = 0
+
+        header = self.get_header()
+
+        for item in header:
+            worksheet.write(row, col, str(item))
+            col += 1
+
+        row += 1
+        col = 0
+        
+        for application in self.applications:
+            table_row = self.get_application_row(application)
+            for cell in table_row:
+                worksheet.write(row, col, cell)
+                col += 1
+            row += 1
+            col = 0
+
+        workbook.close()
+
+        return response
+
+
+class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
+                                                RequireWriteMixin,
+                                                GroupIsConferenceMixin,
+                                                CSVDownloadMixin,
+                                                View):
+    
+    @cached_property
+    def conference_options(self):
+        selected_options = []
+        if self.management and self.management.application_options:
+            if hasattr(settings, 'COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS'):
+                for option in settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS:
+                    if option[0] in self.management.application_options:
+                        selected_options.append(option)
+        return selected_options
+
+    @cached_property
+    def management(self):
+        return self.group.participation_management.first()
+
+    def get_options_strings(self):
+        return ['{}: {}'.format(_('Option'), option[1]) for option in self.conference_options]
+
+    def get_application_options(self, application):
+        options = self.conference_options
+        result = []
+        for option in options:
+            if application.options and option[0] in application.options:
+                result.append('x')
+            else:
+                result.append('')
+        return result
+
+    @cached_property
+    def conditions_check(self):
+        if self.management and self.management.has_conditions:
+            return 'x'
+        else:
+            return ''
+
+    def get_header(self):
+        header = [
+            _('First Name'), 
+            _('Last Name'),
+            _('Motivation for applying'),
+            _('Status'),
+        ]
+        if not 'contact_email' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
+            header += [
+                _('Contact E-Mail Address')
+            ]
+        if not 'contact_phone' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
+            header += [
+                _('Contact Phone Number')
+            ] 
+        if self.management and self.management.priority_choice_enabled:   
+            header += [
+                _('First Choice'),
+                _('Second Choice'),
+            ]
+        header += self.get_extra_header() 
+        header += self.get_options_strings()
+        return header
+    
+    def get_extra_header(self):
+        """ Stub for overriding view in portals """
+        return []
+    
+    def get_application_row(self, application):
+        user = application.user
+        row = [
+            user.first_name if user.first_name else '',
+            user.last_name if user.last_name else '',
+            application.information,
+            str(dict(APPLICATION_STATES).get(application.status)),
+        ]
+        if self.management and self.management.priority_choice_enabled:
+            row += [
+                application.first_priorities_string,
+                application.second_priorities_string,
+            ]
+        if not 'contact_email' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
+            row += [
+                application.contact_email
+            ]
+        if not 'contact_phone' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
+            row += [
+                application.contact_phone.as_international if application.contact_phone else ''
+            ]
+        row += self.get_extra_application_row(application) 
+        row += self.get_application_options(application)
+        return row
+    
+    def get_extra_application_row(self, application):
+        """ Stub for overriding view in portals """
+        return []
+
+    def get_filename(self):
+        return '{} - {}.xlsx'.format(_('Application List'), self.group.slug)
+
+
+
+conference_applicant_details_download = ConferenceApplicantsDetailsDownloadView.as_view()
 conference_applications = ConferenceParticipationManagementApplicationsView.as_view()
 conference_application = ConferenceApplicationView.as_view()
 conference_participation_management = ConferenceParticipationManagementView.as_view()
