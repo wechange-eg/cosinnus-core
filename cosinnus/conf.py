@@ -850,6 +850,12 @@ class CosinnusConf(AppConf):
     # default value for form field for if to allow user creation of coffee tables
     CONFERENCE_COFFEETABLES_ALLOW_USER_CREATION_DEFAULT = False
     
+    # a list of formfield names of `ConferenceApplicationForm` to be hidden for this portal
+    CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS = []
+    
+    # default for checkbox "Priority choice enabled" in participation management
+    CONFERENCE_PRIORITY_CHOICE_DEFAULT = False
+    
     CONFERENCE_PARTICIPATION_OPTIONS = [
         (1, _('Overnight stay required')),
         (2, _('Barrier-free access required')),

@@ -558,10 +558,16 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                                 RequireLoggedInMixin,
                                 DipatchGroupURLMixin,
                                 GroupIsConferenceMixin,
+                                RequireExtraDispatchCheckMixin,
                                 FormView):
     form_class = ConferenceApplicationForm
     template_name = 'cosinnus/conference/conference_application_form.html'
-
+    
+    def extra_dispatch_check(self):
+        if not self.group.use_conference_applications:
+            messages.warning(self.request, _('This function is not enabled for this conference.'))
+            return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
+    
     @property
     def events(self):
         from cosinnus_event.models import ConferenceEvent # noqa

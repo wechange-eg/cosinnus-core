@@ -338,7 +338,8 @@ class ParticipationManagement(models.Model):
     information_field_enabled = models.BooleanField(_('Request user information'), default=True)
     information_field_initial_text = models.TextField(_('Pre-filled content for the information field'), blank=True, null=True)
     
-    priority_choice_enabled = models.BooleanField(_('Priority choice enabled'), default=True)
+    priority_choice_enabled = models.BooleanField(_('Priority choice enabled'), 
+                                                  default=settings.COSINNUS_CONFERENCE_PRIORITY_CHOICE_DEFAULT)
     
 
     @property

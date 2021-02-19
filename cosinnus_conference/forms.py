@@ -76,6 +76,7 @@ class ConferenceParticipationManagement(forms.ModelForm):
     application_conditions_upload = forms.FileField(required=False,
                                                     widget=ConferenceFileUploadWidget,
                                                     validators=[validate_file_infection])
+    
 
     class Meta:
         model = ParticipationManagement
@@ -118,7 +119,7 @@ class ConferenceParticipationManagement(forms.ModelForm):
 
 class ConferenceApplicationForm(forms.ModelForm):
     conditions_accepted = forms.BooleanField(required=True)
-
+    
     class Meta:
         model = CosinnusConferenceApplication
         exclude = ['conference', 'user', 'status', 'priorities']
@@ -162,10 +163,11 @@ class ConferenceApplicationForm(forms.ModelForm):
             and self.participation_management.information_field_initial_text):
             self.fields['information'].initial = self.participation_management.information_field_initial_text
         
-        # information_field_enabled
-        # information_field_initial_text
-        # priority_choice_enabled
-
+        # exclude some optional fields for this portal
+        for field_name in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
+            if field_name in self.fields:
+                del self.fields[field_name]
+        
     def clean_options(self):
         if self.cleaned_data['options'] and len(self.cleaned_data) > 0:
             return [int(option) for option in self.cleaned_data['options']]

@@ -127,8 +127,6 @@
 				                                <i>{% trans "not specified" %}</i>
 				                            {% endif %}
 				                        </div>
-				                    {% else %}
-				                        <div class="col-md-6 hidden-xs hidden-sm"></div>
 				                    {% endif %}
 			                        {% comment %} Full Details {% endcomment %}
 			                        <div class="col-md-6 textfield transparent application-details">
@@ -136,7 +134,19 @@
 		                                    <div>
 		                                        <b>{% trans 'Application submitted' %}:</b>
 		                                        {{ application.created|date:"DATETIME_FORMAT" }}
-                                        	</div>                                    
+                                        	</div>
+                                        	{% if application.instance.contact_email %}
+                                                <div>
+                                                    <b>{% trans 'Contact E-Mail Address' %}:</b>
+                                                    {{ application.instance.contact_email }}
+                                                </div>
+                                            {% endif %}
+                                            {% if application.instance.contact_phone %}
+                                                <div>
+                                                    <b>{% trans 'Contact Phone Number' %}:</b>
+                                                    {{ application.instance.contact_phone }}
+                                                </div>
+                                            {% endif %}
 		                                {% endblock %}
 			                        </div>
 			                    </div> <!-- end row 2 -->
