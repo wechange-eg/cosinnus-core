@@ -10,21 +10,20 @@ def create_default_portal_conference_settings(apps, schema_editor):
     CosinnusConferenceSettings = apps.get_model("cosinnus", "CosinnusConferenceSettings")
     current_portal = CosinnusPortal.objects.get(site__id=settings.SITE_ID)
     ContentType = apps.get_model('contenttypes', 'ContentType')
-    portal_content_type = ContentType.objects.get(
-        app_label='cosinnus',
-        model='cosinnusportal'
-    )
+    portal_content_type = ContentType.objects.get_for_model(CosinnusPortal)
     
-    CosinnusConferenceSettings.objects.get_or_create(
-        content_type=portal_content_type,
-        object_id=current_portal.id,
-    )
+    if portal_content_type:
+        CosinnusConferenceSettings.objects.get_or_create(
+            content_type=portal_content_type,
+            object_id=current_portal.id,
+        )
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
         ('cosinnus', '0095_auto_20210217_1022'),
+        ('contenttypes', '0002_remove_content_type_name'),
     ]
 
     operations = [
