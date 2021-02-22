@@ -49,6 +49,8 @@ class CommaSeparatedSelect2MultipleChoiceField(forms.MultipleChoiceField):
         """
         if value:
             value = value.split(',')
+        else:
+            value = []
         super(CommaSeparatedSelect2MultipleChoiceField, self).validate(value)
 
 
