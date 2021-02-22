@@ -130,7 +130,7 @@ module.exports = BaseView.extend({
         var topicsSearchMethods = {};
         for (var topicId in self.options.topicsJson) {
             var topic = self.options.topicsJson[topicId];
-            if (topic.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+            if (topic && topic.toLowerCase().indexOf(query.toLowerCase()) > -1) {
                 // highlight the topic occurence
                 var title = util.iReplace(topic, query, '<b>$1</b>');
                 var url = self.options.topicsUrl.replace('{{t}}', topicId);
@@ -140,8 +140,9 @@ module.exports = BaseView.extend({
 
         if (self.options.sdgsJson.length > 0) {
             var sdgSearchMethods = {};
-            for (var sdg in self.options.sdgsJson) {
-                if (sdg.name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+            for (var sdgId in self.options.sdgsJson) {
+                var sdg = self.options.sdgsJson[sdgId];
+                if (sdg && sdg.name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
                     var title = util.iReplace(sdg.name, query, '<b>$1</b>')
                     var url = self.options.sdgsUrl.replace('{{t}}', sdg.id);
                     sdgSearchMethods[title] = url;
