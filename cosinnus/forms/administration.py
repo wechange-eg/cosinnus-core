@@ -37,13 +37,19 @@ class NewsletterForManagedTagsForm(forms.ModelForm):
 
 class NewsletterForGroupsForm(forms.ModelForm):
     groups = CustomSelectMultiple(
-        queryset=get_cosinnus_group_model().objects.all_in_portal(),
+        queryset=None,
         widget=forms.CheckboxSelectMultiple
     )
 
     class Meta(object):
         model = GroupsNewsletter
         fields = ['subject', 'body', 'groups']
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # cannot use the group model getter at Class construction time, so add queryset here
+        if 'groups' in self.fields:
+            self.fields['groups'].queryset = get_cosinnus_group_model().objects.all_in_portal()
 
 
 class UserAdminForm(forms.ModelForm):
