@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-15 14:46+0100\n"
+"POT-Creation-Date: 2021-02-23 18:24+0100\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,14 +24,20 @@ msgstr ""
 msgid "Convert memberships to Member status"
 msgstr ""
 
+#, python-format
+msgid "%d Users' rocketchat room memberships were re-done."
+msgstr ""
+
+msgid "Rocket: Fix missing RocketChat room membership for users"
+msgstr ""
+
 msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr "Token se stejným kódem již existuje! Vyberte pro svůj token jiný řetězec."
 
-msgid "The following Projects were converted to Groups:"
+#, fuzzy, python-format
+#| msgid "The following Projects were converted to Groups:"
+msgid "The following items were converted to %s:"
 msgstr "Následující projekty byly převedeny na skupiny:"
-
-msgid "Convert selected Projects to Groups"
-msgstr "Převést vybrané projekty na skupiny"
 
 msgid "The following Users were added to this portal:"
 msgstr "Na tento portál byli přidáni následující uživatelé:"
@@ -56,12 +62,6 @@ msgstr "Přesunout vybrané skupiny a jejich podprojekty na aktuální portál"
 
 msgid "Move selected groups and their subprojects to current portal and message members"
 msgstr "Přesunout vybrané skupiny a jejich podprojekty na aktuální portál a členy zpráv"
-
-msgid "The following Groups were converted to Projects:"
-msgstr "Následující skupiny byly převedeny na projekty:"
-
-msgid "Convert selected Groups to Projects"
-msgstr "Převést vybrané skupiny na projekty"
 
 msgid "ToS Accepted"
 msgstr "Podmínky služby (ToS) přijaty"
@@ -98,14 +98,25 @@ msgstr "Deaktivovat uživatele (zachová všechny položky, které na webu vytvo
 msgid "%d Users were synchronized successfully."
 msgstr "%d uživatelů bylo úspěšně deaktivováno."
 
-msgid "Re-synchronize RocketChat user-account (will log users out of RocketChat!)"
+msgid "Rocket: Re-synchronize RocketChat user-account connection (will log users out of RocketChat!)"
 msgstr ""
 
 #, fuzzy, python-format
 msgid "%d Users were made RocketChat admins."
 msgstr "%d uživatelů bylo úspěšně deaktivováno."
 
-msgid "Make user RocketChat admin"
+#, fuzzy
+msgid "Rocket: Make user RocketChat admin"
+msgstr "%d uživatelů bylo úspěšně deaktivováno."
+
+#, python-format
+msgid "%d Users rocketchat accounts were checked."
+msgstr ""
+
+msgid "Rocket: Repair/create missing users' rocketchat accounts"
+msgstr ""
+
+msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
 msgid "Restart"
@@ -159,6 +170,27 @@ msgstr "Stavba a bydlení"
 msgid "Klimaschutz"
 msgstr "Ochrana klimatu"
 
+msgid "Overnight stay required"
+msgstr ""
+
+msgid "Barrier-free access required"
+msgstr ""
+
+msgid "Interpreter required"
+msgstr ""
+
+msgid "Vegetarian cuisine"
+msgstr ""
+
+msgid "Vegan cuisine"
+msgstr ""
+
+msgid "Lactose-free cuisine"
+msgstr ""
+
+msgid "Gluten-free cuisine"
+msgstr ""
+
 msgid "General"
 msgstr "Obecné"
 
@@ -183,9 +215,6 @@ msgstr ""
 
 msgid "Bookmarked Users list"
 msgstr ""
-
-msgid "Only team members can see the content you requested. Apply to become a member now!"
-msgstr "Vámi vybraný obsah mohou zobrazit pouze členové týmu. Podejte žádost o členství hned teď!"
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Vámi vybraný obsah mohou zobrazit pouze registrovaní členové! Přihlaste se nebo si vytvořte účet hned teď!"
@@ -300,6 +329,33 @@ msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších odmítlo pozvánku"
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgstr "\"%(sender_name)s\" odmítl/a pozvánku do %(team_name)s."
 
+msgid "Your participation application was accepted"
+msgstr ""
+
+msgid "You submitted an application"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Your membership request for %(team_name)s was accepted!"
+msgid "Your participation application for %(team_name)s was accepted!"
+msgstr "Vaše žádost o členství v %(team_name)s byla přijata!"
+
+msgid "Your participation application was declined"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Your membership request for %(team_name)s was declined."
+msgid "Your participation application for %(team_name)s was declined!"
+msgstr "Vaše žádost o členství v %(team_name)s byla zamítnuta."
+
+msgid "Your participation application was waitlisted"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Your membership request for %(team_name)s was accepted!"
+msgid "Your participation application for %(team_name)s was waitlisted!"
+msgstr "Vaše žádost o členství v %(team_name)s byla přijata!"
+
 msgid "You were made an admin of this team"
 msgstr "Stal se z vás administrátor tohoto týmu"
 
@@ -373,6 +429,45 @@ msgstr "Jeden z vašich projektů/skupin byl přesunut na portál \"%(portal_nam
 #, python-format
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "\"%(team_name)s\" byl přesunut do %(portal_name)s!"
+
+msgid "A user created a new conference"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
+msgid "%(sender_name)s created the conference %(object_name)s"
+msgstr "%(sender_name)s právě vytvořil/a nápad \"%(object_name)s\"!"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in %(count)d items"
+msgid "%(sender_name)s created %(count)d conferences"
+msgstr "%(sender_name)s vás označil/a v %(count)d položkách"
+
+#, fuzzy, python-format
+#| msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
+msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgstr "Byli jste označeni v \"%(object_name)s\" v %(team_name)s."
+
+#, fuzzy
+#| msgid "Apply"
+msgctxt "email campaign button label to apply for a conference"
+msgid "Apply now!"
+msgstr "Použít"
+
+#, fuzzy
+#| msgid "Is conference"
+msgid "View conference"
+msgstr "Je konference"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s invited you to join %(team_name)s"
+msgid "%(sender_name)s invited you to apply for the conference %(team_name)s"
+msgstr "%(sender_name)s vás zve, abyste se připojili k %(team_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
+msgid "%(sender_name)s invited you to apply for \"%(team_name)s\" on %(portal_name)s! <br/><br/> To apply, please click on the link below."
+msgstr "%(sender_name)s vás zve, abyste se připojili k \"%(team_name)s\" na %(portal_name)s! <br/><br/> Chcete-li se připojit, klikněte na odkaz níže. Budete přesměrováni na portál, kde si můžete pozvánku prohlédnout a přijmout."
 
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
@@ -452,6 +547,50 @@ msgid "Hebrew--NATIVE-LANGUAGE"
 msgstr "Français"
 
 msgid "Belarus"
+msgstr ""
+
+#, fuzzy
+#| msgid "Header Title"
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Title"
+msgstr "Název záhlaví"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 1"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 2"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 3"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Street and Number"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "City"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "State"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Country"
+msgstr ""
+
+#, fuzzy
+#| msgid "Promote Member"
+msgctxt "Multi-Address Field Subfield"
+msgid "Phone Number"
+msgstr "Povýšit člena"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Mobile Phone Number"
 msgstr ""
 
 msgid "(No choice)"
@@ -714,12 +853,24 @@ msgstr "Cosinnus CMS Micropage"
 msgid "Cosinnus Micropages"
 msgstr "Cosinnus Micropages"
 
+msgid "BBB Server"
+msgstr ""
+
+#, fuzzy
+msgid "Cosinnus Conference Setting"
+msgstr "Konference probíhá"
+
+#, fuzzy
+msgid "Cosinnus Conference Settings"
+msgstr "Konference probíhá"
+
 msgid "Lobby"
 msgstr ""
 
 msgid "Stage"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Workshops"
 msgstr "Workshopy"
 
@@ -798,6 +949,122 @@ msgstr "Konference probíhá"
 
 msgid "Slug must not be empty."
 msgstr "Identifikátor nesmí být prázdný."
+
+msgid "Conditiions for participation"
+msgstr ""
+
+msgid "Shown as a download link near the checkbox to accept the conditions."
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference Management"
+msgid "Participation Management"
+msgstr "Vedení konference"
+
+#, fuzzy
+msgid "Request user information"
+msgstr "Znovu poslat pozvánku"
+
+msgid "Pre-filled content for the information field"
+msgstr ""
+
+msgid "Priority choice enabled"
+msgstr ""
+
+msgid "Participation applications are open."
+msgstr ""
+
+msgid "Participation application has not started yet."
+msgstr ""
+
+msgid "Participation application is over."
+msgstr ""
+
+msgctxt "a conference application status"
+msgid "Invalid"
+msgstr ""
+
+#, fuzzy
+#| msgid "Submitting..."
+msgctxt "a conference application status"
+msgid "Submitted"
+msgstr "Odesílání..."
+
+msgctxt "a conference application status"
+msgid "Waitlist"
+msgstr ""
+
+#, fuzzy
+#| msgid "ToS Accepted"
+msgctxt "a conference application status"
+msgid "Accepted"
+msgstr "Podmínky služby (ToS) přijaty"
+
+#, fuzzy
+#| msgid "Decline User"
+msgctxt "a conference application status"
+msgid "Declined"
+msgstr "Odmítnout uživatele"
+
+msgid "Your application is invalid."
+msgstr ""
+
+msgid "Your application has been submitted. You will be notified when it is processed."
+msgstr ""
+
+msgid "Your application is currently on the waiting list."
+msgstr ""
+
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your application has been accepted!"
+msgstr "Vaše změny byly uloženy."
+
+#, fuzzy
+#| msgid "We're sorry, but your membership request for %(team_name)s was declined."
+msgid "We are sorry, but your application has been declined."
+msgstr "Je nám líto, ale vaše žádost o členství v %(team_name)s byla zamítnuta."
+
+#, fuzzy
+#| msgid "Decline User"
+msgid "Declined"
+msgstr "Odmítnout uživatele"
+
+msgid "Waitlist"
+msgstr ""
+
+#, fuzzy
+#| msgid "ToS Accepted"
+msgid "Accepted"
+msgstr "Podmínky služby (ToS) přijaty"
+
+#, fuzzy
+msgid "Confernence Application"
+msgstr "Konference probíhá"
+
+msgid "Priorities"
+msgstr ""
+
+msgid "Motivation for applying"
+msgstr ""
+
+#, fuzzy
+#| msgid "E-Mail Addresses"
+msgid "Contact E-Mail Address"
+msgstr "E-mailová adresa"
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "Cosinnus conference application"
+msgstr "CosinnusLocation"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "Cosinnus conference applications"
+msgstr "CosinnusLocations"
+
+msgid "Note from the organizers"
+msgstr ""
 
 msgid "Complaint Text"
 msgstr "Text stížnosti"
@@ -970,7 +1237,9 @@ msgstr "Extra CSS pro tento portál, bude použit po všech ostatních stylech."
 msgid "Video Conference Server"
 msgstr "Videokonferenční server"
 
-msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+#, fuzzy
+#| msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgid "For old-style events meeting popups only! If entered, will enable Jitsi-like video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
 msgstr "Je-li zadáno, povolí funkce videokonference na celém webu. Musí jít o URL adresu až do bodu, kde lze připojit libovolný náhodný název místnosti."
 
 msgid "Dynamic choice field choices"
@@ -979,6 +1248,10 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Projekt"
+
+#, fuzzy
+msgid "Conference"
+msgstr "Je konference"
 
 msgid "Project Type"
 msgstr "Typ projektu"
@@ -1072,14 +1345,32 @@ msgstr "ID Nextcloud složky skupiny"
 msgid "Is conference"
 msgstr "Je konference"
 
-msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
-msgstr "Je-li skupina označena jako konference, je možné automaticky generovat účty pro účastníky workshopu"
+#, fuzzy
+#| msgid "Start date."
+msgid "Start Datetime"
+msgstr "Počáteční datum."
 
-msgid "Conference is running"
-msgstr "Konference probíhá"
+#, fuzzy
+#| msgid "End date."
+msgid "End Datetime"
+msgstr "Konečné datum."
 
-msgid "Determins whether a group that is marked as conference is running"
-msgstr "Určuje, zda je spuštěna skupina označená jako konference"
+msgid "Determins if application management is visible in conference administration."
+msgstr ""
+
+msgid "Allow temporary users accounts for this conference."
+msgstr ""
+
+msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference Management"
+msgid "Conference accounts active"
+msgstr "Vedení konference"
+
+msgid "If enabled, temporary user accounts for this conference are active and can log in."
+msgstr ""
 
 msgid "Parent Group"
 msgstr "Mateřská skupina"
@@ -1103,18 +1394,6 @@ msgstr "Žádost o váš projekt \"%(group_name)s\""
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Žádost o vaši skupinu \"%(group_name)s\""
-
-msgid "Project Menu"
-msgstr "Menu projektu"
-
-msgid "Group Menu"
-msgstr "Menu skupiny"
-
-msgid "Project Dashboard"
-msgstr "Panel projektu"
-
-msgid "Group Dashboard"
-msgstr "Panel skupiny"
 
 msgid "Token"
 msgstr "Token"
@@ -1499,7 +1778,7 @@ msgstr ""
 msgid "Ignored/Failed Items"
 msgstr ""
 
-msgid "An unexpected system error has occured while processing the data. This should not have happened. Please contact the support!"
+msgid "An unexpected system error has occured while processing the data. This should not have happened. Please contact the support! Technical Details follow:"
 msgstr ""
 
 #, fuzzy
@@ -1826,20 +2105,52 @@ msgstr "Nejsou nastaveny žádné informace"
 msgid "Back to Project Overview"
 msgstr "Zpět na Přehled projektu"
 
+msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
+msgstr ""
+
 msgid "Administration"
 msgstr "Správa"
 
 msgid "Select a page on the left side."
 msgstr "Vyberte stránku na levé straně."
 
-msgid "Simple Statistics"
-msgstr "Jednoduchá statistika"
-
-msgid "User Welcome Email"
-msgstr "Uvítací e-mail uživatele"
-
 msgid "Newsletters"
 msgstr ""
+
+msgid "Update Newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "Create Newsletter"
+msgstr "Vytvořit uživatele"
+
+msgid "Recipients"
+msgstr ""
+
+#, python-format
+msgid "With the current selection the newsletter will be sent to %(counter)s recipients."
+msgid_plural "With the current selection the newsletter will be sent to %(counter)s recipients."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to remove the user?"
+msgid "Do you really want to send the newsletter?"
+msgstr "Opravdu chcete uživatele odebrat?"
+
+msgid "Send newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Send Newsletter"
+msgstr "Přidat uživatele"
 
 #, fuzzy
 #| msgid "Conference Management"
@@ -1855,41 +2166,20 @@ msgstr ""
 msgid "User Dashboard Announcements"
 msgstr "Oznámení panelu uživatele"
 
+msgid "User Welcome Email"
+msgstr "Uvítací e-mail uživatele"
+
+msgid "Simple Statistics"
+msgstr "Jednoduchá statistika"
+
 msgid "Edit"
 msgstr "Upravit"
-
-msgid "Update Newsletter"
-msgstr ""
-
-#, fuzzy
-#| msgid "Create User"
-msgid "Create Newsletter"
-msgstr "Vytvořit uživatele"
 
 msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
 msgstr ""
 
+msgctxt "subject of an E-Mail"
 msgid "Subject"
-msgstr ""
-
-msgid "Recipients"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                With the current selection the newsletter will be sent to %(counter)s recipients.\n"
-"                "
-msgid_plural ""
-"\n"
-"                With the current selection the newsletter will be sent to %(counter)s recipients.\n"
-"                "
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-
-msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
 msgstr ""
 
 msgid "Body"
@@ -1900,9 +2190,6 @@ msgstr ""
 msgid "Currently set Email Text"
 msgstr "Aktuálně nastavený uvítací e-mail"
 
-msgid "Send newsletter"
-msgstr ""
-
 msgid "Send yourself a Test-Mail"
 msgstr "Pošlete si zkušební e-mail"
 
@@ -1911,11 +2198,6 @@ msgstr ""
 
 msgid "Save draft"
 msgstr ""
-
-#, fuzzy
-#| msgid "Do you really want to remove the user?"
-msgid "Do you really want to send the newsletter?"
-msgstr "Opravdu chcete uživatele odebrat?"
 
 msgid "Newsletter"
 msgstr ""
@@ -1962,10 +2244,8 @@ msgstr "Správa"
 msgid "send login token to all inactive users"
 msgstr ""
 
-#, fuzzy
-#| msgid "Search for Ideas"
-msgid "Search for email"
-msgstr "Hledat nápady"
+msgid "Search for email, firstname or lastname"
+msgstr ""
 
 #, fuzzy
 #| msgid "Search"
@@ -2040,6 +2320,11 @@ msgstr "další"
 msgid "Add user"
 msgstr "Přidat uživatele"
 
+#, fuzzy
+#| msgid "Create User"
+msgid "Update User"
+msgstr "Vytvořit uživatele"
+
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "V jednom z polí, která jste zadali, došlo k chybě. Před uložením to prosím opravte!"
 
@@ -2048,10 +2333,6 @@ msgstr "Můžete použít následující proměnné:"
 
 msgid "Currently set Welcome-Email Text"
 msgstr "Aktuálně nastavený uvítací e-mail"
-
-#, fuzzy
-msgid "Conference Page"
-msgstr "Vedení konference"
 
 msgid "Conference Management"
 msgstr "Vedení konference"
@@ -2063,6 +2344,12 @@ msgstr "Vedení konference"
 #, fuzzy
 msgid "Conference Event Management"
 msgstr "Vedení konference"
+
+msgid "Edit Conditions of Participation"
+msgstr ""
+
+msgid "Manage Participation Applications"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -2360,74 +2647,235 @@ msgstr "Zobrazit v mých projektech..."
 msgid "Disable editor"
 msgstr "Zakázat editor"
 
-msgid "Conference is not running"
-msgstr "Konference neprobíhá"
+#, fuzzy
+#| msgid "Current Members"
+msgid "Current File"
+msgstr "Stávající členové"
 
-msgid "Accounts from CSV Upload"
-msgstr "Účty z nahrávání z CSV"
+#, fuzzy
+#| msgid "Application name"
+msgid "Application"
+msgstr "Název aplikace"
 
-msgid "Upload Participants"
-msgstr "Nahrajte účastníky"
+#, fuzzy
+#| msgid "Application name"
+msgid "Apply for participation in"
+msgstr "Název aplikace"
 
-msgid "last login"
-msgstr "poslední přihlášení"
+msgid "Edit your application for"
+msgstr ""
 
-msgid "no login yet"
-msgstr "zatím žádné přihlášení"
+msgid "Please fill out the fields below to submit your application. Be aware that the organizers may take your profile into consideration when processing your application, so make sure that your profile page is well maintained. You can view and edit your profile page here:"
+msgstr ""
 
-msgid "Admin"
-msgstr "Správce"
+#, fuzzy
+#| msgid "Your Profile"
+msgid "Your profile"
+msgstr "Váš profil"
 
-msgid "Member"
-msgstr "Člen"
+msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
+msgstr ""
 
-msgid "active"
-msgstr "aktivní"
+msgid "Please provide your motivation for applying"
+msgstr ""
 
-msgid "not active"
-msgstr "neaktivní"
+msgid "Describe why you wish to participate"
+msgstr ""
 
-msgid "User participates in the following workshops:"
-msgstr "Uživatel se účastní následujících workshopů:"
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Optional contact information"
+msgstr "Kontaktní informace"
 
-msgid "deactivate member"
-msgstr "deaktivovat člena"
+msgid "We recommend you to provide at least one contact option for the organizers to contact you directly. This information can be seen by all organizers of the conference."
+msgstr ""
 
-msgid "activate member"
-msgstr "aktivovat člena"
+msgid "Contact Phone Number"
+msgstr ""
 
-msgid "remove user"
-msgstr "odebrat uživatele"
+#, fuzzy
+#| msgid "Workshops"
+msgid "Workshop"
+msgstr "Workshopy"
 
-msgid "Do you really want to deactivate the member's user account ?"
-msgstr "Opravdu chcete deaktivovat uživatelský účet člena?"
+msgid "My individual needs"
+msgstr ""
 
-msgid "Deactivate Member"
-msgstr "Deaktivovat člena"
+msgid "(no options chosen)"
+msgstr ""
 
-msgid "Do you really want to activate the member's user account ?"
-msgstr "Opravdu chcete aktivovat uživatelský účet člena?"
+#, fuzzy
+#| msgid "Application name"
+msgid "Application conditions"
+msgstr "Název aplikace"
 
-msgid "Activate Member"
-msgstr "Aktivovat člena"
-
-msgid "Do you really want to remove the user?"
-msgstr "Opravdu chcete uživatele odebrat?"
-
-msgid "Remove User"
-msgstr "Odebrat uživatele"
-
-msgid "Finish conference and deactivate user accounts"
-msgstr "Dokončit konferenci a deaktivovat uživatelské účty"
-
-msgid "Start conference and activate user accounts"
-msgstr "Zahájit konferenci a deaktivovat uživatelské účty"
-
-msgid "Download Statistics"
+#, fuzzy
+#| msgid "Download Statistics"
+msgid "Download the conditions"
 msgstr "Stáhnout statistiku"
 
-msgid "Add workshop"
-msgstr "Přidat workshop"
+msgid "I accept the conditions in order to submit my application"
+msgstr ""
+
+msgid "Save changes"
+msgstr ""
+
+msgid "Apply for conference participation"
+msgstr ""
+
+msgid "Withdraw"
+msgstr "Stáhnout"
+
+#, fuzzy
+msgid "Conference Applications"
+msgstr "Konference probíhá"
+
+msgid "Manage participation applications"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no invitations."
+msgid "There are no participation applications yet."
+msgstr "Nejsou žádné pozvánky."
+
+msgid "The maximum number of participants is "
+msgstr ""
+
+#, python-format
+msgid " 1 place left "
+msgid_plural " %(counter)s places left "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Collapse all processed applications"
+msgstr ""
+
+#, fuzzy
+#| msgid "not active"
+msgid "not specified"
+msgstr "neaktivní"
+
+#, fuzzy
+#| msgid "Show more options..."
+msgid "show more ..."
+msgstr "Zobrazit více možností..."
+
+msgid "Reason for rejection"
+msgstr ""
+
+#, fuzzy
+#| msgctxt "written next to optional form fields"
+#| msgid "optional"
+msgid "optional"
+msgstr "volitelné"
+
+#, fuzzy
+#| msgid "First name"
+msgid "First Choice"
+msgstr "Jméno"
+
+msgid "Second Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application submitted"
+msgstr "Název aplikace"
+
+#, fuzzy
+#| msgid "Workshop username"
+msgid "Workshop Assignments"
+msgstr "Uživatelské jméno workshopu"
+
+msgid "Choose users to assign to this workshop"
+msgstr ""
+
+msgid "List of Applicants"
+msgstr ""
+
+msgid "Here you can configure the application form that participants have to fill out in order to apply."
+msgstr ""
+
+#, python-format
+msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
+msgstr ""
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application method"
+msgstr "Název aplikace"
+
+#, python-format
+msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
+msgstr ""
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application period"
+msgstr "Název aplikace"
+
+msgid "From"
+msgstr "Od"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Start date."
+msgstr "Počáteční datum."
+
+msgid "Until"
+msgstr "Do"
+
+msgid "End date."
+msgstr "Konečné datum."
+
+msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
+msgstr ""
+
+msgid "Maximal Number of participants"
+msgstr ""
+
+msgid "This is not an enforced limit and serves only as a display for guests."
+msgstr ""
+
+msgid "(no limit selected)"
+msgstr ""
+
+msgid "Require applicants to submit a text about their motivation for applying"
+msgstr ""
+
+msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+msgstr ""
+
+#, python-format
+msgid "Only applicable if \"%(other_option)s\" is enabled."
+msgstr ""
+
+msgid "Enter text to pre-fill or leave empty"
+msgstr ""
+
+msgid "Options for participation"
+msgstr ""
+
+msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
+msgstr ""
+
+msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
+msgstr ""
+
+msgid "Conditions for participation"
+msgstr ""
+
+msgid "If set, applicants will have to agree to these conditions by checking a checkbox"
+msgstr ""
+
+msgid "(no conditions selected)"
+msgstr ""
+
+msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
+msgstr ""
 
 #, fuzzy
 msgid "Conference reminders"
@@ -2441,6 +2889,9 @@ msgstr ""
 
 #, python-format
 msgid "Status info: sent %(sent_date)s"
+msgstr ""
+
+msgid "This e-mail will be sent out 7 days before and at the same time of day as the conference start date."
 msgstr ""
 
 #, fuzzy
@@ -2457,6 +2908,9 @@ msgid "Send test to myself"
 msgstr ""
 
 msgid "Send 1 day before conference"
+msgstr ""
+
+msgid "This e-mail will be sent out 24 hours before the conference start date."
 msgstr ""
 
 msgid "Send 1 hour before conference"
@@ -2553,13 +3007,95 @@ msgstr "Opravdu chcete smazat oznámení \"%(title)s\"?"
 msgid "Delete room"
 msgstr "Smazat profil"
 
-msgid "Room list"
+msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
+msgstr ""
+
+msgid "You can directly create conference events for rooms from here by using the controls for each room's dropdown menu."
 msgstr ""
 
 #, fuzzy
 #| msgid "There are no items yet"
 msgid "There are no rooms yet."
 msgstr "Zatím nejsou žádné položky"
+
+msgid "Conference is running"
+msgstr "Konference probíhá"
+
+msgid "Conference is not running"
+msgstr "Konference neprobíhá"
+
+msgid "Accounts from CSV Upload"
+msgstr "Účty z nahrávání z CSV"
+
+msgid "Upload Participants"
+msgstr "Nahrajte účastníky"
+
+msgid "last login"
+msgstr "poslední přihlášení"
+
+msgid "no login yet"
+msgstr "zatím žádné přihlášení"
+
+msgid "Admin"
+msgstr "Správce"
+
+msgid "Member"
+msgstr "Člen"
+
+msgid "active"
+msgstr "aktivní"
+
+msgid "not active"
+msgstr "neaktivní"
+
+msgid "User participates in the following workshops:"
+msgstr "Uživatel se účastní následujících workshopů:"
+
+msgid "deactivate member"
+msgstr "deaktivovat člena"
+
+msgid "activate member"
+msgstr "aktivovat člena"
+
+msgid "remove user"
+msgstr "odebrat uživatele"
+
+msgid "Do you really want to deactivate the member's user account ?"
+msgstr "Opravdu chcete deaktivovat uživatelský účet člena?"
+
+msgid "Deactivate Member"
+msgstr "Deaktivovat člena"
+
+msgid "Do you really want to activate the member's user account ?"
+msgstr "Opravdu chcete aktivovat uživatelský účet člena?"
+
+msgid "Activate Member"
+msgstr "Aktivovat člena"
+
+msgid "Do you really want to remove the user?"
+msgstr "Opravdu chcete uživatele odebrat?"
+
+msgid "Remove User"
+msgstr "Odebrat uživatele"
+
+msgid "Finish conference and deactivate user accounts"
+msgstr "Dokončit konferenci a deaktivovat uživatelské účty"
+
+msgid "Start conference and activate user accounts"
+msgstr "Zahájit konferenci a deaktivovat uživatelské účty"
+
+msgid "Download Statistics"
+msgstr "Stáhnout statistiku"
+
+#, fuzzy
+#| msgid "Accept User"
+msgid "Accept"
+msgstr "Přijmout uživatele"
+
+#, fuzzy
+#| msgid "Decline User"
+msgid "Decline"
+msgstr "Odmítnout uživatele"
 
 msgid "Rearrange"
 msgstr "Uspořádat"
@@ -2740,29 +3276,88 @@ msgstr "Příklad: http://mywebsite.com"
 msgid "website"
 msgstr "Webová stránka"
 
-msgid "Re-Activate Project/Group"
-msgstr "Znovu aktivovat projekt/skupinu"
+msgid "indicates a mandatory field"
+msgstr ""
 
-msgid "Deactivate Project/Group"
-msgstr "Deaktivovat projekt/skupinu"
+msgid "This is the current address"
+msgstr ""
 
-msgid "Deactivated Projects and Groups"
-msgstr "Deaktivované projekty a skupiny"
+#, fuzzy
+#| msgid "email address"
+msgid "Remove this Address"
+msgstr "e-mailová adresa"
+
+#, fuzzy
+#| msgid "E-Mail Addresses"
+msgid "Add an Address"
+msgstr "E-mailová adresa"
+
+msgid "Maximum Number of Participants"
+msgstr ""
+
+#, fuzzy
+#| msgid "About the Project"
+msgid "About the conference"
+msgstr "O projektu"
+
+msgctxt "time"
+msgid "o'clock"
+msgstr ""
+
+#, fuzzy
+#| msgid "Until"
+msgctxt "time"
+msgid "until"
+msgstr "Do"
+
+#, fuzzy
+#| msgid "No info."
+msgid "More infos..."
+msgstr "Žádné informace."
+
+#, fuzzy
+#| msgid "You will now receive notifications for content posted in this project."
+msgid "You will now receive notifications for content posted in this conference."
+msgstr "Nyní budete dostávat oznámení o obsahu zveřejněném v tomto projektu."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "No contact data has been added yet."
+msgstr "Zatím nebyly přidány žádné kontaktní údaje."
+
+msgid "Register and join!"
+msgstr "Zaregistrujte se a připojte se!"
+
+#, fuzzy
+#| msgid "You have been invited to collaborate!"
+msgid "You have been invited to apply!"
+msgstr "Byli jste pozváni ke spolupráci!"
+
+msgid "Decline Invitation"
+msgstr "Odmítnout pozvánku"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Opravdu chcete odmítnout pozvánku?"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Edit Application"
+msgstr "Název aplikace"
+
+#, fuzzy
+#| msgid "Upload Participants"
+msgid "Apply for Participation"
+msgstr "Nahrajte účastníky"
+
+#, fuzzy
+#| msgid "Protected Content"
+msgid "Your Deactivated Content"
+msgstr "Chráněný obsah"
 
 msgid "Warning!"
 msgstr "Varování!"
-
-msgid "You are about to deactivate this project/group!"
-msgstr "Chystáte se deaktivovat tento projekt/skupinu!"
-
-msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
-msgstr "Chystáte se znovu aktivovat tento projekt/skupinu. Ten/ta a veškerý jeho/její obsah bude na webu znovu viditelný."
-
-msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "Chystáte se deaktivovat tento projekt/skupinu. Ten/ta a veškerý jeho/její obsah bude na webu skryt a neviditelný pro všechny, včetně vás."
-
-msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-msgstr "Tento proces je reverzibilní. Projekt/skupinu můžete ze svého uživatelského profilu kdykoli znovu aktivovat."
 
 msgid "Re-Activate"
 msgstr "Znovu aktivovat"
@@ -2780,6 +3375,40 @@ msgstr "Opravdu chcete tento tým smazat?"
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Členové"
+
+msgid "Membership requests"
+msgstr "Žádosti o členství"
+
+msgid "Please manage participation applications via the applications page. You can disable the participation management in the conference settings."
+msgstr ""
+
+#, fuzzy
+#| msgid "My location"
+msgid "Manage applications"
+msgstr "Moje umístění"
+
+msgid "Invite members of groups/projects to apply..."
+msgstr ""
+
+#, fuzzy
+#| msgid "Shown in my projects..."
+msgid "Select one or more groups/projects..."
+msgstr "Zobrazeno v mých projektech..."
+
+#, fuzzy
+#| msgid "Invited Groups"
+msgid "Invite groups"
+msgstr "Pozvané skupiny"
+
+#, fuzzy
+#| msgid "Invited to be a member"
+msgid "Invited group/project members"
+msgstr "Pozván/a být členem"
+
+#, fuzzy
+#| msgid "Invite users"
+msgid "Invite users to apply..."
+msgstr "Pozvat uživatele"
 
 msgid "Invite registered users..."
 msgstr "Pozvat registrované uživatele..."
@@ -2799,9 +3428,6 @@ msgstr "Pozvaní členové"
 msgid "Revoke Invitation"
 msgstr "Odvolat pozvánku"
 
-msgid "Decline Invitation"
-msgstr "Odmítnout pozvánku"
-
 msgid "Accept Invitation"
 msgstr "Přijmout pozvánku"
 
@@ -2814,9 +3440,6 @@ msgstr "Opravdu chcete odvolat pozvánku pro člena \"%(name)s\"?"
 
 msgid "Revoke Invitation for Member"
 msgstr "Zrušit pozvánku pro člena"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "Opravdu chcete odmítnout pozvánku?"
 
 msgid "There are no pending invitations."
 msgstr "Neexistují žádné nevyřízené pozvánky."
@@ -2853,9 +3476,6 @@ msgstr "kým"
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "Opravdu chcete smazat pozvánku pro \"%(title)s\"?"
 
-msgid "Membership requests"
-msgstr "Žádosti o členství"
-
 msgid "Decline User"
 msgstr "Odmítnout uživatele"
 
@@ -2891,6 +3511,11 @@ msgstr "Poslat zprávu všem členům"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
 msgstr "Poslat zprávu"
+
+#, fuzzy
+#| msgid "This account is inactive."
+msgid "User account inactive"
+msgstr "Tento účet je neaktivní."
 
 msgid "Kick"
 msgstr "Vykoupnout"
@@ -2946,14 +3571,6 @@ msgstr "Exportovat"
 msgid "Edit “%(team_name)s”"
 msgstr "Upravit “%(team_name)s”"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Create Group"
-msgstr "Vytvořit skupinu"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Create Project"
-msgstr "Vytvořit projekt"
-
 msgid "Help about groups"
 msgstr "Nápověda ke skupinám"
 
@@ -2962,12 +3579,6 @@ msgstr "Nápověda k projektům"
 
 msgid "Help about the microsite"
 msgstr "Nápověda k mikrostránce"
-
-msgid "Edit Group"
-msgstr "Upravit skupinu"
-
-msgid "Edit Project"
-msgstr "Upravit projekt"
 
 msgid "Let's bring this idea to life!"
 msgstr "Pojďme oživit tento nápad!"
@@ -2988,21 +3599,42 @@ msgstr "Samozřejmě můžete také vytvořit projekt bez připojení k nápadu 
 msgid "Facebook-Integration"
 msgstr "Integrace Facebooku"
 
+msgid "After you have created the conference, you can create conference rooms and events."
+msgstr ""
+
 #, fuzzy
-msgid "Conference Settings"
-msgstr "Konference probíhá"
+#| msgid "Conference successfully started and user accounts activated"
+msgid "Conference start and end date and time"
+msgstr "Konference byla úspěšně zahájena a uživatelské účty aktivovány"
 
-msgid "Group name"
-msgstr "Název skupiny"
+msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+msgstr ""
 
-msgid "Project name"
-msgstr "Název projektu"
+msgid "Require participation applications for this conference"
+msgstr ""
 
-msgid "Enter a name for the group."
-msgstr "Zadejte název skupiny."
+msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
+msgstr ""
 
-msgid "Enter a name for the project."
-msgstr "Zadejte název projektu."
+msgid "In which projects' or groups' calendars should the conference be shown?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Select related Projects/Groups"
+msgid "Select Projects/Groups"
+msgstr "Vybrat související projekty/skupiny"
+
+msgid "Description and Infos"
+msgstr "Popis a informace"
+
+msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
+msgstr "Toto je veřejný popis, který může kdokoli vidět a bude zobrazen na mikrostránce."
+
+msgid "Contact info"
+msgstr "Kontaktní informace"
+
+msgid "How you can be reached, addresses, social media, etc..."
+msgstr "Jak vás lze zastihnout, adresy, sociální média atd."
 
 msgid "Short description"
 msgstr "Krátký popis"
@@ -3016,6 +3648,19 @@ msgstr "Popište projekt několika větami."
 msgid "This description will be publicly visible."
 msgstr "Tento popis bude veřejně viditelný."
 
+#, fuzzy
+msgid "Conference Theme Color"
+msgstr "Vedení konference"
+
+msgid "Hex code (example: #A2A2A2)"
+msgstr ""
+
+msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
+msgstr ""
+
+msgid "Icon"
+msgstr ""
+
 msgid "A picture for better recognition."
 msgstr "Obrázek pro lepší rozeznání."
 
@@ -3025,11 +3670,19 @@ msgstr "Velikost souboru"
 msgid "max. 10 MB"
 msgstr "max. 10 MB"
 
+#, fuzzy
+#| msgid "Header image"
+msgid "Banner Image"
+msgstr "Obrázek záhlaví"
+
 msgid "Upload an image."
 msgstr "Nahrát obrázek."
 
 msgid "Reset"
 msgstr "Obnovit"
+
+msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgstr ""
 
 msgid "Example: http://mywebsite.com"
 msgstr "Příklad: http://mywebsite.com"
@@ -3039,9 +3692,6 @@ msgstr ""
 
 msgid "Select sustainable development goals"
 msgstr ""
-
-msgid "Where are you active?"
-msgstr "Kde jste aktivní?"
 
 msgid "Remove location"
 msgstr "Odebrat umístění"
@@ -3097,18 +3747,6 @@ msgstr "Které aplikace by měly být aktivovány?"
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Tuto aplikaci lze aktivovat pouze pro skupinu, nikoli však pro projekt!"
-
-msgid "Description and Infos"
-msgstr "Popis a informace"
-
-msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
-msgstr "Toto je veřejný popis, který může kdokoli vidět a bude zobrazen na mikrostránce."
-
-msgid "Contact info"
-msgstr "Kontaktní informace"
-
-msgid "How you can be reached, addresses, social media, etc..."
-msgstr "Jak vás lze zastihnout, adresy, sociální média atd."
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Z jakých aplikací by se měly veřejné položky zobrazovat na mikrostránce?"
@@ -3185,16 +3823,6 @@ msgstr "Integrace s Facebookem je k dispozici po vytvoření projektu!"
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Zde zadaný kód HTML se zobrazí na panelu skupiny/projektu (pouze pro členy)"
 
-#, fuzzy
-msgid "Conference Theme Color"
-msgstr "Vedení konference"
-
-msgid "Hex code (example: #A2A2A2)"
-msgstr ""
-
-msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
 msgstr "Pozvánky"
@@ -3227,9 +3855,6 @@ msgstr "(Neaktivní)"
 msgid "Leave"
 msgstr "Odejít"
 
-msgid "Withdraw"
-msgstr "Stáhnout"
-
 msgid "Details"
 msgstr "Detaily"
 
@@ -3254,53 +3879,6 @@ msgstr "Nejste spokojeni s tím, jak vypadá vaše mikrostránka?"
 
 msgid "Change it here..."
 msgstr "Změňte to zde..."
-
-msgid "You have been invited to collaborate!"
-msgstr "Byli jste pozváni ke spolupráci!"
-
-msgid "Register and join!"
-msgstr "Zaregistrujte se a připojte se!"
-
-msgid "Join now and collaborate!"
-msgstr "Připojte se teď a spolupracujte!"
-
-msgid "Register"
-msgstr "Registrovat"
-
-msgid "Log in"
-msgstr "Přihlásit se"
-
-msgid "You are a member!"
-msgstr "Jste členem!"
-
-msgid "View Project"
-msgstr "Zobrazit projekt"
-
-msgid "View Group"
-msgstr "Zobrazit skupinu"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership request pending..."
-msgstr "Nevyřízená žádost o členství..."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "You are invited!"
-msgstr "Jste pozváni!"
-
-msgid "Collaborate!"
-msgstr "Spolupracovat!"
-
-msgid "Join now!"
-msgstr "Připojit se teď!"
-
-msgid "Browse"
-msgstr "Procházet"
-
-msgid "Public Project"
-msgstr "Veřejný projekt"
-
-msgid "Public Group"
-msgstr "Veřejná skupina"
 
 msgid "News posts"
 msgstr "Novinky"
@@ -3341,19 +3919,6 @@ msgstr "Sdílet na Twitteru"
 msgid "Sustainable Development Goals"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Contact"
-msgstr "Kontakt"
-
-msgid "No contact data has been added yet."
-msgstr "Zatím nebyly přidány žádné kontaktní údaje."
-
-msgid "Project Administrator"
-msgstr "Správce projektu"
-
-msgid "Group Administrator"
-msgstr "Správce skupiny"
-
 msgid "Tweets"
 msgstr "Tweety"
 
@@ -3363,18 +3928,41 @@ msgstr "Galerie Flickr"
 msgid "Call to Action"
 msgstr "Výzva k akci"
 
+msgid "Register"
+msgstr "Registrovat"
+
+msgid "Log in"
+msgstr "Přihlásit se"
+
+msgid "You are a member!"
+msgstr "Jste členem!"
+
+msgid "View Project"
+msgstr "Zobrazit projekt"
+
+msgid "View Group"
+msgstr "Zobrazit skupinu"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership request pending..."
+msgstr "Nevyřízená žádost o členství..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are invited!"
+msgstr "Jste pozváni!"
+
+msgid "Join now!"
+msgstr "Připojit se teď!"
+
+msgid "Browse"
+msgstr "Procházet"
+
 #, python-format
 msgid "Users in team %(group)s"
 msgstr "Uživatelé v týmu %(group)s"
 
 msgid "There are no visible users."
 msgstr "Žádní viditelní uživatelé."
-
-msgid "All projects"
-msgstr "Všechny projekty"
-
-msgid "All groups"
-msgstr "Všechny skupiny"
 
 msgid "All users"
 msgstr "Všichni uživatelé"
@@ -3385,6 +3973,12 @@ msgstr "Správci portálu"
 msgid "All societies"
 msgstr "Všechny společnosti"
 
+msgid "All projects"
+msgstr "Všechny projekty"
+
+msgid "Temporary User Accounts"
+msgstr ""
+
 msgid "Reminder emails"
 msgstr ""
 
@@ -3392,18 +3986,6 @@ msgstr ""
 #, fuzzy
 msgid "Organizations"
 msgstr "Pozvánky"
-
-msgid "Re-activate Group"
-msgstr "Znovu aktivovat skupinu"
-
-msgid "Deactivate Group"
-msgstr "Deaktivovat skupinu"
-
-msgid "Activate Project"
-msgstr "Aktivovat projekt"
-
-msgid "Deactivate Project"
-msgstr "Deaktivovat projekt"
 
 msgid "Withdraw Request"
 msgstr "Stáhnout žádost"
@@ -3728,7 +4310,7 @@ msgid ""
 "\n"
 "an account was just created for you on %(site_name)s. We're happy to see you!\n"
 "\n"
-"In order to start using your account, you need to first set a password for it.\n"
+"In order to start using your account, you need to first set a password for it. Afterwards, you may log in using your email %(user_mail)s and the password you have set.\n"
 "\n"
 "\n"
 "Please click on the following link to set your initial password (or copy and paste the link it in your browser):\n"
@@ -4417,10 +4999,17 @@ msgstr "Odkaz na obnovení hesla byl neplatný, pravděpodobně proto, že již 
 msgid "Password reset successful"
 msgstr "Obnovení hesla bylo úspěšné"
 
-msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
-msgstr "Pokyny k nastavení hesla jsme vám zaslali e-mailem. Brzy byste je měli obdržet."
+#, fuzzy
+#| msgid "Password reset complete"
+msgid "Password reset request received."
+msgstr "Obnovení hesla dokončeno"
 
-msgid "If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder."
+msgid "If there is an account registered with the email address you entered, we will email you instructions for resetting the account password shortly."
+msgstr ""
+
+#, fuzzy
+#| msgid "If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder."
+msgid "If you don't receive an email, please make sure you entered the correct email address associated with your account, and check your spam folder."
 msgstr "Pokud e-mail neobdržíte, zkontrolujte, zda jste zadali adresu, se kterou jste se zaregistrovali, a zkontrolujte složku se spamem."
 
 #, python-format
@@ -4436,10 +5025,14 @@ msgstr "Vaše uživatelské jméno, pokud jste zapomněli:"
 msgid "Thanks for using our site!"
 msgstr "Děkujeme, že používáte náš web!"
 
-msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
+#, fuzzy
+#| msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
+msgid "Forgotten your password? Enter your account's email address below, and we'll email instructions for setting a new one."
 msgstr "Zapomněli jste heslo? Zadejte níže svou e-mailovou adresu a my vám zašleme e-mailem pokyny pro nastavení nového."
 
-msgid "The email you used to register your account. This is the one you receive email notifications on"
+#, fuzzy
+#| msgid "The email you used to register your account. This is the one you receive email notifications on"
+msgid "The email associated with your account. This should the email address you receive email notifications on."
 msgstr "E-mail, který jste použili při registraci účtu. Na ten dostáváte e-mailová oznámení"
 
 msgid "Example: mymail@example.com"
@@ -4632,23 +5225,8 @@ msgstr "E-maily všech odběratelů newsletterů"
 msgid "E-Mails of ALL active users"
 msgstr "E-maily VŠECH aktivních uživatelů"
 
-msgid "Date"
-msgstr "Datum"
-
-msgid "From"
-msgstr "Od"
-
-msgid "Start date."
-msgstr "Počáteční datum."
-
 msgid "Time"
 msgstr "Čas"
-
-msgid "Until"
-msgstr "Do"
-
-msgid "End date."
-msgstr "Konečné datum."
 
 msgid "Ok"
 msgstr "OK"
@@ -4716,6 +5294,14 @@ msgstr "Vytvořit uživatele"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Event"
 msgstr "Vytvořit událost"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Project"
+msgstr "Vytvořit projekt"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Group"
+msgstr "Vytvořit skupinu"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4821,11 +5407,6 @@ msgstr "Procházet všechny skupiny"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Browse all Projects"
 msgstr "Procházet všechny projekty"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-msgid "My Conferences"
-msgstr "Je konference"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4954,6 +5535,50 @@ msgid "No description yet."
 msgstr "Zatím žádný popis."
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "max."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "You are participating"
+msgstr "Jste členem"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Participation request pending..."
+msgstr "Nevyřízená žádost o členství..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Participants"
+msgid "Participate"
+msgstr "Účastníci"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Contact organizers"
+msgstr "Kontaktní informace"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will now receive notifications for content posted in this group."
+msgid "You will now receive notifications for content posted."
+msgstr "Nyní budete dostávat oznámení o obsahu zveřejněném v této skupině."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If you do not want notifications, click the unfollow button!"
+msgstr "Pokud nechcete dostávat oznámení, klikněte na tlačítko zrušit sledování!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr "Vaše nastavení Like se nepodařilo uložit z důvodu chyby."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr "Vaše nastavení sledování se nepodařilo uložit z důvodu chyby."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
 msgstr "Vyberte umístění pro svůj nápad přetažením značky. Toto umístění můžete později změnit."
 
@@ -4992,18 +5617,6 @@ msgstr "Navštívit stránku události"
 #. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for comments or when this event is updated or its details change."
 msgstr "Nyní budete dostávat oznámení o komentářích nebo o aktualizaci této události nebo změně jejích podrobností."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "If you do not want notifications, click the unfollow button!"
-msgstr "Pokud nechcete dostávat oznámení, klikněte na tlačítko zrušit sledování!"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your like setting because of an error."
-msgstr "Vaše nastavení Like se nepodařilo uložit z důvodu chyby."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your follow setting because of an error."
-msgstr "Vaše nastavení sledování se nepodařilo uložit z důvodu chyby."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Hidden Users"
@@ -5389,7 +6002,14 @@ msgstr "Zatím nejsou k dispozici žádná oznámení."
 msgid "User Import Archive"
 msgstr ""
 
-msgid "Archived User Imports"
+msgid "Archived User Import Entry"
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to delete this Archived User Import Entry?"
+msgstr "Opravdu chcete odmítnout pozvánku?"
+
+msgid "Delete Archived User Import Entry"
 msgstr ""
 
 #, fuzzy
@@ -5431,7 +6051,7 @@ msgstr ""
 
 #, fuzzy
 #| msgid "No contact data has been added yet."
-msgid "No data has been imported yet."
+msgid "No data has been imported yet. Ready to import!"
 msgstr "Zatím nebyly přidány žádné kontaktní údaje."
 
 msgid "The uploaded data is valid and ready to be imported! Please review carefully!"
@@ -5455,6 +6075,11 @@ msgstr ""
 #, python-format
 msgid "Once you are ready to begin the import, please click \"%(submit_button_label)s\" at the bottom of the page."
 msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "No data has been imported yet."
+msgstr "Zatím nebyly přidány žádné kontaktní údaje."
 
 msgid "The uploaded data is invalid!"
 msgstr ""
@@ -5748,17 +6373,11 @@ msgstr "Upravit můj profil"
 msgid "What's happening where and when? What's to discover? Where to meet?"
 msgstr "Co se kde a kdy děje? Co objevovat? Kde se setkat?"
 
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
-msgstr "Skupiny pomáhají zlepšovat komunikaci a spolupráci ve velkých sítích nebo organizacích. V rámci skupiny můžete spojit několik menších projektů nebo pracovních skupin."
-
 msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
 msgstr "Jak bude vypadat náš region v budoucnu? Jaká je vaše představa o ekologicky šetrném a udržitelném regionu? Najděte pomocníky svých nápadů na projekty."
 
 msgid "Do you have something to share, sell or give away? Are you searching for something?"
 msgstr "Máte co sdílet, prodat nebo rozdat? Hledáte něco?"
-
-msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
-msgstr "Efektivně organizujte své projekty nebo iniciativy se svými spolupracovníky. Všechny důležité nástroje pro spolupráci na jednom místě: Novinky, pady, události, úkoly a další."
 
 msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "Welcome"
@@ -5868,6 +6487,335 @@ msgstr "(Vymazaný uživatel)"
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>Prohlížeč pro %(model_name)s nebyl nalezen!</i>"
 
+#, fuzzy
+#| msgid "You are not in any groups or projects yet"
+msgid "You are not currently in any Projects"
+msgstr "Zatím nejste v žádné skupině ani projektu"
+
+msgid "Project Menu"
+msgstr "Menu projektu"
+
+msgid "Project Dashboard"
+msgstr "Panel projektu"
+
+msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
+msgstr "Efektivně organizujte své projekty nebo iniciativy se svými spolupracovníky. Všechny důležité nástroje pro spolupráci na jednom místě: Novinky, pady, události, úkoly a další."
+
+msgid "Edit Project"
+msgstr "Upravit projekt"
+
+msgid "Activate Project"
+msgstr "Aktivovat projekt"
+
+#, fuzzy
+#| msgid "Deactivate Project"
+msgid "Re-activate Project"
+msgstr "Deaktivovat projekt"
+
+msgid "Deactivate Project"
+msgstr "Deaktivovat projekt"
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group!"
+msgid "You are about to deactivate this project!"
+msgstr "Chystáte se deaktivovat tento projekt/skupinu!"
+
+#, fuzzy
+#| msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
+msgid "You are about to re-activate this project. It and all of its content will be visible on the website again."
+msgstr "Chystáte se znovu aktivovat tento projekt/skupinu. Ten/ta a veškerý jeho/její obsah bude na webu znovu viditelný."
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr "Chystáte se deaktivovat tento projekt/skupinu. Ten/ta a veškerý jeho/její obsah bude na webu skryt a neviditelný pro všechny, včetně vás."
+
+#, fuzzy
+#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+msgstr "Tento proces je reverzibilní. Projekt/skupinu můžete ze svého uživatelského profilu kdykoli znovu aktivovat."
+
+#, fuzzy
+#| msgid "Convert selected Groups to Projects"
+msgid "Convert selected items to Projects"
+msgstr "Převést vybrané skupiny na projekty"
+
+#, fuzzy
+#| msgid "Project Administrator"
+msgid "Project administrator"
+msgstr "Správce projektu"
+
+msgid "Project name"
+msgstr "Název projektu"
+
+msgid "Enter a name for the project."
+msgstr "Zadejte název projektu."
+
+#, fuzzy
+#| msgid "Where are you active?"
+msgid "Where is the project active?"
+msgstr "Kde jste aktivní?"
+
+#, fuzzy
+#| msgid "Team members only"
+msgid "Project members only"
+msgstr "Jen členové týmu"
+
+msgid "Collaborate!"
+msgstr "Spolupracovat!"
+
+msgid "Join now and collaborate!"
+msgstr "Připojte se teď a spolupracujte!"
+
+msgid "You have been invited to collaborate!"
+msgstr "Byli jste pozváni ke spolupráci!"
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
+msgstr "Litujeme, pouze správci portálu mohou deaktivovat skupiny! Můžete napsat zprávu jednomu ze správců, aby ji pro vás deaktivoval. Níže naleznete seznam všech správců."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgstr "Litujeme, pouze správci portálu mohou deaktivovat skupiny! Můžete napsat zprávu jednomu ze správců, aby ji pro vás deaktivoval. Níže naleznete seznam všech správců."
+
+#, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only project members can see the content you requested. Apply to become a member now!"
+msgstr "Vámi vybraný obsah mohou zobrazit pouze členové týmu. Podejte žádost o členství hned teď!"
+
+#, fuzzy
+#| msgid "You are not in any groups or projects yet"
+msgid "You are not currently in any Groups"
+msgstr "Zatím nejste v žádné skupině ani projektu"
+
+msgid "Group Menu"
+msgstr "Menu skupiny"
+
+msgid "Group Dashboard"
+msgstr "Panel skupiny"
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgstr "Skupiny pomáhají zlepšovat komunikaci a spolupráci ve velkých sítích nebo organizacích. V rámci skupiny můžete spojit několik menších projektů nebo pracovních skupin."
+
+msgid "Edit Group"
+msgstr "Upravit skupinu"
+
+#, fuzzy
+#| msgid "Deactivate Group"
+msgid "Activate Group"
+msgstr "Deaktivovat skupinu"
+
+msgid "Re-activate Group"
+msgstr "Znovu aktivovat skupinu"
+
+msgid "Deactivate Group"
+msgstr "Deaktivovat skupinu"
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group!"
+msgid "You are about to deactivate this group!"
+msgstr "Chystáte se deaktivovat tento projekt/skupinu!"
+
+#, fuzzy
+#| msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
+msgid "You are about to re-activate this group. It and all of its content will be visible on the website again."
+msgstr "Chystáte se znovu aktivovat tento projekt/skupinu. Ten/ta a veškerý jeho/její obsah bude na webu znovu viditelný."
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr "Chystáte se deaktivovat tento projekt/skupinu. Ten/ta a veškerý jeho/její obsah bude na webu skryt a neviditelný pro všechny, včetně vás."
+
+#, fuzzy
+#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+msgstr "Tento proces je reverzibilní. Projekt/skupinu můžete ze svého uživatelského profilu kdykoli znovu aktivovat."
+
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Convert selected items to Groups"
+msgstr "Převést vybrané projekty na skupiny"
+
+#, fuzzy
+#| msgid "Group Administrator"
+msgid "Group administrator"
+msgstr "Správce skupiny"
+
+msgid "Group name"
+msgstr "Název skupiny"
+
+msgid "Enter a name for the group."
+msgstr "Zadejte název skupiny."
+
+#, fuzzy
+#| msgid "Where are you active?"
+msgid "Where is the group active?"
+msgstr "Kde jste aktivní?"
+
+#, fuzzy
+#| msgid "Team members only"
+msgid "Group members only"
+msgstr "Jen členové týmu"
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+msgstr "Litujeme, pouze správci portálu mohou deaktivovat skupiny! Můžete napsat zprávu jednomu ze správců, aby ji pro vás deaktivoval. Níže naleznete seznam všech správců."
+
+msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgstr "Litujeme, pouze správci portálu mohou deaktivovat skupiny! Můžete napsat zprávu jednomu ze správců, aby ji pro vás deaktivoval. Níže naleznete seznam všech správců."
+
+#, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only group members can see the content you requested. Apply to become a member now!"
+msgstr "Vámi vybraný obsah mohou zobrazit pouze členové týmu. Podejte žádost o členství hned teď!"
+
+#, fuzzy
+msgid "Conferences"
+msgstr "Je konference"
+
+#, fuzzy
+msgid "All Conferences"
+msgstr "Je konference"
+
+#, fuzzy
+msgid "My Conferences"
+msgstr "Je konference"
+
+#, fuzzy
+msgid "You are not currently attending any Conferences"
+msgstr "Neodpověděli jste na žádné události."
+
+#, fuzzy
+msgid "Conference Menu"
+msgstr "Vedení konference"
+
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Conference Dashboard"
+msgstr "Panel projektu"
+
+#, fuzzy
+#| msgid "Browse all Projects"
+msgid "Browse all Conferences"
+msgstr "Procházet všechny projekty"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Create Conference"
+msgstr "Vytvořit událost"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Create new Conference"
+msgstr "Vytvořit událost"
+
+msgid "Conferences let you set up and host workshops and events over multiple days, complete with video messaging, stage stream integration, breakout rooms and lobby chats."
+msgstr ""
+
+#, fuzzy
+msgid "Edit Conference"
+msgstr "Je konference"
+
+#, fuzzy
+#| msgid "Activate Project"
+msgid "Activate Conference"
+msgstr "Aktivovat projekt"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Re-activate Conference"
+msgstr "Vytvořit událost"
+
+#, fuzzy
+#| msgid "Deactivate Project"
+msgid "Deactivate Conference"
+msgstr "Deaktivovat projekt"
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group!"
+msgid "You are about to deactivate this conference!"
+msgstr "Chystáte se deaktivovat tento projekt/skupinu!"
+
+#, fuzzy
+#| msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
+msgid "You are about to re-activate this conference. It and all of its content will be visible on the website again."
+msgstr "Chystáte se znovu aktivovat tento projekt/skupinu. Ten/ta a veškerý jeho/její obsah bude na webu znovu viditelný."
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr "Chystáte se deaktivovat tento projekt/skupinu. Ten/ta a veškerý jeho/její obsah bude na webu skryt a neviditelný pro všechny, včetně vás."
+
+#, fuzzy
+#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+msgstr "Tento proces je reverzibilní. Projekt/skupinu můžete ze svého uživatelského profilu kdykoli znovu aktivovat."
+
+#, fuzzy
+#| msgid "Convert selected Groups to Projects"
+msgid "Convert selected items to Conferences"
+msgstr "Převést vybrané skupiny na projekty"
+
+#, fuzzy
+msgid "Conference contact person"
+msgstr "Vedení konference"
+
+#, fuzzy
+msgid "Conference name"
+msgstr "Vedení konference"
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a name for the conference."
+msgstr "Zadejte název projektu."
+
+#, fuzzy
+#| msgid "Describe the project in a few sentences."
+msgid "Describe the conference in a few sentences."
+msgstr "Popište projekt několika větami."
+
+#, fuzzy
+#| msgid "Where are you active?"
+msgid "Where is the conference active?"
+msgstr "Kde jste aktivní?"
+
+#, fuzzy
+msgid "Conference members only"
+msgstr "Vedení konference"
+
+#, fuzzy
+#| msgid "Participants"
+msgid "Participate!"
+msgstr "Účastníci"
+
+#, fuzzy
+#| msgid "Join now and collaborate!"
+msgid "Join now and participate!"
+msgstr "Připojte se teď a spolupracujte!"
+
+#, fuzzy
+#| msgid "You have been invited to collaborate!"
+msgid "You have been invited to participate!"
+msgstr "Byli jste pozváni ke spolupráci!"
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
+msgstr "Litujeme, pouze správci portálu mohou deaktivovat skupiny! Můžete napsat zprávu jednomu ze správců, aby ji pro vás deaktivoval. Níže naleznete seznam všech správců."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgstr "Litujeme, pouze správci portálu mohou deaktivovat skupiny! Můžete napsat zprávu jednomu ze správců, aby ji pro vás deaktivoval. Níže naleznete seznam všech správců."
+
+#, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the content you requested. Apply to become a member now!"
+msgstr "Vámi vybraný obsah mohou zobrazit pouze členové týmu. Podejte žádost o členství hned teď!"
+
 msgid "Team Description"
 msgstr "Popis týmu"
 
@@ -5896,9 +6844,6 @@ msgstr ""
 msgid "Test email sent!"
 msgstr "Testovací e-mail odeslán!"
 
-msgid "Newsletter successfully created!"
-msgstr ""
-
 msgid "Newsletter sent."
 msgstr ""
 
@@ -5915,13 +6860,20 @@ msgstr ""
 msgid "Newsletter has been updated."
 msgstr "(Nahlášená položka byla odstraněna.)"
 
-msgid "Login tokens were sent."
+msgid "Newsletter successfully created!"
 msgstr ""
 
-msgid "Login token was sent."
+msgid "Login tokens to all previously uninvited users are now being sent."
+msgstr ""
+
+#, python-format
+msgid "Login token was sent to %(email)s."
 msgstr ""
 
 msgid "Die Änderungen wurden erfolgreich gespeichert."
+msgstr ""
+
+msgid "Login token was sent."
 msgstr ""
 
 #, fuzzy
@@ -5985,9 +6937,6 @@ msgstr "Váš účet na Facebooku byl od tohoto účtu úspěšně odpojen."
 
 msgid "Sorry, only portal administrators can create projects and groups!"
 msgstr "Litujeme, projekty a skupiny mohou vytvářet pouze správci portálu!"
-
-msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-msgstr "Je nám líto, skupiny mohou vytvářet pouze správci portálu! Můžete buď vytvořit projekt, nebo napsat zprávu některému ze správců a vytvořit pro vás skupinu. Níže naleznete seznam všech správců."
 
 #, python-format
 msgid "%(team_type)s \"%(group)s\" was created successfully."
@@ -6071,6 +7020,14 @@ msgstr "Uživatel %(username)s již požádal o členství a nyní se stal člen
 msgid "User %(username)s was successfully invited!"
 msgstr "Uživatel %(username)s byl úspěšně pozván!"
 
+#, fuzzy, python-format
+#| msgid "The following Users were added to this portal:"
+msgid "The following users were invited to apply: %s"
+msgstr "Na tento portál byli přidáni následující uživatelé:"
+
+msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
+msgstr ""
+
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "Z tohoto týmu nemůžete odstranit uživatele “%(username)s”. Zbývá pouze jeden správce."
@@ -6103,14 +7060,14 @@ msgstr "%(team_name)s byl úspěšně znovu aktivován!"
 msgid "%(team_name)s was deactivated successfully!"
 msgstr "%(team_name)s byl úspěšně deaktivován!"
 
-msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
-msgstr "Litujeme, pouze správci portálu mohou deaktivovat skupiny! Můžete napsat zprávu jednomu ze správců, aby ji pro vás deaktivoval. Níže naleznete seznam všech správců."
-
 msgid "This project/group is already active!"
 msgstr "Tento projekt/skupina je již aktivní!"
 
 msgid "This project/group is already inactive!"
 msgstr "Tento projekt/skupina je již neaktivní!"
+
+msgid "You are not a member, but have access because you are an Administrator."
+msgstr ""
 
 msgid "Only group/project members have permission to do this!"
 msgstr "K tomu mají oprávnění pouze členové skupiny/projektu!"
@@ -6276,6 +7233,9 @@ msgstr "Při zpracování vašich pozvánek došlo k chybě. Některá z vašich
 msgid "You are already logged in!"
 msgstr "Už jste přihlášen!"
 
+msgid "User signup is currently disabled!"
+msgstr ""
+
 msgid "Please enter a token!"
 msgstr "Zadejte prosím token!"
 
@@ -6350,6 +7310,11 @@ msgid "Your Announcement was deactivated successfully."
 msgstr "Vaše oznámení bylo úspěšně deaktivováno."
 
 #, fuzzy
+#| msgid "Your Announcement was deleted successfully."
+msgid "The Archived User Import Entry was deleted successfully."
+msgstr "Vaše oznámení bylo úspěšně smazáno."
+
+#, fuzzy
 #| msgid "This action is not available directly!"
 msgid "This action is not allowed right now"
 msgstr "Tato akce není k dispozici přímo!"
@@ -6379,6 +7344,47 @@ msgstr "Momentálně nejste členem %s! Pokud si přejete, můžete požádat o 
 
 msgid "Your changes have been saved."
 msgstr "Vaše změny byly uloženy."
+
+#~ msgid "The following Groups were converted to Projects:"
+#~ msgstr "Následující skupiny byly převedeny na projekty:"
+
+#~ msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
+#~ msgstr "Je-li skupina označena jako konference, je možné automaticky generovat účty pro účastníky workshopu"
+
+#~ msgid "Determins whether a group that is marked as conference is running"
+#~ msgstr "Určuje, zda je spuštěna skupina označená jako konference"
+
+#, fuzzy
+#~| msgid "Search for Ideas"
+#~ msgid "Search for email"
+#~ msgstr "Hledat nápady"
+
+#~ msgid "Add workshop"
+#~ msgstr "Přidat workshop"
+
+#~ msgid "Re-Activate Project/Group"
+#~ msgstr "Znovu aktivovat projekt/skupinu"
+
+#~ msgid "Deactivate Project/Group"
+#~ msgstr "Deaktivovat projekt/skupinu"
+
+#~ msgid "Deactivated Projects and Groups"
+#~ msgstr "Deaktivované projekty a skupiny"
+
+#~ msgid "Public Project"
+#~ msgstr "Veřejný projekt"
+
+#~ msgid "Public Group"
+#~ msgstr "Veřejná skupina"
+
+#~ msgid "All groups"
+#~ msgstr "Všechny skupiny"
+
+#~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
+#~ msgstr "Pokyny k nastavení hesla jsme vám zaslali e-mailem. Brzy byste je měli obdržet."
+
+#~ msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+#~ msgstr "Je nám líto, skupiny mohou vytvářet pouze správci portálu! Můžete buď vytvořit projekt, nebo napsat zprávu některému ze správců a vytvořit pro vás skupinu. Níže naleznete seznam všech správců."
 
 #~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 #~ msgstr "Nahrajte soubor CSV s následujícími sloupci: jedinečný identifikátor uživatele, jméno, příjmení a jeden sloupec pro každý workshop označený identifikátorem workshopu. Pro nápovědu si můžete stáhnout šablonu <a href=\"%(workshop_participants_upload_skeleton)s\">zde</a>"

@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-03 17:20+0100\n"
+"POT-Creation-Date: 2021-02-23 18:24+0100\n"
 "PO-Revision-Date: 2020-11-05 11:50+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: \n"
-"Language: fr\n"
 
 msgid "Conferences"
 msgstr "Conférences"
@@ -25,236 +25,53 @@ msgctxt "the_app"
 msgid "conference"
 msgstr "Conférence"
 
+msgid "End date must be before start date"
+msgstr ""
+
+msgid "Please also provide a start date"
+msgstr ""
+
+msgid "Please also provide a end date"
+msgstr ""
+
+#, fuzzy
+#| msgid "First Name"
+msgid "First Choice"
+msgstr "Prénom"
+
+msgid "Second Choice"
+msgstr ""
+
 msgid "Conference Management"
 msgstr "Gestion des conférences"
 
-msgid "Conference is running"
-msgstr "La conférence est en cours"
-
-msgid "Conference is not running"
-msgstr "La conférence n'est pas en cours"
-
-msgid "Accounts from CSV Upload"
-msgstr "Comptes à partir de CSV téléchargement"
-
-msgid "Upload Participants"
-msgstr "Télécharger participants"
-
-msgid "last login"
-msgstr "dernière connexion"
-
-msgid "no login yet"
-msgstr "pas encore de connexion"
-
-msgid "Admin"
-msgstr "Administrateur"
-
-msgid "Member"
-msgstr "Membre"
-
-msgid "active"
-msgstr "Est actif"
-
-msgid "not active"
-msgstr "inactif"
-
-msgid "User participates in the following workshops:"
-msgstr "L'utilisateur participe aux ateliers suivants:"
-
-msgid "deactivate member"
-msgstr "Désactive membre"
-
-msgid "activate member"
-msgstr "Activer le membre"
-
-msgid "remove user"
-msgstr "Enlever le membre"
-
-msgid "Do you really want to deactivate the member's user account ?"
-msgstr "Souhaitez-vous vraiment désactiver le compte utilisateur du membre?"
-
-msgid "Deactivate Member"
-msgstr "Désactiver le membre"
-
-msgid "Do you really want to activate the member's user account ?"
-msgstr "Souhaitez-vous vraiment activer le compte utilisateur du membre?"
-
-msgid "Activate Member"
-msgstr "Activer le membre"
-
-msgid "Do you really want to remove the user?"
-msgstr "Souhaitez-vous vraiment supprimer l'utilisateur?"
-
-msgid "Remove User"
-msgstr "Enlever le membre"
-
-msgid "Finish conference and deactivate user accounts"
-msgstr "Terminer la conférence et désactiver les comptes d'utilisateurs"
-
-msgid "Start conference and activate user accounts"
-msgstr "Démarrer la conférence et activer les comptes d'utilisateurs"
-
-msgid "Download Statistics"
-msgstr "Télecharger les statistiques"
-
-msgid "Workshops"
-msgstr "Ateliers"
-
-msgid "Add workshop"
-msgstr "Ajouter l'atelier"
+msgid "Workshop Participant File Upload"
+msgstr ""
 
 #, python-format
-msgid "Edit Room “%(title)s”"
-msgstr "Editer l'espace \"%(title)s\""
-
-msgid "Create Room"
-msgstr "Créer un espace"
-
-msgid "Conference Room Management"
-msgstr "Gestion des conférences"
-
-msgid "Edit Room"
-msgstr "Editer l'espace"
-
-msgid ""
-"There was an error in one of the fields you entered. Please correct it "
-"before saving!"
+msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 msgstr ""
-"Il y a une erreur dans l'un des champs que tu as saisis. Corrige-la avant "
-"d'enregistrer !"
 
-msgid "Room type"
-msgstr "Type de pièce"
-
-msgid "TODO: Room Type Lobby description text"
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
 msgstr ""
-"Le hall est l'entrée principale pour les participants. Vous y trouverez "
-"l'ordre du jour de la conférence."
 
-msgid "TODO: Room Type Stage description text"
+msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
 msgstr ""
-"La scène est utilisée pour afficher des flux, par exemple de YouTube ou de "
-"Vimeo. Un chat est affiché à côté."
 
-msgid "TODO: Room Type Workshops description text"
+msgid "Upload File"
 msgstr ""
-"Dans les salles d'ateliers, chaque événement dispose d'un système de "
-"vidéoconférence. Les présentateurs sont autorisés à les modérer."
 
-msgid "TODO: Room Type Discussions description text"
+#, fuzzy
+#| msgctxt "the_app"
+#| msgid "conference"
+msgid "Go to conference"
+msgstr "Conférence"
+
+msgid "This function is not enabled for this conference."
 msgstr ""
-"Dans les salles d'ateliers, chaque événement dispose d'un système de "
-"vidéoconférence. Les présentateurs sont autorisés à les modérer. Se "
-"distingue des \"salles d'atelier\" uniquement par la conception de l'ordre "
-"du jour. Atelier : tuiles, discussion : liste"
-
-msgid "TODO: Room Type Coffee Tables description text"
-msgstr ""
-"Dans le café, vous pouvez créer autant de tables que vous le souhaitez. Là, "
-"les participants peuvent se rencontrer et démarrer une vidéoconférence "
-"directement avec une webcam et un microphone."
-
-msgid "TODO: Room Type Results description text"
-msgstr "Ajoutez-y un projet que vous utiliserez à des fins documentaires."
-
-msgid "Add project"
-msgstr "Ajouter projet"
-
-msgid "TODO: Room Type Participants description text"
-msgstr "Affiche une liste de tous les participants"
-
-msgid "Maximum Coffee Table Participants"
-msgstr "Nombre maximum de participants à la table basse"
-
-msgid ""
-"How many participants should can join one coffee table before it is full"
-msgstr ""
-"Combien de participants peuvent rejoindre une table à café avant qu'elle ne "
-"soit pleine"
-
-msgid "Allow users to create new coffee tables"
-msgstr "Permettre aux utilisateurs de créer de nouvelles tables basses"
-
-msgid "Enable this to allow users to create their own coffee tables"
-msgstr "Permettre aux utilisateurs de créer leurs propres tables de café"
-
-msgid "Result Project"
-msgstr "Projet pour les résultats"
-
-msgid ""
-"Choose one of the sub-projects of this group to display as nested results-"
-"project for participants"
-msgstr ""
-"Choisissez l'un des sous-projets de ce groupe pour l'afficher en tant que "
-"projet à résultats imbriqués pour les participants"
-
-msgid "Title"
-msgstr "Titre"
-
-msgid "Sort index"
-msgstr "Numéro de tri"
-
-msgid ""
-"Number by which rooms are sorted in ascending order in the conference room "
-"navigation list"
-msgstr ""
-"Les pièces sont affichées dans la navigation des pièces par ordre croissant "
-"à partir de ce numéro."
-
-msgid "Description"
-msgstr "Description"
-
-msgid ""
-"A short description or topic for your room. Will be shown on top of the room "
-"page."
-msgstr ""
-"Brève description ou thème de la salle, apparaissant au haut de sa page."
-
-msgid "Room is visible"
-msgstr "La pièce est visible"
-
-msgid ""
-"Uncheck this to hide the room for participants (you will still be able to "
-"see it)"
-msgstr ""
-"Décochez cette case pour dissimuler la salle à la vue des participants (vous-"
-"même pourrez toujours la voir)"
-
-msgid "Save"
-msgstr "Enregistrer"
-
-msgid "Go to Room"
-msgstr "Se rendre dans la salle"
-
-msgid "hidden"
-msgstr "Caché"
-
-msgid "Delete"
-msgstr "Supprimer"
-
-msgid "Edit"
-msgstr "Modifier"
-
-msgid "Create Conference Event"
-msgstr "Créer un événement"
-
-#, python-format
-msgid "Do you really want to delete room \"%(title)s\"?"
-msgstr "Êtes-vous sûr(e) de vouloir supprimer cette pièce \"%(title)s\"?"
-
-msgid "Delete room"
-msgstr "Supprimer une salle"
-
-msgid "Room list"
-msgstr "Liste des salles"
-
-msgid "There are no rooms yet."
-msgstr "Il n'y a pas d'espaces."
 
 msgid "Conference successfully started and user accounts activated"
-msgstr ""
-"La conférence a démarré avec succès et les comptes d'utilisateurs ont été "
-"activés"
+msgstr "La conférence a démarré avec succès et les comptes d'utilisateurs ont été activés"
 
 msgid "Conference successfully finished and user accounts deactivated"
 msgstr "Conférence terminée avec succès et comptes d'utilisateurs désactivés"
@@ -291,3 +108,243 @@ msgstr "L'espace a été supprimé."
 
 msgid "The supplied Conference Room could not be found"
 msgstr "L'espace souhaité n'a pas pu être trouvée"
+
+msgid "Conference reminder settings have been successfully updated."
+msgstr ""
+
+msgid "A test email has been sent to your email address."
+msgstr ""
+
+msgid "Participation configurations have been updated."
+msgstr ""
+
+msgid "Your application has been submitted."
+msgstr ""
+
+msgid "Your application has been updated."
+msgstr ""
+
+msgid "You cannot change your application anymore."
+msgstr ""
+
+msgid "Application has been withdrawn."
+msgstr ""
+
+#, python-format
+msgid "The following users were accepted and added as members: %s"
+msgstr ""
+
+#, python-format
+msgid "The following users were put on the wait list: %s"
+msgstr ""
+
+#, python-format
+msgid "The following users were declined: %s"
+msgstr ""
+
+msgid "Your changes were saved."
+msgstr ""
+
+msgid "Option"
+msgstr ""
+
+msgid "Motivation for applying"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Contact E-Mail Address"
+msgstr ""
+
+msgid "Contact Phone Number"
+msgstr ""
+
+msgid "List of Applicants"
+msgstr ""
+
+#~ msgid "Conference is running"
+#~ msgstr "La conférence est en cours"
+
+#~ msgid "Conference is not running"
+#~ msgstr "La conférence n'est pas en cours"
+
+#~ msgid "Accounts from CSV Upload"
+#~ msgstr "Comptes à partir de CSV téléchargement"
+
+#~ msgid "Upload Participants"
+#~ msgstr "Télécharger participants"
+
+#~ msgid "last login"
+#~ msgstr "dernière connexion"
+
+#~ msgid "no login yet"
+#~ msgstr "pas encore de connexion"
+
+#~ msgid "Admin"
+#~ msgstr "Administrateur"
+
+#~ msgid "Member"
+#~ msgstr "Membre"
+
+#~ msgid "active"
+#~ msgstr "Est actif"
+
+#~ msgid "not active"
+#~ msgstr "inactif"
+
+#~ msgid "User participates in the following workshops:"
+#~ msgstr "L'utilisateur participe aux ateliers suivants:"
+
+#~ msgid "deactivate member"
+#~ msgstr "Désactive membre"
+
+#~ msgid "activate member"
+#~ msgstr "Activer le membre"
+
+#~ msgid "remove user"
+#~ msgstr "Enlever le membre"
+
+#~ msgid "Do you really want to deactivate the member's user account ?"
+#~ msgstr "Souhaitez-vous vraiment désactiver le compte utilisateur du membre?"
+
+#~ msgid "Deactivate Member"
+#~ msgstr "Désactiver le membre"
+
+#~ msgid "Do you really want to activate the member's user account ?"
+#~ msgstr "Souhaitez-vous vraiment activer le compte utilisateur du membre?"
+
+#~ msgid "Activate Member"
+#~ msgstr "Activer le membre"
+
+#~ msgid "Do you really want to remove the user?"
+#~ msgstr "Souhaitez-vous vraiment supprimer l'utilisateur?"
+
+#~ msgid "Remove User"
+#~ msgstr "Enlever le membre"
+
+#~ msgid "Finish conference and deactivate user accounts"
+#~ msgstr "Terminer la conférence et désactiver les comptes d'utilisateurs"
+
+#~ msgid "Start conference and activate user accounts"
+#~ msgstr "Démarrer la conférence et activer les comptes d'utilisateurs"
+
+#~ msgid "Download Statistics"
+#~ msgstr "Télecharger les statistiques"
+
+#~ msgid "Workshops"
+#~ msgstr "Ateliers"
+
+#~ msgid "Add workshop"
+#~ msgstr "Ajouter l'atelier"
+
+#~ msgid "Edit Room “%(title)s”"
+#~ msgstr "Editer l'espace \"%(title)s\""
+
+#~ msgid "Create Room"
+#~ msgstr "Créer un espace"
+
+#~ msgid "Conference Room Management"
+#~ msgstr "Gestion des conférences"
+
+#~ msgid "Edit Room"
+#~ msgstr "Editer l'espace"
+
+#~ msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+#~ msgstr "Il y a une erreur dans l'un des champs que tu as saisis. Corrige-la avant d'enregistrer !"
+
+#~ msgid "Room type"
+#~ msgstr "Type de pièce"
+
+#~ msgid "TODO: Room Type Lobby description text"
+#~ msgstr "Le hall est l'entrée principale pour les participants. Vous y trouverez l'ordre du jour de la conférence."
+
+#~ msgid "TODO: Room Type Stage description text"
+#~ msgstr "La scène est utilisée pour afficher des flux, par exemple de YouTube ou de Vimeo. Un chat est affiché à côté."
+
+#~ msgid "TODO: Room Type Workshops description text"
+#~ msgstr "Dans les salles d'ateliers, chaque événement dispose d'un système de vidéoconférence. Les présentateurs sont autorisés à les modérer."
+
+#~ msgid "TODO: Room Type Discussions description text"
+#~ msgstr "Dans les salles d'ateliers, chaque événement dispose d'un système de vidéoconférence. Les présentateurs sont autorisés à les modérer. Se distingue des \"salles d'atelier\" uniquement par la conception de l'ordre du jour. Atelier : tuiles, discussion : liste"
+
+#~ msgid "TODO: Room Type Coffee Tables description text"
+#~ msgstr "Dans le café, vous pouvez créer autant de tables que vous le souhaitez. Là, les participants peuvent se rencontrer et démarrer une vidéoconférence directement avec une webcam et un microphone."
+
+#~ msgid "TODO: Room Type Results description text"
+#~ msgstr "Ajoutez-y un projet que vous utiliserez à des fins documentaires."
+
+#~ msgid "Add project"
+#~ msgstr "Ajouter projet"
+
+#~ msgid "TODO: Room Type Participants description text"
+#~ msgstr "Affiche une liste de tous les participants"
+
+#~ msgid "Maximum Coffee Table Participants"
+#~ msgstr "Nombre maximum de participants à la table basse"
+
+#~ msgid "How many participants should can join one coffee table before it is full"
+#~ msgstr "Combien de participants peuvent rejoindre une table à café avant qu'elle ne soit pleine"
+
+#~ msgid "Allow users to create new coffee tables"
+#~ msgstr "Permettre aux utilisateurs de créer de nouvelles tables basses"
+
+#~ msgid "Enable this to allow users to create their own coffee tables"
+#~ msgstr "Permettre aux utilisateurs de créer leurs propres tables de café"
+
+#~ msgid "Result Project"
+#~ msgstr "Projet pour les résultats"
+
+#~ msgid "Choose one of the sub-projects of this group to display as nested results-project for participants"
+#~ msgstr "Choisissez l'un des sous-projets de ce groupe pour l'afficher en tant que projet à résultats imbriqués pour les participants"
+
+#~ msgid "Title"
+#~ msgstr "Titre"
+
+#~ msgid "Sort index"
+#~ msgstr "Numéro de tri"
+
+#~ msgid "Number by which rooms are sorted in ascending order in the conference room navigation list"
+#~ msgstr "Les pièces sont affichées dans la navigation des pièces par ordre croissant à partir de ce numéro."
+
+#~ msgid "Description"
+#~ msgstr "Description"
+
+#~ msgid "A short description or topic for your room. Will be shown on top of the room page."
+#~ msgstr "Brève description ou thème de la salle, apparaissant au haut de sa page."
+
+#~ msgid "Room is visible"
+#~ msgstr "La pièce est visible"
+
+#~ msgid "Uncheck this to hide the room for participants (you will still be able to see it)"
+#~ msgstr "Décochez cette case pour dissimuler la salle à la vue des participants (vous-même pourrez toujours la voir)"
+
+#~ msgid "Save"
+#~ msgstr "Enregistrer"
+
+#~ msgid "Go to Room"
+#~ msgstr "Se rendre dans la salle"
+
+#~ msgid "hidden"
+#~ msgstr "Caché"
+
+#~ msgid "Delete"
+#~ msgstr "Supprimer"
+
+#~ msgid "Edit"
+#~ msgstr "Modifier"
+
+#~ msgid "Create Conference Event"
+#~ msgstr "Créer un événement"
+
+#~ msgid "Do you really want to delete room \"%(title)s\"?"
+#~ msgstr "Êtes-vous sûr(e) de vouloir supprimer cette pièce \"%(title)s\"?"
+
+#~ msgid "Delete room"
+#~ msgstr "Supprimer une salle"
+
+#~ msgid "Room list"
+#~ msgstr "Liste des salles"
+
+#~ msgid "There are no rooms yet."
+#~ msgstr "Il n'y a pas d'espaces."

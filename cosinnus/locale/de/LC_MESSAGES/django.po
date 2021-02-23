@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-18 15:31+0100\n"
+"POT-Creation-Date: 2021-02-23 18:24+0100\n"
 "PO-Revision-Date: 2021-02-18 15:47+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -989,6 +989,14 @@ msgstr "ToS angenommen"
 
 msgid "Confernence Application"
 msgstr "Tagung Anmeldung"
+
+#, fuzzy
+#| msgid "Priority"
+msgid "Priorities"
+msgstr "Priorität"
+
+msgid "Motivation for applying"
+msgstr "Motivation für die Teilnahme"
 
 msgid "Contact E-Mail Address"
 msgstr "Kontakt-E-Mail Adresse"
@@ -2533,11 +2541,36 @@ msgstr "Bewirb dich für die Teilnahme an"
 msgid "Edit your application for"
 msgstr "Deine Anmeldung bearbeiten für"
 
+msgid "Please fill out the fields below to submit your application. Be aware that the organizers may take your profile into consideration when processing your application, so make sure that your profile page is well maintained. You can view and edit your profile page here:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Your Profile"
+msgid "Your profile"
+msgstr "Über mich"
+
+msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
+msgstr ""
+
 msgid "Please provide your motivation for applying"
 msgstr "Bitte gib deine Motivation für die Teilnahme an"
 
 msgid "Describe why you wish to participate"
 msgstr "Beschreibe, warum du teilnehmen möchtest"
+
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Optional contact information"
+msgstr "Kontaktinfos"
+
+msgid "We recommend you to provide at least one contact option for the organizers to contact you directly. This information can be seen by all organizers of the conference."
+msgstr ""
+
+#, fuzzy
+#| msgctxt "Multi-Address Field Subfield"
+#| msgid "Phone Number"
+msgid "Contact Phone Number"
+msgstr "Telefonnummer"
 
 msgid "Workshop"
 msgstr "Workshop"
@@ -2608,14 +2641,30 @@ msgstr "Zweite Wahl"
 msgid "Application submitted"
 msgstr "Teilnahmeantrag eingereicht"
 
-msgid "Motivation for applying"
-msgstr "Motivation für die Teilnahme"
-
 msgid "Workshop Assignments"
 msgstr "Workshop-Zuweisungen"
 
 msgid "Choose users to assign to this workshop"
 msgstr "Wähle Benutzer/innen für diesen Workshop"
+
+#, fuzzy
+#| msgid "Edit Application"
+msgid "List of Applicants"
+msgstr "Anmeldung bearbeiten"
+
+msgid "Here you can configure the application form that participants have to fill out in order to apply."
+msgstr ""
+
+#, python-format
+msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
+msgstr ""
+
+msgid "Application method"
+msgstr "Art des Teilnahmeantrags"
+
+#, python-format
+msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
+msgstr ""
 
 msgid "Application period"
 msgstr "Anmeldefrist"
@@ -2792,8 +2841,11 @@ msgstr "Möchtest du den Raum \"%(title)s\" wirklich löschen?"
 msgid "Delete room"
 msgstr "Raum löschen"
 
-msgid "Room list"
-msgstr "Raumliste"
+msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
+msgstr ""
+
+msgid "You can directly create conference events for rooms from here by using the controls for each room's dropdown menu."
+msgstr ""
 
 msgid "There are no rooms yet."
 msgstr "Es sind noch keine Räume vorhanden."
@@ -3341,14 +3393,14 @@ msgstr "Natürlich kannst du auch ein Projekt ohne diese Verbindung zur Idee ers
 msgid "Facebook-Integration"
 msgstr "Facebook-Integration"
 
+msgid "After you have created the conference, you can create conference rooms and events."
+msgstr ""
+
 msgid "Conference start and end date and time"
 msgstr "Tagung Start-und Endzeit"
 
 msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgstr "Die Start- und Endzeit werden für Erinnerungs-E-Mails benutzt (wenn eingesetllt). Kann mehrere Tage beinhalten."
-
-msgid "Application method"
-msgstr "Art des Teilnahmeantrags"
 
 msgid "Require participation applications for this conference"
 msgstr "Teilnahmeanträge für diese Tagung erforderlich"
@@ -6434,8 +6486,9 @@ msgstr "Der Newsletter wurde aktualisiert."
 msgid "Newsletter successfully created!"
 msgstr "Newsletter erfolgreich erstellt!"
 
-#, python-format
-msgid "Login tokens to %(count)s users were sent."
+#, fuzzy
+#| msgid "Login tokens to %(count)s users were sent."
+msgid "Login tokens to all previously uninvited users are now being sent."
 msgstr "Login-Token wurden an %(count)s Benutzer gesendet."
 
 #, python-format
@@ -6905,6 +6958,9 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#~ msgid "Room list"
+#~ msgstr "Raumliste"
+
 #~ msgid "Determins whether a group that is marked as conference is running"
 #~ msgstr "Entscheidet darüber ob eine Tagung als 'gerade laufend' makiert wird"
 
@@ -7027,9 +7083,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Cosinnus conferences"
 #~ msgstr "Tagungen"
-
-#~ msgid "Priority"
-#~ msgstr "Priorität"
 
 #~ msgid "Conference participation management"
 #~ msgstr "Verwaltung von Tagungsteilnahmen"

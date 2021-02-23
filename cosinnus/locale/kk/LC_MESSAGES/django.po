@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-15 14:46+0100\n"
+"POT-Creation-Date: 2021-02-23 18:24+0100\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,14 +24,20 @@ msgstr ""
 msgid "Convert memberships to Member status"
 msgstr ""
 
+#, python-format
+msgid "%d Users' rocketchat room memberships were re-done."
+msgstr ""
+
+msgid "Rocket: Fix missing RocketChat room membership for users"
+msgstr ""
+
 msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr "Бірдей код бар токен бұрыннан бар! Токеніңіз үшін басқа жол таңдаңыз."
 
-msgid "The following Projects were converted to Groups:"
+#, fuzzy, python-format
+#| msgid "The following Projects were converted to Groups:"
+msgid "The following items were converted to %s:"
 msgstr "Келесі Жобалар Топтарға өзгертілді:"
-
-msgid "Convert selected Projects to Groups"
-msgstr "Белгіленген Жобаларды Топтарға өзгерту"
 
 msgid "The following Users were added to this portal:"
 msgstr "Бұл порталға келесі Пайдаланушылар қосылды:"
@@ -56,12 +62,6 @@ msgstr "Таңдалған топтар мен олардың ішкі жоба�
 
 msgid "Move selected groups and their subprojects to current portal and message members"
 msgstr "Таңдалған топтар мен олардың ішкі жобаларын ағымдағы порталға және хабарлама алушыларға жылжытыңыз"
-
-msgid "The following Groups were converted to Projects:"
-msgstr "Келесі Топтар Жобаларға өзгертілді:"
-
-msgid "Convert selected Groups to Projects"
-msgstr "Таңдалған Топтарды Жобаларға өзгерту"
 
 msgid "ToS Accepted"
 msgstr "ToS қабылданды"
@@ -95,7 +95,7 @@ msgstr "Пайдаланушыларды ажыратыңыз (сайтта жа
 msgid "%d Users were synchronized successfully."
 msgstr "%d пайдаланушылар сәтті ажыратылды."
 
-msgid "Re-synchronize RocketChat user-account (will log users out of RocketChat!)"
+msgid "Rocket: Re-synchronize RocketChat user-account connection (will log users out of RocketChat!)"
 msgstr ""
 
 #, fuzzy, python-format
@@ -103,8 +103,18 @@ msgid "%d Users were made RocketChat admins."
 msgstr "%d пайдаланушылар сәтті ажыратылды."
 
 #, fuzzy
-msgid "Make user RocketChat admin"
+msgid "Rocket: Make user RocketChat admin"
 msgstr "Сізді әкімші қылды"
+
+#, python-format
+msgid "%d Users rocketchat accounts were checked."
+msgstr ""
+
+msgid "Rocket: Repair/create missing users' rocketchat accounts"
+msgstr ""
+
+msgid "Rocket: Fix missing RocketChat room memberships for users"
+msgstr ""
 
 msgid "Restart"
 msgstr ""
@@ -157,6 +167,27 @@ msgstr "Құрылыс және өмір"
 msgid "Klimaschutz"
 msgstr "Климатты қорғау"
 
+msgid "Overnight stay required"
+msgstr ""
+
+msgid "Barrier-free access required"
+msgstr ""
+
+msgid "Interpreter required"
+msgstr ""
+
+msgid "Vegetarian cuisine"
+msgstr ""
+
+msgid "Vegan cuisine"
+msgstr ""
+
+msgid "Lactose-free cuisine"
+msgstr ""
+
+msgid "Gluten-free cuisine"
+msgstr ""
+
 msgid "General"
 msgstr "Жалпы"
 
@@ -181,9 +212,6 @@ msgstr ""
 
 msgid "Bookmarked Users list"
 msgstr ""
-
-msgid "Only team members can see the content you requested. Apply to become a member now!"
-msgstr "Сіз сұраған мазмұнды тек топ мүшелері көре алады. Қазір мүшелікке өтініш бер!"
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Тек тіркелген пайдаланушылар сіз сұраған материалды көре алады! Қазір кіріңіз немесе тіркеліңіз!"
@@ -289,6 +317,33 @@ msgstr[1] "%(sender_name) s және %(count_minus_one)d басқалары ша
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgstr "„%(sender_name)s“ %(team_name)s шақыруды қабылдамады."
 
+msgid "Your participation application was accepted"
+msgstr ""
+
+msgid "You submitted an application"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Your membership request for %(team_name)s was accepted!"
+msgid "Your participation application for %(team_name)s was accepted!"
+msgstr "Сіздің %(team_name)s мүшелік сұранысыңыз қабылданды!"
+
+msgid "Your participation application was declined"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Your membership request for %(team_name)s was declined."
+msgid "Your participation application for %(team_name)s was declined!"
+msgstr "Сіздің %(team_name)s мүшелік сұранысыңыз қабылданбады."
+
+msgid "Your participation application was waitlisted"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Your membership request for %(team_name)s was accepted!"
+msgid "Your participation application for %(team_name)s was waitlisted!"
+msgstr "Сіздің %(team_name)s мүшелік сұранысыңыз қабылданды!"
+
 msgid "You were made an admin of this team"
 msgstr "Сіз осы топтың әкімшісі болып қойылдыңыз"
 
@@ -362,6 +417,44 @@ msgstr "Сіздің жобаларыңыздың / топтарыңыздың �
 #, python-format
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "„%(team_name)s“ %(portal_name)s ге жылжытылды!"
+
+msgid "A user created a new conference"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
+msgid "%(sender_name)s created the conference %(object_name)s"
+msgstr "%(sender_name)s „%(object_name)s“ идеясын жаңа ғана жасады!"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in %(count)d items"
+msgid "%(sender_name)s created %(count)d conferences"
+msgstr "%(sender_name)s сізді %(count)d нәрседе белгіледі"
+
+#, fuzzy, python-format
+#| msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
+msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgstr "Сіз „%(object_name)s“ %(team_name)s ішінде белгіленгенсіз."
+
+#, fuzzy
+#| msgid "Apply"
+msgctxt "email campaign button label to apply for a conference"
+msgid "Apply now!"
+msgstr "Қолдану"
+
+#, fuzzy
+msgid "View conference"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s invited you to join %(team_name)s"
+msgid "%(sender_name)s invited you to apply for the conference %(team_name)s"
+msgstr "%(sender_name)s сізді %(team_name)s тобына қосылуға шақырды"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
+msgid "%(sender_name)s invited you to apply for \"%(team_name)s\" on %(portal_name)s! <br/><br/> To apply, please click on the link below."
+msgstr "%(sender_name)s сізді %(portal_name)s „%(team_name)s“ қосылуға шақырды! <br/> <br/> Қосылу үшін төмендегі сілтемені басыңыз. Сіз шақыруды көріп, қабылдай алатын порталға бағытталасыз."
 
 #, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
@@ -439,6 +532,50 @@ msgid "Hebrew--NATIVE-LANGUAGE"
 msgstr "עברית"
 
 msgid "Belarus"
+msgstr ""
+
+#, fuzzy
+#| msgid "Header Title"
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Title"
+msgstr "Тақырыптың мәтіні"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 1"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 2"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 3"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Street and Number"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "City"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "State"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Country"
+msgstr ""
+
+#, fuzzy
+#| msgid "Promote Member"
+msgctxt "Multi-Address Field Subfield"
+msgid "Phone Number"
+msgstr "Мүшені алға жылжыту"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Mobile Phone Number"
 msgstr ""
 
 msgid "(No choice)"
@@ -702,12 +839,24 @@ msgstr "Cosinnus CMS микро парағы"
 msgid "Cosinnus Micropages"
 msgstr "Cosinnus Micropages"
 
+msgid "BBB Server"
+msgstr ""
+
+#, fuzzy
+msgid "Cosinnus Conference Setting"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Cosinnus Conference Settings"
+msgstr "Бейне конференциялар сервері"
+
 msgid "Lobby"
 msgstr ""
 
 msgid "Stage"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Workshops"
 msgstr ""
 
@@ -783,6 +932,122 @@ msgstr ""
 
 msgid "Slug must not be empty."
 msgstr "Ашасы бос болмауы керек."
+
+msgid "Conditiions for participation"
+msgstr ""
+
+msgid "Shown as a download link near the checkbox to accept the conditions."
+msgstr ""
+
+#, fuzzy
+#| msgid "Participants"
+msgid "Participation Management"
+msgstr "Мүшелер"
+
+#, fuzzy
+msgid "Request user information"
+msgstr "Шақыруды жою"
+
+msgid "Pre-filled content for the information field"
+msgstr ""
+
+msgid "Priority choice enabled"
+msgstr ""
+
+msgid "Participation applications are open."
+msgstr ""
+
+msgid "Participation application has not started yet."
+msgstr ""
+
+msgid "Participation application is over."
+msgstr ""
+
+msgctxt "a conference application status"
+msgid "Invalid"
+msgstr ""
+
+#, fuzzy
+#| msgid "Submitting..."
+msgctxt "a conference application status"
+msgid "Submitted"
+msgstr "Жіберілуде."
+
+msgctxt "a conference application status"
+msgid "Waitlist"
+msgstr ""
+
+#, fuzzy
+#| msgid "ToS Accepted"
+msgctxt "a conference application status"
+msgid "Accepted"
+msgstr "ToS қабылданды"
+
+#, fuzzy
+#| msgid "Decline User"
+msgctxt "a conference application status"
+msgid "Declined"
+msgstr "Пайдаланушыдан бас тарту"
+
+msgid "Your application is invalid."
+msgstr ""
+
+msgid "Your application has been submitted. You will be notified when it is processed."
+msgstr ""
+
+msgid "Your application is currently on the waiting list."
+msgstr ""
+
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your application has been accepted!"
+msgstr "Сіздің өзгертулеріңіз сақталды."
+
+#, fuzzy
+#| msgid "We're sorry, but your membership request for %(team_name)s was declined."
+msgid "We are sorry, but your application has been declined."
+msgstr "Кешіріңіз, бірақ %(team_name)s мүшелік сұранысы қабылданбады."
+
+#, fuzzy
+#| msgid "Decline User"
+msgid "Declined"
+msgstr "Пайдаланушыдан бас тарту"
+
+msgid "Waitlist"
+msgstr ""
+
+#, fuzzy
+#| msgid "ToS Accepted"
+msgid "Accepted"
+msgstr "ToS қабылданды"
+
+#, fuzzy
+msgid "Confernence Application"
+msgstr "Бейне конференциялар сервері"
+
+msgid "Priorities"
+msgstr ""
+
+msgid "Motivation for applying"
+msgstr ""
+
+#, fuzzy
+#| msgid "E-Mail Addresses"
+msgid "Contact E-Mail Address"
+msgstr "Электрондық пошта мекенжайлары"
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "Cosinnus conference application"
+msgstr "CosinnusОрналасу"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "Cosinnus conference applications"
+msgstr "CosinnusОрналасулар"
+
+msgid "Note from the organizers"
+msgstr ""
 
 msgid "Complaint Text"
 msgstr "Шағым мәтіні"
@@ -955,7 +1220,9 @@ msgstr "Осы порталға арналған қосымша CSS барлық
 msgid "Video Conference Server"
 msgstr "Бейне конференциялар сервері"
 
-msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+#, fuzzy
+#| msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgid "For old-style events meeting popups only! If entered, will enable Jitsi-like video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
 msgstr "Егер ол енгізілсе, бүкіл сайт бойынша бейнеконференция қызметін қосады. Бөлменің кез-келген атауын қосуға болатынға дейін URL болуы керек."
 
 msgid "Dynamic choice field choices"
@@ -964,6 +1231,10 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Жоба"
+
+#, fuzzy
+msgid "Conference"
+msgstr "Бейне конференциялар сервері"
 
 msgid "Project Type"
 msgstr "Жобаның түрі"
@@ -1059,13 +1330,30 @@ msgstr "Nextcloud тобының идентификаторы"
 msgid "Is conference"
 msgstr ""
 
-msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
+#, fuzzy
+#| msgid "Start date."
+msgid "Start Datetime"
+msgstr "Басталу күні."
+
+#, fuzzy
+#| msgid "End date."
+msgid "End Datetime"
+msgstr "Мерзімнің аяқталуы."
+
+msgid "Determins if application management is visible in conference administration."
 msgstr ""
 
-msgid "Conference is running"
+msgid "Allow temporary users accounts for this conference."
 msgstr ""
 
-msgid "Determins whether a group that is marked as conference is running"
+msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+msgstr ""
+
+#, fuzzy
+msgid "Conference accounts active"
+msgstr "Бейне конференциялар сервері"
+
+msgid "If enabled, temporary user accounts for this conference are active and can log in."
 msgstr ""
 
 msgid "Parent Group"
@@ -1090,22 +1378,6 @@ msgstr "Сіздің „%(group_name)s“ жобаңыз туралы сұрат
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Сіздің тобыңыз „%(group_name)s“ туралы сұрату"
-
-#, fuzzy
-msgid "Project Menu"
-msgstr "Жобаның түрі"
-
-#, fuzzy
-msgid "Group Menu"
-msgstr "Топ атауы"
-
-#, fuzzy
-msgid "Project Dashboard"
-msgstr "Прибор панелі"
-
-#, fuzzy
-msgid "Group Dashboard"
-msgstr "Прибор панелі"
 
 msgid "Token"
 msgstr "Белгі"
@@ -1492,7 +1764,7 @@ msgstr ""
 msgid "Ignored/Failed Items"
 msgstr ""
 
-msgid "An unexpected system error has occured while processing the data. This should not have happened. Please contact the support!"
+msgid "An unexpected system error has occured while processing the data. This should not have happened. Please contact the support! Technical Details follow:"
 msgstr ""
 
 #, fuzzy
@@ -1819,20 +2091,52 @@ msgstr "Ақпарат жоқ"
 msgid "Back to Project Overview"
 msgstr "Жобаға шолуға оралу"
 
+msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
+msgstr ""
+
 msgid "Administration"
 msgstr "Әкімшілік"
 
 msgid "Select a page on the left side."
 msgstr "Сол жақтағы бетті таңдаңыз."
 
-msgid "Simple Statistics"
-msgstr "Қарапайым статистика"
-
-msgid "User Welcome Email"
-msgstr "Пайдаланушының электрондық поштасына қош келдіңіз"
-
 msgid "Newsletters"
 msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "Update Newsletter"
+msgstr "Қолданушыны құру"
+
+#, fuzzy
+#| msgid "Create User"
+msgid "Create Newsletter"
+msgstr "Қолданушыны құру"
+
+msgid "Recipients"
+msgstr ""
+
+#, python-format
+msgid "With the current selection the newsletter will be sent to %(counter)s recipients."
+msgid_plural "With the current selection the newsletter will be sent to %(counter)s recipients."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to send the newsletter?"
+msgstr "Шынымен %(title)s“ қалдырғыңыз келе ме?"
+
+msgid "Send newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Send Newsletter"
+msgstr "Пайдаланушыны қосу"
 
 msgid "User Management"
 msgstr ""
@@ -1846,41 +2150,20 @@ msgstr ""
 msgid "User Dashboard Announcements"
 msgstr "Пайдаланушы бақылау тақтасындағы хабарландырулар"
 
+msgid "User Welcome Email"
+msgstr "Пайдаланушының электрондық поштасына қош келдіңіз"
+
+msgid "Simple Statistics"
+msgstr "Қарапайым статистика"
+
 msgid "Edit"
 msgstr "Өңдеу"
-
-#, fuzzy
-#| msgid "Create User"
-msgid "Update Newsletter"
-msgstr "Қолданушыны құру"
-
-#, fuzzy
-#| msgid "Create User"
-msgid "Create Newsletter"
-msgstr "Қолданушыны құру"
 
 msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
 msgstr ""
 
+msgctxt "subject of an E-Mail"
 msgid "Subject"
-msgstr ""
-
-msgid "Recipients"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                With the current selection the newsletter will be sent to %(counter)s recipients.\n"
-"                "
-msgid_plural ""
-"\n"
-"                With the current selection the newsletter will be sent to %(counter)s recipients.\n"
-"                "
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
 msgstr ""
 
 msgid "Body"
@@ -1891,9 +2174,6 @@ msgstr ""
 msgid "Currently set Email Text"
 msgstr "Электрондық пошта мәтіні қазір орнатылды"
 
-msgid "Send newsletter"
-msgstr ""
-
 msgid "Send yourself a Test-Mail"
 msgstr "Өзіңізге сынақ хатын жіберіңіз"
 
@@ -1902,11 +2182,6 @@ msgstr ""
 
 msgid "Save draft"
 msgstr ""
-
-#, fuzzy
-#| msgid "Do you really want to leave „%(title)s“?"
-msgid "Do you really want to send the newsletter?"
-msgstr "Шынымен %(title)s“ қалдырғыңыз келе ме?"
 
 msgid "Newsletter"
 msgstr ""
@@ -1953,10 +2228,8 @@ msgstr "Әкімшілік"
 msgid "send login token to all inactive users"
 msgstr ""
 
-#, fuzzy
-#| msgid "Search for Ideas"
-msgid "Search for email"
-msgstr "Идеяларды іздеңіз"
+msgid "Search for email, firstname or lastname"
+msgstr ""
 
 #, fuzzy
 #| msgid "Search"
@@ -2027,6 +2300,11 @@ msgstr "келесі"
 msgid "Add user"
 msgstr "Пайдаланушыны қосу"
 
+#, fuzzy
+#| msgid "Create User"
+msgid "Update User"
+msgstr "Қолданушыны құру"
+
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "Өрістердің бірінде қате пайда болды. Мұны сақтамас бұрын жөндеңіз!"
 
@@ -2036,10 +2314,6 @@ msgstr "Сіз келесі айнымалыларды пайдалана ала
 msgid "Currently set Welcome-Email Text"
 msgstr "Электрондық пошта мәтіні қазір орнатылды"
 
-#, fuzzy
-msgid "Conference Page"
-msgstr "Бейне конференциялар сервері"
-
 msgid "Conference Management"
 msgstr ""
 
@@ -2047,6 +2321,12 @@ msgid "Conference Room Management"
 msgstr ""
 
 msgid "Conference Event Management"
+msgstr ""
+
+msgid "Edit Conditions of Participation"
+msgstr ""
+
+msgid "Manage Participation Applications"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -2344,88 +2624,225 @@ msgid "Disable editor"
 msgstr "редакторды өшіріңіз"
 
 #, fuzzy
-msgid "Conference is not running"
-msgstr "Бейне конференциялар сервері"
+#| msgid "Current Members"
+msgid "Current File"
+msgstr "Қазіргі мүшелер"
 
-msgid "Accounts from CSV Upload"
+#, fuzzy
+#| msgid "Application name"
+msgid "Application"
+msgstr "Өтінімнің атауы"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Apply for participation in"
+msgstr "Өтінімнің атауы"
+
+msgid "Edit your application for"
+msgstr ""
+
+msgid "Please fill out the fields below to submit your application. Be aware that the organizers may take your profile into consideration when processing your application, so make sure that your profile page is well maintained. You can view and edit your profile page here:"
 msgstr ""
 
 #, fuzzy
-msgid "Upload Participants"
-msgstr "Мүшелер"
+#| msgid "Your Profile"
+msgid "Your profile"
+msgstr "Сіздің профиліңіз"
 
-#, fuzzy
-msgid "last login"
-msgstr "Растау"
-
-msgid "no login yet"
+msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
 msgstr ""
 
-msgid "Admin"
-msgstr "Админ"
+msgid "Please provide your motivation for applying"
+msgstr ""
 
-msgid "Member"
-msgstr "Мүше"
-
-msgid "active"
-msgstr "белсенді"
-
-#, fuzzy
-msgid "not active"
-msgstr "белсенді емес"
-
-msgid "User participates in the following workshops:"
+msgid "Describe why you wish to participate"
 msgstr ""
 
 #, fuzzy
-msgid "deactivate member"
-msgstr "Топты ажыратыңыз"
+#| msgid "Contact Information"
+msgid "Optional contact information"
+msgstr "Байланыс ақпараты"
+
+msgid "We recommend you to provide at least one contact option for the organizers to contact you directly. This information can be seen by all organizers of the conference."
+msgstr ""
+
+msgid "Contact Phone Number"
+msgstr ""
+
+msgid "Workshop"
+msgstr ""
+
+msgid "My individual needs"
+msgstr ""
+
+msgid "(no options chosen)"
+msgstr ""
 
 #, fuzzy
-msgid "activate member"
-msgstr "Пайдаланушыны шақыру"
+#| msgid "Application name"
+msgid "Application conditions"
+msgstr "Өтінімнің атауы"
 
 #, fuzzy
-msgid "remove user"
-msgstr "Мүшені алып тастау"
-
-#, fuzzy
-msgid "Do you really want to deactivate the member's user account ?"
-msgstr "Шақыруды қабылдамайсыз ба?"
-
-#, fuzzy
-msgid "Deactivate Member"
-msgstr "Бас тарту"
-
-#, fuzzy
-msgid "Do you really want to activate the member's user account ?"
-msgstr "Шақыруды қабылдамайсыз ба?"
-
-#, fuzzy
-msgid "Activate Member"
-msgstr "Мүшені қабылдау"
-
-#, fuzzy
-msgid "Do you really want to remove the user?"
-msgstr "Шынымен %(title)s“ қалдырғыңыз келе ме?"
-
-#, fuzzy
-msgid "Remove User"
-msgstr "Мүшені алып тастау"
-
-#, fuzzy
-msgid "Finish conference and deactivate user accounts"
-msgstr "Пайдаланушы тіркелгісін жою"
-
-#, fuzzy
-msgid "Start conference and activate user accounts"
-msgstr "Пайдаланушы тіркелгісін жою"
-
-#, fuzzy
-msgid "Download Statistics"
+msgid "Download the conditions"
 msgstr "Қарапайым статистика"
 
-msgid "Add workshop"
+msgid "I accept the conditions in order to submit my application"
+msgstr ""
+
+msgid "Save changes"
+msgstr ""
+
+msgid "Apply for conference participation"
+msgstr ""
+
+msgid "Withdraw"
+msgstr "Қаражатты шығару"
+
+#, fuzzy
+msgid "Conference Applications"
+msgstr "Бейне конференциялар сервері"
+
+msgid "Manage participation applications"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no invitations."
+msgid "There are no participation applications yet."
+msgstr "Шақырулар жоқ."
+
+msgid "The maximum number of participants is "
+msgstr ""
+
+#, python-format
+msgid " 1 place left "
+msgid_plural " %(counter)s places left "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Collapse all processed applications"
+msgstr ""
+
+#, fuzzy
+msgid "not specified"
+msgstr "белсенді емес"
+
+#, fuzzy
+#| msgid "Show more options..."
+msgid "show more ..."
+msgstr "Қосымша опцияларды көрсету."
+
+msgid "Reason for rejection"
+msgstr ""
+
+#, fuzzy
+#| msgctxt "written next to optional form fields"
+#| msgid "optional"
+msgid "optional"
+msgstr "міндетті емес"
+
+#, fuzzy
+#| msgid "First name"
+msgid "First Choice"
+msgstr "Аты"
+
+msgid "Second Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application submitted"
+msgstr "Өтінімнің атауы"
+
+msgid "Workshop Assignments"
+msgstr ""
+
+msgid "Choose users to assign to this workshop"
+msgstr ""
+
+msgid "List of Applicants"
+msgstr ""
+
+msgid "Here you can configure the application form that participants have to fill out in order to apply."
+msgstr ""
+
+#, python-format
+msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
+msgstr ""
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application method"
+msgstr "Өтінімнің атауы"
+
+#, python-format
+msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
+msgstr ""
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application period"
+msgstr "Өтінімнің атауы"
+
+msgid "From"
+msgstr "Бастап"
+
+msgid "Date"
+msgstr "Күні"
+
+msgid "Start date."
+msgstr "Басталу күні."
+
+msgid "Until"
+msgstr "Дейін"
+
+msgid "End date."
+msgstr "Мерзімнің аяқталуы."
+
+msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
+msgstr ""
+
+msgid "Maximal Number of participants"
+msgstr ""
+
+msgid "This is not an enforced limit and serves only as a display for guests."
+msgstr ""
+
+msgid "(no limit selected)"
+msgstr ""
+
+msgid "Require applicants to submit a text about their motivation for applying"
+msgstr ""
+
+msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+msgstr ""
+
+#, python-format
+msgid "Only applicable if \"%(other_option)s\" is enabled."
+msgstr ""
+
+msgid "Enter text to pre-fill or leave empty"
+msgstr ""
+
+msgid "Options for participation"
+msgstr ""
+
+msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
+msgstr ""
+
+msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
+msgstr ""
+
+msgid "Conditions for participation"
+msgstr ""
+
+msgid "If set, applicants will have to agree to these conditions by checking a checkbox"
+msgstr ""
+
+msgid "(no conditions selected)"
+msgstr ""
+
+msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr ""
 
 #, fuzzy
@@ -2442,6 +2859,9 @@ msgstr ""
 msgid "Status info: sent %(sent_date)s"
 msgstr ""
 
+msgid "This e-mail will be sent out 7 days before and at the same time of day as the conference start date."
+msgstr ""
+
 #, fuzzy
 #| msgid "Invitations"
 msgid "Invitation subject"
@@ -2456,6 +2876,9 @@ msgid "Send test to myself"
 msgstr ""
 
 msgid "Send 1 day before conference"
+msgstr ""
+
+msgid "This e-mail will be sent out 24 hours before the conference start date."
 msgstr ""
 
 msgid "Send 1 hour before conference"
@@ -2552,13 +2975,111 @@ msgstr "„%(title)s“ шақыруын шынымен жойғыңыз кел�
 msgid "Delete room"
 msgstr "Профильді жою"
 
-msgid "Room list"
+msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
+msgstr ""
+
+msgid "You can directly create conference events for rooms from here by using the controls for each room's dropdown menu."
 msgstr ""
 
 #, fuzzy
 #| msgid "There are no items yet"
 msgid "There are no rooms yet."
 msgstr "Әзірге бұл жерде ештеңе жоқ"
+
+msgid "Conference is running"
+msgstr ""
+
+#, fuzzy
+msgid "Conference is not running"
+msgstr "Бейне конференциялар сервері"
+
+msgid "Accounts from CSV Upload"
+msgstr ""
+
+#, fuzzy
+msgid "Upload Participants"
+msgstr "Мүшелер"
+
+#, fuzzy
+msgid "last login"
+msgstr "Растау"
+
+msgid "no login yet"
+msgstr ""
+
+msgid "Admin"
+msgstr "Админ"
+
+msgid "Member"
+msgstr "Мүше"
+
+msgid "active"
+msgstr "белсенді"
+
+#, fuzzy
+msgid "not active"
+msgstr "белсенді емес"
+
+msgid "User participates in the following workshops:"
+msgstr ""
+
+#, fuzzy
+msgid "deactivate member"
+msgstr "Топты ажыратыңыз"
+
+#, fuzzy
+msgid "activate member"
+msgstr "Пайдаланушыны шақыру"
+
+#, fuzzy
+msgid "remove user"
+msgstr "Мүшені алып тастау"
+
+#, fuzzy
+msgid "Do you really want to deactivate the member's user account ?"
+msgstr "Шақыруды қабылдамайсыз ба?"
+
+#, fuzzy
+msgid "Deactivate Member"
+msgstr "Бас тарту"
+
+#, fuzzy
+msgid "Do you really want to activate the member's user account ?"
+msgstr "Шақыруды қабылдамайсыз ба?"
+
+#, fuzzy
+msgid "Activate Member"
+msgstr "Мүшені қабылдау"
+
+#, fuzzy
+msgid "Do you really want to remove the user?"
+msgstr "Шынымен %(title)s“ қалдырғыңыз келе ме?"
+
+#, fuzzy
+msgid "Remove User"
+msgstr "Мүшені алып тастау"
+
+#, fuzzy
+msgid "Finish conference and deactivate user accounts"
+msgstr "Пайдаланушы тіркелгісін жою"
+
+#, fuzzy
+msgid "Start conference and activate user accounts"
+msgstr "Пайдаланушы тіркелгісін жою"
+
+#, fuzzy
+msgid "Download Statistics"
+msgstr "Қарапайым статистика"
+
+#, fuzzy
+#| msgid "Accept User"
+msgid "Accept"
+msgstr "Пайдаланушыны қабылдау"
+
+#, fuzzy
+#| msgid "Decline User"
+msgid "Decline"
+msgstr "Пайдаланушыдан бас тарту"
 
 msgid "Rearrange"
 msgstr "Қайта құру"
@@ -2740,29 +3261,87 @@ msgstr "Мысал: http://mywebsite.com"
 msgid "website"
 msgstr "Веб сайт"
 
-msgid "Re-Activate Project/Group"
-msgstr "Жобаны / топты қайта белсендіру"
+msgid "indicates a mandatory field"
+msgstr ""
 
-msgid "Deactivate Project/Group"
-msgstr "Жоба / топты ажыратыңыз"
+msgid "This is the current address"
+msgstr ""
 
-msgid "Deactivated Projects and Groups"
-msgstr "Өшірілген жобалар мен топтар"
+#, fuzzy
+#| msgid "email address"
+msgid "Remove this Address"
+msgstr "электрондық пошта мекенжайы"
+
+#, fuzzy
+#| msgid "E-Mail Addresses"
+msgid "Add an Address"
+msgstr "Электрондық пошта мекенжайлары"
+
+msgid "Maximum Number of Participants"
+msgstr ""
+
+#, fuzzy
+#| msgid "About the Project"
+msgid "About the conference"
+msgstr "Жоба жайлы"
+
+msgctxt "time"
+msgid "o'clock"
+msgstr ""
+
+#, fuzzy
+#| msgid "Until"
+msgctxt "time"
+msgid "until"
+msgstr "Дейін"
+
+#, fuzzy
+#| msgid "No info."
+msgid "More infos..."
+msgstr "Ақпарат жоқ."
+
+#, fuzzy
+#| msgid "You will now receive notifications for content posted in this project."
+msgid "You will now receive notifications for content posted in this conference."
+msgstr "Енді осы жобада жарияланған мазмұн туралы хабарландырулар аласыз."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact"
+msgstr "Байланыс"
+
+msgid "No contact data has been added yet."
+msgstr "Контакт мәліметтері әлі қосылмаған."
+
+msgid "Register and join!"
+msgstr "Тіркеліңіз және қосылыңыз!"
+
+#, fuzzy
+#| msgid "You have been invited to collaborate!"
+msgid "You have been invited to apply!"
+msgstr "Сізді ынтымақтастыққа шақырды!"
+
+msgid "Decline Invitation"
+msgstr "Шақырудан бас тарту"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Шақыруды қабылдамайсыз ба?"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Edit Application"
+msgstr "Өтінімнің атауы"
+
+#, fuzzy
+msgid "Apply for Participation"
+msgstr "Мүшелер"
+
+#, fuzzy
+#| msgid "Protected Content"
+msgid "Your Deactivated Content"
+msgstr "Қорғалған контент"
 
 msgid "Warning!"
 msgstr "Назар аударыңыз!"
-
-msgid "You are about to deactivate this project/group!"
-msgstr "Сіз бұл жобаны / топты өшіргіңіз келеді!"
-
-msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
-msgstr "Сіз бұл жобаны / топты қайта іске қосқалы отырсыз. Ол және оның барлық мазмұны тағы да сайтта көрінетін болады."
-
-msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "Сіз бұл жобаны / топты өшіргіңіз келеді. Ол және оның барлық мазмұны сайтта жасырын болады және бәріне, соның ішінде сіздерге де көрінбейді."
-
-msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-msgstr "Бұл процесс қайтымды. Пайдаланушы профилінен кез келген уақытта жоба / топты қайта іске қосуға болады."
 
 msgid "Re-Activate"
 msgstr "Реактивация"
@@ -2780,6 +3359,40 @@ msgstr "Бұл пәрменді шынымен жойғыңыз келе ме?"
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s – мүшелер"
+
+msgid "Membership requests"
+msgstr "Мүшелік туралы өтініштер"
+
+msgid "Please manage participation applications via the applications page. You can disable the participation management in the conference settings."
+msgstr ""
+
+#, fuzzy
+#| msgid "My location"
+msgid "Manage applications"
+msgstr "Менің орным"
+
+msgid "Invite members of groups/projects to apply..."
+msgstr ""
+
+#, fuzzy
+#| msgid "Shown in my projects..."
+msgid "Select one or more groups/projects..."
+msgstr "Менің жобаларымда көрсетілген."
+
+#, fuzzy
+#| msgid "Invited Groups"
+msgid "Invite groups"
+msgstr "Шақырылған топтар"
+
+#, fuzzy
+#| msgid "Invited to be a member"
+msgid "Invited group/project members"
+msgstr "Мүше болуға шақырылды"
+
+#, fuzzy
+#| msgid "Invite users"
+msgid "Invite users to apply..."
+msgstr "Пайдаланушыны шақыру"
 
 msgid "Invite registered users..."
 msgstr "Тіркелген мүшені шақырыңыз."
@@ -2799,9 +3412,6 @@ msgstr "Шақырылған мүшелер"
 msgid "Revoke Invitation"
 msgstr "Шақыруды болдырмау"
 
-msgid "Decline Invitation"
-msgstr "Шақырудан бас тарту"
-
 msgid "Accept Invitation"
 msgstr "Шақыруды қабылдау"
 
@@ -2814,9 +3424,6 @@ msgstr "„%(name)s“ шақыруын қайтарып алғыңыз келе
 
 msgid "Revoke Invitation for Member"
 msgstr "Директорлар кеңесінің мүшесін шақырудан бас тарту"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "Шақыруды қабылдамайсыз ба?"
 
 msgid "There are no pending invitations."
 msgstr "Күтудегі шақырулар жоқ."
@@ -2853,9 +3460,6 @@ msgstr "жанынан"
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "Вы действительно хотите удалить приглашение для „%(title)s“?"
 
-msgid "Membership requests"
-msgstr "Мүшелік туралы өтініштер"
-
 msgid "Decline User"
 msgstr "Пайдаланушыдан бас тарту"
 
@@ -2891,6 +3495,11 @@ msgstr "Барлық мүшелерге хабарлаңыз"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
 msgstr "Xабарлама жіберу"
+
+#, fuzzy
+#| msgid "This account is inactive."
+msgid "User account inactive"
+msgstr "Бұл тіркелгі белсенді емес."
 
 msgid "Kick"
 msgstr "Нұқыңыз"
@@ -2946,14 +3555,6 @@ msgstr "Экспорт"
 msgid "Edit “%(team_name)s”"
 msgstr "“%(team_name)s” түзетіңіз"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Create Group"
-msgstr "Топ құру"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Create Project"
-msgstr "Жобаны құру"
-
 msgid "Help about groups"
 msgstr "Топтармен жұмыс жасауға көмектесу"
 
@@ -2962,12 +3563,6 @@ msgstr "Жобаларды іске асыруға көмек"
 
 msgid "Help about the microsite"
 msgstr "Микросайт туралы анықтама алу"
-
-msgid "Edit Group"
-msgstr "Топты өңдеу"
-
-msgid "Edit Project"
-msgstr "Жобаны өңдеу"
 
 msgid "Let's bring this idea to life!"
 msgstr "Осы идеяны өмірге әкелейік!"
@@ -2988,21 +3583,40 @@ msgstr "Әрине, сіз идеямен ешқандай байланыссы�
 msgid "Facebook-Integration"
 msgstr "Facebook интеграциясы"
 
+msgid "After you have created the conference, you can create conference rooms and events."
+msgstr ""
+
+msgid "Conference start and end date and time"
+msgstr ""
+
+msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+msgstr ""
+
+msgid "Require participation applications for this conference"
+msgstr ""
+
+msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
+msgstr ""
+
+msgid "In which projects' or groups' calendars should the conference be shown?"
+msgstr ""
+
 #, fuzzy
-msgid "Conference Settings"
-msgstr "Бейне конференциялар сервері"
+#| msgid "Select related Projects/Groups"
+msgid "Select Projects/Groups"
+msgstr "Тиісті жобаларды / топтарды таңдау"
 
-msgid "Group name"
-msgstr "Топ атауы"
+msgid "Description and Infos"
+msgstr "Сипаттама және ақпарат"
 
-msgid "Project name"
-msgstr "Жобаның атауы"
+msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
+msgstr "Бұл барлық адамдар көре алатын және микросайтта көрсетілетін қоғамдық сипаттама."
 
-msgid "Enter a name for the group."
-msgstr "Топ атауын енгізіңіз."
+msgid "Contact info"
+msgstr "Байланыс ақпараты"
 
-msgid "Enter a name for the project."
-msgstr "Жобаның атын енгізіңіз."
+msgid "How you can be reached, addresses, social media, etc..."
+msgstr "Сізбен қалай байланысуға болады, мекен-жайлар, әлеуметтік желілер және т.б."
 
 msgid "Short description"
 msgstr "Қысқаша сипаттамасы"
@@ -3016,6 +3630,19 @@ msgstr "Бұл сипаттама көпшілікке қол жетімді б�
 msgid "This description will be publicly visible."
 msgstr "Жобаны бірнеше сөйлеммен сипаттаңыз."
 
+#, fuzzy
+msgid "Conference Theme Color"
+msgstr "Бейне конференциялар сервері"
+
+msgid "Hex code (example: #A2A2A2)"
+msgstr ""
+
+msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
+msgstr ""
+
+msgid "Icon"
+msgstr ""
+
 msgid "A picture for better recognition."
 msgstr "Жақсырақ тану үшін сурет."
 
@@ -3025,11 +3652,19 @@ msgstr "Файл өлшемі"
 msgid "max. 10 MB"
 msgstr "макс. 10 МБ"
 
+#, fuzzy
+#| msgid "Header image"
+msgid "Banner Image"
+msgstr "Тақырып суреті"
+
 msgid "Upload an image."
 msgstr "Суретті жүктеу."
 
 msgid "Reset"
 msgstr "Қалпына келтіру"
+
+msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgstr ""
 
 msgid "Example: http://mywebsite.com"
 msgstr "Мысал: http://mywebsite.com"
@@ -3039,9 +3674,6 @@ msgstr ""
 
 msgid "Select sustainable development goals"
 msgstr ""
-
-msgid "Where are you active?"
-msgstr "Сен қайда белсендісің?"
 
 msgid "Remove location"
 msgstr "Орынды жою"
@@ -3097,18 +3729,6 @@ msgstr "Қандай қосымшаларды іске қосу керек?"
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Бұл қосымшаны жоба үшін емес, тек топ үшін іске қосуға болады!"
-
-msgid "Description and Infos"
-msgstr "Сипаттама және ақпарат"
-
-msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
-msgstr "Бұл барлық адамдар көре алатын және микросайтта көрсетілетін қоғамдық сипаттама."
-
-msgid "Contact info"
-msgstr "Байланыс ақпараты"
-
-msgid "How you can be reached, addresses, social media, etc..."
-msgstr "Сізбен қалай байланысуға болады, мекен-жайлар, әлеуметтік желілер және т.б."
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Микроситте қоғамдық нысандар қай қосымшалардан көрінуі керек?"
@@ -3185,16 +3805,6 @@ msgstr "Facebook интеграциясы жоба жасалғаннан кей
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
 
-#, fuzzy
-msgid "Conference Theme Color"
-msgstr "Бейне конференциялар сервері"
-
-msgid "Hex code (example: #A2A2A2)"
-msgstr ""
-
-msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
 msgstr "Шақырулар"
@@ -3227,9 +3837,6 @@ msgstr "(Белсенді емес)"
 msgid "Leave"
 msgstr "Кетіңіз"
 
-msgid "Withdraw"
-msgstr "Қаражатты шығару"
-
 msgid "Details"
 msgstr "Толығырақ"
 
@@ -3254,53 +3861,6 @@ msgstr "Сіздің микросайттың қандай екеніне риз
 
 msgid "Change it here..."
 msgstr "Осы жерде өзгертіңіз."
-
-msgid "You have been invited to collaborate!"
-msgstr "Сізді ынтымақтастыққа шақырды!"
-
-msgid "Register and join!"
-msgstr "Тіркеліңіз және қосылыңыз!"
-
-msgid "Join now and collaborate!"
-msgstr "Қазір қосылыңыз және бірлесіп жұмыс жасаңыз!"
-
-msgid "Register"
-msgstr "Тіркелу"
-
-msgid "Log in"
-msgstr "Жүйеге кіру"
-
-msgid "You are a member!"
-msgstr "Сіз мүшесіз!"
-
-msgid "View Project"
-msgstr "Жобаны қарау"
-
-msgid "View Group"
-msgstr "Топты көру"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership request pending..."
-msgstr "Мүшелікке сұраныс қаралуда."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "You are invited!"
-msgstr "Сіз шақырылдыңыз!"
-
-msgid "Collaborate!"
-msgstr "Ынтымақтастық!"
-
-msgid "Join now!"
-msgstr "Қазір қосылыңыз!"
-
-msgid "Browse"
-msgstr "Көру"
-
-msgid "Public Project"
-msgstr "Қоғамдық жоба"
-
-msgid "Public Group"
-msgstr "Қоғамдық топ"
 
 msgid "News posts"
 msgstr "Жаңалық хабарламалары"
@@ -3342,19 +3902,6 @@ msgstr "Facebook-те бөлісіңіз"
 msgid "Sustainable Development Goals"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Contact"
-msgstr "Байланыс"
-
-msgid "No contact data has been added yet."
-msgstr "Контакт мәліметтері әлі қосылмаған."
-
-msgid "Project Administrator"
-msgstr "Жоба Әкімшісі"
-
-msgid "Group Administrator"
-msgstr "Топ Әкімшісі"
-
 msgid "Tweets"
 msgstr "Твиттер"
 
@@ -3364,18 +3911,41 @@ msgstr "Flickr галереясы"
 msgid "Call to Action"
 msgstr "Іс-әрекетке шақыру"
 
+msgid "Register"
+msgstr "Тіркелу"
+
+msgid "Log in"
+msgstr "Жүйеге кіру"
+
+msgid "You are a member!"
+msgstr "Сіз мүшесіз!"
+
+msgid "View Project"
+msgstr "Жобаны қарау"
+
+msgid "View Group"
+msgstr "Топты көру"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership request pending..."
+msgstr "Мүшелікке сұраныс қаралуда."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are invited!"
+msgstr "Сіз шақырылдыңыз!"
+
+msgid "Join now!"
+msgstr "Қазір қосылыңыз!"
+
+msgid "Browse"
+msgstr "Көру"
+
 #, python-format
 msgid "Users in team %(group)s"
 msgstr "%(group)s пайдаланушылар"
 
 msgid "There are no visible users."
 msgstr "Көрінетін пайдаланушылар жоқ."
-
-msgid "All projects"
-msgstr "Барлық жобалар"
-
-msgid "All groups"
-msgstr "Барлық топтар"
 
 msgid "All users"
 msgstr "Барлық қолданушылар"
@@ -3386,6 +3956,12 @@ msgstr "Портал әкімшілері"
 msgid "All societies"
 msgstr "Барлық қоғамдар"
 
+msgid "All projects"
+msgstr "Барлық жобалар"
+
+msgid "Temporary User Accounts"
+msgstr ""
+
 msgid "Reminder emails"
 msgstr ""
 
@@ -3393,18 +3969,6 @@ msgstr ""
 #, fuzzy
 msgid "Organizations"
 msgstr "Шақырулар"
-
-msgid "Re-activate Group"
-msgstr "Топтық реакция"
-
-msgid "Deactivate Group"
-msgstr "Топты ажыратыңыз"
-
-msgid "Activate Project"
-msgstr "Жобаны іске қосыңыз"
-
-msgid "Deactivate Project"
-msgstr "Жобаны ажыратыңыз"
 
 msgid "Withdraw Request"
 msgstr "Қаражатты қайтарып алу туралы өтініш"
@@ -3733,7 +4297,7 @@ msgid ""
 "\n"
 "an account was just created for you on %(site_name)s. We're happy to see you!\n"
 "\n"
-"In order to start using your account, you need to first set a password for it.\n"
+"In order to start using your account, you need to first set a password for it. Afterwards, you may log in using your email %(user_mail)s and the password you have set.\n"
 "\n"
 "\n"
 "Please click on the following link to set your initial password (or copy and paste the link it in your browser):\n"
@@ -4414,10 +4978,17 @@ msgstr "Құпия сөзді қалпына келтіру сілтемесі �
 msgid "Password reset successful"
 msgstr "Парольді қалпына келтіру сәтті өтті"
 
-msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
-msgstr "Біз сізге құпия сөзді орнату туралы нұсқауларды жібердік. Сіз оларды жақын арада алуыңыз керек."
+#, fuzzy
+#| msgid "Password reset complete"
+msgid "Password reset request received."
+msgstr "Парольді қалпына келтіру аяқталды"
 
-msgid "If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder."
+msgid "If there is an account registered with the email address you entered, we will email you instructions for resetting the account password shortly."
+msgstr ""
+
+#, fuzzy
+#| msgid "If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder."
+msgid "If you don't receive an email, please make sure you entered the correct email address associated with your account, and check your spam folder."
 msgstr "Егер сізге электрондық хат келмесе, енгізген пштаңызды тексеріп, спам қалтасын тексеріңіз."
 
 #, python-format
@@ -4433,10 +5004,14 @@ msgstr "Егер сіз ұмытып қалсаңыз, сіздің логині
 msgid "Thanks for using our site!"
 msgstr "Біздің сайтты пайдаланғаныңыз үшін рахмет!"
 
-msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
+#, fuzzy
+#| msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
+msgid "Forgotten your password? Enter your account's email address below, and we'll email instructions for setting a new one."
 msgstr "Құпия сөзді ұмыттыңыз ба? Төменде электрондық поштаңызды енгізіңіз, біз нұсқауларды жібереміз."
 
-msgid "The email you used to register your account. This is the one you receive email notifications on"
+#, fuzzy
+#| msgid "The email you used to register your account. This is the one you receive email notifications on"
+msgid "The email associated with your account. This should the email address you receive email notifications on."
 msgstr "Есептік жазбаны тіркеу үшін пайдаланған электрондық пошта Бұл сіз электрондық пошта хабарландыруларды аласыз"
 
 msgid "Example: mymail@example.com"
@@ -4632,23 +5207,8 @@ msgstr ""
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Date"
-msgstr "Күні"
-
-msgid "From"
-msgstr "Бастап"
-
-msgid "Start date."
-msgstr "Басталу күні."
-
 msgid "Time"
 msgstr "Уақыт"
-
-msgid "Until"
-msgstr "Дейін"
-
-msgid "End date."
-msgstr "Мерзімнің аяқталуы."
 
 msgid "Ok"
 msgstr "ОК"
@@ -4716,6 +5276,14 @@ msgstr "Қолданушыны құру"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Event"
 msgstr "Шара құру"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Project"
+msgstr "Жобаны құру"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Group"
+msgstr "Топ құру"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4821,11 +5389,6 @@ msgstr "Барлық топтарды қараңыз"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Browse all Projects"
 msgstr "Барлық жобаларды қараңыз"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-msgid "My Conferences"
-msgstr "Бейне конференциялар сервері"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4954,6 +5517,50 @@ msgid "No description yet."
 msgstr "Сипаттама жоқ."
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "max."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "You are participating"
+msgstr "Сіз мүшесіз"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Participation request pending..."
+msgstr "Мүшелікке сұраныс қаралуда."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Participants"
+msgid "Participate"
+msgstr "Мүшелер"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Contact organizers"
+msgstr "Байланыс ақпараты"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will now receive notifications for content posted in this group."
+msgid "You will now receive notifications for content posted."
+msgstr "Енді осы топта жарияланған мазмұн туралы хабарландырулар аласыз."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If you do not want notifications, click the unfollow button!"
+msgstr "Егер сіз хабарлама алғыңыз келмесе, бас тарту түймесін басыңыз!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr "Қате болғандықтан, ұнату параметрді сақтау мүмкін болмады."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr "Қате себебінен бақылау параметрлерді сақтау мүмкін болмады."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
 msgstr "Маркерді сүйреп апару арқылы идеяңыз үшін орынды таңдаңыз. Сіз бұл орынды кейінірек өзгерте аласыз."
 
@@ -4992,18 +5599,6 @@ msgstr "Шаралар парақшасы"
 #. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for comments or when this event is updated or its details change."
 msgstr "Енді сіз ескертулер туралы немесе осы оқиға жаңартылғанда немесе оның мәліметтері өзгерген кезде хабарландырулар аласыз."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "If you do not want notifications, click the unfollow button!"
-msgstr "Егер сіз хабарлама алғыңыз келмесе, бас тарту түймесін басыңыз!"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your like setting because of an error."
-msgstr "Қате болғандықтан, ұнату параметрді сақтау мүмкін болмады."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your follow setting because of an error."
-msgstr "Қате себебінен бақылау параметрлерді сақтау мүмкін болмады."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Hidden Users"
@@ -5389,7 +5984,14 @@ msgstr "Әзірге хабарландырулар жоқ."
 msgid "User Import Archive"
 msgstr ""
 
-msgid "Archived User Imports"
+msgid "Archived User Import Entry"
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to delete this Archived User Import Entry?"
+msgstr "Шақыруды қабылдамайсыз ба?"
+
+msgid "Delete Archived User Import Entry"
 msgstr ""
 
 #, fuzzy
@@ -5430,7 +6032,7 @@ msgstr ""
 
 #, fuzzy
 #| msgid "No contact data has been added yet."
-msgid "No data has been imported yet."
+msgid "No data has been imported yet. Ready to import!"
 msgstr "Контакт мәліметтері әлі қосылмаған."
 
 msgid "The uploaded data is valid and ready to be imported! Please review carefully!"
@@ -5454,6 +6056,11 @@ msgstr ""
 #, python-format
 msgid "Once you are ready to begin the import, please click \"%(submit_button_label)s\" at the bottom of the page."
 msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "No data has been imported yet."
+msgstr "Контакт мәліметтері әлі қосылмаған."
 
 msgid "The uploaded data is invalid!"
 msgstr ""
@@ -5746,17 +6353,11 @@ msgstr "Профилімді редакциялау"
 msgid "What's happening where and when? What's to discover? Where to meet?"
 msgstr "Қайда және қашан не болып жатыр? Нені қарау керек? Қайда кездесуге болады?"
 
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
-msgstr "Топтар үлкен желілерде немесе ұйымдарда байланыс пен ынтымақтастықты жақсартуға көмектеседі. Топ ішінде бірнеше кіші жобаларды немесе жұмыс топтарын біріктіруге болады."
-
 msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
 msgstr "Болашақта біздің тұрғылықты жеріміз қандай болады? Сіздің экологиялық таза және тұрақты аймақ туралы ойыңыз қандай? Сіздің жобаңыздың идеяларын іске асыратын серіктестерді табыңыз."
 
 msgid "Do you have something to share, sell or give away? Are you searching for something?"
 msgstr "Бөлісетін, сататын немесе беретін бір нәрсе бар ма? Сіз бірдеңе іздеп жүрсіз бе?"
-
-msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
-msgstr "Әріптестеріңізбен бірге өз жобаларыңызды немесе бастамаларыңызды тиімді ұйымдастырыңыз. Бір жерде жұмыс істеуге арналған барлық маңызды құралдар: Жаңалықтар, Pads, Шаралар, Todos және басқалар."
 
 msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "Welcome"
@@ -5866,6 +6467,338 @@ msgstr "(Жойылған пайдаланушы)"
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s-ге рендерер табылмады!</i>"
 
+#, fuzzy
+#| msgid "You are not in any groups or projects yet"
+msgid "You are not currently in any Projects"
+msgstr "Сіз әлі ешқандай топта немесе жобада емессіз"
+
+#, fuzzy
+msgid "Project Menu"
+msgstr "Жобаның түрі"
+
+#, fuzzy
+msgid "Project Dashboard"
+msgstr "Прибор панелі"
+
+msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
+msgstr "Әріптестеріңізбен бірге өз жобаларыңызды немесе бастамаларыңызды тиімді ұйымдастырыңыз. Бір жерде жұмыс істеуге арналған барлық маңызды құралдар: Жаңалықтар, Pads, Шаралар, Todos және басқалар."
+
+msgid "Edit Project"
+msgstr "Жобаны өңдеу"
+
+msgid "Activate Project"
+msgstr "Жобаны іске қосыңыз"
+
+#, fuzzy
+#| msgid "Deactivate Project"
+msgid "Re-activate Project"
+msgstr "Жобаны ажыратыңыз"
+
+msgid "Deactivate Project"
+msgstr "Жобаны ажыратыңыз"
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group!"
+msgid "You are about to deactivate this project!"
+msgstr "Сіз бұл жобаны / топты өшіргіңіз келеді!"
+
+#, fuzzy
+#| msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
+msgid "You are about to re-activate this project. It and all of its content will be visible on the website again."
+msgstr "Сіз бұл жобаны / топты қайта іске қосқалы отырсыз. Ол және оның барлық мазмұны тағы да сайтта көрінетін болады."
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr "Сіз бұл жобаны / топты өшіргіңіз келеді. Ол және оның барлық мазмұны сайтта жасырын болады және бәріне, соның ішінде сіздерге де көрінбейді."
+
+#, fuzzy
+#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+msgstr "Бұл процесс қайтымды. Пайдаланушы профилінен кез келген уақытта жоба / топты қайта іске қосуға болады."
+
+#, fuzzy
+#| msgid "Convert selected Groups to Projects"
+msgid "Convert selected items to Projects"
+msgstr "Таңдалған Топтарды Жобаларға өзгерту"
+
+#, fuzzy
+#| msgid "Project Administrator"
+msgid "Project administrator"
+msgstr "Жоба Әкімшісі"
+
+msgid "Project name"
+msgstr "Жобаның атауы"
+
+msgid "Enter a name for the project."
+msgstr "Жобаның атын енгізіңіз."
+
+#, fuzzy
+#| msgid "Where are you active?"
+msgid "Where is the project active?"
+msgstr "Сен қайда белсендісің?"
+
+#, fuzzy
+#| msgid "Team members only"
+msgid "Project members only"
+msgstr "Тек команда мүшелері үшін"
+
+msgid "Collaborate!"
+msgstr "Ынтымақтастық!"
+
+msgid "Join now and collaborate!"
+msgstr "Қазір қосылыңыз және бірлесіп жұмыс жасаңыз!"
+
+msgid "You have been invited to collaborate!"
+msgstr "Сізді ынтымақтастыққа шақырды!"
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
+msgstr "Кешіріңіз, тек портал әкімшілері Топтарды өшіре алады! Сіз оны өшіру үшін әкімшілердің біріне хабарлама жаза аласыз. Төменде сіз барлық әкімшілердің тізімін таба аласыз."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgstr "Кешіріңіз, тек портал әкімшілері Топтарды өшіре алады! Сіз оны өшіру үшін әкімшілердің біріне хабарлама жаза аласыз. Төменде сіз барлық әкімшілердің тізімін таба аласыз."
+
+#, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only project members can see the content you requested. Apply to become a member now!"
+msgstr "Сіз сұраған мазмұнды тек топ мүшелері көре алады. Қазір мүшелікке өтініш бер!"
+
+#, fuzzy
+#| msgid "You are not in any groups or projects yet"
+msgid "You are not currently in any Groups"
+msgstr "Сіз әлі ешқандай топта немесе жобада емессіз"
+
+#, fuzzy
+msgid "Group Menu"
+msgstr "Топ атауы"
+
+#, fuzzy
+msgid "Group Dashboard"
+msgstr "Прибор панелі"
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgstr "Топтар үлкен желілерде немесе ұйымдарда байланыс пен ынтымақтастықты жақсартуға көмектеседі. Топ ішінде бірнеше кіші жобаларды немесе жұмыс топтарын біріктіруге болады."
+
+msgid "Edit Group"
+msgstr "Топты өңдеу"
+
+#, fuzzy
+#| msgid "Deactivate Group"
+msgid "Activate Group"
+msgstr "Топты ажыратыңыз"
+
+msgid "Re-activate Group"
+msgstr "Топтық реакция"
+
+msgid "Deactivate Group"
+msgstr "Топты ажыратыңыз"
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group!"
+msgid "You are about to deactivate this group!"
+msgstr "Сіз бұл жобаны / топты өшіргіңіз келеді!"
+
+#, fuzzy
+#| msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
+msgid "You are about to re-activate this group. It and all of its content will be visible on the website again."
+msgstr "Сіз бұл жобаны / топты қайта іске қосқалы отырсыз. Ол және оның барлық мазмұны тағы да сайтта көрінетін болады."
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr "Сіз бұл жобаны / топты өшіргіңіз келеді. Ол және оның барлық мазмұны сайтта жасырын болады және бәріне, соның ішінде сіздерге де көрінбейді."
+
+#, fuzzy
+#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+msgstr "Бұл процесс қайтымды. Пайдаланушы профилінен кез келген уақытта жоба / топты қайта іске қосуға болады."
+
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Convert selected items to Groups"
+msgstr "Белгіленген Жобаларды Топтарға өзгерту"
+
+#, fuzzy
+#| msgid "Group Administrator"
+msgid "Group administrator"
+msgstr "Топ Әкімшісі"
+
+msgid "Group name"
+msgstr "Топ атауы"
+
+msgid "Enter a name for the group."
+msgstr "Топ атауын енгізіңіз."
+
+#, fuzzy
+#| msgid "Where are you active?"
+msgid "Where is the group active?"
+msgstr "Сен қайда белсендісің?"
+
+#, fuzzy
+#| msgid "Team members only"
+msgid "Group members only"
+msgstr "Тек команда мүшелері үшін"
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+msgstr "Кешіріңіз, тек портал әкімшілері Топтарды өшіре алады! Сіз оны өшіру үшін әкімшілердің біріне хабарлама жаза аласыз. Төменде сіз барлық әкімшілердің тізімін таба аласыз."
+
+msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgstr "Кешіріңіз, тек портал әкімшілері Топтарды өшіре алады! Сіз оны өшіру үшін әкімшілердің біріне хабарлама жаза аласыз. Төменде сіз барлық әкімшілердің тізімін таба аласыз."
+
+#, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only group members can see the content you requested. Apply to become a member now!"
+msgstr "Сіз сұраған мазмұнды тек топ мүшелері көре алады. Қазір мүшелікке өтініш бер!"
+
+#, fuzzy
+msgid "Conferences"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "All Conferences"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "My Conferences"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "You are not currently attending any Conferences"
+msgstr "Сіз ешқандай шараға шақыруды қабылдамадыңыз."
+
+#, fuzzy
+msgid "Conference Menu"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Conference Dashboard"
+msgstr "Прибор панелі"
+
+#, fuzzy
+#| msgid "Browse all Projects"
+msgid "Browse all Conferences"
+msgstr "Барлық жобаларды қараңыз"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Create Conference"
+msgstr "Шара құру"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Create new Conference"
+msgstr "Шара құру"
+
+msgid "Conferences let you set up and host workshops and events over multiple days, complete with video messaging, stage stream integration, breakout rooms and lobby chats."
+msgstr ""
+
+#, fuzzy
+msgid "Edit Conference"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+#| msgid "Activate Project"
+msgid "Activate Conference"
+msgstr "Жобаны іске қосыңыз"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Re-activate Conference"
+msgstr "Шара құру"
+
+#, fuzzy
+#| msgid "Deactivate Project"
+msgid "Deactivate Conference"
+msgstr "Жобаны ажыратыңыз"
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group!"
+msgid "You are about to deactivate this conference!"
+msgstr "Сіз бұл жобаны / топты өшіргіңіз келеді!"
+
+#, fuzzy
+#| msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
+msgid "You are about to re-activate this conference. It and all of its content will be visible on the website again."
+msgstr "Сіз бұл жобаны / топты қайта іске қосқалы отырсыз. Ол және оның барлық мазмұны тағы да сайтта көрінетін болады."
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr "Сіз бұл жобаны / топты өшіргіңіз келеді. Ол және оның барлық мазмұны сайтта жасырын болады және бәріне, соның ішінде сіздерге де көрінбейді."
+
+#, fuzzy
+#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+msgstr "Бұл процесс қайтымды. Пайдаланушы профилінен кез келген уақытта жоба / топты қайта іске қосуға болады."
+
+#, fuzzy
+#| msgid "Convert selected Groups to Projects"
+msgid "Convert selected items to Conferences"
+msgstr "Таңдалған Топтарды Жобаларға өзгерту"
+
+#, fuzzy
+msgid "Conference contact person"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Conference name"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a name for the conference."
+msgstr "Жобаның атын енгізіңіз."
+
+#, fuzzy
+#| msgid "Describe the project in a few sentences."
+msgid "Describe the conference in a few sentences."
+msgstr "Бұл сипаттама көпшілікке қол жетімді болады."
+
+#, fuzzy
+#| msgid "Where are you active?"
+msgid "Where is the conference active?"
+msgstr "Сен қайда белсендісің?"
+
+#, fuzzy
+msgid "Conference members only"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+#| msgid "Participants"
+msgid "Participate!"
+msgstr "Мүшелер"
+
+#, fuzzy
+#| msgid "Join now and collaborate!"
+msgid "Join now and participate!"
+msgstr "Қазір қосылыңыз және бірлесіп жұмыс жасаңыз!"
+
+#, fuzzy
+#| msgid "You have been invited to collaborate!"
+msgid "You have been invited to participate!"
+msgstr "Сізді ынтымақтастыққа шақырды!"
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
+msgstr "Кешіріңіз, тек портал әкімшілері Топтарды өшіре алады! Сіз оны өшіру үшін әкімшілердің біріне хабарлама жаза аласыз. Төменде сіз барлық әкімшілердің тізімін таба аласыз."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgstr "Кешіріңіз, тек портал әкімшілері Топтарды өшіре алады! Сіз оны өшіру үшін әкімшілердің біріне хабарлама жаза аласыз. Төменде сіз барлық әкімшілердің тізімін таба аласыз."
+
+#, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the content you requested. Apply to become a member now!"
+msgstr "Сіз сұраған мазмұнды тек топ мүшелері көре алады. Қазір мүшелікке өтініш бер!"
+
 msgid "Team Description"
 msgstr "Топ сипаттамасы"
 
@@ -5894,9 +6827,6 @@ msgstr ""
 msgid "Test email sent!"
 msgstr ""
 
-msgid "Newsletter successfully created!"
-msgstr ""
-
 msgid "Newsletter sent."
 msgstr ""
 
@@ -5911,13 +6841,20 @@ msgstr ""
 msgid "Newsletter has been updated."
 msgstr "(Хабарланған элемент жойылды.)"
 
-msgid "Login tokens were sent."
+msgid "Newsletter successfully created!"
 msgstr ""
 
-msgid "Login token was sent."
+msgid "Login tokens to all previously uninvited users are now being sent."
+msgstr ""
+
+#, python-format
+msgid "Login token was sent to %(email)s."
 msgstr ""
 
 msgid "Die Änderungen wurden erfolgreich gespeichert."
+msgstr ""
+
+msgid "Login token was sent."
 msgstr ""
 
 #, fuzzy
@@ -5981,9 +6918,6 @@ msgstr "Facebook есептік жазбаңыз осы есептік жазб�
 
 msgid "Sorry, only portal administrators can create projects and groups!"
 msgstr ""
-
-msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-msgstr "Кешіріңіз, тек портал әкімшілері Топтар жасай алады! Сіз Жобаны құра аласыз немесе сіз үшін Топ құру үшін әкімшілердің біріне хабарлама жаза аласыз. Төменде сіз барлық әкімшілердің тізімін таба аласыз."
 
 #, python-format
 msgid "%(team_type)s \"%(group)s\" was created successfully."
@@ -6073,6 +7007,14 @@ msgstr "Пайдаланушы %(username)s мүше болуды сұрады �
 msgid "User %(username)s was successfully invited!"
 msgstr "Қолданушы %(username)s сәтті шақырылды!"
 
+#, fuzzy, python-format
+#| msgid "The following Users were added to this portal:"
+msgid "The following users were invited to apply: %s"
+msgstr "Бұл порталға келесі Пайдаланушылар қосылды:"
+
+msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
+msgstr ""
+
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "Осы “%(username)s” алып тастай алмайсыз. Ол жалғыз қалған әкімші."
@@ -6105,14 +7047,14 @@ msgstr "%(team_name)s сәтті түрде қайта қосылды!"
 msgid "%(team_name)s was deactivated successfully!"
 msgstr "%(team_name)s сәтті түрде ажыратылды!"
 
-msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
-msgstr "Кешіріңіз, тек портал әкімшілері Топтарды өшіре алады! Сіз оны өшіру үшін әкімшілердің біріне хабарлама жаза аласыз. Төменде сіз барлық әкімшілердің тізімін таба аласыз."
-
 msgid "This project/group is already active!"
 msgstr "Бұл жоба/топ белсенді!"
 
 msgid "This project/group is already inactive!"
 msgstr "Бұл жоба/топ белсенді емес!"
+
+msgid "You are not a member, but have access because you are an Administrator."
+msgstr ""
 
 msgid "Only group/project members have permission to do this!"
 msgstr "Мұны жасауға тек топ/жоба мүшелерінің рұқсаты бар!"
@@ -6278,6 +7220,9 @@ msgstr "Шақыруларыңызды өңдеу кезінде қате пай
 msgid "You are already logged in!"
 msgstr "Сіз жүйеге кіріп қойдыңыз!"
 
+msgid "User signup is currently disabled!"
+msgstr ""
+
 msgid "Please enter a token!"
 msgstr "Токенді енгізіңіз!"
 
@@ -6352,6 +7297,11 @@ msgid "Your Announcement was deactivated successfully."
 msgstr "Хабарландыру сәтті ажыратылды."
 
 #, fuzzy
+#| msgid "Your Announcement was deleted successfully."
+msgid "The Archived User Import Entry was deleted successfully."
+msgstr "Хабарландыру сәтті жойылды."
+
+#, fuzzy
 #| msgid "This action is not available directly!"
 msgid "This action is not allowed right now"
 msgstr "Бұл әрекет тікелей қолжетімсіз!"
@@ -6381,6 +7331,38 @@ msgstr "Сіз қазір %s мүшесі емессіз! Егер қаласа�
 
 msgid "Your changes have been saved."
 msgstr "Сіздің өзгертулеріңіз сақталды."
+
+#~ msgid "The following Groups were converted to Projects:"
+#~ msgstr "Келесі Топтар Жобаларға өзгертілді:"
+
+#, fuzzy
+#~| msgid "Search for Ideas"
+#~ msgid "Search for email"
+#~ msgstr "Идеяларды іздеңіз"
+
+#~ msgid "Re-Activate Project/Group"
+#~ msgstr "Жобаны / топты қайта белсендіру"
+
+#~ msgid "Deactivate Project/Group"
+#~ msgstr "Жоба / топты ажыратыңыз"
+
+#~ msgid "Deactivated Projects and Groups"
+#~ msgstr "Өшірілген жобалар мен топтар"
+
+#~ msgid "Public Project"
+#~ msgstr "Қоғамдық жоба"
+
+#~ msgid "Public Group"
+#~ msgstr "Қоғамдық топ"
+
+#~ msgid "All groups"
+#~ msgstr "Барлық топтар"
+
+#~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
+#~ msgstr "Біз сізге құпия сөзді орнату туралы нұсқауларды жібердік. Сіз оларды жақын арада алуыңыз керек."
+
+#~ msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+#~ msgstr "Кешіріңіз, тек портал әкімшілері Топтар жасай алады! Сіз Жобаны құра аласыз немесе сіз үшін Топ құру үшін әкімшілердің біріне хабарлама жаза аласыз. Төменде сіз барлық әкімшілердің тізімін таба аласыз."
 
 #~ msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
 #~ msgstr "Сіздің %(team_type)s “%(team_name)s” шақырмаңыз сәтті алынып тасталды."
