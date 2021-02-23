@@ -52,14 +52,6 @@
 			{% else %}
 				{{ macros.listItem(item.text, item.url, item.icon, annotation=item.group, annotationIcon=item.group_icon, includeUnderdrop=true) }}
 			{% endif %}
-		{% endfor %} 
-		
-		
-	{% else %}
-		{% set placeholder_label %}
-			{# Translators: __INCLUDE_JS_PO__ #}
-			{% trans "Search for Names, Topics and Places..." %}
-		{% endset %}
-		{{ macros.listItem(placeholder_label, "#", '', includeUnderdrop=true, inactive=true) }}
+		{% endfor %}
 	{% endif %}
 </ul>

@@ -90,6 +90,7 @@ module.exports = BaseView.extend({
 
     /** Searchbox focused */
     onSearchBoxFocusIn: function (event) {
+        this.$searchBarEl.find('.nav-search-box').attr('placeholder', this.options.placeholder);
         this.showDropdown();
     },
 
@@ -207,6 +208,7 @@ module.exports = BaseView.extend({
             || $(event.target).hasClass('nav-search-backdrop')) {
             this.$searchBarEl.removeClass('active');
             $('.v2-navbar').removeClass('search-open');
+            this.$searchBarEl.find('.nav-search-box').attr('placeholder', '');
             document.removeEventListener('click', this.thisContext(this.checkQuickSearchFocusOut));
         }
     },
@@ -215,6 +217,7 @@ module.exports = BaseView.extend({
         if (this.$searchBarEl.hasClass('active')) {
             this.fireSearch();
         } else {
+            this.$searchBarEl.find('.nav-search-box').attr('placeholder', this.options.placeholder);
             this.$searchBarEl.find('.nav-search-box').focus();
         }
     },
