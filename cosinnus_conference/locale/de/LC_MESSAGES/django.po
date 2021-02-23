@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-23 18:24+0100\n"
-"PO-Revision-Date: 2021-02-18 15:46+0100\n"
+"PO-Revision-Date: 2021-02-23 18:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -141,22 +141,22 @@ msgid "Your changes were saved."
 msgstr "Deine Änderungen wurden übernommen."
 
 msgid "Option"
-msgstr ""
+msgstr "Option"
 
 msgid "Motivation for applying"
-msgstr ""
+msgstr "Motivation für die Anmeldung"
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 msgid "Contact E-Mail Address"
-msgstr ""
+msgstr "Kontakt-E-Mail-Address"
 
 msgid "Contact Phone Number"
-msgstr ""
+msgstr "Kontakt-Telefonnummer"
 
 msgid "List of Applicants"
-msgstr ""
+msgstr "Liste der Antragssteller/innen"
 
 #~ msgid "No Interest"
 #~ msgstr "Kein Interesse"
