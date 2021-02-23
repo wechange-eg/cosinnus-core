@@ -8,6 +8,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from cosinnus.models.user_import import CosinnusUserImportProcessor
 from cosinnus.utils.validators import validate_file_infection
+import chardet
 
 
 class CosinusUserImportCSVForm(forms.Form):
@@ -72,7 +73,10 @@ class CosinusUserImportCSVForm(forms.Form):
 
     def process_csv(self, csv_file):
         try:
-            file = csv_file.read().decode('utf-8')
+            raw_file = csv_file.read()
+            encoding = chardet.detect(raw_file)['encoding']
+            file = raw_file.decode(encoding)
+            
             io_string = io.StringIO(file)
             dialect = csv.Sniffer().sniff(io_string.read(102400000), delimiters=";,")
             io_string.seek(0)

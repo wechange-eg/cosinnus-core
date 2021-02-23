@@ -60,7 +60,9 @@ setup(
         'Pillow==6.2.0',
         'Celery==4.2.0',
         'dataclasses',
-
+        
+        'beautifulsoup4==4.8.1',
+        'chardet==3.0.4',
         'django-allauth==0.42.0',
         'django-annoying==0.7.6',
         'django-appconf==1.0.3',
