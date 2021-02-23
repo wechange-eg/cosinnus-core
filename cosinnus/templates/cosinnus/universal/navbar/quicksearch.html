@@ -2,6 +2,24 @@
 {% import "include/macros.html" as macros %}
 
 <ul class="item-list">
+
+	<li>
+		<div class="button-list">
+				<a class="rounded-button button-color-projects result-filter-button" data-result-filter-type="projects">
+					{{ macros.typeLabel("projects", "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+				<a class="rounded-button button-color-events result-filter-button" data-result-filter-type="events">
+					{{ macros.typeLabel("events", "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+				<a class="rounded-button button-color-groups result-filter-button" data-result-filter-type="groups">
+					{{ macros.typeLabel("groups", "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+				<a class="rounded-button button-color-ideas result-filter-button" data-result-filter-type="ideas">
+					{{ macros.typeLabel("ideas", "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+		</div>
+	</li>
+
 	{% if query and query|length > 2 %}
 		{% set default_annotation %}
 			{# Translators: __INCLUDE_JS_PO__ #}
