@@ -321,7 +321,7 @@
                         {% if group_model == "CosinnusConference" %}
 	                        {# Attachable File upload Field #}
 	                        {% trans "Uploaded files will be available for download and images will be shown in a gallery." as files_legend %}
-					        {% include 'cosinnus/media_tags.html' with show_all=True files_label=files_label files_legend=files_legend disable_persons=True disable_tags=True disable_location=True disable_topics=True disable_visibility=True hide_intro=True %}
+					        {% include 'cosinnus/media_tags.html' with show_all=True files_label=files_label files_legend=files_legend disable_persons=True disable_tags=True disable_location=True disable_topics=True disable_visibility=True hide_intro=True no_imports=True %}
 				        {% endif %}
                         
                         {# Website Field #}
