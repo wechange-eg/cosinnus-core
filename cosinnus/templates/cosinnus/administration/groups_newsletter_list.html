@@ -1,5 +1,15 @@
 {% extends "cosinnus/administration/managed_tags_newsletter_list.html" %}
 {% load i18n cosinnus_tags %}
 
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li class="active">
+        {% trans "Newsletters" %}
+        {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}
+            ({% trans "Groups" %})
+       {% endif %}
+    </li>
+{% endblock %}
+
 {% block update_url %}{% url 'cosinnus:administration-groups-newsletter-update' newsletter_id=newsletter.id %}{% endblock %}
 {% block create_url %}{% url 'cosinnus:administration-groups-newsletter-create' %}{% endblock %}

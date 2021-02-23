@@ -9,7 +9,12 @@
 
 {% block breadcrumb %}
     <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
-    <li class="active">{% trans "Newsletters" %}</li>
+    <li class="active">
+        {% trans "Newsletters" %}
+        {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}
+            ({{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_NAME_PLURAL }})
+       {% endif %}
+    </li>
 {% endblock %}
 
 {% block extrahead %}
@@ -19,22 +24,26 @@
 
 {% block content %}
 	<div class="content-box">
-	    <h2 class="white-text large-space">{% trans 'Newsletters' %}</h2>
+	    <h2>
+	       {% trans 'Newsletters' %}
+	    
+	    </h2>
+	    
 	    {% if object_list %}
-	    <table class="table table-striped white-content">
-	        <thead>
-	            <tr>
-	                <th>{% trans "Newsletter" %}</th>
-	                <th>{% trans "Sent at:" %}</th>
-	            </tr>
-	        </thead>
-	        {% for newsletter in object_list %}
-	        <tr>
-	            <th><a href="{% block update_url %}{% url 'cosinnus:administration-managed-tags-newsletter-update' newsletter_id=newsletter.id %}{% endblock %}">{{ newsletter.subject }}</a></th>
-	            <th>{% if newsletter.sent %}{{ newsletter.sent }}{% else %}{% trans 'This newsletter has not been sent' %}{% endif %}</th>
-	        </tr>
-	        {% endfor %}
-	    </table>
+		    <table class="table table-striped white-content">
+		        <thead>
+		            <tr>
+		                <th>{% trans "Newsletter" %}</th>
+		                <th>{% trans "Sent at:" %}</th>
+		            </tr>
+		        </thead>
+		        {% for newsletter in object_list %}
+			        <tr>
+			            <th><a href="{% block update_url %}{% url 'cosinnus:administration-managed-tags-newsletter-update' newsletter_id=newsletter.id %}{% endblock %}">{{ newsletter.subject }}</a></th>
+			            <th>{% if newsletter.sent %}{{ newsletter.sent }}{% else %}{% trans 'This newsletter has not been sent' %}{% endif %}</th>
+			        </tr>
+		        {% endfor %}
+		    </table>
 	    {% else %}
 	        {% trans "There are no newsletters yet." %}
 	    {% endif %}

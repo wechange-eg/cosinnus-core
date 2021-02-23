@@ -3,7 +3,12 @@
 
 {% block breadcrumb %}
 	<li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
-	<li><a href="{% url 'cosinnus:administration-groups-newsletter' %}">{% trans "Newsletters" %}</a></li>
+	<li><a href="{% url 'cosinnus:administration-groups-newsletter' %}">
+	    {% trans "Newsletters" %}
+	    {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}
+            ({% trans "Groups" %})
+       {% endif %}
+	</a></li>
 	{% if object %}
 	    <li class="active">{% trans "Update Newsletter" %}</li>
 	{% else %}

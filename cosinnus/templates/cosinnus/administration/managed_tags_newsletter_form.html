@@ -4,22 +4,27 @@
 {% block page_title %}{% trans "Newsletters" %} - {% trans "Edit" %}{% endblock %}
 
 {% block leftnav %}
-{% include 'cosinnus/administration/leftnav.html' %}
+    {% include 'cosinnus/administration/leftnav.html' %}
 {% endblock leftnav %}
 
 {% block breadcrumb %}
-<li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
-<li><a href="{% url 'cosinnus:administration-managed-tags-newsletter' %}">{% trans "Newsletters" %}</a></li>
-{% if object %}
-<li class="active">{% trans "Update Newsletter" %}</li>
-{% else %}
-<li class="active">{% trans "Create Newsletter" %}</li>
-{% endif %}
+	<li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+	<li><a href="{% url 'cosinnus:administration-managed-tags-newsletter' %}">
+	   {% trans "Newsletters" %}
+       {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}
+            ({{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_NAME_PLURAL }})
+       {% endif %}
+	</a></li>
+	{% if object %}
+	    <li class="active">{% trans "Update Newsletter" %}</li>
+	{% else %}
+	    <li class="active">{% trans "Create Newsletter" %}</li>
+	{% endif %}
 {% endblock %}
 
 {% block extrahead %}
-{{ block.super }}
-{% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.email_text.id_for_label %}
+	{{ block.super }}
+	{% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.email_text.id_for_label %}
 {% endblock %}
 
 {% block content %}

@@ -1,7 +1,8 @@
 {% load i18n cosinnus_tags %}
 
 {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED %}
-    <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-managed-tags-newsletter' %}">
+    <div type="button" class="btn w100 btn-emphasized {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}fine-space{% else %}regular-space{% endif %}" 
+            href="{% url 'cosinnus:administration-managed-tags-newsletter' %}">
         <ul class="media-list">
             <li class="media">
                <a class="pull-left">
@@ -9,6 +10,9 @@
                 </a>
                 <div class="media-body">
                     {% trans "Send Newsletter" %}
+                    {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}
+                        ({{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_NAME_PLURAL }})
+                    {% endif %}
                 </div>
             </li>
         </ul>
@@ -24,6 +28,9 @@
                 </a>
                 <div class="media-body">
                     {% trans "Send Newsletter" %}
+                    {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}
+                        ({% trans "Groups" %})
+                    {% endif %}
                 </div>
             </li>
         </ul>
