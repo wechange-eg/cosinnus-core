@@ -6,7 +6,8 @@
 {% endblock page_title %}
 
 {% block breadcrumb %}
-    <li><a href="{% group_url 'cosinnus:conference:room-management' group=group %}">{% trans "Conference Room Management" %}</a></li>
+    {{ block.super }}
+    <li class="active">{% trans "Conference Room Management" %}</li>
 {% endblock %}
 
 {% block leftnav %}
@@ -30,7 +31,19 @@
     
     <!-- a box with semi transparent background -->
     <div class="content-box large-space">
-        <h2 class="large-space">{% trans "Room list" %} - {{ group.name }}</h2>
+        <h2>{% trans "Conference Room Management" %}</h2>
+        
+        {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+	        <div class='form-info textfield transparent'>
+	            <p>
+	                {% trans "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference." %}
+	            </p>
+	            <p>
+	                {% trans "You can directly create conference events for rooms from here by using the controls for each room's dropdown menu." %}
+	            </p>
+	        </div>
+	        <div class="ultra-space"></div>
+        {% endif %}
         
         {% for room in object_list %}
             {% include 'cosinnus/conference/conference_room_list_object.html' with object=room %}

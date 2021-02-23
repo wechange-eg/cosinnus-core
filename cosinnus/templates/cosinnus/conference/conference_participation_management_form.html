@@ -29,7 +29,20 @@
 
         <div class="content-box">
             <h2>{% trans "Edit Conditions of Participation" %}</h2>  
-        
+            
+            <div class='form-info textfield transparent'>
+                {% trans "Manage Participation Applications" as application_management_label %}
+                <p>
+                    {% trans "Here you can configure the application form that participants have to fill out in order to apply." %}
+                    {% blocktrans %}You and all other organizers can process the applications in the "{{ application_management_label }}" section. You can do this even while applications are still open.{% endblocktrans %}
+                </p>
+                <p>
+	                {% trans 'Application method' as application_setting_label %}
+                    {% blocktrans %} If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting "{{ application_setting_label }}" in the conference settings.{% endblocktrans %}
+                </p>
+            </div>
+            <div class="ultra-space"></div>
+            
             {% trans "Application period" as date_label %}
             {% captureas date_html %}
                 {{ form.application_start.errors }}

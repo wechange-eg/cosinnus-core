@@ -159,6 +159,25 @@
 				{% block group_form_tab_panes %}
 					<div class="tab-pane {% if not SETTINGS.COSINNUS_MICROSITES_ENABLED or not request.GET.tab %}active{% endif %}" id="general">
 						
+						{% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+					        {% if object %}
+                                <h2>{{ group_model_class.get_trans.EDIT }}</h2>
+					        {% else %}
+					            <h2>{{ group_model_class.get_trans.CREATE }}</h2>
+							    <div class='form-info textfield transparent'>
+							        <p>
+							            {{ group_model_class.get_trans.CREATE_DESCRIPTION }}
+							        </p>
+									{% if group_model == "CosinnusConference" %}
+	       						        <p>
+							               {% trans "After you have created the conference, you can create conference rooms and events." %}
+    							        </p>
+						            {% endif %}
+							    </div>
+							    <div class="ultra-space"></div>
+							{% endif %}
+						{% endif %}
+						
                         {% include 'cosinnus/fields/default_field.html' with label=group_model_class.get_trans.FORMFIELD_NAME field_id=form.forms.obj.name.id_for_label first=True %}
                         
                         {# Name Field #}
@@ -174,7 +193,7 @@
 	                        {% if form.forms.obj.fields.from_date and form.forms.obj.fields.to_date %}
 	                             {% captureas date_label %}{% trans "Conference start and end date and time" %}{% endcaptureas %}
 	                             {% captureas date_legend %}{% trans "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days." %}{% endcaptureas %}
-	                             {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.forms.obj.from_date to_date_field=form.forms.obj.to_date date_label=date_label %}
+	                             {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.forms.obj.from_date to_date_field=form.forms.obj.to_date date_label=date_label legend=date_legend %}
 	                        {% endif %}
                         {% endblock %}
                         
@@ -187,7 +206,7 @@
 	                        {% endif %}
                         {% endblock %}
 				        
-				        {% if group_model == "CosinnusConference"%}
+				        {% if group_model == "CosinnusConference" %}
                             {% if form.forms.obj.related_groups %}
                                 {# Related Groups Field #}
                                 {% trans "In which projects' or groups' calendars should the conference be shown?" as related_label %}
@@ -347,7 +366,7 @@
 		                {% endblock managed_tag_field %}
                         
                         {% block visibility_field %}
-                            {% if not group_model == "CosinnusConference" or SETTINGS.COSINNUS_CONFERENCES_PUBLIC_SETTING_LOCKED is None %}
+                            {% if not group_model == "CosinnusConference" %}
 		                        {# Group Visibility Field #}
 				                {% trans "Privacy settings" as visibility_label %}
 				                {% trans "This will be the default setting for all content created by members." as visibility_legend %}
