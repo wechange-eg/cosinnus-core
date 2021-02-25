@@ -285,9 +285,15 @@ class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
     def __init__(self, instance, *args, **kwargs):    
         super(_CosinnusProjectForm, self).__init__(instance=instance, *args, **kwargs)
         # choosable groups are only the ones the user is a member of, and never the forum
+        user_group_ids = list(CosinnusSociety.objects.get_for_user_pks(self.request.user))
+        # choosable are also conferences the user is an admin of 
+        user_conference_ids = list(CosinnusConference.objects.get_for_user_group_admin_pks(self.request.user))
+        
+        conference_and_group_types = [get_cosinnus_group_model().TYPE_SOCIETY, get_cosinnus_group_model().TYPE_CONFERENCE]
+        groups_and_conferences = get_cosinnus_group_model().objects.filter(type__in=conference_and_group_types)
+        qs = groups_and_conferences.filter(portal=CosinnusPortal.get_current(), is_active=True, id__in=user_group_ids+user_conference_ids)
+        
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
-        user_group_ids = CosinnusSociety.objects.get_for_user_pks(self.request.user)
-        qs = CosinnusSociety.objects.filter(portal=CosinnusPortal.get_current(), is_active=True, id__in=user_group_ids)
         if forum_slug:
             qs = qs.exclude(slug=forum_slug)
         self.fields['parent'].queryset = qs
