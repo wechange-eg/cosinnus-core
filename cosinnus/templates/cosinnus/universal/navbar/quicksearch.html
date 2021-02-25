@@ -15,18 +15,21 @@
 		{% endset %}
 
 		{{ filter_annotations_prefix }}
-		<button class="rounded-button button-color-projects result-filter-button quicksearch-filterbutton" data-result-filter-type="projects">
+		<a class="rounded-button button-color-projects result-filter-button quicksearch-filterbutton" data-result-filter-type="projects">
 			{{ macros.typeLabel("projects", "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
-		</button>
-		<button class="rounded-button button-color-events result-filter-button quicksearch-filterbutton" data-result-filter-type="events">
+		</a>
+		<a class="rounded-button button-color-events result-filter-button quicksearch-filterbutton" data-result-filter-type="events">
 			{{ macros.typeLabel("events", "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
-		</button>
-		<button class="rounded-button button-color-groups result-filter-button quicksearch-filterbutton" data-result-filter-type="groups">
+		</a>
+		<a class="rounded-button button-color-groups result-filter-button quicksearch-filterbutton" data-result-filter-type="groups">
 			{{ macros.typeLabel("groups", "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
-		</button>
-		<button class="rounded-button button-color-ideas result-filter-button quicksearch-filterbutton" data-result-filter-type="ideas">
+		</a>
+		<a class="rounded-button button-color-ideas result-filter-button quicksearch-filterbutton" data-result-filter-type="ideas">
 			{{ macros.typeLabel("ideas", "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
-		</button>
+		</a>
+		<a class="rounded-button button-color-conferences result-filter-button quicksearch-filterbutton" data-result-filter-type="conferences">
+			{{ macros.typeLabel("conferences", "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
+		</a>
 		{{ filter_annotations_suffix }}
 	</li>
 
