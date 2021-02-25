@@ -55,31 +55,30 @@
             {% captureas type_description_html %}
                 <div class="v-spacer-m"></div>
                 <div class="room-type-selector room-type-selector-0">
-                    <p class="textfield transparent">{% trans "TODO: Room Type Lobby description text" %}</p>
+                    <p class="textfield transparent">{% trans "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here." %}</p>
                 </div>
                 <div class="room-type-selector room-type-selector-1">
-                    <p class="textfield transparent">{% trans "TODO: Room Type Stage description text" %}</p>
+                    <p class="textfield transparent">{% trans "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it." %}</p>
                 </div>
                 <div class="room-type-selector room-type-selector-2">
-                    <p class="textfield transparent">{% trans "TODO: Room Type Workshops description text" %}</p>
+                    <p class="textfield transparent">{% trans "In Workshops each event has a video conference. Presenters are allowed to moderate those." %}</p>
                 </div>
                 <div class="room-type-selector room-type-selector-3">
-                    <p class="textfield transparent">{% trans "TODO: Room Type Discussions description text" %}</p>
+                    <p class="textfield transparent">{% trans "In Discussions each event has a video conference. Presenters are allowed to moderate those. Differs from \"Workshops\" only by the design in the agenda. Workshop: tiles, discussion: list." %}</p>
                 </div>
                 <div class="room-type-selector room-type-selector-4">
-                    <p class="textfield transparent">{% trans "TODO: Room Type Coffee Tables description text" %}</p>
+                    <p class="textfield transparent">{% trans "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone." %}</p>
                 </div>
                 <div class="room-type-selector room-type-selector-5">
-                    <p class="textfield transparent">{% trans "TODO: Room Type Results description text" %}</p>
+                    <p class="textfield transparent">{% trans "Include a project that you use for documentation purposes. Click the link below to add a project to the conference first, if you haven't already." %}</p>
                     <p class="transparent">
-	                    <a href="{% url 'cosinnus:group-add' %}?group={{ group.slug }}" target="_blank">
-	                        <i class="fa fa-external-link"></i>
+	                    <a href="{% url 'cosinnus:group-add' %}?group={{ group.slug }}&next={% group_url "cosinnus:conference:room-add" group=group %}">
 	                        {% trans "Add project" %}
 	                    </a>
                     </p>
                 </div>
                 <div class="room-type-selector room-type-selector-6">
-                    <p class="textfield transparent">{% trans "TODO: Room Type Participants description text" %}</p>
+                    <p class="textfield transparent">{% trans "Shows a list of all participants." %}</p>
                 </div>
                 <script type="text/javascript">
                     {% comment %} show or hide a type description {% endcomment %}
