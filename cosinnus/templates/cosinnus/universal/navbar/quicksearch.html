@@ -15,18 +15,18 @@
 		{% endset %}
 
 		{{ filter_annotations_prefix }}
-		<a href="/map/?people=false&events=false&projects=true&groups=false&ideas=false&conferences=false" class="rounded-button button-color-projects result-filter-button">
+		<button class="rounded-button button-color-projects result-filter-button quicksearch-filterbutton" data-result-filter-type="projects">
 			{{ macros.typeLabel("projects", "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
-		</a>
-		<a href="/map/?people=false&events=true&projects=false&groups=false&ideas=false&conferences=false" class="rounded-button button-color-events result-filter-button">
+		</button>
+		<button class="rounded-button button-color-events result-filter-button quicksearch-filterbutton" data-result-filter-type="events">
 			{{ macros.typeLabel("events", "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
-		</a>
-		<a href="/map/?people=false&events=false&projects=false&groups=true&ideas=false&conferences=false" class="rounded-button button-color-groups result-filter-button">
+		</button>
+		<button class="rounded-button button-color-groups result-filter-button quicksearch-filterbutton" data-result-filter-type="groups">
 			{{ macros.typeLabel("groups", "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
-		</a>
-		<a href="/map/?people=false&events=false&projects=false&groups=false&ideas=true&conferences=false" class="rounded-button button-color-ideas result-filter-button">
+		</button>
+		<button class="rounded-button button-color-ideas result-filter-button quicksearch-filterbutton" data-result-filter-type="ideas">
 			{{ macros.typeLabel("ideas", "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
-		</a>
+		</button>
 		{{ filter_annotations_suffix }}
 	</li>
 

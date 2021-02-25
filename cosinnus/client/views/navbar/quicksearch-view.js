@@ -57,6 +57,8 @@ module.exports = BaseView.extend({
         self.$searchBarEl.on('keydown', '.nav-search-box', self.thisContext(self.onSearchBoxKeyDown));
         self.$searchBarEl.on('input', '.nav-search-box', self.thisContext(self.onSearchBoxTyped));
         self.$searchBarEl.on('click', '.nav-button-search', self.thisContext(self.onSearchIconClicked));
+        self.$searchBarEl.on('click', '.quicksearch-filterbutton', self.thisContext(self.onQuickSearchFilterButtonClicked));
+
 
         // TODO: add a collection for quicksearch DB results!
         return;
@@ -102,6 +104,30 @@ module.exports = BaseView.extend({
             this.$searchBarEl.removeClass('active').find('.nav-search-box').blur();
             $('.v2-navbar').removeClass('search-open');
         }
+    },
+
+    onQuickSearchFilterButtonClicked: function (event) {
+        event.preventDefault();
+        var type = event.currentTarget.getAttribute('data-result-filter-type');
+        var query = this.getCurrentQuery();
+
+        var data = {
+            'q': query ? query : '',
+            'people': type === 'people',
+            'events': type === 'events',
+            'projects': type === 'projects',
+            'groups': type === 'groups',
+            'ideas': type === 'ideas',
+            'conferences': type === 'conferences'
+        }
+
+        var params = [];
+
+        for (var d in data) {
+            params.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
+        }
+        var url = '/map/?' + params.join('&');
+        window.location.href = url;
     },
 
     /** Searchbox text input */
