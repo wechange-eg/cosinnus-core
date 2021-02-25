@@ -4364,8 +4364,8 @@ msgstr "Créer dossier"
 
 #, python-format
 msgid ""
-"The conference \"%%(group.name)\" starts tomorrow.\n"
-"Start of the event is %%(group.from_date|date:\"SHORT_DATETIME_FORMAT\").\n"
+"The conference [[name]] starts tomorrow.\n"
+"Start of the event is [[from_date]].\n"
 "\n"
 "Under the following link you can already get an overview of the conference events.\n"
 "\n"
@@ -4374,13 +4374,13 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "Conference starts tomorrow: %%(group.name)"
+msgid "Conference starts tomorrow: [[name]]"
 msgstr ""
 
 #, python-format
 msgid ""
-"The conference \"%%(group.name)\" starts soon.\n"
-"Start of the event is %%(group.from_date|date:\"SHORT_DATETIME_FORMAT\").\n"
+"The conference [[name]] starts soon.\n"
+"Start of the event is [[from_date]].\n"
 "\n"
 "Under the following link you can already get an overview of the conference events.\n"
 "\n"
@@ -4389,13 +4389,13 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "Conference starts soon: %%(group.name)"
+msgid "Conference starts soon: [[name]]"
 msgstr ""
 
 #, python-format
 msgid ""
-"The conference \"%%(group.name)\" starts in a week.\n"
-"Start of the event is %%(group.from_date|date:\"SHORT_DATETIME_FORMAT\").\n"
+"The conference [[name]] starts in a week.\n"
+"Start of the event is [[from_date]].\n"
 "\n"
 "Under the following link you can already get an overview of the conference events.\n"
 "\n"
@@ -4404,7 +4404,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "Conference starts next week: %%(group.name)"
+msgid "Conference starts next week: [[name]]"
 msgstr ""
 
 #, python-format

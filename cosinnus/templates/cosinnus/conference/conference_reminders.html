@@ -35,6 +35,17 @@
                     </h4>
                 </label>
             </div>
+            
+            {% captureas content_legend %}
+                {% trans "You may use the following variables:" %}
+                [[name]]
+                [[from_date]]
+                [[to_date]]
+                [[user_first_name]]
+                [[user_last_name]]
+                [[user_full_name]]
+            {% endcaptureas %}
+            
             <div id="collapseWeekBefore" class="panel-collapse">
                 <div class="panel-body">
                     <label>
@@ -45,7 +56,7 @@
                     {% include 'cosinnus/fields/default_field.html' with field=form.week_before_subject label=subject_label %}
                     {# Week before email text #}
                     {% trans "Invitation text" as content_label %}
-                    {% include 'cosinnus/fields/default_field.html' with field=form.week_before_content label=content_label large_field=True %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.week_before_content label=content_label legend_selectable=True  legend=content_legend large_field=True %}
                     <button type="submit" class="btn btn-default btn-autosize" name="test" value="week_before">
                         <ul class="media-list">
                             <li class="media">
@@ -83,7 +94,7 @@
                     {% include 'cosinnus/fields/default_field.html' with field=form.day_before_subject label=subject_label %}
                     {# Day before email text #}
                     {% trans "Invitation text" as content_label %}
-                    {% include 'cosinnus/fields/default_field.html' with field=form.day_before_content label=content_label large_field=True %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.day_before_content label=content_label legend_selectable=True  legend=content_legend large_field=True %}
                     <button type="submit" class="btn btn-default btn-autosize" name="test" value="day_before">
                         <ul class="media-list">
                             <li class="media">
@@ -118,7 +129,7 @@
                     {% include 'cosinnus/fields/default_field.html' with field=form.hour_before_subject label=subject_label %}
                     {# Hour before email text #}
                     {% trans "Invitation text" as content_label %}
-                    {% include 'cosinnus/fields/default_field.html' with field=form.hour_before_content label=content_label large_field=True %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.hour_before_content label=content_label legend_selectable=True  legend=content_legend large_field=True %}
                     <button type="submit" class="btn btn-default btn-autosize" name="test" value="hour_before">
                         <ul class="media-list">
                             <li class="media">

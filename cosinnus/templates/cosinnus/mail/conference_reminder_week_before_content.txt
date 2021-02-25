@@ -1,5 +1,5 @@
-{% load i18n %}{% blocktrans %}The conference "%(group.name)" starts in a week.
-Start of the event is %(group.from_date|date:"SHORT_DATETIME_FORMAT").
+{% load i18n %}{% blocktrans %}The conference [[name]] starts in a week.
+Start of the event is [[from_date]].
 
 Under the following link you can already get an overview of the conference events.
 

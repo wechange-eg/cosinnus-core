@@ -14,6 +14,9 @@ from cosinnus.utils.mail import send_notification_item_html_threaded
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.user import filter_active_users
 from cosinnus.utils.permissions import check_user_can_receive_emails
+from uritemplate.api import variables
+from django.template.defaultfilters import date
+from cosinnus.utils.html import render_html_with_variables
 
 
 def get_initial_template(field_name):
@@ -29,11 +32,15 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
     """
     Send conference reminder email a week/day/hour before start
     """
-    def render_template(extra_fields, field_name, field_type, context):
+    def render_template(extra_fields, field_name, field_type, user, group):
         template = extra_fields.get(f'reminder_{field_name}_{field_type}')
         template = template or get_initial_template(f'{field_name}_{field_type}')
-        template = re.sub('\%\(([^\)]+)\)', r'{{\1}}', template)
-        return Template(template).render(Context(context))
+        variables = {
+            'name': group['name'],
+            'from_date': date(group.from_date, 'SHORT_DATETIME_FORMAT'),
+            'to_date': date(group.from_date, 'SHORT_DATETIME_FORMAT'),
+        }
+        return render_html_with_variables(user, template, variables)
     
     if not recipients:
         recipients = group.actual_members
@@ -49,10 +56,8 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
                 translation.activate(getattr(recipient.cosinnus_profile, 'language', settings.LANGUAGES[0][0]))
 
             extra_fields = group.extra_fields or {}
-            context = get_common_mail_context(request=None, group=group, user=recipient)
-
-            subject = render_template(extra_fields, field_name, 'subject', context)
-            content = textfield(render_template(extra_fields, field_name, 'content', context))
+            subject = render_template(extra_fields, field_name, 'subject', recipient, group)
+            content = textfield(render_template(extra_fields, field_name, 'content', recipient, group))
 
             portal_url = group.portal.get_domain()
             group_icon_url = portal_url + (group.get_avatar_thumbnail_url() or get_image_url_for_icon(group.get_icon()))
