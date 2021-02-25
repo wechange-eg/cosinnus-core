@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-23 18:24+0100\n"
-"PO-Revision-Date: 2021-02-23 18:45+0100\n"
+"PO-Revision-Date: 2021-02-23 18:51+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -2639,7 +2639,7 @@ msgid "Choose users to assign to this workshop"
 msgstr "Wähle Benutzer/innen für diesen Workshop"
 
 msgid "List of Applicants"
-msgstr "Liste der Antragssteller"
+msgstr "Liste der Antragssteller/innen"
 
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
 msgstr "Hier kannst du das Anmeldeformular konfigurieren, das die Teilnehmer ausfüllen müssen, um sich zu bewerben."
@@ -2686,10 +2686,10 @@ msgid "(no limit selected)"
 msgstr "(keine Begrenzung ausgewählt)"
 
 msgid "Require applicants to submit a text about their motivation for applying"
-msgstr "Antragssteller müssen einen Text über ihre Motiviation für die Teilnahme angeben"
+msgstr "Antragssteller/innen müssen einen Text über ihre Motiviation für die Teilnahme angeben"
 
 msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
-msgstr "Das Motivations-Textfeld wird mit dem Text vorausgefüllt, den du hier eingibst. Du kannst dies nutzen, um einen Hilfetext für das Verfassen des Motivationstextes zu hinterlegen oder eine Frageliste angeben, die die Antragssteller beantworten sollen."
+msgstr "Das Motivations-Textfeld wird mit dem Text vorausgefüllt, den du hier eingibst. Du kannst dies nutzen, um einen Hilfetext für das Verfassen des Motivationstextes zu hinterlegen oder eine Frageliste angeben, die die Antragssteller/innen beantworten sollen."
 
 #, python-format
 msgid "Only applicable if \"%(other_option)s\" is enabled."
@@ -2705,7 +2705,7 @@ msgid "Choose one or more options that will be displayed on the application form
 msgstr "Wähle eine oder mehr Bedingungen die auf dem Anmeldeformular angezeigt werden sollen. Benutzer können bei der Antragsstellung aus diesen Optionen Beliebige auswählen."
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
-msgstr "Workshopauswahl: Antragssteller können Workshops priorisieren, an denen sie teilnehmen möchten"
+msgstr "Workshopauswahl: Antragssteller/innen können Workshops priorisieren, an denen sie teilnehmen möchten"
 
 msgid "Conditions for participation"
 msgstr "Bedingungen für die Teilnahme"
