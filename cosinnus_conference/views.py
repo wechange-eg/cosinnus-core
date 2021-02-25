@@ -962,11 +962,6 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
             application.information,
             str(dict(APPLICATION_STATES).get(application.status)),
         ]
-        if self.management and self.management.priority_choice_enabled:
-            row += [
-                application.first_priorities_string,
-                application.second_priorities_string,
-            ]
         if not 'contact_email' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
             row += [
                 application.contact_email
@@ -974,6 +969,11 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         if not 'contact_phone' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
             row += [
                 application.contact_phone.as_international if application.contact_phone else ''
+            ]
+        if self.management and self.management.priority_choice_enabled:
+            row += [
+                application.first_priorities_string,
+                application.second_priorities_string,
             ]
         row += self.get_extra_application_row(application) 
         row += self.get_application_options(application)
