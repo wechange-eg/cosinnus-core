@@ -63,11 +63,17 @@
 {% endif %}
 
 {% if current_page == "all" %}
+    {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
+        {% captureas href %}{% url 'cosinnus:conference__group-list' %}{% endcaptureas %}
+	    {% captureas label %}{% trans "All Conferences" %}{% endcaptureas %}
+	    {% include "cosinnus/leftnav_button.html" with active=is_grouplist__conference extra_classes="regular-space" icon="fa-group" label=label href=href  %}
+    {% endif %}
+    
     {% captureas href %}{% url 'cosinnus:group__group-list' %}{% endcaptureas %}
-    {% captureas label %}{% trans "All societies" %}{% endcaptureas %}
+    {% captureas label %}{% trans "All Groups" %}{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with active=is_grouplist__society extra_classes="regular-space" icon="fa-group" label=label href=href  %}
     
     {% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
-    {% captureas label %}{% trans "All projects" %}{% endcaptureas %}
+    {% captureas label %}{% trans "All Projects" %}{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with active=is_grouplist extra_classes="regular-space" icon="fa-group" label=label href=href  %}
 {% endif %}

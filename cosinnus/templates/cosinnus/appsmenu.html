@@ -71,12 +71,16 @@
 	
 	        {% if group.group_is_conference and user|has_write_access:group  %}
 	            {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+	                {% comment %}  
+	                Hidden until CSV temporary import is fixed
+	                
 			        <li class="app-main appnavi-listelement fine-space">
 			            <a href="{{ conference_management_page }}">
 			                <i class="fas fa-fw fa-chalkboard-teacher"></i>
 			                {% trans "Conference Management" %}
 			            </a>
 			        </li>
+	                {% endcomment %}
 			        
 		            <li class="app-main appnavi-listelement fine-space">
 		                <a href="{{ conference_room_management_page }}">

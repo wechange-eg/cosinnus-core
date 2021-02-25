@@ -183,7 +183,7 @@
 		                    <i class="fa fa-chevron-down panel-collapsed"></i>
 		                    <i class="fa fa-chevron-up panel-open"></i>
 		                    {% if group.group_is_conference and group.use_conference_applications %}
-		                        {% trans "Invite users to apply..." %} 
+		                        {% trans "Invite registered users to apply..." %} 
 		                    {% else %}
                                 {% trans "Invite registered users..." %} 
 		                    {% endif %}
@@ -328,7 +328,7 @@
 		        </div> {% comment %} panel {% endcomment %}
 	        {% endif %}
 	        
-	        {% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED and not group.group_is_conference or SETTINGS.COSINNUS_USER_SIGNUP_ENABLED and not group.use_conference_applications %}
+	        {% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
 		        {% if user in admins or user|is_superuser or recruited %}
 		
 			        <div class="panel panel-default large-space">
@@ -336,7 +336,12 @@
 			                <h4 class="panel-title {% if not request.GET.invite %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseTwo">
 			                    <i class="fa fa-chevron-down panel-collapsed"></i>
 			                    <i class="fa fa-chevron-up panel-open"></i>
-			                    {% trans "Invite unregistered users..." %} {% if recruited|length > 0 %}({{ recruited|length }}){% endif %}
+    			                {% if group.group_is_conference and group.use_conference_applications %}
+                                    {% trans "Invite unregistered users to apply..." %}
+    			                {% else %}
+    			                    {% trans "Invite unregistered users..." %} 
+			                    {% endif %}
+			                    {% if recruited|length > 0 %}({{ recruited|length }}){% endif %}
 			                </h4>
 			            </div>
 			            <div id="collapseTwo" class="panel-collapse {% if not request.GET.invite %}collapse{% else %}in{% endif %}">

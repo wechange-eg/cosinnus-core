@@ -1037,7 +1037,7 @@ def convert_email_group_invites(sender, profile, **kwargs):
         for a user after registration. If there were any, also adds an entry to the user's profile's visit-next setting. """
     # TODO: caching?
     user = profile.user
-    invites = CosinnusUnregisterdUserGroupInvite.objects.filter(email=get_newly_registered_user_email(user))
+    invites = CosinnusUnregisterdUserGroupInvite.objects.filter(email__iexact=get_newly_registered_user_email(user))
     if invites:
         with transaction.atomic():
             other_invites = []

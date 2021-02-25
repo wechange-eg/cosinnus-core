@@ -118,7 +118,7 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     MY_LIST_EMPTY = _('You are not currently attending any Conferences')
     
     MENU_LABEL = _('Conference Menu')
-    DASHBOARD_LABEL = _('Conference Dashboard')
+    DASHBOARD_LABEL = VERBOSE_NAME
     BROWSE_ALL = _('Browse all Conferences')
     CREATE = _('Create Conference')
     CREATE_NEW = _('Create new Conference')

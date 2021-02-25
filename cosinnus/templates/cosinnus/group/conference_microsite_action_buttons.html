@@ -4,18 +4,33 @@
 <div class="group-microsite-login-box overlay-box-gray">
 
     {% if not user.is_authenticated %}
-        <button href="{% url 'cosinnus:user-add' %}?next={% group_url 'cosinnus:conference:application' group=group.slug %}" style="width: 100% !important;" type="button" class="btn btn-emphasized">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#">
-                        <i class="fa fa-user-plus"></i>
-                    </a>
-                    <div class="media-body">
-                        {% trans "Register and join!" %}
-                    </div>
-                </li>
-            </ul>
-        </button>
+        {% if group.use_conference_applications %}
+	        <button href="{% url 'cosinnus:user-add' %}?next={% group_url 'cosinnus:conference:application' group=group.slug %}" style="width: 100% !important;" type="button" class="btn btn-emphasized">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left" href="#">
+	                        <i class="fa fa-user-plus"></i>
+	                    </a>
+	                    <div class="media-body">
+	                        {% trans "Register and apply!" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button>
+	    {% else %}
+	        <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}join/?direct=1" style="width: 100% !important;" type="button" class="btn btn-emphasized">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-user-plus"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans "Register and join!" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+	    {% endif %}
         
     {% else %}
         {% conference_application group as application %}
