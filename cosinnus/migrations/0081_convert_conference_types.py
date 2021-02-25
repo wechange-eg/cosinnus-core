@@ -13,7 +13,10 @@ def convert_conference_types(apps, schema_editor):
         if group.type == 1 and group.is_conference:
             group.type = 2
             group.save()
-            CosinnusPermanentRedirect.objects.create(from_portal=group.portal, from_type='group', from_slug=group.slug, to_group=group)
+            try:
+                CosinnusPermanentRedirect.objects.create(from_portal=group.portal, from_type='group', from_slug=group.slug, to_group=group)
+            except:
+                pass
 
 
 class Migration(migrations.Migration):
