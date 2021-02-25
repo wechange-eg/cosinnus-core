@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-23 18:24+0100\n"
+"POT-Creation-Date: 2021-02-25 14:33+0100\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2314,9 +2314,6 @@ msgstr "Сіз келесі айнымалыларды пайдалана ала
 msgid "Currently set Welcome-Email Text"
 msgstr "Электрондық пошта мәтіні қазір орнатылды"
 
-msgid "Conference Management"
-msgstr ""
-
 msgid "Conference Room Management"
 msgstr ""
 
@@ -2903,28 +2900,28 @@ msgstr "Топты өңдеу"
 msgid "Room type"
 msgstr "Команда түрінен"
 
-msgid "TODO: Room Type Lobby description text"
+msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr ""
 
-msgid "TODO: Room Type Stage description text"
+msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr ""
 
-msgid "TODO: Room Type Workshops description text"
+msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
 msgstr ""
 
-msgid "TODO: Room Type Discussions description text"
+msgid "In Discussions each event has a video conference. Presenters are allowed to moderate those. Differs from \"Workshops\" only by the design in the agenda. Workshop: tiles, discussion: list."
 msgstr ""
 
-msgid "TODO: Room Type Coffee Tables description text"
+msgid "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
 msgstr ""
 
-msgid "TODO: Room Type Results description text"
+msgid "Include a project that you use for documentation purposes. Click the link below to add a project to the conference first, if you haven't already."
 msgstr ""
 
 msgid "Add project"
 msgstr "Жоба қосу"
 
-msgid "TODO: Room Type Participants description text"
+msgid "Shows a list of all participants."
 msgstr ""
 
 msgid "How many participants should can join one coffee table before it is full"
@@ -2985,6 +2982,9 @@ msgstr ""
 #| msgid "There are no items yet"
 msgid "There are no rooms yet."
 msgstr "Әзірге бұл жерде ештеңе жоқ"
+
+msgid "Conference Management"
+msgstr ""
 
 msgid "Conference is running"
 msgstr ""
@@ -3312,6 +3312,11 @@ msgstr "Байланыс"
 msgid "No contact data has been added yet."
 msgstr "Контакт мәліметтері әлі қосылмаған."
 
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Register and apply!"
+msgstr "Тіркеліңіз және қосылыңыз!"
+
 msgid "Register and join!"
 msgstr "Тіркеліңіз және қосылыңыз!"
 
@@ -3390,9 +3395,9 @@ msgid "Invited group/project members"
 msgstr "Мүше болуға шақырылды"
 
 #, fuzzy
-#| msgid "Invite users"
-msgid "Invite users to apply..."
-msgstr "Пайдаланушыны шақыру"
+#| msgid "Invite registered users..."
+msgid "Invite registered users to apply..."
+msgstr "Тіркелген мүшені шақырыңыз."
 
 msgid "Invite registered users..."
 msgstr "Тіркелген мүшені шақырыңыз."
@@ -3427,6 +3432,11 @@ msgstr "Директорлар кеңесінің мүшесін шақыруд�
 
 msgid "There are no pending invitations."
 msgstr "Күтудегі шақырулар жоқ."
+
+#, fuzzy
+#| msgid "Invite unregistered users..."
+msgid "Invite unregistered users to apply..."
+msgstr "Тіркелмеген пайдаланушыларды шақыру."
 
 msgid "Invite unregistered users..."
 msgstr "Тіркелмеген пайдаланушыларды шақыру."
@@ -3824,6 +3834,11 @@ msgstr "Шолу"
 msgid "To the Forum"
 msgstr "Форумға"
 
+#, fuzzy
+#| msgid "Invite users"
+msgid "Invited to apply"
+msgstr "Пайдаланушыны шақыру"
+
 msgctxt "Group"
 msgid "Public"
 msgstr "Қоғамдық"
@@ -3953,10 +3968,16 @@ msgstr "Барлық қолданушылар"
 msgid "Portal Administrators"
 msgstr "Портал әкімшілері"
 
-msgid "All societies"
-msgstr "Барлық қоғамдар"
+#, fuzzy
+msgid "All Conferences"
+msgstr "Бейне конференциялар сервері"
 
-msgid "All projects"
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Groups"
+msgstr "Барлық топтар"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Projects"
 msgstr "Барлық жобалар"
 
 msgid "Temporary User Accounts"
@@ -4798,20 +4819,12 @@ msgstr "Шақырылған топтар"
 msgid "My Groups"
 msgstr "Менің топтарым"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Groups"
-msgstr "Барлық топтар"
-
 msgid "Invited Projects"
 msgstr "Шақырылған Жобалар"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
 msgstr "Менің жобаларым"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Projects"
-msgstr "Барлық жобалар"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas"
@@ -6661,10 +6674,6 @@ msgid "Conferences"
 msgstr "Бейне конференциялар сервері"
 
 #, fuzzy
-msgid "All Conferences"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
 msgid "My Conferences"
 msgstr "Бейне конференциялар сервері"
 
@@ -6675,10 +6684,6 @@ msgstr "Сіз ешқандай шараға шақыруды қабылдама
 #, fuzzy
 msgid "Conference Menu"
 msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Conference Dashboard"
-msgstr "Прибор панелі"
 
 #, fuzzy
 #| msgid "Browse all Projects"
@@ -7331,6 +7336,16 @@ msgstr "Сіз қазір %s мүшесі емессіз! Егер қаласа�
 
 msgid "Your changes have been saved."
 msgstr "Сіздің өзгертулеріңіз сақталды."
+
+#~ msgid "All societies"
+#~ msgstr "Барлық қоғамдар"
+
+#~ msgid "All projects"
+#~ msgstr "Барлық жобалар"
+
+#, fuzzy
+#~ msgid "Conference Dashboard"
+#~ msgstr "Прибор панелі"
 
 #~ msgid "The following Groups were converted to Projects:"
 #~ msgstr "Келесі Топтар Жобаларға өзгертілді:"

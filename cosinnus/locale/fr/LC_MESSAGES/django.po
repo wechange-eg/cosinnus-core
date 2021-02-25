@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-23 18:24+0100\n"
+"POT-Creation-Date: 2021-02-25 14:33+0100\n"
 "PO-Revision-Date: 2020-12-15 14:45+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2402,9 +2402,6 @@ msgstr "Tu es invité !"
 msgid "Currently set Welcome-Email Text"
 msgstr "Texte d'email de bienvenue"
 
-msgid "Conference Management"
-msgstr "Gestion des conférences"
-
 msgid "Conference Room Management"
 msgstr "Gestion des salles de conférence"
 
@@ -3025,29 +3022,31 @@ msgstr "Editer groupe"
 msgid "Room type"
 msgstr "Depuis le type d'équipe"
 
-msgid "TODO: Room Type Lobby description text"
+msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr ""
 
-msgid "TODO: Room Type Stage description text"
+msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr ""
 
-msgid "TODO: Room Type Workshops description text"
+msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
 msgstr ""
 
-msgid "TODO: Room Type Discussions description text"
+msgid "In Discussions each event has a video conference. Presenters are allowed to moderate those. Differs from \"Workshops\" only by the design in the agenda. Workshop: tiles, discussion: list."
 msgstr ""
 
-msgid "TODO: Room Type Coffee Tables description text"
+msgid "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
 msgstr ""
 
-msgid "TODO: Room Type Results description text"
+msgid "Include a project that you use for documentation purposes. Click the link below to add a project to the conference first, if you haven't already."
 msgstr ""
 
 msgid "Add project"
 msgstr "Ajouter projet"
 
-msgid "TODO: Room Type Participants description text"
-msgstr ""
+#, fuzzy
+#| msgid "Maximum Coffee Table Participants"
+msgid "Shows a list of all participants."
+msgstr "Nombre maximum de participants à la table basse"
 
 msgid "How many participants should can join one coffee table before it is full"
 msgstr ""
@@ -3110,6 +3109,9 @@ msgstr ""
 #| msgid "There are no visible users."
 msgid "There are no rooms yet."
 msgstr "Il n'y a pas d'utilisateurs visibles."
+
+msgid "Conference Management"
+msgstr "Gestion des conférences"
 
 msgid "Conference is running"
 msgstr "La conférence est en cours"
@@ -3458,6 +3460,11 @@ msgstr "Contact"
 msgid "No contact data has been added yet."
 msgstr "Aucune données de contact n'ont été ajoutées."
 
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Register and apply!"
+msgstr "Inscris-toi et rejoins !"
+
 msgid "Register and join!"
 msgstr "Inscris-toi et rejoins !"
 
@@ -3537,9 +3544,9 @@ msgid "Invited group/project members"
 msgstr "Invité à être membre"
 
 #, fuzzy
-#| msgid "Invite user"
-msgid "Invite users to apply..."
-msgstr "Inviter un utilisateur"
+#| msgid "Team Invites for Unregistered Users"
+msgid "Invite registered users to apply..."
+msgstr "Invitations à rejoindre l'équipe pour les utilisateurs non-enregistrés"
 
 #, fuzzy
 #| msgid "Team Invites for Unregistered Users"
@@ -3578,6 +3585,11 @@ msgstr "Révoquer l'invitation pour le membre"
 
 msgid "There are no pending invitations."
 msgstr "Il n'y a aucune invitation en attente."
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Invite unregistered users to apply..."
+msgstr "Invitations à rejoindre l'équipe pour les utilisateurs non-enregistrés"
 
 #, fuzzy
 #| msgid "Team Invites for Unregistered Users"
@@ -3983,6 +3995,11 @@ msgstr "Vue d'ensemble"
 msgid "To the Forum"
 msgstr "Au forum"
 
+#, fuzzy
+#| msgid "Invite user"
+msgid "Invited to apply"
+msgstr "Inviter un utilisateur"
+
 msgctxt "Group"
 msgid "Public"
 msgstr "Public"
@@ -4117,10 +4134,17 @@ msgstr "Tous les utilisateurs"
 msgid "Portal Administrators"
 msgstr "Administrateurs du portail"
 
-msgid "All societies"
-msgstr "Toutes les sociétés"
+#, fuzzy
+#| msgid "Is conference"
+msgid "All Conferences"
+msgstr "Est la conférence"
 
-msgid "All projects"
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Groups"
+msgstr "Tous les groupes"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Projects"
 msgstr "Tous les projets"
 
 msgid "Temporary User Accounts"
@@ -4994,20 +5018,12 @@ msgstr "Groupes invités"
 msgid "My Groups"
 msgstr "Mes groupes"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Groups"
-msgstr "Tous les groupes"
-
 msgid "Invited Projects"
 msgstr "Projets invités"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
 msgstr "Mes projets"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Projects"
-msgstr "Tous les projets"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas"
@@ -6987,11 +7003,6 @@ msgstr "Seuls les membres de l'équipe peuvent voir le contenu demandé. Demande
 msgid "Conferences"
 msgstr "Salles de conférence"
 
-#, fuzzy
-#| msgid "Is conference"
-msgid "All Conferences"
-msgstr "Est la conférence"
-
 msgid "My Conferences"
 msgstr ""
 
@@ -7004,11 +7015,6 @@ msgstr "Tu es invité !"
 #| msgid "Conference Page"
 msgid "Conference Menu"
 msgstr "Page de la conférence"
-
-#, fuzzy
-#| msgid "Dashboard"
-msgid "Conference Dashboard"
-msgstr "Tableau de bord"
 
 #, fuzzy
 #| msgid "Created Projects"
@@ -7692,6 +7698,17 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#~ msgid "All societies"
+#~ msgstr "Toutes les sociétés"
+
+#~ msgid "All projects"
+#~ msgstr "Tous les projets"
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Conference Dashboard"
+#~ msgstr "Tableau de bord"
 
 #~ msgid "The following Groups were converted to Projects:"
 #~ msgstr "Les groupes suivants ont été convertis en projets :"

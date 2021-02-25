@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-23 18:24+0100\n"
+"POT-Creation-Date: 2021-02-25 14:33+0100\n"
 "PO-Revision-Date: 2020-09-29 17:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2450,9 +2450,6 @@ msgstr "يمكنك استخدام المتغيرات التالية:"
 msgid "Currently set Welcome-Email Text"
 msgstr "نص البريد الإلكتروني الترحيبي المعين حاليًا"
 
-msgid "Conference Management"
-msgstr "إدارة المؤتمرات"
-
 #, fuzzy
 #| msgid "Conference Management"
 msgid "Conference Room Management"
@@ -3067,28 +3064,28 @@ msgstr "تعديل المجموعة"
 msgid "Room type"
 msgstr "من نوع الفريق"
 
-msgid "TODO: Room Type Lobby description text"
+msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr ""
 
-msgid "TODO: Room Type Stage description text"
+msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr ""
 
-msgid "TODO: Room Type Workshops description text"
+msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
 msgstr ""
 
-msgid "TODO: Room Type Discussions description text"
+msgid "In Discussions each event has a video conference. Presenters are allowed to moderate those. Differs from \"Workshops\" only by the design in the agenda. Workshop: tiles, discussion: list."
 msgstr ""
 
-msgid "TODO: Room Type Coffee Tables description text"
+msgid "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
 msgstr ""
 
-msgid "TODO: Room Type Results description text"
+msgid "Include a project that you use for documentation purposes. Click the link below to add a project to the conference first, if you haven't already."
 msgstr ""
 
 msgid "Add project"
 msgstr "أضف مشروع"
 
-msgid "TODO: Room Type Participants description text"
+msgid "Shows a list of all participants."
 msgstr ""
 
 msgid "How many participants should can join one coffee table before it is full"
@@ -3150,6 +3147,9 @@ msgstr ""
 #| msgid "There are no items yet"
 msgid "There are no rooms yet."
 msgstr "لا توجد عناصر حتى الآن"
+
+msgid "Conference Management"
+msgstr "إدارة المؤتمرات"
 
 msgid "Conference is running"
 msgstr "المؤتمر قيد التشغيل"
@@ -3467,6 +3467,11 @@ msgstr "اتصل"
 msgid "No contact data has been added yet."
 msgstr "لم يتم إضافة بيانات الاتصال حتى الآن."
 
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Register and apply!"
+msgstr "سجل وانضم!"
+
 msgid "Register and join!"
 msgstr "سجل وانضم!"
 
@@ -3547,9 +3552,9 @@ msgid "Invited group/project members"
 msgstr "مدعو لتكون عضوا"
 
 #, fuzzy
-#| msgid "Invite users"
-msgid "Invite users to apply..."
-msgstr "ادعُ المستخدمين"
+#| msgid "Invite registered users..."
+msgid "Invite registered users to apply..."
+msgstr "دعوة المستخدمين المسجلين..."
 
 msgid "Invite registered users..."
 msgstr "دعوة المستخدمين المسجلين..."
@@ -3584,6 +3589,11 @@ msgstr "إبطال دعوة العضو"
 
 msgid "There are no pending invitations."
 msgstr "لا توجد دعوات معلقة."
+
+#, fuzzy
+#| msgid "Invite unregistered users..."
+msgid "Invite unregistered users to apply..."
+msgstr "دعوة المستخدمين غير المسجلين..."
 
 msgid "Invite unregistered users..."
 msgstr "دعوة المستخدمين غير المسجلين..."
@@ -3990,6 +4000,11 @@ msgstr "نظرة عامة"
 msgid "To the Forum"
 msgstr "إلى المنتدى"
 
+#, fuzzy
+#| msgid "Invite users"
+msgid "Invited to apply"
+msgstr "ادعُ المستخدمين"
+
 msgctxt "Group"
 msgid "Public"
 msgstr "عام"
@@ -4120,10 +4135,17 @@ msgstr "كل المستخدمين"
 msgid "Portal Administrators"
 msgstr "مسؤولي البوابة"
 
-msgid "All societies"
-msgstr "كل المجتمعات"
+#, fuzzy
+#| msgid "Is conference"
+msgid "All Conferences"
+msgstr "هو مؤتمر"
 
-msgid "All projects"
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Groups"
+msgstr "كل المجموعات"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Projects"
 msgstr "كل المشاريع"
 
 msgid "Temporary User Accounts"
@@ -5000,20 +5022,12 @@ msgstr "المجموعات المدعوة"
 msgid "My Groups"
 msgstr "مجموعاتي"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Groups"
-msgstr "كل المجموعات"
-
 msgid "Invited Projects"
 msgstr "المشاريع المدعوة"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
 msgstr "مشاريعي"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Projects"
-msgstr "كل المشاريع"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas"
@@ -6886,11 +6900,6 @@ msgstr "هو مؤتمر"
 
 #, fuzzy
 #| msgid "Is conference"
-msgid "All Conferences"
-msgstr "هو مؤتمر"
-
-#, fuzzy
-#| msgid "Is conference"
 msgid "My Conferences"
 msgstr "هو مؤتمر"
 
@@ -6903,11 +6912,6 @@ msgstr "لم تقم بالرد إذا كنت ستحضر أي من المناسب
 #| msgid "Conference Page"
 msgid "Conference Menu"
 msgstr "إدارة المؤتمرات"
-
-#, fuzzy
-#| msgid "Project Dashboard"
-msgid "Conference Dashboard"
-msgstr "لوحة تحكم المشروع"
 
 #, fuzzy
 #| msgid "Browse all Projects"
@@ -7571,6 +7575,17 @@ msgstr "أنت لست عضوًا حاليًا في %s! إذا كنت ترغب ف
 
 msgid "Your changes have been saved."
 msgstr "تم حفظ التغييرات."
+
+#~ msgid "All societies"
+#~ msgstr "كل المجتمعات"
+
+#~ msgid "All projects"
+#~ msgstr "كل المشاريع"
+
+#, fuzzy
+#~| msgid "Project Dashboard"
+#~ msgid "Conference Dashboard"
+#~ msgstr "لوحة تحكم المشروع"
 
 #~ msgid "The following Groups were converted to Projects:"
 #~ msgstr "تم تحويل المجموعات التالية إلى مشاريع:"

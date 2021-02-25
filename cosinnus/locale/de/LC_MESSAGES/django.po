@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-23 18:24+0100\n"
-"PO-Revision-Date: 2021-02-23 18:51+0100\n"
+"POT-Creation-Date: 2021-02-25 14:33+0100\n"
+"PO-Revision-Date: 2021-02-25 14:34+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -2204,9 +2204,6 @@ msgstr "Du kannst die folgenden Variablen benutzen:"
 msgid "Currently set Welcome-Email Text"
 msgstr "Aktueller Willkommens-E-Mail Text"
 
-msgid "Conference Management"
-msgstr "Tagungsmanagement"
-
 msgid "Conference Room Management"
 msgstr "Tagungsräume verwalten"
 
@@ -2766,28 +2763,28 @@ msgstr "Raum bearbeiten"
 msgid "Room type"
 msgstr "Raumtyp"
 
-msgid "TODO: Room Type Lobby description text"
+msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr "Die Lobby ist der Haupteingang für die Teilnehmer. Hier finden sie die Agenda der Tagung."
 
-msgid "TODO: Room Type Stage description text"
+msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr "Die Bühne dient zur Anzeige eines Streams, z. B. von YouTube oder Vimeo. Daneben wird ein Chat angezeigt."
 
-msgid "TODO: Room Type Workshops description text"
+msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
 msgstr "In Workshops gibt es zu jeder Veranstaltung eine Videokonferenz. Präsentatoren dürfen diese moderieren."
 
-msgid "TODO: Room Type Discussions description text"
-msgstr "In Diskussionen gibt es zu jeder Veranstaltung eine Videokonferenz. Präsentatoren dürfen diese moderieren. Unterscheidet sich von \"Workshops\" nur durch die Gestaltung in der Agenda. Workshop: Kacheln, Diskussion: Liste"
+msgid "In Discussions each event has a video conference. Presenters are allowed to moderate those. Differs from \"Workshops\" only by the design in the agenda. Workshop: tiles, discussion: list."
+msgstr "In Diskussionen gibt es zu jeder Veranstaltung eine Videokonferenz. Präsentatoren dürfen diese moderieren. Unterscheidet sich von \\\"Workshops\\\" nur durch die Gestaltung in der Agenda. Workshop: Kacheln, Diskussion: Liste."
 
-msgid "TODO: Room Type Coffee Tables description text"
+msgid "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
 msgstr "Im Café kannst du beliebig viele Tische anlegen. Dort können sich die Teilnehmer treffen und mit einer Webcam und einem Mikrofon direkt eine Videokonferenz starten."
 
-msgid "TODO: Room Type Results description text"
-msgstr "Füge ein Projekt zur Tagung hinzu, das du für Dokumentationszwecken verwenden kannst."
+msgid "Include a project that you use for documentation purposes. Click the link below to add a project to the conference first, if you haven't already."
+msgstr "Füge ein Projekt zur Tagung hinzu, das du für Dokumentationszwecken verwenden kannst. Klicke den untenstehenden Link um ein Projekt in der Tagung zu erstellen, falls du dies noch nicht getan hast."
 
 msgid "Add project"
 msgstr "Projekt hinzufügen"
 
-msgid "TODO: Room Type Participants description text"
+msgid "Shows a list of all participants."
 msgstr "Zeigt eine Liste mit allen Teilnehmern."
 
 msgid "How many participants should can join one coffee table before it is full"
@@ -2838,6 +2835,9 @@ msgstr "Du kannst von hier aus direkt Tagungsveranstaltungen für Räume erstell
 
 msgid "There are no rooms yet."
 msgstr "Es sind noch keine Räume vorhanden."
+
+msgid "Conference Management"
+msgstr "Tagungsmanagement"
 
 msgid "Conference is running"
 msgstr "Die Tagung läuft gerade"
@@ -3130,6 +3130,9 @@ msgstr "Kontakt"
 msgid "No contact data has been added yet."
 msgstr "Es wurden noch keine Kontaktdaten eingetragen."
 
+msgid "Register and apply!"
+msgstr "Registrieren und Teilnahme beantragen!"
+
 msgid "Register and join!"
 msgstr "Registrieren und beitreten!"
 
@@ -3192,8 +3195,8 @@ msgstr "Gruppen einladen"
 msgid "Invited group/project members"
 msgstr "Eingeladene Gruppen/Projektmitglieder/innen"
 
-msgid "Invite users to apply..."
-msgstr "Benutzer zur Antragsstellung einladen..."
+msgid "Invite registered users to apply..."
+msgstr "Registrierte Benutzer zur Antragsstellung einladen..."
 
 msgid "Invite registered users..."
 msgstr "Registrierte Benutzer einladen..."
@@ -3228,6 +3231,9 @@ msgstr "Einladung für Benutzer zurückziehen"
 
 msgid "There are no pending invitations."
 msgstr "Es gibt aktuell keine eingeladenen Mitglieder."
+
+msgid "Invite unregistered users to apply..."
+msgstr "Nicht registrierte Benutzer zur Antragsstellung einladen..."
 
 msgid "Invite unregistered users..."
 msgstr "Nicht registrierte Benutzer einladen..."
@@ -3617,6 +3623,9 @@ msgstr "Übersicht"
 msgid "To the Forum"
 msgstr "Zum Forum"
 
+msgid "Invited to apply"
+msgstr "Zur Antragsstellung eingeladen"
+
 msgctxt "Group"
 msgid "Public"
 msgstr "Öffentlich"
@@ -3746,10 +3755,15 @@ msgstr "Alle Menschen"
 msgid "Portal Administrators"
 msgstr "Portal-Administrator_innen"
 
-msgid "All societies"
+msgid "All Conferences"
+msgstr "Alle Tagungen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Groups"
 msgstr "Alle Gruppen"
 
-msgid "All projects"
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Projects"
 msgstr "Alle Projekte"
 
 msgid "Temporary User Accounts"
@@ -4585,20 +4599,12 @@ msgstr "Gruppeneinladungen"
 msgid "My Groups"
 msgstr "Meine Gruppen"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Groups"
-msgstr "Alle Gruppen"
-
 msgid "Invited Projects"
 msgstr "Projekteinladungen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
 msgstr "Meine Projekte"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Projects"
-msgstr "Alle Projekte"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas"
@@ -6342,9 +6348,6 @@ msgstr "Nur Mitglieder dieser Gruppe können diesen Inhalt sehen. Stelle jetzt e
 msgid "Conferences"
 msgstr "Tagungen"
 
-msgid "All Conferences"
-msgstr "Alle Tagungen"
-
 msgid "My Conferences"
 msgstr "Meine Tagungen"
 
@@ -6353,9 +6356,6 @@ msgstr "Du nimmst aktuell noch noch an keinen Tagungen teil"
 
 msgid "Conference Menu"
 msgstr "Tagungsmenü"
-
-msgid "Conference Dashboard"
-msgstr "Tagung Dashboard"
 
 msgid "Browse all Conferences"
 msgstr "Alle Tagungen anzeigen"
@@ -6944,6 +6944,36 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "TODO: Room Type Lobby description text"
+#~ msgstr "Die Lobby ist der Haupteingang für die Teilnehmer. Hier finden sie die Agenda der Tagung."
+
+#~ msgid "TODO: Room Type Stage description text"
+#~ msgstr "Die Bühne dient zur Anzeige eines Streams, z. B. von YouTube oder Vimeo. Daneben wird ein Chat angezeigt."
+
+#~ msgid "TODO: Room Type Workshops description text"
+#~ msgstr "In Workshops gibt es zu jeder Veranstaltung eine Videokonferenz. Präsentatoren dürfen diese moderieren."
+
+#~ msgid "TODO: Room Type Discussions description text"
+#~ msgstr "In Diskussionen gibt es zu jeder Veranstaltung eine Videokonferenz. Präsentatoren dürfen diese moderieren. Unterscheidet sich von \"Workshops\" nur durch die Gestaltung in der Agenda. Workshop: Kacheln, Diskussion: Liste"
+
+#~ msgid "TODO: Room Type Coffee Tables description text"
+#~ msgstr "Im Café kannst du beliebig viele Tische anlegen. Dort können sich die Teilnehmer treffen und mit einer Webcam und einem Mikrofon direkt eine Videokonferenz starten."
+
+#~ msgid "TODO: Room Type Results description text"
+#~ msgstr "Füge ein Projekt zur Tagung hinzu, das du für Dokumentationszwecken verwenden kannst."
+
+#~ msgid "TODO: Room Type Participants description text"
+#~ msgstr "Zeigt eine Liste mit allen Teilnehmern."
+
+#~ msgid "All societies"
+#~ msgstr "Alle Gruppen"
+
+#~ msgid "All projects"
+#~ msgstr "Alle Projekte"
+
+#~ msgid "Conference Dashboard"
+#~ msgstr "Tagung Dashboard"
 
 #~ msgid "Room list"
 #~ msgstr "Raumliste"

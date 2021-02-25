@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-23 18:24+0100\n"
+"POT-Creation-Date: 2021-02-25 14:33+0100\n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2315,9 +2315,6 @@ msgstr "Ви можете використовувати такі змінні:"
 msgid "Currently set Welcome-Email Text"
 msgstr "Поточний встановлений текст-привітання"
 
-msgid "Conference Management"
-msgstr "Управління Конференцією"
-
 msgid "Conference Room Management"
 msgstr "Управління Кімнатою Конференції"
 
@@ -2914,29 +2911,31 @@ msgstr "Редагувати Групу"
 msgid "Room type"
 msgstr "Тип кімнати"
 
-msgid "TODO: Room Type Lobby description text"
+msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr ""
 
-msgid "TODO: Room Type Stage description text"
+msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr ""
 
-msgid "TODO: Room Type Workshops description text"
+msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
 msgstr ""
 
-msgid "TODO: Room Type Discussions description text"
+msgid "In Discussions each event has a video conference. Presenters are allowed to moderate those. Differs from \"Workshops\" only by the design in the agenda. Workshop: tiles, discussion: list."
 msgstr ""
 
-msgid "TODO: Room Type Coffee Tables description text"
+msgid "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
 msgstr ""
 
-msgid "TODO: Room Type Results description text"
+msgid "Include a project that you use for documentation purposes. Click the link below to add a project to the conference first, if you haven't already."
 msgstr ""
 
 msgid "Add project"
 msgstr "Додати проєкт"
 
-msgid "TODO: Room Type Participants description text"
-msgstr ""
+#, fuzzy
+#| msgid "Maximum Coffee Table Participants"
+msgid "Shows a list of all participants."
+msgstr "Максимальна кількість учасників за Coffee Tables"
 
 msgid "How many participants should can join one coffee table before it is full"
 msgstr ""
@@ -2999,6 +2998,9 @@ msgstr ""
 #| msgid "There are no items yet"
 msgid "There are no rooms yet."
 msgstr "Поки що немає жодного елементу"
+
+msgid "Conference Management"
+msgstr "Управління Конференцією"
 
 msgid "Conference is running"
 msgstr "Конференція триває"
@@ -3329,6 +3331,11 @@ msgstr "Контакт"
 msgid "No contact data has been added yet."
 msgstr "Поки не було додано контактних даних."
 
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Register and apply!"
+msgstr "Зареєструватися і долучитися!"
+
 msgid "Register and join!"
 msgstr "Зареєструватися і долучитися!"
 
@@ -3407,9 +3414,9 @@ msgid "Invited group/project members"
 msgstr "Запрошено стати учасником"
 
 #, fuzzy
-#| msgid "Invite users"
-msgid "Invite users to apply..."
-msgstr "Запросити користувачів"
+#| msgid "Invite registered users..."
+msgid "Invite registered users to apply..."
+msgstr "Запросити зареєстрованих користувачів..."
 
 msgid "Invite registered users..."
 msgstr "Запросити зареєстрованих користувачів..."
@@ -3444,6 +3451,11 @@ msgstr "Відкликати запрошення для Учасника(-ці)
 
 msgid "There are no pending invitations."
 msgstr "Немає запрошень, що очікують на розгляд."
+
+#, fuzzy
+#| msgid "Invite unregistered users..."
+msgid "Invite unregistered users to apply..."
+msgstr "Запросити незареєстрованих користувачів..."
 
 msgid "Invite unregistered users..."
 msgstr "Запросити незареєстрованих користувачів..."
@@ -3843,6 +3855,11 @@ msgstr "Огляд"
 msgid "To the Forum"
 msgstr "До Форуму"
 
+#, fuzzy
+#| msgid "Invite users"
+msgid "Invited to apply"
+msgstr "Запросити користувачів"
+
 msgctxt "Group"
 msgid "Public"
 msgstr "Відкрита"
@@ -3971,10 +3988,16 @@ msgstr "Усі користувачі"
 msgid "Portal Administrators"
 msgstr "Адміністратори Порталу"
 
-msgid "All societies"
-msgstr "Усі спільноти"
+#, fuzzy
+msgid "All Conferences"
+msgstr "Є конференція"
 
-msgid "All projects"
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Groups"
+msgstr "Усі Групи"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Projects"
 msgstr "Усі Проєкти"
 
 msgid "Temporary User Accounts"
@@ -4829,20 +4852,12 @@ msgstr "Групи, до яких мене запросили"
 msgid "My Groups"
 msgstr "Мої Групи"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Groups"
-msgstr "Усі Групи"
-
 msgid "Invited Projects"
 msgstr "Проєкти, до яких мене запросили"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
 msgstr "Мої Проєкти"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Projects"
-msgstr "Усі Проєкти"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas"
@@ -6678,10 +6693,6 @@ msgid "Conferences"
 msgstr "Є конференція"
 
 #, fuzzy
-msgid "All Conferences"
-msgstr "Є конференція"
-
-#, fuzzy
 msgid "My Conferences"
 msgstr "Є конференція"
 
@@ -6694,11 +6705,6 @@ msgstr "Ви ще не створили жодної організації."
 #| msgid "Conference Page"
 msgid "Conference Menu"
 msgstr "Сторінка Конференції"
-
-#, fuzzy
-#| msgid "Project Dashboard"
-msgid "Conference Dashboard"
-msgstr "Інформаційна панель Проєкту"
 
 #, fuzzy
 #| msgid "Browse all Projects"
@@ -7350,6 +7356,17 @@ msgstr "Наразі Ви не є членом %s! Якщо ви бажаєте 
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#~ msgid "All societies"
+#~ msgstr "Усі спільноти"
+
+#~ msgid "All projects"
+#~ msgstr "Усі Проєкти"
+
+#, fuzzy
+#~| msgid "Project Dashboard"
+#~ msgid "Conference Dashboard"
+#~ msgstr "Інформаційна панель Проєкту"
 
 #~ msgid "The following Groups were converted to Projects:"
 #~ msgstr "Такі Групи були перетворені у Проєкти:"
