@@ -22,6 +22,7 @@ class CosinnusProjectTransBase(object):
     ALL_LIST = _('All Projects')
     MY_LIST = _('My Projects')
     MY_LIST_EMPTY = _('You are not currently in any Projects')
+    MY_UPCOMING_LIST = _('My upcoming Projects')
     
     MENU_LABEL = _('Project Menu')
     DASHBOARD_LABEL = _('Project Dashboard')
@@ -69,6 +70,7 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     ALL_LIST = _('All Groups')
     MY_LIST = _('My Groups')
     MY_LIST_EMPTY = _('You are not currently in any Groups')
+    MY_UPCOMING_LIST = _('My upcoming Groups')
     
     MENU_LABEL = _('Group Menu')
     DASHBOARD_LABEL = _('Group Dashboard')
@@ -116,6 +118,7 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     ALL_LIST = _('All Conferences')
     MY_LIST = _('My Conferences')
     MY_LIST_EMPTY = _('You are not currently attending any Conferences')
+    MY_UPCOMING_LIST = _('My upcoming Conferences')
     
     MENU_LABEL = _('Conference Menu')
     DASHBOARD_LABEL = VERBOSE_NAME

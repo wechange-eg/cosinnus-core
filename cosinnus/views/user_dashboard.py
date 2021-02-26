@@ -104,7 +104,7 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
             my_conferences = CosinnusConference.objects.get_for_user(self.request.user)
             my_current_conferences = [(conf, conf.get_icon()) for conf in my_conferences if conf.get_or_infer_to_date and conf.get_or_infer_to_date > _now] 
             my_pending_conference_applications = [(appl.conference, appl.get_icon()) for appl in self.request.user.user_applications.pending_current()]
-            ctx['my_conferences_with_icons'] = my_pending_conference_applications + my_current_conferences
+            ctx['my_upcoming_conferences_with_icons'] = my_pending_conference_applications + my_current_conferences
         return ctx
 
 

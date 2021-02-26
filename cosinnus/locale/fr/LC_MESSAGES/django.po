@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-25 14:33+0100\n"
+"POT-Creation-Date: 2021-02-26 18:08+0100\n"
 "PO-Revision-Date: 2020-12-15 14:45+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4362,7 +4362,6 @@ msgstr "Nouveau nom de dossier"
 msgid "Create folder"
 msgstr "Créer dossier"
 
-#, python-format
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
 "Start of the event is [[from_date]].\n"
@@ -4373,11 +4372,9 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts tomorrow: [[name]]"
 msgstr ""
 
-#, python-format
 msgid ""
 "The conference [[name]] starts soon.\n"
 "Start of the event is [[from_date]].\n"
@@ -4388,11 +4385,9 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts soon: [[name]]"
 msgstr ""
 
-#, python-format
 msgid ""
 "The conference [[name]] starts in a week.\n"
 "Start of the event is [[from_date]].\n"
@@ -4403,7 +4398,6 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts next week: [[name]]"
 msgstr ""
 
@@ -6811,6 +6805,11 @@ msgid "You are not currently in any Projects"
 msgstr "Vous ne faites pas encore partie d'un groupe ou d'un projet"
 
 #, fuzzy
+#| msgid "My Projects"
+msgid "My upcoming Projects"
+msgstr "Mes projets"
+
+#, fuzzy
 #| msgid "Project Type"
 msgid "Project Menu"
 msgstr "Type de projet"
@@ -6913,6 +6912,11 @@ msgid "You are not currently in any Groups"
 msgstr "Vous ne faites pas encore partie d'un groupe ou d'un projet"
 
 #, fuzzy
+#| msgid "My Groups"
+msgid "My upcoming Groups"
+msgstr "Mes groupes"
+
+#, fuzzy
 #| msgid "Group name"
 msgid "Group Menu"
 msgstr "Nom du groupe"
@@ -7010,6 +7014,11 @@ msgstr ""
 #| msgid "You are invited!"
 msgid "You are not currently attending any Conferences"
 msgstr "Tu es invité !"
+
+#, fuzzy
+#| msgid "Conference Rooms"
+msgid "My upcoming Conferences"
+msgstr "Salles de conférence"
 
 #, fuzzy
 #| msgid "Conference Page"

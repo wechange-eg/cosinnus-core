@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-25 14:33+0100\n"
+"POT-Creation-Date: 2021-02-26 18:08+0100\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4173,7 +4173,6 @@ msgstr "Nieuwe mapnaam"
 msgid "Create folder"
 msgstr "Maak folder aan"
 
-#, python-format
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
 "Start of the event is [[from_date]].\n"
@@ -4184,11 +4183,9 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts tomorrow: [[name]]"
 msgstr ""
 
-#, python-format
 msgid ""
 "The conference [[name]] starts soon.\n"
 "Start of the event is [[from_date]].\n"
@@ -4199,11 +4196,9 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts soon: [[name]]"
 msgstr ""
 
-#, python-format
 msgid ""
 "The conference [[name]] starts in a week.\n"
 "Start of the event is [[from_date]].\n"
@@ -4214,7 +4209,6 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts next week: [[name]]"
 msgstr ""
 
@@ -6499,6 +6493,11 @@ msgid "You are not currently in any Projects"
 msgstr "U zit nog niet in groepen of projecten"
 
 #, fuzzy
+#| msgid "My Groups and Projects"
+msgid "My upcoming Projects"
+msgstr "Mijn Groepen en Projecten"
+
+#, fuzzy
 msgid "Project Menu"
 msgstr "Project Type"
 
@@ -6599,6 +6598,11 @@ msgid "You are not currently in any Groups"
 msgstr "U zit nog niet in groepen of projecten"
 
 #, fuzzy
+#| msgid "My Groups"
+msgid "My upcoming Groups"
+msgstr "Mijn Groepen"
+
+#, fuzzy
 msgid "Group Menu"
 msgstr "Groep naam"
 
@@ -6693,6 +6697,11 @@ msgstr ""
 #, fuzzy
 msgid "You are not currently attending any Conferences"
 msgstr "U heeft niet RSVPED op evenementen."
+
+#, fuzzy
+#| msgid "Configure"
+msgid "My upcoming Conferences"
+msgstr "Configureer"
 
 #, fuzzy
 #| msgid "Create Event"

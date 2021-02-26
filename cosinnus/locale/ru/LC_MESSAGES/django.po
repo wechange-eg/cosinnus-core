@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-25 14:33+0100\n"
+"POT-Creation-Date: 2021-02-26 18:08+0100\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4209,7 +4209,6 @@ msgstr "Новое название папки"
 msgid "Create folder"
 msgstr "Создать папку"
 
-#, python-format
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
 "Start of the event is [[from_date]].\n"
@@ -4220,11 +4219,9 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts tomorrow: [[name]]"
 msgstr ""
 
-#, python-format
 msgid ""
 "The conference [[name]] starts soon.\n"
 "Start of the event is [[from_date]].\n"
@@ -4235,11 +4232,9 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts soon: [[name]]"
 msgstr ""
 
-#, python-format
 msgid ""
 "The conference [[name]] starts in a week.\n"
 "Start of the event is [[from_date]].\n"
@@ -4250,7 +4245,6 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts next week: [[name]]"
 msgstr ""
 
@@ -6521,6 +6515,11 @@ msgstr "<i>Невозможно провести рендеринг для %(mod
 msgid "You are not currently in any Projects"
 msgstr "Тебя пока нет ни в одной группе либо проекте"
 
+#, fuzzy
+#| msgid "My Groups and Projects"
+msgid "My upcoming Projects"
+msgstr "Мои группы и проекты"
+
 msgid "Project Menu"
 msgstr "Меню проекта"
 
@@ -6619,6 +6618,11 @@ msgstr "Данный контент доступен только для чле�
 msgid "You are not currently in any Groups"
 msgstr "Тебя пока нет ни в одной группе либо проекте"
 
+#, fuzzy
+#| msgid "My Groups"
+msgid "My upcoming Groups"
+msgstr "Мои группы"
+
 msgid "Group Menu"
 msgstr "Меню группы"
 
@@ -6713,6 +6717,10 @@ msgstr "Конференция"
 #| msgid "You have not created any organizations yet."
 msgid "You are not currently attending any Conferences"
 msgstr "Вы еще не создали ни одной организации."
+
+#, fuzzy
+msgid "My upcoming Conferences"
+msgstr "Конференция"
 
 #, fuzzy
 #| msgid "Conference Page"

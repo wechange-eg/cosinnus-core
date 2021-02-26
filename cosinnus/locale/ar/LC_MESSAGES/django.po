@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-25 14:33+0100\n"
+"POT-Creation-Date: 2021-02-26 18:08+0100\n"
 "PO-Revision-Date: 2020-09-29 17:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4368,7 +4368,6 @@ msgstr "اسم المجلد الجديد"
 msgid "Create folder"
 msgstr "إنشاء مجلد"
 
-#, python-format
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
 "Start of the event is [[from_date]].\n"
@@ -4379,11 +4378,9 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts tomorrow: [[name]]"
 msgstr ""
 
-#, python-format
 msgid ""
 "The conference [[name]] starts soon.\n"
 "Start of the event is [[from_date]].\n"
@@ -4394,11 +4391,9 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts soon: [[name]]"
 msgstr ""
 
-#, python-format
 msgid ""
 "The conference [[name]] starts in a week.\n"
 "Start of the event is [[from_date]].\n"
@@ -4409,7 +4404,6 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts next week: [[name]]"
 msgstr ""
 
@@ -6713,6 +6707,11 @@ msgstr "<i> العارض لـ%(model_name)s غير موجود! </i>"
 msgid "You are not currently in any Projects"
 msgstr "أنت لست في أي مجموعات أو مشاريع حتى الآن"
 
+#, fuzzy
+#| msgid "My Groups and Projects"
+msgid "My upcoming Projects"
+msgstr "مجموعاتي ومشاريعي"
+
 msgid "Project Menu"
 msgstr "قائمة المشروع"
 
@@ -6811,6 +6810,11 @@ msgstr "يمكن لأعضاء الفريق فقط رؤية المحتوى الذ
 msgid "You are not currently in any Groups"
 msgstr "أنت لست في أي مجموعات أو مشاريع حتى الآن"
 
+#, fuzzy
+#| msgid "My Groups"
+msgid "My upcoming Groups"
+msgstr "مجموعاتي"
+
 msgid "Group Menu"
 msgstr "قائمة المجموعة"
 
@@ -6907,6 +6911,11 @@ msgstr "هو مؤتمر"
 #| msgid "You have not created any organizations yet."
 msgid "You are not currently attending any Conferences"
 msgstr "لم تقم بالرد إذا كنت ستحضر أي من المناسبات."
+
+#, fuzzy
+#| msgid "Is conference"
+msgid "My upcoming Conferences"
+msgstr "هو مؤتمر"
 
 #, fuzzy
 #| msgid "Conference Page"

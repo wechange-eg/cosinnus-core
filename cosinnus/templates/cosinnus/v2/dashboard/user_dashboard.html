@@ -47,11 +47,11 @@
 			<div class="group-widget-root">
 			</div>
 			
-			{% if SETTINGS.COSINNUS_CONFERENCES_ENABLED and my_conferences_with_icons %}
+			{% if SETTINGS.COSINNUS_CONFERENCES_ENABLED and my_upcoming_conferences_with_icons %}
 				<div class="widget-content">
-					<h2 class="headline">{{ COSINNUS_CONFERENCE_TRANS.MY_LIST }}</h2>
+					<h2 class="headline">{{ COSINNUS_CONFERENCE_TRANS.MY_UPCOMING_LIST }}</h2>
 					<ul class="item-list">
-						{% for conference, conference_icon in my_conferences_with_icons %}
+						{% for conference, conference_icon in my_upcoming_conferences_with_icons %}
 							<li>
 								<a class="list-item" href="{{ conference.get_absolute_url }}">
 									<div class="item-icon ">

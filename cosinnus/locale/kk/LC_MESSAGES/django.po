@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-25 14:33+0100\n"
+"POT-Creation-Date: 2021-02-26 18:08+0100\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4175,7 +4175,6 @@ msgstr "Жаңа қалта атауы"
 msgid "Create folder"
 msgstr "Қалтаны жасау"
 
-#, python-format
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
 "Start of the event is [[from_date]].\n"
@@ -4186,11 +4185,9 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts tomorrow: [[name]]"
 msgstr ""
 
-#, python-format
 msgid ""
 "The conference [[name]] starts soon.\n"
 "Start of the event is [[from_date]].\n"
@@ -4201,11 +4198,9 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts soon: [[name]]"
 msgstr ""
 
-#, python-format
 msgid ""
 "The conference [[name]] starts in a week.\n"
 "Start of the event is [[from_date]].\n"
@@ -4216,7 +4211,6 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts next week: [[name]]"
 msgstr ""
 
@@ -6486,6 +6480,11 @@ msgid "You are not currently in any Projects"
 msgstr "Сіз әлі ешқандай топта немесе жобада емессіз"
 
 #, fuzzy
+#| msgid "My Groups and Projects"
+msgid "My upcoming Projects"
+msgstr "Менің Жобаларым мен Топтарым"
+
+#, fuzzy
 msgid "Project Menu"
 msgstr "Жобаның түрі"
 
@@ -6586,6 +6585,11 @@ msgid "You are not currently in any Groups"
 msgstr "Сіз әлі ешқандай топта немесе жобада емессіз"
 
 #, fuzzy
+#| msgid "My Groups"
+msgid "My upcoming Groups"
+msgstr "Менің топтарым"
+
+#, fuzzy
 msgid "Group Menu"
 msgstr "Топ атауы"
 
@@ -6680,6 +6684,10 @@ msgstr "Бейне конференциялар сервері"
 #, fuzzy
 msgid "You are not currently attending any Conferences"
 msgstr "Сіз ешқандай шараға шақыруды қабылдамадыңыз."
+
+#, fuzzy
+msgid "My upcoming Conferences"
+msgstr "Бейне конференциялар сервері"
 
 #, fuzzy
 msgid "Conference Menu"

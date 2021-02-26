@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-25 14:33+0100\n"
+"POT-Creation-Date: 2021-02-26 18:08+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4077,7 +4077,6 @@ msgstr ""
 msgid "Create folder"
 msgstr ""
 
-#, python-format
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
 "Start of the event is [[from_date]].\n"
@@ -4088,11 +4087,9 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts tomorrow: [[name]]"
 msgstr ""
 
-#, python-format
 msgid ""
 "The conference [[name]] starts soon.\n"
 "Start of the event is [[from_date]].\n"
@@ -4103,11 +4100,9 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts soon: [[name]]"
 msgstr ""
 
-#, python-format
 msgid ""
 "The conference [[name]] starts in a week.\n"
 "Start of the event is [[from_date]].\n"
@@ -4118,7 +4113,6 @@ msgid ""
 "Your conference team"
 msgstr ""
 
-#, python-format
 msgid "Conference starts next week: [[name]]"
 msgstr ""
 
@@ -6219,6 +6213,10 @@ msgid "You are not currently in any Projects"
 msgstr ""
 
 #, fuzzy
+msgid "My upcoming Projects"
+msgstr "My Projects"
+
+#, fuzzy
 msgid "Project Menu"
 msgstr "Project Type"
 
@@ -6304,6 +6302,11 @@ msgid "You are not currently in any Groups"
 msgstr ""
 
 #, fuzzy
+#| msgid "My Groups"
+msgid "My upcoming Groups"
+msgstr "My Groups"
+
+#, fuzzy
 msgid "Group Menu"
 msgstr "Group"
 
@@ -6381,6 +6384,10 @@ msgstr ""
 
 msgid "You are not currently attending any Conferences"
 msgstr ""
+
+#, fuzzy
+msgid "My upcoming Conferences"
+msgstr "Create Project"
 
 #, fuzzy
 msgid "Conference Menu"
