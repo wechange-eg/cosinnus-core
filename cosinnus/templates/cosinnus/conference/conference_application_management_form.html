@@ -33,9 +33,26 @@
 		    {{ form.non_field_errors }}
 		    {{ form.management_form }}
 		    {{ assignment_formset.management_form }}
+		    
 		    <div class="content-box">
-		        
                 <h2>{% trans "Manage participation applications" %}</h2>
+                
+		        <div class='form-info textfield transparent'>
+	                <p>
+	                    {% trans "Here you and all other organizers can process all applications. Check each application carefully and select your choice of whether to decline or accept an application or put it on the wait list. You may add a reason for waitlisted or declined applications that will be shown to the applicant." %}
+	                </p>
+	                <p>
+	                    {% trans 'Once you are done, click "Save" on the bottom of the page. All applicants will receive an on-site notification and an e-mail (depending on their e-mail notification settings).' %}
+	                    {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+	                        {% trans "Accepted applicants will be granted membership status of the conference and they can enter the conference area immediately." %}
+	                    {% endif %}
+	                </p>
+	                <p>
+	                    {% trans 'If you have changed your mind for some applications later on, you can simply select a different option for those you want to change, and click "Save" again. Only the applicants whose application status changed will be notified of the change.' %}
+	                    {% trans "You may also leave some applications unselected at first and process them at a later time." %}
+                    </p>
+	            </div>
+	            <div class="large-space"></div>
 		    
 		        {% if max_number %}
 		            <div class="large-space">

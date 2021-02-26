@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-26 18:08+0100\n"
-"PO-Revision-Date: 2021-02-26 18:08+0100\n"
+"POT-Creation-Date: 2021-02-26 18:46+0100\n"
+"PO-Revision-Date: 2021-02-26 18:51+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -2595,6 +2595,21 @@ msgstr "Teilnahmeanträge bearbeiten"
 
 msgid "There are no participation applications yet."
 msgstr "Es gibt noch keine Teilnahmeanträge."
+
+msgid "Here you and all other organizers can process all applications. Check each application carefully and select your choice of whether to decline or accept an application or put it on the wait list. You may add a reason for waitlisted or declined applications that will be shown to the applicant."
+msgstr "Hier kannst du und alle anderen Organisatoren alle Teilnahmeanträge bearbeiten. Prüfe jede Bewerbung sorgfältig und wähle aus, ob du einen Antrag ablehnen, annehmen oder auf die Warteliste setzen möchtest. Du kannst einen Grund für auf die Warteliste gesetzte oder abgelehnte Teilnahmeanträge hinzufügen, der dem/der Antragsteller/in angezeigt wird."
+
+msgid "Once you are done, click \"Save\" on the bottom of the page. All applicants will receive an on-site notification and an e-mail (depending on their e-mail notification settings)."
+msgstr "Wenn du fertig bist, klicke unten auf der Seite auf \"Sichern\". Alle Antragssteller/innen erhalten eine Benachrichtigung auf der Webseite und eine E-Mail (abhängig von ihren E-Mail-Benachrichtigungseinstellungen)."
+
+msgid "Accepted applicants will be granted membership status of the conference and they can enter the conference area immediately."
+msgstr "Angenommene Antragssteller/innen erhalten Mitgliedsstatus bei der Tagung und können den Tagungsbereich sofort betreten."
+
+msgid "If you have changed your mind for some applications later on, you can simply select a different option for those you want to change, and click \"Save\" again. Only the applicants whose application status changed will be notified of the change."
+msgstr "Wenn du es dir später bei einigen Teilnahmeanträgen anders überlegt hast, kannst du einfach eine andere Option für die zu ändernden Teilnahmeanträge auswählen und erneut auf \"Sichern\" klicken. Nur die Antragssteller/innen, deren Teilnameantragsstatus sich geändert hat, werden über die Änderung informiert."
+
+msgid "You may also leave some applications unselected at first and process them at a later time."
+msgstr "Du kannst auch einige Teilnahmeanträge zunächst unausgewählt lassen und sie zu einem späteren Zeitpunkt bearbeiten."
 
 msgid "The maximum number of participants is "
 msgstr "Die maximale Anzahl der Teilnehmenden ist "

@@ -36,10 +36,12 @@
                     {% trans "Here you can configure the application form that participants have to fill out in order to apply." %}
                     {% blocktrans %}You and all other organizers can process the applications in the "{{ application_management_label }}" section. You can do this even while applications are still open.{% endblocktrans %}
                 </p>
-                <p>
-	                {% trans 'Application method' as application_setting_label %}
-                    {% blocktrans %} If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting "{{ application_setting_label }}" in the conference settings.{% endblocktrans %}
-                </p>
+                {% if not SETTINGS.COSINNUS_CONFERENCE_USE_PARTICIPATION_FIELD_HIDDEN %}
+	                <p>
+		                {% trans 'Application method' as application_setting_label %}
+	                    {% blocktrans %} If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting "{{ application_setting_label }}" in the conference settings.{% endblocktrans %}
+	                </p>
+                {% endif %}
             </div>
             <div class="ultra-space"></div>
             
