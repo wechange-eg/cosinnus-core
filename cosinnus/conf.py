@@ -866,6 +866,8 @@ class CosinnusConf(AppConf):
         (7, _('Gluten-free cuisine')),
     ]
     
+    CONFERENCE_USE_PARTICIPATION_FIELD_HIDDEN = False
+    
     # enable display and forms for managed tags
     MANAGED_TAGS_ENABLED = False
     # allows assigning multiple managed tags to objects
