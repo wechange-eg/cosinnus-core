@@ -1547,18 +1547,12 @@ class ActivateOrDeactivateGroupView(TemplateView):
         group_id = int(kwargs.pop('group_id'))
         self.activate = kwargs.pop('activate')
         group = get_object_or_404(CosinnusGroup, id=group_id)
-        is_admin = check_user_superuser(request.user)
+        is_admin = check_user_superuser(request.user) or check_ug_admin(request.user, group)
         
         # only admins and group admins may deactivate groups/projects
-        if not (is_admin or check_ug_admin(request.user, group)):
-            redirect_to_403(request, self)
-        # special check: only portal admins can create/deactivate CosinnusSocieties/Conferences
-        if (group.type == CosinnusGroup.TYPE_SOCIETY and not is_admin and \
-                not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False)) or \
-                (group.type == CosinnusGroup.TYPE_CONFERENCE and not is_admin and \
-                not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_CONFERENCES', False)):
+        if not is_admin:
             messages.warning(self.request, group.trans.MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE)
-            return redirect(reverse('cosinnus:portal-admin-list'))
+            return redirect_to_403(request, self)
         
         if group.is_active and self.activate or (not group.is_active and not self.activate):
             if self.activate:
