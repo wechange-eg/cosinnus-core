@@ -84,39 +84,41 @@
 				
 				<div class="group-microsite-details">
 					
-					<p class="transparent">
-		            	{{ group.trans.VERBOSE_NAME }}
-		            </p>
-		            
-		            {% with parent=group.get_parent_typed %}
-		                {% if parent %}
-		                    <p class="transparent">
-		                    	{% trans "Group" %}: <a href="{{ parent.get_absolute_url }}">{{ parent.name }}</a>
-		                    	{% comment %} Other Projects (siblings) link out for now.
-		                    	{% with siblings=group.get_siblings %}
-		                    		{% if siblings %}
-		                    			| {% trans "Other Projects" %}: 
-		                    			{% for sibling in siblings %}
-		                    				<a href="{{ sibling.get_absolute_url }}">{{ sibling.name }}</a>
-		                    				{% if not forloop.last %}, {% endif %}
-		                    			{% endfor %}
-		                    		{% endif %}
-		                    	{% endwith %}
-		                    	{% endcomment %}
-		                    </p>
-		                {% else %}
-				            {% with children=group.get_children %}
-				        		{% if children %}
-				        			<p class="transparent">
-					        			{% trans "Projects" %}: 
-					        			{% for child in children %}
-					        				<a href="{{ child.get_absolute_url }}">{{ child.name }}</a>{% if not forloop.last %}, {% endif %}
-					        			{% endfor %}
-				        			</p>
-				        		{% endif %}
-				        	{% endwith %}
-		                {% endif %}
-		            {% endwith %}
+					{% block microsite_header_details %}
+						<p class="transparent">
+			            	{{ group.trans.VERBOSE_NAME }}
+			            </p>
+			            
+			            {% with parent=group.get_parent_typed %}
+			                {% if parent %}
+			                    <p class="transparent">
+			                    	{% trans "Group" %}: <a href="{{ parent.get_absolute_url }}">{{ parent.name }}</a>
+			                    	{% comment %} Other Projects (siblings) link out for now.
+			                    	{% with siblings=group.get_siblings %}
+			                    		{% if siblings %}
+			                    			| {% trans "Other Projects" %}: 
+			                    			{% for sibling in siblings %}
+			                    				<a href="{{ sibling.get_absolute_url }}">{{ sibling.name }}</a>
+			                    				{% if not forloop.last %}, {% endif %}
+			                    			{% endfor %}
+			                    		{% endif %}
+			                    	{% endwith %}
+			                    	{% endcomment %}
+			                    </p>
+			                {% else %}
+					            {% with children=group.get_children %}
+					        		{% if children %}
+					        			<p class="transparent">
+						        			{% trans "Projects" %}: 
+						        			{% for child in children %}
+						        				<a href="{{ child.get_absolute_url }}">{{ child.name }}</a>{% if not forloop.last %}, {% endif %}
+						        			{% endfor %}
+					        			</p>
+					        		{% endif %}
+					        	{% endwith %}
+			                {% endif %}
+			            {% endwith %}
+		            {% endblock microsite_header_details %}
 	            </div>
             {% endblock microsite_main_content %}
 			
