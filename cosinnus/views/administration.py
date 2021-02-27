@@ -324,8 +324,9 @@ class UserListView(ListView):
                             if not PROFILE_SETTING_LOGIN_TOKEN_SENT in profile.settings:
                                 view.send_login_token(user)
                 UserLoginTokenThread().start()
-                    
-                messages.add_message(self.request, messages.SUCCESS, _('Login tokens to all previously uninvited users are now being sent.'))
+                
+                msg = _('Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations.')
+                messages.add_message(self.request, messages.SUCCESS, msg)
             else:
                 user_id = self.request.POST.get('send_login_token')
                 user = get_user_model().objects.get(id=user_id)

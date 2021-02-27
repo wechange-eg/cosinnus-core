@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-26 18:46+0100\n"
-"PO-Revision-Date: 2021-02-26 18:51+0100\n"
+"PO-Revision-Date: 2021-02-27 14:59+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -5843,7 +5843,7 @@ msgid "Import successful!"
 msgstr "Import erfolgreich!"
 
 msgid "Archive Import Report"
-msgstr "Archiv Import Bericht"
+msgstr "Import Bericht archivieren"
 
 msgid "Below you will find a report of everything that was imported."
 msgstr "Nachfolgend findest du einen Bericht über alles, was importiert wurde."
@@ -6493,8 +6493,8 @@ msgstr "Der Newsletter wurde aktualisiert."
 msgid "Newsletter successfully created!"
 msgstr "Newsletter erfolgreich erstellt!"
 
-msgid "Login tokens to all previously uninvited users are now being sent."
-msgstr "Login-Token an alle bisher noch nicht eingeladenen Benutzer/innen werden jetzt versendet."
+msgid "Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations."
+msgstr "Login-Token an alle bisher noch nicht eingeladenen Benutzer/innen werden jetzt im Hintergrund versendet. Du kannst diese Seite neu laden, um die Anzeige des Versandsstatus zu aktualisieren."
 
 #, python-format
 msgid "Login token was sent to %(email)s."
