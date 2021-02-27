@@ -119,7 +119,7 @@ class _DynamicFieldsBaseFormMixin(object):
     readonly_dynamic_fields_enabled = False
     
     def __init__(self, *args, **kwargs):
-        if not self.DYNAMIC_FIELD_SETTINGS:
+        if self.DYNAMIC_FIELD_SETTINGS is None:
             raise ImproperlyConfigured('_DynamicFieldsBaseFormMixin need to configure `DYNAMIC_FIELD_SETTINGS`!')
         
         self.hidden_dynamic_fields_shown = kwargs.pop('hidden_dynamic_fields_shown', False)
@@ -137,8 +137,10 @@ class _DynamicFieldsBaseFormMixin(object):
     def prepare_extra_fields_initial(self):
         """ Stub for settting the initial data for `self.dynamic_fields` as defined in
             `self.DYNAMIC_FIELD_SETTINGS`.
-            Only a form with an UpdateView needs to implement this.  """
-        pass
+            Only a form with an UpdateView needs this.  """
+        for field_name in self.DYNAMIC_FIELD_SETTINGS.keys():
+            if field_name in self.instance.dynamic_fields:
+                self.initial[field_name] = self.instance.dynamic_fields[field_name]
     
     def prepare_extra_fields(self):
         """ Creates extra fields for `self.dynamic_fields` as defined in
@@ -177,8 +179,6 @@ class _DynamicFieldsBaseFormMixin(object):
             # some formfields may need to change the initial data in the form itself
             if dynamic_field_generator.get_new_initial_after_formfield_creation():
                 self.initial[field_name] = dynamic_field_generator.get_new_initial_after_formfield_creation()
-            
-            # todo multi address field
             
             # "register" the extra field additionally
             field_map[field_name] = self.fields[field_name]

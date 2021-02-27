@@ -64,6 +64,10 @@ class UserCreationFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
     # only show fields with option `in_signup` set to True
     filter_included_fields_by_option_name = 'in_signup'
     
+    def prepare_extra_fields_initial(self):
+        """ no need for this, as the creation form never has any initial values """
+        pass
+    
     def save(self, commit=True):
         """ Assign the extra fields to the user's cosinnus_profile's `dynamic_fields` 
         JSON field instead of model fields, after user form save """

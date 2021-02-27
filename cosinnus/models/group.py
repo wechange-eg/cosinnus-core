@@ -815,8 +815,15 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     # on the platform, no matter their visibility settings, and thus subject to moderation
     cosinnus_always_visible_by_users_moderator_flag = True
 
+    # NOTE: this is the deprecated old extra_field jsonfield, 
+    # but it is still in use for some custom portal code, so cannot yet be removed.
+    # DO NOT USE THIS IN NEW CODE ANYMORE. USE `group.dynamic_fields` or `group.settings` instead!
     extra_fields = JSONField(default={}, blank=True)
     settings = PostgresJSONField(default=dict, blank=True, null=True)
+    
+    dynamic_fields = PostgresJSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
+            help_text='Extra group fields for each portal, as defined in `settings.COSINNUS_GROUP_EXTRA_FIELDS`',
+            encoder=DjangoJSONEncoder)  
     sdgs = PostgresJSONField(default=list, blank=True, null=True)
     
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')

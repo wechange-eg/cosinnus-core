@@ -46,6 +46,7 @@ from annoying.functions import get_object_or_None
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus import cosinnus_notifications
 from uuid import uuid1
+from cosinnus.forms.dynamic_fields import _DynamicFieldsBaseFormMixin
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -108,8 +109,31 @@ class AsssignPortalMixin(object):
         return super(AsssignPortalMixin, self).save(**kwargs)
 
 
+class GroupFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
+    """ Mixin for the CosinnusBaseGroupForm modelform that
+        adds functionality for by-portal configured extra group form fields """
+        
+    DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_GROUP_EXTRA_FIELDS
+    
+    def full_clean(self):
+        """ Assign the extra fields to the `extra_fields` the userprofile JSON field
+            instead of model fields, during regular form saving """
+        super().full_clean()
+        if hasattr(self, 'cleaned_data'):
+            for field_name in self.DYNAMIC_FIELD_SETTINGS.keys():
+                # skip saving fields that weren't included in the POST
+                # this is important, do not add exceptions here.
+                # if you need an exception, add a hidden field with the field name and any value!
+                if not field_name in self.data.keys():
+                    continue
+                # skip saving disabled fields
+                if field_name in self.fields and not self.fields[field_name].disabled:
+                    self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
+
+
 class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, 
-                ManagedTagFormMixin, FormAttachableMixin, AdditionalFormsMixin, forms.ModelForm):
+                GroupFormDynamicFieldsMixin, ManagedTagFormMixin, FormAttachableMixin, 
+                AdditionalFormsMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 
                   disable_preview=True, validators=[validate_file_infection])

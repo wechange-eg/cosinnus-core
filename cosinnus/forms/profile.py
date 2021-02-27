@@ -22,15 +22,8 @@ class UserProfileFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
         
     DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
     
-    def prepare_extra_fields_initial(self):
-        """ Set the initial data for `self.dynamic_fields` as defined in
-            `self.DYNAMIC_FIELD_SETTINGS` """
-        for field_name in self.DYNAMIC_FIELD_SETTINGS.keys():
-            if field_name in self.instance.dynamic_fields:
-                self.initial[field_name] = self.instance.dynamic_fields[field_name]
-        
     def full_clean(self):
-        """ Assign the extra fields to the `extra_fields` the userprofile JSON field
+        """ Assign the extra fields to the `dynamic_fields` the userprofile JSON field
             instead of model fields, during regular form saving """
         super().full_clean()
         if hasattr(self, 'cleaned_data'):
@@ -43,7 +36,6 @@ class UserProfileFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
                 # skip saving disabled fields
                 if field_name in self.fields and not self.fields[field_name].disabled:
                     self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
-
 
 
 class _UserProfileForm(UserProfileFormDynamicFieldsMixin, ManagedTagFormMixin, forms.ModelForm):
