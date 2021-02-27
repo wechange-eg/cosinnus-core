@@ -6,6 +6,7 @@ from django_select2.widgets import Select2Widget, HeavySelect2MultipleWidget
 
 from django import forms
 from django.contrib.auth import get_user_model
+from django.forms.boundfield import BoundField
 from django.urls.base import reverse, reverse_lazy
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
@@ -16,8 +17,6 @@ from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.forms.select2 import HeavySelect2MultipleFreeTextChoiceWidget, \
     HeavySelect2FreeTextChoiceWidget
 from cosinnus.utils.user import get_user_select2_pills
-from django.forms.boundfield import BoundField
-from cosinnus.utils.functions import is_number
 
 
 class DynamicFieldFormFieldGenerator(object):

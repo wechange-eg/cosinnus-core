@@ -750,6 +750,10 @@ class CosinnusConf(AppConf):
     # that become disabled unless the user has the managed tag
     USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS = []
     
+    # extra fields for CosinnusBaseGroup derived models.
+    # usage: see `USERPROFILE_EXTRA_FIELDS`
+    GROUP_EXTRA_FIELDS = {}
+    
     # a i18n str that explains the special password rules to the user,
     # can be markdown.
     # will display default field legend if None

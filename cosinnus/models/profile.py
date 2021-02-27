@@ -9,9 +9,11 @@ from annoying.functions import get_object_or_None
 import django
 from django.apps import apps
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.postgres.fields import JSONField as PostgresJSONField
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models, transaction
 from django.db.models.signals import post_save, class_prepared
 from django.template.loader import render_to_string
@@ -22,7 +24,6 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from django_countries.fields import CountryField
 from jsonfield import JSONField
-from django.contrib.postgres.fields import JSONField as PostgresJSONField
 import six
 
 from cosinnus.conf import settings
@@ -39,8 +40,6 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import get_newly_registered_user_email
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
-from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS
-from django.core.serializers.json import DjangoJSONEncoder
 
 
 logger = logging.getLogger('cosinnus')
@@ -564,132 +563,3 @@ def _make_country_formfield(**kwargs):
     ).formfield(**kwargs)
 
 
-class _UserProfileFormExtraFieldsBaseMixin(object):
-    """ Base for the Mixins for the UserProfile or User modelforms that
-        add functionality for by-portal configured extra profile form fields """
-    
-    # if set to a string, will only include such fields in the form
-    # that have the given option name set to True in `COSINNUS_USERPROFILE_EXTRA_FIELDS`
-    filter_included_fields_by_option_name = None
-    
-    # (passed in kwargs) if set to True, hidden dynamic fields will be shown, e.g. to display them to admins
-    hidden_dynamic_fields_shown = False
-    
-    # (passed in kwargs) if set to True, enable readonly dynamic fields will be enabled instead of disabled, e.g. to display them to admins
-    readonly_dynamic_fields_enabled = False
-    
-    def __init__(self, *args, **kwargs):
-        self.hidden_dynamic_fields_shown = kwargs.pop('hidden_dynamic_fields_shown', False)
-        self.readonly_dynamic_fields_enabled = kwargs.pop('readonly_dynamic_fields_enabled', False)
-        
-        super().__init__(*args, **kwargs)
-        
-        self.prepare_extra_fields_initial()
-        self.prepare_extra_fields()
-        if 'extra_fields' in self.fields:
-            del self.fields['extra_fields']
-        if 'dynamic_fields' in self.fields:
-            del self.fields['dynamic_fields']
-            
-    def prepare_extra_fields_initial(self):
-        """ Stub for settting the initial data for `self.dynamic_fields` as defined in
-            `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`.
-            Only a form with an UpdateView needs to implement this.  """
-        pass
-    
-    def prepare_extra_fields(self):
-        """ Creates extra fields for `self.dynamic_fields` as defined in
-            `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` """
-        field_map = {}
-        for field_name, field_options in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.items():
-            if field_name in self.fields:
-                raise ImproperlyConfigured(f'COSINNUS_USERPROFILE_EXTRA_FIELDS: {field_name} clashes with an existing UserProfile field!')
-            if not field_options.type in EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS:
-                raise ImproperlyConfigured(f'COSINNUS_USERPROFILE_EXTRA_FIELDS: {field_name}\'s "type" attribute was not found in {self.__class__.__name__}.EXTRA_FIELD_TYPE_FORMFIELDS!')
-            # filter by whether a given option is set
-            if self.filter_included_fields_by_option_name \
-                    and not getattr(field_options, self.filter_included_fields_by_option_name, False):
-                continue
-            if field_options.hidden and not self.hidden_dynamic_fields_shown:
-                continue
-            
-            # create a formfield from the dynamic field definitions
-            dynamic_field_generator = EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS[field_options.type]()
-            formfield = dynamic_field_generator.get_formfield(
-                field_name,
-                field_options,
-                dynamic_field_initial=self.initial.get(field_name, None),
-                readonly_dynamic_fields_enabled=self.readonly_dynamic_fields_enabled,
-                data=self.data,
-                form=self
-            )
-            self.fields[field_name] = formfield
-            setattr(self.fields[field_name], 'field_name', field_name)
-            setattr(self.fields[field_name], 'label', field_options.label)
-            setattr(self.fields[field_name], 'legend', field_options.legend)
-            setattr(self.fields[field_name], 'placeholder', field_options.placeholder)
-            setattr(self.fields[field_name], 'large_field', dynamic_field_generator.get_is_large_field()) 
-            setattr(self.fields[field_name], 'dynamic_field_type', field_options.type) 
-            
-            # some formfields may need to change the initial data in the form itself
-            if dynamic_field_generator.get_new_initial_after_formfield_creation():
-                self.initial[field_name] = dynamic_field_generator.get_new_initial_after_formfield_creation()
-            
-            # todo multi address field
-            
-            # "register" the extra field additionally
-            field_map[field_name] = self.fields[field_name]
-            
-        setattr(self, 'extra_field_list', field_map.keys())
-        setattr(self, 'extra_field_items', field_map.items())
-    
-    
-class UserProfileFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
-    """ Mixin for the UserProfile modelform that
-        adds functionality for by-portal configured extra profile form fields """
-    
-    def prepare_extra_fields_initial(self):
-        """ Set the initial data for `self.dynamic_fields` as defined in
-            `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` """
-        for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
-            if field_name in self.instance.dynamic_fields:
-                self.initial[field_name] = self.instance.dynamic_fields[field_name]
-        
-    def full_clean(self):
-        """ Assign the extra fields to the `extra_fields` the userprofile JSON field
-            instead of model fields, during regular form saving """
-        super().full_clean()
-        if hasattr(self, 'cleaned_data'):
-            for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
-                # skip saving fields that weren't included in the POST
-                # this is important, do not add exceptions here.
-                # if you need an exception, add a hidden field with the field name and any value!
-                if not field_name in self.data.keys():
-                    continue
-                # skip saving disabled fields
-                if field_name in self.fields and not self.fields[field_name].disabled:
-                    self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
-
-
-class UserCreationFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
-    """ Like UserProfileFormExtraFieldsMixin, but works with the user signup form """
-    
-    # only show fields with option `in_signup` set to True
-    filter_included_fields_by_option_name = 'in_signup'
-    
-    def save(self, commit=True):
-        """ Assign the extra fields to the user's cosinnus_profile's `dynamic_fields` 
-        JSON field instead of model fields, after user form save """
-        ret = super().save(commit=commit)
-        if commit:
-            if hasattr(self, 'cleaned_data'):
-                # sanity check, retrieve the user's profile (will create it if it doesnt exist)
-                if not self.instance.cosinnus_profile:
-                    get_user_profile_model()._default_manager.get_for_user(self.instance)
-                
-                profile = self.instance.cosinnus_profile
-                for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
-                    profile.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
-                    profile.save()
-        return ret
-    

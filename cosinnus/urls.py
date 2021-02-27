@@ -163,7 +163,7 @@ if getattr(settings, 'COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED', False)
 
 if getattr(settings, 'COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED', False): 
     urlpatterns += [
-        url(r'^administration/admin_dynamic_fields/edit/$', dynamic_fields.dynamic_field_form_view, name='administration-dynamic-fields'),
+        url(r'^administration/admin_dynamic_fields/edit/$', dynamic_fields.dynamic_field_admin_choices_form_view, name='administration-dynamic-fields'),
     ]
 
 if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
