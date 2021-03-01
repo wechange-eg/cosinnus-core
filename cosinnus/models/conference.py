@@ -29,8 +29,47 @@ from django.contrib.contenttypes.fields import GenericForeignKey,\
 from cosinnus.models.tagged import get_tag_object_model
 from annoying.functions import get_object_or_None
 from phonenumber_field.modelfields import PhoneNumberField
+from cosinnus.utils.group import get_cosinnus_group_model
 
 logger = logging.getLogger('cosinnus')
+
+
+def get_parent_object_in_conference_setting_chain(source_object):
+    """ Will traverse upwards one step in the conference-setting hierarchy chain for the given object
+        and return that higher-level object. 
+    
+        The hierarchy chain is:
+        - cosinnus.BBBRoom
+        - cosinnus_event.ConferenceEvent 
+        - cosinnus.CosinnusConferenceRoom
+        - cosinnus.CosinnusGroup
+        - cosinnus.CosinnusPortal 
+        
+        @param return: None if it arrived at CosinnusPortal or was given None. Else, the higher object in the chain. """ 
+        
+    if source_object is None:
+        return None
+    try:
+        from cosinnus_event.models import ConferenceEvent # noqa
+    except ImportError:
+        ConferenceEvent = None
+    from cosinnus.models.bbb_room import BBBRoom
+                    
+    # BBBRoom --> tagged object for this room if there is one
+    if type(source_object) is BBBRoom and ConferenceEvent is not None:
+        conference_event = get_object_or_None(ConferenceEvent, media_tag__bbb_room=source_object)
+        return conference_event
+    # ConferenceEvent --> CosinnusConferenceRoom
+    if ConferenceEvent is not None and type(source_object) is ConferenceEvent:
+        return source_object.room
+    # ConferenceRoom --> CosinnusGroup
+    if type(source_object) is CosinnusConferenceRoom:
+        return source_object.group
+    # CoinnusGroup --> CosinnusPortal
+    if type(source_object) is get_cosinnus_group_model() or issubclass(source_object.__class__, get_cosinnus_group_model()):
+        return source_object.portal
+    # else: return None
+    return None
 
 
 class CosinnusConferenceSettings(models.Model):
@@ -67,11 +106,7 @@ class CosinnusConferenceSettings(models.Model):
             None is returned.
             
             The currently supported source_object attachment points for CosinnusConferenceSettings are, 
-            in order of the hierarchy chain:
-                - cosinnus_event.ConferenceEvent 
-                - cosinnus.CosinnusConferenceRoom
-                - cosinnus.CosinnusGroup
-                - cosinnus.CosinnusPortal
+            in order of the hierarchy chain (see ``).
             
             Furthermore, this function will accept these models as source_object 
             and use the resolved cosinnus_event.ConferenceEvent as chain starting point, if there is one:
@@ -81,19 +116,6 @@ class CosinnusConferenceSettings(models.Model):
                                     If None is supplied, the portal default settings will be returned.
             .
         """
-        from cosinnus.models.bbb_room import BBBRoom
-        try:
-            from cosinnus_event.models import ConferenceEvent # noqa
-        except ImportError:
-            ConferenceEvent = None
-            
-        # resolve model types that can be in the hierarchy chain, but not be an attachment point
-        # for conference settings
-        if source_object is not None:
-            # BBBRoom: get the tagged object for this room if there is one
-            if type(source_object) is BBBRoom and ConferenceEvent is not None:
-                source_object = get_object_or_None(ConferenceEvent, media_tag__bbb_room=source_object)
-        
         # if no object is given, use the portal as default
         obj = source_object or CosinnusPortal.get_current()
         
@@ -106,23 +128,13 @@ class CosinnusConferenceSettings(models.Model):
         if conference_settings:
             return conference_settings
         
-        # no settings found; handle next object in chain:
-        
-        # CosinnusPortal --> (End of chain - no settings seem to be configured anywhere)
+        # CosinnusPortal --> (End of chain because the portal had no settings, and settings seem to be configured anywhere)
         if source_object is None or type(obj) is CosinnusPortal:
             return None
-        # ConferenceEvent --> CosinnusConferenceRoom
-        if ConferenceEvent is not None and type(obj) is ConferenceEvent:
-            return cls.get_for_object(obj.room)
-        # ConferenceRoom --> CosinnusGroup
-        if type(obj) is CosinnusConferenceRoom:
-            return cls.get_for_object(obj.group)
-        # CoinnusGroup --> CosinnusPortal
-        if type(obj) is CosinnusConferenceRoom:
-            return cls.get_for_object(obj.portal)
         
-        # if no models matched the chain, return the default settings
-        return cls.get_for_object(None)
+        # no settings found; check next object in chain:
+        parent_object = get_parent_object_in_conference_setting_chain(obj)
+        return cls.get_for_object(parent_object)
 
 
 class CosinnusConferenceRoomQS(models.query.QuerySet):
