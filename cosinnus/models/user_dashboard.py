@@ -66,8 +66,10 @@ class DashboardItem(dict):
                 self['text'] = escape(full_name(obj.user))
                 self['url'] = obj.get_absolute_url()
             elif BaseTaggableObjectModel in inspect.getmro(obj.__class__):
+                
+                
                 self['icon'] = 'fa-question'
-                self['text'] = escape(obj.title)
+                self['text'] = escape(obj.get_readable_title())
                 self['url'] = obj.get_absolute_url()
                 self['subtext'] = escape(obj.group.name)
 
