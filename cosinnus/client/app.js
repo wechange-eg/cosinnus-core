@@ -304,7 +304,8 @@ var App = function App () {
                 sdgsJson: sdgsJson,
                 portalInfo: portalInfo,
                 cloudEnabled: cloudEnabled,
-        	}, 
+                placeholder: options.placeholder
+        	},
         	self
         	).render();
         	Backbone.mediator.publish('navbar-quicksearch:ready');
