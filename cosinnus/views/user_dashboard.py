@@ -248,8 +248,6 @@ class FollowedObjectsWidgetView(BaseUserDashboardWidgetView):
     """ Shows all unlimited (for now) ideas the user likes. """
 
     def get_data(self, *kwargs):
-        profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
-        group_ct = ContentType.objects.get_for_model(CosinnusGroup)
         followed = LikeObject.objects.filter(user=self.request.user, followed=True)
         objects = []
         for follow in followed:
