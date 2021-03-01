@@ -778,7 +778,8 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     nextcloud_groupfolder_id = models.PositiveIntegerField(_('Nextcloud Groupfolder ID'),
                                                            unique=True, blank=True, null=True,
                                                            help_text='The boolean internal nextcloud id for the groupfolder. Only set once a groupfolder is created.')
-
+    
+    # NOTE: deprecated, do not use!
     is_conference = models.BooleanField(_('Is conference'),
                                         help_text='Note: DEPRECATED, use group.type=2 now. Delete once all portals have been migrated and checked. If a group is marked as conference it is possible to auto-generate accounts for workshop participants',
                                         default=False)
@@ -799,6 +800,18 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     
     conference_is_running = models.BooleanField(_('Conference accounts active'),
                                                 help_text=_('If enabled, temporary user accounts for this conference are active and can log in.'),
+                                                default=False
+                                                )
+    
+    is_premium_currently = models.BooleanField(_('Conference is currrently premium'),
+                                                help_text='Flag whether this is currently in premium mode because of a booking, changed automatically by the system.',
+                                                default=False,
+                                                editable=False,
+                                                )
+    
+    # note: this overrides `is_premium_currently` in all functionalities
+    is_premium_permanently = models.BooleanField(_('Conference is permanently premium'),
+                                                help_text='If enabled, this will always be in premium mode, independent of any bookings. WARNING: changing this may (depending on the event/conference/portal settings) cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!',
                                                 default=False
                                                 )
 

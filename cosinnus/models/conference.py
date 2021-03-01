@@ -46,7 +46,11 @@ class CosinnusConferenceSettings(models.Model):
     
     bbb_server_choice = models.PositiveSmallIntegerField(_('BBB Server'), blank=False,
         default=0, choices=settings.COSINNUS_BBB_SERVER_CHOICES,
-        help_text='The chosen BBB-Server/Cluster setting for the generic object. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
+        help_text='The default chosen BBB-Server/Cluster setting for the generic object. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
+    bbb_server_choice_premium = models.PositiveSmallIntegerField(_('BBB Server for Premium Conferences'), blank=False,
+        default=0, choices=settings.COSINNUS_BBB_SERVER_CHOICES,
+        help_text='The chosen BBB-Server/Cluster setting for the generic object, that will be used when the group of that object is currently in its premium state. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
+    
     
     class Meta(object):
         app_label = 'cosinnus'
