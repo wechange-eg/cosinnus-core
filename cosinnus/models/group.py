@@ -864,7 +864,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
 
     def __str__(self):
         # FIXME: better caching for .portal.name
-        return '%s (%s)' % (self.name, self.portal.name)
+        return '%s (%s)' % (self.name, self.get_absolute_url())
 
     def _get_likeable_model_name(self):
         return 'CosinnusGroup'
