@@ -11,6 +11,8 @@ from cosinnus_event.models import ConferenceEvent
 from rest_framework.decorators import action
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.models.group_extra import CosinnusConference
+from cosinnus.api.views import CosinnusFilterQuerySetMixin,\
+    PublicCosinnusGroupFilterMixin
 
 
 class DefaultPageNumberPagination(pagination.PageNumberPagination):
@@ -39,11 +41,19 @@ class RequireEventReadMixin(object):
         return queryset
 
 
-class ConferenceViewSet(RequireGroupReadMixin,
-                        viewsets.ReadOnlyModelViewSet):
+class BaseConferenceViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = CosinnusConference.objects.filter(is_active=True)
     serializer_class = ConferenceSerializer
     pagination_class = DefaultPageNumberPagination
+    
+
+class PublicConferenceViewSet(CosinnusFilterQuerySetMixin,
+                             PublicCosinnusGroupFilterMixin,
+                             BaseConferenceViewSet):
+    pass
+
+
+class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
 
     @action(detail=True, methods=['get'])
     def events(self, request, pk=None):

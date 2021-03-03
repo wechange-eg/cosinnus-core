@@ -22,7 +22,8 @@ from cosinnus.views import bbb_room, user_import
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
     user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields
-from cosinnus_conference.api.views import ConferenceViewSet
+from cosinnus_conference.api.views import ConferenceViewSet,\
+    PublicConferenceViewSet
 from cosinnus_event.api.views import EventViewSet
 from cosinnus_note.api.views import NoteViewSet
 from cosinnus_organization.api.views import OrganizationViewSet
@@ -298,6 +299,7 @@ urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
 router = routers.SimpleRouter()
+router.register(r'public_conferences', PublicConferenceViewSet)
 router.register(r'conferences', ConferenceViewSet)
 router.register(r'groups', CosinnusSocietyViewSet)
 router.register(r'projects', CosinnusProjectViewSet)
