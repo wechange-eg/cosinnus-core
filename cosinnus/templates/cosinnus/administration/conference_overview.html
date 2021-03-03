@@ -3,7 +3,7 @@
 
 {% block page_title %}
     {% if only_nonstandard %}
-        {% trans "Overview - Conferences with custom settings" %}
+        {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
     {% else %}
         {% trans "Overview - All Conferences" %}
     {% endif %}
@@ -17,7 +17,7 @@
     <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
     <li class="active">
         {% if only_nonstandard %}
-            {% trans "Overview - Conferences with custom settings" %}
+            {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
         {% else %}
             {% trans "Overview - All Conferences" %}
         {% endif %}

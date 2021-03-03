@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-26 18:46+0100\n"
+"POT-Creation-Date: 2021-03-03 13:11+0100\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -461,9 +461,10 @@ msgstr "%(sender_name)s запрасіў(-ла) Вас далучыцца да \
 msgid "%(sender_name)s invited you to apply for \"%(team_name)s\" on %(portal_name)s! <br/><br/> To apply, please click on the link below."
 msgstr "%(sender_name)s запрасіў(-ла) Вас далучыцца да \"%(team_name)s\" на %(portal_name)s! <br/><br/> Каб далучыцца, калі ласка, націсніце на спасылку ніжэй. Вы будзеце перанакіраваны на партал, дзе можна прагледзець і прыняць запрашэнне."
 
-#, python-format
-msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s толькі што стварыў праект/групу \"%(team_name)s\" на %(portal_name)s!"
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s just created \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s толькі што стварыў(-ла) ідэю \"%(object_name)s\" на %(portal_name)s!"
 
 #, fuzzy, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
@@ -845,6 +846,9 @@ msgid "Cosinnus Micropages"
 msgstr "Мікрастаронкі Cosinnus"
 
 msgid "BBB Server"
+msgstr ""
+
+msgid "BBB Server for Premium Conferences"
 msgstr ""
 
 #, fuzzy
@@ -1362,11 +1366,22 @@ msgstr "Гэты акаўнт неактыўны."
 msgid "If enabled, temporary user accounts for this conference are active and can log in."
 msgstr ""
 
+msgid "Conference is currrently premium"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team members only"
+msgid "Conference is permanently premium"
+msgstr "Толькі чальцы каманды"
+
 msgid "Parent Group"
 msgstr "Бацькоўская група"
 
 msgid "Related Teams"
 msgstr "Роднасныя тэрміны"
+
+msgid "Dynamic extra fields"
+msgstr ""
 
 msgid "Cosinnus project"
 msgstr "Cosinnus-праект"
@@ -1546,9 +1561,6 @@ msgid "Language"
 msgstr "Мова"
 
 msgid "May be contacted"
-msgstr ""
-
-msgid "Dynamic extra fields"
 msgstr ""
 
 msgid "Terms of Service"
@@ -2111,6 +2123,89 @@ msgstr "Адміністратар"
 msgid "Select a page on the left side."
 msgstr ""
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Усе праекты"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+#| msgid "View on page"
+msgid "View Upcoming"
+msgstr "Прагледзець на старонцы"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+#| msgid "View Project"
+msgid "View Past"
+msgstr "Прагледзець праект"
+
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Portal Setting"
+msgstr "Налады прыватнасці"
+
+#, fuzzy
+#| msgid "Cosinnus projects"
+msgid "Conference Settings"
+msgstr "Cosinnus-праекты"
+
+msgid "Is premium"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+#| msgid "Start date."
+msgid "Start"
+msgstr "Дата пачатку."
+
+#, fuzzy
+#| msgid "Join now!"
+msgid "running now!"
+msgstr "Далучыцеся зараз!"
+
+#, fuzzy
+#| msgid "Cosinnus project"
+msgid "Conference Setting"
+msgstr "Cosinnus-праект"
+
+#, fuzzy
+msgid "Room"
+msgstr "З тыпу каманды"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Падзея"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Бачных карыстальнікаў(-ц) няма."
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+#, fuzzy
+#| msgid "Not assigned"
+msgid "Not set"
+msgstr "Не прызначана"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2168,6 +2263,16 @@ msgstr "Тэкст вітальнага ліста"
 
 msgid "Simple Statistics"
 msgstr "Простая статыстыка"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Conference Overview"
+msgstr "Стварыць падзею"
+
+#, fuzzy
+#| msgid "Cosinnus projects"
+msgid "Conferences with Custom Settings"
+msgstr "Cosinnus-праекты"
 
 msgid "Edit"
 msgstr "Рэдагаваць"
@@ -2958,6 +3063,9 @@ msgstr ""
 msgid "How many participants should can join one coffee table before it is full"
 msgstr ""
 
+msgid "Attention: The visible update of the free seats is still work in progress. Therefore, we recommend not to use the limitation of individual coffee tables, so as not to let the virtual coffee go cold while searching for free seats."
+msgstr ""
+
 msgid "Choose one of the sub-projects of this group to display as nested results-project for participants"
 msgstr ""
 
@@ -3001,6 +3109,14 @@ msgstr "Вы сапраўды хочаце выдаліць запрашэнне
 #| msgid "Delete Profile"
 msgid "Delete room"
 msgstr "Выдаліць профіль"
+
+msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Configure"
+msgid "Conference Bookings"
+msgstr "Сканфігураваць"
 
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr ""
@@ -5297,10 +5413,6 @@ msgid "Cloud Files"
 msgstr "Зацягніце выяву."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Падзея"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Idea"
 msgstr "Ідэя"
 
@@ -6936,7 +7048,7 @@ msgstr "(Элемент, на які паскардзіліся, выдален�
 msgid "Newsletter successfully created!"
 msgstr ""
 
-msgid "Login tokens to all previously uninvited users are now being sent."
+msgid "Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations."
 msgstr ""
 
 #, python-format
@@ -7428,6 +7540,9 @@ msgstr "Вы не з'яўляецеся чальцом %s! Пры жаданні
 
 msgid "Your changes have been saved."
 msgstr "Вашы змены захаваныя."
+
+#~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+#~ msgstr "%(sender_name)s толькі што стварыў праект/групу \"%(team_name)s\" на %(portal_name)s!"
 
 #~ msgid "All societies"
 #~ msgstr "Усе аб'яднанні"

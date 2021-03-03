@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-26 18:46+0100\n"
+"POT-Creation-Date: 2021-03-03 13:11+0100\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -464,9 +464,10 @@ msgstr "%(sender_name)s v-a invitat să vă alăturați %(team_name)s"
 msgid "%(sender_name)s invited you to apply for \"%(team_name)s\" on %(portal_name)s! <br/><br/> To apply, please click on the link below."
 msgstr "%(sender_name)s te-a invitat să te înscrii ”%(team_name)s” pe %(portal_name)s! <br/><br/> Pentru a vă alătura, vă rugăm să faceți clic pe linkul de mai jos. Veți fi redirecționat către portal, unde puteți vedea și accepta invitația."
 
-#, python-format
-msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s tocmai a creat proiectul/grupul ”%(team_name)s” pe %(portal_name)s!"
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s just created \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s tocmai a creat ideea ”%(object_name)s” pe %(portal_name)s!"
 
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
@@ -846,6 +847,9 @@ msgid "Cosinnus Micropages"
 msgstr "Cosinus Micropage"
 
 msgid "BBB Server"
+msgstr ""
+
+msgid "BBB Server for Premium Conferences"
 msgstr ""
 
 #, fuzzy
@@ -1355,11 +1359,24 @@ msgstr "Managementul Conferinței"
 msgid "If enabled, temporary user accounts for this conference are active and can log in."
 msgstr ""
 
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conference is currrently premium"
+msgstr "Conferința se desfășoară"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conference is permanently premium"
+msgstr "Conferința se desfășoară"
+
 msgid "Parent Group"
 msgstr "Grup de Părinți"
 
 msgid "Related Teams"
 msgstr "Echipe Conexe"
+
+msgid "Dynamic extra fields"
+msgstr ""
 
 msgid "Cosinnus project"
 msgstr "Proiect cosinnus"
@@ -1540,9 +1557,6 @@ msgstr "Limba"
 
 msgid "May be contacted"
 msgstr "Poate fi contactat"
-
-msgid "Dynamic extra fields"
-msgstr ""
 
 msgid "Terms of Service"
 msgstr "Termeni și Service"
@@ -2099,6 +2113,96 @@ msgstr "Administrare"
 msgid "Select a page on the left side."
 msgstr "Selectați o pagină din partea stângă."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Este conferință"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+#| msgid "View on page"
+msgid "View Upcoming"
+msgstr "Vizualizarea pe pagină"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+#| msgid "View Project"
+msgid "View Past"
+msgstr "Vezi Proiect"
+
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Portal Setting"
+msgstr "Setările de confidențialitate"
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Conference Settings"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Is premium"
+msgstr "Premium"
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Not premium"
+msgstr "Premium"
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Restrâns"
+
+#, fuzzy
+#| msgid "Join now!"
+msgid "running now!"
+msgstr "Alătură-te acum!"
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Conference Setting"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+#| msgid "Room Type"
+msgid "Room"
+msgstr "Tipul Camerei"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Eveniment"
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no items to show."
+msgstr "Nu există articole încă"
+
+msgid "BBB"
+msgstr ""
+
+#, fuzzy
+#| msgid "Premium"
+msgid "BBB Premium"
+msgstr "Premium"
+
+#, fuzzy
+#| msgid "Not assigned"
+msgid "Not set"
+msgstr "Nealocat"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2156,6 +2260,16 @@ msgstr "Utilizator Bun Venit pe E-mail"
 
 msgid "Simple Statistics"
 msgstr "Statistici Simple"
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Conference Overview"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conferences with Custom Settings"
+msgstr "Conferința se desfășoară"
 
 msgid "Edit"
 msgstr "Editați"
@@ -2955,6 +3069,9 @@ msgstr "Participanți Maximum la Masa de Cafea"
 msgid "How many participants should can join one coffee table before it is full"
 msgstr ""
 
+msgid "Attention: The visible update of the free seats is still work in progress. Therefore, we recommend not to use the limitation of individual coffee tables, so as not to let the virtual coffee go cold while searching for free seats."
+msgstr ""
+
 msgid "Choose one of the sub-projects of this group to display as nested results-project for participants"
 msgstr ""
 
@@ -3002,6 +3119,14 @@ msgstr "Doriți cu adevărat să ștergeți anunțul ”%(title)s”?"
 #| msgid "Delete Profile"
 msgid "Delete room"
 msgstr "Ștergeți Profilul"
+
+msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference Rooms"
+msgid "Conference Bookings"
+msgstr "Camerele de conferințe"
 
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr ""
@@ -5295,10 +5420,6 @@ msgid "Cloud Files"
 msgstr "Încarcă Fișierul"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Eveniment"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Idea"
 msgstr "Ideea"
 
@@ -6892,7 +7013,7 @@ msgstr "(Elementul raportat a fost șters.)"
 msgid "Newsletter successfully created!"
 msgstr ""
 
-msgid "Login tokens to all previously uninvited users are now being sent."
+msgid "Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations."
 msgstr ""
 
 #, python-format
@@ -7373,6 +7494,9 @@ msgstr "În prezent nu sunteți membru %s! Dacă doriți, puteți solicita să d
 
 msgid "Your changes have been saved."
 msgstr "Schimbările tale au fost salvate."
+
+#~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+#~ msgstr "%(sender_name)s tocmai a creat proiectul/grupul ”%(team_name)s” pe %(portal_name)s!"
 
 #~ msgid "All societies"
 #~ msgstr "Toate societățiile"
