@@ -98,7 +98,7 @@ class CosinnusConferenceSettings(models.Model):
         unique_together = (('content_type', 'object_id',),)
     
     @classmethod
-    def get_for_object(cls, source_object=None):
+    def get_for_object(cls, source_object=None, no_traversal=False):
         """ Given any object in the BBB settings hierarchy chain,
             checks if there is a settings object attached and returns it,
             or checks the next higher object in the chain.
@@ -114,6 +114,8 @@ class CosinnusConferenceSettings(models.Model):
             
             @param source_object: Any object. If it matches a model valid for the chain, we check the chain.
                                     If None is supplied, the portal default settings will be returned.
+            @param no_traversal: if True, will only attempt to find a setting object on the `source_object`
+                                    and not recursively check its parents
             .
         """
         # if no object is given, use the portal as default
@@ -129,13 +131,21 @@ class CosinnusConferenceSettings(models.Model):
             return conference_settings
         
         # CosinnusPortal --> (End of chain because the portal had no settings, and settings seem to be configured anywhere)
-        if source_object is None or type(obj) is CosinnusPortal:
+        if no_traversal or source_object is None or type(obj) is CosinnusPortal:
             return None
         
         # no settings found; check next object in chain:
         parent_object = get_parent_object_in_conference_setting_chain(obj)
         return cls.get_for_object(parent_object)
-
+    
+    @property
+    def bbb_server_choice_text(self):
+        return settings.COSINNUS_BBB_SERVER_CHOICES[self.bbb_server_choice][1]
+    
+    @property
+    def bbb_server_choice_premium_text(self):
+        return settings.COSINNUS_BBB_SERVER_CHOICES[self.bbb_server_choice_premium][1]
+    
 
 class CosinnusConferenceRoomQS(models.query.QuerySet):
 

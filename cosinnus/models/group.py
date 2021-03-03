@@ -65,6 +65,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from cosinnus.trans.group import get_group_trans_by_type
 from annoying.functions import get_object_or_None
 from django.utils.safestring import mark_safe
+from django.utils.timezone import now
 
 logger = logging.getLogger('cosinnus')
 
@@ -1004,6 +1005,11 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         group.update_index()
         return group
     
+    @property
+    def is_premium(self):
+        """ Shortcut to determine if a group is in premium state right now """
+        return self.is_premium_currently or self.is_premium_permanently
+    
     def add_member_to_group(self, user, membership_status):
         """ "Makes the user a group member". 
             Safely adds a membership for the given user with the given status for this group.
@@ -1359,6 +1365,12 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         if queryset.count() > 0:
             return queryset.aggregate(Max('to_date'))['to_date__max']
         return None
+    
+    @property
+    def is_running(self):
+        has_time = self.from_date and self.to_date
+        running = has_time and self.from_date <= now() <= self.to_date
+        return has_time and running
 
     @property
     def conference_events(self):

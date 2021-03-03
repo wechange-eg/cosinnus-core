@@ -79,7 +79,7 @@ class BigBlueButtonAPI(object):
                             break
                     # if we have found a group, and that group has a premium status, we use 
                     # the premium server choice of the bbb server settings object
-                    if found_group and (found_group.is_premium_currently or found_group.is_premium_permanently):
+                    if found_group and (found_group.is_premium):
                         bbb_server_choice = conference_settings.bbb_server_choice_premium
                 
                 auth_pair = dict(settings.COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS).get(bbb_server_choice)

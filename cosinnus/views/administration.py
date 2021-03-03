@@ -35,6 +35,12 @@ from cosinnus.views.user import email_first_login_token_to_user
 from cosinnus.conf import settings
 from cosinnus.models.profile import PROFILE_SETTING_LOGIN_TOKEN_SENT
 from threading import Thread
+from cosinnus.views.mixins.group import RequireSuperuserMixin
+from cosinnus.models.group_extra import CosinnusConference
+from cosinnus.models.conference import CosinnusConferenceSettings,\
+    CosinnusConferenceRoom
+from django.utils.timezone import now
+from _collections import defaultdict
 
 
 class AdministrationView(TemplateView):
@@ -394,3 +400,114 @@ class UserCreateView(SuccessMessageMixin, CreateView):
         return super().dispatch(request, *args, **kwargs)
 
 user_add = UserCreateView.as_view()
+
+
+class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
+    """ A deep-down report list view of all conferences, their rooms, events, 
+        and for all of those, their `CosinnusConferenceSettings` if they have one assigned.
+        
+        Kwargs:
+            - only_nonstandard: if True, only objects with a set `CosinnusConferenceSettings` 
+                will be listed
+    """
+    
+    template_name = 'cosinnus/administration/conference_overview.html'
+    only_nonstandard = False
+    past = False
+    
+    def dispatch(self, request, *args, **kwargs):
+        self.only_nonstandard = kwargs.pop('only_nonstandard', self.only_nonstandard)
+        self.past = request.GET.get('past', self.past)
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get_context_data(self, *args, **kwargs):
+        """ Gather all conferences, and their rooms and those rooms' events and for each of those,
+            their conference setting object, if one exists.
+            If self.only_nonstandard view option is set, we only show items if they have a conference setting item,
+            otherwise we list all of them.
+         """
+        context = super(ConferenceOverviewView, self).get_context_data(*args, **kwargs)
+        
+        # split conferences by soonest running first, then list all finished ones
+        conferences = CosinnusConference.objects.all_in_portal()\
+                        .order_by('from_date')\
+                        .prefetch_related('rooms', 'rooms__events')
+        filtered_conferences = None
+        if self.past: 
+            filtered_conferences = conferences.exclude(to_date__gte=now())
+        else:
+            filtered_conferences = conferences.filter(to_date__gte=now())
+        
+        # make a cached list for conference settings
+        all_settings = CosinnusConferenceSettings.objects.all()
+        conference_settings_dict = defaultdict(dict)
+        for sett in all_settings:
+            conference_settings_dict[sett.content_type_id][sett.object_id] = sett
+        conference_ct_id = ContentType.objects.get_for_model(CosinnusConference).id
+        room_ct_id = ContentType.objects.get_for_model(CosinnusConferenceRoom).id
+        from cosinnus_event.models import ConferenceEvent # noqa
+        event_ct_id = ContentType.objects.get_for_model(ConferenceEvent).id
+        
+        conference_report_list = []
+        for conference in filtered_conferences:
+            # traverse the conference, its rooms and events and attach their settings to themselves
+            confsetting = conference_settings_dict.get(conference_ct_id, {}).get(conference.id, None)
+            setattr(conference, 'resolved_conference_setting', confsetting)
+            anysetting_conference = bool(confsetting)
+            
+            # gather for rooms in conference
+            total_rooms = 0
+            total_events = 0
+            rooms_and_events = []
+            anysetting_rooms = False
+            for room in conference.rooms.all():
+                total_rooms += 1
+                roomsetting = conference_settings_dict.get(room_ct_id, {}).get(room.id, None)
+                setattr(room, 'resolved_conference_setting', roomsetting)
+                anysetting_rooms = anysetting_rooms or bool(roomsetting)
+                
+                # gather for events in room
+                events = []
+                anysetting_events = False
+                for event in room.events.all():
+                    if event.is_break:
+                        continue
+                    total_events += 1
+                    eventsetting = conference_settings_dict.get(event_ct_id, {}).get(event.id, None)
+                    anysetting_events = anysetting_events or bool(eventsetting)
+                    setattr(event, 'resolved_conference_setting', eventsetting)
+                    if eventsetting or not self.only_nonstandard:
+                        events.append(event)
+                
+                anysetting_rooms = anysetting_rooms or anysetting_events
+                if anysetting_rooms or not self.only_nonstandard:
+                    # don't append the room if it doesn't have a setting in nonstandard mode
+                    if not roomsetting and self.only_nonstandard:
+                        room = None
+                    rooms_and_events.append((room, events))
+                    
+            # in the non-standard only list, we only show conferences where at least one setting was set *anywhere*
+            anysetting_conference = anysetting_conference or anysetting_rooms
+            if anysetting_conference or not self.only_nonstandard:
+                conf_dict = {
+                    'conference': conference,
+                    'rooms_and_events': rooms_and_events,
+                    'room_count': total_rooms,
+                    'event_count': total_events,
+                }
+                conference_report_list.append(conf_dict)
+        
+        portal = CosinnusPortal.get_current()
+        context.update({
+            'portal': portal,
+            'portal_setting': CosinnusConferenceSettings.get_for_object(portal),
+            'conference_report_list': conference_report_list,
+            'only_nonstandard': self.only_nonstandard,
+            'past': self.past,
+        })
+        return context
+    
+
+conference_overview = ConferenceOverviewView.as_view()
+
+

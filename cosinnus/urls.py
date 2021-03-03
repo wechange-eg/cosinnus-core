@@ -120,6 +120,9 @@ urlpatterns = [
     url(r'^administration/announcement/(?P<slug>[^/]+)/delete/$', user_dashboard_announcement.user_dashboard_announcement_delete, name='user-dashboard-announcement-delete'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/activate-toggle/$', user_dashboard_announcement.user_dashboard_announcement_activate, name='user-dashboard-announcement-activate'),
     
+    url(r'^administration/conference_overview/$', administration.conference_overview, name='administration-conference-overview'),
+    url(r'^administration/conference_overview/nonstandard/$', administration.conference_overview, name='administration-conference-overview-nonstandard', kwargs={'only_nonstandard': True}),
+    
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),
     
