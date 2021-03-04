@@ -29,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
     wordBreak: "break-word",
     "& h3": {
       fontWeight: 700,
-      color: "#ffffff",
+      color: theme.palette.text.secondary,
       textTransform: "uppercase",
       fontSize: "1.3rem",
       marginBottom: "1rem"
@@ -59,7 +59,7 @@ export const useStyles = makeStyles((theme) => ({
       color: theme.palette.primary.light,
     },
     "&:hover,&.Mui-selected,&.Mui-selected:hover": {
-      background: "#ffffff",
+      background: theme.palette.text.secondary,
       "& span,svg": {
         color: theme.palette.primary.main,
       },

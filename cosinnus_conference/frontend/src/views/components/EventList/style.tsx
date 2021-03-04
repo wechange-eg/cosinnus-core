@@ -60,14 +60,14 @@ export const useStyles = makeStyles((theme) => ({
         },
         "& div.event-title": {
           "& span:first-child": {
-            color: "#ffffff"
+            color: theme.palette.text.secondary
           },
           "& span:last-child, span:last-child *": {
             color: theme.palette.primary.light,
           }
         },
         "& a": {
-          color: "#ffffff"
+          color: theme.palette.text.secondary
         }
       },
       [theme.breakpoints.down('sm')]: {
