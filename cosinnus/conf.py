@@ -261,6 +261,10 @@ class CosinnusConf(AppConf):
     # how long managed tags by portal should stay in cache until they will be removed
     MANAGED_TAG_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
+    # very very small timeout for cached BBB server configs!
+    # this should be in the seconds region
+    CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT = 10 # 10 seconds
+    
     # should CosinnusIdeas be enabled for this Portal?
     IDEAS_ENABLED = False
     

@@ -12,6 +12,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 import six
+from django.core.cache import cache
 
 from cosinnus.conf import settings
 from cosinnus.utils.files import get_conference_conditions_filename
@@ -90,6 +91,7 @@ class CosinnusConferenceSettings(models.Model):
         default=0, choices=settings.COSINNUS_BBB_SERVER_CHOICES,
         help_text='The chosen BBB-Server/Cluster setting for the generic object, that will be used when the group of that object is currently in its premium state. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
     
+    CACHE_KEY = 'cosinnus/core/conferencesetting/class/%s/id/%d'
     
     class Meta(object):
         app_label = 'cosinnus'
@@ -121,22 +123,34 @@ class CosinnusConferenceSettings(models.Model):
         # if no object is given, use the portal as default
         obj = source_object or CosinnusPortal.get_current()
         
-        # find and return conference settings if attached to our current object
-        conference_settings = None
-        try:
-            conference_settings = obj.conference_settings_assignments.all()[0]
-        except:
-            pass
-        if conference_settings:
-            return conference_settings
+        cache_key = cls.CACHE_KEY % (obj.__class__.__name__, obj.id)
+        setting_obj = cache.get(cache_key)
+        if not setting_obj:
+            # can't be Falsy because None is a valid return value
+            setting_obj = 'UNSET'
+            
+            # find and return conference settings if attached to our current object
+            conference_settings = None
+            try:
+                conference_settings = obj.conference_settings_assignments.all()[0]
+            except:
+                pass
+            if conference_settings:
+                setting_obj = conference_settings
+            
+            # CosinnusPortal --> (End of chain because the portal had no settings, and settings seem to be configured anywhere)
+            if setting_obj == 'UNSET' and (no_traversal or source_object is None or type(obj) is CosinnusPortal):
+                setting_obj = None
+            
+            if setting_obj == 'UNSET':
+                # no settings found; check next object in chain:
+                parent_object = get_parent_object_in_conference_setting_chain(obj)
+                setting_obj = cls.get_for_object(parent_object)
+                
+            cache.set(cache_key, setting_obj, settings.COSINNUS_CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT)
         
-        # CosinnusPortal --> (End of chain because the portal had no settings, and settings seem to be configured anywhere)
-        if no_traversal or source_object is None or type(obj) is CosinnusPortal:
-            return None
+        return setting_obj
         
-        # no settings found; check next object in chain:
-        parent_object = get_parent_object_in_conference_setting_chain(obj)
-        return cls.get_for_object(parent_object)
     
     @property
     def bbb_server_choice_text(self):
