@@ -26,11 +26,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   drawerHeader: {
     marginBottom: "2rem",
+    wordBreak: "break-word",
     "& h3": {
       fontWeight: 700,
       color: "#ffffff",
       textTransform: "uppercase",
-      fontSize: "1.4rem",
+      fontSize: "1.3rem",
       marginBottom: "1rem"
     },
     "& h4": {
