@@ -1,4 +1,5 @@
-import { createMuiTheme, lighten, darken } from "@material-ui/core"
+import { createMuiTheme, lighten } from "@material-ui/core"
+var tinycolor = require("tinycolor2");
 
 import BrandonTextRegular from "./fonts/brandon-text-regular.ttf"
 import BrandonTextItalic from "./fonts/brandon-text-italic.ttf"
@@ -80,22 +81,18 @@ const muiCssBaseline = {
 export const getTheme = (primaryColor= "#7062b3") => {
   var primaryText = "#4a4a4a" // regular flow text
   var secondaryText = "#ffffff" // hovered and emphasized text
-  var shift = lighten
-  if (true) {
-      primaryText = "#4a4a4a"
-      secondaryText = "#333333"
-      //shift = darken
+
+  // if the primary color is set too bright to be readable,
+  // swith the secondary text color to dark
+  if (tinycolor(primaryColor).getBrightness() > 200) {
+      primaryText = "#4a4a4a" // regular flow text
+      secondaryText = "#333333" // hovered and emphasized text
   }
 
   return createMuiTheme({
     palette: {
       type: "light",
       primary: {
-        main: primaryColor,
-        light: shift(primaryColor, 0.5),
-        contrastText: shift(primaryColor, 0.75),
-      },
-      secondary: {
         main: primaryColor,
         light: lighten(primaryColor, 0.5),
         contrastText: lighten(primaryColor, 0.75),

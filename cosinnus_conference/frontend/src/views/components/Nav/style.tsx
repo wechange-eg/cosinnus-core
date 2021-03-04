@@ -58,6 +58,9 @@ export const useStyles = makeStyles((theme) => ({
     "& p": {
       color: theme.palette.primary.light,
     },
+    "& span,svg": {
+      color: theme.palette.text.secondary,
+    },
     "&:hover,&.Mui-selected,&.Mui-selected:hover": {
       background: theme.palette.text.secondary,
       "& span,svg": {

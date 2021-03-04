@@ -9,7 +9,7 @@ export const Content = styled(Grid)(({ theme }) => ({
     fontSize: "1rem",
     textTransform: "uppercase",
     fontWeight: "700",
-    color: theme.palette.primary.main,
+    color: theme.palette.text.primary,
     marginBottom: "1rem",
   },
   "&.fullheight": {
