@@ -56,7 +56,7 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: "1rem",
     },
     "& p": {
-      color: theme.palette.primary.light,
+      color: theme.palette.text.primary,
     },
     "& span,svg": {
       color: theme.palette.text.secondary,
@@ -84,7 +84,12 @@ export const useStyles = makeStyles((theme) => ({
       fontWeight: 300,
       fontSize: ".8rem",
       right: ".5rem",
-      color: theme.palette.primary.light
+      color: theme.palette.text.secondary
+    },
+    "&:hover,&.Mui-selected,&.Mui-selected:hover": {
+      "& span": {
+        color: theme.palette.text.secondary
+      },
     }
   },
   toggleMenuButton: {
