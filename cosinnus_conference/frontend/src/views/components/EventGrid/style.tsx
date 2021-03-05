@@ -74,7 +74,7 @@ export const useStyles = makeStyles((theme) => ({
   left: {
     flex: "0 0 60%",
     "& p": {
-      color: theme.palette.text.secondary,
+      color: theme.palette.text.primary,
     },
   },
   right: {
