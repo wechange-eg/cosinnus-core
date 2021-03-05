@@ -57,6 +57,10 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
     def get_count(self, obj):
         if obj.type == obj.TYPE_PARTICIPANTS:
             return obj.group.users.filter(is_active=True).count()
+        return 0
+        # Note: room event counts are disabled for now, as they are confusing users to
+        # think that the number actually means participant counts
+        """
         elif obj.type == obj.TYPE_LOBBY:
             queryset = ConferenceEvent.objects.filter(group=obj.group)\
                 .exclude(type__in=ConferenceEvent.TIMELESS_TYPES)\
@@ -64,6 +68,7 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
             return queryset.count()
         else:
             return obj.events.count()
+        """
 
     def get_url(self, obj):
         if obj.type == obj.TYPE_RESULTS and obj.target_result_group:
