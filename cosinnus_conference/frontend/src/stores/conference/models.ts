@@ -10,6 +10,11 @@ export interface ConferenceJson {
     manage_rooms: string
     manage_events: string
   }
+  header_notification: {
+    notification_text: string
+    link_text: string
+    link_url: string
+  }
   theme_color: string
   dates: string[]
   avatar: string
@@ -26,6 +31,11 @@ export interface ConferenceProps {
     manageConference: string
     manageRooms: string
     manageEvents: string
+  }
+  headerNotification: {
+    notificationText: string
+    linkText: string
+    linkUrl: string
   }
   themeColor: string
   dates: string[]
@@ -57,6 +67,11 @@ export class Conference {
         manageConference: json.management_urls.manage_conference,
         manageRooms: json.management_urls.manage_rooms,
         manageEvents: json.management_urls.manage_events,
+      },
+      headerNotification: {
+        notificationText: json.header_notification.notification_text,
+        linkText: json.header_notification.link_text,
+        linkUrl: json.header_notification.link_url,
       },
       themeColor: json.theme_color,
       dates: json.dates,
@@ -95,6 +110,11 @@ export class Conference {
         manage_conference: props.managementUrls.manageConference,
         manage_rooms: props.managementUrls.manageRooms,
         manage_events: props.managementUrls.manageEvents,
+      },  
+      header_notification: {
+        notification_text: props.headerNotification.notificationText,
+        link_text: props.headerNotification.linkText,
+        link_url: props.headerNotification.linkUrl,
       },
       theme_color: props.themeColor,
       dates: props.dates,

@@ -42,7 +42,8 @@ function HeaderConnector(props: HeaderProps) {
   if (!conference) {
     return null
   }
-  if (!conference.props.wallpaper && (!conference.props.images || conference.props.images.length === 0)) {
+  if (!conference.props.wallpaper && (!conference.props.images || conference.props.images.length === 0) 
+      && (!conference.props.headerNotification || !conference.props.headerNotification.notificationText)) {
     return null
   }
   return (
@@ -61,6 +62,9 @@ function HeaderConnector(props: HeaderProps) {
           </GridListTile>
         ))}
       </GridList>
+      {conference.props.headerNotification.notificationText && (
+        <div className="description" dangerouslySetInnerHTML={{__html: conference.props.headerNotification.notificationText}} />
+      )}
     </div>
   )
 }

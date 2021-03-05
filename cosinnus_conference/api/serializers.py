@@ -16,6 +16,9 @@ from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group import CosinnusGroup
 from django.templatetags.static import static
 from django.utils.timezone import now
+from django.utils.translation import ugettext_lazy as _, get_language
+from django.template.loader import render_to_string
+from django.template.context import Context
 
 
 __all__ = ('ConferenceSerializer', )
@@ -45,8 +48,8 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = CosinnusConferenceRoom
-        fields = ('id', 'slug', 'title', 'description_html', 'type', 'count', 'url', 'management_urls', 'is_visible',
-                  'show_chat')
+        fields = ('id', 'slug', 'title', 'description_html', 'type', 'count', 'url', 'management_urls', 
+                  'is_visible', 'show_chat')
 
     def get_type(self, obj):
         return self.TYPE_MAP.get(obj.type)
@@ -95,11 +98,12 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
     avatar = serializers.CharField(source='avatar_url')
     wallpaper = serializers.SerializerMethodField()
     images = serializers.SerializerMethodField()
+    header_notification = serializers.SerializerMethodField()
 
     class Meta(object):
         model = CosinnusGroup
         fields = ('id', 'name', 'description', 'rooms', 'management_urls', 'theme_color', 'dates', 'avatar',
-                  'wallpaper', 'images')
+                  'wallpaper', 'images', 'header_notification')
 
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
@@ -118,6 +122,19 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
                 'manage_events': group_aware_reverse('cosinnus:event:conference-event-list', kwargs={'group': obj}),
             }
         return ""
+    
+    def get_header_notification(self, obj):
+        user = self.context['request'].user
+        if check_ug_admin(user, obj) or check_user_superuser(user):
+            header_notification = {
+                'notification_text': _('Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:'),
+                'link_text': _('Conference Bookings'),
+                'link_url': render_to_string('cosinnus/v2/urls/conference_premium_booking_url.html', context={
+                                'COSINNUS_CURRENT_LANGUAGE': get_language(),
+                            }),
+            }
+            return header_notification
+        return {}
 
     def get_dates(self, obj):
         queryset = ConferenceEvent.objects.filter(room__group=obj)
