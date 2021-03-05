@@ -634,6 +634,9 @@ class CosinnusConf(AppConf):
     # whether to show conferences on the site
     CONFERENCES_ENABLED = False
     
+    # whether to use the premium difference for conferences
+    PREMIUM_CONFERENCES_ENABLED = False
+    
     # if `CONFERENCES_ENABLED` is True, setting this to 
     # True will only show the conference button if the current user actually
     # has permission to create a conference

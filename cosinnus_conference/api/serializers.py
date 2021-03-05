@@ -71,11 +71,16 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
     def get_management_urls(self, obj):
         user = self.context['request'].user
         if check_ug_admin(user, obj.group) or check_user_superuser(user):
-            return {
-                'create_event': obj.get_room_create_url(),
+            management_urls = {
                 'update_room': obj.get_edit_url(),
                 'delete_room': obj.get_delete_url(),
             }
+            # Lobby room types do not have a "Create Event" button
+            if obj.type != CosinnusConferenceRoom.TYPE_LOBBY:
+                management_urls.update({
+                    'create_event': obj.get_room_create_url(),
+                })
+            return management_urls
         return {}
 
     def get_description_html(self, obj):
