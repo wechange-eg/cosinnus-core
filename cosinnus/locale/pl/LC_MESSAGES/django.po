@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-03 13:11+0100\n"
+"POT-Creation-Date: 2021-03-07 17:51+0100\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1243,6 +1243,17 @@ msgstr "Projekt"
 msgid "Conference"
 msgstr "Jest konferencja"
 
+#, fuzzy
+#| msgid "New membership request"
+msgid "Regular membership requests"
+msgstr "Nowa prośba o dołączenie"
+
+msgid "Require participation applications for this conference"
+msgstr ""
+
+msgid "Everyone may join"
+msgstr ""
+
 msgid "Project Type"
 msgstr "Typ Projektu"
 
@@ -1269,6 +1280,11 @@ msgstr "Obraz tapety"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Wyświetlany jako duży baner na Mikrostronie (1140 x 240 px)"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application method"
+msgstr "Nazwa aplikacji"
 
 msgid "Microsite Video"
 msgstr "Wideo Mikrostrony"
@@ -1342,9 +1358,6 @@ msgstr "Data początkowa."
 #| msgid "End date."
 msgid "End Datetime"
 msgstr "Data zakończenia."
-
-msgid "Determins if application management is visible in conference administration."
-msgstr ""
 
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
@@ -2903,11 +2916,6 @@ msgstr ""
 msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
 msgstr ""
 
-#, fuzzy
-#| msgid "Application name"
-msgid "Application method"
-msgstr "Nazwa aplikacji"
-
 #, python-format
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr ""
@@ -3473,34 +3481,6 @@ msgid "No contact data has been added yet."
 msgstr "Nie dodano jeszcze danych kontaktowych."
 
 #, fuzzy
-#| msgid "Register and join!"
-msgid "Register and apply!"
-msgstr "Zarejestruj się i dołącz!"
-
-msgid "Register and join!"
-msgstr "Zarejestruj się i dołącz!"
-
-#, fuzzy
-#| msgid "You have been invited to collaborate!"
-msgid "You have been invited to apply!"
-msgstr "Zostałeś/aś zaproszony/a do współpracy!"
-
-msgid "Decline Invitation"
-msgstr "Odrzuć Zaproszenie"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "Czy na pewno chcesz odrzucić to zaproszenie?"
-
-#, fuzzy
-#| msgid "Application name"
-msgid "Edit Application"
-msgstr "Nazwa aplikacji"
-
-#, fuzzy
-msgid "Apply for Participation"
-msgstr "Uczestnicy"
-
-#, fuzzy
 #| msgid "Protected Content"
 msgid "Your Deactivated Content"
 msgstr "Zawartość Chroniona"
@@ -3577,6 +3557,9 @@ msgstr "Zaproszeni członkowie"
 msgid "Revoke Invitation"
 msgstr "Wycofaj Zaproszenie"
 
+msgid "Decline Invitation"
+msgstr "Odrzuć Zaproszenie"
+
 msgid "Accept Invitation"
 msgstr "Przyjmij Zaproszenie"
 
@@ -3589,6 +3572,9 @@ msgstr "Czy na pewno chcesz wycofać zaproszenie dla użytkownika „%(name)s“
 
 msgid "Revoke Invitation for Member"
 msgstr "Wycofaj Zaproszenie dla Członka"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Czy na pewno chcesz odrzucić to zaproszenie?"
 
 msgid "There are no pending invitations."
 msgstr "Nie ma oczekujących zaproszeń."
@@ -3764,10 +3750,10 @@ msgstr "Konferencja rozpoczęta pomyślnie a konta użytkownika zostały aktywow
 msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgstr ""
 
-msgid "Require participation applications for this conference"
+msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
 msgstr ""
 
-msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
+msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
 msgstr ""
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
@@ -4015,6 +4001,10 @@ msgstr "Opuść"
 msgid "Details"
 msgstr "Szczegóły"
 
+#, fuzzy
+msgid "Apply for Participation"
+msgstr "Uczestnicy"
+
 #, python-format
 msgid "Do you really want to leave „%(title)s“?"
 msgstr "Czy na pewno chcesz opuścić „%(title)s“?"
@@ -4087,6 +4077,9 @@ msgstr "Galeria Flickr"
 msgid "Call to Action"
 msgstr "Wezwanie do Działania"
 
+msgid "Register and join!"
+msgstr "Zarejestruj się i dołącz!"
+
 msgid "Register"
 msgstr "Zarejestruj się"
 
@@ -4110,11 +4103,42 @@ msgstr "Trwa przetwarzanie prośby o członkostwo..."
 msgid "You are invited!"
 msgstr "Zostałeś/aś zaproszony/a!"
 
+msgid "Participation is open for everyone. You may instantly join and become a member."
+msgstr ""
+
+msgid "You may request to become a member and participate once your request has been accepted."
+msgstr ""
+
 msgid "Join now!"
 msgstr "Dołącz teraz!"
 
+#, fuzzy
+#| msgid "Team membership"
+msgid "Request membership"
+msgstr "Członkostwo w zespole"
+
+#, fuzzy, python-format
+#| msgid "Do you wish to request to join „%(title)s“?"
+msgid "Do you wish to join „%(title)s“ now?"
+msgstr "Czy chcesz poprosić o dołączenie do „%(title)s“?"
+
 msgid "Browse"
 msgstr "Przeglądaj"
+
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Register and apply!"
+msgstr "Zarejestruj się i dołącz!"
+
+#, fuzzy
+#| msgid "You have been invited to collaborate!"
+msgid "You have been invited to apply!"
+msgstr "Zostałeś/aś zaproszony/a do współpracy!"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Edit Application"
+msgstr "Nazwa aplikacji"
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -6714,6 +6738,9 @@ msgstr "Miejsce Twojej działalności?"
 msgid "Project members only"
 msgstr "Tylko członkowie zespołu"
 
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
 msgid "Collaborate!"
 msgstr "Współpracuj!"
 
@@ -6816,6 +6843,9 @@ msgstr "Miejsce Twojej działalności?"
 #| msgid "Team members only"
 msgid "Group members only"
 msgstr "Tylko członkowie zespołu"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
 
 #, fuzzy
 #| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
@@ -6943,6 +6973,9 @@ msgstr "Miejsce Twojej działalności?"
 #| msgid "Conference theme color"
 msgid "Conference members only"
 msgstr "Kolor tematyczny konferencji"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
 
 #, fuzzy
 #| msgid "Participants"
@@ -7638,9 +7671,6 @@ msgstr "Twoje zmiany zostały zapisane."
 
 #~ msgid "Invited you"
 #~ msgstr "Zaprosił/a Cię"
-
-#~ msgid "New membership request"
-#~ msgstr "Nowa prośba o dołączenie"
 
 #, fuzzy
 #~ msgid "Options"

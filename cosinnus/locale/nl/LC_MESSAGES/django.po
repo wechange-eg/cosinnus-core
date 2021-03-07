@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-03 13:11+0100\n"
+"POT-Creation-Date: 2021-03-07 17:51+0100\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1239,6 +1239,17 @@ msgstr "Project"
 msgid "Conference"
 msgstr "Configureer"
 
+#, fuzzy
+#| msgid "New membership request"
+msgid "Regular membership requests"
+msgstr "Nieuw lidmaatschapsverzoek"
+
+msgid "Require participation applications for this conference"
+msgstr ""
+
+msgid "Everyone may join"
+msgstr ""
+
 msgid "Project Type"
 msgstr "Project Type"
 
@@ -1265,6 +1276,11 @@ msgstr "Achtergrondafbeelding"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Weergegeven als grote bannerafbeelding op de Microsite (1140 x 240 px)"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application method"
+msgstr "Applicatienaam"
 
 msgid "Microsite Video"
 msgstr "Microsite Video"
@@ -1342,9 +1358,6 @@ msgstr "Startdatum."
 #| msgid "End date."
 msgid "End Datetime"
 msgstr "Einddatum."
-
-msgid "Determins if application management is visible in conference administration."
-msgstr ""
 
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
@@ -2889,11 +2902,6 @@ msgstr ""
 msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
 msgstr ""
 
-#, fuzzy
-#| msgid "Application name"
-msgid "Application method"
-msgstr "Applicatienaam"
-
 #, python-format
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr ""
@@ -3443,34 +3451,6 @@ msgid "No contact data has been added yet."
 msgstr "Er zijn nog geen contactgegevens toegevoegd."
 
 #, fuzzy
-#| msgid "Register and join!"
-msgid "Register and apply!"
-msgstr "Registreer en doe mee!"
-
-msgid "Register and join!"
-msgstr "Registreer en doe mee!"
-
-#, fuzzy
-#| msgid "You have been invited to collaborate!"
-msgid "You have been invited to apply!"
-msgstr "U bent uitgenodigd om samen te werken!"
-
-msgid "Decline Invitation"
-msgstr "Uitnodiging afwijzen"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "Wilt u de uitnodiging echt weigeren?"
-
-#, fuzzy
-#| msgid "Application name"
-msgid "Edit Application"
-msgstr "Applicatienaam"
-
-#, fuzzy
-msgid "Apply for Participation"
-msgstr "Deelnemers"
-
-#, fuzzy
 #| msgid "Protected Content"
 msgid "Your Deactivated Content"
 msgstr "Beschermde inhoud"
@@ -3548,6 +3528,9 @@ msgstr "Nodig leden uit"
 msgid "Revoke Invitation"
 msgstr "Uitnodiging intrekken"
 
+msgid "Decline Invitation"
+msgstr "Uitnodiging afwijzen"
+
 msgid "Accept Invitation"
 msgstr "Uitnodiging accepteren"
 
@@ -3560,6 +3543,9 @@ msgstr "Wilt u de uitnodiging voor lid “%(name)s” echt intrekken?"
 
 msgid "Revoke Invitation for Member"
 msgstr "Uitnodiging voor lid intrekken"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Wilt u de uitnodiging echt weigeren?"
 
 msgid "There are no pending invitations."
 msgstr "Er zijn geen openstaande uitnodigingen."
@@ -3735,10 +3721,10 @@ msgstr ""
 msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgstr ""
 
-msgid "Require participation applications for this conference"
+msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
 msgstr ""
 
-msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
+msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
 msgstr ""
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
@@ -3986,6 +3972,10 @@ msgstr "Verlaat"
 msgid "Details"
 msgstr "Details"
 
+#, fuzzy
+msgid "Apply for Participation"
+msgstr "Deelnemers"
+
 #, python-format
 msgid "Do you really want to leave „%(title)s“?"
 msgstr "Weet u zeker dat je „%(title)s“ wilt verlaten?"
@@ -4059,6 +4049,9 @@ msgstr "Flickr Galerij"
 msgid "Call to Action"
 msgstr "Bel voor Actie"
 
+msgid "Register and join!"
+msgstr "Registreer en doe mee!"
+
 msgid "Register"
 msgstr "Registreer"
 
@@ -4082,11 +4075,42 @@ msgstr "Lidmaatschapsverzoek in behandeling…"
 msgid "You are invited!"
 msgstr "U bent uitgenodigd!"
 
+msgid "Participation is open for everyone. You may instantly join and become a member."
+msgstr ""
+
+msgid "You may request to become a member and participate once your request has been accepted."
+msgstr ""
+
 msgid "Join now!"
 msgstr "Doe mee!"
 
+#, fuzzy
+#| msgid "Team membership"
+msgid "Request membership"
+msgstr "Team lidmaatschap"
+
+#, fuzzy, python-format
+#| msgid "Do you wish to request to join „%(title)s“?"
+msgid "Do you wish to join „%(title)s“ now?"
+msgstr "Wilt u een verzoek indienen om lid te worden van „%(title)s“?"
+
 msgid "Browse"
 msgstr "Blader"
+
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Register and apply!"
+msgstr "Registreer en doe mee!"
+
+#, fuzzy
+#| msgid "You have been invited to collaborate!"
+msgid "You have been invited to apply!"
+msgstr "U bent uitgenodigd om samen te werken!"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Edit Application"
+msgstr "Applicatienaam"
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -6697,6 +6721,9 @@ msgstr "Waar bent u actief?"
 msgid "Project members only"
 msgstr "Alleen teamleden"
 
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
 msgid "Collaborate!"
 msgstr "Werk samen!"
 
@@ -6801,6 +6828,9 @@ msgstr "Waar bent u actief?"
 #| msgid "Team members only"
 msgid "Group members only"
 msgstr "Alleen teamleden"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
 
 #, fuzzy
 #| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
@@ -6927,6 +6957,9 @@ msgstr "Waar bent u actief?"
 #| msgid "Team members only"
 msgid "Conference members only"
 msgstr "Alleen teamleden"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
 
 #, fuzzy
 #| msgid "Participants"
@@ -7575,9 +7608,6 @@ msgstr "Uw veranderingen zijn bewaard."
 
 #~ msgid "Nachrichten"
 #~ msgstr "Nieuws"
-
-#~ msgid "New membership request"
-#~ msgstr "Nieuw lidmaatschapsverzoek"
 
 #, fuzzy
 #~ msgid "Options"

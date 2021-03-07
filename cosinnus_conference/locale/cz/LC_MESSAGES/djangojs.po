@@ -163,6 +163,13 @@ msgstr ""
 msgid "Manage rooms"
 msgstr ""
 
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr ""
+
 #. [Name]
 #. defaultMessage is:
 #. undefined

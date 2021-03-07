@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-03 13:11+0100\n"
+"POT-Creation-Date: 2021-03-07 17:51+0100\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1257,6 +1257,17 @@ msgstr "Projekt"
 msgid "Conference"
 msgstr "Je konference"
 
+#, fuzzy
+#| msgid "Membership requests"
+msgid "Regular membership requests"
+msgstr "Žádosti o členství"
+
+msgid "Require participation applications for this conference"
+msgstr ""
+
+msgid "Everyone may join"
+msgstr ""
+
 msgid "Project Type"
 msgstr "Typ projektu"
 
@@ -1283,6 +1294,11 @@ msgstr "Obrázek tapety"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Zobrazen jako velký bannerový obrázek na mikrostránce (1140 x 240 px)"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application method"
+msgstr "Název aplikace"
 
 msgid "Microsite Video"
 msgstr "Video mikrostránky"
@@ -1358,9 +1374,6 @@ msgstr "Počáteční datum."
 #| msgid "End date."
 msgid "End Datetime"
 msgstr "Konečné datum."
-
-msgid "Determins if application management is visible in conference administration."
-msgstr ""
 
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
@@ -2919,11 +2932,6 @@ msgstr ""
 msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
 msgstr ""
 
-#, fuzzy
-#| msgid "Application name"
-msgid "Application method"
-msgstr "Název aplikace"
-
 #, python-format
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr ""
@@ -3458,35 +3466,6 @@ msgid "No contact data has been added yet."
 msgstr "Zatím nebyly přidány žádné kontaktní údaje."
 
 #, fuzzy
-#| msgid "Register and join!"
-msgid "Register and apply!"
-msgstr "Zaregistrujte se a připojte se!"
-
-msgid "Register and join!"
-msgstr "Zaregistrujte se a připojte se!"
-
-#, fuzzy
-#| msgid "You have been invited to collaborate!"
-msgid "You have been invited to apply!"
-msgstr "Byli jste pozváni ke spolupráci!"
-
-msgid "Decline Invitation"
-msgstr "Odmítnout pozvánku"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "Opravdu chcete odmítnout pozvánku?"
-
-#, fuzzy
-#| msgid "Application name"
-msgid "Edit Application"
-msgstr "Název aplikace"
-
-#, fuzzy
-#| msgid "Upload Participants"
-msgid "Apply for Participation"
-msgstr "Nahrajte účastníky"
-
-#, fuzzy
 #| msgid "Protected Content"
 msgid "Your Deactivated Content"
 msgstr "Chráněný obsah"
@@ -3563,6 +3542,9 @@ msgstr "Pozvaní členové"
 msgid "Revoke Invitation"
 msgstr "Odvolat pozvánku"
 
+msgid "Decline Invitation"
+msgstr "Odmítnout pozvánku"
+
 msgid "Accept Invitation"
 msgstr "Přijmout pozvánku"
 
@@ -3575,6 +3557,9 @@ msgstr "Opravdu chcete odvolat pozvánku pro člena \"%(name)s\"?"
 
 msgid "Revoke Invitation for Member"
 msgstr "Zrušit pozvánku pro člena"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Opravdu chcete odmítnout pozvánku?"
 
 msgid "There are no pending invitations."
 msgstr "Neexistují žádné nevyřízené pozvánky."
@@ -3750,10 +3735,10 @@ msgstr "Konference byla úspěšně zahájena a uživatelské účty aktivovány
 msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgstr ""
 
-msgid "Require participation applications for this conference"
+msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
 msgstr ""
 
-msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
+msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
 msgstr ""
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
@@ -4003,6 +3988,11 @@ msgstr "Odejít"
 msgid "Details"
 msgstr "Detaily"
 
+#, fuzzy
+#| msgid "Upload Participants"
+msgid "Apply for Participation"
+msgstr "Nahrajte účastníky"
+
 #, python-format
 msgid "Do you really want to leave „%(title)s“?"
 msgstr "Opravdu chcete opustit „%(title)s“?"
@@ -4073,6 +4063,9 @@ msgstr "Galerie Flickr"
 msgid "Call to Action"
 msgstr "Výzva k akci"
 
+msgid "Register and join!"
+msgstr "Zaregistrujte se a připojte se!"
+
 msgid "Register"
 msgstr "Registrovat"
 
@@ -4096,11 +4089,42 @@ msgstr "Nevyřízená žádost o členství..."
 msgid "You are invited!"
 msgstr "Jste pozváni!"
 
+msgid "Participation is open for everyone. You may instantly join and become a member."
+msgstr ""
+
+msgid "You may request to become a member and participate once your request has been accepted."
+msgstr ""
+
 msgid "Join now!"
 msgstr "Připojit se teď!"
 
+#, fuzzy
+#| msgid "Team membership"
+msgid "Request membership"
+msgstr "Členství v týmu"
+
+#, fuzzy, python-format
+#| msgid "Do you wish to request to join „%(title)s“?"
+msgid "Do you wish to join „%(title)s“ now?"
+msgstr "Chcete požádat o připojení k „%(title)s“?"
+
 msgid "Browse"
 msgstr "Procházet"
+
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Register and apply!"
+msgstr "Zaregistrujte se a připojte se!"
+
+#, fuzzy
+#| msgid "You have been invited to collaborate!"
+msgid "You have been invited to apply!"
+msgstr "Byli jste pozváni ke spolupráci!"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Edit Application"
+msgstr "Název aplikace"
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -6699,6 +6723,9 @@ msgstr "Kde jste aktivní?"
 msgid "Project members only"
 msgstr "Jen členové týmu"
 
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
 msgid "Collaborate!"
 msgstr "Spolupracovat!"
 
@@ -6801,6 +6828,9 @@ msgstr "Kde jste aktivní?"
 #| msgid "Team members only"
 msgid "Group members only"
 msgstr "Jen členové týmu"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
 
 #, fuzzy
 #| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
@@ -6923,6 +6953,9 @@ msgstr "Kde jste aktivní?"
 #, fuzzy
 msgid "Conference members only"
 msgstr "Vedení konference"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
 
 #, fuzzy
 #| msgid "Participants"

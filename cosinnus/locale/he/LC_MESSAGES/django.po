@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-03 13:11+0100\n"
+"POT-Creation-Date: 2021-03-07 17:51+0100\n"
 "PO-Revision-Date: 2020-09-29 18:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1286,6 +1286,17 @@ msgstr "פרויקט"
 msgid "Conference"
 msgstr "הוועידה פועלת"
 
+#, fuzzy
+#| msgid "Membership requests"
+msgid "Regular membership requests"
+msgstr "בקשות חברות"
+
+msgid "Require participation applications for this conference"
+msgstr ""
+
+msgid "Everyone may join"
+msgstr ""
+
 msgid "Project Type"
 msgstr "סוג פרויקט"
 
@@ -1312,6 +1323,11 @@ msgstr "תמונת טפט"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "מוצג כתמונת מודעה גדולה על ה- Microsite (1140 x 240 px)"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application method"
+msgstr "שם יישום"
 
 msgid "Microsite Video"
 msgstr "סרטון Microsite"
@@ -1389,9 +1405,6 @@ msgstr "תאריך התחלה."
 #| msgid "End date."
 msgid "End Datetime"
 msgstr "תאריך סיום."
-
-msgid "Determins if application management is visible in conference administration."
-msgstr ""
 
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
@@ -2967,11 +2980,6 @@ msgstr ""
 msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
 msgstr ""
 
-#, fuzzy
-#| msgid "Application name"
-msgid "Application method"
-msgstr "שם יישום"
-
 #, python-format
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr ""
@@ -3522,35 +3530,6 @@ msgid "No contact data has been added yet."
 msgstr "עדיין לא נוספו נתוני איש קשר."
 
 #, fuzzy
-#| msgid "Register and join!"
-msgid "Register and apply!"
-msgstr "הירשם והצטרף!"
-
-msgid "Register and join!"
-msgstr "הירשם והצטרף!"
-
-#, fuzzy
-#| msgid "You have been invited to collaborate!"
-msgid "You have been invited to apply!"
-msgstr "הוזמנת לשתף פעולה!"
-
-msgid "Decline Invitation"
-msgstr "דחה הזמנה"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "האם אתה בטוח שברצונך לדחות את ההזמנה?"
-
-#, fuzzy
-#| msgid "Application name"
-msgid "Edit Application"
-msgstr "שם יישום"
-
-#, fuzzy
-#| msgid "Upload Participants"
-msgid "Apply for Participation"
-msgstr "העלאת משתתפים"
-
-#, fuzzy
 #| msgid "Protected Content"
 msgid "Your Deactivated Content"
 msgstr "תוכן מוגן"
@@ -3627,6 +3606,9 @@ msgstr "חברים מוזמנים"
 msgid "Revoke Invitation"
 msgstr "בטל הזמנה"
 
+msgid "Decline Invitation"
+msgstr "דחה הזמנה"
+
 msgid "Accept Invitation"
 msgstr "קבל הזמנה"
 
@@ -3639,6 +3621,9 @@ msgstr "האם אתה בטוח שברצונך לבטל את ההזמנה עבו�
 
 msgid "Revoke Invitation for Member"
 msgstr "בטל הזמנה לחבר"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "האם אתה בטוח שברצונך לדחות את ההזמנה?"
 
 msgid "There are no pending invitations."
 msgstr "אין הזמנות ממתינות."
@@ -3814,10 +3799,10 @@ msgstr "הוועידה הופעלה בהצלחה וחשבונות משתמשים
 msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgstr ""
 
-msgid "Require participation applications for this conference"
+msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
 msgstr ""
 
-msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
+msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
 msgstr ""
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
@@ -4069,6 +4054,11 @@ msgstr "עזוב"
 msgid "Details"
 msgstr "פרטים"
 
+#, fuzzy
+#| msgid "Upload Participants"
+msgid "Apply for Participation"
+msgstr "העלאת משתתפים"
+
 #, python-format
 msgid "Do you really want to leave „%(title)s“?"
 msgstr "האם אתה בטוח שברצונך להשאיר את „%(title)s“?"
@@ -4139,6 +4129,9 @@ msgstr "גלריית Flickr"
 msgid "Call to Action"
 msgstr "פקודת הפעלה"
 
+msgid "Register and join!"
+msgstr "הירשם והצטרף!"
+
 msgid "Register"
 msgstr "הירשם"
 
@@ -4162,11 +4155,42 @@ msgstr "בקשת חברות ממתינה..."
 msgid "You are invited!"
 msgstr "הוזמנת!"
 
+msgid "Participation is open for everyone. You may instantly join and become a member."
+msgstr ""
+
+msgid "You may request to become a member and participate once your request has been accepted."
+msgstr ""
+
 msgid "Join now!"
 msgstr "הצטרף עכשיו!"
 
+#, fuzzy
+#| msgid "Team membership"
+msgid "Request membership"
+msgstr "חברות בצוות"
+
+#, fuzzy, python-format
+#| msgid "Do you wish to request to join „%(title)s“?"
+msgid "Do you wish to join „%(title)s“ now?"
+msgstr "האם ברצונך לבקש להצטרף ל-„%(title)s“?"
+
 msgid "Browse"
 msgstr "דפדף"
+
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Register and apply!"
+msgstr "הירשם והצטרף!"
+
+#, fuzzy
+#| msgid "You have been invited to collaborate!"
+msgid "You have been invited to apply!"
+msgstr "הוזמנת לשתף פעולה!"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Edit Application"
+msgstr "שם יישום"
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -6801,6 +6825,9 @@ msgstr "איפה אתה פעיל?"
 msgid "Project members only"
 msgstr "חברי צוות בלבד"
 
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
 msgid "Collaborate!"
 msgstr "שתף פעולה!"
 
@@ -6903,6 +6930,9 @@ msgstr "איפה אתה פעיל?"
 #| msgid "Team members only"
 msgid "Group members only"
 msgstr "חברי צוות בלבד"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
 
 #, fuzzy
 #| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
@@ -7034,6 +7064,9 @@ msgstr "איפה אתה פעיל?"
 #| msgid "Conference Management"
 msgid "Conference members only"
 msgstr "ניהול כנסים"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
 
 #, fuzzy
 #| msgid "Participants"

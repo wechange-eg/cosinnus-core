@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-03 13:11+0100\n"
+"POT-Creation-Date: 2021-03-07 17:51+0100\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1242,6 +1242,17 @@ msgstr "Proiect"
 msgid "Conference"
 msgstr "Este conferință"
 
+#, fuzzy
+#| msgid "New membership request"
+msgid "Regular membership requests"
+msgstr "Nouă solicitare de membru"
+
+msgid "Require participation applications for this conference"
+msgstr ""
+
+msgid "Everyone may join"
+msgstr ""
+
 msgid "Project Type"
 msgstr "Tip de proiect"
 
@@ -1268,6 +1279,11 @@ msgstr "Imagine de tapet"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Este afișată ca imagine de banner mare pe Microsite (1140 x 240 px)"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application method"
+msgstr "Numele Aplicației"
 
 msgid "Microsite Video"
 msgstr "Video Microsite"
@@ -1341,9 +1357,6 @@ msgstr "Data de început."
 #| msgid "End date."
 msgid "End Datetime"
 msgstr "Data de sfârșit."
-
-msgid "Determins if application management is visible in conference administration."
-msgstr ""
 
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
@@ -2903,11 +2916,6 @@ msgstr ""
 msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
 msgstr ""
 
-#, fuzzy
-#| msgid "Application name"
-msgid "Application method"
-msgstr "Numele Aplicației"
-
 #, python-format
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr ""
@@ -3472,34 +3480,6 @@ msgid "No contact data has been added yet."
 msgstr "Nu au fost adăugate încă date de contact."
 
 #, fuzzy
-#| msgid "Register and join!"
-msgid "Register and apply!"
-msgstr "Înregistrați-vă și alăturați-vă!"
-
-msgid "Register and join!"
-msgstr "Înregistrați-vă și alăturați-vă!"
-
-#, fuzzy
-#| msgid "You have been invited to collaborate!"
-msgid "You have been invited to apply!"
-msgstr "Ai fost invitat să colaborezi!"
-
-msgid "Decline Invitation"
-msgstr "Refuză Invitația"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "Chiar vrei să refuzi invitația?"
-
-#, fuzzy
-#| msgid "Application name"
-msgid "Edit Application"
-msgstr "Numele Aplicației"
-
-#, fuzzy
-msgid "Apply for Participation"
-msgstr "Participanți"
-
-#, fuzzy
 #| msgid "Protected Content"
 msgid "Your Deactivated Content"
 msgstr "Conținutul Protejat"
@@ -3576,6 +3556,9 @@ msgstr "Membrii invitați"
 msgid "Revoke Invitation"
 msgstr "Revocă Invitația"
 
+msgid "Decline Invitation"
+msgstr "Refuză Invitația"
+
 msgid "Accept Invitation"
 msgstr "Acceptă Invitația"
 
@@ -3588,6 +3571,9 @@ msgstr "Doriți cu adevărat să revocați invitația pentru membru „%(name)s�
 
 msgid "Revoke Invitation for Member"
 msgstr "Revocă Invitația pentru Membru"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Chiar vrei să refuzi invitația?"
 
 msgid "There are no pending invitations."
 msgstr "Nu există invitații în așteptare."
@@ -3763,10 +3749,10 @@ msgstr "Conferința a început cu succes și conturile de utilizator activate"
 msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgstr ""
 
-msgid "Require participation applications for this conference"
+msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
 msgstr ""
 
-msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
+msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
 msgstr ""
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
@@ -4014,6 +4000,10 @@ msgstr "Lăsați"
 msgid "Details"
 msgstr "Detalii"
 
+#, fuzzy
+msgid "Apply for Participation"
+msgstr "Participanți"
+
 #, python-format
 msgid "Do you really want to leave „%(title)s“?"
 msgstr "Chiar vrei să lași „%(title)s”?"
@@ -4084,6 +4074,9 @@ msgstr "Galeria Flickr"
 msgid "Call to Action"
 msgstr "Apel la Acțiune"
 
+msgid "Register and join!"
+msgstr "Înregistrați-vă și alăturați-vă!"
+
 msgid "Register"
 msgstr "Înregistrează-te"
 
@@ -4107,11 +4100,42 @@ msgstr "Cerere de membru în așteptare..."
 msgid "You are invited!"
 msgstr "Ești invitat!"
 
+msgid "Participation is open for everyone. You may instantly join and become a member."
+msgstr ""
+
+msgid "You may request to become a member and participate once your request has been accepted."
+msgstr ""
+
 msgid "Join now!"
 msgstr "Alătură-te acum!"
 
+#, fuzzy
+#| msgid "Team membership"
+msgid "Request membership"
+msgstr "Calitatea de membru al echipei"
+
+#, fuzzy, python-format
+#| msgid "Do you wish to request to join „%(title)s“?"
+msgid "Do you wish to join „%(title)s“ now?"
+msgstr "Doriți să solicitați și să vă alăturați „%(title)s”?"
+
 msgid "Browse"
 msgstr "Naviga"
+
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Register and apply!"
+msgstr "Înregistrați-vă și alăturați-vă!"
+
+#, fuzzy
+#| msgid "You have been invited to collaborate!"
+msgid "You have been invited to apply!"
+msgstr "Ai fost invitat să colaborezi!"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Edit Application"
+msgstr "Numele Aplicației"
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -6706,6 +6730,9 @@ msgstr "Unde ești activ?"
 msgid "Project members only"
 msgstr "Doar membrii echipei"
 
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
 msgid "Collaborate!"
 msgstr "Colabora!"
 
@@ -6808,6 +6835,9 @@ msgstr "Unde ești activ?"
 #| msgid "Team members only"
 msgid "Group members only"
 msgstr "Doar membrii echipei"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
 
 #, fuzzy
 #| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
@@ -6935,6 +6965,9 @@ msgstr "Unde ești activ?"
 #| msgid "Conference theme color"
 msgid "Conference members only"
 msgstr "Culoarea temei conferinței"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
 
 #, fuzzy
 #| msgid "Participants"
@@ -7599,9 +7632,6 @@ msgstr "Schimbările tale au fost salvate."
 
 #~ msgid "Nachrichten"
 #~ msgstr "Știri"
-
-#~ msgid "New membership request"
-#~ msgstr "Nouă solicitare de membru"
 
 #, fuzzy
 #~ msgid "Options"

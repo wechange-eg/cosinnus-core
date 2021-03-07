@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-03 13:11+0100\n"
+"POT-Creation-Date: 2021-03-07 17:51+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1228,6 +1228,15 @@ msgstr ""
 msgid "Conference"
 msgstr "Create Project"
 
+msgid "Regular membership requests"
+msgstr ""
+
+msgid "Require participation applications for this conference"
+msgstr ""
+
+msgid "Everyone may join"
+msgstr ""
+
 msgid "Project Type"
 msgstr "Project Type"
 
@@ -1253,6 +1262,9 @@ msgid "Wallpaper image"
 msgstr ""
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
+msgstr ""
+
+msgid "Application method"
 msgstr ""
 
 msgid "Microsite Video"
@@ -1322,9 +1334,6 @@ msgid "Start Datetime"
 msgstr ""
 
 msgid "End Datetime"
-msgstr ""
-
-msgid "Determins if application management is visible in conference administration."
 msgstr ""
 
 msgid "Allow temporary users accounts for this conference."
@@ -2827,9 +2836,6 @@ msgstr ""
 msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
 msgstr ""
 
-msgid "Application method"
-msgstr ""
-
 #, python-format
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr ""
@@ -3345,28 +3351,6 @@ msgstr ""
 msgid "No contact data has been added yet."
 msgstr ""
 
-msgid "Register and apply!"
-msgstr ""
-
-msgid "Register and join!"
-msgstr ""
-
-msgid "You have been invited to apply!"
-msgstr ""
-
-msgid "Decline Invitation"
-msgstr ""
-
-#, fuzzy
-msgid "Do you really want to decline the invitation?"
-msgstr "Do you really want to leave project „%(title)s“?"
-
-msgid "Edit Application"
-msgstr ""
-
-msgid "Apply for Participation"
-msgstr ""
-
 #, fuzzy
 msgid "Your Deactivated Content"
 msgstr "Project Type"
@@ -3438,6 +3422,9 @@ msgstr ""
 msgid "Revoke Invitation"
 msgstr ""
 
+msgid "Decline Invitation"
+msgstr ""
+
 msgid "Accept Invitation"
 msgstr ""
 
@@ -3450,6 +3437,10 @@ msgstr "Do you really want to leave project „%(title)s“?"
 
 msgid "Revoke Invitation for Member"
 msgstr ""
+
+#, fuzzy
+msgid "Do you really want to decline the invitation?"
+msgstr "Do you really want to leave project „%(title)s“?"
 
 #, fuzzy
 msgid "There are no pending invitations."
@@ -3625,10 +3616,10 @@ msgstr ""
 msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgstr ""
 
-msgid "Require participation applications for this conference"
+msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
 msgstr ""
 
-msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
+msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
 msgstr ""
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
@@ -3874,6 +3865,9 @@ msgstr ""
 msgid "Details"
 msgstr "Details"
 
+msgid "Apply for Participation"
+msgstr ""
+
 #, python-format
 msgid "Do you really want to leave „%(title)s“?"
 msgstr "Do you really want to leave project „%(title)s“?"
@@ -3948,6 +3942,9 @@ msgstr ""
 msgid "Call to Action"
 msgstr ""
 
+msgid "Register and join!"
+msgstr ""
+
 msgid "Register"
 msgstr ""
 
@@ -3973,11 +3970,35 @@ msgstr ""
 msgid "You are invited!"
 msgstr ""
 
+msgid "Participation is open for everyone. You may instantly join and become a member."
+msgstr ""
+
+msgid "You may request to become a member and participate once your request has been accepted."
+msgstr ""
+
 #, fuzzy
 msgid "Join now!"
 msgstr "Join Project"
 
+#, fuzzy
+msgid "Request membership"
+msgstr "Convert selected Projects to Groups"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you wish to join „%(title)s“ now?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
 msgid "Browse"
+msgstr ""
+
+msgid "Register and apply!"
+msgstr ""
+
+msgid "You have been invited to apply!"
+msgstr ""
+
+msgid "Edit Application"
 msgstr ""
 
 #, python-format
@@ -6395,6 +6416,9 @@ msgstr ""
 msgid "Project members only"
 msgstr "Project Type"
 
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
 msgid "Collaborate!"
 msgstr ""
 
@@ -6480,6 +6504,9 @@ msgid "Where is the group active?"
 msgstr ""
 
 msgid "Group members only"
+msgstr ""
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
 msgstr ""
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
@@ -6579,6 +6606,9 @@ msgid "Where is the conference active?"
 msgstr "Create Project"
 
 msgid "Conference members only"
+msgstr ""
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
 msgstr ""
 
 msgid "Participate!"
