@@ -130,7 +130,9 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
     
     def get_header_notification(self, obj):
         user = self.context['request'].user
-        if check_ug_admin(user, obj) or check_user_superuser(user):
+        # show a premium notification for admins
+        if (settings.COSINNUS_PREMIUM_CONFERENCES_ENABLED and not obj.is_premium) \
+                and (check_ug_admin(user, obj) or check_user_superuser(user)):
             header_notification = {
                 'notification_text': _('Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:'),
                 'link_text': _('Conference Bookings'),

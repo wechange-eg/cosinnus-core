@@ -1,7 +1,8 @@
 import React, {useState} from "react"
 import {
-  ListItemText, Drawer, Typography, List, ListItem, Badge, Button, Divider, Link, Card, GridList, GridListTile
+  Link
 } from "@material-ui/core"
+import Alert from '@material-ui/lab/Alert';
 import {connect} from "react-redux"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {
@@ -23,7 +24,7 @@ import {Room} from "../../../stores/room/models"
 import {Conference} from "../../../stores/conference/models"
 import {Participant} from "../../../stores/participants/models"
 
-interface HeaderProps {
+interface NotificationProps {
   conference: Conference
 }
 
@@ -36,33 +37,30 @@ function mapStateToProps(state: RootState) {
 const mapDispatchToProps = {
 }
 
-function HeaderConnector(props: HeaderProps) {
+function NotificationConnector(props: NotificationProps) {
   const { conference } = props
   const classes = useStyles()
   if (!conference) {
     return null
   }
-  if (!conference.props.wallpaper && (!conference.props.images || conference.props.images.length === 0)) {
+  if (!conference.props.headerNotification || !conference.props.headerNotification.notificationText) {
     return null
   }
   return (
-    <div className={classes.header}>
-      {conference.props.wallpaper && (
-        <img
-          src={conference.props.wallpaper}
-          alt={conference.props.name}
-          className={classes.wallpaper}
-        />
+    <div className={classes.notification}>
+      {conference.props.headerNotification.notificationText && (
+        <Alert
+          severity="warning"
+          action={
+            <Link href={conference.props.headerNotification.linkUrl}>
+              {conference.props.headerNotification.linkText}
+            </Link>
+          }>
+          <span className="description" dangerouslySetInnerHTML={{__html: conference.props.headerNotification.notificationText}} />
+        </Alert>
       )}
-      <GridList className={classes.images} cols={6} spacing={20}>
-        {conference.props.images.map((img) => (
-          <GridListTile key={img}>
-            <img src={img} alt="" />
-          </GridListTile>
-        ))}
-      </GridList>
     </div>
   )
 }
 
-export const Header = connect(mapStateToProps, mapDispatchToProps)(HeaderConnector)
+export const Notification = connect(mapStateToProps, mapDispatchToProps)(NotificationConnector)
