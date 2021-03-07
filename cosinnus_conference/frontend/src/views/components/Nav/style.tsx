@@ -117,5 +117,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   dialogText: {
     color: theme.palette.text.primary
+  },
+  divider: {
+    margin: "15px 0",
+    border: "0",
+    borderTop: "1px solid",
+    borderTopColor: theme.palette.text.secondary,
+    boxSizing: "inherit",
   }
 }));

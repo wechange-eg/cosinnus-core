@@ -26,7 +26,8 @@ __all__ = ('ConferenceSerializer', )
 
 from cosinnus.utils.files import image_thumbnail_url
 
-from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
+from cosinnus.utils.permissions import check_ug_admin, check_user_superuser,\
+    check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_event.models import ConferenceEvent
 
@@ -122,13 +123,19 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_management_urls(self, obj):
         user = self.context['request'].user
+        management_urls = {}
+        # available for all members
+        if check_ug_membership(user, obj) or check_user_superuser(user):
+            management_urls.update({
+                'manage_memberships': group_aware_reverse('cosinnus:group-detail', kwargs={'group': obj})
+            })
         if check_ug_admin(user, obj) or check_user_superuser(user):
-            return {
-                'manage_conference': group_aware_reverse('cosinnus:group-detail', kwargs={'group': obj}),
+            management_urls.update({
+                'manage_conference': group_aware_reverse('cosinnus:group-edit', kwargs={'group': obj}),
                 'manage_rooms': group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': obj}),
                 'manage_events': group_aware_reverse('cosinnus:event:conference-event-list', kwargs={'group': obj}),
-            }
-        return ""
+            })
+        return management_urls
     
     def get_header_notification(self, obj):
         user = self.context['request'].user

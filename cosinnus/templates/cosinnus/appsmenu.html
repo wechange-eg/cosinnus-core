@@ -114,7 +114,7 @@
 	            {% endif %}
 	        {% endif%}
 	        
-	        {% if request.user in group.members.pk or request.user.pk in group.admins or request.user|is_superuser or group.public and not group.group_is_conference %}
+	        {% if request.user.pk in group.members or request.user.pk in group.admins or request.user|is_superuser or group.public and not group.group_is_conference %}
 		        <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %}">
 		            <a href="{{ group_detail_page }}">
 		                <i class="fa fa-fw fa-group"></i>

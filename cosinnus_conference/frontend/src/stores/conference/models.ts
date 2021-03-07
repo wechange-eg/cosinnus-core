@@ -9,6 +9,7 @@ export interface ConferenceJson {
     manage_conference: string
     manage_rooms: string
     manage_events: string
+    manage_memberships: string
   }
   header_notification: {
     notification_text: string
@@ -31,6 +32,7 @@ export interface ConferenceProps {
     manageConference: string
     manageRooms: string
     manageEvents: string
+    manageMemberships: string
   }
   headerNotification: {
     notificationText: string
@@ -67,6 +69,7 @@ export class Conference {
         manageConference: json.management_urls.manage_conference,
         manageRooms: json.management_urls.manage_rooms,
         manageEvents: json.management_urls.manage_events,
+        manageMemberships: json.management_urls.manage_memberships,
       },
       headerNotification: {
         notificationText: json.header_notification.notification_text,
@@ -110,6 +113,7 @@ export class Conference {
         manage_conference: props.managementUrls.manageConference,
         manage_rooms: props.managementUrls.manageRooms,
         manage_events: props.managementUrls.manageEvents,
+        manage_memberships: props.managementUrls.manageMemberships,
       },  
       header_notification: {
         notification_text: props.headerNotification.notificationText,

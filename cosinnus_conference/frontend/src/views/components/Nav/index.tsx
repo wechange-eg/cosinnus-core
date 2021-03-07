@@ -138,8 +138,12 @@ function NavConnector(props: NavProps) {
               <Badge badgeContent={navRoom.props.count} className={classes.badge} />
             </ListItem>
         ))}
-        {(conference.props.managementUrls.manageConference || conference.props.managementUrls.manageRooms ) && (
-          <Divider />
+        {(conference.props.managementUrls.manageConference || conference.props.managementUrls.manageRooms
+          || conference.props.managementUrls.manageEvents || conference.props.managementUrls.manageMemberships ) && (
+          <Divider classes={{
+              root: classes.divider,
+            }}
+          />
         )}
         {conference.props.managementUrls.manageConference && (
         <ListItem
@@ -163,14 +167,24 @@ function NavConnector(props: NavProps) {
           <ListItemText primary={<FormattedMessage id="Manage rooms" />} />
         </ListItem>
         )}
-        {conference.props.managementUrls.Events && (
+        {conference.props.managementUrls.manageEvents && (
         <ListItem
           button
-          href={conference.props.managementUrls.Events}
+          href={conference.props.managementUrls.manageEvents}
           className={classes.listItem}
         >
           <FontAwesomeIcon icon={faCalendar} />&nbsp;
           <ListItemText primary={<FormattedMessage id="Manage events" />} />
+        </ListItem>
+        )}
+        {conference.props.managementUrls.manageMemberships && (
+        <ListItem
+          button
+          href={conference.props.managementUrls.manageMemberships}
+          className={classes.listItem}
+        >
+          <FontAwesomeIcon icon={faUsersCog} />&nbsp;
+          <ListItemText primary={<FormattedMessage id="Membership" />} />
         </ListItem>
         )}
       </List>
