@@ -1029,6 +1029,15 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         return bool(self.membership_mode == self.MEMBERSHIP_MODE_APPLICATION)
     
     @property
+    def is_autojoin_group(self):
+        """ Shortcut to determine if a user joining this group will be instantly 
+            accepted instead of creating a join request for the administrators.
+            This checks the membership_mode of the group, as well as the 
+            settings.COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS setting for this portal. """
+        return bool(self.membership_mode == self.MEMBERSHIP_MODE_AUTOJOIN \
+                    or (self.slug and self.slug in settings.COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS))
+    
+    @property
     def is_premium(self):
         """ Shortcut to determine if a group is in premium state right now """
         return self.is_premium_currently or self.is_premium_permanently
