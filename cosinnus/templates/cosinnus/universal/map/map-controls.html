@@ -41,6 +41,43 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 	        </div>
         {% endif %}
 
+		<ol id="date-time-filter" class="input-area" style="display: none;">
+			<li class="calendar-date-time-chooser">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "From" %}
+				<i class="fa fa-calendar"></i>
+				<input
+					placeholder="{# Translators: __INCLUDE_JS_PO__ #}{% trans "Date" %}"
+					readonly ="readonly"
+					class="calendar-date-time-chooser-date" />
+				<input class="calendar-date-time-chooser-hiddendate" id="id_start_0" name="start_0"
+					placeholder="{% trans "Start date." %}" type="hidden"
+				>
+				<input class="calendar-date-time-chooser-time" id="id_start_1" name="start_1"
+					placeholder="00:00" type="text"
+				>
+				<div class="small-calendar"></div>
+			</li>
+
+			<li class="calendar-date-time-chooser">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Until" %}
+				<i class="fa fa-calendar"></i>
+				<input
+					placeholder="{# Translators: __INCLUDE_JS_PO__ #} {% trans "Date" %}"
+					readonly ="readonly"
+					class="calendar-date-time-chooser-date" />
+				<input class="calendar-date-time-chooser-hiddendate" id="id_end_0" name="end_0"
+					placeholder="{# Translators: __INCLUDE_JS_PO__ #}{% trans "End date." %}" type="hidden"
+				>
+				<input class="calendar-date-time-chooser-time" id="id_end_1" name="end_1"
+					placeholder="00:00" type="text"
+
+				>
+				<div class="small-calendar"></div>
+			</li>
+		</ol>
+
         {% if allSDGS|length > 0 %}
 	        <h1>
 	            {# Translators: __INCLUDE_JS_PO__ #}

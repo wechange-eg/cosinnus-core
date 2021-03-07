@@ -195,6 +195,15 @@ module.exports = ContentControlView.extend({
             this.$el.find('.topic-button').length == this.$el.find('.topic-button.selected').length) {
             this.$el.find('.topic-button').removeClass('selected');
         }
+
+        var type = $button.attr('data-result-filter-type')
+        if((type === 'events' || type === 'conferences') && !$button.hasClass('selected')) {
+            $('#date-time-filter').show()
+            $.cosinnus.calendarDayTimeChooser();
+            $.cosinnus.fullcalendar();
+        } else {
+            $('#date-time-filter').hide()
+        }
         // toggle the button
         $button.toggleClass('selected');
         // mark search box as searchable
@@ -1345,6 +1354,36 @@ module.exports = ContentControlView.extend({
             projects: this.state.activeFilters.projects,
             groups: this.state.activeFilters.groups,
         };
+
+        var fromDate = $('#id_start_0')[0].value
+        var fromTime = $('#id_start_1')[0].value
+
+        var toDate = $('#id_end_0')[0].value
+        var toTime = $('#id_end_1')[0].value
+
+        if (fromDate) {
+            _.extend(searchParams, {
+                fromDate: fromDate
+            });
+            if (fromTime) {
+                _.extend(searchParams, {
+                    fromTime: fromTime
+                });
+            }
+        }
+
+        if (toDate) {
+            _.extend(searchParams, {
+                toDate: toDate
+            });
+            if (toTime) {
+                _.extend(searchParams, {
+                    toTime: toTime
+                });
+            }
+        }
+
+
         if (COSINNUS_IDEAS_ENABLED) {
         	_.extend(searchParams, {
                 ideas: this.state.activeFilters.ideas
