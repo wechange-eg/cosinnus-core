@@ -313,6 +313,18 @@ class CosinnusConf(AppConf):
     # number of members displayed in the group widet
     GROUP_MEMBER_WIDGET_USER_COUNT = 19
     
+    # a dict by group type for the allowed membership modes
+    # for each group type.
+    # Note: mode 1 (applications) should stay reserved for type 2 (conferences)
+    GROUP_MEMBERSHIP_MODE_CHOICES = {
+        # projects
+        0: [0, 2], # regular, auto-join
+        # groups
+        1: [0, 2], # regular, auto-join
+        # conferences
+        2: [0, 1, 2], # regular, applications, auto-join
+    }
+    
     # widgets listed here will be created for the group dashboard upon CosinnusGroup creation.
     # this. will check if the cosinnus app is installed and if the widget is registered, so
     # invalid entries do not produce errors

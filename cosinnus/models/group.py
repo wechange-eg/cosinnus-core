@@ -676,6 +676,22 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         (TYPE_SOCIETY, _('Group')),
         (TYPE_CONFERENCE, _('Conference')),
     )
+    
+    # the "normal" group join method - users request to be members, admin approve/decline them
+    MEMBERSHIP_MODE_REQUEST = 0
+    # the "conference" method - users create an application, admins sort through them and
+    # accept/decline them with an optional reason
+    # Note: this replaces the old bool modelfield `use_conference_applications`
+    MEMBERSHIP_MODE_APPLICATION = 1
+    # the "everyone can join" method - users can become a member instantly without any approval system
+    MEMBERSHIP_MODE_AUTOJOIN = 2
+    
+    # this can and will be overridden by the specific group models!
+    MEMBERSHIP_MODE_CHOICES = [
+        (MEMBERSHIP_MODE_REQUEST, _('Regular membership requests')),
+        (MEMBERSHIP_MODE_APPLICATION, _('Require participation applications for this conference')),
+        (MEMBERSHIP_MODE_AUTOJOIN, _('Everyone may join')),
+    ]
 
     GROUP_MODEL_TYPE = TYPE_PROJECT
 
@@ -720,7 +736,11 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
                                    related_name='cosinnus_groups', through='cosinnus.CosinnusGroupMembership')
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
                                      blank=True, null=True, editable=False, on_delete=models.SET_NULL)
-
+    
+    membership_mode = models.PositiveSmallIntegerField(_('Application method'),
+                                                       default=MEMBERSHIP_MODE_REQUEST,
+                                                       choices=MEMBERSHIP_MODE_CHOICES
+                                                       )
     # microsite-embeds:
     video = models.URLField(_('Microsite Video'), max_length=200, blank=True, null=True,
                             validators=[MaxLengthValidator(200)])
@@ -789,10 +809,6 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
                                      help_text='Used for conferences to determine overall running time period.')
     to_date = models.DateTimeField(_('End Datetime'), default=None, blank=True, null=True,
                                      help_text='Used for conferences to determine overall running time period.')
-
-    use_conference_applications = models.BooleanField(_('Determins if application management is visible in conference administration.'),
-                                                      default=False
-                                                     )
     
     allow_conference_temporary_users = models.BooleanField(_('Allow temporary users accounts for this conference.'),
                                                           default=False,
@@ -1004,6 +1020,13 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         )
         group.update_index()
         return group
+    
+    @property
+    def use_conference_applications(self):
+        """ Shortcut to determine if the group uses CosinnusConferenceApplication as 
+            membership request mode. 
+            Replacement for the old bool modelfield that existed. """
+        return bool(self.membership_mode == self.MEMBERSHIP_MODE_APPLICATION)
     
     @property
     def is_premium(self):
