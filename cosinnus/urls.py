@@ -299,8 +299,8 @@ urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
 router = routers.SimpleRouter()
-router.register(r'public_conferences', PublicConferenceViewSet)
-router.register(r'conferences', ConferenceViewSet)
+router.register(r'conferences', PublicConferenceViewSet)
+router.register(r'user_conferences', ConferenceViewSet)
 router.register(r'groups', CosinnusSocietyViewSet)
 router.register(r'projects', CosinnusProjectViewSet)
 router.register(r'organizations', OrganizationViewSet)

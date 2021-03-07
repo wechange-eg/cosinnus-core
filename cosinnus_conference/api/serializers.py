@@ -19,6 +19,7 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _, get_language
 from django.template.loader import render_to_string
 from django.template.context import Context
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 
 
 __all__ = ('ConferenceSerializer', )
@@ -104,11 +105,12 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
     wallpaper = serializers.SerializerMethodField()
     images = serializers.SerializerMethodField()
     header_notification = serializers.SerializerMethodField()
+    managed_tags = serializers.SerializerMethodField()
 
     class Meta(object):
         model = CosinnusGroup
         fields = ('id', 'name', 'description', 'rooms', 'management_urls', 'theme_color', 'dates', 'avatar',
-                  'wallpaper', 'images', 'header_notification')
+                  'wallpaper', 'images', 'header_notification', 'managed_tags')
 
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
@@ -158,7 +160,10 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_images(self, obj):
         return [img.image.url for img in obj.gallery_images.all()]
-
+    
+    def get_managed_tags(self, obj):
+        return [tag.slug for tag in obj.get_managed_tags()]
+    
 
 class ConferenceParticipant(serializers.ModelSerializer):
     organisation = serializers.SerializerMethodField()
