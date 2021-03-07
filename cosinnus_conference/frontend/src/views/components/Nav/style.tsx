@@ -114,5 +114,8 @@ export const useStyles = makeStyles((theme) => ({
       width: "50%",
       margin: "0 auto 1rem"
     },
+  },
+  dialogText: {
+    color: theme.palette.text.primary
   }
 }));

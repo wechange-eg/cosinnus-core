@@ -182,15 +182,19 @@ function NavConnector(props: NavProps) {
       >
         <DialogTitle id="leave-dialog-title"><FormattedMessage id="Are you sure you want to leave this event?" /></DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText 
+            id="alert-dialog-description"
+            classes={{
+              root: classes.dialogText,
+            }}>
             <FormattedMessage id="You're currently attending an event. Are you sure you want to leave? Tip: You can open a new tab or window instead." />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => window.location.href = leaveUrl} color="primary">
+          <Button onClick={() => window.location.href = leaveUrl}>
             <FormattedMessage id="Yes" />
           </Button>
-          <Button onClick={() => setLeaveOpen(false)} color="primary" autoFocus>
+          <Button onClick={() => setLeaveOpen(false)} autoFocus>
             <FormattedMessage id="No" />
           </Button>
         </DialogActions>
