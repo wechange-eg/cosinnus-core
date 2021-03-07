@@ -8,6 +8,7 @@ import logging
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from django.utils import timezone
 from django.http.response import JsonResponse, HttpResponseBadRequest, \
     HttpResponseNotFound, HttpResponseForbidden
 from django.utils.encoding import force_text
@@ -23,7 +24,9 @@ from cosinnus.models.map import CloudfileMapCard, HaystackMapResult, \
     SEARCH_MODEL_NAMES, SEARCH_MODEL_NAMES_REVERSE, \
     SEARCH_RESULT_DETAIL_TYPE_MAP, \
     SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS, \
-    filter_event_searchqueryset_by_upcoming
+    filter_event_searchqueryset_by_upcoming, \
+    filter_event_or_conference_starts_after, \
+    filter_event_or_conference_starts_before
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import check_object_read_access
@@ -82,6 +85,10 @@ MAP_NON_CONTENT_TYPE_SEARCH_PARAMETERS = {
     'ignore_location': False, # if True, we completely ignore locs, and even return results without location
     'mine': False, # if True, we only show items of the current user. ignored if user not authenticated
     'external': False,
+    'fromDate': None,
+    'fromTime': None,
+    'toDate': None,
+    'toTime': None
 }
 # supported map search query parameters for selecting content models, and their default values (as python data after a json.loads()!) if not present
 MAP_CONTENT_TYPE_SEARCH_PARAMETERS = {
@@ -195,7 +202,16 @@ def map_search_endpoint(request, filter_group_id=None):
     # filter events by upcoming status and exclude hidden proxies
     if params['events'] and Event is not None:
         sqs = filter_event_searchqueryset_by_upcoming(sqs).exclude(is_hidden_group_proxy=True)
-    
+
+    if (params.get('fromDate') or params.get('toDate')) and (params.get('events') or params.get('conferences')):
+        from_date_string = params.get('fromDate')
+        from_time_string = params.get('fromTime')
+        to_date_string = params.get('toDate')
+        to_time_string = params.get('toTime')
+
+        sqs = filter_event_or_conference_starts_after(from_date_string, from_time_string, sqs)
+        sqs = filter_event_or_conference_starts_before(to_date_string, to_time_string, sqs)
+
     # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't shown)
     if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
         sqs = sqs.exclude(is_group_model=True,slug__in=get_default_user_group_slugs())
