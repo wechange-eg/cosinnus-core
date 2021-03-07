@@ -35,6 +35,8 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     always_visible = indexes.BooleanField(default=True)
     created = indexes.DateTimeField(model_attr='created')
     group = indexes.IntegerField(model_attr='id')
+    from_date = indexes.DateTimeField(model_attr='from_date', null=True)
+    to_date = indexes.DateTimeField(model_attr='to_date', null=True)
     # for filtering on this model
     is_group_model = indexes.BooleanField(default=True)
     
