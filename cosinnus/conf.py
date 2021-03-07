@@ -906,6 +906,7 @@ class CosinnusConf(AppConf):
     # if set to a str managed tag slugs, the user choices for
     # DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD fields will be 
     # filtered on users tagged with this tag
+    MANAGED_TAGS_SHOW_FILTER_ON_MAP_ONLY_FOR_CONTENT_TYPES = []
     MANAGED_TAG_DYNAMIC_USER_FIELD_FILTER_ON_TAG_SLUG = None
     
     # set to True to enable virusscan. the clamd daeomon needs to be running!
