@@ -12,7 +12,7 @@ from rest_framework.decorators import action
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.api.views import CosinnusFilterQuerySetMixin,\
-    PublicCosinnusGroupFilterMixin
+    PublicCosinnusGroupFilterMixin, CosinnusPaginateMixin
 from copy import copy
 from django.utils.timezone import now
 from django.db.models import Q
@@ -57,9 +57,11 @@ class BaseConferenceViewSet(CosinnusFilterQuerySetMixin, viewsets.ReadOnlyModelV
     FILTER_DEFAULT_ORDER = ['from_date', ]
     
 
-class PublicConferenceViewSet(PublicCosinnusGroupFilterMixin,
+class PublicConferenceViewSet(CosinnusPaginateMixin, PublicCosinnusGroupFilterMixin,
                              BaseConferenceViewSet):
+    
     pass
+        
 
 class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
 

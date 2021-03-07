@@ -104,6 +104,14 @@ class CosinnusFilterQuerySetMixin(object):
         return queryset
 
 
+class CosinnusPaginateMixin(object):
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        page = self.paginate_queryset(queryset)
+        return page
+
+
 class CosinnusSocietyViewSet(CosinnusFilterQuerySetMixin,
                              PublicCosinnusGroupFilterMixin,
                              viewsets.ReadOnlyModelViewSet):
