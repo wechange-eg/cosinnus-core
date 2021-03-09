@@ -37,6 +37,7 @@ module.exports = ContentControlView.extend({
         allSDGS: {}, // the dict of all searchable SDGs
         allManagedTags: {}, // the dict of all searchable CosinnusManagedTags
         managedTagsLabels: {}, // the labels dict for CosinnusManagedTags
+        showManagedTagsOnTypesSelected: [],
         portalInfo: {}, // portal info by portal-id, from `get_cosinnus_portal_info()`
         controlsEnabled: true,
         filterGroup: null,
@@ -198,9 +199,34 @@ module.exports = ContentControlView.extend({
 
         // toggle the button
         $button.toggleClass('selected');
-        this.toggleDateTimePicker()
+        this.toggleDateTimePicker();
+        this.toggleManagedTagsOnType();
         // mark search box as searchable
         this.markSearchBoxSearchable();
+    },
+
+    toggleManagedTagsOnType: function () {
+        if (this.options.showManagedTagsOnTypesSelected.length > 0) {
+            var typesForManagedTags = this.options.showManagedTagsOnTypesSelected
+            var showManagedTags = false;
+            var selectedButtons = $('.result-filter-button.selected');
+
+            selectedButtons.each(function (i) {
+                if (this.hasAttribute('data-result-filter-type')) {
+                    var type = this.getAttribute('data-result-filter-type')
+                    if ($.inArray(type, typesForManagedTags) > -1) {
+                        showManagedTags = true;
+                    }
+                }
+            })
+
+            if (showManagedTags) {
+                $('.managed-tags-buttons').show();
+            } else {
+                $('.managed-tags-buttons').hide();
+            }
+
+        }
     },
 
     toggleDateTimePicker: function () {
