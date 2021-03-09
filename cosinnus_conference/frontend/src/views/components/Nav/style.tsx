@@ -15,6 +15,8 @@ export const useStyles = makeStyles((theme) => ({
     border: "none",
     color: "#c3bdde",
     marginTop: "50px",
+    height: "calc(100% - 50px)",
+    overflowX: "hidden",
     width: navWidth,
     zIndex: 1,
     padding: "1.5rem 1rem 1.5rem 1.5rem",

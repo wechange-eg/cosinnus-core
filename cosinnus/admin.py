@@ -196,7 +196,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     list_filter = ('portal', 'public', 'is_active',)
     search_fields = ('name', 'slug', 'id',)
     prepopulated_fields = {'slug': ('name', )}
-    readonly_fields = ('created', 'last_modified', 'is_premium_currently')
+    readonly_fields = ('created', 'last_modified', 'is_premium_currently', 'attached_objects',)
     raw_id_fields = ('parent',)
     exclude = ('is_conference', 'conference_is_running')
     inlines = [CosinnusConferenceSettingsInline]
