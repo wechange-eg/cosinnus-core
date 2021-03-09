@@ -350,7 +350,7 @@ msgstr "Veranstaltungen parallel"
 #: locale/src/views/components/CoffeeTable/index.json
 #: locale/src/views/components/EventGrid/index.json
 msgid "participants"
-msgstr "Teilnehmer"
+msgstr "Teilnehmende"
 
 #. [places left]
 #. defaultMessage is:
