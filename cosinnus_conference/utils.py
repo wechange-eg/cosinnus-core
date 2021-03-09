@@ -4,13 +4,14 @@ import re
 from django.conf import settings
 from django.template import Template, Context
 from django.template.loader import get_template
-from django.utils import translation
+from django.utils import translation, timezone
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.core.mail import get_common_mail_context
 from cosinnus.utils.files import get_image_url_for_icon
-from cosinnus.utils.mail import send_notification_item_html_threaded
+from cosinnus.utils.mail import send_notification_item_html_threaded,\
+    send_notification_item_html
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.user import filter_active_users
 from cosinnus.utils.permissions import check_user_can_receive_emails
@@ -37,8 +38,8 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
         template = template or get_initial_template(f'{field_name}_{field_type}')
         variables = {
             'name': group['name'],
-            'from_date': date(group.from_date, 'SHORT_DATETIME_FORMAT'),
-            'to_date': date(group.from_date, 'SHORT_DATETIME_FORMAT'),
+            'from_date': date(timezone.localtime(group.from_date), 'SHORT_DATETIME_FORMAT'),
+            'to_date': date(timezone.localtime(group.to_date), 'SHORT_DATETIME_FORMAT'),
         }
         return render_html_with_variables(user, template, variables)
     
@@ -72,7 +73,7 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
                 'action_button_1_text': _('Go to conference'),
                 'action_button_1_url': group.get_absolute_url(),
             }
-            send_notification_item_html_threaded(recipient, subject, context)
+            send_notification_item_html(recipient, subject, context)
         finally:
             translation.activate(cur_language)
 
