@@ -100,7 +100,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
         {% endif %}
 
         {% if allManagedTags|length > 0 %}
-			<div class="managed-tags-buttons" {% if showManagedTagsOnTypesSelected|length > 0 %}style="display: none;"{% endif %}>
+			<div class="managed-tags-buttons" {% if showManagedTagsOnTypesSelected|length > 0 and not displayManagedTagsFilter %}style="display: none;"{% endif %}>
 				<h1>
 					{{ managedTagsLabels.MANAGED_TAG_NAME_PLURAL }}
 				</h1>

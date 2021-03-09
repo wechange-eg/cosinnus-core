@@ -74,7 +74,8 @@ module.exports = ContentControlView.extend({
             resultsStale: false,
             urlSelectedResultId: null, // URL param. the currently selected result, given in the url
             filterPanelVisible: false,
-            lastViewBeforeDetailWasListView: false, // a savestate so we know which view to return to after closing the detail view on mobile
+            lastViewBeforeDetailWasListView: false, // a savestate so we know which view to return to after closing the detail view on mobile,
+            displayManagedTagsFilter: true
         }
     },
     
@@ -1383,6 +1384,17 @@ module.exports = ContentControlView.extend({
 
         if (cosinnus_active_user) {
         	this.options.showMine = util.ifundef(urlParams.mine, this.options.showMine);
+        }
+
+        if (this.options.showManagedTagsOnTypesSelected.length > 0) {
+            var activeFilters = this.state.activeFilters
+            var showManagedTags = _.some(this.options.showManagedTagsOnTypesSelected, function(type) {
+                if (activeFilters[type]) {
+                   return true;
+
+                }
+            });
+            this.state.displayManagedTagsFilter = showManagedTags
         }
     },
     
