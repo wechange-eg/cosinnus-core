@@ -48,6 +48,13 @@
 		            </span>
 		        </a>
             {% endif %}
+            <a href="{{ controlView.portalInfo[portal].domain }}{{ url }}" target="_blank" class="rounded-button button-action button-star">
+                <span class="rounded-button-inner">
+                    <i class="fa fa-user"></i>
+                    {# Translators: __INCLUDE_JS_PO__ #}
+		            {% trans "To Profile" %}
+                </span>
+            </a>
 	        {{ super() }}
 	    </div>
     {% endif %}

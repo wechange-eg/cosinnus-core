@@ -4,11 +4,13 @@ from __future__ import unicode_literals
 from copy import copy
 import datetime
 import re
+import pytz
 
 from django.urls import reverse
 from django.db.models import Q
 from django.template.defaultfilters import linebreaksbr
 from django.utils.html import escape
+from django.utils import timezone
 from django.utils.timezone import now
 from haystack.query import SearchQuerySet
 
@@ -828,4 +830,38 @@ def filter_event_searchqueryset_by_upcoming(sqs):
     sqs = sqs.exclude(Q(to_date__lt=event_horizon) | (Q(_missing_='to_date') & Q(from_date__lt=event_horizon)))
     # only actual events, no doodles
     sqs = sqs.filter_and(Q(_missing_='event_state') | Q(event_state=1))
+    return sqs
+
+def build_date_time(date_string, time_string):
+
+    if date_string:
+        time_zone = timezone.get_current_timezone_name()
+        time_zone = pytz.timezone(time_zone)
+
+        format_string = "%Y-%m-%d"
+        if date_string and time_string:
+            format_string = "%Y-%m-%d %H:%M"
+
+        date_time_string = date_string
+        if time_string:
+            date_time_string = '{} {}'.format(date_string, time_string)
+
+        try:
+            date_time = datetime.datetime.strptime(date_time_string, format_string)
+        except ValueError:
+            date_time = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+
+        date_time = time_zone.localize(date_time)
+        return date_time
+
+def filter_event_or_conference_starts_after(date_string, time_string, sqs):
+    date_time = build_date_time(date_string, time_string)
+    if date_time:
+        return sqs.filter(from_date__gt=date_time)
+    return sqs
+
+def filter_event_or_conference_starts_before(date_string, time_string, sqs):
+    date_time = build_date_time(date_string, time_string)
+    if date_time:
+        return sqs.filter(from_date__lt=date_time)
     return sqs
