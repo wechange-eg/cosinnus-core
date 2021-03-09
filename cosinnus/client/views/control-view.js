@@ -196,18 +196,31 @@ module.exports = ContentControlView.extend({
             this.$el.find('.topic-button').removeClass('selected');
         }
 
-        var type = $button.attr('data-result-filter-type')
-        if((type === 'events' || type === 'conferences') && !$button.hasClass('selected')) {
-            $('#date-time-filter').show()
-            $.cosinnus.calendarDayTimeChooser();
-            $.cosinnus.fullcalendar();
-        } else {
-            $('#date-time-filter').hide()
-        }
         // toggle the button
         $button.toggleClass('selected');
+        this.toggleDateTimePicker()
         // mark search box as searchable
         this.markSearchBoxSearchable();
+    },
+
+    toggleDateTimePicker: function () {
+        var typesWithDates = ['events', 'conferences'];
+        var showDateTimePicker = false;
+        var selectedButtons = $('.result-filter-button.selected');
+
+        selectedButtons.each(function (i) {
+            if (this.hasAttribute('data-result-filter-type')) {
+                var type = this.getAttribute('data-result-filter-type')
+                if ($.inArray(type, typesWithDates) > -1) {
+                    showDateTimePicker = true;
+                }
+            }
+        })
+        if (showDateTimePicker) {
+            $('#date-time-filter').show();
+        } else {
+            $('#date-time-filter').hide();
+        }
     },
 
     toggleSDGFilterButton: function (event) {
@@ -962,6 +975,8 @@ module.exports = ContentControlView.extend({
     /** Executed *every time* after render */
     afterRender: function () {
         var self = this;
+        $.cosinnus.calendarDayTimeChooser();
+        $.cosinnus.fullcalendar();
         // Create the pagination control view if not exists
         if (!self.paginationControlView && self.options.paginationControlsEnabled && self.App.tileListView) {
             self.paginationControlView = new PaginationControlView({
