@@ -16,13 +16,18 @@ from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group import CosinnusGroup
 from django.templatetags.static import static
 from django.utils.timezone import now
+from django.utils.translation import ugettext_lazy as _, get_language
+from django.template.loader import render_to_string
+from django.template.context import Context
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 
 
 __all__ = ('ConferenceSerializer', )
 
 from cosinnus.utils.files import image_thumbnail_url
 
-from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
+from cosinnus.utils.permissions import check_ug_admin, check_user_superuser,\
+    check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_event.models import ConferenceEvent
 
@@ -45,8 +50,8 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = CosinnusConferenceRoom
-        fields = ('id', 'slug', 'title', 'description_html', 'type', 'count', 'url', 'management_urls', 'is_visible',
-                  'show_chat')
+        fields = ('id', 'slug', 'title', 'description_html', 'type', 'count', 'url', 'management_urls', 
+                  'is_visible', 'show_chat')
 
     def get_type(self, obj):
         return self.TYPE_MAP.get(obj.type)
@@ -54,6 +59,10 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
     def get_count(self, obj):
         if obj.type == obj.TYPE_PARTICIPANTS:
             return obj.group.users.filter(is_active=True).count()
+        return 0
+        # Note: room event counts are disabled for now, as they are confusing users to
+        # think that the number actually means participant counts
+        """
         elif obj.type == obj.TYPE_LOBBY:
             queryset = ConferenceEvent.objects.filter(group=obj.group)\
                 .exclude(type__in=ConferenceEvent.TIMELESS_TYPES)\
@@ -61,6 +70,7 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
             return queryset.count()
         else:
             return obj.events.count()
+        """
 
     def get_url(self, obj):
         if obj.type == obj.TYPE_RESULTS and obj.target_result_group:
@@ -71,11 +81,16 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
     def get_management_urls(self, obj):
         user = self.context['request'].user
         if check_ug_admin(user, obj.group) or check_user_superuser(user):
-            return {
-                'create_event': obj.get_room_create_url(),
+            management_urls = {
                 'update_room': obj.get_edit_url(),
                 'delete_room': obj.get_delete_url(),
             }
+            # Lobby room types do not have a "Create Event" button
+            if obj.type != CosinnusConferenceRoom.TYPE_LOBBY:
+                management_urls.update({
+                    'create_event': obj.get_room_create_url(),
+                })
+            return management_urls
         return {}
 
     def get_description_html(self, obj):
@@ -90,11 +105,13 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
     avatar = serializers.CharField(source='avatar_url')
     wallpaper = serializers.SerializerMethodField()
     images = serializers.SerializerMethodField()
+    header_notification = serializers.SerializerMethodField()
+    managed_tags = serializers.SerializerMethodField()
 
     class Meta(object):
         model = CosinnusGroup
         fields = ('id', 'name', 'description', 'rooms', 'management_urls', 'theme_color', 'dates', 'avatar',
-                  'wallpaper', 'images')
+                  'wallpaper', 'images', 'header_notification', 'managed_tags')
 
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
@@ -106,13 +123,34 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_management_urls(self, obj):
         user = self.context['request'].user
+        management_urls = {}
+        # available for all members
+        if check_ug_membership(user, obj) or check_user_superuser(user):
+            management_urls.update({
+                'manage_memberships': group_aware_reverse('cosinnus:group-detail', kwargs={'group': obj})
+            })
         if check_ug_admin(user, obj) or check_user_superuser(user):
-            return {
-                'manage_conference': group_aware_reverse('cosinnus:group-detail', kwargs={'group': obj}),
+            management_urls.update({
+                'manage_conference': group_aware_reverse('cosinnus:group-edit', kwargs={'group': obj}),
                 'manage_rooms': group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': obj}),
                 'manage_events': group_aware_reverse('cosinnus:event:conference-event-list', kwargs={'group': obj}),
+            })
+        return management_urls
+    
+    def get_header_notification(self, obj):
+        user = self.context['request'].user
+        # show a premium notification for admins
+        if (settings.COSINNUS_PREMIUM_CONFERENCES_ENABLED and not obj.is_premium) \
+                and (check_ug_admin(user, obj) or check_user_superuser(user)):
+            header_notification = {
+                'notification_text': _('Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:'),
+                'link_text': _('Conference Bookings'),
+                'link_url': render_to_string('cosinnus/v2/urls/conference_premium_booking_url.html', context={
+                                'COSINNUS_CURRENT_LANGUAGE': get_language(),
+                            }),
             }
-        return ""
+            return header_notification
+        return {}
 
     def get_dates(self, obj):
         queryset = ConferenceEvent.objects.filter(room__group=obj)
@@ -129,7 +167,10 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_images(self, obj):
         return [img.image.url for img in obj.gallery_images.all()]
-
+    
+    def get_managed_tags(self, obj):
+        return [tag.slug for tag in obj.get_managed_tags()]
+    
 
 class ConferenceParticipant(serializers.ModelSerializer):
     organisation = serializers.SerializerMethodField()

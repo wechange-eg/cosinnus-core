@@ -61,7 +61,8 @@ NEVER_REDIRECT_URLS = [
     '/media/',
     '/static/',
     '/language',
-    '/api/',
+    '/api/v1/user/me/',
+    '/api/v1/login/',
     '/o/',
     # these deprecated URLs can be removed from the filter list once the URLs are removed
     # and their /account/ URL-path equivalents are the only remaining version of the view URL
@@ -298,18 +299,19 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                 redirect_url = redirect_next_or(request, getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None))
                 if redirect_url:
                     return HttpResponseRedirect(redirect_url)
-            
-            if 'next_redirect_pending' in request.session:
-                del request.session['next_redirect_pending']
-            # redirect if it is set as a next redirect in user-settings
-            elif request.method == 'GET' and request.path not in NO_AUTO_REDIRECTS:
-                settings_redirect = request.user.cosinnus_profile.pop_next_redirect()
-                if settings_redirect:
-                    # set flag so multiple redirects aren't consumed instantly
-                    request.session['next_redirect_pending'] = True
-                    if settings_redirect[1]:
-                        messages.success(request, _(settings_redirect[1]))
-                    return HttpResponseRedirect(settings_redirect[0])
+                
+            if not request.path.startswith('/api/'):
+                if 'next_redirect_pending' in request.session:
+                    del request.session['next_redirect_pending']
+                # redirect if it is set as a next redirect in user-settings
+                elif request.method == 'GET' and request.path not in NO_AUTO_REDIRECTS:
+                    settings_redirect = request.user.cosinnus_profile.pop_next_redirect()
+                    if settings_redirect:
+                        # set flag so multiple redirects aren't consumed instantly
+                        request.session['next_redirect_pending'] = True
+                        if settings_redirect[1]:
+                            messages.success(request, _(settings_redirect[1]))
+                        return HttpResponseRedirect(settings_redirect[0])
                 
                 
 class MovedTemporarilyRedirectFallbackMiddleware(RedirectFallbackMiddleware):

@@ -136,8 +136,7 @@ msgstr "Filtrer par pays"
 #. [Happening now]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/CoffeeTables/list.json
-#: locale/src/views/components/EventGrid/index.json
+#: locale/src/views/CoffeeTables/list.json locale/src/views/components/EventGrid/index.json
 #: locale/src/views/components/EventList/index.json
 msgid "Happening now"
 msgstr "En ce moment même"
@@ -162,6 +161,13 @@ msgstr "Gérer les événements"
 #: locale/src/views/components/Nav/index.json
 msgid "Manage rooms"
 msgstr "Gérer les salles"
+
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "Adhésion"
 
 #. [Name]
 #. defaultMessage is:
@@ -356,9 +362,8 @@ msgid "Are you sure you want to leave this event?"
 msgstr "Êtes-vous sûr de vouloir quitter cet événement ?"
 
 msgid ""
-"You're currently attending an event. Are you sure you want to leave? "
-"Tip: You can open a new tab or window instead."
+"You're currently attending an event. Are you sure you want to leave? Tip: You can open a "
+"new tab or window instead."
 msgstr ""
-"Vous assistez actuellement à un événement. Vous êtes sûr de vouloir "
-"partir ? Conseil : vous pouvez ouvrir un nouvel onglet ou une "
-"nouvelle fenêtre à la place."
+"Vous assistez actuellement à un événement. Vous êtes sûr de vouloir partir ? Conseil : "
+"vous pouvez ouvrir un nouvel onglet ou une nouvelle fenêtre à la place."

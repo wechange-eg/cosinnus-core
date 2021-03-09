@@ -11,6 +11,11 @@ from cosinnus_event.models import ConferenceEvent
 from rest_framework.decorators import action
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.models.group_extra import CosinnusConference
+from cosinnus.api.views import CosinnusFilterQuerySetMixin,\
+    PublicCosinnusGroupFilterMixin, CosinnusPaginateMixin
+from copy import copy
+from django.utils.timezone import now
+from django.db.models import Q
 
 
 class DefaultPageNumberPagination(pagination.PageNumberPagination):
@@ -39,11 +44,26 @@ class RequireEventReadMixin(object):
         return queryset
 
 
-class ConferenceViewSet(RequireGroupReadMixin,
-                        viewsets.ReadOnlyModelViewSet):
+class BaseConferenceViewSet(CosinnusFilterQuerySetMixin, viewsets.ReadOnlyModelViewSet):
     queryset = CosinnusConference.objects.filter(is_active=True)
     serializer_class = ConferenceSerializer
-    pagination_class = DefaultPageNumberPagination
+    
+    FILTER_CONDITION_MAP = copy(CosinnusFilterQuerySetMixin.FILTER_CONDITION_MAP)
+    FILTER_CONDITION_MAP.update({
+        'upcoming': {
+            'true': [Q(to_date__gte=now())]
+        }
+    })
+    FILTER_DEFAULT_ORDER = ['from_date', ]
+    
+
+class PublicConferenceViewSet(CosinnusPaginateMixin, PublicCosinnusGroupFilterMixin,
+                             BaseConferenceViewSet):
+    
+    pass
+        
+
+class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
 
     @action(detail=True, methods=['get'])
     def events(self, request, pk=None):

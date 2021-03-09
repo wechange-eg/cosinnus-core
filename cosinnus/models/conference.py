@@ -12,6 +12,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 import six
+from django.core.cache import cache
 
 from cosinnus.conf import settings
 from cosinnus.utils.files import get_conference_conditions_filename
@@ -29,8 +30,47 @@ from django.contrib.contenttypes.fields import GenericForeignKey,\
 from cosinnus.models.tagged import get_tag_object_model
 from annoying.functions import get_object_or_None
 from phonenumber_field.modelfields import PhoneNumberField
+from cosinnus.utils.group import get_cosinnus_group_model
 
 logger = logging.getLogger('cosinnus')
+
+
+def get_parent_object_in_conference_setting_chain(source_object):
+    """ Will traverse upwards one step in the conference-setting hierarchy chain for the given object
+        and return that higher-level object. 
+    
+        The hierarchy chain is:
+        - cosinnus.BBBRoom
+        - cosinnus_event.ConferenceEvent 
+        - cosinnus.CosinnusConferenceRoom
+        - cosinnus.CosinnusGroup
+        - cosinnus.CosinnusPortal 
+        
+        @param return: None if it arrived at CosinnusPortal or was given None. Else, the higher object in the chain. """ 
+        
+    if source_object is None:
+        return None
+    try:
+        from cosinnus_event.models import ConferenceEvent # noqa
+    except ImportError:
+        ConferenceEvent = None
+    from cosinnus.models.bbb_room import BBBRoom
+                    
+    # BBBRoom --> tagged object for this room if there is one
+    if type(source_object) is BBBRoom and ConferenceEvent is not None:
+        conference_event = get_object_or_None(ConferenceEvent, media_tag__bbb_room=source_object)
+        return conference_event
+    # ConferenceEvent --> CosinnusConferenceRoom
+    if ConferenceEvent is not None and type(source_object) is ConferenceEvent:
+        return source_object.room
+    # ConferenceRoom --> CosinnusGroup
+    if type(source_object) is CosinnusConferenceRoom:
+        return source_object.group
+    # CoinnusGroup --> CosinnusPortal
+    if type(source_object) is get_cosinnus_group_model() or issubclass(source_object.__class__, get_cosinnus_group_model()):
+        return source_object.portal
+    # else: return None
+    return None
 
 
 class CosinnusConferenceSettings(models.Model):
@@ -46,7 +86,12 @@ class CosinnusConferenceSettings(models.Model):
     
     bbb_server_choice = models.PositiveSmallIntegerField(_('BBB Server'), blank=False,
         default=0, choices=settings.COSINNUS_BBB_SERVER_CHOICES,
-        help_text='The chosen BBB-Server/Cluster setting for the generic object. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
+        help_text='The default chosen BBB-Server/Cluster setting for the generic object. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
+    bbb_server_choice_premium = models.PositiveSmallIntegerField(_('BBB Server for Premium Conferences'), blank=False,
+        default=0, choices=settings.COSINNUS_BBB_SERVER_CHOICES,
+        help_text='The chosen BBB-Server/Cluster setting for the generic object, that will be used when the group of that object is currently in its premium state. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
+    
+    CACHE_KEY = 'cosinnus/core/conferencesetting/class/%s/id/%d'
     
     class Meta(object):
         app_label = 'cosinnus'
@@ -55,7 +100,7 @@ class CosinnusConferenceSettings(models.Model):
         unique_together = (('content_type', 'object_id',),)
     
     @classmethod
-    def get_for_object(cls, source_object=None):
+    def get_for_object(cls, source_object=None, no_traversal=False):
         """ Given any object in the BBB settings hierarchy chain,
             checks if there is a settings object attached and returns it,
             or checks the next higher object in the chain.
@@ -63,11 +108,7 @@ class CosinnusConferenceSettings(models.Model):
             None is returned.
             
             The currently supported source_object attachment points for CosinnusConferenceSettings are, 
-            in order of the hierarchy chain:
-                - cosinnus_event.ConferenceEvent 
-                - cosinnus.CosinnusConferenceRoom
-                - cosinnus.CosinnusGroup
-                - cosinnus.CosinnusPortal
+            in order of the hierarchy chain (see ``).
             
             Furthermore, this function will accept these models as source_object 
             and use the resolved cosinnus_event.ConferenceEvent as chain starting point, if there is one:
@@ -75,51 +116,50 @@ class CosinnusConferenceSettings(models.Model):
             
             @param source_object: Any object. If it matches a model valid for the chain, we check the chain.
                                     If None is supplied, the portal default settings will be returned.
+            @param no_traversal: if True, will only attempt to find a setting object on the `source_object`
+                                    and not recursively check its parents
             .
         """
-        from cosinnus.models.bbb_room import BBBRoom
-        try:
-            from cosinnus_event.models import ConferenceEvent # noqa
-        except ImportError:
-            ConferenceEvent = None
-            
-        # resolve model types that can be in the hierarchy chain, but not be an attachment point
-        # for conference settings
-        if source_object is not None:
-            # BBBRoom: get the tagged object for this room if there is one
-            if type(source_object) is BBBRoom and ConferenceEvent is not None:
-                source_object = get_object_or_None(ConferenceEvent, media_tag__bbb_room=source_object)
-        
         # if no object is given, use the portal as default
         obj = source_object or CosinnusPortal.get_current()
         
-        # find and return conference settings if attached to our current object
-        conference_settings = None
-        try:
-            conference_settings = obj.conference_settings_assignments.all()[0]
-        except:
-            pass
-        if conference_settings:
-            return conference_settings
+        cache_key = cls.CACHE_KEY % (obj.__class__.__name__, obj.id)
+        setting_obj = cache.get(cache_key)
+        if not setting_obj:
+            # can't be Falsy because None is a valid return value
+            setting_obj = 'UNSET'
+            
+            # find and return conference settings if attached to our current object
+            conference_settings = None
+            try:
+                conference_settings = obj.conference_settings_assignments.all()[0]
+            except:
+                pass
+            if conference_settings:
+                setting_obj = conference_settings
+            
+            # CosinnusPortal --> (End of chain because the portal had no settings, and settings seem to be configured anywhere)
+            if setting_obj == 'UNSET' and (no_traversal or source_object is None or type(obj) is CosinnusPortal):
+                setting_obj = None
+            
+            if setting_obj == 'UNSET':
+                # no settings found; check next object in chain:
+                parent_object = get_parent_object_in_conference_setting_chain(obj)
+                setting_obj = cls.get_for_object(parent_object)
+                
+            cache.set(cache_key, setting_obj, settings.COSINNUS_CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT)
         
-        # no settings found; handle next object in chain:
+        return setting_obj
         
-        # CosinnusPortal --> (End of chain - no settings seem to be configured anywhere)
-        if source_object is None or type(obj) is CosinnusPortal:
-            return None
-        # ConferenceEvent --> CosinnusConferenceRoom
-        if ConferenceEvent is not None and type(obj) is ConferenceEvent:
-            return cls.get_for_object(obj.room)
-        # ConferenceRoom --> CosinnusGroup
-        if type(obj) is CosinnusConferenceRoom:
-            return cls.get_for_object(obj.group)
-        # CoinnusGroup --> CosinnusPortal
-        if type(obj) is CosinnusConferenceRoom:
-            return cls.get_for_object(obj.portal)
-        
-        # if no models matched the chain, return the default settings
-        return cls.get_for_object(None)
-
+    
+    @property
+    def bbb_server_choice_text(self):
+        return settings.COSINNUS_BBB_SERVER_CHOICES[self.bbb_server_choice][1]
+    
+    @property
+    def bbb_server_choice_premium_text(self):
+        return settings.COSINNUS_BBB_SERVER_CHOICES[self.bbb_server_choice_premium][1]
+    
 
 class CosinnusConferenceRoomQS(models.query.QuerySet):
 

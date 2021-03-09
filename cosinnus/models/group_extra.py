@@ -83,6 +83,7 @@ class CosinnusProject(get_cosinnus_group_model()):
         verbose_name_plural = _('Cosinnus projects')
     
     GROUP_MODEL_TYPE = CosinnusGroup.TYPE_PROJECT
+    MEMBERSHIP_MODE_CHOICES = [CosinnusGroup.MEMBERSHIP_MODE_CHOICES[mode] for mode in settings.COSINNUS_GROUP_MEMBERSHIP_MODE_CHOICES[GROUP_MODEL_TYPE]]
     
     objects = CosinnusProjectManager()
     
@@ -114,6 +115,7 @@ class CosinnusSociety(get_cosinnus_group_model()):
         verbose_name_plural = _('Cosinnus groups')
     
     GROUP_MODEL_TYPE = CosinnusGroup.TYPE_SOCIETY
+    MEMBERSHIP_MODE_CHOICES = [CosinnusGroup.MEMBERSHIP_MODE_CHOICES[mode] for mode in settings.COSINNUS_GROUP_MEMBERSHIP_MODE_CHOICES[GROUP_MODEL_TYPE]]
     
     objects = CosinnusSocietyManager()
     
@@ -144,6 +146,7 @@ class CosinnusConference(get_cosinnus_group_model()):
         verbose_name_plural = get_group_trans_by_type(CosinnusGroup.TYPE_CONFERENCE).VERBOSE_NAME_PLURAL
     
     GROUP_MODEL_TYPE = CosinnusGroup.TYPE_CONFERENCE
+    MEMBERSHIP_MODE_CHOICES = [CosinnusGroup.MEMBERSHIP_MODE_CHOICES[mode] for mode in settings.COSINNUS_GROUP_MEMBERSHIP_MODE_CHOICES[GROUP_MODEL_TYPE]]
     
     objects = CosinnusConferenceManager()
     

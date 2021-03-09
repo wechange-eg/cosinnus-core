@@ -163,6 +163,13 @@ msgstr "Veranstaltungen bearbeiten"
 msgid "Manage rooms"
 msgstr "Räume bearbeiten"
 
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "Mitgliedschaft"
+
 #. [Name]
 #. defaultMessage is:
 #. undefined

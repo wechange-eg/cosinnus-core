@@ -26,11 +26,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   drawerHeader: {
     marginBottom: "2rem",
+    wordBreak: "break-word",
     "& h3": {
       fontWeight: 700,
-      color: "#ffffff",
+      color: theme.palette.text.secondary,
       textTransform: "uppercase",
-      fontSize: "1.4rem",
+      fontSize: "1.3rem",
       marginBottom: "1rem"
     },
     "& h4": {
@@ -55,10 +56,13 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: "1rem",
     },
     "& p": {
-      color: theme.palette.primary.light,
+      color: theme.palette.text.primary,
+    },
+    "& span,svg": {
+      color: theme.palette.text.secondary,
     },
     "&:hover,&.Mui-selected,&.Mui-selected:hover": {
-      background: "#ffffff",
+      background: theme.palette.text.secondary,
       "& span,svg": {
         color: theme.palette.primary.main,
       },
@@ -80,7 +84,12 @@ export const useStyles = makeStyles((theme) => ({
       fontWeight: 300,
       fontSize: ".8rem",
       right: ".5rem",
-      color: theme.palette.primary.light
+      color: theme.palette.text.secondary
+    },
+    "&:hover,&.Mui-selected,&.Mui-selected:hover": {
+      "& span": {
+        color: theme.palette.text.secondary
+      },
     }
   },
   toggleMenuButton: {
@@ -105,5 +114,15 @@ export const useStyles = makeStyles((theme) => ({
       width: "50%",
       margin: "0 auto 1rem"
     },
+  },
+  dialogText: {
+    color: theme.palette.text.primary
+  },
+  divider: {
+    margin: "15px 0",
+    border: "0",
+    borderTop: "1px solid",
+    borderTopColor: theme.palette.text.secondary,
+    boxSizing: "inherit",
   }
 }));
