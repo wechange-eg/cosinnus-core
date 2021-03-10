@@ -41,7 +41,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 	        </div>
         {% endif %}
 
-		<ol id="date-time-filter" class="input-area" style="display: none;">
+		<ol id="date-time-filter" class="input-area"  style="display: {% if typeFiltersActive and (activeFilters['events'] or activeFilters['conferences']) %} block {% else %} none {% endif %};">
 			<li class="calendar-date-time-chooser">
 				{# Translators: __INCLUDE_JS_PO__ #}
 				{% trans "From" %}
@@ -78,6 +78,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 			</li>
 		</ol>
 
+
         {% if allSDGS|length > 0 %}
 	        <h1>
 	            {# Translators: __INCLUDE_JS_PO__ #}
@@ -97,26 +98,28 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 	            {% endfor %}
 	        </div>
         {% endif %}
-        
+
         {% if allManagedTags|length > 0 %}
-	        <h1>
-	            {{ managedTagsLabels.MANAGED_TAG_NAME_PLURAL }}
-	        </h1>
-	
-	        <div class="button-list">
-	            {% for managed_tag in allManagedTags %}
-	                {% if managed_tag.id != "" and managed_tag %}
-	                    <a class="rounded-button button-color-topic managed-tag-button hover-image-button {% if managed_tag.id in activeManagedTagsIds %}selected{% endif %}" data-managed-tag-id="{{ managed_tag.id }}">
-	                        <span class="rounded-button-inner hover-image-button-inner">
-	                            {{ managed_tag.name }}
-	                            {% if managed_tag.image %}
-    	                            <img class="over-image-icon hover-image-icon-pos-abs hover-image-icon-hidden" src="{{ managed_tag.image }}">
-	                            {% endif %}
-	                        </span>
-	                    </a>
-	                {% endif %}
-	            {% endfor %}
-	        </div>
+			<div class="managed-tags-buttons" {% if showManagedTagsOnTypesSelected|length > 0 and not displayManagedTagsFilter %}style="display: none;"{% endif %}>
+				<h1>
+					{{ managedTagsLabels.MANAGED_TAG_NAME_PLURAL }}
+				</h1>
+
+				<div class="button-list">
+					{% for managed_tag in allManagedTags %}
+						{% if managed_tag.id != "" and managed_tag %}
+							<a class="rounded-button button-color-topic managed-tag-button hover-image-button {% if managed_tag.id in activeManagedTagsIds %}selected{% endif %}" data-managed-tag-id="{{ managed_tag.id }}">
+								<span class="rounded-button-inner hover-image-button-inner">
+									{{ managed_tag.name }}
+									{% if managed_tag.image %}
+										<img class="over-image-icon hover-image-icon-pos-abs hover-image-icon-hidden" src="{{ managed_tag.image }}">
+									{% endif %}
+								</span>
+							</a>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
         {% endif %}
 
         {% if not hideTopics %}

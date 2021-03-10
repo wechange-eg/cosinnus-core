@@ -37,6 +37,7 @@ module.exports = ContentControlView.extend({
         allSDGS: {}, // the dict of all searchable SDGs
         allManagedTags: {}, // the dict of all searchable CosinnusManagedTags
         managedTagsLabels: {}, // the labels dict for CosinnusManagedTags
+        showManagedTagsOnTypesSelected: [],
         portalInfo: {}, // portal info by portal-id, from `get_cosinnus_portal_info()`
         controlsEnabled: true,
         filterGroup: null,
@@ -73,7 +74,8 @@ module.exports = ContentControlView.extend({
             resultsStale: false,
             urlSelectedResultId: null, // URL param. the currently selected result, given in the url
             filterPanelVisible: false,
-            lastViewBeforeDetailWasListView: false, // a savestate so we know which view to return to after closing the detail view on mobile
+            lastViewBeforeDetailWasListView: false, // a savestate so we know which view to return to after closing the detail view on mobile,
+            displayManagedTagsFilter: true
         }
     },
     
@@ -196,18 +198,56 @@ module.exports = ContentControlView.extend({
             this.$el.find('.topic-button').removeClass('selected');
         }
 
-        var type = $button.attr('data-result-filter-type')
-        if((type === 'events' || type === 'conferences') && !$button.hasClass('selected')) {
-            $('#date-time-filter').show()
-            $.cosinnus.calendarDayTimeChooser();
-            $.cosinnus.fullcalendar();
-        } else {
-            $('#date-time-filter').hide()
-        }
         // toggle the button
         $button.toggleClass('selected');
+        this.toggleDateTimePicker();
+        this.toggleManagedTagsOnType();
         // mark search box as searchable
         this.markSearchBoxSearchable();
+    },
+
+    toggleManagedTagsOnType: function () {
+        if (this.options.showManagedTagsOnTypesSelected.length > 0) {
+            var typesForManagedTags = this.options.showManagedTagsOnTypesSelected
+            var showManagedTags = false;
+            var selectedButtons = $('.result-filter-button.selected');
+
+            selectedButtons.each(function (i) {
+                if (this.hasAttribute('data-result-filter-type')) {
+                    var type = this.getAttribute('data-result-filter-type')
+                    if ($.inArray(type, typesForManagedTags) > -1) {
+                        showManagedTags = true;
+                    }
+                }
+            })
+
+            if (showManagedTags) {
+                $('.managed-tags-buttons').show();
+            } else {
+                $('.managed-tags-buttons').hide();
+            }
+
+        }
+    },
+
+    toggleDateTimePicker: function () {
+        var typesWithDates = ['events', 'conferences'];
+        var showDateTimePicker = false;
+        var selectedButtons = $('.result-filter-button.selected');
+
+        selectedButtons.each(function (i) {
+            if (this.hasAttribute('data-result-filter-type')) {
+                var type = this.getAttribute('data-result-filter-type')
+                if ($.inArray(type, typesWithDates) > -1) {
+                    showDateTimePicker = true;
+                }
+            }
+        })
+        if (showDateTimePicker) {
+            $('#date-time-filter').show();
+        } else {
+            $('#date-time-filter').hide();
+        }
     },
 
     toggleSDGFilterButton: function (event) {
@@ -962,6 +1002,8 @@ module.exports = ContentControlView.extend({
     /** Executed *every time* after render */
     afterRender: function () {
         var self = this;
+        $.cosinnus.calendarDayTimeChooser();
+        $.cosinnus.fullcalendar();
         // Create the pagination control view if not exists
         if (!self.paginationControlView && self.options.paginationControlsEnabled && self.App.tileListView) {
             self.paginationControlView = new PaginationControlView({
@@ -1342,6 +1384,17 @@ module.exports = ContentControlView.extend({
 
         if (cosinnus_active_user) {
         	this.options.showMine = util.ifundef(urlParams.mine, this.options.showMine);
+        }
+
+        if (this.options.showManagedTagsOnTypesSelected.length > 0) {
+            var activeFilters = this.state.activeFilters
+            var showManagedTags = _.some(this.options.showManagedTagsOnTypesSelected, function(type) {
+                if (activeFilters[type]) {
+                   return true;
+
+                }
+            });
+            this.state.displayManagedTagsFilter = showManagedTags
         }
     },
     

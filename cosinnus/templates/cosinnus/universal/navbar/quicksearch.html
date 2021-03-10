@@ -1,7 +1,9 @@
 {% load i18n %}
 {% import "include/macros.html" as macros %}
 
-	<div>
+<ul class="item-list">
+
+	<li>
 		{% set filter_annotations_prefix %}
 		{# Translators: __INCLUDE_JS_PO__ #}
 		{% trans "Search for categories" %}
@@ -32,7 +34,7 @@
 				{{ macros.typeLabel("conferences", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
 			</a>
 		<span class="btn-no-interact">{{ filter_annotations_suffix }}</span>
-	</div>
+	</li>
 
 	{% if query and query|length > 2 %}
 		{% set default_annotation %}
