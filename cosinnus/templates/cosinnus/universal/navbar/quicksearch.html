@@ -4,36 +4,35 @@
 <ul class="item-list">
 
 	<li>
-		{% set filter_annotations_prefix %}
-		{# Translators: __INCLUDE_JS_PO__ #}
-		{% trans "Search for categories" %}
-		{% endset %}
-
-		{% set filter_annotations_suffix %}
-		{# Translators: __INCLUDE_JS_PO__ #}
-		{% trans "on map" %}
-		{% endset %}
-
-		<span class="btn-no-interact">{{ filter_annotations_prefix }}</span>
-			<a class="rounded-button button-color-people result-filter-button quicksearch-filterbutton" data-result-filter-type="people">
-				{{ macros.typeLabel("people", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
-			</a>
-			<a class="rounded-button button-color-projects result-filter-button quicksearch-filterbutton" data-result-filter-type="projects">
-				{{ macros.typeLabel("projects", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
-			</a>
-			<a class="rounded-button button-color-events result-filter-button quicksearch-filterbutton" data-result-filter-type="events">
-				{{ macros.typeLabel("events", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
-			</a>
-			<a class="rounded-button button-color-groups result-filter-button quicksearch-filterbutton" data-result-filter-type="groups">
-				{{ macros.typeLabel("groups", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
-			</a>
-			<a class="rounded-button button-color-ideas result-filter-button quicksearch-filterbutton" data-result-filter-type="ideas">
-				{{ macros.typeLabel("ideas", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
-			</a>
-			<a class="rounded-button button-color-conferences result-filter-button quicksearch-filterbutton" data-result-filter-type="conferences">
-				{{ macros.typeLabel("conferences", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
-			</a>
-		<span class="btn-no-interact">{{ filter_annotations_suffix }}</span>
+	    <div class="nav-quicksearch-buttons">
+			<div class="btn-no-interact nav-quicksearch-button-label">
+				{% set filter_annotations_prefix %}
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Find on map:" %}
+				{% endset %}
+			    {{ filter_annotations_prefix }}
+		    </div>
+		    <div>
+				<a class="rounded-button button-color-people result-filter-button quicksearch-filterbutton" data-result-filter-type="people">
+					{{ macros.typeLabel("people", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+				<a class="rounded-button button-color-projects result-filter-button quicksearch-filterbutton" data-result-filter-type="projects">
+					{{ macros.typeLabel("projects", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+				<a class="rounded-button button-color-events result-filter-button quicksearch-filterbutton" data-result-filter-type="events">
+					{{ macros.typeLabel("events", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+				<a class="rounded-button button-color-groups result-filter-button quicksearch-filterbutton" data-result-filter-type="groups">
+					{{ macros.typeLabel("groups", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+				<a class="rounded-button button-color-ideas result-filter-button quicksearch-filterbutton" data-result-filter-type="ideas">
+					{{ macros.typeLabel("ideas", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+				<a class="rounded-button button-color-conferences result-filter-button quicksearch-filterbutton" data-result-filter-type="conferences">
+					{{ macros.typeLabel("conferences", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+			</div>
+		</div>
 	</li>
 
 	{% if query and query|length > 2 %}

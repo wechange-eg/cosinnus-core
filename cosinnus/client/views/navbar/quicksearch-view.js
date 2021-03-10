@@ -220,6 +220,7 @@ module.exports = BaseView.extend({
         document.addEventListener('click', this.thisContext(this.checkQuickSearchFocusOut));
         this.$searchBarEl.addClass('active');
         $('.v2-navbar').addClass('search-open');
+        this.render();
     },
 
     /** Hides the quicksearch result list */
