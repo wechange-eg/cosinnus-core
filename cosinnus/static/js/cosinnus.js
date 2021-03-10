@@ -332,6 +332,75 @@
 
         },
 
+        /** inits the calendar widget from from_to_date_field.html as an always-shown
+         * non-self-hiding/sliding widget
+         */
+        initCalendarDayTimeChooserWidget: function() {
+
+            // on every re-drawing of the calendar select the choosen date
+            $('.calendar-date-time-chooser .small-calendar')
+            .on("fullCalendarViewRender", function(event, cell) {
+                // select choosen day
+
+                var date = $(this)
+                    .closest('.calendar-date-time-chooser')
+                    .find('.calendar-date-time-chooser-hiddendate')
+                    .val();
+                // "2014-04-28"
+                if (date) $(this)
+                    .find('td[data-date='+date+']')
+                    .addClass('selected');
+            })
+            .trigger('fullCalendarViewRender')
+
+            // when clicked on a day: use this!
+            .on("fullCalendarDayClick", function(event, date, jsEvent) {
+                var dayElement = jsEvent.currentTarget;
+                if ($(dayElement).hasClass('fc-other-month')) return;
+
+                var dateDataAttr = date.getFullYear() + "-"
+                    + ((date.getMonth()+1).toString().length === 2
+                        ? (date.getMonth()+1)
+                        : "0" + (date.getMonth()+1)) + "-"
+                    + (date.getDate().toString().length === 2
+                        ? date.getDate()
+                        : "0" + date.getDate());
+
+                // unselect all and re-select later
+                $(dayElement).parent().parent().find('td').removeClass('selected');
+                $(dayElement).addClass('selected');
+
+
+                // When date picked, update date in form
+                $(this)
+                    .closest('.calendar-date-time-chooser')
+                    .find('.calendar-date-time-chooser-hiddendate')
+                    .val(dateDataAttr);
+
+                // Update INPUT with human readable date
+                moment.lang(moment.lang(),$.cosinnus.momentShort);
+                var humanDateString = moment(dateDataAttr).calendar();
+                    $(this)
+                        .closest('.calendar-date-time-chooser')
+                        .find('.calendar-date-time-chooser-date')
+                        .val(humanDateString);
+            });
+
+            // Set INPUT with human readable date
+            $('.calendar-date-time-chooser').each(function() {
+                var dateDataAttr = $(this)
+                    .find('.calendar-date-time-chooser-hiddendate')
+                    .val();
+
+                if (dateDataAttr) {
+                    moment.lang(moment.lang(),$.cosinnus.momentShort);
+                    var humanDateString = moment(dateDataAttr).calendar();
+                        $(this)
+                            .find('.calendar-date-time-chooser-date')
+                            .val(humanDateString);
+                }
+            });
+        },
 
         // When creating or editing an event the user has to select date and time.
         // Clicking one date input shows all calendars on the whole page.
@@ -358,70 +427,7 @@
 
             $('.calendar-date-time-chooser .small-calendar').hide();
 
-
-            // on every re-drawing of the calendar select the choosen date
-            $('.calendar-date-time-chooser .small-calendar')
-                .on("fullCalendarViewRender", function(event, cell) {
-                    // select choosen day
-
-                    var date = $(this)
-                        .closest('.calendar-date-time-chooser')
-                        .find('.calendar-date-time-chooser-hiddendate')
-                        .val();
-                    // "2014-04-28"
-                    if (date) $(this)
-                        .find('td[data-date='+date+']')
-                        .addClass('selected');
-                })
-                .trigger('fullCalendarViewRender')
-
-                // when clicked on a day: use this!
-                .on("fullCalendarDayClick", function(event, date, jsEvent) {
-                    var dayElement = jsEvent.currentTarget;
-                    if ($(dayElement).hasClass('fc-other-month')) return;
-
-                    var dateDataAttr = date.getFullYear() + "-"
-                        + ((date.getMonth()+1).toString().length === 2
-                            ? (date.getMonth()+1)
-                            : "0" + (date.getMonth()+1)) + "-"
-                        + (date.getDate().toString().length === 2
-                            ? date.getDate()
-                            : "0" + date.getDate());
-
-                    // unselect all and re-select later
-                    $(dayElement).parent().parent().find('td').removeClass('selected');
-                    $(dayElement).addClass('selected');
-
-
-                    // When date picked, update date in form
-                    $(this)
-                        .closest('.calendar-date-time-chooser')
-                        .find('.calendar-date-time-chooser-hiddendate')
-                        .val(dateDataAttr);
-
-                    // Update INPUT with human readable date
-                    moment.lang(moment.lang(),$.cosinnus.momentShort);
-                    var humanDateString = moment(dateDataAttr).calendar();
-                        $(this)
-                            .closest('.calendar-date-time-chooser')
-                            .find('.calendar-date-time-chooser-date')
-                            .val(humanDateString);
-                });
-
-            // Set INPUT with human readable date
-            $('.calendar-date-time-chooser').each(function() {
-                var dateDataAttr = $(this)
-                    .find('.calendar-date-time-chooser-hiddendate')
-                    .val();
-
-                if (dateDataAttr) {
-                    moment.lang(moment.lang(),$.cosinnus.momentShort);
-                    var humanDateString = moment(dateDataAttr).calendar();
-                        $(this)
-                            .find('.calendar-date-time-chooser-date')
-                            .val(humanDateString);
-                }
-            });
+            $.cosinnus.initCalendarDayTimeChooserWidget();
         },
 
 
@@ -1655,7 +1661,6 @@ $(function() {
     $.cosinnus.showNextOnHover();
     $.cosinnus.fadedown();
     $.cosinnus.selectors();
-    $.cosinnus.fullcalendar();
     $.cosinnus.calendarBig();
     $.cosinnus.editThisClickarea();
     $.cosinnus.searchbar();
@@ -1665,7 +1670,6 @@ $(function() {
     $.cosinnus.etherpadList();
     $.cosinnus.inputDynamicSendButton();
     $.cosinnus.buttonHref();
-    $.cosinnus.calendarDayTimeChooser();
     $.cosinnus.calendarDoodleVote();
     $.cosinnus.fileList();
     $.cosinnus.itemCheckboxList();

@@ -67,3 +67,11 @@
     </ol>
 {% endcaptureas %}
 {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label large_field=True date_legend=date_legend %}
+
+<script type="text/javascript">
+    $(function(){
+	    $.cosinnus.fullcalendar();
+	    $.cosinnus.calendarDayTimeChooser();
+    });
+</script>
+

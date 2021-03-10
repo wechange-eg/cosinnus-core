@@ -51,10 +51,10 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					readonly ="readonly"
 					class="calendar-date-time-chooser-date" />
 				<input class="calendar-date-time-chooser-hiddendate" id="id_start_0" name="start_0"
-					placeholder="{% trans "Start date." %}" type="hidden"
+                    type="hidden" value="{{ fromDate }}"
 				>
 				<input class="calendar-date-time-chooser-time" id="id_start_1" name="start_1"
-					placeholder="00:00" type="text"
+					placeholder="00:00" type="text" value="{{ fromTime }}"
 				>
 				<div class="small-calendar"></div>
 			</li>
@@ -68,11 +68,10 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					readonly ="readonly"
 					class="calendar-date-time-chooser-date" />
 				<input class="calendar-date-time-chooser-hiddendate" id="id_end_0" name="end_0"
-					placeholder="{# Translators: __INCLUDE_JS_PO__ #}{% trans "End date." %}" type="hidden"
+                    type="hidden" value="{{ toDate }}"
 				>
 				<input class="calendar-date-time-chooser-time" id="id_end_1" name="end_1"
-					placeholder="00:00" type="text"
-
+					placeholder="00:00" type="text" value="{{ toTime }}"
 				>
 				<div class="small-calendar"></div>
 			</li>

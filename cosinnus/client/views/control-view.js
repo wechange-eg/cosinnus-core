@@ -75,7 +75,11 @@ module.exports = ContentControlView.extend({
             urlSelectedResultId: null, // URL param. the currently selected result, given in the url
             filterPanelVisible: false,
             lastViewBeforeDetailWasListView: false, // a savestate so we know which view to return to after closing the detail view on mobile,
-            displayManagedTagsFilter: true
+            displayManagedTagsFilter: true,
+            fromDate: null,
+            fromTime: null,
+            toDate: null,
+            toTime: null
         }
     },
     
@@ -243,10 +247,28 @@ module.exports = ContentControlView.extend({
                 }
             }
         })
+        this.showOrHideDateTimePicker(showDateTimePicker);
+    },
+
+    showOrHideDateTimePicker: function (showDateTimePicker) {
+        var self = this;
+        var dateTimePicker = $('#date-time-filter');
         if (showDateTimePicker) {
-            $('#date-time-filter').show();
+            dateTimePicker.show();
+            if (!dateTimePicker.attr('inited') && dateTimePicker.is(":visible")) {
+                $.cosinnus.fullcalendar();
+                $.cosinnus.initCalendarDayTimeChooserWidget();
+                $('.calendar-date-time-chooser .small-calendar').on("fullCalendarDayClick", function(event, date, jsEvent) {
+                    self.markSearchBoxSearchable();
+                });
+                $('.calendar-date-time-chooser input').on("keyup change", function() {
+                    self.markSearchBoxSearchable();
+                });
+                
+                dateTimePicker.attr('inited', true);
+            }
         } else {
-            $('#date-time-filter').hide();
+            dateTimePicker.hide();
         }
     },
 
@@ -303,6 +325,18 @@ module.exports = ContentControlView.extend({
         this.resetManagedTags();
         this.resetTypeFilters();
         this.clearDetailResultCache();
+        this.resetDateTimeWidget();
+    },
+
+    /** Internal state reset of fromDate, fromTime, toDate, toTime */
+    resetDateTimeWidget: function() {
+        var today = moment().format('YYYY-MM-DD');
+        var in_a_month = moment().add(1, 'M').format('YYYY-MM-DD');
+        this.state.fromDate =  today;
+        this.state.fromTime = "00:00";
+        this.state.toDate = in_a_month;
+        this.state.toTime = "23:59";
+        this.showOrHideDateTimePicker(false);
     },
     
     /** Internal state reset of filtered topics */
@@ -321,12 +355,14 @@ module.exports = ContentControlView.extend({
     /** Internal state reset of filtered result types */
     resetTypeFilters: function () {
         this.state.activeFilters = _(this.options.availableFilters).clone();
+        this.state.typeFiltersActive = false;
     },
 
     resetTypeFiltersClicked: function (event) {
         event.preventDefault();
         event.stopPropagation();
         this.resetTypeFilters();
+        this.resetDateTimeWidget();
         this.render();
         this.clearDetailResultCache();
         var searchReason = 'reset-filters-search';
@@ -378,6 +414,7 @@ module.exports = ContentControlView.extend({
         event.stopPropagation();
         this.resetTypeFilters();
         this.resetTopics();
+        this.resetDateTimeWidget();
         this.render();
         this.clearDetailResultCache();
         var searchReason = 'reset-filters-search';
@@ -905,6 +942,7 @@ module.exports = ContentControlView.extend({
         this.state.filterPanelVisible = true;
         this.$el.find('.map-controls-filters').slideDown(250);
         this.$el.find('.icon-filters').addClass('open');
+        this.toggleDateTimePicker();
     },
 
     /** State switcher for the filter frame */
@@ -962,6 +1000,7 @@ module.exports = ContentControlView.extend({
     },
     
     markSearchBoxSearchable: function () {
+        // trigger this when new data/states are entered to enable the search button
         this.$el.find('.icon-search').addClass('active');
         this.$el.find('.button-search').removeClass('disabled');
     },
@@ -1002,8 +1041,7 @@ module.exports = ContentControlView.extend({
     /** Executed *every time* after render */
     afterRender: function () {
         var self = this;
-        $.cosinnus.calendarDayTimeChooser();
-        $.cosinnus.fullcalendar();
+        
         // Create the pagination control view if not exists
         if (!self.paginationControlView && self.options.paginationControlsEnabled && self.App.tileListView) {
             self.paginationControlView = new PaginationControlView({
@@ -1026,6 +1064,12 @@ module.exports = ContentControlView.extend({
             self
             ).render();
         }
+        var dateTimePicker = $('#date-time-filter');
+        dateTimePicker.find('#id_start_0').val(this.state.fromDate);
+        dateTimePicker.find('#id_start_1').val(this.state.fromTime);
+        dateTimePicker.find('#id_end_0').val(this.state.toDate);
+        dateTimePicker.find('#id_end_1').val(this.state.toTime);
+        this.toggleDateTimePicker();
     },
     
     /**
@@ -1396,6 +1440,13 @@ module.exports = ContentControlView.extend({
             });
             this.state.displayManagedTagsFilter = showManagedTags
         }
+
+        var today = moment().format('YYYY-MM-DD');
+        var in_a_month = moment().add(1, 'M').format('YYYY-MM-DD');
+        this.state.fromDate =  util.ifundef(urlParams.fromDate, today);
+        this.state.fromTime = util.ifundef(urlParams.fromTime, "00:00").replace("%3A", ":");
+        this.state.toDate = util.ifundef(urlParams.toDate, in_a_month);
+        this.state.toTime = util.ifundef(urlParams.toTime, "23:59").replace("%3A", ":");
     },
     
     // extended from content-control-view.js
@@ -1408,11 +1459,17 @@ module.exports = ContentControlView.extend({
             groups: this.state.activeFilters.groups,
         };
 
-        var fromDate = $('#id_start_0')[0].value
-        var fromTime = $('#id_start_1')[0].value
-
-        var toDate = $('#id_end_0')[0].value
-        var toTime = $('#id_end_1')[0].value
+        var dateTimePicker = $('#date-time-filter');
+        var fromDate = dateTimePicker.find('#id_start_0').val() || this.state.fromDate;
+        var fromTime = dateTimePicker.find('#id_start_1').val() || this.state.fromTime;
+        var toDate = dateTimePicker.find('#id_end_0').val() || this.state.toDate;
+        var toTime = dateTimePicker.find('#id_end_1').val() || this.state.fromDate;
+        if (!fromTime.includes(':')) {
+            fromTime += ':00';
+        }
+        if (!toTime.includes(':')) {
+            toTime += ':00';
+        }
 
         if (fromDate) {
             _.extend(searchParams, {
