@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-07 17:51+0100\n"
-"PO-Revision-Date: 2021-03-09 17:41+0100\n"
+"PO-Revision-Date: 2021-03-11 12:28+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -941,7 +941,7 @@ msgid "Participation applications are open."
 msgstr "Anmeldung geöffnet."
 
 msgid "Participation application has not started yet."
-msgstr "Die Teilnahmeantragsstellung hat noch nicht begonnen."
+msgstr "Die Anmeldefrist hat noch nicht begonnen."
 
 msgid "Participation application is over."
 msgstr "Die Teilnahmeantragsstellung ist vorbei."
@@ -2619,19 +2619,19 @@ msgid "Application"
 msgstr "Antrag"
 
 msgid "Apply for participation in"
-msgstr "Bewirb dich für die Teilnahme an"
+msgstr "Anmeldung zur Teilnahme an der Veranstaltung"
 
 msgid "Edit your application for"
 msgstr "Deine Anmeldung bearbeiten für"
 
 msgid "Please fill out the fields below to submit your application. Be aware that the organizers may take your profile into consideration when processing your application, so make sure that your profile page is well maintained. You can view and edit your profile page here:"
-msgstr "Bitte fülle die unten stehenden Felder aus, um deine Bewerbung einzureichen. Bitte beachte, dass die Organisator/innen dein Profil bei der Bearbeitung deiner Bewerbung berücksichtigen können. Stelle also sicher, dass deine Profilseite gut gepflegt ist. Du kannst deine Profilseite hier einsehen und bearbeiten:"
+msgstr "Bitte fülle die folgenden Felder aus, um deine Anmeldung einzureichen. Bitte beachte, dass die Organisator/innen dein Profil bei der Bearbeitung deiner Bewerbung berücksichtigen können. Stelle also sicher, dass deine Profilseite gut gepflegt ist. Du kannst deine Profilseite hier einsehen und bearbeiten:"
 
 msgid "Your profile"
 msgstr "Dein Profil"
 
 msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
-msgstr "Du erhältst eine Benachrichtigungs-E-Mail und eine Benachrichtigung auf der Webseite, wenn die Organisator/innen deine Anmeldung bearbeitet haben. Stelle sicher, dass deine Benachrichtigungseinstellungen korrekt konfiguriert sind, um E-Mails von uns zu erhalten!"
+msgstr "Du erhältst eine Benachrichtigungs-E-Mail und eine Benachrichtigung auf der Webseite, wenn wir deine Anmeldung bearbeitet haben. Stelle also bitte sicher, dass du unter deinen Benachrichtigungseinstellungen an der Stelle \"Ich möchte Benachrichtigungs-Emails erhalten\" die richtige Auswahl getroffen hast, um E-Mails von uns zu erhalten."
 
 msgid "Please provide your motivation for applying"
 msgstr "Bitte gib deine Motivation für die Teilnahme an"
