@@ -52,7 +52,7 @@ function NotificationConnector(props: NotificationProps) {
         <Alert
           severity="warning"
           action={
-            <Link className={classes.link} href={conference.props.headerNotification.linkUrl} >
+            <Link className={classes.link} target="_blank" href={conference.props.headerNotification.linkUrl} >
               {conference.props.headerNotification.linkText}
             </Link>
           }>
