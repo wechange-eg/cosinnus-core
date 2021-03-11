@@ -10,6 +10,12 @@ export const useStyles = makeStyles((theme) => ({
     },
     "& > div > span": {
       backgroundColor: theme.palette.primary.main
+    },
+    "& .MuiTab-root.Mui-selected, & .MuiTab-root:hover": {
+      background: theme.palette.primary.light,
+      "& span,svg": {
+        color: theme.palette.text.primary,
+      },
     }
   },
   tabPanel: {
