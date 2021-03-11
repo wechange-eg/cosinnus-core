@@ -129,57 +129,8 @@
 	        
 	        <div>Select the date range for which you would like statistics</div>
 	        
-	        
 	        {% trans "Date" as date_label %}
-	        {% captureas date_html %}
-	            {{ form.from_date.errors }}
-	            {{ form.to_date.errors }}
-	            <ol class="input-area">
-	                <li class="calendar-date-time-chooser">
-	                    {% trans "From" %} <i class="fa fa-calendar"></i>
-	                    <input
-	                        placeholder="{% trans "Date" %}"
-	                        readonly ="readonly"
-	                        class="calendar-date-time-chooser-date" />
-	                    <input class="calendar-date-time-chooser-hiddendate" id="id_from_date_0" name="from_date_0" 
-	                        placeholder="{% trans "Start date." %}" type="hidden" 
-	                        {% if form.from_date.value|date:"Y-m-d" %}
-	                        value="{{ form.from_date.value|date:"Y-m-d" }}" 
-	                        {% else %}
-	                        value="{% now "Y-m-d" %}" 
-	                        {% endif %}
-	                    >
-	                    <input class="calendar-date-time-chooser-time" id="id_from_date_1" name="from_date_1" 
-	                        placeholder="{% trans "Time" %}" type="text" 
-	                        value="00:00" 
-	                        style="display: none;"
-	                    >                                           
-	                    <div class="small-calendar"></div>
-	                </li>
-	                <li class="calendar-date-time-chooser">
-	                    {% trans "Until" %} <i class="fa fa-calendar"></i>
-	                    <input
-	                        placeholder="{% trans "Date" %}"
-	                        readonly ="readonly"
-	                        class="calendar-date-time-chooser-date" />
-	                    <input class="calendar-date-time-chooser-hiddendate" id="id_to_date_0" name="to_date_0" 
-	                        placeholder="{% trans "End date." %}" type="hidden" 
-	                        {% if form.to_date.value|date:"Y-m-d" %}
-	                        value="{{ form.to_date.value|date:"Y-m-d" }}" 
-	                        {% else %}
-	                        value="{% now "Y-m-d" %}" 
-	                        {% endif %}
-	                    >
-	                    <input class="calendar-date-time-chooser-time" id="id_to_date_1" name="to_date_1" 
-	                        placeholder="{% trans "Time" %}" type="text" 
-	                        value="23:59" 
-	                        style="display: none;"
-	                    >    
-	                    <div class="small-calendar"></div>
-	                </li>
-	            </ol>
-	        {% endcaptureas %}
-	        {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label label=date_label large_field=True %} 
+	        {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.from_date to_date_field=form.to_date label=date_label%} 
         </div>
         
         
