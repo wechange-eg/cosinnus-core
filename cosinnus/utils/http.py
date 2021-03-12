@@ -12,6 +12,7 @@ from django.http import HttpResponse
 
 from cosinnus.conf import settings
 from django.utils.timezone import now
+import xlsxwriter
 
 
 __all__ = ('JSONResponse', 'CSVResponse')
@@ -110,3 +111,42 @@ def make_csv_response(rows, row_names=[], file_name=None):
         now().strftime('%Y%m%d %H%M%S'))
     response['Content-Disposition'] = 'attachment; filename="%s"' % filename
     return response
+
+
+def make_xlsx_response(rows, row_names=[], file_name=None):
+    """ 
+        Shortcut to turn a list of rows into a quick XLSX download response.
+    """
+    filename = '%s - %s.xlsx' % (
+        file_name or 'export',
+        now().strftime('%Y%m%d %H%M%S'))
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument'
+                     '.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
+    workbook = xlsxwriter.Workbook(response, {
+        'in_memory': True,
+        'strings_to_formulas': False,
+        'remove_timezone': True
+    })
+    worksheet = workbook.add_worksheet()
+    
+    row = 0
+    col = 0
+    if row_names:
+        for item in row_names:
+            worksheet.write(row, col, str(item))
+            col += 1
+        row += 1
+        col = 0
+        
+    for table_row in rows:
+        for cell in table_row:
+            worksheet.write(row, col, str(cell))
+            col += 1
+        row += 1
+        col = 0
+
+    workbook.close()
+    return response
+

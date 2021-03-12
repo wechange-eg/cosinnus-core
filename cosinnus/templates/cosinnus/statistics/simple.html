@@ -58,19 +58,20 @@
         </ul>
     </button>
     
-    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:simple-statistics-bbb-room-visits' %}">
-        <ul class="media-list">
-            <li class="media">
-               <a class="pull-left">
-                    <i class="fa fa-download"></i>
-                </a>
-                <div class="media-body">
-                    {% trans "BBB Room Visits" %}
-                </div>
-            </li>
-        </ul>
-    </button>
-    
+    {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+	    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:simple-statistics-bbb-room-visits' %}">
+	        <ul class="media-list">
+	            <li class="media">
+	               <a class="pull-left">
+	                    <i class="fa fa-download"></i>
+	                </a>
+	                <div class="media-body">
+	                    {% trans "BBB Room Visits" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    {% endif %}
     
     {% if SETTINGS.COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS %}
 	    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-newsletter-user-emails' %}">
