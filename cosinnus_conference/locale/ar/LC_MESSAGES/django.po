@@ -3,163 +3,168 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-07 17:56+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2021-03-12 17:55+0100\n"
+"PO-Revision-Date: 2021-03-05 18:22+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Poedit 2.4.1\n"
 
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr ""
 
+#, fuzzy
+#| msgid "Conferences"
 msgid "Conference Bookings"
-msgstr ""
+msgstr "مؤتمرات"
 
 msgid "Conferences"
-msgstr ""
+msgstr "مؤتمرات"
 
 msgctxt "the_app"
 msgid "conference"
-msgstr ""
+msgstr "مؤتمر"
 
 msgid "End date must be before start date"
-msgstr ""
+msgstr "يجب أن يكون تاريخ الانتهاء قبل تاريخ الابتداء"
 
 msgid "Please also provide a start date"
-msgstr ""
+msgstr "يرجى أيضًا تقديم تاريخ الابتداء"
 
 msgid "Please also provide a end date"
-msgstr ""
+msgstr "يرجى أيضا تقديم تاريخ الانتهاء"
 
 msgid "First Choice"
-msgstr ""
+msgstr "الخيار الأول"
 
 msgid "Second Choice"
-msgstr ""
+msgstr "الخيار الثاني"
 
 msgid "Conference Management"
-msgstr ""
+msgstr "إدارة المؤتمر"
 
+#, fuzzy
 msgid "Workshop Participant File Upload"
-msgstr ""
+msgstr "تحميل ملف مشارك ورشة العمل"
 
 #, python-format
 msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr ""
+msgstr "يرجى تحميل ملف CSV مع الأعمدة التالية: معرف المستخدم الفريد, الاسم الأول,اسم العائلة وعمود واحد لكل ورشة عمل تم تحديدها بواسطة الرابط الثابت لورشة العمل. للحصول على المساعدة ، يمكنك تحميل نموذج <a href=\"%(workshop_participants_upload_skeleton)s\">هنا</a>"
 
 msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr ""
+msgstr "ثم أضف صفًا لكل حساب تريد إضافته. يجب عليك إضافة معرف مستخدم فريد ولكن يمكن أن يكون الاسم الأول والأخير فارغين. ثم أضف 1 إلى جميع أعمدة ورشة العمل بحيث يجب أن يكون المستخدم عضوًا عاديًا أو 2 إذا كان هذا المستخدم يجب أن يكون مسؤول ورشة العمل."
 
 msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr ""
+msgstr "سوف يؤدي تحميل CSV إلى إنشاء الحسابات وعضويات حسابات ورش العمل والنتائج في تنزيل CSV مباشر بالحسابات وكلمات المرور التي تم انشاءها حديثًا. ستشمل كلمات المرور فقط عند إنشاء الحساب. يرجى تحديث الصفحة بعد التنزيل."
 
 msgid "Upload File"
-msgstr ""
+msgstr "رفع ملف"
 
 msgid "Go to conference"
-msgstr ""
+msgstr "اذهب إلى المؤتمر"
 
 msgid "This function is not enabled for this conference."
-msgstr ""
+msgstr "لم يتم تمكين هذه الوظيفة لهذا المؤتمر."
 
 msgid "Conference successfully started and user accounts activated"
-msgstr ""
+msgstr "بدأ المؤتمر بنجاح وتم تنشيط حسابات المستخدمين"
 
 msgid "Conference successfully finished and user accounts deactivated"
-msgstr ""
+msgstr "انتهى المؤتمر بنجاح وتم إلغاء تنشيط حسابات المستخدمين"
 
 msgid "Successfully deactivated user account"
-msgstr ""
+msgstr "تم إلغاء تنشيط حساب المستخدم بنجاح"
 
 msgid "Successfully activated user account"
-msgstr ""
+msgstr "تم تنشيط حساب المستخدم بنجاح"
 
 msgid "Successfully removed user"
-msgstr ""
+msgstr "تم إزالة المستخدم بنجاح"
 
 msgid "User was not created"
-msgstr ""
+msgstr "لم يتم إنشاء المستخدم"
 
 msgid "Workshop username"
-msgstr ""
+msgstr "اسم مستخدم ورشة العمل"
 
 msgid "First Name"
-msgstr ""
+msgstr "الاسم الأول"
 
 msgid "Last Name"
-msgstr ""
+msgstr "الاسم الاخير"
 
 msgid "The room was created successfully."
-msgstr ""
+msgstr "تم إنشاء الغرفة بنجاح."
 
 msgid "The room was saved successfully."
-msgstr ""
+msgstr "تم حفظ الغرفة بنجاح."
 
 msgid "The room was deleted successfully."
-msgstr ""
+msgstr "تم حذف الغرفة بنجاح."
 
+#, fuzzy
 msgid "The supplied Conference Room could not be found"
-msgstr ""
+msgstr "تعذر العثور على غرفة الاجتماعات الموردة"
 
 msgid "Conference reminder settings have been successfully updated."
-msgstr ""
+msgstr "تم تحديث إعدادات تذكير المؤتمر بنجاح."
 
 msgid "A test email has been sent to your email address."
-msgstr ""
+msgstr "تم إرسال بريد إلكتروني تجريبي إلى عنوان بريدك الإلكتروني."
 
+#, fuzzy
 msgid "Participation configurations have been updated."
-msgstr ""
+msgstr "تم تحديث تكوينات المشاركة."
 
 msgid "Your application has been submitted."
-msgstr ""
+msgstr "تم تقديم تطبيقاتك."
 
 msgid "Your application has been updated."
-msgstr ""
+msgstr "تم تحديث التطبيق الخاص بك."
 
 msgid "You cannot change your application anymore."
-msgstr ""
+msgstr "لا يمكنك تغيير طلبك بعد الآن."
 
 msgid "Application has been withdrawn."
-msgstr ""
+msgstr "تم سحب التطبيق."
 
 #, python-format
 msgid "The following users were accepted and added as members: %s"
-msgstr ""
+msgstr "تم قبول المستخدمين التالين وإضافتهم كأعضاء: %s"
 
 #, python-format
 msgid "The following users were put on the wait list: %s"
-msgstr ""
+msgstr "تم وضع المستخدمين التالين في قائمة الانتظار: %s"
 
 #, python-format
 msgid "The following users were declined: %s"
-msgstr ""
+msgstr "تم رفض المستخدمين التالين: %s"
 
 msgid "Your changes were saved."
-msgstr ""
+msgstr "تم حفظ التغييرات الخاصة بك."
 
 msgid "Option"
-msgstr ""
+msgstr "خيار"
 
 msgid "Motivation for applying"
-msgstr ""
+msgstr "الدافع للتقديم"
 
 msgid "Status"
-msgstr ""
+msgstr "حالة"
 
 msgid "Contact E-Mail Address"
-msgstr ""
+msgstr "عنوان البريد الإلكتروني للاتصال"
 
 msgid "Contact Phone Number"
-msgstr ""
+msgstr "الاتصال رقم الهاتف"
 
 msgid "List of Applicants"
-msgstr ""
+msgstr "قائمة المتقدمين"
