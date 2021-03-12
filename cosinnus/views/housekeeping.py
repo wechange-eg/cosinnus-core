@@ -549,7 +549,8 @@ def user_activity_info(request):
     return make_csv_response(rows, headers, 'user-activity-report')
 
 
-def newsletter_users(request, includeOptedOut=False, never_logged_in_only=False, file_name='newsletter-user-emails'):
+def newsletter_users(request, includeOptedOut=False, never_logged_in_only=False, 
+                       all_portal_users=False, file_name='newsletter-user-emails'):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     if not getattr(settings, 'COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS', False):
@@ -558,15 +559,23 @@ def newsletter_users(request, includeOptedOut=False, never_logged_in_only=False,
     result_columns = [['email', 'firstname', 'lastname', 'registration_timestamp', 'language'],]
     portal = CosinnusPortal.get_current()
     
-    memberships = CosinnusPortalMembership.objects.filter(group=portal, user__is_active=True)
-    if never_logged_in_only:
-        memberships = memberships.filter(user__last_login__exact=None)
+    if all_portal_users:
+        # this gets users even when they don't have a portal membership yet
+        users = get_user_model().objects.filter(is_active=True)
+        if never_logged_in_only:
+            users = users.filter(last_login__exact=None)
+        else:
+            users = users.exclude(last_login__exact=None)
     else:
-        memberships = memberships.exclude(user__last_login__exact=None)
-    memberships = memberships.prefetch_related('user')
+        memberships = CosinnusPortalMembership.objects.filter(group=portal, user__is_active=True)
+        if never_logged_in_only:
+            memberships = memberships.filter(user__last_login__exact=None)
+        else:
+            memberships = memberships.exclude(user__last_login__exact=None)
+        memberships = memberships.prefetch_related('user')
+        users = [membership.user for membership in memberships]
     
-    for membership in memberships:
-        user = membership.user
+    for user in users:
         if includeOptedOut or (check_user_can_receive_emails(user) and user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True):
             row = [user.email, user.first_name, user.last_name, user.date_joined, user.cosinnus_profile.language]
             result_columns.append(row)
@@ -577,7 +586,7 @@ def active_user_emails(request):
 
 def never_logged_in_user_emails(request):
     return newsletter_users(request, includeOptedOut=True, never_logged_in_only=True,
-                            file_name='never-logged-in-user-emails')
+                            all_portal_users=True, file_name='never-logged-in-user-emails')
 
 def group_admin_emails(request, slugs):
     """ For a comma-seperated list of group slugs, return a CSV of all emails
