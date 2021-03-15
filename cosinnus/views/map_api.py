@@ -200,10 +200,20 @@ def map_search_endpoint(request, filter_group_id=None):
     # filter for read access by this user
     sqs = filter_searchqueryset_for_read_access(sqs, request.user)
     # filter events by upcoming status and exclude hidden proxies
-    if params['events'] and Event is not None:
+    if params['events'] or params['conferences'] and Event is not None:
         sqs = filter_event_searchqueryset_by_upcoming(sqs).exclude(is_hidden_group_proxy=True)
 
-    if (params.get('fromDate') or params.get('toDate')) and (params.get('events') or params.get('conferences')):
+    params_keys = [key for key, value in params.items() if value]
+    settings_keys = MAP_CONTENT_TYPE_SEARCH_PARAMETERS.keys()
+
+    content_type_params =  list(set(params_keys) & set(settings_keys))
+    check_date_cts = ['events', 'conferences']
+    reduced_pramas = list(set(content_type_params) & set(check_date_cts))
+
+    check_date_by_date_param = params.get('fromDate') or params.get('toDate')
+    check_date_by_conten_type = len(content_type_params) == len(reduced_pramas)
+
+    if check_date_by_date_param and check_date_by_conten_type:
         from_date_string = params.get('fromDate')
         from_time_string = params.get('fromTime')
         to_date_string = params.get('toDate')
