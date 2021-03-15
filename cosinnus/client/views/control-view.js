@@ -236,17 +236,22 @@ module.exports = ContentControlView.extend({
 
     toggleDateTimePicker: function () {
         var typesWithDates = ['events', 'conferences'];
-        var showDateTimePicker = false;
+        var showDateTimePicker = true;
         var selectedButtons = $('.result-filter-button.selected');
 
-        selectedButtons.each(function (i) {
-            if (this.hasAttribute('data-result-filter-type')) {
-                var type = this.getAttribute('data-result-filter-type')
-                if ($.inArray(type, typesWithDates) > -1) {
-                    showDateTimePicker = true;
+        if (selectedButtons.length == 0){
+            showDateTimePicker = false;
+        } else {
+            selectedButtons.each(function (i) {
+                if (this.hasAttribute('data-result-filter-type')) {
+                    var type = this.getAttribute('data-result-filter-type')
+                    if ($.inArray(type, typesWithDates) == -1) {
+                        showDateTimePicker = false;
+                    }
                 }
-            }
-        })
+            })
+        }
+
         this.showOrHideDateTimePicker(showDateTimePicker);
     },
 
