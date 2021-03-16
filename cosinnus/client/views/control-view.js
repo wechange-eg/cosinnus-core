@@ -213,24 +213,27 @@ module.exports = ContentControlView.extend({
     toggleManagedTagsOnType: function () {
         if (this.options.showManagedTagsOnTypesSelected.length > 0) {
             var typesForManagedTags = this.options.showManagedTagsOnTypesSelected
-            var showManagedTags = false;
+            var showManagedTags = true;
             var selectedButtons = $('.result-filter-button.selected');
 
-            selectedButtons.each(function (i) {
-                if (this.hasAttribute('data-result-filter-type')) {
-                    var type = this.getAttribute('data-result-filter-type')
-                    if ($.inArray(type, typesForManagedTags) > -1) {
-                        showManagedTags = true;
+            if (selectedButtons.length == 0){
+                showManagedTags = false;
+            } else {
+                selectedButtons.each(function (i) {
+                    if (this.hasAttribute('data-result-filter-type')) {
+                        var type = this.getAttribute('data-result-filter-type')
+                        if ($.inArray(type, typesForManagedTags) == -1) {
+                            showManagedTags = false;
+                        }
                     }
-                }
-            })
+                })
+            }
 
             if (showManagedTags) {
                 $('.managed-tags-buttons').show();
             } else {
                 $('.managed-tags-buttons').hide();
             }
-
         }
     },
 
@@ -1435,6 +1438,8 @@ module.exports = ContentControlView.extend({
         	this.options.showMine = util.ifundef(urlParams.mine, this.options.showMine);
         }
 
+        this.state.typeFiltersActive = Object.values(this.state.activeFilters).indexOf(true) > -1
+
         if (this.options.showManagedTagsOnTypesSelected.length > 0) {
             var activeFilters = this.state.activeFilters
             var showManagedTags = _.some(this.options.showManagedTagsOnTypesSelected, function(type) {
@@ -1443,7 +1448,7 @@ module.exports = ContentControlView.extend({
 
                 }
             });
-            this.state.displayManagedTagsFilter = showManagedTags
+            this.state.displayManagedTagsFilter = showManagedTags && this.state.typeFiltersActive
         }
 
         var today = moment().format('YYYY-MM-DD');
@@ -1453,7 +1458,7 @@ module.exports = ContentControlView.extend({
         this.state.toDate = util.ifundef(urlParams.toDate, in_a_month);
         this.state.toTime = util.ifundef(urlParams.toTime, "23:59").replace("%3A", ":");
     },
-    
+
     // extended from content-control-view.js
     contributeToSearchParameters: function(forAPI) {
         var searchParams = {
