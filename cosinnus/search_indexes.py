@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import json
 from haystack import indexes
 
 from django.contrib.auth import get_user_model
@@ -250,6 +251,7 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     managed_tags = indexes.MultiValueField()
     user_id = indexes.IntegerField(model_attr='user__id')
     created = indexes.DateTimeField(model_attr='user__date_joined')
+    dynamic_fields = indexes.MultiValueField()
 
     local_cached_attrs = ['_memberships_count']
     
@@ -273,6 +275,9 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     
     def prepare_managed_tags(self, obj):
         return obj.get_managed_tag_ids()
+
+    def prepare_dynamic_fields(self, obj):
+        return json.dumps(obj.dynamic_fields)
     
     def prepare_url(self, obj):
         """ NOTE: UserProfiles always contain a relative URL! """

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from copy import copy
 import datetime
+import json
 import re
 import pytz
 
@@ -420,6 +421,7 @@ class DetailedUserMapResult(DetailedMapResult):
     fields.update({
         'projects': [],
         'groups': [],
+        'dynamic_fields': {}
     })
 
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -443,10 +445,12 @@ class DetailedUserMapResult(DetailedMapResult):
         # the preview for projects and groups is always visible for everyone!
         #sqs = filter_searchqueryset_for_read_access(sqs, user)
         sqs = sqs.order_by('title')
-        
+
+
         kwargs.update({
             'projects': [],
             'groups': [],
+            'dynamic_fields': {}
         })
         for result in sqs:
             if SEARCH_MODEL_NAMES[result.model] == 'projects':
@@ -455,8 +459,9 @@ class DetailedUserMapResult(DetailedMapResult):
                 kwargs['conferences'].append(HaystackConferenceMapCard(result))
             else:
                 kwargs['groups'].append(HaystackGroupMapCard(result))
-                
-                
+
+        kwargs['dynamic_fields'] = json.loads(haystack_result.dynamic_fields[0])
+
         if getattr(settings, 'COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD', False):
             kwargs.update({
                 'may_be_contacted': obj.may_be_contacted,
