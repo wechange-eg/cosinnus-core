@@ -57,7 +57,7 @@ setup(
         # please mirror all changes in the requirements.txt for local installs!
         'Django>=2.1.5,<2.2',
         'MarkupSafe==1.1',
-        'Pillow==6.2.0',
+        'Pillow==8.1.1',
         'Celery==4.2.0',
         
         'django-allauth==0.42.0',
