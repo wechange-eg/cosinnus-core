@@ -377,7 +377,17 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
 
     def get_image_field_for_background(self):
         return self.wallpaper
-    
+
+    @property
+    def avatar_url(self):
+        return self.avatar.url if self.avatar else None
+
+    def get_avatar_thumbnail(self, size=(80, 80)):
+        return image_thumbnail(self.avatar, size)
+
+    def get_avatar_thumbnail_url(self, size=(80, 80)):
+        return image_thumbnail_url(self.avatar, size) or get_image_url_for_icon(self.get_icon(), large=True)
+
     def is_foreign_portal(self):
         return CosinnusPortal.get_current().id != self.portal_id
     

@@ -1,21 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import logging
+from taggit.models import Tag
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.db.models.query import QuerySet
+from django.core.validators import validate_comma_separated_integer_list
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusBaseGroup
-
-import logging
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
-from taggit.models import Tag
-from django.core.validators import validate_comma_separated_integer_list
-from django.db.models.query import QuerySet
 logger = logging.getLogger('cosinnus')
 
 
-class ExternalModelQuerySet(QuerySet):
+class ExchangeModelQuerySet(QuerySet):
 
     def count(self):
         return 0
@@ -33,13 +31,13 @@ class ExternalModelQuerySet(QuerySet):
         return self.none()
 
 
-class ExternalModelManager(models.Manager):
+class ExchangeModelManager(models.Manager):
     
     def all(self):
-        return ExternalModelQuerySet()
+        return ExchangeModelQuerySet()
     
 
-class ExternalObjectBaseModel(IndexingUtilsMixin, models.Model):
+class ExchangeObjectBaseModel(IndexingUtilsMixin, models.Model):
     """ Used for Haystack indexing of non-Databased map objects. 
         Index items by instantiating a subclass of this model and calling save() on it.
         
@@ -47,13 +45,12 @@ class ExternalObjectBaseModel(IndexingUtilsMixin, models.Model):
         SearchQuerySet. The aim of this base class is to always be compatible with both
         `HaystackMapCard` and `HaystackMapResult`.
     """
-    
+    id = models.CharField(max_length=255, primary_key=True)
     source = models.CharField(max_length=255, null=False)
-    # defaults to 0, which means external
-    portal = models.IntegerField(null=False)
+    portal = models.IntegerField(default=settings.COSINNUS_EXCHANGE_PORTAL_ID)
     # defaults to public=True because external
     public = models.BooleanField(default=True)
-    
+
     """ from StoredDataIndexMixin """
     
     title = models.CharField(max_length=255, null=False)
@@ -92,37 +89,35 @@ class ExternalObjectBaseModel(IndexingUtilsMixin, models.Model):
     mt_visibility = models.IntegerField(default=2)
     mt_public = models.BooleanField(default=True)
     
-    objects = ExternalModelManager()
+    objects = ExchangeModelManager()
     
     class Meta(object):
         managed = False
         
-    def __init__(self, external_id, source, title, url, mt_location, mt_location_lat, mt_location_lon,
-                 description=None, icon_image_url=None, contact_info=None, tags=[], topics=[]):
+    def __init__(self, **kwargs):
         """ Note:
             - `tags` is passed as an array of strings and then saved as taggit manager
             - `topics` is passed as an array of ints and then saved as comma-separated int string
                 (see `settings.TOPIC_CHOICES`)
         """
-        self.pk = url
-        self.slug = external_id
-        self.source = source
-        self.title = title
-        self.url = url
-        self.mt_location = mt_location
-        self.mt_location_lat = mt_location_lat
-        self.mt_location_lon = mt_location_lon
-        self.description = description
-        self.icon_image_url = icon_image_url
-        self.contact_info = contact_info
-        self.mt_topics = ','.join((str(topic) for topic in topics))
+        self.pk = kwargs.get('url')
+        self.slug = kwargs.get('external_id')
+        self.source = kwargs.get('source')
+        self.title = kwargs.get('title')
+        self.url = kwargs.get('url')
+        self.mt_location = kwargs.get('mt_location')
+        self.mt_location_lat = kwargs.get('mt_location_lat')
+        self.mt_location_lon = kwargs.get('mt_location_lon')
+        self.description = kwargs.get('description')
+        self.icon_image_url = kwargs.get('icon_image_url')
+        self.contact_info = kwargs.get('contact_info')
+        self.mt_topics = ','.join(str(t) for t in kwargs.get('mt_topics'))
         
         # add unknown tags to taggit, save all ids
         all_tags = []
-        for str_tag in tags:
-            try:
-                tag = Tag.objects.get(name__iexact=str_tag)
-            except Tag.DoesNotExist:
+        for str_tag in kwargs.get('mt_tags'):
+            tag = Tag.objects.filter(name__iexact=str_tag).first()
+            if not tag:
                 tag = Tag.objects.create(name=str_tag)
             all_tags.append(str(tag.id))
         self.mt_tags = ','.join(all_tags)
@@ -138,11 +133,11 @@ class ExternalObjectBaseModel(IndexingUtilsMixin, models.Model):
     
     def save(self, *args, **kwargs):
         """ Only updates the haystack index for this instance, does not save anything to DB.
-            Calling save() on any ExternalModel has this functionality. """
+            Calling save() on any ExchangeModel has this functionality. """
         self.update_index()
         
     
-class ExternalBaseGroup(ExternalObjectBaseModel):
+class ExchangeBaseGroup(ExchangeObjectBaseModel):
     
     GROUP_MODEL_TYPE = CosinnusBaseGroup.TYPE_PROJECT
     
@@ -150,11 +145,11 @@ class ExternalBaseGroup(ExternalObjectBaseModel):
         managed = False
 
     def __init__(self, *args, **kwargs):
-        super(ExternalBaseGroup, self).__init__(*args, **kwargs)
+        super(ExchangeBaseGroup, self).__init__(*args, **kwargs)
         self.type = self.GROUP_MODEL_TYPE
 
 
-class ExternalProject(ExternalBaseGroup):
+class ExchangeProject(ExchangeBaseGroup):
     
     GROUP_MODEL_TYPE = CosinnusBaseGroup.TYPE_PROJECT
     
@@ -162,9 +157,28 @@ class ExternalProject(ExternalBaseGroup):
         managed = False
 
 
-class ExternalSociety(ExternalBaseGroup):
+class ExchangeSociety(ExchangeBaseGroup):
     
     GROUP_MODEL_TYPE = CosinnusBaseGroup.TYPE_SOCIETY
     
     class Meta(object):
         managed = False
+
+
+class ExchangeOrganization(ExchangeObjectBaseModel):
+
+    class Meta(object):
+        managed = False
+
+
+class ExchangeEvent(ExchangeObjectBaseModel):
+    from_date = models.DateTimeField(max_length=255, blank=True, null=True)
+    to_date = models.DateTimeField(max_length=255, blank=True, null=True)
+
+    class Meta(object):
+        managed = False
+
+    def __init__(self, **kwargs):
+        self.from_date = kwargs.pop('from_date', None)
+        self.to_date = kwargs.pop('to_date', None)
+        super().__init__(**kwargs)

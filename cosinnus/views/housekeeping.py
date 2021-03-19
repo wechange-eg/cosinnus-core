@@ -17,11 +17,9 @@ from cosinnus.utils.group import move_group_content as move_group_content_utils,
 from cosinnus.models.widget import WidgetConfig
 from django.core.cache import cache
 from django.conf import settings
-from cosinnus.conf import settings as cosinnus_settings
 import json
 import urllib.request, urllib.error, urllib.parse
 from django.utils.encoding import force_text
-from uuid import uuid4
 import pickle
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 import datetime
@@ -32,11 +30,9 @@ from cosinnus.utils.user import filter_active_users, accept_user_tos_for_portal,
     get_user_tos_accepted_date
 from cosinnus.models.profile import get_user_profile_model
 from django.core.mail.message import EmailMessage
-from cosinnus.core.mail import send_mail_or_fail, send_mail,\
+from cosinnus.core.mail import send_mail,\
     send_mail_or_fail_threaded, send_html_mail_threaded,\
     render_notification_item_html_mail
-from django.template.defaultfilters import linebreaksbr
-from django.db.models.aggregates import Count
 from cosinnus.utils.http import make_csv_response
 from operator import itemgetter
 from cosinnus.utils.permissions import check_user_can_receive_emails
@@ -47,8 +43,6 @@ from annoying.functions import get_object_or_None
 logger = logging.getLogger('cosinnus')
 
 import logging
-from cosinnus.external.models import ExternalProject
-from haystack.query import SearchQuerySet
 logger = logging.getLogger('cosinnus')
 
 
@@ -71,32 +65,6 @@ def ensure_group_widgets(request=None):
     else:
         return ret
 
-
-def fill_external_data(request): 
-    if not request.user.is_superuser:
-        return HttpResponseForbidden('Not authenticated')
-    
-    project = ExternalProject(
-        external_id='https://my.item/item1',
-        source='https://my.item/',
-        title='My Item',
-        url='https://my.item/1item1',
-        mt_location='Location String',
-        mt_location_lat=52.526806,
-        mt_location_lon=11.313272,
-        description='A test description',
-        icon_image_url='/media/cosinnus_portals/portal_default/organization_images/images/wDnx8TQS0Ful.jpg',
-        contact_info='saschanarr@gmail.com',
-        tags=['Loltag', 'Tagtag'],
-        topics=[1,6],
-    )
-    project.save()
-    logger.warn('Check proj: %s' % project.slug)
-    sqs = SearchQuerySet().models(ExternalProject).all()
-    haystack_project = sqs[len(sqs)-1]
-    ret = '<br/>Count: %d<br/>URL of -1: %s<br/>Title of -1: %s<br/>ID of -1: %s<br/>Loc: %s,%s' % \
-     (len(sqs), haystack_project.url, haystack_project.title, haystack_project.id, haystack_project.mt_location_lat, haystack_project.mt_location_lon) 
-    return HttpResponse(ret)
 
 def delete_spam_users(request):
     if not request.user.is_superuser:

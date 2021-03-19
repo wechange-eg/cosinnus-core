@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.models import AnonymousUser
 from django.utils.timezone import now
 
+from cosinnus.conf import settings
 from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgramField,\
     TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin,\
     DocumentBoostMixin, CommaSeperatedIntegerMultiValueField,\
@@ -416,4 +417,3 @@ class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearch
 
 
 # also import all external search indexes
-from cosinnus.external.search_indexes import * #noqa

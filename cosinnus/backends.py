@@ -15,6 +15,7 @@ import smtplib
 from django.core.mail.message import sanitize_address
 
 from haystack.backends.elasticsearch_backend import ElasticsearchSearchBackend, ElasticsearchSearchEngine
+
 from urllib3.exceptions import ProtocolError, ConnectionError
 from elasticsearch.exceptions import TransportError
 
@@ -118,8 +119,9 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
         super(RobustElasticSearchBackend, self).remove(obj, commit)
 
     @mute_error
-    def clear(self, models=[], commit=True):
+    def clear(self, models=None, commit=True):
         super(RobustElasticSearchBackend, self).clear(models, commit)
+
 
 class RobustElasticSearchEngine(ElasticsearchSearchEngine):
     backend = RobustElasticSearchBackend

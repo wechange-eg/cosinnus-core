@@ -26,9 +26,21 @@
 {% endblock top_line_group %}
 
 {% block action_buttons %}
-{% endblock action_buttons %}
+{% if portal == COSINNUS_EXCHANGE_PORTAL_ID and url %}
+    <div class="tile-section tile-section-button-list">
+        <a class="rounded-button button-action" href="{{ url }}" target="_blank">
+            <span class="rounded-button-inner">
+                <i clasS="fa fa-external-link"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Organization" %} {% trans "on" %} {{ source }}
+            </span>
+        </a>
+    </div>
+{% endif %}
+{% endblock %}
 
 {% block contact %}
+{% if portal != COSINNUS_EXCHANGE_PORTAL_ID %}
     <div class="tile-section tile-section-divided">
         <div class="row">
             <div class="col-xs-6">
@@ -136,4 +148,5 @@
             </div>
         </div>
     {% endif %}
+{% endif %}
 {% endblock contact %}
