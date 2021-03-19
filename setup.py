@@ -86,7 +86,7 @@ setup(
         'django-suit==0.2.26',
         'django-taggit==0.23.0',
         'django-widget-tweaks==1.3',
-        'djangorestframework==3.9.1',
+        'djangorestframework==3.11.2',
         'djangorestframework-jwt==1.11.0',
         'dnspython==1.15.0',
         'drf-yasg==1.17.1',
