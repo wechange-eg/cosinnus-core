@@ -13,6 +13,7 @@ from django.template.defaultfilters import linebreaksbr
 from django.utils.html import escape
 from django.utils import timezone
 from django.utils.timezone import now
+from django.template.loader import render_to_string
 from haystack.query import SearchQuerySet
 
 from cosinnus.conf import settings
@@ -421,7 +422,7 @@ class DetailedUserMapResult(DetailedMapResult):
     fields.update({
         'projects': [],
         'groups': [],
-        'dynamic_fields': {}
+        'extra_html': ''
     })
 
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -446,11 +447,16 @@ class DetailedUserMapResult(DetailedMapResult):
         #sqs = filter_searchqueryset_for_read_access(sqs, user)
         sqs = sqs.order_by('title')
 
+        dynamic_fields_template = render_to_string('cosinnus/user/user_profile_dynamic_fields.html',
+                                                  {'profile': obj,
+                                                   'profile_values':obj.dynamic_fields,
+                                                   'labels': settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
+                                                   })
 
         kwargs.update({
             'projects': [],
             'groups': [],
-            'dynamic_fields': {}
+            'extra_html': dynamic_fields_template
         })
         for result in sqs:
             if SEARCH_MODEL_NAMES[result.model] == 'projects':
@@ -459,8 +465,6 @@ class DetailedUserMapResult(DetailedMapResult):
                 kwargs['conferences'].append(HaystackConferenceMapCard(result))
             else:
                 kwargs['groups'].append(HaystackGroupMapCard(result))
-
-        kwargs['dynamic_fields'] = json.loads(haystack_result.dynamic_fields[0])
 
         if getattr(settings, 'COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD', False):
             kwargs.update({
