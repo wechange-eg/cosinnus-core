@@ -46,6 +46,7 @@ from annoying.functions import get_object_or_None
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus import cosinnus_notifications
 from uuid import uuid1
+from cosinnus.forms.dynamic_fields import _DynamicFieldsBaseFormMixin
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -108,8 +109,31 @@ class AsssignPortalMixin(object):
         return super(AsssignPortalMixin, self).save(**kwargs)
 
 
+class GroupFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
+    """ Mixin for the CosinnusBaseGroupForm modelform that
+        adds functionality for by-portal configured extra group form fields """
+        
+    DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_GROUP_EXTRA_FIELDS
+    
+    def full_clean(self):
+        """ Assign the extra fields to the `extra_fields` the userprofile JSON field
+            instead of model fields, during regular form saving """
+        super().full_clean()
+        if hasattr(self, 'cleaned_data'):
+            for field_name in self.DYNAMIC_FIELD_SETTINGS.keys():
+                # skip saving fields that weren't included in the POST
+                # this is important, do not add exceptions here.
+                # if you need an exception, add a hidden field with the field name and any value!
+                if not field_name in self.data.keys():
+                    continue
+                # skip saving disabled fields
+                if field_name in self.fields and not self.fields[field_name].disabled:
+                    self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
+
+
 class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, 
-                ManagedTagFormMixin, FormAttachableMixin, AdditionalFormsMixin, forms.ModelForm):
+                GroupFormDynamicFieldsMixin, ManagedTagFormMixin, FormAttachableMixin, 
+                AdditionalFormsMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 
                   disable_preview=True, validators=[validate_file_infection])
@@ -127,7 +151,8 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 'sdgs',
                         'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
                          'twitter_widget_id', 'flickr_url', 'deactivated_apps', 'microsite_public_apps',
-                         'call_to_action_active', 'call_to_action_title', 'call_to_action_description',] \
+                         'call_to_action_active', 'call_to_action_title', 'call_to_action_description',
+                         'membership_mode'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else []) \
                         + (['embedded_dashboard_html',] if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED else []) \
@@ -276,6 +301,11 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
 class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
     """ Specific form implementation for CosinnusProject objects (used through `registration.group_models`)  """
     
+    membership_mode = forms.ChoiceField(
+        choices=CosinnusProject.MEMBERSHIP_MODE_CHOICES,
+        required=False
+    )
+    
     extra_forms_setting = 'COSINNUS_PROJECT_ADDITIONAL_FORMS'
 
     class Meta(object):
@@ -302,6 +332,11 @@ class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
 class _CosinnusSocietyForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
     """ Specific form implementation for CosinnusSociety objects (used through `registration.group_models`)  """
     
+    membership_mode = forms.ChoiceField(
+        choices=CosinnusSociety.MEMBERSHIP_MODE_CHOICES,
+        required=False
+    )
+    
     extra_forms_setting = 'COSINNUS_GROUP_ADDITIONAL_FORMS'
 
     class Meta(object):
@@ -314,13 +349,16 @@ class _CosinnusConferenceForm(CleanAppSettingsMixin, AsssignPortalMixin, Cosinnu
     
     from_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='00:00'))
     to_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='23:59'))
-    use_conference_applications = forms.BooleanField(initial=settings.COSINNUS_CONFERENCES_USE_APPLICATIONS_CHOICE_DEFAULT, required=False)
+    membership_mode = forms.ChoiceField(
+        initial=(CosinnusConference.MEMBERSHIP_MODE_APPLICATION if settings.COSINNUS_CONFERENCES_USE_APPLICATIONS_CHOICE_DEFAULT else CosinnusConference.MEMBERSHIP_MODE_REQUEST),
+        choices=CosinnusConference.MEMBERSHIP_MODE_CHOICES,
+        required=False
+    )
     
     extra_forms_setting = 'COSINNUS_CONFERENCE_ADDITIONAL_FORMS'
     
     class Meta(object):
         fields = CosinnusBaseGroupForm.Meta.fields + [
-                    'use_conference_applications', 
                     'conference_theme_color',
                     'from_date',
                     'to_date',

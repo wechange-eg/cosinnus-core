@@ -1055,7 +1055,6 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
 
     message_success = _('You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request.')
     referer_url = reverse_lazy('cosinnus:group-list')
-    auto_accept_slugs = getattr(settings, 'COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS', [])
     membership_status = MEMBERSHIP_MEMBER
 
     @method_decorator(login_required)
@@ -1090,8 +1089,8 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
                 messages.success(self.request, _('You had already been invited to "%(team_name)s" and have now been made a member immediately!') % {'team_name': self.object.name})
                 signals.user_group_invitation_accepted.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
         except self.membership_class.DoesNotExist:
-            # default user-auto-join groups will accept immediately
-            if self.object.slug in self.auto_accept_slugs:
+            # auto-join groups will accept immediately
+            if self.object.is_autojoin_group:
                 self.membership_class.objects.create(
                     user=self.request.user,
                     group=self.object,
@@ -1110,8 +1109,7 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
 
 
 class CSRFExemptGroupJoinView(GroupUserJoinView):
-    """ A CSRF-exempt group user join view that only works on groups/projects with slugs
-        in settings.COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS in this portal.
+    """ A CSRF-exempt group user join view that only works on autojoin groups.
     """
     
     @csrf_exempt
@@ -1120,7 +1118,7 @@ class CSRFExemptGroupJoinView(GroupUserJoinView):
     
     def get_object(self, *args, **kwargs): 
         group = super(CSRFExemptGroupJoinView, self).get_object(*args, **kwargs)
-        if group and group.slug not in self.auto_accept_slugs:
+        if group and not group.is_autojoin_group:
             raise PermissionDenied('The group/project requested for the join is not marked as auto-join!')
         return group
 

@@ -10,6 +10,12 @@ export const useStyles = makeStyles((theme) => ({
     },
     "& > div > span": {
       backgroundColor: theme.palette.primary.main
+    },
+    "& .MuiTab-root.Mui-selected, & .MuiTab-root:hover": {
+      background: theme.palette.primary.light,
+      "& span,svg": {
+        color: theme.palette.text.primary,
+      },
     }
   },
   tabPanel: {
@@ -38,12 +44,12 @@ export const useStyles = makeStyles((theme) => ({
     "&:hover": {
       background: theme.palette.primary.main,
       cursor: "pointer",
-      color: "#ffffff",
+      color: theme.palette.text.secondary,
       "& div:first-child p": {
         color: theme.palette.primary.light,
       },
       "& a": {
-        color: "#ffffff"
+        color: theme.palette.text.secondary
       }
     }
   },
@@ -74,7 +80,7 @@ export const useStyles = makeStyles((theme) => ({
   left: {
     flex: "0 0 60%",
     "& p": {
-      color: theme.palette.text.secondary,
+      color: theme.palette.text.primary,
     },
   },
   right: {

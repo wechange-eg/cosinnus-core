@@ -212,7 +212,7 @@ class StarredUsersWidgetView(BaseUserDashboardWidgetView):
         profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
         likeobjects = LikeObject.objects.filter(user=self.request.user, content_type=profile_ct, starred=True)
         liked_users_ids = likeobjects.values_list('object_id', flat=True)
-        liked_users = get_user_profile_model().objects.filter(id__in=liked_users_ids)
+        liked_users = get_user_profile_model().objects.filter(id__in=liked_users_ids, user__is_active=True)
         users = []
         for user in liked_users:
             dashboard_item = DashboardItem(user)
@@ -248,13 +248,15 @@ class FollowedObjectsWidgetView(BaseUserDashboardWidgetView):
     """ Shows all unlimited (for now) ideas the user likes. """
 
     def get_data(self, *kwargs):
-        profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
-        group_ct = ContentType.objects.get_for_model(CosinnusGroup)
         followed = LikeObject.objects.filter(user=self.request.user, followed=True)
         objects = []
         for follow in followed:
             ct = ContentType.objects.get_for_id(follow.content_type.id)
             obj = ct.get_object_for_this_type(pk=follow.object_id)
+            # filter inactive groups
+            if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
+                if not obj.is_active:
+                    continue
             dashboard_item = DashboardItem(obj)
             dashboard_item['id'] = obj.id
             dashboard_item['ct'] = obj.get_content_type()

@@ -197,12 +197,32 @@
 	                        {% endif %}
                         {% endblock %}
                         
-                        {% block use_conference_applications_field %}
-	                        {% if form.forms.obj.use_conference_applications %}
-	                            {% captureas use_conference_applications_label %}{% trans 'Application method' %}{% endcaptureas %}
-	                            {% captureas use_conference_applications_checkbox_label %}{% trans 'Require participation applications for this conference' %}{% endcaptureas %}
-	                            {% captureas use_conference_applications_legend %}{% trans "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area." %}{% endcaptureas %}
-	                            {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_conference_applications label=use_conference_applications_label checkbox_label=use_conference_applications_checkbox_label legend=use_conference_applications_legend %}
+                        {% block membership_mode_field %}
+	                        {% if form.forms.obj.membership_mode %}
+	                            {% captureas membership_mode_label %}{% trans 'Application method' %}{% endcaptureas %}
+	                            {% captureas membership_mode_legend %}
+                                    <div class="group-membership-mode-legend value-0" style="display: none;">
+                                        {{ group_model_class.get_trans.FORMFIELD_MEMBERSHIP_MODE_TYPE_0_LEGEND }}
+                                    </div>
+                                    <div class="group-membership-mode-legend value-1" style="display: none;">
+                                        {% trans "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area." %}
+                                    </div>
+                                    <div class="group-membership-mode-legend value-2" style="display: none;">
+                                        {% trans "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items." %}
+                                    </div>
+                                {% endcaptureas %}
+	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.membership_mode label=membership_mode_label legend=membership_mode_legend %}
+                                {% comment %} Change the membership mode field legend depending on the selection {% endcomment %}
+                                <script type="text/javascript">
+                                    var change_membership_mode_legend = function(){
+                                        $('.group-membership-mode-legend').hide();
+                                        $('.group-membership-mode-legend.value-' + $('#id_membership_mode').val()).show();
+                                    };
+                                    change_membership_mode_legend();
+                                    $(function(){
+                                        $('#id_membership_mode').on('change', change_membership_mode_legend);
+                                    });
+                                </script>
 	                        {% endif %}
                         {% endblock %}
 				        
@@ -364,6 +384,11 @@
 		                        {% include 'cosinnus/fields/managed_tag_formfield.html' with form=form.forms.obj legend=COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_CONTENT type="group" %}
 		                    {% endif %}
 		                {% endblock managed_tag_field %}
+		                
+		                {% comment %} The fields in this block are generated from `settings.COSINNUS_GROUP_EXTRA_FIELDS` {% endcomment %}
+		                {% block portal_specific_group_extra_fields %}
+		                    {% include 'cosinnus/fields/userprofile_extra_formfields.html' with form=form.forms.obj %}
+		                {% endblock %}
                         
                         {% block visibility_field %}
                             {% if not group_model == "CosinnusConference" %}

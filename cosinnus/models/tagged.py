@@ -515,7 +515,13 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
     def secret_from_created(self):
         """ Returns an (unsafe) secret id based on the created date timestamp """
         return str(timestamp_from_datetime(self.created)).replace('.', '')
-        
+    
+    def get_readable_title(self):
+        """ The human-readable title. 
+            An overridable replacement for the title, to be used by extending models
+            that may not have a well-readable title. """
+        return self.title
+    
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     """

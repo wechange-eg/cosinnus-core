@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
     "&:hover": {
       background: theme.palette.primary.main,
       cursor: "pointer",
-      color: "#ffffff",
+      color: theme.palette.text.secondary,
       "& div:first-child p": {
         color: theme.palette.primary.light,
       }

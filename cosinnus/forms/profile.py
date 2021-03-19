@@ -1,22 +1,44 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from builtins import object
-from django import forms
-
 from awesome_avatar import forms as avatar_forms
+from builtins import object
 from multiform.forms import InvalidArgument
 
-from cosinnus.models.profile import get_user_profile_model,\
-    UserProfileFormExtraFieldsMixin
+from django import forms
+
+from cosinnus.conf import settings
+from cosinnus.forms.dynamic_fields import _DynamicFieldsBaseFormMixin
+from cosinnus.forms.managed_tags import ManagedTagFormMixin
 from cosinnus.forms.tagged import get_form
 from cosinnus.forms.user import UserChangeForm
-from cosinnus.conf import settings
-from cosinnus.forms.managed_tags import ManagedTagFormMixin
+from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.validators import validate_file_infection
 
 
-class _UserProfileForm(UserProfileFormExtraFieldsMixin, ManagedTagFormMixin, forms.ModelForm):
+class UserProfileFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
+    """ Mixin for the UserProfile modelform that
+        adds functionality for by-portal configured extra profile form fields """
+        
+    DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
+    
+    def full_clean(self):
+        """ Assign the extra fields to the `dynamic_fields` the userprofile JSON field
+            instead of model fields, during regular form saving """
+        super().full_clean()
+        if hasattr(self, 'cleaned_data'):
+            for field_name in self.DYNAMIC_FIELD_SETTINGS.keys():
+                # skip saving fields that weren't included in the POST
+                # this is important, do not add exceptions here.
+                # if you need an exception, add a hidden field with the field name and any value!
+                if not field_name in self.data.keys():
+                    continue
+                # skip saving disabled fields
+                if field_name in self.fields and not self.fields[field_name].disabled:
+                    self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
+
+
+class _UserProfileForm(UserProfileFormDynamicFieldsMixin, ManagedTagFormMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True, validators=[validate_file_infection])
     website = forms.URLField(widget=forms.TextInput, required=False)

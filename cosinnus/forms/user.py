@@ -1,26 +1,28 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from builtins import str
 from builtins import object
+from builtins import str
+import logging
+
+from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth import get_user_model, password_validation
-from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm,\
+from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm, \
     AuthenticationForm, PasswordChangeForm
+from django.core.validators import MaxLengthValidator
+from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
-
+from cosinnus.forms.dynamic_fields import _DynamicFieldsBaseFormMixin
+from cosinnus.forms.managed_tags import ManagedTagFormMixin
 from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
+from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject
-from django.core.validators import MaxLengthValidator
-from captcha.fields import CaptchaField
-from django.utils.timezone import now
 from cosinnus.utils.user import accept_user_tos_for_portal
 
-import logging
-from cosinnus.models.profile import UserCreationFormExtraFieldsMixin
-from cosinnus.forms.managed_tags import ManagedTagFormMixin
+
 logger = logging.getLogger('cosinnus')
 
 
@@ -52,9 +54,38 @@ class TermsOfServiceFormFields(forms.Form):
     
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
         newsletter_opt_in = forms.BooleanField(label='newsletter_opt_in', required=False)
-        
 
-class UserCreationForm(UserCreationFormExtraFieldsMixin, TermsOfServiceFormFields, ManagedTagFormMixin, DjUserCreationForm):
+
+class UserCreationFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
+    """ Like UserProfileFormDynamicFieldsMixin, but works with the user signup form """
+    
+    DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
+    
+    # only show fields with option `in_signup` set to True
+    filter_included_fields_by_option_name = 'in_signup'
+    
+    def prepare_extra_fields_initial(self):
+        """ no need for this, as the creation form never has any initial values """
+        pass
+    
+    def save(self, commit=True):
+        """ Assign the extra fields to the user's cosinnus_profile's `dynamic_fields` 
+        JSON field instead of model fields, after user form save """
+        ret = super().save(commit=commit)
+        if commit:
+            if hasattr(self, 'cleaned_data'):
+                # sanity check, retrieve the user's profile (will create it if it doesnt exist)
+                if not self.instance.cosinnus_profile:
+                    get_user_profile_model()._default_manager.get_for_user(self.instance)
+                
+                profile = self.instance.cosinnus_profile
+                for field_name in self.DYNAMIC_FIELD_SETTINGS.keys():
+                    profile.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
+                    profile.save()
+        return ret
+    
+
+class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFields, ManagedTagFormMixin, DjUserCreationForm):
     # Inherit from UserCreationForm for proper password hashing!
 
     class Meta(object):

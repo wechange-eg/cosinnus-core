@@ -447,8 +447,8 @@ notifications = {
         'moderatable_content': True,
         
         'is_html': True,
-        'event_text': _('%(sender_name)s just created the project/group "%(team_name)s" on %(portal_name)s!'),
-        'subject_text': _('%(sender_name)s just created the project/group "%(team_name)s" on %(portal_name)s!'),
+        'event_text': _('%(sender_name)s just created "%(team_name)s" on %(portal_name)s!'),
+        'subject_text': _('%(sender_name)s just created "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
             'object_name': 'name',
             'object_text': 'description',

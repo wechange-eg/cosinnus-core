@@ -18,6 +18,7 @@ import {ManageRoomButtons} from "../components/ManageRoomButtons"
 import {Room} from "../../stores/room/models"
 import {EventRoomState} from "../../stores/events/reducer"
 import {Loading} from "../components/Loading"
+import {Notification} from "../components/Notification"
 
 interface StageProps {
   events: EventRoomState
@@ -50,6 +51,7 @@ function StageConnector (props: StageProps & RouteComponentProps) {
   return (
     <Grid container>
       <Content>
+        <Notification />
         <Typography component="h1"><FormattedMessage id="Agenda" /></Typography>
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />

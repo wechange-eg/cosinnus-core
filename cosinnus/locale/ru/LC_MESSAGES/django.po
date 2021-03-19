@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-26 18:46+0100\n"
+"POT-Creation-Date: 2021-03-07 17:51+0100\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -464,9 +464,10 @@ msgstr "%(sender_name)s пригласил(а) Вас присоединитьс
 msgid "%(sender_name)s invited you to apply for \"%(team_name)s\" on %(portal_name)s! <br/><br/> To apply, please click on the link below."
 msgstr "%(sender_name)s пригласил Вас присоединиться, \"%(team_name)s\" к %(portal_name)s! <br/><br/> Чтобы присоединиться, нажмите, пожалуйста, на ссылку ниже. Вы будете переадресованы на портал, где сможете посмотреть и принять приглашение."
 
-#, python-format
-msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s только что создал(а) проект/группу “%(team_name)s” on %(portal_name)s!"
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s just created \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s пригласил(а) Вас присоединиться к “%(object_name)s\" на %(portal_name)s!"
 
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
@@ -848,6 +849,9 @@ msgid "Cosinnus Micropages"
 msgstr "Микросайты Cosinnus"
 
 msgid "BBB Server"
+msgstr ""
+
+msgid "BBB Server for Premium Conferences"
 msgstr ""
 
 #, fuzzy
@@ -1245,6 +1249,17 @@ msgstr "Проект"
 msgid "Conference"
 msgstr "Конференция"
 
+#, fuzzy
+#| msgid "New membership request"
+msgid "Regular membership requests"
+msgstr "Новые заявки на вступление"
+
+msgid "Require participation applications for this conference"
+msgstr ""
+
+msgid "Everyone may join"
+msgstr ""
+
 msgid "Project Type"
 msgstr "Тип проекта"
 
@@ -1271,6 +1286,11 @@ msgstr "Фоновое изображение"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Отображается на микросайте как большой баннер (1140 x 240 px)"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application method"
+msgstr "Название приложения"
 
 msgid "Microsite Video"
 msgstr "Микросайт Видео"
@@ -1345,9 +1365,6 @@ msgstr "Дата начала."
 msgid "End Datetime"
 msgstr "Любая дата."
 
-msgid "Determins if application management is visible in conference administration."
-msgstr ""
-
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
 
@@ -1362,11 +1379,24 @@ msgstr "Управление конференцией"
 msgid "If enabled, temporary user accounts for this conference are active and can log in."
 msgstr ""
 
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conference is currrently premium"
+msgstr "Проходит конференция"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conference is permanently premium"
+msgstr "Проходит конференция"
+
 msgid "Parent Group"
 msgstr "Исходная группа"
 
 msgid "Related Teams"
 msgstr "Имеются связи с"
+
+msgid "Dynamic extra fields"
+msgstr ""
 
 msgid "Cosinnus project"
 msgstr "Cosinnus Проект"
@@ -1548,9 +1578,6 @@ msgstr "Язык"
 
 msgid "May be contacted"
 msgstr "Можно связаться"
-
-msgid "Dynamic extra fields"
-msgstr ""
 
 msgid "Terms of Service"
 msgstr "Условия пользования"
@@ -2110,6 +2137,97 @@ msgstr "Администрирование"
 msgid "Select a page on the left side."
 msgstr "Выбрать страницу слева."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Конференция"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+#| msgid "View on page"
+msgid "View Upcoming"
+msgstr "Посмотреть на странице"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+#| msgid "View Project"
+msgid "View Past"
+msgstr "Посмотреть проект"
+
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Portal Setting"
+msgstr "Настройки приватности"
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Conference Settings"
+msgstr "Настройки конференции"
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Is premium"
+msgstr "Премиум"
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Not premium"
+msgstr "Премиум"
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Ограниченный"
+
+#, fuzzy
+#| msgid "Join now!"
+msgid "running now!"
+msgstr "Присоединяйтесь сейчас!"
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Conference Setting"
+msgstr "Настройки конференции"
+
+#, fuzzy
+#| msgid "Room Type"
+msgid "Room"
+msgstr "Тип комнаты"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Мероприятия"
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no items to show."
+msgstr "Здесь пока пусто"
+
+msgid "BBB"
+msgstr ""
+
+#, fuzzy
+#| msgid "Premium"
+msgid "BBB Premium"
+msgstr "Премиум"
+
+# ???
+#, fuzzy
+#| msgid "Not assigned"
+msgid "Not set"
+msgstr "Не определено"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2167,6 +2285,16 @@ msgstr "Приветственный емейл пользователям"
 
 msgid "Simple Statistics"
 msgstr "Простая статистика"
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Conference Overview"
+msgstr "Настройки конференции"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conferences with Custom Settings"
+msgstr "Проходит конференция"
 
 msgid "Edit"
 msgstr "Редактировать"
@@ -2800,11 +2928,6 @@ msgstr ""
 msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
 msgstr ""
 
-#, fuzzy
-#| msgid "Application name"
-msgid "Application method"
-msgstr "Название приложения"
-
 #, python-format
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr ""
@@ -2966,6 +3089,9 @@ msgstr "Максимум участников за кофейным столик
 msgid "How many participants should can join one coffee table before it is full"
 msgstr ""
 
+msgid "Attention: The visible update of the free seats is still work in progress. Therefore, we recommend not to use the limitation of individual coffee tables, so as not to let the virtual coffee go cold while searching for free seats."
+msgstr ""
+
 msgid "Choose one of the sub-projects of this group to display as nested results-project for participants"
 msgstr ""
 
@@ -3014,6 +3140,14 @@ msgstr "Вы действительно хотите удалить объявл
 #| msgid "Delete Profile"
 msgid "Delete room"
 msgstr "Удалить профиль"
+
+msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference Rooms"
+msgid "Conference Bookings"
+msgstr "Комнаты конференции"
 
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr ""
@@ -3361,34 +3495,6 @@ msgid "No contact data has been added yet."
 msgstr "Контактная информация ещё не была внесена."
 
 #, fuzzy
-#| msgid "Register and join!"
-msgid "Register and apply!"
-msgstr "Зарегистрируйтесь и присоединитесь!"
-
-msgid "Register and join!"
-msgstr "Зарегистрируйтесь и присоединитесь!"
-
-#, fuzzy
-#| msgid "You have been invited to collaborate!"
-msgid "You have been invited to apply!"
-msgstr "Вас пригласили сотрудничать!"
-
-msgid "Decline Invitation"
-msgstr "Отклонить приглашение"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "Вы действительно хотите отклонить приглашение?"
-
-#, fuzzy
-#| msgid "Application name"
-msgid "Edit Application"
-msgstr "Название приложения"
-
-#, fuzzy
-msgid "Apply for Participation"
-msgstr "Участники"
-
-#, fuzzy
 #| msgid "Protected Content"
 msgid "Your Deactivated Content"
 msgstr "Защищенный контент"
@@ -3466,6 +3572,9 @@ msgstr "Приглашенные участники"
 msgid "Revoke Invitation"
 msgstr "Отозвать приглашение"
 
+msgid "Decline Invitation"
+msgstr "Отклонить приглашение"
+
 msgid "Accept Invitation"
 msgstr "Принять приглашение"
 
@@ -3478,6 +3587,9 @@ msgstr "Вы действительно хотите отозвать пригл
 
 msgid "Revoke Invitation for Member"
 msgstr "Отозвать приглашение для участника"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Вы действительно хотите отклонить приглашение?"
 
 msgid "There are no pending invitations."
 msgstr "Нет приглашений, ожидающих Вашего внимания."
@@ -3653,10 +3765,10 @@ msgstr "Конференция успешно началась и пользов
 msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgstr ""
 
-msgid "Require participation applications for this conference"
+msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
 msgstr ""
 
-msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
+msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
 msgstr ""
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
@@ -3905,6 +4017,10 @@ msgstr "Покинуть"
 msgid "Details"
 msgstr "Детали"
 
+#, fuzzy
+msgid "Apply for Participation"
+msgstr "Участники"
+
 #, python-format
 msgid "Do you really want to leave „%(title)s“?"
 msgstr "Вы действительно хотите покинуть проект „%(title)s“?"
@@ -3975,6 +4091,9 @@ msgstr "Галерея Flickr/Слайдшоу"
 msgid "Call to Action"
 msgstr "Призыв к действию"
 
+msgid "Register and join!"
+msgstr "Зарегистрируйтесь и присоединитесь!"
+
 msgid "Register"
 msgstr "Регистрация"
 
@@ -3998,11 +4117,42 @@ msgstr "Заявка на членство в ожидании..."
 msgid "You are invited!"
 msgstr "Вы приглашены!"
 
+msgid "Participation is open for everyone. You may instantly join and become a member."
+msgstr ""
+
+msgid "You may request to become a member and participate once your request has been accepted."
+msgstr ""
+
 msgid "Join now!"
 msgstr "Присоединяйтесь сейчас!"
 
+#, fuzzy
+#| msgid "Team membership"
+msgid "Request membership"
+msgstr "Членство в группе"
+
+#, fuzzy, python-format
+#| msgid "Do you wish to request to join „%(title)s“?"
+msgid "Do you wish to join „%(title)s“ now?"
+msgstr "Вы хотите отправить запрос, чтобы присоединиться к „%(title)s“?"
+
 msgid "Browse"
 msgstr "Просматривать"
+
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Register and apply!"
+msgstr "Зарегистрируйтесь и присоединитесь!"
+
+#, fuzzy
+#| msgid "You have been invited to collaborate!"
+msgid "You have been invited to apply!"
+msgstr "Вас пригласили сотрудничать!"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Edit Application"
+msgstr "Название приложения"
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5313,10 +5463,6 @@ msgid "Cloud Files"
 msgstr "Загрузить файл"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Мероприятия"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Idea"
 msgstr "Идея"
 
@@ -6604,6 +6750,9 @@ msgstr "Где Вы проводите свой проект?"
 msgid "Project members only"
 msgstr "Только для членов проекта или группы"
 
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
 msgid "Collaborate!"
 msgstr "Давайте сотрудничать!"
 
@@ -6706,6 +6855,9 @@ msgstr "Где Вы проводите свой проект?"
 #| msgid "Team members only"
 msgid "Group members only"
 msgstr "Только для членов проекта или группы"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
 
 #, fuzzy
 #| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
@@ -6834,6 +6986,9 @@ msgstr "Где Вы проводите свой проект?"
 msgid "Conference members only"
 msgstr "Цвет темы конференции"
 
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
 #, fuzzy
 #| msgid "Participants"
 msgid "Participate!"
@@ -6911,7 +7066,7 @@ msgstr "(Элемент, на который поступила жалоба, у
 msgid "Newsletter successfully created!"
 msgstr ""
 
-msgid "Login tokens to all previously uninvited users are now being sent."
+msgid "Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations."
 msgstr ""
 
 #, python-format
@@ -7395,6 +7550,9 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
+#~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+#~ msgstr "%(sender_name)s только что создал(а) проект/группу “%(team_name)s” on %(portal_name)s!"
+
 #~ msgid "All societies"
 #~ msgstr "Все сообщества"
 
@@ -7536,9 +7694,6 @@ msgstr "Ваши изменения были сохранены."
 
 #~ msgid "Nachrichten"
 #~ msgstr "Новости"
-
-#~ msgid "New membership request"
-#~ msgstr "Новые заявки на вступление"
 
 #, fuzzy
 #~ msgid "Options"

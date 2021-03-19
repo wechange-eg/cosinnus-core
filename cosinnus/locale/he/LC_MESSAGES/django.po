@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-26 18:46+0100\n"
+"POT-Creation-Date: 2021-03-07 17:51+0100\n"
 "PO-Revision-Date: 2020-09-29 18:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -483,9 +483,10 @@ msgstr ""
 "%(sender_name)s הזמין אותך להצטרף ל-\"%(team_name)s\" ב-%(portal_name)s!\n"
 "<br/><br/> על מנת להצטרך, לחץ על הקישור שלהלן. תקושר ישירות לפורטל בו תוכל לצפות ולאשר את ההזמנה."
 
-#, python-format
-msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s יצר כרגע את הפרויקט/קבוצה \"%(team_name)s\" ב-%(portal_name)s!"
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s just created \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s יצר כרגע את הרעיון \"%(object_name)s\" ב-%(portal_name)s!"
 
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
@@ -867,6 +868,9 @@ msgid "Cosinnus Micropages"
 msgstr "Micropages קוסינוס"
 
 msgid "BBB Server"
+msgstr ""
+
+msgid "BBB Server for Premium Conferences"
 msgstr ""
 
 #, fuzzy
@@ -1282,6 +1286,17 @@ msgstr "פרויקט"
 msgid "Conference"
 msgstr "הוועידה פועלת"
 
+#, fuzzy
+#| msgid "Membership requests"
+msgid "Regular membership requests"
+msgstr "בקשות חברות"
+
+msgid "Require participation applications for this conference"
+msgstr ""
+
+msgid "Everyone may join"
+msgstr ""
+
 msgid "Project Type"
 msgstr "סוג פרויקט"
 
@@ -1308,6 +1323,11 @@ msgstr "תמונת טפט"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "מוצג כתמונת מודעה גדולה על ה- Microsite (1140 x 240 px)"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application method"
+msgstr "שם יישום"
 
 msgid "Microsite Video"
 msgstr "סרטון Microsite"
@@ -1386,9 +1406,6 @@ msgstr "תאריך התחלה."
 msgid "End Datetime"
 msgstr "תאריך סיום."
 
-msgid "Determins if application management is visible in conference administration."
-msgstr ""
-
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
 
@@ -1403,11 +1420,24 @@ msgstr "ניהול כנסים"
 msgid "If enabled, temporary user accounts for this conference are active and can log in."
 msgstr ""
 
+#, fuzzy
+#| msgid "Conference is not running"
+msgid "Conference is currrently premium"
+msgstr "הוועידה אינה פועלת"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conference is permanently premium"
+msgstr "הוועידה פועלת"
+
 msgid "Parent Group"
 msgstr "קבוצת הורים"
 
 msgid "Related Teams"
 msgstr "צוותים קשורים"
+
+msgid "Dynamic extra fields"
+msgstr ""
 
 msgid "Cosinnus project"
 msgstr "פרויקט קוסינוס"
@@ -1596,9 +1626,6 @@ msgstr "שפה"
 
 msgid "May be contacted"
 msgstr "ניתן ליצור קשר"
-
-msgid "Dynamic extra fields"
-msgstr ""
 
 msgid "Terms of Service"
 msgstr "תנאי שימוש"
@@ -2155,6 +2182,98 @@ msgstr "ניהול מערכת"
 msgid "Select a page on the left side."
 msgstr "בחר עמוד בצד שמאל."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Overview - All Conferences"
+msgstr "הוועידה פועלת"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+#| msgid "View on page"
+msgid "View Upcoming"
+msgstr "הצג בדף"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+#| msgid "View Project"
+msgid "View Past"
+msgstr "צפה בפרויקט"
+
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Portal Setting"
+msgstr "הגדרות פרטיות"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conference Settings"
+msgstr "הוועידה פועלת"
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Is premium"
+msgstr "פרמיום"
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Not premium"
+msgstr "פרמיום"
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+#| msgid "Restricted"
+msgid "Start"
+msgstr "מוגבל"
+
+#, fuzzy
+#| msgid "Join now!"
+msgid "running now!"
+msgstr "הצטרף עכשיו!"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conference Setting"
+msgstr "הוועידה פועלת"
+
+#, fuzzy
+#| msgid "Room Type"
+msgid "Room"
+msgstr "סוג חדר"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "אירוע"
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no items to show."
+msgstr "אין עדיין פריטים"
+
+msgid "BBB"
+msgstr ""
+
+#, fuzzy
+#| msgid "Premium"
+msgid "BBB Premium"
+msgstr "פרמיום"
+
+#, fuzzy
+#| msgid "Not assigned"
+msgid "Not set"
+msgstr "לא הוקצה"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2212,6 +2331,16 @@ msgstr "דוא\"ל ברכת הצטרפות"
 
 msgid "Simple Statistics"
 msgstr "סטטיסטיקה פשוטה"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conference Overview"
+msgstr "הוועידה פועלת"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conferences with Custom Settings"
+msgstr "הוועידה פועלת"
 
 msgid "Edit"
 msgstr "ערוך"
@@ -2851,11 +2980,6 @@ msgstr ""
 msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
 msgstr ""
 
-#, fuzzy
-#| msgid "Application name"
-msgid "Application method"
-msgstr "שם יישום"
-
 #, python-format
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr ""
@@ -3017,6 +3141,9 @@ msgstr "מספר משתתפים מקסימלי לשולחן קפה "
 msgid "How many participants should can join one coffee table before it is full"
 msgstr ""
 
+msgid "Attention: The visible update of the free seats is still work in progress. Therefore, we recommend not to use the limitation of individual coffee tables, so as not to let the virtual coffee go cold while searching for free seats."
+msgstr ""
+
 msgid "Choose one of the sub-projects of this group to display as nested results-project for participants"
 msgstr ""
 
@@ -3064,6 +3191,14 @@ msgstr "האם אתה בטוח שברצונך למחוק את ההודעה \"%(t
 #| msgid "Delete profile"
 msgid "Delete room"
 msgstr "מחק פרופיל"
+
+msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conference Bookings"
+msgstr "הוועידה פועלת"
 
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr ""
@@ -3395,35 +3530,6 @@ msgid "No contact data has been added yet."
 msgstr "עדיין לא נוספו נתוני איש קשר."
 
 #, fuzzy
-#| msgid "Register and join!"
-msgid "Register and apply!"
-msgstr "הירשם והצטרף!"
-
-msgid "Register and join!"
-msgstr "הירשם והצטרף!"
-
-#, fuzzy
-#| msgid "You have been invited to collaborate!"
-msgid "You have been invited to apply!"
-msgstr "הוזמנת לשתף פעולה!"
-
-msgid "Decline Invitation"
-msgstr "דחה הזמנה"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "האם אתה בטוח שברצונך לדחות את ההזמנה?"
-
-#, fuzzy
-#| msgid "Application name"
-msgid "Edit Application"
-msgstr "שם יישום"
-
-#, fuzzy
-#| msgid "Upload Participants"
-msgid "Apply for Participation"
-msgstr "העלאת משתתפים"
-
-#, fuzzy
 #| msgid "Protected Content"
 msgid "Your Deactivated Content"
 msgstr "תוכן מוגן"
@@ -3500,6 +3606,9 @@ msgstr "חברים מוזמנים"
 msgid "Revoke Invitation"
 msgstr "בטל הזמנה"
 
+msgid "Decline Invitation"
+msgstr "דחה הזמנה"
+
 msgid "Accept Invitation"
 msgstr "קבל הזמנה"
 
@@ -3512,6 +3621,9 @@ msgstr "האם אתה בטוח שברצונך לבטל את ההזמנה עבו�
 
 msgid "Revoke Invitation for Member"
 msgstr "בטל הזמנה לחבר"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "האם אתה בטוח שברצונך לדחות את ההזמנה?"
 
 msgid "There are no pending invitations."
 msgstr "אין הזמנות ממתינות."
@@ -3687,10 +3799,10 @@ msgstr "הוועידה הופעלה בהצלחה וחשבונות משתמשים
 msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgstr ""
 
-msgid "Require participation applications for this conference"
+msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
 msgstr ""
 
-msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
+msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
 msgstr ""
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
@@ -3942,6 +4054,11 @@ msgstr "עזוב"
 msgid "Details"
 msgstr "פרטים"
 
+#, fuzzy
+#| msgid "Upload Participants"
+msgid "Apply for Participation"
+msgstr "העלאת משתתפים"
+
 #, python-format
 msgid "Do you really want to leave „%(title)s“?"
 msgstr "האם אתה בטוח שברצונך להשאיר את „%(title)s“?"
@@ -4012,6 +4129,9 @@ msgstr "גלריית Flickr"
 msgid "Call to Action"
 msgstr "פקודת הפעלה"
 
+msgid "Register and join!"
+msgstr "הירשם והצטרף!"
+
 msgid "Register"
 msgstr "הירשם"
 
@@ -4035,11 +4155,42 @@ msgstr "בקשת חברות ממתינה..."
 msgid "You are invited!"
 msgstr "הוזמנת!"
 
+msgid "Participation is open for everyone. You may instantly join and become a member."
+msgstr ""
+
+msgid "You may request to become a member and participate once your request has been accepted."
+msgstr ""
+
 msgid "Join now!"
 msgstr "הצטרף עכשיו!"
 
+#, fuzzy
+#| msgid "Team membership"
+msgid "Request membership"
+msgstr "חברות בצוות"
+
+#, fuzzy, python-format
+#| msgid "Do you wish to request to join „%(title)s“?"
+msgid "Do you wish to join „%(title)s“ now?"
+msgstr "האם ברצונך לבקש להצטרף ל-„%(title)s“?"
+
 msgid "Browse"
 msgstr "דפדף"
+
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Register and apply!"
+msgstr "הירשם והצטרף!"
+
+#, fuzzy
+#| msgid "You have been invited to collaborate!"
+msgid "You have been invited to apply!"
+msgstr "הוזמנת לשתף פעולה!"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Edit Application"
+msgstr "שם יישום"
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5368,10 +5519,6 @@ msgid "Cloud Files"
 msgstr "העלה קובץ"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "אירוע"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Idea"
 msgstr "רעיון"
 
@@ -6678,6 +6825,9 @@ msgstr "איפה אתה פעיל?"
 msgid "Project members only"
 msgstr "חברי צוות בלבד"
 
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
 msgid "Collaborate!"
 msgstr "שתף פעולה!"
 
@@ -6780,6 +6930,9 @@ msgstr "איפה אתה פעיל?"
 #| msgid "Team members only"
 msgid "Group members only"
 msgstr "חברי צוות בלבד"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
 
 #, fuzzy
 #| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
@@ -6912,6 +7065,9 @@ msgstr "איפה אתה פעיל?"
 msgid "Conference members only"
 msgstr "ניהול כנסים"
 
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
 #, fuzzy
 #| msgid "Participants"
 msgid "Participate!"
@@ -6989,7 +7145,7 @@ msgstr "(הפריט המדווח נמחק.)"
 msgid "Newsletter successfully created!"
 msgstr ""
 
-msgid "Login tokens to all previously uninvited users are now being sent."
+msgid "Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations."
 msgstr ""
 
 #, python-format
@@ -7472,6 +7628,9 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
+
+#~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+#~ msgstr "%(sender_name)s יצר כרגע את הפרויקט/קבוצה \"%(team_name)s\" ב-%(portal_name)s!"
 
 #~ msgid "All societies"
 #~ msgstr "כל החברות"

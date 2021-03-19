@@ -262,6 +262,10 @@ class CosinnusConf(AppConf):
     # how long managed tags by portal should stay in cache until they will be removed
     MANAGED_TAG_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
+    # very very small timeout for cached BBB server configs!
+    # this should be in the seconds region
+    CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT = 10 # 10 seconds
+    
     # should CosinnusIdeas be enabled for this Portal?
     IDEAS_ENABLED = False
     
@@ -312,6 +316,18 @@ class CosinnusConf(AppConf):
     
     # number of members displayed in the group widet
     GROUP_MEMBER_WIDGET_USER_COUNT = 19
+    
+    # a dict by group type for the allowed membership modes
+    # for each group type.
+    # Note: mode 1 (applications) should stay reserved for type 2 (conferences)
+    GROUP_MEMBERSHIP_MODE_CHOICES = {
+        # projects
+        0: [0, 2], # regular, auto-join
+        # groups
+        1: [0, 2], # regular, auto-join
+        # conferences
+        2: [0, 1, 2], # regular, applications, auto-join
+    }
     
     # widgets listed here will be created for the group dashboard upon CosinnusGroup creation.
     # this. will check if the cosinnus app is installed and if the widget is registered, so
@@ -635,6 +651,9 @@ class CosinnusConf(AppConf):
     # whether to show conferences on the site
     CONFERENCES_ENABLED = False
     
+    # whether to use the premium difference for conferences
+    PREMIUM_CONFERENCES_ENABLED = False
+    
     # if `CONFERENCES_ENABLED` is True, setting this to 
     # True will only show the conference button if the current user actually
     # has permission to create a conference
@@ -754,6 +773,10 @@ class CosinnusConf(AppConf):
     # a list of tuples of a <LIST of managed tag slugs> and <LIST of profile extra field names>
     # that become disabled unless the user has the managed tag
     USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS = []
+    
+    # extra fields for CosinnusBaseGroup derived models.
+    # usage: see `USERPROFILE_EXTRA_FIELDS`
+    GROUP_EXTRA_FIELDS = {}
     
     # a i18n str that explains the special password rules to the user,
     # can be markdown.

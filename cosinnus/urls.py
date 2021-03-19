@@ -22,7 +22,8 @@ from cosinnus.views import bbb_room, user_import
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
     user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields
-from cosinnus_conference.api.views import ConferenceViewSet
+from cosinnus_conference.api.views import ConferenceViewSet,\
+    PublicConferenceViewSet
 from cosinnus_event.api.views import EventViewSet
 from cosinnus_note.api.views import NoteViewSet
 from cosinnus_organization.api.views import OrganizationViewSet
@@ -120,6 +121,9 @@ urlpatterns = [
     url(r'^administration/announcement/(?P<slug>[^/]+)/delete/$', user_dashboard_announcement.user_dashboard_announcement_delete, name='user-dashboard-announcement-delete'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/activate-toggle/$', user_dashboard_announcement.user_dashboard_announcement_activate, name='user-dashboard-announcement-activate'),
     
+    url(r'^administration/conference_overview/$', administration.conference_overview, name='administration-conference-overview'),
+    url(r'^administration/conference_overview/nonstandard/$', administration.conference_overview, name='administration-conference-overview-nonstandard', kwargs={'only_nonstandard': True}),
+    
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),
     
@@ -162,7 +166,7 @@ if getattr(settings, 'COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED', False)
 
 if getattr(settings, 'COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED', False): 
     urlpatterns += [
-        url(r'^administration/admin_dynamic_fields/edit/$', dynamic_fields.dynamic_field_form_view, name='administration-dynamic-fields'),
+        url(r'^administration/admin_dynamic_fields/edit/$', dynamic_fields.dynamic_field_admin_choices_form_view, name='administration-dynamic-fields'),
     ]
 
 if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
@@ -294,6 +298,7 @@ urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
 router = routers.SimpleRouter()
+router.register(r'public_conferences', PublicConferenceViewSet)
 router.register(r'conferences', ConferenceViewSet)
 router.register(r'groups', CosinnusSocietyViewSet)
 router.register(r'projects', CosinnusProjectViewSet)

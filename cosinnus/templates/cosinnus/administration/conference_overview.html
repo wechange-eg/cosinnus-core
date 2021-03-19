@@ -1,0 +1,174 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block page_title %}
+    {% if only_nonstandard %}
+        {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
+    {% else %}
+        {% trans "Overview - All Conferences" %}
+    {% endif %}
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus/administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li class="active">
+        {% if only_nonstandard %}
+            {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
+        {% else %}
+            {% trans "Overview - All Conferences" %}
+        {% endif %}
+    </li>
+{% endblock %}
+
+
+{% block content %}
+    <div class="content-box textfield">
+        <h2>
+           {% if only_nonstandard %}
+	            {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
+	        {% else %}
+	            {% trans "Overview - Conferences, Rooms and Workshops" %}
+	        {% endif %}
+            -
+	        {% if past %}
+	            {% trans "Past" %}
+                <a href="{{ request.path }}">
+                   [{% trans "View Upcoming" %}]
+                </a>
+	        {% else %}
+	            {% trans "Upcoming" %}
+	            <a href="{{ request.path }}?past=True">
+	               [{% trans "View Past" %}]
+	            </a>
+	        {% endif %}
+        </h2>
+        
+        <h4>
+            {% trans "Portal Setting" %}
+            <a href="{% url 'admin:cosinnus_cosinnusportal_change' object_id=portal.id %}#conference_settings" target="_blank">
+                <i class="fa fa-cog"></i>
+            </a>
+        </h4>
+        {% include 'cosinnus/administration/conference_overview_setting_snippet.html' with setting=portal_setting %}
+        
+        <hr/>
+        
+        <h4>{% trans "Conference Settings" %}</h4>
+        {% if conference_report_list %}
+            {% for item in conference_report_list %}
+                
+                {% captureas uuid %}{{ "accordion-"|add_uuid }}{% endcaptureas %}
+                <div class="panel panel-default import-report-container-item">
+				    <div class="panel-heading">
+				        <h4 class="panel-title {% if not only_nonstandard %}collapsed{% endif %}" data-toggle="collapse" data-target="#{{ uuid}}">
+				            {% if item.conference.resolved_conference_setting or item.rooms_and_events %}
+					            <i class="fa fa-chevron-down panel-collapsed pull-right"></i>
+					            <i class="fa fa-chevron-up panel-open pull-right"></i>
+				            {% endif %}
+				            
+				            <a href="{{ item.conference.get_absolute_url }}" target="_blank">
+    				            {{ item.conference.name }}
+				            </a>
+				            <a href="{% url 'admin:cosinnus_cosinnusconference_change' object_id=item.conference.id %}#conference_settings" target="_blank">
+				                <i class="fa fa-cog"></i>
+				            </a>
+				            -
+					        <span>
+					            {% if item.conference.is_premium %}
+					                {% trans "Is premium" %}
+					                <i class="fa fa-star"></i>
+					            {% else %}
+					                {% trans "Not premium" %}
+					            {% endif %}
+					        </span>
+					        -
+					        <span>
+					            {% trans "Rooms" %}: {{ item.room_count }},
+                                {% trans "Workshops" %}: {{ item.event_count }}
+					        </span>
+					        -
+					        <span>
+                                {% trans "Start" %}: {{ item.conference.from_date|date:"SHORT_DATE_FORMAT" }}
+                                {% if item.conference.is_running %}
+                                    <i>
+                                        ({% trans "running now!" %})
+                                    </i>
+                                {% endif %}
+					        </span>
+				        </h4>
+				    </div>
+			        {% if item.conference.resolved_conference_setting or item.rooms_and_events %}
+					    <div id="{{ uuid}}" class="panel-collapse {% if only_nonstandard %}in{% else %}collapse{% endif %}">
+					        <div class="panel-body">
+					            <div class="textfield transparent">
+					                {% if item.conference.resolved_conference_setting %}
+					                    <i class="fas fa-fw {{ COSINNUS_CONFERENCE_TRANS.ICON }}"></i>
+					                    {% trans "Conference Setting" %}:
+					                    <a href="{% url 'admin:cosinnus_cosinnusconference_change' object_id=item.conference.id %}#conference_settings" target="_blank">
+			                                <i class="fa fa-cog"></i>
+			                            </a>
+					                    {% include 'cosinnus/administration/conference_overview_setting_snippet.html' with setting=item.conference.resolved_conference_setting %}
+					                {% endif %}
+					                
+					                {% if item.rooms_and_events %}
+					                    <ul class="blank-list">
+							                {% for room, events in item.rooms_and_events %}
+							                    {% if room or events %}
+								                    <li>
+			    								        {% if room %}
+			    								            <i class="fas fa-fw fa-door-open"></i>
+										                    {% trans "Room" %}:
+										                    <a href="{{ room.get_absolute_url }}" target="_blank">
+			                                                    {{ room.title }}    								        
+			                                                </a>
+			                                                <a href="{% url 'admin:cosinnus_cosinnusconferenceroom_change' object_id=room.id %}#conference_settings" target="_blank">
+								                                <i class="fa fa-cog"></i>
+								                            </a>
+								                            <br/>
+			                                                {% if room.resolved_conference_setting %}
+			                                                    {% include 'cosinnus/administration/conference_overview_setting_snippet.html' with setting=room.resolved_conference_setting %}
+			                                                {% endif %}
+			    								        {% endif %}
+			    								        
+			    								        {% if events %}
+			    								            <ul class="blank-list">
+					    								        {% for event in events %}
+					    								            <li>
+						    								            <i class="fas fa-fw fa-calendar"></i>
+						    								            {% trans "Event" %}:
+						                                                <a href="{{ event.get_absolute_url }}" target="_blank">
+						                                                    {{ event.title }}                                         
+						                                                </a>
+						                                                <a href="{% url 'admin:cosinnus_event_conferenceevent_change' object_id=event.id %}#conference_settings" target="_blank">
+						                                                    <i class="fa fa-cog"></i>
+						                                                </a>
+						                                                <br/>
+						                                                {% if event.resolved_conference_setting %}
+						                                                    {% include 'cosinnus/administration/conference_overview_setting_snippet.html' with setting=event.resolved_conference_setting %}
+						                                                {% endif %}
+					                                                </li>
+					    								        {% endfor %}
+				    								        </ul>
+			    								        {% endif %}
+		    								        </li>
+	    								        {% endif %}
+								            {% endfor %}
+							            </ul>
+						            {% endif %}
+	                            </div>
+					        </div>
+					    </div>
+				    {% endif %}
+				</div>
+                
+                
+            {% endfor %}
+        {% else %}
+            {% trans "There are no items to show." %}
+        {% endif %}
+    </div>
+{% endblock %}

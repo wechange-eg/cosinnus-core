@@ -136,6 +136,16 @@
     {% else %} {# User authenticated but not a members #}
         <h2>{{ group.trans.CALL_TO_JOIN }}</h2>
         
+        <div class="textfield transparent">
+            <p>
+                {% if group.is_autojoin_group %}
+                    {% trans "Participation is open for everyone. You may instantly join and become a member." %}
+                {% else %}
+                    {% trans "You may request to become a member and participate once your request has been accepted." %}
+                {% endif %}
+            </p>
+        </div>
+        
         <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#join_withdraw_modal">
             <ul class="media-list">
                 <li class="media">
@@ -143,12 +153,22 @@
                         <i class="fa fa-sign-in"></i>
                     </a>
                     <div class="media-body">
-                        {% trans "Join now!" %}
+                        {% if group.is_autojoin_group %}
+	                        {% trans "Join now!" %}
+		                {% else %}
+		                    {% trans "Request membership" %}
+		                {% endif %}
                     </div>
                 </li>
             </ul>
         </button>
-        {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+        {% captureas label %}
+            {% if group.is_autojoin_group %}
+                {% blocktrans with title=group.name %}Do you wish to join „{{ title }}“ now?{% endblocktrans %}
+            {% else %}
+	            {% blocktrans with title=group.name %}Do you wish to request to join „{{ title }}“?{% endblocktrans %}
+            {% endif %}
+        {% endcaptureas %}
         {% captureas title %}{% trans "Join" %}{% endcaptureas %}
         {% captureas action %}{% group_url 'cosinnus:group-user-join' group=group %}{% endcaptureas %}
         

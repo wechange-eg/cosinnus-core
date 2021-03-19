@@ -138,8 +138,12 @@ function NavConnector(props: NavProps) {
               <Badge badgeContent={navRoom.props.count} className={classes.badge} />
             </ListItem>
         ))}
-        {(conference.props.managementUrls.manageConference || conference.props.managementUrls.manageRooms ) && (
-          <Divider />
+        {(conference.props.managementUrls.manageConference || conference.props.managementUrls.manageRooms
+          || conference.props.managementUrls.manageEvents || conference.props.managementUrls.manageMemberships ) && (
+          <Divider classes={{
+              root: classes.divider,
+            }}
+          />
         )}
         {conference.props.managementUrls.manageConference && (
         <ListItem
@@ -163,14 +167,24 @@ function NavConnector(props: NavProps) {
           <ListItemText primary={<FormattedMessage id="Manage rooms" />} />
         </ListItem>
         )}
-        {conference.props.managementUrls.Events && (
+        {conference.props.managementUrls.manageEvents && (
         <ListItem
           button
-          href={conference.props.managementUrls.Events}
+          href={conference.props.managementUrls.manageEvents}
           className={classes.listItem}
         >
           <FontAwesomeIcon icon={faCalendar} />&nbsp;
           <ListItemText primary={<FormattedMessage id="Manage events" />} />
+        </ListItem>
+        )}
+        {conference.props.managementUrls.manageMemberships && (
+        <ListItem
+          button
+          href={conference.props.managementUrls.manageMemberships}
+          className={classes.listItem}
+        >
+          <FontAwesomeIcon icon={faUsersCog} />&nbsp;
+          <ListItemText primary={<FormattedMessage id="Membership" />} />
         </ListItem>
         )}
       </List>
@@ -182,15 +196,19 @@ function NavConnector(props: NavProps) {
       >
         <DialogTitle id="leave-dialog-title"><FormattedMessage id="Are you sure you want to leave this event?" /></DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText 
+            id="alert-dialog-description"
+            classes={{
+              root: classes.dialogText,
+            }}>
             <FormattedMessage id="You're currently attending an event. Are you sure you want to leave? Tip: You can open a new tab or window instead." />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => window.location.href = leaveUrl} color="primary">
+          <Button onClick={() => window.location.href = leaveUrl}>
             <FormattedMessage id="Yes" />
           </Button>
-          <Button onClick={() => setLeaveOpen(false)} color="primary" autoFocus>
+          <Button onClick={() => setLeaveOpen(false)} autoFocus>
             <FormattedMessage id="No" />
           </Button>
         </DialogActions>

@@ -65,6 +65,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from cosinnus.trans.group import get_group_trans_by_type
 from annoying.functions import get_object_or_None
 from django.utils.safestring import mark_safe
+from django.utils.timezone import now
 
 logger = logging.getLogger('cosinnus')
 
@@ -675,6 +676,22 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         (TYPE_SOCIETY, _('Group')),
         (TYPE_CONFERENCE, _('Conference')),
     )
+    
+    # the "normal" group join method - users request to be members, admin approve/decline them
+    MEMBERSHIP_MODE_REQUEST = 0
+    # the "conference" method - users create an application, admins sort through them and
+    # accept/decline them with an optional reason
+    # Note: this replaces the old bool modelfield `use_conference_applications`
+    MEMBERSHIP_MODE_APPLICATION = 1
+    # the "everyone can join" method - users can become a member instantly without any approval system
+    MEMBERSHIP_MODE_AUTOJOIN = 2
+    
+    # this can and will be overridden by the specific group models!
+    MEMBERSHIP_MODE_CHOICES = [
+        (MEMBERSHIP_MODE_REQUEST, _('Regular membership requests')),
+        (MEMBERSHIP_MODE_APPLICATION, _('Require participation applications for this conference')),
+        (MEMBERSHIP_MODE_AUTOJOIN, _('Everyone may join')),
+    ]
 
     GROUP_MODEL_TYPE = TYPE_PROJECT
 
@@ -719,7 +736,11 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
                                    related_name='cosinnus_groups', through='cosinnus.CosinnusGroupMembership')
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
                                      blank=True, null=True, editable=False, on_delete=models.SET_NULL)
-
+    
+    membership_mode = models.PositiveSmallIntegerField(_('Application method'),
+                                                       default=MEMBERSHIP_MODE_REQUEST,
+                                                       choices=MEMBERSHIP_MODE_CHOICES
+                                                       )
     # microsite-embeds:
     video = models.URLField(_('Microsite Video'), max_length=200, blank=True, null=True,
                             validators=[MaxLengthValidator(200)])
@@ -778,7 +799,8 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     nextcloud_groupfolder_id = models.PositiveIntegerField(_('Nextcloud Groupfolder ID'),
                                                            unique=True, blank=True, null=True,
                                                            help_text='The boolean internal nextcloud id for the groupfolder. Only set once a groupfolder is created.')
-
+    
+    # NOTE: deprecated, do not use!
     is_conference = models.BooleanField(_('Is conference'),
                                         help_text='Note: DEPRECATED, use group.type=2 now. Delete once all portals have been migrated and checked. If a group is marked as conference it is possible to auto-generate accounts for workshop participants',
                                         default=False)
@@ -787,10 +809,6 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
                                      help_text='Used for conferences to determine overall running time period.')
     to_date = models.DateTimeField(_('End Datetime'), default=None, blank=True, null=True,
                                      help_text='Used for conferences to determine overall running time period.')
-
-    use_conference_applications = models.BooleanField(_('Determins if application management is visible in conference administration.'),
-                                                      default=False
-                                                     )
     
     allow_conference_temporary_users = models.BooleanField(_('Allow temporary users accounts for this conference.'),
                                                           default=False,
@@ -799,6 +817,18 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     
     conference_is_running = models.BooleanField(_('Conference accounts active'),
                                                 help_text=_('If enabled, temporary user accounts for this conference are active and can log in.'),
+                                                default=False
+                                                )
+    
+    is_premium_currently = models.BooleanField(_('Conference is currrently premium'),
+                                                help_text='Flag whether this is currently in premium mode because of a booking, changed automatically by the system.',
+                                                default=False,
+                                                editable=False,
+                                                )
+    
+    # note: this overrides `is_premium_currently` in all functionalities
+    is_premium_permanently = models.BooleanField(_('Conference is permanently premium'),
+                                                help_text='If enabled, this will always be in premium mode, independent of any bookings. WARNING: changing this may (depending on the event/conference/portal settings) cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!',
                                                 default=False
                                                 )
 
@@ -815,8 +845,15 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     # on the platform, no matter their visibility settings, and thus subject to moderation
     cosinnus_always_visible_by_users_moderator_flag = True
 
+    # NOTE: this is the deprecated old extra_field jsonfield, 
+    # but it is still in use for some custom portal code, so cannot yet be removed.
+    # DO NOT USE THIS IN NEW CODE ANYMORE. USE `group.dynamic_fields` or `group.settings` instead!
     extra_fields = JSONField(default={}, blank=True)
     settings = PostgresJSONField(default=dict, blank=True, null=True)
+    
+    dynamic_fields = PostgresJSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
+            help_text='Extra group fields for each portal, as defined in `settings.COSINNUS_GROUP_EXTRA_FIELDS`',
+            encoder=DjangoJSONEncoder)  
     sdgs = PostgresJSONField(default=list, blank=True, null=True)
     
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
@@ -843,7 +880,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
 
     def __str__(self):
         # FIXME: better caching for .portal.name
-        return '%s (%s)' % (self.name, self.portal.name)
+        return '%s (%s)' % (self.name, self.get_absolute_url())
 
     def _get_likeable_model_name(self):
         return 'CosinnusGroup'
@@ -983,6 +1020,27 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         )
         group.update_index()
         return group
+    
+    @property
+    def use_conference_applications(self):
+        """ Shortcut to determine if the group uses CosinnusConferenceApplication as 
+            membership request mode. 
+            Replacement for the old bool modelfield that existed. """
+        return bool(self.membership_mode == self.MEMBERSHIP_MODE_APPLICATION)
+    
+    @property
+    def is_autojoin_group(self):
+        """ Shortcut to determine if a user joining this group will be instantly 
+            accepted instead of creating a join request for the administrators.
+            This checks the membership_mode of the group, as well as the 
+            settings.COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS setting for this portal. """
+        return bool(self.membership_mode == self.MEMBERSHIP_MODE_AUTOJOIN \
+                    or (self.slug and self.slug in settings.COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS))
+    
+    @property
+    def is_premium(self):
+        """ Shortcut to determine if a group is in premium state right now """
+        return self.is_premium_currently or self.is_premium_permanently
     
     def add_member_to_group(self, user, membership_status):
         """ "Makes the user a group member". 
@@ -1339,6 +1397,12 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         if queryset.count() > 0:
             return queryset.aggregate(Max('to_date'))['to_date__max']
         return None
+    
+    @property
+    def is_running(self):
+        has_time = self.from_date and self.to_date
+        running = has_time and self.from_date <= now() <= self.to_date
+        return has_time and running
 
     @property
     def conference_events(self):

@@ -515,14 +515,15 @@ LOGIN_RATELIMIT_LOGGER_NAME = 'cosinnus'
 # new users that register will automatically be assigned these django permission groups
 NEWW_DEFAULT_USER_AUTH_GROUPS = ['Users']
 
-# new user that register will automatically become members of these groups/projects (supply group slugs!)
-NEWW_DEFAULT_USER_GROUPS = ['forum']
-
-# these groups will accept members instantly after requesting membership
-COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS = ['forum']
-
 # the "Home" group for this portal. if not set, some things won't work (like attaching files to direct messages)
 NEWW_FORUM_GROUP_SLUG = 'forum'
+
+# new user that register will automatically become members of these groups/projects (supply group slugs!)
+NEWW_DEFAULT_USER_GROUPS = [NEWW_FORUM_GROUP_SLUG]
+
+# these groups will accept members instantly after requesting membership
+COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS = NEWW_DEFAULT_USER_GROUPS
+
 
 # the resident "Events" group for this portal. set this to thhe `NEWW_FORUM_GROUP_SLUG` if there isn't a seperate group!
 NEWW_EVENTS_GROUP_SLUG = NEWW_FORUM_GROUP_SLUG
