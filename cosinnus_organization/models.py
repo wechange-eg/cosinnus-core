@@ -132,7 +132,7 @@ class OrganizationManager(models.Manager):
     def public(self):
         """ Returns active, public Organizations """
         qs = self.active()
-        return qs.filter(public=True)
+        return qs.filter(media_tag__public=True)
     
     def active(self):
         """ Returns active Organizations """

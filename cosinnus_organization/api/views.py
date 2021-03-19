@@ -11,7 +11,7 @@ class OrganizationViewSet(PublicCosinnusGroupFilterMixin,
                           RDFViewSetMixin,
                           viewsets.ReadOnlyModelViewSet):
 
-    queryset = CosinnusOrganization.objects.all()
+    queryset = CosinnusOrganization.objects.public()
     serializer_class = OrganizationListSerializer
     rdf_serializer_class = OrganizationRDFSerializer
 
