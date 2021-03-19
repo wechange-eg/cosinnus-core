@@ -6,7 +6,7 @@ from cosinnus.models import CosinnusPortal, BaseTagObject
 class PublicCosinnusGroupFilterMixin(object):
 
     def get_queryset(self):
-        queryset = self.queryset
+        queryset = super().get_queryset()
         # filter for current portal
         queryset = queryset.filter(portal=CosinnusPortal.get_current())
         # Filter visibility
@@ -25,7 +25,7 @@ class PublicTaggableObjectFilterMixin(object):
         return queryset
 
 
-class CosinnusFilterQuerySetMixin:
+class CosinnusFilterQuerySetMixin(object):
     FILTER_CONDITION_MAP = {
         'avatar': {
             'true': [~Q(avatar="")],
@@ -41,6 +41,8 @@ class CosinnusFilterQuerySetMixin:
     }
     FILTER_DEFAULT_ORDER = ['-created', ]
     MANAGED_TAGS_KEY = 'managed_tags'
+    # if true, filter managed tags on the group of the object, not on the object itself
+    MANAGED_TAGS_FILTER_ON_GROUP = False
 
     def get_queryset(self):
         """
@@ -55,8 +57,12 @@ class CosinnusFilterQuerySetMixin:
         # Managed tag filters
         if self.MANAGED_TAGS_KEY in query_params:
             managed_tags = query_params.getlist(self.MANAGED_TAGS_KEY)
-            queryset = queryset.filter(managed_tag_assignments__managed_tag__slug__in=managed_tags,
-                                       managed_tag_assignments__approved=True)
+            mtag_filter_prefix = 'group__' if self.MANAGED_TAGS_FILTER_ON_GROUP else ''
+            mtag_filter = {
+                f'{mtag_filter_prefix}managed_tag_assignments__managed_tag__slug__in': managed_tags,
+                f'{mtag_filter_prefix}managed_tag_assignments__approved': True
+            }
+            queryset = queryset.filter(**mtag_filter)
             query_params.pop(self.MANAGED_TAGS_KEY)
         # Overwrite ugly but commonly used filters
         for key, value in list(query_params.items()):
@@ -77,3 +83,11 @@ class CosinnusFilterQuerySetMixin:
                 else:
                     queryset = queryset.filter(**{key: value})
         return queryset
+
+
+class CosinnusPaginateMixin(object):
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        page = self.paginate_queryset(queryset)
+        return page

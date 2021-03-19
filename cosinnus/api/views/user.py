@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..serializers.user import UserCreateUpdateSerializer
+from ..serializers.user import UserCreateUpdateSerializer, UserSerializer
 from ...models import get_user_profile_model, CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_MEMBER, \
     MEMBERSHIP_ADMIN
 
@@ -79,6 +79,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 if group:
                     CosinnusGroupMembership.objects.create(user=user, group=group,
                                                            status=MEMBERSHIP_MEMBER)
+
 
 
 class OAuthUserView(APIView):

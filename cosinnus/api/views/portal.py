@@ -59,6 +59,47 @@ class StatisticsView(APIView):
         return Response(data)
 
 
+class StatisticsManagedTagFilteredView(StatisticsView):
+    """
+    Returns a JSON dict of common statistics for this portal, filtered for a managed tag
+    """
+
+    tag_slug = None
+
+    def get(self, request, *args, **kwargs):
+        self.tag_slug = kwargs.pop('slug', None)
+        return super(StatisticsManagedTagFilteredView, self).get(request, *args, **kwargs)
+
+    def get_user_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_user_qs()
+        if self.tag_slug:
+            qs = qs.filter(cosinnus_profile__managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs
+
+    def get_society_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_society_qs()
+        if self.tag_slug:
+            qs = qs.filter(managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs
+
+    def get_project_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_project_qs()
+        if self.tag_slug:
+            qs = qs.filter(managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs
+
+    def get_event_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_event_qs()
+        if self.tag_slug:
+            qs = qs.filter(group__managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs
+
+    def get_note_qs(self):
+        qs = super(StatisticsManagedTagFilteredView, self).get_note_qs()
+        if self.tag_slug:
+            qs = qs.filter(group__managed_tag_assignments__managed_tag__slug=self.tag_slug)
+        return qs
+
 class NavBarView(APIView):
     """
     Returns navigation including styles to be included within Wordpress
@@ -100,45 +141,3 @@ class SettingsView(APIView):
 statistics = StatisticsView.as_view()
 navbar = NavBarView.as_view()
 settings = SettingsView.as_view()
-
-
-class StatisticsManagedTagFilteredView(StatisticsView):
-    """
-    Returns a JSON dict of common statistics for this portal, filtered for a managed tag
-    """
-
-    tag_slug = None
-
-    def get(self, request, *args, **kwargs):
-        self.tag_slug = kwargs.pop('slug', None)
-        return super(StatisticsManagedTagFilteredView, self).get(request, *args, **kwargs)
-
-    def get_user_qs(self):
-        qs = super(StatisticsManagedTagFilteredView, self).get_user_qs()
-        if self.tag_slug:
-            qs = qs.filter(cosinnus_profile__managed_tag_assignments__managed_tag__slug=self.tag_slug)
-        return qs
-
-    def get_society_qs(self):
-        qs = super(StatisticsManagedTagFilteredView, self).get_society_qs()
-        if self.tag_slug:
-            qs = qs.filter(managed_tag_assignments__managed_tag__slug=self.tag_slug)
-        return qs
-
-    def get_project_qs(self):
-        qs = super(StatisticsManagedTagFilteredView, self).get_project_qs()
-        if self.tag_slug:
-            qs = qs.filter(managed_tag_assignments__managed_tag__slug=self.tag_slug)
-        return qs
-
-    def get_event_qs(self):
-        qs = super(StatisticsManagedTagFilteredView, self).get_event_qs()
-        if self.tag_slug:
-            qs = qs.filter(group__managed_tag_assignments__managed_tag__slug=self.tag_slug)
-        return qs
-
-    def get_note_qs(self):
-        qs = super(StatisticsManagedTagFilteredView, self).get_note_qs()
-        if self.tag_slug:
-            qs = qs.filter(group__managed_tag_assignments__managed_tag__slug=self.tag_slug)
-        return qs
