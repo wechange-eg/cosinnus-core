@@ -163,6 +163,13 @@ msgstr "إدارة المناسبات/الفعاليات"
 msgid "Manage rooms"
 msgstr "إدارة الغرف"
 
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "عضوية"
+
 #. [Name]
 #. defaultMessage is:
 #. undefined
@@ -352,12 +359,14 @@ msgstr "المشاركين"
 msgid "places left"
 msgstr "أماكن متبقية"
 
-msgid "Are you sure you want to leave this event?"
-msgstr "هل أنت متأكد أنك تريد أن تترك هذا الحدث؟"
+msgid "Are you sure you want to leave this video conference?"
+msgstr "هل أنت متأكد أنك تريد مغادرة مؤتمر الفيديو هذا؟"
 
 msgid ""
-"You're currently attending an event. Are you sure you want to leave? "
-"Tip: You can open a new tab or window instead."
+"If you click, you will leave the video conference. Are you sure "
+"you want to leave? Tip: Alternatively, you can open the link in a new "
+"tab or window and stay in the event."
 msgstr ""
-"أنت تحضر حاليًا حدثًا. هل انت متاكد انك تريد ان تغادر؟ "
-"نصيحة: يمكنك فتح علامة تبويب أو نافذة جديدة بدلاً من ذلك."
+"إذا قمت بالنقر فوق الزر ، فسوف تغادر مؤتمر الفيديو. هل انت متاكد"
+"انك تريد ان تغادر؟ نصيحة: بدلاً من ذلك ، يمكنك فتح الرابط في علامة"
+"تبويب أو نافذة جديدة والبقاء في الحدث."

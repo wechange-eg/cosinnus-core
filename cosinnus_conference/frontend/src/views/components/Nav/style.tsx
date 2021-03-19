@@ -117,9 +117,6 @@ export const useStyles = makeStyles((theme) => ({
       margin: "0 auto 1rem"
     },
   },
-  dialogText: {
-    color: theme.palette.text.primary
-  },
   divider: {
     margin: "15px 0",
     border: "0",

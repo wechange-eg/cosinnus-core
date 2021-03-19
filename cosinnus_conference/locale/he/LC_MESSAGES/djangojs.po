@@ -163,6 +163,13 @@ msgstr "נהל/י אירועים"
 msgid "Manage rooms"
 msgstr "נהל/י חדרים"
 
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "חֲבֵרוּת"
+
 #. [Name]
 #. defaultMessage is:
 #. undefined
@@ -352,12 +359,14 @@ msgstr "משתתפים"
 msgid "places left"
 msgstr "מקומות שנותרו"
 
-msgid "Are you sure you want to leave this event?"
-msgstr "האם אתה בטוח שברצונך לעזוב את האירוע הזה?"
+msgid "Are you sure you want to leave this video conference?"
+msgstr "האם אתה בטוח שאתה רוצה לעזוב את ועידת הווידיאו הזו?"
 
 msgid ""
-"You're currently attending an event. Are you sure you want to leave? "
-"Tip: You can open a new tab or window instead."
+"If you click, you will leave the video conference. Are you sure "
+"you want to leave? Tip: Alternatively, you can open the link in a new "
+"tab or window and stay in the event."
 msgstr ""
-"אתה משתתף כרגע באירוע. אתה בטוח שאתה רוצה לעזוב? "
-"טיפ: במקום זאת תוכלו לפתוח כרטיסייה או חלון חדשים."
+"אם תלחץ, תעזוב את ועידת הווידיאו. אתה בטוח שאתה רוצה"
+"לעזוב? טיפ: לחלופין, תוכלו לפתוח את הקישור בכרטיסייה או בחלון חדש"
+"ולהישאר באירוע."
