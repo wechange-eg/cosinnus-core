@@ -562,7 +562,7 @@ REST_FRAMEWORK = {
 }
 
 COSINNUS_API_SETTINGS = {
-    # 'user': ['head', 'post'],
+    'user': ['head', 'post'],
     # 'users': [ 'head', 'get', 'post', 'put', 'patch', 'delete']
     # 'hooks': {
     #     'user.activated': ['https://webhook.site/test'],
