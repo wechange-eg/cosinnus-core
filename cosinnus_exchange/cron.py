@@ -10,9 +10,11 @@ class PullData(CosinnusCronJobBase):
     """
     Pull data from exchange backends
     """
-
-    RUN_EVERY_MINS = settings.COSINNUS_EXCHANGE_RUN_EVERY_MINS
-    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    if settings.COSINNUS_EXCHANGE_ENABLED:
+        RUN_EVERY_MINS = settings.COSINNUS_EXCHANGE_RUN_EVERY_MINS
+        schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    else:
+        schedule = Schedule()
 
     cosinnus_code = 'cosinnus_exchange.pull_data'
 

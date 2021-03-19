@@ -802,15 +802,14 @@ SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS = [
     'conferences',
 ]
 
-if settings.COSINNUS_EXCHANGE_ENABLED:
-    EXCHANGE_SEARCH_MODEL_NAMES = {
-        ExchangeProject: 'projects',
-        ExchangeSociety: 'groups',
-        ExchangeOrganization: 'organizations',
-        ExchangeEvent: 'events'
-    }
-    SEARCH_MODEL_NAMES.update(EXCHANGE_SEARCH_MODEL_NAMES)
-    EXCHANGE_SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(EXCHANGE_SEARCH_MODEL_NAMES.items())])
+EXCHANGE_SEARCH_MODEL_NAMES = {
+    ExchangeProject: 'projects',
+    ExchangeSociety: 'groups',
+    ExchangeOrganization: 'organizations',
+    ExchangeEvent: 'events'
+}
+SEARCH_MODEL_NAMES.update(EXCHANGE_SEARCH_MODEL_NAMES)
+EXCHANGE_SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(EXCHANGE_SEARCH_MODEL_NAMES.items())])
 
 
 
