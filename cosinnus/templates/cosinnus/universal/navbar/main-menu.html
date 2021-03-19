@@ -99,22 +99,46 @@
 		</div>
 	</div>
 	
-	{% if COSINNUS_IDEAS_ENABLED or COSINNUS_ORGANIZATIONS_ENABLED or my_conferences|length > 0 %}
+	{% if COSINNUS_CONFERENCES_ENABLED or COSINNUS_IDEAS_ENABLED or COSINNUS_ORGANIZATIONS_ENABLED %}
 	<div class="nav-column">
-	    
-        {% if my_conferences|length > 0 %}
-            <h2 class="headline headline-condensed">
-                {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "My Conferences" %}
-            </h2>
-        
-            <ul class="item-list">
-                {% for item in my_conferences %}
-                    {{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
-                {% endfor %}
-            </ul>
+	    {% if COSINNUS_CONFERENCES_ENABLED %}
+	        <h2 class="headline headline-condensed">
+			    {{ COSINNUS_TRANS.COSINNUS_TRANS_MY_CONFERENCES }}
+	        </h2>
+	        
+	        <ul class="item-list">
+	            {% if my_conferences|length %}
+	                {% for item in my_conferences %}
+	                    {{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+	                {% endfor %}
+	            {% else %}
+	                <li>
+	                    <span class="list-item list-item-link no-select" href="#" role="button" titledby=".item-text">
+	                        <div class="item-text">
+	                            {{ COSINNUS_TRANS.COSINNUS_TRANS_MY_CONFERENCES_EMPTY }}
+	                        </div>
+	                    </span>
+	                </li>    
+		        {% endif %}
+	        </ul>
+	            
+	        <hr>
+	        {% if COSINNUS_USER_CAN_CREATE_CONFERENCE %}
+	           <div class="main-menu-links">
+		           <div><a href="/conferences/add/">
+	                    {{ COSINNUS_TRANS.COSINNUS_TRANS_CREATE_CONFERENCE }} 
+	                </a></div>
+                </div>
+            {% endif%}
+            <div class="main-menu-links">
+                <div><a href="/conferences/">
+                    {{ COSINNUS_TRANS.COSINNUS_TRANS_BROWSE_ALL_CONFERENCES }}
+                </a></div>
+            </div>
             
+            {% if COSINNUS_ORGANIZATIONS_ENABLED or COSINNUS_IDEAS_ENABLED %}
             <hr>
+            {% endif %}
         {% endif %}
 	
 		{% if COSINNUS_ORGANIZATIONS_ENABLED %}
@@ -207,7 +231,7 @@
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "Browse all Ideas" %} 
 				</a></div>
-				<div style="display:none;"><a href="/map/?people=false&events=false&projects=false&groups=false&ideas=true&organizations=false">
+				<div style="display:none;"><a href="/map/?people=false&events=false&projects=false&groups=false&conferences=false&ideas=true&organizations=false">
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "Search for Ideas" %} 
 				</a></div>

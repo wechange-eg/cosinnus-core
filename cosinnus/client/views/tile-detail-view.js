@@ -7,6 +7,7 @@ var util = require('lib/util');
 var templates = {
     'projects': require('tiles/tile-detail-projects'),
     'groups': require('tiles/tile-detail-groups'),
+    'conferences': require('tiles/tile-detail-conferences'),
     'people': require('tiles/tile-detail-people'),
     'events': require('tiles/tile-detail-events'),
     'ideas': require('tiles/tile-detail-ideas'),
@@ -32,6 +33,7 @@ module.exports = BaseView.extend({
         'click .managed-tag-filter-link': 'onManagedTagLinkClicked',
         'click .button-like': 'onLikeButtonClicked',
         'click .button-follow': 'onFollowButtonClicked',
+        'click .button-star': 'onStarButtonClicked',
         'click .button-report-object': 'onReportButtonClicked',
     },
     
@@ -53,6 +55,8 @@ module.exports = BaseView.extend({
             self.App.controlView.options,
             self.App.controlView.state
         );
+        data['starLabel'] = COSINNUS_STARRED_STAR_LABEL
+        data['starringLabel'] = COSINNUS_STARRED_STARRING_LABEL
         return data;
     },
 
@@ -77,7 +81,8 @@ module.exports = BaseView.extend({
 
         this.model.on({
         	'change:liked': self.thisContext(self.render),
-        	'change:followed': self.thisContext(self.render),
+            'change:followed': self.thisContext(self.render),
+            'change:starred': self.thisContext(self.render),
         });
         this.fitTemplate();
         this.render();
@@ -144,6 +149,9 @@ module.exports = BaseView.extend({
     
     onFollowButtonClicked: function (event) {
     	this.App.controlView.triggerResultFollowOrUnfollow(this.model);
+    },
+    onStarButtonClicked: function (event) {
+    	this.App.controlView.triggerResultStarOrUnstar(this.model);
     },
     
     /** report the currently open detail view object */

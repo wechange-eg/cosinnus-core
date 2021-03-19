@@ -163,6 +163,13 @@ msgstr "إدارة المناسبات/الفعاليات"
 msgid "Manage rooms"
 msgstr "إدارة الغرف"
 
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "عضوية"
+
 #. [Name]
 #. defaultMessage is:
 #. undefined
@@ -351,3 +358,13 @@ msgstr "المشاركين"
 #: locale/src/views/components/CoffeeTable/index.json
 msgid "places left"
 msgstr "أماكن متبقية"
+
+msgid "Are you sure you want to leave this event?"
+msgstr "هل أنت متأكد أنك تريد أن تترك هذا الحدث؟"
+
+msgid ""
+"You're currently attending an event. Are you sure you want to leave? "
+"Tip: You can open a new tab or window instead."
+msgstr ""
+"أنت تحضر حاليًا حدثًا. هل انت متاكد انك تريد ان تغادر؟ نصيحة: يمكنك فتح "
+"علامة تبويب أو نافذة جديدة بدلاً من ذلك."

@@ -28,6 +28,8 @@ from django.forms.widgets import SelectMultiple
 from django_select2.widgets import Select2MultipleWidget, Select2Widget
 from cosinnus.utils.user import get_user_select2_pills
 from cosinnus.fields import UserSelect2MultipleChoiceField
+from cosinnus.utils.permissions import get_inherited_visibility_from_group
+from cosinnus.utils.functions import get_int_or_None
 
 
 TagObject = get_tag_object_model()
@@ -58,7 +60,6 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         
         # needs to be initialized here because using reverser_lazy() at model instantiation time causes problems
         self.fields['tags'] = TagSelect2Field(required=False, data_url=reverse_lazy('cosinnus:select2:tags'))
-        
         # inherit tags from group for new TaggableObjects
         preresults = []
         if self.instance.pk:
@@ -70,7 +71,7 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
             self.fields['tags'].choices = preresults
             self.fields['tags'].initial = [key for key,val in preresults]#[tag.name for tag in self.instance.tags.all()]
             self.initial['tags'] = self.fields['tags'].initial
-            
+        
         # if no media tag data was supplied the object was created directly and not through a frontend form
         # we then manually inherit the group's media_tag topics by adding them to the data 
         # (usually they would have been added into the form's initial data)
@@ -80,10 +81,7 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         
         if self.group and not self.instance.pk:
             # for new TaggableObjects (not groups), set the default visibility corresponding to the group's public status
-            if self.group.public:
-                self.fields['visibility'].initial = BaseTagObject.VISIBILITY_ALL
-            else:
-                self.fields['visibility'].initial = BaseTagObject.VISIBILITY_GROUP
+            self.fields['visibility'].initial = get_inherited_visibility_from_group(self.group)
         
         if self.group:
             data_url = group_aware_reverse('cosinnus:select2:group-members',
@@ -97,7 +95,7 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
           
         if self.instance.pk:
             # choices and initial must be set so pre-existing form fields can be prepopulated
-            preresults = get_user_select2_pills(self.instance.persons.all(), text_only=True)
+            preresults = get_user_select2_pills(self.instance.persons.all(), text_only=False)
             self.fields['persons'].choices = preresults
             self.fields['persons'].initial = [key for key,val in preresults]
             self.initial['persons'] = self.fields['persons'].initial
@@ -123,10 +121,8 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
                 # the default visibility corresponds to group's public setting
                 if 'visibility' in old_initial:
                     self.initial['visibility'] = old_initial['visibility']
-                elif self.group.public:
-                    self.initial['visibility'] = BaseTagObject.VISIBILITY_ALL
                 else:
-                    self.initial['visibility'] = BaseTagObject.VISIBILITY_GROUP
+                    self.initial['visibility'] = get_inherited_visibility_from_group(self.group)
             
         if (self.user and self.instance.pk and
                 self.instance.likers.filter(id=self.user.id).exists()):
@@ -152,14 +148,13 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         if 'bbb_room' in self.initial:
             self.instance.bbb_room = self.initial['bbb_room']
         
-        # set default visibility tag to correspond to group visibility
-        # GOTCHA: since BaseTagObject.VISIBILITY_USER == 0, we cannot simply check for ``if not <property``
-        if not self.instance.visibility and self.instance.visibility is not BaseTagObject.VISIBILITY_USER:
+        # the tag inherits the visibility default from the instance's group
+        # if no or no valid visibility has been selected in the form, 
+        visibility_data_value = get_int_or_None(self.cleaned_data.get('visibility', None))
+        if visibility_data_value not in BaseTagObject.VISIBILITY_VALID_VALUES:
             # check if our tag object belongs to a group (i.e: isn't itself a group, or a user):
-            if hasattr(self.instance, 'group') and self.instance.group and self.instance.group.public:
-                self.instance.visibility = BaseTagObject.VISIBILITY_ALL
-            else:
-                self.instance.visibility = BaseTagObject.VISIBILITY_GROUP
+            if hasattr(self.instance, 'group') and self.instance.group:
+                self.instance.visibility = get_inherited_visibility_from_group(self.instance.group)
         
         if self.user:
             if not self.instance.pk:
@@ -174,7 +169,9 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
 
         if commit:
             self.instance.save()
-            self.save_m2m()
+            # For future reference: we skip the call to `save_m2m` here, because the django-multiform `MultiModelForm` already calls it!
+            # This should be safe, but maybe in a bug corner case it could cause the `save_m2m` call to be skipped entirely
+            # self.save_m2m()
         return self.instance
 
 
@@ -226,33 +223,33 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}, init_func
         def __init__(self, *args, **kwargs):
             super(TaggableObjectForm, self).__init__(*args, **kwargs)
             
-            # we reset newly added tags if we ran into a validation error
-            # these would have to be re-added in some weird way I can't figure out, but
-            # simply letting the validation re-fill the form with them causes an error
-            # because their strings are being filled into the field that requires an id
-            # because the tag string has not actually been made a tag, and so has no id            
-            if isinstance(self.data, QueryDict) and not self.is_valid() and \
-                 any([(datatag not in self.forms['media_tag'].initial.get('tags', [])) \
-                               for datatag in self.data.getlist('media_tag-tags')]):
-                self.data._mutable = True
-                del self.data['media_tag-tags']
-                self.data.setlist('media_tag-tags', copy(self.forms['media_tag'].initial.get('tags', [])))
-            
-            # we need to do this here ~again~ on top of in the media tag form, to prevent
-            # the select2 field's values from being overwritten 
-            if self.instance.pk:
-                if self.is_valid() and 'tags' in self.forms['media_tag'].initial:
-                    del self.forms['media_tag'].initial['tags']
-            
             # execute the on init function
             if init_func:
                 init_func(self)
-            
             
         # attach any extra form classes
         for form_name, form_class in list(base_extra_forms.items()):
             base_forms[form_name] = form_class
         
+        def is_valid(self, *args, **kwargs):
+            is_valid = super(TaggableObjectForm, self).is_valid(*args, **kwargs)
+            
+            # on an invalid form, when the view bounces back to the form,
+            # the choice list for the tags-field aren't updated with the currently-edited but yet-unsaved
+            # tags. so we make the choices equal to the entered values. 
+            # this is safe as it is only done on a an invalid form and not before the instance would be saved             
+            if isinstance(self.data, QueryDict) and not is_valid and \
+                 any([(datatag not in self.forms['media_tag'].initial.get('tags', [])) \
+                               for datatag in self.data.getlist('media_tag-tags')]):
+                self.forms['media_tag'].fields['tags'].choices = [(val, val) for val in self.data.getlist('media_tag-tags')]
+            
+            # we need to do this here ~again~ on top of in the media tag form, to prevent
+            # the select2 field's values from being overwritten 
+            if self.instance.pk:
+                if is_valid and 'tags' in self.forms['media_tag'].initial:
+                    del self.forms['media_tag'].initial['tags']
+            
+            return is_valid
         
         def save(self, commit=True):
             """
@@ -288,7 +285,9 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}, init_func
                 # Some forms might contain m2m data. We need to save them
                 # explicitly since we called save() with commit=False before.
                 
-                self.save_m2m()
+                # For future reference: we skip the call to `save_m2m` here, because the django-multiform `MultiModelForm` already calls it!
+                # This should be safe, but maybe in a bug corner case it could cause the `save_m2m` call to be skipped entirely
+                # self.save_m2m()
                 
                 # compare tagged persons, and if there are new ones, trigger notifications
                 persons_after = set(media_tag.persons.all())

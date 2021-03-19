@@ -15,7 +15,7 @@ module.exports = ContentControlView.extend({
     
     template: require('map/map-controls'),
     
-    activeFiltersTemplate: require('map/map-controls-active-filters'), 
+    activeFiltersTemplate: require('map/map-controls-active-filters'),
     
     // will be set to self.options during initialization
     defaults: {
@@ -43,6 +43,7 @@ module.exports = ContentControlView.extend({
         fullscreen: false,
         splitscreen: false,
         showMine: false, // URL param. if true, only the current user's own results will be shown. ignored away if user is not logged in.
+        hideTopics: false,
         
         paginationControlsEnabled: true, 
         paginationControlsUseInfiniteScroll: false, // if true, the pagination controls will be hidden and infinite scroll will be used
@@ -105,8 +106,18 @@ module.exports = ContentControlView.extend({
         }
         // add organization models if active
         if (COSINNUS_ORGANIZATIONS_ENABLED) {
-        	self.defaults.availableFilters['organizations'] = true;
-        	self.defaults.activeFilters['organizations'] = true;
+            self.defaults.availableFilters['organizations'] = true;
+            self.defaults.activeFilters['organizations'] = true;
+        }
+        // add conferences models if active
+        if (COSINNUS_CONFERENCES_ENABLED) {
+            self.defaults.availableFilters['conferences'] = true;
+            self.defaults.activeFilters['conferences'] = true;
+        }
+
+        if (COSINNUS_CLOUD_ENABLED) {
+            self.defaults.availableFilterList['cloudfiles'] = true;
+            self.defaults.activeFilters['cloudfiles'] = false;
         }
         
         ContentControlView.prototype.initialize.call(self, options, app, collection);
@@ -556,7 +567,10 @@ module.exports = ContentControlView.extend({
             var data = util.parseDirectItemId(directItemId);
         }
         util.log('tile-view.js: got a select click event! data: ' + JSON.stringify(data));
-        
+        if (data.type == "cloudfile") {
+            window.open(data.slug);
+            return;
+        }
         // check if this item is in the local detail Result cache
         var result = null;
         if (directItemId in self.detailResultCache) {
@@ -636,7 +650,7 @@ module.exports = ContentControlView.extend({
     /** Will like/unlike a given result, depending on the current liked status */
     triggerResultLikeOrUnlike: function (result) {
     	var self = this;
-    	var url = '/likefollow/'
+    	var url = '/likefollowstar/'
     		
     	var data = util.getAPIDataForDirectItemId(result.get('id'));
     	if (data == null || !(result.get('type') == 'ideas' || result.get('type') == 'events')) {
@@ -700,9 +714,10 @@ module.exports = ContentControlView.extend({
     /** Will follow/unfollow a given result, depending on the current followed status */
     triggerResultFollowOrUnfollow: function (result) {
     	var self = this;
-    	var url = '/likefollow/'
+    	var url = '/likefollowstar/'
     		
-    	var data = util.getAPIDataForDirectItemId(result.get('id'));
+        var data = util.getAPIDataForDirectItemId(result.get('id'));
+
     	if (data == null) {
     		util.log('Following cancelled - invalid result type for liking: ' + result.get('type'));
     		return;
@@ -736,7 +751,7 @@ module.exports = ContentControlView.extend({
             },
             complete: function (xhr, textStatus) {
                 util.log('control-view.js: Follow complete: ' + textStatus);
-                
+
                 if (textStatus !== 'success') {
                 	followHadErrors = true;
                 }
@@ -746,7 +761,56 @@ module.exports = ContentControlView.extend({
             }
         });
     },
-    
+
+    triggerResultStarOrUnstar: function (result) {
+        var self = this;
+        var url = '/likefollowstar/'
+
+        var data = util.getAPIDataForDirectItemId(result.get('id'));
+    	if (data == null) {
+    		util.log('Marking cancelled - invalid result type for starring: ' + result.get('type'));
+    		return;
+        }
+
+        var to_star = result.get('starred') ? '0' : 1;
+        data['star'] = to_star;
+
+        util.log('Sending star request for slug "' + result.get('slug') + '" and star: ' + to_star);
+
+        var starHadErrors = false;
+        self.currentDetailHttpRequest = $.ajax(url, {
+            type: 'POST',
+            timeout: self.searchXHRTimeout,
+            data: data,
+            success: function (data, textStatus) {
+
+                util.log('got resultssss for star')
+                util.log(data)
+                util.log(textStatus)
+
+                if ('starred' in data) {
+                    result.set('starred', data.starred);
+                }
+
+            },
+            error: function (xhr, textStatus) {
+                util.log('control-view.js: Star XHR failed.')
+                starHadErrors = true;
+            },
+            complete: function (xhr, textStatus) {
+                util.log('control-view.js: Star complete: ' + textStatus);
+
+                if (textStatus !== 'success') {
+                	starHadErrors  = true;
+                }
+                if (starHadErrors) {
+                    $('.star-button-error').show();
+                }
+            }
+        });
+
+
+    },
     /** Called manually or deferredly after loading a Result from the server,
      *  to be shown as the Detail View.
      *  @param result: This must be *a detailed* Result model, or null!
@@ -1258,8 +1322,15 @@ module.exports = ContentControlView.extend({
         	this.state.activeFilters['ideas'] = this.options.availableFilters.ideas ? util.ifundef(urlParams.ideas, this.options.activeFilters.ideas) : false;
         }
         if (COSINNUS_ORGANIZATIONS_ENABLED) {
-        	this.state.activeFilters['organizations'] = this.options.availableFilters.organizations ? util.ifundef(urlParams.organizations, this.options.activeFilters.organizations) : false;
+            this.state.activeFilters['organizations'] = this.options.availableFilters.organizations ? util.ifundef(urlParams.organizations, this.options.activeFilters.organizations) : false;
         }
+        if (COSINNUS_CONFERENCES_ENABLED) {
+            this.state.activeFilters['conferences'] = this.options.availableFilters.conferences ? util.ifundef(urlParams.conferences, this.options.activeFilters.conferences) : false;
+        }
+        if (COSINNUS_CLOUD_ENABLED) {
+            this.state.activeFilters['cloudfiles'] = this.options.availableFilterList.cloudfiles ? util.ifundef(urlParams.cloudfiles, this.options.activeFilters.cloudfiles) : false;
+        }
+
         if (cosinnus_active_user) {
         	this.options.showMine = util.ifundef(urlParams.mine, this.options.showMine);
         }
@@ -1280,8 +1351,18 @@ module.exports = ContentControlView.extend({
             });
         }
         if (COSINNUS_ORGANIZATIONS_ENABLED) {
-        	_.extend(searchParams, {
-        		organizations: this.state.activeFilters.organizations
+            _.extend(searchParams, {
+                organizations: this.state.activeFilters.organizations
+            });
+        }
+        if (COSINNUS_CONFERENCES_ENABLED) {
+            _.extend(searchParams, {
+                conferences: this.state.activeFilters.conferences
+            });
+        }
+        if (COSINNUS_CLOUD_ENABLED) {
+            _.extend(searchParams, {
+                cloudfiles: this.state.activeFilters.cloudfiles
             });
         }
         if (this.state.activeTopicIds.length > 0) {

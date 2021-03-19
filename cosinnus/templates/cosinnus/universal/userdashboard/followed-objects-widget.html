@@ -1,0 +1,22 @@
+{% extends 'userdashboard/base-widget' %}
+{% import "include/macros.html" as macros %}
+
+{% block title %}
+    {# Translators: __INCLUDE_JS_PO__ #}
+	{% trans "Items you follow" %}
+{% endblock %}
+
+{% block content %}
+    {% if items|length > 0 %}
+        <ul class="item-list">
+            {% for item in items %}
+            {{ macros.followedlistItem(item) }}
+            {% endfor %}
+		</ul>
+	{% else %}
+	<div class="widget-info-box no-select">
+        {# Translators: __INCLUDE_JS_PO__ #}
+		{% trans "Nothing here yet." %}
+	</div>
+    {% endif %}
+{% endblock %}

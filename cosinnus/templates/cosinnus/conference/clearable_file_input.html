@@ -1,0 +1,19 @@
+{% load i18n %}
+<div class="white-content">
+{% if widget.is_initial %}
+    <p>
+        {{ widget.initial_text }}: <a href="{{ widget.value.url }}">{% trans 'Current File' %}</a>
+    </p>
+    <p>{{ widget.input_text }}:</p>
+{% endif %}
+<input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+
+{% if widget.is_initial and not widget.required %}
+    <div class="checkbox">
+        <label for="{{ widget.checkbox_id }}">
+            <input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}"{% if widget.attrs.disabled %} disabled{% endif %}> {{ widget.clear_checkbox_label }}
+        </label>
+    </div>
+{% endif %}
+</div>
+

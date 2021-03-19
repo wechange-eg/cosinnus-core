@@ -3,7 +3,9 @@
 
 {% block extrahead %}
     {{ block.super }}
-    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
+    {% if not "description" in SETTINGS.COSINNUS_USERPROFILE_HIDDEN_FIELDS %}
+        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
+    {% endif %}
 {% endblock %}
 
 {% block page_title %}
@@ -40,10 +42,12 @@
 	        {{ form.forms.obj.non_field_errors }}
 		    {{ form.forms.user.non_field_errors }}
             {{ form.forms.media_tag.non_field_errors }}
-		    
+
+                {% block title %}
                 {% trans "Basic data" as basic_label %}
                 {% include 'cosinnus/fields/default_field.html' with label=basic_label first=True %}
-                
+                {% endblock %}
+
                 {% block user_info %}
                     <div class="row">
                         <div class="col-sm-6 regular-space">
@@ -59,48 +63,48 @@
 							{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.last_name label=last_name_label placeholder=last_name_placeholder help_popup="helptext_52_profilelastname" %}
                         </div>
                     </div><!-- row -->
-                    
-                
                 {% endblock user_info %}
-                
-                
+
+                {% block email %}
                 {# email Field #}
 				{% trans "E-Mail" as email_label %}
 				{% trans "E-Mail" as  email_placeholder %}
 				{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.email label=email_label placeholder=email_placeholder %}
-				                
+                {% endblock %}
 
+                {% block avatar %}
                 {# Avatar Field #}
 				{% trans "Profile avatar" as avatar_label %}
 				{% captureas avatar_legend %}{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}{% endcaptureas %}
 				{% captureas preview_html %}
 				    {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.select_area_width}}px;height:{{SETTINGS.AWESOME_AVATAR.select_area_height}}px{% endcaptureas %}
                     <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
-                        {% include "cosinnus/user/user_avatar_image.html" with user=request.user extra_style=preview_style image_size="large" %}
+                        {% include "cosinnus/user/user_avatar_image.html" with user=object.user extra_style=preview_style image_size="large" %}
                     </div>
 				{% endcaptureas %}
 				{% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
-
+                {% endblock %}
 
                 {% block userprofile_about_fields %}
-                    
-                    {# SimpleMDE Description Field (gets initialized in extrahead) #}
-                    {# Large Field #}
-					{% trans "Who are you and what motivates you?" as description_label %}
-					{% trans "Tell others something about you!" as  description_placeholder %}
-					{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description label=description_label placeholder=description_placeholder large_field=True %}
-					                    
+                    {% if not "description" in SETTINGS.COSINNUS_USERPROFILE_HIDDEN_FIELDS %}
+	                    {# SimpleMDE Description Field (gets initialized in extrahead) #}
+	                    {# Large Field #}
+						{% trans "Who are you and what motivates you?" as description_label %}
+						{% trans "Tell others something about you!" as  description_placeholder %}
+						{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description label=description_label placeholder=description_placeholder large_field=True %}
+					{% endif %}
+
                     {# Regular Field #}
 					{% trans "Website" as website_label %}
 					{% trans "Example: http://mywebsite.com" as  website_placeholder %}
 					{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.website label=website_label placeholder=website_placeholder %}
-					                    
+
                {% endblock userprofile_about_fields %}
-                    
-               
-                {% include "cosinnus/media_tags_userprofile.html" %} 
-				
-				
+
+               {% block media_tags %}
+               {% include "cosinnus/media_tags_userprofile.html" %}
+               {% endblock %}
+
 				{% if SETTINGS.COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD %}
 					{# May be contacted checkbox #}
 	                {% trans "Cooperation requests for you" as mc_label %}
@@ -111,18 +115,20 @@
                 
                 {% comment %} The fields in this block are generated from `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` {% endcomment %}
                 {% block portal_specific_userprofile_extra_fields %}
-	                {% include 'cosinnus/user/userprofile_extra_formfields.html' with form=form.forms.obj %}
+	                {% include 'cosinnus/fields/userprofile_extra_formfields.html' with form=form.forms.obj %}
                 {% endblock %}
                 
                 {% comment %} This block can be used to override fields using templates {% endcomment %}
                 {% block userprofile_extra_fields %}
                 {% endblock userprofile_extra_fields %}
                 
-                {% block managed_tag_field %}
-                    {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF %}
-                        {% include 'cosinnus/fields/managed_tag_formfield.html' with form=form.forms.obj legend=COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_PROFILE type="user" %}
-                    {% endif %}
-                {% endblock managed_tag_field %}
+                {% block managed_tags %}
+                    {% block managed_tag_field %}
+                        {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF %}
+                            {% include 'cosinnus/fields/managed_tag_formfield.html' with form=form.forms.obj legend=COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_PROFILE type="user" %}
+                        {% endif %}
+                    {% endblock managed_tag_field %}
+                {% endblock %}
                 
 	    </div>
 	    

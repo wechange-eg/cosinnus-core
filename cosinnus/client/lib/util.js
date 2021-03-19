@@ -92,7 +92,7 @@ module.exports = {
     
     getAPIDataForDirectItemId: function (directItemId) {
     	var data = this.parseDirectItemId(directItemId);
-    	var apiData = {};
+        var apiData = {};
     	if (data.type == 'ideas') {
     		apiData = {
     			ct: 'cosinnus.CosinnusIdea',
@@ -114,9 +114,19 @@ module.exports = {
 				slug: data.slug,
     		};
     	} else if (data.type == 'groups') {
+            apiData = {
+                ct: 'cosinnus.CosinnusSociety',
+                slug: data.slug,
+            };
+        } else if (data.type == 'conferences') {
+            apiData = {
+                ct: 'cosinnus.CosinnusConference',
+                slug: data.slug,
+            };
+        } else if (data.type == 'people') {
     		apiData = {
-				ct: 'cosinnus.CosinnusSociety',
-				slug: data.slug,
+                slug: data.slug,
+                ct: 'people'
     		};
     	} else {
     		return null;

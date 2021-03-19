@@ -1,0 +1,17 @@
+{% load i18n %}
+
+<span class="application-radio-option">
+	{% include "django/forms/widgets/input.html" %}
+	<label for="{{ widget.attrs.id }}">
+		{% if widget.value == 3 %}
+	        {% trans "Waitlist" %}
+	        <i class="fas fa-clock"></i>
+		{% elif widget.value == 4 %}
+	        {% trans "Accept" %}
+	        <i class="fas fa-check"></i>
+		{% elif widget.value == 5 %}
+	        {% trans "Decline" %}
+	        <i class="fas fa-times"></i>
+		{% endif %}
+	</label>
+</span>

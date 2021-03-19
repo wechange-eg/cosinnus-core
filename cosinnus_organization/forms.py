@@ -7,18 +7,19 @@ from awesome_avatar import forms as avatar_forms
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from extra_views import InlineFormSet
+from multiform import InvalidArgument
 
 from cosinnus.conf import settings
-from cosinnus.forms.group import AsssignPortalMixin, MultiSelectForm, GroupKwargModelFormMixin
+from cosinnus.forms.group import AsssignPortalMixin, MultiSelectForm
 from cosinnus.forms.mixins import AdditionalFormsMixin
 from cosinnus.forms.tagged import get_form
-from cosinnus.models import reverse, CosinnusPortal, MEMBERSHIP_MEMBER
+from cosinnus.models import CosinnusPortal, MEMBERSHIP_MEMBER
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.utils.user import get_group_select2_pills
 from cosinnus_organization.fields import OrganizationSelect2MultipleChoiceField
 from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationLocation, \
     CosinnusOrganizationSocialMedia, CosinnusOrganizationGroup
 from cosinnus_organization.utils import get_organization_select2_pills
+from cosinnus.utils.validators import validate_file_infection
 
 
 class CosinnusOrganizationSocialMediaForm(forms.ModelForm):
@@ -55,7 +56,8 @@ class _CosinnusOrganizationForm(AsssignPortalMixin, AdditionalFormsMixin, forms.
 
     extra_forms_setting = 'COSINNUS_ORGANIZATION_ADDITIONAL_FORMS'
 
-    avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), disable_preview=True)
+    avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 
+                      disable_preview=True, validators=[validate_file_infection])
     
     class Meta(object):
         model = CosinnusOrganization
@@ -66,13 +68,6 @@ class _CosinnusOrganizationForm(AsssignPortalMixin, AdditionalFormsMixin, forms.
         if 'request' in kwargs:
             self.request = kwargs.pop('request')
         super(_CosinnusOrganizationForm, self).__init__(instance=instance, *args, **kwargs)
-
-        
-def on_init(taggable_form):
-    # set the media_tag location fields to required
-    taggable_form.forms['media_tag'].fields['location'].required = True
-    taggable_form.forms['media_tag'].fields['location_lat'].required = True
-    taggable_form.forms['media_tag'].fields['location_lon'].required = True
 
 
 class MultiOrganizationSelectForm(MultiSelectForm):
@@ -105,7 +100,16 @@ class MultiOrganizationSelectForm(MultiSelectForm):
         return group_aware_reverse('cosinnus:group-organization-request-select2', kwargs={'group': self.group.slug})
 
 
-CosinnusOrganizationForm = get_form(_CosinnusOrganizationForm, attachable=False, init_func=on_init)
+class CosinnusOrganizationForm(get_form(_CosinnusOrganizationForm, attachable=False)):
+    def dispatch_init_group(self, name, group):
+        if name == 'media_tag':
+            return group
+        return InvalidArgument
+
+    def dispatch_init_user(self, name, user):
+        if name == 'media_tag':
+            return user
+        return InvalidArgument
 
 
 class CosinnusOrganizationGroupForm(forms.ModelForm):

@@ -3,7 +3,7 @@
 
 {% block description_area %}
     <h1>
-    	{{title}} 
+    	{{title}}
     	{% if isYou %}
     		<i class="pale-color">
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -15,10 +15,10 @@
     {% if group_slug and group_name and portal %}
         <div class="pale-color one-line">
             {% if type == "projects" %}
-                {{ macros.typeLabel("groups", singular=1, useStyles=0, colon=1, showIcon=0) }}
+                {{ macros.typeLabel("groups", singular=1, useStyles=0, colon=1, showIcon=0, COSINNUS_TRANS=COSINNUS_TRANS) }}
                 {{ macros.resultLink(portal, group_slug, group_name, "groups") }}
             {% else %}
-                {{ macros.typeLabel("projects", singular=1, useStyles=0, colon=1, showIcon=0) }}
+                {{ macros.typeLabel("projects", singular=1, useStyles=0, colon=1, showIcon=0, COSINNUS_TRANS=COSINNUS_TRANS) }}
                 {{ macros.resultLink(portal, group_slug, group_name, "projects") }}
             {% endif %}
         </div>

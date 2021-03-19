@@ -7,16 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-03 17:20+0100\n"
+"POT-Creation-Date: 2021-03-07 17:56+0100\n"
 "PO-Revision-Date: 2020-11-06 14:03+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: \n"
-"Language: cs\n"
+
+msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conference Bookings"
+msgstr "Konference probíhá"
 
 msgid "Conferences"
 msgstr ""
@@ -25,208 +33,49 @@ msgctxt "the_app"
 msgid "conference"
 msgstr "Konference"
 
+msgid "End date must be before start date"
+msgstr ""
+
+msgid "Please also provide a start date"
+msgstr ""
+
+msgid "Please also provide a end date"
+msgstr ""
+
+#, fuzzy
+#| msgid "First Name"
+msgid "First Choice"
+msgstr "Jméno"
+
+msgid "Second Choice"
+msgstr ""
+
 msgid "Conference Management"
 msgstr "Vedení konference"
 
-msgid "Conference is running"
-msgstr "Konference probíhá"
-
-msgid "Conference is not running"
-msgstr "Konference neprobíhá"
-
-msgid "Accounts from CSV Upload"
-msgstr "Účty z nahrávání z CSV"
-
-msgid "Upload Participants"
-msgstr "Nahrajte účastníky"
-
-msgid "last login"
-msgstr ""
-
-msgid "no login yet"
-msgstr ""
-
-msgid "Admin"
-msgstr "Správce"
-
-msgid "Member"
-msgstr "Člen"
-
-msgid "active"
-msgstr "aktivní"
-
-msgid "not active"
-msgstr "neaktivní"
-
-msgid "User participates in the following workshops:"
-msgstr "Uživatel se účastní následujících workshopů:"
-
-msgid "deactivate member"
-msgstr "deaktivovat člena"
-
-msgid "activate member"
-msgstr "aktivovat člena"
-
-msgid "remove user"
-msgstr "odebrat uživatele"
-
-msgid "Do you really want to deactivate the member's user account ?"
-msgstr "Opravdu chcete deaktivovat uživatelský účet člena?"
-
-msgid "Deactivate Member"
-msgstr "Deaktivovat člena"
-
-msgid "Do you really want to activate the member's user account ?"
-msgstr "Opravdu chcete aktivovat uživatelský účet člena?"
-
-msgid "Activate Member"
-msgstr "Aktivovat člena"
-
-msgid "Do you really want to remove the user?"
-msgstr "Opravdu chcete uživatele odebrat?"
-
-msgid "Remove User"
-msgstr "Odebrat uživatele"
-
-msgid "Finish conference and deactivate user accounts"
-msgstr "Dokončit konferenci a deaktivovat uživatelské účty"
-
-msgid "Start conference and activate user accounts"
-msgstr "Zahájit konferenci a deaktivovat uživatelské účty"
-
-msgid "Download Statistics"
-msgstr "Stáhnout statistiku"
-
-msgid "Workshops"
-msgstr "Workshopy"
-
-msgid "Add workshop"
-msgstr "Přidat workshop"
-
-#, python-format
-msgid "Edit Room “%(title)s”"
-msgstr ""
-
-msgid "Create Room"
-msgstr ""
-
-msgid "Conference Room Management"
-msgstr ""
-
-msgid "Edit Room"
-msgstr ""
-
-msgid ""
-"There was an error in one of the fields you entered. Please correct it "
-"before saving!"
-msgstr ""
-"V jednom z polí, která jste zadali, došlo k chybě. Před uložením to prosím "
-"opravte!"
-
-msgid "Room type"
-msgstr ""
-
-msgid "TODO: Room Type Lobby description text"
-msgstr ""
-
-msgid "TODO: Room Type Stage description text"
-msgstr ""
-
-msgid "TODO: Room Type Workshops description text"
-msgstr ""
-
-msgid "TODO: Room Type Discussions description text"
-msgstr ""
-
-msgid "TODO: Room Type Coffee Tables description text"
-msgstr ""
-
-msgid "TODO: Room Type Results description text"
-msgstr ""
-
-msgid "Add project"
-msgstr "Přidat projekt"
-
-msgid "TODO: Room Type Participants description text"
-msgstr ""
-
-msgid "Maximum Coffee Table Participants"
-msgstr ""
-
-msgid ""
-"How many participants should can join one coffee table before it is full"
-msgstr ""
-
-msgid "Allow users to create new coffee tables"
-msgstr ""
-
-msgid "Enable this to allow users to create their own coffee tables"
-msgstr ""
-
-msgid "Result Project"
-msgstr ""
-
-msgid ""
-"Choose one of the sub-projects of this group to display as nested results-"
-"project for participants"
-msgstr ""
-
-msgid "Title"
-msgstr "Název"
-
-msgid "Sort index"
-msgstr ""
-
-msgid ""
-"Number by which rooms are sorted in ascending order in the conference room "
-"navigation list"
-msgstr ""
-
-msgid "Description"
-msgstr "Popis"
-
-msgid ""
-"A short description or topic for your room. Will be shown on top of the room "
-"page."
-msgstr ""
-
-msgid "Room is visible"
-msgstr ""
-
-msgid ""
-"Uncheck this to hide the room for participants (you will still be able to "
-"see it)"
-msgstr ""
-
-msgid "Save"
-msgstr "Uložit"
-
-msgid "Go to Room"
-msgstr ""
-
-msgid "hidden"
-msgstr ""
-
-msgid "Delete"
-msgstr "Smazat"
-
-msgid "Edit"
-msgstr "Upravit"
-
-msgid "Create Conference Event"
+msgid "Workshop Participant File Upload"
 msgstr ""
 
 #, python-format
-msgid "Do you really want to delete room \"%(title)s\"?"
+msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 msgstr ""
 
-msgid "Delete room"
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
 msgstr ""
 
-msgid "Room list"
+msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
 msgstr ""
 
-msgid "There are no rooms yet."
+msgid "Upload File"
+msgstr ""
+
+#, fuzzy
+#| msgctxt "the_app"
+#| msgid "conference"
+msgid "Go to conference"
+msgstr "Konference"
+
+msgid "This function is not enabled for this conference."
 msgstr ""
 
 msgid "Conference successfully started and user accounts activated"
@@ -267,3 +116,144 @@ msgstr ""
 
 msgid "The supplied Conference Room could not be found"
 msgstr ""
+
+msgid "Conference reminder settings have been successfully updated."
+msgstr ""
+
+msgid "A test email has been sent to your email address."
+msgstr ""
+
+msgid "Participation configurations have been updated."
+msgstr ""
+
+msgid "Your application has been submitted."
+msgstr ""
+
+msgid "Your application has been updated."
+msgstr ""
+
+msgid "You cannot change your application anymore."
+msgstr ""
+
+msgid "Application has been withdrawn."
+msgstr ""
+
+#, python-format
+msgid "The following users were accepted and added as members: %s"
+msgstr ""
+
+#, python-format
+msgid "The following users were put on the wait list: %s"
+msgstr ""
+
+#, python-format
+msgid "The following users were declined: %s"
+msgstr ""
+
+msgid "Your changes were saved."
+msgstr ""
+
+msgid "Option"
+msgstr ""
+
+msgid "Motivation for applying"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Contact E-Mail Address"
+msgstr ""
+
+msgid "Contact Phone Number"
+msgstr ""
+
+msgid "List of Applicants"
+msgstr ""
+
+#~ msgid "Conference is not running"
+#~ msgstr "Konference neprobíhá"
+
+#~ msgid "Accounts from CSV Upload"
+#~ msgstr "Účty z nahrávání z CSV"
+
+#~ msgid "Upload Participants"
+#~ msgstr "Nahrajte účastníky"
+
+#~ msgid "Admin"
+#~ msgstr "Správce"
+
+#~ msgid "Member"
+#~ msgstr "Člen"
+
+#~ msgid "active"
+#~ msgstr "aktivní"
+
+#~ msgid "not active"
+#~ msgstr "neaktivní"
+
+#~ msgid "User participates in the following workshops:"
+#~ msgstr "Uživatel se účastní následujících workshopů:"
+
+#~ msgid "deactivate member"
+#~ msgstr "deaktivovat člena"
+
+#~ msgid "activate member"
+#~ msgstr "aktivovat člena"
+
+#~ msgid "remove user"
+#~ msgstr "odebrat uživatele"
+
+#~ msgid "Do you really want to deactivate the member's user account ?"
+#~ msgstr "Opravdu chcete deaktivovat uživatelský účet člena?"
+
+#~ msgid "Deactivate Member"
+#~ msgstr "Deaktivovat člena"
+
+#~ msgid "Do you really want to activate the member's user account ?"
+#~ msgstr "Opravdu chcete aktivovat uživatelský účet člena?"
+
+#~ msgid "Activate Member"
+#~ msgstr "Aktivovat člena"
+
+#~ msgid "Do you really want to remove the user?"
+#~ msgstr "Opravdu chcete uživatele odebrat?"
+
+#~ msgid "Remove User"
+#~ msgstr "Odebrat uživatele"
+
+#~ msgid "Finish conference and deactivate user accounts"
+#~ msgstr "Dokončit konferenci a deaktivovat uživatelské účty"
+
+#~ msgid "Start conference and activate user accounts"
+#~ msgstr "Zahájit konferenci a deaktivovat uživatelské účty"
+
+#~ msgid "Download Statistics"
+#~ msgstr "Stáhnout statistiku"
+
+#~ msgid "Workshops"
+#~ msgstr "Workshopy"
+
+#~ msgid "Add workshop"
+#~ msgstr "Přidat workshop"
+
+#~ msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+#~ msgstr "V jednom z polí, která jste zadali, došlo k chybě. Před uložením to prosím opravte!"
+
+#~ msgid "Add project"
+#~ msgstr "Přidat projekt"
+
+#~ msgid "Title"
+#~ msgstr "Název"
+
+#~ msgid "Description"
+#~ msgstr "Popis"
+
+#~ msgid "Save"
+#~ msgstr "Uložit"
+
+#~ msgid "Delete"
+#~ msgstr "Smazat"
+
+#~ msgid "Edit"
+#~ msgstr "Upravit"

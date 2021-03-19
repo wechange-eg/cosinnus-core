@@ -20,6 +20,7 @@ import {Room} from "../../stores/room/models"
 import {fetchParticipants} from "../../stores/participants/effects"
 import {Participant} from "../../stores/participants/models"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
+import {Notification} from "../components/Notification"
 
 interface ParticipantsProps {
   participants: Participant[]
@@ -106,6 +107,7 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
   return (
     <Grid container>
       <Content>
+        <Notification />
         <Typography component="h1">{room.props.title}</Typography>
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />

@@ -31,6 +31,7 @@ from cosinnus.templatetags.cosinnus_tags import cosinnus_setting
 from uuid import uuid1
 from cosinnus.views.user import set_user_email_to_verify
 from cosinnus.core import signals
+from django.forms.fields import CharField
 
 
 def delete_userprofile(user):
@@ -165,11 +166,6 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
             'profile': profile,
             'this_user': profile.user,
         })
-        if profile.user == self.request.user:
-            context.update({
-                'has_deactivated_groups': CosinnusGroup.objects.get_deactivated_for_user(self.request.user).count() > 0,
-            })
-        
         return context
 
 detail_view = UserProfileDetailView.as_view()
@@ -180,6 +176,14 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
     template_name = 'cosinnus/user/userprofile_form.html'
     message_success = _('Your profile was edited successfully.')
     
+    # for extending views, changes some behaviour with the mode that an admin is doing direct changes
+    # (e.g. no validation for e-mail changes)
+    is_admin_elevated_view = False
+    
+    # if set to True, all fields will always be kept enabled
+    # if set to False, disables some fields depending on settings variables
+    disable_conditional_field_locking = False
+    
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(UserProfileObjectMixin, self).dispatch(
@@ -188,7 +192,8 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
     def get_initial(self):
         """ Allow pre-populating managed tags on userprofile edit from initial default tags """
         initial = super().get_initial()
-        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and \
+                (settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF or settings.COSINNUS_MANAGED_TAGS_ASSIGNABLE_IN_USER_ADMIN_FORM):
             if settings.COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG is not None:
                 initial['managed_tag_field'] = settings.COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG
         return initial
@@ -206,7 +211,7 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
             messages.warning(request, _('Your user account is associated with an integrated Portal. This account\'s email address is fixed and therefore was left unchanged.'))
             request.POST._mutable = True
             request.POST['user-email'] = user.email
-        elif request.POST.get('user-email', user.email) != user.email and CosinnusPortal.get_current().email_needs_verification:
+        elif not self.is_admin_elevated_view and request.POST.get('user-email', user.email) != user.email and CosinnusPortal.get_current().email_needs_verification:
             # set flags to be changed if form submit is successful
             self.target_email_to_confirm = request.POST['user-email']
             self.user = user
@@ -232,6 +237,40 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
                 messages.error(self.request, _('Sorry, something went wrong while saving your profile!'))
             ret = HttpResponseRedirect(reverse('cosinnus:profile-edit'))
         return ret
+    
+    def get_form(self, *args, **kwargs):
+        form = super(UserProfileUpdateView, self).get_form(*args, **kwargs)
+        # note: we have a django-multiforms form here with 'user', 'obj' (CosinnusProfile) and 'media_tag'!
+        
+        if not self.disable_conditional_field_locking:
+            for form_name, formfield_list in settings.COSINNUS_USERPROFILE_DISABLED_FIELDS.items():
+                sub_form = form.forms[form_name]
+                # disable profile formfields from settings
+                # we also need to remove any validation errors from required later-disabled fields
+                for field_name in formfield_list:
+                    if field_name in sub_form.fields:
+                        field = sub_form.fields[field_name]
+                        field.disabled = True
+                        field.required = False
+            # disable the userprofile visibility field if it is locked
+            if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
+                field = form.forms['media_tag'].fields['visibility']
+                field.disabled = True
+                field.required = False
+        
+        # disable all fields that require a certain managed_tag to be assigned to the user
+        # that this user doesn't have
+        user_managed_tag_slugs = [tag.slug for tag in self.object.get_managed_tags()]
+        for tag_slug_list, field_list in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS:
+            if not any([tag_slug in user_managed_tag_slugs for tag_slug in tag_slug_list]):
+                for field_name in field_list:
+                    if field_name in form.forms['obj'].fields:
+                        field = form.forms['obj'].fields[field_name]
+                        field.disabled = True
+                        field.required = False
+        
+        return form
+    
 
 update_view = UserProfileUpdateView.as_view()
 

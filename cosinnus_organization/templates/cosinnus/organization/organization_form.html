@@ -23,20 +23,18 @@
     {% include "cosinnus/organization/leftnav_organization.html" with current_page=current_page %}
 
     {% if object %}
-        <div class="app-etherpad">
-	        <div type="button" class="btn w100 btn-emphasized" data-toggle="modal" data-target="#deleteModal">
-	            <ul class="media-list">
-	                <li class="media">
-	                    <a class="pull-left" href="#">
-	                        <i class="fa fa-eraser"></i>
-	                    </a>
-	                    <div class="media-body">
-	                        {% trans "Delete this Organization" %}
-	                    </div>
-	                </li>
-	            </ul>
-	        </div>
-	    </div>
+        <div type="button" class="btn w100 btn-default" data-toggle="modal" data-target="#deleteModal">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-eraser"></i>
+                    </a>
+                    <div class="media-body">
+                        {% trans "Delete this Organization" %}
+                    </div>
+                </li>
+            </ul>
+        </div>
         {% captureas label %}{% blocktrans with title=object.name %}Do you really want to delete organization „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
         {% captureas title %}{% trans "Delete Organization" %}{% endcaptureas %}
         {% trans "Yes" as submit_button_label %}
@@ -111,37 +109,7 @@
 
                     {# type field #}
                     {% trans "Type of your organization" as type_label %}
-                    {% captureas type_html %}
-                        {{ form.forms.obj.type.errors }}
-                        <div class="input-area" style="padding: 5px;">
-                            {% for option_value, option_label in form.forms.obj.instance.TYPE_CHOICES %}
-                                <span class="pull-left inline-list nowrap">
-                                    <a class="app-background small-padding">
-                                        <input
-                                                id="radio_type_{{ option_value }}"
-                                                type="radio"
-                                                name="type"
-                                                {% if option_value == form.forms.obj.instance.type %}checked="true"{% endif %}
-                                                value="{{ option_value }}"
-                                                onchange="$('#id_type_other').parent().toggleClass('hidden', !$('#radio_type_{{ form.forms.obj.instance.TYPE_OTHER }}').prop('checked'))"
-                                        />
-                                    </a>
-                                    <span
-                                            class="app-background-light dark-color small-padding"
-                                            onclick="
-                                                $('#radio_type_{{ option_value }}').prop('checked', !($('#radio_type_{{ option_value }}').prop('checked')));
-                                                $('#id_type_other').parent().toggleClass('hidden', !$('#radio_type_{{ form.forms.obj.instance.TYPE_OTHER }}').prop('checked'));
-                                            "
-                                    >
-                                        {{ option_label }}
-                                    </span>
-                                </span>
-                            {% endfor %}
-                        </div>
-                    {% endcaptureas %}
-                    <div class="cosinnus-field">
-                    {% include 'cosinnus/fields/default_field.html' with extra_html=type_html label=type_label large_field=True %}
-                    </div>
+                    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.type label=type_label %}
 
                     {# type_other Field #}
                     {% captureas type_other_placeholder %}{% trans "If none of the options apply, specify the type of your organization here" %}{% endcaptureas %}

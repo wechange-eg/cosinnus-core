@@ -56,9 +56,9 @@ msgid "Organization Invites for Unregistered Users"
 msgstr "Organisations-Einladungen für nicht registrierte Benutzer*innen"
 
 #: cosinnus-core/cosinnus_organization/models.py:233
-msgid "Civil society organization (e.g. club, association, foundation, party)"
+msgid "Civil society organization"
 msgstr ""
-"zivilgesellschaftliche Organisation (Verein, Verband, Stiftung, Partei etc.)"
+"zivilgesellschaftliche Organisation"
 
 #: cosinnus-core/cosinnus_organization/models.py:234
 msgid "Company (commercial)"
@@ -66,9 +66,9 @@ msgstr "Unternehmen (kommerziell)"
 
 #: cosinnus-core/cosinnus_organization/models.py:235
 msgid ""
-"Public institution (e.g. educational institution, library, swimming pool)"
+"Public institution"
 msgstr ""
-"öffentliche Einrichtung (Bildungseinrichtung, Bibliothek, Schwimmbad etc.)"
+"öffentliche Einrichtung"
 
 #: cosinnus-core/cosinnus_organization/models.py:236
 msgid "Other"

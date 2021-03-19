@@ -42,7 +42,7 @@ function ParticipantConnector (props: ParticipantProps & RouteComponentProps) {
   return (
     <Main container>
       {(participant && (
-        <Content className="fullheight">
+        <Content className="fullheight detail-view">
           <Typography component="h1">{participant.getFullName()}</Typography>
           {(participant.props.organisation || participant.props.country) && (
             <div className="description">

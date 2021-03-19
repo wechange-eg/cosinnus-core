@@ -1,5 +1,9 @@
 .fullcalendar(@light,@normal,@dark) {
-
+    
+    .fc-event {
+        font-size: 11px;
+    }
+    
 	// The header
 	.fc-header-title h2 {
 		font-size: 1.5em;
@@ -46,6 +50,10 @@
 		background-color: @normal;
 		border-color: @normal;
 		cursor: pointer;
+		
+		&.event-special {
+		    background-color: @dark;
+		}
 	}
 
 	// selected days for event creation

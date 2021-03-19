@@ -1,21 +1,17 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 09:08+0100\n"
-"PO-Revision-Date: 2020-04-27 12:10+0100\n"
+"POT-Creation-Date: 2021-03-07 17:51+0100\n"
+"PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -34,14 +30,20 @@ msgstr ""
 msgid "Convert memberships to Member status"
 msgstr ""
 
+#, python-format
+msgid "%d Users' rocketchat room memberships were re-done."
+msgstr ""
+
+msgid "Rocket: Fix missing RocketChat room membership for users"
+msgstr ""
+
 msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr ""
 
-msgid "The following Projects were converted to Groups:"
+#, fuzzy, python-format
+#| msgid "The following Projects were converted to Groups:"
+msgid "The following items were converted to %s:"
 msgstr "The following Projects were converted to Groups:"
-
-msgid "Convert selected Projects to Groups"
-msgstr "Convert selected Projects to Groups"
 
 msgid "The following Users were added to this portal:"
 msgstr ""
@@ -66,12 +68,6 @@ msgstr ""
 
 msgid "Move selected groups and their subprojects to current portal and message members"
 msgstr ""
-
-msgid "The following Groups were converted to Projects:"
-msgstr "The following Groups were converted to Projects:"
-
-msgid "Convert selected Groups to Projects"
-msgstr "Convert selected Groups to Projects"
 
 msgid "ToS Accepted"
 msgstr ""
@@ -105,14 +101,24 @@ msgstr ""
 msgid "%d Users were synchronized successfully."
 msgstr ""
 
-msgid "Re-synchronize RocketChat user-account (will log users out of RocketChat!)"
+msgid "Rocket: Re-synchronize RocketChat user-account connection (will log users out of RocketChat!)"
 msgstr ""
 
 #, python-format
 msgid "%d Users were made RocketChat admins."
 msgstr ""
 
-msgid "Make user RocketChat admin"
+msgid "Rocket: Make user RocketChat admin"
+msgstr ""
+
+#, python-format
+msgid "%d Users rocketchat accounts were checked."
+msgstr ""
+
+msgid "Rocket: Repair/create missing users' rocketchat accounts"
+msgstr ""
+
+msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
 msgid "Restart"
@@ -166,6 +172,27 @@ msgstr "Construction and Living"
 msgid "Klimaschutz"
 msgstr "Climate Protection"
 
+msgid "Overnight stay required"
+msgstr ""
+
+msgid "Barrier-free access required"
+msgstr ""
+
+msgid "Interpreter required"
+msgstr ""
+
+msgid "Vegetarian cuisine"
+msgstr ""
+
+msgid "Vegan cuisine"
+msgstr ""
+
+msgid "Lactose-free cuisine"
+msgstr ""
+
+msgid "Gluten-free cuisine"
+msgstr ""
+
 msgid "General"
 msgstr ""
 
@@ -179,7 +206,16 @@ msgstr ""
 msgid "Premium"
 msgstr ""
 
-msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Bookmark"
+msgstr ""
+
+msgid "Bookmarked"
+msgstr ""
+
+msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
@@ -199,6 +235,9 @@ msgid "This team no longer resides under the URL you entered. You have been redi
 msgstr ""
 
 msgid "This account is no longer active. You have been logged out."
+msgstr ""
+
+msgid "You have been automatically logged out after being inactive for some time."
 msgstr ""
 
 #, python-format
@@ -283,6 +322,30 @@ msgstr[1] ""
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgstr ""
 
+msgid "Your participation application was accepted"
+msgstr ""
+
+msgid "You submitted an application"
+msgstr ""
+
+#, python-format
+msgid "Your participation application for %(team_name)s was accepted!"
+msgstr ""
+
+msgid "Your participation application was declined"
+msgstr ""
+
+#, python-format
+msgid "Your participation application for %(team_name)s was declined!"
+msgstr ""
+
+msgid "Your participation application was waitlisted"
+msgstr ""
+
+#, python-format
+msgid "Your participation application for %(team_name)s was waitlisted!"
+msgstr ""
+
 msgid "You were made an admin of this team"
 msgstr ""
 
@@ -340,12 +403,10 @@ msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_nam
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Accept invitation"
 msgstr "There are no groups."
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "View invitation"
 msgstr "There are no groups."
 
@@ -357,7 +418,6 @@ msgstr ""
 "The user %(user_name)s wants to join project %(team_name)s."
 
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "New link to the moved project/group"
 msgstr "Convert selected Projects to Groups"
 
@@ -369,9 +429,54 @@ msgstr ""
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr ""
 
-#, python-format
-msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+msgid "A user created a new conference"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%(sender_name)s created the conference %(object_name)s"
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
+
+#, fuzzy, python-format
+msgid "%(sender_name)s created %(count)d conferences"
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
+
+#, fuzzy, python-format
+msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
+
+msgctxt "email campaign button label to apply for a conference"
+msgid "Apply now!"
+msgstr ""
+
+msgid "View conference"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(sender_name)s invited you to apply for the conference %(team_name)s"
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
+
+#, python-format
+msgid "%(sender_name)s invited you to apply for \"%(team_name)s\" on %(portal_name)s! <br/><br/> To apply, please click on the link below."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(sender_name)s just created \"%(team_name)s\" on %(portal_name)s!"
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
 
 #, fuzzy, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
@@ -448,6 +553,58 @@ msgid "Hebrew--NATIVE-LANGUAGE"
 msgstr "עברית"
 
 msgid "Belarus"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Title"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 1"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 2"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 3"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Street and Number"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "City"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "State"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Country"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Phone Number"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Mobile Phone Number"
+msgstr ""
+
+msgid "(No choice)"
+msgstr ""
+
+msgid "email address"
+msgstr ""
+
+msgid "first name"
+msgstr ""
+
+msgid "This email address already has a registered user!"
 msgstr ""
 
 msgid "Attachments"
@@ -563,15 +720,6 @@ msgstr ""
 msgid "Persons"
 msgstr ""
 
-msgid "email address"
-msgstr ""
-
-msgid "first name"
-msgstr ""
-
-msgid "This email address already has a registered user!"
-msgstr ""
-
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
 msgstr ""
 
@@ -579,6 +727,16 @@ msgid "Your Web browser doesn't appear to have cookies enabled. Cookies are requ
 msgstr ""
 
 msgid "This account is inactive."
+msgstr ""
+
+#, python-brace-format
+msgid "Some required columns are not present in the CSV: {missing_headers}!"
+msgstr ""
+
+msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
+msgstr ""
+
+msgid "Some CSV headers did not have a name!"
 msgstr ""
 
 msgid "Hello"
@@ -597,7 +755,6 @@ msgid "Unsubscribe"
 msgstr ""
 
 #, fuzzy
-#| msgid "Society Dashboard"
 msgid "My Dashboard"
 msgstr "Group Dashboard"
 
@@ -668,6 +825,19 @@ msgstr ""
 msgid "Room Type"
 msgstr "Project Type"
 
+msgid "BBB ROOM"
+msgstr ""
+
+msgid "Visitor"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Group"
+
+msgid "Created"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Title"
 msgstr ""
@@ -684,12 +854,29 @@ msgstr ""
 msgid "Cosinnus Micropages"
 msgstr ""
 
+msgid "BBB Server"
+msgstr ""
+
+msgid "BBB Server for Premium Conferences"
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus project"
+msgid "Cosinnus Conference Setting"
+msgstr "Project"
+
+#, fuzzy
+#| msgid "Cosinnus projects"
+msgid "Cosinnus Conference Settings"
+msgstr "Projects"
+
 msgid "Lobby"
 msgstr ""
 
 msgid "Stage"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Workshops"
 msgstr ""
 
@@ -728,9 +915,6 @@ msgstr ""
 msgid "Sorting index"
 msgstr ""
 
-msgid "Created"
-msgstr ""
-
 msgid "Creator"
 msgstr ""
 
@@ -753,7 +937,6 @@ msgid "Maximum Coffee Table Participants"
 msgstr ""
 
 #, fuzzy
-#| msgid "Create Project"
 msgid "Result Project"
 msgstr "Create Project"
 
@@ -764,6 +947,101 @@ msgid "Conference Rooms"
 msgstr ""
 
 msgid "Slug must not be empty."
+msgstr ""
+
+msgid "Conditiions for participation"
+msgstr ""
+
+msgid "Shown as a download link near the checkbox to accept the conditions."
+msgstr ""
+
+msgid "Participation Management"
+msgstr ""
+
+#, fuzzy
+msgid "Request user information"
+msgstr "There are no groups."
+
+msgid "Pre-filled content for the information field"
+msgstr ""
+
+msgid "Priority choice enabled"
+msgstr ""
+
+msgid "Participation applications are open."
+msgstr ""
+
+msgid "Participation application has not started yet."
+msgstr ""
+
+msgid "Participation application is over."
+msgstr ""
+
+msgctxt "a conference application status"
+msgid "Invalid"
+msgstr ""
+
+msgctxt "a conference application status"
+msgid "Submitted"
+msgstr ""
+
+msgctxt "a conference application status"
+msgid "Waitlist"
+msgstr ""
+
+msgctxt "a conference application status"
+msgid "Accepted"
+msgstr ""
+
+msgctxt "a conference application status"
+msgid "Declined"
+msgstr ""
+
+msgid "Your application is invalid."
+msgstr ""
+
+msgid "Your application has been submitted. You will be notified when it is processed."
+msgstr ""
+
+msgid "Your application is currently on the waiting list."
+msgstr ""
+
+msgid "Your application has been accepted!"
+msgstr ""
+
+msgid "We are sorry, but your application has been declined."
+msgstr ""
+
+msgid "Declined"
+msgstr ""
+
+msgid "Waitlist"
+msgstr ""
+
+msgid "Accepted"
+msgstr ""
+
+msgid "Confernence Application"
+msgstr ""
+
+msgid "Priorities"
+msgstr ""
+
+msgid "Motivation for applying"
+msgstr ""
+
+msgid "Contact E-Mail Address"
+msgstr ""
+
+#, fuzzy
+msgid "Cosinnus conference application"
+msgstr "Groups"
+
+#, fuzzy
+msgid "Cosinnus conference applications"
+msgstr "Groups"
+
+msgid "Note from the organizers"
 msgstr ""
 
 msgid "Complaint Text"
@@ -797,7 +1075,6 @@ msgid "Gender Equality"
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Clean Water and Sanitation"
 msgstr "There are no groups."
 
@@ -937,16 +1214,28 @@ msgstr ""
 msgid "Video Conference Server"
 msgstr ""
 
-msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgid "For old-style events meeting popups only! If entered, will enable Jitsi-like video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgstr ""
+
+msgid "Dynamic choice field choices"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Group"
+#, fuzzy
+msgid "Conference"
+msgstr "Create Project"
+
+msgid "Regular membership requests"
+msgstr ""
+
+msgid "Require participation applications for this conference"
+msgstr ""
+
+msgid "Everyone may join"
+msgstr ""
 
 msgid "Project Type"
 msgstr "Project Type"
@@ -973,6 +1262,9 @@ msgid "Wallpaper image"
 msgstr ""
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
+msgstr ""
+
+msgid "Application method"
 msgstr ""
 
 msgid "Microsite Video"
@@ -1038,19 +1330,37 @@ msgstr ""
 msgid "Is conference"
 msgstr ""
 
-msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
+msgid "Start Datetime"
 msgstr ""
 
-msgid "Conference is running"
+msgid "End Datetime"
 msgstr ""
 
-msgid "Determins whether a group that is marked as conference is running"
+msgid "Allow temporary users accounts for this conference."
+msgstr ""
+
+msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+msgstr ""
+
+msgid "Conference accounts active"
+msgstr ""
+
+msgid "If enabled, temporary user accounts for this conference are active and can log in."
+msgstr ""
+
+msgid "Conference is currrently premium"
+msgstr ""
+
+msgid "Conference is permanently premium"
 msgstr ""
 
 msgid "Parent Group"
 msgstr ""
 
 msgid "Related Teams"
+msgstr ""
+
+msgid "Dynamic extra fields"
 msgstr ""
 
 msgid "Cosinnus project"
@@ -1070,26 +1380,6 @@ msgstr ""
 msgid "Request about your group \"%(group_name)s\""
 msgstr ""
 
-#, fuzzy
-#| msgid "Project Type"
-msgid "Project Menu"
-msgstr "Project Type"
-
-#, fuzzy
-#| msgid "Group"
-msgid "Group Menu"
-msgstr "Group"
-
-#, fuzzy
-#| msgid "Project Type"
-msgid "Project Dashboard"
-msgstr "Project Type"
-
-#, fuzzy
-#| msgid "Project Type"
-msgid "Group Dashboard"
-msgstr "Project Type"
-
 msgid "Token"
 msgstr ""
 
@@ -1103,17 +1393,14 @@ msgid "Valid until"
 msgstr ""
 
 #, fuzzy
-#| msgid "Edit Group"
 msgid "Invite-Groups"
 msgstr "Edit Project"
 
 #, fuzzy
-#| msgid "Cosinnus group"
 msgid "Cosinnus Group Invite Token"
 msgstr "Group"
 
 #, fuzzy
-#| msgid "Cosinnus groups"
 msgid "Cosinnus Group Invite Tokens"
 msgstr "Groups"
 
@@ -1146,27 +1433,22 @@ msgid "Longitude"
 msgstr ""
 
 #, fuzzy
-#| msgid "Cosinnus groups"
 msgid "CosinnusLocation"
 msgstr "Groups"
 
 #, fuzzy
-#| msgid "Cosinnus groups"
 msgid "CosinnusLocations"
 msgstr "Groups"
 
 #, fuzzy
-#| msgid "Group"
 msgid "Group Image"
 msgstr "Group"
 
 #, fuzzy
-#| msgid "Cosinnus group"
 msgid "CosinnusGroup GalleryImage"
 msgstr "Group"
 
 #, fuzzy
-#| msgid "Cosinnus groups"
 msgid "CosinnusGroup GalleryImages"
 msgstr "Groups"
 
@@ -1186,22 +1468,18 @@ msgid "Cosinnus groups"
 msgstr "Groups"
 
 #, fuzzy
-#| msgid "Group"
 msgid "Image"
 msgstr "Group"
 
 #, fuzzy
-#| msgid "Create Project"
 msgid "Created Projects"
 msgstr "Create Project"
 
 #, fuzzy
-#| msgid "Cosinnus project"
 msgid "Cosinnus Idea"
 msgstr "Project"
 
 #, fuzzy
-#| msgid "Cosinnus projects"
 msgid "Cosinnus Ideas"
 msgstr "Projects"
 
@@ -1209,7 +1487,14 @@ msgid "Managed Tag"
 msgstr ""
 
 #, fuzzy
-#| msgid "Create Project"
+msgid "Managed Tag Type"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Managed Tag Types"
+msgstr "Create Project"
+
+#, fuzzy
 msgid "Create Managed Tag"
 msgstr "Create Project"
 
@@ -1231,6 +1516,12 @@ msgstr ""
 msgid "Approved"
 msgstr ""
 
+msgid "Prefix label"
+msgstr ""
+
+msgid "The label that will be prepended before Managed Tags of this type, instead of `name`"
+msgstr ""
+
 msgid "Color"
 msgstr ""
 
@@ -1238,7 +1529,6 @@ msgid "Optional color code (css hex value, with or without \"#\")"
 msgstr ""
 
 #, fuzzy
-#| msgid "Edit Group"
 msgid "Paired Group"
 msgstr "Edit Project"
 
@@ -1246,7 +1536,6 @@ msgid "A paired group will automatically be joined by all users assigned to this
 msgstr ""
 
 #, fuzzy
-#| msgid "Other Projects"
 msgid "Search Synonyms"
 msgstr "Other Projects"
 
@@ -1367,7 +1656,6 @@ msgid "Reflected Object"
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Reflected Objects"
 msgstr "Convert selected Projects to Groups"
 
@@ -1377,6 +1665,9 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
+msgstr ""
+
+msgid "Starred"
 msgstr ""
 
 msgid "Text Editor"
@@ -1418,8 +1709,78 @@ msgstr ""
 msgid "Raw HTML for this announcement."
 msgstr ""
 
+msgid "Dry run in progress"
+msgstr ""
+
+msgid "Dry run finished, errors in CSV that prevent import"
+msgstr ""
+
+msgid "Dry run finished, waiting to start import"
+msgstr ""
+
+msgid "Import running"
+msgstr ""
+
+msgid "Import finished"
+msgstr ""
+
+msgid "Import failed"
+msgstr ""
+
+msgid "Import archived"
+msgstr ""
+
+msgid "Import state"
+msgstr ""
+
+msgid "Import Data"
+msgstr ""
+
+msgid "Import Report HTML"
+msgstr ""
+
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
+#| msgid "Cosinnus project"
+msgid "Cosinnus User Import"
+msgstr "Project"
+
+#, fuzzy
+#| msgid "Cosinnus projects"
+msgid "Cosinnus User Imports"
+msgstr "Projects"
+
+#, python-format
+msgid "CSV row did not contain data for required columns: \"%(fields)s\""
+msgstr ""
+
+msgid "Import for a user item has failed, cancelling the import process! TODO: has data been written?"
+msgstr ""
+
+msgid "Total Items"
+msgstr ""
+
+msgid "Items for Import"
+msgstr ""
+
+msgid "Ignored/Failed Items"
+msgstr ""
+
+msgid "An unexpected system error has occured while processing the data. This should not have happened. Please contact the support! Technical Details follow:"
+msgstr ""
+
+msgid "The email-address already has an existing user account in the system!"
+msgstr ""
+
+msgid "The email-address is duplicated and already contained in the CSV!"
+msgstr ""
+
+msgid "The email address was not a valid email address!"
+msgstr ""
+
+msgid "New user account: "
+msgstr ""
+
+#, fuzzy
 msgid "Create-Project or Group Button"
 msgstr "Convert selected Projects to Groups"
 
@@ -1728,25 +2089,280 @@ msgstr ""
 msgid "Back to Project Overview"
 msgstr ""
 
+msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
+msgstr ""
+
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Administration"
 msgstr "There are no groups."
 
 msgid "Select a page on the left side."
 msgstr ""
 
-msgid "Simple Statistics"
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr ""
 
-msgid "User Welcome Email"
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "My Projects"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+msgid "View Upcoming"
+msgstr ""
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Edit Project"
+
+msgid "Portal Setting"
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus projects"
+msgid "Conference Settings"
+msgstr "Projects"
+
+msgid "Is premium"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+#, fuzzy
+msgid "running now!"
+msgstr "Join Project"
+
+#, fuzzy
+#| msgid "Cosinnus project"
+msgid "Conference Setting"
+msgstr "Project"
+
+#, fuzzy
+msgid "Room"
+msgstr "Project Type"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr ""
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "There are no groups."
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "Not set"
+msgstr ""
+
+msgid "Newsletters"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Project"
+msgid "Update Newsletter"
+msgstr "Create Project"
+
+#, fuzzy
+#| msgid "Create Project"
+msgid "Create Newsletter"
+msgstr "Create Project"
+
+msgid "Recipients"
+msgstr ""
+
+#, python-format
+msgid "With the current selection the newsletter will be sent to %(counter)s recipients."
+msgid_plural "With the current selection the newsletter will be sent to %(counter)s recipients."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to send the newsletter?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+msgid "Send newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Project"
+msgid "Send Newsletter"
+msgstr "Create Project"
+
+msgid "User Management"
+msgstr ""
+
+msgid "User Import"
+msgstr ""
+
+msgid "User Profile Field Choices"
 msgstr ""
 
 msgid "User Dashboard Announcements"
 msgstr ""
 
+msgid "User Welcome Email"
+msgstr ""
+
+msgid "Simple Statistics"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Create Project"
+
+#, fuzzy
+#| msgid "Cosinnus projects"
+msgid "Conferences with Custom Settings"
+msgstr "Projects"
+
 msgid "Edit"
 msgstr ""
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgctxt "subject of an E-Mail"
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Currently set Email Text"
+msgstr ""
+
+msgid "Send yourself a Test-Mail"
+msgstr ""
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "There are no newsletters yet."
+msgstr "There are no groups."
+
+msgid "Add newsletter"
+msgstr ""
+
+#, fuzzy
+msgid "Create new User"
+msgstr "Create Project"
+
+msgid "Firstname"
+msgstr ""
+
+msgid "Lastname"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+#, fuzzy
+msgid "User Administration"
+msgstr "There are no groups."
+
+msgid "send login token to all inactive users"
+msgstr ""
+
+msgid "Search for email, firstname or lastname"
+msgstr ""
+
+msgid "search"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Found %(total)s user with an email that contains: '%(search_string)s'\n"
+"                "
+msgid_plural ""
+"\n"
+"                Found %(total)s users with an email that contains: '%(search_string)s'\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "clear search"
+msgstr ""
+
+msgid "Last Login"
+msgstr ""
+
+msgid "User token"
+msgstr ""
+
+msgid "Account deactivated"
+msgstr ""
+
+#, fuzzy
+msgid "Resend login token"
+msgstr "There are no groups."
+
+msgid "Send login token"
+msgstr ""
+
+msgid "Last sent on: "
+msgstr ""
+
+#, python-format
+msgid "Could not find any users with an email that contains '%(search_string)s.'"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "There are no users yet."
+msgstr "There are no groups."
+
+msgid "to first page"
+msgstr ""
+
+msgid "previous"
+msgstr ""
+
+msgid "next"
+msgstr ""
+
+msgid "Add user"
+msgstr ""
+
+#, fuzzy
+msgid "Update User"
+msgstr "Create Project"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr ""
@@ -1754,25 +2370,19 @@ msgstr ""
 msgid "You may use the following variables:"
 msgstr ""
 
-msgid "Save"
-msgstr ""
-
 msgid "Currently set Welcome-Email Text"
-msgstr ""
-
-msgid "Send yourself a Test-Mail"
-msgstr ""
-
-msgid "Conference Page"
-msgstr ""
-
-msgid "Conference Management"
 msgstr ""
 
 msgid "Conference Room Management"
 msgstr ""
 
 msgid "Conference Event Management"
+msgstr ""
+
+msgid "Edit Conditions of Participation"
+msgstr ""
+
+msgid "Manage Participation Applications"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -1885,7 +2495,6 @@ msgid "Delete elements"
 msgstr ""
 
 #, fuzzy
-#| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete all selected elements?"
 msgstr "Are you sure you want to delete this prject?"
 
@@ -1963,7 +2572,6 @@ msgid "Items from this group can be shown in any of the group's subprojects."
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Show in other projects/groups"
 msgstr "Convert selected Projects to Groups"
 
@@ -2023,8 +2631,6 @@ msgid "helptext_13_groupadministration"
 msgstr "The administration of Groups begins with managing its membership. Here you can decide who can join your Group and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal. "
 
 #, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_13_groupadministration"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
 msgstr "The administration of Groups begins with managing its membership. Here you can decide who can join your Group and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal. "
@@ -2079,16 +2685,450 @@ msgid "Invite"
 msgstr ""
 
 #, fuzzy
-#| msgid "Other Projects"
 msgid "Shown in my projects..."
 msgstr "Other Projects"
 
 #, fuzzy
-#| msgid "Other Projects"
 msgid "Show in my projects..."
 msgstr "Other Projects"
 
 msgid "Disable editor"
+msgstr ""
+
+#, fuzzy
+msgid "Current File"
+msgstr "Convert selected Projects to Groups"
+
+msgid "Application"
+msgstr ""
+
+msgid "Apply for participation in"
+msgstr ""
+
+msgid "Edit your application for"
+msgstr ""
+
+msgid "Please fill out the fields below to submit your application. Be aware that the organizers may take your profile into consideration when processing your application, so make sure that your profile page is well maintained. You can view and edit your profile page here:"
+msgstr ""
+
+msgid "Your profile"
+msgstr ""
+
+msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
+msgstr ""
+
+msgid "Please provide your motivation for applying"
+msgstr ""
+
+msgid "Describe why you wish to participate"
+msgstr ""
+
+msgid "Optional contact information"
+msgstr ""
+
+msgid "We recommend you to provide at least one contact option for the organizers to contact you directly. This information can be seen by all organizers of the conference."
+msgstr ""
+
+msgid "Contact Phone Number"
+msgstr ""
+
+msgid "Workshop"
+msgstr ""
+
+msgid "My individual needs"
+msgstr ""
+
+msgid "(no options chosen)"
+msgstr ""
+
+#, fuzzy
+msgid "Application conditions"
+msgstr "There are no groups."
+
+msgid "Download the conditions"
+msgstr ""
+
+msgid "I accept the conditions in order to submit my application"
+msgstr ""
+
+msgid "Save changes"
+msgstr ""
+
+msgid "Apply for conference participation"
+msgstr ""
+
+msgid "Withdraw"
+msgstr ""
+
+msgid "Conference Applications"
+msgstr ""
+
+msgid "Manage participation applications"
+msgstr ""
+
+#, fuzzy
+msgid "There are no participation applications yet."
+msgstr "There are no groups."
+
+msgid "Here you and all other organizers can process all applications. Check each application carefully and select your choice of whether to decline or accept an application or put it on the wait list. You may add a reason for waitlisted or declined applications that will be shown to the applicant."
+msgstr ""
+
+msgid "Once you are done, click \"Save\" on the bottom of the page. All applicants will receive an on-site notification and an e-mail (depending on their e-mail notification settings)."
+msgstr ""
+
+msgid "Accepted applicants will be granted membership status of the conference and they can enter the conference area immediately."
+msgstr ""
+
+msgid "If you have changed your mind for some applications later on, you can simply select a different option for those you want to change, and click \"Save\" again. Only the applicants whose application status changed will be notified of the change."
+msgstr ""
+
+msgid "You may also leave some applications unselected at first and process them at a later time."
+msgstr ""
+
+msgid "The maximum number of participants is "
+msgstr ""
+
+#, python-format
+msgid " 1 place left "
+msgid_plural " %(counter)s places left "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Collapse all processed applications"
+msgstr ""
+
+#, fuzzy
+msgid "not specified"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "show more ..."
+msgstr "Other Projects"
+
+msgid "Reason for rejection"
+msgstr ""
+
+msgid "optional"
+msgstr ""
+
+msgid "First Choice"
+msgstr ""
+
+msgid "Second Choice"
+msgstr ""
+
+msgid "Application submitted"
+msgstr ""
+
+msgid "Workshop Assignments"
+msgstr ""
+
+msgid "Choose users to assign to this workshop"
+msgstr ""
+
+msgid "List of Applicants"
+msgstr ""
+
+msgid "Here you can configure the application form that participants have to fill out in order to apply."
+msgstr ""
+
+#, python-format
+msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
+msgstr ""
+
+#, python-format
+msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
+msgstr ""
+
+msgid "Application period"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Start date."
+msgstr ""
+
+msgid "Until"
+msgstr ""
+
+msgid "End date."
+msgstr ""
+
+msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
+msgstr ""
+
+msgid "Maximal Number of participants"
+msgstr ""
+
+msgid "This is not an enforced limit and serves only as a display for guests."
+msgstr ""
+
+msgid "(no limit selected)"
+msgstr ""
+
+msgid "Require applicants to submit a text about their motivation for applying"
+msgstr ""
+
+msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+msgstr ""
+
+#, python-format
+msgid "Only applicable if \"%(other_option)s\" is enabled."
+msgstr ""
+
+msgid "Enter text to pre-fill or leave empty"
+msgstr ""
+
+msgid "Options for participation"
+msgstr ""
+
+msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
+msgstr ""
+
+msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
+msgstr ""
+
+msgid "Conditions for participation"
+msgstr ""
+
+msgid "If set, applicants will have to agree to these conditions by checking a checkbox"
+msgstr ""
+
+msgid "(no conditions selected)"
+msgstr ""
+
+msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
+msgstr ""
+
+msgid "Conference reminders"
+msgstr ""
+
+msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
+msgstr ""
+
+msgid "Send 1 week before conference"
+msgstr ""
+
+#, python-format
+msgid "Status info: sent %(sent_date)s"
+msgstr ""
+
+msgid "This e-mail will be sent out 7 days before and at the same time of day as the conference start date."
+msgstr ""
+
+msgid "Invitation subject"
+msgstr ""
+
+#, fuzzy
+msgid "Invitation text"
+msgstr "There are no groups."
+
+msgid "Send test to myself"
+msgstr ""
+
+msgid "Send 1 day before conference"
+msgstr ""
+
+msgid "This e-mail will be sent out 24 hours before the conference start date."
+msgstr ""
+
+msgid "Send 1 hour before conference"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgid "Edit Room “%(title)s”"
+msgstr "Edit project “%(team_name)s”"
+
+#, fuzzy
+#| msgid "Create Group"
+msgid "Create Room"
+msgstr "Create Group"
+
+#, fuzzy
+#| msgid "Edit Group"
+msgid "Edit Room"
+msgstr "Edit Project"
+
+#, fuzzy
+msgid "Room type"
+msgstr "Project Type"
+
+msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
+msgstr ""
+
+msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgstr ""
+
+msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
+msgstr ""
+
+msgid "In Discussions each event has a video conference. Presenters are allowed to moderate those. Differs from \"Workshops\" only by the design in the agenda. Workshop: tiles, discussion: list."
+msgstr ""
+
+msgid "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
+msgstr ""
+
+msgid "Include a project that you use for documentation purposes. Click the link below to add a project to the conference first, if you haven't already."
+msgstr ""
+
+msgid "Add project"
+msgstr ""
+
+msgid "Shows a list of all participants."
+msgstr ""
+
+msgid "How many participants should can join one coffee table before it is full"
+msgstr ""
+
+msgid "Attention: The visible update of the free seats is still work in progress. Therefore, we recommend not to use the limitation of individual coffee tables, so as not to let the virtual coffee go cold while searching for free seats."
+msgstr ""
+
+msgid "Choose one of the sub-projects of this group to display as nested results-project for participants"
+msgstr ""
+
+msgid "Sort index"
+msgstr ""
+
+msgid "Number by which rooms are sorted in ascending order in the conference room navigation list"
+msgstr ""
+
+msgid "A short description or topic for your room. Will be shown on top of the room page."
+msgstr ""
+
+msgid "Room is visible"
+msgstr ""
+
+msgid "Uncheck this to hide the room for participants (you will still be able to see it)"
+msgstr ""
+
+msgid "Check this to show rocket chat in the sidebar."
+msgstr ""
+
+msgid "Go to Room"
+msgstr ""
+
+msgid "hidden"
+msgstr ""
+
+#, fuzzy
+msgid "Create Conference Event"
+msgstr "Create Project"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete room \"%(title)s\"?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+msgid "Delete room"
+msgstr ""
+
+msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Bookings"
+msgstr "Create Project"
+
+msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
+msgstr ""
+
+msgid "You can directly create conference events for rooms from here by using the controls for each room's dropdown menu."
+msgstr ""
+
+#, fuzzy
+msgid "There are no rooms yet."
+msgstr "There are no groups."
+
+msgid "Conference Management"
+msgstr ""
+
+msgid "Conference is running"
+msgstr ""
+
+msgid "Conference is not running"
+msgstr ""
+
+msgid "Accounts from CSV Upload"
+msgstr ""
+
+msgid "Upload Participants"
+msgstr ""
+
+msgid "last login"
+msgstr ""
+
+msgid "no login yet"
+msgstr ""
+
+msgid "Admin"
+msgstr ""
+
+msgid "Member"
+msgstr ""
+
+msgid "active"
+msgstr ""
+
+#, fuzzy
+msgid "not active"
+msgstr "Create Project"
+
+msgid "User participates in the following workshops:"
+msgstr ""
+
+#, fuzzy
+msgid "deactivate member"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "activate member"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "remove user"
+msgstr "Edit Project"
+
+#, fuzzy
+msgid "Do you really want to deactivate the member's user account ?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+msgid "Deactivate Member"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Do you really want to activate the member's user account ?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+msgid "Activate Member"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Do you really want to remove the user?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+msgid "Remove User"
+msgstr "Create Project"
+
+msgid "Finish conference and deactivate user accounts"
+msgstr ""
+
+msgid "Start conference and activate user accounts"
+msgstr ""
+
+msgid "Download Statistics"
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Decline"
 msgstr ""
 
 msgid "Rearrange"
@@ -2209,6 +3249,15 @@ msgstr ""
 msgid "more"
 msgstr ""
 
+msgid "Change User Profile Field Choices"
+msgstr ""
+
+msgid "Enter your choices as semicolon separated values"
+msgstr ""
+
+msgid "Enter your choices"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr ""
@@ -2260,31 +3309,53 @@ msgstr ""
 msgid "website"
 msgstr ""
 
-msgid "Re-Activate Project/Group"
+msgid "indicates a mandatory field"
 msgstr ""
 
-msgid "Deactivate Project/Group"
+msgid "This is the current address"
 msgstr ""
 
 #, fuzzy
-#| msgid "Other Projects"
-msgid "Deactivated Projects and Groups"
+msgid "Remove this Address"
+msgstr "Create Project"
+
+msgid "Add an Address"
+msgstr ""
+
+msgid "Maximum Number of Participants"
+msgstr ""
+
+#, fuzzy
+msgid "About the conference"
+msgstr "About the project"
+
+msgctxt "time"
+msgid "o'clock"
+msgstr ""
+
+msgctxt "time"
+msgid "until"
+msgstr ""
+
+#, fuzzy
+msgid "More infos..."
 msgstr "Other Projects"
 
-msgid "Warning!"
+msgid "You will now receive notifications for content posted in this conference."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact"
+msgstr ""
+
+msgid "No contact data has been added yet."
 msgstr ""
 
 #, fuzzy
-msgid "You are about to deactivate this project/group!"
-msgstr "Are you sure you want to delete this prject?"
+msgid "Your Deactivated Content"
+msgstr "Project Type"
 
-msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
-msgstr ""
-
-msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr ""
-
-msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+msgid "Warning!"
 msgstr ""
 
 msgid "Re-Activate"
@@ -2304,6 +3375,34 @@ msgstr "Are you sure you want to delete this prject?"
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Members"
 
+msgid "Membership requests"
+msgstr ""
+
+msgid "Please manage participation applications via the applications page. You can disable the participation management in the conference settings."
+msgstr ""
+
+msgid "Manage applications"
+msgstr ""
+
+msgid "Invite members of groups/projects to apply..."
+msgstr ""
+
+#, fuzzy
+msgid "Select one or more groups/projects..."
+msgstr "Other Projects"
+
+#, fuzzy
+msgid "Invite groups"
+msgstr "Edit Project"
+
+#, fuzzy
+msgid "Invited group/project members"
+msgstr "Edit Project"
+
+#, fuzzy
+msgid "Invite registered users to apply..."
+msgstr "Edit Project"
+
 msgid "Invite registered users..."
 msgstr ""
 
@@ -2314,7 +3413,6 @@ msgid "Enter a user name or email to find users to invite..."
 msgstr ""
 
 #, fuzzy
-#| msgid "Edit Group"
 msgid "Invite users"
 msgstr "Edit Project"
 
@@ -2334,7 +3432,6 @@ msgid "Invited to be a member"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
 msgstr "Do you really want to leave project „%(title)s“?"
 
@@ -2342,14 +3439,16 @@ msgid "Revoke Invitation for Member"
 msgstr ""
 
 #, fuzzy
-#| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to decline the invitation?"
 msgstr "Do you really want to leave project „%(title)s“?"
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "There are no pending invitations."
 msgstr "There are no groups."
+
+#, fuzzy
+msgid "Invite unregistered users to apply..."
+msgstr "Edit Project"
 
 msgid "Invite unregistered users..."
 msgstr ""
@@ -2370,12 +3469,10 @@ msgid "People currently invited by you"
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Delete invitation"
 msgstr "There are no groups."
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Resend invitation"
 msgstr "There are no groups."
 
@@ -2384,12 +3481,8 @@ msgid "by"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "Do you really want to leave project „%(title)s“?"
-
-msgid "Membership requests"
-msgstr ""
 
 msgid "Decline User"
 msgstr ""
@@ -2418,7 +3511,6 @@ msgid "There are no new membership requests."
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Current Members"
 msgstr "Convert selected Projects to Groups"
 
@@ -2429,10 +3521,7 @@ msgstr ""
 msgid "Send Message"
 msgstr ""
 
-msgid "Admin"
-msgstr ""
-
-msgid "Member"
+msgid "User account inactive"
 msgstr ""
 
 msgid "Kick"
@@ -2489,30 +3578,15 @@ msgstr ""
 msgid "Edit “%(team_name)s”"
 msgstr "Edit project “%(team_name)s”"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Create Group"
-msgstr "Create Group"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Create Project"
-msgstr "Create Project"
-
 msgid "Help about groups"
 msgstr ""
 
 #, fuzzy
-#| msgid "All projects"
 msgid "Help about projects"
 msgstr "All projects"
 
 msgid "Help about the microsite"
 msgstr ""
-
-msgid "Edit Group"
-msgstr "Edit Project"
-
-msgid "Edit Project"
-msgstr "Edit Project"
 
 msgid "Let's bring this idea to life!"
 msgstr ""
@@ -2533,24 +3607,39 @@ msgstr ""
 msgid "Facebook-Integration"
 msgstr ""
 
-msgid "Conference Settings"
+msgid "After you have created the conference, you can create conference rooms and events."
+msgstr ""
+
+msgid "Conference start and end date and time"
+msgstr ""
+
+msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+msgstr ""
+
+msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
+msgstr ""
+
+msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
+msgstr ""
+
+msgid "In which projects' or groups' calendars should the conference be shown?"
 msgstr ""
 
 #, fuzzy
-#| msgid "Group"
-msgid "Group name"
-msgstr "Group"
+msgid "Select Projects/Groups"
+msgstr "Convert selected Projects to Groups"
 
-#, fuzzy
-#| msgid "Project Type"
-msgid "Project name"
-msgstr "Project Type"
+msgid "Description and Infos"
+msgstr ""
 
-msgid "Enter a name for the group."
-msgstr "Enter a name for the project."
+msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
+msgstr ""
 
-msgid "Enter a name for the project."
-msgstr "Enter a name for the project."
+msgid "Contact info"
+msgstr ""
+
+msgid "How you can be reached, addresses, social media, etc..."
+msgstr ""
 
 msgid "Short description"
 msgstr ""
@@ -2564,6 +3653,18 @@ msgstr "Describe the project in a few sentences."
 msgid "This description will be publicly visible."
 msgstr ""
 
+msgid "Conference Theme Color"
+msgstr ""
+
+msgid "Hex code (example: #A2A2A2)"
+msgstr ""
+
+msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
+msgstr ""
+
+msgid "Icon"
+msgstr ""
+
 msgid "A picture for better recognition."
 msgstr ""
 
@@ -2573,10 +3674,17 @@ msgstr ""
 msgid "max. 10 MB"
 msgstr ""
 
+#, fuzzy
+msgid "Banner Image"
+msgstr "Group"
+
 msgid "Upload an image."
 msgstr ""
 
 msgid "Reset"
+msgstr ""
+
+msgid "Uploaded files will be available for download and images will be shown in a gallery."
 msgstr ""
 
 msgid "Example: http://mywebsite.com"
@@ -2586,9 +3694,6 @@ msgid "Which sustainable development goals (SDG) does your project contribute to
 msgstr ""
 
 msgid "Select sustainable development goals"
-msgstr ""
-
-msgid "Where are you active?"
 msgstr ""
 
 msgid "Remove location"
@@ -2607,7 +3712,6 @@ msgid "Are there any projects/groups related to this one?"
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Select related Projects/Groups"
 msgstr "Convert selected Projects to Groups"
 
@@ -2645,18 +3749,6 @@ msgid "Which apps should be activated?"
 msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
-msgstr ""
-
-msgid "Description and Infos"
-msgstr ""
-
-msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
-msgstr ""
-
-msgid "Contact info"
-msgstr ""
-
-msgid "How you can be reached, addresses, social media, etc..."
 msgstr ""
 
 msgid "From which apps should public items be shown on the microsite?"
@@ -2734,15 +3826,6 @@ msgstr ""
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
 
-msgid "Conference Theme Color"
-msgstr ""
-
-msgid "Hex code (example: #A2A2A2)"
-msgstr ""
-
-msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
 msgstr ""
@@ -2762,6 +3845,10 @@ msgstr ""
 msgid "To the Forum"
 msgstr ""
 
+#, fuzzy
+msgid "Invited to apply"
+msgstr "Edit Project"
+
 msgctxt "Group"
 msgid "Public"
 msgstr ""
@@ -2775,11 +3862,11 @@ msgstr ""
 msgid "Leave"
 msgstr ""
 
-msgid "Withdraw"
-msgstr ""
-
 msgid "Details"
 msgstr "Details"
+
+msgid "Apply for Participation"
+msgstr ""
 
 #, python-format
 msgid "Do you really want to leave „%(title)s“?"
@@ -2792,7 +3879,6 @@ msgid "There are no projects."
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "There are no invitations."
 msgstr "There are no groups."
 
@@ -2805,72 +3891,14 @@ msgstr ""
 msgid "Change it here..."
 msgstr ""
 
-msgid "You have been invited to collaborate!"
-msgstr ""
-
-msgid "Register and join!"
-msgstr ""
-
-msgid "Join now and collaborate!"
-msgstr ""
-
-msgid "Register"
-msgstr ""
-
-msgid "Log in"
-msgstr ""
-
-msgid "You are a member!"
-msgstr ""
-
-#, fuzzy
-#| msgid "Edit Project"
-msgid "View Project"
-msgstr "Edit Project"
-
-#, fuzzy
-#| msgid "Edit Group"
-msgid "View Group"
-msgstr "Edit Project"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership request pending..."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "You are invited!"
-msgstr ""
-
-msgid "Collaborate!"
-msgstr ""
-
-#, fuzzy
-msgid "Join now!"
-msgstr "Join Project"
-
-msgid "Browse"
-msgstr ""
-
-#, fuzzy
-#| msgid "All Projects"
-msgid "Public Project"
-msgstr "All Projects"
-
-#, fuzzy
-#| msgid "Select Group"
-msgid "Public Group"
-msgstr "Select Group"
-
 msgid "News posts"
 msgstr ""
 
 #, fuzzy
-#| msgid "About the group"
 msgid "About the Project"
 msgstr "About the project"
 
 #, fuzzy
-#| msgid "About the group"
 msgid "About the Group"
 msgstr "About the project"
 
@@ -2881,7 +3909,6 @@ msgid "There is no description for this group yet."
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Related Projects/Groups"
 msgstr "Convert selected Projects to Groups"
 
@@ -2906,19 +3933,6 @@ msgstr ""
 msgid "Sustainable Development Goals"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Contact"
-msgstr ""
-
-msgid "No contact data has been added yet."
-msgstr ""
-
-msgid "Project Administrator"
-msgstr ""
-
-msgid "Group Administrator"
-msgstr ""
-
 msgid "Tweets"
 msgstr ""
 
@@ -2928,21 +3942,71 @@ msgstr ""
 msgid "Call to Action"
 msgstr ""
 
+msgid "Register and join!"
+msgstr ""
+
+msgid "Register"
+msgstr ""
+
+msgid "Log in"
+msgstr ""
+
+msgid "You are a member!"
+msgstr ""
+
+#, fuzzy
+msgid "View Project"
+msgstr "Edit Project"
+
+#, fuzzy
+msgid "View Group"
+msgstr "Edit Project"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership request pending..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are invited!"
+msgstr ""
+
+msgid "Participation is open for everyone. You may instantly join and become a member."
+msgstr ""
+
+msgid "You may request to become a member and participate once your request has been accepted."
+msgstr ""
+
+#, fuzzy
+msgid "Join now!"
+msgstr "Join Project"
+
+#, fuzzy
+msgid "Request membership"
+msgstr "Convert selected Projects to Groups"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you wish to join „%(title)s“ now?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+msgid "Browse"
+msgstr ""
+
+msgid "Register and apply!"
+msgstr ""
+
+msgid "You have been invited to apply!"
+msgstr ""
+
+msgid "Edit Application"
+msgstr ""
+
 #, python-format
 msgid "Users in team %(group)s"
 msgstr "Users in project %(group)s"
 
-msgid "Add user"
-msgstr ""
-
 msgid "There are no visible users."
 msgstr ""
-
-msgid "All projects"
-msgstr "All projects"
-
-msgid "All groups"
-msgstr "All projects"
 
 msgid "All users"
 msgstr ""
@@ -2950,51 +4014,43 @@ msgstr ""
 msgid "Portal Administrators"
 msgstr ""
 
-#, fuzzy
-#| msgid "All projects"
-msgid "All societies"
-msgstr "All projects"
+msgid "All Conferences"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Groups"
+msgstr "All Groups"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Projects"
+msgstr "All Projects"
+
+msgid "Temporary User Accounts"
+msgstr ""
+
+msgid "Reminder emails"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Organizations"
 msgstr ""
 
-#, fuzzy
-msgid "Re-activate Group"
-msgstr "Create Project"
-
-#, fuzzy
-msgid "Deactivate Group"
-msgstr "Create Project"
-
-#, fuzzy
-msgid "Activate Project"
-msgstr "Create Project"
-
-#, fuzzy
-msgid "Deactivate Project"
-msgstr "Create Project"
-
 msgid "Withdraw Request"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%(team_name)s - Members"
 msgid "%(team_name)s - Assigned organizations"
 msgstr "%(team_name)s - Members"
 
 #, fuzzy
-#| msgid "List all groups"
 msgid "Assigned organizations"
 msgstr "List all projects"
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Request organizations..."
 msgstr "There are no groups."
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Request organization"
 msgstr "There are no groups."
 
@@ -3002,12 +4058,10 @@ msgid "Enter a name to find organizations to request..."
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Request organizations"
 msgstr "There are no groups."
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Requested organizations"
 msgstr "There are no groups."
 
@@ -3024,60 +4078,36 @@ msgid "Requested"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to revoke the request for „%(name)s“?"
 msgstr "Do you really want to leave project „%(title)s“?"
 
 #, fuzzy
-#| msgid "Create Project"
 msgid "Revoke request for organization"
 msgstr "Create Project"
 
 #, fuzzy
-#| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to decline the request?"
 msgstr "Do you really want to leave project „%(title)s“?"
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Organization invitations"
 msgstr "There are no groups."
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Decline invitation"
 msgstr "There are no groups."
 
 #, fuzzy
-#| msgid "Edit Group"
 msgid "Invited"
 msgstr "Edit Project"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to remove „%(name)s“ from the organization?"
 msgstr "Do you really want to leave project „%(title)s“?"
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Remove organization"
 msgstr "There are no groups."
-
-msgid "Workshop Participant File Upload"
-msgstr ""
-
-#, python-format
-msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr ""
-
-msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr ""
-
-msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr ""
-
-msgid "Upload File"
-msgstr ""
 
 msgid "Add container"
 msgstr ""
@@ -3097,17 +4127,14 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create Project"
 msgid "Create Idea"
 msgstr "Create Project"
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Delete this idea"
 msgstr "There are no groups."
 
 #, fuzzy, python-format
-#| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to delete idea „%(title)s“?"
 msgstr "Do you really want to leave project „%(title)s“?"
 
@@ -3130,7 +4157,6 @@ msgid "You and anyone who like (and follow) your idea will be notified when a ne
 msgstr ""
 
 #, fuzzy
-#| msgid "Enter a name for the project."
 msgid "Enter a descriptive title for your idea"
 msgstr "Enter a name for the project."
 
@@ -3191,6 +4217,45 @@ msgstr ""
 msgid "Create folder"
 msgstr ""
 
+msgid ""
+"The conference [[name]] starts tomorrow.\n"
+"Start of the event is [[from_date]].\n"
+"\n"
+"Under the following link you can already get an overview of the conference events.\n"
+"\n"
+"Best regards,\n"
+"Your conference team"
+msgstr ""
+
+msgid "Conference starts tomorrow: [[name]]"
+msgstr ""
+
+msgid ""
+"The conference [[name]] starts soon.\n"
+"Start of the event is [[from_date]].\n"
+"\n"
+"Under the following link you can already get an overview of the conference events.\n"
+"\n"
+"Best regards,\n"
+"Your conference team"
+msgstr ""
+
+msgid "Conference starts soon: [[name]]"
+msgstr ""
+
+msgid ""
+"The conference [[name]] starts in a week.\n"
+"Start of the event is [[from_date]].\n"
+"\n"
+"Under the following link you can already get an overview of the conference events.\n"
+"\n"
+"Best regards,\n"
+"Your conference team"
+msgstr ""
+
+msgid "Conference starts next week: [[name]]"
+msgstr ""
+
 #, python-format
 msgid ""
 "%(site_name)s CSV import failed!\n"
@@ -3239,6 +4304,28 @@ msgstr ""
 
 #, python-format
 msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"an account was just created for you on %(site_name)s. We're happy to see you!\n"
+"\n"
+"In order to start using your account, you need to first set a password for it. Afterwards, you may log in using your email %(user_mail)s and the password you have set.\n"
+"\n"
+"\n"
+"Please click on the following link to set your initial password (or copy and paste the link it in your browser):\n"
+"%(domain_url)s%(verification_token)s\n"
+"\n"
+"\n"
+"Thank you and see you soon!\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "Please set yout initial password for %(site_name)s!"
 msgstr ""
 
 #, python-format
@@ -3500,7 +4587,6 @@ msgid "If you do not wish this, you can change this item's visibility setting be
 msgstr ""
 
 #, fuzzy
-#| msgid "Other Projects"
 msgid "Show more options..."
 msgstr "Other Projects"
 
@@ -3596,7 +4682,6 @@ msgid "People"
 msgstr ""
 
 #, fuzzy
-#| msgid "Edit Group"
 msgid "Invited Groups"
 msgstr "Edit Project"
 
@@ -3604,12 +4689,7 @@ msgstr "Edit Project"
 msgid "My Groups"
 msgstr "My Groups"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Groups"
-msgstr "All Groups"
-
 #, fuzzy
-#| msgid "Edit Project"
 msgid "Invited Projects"
 msgstr "Edit Project"
 
@@ -3618,16 +4698,11 @@ msgid "My Projects"
 msgstr "My Projects"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "All Projects"
-msgstr "All Projects"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Ideas"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "My teams"
 msgid "My Ideas"
 msgstr "My projects"
 
@@ -3697,7 +4772,6 @@ msgid "Password"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Edit “%(team_name)s”"
 msgid "Log in with %(portal_name)s"
 msgstr "Edit project “%(team_name)s”"
 
@@ -3787,10 +4861,13 @@ msgstr ""
 msgid "Password reset successful"
 msgstr ""
 
-msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
+msgid "Password reset request received."
 msgstr ""
 
-msgid "If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder."
+msgid "If there is an account registered with the email address you entered, we will email you instructions for resetting the account password shortly."
+msgstr ""
+
+msgid "If you don't receive an email, please make sure you entered the correct email address associated with your account, and check your spam folder."
 msgstr ""
 
 #, python-format
@@ -3806,13 +4883,34 @@ msgstr ""
 msgid "Thanks for using our site!"
 msgstr ""
 
-msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
+msgid "Forgotten your password? Enter your account's email address below, and we'll email instructions for setting a new one."
 msgstr ""
 
-msgid "The email you used to register your account. This is the one you receive email notifications on"
+msgid "The email associated with your account. This should the email address you receive email notifications on."
 msgstr ""
 
 msgid "Example: mymail@example.com"
+msgstr ""
+
+msgid "Set your password"
+msgstr ""
+
+msgid "Set a password to start using your account"
+msgstr ""
+
+msgid "Before you begin using your account, you first need to set a password. Afterwards, you may log in using this password and your e-mail address."
+msgstr ""
+
+msgid "Enter a password"
+msgstr ""
+
+msgid "Repeat the password just to make sure"
+msgstr ""
+
+msgid "Repeat the Password"
+msgstr ""
+
+msgid "Set my password"
 msgstr ""
 
 msgid "Sign up"
@@ -3879,7 +4977,6 @@ msgid "Generate a new captcha"
 msgstr ""
 
 #, fuzzy
-#| msgid "Other Projects"
 msgid "Search options..."
 msgstr "Other Projects"
 
@@ -3911,17 +5008,14 @@ msgid "Search in teams"
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "All Projects and Groups"
 msgstr "Convert selected Projects to Groups"
 
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "My Projects and Groups"
 msgstr "Convert selected Projects to Groups"
 
 #, fuzzy
-#| msgid "Other Projects"
 msgid "Other Projects and Groups"
 msgstr "Other Projects"
 
@@ -3955,12 +5049,6 @@ msgstr ""
 msgid "We could not find any results matching your search query."
 msgstr ""
 
-msgid "previous"
-msgstr ""
-
-msgid "next"
-msgstr ""
-
 msgid "Enter one or more search terms or select a topic to search."
 msgstr ""
 
@@ -3976,28 +5064,16 @@ msgstr ""
 msgid "User statistics (min 1x logged in)"
 msgstr ""
 
+msgid "BBB Room Visits"
+msgstr ""
+
 msgid "E-Mails of all newsletter subcribers"
 msgstr ""
 
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Date"
-msgstr ""
-
-msgid "From"
-msgstr ""
-
-msgid "Start date."
-msgstr ""
-
 msgid "Time"
-msgstr ""
-
-msgid "Until"
-msgstr ""
-
-msgid "End date."
 msgstr ""
 
 msgid "Ok"
@@ -4014,30 +5090,30 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "My teams"
 msgid "My Users"
 msgstr "My projects"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "My Projects"
 msgid "My Events"
 msgstr "My Projects"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "My Cloud Files"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "All projects"
 msgid "All Users"
 msgstr "All projects"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "All projects"
 msgid "All Events"
 msgstr "All projects"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Event"
+msgid "Cloud Files"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -4049,20 +5125,29 @@ msgid "Organization"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Cloud File"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create Project"
 msgid "Create User"
 msgstr "Create Project"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create Project"
 msgid "Create Event"
 msgstr "Create Project"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Create Project"
+msgstr "Create Project"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Group"
+msgstr "Create Group"
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "There are no groups."
 msgid "Create Organization"
 msgstr "There are no groups."
 
@@ -4104,7 +5189,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create Project"
 msgid "Create idea"
 msgstr "Create Project"
 
@@ -4142,13 +5226,11 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "My Projects"
 msgid "My Groups and Projects"
 msgstr "My Projects"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Other Projects"
 msgid "Show more Projects of this Group"
 msgstr "Other Projects"
 
@@ -4158,31 +5240,23 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create Group"
 msgid "Create new Group"
 msgstr "Create Group"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create Project"
 msgid "Create new Project"
 msgstr "Create Project"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "List all groups"
 msgid "Browse all Groups"
 msgstr "List all projects"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "My Projects"
 msgid "Browse all Projects"
 msgstr "My Projects"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "My Conferences"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You have not created any organizations yet."
@@ -4190,19 +5264,16 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create Group"
 msgid "Create new Organization"
 msgstr "Create Group"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "List all groups"
 msgid "Browse all Organizations"
 msgstr "List all projects"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create Project"
 msgid "Search for Organizations"
 msgstr "Create Project"
 
@@ -4216,7 +5287,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Cosinnus project"
 msgid "Post new Idea"
 msgstr "Project"
 
@@ -4226,7 +5296,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create Project"
 msgid "Search for Ideas"
 msgstr "Create Project"
 
@@ -4236,7 +5305,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "All projects"
 msgid "Add Event"
 msgstr "All projects"
 
@@ -4246,19 +5314,16 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "There are no groups."
 msgid "There was an error loading the widget"
 msgstr "There are no groups."
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Cosinnus groups"
 msgid "Notifications"
 msgstr "Groups"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Other Projects"
 msgid "Show more"
 msgstr "Other Projects"
 
@@ -4276,9 +5341,12 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "My Projects"
 msgid "In my Groups and Projects"
 msgstr "My Projects"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "In my Cloud Files"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
@@ -4298,7 +5366,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Projects/Groups"
 msgstr "Convert selected Projects to Groups"
 
@@ -4323,6 +5390,42 @@ msgid "No description yet."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "max."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are participating"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Participation request pending..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Participate"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact organizers"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications for content posted."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If you do not want notifications, click the unfollow button!"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
 msgstr ""
 
@@ -4332,7 +5435,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Project Type"
 msgid "Protected Content"
 msgstr "Project Type"
 
@@ -4365,18 +5467,6 @@ msgid "You will now receive notifications for comments or when this event is upd
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "If you do not want notifications, click the unfollow button!"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your like setting because of an error."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your follow setting because of an error."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Hidden Users"
 msgstr ""
 
@@ -4390,13 +5480,11 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Edit Group"
 msgid "Join Group"
 msgstr "Edit Project"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create Group"
 msgid "Message Group"
 msgstr "Create Group"
 
@@ -4406,7 +5494,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create Project"
 msgid "Create Project from Idea"
 msgstr "Create Project"
 
@@ -4432,13 +5519,11 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Projects and groups"
 msgstr "Convert selected Projects to Groups"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Project/group"
 msgstr "Convert selected Projects to Groups"
 
@@ -4452,13 +5537,11 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Edit Project"
 msgid "Join Project"
 msgstr "Edit Project"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create Project"
 msgid "Message Project"
 msgstr "Create Project"
 
@@ -4472,13 +5555,19 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "There are no groups."
 msgid "There are no items yet"
 msgstr "There are no groups."
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Items you follow"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Nothing here yet."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "My Projects"
 msgid "Groups and Projects"
 msgstr "My Projects"
 
@@ -4508,7 +5597,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "My Projects"
 msgid "Only content from my Groups and Projects"
 msgstr "My Projects"
 
@@ -4549,6 +5637,9 @@ msgstr "Project Type"
 msgid "Edit Profile"
 msgstr ""
 
+msgid "Legacy Messages Archive"
+msgstr ""
+
 #, python-format
 msgid "Your account is currently connected with the Facebook account \"%(name)s\". Do you really want to disconnect your Facebook account? This will also revoke all permissions you granted us to your Facebook account."
 msgstr ""
@@ -4570,7 +5661,6 @@ msgid "User overview"
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Members of your projects and groups only"
 msgstr "Convert selected Projects to Groups"
 
@@ -4606,9 +5696,6 @@ msgstr ""
 
 #, python-format
 msgid "User profile: %(username)s"
-msgstr ""
-
-msgid "Legacy Messages Archive"
 msgstr ""
 
 msgid "Cooperation requests"
@@ -4650,6 +5737,10 @@ msgstr ""
 msgid "I am open for cooperation requests"
 msgstr ""
 
+#, fuzzy
+msgid "Message"
+msgstr "Create Group"
+
 msgid "Welcome!"
 msgstr ""
 
@@ -4680,9 +5771,6 @@ msgstr ""
 msgid "Open Preview"
 msgstr ""
 
-msgid "active"
-msgstr ""
-
 msgid "displayed right now"
 msgstr ""
 
@@ -4697,7 +5785,6 @@ msgid "Activate"
 msgstr "Create Project"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to delete announcement \"%(title)s\"?"
 msgstr "Do you really want to leave project „%(title)s“?"
 
@@ -4708,7 +5795,6 @@ msgid "Edit Announcement"
 msgstr ""
 
 #, fuzzy
-#| msgid "Create Project"
 msgid "Create Announcement"
 msgstr "Create Project"
 
@@ -4767,9 +5853,139 @@ msgid "A user can dismiss an announcement, in which case it will disappear and n
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "There are no announcements yet."
 msgstr "There are no groups."
+
+msgid "User Import Archive"
+msgstr ""
+
+msgid "Archived User Import Entry"
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to delete this Archived User Import Entry?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+msgid "Delete Archived User Import Entry"
+msgstr ""
+
+#, fuzzy
+msgid "There are no archived imports yet."
+msgstr "There are no groups."
+
+msgid "Delete uploaded data and upload a new CSV file"
+msgstr ""
+
+msgid "Upload a user CSV file to import user profiles"
+msgstr ""
+
+msgid "Please upload a CSV with the following columns (in any order)"
+msgstr ""
+
+msgid "No data will be imported at this point."
+msgstr ""
+
+msgid "The uploaded file will be validated and a report of the data it contains will be shown."
+msgstr ""
+
+msgid "You can then start the import from the report page."
+msgstr ""
+
+#, fuzzy
+msgid "Upload CSV File"
+msgstr "Convert selected Projects to Groups"
+
+msgid "The CSV is currently being validated..."
+msgstr ""
+
+msgid "The import is currently running..."
+msgstr ""
+
+msgid "This page will automatically refresh when the process is done."
+msgstr ""
+
+msgid "No data has been imported yet. Ready to import!"
+msgstr ""
+
+msgid "The uploaded data is valid and ready to be imported! Please review carefully!"
+msgstr ""
+
+msgid "Import the shown data now"
+msgstr ""
+
+msgid "The uploaded data is valid and is ready to be imported."
+msgstr ""
+
+msgid "Please review the data carefully below. Everything that will be imported is shown in the table."
+msgstr ""
+
+msgid "If any data is missing in the report that you think should have been included in the CSV, please do not start the import yet!"
+msgstr ""
+
+msgid "In this case review the uploaded CSV, and if the data is contained there, but not in the report, please contact the support!"
+msgstr ""
+
+#, python-format
+msgid "Once you are ready to begin the import, please click \"%(submit_button_label)s\" at the bottom of the page."
+msgstr ""
+
+msgid "No data has been imported yet."
+msgstr ""
+
+msgid "The uploaded data is invalid!"
+msgstr ""
+
+msgid "Please review the errors encountered, and correct them in the CSV. If you have questions, contact our support for help."
+msgstr ""
+
+#, python-format
+msgid "Click \"%(reset_button_label)s\" at the top of the page to start another upload."
+msgstr ""
+
+#, fuzzy
+msgid "There was a critical unexpected error during the import"
+msgstr "There are no groups."
+
+msgid "Some data may have been imported already, so please do not restart the import at this time!"
+msgstr ""
+
+msgid "The error has been logged in the system, please contact our support for help!"
+msgstr ""
+
+msgid "The uploaded data has been successfully imported!"
+msgstr ""
+
+msgid "Import successful!"
+msgstr ""
+
+msgid "Archive Import Report"
+msgstr ""
+
+msgid "Below you will find a report of everything that was imported."
+msgstr ""
+
+#, python-format
+msgid "Click \"%(submit_button_label)s\" to archive the report. You can access the report later from the left side navigation of this page."
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to perform the import of the shown data?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+msgid "Make sure you have double checked all the data that will be imported, as a second import with the same data will not be possible!"
+msgstr ""
+
+msgid "Start the Import?"
+msgstr ""
+
+msgid "Import Now!"
+msgstr ""
+
+msgid "Report for CSV validation performed"
+msgstr ""
+
+msgid "Report for CSV Import performed"
+msgstr ""
 
 msgid "Enable posting to Facebook"
 msgstr ""
@@ -4920,7 +6136,6 @@ msgid "We could not retrieve your groups from Facebook because of an error. Plea
 msgstr ""
 
 #, fuzzy
-#| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete the item?"
 msgstr "Are you sure you want to delete this prject?"
 
@@ -4956,7 +6171,6 @@ msgid "Are you part of an interesting company, an NGO or an association? Put you
 msgstr ""
 
 #, fuzzy
-#| msgid "Project overview"
 msgid "Preview"
 msgstr "Project overview"
 
@@ -4970,12 +6184,10 @@ msgid "Your recently visited Pads, Files, Events, Todos and other content will b
 msgstr ""
 
 #, fuzzy
-#| msgid "Create Project"
 msgid "You created an idea"
 msgstr "Create Project"
 
 #, fuzzy
-#| msgid "Create Project"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an idea"
 msgstr "Create Project"
@@ -4987,7 +6199,6 @@ msgid "Quick Search"
 msgstr ""
 
 #, fuzzy
-#| msgid "Create Project"
 msgid "Create content"
 msgstr "Create Project"
 
@@ -5007,19 +6218,14 @@ msgid "Offer"
 msgstr ""
 
 #, fuzzy
-#| msgid "Cosinnus project"
 msgid "Post new Offer"
 msgstr "Project"
 
 #, fuzzy
-#| msgid "Edit Project"
 msgid "Edit My Profile"
 msgstr "Edit Project"
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
-msgstr ""
-
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr ""
 
 msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
@@ -5028,15 +6234,11 @@ msgstr ""
 msgid "Do you have something to share, sell or give away? Are you searching for something?"
 msgstr ""
 
-msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
-msgstr ""
-
 msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "Welcome"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Edit “%(team_name)s”"
 msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "to %(portal_name)s"
 msgstr "Edit project “%(team_name)s”"
@@ -5049,7 +6251,6 @@ msgid "Jetzt anmelden und mitgestalten"
 msgstr "Join now and collaborate"
 
 #, fuzzy
-#| msgid "Other Projects"
 msgid "Show more Projects"
 msgstr "Other Projects"
 
@@ -5083,9 +6284,6 @@ msgstr ""
 msgid "There are no projects in this group yet."
 msgstr ""
 
-msgid "Add project"
-msgstr ""
-
 msgid "Attach Images/Files"
 msgstr ""
 
@@ -5102,12 +6300,10 @@ msgid "Widget not found."
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "No related projects/groups"
 msgstr "Convert selected Projects to Groups"
 
 #, fuzzy
-#| msgid "Russian"
 msgid "Assign"
 msgstr "Русский"
 
@@ -5149,6 +6345,290 @@ msgstr ""
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr ""
 
+msgid "You are not currently in any Projects"
+msgstr ""
+
+#, fuzzy
+msgid "My upcoming Projects"
+msgstr "My Projects"
+
+#, fuzzy
+msgid "Project Menu"
+msgstr "Project Type"
+
+#, fuzzy
+msgid "Project Dashboard"
+msgstr "Project Type"
+
+msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
+msgstr ""
+
+msgid "Edit Project"
+msgstr "Edit Project"
+
+#, fuzzy
+msgid "Activate Project"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Re-activate Project"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Deactivate Project"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "You are about to deactivate this project!"
+msgstr "Are you sure you want to delete this prject?"
+
+msgid "You are about to re-activate this project. It and all of its content will be visible on the website again."
+msgstr ""
+
+msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr ""
+
+msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+msgstr ""
+
+#, fuzzy
+#| msgid "Convert selected Groups to Projects"
+msgid "Convert selected items to Projects"
+msgstr "Convert selected Groups to Projects"
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_12_projectadministration"
+msgid "Project administrator"
+msgstr "The administration of Projects begins with managing its membership. Here you can decide who can join your project and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal."
+
+#, fuzzy
+msgid "Project name"
+msgstr "Project Type"
+
+msgid "Enter a name for the project."
+msgstr "Enter a name for the project."
+
+msgid "Where is the project active?"
+msgstr ""
+
+#, fuzzy
+msgid "Project members only"
+msgstr "Project Type"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
+msgid "Collaborate!"
+msgstr ""
+
+msgid "Join now and collaborate!"
+msgstr ""
+
+msgid "You have been invited to collaborate!"
+msgstr ""
+
+msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
+msgstr ""
+
+msgid "Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgstr ""
+
+msgid "Only project members can see the content you requested. Apply to become a member now!"
+msgstr ""
+
+msgid "You are not currently in any Groups"
+msgstr ""
+
+#, fuzzy
+#| msgid "My Groups"
+msgid "My upcoming Groups"
+msgstr "My Groups"
+
+#, fuzzy
+msgid "Group Menu"
+msgstr "Group"
+
+#, fuzzy
+msgid "Group Dashboard"
+msgstr "Project Type"
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgstr ""
+
+msgid "Edit Group"
+msgstr "Edit Project"
+
+#, fuzzy
+msgid "Activate Group"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Re-activate Group"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Deactivate Group"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "You are about to deactivate this group!"
+msgstr "Are you sure you want to delete this prject?"
+
+msgid "You are about to re-activate this group. It and all of its content will be visible on the website again."
+msgstr ""
+
+msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr ""
+
+msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+msgstr ""
+
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Convert selected items to Groups"
+msgstr "Convert selected Projects to Groups"
+
+#, fuzzy
+msgid "Group administrator"
+msgstr "There are no groups."
+
+#, fuzzy
+msgid "Group name"
+msgstr "Group"
+
+msgid "Enter a name for the group."
+msgstr "Enter a name for the project."
+
+msgid "Where is the group active?"
+msgstr ""
+
+msgid "Group members only"
+msgstr ""
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
+
+msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+msgstr ""
+
+msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgstr ""
+
+msgid "Only group members can see the content you requested. Apply to become a member now!"
+msgstr ""
+
+msgid "Conferences"
+msgstr ""
+
+msgid "My Conferences"
+msgstr ""
+
+msgid "You are not currently attending any Conferences"
+msgstr ""
+
+#, fuzzy
+msgid "My upcoming Conferences"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Conference Menu"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Browse all Conferences"
+msgstr "My Projects"
+
+#, fuzzy
+msgid "Create Conference"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Create new Conference"
+msgstr "Create Project"
+
+msgid "Conferences let you set up and host workshops and events over multiple days, complete with video messaging, stage stream integration, breakout rooms and lobby chats."
+msgstr ""
+
+#, fuzzy
+msgid "Edit Conference"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Activate Conference"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Re-activate Conference"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Deactivate Conference"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "You are about to deactivate this conference!"
+msgstr "Are you sure you want to delete this prject?"
+
+msgid "You are about to re-activate this conference. It and all of its content will be visible on the website again."
+msgstr ""
+
+msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr ""
+
+msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+msgstr ""
+
+#, fuzzy
+#| msgid "Convert selected Groups to Projects"
+msgid "Convert selected items to Conferences"
+msgstr "Convert selected Groups to Projects"
+
+msgid "Conference contact person"
+msgstr ""
+
+#, fuzzy
+msgid "Conference name"
+msgstr "Create Project"
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a name for the conference."
+msgstr "Enter a name for the project."
+
+#, fuzzy
+#| msgid "Describe the project in a few sentences."
+msgid "Describe the conference in a few sentences."
+msgstr "Describe the project in a few sentences."
+
+#, fuzzy
+msgid "Where is the conference active?"
+msgstr "Create Project"
+
+msgid "Conference members only"
+msgstr ""
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
+msgid "Participate!"
+msgstr ""
+
+msgid "Join now and participate!"
+msgstr ""
+
+msgid "You have been invited to participate!"
+msgstr ""
+
+msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
+msgstr ""
+
+msgid "Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgstr ""
+
+msgid "Only conference members can see the content you requested. Apply to become a member now!"
+msgstr ""
+
 msgid "Team Description"
 msgstr ""
 
@@ -5158,11 +6638,61 @@ msgstr ""
 msgid "Question about"
 msgstr ""
 
+msgid "The password must contain at least 1 digit, 0-9."
+msgstr ""
+
+msgid "The password must contain at least one upper case character A...Z"
+msgstr ""
+
+msgid "The password must contain at least one lower case character A...Z"
+msgstr ""
+
+msgid "The password must contain at least one special character (e.g.: $ § % & ? ! )"
+msgstr ""
+
+#, python-brace-format
+msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
+msgstr ""
+
 msgid "Test email sent!"
+msgstr ""
+
+msgid "Newsletter sent."
+msgstr ""
+
+msgid "Test email sent."
+msgstr ""
+
+msgid "Newsletter has been copied."
+msgstr ""
+
+msgid "Newsletter has been updated."
+msgstr ""
+
+msgid "Newsletter successfully created!"
+msgstr ""
+
+msgid "Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations."
+msgstr ""
+
+#, python-format
+msgid "Login token was sent to %(email)s."
+msgstr ""
+
+msgid "Die Änderungen wurden erfolgreich gespeichert."
+msgstr ""
+
+msgid "Login token was sent."
+msgstr ""
+
+msgid "User successfully created!"
 msgstr ""
 
 #, python-format
 msgid "The language \"%s\" is not supported"
+msgstr ""
+
+msgid "Your data was saved successfully!"
 msgstr ""
 
 msgid "No model given to export data from."
@@ -5211,9 +6741,6 @@ msgid "Your Facebook account was successfully disconnected from this account."
 msgstr ""
 
 msgid "Sorry, only portal administrators can create projects and groups!"
-msgstr ""
-
-msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgstr ""
 
 #, python-format
@@ -5282,7 +6809,7 @@ msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” su
 msgstr ""
 
 #, python-format
-msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
+msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
 msgstr ""
 
 #, python-format
@@ -5297,6 +6824,14 @@ msgstr ""
 msgid "User %(username)s was successfully invited!"
 msgstr ""
 
+#, fuzzy, python-format
+#| msgid "The following Projects were converted to Groups:"
+msgid "The following users were invited to apply: %s"
+msgstr "The following Projects were converted to Groups:"
+
+msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
+msgstr ""
+
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "You cannot remove “%(username)s” form this project. Only one admin left."
@@ -5306,7 +6841,6 @@ msgid "You cannot remove yourself from a %(team_type)s."
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
 msgstr "You cannot remove “%(username)s” form this project. Only one admin left."
 
@@ -5330,14 +6864,16 @@ msgstr ""
 msgid "%(team_name)s was deactivated successfully!"
 msgstr ""
 
-msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
-msgstr ""
-
 msgid "This project/group is already active!"
 msgstr ""
 
 msgid "This project/group is already inactive!"
 msgstr ""
+
+#, fuzzy
+#| msgid "You're receiving this email because you are an administrator of this group."
+msgid "You are not a member, but have access because you are an Administrator."
+msgstr "You're receiving this email because you are an administrator of this project."
 
 msgid "Only group/project members have permission to do this!"
 msgstr ""
@@ -5371,7 +6907,6 @@ msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "There was an error when trying to delete the invitation."
 msgstr "There are no groups."
 
@@ -5475,6 +7010,9 @@ msgstr ""
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr ""
 
+msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
+msgstr ""
+
 #, python-format
 msgid "Your account \"%(user)s\" was registered successfully. Welcome to the community!"
 msgstr ""
@@ -5502,6 +7040,9 @@ msgstr ""
 msgid "You are already logged in!"
 msgstr ""
 
+msgid "User signup is currently disabled!"
+msgstr ""
+
 msgid "Please enter a token!"
 msgstr ""
 
@@ -5509,7 +7050,6 @@ msgid "Sorry, but the invite token you have used does not seem to be valid!"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Edit “%(team_name)s”"
 msgid "Welcome to %(portal_name)s!"
 msgstr "Edit project “%(team_name)s”"
 
@@ -5576,6 +7116,29 @@ msgstr ""
 msgid "Your Announcement was deactivated successfully."
 msgstr ""
 
+msgid "The Archived User Import Entry was deleted successfully."
+msgstr ""
+
+msgid "This action is not allowed right now"
+msgstr ""
+
+msgid "Another import is currently running!"
+msgstr ""
+
+msgid "No validated CSV upload found to start the import from!"
+msgstr ""
+
+msgid "Unknown POST action!"
+msgstr ""
+
+#, fuzzy
+#| msgid "The following Groups were converted to Projects:"
+msgid "The following columns were not recognized and were ignored"
+msgstr "The following Groups were converted to Projects:"
+
+msgid "The import was successfully archived."
+msgstr ""
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr ""
@@ -5583,66 +7146,105 @@ msgstr ""
 msgid "Your changes have been saved."
 msgstr ""
 
+#~ msgid "TODO: Room Type Lobby description text"
+#~ msgstr "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
+
+#~ msgid "TODO: Room Type Stage description text"
+#~ msgstr "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+
+#~ msgid "TODO: Room Type Workshops description text"
+#~ msgstr "In Workshops each event has a video conference. Presenters are allowed to moderate those."
+
+#~ msgid "TODO: Room Type Discussions description text"
+#~ msgstr "In Discussions each event has a video conference. Presenters are allowed to moderate those. Differs from \"Workshops\" only by the design in the agenda. Workshop: tiles, discussion: list"
+
+#~ msgid "TODO: Room Type Coffee Tables description text"
+#~ msgstr "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
+
+#~ msgid "TODO: Room Type Results description text"
+#~ msgstr "Include a project that you use for documentation purposes."
+
+#~ msgid "TODO: Room Type Participants description text"
+#~ msgstr "Shows a list of all participants."
+
 #, fuzzy
-#~ msgid "deactivate member"
+#~ msgid "All societies"
+#~ msgstr "All projects"
+
+#~ msgid "All projects"
+#~ msgstr "All projects"
+
+#, fuzzy
+#~ msgid "Conference Dashboard"
+#~ msgstr "Project Type"
+
+#~ msgid "The following Groups were converted to Projects:"
+#~ msgstr "The following Groups were converted to Projects:"
+
+#, fuzzy
+#~ msgid "Search for email"
 #~ msgstr "Create Project"
 
 #, fuzzy
-#~ msgid "activate member"
-#~ msgstr "Create Project"
+#~ msgid "Deactivated Projects and Groups"
+#~ msgstr "Other Projects"
 
 #, fuzzy
-#~| msgid "Edit Group"
-#~ msgid "remove user"
-#~ msgstr "Edit Project"
+#~ msgid "Public Project"
+#~ msgstr "All Projects"
 
 #, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to deactivate the member's user account ?"
-#~ msgstr "Do you really want to leave project „%(title)s“?"
+#~ msgid "Public Group"
+#~ msgstr "Select Group"
+
+#~ msgid "All groups"
+#~ msgstr "All projects"
 
 #, fuzzy
-#~ msgid "Deactivate Member"
-#~ msgstr "Create Project"
+#~ msgid "Browse this public team"
+#~ msgstr "Public project"
+
+#~ msgid "Deutsch"
+#~ msgstr "Deutsch"
+
+#~ msgid "Do you really want to leave group „%(title)s“?"
+#~ msgstr "Do you really want to leave „%(title)s“?"
+
+#~ msgid "English"
+#~ msgstr "English"
+
+#~ msgid "Enter a descriptive name for your group."
+#~ msgstr "Enter a name for the project."
+
+#~ msgid "French"
+#~ msgstr "Français"
+
+#~ msgid "Group overview"
+#~ msgstr "Group overview"
+
+#~ msgid "Gruppen"
+#~ msgstr "Group"
 
 #, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to activate the member's user account ?"
-#~ msgstr "Do you really want to leave project „%(title)s“?"
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Convert selected Projects to Groups"
 
 #, fuzzy
-#~ msgid "Activate Member"
-#~ msgstr "Create Project"
-
-#, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "Do you really want to leave project „%(title)s“?"
-
-#, fuzzy
-#~| msgid "Create Project"
-#~ msgid "Remove User"
-#~ msgstr "Create Project"
-
-#, fuzzy
-#~| msgid "Convert selected Projects to Groups"
 #~ msgid "Import Projects and Groups or Users"
 #~ msgstr "Convert selected Projects to Groups"
 
+#~ msgid "No group found with this name"
+#~ msgstr "No project found with this name"
+
+#~ msgid "Polish"
+#~ msgstr "Polski"
+
 #, fuzzy
-#~| msgid "Convert selected Projects to Groups"
 #~ msgid "Project/group CSV File"
 #~ msgstr "Convert selected Projects to Groups"
 
-#, fuzzy
-#~| msgid "Convert selected Projects to Groups"
-#~ msgid "User CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~| msgid "Convert selected Projects to Groups"
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Convert selected Projects to Groups"
+#~ msgid "Russian"
+#~ msgstr "Русский"
 
 #~ msgid "Society"
 #~ msgstr "Group"
@@ -5650,47 +7252,8 @@ msgstr ""
 #~ msgid "Society Menu"
 #~ msgstr "Group Menu"
 
-#~ msgid "Group overview"
-#~ msgstr "Group overview"
-
-#~ msgid "Deutsch"
-#~ msgstr "Deutsch"
-
-#~ msgid "English"
-#~ msgstr "English"
-
-#~ msgid "Russian"
-#~ msgstr "Русский"
-
 #~ msgid "Ukrainian"
 #~ msgstr "Українська"
-
-#~ msgid "French"
-#~ msgstr "Français"
-
-#~ msgid "Polish"
-#~ msgstr "Polski"
-
-#~| msgid "Group"
-#~ msgid "Gruppen"
-#~ msgstr "Group"
-
-#~| msgid "Enter a name for the group."
-#~ msgid "Enter a descriptive name for your group."
-#~ msgstr "Enter a name for the project."
-
-#, fuzzy
-#~ msgid "Browse this public team"
-#~ msgstr "Public project"
-
-#~ msgid "Do you really want to leave group „%(title)s“?"
-#~ msgstr "Do you really want to leave „%(title)s“?"
-
-#~ msgid "No group found with this name"
-#~ msgstr "No project found with this name"
-
-#~ msgid "You're receiving this email because you are an administrator of this group."
-#~ msgstr "You're receiving this email because you are an administrator of this project."
 
 #~ msgid "join team"
 #~ msgstr "Join Project"

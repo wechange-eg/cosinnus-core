@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from copy import copy
 import datetime
+import re
 
 from django.urls import reverse
 from django.db.models import Q
@@ -15,7 +16,8 @@ from cosinnus.conf import settings
 from cosinnus.forms.search import get_visible_portal_ids, \
     filter_searchqueryset_for_read_access
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
+from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject,\
+    CosinnusConference
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import message_group_admins_url
@@ -40,7 +42,7 @@ class DictResult(dict):
     def __init__(self, *args, **kwargs):
         for key in list(self.fields.keys()):
             val = kwargs.get(key, self.fields.get(key))
-            if val == REQUIRED:
+            if val is REQUIRED:
                 raise Exception('MAP API Error: Expected required key "%s" for MapResult!' % key)
         return super(DictResult, self).__init__(*args, **kwargs)
 
@@ -122,6 +124,16 @@ class HaystackGroupMapCard(HaystackMapCard):
             'dataSlot2': result.participant_count, # subproject count
         })
         return super(HaystackGroupMapCard, self).__init__(result, *args, **kwargs)
+
+
+class HaystackConferenceMapCard(HaystackMapCard):
+    
+    def __init__(self, result, *args, **kwargs):
+        kwargs.update({
+            'dataSlot1': result.humanized_event_time_html, # time and date 
+            'dataSlot2': result.participant_count, # group member count
+        })
+        return super(HaystackConferenceMapCard, self).__init__(result, *args, **kwargs)
 
 
 class HaystackOrganizationMapCard(HaystackMapCard):
@@ -286,6 +298,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
         'admins': [],
         'organizations': [],
         'followed': False,
+        'starred': False
     })
          
     background_image_field = 'wallpaper'
@@ -311,6 +324,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
             'website_url': obj.website,
             'contact': linebreaksbr(escape(obj.contact_info)),
             'followed': obj.is_user_following(user),
+            'starred': obj.is_user_starring(user)
         })
         """ TODO: check all read permissions on related objects! """
         
@@ -382,6 +396,18 @@ class DetailedSocietyMapResult(DetailedBaseGroupMapResult):
         return super(DetailedSocietyMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
 
+class DetailedConferenceMapResult(DetailedBaseGroupMapResult):
+    """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
+         into a proper MapResult """
+
+    def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        kwargs.update({
+            'time_html': haystack_result.humanized_event_time_html,
+            'participants_limit_count': haystack_result.participants_limit_count,
+        })
+        return super(DetailedConferenceMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
+
+
 class DetailedUserMapResult(DetailedMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
@@ -423,8 +449,11 @@ class DetailedUserMapResult(DetailedMapResult):
         for result in sqs:
             if SEARCH_MODEL_NAMES[result.model] == 'projects':
                 kwargs['projects'].append(HaystackProjectMapCard(result))
+            elif SEARCH_MODEL_NAMES[result.model] == 'conferences':
+                kwargs['conferences'].append(HaystackConferenceMapCard(result))
             else:
                 kwargs['groups'].append(HaystackGroupMapCard(result))
+                
                 
         if getattr(settings, 'COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD', False):
             kwargs.update({
@@ -446,6 +475,7 @@ class DetailedEventResult(DetailedMapResult):
         'participants': [],
         'participant_count': 0,
         'followed': False,
+        'starred': False
     })
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -463,6 +493,7 @@ class DetailedEventResult(DetailedMapResult):
             'participants': [HaystackUserMapCard(result) for result in sqs],
             'participant_count': haystack_result.participant_count,
             'followed': obj.is_user_following(user),
+            'starred': obj.is_user_starring(user)
         })
         return super(DetailedEventResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
@@ -475,6 +506,7 @@ class DetailedIdeaMapResult(DetailedMapResult):
     fields.update({
         'projects': [],
         'followed': False,
+        'starred': False
     })
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -491,6 +523,7 @@ class DetailedIdeaMapResult(DetailedMapResult):
             'creator_name': obj.creator.get_full_name(),
             'creator_slug': obj.creator.username,
             'followed': obj.is_user_following(user),
+            'starred': obj.is_user_starring(user)
         })
         ret = super(DetailedIdeaMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
         return ret
@@ -546,9 +579,42 @@ class DetailedOrganizationMapResult(DetailedMapResult):
             'groups': [HaystackGroupMapCard(result) for result in sqs]
         })
         
-        ret = super(DetailedOrganizationMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
-        return ret
+        super(DetailedOrganizationMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
+
+
+class CloudfileMapCard(BaseMapCard):
+    fields = BaseMapCard.fields.copy()
+    fields.update({
+        "mtime": None,
+        "mime": None,
+        "size": None,
+        "excerpt": None,
+    })
+
+    def __init__(self, document, query, *args, **kwargs):
+
+        query_regexp = "|".join(re.escape(word) for word in query.split())
+
+        try:
+            excerpt = escape(document['excerpts'][0]['excerpt'])
+        except LookupError:
+            excerpt = None
+        else:
+            excerpt = re.sub(query_regexp, r"<b>\g<0></b>", excerpt, flags=re.IGNORECASE)
+
+
+        super().__init__(
+            id=document['id'],
+            type="cloudfile",
+            slug=f"{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}{document['link']}",
+            title=re.sub(query_regexp, r"<b>\g<0></b>", escape(document['title']), flags=re.IGNORECASE),
+            mime=document['info']['mime'],
+            size=document['info']['size'],
+            mtime=document['info']['mtime'],
+            excerpt=excerpt,
+            **kwargs
+        )
 
 SHORTENED_ID_MAP = {
     'cosinnus.cosinnusproject': 1,
@@ -715,12 +781,24 @@ if settings.COSINNUS_ORGANIZATIONS_ENABLED:
         'organizations': DetailedOrganizationMapResult,
     })
 
+if settings.COSINNUS_CONFERENCES_ENABLED:
+    SEARCH_MODEL_NAMES.update({
+        CosinnusConference: 'conferences',                       
+    })
+    SHORT_MODEL_MAP.update({
+        13: CosinnusConference,
+    })
+    SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+        'conferences': DetailedConferenceMapResult,
+    })
+
     
 SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
 # these can always be read by any user (returned fields still vary)
 SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS = [
     'projects',
     'groups',
+    'conferences',
 ]
 
 if settings.COSINNUS_EXTERNAL_CONTENT_ENABLED:

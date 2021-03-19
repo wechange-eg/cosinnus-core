@@ -1,0 +1,12 @@
+{% load i18n %}
+
+{% if SETTINGS.COSINNUS_FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL %}
+    {% if not no_spacer %}
+        <div class="v-offset-l"></div>
+    {% endif %}
+    
+    <p class="textfield transparent cosinnus-field">
+        <span class="required-label">*</span>
+        {% trans "indicates a mandatory field" %}
+    </p>
+{% endif %}

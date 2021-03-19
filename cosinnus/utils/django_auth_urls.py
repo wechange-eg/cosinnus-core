@@ -3,17 +3,20 @@
 # It is also provided as a convenience to those who want to deploy these URLs
 # elsewhere.
 
-from django.conf.urls import url
+from django.conf.urls import url, include
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal,\
     is_sso_portal
 from cosinnus.forms.user import UserEmailLoginForm
+from cosinnus.views.user import SetInitialPasswordView
 from cosinnus.views import common, sso, user, integrated
 from django.contrib.auth.views import PasswordChangeDoneView,\
     PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
 # regular auth URLs, disabled for integrated portals
 if not is_integrated_portal():
-    
+
+    # app_name = "cosinnus-auth"
+
     urlpatterns = [
         url(r'^login/$',
             common.cosinnus_login,
@@ -64,6 +67,20 @@ if not is_integrated_portal():
             url(r'^reset/done/$',
                 PasswordResetCompleteView.as_view(template_name='cosinnus/registration/password_reset_complete.html'),
                 name='password_reset_complete'),
+        ]
+
+        # set initial password
+        urlpatterns += [
+            url(r'password_set_initial/', include([
+                url(r'^$',
+                    SetInitialPasswordView.as_view(
+                        template_name='cosinnus/registration/password_set_initial_form.html'),
+                    name='password_set_initial'),
+                url('(?P<token>[0-9A-Za-z_\-]+)$',
+                    SetInitialPasswordView.as_view(
+                        template_name='cosinnus/registration/password_set_initial_form.html'),
+                    name='password_set_initial'),
+                ])),
         ]
 
 # integrated portal auth patterns

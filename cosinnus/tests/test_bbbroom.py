@@ -7,18 +7,28 @@ from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django.conf import settings
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ImproperlyConfigured
 
 from cosinnus.models.bbb_room import BBBRoom
-from cosinnus.apis import bigbluebutton as bbb
 from cosinnus.models import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.utils import bigbluebutton as bbb_utils
 
 from cosinnus.views.bbb_room import BBBRoomMeetingView
+from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
 
 
 class BBBRoomTest(TestCase):
+    
+    bbb_api = None # initialized in setUp
+    
     def setUp(self):
+        
+        try:
+            self.bbb_api = BigBlueButtonAPI()
+        except ImproperlyConfigured:
+            self.skipTest("BBB module is not configured properly. Please enter a valid secret key.")
+            return
+
         self.moderator = User.objects.create_user(
             username="moderator",
             email="moderator@example.org",
@@ -60,12 +70,12 @@ class BBBRoomTest(TestCase):
 
         time.sleep(2)
 
-        room_info = bbb.meeting_info(room.meeting_id, room.moderator_password)
+        room_info = self.bbb_api.meeting_info(room.meeting_id, room.moderator_password)
         self.assertNotEqual(room_info, None)
         self.assertEqual(room_info['moderatorPW'], room.moderator_password)
         self.assertEqual(room_info['attendeePW'], room.attendee_password)
 
-        room_info = bbb.meeting_info(room.meeting_id, room.moderator_password)
+        room_info = self.bbb_api.meeting_info(room.meeting_id, room.moderator_password)
 
     def test_option_creation(self):
         room_options = {
@@ -91,7 +101,7 @@ class BBBRoomTest(TestCase):
 
         time.sleep(2)
 
-        room_info = bbb.meeting_info(room.meeting_id, room.moderator_password)
+        room_info = self.bbb_api.meeting_info(room.meeting_id, room.moderator_password)
         self.assertNotEqual(room_info, None)
         self.assertEqual(room_info['moderatorPW'], room.moderator_password)
         self.assertEqual(room_info['attendeePW'], room.attendee_password)
@@ -108,7 +118,7 @@ class BBBRoomTest(TestCase):
         room.join_group_members(self.group)
 
         # test joining as attendee
-        xml_result = bbb.xml_join("Example Name", room.meeting_id, room.attendee_password)
+        xml_result = self.bbb_api.xml_join("Example Name", room.meeting_id, room.attendee_password)
         self.assertNotEqual(xml_result, None)
         json_result = bbb_utils.xml_to_json(xml_result)
         self.assertEqual(json_result['returncode'], "SUCCESS")
@@ -116,7 +126,7 @@ class BBBRoomTest(TestCase):
         self.assertEqual(json_result['messageKey'], 'successfullyJoined')
 
         # test joining as moderator
-        xml_result = bbb.xml_join("Moderator Name", room.meeting_id, room.moderator_password)
+        xml_result = self.bbb_api.xml_join("Moderator Name", room.meeting_id, room.moderator_password)
         self.assertNotEqual(xml_result, None)
         json_result = bbb_utils.xml_to_json(xml_result)
         self.assertEqual(json_result['returncode'], "SUCCESS")
@@ -124,11 +134,11 @@ class BBBRoomTest(TestCase):
         self.assertEqual(json_result['messageKey'], 'successfullyJoined')
 
         # test joining with wrong credentials
-        xml_result = bbb.xml_join("No Name", room.meeting_id, "abcdefg")
+        xml_result = self.bbb_api.xml_join("No Name", room.meeting_id, "abcdefg")
         self.assertEqual(xml_result, None)
 
         # test meeting info participant count information
-        info = bbb.meeting_info(room.meeting_id, room.moderator_password)
+        info = self.bbb_api.meeting_info(room.meeting_id, room.moderator_password)
 
         # self.assertEqual(info.get('participantCount', -1), 2)
 
@@ -142,16 +152,19 @@ class BBBRoomTest(TestCase):
         time.sleep(2)
         room.join_group_members(self.group)
 
-        room_info = bbb.meeting_info(room.meeting_id, room.moderator_password)
+        room_info = self.bbb_api.meeting_info(room.meeting_id, room.moderator_password)
         self.assertNotEqual(room_info, None)
         self.assertEqual(room_info['moderatorPW'], room.moderator_password)
         self.assertEqual(room_info['attendeePW'], room.attendee_password)
 
         room.end()
         time.sleep(2)
+        """ TODO: this restart() fails on BBBatscale but works on a direct BBB server!
+            Also, after a room has been end()ed like this, it cannot be recreated by a new call
+            to create(), and will forever stay broken! """
         room.restart()
 
-        room_info = bbb.meeting_info(room.meeting_id, room.moderator_password)
+        room_info = self.bbb_api.meeting_info(room.meeting_id, room.moderator_password)
         self.assertNotEqual(room_info, None)
         self.assertEqual(room_info['moderatorPW'], room.moderator_password)
         self.assertEqual(room_info['attendeePW'], room.attendee_password)
@@ -222,7 +235,7 @@ class BBBRoomTest(TestCase):
         room.join_group_members(self.group)
 
         # end room with bbb library
-        xml_result = bbb.end_meeting(room.meeting_id, room.moderator_password)
+        xml_result = self.bbb_api.end_meeting(room.meeting_id, room.moderator_password)
         self.assertNotEqual(xml_result, 'error')
         self.assertEqual(xml_result, True)
 
@@ -274,7 +287,7 @@ class BBBRoomTest(TestCase):
 
         first_token = response.url
 
-        self.assertTrue(first_token.startswith(settings.BBB_SERVER))
+        self.assertTrue(first_token.startswith(self.bbb_api.api_auth_url))
 
         # another request with another user
         request = factory.get(reverse("cosinnus:bbb-room", kwargs={"room_id": room.id}))
@@ -289,7 +302,7 @@ class BBBRoomTest(TestCase):
         second_token = response.url
 
         self.assertNotEqual(first_token, second_token)
-        self.assertTrue(second_token.startswith(settings.BBB_SERVER))
+        self.assertTrue(second_token.startswith(self.bbb_api.api_auth_url))
 
         # third request as anonymous user should result in a 403
         request = factory.get(reverse("cosinnus:bbb-room", kwargs={"room_id": room.id}))
@@ -317,7 +330,7 @@ class BBBRoomTest(TestCase):
         second_token = response.url
 
         self.assertNotEqual(first_token, second_token)
-        self.assertTrue(second_token.startswith(settings.BBB_SERVER))
+        self.assertTrue(second_token.startswith(self.bbb_api.api_auth_url))
 
     def tearDown(self):
         for room in BBBRoom.objects.all():

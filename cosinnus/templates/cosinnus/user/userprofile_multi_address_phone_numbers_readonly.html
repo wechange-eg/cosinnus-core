@@ -1,0 +1,24 @@
+{% load i18n cosinnus_tags %}
+
+{% comment %} Takes as argument:
+    - multi_address_field: a dynamic field type DYNAMIC_FIELD_TYPE_MULTI_ADDRESS value 
+    and renders the phone numbers, if any are set.
+{% endcomment %}
+
+{% if multi_address_field.current_address != None %}
+    {% with address=multi_address_field.addresses|get_item_or_none:multi_address_field.current_address %}
+        {% if address.phone %}
+            <a href="tel:{{ address.phone }}" class="nowrap">
+                <i class="fas fa-phone"></i>
+                {{ address.phone }}
+            </a>
+        {% endif %}
+        {% if address.mobile %}
+            {% if address.phone %}&nbsp;&nbsp;{% endif %}
+            <a href="tel:{{ address.mobile }}" class="nowrap">
+                <i class="fas fa-mobile"></i>
+                {{ address.mobile }}
+            </a>
+        {% endif %}
+    {% endwith %}
+{% endif %}        

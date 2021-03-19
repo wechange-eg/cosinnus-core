@@ -1,0 +1,36 @@
+{% load i18n cosinnus_tags %}
+
+{% comment %}  
+    Expects an `object` context variable for the object to like/follow.
+{% endcomment %}
+
+<a class="likefollowstar-button likefollowstar-button-style follow-button {% if user|can_likefollowstar:object %}action-do-likefollowstar{% endif %} {% if user.id in object.get_followed_user_ids %}selected{% endif %}" 
+        data-type="follow" data-ct="{{ object.get_content_type }}" data-id="{{ object.id }}"
+        {% if not user|can_likefollowstar:object %}href="{% url 'login' %}?next={{ object.get_absolute_follow_url|urlencode }}"{% endif %}>
+    <span class="show-unselected">
+        {% comment %}  
+            No counter in follow buttons!
+	        {% if user.id in object.get_followed_user_ids %}{{ object.follow_count|subtract:1 }}{% else %}{{ object.follow_count }}{% endif %}
+        {% endcomment %}
+        <i class="far fa-bell"></i>
+        {% trans "Follow" %}
+    </span>
+    <span class="show-selected">
+        {% comment %}  
+            No counter in follow buttons!
+	        {% if user.id in object.get_followed_user_ids %}{{ object.follow_count }}{% else %}{{ object.follow_count|add:1 }}{% endif %}
+        {% endcomment %}
+        <i class="fas fa-bell"></i>
+        {% trans "Following" %}
+    </span>
+</a>
+<span class="likefollowstar-button-success-message likefollowstar-button-success-message-style" style="display:none;">
+    {% if success_message %}
+        {{ success_message }}
+    {% else %}
+        {% trans "You will now receive notifications for comments or when this content is updated." %}
+    {% endif %}        
+    {% comment %}  
+    {% trans "Check your notification settings to adjust how you receive notifications for followed content." %}
+    {% endcomment %}
+</span>

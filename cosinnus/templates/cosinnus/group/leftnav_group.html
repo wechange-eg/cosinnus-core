@@ -6,41 +6,76 @@
     {% captureas is_editgroup %}True{% endcaptureas %}
 {% elif current_page == "groupdetails" %}
     {% captureas is_groupdetails %}True{% endcaptureas %}
+{% elif current_page == "conferencereminders" %}
+    {% captureas is_conferencereminders %}True{% endcaptureas %}
 {% elif current_page == "organizations" %}
     {% captureas is_organizations %}True{% endcaptureas %}
 {% elif current_page == "groupdeactivate" %}
     {% captureas is_deactivategroup %}True{% endcaptureas %}
-{% elif current_page == "conferencemanagement" %}
-    {% captureas is_conferencemanagement %}True{% endcaptureas %}
+{% elif current_page == "temporaryusers" %}
+    {% captureas is_temporaryusers %}True{% endcaptureas %}
 {% elif current_page == "conferenceroommanagement" %}
     {% captureas is_conferenceroommanagement %}True{% endcaptureas %}
+{% elif current_page == "conference_participation_manangement" %}
+    {% captureas is_conference_participation_manangement %}True{% endcaptureas %}
+{% elif current_page == "conference_applications" %}
+    {% captureas is_conference_applications %}True{% endcaptureas %}
 {% elif current_page == "conferenceeventmanagement" %}
     {% captureas is_conferenceeventmanagement %}True{% endcaptureas %}
 {% endif %}
 
 {% if user|has_write_access:object %}
 	{% captureas href %}{% group_url 'cosinnus:group-edit' group=group %}{% endcaptureas %}
-	{% captureas label %}{% if group and group.type == 1 or group_model == "CosinnusSociety" %}{% trans "Edit Group" %}{% else %}{% trans "Edit Project" %}{% endif %}{% endcaptureas %}
-	{% include "cosinnus/leftnav_button.html" with active=is_editgroup extra_classes="fine-space" icon="fa-info-circle" label=label href=href  %}
+	{% trans "Settings" as edit_label %}
+	{% include "cosinnus/leftnav_button.html" with active=is_editgroup extra_classes="fine-space" icon="fa-cogs" label=edit_label href=href  %}
 {% endif %}
 
 {% if group.group_is_conference and user|has_write_access:object %}
-	{% captureas href %}{% group_url 'cosinnus:conference:management' group=group %}{% endcaptureas %}
-	{% captureas label %}{% trans "Conference Management" %}{% endcaptureas %}
-	{% include "cosinnus/leftnav_button.html" with active=is_conferencemanagement extra_classes="fine-space" icon_full_class="fas fa-chalkboard-teacher" label=label href=href  %}
-	
-	{% captureas href %}{% group_url 'cosinnus:conference:room-management' group=group %}{% endcaptureas %}
-    {% captureas label %}{% trans "Conference Room Management" %}{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with active=is_conferenceroommanagement extra_classes="fine-space" icon_full_class="fas fa-door-open" label=label href=href  %}
+    {% if group.use_conference_applications %}
+	    {% captureas href %}{% group_url 'cosinnus:conference:participation-management' group=group %}{% endcaptureas %}
+        {% captureas label %}{% trans "Edit Conditions of Participation" %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with active=is_conference_participation_manangement extra_classes="fine-space" icon_full_class="fas fa-user-cog" label=label href=href  %}
+    {% endif %}
     
+    <div class="small-space">&nbsp;</div>
+    
+    {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+		{% captureas href %}{% group_url 'cosinnus:conference:room-management' group=group %}{% endcaptureas %}
+	    {% captureas label %}{% trans "Conference Room Management" %}{% endcaptureas %}
+	    {% include "cosinnus/leftnav_button.html" with active=is_conferenceroommanagement extra_classes="fine-space" icon_full_class="fas fa-door-open" label=label href=href  %}
+    {% endif %}
+
     {% captureas href %}{% group_url 'cosinnus:event:conference-event-list' group=group %}{% endcaptureas %}
     {% captureas label %}{% trans "Conference Event Management" %}{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with active=is_conferenceeventmanagement extra_classes="fine-space" icon_full_class="fas fa-calendar" label=label href=href  %}
+    
+    {% if group.use_conference_applications %}
+        {% captureas href %}{% group_url 'cosinnus:conference:participation-management-applications' group=group %}{% endcaptureas %}
+        {% captureas label %}{% trans "Manage Participation Applications" %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with active=is_conference_applications extra_classes="fine-space" icon_full_class="fas fa-user-plus" label=label href=href  %}
+    {% endif %}
+    
+    <div class="small-space">&nbsp;</div>
+    
+    {% if group.allow_conference_temporary_users and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+        {% captureas href %}{% group_url 'cosinnus:conference:temporary-users' group=group %}{% endcaptureas %}
+        {% captureas label %}{% trans "Temporary User Accounts" %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with active=is_temporaryusers extra_classes="fine-space" icon_full_class="fas fa-user-clock" label=label href=href  %}
+    {% endif %}
 {% endif %}
+
 
 {% captureas href %}{% group_url 'cosinnus:group-detail' group=group %}{% endcaptureas %}
 {% captureas label %}{% trans "Members" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_groupdetails extra_classes="fine-space" icon="fa-users" label=label href=href  %}
+
+<div class="small-space">&nbsp;</div>
+
+{% if group.group_is_conference and user|has_write_access:object %}
+	{% captureas href %}{% group_url 'cosinnus:conference:reminders' group=group %}{% endcaptureas %}
+	{% captureas label %}{% trans "Reminder emails" %}{% endcaptureas %}
+	{% include "cosinnus/leftnav_button.html" with active=is_conferencereminders extra_classes="fine-space" icon="fa-envelope" label=label href=href  %}
+{% endif %}
 
 {% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
 {% captureas href %}{% group_url 'cosinnus:group-organizations' group=group %}{% endcaptureas %}
@@ -50,7 +85,7 @@
 
 {% if user|is_group_admin:group or user|is_superuser %}
 	{% captureas href %}{% if activate %}{% url 'cosinnus:group-activate' group_id=group.id %}{% else %}{% url 'cosinnus:group-deactivate' group_id=group.id %}{% endif %}{% endcaptureas %}
-	{% captureas label %}{% if group and group.type == 1 or group_model == "CosinnusSociety" %}{% if activate %}{% trans "Re-activate Group" %}{% else %}{% trans "Deactivate Group" %}{% endif %}{% else %}{% if activate %}{% trans "Activate Project" %}{% else %}{% trans "Deactivate Project" %}{% endif %}{% endif %}{% endcaptureas %}
+	{% captureas label %}{% if activate %}{{ group.trans.REACTIVATE }}{% else %}{{ group.trans.DEACTIVATE }}{% endif %}{% endcaptureas %}
 	{% captureas icon %}{% if activate %}fa-flash{% else %}fa-times{% endif %}{% endcaptureas %}
 	{% include "cosinnus/leftnav_button.html" with active=is_deactivategroup extra_classes="large-space" icon=icon label=label href=href  %}
 {% else %}
@@ -61,32 +96,31 @@
     {% captureas label %}{% trans "Leave" %}{% endcaptureas %}
     {% captureas extra_atts %}data-toggle="modal" data-target="#leave_join_group_modal"{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-out" label=label href="#"  %}
-    
+
     {% captureas label %}{% blocktrans with title=object.name %}Do you really want to leave „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
     {% captureas title %}{% trans "Leave" %}{% endcaptureas %}
     {% captureas action %}{% group_url 'cosinnus:group-user-leave' group=group %}{% endcaptureas %}
-    
+
     {% include "cosinnus/modal_box.html" with id="leave_join_group_modal" label=label title=title form_action=action %}
 {% elif user.pk in group.pendings %}
     {% captureas label %}{% trans "Withdraw Request" %}{% endcaptureas %}
     {% captureas extra_atts %}data-toggle="modal" data-target="#leave_join_group_modal"{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-out" label=label href="#"  %}
-    
+
     {% captureas label %}{% blocktrans with title=group.name %}Do you really want to withdraw your join request to „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
     {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
     {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group %}{% endcaptureas %}
-    
+
     {% include "cosinnus/modal_box.html" with id="leave_join_group_modal" label=label title=title form_action=action %}
 {% elif object.members %}
     {% captureas label %}{% trans "Join" %}{% endcaptureas %}
     {% captureas extra_atts %}data-toggle="modal" data-target="#leave_join_group_modal"{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-in" label=label href="#"  %}
-    
+
     {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
     {% captureas title %}{% trans "Join" %}{% endcaptureas %}
     {% captureas action %}{% group_url 'cosinnus:group-user-join' group=group %}{% endcaptureas %}
-    
+
     {% include "cosinnus/modal_box.html" with id="leave_join_group_modal" label=label title=title form_action=action %}
 {% endif %}
 
-                

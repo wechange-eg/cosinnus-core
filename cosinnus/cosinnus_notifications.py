@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import django.dispatch as dispatch
-from django.utils.translation import ugettext_lazy as _, ngettext_lazy
+from django.utils.translation import ugettext_lazy as _, ngettext_lazy, pgettext_lazy
 from cosinnus.conf import settings
 
 
@@ -26,6 +26,11 @@ idea_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 group_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 organization_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_account_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
+user_conference_application_accepted = dispatch.Signal(providing_args=["user", "obj", "audience"])
+user_conference_application_declined = dispatch.Signal(providing_args=["user", "obj", "audience"])
+user_conference_application_waitlisted = dispatch.Signal(providing_args=["user", "obj", "audience"])
+conference_created_in_group = dispatch.Signal(providing_args=["user", "obj", "audience"])
+user_conference_invited_to_apply = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
 """ Notification definitions.
@@ -173,7 +178,71 @@ notifications = {
             'sub_object_icon': 'get_icon',
         },
        'notification_reason': 'admin',
-    },    
+    },
+    'user_conference_application_accepted': {
+        'label': '<hidden-user_conference_application_accepted>', 
+        'signals': [user_conference_application_accepted],
+        'default': True,
+        'hidden': True,
+        
+        'alert_text': _('Your participation application was accepted'),
+        'alert_reason': _('You submitted an application'),
+        
+        'is_html': True,
+        'event_text': _('Your participation application was accepted'),
+        'topic': _('Your participation application for %(team_name)s was accepted!'),
+        'subject_text': _('Your participation application for %(team_name)s was accepted!'),
+        'data_attributes': {
+            'object_name': 'conference.name',
+            'object_url': 'conference.get_absolute_url',
+            'object_text': 'email_notification_body',
+            'object_icon': 'conference.get_icon',
+        },
+       'notification_reason': 'none',
+    },
+    'user_conference_application_declined': {
+        'label': '<hidden-user_conference_application_declined>', 
+        'signals': [user_conference_application_declined],
+        'default': True,
+        'hidden': True,
+        
+        'alert_text': _('Your participation application was declined'),
+        'alert_reason': _('You submitted an application'),
+        
+        'is_html': True,
+        'event_text': _('Your participation application was declined'),
+        'topic': _('Your participation application for %(team_name)s was declined!'),
+        'subject_text': _('Your participation application for %(team_name)s was declined!'),
+        'data_attributes': {
+            'object_name': 'conference.name',
+            'object_url': 'conference.get_absolute_url',
+            'object_text': 'email_notification_body',
+            'object_icon': 'conference.get_icon',
+        },
+       'notification_reason': 'none',
+    },
+    'user_conference_application_waitlisted': {
+        'label': '<hidden-user_conference_application_waitlisted>', 
+        'signals': [user_conference_application_waitlisted],
+        'default': True,
+        'hidden': True,
+        
+        'alert_text': _('Your participation application was waitlisted'),
+        'alert_reason': _('You submitted an application'),
+        
+        'is_html': True,
+        'event_text': _('Your participation application was waitlisted'),
+        'topic': _('Your participation application for %(team_name)s was waitlisted!'),
+        'subject_text': _('Your participation application for %(team_name)s was waitlisted!'),
+        'data_attributes': {
+            'object_name': 'conference.name',
+            'object_url': 'conference.get_absolute_url',
+            'object_text': 'email_notification_body',
+            'object_icon': 'conference.get_icon',
+        },
+       'notification_reason': 'none',
+    },
+    
     'user_group_made_admin': {
         'label': _('You were made an admin of this team'), 
         'mail_template': '<html-only>',
@@ -319,6 +388,55 @@ notifications = {
         },
         'notification_reason': 'none',
     },
+    'conference_created_in_group': {
+        'label': _('A user created a new conference'), 
+        'signals': [conference_created_in_group],
+        'default': True,
+        'moderatable_content': True,
+        
+        'alert_text': _('%(sender_name)s created the conference %(object_name)s'),
+        'alert_text_multi': _('%(sender_name)s created %(count)d conferences'),
+        'alert_multi_type': 2,
+        
+        'is_html': True,
+        'event_text': _('%(sender_name)s created the conference %(object_name)s'),
+        'subject_text': _('A new conference: "%(object_name)s" was announced in %(team_name)s.'),
+        'data_attributes': {
+            'object_name': 'name', 
+            'object_url': 'get_absolute_url', 
+            'object_text': 'description_long_or_short',
+            'image_url': 'get_avatar_thumbnail_url',
+            'event_meta': 'from_date',
+        },
+        'action_button_text': pgettext_lazy('email campaign button label to apply for a conference', 'Apply now!'),
+        'action_button_alternate_text': _('View conference'),
+    },
+    'user_conference_invited_to_apply': {
+        'label': '<hidden-user_group_invited>', 
+        'signals': [user_conference_invited_to_apply],
+        'default': True,
+        'hidden': True,
+        
+        'alert_text': _('%(sender_name)s invited you to apply for the conference %(team_name)s'),
+        'alert_reason': '',
+        
+        'is_html': True,
+        'event_text': _('%(sender_name)s invited you to apply for the conference %(team_name)s'),
+        'topic': _('%(sender_name)s invited you to apply for "%(team_name)s" on %(portal_name)s! <br/><br/>' 
+                           ' To apply, please click on the link below.'),
+        'subject_text': _('%(sender_name)s invited you to apply for the conference %(team_name)s'),
+        'data_attributes': {
+            'object_name': 'name',
+            'object_url': 'get_absolute_url',
+            'object_text': 'description_long_or_short', 
+            'sub_object_name': '_sender_name', 
+            'sub_object_text': '_sender.cosinnus_profile.description',
+            'sub_object_url': '_sender.cosinnus_profile.get_absolute_url',
+            'sub_object_icon': '_sender.cosinnus_profile.get_icon',
+        },
+        'action_button_text': _('View invitation'),
+        'notification_reason': 'none',
+    }, 
     'group_created': {
         'label': '<hidden-group_created>', 
         'mail_template': '<html-only>',
@@ -329,8 +447,8 @@ notifications = {
         'moderatable_content': True,
         
         'is_html': True,
-        'event_text': _('%(sender_name)s just created the project/group "%(team_name)s" on %(portal_name)s!'),
-        'subject_text': _('%(sender_name)s just created the project/group "%(team_name)s" on %(portal_name)s!'),
+        'event_text': _('%(sender_name)s just created "%(team_name)s" on %(portal_name)s!'),
+        'subject_text': _('%(sender_name)s just created "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
             'object_name': 'name',
             'object_text': 'description',
@@ -359,6 +477,7 @@ notifications = {
         },
         'notification_reason': 'none',
     },
+    
 }
 
 if settings.COSINNUS_IDEAS_ENABLED:

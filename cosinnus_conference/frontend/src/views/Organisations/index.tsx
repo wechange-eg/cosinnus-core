@@ -14,21 +14,22 @@ import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
 import {Content} from "../components/Content/style"
 import {Sidebar} from "../components/Sidebar"
-import {Organisation} from "../../stores/organisations/reducer"
+import {Organisation as OrganisationModel} from "../../stores/organisations/reducer"
 import {fetchOrganisations} from "../../stores/organisations/effects"
 import {useStyles} from "./style"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
+import {Room} from "../../stores/room/models"
 
 interface OrganisationsProps {
-  organisations: Organisation[]
+  organisations: OrganisationModel[]
   fetchOrganisations: DispatchedReduxThunkActionCreator<Promise<void>>
-  url: string
+  room: Room
 }
 
 function mapStateToProps(state: RootState) {
   return {
     organisations: state.organisations,
-    url: state.room.props.url,
+    room: state.room,
   }
 }
 
@@ -37,7 +38,7 @@ const mapDispatchToProps = {
 }
 
 function OrganisationsConnector (props: OrganisationsProps & RouteComponentProps) {
-  const { organisations, fetchOrganisations, url } = props
+  const { organisations, fetchOrganisations, room } = props
   if (!organisations) {
     fetchOrganisations()
   }
@@ -75,7 +76,7 @@ function OrganisationsConnector (props: OrganisationsProps & RouteComponentProps
         }
         <ManageRoomButtons />
       </Content>
-      {url && <Sidebar url={url} />}
+      {room.props.showChat && room.props.url && <Sidebar url={room.props.url} />}
     </Grid>
   )
 }

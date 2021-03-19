@@ -1,0 +1,227 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block page_title %}{% trans "User Administration" %} - {% trans "Edit" %}{% endblock %}
+
+{% block leftnav %}
+{% include 'cosinnus/administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+<li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+<li class="active">{% trans "User Management" %}</li>
+{% endblock %}
+
+{% block content %}
+<div class="content-box">
+    
+    <form method="post">{% csrf_token %}
+        {% if request.GET.search %}
+            <input type="hidden" name="search" value="{{ request.GET.search }}">
+        {% endif %}
+        <div class="fadedown pull-right">
+            <button id="start_send_all_tokens" type="submit" name="send_login_token" value="__all__" class="btn btn-emphasized btn-autosize">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans 'send login token to all inactive users'%}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+	        <script type="text/javascript">
+	             $('#start_send_all_tokens').on('mouseup', function(){
+	                 setTimeout(function(){$('#start_send_all_tokens').attr('disabled', 'disabled');}, 5);
+	             });
+	        </script>
+        </div>
+    </form>
+    
+    <h2 class="white-text large-space">{% trans 'Users' %}</h2>
+    <form method="post">{% csrf_token %}
+        <div class="row">
+            <div class="col-md-10">
+                <div type="button" class="btn btn-default w100">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-search"></i>
+                            </a>
+                            <div class="media-body media-body-form-control">
+                                <input class="form-control"
+                                    placeholder="{% trans 'Search for email, firstname or lastname' %}"
+                                    name="search" {% if request.GET.search %}value="{{ request.GET.search }}"{% endif %}>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-emphasized large-space" title="{% trans 'search' %}">
+                    <ul class="media-list">
+                        <li class="media">
+                            <div class="media-body">
+                                {% trans 'search' %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            </div>
+
+        </div>
+    </form>
+
+
+    {% if object_list %}
+
+    {% if request.GET.search %}
+        <div class="user-management-search-result large-space">
+            <div>
+                {% blocktrans with search_string=request.GET.search count total=total %}
+                Found {{ total }} user with an email that contains: '{{ search_string }}'
+                {% plural %}
+                Found {{ total }} users with an email that contains: '{{ search_string }}'
+                {% endblocktrans %}
+            </div>
+
+            <button class="btn btn-small" href="{% url 'cosinnus:administration-users' %}">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left">
+                            <i class="fas fa-times"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans 'clear search' %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+
+        </div>
+    {% endif %}
+
+    <table class="table table-striped white-content user-management-user-list">
+        <thead>
+            <tr>
+                <th>{% trans "Email" %}</th>
+                <th>{% trans "Firstname" %}</th>
+                <th>{% trans "Lastname" %}</th>
+                <th>{% trans "Last Login" %}</th>
+                <th><div class="pull-right">{% trans "User token" %}</div></th>
+            </tr>
+        </thead>
+        {% for user in object_list %}
+        <tr>
+            <th>
+                <a href="{% url 'cosinnus:administration-user-update' pk=user.id %}">
+                    {{ user.email }}
+                </a>
+                {% if not user.is_active %}
+                    ({% trans "Account deactivated" %})
+                {% endif %}
+                {% block extra_user_data %}{% endblock %}
+            </th>
+            <th>{{ user.first_name }}</th>
+            <th>{{ user.last_name }}</th>
+            <th>{% if user.last_login %}{{ user.last_login }}{% else %}-{% endif %}</th>
+            <th>
+                {% if not user.last_login and not user.password %}
+                <form method="post">{% csrf_token %}
+                    {% if request.GET.search %}
+                        <input type="hidden" name="search" value="{{ request.GET.search }}">
+                    {% endif %}
+                    <div class="fadedown pull-right">
+                        <button type="submit" name="send_login_token" value="{{ user.id }}" class="btn btn-emphasized btn-autosize btn-small">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left">
+                                        <i class="fa fa-envelope"></i>
+                                    </a>
+                                    <div class="media-body">
+						                {% if user.cosinnus_profile.get_last_login_token_sent %}
+						                    {% trans 'Resend login token'%}
+						                {% else %}
+                                            {% trans 'Send login token'%}
+						                {% endif %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </button>
+                    </div>
+                </form>
+                {% endif %}
+                {% if user.cosinnus_profile.get_last_login_token_sent %}
+	                <div class="pull-right">
+	                    {% trans 'Last sent on: ' %} {{ user.cosinnus_profile.get_last_login_token_sent |stringformat:"%Y-%m-%dT%H:%M:%SZ"|date:"SHORT_DATETIME_FORMAT"}}
+	                </div>
+                {% endif %}
+            </th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <div class="user-management-search-result large-space">
+        {% if request.GET.search %}
+        <div>{% blocktrans with search_string=request.GET.search%}Could not find any users with an email that contains '{{ search_string }}.'{% endblocktrans %}</div>
+
+        <button class="btn btn-small" href="{% url 'cosinnus:administration-users' %}">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="media-body">
+                        {% trans 'clear search' %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+        {% else %}
+        {% trans "There are no users yet." %}
+        {% endif %}
+        </div>
+    {% endif %}
+
+    {% if object_list %}
+    <div class="user-management-search-pagination row">
+        <class class="col-xs-4">
+            {% if page_obj.has_previous %}
+                <a href="?page=1{% if request.GET.search %}&search={{ request.GET.search}}{% endif %}">&laquo; {% trans 'to first page' %}</a>
+                <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search}}{% endif %}">{% trans 'previous' %}</a>
+            {% endif %}
+        </class>
+
+        <div class="col-xs-4 current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </div>
+
+        <div class="col-xs-4 next">
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search}}{% endif %}">{% trans 'next' %} &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+
+
+<div class="fadedown pull-right">
+    <button class="btn btn-emphasized btn-autosize" href="{% url 'cosinnus:administration-user-create' %}">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left">
+                    <i class="fa fa-plus"></i>
+                </a>
+                <div class="media-body">
+                    {% trans 'Add user'%}
+                </div>
+            </li>
+        </ul>
+    </button>
+</div>
+{% endblock %}

@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 import logging
 
 from cosinnus.conf import settings
-
 from cosinnus.core.registries.widgets import widget_registry
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_slugs
@@ -112,6 +111,11 @@ def ensure_user_to_default_portal_groups(sender, created, **kwargs):
         # We fail silently, because we never want to 500 here unexpectedly
         logger.error("Error while trying to add User Membership for newly created user.")
 
+def is_user_active(user):
+    """ Similar to `filter_active_users`, returns True if 
+        the user account is considered active in the portal """
+    return user.is_active and user.last_login and user.cosinnus_profile.settings.get('tos_accepted', False)
+
 def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
     """ Filters a QS of ``get_user_model()`` so that all users are removed that are either of
             - inactive
@@ -165,38 +169,54 @@ def get_user_query_filter_for_search_terms(terms):
         
 
 # very similar to create_user but uses UserCreateForm from django.contrib.auth as the one from cosinnus.forms.user requires a captcha
-def create_base_user(email, username=None, password=None, first_name=None, last_name=None):
+def create_base_user(email, username=None, password=None, first_name=None, last_name=None, no_generated_password=False):
+    """ :param no_generated_password: set password generation behaviour. If False Password will be kept with None
+        :type no_generated_password: bool | default False
+    """
 
     from django.contrib.auth.forms import UserCreationForm
     from cosinnus.models.profile import get_user_profile_model
     from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
     from cosinnus.models.membership import MEMBERSHIP_MEMBER
+    from cosinnus.views.user import email_first_login_token_to_user
     from django.contrib.auth import get_user_model
     from django.core.exceptions import ObjectDoesNotExist
 
     try:
         user_model = get_user_model()
-        user_model.objects.get(email=email)
+        user_model.objects.get(email__iexact=email)
         logger.warning('Manual user creation failed because email already exists!')
         return False
     except ObjectDoesNotExist:
         pass
 
-    if not password:
+    if not password and no_generated_password:
+        # special handling for user without password
+        user_model = get_user_model()
+        temp_username = email if not username else username
+
+        # check if user with that password already exist
+        user, created = user_model.objects.get_or_create(username=temp_username, email=email)
+
+        email_first_login_token_to_user(user=user)
+        if not created:
+            logger.error('Manual user creation failed. A user with tha username already exists!')
+
+    else:
         password = get_random_string()
 
-    user_data = {
-        'username': username or get_random_string(),
-        'password1': password,
-        'password2': password
-    }
+        user_data = {
+            'username': username or get_random_string(),
+            'password1': password,
+            'password2': password
+        }
 
-    form = UserCreationForm(user_data)
-    if form.is_valid():
-        user = form.save()
-    else:
-        logger.warning('Manual user creation failed because of form errors!', extra={'data': data, 'form-errors': form.errors})
-        return False
+        form = UserCreationForm(user_data)
+        if form.is_valid():
+            user = form.save()
+        else:
+            logger.warning('Manual user creation failed because of form errors!', extra={'data': user_data, 'form-errors': form.errors})
+            return False
 
     user.email = email
     if not username:
@@ -374,3 +394,25 @@ def get_unread_message_count_for_user(user):
         from postman.models import Message
         unread_count = Message.objects.inbox_unread_count(user)
     return unread_count
+
+
+def get_user_from_set_password_token(token):
+    """ Checks if a token given as URL parameter for a user created without password is valid or not
+
+    :param token: UUID4 send by mail as string
+    :type token: str
+
+    :rtype: user
+    """
+    from cosinnus.models.profile import PROFILE_SETTING_PASSWORD_NOT_SET
+
+    USER_MODEL = get_user_model()
+
+    # TODO this query could be simplified, if json field is imported by postgress library instead of django-jsonfield
+    token_users = USER_MODEL.objects.filter(cosinnus_profile__settings__contains='password_not_set')
+
+    for user in token_users:
+        if user.cosinnus_profile.settings.get(PROFILE_SETTING_PASSWORD_NOT_SET, "") == token:
+            return user
+
+    return None

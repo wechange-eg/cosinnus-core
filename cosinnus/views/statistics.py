@@ -10,6 +10,10 @@ from cosinnus.forms.statistics import SimpleStatisticsForm
 from cosinnus.utils.permissions import check_user_superuser
 from django.core.exceptions import PermissionDenied
 from datetime import datetime
+from cosinnus.models.bbb_room import BBBRoomVisitStatistics
+from cosinnus.utils.http import make_csv_response
+from django.http.response import HttpResponseForbidden
+from django.utils import timezone
 
 
 class SimpleStatisticsView(FormView):
@@ -96,4 +100,41 @@ class SimpleStatisticsView(FormView):
 
 
 simple_statistics = SimpleStatisticsView.as_view()
+
+
+def bbb_room_visit_statistics_download(request):
+    """
+        Will return a CSV containing infos about all BBB Room visits
+    """
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    rows = []
+    headers = [
+        'datetime',
+        'conference_name',
+        'room_name',
+        'user_id',
+        'user_mtag_ids',
+        'user_mtag_slugs',
+        'group_mtag_ids',
+        'group_mtag_slugs',
+    ]
+    
+    for visit in BBBRoomVisitStatistics.objects.all().order_by('visit_datetime'):
+        rows.append([
+            timezone.localtime(visit.visit_datetime).strftime('%Y-%m-%d %H:%M:%S'), # 'datetime',
+            visit.group and visit.group.name or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_NAME, ''), #'conference_name',
+            visit.bbb_room and visit.bbb_room.name or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_ROOM_NAME, ''), #'room_name',
+            visit.user and visit.user.id or '<no-user>', #'user_id',
+            ','.join([str(item) for item in visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_USER_MANAGED_TAG_IDS, [])]), #'user_mtag_ids',
+            ','.join([str(item) for item in visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_USER_MANAGED_TAG_SLUGS, [])]), #'user_mtag_slugs',
+            ','.join([str(item) for item in visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_MANAGED_TAG_IDS, [])]), #'group_mtag_ids',
+            ','.join([str(item) for item in visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_MANAGED_TAG_SLUGS, [])]), #'group_mtag_slugs',
+        ])
+        
+    return make_csv_response(rows, headers, 'bbb-room-visits')
+
+
+
 

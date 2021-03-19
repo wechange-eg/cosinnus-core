@@ -32,25 +32,36 @@
                     {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
                 <span class="rounded-button-inner">
                     {% if liked %}
-                        <i clasS="fa fa-heart"></i>
+                        <i clasS="fas fa-heart"></i>
                         {# Translators: __INCLUDE_JS_PO__ #}
                         {% trans "Liked" %}
                     {% else %}
-                        <i clasS="fa fa-heart-o"></i>
+                        <i clasS="far fa-heart"></i>
                         {# Translators: __INCLUDE_JS_PO__ #}
                         {% trans "Like" %}
                     {% endif %}
                 </span>
             </a>
-            <a class="rounded-button button-action 
+            <a class="rounded-button button-action button-star">
+                <span class="rounded-button-inner">
+                    {% if starred %}
+                        <i class="fas fa-star"></i>
+                        {{ starringLabel }}
+                    {% else %}
+                        <i class="far fa-star"></i>
+                        {{ starLabel }}
+                    {% endif %}
+                </span>
+            </a>
+            <a class="rounded-button button-action
                     {% if cosinnus_active_user %}button-follow" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
                 <span class="rounded-button-inner">
                     {% if followed %}
-                        <i clasS="fa fa-bell"></i>
+                        <i clasS="fas fa-bell"></i>
                         {# Translators: __INCLUDE_JS_PO__ #}
                         {% trans "Following" %}
                     {% else %}
-                        <i clasS="fa fa-bell-o"></i>
+                        <i clasS="far fa-bell"></i>
                         {# Translators: __INCLUDE_JS_PO__ #}
                         {% trans "Follow" %}
                     {% endif %}
@@ -71,7 +82,7 @@
     
     <div class="no-input">
         <div class="now-following-message message-success extra-space-top" style="display: none;">
-            <i class="fa fa-bell"></i>
+            <i class="fas fa-bell"></i>
             {# Translators: __INCLUDE_JS_PO__ #}
             {% trans "You will now receive notifications for comments or when this event is updated or its details change." %}
             {# Translators: __INCLUDE_JS_PO__ #}

@@ -290,13 +290,20 @@ class DashboardWidgetMixin(object):
         return super(DashboardWidgetMixin, self).get_context_data(**kwargs)
 
 
-class GroupDashboard(RequireReadOrRedirectMixin, DashboardWidgetMixin, GroupObjectCountMixin, TemplateView):
+class GroupDashboard(RequireReadOrRedirectMixin, DashboardWidgetMixin, GroupObjectCountMixin,
+                       TemplateView):
     
     template_name = 'cosinnus/dashboard.html'
     
+    def render_to_response(self, *args, **kwargs):
+        # conferences never show the group dashboard, they show the conference frontend
+        # (for `COSINNUS_CONFERENCES_USE_COMPACT_MODE`, the redirecting is done via middleware)
+        if self.group.group_is_conference:
+            return redirect(group_aware_reverse('cosinnus:conference:index', kwargs={'group': self.group}))
+        return super(GroupDashboard, self).render_to_response(*args, **kwargs)
+    
     def get_filter(self):
         return {'group_id': self.group.pk, 'type': WidgetConfig.TYPE_DASHBOARD}
-
     
     def on_error(self, request, *args, **kwargs):
         """ Called when the require-read permission is not met """

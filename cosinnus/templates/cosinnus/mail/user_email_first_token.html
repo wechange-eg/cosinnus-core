@@ -1,0 +1,14 @@
+{% load i18n cosinnus_tags %}{% url 'cosinnus:user-verifiy-email' email_verification_param=verification_url_param as user_verification_url %}{% autoescape off %}{% blocktrans with user_name=user|full_name_force %}Hi {{ user_name }},
+
+an account was just created for you on {{ site_name }}. We're happy to see you!
+
+In order to start using your account, you need to first set a password for it. Afterwards, you may log in using your email {{ user_mail }} and the password you have set.
+
+
+Please click on the following link to set your initial password (or copy and paste the link it in your browser):
+{{ domain_url }}{{ verification_token  }}
+
+
+Thank you and see you soon!
+
+Your {{ site_name }} Team{% endblocktrans %}{% endautoescape %}

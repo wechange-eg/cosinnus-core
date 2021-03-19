@@ -1,0 +1,249 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags sekizai_tags %}
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li><a href="{% group_url 'cosinnus:conference:participation-management' group=group %}">{% trans "Conference Applications" %}</a></li>
+        <li class="active">{% trans "Manage participation applications" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_group.html" with current_page="conference_applications" object=group %}
+{% endblock leftnav %}
+
+{% block content %}
+
+	{% if form|length == 0 %}
+	    <div class="content-box">
+            <h2>{% trans "Manage participation applications" %}</h2>
+            <hr class="invisible" />
+	        <div class="textfield transparent">
+	            <p>
+	                {% trans "There are no participation applications yet." %}
+	            </p>
+	        </div>
+	    </div>
+	{% else %}
+		<form method="POST" action="" class="cosinnus-form">
+		    {% csrf_token %}
+		    {{ form.media }}
+		    {{ form.non_field_errors }}
+		    {{ form.non_field_errors }}
+		    {{ form.management_form }}
+		    {{ assignment_formset.management_form }}
+		    
+		    <div class="content-box">
+                <h2>{% trans "Manage participation applications" %}</h2>
+                
+		        <div class='form-info textfield transparent'>
+	                <p>
+	                    {% trans "Here you and all other organizers can process all applications. Check each application carefully and select your choice of whether to decline or accept an application or put it on the wait list. You may add a reason for waitlisted or declined applications that will be shown to the applicant." %}
+	                </p>
+	                <p>
+	                    {% trans 'Once you are done, click "Save" on the bottom of the page. All applicants will receive an on-site notification and an e-mail (depending on their e-mail notification settings).' %}
+	                    {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+	                        {% trans "Accepted applicants will be granted membership status of the conference and they can enter the conference area immediately." %}
+	                    {% endif %}
+	                </p>
+	                <p>
+	                    {% trans 'If you have changed your mind for some applications later on, you can simply select a different option for those you want to change, and click "Save" again. Only the applicants whose application status changed will be notified of the change.' %}
+	                    {% trans "You may also leave some applications unselected at first and process them at a later time." %}
+                    </p>
+	            </div>
+	            <div class="large-space"></div>
+		    
+		        {% if max_number %}
+		            <div class="large-space">
+		              {% trans 'The maximum number of participants is ' %} {{ max_number }} 
+		              ({% blocktrans count counter=places_left %} 1 place left {% plural %} {{ counter }} places left {% endblocktrans %})
+	                </div>
+		        {% endif %}
+		        
+		        <div class="large-space">
+		            <a class="conference-collapse-link collapse-unedited-applications pull-right">
+		                {% trans "Collapse all processed applications" %}
+		            </a>
+			        <div class="clearfix"></div>
+		        </div>
+		        
+		        <div class="application-form">
+		
+		            {% for application in form %}
+		                <div class="white-content application application-open">
+			                {{ application.conference }}
+			                {{ application.user }}
+			                {{ application.id }}
+			                {{ application.information }}
+			                
+		                    <div class="row application-row first">
+		                        {% comment %} Name {% endcomment %}
+		                        <div class="col-md-3 textfield transparent no-margin">
+		                            <a href="{{ application.instance.user.cosinnus_profile.get_absolute_url }}" target="_blank">
+		                                {{ application.instance.user|full_name }}
+		                            </a>
+		                        </div>
+		                        {% comment %} Location {% endcomment %}
+		                        <div class="col-md-3 textfield transparent no-margin">
+		                            <b><i class="fa fa-fw fa-map-marker"></i></b>
+	                                {% if application.instance.user.cosinnus_profile.media_tag.location %}
+	                                    <a href="{{ application.instance.user.cosinnus_profile.media_tag.location_url }}" target="_blank">
+	                                    {{ application.instance.user.cosinnus_profile.media_tag.location }}
+	                                    </a>
+	                                {% else %}
+	                                    <i>{% trans "not specified" %}</i>
+	                                {% endif %}
+		                        </div>
+		                        {% comment %} Controls {% endcomment %}
+		                        <div class="col-md-6">
+		                            <a class="application-toggle-button" data-toggle="collapse" href="#collapse-application-details-{{ forloop.counter0 }}" title="{% trans 'show more ...' %}" aria-expanded="true" aria-controls="collapse-application-details-{{ forloop.counter0 }}">
+		                                <i class="fas fa-chevron-up toggle-button-state show-open"></i>
+                                        <i class="fas fa-chevron-down toggle-button-state show-collapsed"></i>
+		                            </a>
+		                            <div class="application-status-controls">
+		                                <div class="row">
+		                                    {{ application.status }}
+	                                    </div>
+		                            </div>
+		                        </div>
+		                    
+		                    </div> <!-- end row 1 -->
+		                    
+		                    <div id="collapse-application-details-{{ forloop.counter0 }}" class="collapse-application-details in" class="collapse" role="tabpanel">
+		                    
+                                <div id="collapse-rejection-reason-{{ forloop.counter0 }}" {% if application.reason_for_rejection.value and application.status.value != 4  %}class="in"{% else %}class="collapse" style="height: 0px;"{% endif %}" role="tabpanel">
+                                    <div class="row application-row">
+	                                    <div class="col-xs-12 textfield transparent">
+	                                        {% trans 'Reason for rejection' as rejection_placeholder %}
+	                                        <b>{{ rejection_placeholder }} ({% trans "optional" %})</b>
+	                                        {% include 'cosinnus/fields/default_field.html' with field=application.reason_for_rejection placeholder=rejection_placeholder %}
+	                                    </div>
+	                                </div>
+                                </div> <!-- end rejection-reason collapse row-->
+		                    
+			                    <div class="row application-row">
+			                        {% if priority_choice_enabled %}
+				                        {% comment %} First Choice {% endcomment %}
+				                        <div class="col-md-3 textfield transparent">
+				                            <b>{% trans "First Choice" %}:</b> 
+				                            <br/>
+				                            {% if application.instance.first_priorities_string %}
+				                                {{ application.instance.first_priorities_string }}
+				                            {% else %}
+				                                <i>{% trans "not specified" %}</i>
+				                            {% endif %}
+				                        </div>
+				                        {% comment %} Second choice {% endcomment %}
+				                        <div class="col-md-3 textfield transparent no-margin">
+				                            <b>{% trans "Second Choice" %}:</b> 
+				                            <br/>
+				                            {% if application.instance.second_priorities_string %}
+				                                {{ application.instance.second_priorities_string }}
+				                            {% else %}
+				                                <i>{% trans "not specified" %}</i>
+				                            {% endif %}
+				                        </div>
+				                    {% endif %}
+			                        {% comment %} Full Details {% endcomment %}
+			                        <div class="col-md-6 textfield transparent application-details">
+			                            {% block application_info_row %}
+		                                    <div>
+		                                        <b>{% trans 'Application submitted' %}:</b>
+		                                        {{ application.created|date:"DATETIME_FORMAT" }}
+                                        	</div>
+                                        	{% if application.instance.contact_email %}
+                                                <div>
+                                                    <b>{% trans 'Contact E-Mail Address' %}:</b>
+                                                    {{ application.instance.contact_email }}
+                                                </div>
+                                            {% endif %}
+                                            {% if application.instance.contact_phone %}
+                                                <div>
+                                                    <b>{% trans 'Contact Phone Number' %}:</b>
+                                                    {{ application.instance.contact_phone }}
+                                                </div>
+                                            {% endif %}
+		                                {% endblock %}
+			                        </div>
+			                    </div> <!-- end row 2 -->
+			                    
+			                    <div class="row application-row">
+                                    {% comment %} Message to organizers {% endcomment %}
+                                    <div class="col-xs-12 textfield flat-h transparent">
+                                        {% if application.information.value %}
+                                            <b>{% trans 'Motivation for applying' %}:</b>
+                                            <br/>
+                                            {{ application.information.value|textfield }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+			                    
+                            </div> <!-- end details-collapse -->
+		                </div> <!-- end application -->
+		                    
+		            {% endfor %}
+		        </div>
+		        
+		        <hr class="invisible"/>
+		        
+		        <div class="large-space">
+		            {% for form in assignment_formset %}
+		                {% if forloop.first %}
+			               <h4>{% trans "Workshop Assignments" %}</h4>
+			            {% endif %}
+			            
+		                {{ form.event_id }}
+		                {% if forloop.first %}
+		                    <div class="row">
+		                {% endif %}
+			                    <div class="col-md-6">
+			                        {% trans "Choose users to assign to this workshop" as workshop_placeholder %}
+			                        {% include 'cosinnus/fields/default_field.html' with field=form.users label=form.event_name.value placeholder=workshop_placeholder large_field=True %}
+			                    </div>
+		                {% if forloop.last %}
+		                    </div>
+		                {% endif %}
+		            {% endfor %}
+		        </div>
+		
+		    </div>
+
+			{% block extra_buttons %}
+			     <a class="btn btn-left btn-emphasized btn-autosize" href="{% group_url 'cosinnus:conference:applicants-details-download' group=group.slug %}">
+			        <ul class="media-list">
+			            <li class="media">
+			                <span class="pull-left" >
+			                    <i class="fas fa-download"></i>
+			                </span>
+			                <div class="media-body">
+			                    {% trans "List of Applicants" %}
+			                </div>
+			            </li>
+			        </ul>
+			    </a>
+			{% endblock %}
+		    
+		    <button type="submit" class="btn btn-emphasized">
+		        <ul class="media-list">
+		            <li class="media">
+		                <a class="pull-left" href="#">
+		                    <i class="fa fa-check"></i>
+		                </a>
+		                <div class="media-body">
+		                    {% trans "Save" %}
+		                </div>
+		            </li>
+		        </ul>
+		    </button>
+		</form>
+	{% endif %}
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% addtoblock "js" %}
+        <script src="{% static 'js/reason_for_reject.js' %}" charset="utf-8"></script>
+    {% endaddtoblock %}
+{% endblock extrahead %}
+

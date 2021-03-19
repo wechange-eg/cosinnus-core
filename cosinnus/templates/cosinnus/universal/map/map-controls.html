@@ -35,7 +35,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 	        <div class="button-list">
 	            {% for filter_type in availableFilterList %}
 	                <a class="rounded-button button-color-{{ filter_type }} result-filter-button {% if typeFiltersActive and activeFilters[filter_type] %}selected{% endif %}" data-result-filter-type="{{ filter_type }}">
-	                    {{ macros.typeLabel(filter_type, "rounded-button-inner", button=1) }}
+	                    {{ macros.typeLabel(filter_type, "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
 	                </a>
 	            {% endfor %}
 	        </div>
@@ -81,25 +81,27 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 	            {% endfor %}
 	        </div>
         {% endif %}
-        
-        <h1>
-            {# Translators: __INCLUDE_JS_PO__ #}
-            {% trans "Topics" %}
-        </h1>
-    
-        <div class="button-list">
-            {% for topic_id, topic in allTopics %}
-                {% if topic_id != "" and topic %}
-                    <a class="rounded-button button-color-topic topic-button {% if topic_id|int in activeTopicIds %}selected{% endif %}" data-topic-id="{{ topic_id }}">
-                        <span class="rounded-button-inner">
-                            {{ topic }}
-                        </span>
-                    </a>
-                {% endif %}
-            {% endfor %}
-        </div>
 
-      
+        {% if not hideTopics %}
+            <h1>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Topics" %}
+            </h1>
+        
+            <div class="button-list">
+                {% for topic_id, topic in allTopics %}
+                    {% if topic_id != "" and topic %}
+                        <a class="rounded-button button-color-topic topic-button {% if topic_id|int in activeTopicIds %}selected{% endif %}" data-topic-id="{{ topic_id }}">
+                            <span class="rounded-button-inner">
+                                {{ topic }}
+                            </span>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+        {% endif %}
+
         {% if splitscreen %}
 	        <h1>
 	            {# Translators: __INCLUDE_JS_PO__ #}

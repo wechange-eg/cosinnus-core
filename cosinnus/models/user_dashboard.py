@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 import inspect
+import logging
+from cosinnus.models.cloud import NextcloudFileProxy
 
 from django.template.defaultfilters import date as django_date_filter
 
@@ -30,7 +32,7 @@ class DashboardItem(dict):
     is_emphasized = False
     group = None # group name of item if it has one
     group_icon = None # group type icon
-    
+
     def __init__(self, obj=None, is_emphasized=False, user=None):
         if obj:
             from cosinnus.templatetags.cosinnus_tags import full_name
@@ -49,6 +51,11 @@ class DashboardItem(dict):
                 self['icon'] = 'fa-building'
                 self['text'] = escape(obj.name)
                 self['url'] = obj.get_absolute_url()
+            elif isinstance(obj, NextcloudFileProxy):
+                self['icon'] = 'fa-cloud'
+                self['text'] = obj.name
+                self['url'] = obj.url
+                self['subtext'] = obj.excerpt
             elif obj._meta.model.__name__ == 'Message' and not settings.COSINNUS_ROCKET_ENABLED and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
                 self['icon'] = 'fa-envelope'
                 self['text'] = escape(obj.subject)
@@ -59,11 +66,13 @@ class DashboardItem(dict):
                 self['text'] = escape(full_name(obj.user))
                 self['url'] = obj.get_absolute_url()
             elif BaseTaggableObjectModel in inspect.getmro(obj.__class__):
+                
+                
                 self['icon'] = 'fa-question'
-                self['text'] = escape(obj.title)
+                self['text'] = escape(obj.get_readable_title())
                 self['url'] = obj.get_absolute_url()
                 self['subtext'] = escape(obj.group.name)
-                
+
                 if hasattr(obj, 'get_icon'):
                     self['icon'] = obj.get_icon()
                 if obj.group.slug in get_default_user_group_slugs():

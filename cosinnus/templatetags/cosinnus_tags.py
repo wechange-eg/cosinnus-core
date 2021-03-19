@@ -4,11 +4,14 @@ from __future__ import print_function
 from builtins import str
 from collections import defaultdict
 
+import dateutil.parser
 import six
+from django.utils import dateparse
 from six.moves.urllib.parse import parse_qsl
 from copy import copy, deepcopy
 
 from django import template
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ImproperlyConfigured
 from django.urls import resolve, reverse, Resolver404
 from django.http import HttpRequest
@@ -25,7 +28,8 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token,
     check_user_portal_admin, check_user_superuser,
-    check_object_likefollow_access, filter_tagged_object_queryset_for_user)
+    check_object_likefollowstar_access, filter_tagged_object_queryset_for_user,
+    check_user_can_create_conferences)
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
 from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
     LikeObject
@@ -43,7 +47,9 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.template.defaultfilters import linebreaksbr
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+    CosinnusConference
+from cosinnus.models.conference import CosinnusConferenceApplication
 from wagtail.core.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
 from annoying.functions import get_object_or_None
@@ -56,7 +62,8 @@ from django.db.models.functions import Lower
 from django.contrib.contenttypes.models import ContentType
 from cosinnus_organization.models import CosinnusOrganization
 
-from cosinnus.utils.user import check_user_has_accepted_portal_tos
+from cosinnus.utils.user import check_user_has_accepted_portal_tos,\
+    is_user_active as utils_is_user_active
 from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
 from django.templatetags.i18n import do_translate, do_block_translate, TranslateNode, BlockTranslateNode
 from cosinnus.utils.html import render_html_with_variables
@@ -133,11 +140,11 @@ def can_create_groups(user):
     return user.is_authenticated
 
 @register.filter
-def can_likefollow(user, obj):
+def can_likefollowstar(user, obj):
     """
     Template filter to check if a user can create like/follow an object.
     """
-    return user.is_authenticated and check_object_likefollow_access(obj, user)
+    return user.is_authenticated and check_object_likefollowstar_access(obj, user)
 
 @register.filter
 def is_superuser(user):
@@ -258,6 +265,11 @@ def contains(iterable, item):
     """Template filter to check if an iterable contains an item, just like the `in` keyword """
     return bool(iterable is not None and item in iterable)
 
+@register.filter
+def negate(value):
+    """Template filter that returns the negation of the passed value
+    """
+    return not value
 
 @register.simple_tag(takes_context=True)
 def cosinnus_group_url_path(context, group=None):
@@ -379,13 +391,16 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         # "Invitations"
         societies_invited = CosinnusSociety.objects.get_for_user_invited(request.user)
         projects_invited = CosinnusProject.objects.get_for_user_invited(request.user)
+        conferences_invited = CosinnusConference.objects.get_for_user_invited(request.user)
         groups_invited = [DashboardItem(group) for group in societies_invited]
         groups_invited += [DashboardItem(group) for group in projects_invited]
+        groups_invited += [DashboardItem(group) for group in conferences_invited]
         context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         context['groups_invited_count'] = len(groups_invited)
 
-        # conferences        
-        my_conferences = [society for society in CosinnusSociety.objects.get_for_user(request.user) if society.group_is_conference]
+        # conferences    
+        my_conferences = CosinnusConference.objects.get_for_user(request.user)
+        context['my_conference_groups'] = my_conferences
         context['my_conferences_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(conference) for conference in my_conferences]))
         
         membership_requests = []
@@ -403,10 +418,6 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
                 membership_requests_count += len(pending_ids)
         context['group_requests_json_encoded'] = _escape_quotes(_json.dumps(membership_requests))
         context['group_requests_count'] = membership_requests_count
-        
-        # conference groups
-        user_societies = CosinnusSociety.objects.get_for_user(request.user)
-        context['my_conference_groups'] = [society for society in user_societies if society.group_is_conference]
         
         attending_events = []
         try:
@@ -1218,6 +1229,13 @@ def context_id_do_block_translate(parser, token):
     block_translate_node = do_block_translate(parser, token)
     return ContextIdBlockTranslateNode(block_translate_node)
 
+@register.filter
+def get_user_from_id(id):
+    try:
+        return get_user_model().objects.get(id=id)
+    except get_user_model().DoesNotExist:
+        pass
+
 
 @register.filter
 def get_attr(obj, attr_name):
@@ -1232,13 +1250,80 @@ def get_item(obj, attr_name):
     return obj[attr_name]
 
 @register.filter
+def get_item_or_none(obj, attr_name):
+    """ Returns the given attribute by trying to resolve
+        it in the template using __getitem__ """
+    ret = obj.get(attr_name, None)
+    return ret
+
+@register.filter
 def get_country_name(country_code):
     """ Returns the verbose country name for a ISO 3166-1 country code """
     from django_countries import countries
     return dict(countries).get(country_code, '(unknown)')
 
+@register.simple_tag
+def get_setting(name):
+    return getattr(settings, name, "")
+    
+@register.filter
+def parse_datetime(value):
+    return dateparse.parse_datetime(value)
+
+@register.filter
+def stringformat(value, args):
+    return dateutil.parser.parse(value)
+
+@register.filter
+def listformat(value):
+    if isinstance(value, list):
+        return ', '.join(value)
+    return value
+
+# a map of {dynamic_field_names: [managed_tag_slugs,]} 
+_DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP = None
+
+@register.filter
+def has_managed_tag_requirement_for_dynamic_field(user, dynamic_field_name):
+    """ Will return True if a user has any of the managed tags assigned 
+        that are required to enable the given dynamic field, as defined in
+        setting `COSINNUS_USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS` """
+    global _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP
+    if _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP is None:
+        field_map = defaultdict(list)
+        for tag_slug_list, field_list in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS:
+            for field_name in field_list:
+                field_map[field_name].extend(tag_slug_list)
+        for field_name in field_map.keys():
+            field_map[field_name] = list(set(field_map[field_name]))
+        _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP = field_map
+
+    user_managed_tag_slugs = [tag.slug for tag in user.cosinnus_profile.get_managed_tags()]
+    required_tag_slugs = _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP.get(dynamic_field_name, [])
+    return any([user_tag_slug in required_tag_slugs for user_tag_slug in user_managed_tag_slugs])
+
+
 @register.filter
 def get_ui_pref_for_user(user, ui_pref_name):
     """ Returns for a user the value of the given ui pref """
     return get_ui_prefs_for_user(user).get(ui_pref_name, None)
+
+
+@register.simple_tag(takes_context=True)
+def conference_application(context, conference):
+    request = context['request']
+    user = request.user
+    applications = CosinnusConferenceApplication.objects.filter(user=user, conference=conference)
+    if applications:
+        return applications.first()
+
+@register.filter
+def is_user_active(user):
+    """ Returns for a user the value of the given ui pref """
+    return utils_is_user_active(user)
+
+@register.filter
+def user_can_create_conferences(user):
+    """ Checks if a user has the necessary permissions to create a CosinnusConference"""
+    return check_user_can_create_conferences(user)
 

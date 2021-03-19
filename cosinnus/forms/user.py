@@ -1,26 +1,28 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from builtins import str
 from builtins import object
+from builtins import str
+import logging
+
+from captcha.fields import CaptchaField
 from django import forms
-from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm,\
-    AuthenticationForm
+from django.contrib.auth import get_user_model, password_validation
+from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm, \
+    AuthenticationForm, PasswordChangeForm
+from django.core.validators import MaxLengthValidator
+from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
-
+from cosinnus.forms.dynamic_fields import _DynamicFieldsBaseFormMixin
+from cosinnus.forms.managed_tags import ManagedTagFormMixin
 from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
+from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject
-from django.core.validators import MaxLengthValidator
-from captcha.fields import CaptchaField
-from django.utils.timezone import now
 from cosinnus.utils.user import accept_user_tos_for_portal
 
-import logging
-from cosinnus.models.profile import UserCreationFormExtraFieldsMixin
-from cosinnus.forms.managed_tags import ManagedTagFormMixin
+
 logger = logging.getLogger('cosinnus')
 
 
@@ -52,9 +54,38 @@ class TermsOfServiceFormFields(forms.Form):
     
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
         newsletter_opt_in = forms.BooleanField(label='newsletter_opt_in', required=False)
-        
 
-class UserCreationForm(UserCreationFormExtraFieldsMixin, TermsOfServiceFormFields, ManagedTagFormMixin, DjUserCreationForm):
+
+class UserCreationFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
+    """ Like UserProfileFormDynamicFieldsMixin, but works with the user signup form """
+    
+    DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
+    
+    # only show fields with option `in_signup` set to True
+    filter_included_fields_by_option_name = 'in_signup'
+    
+    def prepare_extra_fields_initial(self):
+        """ no need for this, as the creation form never has any initial values """
+        pass
+    
+    def save(self, commit=True):
+        """ Assign the extra fields to the user's cosinnus_profile's `dynamic_fields` 
+        JSON field instead of model fields, after user form save """
+        ret = super().save(commit=commit)
+        if commit:
+            if hasattr(self, 'cleaned_data'):
+                # sanity check, retrieve the user's profile (will create it if it doesnt exist)
+                if not self.instance.cosinnus_profile:
+                    get_user_profile_model()._default_manager.get_for_user(self.instance)
+                
+                profile = self.instance.cosinnus_profile
+                for field_name in self.DYNAMIC_FIELD_SETTINGS.keys():
+                    profile.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
+                    profile.save()
+        return ret
+    
+
+class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFields, ManagedTagFormMixin, DjUserCreationForm):
     # Inherit from UserCreationForm for proper password hashing!
 
     class Meta(object):
@@ -63,14 +94,16 @@ class UserCreationForm(UserCreationFormExtraFieldsMixin, TermsOfServiceFormField
             'username', 'email', 'password1', 'password2', 'first_name',
             'last_name', 'tos_check'
         ]
-        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF \
+                and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:
             fields = fields + ['managed_tag_field']
     
     # email maxlength 220 instead of 254, to accomodate hashes to scramble them 
     email = forms.EmailField(label=_('email address'), required=True, validators=[MaxLengthValidator(220)]) 
     first_name = forms.CharField(label=_('first name'), required=True)  
     
-    if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF \
+                and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:
         managed_tag_field = forms.CharField(required=settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED)
         managed_tag_assignment_attribute_name = 'cosinnus_profile' 
     if not settings.COSINNUS_IS_INTEGRATED_PORTAL and not settings.COSINNUS_IS_SSO_PORTAL: 
@@ -115,10 +148,18 @@ class UserCreationForm(UserCreationFormExtraFieldsMixin, TermsOfServiceFormField
         CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user, defaults={
             'status': 1,
         })
+        default_visibility = None
+        
         # set the user's visibility to public if the setting says so
         if settings.COSINNUS_USER_DEFAULT_VISIBLE_WHEN_CREATED:
+            default_visibility = BaseTagObject.VISIBILITY_ALL
+        # set the user's visibility to the locked value if the setting says so
+        if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
+            default_visibility = settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED
+        
+        if default_visibility is not None:
             media_tag = user.cosinnus_profile.media_tag
-            media_tag.visibility = BaseTagObject.VISIBILITY_ALL
+            media_tag.visibility = default_visibility
             media_tag.save()
         
         # set the user's tos_accepted flag to true and date to now
@@ -161,3 +202,22 @@ class UserEmailLoginForm(AuthenticationForm):
                         "enabled. Cookies are required for logging in."),
         'inactive': _("This account is inactive."),
     }
+
+
+class ValidatedPasswordChangeForm(PasswordChangeForm):
+    """ For some reason the Django default SetPasswordForm does not use the default password validators.
+        Therefore this form includes the default password validators.
+    """
+    def clean_new_password2(self):
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+        if password1 and password2:
+            if password1 != password2:
+                raise forms.ValidationError(
+                    self.error_messages['password_mismatch'],
+                    code='password_mismatch',
+                )
+
+        validators = password_validation.get_default_password_validators()
+        password_validation.validate_password(password2, self.user, password_validators=validators)
+        return password2

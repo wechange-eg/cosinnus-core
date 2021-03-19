@@ -33,7 +33,7 @@
     	</div>
     </div>
 
-
+    {% block quicksearch %}
     <div class="nav-section nav-search" id="nav-quicksearch">
     	<div class="">
 			<a class="nav-button nav-button-search show-active" title="{% trans "Search" %}">
@@ -59,6 +59,7 @@
 	        });
 	    });
 	</script>
+	{% endblock quicksearch %}
 
 	<div class="nav-section nav-mobile-triple-dots mobile-only">
 		<a class="nav-button" role="button" onclick="$('body').toggleClass('mobile-triple-dots-active');">
@@ -68,12 +69,6 @@
 
     {% block nav_buttons %}
 	    <div class="nav-section nav-buttons">
-	        {% block mobile_brand_links %}
-		    	<div class="brand-links mobile-only">
-		        	{% include 'cosinnus/v2/navbar/brand_links.html' %}
-		        </div>
-	        {% endblock %}
-
 	        {% block create_icon_button %}
 	            {% if not SETTINGS.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS or user|is_superuser %}
 					<a class="nav-button nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Create content" %}"
@@ -128,19 +123,29 @@
 				    {% include "cosinnus/user/user_avatar_image.html" with user=request.user image_size="mini" show_v2_icon_on_missing=True %}
 				</a>
 			{% else %}
+			    {% if not SETTINGS.COSINNUS_LANGUAGE_SELECT_DISABLED %}
 				<a class="nav-button nav-header-textlink" rel="toggle" role="button" title="{% trans "Change language" %}"
 			    		aria-expanded="false" aria-controls="language-menu-collapse"
 			    		data-toggle="collapse" data-target="#language-menu-collapse">
 	            	{{ request.LANGUAGE_CODE|upper }}
 	            </a>
+	            {% endif %}
 	            <a class="nav-button nav-header-textlink" href="{% url 'login' %}" title="{% trans "Log in" %}">
 	            	{% trans "Log in" %}
 	            </a>
-	            <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
-	            	{% trans "Register" %}
-	            </a>
+                {% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
+		            <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
+		            	{% trans "Register" %}
+		            </a>
+	            {% endif %}
 			{% endif %}
 	    </div>
+	    
+        {% block mobile_brand_links %}
+            <div class="brand-links mobile-only mobile-triple-dots-only">
+                {% include 'cosinnus/v2/navbar/brand_links.html' %}
+            </div>
+        {% endblock %}
     {% endblock %}
 
     {% if request.user.is_authenticated %}
@@ -195,24 +200,38 @@
 		<div class="nav-flyout-section flex-row mobile-flex-column">
 			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:group-add' %}"
 					class="create-menu-link flex-grow">
-				<h2 class="headline margin-regular">{% trans "Project" %}</h2>
+				<h2 class="headline margin-regular">{{ COSINNUS_PROJECT_TRANS.VERBOSE_NAME }}</h2>
 				<div class="description">
                     {% include 'cosinnus/v2/texts/create_projects_description.html' %}
 				</div>
 				<div class="action text-bold">
-					{% trans "Create new Project" %}
+					{{ COSINNUS_PROJECT_TRANS.CREATE_NEW }}
 				</div>
 			</a>
 			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:group__group-add' %}"
-					class="create-menu-link flex-grow">
-				<h2 class="headline">{% trans "Group" %}</h2>
-				<div class="description">
+                    class="create-menu-link flex-grow">
+                <h2 class="headline">{{ COSINNUS_SOCIETY_TRANS.VERBOSE_NAME }}</h2>
+                <div class="description">
                     {% include 'cosinnus/v2/texts/create_groups_description.html' %}
-				</div>
-				<div class="action text-bold">
-					{% trans "Create new Group" %}
-				</div>
-			</a>
+                </div>
+                <div class="action text-bold">
+                    {{ COSINNUS_SOCIETY_TRANS.CREATE_NEW }}
+                </div>
+            </a>
+            {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
+                {% if not SETTINGS.COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED or user|user_can_create_conferences %}
+		            <a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:conference__group-add' %}"
+		                    class="create-menu-link flex-grow">
+		                <h2 class="headline">{{ COSINNUS_CONFERENCE_TRANS.VERBOSE_NAME }}</h2>
+		                <div class="description">
+		                    {% include 'cosinnus/v2/texts/create_conferences_description.html' %}
+		                </div>
+		                <div class="action text-bold">
+		                    {{ COSINNUS_CONFERENCE_TRANS.CREATE_NEW }}
+		                </div>
+		            </a>
+	            {% endif %}
+            {% endif %}
 			{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
 			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url "cosinnus:organization-create" %}"
 					class="create-menu-link flex-grow">
@@ -282,7 +301,8 @@
         });
     </script>
     {% endif %}
-
+    
+    {% if not SETTINGS.COSINNUS_LANGUAGE_SELECT_DISABLED %}
 	<div class="collapse nav-flyout text-right" id="language-menu-collapse">
 
 		<div class="nav-flyout-section padded">
@@ -303,6 +323,7 @@
 		</div>
 		<div class="nav-flyout-backdrop"></div>
 	</div>
+	{% endif %}
 
 
 	<div class="collapse nav-flyout text-right" id="user-menu-collapse">
@@ -316,27 +337,30 @@
 
 		<div class="nav-flyout-section padded">
 			<ul class="item-list">
-				<li>
-					<a href="{% url 'cosinnus:profile-detail' %}" class="list-item" role="button" titledby=".item-text">
-			    		<div class="item-text">
-			    			{% trans "My Profile" %}
-			    		</div>
-					</a>
-				</li>
-				<li>
-					<a href="{% url 'cosinnus:profile-edit' %}" class="list-item" role="button" titledby=".item-text">
-			    		<div class="item-text">
-			    			{% trans "Edit My Profile" %}
-			    		</div>
-					</a>
-				</li>
-				<li>
-					<a href="{% url 'cosinnus:notifications' %}" class="list-item" role="button" titledby=".item-text">
-			    		<div class="item-text">
-			    			{% trans "Notification Preferences" %}
-			    		</div>
-					</a>
-				</li>
+			    {% block profile_menu_links %}
+					<li>
+						<a href="{% url 'cosinnus:profile-detail' %}" class="list-item" role="button" titledby=".item-text">
+				    		<div class="item-text">
+				    			{% trans "My Profile" %}
+				    		</div>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'cosinnus:profile-edit' %}" class="list-item" role="button" titledby=".item-text">
+				    		<div class="item-text">
+				    			{% trans "Edit My Profile" %}
+				    		</div>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'cosinnus:notifications' %}" class="list-item" role="button" titledby=".item-text">
+				    		<div class="item-text">
+				    			{% trans "Notification Preferences" %}
+				    		</div>
+						</a>
+					</li>
+				{% endblock %}
+				{% if not SETTINGS.COSINNUS_LANGUAGE_SELECT_DISABLED %}
 				<li>
 					<a rel="toggle" class="list-item" role="button" titledby=".item-text" title="{% trans "Change language" %}
 							aria-expanded="false" aria-controls="language-menu-collapse"
@@ -347,6 +371,7 @@
 			    		</div>
 					</a>
 				</li>
+				{% endif %}
 				{% if SETTINGS.COSINNUS_PAYMENTS_ENABLED or SETTINGS.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY and user.is_superuser %}
 				<li>
 					<a href="{% url 'wechange-payments:overview' %}" class="list-item" role="button" titledby=".item-text-title">

@@ -6,14 +6,16 @@
     {% if not splitscreen %}
         <div class="tile-list-header">
             <span class="pull-right">
-	            {% for type in ['projects', 'groups', 'ideas', 'organizations'] %}
+	            {% for type in ['projects', 'groups', 'conferences', 'ideas', 'organizations'] %}
 	                {% if type in controlView.availableFilterList %}
 	                    {% if not type in ['projects', 'groups'] or COSINNUS_SHOW_PROJECT_AND_GROUP_CREATE_BUTTONS %}
-				            <a href="{% if not cosinnus_active_user %}/signup/?acc_req_msg=1&next={% endif %}/{{type}}/add/" class="rounded-button button-color-{{ type }}-inverted">
-					            <span class="rounded-button-inner">
-					                {{ macros.typeLabel(type, useStyles=0, create=true) }}
-					            </span>
-					        </a>
+	                        {% if not type == 'conferences' or COSINNUS_USER_CAN_CREATE_CONFERENCE %}
+					            <a href="{% if not cosinnus_active_user %}/signup/?acc_req_msg=1&next={% endif %}/{{type}}/add/" class="rounded-button button-color-{{ type }}-inverted">
+						            <span class="rounded-button-inner">
+						                {{ macros.typeLabel(type, useStyles=0, create=true, COSINNUS_TRANS=COSINNUS_TRANS) }}
+						            </span>
+						        </a>
+					        {% endif %}
 					    {% endif %}
 	                {% endif %}
 	            {% endfor %}
@@ -21,7 +23,7 @@
             
 	        <h1 class="no-select">
                 {% for filter_type in controlView.availableFilterList %}
-                    {{ macros.typeLabel(filter_type, mine=controlView.showMine, all=true) }}
+                    {{ macros.typeLabel(filter_type, mine=controlView.showMine, all=true, COSINNUS_TRANS=COSINNUS_TRANS) }}
                 {% endfor %}
             </h1>
         </div>

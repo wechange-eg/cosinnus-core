@@ -58,6 +58,20 @@
         </ul>
     </button>
     
+    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:simple-statistics-bbb-room-visits' %}">
+        <ul class="media-list">
+            <li class="media">
+               <a class="pull-left">
+                    <i class="fa fa-download"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "BBB Room Visits" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+    
     {% if SETTINGS.COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS %}
 	    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-newsletter-user-emails' %}">
 	        <ul class="media-list">
@@ -86,15 +100,14 @@
 	    </button>
     {% endif %}
     
-	
-	
-	
-
 {% endblock leftnav %}
 
 
 {% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li class="active">{% trans "Simple Statistics" %}</li>
 {% endblock %}
+
 
 {% block content %}
     

@@ -2,7 +2,7 @@
 
 <div class="tile tile-{{ type }} grid-item {% if selected %}selected{% endif %} {% if hovered %}hovered{% endif %}">
     <div class="tile-detail-link result-link" {{ macros.resultLink(portal, slug, title, type, group_slug=group_slug, inline_only=1) }}>
-        {% if isSmall %}
+        {% if isSmall and not noImage%}
             <div class="single-tile-image {% if not iconImageUrl %}image-placeholder-background image-placeholder-background-{{ type }}{% endif %}">
             	{% if iconImageUrl %}
                 	<img class="framed-tile-image" src="{{ iconImageUrl }}" />
@@ -12,7 +12,7 @@
     
         {% block type_area %}
             <div class="tile-header-section">
-                {{ macros.typeLabel(type, singular=1) }}
+                {{ macros.typeLabel(type, singular=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
                 {% if portal == 99999 %}
                 	{# Translators: __INCLUDE_JS_PO__ #}
 	                ({% trans "External" %})
@@ -28,7 +28,7 @@
             </div>
         {% endblock %}
         
-        {% if not isSmall %}
+        {% if (not isSmall) and (not noImage) %}
             <div class="tile-section">
                 <div class="dual-tile-image {% if not backgroundImageSmallUrl %}image-placeholder-background image-placeholder-background-{{ type }}{% endif %}">
                     {% if backgroundImageSmallUrl %}

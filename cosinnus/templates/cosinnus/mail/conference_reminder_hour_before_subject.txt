@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans %}Conference starts soon: [[name]]{% endblocktrans %}

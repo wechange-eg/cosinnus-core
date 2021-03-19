@@ -173,7 +173,7 @@ def check_group_create_objects_access(group, user):
     is_admin = check_ug_admin(user, group)
     return is_member or is_admin or check_user_superuser(user)
 
-def check_object_likefollow_access(obj, user):
+def check_object_likefollowstar_access(obj, user):
     """ Checks permissions of a user to like/follow an object.
         This permission may behave differently depending on the object model.
     """
@@ -250,7 +250,7 @@ def check_user_can_receive_emails(user):
     if not user.is_authenticated:
         return not GlobalBlacklistedEmail.is_email_blacklisted(user.email)
     else:
-        return GlobalUserNotificationSetting.objects.get_for_user(user) > GlobalUserNotificationSetting.SETTING_NEVER
+        return user.is_active and GlobalUserNotificationSetting.objects.get_for_user(user) > GlobalUserNotificationSetting.SETTING_NEVER
 
 
 def filter_tagged_object_queryset_for_user(qs, user):
@@ -299,3 +299,28 @@ def get_user_token(user, token_name):
         user.cosinnus_profile.settings['token:%s' % token_name] = token
         user.cosinnus_profile.save()
     return token
+
+
+def get_inherited_visibility_from_group(group):
+    """ Returns the proper visibility for a BaseTagged content object
+        depending on the public status of its given group
+        @param return: An int value from `BaseTagObject.VISIBILITY_CHOICES` """
+    if group.public:
+        return BaseTagObject.VISIBILITY_ALL
+    else:
+        return BaseTagObject.VISIBILITY_GROUP
+    
+
+def check_user_can_create_conferences(user):    
+    """ Checks if a user has the necessary permissions to create a CosinnusConference """
+    if not user.is_authenticated:
+        return False
+    if check_user_superuser(user):
+        return True
+    if getattr(settings, 'COSINNUS_USERS_CAN_CREATE_CONFERENCES', False):
+        return True
+    _user_managed_tag_slugs = [tag.slug for tag in user.cosinnus_profile.get_managed_tags()]
+    if any(tag_slug in settings.COSINNUS_USERS_WITH_MANAGED_TAG_SLUGS_CAN_CREATE_CONFERENCES for tag_slug in _user_managed_tag_slugs):
+        return True
+    return False
+    

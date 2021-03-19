@@ -1,6 +1,3 @@
-import {
-  Typography
-} from "@material-ui/core"
 import React from "react"
 import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
@@ -8,14 +5,9 @@ import {withRouter} from "react-router"
 
 import {RootState} from "../../stores/rootReducer"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {Event} from "../../stores/events/models"
-import {Content} from "../components/Content/style"
-import {Main} from "../components/Main/style"
-import {Loading} from "../components/Loading"
 import {fetchEvents} from "../../stores/events/effects"
-import {ManageEventButtons} from "../components/ManageEventButtons"
-import {IframeContent} from "../components/IframeContent"
-import {FormattedMessage} from "react-intl"
+import {EventRoomState} from "../../stores/events/reducer"
+import {Event} from "../components/Event"
 
 interface DiscussionProps {
   id: number
@@ -41,27 +33,7 @@ function DiscussionConnector (props: DiscussionProps & RouteComponentProps) {
   } else if (!events && !(events && events.loading)) {
     fetchEvents()
   }
-  return (
-    <Main container>
-      {(event && (
-        <Content className="fullheight">
-          <Typography component="h1">{event.props.title}</Typography>
-          {event.props.noteHtml && (
-            <div className="description" dangerouslySetInnerHTML={{__html: event.props.noteHtml}} />
-          )}
-          <IframeContent url={event.props.url} />
-          <ManageEventButtons event={event} />
-        </Content>
-      ))
-      || (events && events.loading) && (
-        <Content className="fullheight"><Loading /></Content>
-      ) || (
-        <Content className="fullheight">
-          <Typography><FormattedMessage id="Event not found."/></Typography>
-        </Content>
-      )}
-    </Main>
-  )
+  return <Event events={events} event={event} />
 }
 
 export const Discussion = reduxConnect(mapStateToProps, mapDispatchToProps)(

@@ -86,9 +86,15 @@
         
         {# Regular Field #}
         {% trans "Password" as pass1_label %}
-        {% trans "Enter a password you don't use anywhere else. The longer the better!" as pass1_legend %}
+        {% captureas pass1_legend %}
+            {% if SETTINGS.COSINNUS_USER_PASSWORD_FIELD_ADDITIONAL_HINT_TRANS %}
+                {{ SETTINGS.COSINNUS_USER_PASSWORD_FIELD_ADDITIONAL_HINT_TRANS|textfield }}
+            {% else %}
+                {% trans "Enter a password you don't use anywhere else. The longer the better!" %}
+            {% endif %}
+        {% endcaptureas %}
         {% trans "Password" as pass1_placeholder %}
-        {% include 'cosinnus/fields/default_field.html' with field=form.password1 legend=pass1_legend label=pass1_label placeholder=pass1_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.password1 legend=pass1_legend label=pass1_label placeholder=pass1_placeholder legend_class="textfield transparent" %}
         
         {# Regular Field #}
         {% trans "Repeat your password just to make sure" as pass2_label %}
@@ -110,11 +116,11 @@
         
         {% comment %} The fields in this block are generated from `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` {% endcomment %}
         {% block portal_specific_userprofile_extra_fields %}
-            {% include 'cosinnus/user/userprofile_extra_formfields.html' with form=form %}
+            {% include 'cosinnus/fields/userprofile_extra_formfields.html' with form=form %}
         {% endblock %}
         
         {% block managed_tag_field %}
-            {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF %}
+            {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF and SETTINGS.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM %}
                 {% include 'cosinnus/fields/managed_tag_formfield.html' with form=form legend=COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_PROFILE type="user" %}
             {% endif %}
         {% endblock managed_tag_field %}

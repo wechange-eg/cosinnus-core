@@ -1,0 +1,148 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block page_title %}{% trans "Newsletters" %} - {% trans "Edit" %}{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus/administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+	<li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+	<li><a href="{% url 'cosinnus:administration-managed-tags-newsletter' %}">
+	   {% trans "Newsletters" %}
+       {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}
+            ({{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_NAME_PLURAL }})
+       {% endif %}
+	</a></li>
+	{% if object %}
+	    <li class="active">{% trans "Update Newsletter" %}</li>
+	{% else %}
+	    <li class="active">{% trans "Create Newsletter" %}</li>
+	{% endif %}
+{% endblock %}
+
+{% block extrahead %}
+	{{ block.super }}
+	{% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.email_text.id_for_label %}
+{% endblock %}
+
+{% block content %}
+
+<form method="post" class="cosinnus-form form-horizontal">{% csrf_token %}
+
+    <div class="content-box">
+        {{ form.non_field_errors }}
+
+
+        {% if form.instance.sent %}
+        <p class="transparent"><i class="fas fa-info-circle"></i> {% trans 'This newsletter has already been sent. If you want to send it again, please copy it and send the copy.' %}</p>
+        {% endif %}
+
+        {% trans "Subject" context "subject of an E-Mail" as newsletter_subject_label %}
+        {% trans "Subject" context "subject of an E-Mail" as newsletter_subject_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.subject label=newsletter_subject_label placeholder=newsletter_subject_placeholder large_field=True %}
+        
+        {% block recipient_formfield %}
+	        <div class="cosinnus-field">
+	            <label>{% trans 'Recipients' %}</label>
+	            <div class="field-description no-select {{ legend_class }}">
+	                {% blocktrans count counter=receipients|length %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% plural %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% endblocktrans %}
+	                {% if SETTINGS.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN %}
+	                    {% trans "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter." %}
+	                {% endif %}
+	            </div>
+	            {{ form.managed_tags.errors }}
+	            <div class="checkbox-multiple">
+	                {{ form.managed_tags }}
+	                {% if form.instance.id and not form.managed_tags.errors %}
+	                {% endif %}
+	            </div>
+	
+	        </div>
+        {% endblock recipient_formfield %}
+
+        {% trans "Body" as newsletter_body_label %}
+        {% trans "Body" as newsletter_body_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.body label=newsletter_body_label placeholder=newsletter_body_placeholder large_field=True %}
+
+        {% if form.instance.id %}
+        <div class="large-space">
+            <div class="content-box white-content">
+                <h2>{% trans "Currently set Email Text" %}:</h2>
+                <div class="textfield">{{ form.instance.body|textfield }}</div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if form.instance.id %}
+        {% if not form.instance.sent %}
+        {% captureas modal_send_newsletter %}send_newsletter_{{ form.instance.id }}{% endcaptureas %}
+        <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#{{ modal_send_newsletter }}">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    <div class="media-body">
+                        {% trans "Send newsletter" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+
+        <button type="submit" name="send_test_mail" class="btn btn-emphasized btn-autosize">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                    <div class="media-body">
+                        {% trans "Send yourself a Test-Mail" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+        {% else %}
+        <button type="submit" name="copy_newsletter" class="btn btn-emphasized btn-autosize">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fas fa-copy"></i>
+                    </a>
+                    <div class="media-body">
+                        {% trans "Copy this newsletter" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+        {% endif  %}
+    {% endif  %}
+
+    {% if not form.instance.sent %}
+    <button type="submit" name="save_draft" class="btn btn-emphasized btn-autosize">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-floppy-o"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Save draft" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    {% endif %}
+    
+    {% block modal_send_newsletter %}
+	    {% if form.instance.id %}
+		    {% captureas label %}{% trans "Do you really want to send the newsletter?" %}{% endcaptureas %}
+		    {% captureas title %}{% trans "Send newsletter" %}{% endcaptureas %}
+		    {% captureas action %}{% url 'cosinnus:administration-managed-tags-newsletter-update' newsletter_id=form.instance.id %}{% endcaptureas %}
+		    {% include "cosinnus/modal_box.html" with id=modal_send_newsletter label=label title=title form_action=action submit_name="send_newsletter" title_icon='fa fa-envelope' %}
+	    {% endif %}
+    {% endblock modal_send_newsletter %}
+</form>
+
+{% endblock %}

@@ -40,6 +40,18 @@ body div {
 			.select2-arrow {
 				color: @app-neutral-color-dark;
 			}
+			.select2-search-choice-close {
+			    top: 14px;
+			}
+		}
+		.select2-search-choice {
+		    div {
+		        line-height: 20px;
+                font-size: 16px;    
+		    }
+		    .select2-search-choice-close {
+		        top: 7px;
+		    }
 		}
 	}
 
@@ -63,7 +75,7 @@ body div {
 
 
 	.select2-results .select2-highlighted {
-		background-color: @app-neutral-color;
+		background-color: @app-neutral-color-light;
 		color: @app-neutral-color-white;
 	}
 
@@ -72,6 +84,7 @@ body div {
 		background-image: none;
 		background-color: @app-neutral-color-light;
 		color: @app-neutral-color-dark;
+		margin: 3px 3px 3px 5px
 	}
 
 
@@ -100,6 +113,7 @@ body div {
 		vertical-align: bottom;
 		font-size: 16px;
 		display: inline-block;
+		line-height: 20px;
 		
 		img {
 		    max-width: 100%;
@@ -174,10 +188,26 @@ body div {
 			}
 		}
 	}
+	&.select2-with-searchbox {
+	    margin-top: -40px;
+	    
+	    .select2-search {
+	        padding-left: 0;
+	        padding-right: 0;
+	    }
+        input {
+            border: none;
+            height: 40px !important;
+            padding-left: 10px;
+            padding-right: 10px;
+        }	    
+	}
 }
 
-.select2-input {
-    font-family: Verdana, Geneva, sans-serif !important;
+.select2-input,
+.select2-with-searchbox input {
+    font-family: @font-regular !important;
+    font-size: 14px !important;
 }
 
 .error a.select2-choice {

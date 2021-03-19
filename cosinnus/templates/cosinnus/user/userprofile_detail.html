@@ -5,8 +5,19 @@
   {% blocktrans with username=this_user|full_name %}User profile: {{ username }}{% endblocktrans %}{{ block.super }}
 {% endblock %}
 
+{% block leftnav %}
+    {% if request.user.is_authenticated and request.user == this_user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+	    {% include 'cosinnus/user/leftnav.html' with view="my_profile" %}
+	    
+	    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_4_profile" %}
+    {% endif %}
+{% endblock leftnav %}
 
-{% block main_page %}
+{% block breadcrumb %}
+        <li class="active">{% trans "Your Profile" %}</li>
+{% endblock %}
+
+{% block content %}
 
     {% if SETTINGS.DEBUG and not user|cosinnus_setting:"test_msg" %}
         <div class="alert alert-info alert-dismissable">
@@ -16,359 +27,176 @@
         </div>
     {% endif %}
 
-    <div class="row">
-		<div class="col-xs-12">
-		    {% include 'cosinnus/messages.html' %}
-		
-			<div class="row large-space">
-			    <div class="col-sm-3 large-space">
-			        {% include "cosinnus/user/user_avatar_image.html" with user=this_user extra_classes="w100" image_size="large" %}
-			    </div>
-			    <div class="col-sm-9 bottom-align large-space">
-			        <legend class="large-space userprofile-title ">{{ this_user.cosinnus_profile.get_extended_full_name }}</legend>
-			
-			        {% if request.user.is_authenticated and request.user == this_user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-			        	{# Buttons for my userprofile #}
-			        	
-			            {% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
-				            <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" href="{% url 'cosinnus:profile-edit' %}">
-	                            <ul class="media-list">
-	                                <li class="media">
-	                                    <a class="pull-left" href="#">
-	                                        <i class="fa fa-pencil"></i>
-	                                    </a>
-	                                    <div class="media-body">
-	                                        {% trans "Edit Profile" %}
-	                                    </div>
-	                                </li>
-	                            </ul>
-	                        </button>
-                        {% endif %}
-                        
-                        <button type="button" class="btn btn-emphasized v-offset-s btn-autosize" href="{% url 'cosinnus:notifications' %}" title="{% trans "Notification Preferences" %}">
-                            <ul class="media-list">
-                                <li class="media">
-                                    <a class="pull-left" href="#">
-                                        <i class="fa fa-cogs"></i>
-                                    </a>
-                                    <div class="media-body">
-                                        {% trans "Notification Preferences" %}
-                                    </div>
-                                </li>
-                            </ul>
-                        </button>
-                        
-                        {% if SETTINGS.COSINNUS_POSTMAN_ARCHIVE_MODE %}
-	                        <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" 
-	                                title="{% trans "Legacy Messages Archive" %}" 
-	                                href="{% url 'postman:index' %}">
-	                            <ul class="media-list">
-	                                <li class="media">
-	                                    <a class="pull-left" href="#">
-	                                        <i class="fa fa-envelope"></i>
-	                                    </a>
-	                                    <div class="media-body">
-	                                        {% trans "Legacy Messages Archive" %}
-	                                    </div>
-	                                </li>
-	                            </ul>
-	                        </button>
-                        {% endif %}
-                        
-                        <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" 
-                        		title="{% trans "Deactivated Projects and Groups" %}" 
-                        		{% if has_deactivated_groups %}href="{% url 'cosinnus:deactivated-groups' %}"{% else %}disabled="true"{% endif %}>
-                            <ul class="media-list">
-                                <li class="media">
-                                    <a class="pull-left" href="#">
-                                        <i class="fa fa-flash"></i>
-                                    </a>
-                                    <div class="media-body">
-                                        {% trans "Deactivated Projects and Groups" %}
-                                    </div>
-                                </li>
-                            </ul>
-                        </button>
-                        
-                        {% if SETTINGS.COSINNUS_IS_SSO_PORTAL %}
-                        	{# need this here because usually it shows in the profile form, but sso portals don't have that #}
-                            <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" href="{% url 'cosinnus:profile-delete' %}">
-                                <ul class="media-list">
-                                    <li class="media">
-                                        <a class="pull-left" href="#">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                        <div class="media-body">
-                                            {% trans "Delete profile" %}
-                                        </div>
-                                    </li>
-                                </ul>
-                            </button>
-                        {% endif %}
-                        
-			        {% else %}
-			        	{# Buttons for other users' profiles #}
-			        
-			            {% comment %} Abonnieren is out for now 
-			            <button type="button" class="btn btn-default">
-			                <ul class="media-list">
-			                    <li class="media">
-			                        <a class="pull-left" href="#">
-			                            <i class="fa fa-hand-o-right "></i>
-			                        </a>
-			                        <div class="media-body">
-			                            <!-- <a href="#"> -->
-			                                {% trans "Abonnieren" %}
-			                            <!-- </a> -->
-			                        </div>
-			                    </li>
-			                </ul>
-			            </button>
-			             {% endcomment %}
-			            {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-                        {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
-			            <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=this_user.username %}{% else %}{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}{% endif %}">
-			                <ul class="media-list">
-			                    <li class="media">
-			                        <a class="pull-left" href="#">
-			                            <i class="fa fa-envelope"></i>
-			                        </a>
-			                        <div class="media-body">
-			                            {% trans "Send Message" %}
-			                        </div>
-			                    </li>
-			                </ul>
-			            </button>
-			            {% endif %}
-                        {% endif %}
-			            
-			            {% include 'cosinnus/feedback/report_button_btn.html' with object=this_user %}
-			            
-			        {% endif %} 
-			    </div>
-			
-			
-			</div><!-- row -->
-			
-			
-			<div class="row">
-			    <div class="col-md-6 col-lg-4 large-space">
-			
-			        <div type="button" class="btn btn-emphasized btn-headline btn-no-interact">
-			            <ul class="media-list">
-			                <li class="media">
-			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-			                    <a class="pull-left" href="#">
-			                        <i class="fa fa-user"></i>
-			                    </a>
-			                    <div class="media-body">
-			                        {% trans "About me" %}
-			                    </div>
-			                </li>
-			            </ul>
-			        </div><!-- btn -->
-			        <div class="content-box large-space">
-			        	{% block userprofile_content %}
-				            <div class="textfield transparent">
-    				            {% if profile.description %} 
-					                {{ profile.description|textfield }}
-					            {% else %}
-                                    <i>{% trans "No Description set" %}</i>
-					            {% endif %}
-				            </div>
-				            
-				            
-							{% if SETTINGS.COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD %}
-								<legend>{% trans "Cooperation requests" %}</legend>
-					            <p class="transparent">
-					            	{% if profile.may_be_contacted %}
-					            		<i class="fa fa-fw fa-commenting-o"></i> {% trans "I am open to be contacted about potential collaboration opportunities!" %}
-					            	{% else %}
-					            		<i class="fa fa-fw fa-ban"></i> {% trans "I do NOT wish to be contacted for potential collaboration!" %}
-					            	{% endif %}
-					            </p>
-							{% endif %}
-					            
-				            
-				            {% if profile.website %}
-					            <legend>{% trans "My Website" %}</legend>
-					            <p class="transparent">
-					                <i class="fa fa-globe"></i> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
-					            </p>
-				            {% endif %}
-				            
-			                {% comment %} 
-			                    If a portal defines dynamic user profile form fields with the 
-			                    `COSINNUS_USERPROFILE_EXTRA_FIELDS` setting, you can to use
-			                    this block to define the detail view display of those feels, if wished.
-			                {% endcomment %}
-				            {% block portal_specific_userprofile_extra_fields %}
-				            {% endblock %}
-				            
-				            {% comment %}  
-				                For portals that have COSINNUS_MANAGED_TAGS_ENABLED enabled, show the tags here
-				            {% endcomment %}
-				            {% block managed_tag_userprofile_field %}
-				                {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED %}
-				                    {% with managed_tags=profile.get_managed_tags %}
-				                        {% if managed_tags %}
-						                    <legend>{{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_NAME }}</legend>
-								            {% for tag in managed_tags %}
-							                    {% include 'cosinnus/fields/managed_tag_field_readonly.html' with tag=tag visible=True %}
-							                {% endfor %}
-							            {% endif %}
-							        {% endwith %}
-					            {% endif %}
-                            {% endblock %}
-				            
-				            {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
-			            {% endblock userprofile_content %}
-			        </div><!-- content-box -->
-			    </div><!-- column -->
-			
-			    <div class="col-md-6 col-lg-4 large-space">
-			
-			        <div type="button" class="btn btn-emphasized btn-headline btn-no-interact fine-space">
-			            <ul class="media-list">
-			                <li class="media">
-			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-			                    <a class="pull-left" href="#">
-			                        <i class="fa fa-sitemap"></i>
-			                    </a>
-			                    <div class="media-body">
-			                        {% trans "My Groups" %}
-			                    </div>
-			                </li>
-			            </ul>
-			        </div><!-- btn -->
-			        
-			        {% with groups=profile.cosinnus_societies %}
-				        {% for group in groups %}
-				        	{% if not SETTINGS.COSINNUS_USE_V2_DASHBOARD or not group.slug in SETTINGS.NEWW_DEFAULT_USER_GROUPS %}
-					            <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
-					                <ul class="media-list">
-					                    <li class="media">
-					                        <a class="pull-left">
-					                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-					                        </a>
-					                        <div class="media-body">
-					                            {{ group.name }}
-					                        </div>
-					                    </li>
-					                </ul>
-					            </button>
-				            {% endif %}
-				        {% endfor %}
-			        {% endwith %}
-			
-			        {% comment %} Mehr button is hidden till we can load more results  
-			        <button type="button" class="btn btn-emphasized large-space">
-			            <ul class="media-list">
-			                <li class="media">
-			                    <a class="pull-left" href="#"></a>
-			                    <a class="pull-right btn-extra-emphasized" href="#">
-			                        <i class="fa fa-chevron-right "></i>
-			                    </a>
-			                    <div class="media-body">
-			                        <a href="#">
-			                            {% trans "More" %}
-			                        </a>
-			                    </div>
-			                </li>
-			            </ul>
-			        </button>
-			         {% endcomment %}
-			
-			
-			    </div><!-- column -->
-			    
-			    <div class="col-md-6 col-lg-4 large-space">
-            
-                    <div type="button" class="btn btn-emphasized btn-headline btn-no-interact fine-space">
+	<div class="row large-space">
+	    <div class="col-sm-3 large-space">
+	        {% include "cosinnus/user/user_avatar_image.html" with user=this_user extra_classes="w100" image_size="large" %}
+	    </div>
+	    <div class="col-sm-9 bottom-align large-space">
+			<legend class="large-space userprofile-title ">{{ this_user.cosinnus_profile.get_extended_full_name }}</legend>
+
+			{% block buttons %}
+			{% if not this_user == request.user %}
+			{% include 'cosinnus/common/likefollowstar/star_button_btn.html' with user=request.user object=this_user.cosinnus_profile %}
+			{% endif %}
+
+	        {% if request.user.is_authenticated and request.user == this_user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+	        	{# Buttons for my userprofile #}
+	        	
+                {% if SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+                	{# need this here because usually it shows in the profile form, but sso portals don't have that #}
+                    <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" href="{% url 'cosinnus:profile-delete' %}">
                         <ul class="media-list">
                             <li class="media">
-                                <a class="pull-left btn-extra-emphasized" href="#"></a>
                                 <a class="pull-left" href="#">
-                                    <i class="fa fa-users"></i>
+                                    <i class="fa fa-times"></i>
                                 </a>
                                 <div class="media-body">
-                                    {% trans "My Projects" %}
-                                </div>
-                            </li>
-                        </ul>
-                    </div><!-- btn -->
-                    
-                    {% with projects=profile.cosinnus_projects %}
-                        {% for group in projects %}
-                            <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
-                                <ul class="media-list">
-                                    <li class="media">
-                                        <a class="pull-left">
-                                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-                                        </a>
-                                        <div class="media-body">
-                                            {{ group.name }}
-                                        </div>
-                                    </li>
-                                </ul>
-                            </button>
-                        {% endfor %}
-                    {% endwith %}
-            
-                    {% comment %} Mehr button is hidden till we can load more results  
-                    <button type="button" class="btn btn-emphasized large-space">
-                        <ul class="media-list">
-                            <li class="media">
-                                <a class="pull-left" href="#"></a>
-                                <a class="pull-right btn-extra-emphasized" href="#">
-                                    <i class="fa fa-chevron-right "></i>
-                                </a>
-                                <div class="media-body">
-                                    <a href="#">
-                                        {% trans "More" %}
-                                    </a>
+                                    {% trans "Delete profile" %}
                                 </div>
                             </li>
                         </ul>
                     </button>
-                     {% endcomment %}
-            
-            
-                </div><!-- column -->
+                {% endif %}
+                
+	        {% else %}
+	        	{# Buttons for other users' profiles #}
+	        
+	            {% comment %} Abonnieren is out for now 
+	            <button type="button" class="btn btn-default">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="#">
+	                            <i class="fa fa-hand-o-right "></i>
+	                        </a>
+	                        <div class="media-body">
+	                            <!-- <a href="#"> -->
+	                                {% trans "Abonnieren" %}
+	                            <!-- </a> -->
+	                        </div>
+	                    </li>
+	                </ul>
+	            </button>
+	             {% endcomment %}
+	            {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+                {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+	            <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=this_user.username %}{% else %}{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}{% endif %}">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="#">
+	                            <i class="fa fa-envelope"></i>
+	                        </a>
+	                        <div class="media-body">
+	                            {% trans "Send Message" %}
+	                        </div>
+	                    </li>
+	                </ul>
+	            </button>
+	            {% endif %}
+                {% endif %}
+	            
+	            {% include 'cosinnus/feedback/report_button_btn.html' with object=this_user %}
+	            
+			{% endif %}
+			{% endblock %}
+	    </div>
+	
+	
+	</div><!-- row -->
+	
+	
+	<div class="row">
+	    <div class="col-md-6 col-lg-4 large-space">
+	
+			{% block left_column %}
+	        <div type="button" class="btn btn-emphasized btn-headline btn-no-interact">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+	                    <a class="pull-left" href="#">
+	                        <i class="fa fa-user"></i>
+	                    </a>
+	                    <div class="media-body">
+	                        {% trans "About me" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </div><!-- btn -->
+	        <div class="content-box large-space">
+	        	{% block userprofile_content %}
+		            <div class="textfield transparent">
+			            {% if profile.description %} 
+			                {{ profile.description|textfield }}
+			            {% else %}
+                            <i>{% trans "No Description set" %}</i>
+			            {% endif %}
+		            </div>
+		            
+		            
+					{% if SETTINGS.COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD %}
+						<legend>{% trans "Cooperation requests" %}</legend>
+			            <p class="transparent">
+			            	{% if profile.may_be_contacted %}
+			            		<i class="fa fa-fw fa-commenting-o"></i> {% trans "I am open to be contacted about potential collaboration opportunities!" %}
+			            	{% else %}
+			            		<i class="fa fa-fw fa-ban"></i> {% trans "I do NOT wish to be contacted for potential collaboration!" %}
+			            	{% endif %}
+			            </p>
+					{% endif %}
+			            
+		            
+		            {% if profile.website %}
+			            <legend>{% trans "My Website" %}</legend>
+			            <p class="transparent">
+			                <i class="fa fa-globe"></i> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
+			            </p>
+		            {% endif %}
+		            
+	                {% comment %} 
+	                    If a portal defines dynamic user profile form fields with the 
+	                    `COSINNUS_USERPROFILE_EXTRA_FIELDS` setting, you can to use
+	                    this block to define the detail view display of those feels, if wished.
+	                {% endcomment %}
+					{% block portal_specific_userprofile_extra_fields %}
+		            {% endblock %}
+		            
+		            {% comment %}  
+		                For portals that have COSINNUS_MANAGED_TAGS_ENABLED enabled, show the tags here
+		            {% endcomment %}
+		            {% block managed_tag_userprofile_field %}
+		                {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED %}
+		                    {% with managed_tags=profile.get_managed_tags %}
+		                        {% if managed_tags %}
+				                    <legend>{{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_NAME }}</legend>
+						            {% for tag in managed_tags %}
+					                    {% include 'cosinnus/fields/managed_tag_field_readonly.html' with tag=tag visible=True %}
+					                {% endfor %}
+					            {% endif %}
+					        {% endwith %}
+			            {% endif %}
+                    {% endblock %}
+		            
+		            {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
+	            {% endblock userprofile_content %}
+			</div><!-- content-box -->
+			{% endblock %}
+	    </div><!-- column -->
+	
+	    <div class="col-md-6 col-lg-4 large-space">
+			{% block middle_column %}
+		        {% include 'cosinnus/user/userprofile_detail_groups_widget.html' %}
+			{% endblock %}
+	    </div><!-- column -->
+	    
+	    <div class="col-md-6 col-lg-4 large-space">
+			{% block right_column %}
+                {% include 'cosinnus/user/userprofile_detail_projects_widget.html' %}
+			{% endblock %}
+        </div><!-- column -->
+	
+	</div><!-- row -->
 			
-			    {% comment %} My Network widget deactivated instead of placeholder 
-			    <div class="col-md-6 col-lg-4">
-			
-			        <div type="button" class="btn btn-emphasized btn-headline btn-no-interact fine-space">
-			            <ul class="media-list">
-			                <li class="media">
-			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-			                    <a class="pull-left" href="#">
-			                        <i class="fa fa-th"></i>
-			                    </a>
-			                    <div class="media-body">
-			                        {% trans "My Network" %}
-			                    </div>
-			                </li>
-			            </ul>
-			        </div><!-- btn -->
-			
-			        <table>
-			            <tr>
-			                <td><a href="#"><img src="{% static 'images/feature-placeholder.png' %}" class="w100" /></a></td>
-			            </tr>
-			        </table>
-			
-			    </div><!-- column -->
-			    {% endcomment %}
-			
-			</div><!-- row -->
-			
-        </div><!-- col -->
-    </div><!-- row -->
-
   
-{% endblock main_page %}
+{% endblock content %}
   
 
 {% block extrafooter %}

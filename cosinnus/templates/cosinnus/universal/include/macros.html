@@ -1,4 +1,4 @@
-{% macro typeLabel(type, classes="", singular=0, button=0, useStyles=1, colon=0, showIcon=1, mine=false, all=false, create=false) %}
+{% macro typeLabel(type, classes="", singular=0, button=0, useStyles=1, colon=0, showIcon=1, mine=false, all=false, create=false, COSINNUS_TRANS={}) %}
     <span class="{% if useStyles == 1 %}result-type-span {% if button %}button{% else %}apply{% endif %}-color-{{ type }}{% endif %} {{ classes }}">
         {% if mine %}
             {% if type == "people" %}
@@ -17,6 +17,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "My Groups" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "conferences" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_MY_CONFERENCES }}{% if colon == 1 %}:{% endif %}
             {% elif type == "ideas" %}
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -25,6 +28,10 @@
                 {% if showIcon == 1 %}<i class="fa fa-building"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "My Organizations" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "cloudfiles" %}
+                {% if showIcon == 1 %}<i class="fa fa-cloud"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "My Cloud Files" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% elif all %}
             {% if type == "people" %}
@@ -43,6 +50,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "All Groups" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "conferences" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_ALL_CONFERENCES }}{% if colon == 1 %}:{% endif %}
             {% elif type == "ideas" %}
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -51,6 +61,10 @@
                 {% if showIcon == 1 %}<i class="fa fa-building"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "All Organizations" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "cloudfiles" %}
+                {% if showIcon == 1 %}<i class="fa fa-cloud"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Cloud Files" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% elif singular %}
             {% if type == "people" %}
@@ -69,6 +83,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Group" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "conferences" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_CONFERENCE }}{% if colon == 1 %}:{% endif %}
             {% elif type == "ideas" %}
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -77,6 +94,10 @@
                 {% if showIcon == 1 %}<i class="fa fa-building"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Organization" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "cloudfiles" %}
+                {% if showIcon == 1 %}<i class="fa fa-cloud"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Cloud File" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% elif create %}
             {% if type == "people" %}
@@ -95,6 +116,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Create Group" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "conferences" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_CREATE_CONFERENCE }}{% if colon == 1 %}:{% endif %}
             {% elif type == "ideas" %}
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -121,6 +145,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Groups" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "conferences" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_CONFERENCE }}{% if colon == 1 %}:{% endif %}
             {% elif type == "ideas" %}
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -129,6 +156,10 @@
                 {% if showIcon == 1 %}<i class="fa fa-building"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Organizations" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "cloudfiles" %}
+                {% if showIcon == 1 %}<i class="fa fa-cloud"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Cloud Files" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% endif %}
     </span>
@@ -231,5 +262,67 @@
     		{% endif %}
 		</a>
 	</li>
+{% endmacro %}
+
+{% macro starredlistItem(item, makeSafe=true) %}
+<li>
+    <a class="list-item" href="{{ item.url }}" titledby=".item-text">
+        <div class="item-icon">
+            {% if item.icon and '/' in item.icon %}
+                <img src="{{ item.icon }}"></img>
+            {% else %}
+                <i class="fas fa-fw {{ item.icon }}"></i>
+            {% endif %}
+        </div>
+        <div class="item-text">
+            {% if makeSafe %}
+                {{ item.text|safe }}
+            {% else %}
+                {{ item.text }} 
+            {% endif %}
+        </div>
+        <div class="right-side-annotation right-side-action truncated-oneline">
+            <div class="likefollowstar-button action-do-likefollowstar likefollowstar-button-simple selected" data-type="star" data-ct="{{ item.ct }}" data-id="{{ item.id }}">
+                <span class="show-unselected">
+                    <i class="far fa-star prevent-click"></i>
+                </span>
+                <span class="show-selected">
+                    <i class="fas fa-star prevent-click"></i>
+                </span>
+            </div>
+        </div>
+    </a>
+</li>
+{% endmacro %}
+
+{% macro followedlistItem(item, makeSafe=true) %}
+<li>
+    <a class="list-item" href="{{ item.url }}" titledby=".item-text">
+        <div class="item-icon">
+            {% if item.icon and '/' in item.icon %}
+                <img src="{{ item.icon }}"></img>
+            {% else %}
+                <i class="fas fa-fw {{ item.icon }}"></i>
+            {% endif %}
+        </div>
+        <div class="item-text">
+            {% if makeSafe %}
+                {{ item.text|safe }}
+            {% else %}
+                {{ item.text }} 
+            {% endif %}
+        </div>
+        <div class="right-side-annotation right-side-action truncated-oneline">
+            <div class="likefollowstar-button action-do-likefollowstar likefollowstar-button-simple selected" data-type="follow" data-ct="{{ item.ct }}" data-id="{{ item.id }}">
+                <span class="show-unselected">
+                    <i class="far fa-bell prevent-click"></i>
+                </span>
+                <span class="show-selected">
+                    <i class="fas fa-bell prevent-click"></i>
+                </span>
+            </div>
+        </div>
+    </a>
+</li>
 {% endmacro %}
 

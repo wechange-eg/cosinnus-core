@@ -1,0 +1,30 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n bootstrap3 cosinnus_tags djajax_tags %}
+{% load static from staticfiles %}
+
+{% block page_title %}{{ group.name }}{% endblock page_title %}
+
+{% block extrahead %}
+  <link href="{% static "css/cosinnus.dashboard.css" %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block og_meta_attributes %}
+	{% include 'cosinnus/group/group_og_meta_attributes.html' with group=group %}
+{% endblock og_meta_attributes %}
+
+{% block container_classes %}conference{% endblock container_classes %}
+
+{% block main_page %}
+    <div id="app">
+        <!-- React will load here -->
+    </div>
+{% endblock main_page %}
+
+{% block extrafooter %}
+    {{ block.super }}
+    <script type="text/javascript">
+	    window.conferenceId = {{ group.id }};
+	    window.conferenceRoomId = {% if room %}{{ room.id }}{% else %}null{% endif %};
+    </script>
+    <script src="{% static "conference/main.js" %}?v=1.5"></script>
+{% endblock %}

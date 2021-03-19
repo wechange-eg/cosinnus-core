@@ -10,6 +10,12 @@ from cosinnus_event.models import ConferenceEvent
 # FIXME: Make this pagination class default in REST_FRAMEWORK setting
 from rest_framework.decorators import action
 from cosinnus.utils.permissions import check_user_superuser
+from cosinnus.models.group_extra import CosinnusConference
+from cosinnus.api.views import CosinnusFilterQuerySetMixin,\
+    PublicCosinnusGroupFilterMixin, CosinnusPaginateMixin
+from copy import copy
+from django.utils.timezone import now
+from django.db.models import Q
 
 
 class DefaultPageNumberPagination(pagination.PageNumberPagination):
@@ -34,15 +40,30 @@ class RequireEventReadMixin(object):
         queryset = self.queryset
         if not check_user_superuser(self.request.user):
             user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(self.request.user)
-            queryset = queryset.filter(room__group__id__in=user_group_ids)
+            queryset = queryset.filter(room__group__id__in=user_group_ids, room__is_visible=True)
         return queryset
 
 
-class ConferenceViewSet(RequireGroupReadMixin,
-                        viewsets.ReadOnlyModelViewSet):
-    queryset = get_cosinnus_group_model().objects.filter(is_conference=True, is_active=True)
+class BaseConferenceViewSet(CosinnusFilterQuerySetMixin, viewsets.ReadOnlyModelViewSet):
+    queryset = CosinnusConference.objects.filter(is_active=True)
     serializer_class = ConferenceSerializer
-    pagination_class = DefaultPageNumberPagination
+    
+    FILTER_CONDITION_MAP = copy(CosinnusFilterQuerySetMixin.FILTER_CONDITION_MAP)
+    FILTER_CONDITION_MAP.update({
+        'upcoming': {
+            'true': [Q(to_date__gte=now())]
+        }
+    })
+    FILTER_DEFAULT_ORDER = ['from_date', ]
+    
+
+class PublicConferenceViewSet(CosinnusPaginateMixin, PublicCosinnusGroupFilterMixin,
+                             BaseConferenceViewSet):
+    
+    pass
+        
+
+class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
 
     @action(detail=True, methods=['get'])
     def events(self, request, pk=None):
@@ -51,7 +72,9 @@ class ConferenceViewSet(RequireGroupReadMixin,
         if room_id:
             queryset = queryset.filter(room=room_id)
         else:
-            queryset = queryset.filter(room__group=pk).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
+            queryset = queryset.filter(room__group=pk)\
+                .exclude(type__in=ConferenceEvent.TIMELESS_TYPES)\
+                .filter(room__is_visible=True)
         queryset = queryset.order_by('from_date', 'title')
         page = self.paginate_queryset(queryset)
         serializer = ConferenceEventSerializer(page, many=True, context={"request": request})
@@ -59,7 +82,7 @@ class ConferenceViewSet(RequireGroupReadMixin,
 
     @action(detail=True, methods=['get'])
     def participants(self, request, pk=None):
-        queryset = self.get_object().users.filter(is_active=True).order_by('first_name', 'last_name')
+        queryset = self.get_object().actual_members.order_by('first_name', 'last_name')
         page = self.paginate_queryset(queryset)
         serializer = ConferenceParticipantSerializer(page, many=True, context={"request": request})
         return self.get_paginated_response(serializer.data)

@@ -286,7 +286,8 @@
 		background-color: @background-color-secondary;
 		
 		.main-menu-links {
-			line-height: 18px;
+		    font-size: 14px;
+			line-height: 20px;
 			padding: 0 20px 10px 20px;
 			div {
 				margin-bottom: 10px;
@@ -437,6 +438,9 @@
 		}
 	}
 	
+	body:not(.mobile-triple-dots-active) .mobile-triple-dots-only {
+	    display: none;
+	}
 	body.mobile-triple-dots-active {
 		&:not(.v2-dashboard-body) {
 			padding-top: 120px;
@@ -459,14 +463,22 @@
 				    top: 100px;
 				}
 			}
-			.brand-links {
-				float: left;
-				max-width: 80%;
-				overflow:hidden;
-				&.brand-links-full-width {
-				    width: 100%;
-				} 
-			}
+			/** The brand links drop over the nav menu to have enough space, one link per line */
+            .brand-links.mobile-only {
+                position: absolute;
+                top: 100px;
+                white-space: normal;
+                background: @background-color-secondary;
+                width: 100%;
+                max-width: 100%;
+                border-bottom: 1px solid @border-color;
+                
+                a {
+                    display: block;
+                    padding-top: 0;
+                    padding-bottom: 0;
+                }
+            }
 			.nav-flyout, 
 			.nav-flyout-backdrop,
 			.nav-search-backdrop {

@@ -1,0 +1,78 @@
+{% load i18n cosinnus_tags %}
+
+
+{% comment %}  
+    This enables "directly" liking or following an object by passing like=1 or follow=1 and ct= and id= 
+    as URL parameters. This checks if a clickable like/follow button for the given object exists,
+    and if so, shows a popup on page load that asks for confirmation, then fires the like/follow action on OK click.
+    The popup will not show if the object already has been liked/followed by the user.
+{% endcomment %}
+
+{% if user|can_likefollowstar:object %}
+	{% if request.GET.like == "1" or request.GET.follow == "1" %}
+	    {% if request.GET.ct and request.GET.id %} 
+	        <script type="text/javascript">
+	            $(function(){
+	                var type = "{% if request.GET.like == "1" %}like{% elif request.GET.follow == "1" %}follow{% endif %}";
+	                var button= $('.likefollowstar-button.'+type+'-button.action-do-likefollowstar[data-ct="{{ request.GET.ct }}"][data-id="{{ request.GET.id }}"]')
+	                if(button.length > 0 && !button.hasClass('selected')) {
+	                    $('#confirm_likefollowstar_modal_submit_btn').unbind().click(function(){
+	                        button.click();
+	                        $('#confirm_likefollowstar_modal').modal('hide');
+	                    });
+	                    $('#confirm_likefollowstar_modal').modal('show');
+	                }
+	            });
+	        </script>
+	    {% endif %}
+	{% endif %}
+	
+	<!-- Modal -->
+	<div class="modal fade" id="confirm_likefollowstar_modal" tabindex="1" role="dialog" aria-labelledby="confirm_likefollow_modal_Label" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+	                    <i class="fa fa-times"></i>
+	                </button>
+	                <h4 class="modal-title" id="confirm_likefollowstar_modal_Label">
+	                    {% if request.GET.like %}
+	                        <i class="fa fa-heart"></i>
+	                        {% trans "I want to like this" %}:
+	                    {% else %}
+	                        <i class="fa fa-bell"></i>
+	                        {% trans "I want to follow this" %}:
+	                    {% endif %}
+	                </h4>
+	            </div>
+	            <div class="modal-footer no-border">
+	                <button id="confirm_likefollowstar_modal_submit_btn" type="button" class="btn btn-emphasized">
+	                    <ul class="media-list">
+	                        <li class="media">
+	                            <a class="pull-left" href="#">
+	                                <i class="fa {% if request.GET.like %}fa-heart{% else %}fa-bell{% endif %}"></i>
+	                            </a>
+	                            <div class="media-body">
+	                                {% trans "Yes" %}
+	                            </div>
+	                        </li>
+	                    </ul>
+	                </button>
+	                <button type="button" class="btn btn-emphasized" data-dismiss="modal">
+	                    <ul class="media-list">
+	                        <li class="media">
+	                            <a class="pull-left" href="#">
+	                                <i class="fa fa-times"></i>
+	                            </a>
+	                            <div class="media-body">
+	                                {% trans "Cancel" %}
+	                            </div>
+	                        </li>
+	                    </ul>
+	                </button>
+	                
+	            </div>
+	        </div>
+	    </div>
+	</div><!-- modal -->
+{% endif %}

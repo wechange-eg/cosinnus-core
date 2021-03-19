@@ -5,7 +5,7 @@ import {FormattedMessage} from "react-intl"
 
 import {Event} from "../../../stores/events/models"
 import {useStyles} from "./style"
-import {ManageEventIcons} from "../ManageEventIcons"
+import {EventIcons} from "../EventIcons"
 
 export interface CoffeeTableProps {
   event: Event
@@ -50,7 +50,7 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
           <CardMedia
             component="img"
             alt={event.props.title}
-            height="100"
+            height="auto"
             image={event.props.imageUrl}
             title={event.props.title}
           />
@@ -60,6 +60,9 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
           ))}
           </Grid>
           */}
+          {/*
+          Put this back in to show "8 places left" for coffee tables.
+          For now, we only show the active participants, like in workshops
           {participantsCount !== undefined && (
             (availablePlaces === null && (
               <Typography component="p">
@@ -72,7 +75,11 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
               </Typography>
             )
           )}
-          <ManageEventIcons event={event} />
+          */}
+          <Typography component="p">
+            {participantsCount} <FormattedMessage id="participants" />
+          </Typography>
+          <EventIcons event={event} />
         </CardContent>
       </CardActionArea>
     </Card>

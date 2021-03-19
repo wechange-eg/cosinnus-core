@@ -1,0 +1,167 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% if form.information %}
+        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.information.id_for_label %}
+    {% endif %}
+{% endblock %}
+
+{% block leftnav %}{% endblock %}
+
+{% block page_title %}{% trans "Application" %} - {{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">{% trans "Application" %} - {{ group.name }}</li>
+{% endblock %}
+
+{% block content %}
+	{% if applications_are_active %}
+	    {% if form.errors %}
+	        <div class="alert alert-danger alert-dismissable">
+	            <i class="fa fa-exclamation-triangle fa-3x"></i>
+	            <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+	            {{ form.errors }}
+	        </div>
+	    {% endif %}
+	
+		<form method="POST" action="" class="cosinnus-form">
+		    {% csrf_token %}
+		    {{ form.media }}
+		    {{ form.non_field_errors }}
+		    {{ priority_formset.management_form }}
+		    {{ priority_formset.non_form_errors }}
+		    <div class="content-box">
+                {% if not form.options and priority_formset.forms|length_is:0 and not form.conditions_accepted %}
+                    <h2>{% trans 'Apply for participation in' %} <i>{{ group.name }}</i></h2>
+                {% else %}
+                    <h2>{% trans 'Edit your application for' %} <i>{{ group.name }}</i></h2>
+                {% endif %}
+                
+                <div class="textfield transparent">
+                    <p>
+                        {% trans "Please fill out the fields below to submit your application. Be aware that the organizers may take your profile into consideration when processing your application, so make sure that your profile page is well maintained. You can view and edit your profile page here:" %}
+                        <a href="{% url 'cosinnus:profile-detail' %}" target="_blank">
+			                {% trans "Your profile" %}
+			            </a>
+                    </p>
+                    <p class="ultra-space">
+                        {% trans "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!" %}
+                    </p>
+                </div>
+                <div class="large-space"></div>
+		        
+		        {% if form.information %}
+			        {% trans "Please provide your motivation for applying" as information_label %}
+	                {% trans "Describe why you wish to participate" as information_placeholder %}
+			        {% include 'cosinnus/fields/default_field.html' with field=form.information label=information_label placeholder=information_placeholder large_field=True %}
+			    {% endif %}
+			    
+			    {% if form.contact_email or form.contact_phone %}
+                    <h3>{% trans "Optional contact information" %}</h3>                    
+                    <p class="textfield transparent">
+                        {% trans "We recommend you to provide at least one contact option for the organizers to contact you directly. This information can be seen by all organizers of the conference." %}
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+		                    {% trans "Contact E-Mail Address" as email_label %}
+                            {% trans "Contact E-Mail Address" as email_placeholder %}
+		                    {% include 'cosinnus/fields/default_field.html' with field=form.contact_email label=email_label placeholder=email_placeholder %}
+                        </div>
+                        <div class="col-md-6">
+                            {% trans "Contact Phone Number" as phone_label %}
+                            {% trans "Contact Phone Number" as phone_placeholder %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.contact_phone label=phone_label placeholder=phone_placeholder %}
+                        </div>
+                    </div>
+                {% endif %}
+		
+		        {% if priority_formset.forms %}
+			        <table class="table table-striped white-content priority-form">
+			            <thead>
+			                <tr>
+			                    <th>{% trans "Workshop" %}</th>
+			                    {% for value, text in priority_formset.0.priority.field.widget.choices %}
+			                        <th>{{ text }}</th>
+			                    {% endfor %}
+			                </tr>
+			            </thead>
+			
+			        {% for form in priority_formset %}
+				        {{ form.event_id }}
+				        <tr>
+				            <td>{{ form.event_name.value }}</td>
+				            {{ form.priority }}
+				        </tr>
+				
+			        {% endfor %}
+			        </table>
+		        {% endif %}
+		        
+                {% if form.options %}
+                    {% trans "My individual needs" as options_label %}
+                    {% trans "(no options chosen)" as options_placeholder %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.options label=options_label placeholder=options_placeholder large_field=True %}
+                {% endif %}
+		
+		        {% if form.conditions_accepted %}
+		            <h3>{% trans "Application conditions" %}</h3>
+					<div class="large-space textfield transparent">
+					    {% if participation_management and participation_management.application_conditions %}
+    						{{ participation_management.application_conditions|textfield }}
+						{% endif %}
+						{% if participation_management and participation_management.application_conditions_upload %}
+							<p>
+								<a href="{{ participation_management.application_conditions_upload.url }}" target="_blank">
+									<i class="fas fa-download"></i>
+									{% trans 'Download the conditions' %}
+								</a>
+							</p>
+						{% endif %}
+					</div>
+					{% trans "I accept the conditions in order to submit my application" as conditions_checkbox_label %}
+			        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_checkbox_label legend=legend checkbox_label=conditions_checkbox_label %}
+		        {% endif %}
+		        
+		        <div class="ultra-space"> </div>
+		        {% if participation_management %}
+                    {% include 'cosinnus/fields/mandatory_field_legend.html' with no_spacer=True %}
+                {% endif %}
+		    </div>
+		
+		    <button type="submit" class="btn btn-emphasized btn-autosize">
+		        <ul class="media-list">
+		            <li class="media">
+		                <a class="pull-left" href="#">
+		                    <i class="fa fa-check"></i>
+		                </a>
+		                <div class="media-body">
+		                    {% if form.instance.id %}
+		                        {% trans "Save changes" %}
+		                    {% else %}
+		                        {% trans "Apply for conference participation" %}
+		                    {% endif %}
+		                </div>
+		            </li>
+		        </ul>
+		    </button>
+		
+		    {% if form.instance.id %}
+			    <button type="submit" name="withdraw" class="btn btn-emphasized">
+			        <ul class="media-list">
+			            <li class="media">
+			                <a class="pull-left" href="#">
+			                    <i class="fa fa-trash"></i>
+			                </a>
+			                <div class="media-body">
+			                    {% trans "Withdraw" %}
+			                </div>
+			            </li>
+			        </ul>
+			    </button>
+		    {% endif %}
+		</form>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% load i18n %}
+
+
+<div type="button" class="btn w100 btn-{% if current_page == "import" %}extra-{% endif %}emphasized regular-space" href="{% url 'cosinnus:administration-user-import' %}">
+    <ul class="media-list">
+        <li class="media">
+           <a class="pull-left">
+                <i class="fa fa-upload"></i>
+            </a>
+            <div class="media-body">
+                {% trans "User Import" %}
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+<div type="button" class="btn w100 btn-{% if current_page == "archive" %}extra-{% endif %}emphasized regular-space" href="{% url 'cosinnus:administration-archived-user-import-list' %}">
+    <ul class="media-list">
+        <li class="media">
+           <a class="pull-left">
+                <i class="fa fa-archive"></i>
+            </a>
+            <div class="media-body">
+                {% trans "User Import Archive" %}
+            </div>
+        </li>
+    </ul>
+</div>

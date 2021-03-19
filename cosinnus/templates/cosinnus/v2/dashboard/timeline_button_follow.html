@@ -9,15 +9,15 @@
 {% endcomment %}
 
 <div class="action-button-wrapper">
-	<a class="action-button action-button-toggleable likefollow-button follow-button {% if user|can_likefollow:item %}action-do-likefollow{% endif %} {% if user.id in item.get_followed_user_ids %}selected{% endif %}" 
+	<a class="action-button action-button-toggleable likefollowstar-button follow-button {% if user|can_likefollowstar:item %}action-do-likefollowstar{% endif %} {% if user.id in item.get_followed_user_ids %}selected{% endif %}" 
 	        data-type="follow" data-ct="{{ item.get_content_type }}" data-id="{{ item.id }}"
-	        {% if not user|can_likefollow:item %}href="{% url 'login' %}?next={{ item.get_absolute_follow_url|urlencode }}"{% endif %}>
+	        {% if not user|can_likefollowstar:item %}href="{% url 'login' %}?next={{ item.get_absolute_follow_url|urlencode }}"{% endif %}>
 	    <span class="show-unselected">
 	        {% comment %}  
 	            No counter in follow buttons!
 		        {% if user.id in item.get_followed_user_ids %}{{ item.follow_count|subtract:1 }}{% else %}{{ item.follow_count }}{% endif %}
 	        {% endcomment %}
-	        <i class="fa fa-bell"></i>
+	        <i class="far fa-bell"></i>
 	        {% trans "Follow" %}
 	    </span>
 	    <span class="show-selected">
@@ -25,11 +25,11 @@
 	            No counter in follow buttons!
 		        {% if user.id in item.get_followed_user_ids %}{{ item.follow_count }}{% else %}{{ item.follow_count|add:1 }}{% endif %}
 	        {% endcomment %}
-	        <i class="fa fa-bell"></i>
+	        <i class="fas fa-bell"></i>
 	        {% trans "Following" %}
 	    </span>
 	</a>
-	<div class="likefollow-button-success-message arrow-box no-select" style="display:none;">
+	<div class="likefollowstar-button-success-message arrow-box no-select" style="display:none;">
 	    {% if success_message %}
 	        {{ success_message }}
 	    {% else %}

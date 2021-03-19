@@ -1,0 +1,154 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% if form.information_field_initial_text %}
+        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.information_field_initial_text.id_for_label %}
+    {% endif %}
+{% endblock %}
+
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">{% trans "Edit Conditions of Participation" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_group.html" with current_page="conference_participation_manangement" object=group %}
+{% endblock leftnav %}
+
+{% block content %}
+    <form method="POST" action="" enctype="multipart/form-data" class="cosinnus-form" >
+        {% csrf_token %}
+        {{ form.media }}
+	    {{ form.non_field_errors }}
+	    {{ form.non_field_errors }}
+
+        <div class="content-box">
+            <h2>{% trans "Edit Conditions of Participation" %}</h2>  
+            
+            <div class='form-info textfield transparent'>
+                {% trans "Manage Participation Applications" as application_management_label %}
+                <p>
+                    {% trans "Here you can configure the application form that participants have to fill out in order to apply." %}
+                    {% blocktrans %}You and all other organizers can process the applications in the "{{ application_management_label }}" section. You can do this even while applications are still open.{% endblocktrans %}
+                </p>
+                {% if not SETTINGS.COSINNUS_CONFERENCE_USE_PARTICIPATION_FIELD_HIDDEN %}
+	                <p>
+		                {% trans 'Application method' as application_setting_label %}
+	                    {% blocktrans %} If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting "{{ application_setting_label }}" in the conference settings.{% endblocktrans %}
+	                </p>
+                {% endif %}
+            </div>
+            <div class="ultra-space"></div>
+            
+            {% trans "Application period" as date_label %}
+            {% captureas date_html %}
+                {{ form.application_start.errors }}
+                {{ form.application_end.errors }}
+                <ol class="input-area">
+
+                    <!-- application start date -->
+                    <li class="calendar-date-time-chooser">
+                        {% trans "From" %} <i class="fa fa-calendar"></i>
+                        <input
+                            placeholder="{% trans "Date" %}"
+                            readonly ="readonly"
+                            class="calendar-date-time-chooser-date" />
+                        <input class="calendar-date-time-chooser-hiddendate" id="id_application_start_0" name="application_start_0"
+                            placeholder="{% trans "Start date." %}" type="hidden" value="{{ form.application_start.value|date:"Y-m-d" }}" "
+                        >
+                        <input class="calendar-date-time-chooser-time" id="id_application_start_1" name="application_start_1"
+                            placeholder="00:00" type="text"
+                            value="{{ form.application_start.value|date:"H:i" }}"
+                        >
+                        <div class="small-calendar"></div>
+                    </li>
+
+                    <!-- application end date -->
+                    <li class="calendar-date-time-chooser">
+                        {% trans "Until" %} <i class="fa fa-calendar"></i>
+                        <input
+                            placeholder="{% trans "Date" %}"
+                            readonly ="readonly"
+                            class="calendar-date-time-chooser-date" />
+                        <input class="calendar-date-time-chooser-hiddendate" id="id_application_end_0" name="application_end_0"
+                            placeholder="{% trans "End date." %}" type="hidden" value="{{ form.application_end.value|date:"Y-m-d" }}"
+                        >
+                        <input class="calendar-date-time-chooser-time" id="id_application_end_1" name="application_end_1"
+                            placeholder="00:00" type="text"
+                            value="{{ form.application_end.value|date:"H:i" }}"
+                        >
+                        <div class="small-calendar"></div>
+                    </li>
+                </ol>
+            {% endcaptureas %}
+            {% trans "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications." as date_legend %}
+            {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label legend=date_legend large_field=True %}
+            
+            {% trans "Maximal Number of participants" as limits_label %}
+            {% trans "This is not an enforced limit and serves only as a display for guests." as limits_legend %}
+            {% trans "(no limit selected)" as limits_placeholder %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.participants_limit label=limits_label legend=limits_legend placeholder=limits_placeholder large_field=True %}
+            
+            <div class="regular-space"></div>
+            {% trans "Require applicants to submit a text about their motivation for applying" as information_checkbox_label %}
+            {% include 'cosinnus/fields/checkbox_field.html' with field=form.information_field_enabled label=information_checkbox_label checkbox_label=information_checkbox_label %}
+            
+            {% captureas infotemplate_legend %}
+                {% trans "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer." %}
+                {% blocktrans with other_option=information_checkbox_label %}Only applicable if "{{ other_option }}" is enabled.{% endblocktrans %}
+            {% endcaptureas %}
+            {% trans "Enter text to pre-fill or leave empty" as infotemplate_placeholder %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.information_field_initial_text legend=infotemplate_legend placeholder=infotemplate_placeholder large_field=True %}
+        
+            {% if form.application_options %}
+                {% trans "Options for participation" as options_label %}
+                {% trans "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application." as options_legend %}
+                {% trans "(no options chosen)" as options_placeholder %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.application_options label=options_label legend=options_legend placeholder=options_placeholder large_field=True %}
+            {% endif %}
+            
+            {% trans "Workshop selection: Enable applicants to choose preferred workshops to attend" as priority_checkbox_label %}
+            {% include 'cosinnus/fields/checkbox_field.html' with field=form.priority_choice_enabled label=priority_checkbox_label checkbox_label=priority_checkbox_label %}
+            
+            <div class="regular-space"></div>
+            <div class="cosinnus-field ">
+                <label>{% trans 'Conditions for participation' %}</label>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    {% trans "If set, applicants will have to agree to these conditions by checking a checkbox" as conditions_legend %}
+                    {% trans "(no conditions selected)" as conditions_placeholder %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.application_conditions legend=conditions_legend placeholder=conditions_placeholder large_field=True %}
+                </div>
+                <div class="col-md-6">
+                    <div class="cosinnus-field ">
+                        <div class="field-description">
+                            {% trans 'If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox' %}
+                        </div>
+                    </div>
+                    {{ form.application_conditions_upload }}
+                </div>
+            </div>
+            
+
+        </div>
+        <button type="submit" class="btn btn-emphasized">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-check"></i>
+	                </a>
+	                <div class="media-body">
+                        {% trans "Save" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    </form>
+{% endblock %}

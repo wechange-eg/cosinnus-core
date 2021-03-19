@@ -1,0 +1,83 @@
+.priority-form {
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+}
+
+.conference-collapse-link {
+    &, &:hover {
+        color: @app-main-color-dark;
+        cursor: pointer;
+    }
+}
+
+.application-form {
+    .application {
+        padding: 0 15px;
+        margin-bottom: 8px;
+        
+        .application-row {
+            padding: 5px 15px 0 15px;
+            &.first {
+                padding: 20px 15px 15px 15px;
+            }
+        }
+        .application-details {
+            line-height: 18px;
+        }
+        .application-toggle-button {
+            position: absolute;
+            right: 1px;
+            top: 1px;
+            padding: 5px;
+            z-index: 1;
+            cursor: pointer;
+            color: @text-color;
+            text-decoration: none;
+        }
+        
+        .radio-group {
+            margin-right: 20px;
+        }
+        .application-radio-option {
+            white-space: nowrap;
+            &:not(:last-child) {
+                margin-right: 18px;
+            }
+            &, & label, & input {
+                color: @app-main-color-dark;
+                cursor: pointer;
+            }
+            & label, & i {
+                padding-left: 5px;
+            }
+            input:checked + label {
+                font-weight: bold;
+            }
+        }
+        
+        .cosinnus-field {
+            border: 1px solid @color-medium-gray;
+        }
+        
+        .toggle-button-state {
+            display: none;
+        }
+        .application-toggle-button.collapsed {
+            .toggle-button-state.show-collapsed {
+                display: inherit;
+            }
+        }
+        .application-toggle-button:not(.collapsed) {
+            .toggle-button-state.show-open {
+                display: inherit;
+            }
+        }
+        
+    }
+    
+}
+
+
