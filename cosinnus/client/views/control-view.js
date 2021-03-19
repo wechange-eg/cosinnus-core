@@ -1438,7 +1438,7 @@ module.exports = ContentControlView.extend({
         	this.options.showMine = util.ifundef(urlParams.mine, this.options.showMine);
         }
 
-        this.state.typeFiltersActive = Object.values(this.state.activeFilters).indexOf(true) > -1
+        this.state.typeFiltersActive = Object.values(this.state.activeFilters).indexOf(false) > -1
 
         if (this.options.showManagedTagsOnTypesSelected.length > 0) {
             var activeFilters = this.state.activeFilters
