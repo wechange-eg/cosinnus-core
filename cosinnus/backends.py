@@ -110,16 +110,17 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
         super(RobustElasticSearchBackend, self).__init__(connectionalias, **options)
 
     @mute_error
-    def update(self, indexer, iterable, commit=True):
-        super(RobustElasticSearchBackend, self).update(indexer, iterable, commit)
+    def update(self, *args, **kwargs):
+        super(RobustElasticSearchBackend, self).update(*args, **kwargs)
 
     @mute_error
-    def remove(self, obj, commit=True):
-        super(RobustElasticSearchBackend, self).remove(obj, commit)
+    def remove(self, *args, **kwargs):
+        super(RobustElasticSearchBackend, self).remove(*args, **kwargs)
 
     @mute_error
-    def clear(self, models=None, commit=True):
-        super(RobustElasticSearchBackend, self).clear(models, commit)
+    def clear(self, *args, **kwargs):
+        super(RobustElasticSearchBackend, self).clear(*args, **kwargs)
+
 
 class RobustElasticSearchEngine(ElasticsearchSearchEngine):
     backend = RobustElasticSearchBackend
