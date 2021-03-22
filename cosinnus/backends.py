@@ -118,7 +118,7 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
         super(RobustElasticSearchBackend, self).remove(obj, commit)
 
     @mute_error
-    def clear(self, models=[], commit=True):
+    def clear(self, models=None, commit=True):
         super(RobustElasticSearchBackend, self).clear(models, commit)
 
 class RobustElasticSearchEngine(ElasticsearchSearchEngine):
