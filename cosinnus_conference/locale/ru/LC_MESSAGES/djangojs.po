@@ -333,3 +333,11 @@ msgstr "Сегодня"
 
 msgid "Tomorrow"
 msgstr "Завтра"
+
+
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "Членство"
