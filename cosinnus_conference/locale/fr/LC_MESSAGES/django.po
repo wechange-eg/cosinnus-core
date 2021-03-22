@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-12 17:55+0100\n"
-"PO-Revision-Date: 2020-11-05 11:50+0100\n"
+"POT-Creation-Date: 2021-02-23 18:24+0100\n"
+"PO-Revision-Date: 2021-03-14 21:15+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -16,15 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.0.6\n"
-
-msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
-msgstr ""
-
-#, fuzzy
-#| msgid "Conferences"
-msgid "Conference Bookings"
-msgstr "Conférences"
+"X-Generator: Poedit 2.4.2\n"
 
 msgid "Conferences"
 msgstr "Conférences"
@@ -34,49 +26,44 @@ msgid "conference"
 msgstr "Conférence"
 
 msgid "End date must be before start date"
-msgstr ""
+msgstr "La date de fin doit être avant la date de début"
 
 msgid "Please also provide a start date"
-msgstr ""
+msgstr "Veuillez également fournir une date de début"
 
 msgid "Please also provide a end date"
-msgstr ""
+msgstr "Veuillez également fournir une date de fin"
 
-#, fuzzy
-#| msgid "First Name"
 msgid "First Choice"
-msgstr "Prénom"
+msgstr "Premier choix"
 
 msgid "Second Choice"
-msgstr ""
+msgstr "Deuxième choix"
 
 msgid "Conference Management"
 msgstr "Gestion des conférences"
 
 msgid "Workshop Participant File Upload"
-msgstr ""
+msgstr "Téléchargement du fichier participant à l’atelier"
 
 #, python-format
 msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr ""
+msgstr "Veuillez télécharger un CSV avec les colonnes suivantes : identifiant utilisateur unique, prénom, nom de famille et une colonne pour chaque atelier identifié par le slug de l’atelier. Pour obtenir de l’aide, vous pouvez télécharger un modèle <a href=\"%(workshop_participants_upload_skeleton)s\">ici</a>"
 
 msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr ""
+msgstr "Ajoutez ensuite une ligne pour chaque compte que vous souhaitez ajouter. Vous devez ajouter un identifiant utilisateur unique, mais le prénom et le nom de famille peuvent être vierges. Ajoutez ensuite 1 à toutes les colonnes d’atelier où l’utilisateur doit être un membre normal ou 2 si cet utilisateur doit être administrateur de l’atelier."
 
 msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr ""
+msgstr "Le téléchargement du CSV déclenchera la création des comptes et des abonnements à l’atelier de compte et se traduit par un téléchargement direct de CSV avec les comptes et mots de passe nouvellement créés. Les mots de passe ne seront inclus que lorsque le compte sera créé. Veuillez rafraîchir la page après le téléchargement."
 
 msgid "Upload File"
-msgstr ""
+msgstr "Télécharger un fichier"
 
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "conference"
 msgid "Go to conference"
-msgstr "Conférence"
+msgstr "Aller à la conférence"
 
 msgid "This function is not enabled for this conference."
-msgstr ""
+msgstr "Cette fonction n’est pas activée pour cette conférence."
 
 msgid "Conference successfully started and user accounts activated"
 msgstr "La conférence a démarré avec succès et les comptes d'utilisateurs ont été activés"
@@ -118,58 +105,58 @@ msgid "The supplied Conference Room could not be found"
 msgstr "L'espace souhaité n'a pas pu être trouvée"
 
 msgid "Conference reminder settings have been successfully updated."
-msgstr ""
+msgstr "Les paramètres de rappel de conférence ont été mis à jour avec succès."
 
 msgid "A test email has been sent to your email address."
-msgstr ""
+msgstr "Un e-mail de test a été envoyé à votre adresse e-mail."
 
 msgid "Participation configurations have been updated."
-msgstr ""
+msgstr "Les configurations de participation ont été mises à jour."
 
 msgid "Your application has been submitted."
-msgstr ""
+msgstr "Votre demande a été soumise."
 
 msgid "Your application has been updated."
-msgstr ""
+msgstr "Votre application a été mise à jour."
 
 msgid "You cannot change your application anymore."
-msgstr ""
+msgstr "Vous ne pouvez plus modifier votre application."
 
 msgid "Application has been withdrawn."
-msgstr ""
+msgstr "La demande a été retirée."
 
 #, python-format
 msgid "The following users were accepted and added as members: %s"
-msgstr ""
+msgstr "Les utilisateurs suivants ont été acceptés et ajoutés en tant que membres : %s"
 
 #, python-format
 msgid "The following users were put on the wait list: %s"
-msgstr ""
+msgstr "Les utilisateurs suivants ont été inscrits sur la liste d’attente : %s"
 
 #, python-format
 msgid "The following users were declined: %s"
-msgstr ""
+msgstr "Les utilisateurs suivants ont été refusés : %s"
 
 msgid "Your changes were saved."
-msgstr ""
+msgstr "Vos dernières modifications ont été enregistrées."
 
 msgid "Option"
-msgstr ""
+msgstr "Option"
 
 msgid "Motivation for applying"
-msgstr ""
+msgstr "Motivation de la candidature"
 
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 msgid "Contact E-Mail Address"
-msgstr ""
+msgstr "Adresse E-Mail de contact"
 
 msgid "Contact Phone Number"
-msgstr ""
+msgstr "Numéro de téléphone de contact"
 
 msgid "List of Applicants"
-msgstr ""
+msgstr "Liste des candidats"
 
 #~ msgid "Conference is running"
 #~ msgstr "La conférence est en cours"

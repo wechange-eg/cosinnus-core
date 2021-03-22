@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-12 17:55+0100\n"
+"POT-Creation-Date: 2021-02-23 18:24+0100\n"
 "PO-Revision-Date: 2021-02-23 18:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,158 +18,151 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.6\n"
 
-msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
-msgstr ""
-
-#, fuzzy
-#| msgid "Conference is running"
-msgid "Conference Bookings"
-msgstr "Konference probíhá"
-
 msgid "Conferences"
-msgstr ""
+msgstr "Konferencje"
 
 msgctxt "the_app"
 msgid "conference"
-msgstr ""
+msgstr "konferencja"
 
 msgid "End date must be before start date"
-msgstr ""
+msgstr "Data zakończenia musi znajdować się po dacie rozpoczęcia "
 
 msgid "Please also provide a start date"
-msgstr ""
+msgstr "Proszę zatem wczytać datę rozpoczęcia"
 
 msgid "Please also provide a end date"
-msgstr ""
+msgstr "Proszę zatem wczytać datę zakończenia"
 
-#, fuzzy
 #| msgid "First Name"
 msgid "First Choice"
-msgstr "Jméno"
+msgstr "Pierwszy Wybór"
 
 msgid "Second Choice"
-msgstr ""
+msgstr "Drugi Wybór"
 
 msgid "Conference Management"
-msgstr "Vedení konference"
+msgstr "Zarządzanie Konferencją"
 
 msgid "Workshop Participant File Upload"
-msgstr ""
+msgstr "Wysłano Plik Uczestnika Warsztatów"
 
 #, python-format
 msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr ""
+msgstr "Proszę przesłać plik CSV z następującymi kolumnami: unikalny identyfikator użytkownika, imię, nazwisko oraz jedna kolumna dla każdego warsztatu identyfikowana przez jego hasło. Aby uzyskać pomoc, możesz pobrać szablon <a href=\"%(workshop_participants_upload_skeleton)s\">tutaj</a>"
 
 msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr ""
+msgstr "Następnie, dodaj wiersz dla każdego konta, które chcesz dodać. Musisz dodać unikalny identyfikator użytkownika, ale imię i nazwisko mogą być puste. Następnie dodaj 1 do wszystkich kolumn warsztatu, gdzie użytkownik powinien być zwykłym członkiem lub 2, jeśli użytkownik powinien być administratorem warsztatów."
 
 msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr ""
+msgstr "Przesłanie CSV spowoduje utworzenie kont i członkostwa w warsztatach, a w rezultacie bezpośrednie pobranie CSV z nowo utworzonymi kontami i hasłami. Hasła zostaną dołączone tylko wtedy, gdy zostanie utworzone konto. Proszę odświeżyć stronę po pobraniu."
 
 msgid "Upload File"
-msgstr ""
+msgstr "Wyślij Plik"
 
-#, fuzzy
 #| msgctxt "the_app"
 #| msgid "conference"
 msgid "Go to conference"
-msgstr "Konference"
+msgstr "Przejdź do konferencji"
 
 msgid "This function is not enabled for this conference."
-msgstr ""
+msgstr "Dla tej konferencji funkcja ta nie jest aktywna"
 
 msgid "Conference successfully started and user accounts activated"
-msgstr "Konference byla úspěšně zahájena a uživatelské účty aktivovány"
+msgstr "Konferencja rozpoczęta pomyślnie a konta użytkownika zostały aktywowane"
 
 msgid "Conference successfully finished and user accounts deactivated"
-msgstr "Konference byla úspěšně dokončena a uživatelské účty byly deaktivovány"
+msgstr "Konferencja zakończona pomyślnie a konta użytkownika zostały zdezaktywowane"
 
 msgid "Successfully deactivated user account"
-msgstr "Uživatelský účet byl úspěšně deaktivován"
+msgstr "Pomyślnie dezaktywowano konto użytkownika"
 
 msgid "Successfully activated user account"
-msgstr "Uživatelský účet byl úspěšně aktivován"
+msgstr "Konto użytkownika zostało pomyślnie zaktywowane"
 
 msgid "Successfully removed user"
-msgstr "Uživatel byl úspěšně odebrán"
+msgstr "Pomyślnie usunięto użytkownika"
 
 msgid "User was not created"
-msgstr "Uživatel nebyl vytvořen"
+msgstr "Użytkownik nie został utworzony"
 
 msgid "Workshop username"
-msgstr "Uživatelské jméno workshopu"
+msgstr "Nazwa uczestnika warsztatu"
 
 msgid "First Name"
-msgstr "Jméno"
+msgstr "Imię"
 
 msgid "Last Name"
-msgstr "Příjmení"
+msgstr "Nazwisko"
 
 msgid "The room was created successfully."
-msgstr ""
+msgstr "Pokój został pomyślnie utworzony."
 
 msgid "The room was saved successfully."
-msgstr ""
+msgstr "Pokój został pomyślnie zapisany."
 
 msgid "The room was deleted successfully."
-msgstr ""
+msgstr "Pokój został pomyślnie usunięty."
 
 msgid "The supplied Conference Room could not be found"
-msgstr ""
+msgstr "Nie można znaleźć dostarczonego Pokoju Konferencyjnego."
 
 msgid "Conference reminder settings have been successfully updated."
-msgstr ""
+msgstr "Pomyślnie zaktualizowano ustawienia przypomnienia o konferencji."
 
 msgid "A test email has been sent to your email address."
-msgstr ""
+msgstr "E-mail testowy został wysłany na Twój adres e-mail."
 
 msgid "Participation configurations have been updated."
-msgstr ""
+msgstr "Konfiguracja uczestnictwa została zaktualizowana."
 
 msgid "Your application has been submitted."
-msgstr ""
+msgstr "Twoja aplikacja została przesłana."
 
 msgid "Your application has been updated."
-msgstr ""
+msgstr "Twoja aplikacja została zaktualizowana."
 
 msgid "You cannot change your application anymore."
-msgstr ""
+msgstr "Nie możesz już zmienić swojej aplikacji."
 
 msgid "Application has been withdrawn."
-msgstr ""
+msgstr "Aplikacja została wycofana."
 
 #, python-format
 msgid "The following users were accepted and added as members: %s"
-msgstr ""
+msgstr "Następujący użytkownicy zostali zaakceptowani i dodani jako członkowie: %s "
 
 #, python-format
 msgid "The following users were put on the wait list: %s"
-msgstr ""
+msgstr "Następujący użytkownicy zostali umieszczeni na liście oczekujących: %s"
 
 #, python-format
 msgid "The following users were declined: %s"
-msgstr ""
+msgstr "Następujący użytkownicy zostali odrzuceni: %s"
 
 msgid "Your changes were saved."
-msgstr ""
+msgstr "Twoje zmiany zostały zapisane."
 
 msgid "Option"
-msgstr ""
+msgstr "Opcja"
 
 msgid "Motivation for applying"
-msgstr ""
+msgstr "Motywacja do złożenia aplikacji"
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 msgid "Contact E-Mail Address"
-msgstr ""
+msgstr "Kontaktowy adres e-mail"
 
 msgid "Contact Phone Number"
-msgstr ""
+msgstr "Numer telefonu kontaktowego"
 
 msgid "List of Applicants"
-msgstr ""
+msgstr "Lista osób aplikujących"
+
+#~ msgid "Conference is running"
+#~ msgstr "Konference probíhá"
 
 #~ msgid "Conference is not running"
 #~ msgstr "Konference neprobíhá"

@@ -4,7 +4,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "MIME-Version: 1.0\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.4.2\n"
 "Project-Id-Version: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
@@ -26,7 +26,7 @@ msgstr ""
 #: locale/src/views/Discussions/list.json locale/src/views/Lobby/index.json
 #: locale/src/views/Stage/list.json locale/src/views/Workshops/list.json
 msgid "Agenda"
-msgstr ""
+msgstr "Agenda"
 
 #. [Are you sure you want to delete this event?]
 #. defaultMessage is:
@@ -37,56 +37,56 @@ msgstr ""
 #: locale/src/views/components/ManageEventButtons/index.json
 #: locale/src/views/components/ManageEventIcons/index.json
 msgid "Are you sure you want to delete this event?"
-msgstr ""
+msgstr "Jste si jisti, že chcete smazat tento event?"
 
 #. [Are you sure you want to delete this room?]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Are you sure you want to delete this room?"
-msgstr ""
+msgstr "Jste si jisti, že chcete smazat tuto místnost?"
 
 #. [Chats]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/Sidebar/index.json
 msgid "Chats"
-msgstr ""
+msgstr "Chaty"
 
 #. [Conference is being prepared]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/App.json
 msgid "Conference is being prepared"
-msgstr ""
+msgstr "Konference se připravuje"
 
 #. [Connect with someone via videochat for 5 minutes]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Channels/list.json
 msgid "Connect with someone via videochat for 5 minutes"
-msgstr ""
+msgstr "Spojte se s někým na pět minut pomocí videokonference"
 
 #. [Contact]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. [Country]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
 msgid "Country"
-msgstr ""
+msgstr "Země"
 
 #. [Create event]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Create event"
-msgstr ""
+msgstr "Vytvořte event"
 
 #. [Delete event]
 #. defaultMessage is:
@@ -97,35 +97,35 @@ msgstr ""
 #: locale/src/views/components/ManageEventButtons/index.json
 #: locale/src/views/components/ManageEventIcons/index.json
 msgid "Delete event"
-msgstr ""
+msgstr "Smažte event"
 
 #. [Delete room]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Delete room"
-msgstr ""
+msgstr "Smažte místnost"
 
 #. [Edit event]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/ManageEventButtons/index.json
 msgid "Edit event"
-msgstr ""
+msgstr "Editujte event"
 
 #. [Edit room]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Edit room"
-msgstr ""
+msgstr "Editujte místnost"
 
 #. [Filter by country]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
 msgid "Filter by country"
-msgstr ""
+msgstr "Filtrujte dle země"
 
 #. [Happening now]
 #. defaultMessage is:
@@ -140,42 +140,35 @@ msgstr ""
 #: locale/src/views/components/EventGrid/index.json
 #: locale/src/views/components/EventList/index.json
 msgid "Happening now"
-msgstr ""
+msgstr "Odehrává se nyní"
 
 #. [Manage conference]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/Nav/index.json
 msgid "Manage conference"
-msgstr ""
+msgstr "Řiďte konferenci"
 
 #. [Manage events]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/Nav/index.json
 msgid "Manage events"
-msgstr ""
+msgstr "Řiďte eventy"
 
 #. [Manage rooms]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/Nav/index.json
 msgid "Manage rooms"
-msgstr ""
-
-#. [Membership]
-#. defaultMessage is:
-#. undefined
-#: locale/src/views/components/Nav/index.json
-msgid "Membership"
-msgstr "Členství"
+msgstr "Řiďte místnosti"
 
 #. [Name]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
 msgid "Name"
-msgstr ""
+msgstr "Jméno"
 
 #. [No]
 #. defaultMessage is:
@@ -190,91 +183,91 @@ msgstr ""
 #: locale/src/views/components/ManageEventIcons/index.json
 #: locale/src/views/components/ManageRoomButtons/index.json
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 #. [No coffee tables.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/CoffeeTables/list.json
 msgid "No coffee tables."
-msgstr ""
+msgstr "Žádné coffee tables."
 
 #. [No discussions.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Discussions/list.json
 msgid "No discussions."
-msgstr ""
+msgstr "Žádné diskuse."
 
 #. [No events.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Lobby/index.json
 msgid "No events."
-msgstr ""
+msgstr "Žádné eventy."
 
 #. [No networking channels.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Channels/list.json
 msgid "No networking channels."
-msgstr ""
+msgstr "Žádné kanály se sítěmi."
 
 #. [No participants.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
 msgid "No participants."
-msgstr ""
+msgstr "Žádní účastníci."
 
 #. [No represented organisations.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Organisations/index.json
 msgid "No represented organisations."
-msgstr ""
+msgstr "Žádné organizace se zastoupením."
 
 #. [No stage events.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Stage/list.json
 msgid "No stage events."
-msgstr ""
+msgstr "Žádné stage eventy."
 
 #. [No workshops.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Workshops/list.json
 msgid "No workshops."
-msgstr ""
+msgstr "Žádné workshopy."
 
 #. [Now]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/EventGrid/index.json
 msgid "Now"
-msgstr ""
+msgstr "Nyní"
 
 #. [Organisation]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
 msgid "Organisation"
-msgstr ""
+msgstr "Organizace"
 
 #. [Represented organisations]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Organisations/index.json
 msgid "Represented organisations"
-msgstr ""
+msgstr "Organizace se zastoupením"
 
 #. [The conference is being prepared, please try again at a later date.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/App.json
 msgid "The conference is being prepared, please try again at a later date."
-msgstr ""
+msgstr "Konference se právě připravuje, zkuste to, prosím, znovu později."
 
 #. [Today]
 #. defaultMessage is:
@@ -285,7 +278,7 @@ msgstr ""
 #: locale/src/views/components/EventGrid/index.json
 #: locale/src/views/components/EventList/index.json
 msgid "Today"
-msgstr ""
+msgstr "Dnes"
 
 #. [Tomorrow]
 #. defaultMessage is:
@@ -296,14 +289,14 @@ msgstr ""
 #: locale/src/views/components/EventGrid/index.json
 #: locale/src/views/components/EventList/index.json
 msgid "Tomorrow"
-msgstr ""
+msgstr "Zítra"
 
 #. [Upcoming]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/EventGrid/index.json
 msgid "Upcoming"
-msgstr ""
+msgstr "Nastávající"
 
 #. [Yes]
 #. defaultMessage is:
@@ -318,28 +311,28 @@ msgstr ""
 #: locale/src/views/components/ManageEventIcons/index.json
 #: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Yes"
-msgstr ""
+msgstr "Ano"
 
 #. [hidden]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/Nav/index.json
 msgid "hidden"
-msgstr ""
+msgstr "skryté"
 
 #. [minutes left]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/EventGrid/index.json
 msgid "minutes left"
-msgstr ""
+msgstr "zbývá minut"
 
 #. [parallel events]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/EventList/index.json
 msgid "parallel events"
-msgstr ""
+msgstr "paralelní eventy"
 
 #. [participants]
 #. defaultMessage is:
@@ -350,19 +343,21 @@ msgstr ""
 #: locale/src/views/components/CoffeeTable/index.json
 #: locale/src/views/components/EventGrid/index.json
 msgid "participants"
-msgstr ""
+msgstr "účastníci"
 
 #. [places left]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/components/CoffeeTable/index.json
 msgid "places left"
-msgstr ""
+msgstr "volná místa"
 
 msgid "Are you sure you want to leave this event?"
-msgstr ""
+msgstr "Jste si jisti, že chcete opustit tento event?"
 
 msgid ""
 "You're currently attending an event. Are you sure you want to leave? "
 "Tip: You can open a new tab or window instead."
 msgstr ""
+"V současnosti se účastníte eventu. Jste si jisti, že jej chcete opustit? "
+"Tip: Můžete namísto toho otevřít novou tabulku nebo okno."
