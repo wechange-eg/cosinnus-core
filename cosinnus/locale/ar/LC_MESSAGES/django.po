@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-12 17:55+0100\n"
-"PO-Revision-Date: 2021-03-08 11:48+0100\n"
+"PO-Revision-Date: 2021-03-22 14:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ar\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -522,55 +522,55 @@ msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_na
 msgstr "قام %(sender_name)s للتو بإنشاء المشروع \"%(team_name)s\" على %(portal_name)s من فكرة تتابعها! <br/> <br/> للتحقق من ذلك، يرجى النقر فوق الراتباط أدناه. هناك يمكنك معرفة ما إذا كنت ترغب في الانضمام إلى المشروع."
 
 msgid "Deutsch--NATIVE-LANGUAGE"
-msgstr "الألمانية--اللغة-الأم"
+msgstr ""
 
 msgid "English--NATIVE-LANGUAGE"
-msgstr "الإنجليزية--اللغة-الأم"
+msgstr ""
 
 msgid "Russian--NATIVE-LANGUAGE"
-msgstr "الروسية--اللغة-الأم"
+msgstr ""
 
 msgid "Ukrainian--NATIVE-LANGUAGE"
-msgstr "الأوكرانية--اللغة-الأم"
+msgstr ""
 
 msgid "French--NATIVE-LANGUAGE"
-msgstr "الفرنسية--اللغة-الأم"
+msgstr ""
 
 msgid "Polish--NATIVE-LANGUAGE"
-msgstr "البولندية--اللغة-الأم"
+msgstr ""
 
 msgid "Spanish--NATIVE-LANGUAGE"
-msgstr "الإسبانية--اللغة-الأم"
+msgstr ""
 
 msgid "Romanian--NATIVE-LANGUAGE"
-msgstr "الرومانية--اللغة-الأم"
+msgstr ""
 
 msgid "Belarussian--NATIVE-LANGUAGE"
-msgstr "البيلاروسية--اللغة-الأم"
+msgstr ""
 
 msgid "Dutch--NATIVE-LANGUAGE"
-msgstr "الهولندية--اللغة-الأم"
+msgstr ""
 
 msgid "Czech--NATIVE-LANGUAGE"
-msgstr "التشيكية --اللغة-الأم"
+msgstr ""
 
 msgid "Azerbaijani--NATIVE-LANGUAGE"
-msgstr "الأزربيجانية--اللغة-الأم"
+msgstr ""
 
 msgid "Armenian--NATIVE-LANGUAGE"
-msgstr "الأرمنية--اللغة-الأم"
+msgstr ""
 
 msgid "Georgian--NATIVE-LANGUAGE"
-msgstr "الجورجية--اللغة-الأم"
+msgstr ""
 
 msgid "Kazakh--NATIVE-LANGUAGE"
-msgstr "القازاقية--اللغة-الأم"
+msgstr ""
 
 msgid "Arabic--NATIVE-LANGUAGE"
-msgstr "العربية--اللغة-الأم"
+msgstr ""
 
 msgid "Hebrew--NATIVE-LANGUAGE"
-msgstr "العبرية--اللغة-الأم"
+msgstr ""
 
 msgid "Belarus"
 msgstr "بيلاروسيا"

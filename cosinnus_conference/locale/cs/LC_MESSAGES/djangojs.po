@@ -361,3 +361,12 @@ msgid ""
 msgstr ""
 "V současnosti se účastníte eventu. Jste si jisti, že jej chcete opustit? "
 "Tip: Můžete namísto toho otevřít novou tabulku nebo okno."
+
+
+
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "Členství"

@@ -360,3 +360,11 @@ msgid ""
 msgstr ""
 "Vous assistez actuellement à un événement. Vous êtes sûr de vouloir partir ? Conseil : "
 "vous pouvez ouvrir un nouvel onglet ou une nouvelle fenêtre à la place."
+
+
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "Adhésion"

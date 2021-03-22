@@ -360,3 +360,11 @@ msgid ""
 "Tip: You can open a new tab or window instead."
 msgstr ""
 "Właśnie uczestniczysz w wydarzeniu. Czy na pewno chcesz opuścić to wydarzenie? Wskazówka: Zamiast tego możesz otworzyć nową kartę lub okno."
+
+
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "Członkostwo"

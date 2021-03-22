@@ -361,3 +361,11 @@ msgid ""
 msgstr ""
 "אתה משתתף כרגע באירוע. אתה בטוח שאתה רוצה לעזוב? "
 "טיפ: במקום זאת תוכלו לפתוח כרטיסייה או חלון חדשים."
+
+
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "חֲבֵרוּת"
