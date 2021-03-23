@@ -1,6 +1,4 @@
 {% load cosinnus_tags %}
-
-{% with labels=SETTINGS.COSINNUS_USERPROFILE_EXTRA_FIELDS%}
 {% for key, value in profile_values.items %}
     {% if value %}
         <legend>{{ labels|get_item:key|get_attr:'label' }}</legend>
@@ -13,4 +11,3 @@
         {% endwith %}
     {% endif %}
 {% endfor %}
-{% endwith %}
