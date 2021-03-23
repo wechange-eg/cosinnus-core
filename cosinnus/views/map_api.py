@@ -81,6 +81,7 @@ MAP_NON_CONTENT_TYPE_SEARCH_PARAMETERS = {
     'limit': 20, # result count limit, integer or None
     'page': 0,
     'topics': None,
+    'text_topics': None,
     'item': None,
     'ignore_location': False, # if True, we completely ignore locs, and even return results without location
     'mine': False, # if True, we only show items of the current user. ignored if user not authenticated
@@ -187,6 +188,11 @@ def map_search_endpoint(request, filter_group_id=None):
     topics = ensure_list_of_ints(params.get('topics', ''))
     if topics:
         sqs = sqs.filter_and(mt_topics__in=topics)
+
+    text_topics = ensure_list_of_ints(params.get('text_topics', ''))
+    if text_topics:
+        sqs = sqs.filter_and(mt_text_topics__in=text_topics)
+
     if settings.COSINNUS_ENABLE_SDGS:
         sdgs = ensure_list_of_ints(params.get('sdgs', ''))
         if sdgs:

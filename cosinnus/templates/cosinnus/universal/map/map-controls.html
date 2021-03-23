@@ -121,6 +121,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 			</div>
         {% endif %}
 
+		<div class="text-topic-buttons" {% if showTextTopicsOnTypesSelected|length > 0 and not displayTextTopcFilter %}style="display: none;"{% endif %}>
 			<h1>
 				{# Translators: __INCLUDE_JS_PO__ #}
 				{% trans "Categories" %}
@@ -137,6 +138,8 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					{% endif %}
 				{% endfor %}
 			</div>
+		</div>
+
         {% if not hideTopics %}
             <h1>
                 {# Translators: __INCLUDE_JS_PO__ #}
