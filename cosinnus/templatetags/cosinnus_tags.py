@@ -32,7 +32,7 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_user_can_create_conferences)
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
 from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
-    LikeObject
+    LikeObject, CosinnusTopicCategory
 from django.template.base import TemplateSyntaxError
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
@@ -1121,6 +1121,12 @@ def render_cosinnus_topics_json():
     """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
     topic_choices = dict([(top_id, force_text(val)) for top_id, val in TAG_OBJECT.TOPIC_CHOICES])
     return mark_safe(_json.dumps(topic_choices))
+
+@register.simple_tag()
+def render_cosinnus_text_topics_json():
+    """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
+    text_topic_choices = dict([(top.id, force_text(top.name)) for top in CosinnusTopicCategory.objects.all()])
+    return mark_safe(_json.dumps(text_topic_choices))
 
 @register.simple_tag()
 def render_managed_tags_json():

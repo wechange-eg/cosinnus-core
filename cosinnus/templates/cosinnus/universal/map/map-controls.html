@@ -121,6 +121,22 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 			</div>
         {% endif %}
 
+			<h1>
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Categories" %}
+			</h1>
+
+			<div class="button-list">
+				{% for textTopic_id, textTopic in allTextTopics %}
+					{% if textTopic_id != "" and textTopic %}
+						<a class="rounded-button button-color-topic text-topic-button {% if textTopic_id|int in activeTextTopicIds %}selected{% endif %}" data-text-topic-id="{{ textTopic_id }}">
+							<span class="rounded-button-inner">
+								{{ textTopic }}
+							</span>
+						</a>
+					{% endif %}
+				{% endfor %}
+			</div>
         {% if not hideTopics %}
             <h1>
                 {# Translators: __INCLUDE_JS_PO__ #}
