@@ -12,7 +12,8 @@ def set_last_action_to_created(apps, schema_editor):
     UserProfile = get_user_profile_model()
     for userprofile in UserProfile.objects.all():
         userprofile.dynamic_fields = userprofile.extra_fields
-        userprofile.save()
+        # Update profile without triggering signals to prevent triggers during migrations
+        UserProfile.objects.filter(pk=userprofile.pk).update(dynamic_fields=userprofile.extra_fields)
 
     
 class Migration(migrations.Migration):
