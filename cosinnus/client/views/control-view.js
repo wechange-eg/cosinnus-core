@@ -1013,6 +1013,7 @@ module.exports = ContentControlView.extend({
         this.state.filterPanelVisible = true;
         this.$el.find('.map-controls-filters').slideDown(250);
         this.$el.find('.icon-filters').addClass('open');
+        this.$el.parents().find('.controls').addClass('open');
         this.toggleDateTimePicker();
     },
 
@@ -1024,7 +1025,7 @@ module.exports = ContentControlView.extend({
         this.state.filterPanelVisible = false;
         this.$el.find('.map-controls-filters').slideUp(250);
         this.$el.find('.icon-filters').removeClass('open');
-        
+        this.$el.parents().find('.controls').removeClass('open');
     },
     
     
