@@ -102,6 +102,31 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 
         {% endif %}
 
+        {% if COSINNUS_EXCHANGE_ENABLED %}
+	        <h1>
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans "External contents" %}
+	        </h1>
+
+	        <table class="onoffswitch-frame small-space">
+	            <tr>
+	                <td class="onoffswitch-text-label">
+	                    {# Translators: __INCLUDE_JS_PO__ #}
+	                    {% trans "Include contents from other platforms" %}
+	                </td>
+	                <td>
+	                    <div class="onoffswitch">
+	                        <input type="checkbox" name="onoffswitch-exchange" class="onoffswitch-checkbox check-exchange" id="check-exchange" {% if exchange %}checked{% endif %}>
+	                        <label class="onoffswitch-label" for="check-exchange">
+	                            <span class="onoffswitch-inner"></span>
+	                            <span class="onoffswitch-switch"></span>
+	                        </label>
+	                    </div>
+	                </td>
+	            </tr>
+	        </table>
+        {% endif %}
+
         {% if splitscreen %}
 	        <h1>
 	            {# Translators: __INCLUDE_JS_PO__ #}

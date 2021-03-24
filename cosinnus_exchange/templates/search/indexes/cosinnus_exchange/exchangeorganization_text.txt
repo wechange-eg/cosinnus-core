@@ -1,0 +1,3 @@
+{{ object.title }}
+{% if object.description %}{{ object.description }}{% endif %}
+{% if object.mt_location %}{{ object.mt_location }}{% endif %}

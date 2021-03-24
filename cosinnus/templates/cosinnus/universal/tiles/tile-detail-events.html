@@ -27,6 +27,15 @@
 
 {% block action_buttons %}
     <div class="tile-section tile-section-button-list">
+    {% if portal == COSINNUS_EXCHANGE_PORTAL_ID and url %}
+        <a class="rounded-button button-action" href="{{ url }}" target="_blank">
+            <span class="rounded-button-inner">
+                <i clasS="fa fa-external-link"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Event" %} {% trans "on" %} {{ source }}
+            </span>
+        </a>
+    {% else %}
         {% if controlView.portalInfo.current == portal %}
             <a class="rounded-button button-action 
                     {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
@@ -98,6 +107,7 @@
             {% trans "Could not save your follow setting because of an error." %}
         </div>
     </div>
+{% endif %}
 {% endblock %}
         
 

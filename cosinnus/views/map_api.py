@@ -30,7 +30,6 @@ from cosinnus.utils.permissions import check_object_read_access
 from django.utils.html import escape
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_slugs
-from cosinnus.external.search_indexes import EXTERNAL_CONTENT_PORTAL_ID
 
 
 try:
@@ -81,7 +80,7 @@ MAP_NON_CONTENT_TYPE_SEARCH_PARAMETERS = {
     'item': None,
     'ignore_location': False, # if True, we completely ignore locs, and even return results without location
     'mine': False, # if True, we only show items of the current user. ignored if user not authenticated
-    'external': False,
+    'exchange': False,
 }
 # supported map search query parameters for selecting content models, and their default values (as python data after a json.loads()!) if not present
 MAP_CONTENT_TYPE_SEARCH_PARAMETERS = {
@@ -140,8 +139,8 @@ def map_search_endpoint(request, filter_group_id=None):
     if params.get('cloudfiles', False):
         return map_cloudfiles_endpoint(request, query, limit, page)
 
-    # TODO: set to  params['external'] after the external switch button is in frontend!
-    external = settings.COSINNUS_EXTERNAL_CONTENT_ENABLED
+    if not settings.COSINNUS_EXCHANGE_ENABLED:
+        params['exchange'] = False
     
     prefer_own_portal = getattr(settings, 'MAP_API_HACKS_PREFER_OWN_PORTAL', False)
     
@@ -189,7 +188,8 @@ def map_search_endpoint(request, filter_group_id=None):
         if managed_tags:
             sqs = sqs.filter_and(managed_tags__in=managed_tags)
     # filter for portal visibility
-    sqs = filter_searchqueryset_for_portal(sqs, restrict_multiportals_to_current=prefer_own_portal, external=external)
+    sqs = filter_searchqueryset_for_portal(sqs, restrict_multiportals_to_current=prefer_own_portal,
+                                           exchange=params.get('exchange', False))
     # filter for read access by this user
     sqs = filter_searchqueryset_for_read_access(sqs, request.user)
     # filter events by upcoming status and exclude hidden proxies
@@ -198,7 +198,7 @@ def map_search_endpoint(request, filter_group_id=None):
     
     # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't shown)
     if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
-        sqs = sqs.exclude(is_group_model=True,slug__in=get_default_user_group_slugs())
+        sqs = sqs.exclude(is_group_model=True, slug__in=get_default_user_group_slugs())
     
     # kip score sorting and only rely on natural ordering?
     skip_score_sorting = False
@@ -221,8 +221,6 @@ def map_search_endpoint(request, filter_group_id=None):
     total_count = sqs.count()
     sqs = sqs[limit*page:limit*(page+1)]
     results = []
-    
-            
         
     for i, result in enumerate(sqs):
         if skip_score_sorting:
@@ -261,6 +259,7 @@ def map_search_endpoint(request, filter_group_id=None):
         'page': page_obj,
     }
     return JsonResponse(data)
+
 
 def map_cloudfiles_endpoint(request, query, limit, page):
     from cosinnus_cloud.utils.nextcloud import perform_fulltext_search
@@ -322,7 +321,7 @@ def map_detail_endpoint(request):
         return HttpResponseBadRequest('``type`` param indicated an invalid data model type!')
     
     # for internal DB based objects:
-    if portal != EXTERNAL_CONTENT_PORTAL_ID:
+    if portal != settings.COSINNUS_EXCHANGE_PORTAL_ID:
         # TODO: for groups/projects we should really use the cache here.
         if model_type == 'people':
             # UserProfiles are retrieved independent of the portal
@@ -357,18 +356,20 @@ def map_detail_endpoint(request):
     }
     return JsonResponse(data)
 
+
 def get_searchresult_by_itemid(itemid, user=None):
     portal, model_type, slug = itemid.split('.', 2)
     return get_searchresult_by_args(portal, model_type, slug, user=user)
+
 
 def get_searchresult_by_args(portal, model_type, slug, user=None):
     """ Retrieves a HaystackMapResult just as the API would, for a given shortid
         in the form of `<classid>.<instanceid>` (see `itemid_from_searchresult()`). """
     
     # monkey-hack: if the portal id is 0, we have an external item, so look up the external models
-    if settings.COSINNUS_EXTERNAL_CONTENT_ENABLED and portal == EXTERNAL_CONTENT_PORTAL_ID:
-        from cosinnus.models.map import EXTERNAL_SEARCH_MODEL_NAMES_REVERSE
-        model = EXTERNAL_SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
+    if settings.COSINNUS_EXCHANGE_ENABLED and portal == settings.COSINNUS_EXCHANGE_PORTAL_ID:
+        from cosinnus.models.map import EXCHANGE_SEARCH_MODEL_NAMES_REVERSE
+        model = EXCHANGE_SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
     else:
         model = SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
     

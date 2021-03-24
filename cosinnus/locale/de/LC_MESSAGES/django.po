@@ -7075,6 +7075,22 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "from"
+msgstr "von"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "on"
+msgstr "auf"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "External contents"
+msgstr "Externe Inhalte"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Include contents from other platforms"
+msgstr "Auch Inhalte von anderen Plattformen anzeigen"
+
 #~ msgid "Determins if application management is visible in conference administration."
 #~ msgstr "Legt fest, ob die Anwendungsverwaltung in der Tagungsverwaltung sichtbar ist."
 

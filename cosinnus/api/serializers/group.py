@@ -66,8 +66,8 @@ class CosinnusLocationSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('description', 'geo')
 
     def get_geo(self, obj):
-        if obj and obj.lat and obj.lon:
-            return {'latitude': obj.lat, 'longitude': obj.lon}
+        if obj and obj.location_lat and obj.location_lon:
+            return {'latitude': obj.location_lat, 'longitude': obj.location_lat}
         return None
 
 

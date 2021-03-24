@@ -43,6 +43,7 @@ class TaggableSearchView(SearchView):
 
 search = search_view_factory(TaggableSearchView,
     template='cosinnus/search.html',
+    load_all=False,
     form_class=TaggableModelSearchForm,
 )
 

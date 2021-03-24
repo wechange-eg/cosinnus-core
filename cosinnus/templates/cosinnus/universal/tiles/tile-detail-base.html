@@ -10,9 +10,9 @@
         {% block type_area %}
             <div class="tile-section-header one-line">
                 {{ macros.typeLabel(type, singular=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
-                {% if portal == 99999 %}
+                {% if portal == COSINNUS_EXCHANGE_PORTAL_ID %}
                 	{# Translators: __INCLUDE_JS_PO__ #}
-	                ({% trans "External" %})
+	                {% trans "from" %}: {{ source }}
                 {% endif %}
                 
                 {% if not isSmall and controlView.portalInfo.current != portal %}
