@@ -10,6 +10,7 @@ from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
 from cosinnus.conf import settings
+from cosinnus.models import MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.import_utils import import_from_settings
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
@@ -90,3 +91,34 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('token', 'username', 'password')
+
+
+class ReadWriteSerializerMethodField(serializers.SerializerMethodField):
+    def __init__(self, method_name=None, **kwargs):
+        self.method_name = method_name
+        kwargs['source'] = '*'
+        super(serializers.SerializerMethodField, self).__init__(**kwargs)
+
+    def to_internal_value(self, data):
+        return {self.field_name: data}
+
+
+class UserCreateUpdateSerializer(serializers.ModelSerializer):
+    location = ReadWriteSerializerMethodField(required=False)
+    extra_fields = ReadWriteSerializerMethodField(required=False)
+    groups = ReadWriteSerializerMethodField(required=False)
+
+    class Meta(object):
+        model = User
+        fields = ('id', 'email', 'first_name', 'last_name', 'password',
+                  'location', 'extra_fields', 'groups')
+
+    def get_location(self, obj):
+        return obj.cosinnus_profile.media_tag.location or ""
+
+    def get_extra_fields(self, obj):
+        return obj.cosinnus_profile.extra_fields
+
+    def get_groups(self, obj):
+        queryset = obj.cosinnus_memberships.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN))
+        return list(queryset.values_list('group__slug', flat=True))

@@ -11,7 +11,7 @@ from cosinnus_event.models import ConferenceEvent
 from rest_framework.decorators import action
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.models.group_extra import CosinnusConference
-from cosinnus.api.views import CosinnusFilterQuerySetMixin,\
+from cosinnus.api.views.mixins import CosinnusFilterQuerySetMixin,\
     PublicCosinnusGroupFilterMixin, CosinnusPaginateMixin
 from copy import copy
 from django.utils.timezone import now
