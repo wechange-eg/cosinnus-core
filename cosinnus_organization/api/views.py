@@ -7,6 +7,7 @@ from cosinnus_organization.models import CosinnusOrganization
 from rest_framework_rdf.viewsets import RDFViewSetMixin
 
 
+
 class OrganizationViewSet(PublicCosinnusGroupFilterMixin,
                           RDFViewSetMixin,
                           viewsets.ReadOnlyModelViewSet):

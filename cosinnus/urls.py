@@ -9,10 +9,9 @@ from drf_yasg.views import get_schema_view
 from rest_framework import routers, permissions
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
-from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    oauth_user, oauth_profile
-from cosinnus.api.views import oauth_current_user, statistics as api_statistics, current_user, \
-    navbar, settings as api_settings
+from cosinnus.api.views.group import CosinnusSocietyViewSet, CosinnusProjectViewSet
+from cosinnus.api.views.user import oauth_user, oauth_profile, current_user, oauth_current_user, UserViewSet
+from cosinnus.api.views.portal import statistics as api_statistics, navbar, settings as api_settings
 from cosinnus.api.views.i18n import translations
 from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
@@ -305,6 +304,8 @@ router.register(r'projects', CosinnusProjectViewSet)
 router.register(r'organizations', OrganizationViewSet)
 router.register(r'events', EventViewSet)
 router.register(r'notes', NoteViewSet)
+if getattr(settings, 'COSINNUS_API_SETTINGS', {}).get('user'):
+    router.register(r'users', UserViewSet)
 
 if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
     from cosinnus_message.api.views import MessageExportView

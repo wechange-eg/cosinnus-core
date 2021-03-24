@@ -567,6 +567,16 @@ REST_FRAMEWORK = {
     )
 }
 
+COSINNUS_API_SETTINGS = {
+    'user': ['head', 'post'],
+    # 'users': [ 'head', 'get', 'post', 'put', 'patch', 'delete']
+    # 'hooks': {
+    #     'user.activated': ['https://webhook.site/test'],
+    #     'user.updated': ['https://webhook.site/test'],
+    #     'user.deactivated': ['https://webhook.site/test'],
+    # }
+}
+
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'cosinnus.utils.jwt.jwt_response_handler'
 }
