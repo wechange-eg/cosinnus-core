@@ -928,6 +928,8 @@ class CosinnusConf(AppConf):
     MANAGED_TAGS_SHOW_FILTER_ON_MAP_ONLY_FOR_CONTENT_TYPES = []
     MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
     MANAGED_TAG_DYNAMIC_USER_FIELD_FILTER_ON_TAG_SLUG = None
+
+    TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
     
     # set to True to enable virusscan. the clamd daeomon needs to be running!
     # see https://pypi.org/project/django-clamd/

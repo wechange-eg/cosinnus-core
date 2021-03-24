@@ -102,6 +102,20 @@
                 </div>
             {% endif %}
         {% endblock topic_line %}
+
+        {% block text_topic_line %}
+            {% if text_topics|length > 0 %}
+                <div class="tile-section topic-line">
+                    <span class="pale-color">
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Categories" %}:
+                    </span>
+                    {% for text_topic in text_topics %}
+                        <a class="text-topic-filter-link" data-text-topic-id="{{ text_topic }}">{{ controlView.allTextTopics[text_topic] }}</a>{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endblock text_topic_line %}
         
         {% block managed_tags %}
             {% if managed_tags|length > 0 and controlView.allManagedTags|length > 0 %}

@@ -23,7 +23,7 @@
             {% trans "Does NOT wish to be contacted for potential collaboration!" %}
         </div>
 	{% endif %}
-	
+
 {% endblock topic_line %}
 
 {% block action_buttons %}
@@ -62,7 +62,11 @@
 
 
 {% block related_content %}
-    
+
+    {% if extra_html %}
+    {{ extra_html | safe }}
+    {% endif %}
+
     {% if groups|length > 0 %}
         <div class="clearfix"></div>
     

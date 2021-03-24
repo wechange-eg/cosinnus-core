@@ -273,7 +273,7 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     
     def prepare_managed_tags(self, obj):
         return obj.get_managed_tag_ids()
-    
+
     def prepare_url(self, obj):
         """ NOTE: UserProfiles always contain a relative URL! """
         return reverse('cosinnus:profile-detail', kwargs={'username': obj.user.username})
