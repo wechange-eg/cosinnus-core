@@ -121,7 +121,7 @@
             {% if managed_tags|length > 0 and controlView.allManagedTags|length > 0 %}
                 <div class="tile-section topic-line">
                     <span class="pale-color">
-                        {{ controlView.managedTagsLabels.MANAGED_TAG_NAME_PLURAL }}:
+                        {{ controlView.managedTagsLabels.MANAGED_TAG_MAP_LABEL }}:
                     </span> 
                     {% for managed_tag_id in managed_tags %}
                         {% set outer_loop = loop %}

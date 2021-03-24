@@ -377,10 +377,10 @@ module.exports = ContentControlView.extend({
     /** Internal state reset of fromDate, fromTime, toDate, toTime */
     resetDateTimeWidget: function() {
         var today = moment().format('YYYY-MM-DD');
-        var in_a_month = moment().add(1, 'M').format('YYYY-MM-DD');
+        var in_three_months = moment().add(3, 'M').format('YYYY-MM-DD');
         this.state.fromDate =  today;
         this.state.fromTime = "00:00";
-        this.state.toDate = in_a_month;
+        this.state.toDate = in_three_months;
         this.state.toTime = "23:59";
         this.showOrHideDateTimePicker(false);
     },
@@ -1532,10 +1532,10 @@ module.exports = ContentControlView.extend({
         }
 
         var today = moment().format('YYYY-MM-DD');
-        var in_a_month = moment().add(1, 'M').format('YYYY-MM-DD');
+        var in_three_months = moment().add(3, 'M').format('YYYY-MM-DD');
         this.state.fromDate =  util.ifundef(urlParams.fromDate, today);
         this.state.fromTime = util.ifundef(urlParams.fromTime, "00:00").replace("%3A", ":");
-        this.state.toDate = util.ifundef(urlParams.toDate, in_a_month);
+        this.state.toDate = util.ifundef(urlParams.toDate, in_three_months);
         this.state.toTime = util.ifundef(urlParams.toTime, "23:59").replace("%3A", ":");
     },
 
