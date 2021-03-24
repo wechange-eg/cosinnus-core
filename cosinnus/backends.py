@@ -15,7 +15,6 @@ import smtplib
 from django.core.mail.message import sanitize_address
 
 from haystack.backends.elasticsearch_backend import ElasticsearchSearchBackend, ElasticsearchSearchEngine
-
 from urllib3.exceptions import ProtocolError, ConnectionError
 from elasticsearch.exceptions import TransportError
 
@@ -110,17 +109,25 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
     def __init__(self, connectionalias, **options):
         super(RobustElasticSearchBackend, self).__init__(connectionalias, **options)
 
-    @mute_error
-    def update(self, indexer, iterable, commit=True):
-        super(RobustElasticSearchBackend, self).update(indexer, iterable, commit)
+    def build_schema(self, *args, **kwargs):
+        """ Use the standard search_analyzer for ngram fields, so the search query itself won't be n-gramed """
+        content_field_name, mapping = super(RobustElasticSearchBackend, self).build_schema(*args, **kwargs)
+        for _field_name, field_mapping in mapping.items():
+            if "analyzer" in field_mapping and field_mapping["analyzer"] == "ngram_analyzer":
+                field_mapping["search_analyzer"] = "standard"
+        return content_field_name, mapping
 
     @mute_error
-    def remove(self, obj, commit=True):
-        super(RobustElasticSearchBackend, self).remove(obj, commit)
+    def update(self, *args, **kwargs):
+        super(RobustElasticSearchBackend, self).update(*args, **kwargs)
 
     @mute_error
-    def clear(self, models=None, commit=True):
-        super(RobustElasticSearchBackend, self).clear(models, commit)
+    def remove(self, *args, **kwargs):
+        super(RobustElasticSearchBackend, self).remove(*args, **kwargs)
+
+    @mute_error
+    def clear(self, *args, **kwargs):
+        super(RobustElasticSearchBackend, self).clear(*args, **kwargs)
 
 
 class RobustElasticSearchEngine(ElasticsearchSearchEngine):

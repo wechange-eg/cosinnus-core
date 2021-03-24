@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-07 17:56+0100\n"
-"PO-Revision-Date: 2020-11-06 14:03+0100\n"
+"POT-Creation-Date: 2021-02-23 18:24+0100\n"
+"PO-Revision-Date: 2021-03-11 12:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: cs\n"
@@ -16,67 +16,54 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
-"X-Generator: Poedit 2.3\n"
-
-msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
-msgstr ""
-
-#, fuzzy
-#| msgid "Conference is running"
-msgid "Conference Bookings"
-msgstr "Konference probíhá"
+"X-Generator: Poedit 2.4.2\n"
 
 msgid "Conferences"
-msgstr ""
+msgstr "Konference"
 
 msgctxt "the_app"
 msgid "conference"
-msgstr "Konference"
+msgstr "app_konference"
 
 msgid "End date must be before start date"
-msgstr ""
+msgstr "Konečné datum musí být před počátečním datem"
 
 msgid "Please also provide a start date"
-msgstr ""
+msgstr "Poskytněte, prosím, také počáteční datum"
 
 msgid "Please also provide a end date"
-msgstr ""
+msgstr "Poskytněte, prosím, také konečné datum"
 
-#, fuzzy
-#| msgid "First Name"
 msgid "First Choice"
-msgstr "Jméno"
+msgstr "První volba"
 
 msgid "Second Choice"
-msgstr ""
+msgstr "Druhá volba"
 
 msgid "Conference Management"
 msgstr "Vedení konference"
 
 msgid "Workshop Participant File Upload"
-msgstr ""
+msgstr "Nahrání účastnického souboru dílny"
 
 #, python-format
 msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr ""
+msgstr "Nahrejte, prosím, CSV soubor s následujícími sloupci: unikátní uživatelský identifikátor, jméno, příjmení a jeden sloupec pro každou dílnu identifikovanou slugem dílny <a href=\"%(workshop_participants_upload_skeleton)s\">zde</a>"
 
 msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr ""
+msgstr "Pak přidejte pro každou řadu, co chcete přidat. Musíte přidat unikátní uživatelský identifikátor, jméno a příjmení však mohou zůstat nevyplněny. Pak přidejte 1 ke všem sloupcům dílny, kde může být uživatel běžným členem nebo 2 pokud uživatel má být správcem dílny."
 
 msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr ""
+msgstr "Nahrání CSV souboru spustí vytvoření účtů a členství dílny a výsledkem bude přímé stažení CSV souboru s nově vytvořenými účty a hesly. Hesla mohou být obsažena pouze, když je účet vytvořen. Po stažení, prosím, stránku obnovte."
 
 msgid "Upload File"
-msgstr ""
+msgstr "Nahrajte soubor"
 
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "conference"
 msgid "Go to conference"
-msgstr "Konference"
+msgstr "Přejděte do konference"
 
 msgid "This function is not enabled for this conference."
-msgstr ""
+msgstr "Tato funkce není pro tuto konferenci povolena."
 
 msgid "Conference successfully started and user accounts activated"
 msgstr "Konference byla úspěšně zahájena a uživatelské účty aktivovány"
@@ -106,70 +93,73 @@ msgid "Last Name"
 msgstr "Příjmení"
 
 msgid "The room was created successfully."
-msgstr ""
+msgstr "Místnost byla úspěšně vytvořena."
 
 msgid "The room was saved successfully."
-msgstr ""
+msgstr "Místnost byla úspěšně uložena."
 
 msgid "The room was deleted successfully."
-msgstr ""
+msgstr "Místnost byla úspěšně smazána."
 
 msgid "The supplied Conference Room could not be found"
-msgstr ""
+msgstr "Dodaná Konferenční místnost nemohla být nalezena"
 
 msgid "Conference reminder settings have been successfully updated."
-msgstr ""
+msgstr "Nastavení připomenutí konference byla úspěšně aktualizována."
 
 msgid "A test email has been sent to your email address."
-msgstr ""
+msgstr "Zkušební e-mail byl poslán na vaši e-mailovou adresu."
 
 msgid "Participation configurations have been updated."
-msgstr ""
+msgstr "Účastnické konfigurace byly aktualizovány."
 
 msgid "Your application has been submitted."
-msgstr ""
+msgstr "Vaše žádost byla předána."
 
 msgid "Your application has been updated."
-msgstr ""
+msgstr "Vaše žádost byla aktualizována."
 
 msgid "You cannot change your application anymore."
-msgstr ""
+msgstr "Vaši žádost už nemůžete změnit."
 
 msgid "Application has been withdrawn."
-msgstr ""
+msgstr "Žádost byla stažena."
 
 #, python-format
 msgid "The following users were accepted and added as members: %s"
-msgstr ""
+msgstr "Následující uživatelé byli přijati a přidáni jako členové: %s"
 
 #, python-format
 msgid "The following users were put on the wait list: %s"
-msgstr ""
+msgstr "Následující uživatelé byli přidáni na seznam čekatelů: %s"
 
 #, python-format
 msgid "The following users were declined: %s"
-msgstr ""
+msgstr "Následující uživatelé byli zamítnuti: %s"
 
 msgid "Your changes were saved."
-msgstr ""
+msgstr "Vaše změny byly uloženy."
 
 msgid "Option"
-msgstr ""
+msgstr "Možnosti"
 
 msgid "Motivation for applying"
-msgstr ""
+msgstr "Motivace pro podání žádosti"
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 msgid "Contact E-Mail Address"
-msgstr ""
+msgstr "Kontaktní e-mailová adresa"
 
 msgid "Contact Phone Number"
-msgstr ""
+msgstr "Kontaktní telefonní číslo"
 
 msgid "List of Applicants"
-msgstr ""
+msgstr "Seznam žadatelů"
+
+#~ msgid "Conference is running"
+#~ msgstr "Konference probíhá"
 
 #~ msgid "Conference is not running"
 #~ msgstr "Konference neprobíhá"

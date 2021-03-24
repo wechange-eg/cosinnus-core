@@ -3,163 +3,165 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-07 17:56+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2021-03-12 17:55+0100\n"
+"PO-Revision-Date: 2021-03-08 22:48+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.2\n"
 
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr ""
 
+#, fuzzy
+#| msgid "Conferences"
 msgid "Conference Bookings"
-msgstr ""
+msgstr "שיחות ועידה"
 
 msgid "Conferences"
-msgstr ""
+msgstr "שיחות ועידה"
 
 msgctxt "the_app"
 msgid "conference"
-msgstr ""
+msgstr "שרת ועידות וידאו"
 
 msgid "End date must be before start date"
-msgstr ""
+msgstr "על תאריך הסיום להיות לפני תאריך ההתחלה"
 
 msgid "Please also provide a start date"
-msgstr ""
+msgstr "נא ספק גם תאריך התחלה"
 
 msgid "Please also provide a end date"
-msgstr ""
+msgstr "נא ספק גם תאריך סיום"
 
 msgid "First Choice"
-msgstr ""
+msgstr "בחירה ראשונה"
 
 msgid "Second Choice"
-msgstr ""
+msgstr "בחירה שנייה"
 
 msgid "Conference Management"
-msgstr ""
+msgstr "ניהול שיחות ועידה"
 
 msgid "Workshop Participant File Upload"
-msgstr ""
+msgstr "העלאת קובץ המשתתף בסדנה"
 
 #, python-format
 msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr ""
+msgstr "אנא העלה CSV עם העמודות הבאות: מזהה משתמש ייחודי, שם פרטי, שם משפחה ועמודה אחת לכל סדנא שזוהתה על ידי הסמן של הסדנה. לעזרה אתה יכול להוריד תבנית <a href=\"%(workshop_participants_upload_skeleton)s\">כאן</a>"
 
 msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr ""
+msgstr "לאחר מכן הוסף שורה עבור כל חשבון שברצונך להוסיף. עליך להוסיף מזהה משתמש ייחודי אך שם פרטי ושם משפחה יכולים להיות ריקים. לאחר מכן הוסף 1 לכל עמודות הסדנה שבהן המשתמש צריך להיות חבר רגיל או 2 אם משתמש זה צריך להיות מנהל סדנה."
 
 msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr ""
+msgstr "העלאת CSV תגרום ליצירת חשבונות וחברות בסדנאות חשבונות ותביא להורדת CSV ישירה עם החשבונות והסיסמאות שזה עתה נוצרו. הסיסמאות ייכללו רק לאחר יצירת החשבון. אנא רענן את הדף לאחר ההורדה."
 
 msgid "Upload File"
-msgstr ""
+msgstr "העלה קובץ"
 
 msgid "Go to conference"
-msgstr ""
+msgstr "עבור לוועידה"
 
 msgid "This function is not enabled for this conference."
-msgstr ""
+msgstr "פונקציה זו אינה זמינה עבור ועידה זו."
 
 msgid "Conference successfully started and user accounts activated"
-msgstr ""
+msgstr "הוועידה הופעלה בהצלחה וחשבונות משתמשים הופעלו"
 
 msgid "Conference successfully finished and user accounts deactivated"
-msgstr ""
+msgstr "הוועידה הסתיימה בהצלחה וחשבונות משתמשים הושבתו"
 
 msgid "Successfully deactivated user account"
-msgstr ""
+msgstr "חשבון משתמש הושבת בהצלחה"
 
 msgid "Successfully activated user account"
-msgstr ""
+msgstr "חשבון משתמש הופעל בהצלחה"
 
 msgid "Successfully removed user"
-msgstr ""
+msgstr "משתמש הוסר בהצלחה"
 
 msgid "User was not created"
-msgstr ""
+msgstr "המשתמש לא נוצר"
 
 msgid "Workshop username"
-msgstr ""
+msgstr "שם משתמש לסדנה"
 
 msgid "First Name"
-msgstr ""
+msgstr "שם פרטי"
 
 msgid "Last Name"
-msgstr ""
+msgstr "שם משפחה"
 
 msgid "The room was created successfully."
-msgstr ""
+msgstr "החדר נוצר בהצלחה."
 
 msgid "The room was saved successfully."
-msgstr ""
+msgstr "החדר נשמר בהצלחה."
 
 msgid "The room was deleted successfully."
-msgstr ""
+msgstr "החדר נמחק בהצלחה."
 
 msgid "The supplied Conference Room could not be found"
-msgstr ""
+msgstr "חדר הועידות שסופק לא נמצא"
 
 msgid "Conference reminder settings have been successfully updated."
-msgstr ""
+msgstr "הגדרות תזכורת הוועידה עודכנו בהצלחה."
 
 msgid "A test email has been sent to your email address."
-msgstr ""
+msgstr "דוא\"ל בדיקה נשלח לכתובת הדוא\"ל שלך."
 
 msgid "Participation configurations have been updated."
-msgstr ""
+msgstr "תצורות ההשתתפות עודכנו."
 
 msgid "Your application has been submitted."
-msgstr ""
+msgstr "בקשתך הוגשה."
 
 msgid "Your application has been updated."
-msgstr ""
+msgstr "הבקשה שלך עודכנה."
 
 msgid "You cannot change your application anymore."
-msgstr ""
+msgstr "אין באפשרותך לשנות את בקשתך יותר."
 
 msgid "Application has been withdrawn."
-msgstr ""
+msgstr "הבקשה בוטלה."
 
 #, python-format
 msgid "The following users were accepted and added as members: %s"
-msgstr ""
+msgstr "המשתמשים הבאים התקבלו ונוספו כחברים: %s"
 
 #, python-format
 msgid "The following users were put on the wait list: %s"
-msgstr ""
+msgstr "המשתמשים הבאים הוכנסו לרשימת ההמתנה: %s"
 
 #, python-format
 msgid "The following users were declined: %s"
-msgstr ""
+msgstr "המשתמשים הבאים נדחו: %s"
 
 msgid "Your changes were saved."
-msgstr ""
+msgstr "השינויים שביצעת נשמרו."
 
 msgid "Option"
-msgstr ""
+msgstr "אפשרות"
 
 msgid "Motivation for applying"
-msgstr ""
+msgstr "מוטיבצייה להגשת מועמדות"
 
 msgid "Status"
-msgstr ""
+msgstr "מצב"
 
 msgid "Contact E-Mail Address"
-msgstr ""
+msgstr "כתובת דואר אלקטרוני של איש קשר"
 
 msgid "Contact Phone Number"
-msgstr ""
+msgstr "מספר טלפון של איש קשר"
 
 msgid "List of Applicants"
-msgstr ""
+msgstr "רשימת מועמדים"
