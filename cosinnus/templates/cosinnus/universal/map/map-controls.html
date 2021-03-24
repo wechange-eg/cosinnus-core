@@ -122,24 +122,24 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 			{% endif %}
 
 			{% if allTextTopics|length > 0 %}
-			<div class="text-topic-buttons" {% if showTextTopicsOnTypesSelected|length > 0 and not displayTextTopcFilter %}style="display: none;"{% endif %}>
-				<h1>
-					{# Translators: __INCLUDE_JS_PO__ #}
-					{% trans "Categories" %}
-				</h1>
-
-				<div class="button-list">
-					{% for textTopic_id, textTopic in allTextTopics %}
-						{% if textTopic_id != "" and textTopic %}
-							<a class="rounded-button button-color-topic text-topic-button {% if textTopic_id|int in activeTextTopicIds %}selected{% endif %}" data-text-topic-id="{{ textTopic_id }}">
-								<span class="rounded-button-inner">
-									{{ textTopic }}
-								</span>
-							</a>
-						{% endif %}
-					{% endfor %}
+				<div class="text-topic-buttons" {% if showTextTopicsOnTypesSelected|length > 0 and not displayTextTopcFilter %}style="display: none;"{% endif %}>
+					<h1>
+						{# Translators: __INCLUDE_JS_PO__ #}
+						{% trans "Categories" %}
+					</h1>
+	
+					<div class="button-list">
+						{% for textTopic_id, textTopic in allTextTopics %}
+							{% if textTopic_id != "" and textTopic %}
+								<a class="rounded-button button-color-topic text-topic-button {% if textTopic_id|int in activeTextTopicIds %}selected{% endif %}" data-text-topic-id="{{ textTopic_id }}">
+									<span class="rounded-button-inner">
+										{{ textTopic }}
+									</span>
+								</a>
+							{% endif %}
+						{% endfor %}
+					</div>
 				</div>
-			</div>
 			{% endif %}
 
 			{% if not hideTopics %}
@@ -159,8 +159,32 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 						{% endif %}
 					{% endfor %}
 				</div>
-
 			{% endif %}
+			
+			{% if COSINNUS_EXCHANGE_ENABLED %}
+	            <h1>
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "External contents" %}
+	            </h1>
+	
+	            <table class="onoffswitch-frame small-space">
+	                <tr>
+	                    <td class="onoffswitch-text-label">
+	                        {# Translators: __INCLUDE_JS_PO__ #}
+	                        {% trans "Include contents from other platforms" %}
+	                    </td>
+	                    <td>
+	                        <div class="onoffswitch">
+	                            <input type="checkbox" name="onoffswitch-exchange" class="onoffswitch-checkbox check-exchange" id="check-exchange" {% if exchange %}checked{% endif %}>
+	                            <label class="onoffswitch-label" for="check-exchange">
+	                                <span class="onoffswitch-inner"></span>
+	                                <span class="onoffswitch-switch"></span>
+	                            </label>
+	                        </div>
+	                    </td>
+	                </tr>
+	            </table>
+	        {% endif %}
 
 			{% if splitscreen %}
 				<h1>
@@ -190,7 +214,6 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "If active, searching will be restricted to the visible map area." %}
 				</div>
 			{% endif %}
-		
 		</div>
         
         <div class="spacer"></div>

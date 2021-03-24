@@ -69,6 +69,7 @@ module.exports = ContentControlView.extend({
             sdgFiltersActive: false,
             managedTagsFiltersActive: false,
             ignoreLocation: false, // if true, search ignores all geo-loc and even shows results without tagged location
+            exchange: false, // if true, search includes contents from external platforms
             searching: false,
             searchHadErrors: false,
             searchResultLimit: 20,
@@ -144,6 +145,9 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_MAP_OPTIONS['ignore_location_default_activated']) {
             self.state.ignoreLocation = true;
         }
+        if (COSINNUS_MAP_OPTIONS['exchange_default_activated']) {
+            self.state.exchange = true;
+        }
         
         if (!self.collection) {
             self.collection = new ResultCollection();
@@ -182,6 +186,7 @@ module.exports = ContentControlView.extend({
         'click .reset-type-and-topic-filters': 'resetAllClicked', // use this to only reset the filters box: 'resetTypeAndTopicFiltersClicked',
         'click .active-filters': 'showFilterPanel',
         'change .check-ignore-location': 'markSearchBoxSearchable',
+        'change .check-exchange': 'markSearchBoxSearchable',
         
         'keyup .q': 'handleTyping',
         'keydown .q': 'handleKeyDown',
@@ -692,6 +697,7 @@ module.exports = ContentControlView.extend({
         this.state.q = query;
         this.applyFilters();
         this.state.ignoreLocation = !this.$el.find('.check-ignore-location').is(':checked');
+        this.state.exchange = this.$el.find('.check-exchange').is(':checked');
         this.clearDetailResultCache();
         var searchReason = 'manual-search';
         this.triggerDelayedSearch(true, false, false, searchReason);
@@ -1483,6 +1489,7 @@ module.exports = ContentControlView.extend({
             },
             q: util.ifundef(urlParams.q, this.state.q),
             ignoreLocation: util.ifundef(urlParams.ignore_location, this.state.ignoreLocation),
+            exchange: util.ifundef(urlParams.exchange, this.state.exchange),
             searchResultLimit: util.ifundef(urlParams.limit, this.state.searchResultLimit),
             activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds),
             activeTextTopicIds: util.ifundef(urlParams.text_topics, this.state.activeTextTopicIds),
@@ -1645,10 +1652,14 @@ module.exports = ContentControlView.extend({
             	mine: 1
             });
         }
-
         if (this.state.ignoreLocation) {
             _.extend(searchParams, {
                 ignore_location: 1
+            });
+        }
+        if (this.state.exchange) {
+            _.extend(searchParams, {
+                exchange: 1
             });
         }
         if (forAPI) {

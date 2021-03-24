@@ -9,10 +9,9 @@ from drf_yasg.views import get_schema_view
 from rest_framework import routers, permissions
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
-from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    oauth_user, oauth_profile
-from cosinnus.api.views import oauth_current_user, statistics as api_statistics, current_user, \
-    navbar, settings as api_settings
+from cosinnus.api.views.group import CosinnusSocietyViewSet, CosinnusProjectViewSet
+from cosinnus.api.views.user import oauth_user, oauth_profile, current_user, oauth_current_user, UserViewSet
+from cosinnus.api.views.portal import statistics as api_statistics, navbar, settings as api_settings
 from cosinnus.api.views.i18n import translations
 from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
@@ -128,7 +127,6 @@ urlpatterns = [
     url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),
     
     url(r'^housekeeping/ensure_group_widgets/$', housekeeping.ensure_group_widgets, name='housekeeping-ensure-group-widgets'),
-    url(r'^housekeeping/fillexternaldata/$', housekeeping.fill_external_data, name='housekeeping-fill-external-data'),
     url(r'^housekeeping/newsletterusers/$', housekeeping.newsletter_users, name='housekeeping-newsletter-user-emails'),
     url(r'^housekeeping/activeuseremails/$', housekeeping.active_user_emails, name='housekeeping-active-user-emails'),
     url(r'^housekeeping/neverloggedinuseremails/$', housekeeping.never_logged_in_user_emails, name='housekeeping-never-logged-in-user-emails'),
@@ -307,6 +305,8 @@ router.register(r'projects', CosinnusProjectViewSet)
 router.register(r'organizations', OrganizationViewSet)
 router.register(r'events', EventViewSet)
 router.register(r'notes', NoteViewSet)
+if getattr(settings, 'COSINNUS_API_SETTINGS', {}).get('user'):
+    router.register(r'users', UserViewSet)
 
 if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
     from cosinnus_message.api.views import MessageExportView

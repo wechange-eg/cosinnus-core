@@ -1,0 +1,27 @@
+{% load i18n cosinnus_tags %}
+
+{% with event=object %}
+    <div class="app-calendar">
+        <div class="btn btn-emphasized w100" href="{{ event.url }}">
+            <ul class="media-list {% if no_space %}fine-space{% else %}large-space{% endif %}">
+                <li class="media">
+                    <span class="pull-left square-date-icon">
+                        <div>{{ event.from_date|parse_datetime|date:"d" }}</div>
+                        <div>{{ event.from_date|parse_datetime|date:"M" }}</div>
+                    </span>
+                    <div class="media-body">
+                        <span class="annotation">
+							{% trans "from" %}: {{ event.source }}
+                        </span>
+                        <strong>
+                            <a href="{{ event.url }}">
+	                            {{ event.title }}
+							    <i class="fa fa-external-link"></i>
+	                        </a>
+                        </strong>
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+    </div>
+{% endwith %}

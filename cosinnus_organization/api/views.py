@@ -1,15 +1,20 @@
 from rest_framework import viewsets
 
+from cosinnus_organization.api.rdf_serializers import OrganizationRDFSerializer
 from cosinnus_organization.api.serializers import OrganizationListSerializer, OrganizationRetrieveSerializer
-from cosinnus.api.views import PublicCosinnusGroupFilterMixin
-from cosinnus.models.group_extra import CosinnusProject
+from cosinnus_organization.models import CosinnusOrganization
+from cosinnus.api.views.mixins import PublicCosinnusGroupFilterMixin
+from rest_framework_rdf.viewsets import RDFViewSetMixin
+
 
 
 class OrganizationViewSet(PublicCosinnusGroupFilterMixin,
+                          RDFViewSetMixin,
                           viewsets.ReadOnlyModelViewSet):
 
-    queryset = CosinnusProject.objects.all()
+    queryset = CosinnusOrganization.objects.public()
     serializer_class = OrganizationListSerializer
+    rdf_serializer_class = OrganizationRDFSerializer
 
     def get_serializer_class(self):
         if self.action == 'list':

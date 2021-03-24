@@ -4,17 +4,18 @@ from __future__ import unicode_literals
 from haystack import indexes
 
 from cosinnus.conf import settings
-from cosinnus.external.models import ExternalProject, ExternalSociety
-from cosinnus.utils.search import CommaSeperatedIntegerMultiValueField, TemplateResolveNgramField
+from cosinnus.utils.search import CommaSeperatedIntegerMultiValueField, TemplateResolveNgramField, \
+    TemplateResolveCharField
+from .models import ExchangeProject, ExchangeSociety, ExchangeEvent, ExchangeOrganization
 
 
-EXTERNAL_CONTENT_PORTAL_ID = 99999
+class ExchangeIndexMixin(indexes.SearchIndex):
 
+    text = TemplateResolveNgramField(document=True, use_template=True)
+    rendered = TemplateResolveCharField(use_template=True, indexed=False)
 
-class ExternalBaseIndexMixin(indexes.SearchIndex):
-    
     source = indexes.CharField(stored=True, indexed=False, model_attr='source')
-    portal = indexes.IntegerField(default=EXTERNAL_CONTENT_PORTAL_ID)
+    portal = indexes.IntegerField(default=settings.COSINNUS_EXCHANGE_PORTAL_ID)
     location = indexes.LocationField(null=True)
     
     """ from StoredDataIndexMixin """
@@ -25,7 +26,7 @@ class ExternalBaseIndexMixin(indexes.SearchIndex):
     url = indexes.CharField(stored=True, indexed=False, model_attr='url')
     description = indexes.CharField(stored=True, indexed=False, model_attr='description')
     # the small icon image, should be a 144x144 image
-    icon_image_url = indexes.CharField(stored=True, indexed=False, model_attr='icon_image_url')
+    icon_image_url = indexes.CharField(stored=True, indexed=False, model_attr='icon_image_url', null=True)
     # the small background image or None, should be a 500x275 image
     background_image_small_url = indexes.CharField(stored=True, indexed=False, model_attr='background_image_small_url', null=True)
     # the large background image or None, should be a 1000x550 image
@@ -51,8 +52,6 @@ class ExternalBaseIndexMixin(indexes.SearchIndex):
     
     mt_public = indexes.BooleanField(default=True)
     
-    text = TemplateResolveNgramField(document=True, model_attr='title')
-    
     def prepare_location(self, obj):
         if obj.mt_location_lat and obj.mt_location_lon:
             # this expects (lat,lon)!
@@ -60,20 +59,34 @@ class ExternalBaseIndexMixin(indexes.SearchIndex):
         return None
 
 
-class ExternalBaseGroupIndex(ExternalBaseIndexMixin, indexes.SearchIndex):
+class ExchangeFilterIndex(indexes.SearchIndex):
     # for filtering on this model
     is_group_model = indexes.BooleanField(default=True)
     always_visible = indexes.BooleanField(default=True)
     public = indexes.BooleanField(default=True)
 
 
-class ExternalProjectIndex(ExternalBaseGroupIndex, indexes.Indexable):
+class ExchangeProjectIndex(ExchangeIndexMixin, ExchangeFilterIndex, indexes.Indexable):
     
     def get_model(self):
-        return ExternalProject
+        return ExchangeProject
 
 
-class ExternalSocietyIndex(ExternalBaseGroupIndex, indexes.Indexable):
+class ExchangeSocietyIndex(ExchangeIndexMixin, ExchangeFilterIndex, indexes.Indexable):
     
     def get_model(self):
-        return ExternalSociety
+        return ExchangeSociety
+
+
+class ExchangeOrganizationIndex(ExchangeIndexMixin, ExchangeFilterIndex, indexes.Indexable):
+
+    def get_model(self):
+        return ExchangeOrganization
+
+
+class ExchangeEventIndex(ExchangeIndexMixin, ExchangeFilterIndex, indexes.Indexable):
+    from_date = indexes.DateTimeField(model_attr='from_date', null=True)
+    to_date = indexes.DateTimeField(model_attr='to_date', null=True)
+
+    def get_model(self):
+        return ExchangeEvent

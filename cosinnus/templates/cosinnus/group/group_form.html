@@ -433,7 +433,7 @@
 				            {% endif %}
                         {% endblock visibility_field %}
                         
-						{% if SETTINGS.COSINNUS_DATA_EXCHANGE_ENABLED %}
+						{% if SETTINGS.COSINNUS_EXCHANGE_ENABLED %}
 						{# public Field #}
 						{% trans "Visibility on other platforms" as public_label %}
 						{% blocktrans asvar public_legend with url="/cms/partner-platforms/" %}Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href="#" target="_blank">partner platforms</a> by WECHANGE.{% endblocktrans %}

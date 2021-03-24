@@ -1,0 +1,22 @@
+{% load static cosinnus_tags %}
+
+{% with organization=object %}
+	{% url 'cosinnus:organization-detail' organization=organization.slug as org_url %}
+	<div class="app-main">
+	    <div class="btn btn-emphasized w100" href="{{ org_url }}">
+	        <ul class="media-list large-space">
+	            <li class="media">
+                    <span class="pull-left">
+                        {% include "cosinnus/group/group_avatar_image.html" with group=organization group_avatar_type="organization" %}
+                    </span>
+	                <div class="media-body">
+						<span>
+							<i class="fa fa-building"></i>
+							{{ organization.name }}
+						</span>
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
+	</div>
+{% endwith %}

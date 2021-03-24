@@ -2,7 +2,7 @@ from django.utils.timezone import now
 from haystack import indexes
 
 from cosinnus.utils.search import DocumentBoostMixin, TagObjectSearchIndex, StoredDataIndexMixin, \
-    TemplateResolveNgramField, BOOSTED_FIELD_BOOST, DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
+    TemplateResolveNgramField, BOOSTED_FIELD_BOOST, DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE, TemplateResolveCharField
 from cosinnus_organization.models import CosinnusOrganization
 
 
@@ -10,6 +10,8 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
           StoredDataIndexMixin, indexes.Indexable):
 
     text = TemplateResolveNgramField(document=True, model_attr='name')
+    rendered = TemplateResolveCharField(use_template=True, indexed=False)
+
     boosted = indexes.NgramField(model_attr='name', boost=BOOSTED_FIELD_BOOST)
     location = indexes.LocationField(null=True)
 
