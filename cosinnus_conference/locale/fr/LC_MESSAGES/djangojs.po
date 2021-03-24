@@ -4,7 +4,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "MIME-Version: 1.0\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.4.2\n"
 "Project-Id-Version: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
@@ -65,7 +65,7 @@ msgstr "La conférence est en cours de préparation"
 #. undefined
 #: locale/src/views/Channels/list.json
 msgid "Connect with someone via videochat for 5 minutes"
-msgstr "Connectez-vous avec quelqu'un ( e) parvidéo-chat pendant 5 minutes"
+msgstr "Connectez-vous avec quelqu'un ( e) par vidéo-chat pendant 5 minutes"
 
 #. [Contact]
 #. defaultMessage is:
@@ -161,13 +161,6 @@ msgstr "Gérer les événements"
 #: locale/src/views/components/Nav/index.json
 msgid "Manage rooms"
 msgstr "Gérer les salles"
-
-#. [Membership]
-#. defaultMessage is:
-#. undefined
-#: locale/src/views/components/Nav/index.json
-msgid "Membership"
-msgstr "Adhésion"
 
 #. [Name]
 #. defaultMessage is:
@@ -367,3 +360,11 @@ msgid ""
 msgstr ""
 "Vous assistez actuellement à un événement. Vous êtes sûr de vouloir partir ? Conseil : "
 "vous pouvez ouvrir un nouvel onglet ou une nouvelle fenêtre à la place."
+
+
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "Adhésion"

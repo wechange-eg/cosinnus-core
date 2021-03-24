@@ -163,13 +163,6 @@ msgstr "נהל/י אירועים"
 msgid "Manage rooms"
 msgstr "נהל/י חדרים"
 
-#. [Membership]
-#. defaultMessage is:
-#. undefined
-#: locale/src/views/components/Nav/index.json
-msgid "Membership"
-msgstr "חֲבֵרוּת"
-
 #. [Name]
 #. defaultMessage is:
 #. undefined
@@ -366,5 +359,13 @@ msgid ""
 "You're currently attending an event. Are you sure you want to leave? "
 "Tip: You can open a new tab or window instead."
 msgstr ""
-"אתה משתתף כרגע באירוע. אתה בטוח שאתה רוצה לעזוב? טיפ: במקום זאת תוכלו "
-"לפתוח כרטיסייה או חלון חדשים."
+"אתה משתתף כרגע באירוע. אתה בטוח שאתה רוצה לעזוב? "
+"טיפ: במקום זאת תוכלו לפתוח כרטיסייה או חלון חדשים."
+
+
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "חֲבֵרוּת"
