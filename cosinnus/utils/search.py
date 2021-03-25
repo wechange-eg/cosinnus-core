@@ -56,7 +56,11 @@ class TagObjectIndex(indexes.SearchIndex):
     mt_visibility = indexes.IntegerField(model_attr='media_tag__visibility', null=True)
 
     def prepare_mt_text_topics(self, obj):
-        return [text_topic.id for text_topic in obj.media_tag.text_topics.all()]
+        text_topic_ids = []
+        if obj.media_tag:
+            text_topic_ids = [text_topic.id for text_topic in obj.media_tag.text_topics.all()]
+        return text_topic_ids
+    
 
 def get_tag_object_index():
     """
