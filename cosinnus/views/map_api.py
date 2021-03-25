@@ -376,13 +376,13 @@ def map_detail_endpoint(request):
             return HttpResponseNotFound('No item found that matches the requested type and slug (index: %s, %s, %s).' % (portal, model_type, slug))
         # format data
         result_model = SEARCH_RESULT_DETAIL_TYPE_MAP[model_type]
-        result = result_model(haystack_result, obj, request.user)
+        result = result_model(haystack_result, obj, request.user, request=request)
     else:
         # for external, api based objects:
         haystack_result = get_searchresult_by_args(portal, model_type, slug)
         if not haystack_result:
             return HttpResponseNotFound('No item found that matches the requested type and slug (external: %s, %s, %s).' % (portal, model_type, slug))
-        result = HaystackMapResult(haystack_result, request.user)
+        result = HaystackMapResult(haystack_result, request.user, request=request)
     
     data = {
         'result': result,

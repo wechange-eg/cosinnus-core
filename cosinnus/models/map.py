@@ -248,7 +248,8 @@ class HaystackMapResult(BaseMapResult):
             fields.update({
                 'managed_tags': result.managed_tags,
             })
-        
+        if 'request' in kwargs:
+            kwargs.pop('request')
         fields.update(**kwargs)
         
         return super(HaystackMapResult, self).__init__(*args, **fields)
@@ -449,17 +450,22 @@ class DetailedUserMapResult(DetailedMapResult):
         # the preview for projects and groups is always visible for everyone!
         #sqs = filter_searchqueryset_for_read_access(sqs, user)
         sqs = sqs.order_by('title')
-
-        dynamic_fields_template = render_to_string('cosinnus/user/user_profile_dynamic_fields.html',
-                                                  {'profile': obj,
-                                                   'profile_values':obj.dynamic_fields,
-                                                   'labels': settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
-                                                   })
+        
+        data = {
+            'profile': obj,
+            'profile_values':obj.dynamic_fields,
+            'labels': settings.COSINNUS_USERPROFILE_EXTRA_FIELDS,
+        }
+        dynamic_fields_template = render_to_string(
+            'cosinnus/user/user_profile_dynamic_fields.html',
+            data, 
+            request=kwargs.get('request', None)
+        )
 
         kwargs.update({
             'projects': [],
             'groups': [],
-            'extra_html': dynamic_fields_template
+            'extra_html': dynamic_fields_template,
         })
         for result in sqs:
             if SEARCH_MODEL_NAMES[result.model] == 'projects':
