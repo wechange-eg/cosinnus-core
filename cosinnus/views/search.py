@@ -51,7 +51,7 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
     http_method_names = ['get',]
     
     # which models can be displaed, as found in `SEARCH_MODEL_NAMES_REVERSE`
-    content_types = ['polls', 'todos', 'files', 'pads', 'ideas', 'events', 'projects', 'groups',]
+    content_types = ['polls', 'todos', 'files', 'pads', 'ideas', 'events', 'projects', 'groups', 'conferences']
     
     if settings.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE:
         content_types.append('offers')
@@ -70,6 +70,7 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
         'events': 'title',
         'projects': 'name',
         'groups': 'name',
+        'conferences': 'name',
     }
     if settings.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE:
         content_type_filter_fields['offers'] = 'title'
