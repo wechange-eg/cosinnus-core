@@ -242,6 +242,7 @@
                             {% captureas description_long_legend %}
                                 {{ group_model_class.get_trans.FORMFIELD_DESCRIPTION_LEGEND }}
                                 {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+                                {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
                                 {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
                             {% endcaptureas %}
                             {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
@@ -252,6 +253,7 @@
                             {% captureas contact_info_legend %}
                                 {% trans "How you can be reached, addresses, social media, etc..." %}
                                 {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+                                {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
                                 {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
                             {% endcaptureas %}
                             {% trans "Contact Information" as contact_info_placeholder %}
@@ -286,7 +288,12 @@
                         
                         {# Avatar Field #}
                         {% trans "Icon" as avatar_label %}
-                        {% captureas avatar_legend %}{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}{% endcaptureas %}
+                        {% captureas avatar_legend %}
+                            {% trans "Will be shown as a small logo." %} 
+                            {% trans "This content will be visible for all registered users!" %}
+                            <br/>
+                            {% include 'cosinnus/texts/image_upload_legend_avatar.html' %}
+                        {% endcaptureas %}
                         {% captureas preview_html %}
                             {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.select_area_width}}px;height:{{SETTINGS.AWESOME_AVATAR.select_area_height}}px{% endcaptureas %}
                             {% captureas group_avatar_type %}{% if group_model == "CosinnusSociety" %}group{% else %}project{% endif %}{% endcaptureas %}
@@ -297,11 +304,18 @@
                         {% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
                         
 					    {# Microsite Wallpaper Field #}
-                        {% if group_model == "CosinnusConference" %}
-                            {% captureas wallpaper_label %}{% trans "Banner Image" %} (1140px x 240px, {% trans "max. 10 MB" %}){% endcaptureas %}
-                        {% else %}
-                            {% captureas wallpaper_label %}{% trans "Background Image" %} (1140px x 240px, {% trans "max. 10 MB" %}){% endcaptureas %}
-                        {% endif %}
+                        {% trans "Header Image" as wallpaper_label %}
+                        {% captureas wallpaper_legend %}
+                            {% if group_model == "CosinnusConference" %}
+                                {% trans "Will be shown as a header in the conference lobby and on the conference microsite." %}
+                            {% else %}
+                                {% trans "Will be shown as a header on the microsite." %}
+                            {% endif %}
+                            {% trans "This content will be visible for all registered users!" %}
+                            {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
+                            <br/>
+                            {% include 'cosinnus/texts/image_upload_legend_wallpaper.html' %}
+                        {% endcaptureas %}
 	                    {% captureas wallpaper_html %}
 							{{ form.forms.obj.wallpaper.errors }}
 							{% if object.wallpaper %}
@@ -336,11 +350,15 @@
 				                    </div>
                                 {% endif %}
 	                    {% endcaptureas %}
-						{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label field_html=wallpaper_html extra_html=wallpaper_extra_html first=True large_field=True %}
+						{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label legend=wallpaper_legend field_html=wallpaper_html extra_html=wallpaper_extra_html first=True large_field=True %}
                         
                         {% if group_model == "CosinnusConference" %}
 	                        {# Attachable File upload Field #}
-	                        {% trans "Uploaded files will be available for download and images will be shown in a gallery." as files_legend %}
+	                        {% captureas files_legend %}
+		                        {% trans "Uploaded files will be available for download and images will be shown in a gallery." %}
+		                        {% trans "This content will be visible for all registered users!" %}
+		                        {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
+	                        {% endcaptureas %}
 					        {% include 'cosinnus/media_tags.html' with show_all=True files_label=files_label files_legend=files_legend disable_persons=True disable_tags=True disable_location=True disable_topics=True disable_visibility=True hide_intro=True no_imports=True %}
 				        {% endif %}
                         
@@ -483,6 +501,7 @@
 		                            {% captureas description_long_legend %}
 		                                {% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
 		                                {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+		                                {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
 		                                {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
 		                            {% endcaptureas %}
 		                            {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
@@ -497,6 +516,7 @@
 				                    {% captureas contact_info_legend %}
 				                    	{% trans "How you can be reached, addresses, social media, etc..." %}
 				                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+				                    	{% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
 				                    	{% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
 				                    {% endcaptureas %}
 		                        	{% trans "Contact Information" as contact_info_placeholder %}

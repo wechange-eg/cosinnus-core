@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-12 17:55+0100\n"
-"PO-Revision-Date: 2021-03-09 17:41+0100\n"
+"POT-Creation-Date: 2021-03-26 14:38+0100\n"
+"PO-Revision-Date: 2021-03-26 14:41+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -3539,17 +3539,20 @@ msgstr "Farbe im Hex-Code, die als primäre Farbe für die Tagungsumgebung verwe
 msgid "Icon"
 msgstr "Icon"
 
-msgid "A picture for better recognition."
-msgstr "Ein Bild für die schnellere Wiedererkennung."
+msgid "Will be shown as a small logo."
+msgstr "Wird als kleines Logo-Bild angezeigt."
 
-msgid "File Size"
-msgstr "Dateigröße"
+msgid "This content will be visible for all registered users!"
+msgstr "Dieser Inhalt wird für alle registrierten Benutzer/innen sichtbar sein!"
 
-msgid "max. 10 MB"
-msgstr "max. 10 MB"
+msgid "Header Image"
+msgstr "Kopfzeilenbild"
 
-msgid "Banner Image"
-msgstr "Bannerbild"
+msgid "Will be shown as a header in the conference lobby and on the conference microsite."
+msgstr "Wird als Banner in der Tagungslobby und auf der Microsite angezeigt."
+
+msgid "Will be shown as a header on the microsite."
+msgstr "Wird als Banner auf der Microsite angezeigt."
 
 msgid "Upload an image."
 msgstr "Lade ein Bild hoch."
@@ -3658,6 +3661,12 @@ msgstr "Flickr Galerie URL (Beispiel: \"https://www.flickr.com/photos/username/s
 
 msgid "Microsite Gallery Images"
 msgstr "Microsite Galeriebilder"
+
+msgid "File Size"
+msgstr "Dateigröße"
+
+msgid "max. 10 MB"
+msgstr "max. 10 MB"
 
 msgid "Remove gallery image"
 msgstr "Galeriebild entfernen"
@@ -5110,6 +5119,21 @@ msgstr "Mit der Cloud bieten wir eurem Team eine neue Dateiablage mit umfangreic
 msgid "Learn more"
 msgstr "Mehr erfahren"
 
+msgid "Recommended minimum dimensions: 200px x 200px (square)."
+msgstr "Empfohlene Mindestbildmaße: 200px x 200px (quadratisch)."
+
+msgid "All common image file types are supported. Maximum file size is 10 MB."
+msgstr "Es werden alle gängigen Bilddateitypen unterstützt. Die maximale Dateigröße beträgt 10 MB."
+
+msgid "Recommended minimum dimensions: 600px x 140px (wide)."
+msgstr "Empfohlene Mindestbildmaße: 600px x 140px (breit)."
+
+msgid "Recommended minimum dimensions: 1140px x 240px (wide)."
+msgstr "Empfohlene Mindestbildmaße: 1140px x 240px (breit)."
+
+msgid "View the microsite now"
+msgstr "Microsite jetzt ansehen"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
 msgstr "Meine Benutzer_innen"
@@ -5714,6 +5738,9 @@ msgstr "E-Mail"
 
 msgid "Profile avatar"
 msgstr "Avatar"
+
+msgid "A picture for better recognition."
+msgstr "Ein Bild für die schnellere Wiedererkennung."
 
 msgid "Who are you and what motivates you?"
 msgstr "Wer bist du und was motiviert dich?"
@@ -7074,6 +7101,9 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Banner Image"
+#~ msgstr "Bannerbild"
 
 #~ msgid "Determins if application management is visible in conference administration."
 #~ msgstr "Legt fest, ob die Anwendungsverwaltung in der Tagungsverwaltung sichtbar ist."
