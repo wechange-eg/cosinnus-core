@@ -109,6 +109,14 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
     def __init__(self, connectionalias, **options):
         super(RobustElasticSearchBackend, self).__init__(connectionalias, **options)
 
+    def build_schema(self, *args, **kwargs):
+        """ Use the standard search_analyzer for ngram fields, so the search query itself won't be n-gramed """
+        content_field_name, mapping = super(RobustElasticSearchBackend, self).build_schema(*args, **kwargs)
+        for _field_name, field_mapping in mapping.items():
+            if "analyzer" in field_mapping and field_mapping["analyzer"] == "ngram_analyzer":
+                field_mapping["search_analyzer"] = "standard"
+        return content_field_name, mapping
+
     @mute_error
     def update(self, *args, **kwargs):
         super(RobustElasticSearchBackend, self).update(*args, **kwargs)

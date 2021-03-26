@@ -652,7 +652,7 @@ class CosinnusConf(AppConf):
     # if `CONFERENCES_ENABLED` is True, setting this to 
     # True will only show the conference button if the current user actually
     # has permission to create a conference
-    SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED = False
+    SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED = True
     
     # For conferences, disables the react conference interface, locks non-admin members 
     # to the microsite, removes most group-like elements like apps andremoves room management
