@@ -44,7 +44,8 @@ var App = function App () {
         // we can't actually define them here, as these get set in controlView.defaults!
     	// see controlView.defaults for all their default values
 		/*
-		 * filterGroup: <int> if given, filters all content by the given group id
+         * filterGroup: <int> if given, filters all content by the given group id
+         * filterManagedTag: <int> if given, filters all content by the given managed tag id
 		 * availableFilters: <dict> the shown result filters by type
 		 * activeFilters: <dict> the active (selected) current result filters by type
 		 * basePageUrl: <str> the eg "/map/" url fragment as base of this page, used to build history URLs 
@@ -186,6 +187,7 @@ var App = function App () {
                 paginationControlsEnabled: self.displayOptions.forcePaginationControlsEnabled || self.displayOptions.showTiles,
                 paginationControlsUseInfiniteScroll: !self.displayOptions.showMap && self.displayOptions.showTiles,
                 filterGroup: self.settings.filterGroup,
+                filterManagedTag: self.settings.filterManagedTag,
                 basePageURL: basePageUrl,
                 showMine: self.settings.showMine,
                 fullscreen: self.displayOptions.fullscreen,

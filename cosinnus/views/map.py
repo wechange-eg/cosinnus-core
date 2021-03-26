@@ -12,6 +12,8 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.conf import settings
 from cosinnus.views.map_api import get_searchresult_by_itemid
 from cosinnus.utils.functions import is_number
+from cosinnus.models.managed_tags import CosinnusManagedTag
+from annoying.functions import get_object_or_None
 
 
 USER_MODEL = get_user_model()
@@ -201,6 +203,13 @@ class MapEmbedView(TemplateView):
             map_settings.update({
                 "filterGroup": self.request.GET.get('filter_group', None)
             })
+        if self.request.GET.get('managed_tag', None):
+            mtag = get_object_or_None(CosinnusManagedTag, slug=self.request.GET.get('managed_tag', None))
+            if mtag:
+                map_settings.update({
+                    "filterManagedTag": mtag.id
+                })
+        
         zoom = self.request.GET.get('zoom', None)
         if self.request.GET.get('location_lat', None) and self.request.GET.get('location_lon', None):
             map_settings.update({
