@@ -102,16 +102,17 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
     management_urls = serializers.SerializerMethodField()
     theme_color = serializers.CharField(source='conference_theme_color')
     dates = serializers.SerializerMethodField()
-    avatar = serializers.CharField(source='avatar_url')
+    avatar = serializers.SerializerMethodField()
     wallpaper = serializers.SerializerMethodField()
     images = serializers.SerializerMethodField()
     header_notification = serializers.SerializerMethodField()
     managed_tags = serializers.SerializerMethodField()
+    url = serializers.SerializerMethodField()
 
     class Meta(object):
         model = CosinnusGroup
         fields = ('id', 'name', 'description', 'rooms', 'management_urls', 'theme_color', 'dates', 'avatar',
-                  'wallpaper', 'images', 'header_notification', 'managed_tags')
+                  'wallpaper', 'images', 'header_notification', 'managed_tags', 'url', 'from_date', 'to_date')
 
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
@@ -161,15 +162,24 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
         else:
             from_date, to_date = now(), now()
         return [from_date + timedelta(days=i) for i in range((to_date - from_date).days + 1)]
-
+    
+    def get_avatar(self, obj):
+        domain = obj.portal.get_domain()
+        return (domain + obj.avatar.url) if obj.avatar else None
+    
     def get_wallpaper(self, obj):
-        return obj.wallpaper.url if obj.wallpaper else None
+        domain = obj.portal.get_domain()
+        return (domain + obj.wallpaper.url) if obj.wallpaper else None
 
     def get_images(self, obj):
-        return [img.image.url for img in obj.gallery_images.all()]
+        domain = obj.portal.get_domain()
+        return [(domain + img.file.url) for img in obj.attached_images]
     
     def get_managed_tags(self, obj):
         return [tag.slug for tag in obj.get_managed_tags()]
+    
+    def get_url(self, obj):
+        return obj.get_absolute_url()
     
 
 class ConferenceParticipant(serializers.ModelSerializer):
