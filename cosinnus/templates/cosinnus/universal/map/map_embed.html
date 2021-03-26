@@ -75,7 +75,6 @@
         
         {% captureas controlsEnabled %}{% if request.GET.controls_disabled %}0{% else %}1{% endif %}{% endcaptureas %}
         {% captureas forcePaginationControlsEnabled %}{% if request.GET.controls_disabled %}0{% else %}1{% endif %}{% endcaptureas %}
-        {% captureas map_settings %}{"searchResultLimit": {% if request.GET.search_result_limit %}{{ request.GET.search_result_limit }}{% else %}null{% endif %} {% if request.GET.filter_group %}, "filterGroup": {{ request.GET.filter_group }}{% endif %}}{% endcaptureas %}
-        {% include 'cosinnus/common/init_client_module.html' with module='module-embed' id="app-embed" extra_classes="no-navbar" fullscreen=True controlsEnabled=controlsEnabled settings=map_settings forcePaginationControlsEnabled=forcePaginationControlsEnabled %}
+        {% include 'cosinnus/common/init_client_module.html' with module='module-embed' id="app-embed" extra_classes="no-navbar" fullscreen=True controlsEnabled=controlsEnabled settings=map_settings|json|safe forcePaginationControlsEnabled=forcePaginationControlsEnabled %}
     </body>
 </html>

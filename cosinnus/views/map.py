@@ -11,6 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.views.map_api import get_searchresult_by_itemid
+from cosinnus.utils.functions import is_number
 
 
 USER_MODEL = get_user_model()
@@ -179,13 +180,42 @@ tile_view = TileView.as_view()
 
 
 class MapEmbedView(TemplateView):
-    """ An embeddable, resizable Map view without any other elements than the map """
+    """ An embeddable, resizable Map view without any other elements than the map.
+        
+        Example param usage: /map/embed/?search_result_limit=50&location_lat=48.574790&location_lon=-4.326955&zoom=5
+    """
     
     template_name = 'cosinnus/universal/map/map_embed.html'
     
     @method_decorator(xframe_options_exempt)
     def dispatch(self, *args, **kwargs):
         return super(MapEmbedView, self).dispatch(*args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        limit = self.request.GET.get('search_result_limit', None)
+        map_settings = {
+            "searchResultLimit": limit and is_number(limit) and int(limit) or None
+        }
+        if self.request.GET.get('filter_group', None):
+            map_settings.update({
+                "filterGroup": self.request.GET.get('filter_group', None)
+            })
+        zoom = self.request.GET.get('zoom', None)
+        if self.request.GET.get('location_lat', None) and self.request.GET.get('location_lon', None):
+            map_settings.update({
+                "map": {
+                    "location": [
+                        self.request.GET.get('location_lat', None), 
+                        self.request.GET.get('location_lon', None)
+                    ],
+                    "zoom": zoom and is_number(zoom) and int(zoom) or 9
+                }
+            })
+        context.update({
+            'map_settings': map_settings
+        })
+        return context
 
 map_embed_view = MapEmbedView.as_view()
 
