@@ -458,14 +458,14 @@ USER_MODEL = get_user_model()
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    pass
+    exclude = ('extra_fields',)
 
 admin.site.register(get_user_profile_model(), UserProfileAdmin)
 
 
 class UserProfileInline(admin.StackedInline):
     model = USER_PROFILE_MODEL
-    pass
+    exclude = ('extra_fields',)
 
 class PortalMembershipInline(admin.TabularInline):
     model = CosinnusPortalMembership
