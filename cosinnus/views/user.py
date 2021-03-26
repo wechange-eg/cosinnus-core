@@ -814,8 +814,12 @@ def password_reset_proxy(request, *args, **kwargs):
         if user and check_user_integrated_portal_member(user):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_page.html')
         # silently disallow imported/created users without a password to reset their password
+        # if the user import functionality is enabled, because then imported users are not active
+        # until they have been sent a token invite and may not use the password reset function
         if user and not user.password:
-            return redirect(PasswordResetView().get_success_url())
+            if settings.COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED \
+                        and settings.COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES:
+                return redirect(PasswordResetView().get_success_url())
             
     kwargs.update({
         'form_class': CosinnusPasswordResetForm,
