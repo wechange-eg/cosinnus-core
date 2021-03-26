@@ -10,16 +10,6 @@
                 </a>
                 <div class="media-body">
                     <a href="{{ group.get_absolute_url }}">{{ group.name }}</a>
-                    <div class="group-annotation">
-                            <i class="fa fa-info"></i>
-                            {% if group.description_long %}
-                            	{{ group.description_long }}
-                            {% elif group.description %}
-                            	{{ group.description }}
-                            {% else %}
-                            	<i>{% trans "No Description set" %}</i>
-                            {% endif %}
-                    </div>
                 </div>
             </li>
         </ul>

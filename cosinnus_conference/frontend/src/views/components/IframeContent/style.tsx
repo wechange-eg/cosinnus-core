@@ -48,4 +48,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   fullScreenLink: {
   },
+  dialogText: {
+    color: theme.palette.text.primary
+  },
 }));
