@@ -1,5 +1,7 @@
 {% load i18n cosinnus_tags %}
-<a href="{% group_url 'cosinnus:group-microsite' group=group %}" target="_blank">
-    {% trans "View the microsite now" %}
-    <i class="fa fa-external-link"></i>
-</a>
+{% if group %}
+	<a href="{% group_url 'cosinnus:group-microsite' group=group %}" target="_blank">
+	    {% trans "View the microsite now" %}
+	    <i class="fa fa-external-link"></i>
+	</a>
+{% endif %}
