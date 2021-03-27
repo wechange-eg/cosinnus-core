@@ -297,8 +297,12 @@ class ModelRetrievalMixin(object):
         if BaseHierarchicalTaggableObjectModel in inspect.getmro(model):
             queryset = model._default_manager.filter(is_container=False)
             queryset = exclude_special_folders(queryset)
-        elif model_name == 'cosinnus_event.Event' and current_only:
-            queryset = model.objects.all_upcoming()
+        elif model_name == 'cosinnus_event.Event':
+            if current_only:
+                queryset = model.objects.all_upcoming()
+            else:
+                queryset = model.objects.get_queryset()
+            queryset = queryset.exclude(is_hidden_group_proxy=True)
         elif model_name == 'cosinnus_marketplace.Offer':
             queryset = model.objects.all_active()
         elif model is CosinnusIdea or BaseTaggableObjectModel in inspect.getmro(model):
