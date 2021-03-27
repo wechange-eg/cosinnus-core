@@ -18,8 +18,8 @@
     </ul>
 </div><!-- btn -->
 
-{% with projects=profile.cosinnus_projects %}
-    {% for group in projects %}
+{% with groups=profile.cosinnus_societies %}
+    {% for group in groups %}
         <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
             <ul class="media-list">
                 <li class="media">
