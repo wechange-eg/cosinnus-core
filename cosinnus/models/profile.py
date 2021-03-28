@@ -165,6 +165,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def __init__(self, *args, **kwargs):
         super(BaseUserProfile, self).__init__(*args, **kwargs)
         self._settings = copy.deepcopy(self.settings)
+        self._dynamic_fields = copy.deepcopy(self.dynamic_fields)
         
     def __str__(self):
         return six.text_type(self.user)
