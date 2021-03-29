@@ -477,7 +477,7 @@ def cosinnus_render_attached_objects(context, source, filter=None, skipImages=Tr
         Renderer = attached_object_registry.get(model_name)  # Renderer is a class
         if Renderer:
             # pass the list to that manager and expect a rendered html string
-            rendered_output.append(Renderer.render(context, objects, v2Style=v2Style))
+            rendered_output.append(Renderer.render(context, objects, v2Style=v2Style, request=context['request']))
         elif settings.DEBUG:
             rendered_output.append(_('<i>Renderer for %(model_name)s not found!</i>') % {
                 'model_name': model_name

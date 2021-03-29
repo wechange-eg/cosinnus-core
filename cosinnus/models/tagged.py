@@ -274,6 +274,15 @@ class AttachableObjectModel(models.Model):
                 images.append(attached_file.target_object)
         return images
     
+    @cached_property
+    def attached_cloud_files(self):
+        """ Return the all image files attached to the event"""
+        cloud_files = []
+        for attached_file in self.attached_objects.all():
+            if attached_file.model_name == "cosinnus_cloud.LinkedCloudFile" and attached_file.target_object is not None:
+                cloud_files.append(attached_file.target_object)
+        return cloud_files
+    
     def get_attached_objects_hash(self):
         """ Returns a hashable tuple of sorted list of ids of all attached objects.
             Usuable to compare equality of attached files to objects. """

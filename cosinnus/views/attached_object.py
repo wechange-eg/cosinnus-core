@@ -100,29 +100,34 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
         else:
             attach_models = attached_object_registry.get_attachable_to(self.kwargs.get('model', None))
        
+        result_items = []
         for attach_model_id in attach_models:
             aliases = aliases_dict.get(attach_model_id, [])
             aliases = '||'.join(aliases)
             
             app_label, model_name = attach_model_id.split('.')
             attach_model_class = apps.get_model(app_label, model_name)
-            if BaseHierarchicalTaggableObjectModel in attach_model_class.__bases__:
-                queryset = attach_model_class._default_manager.filter(group__slug=self.kwargs.get('group', None), is_container=False)
+            if hasattr(attach_model_class, 'get_attachable_objects_query_results'):
+                result_items = attach_model_class.get_attachable_objects_query_results(self.group, request, term, page)
             else:
-                queryset = attach_model_class._default_manager.filter(group__slug=self.kwargs.get('group', None))
-            
-            queryset = filter_tagged_object_queryset_for_user(queryset, self.request.user)
-            
-            """ For each token in the search query, filter the full object queryset further down,
-                comparing the titles of these objects, unless: the query is in the special aliases list
-                for that model type (for example 'eve' matches 'events', which is a special alias of 
-                cosinnus_event.Event, and thus only further restrict-filters objects that are not events. """
-            for token in tokens:
-                if not token in aliases:
-                    queryset = queryset.filter(Q(title__icontains=token))
-            
+                if BaseHierarchicalTaggableObjectModel in attach_model_class.__bases__:
+                    queryset = attach_model_class._default_manager.filter(group__slug=self.kwargs.get('group', None), is_container=False)
+                else:
+                    queryset = attach_model_class._default_manager.filter(group__slug=self.kwargs.get('group', None))
+                
+                queryset = filter_tagged_object_queryset_for_user(queryset, self.request.user)
+                
+                """ For each token in the search query, filter the full object queryset further down,
+                    comparing the titles of these objects, unless: the query is in the special aliases list
+                    for that model type (for example 'eve' matches 'events', which is a special alias of 
+                    cosinnus_event.Event, and thus only further restrict-filters objects that are not events. """
+                for token in tokens:
+                    if not token in aliases:
+                        queryset = queryset.filter(Q(title__icontains=token))
+                result_items = list(queryset)
+                
             # these result sets are what select2 uses to build the choice list
-            for result in queryset:
+            for result in result_items:
                 results.append( build_attachment_field_result(attach_model_id, result))
             
         return (NO_ERR_RESP, False, results) # Any error response, Has more results, options list

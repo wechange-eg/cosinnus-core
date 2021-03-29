@@ -32,6 +32,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_marketplace.Offer',
+            'cosinnus_cloud.LinkedCloudFile',
         ],
         'cosinnus_event.Event': [
             'cosinnus_file.FileEntry',
@@ -40,6 +41,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_marketplace.Offer',
+            'cosinnus_cloud.LinkedCloudFile',
         ],
         'cosinnus_etherpad.Etherpad': [
             'cosinnus_file.FileEntry',
@@ -49,6 +51,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_marketplace.Offer',
+            'cosinnus_cloud.LinkedCloudFile',
         ],
         'cosinnus_todo.TodoEntry': [
             'cosinnus_file.FileEntry',
@@ -57,6 +60,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_marketplace.Offer',
+            'cosinnus_cloud.LinkedCloudFile',
         ],
         'cosinnus_poll.Poll': [
             'cosinnus_file.FileEntry',
@@ -65,6 +69,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_marketplace.Offer',
+            'cosinnus_cloud.LinkedCloudFile',
         ],
       'cosinnus_marketplace.Offer': [
             'cosinnus_file.FileEntry',
@@ -73,6 +78,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_event.Event',
+            'cosinnus_cloud.LinkedCloudFile',
         ],
     }
     if not settings.COSINNUS_ROCKET_ENABLED:
@@ -130,6 +136,13 @@ class CosinnusConf(AppConf):
             'aufgabe',
             'task'
         ],
+        'cosinnus_cloud.LinkedCloudFile': [
+            'cloud',
+            'file',
+            'doc',
+            'excel',
+            'word'
+        ]
     }
     
     # list of BaseTaggableObjectModels that can be reflected from groups into projects

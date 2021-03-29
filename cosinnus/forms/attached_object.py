@@ -67,6 +67,7 @@ class FormAttachableMixin(object):
         """ Add attachable objects field if this model is configured in settings.py to have objects that can be attached to it """
         if target_group and attached_object_registry.get_attachable_to(source_model_id):
             self.fields['attached_objects'] = AttachableObjectSelect2MultipleChoiceField(
+                group=getattr(self, 'group', None),
                 label=_("Attachments"), 
                 help_text=_("Type the title and/or type of attachment"), 
                 data_url=group_aware_reverse('cosinnus:attached_object_select2_view', kwargs={'group': target_group, 'model':source_model_id}),
@@ -124,6 +125,7 @@ class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoice
     def __init__(self, *args, **kwargs):
         """ Enable returning HTML formatted results in django-select2 return views!
             Note: You are responsible for cleaning the content, i.e. with  django.utils.html.escape()! """
+        self.group = kwargs.pop('group')
         super(AttachableObjectSelect2MultipleChoiceField, self).__init__(*args, **kwargs)
         self.widget.options['escapeMarkup'] = JSFunction('function(m) { return m; }')
     
@@ -143,10 +145,20 @@ class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoice
             for attached_obj_str in value:
                 if not attached_obj_str:
                     continue
-                """ expand id and model type to real AO """
+                """ expand id and model_name type to real AO """
                 obj_type, _, object_id = str(attached_obj_str).partition(':')
-                app_label, _, model = obj_type.rpartition('.')
-                content_type = ContentType.objects.get_for_model(apps.get_model(app_label, model))
+                app_label, _, model_name = obj_type.rpartition('.')
+                attach_model_class = apps.get_model(app_label, model_name)
+                if object_id.startswith('_unresolved_'):
+                    # if the ID is an unresolved ID, it doesn't actually belong to the attachable object,
+                    # but needs to be resolved through it
+                    object_id = object_id.replace('_unresolved_', '')
+                    resolved_attachable_object = attach_model_class.resolve_attachable_object_id(object_id, self.group)
+                    if not resolved_attachable_object or not resolved_attachable_object.id:
+                        continue
+                    object_id = resolved_attachable_object.id
+                    
+                content_type = ContentType.objects.get_for_model(attach_model_class)
                 (ao, _) = AttachedObject.objects.get_or_create(content_type=content_type, object_id=object_id)
                 attached_objects.append(ao)
         
