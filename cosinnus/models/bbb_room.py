@@ -22,6 +22,7 @@ from cosinnus.utils.permissions import check_user_superuser
 from datetime import timedelta
 from django.utils.timezone import now
 from django.http.response import HttpResponseForbidden
+from django.utils.crypto import get_random_string
 
 
 # from cosinnus.models import MEMBERSHIP_ADMIN
@@ -296,6 +297,20 @@ class BBBRoom(models.Model):
 
         :type: dict
         """
+        
+        from cosinnus.models.group import CosinnusPortal
+        current_portal = CosinnusPortal.get_current()
+        
+        # Do not create a meeting if one already exists
+        existing_meeting = get_object_or_None(BBBRoom, meeting_id=meeting_id, portal=current_portal)
+        if existing_meeting:
+            existing_meeting.restart()
+            return existing_meeting
+        
+        # add a suffix to uniquify this meeting id - makes it safe for manual restarts
+        # by deleting the BBBRoom object
+        meeting_id = f'{meeting_id}-' + get_random_string(8)
+        
         if attendee_password is None:
             attendee_password = bbb_utils.random_password()
         if moderator_password is None:
@@ -328,9 +343,6 @@ class BBBRoom(models.Model):
         )
 
         meeting_json = bbb_utils.xml_to_json(m_xml)
-
-        from cosinnus.models.group import CosinnusPortal
-        current_portal = CosinnusPortal.get_current()
 
         # Now create a model for it.
         meeting, created = BBBRoom.objects.get_or_create(meeting_id=meeting_id, portal=current_portal)
