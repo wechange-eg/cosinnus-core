@@ -422,6 +422,13 @@ module.exports = ContentControlView.extend({
     resetTypeFilters: function () {
         this.state.activeFilters = _(this.options.availableFilters).clone();
         this.state.typeFiltersActive = false;
+        if (this.options.showTextTopicsOnTypesSelected.length > 0 ) {
+            this.resetTextTopics();
+        }
+        if (this.options.showManagedTagsOnTypesSelected.length > 0 ) {
+            this.resetManagedTags();
+        }
+        
     },
 
     resetTypeFiltersClicked: function (event) {
