@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     overflowX: "hidden",
     width: navWidth,
     zIndex: 1,
-    padding: "1.5rem 1rem 1.5rem 1.5rem",
+    padding: "1.5rem 1rem 0.5rem 1.5rem",
     [theme.breakpoints.down('sm')]: {
       width: "100%",
       position: "static",
