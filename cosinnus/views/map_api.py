@@ -206,28 +206,32 @@ def map_search_endpoint(request, filter_group_id=None):
                                            exchange=params.get('exchange', False))
     # filter for read access by this user
     sqs = filter_searchqueryset_for_read_access(sqs, request.user)
-    # filter events by upcoming status and exclude hidden proxies
-    if params['events'] or params['conferences'] and Event is not None:
-        sqs = filter_event_searchqueryset_by_upcoming(sqs).exclude(is_hidden_group_proxy=True)
-
+    
     params_keys = [key for key, value in params.items() if value]
     settings_keys = MAP_CONTENT_TYPE_SEARCH_PARAMETERS.keys()
 
-    content_type_params =  list(set(params_keys) & set(settings_keys))
+    # filtering for events and conferences
     check_date_cts = ['events', 'conferences']
-    reduced_pramas = list(set(content_type_params) & set(check_date_cts))
+    if any([params[checktype] for checktype in check_date_cts]):
+        sqs = sqs.exclude(is_hidden_group_proxy=True)
+        
+        # figure out if a datetime filter is active
+        content_type_params =  list(set(params_keys) & set(settings_keys))
+        reduced_pramas = list(set(content_type_params) & set(check_date_cts))
+        check_date_by_date_param = params.get('fromDate') or params.get('toDate')
+        check_date_by_conten_type = len(content_type_params) == len(reduced_pramas)
+        if check_date_by_date_param and check_date_by_conten_type:
+            # filter by datetime range
+            from_date_string = params.get('fromDate')
+            from_time_string = params.get('fromTime')
+            to_date_string = params.get('toDate')
+            to_time_string = params.get('toTime')
+            sqs = filter_event_or_conference_starts_after(from_date_string, from_time_string, sqs)
+            sqs = filter_event_or_conference_starts_before(to_date_string, to_time_string, sqs)
+        else:
+            # filter events by upcoming status and exclude hidden proxies
+            sqs = filter_event_searchqueryset_by_upcoming(sqs)
 
-    check_date_by_date_param = params.get('fromDate') or params.get('toDate')
-    check_date_by_conten_type = len(content_type_params) == len(reduced_pramas)
-
-    if check_date_by_date_param and check_date_by_conten_type:
-        from_date_string = params.get('fromDate')
-        from_time_string = params.get('fromTime')
-        to_date_string = params.get('toDate')
-        to_time_string = params.get('toTime')
-
-        sqs = filter_event_or_conference_starts_after(from_date_string, from_time_string, sqs)
-        sqs = filter_event_or_conference_starts_before(to_date_string, to_time_string, sqs)
 
     # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't shown)
     if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
