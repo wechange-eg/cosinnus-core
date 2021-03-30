@@ -30,12 +30,12 @@
                 {% with group=application.conference %}
                     {% if group.from_date %}
                     {
-                        title: $.cosinnus.decodeEntities('{{ group.name|truncatechars:25 }}'),
-                        start: moment("{{ group.from_date|date:"c"}}"),
+                        title: "{{ group.name|truncatechars:25 }}",
+                        start: "{{ group.from_date|date:'c'}}",
                         {% if group.to_date %}
-                        end: moment("{{ group.to_date|date:"c"}}"),
+                        end: "{{ group.to_date|date:'c'}}",
                         {% endif %}
-                        url: '{{ group.get_absolute_url }}'
+                        url: "{{ group.get_absolute_url }}"
                     },
                     {% endif %}
                 {% endwith %}

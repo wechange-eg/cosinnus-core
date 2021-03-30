@@ -63,7 +63,13 @@
 
 	/* ##### Small calendar ####### */
 	.small-calendar {
-			width: 225px;
+
+		.fc-daygrid-day-events {
+			min-height: 0;
+			margin: 0;
+		}
+
+		width: 225px;
 
 		.fc-header {
 			background-color: @normal;
@@ -87,15 +93,15 @@
 			// border-spacing: 2px;
 		}
 
-		.fc-day,
-		.fc-day-header {
-		  border-spacing: 10px;
-		  border-collapse: separate;
-			// hack to set TD width
-			// min-width: 30px;
-			// max-width: 30px;
-			height: 20px;
-		}
+		// .fc-day,
+		// .fc-day-header {
+		//   border-spacing: 10px;
+		//   border-collapse: separate;
+		// 	// hack to set TD width
+		// 	// min-width: 30px;
+		// 	// max-width: 30px;
+		// 	height: 20px;
+		// }
 
 		.fc-day-number,
 		.fc-day-header {
@@ -177,6 +183,13 @@
 /** Fix z-index popping into navbar */
 .fc-event-container {
 	z-index: 4 !important;
+}
+
+.fc-theme-standard {
+    background-color: #ffffff;
+    &, a {
+        color: @text-color;
+    }
 }
 
 .app-main {

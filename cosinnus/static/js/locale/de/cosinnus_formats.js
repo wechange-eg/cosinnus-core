@@ -34,29 +34,6 @@ $.cosinnus.fullcalendar_format = {
         month: "Monat",
         week: "Woche",
         day: "Tag"
-    },
-    monthNames: ['Januar','Februar','März','April',
-        'Mai','Juni','Juli','August',
-        'September','Oktober','November','Dezember'],
-    monthNamesShort: ['Jan','Feb','Mär','Apr','Mai',
-        'Jun','Jul','Aug','Sept','Okt','Nov','Dez'],
-    dayNames: ['Sonntag','Montag','Dienstag',
-        'Mittwoch','Donnerstag','Freitag','Samstag'],
-    dayNamesShort: ['So','Mo','Di','Mi','Do','Fr','Sa'],
-    titleFormat: {
-        month: 'MMMM yyyy',
-        week: "d.[ MMMM][ yyyy]{ - d. MMMM yyyy}",
-        day: 'dddd d. MMMM yyyy'
-    },
-    columnFormat: {
-        month: 'ddd',
-        week: 'ddd d',
-        day: ''
-    },
-    axisFormat: 'H:mm', 
-    timeFormat: {
-        '': 'H:mm', 
-        agenda: 'H:mm{ - H:mm}'
     }
 };
 
