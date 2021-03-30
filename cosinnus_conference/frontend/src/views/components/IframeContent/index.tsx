@@ -47,7 +47,10 @@ export function IframeContent(props: IframeProps) {
     // Don't prompt if link within detail view container (e.g. maximize button)
     if (detailView[0].contains(e.target)) return;
     e.preventDefault()
-    setLeaveUrl(e.currentTarget.getAttribute("href"))
+    var href_target = e.currentTarget.getAttribute("href");
+    // Don't prompt on
+    if (!href_target || href_target === "#") return;
+    setLeaveUrl(href_target)
     setLeaveOpen(true)
     return false
   }
