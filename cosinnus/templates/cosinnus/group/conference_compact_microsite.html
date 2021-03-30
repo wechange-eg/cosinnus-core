@@ -83,7 +83,7 @@
                         <div class="indented">
 		                    {% for room in group.rooms.all %}
 		                        {% with room_events=room.non_table_events_qs %}
-		                            {% if room_events %}
+		                            {% if room.is_visible and room_events %}
 					                    <div class="regular-space">
 				                            <b>{{ room.title }}:</b>
 				                        </div>
