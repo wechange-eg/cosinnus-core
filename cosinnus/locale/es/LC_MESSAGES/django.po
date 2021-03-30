@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-12 17:55+0100\n"
+"POT-Creation-Date: 2021-03-30 19:11+0200\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3735,7 +3735,7 @@ msgstr ""
 msgid "Conference start and end date and time"
 msgstr ""
 
-msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
 msgstr ""
 
 msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
@@ -3788,19 +3788,24 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-msgid "A picture for better recognition."
-msgstr "Una foto para mejor reconocimiento."
+msgid "Will be shown as a small logo."
+msgstr ""
 
-msgid "File Size"
-msgstr "Tamaño del archivo"
-
-msgid "max. 10 MB"
-msgstr "max. 10 MB"
+#, fuzzy
+#| msgid "This email address already has a registered user!"
+msgid "This content will be visible for all registered users!"
+msgstr "Este correo electrónico ya tiene un usario registrado!"
 
 #, fuzzy
 #| msgid "Header image"
-msgid "Banner Image"
+msgid "Header Image"
 msgstr "Imagen de la cabecera"
+
+msgid "Will be shown as a header in the conference lobby and on the conference microsite."
+msgstr ""
+
+msgid "Will be shown as a header on the microsite."
+msgstr ""
 
 msgid "Upload an image."
 msgstr "Sube una imagen."
@@ -3910,6 +3915,12 @@ msgstr "URL de la galería de Fickr (example: \"https://www.flickr.com/photos/us
 
 msgid "Microsite Gallery Images"
 msgstr "Imagen de la galería del micrositio"
+
+msgid "File Size"
+msgstr "Tamaño del archivo"
+
+msgid "max. 10 MB"
+msgstr "max. 10 MB"
 
 msgid "Remove gallery image"
 msgstr "Eliminar imagen de la galería"
@@ -5403,6 +5414,23 @@ msgstr ""
 msgid "Learn more"
 msgstr ""
 
+msgid "Recommended minimum dimensions: 200px x 200px (square)."
+msgstr ""
+
+msgid "All common image file types are supported. Maximum file size is 10 MB."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 600px x 140px (wide)."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 1140px x 240px (wide)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Help about the microsite"
+msgid "View the microsite now"
+msgstr "Ayuda del micrositio"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
 msgstr "Mis usarios"
@@ -6046,6 +6074,9 @@ msgstr "Correo electrónico"
 
 msgid "Profile avatar"
 msgstr "Avatar del perfil"
+
+msgid "A picture for better recognition."
+msgstr "Una foto para mejor reconocimiento."
 
 msgid "Who are you and what motivates you?"
 msgstr "¿Quién eres y que te motiva?"
@@ -7572,6 +7603,11 @@ msgstr "Actualmente no eres miembro de %s! Si lo deseas, puedes solicitar para s
 
 msgid "Your changes have been saved."
 msgstr "Se han guardado los cambios."
+
+#, fuzzy
+#~| msgid "Header image"
+#~ msgid "Banner Image"
+#~ msgstr "Imagen de la cabecera"
 
 #~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s creó el proyecto/grupo \"%(team_name)s\" en %(portal_name)s!"

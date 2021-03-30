@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-12 17:55+0100\n"
+"POT-Creation-Date: 2021-03-30 19:11+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3613,7 +3613,7 @@ msgstr ""
 msgid "Conference start and end date and time"
 msgstr ""
 
-msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
 msgstr ""
 
 msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
@@ -3665,18 +3665,21 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-msgid "A picture for better recognition."
+msgid "Will be shown as a small logo."
 msgstr ""
 
-msgid "File Size"
-msgstr ""
-
-msgid "max. 10 MB"
+msgid "This content will be visible for all registered users!"
 msgstr ""
 
 #, fuzzy
-msgid "Banner Image"
+msgid "Header Image"
 msgstr "Group"
+
+msgid "Will be shown as a header in the conference lobby and on the conference microsite."
+msgstr ""
+
+msgid "Will be shown as a header on the microsite."
+msgstr ""
 
 msgid "Upload an image."
 msgstr ""
@@ -3785,6 +3788,12 @@ msgid "Flickr Gallery URL (example: \"https://www.flickr.com/photos/username/set
 msgstr ""
 
 msgid "Microsite Gallery Images"
+msgstr ""
+
+msgid "File Size"
+msgstr ""
+
+msgid "max. 10 MB"
 msgstr ""
 
 msgid "Remove gallery image"
@@ -5088,6 +5097,21 @@ msgstr ""
 msgid "Learn more"
 msgstr ""
 
+msgid "Recommended minimum dimensions: 200px x 200px (square)."
+msgstr ""
+
+msgid "All common image file types are supported. Maximum file size is 10 MB."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 600px x 140px (wide)."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 1140px x 240px (wide)."
+msgstr ""
+
+msgid "View the microsite now"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 msgid "My Users"
@@ -5720,6 +5744,9 @@ msgid "E-Mail"
 msgstr ""
 
 msgid "Profile avatar"
+msgstr ""
+
+msgid "A picture for better recognition."
 msgstr ""
 
 msgid "Who are you and what motivates you?"

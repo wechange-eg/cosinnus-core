@@ -192,7 +192,7 @@
 	                        {% comment %} Date picker for from_date - to_date {% endcomment %}
 	                        {% if form.forms.obj.fields.from_date and form.forms.obj.fields.to_date %}
 	                             {% captureas date_label %}{% trans "Conference start and end date and time" %}{% endcaptureas %}
-	                             {% captureas date_legend %}{% trans "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days." %}{% endcaptureas %}
+	                             {% captureas date_legend %}{% trans "The start date and time are used for reminder notification emails (if set up). Can span multiple days." %}{% endcaptureas %}
 	                             {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.forms.obj.from_date to_date_field=form.forms.obj.to_date date_label=date_label legend=date_legend %}
 	                        {% endif %}
                         {% endblock %}

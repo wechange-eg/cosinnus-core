@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-12 17:55+0100\n"
+"POT-Creation-Date: 2021-03-30 19:11+0200\n"
 "PO-Revision-Date: 2021-03-12 17:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3484,7 +3484,9 @@ msgstr "После создания конференции можно созда
 msgid "Conference start and end date and time"
 msgstr "Конференция успешно началась и пользовательсике аккаунты активированы"
 
-msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+#, fuzzy
+#| msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
 msgstr "Дата и время начала используются в электронных письмах с напоминанием (если настроено). Может охватывать несколько дней."
 
 msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
@@ -3535,17 +3537,24 @@ msgstr "Hex код цвета использовать в качестве гл�
 msgid "Icon"
 msgstr "Изображение"
 
-msgid "A picture for better recognition."
-msgstr "Изображение поможет быстрее распознать Вас."
+msgid "Will be shown as a small logo."
+msgstr ""
 
-msgid "File Size"
-msgstr "Размер файла"
+#, fuzzy
+#| msgid "This email address already has a registered user!"
+msgid "This content will be visible for all registered users!"
+msgstr "Этот адрес электронной почты уже используется зарегистрированным пользователем!"
 
-msgid "max. 10 MB"
-msgstr "максимально 10 МБ"
-
-msgid "Banner Image"
+#, fuzzy
+#| msgid "Header image"
+msgid "Header Image"
 msgstr "Фоновое изображение"
+
+msgid "Will be shown as a header in the conference lobby and on the conference microsite."
+msgstr ""
+
+msgid "Will be shown as a header on the microsite."
+msgstr ""
 
 msgid "Upload an image."
 msgstr "Загрузить изображение."
@@ -3654,6 +3663,12 @@ msgstr "Ссылка Flickr Gallery/Слайдшоу галереи (напри�
 
 msgid "Microsite Gallery Images"
 msgstr "Микросайт Галерея изображений"
+
+msgid "File Size"
+msgstr "Размер файла"
+
+msgid "max. 10 MB"
+msgstr "максимально 10 МБ"
 
 msgid "Remove gallery image"
 msgstr "Удалить изображение из галлереи"
@@ -5097,6 +5112,23 @@ msgstr "С помощью облака мы предлагаем Вашей ко
 msgid "Learn more"
 msgstr "Узнать больше"
 
+msgid "Recommended minimum dimensions: 200px x 200px (square)."
+msgstr ""
+
+msgid "All common image file types are supported. Maximum file size is 10 MB."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 600px x 140px (wide)."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 1140px x 240px (wide)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Help about the microsite"
+msgid "View the microsite now"
+msgstr "Справка о микроватте"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
 msgstr "Мои пользователи"
@@ -5691,6 +5723,9 @@ msgstr "Электронная почта"
 
 msgid "Profile avatar"
 msgstr "Аватар"
+
+msgid "A picture for better recognition."
+msgstr "Изображение поможет быстрее распознать Вас."
 
 msgid "Who are you and what motivates you?"
 msgstr "Кто Вы и что Вами движет?"
@@ -7048,6 +7083,9 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
+
+#~ msgid "Banner Image"
+#~ msgstr "Фоновое изображение"
 
 #~ msgid "Determins if application management is visible in conference administration."
 #~ msgstr "Определяет, отображается ли управление заявками на панели администрирования конференции."

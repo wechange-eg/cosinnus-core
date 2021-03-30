@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-12 17:55+0100\n"
+"POT-Creation-Date: 2021-03-30 19:11+0200\n"
 "PO-Revision-Date: 2021-02-18 20:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3777,7 +3777,7 @@ msgstr ""
 msgid "Conference start and end date and time"
 msgstr "Vergadering succesvol gestart en gebruikersaccount geactiveerd"
 
-msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
 msgstr ""
 
 msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
@@ -3830,19 +3830,24 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-msgid "A picture for better recognition."
-msgstr "Een foto voor betere herkenning."
+msgid "Will be shown as a small logo."
+msgstr ""
 
-msgid "File Size"
-msgstr "Bestandsgrootte"
-
-msgid "max. 10 MB"
-msgstr "max. 10 MB"
+#, fuzzy
+#| msgid "This email address already has a registered user!"
+msgid "This content will be visible for all registered users!"
+msgstr "Op dit e-mailadres is al een gebruiker geregistreerd!"
 
 #, fuzzy
 #| msgid "Header image"
-msgid "Banner Image"
+msgid "Header Image"
 msgstr "Header afbeelding"
+
+msgid "Will be shown as a header in the conference lobby and on the conference microsite."
+msgstr ""
+
+msgid "Will be shown as a header on the microsite."
+msgstr ""
 
 msgid "Upload an image."
 msgstr "Upload een afbeelding."
@@ -3951,6 +3956,12 @@ msgstr "Flickr Gallery URL (voorbeeld: “https://www.flickr.com/photos/username
 
 msgid "Microsite Gallery Images"
 msgstr "Microsite Gallery Afbeeldingen"
+
+msgid "File Size"
+msgstr "Bestandsgrootte"
+
+msgid "max. 10 MB"
+msgstr "max. 10 MB"
 
 msgid "Remove gallery image"
 msgstr "Gallery afbeelding verwijderen"
@@ -5474,6 +5485,23 @@ msgstr "Met de cloud bieden we jouw team een nieuwe file repository met uitgebre
 msgid "Learn more"
 msgstr "Meer weten"
 
+msgid "Recommended minimum dimensions: 200px x 200px (square)."
+msgstr ""
+
+msgid "All common image file types are supported. Maximum file size is 10 MB."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 600px x 140px (wide)."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 1140px x 240px (wide)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Help about the microsite"
+msgid "View the microsite now"
+msgstr "Hulp over de microsite"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
 msgstr "Mijn gebruikers"
@@ -6094,6 +6122,9 @@ msgstr "E-mailadres"
 
 msgid "Profile avatar"
 msgstr "Profiel avatar"
+
+msgid "A picture for better recognition."
+msgstr "Een foto voor betere herkenning."
 
 msgid "Who are you and what motivates you?"
 msgstr "Wie ben je en wat motiveert je?"
@@ -7596,6 +7627,11 @@ msgstr "Je bent momenteel geen lid van %s! Als je wilt, kun je hieronder het lid
 
 msgid "Your changes have been saved."
 msgstr "Je wijzigingen zijn opgeslagen."
+
+#, fuzzy
+#~| msgid "Header image"
+#~ msgid "Banner Image"
+#~ msgstr "Header afbeelding"
 
 #~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s heeft zojuist project/groep “%(team_name)s” op %(portal_name)s aangemaakt!"
