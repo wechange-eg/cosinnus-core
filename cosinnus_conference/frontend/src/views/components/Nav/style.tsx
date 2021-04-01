@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     overflowX: "hidden",
     width: navWidth,
     zIndex: 1,
-    padding: "1.5rem 1rem 1.5rem 1.5rem",
+    padding: "1.5rem 1rem 0.5rem 1.5rem",
     [theme.breakpoints.down('sm')]: {
       width: "100%",
       position: "static",
@@ -116,9 +116,6 @@ export const useStyles = makeStyles((theme) => ({
       width: "50%",
       margin: "0 auto 1rem"
     },
-  },
-  dialogText: {
-    color: theme.palette.text.primary
   },
   divider: {
     margin: "15px 0",

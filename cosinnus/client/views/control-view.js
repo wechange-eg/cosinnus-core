@@ -40,6 +40,7 @@ module.exports = ContentControlView.extend({
         portalInfo: {}, // portal info by portal-id, from `get_cosinnus_portal_info()`
         controlsEnabled: true,
         filterGroup: null,
+        filterManagedTag: null, // used only for initially setting the state.activeManagedTagsIds
         fullscreen: false,
         splitscreen: false,
         showMine: false, // URL param. if true, only the current user's own results will be shown. ignored away if user is not logged in.
@@ -154,6 +155,10 @@ module.exports = ContentControlView.extend({
         Backbone.mediator.subscribe('app:stale-results', self.handleStaleResults, self);
         
         self.triggerMobileDefaultView();
+
+        if (options.filterManagedTag != null) {
+            self.defaults.filterManagedTag = options.filterManagedTag;
+        } 
         
         util.log('control-view.js: initialized. with self.App=' + self.App)
     },
@@ -271,7 +276,13 @@ module.exports = ContentControlView.extend({
     },
     
     resetManagedTags: function () {
-        this.state.activeManagedTagsIds = [];
+        if (this.defaults.filterManagedTag != null) {
+            // apply initial managed tags once
+            this.state.activeManagedTagsIds = [this.defaults.filterManagedTag];
+            this.defaults.filterManagedTag = null;
+        } else {
+            this.state.activeManagedTagsIds = [];
+        }
     },
     
     /** Internal state reset of filtered result types */

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-12 17:55+0100\n"
+"POT-Creation-Date: 2021-03-30 19:20+0200\n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3748,7 +3748,7 @@ msgstr ""
 msgid "Conference start and end date and time"
 msgstr "Конференція успішно розпочалася, і профілі користувачів було активовано"
 
-msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
 msgstr ""
 
 msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
@@ -3801,19 +3801,24 @@ msgstr "Шістнадцятковий код кольору для викори
 msgid "Icon"
 msgstr ""
 
-msgid "A picture for better recognition."
-msgstr "Картинка для кращого розпізнавання."
+msgid "Will be shown as a small logo."
+msgstr ""
 
-msgid "File Size"
-msgstr "Розмір Файлу"
-
-msgid "max. 10 MB"
-msgstr "не більше 10 MB"
+#, fuzzy
+#| msgid "This email address already has a registered user!"
+msgid "This content will be visible for all registered users!"
+msgstr "Під цією адресою електронної скриньки уже хтось зареєструвався!"
 
 #, fuzzy
 #| msgid "Header image"
-msgid "Banner Image"
+msgid "Header Image"
 msgstr "Картинка шапки"
+
+msgid "Will be shown as a header in the conference lobby and on the conference microsite."
+msgstr ""
+
+msgid "Will be shown as a header on the microsite."
+msgstr ""
 
 msgid "Upload an image."
 msgstr "Завантажити зображення."
@@ -3922,6 +3927,12 @@ msgstr "Flickr URL Галереї (приклад: \"https://www.flickr.com/phot
 
 msgid "Microsite Gallery Images"
 msgstr "Мікросайт Галерея зображень"
+
+msgid "File Size"
+msgstr "Розмір Файлу"
+
+msgid "max. 10 MB"
+msgstr "не більше 10 MB"
 
 msgid "Remove gallery image"
 msgstr "Видалити зображення галереї"
@@ -5421,6 +5432,23 @@ msgstr "За допомогою хмари ми пропонуємо вашій 
 msgid "Learn more"
 msgstr "Дізнатися більше"
 
+msgid "Recommended minimum dimensions: 200px x 200px (square)."
+msgstr ""
+
+msgid "All common image file types are supported. Maximum file size is 10 MB."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 600px x 140px (wide)."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 1140px x 240px (wide)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Help about the microsite"
+msgid "View the microsite now"
+msgstr "Довідка щодо мікросайтів"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
 msgstr "Мої Користувачі"
@@ -6037,6 +6065,9 @@ msgstr "Адреса електронної скриньки"
 
 msgid "Profile avatar"
 msgstr "Аватар профілю"
+
+msgid "A picture for better recognition."
+msgstr "Картинка для кращого розпізнавання."
 
 msgid "Who are you and what motivates you?"
 msgstr "Хто ви й що вас мотивує?"
@@ -7533,6 +7564,11 @@ msgstr "Наразі Ви не є членом %s! Якщо ви бажаєте 
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#, fuzzy
+#~| msgid "Header image"
+#~ msgid "Banner Image"
+#~ msgstr "Картинка шапки"
 
 #~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s тільки що створив проєкт/групу „%(team_name)s“ на %(portal_name)s!"

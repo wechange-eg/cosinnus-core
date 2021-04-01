@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-23 18:24+0100\n"
+"POT-Creation-Date: 2021-03-30 19:20+0200\n"
 "PO-Revision-Date: 2021-02-23 18:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.6\n"
+
+msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conferences"
+msgid "Conference Bookings"
+msgstr "Konferencje"
 
 msgid "Conferences"
 msgstr "Konferencje"
@@ -34,7 +42,6 @@ msgstr "Proszę zatem wczytać datę rozpoczęcia"
 msgid "Please also provide a end date"
 msgstr "Proszę zatem wczytać datę zakończenia"
 
-#| msgid "First Name"
 msgid "First Choice"
 msgstr "Pierwszy Wybór"
 
@@ -60,8 +67,6 @@ msgstr "Przesłanie CSV spowoduje utworzenie kont i członkostwa w warsztatach, 
 msgid "Upload File"
 msgstr "Wyślij Plik"
 
-#| msgctxt "the_app"
-#| msgid "conference"
 msgid "Go to conference"
 msgstr "Przejdź do konferencji"
 

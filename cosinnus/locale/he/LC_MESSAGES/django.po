@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-12 17:55+0100\n"
+"POT-Creation-Date: 2021-03-30 19:20+0200\n"
 "PO-Revision-Date: 2021-03-11 16:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3475,7 +3475,9 @@ msgstr "לאחר שיצרת את הוועידה, באפשרותך ליצור ח�
 msgid "Conference start and end date and time"
 msgstr "תאריך ושעת התחלת וסיום הועידה"
 
-msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+#, fuzzy
+#| msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
 msgstr "תאריך ההתחלה והשעה משמשים להודעות דוא\"ל על תזכורות (אם הן מוגדרות). התזכורות יכולות לחזור כמה ימים מראש."
 
 msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
@@ -3526,17 +3528,24 @@ msgstr "צבע קוד HEX לשימוש כצבע נושא מרכזי עבור מ�
 msgid "Icon"
 msgstr "אייקון"
 
-msgid "A picture for better recognition."
-msgstr "תמונה להכרה טובה יותר."
+msgid "Will be shown as a small logo."
+msgstr ""
 
-msgid "File Size"
-msgstr "גודל הקובץ"
+#, fuzzy
+#| msgid "This email address already has a registered user!"
+msgid "This content will be visible for all registered users!"
+msgstr "לכתובת דוא\"ל זו כבר יש משתמש רשום!"
 
-msgid "max. 10 MB"
-msgstr "מקסימום 10 MB"
+#, fuzzy
+#| msgid "Header image"
+msgid "Header Image"
+msgstr "תמונת כותרת"
 
-msgid "Banner Image"
-msgstr "תמונת באנר"
+msgid "Will be shown as a header in the conference lobby and on the conference microsite."
+msgstr ""
+
+msgid "Will be shown as a header on the microsite."
+msgstr ""
 
 msgid "Upload an image."
 msgstr "העלה תמונה."
@@ -3645,6 +3654,12 @@ msgstr "כתובת URL של גלריית Flickr (לדוגמא: \"https://www.fli
 
 msgid "Microsite Gallery Images"
 msgstr "גלריית תמונות של מיקרו-אתר"
+
+msgid "File Size"
+msgstr "גודל הקובץ"
+
+msgid "max. 10 MB"
+msgstr "מקסימום 10 MB"
 
 msgid "Remove gallery image"
 msgstr "הסר גלריית תמונות"
@@ -5099,6 +5114,23 @@ msgstr "באמצעות הענן, אנו מציעים לצוות שלך מאגר 
 msgid "Learn more"
 msgstr "למד עוד"
 
+msgid "Recommended minimum dimensions: 200px x 200px (square)."
+msgstr ""
+
+msgid "All common image file types are supported. Maximum file size is 10 MB."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 600px x 140px (wide)."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 1140px x 240px (wide)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Help about the microsite"
+msgid "View the microsite now"
+msgstr "עזרה אודות המיקרו-אתר"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
 msgstr "המשתמשים שלי"
@@ -5693,6 +5725,9 @@ msgstr "דואר אלקטרוני"
 
 msgid "Profile avatar"
 msgstr "אווטאר פרופיל"
+
+msgid "A picture for better recognition."
+msgstr "תמונה להכרה טובה יותר."
 
 msgid "Who are you and what motivates you?"
 msgstr "מי אתה ומה מניע אותך?"
@@ -7047,6 +7082,9 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
+
+#~ msgid "Banner Image"
+#~ msgstr "תמונת באנר"
 
 #~ msgid "Determins if application management is visible in conference administration."
 #~ msgstr "קובע אם ניהול טפסי הבקשות חשוף במנהלת הועידה."

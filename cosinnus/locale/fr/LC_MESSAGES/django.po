@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-03 13:11+0100\n"
+"POT-Creation-Date: 2021-03-30 19:20+0200\n"
 "PO-Revision-Date: 2021-03-16 01:23+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1192,6 +1192,17 @@ msgstr "Projet"
 msgid "Conference"
 msgstr "Conférence"
 
+#, fuzzy
+#| msgid "Membership requests"
+msgid "Regular membership requests"
+msgstr "Demandes d'ajout"
+
+msgid "Require participation applications for this conference"
+msgstr "Exiger des demandes de participation pour cette conférence"
+
+msgid "Everyone may join"
+msgstr ""
+
 msgid "Project Type"
 msgstr "Type de projet"
 
@@ -1218,6 +1229,9 @@ msgstr "Image d'arrière-plan"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Affiché comme bannière large sur le Microsite (1140 x 240 px)"
+
+msgid "Application method"
+msgstr "Méthode de candidature"
 
 msgid "Microsite Video"
 msgstr "Vidéo Microsite"
@@ -1287,9 +1301,6 @@ msgstr "Date de début"
 
 msgid "End Datetime"
 msgstr "Date de fin"
-
-msgid "Determins if application management is visible in conference administration."
-msgstr "Détermine si la gestion des applications est visible dans l’administration de la conférence."
 
 msgid "Allow temporary users accounts for this conference."
 msgstr "Autoriser les comptes d’utilisateurs temporaires pour cette conférence."
@@ -2722,9 +2733,6 @@ msgstr "Ici, tu peux configurer le formulaire de demande que les participants do
 msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
 msgstr "Tous les autres organisateurs et toi pouvez traiter les candidatures dans la section \"%(application_management_label)s\". Tu peux le faire même si les candidatures sont encore ouvertes."
 
-msgid "Application method"
-msgstr "Méthode de candidature"
-
 #, python-format
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr "Si tu préfères utiliser les demandes d'adhésion simples telles qu'elles sont utilisées dans les projets/groupes, tu peux désactiver le paramètre \"%(application_setting_label)s\" dans les paramètres de la conférence."
@@ -3216,27 +3224,6 @@ msgstr "Contact"
 msgid "No contact data has been added yet."
 msgstr "Aucune données de contact n'ont été ajoutées."
 
-msgid "Register and apply!"
-msgstr "Inscris-toi et postule !"
-
-msgid "Register and join!"
-msgstr "Inscris-toi et rejoins !"
-
-msgid "You have been invited to apply!"
-msgstr "Tu as été invité à postuler !"
-
-msgid "Decline Invitation"
-msgstr "Décliner l'invitation"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "Veux-tu vraiment décliner l'invitation ?"
-
-msgid "Edit Application"
-msgstr "Modifier la candidature"
-
-msgid "Apply for Participation"
-msgstr "Fais une demande de participation"
-
 msgid "Your Deactivated Content"
 msgstr "Ton contenu désactivé"
 
@@ -3302,6 +3289,9 @@ msgstr "Membres invités"
 msgid "Revoke Invitation"
 msgstr "Révoquer l'invitation"
 
+msgid "Decline Invitation"
+msgstr "Décliner l'invitation"
+
 msgid "Accept Invitation"
 msgstr "Accepter l'invitation"
 
@@ -3314,6 +3304,9 @@ msgstr "Veux-tu vraiment révoquer l'invitation pour le membre „%(name)s“ ?"
 
 msgid "Revoke Invitation for Member"
 msgstr "Révoquer l'invitation pour le membre"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Veux-tu vraiment décliner l'invitation ?"
 
 msgid "There are no pending invitations."
 msgstr "Il n'y a aucune invitation en attente."
@@ -3480,14 +3473,16 @@ msgstr "Une fois que tu as créé la conférence, tu peux créer des salles de c
 msgid "Conference start and end date and time"
 msgstr "Date et heure de début et de fin de la conférence"
 
-msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+#, fuzzy
+#| msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
 msgstr "La date et l’heure de début sont utilisées pour les e-mails de notification de rappel (s’ils sont configurés). Peut s’étendre sur plusieurs jours."
-
-msgid "Require participation applications for this conference"
-msgstr "Exiger des demandes de participation pour cette conférence"
 
 msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
 msgstr "Au lieu de demandes régulières d’adhésion, les utilisateurs doivent demander leur participation en remplissant un formulaire de demande. Les administrateurs de la conférence peuvent voir toutes les demandes et les approuver/les refuser dans le zone de gestion de la participation."
+
+msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
+msgstr ""
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
 msgstr "Dans quels calendriers de projets ou de groupes la conférence doit-elle figurer ?"
@@ -3531,17 +3526,24 @@ msgstr "Une couleur de code hexadécimal à utiliser comme couleur du thème pri
 msgid "Icon"
 msgstr "Icône"
 
-msgid "A picture for better recognition."
-msgstr "Une image pour une meilleure reconnaissance."
+msgid "Will be shown as a small logo."
+msgstr ""
 
-msgid "File Size"
-msgstr "Taille du fichier"
+#, fuzzy
+#| msgid "This email address already has a registered user!"
+msgid "This content will be visible for all registered users!"
+msgstr "Cette adresse e-mail a déjà un utilisateur enregistré !"
 
-msgid "max. 10 MB"
-msgstr "max. 10 MB"
+#, fuzzy
+#| msgid "Header image"
+msgid "Header Image"
+msgstr "Image d'en-tête"
 
-msgid "Banner Image"
-msgstr "Image de la bannière"
+msgid "Will be shown as a header in the conference lobby and on the conference microsite."
+msgstr ""
+
+msgid "Will be shown as a header on the microsite."
+msgstr ""
 
 msgid "Upload an image."
 msgstr "Télécharger une image."
@@ -3651,6 +3653,12 @@ msgstr "URL de la galerie Flickr (exemple: \"https://www.flickr.com/photos/usern
 msgid "Microsite Gallery Images"
 msgstr "Images de la galerie du microsite"
 
+msgid "File Size"
+msgstr "Taille du fichier"
+
+msgid "max. 10 MB"
+msgstr "max. 10 MB"
+
 msgid "Remove gallery image"
 msgstr "Enlever l'image de galerie"
 
@@ -3728,6 +3736,9 @@ msgstr "Quitter"
 msgid "Details"
 msgstr "Détails"
 
+msgid "Apply for Participation"
+msgstr "Fais une demande de participation"
+
 #, python-format
 msgid "Do you really want to leave „%(title)s“?"
 msgstr "Veux-tu vraiment quitter „%(title)s“ ?"
@@ -3798,6 +3809,9 @@ msgstr "Galerie Flickr"
 msgid "Call to Action"
 msgstr "Appel à l'action"
 
+msgid "Register and join!"
+msgstr "Inscris-toi et rejoins !"
+
 msgid "Register"
 msgstr "S'inscrire"
 
@@ -3821,11 +3835,36 @@ msgstr "Demande d'ajout en attente..."
 msgid "You are invited!"
 msgstr "Tu es invité !"
 
+msgid "Participation is open for everyone. You may instantly join and become a member."
+msgstr ""
+
+msgid "You may request to become a member and participate once your request has been accepted."
+msgstr ""
+
 msgid "Join now!"
 msgstr "Rejoins !"
 
+#, fuzzy
+#| msgid "Team membership"
+msgid "Request membership"
+msgstr "Appartenance à l'équipe"
+
+#, fuzzy, python-format
+#| msgid "Do you wish to request to join „%(title)s“?"
+msgid "Do you wish to join „%(title)s“ now?"
+msgstr "Veux-tu demander à rejoindre „%(title)s“ ?"
+
 msgid "Browse"
 msgstr "Naviguer"
+
+msgid "Register and apply!"
+msgstr "Inscris-toi et postule !"
+
+msgid "You have been invited to apply!"
+msgstr "Tu as été invité à postuler !"
+
+msgid "Edit Application"
+msgstr "Modifier la candidature"
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5071,6 +5110,23 @@ msgstr "Avec le Cloud, nous offrons à votre équipe un nouveau dépôt de fichi
 msgid "Learn more"
 msgstr "En savoir plus"
 
+msgid "Recommended minimum dimensions: 200px x 200px (square)."
+msgstr ""
+
+msgid "All common image file types are supported. Maximum file size is 10 MB."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 600px x 140px (wide)."
+msgstr ""
+
+msgid "Recommended minimum dimensions: 1140px x 240px (wide)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Help about the microsite"
+msgid "View the microsite now"
+msgstr "Aide à propos du microsite"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
 msgstr "Mes utilisateurs"
@@ -5665,6 +5721,9 @@ msgstr "E-mail"
 
 msgid "Profile avatar"
 msgstr "Avatar du profil"
+
+msgid "A picture for better recognition."
+msgstr "Une image pour une meilleure reconnaissance."
 
 msgid "Who are you and what motivates you?"
 msgstr "Qui es-tu et qu'est-ce qui te motive ?"
@@ -6326,6 +6385,9 @@ msgstr "Où le projet est-il actif ?"
 msgid "Project members only"
 msgstr "Membres du projet seulement"
 
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
 msgid "Collaborate!"
 msgstr "Collabore !"
 
@@ -6400,6 +6462,9 @@ msgstr "Où le groupe est-il actif?"
 
 msgid "Group members only"
 msgstr "Membres du groupe seulement"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgstr "Désolé, seulement les admins du portail peuvent créer des groupes ! Tu peux écrire un message à un admin pour créer un groupe pour toi. Tu trouveras la liste des admins ci-dessous."
@@ -6481,6 +6546,9 @@ msgstr "Où la conférence est-elle active ?"
 
 msgid "Conference members only"
 msgstr "Membres de la conférence seulement"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
 
 msgid "Participate!"
 msgstr "Participe !"
@@ -7010,6 +7078,12 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#~ msgid "Determins if application management is visible in conference administration."
+#~ msgstr "Détermine si la gestion des applications est visible dans l’administration de la conférence."
+
+#~ msgid "Banner Image"
+#~ msgstr "Image de la bannière"
 
 #~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name) s vient de créer le projet/groupe \"%(team_name)s\" sur %(portal_name)s!"
