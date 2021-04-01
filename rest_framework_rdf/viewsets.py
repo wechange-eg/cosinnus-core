@@ -3,8 +3,12 @@ from rest_framework_rdf.renderers import TurtleRenderer
 from rest_framework_rdf.serializers import RDFSerializer
 
 
+class TextTurtleRenderer(TurtleRenderer):
+    media_type = 'text/turtle'
+
+
 class RDFViewSetMixin:
-    rdf_renderer_classes = [TurtleRenderer, ]
+    rdf_renderer_classes = [TextTurtleRenderer, ]
     rdf_renderer_media_types = list(r.media_type for r in rdf_renderer_classes)
     rdf_serializer_class = RDFSerializer
 

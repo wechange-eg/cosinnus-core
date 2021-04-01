@@ -7,7 +7,7 @@ from cosinnus_organization.models import CosinnusOrganization
 
 
 class OrganizationListSerializer(serializers.HyperlinkedModelSerializer):
-    id = serializers.URLField(source='get_absolute_url', read_only=True)
+    url = serializers.URLField(source='get_absolute_url', read_only=True)
     timestamp = serializers.DateTimeField(source='last_modified')
     image = serializers.SerializerMethodField()
     topics = serializers.SerializerMethodField()
@@ -17,8 +17,8 @@ class OrganizationListSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta(object):
         model = CosinnusOrganization
-        fields = ('id', 'slug', 'name', 'description', 'website', 'admins', 'locations', 'timestamp', 'topics', 'tags',
-                  'image')
+        fields = ('id', 'url', 'slug', 'name', 'description', 'website', 'admins', 'locations', 'timestamp', 'topics',
+                  'tags', 'image')
 
     def get_image(self, obj):
         if not obj.avatar:
