@@ -47,6 +47,7 @@ class CosinnusProjectTransBase(object):
     FORMFIELD_LOCATION_LABEL = _('Where is the project active?')
     FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Project members only')
     FORMFIELD_MEMBERSHIP_MODE_TYPE_0_LEGEND = _("Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators.")
+    FORMFIELD_ATTACH_OBJECTS_HINT = _('Type the names of files, events or pads from this project to attach...')
     
     CALL_TO_JOIN = _('Collaborate!')
     CALL_TO_REGISTER_AND_JOIN = _('Join now and collaborate!')
@@ -96,6 +97,7 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     FORMFIELD_LOCATION_LABEL = _('Where is the group active?')
     FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Group members only')
     FORMFIELD_MEMBERSHIP_MODE_TYPE_0_LEGEND = _("Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators.")
+    FORMFIELD_ATTACH_OBJECTS_HINT = _('Type the names of files, events or pads from this group to attach...')
     
     CALL_TO_JOIN = _('Collaborate!')
     CALL_TO_REGISTER_AND_JOIN = _('Join now and collaborate!')
@@ -145,6 +147,7 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     FORMFIELD_LOCATION_LABEL = _('Where is the conference active?')
     FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Conference members only')
     FORMFIELD_MEMBERSHIP_MODE_TYPE_0_LEGEND = _("Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers.")
+    FORMFIELD_ATTACH_OBJECTS_HINT = _('Type the names of files, events or pads from this conference to attach...')
     
     CALL_TO_JOIN = _('Participate!')
     CALL_TO_REGISTER_AND_JOIN = _('Join now and participate!')

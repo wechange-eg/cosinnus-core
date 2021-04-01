@@ -2,8 +2,7 @@
 
 {% with group=form.target_group %}
     <span id="attachments-existing-files" {% if hide_existing_file_field %}style="display: none;"{% endif %}>
-        {% captureas placeholder %}{% trans "Attach existing Files..." %}{% endcaptureas %}
-        {% render_field form.attached_objects placeholder=placeholder %}
+        {% render_field form.attached_objects placeholder=group.trans.FORMFIELD_ATTACH_OBJECTS_HINT %}
     </span>
     <div class="">
        {% include 'cosinnus/attached/file_upload_button.html' with attachments_only=True %}
