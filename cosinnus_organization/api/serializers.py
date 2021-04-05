@@ -1,12 +1,12 @@
+from django.urls import reverse
 from rest_framework import serializers
 
 from cosinnus.api.serializers.group import CosinnusLocationSerializer
-from cosinnus.models import BaseTagObject
-from cosinnus.models.group_extra import CosinnusProject
 from cosinnus_organization.models import CosinnusOrganization
 
 
 class OrganizationListSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.SerializerMethodField()
     url = serializers.URLField(source='get_absolute_url', read_only=True)
     timestamp = serializers.DateTimeField(source='last_modified')
     image = serializers.SerializerMethodField()
@@ -19,6 +19,10 @@ class OrganizationListSerializer(serializers.HyperlinkedModelSerializer):
         model = CosinnusOrganization
         fields = ('id', 'url', 'slug', 'name', 'description', 'website', 'admins', 'locations', 'timestamp', 'topics',
                   'tags', 'image')
+
+    def get_id(self, obj):
+        url = reverse('cosinnus:api:organization-detail', kwargs={'slug': obj.slug})
+        return self.context['request'].build_absolute_uri(url)[:-1]
 
     def get_image(self, obj):
         if not obj.avatar:
