@@ -101,7 +101,7 @@ class CreativeWorkRDFSerializer(RDFSerializer):
         if hasattr(obj, 'media_tag'):
             topics = obj.media_tag.get_topics_rendered()
             tags = ','.join(obj.media_tag.tags.values_list('name', flat=True))
-            return ','.join(filter(None, [topics, tags]))
+            return ','.join(filter(None, [topics, tags])).lower()
         return ''
 
     def get_identifier(self, obj):
