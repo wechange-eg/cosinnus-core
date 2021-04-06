@@ -1,9 +1,22 @@
 .fullcalendar(@light,@normal,@dark) {
     
-    .fc-event {
+    .fc-event-title {
         font-size: 11px;
     }
-    
+
+	.fc-h-event {
+		background-color: @normal;
+		border: 1px solid @normal;
+	}
+
+	.fc-list-event-dot {
+		border: 5px solid @normal;
+	}
+
+	.fc-daygrid-event-dot {
+		border: 4px solid @normal;
+	}
+
 	// The header
 	.fc-header-title h2 {
 		font-size: 1.5em;
@@ -87,21 +100,6 @@
 			margin-bottom: 0;
 			color: @app-neutral-color-white;
 		}
-
-		table.fc-border-separate {
-			// gap between TDs does not really work.
-			// border-spacing: 2px;
-		}
-
-		// .fc-day,
-		// .fc-day-header {
-		//   border-spacing: 10px;
-		//   border-collapse: separate;
-		// 	// hack to set TD width
-		// 	// min-width: 30px;
-		// 	// max-width: 30px;
-		// 	height: 20px;
-		// }
 
 		.fc-day-number,
 		.fc-day-header {
