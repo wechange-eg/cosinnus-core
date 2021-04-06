@@ -228,6 +228,10 @@ class CosinnusConf(AppConf):
     # the global notification setting for users on the plattform (3: weekly)
     DEFAULT_GLOBAL_NOTIFICATION_SETTING = 3
     
+    # default rocketchat notification mails are off
+    # (see `GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES`)
+    DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING = 0
+    
     # default setting for notifications for followed objects
     DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING = 2 # SETTING_DAILY = 2
     
@@ -246,6 +250,7 @@ class CosinnusConf(AppConf):
         'cosinnus_event',
         'cosinnus_file',
         'cosinnus_marketplace',
+        'cosinnus_message',
         'cosinnus_note',
         'cosinnus_poll',
         'cosinnus_todo',
@@ -350,6 +355,7 @@ class CosinnusConf(AppConf):
         ("note", "detailed_news_list", {'amount':'3', 'sort_field':'1'}),
         ("event", "upcoming", {'amount':'5', 'sort_field':'2'}),
         ("todo", "mine", {'amount':'5', 'amount_subtask':'2', 'sort_field':'3'}),
+        ("message", "embeddedchat", {'amount':'5', 'sort_field':'3'}),
         ("etherpad", "latest", {'amount':'5', 'sort_field':'4'}),
         ("cloud", "latest", {'amount':'5', 'sort_field':'4'}),
         ("file", "latest", {'sort_field':'5', 'amount':'5'}),
