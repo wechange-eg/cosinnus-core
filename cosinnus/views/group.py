@@ -244,7 +244,8 @@ class CosinnusGroupFormMixin(object):
                     'checked': app_is_active,
                     'app_not_activatable': app_not_activatable,
                 })
-                if app_is_active and not app_not_activatable:
+                app_disabled_for_microsite = app_name in settings.COSINNUS_GROUP_MICROSITE_APPS_DISABLED
+                if app_is_active and not app_not_activatable and not app_disabled_for_microsite:
                     microsite_public_apps_selection.append({
                         'app_name': app_name,
                         'app': app,

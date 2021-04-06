@@ -1310,7 +1310,8 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         """ Returns a list of cosinnus apps whose public objects should be shown on the microsite.
             If not set, used the default setting in COSINNUS_MICROSITE_DEFAULT_PUBLIC_APPS """
         if getattr(self, 'microsite_public_apps', None):
-            return self.microsite_public_apps.split(',')
+            return [app_name for app_name in self.microsite_public_apps.split(',') 
+                        if not app_name in settings.COSINNUS_GROUP_MICROSITE_APPS_DISABLED]
         else:
             return settings.COSINNUS_MICROSITE_DEFAULT_PUBLIC_APPS
 

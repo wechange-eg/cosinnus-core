@@ -381,9 +381,10 @@ class CosinnusConf(AppConf):
         ("cosinnus", "meta_attr_widget", {'sort_field':'1'}),
         ("event", "upcoming", {'sort_field':'2', 'amount':'5'}),
         ("file", "latest", {'sort_field':'3', 'amount':'5'}),
-        
     ]
-    
+    GROUP_MICROSITE_APPS_DISABLED = [
+        'cosinnus_cloud',
+    ]
     
     # a map of class dropins for the typed group trans classes
     # status (int) --> class (str classpath)
