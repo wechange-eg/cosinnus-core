@@ -252,7 +252,13 @@ class FollowedObjectsWidgetView(BaseUserDashboardWidgetView):
         objects = []
         for follow in followed:
             ct = ContentType.objects.get_for_id(follow.content_type.id)
-            obj = ct.get_object_for_this_type(pk=follow.object_id)
+            model_class = ct.model_class()
+            obj = get_object_or_None(model_class, pk=follow.object_id)
+            # should the target object not exist, delete the follow relation
+            if not obj:
+                follow.delete()
+                continue
+            
             # filter inactive groups
             if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
                 if not obj.is_active:
