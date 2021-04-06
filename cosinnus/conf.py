@@ -510,6 +510,9 @@ class CosinnusConf(AppConf):
     
     # dimensions of the images for map images
     MAP_IMAGE_SIZE = (500, 500)
+
+    # display map in iframe in user dashboard
+    USERDASHBOARD_USE_LIVE_MAP_WIDGET = False
     
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them

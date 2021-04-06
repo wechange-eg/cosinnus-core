@@ -74,6 +74,13 @@
         {% if SETTINGS.COSINNUS_USE_V2_NAVBAR or SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
 	        <link href="{% static 'css/v2_map_corrections.css' %}" rel="stylesheet">
 		{% endif %}
+
+        <style type="text/css">
+            html {
+                overflow: hidden;
+            }
+
+        </style>
     </head>
     
     <body>
