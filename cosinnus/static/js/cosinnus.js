@@ -223,51 +223,93 @@
             // The .small-calendar is for tooltips or small static date chooser.
             // both are based on jQuery fullcalendar. http://arshaw.com/fullcalendar/
 
+            if($('.event-list').length && typeof(cosinnus_calendarEvents) !== "undefined") {
+                $('.event-list').empty();
+                var dateFormat = $.cosinnus.fullcalendar_format;
+
+                $('.event-list').each(function(index) {
+                    var eventListEl = $('.event-list')[index];
+                    var calendarList = new FullCalendar.Calendar(eventListEl, $.extend({
+                        initialView: 'listWeek',
+                        events: cosinnus_calendarEvents,
+                        contentHeight: 'auto'
+                    }, dateFormat))
+                    calendarList.setOption('locale', cosinnus_current_language);
+                    calendarList.render();
+                });
+
+            }
+
             if ($('.big-calendar').length && typeof(cosinnus_calendarEvents) !== "undefined") {
                 $('.big-calendar').empty();
-                $('.big-calendar').fullCalendar($.extend({
-                    header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'year,month,basicWeek,week' // basicDay
-                    },
-    
-                    // cosinnus_calendarEvents is a global var containing the events
-                    // set by the backend somewhere in the BODY.
-                    events: cosinnus_calendarEvents,
-                    select: function(startDate, endDate, allDay, jsEvent, view) {
-                        $(this.element)
-                            .closest('.big-calendar')
-                            .trigger('fullCalendarSelect',[startDate, endDate, allDay, jsEvent, view]);
-                    },
-                    eventClick: function(event, jsEvent, view) {
-                        $(this)
-                            .closest('.big-calendar')
-                            .trigger('fullCalendarEventClick',[event, jsEvent, view]);
-                    },
-                    selectable: true,
-                    selectHelper: true
-                }, $.cosinnus.fullcalendar_format));
+
+                var dateFormat = $.cosinnus.fullcalendar_format;
+
+                $('.big-calendar').each(function(index) {
+                    var calendarEl = $('.big-calendar')[index];
+                    var calendar = new FullCalendar.Calendar(calendarEl, $.extend({
+                        headerToolbar: {
+                            left: 'prev,next,today',
+                            right: 'dayGridMonth,timeGridWeek, listWeek' // basicDay
+                        },
+                        footerToolbar: {
+                            center: 'title'
+                        },
+                        contentHeight: 'auto',
+                        showNonCurrentDates: false,
+                        fixedWeekCount: false,
+                        editable: true,
+                        events: cosinnus_calendarEvents,
+                        eventDrop: function(date) {
+                            $(calendarEl)
+                                .closest('.big-calendar')
+                                .trigger('fullCalendarEventDragged',[date]);
+                        },
+                        select: function(date) {
+                            $(calendarEl)
+                                .closest('.big-calendar')
+                                .trigger('fullCalendarSelect',[date]);
+                        },
+                        eventClick: function(event, jsEvent, view) {
+                            $(this)
+                                .closest('.big-calendar')
+                                .trigger('fullCalendarEventClick',[event, jsEvent, view]);
+                        },
+                        selectable: true,
+                    }, dateFormat));
+                    calendar.setOption('locale', cosinnus_current_language);
+                    calendar.render();
+                });
             }
-            
             if ($('.small-calendar').length) {
                 $('.small-calendar').empty();
-                $('.small-calendar').fullCalendar($.extend({
-                    header: {
-                        left: 'prev',
-                        center: 'title',
-                        right: 'next'
-                    },
-                    events: (typeof cosinnus_calendarWidgetEvents !== "undefined" ? cosinnus_calendarWidgetEvents : []),
-                    dayClick: function(date, allDay, jsEvent, view) {
-                        $(this).trigger('fullCalendarDayClick',[date,jsEvent]);
-                    },
-                    viewRender: function(date, cell) {
-                        // A day has to be rendered because of redraw or something
-                        $(cell).closest('.small-calendar').trigger('fullCalendarViewRender',[cell]);
-                    }
-    
-                }, $.cosinnus.fullcalendar_format));
+
+                var dateFormat = $.cosinnus.fullcalendar_format;
+
+                $('.small-calendar').each(function(index) {
+                    var calenderEl = $('.small-calendar')[index];
+                    var calendar = new FullCalendar.Calendar(calenderEl, $.extend({
+                        headerToolbar: {
+                            left: 'prev',
+                            center: 'title',
+                            right: 'next'
+                        },
+                        showNonCurrentDates: false,
+                        fixedWeekCount: false,
+                        contentHeight: 'auto',
+                        eventDisplay: 'background',
+                        selectable: true,
+                        dateClick: function(date) {
+                            $(calenderEl).trigger('fullCalendarDayClick',[date]);
+                        },
+                        datesSet: function(date) {
+                            // A day has to be rendered because of redraw or something
+                            $(calenderEl).trigger('fullCalendarViewRender',[date]);
+                        }
+                    }, dateFormat));
+                    calendar.setOption('locale', cosinnus_current_language);
+                    calendar.render();
+                })
             }
         },
 
@@ -276,23 +318,36 @@
             // The big calendar fills the whole content area and contains the user's events.
 
             $('.big-calendar')
-                .on("fullCalendarSelect", function(event, startDate, endDate, allDay, jsEvent, view) {
+                .on("fullCalendarEventDragged", function(event, date){
+                    var eventId = date.event._def.publicId
+                    var url = '/events/' + eventId + '/update'
+                    var data = {
+                        'start': date.event.start.toISOString(),
+                        'end': date.event.end.toISOString()
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: data
+                      });
+                })
+                .on("fullCalendarSelect", function(event, date) {
                     // Dates have been selected. Now the user might want to add an event.
-                    var startDateDataAttr = startDate.getFullYear() + "-"
-                        + ((startDate.getMonth()+1).toString().length === 2
-                            ? (startDate.getMonth()+1)
-                            : "0" + (startDate.getMonth()+1)) + "-"
-                        + (startDate.getDate().toString().length === 2
-                            ? startDate.getDate()
-                            : "0" + startDate.getDate());
+                    var startDateDataAttr = date.start.getFullYear() + "-"
+                        + ((date.start.getMonth()+1).toString().length === 2
+                            ? (date.start.getMonth()+1)
+                            : "0" + (date.start.getMonth()+1)) + "-"
+                        + (date.start.getDate().toString().length === 2
+                            ? date.start.getDate()
+                            : "0" + date.start.getDate());
 
-                    var endDateDataAttr = endDate.getFullYear() + "-"
-                        + ((endDate.getMonth()+1).toString().length === 2
-                            ? (endDate.getMonth()+1)
-                            : "0" + (endDate.getMonth()+1)) + "-"
-                        + (endDate.getDate().toString().length === 2
-                            ? endDate.getDate()
-                            : "0" + endDate.getDate());
+                    var endDateDataAttr = date.end.getFullYear() + "-"
+                        + ((date.end.getMonth()+1).toString().length === 2
+                            ? (date.end.getMonth()+1)
+                            : "0" + (date.end.getMonth()+1)) + "-"
+                        + (date.end.getDate().toString().length === 2
+                            ? date.end.getDate()
+                            : "0" + date.end.getDate());
 
                     // allDay is always true as times can not be selected.
 
@@ -339,7 +394,8 @@
 
             // on every re-drawing of the calendar select the choosen date
             $('.calendar-date-time-chooser .small-calendar')
-            .on("fullCalendarViewRender", function(event, cell) {
+            .on("fullCalendarViewRender", function() {
+
                 // select choosen day
 
                 var date = $(this)
@@ -354,17 +410,17 @@
             .trigger('fullCalendarViewRender')
 
             // when clicked on a day: use this!
-            .on("fullCalendarDayClick", function(event, date, jsEvent) {
-                var dayElement = jsEvent.currentTarget;
+            .on("fullCalendarDayClick", function(event, date) {
+                var dayElement = date.dayEl;
                 if ($(dayElement).hasClass('fc-other-month')) return;
 
-                var dateDataAttr = date.getFullYear() + "-"
-                    + ((date.getMonth()+1).toString().length === 2
-                        ? (date.getMonth()+1)
-                        : "0" + (date.getMonth()+1)) + "-"
-                    + (date.getDate().toString().length === 2
-                        ? date.getDate()
-                        : "0" + date.getDate());
+                var dateDataAttr = date.date.getFullYear() + "-"
+                    + ((date.date.getMonth()+1).toString().length === 2
+                        ? (date.date.getMonth()+1)
+                        : "0" + (date.date.getMonth()+1)) + "-"
+                    + (date.date.getDate().toString().length === 2
+                        ? date.date.getDate()
+                        : "0" + date.date.getDate());
 
                 // unselect all and re-select later
                 $(dayElement).parent().parent().find('td').removeClass('selected');

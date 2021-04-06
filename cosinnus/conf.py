@@ -1041,4 +1041,5 @@ class CosinnusDefaultSettings(AppConf):
     STARRED_USERS_LIST = _('Bookmarked Users list')
 
     PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
+    CALENDAR_WIDGET_DISPLAY_AS_LIST = False
 
