@@ -223,6 +223,23 @@
             // The .small-calendar is for tooltips or small static date chooser.
             // both are based on jQuery fullcalendar. http://arshaw.com/fullcalendar/
 
+            if($('.event-list').length && typeof(cosinnus_calendarEvents) !== "undefined") {
+                $('.event-list').empty();
+                var dateFormat = $.cosinnus.fullcalendar_format;
+
+                $('.event-list').each(function(index) {
+                    var eventListEl = $('.event-list')[index];
+                    var calendarList = new FullCalendar.Calendar(eventListEl, $.extend({
+                        initialView: 'listWeek',
+                        events: cosinnus_calendarEvents,
+                        contentHeight: 'auto'
+                    }, dateFormat))
+                    calendarList.setOption('locale', cosinnus_current_language);
+                    calendarList.render();
+                });
+
+            }
+
             if ($('.big-calendar').length && typeof(cosinnus_calendarEvents) !== "undefined") {
                 $('.big-calendar').empty();
 
