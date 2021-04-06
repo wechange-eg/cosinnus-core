@@ -70,6 +70,9 @@ module.exports = BaseView.extend({
         if (typeof json['topics'] === "number" || (typeof json['topics'] === "string" && json['topics'].length > 0)) {
             json['topics'] = json['topics'].toString().split(',').map(Number);
         }
+        if (typeof json['text_topics'] === "number" || (typeof json['text_topics'] === "string" && json['text_topics'].length > 0)) {
+            json['text_topics'] = json['text_topics'].toString().split(',').map(Number);
+        }
         if (typeof json['sdgs'] === "number" || (typeof json['sdgs'] === "string" && json['sdgs'].length > 0)) {
             json['sdgs'] = json['sdgs'].toString().split(',').map(Number);
         }
@@ -78,6 +81,4 @@ module.exports = BaseView.extend({
         }
         return json;
     },
-    
-    
 });

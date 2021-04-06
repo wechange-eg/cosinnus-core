@@ -129,6 +129,7 @@ urlpatterns = [
     url(r'^housekeeping/ensure_group_widgets/$', housekeeping.ensure_group_widgets, name='housekeeping-ensure-group-widgets'),
     url(r'^housekeeping/newsletterusers/$', housekeeping.newsletter_users, name='housekeeping-newsletter-user-emails'),
     url(r'^housekeeping/activeuseremails/$', housekeeping.active_user_emails, name='housekeeping-active-user-emails'),
+    url(r'^housekeeping/neverloggedinuseremails/$', housekeeping.never_logged_in_user_emails, name='housekeeping-never-logged-in-user-emails'),
     url(r'^housekeeping/deletespamusers/$', housekeeping.delete_spam_users, name='housekeeping_delete_spam_users'),
     url(r'^housekeeping/movegroupcontent/(?P<fromgroup>[^/]+)/(?P<togroup>[^/]+)/$', housekeeping.move_group_content, name='housekeeping_move_group_content'),
     url(r'^housekeeping/recreategroupwidgets/$', housekeeping.recreate_all_group_widgets, name='housekeeping_recreate_all_group_widgets'),

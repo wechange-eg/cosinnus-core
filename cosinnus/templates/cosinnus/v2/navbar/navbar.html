@@ -56,6 +56,7 @@
 	    $('html').on('init:client', function () {
 	        Backbone.mediator.publish('init:module-navbar-quicksearch', {
             	el: '#nav-quicksearch-results',
+				placeholder: '{% trans "Search for Names, Topics and Places..." %}'
 	        });
 	    });
 	</script>

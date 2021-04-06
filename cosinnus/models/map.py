@@ -3,13 +3,17 @@ from __future__ import unicode_literals
 
 from copy import copy
 import datetime
+import json
 import re
+import pytz
 
 from django.urls import reverse
 from django.db.models import Q
 from django.template.defaultfilters import linebreaksbr
 from django.utils.html import escape
+from django.utils import timezone
 from django.utils.timezone import now
+from django.template.loader import render_to_string
 from haystack.query import SearchQuerySet
 
 from cosinnus.conf import settings
@@ -168,7 +172,8 @@ class BaseMapResult(DictResult):
         'backgroundImageSmallUrl': None,
         'backgroundImageLargeUrl': None,
         'description': None,
-        'topics': [],
+        'topics' : [],
+        'text_topics': [],
         'portal': None,
         'group_slug': None,
         'group_name': None,
@@ -225,6 +230,7 @@ class HaystackMapResult(BaseMapResult):
             'description': textfield(result.description),
             'relevance': result.score,
             'topics': result.mt_topics,
+            'text_topics': result.mt_text_topics,
             'portal': portal,
             'group_slug': result.group_slug,
             'group_name': result.group_name,
@@ -242,7 +248,8 @@ class HaystackMapResult(BaseMapResult):
             fields.update({
                 'managed_tags': result.managed_tags,
             })
-        
+        if 'request' in kwargs:
+            kwargs.pop('request')
         fields.update(**kwargs)
         
         return super(HaystackMapResult, self).__init__(*args, **fields)
@@ -419,6 +426,7 @@ class DetailedUserMapResult(DetailedMapResult):
     fields.update({
         'projects': [],
         'groups': [],
+        'extra_html': ''
     })
 
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -443,9 +451,21 @@ class DetailedUserMapResult(DetailedMapResult):
         #sqs = filter_searchqueryset_for_read_access(sqs, user)
         sqs = sqs.order_by('title')
         
+        data = {
+            'profile': obj,
+            'profile_values':obj.dynamic_fields,
+            'labels': settings.COSINNUS_USERPROFILE_EXTRA_FIELDS,
+        }
+        dynamic_fields_template = render_to_string(
+            'cosinnus/user/user_profile_dynamic_fields.html',
+            data, 
+            request=kwargs.get('request', None)
+        )
+
         kwargs.update({
             'projects': [],
             'groups': [],
+            'extra_html': dynamic_fields_template,
         })
         for result in sqs:
             if SEARCH_MODEL_NAMES[result.model] == 'projects':
@@ -454,8 +474,7 @@ class DetailedUserMapResult(DetailedMapResult):
                 kwargs['conferences'].append(HaystackConferenceMapCard(result))
             else:
                 kwargs['groups'].append(HaystackGroupMapCard(result))
-                
-                
+
         if getattr(settings, 'COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD', False):
             kwargs.update({
                 'may_be_contacted': obj.may_be_contacted,
@@ -831,4 +850,38 @@ def filter_event_searchqueryset_by_upcoming(sqs):
     sqs = sqs.exclude(Q(to_date__lt=event_horizon) | (Q(_missing_='to_date') & Q(from_date__lt=event_horizon)))
     # only actual events, no doodles
     sqs = sqs.filter_and(Q(_missing_='event_state') | Q(event_state=1))
+    return sqs
+
+def build_date_time(date_string, time_string):
+
+    if date_string:
+        time_zone = timezone.get_current_timezone_name()
+        time_zone = pytz.timezone(time_zone)
+
+        format_string = "%Y-%m-%d"
+        if date_string and time_string:
+            format_string = "%Y-%m-%d %H:%M"
+
+        date_time_string = date_string
+        if time_string:
+            date_time_string = '{} {}'.format(date_string, time_string)
+
+        try:
+            date_time = datetime.datetime.strptime(date_time_string, format_string)
+        except ValueError:
+            date_time = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+
+        date_time = time_zone.localize(date_time)
+        return date_time
+
+def filter_event_or_conference_starts_after(date_string, time_string, sqs):
+    date_time = build_date_time(date_string, time_string)
+    if date_time:
+        return sqs.filter(from_date__gt=date_time)
+    return sqs
+
+def filter_event_or_conference_starts_before(date_string, time_string, sqs):
+    date_time = build_date_time(date_string, time_string)
+    if date_time:
+        return sqs.filter(from_date__lt=date_time)
     return sqs

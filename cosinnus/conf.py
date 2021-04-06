@@ -951,6 +951,22 @@ class CosinnusConf(AppConf):
     # filtered on users tagged with this tag
     MANAGED_TAG_DYNAMIC_USER_FIELD_FILTER_ON_TAG_SLUG = None
     
+    # if set to a list of ids, in the map filter only managed tags will be shown
+    # that have an assigneg CosinnusManagedTagType of a matchind id
+    MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_FROM_TYPE_IDS = []
+    
+    # if set to a list of ids, in the map filter only managed tags will be shown
+    # that have a matching id
+    MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS = []
+    
+    # managed tag filters will only be shown on the map for these
+    # map content types
+    MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
+
+    # text topic filters will only be shown on the map for these
+    # map content types (and if any text topics even exist)
+    TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
+    
     # set to True to enable virusscan. the clamd daeomon needs to be running!
     # see https://pypi.org/project/django-clamd/
     VIRUS_SCAN_UPLOADED_FILES = False
@@ -1044,4 +1060,5 @@ class CosinnusDefaultSettings(AppConf):
     STARRED_USERS_LIST = _('Bookmarked Users list')
 
     PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
+    CALENDAR_WIDGET_DISPLAY_AS_LIST = False
 

@@ -26,7 +26,7 @@
                 placeholder="{% trans "Date" %}"
                 readonly ="readonly"
                 class="calendar-date-time-chooser-date" />
-            <input class="calendar-date-time-chooser-hiddendate" id="id_from_date_0" name="from_date_0" 
+            <input class="calendar-date-time-chooser-hiddendate" id="id_{{ from_date_field.html_name }}_0" name="{{ from_date_field.html_name }}_0" 
                 placeholder="{% trans "Start date." %}" type="hidden" 
                 {% if from_date_field.value %}
                 value="{{ from_date_field.value|date:"Y-m-d" }}" 
@@ -36,7 +36,7 @@
                 value="{% now "Y-m-d" %}" 
                 {% endif %}
             >
-            <input class="calendar-date-time-chooser-time" id="id_from_date_1" name="from_date_1" 
+            <input class="calendar-date-time-chooser-time" id="id_{{ from_date_field.html_name }}_1" name="{{ from_date_field.html_name }}_1" 
                 placeholder="00:00" type="text" 
                 value="{{ from_date_field.value|date:"H:i" }}" 
             >                                           
@@ -48,7 +48,7 @@
                 placeholder="{% trans "Date" %}"
                 readonly ="readonly"
                 class="calendar-date-time-chooser-date" />
-            <input class="calendar-date-time-chooser-hiddendate" id="id_to_date_0" name="to_date_0" 
+            <input class="calendar-date-time-chooser-hiddendate" id="id_{{ to_field.html_name }}_0" name="{{ to_date_field.html_name }}_0"
                 placeholder="{% trans "End date." %}" type="hidden" 
                 {% if to_date_field.value %}
                 value="{{ to_date_field.value|date:"Y-m-d" }}" 
@@ -58,7 +58,7 @@
                 value="{% now "Y-m-d" %}" 
                 {% endif %}
             >
-            <input class="calendar-date-time-chooser-time" id="id_to_date_1" name="to_date_1" 
+            <input class="calendar-date-time-chooser-time" id="id_{{ to_date_field.html_name }}_1" name="{{ to_date_field.html_name }}_1"
                 placeholder="23:59" type="text" 
                 value="{{ to_date_field.value|date:"H:i" }}" 
             >    
@@ -67,3 +67,11 @@
     </ol>
 {% endcaptureas %}
 {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label large_field=True date_legend=date_legend %}
+
+<script type="text/javascript">
+    $(function(){
+	    $.cosinnus.fullcalendar();
+	    $.cosinnus.calendarDayTimeChooser();
+    });
+</script>
+

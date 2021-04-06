@@ -28,7 +28,7 @@
             </h1>
         </div>
     {% endif %}
-    <div class="controls"></div>
+    <div class="controls {% if controlView.state.filterPanelVisible %}open{% endif %}"></div>
     <div class="tile-contents mobile-view mobile-view-list-visible-block">
         <div id="tile-container-proto" class="grid" style="display: none;">
             <!-- width of .grid-sizer used for columnWidth -->
