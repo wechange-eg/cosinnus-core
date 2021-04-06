@@ -43,7 +43,7 @@
 			<link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
 			<script src="{% static "js/vendor/less.min.js" %}"></script>
 			{% else %}
-		    <link href="{% static 'css/cosinnus.css' %}?v=0.60" rel="stylesheet">
+		    <link href="{% static 'css/cosinnus.css' %}?v=0.61" rel="stylesheet">
 			{% endif %}
 	        <link href="{% static 'css/cosinnus_portal_style.css' %}?v=0.8" rel="stylesheet">
 	        <link href="{% static COSINNUS_CURRENT_PORTAL.custom_stylesheet_url %}?v=0.3" rel="stylesheet">
@@ -105,7 +105,7 @@
                 var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
                 var cosinnus_report_object_url = "{% url 'cosinnus:report-object' %}";
             </script>
-            <script src="{% static 'js/cosinnus.js' %}?v=0.48"></script>
+            <script src="{% static 'js/cosinnus.js' %}?v=0.49"></script>
             <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
             <script src="{% static 'js/cosinnus.feedback.js' %}?v=0.1"></script>
             
