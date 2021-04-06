@@ -246,7 +246,8 @@
                 var dateFormat = $.cosinnus.fullcalendar_format;
 
                 $('.big-calendar').each(function(index) {
-                    var calendar = new FullCalendar.Calendar($('.big-calendar')[index], $.extend({
+                    var calendarEl = $('.big-calendar')[index];
+                    var calendar = new FullCalendar.Calendar(calendarEl, $.extend({
                         headerToolbar: {
                             left: 'prev,next,today',
                             right: 'dayGridMonth,timeGridWeek, listWeek' // basicDay
@@ -257,11 +258,17 @@
                         contentHeight: 'auto',
                         showNonCurrentDates: false,
                         fixedWeekCount: false,
+                        editable: true,
                         events: cosinnus_calendarEvents,
-                        select: function(startDate, endDate, allDay, jsEvent, view) {
-                            $(this.element)
+                        eventDrop: function(date) {
+                            $(calendarEl)
                                 .closest('.big-calendar')
-                                .trigger('fullCalendarSelect',[startDate, endDate, allDay, jsEvent, view]);
+                                .trigger('fullCalendarEventDragged',[date]);
+                        },
+                        select: function(date) {
+                            $(calendarEl)
+                                .closest('.big-calendar')
+                                .trigger('fullCalendarSelect',[date]);
                         },
                         eventClick: function(event, jsEvent, view) {
                             $(this)
@@ -292,7 +299,7 @@
                         contentHeight: 'auto',
                         eventDisplay: 'background',
                         selectable: true,
-                        dateClick: function(date, allDay, jsEvent, view) {
+                        dateClick: function(date) {
                             $(calenderEl).trigger('fullCalendarDayClick',[date]);
                         },
                         datesSet: function(date) {
@@ -311,23 +318,36 @@
             // The big calendar fills the whole content area and contains the user's events.
 
             $('.big-calendar')
-                .on("fullCalendarSelect", function(event, startDate, endDate, allDay, jsEvent, view) {
+                .on("fullCalendarEventDragged", function(event, date){
+                    var eventId = date.event._def.publicId
+                    var url = '/events/' + eventId + '/update'
+                    var data = {
+                        'start': date.event.start.toISOString(),
+                        'end': date.event.end.toISOString()
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: data
+                      });
+                })
+                .on("fullCalendarSelect", function(event, date) {
                     // Dates have been selected. Now the user might want to add an event.
-                    var startDateDataAttr = startDate.getFullYear() + "-"
-                        + ((startDate.getMonth()+1).toString().length === 2
-                            ? (startDate.getMonth()+1)
-                            : "0" + (startDate.getMonth()+1)) + "-"
-                        + (startDate.getDate().toString().length === 2
-                            ? startDate.getDate()
-                            : "0" + startDate.getDate());
+                    var startDateDataAttr = date.start.getFullYear() + "-"
+                        + ((date.start.getMonth()+1).toString().length === 2
+                            ? (date.start.getMonth()+1)
+                            : "0" + (date.start.getMonth()+1)) + "-"
+                        + (date.start.getDate().toString().length === 2
+                            ? date.start.getDate()
+                            : "0" + date.start.getDate());
 
-                    var endDateDataAttr = endDate.getFullYear() + "-"
-                        + ((endDate.getMonth()+1).toString().length === 2
-                            ? (endDate.getMonth()+1)
-                            : "0" + (endDate.getMonth()+1)) + "-"
-                        + (endDate.getDate().toString().length === 2
-                            ? endDate.getDate()
-                            : "0" + endDate.getDate());
+                    var endDateDataAttr = date.end.getFullYear() + "-"
+                        + ((date.end.getMonth()+1).toString().length === 2
+                            ? (date.end.getMonth()+1)
+                            : "0" + (date.end.getMonth()+1)) + "-"
+                        + (date.end.getDate().toString().length === 2
+                            ? date.end.getDate()
+                            : "0" + date.end.getDate());
 
                     // allDay is always true as times can not be selected.
 
