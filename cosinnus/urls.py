@@ -297,15 +297,15 @@ urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
 router = routers.SimpleRouter()
-router.register(r'public_conferences', PublicConferenceViewSet)
-router.register(r'conferences', ConferenceViewSet)
-router.register(r'groups', CosinnusSocietyViewSet)
-router.register(r'projects', CosinnusProjectViewSet)
-router.register(r'organizations', OrganizationViewSet)
-router.register(r'events', EventViewSet)
-router.register(r'notes', NoteViewSet)
+router.register(r'public_conferences', PublicConferenceViewSet, basename='public_conference')
+router.register(r'conferences', ConferenceViewSet, basename='conference')
+router.register(r'groups', CosinnusSocietyViewSet, basename='group')
+router.register(r'projects', CosinnusProjectViewSet, basename='project')
+router.register(r'organizations', OrganizationViewSet, basename='organization')
+router.register(r'events', EventViewSet, basename='event')
+router.register(r'notes', NoteViewSet, basename='note')
 if getattr(settings, 'COSINNUS_API_SETTINGS', {}).get('user'):
-    router.register(r'users', UserViewSet)
+    router.register(r'users', UserViewSet, basename='user')
 
 if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
     from cosinnus_message.api.views import MessageExportView
@@ -331,7 +331,7 @@ schema_url_patterns = [
     url(r'^api/v2/settings/$', api_settings, name='api-settings'),
     url(r'^api/v2/statistics/', api_statistics, name='api-statistics'),
     url(r'^api/v2/jsi18n/$', translations, name='api-jsi18n'),
-    url(r'^api/v2/', include(router.urls)),
+    url(r'^api/v2/', include((router.urls, 'api'), namespace='api')),
 ]
 
 urlpatterns += schema_url_patterns

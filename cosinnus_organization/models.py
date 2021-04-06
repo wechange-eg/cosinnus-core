@@ -123,7 +123,6 @@ class OrganizationManager(models.Manager):
             cache.set(self._ORGANIZATIONS_PK_TO_SLUG_CACHE_KEY % (portal_id), pks,
                 settings.COSINNUS_ORGANIZATION_CACHE_TIMEOUT)
         return pks
-
     
     def all_in_portal(self):
         """ Returns all groups within the current portal only """
@@ -398,8 +397,8 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
         return getattr(self, key)
     
     def get_absolute_url(self):
-        item_id = '%d.organizations.%s' % (self.portal_id, self.slug)
-        return get_domain_for_portal(self.portal) + reverse('cosinnus:map') + '?item=' + item_id
+        return get_domain_for_portal(self.portal) + reverse('cosinnus:organization-detail',
+                                                            kwargs={'organization': self.slug})
     
     def get_edit_url(self):
         return reverse('cosinnus:organization-edit', kwargs={'organization': self.slug})

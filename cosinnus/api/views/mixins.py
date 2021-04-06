@@ -1,4 +1,5 @@
 from django.db.models import Q
+from rest_framework import permissions
 
 from cosinnus.models import CosinnusPortal, BaseTagObject
 
@@ -91,3 +92,8 @@ class CosinnusPaginateMixin(object):
         queryset = super().get_queryset()
         page = self.paginate_queryset(queryset)
         return page
+
+
+class ReadOnlyOrIsAdminUser(permissions.IsAdminUser):
+    def has_permission(self, request, view):
+        return view.action in ['list', 'retrieve'] or super().has_permission(request, view)

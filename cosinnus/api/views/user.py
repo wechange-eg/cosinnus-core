@@ -1,6 +1,5 @@
 import json
 
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from oauth2_provider.decorators import protected_resource
@@ -9,6 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from cosinnus.conf import settings
 from ..serializers.user import UserCreateUpdateSerializer, UserSerializer
 from ...models import get_user_profile_model, CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_MEMBER, \
     MEMBERSHIP_ADMIN
