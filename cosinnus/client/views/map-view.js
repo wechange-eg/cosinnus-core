@@ -77,15 +77,16 @@ module.exports = ContentControlView.extend({
         // the amount of decimals to round all coordinates to
         latLngRoundToDecimals: 5,
         
+        // image size and display size multiplier for the marker images
         resultMarkerSizes: {
-            width: 14,
-            height: 14,
-            widthLarge: 28,
-            heightLarge: 37,
-            widthStacked: 23,
-            heightStacked: 23,
-            widthBase: 28,
-            heightBase: 37,
+            width:          14 * 0.8,
+            height:         14 * 0.8,
+            widthLarge:     28 * 0.8,
+            heightLarge:    37 * 0.8,
+            widthStacked:   23 * 0.8,
+            heightStacked:  23 * 0.8,
+            widthBase:      28 * 0.8,
+            heightBase:     37 * 0.8,
         },
         
         // calculated dynamically depending on zoom, in `handleViewportChange()`
@@ -98,7 +99,7 @@ module.exports = ContentControlView.extend({
         MARKER_NUMBER_OF_LARGE_MARKERS: 8, // this many of the most relevant results become large markers
         
         MARKER_CLUSTER_RADIUS_LIMIT: 0.85, // cluster radius multiplier: modifier for how aggressively the clusters should pull in markers
-        MARKER_STACK_PX_OFFSET_PER_CLUSTER_LEVEL: 12, // offset in px for clustered stack-makers per level
+        MARKER_STACK_PX_OFFSET_PER_CLUSTER_LEVEL: 7, // offset in px for clustered stack-makers per level
         MARKER_STACK_PX_OFFSET_BASE: 8, // additional offset in px of first clustered stack-marker (level 1) from the base marker
 
         // if location is set to a location pair at initialization,
