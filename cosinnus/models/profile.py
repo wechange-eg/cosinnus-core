@@ -391,11 +391,17 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     @property
     def map_embed_url(self):
         url = reverse('cosinnus:map-embed')
-        if not self.media_tag.location:
+        defaults = settings.COSINNUS_DASHBOARD_WIDGET_MAP_DEFAULTS
+        if (not defaults or not 'location' in defaults) and not self.media_tag.location:
             return url
-        lat = self.media_tag.location_lat
-        lon = self.media_tag.location_lon
-        return '{}?location_lat={}&location_lon={}&zoom={}'.format(url, lat, lon, 10)
+        if self.media_tag.location:
+            lat = self.media_tag.location_lat
+            lon = self.media_tag.location_lon
+        else:
+            lat = defaults['location'][0]
+            lon = defaults['location'][1]
+        zoom = defaults.get('zoom', 10)
+        return '{}?location_lat={}&location_lon={}&zoom={}'.format(url, lat, lon, zoom)
 
 
 class UserProfile(BaseUserProfile):

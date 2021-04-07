@@ -527,6 +527,17 @@ class CosinnusConf(AppConf):
         'ignore_location_default_activated': False, # whether the "In map area" button should be off on load
         'exchange_default_activated': True, # whether the "also show external contents" button should be off on load
     }
+    # Only for the dashboard map widget view if the user has no custom location set
+    # If not set, will attempt to use what is given in COSINNUS_MAP_OPTIONS
+    # Example:
+    #     DASHBOARD_WIDGET_MAP_DEFAULTS = {
+    #         "location": [
+    #              52.51, 
+    #             13.39
+    #          ],
+    #         "zoom": 10
+    #     }
+    DASHBOARD_WIDGET_MAP_DEFAULTS = {}
     
     # dimensions of the images for map images
     MAP_IMAGE_SIZE = (500, 500)
