@@ -286,27 +286,6 @@ module.exports = ContentControlView.extend({
         }
     },
 
-/**
-    toggleDateTimePicker: function () {
-        
-        var showDateTimePicker = true;
-
-        if (selectedButtons.length == 0){
-            showDateTimePicker = false;
-        } else {
-            selectedButtons.each(function (i) {
-                if (this.hasAttribute('data-result-filter-type')) {
-                    var type = this.getAttribute('data-result-filter-type')
-                    if ($.inArray(type, typesWithDates) == -1) {
-                        showDateTimePicker = false;
-                    }
-                }
-            })
-        }
-
-    },
-    */
-    
     /** Will set state.dateFiltersActive based on if only date-like content types are shown */
     toggleDateTimePicker: function() {
         var typesWithDates = ['events', 'conferences'];
@@ -1082,32 +1061,6 @@ module.exports = ContentControlView.extend({
         this.$el.find('.icon-filters').removeClass('open');
         this.$el.parents().find('.controls').removeClass('open');
     },
-    
-    
-    /**
-     * Unused now, this used to be the search-while-typing feature.
-     * TODO: Remove completely (also this.state.typing) once sure 
-     * we don't want it
-     
-    toggleTyping: function (event) {
-        this.state.typing = !this.state.typing;
-        this.$el.find('.icon-search').toggle();
-    },
-
-    handleTyping: function (event) {
-        if (util.isIgnorableKey(event)) {
-            event.preventDefault();
-            return false;
-        }
-        
-        var query = $(event.currentTarget).val();
-        if (query.length > 2 || query.length === 0) {
-            this.state.q = query;
-            this.triggerDelayedSearch();
-        }
-    },
-    
-    */
     
     handleTyping: function (event) {
         var self = this;
