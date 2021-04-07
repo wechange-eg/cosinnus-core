@@ -144,12 +144,13 @@ class DynamicFreetextChoicesView(Select2View):
             raise Http404
         has_more = count > end
         
-        all_values = qs.values_list(f'dynamic_fields__{self.field_name}', flat=True)
+        all_values = qs.values_list(f'dynamic_fields__{self.field_name}', flat=True).distinct()
         # flatten values as some returned values might be items, and some might be lists
         flat_values = []
         for val in all_values:
             flat_values += val if isinstance(val, list) else [val]
         # return only matched values
+        flat_values = list(set(flat_values))
         matches = [item for item in flat_values if item and term in item.lower()]
         text_choices = [(match, match) for match in matches[start:end]]
         return (NO_ERR_RESP, has_more, text_choices)
