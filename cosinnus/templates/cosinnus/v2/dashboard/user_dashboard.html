@@ -74,14 +74,28 @@
 			<div class="starred-objects-widget-root"></div>
 			<div class="followed-objects-widget-root"></div>
 			{% block map_widget %}
-				<div class="map-widget square-widget">
+				{% if SETTINGS.COSINNUS_USERDASHBOARD_USE_LIVE_MAP_WIDGET %}
+					<div class="map-widget-iframe square-widget">
+						<iframe class="square-content" src="{{ request.user.cosinnus_profile.map_embed_url }}"></iframe>
+						<div class="map-widget-link">
+							<a href="{% url 'cosinnus:map' %}">
+								<img width="26" src="{% static 'images/user_dashboard_map_link.png' %}">
+							</a>
+						</div>
+					</div>
+					{% if request.user.cosinnus_profile.media_tag.location %}
+					<div class="widget-info-box no-select">{% trans 'The map is centrered on the address you added in your profile settings.' %}</div>
+					{% endif %}
+				{% else %}
+					<div class="map-widget square-widget">
 						<div class="widget-content square-content background-content">
 							<h2 class="headline">{% trans "Close to me" %}</h2>
 						</div>
 						<a href="/map/" class="square-content hover-link">
 							{% trans "Show large map" %}
 						</a>
-				</div>
+					</div>
+				{% endif %}
 			{% endblock %}
 			{% block legal_links %}
 				<div class="legal-links">

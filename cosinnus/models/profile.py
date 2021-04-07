@@ -17,6 +17,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models, transaction
 from django.db.models.signals import post_save, class_prepared
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
@@ -384,6 +385,15 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     @property
     def get_last_login_token_sent(self):
         return self.settings.get(PROFILE_SETTING_LOGIN_TOKEN_SENT, None)
+
+    @property
+    def map_embed_url(self):
+        url = reverse('cosinnus:map-embed')
+        if not self.media_tag.location:
+            return url
+        lat = self.media_tag.location_lat
+        lon = self.media_tag.location_lon
+        return '{}?location_lat={}&location_lon={}&zoom={}'.format(url, lat, lon, 12)
 
 
 class UserProfile(BaseUserProfile):
