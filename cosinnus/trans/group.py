@@ -40,6 +40,8 @@ class CosinnusProjectTransBase(object):
     REACTIVATE_EXPLANATION_2 = _('This process is reversible. You can reactivate the project from your user profile page at any time.')
     CONVERT_ITEMS_TO = _('Convert selected items to Projects')
     CONTACT_PERSON = _('Project administrator')
+    CONTACT_ROOM_TOPIC = _('Request about your project "%(group_name)s"')
+    CONTACT_ROOM_GREETING_MESSAGE = _('You are now in a private channel with the admins of this project.')
     
     FORMFIELD_NAME = _('Project name')
     FORMFIELD_NAME_PLACEHOLDER = _('Enter a name for the project.')
@@ -90,6 +92,8 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     REACTIVATE_EXPLANATION_2 = _('This process is reversible. You can reactivate the group from your user profile page at any time.')
     CONVERT_ITEMS_TO = _('Convert selected items to Groups')
     CONTACT_PERSON = _('Group administrator')
+    CONTACT_ROOM_TOPIC = _('Request about your group "%(group_name)s"')
+    CONTACT_ROOM_GREETING_MESSAGE = _('You are now in a private channel with the admins of this group.')
     
     FORMFIELD_NAME = _('Group name')
     FORMFIELD_NAME_PLACEHOLDER = _('Enter a name for the group.')
@@ -140,6 +144,8 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     REACTIVATE_EXPLANATION_2 = _('This process is reversible. You can reactivate the conference from your user profile page at any time.')
     CONVERT_ITEMS_TO = _('Convert selected items to Conferences')
     CONTACT_PERSON = _('Conference contact person')
+    CONTACT_ROOM_TOPIC = _('Request about your conference "%(group_name)s"')
+    CONTACT_ROOM_GREETING_MESSAGE = _('You are now in a private channel with the organizers of this conference.')
     
     FORMFIELD_NAME = _('Conference name')
     FORMFIELD_NAME_PLACEHOLDER = _('Enter a name for the conference.')
