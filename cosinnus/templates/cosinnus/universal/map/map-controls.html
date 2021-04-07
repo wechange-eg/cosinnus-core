@@ -41,7 +41,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 				</div>
 			{% endif %}
 
-			<ol id="date-time-filter" class="input-area"  style="display: {% if typeFiltersActive and (activeFilters['events'] or activeFilters['conferences']) %} block {% else %} none {% endif %};">
+			<ol id="date-time-filter" class="input-area"  style="display: {% if dateFiltersActive %} block {% else %} none {% endif %};">
 				<li class="calendar-date-time-chooser">
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "From" %}

@@ -66,6 +66,7 @@ module.exports = ContentControlView.extend({
             filtersActive: false, // URL param.  if true, any filter is active and we display a reset-filter button
             typeFiltersActive: false, // URL param.  a result type filter is active
             topicFiltersActive: false, // URL param.  a topic filter is active
+            dateFiltersActive: false, // if the datetime widget pickers and date filters are active. only true if only event-like types are active
             textTopicFiltersActive: false,
             sdgFiltersActive: false,
             managedTagsFiltersActive: false,
@@ -224,6 +225,7 @@ module.exports = ContentControlView.extend({
 
         // toggle the button
         $button.toggleClass('selected');
+        
         this.toggleDateTimePicker();
         this.toggleManagedTagsOnType();
         this.toggleTextTopicsOnType();
@@ -284,10 +286,10 @@ module.exports = ContentControlView.extend({
         }
     },
 
+/**
     toggleDateTimePicker: function () {
-        var typesWithDates = ['events', 'conferences'];
+        
         var showDateTimePicker = true;
-        var selectedButtons = $('.result-filter-button.selected');
 
         if (selectedButtons.length == 0){
             showDateTimePicker = false;
@@ -302,7 +304,36 @@ module.exports = ContentControlView.extend({
             })
         }
 
-        this.showOrHideDateTimePicker(showDateTimePicker);
+    },
+    */
+    
+    /** Will set state.dateFiltersActive based on if only date-like content types are shown */
+    toggleDateTimePicker: function() {
+        var typesWithDates = ['events', 'conferences'];
+        var onlyDateTypesAvailable = true;
+        _.each(this.options.availableFilters, function(available, type){
+            if (available && $.inArray(type, typesWithDates) == -1) {
+                onlyDateTypesAvailable = false;
+            }
+        });
+        var onlyDateTypesActive = true;
+        var selectedButtons = $('.result-filter-button.selected');
+        if (selectedButtons.length == 0){
+            onlyDateTypesActive = false;
+        } else {
+            selectedButtons.each(function (i) {
+                if (this.hasAttribute('data-result-filter-type')) {
+                    var type = this.getAttribute('data-result-filter-type');
+                    if ($.inArray(type, typesWithDates) == -1) {
+                        onlyDateTypesActive = false;
+                    }
+                }
+            });
+        }
+        
+        
+        this.state.dateFiltersActive = onlyDateTypesAvailable || onlyDateTypesActive;
+        this.showOrHideDateTimePicker(this.state.dateFiltersActive);
     },
 
     showOrHideDateTimePicker: function (showDateTimePicker) {
@@ -379,11 +410,11 @@ module.exports = ContentControlView.extend({
         this.resetTextTopics();
         this.resetSDGS();
         this.resetManagedTags();
+        this.resetDateTimeWidget();
         this.resetTypeFilters();
         this.clearDetailResultCache();
-        this.resetDateTimeWidget();
     },
-
+    
     /** Internal state reset of fromDate, fromTime, toDate, toTime */
     resetDateTimeWidget: function() {
         var today = moment().format('YYYY-MM-DD');
@@ -392,7 +423,6 @@ module.exports = ContentControlView.extend({
         this.state.fromTime = "00:00";
         this.state.toDate = in_three_months;
         this.state.toTime = "23:59";
-        this.showOrHideDateTimePicker(false);
     },
     
     /** Internal state reset of filtered topics */
@@ -428,7 +458,7 @@ module.exports = ContentControlView.extend({
         if (this.options.showManagedTagsOnTypesSelected.length > 0 ) {
             this.resetManagedTags();
         }
-        
+        this.toggleDateTimePicker();
     },
 
     resetTypeFiltersClicked: function (event) {
@@ -503,6 +533,7 @@ module.exports = ContentControlView.extend({
         var searchReason = 'reset-filters-search';
         this.triggerDelayedSearch(true, false, false, searchReason);
     },
+    
     
     /** This doesn't listen to events in this view, but rather is the target for 
      *     delegated events from tile-view and tile-detail-view */
@@ -1574,41 +1605,42 @@ module.exports = ContentControlView.extend({
             projects: this.state.activeFilters.projects,
             groups: this.state.activeFilters.groups,
         };
-
-        var dateTimePicker = $('#date-time-filter');
-        var fromDate = dateTimePicker.find('#id_start_0').val() || this.state.fromDate;
-        var fromTime = dateTimePicker.find('#id_start_1').val() || this.state.fromTime;
-        var toDate = dateTimePicker.find('#id_end_0').val() || this.state.toDate;
-        var toTime = dateTimePicker.find('#id_end_1').val() || this.state.fromDate;
-        if (!fromTime.includes(':')) {
-            fromTime += ':00';
-        }
-        if (!toTime.includes(':')) {
-            toTime += ':00';
-        }
-
-        if (fromDate) {
-            _.extend(searchParams, {
-                fromDate: fromDate
-            });
-            if (fromTime) {
+        
+        if (this.state.dateFiltersActive) {
+            var dateTimePicker = $('#date-time-filter');
+            var fromDate = dateTimePicker.find('#id_start_0').val() || this.state.fromDate;
+            var fromTime = dateTimePicker.find('#id_start_1').val() || this.state.fromTime;
+            var toDate = dateTimePicker.find('#id_end_0').val() || this.state.toDate;
+            var toTime = dateTimePicker.find('#id_end_1').val() || this.state.fromDate;
+            if (!fromTime.includes(':')) {
+                fromTime += ':00';
+            }
+            if (!toTime.includes(':')) {
+                toTime += ':00';
+            }
+    
+            if (fromDate) {
                 _.extend(searchParams, {
-                    fromTime: fromTime
+                    fromDate: fromDate
                 });
+                if (fromTime) {
+                    _.extend(searchParams, {
+                        fromTime: fromTime
+                    });
+                }
+            }
+    
+            if (toDate) {
+                _.extend(searchParams, {
+                    toDate: toDate
+                });
+                if (toTime) {
+                    _.extend(searchParams, {
+                        toTime: toTime
+                    });
+                }
             }
         }
-
-        if (toDate) {
-            _.extend(searchParams, {
-                toDate: toDate
-            });
-            if (toTime) {
-                _.extend(searchParams, {
-                    toTime: toTime
-                });
-            }
-        }
-
 
         if (COSINNUS_IDEAS_ENABLED) {
         	_.extend(searchParams, {
