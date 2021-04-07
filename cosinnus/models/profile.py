@@ -395,7 +395,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             return url
         lat = self.media_tag.location_lat
         lon = self.media_tag.location_lon
-        return '{}?location_lat={}&location_lon={}&zoom={}'.format(url, lat, lon, 12)
+        return '{}?location_lat={}&location_lon={}&zoom={}'.format(url, lat, lon, 10)
 
 
 class UserProfile(BaseUserProfile):
