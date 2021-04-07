@@ -33,9 +33,14 @@ class UserProfileFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
                 # if you need an exception, add a hidden field with the field name and any value!
                 if not field_name in self.data.keys():
                     continue
-                # skip saving disabled fields
+                # save dynamic field unless it is disabled
                 if field_name in self.fields and not self.fields[field_name].disabled:
-                    self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
+                    cleaned_value = self.cleaned_data.get(field_name, None)
+                    if type(cleaned_value) is list:
+                        # do not persist empty values in lists
+                        cleaned_value = [val for val in cleaned_value if val is None or val != '']
+                        
+                    self.instance.dynamic_fields[field_name] = cleaned_value
 
 
 class _UserProfileForm(UserProfileFormDynamicFieldsMixin, ManagedTagFormMixin, forms.ModelForm):
