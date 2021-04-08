@@ -27,6 +27,7 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from cosinnus.utils.permissions import check_user_superuser, check_ug_membership,\
     check_ug_admin
 from annoying.functions import get_object_or_None
+from cosinnus.core.decorators.views import redirect_to_not_logged_in
 
 
 logger = logging.getLogger('cosinnus')
@@ -60,6 +61,17 @@ NEVER_REDIRECT_URLS = [
     '/media/',
     '/static/',
     '/language',
+    '/api/v1/user/me/',
+    '/api/v1/login/',
+    '/o/',
+    # these deprecated URLs can be removed from the filter list once the URLs are removed
+    # and their /account/ URL-path equivalents are the only remaining version of the view URL
+    '/administration/list-unsubscribe/',
+    '/administration/list-unsubscribe-result/',
+    '/administration/deactivated/',
+    '/administration/activate/',
+    '/administration/deactivate/',
+    '/administration/verify_email/',
 ]
 
 LOGIN_URLS = NEVER_REDIRECT_URLS + [
@@ -68,6 +80,9 @@ LOGIN_URLS = NEVER_REDIRECT_URLS + [
     '/integrated/login/',
     '/integrated/logout/',
     '/integrated/create_user/',
+    '/password_reset/',
+    '/reset/',
+    '/password_set_initial/',
 ]
 
 EXEMPTED_URLS_FOR_2FA = [url for url in LOGIN_URLS if url != '/admin/']
@@ -113,8 +128,8 @@ class OTPMiddleware(MiddlewareMixin):
         if not getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED', False):
             return None
         
-        # regular mode covers only the admin area
-        filter_path = '/admin/'
+        # regular mode covers the django-admin and administration area
+        filter_path = '/admin'
         # strict mode covers the entire page
         if getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_STRICT_MODE', False):
             filter_path = '/'
@@ -188,12 +203,21 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
                         target_group_cls = group_model_registry.get(group_type) 
                         portal = CosinnusPortal().get_current()
                         target_group = get_object_or_None(target_group_cls, portal=portal, slug=group_slug)
-                        if target_group:
-                            # *** Conferences: force most URLs to conference page ***
-                            # if the group is a conference group, and the user is only a member, not an admin:
-                            if target_group is not None and target_group.group_is_conference and check_ug_membership(request.user, target_group):
+                        
+                        # *** Conferences: redirect most URLs to conference page ***
+                        # if the group is a conference group, and the user is only a member, not an admin:
+                        if target_group and target_group.group_is_conference:
+                            is_admin = check_ug_admin(request.user, target_group) or check_user_superuser(request.user, portal)
+                            
+                            if settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
+                                # in a special setting, normal users are locked to the microsite, 
+                                # except for the conference application view and any event views
+                                if len(request_tokens) > 4 and not (is_admin or \
+                                                                    (len(request_tokens) >= 6 and request_tokens[5] in ['apply',]) or \
+                                                                    (len(request_tokens) >= 5 and request_tokens[4] in ['event', 'join', 'decline', 'accept', 'withdraw', 'leave'])):
+                                    return HttpResponseRedirect(target_group.get_absolute_url())
+                            elif check_ug_membership(request.user, target_group):
                                 # normal users only have access to the conference page of a conference group (and the management views)
-                                is_admin = check_ug_admin(request.user, target_group) or check_user_superuser(request.user, portal)
                                 if len(request_tokens) <= 4 or (request_tokens[4] not in ['conference', 'members', 'leave'] and not is_admin):
                                     # bounce user to the conference start page (admins get bounced on index page)
                                     return HttpResponseRedirect(group_aware_reverse('cosinnus:conference:index', kwargs={'group': target_group}))
@@ -239,8 +263,28 @@ class DenyAnonymousAccessMiddleware(MiddlewareMixin):
         if not request.user.is_authenticated:
             if request.path not in LOGIN_URLS:
                 return TemplateResponse(request, 'cosinnus/portal/no_anonymous_access_page.html').render()
+
+
+class RedirectAnonymousUserToLoginMiddleware(MiddlewareMixin):
+    """ This middleware will show an error page on any anonymous request,
+        unless the request is directed at a login URL. """
+
+    def process_request(self, request):
+        if not request.user.is_authenticated:
+            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS]):
+                return redirect_to_not_logged_in(request)
             
             
+class RedirectAnonymousUserToLoginAllowSignupMiddleware(MiddlewareMixin):
+    """ This middleware will show an error page on any anonymous request,
+        unless the request is directed at a login URL. """
+
+    def process_request(self, request):
+        if not request.user.is_authenticated:
+            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]):
+                return redirect_to_not_logged_in(request)
+
+
 class ConditionalRedirectMiddleware(MiddlewareMixin):
     """ A collection of redirects based on some requirements we want to put it,
         usually to force some routing behaviour, like logged-in users being redirected off /login """
@@ -255,18 +299,19 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                 redirect_url = redirect_next_or(request, getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None))
                 if redirect_url:
                     return HttpResponseRedirect(redirect_url)
-            
-            if 'next_redirect_pending' in request.session:
-                del request.session['next_redirect_pending']
-            # redirect if it is set as a next redirect in user-settings
-            elif request.method == 'GET' and request.path not in NO_AUTO_REDIRECTS:
-                settings_redirect = request.user.cosinnus_profile.pop_next_redirect()
-                if settings_redirect:
-                    # set flag so multiple redirects aren't consumed instantly
-                    request.session['next_redirect_pending'] = True
-                    if settings_redirect[1]:
-                        messages.success(request, _(settings_redirect[1]))
-                    return HttpResponseRedirect(settings_redirect[0])
+                
+            if not request.path.startswith('/api/'):
+                if 'next_redirect_pending' in request.session:
+                    del request.session['next_redirect_pending']
+                # redirect if it is set as a next redirect in user-settings
+                elif request.method == 'GET' and request.path not in NO_AUTO_REDIRECTS:
+                    settings_redirect = request.user.cosinnus_profile.pop_next_redirect()
+                    if settings_redirect:
+                        # set flag so multiple redirects aren't consumed instantly
+                        request.session['next_redirect_pending'] = True
+                        if settings_redirect[1]:
+                            messages.success(request, _(settings_redirect[1]))
+                        return HttpResponseRedirect(settings_redirect[0])
                 
                 
 class MovedTemporarilyRedirectFallbackMiddleware(RedirectFallbackMiddleware):

@@ -1,0 +1,47 @@
+{% extends "cosinnus/administration/managed_tags_newsletter_form.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block breadcrumb %}
+	<li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+	<li><a href="{% url 'cosinnus:administration-groups-newsletter' %}">
+	    {% trans "Newsletters" %}
+	    {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}
+            ({% trans "Groups" %})
+       {% endif %}
+	</a></li>
+	{% if object %}
+	    <li class="active">{% trans "Update Newsletter" %}</li>
+	{% else %}
+	    <li class="active">{% trans "Create Newsletter" %}</li>
+	{% endif %}
+{% endblock %}
+
+{% block recipient_formfield %}
+    <div class="cosinnus-field">
+        <label>{% trans 'Recipients' %}</label>
+        <div class="field-description no-select {{ legend_class }}">
+            {% blocktrans count counter=receipients|length %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% plural %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% endblocktrans %}
+            {% if SETTINGS.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN %}
+                {% trans "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter." %}
+            {% endif %}
+        </div>
+        {{ form.groups.errors }}
+        <div class="checkbox-multiple">
+            {{ form.groups }}
+            {% if form.instance.id and not form.groups.errors %}
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock recipient_formfield %}
+
+
+{% block modal_send_newsletter %}
+    {% if form.instance.id %}
+        {% captureas label %}{% trans "Do you really want to send the newsletter?" %}{% endcaptureas %}
+        {% captureas title %}{% trans "Send newsletter" %}{% endcaptureas %}
+        {% captureas action %}{% url 'cosinnus:administration-groups-newsletter-update' newsletter_id=form.instance.id %}{% endcaptureas %}
+        {% include "cosinnus/modal_box.html" with id=modal_send_newsletter label=label title=title form_action=action submit_name="send_newsletter" title_icon='fa fa-envelope' %}
+    {% endif %}
+{% endblock modal_send_newsletter %}
+

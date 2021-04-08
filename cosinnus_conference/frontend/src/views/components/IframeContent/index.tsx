@@ -1,18 +1,19 @@
 import React, {useCallback, useEffect, useState} from "react"
+import {faArrowsAlt, faCompressArrowsAlt, faExternalLinkAlt} from "@fortawesome/free-solid-svg-icons"
 import Iframe from "react-iframe"
-
-import {useStyles} from "./style"
 import {Link} from "@material-ui/core"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faArrowsAlt, faCompressArrowsAlt, faExternalLinkAlt, faLink} from "@fortawesome/free-solid-svg-icons"
 import clsx from "clsx"
 
+import {useStyles} from "./style"
+
 interface IframeProps {
-  url: string
+  url?: string
+  html?: string
 }
 
 export function IframeContent(props: IframeProps) {
-  const { url } = props
+  const { url, html } = props
   const [ fullscreen, setFullscreen ] = useState(false)
   const classes = useStyles()
 
@@ -47,12 +48,16 @@ export function IframeContent(props: IframeProps) {
           <FontAwesomeIcon icon={fullscreen && faCompressArrowsAlt || faArrowsAlt} />
         </Link>
       </div>
-      <Iframe
-        url={url}
-        width="100%"
-        height="100%"
-        allow="display-capture; geolocation; microphone *; camera *"
-      />
+      {html && (
+        <div dangerouslySetInnerHTML={{__html: html}} />
+      ) || (
+        <Iframe
+          url={url}
+          width="100%"
+          height="100%"
+          allow="display-capture; geolocation; microphone *; camera *; fullscreen *;"
+        />
+      )}
     </div>
   )
 }

@@ -1,0 +1,232 @@
+{% extends "cosinnus/group/group_microsite.html" %}
+{% load i18n cosinnus_tags static %}
+
+{% block teaser %}{% endblock %}
+
+{% block microsite_subheader %}
+	<div class="group-microsite-subheader">
+		<div class="group-microsite-subheader-container">
+		    {% if group.member_count > 0 %}
+				<div class="group-microsite-subheader-item">
+					<header>{% trans "Participants" %}</header>
+					<div class="group-microsite-subheader-item-value">
+					    {{ group.member_count }}
+				    </div>
+				</div>
+            {% endif %}
+            {% if group.participation_management.all.first.participants_limit %}
+				<div class="group-microsite-subheader-item">
+					<header>{% trans "Maximum Number of Participants" %}</header>
+					<div class="group-microsite-subheader-item-value">
+					    {{ group.participation_management.all.first.participants_limit }}
+				    </div>
+				</div>
+		    {% endif %}
+			{% if group.conference_events.all %}
+				<div class="group-microsite-subheader-item">
+					<header>{% trans "Workshops" %}</header>
+					<div class="group-microsite-subheader-item-value">
+					    {{ group.conference_events.count }}
+				    </div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock microsite_subheader %}
+
+{% block microsite_content %}
+    <div class="row microsite-conference-content">
+        <div class="col-md-6">
+            {# About Project box #}
+            <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left btn-extra-emphasized" href="#"></a>
+                        <div class="media-body">
+                            {% trans "About the conference" %}
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- btn -->
+            <div class="white-content">
+                <div class="textfield">
+	                {% if group.from_date %}
+	                    <div class="large-space">
+	                       <b>
+	                           {{ group.from_date|date:"SHORT_DATE_FORMAT" }}, {{ group.from_date|date:"H:i" }} 
+	                           {% trans "o'clock" context "time" %}
+	                           {% if group.to_date %}
+	                               {% trans "until" context "time" %}
+	                               {{ group.to_date|date:"SHORT_DATE_FORMAT" }}, {{ group.to_date|date:"H:i" }}
+	                               {% trans "o'clock" context "time" %}
+	                           {% endif %}
+	                       </b>
+	                    </div>
+	                {% endif %}
+                    
+                    {% if group.description_long or group.description %}
+                        <div class="textfield transparent large-space">
+                            {% if group.description_long %}
+	                            {{ group.description_long|textfield }}
+	                        {% else %}
+	                            {{ group.description|textfield }}
+	                        {% endif %}
+	                    </div>
+                    {% endif %}
+                    
+                    {% if group.conference_events.count > 0 %}
+                        <hr class="invisible"/>
+                        <div class="large-space">
+                            <b>{% trans "Events" %}:</b>
+                        </div>
+                        
+                        <div class="indented">
+		                    {% for room in group.rooms.all %}
+		                        {% with room_events=room.non_table_events_qs %}
+		                            {% if room_events %}
+					                    <div class="regular-space">
+				                            <b>{{ room.title }}:</b>
+				                        </div>
+					                    <div class="microsite-conference-workshop-list large-space">
+					                        {% for event in room_events %}
+					                            {% if not event.is_break %}
+					                                <div class="fadedown regular-space">
+					                                   <div class="small-space">
+							                                <a href="{{ event.get_absolute_url }}">
+									                            {{ event.title }} - {{ event.media_tag.visibility }}
+								                            </a>
+								                            
+								                            {% if event.from_date %}
+                                                                <br/>
+                                                                {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
+                                                                {% if event.note %}
+                                                                &nbsp;
+                                                                <a href="#" class="fadedown-clickarea">
+                                                                    {% trans "More infos..." %}
+                                                                    <i class="fa fa-chevron-down"></i>
+                                                                </a>
+                                                            {% endif %}
+                                                            {% endif %}
+						                                </div>
+						                                {% if event.note %}
+								                            <div class="textfield transparent">
+								                                {{ event.note|textfield }}
+								                            </div>
+							                            {% endif %}
+						                            </div>
+						                        {% endif %}
+						                    {% endfor %}
+					                    </div>
+					                {% endif %}
+					            {% endwith %}
+	                        {% endfor %}
+	                    </div> <!-- end indented -->
+	                {% endif %}
+                </div> {% comment %} end div[textfield] {% endcomment %}
+                
+                <hr class="invisible" />
+                {% trans "You will now receive notifications for content posted in this conference." as follow_success_message %}
+                {% include 'cosinnus/common/likefollowstar/like_button.html' with object=group %}
+                {% include 'cosinnus/common/likefollowstar/star_button.html' with object=group %}
+                {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=group success_message=follow_success_message %}
+                {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=group %}
+            </div>
+            
+        </div>
+        
+		<div class="col-md-6">
+            {% if not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS %}
+                {# Contact box #}
+                <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left btn-extra-emphasized" href="#"></a>
+                            <div class="media-body">
+                                {% trans "Contact" %}
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- btn -->
+            {% endif %}
+
+            {# Little hack to show an empty message, because a render-time empty check is complex due to extendable blocks #}
+            <script type="text/javascript">
+                $(function() {
+                    var box = $('#microsite_contact_content');
+                    if (box.text().replace(/\s/g, '').length == 0) {
+                        box.html("<p><i>{% trans "No contact data has been added yet." %}</i></p>");
+                    }
+                });
+            </script>
+            <div id="microsite_contact_content" class="white-content">
+                {% if group.contact_info and group.contact_info|length > 0 %}
+                    <div class="textfield">
+                        {{ group.contact_info|textfield }}
+                    </div>
+                {% endif %}
+                <p>
+                    {% if group.website %}
+                        <b>{% trans "Website" %}:</b>
+                        <a href="{{ group.website }}" target="_blank">{{ group.website }}</a>
+                        <br/>
+                    {% endif %}
+                    {% with group_locations=group.locations.all %}
+                        {% if group_locations %}
+                            <b>{% trans "Location" %}:</b>
+                            {% for group_location in group.locations.all %}
+                                <a href="{{ group_location.location_url }}" target="_blank">{{ group_location.location }}</a>{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                            <br/>
+                        {% endif %}
+                    {% endwith %}
+                </p>
+            </div>
+            {% with group_admins=group.actual_admins %}
+                {% if group_admins %}
+                    <div class="white-content">
+                        <p>
+                            <b>{{ group.trans.CONTACT_PERSON }}:</b>&nbsp;
+                            {% for admin in group_admins %}
+                                <a href="{{ admin|profile_url }}" >{{ admin|full_name }}</a>
+                                {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                        {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+                            {% with contact_url=group.get_admin_contact_url %}
+                                <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized" style="float: none; margin-left: 0px;">
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <a class="pull-left" href="#">
+                                                <i class="fa fa-envelope"></i>
+                                            </a>
+                                            <div class="media-body">
+                                                {% trans "Contact" %}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </button>
+                            {% endwith %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+			{% endwith %}
+			
+            <hr class="invisible"/>
+            
+            <div class="no-indent">
+	            {% if group.attached_objects.exists or group.attached_images %}
+	                {% if group.attached_images %}
+	                        {% include 'cosinnus/common/attached_images_gallery.html' with object=group max_images=12 %}
+	                {% endif %}
+	                {% if group.attached_objects.exists %}
+	                    {% cosinnus_render_attached_objects group with %}
+	                {% endif %}
+	            {% endif %}
+	        </div>
+        </div>
+        
+        
+    </div>
+
+
+{% endblock microsite_content %}

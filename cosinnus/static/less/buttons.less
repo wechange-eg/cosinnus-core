@@ -66,6 +66,10 @@ Reverted for now, interferes with some formfields
 	background-color: @app-neutral-color-white;
 	color: @app-neutral-color-dark;
 }
+.btn-default:hover .media > .media-body {
+    background-color: @color-light-medium-gray;
+}
+
 .btn-default .media > .media-body a {
 	color: @app-neutral-color-dark;
 }
@@ -630,7 +634,22 @@ a.light-link:hover i { display: inherit; }
     color: @app-neutral-color;
 }
 
-.likefollow-button-style  {
+.likefollowstar-button-simple {
+    .show-selected {
+        display: none;
+    }
+    
+    &.selected {
+        .show-unselected {
+            display: none;
+        }
+        .show-selected {
+            display: inherit;
+        }
+    }
+}
+
+.likefollowstar-button-style  {
     cursor: pointer;
     margin-right: 20px;
     padding: 5px;
@@ -661,13 +680,23 @@ a.light-link:hover i { display: inherit; }
     }
 }
 
+.no-padding {
+	padding: 0;
+}
+
+.no-hover {
+	&:hover {
+        background-color: transparent;
+		border-radius: 0px;
+		outline: none;
+    }
+}
+
 .apply-color-liked {
     color: @map-liked-color;
 }
-.apply-color-followed {
-    color: @map-followed-color;
-}
-.likefollow-button-success-message-style {
+
+.likefollowstar-button-success-message-style {
     padding: 8px 5px;
     color: #779b48;
     white-space: normal;
@@ -841,6 +870,7 @@ a.light-link:hover i { display: inherit; }
     .colored-button(people, @map-people-color, @map-people-color);
     .colored-button(projects, @map-projects-color, @map-projects-color);
     .colored-button(groups, @map-groups-color, @map-groups-color);
+    .colored-button(conferences, @map-conferences-color, @map-conferences-color);
     .colored-button(ideas, @map-ideas-color, @map-ideas-color);
     .colored-button(organizations, @map-organizations-color, @map-organizations-color);
     .colored-button(primary, @color-primary, @color-primary);

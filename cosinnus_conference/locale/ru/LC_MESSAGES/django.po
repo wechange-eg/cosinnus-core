@@ -1,0 +1,167 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-12 17:55+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conferences"
+msgid "Conference Bookings"
+msgstr "Конференции"
+
+msgid "Conferences"
+msgstr "Конференции"
+
+msgctxt "the_app"
+msgid "conference"
+msgstr "конференция"
+
+msgid "End date must be before start date"
+msgstr "Дата окончания должна предшествовать дате начала"
+
+msgid "Please also provide a start date"
+msgstr "Укажите дату начала"
+
+msgid "Please also provide a end date"
+msgstr "Укажите дату окончания"
+
+msgid "First Choice"
+msgstr "Первый выбор"
+
+msgid "Second Choice"
+msgstr "Второй выбор"
+
+msgid "Conference Management"
+msgstr "Управление конференцией"
+
+msgid "Workshop Participant File Upload"
+msgstr "Загрузка файла участника воркшопа"
+
+#, python-format
+msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
+msgstr "Загрузите файл CSV со следующими столбцами: уникальный идентификатор пользователя, имя, фамилия и один столбец для каждого воркшопа с идентификатором. В качестве примера можно скачать шаблон <a href=\"%(workshop_participants_upload_skeleton)s\">здесь</a>"
+
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
+msgstr "Затем добавьте строку для каждого аккаунта, который хотите добавить. Нужно указать уникальный идентификатор пользователя, а имя и фамилию можно не указывать. Затем поставьте 1 во всех столбцах для воркшопов, во время которых пользователь должен быть обычным участником, или 2, если пользователь должен быть администратором воркшопа."
+
+msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
+msgstr "Загрузка файла CSV инициирует создание аккаунтов и состава участников воркшопа и позволит скачать файл CSV с новыми аккаунтами и паролями. Пароли будут указаны только после создания аккаунта. Обновите страницу после скачивания."
+
+msgid "Upload File"
+msgstr "Загрузить файл"
+
+msgid "Go to conference"
+msgstr "Перейти к конференции"
+
+msgid "This function is not enabled for this conference."
+msgstr "Эта функция недоступна для этой конференции."
+
+msgid "Conference successfully started and user accounts activated"
+msgstr "Конференция успешно началась и пользовательские аккаунты активированы"
+
+msgid "Conference successfully finished and user accounts deactivated"
+msgstr "Конференция успешно завершена и пользовательские аккаунты деактивированы"
+
+msgid "Successfully deactivated user account"
+msgstr "Пользовательский аккаунт успешно деактивирован"
+
+msgid "Successfully activated user account"
+msgstr "Пользовательский аккаунт успешно активирован"
+
+msgid "Successfully removed user"
+msgstr "Пользователь успешно удален"
+
+msgid "User was not created"
+msgstr "Пользователь не создан"
+
+msgid "Workshop username"
+msgstr "Название воркшопа"
+
+msgid "First Name"
+msgstr "Имя"
+
+msgid "Last Name"
+msgstr "Фамилия"
+
+msgid "The room was created successfully."
+msgstr "Комната успешно создана."
+
+msgid "The room was saved successfully."
+msgstr "Комната успешно сохранена."
+
+msgid "The room was deleted successfully."
+msgstr "Комната успешно удалена."
+
+msgid "The supplied Conference Room could not be found"
+msgstr "Не удалось найти предоставленную комнату конференции"
+
+msgid "Conference reminder settings have been successfully updated."
+msgstr "Настройки напоминания о конференции были успешно обновлены."
+
+msgid "A test email has been sent to your email address."
+msgstr "Тестовое электронное письмо было отправлено на Ваш адрес электронной почты."
+
+msgid "Participation configurations have been updated."
+msgstr "Настройки участника обновлены."
+
+msgid "Your application has been submitted."
+msgstr "Ваша заявка отправлена."
+
+msgid "Your application has been updated."
+msgstr "Ваша заявка обновлена."
+
+msgid "You cannot change your application anymore."
+msgstr "Вы не можете изменить свою заявку."
+
+msgid "Application has been withdrawn."
+msgstr "Заявка отозвана."
+
+#, python-format
+msgid "The following users were accepted and added as members: %s"
+msgstr "Следующие пользователи были приняты и добавлены в качестве членов: %s"
+
+#, python-format
+msgid "The following users were put on the wait list: %s"
+msgstr "Следующие пользователи были добавлены в список ожидания: %s"
+
+#, python-format
+msgid "The following users were declined: %s"
+msgstr "Заявки следующих пользователей были отклонены: %s"
+
+msgid "Your changes were saved."
+msgstr "Ваши изменения сохранены."
+
+msgid "Option"
+msgstr "Вариант"
+
+msgid "Motivation for applying"
+msgstr "Мотивация участия"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Contact E-Mail Address"
+msgstr "Контактный адрес электронной почты"
+
+msgid "Contact Phone Number"
+msgstr "Контактный номер телефона"
+
+msgid "List of Applicants"
+msgstr "Список заявителей"

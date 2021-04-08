@@ -25,20 +25,18 @@
     
     {% if object %}
         
-        <div class="app-etherpad">
-	        <div type="button" class="btn w100 btn-emphasized" data-toggle="modal" data-target="#deleteModal">
-	            <ul class="media-list">
-	                <li class="media">
-	                    <a class="pull-left" href="#">
-	                        <i class="fa fa-eraser"></i>
-	                    </a>
-	                    <div class="media-body">
-	                        {% trans "Delete this idea" %}
-	                    </div>
-	                </li>
-	            </ul>
-	        </div>
-	    </div>
+        <div type="button" class="btn w100 btn-default" data-toggle="modal" data-target="#deleteModal">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-eraser"></i>
+                    </a>
+                    <div class="media-body">
+                        {% trans "Delete this idea" %}
+                    </div>
+                </li>
+            </ul>
+        </div>
         {% captureas label %}{% blocktrans with title=object.title %}Do you really want to delete idea „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
         {% captureas title %}{% trans "Delete Idea" %}{% endcaptureas %}
         {% trans "Yes" as submit_button_label %}
@@ -162,44 +160,44 @@
             
             {% include "cosinnus/media_tags_idea.html"%} 
             
-            
-            {# Idea Visibility Field #}
-            {% trans "Privacy settings" as visibility_label %}
-            {% captureas visibility_legend %}
-	            {% trans "This will determine who can see your idea." %}
-            	{% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="idea" %}
-        	{% endcaptureas %}
-            {% captureas visibility_warning_html %}
-                <div class="group-public-warning-area" {% if object and not object.public %}style="display: none;"{% endif %} id="idea-visibility-warning">
-                    <i class="fa fa-fw fa-globe"></i>
-                    {% trans "This idea will be set to be publicly visible!" %}
-                    <br/><br/>
-                    {% trans "Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!" %}
-                    <br/><br/>
-                    {% trans "If you do not wish this, you can change the visibility setting above." %}
-                </div>
-                <script type="text/javascript">
-                    {# show or hide a visibility warning #}
-                    $(function(){
-                        $('#idea-public-field').on('change', function(){
-                            if ($(this).val() == "true") {
-                                $('#idea-visibility-warning').show();
-                            } else {
-                                $('#idea-visibility-warning').hide();
-                            } 
-                        });
-                    });
-                </script>
-            {% endcaptureas %}
-            {% captureas visibility_field_html %}
-                <select name="public" id="idea-public-field">
-                    <option default value="false">{% trans "Registered users only" %}</option>
-                    <option {% if not object or object and object.public %}selected{% endif %} value="true">{% trans "Public (visible without login)" %}</option>
-                </select>
-            {% endcaptureas %}
-            
-            {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html field=form.forms.media_tag.visibility field_id="idea-public-field" label=visibility_label legend=visibility_legend extra_html=visibility_warning_html %}
-            
+            {% if not SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+	            {# Idea Visibility Field #}
+	            {% trans "Privacy settings" as visibility_label %}
+	            {% captureas visibility_legend %}
+		            {% trans "This will determine who can see your idea." %}
+	            	{% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="idea" %}
+	        	{% endcaptureas %}
+	            {% captureas visibility_warning_html %}
+	                <div class="group-public-warning-area" {% if object and not object.public %}style="display: none;"{% endif %} id="idea-visibility-warning">
+	                    <i class="fa fa-fw fa-globe"></i>
+	                    {% trans "This idea will be set to be publicly visible!" %}
+	                    <br/><br/>
+	                    {% trans "Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!" %}
+	                    <br/><br/>
+	                    {% trans "If you do not wish this, you can change the visibility setting above." %}
+	                </div>
+	                <script type="text/javascript">
+	                    {# show or hide a visibility warning #}
+	                    $(function(){
+	                        $('#idea-public-field').on('change', function(){
+	                            if ($(this).val() == "true") {
+	                                $('#idea-visibility-warning').show();
+	                            } else {
+	                                $('#idea-visibility-warning').hide();
+	                            } 
+	                        });
+	                    });
+	                </script>
+	            {% endcaptureas %}
+	            {% captureas visibility_field_html %}
+	                <select name="public" id="idea-public-field">
+	                    <option default value="false">{% trans "Registered users only" %}</option>
+	                    <option {% if not object or object and object.public %}selected{% endif %} value="true">{% trans "Public (visible without login)" %}</option>
+	                </select>
+	            {% endcaptureas %}
+	            
+	            {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html field=form.forms.media_tag.visibility field_id="idea-public-field" label=visibility_label legend=visibility_legend extra_html=visibility_warning_html %}
+            {% endif %}
                         
 	    </div>
 	    

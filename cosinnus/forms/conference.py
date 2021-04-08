@@ -17,8 +17,8 @@ class CosinnusConferenceRoomForm(GroupKwargModelFormMixin, UserKwargModelFormMix
     class Meta(BaseTaggableObjectForm.Meta):
         model = CosinnusConferenceRoom
         exclude = ('group', 'slug', 'creator', 'created')
-        fields = ['title', 'description', 'type', 'sort_index', 'is_visible', 
-                  'allow_user_table_creation', 'max_coffeetable_participants', 'target_result_group']
+        fields = ['title', 'description', 'type', 'sort_index', 'is_visible',
+                  'max_coffeetable_participants', 'target_result_group', 'show_chat'] # 'allow_user_table_creation',
         
     def __init__(self, instance, *args, **kwargs):
         if 'request' in kwargs:

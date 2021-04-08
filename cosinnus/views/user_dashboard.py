@@ -19,10 +19,12 @@ from django.views.generic.base import View
 import six
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.group import CosinnusPortal, CosinnusGroup
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+    CosinnusConference
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.map import SEARCH_MODEL_NAMES_REVERSE
+from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import LikeObject, BaseTaggableObjectModel, \
     BaseHierarchicalTaggableObjectModel, BaseTagObject, LastVisitedObject
 from cosinnus.models.user_dashboard import DashboardItem
@@ -97,6 +99,12 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
             'announcement_is_preview': announcement_is_preview,
             'show_welcome_screen': welcome_screen_enabled and not welcome_screen_expired,
         }
+        if settings.COSINNUS_CONFERENCES_ENABLED:
+            _now = now()
+            my_conferences = CosinnusConference.objects.get_for_user(self.request.user)
+            my_current_conferences = [(conf, conf.get_icon()) for conf in my_conferences if conf.get_or_infer_to_date and conf.get_or_infer_to_date > _now] 
+            my_pending_conference_applications = [(appl.conference, appl.get_icon()) for appl in self.request.user.user_applications.pending_current()]
+            ctx['my_upcoming_conferences_with_icons'] = my_pending_conference_applications + my_current_conferences
         return ctx
 
 
@@ -188,13 +196,74 @@ class LikedIdeasWidgetView(BaseUserDashboardWidgetView):
     
     def get_data(self, *kwargs):
         idea_ct = ContentType.objects.get_for_model(CosinnusIdea)
-        likeobjects = LikeObject.objects.filter(user=self.request.user, content_type=idea_ct, liked=True) 
+        likeobjects = LikeObject.objects.filter(user=self.request.user, content_type=idea_ct, liked=True)
         liked_ideas_ids = likeobjects.values_list('object_id', flat=True)
         liked_ideas = CosinnusIdea.objects.all_in_portal().filter(id__in=liked_ideas_ids)
         ideas = [DashboardItem(idea) for idea in liked_ideas]
         return {'items': ideas}
 
 api_user_liked_ideas = LikedIdeasWidgetView.as_view()
+
+
+class StarredUsersWidgetView(BaseUserDashboardWidgetView):
+    """ Shows all unlimited (for now) ideas the user likes. """
+
+    def get_data(self, *kwargs):
+        profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
+        likeobjects = LikeObject.objects.filter(user=self.request.user, content_type=profile_ct, starred=True)
+        liked_users_ids = likeobjects.values_list('object_id', flat=True)
+        liked_users = get_user_profile_model().objects.filter(id__in=liked_users_ids, user__is_active=True)
+        users = []
+        for user in liked_users:
+            dashboard_item = DashboardItem(user)
+            dashboard_item['id'] = user.id
+            dashboard_item['ct'] = user.get_content_type()
+            users.append(dashboard_item)
+        return {'items': users}
+
+api_user_starred_users = StarredUsersWidgetView.as_view()
+
+
+class StarredObjectsWidgetView(BaseUserDashboardWidgetView):
+    """ Shows all unlimited (for now) ideas the user likes. """
+
+    def get_data(self, *kwargs):
+        profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
+        exclude_ids = [profile_ct.id]
+        liked = LikeObject.objects.filter(user=self.request.user, starred=True).exclude(content_type_id__in=exclude_ids)
+        objects = []
+        for like in liked:
+            ct = ContentType.objects.get_for_id(like.content_type.id)
+            obj = ct.get_object_for_this_type(pk=like.object_id)
+            dashboard_item = DashboardItem(obj)
+            dashboard_item['id'] = obj.id
+            dashboard_item['ct'] = obj.get_content_type()
+            objects.append(dashboard_item)
+        return {'items': objects}
+
+api_user_starred_objects = StarredObjectsWidgetView.as_view()
+
+
+class FollowedObjectsWidgetView(BaseUserDashboardWidgetView):
+    """ Shows all unlimited (for now) ideas the user likes. """
+
+    def get_data(self, *kwargs):
+        followed = LikeObject.objects.filter(user=self.request.user, followed=True)
+        objects = []
+        for follow in followed:
+            ct = ContentType.objects.get_for_id(follow.content_type.id)
+            obj = ct.get_object_for_this_type(pk=follow.object_id)
+            # filter inactive groups
+            if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
+                if not obj.is_active:
+                    continue
+            dashboard_item = DashboardItem(obj)
+            dashboard_item['id'] = obj.id
+            dashboard_item['ct'] = obj.get_content_type()
+            objects.append(dashboard_item)
+        return {'items': objects}
+
+api_user_followed_objects = FollowedObjectsWidgetView.as_view()
 
 
 class ModelRetrievalMixin(object):
@@ -228,8 +297,12 @@ class ModelRetrievalMixin(object):
         if BaseHierarchicalTaggableObjectModel in inspect.getmro(model):
             queryset = model._default_manager.filter(is_container=False)
             queryset = exclude_special_folders(queryset)
-        elif model_name == 'cosinnus_event.Event' and current_only:
-            queryset = model.objects.all_upcoming()
+        elif model_name == 'cosinnus_event.Event':
+            if current_only:
+                queryset = model.objects.all_upcoming()
+            else:
+                queryset = model.objects.get_queryset()
+            queryset = queryset.exclude(is_hidden_group_proxy=True)
         elif model_name == 'cosinnus_marketplace.Offer':
             queryset = model.objects.all_active()
         elif model is CosinnusIdea or BaseTaggableObjectModel in inspect.getmro(model):

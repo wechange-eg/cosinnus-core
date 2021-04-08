@@ -15,7 +15,6 @@ from billiard.five import items
 
 
 class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTaggedObjectsMixin, TemplateView):
-    template_name = 'cosinnus/group/group_microsite.html'
     
     def dispatch(self, request, *args, **kwargs):
         if not getattr(settings, 'COSINNUS_MICROSITES_ENABLED', False):
@@ -25,6 +24,13 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
                 and not request.GET.get('invited', None) == '1':
             return redirect_to_not_logged_in(self.request, view=self)
         return super(GroupMicrositeView, self).dispatch(request, *args, **kwargs)
+    
+    def get_template_names(self):
+        """ Return the extending compact-conference microsite if this is a conference
+            and conferences are shown in compact mode """
+        if self.group.group_is_conference:
+            return ['cosinnus/group/conference_compact_microsite.html']
+        return ['cosinnus/group/group_microsite.html']
     
     def get_public_objects(self):
         """ Returns a list of tuples [('<app>', <app_name>'m [<app_items>]), ...] """

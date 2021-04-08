@@ -29,6 +29,17 @@
 {% block action_buttons %}
 	{% if not is_self %}
 	    <div class="tile-section tile-section-button-list">
+            <a class="rounded-button button-action button-star">
+                <span class="rounded-button-inner">
+                    {% if starred %}
+                        <i class="fas fa-star"></i>
+                        {{ starringLabel }}
+                    {% else %}
+                        <i class="far fa-star"></i>
+                        {{ starLabel }}
+                    {% endif %}
+                </span>
+            </a>
 	        {% if action_url_1 %}
 		        <a href="{{ action_url_1 }}" target="_blank" class="rounded-button button-action">
 		            <span class="rounded-button-inner">
@@ -36,8 +47,7 @@
 		                {% trans "Send Message" %}
 		            </span>
 		        </a>
-	        {% endif %}
-	    
+            {% endif %}
 	        {{ super() }}
 	    </div>
     {% endif %}

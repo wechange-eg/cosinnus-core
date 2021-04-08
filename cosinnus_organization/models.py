@@ -230,9 +230,9 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
     TYPE_COMPANY = 2
     TYPE_PUBLIC_INSTITUTION = 3
     TYPE_CHOICES = (
-        (TYPE_CIVIL_SOCIETY_ORGANISATION, _('Civil society organization (e.g. club, association, foundation, party)')),
+        (TYPE_CIVIL_SOCIETY_ORGANISATION, _('Civil society organization')),
         (TYPE_COMPANY, _('Company (commercial)')),
-        (TYPE_PUBLIC_INSTITUTION, _('Public institution (e.g. educational institution, library, swimming pool)')),
+        (TYPE_PUBLIC_INSTITUTION, _('Public institution')),
         (TYPE_OTHER, _('Other')),
     )
 
@@ -317,6 +317,9 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
             from cosinnus.models.tagged import get_tag_object_model
             media_tag = get_tag_object_model()._default_manager.create()
             self.media_tag = media_tag
+
+        # FIXME: This shouldn't be necessary, but throws an error if missing
+        self.media_tag.save()
         
         # set portal to current
         if created and not self.portal:

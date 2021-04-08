@@ -15,14 +15,16 @@ from cosinnus.models.group import CosinnusGroupMembership,\
 from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN
 from cosinnus.models.profile import get_user_profile_model,\
     GlobalBlacklistedEmail, GlobalUserNotificationSetting
-from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
+from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory,\
+    get_tag_object_model, BaseTagObject
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.feedback import CosinnusReportedObject,\
     CosinnusSentEmailLog, CosinnusFailedLoginRateLimitLog
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.models.tagged import TagObject
 from cosinnus.models.widget import WidgetConfig
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+    CosinnusConference
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.contrib.auth import login as django_login
 
@@ -31,11 +33,17 @@ from cosinnus.models.idea import CosinnusIdea
 from cosinnus.core import signals
 from django import forms
 from django.core.exceptions import ValidationError
-from cosinnus.models.bbb_room import BBBRoom
-from cosinnus.models.conference import CosinnusConferenceRoom
+from cosinnus.models.bbb_room import BBBRoom, BBBRoomVisitStatistics
+from cosinnus.models.conference import CosinnusConferenceRoom,\
+    CosinnusConferenceSettings
+from cosinnus.models.conference import ParticipationManagement, CosinnusConferenceApplication
 from cosinnus.models.managed_tags import CosinnusManagedTag,\
-    CosinnusManagedTagAssignment
-
+    CosinnusManagedTagAssignment, CosinnusManagedTagType
+from cosinnus.models.newsletter import Newsletter
+from cosinnus.models.user_import import CosinnusUserImport
+from django.contrib.contenttypes.admin import GenericTabularInline,\
+    GenericStackedInline
+from django_reverse_admin import ReverseModelAdmin
 
 class SingleDeleteActionMixin(object):
     
@@ -66,21 +74,33 @@ class MembershipAdmin(admin.ModelAdmin):
     search_fields = ('user__first_name', 'user__last_name', 'user__email', 'group__name')
     raw_id_fields = ('user',)
     actions = ['make_admin', 'make_member']
+    if settings.COSINNUS_ROCKET_ENABLED:
+        actions += ['force_redo_user_room_membership',]
     
     def make_admin(self, request, queryset):
         """ Converts the memberships' statuses """
         queryset.update(status=MEMBERSHIP_ADMIN)
         self.message_user(request, f'Made {len(queryset)} users an Admin', messages.SUCCESS)
-    
     make_admin.short_description = _("Convert memberships to Admin status")
         
     def make_member(self, request, queryset):
         """ Converts the memberships' statuses """
         queryset.update(status=MEMBERSHIP_MEMBER)
         self.message_user(request, f'Made {len(queryset)} users a Member', messages.SUCCESS)
-        
     make_member.short_description = _("Convert memberships to Member status")
     
+    if settings.COSINNUS_ROCKET_ENABLED:
+        def force_redo_user_room_membership(self, request, queryset):
+            count = 0
+            from cosinnus_message.rocket_chat import RocketChatConnection
+            rocket = RocketChatConnection()
+            for membership in queryset:
+                rocket.invite_or_kick_for_membership(membership)
+                count += 1
+            message = _('%d Users\' rocketchat room memberships were re-done.') % count
+            self.message_user(request, message)
+        force_redo_user_room_membership.short_description = _('Rocket: Fix missing RocketChat room membership for users')
+        
 admin.site.register(CosinnusGroupMembership, MembershipAdmin)
 
 
@@ -116,6 +136,12 @@ class CosinnusGroupInviteTokenAdmin(admin.ModelAdmin):
 
 admin.site.register(CosinnusGroupInviteToken, CosinnusGroupInviteTokenAdmin)
 
+
+class CosinnusConferenceSettingsInline(GenericStackedInline):
+    model = CosinnusConferenceSettings
+    template = 'cosinnus/admin/conference_setting_help_text_stacked_inline.html'
+    extra = 0
+    max_num = 1
 
 class PermanentRedirectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
     list_display = ('to_group', 'from_slug', 'from_type', 'from_portal',)
@@ -164,17 +190,20 @@ class MembershipInline(admin.StackedInline):
 
 
 class CosinnusProjectAdmin(admin.ModelAdmin):
-    actions = ['convert_to_society', 'add_members_to_current_portal', 'move_members_to_current_portal',
+    actions = ['convert_to_society', 'convert_to_conference', 'add_members_to_current_portal', 'move_members_to_current_portal',
                 'move_groups_to_current_portal', 'move_groups_to_current_portal_and_message_users']
     list_display = ('name', 'slug', 'portal', 'public', 'is_active',)
     list_filter = ('portal', 'public', 'is_active',)
     search_fields = ('name', 'slug', 'id',)
     prepopulated_fields = {'slug': ('name', )}
-    readonly_fields = ('created', 'last_modified')
+    readonly_fields = ('created', 'last_modified', 'is_premium_currently', 'attached_objects',)
     raw_id_fields = ('parent',)
     exclude = ('is_conference', 'conference_is_running')
+    inlines = [CosinnusConferenceSettingsInline]
     
-    def convert_to_society(self, request, queryset):
+    ALL_TYPES_CLASSES = [CosinnusProject, CosinnusSociety, CosinnusConference]
+    
+    def _convert_to_type(self, request, queryset, to_group_type, to_group_klass):
         """ Converts this CosinnusGroup's type """
         converted_names = []
         refused_portal_names = []
@@ -182,21 +211,33 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             if group.portal_id != CosinnusPortal.get_current().id:
                 refused_portal_names.append(group.name)
                 continue
+            # don't change type to same type
+            if group.type == to_group_type:
+                continue
             
             # remove haystack index for this group, re-index after
             group.remove_index()
             # swap types
-            group.type = CosinnusGroup.TYPE_SOCIETY
+            old_type = group.type
+            group.type = to_group_type
             # clear parent group if the project had one (societies cannot have parents!)
             group.parent = None
             group.save(allow_type_change=True)
-            if group.type == CosinnusGroup.TYPE_SOCIETY:
+            if group.type == to_group_type:
                 converted_names.append(group.name)
-                CosinnusPermanentRedirect.create_for_pattern(group.portal, CosinnusGroup.TYPE_PROJECT, group.slug, group)
+                CosinnusPermanentRedirect.create_for_pattern(group.portal, old_type, group.slug, group)
+                if old_type == CosinnusGroup.TYPE_SOCIETY:
+                    # all projects that had this group as parent, get set their parent=None and set this as related project
+                    # and all of those former child projects are also added as related to this newly-converted project
+                    for project in get_cosinnus_group_model().objects.filter(parent=group):
+                        project.parent = None
+                        project.save(update_fields=['parent'])
+                        RelatedGroups.objects.get_or_create(from_group=project, to_group=group)
+                        RelatedGroups.objects.get_or_create(from_group=group, to_group=project)
                 
             # we beat the cache with a hammer on all class models, to be sure
-            CosinnusProject._clear_cache(group=group)
-            CosinnusSociety._clear_cache(group=group)
+            for klass in self.ALL_TYPES_CLASSES:
+                klass._clear_cache(group=group)
             get_cosinnus_group_model()._clear_cache(group=group)
             CosinnusGroupMembership.clear_member_cache_for_group(group)
             
@@ -206,17 +247,27 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             
             # re-index haystack for this group after getting a properly classed, fresh object
             group.remove_index()
-            group = CosinnusSociety.objects.get(id=group.id)
+            group = to_group_klass.objects.get(id=group.id)
             group.update_index()
         
         if converted_names:
-            message = _('The following Projects were converted to Groups:') + '\n' + ", ".join(converted_names)
+            message = _('The following items were converted to %s:') % to_group_klass.get_trans().VERBOSE_NAME_PLURAL + '\n' + ", ".join(converted_names)
             self.message_user(request, message, messages.SUCCESS)
         if refused_portal_names:
-            message_error = 'These Projects could not be converted because they do not belong to this portal:' + '\n' + ", ".join(refused_portal_names)
+            message_error = 'These items could not be converted because they do not belong to this portal:' + '\n' + ", ".join(refused_portal_names)
             self.message_user(request, message_error, messages.ERROR)
+    
+    def convert_to_project(self, request, queryset):
+        self._convert_to_type(request, queryset, CosinnusGroup.TYPE_PROJECT, CosinnusProject)
+    convert_to_project.short_description = CosinnusProject.get_trans().CONVERT_ITEMS_TO
         
-    convert_to_society.short_description = _("Convert selected Projects to Groups")
+    def convert_to_society(self, request, queryset):
+        self._convert_to_type(request, queryset, CosinnusGroup.TYPE_SOCIETY, CosinnusSociety)
+    convert_to_society.short_description = CosinnusSociety.get_trans().CONVERT_ITEMS_TO
+    
+    def convert_to_conference(self, request, queryset):
+        self._convert_to_type(request, queryset, CosinnusGroup.TYPE_CONFERENCE, CosinnusConference)
+    convert_to_conference.short_description = CosinnusConference.get_trans().CONVERT_ITEMS_TO
     
     
     def add_members_to_current_portal(self, request, queryset, remove_all_other_memberships=False):
@@ -323,7 +374,7 @@ admin.site.register(CosinnusProject, CosinnusProjectAdmin)
 
 class CosinnusSocietyAdmin(CosinnusProjectAdmin):
     
-    actions = ['convert_to_project', 'move_society_and_subprojects_to_portal', 
+    actions = ['convert_to_project', 'convert_to_conference', 'move_society_and_subprojects_to_portal', 
                 'move_society_and_subprojects_to_portal_and_message_users']
     exclude = None
     
@@ -345,55 +396,6 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
         self.move_society_and_subprojects_to_portal(request, queryset, message_members=True)
     move_society_and_subprojects_to_portal_and_message_users.short_description = _("Move selected groups and their subprojects to current portal and message members")
     
-    
-    def convert_to_project(self, request, queryset):
-        """ Converts this CosinnusGroup's type """
-        converted_names = []
-        refused_portal_names = []
-        for group in queryset:
-            if group.portal_id != CosinnusPortal.get_current().id:
-                refused_portal_names.append(group.name)
-                continue
-            # remove haystack index for this group, re-index after
-            group.remove_index()
-            # swap types
-            group.type = CosinnusGroup.TYPE_PROJECT
-            group.save(allow_type_change=True)
-            
-            if group.type == CosinnusGroup.TYPE_PROJECT:
-                converted_names.append(group.name)
-                CosinnusPermanentRedirect.create_for_pattern(group.portal, CosinnusGroup.TYPE_SOCIETY, group.slug, group)
-                # all projects that had this group as parent, get set their parent=None and set this as related project
-                # and all of those former child projects are also added as related to this newly-converted project
-                for project in get_cosinnus_group_model().objects.filter(parent=group):
-                    project.parent = None
-                    project.save(update_fields=['parent'])
-                    RelatedGroups.objects.get_or_create(from_group=project, to_group=group)
-                    RelatedGroups.objects.get_or_create(from_group=group, to_group=project)
-                    
-            # we beat the cache with a hammer on all class models, to be sure
-            CosinnusProject._clear_cache(group=group)
-            CosinnusSociety._clear_cache(group=group)
-            get_cosinnus_group_model()._clear_cache(group=group)
-            CosinnusGroupMembership.clear_member_cache_for_group(group)
-            # delete and recreate all group widgets (there might be different ones for group than for porject)
-            WidgetConfig.objects.filter(group_id=group.pk).delete()
-            create_initial_group_widgets(group, group)
-            
-            # re-index haystack for this group after getting a properly classed, fresh object
-            group.remove_index()
-            group = CosinnusProject.objects.get(id=group.id)
-            group.update_index()
-        
-        if converted_names:
-            message = _('The following Groups were converted to Projects:') + '\n' + ", ".join(converted_names)
-            self.message_user(request, message, messages.SUCCESS)
-        if refused_portal_names:
-            message_error = 'These Groups could not be converted because they do not belong to this portal:' + '\n' + ", ".join(refused_portal_names)
-            self.message_user(request, message_error, messages.ERROR)
-        
-    convert_to_project.short_description = _("Convert selected Groups to Projects")
-    
     def get_form(self, request, obj=None, **kwargs):
         self.exclude = ("parent", )
         return super(CosinnusSocietyAdmin, self).get_form(request, obj, **kwargs)
@@ -401,10 +403,24 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
 admin.site.register(CosinnusSociety, CosinnusSocietyAdmin)
 
 
+class CosinnusConferenceAdmin(CosinnusProjectAdmin):
+    
+    actions = ['convert_to_project', 'convert_to_society',]
+    exclude = None
+    
+    def get_actions(self, request):
+        actions = super(CosinnusConferenceAdmin, self).get_actions(request)
+        del actions['convert_to_conference']
+        return actions
+
+admin.site.register(CosinnusConference, CosinnusConferenceAdmin)
+
+
 class CosinnusPortalAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'site', 'public')
     prepopulated_fields = {'slug': ('name', )}
     readonly_fields = ('saved_infos',)
+    inlines = [CosinnusConferenceSettingsInline]
     
     def queryset(self, request):
         """ Allow portals to be accessed only by superusers and Portal-Admins """
@@ -442,14 +458,14 @@ USER_MODEL = get_user_model()
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    readonly_fields = ('settings',)
+    exclude = ('extra_fields',)
 
 admin.site.register(get_user_profile_model(), UserProfileAdmin)
 
 
 class UserProfileInline(admin.StackedInline):
     model = USER_PROFILE_MODEL
-    readonly_fields = ('settings',)
+    exclude = ('extra_fields',)
 
 class PortalMembershipInline(admin.TabularInline):
     model = CosinnusPortalMembership
@@ -506,7 +522,8 @@ class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
     actions = ['deactivate_users', 'export_as_csv', 'log_in_as_user']
     if settings.COSINNUS_ROCKET_ENABLED:
-        actions += ['force_sync_rocket_user', 'make_user_rocket_admin']
+        actions += ['force_sync_rocket_user', 'make_user_rocket_admin', 'force_redo_user_room_memberships',
+                    'ensure_user_account_sanity']
     list_display = ('email', 'is_active', 'date_joined', 'has_logged_in', 'tos_accepted', 'username', 'first_name', 'last_name', 'is_staff', )
     list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,]
     
@@ -530,7 +547,7 @@ class UserAdmin(DjangoUserAdmin):
     def has_delete_permission(self, request, obj=None):
         """ We never allow users to be deleted, only deactivated! """
         return False
-    
+     
     def deactivate_users(self, request, queryset):
         count = 0
         for user in queryset:
@@ -557,7 +574,7 @@ class UserAdmin(DjangoUserAdmin):
                 count += 1
             message = _('%d Users were synchronized successfully.') % count
             self.message_user(request, message)
-        force_sync_rocket_user.short_description = _('Re-synchronize RocketChat user-account (will log users out of RocketChat!)')
+        force_sync_rocket_user.short_description = _('Rocket: Re-synchronize RocketChat user-account connection (will log users out of RocketChat!)')
         
         def make_user_rocket_admin(self, request, queryset):
             count = 0
@@ -568,7 +585,29 @@ class UserAdmin(DjangoUserAdmin):
                 count += 1
             message = _('%d Users were made RocketChat admins.') % count
             self.message_user(request, message)
-        make_user_rocket_admin.short_description = _('Make user RocketChat admin')
+        make_user_rocket_admin.short_description = _('Rocket: Make user RocketChat admin')
+        
+        def ensure_user_account_sanity(self, request, queryset):
+            count = 0
+            from cosinnus_message.rocket_chat import RocketChatConnection
+            rocket = RocketChatConnection()
+            for user in queryset:
+                rocket.ensure_user_account_sanity(user)
+                count += 1
+            message = _('%d Users rocketchat accounts were checked.') % count
+            self.message_user(request, message)
+        ensure_user_account_sanity.short_description = _('Rocket: Repair/create missing users\' rocketchat accounts')
+        
+        def force_redo_user_room_memberships(self, request, queryset):
+            count = 0
+            from cosinnus_message.rocket_chat import RocketChatConnection
+            rocket = RocketChatConnection()
+            for user in queryset:
+                rocket.force_redo_user_room_memberships(user)
+                count += 1
+            message = _('%d Users\' rocketchat room memberships were re-done.') % count
+            self.message_user(request, message)
+        force_redo_user_room_memberships.short_description = _('Rocket: Fix missing RocketChat room memberships for users')
         
 
 admin.site.unregister(USER_MODEL)
@@ -581,7 +620,8 @@ class CosinnusTopicCategoryAdmin(admin.ModelAdmin):
 admin.site.register(CosinnusTopicCategory, CosinnusTopicCategoryAdmin)
 
 
-class BaseTaggableAdminMixin(object):
+
+class BaseTaggableAdmin(ReverseModelAdmin):
     """ Base mixin for the common properties for a BaseTaggableObject admin  """
     list_display = ['title', 'group', 'creator', 'created']
     list_filter = ['group__portal',]
@@ -589,15 +629,25 @@ class BaseTaggableAdminMixin(object):
     readonly_fields = ['media_tag', 'attached_objects']
     inlines = []
     raw_id_fields = ['group', 'creator']
+    inline_type = 'stacked'
+    inline_reverse = [
+        ('media_tag', {'fields': [
+                'visibility',
+                'location',
+                'topics',
+                'text_topics',
+                'bbb_room',
+            ]}),
+    ]
 
 
-class BaseHierarchicalTaggableAdminMixin(BaseTaggableAdminMixin):
-    list_display = BaseTaggableAdminMixin.list_display + ['path', 'is_container']
-    list_filter = BaseTaggableAdminMixin.list_filter + ['is_container']
+class BaseHierarchicalTaggableAdmin(BaseTaggableAdmin):
+    list_display = BaseTaggableAdmin.list_display + ['path', 'is_container']
+    list_filter = BaseTaggableAdmin.list_filter + ['is_container']
 
 
 class GlobalUserNotificationSettingAdmin(admin.ModelAdmin):
-    list_display = ('user', 'setting', 'portal',)
+    list_display = ('user_email', 'setting', 'portal',)
     list_filter = ('setting', 'portal',)
     search_fields = ('user__first_name', 'user__last_name', 'user__email',) 
     
@@ -647,11 +697,22 @@ if settings.COSINNUS_IDEAS_ENABLED:
     admin.site.register(CosinnusIdea, CosinnusIdeaAdmin)
 
 
+def restart_bbb_rooms(modeladmin, request, queryset):
+    for bbb_room in queryset.all():
+        try:
+            bbb_room.restart()
+        except:
+            pass
+
+
+restart_bbb_rooms.short_description = _('Restart')
+
+
 class CosinnusBBBRoomAdmin(admin.ModelAdmin):
     list_display = ('meeting_id', 'name', 'ended', 'portal')
     list_filter = ('ended', 'portal')
     search_fields = ('meeting_id', 'internal_meeting_id', 'name')
-
+    actions = (restart_bbb_rooms, )
 admin.site.register(BBBRoom, CosinnusBBBRoomAdmin)
 
 
@@ -659,16 +720,49 @@ class CosinnusConferenceRoomAdmin(admin.ModelAdmin):
     list_display = ('title', 'id', 'type', 'group', 'sort_index')
     list_filter = ('group', 'group__portal')
     search_fields = ('slug', 'title',)
+    inlines = [CosinnusConferenceSettingsInline]
 
 admin.site.register(CosinnusConferenceRoom, CosinnusConferenceRoomAdmin)
 
+class CosinnusParticipationManagementAdmin(admin.ModelAdmin):
+    list_display = ('conference', 'application_start', 'application_end')
+
+admin.site.register(ParticipationManagement, CosinnusParticipationManagementAdmin)
+
+class CosinnusConferenceApplicationAdmin(admin.ModelAdmin):
+    list_display = ('user_email', 'conference', 'status')
+    search_fields = ('conference__name',)
+
+admin.site.register(CosinnusConferenceApplication, CosinnusConferenceApplicationAdmin)
+
+class BBBRoomVisitStatisticsAdmin(admin.ModelAdmin):
+    list_display = ('user', 'bbb_room', 'group', 'visit_datetime')
+    list_filter = ('bbb_room',)
+    search_fields = ('bbb_room__name', 'group__name')
+    
+admin.site.register(BBBRoomVisitStatistics, BBBRoomVisitStatisticsAdmin)
+
+
+class CosinnusNewsletterAdmin(admin.ModelAdmin):
+    list_display = ('subject', 'sent')
+
+admin.site.register(Newsletter, CosinnusNewsletterAdmin)
+
 
 class CosinnusManagedTagAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'portal', 'paired_group')
-    list_filter = ('portal',)
-    search_fields = ('slug', 'name',)
+    list_display = ('name', 'slug', 'portal', 'type', 'paired_group')
+    list_filter = ('portal', 'type')
+    search_fields = ('slug', 'name', 'paired_group__slug', 'paired_group__name')
 
 admin.site.register(CosinnusManagedTag, CosinnusManagedTagAdmin)
+
+
+class CosinnusManagedTagTypeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'color', 'portal',)
+    list_filter = ('portal',)
+    search_fields = ('name',)
+
+admin.site.register(CosinnusManagedTagType, CosinnusManagedTagTypeAdmin)
 
 
 class CosinnusManagedTagAssignmentAdmin(admin.ModelAdmin):
@@ -679,6 +773,11 @@ class CosinnusManagedTagAssignmentAdmin(admin.ModelAdmin):
 admin.site.register(CosinnusManagedTagAssignment, CosinnusManagedTagAssignmentAdmin)
 
 
+class CosinnusUserImportAdmin(admin.ModelAdmin):
+    list_display = ('state', 'creator', 'last_modified')
+    readonly_fields = ('import_data', 'import_report_html')
+
+admin.site.register(CosinnusUserImport, CosinnusUserImportAdmin)
 
 
 ## TODO: FIXME: re-enable after 1.8 migration

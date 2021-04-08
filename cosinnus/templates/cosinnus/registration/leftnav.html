@@ -14,9 +14,11 @@
 {% captureas label %}{% trans "Log in" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_login extra_classes="fine-space" icon="fa-hand-o-right" label=label href=href  %}
 
-{% captureas href %}{% url "cosinnus:user-add" %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}{% endcaptureas %}
-{% captureas label %}{% trans "Register" %}{% endcaptureas %}
-{% include "cosinnus/leftnav_button.html" with active=is_signup extra_classes="large-space" icon="fa-user" label=label href=href  %}
+{% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
+	{% captureas href %}{% url "cosinnus:user-add" %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}{% endcaptureas %}
+	{% captureas label %}{% trans "Register" %}{% endcaptureas %}
+	{% include "cosinnus/leftnav_button.html" with active=is_signup extra_classes="large-space" icon="fa-user" label=label href=href  %}
+{% endif %}
 
 {% captureas href %}{% url "password_reset" %}{% endcaptureas %}
 {% captureas label %}{% trans "Forgot password?" %}{% endcaptureas %}

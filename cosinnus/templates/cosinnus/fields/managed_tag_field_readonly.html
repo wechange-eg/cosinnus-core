@@ -3,27 +3,31 @@
 <div class="managed-tag-detail" data-tag-slug="{{ tag.slug }}" {% if not visible %}style="display: none;"{% endif %}>
     <div class="tag-content transparent">
         <div class="pull-left tag-image">
-		    {% if tag.image %}
-	            <img class="image forms-managed-tags detail-image" src="{{ tag.get_image_thumbnail_url }}">
-		    {% else %}
-	            <i class="fa fa-3x {{ COSINNUS_MANAGED_TAG_LABELS.ICON }}"></i>
-		    {% endif %}
+		    <a target="_blank" href="{% include 'cosinnus/fields/managed_tag_field_readonly_url.html' with tag=tag %}">
+			    {% if tag.image %}
+		            <img class="image forms-managed-tags detail-image" src="{{ tag.get_image_thumbnail_url }}">
+			    {% else %}
+		            <i class="fa fa-3x {{ COSINNUS_MANAGED_TAG_LABELS.ICON }}"></i>
+			    {% endif %}
+		    </a>
 	    </div>  
 	    <div>
 	        <p class="transparent forms-managed-tags detail-name">
-	            <a target="_blank" href="{{ tag.get_search_url }}">
+	            <a target="_blank" href="{% include 'cosinnus/fields/managed_tag_field_readonly_url.html' with tag=tag %}">
 	                {{ tag.name }}</a>
-	            {% if tag.get_absolute_url %}
-		            <a target="_blank" href="{{ tag.get_absolute_url}}">
+	            {% if tag.url %}
+		            <a target="_blank" href="{{ tag.url}}">
 	                    (<i class="fa fa-external-link"></i>
 	                    {% trans "website" %})
 	                </a>
                 {% endif %}
 	        </p>
 	        {% if tag.description %}
-	            <p class="transparent forms-managed-tags detail-description">
-	                {{ tag.description }}
-	            </p>
+	            {% if on_editable_form or not SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_DESCRIPTION_IN_FORMS_ONLY %}
+		            <p class="transparent forms-managed-tags detail-description">
+		                {{ tag.description }}
+		            </p>
+	            {% endif %}
 	        {% endif %}
 	    </div>
     </div>

@@ -15,16 +15,18 @@
 {% endif %}
 
 {% for folder in folders %}
-    {% captureas href %}{% group_url cosinnus_app_list_url group=group slug=folder.container_object.slug %}{% add_current_params %}{% endcaptureas %}
-    {% captureas label %}{% if folder.container_object.special_type %}{% trans folder.container_object.title context "special_folder_type" %}{% else %}{{ folder.container_object.title }}{% endif %}{% endcaptureas %}
-    {% captureas button_class %}{% if forloop.last or folder.container_object.special_type %}regular-space{% else %}fine-space{% endif %}{% endcaptureas %}
-    {% if not is_deep_hierarchy or is_deep_hierarchy == False %}
-        {% captureas folder_size %}{{ folder.objects|length }}{% endcaptureas %}
-    {% endif %}
-    {% captureas active %}{% if current_folder and folder.name == current_folder.slug %}True{% endif %}{% endcaptureas %}
-    {% captureas button_template %}{% if user|can_create_objects_in:folder.container_object.group and not folder.container_object.special_type %}cosinnus/leftnav_button_editable_folder.html{% else %}cosinnus/leftnav_button.html{% endif %}{% endcaptureas %}
+    {% if not group.slug == SETTINGS.NEWW_FORUM_GROUP_SLUG or not folder.container_object.special_type %}
+	    {% captureas href %}{% group_url cosinnus_app_list_url group=group slug=folder.container_object.slug %}{% add_current_params %}{% endcaptureas %}
+	    {% captureas label %}{% if folder.container_object.special_type %}{% trans folder.container_object.title context "special_folder_type" %}{% else %}{{ folder.container_object.title }}{% endif %}{% endcaptureas %}
+	    {% captureas button_class %}{% if forloop.last or folder.container_object.special_type %}regular-space{% else %}fine-space{% endif %}{% endcaptureas %}
+	    {% if not is_deep_hierarchy or is_deep_hierarchy == False %}
+	        {% captureas folder_size %}{{ folder.objects|length }}{% endcaptureas %}
+	    {% endif %}
+	    {% captureas active %}{% if current_folder and folder.name == current_folder.slug %}True{% endif %}{% endcaptureas %}
+	    {% captureas button_template %}{% if user|can_create_objects_in:folder.container_object.group and not folder.container_object.special_type %}cosinnus/leftnav_button_editable_folder.html{% else %}cosinnus/leftnav_button.html{% endif %}{% endcaptureas %}
     
-    {% include button_template with active=active extra_classes=button_class icon="fa-folder" icon_content=folder_size label=label href=href folder=folder.container_object downloadable=downloadable %}
+        {% include button_template with active=active extra_classes=button_class icon="fa-folder" icon_content=folder_size label=label href=href folder=folder.container_object downloadable=downloadable %}
+    {% endif %}
 {% endfor %}
 
 {% if user|can_create_objects_in:group %}

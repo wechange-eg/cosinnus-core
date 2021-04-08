@@ -1,0 +1,7 @@
+{% for group, options, index in widget.optgroups %}
+    {% for option in options %}
+    <td>{% include option.template_name with widget=option %}</td>
+    {% endfor %}
+{% endfor %}
+
+

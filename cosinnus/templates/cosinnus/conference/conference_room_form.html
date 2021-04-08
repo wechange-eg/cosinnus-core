@@ -1,0 +1,168 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% if not object and request.GET.description %}
+	    {% captureas description_value %}{{ request.GET.description }}{% endcaptureas %}
+	{% endif %}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.description.id_for_label value=description_value %}
+{% endblock %}
+
+{% block page_title %}
+	{% if object %}
+	   {% blocktrans with title=object.title %}Edit Room “{{ title }}”{% endblocktrans %}
+	{% else %}
+	   {% trans "Create Room" %}
+    {% endif %}
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_group.html"  with current_page="conferenceroommanagement" %}
+{% endblock leftnav %}
+
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li><a href="{% group_url 'cosinnus:conference:room-management' group=group %}">{% trans "Conference Room Management" %}</a></li>
+    {% if object %}
+        <li class="active">{% trans "Edit Room" %}</li>
+    {% else %}
+        <li class="active">{% trans "Create Room" %}</li>
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+    {% if form.errors %}
+	    <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+	        <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+	    </div>
+    {% endif %}
+
+	<form action="" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
+	    {% csrf_token %}
+	    {{ form.media }}
+	    {{ form.non_field_errors }}
+	    
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+        
+            {% comment %} Type Field {% endcomment %}
+            {% trans "Room type" as type_label %}
+            {% captureas type_description_html %}
+                <div class="v-spacer-m"></div>
+                <div class="room-type-selector room-type-selector-0">
+                    <p class="textfield transparent">{% trans "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here." %}</p>
+                </div>
+                <div class="room-type-selector room-type-selector-1">
+                    <p class="textfield transparent">{% trans "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it." %}</p>
+                </div>
+                <div class="room-type-selector room-type-selector-2">
+                    <p class="textfield transparent">{% trans "In Workshops each event has a video conference. Presenters are allowed to moderate those." %}</p>
+                </div>
+                <div class="room-type-selector room-type-selector-3">
+                    <p class="textfield transparent">{% trans 'In Discussions each event has a video conference. Presenters are allowed to moderate those. Differs from "Workshops" only by the design in the agenda. Workshop: tiles, discussion: list.' %}</p>
+                </div>
+                <div class="room-type-selector room-type-selector-4">
+                    <p class="textfield transparent">{% trans "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone." %}</p>
+                </div>
+                <div class="room-type-selector room-type-selector-5">
+                    <p class="textfield transparent">{% trans "Include a project that you use for documentation purposes. Click the link below to add a project to the conference first, if you haven't already." %}</p>
+                    <p class="transparent">
+	                    <a href="{% url 'cosinnus:group-add' %}?group={{ group.slug }}&next={% group_url "cosinnus:conference:room-add" group=group %}">
+	                        {% trans "Add project" %}
+	                    </a>
+                    </p>
+                </div>
+                <div class="room-type-selector room-type-selector-6">
+                    <p class="textfield transparent">{% trans "Shows a list of all participants." %}</p>
+                </div>
+                <script type="text/javascript">
+                    {% comment %} show or hide a type description {% endcomment %}
+                    $(function(){
+                        function updateFormDisplay(val) {
+                            $('.room-type-selector').hide();
+                            $('.room-type-selector-' + val).show();
+                        };
+                        $('#{{ form.type.auto_id }}').on('change', function(){
+                            updateFormDisplay($(this).val());
+                        });
+                        // update on load
+                        updateFormDisplay($('#{{ form.type.auto_id }}').val());
+                    });
+                </script>
+            {% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.type label=type_label extra_html=type_description_html %}
+            
+            <div class="room-type-selector room-type-selector-4">
+                {% comment %} Maximum table users Field {% endcomment %}
+                {% trans "Maximum Coffee Table Participants" as max_label %}
+                {% trans "How many participants should can join one coffee table before it is full" as max_legend %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.max_coffeetable_participants label=max_label legend=max_legend %}
+                
+                <p>
+                    <i class="fas fa-exclamation-triangle"></i>
+                    {% trans "Attention: The visible update of the free seats is still work in progress. Therefore, we recommend not to use the limitation of individual coffee tables, so as not to let the virtual coffee go cold while searching for free seats." %}
+                </p>
+                {% comment %} Allow user Field {% endcomment %}
+                {% comment %} Disabled this option as the frontend isn't implemented
+                {% trans "Allow users to create new coffee tables" as allow_label %}
+                {% trans "Enable this to allow users to create their own coffee tables" as allow_legend %}
+                {% include 'cosinnus/fields/checkbox_field.html' with field=form.allow_user_table_creation label=allow_label legend=allow_legend checkbox_label=allow_label %}
+                 {% endcomment %}
+            </div>
+            
+            <div class="room-type-selector room-type-selector-5">
+                {% comment %} Target project Field {% endcomment %}
+                {% trans "Result Project" as project_label %}
+                {% trans "Choose one of the sub-projects of this group to display as nested results-project for participants" as project_legend %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.target_result_group label=project_label legend=project_legend %}
+            </div>
+            
+            <hr>
+            
+            {% comment %} Title Field {% endcomment %}
+            {% trans "Title" as title_label %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.title label=title_label placeholder=title_label first=True %}
+            
+            {% comment %} Sort Field {% endcomment %}
+            {% trans "Sort index" as sort_label %}
+            {% trans "Number by which rooms are sorted in ascending order in the conference room navigation list" as sort_legend %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.sort_index label=sort_label legend=sort_legend %}
+            
+	        {% comment %} SimpleMDE Description Field (gets initialized in extrahead) {% endcomment %}                                  
+            {% trans "Description" as description_label %}
+            {% captureas description_placeholder %}{% trans "A short description or topic for your room. Will be shown on top of the room page." %}{% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.description label=description_label legend=description_placeholder placeholder=description_placeholder large_field=True %}
+
+            {% comment %} Visibility Field {% endcomment %}
+            {% trans "Room is visible" as vis_label %}
+            {% trans "Uncheck this to hide the room for participants (you will still be able to see it)" as vis_legend %}
+            {% include 'cosinnus/fields/checkbox_field.html' with field=form.is_visible label=vis_label legend=vis_legend checkbox_label=vis_label %}
+
+            {% comment %} Show chat {% endcomment %}
+	        {% trans "Show chat" as show_chat_label %}
+	        {% trans "Check this to show rocket chat in the sidebar." as show_chat_legend %}
+            {% include 'cosinnus/fields/checkbox_field.html' with field=form.show_chat label=show_chat_label legend=show_chat_legend checkbox_label=show_chat_label %}
+        </div>
+	    
+	    <button type="submit" class="btn btn-emphasized">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-check"></i>
+	                </a>
+	                <div class="media-body">
+                        {% trans "Save" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    
+    </form>
+
+{% endblock %}
+

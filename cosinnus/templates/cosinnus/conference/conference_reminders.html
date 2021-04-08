@@ -1,0 +1,164 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_group.html"  with current_page="conferencereminders" %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">{% trans "Conference reminders" %}</li>
+{% endblock %}
+
+{% block content %}
+    <form method="POST" action="" class="cosinnus-form">
+        {% csrf_token %}
+        <input type="hidden" id="provider" name="provider" value="{{ request.GET.provider }}">
+
+        <div class="content-box">
+		<h2 class="large-space">{% trans "Conference reminders" %}</h2>
+        <p class="transparent extra-space-bottom">{% blocktrans %}Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference{% endblocktrans %}</p>
+
+        {{ form.non_field_errors }}
+
+        <div class="panel panel-default large-space">
+            <div class="panel-heading">
+                <label for="id_week_before" class="cursor-pointer">
+                    <h4 class="panel-title">
+                        {{ form.week_before }}&nbsp;
+                        {% trans "Send 1 week before conference" %}
+                        {% with object.settings.reminder_week_before_sent|parse_datetime|date:"SHORT_DATETIME_FORMAT" as sent_date %}{% if sent_date %}
+                        <span class="badge">{% blocktrans %}Status info: sent {{ sent_date }}{% endblocktrans %}</span>
+                        {% endif %}{% endwith %}
+                    </h4>
+                </label>
+            </div>
+            
+            {% captureas content_legend %}
+                {% trans "You may use the following variables:" %}
+                [[name]]
+                [[from_date]]
+                [[to_date]]
+                [[user_first_name]]
+                [[user_last_name]]
+                [[user_full_name]]
+            {% endcaptureas %}
+            
+            <div id="collapseWeekBefore" class="panel-collapse">
+                <div class="panel-body">
+                    <label>
+                        {% trans "This e-mail will be sent out 7 days before and at the same time of day as the conference start date." %}
+                    </label>
+                    {# Week before subject #}
+                    {% trans "Invitation subject" as subject_label %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.week_before_subject label=subject_label %}
+                    {# Week before email text #}
+                    {% trans "Invitation text" as content_label %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.week_before_content label=content_label legend_selectable=True  legend=content_legend large_field=True %}
+                    <button type="submit" class="btn btn-default btn-autosize" name="test" value="week_before">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left" href="#" tabindex="-1">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans 'Send test to myself' %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default large-space">
+            <div class="panel-heading">
+                <label for="id_day_before" class="cursor-pointer">
+                    <h4 class="panel-title">
+                        {{ form.day_before }}&nbsp;
+                        {% trans "Send 1 day before conference" %}
+                        {% with object.settings.reminder_day_before_sent|parse_datetime|date:"SHORT_DATETIME_FORMAT" as sent_date %}{% if sent_date %}
+                        <span class="badge">{% blocktrans %}Status info: sent {{ sent_date }}{% endblocktrans %}</span>
+                        {% endif %}{% endwith %}
+                    </h4>
+                </label>
+            </div>
+            <div id="collapseDayBefore" class="panel-collapse">
+                <div class="panel-body">
+                    <label>
+                        {% trans "This e-mail will be sent out 24 hours before the conference start date." %}
+                    </label>
+                    {# Day before subject #}
+                    {% trans "Invitation subject" as subject_label %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.day_before_subject label=subject_label %}
+                    {# Day before email text #}
+                    {% trans "Invitation text" as content_label %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.day_before_content label=content_label legend_selectable=True  legend=content_legend large_field=True %}
+                    <button type="submit" class="btn btn-default btn-autosize" name="test" value="day_before">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left" href="#" tabindex="-1">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans 'Send test to myself' %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default large-space">
+            <div class="panel-heading">
+                <label for="id_hour_before" class="cursor-pointer">
+                    <h4 class="panel-title">
+                        {{ form.hour_before }}&nbsp;
+                        {% trans "Send 1 hour before conference" %}
+                        {% with object.settings.reminder_hour_before_sent|parse_datetime|date:"SHORT_DATETIME_FORMAT" as sent_date %}{% if sent_date %}
+                        <span class="badge">{% blocktrans %}Status info: sent {{ sent_date }}{% endblocktrans %}</span>
+                        {% endif %}{% endwith %}
+                    </h4>
+                </label>
+            </div>
+            <div id="collapseHourBefore" class="panel-collapse">
+                <div class="panel-body">
+                    {# Hour before subject #}
+                    {% trans "Invitation subject" as subject_label %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.hour_before_subject label=subject_label %}
+                    {# Hour before email text #}
+                    {% trans "Invitation text" as content_label %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.hour_before_content label=content_label legend_selectable=True  legend=content_legend large_field=True %}
+                    <button type="submit" class="btn btn-default btn-autosize" name="test" value="hour_before">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left" href="#" tabindex="-1">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans 'Send test to myself' %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-emphasized" name="submit" value="1">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left" href="#" tabindex="-1">
+                        <i class="fa fa-hand-o-right"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans 'Save' %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+
+        </div>
+    </form>
+{% endblock content %}

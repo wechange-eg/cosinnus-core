@@ -1,22 +1,11 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 09:08+0100\n"
-"PO-Revision-Date: 2020-04-07 15:23+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2021-03-12 17:55+0100\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.3\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -35,14 +24,20 @@ msgstr ""
 msgid "Convert memberships to Member status"
 msgstr ""
 
+#, python-format
+msgid "%d Users' rocketchat room memberships were re-done."
+msgstr ""
+
+msgid "Rocket: Fix missing RocketChat room membership for users"
+msgstr ""
+
 msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr "ნიშანი იგივე კოდით უკვე არსებობს ! გთხოვთ აირჩიოთ ბაზა თქვენი კოდისათვის."
 
-msgid "The following Projects were converted to Groups:"
+#, fuzzy, python-format
+#| msgid "The following Projects were converted to Groups:"
+msgid "The following items were converted to %s:"
 msgstr "შემდეგი პროექტი გადატანილ იქნა ჯგუფებში:"
-
-msgid "Convert selected Projects to Groups"
-msgstr "არჩეული პროექტების ჯგუფებში გადატანა"
 
 msgid "The following Users were added to this portal:"
 msgstr "შემდეგი მომხმარებლები დაემატნენ ამ პორტალს:"
@@ -67,12 +62,6 @@ msgstr "არჩეული ჯგუფების და მათი ქ�
 
 msgid "Move selected groups and their subprojects to current portal and message members"
 msgstr "არჩეული ჯგუფების და მათი ქვეპროექტების მიმდინარე პორტალზე გადატანა და წევრების შეტყობინება"
-
-msgid "The following Groups were converted to Projects:"
-msgstr "შემდეგი ჯგუფები გადატანილ იქნა პროექტებში:"
-
-msgid "Convert selected Groups to Projects"
-msgstr "არჩეული ჯგუფების პროექტებში გადატანა"
 
 msgid "ToS Accepted"
 msgstr "ToS მიღებულ იქნა"
@@ -103,22 +92,29 @@ msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr "მომხმარებლების დეაქტივაცია"
 
 #, fuzzy, python-format
-#| msgid "%d Users were deactivated successfully."
 msgid "%d Users were synchronized successfully."
 msgstr "%d მომხმარებლების დეაქტივაცია წარმატებით განხორციელდა."
 
-msgid "Re-synchronize RocketChat user-account (will log users out of RocketChat!)"
+msgid "Rocket: Re-synchronize RocketChat user-account connection (will log users out of RocketChat!)"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%d Users were deactivated successfully."
 msgid "%d Users were made RocketChat admins."
 msgstr "%d მომხმარებლების დეაქტივაცია წარმატებით განხორციელდა."
 
 #, fuzzy
-#| msgid "Made you an admin"
-msgid "Make user RocketChat admin"
+msgid "Rocket: Make user RocketChat admin"
 msgstr "მოახდინა თქვენი ადმინისტრატორად დასმა"
+
+#, python-format
+msgid "%d Users rocketchat accounts were checked."
+msgstr ""
+
+msgid "Rocket: Repair/create missing users' rocketchat accounts"
+msgstr ""
+
+msgid "Rocket: Fix missing RocketChat room memberships for users"
+msgstr ""
 
 msgid "Restart"
 msgstr ""
@@ -131,7 +127,6 @@ msgid "If you have not received an activation email yet, please try signing up a
 msgstr "თუ ჯერ არ მიგიღიათ აქტივაციის კოდი, გთხოვთ დარეგისტრირდეთ თავიდან ან დაუკავშირდეთ დამხმარე ჯგუფს ამ მისამართზე %(email)s!"
 
 #, fuzzy, python-format
-#| msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
 msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
 msgstr "თუ ჯერ არ მიგიღიათ აქტივაციის კოდი, გთხოვთ დარეგისტრირდეთ თავიდან ან დაუკავშირდეთ დამხმარე ჯგუფს!"
 
@@ -172,11 +167,31 @@ msgstr "მშენებლობა და ცხოვრება"
 msgid "Klimaschutz"
 msgstr "კლიმატის დაცვა"
 
+msgid "Overnight stay required"
+msgstr ""
+
+msgid "Barrier-free access required"
+msgstr ""
+
+msgid "Interpreter required"
+msgstr ""
+
+msgid "Vegetarian cuisine"
+msgstr ""
+
+msgid "Vegan cuisine"
+msgstr ""
+
+msgid "Lactose-free cuisine"
+msgstr ""
+
+msgid "Gluten-free cuisine"
+msgstr ""
+
 msgid "General"
 msgstr "ზოგადი"
 
 #, fuzzy
-#| msgid "Activate"
 msgid "Active"
 msgstr "აქტივაცია"
 
@@ -186,8 +201,17 @@ msgstr ""
 msgid "Premium"
 msgstr ""
 
-msgid "Only team members can see the content you requested. Apply to become a member now!"
-msgstr "თქვენ მიერ მოთხოვნილი კონტენტის ნახვა მხოლოდ გუნდის წევრებს შეუძლიათ.  იმისათვის, რომ გახდეთ წევრი, გააკეთეთ განაცხადი ახლა !"
+msgid "Bookmark"
+msgstr ""
+
+msgid "Bookmarked"
+msgstr ""
+
+msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
+msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "თქვენ მიერ მოთხოვნილი კონტენტის ნახვა მხოლოდ რეგისტრირებულ წევრებს შეუძლიათ ! განახორციელეთ შესვლა ან ახლა შექმენით ანგარიში !"
@@ -207,6 +231,9 @@ msgstr "ეს გუნდი შეყვანილი URL-ს ქვეშ 
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "ეს ანგარიში აქტიური აღარ არის. თქვენ გამოსული ხართ."
+
+msgid "You have been automatically logged out after being inactive for some time."
+msgstr ""
 
 #, python-format
 msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
@@ -290,6 +317,33 @@ msgstr[0] ""
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgstr "\"%(sender_name)s\" გუნდ %(team_name)s -ში მოწევევას არ დაეთანხმა."
 
+msgid "Your participation application was accepted"
+msgstr ""
+
+msgid "You submitted an application"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Your membership request for %(team_name)s was accepted!"
+msgid "Your participation application for %(team_name)s was accepted!"
+msgstr "თქვენი მოთხოვნა წევრობაზე გუნდისთვის - %(team_name)s მიღებულ იქნა!"
+
+msgid "Your participation application was declined"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Your membership request for %(team_name)s was declined."
+msgid "Your participation application for %(team_name)s was declined!"
+msgstr "თქვენი მოთხოვნა გუნდის- %(team_name)s წევრობაზე უარყოფილ იქნა."
+
+msgid "Your participation application was waitlisted"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Your membership request for %(team_name)s was accepted!"
+msgid "Your participation application for %(team_name)s was waitlisted!"
+msgstr "თქვენი მოთხოვნა წევრობაზე გუნდისთვის - %(team_name)s მიღებულ იქნა!"
+
 msgid "You were made an admin of this team"
 msgstr "თქვენ გახდით ამ გუნდის ადმინისტრატორი"
 
@@ -350,7 +404,6 @@ msgid "View invitation"
 msgstr "მოწვევის ნახვა"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s tagged you in"
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s -მა მოგნიშნათ"
 
@@ -365,12 +418,50 @@ msgstr "ერთ-ერთი თქვენი პროექტი/ჯგ�
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "\"%(team_name)s\"  გადატანილ იქნა %(portal_name)s-ზე!"
 
-#, python-format
-msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s ახლახან შექმნა პროექტი/ჯგუფი \"%(team_name)s\" %(portal_name)s-ზე!"
+msgid "A user created a new conference"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
+msgid "%(sender_name)s created the conference %(object_name)s"
+msgstr "%(sender_name)s ახალხან შექმნა იდეა \"%(object_name)s\"!"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in %(count)d items"
+msgid "%(sender_name)s created %(count)d conferences"
+msgstr "%(sender_name)s-მა მოგნიშნათ %(count)d საგანზე"
+
+#, fuzzy, python-format
+#| msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
+msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgstr "თქვენ მოინიშნეთ %(team_name)s-ში \"%(object_name)s-ზე\"."
+
+#, fuzzy
+#| msgid "Apply"
+msgctxt "email campaign button label to apply for a conference"
+msgid "Apply now!"
+msgstr "შევსება"
+
+#, fuzzy
+msgid "View conference"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s invited you to join %(team_name)s"
+msgid "%(sender_name)s invited you to apply for the conference %(team_name)s"
+msgstr "%(sender_name)s-მა მოგიწვიათ, რომ შეუერთდეთ %(team_name)s-ს"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
+msgid "%(sender_name)s invited you to apply for \"%(team_name)s\" on %(portal_name)s! <br/><br/> To apply, please click on the link below."
+msgstr "%(sender_name)s-მა მოგიწვიათ, რომ შეუერთდეთ გუნდს \"%(team_name)s\" %(portal_name)s! -ზე <br/><br/> იმისათვის, რომ შეუერთდეთ გუნდს, დააკლიკეთ ბმულს ქვემოთ. თქვენ გადახვალთ შესაბამის პორტალზე, მოწვევის სანახავად და დასადასტურებლად."
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s just created \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s ახლახან შექმნა იდეა \"%(object_name)s\" %(portal_name)s-ზე !"
+
+#, fuzzy, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s ახლახან შექმნა იდეა \"%(object_name)s\" %(portal_name)s-ზე !"
 
@@ -443,6 +534,62 @@ msgstr "עברית"
 
 msgid "Belarus"
 msgstr ""
+
+#, fuzzy
+#| msgid "Header Title"
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Title"
+msgstr "თავსართის სათაური"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 1"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 2"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Address Line 3"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Street and Number"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "City"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "State"
+msgstr ""
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Country"
+msgstr ""
+
+#, fuzzy
+#| msgid "Promote Member"
+msgctxt "Multi-Address Field Subfield"
+msgid "Phone Number"
+msgstr "წევრის დაწინაურება"
+
+msgctxt "Multi-Address Field Subfield"
+msgid "Mobile Phone Number"
+msgstr ""
+
+msgid "(No choice)"
+msgstr ""
+
+msgid "email address"
+msgstr "ელ-ფოსტის მისამართი"
+
+msgid "first name"
+msgstr "სახელი"
+
+msgid "This email address already has a registered user!"
+msgstr "აღნიშნული ელ-ფოსტით მომხმარებელი უკვე დარეგისტრირებულია !"
 
 msgid "Attachments"
 msgstr "მიმაგრებული ფაილები"
@@ -557,15 +704,6 @@ msgstr "მოწონება"
 msgid "Persons"
 msgstr "პერსონები"
 
-msgid "email address"
-msgstr "ელ-ფოსტის მისამართი"
-
-msgid "first name"
-msgstr "სახელი"
-
-msgid "This email address already has a registered user!"
-msgstr "აღნიშნული ელ-ფოსტით მომხმარებელი უკვე დარეგისტრირებულია !"
-
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
 msgstr "გთხოვთ შეიყვანოთ სწორი ელ-ფოსტა და პაროლი. გაითვალისწინეთ, ორივე ველი შესაძლოა ასხვავებდეს დიდ და პატარა ნიშნებს ასოებს."
 
@@ -574,6 +712,16 @@ msgstr "თქვენს ინტერნეტ ბრაუზერს ს
 
 msgid "This account is inactive."
 msgstr "ეს ანგარიში არ არის აქტიური."
+
+#, python-brace-format
+msgid "Some required columns are not present in the CSV: {missing_headers}!"
+msgstr ""
+
+msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
+msgstr ""
+
+msgid "Some CSV headers did not have a name!"
+msgstr ""
 
 msgid "Hello"
 msgstr ""
@@ -591,7 +739,6 @@ msgid "Unsubscribe"
 msgstr "გამოწერის გაუქმება"
 
 #, fuzzy
-#| msgid "Dashboard"
 msgid "My Dashboard"
 msgstr "ხელსაწყოთა პანელი"
 
@@ -659,9 +806,23 @@ msgid "options for the room, that are represented in the bigbluebutton API"
 msgstr ""
 
 #, fuzzy
-#| msgid "From Team Type"
 msgid "Room Type"
 msgstr "გუნდის ტიპიდან"
+
+msgid "BBB ROOM"
+msgstr ""
+
+#, fuzzy
+#| msgid "Visited"
+msgid "Visitor"
+msgstr "ეწვია"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "ჯგუფი"
+
+msgid "Created"
+msgstr "შექმნილი"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Title"
@@ -679,17 +840,31 @@ msgstr "კოსინუს CMS  მიკროგვერდი"
 msgid "Cosinnus Micropages"
 msgstr "კოსინუს მიგროკვერდები"
 
+msgid "BBB Server"
+msgstr ""
+
+msgid "BBB Server for Premium Conferences"
+msgstr ""
+
+#, fuzzy
+msgid "Cosinnus Conference Setting"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Cosinnus Conference Settings"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
 msgid "Lobby"
 msgstr ""
 
 msgid "Stage"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Workshops"
 msgstr ""
 
 #, fuzzy
-#| msgid "Permissions"
 msgid "Discussions"
 msgstr "ნებართვა"
 
@@ -723,12 +898,8 @@ msgid "Is visible"
 msgstr ""
 
 #, fuzzy
-#| msgid "Sort field"
 msgid "Sorting index"
 msgstr "დახარისხების ველი"
-
-msgid "Created"
-msgstr "შექმნილი"
 
 msgid "Creator"
 msgstr "შემქმნელი"
@@ -737,12 +908,10 @@ msgid "Last modified"
 msgstr "უკანასკნელი განახლება"
 
 #, fuzzy
-#| msgid "Rocket.Chat"
 msgid "RocketChat room id"
 msgstr "Rocket.Chat"
 
 #, fuzzy
-#| msgid "Rocket.Chat"
 msgid "RocketChat room name"
 msgstr "Rocket.Chat"
 
@@ -756,7 +925,6 @@ msgid "Maximum Coffee Table Participants"
 msgstr ""
 
 #, fuzzy
-#| msgid "Create Project"
 msgid "Result Project"
 msgstr "პროექტის შექმნა"
 
@@ -768,6 +936,122 @@ msgstr ""
 
 msgid "Slug must not be empty."
 msgstr "Slug-ი არ უნდა იყოს ცარიელი."
+
+msgid "Conditiions for participation"
+msgstr ""
+
+msgid "Shown as a download link near the checkbox to accept the conditions."
+msgstr ""
+
+#, fuzzy
+#| msgid "Participants"
+msgid "Participation Management"
+msgstr "მონაწილეები"
+
+#, fuzzy
+msgid "Request user information"
+msgstr "მოწვევის წაშლა"
+
+msgid "Pre-filled content for the information field"
+msgstr ""
+
+msgid "Priority choice enabled"
+msgstr ""
+
+msgid "Participation applications are open."
+msgstr ""
+
+msgid "Participation application has not started yet."
+msgstr ""
+
+msgid "Participation application is over."
+msgstr ""
+
+msgctxt "a conference application status"
+msgid "Invalid"
+msgstr ""
+
+#, fuzzy
+#| msgid "Submitting..."
+msgctxt "a conference application status"
+msgid "Submitted"
+msgstr "დამახსოვრება..."
+
+msgctxt "a conference application status"
+msgid "Waitlist"
+msgstr ""
+
+#, fuzzy
+#| msgid "ToS Accepted"
+msgctxt "a conference application status"
+msgid "Accepted"
+msgstr "ToS მიღებულ იქნა"
+
+#, fuzzy
+#| msgid "Decline User"
+msgctxt "a conference application status"
+msgid "Declined"
+msgstr "მომხმარებლის გაუქმება"
+
+msgid "Your application is invalid."
+msgstr ""
+
+msgid "Your application has been submitted. You will be notified when it is processed."
+msgstr ""
+
+msgid "Your application is currently on the waiting list."
+msgstr ""
+
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your application has been accepted!"
+msgstr "თქვენი ცვლილებები შენახულია."
+
+#, fuzzy
+#| msgid "We're sorry, but your membership request for %(team_name)s was declined."
+msgid "We are sorry, but your application has been declined."
+msgstr "სამწუხაროდ, თქვენი მოთხოვნა გუნდის - %(team_name)s წევრობაზე უარყოფილ იქნა."
+
+#, fuzzy
+#| msgid "Decline User"
+msgid "Declined"
+msgstr "მომხმარებლის გაუქმება"
+
+msgid "Waitlist"
+msgstr ""
+
+#, fuzzy
+#| msgid "ToS Accepted"
+msgid "Accepted"
+msgstr "ToS მიღებულ იქნა"
+
+#, fuzzy
+msgid "Confernence Application"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "Priorities"
+msgstr ""
+
+msgid "Motivation for applying"
+msgstr ""
+
+#, fuzzy
+#| msgid "E-Mail Addresses"
+msgid "Contact E-Mail Address"
+msgstr "ელ-ფოსტის მისამართები"
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "Cosinnus conference application"
+msgstr "CosinnusLocation"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "Cosinnus conference applications"
+msgstr "CosinnusLocations"
+
+msgid "Note from the organizers"
+msgstr ""
 
 msgid "Complaint Text"
 msgstr "საჩივრის ტექსტი"
@@ -800,7 +1084,6 @@ msgid "Gender Equality"
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete invitation"
 msgid "Clean Water and Sanitation"
 msgstr "მოწვევის წაშლა"
 
@@ -823,7 +1106,6 @@ msgid "Responsible Consumption and Production"
 msgstr ""
 
 #, fuzzy
-#| msgid "Call to Action"
 msgid "Climate Action"
 msgstr "Call to Action"
 
@@ -942,16 +1224,32 @@ msgstr "ამ პორტალისათვის Extra CSS -ის გა�
 msgid "Video Conference Server"
 msgstr "ვიდეო კონფერენციის სერვერი"
 
-msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+#, fuzzy
+#| msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
+msgid "For old-style events meeting popups only! If entered, will enable Jitsi-like video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
 msgstr "შეყვანის შემთხვევაში, მოხდება ვიდეო კონფერენციის ფუნქციის ჩართვა საიტის გავლით. ნაწილობრივ არის URL-ს საჭიროებაა, სადაც ნებისმიერი შემთხვევითი ოთახის სახელის მიმაგრება იქნება შესაძლებელი."
+
+msgid "Dynamic choice field choices"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "პროექტი"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "ჯგუფი"
+#, fuzzy
+msgid "Conference"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+#| msgid "New membership request"
+msgid "Regular membership requests"
+msgstr "ახალი მოთხოვნა წევრობაზე"
+
+msgid "Require participation applications for this conference"
+msgstr ""
+
+msgid "Everyone may join"
+msgstr ""
 
 msgid "Project Type"
 msgstr "პროექტის ტიპი"
@@ -979,6 +1277,11 @@ msgstr "ფონის გამოსახულება"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "დიდი ბანერის გამოსახულების Microsite (1140 x 240 px)-ზე ჩვენება"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application method"
+msgstr "განცხადების სახელი"
 
 msgid "Microsite Video"
 msgstr "Microsite ვიდეო"
@@ -1008,12 +1311,10 @@ msgid "Embedded Dashboard HTML"
 msgstr ""
 
 #, fuzzy
-#| msgid "Video Conference Server"
 msgid "Conference theme color"
 msgstr "ვიდეო კონფერენციის სერვერი"
 
 #, fuzzy
-#| msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
 msgid "Conference theme color for conference groups only (css hex value, with or without \"#\")"
 msgstr "გრადიენტის ქვედა ფერი (css hex value, with or without \"#\")"
 
@@ -1039,32 +1340,55 @@ msgid "Nextcloud Group ID"
 msgstr "Nextcloud Group ID"
 
 #, fuzzy
-#| msgid "Nextcloud Group ID"
 msgid "Nextcloud Groupfolder Name"
 msgstr "Nextcloud Group ID"
 
 #, fuzzy
-#| msgid "Nextcloud Group ID"
 msgid "Nextcloud Groupfolder ID"
 msgstr "Nextcloud Group ID"
 
 msgid "Is conference"
 msgstr ""
 
-msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
+#, fuzzy
+#| msgid "Start date."
+msgid "Start Datetime"
+msgstr "საწყისი თარიღი."
+
+#, fuzzy
+#| msgid "End date."
+msgid "End Datetime"
+msgstr "დასასრული."
+
+msgid "Allow temporary users accounts for this conference."
 msgstr ""
 
-msgid "Conference is running"
+msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
 msgstr ""
 
-msgid "Determins whether a group that is marked as conference is running"
+#, fuzzy
+msgid "Conference accounts active"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "If enabled, temporary user accounts for this conference are active and can log in."
 msgstr ""
+
+#, fuzzy
+msgid "Conference is currrently premium"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Conference is permanently premium"
+msgstr "ვიდეო კონფერენციის სერვერი"
 
 msgid "Parent Group"
 msgstr "მშობლის ჯგუფი"
 
 msgid "Related Teams"
 msgstr "შესაბამის კავშირში მყოფი გუნდები"
+
+msgid "Dynamic extra fields"
+msgstr ""
 
 msgid "Cosinnus project"
 msgstr "კოსინუს პროექტი"
@@ -1082,26 +1406,6 @@ msgstr "თხოვნა თქვენს პროექტთან \"%(gr
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "თხოვნა თქვენ ჯგუფთან \"%(group_name)s\" დაკავშირებით"
-
-#, fuzzy
-#| msgid "Project Type"
-msgid "Project Menu"
-msgstr "პროექტის ტიპი"
-
-#, fuzzy
-#| msgid "Group name"
-msgid "Group Menu"
-msgstr "ჯგუფის სახელი"
-
-#, fuzzy
-#| msgid "Dashboard"
-msgid "Project Dashboard"
-msgstr "ხელსაწყოთა პანელი"
-
-#, fuzzy
-#| msgid "Dashboard"
-msgid "Group Dashboard"
-msgstr "ხელსაწყოთა პანელი"
 
 msgid "Token"
 msgstr "ტოკენი"
@@ -1197,7 +1501,14 @@ msgid "Managed Tag"
 msgstr ""
 
 #, fuzzy
-#| msgid "Create Idea"
+msgid "Managed Tag Type"
+msgstr "იდეის შექმნა"
+
+#, fuzzy
+msgid "Managed Tag Types"
+msgstr "იდეის შექმნა"
+
+#, fuzzy
 msgid "Create Managed Tag"
 msgstr "იდეის შექმნა"
 
@@ -1205,7 +1516,6 @@ msgid "Edit Managed Tag"
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete Idea"
 msgid "Delete Managed Tag"
 msgstr "იდეის წაშლა"
 
@@ -1219,20 +1529,25 @@ msgid "No Tag selected"
 msgstr ""
 
 #, fuzzy
-#| msgid "Approach"
 msgid "Approved"
 msgstr "მიახლოება"
+
+#, fuzzy
+#| msgid "Link label"
+msgid "Prefix label"
+msgstr "იარლიყის ბმული"
+
+msgid "The label that will be prepended before Managed Tags of this type, instead of `name`"
+msgstr ""
 
 msgid "Color"
 msgstr ""
 
 #, fuzzy
-#| msgid "Main background color (css hex value, with or without \"#\")"
 msgid "Optional color code (css hex value, with or without \"#\")"
 msgstr "ფონის ძირითადი ფერი (css hex value, with or without \"#\")"
 
 #, fuzzy
-#| msgid "Parent Group"
 msgid "Paired Group"
 msgstr "მშობლის ჯგუფი"
 
@@ -1240,7 +1555,6 @@ msgid "A paired group will automatically be joined by all users assigned to this
 msgstr ""
 
 #, fuzzy
-#| msgid "Search in teams"
 msgid "Search Synonyms"
 msgstr "ძიება საგნებში"
 
@@ -1371,6 +1685,9 @@ msgstr "მოწონებული"
 msgid "Following"
 msgstr "მომდევნო"
 
+msgid "Starred"
+msgstr ""
+
 msgid "Text Editor"
 msgstr "ტექსტის რედაქტორი"
 
@@ -1409,6 +1726,87 @@ msgstr "ამ განცხადების ძირითადი ტე
 
 msgid "Raw HTML for this announcement."
 msgstr "ამ განცხადების ნედლი HTML."
+
+msgid "Dry run in progress"
+msgstr ""
+
+msgid "Dry run finished, errors in CSV that prevent import"
+msgstr ""
+
+msgid "Dry run finished, waiting to start import"
+msgstr ""
+
+msgid "Import running"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sort field"
+msgid "Import finished"
+msgstr "დახარისხების ველი"
+
+#, fuzzy
+#| msgid "Sort field"
+msgid "Import failed"
+msgstr "დახარისხების ველი"
+
+msgid "Import archived"
+msgstr ""
+
+#, fuzzy
+msgid "Import state"
+msgstr "შეტყობინებები"
+
+#, fuzzy
+msgid "Import Data"
+msgstr "შეტყობინებები"
+
+msgid "Import Report HTML"
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus project"
+msgid "Cosinnus User Import"
+msgstr "კოსინუს პროექტი"
+
+#, fuzzy
+#| msgid "Cosinnus projects"
+msgid "Cosinnus User Imports"
+msgstr "კოსინუს პროექტები"
+
+#, python-format
+msgid "CSV row did not contain data for required columns: \"%(fields)s\""
+msgstr ""
+
+msgid "Import for a user item has failed, cancelling the import process! TODO: has data been written?"
+msgstr ""
+
+msgid "Total Items"
+msgstr ""
+
+msgid "Items for Import"
+msgstr ""
+
+msgid "Ignored/Failed Items"
+msgstr ""
+
+msgid "An unexpected system error has occured while processing the data. This should not have happened. Please contact the support! Technical Details follow:"
+msgstr ""
+
+#, fuzzy
+#| msgid "This email address already has a registered user!"
+msgid "The email-address already has an existing user account in the system!"
+msgstr "აღნიშნული ელ-ფოსტით მომხმარებელი უკვე დარეგისტრირებულია !"
+
+msgid "The email-address is duplicated and already contained in the CSV!"
+msgstr ""
+
+msgid "The email address was not a valid email address!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete user account"
+msgid "New user account: "
+msgstr "მომხმარებლის ანგარიშის წაშლა"
 
 msgid "Create-Project or Group Button"
 msgstr "პროექტის ან ჯგუფის ღილაკის შექმნა"
@@ -1718,23 +2116,307 @@ msgstr "არ არის ინფორმაციები"
 msgid "Back to Project Overview"
 msgstr "პროექტის მიმოხილვაზე დაბრუნება"
 
+msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
+msgstr ""
+
 msgid "Administration"
 msgstr "ადმინისტრაცია"
 
 msgid "Select a page on the left side."
 msgstr "მარცხენა მხარეს გვერდის მონიშვნა."
 
-msgid "Simple Statistics"
-msgstr "უბრალო სტატისტიკა"
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
 
-msgid "User Welcome Email"
-msgstr "მომხმარებლის მისასალმებელი ელ-ფოსტა"
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+#| msgid "View on page"
+msgid "View Upcoming"
+msgstr "გვერდზე ნახვა"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+#| msgid "View Project"
+msgid "View Past"
+msgstr "პროექტის ნახვა"
+
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Portal Setting"
+msgstr "პირადი პარამეტრები"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "Is premium"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+#| msgid "Start date."
+msgid "Start"
+msgstr "საწყისი თარიღი."
+
+#, fuzzy
+#| msgid "Join now!"
+msgid "running now!"
+msgstr "ჩაერთეთ ახლა!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Room"
+msgstr "გუნდის ტიპიდან"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "ღონისძება"
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no items to show."
+msgstr "საგნები ჯერ არ არის"
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+#, fuzzy
+#| msgid "Not assigned"
+msgid "Not set"
+msgstr "არ არის დალაგებული"
+
+msgid "Newsletters"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create User"
+msgid "Update Newsletter"
+msgstr "მომხმარებლის შექმნა"
+
+#, fuzzy
+#| msgid "Create User"
+msgid "Create Newsletter"
+msgstr "მომხმარებლის შექმნა"
+
+msgid "Recipients"
+msgstr ""
+
+#, python-format
+msgid "With the current selection the newsletter will be sent to %(counter)s recipients."
+msgid_plural "With the current selection the newsletter will be sent to %(counter)s recipients."
+msgstr[0] ""
+
+msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to send the newsletter?"
+msgstr "ნამდვილად გსურთ დატოვოთ  „%(title)s“?"
+
+msgid "Send newsletter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Send Newsletter"
+msgstr "მომხმარებლის დამატება"
+
+msgid "User Management"
+msgstr ""
+
+msgid "User Import"
+msgstr ""
+
+msgid "User Profile Field Choices"
+msgstr ""
 
 msgid "User Dashboard Announcements"
 msgstr "მომხმარებლის ხელსაწყოთა პანელის განცხადება"
 
+msgid "User Welcome Email"
+msgstr "მომხმარებლის მისასალმებელი ელ-ფოსტა"
+
+msgid "Simple Statistics"
+msgstr "უბრალო სტატისტიკა"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
 msgid "Edit"
 msgstr "რედაქტირება"
+
+msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+msgctxt "subject of an E-Mail"
+msgid "Subject"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+#, fuzzy
+#| msgid "Currently set Welcome-Email Text"
+msgid "Currently set Email Text"
+msgstr "ამჟამად დაყენებული მისასალმებელი ელ-ფოსტის ტექსტი"
+
+msgid "Send yourself a Test-Mail"
+msgstr "საკუთარი თავისთვის ტესტური ელ-ფოსტის გაგზავნა"
+
+msgid "Copy this newsletter"
+msgstr ""
+
+msgid "Save draft"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Sent at:"
+msgstr ""
+
+msgid "This newsletter has not been sent"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no newsletters yet."
+msgstr "საგნები ჯერ არ არის"
+
+#, fuzzy
+#| msgid "Add user"
+msgid "Add newsletter"
+msgstr "მომხმარებლის დამატება"
+
+#, fuzzy
+#| msgid "Create User"
+msgid "Create new User"
+msgstr "მომხმარებლის შექმნა"
+
+#, fuzzy
+#| msgid "First name"
+msgid "Firstname"
+msgstr "სახელი"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "Lastname"
+msgstr "გვარი"
+
+msgid "Save"
+msgstr "შენახვა"
+
+#, fuzzy
+#| msgid "Administration"
+msgid "User Administration"
+msgstr "ადმინისტრაცია"
+
+msgid "send login token to all inactive users"
+msgstr ""
+
+msgid "Search for email, firstname or lastname"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search"
+msgid "search"
+msgstr "ძიება"
+
+#, python-format
+msgid ""
+"\n"
+"                Found %(total)s user with an email that contains: '%(search_string)s'\n"
+"                "
+msgid_plural ""
+"\n"
+"                Found %(total)s users with an email that contains: '%(search_string)s'\n"
+"                "
+msgstr[0] ""
+
+msgid "clear search"
+msgstr ""
+
+#, fuzzy
+#| msgid "Login"
+msgid "Last Login"
+msgstr "შესვლა"
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "User token"
+msgstr "შეიყვანეთ ტოკენი:"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "Account deactivated"
+msgstr "დეაქტივაცია"
+
+#, fuzzy
+#| msgid "Resend invitation"
+msgid "Resend login token"
+msgstr "მოწვევის ხელახლა გაგზავნა"
+
+msgid "Send login token"
+msgstr ""
+
+msgid "Last sent on: "
+msgstr ""
+
+#, python-format
+msgid "Could not find any users with an email that contains '%(search_string)s.'"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no users yet."
+msgstr "საგნები ჯერ არ არის"
+
+#, fuzzy
+#| msgid "first name"
+msgid "to first page"
+msgstr "სახელი"
+
+msgid "previous"
+msgstr "წინა"
+
+msgid "next"
+msgstr "შემდეგი"
+
+msgid "Add user"
+msgstr "მომხმარებლის დამატება"
+
+#, fuzzy
+#| msgid "Create User"
+msgid "Update User"
+msgstr "მომხმარებლის შექმნა"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "შეცდომა დაფიქსირდა ერთ-ერთ გრაფაში, რომელშიც ინფორმაცია შეიყვანეთ. გთხოვთ შეასწოროთ შენახვამდე!"
@@ -1742,27 +2424,19 @@ msgstr "შეცდომა დაფიქსირდა ერთ-ერთ
 msgid "You may use the following variables:"
 msgstr "თქვენ შეგიძლიათ გამოიყენოთ შემდეგი ცვლადები:"
 
-msgid "Save"
-msgstr "შენახვა"
-
 msgid "Currently set Welcome-Email Text"
 msgstr "ამჟამად დაყენებული მისასალმებელი ელ-ფოსტის ტექსტი"
-
-msgid "Send yourself a Test-Mail"
-msgstr "საკუთარი თავისთვის ტესტური ელ-ფოსტის გაგზავნა"
-
-#, fuzzy
-#| msgid "Video Conference Server"
-msgid "Conference Page"
-msgstr "ვიდეო კონფერენციის სერვერი"
-
-msgid "Conference Management"
-msgstr ""
 
 msgid "Conference Room Management"
 msgstr ""
 
 msgid "Conference Event Management"
+msgstr ""
+
+msgid "Edit Conditions of Participation"
+msgstr ""
+
+msgid "Manage Participation Applications"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -2008,8 +2682,6 @@ msgid "helptext_13_groupadministration"
 msgstr "helptext_13_groupadministration"
 
 #, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_13_groupadministration"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
 msgstr "helptext_13_groupadministration"
@@ -2060,6 +2732,486 @@ msgstr "ჩემს პროექტებში ჩვენება..."
 msgid "Disable editor"
 msgstr "გამორთეთ რედაქტორი"
 
+#, fuzzy
+#| msgid "Current Members"
+msgid "Current File"
+msgstr "მიმდინარე წევრები"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application"
+msgstr "განცხადების სახელი"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Apply for participation in"
+msgstr "განცხადების სახელი"
+
+msgid "Edit your application for"
+msgstr ""
+
+msgid "Please fill out the fields below to submit your application. Be aware that the organizers may take your profile into consideration when processing your application, so make sure that your profile page is well maintained. You can view and edit your profile page here:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Your Profile"
+msgid "Your profile"
+msgstr "თქვენი პროფილი"
+
+msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
+msgstr ""
+
+msgid "Please provide your motivation for applying"
+msgstr ""
+
+msgid "Describe why you wish to participate"
+msgstr ""
+
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Optional contact information"
+msgstr "საკონტაქტო ინფორმაცია"
+
+msgid "We recommend you to provide at least one contact option for the organizers to contact you directly. This information can be seen by all organizers of the conference."
+msgstr ""
+
+msgid "Contact Phone Number"
+msgstr ""
+
+msgid "Workshop"
+msgstr ""
+
+msgid "My individual needs"
+msgstr ""
+
+msgid "(no options chosen)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application conditions"
+msgstr "განცხადების სახელი"
+
+#, fuzzy
+msgid "Download the conditions"
+msgstr "უბრალო სტატისტიკა"
+
+msgid "I accept the conditions in order to submit my application"
+msgstr ""
+
+msgid "Save changes"
+msgstr ""
+
+msgid "Apply for conference participation"
+msgstr ""
+
+msgid "Withdraw"
+msgstr "გამოთხოვა"
+
+#, fuzzy
+msgid "Conference Applications"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "Manage participation applications"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no invitations."
+msgid "There are no participation applications yet."
+msgstr "მოწვევები არ არის."
+
+msgid "Here you and all other organizers can process all applications. Check each application carefully and select your choice of whether to decline or accept an application or put it on the wait list. You may add a reason for waitlisted or declined applications that will be shown to the applicant."
+msgstr ""
+
+msgid "Once you are done, click \"Save\" on the bottom of the page. All applicants will receive an on-site notification and an e-mail (depending on their e-mail notification settings)."
+msgstr ""
+
+msgid "Accepted applicants will be granted membership status of the conference and they can enter the conference area immediately."
+msgstr ""
+
+msgid "If you have changed your mind for some applications later on, you can simply select a different option for those you want to change, and click \"Save\" again. Only the applicants whose application status changed will be notified of the change."
+msgstr ""
+
+msgid "You may also leave some applications unselected at first and process them at a later time."
+msgstr ""
+
+msgid "The maximum number of participants is "
+msgstr ""
+
+#, python-format
+msgid " 1 place left "
+msgid_plural " %(counter)s places left "
+msgstr[0] ""
+
+msgid "Collapse all processed applications"
+msgstr ""
+
+#, fuzzy
+msgid "not specified"
+msgstr "არააქტიური"
+
+#, fuzzy
+#| msgid "Show more options..."
+msgid "show more ..."
+msgstr "დამატებითი არჩევანის ჩვენება..."
+
+msgid "Reason for rejection"
+msgstr ""
+
+#, fuzzy
+#| msgctxt "written next to optional form fields"
+#| msgid "optional"
+msgid "optional"
+msgstr "ნებაყოფლობითი"
+
+#, fuzzy
+#| msgid "First name"
+msgid "First Choice"
+msgstr "სახელი"
+
+msgid "Second Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application submitted"
+msgstr "განცხადების სახელი"
+
+msgid "Workshop Assignments"
+msgstr ""
+
+msgid "Choose users to assign to this workshop"
+msgstr ""
+
+msgid "List of Applicants"
+msgstr ""
+
+msgid "Here you can configure the application form that participants have to fill out in order to apply."
+msgstr ""
+
+#, python-format
+msgid "You and all other organizers can process the applications in the \"%(application_management_label)s\" section. You can do this even while applications are still open."
+msgstr ""
+
+#, python-format
+msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
+msgstr ""
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Application period"
+msgstr "განცხადების სახელი"
+
+msgid "From"
+msgstr "დან"
+
+msgid "Date"
+msgstr "თარიღი"
+
+msgid "Start date."
+msgstr "საწყისი თარიღი."
+
+msgid "Until"
+msgstr "მდე"
+
+msgid "End date."
+msgstr "დასასრული."
+
+msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
+msgstr ""
+
+msgid "Maximal Number of participants"
+msgstr ""
+
+msgid "This is not an enforced limit and serves only as a display for guests."
+msgstr ""
+
+msgid "(no limit selected)"
+msgstr ""
+
+msgid "Require applicants to submit a text about their motivation for applying"
+msgstr ""
+
+msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+msgstr ""
+
+#, python-format
+msgid "Only applicable if \"%(other_option)s\" is enabled."
+msgstr ""
+
+msgid "Enter text to pre-fill or leave empty"
+msgstr ""
+
+msgid "Options for participation"
+msgstr ""
+
+msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
+msgstr ""
+
+msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
+msgstr ""
+
+msgid "Conditions for participation"
+msgstr ""
+
+msgid "If set, applicants will have to agree to these conditions by checking a checkbox"
+msgstr ""
+
+msgid "(no conditions selected)"
+msgstr ""
+
+msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
+msgstr ""
+
+#, fuzzy
+msgid "Conference reminders"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
+msgstr ""
+
+msgid "Send 1 week before conference"
+msgstr ""
+
+#, python-format
+msgid "Status info: sent %(sent_date)s"
+msgstr ""
+
+msgid "This e-mail will be sent out 7 days before and at the same time of day as the conference start date."
+msgstr ""
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Invitation subject"
+msgstr "მოწვევები"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Invitation text"
+msgstr "მოწვევები"
+
+msgid "Send test to myself"
+msgstr ""
+
+msgid "Send 1 day before conference"
+msgstr ""
+
+msgid "This e-mail will be sent out 24 hours before the conference start date."
+msgstr ""
+
+msgid "Send 1 hour before conference"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgid "Edit Room “%(title)s”"
+msgstr "“%(team_name)s-ის” რედაქტირება"
+
+#, fuzzy
+#| msgid "Create"
+msgid "Create Room"
+msgstr "შექმნა"
+
+#, fuzzy
+#| msgid "Edit Group"
+msgid "Edit Room"
+msgstr "ჯგუფის რედაქტირება"
+
+#, fuzzy
+msgid "Room type"
+msgstr "გუნდის ტიპიდან"
+
+msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
+msgstr ""
+
+msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgstr ""
+
+msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
+msgstr ""
+
+msgid "In Discussions each event has a video conference. Presenters are allowed to moderate those. Differs from \"Workshops\" only by the design in the agenda. Workshop: tiles, discussion: list."
+msgstr ""
+
+msgid "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
+msgstr ""
+
+msgid "Include a project that you use for documentation purposes. Click the link below to add a project to the conference first, if you haven't already."
+msgstr ""
+
+msgid "Add project"
+msgstr "პროექტების დამატება"
+
+msgid "Shows a list of all participants."
+msgstr ""
+
+msgid "How many participants should can join one coffee table before it is full"
+msgstr ""
+
+msgid "Attention: The visible update of the free seats is still work in progress. Therefore, we recommend not to use the limitation of individual coffee tables, so as not to let the virtual coffee go cold while searching for free seats."
+msgstr ""
+
+msgid "Choose one of the sub-projects of this group to display as nested results-project for participants"
+msgstr ""
+
+#, fuzzy
+msgid "Sort index"
+msgstr "დახარისხების ველი"
+
+msgid "Number by which rooms are sorted in ascending order in the conference room navigation list"
+msgstr ""
+
+#, fuzzy
+#| msgid "Short Description (optional). Will be shown on the token page."
+msgid "A short description or topic for your room. Will be shown on top of the room page."
+msgstr "მოკლე აღწერა (არასავალდებულო). ნაჩვენების იქნება ტოკენის გვერდზე."
+
+msgid "Room is visible"
+msgstr ""
+
+msgid "Uncheck this to hide the room for participants (you will still be able to see it)"
+msgstr ""
+
+msgid "Check this to show rocket chat in the sidebar."
+msgstr ""
+
+msgid "Go to Room"
+msgstr ""
+
+msgid "hidden"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Create Conference Event"
+msgstr "ღონისძიების შექმნა"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete announcement \"%(title)s\"?"
+msgid "Do you really want to delete room \"%(title)s\"?"
+msgstr "ნამდვილად გსურთ წაშალოთ განცხადება „%(title)s“?"
+
+#, fuzzy
+#| msgid "Delete Profile"
+msgid "Delete room"
+msgstr "პროფილის წაშლა"
+
+msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Bookings"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
+msgstr ""
+
+msgid "You can directly create conference events for rooms from here by using the controls for each room's dropdown menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no rooms yet."
+msgstr "საგნები ჯერ არ არის"
+
+msgid "Conference Management"
+msgstr ""
+
+msgid "Conference is running"
+msgstr ""
+
+#, fuzzy
+msgid "Conference is not running"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "Accounts from CSV Upload"
+msgstr ""
+
+#, fuzzy
+msgid "Upload Participants"
+msgstr "მონაწილეები"
+
+#, fuzzy
+msgid "last login"
+msgstr "განახლება"
+
+msgid "no login yet"
+msgstr ""
+
+msgid "Admin"
+msgstr "ადმინისტრატორი"
+
+msgid "Member"
+msgstr "წევრი"
+
+msgid "active"
+msgstr "აქტიური"
+
+#, fuzzy
+msgid "not active"
+msgstr "არააქტიური"
+
+msgid "User participates in the following workshops:"
+msgstr ""
+
+#, fuzzy
+msgid "deactivate member"
+msgstr "ჯგუფის აქტივაციის გაუქმება"
+
+#, fuzzy
+msgid "activate member"
+msgstr "წევრის მოწვევა"
+
+#, fuzzy
+msgid "remove user"
+msgstr "წევრის ამოშლა"
+
+#, fuzzy
+msgid "Do you really want to deactivate the member's user account ?"
+msgstr "ნამდვილად გსურთ მოწვევაზე უარის თქმა?"
+
+#, fuzzy
+msgid "Deactivate Member"
+msgstr "წევრისათვის უარის თქმა"
+
+#, fuzzy
+msgid "Do you really want to activate the member's user account ?"
+msgstr "ნამდვილად გსურთ მოწვევაზე უარის თქმა?"
+
+#, fuzzy
+msgid "Activate Member"
+msgstr "წევრისათვის დათანხმება"
+
+#, fuzzy
+msgid "Do you really want to remove the user?"
+msgstr "ნამდვილად გსურთ დატოვოთ  „%(title)s“?"
+
+#, fuzzy
+msgid "Remove User"
+msgstr "წევრის ამოშლა"
+
+#, fuzzy
+msgid "Finish conference and deactivate user accounts"
+msgstr "მომხმარებლის ანგარიშის წაშლა"
+
+#, fuzzy
+msgid "Start conference and activate user accounts"
+msgstr "მომხმარებლის ანგარიშის წაშლა"
+
+#, fuzzy
+msgid "Download Statistics"
+msgstr "უბრალო სტატისტიკა"
+
+#, fuzzy
+#| msgid "Accept User"
+msgid "Accept"
+msgstr "მომხმარებლის დათანხმება"
+
+#, fuzzy
+#| msgid "Decline User"
+msgid "Decline"
+msgstr "მომხმარებლის გაუქმება"
+
 msgid "Rearrange"
 msgstr "გადაწყობა"
 
@@ -2092,7 +3244,6 @@ msgid "get started here..."
 msgstr "დაწყება აქედან..."
 
 #, fuzzy
-#| msgid "Activate"
 msgid "Activate Cloud"
 msgstr "აქტივაცია"
 
@@ -2179,6 +3330,15 @@ msgstr "აღწერა არ არის დამატებული"
 msgid "more"
 msgstr "მეტი"
 
+msgid "Change User Profile Field Choices"
+msgstr ""
+
+msgid "Enter your choices as semicolon separated values"
+msgstr ""
+
+msgid "Enter your choices"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr "დამამცირებელი შინაარსის გამოვლენა"
@@ -2224,39 +3384,72 @@ msgid "Choose and upload a gallery image"
 msgstr "აარჩიეთ და ატვირთეთ ალბომის გამოსახულება"
 
 #, fuzzy
-#| msgid "Example: http://mywebsite.com"
 msgid "Example: https://twitter.com/myaccount"
 msgstr "მაგალითი: http://mywebsite.com"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Website"
 msgid "website"
 msgstr "ვებ-საიტი"
 
-msgid "Re-Activate Project/Group"
-msgstr "პროექტის/ჯგუფის ხელახლა აქტივაცია"
+msgid "indicates a mandatory field"
+msgstr ""
 
-msgid "Deactivate Project/Group"
-msgstr "პროექტის/ჯგუფის დეაქტივაცია"
+msgid "This is the current address"
+msgstr ""
 
-msgid "Deactivated Projects and Groups"
-msgstr "პროექტები და ჯგუფები დეაქტივირირებულია"
+#, fuzzy
+#| msgid "email address"
+msgid "Remove this Address"
+msgstr "ელ-ფოსტის მისამართი"
+
+#, fuzzy
+#| msgid "E-Mail Addresses"
+msgid "Add an Address"
+msgstr "ელ-ფოსტის მისამართები"
+
+msgid "Maximum Number of Participants"
+msgstr ""
+
+#, fuzzy
+#| msgid "About the Project"
+msgid "About the conference"
+msgstr "პროექტის შესახებ"
+
+msgctxt "time"
+msgid "o'clock"
+msgstr ""
+
+#, fuzzy
+#| msgid "Until"
+msgctxt "time"
+msgid "until"
+msgstr "მდე"
+
+#, fuzzy
+#| msgid "No info."
+msgid "More infos..."
+msgstr "არ არის ინფორმაცია."
+
+#, fuzzy
+#| msgid "You will now receive notifications for content posted in this project."
+msgid "You will now receive notifications for content posted in this conference."
+msgstr "თქვენ მიიღებთ შეტყობინებებს ამ პროექტში არსებული კონტენტის შესახებ."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact"
+msgstr "კონტაქტი"
+
+msgid "No contact data has been added yet."
+msgstr "საკონტაქტო ბაზა ჯერ დამატებული არ არის."
+
+#, fuzzy
+#| msgid "Protected Content"
+msgid "Your Deactivated Content"
+msgstr "დაცული კონტენტი"
 
 msgid "Warning!"
 msgstr "გაფრთხილება!"
-
-msgid "You are about to deactivate this project/group!"
-msgstr "თქვენ ამჟამად ახორციელებთ პროექტის/ჯგუფის დეაქტივაციას!"
-
-msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
-msgstr "თქვენ ამჟამად ახორციელებთ პროექტის/ჯგუფის ხელახლა აქტივაცია. ის და ყველა ინფორმაცია მის შიგნით ვებ-საიტზე თავიდან გამოჩნდება."
-
-msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "თქვენ ამჟამად ახროციელებთ პროექტის/ჯგუფის დეაქტივაციას. ის და მასში არსებული ყველა ინფორმაცია აღარ გამოჩნდება ვებ-საიტზე, არც თქვენთვის და არც სხვებისათვის."
-
-msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-msgstr "ეს პროცესი შესაძლოა რევერსირდეს. თქვენ შეგიძლიათ ნებისმიერ დროს ხელახლა მოახდინოთ პროექტის/ჯგუფის აქტივაცია თქვენივე მომხმარებლის ანგარიშიდან."
 
 msgid "Re-Activate"
 msgstr "ხელახლა აქტივაცია"
@@ -2274,6 +3467,40 @@ msgstr "დარწმუნებული ხართ, რომ გსუ�
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s -წევრები"
+
+msgid "Membership requests"
+msgstr "მოთხოვნა წევრობაზე"
+
+msgid "Please manage participation applications via the applications page. You can disable the participation management in the conference settings."
+msgstr ""
+
+#, fuzzy
+#| msgid "My location"
+msgid "Manage applications"
+msgstr "ჩემი ლოკაცია"
+
+msgid "Invite members of groups/projects to apply..."
+msgstr ""
+
+#, fuzzy
+#| msgid "Shown in my projects..."
+msgid "Select one or more groups/projects..."
+msgstr "ჩემს პროექტებში არის ნაჩვენები..."
+
+#, fuzzy
+#| msgid "Invited Groups"
+msgid "Invite groups"
+msgstr "მოწვეული ჯგუფები"
+
+#, fuzzy
+#| msgid "Invited to be a member"
+msgid "Invited group/project members"
+msgstr "მოწვეულ იქნა წევრობაზე"
+
+#, fuzzy
+#| msgid "Invite registered users..."
+msgid "Invite registered users to apply..."
+msgstr "დარეგისტრირებული მომხმარებლების მოწვევა..."
 
 msgid "Invite registered users..."
 msgstr "დარეგისტრირებული მომხმარებლების მოწვევა..."
@@ -2315,6 +3542,11 @@ msgstr "ნამდვილად გსურთ მოწვევაზე 
 msgid "There are no pending invitations."
 msgstr "მიმდინარე მოწვევები არ არსებობს."
 
+#, fuzzy
+#| msgid "Invite unregistered users..."
+msgid "Invite unregistered users to apply..."
+msgstr "არარეგისტრირებული მომხმარებლების მოწვევა..."
+
 msgid "Invite unregistered users..."
 msgstr "არარეგისტრირებული მომხმარებლების მოწვევა..."
 
@@ -2346,9 +3578,6 @@ msgstr "მიერ"
 #, python-format
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "ნამდვილად გსურთ რომ წაშალოთ მოწვევა \"%(title)s\"-თვის?"
-
-msgid "Membership requests"
-msgstr "მოთხოვნა წევრობაზე"
 
 msgid "Decline User"
 msgstr "მომხმარებლის გაუქმება"
@@ -2386,11 +3615,10 @@ msgstr "ყველა წევრის შეტყობინება"
 msgid "Send Message"
 msgstr "შეტყობინების გაგზავნა"
 
-msgid "Admin"
-msgstr "ადმინისტრატორი"
-
-msgid "Member"
-msgstr "წევრი"
+#, fuzzy
+#| msgid "This account is inactive."
+msgid "User account inactive"
+msgstr "ეს ანგარიში არ არის აქტიური."
 
 msgid "Kick"
 msgstr "გამოგდება"
@@ -2446,14 +3674,6 @@ msgstr "გადაცემა"
 msgid "Edit “%(team_name)s”"
 msgstr "“%(team_name)s-ის” რედაქტირება"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Create Group"
-msgstr "ჯგუფის შექმნა"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Create Project"
-msgstr "პროექტის შექმნა"
-
 msgid "Help about groups"
 msgstr "ჯგუფების შესახებ დახმარება"
 
@@ -2462,12 +3682,6 @@ msgstr "პროექტების შესახებ დახმარ�
 
 msgid "Help about the microsite"
 msgstr "მიკრო საიტების შესახებ დახმარება"
-
-msgid "Edit Group"
-msgstr "ჯგუფის რედაქტირება"
-
-msgid "Edit Project"
-msgstr "პროექტის რედაქტირება"
 
 msgid "Let's bring this idea to life!"
 msgstr "მოიყვანეთ ეს იდეა სისრულეში!"
@@ -2488,22 +3702,40 @@ msgstr "რა თქმა უნდა თქვენ შეგიძლი�
 msgid "Facebook-Integration"
 msgstr "Facebook-თან გაერთიანება"
 
+msgid "After you have created the conference, you can create conference rooms and events."
+msgstr ""
+
+msgid "Conference start and end date and time"
+msgstr ""
+
+msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
+msgstr ""
+
+msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
+msgstr ""
+
+msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
+msgstr ""
+
+msgid "In which projects' or groups' calendars should the conference be shown?"
+msgstr ""
+
 #, fuzzy
-#| msgid "Video Conference Server"
-msgid "Conference Settings"
-msgstr "ვიდეო კონფერენციის სერვერი"
+#| msgid "Select related Projects/Groups"
+msgid "Select Projects/Groups"
+msgstr "მონიშნეთ შესაბამისი პროექტები/ჯგუფები"
 
-msgid "Group name"
-msgstr "ჯგუფის სახელი"
+msgid "Description and Infos"
+msgstr "აღწერა და ინფორმაცია"
 
-msgid "Project name"
-msgstr "პროექტის სახელი"
+msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
+msgstr "ეს არის საჯარო აღწერა, რომელიც ხილული იქნება ყველასთვის და ნაჩვენები იქნება მიკრო საიტზე."
 
-msgid "Enter a name for the group."
-msgstr "შეიყვანეთ ჯგუფის სახელი."
+msgid "Contact info"
+msgstr "საკონტაქტო ინფორმაცია"
 
-msgid "Enter a name for the project."
-msgstr "შეიყვანეთ პროექტის სახელი."
+msgid "How you can be reached, addresses, social media, etc..."
+msgstr "როგორ შეიძლება თქვენთან დაკავშირება, მისამართები, სოციალური მედია და სხვ..."
 
 msgid "Short description"
 msgstr "მოკლე აღწერა"
@@ -2517,6 +3749,19 @@ msgstr "გააკეთეთ მოკლე აღწერა პროე
 msgid "This description will be publicly visible."
 msgstr "ეს აღწერა იქნება საჯარო."
 
+#, fuzzy
+msgid "Conference Theme Color"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "Hex code (example: #A2A2A2)"
+msgstr ""
+
+msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
+msgstr ""
+
+msgid "Icon"
+msgstr ""
+
 msgid "A picture for better recognition."
 msgstr "სურათი უკეთესი აღქმისათვის."
 
@@ -2526,11 +3771,19 @@ msgstr "ფაილის ზომა"
 msgid "max. 10 MB"
 msgstr "მაქს. 10 MB"
 
+#, fuzzy
+#| msgid "Header image"
+msgid "Banner Image"
+msgstr "თავსართის გამოსახულება"
+
 msgid "Upload an image."
 msgstr "გამოსახულების ატვირთვა."
 
 msgid "Reset"
 msgstr "გადატვირთვა"
+
+msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgstr ""
 
 msgid "Example: http://mywebsite.com"
 msgstr "მაგალითი: http://mywebsite.com"
@@ -2540,9 +3793,6 @@ msgstr ""
 
 msgid "Select sustainable development goals"
 msgstr ""
-
-msgid "Where are you active?"
-msgstr "სად ხართ აქტიური?"
 
 msgid "Remove location"
 msgstr "ლოკაციის ამოშლა"
@@ -2590,7 +3840,6 @@ msgid "Here you can control whether the publicly visible information about your 
 msgstr ""
 
 #, fuzzy
-#| msgid "This project will be set to be publicly visible!"
 msgid "This project shall be made publicly findable via other platforms."
 msgstr "ეს პროექტი ხილული იქნება საჯაროდ!"
 
@@ -2599,18 +3848,6 @@ msgstr "რომელი აპლიკაციები უნდა იქ
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "ეს აპლიკაცია შეიძლება გააქტიურდეს მხოლოდ ჯგუფისთვის და არა პროექტისთვის!"
-
-msgid "Description and Infos"
-msgstr "აღწერა და ინფორმაცია"
-
-msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
-msgstr "ეს არის საჯარო აღწერა, რომელიც ხილული იქნება ყველასთვის და ნაჩვენები იქნება მიკრო საიტზე."
-
-msgid "Contact info"
-msgstr "საკონტაქტო ინფორმაცია"
-
-msgid "How you can be reached, addresses, social media, etc..."
-msgstr "როგორ შეიძლება თქვენთან დაკავშირება, მისამართები, სოციალური მედია და სხვ..."
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "რომელი აპლიკაციებიდან იქნეს ნაჩვენები საჯარო საგნები მიკრო საიტზე?"
@@ -2687,17 +3924,6 @@ msgstr "პროექტის შექმნისთანავე, შე
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
 
-#, fuzzy
-#| msgid "Video Conference Server"
-msgid "Conference Theme Color"
-msgstr "ვიდეო კონფერენციის სერვერი"
-
-msgid "Hex code (example: #A2A2A2)"
-msgstr ""
-
-msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
 msgstr "მოწვევები"
@@ -2717,6 +3943,11 @@ msgstr "მიმოხილვა"
 msgid "To the Forum"
 msgstr "ფორუმზე"
 
+#, fuzzy
+#| msgid "Invite users"
+msgid "Invited to apply"
+msgstr "მომხმარებლების მოწევევა"
+
 msgctxt "Group"
 msgid "Public"
 msgstr "საჯარო"
@@ -2730,11 +3961,12 @@ msgstr "(არააქტიური)"
 msgid "Leave"
 msgstr "დატოვება"
 
-msgid "Withdraw"
-msgstr "გამოთხოვა"
-
 msgid "Details"
 msgstr "დეტალები"
+
+#, fuzzy
+msgid "Apply for Participation"
+msgstr "მონაწილეები"
 
 #, python-format
 msgid "Do you really want to leave „%(title)s“?"
@@ -2757,53 +3989,6 @@ msgstr "არ მოგწონთ თქვენი მიკრო სა�
 
 msgid "Change it here..."
 msgstr "შეცვალეთ ის აქ..."
-
-msgid "You have been invited to collaborate!"
-msgstr "თქვენ მოგიწვიეს თანამშრომლობისთვის!"
-
-msgid "Register and join!"
-msgstr "რეგისტრაცია და ჩართვა!"
-
-msgid "Join now and collaborate!"
-msgstr "ჩაერთეთ ახლა და ითანამშრომლეთ!"
-
-msgid "Register"
-msgstr "რეგისტრაცია"
-
-msgid "Log in"
-msgstr "შესვლა"
-
-msgid "You are a member!"
-msgstr "თქვენ ხართ წევრი!"
-
-msgid "View Project"
-msgstr "პროექტის ნახვა"
-
-msgid "View Group"
-msgstr "ჯგუფის ნახვა"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership request pending..."
-msgstr "წევრობაზე მოთხოვნა პროცესშია..."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "You are invited!"
-msgstr "თქვენ მოწვეული ხართ!"
-
-msgid "Collaborate!"
-msgstr "ითანამშრომლეთ!"
-
-msgid "Join now!"
-msgstr "ჩაერთეთ ახლა!"
-
-msgid "Browse"
-msgstr "დათვალიერება"
-
-msgid "Public Project"
-msgstr "საჯარო პროექტი"
-
-msgid "Public Group"
-msgstr "საჯარო ჯგუფი"
 
 msgid "News posts"
 msgstr "ახალი პოსტები"
@@ -2838,26 +4023,12 @@ msgid "Share on Facebook"
 msgstr "Facebook-ზე გაზიარება"
 
 #, fuzzy
-#| msgid "Share on Facebook"
 msgid "Share on Twitter"
 msgstr "Facebook-ზე გაზიარება"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Contact"
-msgstr "კონტაქტი"
-
-msgid "No contact data has been added yet."
-msgstr "საკონტაქტო ბაზა ჯერ დამატებული არ არის."
-
-msgid "Project Administrator"
-msgstr "პროექტის ადმინისტრატორი"
-
-msgid "Group Administrator"
-msgstr "ჯგუფის ადმინისტრატორი"
 
 msgid "Tweets"
 msgstr "Tweets"
@@ -2868,21 +4039,75 @@ msgstr "Flickr გალერეა"
 msgid "Call to Action"
 msgstr "Call to Action"
 
+msgid "Register and join!"
+msgstr "რეგისტრაცია და ჩართვა!"
+
+msgid "Register"
+msgstr "რეგისტრაცია"
+
+msgid "Log in"
+msgstr "შესვლა"
+
+msgid "You are a member!"
+msgstr "თქვენ ხართ წევრი!"
+
+msgid "View Project"
+msgstr "პროექტის ნახვა"
+
+msgid "View Group"
+msgstr "ჯგუფის ნახვა"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership request pending..."
+msgstr "წევრობაზე მოთხოვნა პროცესშია..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are invited!"
+msgstr "თქვენ მოწვეული ხართ!"
+
+msgid "Participation is open for everyone. You may instantly join and become a member."
+msgstr ""
+
+msgid "You may request to become a member and participate once your request has been accepted."
+msgstr ""
+
+msgid "Join now!"
+msgstr "ჩაერთეთ ახლა!"
+
+#, fuzzy
+#| msgid "Team membership"
+msgid "Request membership"
+msgstr "გუნდის წევრობა"
+
+#, fuzzy, python-format
+#| msgid "Do you wish to request to join „%(title)s“?"
+msgid "Do you wish to join „%(title)s“ now?"
+msgstr "გსურთ რომ მოითხოვოთ ,,%(title)s-სთან“ შეერთება?"
+
+msgid "Browse"
+msgstr "დათვალიერება"
+
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Register and apply!"
+msgstr "რეგისტრაცია და ჩართვა!"
+
+#, fuzzy
+#| msgid "You have been invited to collaborate!"
+msgid "You have been invited to apply!"
+msgstr "თქვენ მოგიწვიეს თანამშრომლობისთვის!"
+
+#, fuzzy
+#| msgid "Application name"
+msgid "Edit Application"
+msgstr "განცხადების სახელი"
+
 #, python-format
 msgid "Users in team %(group)s"
 msgstr "მომხმარებლები %(group)s -ის გუნდში"
 
-msgid "Add user"
-msgstr "მომხმარებლის დამატება"
-
 msgid "There are no visible users."
 msgstr "ხილული მომხმარებლები არ არსებობს."
-
-msgid "All projects"
-msgstr "ყველა პროექტი"
-
-msgid "All groups"
-msgstr "ყველა ჯგუფი"
 
 msgid "All users"
 msgstr "ყველა მომხმარებელი"
@@ -2890,144 +4115,107 @@ msgstr "ყველა მომხმარებელი"
 msgid "Portal Administrators"
 msgstr "პორტალის ადმინისტრატორები"
 
-msgid "All societies"
-msgstr "ყველა საზოგადოება"
+#, fuzzy
+msgid "All Conferences"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Groups"
+msgstr "ყველა ჯგუფი"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Projects"
+msgstr "ყველა პროექტი"
+
+msgid "Temporary User Accounts"
+msgstr ""
+
+msgid "Reminder emails"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Invitations"
 msgid "Organizations"
 msgstr "მოწვევები"
-
-msgid "Re-activate Group"
-msgstr "ჯგუფის ხელახლა გააქტიურება"
-
-msgid "Deactivate Group"
-msgstr "ჯგუფის აქტივაციის გაუქმება"
-
-msgid "Activate Project"
-msgstr "პროექტის აქტივაცია"
-
-msgid "Deactivate Project"
-msgstr "პროექტის აქტივაციის გაუქმენა"
 
 msgid "Withdraw Request"
 msgstr "მოთხოვნის გამოთხოვა"
 
 #, fuzzy, python-format
-#| msgid "%(team_name)s - Members"
 msgid "%(team_name)s - Assigned organizations"
 msgstr "%(team_name)s -წევრები"
 
 #, fuzzy
-#| msgid "Invitations"
 msgid "Assigned organizations"
 msgstr "მოწვევები"
 
 #, fuzzy
-#| msgid "Delete invitation"
 msgid "Request organizations..."
 msgstr "მოწვევის წაშლა"
 
 #, fuzzy
-#| msgid "Delete invitation"
 msgid "Request organization"
 msgstr "მოწვევის წაშლა"
 
 #, fuzzy
-#| msgid "Enter a user name or email to find users to invite..."
 msgid "Enter a name to find organizations to request..."
 msgstr "მომხმარებლის სახელის ან ელ-ფოსტის შეყვანა მომხმარებლის მოძებნისა და მოწვევისათვის."
 
 #, fuzzy
-#| msgid "Invitations"
 msgid "Request organizations"
 msgstr "მოწვევები"
 
 #, fuzzy
-#| msgid "Delete invitation"
 msgid "Requested organizations"
 msgstr "მოწვევის წაშლა"
 
 #, fuzzy
-#| msgctxt "withdraw join team button second item"
-#| msgid "Request"
 msgid "Revoke request"
 msgstr "მოთხოვნა"
 
 #, fuzzy
-#| msgid "Decline Member"
 msgid "Decline request"
 msgstr "წევრისათვის უარის თქმა"
 
 #, fuzzy
-#| msgid "Accept Member"
 msgid "Accept request"
 msgstr "წევრისათვის დათანხმება"
 
 #, fuzzy
-#| msgctxt "join request pending team button second item"
-#| msgid "Requested"
 msgid "Requested"
 msgstr "მოთხოვნილი"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
 msgid "Do you really want to revoke the request for „%(name)s“?"
 msgstr "ნამდვილად გსურთ მოწვევის გაუქმება წევრისათვის„%(name)s“?"
 
 #, fuzzy
-#| msgid "Search for Users"
 msgid "Revoke request for organization"
 msgstr "ძიება მომხმარებლებში"
 
 #, fuzzy
-#| msgid "Do you really want to decline the invitation?"
 msgid "Do you really want to decline the request?"
 msgstr "ნამდვილად გსურთ მოწვევაზე უარის თქმა?"
 
 #, fuzzy
-#| msgid "Invitations"
 msgid "Organization invitations"
 msgstr "მოწვევები"
 
 #, fuzzy
-#| msgid "Decline Invitation"
 msgid "Decline invitation"
 msgstr "მოწვევაზე უარის თქმა"
 
 #, fuzzy
-#| msgid "Invite"
 msgid "Invited"
 msgstr "მოწვევა"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to remove member „%(name)s“ from the team?"
 msgid "Do you really want to remove „%(name)s“ from the organization?"
 msgstr "ნამდვილად გსურთ წევრ „%(name)s-ის“ გუნდიდან ამოშლა?"
 
 #, fuzzy
-#| msgid "Remove location"
 msgid "Remove organization"
 msgstr "ლოკაციის ამოშლა"
-
-msgid "Workshop Participant File Upload"
-msgstr ""
-
-#, python-format
-msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr ""
-
-msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr ""
-
-msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr ""
-
-#, fuzzy
-#| msgid "Upload an image."
-msgid "Upload File"
-msgstr "გამოსახულების ატვირთვა."
 
 msgid "Add container"
 msgstr "Add container"
@@ -3134,6 +4322,45 @@ msgstr "ახალი საქაღალდის სახელი"
 msgid "Create folder"
 msgstr "ფაილის შექმნა"
 
+msgid ""
+"The conference [[name]] starts tomorrow.\n"
+"Start of the event is [[from_date]].\n"
+"\n"
+"Under the following link you can already get an overview of the conference events.\n"
+"\n"
+"Best regards,\n"
+"Your conference team"
+msgstr ""
+
+msgid "Conference starts tomorrow: [[name]]"
+msgstr ""
+
+msgid ""
+"The conference [[name]] starts soon.\n"
+"Start of the event is [[from_date]].\n"
+"\n"
+"Under the following link you can already get an overview of the conference events.\n"
+"\n"
+"Best regards,\n"
+"Your conference team"
+msgstr ""
+
+msgid "Conference starts soon: [[name]]"
+msgstr ""
+
+msgid ""
+"The conference [[name]] starts in a week.\n"
+"Start of the event is [[from_date]].\n"
+"\n"
+"Under the following link you can already get an overview of the conference events.\n"
+"\n"
+"Best regards,\n"
+"Your conference team"
+msgstr ""
+
+msgid "Conference starts next week: [[name]]"
+msgstr ""
+
 #, python-format
 msgid ""
 "%(site_name)s CSV import failed!\n"
@@ -3208,6 +4435,61 @@ msgstr ""
 #, python-format
 msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
 msgstr "შეურაცხმყოფელი საგანი იქნა გამოვლენილი: \"%(object_name)s-ის\" მიერ %(site_name)s-ზე!"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi %(user_name)s,\n"
+#| "\n"
+#| "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#| "\n"
+#| "You will need to verify your email %(user_email)s before you can log in. \n"
+#| "\n"
+#| "\n"
+#| "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#| "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#| "\n"
+#| "\n"
+#| "\n"
+#| "Thank you and see you soon!\n"
+#| "\n"
+#| "Your %(site_name)s Team"
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"an account was just created for you on %(site_name)s. We're happy to see you!\n"
+"\n"
+"In order to start using your account, you need to first set a password for it. Afterwards, you may log in using your email %(user_mail)s and the password you have set.\n"
+"\n"
+"\n"
+"Please click on the following link to set your initial password (or copy and paste the link it in your browser):\n"
+"%(domain_url)s%(verification_token)s\n"
+"\n"
+"\n"
+"Thank you and see you soon!\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"გამარჯობა %(user_name)s,\n"
+"\n"
+"თქვენ ახლახან შექმენით ანგარიში %(site_name)s-ზე. მოხარული ვართ გიხილოთ აქ! \n"
+"\n"
+"სისტემაში შესვლამდე, ჩვენ გვჭირდება დავადასტუროთ თქვენი ელ-ფოსტის- %(user_email)s ნამდვილობა. \n"
+"\n"
+"\n"
+"გთხოვთ დააკლიკოთ მოცემულ ბმულს ელ-ფოსტის მისამართის ნამდვილობის დასამოწმებლად (ან გადაიტანეთ ბმული თქვენს ბრაუზერში):\n"
+"\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
+"\n"
+"\n"
+"\n"
+"გმადლობთ და მომავალ შეხვედრამდე!\n"
+"\n"
+"თქვენი %(site_name)s-ის გუნდი"
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please set yout initial password for %(site_name)s!"
+msgstr "გთხოვთ დაადასტუროთ თქვენი ელ-ფოსტის მისამართის ნამდვილობა %(site_name)s-თვის!"
 
 #, python-format
 msgid ""
@@ -3680,20 +4962,12 @@ msgstr "მოწვეული ჯგუფები"
 msgid "My Groups"
 msgstr "ჩემი ჯგუფები"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Groups"
-msgstr "ყველა ჯგუფი"
-
 msgid "Invited Projects"
 msgstr "მოწვეული პროექტები"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
 msgstr "ჩემი პროექტები"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "All Projects"
-msgstr "ყველა პროექტი"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas"
@@ -3760,12 +5034,10 @@ msgid "In order to use your %(portal_name)s account to login to another platform
 msgstr ""
 
 #, fuzzy
-#| msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
 msgstr "მომხმარებელი \"%(user)s\" წარმატებით იქნა დარეგისტრირებული. ამ ანგარიშის დადასტურება შესვლამდე უნდა მოხდეს. როდესაც ეს მოხდება, ჩვენ გამოგიგზავნით ელ-ფოსტის მისამართს \"%(email)s\"."
 
 #, fuzzy
-#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
 msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 msgstr "მომხმარებელი \"%(user)s\" წარმატებით დარეგისტრირდა. მალე, ჩვენ გამოგიგზავნით ელ-ფოსტას თქვენს მისამართზე ''%(email)s\". თქვენ უნდა დაადასტუროთ ელ-ფოსტის მისამართი შესვლამდე."
 
@@ -3773,8 +5045,6 @@ msgid "Password"
 msgstr "პაროლი"
 
 #, fuzzy, python-format
-#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-#| msgid "to %(portal_name)s"
 msgid "Log in with %(portal_name)s"
 msgstr "%(portal_name)s-ზე"
 
@@ -3864,10 +5134,17 @@ msgstr "პაროლის ბმული არასწორია. ს�
 msgid "Password reset successful"
 msgstr "პაროლის გადაყენება წარმატებით განხორციელდა"
 
-msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
-msgstr "ჩვენ გამოვაგზავნეთ ინსტრუქცია თქვენი პაროლის დასაყენებლად, რომელსაც მალე მიიღებთ."
+#, fuzzy
+#| msgid "Password reset complete"
+msgid "Password reset request received."
+msgstr "პაროლის გადაყენება დასრულებულია"
 
-msgid "If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder."
+msgid "If there is an account registered with the email address you entered, we will email you instructions for resetting the account password shortly."
+msgstr ""
+
+#, fuzzy
+#| msgid "If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder."
+msgid "If you don't receive an email, please make sure you entered the correct email address associated with your account, and check your spam folder."
 msgstr "თუ არ მიიღებთ შეტყობინებას, გთხოვთ, დარწმუნდეთ, რომ თქვენ შეიყვანეთ ის მისამართი, რომლითაც დარეგისტრირებული ხართ და ასევე, შეამოწმოთ Spam- ის საქაღალდე."
 
 #, python-format
@@ -3883,14 +5160,49 @@ msgstr "თქვენი მომხმარებლის სახელ�
 msgid "Thanks for using our site!"
 msgstr "მადლობას გიხდით ჩვენი საიტით სარგებლობისათვის!"
 
-msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
+#, fuzzy
+#| msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
+msgid "Forgotten your password? Enter your account's email address below, and we'll email instructions for setting a new one."
 msgstr "დაგავიწყდათ პაროლი? გთხოვთ, ქვემოთ შეიყვანოთ ელ-ფოსტის მისამართი, და ჩვენ გამოგიგზავნით ინსტრუქციას ახლის დასაყენებლად."
 
-msgid "The email you used to register your account. This is the one you receive email notifications on"
+#, fuzzy
+#| msgid "The email you used to register your account. This is the one you receive email notifications on"
+msgid "The email associated with your account. This should the email address you receive email notifications on."
 msgstr "ელ-ფოსტა, რომელიც გამოიყენეთ ანგარიშის დასარეგისტრირებელად, ასევე გამოყენებულ იქნება შეტყობინებების მისაღებად"
 
 msgid "Example: mymail@example.com"
 msgstr "მაგალითი: mymail@example.com"
+
+#, fuzzy
+#| msgid "Reset password"
+msgid "Set your password"
+msgstr "პაროლის გადაყენება"
+
+msgid "Set a password to start using your account"
+msgstr ""
+
+msgid "Before you begin using your account, you first need to set a password. Afterwards, you may log in using this password and your e-mail address."
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter new password"
+msgid "Enter a password"
+msgstr "შეიყვანეთ ახალი პაროლი"
+
+#, fuzzy
+#| msgid "Repeat your password just to make sure"
+msgid "Repeat the password just to make sure"
+msgstr "გაიმეორეთ პაროლი უკეთ დარწმუნებისათვის"
+
+#, fuzzy
+#| msgid "Repeat new Password"
+msgid "Repeat the Password"
+msgstr "გაიმეორეთ პაროლი"
+
+#, fuzzy
+#| msgid "Change my password"
+msgid "Set my password"
+msgstr "შეცვალეთ პაროლი"
 
 msgid "Sign up"
 msgstr "დარეგისტრირება"
@@ -3977,12 +5289,10 @@ msgid "To search for Cloud files, please visit the Cloud app and use the integra
 msgstr ""
 
 #, fuzzy
-#| msgid "Search in teams"
 msgid "Searching in Cloud files"
 msgstr "ძიება საგნებში"
 
 #, fuzzy
-#| msgid "Search in teams"
 msgid "Search in Cloud files"
 msgstr "ძიება საგნებში"
 
@@ -4028,17 +5338,10 @@ msgstr "ან"
 msgid "We could not find any results matching your search query."
 msgstr "ჩვენ ვერ ვნახეთ ვერცერთი დაკავშირებული შედეგი თქვენი გამოკითხვისთვის."
 
-msgid "previous"
-msgstr "წინა"
-
-msgid "next"
-msgstr "შემდეგი"
-
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "შეიყვანეთ ერთი ან მეტი საძიებო ტერმინი ან შეარჩიეთ საძიებო თემა."
 
 #, fuzzy
-#| msgid "Download"
 msgid "CSV Downloads"
 msgstr "გადმოწერა"
 
@@ -4051,29 +5354,17 @@ msgstr ""
 msgid "User statistics (min 1x logged in)"
 msgstr ""
 
+msgid "BBB Room Visits"
+msgstr ""
+
 msgid "E-Mails of all newsletter subcribers"
 msgstr ""
 
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Date"
-msgstr "თარიღი"
-
-msgid "From"
-msgstr "დან"
-
-msgid "Start date."
-msgstr "საწყისი თარიღი."
-
 msgid "Time"
 msgstr "დრო"
-
-msgid "Until"
-msgstr "მდე"
-
-msgid "End date."
-msgstr "დასასრული."
 
 msgid "Ok"
 msgstr "კარგი"
@@ -4096,6 +5387,12 @@ msgid "My Events"
 msgstr "ჩემი ღონისძიებები"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Upload an image."
+msgid "My Cloud Files"
+msgstr "გამოსახულების ატვირთვა."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Users"
 msgstr "ყველა მომხმარებელი"
 
@@ -4104,8 +5401,10 @@ msgid "All Events"
 msgstr "ყველა ღონისძიება"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "ღონისძება"
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Cloud Files"
+msgstr "გამოსახულების ატვირთვა."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Idea"
@@ -4113,9 +5412,14 @@ msgstr "იდეა"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Invitations"
 msgid "Organization"
 msgstr "მოწვევები"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Cloud File"
+msgstr "გამოსახულების ატვირთვა."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create User"
@@ -4126,8 +5430,15 @@ msgid "Create Event"
 msgstr "ღონისძიების შექმნა"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Create Project"
+msgstr "პროექტის შექმნა"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Group"
+msgstr "ჯგუფის შექმნა"
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Delete invitation"
 msgid "Create Organization"
 msgstr "მოწვევის წაშლა"
 
@@ -4234,31 +5545,21 @@ msgstr "ყველა პროექტის დათვალიერე�
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Video Conference Server"
-msgid "My Conferences"
-msgstr "ვიდეო კონფერენციის სერვერი"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "You have not RSVPed to any Events."
 msgid "You have not created any organizations yet."
 msgstr "თქვენ არ გაქვთ RSVPed არცერთი ღონისძიებებისთვის."
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create new Group"
 msgid "Create new Organization"
 msgstr "ახალი ჯგუფის შექმნა"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Browse all Groups"
 msgid "Browse all Organizations"
 msgstr "ყველა ჯგუფის დათვალიერება"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Search for Users"
 msgid "Search for Organizations"
 msgstr "ძიება მომხმარებლებში"
 
@@ -4323,6 +5624,12 @@ msgid "In my Groups and Projects"
 msgstr "ჩემს ჯგუფებში და პროექტებში"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Search in teams"
+msgid "In my Cloud Files"
+msgstr "ძიება საგნებში"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
 msgstr "თემა"
 
@@ -4363,6 +5670,50 @@ msgid "No description yet."
 msgstr "აღწერა ჯერ არ არის."
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "max."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "You are participating"
+msgstr "თქვენ ხართ წევრი"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Participation request pending..."
+msgstr "წევრობაზე მოთხოვნა პროცესშია..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Participants"
+msgid "Participate"
+msgstr "მონაწილეები"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Contact organizers"
+msgstr "საკონტაქტო ინფორმაცია"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will now receive notifications for content posted in this group."
+msgid "You will now receive notifications for content posted."
+msgstr "თქვენ მიიღებთ შეტყობინებებს ამ ჯგუფში არსებული კონტენტის შესახებ."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If you do not want notifications, click the unfollow button!"
+msgstr "თუ თქვენ არ გსურთ შეტყობინებები, დააკლიკეთ გამოყოლის გაუქმენის ღილაკს!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr "შეცდომის გამო, თქვენი მოწონების პარამეტრის დამახსოვრება ვერ ხერხდება."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr "შეცდომის გამო, თქვენი გამოყოლის პარამეტრის დამახსოვრება ვერ ხერხდება."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
 msgstr "აირჩიე იდეის ლოკაცია მარკერის გადატანით და ჩაყრით. თქვენ ყოველთვის შეძლებთ ლოკაციის შეცვლას."
 
@@ -4401,18 +5752,6 @@ msgstr "ეწვიეთ ღონისძიებათა გვერდ�
 #. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for comments or when this event is updated or its details change."
 msgstr "თქვენ ახლა მიიღებთ შეტყობინებებს კომენტარებისგან. ასევე, როდესაც ეს ღონისძიება განახლდება ან მისი დეტალები შეიცვლება."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "If you do not want notifications, click the unfollow button!"
-msgstr "თუ თქვენ არ გსურთ შეტყობინებები, დააკლიკეთ გამოყოლის გაუქმენის ღილაკს!"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your like setting because of an error."
-msgstr "შეცდომის გამო, თქვენი მოწონების პარამეტრის დამახსოვრება ვერ ხერხდება."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your follow setting because of an error."
-msgstr "შეცდომის გამო, თქვენი გამოყოლის პარამეტრის დამახსოვრება ვერ ხერხდება."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Hidden Users"
@@ -4456,25 +5795,21 @@ msgstr "პროექტები - შექმნილი ამ იდე�
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "You are a Member"
 msgid "You are a Admin"
 msgstr "თქვენ ხართ წევრი"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Membership request pending..."
 msgid "Ownership request pending..."
 msgstr "წევრობაზე მოთხოვნა პროცესშია..."
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "My Projects and Groups"
 msgid "Projects and groups"
 msgstr "ჩემი პროექტები და ჯგუფები"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Projects/Groups"
 msgid "Project/group"
 msgstr "პროექტები/ჯგუფები"
 
@@ -4505,6 +5840,16 @@ msgstr "ჩასვლა"
 #. Translators: __INCLUDE_JS_PO__
 msgid "There are no items yet"
 msgstr "საგნები ჯერ არ არის"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Ideas I am following"
+msgid "Items you follow"
+msgstr "თქვენ მიერ გაყოლილი იდეები"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Nothing here yet."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
@@ -4573,6 +5918,9 @@ msgstr "მაგალითად"
 msgid "Edit Profile"
 msgstr "პროფილის რედაქტირება"
 
+msgid "Legacy Messages Archive"
+msgstr ""
+
 #, python-format
 msgid "Your account is currently connected with the Facebook account \"%(name)s\". Do you really want to disconnect your Facebook account? This will also revoke all permissions you granted us to your Facebook account."
 msgstr "თქვენი ანგარიში ამჟამად დაკავშირებულია Facebook-ის ანგარიშთან \"%(name)s\". ნამდვილად გსურთ გათიშოთ Facebook ანგარიში? ასევე მოხდება ყველა ნებართვის გაუქმება, რომელზეც თქვენ მოგვეცით წვდომა Facebook ანგარიშზე."
@@ -4630,9 +5978,6 @@ msgstr "მომხმარებლის ანგარიშის წა�
 msgid "User profile: %(username)s"
 msgstr "მომხმარებლის პროფილი: %(username)s"
 
-msgid "Legacy Messages Archive"
-msgstr ""
-
 msgid "Cooperation requests"
 msgstr "მოთხოვნები თანამშრომლობაზე"
 
@@ -4672,6 +6017,11 @@ msgstr "ნიშანი თქვენს სურვილზე, რო�
 msgid "I am open for cooperation requests"
 msgstr "თანახმა ვარ თანამშრომლობის მოთხოვნებზე"
 
+#, fuzzy
+#| msgid "Messages"
+msgid "Message"
+msgstr "შეტყობინებები"
+
 msgid "Welcome!"
 msgstr "კეთილი იყოს თქვენი მობრძანება!"
 
@@ -4701,9 +6051,6 @@ msgstr "მიერ"
 
 msgid "Open Preview"
 msgstr "ანონსის გახსნა"
-
-msgid "active"
-msgstr "აქტიური"
 
 msgid "displayed right now"
 msgstr "ახლა მოხდა ჩვენება"
@@ -4786,6 +6133,145 @@ msgstr "მომხმარებელს შეუძლია არ გა
 
 msgid "There are no announcements yet."
 msgstr "განცხადებები ჯერ არის."
+
+msgid "User Import Archive"
+msgstr ""
+
+msgid "Archived User Import Entry"
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to delete this Archived User Import Entry?"
+msgstr "ნამდვილად გსურთ მოწვევაზე უარის თქმა?"
+
+msgid "Delete Archived User Import Entry"
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no archived imports yet."
+msgstr "საგნები ჯერ არ არის"
+
+msgid "Delete uploaded data and upload a new CSV file"
+msgstr ""
+
+msgid "Upload a user CSV file to import user profiles"
+msgstr ""
+
+msgid "Please upload a CSV with the following columns (in any order)"
+msgstr ""
+
+msgid "No data will be imported at this point."
+msgstr ""
+
+msgid "The uploaded file will be validated and a report of the data it contains will be shown."
+msgstr ""
+
+msgid "You can then start the import from the report page."
+msgstr ""
+
+#, fuzzy
+msgid "Upload CSV File"
+msgstr "გამოსახულების ატვირთვა."
+
+msgid "The CSV is currently being validated..."
+msgstr ""
+
+msgid "The import is currently running..."
+msgstr ""
+
+msgid "This page will automatically refresh when the process is done."
+msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "No data has been imported yet. Ready to import!"
+msgstr "საკონტაქტო ბაზა ჯერ დამატებული არ არის."
+
+msgid "The uploaded data is valid and ready to be imported! Please review carefully!"
+msgstr ""
+
+msgid "Import the shown data now"
+msgstr ""
+
+msgid "The uploaded data is valid and is ready to be imported."
+msgstr ""
+
+msgid "Please review the data carefully below. Everything that will be imported is shown in the table."
+msgstr ""
+
+msgid "If any data is missing in the report that you think should have been included in the CSV, please do not start the import yet!"
+msgstr ""
+
+msgid "In this case review the uploaded CSV, and if the data is contained there, but not in the report, please contact the support!"
+msgstr ""
+
+#, python-format
+msgid "Once you are ready to begin the import, please click \"%(submit_button_label)s\" at the bottom of the page."
+msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "No data has been imported yet."
+msgstr "საკონტაქტო ბაზა ჯერ დამატებული არ არის."
+
+msgid "The uploaded data is invalid!"
+msgstr ""
+
+msgid "Please review the errors encountered, and correct them in the CSV. If you have questions, contact our support for help."
+msgstr ""
+
+#, python-format
+msgid "Click \"%(reset_button_label)s\" at the top of the page to start another upload."
+msgstr ""
+
+#, fuzzy
+#| msgid "There was an error loading the widget"
+msgid "There was a critical unexpected error during the import"
+msgstr "შეცდომა დაფიქსირდა ვიჯეტის ჩატვირთვისას"
+
+msgid "Some data may have been imported already, so please do not restart the import at this time!"
+msgstr ""
+
+msgid "The error has been logged in the system, please contact our support for help!"
+msgstr ""
+
+msgid "The uploaded data has been successfully imported!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Password reset successful"
+msgid "Import successful!"
+msgstr "პაროლის გადაყენება წარმატებით განხორციელდა"
+
+msgid "Archive Import Report"
+msgstr ""
+
+msgid "Below you will find a report of everything that was imported."
+msgstr ""
+
+#, python-format
+msgid "Click \"%(submit_button_label)s\" to archive the report. You can access the report later from the left side navigation of this page."
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to perform the import of the shown data?"
+msgstr "ნამდვილად გსურთ დატოვოთ  „%(title)s“?"
+
+msgid "Make sure you have double checked all the data that will be imported, as a second import with the same data will not be possible!"
+msgstr ""
+
+msgid "Start the Import?"
+msgstr ""
+
+msgid "Import Now!"
+msgstr ""
+
+msgid "Report for CSV validation performed"
+msgstr ""
+
+msgid "Report for CSV Import performed"
+msgstr ""
 
 msgid "Enable posting to Facebook"
 msgstr "Facebook-ზე დაპოსტვის ფუნქციის ჩართვა"
@@ -5020,17 +6506,11 @@ msgstr "ჩემი პროფილის რედაქტირება"
 msgid "What's happening where and when? What's to discover? Where to meet?"
 msgstr "რა ხდება, სად და როდის? რისი ნახვაა შესაძლებელი? სად შეიძლება შეხვედრა?"
 
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
-msgstr "ჯგუფები ხელს უწყობენ კომუნიკაციის და თანამშრომლობის გაუმჯობესებას. ჯგუფის შიგნით თქვენ ერთად შეკრებთ რამდენიმე პატარა პროექტს და სამუშაო ჯგუფს."
-
 msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
 msgstr "როგორი იქნება ჩვენი რეგიონი მომავალში? რა არის თქვენი იდეა გარემოსთან მეგობრული და მდგრადი რეგიონისთვის? მოძებნეთ თანამონაწილეები თქვენი ახალი პროექტის იდეის კამპანიისთვის."
 
 msgid "Do you have something to share, sell or give away? Are you searching for something?"
 msgstr "გსურთ რამე გააზიაროთ, გაყიდოთ ან გააჩუქოთ? ეძებთ რამეს?"
-
-msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
-msgstr "თქვენი პროექტების და ინიციატივების ეფექტურად ორგანიზება თქვენთან ერთად კამპანიაზე მომუშავეებთან ერთად. ყველა მნიშვნელოვანი საშუალება ერთ ადგილას: ახალი ამბები, დაფები, ღონისძიებები, ტოდოები და სხვა."
 
 msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "Welcome"
@@ -5080,9 +6560,6 @@ msgstr "ყველა წევრი"
 
 msgid "There are no projects in this group yet."
 msgstr "ჯგუფში ჯერ არ არის პროექტები."
-
-msgid "Add project"
-msgstr "პროექტების დამატება"
 
 msgid "Attach Images/Files"
 msgstr "გამოსახულებების/ფაილების მიმაგრება"
@@ -5143,6 +6620,353 @@ msgstr "(წაშლილი მომხმარებელი)"
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>Renderer %(model_name)s -ისთვის არ მოიძებნა!</i>"
 
+#, fuzzy
+#| msgid "You are not in any groups or projects yet"
+msgid "You are not currently in any Projects"
+msgstr "თქვენ ჯერ არცერთ ჯგუფში ან პროექტში არ ხართ"
+
+#, fuzzy
+#| msgid "My Groups and Projects"
+msgid "My upcoming Projects"
+msgstr "ჩემი პროექტები და ჯგუფები"
+
+#, fuzzy
+msgid "Project Menu"
+msgstr "პროექტის ტიპი"
+
+#, fuzzy
+msgid "Project Dashboard"
+msgstr "ხელსაწყოთა პანელი"
+
+msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
+msgstr "თქვენი პროექტების და ინიციატივების ეფექტურად ორგანიზება თქვენთან ერთად კამპანიაზე მომუშავეებთან ერთად. ყველა მნიშვნელოვანი საშუალება ერთ ადგილას: ახალი ამბები, დაფები, ღონისძიებები, ტოდოები და სხვა."
+
+msgid "Edit Project"
+msgstr "პროექტის რედაქტირება"
+
+msgid "Activate Project"
+msgstr "პროექტის აქტივაცია"
+
+#, fuzzy
+#| msgid "Deactivate Project"
+msgid "Re-activate Project"
+msgstr "პროექტის აქტივაციის გაუქმენა"
+
+msgid "Deactivate Project"
+msgstr "პროექტის აქტივაციის გაუქმენა"
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group!"
+msgid "You are about to deactivate this project!"
+msgstr "თქვენ ამჟამად ახორციელებთ პროექტის/ჯგუფის დეაქტივაციას!"
+
+#, fuzzy
+#| msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
+msgid "You are about to re-activate this project. It and all of its content will be visible on the website again."
+msgstr "თქვენ ამჟამად ახორციელებთ პროექტის/ჯგუფის ხელახლა აქტივაცია. ის და ყველა ინფორმაცია მის შიგნით ვებ-საიტზე თავიდან გამოჩნდება."
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr "თქვენ ამჟამად ახროციელებთ პროექტის/ჯგუფის დეაქტივაციას. ის და მასში არსებული ყველა ინფორმაცია აღარ გამოჩნდება ვებ-საიტზე, არც თქვენთვის და არც სხვებისათვის."
+
+#, fuzzy
+#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+msgstr "ეს პროცესი შესაძლოა რევერსირდეს. თქვენ შეგიძლიათ ნებისმიერ დროს ხელახლა მოახდინოთ პროექტის/ჯგუფის აქტივაცია თქვენივე მომხმარებლის ანგარიშიდან."
+
+#, fuzzy
+#| msgid "Convert selected Groups to Projects"
+msgid "Convert selected items to Projects"
+msgstr "არჩეული ჯგუფების პროექტებში გადატანა"
+
+#, fuzzy
+#| msgid "Project Administrator"
+msgid "Project administrator"
+msgstr "პროექტის ადმინისტრატორი"
+
+msgid "Project name"
+msgstr "პროექტის სახელი"
+
+msgid "Enter a name for the project."
+msgstr "შეიყვანეთ პროექტის სახელი."
+
+#, fuzzy
+#| msgid "Where are you active?"
+msgid "Where is the project active?"
+msgstr "სად ხართ აქტიური?"
+
+#, fuzzy
+#| msgid "Team members only"
+msgid "Project members only"
+msgstr "მხოლოდ გუნდის წევრებისათვის"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
+msgid "Collaborate!"
+msgstr "ითანამშრომლეთ!"
+
+msgid "Join now and collaborate!"
+msgstr "ჩაერთეთ ახლა და ითანამშრომლეთ!"
+
+msgid "You have been invited to collaborate!"
+msgstr "თქვენ მოგიწვიეს თანამშრომლობისთვის!"
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
+msgstr "სამწუხაროდ, მხოლოდ პორტალის ადმინისტრატორს შეუძლია ჯგუფების დეაქტივაცია! თქვენ შეგიძლიათ მიწეროთ ერთ-ერთ ადმინისტრატორს, რომ გააკეთოს ეს თქვენთვის. ქვემოთ შეგიძლიათ ნახოთ ყველა ადმინისტრატორის ჩამონათვალი."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgstr "სამწუხაროდ, მხოლოდ პორტალის ადმინისტრატორს შეუძლია ჯგუფების დეაქტივაცია! თქვენ შეგიძლიათ მიწეროთ ერთ-ერთ ადმინისტრატორს, რომ გააკეთოს ეს თქვენთვის. ქვემოთ შეგიძლიათ ნახოთ ყველა ადმინისტრატორის ჩამონათვალი."
+
+#, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only project members can see the content you requested. Apply to become a member now!"
+msgstr "თქვენ მიერ მოთხოვნილი კონტენტის ნახვა მხოლოდ გუნდის წევრებს შეუძლიათ.  იმისათვის, რომ გახდეთ წევრი, გააკეთეთ განაცხადი ახლა !"
+
+#, fuzzy
+#| msgid "You are not in any groups or projects yet"
+msgid "You are not currently in any Groups"
+msgstr "თქვენ ჯერ არცერთ ჯგუფში ან პროექტში არ ხართ"
+
+#, fuzzy
+#| msgid "My Groups"
+msgid "My upcoming Groups"
+msgstr "ჩემი ჯგუფები"
+
+#, fuzzy
+msgid "Group Menu"
+msgstr "ჯგუფის სახელი"
+
+#, fuzzy
+msgid "Group Dashboard"
+msgstr "ხელსაწყოთა პანელი"
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgstr "ჯგუფები ხელს უწყობენ კომუნიკაციის და თანამშრომლობის გაუმჯობესებას. ჯგუფის შიგნით თქვენ ერთად შეკრებთ რამდენიმე პატარა პროექტს და სამუშაო ჯგუფს."
+
+msgid "Edit Group"
+msgstr "ჯგუფის რედაქტირება"
+
+#, fuzzy
+#| msgid "Deactivate Group"
+msgid "Activate Group"
+msgstr "ჯგუფის აქტივაციის გაუქმება"
+
+msgid "Re-activate Group"
+msgstr "ჯგუფის ხელახლა გააქტიურება"
+
+msgid "Deactivate Group"
+msgstr "ჯგუფის აქტივაციის გაუქმება"
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group!"
+msgid "You are about to deactivate this group!"
+msgstr "თქვენ ამჟამად ახორციელებთ პროექტის/ჯგუფის დეაქტივაციას!"
+
+#, fuzzy
+#| msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
+msgid "You are about to re-activate this group. It and all of its content will be visible on the website again."
+msgstr "თქვენ ამჟამად ახორციელებთ პროექტის/ჯგუფის ხელახლა აქტივაცია. ის და ყველა ინფორმაცია მის შიგნით ვებ-საიტზე თავიდან გამოჩნდება."
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr "თქვენ ამჟამად ახროციელებთ პროექტის/ჯგუფის დეაქტივაციას. ის და მასში არსებული ყველა ინფორმაცია აღარ გამოჩნდება ვებ-საიტზე, არც თქვენთვის და არც სხვებისათვის."
+
+#, fuzzy
+#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+msgstr "ეს პროცესი შესაძლოა რევერსირდეს. თქვენ შეგიძლიათ ნებისმიერ დროს ხელახლა მოახდინოთ პროექტის/ჯგუფის აქტივაცია თქვენივე მომხმარებლის ანგარიშიდან."
+
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Convert selected items to Groups"
+msgstr "არჩეული პროექტების ჯგუფებში გადატანა"
+
+#, fuzzy
+#| msgid "Group Administrator"
+msgid "Group administrator"
+msgstr "ჯგუფის ადმინისტრატორი"
+
+msgid "Group name"
+msgstr "ჯგუფის სახელი"
+
+msgid "Enter a name for the group."
+msgstr "შეიყვანეთ ჯგუფის სახელი."
+
+#, fuzzy
+#| msgid "Where are you active?"
+msgid "Where is the group active?"
+msgstr "სად ხართ აქტიური?"
+
+#, fuzzy
+#| msgid "Team members only"
+msgid "Group members only"
+msgstr "მხოლოდ გუნდის წევრებისათვის"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+msgstr "სამწუხაროდ, მხოლოდ პორტალის ადმინისტრატორს შეუძლია ჯგუფების დეაქტივაცია! თქვენ შეგიძლიათ მიწეროთ ერთ-ერთ ადმინისტრატორს, რომ გააკეთოს ეს თქვენთვის. ქვემოთ შეგიძლიათ ნახოთ ყველა ადმინისტრატორის ჩამონათვალი."
+
+msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgstr "სამწუხაროდ, მხოლოდ პორტალის ადმინისტრატორს შეუძლია ჯგუფების დეაქტივაცია! თქვენ შეგიძლიათ მიწეროთ ერთ-ერთ ადმინისტრატორს, რომ გააკეთოს ეს თქვენთვის. ქვემოთ შეგიძლიათ ნახოთ ყველა ადმინისტრატორის ჩამონათვალი."
+
+#, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only group members can see the content you requested. Apply to become a member now!"
+msgstr "თქვენ მიერ მოთხოვნილი კონტენტის ნახვა მხოლოდ გუნდის წევრებს შეუძლიათ.  იმისათვის, რომ გახდეთ წევრი, გააკეთეთ განაცხადი ახლა !"
+
+#, fuzzy
+msgid "Conferences"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "My Conferences"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "You are not currently attending any Conferences"
+msgstr "თქვენ არ გაქვთ RSVPed არცერთი ღონისძიებებისთვის."
+
+#, fuzzy
+msgid "My upcoming Conferences"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Conference Menu"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+#| msgid "Browse all Projects"
+msgid "Browse all Conferences"
+msgstr "ყველა პროექტის დათვალიერება"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Create Conference"
+msgstr "ღონისძიების შექმნა"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Create new Conference"
+msgstr "ღონისძიების შექმნა"
+
+msgid "Conferences let you set up and host workshops and events over multiple days, complete with video messaging, stage stream integration, breakout rooms and lobby chats."
+msgstr ""
+
+#, fuzzy
+msgid "Edit Conference"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+#| msgid "Activate Project"
+msgid "Activate Conference"
+msgstr "პროექტის აქტივაცია"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Re-activate Conference"
+msgstr "ღონისძიების შექმნა"
+
+#, fuzzy
+#| msgid "Deactivate Project"
+msgid "Deactivate Conference"
+msgstr "პროექტის აქტივაციის გაუქმენა"
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group!"
+msgid "You are about to deactivate this conference!"
+msgstr "თქვენ ამჟამად ახორციელებთ პროექტის/ჯგუფის დეაქტივაციას!"
+
+#, fuzzy
+#| msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
+msgid "You are about to re-activate this conference. It and all of its content will be visible on the website again."
+msgstr "თქვენ ამჟამად ახორციელებთ პროექტის/ჯგუფის ხელახლა აქტივაცია. ის და ყველა ინფორმაცია მის შიგნით ვებ-საიტზე თავიდან გამოჩნდება."
+
+#, fuzzy
+#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+msgstr "თქვენ ამჟამად ახროციელებთ პროექტის/ჯგუფის დეაქტივაციას. ის და მასში არსებული ყველა ინფორმაცია აღარ გამოჩნდება ვებ-საიტზე, არც თქვენთვის და არც სხვებისათვის."
+
+#, fuzzy
+#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+msgstr "ეს პროცესი შესაძლოა რევერსირდეს. თქვენ შეგიძლიათ ნებისმიერ დროს ხელახლა მოახდინოთ პროექტის/ჯგუფის აქტივაცია თქვენივე მომხმარებლის ანგარიშიდან."
+
+#, fuzzy
+#| msgid "Convert selected Groups to Projects"
+msgid "Convert selected items to Conferences"
+msgstr "არჩეული ჯგუფების პროექტებში გადატანა"
+
+#, fuzzy
+msgid "Conference contact person"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Conference name"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a name for the conference."
+msgstr "შეიყვანეთ პროექტის სახელი."
+
+#, fuzzy
+#| msgid "Describe the project in a few sentences."
+msgid "Describe the conference in a few sentences."
+msgstr "გააკეთეთ მოკლე აღწერა პროექტის შესახებ."
+
+#, fuzzy
+#| msgid "Where are you active?"
+msgid "Where is the conference active?"
+msgstr "სად ხართ აქტიური?"
+
+#, fuzzy
+msgid "Conference members only"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
+#, fuzzy
+#| msgid "Participants"
+msgid "Participate!"
+msgstr "მონაწილეები"
+
+#, fuzzy
+#| msgid "Join now and collaborate!"
+msgid "Join now and participate!"
+msgstr "ჩაერთეთ ახლა და ითანამშრომლეთ!"
+
+#, fuzzy
+#| msgid "You have been invited to collaborate!"
+msgid "You have been invited to participate!"
+msgstr "თქვენ მოგიწვიეს თანამშრომლობისთვის!"
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
+msgstr "სამწუხაროდ, მხოლოდ პორტალის ადმინისტრატორს შეუძლია ჯგუფების დეაქტივაცია! თქვენ შეგიძლიათ მიწეროთ ერთ-ერთ ადმინისტრატორს, რომ გააკეთოს ეს თქვენთვის. ქვემოთ შეგიძლიათ ნახოთ ყველა ადმინისტრატორის ჩამონათვალი."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
+msgstr "სამწუხაროდ, მხოლოდ პორტალის ადმინისტრატორს შეუძლია ჯგუფების დეაქტივაცია! თქვენ შეგიძლიათ მიწეროთ ერთ-ერთ ადმინისტრატორს, რომ გააკეთოს ეს თქვენთვის. ქვემოთ შეგიძლიათ ნახოთ ყველა ადმინისტრატორის ჩამონათვალი."
+
+#, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the content you requested. Apply to become a member now!"
+msgstr "თქვენ მიერ მოთხოვნილი კონტენტის ნახვა მხოლოდ გუნდის წევრებს შეუძლიათ.  იმისათვის, რომ გახდეთ წევრი, გააკეთეთ განაცხადი ახლა !"
+
 msgid "Team Description"
 msgstr "გუნდის აღწერა"
 
@@ -5152,12 +6976,68 @@ msgstr "ჩვენ შესახებ"
 msgid "Question about"
 msgstr "კითხვა"
 
+msgid "The password must contain at least 1 digit, 0-9."
+msgstr ""
+
+msgid "The password must contain at least one upper case character A...Z"
+msgstr ""
+
+msgid "The password must contain at least one lower case character A...Z"
+msgstr ""
+
+msgid "The password must contain at least one special character (e.g.: $ § % & ? ! )"
+msgstr ""
+
+#, python-brace-format
+msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr ""
+
+msgid "Newsletter sent."
+msgstr ""
+
+msgid "Test email sent."
+msgstr ""
+
+msgid "Newsletter has been copied."
+msgstr ""
+
+#, fuzzy
+#| msgid "(The reported item has been deleted.)"
+msgid "Newsletter has been updated."
+msgstr "(გამოვლენილი საგანი წაშლილ იქნა.)"
+
+msgid "Newsletter successfully created!"
+msgstr ""
+
+msgid "Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations."
+msgstr ""
+
+#, python-format
+msgid "Login token was sent to %(email)s."
+msgstr ""
+
+msgid "Die Änderungen wurden erfolgreich gespeichert."
+msgstr ""
+
+msgid "Login token was sent."
+msgstr ""
+
+#, fuzzy
+#| msgid "User %(username)s was successfully invited!"
+msgid "User successfully created!"
+msgstr "მოხმარებელი %(username)s წარმატებით იქნა მოწვეული!"
 
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "\"%s\" ენა არ არის მხარდაჭერილი"
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your data was saved successfully!"
+msgstr "თქვენი იდეა წარმატებით წაიშალა."
 
 msgid "No model given to export data from."
 msgstr "არ არის მოცემული მოდელი მონაცემთა ექსპორტისთვის."
@@ -5207,9 +7087,6 @@ msgstr "თქვენი Facebook ანგარიშის კავში�
 msgid "Sorry, only portal administrators can create projects and groups!"
 msgstr ""
 
-msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-msgstr "სამწუხაროდ, მხოლოდ პორტალის ადმინისტრატორს შეუძლია შექმნას ჯგუფები! თქვენ შეგიძლიათ შექმნათ ან პროექტი ან მისწეროთ ადმინისტრატორს, რომ შექმნას ჯგუფის თქვენთვის. იხილეთ ყველა ადმინისტრატორის სია ქვემოთ."
-
 #, python-format
 msgid "%(team_type)s \"%(group)s\" was created successfully."
 msgstr "%(team_type)s ''%(group)s\"  წარმატებით შეიქმნა."
@@ -5224,22 +7101,18 @@ msgid "Conference successfully finished and user accounts deactivated"
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete user account"
 msgid "Successfully deactivated user account"
 msgstr "მომხმარებლის ანგარიშის წაშლა"
 
 #, fuzzy
-#| msgid "Delete user account"
 msgid "Successfully activated user account"
 msgstr "მომხმარებლის ანგარიშის წაშლა"
 
 #, fuzzy
-#| msgid "Delete user account"
 msgid "Successfully removed user"
 msgstr "მომხმარებლის ანგარიშის წაშლა"
 
 #, fuzzy
-#| msgid "Has created"
 msgid "User was not created"
 msgstr "შექმნა"
 
@@ -5247,12 +7120,10 @@ msgid "Workshop username"
 msgstr ""
 
 #, fuzzy
-#| msgid "First name"
 msgid "First Name"
 msgstr "სახელი"
 
 #, fuzzy
-#| msgid "Last name"
 msgid "Last Name"
 msgstr "გვარი"
 
@@ -5287,9 +7158,10 @@ msgstr "თქვენ არ შეგიძლიათ დატოვოთ
 msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
 msgstr "თქვენი მოთხოვნა ჩართვაზე %(team_type)s “%(team_name)s” -შო წარმატებით იქნა გამოთხოვილი."
 
-#, python-format
-msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
-msgstr "თქვენი მოწვევას %(team_type)s “%(team_name)s” -ზე წარმატებით ეთქვა უარი."
+#, fuzzy, python-format
+#| msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
+msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
+msgstr "თქვენ აღარ ხართ %(team_type)s “%(team_name)s”-ის წევრი."
 
 #, python-format
 msgid "I invited you to join \"%(team_name)s\"!"
@@ -5302,6 +7174,14 @@ msgstr "მომხამრებელმა %(username)s უკვე მო
 #, python-format
 msgid "User %(username)s was successfully invited!"
 msgstr "მოხმარებელი %(username)s წარმატებით იქნა მოწვეული!"
+
+#, fuzzy, python-format
+#| msgid "The following Users were added to this portal:"
+msgid "The following users were invited to apply: %s"
+msgstr "შემდეგი მომხმარებლები დაემატნენ ამ პორტალს:"
+
+msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
+msgstr ""
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
@@ -5335,14 +7215,14 @@ msgstr "%(team_name)s-ის ხელახლა აქტივაცია �
 msgid "%(team_name)s was deactivated successfully!"
 msgstr "%(team_name)s -ის დეაქტივაცია წარმატებით განხორციელდა!"
 
-msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
-msgstr "სამწუხაროდ, მხოლოდ პორტალის ადმინისტრატორს შეუძლია ჯგუფების დეაქტივაცია! თქვენ შეგიძლიათ მიწეროთ ერთ-ერთ ადმინისტრატორს, რომ გააკეთოს ეს თქვენთვის. ქვემოთ შეგიძლიათ ნახოთ ყველა ადმინისტრატორის ჩამონათვალი."
-
 msgid "This project/group is already active!"
 msgstr "ეს პროექტი/ჯგუფი უკვე აქტიურია!"
 
 msgid "This project/group is already inactive!"
 msgstr "ეს პროექტი/ჯგუფი უკვე არ არის აქტიური!"
+
+msgid "You are not a member, but have access because you are an Administrator."
+msgstr ""
 
 msgid "Only group/project members have permission to do this!"
 msgstr "მხოლოდ ჯგუფის/პროექტის წევრებს აქვთ უფლება, რომ ეს გააკეთონ!"
@@ -5389,17 +7269,14 @@ msgid "This item is now being shown in these projects/groups: %(group_names)s"
 msgstr "საგანი ნაჩვენებია ამ პროექტებზე/ჯგუფებზე: %(group_names)s"
 
 #, fuzzy, python-format
-#| msgid "Which apps should be activated?"
 msgid "The %s-app was activated!"
 msgstr "რომელი აპლიკაციები უნდა იქნეს გააქტიურებული?"
 
 #, fuzzy, python-format
-#| msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
 msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
 msgstr "თქვენ მოითხოვეთ %(team_type)s “%(team_name)s” ჩართვა. თქვენ მიიღებთ ელ-ფოსტას, როგორც კი გუნდის ადმინისტრატორი რეაგირებას მოახდენს თქვენს მოთხოვნაზე."
 
 #, fuzzy, python-format
-#| msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
 msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
 msgstr "თქვენ უკვე მოწვეული ხართ \"%(team_name)s\" -ში და ახალხან გახდით წევრი!"
 
@@ -5481,6 +7358,9 @@ msgstr "სამწუხაროდ, ჩვენ არ შეგვიძ�
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "სამწუხაროდ, თქვენ არ შეგიძლიათ შესვლა, რადგან თქვენი ანგარიში შეჩერებულია. გთხოვთ, დაუკავშირდეთ სისტემურ ადმინისტრატორს!"
 
+msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
+msgstr ""
+
 #, python-format
 msgid "Your account \"%(user)s\" was registered successfully. Welcome to the community!"
 msgstr "თქვენ ანგარიში \"%(user)s\" წარმატებით დარეგისტრირდა. კეთილი იყოს თქვენი მობრძანება საზოგადოებაში!"
@@ -5490,7 +7370,6 @@ msgid "User \"%(user)s\" was registered successfully. The account will need to b
 msgstr "მომხმარებელი \"%(user)s\" წარმატებით იქნა დარეგისტრირებული. ამ ანგარიშის დადასტურება შესვლამდე უნდა მოხდეს. როდესაც ეს მოხდება, ჩვენ გამოგიგზავნით ელ-ფოსტის მისამართს \"%(email)s\"."
 
 #, fuzzy, python-format
-#| msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
 msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 msgstr "მომხმარებელი \"%(user)s\" წარმატებით დარეგისტრირდა. მალე, ჩვენ გამოგიგზავნით ელ-ფოსტას თქვენს მისამართზე ''%(email)s\". თქვენ უნდა დაადასტუროთ ელ-ფოსტის მისამართი შესვლამდე."
 
@@ -5508,6 +7387,9 @@ msgstr "დაფიქსირდა შეცდომა მოსაწვ�
 
 msgid "You are already logged in!"
 msgstr "თქვენ უკვე შესული ხართ!"
+
+msgid "User signup is currently disabled!"
+msgstr ""
 
 msgid "Please enter a token!"
 msgstr "გთხოვთ შეიყვანოთ ტოკენი!"
@@ -5582,6 +7464,35 @@ msgstr "თქვენი განცხადება წარმატე�
 msgid "Your Announcement was deactivated successfully."
 msgstr "თქვენი განცხადების დეაქტივაცია წარმატებით განხორციელდა."
 
+#, fuzzy
+#| msgid "Your Announcement was deleted successfully."
+msgid "The Archived User Import Entry was deleted successfully."
+msgstr "თქვენი განცხადება წარმატებით წაიშალა."
+
+#, fuzzy
+#| msgid "This action is not available directly!"
+msgid "This action is not allowed right now"
+msgstr "მოქმედება არ არის პირდაპირ ხელმისაწვდომი!"
+
+msgid "Another import is currently running!"
+msgstr ""
+
+msgid "No validated CSV upload found to start the import from!"
+msgstr ""
+
+msgid "Unknown POST action!"
+msgstr ""
+
+#, fuzzy
+#| msgid "The following Groups were converted to Projects:"
+msgid "The following columns were not recognized and were ignored"
+msgstr "შემდეგი ჯგუფები გადატანილ იქნა პროექტებში:"
+
+#, fuzzy
+#| msgid "The invitation was successfully deleted."
+msgid "The import was successfully archived."
+msgstr "მოწვევა წარმატებით წაიშალა."
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "თქვენ არ ხართ %s-ის წევრი! თუ გსურთ, მოითხოვეთ წევრობა ქვემოთ."
@@ -5589,154 +7500,60 @@ msgstr "თქვენ არ ხართ %s-ის წევრი! თუ �
 msgid "Your changes have been saved."
 msgstr "თქვენი ცვლილებები შენახულია."
 
-#, fuzzy
-#~| msgid "Participants"
-#~ msgid "Upload Participants"
-#~ msgstr "მონაწილეები"
+#~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+#~ msgstr "%(sender_name)s ახლახან შექმნა პროექტი/ჯგუფი \"%(team_name)s\" %(portal_name)s-ზე!"
+
+#~ msgid "All societies"
+#~ msgstr "ყველა საზოგადოება"
+
+#~ msgid "All projects"
+#~ msgstr "ყველა პროექტი"
 
 #, fuzzy
-#~| msgid "inactive"
-#~ msgid "not active"
-#~ msgstr "არააქტიური"
+#~ msgid "Conference Dashboard"
+#~ msgstr "ხელსაწყოთა პანელი"
+
+#~ msgid "The following Groups were converted to Projects:"
+#~ msgstr "შემდეგი ჯგუფები გადატანილ იქნა პროექტებში:"
 
 #, fuzzy
-#~| msgid "Deactivate Group"
-#~ msgid "deactivate member"
-#~ msgstr "ჯგუფის აქტივაციის გაუქმება"
+#~| msgid "Search for Ideas"
+#~ msgid "Search for email"
+#~ msgstr "იდეების ძებნა"
 
-#, fuzzy
-#~| msgid "Invite a member"
-#~ msgid "activate member"
-#~ msgstr "წევრის მოწვევა"
+#~ msgid "Re-Activate Project/Group"
+#~ msgstr "პროექტის/ჯგუფის ხელახლა აქტივაცია"
 
-#, fuzzy
-#~| msgid "Remove Member"
-#~ msgid "remove user"
-#~ msgstr "წევრის ამოშლა"
+#~ msgid "Deactivate Project/Group"
+#~ msgstr "პროექტის/ჯგუფის დეაქტივაცია"
 
-#, fuzzy
-#~| msgid "Do you really want to decline the invitation?"
-#~ msgid "Do you really want to deactivate the member's user account ?"
-#~ msgstr "ნამდვილად გსურთ მოწვევაზე უარის თქმა?"
+#~ msgid "Deactivated Projects and Groups"
+#~ msgstr "პროექტები და ჯგუფები დეაქტივირირებულია"
 
-#, fuzzy
-#~| msgid "Decline Member"
-#~ msgid "Deactivate Member"
-#~ msgstr "წევრისათვის უარის თქმა"
+#~ msgid "Public Project"
+#~ msgstr "საჯარო პროექტი"
 
-#, fuzzy
-#~| msgid "Do you really want to decline the invitation?"
-#~ msgid "Do you really want to activate the member's user account ?"
-#~ msgstr "ნამდვილად გსურთ მოწვევაზე უარის თქმა?"
+#~ msgid "Public Group"
+#~ msgstr "საჯარო ჯგუფი"
 
-#, fuzzy
-#~| msgid "Accept Member"
-#~ msgid "Activate Member"
-#~ msgstr "წევრისათვის დათანხმება"
+#~ msgid "All groups"
+#~ msgstr "ყველა ჯგუფი"
 
-#, fuzzy
-#~| msgid "Do you really want to leave „%(title)s“?"
-#~ msgid "Do you really want to remove the user?"
-#~ msgstr "ნამდვილად გსურთ დატოვოთ  „%(title)s“?"
+#~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
+#~ msgstr "ჩვენ გამოვაგზავნეთ ინსტრუქცია თქვენი პაროლის დასაყენებლად, რომელსაც მალე მიიღებთ."
 
-#, fuzzy
-#~| msgid "Remove Member"
-#~ msgid "Remove User"
-#~ msgstr "წევრის ამოშლა"
+#~ msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+#~ msgstr "სამწუხაროდ, მხოლოდ პორტალის ადმინისტრატორს შეუძლია შექმნას ჯგუფები! თქვენ შეგიძლიათ შექმნათ ან პროექტი ან მისწეროთ ადმინისტრატორს, რომ შექმნას ჯგუფის თქვენთვის. იხილეთ ყველა ადმინისტრატორის სია ქვემოთ."
 
-#, fuzzy
-#~| msgid "Simple Statistics"
-#~ msgid "Download Statistics"
-#~ msgstr "უბრალო სტატისტიკა"
-
-#, fuzzy
-#~| msgid "My Projects and Groups"
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "ჩემი პროექტები და ჯგუფები"
-
-#, fuzzy
-#~| msgid "Projects/Groups"
-#~ msgid "Project/group CSV File"
-#~ msgstr "პროექტები/ჯგუფები"
-
-#, fuzzy
-#~| msgid "Projects/Groups"
-#~ msgid "User CSV File"
-#~ msgstr "პროექტები/ჯგუფები"
-
-#, fuzzy
-#~| msgid "Proportions"
-#~ msgid "Options"
-#~ msgstr "პროპორციები"
-
-#, fuzzy
-#~| msgid "Upload an image."
-#~ msgid "Upload and Import..."
-#~ msgstr "გამოსახულების ატვირთვა."
-
-#, fuzzy
-#~| msgid "My Projects and Groups"
-#~ msgid "Import Projects and Groups"
-#~ msgstr "ჩემი პროექტები და ჯგუფები"
-
-#, fuzzy
-#~| msgid "Error!"
-#~ msgid "Read errors:"
-#~ msgstr "შეცდომა!"
-
-#, fuzzy
-#~| msgid "Messages"
-#~ msgid "Important messages:"
-#~ msgstr "შეტყობინებები"
-
-#, fuzzy
-#~| msgid "Error!"
-#~ msgid "Errors:"
-#~ msgstr "შეცდომა!"
-
-#, fuzzy
-#~| msgid "Messages"
-#~ msgid "Info messages:"
-#~ msgstr "შეტყობინებები"
-
-#, fuzzy
-#~| msgid "Email"
-#~ msgid "email"
-#~ msgstr "ელ-ფოსტა"
-
-#, fuzzy
-#~| msgid "Has Logged In"
-#~ msgid "has logged in"
-#~ msgstr "შესულა"
-
-#, fuzzy
-#~| msgid "Validate"
-#~ msgid "last login date"
-#~ msgstr "განახლება"
-
-#~ msgid "New membership request"
-#~ msgstr "ახალი მოთხოვნა წევრობაზე"
-
-#~ msgid "Revoked your admin status"
-#~ msgstr "გუნდის ადმინისტრატორის სტატუსი გაგიუქმდათ"
-
-#~ msgid "You were tagged by %(sender_name)s"
-#~ msgstr "თქვენ მოინიშნეთ %(sender_name)s-ს მიერ"
-
-#~ msgid "Invited you"
-#~ msgstr "თქვენ მოგიწვიათ"
-
-#~ msgid "Hi,"
-#~ msgstr "გამარჯობა,"
-
-#~ msgid "What's the latest news?"
-#~ msgstr "რა არის უკანასკნელი სიახლე?"
-
-#~ msgid "You cannot change your own admin status."
-#~ msgstr "თქვენ არ შეგიძლიათ თქვენი ადმინისტრატორის სტატუსის შეცვლა."
+#~ msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
+#~ msgstr "თქვენი მოწვევას %(team_type)s “%(team_name)s” -ზე წარმატებით ეთქვა უარი."
 
 #~ msgid "Choose App"
 #~ msgstr "აპლიკაციის არჩევა"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "შეცდომა!"
 
 #~ msgid ""
 #~ "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
@@ -5772,3 +7589,66 @@ msgstr "თქვენი ცვლილებები შენახულ�
 #~ "\n"
 #~ "Viele Grüße und viel Spaß hier,\n"
 #~ "das %(site_name)s Team"
+
+#, fuzzy
+#~| msgid "Here you can find an overview of Ideas you have liked."
+#~ msgid "Here you can find an overview of items you follow."
+#~ msgstr "აქ შეგიძლიათ ნახოთ თქვენ მიერ მოწონებული იდეების მიმოხილვა."
+
+#~ msgid "Hi,"
+#~ msgstr "გამარჯობა,"
+
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "ჩემი პროექტები და ჯგუფები"
+
+#, fuzzy
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "ჩემი პროექტები და ჯგუფები"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "შეტყობინებები"
+
+#~ msgid "Invited you"
+#~ msgstr "თქვენ მოგიწვიათ"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "პროპორციები"
+
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "პროექტები/ჯგუფები"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "შეცდომა!"
+
+#~ msgid "Revoked your admin status"
+#~ msgstr "გუნდის ადმინისტრატორის სტატუსი გაგიუქმდათ"
+
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "გამოსახულების ატვირთვა."
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "პროექტები/ჯგუფები"
+
+#~ msgid "What's the latest news?"
+#~ msgstr "რა არის უკანასკნელი სიახლე?"
+
+#~ msgid "You cannot change your own admin status."
+#~ msgstr "თქვენ არ შეგიძლიათ თქვენი ადმინისტრატორის სტატუსის შეცვლა."
+
+#~ msgid "You were tagged by %(sender_name)s"
+#~ msgstr "თქვენ მოინიშნეთ %(sender_name)s-ს მიერ"
+
+#, fuzzy
+#~ msgid "email"
+#~ msgstr "ელ-ფოსტა"
+
+#, fuzzy
+#~ msgid "has logged in"
+#~ msgstr "შესულა"

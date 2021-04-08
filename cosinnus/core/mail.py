@@ -164,13 +164,15 @@ def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc
         mail_thread.start()
 
 
-def send_html_mail_threaded(to_user, subject, html_content):
+def send_html_mail_threaded(to_user, subject, html_content, topic_instead_of_subject=None):
     """ Sends out a pretty html to an email-address.
         The given `html_content` will be placed inside the notification html template,
-        and the style will be a "from-portal" style (instead of a "from-group" style. """
+        and the style will be a "from-portal" style (instead of a "from-group" style.
+        @param topic_instead_of_subject: If given, will set the topic line after "Hello, <user", 
+            in the mail body to a different text than the email-subject. """
     
     template = '/cosinnus/html_mail/notification.html'
-    data = get_html_mail_data(to_user, subject, html_content)
+    data = get_html_mail_data(to_user, topic_instead_of_subject or subject, html_content)
     send_mail_or_fail_threaded(to_user.email, subject, template, data, is_html=True)
 
 
@@ -231,7 +233,7 @@ def get_common_mail_context(request, group=None, user=None):
     site = portal.site
     context = {
         'site': site,
-        'site_name': site.name,
+        'site_name': portal.name,
         'protocol': protocol,
         'domain_url': portal.get_domain(),
     }

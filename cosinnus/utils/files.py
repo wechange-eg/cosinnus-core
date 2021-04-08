@@ -60,6 +60,10 @@ def get_group_wallpaper_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'group_wallpapers', base_folder='group_images')
 
 
+def get_conference_conditions_filename(instance, filename):
+    return _get_avatar_filename(instance, filename, 'conference_conditions', base_folder='group_conferences')
+
+
 def get_idea_image_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'images', base_folder='idea_images')
 
@@ -99,6 +103,10 @@ def _get_all_portals_filename(instance, filename, sub_folder='images'):
     name = '%s%s%s' % (settings.SECRET_KEY, my_uuid , filename)
     newfilename = hashlib.sha1(name.encode('utf-8')).hexdigest() + ext
     return path.join(filedir, newfilename)
+
+
+def get_presentation_filename(instance, filename):
+    return _get_all_portals_filename(instance, filename, 'presentations')
 
 
 def create_zip_file(files):

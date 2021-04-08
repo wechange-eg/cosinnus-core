@@ -15,13 +15,13 @@
     }
 </script>
 
-
-{% if not media_tags_label %}{% trans "Additional options" as media_tags_label %}{% endif %}
-{% if not media_tags_legend %}{% trans "Attach files, add a location, mark topics and adjust visibility settings" as media_tags_legend %}{% endif %}
-<div {% if not show_all and not all_errors %}class="media_tag_initial_hidden" style="display: none;"{% endif %}>
-    {% include 'cosinnus/fields/default_field.html' with legend=media_tags_legend label=media_tags_label %}
-</div>
-
+{% if not hide_intro %}
+	{% if not media_tags_label %}{% trans "Additional options" as media_tags_label %}{% endif %}
+	{% if not media_tags_legend %}{% trans "Attach files, add a location, mark topics and adjust visibility settings" as media_tags_legend %}{% endif %}
+	<div {% if not show_all and not all_errors %}class="media_tag_initial_hidden" style="display: none;"{% endif %}>
+	    {% include 'cosinnus/fields/default_field.html' with legend=media_tags_legend label=media_tags_label %}
+	</div>
+{% endif %}
 
 {% if not disable_persons %}
 	<div class="media_tag_initial_hidden" {% if not show_persons == True and not show_all == True and not form.forms.media_tag.persons.errors %}style="display: none;"{% endif %}>

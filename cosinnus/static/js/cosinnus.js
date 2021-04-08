@@ -53,7 +53,7 @@
             if (typeof target === "undefined") {
                 target = 'body';
             }
-            $(target).on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea',function(e) {
+            $(target).on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea, .fadedown a.fadedown-clickarea',function(e) {
                 if (!$(this).closest('.fadedown').hasClass('open')) {
                     // closed
                     $(this)
@@ -606,22 +606,6 @@
             });
         },
 
-        todosSelect : function() {
-            $('body').on('click','.fa-star-o',function() {
-                $(this).removeClass('fa-star-o');
-                $(this).addClass('fa-star');
-            });
-            $('body').on('click','.fa-star',function() {
-                $(this).removeClass('fa-star');
-                $(this).addClass(' fa-star-half-o');
-            });
-            $('body').on('click','.fa-star-half-o',function() {
-                $(this).removeClass(' fa-star-half-o');
-                $(this).addClass('fa-star-o');
-            });
-
-        },
-
         datePicker : function() {
             $('#datePickerModal').on('shown.bs.modal', function(e) {
                 // Find the element that has been clicked
@@ -1090,12 +1074,10 @@
                             });
                         }
                         
-                    } else if (data.result.status == 'denied') {
-                        alert('Die Datei die hochgeladen wurde war zu groß oder nicht für den Upload zugelassen!');
-                    } else if (data.result.status == 'invalid') {
-                        alert('Die Datei die hochgeladen wurde war zu groß oder nicht für den Upload zugelassen!');
+                    } else if (data.result.status == 'error' && data.result.message) {
+                        alert(data.result.message);
                     } else {
-                        alert('Es gab einen unbekannten Fehler beim hochladen. Wir werden das Problem umgehend beheben!');
+                        alert('Es gab einen unbekannten Fehler beim hochladen!');
                     }
 
                     data.context.remove(); // remove progress bar
@@ -1677,7 +1659,6 @@ $(function() {
     $.cosinnus.calendarBig();
     $.cosinnus.editThisClickarea();
     $.cosinnus.searchbar();
-    $.cosinnus.todosSelect();
     $.cosinnus.datePicker();
     $.cosinnus.renderMomentDataDate();
     $.cosinnus.etherpadEditMeta();

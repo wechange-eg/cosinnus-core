@@ -18,7 +18,6 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.5.4\n"
 
-
 #: locale/src/views/Discussions/list.json
 #. [conference.events.agenda]
 #. defaultMessage is:
@@ -334,3 +333,11 @@ msgstr "Сегодня"
 
 msgid "Tomorrow"
 msgstr "Завтра"
+
+
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "Членство"

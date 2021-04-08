@@ -20,6 +20,7 @@ import {EventRoomState} from "../../stores/events/reducer"
 import {Loading} from "../components/Loading"
 import {EventParticipantsRoomState} from "../../stores/eventParticipants/reducer"
 import {fetchEventParticipants} from "../../stores/eventParticipants/effects"
+import {Notification} from "../components/Notification"
 
 interface WorkshopsProps {
   events: EventRoomState
@@ -57,6 +58,7 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
   return (
     <Grid container>
       <Content>
+        <Notification />
         <Typography component="h1"><FormattedMessage id="Agenda" /></Typography>
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
@@ -68,7 +70,7 @@ function WorkshopsConnector (props: WorkshopsProps & RouteComponentProps) {
         }
         <ManageRoomButtons />
       </Content>
-      {room.props.url && <Sidebar url={room.props.url} />}
+      {room.props.showChat && room.props.url && <Sidebar url={room.props.url} />}
     </Grid>
   )
 }

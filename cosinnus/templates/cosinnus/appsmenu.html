@@ -4,11 +4,12 @@
 {% group_url 'cosinnus:conference:management' group=group as conference_management_page %}
 {% group_url 'cosinnus:conference:room-management' group=group as conference_room_management_page %}
 {% group_url 'cosinnus:event:conference-event-list' group=group as conference_event_management_page %}
+{% group_url 'cosinnus:conference:participation-management' group=group as conference_participation_management_page %}
+{% group_url 'cosinnus:conference:participation-management-applications' group=group as conference_applications_page %}
 {% group_url 'cosinnus:group-edit' group=group as group_edit_page %}
 {% group_url 'cosinnus:group-dashboard' group=group as group_dashboard_page %}
 {% group_url 'cosinnus:group-microsite' group=group as group_microsite_page %}
 
-{% if user|has_read_access:group %}
 <div class="btn-group w100 large-space">
     <button type="button" class="btn btn-appnavi w100 dropdown-toggle" data-toggle="dropdown">
         <ul class="media-list">
@@ -18,11 +19,9 @@
                 <a class="pull-left" href="#">
                     <i class="fa fa-fw {{ group.get_icon }}"></i>
                 </a>
-                {% if user|has_read_access:group %}
                 <a class="pull-right" href="#">
                     <i class="fa fa-caret-down"></i>
                 </a>
-                {% endif %}
                 <div class="media-body">
                     {{ group.get_group_menu_label }}
                 </div>
@@ -30,77 +29,108 @@
         </ul>
     </button>
     
-    {% if user|has_read_access:group %}
     <ul class="dropdown-menu appnavi-dropdown-menu w100" role="menu">
-            <li class="app-main appnavi-listelement fine-space">
-                <a href="{% group_url 'cosinnus:group-dashboard' group=group %}{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}{% if group.public or user.is_superuser %}?browse=true{% endif %}{% endif %}">
-                    <i class="fa fa-fw fa-th-large"></i>
-                    {% if group.group_is_conference %}
-	                    {% trans "Conference Page" %}
-			        {% else %}
-                        {{ group.get_group_dashboard_label }}
-			        {% endif %}
-                </a>
-            </li>
-        {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
-        <li class="app-main appnavi-listelement fine-space">
-            <a href="{{ group_microsite_page }}">
-                <i class="fa fa-fw fa-lightbulb-o"></i>
-                {% trans "Microsite" %}
-            </a>
-        </li>
-        {% endif %}
-        {% for app in apps %}
-            {% captureas app_css_class %}{% if app.app == 'cosinnus_todo' %}app-todos{% elif app.app == 'cosinnus_note' %}app-main{% elif app.app == 'cosinnus_poll' %}app-poll{% elif app.app == 'cosinnus_cloud' %}app-cloud{% elif app.app == 'cosinnus_marketplace' %}app-marketplace{% elif app.app == 'cosinnus_file' %}app-files{% elif app.app == 'cosinnus_etherpad' %}app-etherpad{% elif app.app == 'cosinnus_event' %}app-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
-            {% captureas app_icon %}{% if app.app == 'cosinnus_todo' %}fa-tasks{% elif app.app == 'cosinnus_note' %}fa-book{% elif app.app == 'cosinnus_poll' %}fa-bar-chart{% elif app.app == 'cosinnus_cloud' %}fa-cloud{% elif app.app == 'cosinnus_marketplace' %}fa-exchange{% elif app.app == 'cosinnus_file' %}fa-file{% elif app.app == 'cosinnus_etherpad' %}fa-file-text{% elif app.app == 'cosinnus_event' %}fa-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
-
-	        <li class="{{app_css_class}} appnavi-listelement {% if app.active %}active{% endif %}">
-	            <a href="{{ app.url }}" {% if app.app == 'cosinnus_cloud' and SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}>
-	                <i class="fa fa-fw {{ app_icon }}"></i>
-	                {{ app.label }}
-	            </a>
-	        </li>
-        {% endfor %}
-
-        {% if user|has_write_access:group and group.group_is_conference %}
+        {% if user|has_read_access:group %}
 	        <li class="app-main appnavi-listelement fine-space">
-	            <a href="{{ conference_management_page }}">
-	                <i class="fas fa-fw fa-chalkboard-teacher"></i>
-	                {% trans "Conference Management" %}
+	            <a href="{% group_url 'cosinnus:group-dashboard' group=group %}{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}{% if group.public or user.is_superuser %}?browse=true{% endif %}{% endif %}">
+	                <i class="fa fa-fw fa-th-large"></i>
+	                {{ group.get_group_dashboard_label }}
 	            </a>
 	        </li>
-	        
-            <li class="app-main appnavi-listelement fine-space">
-                <a href="{{ conference_room_management_page }}">
-                    <i class="fas fa-fw fa-door-open"></i>
-                    {% trans "Conference Room Management" %}
-                </a>
-            </li>
-            
-            <li class="app-main appnavi-listelement fine-space">
-                <a href="{{ conference_event_management_page }}">
-                    <i class="fas fa-fw fa-calendar"></i>
-                    {% trans "Conference Event Management" %}
-                </a>
-            </li>
-        {% endif%}
-
-        <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %}">
-            <a href="{{ group_detail_page }}">
-                <i class="fa fa-fw fa-group"></i>
-                {% trans "Members" %}
-            </a>
-        </li>
-
-        {% if user|has_write_access:group %}
-        <li class="app-main appnavi-listelement">
-            <a href="{{ group_edit_page }}">
-                <i class="fa fa-fw fa-cogs"></i>
-                {% trans "Settings" %}
-            </a>
-        </li>
+	    {% endif %}
+	            
+        {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
+            {% if not group.group_is_conference or not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+		        <li class="app-main appnavi-listelement fine-space">
+		            <a href="{{ group_microsite_page }}">
+		                <i class="fa fa-fw fa-lightbulb-o"></i>
+		                {% trans "Microsite" %}
+		            </a>
+		        </li>
+	        {% endif %}
         {% endif %}
-    </ul>
+	        
+	    {% if user|has_read_access:group %}
+	        {% for app in apps %}
+		        {% if not group.group_is_conference or app.app == 'cosinnus_event' %}
+		            {% captureas app_css_class %}{% if group.group_is_conference %}app-main{% elif app.app == 'cosinnus_todo' %}app-todos{% elif app.app == 'cosinnus_note' %}app-main{% elif app.app == 'cosinnus_poll' %}app-poll{% elif app.app == 'cosinnus_cloud' %}app-cloud{% elif app.app == 'cosinnus_marketplace' %}app-marketplace{% elif app.app == 'cosinnus_file' %}app-files{% elif app.app == 'cosinnus_etherpad' %}app-etherpad{% elif app.app == 'cosinnus_event' %}app-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
+		            {% captureas app_icon %}{% if app.app == 'cosinnus_todo' %}fa-tasks{% elif app.app == 'cosinnus_note' %}fa-book{% elif app.app == 'cosinnus_poll' %}fa-bar-chart{% elif app.app == 'cosinnus_cloud' %}fa-cloud{% elif app.app == 'cosinnus_marketplace' %}fa-exchange{% elif app.app == 'cosinnus_file' %}fa-file{% elif app.app == 'cosinnus_etherpad' %}fa-file-text{% elif app.app == 'cosinnus_event' %}fa-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
+		
+			        <li class="{{app_css_class}} appnavi-listelement {% if app.active %}active{% endif %} fine-space">
+			            <a href="{{ app.url }}" {% if app.app == 'cosinnus_cloud' and SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}>
+			                <i class="fa fa-fw {{ app_icon }}"></i>
+			                {% if group.group_is_conference and app.app == 'cosinnus_event' %}
+			                    {% trans "Workshops" %}
+			                {% else %}
+	    		                {{ app.label }}
+			                {% endif %}
+			            </a>
+			        </li>
+	            {% endif %}
+	        {% endfor %}
+	
+	        {% if group.group_is_conference and user|has_write_access:group  %}
+	            {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+	                {% comment %}  
+	                Hidden until CSV temporary import is fixed
+	                
+			        <li class="app-main appnavi-listelement fine-space">
+			            <a href="{{ conference_management_page }}">
+			                <i class="fas fa-fw fa-chalkboard-teacher"></i>
+			                {% trans "Conference Management" %}
+			            </a>
+			        </li>
+	                {% endcomment %}
+			        
+		            <li class="app-main appnavi-listelement fine-space">
+		                <a href="{{ conference_room_management_page }}">
+		                    <i class="fas fa-fw fa-door-open"></i>
+		                    {% trans "Conference Room Management" %}
+		                </a>
+		            </li>
+		        {% endif %}
+	            
+	            <li class="app-main appnavi-listelement fine-space">
+	                <a href="{{ conference_event_management_page }}">
+	                    <i class="fas fa-fw fa-calendar"></i>
+	                    {% trans "Conference Event Management" %}
+	                </a>
+	            </li>
+	            
+	            {% if group.use_conference_applications %}
+	                <li class="app-main appnavi-listelement fine-space">
+		                <a href="{{ conference_participation_management_page }}">
+		                    <i class="fas fa-user-cog"></i>
+		                    {% trans "Edit Conditions of Participation" %}
+		                </a>
+		            </li>
+		            
+		            <li class="app-main appnavi-listelement fine-space">
+		                <a href="{{ conference_applications_page }}">
+		                    <i class="fas fa-user-plus"></i>
+		                    {% trans "Manage Participation Applications" %}
+		                </a>
+		            </li>
+	            {% endif %}
+	        {% endif%}
+	        
+	        {% if request.user.pk in group.members or request.user.pk in group.admins or request.user|is_superuser or group.public and not group.group_is_conference %}
+		        <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %}">
+		            <a href="{{ group_detail_page }}">
+		                <i class="fa fa-fw fa-group"></i>
+		                {% trans "Members" %}
+		            </a>
+		        </li>
+	        {% endif %}
+	
+	        {% if user|has_write_access:group %}
+	        <li class="app-main appnavi-listelement">
+	            <a href="{{ group_edit_page }}">
+	                <i class="fa fa-fw fa-cogs"></i>
+	                {% trans "Settings" %}
+	            </a>
+	        </li>
+	        {% endif %}
+	    </ul>
     {% endif %} 
 </div><!-- btn-group -->
-{% endif %}

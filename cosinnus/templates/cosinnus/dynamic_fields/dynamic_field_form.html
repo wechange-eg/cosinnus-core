@@ -1,0 +1,90 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n  cosinnus_tags widget_tweaks %}
+
+{% block page_title %}{% trans "Change User Profile Field Choices" %}{% endblock %}
+
+{% block jshead %}
+    {% comment %} This is the JS functionality to mark unsaved form data. {% endcomment %}
+    <script type="text/javascript">
+
+    var form_ids = [{% for form in forms %}"{{form.id}}", {%endfor%}];
+
+    $( document ).ready(function() {
+        function addWarning(form_id){
+            $("form#" + form_id).css("border", "1px solid red");
+        }
+
+        {% for form in forms %}
+            var {{form.id}} = false;
+            $("form#{{form.id}}").mouseleave(function() {
+                if ({{form.id}}) {
+                    addWarning("{{form.id}}");
+                }
+            });
+
+            $("input#id_{{form.id}}-options").change(function() {
+                var {{form.id}} = true;
+                if (!$(this).is(":hover")) {
+                    addWarning("{{form.id}}");
+                }
+            });
+        {% endfor %}
+    });
+
+    function saySmth(){
+        alert("a");
+    }
+
+    </script>
+{% endblock jshead %}
+
+{% block leftnav %}
+    {% include 'cosinnus/administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li class="active">{% trans "Change User Profile Field Choices" %}</li>
+{% endblock %}
+
+{% block content %}
+    
+    <h1>{% trans "Change User Profile Field Choices" %}</h1>
+    
+    <h3>WIP: Diese Felder sind aktuell semikolon-getrennt, werden bald aber richtige Multi-auswahlfelder sein!</h3>
+
+	{% for form in forms %}
+	    <form id="{{form.id}}" action="" method="post" class="cosinnus-form form-horizontal" role="form">
+	      {% csrf_token %}
+	
+	        <!-- a box with semi transparent background -->
+	        <div class="content-box">
+	            <label class=""></label>
+	
+	            {{ form.non_field_errors }}
+	            {{ form.option_name }}
+	
+	            {# Regular Field #}
+	            {% trans "Enter your choices as semicolon separated values" as options_legend %}
+	            {% trans "Enter your choices" as options_placeholder %}
+	            {% include 'cosinnus/fields/default_field.html' with field=form.options label=form.fields.options.label legend=options_legend placeholder=options_placeholder large_field=True %}
+	
+	        </div><!-- content-box -->
+	
+	        <button type="submit" class="btn btn-emphasized">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <span class="pull-left" href="#" tabindex="-1">
+	                        <i class="fa fa-hand-o-right"></i>
+	                    </span>
+	                    <div class="media-body">
+	                        {% trans 'Save' %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button>
+	
+	    </form>
+	{% endfor %}
+
+{% endblock %}

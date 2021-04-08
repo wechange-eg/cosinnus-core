@@ -1,0 +1,69 @@
+{% load i18n cosinnus_tags %}
+
+{% comment %} 
+    A formfield date-picker for a form containing `from_date`, `to_date` DateTimeFields.  
+    
+    Expected parameters:
+        - from_date_field: The from_date formfield
+        - to_date_field: The to_date formfield
+    
+    Optional parameters:
+        - date_label: Label for the formfield
+        - date_legend: Legend for the formfield
+        
+{% endcomment %}
+
+{% if not date_label %}
+    {% trans "Date" as date_label %}
+{% endif %}
+{% captureas date_html %}
+    {{ from_date_field.errors }}
+    {{ to_date_field.errors }}
+    <ol class="input-area">
+        <li class="calendar-date-time-chooser">
+            {% trans "From" %} <i class="fa fa-calendar"></i>
+            <input
+                placeholder="{% trans "Date" %}"
+                readonly ="readonly"
+                class="calendar-date-time-chooser-date" />
+            <input class="calendar-date-time-chooser-hiddendate" id="id_from_date_0" name="from_date_0" 
+                placeholder="{% trans "Start date." %}" type="hidden" 
+                {% if from_date_field.value %}
+                value="{{ from_date_field.value|date:"Y-m-d" }}" 
+                {% elif form_view == "add" and request.GET.start %}
+                value="{{ request.GET.start }}" 
+                {% else %}
+                value="{% now "Y-m-d" %}" 
+                {% endif %}
+            >
+            <input class="calendar-date-time-chooser-time" id="id_from_date_1" name="from_date_1" 
+                placeholder="00:00" type="text" 
+                value="{{ from_date_field.value|date:"H:i" }}" 
+            >                                           
+            <div class="small-calendar"></div>
+        </li>
+        <li class="calendar-date-time-chooser">
+            {% trans "Until" %} <i class="fa fa-calendar"></i>
+            <input
+                placeholder="{% trans "Date" %}"
+                readonly ="readonly"
+                class="calendar-date-time-chooser-date" />
+            <input class="calendar-date-time-chooser-hiddendate" id="id_to_date_0" name="to_date_0" 
+                placeholder="{% trans "End date." %}" type="hidden" 
+                {% if to_date_field.value %}
+                value="{{ to_date_field.value|date:"Y-m-d" }}" 
+                {% elif form_view == "add" and request.GET.end %}
+                value="{{ request.GET.end }}" 
+                {% else %}
+                value="{% now "Y-m-d" %}" 
+                {% endif %}
+            >
+            <input class="calendar-date-time-chooser-time" id="id_to_date_1" name="to_date_1" 
+                placeholder="23:59" type="text" 
+                value="{{ to_date_field.value|date:"H:i" }}" 
+            >    
+            <div class="small-calendar"></div>
+        </li>
+    </ol>
+{% endcaptureas %}
+{% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label large_field=True date_legend=date_legend %}

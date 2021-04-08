@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-12 17:55+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
+msgstr ""
+
+msgid "Conference Bookings"
+msgstr ""
+
+msgid "Conferences"
+msgstr ""
+
+msgctxt "the_app"
+msgid "conference"
+msgstr ""
+
+msgid "End date must be before start date"
+msgstr ""
+
+msgid "Please also provide a start date"
+msgstr ""
+
+msgid "Please also provide a end date"
+msgstr ""
+
+msgid "First Choice"
+msgstr ""
+
+msgid "Second Choice"
+msgstr ""
+
+msgid "Conference Management"
+msgstr ""
+
+msgid "Workshop Participant File Upload"
+msgstr ""
+
+#, python-format
+msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
+msgstr ""
+
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
+msgstr ""
+
+msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
+msgstr ""
+
+msgid "Upload File"
+msgstr ""
+
+msgid "Go to conference"
+msgstr ""
+
+msgid "This function is not enabled for this conference."
+msgstr ""
+
+msgid "Conference successfully started and user accounts activated"
+msgstr ""
+
+msgid "Conference successfully finished and user accounts deactivated"
+msgstr ""
+
+msgid "Successfully deactivated user account"
+msgstr ""
+
+msgid "Successfully activated user account"
+msgstr ""
+
+msgid "Successfully removed user"
+msgstr ""
+
+msgid "User was not created"
+msgstr ""
+
+msgid "Workshop username"
+msgstr ""
+
+msgid "First Name"
+msgstr ""
+
+msgid "Last Name"
+msgstr ""
+
+msgid "The room was created successfully."
+msgstr ""
+
+msgid "The room was saved successfully."
+msgstr ""
+
+msgid "The room was deleted successfully."
+msgstr ""
+
+msgid "The supplied Conference Room could not be found"
+msgstr ""
+
+msgid "Conference reminder settings have been successfully updated."
+msgstr ""
+
+msgid "A test email has been sent to your email address."
+msgstr ""
+
+msgid "Participation configurations have been updated."
+msgstr ""
+
+msgid "Your application has been submitted."
+msgstr ""
+
+msgid "Your application has been updated."
+msgstr ""
+
+msgid "You cannot change your application anymore."
+msgstr ""
+
+msgid "Application has been withdrawn."
+msgstr ""
+
+#, python-format
+msgid "The following users were accepted and added as members: %s"
+msgstr ""
+
+#, python-format
+msgid "The following users were put on the wait list: %s"
+msgstr ""
+
+#, python-format
+msgid "The following users were declined: %s"
+msgstr ""
+
+msgid "Your changes were saved."
+msgstr ""
+
+msgid "Option"
+msgstr ""
+
+msgid "Motivation for applying"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Contact E-Mail Address"
+msgstr ""
+
+msgid "Contact Phone Number"
+msgstr ""
+
+msgid "List of Applicants"
+msgstr ""

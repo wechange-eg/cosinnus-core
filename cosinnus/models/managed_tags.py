@@ -13,7 +13,9 @@ from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
 from django.db import models
+from django.urls.base import reverse
 from django.utils.encoding import python_2_unicode_compatible, force_text
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 import six
 
@@ -21,7 +23,6 @@ from cosinnus.conf import settings
 from cosinnus.utils.files import get_managed_tag_image_filename, image_thumbnail, \
     image_thumbnail_url
 from cosinnus.utils.functions import clean_single_line_text, resolve_class
-from django.urls.base import reverse
 
 
 logger = logging.getLogger('cosinnus')
@@ -40,6 +41,9 @@ class CosinnusManagedTagLabels(object):
     
     MANAGED_TAG_NAME = _('Managed Tag')
     MANAGED_TAG_NAME_PLURAL = _('Managed Tag')
+    
+    MANAGED_TAG_TYPE_NAME = _('Managed Tag Type')
+    MANAGED_TAG_TYPE_NAME_PLURAL = _('Managed Tag Types')
     
     CREATE_MANAGED_TAG = _('Create Managed Tag')
     EDIT_MANAGED_TAG = _('Edit Managed Tag')
@@ -145,6 +149,10 @@ class CosinnusManagedTagAssignmentManager(models.Manager):
     def all_approved(self):
         return self.get_queryset().filter(approved=True)
     
+    def get_for_model(self, model):
+        model_type = ContentType.objects.get_for_model(model)
+        return self.get_queryset().filter(content_type__pk=model_type.id)
+    
     
 class CosinnusManagedTagAssignment(models.Model):
     """ The assignment intermediate-Model for CosinnusManagedTag """
@@ -160,7 +168,7 @@ class CosinnusManagedTagAssignment(models.Model):
     approved = models.BooleanField(verbose_name=_('Approved'), default=False)
     last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
 
-    objects = CosinnusManagedTagManager()
+    objects = CosinnusManagedTagAssignmentManager()
 
     class Meta(object):
         app_label = 'cosinnus'
@@ -204,6 +212,56 @@ class CosinnusManagedTagAssignment(models.Model):
                 approve = not bool(settings.COSINNUS_MANAGED_TAGS_USER_TAGS_REQUIRE_APPROVAL)
                 cls.objects.create(content_type=content_type, object_id=obj.id, managed_tag=managed_tag, approved=approve)
 
+        
+    @classmethod
+    def assign_managed_tag_to_object(cls, obj, tag_slug_to_assign):
+        """ Will assign a given CosinnusManagedTag to the given object and keep all other assigned tags.
+            @param obj: Any object to assign the managed tag to
+            @param tag_slug_to_assign: A slug of a CosinnusManagedTag. Only those slugs that actually
+                exist will be assigned. """
+        if not obj.pk:
+            logger.error('Could not save CosinnusManagedTags assignment: target object has not been saved yet!', extra={obj})
+            return
+        content_type = ContentType.objects.get_for_model(obj._meta.model)
+        assigned_slugs = list(cls.objects.filter(
+                content_type=content_type, object_id=obj.id
+            ).values_list('managed_tag__slug', flat=True))
+        
+        # add wanted non-assigned tag
+        if not tag_slug_to_assign in assigned_slugs:
+            managed_tag = CosinnusManagedTag.objects.get_cached(tag_slug_to_assign)
+            if managed_tag:
+                approve = not bool(settings.COSINNUS_MANAGED_TAGS_USER_TAGS_REQUIRE_APPROVAL)
+                cls.objects.create(content_type=content_type, object_id=obj.id, managed_tag=managed_tag, approved=approve)
+
+
+@python_2_unicode_compatible
+class CosinnusManagedTagType(models.Model):
+    
+    # don't worry, the default Portal with id 1 is created in a datamigration
+    # there was no other way to generate completely runnable migrations 
+    # (with a get_default function, or any other way)
+    portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='managed_tag_types', 
+        null=False, blank=False, default=1, on_delete=models.CASCADE) # port_id 1 is created in a datamigration!
+    
+    name = models.CharField(_('Name'), max_length=250)
+    prefix_label = models.CharField(_('Prefix label'), max_length=250,
+        help_text=_('The label that will be prepended before Managed Tags of this type, instead of `name`'),
+        blank=True, null=True)
+    color = models.CharField(_('Color'),
+         max_length=10, validators=[MaxLengthValidator(7)],
+         help_text=_('Optional color code (css hex value, with or without "#")'),
+         blank=True, null=True)
+
+    class Meta(object):
+        ordering = ('name',)
+        verbose_name = MANAGED_TAG_LABELS.MANAGED_TAG_TYPE_NAME
+        verbose_name_plural = MANAGED_TAG_LABELS.MANAGED_TAG_TYPE_NAME_PLURAL
+        unique_together = (('name', 'portal'), )
+        
+    def __str__(self):
+        return f'Type: %s (Portal %d)' % (self.name, self.portal_id)
+
 
 @python_2_unicode_compatible
 class CosinnusManagedTag(models.Model):
@@ -214,10 +272,13 @@ class CosinnusManagedTag(models.Model):
     portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='managed_tags', 
         null=False, blank=False, default=1, on_delete=models.CASCADE) # port_id 1 is created in a datamigration!
     
+    type = models.ForeignKey('cosinnus.CosinnusManagedTagType', verbose_name=MANAGED_TAG_LABELS.MANAGED_TAG_TYPE_NAME, 
+        related_name='managed_tags', null=True, blank=True, on_delete=models.SET_NULL)
+    
     name = models.CharField(_('Name'), max_length=250) 
     slug = models.SlugField(_('Slug'), 
         help_text=_('Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'), 
-        max_length=50)
+        max_length=250)
     
     description = models.TextField(verbose_name=_('Short Description'), blank=True)
     
@@ -226,10 +287,6 @@ class CosinnusManagedTag(models.Model):
         upload_to=get_managed_tag_image_filename,
         max_length=250)
     url = models.URLField(_('URL'), max_length=200, blank=True, null=True, validators=[MaxLengthValidator(200)])
-    color = models.CharField(_('Color'),
-         max_length=10, validators=[MaxLengthValidator(7)],
-         help_text=_('Optional color code (css hex value, with or without "#")'),
-         blank=True, null=True)
     
     paired_group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, 
         verbose_name=_('Paired Group'),
@@ -288,7 +345,12 @@ class CosinnusManagedTag(models.Model):
         
     def clear_cache(self):
         CosinnusManagedTag.objects.clear_cache()
-        
+    
+    @property
+    def sort_key(self):
+        """ A sort key with prefixed ManagedTagType name, usable as grouped sort key """
+        return ((self.type.name if self.type else 'zzzzzz__NO-TYPE') + ' - '+ self.name).lower()
+    
     @property
     def image_url(self):
         return self.image.url if self.image else None
@@ -307,6 +369,54 @@ class CosinnusManagedTag(models.Model):
         """ Returns the filtered search view for this tag """
         return reverse('cosinnus:map') + f'?managed_tags={self.id}'
     
+    @classmethod
+    def create_managed_tag_and_paired_group(cls, name, creator, managed_tag_type=None, description=''):
+        """ Creates a managed tag if it doesn't exist and a paired group 
+            @param name: The name for both the managed tag and the paired group
+            @param creator: user that is set as creator of the tag and group
+            @param managed_tag_type: optional, the CosinnusManagedTagType for the tag
+            @return: False if a managed tag of the given `name` already existed, the tag otherwise
+        """
+        tag_slug = slugify(name)
+        existing_tag = get_object_or_None(CosinnusManagedTag, name__iexact=name, portal=CosinnusPortal().get_current())
+        existing_tag_by_slug = get_object_or_None(CosinnusManagedTag, slug__iexact=tag_slug, portal=CosinnusPortal().get_current())
+        if existing_tag or existing_tag_by_slug:
+            logger.info('`create_managed_tag_and_paired_group` Did not create a new managed tag because an existing tag has the same name or slug', extra={'new_tag_name': name})
+            return existing_tag or existing_tag_by_slug
+        
+        # create group
+        try:
+            from cosinnus.models.group_extra import CosinnusSociety
+            group_name = f'{settings.COSINNUS_MANAGED_TAGS_PAIRED_GROUPS_PREFIX}{name}'
+            if creator is None or not creator.is_authenticated:
+                paired_group = CosinnusSociety.create_group_without_member(group_name)
+            else:
+                paired_group = CosinnusSociety.create_group_for_user(group_name, creator)
+            
+        except Exception as e:
+            logger.error('Error when creating a new managed tag, could not create paired group, but continuing tag creation!', extra={'exception': e})
+            if settings.DEBUG:
+                raise
+        
+        # create tag
+        try:
+            managed_tag = CosinnusManagedTag.objects.create(
+                name=name,
+                slug=tag_slug,
+                creator=creator,
+                type=managed_tag_type,
+                paired_group=paired_group,
+                portal=CosinnusPortal().get_current(),
+                description=description
+            )
+        except Exception as e:
+            logger.error('Error when creating a new managed tag, during paired group creation', extra={'exception': e})
+            if settings.DEBUG:
+                raise
+            return False
+        return managed_tag
+        
+    
 
 class CosinnusManagedTagAssignmentModelMixin(object):
     """ Mixin for models that can have CosinnusManagedTagAssignments assigned. 
@@ -322,4 +432,5 @@ class CosinnusManagedTagAssignmentModelMixin(object):
         """ Returns all approved assigned managed tags for this object """
         tag_ids = self.get_managed_tag_ids()
         return CosinnusManagedTag.objects.get_cached(list(tag_ids))
+
 

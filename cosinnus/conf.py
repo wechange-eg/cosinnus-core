@@ -261,6 +261,10 @@ class CosinnusConf(AppConf):
     # how long managed tags by portal should stay in cache until they will be removed
     MANAGED_TAG_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
+    # very very small timeout for cached BBB server configs!
+    # this should be in the seconds region
+    CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT = 10 # 10 seconds
+    
     # should CosinnusIdeas be enabled for this Portal?
     IDEAS_ENABLED = False
     
@@ -275,7 +279,10 @@ class CosinnusConf(AppConf):
 
     # should CosinnusOrganizations be enabled for this Portal?
     ORGANIZATIONS_ENABLED = False
-
+    
+    # disables the navbar language select menus
+    LANGUAGE_SELECT_DISABLED = False
+    
     # is the external content (GoodDB for example) enabled?
     EXTERNAL_CONTENT_ENABLED = False
 
@@ -305,6 +312,18 @@ class CosinnusConf(AppConf):
     
     # number of members displayed in the group widet
     GROUP_MEMBER_WIDGET_USER_COUNT = 19
+    
+    # a dict by group type for the allowed membership modes
+    # for each group type.
+    # Note: mode 1 (applications) should stay reserved for type 2 (conferences)
+    GROUP_MEMBERSHIP_MODE_CHOICES = {
+        # projects
+        0: [0, 2], # regular, auto-join
+        # groups
+        1: [0, 2], # regular, auto-join
+        # conferences
+        2: [0, 1, 2], # regular, applications, auto-join
+    }
     
     # widgets listed here will be created for the group dashboard upon CosinnusGroup creation.
     # this. will check if the cosinnus app is installed and if the widget is registered, so
@@ -341,6 +360,13 @@ class CosinnusConf(AppConf):
         ("file", "latest", {'sort_field':'3', 'amount':'5'}),
         
     ]
+    
+    
+    # a map of class dropins for the typed group trans classes
+    # status (int) --> class (str classpath)
+    GROUP_TRANS_TYPED_CLASSES_DROPINS = {
+    }
+    
     
     # all uploaded cosinnus images are scaled down on the website  (except direct downloads)
     # this is the maximum scale (at least one dimension fits) for any image
@@ -456,8 +482,12 @@ class CosinnusConf(AppConf):
     # URL if they try to visit the register or login pages
     LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET = '/map/'
     
-    # default number of days offers in the Marketplace stay active
-    MARKETPLACE_OFFER_ACTIVITY_DURATION_DAYS = 30
+    # if True, form fields will show a Required label for required fields
+    # instead of showing an Optional label for optional fields
+    FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL = False
+    
+    # label for required fields
+    FIELDS_REQUIRED_LABEL = '*'
     
     # Default starting map coordinates if no coordinates have been specified
     # currently: central europe with germany centered
@@ -605,6 +635,35 @@ class CosinnusConf(AppConf):
     # if False, users can only create Projects 
     USERS_CAN_CREATE_GROUPS = False
     
+    # should regular, non-admin users be allowed to create CosinnusConferences as well?
+    # if False, users can only create Projects 
+    USERS_CAN_CREATE_CONFERENCES = False
+    
+    # any users with any of these managed_tag_slugs
+    # supersedes `USERS_CAN_CREATE_CONFERENCES`
+    USERS_WITH_MANAGED_TAG_SLUGS_CAN_CREATE_CONFERENCES = []
+    
+    # whether to show conferences on the site
+    CONFERENCES_ENABLED = False
+    
+    # whether to use the premium difference for conferences
+    PREMIUM_CONFERENCES_ENABLED = False
+    
+    # if `CONFERENCES_ENABLED` is True, setting this to 
+    # True will only show the conference button if the current user actually
+    # has permission to create a conference
+    SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED = True
+    
+    # For conferences, disables the react conference interface, locks non-admin members 
+    # to the microsite, removes most group-like elements like apps andremoves room management
+    CONFERENCES_USE_COMPACT_MODE = False
+    
+    CONFERENCES_USE_APPLICATIONS_CHOICE_DEFAULT = False
+    
+    # if set to any value other than None, the conference public field will be disabled
+    # and locked to the value set here
+    CONFERENCES_PUBLIC_SETTING_LOCKED = None
+    
     # if set to True, regular non-portal admin users can not create projects and groups by themselves
     # and some elements like the "+" button in the navbar is hidden
     LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS = False
@@ -632,6 +691,9 @@ class CosinnusConf(AppConf):
     # whether to use the new style user-dashboard
     USE_V2_DASHBOARD = False    
     
+    # the URL fragment for the user-dashboard on this portal
+    V2_DASHBOARD_URL_FRAGMENT = 'dashboard'
+    
     # whether to use the new style user-dashboard ONLY for admins 
     # does not need `USE_V2_DASHBOARD` to be enabled
     USE_V2_DASHBOARD_ADMIN_ONLY = False    
@@ -651,13 +713,33 @@ class CosinnusConf(AppConf):
     # in v2, the footer is disabled by default. set this to True to enable it!
     V2_FORCE_SITE_FOOTER = False
     
+    # whether the regular user signup method is enabled for this portal
+    USER_SIGNUP_ENABLED = True
+    
+    USER_EXTERNAL_USERS_FORBIDDEN = False
+    
     # if true, an additional signup form field will be present
     SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK = False
+    
+    # if True, the modern user import views will be shown
+    # they require a per-portal implementation of the importer class
+    USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED = False
+    
+    # a class dropin to replace CosinnusUserImportProcessorBase as user import processor
+    # (str classpath)
+    USER_IMPORT_PROCESSOR_CLASS_DROPIN = None
     
     # if true, during signup and in the user profile, an additional
     # opt-in checkbox will be shown to let the user choose if they wish to 
     # receive a newsletter
     USERPROFILE_ENABLE_NEWSLETTER_OPT_IN = False
+    
+    # base fields of the user profile form to hide in form and detail view
+    USERPROFILE_HIDDEN_FIELDS = []
+    
+    # if set to any value other than None, the userprofile visibility field will be disabled
+    # and locked to the value set here
+    USERPROFILE_VISIBILITY_SETTINGS_LOCKED = None
     
     # extra fields for the user profile.
     # usage:
@@ -673,7 +755,29 @@ class CosinnusConf(AppConf):
     # }
     # example: {'organisation': {'type': 'text', 'required': True}}
     USERPROFILE_EXTRA_FIELDS = {}
-
+    
+    # a dict of <form-name> -> list of formfield names that will be disabled in the user profile forms 
+    # for the current portal. can be dynamic and regular fields
+    # multiforms choosable are 'obj' (CosinnusProfile), 'user', 'media_tag'
+    USERPROFILE_DISABLED_FIELDS = {}
+    
+    # should the form view for admin-defined dynamic fields be shown
+    # in the admin
+    DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED = False
+    
+    # a list of tuples of a <LIST of managed tag slugs> and <LIST of profile extra field names>
+    # that become disabled unless the user has the managed tag
+    USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS = []
+    
+    # extra fields for CosinnusBaseGroup derived models.
+    # usage: see `USERPROFILE_EXTRA_FIELDS`
+    GROUP_EXTRA_FIELDS = {}
+    
+    # a i18n str that explains the special password rules to the user,
+    # can be markdown.
+    # will display default field legend if None
+    USER_PASSWORD_FIELD_ADDITIONAL_HINT_TRANS = None
+    
     # if True, payment urls and views will be enabled
     PAYMENTS_ENABLED = False
     # if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins
@@ -682,7 +786,7 @@ class CosinnusConf(AppConf):
     # whether to enable the cosinnus cloud app
     CLOUD_ENABLED = False
     # whether to show the cosinnus cloud dashboard widget
-    CLOUD_DASHBOARD_WIDGET_ENABLED = False 
+    CLOUD_DASHBOARD_WIDGET_ENABLED = True 
     
     # base url of the nextcloud service, without trailing slash
     CLOUD_NEXTCLOUD_URL = None
@@ -722,6 +826,9 @@ class CosinnusConf(AppConf):
     # if set to True, will hide some UI elements in navbar and dashboard and change some redirects
     FORUM_DISABLED = False
     
+    # if`InactiveLogoutMiddleware` is active, this is the time after which a user is logged out
+    INACTIVE_LOGOUT_TIME_SECONDS = 60 * 60
+    
     # if set to True, will hide some UI elements in navbar and dashboard and change some redirects
     POST_TO_FORUM_FROM_DASHBOARD_DISABLED = False
     
@@ -735,7 +842,17 @@ class CosinnusConf(AppConf):
     # if enabled, this allows all portal-admins to download user emails, this might be
     # *VERY* risky, so use cautiously
     ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS = False
-
+    
+    # should the "send newsletter to groups" admin view be enabled?
+    ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED = True
+    
+    # should the "send newsletter to managed tags" admin view be enabled?
+    ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED = False
+    
+    # if True administration newsletters ignore check_user_can_receive_emails`
+    # (will ignore any blacklisting, but will still not send to inactive accounts)
+    NEWSLETTER_SENDING_IGNORES_NOTIFICATION_SETTINGS = False
+    
     # set to True if you want to use this instance as oauth provider for other platforms
     IS_OAUTH_PROVIDER = False
     
@@ -756,14 +873,41 @@ class CosinnusConf(AppConf):
     # default value for form field for if to allow user creation of coffee tables
     CONFERENCE_COFFEETABLES_ALLOW_USER_CREATION_DEFAULT = False
     
+    # a list of formfield names of `ConferenceApplicationForm` to be hidden for this portal
+    CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS = []
+    
+    # default for checkbox "Priority choice enabled" in participation management
+    CONFERENCE_PRIORITY_CHOICE_DEFAULT = False
+    
+    CONFERENCE_PARTICIPATION_OPTIONS = [
+        (1, _('Overnight stay required')),
+        (2, _('Barrier-free access required')),
+        (3, _('Interpreter required')),
+        (4, _('Vegetarian cuisine')),
+        (5, _('Vegan cuisine')),
+        (6, _('Lactose-free cuisine')),
+        (7, _('Gluten-free cuisine')),
+    ]
+    
+    CONFERENCE_USE_PARTICIPATION_FIELD_HIDDEN = False
+    
     # enable display and forms for managed tags
     MANAGED_TAGS_ENABLED = False
+    # allows assigning multiple managed tags to objects
+    MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED = False
     # str path to a drop-in class for managed tags containing strings 
     MANAGED_TAGS_LABEL_CLASS_DROPIN = None
     # will the managed tag show up in the user profile form for the users to assign themselves?
     MANAGED_TAGS_USERS_MAY_ASSIGN_SELF = False
+    # users cannot assign the managed tags in their profiles,
+    # but admins can assign them in the userprofile admin update view
+    MANAGED_TAGS_ASSIGNABLE_IN_USER_ADMIN_FORM = False
     # will the managed tag show up in the group form for the users to assign their groups?
     MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS = False
+    
+    MANAGED_TAGS_IN_SIGNUP_FORM = True
+    # if set to True, managed tag descriptions will only be shown in form fields
+    MANAGED_TAGS_SHOW_DESCRIPTION_IN_FORMS_ONLY = False
     # is approval by an admin needed on user created tags?
     # (setting this to true makes managed tags get created with approved=False)
     MANAGED_TAGS_USER_TAGS_REQUIRE_APPROVAL = False
@@ -774,6 +918,36 @@ class CosinnusConf(AppConf):
     MANAGED_TAGS_GROUP_FORMFIELD_REQUIRED = False
     # the default slug for pre-filled managed tags
     MANAGED_TAGS_DEFAULT_INITIAL_SLUG = None
+    # the prefix for any automatically created paired groups
+    MANAGED_TAGS_PAIRED_GROUPS_PREFIX = ''
+    # whether to show the managed tags as a filter on the map
+    MANAGED_TAGS_SHOW_FILTER_ON_MAP = True
+    # if set to a str managed tag slugs, the user choices for
+    # DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD fields will be 
+    # filtered on users tagged with this tag
+    MANAGED_TAG_DYNAMIC_USER_FIELD_FILTER_ON_TAG_SLUG = None
+    
+    # set to True to enable virusscan. the clamd daeomon needs to be running!
+    # see https://pypi.org/project/django-clamd/
+    VIRUS_SCAN_UPLOADED_FILES = False
+    
+    # if this is True, then the bbb-room create call
+    # will be triggered every time the queue request hits
+    # if False, it will be triggered on requesting of the queue-URL (should happen less often)
+    TRIGGER_BBB_ROOM_CREATION_IN_QUEUE = True
+    
+    BBB_SERVER_CHOICES = (
+        (0, '(None)'),
+    )
+    
+    # map of the authentication data for the server choices
+    # in `COSINNUS_BBB_SERVER_CHOICES`
+    # { <int>: (BBB_API_URL, BBB_SECRET_KEY), ... }  
+    BBB_SERVER_AUTH_AND_SECRET_PAIRS = {
+        0: (None, None),
+    }
+    
+    BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: url.startswith('https://bbbatscale')
     
 
 class CosinnusDefaultSettings(AppConf):
@@ -802,7 +976,7 @@ class CosinnusDefaultSettings(AppConf):
     BBB_ROOM_DEFAULT_SETTINGS = {
         "record": False,
         "autoStartRecording": False,
-        "allowStartStopRecording": False
+        "allowStartStopRecording": True
     }
     # cache timeout for retrieval of participants
     BBB_ROOM_PARTICIPANTS_CACHE_TIMEOUT_SECONDS = 20
@@ -837,3 +1011,13 @@ class CosinnusDefaultSettings(AppConf):
         2: {},
         3: {},
     }
+    # limit visit creation for (user, bbb_room) pairs to a time window
+    BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
+
+    STARRED_STAR_LABEL = _('Bookmark')
+    STARRED_STARRING_LABEL = _('Bookmarked')
+    STARRED_OBJECTS_LIST = _('Bookmark list')
+    STARRED_USERS_LIST = _('Bookmarked Users list')
+
+    PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
+

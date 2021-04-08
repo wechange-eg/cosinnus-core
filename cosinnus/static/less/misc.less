@@ -73,7 +73,9 @@
     }
     
     > .btn, > span > .btn {
-    	float: none;
+        float: none;
+    }
+    > .btn:first-of-type, > span > .btn:first-of-type {
         margin: 0;
     }
     span + .btn {
@@ -184,29 +186,30 @@
 .nav-tabs > li > a, .nav-tabs > li.active > a,
 .nav-tabs > li > a:focus, .nav-tabs > li.active > a:focus,
 .nav-tabs > li > a:hover, .nav-tabs > li.active > a:hover {
-    border-color: #104a59;
+    border-color: @app-main-color-dark;
 }
 
 .nav-tabs > li > a {
-    background-color: #16778d;
+    background-color: @app-main-color;
     color: white;
 }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus {
-    background-color: #104a59;
+    background-color: @app-main-color-dark;
     color: white;
 }
 
 .nav-tabs > li > a:hover, .nav-tabs > li.active > a:hover {
-    background-color: #104a59;
+    background-color: @app-main-color-dark;
     color: white;
 }
 
 
-.btn-no-interact {
+.btn-no-interact, .btn-headline {
     cursor: default !important;
 }
 
-.app-main .btn-no-interact:hover .media, .app-main .btn-no-interact:hover .media > .media-body {
+.app-main .btn-headline:not(.btn-white):hover .media, .app-main .btn-headline:not(.btn-white):hover .media > .media-body,
+.app-main .btn-headline:not(.btn-white):hover .media, .app-main .btn-headline:not(.btn-white):hover .media > .media-body {
     background-color: @app-main-color;
 }
 
@@ -362,8 +365,9 @@
 .CodeMirror .editor-preview p, .CodeMirror .editor-preview ul,
 .CodeMirror .editor-preview ol, .CodeMirror .editor-preview li,
 .CodeMirror .editor-preview pre, .CodeMirror .editor-preview h1,
-.CodeMirror .editor-preview h2, .CodeMirror .editor-preview h3 {
-    background-color: @app-neutral-color-light;
+.CodeMirror .editor-preview h2, .CodeMirror .editor-preview h3,
+.CodeMirror .editor-preview {
+    background-color: @color-light-medium-gray;
 }
 
 .CodeMirror-scroll {
@@ -451,6 +455,12 @@ a.anchor {
         2px -2px 0 #000,
         -2px 2px 0 #000,
         2px 2px 0 #000;
+}
+
+ul.blank-list, ul.blank-list li,
+ol.blank-list, ol.blank-list li {
+    list-style: none;
+    
 }
 
 @media (max-width: 767px) {

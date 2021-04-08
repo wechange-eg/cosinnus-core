@@ -1,4 +1,4 @@
-from django_select2 import (HeavyModelSelect2MultipleChoiceField)
+from django_select2.fields import HeavySelect2MultipleChoiceField
 from django.core.exceptions import ValidationError
 from cosinnus.models.group import CosinnusGroup
 from django_select2.util import JSFunction
@@ -10,7 +10,7 @@ from cosinnus.utils.user import filter_active_users
 User = get_user_model()
 
 
-class Select2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
+class Select2MultipleChoiceField(HeavySelect2MultipleChoiceField):
 
     select_type = 'user'
     model = None
@@ -78,7 +78,16 @@ class UserSelect2MultipleChoiceField(Select2MultipleChoiceField):
             recipients.update(filter_active_users(User.objects.filter(id__in=ids['user'])))
 
         return list(recipients)
-
+    
+    
+class UserIDSelect2MultipleChoiceField(UserSelect2MultipleChoiceField):
+    """ Like UserSelect2MultipleChoiceField, but persists values as list of int ids instead of
+        list of users """
+    
+    def clean(self, *args, **kwargs):
+        user_list = super(UserIDSelect2MultipleChoiceField, self).clean(*args, **kwargs)
+        return [user.id for user in user_list]
+    
 
 class GroupSelect2MultipleChoiceField(Select2MultipleChoiceField):
     model = get_cosinnus_group_model()

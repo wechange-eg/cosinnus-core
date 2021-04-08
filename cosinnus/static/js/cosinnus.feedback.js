@@ -143,43 +143,45 @@ $.cosinnus.Feedback = {
       });
   },
   
-  cosinnus_register_likefollow: function() {
-	  $('body').on('click', '.likefollow-button.action-do-likefollow', function(event){
+  cosinnus_register_likefollowstar: function() {
+	  $('body').on('click', '.likefollowstar-button.action-do-likefollowstar', function(event){
+          event.preventDefault();
 		  var $this = $(this);
 		  var ct = $this.data('ct');
 		  var id = $this.data('id');
 		  var type = $this.data('type');
 		  var selected = $this.hasClass('selected');
 		  selected = !selected;
-		  var $button = $('.'+type+'-button[data-ct="'+ct+'"][data-id="'+id+'"]')
-		  $button.toggleClass('selected', selected);
+          var $button = $('.'+type+'-button[data-ct="'+ct+'"][data-id="'+id+'"]')
 		  if (selected) {
-			  $button.next('.likefollow-button-success-message').fadeIn(function(){ $(this).addClass('hide-on-click'); });
+              $this.addClass('selected');
+			  $button.next('.likefollowstar-button-success-message').fadeIn(function(){ $(this).addClass('hide-on-click'); });
 		  } else {
-			  $button.next('.likefollow-button-success-message').hide().removeClass('hide-on-click');
+            $this.removeClass('selected');
+			$button.next('.likefollowstar-button-success-message').hide().removeClass('hide-on-click');
 		  }
 		  
 		  var params = {};
 		  params[type] = selected ? '1' : '0';
-		  $.cosinnus.Feedback.cosinnus_fire_likefollow(ct, id, params);
+		  $.cosinnus.Feedback.cosinnus_fire_likefollowstar(ct, id, params);
 		  
 	  });
 	  
   },
   
   /**
-   * Fires a like/follow. Expects a param dict likefollowParams
+   * Fires a like/follow. Expects a param dict likefollowstarParams
    * containing either/both of `like` `follow` with values '1' or '0'.
    */
-  cosinnus_fire_likefollow: function(contentType, id, likefollowParams) {
-	  var likefollowUrl = '/likefollow/';
-	  var post_data = likefollowParams;
+  cosinnus_fire_likefollowstar: function(contentType, id, likefollowstarParams) {
+	  var likefollowstarUrl = '/likefollowstar/';
+	  var post_data = likefollowstarParams;
 	  post_data['ct'] = contentType;
 	  post_data['id'] = id;
 	  
 	  $.ajax({
           type:"POST",
-          url: likefollowUrl,
+          url: likefollowstarUrl,
           data: post_data,
           success: function(data){
           },
@@ -192,5 +194,5 @@ $.cosinnus.Feedback = {
 };
 
 $(function() {
-	$.cosinnus.Feedback.cosinnus_register_likefollow();
+	$.cosinnus.Feedback.cosinnus_register_likefollowstar();
 });

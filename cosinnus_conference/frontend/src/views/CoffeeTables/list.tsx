@@ -22,6 +22,7 @@ import {Loading} from "../components/Loading"
 import {EventRoomState} from "../../stores/events/reducer"
 import {EventParticipantsRoomState} from "../../stores/eventParticipants/reducer"
 import {fetchEventParticipants} from "../../stores/eventParticipants/effects"
+import {Notification} from "../components/Notification"
 
 interface CoffeeTablesProps {
   events: EventRoomState
@@ -63,6 +64,7 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
   return (
     <Grid container>
       <Content>
+        <Notification />
         <div className={classes.section}>
           <Typography component="h1"><FormattedMessage id="Happening now" /></Typography>
           {room.props.descriptionHtml && (
@@ -83,7 +85,7 @@ function CoffeeTablesConnector (props: CoffeeTablesProps & RouteComponentProps) 
         </div>
         <ManageRoomButtons />
       </Content>
-      {room.props.url && <Sidebar url={room.props.url} />}
+      {room.props.showChat && room.props.url && <Sidebar url={room.props.url} />}
     </Grid>
   )
 }

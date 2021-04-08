@@ -1,0 +1,235 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail %}
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_group.html"  with current_page="temporaryusers" %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">{% trans "Conference Management" %}</li>
+{% endblock %}
+
+{% block content %}
+<div class="content-box">
+	<h2 class="white-text large-space">{{ group.name }} ({% if group.conference_is_running %} {% trans "Conference is running" %} {% else %} {% trans "Conference is not running" %} {% endif %})</h2>
+	
+	{% group_url 'cosinnus:conference:workshop-participants-upload' group=group as workshop_participants_upload_page %}
+	{% group_url 'cosinnus:conference:workshop-participants-download' group=group as workshop_participants_download_page %}
+
+
+	<div class="panel panel-default large-space">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                {% trans "Accounts from CSV Upload" %}
+                <a class="btn" href="{{ workshop_participants_upload_page }}"><i class="fa fa-upload"></i> {% trans "Upload Participants" %}</a>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse">
+            <div class="panel-body">
+		        {% for member_dict in members %}
+		            <div class="fadedown regular-space">
+		                <div class="btn btn-emphasized w100">
+		                    <ul class="media-list">
+		                        <li class="media">
+		                            <span class="pull-left" href="{{ member_dict.member|profile_url }}">
+		                                {% include "cosinnus/user/user_avatar_image.html" with user=member_dict.member %}
+		                            </span>
+		                            <a class="pull-right fadedown-clickarea" href="#">
+			                            <i class="fa fa-chevron-down"></i>
+			                        </a>
+		                            <div class="media-body">
+		                                <span class="annotation mobile-hidden">
+		                                	{% if member_dict.member.last_login %}
+		                                	<span>
+		                                		{% trans 'last login' %}: {{ member_dict.member.last_login | date }}
+		                                		&nbsp;&nbsp;
+		                                	</span>
+		                                	{% else %}
+		                                	<span>
+		                                		{% trans 'last login' %}: {% trans 'no login yet'%}
+		                                		&nbsp;&nbsp;
+		                                	</span>
+		                                	{% endif %}
+		                                	<span>
+		                                		<i class="fa fa-users"></i> {{ member_dict.workshops.count }}
+		                                		&nbsp;&nbsp;
+		                                	</span>
+		                                	<span>
+		                                		{% if member_dict.member.id in group_admins %} {% trans "Admin" %} {% else %} {% trans "Member" %} {% endif %}
+		                                		&nbsp;&nbsp;
+		                                	</span>
+		                                	<span>
+	                                        {% if member_dict.member.is_active %} {% trans 'active'%} {% else %} {% trans 'not active'%} {% endif %}
+	                                        	&nbsp;&nbsp;
+	                                    	</span>
+	                                	</span>
+		                                <a href="{{ member|profile_url }}">
+		                                	{% if member_dict.member.cosinnus_profile.workshop_user_name %}
+		                                	{{ member_dict.member.cosinnus_profile.readable_workshop_user_name }}
+		                                	{% else %}
+		                                    {{ member_dict.member|full_name }}
+		                                    {% endif %}
+		                                </a>
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </div>
+		                <div>
+		                	<div>
+        						<div class="media-body well">
+        							<div class="textfield">{% trans 'User participates in the following workshops:' %}</div>
+        							{% for workshop in member_dict.workshops %}
+            						<div class="textfield"> {{ workshop.group.name }}: {% if workshop.status == 2 %} {% trans "Admin" %} {% else %} {% trans "Member" %} {% endif %}</div>
+        							{% endfor %}
+        						</div>
+  							</div>
+		                	{% if member_dict.member.is_active %}
+		                	{% captureas modal_deactivate_id %}userModal_deactivate_{{member_dict.member.pk}}{% endcaptureas %}
+		                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_deactivate_id}}">
+		                        <ul class="media-list">
+		                            <li class="media">
+		                            	<a class="pull-left" href="#">
+				                                <i class="fas fa-minus-circle"></i>
+				                            </a>
+		                                <div class="media-body">
+		                                    {% trans "deactivate member" %}
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </button>
+
+		                    {% else %}
+		                    {% captureas modal_activate_id %}userModal_activate_{{member_dict.member.pk}}{% endcaptureas %}
+		                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_activate_id}}">
+		                        <ul class="media-list">
+		                            <li class="media">
+		                            	<a class="pull-left" href="#">
+				                                <i class="fas fa-check-circle"></i>
+				                            </a>
+		                                <div class="media-body">
+		                                    {% trans "activate member" %}
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </button>
+		                    {% endif %}
+
+		                    {% captureas modal_remove_id %}userModal_remove_{{member_dict.member.pk}}{% endcaptureas %}
+		                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_remove_id}}">
+		                        <ul class="media-list">
+		                            <li class="media">
+		                            	<a class="pull-left" href="#">
+				                                <i class="fas fa-user-slash"></i>
+				                            </a>
+		                                <div class="media-body">
+		                                    {% trans "remove user" %}
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </button>
+
+		                </div>
+		            </div>
+		            {% if member_dict.member.is_active %}
+		            {% captureas label %}{% trans "Do you really want to deactivate the member's user account ?" %}{% endcaptureas %}
+	                {% captureas title %}{% trans "Deactivate Member" %}{% endcaptureas %}
+	                {% captureas action %}{% group_url 'cosinnus:conference:management' group=object %}{% endcaptureas %}
+	                {% include "cosinnus/modal_box.html" with id=modal_deactivate_id label=label title=title form_action=action submit_name="deactivate_member" submit_value=member_dict.member.id title_icon='fas fa-minus-circle' %}
+
+	                {% else %}
+	                {% captureas label %}{% trans "Do you really want to activate the member's user account ?" %}{% endcaptureas %}
+	                {% captureas title %}{% trans "Activate Member" %}{% endcaptureas %}
+	                {% captureas action %}{% group_url 'cosinnus:conference:management' group=object %}{% endcaptureas %}
+	                {% include "cosinnus/modal_box.html" with id=modal_activate_id label=label title=title form_action=action submit_name="activate_member" submit_value=member_dict.member.id title_icon='fas fa-check-circle' %}
+	                {% endif %}
+
+	                {% captureas label %}{% trans "Do you really want to remove the user?" %}{% endcaptureas %}
+	                {% captureas title %}{% trans "Remove User" %}{% endcaptureas %}
+	                {% captureas action %}{% group_url 'cosinnus:conference:management' group=object %}{% endcaptureas %}
+	                {% include "cosinnus/modal_box.html" with id=modal_remove_id label=label title=title form_action=action submit_name="remove_member" submit_value=member_dict.member.id title_icon_full_class='fas fa-user-slash' %}
+		        {% endfor %}
+		        
+		        <div>
+			        <div class="fadedown pull-right regular-space">
+				        <form action="" method="post">
+			    		{% csrf_token %}
+					        <button type="submit" class="btn btn-emphasized btn-autosize" name="{% if group.conference_is_running %}finishConferenence{% else %}startConferenence{% endif%}">
+					            <ul class="media-list">
+					                <li class="media">
+					                    <a class="pull-left" href="#">
+					                    	{% if group.conference_is_running %}
+					                    	<i class="far fa-stop-circle"></i>
+					                    	{% else %}
+					                        <i class="far fa-play-circle"></i>
+					                        {% endif %}
+					                    </a>
+					                    <div class="media-body">
+					                    	{% if group.conference_is_running %}
+					                        {% trans "Finish conference and deactivate user accounts" %}
+					                        {% else %}
+					                        {% trans "Start conference and activate user accounts" %}
+					                        {% endif %}
+					                    </div>
+					                </li>
+					            </ul>
+					        </button>
+						</form>
+					</div>
+					<div class="fadedown pull-right">
+			        	<button class="btn btn-emphasized">
+			        		<ul class="media-list">
+			        			<li class="media">
+			        				<a class="pull-left" href="{{ workshop_participants_download_page }}">
+			        					<i class="fa fa-download"></i>
+					                </a>
+			        				<div class="media-body">
+			        					<a href="{{ workshop_participants_download_page }}">{% trans "Download Statistics" %}</a>
+			        				</div>
+			        			</li>
+			        		</ul>
+			        	</button>
+			        </div>
+			        
+				</div>
+            </div>
+        </div>
+    </div>
+    
+    {% comment %} 
+	Removed for now
+	TODO: remove this feature properly when we refactor this!
+    <div class="panel panel-default large-space">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                {% trans "Workshops" %}
+                <a class="btn" href="{% url 'cosinnus:group-add' %}?group={{ group.slug }}"><i class="fa fa-plus"></i> {% trans "Add workshop" %}</a>
+            </h4>
+        </div>
+        <div class="panel-body">
+        	{% for group in group.groups.all %}
+	        	{% group_url 'cosinnus:group-dashboard' group=group as group_url %}
+	        	<div class="fadedown regular-space">
+	        		<div class="btn btn-emphasized w100">
+	            		<ul class="media-list">
+	            			<li class="media">
+	            				<a class="pull-left" href="{{ group_url }}">
+	                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+	                        	</a>
+	                        	<div class="media-body">
+	                        		<a href="{{ group_url }}">
+	                                {{ group.name }}
+	                            	</a>
+	                            </div>
+	            			</li>
+	            		</ul>
+	            	</div>
+	            </div>
+        	{% endfor %}
+        </div>
+	</div>
+	{% endcomment %}
+	
+{% endblock content %}

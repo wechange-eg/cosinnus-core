@@ -58,7 +58,7 @@ msgstr "Chats"
 #. undefined
 #: locale/src/views/App.json
 msgid "Conference is being prepared"
-msgstr "Die Konferenzumgebung ist noch nicht eingerichtet"
+msgstr "Die Tagungsumgebung ist noch nicht eingerichtet"
 
 #. [Connect with someone via videochat for 5 minutes]
 #. defaultMessage is:
@@ -147,7 +147,7 @@ msgstr "Findet gerade statt"
 #. undefined
 #: locale/src/views/components/Nav/index.json
 msgid "Manage conference"
-msgstr "Konferenz bearbeiten"
+msgstr "Tagung bearbeiten"
 
 #. [Manage events]
 #. defaultMessage is:
@@ -162,6 +162,13 @@ msgstr "Veranstaltungen bearbeiten"
 #: locale/src/views/components/Nav/index.json
 msgid "Manage rooms"
 msgstr "Räume bearbeiten"
+
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "Mitgliedschaft"
 
 #. [Name]
 #. defaultMessage is:
@@ -267,7 +274,7 @@ msgstr "Repräsentierte Organisationen"
 #. undefined
 #: locale/src/views/App.json
 msgid "The conference is being prepared, please try again at a later date."
-msgstr "Die Konferenzumgebung wird noch gepflegt, bitte versuchen Sie es später erneut."
+msgstr "Die Tagungsumgebung wird noch gepflegt, bitte versuchen Sie es später erneut."
 
 #. [Today]
 #. defaultMessage is:
@@ -343,7 +350,7 @@ msgstr "Veranstaltungen parallel"
 #: locale/src/views/components/CoffeeTable/index.json
 #: locale/src/views/components/EventGrid/index.json
 msgid "participants"
-msgstr "Teilnehmer"
+msgstr "Teilnehmende"
 
 #. [places left]
 #. defaultMessage is:
@@ -351,3 +358,14 @@ msgstr "Teilnehmer"
 #: locale/src/views/components/CoffeeTable/index.json
 msgid "places left"
 msgstr "Plätze frei"
+
+msgid "Are you sure you want to leave this event?"
+msgstr "Sind Sie sicher, dass Sie diese Veranstaltung verlassen wollen?"
+
+msgid ""
+"You're currently attending an event. Are you sure you want to leave? Tip: You can "
+"open a new tab or window instead."
+msgstr ""
+"Sie nehmen derzeit an einer Veranstaltung teil. Sind Sie sicher, dass Sie gehen "
+"möchten? Tipp: Sie können stattdessen eine neue Registerkarte oder ein neues "
+"Fenster öffnen."

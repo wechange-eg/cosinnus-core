@@ -249,8 +249,12 @@ ul.errorlist {
 .panel-default {
     border: none;
     border-left: 3px solid whitesmoke;
-    margin-bottom: 20px !important;
+    margin-bottom: 12px !important;
     background-color: transparent;
+    
+    &.large-space {
+        margin-bottom: 20px !important;
+    }
 }
 
 #map {
@@ -335,11 +339,17 @@ ul.errorlist {
 .comment-background, .comment-background p {
 	background-color: @comment-background-color !important;
 }
+
 .indented {
-	padding-left: 40px;
+    padding-left: 40px;
 }
 .extra-indented {
   padding-left: 50px;
+}
+.no-indent {
+    .indented, .extra-indented {
+    	padding-left: 0;
+    }
 }
 .underlined {
 	text-decoration: underline !important;

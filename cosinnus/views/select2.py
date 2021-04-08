@@ -14,6 +14,11 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import filter_active_users,\
     get_user_query_filter_for_search_terms, get_user_select2_pills
 from cosinnus.views.user import UserSelect2View
+from django.core.exceptions import PermissionDenied
+from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
+from cosinnus.conf import settings
+from cosinnus.utils.permissions import check_user_superuser
 
 
 class GroupMembersView(RequireGroupMember, Select2View):
@@ -51,6 +56,11 @@ class GroupMembersView(RequireGroupMember, Select2View):
 
 class AllMembersView(RequireLoggedIn, Select2View):
     
+    def filter_user_qs(self, user_qs, terms):
+        q = get_user_query_filter_for_search_terms(terms)
+        user_qs = filter_active_users(user_qs.filter(id__in=CosinnusPortal.get_current().members).filter(q))
+        return user_qs
+    
     def get_results(self, request, term, page, context):
         start = (page - 1) * 10
         end = page * 10
@@ -58,9 +68,9 @@ class AllMembersView(RequireLoggedIn, Select2View):
         User = get_user_model()
         
         terms = term.strip().lower().split(' ')
-        q = get_user_query_filter_for_search_terms(terms)
         
-        user_qs = filter_active_users(User.objects.filter(id__in=CosinnusPortal.get_current().members).filter(q))
+        user_qs = User.objects.all()
+        user_qs = self.filter_user_qs(user_qs, terms)
         
         count = user_qs.count()
         if count < start:
@@ -72,6 +82,23 @@ class AllMembersView(RequireLoggedIn, Select2View):
         results = get_user_select2_pills(users)
 
         return (NO_ERR_RESP, has_more, results)
+
+
+class ManagedTagsMembersView(AllMembersView):
+    
+    managed_tag_slug = None
+    
+    def dispatch(self, request, *args, **kwargs):
+        self.managed_tag_slug = kwargs.pop('tag_slug', None)
+        return super(ManagedTagsMembersView, self).dispatch(request, *args, **kwargs)
+    
+    def filter_user_qs(self, user_qs, terms):
+        user_qs = super(ManagedTagsMembersView, self).filter_user_qs(user_qs, terms)
+        if self.managed_tag_slug:
+            profile_assignments_qs = CosinnusManagedTagAssignment.objects.get_for_model(get_user_profile_model())
+            assigned_profile_ids = profile_assignments_qs.filter(managed_tag__slug=self.managed_tag_slug).values_list('object_id', flat=True)
+            user_qs = user_qs.filter(cosinnus_profile__id__in=assigned_profile_ids)
+        return user_qs
 
 
 class TagsView(Select2View):
@@ -88,8 +115,44 @@ class TagsView(Select2View):
         has_more = count > end
 
         tags = list(Tag.objects.filter(q).values_list('name', 'name').all()[start:end])
-
         return (NO_ERR_RESP, has_more, tags)
+
+
+class DynamicFreetextChoicesView(Select2View):
+    
+    field_name = None
+    
+    def dispatch(self, request, *args, **kwargs):
+        if 'field_name' in kwargs:
+            self.field_name = kwargs.pop('field_name')
+            return super(DynamicFreetextChoicesView, self).dispatch(request, *args, **kwargs)
+    
+    def check_all_permissions(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            raise PermissionDenied('Only authenticated users have access to this endpoint')
+    
+    def get_results(self, request, term, page, context):
+        term = term.lower()
+        start = (page - 1) * 10
+        end = page * 10
+        
+        filt = Q(**{f'dynamic_fields__{self.field_name}__icontains': term})
+        qs = get_user_profile_model().objects.all().filter(filt)
+        
+        count = qs.count()
+        if count < start:
+            raise Http404
+        has_more = count > end
+        
+        all_values = qs.values_list(f'dynamic_fields__{self.field_name}', flat=True)
+        # flatten values as some returned values might be items, and some might be lists
+        flat_values = []
+        for val in all_values:
+            flat_values += val if isinstance(val, list) else [val]
+        # return only matched values
+        matches = [item for item in flat_values if item and term in item.lower()]
+        text_choices = [(match, match) for match in matches[start:end]]
+        return (NO_ERR_RESP, has_more, text_choices)
 
 
 class GroupsView(Select2View):
@@ -107,7 +170,8 @@ class GroupsView(Select2View):
         
         qs = get_cosinnus_group_model().objects.filter(q).filter(portal_id=CosinnusPortal.get_current().id, is_active=True)
 
-        if request.GET.get('is_member', None) == '1':
+        # non-superusers may only select groups they are in
+        if not check_user_superuser(request.user):
             user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(request.user)
             qs = qs.filter(id__in=user_group_ids)
         
@@ -123,6 +187,9 @@ class GroupsView(Select2View):
         
         groups = []
         for group in qs[start:end]:
+            # do/do not return the forum group
+            #if group.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None):
+            #    continue
             # access group.name by its dict lookup to support translation magic
             groups.append((group.id, group['name']))
             
@@ -131,5 +198,7 @@ class GroupsView(Select2View):
 
 group_members = GroupMembersView.as_view()
 all_members = AllMembersView.as_view()
+managed_tagged_members = ManagedTagsMembersView.as_view()
 tags_view = TagsView.as_view()
+dynamic_freetext_choices_view = DynamicFreetextChoicesView.as_view()
 groups_view = GroupsView.as_view()

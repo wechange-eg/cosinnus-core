@@ -16,6 +16,7 @@ import logging
 from cosinnus.utils.user import get_user_tos_accepted_date,\
     check_user_has_accepted_portal_tos
 from cosinnus.models.managed_tags import CosinnusManagedTag
+from cosinnus.trans.group import get_group_trans_by_type
 logger = logging.getLogger('cosinnus')
 
 
@@ -112,6 +113,9 @@ def cosinnus(request):
         'COSINNUS_CURRENT_LANGUAGE': get_language(),
         'COSINNUS_CURRENT_PORTAL': CosinnusPortal.get_current(),
         'COSINNUS_MANAGED_TAG_LABELS': CosinnusManagedTag.labels,
+        'COSINNUS_PROJECT_TRANS': get_group_trans_by_type(0),
+        'COSINNUS_SOCIETY_TRANS': get_group_trans_by_type(1),
+        'COSINNUS_CONFERENCE_TRANS': get_group_trans_by_type(2),
     }
 
 

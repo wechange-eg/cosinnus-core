@@ -43,7 +43,11 @@
                                 {% elif user.pk in pendings %}
                                     {% trans "Membership requested" %}
                                 {% elif user.pk in invited %}
-                                    {% trans "Invited to be a member" %}
+                                    {% if group.group_is_conference and group.use_conference_applications %}
+                                        {% trans "Invited to apply" %}
+                                    {% else %}
+                                        {% trans "Invited to be a member" %}
+                                    {% endif %}
                                 {% elif group.public %}
                                     {% trans "Public" context "Group" %}
                                 {% else %}
@@ -128,37 +132,51 @@
                 {% endif %}
                 
                 {% if user.pk in invited %}
-                    
-	                <span class="app-calendar"> {# Hacky green color #}
-	                    <button type="button" class="btn btn-emphasized" onclick="$('#accept-group-invitation-form').submit();">
-	                        <ul class="media-list">
-	                            <li class="media">
-	                                <a class="pull-left" href="#">
-	                                    <i class="fa fa-sign-in"></i>
-	                                </a>
-	                                <div class="media-body">
-	                                    {% trans "Accept Invitation" %}
-	                                </div>
-	                            </li>
-	                        </ul>
-	                    </button>
-	                </span>
+                    {% if group.group_is_conference and group.use_conference_applications %}
+                        <span class="app-calendar"> {# Hacky green color #}
+                            <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:conference:application' group=group.slug %}" target="_blank">
+                                <ul class="media-list">
+                                    <li class="media">
+                                        <a class="pull-left" href="#">
+                                            <i class="fa fa-sign-in"></i>
+                                        </a>
+                                        <div class="media-body">
+                                            {% trans "Apply for Participation" %}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </button>
+                        </span>
+		            {% else %}
+		                <span class="app-calendar"> {# Hacky green color #}
+		                    <button type="button" class="btn btn-emphasized" onclick="$('#accept-group-invitation-form').submit();">
+		                        <ul class="media-list">
+		                            <li class="media">
+		                                <a class="pull-left" href="#">
+		                                    <i class="fa fa-sign-in"></i>
+		                                </a>
+		                                <div class="media-body">
+		                                    {% trans "Accept Invitation" %}
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </button>
+		                </span>
+		            {% endif %}
 	                
 	                {% captureas modal_decline_invitation_id %}userModal_decline_invitation_{{group.id}}{% endcaptureas %}
-	                <span class="app-etherpad">
-	                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
-	                        <ul class="media-list">
-	                            <li class="media">
-	                                <a class="pull-left" href="#">
-	                                    <i class="fa fa-close"></i>
-	                                </a>
-	                                <div class="media-body">
-	                                    {% trans "Decline Invitation" %}</span>
-	                                </div>
-	                            </li>
-	                        </ul>
-	                    </button>
-	                </span>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-close"></i>
+                                </a>
+                                <div class="media-body">
+                                    {% trans "Decline Invitation" %}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
 	                
 	                {# hidden form, triggered by accept-button JS #}
 	                <form id="accept-group-invitation-form" action="{% group_url 'cosinnus:group-user-accept' group=group %}" method="post" style="display: none;" >{% csrf_token %}

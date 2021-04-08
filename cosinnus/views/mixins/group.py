@@ -360,7 +360,7 @@ class EndlessPaginationMixin(object):
         return super(EndlessPaginationMixin, self).dispatch( request, *args, **kwargs)
 
 
-class GroupIsConferenceMixin:
+class GroupIsConferenceMixin(object):
     """ View mixin that makes it required for the view's group to be a conference.
         If not, redirects to the group dashboard. 
         Needs to be in MRO *after* the group-applying `RequireReadMixin` (or similar).  """
@@ -369,3 +369,22 @@ class GroupIsConferenceMixin:
         if not self.group.group_is_conference:
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
         return super().dispatch(request, *args, **kwargs)
+    
+
+class RequireExtraDispatchCheckMixin(object):
+    """ View mixin that makes it required for the view's group to be a conference.
+        If not, redirects to the group dashboard. 
+        Needs to be in MRO *after* the group-applying `RequireReadMixin` (or similar).  """
+
+    def dispatch(self, request, *args, **kwargs):
+        return_val = self.extra_dispatch_check()
+        if return_val is not None:
+            return return_val
+        return super().dispatch(request, *args, **kwargs)
+    
+    def extra_dispatch_check(self):
+        """ Stub. Implement this in your view. If anything other than None is returned,
+            the dispatch() function will return that value. """
+        return None
+        
+    

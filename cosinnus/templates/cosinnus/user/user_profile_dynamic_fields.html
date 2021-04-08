@@ -1,0 +1,16 @@
+{% load cosinnus_tags %}
+
+{% with labels=SETTINGS.COSINNUS_USERPROFILE_EXTRA_FIELDS%}
+{% for key, value in profile_values.items %}
+    {% if value %}
+        <legend>{{ labels|get_item:key|get_attr:'label' }}</legend>
+        {% with type=labels|get_item:key|get_attr:'type' %}
+            {% if type == 'country' %}
+            <p class="transparent">{{ value|get_country_name }}</p>
+            {% else %}
+            <p class="transparent">{{ value|listformat }}</p>
+            {% endif %}
+        {% endwith %}
+    {% endif %}
+{% endfor %}
+{% endwith %}

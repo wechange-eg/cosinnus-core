@@ -1,0 +1,207 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags cosinnus_map_tags static thumbnail %}
+
+{% block page_title %}{% trans "User Import" %} {{ block.super }}{% endblock page_title %}
+
+{% block leftnav %}
+    {% include "cosinnus/user_import/leftnav.html"  with current_page="import" %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li class="active">{% trans "User Import" %}</li>
+{% endblock %}
+
+{% block content %}
+
+   <div class="content-box">
+        {% trans "Delete uploaded data and upload a new CSV file" as reset_button_label %}
+	
+        {% if form_view == "import-ready" or form_view == "invalid" or form_view == "failed" %}
+            <div class="large-space">
+		        <form action="" method="post" enctype="multipart/form-data">
+	                {% csrf_token %}
+	                
+	                <input type="hidden" name="action" value="scrap" />
+	                
+					<button type="submit" class="btn btn-emphasized btn-autosize">
+					    <ul class="media-list">
+					        <li class="media">
+					            <a class="pull-left" href="#">
+					                <i class="fa fa-refresh"></i>
+					            </a>
+					            <div class="media-body">
+					                {{ reset_button_label }}
+					            </div>
+					        </li>
+					    </ul>
+					</button>
+	            </form>
+	            <div class="clearfix"></div>
+	        </div>
+	    {% endif %}
+	
+		<form action="" method="post" enctype="multipart/form-data">
+		    {% csrf_token %}
+            {{ form.non_field_errors }}
+		    
+		    {% if form_view == "upload" %}
+		        <h2>{% trans "Upload a user CSV file to import user profiles" %}</h2>
+			    <p class="textfield transparent">
+			        {% trans "Please upload a CSV with the following columns (in any order)" %}:
+			        {{ required_columns }}
+		        </p>
+		        {% for field in form %}
+			        <div class="cosinnus-field">
+			            {% include 'cosinnus/fields/default_field.html' with field=field %}
+			        </div>
+		        {% endfor %}
+		        <p class="textfield transparent">
+                    {% trans "No data will be imported at this point." %}<br/><br/>
+                    {% trans "The uploaded file will be validated and a report of the data it contains will be shown." %}<br/>
+                    {% trans "You can then start the import from the report page." %}
+                </p>
+                <input type="hidden" name="action" value="upload" />
+                {% trans "Upload CSV File" as submit_button_label %}
+                {% captureas submit_button_icon %}fa-upload{% endcaptureas %}
+				
+			{% elif form_view == "dry-run-running" or form_view == "import-running" %}
+			    {% if form_view == "dry-run-running" %}
+                    <h2>{% trans "The CSV is currently being validated..." %}</h2>
+                {% endif %}
+                {% if form_view == "import-running" %}
+                    <h2>{% trans "The import is currently running..." %}</h2>
+                {% endif %}
+                
+			    <p class="textfield transparent">
+			     {% trans "This page will automatically refresh when the process is done." %}
+			    </p>
+			    {% comment %} Refresh every 10 seconds {% endcomment %}
+			    <script type="text/javascript">
+				    setTimeout(function () { location.reload(); }, 10000);
+				</script>
+				
+                {% if progress_string %}
+	                <p class="textfield transparent">
+	                    {{ progress_string }}
+	                </p>
+                {% endif %}
+	        
+	        {% elif form_view == "import-ready" %}
+                <p class="textfield import-warning">
+                    {% trans "No data has been imported yet. Ready to import!" %}<br/>
+                </p>
+	            <h2>{% trans "The uploaded data is valid and ready to be imported! Please review carefully!" %}</h2>
+                <input type="hidden" name="action" value="import" />
+                {% trans "Import the shown data now" as submit_button_label %}
+                {% captureas submit_button_icon %}fa-floppy-o{% endcaptureas %}
+                
+                <p class="textfield transparent">
+                    {% trans "The uploaded data is valid and is ready to be imported." %}<br/>
+                    {% trans "Please review the data carefully below. Everything that will be imported is shown in the table." %}
+                </p>
+                <br/>
+                <p class="textfield transparent">
+                    <b>{% trans "If any data is missing in the report that you think should have been included in the CSV, please do not start the import yet!" %}</b><br/>
+                    {% trans "In this case review the uploaded CSV, and if the data is contained there, but not in the report, please contact the support!" %}
+                </p>
+                <p class="textfield transparent">
+                    {% blocktrans with submit_button_label=submit_button_label %}Once you are ready to begin the import, please click "{{ submit_button_label }}" at the bottom of the page.{% endblocktrans %}
+                </p>
+                
+            {% elif form_view == "invalid" %}
+                <p class="textfield import-warning">
+                    {% trans "No data has been imported yet." %}<br/>
+                </p>
+                <h2>{% trans "The uploaded data is invalid!" %}</h2>
+                <p class="textfield transparent">
+                    {% trans "Please review the errors encountered, and correct them in the CSV. If you have questions, contact our support for help." %}
+                </p>
+                <p class="textfield transparent">    
+                    {% blocktrans with reset_button_label=reset_button_label %}Click "{{ reset_button_label }}" at the top of the page to start another upload.{% endblocktrans %}
+                </p>
+                
+            {% elif form_view == "failed" %}
+                <h2>{% trans "There was a critical unexpected error during the import" %}</h2>
+                <p class="textfield transparent">
+                    {% trans "Some data may have been imported already, so please do not restart the import at this time!" %}<br/>
+                    {% trans "The error has been logged in the system, please contact our support for help!" %}
+                </p>
+                <p class="textfield transparent"> 
+                    {% blocktrans with reset_button_label=reset_button_label %}Click "{{ reset_button_label }}" at the top of the page to start another upload.{% endblocktrans %}
+                </p>
+                
+	        
+	        {% elif form_view == "finished" %}
+                <p class="textfield import-success">
+                    {% trans "The uploaded data has been successfully imported!" %}
+                </p>
+                <h2>{% trans "Import successful!" %}</h2>
+                <input type="hidden" name="action" value="archive" />
+                {% trans "Archive Import Report" as submit_button_label %}
+                {% captureas submit_button_icon %}fa-archive{% endcaptureas %}
+                
+                <p class="textfield transparent">
+                    {% trans "Below you will find a report of everything that was imported." %}
+                </p>
+                <p class="textfield transparent"> 
+                    {% blocktrans with submit_button_label=submit_button_label %}Click "{{ submit_button_label }}" to archive the report. You can access the report later from the left side navigation of this page.{% endblocktrans %}
+                </p>
+			{% endif %}
+			
+			
+			{% if form_view == "import-ready" or form_view == "invalid" or form_view == "finished" %}
+                {% include 'cosinnus/user_import/user_import_report_snippet.html' with object=object %}
+			{% endif %}
+		
+            {% if form_view == "upload" or form_view == "finished" %}
+				<button type="submit" class="btn btn-emphasized btn-autosize">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <a class="pull-left" href="#">
+		                        <i class="fa {{ submit_button_icon }}"></i>
+		                    </a>
+		                    <div class="media-body">
+		                        {{ submit_button_label }}
+		                    </div>
+		                </li>
+		            </ul>
+		        </button>
+		    {% elif form_view == "import-ready" %}
+		        <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#modal_start_import">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <a class="pull-left" href="#">
+		                            <i class="fa {{ submit_button_icon }}"></i>
+		                        </a>
+		                    <div class="media-body">
+		                        {{ submit_button_label }}
+		                    </div>
+		                </li>
+		            </ul>
+		        </button>
+		        {% captureas label %}
+		            {% trans "Do you really want to perform the import of the shown data?" %}
+		            <br/><br/>
+                    {% trans "Make sure you have double checked all the data that will be imported, as a second import with the same data will not be possible!" %}
+                {% endcaptureas %}
+			    {% captureas title %}{% trans "Start the Import?" %}{% endcaptureas %}
+                {% captureas modal_submit_button_label %}{% trans "Import Now!" %}{% endcaptureas %}
+			    {% include "cosinnus/modal_box.html" with id="modal_start_import" label=label title=title form_action="." title_icon='fa fa-floppy-o' submit_button_label=modal_submit_button_label %}
+			    
+			    <script type="text/javascript">
+			         $('#modal_start_import_btnsubmit').on('mouseup', function(){
+			             setTimeout(function(){$('#modal_start_import_btnsubmit').attr('disabled', 'disabled');}, 5);
+			         });
+			    </script>
+			    
+	        {% endif %}
+			
+			
+			
+		</form>
+		
+	</div>
+	
+{% endblock content %}
+

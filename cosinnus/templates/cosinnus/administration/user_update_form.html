@@ -1,0 +1,22 @@
+{% extends "cosinnus/user/userprofile_form.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}{% trans "Update User" %} {{ object.user|full_name }}{% endblock %}
+
+{% block leftnav %}
+{% include 'cosinnus/administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+<li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+<li><a href="{% url 'cosinnus:administration-users' %}">{% trans "User Management" %}</a></li>
+<li class="active">{% trans "User" %}</li>
+{% endblock %}
+
+{% block managed_tags %}
+    {% block managed_tag_field %}
+        {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_MANAGED_TAGS_ASSIGNABLE_IN_USER_ADMIN_FORM %}
+            {% include 'cosinnus/fields/managed_tag_formfield.html' with form=form.forms.obj legend=COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_PROFILE type="user" %}
+        {% endif %}
+    {% endblock managed_tag_field %}
+{% endblock %}

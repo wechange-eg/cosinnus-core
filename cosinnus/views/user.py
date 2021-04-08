@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from builtins import str
 from django.contrib.auth import get_user_model, login as auth_login, logout as auth_logout,\
     login
-from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
 from django.utils.decorators import method_decorator
@@ -13,18 +13,19 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-
+from django.http import Http404
 from cosinnus.core.decorators.views import staff_required, superuser_required,\
     redirect_to_not_logged_in, redirect_to_403
 from cosinnus.forms.user import UserCreationForm, UserChangeForm,\
-    TermsOfServiceFormFields
+    TermsOfServiceFormFields, ValidatedPasswordChangeForm
 from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.utils.http import JSONResponse
 from django.contrib import messages
 from cosinnus.models.profile import get_user_profile_model,\
     PROFILE_SETTING_EMAIL_TO_VERIFY, PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN,\
     PROFILE_SETTING_FIRST_LOGIN, GlobalBlacklistedEmail,\
-    GlobalUserNotificationSetting
+    GlobalUserNotificationSetting, PROFILE_SETTING_PASSWORD_NOT_SET,\
+    PROFILE_SETTING_LOGIN_TOKEN_SENT
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusPortal,\
     CosinnusUnregisterdUserGroupInvite, CosinnusGroupMembership, \
@@ -48,8 +49,8 @@ from cosinnus.views.mixins.group import EndlessPaginationMixin,\
 from cosinnus.utils.user import filter_active_users,\
     get_newly_registered_user_email, accept_user_tos_for_portal,\
     get_user_query_filter_for_search_terms, get_user_select2_pills,\
-    get_group_select2_pills
-from uuid import uuid1
+    get_group_select2_pills, get_user_from_set_password_token
+from uuid import uuid1, uuid4
 from django.utils.encoding import force_text
 from cosinnus.core import signals
 from django.dispatch.dispatcher import receiver
@@ -69,13 +70,15 @@ from honeypot.decorators import check_honeypot
 from annoying.functions import get_object_or_None
 
 import logging
-from django.contrib.auth.views import PasswordChangeView, PasswordResetView
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetConfirmView
 from django.utils.timezone import now
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+    CosinnusConference
 from django_select2.views import Select2View, NO_ERR_RESP
 from django.core.exceptions import PermissionDenied
 from cosinnus import cosinnus_notifications
 from cosinnus.utils.html import render_html_with_variables
+from django.utils import timezone
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -137,7 +140,7 @@ user_list_map = UserListMapView.as_view()
 class PortalAdminListView(UserListView):
 
     template_name = 'cosinnus/user/portal_admin_list.html'
-    
+
     def get_queryset(self):
         # get all admins from this portal only        
         qs = super(UserListView, self).get_queryset()
@@ -152,6 +155,66 @@ class PortalAdminListView(UserListView):
     
 portal_admin_list = PortalAdminListView.as_view()
 
+
+class SetInitialPasswordView(TemplateView):
+    """ View that is used to set an initial password for a user, who was created without a initial password.
+        Cosinnus.middleware.set_password.SetPasswordMiddleware will redirect every request for a user without an initial
+        password to that view.
+
+        :param token: UUID4 token that is send wia mail. Must match user.cosinnus_profile.settings.password_not_set
+    """
+
+    template_name = 'cosinnus/registration/password_set_initial_form.html'
+    form_class = SetPasswordForm
+
+    def get(self, request, *args, **kwargs):
+        token = kwargs['token'] if kwargs.get('token', '') else request.COOKIES.get(PROFILE_SETTING_PASSWORD_NOT_SET)
+
+        user = get_user_from_set_password_token(token)
+
+        if user and not request.user.is_authenticated and not user.password:
+            form = self.form_class(user=user)
+            return render(request, template_name=self.template_name, context={'form': form})
+        elif request.user.is_authenticated:
+            raise PermissionDenied()
+        else:
+            raise Http404
+
+    def post(self, request, *args, **kwargs):
+        token = kwargs.get('token', '')
+        user = get_user_from_set_password_token(token)
+
+        if user and not request.user.is_authenticated and not user.password:
+            form = self.form_class(user=user, data=request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(self.request, _("Your password was set successfully! You may now log in using your e-mail address and the password you just set."))
+
+                try:
+                    # removing the key from the cosinnus_profile settings to prevent double usage
+                    user.cosinnus_profile.settings.pop(PROFILE_SETTING_PASSWORD_NOT_SET)
+                except KeyError as e:
+                    logger.error(
+                        'Error while deleting key %s from cosinnus_profile settings of user %s. This key is supposed to be present. Password was set anyway',
+                        extra={'exception': e, 'reason': str(e)})
+                
+                # add redirect to the welcome-settings page, with priority so that it is shown as first one
+                if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
+                    user.cosinnus_profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), self.request), message=None, priority=True)
+                
+                # send welcome email if enabled
+                _send_user_welcome_email_if_enabled(user)
+                
+                # log the user in
+                user.backend = 'cosinnus.backends.EmailAuthBackend'
+                login(self.request, user)
+                
+                # redirect to login page 
+                #(which will redirect to whatever the portal settings for logged in users are)
+                return redirect('login')
+            return render(request, template_name=self.template_name, context={'form': form})
+        else:
+            raise PermissionDenied()
 
 
 class UserCreateView(CreateView):
@@ -168,7 +231,8 @@ class UserCreateView(CreateView):
         """ Allow pre-populating managed tags on signup using URL params /signup/?mtag=tag1,tag2 """
         initial = super().get_initial()
         # match managed tag param and set it as comma-seperated initial
-        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF \
+                and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:
             if self.request.GET.get('mtag', None):
                 initial['managed_tag_field'] = self.request.GET.get('mtag')
             elif settings.COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG is not None:
@@ -273,6 +337,9 @@ class UserCreateView(CreateView):
         if self.request.user.is_authenticated:
             messages.info(self.request, _('You are already logged in!'))
             return redirect('/')
+        if not settings.COSINNUS_USER_SIGNUP_ENABLED:
+            messages.error(self.request, _('User signup is currently disabled!'))
+            return redirect('/')
         return super(UserCreateView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -309,8 +376,7 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
         messages.success(request, self.message_success)
         
         # conference groups
-        user_societies = CosinnusSociety.objects.get_for_user(request.user)
-        user_conferences = [society for society in user_societies if society.group_is_conference]
+        user_conferences = CosinnusConference.objects.get_for_user(request.user)
         if len(user_conferences) > 0:
             # if the user is part of a conference, redirect there after the welcome screen
             redirect_url = user_conferences[0].get_absolute_url()
@@ -590,7 +656,7 @@ def verifiy_user_email(request, email_verification_param):
         setattr(user_profile, 'group', forum_group) 
         cosinnus_notifications.user_account_created.send(sender=user, user=user, obj=user_profile, audience=[])
         login(request, user)
-        return redirect(reverse('cosinnus:map'))
+        return redirect(reverse('cosinnus:profile-detail'))
     else:
         messages.success(request, _('Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!') % {'email': user.email})
         return redirect(reverse('login'))
@@ -676,7 +742,8 @@ def logout_api(request):
 
 class CosinnusPasswordChangeView(PasswordChangeView):
     """ Overridden view that sends a password changed signal """
-    
+    form_class = ValidatedPasswordChangeForm
+
     def form_valid(self, form):
         ret = super().form_valid(form)
         # send a password changed signal
@@ -692,6 +759,26 @@ def password_change_proxy(request, *args, **kwargs):
         return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_changed_page.html')
     return CosinnusPasswordChangeView.as_view(*args, **kwargs)(request)
 
+# =============== set a password from a only by token logged in user =========================== #
+
+class CosinnusSetInitialPasswordView(PasswordResetConfirmView):
+    """ Overridden view that sends a password changed signal """
+
+    def form_valid(self, form):
+        ret = super().form_valid(form)
+        # send a password changed signal
+        signals.user_password_changed.send(sender=self, user=self.request.user)
+        _send_user_welcome_email_if_enabled(self.request.user)
+        return ret
+
+
+def password_set_initial_proxy(request, *args, **kwargs):
+    user = request.user
+    if user.is_authenticated and check_user_integrated_portal_member(user):
+        return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_changed_page.html')
+    return CosinnusSetInitialPasswordView.as_view(*args, **kwargs)(request)
+
+# ================================================================================================= #
 
 class CosinnusPasswordResetForm(PasswordResetForm):
     
@@ -723,8 +810,17 @@ def password_reset_proxy(request, *args, **kwargs):
                 user = USER_MODEL.objects.get(email=email, is_active=True)
             except USER_MODEL.DoesNotExist:
                 pass
+        # disallow integrated users to reset their password
         if user and check_user_integrated_portal_member(user):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_page.html')
+        # silently disallow imported/created users without a password to reset their password
+        # if the user import functionality is enabled, because then imported users are not active
+        # until they have been sent a token invite and may not use the password reset function
+        if user and not user.password:
+            if settings.COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED \
+                        and settings.COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES:
+                return redirect(PasswordResetView().get_success_url())
+            
     kwargs.update({
         'form_class': CosinnusPasswordResetForm,
     })
@@ -761,6 +857,34 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
         subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
         send_mail_or_fail_threaded(new_email, subj_user, None, data)
         
+
+def email_first_login_token_to_user(user):
+    """ Sets the profile variables for a user to login without a set password,
+        and sends out an email with a verification URL to the user.
+    """
+
+    # the verification param for the URL consists of <user-id>-<uuid>, where the uuid is saved to the user's profile
+    a_uuid = uuid4()
+    user.cosinnus_profile.settings[PROFILE_SETTING_PASSWORD_NOT_SET] = str(a_uuid)
+    user.cosinnus_profile.save()
+
+    # message user for email verification
+    data = get_common_mail_context(None)
+    data.update({
+        'user': user,
+        'user_email': user.email,
+        'verification_token': reverse('password_set_initial', kwargs={'token': str(a_uuid)}),
+    })
+    template = 'cosinnus/mail/user_email_first_token.html'
+
+    data.update({
+        'content': render_to_string(template, data),
+    })
+    subj_user = render_to_string('cosinnus/mail/user_email_first_token_subj.txt', data)
+    send_mail_or_fail_threaded(user.email, subj_user, None, data)
+    
+    user.cosinnus_profile.settings[PROFILE_SETTING_LOGIN_TOKEN_SENT] = timezone.now()
+    user.cosinnus_profile.save()
 
 
 def user_api_me(request):
@@ -917,7 +1041,7 @@ def convert_email_group_invites(sender, profile, **kwargs):
         for a user after registration. If there were any, also adds an entry to the user's profile's visit-next setting. """
     # TODO: caching?
     user = profile.user
-    invites = CosinnusUnregisterdUserGroupInvite.objects.filter(email=get_newly_registered_user_email(user))
+    invites = CosinnusUnregisterdUserGroupInvite.objects.filter(email__iexact=get_newly_registered_user_email(user))
     if invites:
         with transaction.atomic():
             other_invites = []

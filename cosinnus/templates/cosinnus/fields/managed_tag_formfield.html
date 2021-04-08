@@ -5,47 +5,73 @@
 {% endcomment %}
 
 {% if "managed_tag_field" in form.fields %}
+    {% if not label %}
+        {% captureas label %}{{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LABEL }}{% endcaptureas %}
+    {% endif %}
+    {% if not legend %}
+        {% captureas legend %}{{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_CONTENT }}{% endcaptureas %}
+    {% endif %}
 	{% captureas managed_tag_extra_html %}
 	    {% if SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_FORMFIELD_SELECTED_TAG_DETAILS %}
 		    <div class="managed-tags-form-detail-frame" id="managed-tags-detail-frame" {% if not form.fields.managed_tag_field.initial %}style="display: none;"{% endif %}>
 		        {% for tag in form.fields.managed_tag_field.all_managed_tags %}
-	                {% include 'cosinnus/fields/managed_tag_field_readonly.html' with tag=tag visible=form.fields.managed_tag_field.initial|contains:tag.slug %}
+	                {% include 'cosinnus/fields/managed_tag_field_readonly.html' with tag=tag visible=form.fields.managed_tag_field.initial|contains:tag.slug on_editable_form=True %}
 		        {% endfor %}
 		    </div>
 		    <script type="text/javascript">
 		        $(function(){
 		            $('#managed-tag-field').on('change', function(){
 		                $('.managed-tag-detail').hide()
-	 	                if ($(this).val()) {
-	 	                    $('.managed-tag-detail[data-tag-slug="' + $(this).val() + '"]').show();
+		                var val = $(this).val();
+	 	                if (val) {
+	 	                    if (val instanceof Array == false) {
+	 	                         val = [val];
+	 	                    } 
+	 	                    $.each(val, function(i, sub_val) {
+                                 $('.managed-tag-detail[data-tag-slug="' + sub_val + '"]').show();
+                             });
 		                    $('#managed-tags-detail-frame').show();
 		                } else {
 		                    $('#managed-tags-detail-frame').hide();
 		                } 
 		            });
 		        });
+		        
+			    {% if SETTINGS.COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED %}
+	               $("#managed-tag-field").select2({'placeholder': '{{ legend }}', 'closeOnSelect': false});
+	            {% endif %}
 		    </script>
 		{% endif %}
 	{% endcaptureas %}
 	{% captureas managed_tag_field_html %}
-	    <select name="managed_tag_field" id="managed-tag-field">
+	    <select name="managed_tag_field" id="managed-tag-field" {% if SETTINGS.COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED %}multiple{% endif %}>
 	        {% if type == "user" and not SETTINGS.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED or type == "group" and not SETTINGS.COSINNUS_MANAGED_TAGS_GROUP_FORMFIELD_REQUIRED %}
     	        <option default value="">- {{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_EMPTY_CHOICE }} -</option>
 	        {% endif %}
 	        
 	        {% for tag in form.fields.managed_tag_field.all_managed_tags %}
-	            <option {% if tag.slug in form.fields.managed_tag_field.initial %}selected{% endif %} value="{{ tag.slug }}">
-	                {{ tag.name }}
-	            </option>
+                {% with tag_type=tag.type %}
+                    {% comment %} Insert Seperator for managed tag types {% endcomment %}
+                    {% ifchanged tag_type %}
+                        {% if tag_type %}
+                            <option disabled>--- {{ tag_type.name }} ---</option>
+                        {% endif %}
+                        {% if not tag_type and not forloop.first %}
+                            <option disabled>--- {% trans "Miscellaneous" %} ---</option>
+                        {% endif %}
+                    {% endifchanged %}
+                    {% comment %} Main option {% endcomment %}
+		            <option {% if tag.slug in form.fields.managed_tag_field.initial %}selected{% endif %} value="{{ tag.slug }}">
+		                {{ tag.name }}
+		                {% if tag_type and tag_type.name %}
+		                    ({{ tag_type.name }})
+		                {% endif %}
+		            </option>
+		            
+		        {% endwith %}
 	        {% endfor %}
 	    </select>
 	{% endcaptureas %}
 	
-	{% if not label %}
-        {% captureas label %}{{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LABEL }}{% endcaptureas %}
-    {% endif %}
-    {% if not legend %}
-        {% captureas legend %}{{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_CONTENT }}{% endcaptureas %}
-    {% endif %}
-	{% include 'cosinnus/fields/default_field.html' with field_html=managed_tag_field_html field=form.managed_tag_field field_id="managed-tag-field" label=label legend=legend extra_html=managed_tag_extra_html %}
+	{% include 'cosinnus/fields/default_field.html' with field_html=managed_tag_field_html field=form.managed_tag_field field_id="managed-tag-field" label=label legend=legend extra_html=managed_tag_extra_html large_field=True %}
 {% endif %}

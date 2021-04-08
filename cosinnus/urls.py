@@ -18,11 +18,12 @@ from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
-from cosinnus.views import bbb_room
+from cosinnus.views import bbb_room, user_import
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
-    user_dashboard, ui_prefs, administration, user_dashboard_announcement
-from cosinnus_conference.api.views import ConferenceViewSet
+    user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields
+from cosinnus_conference.api.views import ConferenceViewSet,\
+    PublicConferenceViewSet
 from cosinnus_event.api.views import EventViewSet
 from cosinnus_note.api.views import NoteViewSet
 from cosinnus_organization.api.views import OrganizationViewSet
@@ -55,6 +56,7 @@ urlpatterns = [
     
     url(r'^projects/$', map.tile_view, name='group-list', kwargs={'types': ['projects']}),
     url(r'^groups/$', map.tile_view, name='group__group-list', kwargs={'types': ['groups']}),
+    url(r'^conferences/$', map.tile_view, name='conference__group-list', kwargs={'types': ['conferences']}),
     url(r'^projects/mine/$', map.tile_view, name='group-list-mine', kwargs={'types': ['projects'], 'show_mine': True}),
     url(r'^groups/mine/$', map.tile_view, name='group__group-list-mine', kwargs={'types': ['groups'], 'show_mine': True}),
     
@@ -63,11 +65,12 @@ urlpatterns = [
     url(r'^map/search/(?P<filter_group_id>\d+)/$', map_api.map_search_endpoint, name='map-search-endpoint-filtered'),
     url(r'^map/detail/$', map_api.map_detail_endpoint, name='map-detail-endpoint'),
     
-    url(r'^likefollow/$', common.do_likefollow,  name='likefollow-view'),
+    url(r'^likefollowstar/$', common.do_likefollowstar,  name='likefollowstar-view'),
     
     url(r'^bbb/room/(?P<room_id>\d+)/$', bbb_room.bbb_room_meeting, name='bbb-room'),
     url(r'^bbb/queue/(?P<mt_id>\d+)/$', bbb_room.bbb_room_meeting_queue, name='bbb-room-queue'),
-
+    url(r'^bbb/queue-api/(?P<mt_id>\d+)/$', bbb_room.bbb_room_meeting_queue_api, name='bbb-room-queue-api'),
+    
     url(r'^invitations/$', group.group_list_invited, name='invitations', kwargs={'show_all': True}),
     url(r'^welcome/$', user.welcome_settings, name='welcome-settings'),
     url(r'^join/$', user.group_invite_token_enter_view, name='group-invite-token-enter'),
@@ -76,27 +79,53 @@ urlpatterns = [
     url(r'^account/report/$', feedback.report_object, name='report-object'),
     url(r'^account/accept_tos/$', user.accept_tos, name='accept-tos'),
     url(r'^account/accept_updated_tos/$', user.accept_updated_tos, name='accept-updated-tos'),
+    url(r'^account/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', user.add_email_to_blacklist, name='user-add-email-blacklist'),
+    url(r'^account/list-unsubscribe-result/$', user.add_email_to_blacklist_result, name='user-add-email-blacklist-result'),
+    url(r'^account/deactivated/$', group.group_list_mine_deactivated, name='deactivated-groups'),
+    url(r'^account/activate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-activate', kwargs={'activate': True}),
+    url(r'^account/deactivate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-deactivate', kwargs={'activate': False}),
+    url(r'^account/verify_email/(?P<email_verification_param>[^/]+)/$', user.verifiy_user_email, name='user-verifiy-email'),
     
-    url(r'^administration/approve_user/(?P<user_id>\d+)/$', user.approve_user, name='user-approve'),
-    url(r'^administration/deny_user/(?P<user_id>\d+)/$', user.deny_user, name='user-deny'),
-    url(r'^administration/verify_email/(?P<email_verification_param>[^/]+)/$', user.verifiy_user_email, name='user-verifiy-email'),
-    url(r'^administration/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', user.add_email_to_blacklist, name='user-add-email-blacklist'),
-    url(r'^administration/list-unsubscribe-result/$', user.add_email_to_blacklist_result, name='user-add-email-blacklist-result'),
-    url(r'^administration/deactivated/$', group.group_list_mine_deactivated, name='deactivated-groups'),
-    url(r'^administration/activate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-activate', kwargs={'activate': True}),
-    url(r'^administration/deactivate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-deactivate', kwargs={'activate': False}),
-    url(r'^administration/login-2fa/$', authentication.admin_only_otp_token_validation, name='login-2fa'),
+    # --- DEPERECATED -----
+    # these URL paths are deprecated and have been replaced by the /account/ prefix
+    # they should be kept until mid-2021 so old sent-out emails do not point to a 404
+    url(r'^administration/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', user.add_email_to_blacklist, name='OLD-user-add-email-blacklist'),
+    url(r'^administration/list-unsubscribe-result/$', user.add_email_to_blacklist_result, name='OLD-user-add-email-blacklist-result'),
+    url(r'^administration/deactivated/$', group.group_list_mine_deactivated, name='OLD-deactivated-groups'),
+    url(r'^administration/activate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='OLD-group-activate', kwargs={'activate': True}),
+    url(r'^administration/deactivate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='OLD-group-deactivate', kwargs={'activate': False}),
+    url(r'^administration/verify_email/(?P<email_verification_param>[^/]+)/$', user.verifiy_user_email, name='OLD-user-verifiy-email'),
+    # ---- END DEPRECATED ---
     
     # these URLs belong to the frontend administration area for superusers
     url(r'^administration/$', administration.administration, name='administration'),
+    url(r'^administration/login-2fa/$', authentication.admin_only_otp_token_validation, name='login-2fa'),
+    url(r'^administration/approve_user/(?P<user_id>\d+)/$', user.approve_user, name='user-approve'),
+    url(r'^administration/deny_user/(?P<user_id>\d+)/$', user.deny_user, name='user-deny'),
+    
     url(r'^administration/welcome_email/$', administration.welcome_email_edit, name='administration-welcome-email'),
+
+    url(r'^administration/users/$', administration.user_list, name='administration-users'),
+    url(r'^administration/users/add/$', administration.user_add, name='administration-user-create'),
+    
+    url(r'^administration/group_newsletter/$', administration.groups_newsletters, name='administration-groups-newsletter'),
+    url(r'^administration/group_newsletter/add/$', administration.groups_newsletter_create, name='administration-groups-newsletter-create'),
+    url(r'^administration/group_newsletter/(?P<newsletter_id>\d+)/edit/$', administration.groups_newsletter_update, name='administration-groups-newsletter-update'),
+    url(r'^administration/tag_newsletter/$', administration.managed_tags_newsletters, name='administration-managed-tags-newsletter'),
+    url(r'^administration/tag_newsletter/add/$', administration.managed_tags_newsletter_create, name='administration-managed-tags-newsletter-create'),
+    url(r'^administration/tag_newsletter/(?P<newsletter_id>\d+)/edit/$', administration.managed_tags_newsletter_update, name='administration-managed-tags-newsletter-update'),
+
     url(r'^administration/announcements/$', user_dashboard_announcement.list_view, name='user-dashboard-announcement-list'),
     url(r'^administration/announcements/add/$', user_dashboard_announcement.user_dashboard_announcement_create, name='user-dashboard-announcement-create'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/edit/$', user_dashboard_announcement.user_dashboard_announcement_edit, name='user-dashboard-announcement-edit'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/delete/$', user_dashboard_announcement.user_dashboard_announcement_delete, name='user-dashboard-announcement-delete'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/activate-toggle/$', user_dashboard_announcement.user_dashboard_announcement_activate, name='user-dashboard-announcement-activate'),
-
+    
+    url(r'^administration/conference_overview/$', administration.conference_overview, name='administration-conference-overview'),
+    url(r'^administration/conference_overview/nonstandard/$', administration.conference_overview, name='administration-conference-overview-nonstandard', kwargs={'only_nonstandard': True}),
+    
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
+    url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),
     
     url(r'^housekeeping/ensure_group_widgets/$', housekeeping.ensure_group_widgets, name='housekeeping-ensure-group-widgets'),
     url(r'^housekeeping/fillexternaldata/$', housekeeping.fill_external_data, name='housekeeping-fill-external-data'),
@@ -123,20 +152,45 @@ urlpatterns = [
     url(r'^housekeeping/user_activity_info/', housekeeping.user_activity_info, name='housekeeping-user-activity-info'),
     url(r'^housekeeping/group_admin_emails/(?P<slugs>[^/]+)/', housekeeping.group_admin_emails, name='housekeeping-group-admin-emails'),
 
+
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
 
+if getattr(settings, 'COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED', False):
+    urlpatterns += [
+        url(r'^administration/user_import/$', user_import.user_import_view, name='administration-user-import'),
+        url(r'^administration/user_import/archived/$', user_import.archived_user_import_list_view, name='administration-archived-user-import-list'),
+        url(r'^administration/user_import/archived/(?P<pk>\d+)/$', user_import.archived_user_import_detail_view, name='administration-archived-user-import-detail'),
+        url(r'^administration/user_import/archived/(?P<pk>\d+)/delete/$', user_import.archived_user_import_delete_view, name='administration-archived-user-import-delete'),
+    
+    ]
+
+if getattr(settings, 'COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED', False): 
+    urlpatterns += [
+        url(r'^administration/admin_dynamic_fields/edit/$', dynamic_fields.dynamic_field_admin_choices_form_view, name='administration-dynamic-fields'),
+    ]
+
+if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
+    urlpatterns += [
+        url(r'^administration/users/(?P<pk>\d+)/edit/$', administration.user_update, name='administration-user-update'),
+    ]
+
 if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False):
+    dashboard_url = getattr(settings, 'COSINNUS_V2_DASHBOARD_URL_FRAGMENT', 'dashboard')
     if getattr(settings, 'COSINNUS_CLOUD_ENABLED', False):
         import cosinnus_cloud.views as cosinnus_cloud_views # noqa
         urlpatterns += [
-            url(r'^dashboard/api/user_typed_content/cloud_files/$', cosinnus_cloud_views.api_user_cloud_files_content, name='user-dashboard-api-typed-content-cloud'),
+            url(fr'^dashboard/api/user_typed_content/cloud_files/$', cosinnus_cloud_views.api_user_cloud_files_content, name='user-dashboard-api-typed-content-cloud'),
             url(r'^dashboard/api/user_typed_content/recent/cloud_files/$', cosinnus_cloud_views.api_user_cloud_files_content, name='user-dashboard-api-typed-content-cloud', kwargs={'show_recent':True}),
+            url(r'^search/cloudfiles/$', map.tile_view, name='cloudfiles-search', kwargs={'types': ['cloudfiles']}),
         ]
     urlpatterns += [
-        url(r'^dashboard/$', user_dashboard.user_dashboard_view, name='user-dashboard'),
+        url(fr'^{dashboard_url}/$', user_dashboard.user_dashboard_view, name='user-dashboard'),
         url(r'^dashboard/api/user_groups/$', user_dashboard.api_user_groups, name='user-dashboard-api-groups'),
         url(r'^dashboard/api/user_liked_ideas/$', user_dashboard.api_user_liked_ideas, name='user-dashboard-api-liked-ideas'),
+        url(r'^dashboard/api/user_starred_users/$', user_dashboard.api_user_starred_users, name='user-dashboard-api-starred-users'),
+        url(r'^dashboard/api/user_starred_objects/$', user_dashboard.api_user_starred_objects, name='user-dashboard-api-starred-objects'),
+        url(r'^dashboard/api/user_followed_objects/$', user_dashboard.api_user_followed_objects, name='user-dashboard-api-followed-objects'),
         url(r'^dashboard/api/user_typed_content/(?P<content>[^/]+)/$', user_dashboard.api_user_typed_content, name='user-dashboard-api-typed-content'),
         url(r'^dashboard/api/user_typed_content/recent/(?P<content>[^/]+)/$', user_dashboard.api_user_typed_content, name='user-dashboard-api-typed-content', kwargs={'show_recent':True}),
         url(r'^dashboard/api/timeline/(?P<content>[^/]+)/$', user_dashboard.api_timeline, name='user-dashboard-api-timeline-filtered'),
@@ -187,7 +241,6 @@ if settings.COSINNUS_IDEAS_ENABLED:
         url(r'^ideas/(?P<slug>[^/]+)/delete/$', idea.idea_delete, name='idea-delete'),
     ]
 
-
 if settings.COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED:
     urlpatterns += [
         url(r'^portal/supporters/$', TemplateView.as_view(template_name='premium_info_page.html'), name='premium-info-page'),
@@ -226,10 +279,13 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/users/$' % url_key, group.group_user_list, name=prefix+'group-user-list'),
         url(r'^%s/(?P<group>[^/]+)/users/add/$' % url_key, group.group_user_add, name=prefix+'group-user-add-generic'),
         url(r'^%s/(?P<group>[^/]+)/users/add-multiple/$' % url_key, group.group_user_add_multiple, name=prefix+'group-user-add-multiple'),
+        url(r'^%s/(?P<group>[^/]+)/add-multiple/$' % url_key, group.group_add_multiple, name=prefix+'group-add-multiple'),
         url(r'^%s/(?P<group>[^/]+)/users/add/(?P<username>[^/]+)/$' % url_key, group.group_user_add, name=prefix+'group-user-add'),
         url(r'^%s/(?P<group>[^/]+)/users/delete/(?P<username>[^/]+)/$' % url_key, group.group_user_delete, name=prefix+'group-user-delete'),
         url(r'^%s/(?P<group>[^/]+)/users/edit/(?P<username>[^/]+)/$' % url_key, group.group_user_update, name=prefix+'group-user-edit'),
         url(r'^%s/(?P<group>[^/]+)/users/member-invite-select2/$' % url_key, group.user_group_member_invite_select2, name=prefix+'group-member-invite-select2'),
+        url(r'^%s/(?P<group>[^/]+)/group-invite-select2/$' % url_key, group.group_invite_select2, name=prefix+'group-invite-select2'),
+        url(r'^%s/(?P<group>[^/]+)/group-group-invite-delete/$' % url_key, group.group_group_invite_delete, name=prefix+'group-group-invite-delete'),
         url(r'^%s/(?P<group>[^/]+)/export/$' % url_key, group.group_export, name=prefix+'group-export'),
     
         url(r'^%s/(?P<group>[^/]+)/widgets/add/$' % url_key, widget.widget_add_group, name=prefix+'widget-add-group-empty'),
@@ -243,6 +299,7 @@ urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
 router = routers.SimpleRouter()
+router.register(r'public_conferences', PublicConferenceViewSet)
 router.register(r'conferences', ConferenceViewSet)
 router.register(r'groups', CosinnusSocietyViewSet)
 router.register(r'projects', CosinnusProjectViewSet)

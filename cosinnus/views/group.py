@@ -64,7 +64,7 @@ from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
                                    CosinnusGroupGalleryImage, CosinnusGroupCallToActionButton,
                                    CosinnusUnregisterdUserGroupInvite)
 from cosinnus.models.group_extra import CosinnusSociety, \
-    ensure_group_type
+    ensure_group_type, CosinnusConference
 from cosinnus.models.membership import MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, MEMBERSHIP_ADMIN, \
     MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS, MembershipClassMixin
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
@@ -79,11 +79,11 @@ from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.group import get_group_query_filter_for_search_terms, get_cosinnus_group_model
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser, \
     check_object_read_access, check_ug_membership, check_object_write_access, \
-    check_user_can_see_user
-from cosinnus.utils.urls import get_non_cms_root_url
+    check_user_can_see_user, check_user_can_create_conferences
+from cosinnus.utils.urls import get_non_cms_root_url, redirect_next_or
 from cosinnus.utils.urls import redirect_with_next, group_aware_reverse
 from cosinnus.utils.user import create_base_user, filter_active_users, get_user_select2_pills, \
-    get_user_query_filter_for_search_terms, get_user_by_email_safe
+    get_user_query_filter_for_search_terms, get_user_by_email_safe, get_group_select2_pills
 from cosinnus.views.microsite import GroupMicrositeView
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
                                         AjaxableFormMixin, ListAjaxableResponseMixin)
@@ -98,6 +98,8 @@ from cosinnus.views.widget import GroupDashboard
 from cosinnus_organization.forms import MultiOrganizationSelectForm
 from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationGroup
 from cosinnus_organization.utils import get_organization_select2_pills
+from cosinnus.models.conference import CosinnusConferenceRoom
+from cosinnus.views.attached_object import AttachableViewMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -163,14 +165,21 @@ class CosinnusGroupFormMixin(object):
             messages.warning(self.request, _('Sorry, only portal administrators can create projects and groups!'))
             return redirect(reverse('cosinnus:portal-admin-list'))
         
-        # special check: only portal admins can create groups
-        if not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False) and self.form_view == 'add' and model_class == CosinnusSociety:
+        society_forbidden = self.form_view == 'add' and model_class == CosinnusSociety and \
+                        not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False)
+        conference_forbidden = self.form_view == 'add' and model_class == CosinnusConference and \
+                            not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_CONFERENCES', False)
+        # check if user is of a managed tag that would allow him to create a conference
+        if conference_forbidden:
+            conference_forbidden = not check_user_can_create_conferences(self.request.user)
+            
+        # special check: only portal admins can create groups/conferences
+        if society_forbidden or conference_forbidden:
             if not check_user_superuser(self.request.user):
-                
                 if getattr(settings, 'COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED', False):
                     redirect_url = reverse('cosinnus:premium-info-page')
                 else:
-                    messages.warning(self.request, _('Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators.'))
+                    messages.warning(self.request, model_class.get_trans().MESSAGE_ONLY_ADMINS_MAY_CREATE)
                     redirect_url = reverse('cosinnus:portal-admin-list')
                 return redirect(redirect_url) 
         
@@ -188,8 +197,26 @@ class CosinnusGroupFormMixin(object):
                 if name == 'media_tag':
                     return user
                 return InvalidArgument
+            
+            def dispatch_init_attached_objects_querysets(self, name, qs):
+                if name == 'obj':
+                    return qs
+                return InvalidArgument
+
+            @property
+            def save_attachable(self):
+                return self.forms['obj'].save_attachable
 
         return CosinnusGroupForm
+    
+    def get_form(self, *args, **kwargs):
+        form = super(CosinnusGroupFormMixin, self).get_form(*args, **kwargs)
+        # disable the userprofile visibility field and set the initial to its value if its locked
+        if settings.COSINNUS_CONFERENCES_PUBLIC_SETTING_LOCKED is not None:
+            field = form.forms['obj'].fields['public']
+            field.disabled = True
+            field.required = False
+        return form
     
     def get_context_data(self, **kwargs):
         context = super(CosinnusGroupFormMixin, self).get_context_data(**kwargs)
@@ -227,6 +254,7 @@ class CosinnusGroupFormMixin(object):
             
         context.update({
             'group_model': self.group_model_class.__name__,
+            'group_model_class': self.group_model_class,
             'deactivated_app_selection': deactivated_app_selection,
             'microsite_public_apps_selection': microsite_public_apps_selection,
         })
@@ -239,15 +267,16 @@ class CosinnusGroupFormMixin(object):
         else:
             self._old_deactivated_apps = []
         ret = super(CosinnusGroupFormMixin, self).post(*args, **kwargs)
-        new_apps = self.object.get_deactivated_apps()
-        
-        # check if any group apps were activated or deactivated
-        deactivated_apps = [app for app in new_apps if not app in self._old_deactivated_apps]
-        activated_apps = [app for app in self._old_deactivated_apps if not app in new_apps]
-        if activated_apps:
-            signals.group_apps_activated.send(sender=self, group=self.object, apps=activated_apps)
-        if deactivated_apps:
-            signals.group_apps_deactivated.send(sender=self, group=self.object, apps=deactivated_apps)
+        if self.object:
+            new_apps = self.object.get_deactivated_apps()
+            
+            # check if any group apps were activated or deactivated
+            deactivated_apps = [app for app in new_apps if not app in self._old_deactivated_apps]
+            activated_apps = [app for app in self._old_deactivated_apps if not app in new_apps]
+            if activated_apps:
+                signals.group_apps_activated.send(sender=self, group=self.object, apps=activated_apps)
+            if deactivated_apps:
+                signals.group_apps_deactivated.send(sender=self, group=self.object, apps=deactivated_apps)
         return ret
     
     def forms_valid(self, form, inlines):
@@ -259,16 +288,26 @@ class CosinnusGroupFormMixin(object):
             group_index = CosinnusProjectIndex()
         else:
             group_index = CosinnusSocietyIndex()
+            
         group_index.update_object(self.object)
+        signals.group_saved_in_form.send(sender=self, group=self.object, user=self.request.user)
         return ret
 
+    def get_success_url(self):
+        # form save chains to participation options form if this is a conference and has applications enabled
+        if self.object.group_is_conference and self.object.use_conference_applications:
+            redirect_url = group_aware_reverse('cosinnus:conference:participation-management', kwargs={'group': self.object})
+        else:
+            redirect_url = self.object.get_absolute_url()
+        return redirect_next_or(self.request, redirect_url)
+    
 
 class GroupMembershipMixin(MembershipClassMixin):
     membership_class = CosinnusGroupMembership
     invite_class = CosinnusUnregisterdUserGroupInvite
 
 
-class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
+class GroupCreateView(CosinnusGroupFormMixin, AttachableViewMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       CreateWithInlinesView):
 
     #form_class = 
@@ -326,6 +365,17 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
             else:
                 logger.error('Could not attach an idea to a project on project creatiion because the idea was not found!', extra={'idea_shortid': shortid})
         
+        # for conferences, always create a default "Workshops" room
+        if self.object.group_is_conference:
+            CosinnusConferenceRoom.objects.create(
+                group=self.object,
+                type=CosinnusConferenceRoom.TYPE_WORKSHOPS,
+                title="Workshops",
+                show_chat=not settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE,
+                sort_index=2,
+                creator=self.request.user
+            )
+        
         messages.success(self.request, self.message_success % {'group':self.object.name, 'team_type':self.object._meta.verbose_name})
         return ret
     
@@ -354,9 +404,6 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
         kwargs = super(GroupCreateView, self).get_form_kwargs()
         kwargs['group'] = self.object
         return kwargs
-    
-    def get_success_url(self):
-        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.object})
 
 
 class GroupDeleteView(SamePortalGroupMixin, AjaxableFormMixin, RequireAdminMixin, DeleteView):
@@ -401,7 +448,8 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         # users in other portals
         # we also exclude users who have never logged in
         _q = get_user_model().objects.all()
-        _q = filter_active_users(_q)
+        if not check_user_superuser(self.request.user):
+            _q = filter_active_users(_q)
         _q = _q.order_by('first_name', 'last_name').select_related('cosinnus_profile')
         
         admins = _q.filter(id__in=admin_ids)
@@ -470,7 +518,13 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             setattr(user, 'membership_status_date', dates_dict[user.id])
         invited = sorted(invited, key=lambda u: u.membership_status_date, reverse=True)
         pendings = sorted(pendings, key=lambda u: u.membership_status_date, reverse=True)
-        
+
+        invited_groups = []
+        if 'invited_groups' in self.group.settings:
+            group_ids = self.group.settings.get('invited_groups')
+            invited_groups = CosinnusGroup.objects.filter(id__in=group_ids)
+
+
         context.update({
             'admins': admins,
             'members': members,
@@ -482,6 +536,8 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             'hidden_user_count': hidden_members,
             'more_user_count': more_user_count,
             'member_invite_form': MultiUserSelectForm(group=self.group),
+            'group_invite_form': MultiGroupSelectForm(group=self.group),
+            'invited_groups': invited_groups
         })
         return context
 
@@ -906,7 +962,8 @@ class GroupMapListView(GroupListView):
     template_name = 'cosinnus/group/group_list_map.html'
 
 
-class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
+class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, 
+                      AttachableViewMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       RequireAdminMixin, UpdateWithInlinesView):
 
     #form_class = 
@@ -943,9 +1000,6 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, AvatarFormMi
     def forms_valid(self, form, inlines):
         messages.success(self.request, self.message_success % {'team_type':self.object._meta.verbose_name})
         return super(GroupUpdateView, self).forms_valid(form, inlines)
-
-    def get_success_url(self):
-        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group})
 
 
 class GroupUserListView(ListAjaxableResponseMixin, RequireReadMixin, ListView):
@@ -1001,7 +1055,6 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
 
     message_success = _('You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request.')
     referer_url = reverse_lazy('cosinnus:group-list')
-    auto_accept_slugs = getattr(settings, 'COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS', [])
     membership_status = MEMBERSHIP_MEMBER
 
     @method_decorator(login_required)
@@ -1009,6 +1062,11 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
         return super(GroupUserJoinView, self).dispatch(request, *args, **kwargs)
     
     def post(self, request, *args, **kwargs):
+        # do not allow this for conferences with application management, because
+        # invitations are done via the application form
+        self.object = self.get_object()
+        if self.object.group_is_conference and self.object.use_conference_applications:
+            raise PermissionDenied()
         self.referer = request.META.get('HTTP_REFERER', self.referer_url)
         return super(GroupUserJoinView, self).post(request, *args, **kwargs)
     
@@ -1031,8 +1089,8 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
                 messages.success(self.request, _('You had already been invited to "%(team_name)s" and have now been made a member immediately!') % {'team_name': self.object.name})
                 signals.user_group_invitation_accepted.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
         except self.membership_class.DoesNotExist:
-            # default user-auto-join groups will accept immediately
-            if self.object.slug in self.auto_accept_slugs:
+            # auto-join groups will accept immediately
+            if self.object.is_autojoin_group:
                 self.membership_class.objects.create(
                     user=self.request.user,
                     group=self.object,
@@ -1051,8 +1109,7 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
 
 
 class CSRFExemptGroupJoinView(GroupUserJoinView):
-    """ A CSRF-exempt group user join view that only works on groups/projects with slugs
-        in settings.COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS in this portal.
+    """ A CSRF-exempt group user join view that only works on autojoin groups.
     """
     
     @csrf_exempt
@@ -1061,7 +1118,7 @@ class CSRFExemptGroupJoinView(GroupUserJoinView):
     
     def get_object(self, *args, **kwargs): 
         group = super(CSRFExemptGroupJoinView, self).get_object(*args, **kwargs)
-        if group and group.slug not in self.auto_accept_slugs:
+        if group and not group.is_autojoin_group:
             raise PermissionDenied('The group/project requested for the join is not marked as auto-join!')
         return group
 
@@ -1138,7 +1195,7 @@ class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, GroupMember
 
 class GroupUserInvitationDeclineView(GroupUserWithdrawView):
 
-    message_success = _('Your invitation to %(team_type)s “%(team_name)s” was declined successfully.')
+    message_success = _('You have declined the invitation to %(team_type)s “%(team_name)s”.')
     
     def confirm_action(self):
         try:
@@ -1157,6 +1214,14 @@ class GroupUserInvitationAcceptView(GroupUserWithdrawView):
 
     message_success = _('You are now a member of %(team_type)s “%(team_name)s”. Welcome!')
     membership_status = MEMBERSHIP_MEMBER
+    
+    def post(self, request, *args, **kwargs):
+        # do not allow this for conferences with application management, because
+        # invitations are done via the application form
+        self.object = self.get_object()
+        if self.object.group_is_conference and self.object.use_conference_applications:
+            raise PermissionDenied()
+        return super(GroupUserInvitationAcceptView, self).post(request, *args, **kwargs)
     
     def confirm_action(self):
         try:
@@ -1251,6 +1316,71 @@ class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
     def get_user_qs(self):
         uids = self.model.objects.get_members(group=self.group)
         return get_user_model()._default_manager.exclude(id__in=uids)
+
+
+class GroupInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormView):
+    form_class = MultiGroupSelectForm
+
+    def get(self, *args, **kwargs):
+        messages.error(self.request, _('This action is not available directly!'))
+        return redirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': kwargs.get('group', '<NOGROUPKWARG>')}))
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group})
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['group'] = self.group
+        return kwargs
+
+    def form_valid(self, form):
+        groups = form.cleaned_data.get('groups')
+        invited_users = []
+        if 'invited_users' in self.group.settings:
+            invited_users = self.group.settings.get('invited_users')
+        else:
+            self.group.settings['invited_users'] = invited_users
+
+        group_ids = [group.id for group in groups]
+
+        if 'invited_groups' in self.group.settings:
+            invited_groups = self.group.settings.get('invited_groups')
+            for group_id in group_ids:
+                if not group_id in invited_groups:
+                    invited_groups.append(group_id)
+        else:
+            self.group.settings['invited_groups'] = group_ids
+            
+        # get all users of the selected groups
+        memberships = CosinnusGroupMembership.objects.get_members(groups=group_ids)
+        member_id_list = list(set([user for sub_list in memberships.values() for user in sub_list]))
+        
+        # get users who already got invitations or have applied
+        already_applied_id_list = list(self.group.conference_applications.all().values_list('user__id', flat=True))
+        currently_notified_id_list = list(set(self.group.members + self.group.invited_pendings + already_applied_id_list))
+        
+        member_list = filter_active_users(get_user_model().objects.filter(id__in=member_id_list).exclude(id__in=currently_notified_id_list))
+        newly_invited_users = []
+        for user in member_list:
+            if not user.id in invited_users and not user.id == self.request.user.id:
+                # send conference invitations to all users who haven't been invited, and never to self
+                self.group.add_member_to_group(user, MEMBERSHIP_INVITED_PENDING)
+                cosinnus_notifications.user_conference_invited_to_apply.send(
+                    sender=self,
+                    obj=self.group,
+                    user=self.request.user,
+                    audience=[user]
+                )
+                invited_users.append(user.id)
+                newly_invited_users.append(user)
+        
+        # save the invited users and groups
+        self.group.save()
+        if newly_invited_users:
+            messages.success(self.request, _('The following users were invited to apply: %s') % ', '.join(full_name(user) for user in newly_invited_users))
+        else:
+            messages.info(self.request, _('All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent.'))
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class GroupUserInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormView):
@@ -1415,23 +1545,19 @@ class ActivateOrDeactivateGroupView(TemplateView):
         group_id = int(kwargs.pop('group_id'))
         self.activate = kwargs.pop('activate')
         group = get_object_or_404(CosinnusGroup, id=group_id)
-        is_admin = check_user_superuser(request.user)
+        is_admin = check_user_superuser(request.user) or check_ug_admin(request.user, group)
         
         # only admins and group admins may deactivate groups/projects
-        if not (is_admin or check_ug_admin(request.user, group)):
-            redirect_to_403(request, self)
-        # special check: only portal admins can create/deactivate CosinnusSocieties
-        if group.type == CosinnusGroup.TYPE_SOCIETY and not is_admin and \
-                not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False):
-            messages.warning(self.request, _('Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.'))
-            return redirect(reverse('cosinnus:portal-admin-list'))
+        if not is_admin:
+            messages.warning(self.request, group.trans.MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE)
+            return redirect_to_403(request, self)
         
         if group.is_active and self.activate or (not group.is_active and not self.activate):
             if self.activate:
                 messages.warning(self.request, _('This project/group is already active!'))
             else:
                 messages.warning(self.request, _('This project/group is already inactive!'))
-            return redirect(get_non_cms_root_url(self.request))
+            return redirect(reverse('cosinnus:profile-detail'))
             
         self.group = group
         return super(ActivateOrDeactivateGroupView, self).dispatch(request, *args, **kwargs)
@@ -1457,12 +1583,12 @@ class ActivateOrDeactivateGroupView(TemplateView):
         else:
             messages.success(request, self.message_success_deactivate % {'team_name': self.group.name})
             signals.group_deactivated.send(sender=typed_group.__class__, group=typed_group)
-            return redirect(get_non_cms_root_url(self.request))
+            return redirect(reverse('cosinnus:profile-detail'))
     
     def get_context_data(self, **kwargs):
         context = super(ActivateOrDeactivateGroupView, self).get_context_data(**kwargs)
         context.update({
-            'target_group': self.group,
+            'target_group': ensure_group_type(self.group),
             'activate': self.activate,
         })
         return context
@@ -1493,6 +1619,7 @@ class GroupStartpage(View):
                 return False
             else:
                 return True
+        # if the group is not accessible, redirect to microsite
         if not check_object_read_access(self.group, request.user):
             return True
         
@@ -1508,12 +1635,25 @@ class GroupStartpage(View):
         
         if self.request.GET.get('microsite', None):
             return True
+        
         if not request.user.pk in self.group.members:
+            # non-members never see the dashboard, but always the microsite
+            if self.group.group_is_conference:
+                return True
+            
+            # grant access to superusers but notifiy them
+            if check_user_superuser(request.user):
+                messages.info(request, _('You are not a member, but have access because you are an Administrator.'))
+                return False
             return True
         return False
     
     @dispatch_group_access()
     def dispatch(self, request, *args, **kwargs):
+        # lock conference groups to microsite if setting enabled
+        if self.group.group_is_conference and settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
+            return self.microsite_view(request, *args, **kwargs)
+        
         redirect_result = self.check_redirect_to_microsite(request)
         if isinstance(redirect_result, six.string_types):
             return redirect(redirect_result)
@@ -1778,6 +1918,44 @@ def group_assign_reflected_object(request, group):
     return redirect(redirect_url)
 
 
+class GroupInviteSelect2View(RequireReadMixin, Select2View):
+    """
+    This view is used as API backend to serve the suggestions for the group invite field.
+    """
+
+    def check_all_permissions(self, request, *args, **kwargs):
+        user = request.user
+        if not user.is_authenticated:
+            raise PermissionDenied
+
+    def get_results(self, request, term, page, context):
+        terms = term.strip().lower().split(' ')
+        q = get_group_query_filter_for_search_terms(terms)
+        groups = get_cosinnus_group_model().objects.filter(q)
+        groups = groups.filter(portal_id=CosinnusPortal.get_current().id, is_active=True)
+        # non-superusers can only invite groups they are a member of
+        if not check_user_superuser(request.user):
+            user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(request.user)
+            groups = groups.filter(id__in=user_group_ids)
+        # do/do not return the forum group
+        forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        if forum_slug:
+            groups = groups.exclude(slug=forum_slug)
+            
+        if 'group' in self.kwargs and self.kwargs.get('group'):
+            group = CosinnusGroup.objects.get(slug=self.kwargs.get('group'))
+            exclude_ids = [group.id]
+            if 'invited_groups' in group.settings:
+                exclude_ids = exclude_ids + group.settings.get('invited_groups')
+            groups = groups.exclude(id__in=exclude_ids)
+        
+
+        results = get_group_select2_pills(groups)
+
+        # Any error response, Has more results, options list
+        return (NO_ERR_RESP, False, results)
+
+
 class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
     """
     This view is used as API backend to serve the suggestions for the group member invite field.
@@ -1936,6 +2114,21 @@ class GroupOrganizationRequestSelect2View(RequireReadMixin, Select2View):
         return (NO_ERR_RESP, False, results)
 
 
+class RemoveGroupInviteFromGroup(RequireReadMixin, FormView):
+
+    def post(self, request, *args, **kwargs):
+        if 'remove-group-invitation' in request.POST:
+            group_id = int(request.POST.get('remove-group-invitation'))
+            if 'invited_groups' in self.group.settings:
+                invited_groups = self.group.settings.get('invited_groups')
+                if group_id in invited_groups:
+                    invited_groups.remove(group_id)
+                    self.group.save()
+        return HttpResponseRedirect(group_aware_reverse(
+            'cosinnus:group-detail', kwargs={'group': self.group}))
+
+
+group_group_invite_delete = RemoveGroupInviteFromGroup.as_view()
 group_create = GroupCreateView.as_view()
 group_create_api = GroupCreateView.as_view(is_ajax_request_url=True)
 group_delete = GroupDeleteView.as_view()
@@ -1967,6 +2160,7 @@ group_user_invitation_accept = GroupUserInvitationAcceptView.as_view()
 group_user_add = GroupUserInviteView.as_view()
 group_user_add_api = GroupUserInviteView.as_view(is_ajax_request_url=True)
 group_user_add_multiple = GroupUserInviteMultipleView.as_view()
+group_add_multiple = GroupInviteMultipleView.as_view()
 group_user_update = GroupUserUpdateView.as_view()
 group_user_update_api = GroupUserUpdateView.as_view(is_ajax_request_url=True)
 group_user_delete = GroupUserDeleteView.as_view()
@@ -1975,6 +2169,7 @@ group_export = GroupExportView.as_view()
 activate_or_deactivate = ActivateOrDeactivateGroupView.as_view()
 group_startpage = GroupStartpage.as_view()
 user_group_member_invite_select2 = UserGroupMemberInviteSelect2View.as_view()
+group_invite_select2 = GroupInviteSelect2View.as_view()
 group_activate_app = GroupActivateAppView.as_view()
 group_organizations = GroupOrganizationsView.as_view()
 group_organization_request = GroupOrganizationRequestView.as_view()

@@ -2,47 +2,45 @@
 from __future__ import unicode_literals
 
 from builtins import object
-import six
-import django
+import copy
+import logging
 
+from annoying.functions import get_object_or_None
+import django
 from django.apps import apps
-from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
-from django.urls import reverse
+from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.postgres.fields import JSONField as PostgresJSONField
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.cache import cache
+from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models, transaction
 from django.db.models.signals import post_save, class_prepared
-from django.utils.encoding import python_2_unicode_compatible, force_text
+from django.template.loader import render_to_string
+from django.utils.encoding import python_2_unicode_compatible
+from django.utils.html import strip_tags
+from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
-
+from django_countries.fields import CountryField
 from jsonfield import JSONField
+import six
 
 from cosinnus.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
-from cosinnus.utils.files import get_avatar_filename, image_thumbnail,\
-    image_thumbnail_url
-from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
-from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core import signals
-from cosinnus.utils.group import get_cosinnus_group_model
-from django.contrib.staticfiles.templatetags.staticfiles import static
-from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
-import copy
 from cosinnus.core.mail import send_mail_or_fail_threaded
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-from django.utils.safestring import mark_safe
-from cosinnus.utils.user import get_newly_registered_user_email
-from annoying.functions import get_object_or_None
+from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
+from cosinnus.models.tagged import LikeableObjectMixin
+from cosinnus.utils.files import get_avatar_filename, image_thumbnail, \
+    image_thumbnail_url
+from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.utils.user import get_newly_registered_user_email
+from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
 
-import logging
-from django import forms
-from django_countries.fields import CountryField
-from django.contrib.contenttypes.fields import GenericRelation
-from cosinnus.models.managed_tags import CosinnusManagedTag,\
-    CosinnusManagedTagAssignmentModelMixin
-from cosinnus.dynamic_fields import dynamic_fields
 
 logger = logging.getLogger('cosinnus')
 
@@ -50,6 +48,11 @@ logger = logging.getLogger('cosinnus')
 # address and this long is bound to his old email (or to a scrambled, unusable one if they just registered)
 PROFILE_SETTING_EMAIL_TO_VERIFY = 'email_to_verify'
 PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN = 'email_verification_pwd'
+# a user with the following settings has not set an initial password yet.
+# the user can only loginwith the given token and is redirected to the `set password view`
+PROFILE_SETTING_PASSWORD_NOT_SET = 'password_not_set'
+# a datetime for when the last initial login token was sent for a user account without a password
+PROFILE_SETTING_LOGIN_TOKEN_SENT = 'login_token_sent'
 # a list of urls to redirect the user to on next page hit (only first in list), enforced by middleware
 PROFILE_SETTING_REDIRECT_NEXT_VISIT = 'redirect_next'
 # first login datetime, used to determine if user first logged in
@@ -87,7 +90,8 @@ class BaseUserProfileManager(models.Manager):
 
 @python_2_unicode_compatible
 class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
-                      CosinnusManagedTagAssignmentModelMixin, models.Model):
+                      LikeableObjectMixin, CosinnusManagedTagAssignmentModelMixin,
+                      models.Model):
     """
     This is a base user profile used within cosinnus. To use it, create your
     own model inheriting from this model.
@@ -136,13 +140,16 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     # UI and other preferences and extra settings for the user account
     settings = JSONField(default={})
     extra_fields = JSONField(default={}, blank=True,
-                help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
-    
+                help_text='NO LONGER USED! Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
+    dynamic_fields = PostgresJSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
+                help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`',
+                encoder=DjangoJSONEncoder)                       
+
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     
     objects = BaseUserProfileManager()
 
-    SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings', 'managed_tag_assignments']\
+    SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings', 'managed_tag_assignments', 'likes']\
                     + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
     
     # this indicates that objects of this model are in some way always visible by registered users
@@ -158,6 +165,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def __init__(self, *args, **kwargs):
         super(BaseUserProfile, self).__init__(*args, **kwargs)
         self._settings = copy.deepcopy(self.settings)
+        self._dynamic_fields = copy.deepcopy(self.dynamic_fields)
         
     def __str__(self):
         return six.text_type(self.user)
@@ -206,6 +214,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
                 subj_user = '%s - %s' % (_('Terms of Service'), data['site_name'])
                 send_mail_or_fail_threaded(get_newly_registered_user_email(self.user), subj_user, 'cosinnus/mail/user_terms_of_services.html', data)
         self._settings = copy.deepcopy(self.settings)
+        self._dynamic_fields = copy.deepcopy(self.dynamic_fields)
 
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})
@@ -263,6 +272,15 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         from cosinnus.models.group_extra import CosinnusSociety
         return CosinnusSociety.objects.get_for_user(self.user)
     
+    def get_deactivated_groups(self):
+        """ Returns a QS of all (untyped) deactivated groups for this user """
+        return get_cosinnus_group_model().objects.get_deactivated_for_user(self.user)
+    
+    @property
+    def has_deactivated_groups(self):
+        """ Returns True if the user has any deactivated groups they can re-activate """
+        return self.get_deactivated_groups().count() > 0
+    
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
@@ -289,12 +307,13 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
                              i18n u_gettext will be applied *later, at redirect time* to this string! 
             @param priority: if set to `True`, will insert the redirect as first URL, so it will be the next one in queue """
         redirects = self.settings.get(PROFILE_SETTING_REDIRECT_NEXT_VISIT, [])
-        if priority:
-            redirects.insert(0, (resolved_url, message))
-        else:
-            redirects.append((resolved_url, message))
-        self.settings[PROFILE_SETTING_REDIRECT_NEXT_VISIT] = redirects
-        self.save(update_fields=['settings'])
+        if not resolved_url in redirects:
+            if priority:
+                redirects.insert(0, (resolved_url, message))
+            else:
+                redirects.append((resolved_url, message))
+            self.settings[PROFILE_SETTING_REDIRECT_NEXT_VISIT] = redirects
+            self.save(update_fields=['settings'])
     
     def pop_next_redirect(self):
         """ Tries to remove the first redirect URL in the user's setting's redirect list, and return it.
@@ -363,6 +382,10 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     @property
     def is_workshop_participant(self):
         return self.settings.get(PROFILE_SETTING_WORKSHOP_PARTICIPANT, False)
+    
+    @property
+    def get_last_login_token_sent(self):
+        return self.settings.get(PROFILE_SETTING_LOGIN_TOKEN_SENT, None)
 
 
 class UserProfile(BaseUserProfile):
@@ -374,7 +397,6 @@ class UserProfile(BaseUserProfile):
 
 def get_user_profile_model():
     "Return the cosinnus user profile model that is active in this project"
-    from django.core.exceptions import ImproperlyConfigured
     from cosinnus.conf import settings
 
     try:
@@ -488,6 +510,10 @@ class GlobalUserNotificationSetting(models.Model):
     def save(self, *args, **kwargs):
         super(GlobalUserNotificationSetting, self).save(*args, **kwargs)
         self._meta.model.objects.clear_cache_for_user(self.user)
+            
+    def user_email(self):
+        """ Needed for django-admin """
+        return self.user.email
     
 
 class GlobalBlacklistedEmail(models.Model):
@@ -539,105 +565,3 @@ def _make_country_formfield(**kwargs):
     ).formfield(**kwargs)
 
 
-class _UserProfileFormExtraFieldsBaseMixin(object):
-    """ Base for the Mixins for the UserProfile or User modelforms that
-        add functionality for by-portal configured extra profile form fields """
-    
-    # a choice of field types for the settings dict values of `COSINNUS_USERPROFILE_EXTRA_FIELDS`
-    # these will be initialized as variable form fields for the fields in `self.extra_fields`
-    EXTRA_FIELD_TYPE_FORMFIELDS = {
-        dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT: forms.CharField,
-        dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: forms.BooleanField,
-        dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: forms.DateField,
-        dynamic_fields.DYNAMIC_FIELD_TYPE_COUNTRY: _make_country_formfield,
-    }
-    # if set to a string, will only include such fields in the form
-    # that have the given option name set to True in `COSINNUS_USERPROFILE_EXTRA_FIELDS`
-    filter_included_fields_by_option_name = None
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.prepare_extra_fields_initial()
-        self.prepare_extra_fields()
-        if 'extra_fields' in self.fields:
-            del self.fields['extra_fields']
-            
-    def prepare_extra_fields_initial(self):
-        """ Stub for settting the initial data for `self.extra_fields` as defined in
-            `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`.
-            Only a form with an UpdateView needs to implement this.  """
-        pass
-    
-    def prepare_extra_fields(self):
-        """ Creates extra fields for `self.extra_fields` as defined in
-            `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` """
-        field_map = {}
-        for field_name, field_options in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.items():
-            if field_name in self.fields:
-                raise ImproperlyConfigured(f'COSINNUS_USERPROFILE_EXTRA_FIELDS: {field_name} clashes with an existing UserProfile field!')
-            if not field_options.type in self.EXTRA_FIELD_TYPE_FORMFIELDS:
-                raise ImproperlyConfigured(f'COSINNUS_USERPROFILE_EXTRA_FIELDS: {field_name}\'s "type" attribute was not found in {self.__class__.__name__}.EXTRA_FIELD_TYPE_FORMFIELDS!')
-            # filter by whether a given option is set
-            if self.filter_included_fields_by_option_name \
-                    and not getattr(field_options, self.filter_included_fields_by_option_name, False):
-                continue
-            
-            formfield_class = self.EXTRA_FIELD_TYPE_FORMFIELDS[field_options.type]
-            self.fields[field_name] = formfield_class(
-                label=field_options.label,
-                initial=self.initial.get(field_name, None),
-                required=field_options.required,
-            )
-            setattr(self.fields[field_name], 'label', field_options.label)
-            setattr(self.fields[field_name], 'legend', field_options.legend)
-            setattr(self.fields[field_name], 'placeholder', field_options.placeholder)
-            
-            # "register" the extra field additionally
-            field_map[field_name] = self.fields[field_name]
-            
-        setattr(self, 'extra_field_list', field_map.keys())
-        setattr(self, 'extra_field_items', field_map.items())
-    
-    
-class UserProfileFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
-    """ Mixin for the UserProfile modelform that
-        adds functionality for by-portal configured extra profile form fields """
-    
-    def prepare_extra_fields_initial(self):
-        """ Set the initial data for `self.extra_fields` as defined in
-            `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` """
-        for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
-            if field_name in self.instance.extra_fields:
-                self.initial[field_name] = self.instance.extra_fields[field_name]
-        
-    def full_clean(self):
-        """ Assign the extra fields to the `extra_fields` the userprofile JSON field
-            instead of model fields, during regular form saving """
-        super().full_clean()
-        if hasattr(self, 'cleaned_data'):
-            for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
-                self.instance.extra_fields[field_name] = self.cleaned_data.get(field_name, None)
-
-
-class UserCreationFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
-    """ Like UserProfileFormExtraFieldsMixin, but works with the user signup form """
-    
-    # only show fields with option `in_signup` set to True
-    filter_included_fields_by_option_name = 'in_signup'
-    
-    def save(self, commit=True):
-        """ Assign the extra fields to the user's cosinnus_profile's `extra_fields` 
-        JSON field instead of model fields, after user form save """
-        ret = super().save(commit=commit)
-        if commit:
-            if hasattr(self, 'cleaned_data'):
-                # sanity check, retrieve the user's profile (will create it if it doesnt exist)
-                if not self.instance.cosinnus_profile:
-                    get_user_profile_model()._default_manager.get_for_user(self.instance)
-                
-                profile = self.instance.cosinnus_profile
-                for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
-                    profile.extra_fields[field_name] = self.cleaned_data.get(field_name, None)
-                    profile.save()
-        return ret
-    

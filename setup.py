@@ -59,7 +59,10 @@ setup(
         'MarkupSafe==1.1',
         'Pillow==6.2.0',
         'Celery==4.2.0',
+        'dataclasses',
         
+        'beautifulsoup4==4.8.1',
+        'chardet==3.0.4',
         'django-allauth==0.42.0',
         'django-annoying==0.7.6',
         'django-appconf==1.0.3',
@@ -67,6 +70,7 @@ setup(
         'django-bootstrap3==11.0.0',
         'django-classy-tags==0.8.0',
         'django-cors-middleware==1.3.1',
+        'django-countries==5.3.3',
         'django-cron==0.5.0',
         'django-embed-video==0.6',
         'django-el-pagination==2.1.2',
@@ -81,6 +85,7 @@ setup(
         'django-otp==0.5.2',
         'django-phonenumber-field==1.1.0',
         'django-polymorphic==0.7.2',
+        'django-reverse-admin==2.9.4',
         'django-sekizai==0.10.0',
         'django-simple-captcha==0.5.7',
         'django-suit==0.2.26',
@@ -113,12 +118,16 @@ setup(
         'python-memcached==1.59',
         'qrcode==6.1',
         'Unidecode==0.4.21',
-        'django-countries==5.3.3',
-        
+        'XlsxWriter==1.3.7',
+
         # wagtail
         'wagtail==2.3',
         'django-compressor',
         
+        # virus file scan validator
+        'clamd==1.0.2',
+        'django-clamd==0.4.0',
+
         # requirements loaded in from github
         'django-awesome-avatar',
         'django-filer',

@@ -87,6 +87,9 @@
     .apply-color-projects {
         color: @map-projects-color;
     }
+    .apply-color-conferences {
+        color: @map-conferences-color;
+    }
     .apply-color-groups {
         color: @map-groups-color;
     }
@@ -95,6 +98,12 @@
     }
     .apply-color-organizations {
         color: @map-organizations-color;
+    }
+    .apply-color-cloudfiles {
+        color: @map-cloud-color;
+    }
+    .apply-color-cloud {
+        color: @map-cloud-color;
     }
     .apply-color-liked {
         color: @map-liked-color;
@@ -186,6 +195,7 @@
     
     .placemark(events, event);
     .placemark(groups, group);
+    .placemark(conferences, conference);
     .placemark(ideas, idea);
     .placemark(organizations, organization);
     .placemark(people, person);
@@ -403,6 +413,13 @@
         background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-groups-color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-groups-color', GradientType=0); /* IE6-9 */
     }
+    .image-placeholder-background-conferences {
+        background: @map-conferences-color; /* Old browsers */
+        background: -moz-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-conferences-color 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-conferences-color 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-conferences-color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-conferences-color', GradientType=0); /* IE6-9 */
+    }
     .image-placeholder-background-ideas {
         background: @map-ideas-color; /* Old browsers */
         background: -moz-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-ideas-color 100%); /* FF3.6-15 */
@@ -411,6 +428,13 @@
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-ideas-color', GradientType=0); /* IE6-9 */
     }
     .image-placeholder-background-organizations {
+        background: @map-ideas-color; /* Old browsers */
+        background: -moz-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-organizations-color', GradientType=0); /* IE6-9 */
+    }
+    .image-placeholder-background-cloudfile {
         background: @map-ideas-color; /* Old browsers */
         background: -moz-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* FF3.6-15 */
         background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* Chrome10-25,Safari5.1-6 */

@@ -165,3 +165,6 @@ __all__ = ('group_model_registry', )
 #group_model_registry.register(<group-url-fragment>, '<plural-url-fragment>', '<django url-name-prefix>', '<str group model name>', '<str group form>', <int group type>)
 group_model_registry.register('project', 'projects', '', 'cosinnus.models.group_extra.CosinnusProject', 'cosinnus.forms.group._CosinnusProjectForm', 0) # CosinnusGroup.TYPE_PROJECT
 group_model_registry.register('group', 'groups', 'group__', 'cosinnus.models.group_extra.CosinnusSociety', 'cosinnus.forms.group._CosinnusSocietyForm', 1) # CosinnusGroup.TYPE_SOCIETY
+if settings.COSINNUS_CONFERENCES_ENABLED:
+    group_model_registry.register('conference', 'conferences', 'conference__', 'cosinnus.models.group_extra.CosinnusConference', 'cosinnus.forms.group._CosinnusConferenceForm', 2) # CosinnusGroup.TYPE_SOCIETY
+

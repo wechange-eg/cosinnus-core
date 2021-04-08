@@ -30,11 +30,11 @@
 	{% if label %}
 		<label {% if for_id %}for="{{ for_id }}"{% endif %} {% if first %}class="first"{% endif %}>
 		    {{ label }}
-		    {% if field and not field.field.required and not required and not hide_optional %}
+		    {% if field and not field.field.required and not required and not hide_optional and not SETTINGS.COSINNUS_FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL %}
                 ({% trans "optional" context "written next to optional form fields" %})
             {% endif %}
-            {% if show_required %}
-            	<span class="required-label">*</span>
+            {% if show_required or SETTINGS.COSINNUS_FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL and required or SETTINGS.COSINNUS_FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL and field.field.required %}
+            	<span class="required-label">{{ SETTINGS.COSINNUS_FIELDS_REQUIRED_LABEL }}</span>
             {% endif %}
             {% if help_popup %}
                 {% include 'cosinnus/common/help_button_for_popup.html' with help_text_id=help_popup %}
@@ -43,7 +43,7 @@
 	{% endif %}
 	
 	{% if legend %}
-	    <div class="field-description no-select">{{ legend|safe }}</div>
+	    <div class="field-description {% if not legend_selectable %}no-select {% endif %}{{ legend_class }}">{{ legend|safe }}</div>
 	{% endif %}
 	
 	{% if field and field.errors %}

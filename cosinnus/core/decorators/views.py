@@ -40,7 +40,7 @@ def redirect_to_403(request, view=None, group=None):
     if group is not None:
         # only redirect to micropage if user isn't a member of the group
         if not request.user.is_authenticated or not request.user.id in group.members:
-            messages.warning(request, _('Only team members can see the content you requested. Apply to become a member now!'))
+            messages.warning(request, group.trans.MESSAGE_MEMBERS_ONLY)
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': group}))
     raise PermissionDenied
 
@@ -191,7 +191,7 @@ def require_superuser():
             if not user.is_authenticated:
                 return redirect_to_not_logged_in(request, view=self)
             if not check_user_superuser(user):
-                return HttpResponseForbidden()
+                raise PermissionDenied('You do not have permission to access this page.')
             
             return function(self, request, *args, **kwargs)
             

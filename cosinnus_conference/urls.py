@@ -8,8 +8,8 @@ from cosinnus_conference import views
 app_name = 'conference'
 
 cosinnus_group_patterns = [
-    url(r'^management/$', views.conference_management,
-        name='management'),
+    url(r'^user-accounts/$', views.conference_temporary_users,
+        name='temporary-users'),
     url(r'^room-management/$', views.conference_room_management,
         name='room-management'),
     url(r'^room-management/add/$', views.conference_room_add,
@@ -22,12 +22,23 @@ cosinnus_group_patterns = [
         name='page-maintenance'),
     url(r'^maintenance/(?P<slug>[^/]+)/$',
         views.conference_page_maintenance, name='page-maintenance-room'),
+    url(r'^participation-manangement/$', views.conference_participation_management,
+        name='participation-management'),
+    url(r'^participation-manangement/applications/$', views.conference_applications,
+        name='participation-management-applications'),
     url(r'^workshop-participants-upload/$', views.workshop_participants_upload,
         name='workshop-participants-upload'),
     url(r'^workshop-participants-upload-skeleton/$',
         views.workshop_participants_upload_skeleton, name='workshop-participants-upload-skeleton'),
     url(r'^workshop-participants-download/$', views.workshop_participants_download,
         name='workshop-participants-download'),
+    url(r'^participation-manangement/applicants-details-download/$', views.conference_applicant_details_download ,
+        name='applicants-details-download'),
+    url(r'^reminders/$', views.conference_reminders,
+        name='reminders'),
+    url(r'^apply/$', views.conference_application,
+        name='application'),
+
 
     url(r'^$', views.conference_page,
         name='index'),

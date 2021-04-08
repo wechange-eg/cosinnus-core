@@ -13,6 +13,10 @@ import six
 import numpy
 import locale
 import functools
+import logging
+
+logger = logging.getLogger('cosinnus')
+
 
 
 def unique_aware_slugify(item, slug_source, slug_field, 
@@ -182,6 +186,20 @@ def is_number(s):
         return True
     except (ValueError, TypeError):
         return False
+    
+def get_float_or_None(s):
+    """ Attempts to return the value coerced to a float, or returns None """
+    try:
+        return float(s)
+    except (ValueError, TypeError):
+        return None
+    
+def get_int_or_None(s):
+    """ Attempts to return the value coerced to a float, or returns None """
+    try:
+        return int(s)
+    except (ValueError, TypeError):
+        return None
 
 
 def resolve_attributes(obj, attr_or_function, default=None, func_args=[]):    
@@ -275,4 +293,17 @@ def sort_key_strcoll_lambda(lambda_func):
     def strcoll_cmp_attr(obj1, obj2):
         return locale.strcoll(lambda_func(obj1), lambda_func(obj2))
     return functools.cmp_to_key(strcoll_cmp_attr)
+
+
+def catch_all_and_log(func):
+    """ Decorator that catches any exception in the function and logs it, then continues execution.
+        Very useful for hook functions that should never bubble up into execution.
+     """
+    def inner_function(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except Exception as e:
+            logger.error(f'Catch_all_and_log caught exception in {func.__module__}.{func.__name__}().',
+                             extra={'exception': e})
+    return inner_function
 

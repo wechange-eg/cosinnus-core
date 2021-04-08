@@ -1,43 +1,53 @@
 {% load i18n cosinnus_tags %}
 
-{% comment %} {{current_page}} is one of: grouplist, addgroup {% endcomment %}
+{% comment %} {{current_page}} is one of: grouplist, addCosinnusProject {% endcomment %}
 
 {% if current_page == "grouplist" %}
     {% captureas is_grouplist %}True{% endcaptureas %}
 {% elif current_page == "grouplist__society" %}
     {% captureas is_grouplist__society %}True{% endcaptureas %}
+{% elif current_page == "grouplist__conference" %}
+    {% captureas is_grouplist__conference %}True{% endcaptureas %}
 {% elif current_page == "userlist" %}
     {% captureas is_userlist %}True{% endcaptureas %}
 {% elif current_page == "portaladminlist" %}
     {% captureas is_portaladminlist %}True{% endcaptureas %}
-{% elif current_page == "addgroup" %}
-    {% captureas is_addgroup %}True{% endcaptureas %}
-{% elif current_page == "addsociety" %}
-    {% captureas is_addsociety %}True{% endcaptureas %}
+{% elif current_page == "addCosinnusProject" %}
+    {% captureas is_addCosinnusProject %}True{% endcaptureas %}
+{% elif current_page == "addCosinnusSociety" %}
+    {% captureas is_addCosinnusSociety %}True{% endcaptureas %}
+{% elif current_page == "addCosinnusConference" %}
+    {% captureas is_addCosinnusConference %}True{% endcaptureas %}
 {% endif %}
 
-{% if current_page == "grouplist" or current_page == "addgroup" %}
+{% if current_page == "grouplist" or current_page == "addCosinnusProject" %}
 	{% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
-	{% captureas label %}{% trans "All projects" %}{% endcaptureas %}
-	{% include "cosinnus/leftnav_button.html" with active=is_grouplist extra_classes="regular-space" icon="fa-group" label=label href=href  %}
+	{% include "cosinnus/leftnav_button.html" with active=is_grouplist extra_classes="regular-space" icon="fa-group" label=COSINNUS_PROJECT_TRANS.ALL_LIST href=href  %}
 	
 	{% if user|can_create_groups %}
 	    {% captureas href %}{% url 'cosinnus:group-add' %}{% endcaptureas %}
-	    {% captureas label %}{% trans "Create Project" %}{% endcaptureas %}
-	    {% include "cosinnus/leftnav_button.html" with active=is_addgroup icon="fa-plus" extra_classes="regular-space" label=label href=href  %}
+	    {% include "cosinnus/leftnav_button.html" with active=is_addCosinnusProject extra_classes="regular-space" icon=COSINNUS_PROJECT_TRANS.ICON extra_classes="regular-space" label=COSINNUS_PROJECT_TRANS.CREATE_NEW href=href  %}
 	{% endif %}
 {% endif %}
 
-{% if current_page == "grouplist__society" or current_page == "addsociety" %}
-	{% captureas href %}{% url 'cosinnus:group__group-list' %}{% endcaptureas %}
-	{% captureas label %}{% trans "All groups" %}{% endcaptureas %}
-	{% include "cosinnus/leftnav_button.html" with active=is_grouplist__society extra_classes="regular-space" icon="fa-group" label=label href=href  %}
-	
-	{% if user|can_create_groups %}
-	    {% captureas href %}{% url 'cosinnus:group__group-add' %}{% endcaptureas %}
-	    {% captureas label %}{% trans "Create Group" %}{% endcaptureas %}
-	    {% include "cosinnus/leftnav_button.html" with active=is_addsociety icon="fa-plus" label=label href=href  %}
-	{% endif %}
+{% if current_page == "grouplist__society" or current_page == "addCosinnusSociety" %}
+    {% captureas href %}{% url 'cosinnus:group__group-list' %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with active=is_grouplist__society extra_classes="regular-space" icon=COSINNUS_SOCIETY_TRANS.ICON label=COSINNUS_SOCIETY_TRANS.ALL_LIST href=href  %}
+    
+    {% if user|can_create_groups %}
+        {% captureas href %}{% url 'cosinnus:group__group-add' %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with active=is_addCosinnusSociety extra_classes="regular-space" icon="fa-plus" label=COSINNUS_SOCIETY_TRANS.CREATE_NEW href=href  %}
+    {% endif %}
+{% endif %}
+
+{% if current_page == "grouplist__conference" or current_page == "addCosinnusConference" %}
+    {% captureas href %}{% url 'cosinnus:conference__group-list' %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with active=is_grouplist__society extra_classes="regular-space" icon=COSINNUS_CONFERENCE_TRANS.ICON label=COSINNUS_CONFERENCE_TRANS.ALL_LIST href=href  %}
+    
+    {% if user|can_create_groups %}
+        {% captureas href %}{% url 'cosinnus:conference__group-add' %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with active=is_addCosinnusSociety extra_classes="regular-space" icon="fa-plus" label=COSINNUS_CONFERENCE_TRANS.CREATE_NEW href=href  %}
+    {% endif %}
 {% endif %}
 
 {% if current_page == "portaladminlist" or current_page == "userlist" %}
@@ -53,11 +63,17 @@
 {% endif %}
 
 {% if current_page == "all" %}
+    {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
+        {% captureas href %}{% url 'cosinnus:conference__group-list' %}{% endcaptureas %}
+	    {% captureas label %}{% trans "All Conferences" %}{% endcaptureas %}
+	    {% include "cosinnus/leftnav_button.html" with active=is_grouplist__conference extra_classes="regular-space" icon="fa-group" label=label href=href  %}
+    {% endif %}
+    
     {% captureas href %}{% url 'cosinnus:group__group-list' %}{% endcaptureas %}
-    {% captureas label %}{% trans "All societies" %}{% endcaptureas %}
+    {% captureas label %}{% trans "All Groups" %}{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with active=is_grouplist__society extra_classes="regular-space" icon="fa-group" label=label href=href  %}
     
     {% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
-    {% captureas label %}{% trans "All projects" %}{% endcaptureas %}
+    {% captureas label %}{% trans "All Projects" %}{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with active=is_grouplist extra_classes="regular-space" icon="fa-group" label=label href=href  %}
 {% endif %}

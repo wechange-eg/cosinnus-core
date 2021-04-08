@@ -2,18 +2,22 @@
 {% load i18n static cosinnus_tags widget_tweaks %}
 
 {% block page_title %}
-	   {% if activate %}{% trans "Re-Activate Project/Group" %}{% else %}{% trans "Deactivate Project/Group" %}{% endif %}
+	   {% if activate %}{{ target_group.trans.REACTIVATE }}{% else %}{{ target_group.trans.DEACTIVATE }}{% endif %}:
+	   {{ target_group.name }}
 {% endblock %}
 
 {% block breadcrumb %}
         {{ block.super }}
-        <li class="active">{% if activate %}{% trans "Re-Activate Project/Group" %}{% else %}{% trans "Deactivate Project/Group" %}{% endif %}</li>
+        <li class="active">
+            {% if activate %}{{ target_group.trans.REACTIVATE }}{% else %}{{ target_group.trans.DEACTIVATE }}{% endif %}:
+            {{ target_group.name }}
+        </li>
 {% endblock %}
 
 {% block leftnav %}
 	{% if activate %}
 		{% url 'cosinnus:deactivated-groups' as deactivated_groups_url %}
-		{% trans "Deactivated Projects and Groups" as label %}
+		{% trans "Your Deactivated Content" as label %}
 		{% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-reply" label=label href=deactivated_groups_url  %}
 	{% else %}
     	{% include 'cosinnus/group/leftnav_group.html' with group=target_group current_page='groupdeactivate' %}
@@ -27,14 +31,17 @@
 	    <div class="alert alert-danger alert-dismissable">
 		    <i class="fa fa-exclamation-triangle fa-3x"></i>
 		    <p>{% trans 'Warning!' %}</p>
-		    <p>{% trans "You are about to deactivate this project/group!" %}</p>
+		    <p>{{ target_group.trans.DEACTIVATE_WARNING }}</p>
 		</div>
 	{% endif %}
 
     <!-- a box with semi transparent background -->
     <div class="content-box">
 	    
-            <legend>{% if activate %}{% trans "Re-Activate Project/Group" %}{% else %}{% trans "Deactivate Project/Group" %}{% endif %}: {{ target_group.name }}</legend>
+            <legend>
+                {% if activate %}{{ target_group.trans.REACTIVATE }}{% else %}{{ target_group.trans.DEACTIVATE }}{% endif %}:
+                {{ target_group.name }}
+            </legend>
 
             <!-- On large screens the long explanation texts are on the right side next to the input elements -->
             <div class="row">
@@ -42,30 +49,28 @@
                 <div class="col-md-12">
                 		<p class="transparent"></p>
                 	{% if activate %}
-						<p class="transparent">{% trans "You are about to re-activate this project/group. It and all of its content will be visible on the website again." %}</p><!-- Text here if neccessary -->
+						<p class="transparent">{{ target_group.trans.DEACTIVATE_EXPLANATION }}</p><!-- Text here if neccessary -->
 					{% else %}
-	                    <p class="transparent">{% trans "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you." %}</p><!-- Text here if neccessary -->
-	                    <p class="transparent">{% trans "This process is reversible. You can reactivate the project/group from your user profile at any time." %}</p><!-- Text here if neccessary -->
+	                    <p class="transparent">{{ target_group.trans.REACTIVATE_EXPLANATION_1 }}</p><!-- Text here if neccessary -->
+	                    <p class="transparent">{{ target_group.trans.REACTIVATE_EXPLANATION_2 }}</p><!-- Text here if neccessary -->
 					{% endif %}
                 </div>
             </div><!-- row -->
     </div>
     
     <form method="POST" action=".">{% csrf_token %}
-	    <div class="{% if activate %}app-calendar{% else %}app-etherpad{% endif %}">
-		    <button type="submit" class="btn btn-emphasized">
-		        <ul class="media-list">
-		            <li class="media">
-		                <a class="pull-left" href="#">
-		                    <i class="fa {% if activate %}fa-check{% else %}fa-times{% endif %}"></i>
-		                </a>
-		                <div class="media-body">
-	                        {% if activate %}{% trans "Re-Activate" %}{% else %}{% trans "Deactivate" %}{% endif %}
-		                </div>
-		            </li>
-		        </ul>
-		    </button>
-	    </div>
+	    <button type="submit" class="btn btn-{% if activate %}emphasized{% else %}default{% endif %}">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa {% if activate %}fa-check{% else %}fa-times{% endif %}"></i>
+	                </a>
+	                <div class="media-body">
+                        {% if activate %}{% trans "Re-Activate" %}{% else %}{% trans "Deactivate" %}{% endif %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
     </form>
 
 {% endblock %}

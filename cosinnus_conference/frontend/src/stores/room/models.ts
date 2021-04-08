@@ -6,6 +6,7 @@ export interface RoomJson {
   count: number
   url: string
   description_html: string
+  show_chat: boolean
   management_urls: {
     create_event?: string
     update_room?: string
@@ -22,6 +23,7 @@ export interface RoomProps {
   count: number
   url: string
   descriptionHtml: string
+  showChat: boolean
   managementUrls: {
     createEvent?: string
     updateRoom?: string
@@ -52,6 +54,7 @@ export class Room {
       count: json.count,
       url: json.url,
       descriptionHtml: json.description_html,
+      showChat: json.show_chat,
       managementUrls: {
         createEvent: json.management_urls.create_event,
         updateRoom: json.management_urls.update_room,
@@ -78,6 +81,7 @@ export class Room {
       count: props.count,
       url: props.url,
       description_html: props.descriptionHtml,
+      show_chat: props.showChat,
       management_urls: {
         create_event: props.managementUrls.createEvent,
         update_room: props.managementUrls.updateRoom,

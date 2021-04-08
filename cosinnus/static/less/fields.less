@@ -47,6 +47,9 @@
         font-size: 14px;
         color: @app-neutral-color-medium;
     }
+    .required-label {
+        color: red;
+    }
     
     
     .cosinnus-field-input {
@@ -77,9 +80,12 @@
             &.missing, &.error {
             	background-color: #ffcccc !important;
             }
-            &:disabled {
-                background-color: @app-neutral-color-light !important;
-            }
+        }
+        input:disabled,
+        textarea:disabled,
+        select:disabled,
+        .select2-container-disabled, .select2-container-disabled .select2-choice, .select2-container-disabled input {
+            background-color: @app-neutral-color-light !important;
         }
         
         input, select {
@@ -121,6 +127,35 @@
             
         }
         
+        .select2-container {
+            width: 100%;
+            height: 40px;
+            
+            .select2-choice {
+                line-height: 40px;
+                height: 40px;
+                padding: 0 12px;
+            }
+            .select2-arrow {
+                padding: 10px 0;
+            }
+        }
+        &.large-field {
+            .select2-container {
+                height: auto;
+            }
+        }
+        &.triplet-date-field {
+            background-color: transparent;
+            
+            select {
+                width: 32%;
+            } 
+            select + select {
+                margin-left: 2%;
+            }
+        }
+        
     }
     .cosinnus-field-input.regular-field {
         height: 40px;
@@ -131,11 +166,18 @@
     .cosinnus-field-input.checkbox-field {
         height: auto;
     }
+    .cosinnus-field-input.checkbox-field-no-label {
+        background-color: transparent;
+        margin-top: 14px;
+    }
     .cosinnus-field-input.checkbox-field input {
         width: inherit;
         vertical-align: middle;
         margin: 0 5px 0 10px;
         cursor: pointer;
+    }
+    .cosinnus-field-input.checkbox-field-no-label input {
+        margin-left: 0;
     }
     .cosinnus-field-input.checkbox-field label {
         cursor: pointer;
@@ -143,6 +185,13 @@
         word-break: break-word;
         vertical-align: middle;
         margin: 5px 0;
+    }
+    .cosinnus-field-input.file-field {
+        input {
+            height: auto;
+            width: auto;
+            min-height: auto;
+        }
     }
     .cosinnus-field-input.transparent {
         background-color: transparent;
@@ -225,4 +274,18 @@
  */
 .conditional-select-container {
 	display: none;	
+}
+
+.checkbox-multiple {
+    background-color: white;
+
+    ul {
+        list-style : none;
+        padding: 7px 10px 5px 10px;
+    }
+
+    .extra-text {
+        text-align: end;
+        padding: 7px 10px 5px 10px;
+    }
 }

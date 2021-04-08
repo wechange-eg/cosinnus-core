@@ -1,0 +1,33 @@
+{% load static i18n %}
+
+{% with profile=user.cosinnus_profile %}
+    <div class="contact-box">
+        <div class="background-wrapper">
+		    <img {% if user.cosinnus_profile.avatar_url %}src="{{ profile.avatar_url }}" {% else %} src="{% static 'images/jane-doe.png' %}" {% endif %}>
+		    <div class="contact-box-content">
+		        <div>
+		            {% block main_data %}
+			            <div class="contact-name">
+			                <a href="{{ profile.get_absolute_url }}">
+		                       {{ profile.get_full_name }}
+		                    </a>
+		                </div>
+			            {% if title %}
+		                   <div><small>{{ title }}</small></div>
+		                {% endif %}
+	                {% endblock main_data %}
+		        </div>
+		        <div>
+		            <small>
+		                {% block extra_data %}
+		                    <a href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=user.username %}{% else %}{% url 'postman:write' recipients=user.username %}?next={% url 'postman:sent' %}{% endif %}">
+		                        <i class="fas fa-comment-dots"></i>
+		                        {% trans "Message" %}
+		                    </a>
+	                    {% endblock %}
+	                </small>
+		        </div>
+		    </div>
+	    </div>
+    </div>
+{% endwith %}

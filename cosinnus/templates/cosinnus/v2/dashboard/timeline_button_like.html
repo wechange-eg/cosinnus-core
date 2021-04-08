@@ -9,12 +9,12 @@
 {% endcomment %}
 
 <div class="action-button-wrapper">
-	<a class="action-button action-button-toggleable likefollow-button like-button {% if user|can_likefollow:item %}action-do-likefollow{% endif %} {% if user.id in item.get_liked_user_ids %}selected{% endif %}" 
+	<a class="action-button action-button-toggleable likefollowstar-button like-button {% if user|can_likefollowstar:item %}action-do-likefollowstar{% endif %} {% if user.id in item.get_liked_user_ids %}selected{% endif %}" 
 	        data-type="like" data-ct="{{ item.get_content_type }}" data-id="{{ item.id }}"
-	        {% if not user|can_likefollow:item %}href="{% url 'login' %}?next={{ item.get_absolute_like_url|urlencode }}"{% endif %}>
+	        {% if not user|can_likefollowstar:item %}href="{% url 'login' %}?next={{ item.get_absolute_like_url|urlencode }}"{% endif %}>
 	    {# We add/subtract 1 here, because that number is for the already-pre-calculated future state of when the current user likes/unlikes the item #}
 	    <span class="show-unselected">
-	        <i class="fa fa-heart"></i>
+	        <i class="far fa-heart"></i>
 	        {% if user.id in item.get_liked_user_ids %}
 	            {% if item.like_count|subtract:1 > 0 %}{{ item.like_count|subtract:1 }}{% endif %}
 	        {% else %}
@@ -22,7 +22,7 @@
 	        {% endif %}
 	    </span>
 	    <span class="show-selected">
-	        <i class="fa fa-heart"></i>
+	        <i class="fas fa-heart"></i>
 	        {% if user.id in item.get_liked_user_ids %}
 	            {% if item.like_count > 0 %}{{ item.like_count }}{% endif %}
 	        {% else %}

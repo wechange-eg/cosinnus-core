@@ -102,7 +102,7 @@ MIDDLEWARE = [
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     
     'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
-    #'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.AddRequestToModelSaveMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
@@ -248,7 +248,9 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'drf_yasg',
         'taggit',
         'django_bigbluebutton',
+        'django_clamd',
     ]
+    
     return _INSTALLED_APPS
 
 LANGUAGES = [
@@ -414,6 +416,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 CRON_CLASSES = [
     'cosinnus_marketplace.cron.DeactivateExpiredOffers',
     'cosinnus_message.cron.ProcessDirectReplyMails',
+    'cosinnus_conference.cron.SendConferenceReminders',
 ]
 # delete cronjob logs older than 30 days
 DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 30
@@ -510,14 +513,15 @@ LOGIN_RATELIMIT_LOGGER_NAME = 'cosinnus'
 # new users that register will automatically be assigned these django permission groups
 NEWW_DEFAULT_USER_AUTH_GROUPS = ['Users']
 
-# new user that register will automatically become members of these groups/projects (supply group slugs!)
-NEWW_DEFAULT_USER_GROUPS = ['forum']
-
-# these groups will accept members instantly after requesting membership
-COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS = ['forum']
-
 # the "Home" group for this portal. if not set, some things won't work (like attaching files to direct messages)
 NEWW_FORUM_GROUP_SLUG = 'forum'
+
+# new user that register will automatically become members of these groups/projects (supply group slugs!)
+NEWW_DEFAULT_USER_GROUPS = [NEWW_FORUM_GROUP_SLUG]
+
+# these groups will accept members instantly after requesting membership
+COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS = NEWW_DEFAULT_USER_GROUPS
+
 
 # the resident "Events" group for this portal. set this to thhe `NEWW_FORUM_GROUP_SLUG` if there isn't a seperate group!
 NEWW_EVENTS_GROUP_SLUG = NEWW_FORUM_GROUP_SLUG
@@ -597,8 +601,9 @@ COSINNUS_ORGANIZATIONS_ENABLED = False
 
 # Additional fields (List of form pathes, required form fields are: label and icon)
 COSINNUS_ORGANIZATION_ADDITIONAL_FORMS = []
-COSINNUS_GROUP_ADDITIONAL_FORMS = []
 COSINNUS_PROJECT_ADDITIONAL_FORMS = []
+COSINNUS_GROUP_ADDITIONAL_FORMS = []
+COSINNUS_CONFERENCE_ADDITIONAL_FORMS = []
 
 # Organizations
 COSINNUS_DATA_EXCHANGE_ENABLED = False
@@ -619,3 +624,9 @@ COSINNUS_GOODDB_PULL = {
         'serializer': 'cosinnus.external.serializers.ExternalEventGoodDBSerializer'
     },
 }
+
+COSINNUS_STARRED_STAR_LABEL = _('Bookmark')
+COSINNUS_STARRED_STARRING_LABEL = _('Bookmarked')
+COSINNUS_STARRED_OBJECTS_LIST = _('Bookmark list')
+COSINNUS_STARRED_USERS_LIST = _('Bookmarked Users list')
+

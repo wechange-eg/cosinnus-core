@@ -1,0 +1,65 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block page_title %}{% trans "Newsletters" %} - {% trans "Edit" %}{% endblock %}
+
+{% block leftnav %}
+	{% include 'cosinnus/administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li class="active">
+        {% trans "Newsletters" %}
+        {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}
+            ({{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_NAME_PLURAL }})
+       {% endif %}
+    </li>
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.email_text.id_for_label %}
+{% endblock %}
+
+{% block content %}
+	<div class="content-box">
+	    <h2>
+	       {% trans 'Newsletters' %}
+	    
+	    </h2>
+	    
+	    {% if object_list %}
+		    <table class="table table-striped white-content">
+		        <thead>
+		            <tr>
+		                <th>{% trans "Newsletter" %}</th>
+		                <th>{% trans "Sent at:" %}</th>
+		            </tr>
+		        </thead>
+		        {% for newsletter in object_list %}
+			        <tr>
+			            <th><a href="{% block update_url %}{% url 'cosinnus:administration-managed-tags-newsletter-update' newsletter_id=newsletter.id %}{% endblock %}">{{ newsletter.subject }}</a></th>
+			            <th>{% if newsletter.sent %}{{ newsletter.sent }}{% else %}{% trans 'This newsletter has not been sent' %}{% endif %}</th>
+			        </tr>
+		        {% endfor %}
+		    </table>
+	    {% else %}
+	        {% trans "There are no newsletters yet." %}
+	    {% endif %}
+	</div>
+	<div class="fadedown pull-right">
+	    <button class="btn btn-emphasized btn-autosize" href="{% block create_url %}{% url 'cosinnus:administration-managed-tags-newsletter-create' %}{% endblock %}">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left">
+	                    <i class="fa fa-plus"></i>
+	                </a>
+	                <div class="media-body">
+	                    {% trans 'Add newsletter'%}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+	</div>
+{% endblock %}

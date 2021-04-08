@@ -13,7 +13,8 @@ from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgram
     LocalCachedIndexMixin, DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
 from cosinnus.utils.user import filter_active_users, filter_portal_users
 from cosinnus.models.profile import get_user_profile_model
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+    CosinnusConference
 from cosinnus.utils.functions import normalize_within_stddev, resolve_class
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_ids
@@ -178,6 +179,58 @@ class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
         """ child projects for groups """ 
         return obj.groups.count()
 
+    
+class CosinnusConferenceIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexes.Indexable):
+    
+    text = TemplateResolveNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
+    rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
+    
+    from_date = indexes.DateTimeField(model_attr='from_date', null=True)
+    to_date = indexes.DateTimeField(model_attr='to_date', null=True)
+    humanized_event_time_html = indexes.CharField(stored=True, indexed=False)
+    participants_limit_count = indexes.IntegerField(stored=True, indexed=False)
+    
+    def get_model(self):
+        return CosinnusConference
+
+    def prepare_participant_count(self, obj):
+        """ Mirrored the member count for simplicity """
+        return self.prepare_member_count(obj)
+    
+    def prepare_participants_limit_count(self, obj):
+        """ Mirrored the member count for simplicity """
+        participation_managements = obj.participation_management.all()
+        if len(participation_managements) > 0:
+            return participation_managements[0].participants_limit
+        return 0
+    
+    def prepare_humanized_event_time_html(self, obj):
+        return obj.get_humanized_event_time_html()
+    
+    def boost_model(self, obj, indexed_data):
+        """ We boost a combined measure of 2 added factors: soonishnes (50%) and participant count (50%).
+            This means that a soon happening event with lots of participants will rank highest and an far off event 
+            with no participants lowest.
+            But it also means that soon happening events with no participants will still rank quite high, 
+            as will far off events with lots of participants.
+            
+            Factors:
+            - The conference's date, highest being now() and lowest >= 12 months from now
+            """
+        
+        if obj.from_date:
+            future_date_timedelta = obj.from_date - now()
+            if future_date_timedelta.days < 0:
+                if obj.to_date and (obj.to_date - now()).days > 0:
+                    rank_from_date = 0.1 # running events rank not nothing
+                else:
+                    rank_from_date = 0.0  # past events rank worst 
+            else:
+                rank_from_date = max(1.0 - (future_date_timedelta.days/365.0), 0) 
+        else:
+            rank_from_date = 0.0
+        return rank_from_date
+    
 
 class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataIndexMixin, 
            TagObjectSearchIndex, indexes.Indexable):

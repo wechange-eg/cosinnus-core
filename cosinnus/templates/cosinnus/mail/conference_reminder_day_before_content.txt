@@ -1,0 +1,7 @@
+{% load i18n %}{% blocktrans %}The conference [[name]] starts tomorrow.
+Start of the event is [[from_date]].
+
+Under the following link you can already get an overview of the conference events.
+
+Best regards,
+Your conference team{% endblocktrans %}
