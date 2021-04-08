@@ -11,7 +11,7 @@ def convert_conference_types(apps, schema_editor):
     CosinnusGroup = apps.get_model(group_app_name, group_model_name)
     CosinnusPermanentRedirect = apps.get_model('cosinnus', 'CosinnusPermanentRedirect')
     for group in CosinnusGroup.objects.all():
-        if group.type == 1 and group.is_conference:
+        if group.type == 1 and hasattr(group, 'is_conference') and group.is_conference:
             group.type = 2
             group.save()
             CosinnusPermanentRedirect.objects.get_or_create(from_portal=group.portal, from_type='group', from_slug=group.slug, to_group=group)
