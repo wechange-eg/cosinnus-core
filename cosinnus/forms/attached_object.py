@@ -40,7 +40,7 @@ class FormAttachableMixin(object):
         
         # retrieve the attached objects ids to select them in the update view
         preresults = []
-        if self.instance and self.instance.pk:
+        if self.instance and self.instance.pk and self.instance.attached_objects is not None:
             for attached in self.instance.attached_objects.all():
                 if attached and attached.target_object:
                     obj = attached.target_object
@@ -89,6 +89,8 @@ class FormAttachableMixin(object):
         if getattr(self, 'extra_instances', []):
             instances.extend(self.extra_instances)
         for instance in instances:
+            if instance.attached_objects is None:
+                continue
             instance.attached_objects.clear()
             for attached_obj in self.cleaned_data.get('attached_objects', []):
                 instance.attached_objects.add(attached_obj)

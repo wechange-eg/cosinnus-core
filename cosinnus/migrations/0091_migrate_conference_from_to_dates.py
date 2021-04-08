@@ -2,13 +2,15 @@
 
 from django.db import migrations
 from django.db.models.aggregates import Min, Max
+from cosinnus.conf import settings
 
 
 def migrate_conference_from_to_dates(apps, schema_editor):
     """ One-Time sets the from_date and to_date for all existing conferences
         if not already set, to the dates of their min/max conference event times """
     
-    CosinnusGroup = apps.get_model('cosinnus', 'CosinnusGroup')
+    group_app_name, group_model_name = settings.COSINNUS_GROUP_OBJECT_MODEL.split('.')
+    CosinnusGroup = apps.get_model(group_app_name, group_model_name)
     try:
         ConferenceEvent = apps.get_model('cosinnus_event', 'ConferenceEvent')
     except:
