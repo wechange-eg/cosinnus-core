@@ -662,6 +662,17 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
         return None
 
 
+class CosinnusGroup_Attached_Objects(models.Model):
+    """ This is only necessary because we need to define the target object specifically to be a 
+        swappable model, as django gets this wrong without an intermediary model. """
+    
+    cosinnusgroup = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, on_delete=models.CASCADE)
+    attachedobject = models.ForeignKey('cosinnus.AttachedObject', on_delete=models.CASCADE)
+    
+    class Meta:
+        auto_created = True
+        
+
 @python_2_unicode_compatible
 class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
                         CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin,
@@ -858,6 +869,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     conference_settings_assignments = GenericRelation('cosinnus.CosinnusConferenceSettings')
+    
+    # overriding the definition of `AttachableObjectModel` to specify our swappable model target
+    attached_objects = models.ManyToManyField('cosinnus.AttachedObject', blank=True, 
+                              through='cosinnus.CosinnusGroup_Attached_Objects')
     
     objects = CosinnusGroupManager()
 
