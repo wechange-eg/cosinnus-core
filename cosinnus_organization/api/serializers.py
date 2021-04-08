@@ -22,7 +22,7 @@ class OrganizationListSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_id(self, obj):
         url = reverse('cosinnus:api:organization-detail', kwargs={'slug': obj.slug})
-        return self.context['request'].build_absolute_uri(url)[:-1]
+        return self.context['request'].build_absolute_uri(url)
 
     def get_image(self, obj):
         if not obj.avatar:
