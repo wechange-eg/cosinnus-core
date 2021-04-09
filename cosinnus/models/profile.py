@@ -401,7 +401,9 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             lat = defaults['location'][0]
             lon = defaults['location'][1]
         zoom = defaults.get('zoom', 10)
-        return '{}?location_lat={}&location_lon={}&zoom={}'.format(url, lat, lon, zoom)
+        content_display = "&people=false&ideas=false&conferences=false"
+        return '{}?location_lat={}&location_lon={}&zoom={}{}'.format(
+            url, lat, lon, zoom, content_display)
 
 
 class UserProfile(BaseUserProfile):
