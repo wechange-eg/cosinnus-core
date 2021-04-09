@@ -247,6 +247,11 @@
 
                 $('.big-calendar').each(function(index) {
                     var calendarEl = $('.big-calendar')[index];
+                    var editable = false;
+                    if (calendarEl.hasAttribute("data-calendar-edit-allowed")) {
+                        editable = true;
+                    }
+
                     var calendar = new FullCalendar.Calendar(calendarEl, $.extend({
                         headerToolbar: {
                             left: 'prev,next,today',
@@ -258,7 +263,7 @@
                         contentHeight: 'auto',
                         showNonCurrentDates: false,
                         fixedWeekCount: false,
-                        editable: true,
+                        editable: editable,
                         events: cosinnus_calendarEvents,
                         eventDrop: function(date) {
                             $(calendarEl)
