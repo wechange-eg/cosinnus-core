@@ -337,6 +337,7 @@
                       });
                 })
                 .on("fullCalendarSelect", function(event, date) {
+
                     // Dates have been selected. Now the user might want to add an event.
                     var startDateDataAttr = date.start.getFullYear() + "-"
                         + ((date.start.getMonth()+1).toString().length === 2
@@ -345,6 +346,8 @@
                         + (date.start.getDate().toString().length === 2
                             ? date.start.getDate()
                             : "0" + date.start.getDate());
+
+                    date.end.setDate(date.end.getDate()-1)
 
                     var endDateDataAttr = date.end.getFullYear() + "-"
                         + ((date.end.getMonth()+1).toString().length === 2
@@ -355,7 +358,6 @@
                             : "0" + date.end.getDate());
 
                     // allDay is always true as times can not be selected.
-
 
                     $('#calendarConfirmStartDate').val(startDateDataAttr);
                     $('#calendarConfirmEndDate').val(endDateDataAttr);
