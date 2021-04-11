@@ -142,7 +142,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 				</div>
 			{% endif %}
 
-			{% if not hideTopics %}
+			{% if allTopics|length > 0 and not hideTopics %}
 				<h1>
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "Topics" %}
