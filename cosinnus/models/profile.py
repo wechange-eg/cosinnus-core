@@ -165,6 +165,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def __init__(self, *args, **kwargs):
         super(BaseUserProfile, self).__init__(*args, **kwargs)
         self._settings = copy.deepcopy(self.settings)
+        self._dynamic_fields = copy.deepcopy(self.dynamic_fields)
         
     def __str__(self):
         return six.text_type(self.user)
@@ -213,6 +214,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
                 subj_user = '%s - %s' % (_('Terms of Service'), data['site_name'])
                 send_mail_or_fail_threaded(get_newly_registered_user_email(self.user), subj_user, 'cosinnus/mail/user_terms_of_services.html', data)
         self._settings = copy.deepcopy(self.settings)
+        self._dynamic_fields = copy.deepcopy(self.dynamic_fields)
 
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})
