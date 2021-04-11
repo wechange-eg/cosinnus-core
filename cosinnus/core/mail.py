@@ -88,7 +88,7 @@ def deliver_mail(to, subject, message, from_email, bcc=None, is_html=False, head
 
     connection = get_connection()
     if is_html:
-        text_message = convert_html_email_to_plaintext(message)
+        text_message = convert_html_to_plaintext(message)
         mail = EmailMultiAlternatives(subject, text_message, from_email, [to], connection=connection, headers=headers)
         mail.attach_alternative(message, 'text/html')
         ret = mail.send()
@@ -99,7 +99,7 @@ def deliver_mail(to, subject, message, from_email, bcc=None, is_html=False, head
     return ret
         
 
-def convert_html_email_to_plaintext(html_message):
+def convert_html_to_plaintext(html_message):
     """ Converts a cosinnus HTML rendered message to useful plaintext """
     
     htmler = html2text.HTML2Text()

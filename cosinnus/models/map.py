@@ -451,21 +451,10 @@ class DetailedUserMapResult(DetailedMapResult):
         #sqs = filter_searchqueryset_for_read_access(sqs, user)
         sqs = sqs.order_by('title')
         
-        data = {
-            'profile': obj,
-            'profile_values':obj.dynamic_fields,
-            'labels': settings.COSINNUS_USERPROFILE_EXTRA_FIELDS,
-        }
-        dynamic_fields_template = render_to_string(
-            'cosinnus/user/user_profile_dynamic_fields.html',
-            data, 
-            request=kwargs.get('request', None)
-        )
-
         kwargs.update({
             'projects': [],
             'groups': [],
-            'extra_html': dynamic_fields_template,
+            'extra_html': obj.get_dynamic_fields_rendered(),
         })
         for result in sqs:
             if SEARCH_MODEL_NAMES[result.model] == 'projects':
