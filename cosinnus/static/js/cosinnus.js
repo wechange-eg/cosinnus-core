@@ -215,7 +215,10 @@
                 }
             });
         },
-
+        
+        // a list of all initialized fullcalendar instances
+        initializedFullcalendars: [],
+        
         fullcalendar : function() {
             // There are two kinds of calendar in cosinnus: big and small.
             // The .big-calendar fills the content and shows events.
@@ -236,6 +239,7 @@
                     }, dateFormat))
                     calendarList.setOption('locale', cosinnus_current_language);
                     calendarList.render();
+                    $.cosinnus.initializedFullcalendars.push(calendarList);
                 });
 
             }
@@ -293,6 +297,7 @@
                     }, dateFormat));
                     calendar.setOption('locale', cosinnus_current_language);
                     calendar.render();
+                    $.cosinnus.initializedFullcalendars.push(calendar);
                 });
             }
             if ($('.small-calendar').length) {
@@ -323,6 +328,7 @@
                     }, dateFormat));
                     calendar.setOption('locale', cosinnus_current_language);
                     calendar.render();
+                    $.cosinnus.initializedFullcalendars.push(calendar);
                 })
             }
         },
@@ -487,18 +493,20 @@
                     $('.calendar-date-time-chooser .small-calendar').slideUp();
                 }
             });
-
-            $('.calendar-date-time-chooser input.calendar-date-time-chooser-date')
-                .click(function() {
-                $('.calendar-date-time-chooser .small-calendar').slideDown();
+            
+            // show the datetime chooser fullcalendar widget on click on any element of the form fields
+            $('.calendar-date-time-chooser input.calendar-date-time-chooser-date, \
+               .calendar-date-time-chooser input.calendar-date-time-chooser-time, \
+               .calendar-date-time-chooser i').click(function() {
+                $('.calendar-date-time-chooser .small-calendar').slideDown(150, function(){
+                    // re-render the calendar (some browsers garble the grid while it is not displayed)
+                    $.each($.cosinnus.initializedFullcalendars, function(i, calendar){
+                        calendar.render();
+                    });
+                });
             });
-
-            $('.calendar-date-time-chooser i').click(function() {
-                $('.calendar-date-time-chooser .small-calendar').slideDown();
-            });
-
+            
             $('.calendar-date-time-chooser .small-calendar').hide();
-
             $.cosinnus.initCalendarDayTimeChooserWidget();
         },
 
