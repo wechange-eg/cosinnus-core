@@ -26,6 +26,7 @@ class CosinnusProjectTransBase(object):
     
     MENU_LABEL = _('Project Menu')
     DASHBOARD_LABEL = _('Project Dashboard')
+    DASHBOARD_LABEL_ON = _('in the Project Dashboard')
     BROWSE_ALL = _('Browse all Projects')
     CREATE = _('Create Project')
     CREATE_NEW = _('Create new Project')
@@ -78,6 +79,7 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     
     MENU_LABEL = _('Group Menu')
     DASHBOARD_LABEL = _('Group Dashboard')
+    DASHBOARD_LABEL_ON = _('in the Group Dashboard')
     BROWSE_ALL = _('Browse all Groups')
     CREATE = _('Create Group')
     CREATE_NEW = _('Create new Group')
@@ -130,6 +132,7 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     
     MENU_LABEL = _('Conference Menu')
     DASHBOARD_LABEL = VERBOSE_NAME
+    DASHBOARD_LABEL_ON = VERBOSE_NAME
     BROWSE_ALL = _('Browse all Conferences')
     CREATE = _('Create Conference')
     CREATE_NEW = _('Create new Conference')

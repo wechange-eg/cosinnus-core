@@ -382,8 +382,14 @@ class CosinnusConf(AppConf):
         ("event", "upcoming", {'sort_field':'2', 'amount':'5'}),
         ("file", "latest", {'sort_field':'3', 'amount':'5'}),
     ]
-    GROUP_MICROSITE_APPS_DISABLED = [
+    # these apps only deactivate a group widget and not the app itself
+    GROUP_APPS_WIDGET_SETTING_ONLY = [
+        'cosinnus_message',
+    ]
+    # these apps' widgets are not displayable on the microsite
+    GROUP_APPS_WIDGETS_MICROSITE_DISABLED = [
         'cosinnus_cloud',
+        'cosinnus_message',
     ]
     
     # a map of class dropins for the typed group trans classes
