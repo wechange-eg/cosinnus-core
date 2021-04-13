@@ -508,7 +508,7 @@ module.exports = ContentControlView.extend({
         if (self.state.mobileSafeInteractions) {
             options = {
                 scrollWheelZoom: false,
-                dragging: false
+                // dragging: false, // this only disables the actual dragging, but not the handlers, so scrolling on mobile is still not possible even with this set to false
             };
         }
         this.leaflet = L.map('map-container', options);

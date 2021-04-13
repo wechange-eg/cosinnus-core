@@ -43,6 +43,13 @@
 			}
 		}
 	}
+	/* Imitating the leaflet box attribution font style */
+	.map-widget-info-box {
+	    padding: 0 5px;
+	    font-size: 11px;
+	    font-weight: 400;
+	    color: #333;
+	}
 	
 	.square-widget {
 		position: relative;
@@ -838,7 +845,11 @@
 			
 		} 
 		
-		
+		/* Ugly border so that mobile view can still scroll away from the map
+		 * as leaflet can't properly deactivate scroll listeners on mobile */
+        .map-widget-iframe iframe, .map-widget-info-box {
+            padding: 0 10%;
+        }
 		
 	}
 	
