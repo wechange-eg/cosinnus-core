@@ -230,6 +230,7 @@ var App = function App () {
     				fullscreen: self.displayOptions.fullscreen,
     				splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles,
                     controlsEnabled: self.displayOptions.showControls,
+                    mobileSafeInteractions: self.settings && self.settings.mobileSafeInteractions,
     			};
     			if (self.settings.map && self.settings.map.location) {
     				options['location'] = self.settings.map.location;

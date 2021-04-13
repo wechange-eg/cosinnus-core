@@ -533,6 +533,11 @@ class CosinnusConf(AppConf):
         'ignore_location_default_activated': False, # whether the "In map area" button should be off on load
         'exchange_default_activated': True, # whether the "also show external contents" button should be off on load
     }
+    
+    # how many results per map results page are shown,
+    # if not modified by the get request
+    MAP_DEFAULT_RESULTS_PER_PAGE = 20
+    
     # Only for the dashboard map widget view if the user has no custom location set
     # If not set, will attempt to use what is given in COSINNUS_MAP_OPTIONS
     # Example:

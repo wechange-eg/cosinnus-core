@@ -66,6 +66,9 @@ module.exports = ContentControlView.extend({
         clusterZoomThreshold: 5,
         maxClusterRadius: 15,
         
+        // should drag and zoom options that disrupt page UX on mobile be disabled
+        mobileSafeInteractions: false,
+        
         // if a marker popup is open, but the search results change and the marker would be removed,
         // should we still keep it and the popup?
         keepOpenMarkersAfterResultChange: false, 
@@ -134,6 +137,7 @@ module.exports = ContentControlView.extend({
         ContentControlView.prototype.initialize.call(self, options, app, collection);
         
         self.state.currentlyClustering = self.options.clusteringEnabled;
+        self.state.mobileSafeInteractions = self.options.mobileSafeInteractions;
         
         Backbone.mediator.subscribe('change:bounds', self.fitBounds, self);
         Backbone.mediator.subscribe('resize:window', function () {
@@ -500,7 +504,14 @@ module.exports = ContentControlView.extend({
         
         util.log('++++++ map-view.js renderMap called! This should only happen once at init! +++++++++++++++++++')
         
-        this.leaflet = L.map('map-container');
+        var options = {};
+        if (self.state.mobileSafeInteractions) {
+            options = {
+                scrollWheelZoom: false,
+                dragging: false
+            };
+        }
+        this.leaflet = L.map('map-container', options);
         this.setLayer(this.options.layer);
         
         if (self.geoRegionUrl) {
