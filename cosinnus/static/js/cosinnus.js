@@ -270,6 +270,11 @@
                                 .closest('.big-calendar')
                                 .trigger('fullCalendarEventDragged',[date]);
                         },
+                        eventResize: function(date) {
+                            $(calendarEl)
+                                .closest('.big-calendar')
+                                .trigger('fullCalendarEventDragged',[date]);
+                        },
                         select: function(date) {
                             $(calendarEl)
                                 .closest('.big-calendar')
