@@ -248,17 +248,21 @@
                 $('.big-calendar').each(function(index) {
                     var calendarEl = $('.big-calendar')[index];
                     var editable = false;
+                    var selectable = false;
+                    var isSmall = $(calendarEl).hasClass( "w100" )
                     if (calendarEl.hasAttribute("data-calendar-edit-allowed")) {
                         editable = true;
+                        selectable = true;
                     }
 
                     var calendar = new FullCalendar.Calendar(calendarEl, $.extend({
                         headerToolbar: {
-                            left: 'prev,next,today',
-                            right: 'dayGridMonth,timeGridWeek, listWeek' // basicDay
+                            start: 'prev,next,today',
+                            center: isSmall ? '': 'title',
+                            end: 'dayGridMonth,timeGridWeek,listWeek' // basicDay
                         },
                         footerToolbar: {
-                            center: 'title'
+                            center: isSmall ? 'title': ''
                         },
                         contentHeight: 'auto',
                         showNonCurrentDates: false,
@@ -266,6 +270,11 @@
                         editable: editable,
                         events: cosinnus_calendarEvents,
                         eventDrop: function(date) {
+                            $(calendarEl)
+                                .closest('.big-calendar')
+                                .trigger('fullCalendarEventDragged',[date]);
+                        },
+                        eventResize: function(date) {
                             $(calendarEl)
                                 .closest('.big-calendar')
                                 .trigger('fullCalendarEventDragged',[date]);
@@ -280,7 +289,7 @@
                                 .closest('.big-calendar')
                                 .trigger('fullCalendarEventClick',[event, jsEvent, view]);
                         },
-                        selectable: true,
+                        selectable: selectable,
                     }, dateFormat));
                     calendar.setOption('locale', cosinnus_current_language);
                     calendar.render();
