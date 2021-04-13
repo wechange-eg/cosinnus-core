@@ -248,8 +248,10 @@
                 $('.big-calendar').each(function(index) {
                     var calendarEl = $('.big-calendar')[index];
                     var editable = false;
+                    var selectable = false;
                     if (calendarEl.hasAttribute("data-calendar-edit-allowed")) {
                         editable = true;
+                        selectable = true;
                     }
 
                     var calendar = new FullCalendar.Calendar(calendarEl, $.extend({
@@ -285,7 +287,7 @@
                                 .closest('.big-calendar')
                                 .trigger('fullCalendarEventClick',[event, jsEvent, view]);
                         },
-                        selectable: true,
+                        selectable: selectable,
                     }, dateFormat));
                     calendar.setOption('locale', cosinnus_current_language);
                     calendar.render();
