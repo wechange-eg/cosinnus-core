@@ -247,6 +247,11 @@
 
                 $('.big-calendar').each(function(index) {
                     var calendarEl = $('.big-calendar')[index];
+                    var editable = false;
+                    if (calendarEl.hasAttribute("data-calendar-edit-allowed")) {
+                        editable = true;
+                    }
+
                     var calendar = new FullCalendar.Calendar(calendarEl, $.extend({
                         headerToolbar: {
                             left: 'prev,next,today',
@@ -258,7 +263,7 @@
                         contentHeight: 'auto',
                         showNonCurrentDates: false,
                         fixedWeekCount: false,
-                        editable: true,
+                        editable: editable,
                         events: cosinnus_calendarEvents,
                         eventDrop: function(date) {
                             $(calendarEl)
@@ -332,6 +337,7 @@
                       });
                 })
                 .on("fullCalendarSelect", function(event, date) {
+
                     // Dates have been selected. Now the user might want to add an event.
                     var startDateDataAttr = date.start.getFullYear() + "-"
                         + ((date.start.getMonth()+1).toString().length === 2
@@ -340,6 +346,8 @@
                         + (date.start.getDate().toString().length === 2
                             ? date.start.getDate()
                             : "0" + date.start.getDate());
+
+                    date.end.setDate(date.end.getDate()-1)
 
                     var endDateDataAttr = date.end.getFullYear() + "-"
                         + ((date.end.getMonth()+1).toString().length === 2
@@ -350,7 +358,6 @@
                             : "0" + date.end.getDate());
 
                     // allDay is always true as times can not be selected.
-
 
                     $('#calendarConfirmStartDate').val(startDateDataAttr);
                     $('#calendarConfirmEndDate').val(endDateDataAttr);
