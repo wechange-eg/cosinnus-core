@@ -249,6 +249,7 @@
                     var calendarEl = $('.big-calendar')[index];
                     var editable = false;
                     var selectable = false;
+                    var isSmall = $(calendarEl).hasClass( "w100" )
                     if (calendarEl.hasAttribute("data-calendar-edit-allowed")) {
                         editable = true;
                         selectable = true;
@@ -257,10 +258,11 @@
                     var calendar = new FullCalendar.Calendar(calendarEl, $.extend({
                         headerToolbar: {
                             start: 'prev,next,today',
+                            center: isSmall ? '': 'title',
                             end: 'dayGridMonth,timeGridWeek,listWeek' // basicDay
                         },
                         footerToolbar: {
-                            center: 'title'
+                            center: isSmall ? 'title': ''
                         },
                         contentHeight: 'auto',
                         showNonCurrentDates: false,
