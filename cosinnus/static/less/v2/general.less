@@ -346,7 +346,15 @@
 	    text-overflow: ellipsis;
 	}
 }
-
+/** Required so the right-hand side action buttons dashboard items like the unfollow buttons align.
+    Can't be applied to navbar, as the group annotations would get squashed. */
+.v2-dashboard {
+    ul.item-list .list-item {
+        .item-text {
+            width: 100%;
+        }
+    } 
+}
 
 
 /** Used in the wrapper for markdown and any other kind 
