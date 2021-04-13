@@ -30,7 +30,6 @@
                 {% with group=application.conference %}
                     {% if group.from_date %}
                     {
-                        id: {{ event.id }},
                         title: "{{ group.name|truncatechars:25 }}",
                         start: "{{ group.from_date|date:'c'}}",
                         {% if group.to_date %}
