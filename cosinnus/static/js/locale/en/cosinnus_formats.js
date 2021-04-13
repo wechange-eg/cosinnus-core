@@ -33,7 +33,8 @@ $.cosinnus.fullcalendar_format = {
         today: "Today",
         month: "Month",
         week: "Week",
-        day: "Day"
+        day: "Day",
+        list: "List"
     }
 };
 

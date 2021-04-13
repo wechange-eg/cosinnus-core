@@ -33,7 +33,8 @@ $.cosinnus.fullcalendar_format = {
         today: "сегодня",
         month: "месяц",
         week: "неделя",
-        day: "день"
+        day: "день",
+        list: "Список"
     }
 };
 
