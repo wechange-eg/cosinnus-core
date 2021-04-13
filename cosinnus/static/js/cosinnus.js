@@ -254,8 +254,8 @@
 
                     var calendar = new FullCalendar.Calendar(calendarEl, $.extend({
                         headerToolbar: {
-                            left: 'prev,next,today',
-                            right: 'dayGridMonth,timeGridWeek, listWeek' // basicDay
+                            start: 'prev,next,today',
+                            end: 'dayGridMonth,timeGridWeek,listWeek' // basicDay
                         },
                         footerToolbar: {
                             center: 'title'
