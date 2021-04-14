@@ -25,12 +25,16 @@
 				<a class="rounded-button button-color-groups result-filter-button quicksearch-filterbutton" data-result-filter-type="groups">
 					{{ macros.typeLabel("groups", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
 				</a>
-				<a class="rounded-button button-color-ideas result-filter-button quicksearch-filterbutton" data-result-filter-type="ideas">
-					{{ macros.typeLabel("ideas", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
-				</a>
-				<a class="rounded-button button-color-conferences result-filter-button quicksearch-filterbutton" data-result-filter-type="conferences">
-					{{ macros.typeLabel("conferences", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
-				</a>
+				{% if COSINNUS_IDEAS_ENABLED %}
+					<a class="rounded-button button-color-ideas result-filter-button quicksearch-filterbutton" data-result-filter-type="ideas">
+						{{ macros.typeLabel("ideas", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+					</a>
+				{% endif %}
+				{% if COSINNUS_CONFERENCES_ENABLED %}
+					<a class="rounded-button button-color-conferences result-filter-button quicksearch-filterbutton" data-result-filter-type="conferences">
+						{{ macros.typeLabel("conferences", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+					</a>
+				{% endif %}
 			</div>
 		</div>
 	</li>

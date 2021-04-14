@@ -22,14 +22,14 @@ module.exports = ContentControlView.extend({
         availableFilters: {
             people: true,
             projects: true,
-            events: true,
             groups: true,
+            events: true,
         },
         activeFilters: {
             people: true,
             projects: true,
+            groups: true,
             events: true,
-            groups: true
         },
         availableFilterList: [], // contains availableFilters keys that are true, generated on initialize
         
@@ -112,15 +112,15 @@ module.exports = ContentControlView.extend({
     
     initialize: function (options, app, collection) {
         var self = this;
-        // add idea models if active
-        if (COSINNUS_IDEAS_ENABLED) {
-        	self.defaults.availableFilters['ideas'] = true;
-        	self.defaults.activeFilters['ideas'] = true;
-        }
         // add organization models if active
         if (COSINNUS_ORGANIZATIONS_ENABLED) {
             self.defaults.availableFilters['organizations'] = true;
             self.defaults.activeFilters['organizations'] = true;
+        }
+        // add idea models if active
+        if (COSINNUS_IDEAS_ENABLED) {
+        	self.defaults.availableFilters['ideas'] = true;
+        	self.defaults.activeFilters['ideas'] = true;
         }
         // add conferences models if active
         if (COSINNUS_CONFERENCES_ENABLED) {
