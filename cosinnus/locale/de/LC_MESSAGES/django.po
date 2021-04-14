@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-26 14:38+0100\n"
-"PO-Revision-Date: 2021-03-26 18:22+0100\n"
+"POT-Creation-Date: 2021-04-14 11:08+0200\n"
+"PO-Revision-Date: 2021-04-14 11:09+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -1439,6 +1439,9 @@ msgstr "Cosinnus Ideen"
 msgid "Managed Tag"
 msgstr "Verwalteter Tag"
 
+msgid "Managed Tags"
+msgstr "Managed Tags"
+
 msgid "Managed Tag Type"
 msgstr "Verwalteter Tag-Typ"
 
@@ -2755,21 +2758,6 @@ msgstr " Wenn du lieber einfache Mitgliedschaftsanfragen verwenden möchtest, wi
 msgid "Application period"
 msgstr "Anmeldefrist"
 
-msgid "From"
-msgstr "Von"
-
-msgid "Date"
-msgstr "Datum"
-
-msgid "Start date."
-msgstr "Anfangsdatum."
-
-msgid "Until"
-msgstr "Bis"
-
-msgid "End date."
-msgstr "Enddatum."
-
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr "Wenn aktiv, können Teilnahmeanträge nur während dieses Zeitraums eingereicht und bearbeitet werden. Du kannst diesen Zeitraum jederzeit ändern, um die Antragsstellung zu schließen oder zu verlängern."
 
@@ -3177,6 +3165,23 @@ msgstr "Bild wird beim speichern gelöscht."
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "optional"
+
+msgid "Date"
+msgstr "Datum"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr "Von"
+
+msgid "Start date."
+msgstr "Anfangsdatum."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr "Bis"
+
+msgid "End date."
+msgstr "Enddatum."
 
 msgid "Call to Action Button"
 msgstr "Aufruf zum Handeln - Microsite-Box Link"
@@ -5053,6 +5058,14 @@ msgstr "Andere Projekte und Gruppen"
 msgid "Search for Users"
 msgstr "Nach Benutzern suchen"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "External contents"
+msgstr "Externe Inhalte"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Include contents from other platforms"
+msgstr "Auch Inhalte von anderen Plattformen anzeigen"
+
 msgid "Ordering"
 msgstr "Sortierung"
 
@@ -5103,9 +5116,6 @@ msgstr "E-Mails aller Newsletter-Abonnenten"
 
 msgid "E-Mails of ALL active users"
 msgstr "E-Mails ALLER aktiven Benutzer"
-
-msgid "Time"
-msgstr "Zeit"
 
 msgid "Ok"
 msgstr "Ok"
@@ -5190,6 +5200,10 @@ msgstr "Gruppe erstellen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Organization"
 msgstr "Organisation erstellen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr "Kategorien"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5358,6 +5372,10 @@ msgid "No current notifications"
 msgstr "Keine aktuellen Benachrichtigungen"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr "Auf der Karte finden:"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr "Gesamtes Netzwerk"
 
@@ -5382,8 +5400,8 @@ msgid "SDG"
 msgstr "SDG"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
-msgstr "Extern"
+msgid "from"
+msgstr "von"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You"
@@ -5481,6 +5499,9 @@ msgstr "Fehler!"
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Tut uns leid, aber der gewünschte Inhalt konnte nicht vom Server geladen werden."
 
+msgid "on"
+msgstr "auf"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr "Event-Seite besuchen"
@@ -5554,6 +5575,10 @@ msgstr "Kann gerne für potentielle Zusammenarbeit kontaktiert werden"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "Möchte KEINE Anfragen für potentielle Zusammenarbeit erhalten!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "To Profile"
+msgstr "Zum Profil"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
@@ -7102,21 +7127,11 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "from"
-msgstr "von"
+#~ msgid "Time"
+#~ msgstr "Zeit"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "on"
-msgstr "auf"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "External contents"
-msgstr "Externe Inhalte"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Include contents from other platforms"
-msgstr "Auch Inhalte von anderen Plattformen anzeigen"
+#~ msgid "External"
+#~ msgstr "Extern"
 
 #~ msgid "Banner Image"
 #~ msgstr "Bannerbild"
