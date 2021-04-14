@@ -112,27 +112,25 @@ module.exports = ContentControlView.extend({
     
     initialize: function (options, app, collection) {
         var self = this;
-        // add organization models if active
-        if (COSINNUS_ORGANIZATIONS_ENABLED) {
-            self.defaults.availableFilters['organizations'] = true;
-            self.defaults.activeFilters['organizations'] = true;
+        // add conferences models if active
+        if (COSINNUS_CONFERENCES_ENABLED) {
+            self.defaults.availableFilters['conferences'] = true;
+            self.defaults.activeFilters['conferences'] = true;
         }
         // add idea models if active
         if (COSINNUS_IDEAS_ENABLED) {
         	self.defaults.availableFilters['ideas'] = true;
         	self.defaults.activeFilters['ideas'] = true;
         }
-        // add conferences models if active
-        if (COSINNUS_CONFERENCES_ENABLED) {
-            self.defaults.availableFilters['conferences'] = true;
-            self.defaults.activeFilters['conferences'] = true;
+        // add organization models if active
+        if (COSINNUS_ORGANIZATIONS_ENABLED) {
+            self.defaults.availableFilters['organizations'] = true;
+            self.defaults.activeFilters['organizations'] = true;
         }
-
         if (COSINNUS_CLOUD_ENABLED) {
             self.defaults.availableFilterList['cloudfiles'] = true;
             self.defaults.activeFilters['cloudfiles'] = false;
         }
-        
         ContentControlView.prototype.initialize.call(self, options, app, collection);
         
         _.each(this.options.availableFilters, function(active, type){
