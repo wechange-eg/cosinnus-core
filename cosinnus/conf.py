@@ -1086,6 +1086,9 @@ class CosinnusDefaultSettings(AppConf):
     STARRED_USERS_LIST = _('Bookmarked Users list')
 
     PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
+    
+    # should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?
     CALENDAR_WIDGET_DISPLAY_AS_LIST = False
+    # should the group dashboard widget grid calendar allow drag & drop of events (only while CALENDAR_WIDGET_DISPLAY_AS_LIST == False)
     CALENDAR_WIDGET_ALLOW_EDIT_IN_GROUP_DASHBOARD = True
 

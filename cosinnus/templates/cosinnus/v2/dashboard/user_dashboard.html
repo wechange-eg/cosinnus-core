@@ -71,6 +71,28 @@
 					{% endif %}
 				{% endblock %}
 				
+                {% block events_widget %}
+                    {% if attending_events %}
+                        <div class="widget-content">
+                            <h2 class="headline">{% trans "My upcoming Events" %}</h2>
+                            <ul class="item-list">
+                                {% for event in attending_events %}
+                                    <li>
+                                        <a class="list-item" href="{{ event.get_absolute_url }}">
+                                            <div class="item-icon ">
+                                                <i class="fas fa-fw {{ event.get_icon }}"></i>
+                                            </div>
+                                            <div class="item-text text-bold">
+                                                {{ event.title }}
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+				
 				{% block extra_dashboard_content %}{% endblock %}
 				
                 {% block idea_widget %}

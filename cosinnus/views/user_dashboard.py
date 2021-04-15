@@ -60,6 +60,7 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
         return super(UserDashboardView, self).get(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
+        user = self.request.user
         forum_group = None
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         note_form = None
@@ -75,19 +76,19 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
         announcement = None
         announcement_is_preview = False
         # for superusers, check if we're viewing an announcement_preview
-        if self.request.GET.get('show_announcement', None) is not None and check_user_superuser(self.request.user):
+        if self.request.GET.get('show_announcement', None) is not None and check_user_superuser(user):
             announcement_id = self.request.GET.get('show_announcement')
             if is_number(announcement_id):
                 announcement_is_preview = True
                 announcement = get_object_or_None(UserDashboardAnnouncement, id=int(announcement_id))
         else:
-            announcement = UserDashboardAnnouncement.get_next_for_user(self.request.user)
+            announcement = UserDashboardAnnouncement.get_next_for_user(user)
         
-        welcome_screen_expired = self.request.user.date_joined < (now() - timedelta(days=getattr(settings, 'COSINNUS_V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS', 7)))
+        welcome_screen_expired = user.date_joined < (now() - timedelta(days=getattr(settings, 'COSINNUS_V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS', 7)))
         welcome_screen_enabled = getattr(settings, 'COSINNUS_V2_DASHBOARD_WELCOME_SCREEN_ENABLED', True)
         
         options = {
-            'ui_prefs': get_ui_prefs_for_user(self.request.user),
+            'ui_prefs': get_ui_prefs_for_user(user),
             'force_only_mine': getattr(settings, 'COSINNUS_USERDASHBOARD_FORCE_ONLY_MINE', False) or \
                                 getattr(settings, 'COSINNUS_FORUM_DISABLED', False),
         }
@@ -99,11 +100,24 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
             'announcement_is_preview': announcement_is_preview,
             'show_welcome_screen': welcome_screen_enabled and not welcome_screen_expired,
         }
+        _now = now()
+        attending_events = []
+        try:
+            from cosinnus_event.models import Event, EventAttendance # noqa
+            my_attendances_ids = EventAttendance.objects.filter(user=user, state__gt=EventAttendance.ATTENDANCE_NOT_GOING).values_list('event_id', flat=True)
+            attending_events = Event.get_current_for_portal().filter(id__in=my_attendances_ids)
+            attending_events = filter_tagged_object_queryset_for_user(attending_events, user)
+        except:
+            if settings.DEBUG:
+                raise
+        if attending_events:
+            ctx['attending_events'] = attending_events
+        print(f'>>>> att {attending_events}')
+        
         if settings.COSINNUS_CONFERENCES_ENABLED:
-            _now = now()
-            my_conferences = CosinnusConference.objects.get_for_user(self.request.user)
+            my_conferences = CosinnusConference.objects.get_for_user(user)
             my_current_conferences = [(conf, conf.get_icon()) for conf in my_conferences if conf.get_or_infer_to_date and conf.get_or_infer_to_date > _now] 
-            my_pending_conference_applications = [(appl.conference, appl.get_icon()) for appl in self.request.user.user_applications.pending_current()]
+            my_pending_conference_applications = [(appl.conference, appl.get_icon()) for appl in user.user_applications.pending_current()]
             ctx['my_upcoming_conferences_with_icons'] = my_pending_conference_applications + my_current_conferences
         return ctx
 
