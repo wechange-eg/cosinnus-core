@@ -30,9 +30,11 @@ import six
 from cosinnus.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.core import signals
-from cosinnus.core.mail import send_mail_or_fail_threaded
+from cosinnus.core.mail import send_mail_or_fail_threaded,\
+    convert_html_to_plaintext
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
-from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin,\
+    CosinnusManagedTag
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.models.tagged import LikeableObjectMixin
 from cosinnus.utils.files import get_avatar_filename, image_thumbnail, \
@@ -300,6 +302,25 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         if not hasattr(self, key):
             setattr(self, key, self.media_tag)
         return getattr(self, key)
+    
+    def get_dynamic_fields_rendered(self, request=None):
+        """ Returns the rendered HTML of the userprofile's dynamic fields detail template snippet """ 
+        data = {
+            'profile': self,
+            'profile_values': self.dynamic_fields,
+            'labels': settings.COSINNUS_USERPROFILE_EXTRA_FIELDS,
+            'SETTINGS': settings,
+            'COSINNUS_MANAGED_TAG_LABELS': CosinnusManagedTag.labels,
+        }
+        return render_to_string(
+            'cosinnus/user/user_profile_dynamic_fields.html',
+            data, 
+            request=request
+        )
+    
+    def get_dynamic_fields_rendered_plaintext(self, request=None):
+        """ Returns a text-only version of the dynamic profile fields for this userprofile """
+        return convert_html_to_plaintext(self.get_dynamic_fields_rendered(request=request))
     
     def add_redirect_on_next_page(self, resolved_url, message=None, priority=False):
         """ Adds a redirect-page to the user's settings redirect list.

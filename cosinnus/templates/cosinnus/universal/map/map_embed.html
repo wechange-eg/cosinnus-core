@@ -4,7 +4,7 @@
     <head>
         <script type="text/javascript">
             var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
-            var COSINNUS_MAP_TOPICS_JSON = {% render_cosinnus_topics_json %};
+            var COSINNUS_MAP_TOPICS_JSON = {% if SETTINGS.COSINNUS_TOPICS_SHOW_AS_MAP_FILTERS %}{% render_cosinnus_topics_json %}{% else %}{}{% endif %};
             {% if SETTINGS.COSINNUS_ENABLE_SDGS %}
 		    var COSINNUS_MAP_SDGS_JSON = {% render_sdg_json %};
 		    {% endif %}

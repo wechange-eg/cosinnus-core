@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-07 12:53+0200\n"
-"PO-Revision-Date: 2021-04-13 18:37+0200\n"
+"POT-Creation-Date: 2021-04-14 11:08+0200\n"
+"PO-Revision-Date: 2021-04-15 15:29+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -7157,11 +7157,11 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
-#~ msgid "Attach existing Files..."
-#~ msgstr "Vorhandene Datei wählen..."
-
 #~ msgid "Time"
 #~ msgstr "Zeit"
+
+#~ msgid "Attach existing Files..."
+#~ msgstr "Vorhandene Datei wählen..."
 
 #~ msgid "External"
 #~ msgstr "Extern"

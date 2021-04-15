@@ -95,7 +95,9 @@ class DKIMEmailBackend(EmailBackend):
 
 class RobustElasticSearchBackend(ElasticsearchSearchBackend):
     """A robust backend that doesn't crash when no connection is available"""
-
+    
+    MAX_NGRAM = 25
+    
     def mute_error(f):
         def error_wrapper(self, *args, **kwargs):
             try:
@@ -106,8 +108,15 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
                 logger.exception('An unknown error occured while indexing an object! Exception in extra.', extra={'exception': force_text(e)})
         return error_wrapper
 
-    def __init__(self, connectionalias, **options):
-        super(RobustElasticSearchBackend, self).__init__(connectionalias, **options)
+    def __init__(self, *args, **options):
+        """ Add custom default options """
+        tokenizer_settings = self.DEFAULT_SETTINGS['settings']['analysis']['tokenizer']
+        filter_settings = self.DEFAULT_SETTINGS['settings']['analysis']['filter']
+        tokenizer_settings['haystack_ngram_tokenizer']['max_gram'] = self.MAX_NGRAM
+        tokenizer_settings['haystack_edgengram_tokenizer']['max_gram'] = self.MAX_NGRAM
+        filter_settings['haystack_ngram']['max_gram'] = self.MAX_NGRAM
+        filter_settings['haystack_edgengram']['max_gram'] = self.MAX_NGRAM
+        super(RobustElasticSearchBackend, self).__init__(*args, **options)
 
     def build_schema(self, *args, **kwargs):
         """ Use the standard search_analyzer for ngram fields, so the search query itself won't be n-gramed """

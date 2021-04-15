@@ -641,7 +641,8 @@ class CosinnusConf(AppConf):
         (9, _('Bauen und Wohnen')),
         (10, _('Klimaschutz')),
     )
-    
+    # whether or not to show the topics as filter-buttons on the map
+    TOPICS_SHOW_AS_MAP_FILTERS = True
     
     # a list of portal-ids of foreign portals to display search data from
     SEARCH_DISPLAY_FOREIGN_PORTALS = []

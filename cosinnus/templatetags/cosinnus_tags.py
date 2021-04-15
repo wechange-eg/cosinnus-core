@@ -1284,7 +1284,11 @@ def parse_datetime(value):
 
 @register.filter
 def stringformat(value, args):
-    return dateutil.parser.parse(value)
+    try:
+        return dateutil.parser.parse(value)
+    except Exception as e:
+        logger.error(f'Exception in cosinnus_tags.py date `stringformat` filter: e', extra={'exception': e})
+        return None
 
 @register.filter
 def listformat(value):
