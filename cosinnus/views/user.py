@@ -176,6 +176,7 @@ class SetInitialPasswordView(TemplateView):
             form = self.form_class(user=user)
             return render(request, template_name=self.template_name, context={'form': form})
         elif request.user.is_authenticated:
+            messages.warning(request, _('You are already logged in. This function is only available to set up your account for the first time!'))
             raise PermissionDenied()
         else:
             raise Http404
