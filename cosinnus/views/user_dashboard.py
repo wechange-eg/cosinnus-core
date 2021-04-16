@@ -365,7 +365,12 @@ class ModelRetrievalMixin(object):
                 if all_public:
                     queryset = queryset.filter(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
             else:
-                queryset = queryset.filter(group__portal__id__in=portal_list)
+                # filter for project and group content from within this portal (no conference contents!)
+                dashboard_content_group_types = [
+                    CosinnusProject.GROUP_MODEL_TYPE,
+                    CosinnusSociety.GROUP_MODEL_TYPE,
+                ]
+                queryset = queryset.filter(group__portal__id__in=portal_list, group__type__in=dashboard_content_group_types)
                 
                 if all_public:
                     # if include_only_public mode is on, do not filter on any groups specifically, but include
