@@ -53,9 +53,9 @@
         <script src="{% static 'js/vendor/select2.min.js' %}"></script>
         <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
         <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/cosinnus.js' %}?v=0.49"></script>
+        <script src="{% static 'js/cosinnus.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
         <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
-        <script src="{% static 'js/client.js' %}?v=0.38"></script>
+        <script src="{% static 'js/client.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
         <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/leaflet.css' %}" rel="stylesheet">
@@ -68,7 +68,7 @@
         <link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
         <script src="{% static "js/vendor/less.min.js" %}"></script>
         {% else %}
-        <link href="{% static 'css/cosinnus.css' %}?v=0.61" rel="stylesheet">
+        <link href="{% static 'css/cosinnus.css' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
         {% endif %}
         
         {% if SETTINGS.COSINNUS_USE_V2_NAVBAR or SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
