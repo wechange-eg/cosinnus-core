@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-14 11:08+0200\n"
-"PO-Revision-Date: 2021-04-15 15:29+0200\n"
+"POT-Creation-Date: 2021-04-16 13:05+0200\n"
+"PO-Revision-Date: 2021-04-16 13:07+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -5644,8 +5644,20 @@ msgid "Discover"
 msgstr "Entdecken"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
-msgstr "Nur Beiträge aus meinen Gruppen und Projekten"
+msgid "Filter"
+msgstr "Filter"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Content from the Forum"
+msgstr "Inhalte aus dem Forum"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Content from my Groups and Projects"
+msgstr "Inhalte aus meinen Gruppen und Projekten"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Public content"
+msgstr "Öffentliche Inhalte"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6200,6 +6212,9 @@ msgstr "Aktivitäten"
 msgid "Contents"
 msgstr "Inhalte"
 
+msgid "My upcoming Events"
+msgstr "Meine anstehenden Veranstaltungen"
+
 msgid "The map is centrered on the address you added in your profile settings."
 msgstr "Zentrierung der Karte auf Ort aus deinen Profileinstellungen."
 
@@ -6394,6 +6409,9 @@ msgstr "Projektmenü"
 msgid "Project Dashboard"
 msgstr "Projektdashboard"
 
+msgid "in the Project Dashboard"
+msgstr "im Projektdashboard"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Organisiere dich effizient mit MitstreiterInnen aus deinem Projekt oder deiner Initiative. Alle wichtigen Tools für eine gute Zusammenarbeit, wie Neuigkeiten, Pads, Kalender, Aufgaben, etc. an einem Ort."
 
@@ -6477,6 +6495,9 @@ msgstr "Gruppenmenü"
 
 msgid "Group Dashboard"
 msgstr "Gruppendashboard"
+
+msgid "in the Group Dashboard"
+msgstr "im Gruppendashboard"
 
 msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Mit Gruppen kannst du die Kommunikation und Zusammenarbeit in großen Netzwerken oder Organisationen vereinfachen. Unter einer Gruppe könnt ihr mehrere kleine Projekte, Arbeitsgruppen oder -kreise abbilden."
@@ -7273,9 +7294,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Deaktivierte Projekte und Gruppen"
-
-#~ msgid "Public Project"
-#~ msgstr "Öffentliches Projekt"
 
 #~ msgid "Public Group"
 #~ msgstr "Öffentliche Gruppe"

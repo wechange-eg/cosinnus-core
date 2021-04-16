@@ -112,7 +112,6 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
                 raise
         if attending_events:
             ctx['attending_events'] = attending_events
-        print(f'>>>> att {attending_events}')
         
         if settings.COSINNUS_CONFERENCES_ENABLED:
             my_conferences = CosinnusConference.objects.get_for_user(user)
@@ -289,7 +288,8 @@ api_user_followed_objects = FollowedObjectsWidgetView.as_view()
 class ModelRetrievalMixin(object):
     """ Mixin for all dashboard views requiring content data """
     
-    def fetch_queryset_for_user(self, model, user, sort_key=None, only_mine=True, only_mine_strict=True, current_only=True):
+    def fetch_queryset_for_user(self, model, user, sort_key=None, only_mine=True, only_mine_strict=True, 
+                                   all_public=False, only_forum=False, current_only=True):
         """ Retrieves a queryset of sorted content items for a user, for a given model.
             @param model: An actual model class. Supported are all `BaseTaggableObjectModel`s,
                 `CosinnusIdea`, and `postman.Message`
@@ -298,9 +298,19 @@ class ModelRetrievalMixin(object):
             @param only_mine: if True, will only show objects that belong to groups or projects
                 the `user` is a member of, including the Forum, and including Ideas.
                 If False, will include all visible items in this portal for the user. 
+                This is basically an "exclude unrelated public items" switch.
             @param only_mine_strict: If set to True along with `only_mine`, really only objects
                 from the user's groups and projects will be returned, *excluding* the Forum and
                 Ideas.
+                This is basically a switch to only return items that are relevant to ME because
+                they are from groups/projects I am a member of voluntarily.
+            @param all_public: if True, includes ALL content that is specifically set to public
+                visibility. This will filter out any other content from groups, even if it would
+                be visible for the current user normally. This clashes with `only_mine==True`, as it 
+                does not filter further down for the user's only items!
+            @param only_forum: if True, includes only such items that are contained in groups
+                that any user joins automatically, i.e. the forum/events group as configured 
+                per portal, and also Ideas as they are plattform wide.
             @param current_only: if True, will only retrieve current items (ie, upcoming events) 
                 TODO: is this correct?
         """
@@ -350,22 +360,34 @@ class ModelRetrievalMixin(object):
                 portal_list += getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
             
             if model is CosinnusIdea or model is get_cosinnus_group_model() or issubclass(model, get_cosinnus_group_model()):
+                # TODO: if groups ever become non-publicly visible, filter for group view permission here!
                 queryset = queryset.filter(portal__id__in=portal_list)
+                if all_public:
+                    queryset = queryset.filter(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
             else:
                 queryset = queryset.filter(group__portal__id__in=portal_list)
-                user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
                 
-                # in strict mode, filter any content from the default groups as well
-                if only_mine and only_mine_strict:
-                    exclude_slugs = get_default_user_group_slugs()
-                    if exclude_slugs:
-                        exclude_groups = get_cosinnus_group_model().objects.get_cached(slugs=exclude_slugs, portal_id=portal_id)
-                        exclude_group_ids = [group.id for group in exclude_groups]
-                        user_group_ids = [group_id for group_id in user_group_ids if group_id not in exclude_group_ids]
-                filter_q = Q(group__pk__in=user_group_ids)
-                # if the switch is on, also include public posts from all portals
-                if not only_mine:
-                    filter_q = filter_q | Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+                if all_public:
+                    # if include_only_public mode is on, do not filter on any groups specifically, but include
+                    # everything that is tagged with public visibility
+                    # might want to make `all_public` combinable with only_mine for clarity in the future...
+                    filter_q = Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+                else:
+                    user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+                    default_user_group_slugs = get_default_user_group_slugs()
+                    if default_user_group_slugs:
+                        # in strict mode, filter any content from the default groups as well
+                        default_user_groups = get_cosinnus_group_model().objects.get_cached(slugs=default_user_group_slugs, portal_id=portal_id)
+                        default_user_group_ids = [group.id for group in default_user_groups]
+                        if only_mine and only_mine_strict:
+                            user_group_ids = [group_id for group_id in user_group_ids if group_id not in default_user_group_ids]
+                        elif only_forum:
+                            # in specific forum mode, EXCLUDE any content NOT from the default groups
+                            user_group_ids = [group_id for group_id in user_group_ids if group_id in default_user_group_ids]
+                    filter_q = Q(group__pk__in=user_group_ids)
+                    # if the switch is on, also include public posts from all portals
+                    if not only_mine and not only_forum:
+                        filter_q = filter_q | Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
                 queryset = queryset.filter(filter_q)
     
                 # filter for read permissions for user
@@ -528,7 +550,13 @@ class TimelineView(ModelRetrievalMixin, View):
     default_offset_timestamp = None
     
     only_mine = None
-    only_mine_default = False
+    only_mine_default = True
+    
+    only_forum = None
+    only_forum_default = True
+    
+    only_public = None
+    only_public_default = True
     
     filter_model = None # if set, only show items of this model
     user = None # set at initialization
@@ -543,9 +571,13 @@ class TimelineView(ModelRetrievalMixin, View):
                 timestamp are returned. Items with the exact timestamp are excluded.
                 Use this parameter in conjunction with the return value `last_timestamp` for 
                 pagination.
-            `only_mine` bool (optional): if True, will only show objects that belong to groups 
-                or projects the `user` is a member of.  If False, will include all visible items 
-                in this portal for the user.
+            `only_mine` bool (optional): if True, will include objects that belong to groups 
+                or projects the `user` is a member of.
+            `only_forum` bool (optional): if True, will include objects that belong to the
+                forum group. 
+            `only_public` bool (optional): if True, will include objects that are set to public
+                specifically.
+            
         """
         # require authenticated user
         self.user = request.user
@@ -571,6 +603,13 @@ class TimelineView(ModelRetrievalMixin, View):
         self.only_mine = request.GET.get('only_mine', self.only_mine_default)
         if isinstance(self.only_mine, six.string_types):
             self.only_mine = bool(json.loads(self.only_mine))
+        self.only_forum = request.GET.get('only_forum', self.only_forum_default)
+        if isinstance(self.only_forum, six.string_types):
+            self.only_forum = bool(json.loads(self.only_forum))
+        self.only_public = request.GET.get('only_public', self.only_public_default)
+        if isinstance(self.only_public, six.string_types):
+            self.only_public = bool(json.loads(self.only_public))
+        
         
         items = self.get_items()
         response = self.render_to_response(items)
@@ -612,8 +651,11 @@ class TimelineView(ModelRetrievalMixin, View):
                     if settings.DEBUG:
                         logger.warn('Could not find content model for timeline content type "%s"' % content_type)
                     continue
-                single_querysets.append(self._get_queryset_for_model(content_model))
+                qs = self._get_queryset_for_model(content_model)
+                single_querysets.append(qs)
                 
+        # filter empty return values and mix the querysets
+        single_querysets = [qs for qs in single_querysets if qs is not None]
         items = self._mix_items_from_querysets(*single_querysets)
         return items
     
@@ -624,20 +666,83 @@ class TimelineView(ModelRetrievalMixin, View):
             context = {'item': item}
             html = render_to_string(template, context, self.request) 
         else:
-            if settings.DEBUG:
+            if settings.DEBUG: 
                 raise ImproperlyConfigured('No `timeline_template` attribute found for item model "%s"' % item._meta.model)
             html = '<!-- Error: Timeline content for model "%s" could not be rendered.' % item._meta.model
         return html
     
-    def _get_queryset_for_model(self, model):
-        """ Returns a *sorted* queryset of items of a model for a user """
+    def _get_qs_for_forum(self, model):
+        """ Returns a qs for a model for only items from the forum groups/ideas """
+        return self.fetch_queryset_for_user(
+            model, 
+            self.user, 
+            sort_key=self.sort_key, 
+            only_mine=False, 
+            only_mine_strict=False,
+            only_forum=True,
+        )
+        
+    def _get_qs_for_mine(self, model):
+        """ Returns a qs for a model for only items from the user's groups and NO forum groups/ideas """
         # the only_mine mode here is a only_mine_strict!
-        queryset = self.fetch_queryset_for_user(model, self.user, sort_key=self.sort_key, only_mine=self.only_mine, only_mine_strict=self.only_mine)
-        if queryset is None:
-            if settings.DEBUG:
-                raise ImproperlyConfigured('No queryset could be matched for model "%s"' % model)
-            return []
-        return queryset
+        return self.fetch_queryset_for_user(
+            model, 
+            self.user, 
+            sort_key=self.sort_key, 
+            only_mine=True, 
+            only_mine_strict=True
+        )
+    
+    def _get_qs_for_public(self, model):
+        """ Returns a qs for a model for only specifically public items """
+        return self.fetch_queryset_for_user(
+            model, 
+            self.user, 
+            sort_key=self.sort_key, 
+            only_mine=False,
+            only_mine_strict=False,
+            all_public=True
+        )
+    
+    def _get_qs_for_everything(self, model):
+        """ Returns a qs for a model for everything the user could possibly see """
+        return self.fetch_queryset_for_user(
+            model, 
+            self.user, 
+            sort_key=self.sort_key, 
+            only_mine=False, 
+            only_mine_strict=False
+        )
+    
+    def _get_queryset_for_model(self, model):
+        """ Returns a *sorted* queryset of items of a model for a user depending
+            on the filter switch settings """
+        # combine QS from the filter function depending on what flags are set
+        flag_func_map = {
+            'only_forum': self._get_qs_for_forum,
+            'only_mine': self._get_qs_for_mine,
+            'only_public': self._get_qs_for_public,
+        }
+        # if no flags are set, return None
+        if all([not getattr(self, attr_name) for attr_name in flag_func_map.keys()]):
+            return None
+        # if all flags are set, we use the get-all function
+        if all([getattr(self, attr_name) for attr_name in flag_func_map.keys()]):
+            return self._get_qs_for_everything(model)
+        
+        # get each singular qs for each flag set, and if there is more than one, combine them
+        querysets = []
+        for attr_name, qs_func in flag_func_map.items():
+            if getattr(self, attr_name):
+                querysets.append(qs_func(model))
+                
+        combined_qs = querysets[0]
+        extra_querysets = querysets[1:]
+        if extra_querysets:
+            for extra_qs in querysets:
+                combined_qs = combined_qs | extra_qs
+            combined_qs = combined_qs.distinct()
+        return combined_qs
     
     def _mix_items_from_querysets(self, *streams):
         """ Will zip items from multiple querysts (each for a single model)
@@ -645,7 +750,8 @@ class TimelineView(ModelRetrievalMixin, View):
             Will peek all of the querysets and pick the next lowest-sorted item
             (honoring the given offset), until enough items for the page size are collected,
             or all querysets are exhausted. """
-            
+        if not streams:
+            return []
         reverse = '-' in self.sort_key
         # apply timestamp offset
         if self.offset_timestamp:
