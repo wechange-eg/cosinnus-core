@@ -332,7 +332,12 @@ class ModelRetrievalMixin(object):
             if model is CosinnusIdea or model is get_cosinnus_group_model() or issubclass(model, get_cosinnus_group_model()):
                 queryset = queryset.filter(portal__id__in=portal_list)
             else:
-                queryset = queryset.filter(group__portal__id__in=portal_list)
+                # filter for project and group content from within this portal (no conference contents!)
+                dashboard_content_group_types = [
+                    CosinnusProject.GROUP_MODEL_TYPE,
+                    CosinnusSociety.GROUP_MODEL_TYPE,
+                ]
+                queryset = queryset.filter(group__portal__id__in=portal_list, group__type__in=dashboard_content_group_types)
                 user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
                 
                 # in strict mode, filter any content from the default groups as well
