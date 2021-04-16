@@ -352,6 +352,7 @@
 	                    {% endcaptureas %}
 						{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label legend=wallpaper_legend field_html=wallpaper_html extra_html=wallpaper_extra_html first=True large_field=True %}
                         
+                        {% block attachable_files %}
                         {% if group_model == "CosinnusConference" %}
 	                        {# Attachable File upload Field #}
 	                        {% captureas files_legend %}
@@ -361,6 +362,7 @@
 	                        {% endcaptureas %}
 					        {% include 'cosinnus/media_tags.html' with show_all=True files_label=files_label files_legend=files_legend disable_persons=True disable_tags=True disable_location=True disable_topics=True disable_visibility=True hide_intro=True no_imports=True %}
 				        {% endif %}
+				        {% endblock %}
                         
                         {# Website Field #}
                         {% trans "Website" as website_label %}
