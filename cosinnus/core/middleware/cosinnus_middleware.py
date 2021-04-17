@@ -273,7 +273,16 @@ class RedirectAnonymousUserToLoginMiddleware(MiddlewareMixin):
         if not request.user.is_authenticated:
             if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS]):
                 return redirect_to_not_logged_in(request)
-            
+
+
+class ExternalEmailLinkRedirectNoticeMiddleware(MiddlewareMixin):
+    """ This middleware will show an error page on any anonymous request,
+        unless the request is directed at a login URL. """
+
+    def process_request(self, request):
+        if request.GET.get('external_link_redirect', None) == '1':
+            messages.warning(request, _('You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it.'))
+
             
 class RedirectAnonymousUserToLoginAllowSignupMiddleware(MiddlewareMixin):
     """ This middleware will show an error page on any anonymous request,
