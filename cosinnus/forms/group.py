@@ -147,6 +147,11 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
     if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS:
         managed_tag_field = forms.CharField(required=settings.COSINNUS_MANAGED_TAGS_GROUP_FORMFIELD_REQUIRED)
     
+    # This is for `FormAttachableMixin` to set all uploaded files to public (otherwise they couldn't be downloaded
+    # from the microsite)
+    # TODO: if groups ever become non-publicly visible, change this setting!
+    FORCE_ATTACHED_OBJECTS_VISIBILITY_ALL = True
+    
     class Meta(object):
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 'sdgs',
                         'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
@@ -179,7 +184,13 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
         for field in list(self.fields.values()):
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
-                
+    
+    @property
+    def group(self):
+        """ This is for `FormAttachableMixin` to get passed the group as a target for
+            uploading files. Only works after the group has been created however. """
+        return self.instance if self.instance.pk else None
+    
     def clean(self):
         if not self.cleaned_data.get('name', None):
             name = self.get_cleaned_name_from_other_languages()

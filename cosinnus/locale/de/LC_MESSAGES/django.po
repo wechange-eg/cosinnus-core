@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
-"PO-Revision-Date: 2021-03-30 19:12+0200\n"
+"POT-Creation-Date: 2021-04-17 18:03+0200\n"
+"PO-Revision-Date: 2021-04-17 18:04+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -3450,10 +3450,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr "Exportieren"
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr "“%(team_name)s” bearbeiten"
-
 msgid "Help about groups"
 msgstr "Hilfe zu Gruppen"
 
@@ -3560,8 +3556,8 @@ msgstr "Lade ein Bild hoch."
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
-msgstr "Hochgeladene Dateien werden zum Download zur Verfügung gestellt und Bilder werden in einer Gallerie angezeigt."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
+msgstr "Hochgeladene Dateien werden auf der Microsite zum Download zur Verfügung gestellt und Bilder werden dort und oben im Lobby-Raum angezeigt."
 
 msgid "Example: http://mywebsite.com"
 msgstr "Beispiel: http://mywebsite.com"
@@ -3985,6 +3981,10 @@ msgstr "Verschieben"
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr "Nachricht von %(sender_full_name)s"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "“%(team_name)s” bearbeiten"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"

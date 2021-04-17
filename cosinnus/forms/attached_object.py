@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_select2 import (HeavyModelSelect2MultipleChoiceField)
 from django.core.exceptions import ValidationError
 
-from cosinnus.models.tagged import AttachedObject
+from cosinnus.models.tagged import AttachedObject, get_tag_object_model
 from cosinnus.views.attached_object import AttachableObjectSelect2View,\
     build_attachment_field_result
 from cosinnus.core.registries import attached_object_registry
@@ -57,6 +57,8 @@ class FormAttachableMixin(object):
 
         # get target groups to add newly attached files to        
         target_group = getattr(self, 'group', None)
+        if callable(target_group):
+            target_group = target_group()
         if not target_group:
             # if this form's model has no group, it may be a global object that can still have attachments,
             # so fall back to the forum group to add attached objects to. if this doesn't exist, attaching in not possible.
@@ -98,7 +100,10 @@ class FormAttachableMixin(object):
                 try:
                     if getattr(self.instance, 'media_tag', None) is not None:
                         target_object_mt = attached_obj.target_object.media_tag
-                        target_object_mt.visibility = self.instance.media_tag.visibility
+                        if getattr(self, 'FORCE_ATTACHED_OBJECTS_VISIBILITY_ALL', False):
+                            target_object_mt.visibility = get_tag_object_model().VISIBILITY_ALL
+                        else:
+                            target_object_mt.visibility = self.instance.media_tag.visibility
                         target_object_mt.save(update_fields=['visibility'])
                 except Exception as e:
                     logger.warning('Could not set the visibility of an attached object to that of its parent!', extra={'exception': e})
