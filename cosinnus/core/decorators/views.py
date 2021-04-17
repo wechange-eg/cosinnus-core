@@ -130,7 +130,8 @@ def _check_deactivated_app_access(view, group, request):
     """ Will check if a view is being accessed within a cosinnus app that 
     has been deactivated for this group. """
     app_name = view.__module__.split('.')[0]
-    if hasattr(group, 'is_app_deactivated') and group.is_app_deactivated(app_name):
+    if hasattr(group, 'is_app_deactivated') and group.is_app_deactivated(app_name) \
+            and not getattr(view, 'ALLOW_VIEW_ACCESS_WHEN_GROUP_APP_DEACTIVATED', False):
         messages.error(request, _("The page you tried to access belongs to an app that has been deactivated for this %(team_type)s. If you feel this is in error, ask the %(team_type)s's administrator to reactivate the app.") % {'team_type': group._meta.verbose_name})
         return HttpResponseRedirect(group.get_absolute_url())
     return None
