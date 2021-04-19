@@ -38,7 +38,7 @@
 	    	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
 	    
 			{% captureas map_settings %}{"filterGroup": {{ group.id }}, "controlsEnabled": false, "activeFilters": {"groups": false, "events": false, "projects": {% if group.type == 1 %}true{% else %}false{% endif %}, "people": true}, "availableFilters": {"groups": true, "events": true, "projects": true, "people": true}}{% endcaptureas %}
-			{% include 'cosinnus/common/init_client_module.html' with module='module-embed' id=""|add_uuid height=400 settings=map_settings %}
+			{% include 'cosinnus/common/init_client_module.html' with module='module-embed' id=""|add_uuid embed=True height=400 settings=map_settings %}
 	        <div class="clearfix"></div>
 	    </div>
     {% endif %}

@@ -23,6 +23,7 @@ module.exports = BaseView.extend({
     events: {
         'click .result-link': 'onResultLinkClicked',
         'click .topic-filter-link': 'onTopicLinkClicked',
+        'click .text-topic-filter-link': 'onTextTopicLinkClicked',
 
         'mouseenter': 'onMouseEnter',
         'mouseleave': 'onMouseLeave',
@@ -90,6 +91,10 @@ module.exports = BaseView.extend({
     /** Called when a topic link is clicked to filter for that topic only */
     onTopicLinkClicked: function(event) {
         this.App.controlView.onTopicLinkClicked(event);
+    },
+
+    onTextTopicLinkClicked: function(event) {
+        this.App.controlView.onTextTopicLinkClicked(event);
     },
     
     /**

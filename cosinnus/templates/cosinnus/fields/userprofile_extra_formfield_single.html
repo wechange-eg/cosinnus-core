@@ -19,6 +19,14 @@
     {% comment %} Regular Field {% endcomment %}   
     {% include 'cosinnus/fields/multi_address_field.html' with field=bound_extra_field label=extra_field.label legend=extra_field.legend placeholder=extra_field.placeholder large_field=True %}       
 {% else %}
-    {% comment %} Regular Field {% endcomment %}   
+    {% comment %} Regular Field {% endcomment %}
+    {% comment %} 
+        This extra hidden field with the same name and no value is required as a fix for select2
+        in conjunction with dynamic fields.
+        Select2 will entirely remove a select-multiple <input> field if no choices are set,
+        which means the formfield name is missing in the POST names, which makes us unable
+        to see if the dynamic field value was set to empty, or the dynamic field was never in the form in the first place.
+     {% endcomment %}
+    <input type="hidden" name="{{ bound_extra_field.html_name }}" class="hidden-fallback" />
     {% include 'cosinnus/fields/default_field.html' with field=bound_extra_field label=extra_field.label legend=extra_field.legend placeholder=extra_field.placeholder large_field=extra_field.large_field %}
 {% endif %}

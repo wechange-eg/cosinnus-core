@@ -8,6 +8,7 @@ import logging
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from django.utils import timezone
 from django.http.response import JsonResponse, HttpResponseBadRequest, \
     HttpResponseNotFound, HttpResponseForbidden
 from django.utils.encoding import force_text
@@ -23,7 +24,9 @@ from cosinnus.models.map import CloudfileMapCard, HaystackMapResult, \
     SEARCH_MODEL_NAMES, SEARCH_MODEL_NAMES_REVERSE, \
     SEARCH_RESULT_DETAIL_TYPE_MAP, \
     SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS, \
-    filter_event_searchqueryset_by_upcoming
+    filter_event_searchqueryset_by_upcoming, \
+    filter_event_or_conference_starts_after, \
+    filter_event_or_conference_starts_before
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import check_object_read_access
@@ -77,9 +80,15 @@ MAP_NON_CONTENT_TYPE_SEARCH_PARAMETERS = {
     'limit': 20, # result count limit, integer or None
     'page': 0,
     'topics': None,
+    'text_topics': None,
     'item': None,
     'ignore_location': False, # if True, we completely ignore locs, and even return results without location
     'mine': False, # if True, we only show items of the current user. ignored if user not authenticated
+    'external': False,
+    'fromDate': None,
+    'fromTime': None,
+    'toDate': None,
+    'toTime': None,
     'exchange': False,
 }
 # supported map search query parameters for selecting content models, and their default values (as python data after a json.loads()!) if not present
@@ -179,6 +188,11 @@ def map_search_endpoint(request, filter_group_id=None):
     topics = ensure_list_of_ints(params.get('topics', ''))
     if topics:
         sqs = sqs.filter_and(mt_topics__in=topics)
+
+    text_topics = ensure_list_of_ints(params.get('text_topics', ''))
+    if text_topics:
+        sqs = sqs.filter_and(mt_text_topics__in=text_topics)
+
     if settings.COSINNUS_ENABLE_SDGS:
         sdgs = ensure_list_of_ints(params.get('sdgs', ''))
         if sdgs:
@@ -192,10 +206,33 @@ def map_search_endpoint(request, filter_group_id=None):
                                            exchange=params.get('exchange', False))
     # filter for read access by this user
     sqs = filter_searchqueryset_for_read_access(sqs, request.user)
-    # filter events by upcoming status and exclude hidden proxies
-    if params['events'] and Event is not None:
-        sqs = filter_event_searchqueryset_by_upcoming(sqs).exclude(is_hidden_group_proxy=True)
     
+    params_keys = [key for key, value in params.items() if value]
+    settings_keys = MAP_CONTENT_TYPE_SEARCH_PARAMETERS.keys()
+
+    # filtering for events and conferences
+    check_date_cts = ['events', 'conferences']
+    if any([params[checktype] for checktype in check_date_cts]):
+        sqs = sqs.exclude(is_hidden_group_proxy=True)
+        
+        # figure out if a datetime filter is active
+        content_type_params =  list(set(params_keys) & set(settings_keys))
+        reduced_pramas = list(set(content_type_params) & set(check_date_cts))
+        check_date_by_date_param = params.get('fromDate') or params.get('toDate')
+        check_date_by_conten_type = len(content_type_params) == len(reduced_pramas)
+        if check_date_by_date_param and check_date_by_conten_type:
+            # filter by datetime range
+            from_date_string = params.get('fromDate')
+            from_time_string = params.get('fromTime')
+            to_date_string = params.get('toDate')
+            to_time_string = params.get('toTime')
+            sqs = filter_event_or_conference_starts_after(from_date_string, from_time_string, sqs)
+            sqs = filter_event_or_conference_starts_before(to_date_string, to_time_string, sqs)
+        else:
+            # filter events by upcoming status and exclude hidden proxies
+            sqs = filter_event_searchqueryset_by_upcoming(sqs)
+
+
     # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't shown)
     if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
         sqs = sqs.exclude(is_group_model=True, slug__in=get_default_user_group_slugs())
@@ -343,13 +380,13 @@ def map_detail_endpoint(request):
             return HttpResponseNotFound('No item found that matches the requested type and slug (index: %s, %s, %s).' % (portal, model_type, slug))
         # format data
         result_model = SEARCH_RESULT_DETAIL_TYPE_MAP[model_type]
-        result = result_model(haystack_result, obj, request.user)
+        result = result_model(haystack_result, obj, request.user, request=request)
     else:
         # for external, api based objects:
         haystack_result = get_searchresult_by_args(portal, model_type, slug)
         if not haystack_result:
             return HttpResponseNotFound('No item found that matches the requested type and slug (external: %s, %s, %s).' % (portal, model_type, slug))
-        result = HaystackMapResult(haystack_result, request.user)
+        result = HaystackMapResult(haystack_result, request.user, request=request)
     
     data = {
         'result': result,

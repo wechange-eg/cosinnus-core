@@ -54,6 +54,11 @@
 			margin-left: 0;
 			margin-right: 0;
 		}
+		&.inlayed-headline {
+		    margin: 0 0 10px 0;
+		    color: inherit;
+		    font-size: 12px;
+		}
 	}
 	/* This is a repeat of &.headline-big */
     .dashboard-announcement-frame h1 {
@@ -346,7 +351,15 @@
 	    text-overflow: ellipsis;
 	}
 }
-
+/** Required so the right-hand side action buttons dashboard items like the unfollow buttons align.
+    Can't be applied to navbar, as the group annotations would get squashed. */
+.v2-dashboard {
+    ul.item-list .list-item {
+        .item-text {
+            width: 100%;
+        }
+    } 
+}
 
 
 /** Used in the wrapper for markdown and any other kind 

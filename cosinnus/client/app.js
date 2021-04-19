@@ -163,8 +163,11 @@ var App = function App () {
         self.displayOptions = displayOptions;
         
         var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
+        var textTopicsJson = typeof COSINNUS_MAP_TEXT_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TEXT_TOPICS_JSON : {};
         var sdgsJson = typeof COSINNUS_MAP_SDGS_JSON !== 'undefined' ? COSINNUS_MAP_SDGS_JSON : {};
         var allManagedTags = typeof COSINNUS_MANAGED_TAGS_JSON !== 'undefined' ? COSINNUS_MANAGED_TAGS_JSON : {};
+        var showManagedTagsOnTypesSelected = typeof COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED !== 'undefined' ? COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED : [];
+        var showTextTopicsOnTypesSelected = typeof COSINNUS_TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED !== 'undefined' ? COSINNUS_TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED : [];
         var managedTagsLabels = typeof COSINNUS_MANAGED_TAGS_LABELS_JSON !== 'undefined' ? COSINNUS_MANAGED_TAGS_LABELS_JSON : {};
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
         self.controlView = new ControlView({
@@ -172,9 +175,12 @@ var App = function App () {
                 availableFilters: self.settings.availableFilters,
                 activeFilters: self.settings.activeFilters,
                 allTopics: topicsJson,
+                allTextTopics: textTopicsJson,
                 allSDGS: sdgsJson,
                 allManagedTags: allManagedTags,
                 managedTagsLabels: managedTagsLabels,
+                showManagedTagsOnTypesSelected: showManagedTagsOnTypesSelected,
+                showTextTopicsOnTypesSelected: showTextTopicsOnTypesSelected,
                 portalInfo: portalInfo,
                 controlsEnabled: self.displayOptions.showControls,
                 scrollControlsEnabled: self.displayOptions.showControls && self.displayOptions.showMap,
@@ -224,6 +230,7 @@ var App = function App () {
     				fullscreen: self.displayOptions.fullscreen,
     				splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles,
                     controlsEnabled: self.displayOptions.showControls,
+                    mobileSafeInteractions: self.settings && self.settings.mobileSafeInteractions,
     			};
     			if (self.settings.map && self.settings.map.location) {
     				options['location'] = self.settings.map.location;
@@ -294,6 +301,7 @@ var App = function App () {
         // add passed options into params extended over the default options
     	var el = options.el ? options.el : '#nav-quicksearch';
         var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
+        var textTopicsJson = typeof COSINNUS_MAP_TEXT_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TEXT_TOPICS_JSON : {};
         var sdgsJson = typeof COSINNUS_MAP_SDGS_JSON !== 'undefined' ? COSINNUS_MAP_SDGS_JSON : {};
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
         var cloudEnabled = COSINNUS_CLOUD_ENABLED || false;
@@ -303,10 +311,12 @@ var App = function App () {
         		model: null,
         		el: el,
         		topicsJson: topicsJson,
+                textTopicsJson: textTopicsJson,
                 sdgsJson: sdgsJson,
                 portalInfo: portalInfo,
                 cloudEnabled: cloudEnabled,
-        	}, 
+                placeholder: options.placeholder
+        	},
         	self
         	).render();
         	Backbone.mediator.publish('navbar-quicksearch:ready');
@@ -318,6 +328,7 @@ var App = function App () {
         // add passed options into params extended over the default options
         var el = options.el ? options.el : '#nav-main-menu';
         var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
+        var textTopicsJson = typeof COSINNUS_MAP_TEXT_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TEXT_TOPICS_JSON : {};
         var sdgsJson = typeof COSINNUS_MAP_SDGS_JSON !== 'undefined' ? COSINNUS_MAP_SDGS_JSON : {};
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
         var contextData = options.contextData ? options.contextData : {};
@@ -330,6 +341,7 @@ var App = function App () {
                 contextData: contextData,
                 contextDataJSON: contextDataJSON,
                 topicsJson: topicsJson,
+                textTopicsJson: textTopicsJson,
                 sdgsJson: sdgsJson,
                 portalInfo: portalInfo,
             }, 
@@ -358,6 +370,7 @@ var App = function App () {
     self.initUserDashboardFromOptions = function (options) {
         // add passed options into params extended over the default options
         var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
+        var textTopicsJson = typeof COSINNUS_MAP_TEXT_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TEXT_TOPICS_JSON : {};
         var sdgsJson = typeof COSINNUS_MAP_SDGS_JSON !== 'undefined' ? COSINNUS_MAP_SDGS_JSON : {};
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
         
@@ -366,6 +379,7 @@ var App = function App () {
         		model: null,
         		el: null,
         		topicsJson: topicsJson,
+                textTopicsJson: textTopicsJson,
                 sdgsJson: sdgsJson,
         		portalInfo: portalInfo,
         		uiPrefs: options.ui_prefs,

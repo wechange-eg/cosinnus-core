@@ -110,6 +110,12 @@ module.exports = BaseView.extend({
 
 		Promise.all(leftBarPromises).then(function(){
     		self.$leftBar.show();
+    		// the userdashboard map widget (as an iframe) causes problems with the map app it shows
+    		// if it is loaded while hidden
+    		var iframe = $('#userdashboard-map-iframe');
+    		if (iframe.length > 0) {
+        		iframe.attr('src', iframe.attr('src_delayed'));
+    		}
     	});
     },
     

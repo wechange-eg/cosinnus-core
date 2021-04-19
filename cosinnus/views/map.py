@@ -99,10 +99,9 @@ class MapView(BaseMapView):
                 })
         # apply GET params that are settings parameters and are
         # set once and then discarded (unlike the map/search query parameters)
-        if self.request.GET.get('search_result_limit', None):
-            map_settings.update({
-                'searchResultLimit': self.request.GET.get('search_result_limit'),
-            })
+        map_settings.update({
+            'searchResultLimit': self.request.GET.get('search_result_limit', settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE),
+        })
         if self.request.GET.get('filter_group', None):
             map_settings.update({
                 'filterGroup': self.request.GET.get('filter_group'),
@@ -195,9 +194,10 @@ class MapEmbedView(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        limit = self.request.GET.get('search_result_limit', None)
+        limit = self.request.GET.get('search_result_limit', settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE)
         map_settings = {
-            "searchResultLimit": limit and is_number(limit) and int(limit) or None
+            "searchResultLimit": limit and is_number(limit) and int(limit) or settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE,
+            "mobileSafeInteractions": True,
         }
         if self.request.GET.get('filter_group', None):
             map_settings.update({

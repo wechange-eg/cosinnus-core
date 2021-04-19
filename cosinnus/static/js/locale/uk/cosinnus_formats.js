@@ -33,30 +33,8 @@ $.cosinnus.fullcalendar_format = {
         today: "сьогодні",
         month: "місяць",
         week: "тиждень",
-        day: "день"
-    },
-    monthNames: ['січень','лютого','березня','квітня',
-        'травня','червень','липня','серпня',
-        'Вересень','жовтень','листопад','грудня'],
-    monthNamesShort: ['січ','лют','бер','кві','тра',
-        'чер','лип','сер','Вер','жов','лис','гру'],
-    dayNames: ['неділя','понеділок','Вівторок',
-        'середа','четвер',"П'ятниця",'субота'],
-    dayNamesShort: ['не','по','Ві','се','че','ят','су'],
-    titleFormat: {
-        month: 'MMMM yyyy',
-        week: "d.[ MMMM][ yyyy]{ - d. MMMM yyyy}",
-        day: 'dddd d. MMMM yyyy'
-    },
-    columnFormat: {
-        month: 'ddd',
-        week: 'ddd d',
-        day: ''
-    },
-    axisFormat: 'H:mm', 
-    timeFormat: {
-        '': 'H:mm', 
-        agenda: 'H:mm{ - H:mm}'
+        day: "день",
+        list: "Список"
     }
 };
 

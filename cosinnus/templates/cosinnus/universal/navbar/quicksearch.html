@@ -2,6 +2,43 @@
 {% import "include/macros.html" as macros %}
 
 <ul class="item-list">
+
+	<li>
+	    <div class="nav-quicksearch-buttons">
+			<div class="btn-no-interact nav-quicksearch-button-label">
+				{% set filter_annotations_prefix %}
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Find on map:" %}
+				{% endset %}
+			    {{ filter_annotations_prefix }}
+		    </div>
+		    <div>
+				<a class="rounded-button button-color-people result-filter-button quicksearch-filterbutton" data-result-filter-type="people">
+					{{ macros.typeLabel("people", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+				<a class="rounded-button button-color-projects result-filter-button quicksearch-filterbutton" data-result-filter-type="projects">
+					{{ macros.typeLabel("projects", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+				<a class="rounded-button button-color-groups result-filter-button quicksearch-filterbutton" data-result-filter-type="groups">
+					{{ macros.typeLabel("groups", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+				<a class="rounded-button button-color-events result-filter-button quicksearch-filterbutton" data-result-filter-type="events">
+					{{ macros.typeLabel("events", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+				</a>
+				{% if COSINNUS_CONFERENCES_ENABLED %}
+					<a class="rounded-button button-color-conferences result-filter-button quicksearch-filterbutton" data-result-filter-type="conferences">
+						{{ macros.typeLabel("conferences", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+					</a>
+				{% endif %}
+				{% if COSINNUS_IDEAS_ENABLED %}
+					<a class="rounded-button button-color-ideas result-filter-button quicksearch-filterbutton" data-result-filter-type="ideas">
+						{{ macros.typeLabel("ideas", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+					</a>
+				{% endif %}
+			</div>
+		</div>
+	</li>
+
 	{% if query and query|length > 2 %}
 		{% set default_annotation %}
 			{# Translators: __INCLUDE_JS_PO__ #}
@@ -52,14 +89,6 @@
 			{% else %}
 				{{ macros.listItem(item.text, item.url, item.icon, annotation=item.group, annotationIcon=item.group_icon, includeUnderdrop=true) }}
 			{% endif %}
-		{% endfor %} 
-		
-		
-	{% else %}
-		{% set placeholder_label %}
-			{# Translators: __INCLUDE_JS_PO__ #}
-			{% trans "Search for Names, Topics and Places..." %}
-		{% endset %}
-		{{ macros.listItem(placeholder_label, "#", '', includeUnderdrop=true, inactive=true) }}
+		{% endfor %}
 	{% endif %}
 </ul>

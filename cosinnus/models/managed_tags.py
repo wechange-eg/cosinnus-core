@@ -40,7 +40,8 @@ class CosinnusManagedTagLabels(object):
     ICON = 'fa-tags'
     
     MANAGED_TAG_NAME = _('Managed Tag')
-    MANAGED_TAG_NAME_PLURAL = _('Managed Tag')
+    MANAGED_TAG_NAME_PLURAL = _('Managed Tags')
+    MANAGED_TAG_MAP_LABEL = MANAGED_TAG_NAME_PLURAL
     
     MANAGED_TAG_TYPE_NAME = _('Managed Tag Type')
     MANAGED_TAG_TYPE_NAME_PLURAL = _('Managed Tag Types')

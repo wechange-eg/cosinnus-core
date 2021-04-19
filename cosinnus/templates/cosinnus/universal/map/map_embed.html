@@ -4,7 +4,7 @@
     <head>
         <script type="text/javascript">
             var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
-            var COSINNUS_MAP_TOPICS_JSON = {% render_cosinnus_topics_json %};
+            var COSINNUS_MAP_TOPICS_JSON = {% if SETTINGS.COSINNUS_TOPICS_SHOW_AS_MAP_FILTERS %}{% render_cosinnus_topics_json %}{% else %}{}{% endif %};
             {% if SETTINGS.COSINNUS_ENABLE_SDGS %}
 		    var COSINNUS_MAP_SDGS_JSON = {% render_sdg_json %};
 		    {% endif %}
@@ -29,10 +29,10 @@
             var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");
             var COSINNUS_SHOW_SUPERUSER_CONTROLS = {% if user|is_superuser %}true{% else %}false{% endif %};
             var COSINNUS_STARRED_STAR_LABEL = "{% get_setting 'COSINNUS_STARRED_STAR_LABEL' %}";
-		    var COSINNUS_STARRED_STARRING_LABEL = "{% get_setting 'COSINNUS_STARRED_STARRING_LABEL' %}";
-		    var COSINNUS_STARRED_OBJECTS_LIST = "{% get_setting 'COSINNUS_STARRED_OBJECTS_LIST' %}";
-		    var COSINNUS_STARRED_USERS_LIST = "{% get_setting 'COSINNUS_STARRED_USERS_LIST' %}";
-		    var COSINNUS_TRANS_MY_CONFERENCES = "{{ COSINNUS_CONFERENCE_TRANS.MY_LIST }}";
+            var COSINNUS_STARRED_STARRING_LABEL = "{% get_setting 'COSINNUS_STARRED_STARRING_LABEL' %}";
+            var COSINNUS_STARRED_OBJECTS_LIST = "{% get_setting 'COSINNUS_STARRED_OBJECTS_LIST' %}";
+            var COSINNUS_STARRED_USERS_LIST = "{% get_setting 'COSINNUS_STARRED_USERS_LIST' %}";
+            var COSINNUS_TRANS_MY_CONFERENCES = "{{ COSINNUS_CONFERENCE_TRANS.MY_LIST }}";
 		    var COSINNUS_TRANS_MY_CONFERENCES_EMPTY = "{{ COSINNUS_CONFERENCE_TRANS.MY_LIST_EMPTY }}";
 		    var COSINNUS_TRANS_CONFERENCE = "{{ COSINNUS_CONFERENCE_TRANS.VERBOSE_NAME }}";
 		    var COSINNUS_TRANS_CONFERENCES = "{{ COSINNUS_CONFERENCE_TRANS.VERBOSE_NAME_PLURAL }}";
@@ -53,9 +53,9 @@
         <script src="{% static 'js/vendor/select2.min.js' %}"></script>
         <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
         <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/cosinnus.js' %}?v=0.48"></script>
+        <script src="{% static 'js/cosinnus.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
         <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
-        <script src="{% static 'js/client.js' %}?v=0.36"></script>
+        <script src="{% static 'js/client.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
         <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/leaflet.css' %}" rel="stylesheet">
@@ -68,12 +68,19 @@
         <link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
         <script src="{% static "js/vendor/less.min.js" %}"></script>
         {% else %}
-        <link href="{% static 'css/cosinnus.css' %}?v=0.59" rel="stylesheet">
+        <link href="{% static 'css/cosinnus.css' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
         {% endif %}
         
         {% if SETTINGS.COSINNUS_USE_V2_NAVBAR or SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
 	        <link href="{% static 'css/v2_map_corrections.css' %}" rel="stylesheet">
 		{% endif %}
+
+        <style type="text/css">
+            html {
+                overflow: hidden;
+            }
+
+        </style>
     </head>
     
     <body>
@@ -81,6 +88,6 @@
         
         {% captureas controlsEnabled %}{% if request.GET.controls_disabled %}0{% else %}1{% endif %}{% endcaptureas %}
         {% captureas forcePaginationControlsEnabled %}{% if request.GET.controls_disabled %}0{% else %}1{% endif %}{% endcaptureas %}
-        {% include 'cosinnus/common/init_client_module.html' with module='module-embed' id="app-embed" extra_classes="no-navbar" fullscreen=True controlsEnabled=controlsEnabled settings=map_settings|json|safe forcePaginationControlsEnabled=forcePaginationControlsEnabled %}
+        {% include 'cosinnus/common/init_client_module.html' with module='module-embed' id="app-embed" embed=True extra_classes="no-navbar" fullscreen=True controlsEnabled=controlsEnabled settings=map_settings|json|safe forcePaginationControlsEnabled=forcePaginationControlsEnabled %}
     </body>
 </html>

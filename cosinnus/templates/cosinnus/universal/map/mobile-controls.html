@@ -25,11 +25,13 @@
 {% endif %}
 
 <div class="map-mobile-controls mobile-only">
+    {% if not fullscreen%}
     <div class="rounded-button rounded-button-circular button-action-faded shadowed-button trigger-mobile-search-view   mobile-view mobile-view-list-visible-inline-block  mobile-view-map-visible-inline-block mobile-view-detail-visible-inline-block">
         <span class="rounded-button-inner">
             <i class="fa fa-fw fa-search"></i>
         </span>
     </div>
+    {% endif %}
     {% if splitscreen %}
 	    <div class="rounded-button rounded-button-circular button-action-faded shadowed-button trigger-mobile-map-view   mobile-view mobile-view-search-visible-inline-block  mobile-view-list-visible-inline-block mobile-view-detail-visible-inline-block">
 	        <span class="rounded-button-inner">

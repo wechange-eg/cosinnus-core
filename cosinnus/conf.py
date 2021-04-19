@@ -228,6 +228,10 @@ class CosinnusConf(AppConf):
     # the global notification setting for users on the plattform (3: weekly)
     DEFAULT_GLOBAL_NOTIFICATION_SETTING = 3
     
+    # default rocketchat notification mails are off
+    # (see `GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES`)
+    DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING = 0
+    
     # default setting for notifications for followed objects
     DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING = 2 # SETTING_DAILY = 2
     
@@ -246,6 +250,7 @@ class CosinnusConf(AppConf):
         'cosinnus_event',
         'cosinnus_file',
         'cosinnus_marketplace',
+        'cosinnus_message',
         'cosinnus_note',
         'cosinnus_poll',
         'cosinnus_todo',
@@ -349,6 +354,7 @@ class CosinnusConf(AppConf):
         #(app_name, widget_name, options),
         ("note", "detailed_news_list", {'amount':'3', 'sort_field':'1'}),
         ("event", "upcoming", {'amount':'5', 'sort_field':'2'}),
+        ("message", "embeddedchat", {'amount':'5', 'sort_field':'2'}),
         ("todo", "mine", {'amount':'5', 'amount_subtask':'2', 'sort_field':'3'}),
         ("etherpad", "latest", {'amount':'5', 'sort_field':'4'}),
         ("cloud", "latest", {'amount':'5', 'sort_field':'4'}),
@@ -375,9 +381,16 @@ class CosinnusConf(AppConf):
         ("cosinnus", "meta_attr_widget", {'sort_field':'1'}),
         ("event", "upcoming", {'sort_field':'2', 'amount':'5'}),
         ("file", "latest", {'sort_field':'3', 'amount':'5'}),
-        
     ]
-    
+    # these apps only deactivate a group widget and not the app itself
+    GROUP_APPS_WIDGET_SETTING_ONLY = [
+        'cosinnus_message',
+    ]
+    # these apps' widgets are not displayable on the microsite
+    GROUP_APPS_WIDGETS_MICROSITE_DISABLED = [
+        'cosinnus_cloud',
+        'cosinnus_message',
+    ]
     
     # a map of class dropins for the typed group trans classes
     # status (int) --> class (str classpath)
@@ -521,8 +534,27 @@ class CosinnusConf(AppConf):
         'exchange_default_activated': True, # whether the "also show external contents" button should be off on load
     }
     
+    # how many results per map results page are shown,
+    # if not modified by the get request
+    MAP_DEFAULT_RESULTS_PER_PAGE = 20
+    
+    # Only for the dashboard map widget view if the user has no custom location set
+    # If not set, will attempt to use what is given in COSINNUS_MAP_OPTIONS
+    # Example:
+    #     DASHBOARD_WIDGET_MAP_DEFAULTS = {
+    #         "location": [
+    #              52.51, 
+    #             13.39
+    #          ],
+    #         "zoom": 10
+    #     }
+    DASHBOARD_WIDGET_MAP_DEFAULTS = {}
+    
     # dimensions of the images for map images
     MAP_IMAGE_SIZE = (500, 500)
+
+    # display map in iframe in user dashboard
+    USERDASHBOARD_USE_LIVE_MAP_WIDGET = False
     
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them
@@ -609,7 +641,8 @@ class CosinnusConf(AppConf):
         (9, _('Bauen und Wohnen')),
         (10, _('Klimaschutz')),
     )
-    
+    # whether or not to show the topics as filter-buttons on the map
+    TOPICS_SHOW_AS_MAP_FILTERS = True
     
     # a list of portal-ids of foreign portals to display search data from
     SEARCH_DISPLAY_FOREIGN_PORTALS = []
@@ -945,6 +978,22 @@ class CosinnusConf(AppConf):
     # filtered on users tagged with this tag
     MANAGED_TAG_DYNAMIC_USER_FIELD_FILTER_ON_TAG_SLUG = None
     
+    # if set to a list of ids, in the map filter only managed tags will be shown
+    # that have an assigneg CosinnusManagedTagType of a matchind id
+    MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_FROM_TYPE_IDS = []
+    
+    # if set to a list of ids, in the map filter only managed tags will be shown
+    # that have a matching id
+    MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS = []
+    
+    # managed tag filters will only be shown on the map for these
+    # map content types
+    MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
+
+    # text topic filters will only be shown on the map for these
+    # map content types (and if any text topics even exist)
+    TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
+    
     # set to True to enable virusscan. the clamd daeomon needs to be running!
     # see https://pypi.org/project/django-clamd/
     VIRUS_SCAN_UPLOADED_FILES = False
@@ -1038,4 +1087,9 @@ class CosinnusDefaultSettings(AppConf):
     STARRED_USERS_LIST = _('Bookmarked Users list')
 
     PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
+    
+    # should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?
+    CALENDAR_WIDGET_DISPLAY_AS_LIST = False
+    # should the group dashboard widget grid calendar allow drag & drop of events (only while CALENDAR_WIDGET_DISPLAY_AS_LIST == False)
+    CALENDAR_WIDGET_ALLOW_EDIT_IN_GROUP_DASHBOARD = True
 

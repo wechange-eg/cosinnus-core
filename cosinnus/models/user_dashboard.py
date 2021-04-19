@@ -5,8 +5,6 @@ import inspect
 import logging
 from cosinnus.models.cloud import NextcloudFileProxy
 
-from django.template.defaultfilters import date as django_date_filter
-
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import BaseTaggableObjectModel
@@ -82,4 +80,8 @@ class DashboardItem(dict):
                     self['group_icon'] = obj.group.get_icon()
                 if obj.__class__.__name__ == 'Event':
                     if obj.state != 2:
-                        self['subtext'] = {'is_date': True, 'date': django_date_filter(obj.from_date, 'Y-m-d')}
+                        date_dict = obj.get_date_or_now_starting_time()
+                        if date_dict.get('is_date', False):
+                            self['subtext'] = date_dict
+                        else:
+                            self['subtext'] = date_dict.get('date')

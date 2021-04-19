@@ -22,21 +22,24 @@ module.exports = ContentControlView.extend({
         availableFilters: {
             people: true,
             projects: true,
-            events: true,
             groups: true,
+            events: true,
         },
         activeFilters: {
             people: true,
             projects: true,
+            groups: true,
             events: true,
-            groups: true
         },
         availableFilterList: [], // contains availableFilters keys that are true, generated on initialize
         
         allTopics: {},  // the dict of all searchable topics
+        allTextTopics: {},
         allSDGS: {}, // the dict of all searchable SDGs
         allManagedTags: {}, // the dict of all searchable CosinnusManagedTags
         managedTagsLabels: {}, // the labels dict for CosinnusManagedTags
+        showManagedTagsOnTypesSelected: [],
+        showTextTopicsOnTypesSelected: [],
         portalInfo: {}, // portal info by portal-id, from `get_cosinnus_portal_info()`
         controlsEnabled: true,
         filterGroup: null,
@@ -57,11 +60,14 @@ module.exports = ContentControlView.extend({
             // current query
             q: '', // URL param. 
             activeTopicIds: [],
+            activeTextTopicIds: [],
             activeSDGIds: [],
             activeManagedTagsIds: [],
             filtersActive: false, // URL param.  if true, any filter is active and we display a reset-filter button
             typeFiltersActive: false, // URL param.  a result type filter is active
             topicFiltersActive: false, // URL param.  a topic filter is active
+            dateFiltersActive: false, // if the datetime widget pickers and date filters are active. only true if only event-like types are active
+            textTopicFiltersActive: false,
             sdgFiltersActive: false,
             managedTagsFiltersActive: false,
             ignoreLocation: false, // if true, search ignores all geo-loc and even shows results without tagged location
@@ -75,7 +81,13 @@ module.exports = ContentControlView.extend({
             resultsStale: false,
             urlSelectedResultId: null, // URL param. the currently selected result, given in the url
             filterPanelVisible: false,
-            lastViewBeforeDetailWasListView: false, // a savestate so we know which view to return to after closing the detail view on mobile
+            lastViewBeforeDetailWasListView: false, // a savestate so we know which view to return to after closing the detail view on mobile,
+            displayManagedTagsFilter: true,
+            displayTextTopcFilter: true,
+            fromDate: null,
+            fromTime: null,
+            toDate: null,
+            toTime: null
         }
     },
     
@@ -101,6 +113,11 @@ module.exports = ContentControlView.extend({
     
     initialize: function (options, app, collection) {
         var self = this;
+        // add conferences models if active
+        if (COSINNUS_CONFERENCES_ENABLED) {
+            self.defaults.availableFilters['conferences'] = true;
+            self.defaults.activeFilters['conferences'] = true;
+        }
         // add idea models if active
         if (COSINNUS_IDEAS_ENABLED) {
         	self.defaults.availableFilters['ideas'] = true;
@@ -111,17 +128,10 @@ module.exports = ContentControlView.extend({
             self.defaults.availableFilters['organizations'] = true;
             self.defaults.activeFilters['organizations'] = true;
         }
-        // add conferences models if active
-        if (COSINNUS_CONFERENCES_ENABLED) {
-            self.defaults.availableFilters['conferences'] = true;
-            self.defaults.activeFilters['conferences'] = true;
-        }
-
         if (COSINNUS_CLOUD_ENABLED) {
             self.defaults.availableFilterList['cloudfiles'] = true;
             self.defaults.activeFilters['cloudfiles'] = false;
         }
-        
         ContentControlView.prototype.initialize.call(self, options, app, collection);
         
         _.each(this.options.availableFilters, function(active, type){
@@ -166,12 +176,14 @@ module.exports = ContentControlView.extend({
     events: {
         'click .result-filter-button': 'toggleFilterButton',
         'click .topic-button': 'toggleFilterButton',
+        'click .text-topic-button': 'toggleFilterButton',
         'click .reset-all': 'resetAllClicked',
         'click .query-search-button ': 'triggerQuerySearch',
         'click .icon-filters': 'toggleFilterPanel',
         'focus .q': 'showFilterPanel',
         'click .reset-type-filters': 'resetTypeFiltersClicked',
         'click .reset-topic-filters': 'resetTopicFiltersClicked',
+        'click .reset-text-topic-filters': 'resetTextTopicFiltersClicked',
         'click .reset-sdg-filters': 'resetSDGFiltersClicked',
         'click .reset-managed-tag-filters': 'resetManagedTagsFiltersClicked',
         'click .reset-q': 'resetQClicked',
@@ -200,15 +212,127 @@ module.exports = ContentControlView.extend({
         //  if so, make this click only select this button (deselect all others)
         if ($button.hasClass('result-filter-button') &&
             this.$el.find('.result-filter-button').length == this.$el.find('.result-filter-button.selected').length) {
-            this.$el.find('.result-filter-button').removeClass('selected');
+                this.$el.find('.result-filter-button').removeClass('selected');
         } else if ($button.hasClass('topic-button') &&
             this.$el.find('.topic-button').length == this.$el.find('.topic-button.selected').length) {
-            this.$el.find('.topic-button').removeClass('selected');
+                this.$el.find('.topic-button').removeClass('selected');
+        } else if ($button.hasClass('text-topic-button') &&
+            this.$el.find('.text-topic-button').length == this.$el.find('.text-topic-button.selected').length) {
+                this.$el.find('.text-topic-button').removeClass('selected');
         }
+
         // toggle the button
         $button.toggleClass('selected');
+        
+        this.toggleDateTimePicker();
+        this.toggleManagedTagsOnType();
+        this.toggleTextTopicsOnType();
         // mark search box as searchable
         this.markSearchBoxSearchable();
+    },
+
+    toggleManagedTagsOnType: function () {
+        if (this.options.showManagedTagsOnTypesSelected.length > 0) {
+            var typesForManagedTags = this.options.showManagedTagsOnTypesSelected;
+            var showManagedTags = true;
+            var selectedButtons = $('.result-filter-button.selected');
+
+            if (selectedButtons.length == 0){
+                showManagedTags = false;
+            } else {
+                selectedButtons.each(function (i) {
+                    if (this.hasAttribute('data-result-filter-type')) {
+                        var type = this.getAttribute('data-result-filter-type')
+                        if ($.inArray(type, typesForManagedTags) == -1) {
+                            showManagedTags = false;
+                        }
+                    }
+                })
+            }
+
+            if (showManagedTags) {
+                $('.managed-tags-buttons').show();
+            } else {
+                $('.managed-tags-buttons').hide();
+            }
+        }
+    },
+
+    toggleTextTopicsOnType: function () {
+        if (this.options.showTextTopicsOnTypesSelected.length > 0 ) {
+            var typesForTextTopics = this.options.showTextTopicsOnTypesSelected;
+            var showTextTopics = true;
+            var selectedButtons = $('.result-filter-button.selected');
+
+            if (selectedButtons.length == 0){
+                showTextTopics = false;
+            } else {
+                selectedButtons.each(function (i) {
+                    if (this.hasAttribute('data-result-filter-type')) {
+                        var type = this.getAttribute('data-result-filter-type')
+                        if ($.inArray(type, typesForTextTopics) == -1) {
+                            showTextTopics = false;
+                        }
+                    }
+                })
+            }
+            if (showTextTopics) {
+                $('.text-topic-buttons').show();
+            } else {
+                $('.text-topic-buttons').hide();
+            }
+        }
+    },
+
+    /** Will set state.dateFiltersActive based on if only date-like content types are shown */
+    toggleDateTimePicker: function() {
+        var typesWithDates = ['events', 'conferences'];
+        var onlyDateTypesAvailable = true;
+        _.each(this.options.availableFilters, function(available, type){
+            if (available && $.inArray(type, typesWithDates) == -1) {
+                onlyDateTypesAvailable = false;
+            }
+        });
+        var onlyDateTypesActive = true;
+        var selectedButtons = $('.result-filter-button.selected');
+        if (selectedButtons.length == 0){
+            onlyDateTypesActive = false;
+        } else {
+            selectedButtons.each(function (i) {
+                if (this.hasAttribute('data-result-filter-type')) {
+                    var type = this.getAttribute('data-result-filter-type');
+                    if ($.inArray(type, typesWithDates) == -1) {
+                        onlyDateTypesActive = false;
+                    }
+                }
+            });
+        }
+        
+        
+        this.state.dateFiltersActive = onlyDateTypesAvailable || onlyDateTypesActive;
+        this.showOrHideDateTimePicker(this.state.dateFiltersActive);
+    },
+
+    showOrHideDateTimePicker: function (showDateTimePicker) {
+        var self = this;
+        var dateTimePicker = $('#date-time-filter');
+        if (showDateTimePicker) {
+            dateTimePicker.show();
+            if (!dateTimePicker.attr('inited') && dateTimePicker.is(":visible")) {
+                $.cosinnus.fullcalendar();
+                $.cosinnus.initCalendarDayTimeChooserWidget();
+                $('.calendar-date-time-chooser .small-calendar').on("fullCalendarDayClick", function(event, date, jsEvent) {
+                    self.markSearchBoxSearchable();
+                });
+                $('.calendar-date-time-chooser input').on("keyup change", function() {
+                    self.markSearchBoxSearchable();
+                });
+                
+                dateTimePicker.attr('inited', true);
+            }
+        } else {
+            dateTimePicker.hide();
+        }
     },
 
     toggleSDGFilterButton: function (event) {
@@ -260,15 +384,31 @@ module.exports = ContentControlView.extend({
     resetAll: function () {
         this.state.q = '';
         this.resetTopics();
+        this.resetTextTopics();
         this.resetSDGS();
         this.resetManagedTags();
+        this.resetDateTimeWidget();
         this.resetTypeFilters();
         this.clearDetailResultCache();
+    },
+    
+    /** Internal state reset of fromDate, fromTime, toDate, toTime */
+    resetDateTimeWidget: function() {
+        var today = moment().format('YYYY-MM-DD');
+        var in_three_months = moment().add(3, 'M').format('YYYY-MM-DD');
+        this.state.fromDate =  today;
+        this.state.fromTime = "00:00";
+        this.state.toDate = in_three_months;
+        this.state.toTime = "23:59";
     },
     
     /** Internal state reset of filtered topics */
     resetTopics: function () {
         this.state.activeTopicIds = [];
+    },
+
+    resetTextTopics: function () {
+        this.state.activeTextTopicIds = [];
     },
 
     resetSDGS: function () {
@@ -288,12 +428,21 @@ module.exports = ContentControlView.extend({
     /** Internal state reset of filtered result types */
     resetTypeFilters: function () {
         this.state.activeFilters = _(this.options.availableFilters).clone();
+        this.state.typeFiltersActive = false;
+        if (this.options.showTextTopicsOnTypesSelected.length > 0 ) {
+            this.resetTextTopics();
+        }
+        if (this.options.showManagedTagsOnTypesSelected.length > 0 ) {
+            this.resetManagedTags();
+        }
+        this.toggleDateTimePicker();
     },
 
     resetTypeFiltersClicked: function (event) {
         event.preventDefault();
         event.stopPropagation();
         this.resetTypeFilters();
+        this.resetDateTimeWidget();
         this.render();
         this.clearDetailResultCache();
         var searchReason = 'reset-filters-search';
@@ -304,6 +453,16 @@ module.exports = ContentControlView.extend({
         event.preventDefault();
         event.stopPropagation();
         this.resetTopics();
+        this.render();
+        this.clearDetailResultCache();
+        var searchReason = 'reset-filters-search';
+        this.triggerDelayedSearch(true, false, false, searchReason);
+    },
+
+    resetTextTopicFiltersClicked: function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.resetTextTopics();
         this.render();
         this.clearDetailResultCache();
         var searchReason = 'reset-filters-search';
@@ -345,11 +504,13 @@ module.exports = ContentControlView.extend({
         event.stopPropagation();
         this.resetTypeFilters();
         this.resetTopics();
+        this.resetDateTimeWidget();
         this.render();
         this.clearDetailResultCache();
         var searchReason = 'reset-filters-search';
         this.triggerDelayedSearch(true, false, false, searchReason);
     },
+    
     
     /** This doesn't listen to events in this view, but rather is the target for 
      *     delegated events from tile-view and tile-detail-view */
@@ -360,6 +521,17 @@ module.exports = ContentControlView.extend({
         var topicId = $link.attr('data-topic-id');
         this.resetAll();
         this.state.activeTopicIds = [parseInt(topicId)];
+        this.clearDetailResultCache();
+        this.triggerDelayedSearch(true);
+    },
+
+    onTextTopicLinkClicked: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var $link = $(event.target);
+        var textTopicId = $link.attr('data-text-topic-id');
+        this.resetAll();
+        this.state.activeTextTopicIds = [parseInt(textTopicId)];
         this.clearDetailResultCache();
         this.triggerDelayedSearch(true);
     },
@@ -873,6 +1045,8 @@ module.exports = ContentControlView.extend({
         this.state.filterPanelVisible = true;
         this.$el.find('.map-controls-filters').slideDown(250);
         this.$el.find('.icon-filters').addClass('open');
+        this.$el.parents().find('.controls').addClass('open');
+        this.toggleDateTimePicker();
     },
 
     /** State switcher for the filter frame */
@@ -883,34 +1057,8 @@ module.exports = ContentControlView.extend({
         this.state.filterPanelVisible = false;
         this.$el.find('.map-controls-filters').slideUp(250);
         this.$el.find('.icon-filters').removeClass('open');
-        
+        this.$el.parents().find('.controls').removeClass('open');
     },
-    
-    
-    /**
-     * Unused now, this used to be the search-while-typing feature.
-     * TODO: Remove completely (also this.state.typing) once sure 
-     * we don't want it
-     
-    toggleTyping: function (event) {
-        this.state.typing = !this.state.typing;
-        this.$el.find('.icon-search').toggle();
-    },
-
-    handleTyping: function (event) {
-        if (util.isIgnorableKey(event)) {
-            event.preventDefault();
-            return false;
-        }
-        
-        var query = $(event.currentTarget).val();
-        if (query.length > 2 || query.length === 0) {
-            this.state.q = query;
-            this.triggerDelayedSearch();
-        }
-    },
-    
-    */
     
     handleTyping: function (event) {
         var self = this;
@@ -930,6 +1078,7 @@ module.exports = ContentControlView.extend({
     },
     
     markSearchBoxSearchable: function () {
+        // trigger this when new data/states are entered to enable the search button
         this.$el.find('.icon-search').addClass('active');
         this.$el.find('.button-search').removeClass('disabled');
     },
@@ -970,6 +1119,7 @@ module.exports = ContentControlView.extend({
     /** Executed *every time* after render */
     afterRender: function () {
         var self = this;
+        
         // Create the pagination control view if not exists
         if (!self.paginationControlView && self.options.paginationControlsEnabled && self.App.tileListView) {
             self.paginationControlView = new PaginationControlView({
@@ -992,6 +1142,12 @@ module.exports = ContentControlView.extend({
             self
             ).render();
         }
+        var dateTimePicker = $('#date-time-filter');
+        dateTimePicker.find('#id_start_0').val(this.state.fromDate);
+        dateTimePicker.find('#id_start_1').val(this.state.fromTime);
+        dateTimePicker.find('#id_end_0').val(this.state.toDate);
+        dateTimePicker.find('#id_end_1').val(this.state.toTime);
+        this.toggleDateTimePicker();
     },
     
     /**
@@ -1186,14 +1342,19 @@ module.exports = ContentControlView.extend({
     determineActiveFilterStatuses: function () {
         var self = this;
         self.state.filtersActive = false;
+        self.state.textTopicFiltersActive = false;
         self.state.topicFiltersActive = false;
         self.state.sdgFiltersActive = false;
         self.state.managedTagsFiltersActive = false;
         self.state.typeFiltersActive = false;
-        
+
         if (self.state.activeTopicIds.length > 0) {
             self.state.filtersActive = true;
             self.state.topicFiltersActive = true;
+        }
+        if (self.state.activeTextTopicIds.length > 0) {
+            self.state.filtersActive = true;
+            self.state.textTopicFiltersActive = true;
         }
         if (self.state.activeSDGIds.length > 0) {
             self.state.filtersActive = true;
@@ -1331,6 +1492,7 @@ module.exports = ContentControlView.extend({
             exchange: util.ifundef(urlParams.exchange, this.state.exchange),
             searchResultLimit: util.ifundef(urlParams.limit, this.state.searchResultLimit),
             activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds),
+            activeTextTopicIds: util.ifundef(urlParams.text_topics, this.state.activeTextTopicIds),
             activeSDGIds: util.ifundef(urlParams.sdgs, this.state.activeSDGIds),
             activeManagedTagsIds: util.ifundef(urlParams.managed_tags, this.state.activeManagedTagsIds),
             pageIndex: util.ifundef(urlParams.page, this.state.pageIndex),
@@ -1352,8 +1514,39 @@ module.exports = ContentControlView.extend({
         if (cosinnus_active_user) {
         	this.options.showMine = util.ifundef(urlParams.mine, this.options.showMine);
         }
+
+        this.state.typeFiltersActive = Object.values(this.state.activeFilters).indexOf(false) > -1
+
+        if (this.options.showManagedTagsOnTypesSelected.length > 0) {
+            var activeFilters = this.state.activeFilters
+            var showManagedTags = _.some(this.options.showManagedTagsOnTypesSelected, function(type) {
+                if (activeFilters[type]) {
+                   return true;
+
+                }
+            });
+            this.state.displayManagedTagsFilter = showManagedTags && this.state.typeFiltersActive
+        }
+
+        if (this.options.showTextTopicsOnTypesSelected.length > 0) {
+            var activeFilters = this.state.activeFilters
+            var showTextTopics = _.some(this.options.showTextTopicsOnTypesSelected, function(type) {
+                if (activeFilters[type]) {
+                   return true;
+
+                }
+            });
+            this.state.displayTextTopcFilter = showTextTopics && this.state.typeFiltersActive
+        }
+
+        var today = moment().format('YYYY-MM-DD');
+        var in_three_months = moment().add(3, 'M').format('YYYY-MM-DD');
+        this.state.fromDate =  util.ifundef(urlParams.fromDate, today);
+        this.state.fromTime = util.ifundef(urlParams.fromTime, "00:00").replace("%3A", ":");
+        this.state.toDate = util.ifundef(urlParams.toDate, in_three_months);
+        this.state.toTime = util.ifundef(urlParams.toTime, "23:59").replace("%3A", ":");
     },
-    
+
     // extended from content-control-view.js
     contributeToSearchParameters: function(forAPI) {
         var searchParams = {
@@ -1363,6 +1556,43 @@ module.exports = ContentControlView.extend({
             projects: this.state.activeFilters.projects,
             groups: this.state.activeFilters.groups,
         };
+        
+        if (this.state.dateFiltersActive) {
+            var dateTimePicker = $('#date-time-filter');
+            var fromDate = dateTimePicker.find('#id_start_0').val() || this.state.fromDate;
+            var fromTime = dateTimePicker.find('#id_start_1').val() || this.state.fromTime;
+            var toDate = dateTimePicker.find('#id_end_0').val() || this.state.toDate;
+            var toTime = dateTimePicker.find('#id_end_1').val() || this.state.fromDate;
+            if (!fromTime.includes(':')) {
+                fromTime += ':00';
+            }
+            if (!toTime.includes(':')) {
+                toTime += ':00';
+            }
+    
+            if (fromDate) {
+                _.extend(searchParams, {
+                    fromDate: fromDate
+                });
+                if (fromTime) {
+                    _.extend(searchParams, {
+                        fromTime: fromTime
+                    });
+                }
+            }
+    
+            if (toDate) {
+                _.extend(searchParams, {
+                    toDate: toDate
+                });
+                if (toTime) {
+                    _.extend(searchParams, {
+                        toTime: toTime
+                    });
+                }
+            }
+        }
+
         if (COSINNUS_IDEAS_ENABLED) {
         	_.extend(searchParams, {
                 ideas: this.state.activeFilters.ideas
@@ -1386,6 +1616,12 @@ module.exports = ContentControlView.extend({
         if (this.state.activeTopicIds.length > 0) {
             _.extend(searchParams, {
                 topics: this.state.activeTopicIds.join(',')
+            });
+        }
+
+        if (this.state.activeTextTopicIds.length > 0) {
+            _.extend(searchParams, {
+                text_topics: this.state.activeTextTopicIds.join(',')
             });
         }
         if (this.state.activeSDGIds.length > 0) {
@@ -1478,7 +1714,7 @@ module.exports = ContentControlView.extend({
                 all_deselected = false;
             }
         });
-        // if we select all types, drop the filter (select all is default). 
+        // if we select all types, drop the filter (select all is default).
         if (all_deselected) {
             self.resetTypeFilters();
         }
@@ -1489,6 +1725,14 @@ module.exports = ContentControlView.extend({
             var $button = $(this);
             var bid = parseInt($button.attr('data-topic-id'));
             self.state.activeTopicIds.push(bid);
+        });
+
+        //TextTopics
+        self.resetTextTopics();
+        self.$el.find('.text-topic-button.selected').each(function(){
+            var $button = $(this);
+            var bid = parseInt($button.attr('data-text-topic-id'));
+            self.state.activeTextTopicIds.push(bid);
         });
 
         // SDGs

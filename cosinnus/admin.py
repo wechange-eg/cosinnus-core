@@ -764,14 +764,15 @@ class CosinnusManagedTagTypeAdmin(admin.ModelAdmin):
 
 admin.site.register(CosinnusManagedTagType, CosinnusManagedTagTypeAdmin)
 
-
+"""
+# Disabled for now, unusable and confusing for customers
 class CosinnusManagedTagAssignmentAdmin(admin.ModelAdmin):
     list_display = ('managed_tag', 'content_type', 'object_id', 'approved',)
     list_filter = ('managed_tag__portal',)
     search_fields = ('managed_tag__slug', 'managed_tag__name',)
 
 admin.site.register(CosinnusManagedTagAssignment, CosinnusManagedTagAssignmentAdmin)
-
+"""
 
 class CosinnusUserImportAdmin(admin.ModelAdmin):
     list_display = ('state', 'creator', 'last_modified')

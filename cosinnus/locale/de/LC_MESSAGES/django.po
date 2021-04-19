@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
-"PO-Revision-Date: 2021-03-30 19:12+0200\n"
+"POT-Creation-Date: 2021-04-16 13:05+0200\n"
+"PO-Revision-Date: 2021-04-16 13:07+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -941,7 +941,7 @@ msgid "Participation applications are open."
 msgstr "Anmeldung geöffnet."
 
 msgid "Participation application has not started yet."
-msgstr "Die Teilnahmeantragsstellung hat noch nicht begonnen."
+msgstr "Die Anmeldefrist hat noch nicht begonnen."
 
 msgid "Participation application is over."
 msgstr "Die Teilnahmeantragsstellung ist vorbei."
@@ -1439,6 +1439,9 @@ msgstr "Cosinnus Ideen"
 msgid "Managed Tag"
 msgstr "Verwalteter Tag"
 
+msgid "Managed Tags"
+msgstr "Managed Tags"
+
 msgid "Managed Tag Type"
 msgstr "Verwalteter Tag-Typ"
 
@@ -1521,6 +1524,14 @@ msgstr "In einem wöchentlichen Report"
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
 msgstr "Individuelle Einstellungen pro Projekt/Gruppe..."
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr "Keine E-Mails für RocketChat-Nachrichten"
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
+msgstr "E-Mails für alle Direktnachrichten und Erwähnungen"
 
 msgid "--- No country selected ---"
 msgstr "--- Kein Land ausgewählt ---"
@@ -2312,9 +2323,6 @@ msgstr "Mitglieder"
 msgid "Settings"
 msgstr "Einstellungen"
 
-msgid "Attach existing Files..."
-msgstr "Vorhandene Datei wählen..."
-
 msgid "Drag and Drop files here..."
 msgstr "Dateien vom Computer hierher ziehen..."
 
@@ -2619,19 +2627,19 @@ msgid "Application"
 msgstr "Antrag"
 
 msgid "Apply for participation in"
-msgstr "Bewirb dich für die Teilnahme an"
+msgstr "Anmeldung zur Teilnahme an der Veranstaltung"
 
 msgid "Edit your application for"
 msgstr "Deine Anmeldung bearbeiten für"
 
 msgid "Please fill out the fields below to submit your application. Be aware that the organizers may take your profile into consideration when processing your application, so make sure that your profile page is well maintained. You can view and edit your profile page here:"
-msgstr "Bitte fülle die unten stehenden Felder aus, um deine Bewerbung einzureichen. Bitte beachte, dass die Organisator/innen dein Profil bei der Bearbeitung deiner Bewerbung berücksichtigen können. Stelle also sicher, dass deine Profilseite gut gepflegt ist. Du kannst deine Profilseite hier einsehen und bearbeiten:"
+msgstr "Bitte fülle die folgenden Felder aus, um deine Anmeldung einzureichen. Bitte beachte, dass die Organisator/innen dein Profil bei der Bearbeitung deiner Bewerbung berücksichtigen können. Stelle also sicher, dass deine Profilseite gut gepflegt ist. Du kannst deine Profilseite hier einsehen und bearbeiten:"
 
 msgid "Your profile"
 msgstr "Dein Profil"
 
 msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
-msgstr "Du erhältst eine Benachrichtigungs-E-Mail und eine Benachrichtigung auf der Webseite, wenn die Organisator/innen deine Anmeldung bearbeitet haben. Stelle sicher, dass deine Benachrichtigungseinstellungen korrekt konfiguriert sind, um E-Mails von uns zu erhalten!"
+msgstr "Du erhältst eine Benachrichtigungs-E-Mail und eine Benachrichtigung auf der Webseite, wenn wir deine Anmeldung bearbeitet haben. Stelle also bitte sicher, dass du unter deinen Benachrichtigungseinstellungen an der Stelle \"Ich möchte Benachrichtigungs-Emails erhalten\" die richtige Auswahl getroffen hast, um E-Mails von uns zu erhalten."
 
 msgid "Please provide your motivation for applying"
 msgstr "Bitte gib deine Motivation für die Teilnahme an"
@@ -2754,21 +2762,6 @@ msgstr " Wenn du lieber einfache Mitgliedschaftsanfragen verwenden möchtest, wi
 
 msgid "Application period"
 msgstr "Anmeldefrist"
-
-msgid "From"
-msgstr "Von"
-
-msgid "Date"
-msgstr "Datum"
-
-msgid "Start date."
-msgstr "Anfangsdatum."
-
-msgid "Until"
-msgstr "Bis"
-
-msgid "End date."
-msgstr "Enddatum."
 
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr "Wenn aktiv, können Teilnahmeanträge nur während dieses Zeitraums eingereicht und bearbeitet werden. Du kannst diesen Zeitraum jederzeit ändern, um die Antragsstellung zu schließen oder zu verlängern."
@@ -3177,6 +3170,23 @@ msgstr "Bild wird beim speichern gelöscht."
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "optional"
+
+msgid "Date"
+msgstr "Datum"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr "Von"
+
+msgid "Start date."
+msgstr "Anfangsdatum."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr "Bis"
+
+msgid "End date."
+msgstr "Enddatum."
 
 msgid "Call to Action Button"
 msgstr "Aufruf zum Handeln - Microsite-Box Link"
@@ -5053,6 +5063,14 @@ msgstr "Andere Projekte und Gruppen"
 msgid "Search for Users"
 msgstr "Nach Benutzern suchen"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "External contents"
+msgstr "Externe Inhalte"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Include contents from other platforms"
+msgstr "Auch Inhalte von anderen Plattformen anzeigen"
+
 msgid "Ordering"
 msgstr "Sortierung"
 
@@ -5103,9 +5121,6 @@ msgstr "E-Mails aller Newsletter-Abonnenten"
 
 msgid "E-Mails of ALL active users"
 msgstr "E-Mails ALLER aktiven Benutzer"
-
-msgid "Time"
-msgstr "Zeit"
 
 msgid "Ok"
 msgstr "Ok"
@@ -5190,6 +5205,10 @@ msgstr "Gruppe erstellen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Organization"
 msgstr "Organisation erstellen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr "Kategorien"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5358,6 +5377,10 @@ msgid "No current notifications"
 msgstr "Keine aktuellen Benachrichtigungen"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr "Auf der Karte finden:"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr "Gesamtes Netzwerk"
 
@@ -5382,8 +5405,8 @@ msgid "SDG"
 msgstr "SDG"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
-msgstr "Extern"
+msgid "from"
+msgstr "von"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You"
@@ -5481,6 +5504,9 @@ msgstr "Fehler!"
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Tut uns leid, aber der gewünschte Inhalt konnte nicht vom Server geladen werden."
 
+msgid "on"
+msgstr "auf"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr "Event-Seite besuchen"
@@ -5556,6 +5582,10 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "Möchte KEINE Anfragen für potentielle Zusammenarbeit erhalten!"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "To Profile"
+msgstr "Zum Profil"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Projekt beitreten"
 
@@ -5614,8 +5644,20 @@ msgid "Discover"
 msgstr "Entdecken"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
-msgstr "Nur Beiträge aus meinen Gruppen und Projekten"
+msgid "Filter"
+msgstr "Filter"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Content from the Forum"
+msgstr "Inhalte aus dem Forum"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Content from my Groups and Projects"
+msgstr "Inhalte aus meinen Gruppen und Projekten"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Public content"
+msgstr "Öffentliche Inhalte"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6170,6 +6212,12 @@ msgstr "Aktivitäten"
 msgid "Contents"
 msgstr "Inhalte"
 
+msgid "My upcoming Events"
+msgstr "Meine anstehenden Veranstaltungen"
+
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr "Zentrierung der Karte auf Ort aus deinen Profileinstellungen."
+
 msgid "Close to me"
 msgstr "In meiner Nähe"
 
@@ -6361,6 +6409,9 @@ msgstr "Projektmenü"
 msgid "Project Dashboard"
 msgstr "Projektdashboard"
 
+msgid "in the Project Dashboard"
+msgstr "im Projektdashboard"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Organisiere dich effizient mit MitstreiterInnen aus deinem Projekt oder deiner Initiative. Alle wichtigen Tools für eine gute Zusammenarbeit, wie Neuigkeiten, Pads, Kalender, Aufgaben, etc. an einem Ort."
 
@@ -6394,6 +6445,9 @@ msgstr "Ausgewählte Gruppen in Projekte umwandeln"
 msgid "Project administrator"
 msgstr "Projekt-Administrator"
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr "Du bist jetzt in einem privaten Chat-Kanal mit den Administrator/innen dieses Projekts."
+
 msgid "Project name"
 msgstr "Projektname"
 
@@ -6408,6 +6462,9 @@ msgstr "Nur Projektmitglieder"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
 msgstr "Benutzer können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administratoren des Projekts angenommen oder abgelehnt werden kann."
+
+msgid "Type the names of files, events or pads from this project to attach..."
+msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus diesem Projekt, um sie anzuhängen..."
 
 msgid "Collaborate!"
 msgstr "Mitmachen!"
@@ -6438,6 +6495,9 @@ msgstr "Gruppenmenü"
 
 msgid "Group Dashboard"
 msgstr "Gruppendashboard"
+
+msgid "in the Group Dashboard"
+msgstr "im Gruppendashboard"
 
 msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Mit Gruppen kannst du die Kommunikation und Zusammenarbeit in großen Netzwerken oder Organisationen vereinfachen. Unter einer Gruppe könnt ihr mehrere kleine Projekte, Arbeitsgruppen oder -kreise abbilden."
@@ -6472,6 +6532,9 @@ msgstr "Ausgewählte Projekte in Gruppen umwandeln"
 msgid "Group administrator"
 msgstr "Gruppen-Administrator"
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr "Du bist jetzt in einem privaten Chat-Kanal mit den Administrator/innen dieser Gruppe."
+
 msgid "Group name"
 msgstr "Gruppenname"
 
@@ -6486,6 +6549,9 @@ msgstr "Nur GruppenMitglieder"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
 msgstr "Benutzer können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administratoren der Gruppe angenommen oder abgelehnt werden kann."
+
+msgid "Type the names of files, events or pads from this group to attach..."
+msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus dieser Gruppe, um sie anzuhängen..."
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie für dich eine Gruppe erstellen. Unten findest du eine Liste aller Administrator_innen."
@@ -6553,6 +6619,13 @@ msgstr "Ausgewählte Elemente in Tagungen umwandeln"
 msgid "Conference contact person"
 msgstr "Tagungs-Kontaktperson"
 
+#, python-format
+msgid "Request about your conference \"%(group_name)s\""
+msgstr "Frage zu deiner Tagung \"%(group_name)s\""
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr "Du bist jetzt in einem privaten Chat-Kanal mit den Veranstalter/innen dieser Tagung."
+
 msgid "Conference name"
 msgstr "Tagungsname"
 
@@ -6570,6 +6643,9 @@ msgstr "Nur Tagungsmitglieder"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
 msgstr "Benutzer können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Veranstalter der Tagung angenommen oder abgelehnt werden kann."
+
+msgid "Type the names of files, events or pads from this conference to attach..."
+msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus dieser Tagung um sie anzuhängen..."
 
 msgid "Participate!"
 msgstr "Teilnehmen!"
@@ -7102,24 +7178,17 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#~ msgid "Time"
+#~ msgstr "Zeit"
+
+#~ msgid "Attach existing Files..."
+#~ msgstr "Vorhandene Datei wählen..."
+
+#~ msgid "External"
+#~ msgstr "Extern"
+
 #~ msgid "Banner Image"
 #~ msgstr "Bannerbild"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "from"
-msgstr "von"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "on"
-msgstr "auf"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "External contents"
-msgstr "Externe Inhalte"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Include contents from other platforms"
-msgstr "Auch Inhalte von anderen Plattformen anzeigen"
 
 #~ msgid "Determins if application management is visible in conference administration."
 #~ msgstr "Legt fest, ob die Anwendungsverwaltung in der Tagungsverwaltung sichtbar ist."
@@ -7225,9 +7294,6 @@ msgstr "Auch Inhalte von anderen Plattformen anzeigen"
 
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Deaktivierte Projekte und Gruppen"
-
-#~ msgid "Public Project"
-#~ msgstr "Öffentliches Projekt"
 
 #~ msgid "Public Group"
 #~ msgstr "Öffentliche Gruppe"

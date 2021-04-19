@@ -52,8 +52,15 @@ class TagObjectIndex(indexes.SearchIndex):
     mt_location_lon = indexes.FloatField(model_attr='media_tag__location_lon', null=True)
     #mt_approach = indexes.CharField(model_attr='media_tag__approach', null=True) # approach hidden for now
     mt_topics = CommaSeperatedIntegerMultiValueField(model_attr='media_tag__topics', null=True)
+    mt_text_topics = CommaSeperatedIntegerMultiValueField(null=True)
     mt_visibility = indexes.IntegerField(model_attr='media_tag__visibility', null=True)
 
+    def prepare_mt_text_topics(self, obj):
+        text_topic_ids = []
+        if obj.media_tag:
+            text_topic_ids = [text_topic.id for text_topic in obj.media_tag.text_topics.all()]
+        return text_topic_ids
+    
 
 def get_tag_object_index():
     """

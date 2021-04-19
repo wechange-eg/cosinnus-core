@@ -1,15 +1,50 @@
 .fullcalendar(@light,@normal,@dark) {
     
-    .fc-event {
+    .fc-event-title {
         font-size: 11px;
     }
-    
+
+	.fc-h-event {
+		background-color: @normal;
+		border: 1px solid @normal;
+	}
+
+	.fc-list-event-dot {
+		border: 5px solid @normal;
+	}
+
+	.fc-button {
+		border-radius: 0;
+	}
+
+	.fc-daygrid-event-dot {
+		border: 4px solid @normal;
+	}
+
 	// The header
 	.fc-header-title h2 {
 		font-size: 1.5em;
 		color: @app-neutral-color-dark;
 		cursor: default;
 	}
+
+	.fc-header-toolbar {
+		margin-top: 0.5em;
+		margin-left: 0.5em;
+		margin-right: 0.5em;
+	}
+
+	.fc-footer-toolbar {
+		margin-top: 1em !important;
+		margin-bottom: 1em;
+		margin-left: 0.5em;
+		margin-right: 0.5em;
+
+		.fc-toolbar-title {
+			font-size: 13px;
+		}
+	}
+
 	.fc-button {
 		background-color: @normal;
 		border-width: 0;
@@ -50,7 +85,7 @@
 		background-color: @normal;
 		border-color: @normal;
 		cursor: pointer;
-		
+
 		&.event-special {
 		    background-color: @dark;
 		}
@@ -63,7 +98,13 @@
 
 	/* ##### Small calendar ####### */
 	.small-calendar {
-			width: 225px;
+
+		.fc-daygrid-day-events {
+			min-height: 0;
+			margin: 0;
+		}
+
+		width: 225px;
 
 		.fc-header {
 			background-color: @normal;
@@ -80,21 +121,6 @@
 			line-height: 1.5em;
 			margin-bottom: 0;
 			color: @app-neutral-color-white;
-		}
-
-		table.fc-border-separate {
-			// gap between TDs does not really work.
-			// border-spacing: 2px;
-		}
-
-		.fc-day,
-		.fc-day-header {
-		  border-spacing: 10px;
-		  border-collapse: separate;
-			// hack to set TD width
-			// min-width: 30px;
-			// max-width: 30px;
-			height: 20px;
 		}
 
 		.fc-day-number,
@@ -172,11 +198,29 @@
         background: white;
         padding-right: 5px;
     }
+    .fc-toolbar {
+        margin-bottom: 1em !important;
+    }
+    .fc-toolbar-title {
+        font-size: 16px;
+    }
+}
+.fc {
+    .fc-toolbar-title {
+        padding: 5px 0 0 8px;
+    }
 }
 
 /** Fix z-index popping into navbar */
 .fc-event-container {
 	z-index: 4 !important;
+}
+
+.fc-theme-standard {
+    background-color: #ffffff;
+    &, a {
+        color: @text-color;
+    }
 }
 
 .app-main {
@@ -195,7 +239,10 @@
 	.fullcalendar(@app-poll-color-light,@app-poll-color,@app-poll-color-dark);
 }
 .app-marketplace {
-	.fullcalendar(@app-marketplace-color-light,@app-marketplace-color,@app-marketplace-color-dark);
+    .fullcalendar(@app-marketplace-color-light,@app-marketplace-color,@app-marketplace-color-dark);
+}
+.app-message {
+    .fullcalendar(@app-message-color-light,@app-message-color,@app-message-color-dark);
 }
 .app-todos {
 	.fullcalendar(@app-todos-color-light,@app-todos-color,@app-todos-color-dark);

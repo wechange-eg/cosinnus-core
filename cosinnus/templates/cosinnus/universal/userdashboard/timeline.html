@@ -1,24 +1,70 @@
 {% if not forceOnlyMine %}
 	<div class="timeline-controls">
+	
+	    <h2 class="headline inlayed-headline">
+	        {# Translators: __INCLUDE_JS_PO__ #}
+	        {% trans "Filter" %}
+	    </h2>
+	    
+        <table class="onoffswitch-frame">
+            <tr>
+                <td>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch-only-forum"
+                             class="onoffswitch-checkbox toggle-only-forum" id="check-only-forum" 
+                             {% if onlyForum %}checked{% endif %}>
+                        <label class="onoffswitch-label" for="check-only-forum">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </td>
+                <td class="onoffswitch-text-label text-bold text-small">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Content from the Forum" %}
+                </td>
+            </tr>
+        </table>
+	
 		<table class="onoffswitch-frame">
-	        <tr>
-	            <td>
-	                <div class="onoffswitch">
-	                    <input type="checkbox" name="onoffswitch-group-content-only"
-	                    	 class="onoffswitch-checkbox toggle-group-content-only" id="check-group-content-only" 
-	                    	 {% if onlyMine %}checked{% endif %}>
-	                    <label class="onoffswitch-label" for="check-group-content-only">
-	                        <span class="onoffswitch-inner"></span>
-	                        <span class="onoffswitch-switch"></span>
-	                    </label>
-	                </div>
-	            </td>
-	            <td class="onoffswitch-text-label text-bold text-small">
-	                {# Translators: __INCLUDE_JS_PO__ #}
-	                {% trans "Only content from my Groups and Projects" %}
-	            </td>
-	        </tr>
-	    </table>
+            <tr>
+                <td>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch-only-mine"
+                             class="onoffswitch-checkbox toggle-only-mine" id="check-only-mine" 
+                             {% if onlyMine %}checked{% endif %}>
+                        <label class="onoffswitch-label" for="check-only-mine">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </td>
+                <td class="onoffswitch-text-label text-bold text-small">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Content from my Groups and Projects" %}
+                </td>
+            </tr>
+        </table>
+        
+        <table class="onoffswitch-frame">
+            <tr>
+                <td>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch-only-public"
+                             class="onoffswitch-checkbox toggle-only-public" id="check-only-public" 
+                             {% if onlyPublic %}checked{% endif %}>
+                        <label class="onoffswitch-label" for="check-only-public">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </td>
+                <td class="onoffswitch-text-label text-bold text-small">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Public content" %}
+                </td>
+            </tr>
+        </table>
 	</div>
 {% endif %}
 
