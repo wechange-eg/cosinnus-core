@@ -514,10 +514,13 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
                             validators=[group_name_validator])
     slug = models.SlugField(_('Slug'), max_length=50, unique=True, blank=True)
 
+    # DEPRECATED! Should not be used anymore!
     description = models.TextField(verbose_name=_('Description'), blank=True)
     support_email = models.EmailField(verbose_name=_('Support Email'),
                                       help_text=_('This email is shown to users as contact address on many pages'),
                                       blank=True)
+    
+    # DEPRECATED! Should not be used anymore!
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
 
     welcome_email_active = models.BooleanField(verbose_name=_('Welcome-Email sending enabled'), default=False)
@@ -526,6 +529,7 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
                                           help_text=_(
                                               'If set and enabled, this text will be sent to all new users after their registration is complete.'))
 
+    # DEPRECATED! Should not be used anymore!
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
                                    related_name='cosinnus_portals', through='cosinnus.CosinnusPortalMembership')
@@ -551,19 +555,23 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
                                     help_text='This is used to determine the date the newest ToS have been released, that users have acceppted. When a portal`s ToS update, set this to a newer date to have a popup come up for all users whose `settings.tos_accepted_date` is not after this date.')
 
     # css fields for custom portal styles
+    # DEPRECATED! Should not be used anymore!
     background_image = models.ImageField(_('Background Image'),
                                          help_text=_('Used for the background of the landing and CMS-pages'),
                                          upload_to=get_portal_background_image_filename,
                                          blank=True, null=True)
+    # DEPRECATED! Should not be used anymore!
     logo_image = models.ImageField(_('Logo Image'),
                                    help_text=_(
                                        'Used as a small logo in the navigation bar and for external links to this portal'),
                                    upload_to=get_portal_background_image_filename,
                                    blank=True, null=True)
+    # DEPRECATED! Should not be used anymore!
     top_color = models.CharField(_('Main color'),
                                  help_text=_('Main background color (css hex value, with or without "#")'),
                                  max_length=10, validators=[MaxLengthValidator(7)],
                                  blank=True, null=True)
+    # DEPRECATED! Should not be used anymore!
     bottom_color = models.CharField(_('Gradient color'),
                                     help_text=_('Bottom color for the gradient (css hex value, with or without "#")'),
                                     max_length=10, validators=[MaxLengthValidator(7)],
@@ -625,7 +633,7 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
 
     def get_logo_image_url(self):
         """ Returns the portal logo static image URL """
-        return '%s%s' % (self.get_domain(), static('img/logo-icon.png'))
+        return '%s%s' % (self.get_domain(), static('img/v2_navbar_brand.png'))
 
     def __str__(self):
         return self.name
