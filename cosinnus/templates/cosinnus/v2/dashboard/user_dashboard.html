@@ -60,9 +60,18 @@
 											<div class="item-icon ">
 												<i class="fas fa-fw {{ conference_icon }}"></i>
 											</div>
-											<div class="item-text text-bold">
-												{{ conference.name }}
-											</div>
+											<div class="item-text item-text-dual">
+                                                <div class="item-text-primary text-bold">
+													{{ conference.name }}
+                                                </div>
+                                                {% if conference.get_date_or_now_starting_time.is_date %}
+                                                    <div class="moment-data-date" data-date="{{ conference.get_date_or_now_starting_time.date }}"></div>
+                                                {% else %}
+                                                    <div>
+                                                        {{ conference.get_date_or_now_starting_time.date }} 
+                                                    </div>
+                                                {% endif %}
+                                            </div>
 										</a>
 									</li>
 								{% endfor %}
@@ -82,9 +91,18 @@
                                             <div class="item-icon ">
                                                 <i class="fas fa-fw {{ event.get_icon }}"></i>
                                             </div>
-                                            <div class="item-text text-bold">
-                                                {{ event.title }}
-                                            </div>
+                                            <div class="item-text item-text-dual">
+							                    <div class="item-text-primary text-bold">
+	                                                {{ event.title }}
+							                    </div>
+							                    {% if event.get_date_or_now_starting_time.is_date %}
+							                        <div class="moment-data-date" data-date="{{ event.get_date_or_now_starting_time.date }}"></div>
+							                    {% else %}
+							                        <div>
+							                            {{ event.get_date_or_now_starting_time.date }} 
+							                        </div>
+							                    {% endif %}
+							                </div>
                                         </a>
                                     </li>
                                 {% endfor %}
