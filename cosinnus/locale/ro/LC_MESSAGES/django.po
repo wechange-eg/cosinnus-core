@@ -6584,7 +6584,7 @@ msgid "to %(portal_name)s"
 msgstr "la %(portal_name)s"
 
 #, python-format
-msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organization, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
 msgstr "Mă bucur să te văd! La %(portal_name)s puteți colabora cu alții în Proiecte și Grupuri. Fie inițiativă, organizație sau rețea- %(portal_name)s oferă toate instrumentele necesare colaborării tale online."
 
 msgid "Jetzt anmelden und mitgestalten"
@@ -6804,7 +6804,7 @@ msgstr "Meniul Grupului"
 msgid "Group Dashboard"
 msgstr "Grupului de Bord al Tablou"
 
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Grupurile ajută la îmbunătățirea comunicării și colaborării în rețele sau organizații mari. În cadrul unui grup puteți reuni mai multe proiecte sau grupuri de lucru mai mici."
 
 msgid "Edit Group"

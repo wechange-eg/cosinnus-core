@@ -6856,7 +6856,7 @@ msgstr "قائمة المجموعة"
 msgid "Group Dashboard"
 msgstr "لوحة تحكم المجموعة"
 
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "تساعد المجموعات في تحسين الاتصال والتعاون في الشبكات أو المنظمات الكبيرة. يمكنك الجمع بين العديد من المشاريع الصغيرة أو مجموعات العمل ضمن المجموعة."
 
 msgid "Edit Group"

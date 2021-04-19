@@ -199,10 +199,10 @@ msgstr "Žádné kanály se sítěmi."
 msgid "No participants."
 msgstr "Žádní účastníci."
 
-#. [No represented organisations.]
+#. [No represented organizations.]
 #. defaultMessage is:
 #. undefined
-msgid "No represented organisations."
+msgid "No represented organizations."
 msgstr "Žádné organizace se zastoupením."
 
 #. [No stage events.]
@@ -226,13 +226,13 @@ msgstr "Nyní"
 #. [Organisation]
 #. defaultMessage is:
 #. undefined
-msgid "Organisation"
+msgid "Organization"
 msgstr "Organizace"
 
-#. [Represented organisations]
+#. [Represented organizations]
 #. defaultMessage is:
 #. undefined
-msgid "Represented organisations"
+msgid "Represented organizations"
 msgstr "Organizace se zastoupením"
 
 #. [The conference is being prepared, please try again at a later date.]

@@ -6553,7 +6553,7 @@ msgid "to %(portal_name)s"
 msgstr "%(portal_name)s-ზე"
 
 #, python-format
-msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organization, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
 msgstr "გვიხარია თქვენი დანახვა! %(portal_name)s-ზე თქვენ შეგიძლიათ ითანამშრომლოთ სხვა პროექტებთან და ჯგუფებთან. რადგან, ინიციატივა, ორგანიზაცია ან ქსელი %(portal_name)s-ზე გთავაზობთ ყველა საჭირო საშუალებას ონლაინ კოლაბორაციისთვის."
 
 msgid "Jetzt anmelden und mitgestalten"
@@ -6777,7 +6777,7 @@ msgstr "ჯგუფის სახელი"
 msgid "Group Dashboard"
 msgstr "ხელსაწყოთა პანელი"
 
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "ჯგუფები ხელს უწყობენ კომუნიკაციის და თანამშრომლობის გაუმჯობესებას. ჯგუფის შიგნით თქვენ ერთად შეკრებთ რამდენიმე პატარა პროექტს და სამუშაო ჯგუფს."
 
 msgid "Edit Group"
