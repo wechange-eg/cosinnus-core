@@ -52,7 +52,7 @@ function ParticipantsTable (props: ParticipantsTableProps) {
         <TableHead>
           <TableRow>
             <TableCell><FormattedMessage id="Name" /></TableCell>
-            <TableCell><FormattedMessage id="Organisation" /></TableCell>
+            <TableCell><FormattedMessage id="Organization" /></TableCell>
             <TableCell><FormattedMessage id="Country" /></TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
@@ -61,7 +61,7 @@ function ParticipantsTable (props: ParticipantsTableProps) {
           {participants.map((participant, index) => (
             <TableRow key={index}>
               <TableCell component="th" scope="row">{participant.getFullName()}</TableCell>
-              <TableCell>{participant.props.organisation}</TableCell>
+              <TableCell>{participant.props.organization}</TableCell>
               <TableCell>{participant.props.country}</TableCell>
               <TableCell align="right">
                 <Button

@@ -6635,7 +6635,7 @@ msgid "to %(portal_name)s"
 msgstr "الى %(portal_name)s"
 
 #, python-format
-msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organization, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
 msgstr "تسرنا رؤيتك! في %(portal_name)s يمكنك التعاون مع الآخرين في المشاريع والمجموعات. سواء كانت المبادرة أو المنظمة أو الشبكة - %(portal_name)s تقدم جميع الأدوات اللازمة للتعاون عبر الإنترنت."
 
 #, fuzzy

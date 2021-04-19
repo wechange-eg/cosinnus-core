@@ -1,17 +1,17 @@
 import { AnyAction } from "redux"
 
 import { ActionType } from "../../constants/actions"
-import {Organisation} from "./models"
+import {Organization} from "./models"
 
-export function OrganisationsReducer(
-  state: Organisation[] = null,
+export function OrganizationsReducer(
+  state: Organization[] = null,
   action: AnyAction
-): Organisation[] {
+): Organization[] {
   switch (action.type) {
-    case ActionType.FETCH_ORGANISATIONS_SUCCESS: {
+    case ActionType.FETCH_ORGANIZATIONS_SUCCESS: {
       return action.payload
     }
-    case ActionType.FETCH_ORGANISATIONS_ERROR: {
+    case ActionType.FETCH_ORGANIZATIONS_ERROR: {
       return state
     }
     default: {

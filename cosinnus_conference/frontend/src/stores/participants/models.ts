@@ -2,7 +2,7 @@ export interface ParticipantJson {
   id: number
   first_name: string
   last_name: string
-  organisation?: string
+  organization?: string
   country?: string
   chat_url?: string
 }
@@ -11,7 +11,7 @@ export interface ParticipantProps {
   id: number
   firstName: string
   lastName: string
-  organisation?: string
+  organization?: string
   country?: string
   chatUrl?: string
 }
@@ -34,7 +34,7 @@ export class Participant {
       id: json.id,
       firstName: json.first_name,
       lastName: json.last_name,
-      organisation: json.organisation,
+      organization: json.organization,
       country: json.country,
       chatUrl: json.chat_url,
     }
@@ -53,7 +53,7 @@ export class Participant {
       id: props.id,
       first_name: props.firstName,
       last_name: props.lastName,
-      organisation: props.organisation,
+      organization: props.organization,
       country: props.country,
       chat_url: props.chatUrl,
     }

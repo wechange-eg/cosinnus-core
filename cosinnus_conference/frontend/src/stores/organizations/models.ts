@@ -1,4 +1,4 @@
-export interface OrganisationJson {
+export interface OrganizationJson {
   name: string
   description: string
   topics: string[]
@@ -6,7 +6,7 @@ export interface OrganisationJson {
   image_url: string
 }
 
-export interface OrganisationProps {
+export interface OrganizationProps {
   name: string
   description: string
   topics: string[]
@@ -14,10 +14,10 @@ export interface OrganisationProps {
   imageUrl: string
 }
 
-export class Organisation {
-  props: OrganisationProps
+export class Organization {
+  props: OrganizationProps
 
-  public constructor(props: OrganisationProps) {
+  public constructor(props: OrganizationProps) {
     this.props = props
   }
 
@@ -25,10 +25,10 @@ export class Organisation {
    * Convert JSON response data into an object
    *
    * @param json - response data in JSON format
-   * @returns {User} - Organisation object
+   * @returns {User} - Organization object
    */
-  public static fromJson(json: OrganisationJson) : Organisation {
-    const props: OrganisationProps = {
+  public static fromJson(json: OrganizationJson) : Organization {
+    const props: OrganizationProps = {
       name: json.name,
       description: json.description,
       topics: json.topics,
@@ -36,15 +36,15 @@ export class Organisation {
       imageUrl: json.image_url,
     }
 
-    return new Organisation(props)
+    return new Organization(props)
   }
 
   /**
    * Convert an object into JSON
    *
-   * @returns {OrganisationJson} - object in JSON format
+   * @returns {OrganizationJson} - object in JSON format
    */
-  toJson() : OrganisationJson {
+  toJson() : OrganizationJson {
     const props = this.props
     return {
       name: props.name,
