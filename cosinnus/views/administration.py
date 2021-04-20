@@ -140,7 +140,7 @@ class BaseNewsletterUpdateView(UpdateView):
     def _filter_valid_recipients(self, users):
         filtered_users = []
         for user in users:
-            if settings.COSINNUS_NEWSLETTER_SENDING_IGNORES_NOTIFICATION_SETTINGS and user.is_active:
+            if settings.COSINNUS_NEWSLETTER_SENDING_IGNORES_NOTIFICATION_SETTINGS and user.is_active and user.password:
                 filtered_users.append(user)
             elif (check_user_can_receive_emails(user)):
                 # if the newsletter opt-in is enabled, only send the newsletter to users
