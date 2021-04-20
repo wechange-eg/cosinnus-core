@@ -41,6 +41,7 @@ from cosinnus.models.conference import CosinnusConferenceSettings,\
     CosinnusConferenceRoom
 from django.utils.timezone import now
 from _collections import defaultdict
+from cosinnus.utils.user import check_user_has_accepted_any_tos
 
 
 class AdministrationView(TemplateView):
@@ -140,9 +141,10 @@ class BaseNewsletterUpdateView(UpdateView):
     def _filter_valid_recipients(self, users):
         filtered_users = []
         for user in users:
-            if settings.COSINNUS_NEWSLETTER_SENDING_IGNORES_NOTIFICATION_SETTINGS and user.is_active and user.password:
+            if settings.COSINNUS_NEWSLETTER_SENDING_IGNORES_NOTIFICATION_SETTINGS and user.last_login \
+                    and user.is_active and user.cosinnus_profile and check_user_has_accepted_any_tos(user):
                 filtered_users.append(user)
-            elif (check_user_can_receive_emails(user)):
+            elif (check_user_can_receive_emails(user) and user.last_login):
                 # if the newsletter opt-in is enabled, only send the newsletter to users
                 # who have the option enabled in their profiles
                 if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN and not \
@@ -164,7 +166,13 @@ class BaseNewsletterUpdateView(UpdateView):
         if 'send_newsletter' in self.request.POST:
             recipients = self._get_recipients_from_choices()
             recipients = self._filter_valid_recipients(recipients)
-            self._send_newsletter(recipients)
+            # send mails threaded
+            my_self = self
+            class CosinnusSendNewsletterThread(Thread):
+                def run(self):
+                    my_self._send_newsletter(recipients)
+            CosinnusSendNewsletterThread().start()
+            
             self.object.sent = timezone.now()
             self.object.save()
             messages.add_message(self.request, messages.SUCCESS, _('Newsletter sent.'))
