@@ -39,7 +39,7 @@ from cosinnus.models.conference import CosinnusConferenceRoom,\
 from cosinnus.models.conference import ParticipationManagement, CosinnusConferenceApplication
 from cosinnus.models.managed_tags import CosinnusManagedTag,\
     CosinnusManagedTagAssignment, CosinnusManagedTagType
-from cosinnus.models.newsletter import Newsletter
+from cosinnus.models.newsletter import Newsletter, GroupsNewsletter
 from cosinnus.models.user_import import CosinnusUserImport
 from django.contrib.contenttypes.admin import GenericTabularInline,\
     GenericStackedInline
@@ -747,6 +747,11 @@ class CosinnusNewsletterAdmin(admin.ModelAdmin):
     list_display = ('subject', 'sent')
 
 admin.site.register(Newsletter, CosinnusNewsletterAdmin)
+
+class CosinnusGroupNewsletterAdmin(admin.ModelAdmin):
+    list_display = ('subject', 'sent')
+
+admin.site.register(GroupsNewsletter, CosinnusGroupNewsletterAdmin)
 
 
 class CosinnusManagedTagAdmin(admin.ModelAdmin):
