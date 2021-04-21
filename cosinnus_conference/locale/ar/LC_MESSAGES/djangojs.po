@@ -201,10 +201,10 @@ msgstr "لا توجد قنوات للتواصل."
 msgid "No participants."
 msgstr "لا يوجد مشاركين/مشاركات."
 
-#. [No represented organisations.]
+#. [No represented organizations.]
 #. defaultMessage is:
 #. undefined
-msgid "No represented organisations."
+msgid "No represented organizations."
 msgstr "لا توجد منظمات مُمثلة/مطروحة."
 
 #. [No stage events.]
@@ -228,13 +228,13 @@ msgstr "الآن"
 #. [Organisation]
 #. defaultMessage is:
 #. undefined
-msgid "Organisation"
+msgid "Organization"
 msgstr "منظمة"
 
-#. [Represented organisations]
+#. [Represented organizations]
 #. defaultMessage is:
 #. undefined
-msgid "Represented organisations"
+msgid "Represented organizations"
 msgstr "المنظمات المطروحة/المُمثلة"
 
 #. [The conference is being prepared, please try again at a later date.]

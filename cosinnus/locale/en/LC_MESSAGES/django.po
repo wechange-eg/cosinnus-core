@@ -6271,7 +6271,7 @@ msgid "to %(portal_name)s"
 msgstr "Edit project “%(team_name)s”"
 
 #, python-format
-msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organization, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
 msgstr ""
 
 msgid "Jetzt anmelden und mitgestalten"
@@ -6480,7 +6480,7 @@ msgstr "Group"
 msgid "Group Dashboard"
 msgstr "Project Type"
 
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr ""
 
 msgid "Edit Group"

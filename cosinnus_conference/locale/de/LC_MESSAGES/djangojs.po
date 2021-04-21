@@ -227,11 +227,11 @@ msgstr "Keine Netzworking-Kanäle vorhanden."
 msgid "No participants."
 msgstr "Keine Teilnehmenden vorhanden."
 
-#. [No represented organisations.]
+#. [No represented organizations.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Organisations/index.json
-msgid "No represented organisations."
+msgid "No represented organizations."
 msgstr "Keine Organisationen vorhanden."
 
 #. [No stage events.]
@@ -259,14 +259,14 @@ msgstr "Jetzt"
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
-msgid "Organisation"
+msgid "Organization"
 msgstr "Institution"
 
-#. [Represented organisations]
+#. [Represented organizations]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Organisations/index.json
-msgid "Represented organisations"
+msgid "Represented organizations"
 msgstr "Repräsentierte Organisationen"
 
 #. [The conference is being prepared, please try again at a later date.]

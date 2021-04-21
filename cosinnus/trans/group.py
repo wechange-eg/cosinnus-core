@@ -83,7 +83,7 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     BROWSE_ALL = _('Browse all Groups')
     CREATE = _('Create Group')
     CREATE_NEW = _('Create new Group')
-    CREATE_DESCRIPTION = _('Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups.')
+    CREATE_DESCRIPTION = _('Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups.')
     EDIT = _('Edit Group')
     ACTIVATE = _('Activate Group')
     REACTIVATE = _('Re-activate Group')

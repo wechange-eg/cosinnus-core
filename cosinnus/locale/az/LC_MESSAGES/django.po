@@ -6556,7 +6556,7 @@ msgid "to %(portal_name)s"
 msgstr "%(portal_name)s -a"
 
 #, python-format
-msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organization, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
 msgstr "Sizi görməyimə şadam! Siz %(portal_name)s portalında Layihələr və Qruplarda başqaları ilə əməkdaşlıq edə bilərsiniz. İstər təşəbbüs, istər Təşkilat, istərsə də şəbəkə - %(portal_name)s portalı onlayn əməkdaşlığınız üçün bütün zəruri vasitələri təklif edir."
 
 msgid "Jetzt anmelden und mitgestalten"
@@ -6780,7 +6780,7 @@ msgstr "Qrupun adı"
 msgid "Group Dashboard"
 msgstr "İdarə paneli"
 
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Qruplar böyük şəbəkələr və ya təşkilatlardakı ünsiyyət və əməkdaşlığı inkişaf etdirməyə kömək edirlər. Qrup daxilində bir neçə kiçik layihə və ya işçi qrupu bir yerə toplaya bilərsiniz."
 
 msgid "Edit Group"

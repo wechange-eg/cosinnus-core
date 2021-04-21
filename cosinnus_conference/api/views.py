@@ -137,11 +137,11 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
         ])
 
     @action(detail=True, methods=['get'])
-    def organisations(self, request, pk=None):
+    def organizations(self, request, pk=None):
         return Response([
             {
                 "id": 1,
-                "name": "Organisation 1",
+                "name": "Organization 1",
                 "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                 "topics": ["One", "Two", "Three"],
                 "location": "Location",
@@ -149,7 +149,7 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
             },
             {
                 "id": 2,
-                "name": "Organisation 2",
+                "name": "Organization 2",
                 "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                 "topics": ["One", "Two", "Three"],
                 "location": "Location",
@@ -157,7 +157,7 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
             },
             {
                 "id": 3,
-                "name": "Organisation 3",
+                "name": "Organization 3",
                 "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                 "topics": ["One", "Two", "Three"],
                 "location": "Location",

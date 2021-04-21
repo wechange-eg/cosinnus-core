@@ -202,10 +202,10 @@ msgstr "Brak kanałów sieciowych."
 msgid "No participants."
 msgstr "Brak uczestników."
 
-#. [No represented organisations.]
+#. [No represented organizations.]
 #. defaultMessage is:
 #. undefined
-msgid "No represented organisations."
+msgid "No represented organizations."
 msgstr "Brak reprezentowanych organizacji."
 
 #. [No stage events.]
@@ -229,13 +229,13 @@ msgstr "Teraz"
 #. [Organisation]
 #. defaultMessage is:
 #. undefined
-msgid "Organisation"
+msgid "Organization"
 msgstr "Organizacja"
 
-#. [Represented organisations]
+#. [Represented organizations]
 #. defaultMessage is:
 #. undefined
-msgid "Represented organisations"
+msgid "Represented organizations"
 msgstr "Reprezentowane organizacje"
 
 #. [The conference is being prepared, please try again at a later date.]

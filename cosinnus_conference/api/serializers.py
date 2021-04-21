@@ -183,14 +183,14 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
     
 
 class ConferenceParticipant(serializers.ModelSerializer):
-    organisation = serializers.SerializerMethodField()
+    organization = serializers.SerializerMethodField()
     location = serializers.SerializerMethodField()
 
     class Meta(object):
         model = get_user_model()
-        fields = ('first_name', 'last_name', 'organisation', 'location')
+        fields = ('first_name', 'last_name', 'organization', 'location')
 
-    def get_organisation(self, obj):
+    def get_organization(self, obj):
         return ""
 
     def get_location(self, obj):
@@ -209,19 +209,19 @@ class ConferenceEventRoomSerializer(serializers.ModelSerializer):
 
 
 class ConferenceParticipantSerializer(serializers.ModelSerializer):
-    organisation = serializers.SerializerMethodField()
+    organization = serializers.SerializerMethodField()
     country = serializers.SerializerMethodField()
     chat_url = serializers.SerializerMethodField()
 
     class Meta(object):
         model = get_user_model()
-        fields = ('id', 'first_name', 'last_name', 'organisation', 'country', 'chat_url')
+        fields = ('id', 'first_name', 'last_name', 'organization', 'country', 'chat_url')
         order_by = ('first_name', 'last_name')
 
-    def get_organisation(self, obj):
+    def get_organization(self, obj):
         if hasattr(obj, 'cosinnus_profile'):
-            # Temporary hack: Allow the organisation field to come from a different attribute
-            att_name = getattr(settings, 'COSINNUS_TEMPHACK_CONFERENCE_ORGANISATION_SOURCE_FIELD_NAME', 'organisation')
+            # Temporary hack: Allow the organization field to come from a different attribute
+            att_name = getattr(settings, 'COSINNUS_TEMPHACK_CONFERENCE_ORGANIZATION_SOURCE_FIELD_NAME', 'organization')
             return obj.cosinnus_profile.dynamic_fields.get(att_name, "")
         return ""
 

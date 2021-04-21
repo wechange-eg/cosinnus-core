@@ -225,11 +225,11 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
     Organization model.
     """
     TYPE_OTHER = 0
-    TYPE_CIVIL_SOCIETY_ORGANISATION = 1
+    TYPE_CIVIL_SOCIETY_ORGANIZATION = 1
     TYPE_COMPANY = 2
     TYPE_PUBLIC_INSTITUTION = 3
     TYPE_CHOICES = (
-        (TYPE_CIVIL_SOCIETY_ORGANISATION, _('Civil society organization')),
+        (TYPE_CIVIL_SOCIETY_ORGANIZATION, _('Civil society organization')),
         (TYPE_COMPANY, _('Company (commercial)')),
         (TYPE_PUBLIC_INSTITUTION, _('Public institution')),
         (TYPE_OTHER, _('Other')),

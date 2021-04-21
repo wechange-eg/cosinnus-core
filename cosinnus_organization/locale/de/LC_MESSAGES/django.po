@@ -600,7 +600,7 @@ msgid "Phone"
 msgstr "Telefon"
 
 #: cosinnus-core/cosinnus_organization/templates/cosinnus/organization/organization_form.html:188
-msgid "Address(es) of your organisation"
+msgid "Address(es) of your organization"
 msgstr "Addresse(n) der Organisation"
 
 #: cosinnus-core/cosinnus_organization/templates/cosinnus/organization/organization_form.html:189

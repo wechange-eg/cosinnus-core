@@ -153,7 +153,7 @@
                     {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.phone_number label=phone_label placeholder=phone_placeholder %}
 
                     {# locations Inlineform #}
-                    {% trans "Address(es) of your organisation" as locations_label %}
+                    {% trans "Address(es) of your organization" as locations_label %}
                     {% trans "Remove location" as loc_rm_label %}
                     {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}
                     {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=locations_label content_template='cosinnus/fields/inlineform_organization_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}

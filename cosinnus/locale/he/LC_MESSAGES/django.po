@@ -6234,7 +6234,7 @@ msgid "to %(portal_name)s"
 msgstr "ל-%(portal_name)s"
 
 #, python-format
-msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organization, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
 msgstr "טוב לראותך! ב-%(portal_name)s אתה יכול ליצור שיתוף פעולה עם אחרים בפרויקטים וקבוצות. בים אם יוזמה, ארגון או רשת- %(portal_name)s מציע לך כלים הדרושים לשת\"פ מקוון."
 
 msgid "Jetzt anmelden und mitgestalten"
@@ -6422,7 +6422,7 @@ msgstr "תפריט קבוצה"
 msgid "Group Dashboard"
 msgstr "לוח כלים של הקבוצה"
 
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "קבוצות מסייעות לשפר את התקשורת ושיתוף הפעולה ברשתות או ארגונים גדולים. בתוך קבוצה באפשרותך לאחד מספר פרויקטים קטנים יותר או קבוצות עבודה."
 
 msgid "Edit Group"

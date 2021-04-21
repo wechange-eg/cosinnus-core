@@ -804,7 +804,7 @@ class CosinnusConf(AppConf):
     #         in_signup=True, # whether to show up in the signup form
     #     ), ...
     # }
-    # example: {'organisation': {'type': 'text', 'required': True}}
+    # example: {'organization': {'type': 'text', 'required': True}}
     USERPROFILE_EXTRA_FIELDS = {}
     
     # a dict of <form-name> -> list of formfield names that will be disabled in the user profile forms 

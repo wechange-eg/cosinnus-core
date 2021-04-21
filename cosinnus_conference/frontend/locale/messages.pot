@@ -218,11 +218,11 @@ msgstr ""
 msgid "No participants."
 msgstr ""
 
-#: locale/src/views/Organisations/index.json
-#. [No represented organisations.]
+#: locale/src/views/Organizations/index.json
+#. [No represented organizations.]
 #. defaultMessage is:
 #. undefined
-msgid "No represented organisations."
+msgid "No represented organizations."
 msgstr ""
 
 #: locale/src/views/Stage/list.json
@@ -247,17 +247,17 @@ msgid "Now"
 msgstr ""
 
 #: locale/src/views/Participants/list.json
-#. [Organisation]
+#. [Organization]
 #. defaultMessage is:
 #. undefined
-msgid "Organisation"
+msgid "Organization"
 msgstr ""
 
-#: locale/src/views/Organisations/index.json
-#. [Represented organisations]
+#: locale/src/views/Organizations/index.json
+#. [Represented organizations]
 #. defaultMessage is:
 #. undefined
-msgid "Represented organisations"
+msgid "Represented organizations"
 msgstr ""
 
 #: locale/src/views/App.json

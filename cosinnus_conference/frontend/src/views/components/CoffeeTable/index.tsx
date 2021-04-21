@@ -28,7 +28,7 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
               {participants[i].props.firstName} {participants[i].props.lastName},
             </Typography>
             <Typography component="span">
-              {participants[i].props.organisation}, {participants[i].props.location}
+              {participants[i].props.organization}, {participants[i].props.location}
             </Typography>
           </span>
         ) || <span /> }

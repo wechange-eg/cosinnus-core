@@ -80,7 +80,7 @@ msgid "Contact"
 msgstr "Контактная информация"
 
 #: locale/src/views/Participants/list.json
-#. [conference.organisations.country]
+#. [conference.organizations.country]
 #. defaultMessage is:
 #. Country
 msgid "Country"
@@ -172,7 +172,7 @@ msgid "Manage rooms"
 msgstr "Комнаты управления"
 
 #: locale/src/views/Participants/list.json
-#. [conference.organisations.name]
+#. [conference.organizations.name]
 #. defaultMessage is:
 #. Name
 msgid "Name"
@@ -222,10 +222,10 @@ msgid "No participants."
 msgstr "Участников нет."
 
 #: locale/src/views/Organisations/index.json
-#. [conference.organisations.noResults]
+#. [conference.organizations.noResults]
 #. defaultMessage is:
-#. No represented organisations.
-msgid "No represented organisations."
+#. No represented organizations.
+msgid "No represented organizations."
 msgstr "Нет представленных организаций."
 
 #: locale/src/views/Workshops/list.json
@@ -247,17 +247,17 @@ msgid "Now"
 msgstr "Теперь"
 
 #: locale/src/views/Participants/list.json
-#. [conference.organisations.organisation]
+#. [conference.organizations.organization]
 #. defaultMessage is:
 #. Organisation
-msgid "Organisation"
+msgid "Organization"
 msgstr "Организация"
 
 #: locale/src/views/Organisations/index.json
-#. [conference.organisations.representedOrganisations]
+#. [conference.organizations.representedOrganisations]
 #. defaultMessage is:
-#. Represented organisations
-msgid "Represented organisations"
+#. Represented organizations
+msgid "Represented organizations"
 msgstr "Представленные организации"
 
 #: locale/src/views/App.json
