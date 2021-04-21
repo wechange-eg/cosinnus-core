@@ -44,50 +44,119 @@
 
 	<div class="dashboard-left-bar dashboard-column visible-panel-1">
 		<div class="dashboard-left-bar-content" style="display: none;">
-			<div class="group-widget-root">
-			</div>
-			
-			{% if SETTINGS.COSINNUS_CONFERENCES_ENABLED and my_upcoming_conferences_with_icons %}
-				<div class="widget-content">
-					<h2 class="headline">{{ COSINNUS_CONFERENCE_TRANS.MY_UPCOMING_LIST }}</h2>
-					<ul class="item-list">
-						{% for conference, conference_icon in my_upcoming_conferences_with_icons %}
-							<li>
-								<a class="list-item" href="{{ conference.get_absolute_url }}">
-									<div class="item-icon ">
-										<i class="fas fa-fw {{ conference_icon }}"></i>
-									</div>
-									<div class="item-text text-bold">
-										{{ conference.name }}
-									</div>
-								</a>
-							</li>
-						{% endfor %}
-					</ul>
-				</div>
-			{% endif %}
-			
-			{% block extra_dashboard_content %}{% endblock %}
-			<div class="ideas-widget-root">
-			</div>
-			<div class="starred-users-widget-root"></div>
-			<div class="starred-objects-widget-root"></div>
-			<div class="followed-objects-widget-root"></div>
-			{% block map_widget %}
-				<div class="map-widget square-widget">
-						<div class="widget-content square-content background-content">
-							<h2 class="headline">{% trans "Close to me" %}</h2>
+		    {% block left_bar_widgets %}
+		        {% block group_widget %}
+    				<div class="group-widget-root"></div>
+				{% endblock %}
+				
+				{% block conference_widget %}
+					{% if SETTINGS.COSINNUS_CONFERENCES_ENABLED and my_upcoming_conferences_with_icons %}
+						<div class="widget-content">
+							<h2 class="headline">{{ COSINNUS_CONFERENCE_TRANS.MY_UPCOMING_LIST }}</h2>
+							<ul class="item-list">
+								{% for conference, conference_icon in my_upcoming_conferences_with_icons %}
+									<li>
+										<a class="list-item" href="{{ conference.get_absolute_url }}">
+											<div class="item-icon ">
+												<i class="fas fa-fw {{ conference_icon }}"></i>
+											</div>
+											<div class="item-text item-text-dual">
+                                                <div class="item-text-primary text-bold">
+													{{ conference.name }}
+                                                </div>
+                                                {% if conference.get_date_or_now_starting_time.is_date %}
+                                                    <div class="moment-data-date" data-date="{{ conference.get_date_or_now_starting_time.date }}"></div>
+                                                {% else %}
+                                                    <div>
+                                                        {{ conference.get_date_or_now_starting_time.date }} 
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+										</a>
+									</li>
+								{% endfor %}
+							</ul>
 						</div>
-						<a href="/map/" class="square-content hover-link">
-							{% trans "Show large map" %}
-						</a>
-				</div>
-			{% endblock %}
-			{% block legal_links %}
-				<div class="legal-links">
-					{% include 'cosinnus/v2/dashboard/tos_links.html' %}
-				</div>
-			{% endblock %}
+					{% endif %}
+				{% endblock %}
+				
+                {% block events_widget %}
+                    {% if attending_events %}
+                        <div class="widget-content">
+                            <h2 class="headline">{% trans "My upcoming Events" %}</h2>
+                            <ul class="item-list">
+                                {% for event in attending_events %}
+                                    <li>
+                                        <a class="list-item" href="{{ event.get_absolute_url }}">
+                                            <div class="item-icon ">
+                                                <i class="fas fa-fw {{ event.get_icon }}"></i>
+                                            </div>
+                                            <div class="item-text item-text-dual">
+							                    <div class="item-text-primary text-bold">
+	                                                {{ event.title }}
+							                    </div>
+							                    {% if event.get_date_or_now_starting_time.is_date %}
+							                        <div class="moment-data-date" data-date="{{ event.get_date_or_now_starting_time.date }}"></div>
+							                    {% else %}
+							                        <div>
+							                            {{ event.get_date_or_now_starting_time.date }} 
+							                        </div>
+							                    {% endif %}
+							                </div>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+				
+				{% block extra_dashboard_content %}{% endblock %}
+				
+                {% block idea_widget %}
+				    <div class="ideas-widget-root"></div>
+				{% endblock %}
+                {% block starred_users_widget %}
+				    <div class="starred-users-widget-root"></div>
+                {% endblock %}
+                {% block starred_objects_widget %}
+				    <div class="starred-objects-widget-root"></div>
+                {% endblock %}
+                {% block followed_objects_widget %}
+				    <div class="followed-objects-widget-root"></div>
+                {% endblock %}
+				{% block map_widget %}
+					{% if SETTINGS.COSINNUS_USERDASHBOARD_USE_LIVE_MAP_WIDGET %}
+						<div class="map-widget-iframe square-widget">
+						    {% comment %} Delayed so the iframe is only loaded once visible. see userdashboard-view.js {% endcomment %}
+							<iframe id="userdashboard-map-iframe" class="square-content" src_delayed="{{ request.user.cosinnus_profile.map_embed_url }}"></iframe>
+							<div class="map-widget-link">
+								<a href="{% url 'cosinnus:map' %}">
+									<img width="26" src="{% static 'images/user_dashboard_map_link.png' %}">
+								</a>
+							</div>
+						</div>
+						{% if request.user.cosinnus_profile.media_tag.location %}
+						    <div class="map-widget-info-box no-select">{% trans 'The map is centrered on the address you added in your profile settings.' %}</div>
+						{% endif %}
+					{% else %}
+						<div class="map-widget square-widget">
+							<div class="widget-content square-content background-content">
+								<h2 class="headline">{% trans "Close to me" %}</h2>
+							</div>
+							<a href="/map/" class="square-content hover-link">
+								{% trans "Show large map" %}
+							</a>
+						</div>
+					{% endif %}
+				{% endblock %}
+				
+				{% block legal_links %}
+					<div class="legal-links">
+						{% include 'cosinnus/v2/dashboard/tos_links.html' %}
+					</div>
+				{% endblock %}
+		     {% endblock left_bar_widgets %}
 		</div>
 	</div>
 		

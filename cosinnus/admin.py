@@ -39,7 +39,7 @@ from cosinnus.models.conference import CosinnusConferenceRoom,\
 from cosinnus.models.conference import ParticipationManagement, CosinnusConferenceApplication
 from cosinnus.models.managed_tags import CosinnusManagedTag,\
     CosinnusManagedTagAssignment, CosinnusManagedTagType
-from cosinnus.models.newsletter import Newsletter
+from cosinnus.models.newsletter import Newsletter, GroupsNewsletter
 from cosinnus.models.user_import import CosinnusUserImport
 from django.contrib.contenttypes.admin import GenericTabularInline,\
     GenericStackedInline
@@ -750,6 +750,11 @@ class CosinnusNewsletterAdmin(admin.ModelAdmin):
 
 admin.site.register(Newsletter, CosinnusNewsletterAdmin)
 
+class CosinnusGroupNewsletterAdmin(admin.ModelAdmin):
+    list_display = ('subject', 'sent')
+
+admin.site.register(GroupsNewsletter, CosinnusGroupNewsletterAdmin)
+
 
 class CosinnusManagedTagAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'portal', 'type', 'paired_group')
@@ -766,14 +771,15 @@ class CosinnusManagedTagTypeAdmin(admin.ModelAdmin):
 
 admin.site.register(CosinnusManagedTagType, CosinnusManagedTagTypeAdmin)
 
-
+"""
+# Disabled for now, unusable and confusing for customers
 class CosinnusManagedTagAssignmentAdmin(admin.ModelAdmin):
     list_display = ('managed_tag', 'content_type', 'object_id', 'approved',)
     list_filter = ('managed_tag__portal',)
     search_fields = ('managed_tag__slug', 'managed_tag__name',)
 
 admin.site.register(CosinnusManagedTagAssignment, CosinnusManagedTagAssignmentAdmin)
-
+"""
 
 class CosinnusUserImportAdmin(admin.ModelAdmin):
     list_display = ('state', 'creator', 'last_modified')

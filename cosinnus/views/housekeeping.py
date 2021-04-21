@@ -17,11 +17,9 @@ from cosinnus.utils.group import move_group_content as move_group_content_utils,
 from cosinnus.models.widget import WidgetConfig
 from django.core.cache import cache
 from django.conf import settings
-from cosinnus.conf import settings as cosinnus_settings
 import json
 import urllib.request, urllib.error, urllib.parse
 from django.utils.encoding import force_text
-from uuid import uuid4
 import pickle
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 import datetime
@@ -32,12 +30,12 @@ from cosinnus.utils.user import filter_active_users, accept_user_tos_for_portal,
     get_user_tos_accepted_date
 from cosinnus.models.profile import get_user_profile_model
 from django.core.mail.message import EmailMessage
-from cosinnus.core.mail import send_mail_or_fail, send_mail,\
+from cosinnus.core.mail import send_mail,\
     send_mail_or_fail_threaded, send_html_mail_threaded,\
     render_notification_item_html_mail
 from django.template.defaultfilters import linebreaksbr
 from django.db.models.aggregates import Count
-from cosinnus.utils.http import make_csv_response
+from cosinnus.utils.http import make_csv_response, make_xlsx_response
 from operator import itemgetter
 from cosinnus.utils.permissions import check_user_can_receive_emails
 import logging
@@ -47,8 +45,6 @@ from annoying.functions import get_object_or_None
 logger = logging.getLogger('cosinnus')
 
 import logging
-from cosinnus.external.models import ExternalProject
-from haystack.query import SearchQuerySet
 logger = logging.getLogger('cosinnus')
 
 
@@ -71,32 +67,6 @@ def ensure_group_widgets(request=None):
     else:
         return ret
 
-
-def fill_external_data(request): 
-    if not request.user.is_superuser:
-        return HttpResponseForbidden('Not authenticated')
-    
-    project = ExternalProject(
-        external_id='https://my.item/item1',
-        source='https://my.item/',
-        title='My Item',
-        url='https://my.item/1item1',
-        mt_location='Location String',
-        mt_location_lat=52.526806,
-        mt_location_lon=11.313272,
-        description='A test description',
-        icon_image_url='/media/cosinnus_portals/portal_default/organization_images/images/wDnx8TQS0Ful.jpg',
-        contact_info='saschanarr@gmail.com',
-        tags=['Loltag', 'Tagtag'],
-        topics=[1,6],
-    )
-    project.save()
-    logger.warn('Check proj: %s' % project.slug)
-    sqs = SearchQuerySet().models(ExternalProject).all()
-    haystack_project = sqs[len(sqs)-1]
-    ret = '<br/>Count: %d<br/>URL of -1: %s<br/>Title of -1: %s<br/>ID of -1: %s<br/>Loc: %s,%s' % \
-     (len(sqs), haystack_project.url, haystack_project.title, haystack_project.id, haystack_project.mt_location_lat, haystack_project.mt_location_lon) 
-    return HttpResponse(ret)
 
 def delete_spam_users(request):
     if not request.user.is_superuser:
@@ -549,7 +519,8 @@ def user_activity_info(request):
     return make_csv_response(rows, headers, 'user-activity-report')
 
 
-def newsletter_users(request, includeOptedOut=False, file_name='newsletter-user-emails'):
+def newsletter_users(request, includeOptedOut=False, never_logged_in_only=False, 
+                       all_portal_users=False, file_name='newsletter-user-emails'):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     if not getattr(settings, 'COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS', False):
@@ -557,18 +528,35 @@ def newsletter_users(request, includeOptedOut=False, file_name='newsletter-user-
     
     result_columns = [['email', 'firstname', 'lastname', 'registration_timestamp', 'language'],]
     portal = CosinnusPortal.get_current()
-    for membership in CosinnusPortalMembership.objects.filter(
-            group=portal, user__is_active=True).exclude(user__last_login__exact=None).\
-            prefetch_related('user'):
-        user = membership.user
-        if check_user_can_receive_emails(user) and (includeOptedOut or user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True):
+    
+    if all_portal_users:
+        # this gets users even when they don't have a portal membership yet
+        users = get_user_model().objects.filter(is_active=True)
+        if never_logged_in_only:
+            users = users.filter(last_login__exact=None)
+        else:
+            users = users.exclude(last_login__exact=None)
+    else:
+        memberships = CosinnusPortalMembership.objects.filter(group=portal, user__is_active=True)
+        if never_logged_in_only:
+            memberships = memberships.filter(user__last_login__exact=None)
+        else:
+            memberships = memberships.exclude(user__last_login__exact=None)
+        memberships = memberships.prefetch_related('user')
+        users = [membership.user for membership in memberships]
+    
+    for user in users:
+        if includeOptedOut or (check_user_can_receive_emails(user) and user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True):
             row = [user.email, user.first_name, user.last_name, user.date_joined, user.cosinnus_profile.language]
             result_columns.append(row)
-    return make_csv_response(result_columns, file_name=file_name)
+    return make_xlsx_response(result_columns, file_name=file_name)
 
 def active_user_emails(request):
     return newsletter_users(request, includeOptedOut=True, file_name='active-user-emails')
 
+def never_logged_in_user_emails(request):
+    return newsletter_users(request, includeOptedOut=True, never_logged_in_only=True,
+                            all_portal_users=True, file_name='never-logged-in-user-emails')
 
 def group_admin_emails(request, slugs):
     """ For a comma-seperated list of group slugs, return a CSV of all emails

@@ -9,10 +9,9 @@ from drf_yasg.views import get_schema_view
 from rest_framework import routers, permissions
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
-from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    oauth_user, oauth_profile
-from cosinnus.api.views import oauth_current_user, statistics as api_statistics, current_user, \
-    navbar, settings as api_settings
+from cosinnus.api.views.group import CosinnusSocietyViewSet, CosinnusProjectViewSet
+from cosinnus.api.views.user import oauth_user, oauth_profile, current_user, oauth_current_user, UserViewSet
+from cosinnus.api.views.portal import statistics as api_statistics, navbar, settings as api_settings
 from cosinnus.api.views.i18n import translations
 from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
@@ -128,9 +127,9 @@ urlpatterns = [
     url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),
     
     url(r'^housekeeping/ensure_group_widgets/$', housekeeping.ensure_group_widgets, name='housekeeping-ensure-group-widgets'),
-    url(r'^housekeeping/fillexternaldata/$', housekeeping.fill_external_data, name='housekeeping-fill-external-data'),
     url(r'^housekeeping/newsletterusers/$', housekeeping.newsletter_users, name='housekeeping-newsletter-user-emails'),
     url(r'^housekeeping/activeuseremails/$', housekeeping.active_user_emails, name='housekeeping-active-user-emails'),
+    url(r'^housekeeping/neverloggedinuseremails/$', housekeeping.never_logged_in_user_emails, name='housekeeping-never-logged-in-user-emails'),
     url(r'^housekeeping/deletespamusers/$', housekeeping.delete_spam_users, name='housekeeping_delete_spam_users'),
     url(r'^housekeeping/movegroupcontent/(?P<fromgroup>[^/]+)/(?P<togroup>[^/]+)/$', housekeeping.move_group_content, name='housekeeping_move_group_content'),
     url(r'^housekeeping/recreategroupwidgets/$', housekeeping.recreate_all_group_widgets, name='housekeeping_recreate_all_group_widgets'),
@@ -299,13 +298,15 @@ urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
 router = routers.SimpleRouter()
-router.register(r'public_conferences', PublicConferenceViewSet)
-router.register(r'conferences', ConferenceViewSet)
-router.register(r'groups', CosinnusSocietyViewSet)
-router.register(r'projects', CosinnusProjectViewSet)
-router.register(r'organizations', OrganizationViewSet)
-router.register(r'events', EventViewSet)
-router.register(r'notes', NoteViewSet)
+router.register(r'public_conferences', PublicConferenceViewSet, basename='public_conference')
+router.register(r'conferences', ConferenceViewSet, basename='conference')
+router.register(r'groups', CosinnusSocietyViewSet, basename='group')
+router.register(r'projects', CosinnusProjectViewSet, basename='project')
+router.register(r'organizations', OrganizationViewSet, basename='organization')
+router.register(r'events', EventViewSet, basename='event')
+router.register(r'notes', NoteViewSet, basename='note')
+if getattr(settings, 'COSINNUS_API_SETTINGS', {}).get('user'):
+    router.register(r'users', UserViewSet, basename='user')
 
 if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
     from cosinnus_message.api.views import MessageExportView
@@ -331,7 +332,7 @@ schema_url_patterns = [
     url(r'^api/v2/settings/$', api_settings, name='api-settings'),
     url(r'^api/v2/statistics/', api_statistics, name='api-statistics'),
     url(r'^api/v2/jsi18n/$', translations, name='api-jsi18n'),
-    url(r'^api/v2/', include(router.urls)),
+    url(r'^api/v2/', include((router.urls, 'api'), namespace='api')),
 ]
 
 urlpatterns += schema_url_patterns

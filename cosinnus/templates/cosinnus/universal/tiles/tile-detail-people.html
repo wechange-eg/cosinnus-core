@@ -23,7 +23,7 @@
             {% trans "Does NOT wish to be contacted for potential collaboration!" %}
         </div>
 	{% endif %}
-	
+
 {% endblock topic_line %}
 
 {% block action_buttons %}
@@ -48,6 +48,13 @@
 		            </span>
 		        </a>
             {% endif %}
+            <a href="{{ controlView.portalInfo[portal].domain }}{{ url }}" target="_blank" class="rounded-button button-action button-star">
+                <span class="rounded-button-inner">
+                    <i class="fa fa-user"></i>
+                    {# Translators: __INCLUDE_JS_PO__ #}
+		            {% trans "To Profile" %}
+                </span>
+            </a>
 	        {{ super() }}
 	    </div>
     {% endif %}
@@ -55,7 +62,11 @@
 
 
 {% block related_content %}
-    
+
+    {% if extra_html %}
+    {{ extra_html | safe }}
+    {% endif %}
+
     {% if groups|length > 0 %}
         <div class="clearfix"></div>
     

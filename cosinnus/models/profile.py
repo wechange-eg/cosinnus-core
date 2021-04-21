@@ -17,6 +17,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models, transaction
 from django.db.models.signals import post_save, class_prepared
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
@@ -29,9 +30,11 @@ import six
 from cosinnus.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.core import signals
-from cosinnus.core.mail import send_mail_or_fail_threaded
+from cosinnus.core.mail import send_mail_or_fail_threaded,\
+    convert_html_to_plaintext
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
-from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin,\
+    CosinnusManagedTag
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.models.tagged import LikeableObjectMixin
 from cosinnus.utils.files import get_avatar_filename, image_thumbnail, \
@@ -300,6 +303,25 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             setattr(self, key, self.media_tag)
         return getattr(self, key)
     
+    def get_dynamic_fields_rendered(self, request=None):
+        """ Returns the rendered HTML of the userprofile's dynamic fields detail template snippet """ 
+        data = {
+            'profile': self,
+            'profile_values': self.dynamic_fields,
+            'labels': settings.COSINNUS_USERPROFILE_EXTRA_FIELDS,
+            'SETTINGS': settings,
+            'COSINNUS_MANAGED_TAG_LABELS': CosinnusManagedTag.labels,
+        }
+        return render_to_string(
+            'cosinnus/user/user_profile_dynamic_fields.html',
+            data, 
+            request=request
+        )
+    
+    def get_dynamic_fields_rendered_plaintext(self, request=None):
+        """ Returns a text-only version of the dynamic profile fields for this userprofile """
+        return convert_html_to_plaintext(self.get_dynamic_fields_rendered(request=request))
+    
     def add_redirect_on_next_page(self, resolved_url, message=None, priority=False):
         """ Adds a redirect-page to the user's settings redirect list.
             A middleware enforces that the user will be redirected to the first URL in the list on the next page hit.
@@ -387,6 +409,23 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def get_last_login_token_sent(self):
         return self.settings.get(PROFILE_SETTING_LOGIN_TOKEN_SENT, None)
 
+    @property
+    def map_embed_url(self):
+        url = reverse('cosinnus:map-embed')
+        defaults = settings.COSINNUS_DASHBOARD_WIDGET_MAP_DEFAULTS
+        if (not defaults or not 'location' in defaults) and not self.media_tag.location:
+            return url
+        if self.media_tag.location:
+            lat = self.media_tag.location_lat
+            lon = self.media_tag.location_lon
+        else:
+            lat = defaults['location'][0]
+            lon = defaults['location'][1]
+        zoom = defaults.get('zoom', 10)
+        content_display = "&people=false&ideas=false&conferences=false"
+        return '{}?location_lat={}&location_lon={}&zoom={}{}'.format(
+            url, lat, lon, zoom, content_display)
+
 
 class UserProfile(BaseUserProfile):
     
@@ -447,7 +486,8 @@ else:
 class GlobalUserNotificationSettingManager(models.Manager):
     """ Cached acces to user notification settings  """
     
-    _NOTIFICATION_CACHE_KEY = 'cosinnus/core/portal/%d/user/%d/slugs' # portal_id, user_id  --> setting value (int)
+    _NOTIFICATION_CACHE_KEY = 'cosinnus/core/portal/%d/user/%d/globalnotificationsetting' # portal_id, user_id  --> setting value (int)
+    _ROCKETCHAT_NOTIFICATION_CACHE_KEY = 'cosinnus/core/portal/%d/user/%d/rocketchatnotificationsetting' # portal_id, user_id  --> setting value (int)
     
     def get_for_user(self, user):
         """ Returns the cached setting value for this user's global notification setting. """
@@ -455,6 +495,15 @@ class GlobalUserNotificationSettingManager(models.Manager):
         if setting is None:
             setting = self.get_object_for_user(user).setting
             cache.set(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id), setting,
+                settings.COSINNUS_GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT)
+        return setting
+    
+    def get_rocketchat_setting_for_user(self, user):
+        """ Returns the cached setting value for this user's global notification setting. """
+        setting = cache.get(self._ROCKETCHAT_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
+        if setting is None:
+            setting = self.get_object_for_user(user).rocketchat_setting
+            cache.set(self._ROCKETCHAT_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id), setting,
                 settings.COSINNUS_GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT)
         return setting
     
@@ -469,6 +518,7 @@ class GlobalUserNotificationSettingManager(models.Manager):
     
     def clear_cache_for_user(self, user):
         cache.delete(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
+        cache.delete(self._ROCKETCHAT_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
     
 
 class GlobalUserNotificationSetting(models.Model):
@@ -494,12 +544,25 @@ class GlobalUserNotificationSetting(models.Model):
         (SETTING_GROUP_INDIVIDUAL, pgettext_lazy('answer to "i wish to receive notification emails:"', 'Individual settings for each Project/Group...')),
     )
     
+    # no rocketchat notification mails
+    ROCKETCHAT_SETTING_OFF = 0
+    # all DMs and mentions
+    ROCKETCHAT_SETTING_MENTIONS = 1
+    
+    ROCKETCHAT_SETTING_CHOICES = (
+        (ROCKETCHAT_SETTING_OFF, pgettext_lazy('answer to "i wish to receive rocketchat notification emails:"', 'No E-Mails for RocketChat messages')),
+        (ROCKETCHAT_SETTING_MENTIONS, pgettext_lazy('answer to "i wish to receive rocketchat notification emails:"', 'E-Mails for all direct messages and mentions')),
+    )
+    
     user = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False, related_name='cosinnus_notification_settings', on_delete=models.CASCADE)
     portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='user_notification_settings', 
         null=False, blank=False, default=1, on_delete=models.CASCADE)
     setting = models.PositiveSmallIntegerField(choices=SETTING_CHOICES,
             default=settings.COSINNUS_DEFAULT_GLOBAL_NOTIFICATION_SETTING,
             help_text='Determines if the user wants no mail, immediate mails,s aggregated mails, or group specific settings')
+    rocketchat_setting = models.PositiveSmallIntegerField(choices=ROCKETCHAT_SETTING_CHOICES,
+            default=settings.COSINNUS_DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING,
+            help_text='Determines if the user wants rocketchat notification emails')
     last_modified = models.DateTimeField(_('Last modified'), auto_now=True, editable=False)
     
     objects = GlobalUserNotificationSettingManager()

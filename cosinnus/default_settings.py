@@ -19,6 +19,10 @@ from django.utils.translation import ugettext_lazy as _
 # this is the default portal, and will change the location of the staticfiles
 COSINNUS_PORTAL_NAME = None
 
+# the suffix of every often-changing JS/CSS staticfile
+# increase this to make sure browsers reload a cached version 
+# after making non-compatible changes to scripts or styles!
+COSINNUS_STATICFILES_VERSION = '1.00'
 
 DEBUG = False
 
@@ -71,7 +75,7 @@ STATIC_URL = '/static/'
 
 
 # List of finder classes that know how to find static files in
-# various locations.
+# various locations
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -206,6 +210,7 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'cosinnus_stream',
         'cosinnus_todo',
         'cosinnus_conference',
+        'cosinnus_exchange',
     ]
     
     # Extra Cosinnus Apps (as defined in external project)
@@ -418,6 +423,7 @@ CRON_CLASSES = [
     'cosinnus_marketplace.cron.DeactivateExpiredOffers',
     'cosinnus_message.cron.ProcessDirectReplyMails',
     'cosinnus_conference.cron.SendConferenceReminders',
+    'cosinnus_exchange.cron.PullData',
 ]
 # delete cronjob logs older than 30 days
 DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 30
@@ -566,6 +572,16 @@ REST_FRAMEWORK = {
     )
 }
 
+COSINNUS_API_SETTINGS = {
+    'user': ['head', 'post'],
+    # 'users': [ 'head', 'get', 'post', 'put', 'patch', 'delete']
+    # 'hooks': {
+    #     'user.activated': ['https://webhook.site/test'],
+    #     'user.updated': ['https://webhook.site/test'],
+    #     'user.deactivated': ['https://webhook.site/test'],
+    # }
+}
+
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'cosinnus.utils.jwt.jwt_response_handler'
 }
@@ -606,28 +622,22 @@ COSINNUS_PROJECT_ADDITIONAL_FORMS = []
 COSINNUS_GROUP_ADDITIONAL_FORMS = []
 COSINNUS_CONFERENCE_ADDITIONAL_FORMS = []
 
-# Organizations
-COSINNUS_DATA_EXCHANGE_ENABLED = False
-COSINNUS_GOODDB_BASE_URL = "https://virtserver.swaggerhub.com/WECHANGE-eG/GoodDB/0.0.9"
-COSINNUS_GOODDB_USER = "user"
-COSINNUS_GOODDB_PASSWORD = "password"
-COSINNUS_GOODDB_PUSH = {
-    'events': {
-        'path': '/events/batch',
-        'model': 'cosinnus_event.Event',
-        'serializer': 'cosinnus_event.api.serializers.EventGoodDBSerializer'
-    },
-}
-COSINNUS_GOODDB_PULL = {
-    'events': {
-        'path': '/events/',
-        'model': 'cosinnus.ExternalEvent',
-        'serializer': 'cosinnus.external.serializers.ExternalEventGoodDBSerializer'
-    },
-}
+# Exchange
+COSINNUS_EXCHANGE_ENABLED = False
+COSINNUS_EXCHANGE_RUN_EVERY_MINS = 60 * 24
+# Exchange Backends
+# Defaults:
+#   backend: 'cosinnus_exchange.backends.ExchangeBackend'
+#   url: None (required)
+#   token_url: (url + ../token/)
+#   username: None (if no login required)
+#   password: None (if no login required)
+#   source: (domain from URL)
+#   model: None (required, e.g. 'cosinnus_exchange.Event')
+#   serializer: None (required, e.g. 'cosinnus_exchange.serializers.ExchangeEventSerializer')
+COSINNUS_EXCHANGE_BACKENDS = []
 
 COSINNUS_STARRED_STAR_LABEL = _('Bookmark')
 COSINNUS_STARRED_STARRING_LABEL = _('Bookmarked')
 COSINNUS_STARRED_OBJECTS_LIST = _('Bookmark list')
 COSINNUS_STARRED_USERS_LIST = _('Bookmarked Users list')
-

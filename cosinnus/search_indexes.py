@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.models import AnonymousUser
 from django.utils.timezone import now
 
+from cosinnus.conf import settings
 from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgramField,\
     TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin,\
     DocumentBoostMixin, CommaSeperatedIntegerMultiValueField,\
@@ -35,6 +36,10 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     always_visible = indexes.BooleanField(default=True)
     created = indexes.DateTimeField(model_attr='created')
     group = indexes.IntegerField(model_attr='id')
+    from_date = indexes.DateTimeField(model_attr='from_date', null=True)
+    to_date = indexes.DateTimeField(model_attr='to_date', null=True)
+    humanized_event_time_html = indexes.CharField(stored=True, indexed=False)
+    
     # for filtering on this model
     is_group_model = indexes.BooleanField(default=True)
     
@@ -97,6 +102,10 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     def prepare_member_count(self, obj):
         """ Member count for projects/groups """
         return len(self.prepare_group_members(obj))
+    
+    def prepare_humanized_event_time_html(self, obj):
+        ret = obj.get_humanized_event_time_html()
+        return ret
     
     def prepare_content_count(self, obj):
         """ Upcoming events for this project/group """
@@ -187,7 +196,6 @@ class CosinnusConferenceIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, ind
     
     from_date = indexes.DateTimeField(model_attr='from_date', null=True)
     to_date = indexes.DateTimeField(model_attr='to_date', null=True)
-    humanized_event_time_html = indexes.CharField(stored=True, indexed=False)
     participants_limit_count = indexes.IntegerField(stored=True, indexed=False)
     
     def get_model(self):
@@ -203,9 +211,6 @@ class CosinnusConferenceIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, ind
         if len(participation_managements) > 0:
             return participation_managements[0].participants_limit
         return 0
-    
-    def prepare_humanized_event_time_html(self, obj):
-        return obj.get_humanized_event_time_html()
     
     def boost_model(self, obj, indexed_data):
         """ We boost a combined measure of 2 added factors: soonishnes (50%) and participant count (50%).
@@ -271,7 +276,7 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     
     def prepare_managed_tags(self, obj):
         return obj.get_managed_tag_ids()
-    
+
     def prepare_url(self, obj):
         """ NOTE: UserProfiles always contain a relative URL! """
         return reverse('cosinnus:profile-detail', kwargs={'username': obj.user.username})
@@ -416,4 +421,3 @@ class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearch
 
 
 # also import all external search indexes
-from cosinnus.external.search_indexes import * #noqa

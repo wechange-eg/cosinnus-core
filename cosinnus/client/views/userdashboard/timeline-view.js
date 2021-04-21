@@ -15,8 +15,12 @@ module.exports = BaseView.extend({
     // will be set to self.options during initialization
     defaults: {
         
-    	onlyMine: false, // inited from uiPrefs
     	forceOnlyMine: false, // overwritten from passed options from higher views
+    	// the following are *combinable* AND filters, not exclusive, 
+    	// like the historical name "only" suggests!
+    	onlyMine: true, // combinable content filter. inited from uiPrefs
+        onlyForum: true, // combinable content filter. inited from uiPrefs
+        onlyPublic: false, // combinable content filter. inited from uiPrefs
     	
         state: {
         	loading: false, // if true, a request is currently loading
@@ -34,7 +38,9 @@ module.exports = BaseView.extend({
     events: {
     	//'focus .nav-search-box': 'onSearchBoxFocusIn',
     	// todo: onlyMine button
-    	'change .toggle-group-content-only': 'toggleOnlyMineClicked',
+    	'change .toggle-only-mine': 'toggleOnlyMineClicked',
+        'change .toggle-only-forum': 'toggleOnlyForumClicked',
+        'change .toggle-only-public': 'toggleOnlyPublicClicked',
     	'click .retry-load': 'retryLoadAfterErrors',
     	'click .show-all-comments': 'showAllCommentsForItem',
     	'click .comment-form :not(textarea)': 'delegateTextInputClick',
@@ -48,6 +54,8 @@ module.exports = BaseView.extend({
         
         self.uiPrefsView = uiPrefsView;
         self.options.onlyMine = self.uiPrefsView.getUiPref('timeline__only_mine');
+        self.options.onlyForum = self.uiPrefsView.getUiPref('timeline__only_forum');
+        self.options.onlyPublic = self.uiPrefsView.getUiPref('timeline__only_public');
         self.initializeParams();
         self.render();
     },
@@ -63,6 +71,9 @@ module.exports = BaseView.extend({
     	var self = this;
     	var urlParams = {
 			'only_mine': self.options.forceOnlyMine || self.options.onlyMine,
+            'only_forum': self.options.onlyForum,
+            'only_public': self.options.onlyPublic,
+            
     	};
     	if (self.state.offsetTimestamp) {
     		urlParams['offset_timestamp'] = self.state.offsetTimestamp;
@@ -251,15 +262,39 @@ module.exports = BaseView.extend({
     },
     
     toggleOnlyMineClicked: function (event) {
-    	var self = this;
-    	if (self.options.forceOnlyMine) {
-    	    return;
-    	}
-    	self.options.onlyMine = event.target.checked;
-    	// save ui pref
-    	self.uiPrefsView.saveUiPrefs({'timeline__only_mine': self.options.onlyMine});
-    	self.resetAndLoad();
+        var self = this;
+        if (self.options.forceOnlyMine) {
+            return;
+        }
+        self.options.onlyMine = event.target.checked;
+        // save ui pref
+        self.uiPrefsView.saveUiPrefs({'timeline__only_mine': self.options.onlyMine});
+        self.resetAndLoad();
     },
+    
+    toggleOnlyForumClicked: function (event) {
+        var self = this;
+        if (self.options.forceOnlyMine) {
+            return;
+        }
+        self.options.onlyForum = event.target.checked;
+        // save ui pref
+        self.uiPrefsView.saveUiPrefs({'timeline__only_forum': self.options.onlyForum});
+        self.resetAndLoad();
+    },
+    
+    toggleOnlyPublicClicked: function (event) {
+        var self = this;
+        if (self.options.forceOnlyMine) {
+            return;
+        }
+        self.options.onlyPublic = event.target.checked;
+        // save ui pref
+        self.uiPrefsView.saveUiPrefs({'timeline__only_public': self.options.onlyPublic});
+        self.resetAndLoad();
+    },
+    
+    
     
     removeEmptyDivs: function () {
     	var self = this;

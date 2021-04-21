@@ -299,6 +299,18 @@
     flex-direction: column;
     overflow-y: auto;
     
+    /**
+     * Taken out for now: this sets the open control-panel to a max-height so
+     * that the search results are always partially visible even if the control pane
+     * is higher than the window height.
+     * This causes there to be two verrically scrollable panels after another, so beware.
+    .controls.open {
+        max-height: 75%;
+        min-height: 50%;
+        overflow-y: auto;
+    }
+     */
+    
     .tile-contents {
         flex-grow: 1;
         overflow-y: scroll;
@@ -1166,6 +1178,9 @@
     .controls-description {
         text-align: left;
     }
+}
+.app-embed .map-mobile-controls {
+    display: none !important;
 }
 .map-pagination-controls {
     padding: 10px;

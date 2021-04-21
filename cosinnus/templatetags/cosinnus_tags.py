@@ -32,7 +32,7 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_user_can_create_conferences)
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
 from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
-    LikeObject
+    LikeObject, CosinnusTopicCategory
 from django.template.base import TemplateSyntaxError
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
@@ -477,7 +477,7 @@ def cosinnus_render_attached_objects(context, source, filter=None, skipImages=Tr
         Renderer = attached_object_registry.get(model_name)  # Renderer is a class
         if Renderer:
             # pass the list to that manager and expect a rendered html string
-            rendered_output.append(Renderer.render(context, objects, v2Style=v2Style))
+            rendered_output.append(Renderer.render(context, objects, v2Style=v2Style, request=context['request']))
         elif settings.DEBUG:
             rendered_output.append(_('<i>Renderer for %(model_name)s not found!</i>') % {
                 'model_name': model_name
@@ -1123,9 +1123,21 @@ def render_cosinnus_topics_json():
     return mark_safe(_json.dumps(topic_choices))
 
 @register.simple_tag()
+def render_cosinnus_text_topics_json():
+    """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
+    text_topic_choices = dict([(top.id, force_text(top.name)) for top in CosinnusTopicCategory.objects.all()])
+    return mark_safe(_json.dumps(text_topic_choices))
+
+@register.simple_tag()
 def render_managed_tags_json():
     """ Returns all managed tags as JSON array of objects"""
-    all_managed_tags = CosinnusManagedTag.objects.all_in_portal_cached()
+    all_managed_tags = CosinnusManagedTag.objects.all_in_portal()
+    if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_FROM_TYPE_IDS:
+        type_ids = settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_FROM_TYPE_IDS
+        all_managed_tags = all_managed_tags.filter(type__id__in=type_ids)
+    if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS:
+        tag_slugs = settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS
+        all_managed_tags = all_managed_tags.filter(slug__in=tag_slugs)
     managed_tags_json = [
         {
             'id': tag.id,
@@ -1272,7 +1284,11 @@ def parse_datetime(value):
 
 @register.filter
 def stringformat(value, args):
-    return dateutil.parser.parse(value)
+    try:
+        return dateutil.parser.parse(value)
+    except Exception as e:
+        logger.error(f'Exception in cosinnus_tags.py date `stringformat` filter: e', extra={'exception': e})
+        return None
 
 @register.filter
 def listformat(value):

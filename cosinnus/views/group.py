@@ -237,18 +237,22 @@ class CosinnusGroupFormMixin(object):
                     app_is_active = not self.object.deactivated_apps or app_name not in deactivated_apps
                     
                 app_not_activatable = (self.group_model_class.GROUP_MODEL_TYPE != CosinnusGroup.TYPE_SOCIETY and app_registry.is_activatable_for_groups_only(app_name))
+                group_label = app_registry.get_label(app_name)
+                if app_name in settings.COSINNUS_GROUP_APPS_WIDGET_SETTING_ONLY:
+                    group_label = f'{group_label} ({self.group_model_class.get_trans().DASHBOARD_LABEL})'
                 deactivated_app_selection.append({
                     'app_name': app_name,
                     'app': app,
-                    'label': pgettext_lazy('the_app', app),
+                    'label': group_label,
                     'checked': app_is_active,
                     'app_not_activatable': app_not_activatable,
                 })
-                if app_is_active and not app_not_activatable:
+                app_disabled_for_microsite = app_name in settings.COSINNUS_GROUP_APPS_WIDGETS_MICROSITE_DISABLED
+                if app_is_active and not app_not_activatable and not app_disabled_for_microsite:
                     microsite_public_apps_selection.append({
                         'app_name': app_name,
                         'app': app,
-                        'label': pgettext_lazy('the_app', app),
+                        'label': app_registry.get_label(app_name),
                         'checked': app_name in microsite_public_apps,
                     })
             

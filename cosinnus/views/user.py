@@ -176,6 +176,7 @@ class SetInitialPasswordView(TemplateView):
             form = self.form_class(user=user)
             return render(request, template_name=self.template_name, context={'form': form})
         elif request.user.is_authenticated:
+            messages.warning(request, _('You are already logged in. This function is only available to set up your account for the first time!'))
             raise PermissionDenied()
         else:
             raise Http404
@@ -366,6 +367,11 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
             notification_setting = request.POST.get('notification_setting', None)
             if notification_setting is not None and int(notification_setting) in (choice for choice, label in self.notification_choices):
                 self.notification_setting.setting = int(notification_setting)
+                # rocketchat: on a global "never", we always set the rocketchat setting to "off"
+                if settings.COSINNUS_ROCKET_ENABLED and self.notification_setting.setting == GlobalUserNotificationSetting.SETTING_NEVER:
+                    from cosinnus_message.utils.utils import save_rocketchat_mail_notification_preference_for_user_setting #noqa
+                    self.notification_setting.rocketchat_setting = GlobalUserNotificationSetting.ROCKETCHAT_SETTING_OFF
+                    save_rocketchat_mail_notification_preference_for_user_setting(self.request.user, self.notification_setting.rocketchat_setting)
                 self.notification_setting.save()
             # save visibility setting:
             visibility_setting = request.POST.get('visibility_setting', None)

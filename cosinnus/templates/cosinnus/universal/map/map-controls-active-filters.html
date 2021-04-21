@@ -1,6 +1,6 @@
 {% load i18n %}
 
-{% if typeFiltersActive or topicFiltersActive or q or sdgFiltersActive or managedTagsFiltersActive %}
+{% if typeFiltersActive or topicFiltersActive or textTopicFiltersActive or q or sdgFiltersActive or managedTagsFiltersActive %}
     <div class="map-controls-active-filter-frame">
 
         {% if typeFiltersActive %}
@@ -32,6 +32,26 @@
             </div>
         {% endif %}
         
+        {% if textTopicFiltersActive %}
+            <div class="active-filters active-filters-text-topics">
+                <span class="active-filters-inner">
+                    <span class="caps">
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Categories" %}:
+                    </span>
+                    {% for text_topic_id in activeTextTopicIds %}
+                        {% set outer_loop = loop %}
+                        {% for tid, text_topic in allTextTopics %}
+                            {% if text_topic and text_topic_id == tid %}
+                                <span>{{ text_topic }}{% if not outer_loop.last %}, {% endif %}</span>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </span>
+                <i class="fa fa-close clickable-button reset-text-topic-filters"></i>
+            </div>
+        {% endif %}
+
         {% if topicFiltersActive %}
             <div class="active-filters active-filters-topics">
                 <span class="active-filters-inner">
@@ -76,7 +96,7 @@
             <div class="active-filters active-filters-managed-tags">
                 <span class="active-filters-inner">
                     <span class="caps">
-                        {{ managedTagsLabels.MANAGED_TAG_NAME_PLURAL }}:
+                        {{ managedTagsLabels.MANAGED_TAG_MAP_LABEL }}:
                     </span>
                     {% for managed_tag_id in activeManagedTagsIds %}
                         {% set outer_loop = loop %}

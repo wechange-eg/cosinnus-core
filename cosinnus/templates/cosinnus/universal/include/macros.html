@@ -147,7 +147,7 @@
                 {% trans "Groups" %}{% if colon == 1 %}:{% endif %}
             {% elif type == "conferences" %}
                 {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
-                {{ COSINNUS_TRANS.COSINNUS_TRANS_CONFERENCE }}{% if colon == 1 %}:{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_CONFERENCES }}{% if colon == 1 %}:{% endif %}
             {% elif type == "ideas" %}
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -225,7 +225,7 @@
 	    				{% endif %}
     				</div>
 	    			{% if subtext['is_date'] %}
-	    				<div class="moment-data-date" data-date="{{ subtext.date }}" data-date-style="short"></div>
+	    				<div class="moment-data-date" data-date="{{ subtext.date }}"></div>
 	    			{% else %}
 	    				<div>
 		    				{% if makeSafe %}

@@ -26,6 +26,7 @@ class CosinnusProjectTransBase(object):
     
     MENU_LABEL = _('Project Menu')
     DASHBOARD_LABEL = _('Project Dashboard')
+    DASHBOARD_LABEL_ON = _('in the Project Dashboard')
     BROWSE_ALL = _('Browse all Projects')
     CREATE = _('Create Project')
     CREATE_NEW = _('Create new Project')
@@ -40,6 +41,8 @@ class CosinnusProjectTransBase(object):
     REACTIVATE_EXPLANATION_2 = _('This process is reversible. You can reactivate the project from your user profile page at any time.')
     CONVERT_ITEMS_TO = _('Convert selected items to Projects')
     CONTACT_PERSON = _('Project administrator')
+    CONTACT_ROOM_TOPIC = _('Request about your project "%(group_name)s"')
+    CONTACT_ROOM_GREETING_MESSAGE = _('You are now in a private channel with the admins of this project.')
     
     FORMFIELD_NAME = _('Project name')
     FORMFIELD_NAME_PLACEHOLDER = _('Enter a name for the project.')
@@ -47,6 +50,7 @@ class CosinnusProjectTransBase(object):
     FORMFIELD_LOCATION_LABEL = _('Where is the project active?')
     FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Project members only')
     FORMFIELD_MEMBERSHIP_MODE_TYPE_0_LEGEND = _("Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators.")
+    FORMFIELD_ATTACH_OBJECTS_HINT = _('Type the names of files, events or pads from this project to attach...')
     
     CALL_TO_JOIN = _('Collaborate!')
     CALL_TO_REGISTER_AND_JOIN = _('Join now and collaborate!')
@@ -75,6 +79,7 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     
     MENU_LABEL = _('Group Menu')
     DASHBOARD_LABEL = _('Group Dashboard')
+    DASHBOARD_LABEL_ON = _('in the Group Dashboard')
     BROWSE_ALL = _('Browse all Groups')
     CREATE = _('Create Group')
     CREATE_NEW = _('Create new Group')
@@ -89,6 +94,8 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     REACTIVATE_EXPLANATION_2 = _('This process is reversible. You can reactivate the group from your user profile page at any time.')
     CONVERT_ITEMS_TO = _('Convert selected items to Groups')
     CONTACT_PERSON = _('Group administrator')
+    CONTACT_ROOM_TOPIC = _('Request about your group "%(group_name)s"')
+    CONTACT_ROOM_GREETING_MESSAGE = _('You are now in a private channel with the admins of this group.')
     
     FORMFIELD_NAME = _('Group name')
     FORMFIELD_NAME_PLACEHOLDER = _('Enter a name for the group.')
@@ -96,6 +103,7 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     FORMFIELD_LOCATION_LABEL = _('Where is the group active?')
     FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Group members only')
     FORMFIELD_MEMBERSHIP_MODE_TYPE_0_LEGEND = _("Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators.")
+    FORMFIELD_ATTACH_OBJECTS_HINT = _('Type the names of files, events or pads from this group to attach...')
     
     CALL_TO_JOIN = _('Collaborate!')
     CALL_TO_REGISTER_AND_JOIN = _('Join now and collaborate!')
@@ -124,6 +132,7 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     
     MENU_LABEL = _('Conference Menu')
     DASHBOARD_LABEL = VERBOSE_NAME
+    DASHBOARD_LABEL_ON = VERBOSE_NAME
     BROWSE_ALL = _('Browse all Conferences')
     CREATE = _('Create Conference')
     CREATE_NEW = _('Create new Conference')
@@ -138,6 +147,8 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     REACTIVATE_EXPLANATION_2 = _('This process is reversible. You can reactivate the conference from your user profile page at any time.')
     CONVERT_ITEMS_TO = _('Convert selected items to Conferences')
     CONTACT_PERSON = _('Conference contact person')
+    CONTACT_ROOM_TOPIC = _('Request about your conference "%(group_name)s"')
+    CONTACT_ROOM_GREETING_MESSAGE = _('You are now in a private channel with the organizers of this conference.')
     
     FORMFIELD_NAME = _('Conference name')
     FORMFIELD_NAME_PLACEHOLDER = _('Enter a name for the conference.')
@@ -145,6 +156,7 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     FORMFIELD_LOCATION_LABEL = _('Where is the conference active?')
     FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Conference members only')
     FORMFIELD_MEMBERSHIP_MODE_TYPE_0_LEGEND = _("Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers.")
+    FORMFIELD_ATTACH_OBJECTS_HINT = _('Type the names of files, events or pads from this conference to attach...')
     
     CALL_TO_JOIN = _('Participate!')
     CALL_TO_REGISTER_AND_JOIN = _('Join now and participate!')

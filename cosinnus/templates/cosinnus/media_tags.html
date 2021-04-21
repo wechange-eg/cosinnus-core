@@ -56,7 +56,6 @@
     </div>
 {% endif %}
 
-
 {% if form.forms.obj.attached_objects and not disable_files %}
     <div class="media_tag_initial_hidden" {% if not show_files == True and not show_all == True and not form.forms.obj.attached_objects.errors %}style="display: none;"{% endif %}>
         {% if not files_label %}{% trans "Upload a file or image or attach an existing one" as files_label %}{% endif %}
@@ -66,7 +65,6 @@
         {% include 'cosinnus/fields/media_tag_field.html' with field_html=files_html label=files_label legend=files_legend icon="fa-paperclip" %}
     </div>
 {% endif %}
-
 
 {% if not disable_topics %}
     <div class="media_tag_initial_hidden" {% if not show_topics == True and not show_all == True and not form.forms.media_tag.topics.errors %}style="display: none;"{% endif %}>

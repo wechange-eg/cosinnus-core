@@ -3,13 +3,17 @@ from __future__ import unicode_literals
 
 from copy import copy
 import datetime
+import json
 import re
+import pytz
 
 from django.urls import reverse
 from django.db.models import Q
 from django.template.defaultfilters import linebreaksbr
 from django.utils.html import escape
+from django.utils import timezone
 from django.utils.timezone import now
+from django.template.loader import render_to_string
 from haystack.query import SearchQuerySet
 
 from cosinnus.conf import settings
@@ -24,7 +28,7 @@ from cosinnus.utils.group import message_group_admins_url
 from cosinnus.utils.permissions import check_ug_membership, check_ug_pending, \
     check_ug_invited_pending, check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.external.models import ExternalProject, ExternalSociety
+from cosinnus_exchange.models import ExchangeProject, ExchangeSociety, ExchangeOrganization, ExchangeEvent
 
 
 def _prepend_url(user, portal=None):
@@ -168,17 +172,18 @@ class BaseMapResult(DictResult):
         'backgroundImageSmallUrl': None,
         'backgroundImageLargeUrl': None,
         'description': None,
-        'topics' : [], 
+        'topics' : [],
+        'text_topics': [],
         'portal': None,
         'group_slug': None,
         'group_name': None,
-        'participant_count': -1, # attendees for events, projects for groups
-        'member_count': -1, # member count for projects/groups, group-member count for events, memberships for users
-        'content_count': -1, # groups/projects: number of upcoming events
-        'type': 'BaseResult', # should be different for every class
-        'liked': False, # has the current user liked this?
+        'participant_count': -1,  # attendees for events, projects for groups
+        'member_count': -1,  # member count for projects/groups, group-member count for events, memberships for users
+        'content_count': -1,  # groups/projects: number of upcoming events
+        'type': 'BaseResult',  # should be different for every class
+        'liked': False,  # has the current user liked this?
+        'source': None,  # source platform if external content
     }
-    
 
 
 class HaystackMapResult(BaseMapResult):
@@ -225,6 +230,7 @@ class HaystackMapResult(BaseMapResult):
             'description': textfield(result.description),
             'relevance': result.score,
             'topics': result.mt_topics,
+            'text_topics': result.mt_text_topics,
             'portal': portal,
             'group_slug': result.group_slug,
             'group_name': result.group_name,
@@ -232,6 +238,7 @@ class HaystackMapResult(BaseMapResult):
             'member_count': result.member_count,
             'content_count': result.content_count,
             'liked': user.id in result.liked_user_ids if (user and getattr(result, 'liked_user_ids', [])) else False,
+            'source': result.source,
         }
         if settings.COSINNUS_ENABLE_SDGS:
             fields.update({
@@ -241,7 +248,8 @@ class HaystackMapResult(BaseMapResult):
             fields.update({
                 'managed_tags': result.managed_tags,
             })
-        
+        if 'request' in kwargs:
+            kwargs.pop('request')
         fields.update(**kwargs)
         
         return super(HaystackMapResult, self).__init__(*args, **fields)
@@ -418,6 +426,7 @@ class DetailedUserMapResult(DetailedMapResult):
     fields.update({
         'projects': [],
         'groups': [],
+        'extra_html': ''
     })
 
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -445,6 +454,7 @@ class DetailedUserMapResult(DetailedMapResult):
         kwargs.update({
             'projects': [],
             'groups': [],
+            'extra_html': obj.get_dynamic_fields_rendered(),
         })
         for result in sqs:
             if SEARCH_MODEL_NAMES[result.model] == 'projects':
@@ -453,8 +463,7 @@ class DetailedUserMapResult(DetailedMapResult):
                 kwargs['conferences'].append(HaystackConferenceMapCard(result))
             else:
                 kwargs['groups'].append(HaystackGroupMapCard(result))
-                
-                
+
         if getattr(settings, 'COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD', False):
             kwargs.update({
                 'may_be_contacted': obj.may_be_contacted,
@@ -801,13 +810,14 @@ SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS = [
     'conferences',
 ]
 
-if settings.COSINNUS_EXTERNAL_CONTENT_ENABLED:
-    EXTERNAL_SEARCH_MODEL_NAMES = {
-        ExternalProject: 'projects',
-        ExternalSociety: 'groups'
-    }
-    SEARCH_MODEL_NAMES.update(EXTERNAL_SEARCH_MODEL_NAMES)
-    EXTERNAL_SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(EXTERNAL_SEARCH_MODEL_NAMES.items())])
+EXCHANGE_SEARCH_MODEL_NAMES = {
+    ExchangeProject: 'projects',
+    ExchangeSociety: 'groups',
+    ExchangeOrganization: 'organizations',
+    ExchangeEvent: 'events'
+}
+SEARCH_MODEL_NAMES.update(EXCHANGE_SEARCH_MODEL_NAMES)
+EXCHANGE_SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(EXCHANGE_SEARCH_MODEL_NAMES.items())])
 
 
 
@@ -821,6 +831,7 @@ def itemid_from_searchresult(result):
         slug = '%s*%s' % (result.group_slug, slug)
     return '%d.%s.%s' % (result.portal or 0, model_name, slug)
 
+
 def filter_event_searchqueryset_by_upcoming(sqs):
     # upcoming events
     _now = now()
@@ -828,4 +839,38 @@ def filter_event_searchqueryset_by_upcoming(sqs):
     sqs = sqs.exclude(Q(to_date__lt=event_horizon) | (Q(_missing_='to_date') & Q(from_date__lt=event_horizon)))
     # only actual events, no doodles
     sqs = sqs.filter_and(Q(_missing_='event_state') | Q(event_state=1))
+    return sqs
+
+def build_date_time(date_string, time_string):
+
+    if date_string:
+        time_zone = timezone.get_current_timezone_name()
+        time_zone = pytz.timezone(time_zone)
+
+        format_string = "%Y-%m-%d"
+        if date_string and time_string:
+            format_string = "%Y-%m-%d %H:%M"
+
+        date_time_string = date_string
+        if time_string:
+            date_time_string = '{} {}'.format(date_string, time_string)
+
+        try:
+            date_time = datetime.datetime.strptime(date_time_string, format_string)
+        except ValueError:
+            date_time = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+
+        date_time = time_zone.localize(date_time)
+        return date_time
+
+def filter_event_or_conference_starts_after(date_string, time_string, sqs):
+    date_time = build_date_time(date_string, time_string)
+    if date_time:
+        return sqs.filter(from_date__gt=date_time)
+    return sqs
+
+def filter_event_or_conference_starts_before(date_string, time_string, sqs):
+    date_time = build_date_time(date_string, time_string)
+    if date_time:
+        return sqs.filter(from_date__lt=date_time)
     return sqs

@@ -123,7 +123,6 @@ class OrganizationManager(models.Manager):
             cache.set(self._ORGANIZATIONS_PK_TO_SLUG_CACHE_KEY % (portal_id), pks,
                 settings.COSINNUS_ORGANIZATION_CACHE_TIMEOUT)
         return pks
-
     
     def all_in_portal(self):
         """ Returns all groups within the current portal only """
@@ -132,7 +131,7 @@ class OrganizationManager(models.Manager):
     def public(self):
         """ Returns active, public Organizations """
         qs = self.active()
-        return qs.filter(public=True)
+        return qs.filter(media_tag__public=True)
     
     def active(self):
         """ Returns active Organizations """
@@ -377,7 +376,17 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
 
     def get_image_field_for_background(self):
         return self.wallpaper
-    
+
+    @property
+    def avatar_url(self):
+        return self.avatar.url if self.avatar else None
+
+    def get_avatar_thumbnail(self, size=(80, 80)):
+        return image_thumbnail(self.avatar, size)
+
+    def get_avatar_thumbnail_url(self, size=(80, 80)):
+        return image_thumbnail_url(self.avatar, size) or get_image_url_for_icon(self.get_icon(), large=True)
+
     def is_foreign_portal(self):
         return CosinnusPortal.get_current().id != self.portal_id
     
@@ -388,8 +397,8 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
         return getattr(self, key)
     
     def get_absolute_url(self):
-        item_id = '%d.organizations.%s' % (self.portal_id, self.slug)
-        return get_domain_for_portal(self.portal) + reverse('cosinnus:map') + '?item=' + item_id
+        return get_domain_for_portal(self.portal) + reverse('cosinnus:organization-detail',
+                                                            kwargs={'organization': self.slug})
     
     def get_edit_url(self):
         return reverse('cosinnus:organization-edit', kwargs={'organization': self.slug})

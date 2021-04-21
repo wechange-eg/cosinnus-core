@@ -1,0 +1,25 @@
+{% load static cosinnus_tags %}
+
+{% with organization=object %}
+	<div class="app-main">
+	    <a class="btn btn-emphasized w100" href="{{ organization.url }}" target="_blank">
+	        <ul class="media-list large-space">
+	            <li class="media">
+                    <span class="pull-left">
+						<img src="{% if organization.icon_image_url %}{{ organization.icon_image_url }}{% else %}{% static 'images/fa-icons/large/fa-building.png' %}{% endif %}" title="{{ organization.title }}" />
+                    </span>
+	                <div class="media-body">
+						<span class="annotation">
+							{% trans "from" %}: {{ organization.source }}
+                        </span>
+						<span>
+							<i class="fa fa-building"></i>
+							{{ organization.title }}
+							<i class="fa fa-external-link"></i>
+						</span>
+	                </div>
+	            </li>
+	        </ul>
+	    </a>
+	</div>
+{% endwith %}

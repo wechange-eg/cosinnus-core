@@ -115,6 +115,7 @@ setup(
         'urllib3==1.24.2',
         'pytz==2018.5',
         'PyJWT==1.7.1',
+        'rdflib==5.0.0',
         'python-memcached==1.59',
         'qrcode==6.1',
         'Unidecode==0.4.21',

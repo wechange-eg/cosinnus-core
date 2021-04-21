@@ -1318,7 +1318,8 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         """ Returns a list of cosinnus apps whose public objects should be shown on the microsite.
             If not set, used the default setting in COSINNUS_MICROSITE_DEFAULT_PUBLIC_APPS """
         if getattr(self, 'microsite_public_apps', None):
-            return self.microsite_public_apps.split(',')
+            return [app_name for app_name in self.microsite_public_apps.split(',') 
+                        if not app_name in settings.COSINNUS_GROUP_APPS_WIDGETS_MICROSITE_DISABLED]
         else:
             return settings.COSINNUS_MICROSITE_DEFAULT_PUBLIC_APPS
 
@@ -1405,6 +1406,15 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         if queryset.count() > 0:
             return queryset.aggregate(Max('to_date'))['to_date__max']
         return None
+    
+    def get_date_or_now_starting_time(self):
+        """ Returns a dict like {'is_date': True, 'date': <date>}
+            with is_date=False date as string "Now" if the event is running, 
+            else is_date=True and date as the moment-usable datetime of the from_date. """
+        _now = now()
+        if self.from_date and self.from_date < _now and self.to_date > _now:
+            return {'is_date': False, 'date': str(_("Now"))}
+        return {'is_date': True, 'date': django_date_filter(self.from_date, 'c')}
     
     @property
     def is_running(self):
