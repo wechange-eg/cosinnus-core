@@ -110,7 +110,7 @@
                 var cosinnus_report_object_url = "{% url 'cosinnus:report-object' %}";
             </script>
             <script src="{% static 'js/cosinnus.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
-            <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
+            <script src="{% localized_js 'cosinnus_formats.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
             <script src="{% static 'js/cosinnus.feedback.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
             
             {% include 'cosinnus/common/simplemde_dependencies.html' with lazy=True %}
