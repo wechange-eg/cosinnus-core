@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
 "PO-Revision-Date: 2021-03-22 14:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -251,6 +251,9 @@ msgstr "لم يعد هذا الفريق موجودًا ضمن الرابط ال�
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "هذا الحساب لم يعد نشطاً. لقد تم تسجيل الخروج."
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "لقد تم تسجيل خروجك تلقائيًا بعد أن بقيت غير نشط لبعض الوقت."
@@ -1475,6 +1478,12 @@ msgstr "طلب حول مشروعك \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "طلب حول مجموعتك \"%(group_name)s\""
 
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "Now"
+msgstr "الآن"
+
 msgid "Token"
 msgstr "رمز"
 
@@ -1568,6 +1577,10 @@ msgstr "أفكار Cosinnus"
 
 #, fuzzy
 msgid "Managed Tag"
+msgstr "نظام إدارة العلامات"
+
+#, fuzzy
+msgid "Managed Tags"
 msgstr "نظام إدارة العلامات"
 
 #, fuzzy
@@ -1669,6 +1682,14 @@ msgstr "في تقرير أسبوعي"
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
 msgstr "الإعدادات الفردية لكل مشروع/مجموعة ..."
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
+msgstr ""
 
 msgid "--- No country selected ---"
 msgstr "- لم يتم اختيار دولة -"
@@ -2544,9 +2565,6 @@ msgstr "أعضاء"
 msgid "Settings"
 msgstr "إعدادات"
 
-msgid "Attach existing Files..."
-msgstr "إرفاق الملفات الموجودة..."
-
 msgid "Drag and Drop files here..."
 msgstr "اسحب الملفات واسطها هنا..."
 
@@ -3030,21 +3048,6 @@ msgstr "إذا كنت تفضل استخدام طلبات العضوية البس
 msgid "Application period"
 msgstr "إسم التطبيق"
 
-msgid "From"
-msgstr "من"
-
-msgid "Date"
-msgstr "تاريخ"
-
-msgid "Start date."
-msgstr "تاريخ البدء."
-
-msgid "Until"
-msgstr "حتى"
-
-msgid "End date."
-msgstr "تاريخ الاتهاء."
-
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr "في حالة الضبط ، يمكن فقط تقديم الطلبات وتعديلها خلال هذا الإطار الزمني. يمكنك تغيير هذا في أي وقت لإغلاق أو إعادة تمكين التطبيقات."
 
@@ -3484,6 +3487,23 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "اختياري"
 
+msgid "Date"
+msgstr "تاريخ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr "من"
+
+msgid "Start date."
+msgstr "تاريخ البدء."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr "حتى"
+
+msgid "End date."
+msgstr "تاريخ الاتهاء."
+
 msgid "Call to Action Button"
 msgstr "زر الدعوة للعمل"
 
@@ -3792,10 +3812,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr "تصدير"
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr "تحرير “%(team_name)s”"
-
 msgid "Help about groups"
 msgstr "مساعدة حول المجموعات"
 
@@ -3915,7 +3931,9 @@ msgstr "حمّل صورة."
 msgid "Reset"
 msgstr "إعادة تعيين"
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
+#, fuzzy
+#| msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr "ستكون الملفات التي تم تحميلها متاحة للتنزيل وسيتم عرض الصور في معرض."
 
 msgid "Example: http://mywebsite.com"
@@ -4359,6 +4377,10 @@ msgstr "نقل"
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr "رسالة من %(sender_full_name)s"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "تحرير “%(team_name)s”"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
@@ -5428,6 +5450,18 @@ msgstr "مشاريع ومجموعات أخرى"
 msgid "Search for Users"
 msgstr "ابحث عن المستخدمين"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create content"
+msgid "External contents"
+msgstr "إنشاء محتوى"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Visibility on other platforms"
+msgid "Include contents from other platforms"
+msgstr "الظهور مرئيا على منصات أخرى"
+
 msgid "Ordering"
 msgstr "الطلب قائم"
 
@@ -5478,9 +5512,6 @@ msgstr "رسائل البريد الإلكتروني لجميع مشتركي ا�
 
 msgid "E-Mails of ALL active users"
 msgstr "رسائل البريد الإلكتروني لجميع المستخدمين النشطين"
-
-msgid "Time"
-msgstr "وقت"
 
 msgid "Ok"
 msgstr "حسناً"
@@ -5566,6 +5597,10 @@ msgstr "إنشاء مجموعة"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Organization"
 msgstr "انشاء منظمة"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5732,6 +5767,10 @@ msgid "No current notifications"
 msgstr "لا توجد إشعارات حالية"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr "الشبكة بالكامل"
 
@@ -5756,8 +5795,8 @@ msgid "SDG"
 msgstr "أهداف التنمية المستدامة SDG"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
-msgstr "خارجي"
+msgid "from"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You"
@@ -5857,6 +5896,11 @@ msgstr "خطأ!"
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "عذراً، ولكن لا يمكن استرجاع المحتوى المطلوب من الخادم."
 
+#, fuzzy
+#| msgid "Done"
+msgid "on"
+msgstr "منجز"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr "قم بزيارة صفحة المناسبة"
@@ -5932,6 +5976,11 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "لا يرغب في أن يتم الاتصال به من أجل التعاون المحتمل!"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "To Profile"
+msgstr "صفحتك الشخصية"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "انضم إلى المشروع"
 
@@ -5988,8 +6037,28 @@ msgid "Discover"
 msgstr "اكتشف"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
+#, fuzzy
+#| msgid "Apply Filters"
+msgid "Filter"
+msgstr "تطبيق أكثر من فيلر"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Note from the organizers"
+msgid "Content from the Forum"
+msgstr "ملاحظة من المنظمين"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Only content from my Groups and Projects"
+msgid "Content from my Groups and Projects"
 msgstr "محتوى من المجموعات والمشاريع الخاصة بي فقط"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Public Project"
+msgid "Public content"
+msgstr "مشروع عام"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6555,6 +6624,16 @@ msgstr "اليوميات (التايم لاين)"
 msgid "Contents"
 msgstr "محتويات"
 
+#, fuzzy
+#| msgid "My Groups and Projects"
+msgid "My upcoming Events"
+msgstr "مجموعاتي ومشاريعي"
+
+#, fuzzy
+#| msgid "You can change this setting later in your profile settings"
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr "يمكنك تغيير هذا الإعداد لاحقًا في إعدادات ملف التعريف الخاص بك"
+
 msgid "Close to me"
 msgstr "قريب مني"
 
@@ -6750,6 +6829,11 @@ msgstr "قائمة المشروع"
 msgid "Project Dashboard"
 msgstr "لوحة تحكم المشروع"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "in the Project Dashboard"
+msgstr "لوحة تحكم المشروع"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "نظّم مشاريعك أو مبادراتك بكفاءة مع زملائك من النشطاء. جميع الأدوات المهمة للتعاون في مكان واحد: الأخبار والإلواح والأحداث و Todos والمزيد."
 
@@ -6797,6 +6881,9 @@ msgstr "تحويل المجموعات المحددة إلى مشاريع"
 msgid "Project administrator"
 msgstr "إدارة المشروع"
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr ""
+
 msgid "Project name"
 msgstr "إسم المشروع"
 
@@ -6814,6 +6901,9 @@ msgid "Project members only"
 msgstr "أعضاء الفريق فقط"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
 msgid "Collaborate!"
@@ -6854,6 +6944,11 @@ msgid "Group Menu"
 msgstr "قائمة المجموعة"
 
 msgid "Group Dashboard"
+msgstr "لوحة تحكم المجموعة"
+
+#, fuzzy
+#| msgid "Group Dashboard"
+msgid "in the Group Dashboard"
 msgstr "لوحة تحكم المجموعة"
 
 msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
@@ -6903,6 +6998,9 @@ msgstr "تحويل المشاريع المحددة إلى مجموعات"
 msgid "Group administrator"
 msgstr "إدارة المجموعة"
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr ""
+
 msgid "Group name"
 msgstr "إسم المجموعة"
 
@@ -6920,6 +7018,9 @@ msgid "Group members only"
 msgstr "أعضاء الفريق فقط"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 #, fuzzy
@@ -7018,6 +7119,14 @@ msgstr "تحويل المجموعات المحددة إلى مشاريع"
 msgid "Conference contact person"
 msgstr "إدارة المؤتمرات"
 
+#, fuzzy, python-format
+#| msgid "Request about your project \"%(group_name)s\""
+msgid "Request about your conference \"%(group_name)s\""
+msgstr "طلب حول مشروعك \"%(group_name)s\""
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr ""
+
 msgid "Conference name"
 msgstr "اسم المؤتمر"
 
@@ -7034,6 +7143,9 @@ msgid "Conference members only"
 msgstr "إدارة المؤتمرات"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
 
 msgid "Participate!"
@@ -7442,6 +7554,9 @@ msgstr "عذرًا، لم نتمكن من ربط حساب المستخدم ال�
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "عذراً، لا يمكنك تسجيل الدخول لأنه تم تعليق حسابك. الرجاء الاتصال بمسؤول النظام!"
 
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr ""
+
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr "تم تعيين كلمة المرور الخاصة بك بنجاح! يمكنك الآن تسجيل الدخول باستخدام عنوان بريدك الإلكتروني وكلمة المرور التي قمت بتعيينها للتو."
 
@@ -7581,6 +7696,15 @@ msgstr "أنت لست عضوًا حاليًا في %s! إذا كنت ترغب ف
 msgid "Your changes have been saved."
 msgstr "تم حفظ التغييرات."
 
+#~ msgid "Attach existing Files..."
+#~ msgstr "إرفاق الملفات الموجودة..."
+
+#~ msgid "Time"
+#~ msgstr "وقت"
+
+#~ msgid "External"
+#~ msgstr "خارجي"
+
 #, fuzzy
 #~| msgid "Header image"
 #~ msgid "Banner Image"
@@ -7628,9 +7752,6 @@ msgstr "تم حفظ التغييرات."
 
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "المشاريع والمجموعات المعطلة"
-
-#~ msgid "Public Project"
-#~ msgstr "مشروع عام"
 
 #~ msgid "Public Group"
 #~ msgstr "مجموعة عامة"

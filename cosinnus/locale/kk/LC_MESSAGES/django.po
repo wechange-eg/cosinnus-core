@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -231,6 +231,9 @@ msgstr "Бұл команда енді сіз енгізген URL мекен-ж
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Бұл есептік жазба енді белсенді емес. Сіз жүйеден шықтыңыз."
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr ""
@@ -1407,6 +1410,12 @@ msgstr "Сіздің „%(group_name)s“ жобаңыз туралы сұрат
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Сіздің тобыңыз „%(group_name)s“ туралы сұрату"
 
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "Now"
+msgstr "Енді"
+
 msgid "Token"
 msgstr "Белгі"
 
@@ -1501,6 +1510,10 @@ msgid "Managed Tag"
 msgstr ""
 
 #, fuzzy
+msgid "Managed Tags"
+msgstr "Идея құрыңыз"
+
+#, fuzzy
 msgid "Managed Tag Type"
 msgstr "Идея құрыңыз"
 
@@ -1592,6 +1605,14 @@ msgstr "Апталық есепте"
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
 msgstr "Әр жоба / топ үшін жеке параметрлер."
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
+msgstr ""
 
 msgid "--- No country selected ---"
 msgstr ""
@@ -2448,9 +2469,6 @@ msgstr "Мүшелері"
 msgid "Settings"
 msgstr "Параметрлер"
 
-msgid "Attach existing Files..."
-msgstr "Бар файлдарды бекітіңіз."
-
 msgid "Drag and Drop files here..."
 msgstr "Файлдарды осы жерге салыңыз."
 
@@ -2906,21 +2924,6 @@ msgstr ""
 msgid "Application period"
 msgstr "Өтінімнің атауы"
 
-msgid "From"
-msgstr "Бастап"
-
-msgid "Date"
-msgstr "Күні"
-
-msgid "Start date."
-msgstr "Басталу күні."
-
-msgid "Until"
-msgstr "Дейін"
-
-msgid "End date."
-msgstr "Мерзімнің аяқталуы."
-
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr ""
 
@@ -3372,6 +3375,23 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "міндетті емес"
 
+msgid "Date"
+msgstr "Күні"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr "Бастап"
+
+msgid "Start date."
+msgstr "Басталу күні."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr "Дейін"
+
+msgid "End date."
+msgstr "Мерзімнің аяқталуы."
+
 msgid "Call to Action Button"
 msgstr "Іс-әрекетке шақыру түймесі"
 
@@ -3674,10 +3694,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr "Экспорт"
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr "“%(team_name)s” түзетіңіз"
-
 msgid "Help about groups"
 msgstr "Топтармен жұмыс жасауға көмектесу"
 
@@ -3791,7 +3807,7 @@ msgstr "Суретті жүктеу."
 msgid "Reset"
 msgstr "Қалпына келтіру"
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr ""
 
 msgid "Example: http://mywebsite.com"
@@ -4247,6 +4263,10 @@ msgstr "Жылжу"
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr "%(sender_full_name)s хабарламасы"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "“%(team_name)s” түзетіңіз"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
@@ -5324,6 +5344,16 @@ msgstr "Басқа Жобалар мен Топтар"
 msgid "Search for Users"
 msgstr "Пайдаланушыларды іздеу"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create content"
+msgid "External contents"
+msgstr "Контент жасау"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Include contents from other platforms"
+msgstr ""
+
 msgid "Ordering"
 msgstr "Тапсырыс беру"
 
@@ -5375,9 +5405,6 @@ msgstr ""
 
 msgid "E-Mails of ALL active users"
 msgstr ""
-
-msgid "Time"
-msgstr "Уақыт"
 
 msgid "Ok"
 msgstr "ОК"
@@ -5471,6 +5498,10 @@ msgstr "Топ құру"
 #, fuzzy
 msgid "Create Organization"
 msgstr "Шақыруды жою"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5641,6 +5672,10 @@ msgid "No current notifications"
 msgstr "Хабарламалар жоқ"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr "Барлық жүйе"
 
@@ -5667,7 +5702,7 @@ msgid "SDG"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
+msgid "from"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5774,6 +5809,11 @@ msgstr "Қате!"
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Кешіріңіз, бірақ сұралған мазмұн серверден алына алмайды."
 
+#, fuzzy
+#| msgid "Done"
+msgid "on"
+msgstr "Дайын"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr "Шаралар парақшасы"
@@ -5851,6 +5891,12 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "Ықтимал ынтымақтастық үшін хабарласқым келмейді!"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Your Profile"
+msgid "To Profile"
+msgstr "Сіздің профиліңіз"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Жобаға қосылу"
 
@@ -5909,8 +5955,28 @@ msgid "Discover"
 msgstr "Шолу жасау"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
+#, fuzzy
+#| msgid "Apply Filters"
+msgid "Filter"
+msgstr "Фильтірлерді Қолдану"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Content (left column)"
+msgid "Content from the Forum"
+msgstr "Мазмұны (сол жақ баған)"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Only content from my Groups and Projects"
+msgid "Content from my Groups and Projects"
 msgstr "Тек менің Топтарым мен Жобаларымның мазмұны"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Public Project"
+msgid "Public content"
+msgstr "Қоғамдық жоба"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6474,6 +6540,16 @@ msgstr "Таймлайн"
 msgid "Contents"
 msgstr "Мазмұны"
 
+#, fuzzy
+#| msgid "My Groups and Projects"
+msgid "My upcoming Events"
+msgstr "Менің Жобаларым мен Топтарым"
+
+#, fuzzy
+#| msgid "You can change this setting later in your profile settings"
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr "Бұл параметрді кейінірек профиль параметрлерінде өзгертуге болады"
+
 msgid "Close to me"
 msgstr "Маған жақын"
 
@@ -6670,6 +6746,10 @@ msgstr "Жобаның түрі"
 msgid "Project Dashboard"
 msgstr "Прибор панелі"
 
+#, fuzzy
+msgid "in the Project Dashboard"
+msgstr "Прибор панелі"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Әріптестеріңізбен бірге өз жобаларыңызды немесе бастамаларыңызды тиімді ұйымдастырыңыз. Бір жерде жұмыс істеуге арналған барлық маңызды құралдар: Жаңалықтар, Pads, Шаралар, Todos және басқалар."
 
@@ -6717,6 +6797,9 @@ msgstr "Таңдалған Топтарды Жобаларға өзгерту"
 msgid "Project administrator"
 msgstr "Жоба Әкімшісі"
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr ""
+
 msgid "Project name"
 msgstr "Жобаның атауы"
 
@@ -6734,6 +6817,9 @@ msgid "Project members only"
 msgstr "Тек команда мүшелері үшін"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
 msgid "Collaborate!"
@@ -6776,6 +6862,10 @@ msgstr "Топ атауы"
 
 #, fuzzy
 msgid "Group Dashboard"
+msgstr "Прибор панелі"
+
+#, fuzzy
+msgid "in the Group Dashboard"
 msgstr "Прибор панелі"
 
 msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
@@ -6825,6 +6915,9 @@ msgstr "Белгіленген Жобаларды Топтарға өзгерт�
 msgid "Group administrator"
 msgstr "Топ Әкімшісі"
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr ""
+
 msgid "Group name"
 msgstr "Топ атауы"
 
@@ -6842,6 +6935,9 @@ msgid "Group members only"
 msgstr "Тек команда мүшелері үшін"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 #, fuzzy
@@ -6943,6 +7039,14 @@ msgstr "Таңдалған Топтарды Жобаларға өзгерту"
 msgid "Conference contact person"
 msgstr "Бейне конференциялар сервері"
 
+#, fuzzy, python-format
+#| msgid "Request about your project \"%(group_name)s\""
+msgid "Request about your conference \"%(group_name)s\""
+msgstr "Сіздің „%(group_name)s“ жобаңыз туралы сұрату."
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr ""
+
 #, fuzzy
 msgid "Conference name"
 msgstr "Бейне конференциялар сервері"
@@ -6967,6 +7071,9 @@ msgid "Conference members only"
 msgstr "Бейне конференциялар сервері"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
 
 #, fuzzy
@@ -7390,6 +7497,9 @@ msgstr "Кешіріңіз, біз сіздің есептік жазбаңыз�
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Кешіріңіз, есептік жазбаңыз уақытша тоқтатылғандықтан кіре алмайсыз. Жүйе әкімшісіне хабарласыңыз!"
 
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr ""
+
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr ""
 
@@ -7532,6 +7642,12 @@ msgstr "Сіз қазір %s мүшесі емессіз! Егер қаласа�
 msgid "Your changes have been saved."
 msgstr "Сіздің өзгертулеріңіз сақталды."
 
+#~ msgid "Attach existing Files..."
+#~ msgstr "Бар файлдарды бекітіңіз."
+
+#~ msgid "Time"
+#~ msgstr "Уақыт"
+
 #, fuzzy
 #~| msgid "Header image"
 #~ msgid "Banner Image"
@@ -7566,9 +7682,6 @@ msgstr "Сіздің өзгертулеріңіз сақталды."
 
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Өшірілген жобалар мен топтар"
-
-#~ msgid "Public Project"
-#~ msgstr "Қоғамдық жоба"
 
 #~ msgid "Public Group"
 #~ msgstr "Қоғамдық топ"

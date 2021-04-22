@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 13:05+0200\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
 "PO-Revision-Date: 2021-04-21 15:50+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -239,6 +239,9 @@ msgstr "Die Gruppe oder das Projekt liegt nicht länger unter der URL die du ein
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Sie wurden ausgeloggt, weil dieses Benutzerkonto nicht mehr aktiv ist."
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Du wurdest automatisch abgemeldet, nachdem du für einige Zeit inaktiv warst."
@@ -1344,6 +1347,12 @@ msgstr "Frage zu deinem Projekt \"%(group_name)s\""
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Frage zu deiner Gruppe \"%(group_name)s\""
+
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "Now"
+msgstr "Beantragen"
 
 msgid "Token"
 msgstr "Token"
@@ -7043,6 +7052,9 @@ msgstr "Entschuldige, wir konnten dein Benutzerkonto nicht einloggen, weil wir B
 
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Entschuldige, du kannst dich nicht einloggen, weil dein Benutzerkonto gesperrt wurde. Bitte kontaktiere einen Administrator!"
+
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr ""
 
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr "Dein Passwort wurde erfolgreich gesetzt! Du kannst dich nun mit deiner E-Mail-Adresse und dem soeben gesetzten Passwort anmelden."

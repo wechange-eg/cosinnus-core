@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -232,6 +232,9 @@ msgstr "El grupo ya no esta bajo la URL que insertaste. Has sido guiado automati
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Esta cuenta ya no esta activa. Tu sesión ha sido cerada."
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr ""
@@ -1414,6 +1417,12 @@ msgstr "Solicitud sobre tu proyecto \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Solicitud sobre tu grupo \"%(group_name)s\""
 
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "Now"
+msgstr "Ahora"
+
 msgid "Token"
 msgstr "Token"
 
@@ -1508,6 +1517,10 @@ msgid "Managed Tag"
 msgstr ""
 
 #, fuzzy
+msgid "Managed Tags"
+msgstr "Crear idea"
+
+#, fuzzy
 msgid "Managed Tag Type"
 msgstr "Crear idea"
 
@@ -1599,6 +1612,14 @@ msgstr "En un reporte semanal"
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
 msgstr "Configuraciónes individuales para cada proyecto/grupo..."
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
+msgstr ""
 
 msgid "--- No country selected ---"
 msgstr ""
@@ -2466,9 +2487,6 @@ msgstr "Miembros"
 msgid "Settings"
 msgstr "Ajustes"
 
-msgid "Attach existing Files..."
-msgstr "Adjuntar archivos existentes..."
-
 msgid "Drag and Drop files here..."
 msgstr "Arrastra y suelta archivos aquí..."
 
@@ -2929,21 +2947,6 @@ msgstr ""
 msgid "Application period"
 msgstr "Nombre de applicación"
 
-msgid "From"
-msgstr "De"
-
-msgid "Date"
-msgstr "Fecha"
-
-msgid "Start date."
-msgstr "Fecha de comienzo."
-
-msgid "Until"
-msgstr "Hasta"
-
-msgid "End date."
-msgstr "Fecha del fin."
-
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr ""
 
@@ -3393,6 +3396,23 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "optional"
 
+msgid "Date"
+msgstr "Fecha"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr "De"
+
+msgid "Start date."
+msgstr "Fecha de comienzo."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr "Hasta"
+
+msgid "End date."
+msgstr "Fecha del fin."
+
 msgid "Call to Action Button"
 msgstr "Botón de llamada a la acción"
 
@@ -3697,10 +3717,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr "Exportar"
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr "Editar “%(team_name)s”"
-
 msgid "Help about groups"
 msgstr "Ayuda de grupos"
 
@@ -3813,7 +3829,7 @@ msgstr "Sube una imagen."
 msgid "Reset"
 msgstr "Reiniciar"
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr ""
 
 msgid "Example: http://mywebsite.com"
@@ -4268,6 +4284,10 @@ msgstr "Trasladar"
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr "Un mensaje de %(sender_full_name)s"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "Editar “%(team_name)s”"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
@@ -5347,6 +5367,15 @@ msgstr "Otros proyectos y grupos"
 msgid "Search for Users"
 msgstr "Buscar usarios"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "External contents"
+msgstr "Crear cuenta"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Include contents from other platforms"
+msgstr ""
+
 msgid "Ordering"
 msgstr "Ordenar"
 
@@ -5398,9 +5427,6 @@ msgstr ""
 
 msgid "E-Mails of ALL active users"
 msgstr ""
-
-msgid "Time"
-msgstr "Hora"
 
 msgid "Ok"
 msgstr "Ok"
@@ -5494,6 +5520,10 @@ msgstr "Crear grupo"
 #, fuzzy
 msgid "Create Organization"
 msgstr "Eliminar invitación"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5680,6 +5710,10 @@ msgid "No current notifications"
 msgstr "Notificación ID"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr ""
 
@@ -5708,7 +5742,7 @@ msgid "SDG"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
+msgid "from"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5815,6 +5849,11 @@ msgstr "¡Error!"
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Lo sentimos, pero el contenido solicitado no se pudo recuperar del servidor."
 
+#, fuzzy
+#| msgid "Done"
+msgid "on"
+msgstr "Terminado"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr "Visitar página de eventos"
@@ -5892,6 +5931,12 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Your Profile"
+msgid "To Profile"
+msgstr "Tu perfil"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Participar en el proyecto"
 
@@ -5952,8 +5997,27 @@ msgid "Discover"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
-msgstr ""
+#, fuzzy
+#| msgid "Apply Filters"
+msgid "Filter"
+msgstr "Aplicar Filtros"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Content (left column)"
+msgid "Content from the Forum"
+msgstr "Contenido (columna izquierda)"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Content from my Groups and Projects"
+msgstr "Convertir grupos elegidos en proyectos"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Public Project"
+msgid "Public content"
+msgstr "Proyecto público"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6530,6 +6594,15 @@ msgid "Contents"
 msgstr "Contenido"
 
 #, fuzzy
+msgid "My upcoming Events"
+msgstr "Mis proyectos"
+
+#, fuzzy
+#| msgid "You can change this setting later in your profile settings"
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr "Puedes cambiar esta configuración más adelante en la configuración de tu perfil"
+
+#, fuzzy
 msgid "Close to me"
 msgstr "Cerrar"
 
@@ -6735,6 +6808,10 @@ msgstr "Tipo del proyecto"
 msgid "Project Dashboard"
 msgstr "Tablero"
 
+#, fuzzy
+msgid "in the Project Dashboard"
+msgstr "Tablero"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr ""
 
@@ -6781,6 +6858,9 @@ msgstr "Convertir grupos elegidos en proyectos"
 msgid "Project administrator"
 msgstr "Administrador del proyecto"
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr ""
+
 msgid "Project name"
 msgstr "Nombre del proyecto"
 
@@ -6798,6 +6878,9 @@ msgid "Project members only"
 msgstr "Solo miembros del grupo"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
 msgid "Collaborate!"
@@ -6840,6 +6923,10 @@ msgstr "Nombre del grupo"
 
 #, fuzzy
 msgid "Group Dashboard"
+msgstr "Tablero"
+
+#, fuzzy
+msgid "in the Group Dashboard"
 msgstr "Tablero"
 
 msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
@@ -6888,6 +6975,9 @@ msgstr "Convertir proyectos elegidos en grupos"
 msgid "Group administrator"
 msgstr "Administrador del grupo"
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr ""
+
 msgid "Group name"
 msgstr "Nombre del grupo"
 
@@ -6905,6 +6995,9 @@ msgid "Group members only"
 msgstr "Solo miembros del grupo"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 #, fuzzy
@@ -7006,6 +7099,14 @@ msgstr "Convertir grupos elegidos en proyectos"
 msgid "Conference contact person"
 msgstr ""
 
+#, fuzzy, python-format
+#| msgid "Request about your project \"%(group_name)s\""
+msgid "Request about your conference \"%(group_name)s\""
+msgstr "Solicitud sobre tu proyecto \"%(group_name)s\""
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr ""
+
 #, fuzzy
 #| msgid "Create Event"
 msgid "Conference name"
@@ -7032,6 +7133,9 @@ msgid "Conference members only"
 msgstr "Solo miembros del grupo"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
 
 #, fuzzy
@@ -7457,6 +7561,9 @@ msgstr "Lo sentimos, no pudimos conectartsu cuenta de usuario porque no pudimos 
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Lo sentimos, no puedes iniciar sesión porque tu cuenta está suspendida. ¡Por favor, póngase en contacto con un administrador del sistema!"
 
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr ""
+
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr ""
 
@@ -7604,6 +7711,12 @@ msgstr "Actualmente no eres miembro de %s! Si lo deseas, puedes solicitar para s
 msgid "Your changes have been saved."
 msgstr "Se han guardado los cambios."
 
+#~ msgid "Attach existing Files..."
+#~ msgstr "Adjuntar archivos existentes..."
+
+#~ msgid "Time"
+#~ msgstr "Hora"
+
 #, fuzzy
 #~| msgid "Header image"
 #~ msgid "Banner Image"
@@ -7638,9 +7751,6 @@ msgstr "Se han guardado los cambios."
 #, fuzzy
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Desactivar proyecto7grupo"
-
-#~ msgid "Public Project"
-#~ msgstr "Proyecto público"
 
 #~ msgid "Public Group"
 #~ msgstr "Grupo público"

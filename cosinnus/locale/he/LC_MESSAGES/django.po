@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
-"PO-Revision-Date: 2021-03-11 16:33+0200\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
+"PO-Revision-Date: 2021-04-14 14:50+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -239,6 +239,9 @@ msgstr "צוות זה אינו פועל יותר תחת כתובת ה-URL שהז
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "חשבון זה אינו פעיל יותר. נותקת מהמערכת."
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "נותקת באופן אוטומטי לאחר שלא היית פעיל במשך זמן מה."
@@ -1194,16 +1197,14 @@ msgstr "פרויקט"
 msgid "Conference"
 msgstr "ועידה"
 
-#, fuzzy
-#| msgid "Membership requests"
 msgid "Regular membership requests"
-msgstr "בקשות חברות"
+msgstr "בקשות חברות רגילות"
 
 msgid "Require participation applications for this conference"
 msgstr "דרוש בקשות להשתתפות בכנס זה"
 
 msgid "Everyone may join"
-msgstr ""
+msgstr "כל אחד יכול להצטרף"
 
 msgid "Project Type"
 msgstr "סוג פרויקט"
@@ -1348,6 +1349,12 @@ msgstr "בקשה אודות הפרויקט שלך \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "בקשה אודות הקבוצה שלך \"%(group_name)s\""
 
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "Now"
+msgstr "כעת"
+
 msgid "Token"
 msgstr "אסימון גישה"
 
@@ -1441,6 +1448,11 @@ msgstr "רעיונות קוסינוס"
 msgid "Managed Tag"
 msgstr "תג מנוהל"
 
+#, fuzzy
+#| msgid "Managed Tag"
+msgid "Managed Tags"
+msgstr "תג מנוהל"
+
 msgid "Managed Tag Type"
 msgstr "סוג תג מנוהל"
 
@@ -1523,6 +1535,14 @@ msgstr "בדו\"ח שבועי"
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
 msgstr "הגדרות ייחודיות עבור כל פרויקט/קבוצה.."
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
+msgstr ""
 
 msgid "--- No country selected ---"
 msgstr "--- לא נבחרה מדינה ---"
@@ -2313,9 +2333,6 @@ msgstr "חברים"
 msgid "Settings"
 msgstr "הגדרות"
 
-msgid "Attach existing Files..."
-msgstr "צירוף קבצים קיימים..."
-
 msgid "Drag and Drop files here..."
 msgstr "גרור ושחרר קבצים כאן..."
 
@@ -2742,21 +2759,6 @@ msgstr " אם אתה מעדיף להשתמש בבקשות חברות פשוטו�
 msgid "Application period"
 msgstr "תקופת טופס הבקשה"
 
-msgid "From"
-msgstr "מ"
-
-msgid "Date"
-msgstr "תאריך"
-
-msgid "Start date."
-msgstr "תאריך התחלה."
-
-msgid "Until"
-msgstr "עד"
-
-msgid "End date."
-msgstr "תאריך סיום."
-
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr "אם מוגדר, ניתן לשלוח ולערוך בקשות רק במהלך מסגרת זמן זו. באפשרותך לשנות זאת בכל עת כדי לסגור או להפעיל מחדש בקשות."
 
@@ -2860,7 +2862,7 @@ msgid "In Workshops each event has a video conference. Presenters are allowed to
 msgstr "בסדנאות לכל אירוע יש ועידת וידאו. מציגים רשאים לצנזר אותם."
 
 msgid "In Discussions each event has a video conference. Presenters are allowed to moderate those. Differs from \"Workshops\" only by the design in the agenda. Workshop: tiles, discussion: list."
-msgstr ""
+msgstr "בדיונים לכל אירוע יש ועידת וידאו. מציגים רשאים למתן אותם. שונה מ\"סדנאות\" רק על ידי העיצוב שעל סדר היום. סדנה: קוביות , דיון: רשימה."
 
 msgid "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
 msgstr "בבית הקפה תוכלו ליצור כמה שולחנות שרק תרצו. שם, המשתתפים יכולים להיפגש ולהתחיל ועידת וידאו ישירות עם מצלמת רשת ומיקרופון."
@@ -2881,7 +2883,7 @@ msgid "Attention: The visible update of the free seats is still work in progress
 msgstr "שימו לב: העדכון הגלוי של המושבים החופשיים עדיין בעיצומו. לכן, אנו ממליצים לא להשתמש במגבלה של שולחנות קפה נפרדים, כדי לא לתת לקפה הווירטואלי להתקרר בזמן חיפוש מקומות ישיבה בחינם."
 
 msgid "Choose one of the sub-projects of this group to display as nested results-project for participants"
-msgstr ""
+msgstr "בחר אחד מפרוייקטי המשנה של קבוצה זו שיוצגו כפרוייקט תוצאות מקונן עבור המשתתפים"
 
 msgid "Sort index"
 msgstr "אינדקס מיון"
@@ -3165,6 +3167,23 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "אופציונאלי"
 
+msgid "Date"
+msgstr "תאריך"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr "מ"
+
+msgid "Start date."
+msgstr "תאריך התחלה."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr "עד"
+
+msgid "End date."
+msgstr "תאריך סיום."
+
 msgid "Call to Action Button"
 msgstr "לחצן קריאה לפעולה"
 
@@ -3437,10 +3456,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr "יצא"
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr "ערוך את “%(team_name)s”"
-
 msgid "Help about groups"
 msgstr "עזרה אודות קבוצות"
 
@@ -3475,8 +3490,6 @@ msgstr "לאחר שיצרת את הוועידה, באפשרותך ליצור ח�
 msgid "Conference start and end date and time"
 msgstr "תאריך ושעת התחלת וסיום הועידה"
 
-#, fuzzy
-#| msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
 msgstr "תאריך ההתחלה והשעה משמשים להודעות דוא\"ל על תזכורות (אם הן מוגדרות). התזכורות יכולות לחזור כמה ימים מראש."
 
@@ -3484,7 +3497,7 @@ msgid "Instead of regular membership requests, require users to request particip
 msgstr "במקום בקשות חברות רגילות, דרוש מהמשתמשים לבקש השתתפות על ידי מילוי טופס בקשה. מנהלי הועידה יכולים לראות את כל הבקשות ולאשר/לדחות אותן בתחום ניהול ההשתתפות."
 
 msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
-msgstr ""
+msgstr "כל חבר רשום רשאי להצטרף באופן מיידי ללא כל אישור מראש. זכור שכל חבר יכול ליצור ולפרסם תוכן. עם זאת, חברים רשאים למחוק פריטים משלהם בלבד."
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
 msgstr "באילו לוחות שנה של פרויקטים או קבוצות יש להציג את הועידה?"
@@ -3529,23 +3542,19 @@ msgid "Icon"
 msgstr "אייקון"
 
 msgid "Will be shown as a small logo."
-msgstr ""
+msgstr "יוצג כלוגו קטן."
 
-#, fuzzy
-#| msgid "This email address already has a registered user!"
 msgid "This content will be visible for all registered users!"
-msgstr "לכתובת דוא\"ל זו כבר יש משתמש רשום!"
+msgstr "תוכן זה יהיה גלוי עבור כל המשתמשים הרשומים!"
 
-#, fuzzy
-#| msgid "Header image"
 msgid "Header Image"
 msgstr "תמונת כותרת"
 
 msgid "Will be shown as a header in the conference lobby and on the conference microsite."
-msgstr ""
+msgstr "יוצג ככותרת בלובי הוועידה ובמיקרו-אתר הוועידה."
 
 msgid "Will be shown as a header on the microsite."
-msgstr ""
+msgstr "יוצג ככותרת באתר המיקרו-אתר."
 
 msgid "Upload an image."
 msgstr "העלה תמונה."
@@ -3553,7 +3562,9 @@ msgstr "העלה תמונה."
 msgid "Reset"
 msgstr "איפוס"
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
+#, fuzzy
+#| msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr "קבצים שהועלו יהיו זמינים להורדה ותמונות יוצגו בגלריה."
 
 msgid "Example: http://mywebsite.com"
@@ -3838,23 +3849,20 @@ msgid "You are invited!"
 msgstr "הוזמנת!"
 
 msgid "Participation is open for everyone. You may instantly join and become a member."
-msgstr ""
+msgstr "ההשתתפות פתוחה לכולם. באפשרותך להצטרף באופן מיידי ולהיות חבר."
 
 msgid "You may request to become a member and participate once your request has been accepted."
-msgstr ""
+msgstr "באפשרותך לבקש להיות חבר ולהשתתף לאחר שבקשתך תתקבל."
 
 msgid "Join now!"
 msgstr "הצטרף עכשיו!"
 
-#, fuzzy
-#| msgid "Team membership"
 msgid "Request membership"
-msgstr "חברות בצוות"
+msgstr "בקש חברות"
 
-#, fuzzy, python-format
-#| msgid "Do you wish to request to join „%(title)s“?"
+#, python-format
 msgid "Do you wish to join „%(title)s“ now?"
-msgstr "האם ברצונך לבקש להצטרף ל-„%(title)s“?"
+msgstr "האם ברצונך להצטרף ל-„%(title)s“ כעת?"
 
 msgid "Browse"
 msgstr "דפדף"
@@ -3981,6 +3989,10 @@ msgstr "העבר"
 msgid "A message from %(sender_full_name)s"
 msgstr "הודעה מ-%(sender_full_name)s"
 
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "ערוך את “%(team_name)s”"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
 msgstr "צור רעיון"
@@ -4047,13 +4059,13 @@ msgid "Do you really want to delete this folder and ALL folders and items it con
 msgstr "האם אתה בטוח שברצונך למחוק תיקיה זו ואת כל התיקיות והפריטים שהיא מכילה? אין אפשרות לבטל פעולות אלה!"
 
 msgid "Gesendet"
-msgstr ""
+msgstr "פורסם"
 
 msgid "Archiv"
 msgstr "ארכיון"
 
 msgid "Papierkorb"
-msgstr ""
+msgstr "סל המחזור"
 
 msgid "Verfassen"
 msgstr ""
@@ -5048,6 +5060,18 @@ msgstr "פרויקטים וקבוצות אחרים"
 msgid "Search for Users"
 msgstr "חפש משתמשים"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create content"
+msgid "External contents"
+msgstr "יצירת תוכן"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Visibility on other platforms"
+msgid "Include contents from other platforms"
+msgstr "נראות על גבי הפלטפורמה"
+
 msgid "Ordering"
 msgstr "מסדר"
 
@@ -5099,9 +5123,6 @@ msgstr "דוא\"ל של כל מנויי הניוזלטר"
 msgid "E-Mails of ALL active users"
 msgstr "דוא\"ל של כל המשתמשים הפעילים"
 
-msgid "Time"
-msgstr "זמן"
-
 msgid "Ok"
 msgstr "אישור"
 
@@ -5115,21 +5136,19 @@ msgid "Learn more"
 msgstr "למד עוד"
 
 msgid "Recommended minimum dimensions: 200px x 200px (square)."
-msgstr ""
+msgstr "מידות מינימום מומלצות: 200px x 200px (ריבוע)."
 
 msgid "All common image file types are supported. Maximum file size is 10 MB."
-msgstr ""
+msgstr "כל סוגי קבצי התמונות הנפוצים נתמכים. גודל הקובץ המרבי הוא 10 MB."
 
 msgid "Recommended minimum dimensions: 600px x 140px (wide)."
-msgstr ""
+msgstr "מידות מינימום מומלצות: 600px x 140px (רחב)."
 
 msgid "Recommended minimum dimensions: 1140px x 240px (wide)."
-msgstr ""
+msgstr "מידות מינימום מומלצות: 1140px x 240px (רחב)."
 
-#, fuzzy
-#| msgid "Help about the microsite"
 msgid "View the microsite now"
-msgstr "עזרה אודות המיקרו-אתר"
+msgstr "הצג את המיקרו-אתר כעת"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
@@ -5186,6 +5205,10 @@ msgstr "צור קבוצה"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Organization"
 msgstr "צור ארגון"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5352,6 +5375,10 @@ msgid "No current notifications"
 msgstr "אין התראות"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr "הרשת כולה"
 
@@ -5376,8 +5403,8 @@ msgid "SDG"
 msgstr "יעד התפתחות ברת קיימה"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
-msgstr "חיצוני"
+msgid "from"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You"
@@ -5475,6 +5502,11 @@ msgstr "שגיאה!"
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "מצטערים, אך לא היתה אפשרות לאחזר את התוכן המבוקש מהשרת."
 
+#, fuzzy
+#| msgid "Done"
+msgid "on"
+msgstr "בוצע"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr "בקר בדף האירוע"
@@ -5548,6 +5580,12 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "לא מעוניין ביצירת קשר לגבי הזדמנויות פוטנציאליות לשיתוף פעולה!"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Your Profile"
+msgid "To Profile"
+msgstr "הפרופיל שלך"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "הצטרף לפרוייקט"
 
@@ -5604,8 +5642,28 @@ msgid "Discover"
 msgstr "גלה/י"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
+#, fuzzy
+#| msgid "Apply Filters"
+msgid "Filter"
+msgstr "החל מסננים"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Note from the organizers"
+msgid "Content from the Forum"
+msgstr "הערה מהמארגנים"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Only content from my Groups and Projects"
+msgid "Content from my Groups and Projects"
 msgstr "תוכן מהקבוצות והפרויקטים שלי בלבד"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Public Project"
+msgid "Public content"
+msgstr "פרויקט ציבורי"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6154,6 +6212,16 @@ msgstr "ציר זמן"
 msgid "Contents"
 msgstr "תוכן העניינים"
 
+#, fuzzy
+#| msgid "My upcoming Projects"
+msgid "My upcoming Events"
+msgstr "הפרוייקטים הקרובים שלי"
+
+#, fuzzy
+#| msgid "You can change this setting later in your profile settings"
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr "באפשרותך לשנות הגדרה זו מאוחר יותר בהגדרות הפרופיל שלך"
+
 msgid "Close to me"
 msgstr "קרוב אליי"
 
@@ -6238,7 +6306,7 @@ msgid "Good to see you! At %(portal_name)s you can collaborate with others in Pr
 msgstr "טוב לראותך! ב-%(portal_name)s אתה יכול ליצור שיתוף פעולה עם אחרים בפרויקטים וקבוצות. בים אם יוזמה, ארגון או רשת- %(portal_name)s מציע לך כלים הדרושים לשת\"פ מקוון."
 
 msgid "Jetzt anmelden und mitgestalten"
-msgstr ""
+msgstr "הירשמו עכשיו ועזרו לעצב אותו"
 
 msgid "Show more Projects"
 msgstr "הצג פרוייקטים נוספים"
@@ -6295,10 +6363,10 @@ msgid "Assign"
 msgstr "שייך"
 
 msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
-msgstr ""
+msgstr "אנא קבל את תנאי השימוש שלנו"
 
 msgid "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
-msgstr ""
+msgstr "אני מסכים לתנאי השימוש"
 
 msgid "Change of Terms of Services and Privacy Policy"
 msgstr "שינוי תנאי השירות ומדיניות הפרטיות"
@@ -6323,7 +6391,7 @@ msgstr ""
 "המשתמש %(user_name)s רוצה להצטרף ל-%(team_name)s."
 
 msgid "Nutzungsbedingungen"
-msgstr ""
+msgstr "תנאי השימוש"
 
 msgid "(Deleted User)"
 msgstr "(משתמש שנמחק)"
@@ -6342,6 +6410,11 @@ msgid "Project Menu"
 msgstr "תפריט פרוייקט"
 
 msgid "Project Dashboard"
+msgstr "לוח כלים של הפרויקט"
+
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "in the Project Dashboard"
 msgstr "לוח כלים של הפרויקט"
 
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
@@ -6377,6 +6450,9 @@ msgstr "המר פריטים נבחרים לפרוייקטים"
 msgid "Project administrator"
 msgstr "מנהל פרויקט"
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr ""
+
 msgid "Project name"
 msgstr "שם הפרויקט"
 
@@ -6390,6 +6466,9 @@ msgid "Project members only"
 msgstr "חברי פרוייקט בלבד"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr "משתמשים יכולים להצטרף על-ידי שליחת בקשת חברות שכל אחד ממנהלי הפרוייקט יכול לקבל או לדחות אותה."
+
+msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
 msgid "Collaborate!"
@@ -6420,6 +6499,11 @@ msgid "Group Menu"
 msgstr "תפריט קבוצה"
 
 msgid "Group Dashboard"
+msgstr "לוח כלים של הקבוצה"
+
+#, fuzzy
+#| msgid "Group Dashboard"
+msgid "in the Group Dashboard"
 msgstr "לוח כלים של הקבוצה"
 
 msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
@@ -6455,6 +6539,9 @@ msgstr "המר פריטים נבחרים לקבוצות"
 msgid "Group administrator"
 msgstr "מנהל קבוצה"
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr ""
+
 msgid "Group name"
 msgstr "שם הקבוצה"
 
@@ -6468,6 +6555,9 @@ msgid "Group members only"
 msgstr "חברי קבוצה בלבד"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr "משתמשים יכולים להצטרף על-ידי שליחת בקשת חברות שניתן לקבל או לדחות על-ידי כל אחד ממנהלי הקבוצות."
+
+msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
@@ -6536,6 +6626,14 @@ msgstr "המרת פריטים נבחרים לוועידות"
 msgid "Conference contact person"
 msgstr "איש קשר של ועידה"
 
+#, fuzzy, python-format
+#| msgid "Request about your project \"%(group_name)s\""
+msgid "Request about your conference \"%(group_name)s\""
+msgstr "בקשה אודות הפרויקט שלך \"%(group_name)s\""
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr ""
+
 msgid "Conference name"
 msgstr "שם ועידה"
 
@@ -6552,6 +6650,9 @@ msgid "Conference members only"
 msgstr "חברי הוועידה בלבד"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr "משתמשים יכולים להצטרף על ידי הגשת בקשת חברות שיכולה להתקבל או להידחות על ידי כל אחד ממארגני הועידה."
+
+msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
 
 msgid "Participate!"
@@ -6623,7 +6724,7 @@ msgid "Login token was sent to %(email)s."
 msgstr "אסימון הכניסה נשלח אל %(email)s."
 
 msgid "Die Änderungen wurden erfolgreich gespeichert."
-msgstr ""
+msgstr "השינויים נשמרו בהצלחה."
 
 msgid "Login token was sent."
 msgstr "אסימון הכניסה נשלח."
@@ -6949,6 +7050,9 @@ msgstr "מצטערים, לא היתה לנו אפשרות לחבר את חשבו
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "מצטערים, אין באפשרותך להיכנס מאחר שהחשבון שלך מושעה. נא פנה למנהל מערכת!"
 
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr ""
+
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr "הסיסמה שלך הוגדרה בהצלחה! כעת באפשרותך להיכנס באמצעות כתובת הדואר האלקטרוני שלך והסיסמה שהגדרת זה עתה."
 
@@ -7083,6 +7187,15 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
 
+#~ msgid "Attach existing Files..."
+#~ msgstr "צירוף קבצים קיימים..."
+
+#~ msgid "Time"
+#~ msgstr "זמן"
+
+#~ msgid "External"
+#~ msgstr "חיצוני"
+
 #~ msgid "Banner Image"
 #~ msgstr "תמונת באנר"
 
@@ -7128,9 +7241,6 @@ msgstr "השינויים שביצעת נשמרו בהצלחה."
 
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "השבת פרויקטים וקבוצות"
-
-#~ msgid "Public Project"
-#~ msgstr "פרויקט ציבורי"
 
 #~ msgid "Public Group"
 #~ msgstr "קבוצה ציבורית"

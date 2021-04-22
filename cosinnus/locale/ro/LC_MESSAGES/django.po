@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -233,6 +233,9 @@ msgstr "Această echipă nu mai locuiește sub URL-ul pe care l-ați introdus. A
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Acest cont nu mai este activ. Ai fost deconectat."
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr ""
@@ -1408,6 +1411,12 @@ msgstr "Cerere despre proiectul dvs. ”%(group_name)s”"
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Cerere despre grupul dvs. ”%(group_name)s”"
 
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "Now"
+msgstr "Acum"
+
 msgid "Token"
 msgstr "Jeton"
 
@@ -1502,6 +1511,10 @@ msgid "Managed Tag"
 msgstr ""
 
 #, fuzzy
+msgid "Managed Tags"
+msgstr "Crea Idee"
+
+#, fuzzy
 msgid "Managed Tag Type"
 msgstr "Crea Idee"
 
@@ -1593,6 +1606,14 @@ msgstr "Într-un Raport Săptămânal"
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
 msgstr "Setări individuale pentru fiecare Proiect/Grup..."
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
+msgstr ""
 
 msgid "--- No country selected ---"
 msgstr "--- Nici o țară selectată ---"
@@ -2461,9 +2482,6 @@ msgstr "Membrii"
 msgid "Settings"
 msgstr "Setări"
 
-msgid "Attach existing Files..."
-msgstr "Atașați Fișierele existente..."
-
 msgid "Drag and Drop files here..."
 msgstr "Trageți și aruncați fișierele aici..."
 
@@ -2924,21 +2942,6 @@ msgstr ""
 #| msgid "Application name"
 msgid "Application period"
 msgstr "Numele Aplicației"
-
-msgid "From"
-msgstr "Din"
-
-msgid "Date"
-msgstr "Data"
-
-msgid "Start date."
-msgstr "Data de început."
-
-msgid "Until"
-msgstr "Până când"
-
-msgid "End date."
-msgstr "Data de sfârșit."
 
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr ""
@@ -3403,6 +3406,23 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "facultativ"
 
+msgid "Date"
+msgstr "Data"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr "Din"
+
+msgid "Start date."
+msgstr "Data de început."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr "Până când"
+
+msgid "End date."
+msgstr "Data de sfârșit."
+
 msgid "Call to Action Button"
 msgstr "Butonul de apel la acțiune"
 
@@ -3706,10 +3726,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr "Export"
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr "Editați ”%(team_name)s”"
-
 msgid "Help about groups"
 msgstr "Ajutor pentru grupuri"
 
@@ -3824,7 +3840,7 @@ msgstr "Încărcați o imagine."
 msgid "Reset"
 msgstr "Restabili"
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr ""
 
 msgid "Example: http://mywebsite.com"
@@ -4277,6 +4293,10 @@ msgstr "Mișcare"
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr "Un mesaj din %(sender_full_name)s"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "Editați ”%(team_name)s”"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
@@ -5360,6 +5380,18 @@ msgstr "Alte proiecte și Grupuri"
 msgid "Search for Users"
 msgstr "Căutați Utilizatori"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create content"
+msgid "External contents"
+msgstr "Creați conținut"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Visibility on other platforms"
+msgid "Include contents from other platforms"
+msgstr "Vizibilitate pe alte platforme"
+
 msgid "Ordering"
 msgstr "Comanda"
 
@@ -5410,9 +5442,6 @@ msgstr "E-mailuri ale tuturor abonaților la buletin informativ"
 
 msgid "E-Mails of ALL active users"
 msgstr "E-mailurile Tuturor utilizatorilor activi"
-
-msgid "Time"
-msgstr "Ora"
 
 msgid "Ok"
 msgstr "OK"
@@ -5504,6 +5533,10 @@ msgstr "Creează Grup"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Organization"
 msgstr "Creează Organizarea"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5670,6 +5703,10 @@ msgid "No current notifications"
 msgstr "Fără notificări actuale"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr "Întreaga Rețea"
 
@@ -5696,8 +5733,8 @@ msgid "SDG"
 msgstr "SDG"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
-msgstr "Extern"
+msgid "from"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You"
@@ -5804,6 +5841,11 @@ msgstr "Eroare!"
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Scuză, dar conținutul solicitat nu a putut fi preluat de pe server."
 
+#, fuzzy
+#| msgid "Done"
+msgid "on"
+msgstr "Terminat"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr "Accesați Pagina de Evenimente"
@@ -5880,6 +5922,12 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "Nu dorește să fie contactat pentru o colaborare potențială!"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Your Profile"
+msgid "To Profile"
+msgstr "Profilul Tău"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Alăturați-vă Proiectului"
 
@@ -5938,8 +5986,28 @@ msgid "Discover"
 msgstr "Descoperi"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
+#, fuzzy
+#| msgid "Apply Filters"
+msgid "Filter"
+msgstr "Aplicați Filtre"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Content (left column)"
+msgid "Content from the Forum"
+msgstr "Conținut (coloana din stânga)"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Only content from my Groups and Projects"
+msgid "Content from my Groups and Projects"
 msgstr "Conținut numai din Grupurile și Proiectele mele"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Public Project"
+msgid "Public content"
+msgstr "Proiect Public"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6504,6 +6572,16 @@ msgstr "Cronologie"
 msgid "Contents"
 msgstr "Cuprins"
 
+#, fuzzy
+#| msgid "My Groups and Projects"
+msgid "My upcoming Events"
+msgstr "Grupurile și Proiectele mele"
+
+#, fuzzy
+#| msgid "You can change this setting later in your profile settings"
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr "Puteți modifica această setare ulterior în setările profilului"
+
 msgid "Close to me"
 msgstr "Aproape de mine"
 
@@ -6698,6 +6776,11 @@ msgstr "Meniul Proiectului"
 msgid "Project Dashboard"
 msgstr "Proiectul Bordului de Tablou"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "in the Project Dashboard"
+msgstr "Proiectul Bordului de Tablou"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Organizează-ți eficient proiectele sau inițiativele împreună cu colegii de campanie. Toate instrumentele importante pentru colaborarea într-un singur loc: Știri, PAD-uri, Evenimente, Todos și multe altele."
 
@@ -6745,6 +6828,9 @@ msgstr "Convertiți Grupuri selectate în Proiecte"
 msgid "Project administrator"
 msgstr "Administrator de Proiect"
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr ""
+
 msgid "Project name"
 msgstr "Numele proiectului"
 
@@ -6762,6 +6848,9 @@ msgid "Project members only"
 msgstr "Doar membrii echipei"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
 msgid "Collaborate!"
@@ -6802,6 +6891,11 @@ msgid "Group Menu"
 msgstr "Meniul Grupului"
 
 msgid "Group Dashboard"
+msgstr "Grupului de Bord al Tablou"
+
+#, fuzzy
+#| msgid "Group Dashboard"
+msgid "in the Group Dashboard"
 msgstr "Grupului de Bord al Tablou"
 
 msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
@@ -6851,6 +6945,9 @@ msgstr "Convertiți Proiectele selectate în Grupuri"
 msgid "Group administrator"
 msgstr "Administrator de Grup"
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr ""
+
 msgid "Group name"
 msgstr "Numele grupului"
 
@@ -6868,6 +6965,9 @@ msgid "Group members only"
 msgstr "Doar membrii echipei"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 #, fuzzy
@@ -6972,6 +7072,14 @@ msgstr "Convertiți Grupuri selectate în Proiecte"
 msgid "Conference contact person"
 msgstr "Tip Sală de Conferință"
 
+#, fuzzy, python-format
+#| msgid "Request about your project \"%(group_name)s\""
+msgid "Request about your conference \"%(group_name)s\""
+msgstr "Cerere despre proiectul dvs. ”%(group_name)s”"
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr ""
+
 #, fuzzy
 #| msgid "Conference Page"
 msgid "Conference name"
@@ -6998,6 +7106,9 @@ msgid "Conference members only"
 msgstr "Culoarea temei conferinței"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
 
 #, fuzzy
@@ -7417,6 +7528,9 @@ msgstr "Ne pare rău, nu am putut conecta contul de utilizator, deoarece nu am p
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Ne pare rău, nu vă puteți autentifica, deoarece contul dvs. este suspendat. Vă rugăm să contactați un administrator de sistem!"
 
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr ""
+
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr ""
 
@@ -7559,6 +7673,15 @@ msgstr "În prezent nu sunteți membru %s! Dacă doriți, puteți solicita să d
 msgid "Your changes have been saved."
 msgstr "Schimbările tale au fost salvate."
 
+#~ msgid "Attach existing Files..."
+#~ msgstr "Atașați Fișierele existente..."
+
+#~ msgid "Time"
+#~ msgstr "Ora"
+
+#~ msgid "External"
+#~ msgstr "Extern"
+
 #, fuzzy
 #~| msgid "Header image"
 #~ msgid "Banner Image"
@@ -7605,9 +7728,6 @@ msgstr "Schimbările tale au fost salvate."
 
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Proiectele și Grupuri dezactivate"
-
-#~ msgid "Public Project"
-#~ msgstr "Proiect Public"
 
 #~ msgid "Public Group"
 #~ msgstr "Proiect Public"
