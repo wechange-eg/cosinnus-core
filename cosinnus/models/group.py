@@ -66,6 +66,8 @@ from cosinnus.trans.group import get_group_trans_by_type
 from annoying.functions import get_object_or_None
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
+from django.template.defaultfilters import date as django_date_filter
+
 
 logger = logging.getLogger('cosinnus')
 
