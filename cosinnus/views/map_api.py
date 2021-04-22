@@ -212,7 +212,7 @@ def map_search_endpoint(request, filter_group_id=None):
 
     # filtering for events and conferences
     check_date_cts = ['events', 'conferences']
-    if any([params[checktype] for checktype in check_date_cts]):
+    if any([params.get(checktype, None) for checktype in check_date_cts]):
         sqs = sqs.exclude(is_hidden_group_proxy=True)
         
         # figure out if a datetime filter is active
