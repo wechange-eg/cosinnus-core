@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-14 11:08+0200\n"
-"PO-Revision-Date: 2021-04-14 11:09+0200\n"
+"POT-Creation-Date: 2021-04-24 17:23+0200\n"
+"PO-Revision-Date: 2021-04-24 17:27+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -1345,6 +1345,9 @@ msgstr "Frage zu deinem Projekt \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Frage zu deiner Gruppe \"%(group_name)s\""
 
+msgid "Now"
+msgstr "Jetzt"
+
 msgid "Token"
 msgstr "Token"
 
@@ -2178,6 +2181,12 @@ msgstr "Nachrichtentext"
 msgid "Currently set Email Text"
 msgstr "Aktueller E-Mail Text"
 
+msgid "Show all recipients..."
+msgstr "Alle Empfänger anzeigen..."
+
+msgid "Note: The newsletter can only be sent after saving any changes made to it!"
+msgstr "Beachte: Der Newsletter kann erst verschickt werden nachdem du jegliche Änderungen daran gespeichert hast!"
+
 msgid "Send yourself a Test-Mail"
 msgstr "Schicke eine Test-Mail an dich selbst"
 
@@ -2263,6 +2272,10 @@ msgstr "Login-Token senden"
 
 msgid "Last sent on: "
 msgstr "Zuletzt gesendet: "
+
+#, python-format
+msgid "Login token was sent to %(email)s."
+msgstr "Login-Token wurde an %(email)s gesendet."
 
 #, python-format
 msgid "Could not find any users with an email that contains '%(search_string)s.'"
@@ -6660,10 +6673,6 @@ msgstr "Newsletter erfolgreich erstellt!"
 msgid "Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations."
 msgstr "Login-Token an alle bisher noch nicht eingeladenen Benutzer/innen werden jetzt im Hintergrund versendet. Du kannst diese Seite neu laden, um die Anzeige des Versandsstatus zu aktualisieren."
 
-#, python-format
-msgid "Login token was sent to %(email)s."
-msgstr "Login-Token wurde an %(email)s gesendet."
-
 msgid "Die Änderungen wurden erfolgreich gespeichert."
 msgstr "Die Änderungen wurden erfolgreich gespeichert."
 
@@ -6992,6 +7001,9 @@ msgstr "Entschuldige, wir konnten dein Benutzerkonto nicht einloggen, weil wir B
 
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Entschuldige, du kannst dich nicht einloggen, weil dein Benutzerkonto gesperrt wurde. Bitte kontaktiere einen Administrator!"
+
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr "Du bist bereits eingeloggt. Diese Funktion ist nur verfügbar wenn du dein Benutzerkonto zum ersten mal einrichtest!"
 
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr "Dein Passwort wurde erfolgreich gesetzt! Du kannst dich nun mit deiner E-Mail-Adresse und dem soeben gesetzten Passwort anmelden."
