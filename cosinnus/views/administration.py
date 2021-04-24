@@ -42,6 +42,7 @@ from cosinnus.models.conference import CosinnusConferenceSettings,\
 from django.utils.timezone import now
 from _collections import defaultdict
 from cosinnus.utils.user import check_user_has_accepted_any_tos
+from django.http.response import JsonResponse
 
 
 class AdministrationView(TemplateView):
@@ -345,6 +346,11 @@ class UserListView(ListView):
                 user_id = self.request.POST.get('send_login_token')
                 user = get_user_model().objects.get(id=user_id)
                 self.send_login_token(user)
+                if self.request.is_ajax():
+                    data = {
+                        'ajax_form_id': self.request.POST.get('ajax_form_id'),
+                    }
+                    return JsonResponse(data)
                 messages.add_message(self.request, messages.SUCCESS, _('Login token was sent to %(email)s.') % {'email': user.email})
         redirect_path = '{}{}'.format(request.path_info, search_string)
         return HttpResponseRedirect(redirect_path)
