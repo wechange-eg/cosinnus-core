@@ -19,6 +19,4 @@ class PortalSettingsSerializer(serializers.ModelSerializer):
         fields = ('name', 'background_image', 'logo_image', 'top_color', 'bottom_color', 'extra_css')
 
     def get_logo_image(self, obj):
-        if obj.logo_image:
-            return obj.logo_image.url
-        return static('img/logo-icon.png')
+        return static('img/v2_navbar_brand.png')

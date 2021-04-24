@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
 "PO-Revision-Date: 2021-02-18 20:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -246,6 +246,9 @@ msgstr "Dit team bevindt zich niet langer onder de opgegeven URL. Je wordt autom
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Dit account is niet meer actief. Je bent uitgelogd."
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr ""
@@ -1422,6 +1425,12 @@ msgstr "Verzoek voor je project “%(group_name)s”"
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Verzoek voor je groep “%(group_name)s”"
 
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "Now"
+msgstr "Nu"
+
 msgid "Token"
 msgstr "Token"
 
@@ -1514,6 +1523,11 @@ msgstr "Cosinnus ideeën"
 
 msgid "Managed Tag"
 msgstr ""
+
+#, fuzzy
+#| msgid "Create Idea"
+msgid "Managed Tags"
+msgstr "Idee aanmaken"
 
 msgid "Managed Tag Type"
 msgstr ""
@@ -1611,6 +1625,14 @@ msgstr "In een wekelijks verslag"
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
 msgstr "Individuele instellingen voor elk(e) project/groep…"
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
+msgstr ""
 
 msgid "--- No country selected ---"
 msgstr "--- Geen land geselecteerd ---"
@@ -2475,9 +2497,6 @@ msgstr "Leden"
 msgid "Settings"
 msgstr "Instellingen"
 
-msgid "Attach existing Files..."
-msgstr "Voeg bestaande bestanden toe…"
-
 msgid "Drag and Drop files here..."
 msgstr "Sleep bestanden hierheen…"
 
@@ -2941,21 +2960,6 @@ msgstr ""
 #| msgid "Application name"
 msgid "Application period"
 msgstr "Applicatienaam"
-
-msgid "From"
-msgstr "Van"
-
-msgid "Date"
-msgstr "Datum"
-
-msgid "Start date."
-msgstr "Startdatum."
-
-msgid "Until"
-msgstr "Tot"
-
-msgid "End date."
-msgstr "Einddatum."
 
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr ""
@@ -3433,6 +3437,23 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "optioneel"
 
+msgid "Date"
+msgstr "Datum"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr "Van"
+
+msgid "Start date."
+msgstr "Startdatum."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr "Tot"
+
+msgid "End date."
+msgstr "Einddatum."
+
 msgid "Call to Action Button"
 msgstr "Call to Action button"
 
@@ -3737,10 +3758,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr "Exporteren"
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr "“%(team_name)s” wijzigen"
-
 msgid "Help about groups"
 msgstr "Hulp over groepen"
 
@@ -3855,7 +3872,7 @@ msgstr "Upload een afbeelding."
 msgid "Reset"
 msgstr "Reset"
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr ""
 
 msgid "Example: http://mywebsite.com"
@@ -4331,6 +4348,10 @@ msgstr "Verplaatsen"
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr "Een bericht van %(sender_full_name)s"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "“%(team_name)s” wijzigen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
@@ -5419,6 +5440,18 @@ msgstr "Andere projecten en groepen"
 msgid "Search for Users"
 msgstr "Zoek naar gebruikers"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create content"
+msgid "External contents"
+msgstr "Inhoud aanmaken"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Visibility on other platforms"
+msgid "Include contents from other platforms"
+msgstr "Zichtbaarheid op andere platforms"
+
 msgid "Ordering"
 msgstr "Bestellen"
 
@@ -5469,9 +5502,6 @@ msgstr "E-mailadressen van alle nieuwsbriefabonnees"
 
 msgid "E-Mails of ALL active users"
 msgstr "E-mailadressen van ALLE actieve gebruikers"
-
-msgid "Time"
-msgstr "Tijd"
 
 msgid "Ok"
 msgstr "Oké"
@@ -5563,6 +5593,10 @@ msgstr "Groep aanmaken"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Organization"
 msgstr "Organisatie aanmaken"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5729,6 +5763,10 @@ msgid "No current notifications"
 msgstr "Momenteel geen notificaties"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr "Volledig netwerk"
 
@@ -5755,8 +5793,8 @@ msgid "SDG"
 msgstr "SDG"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
-msgstr "Extern"
+msgid "from"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You"
@@ -5864,6 +5902,11 @@ msgstr "Foutmelding!"
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Sorry, de gevraagde inhoud kon helaas niet worden opgehaald van de server."
 
+#, fuzzy
+#| msgid "Done"
+msgid "on"
+msgstr "Gedaan"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr "Bezoek evenementenpagina"
@@ -5943,6 +5986,12 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "Wenst NIET gecontacteerd te worden voor mogelijke samenwerking!"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Your Profile"
+msgid "To Profile"
+msgstr "Jouw profiel"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Meedoen aan project"
 
@@ -6001,8 +6050,28 @@ msgid "Discover"
 msgstr "Ontdekken"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
+#, fuzzy
+#| msgid "Apply Filters"
+msgid "Filter"
+msgstr "Filters toepassen"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Content (left column)"
+msgid "Content from the Forum"
+msgstr "Inhoud (linker kolom)"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Only content from my Groups and Projects"
+msgid "Content from my Groups and Projects"
 msgstr "Alleen inhoud van mijn groepen en projecten"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Public Project"
+msgid "Public content"
+msgstr "Openbaar project"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6567,6 +6636,16 @@ msgstr "Tijdlijn"
 msgid "Contents"
 msgstr "Inhoud"
 
+#, fuzzy
+#| msgid "My Groups and Projects"
+msgid "My upcoming Events"
+msgstr "Mijn groepen en projecten"
+
+#, fuzzy
+#| msgid "You can change this setting later in your profile settings"
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr "Je kunt deze instelling later wijzigen in je profielinstellingen"
+
 msgid "Close to me"
 msgstr "Dichtbij me"
 
@@ -6761,6 +6840,11 @@ msgstr "Project menu"
 msgid "Project Dashboard"
 msgstr "Project dashboard"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "in the Project Dashboard"
+msgstr "Project dashboard"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Organiseer je projecten of initiatieven efficiënt met je medecampagnevoerders. Alle belangrijke tools om op één plek samen te werken: Nieuws, Pads, Evenementen, To-dos en meer."
 
@@ -6808,6 +6892,9 @@ msgstr "Geselecteerde groepen omzetten in projecten"
 msgid "Project administrator"
 msgstr "Projectbeheerder"
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr ""
+
 msgid "Project name"
 msgstr "Projectnaam"
 
@@ -6825,6 +6912,9 @@ msgid "Project members only"
 msgstr "Alleen teamleden"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
 msgid "Collaborate!"
@@ -6865,6 +6955,11 @@ msgid "Group Menu"
 msgstr "Groep menu"
 
 msgid "Group Dashboard"
+msgstr "Groep dashboard"
+
+#, fuzzy
+#| msgid "Group Dashboard"
+msgid "in the Group Dashboard"
 msgstr "Groep dashboard"
 
 msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
@@ -6914,6 +7009,9 @@ msgstr "Geselecteerde projecten omzetten in groepen"
 msgid "Group administrator"
 msgstr "Groepsbeheerder"
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr ""
+
 msgid "Group name"
 msgstr "Groepsnaam"
 
@@ -6931,6 +7029,9 @@ msgid "Group members only"
 msgstr "Alleen teamleden"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 #, fuzzy
@@ -7039,6 +7140,14 @@ msgstr "Geselecteerde groepen omzetten in projecten"
 msgid "Conference contact person"
 msgstr "Conferentieruimte type"
 
+#, fuzzy, python-format
+#| msgid "Request about your project \"%(group_name)s\""
+msgid "Request about your conference \"%(group_name)s\""
+msgstr "Verzoek voor je project “%(group_name)s”"
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr ""
+
 #, fuzzy
 #| msgid "Conference Page"
 msgid "Conference name"
@@ -7065,6 +7174,9 @@ msgid "Conference members only"
 msgstr "Conferentie themakleur"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
 
 #, fuzzy
@@ -7486,6 +7598,9 @@ msgstr "Sorry, we konden je gebruikersaccount niet verbinden, omdat we geen bela
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Sorry, je kunt niet inloggen omdat je account is geschorst. Neem contact op met een systeembeheerder!"
 
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr ""
+
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr ""
 
@@ -7628,6 +7743,15 @@ msgstr "Je bent momenteel geen lid van %s! Als je wilt, kun je hieronder het lid
 msgid "Your changes have been saved."
 msgstr "Je wijzigingen zijn opgeslagen."
 
+#~ msgid "Attach existing Files..."
+#~ msgstr "Voeg bestaande bestanden toe…"
+
+#~ msgid "Time"
+#~ msgstr "Tijd"
+
+#~ msgid "External"
+#~ msgstr "Extern"
+
 #, fuzzy
 #~| msgid "Header image"
 #~ msgid "Banner Image"
@@ -7650,9 +7774,6 @@ msgstr "Je wijzigingen zijn opgeslagen."
 
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Gedeactiveerde projecten en groepen"
-
-#~ msgid "Public Project"
-#~ msgstr "Openbaar project"
 
 #~ msgid "Public Group"
 #~ msgstr "Openbare groep"

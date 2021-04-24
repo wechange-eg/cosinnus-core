@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
-"PO-Revision-Date: 2021-03-16 01:23+0100\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
+"PO-Revision-Date: 2021-04-07 13:19+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -239,6 +239,9 @@ msgstr "Cette équipe ne se trouve plus sous l'URL que tu as entré. Tu as été
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Ce compte n'est plus actif. Tu as été déconnecté."
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Tu as été automatiquement déconnecté après avoir été inactif pendant un certain temps."
@@ -1192,16 +1195,14 @@ msgstr "Projet"
 msgid "Conference"
 msgstr "Conférence"
 
-#, fuzzy
-#| msgid "Membership requests"
 msgid "Regular membership requests"
-msgstr "Demandes d'ajout"
+msgstr "Demandes régulières d’adhésion"
 
 msgid "Require participation applications for this conference"
 msgstr "Exiger des demandes de participation pour cette conférence"
 
 msgid "Everyone may join"
-msgstr ""
+msgstr "Tout le monde peut se joindre"
 
 msgid "Project Type"
 msgstr "Type de projet"
@@ -1346,6 +1347,12 @@ msgstr "Demande à propos de ton projet \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Demande à propos de ton groupe \"%(group_name)s\""
 
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "Now"
+msgstr "Maintenant"
+
 msgid "Token"
 msgstr "Jeton"
 
@@ -1439,6 +1446,11 @@ msgstr "Idées Cosinnus"
 msgid "Managed Tag"
 msgstr "Balise gérée"
 
+#, fuzzy
+#| msgid "Managed Tag"
+msgid "Managed Tags"
+msgstr "Balise gérée"
+
 msgid "Managed Tag Type"
 msgstr "Type de balise gérée"
 
@@ -1521,6 +1533,14 @@ msgstr "Rapport hebdomadaire"
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
 msgstr "Paramètres individuels pour chaque projet/groupe..."
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
+msgstr ""
 
 msgid "--- No country selected ---"
 msgstr "--- Aucun pays sélectionné ---"
@@ -2311,9 +2331,6 @@ msgstr "Membres"
 msgid "Settings"
 msgstr "Paramètres"
 
-msgid "Attach existing Files..."
-msgstr "Attacher les fichiers existants..."
-
 msgid "Drag and Drop files here..."
 msgstr "Faire glisser des fichiers ici..."
 
@@ -2740,21 +2757,6 @@ msgstr "Si tu préfères utiliser les demandes d'adhésion simples telles qu'ell
 msgid "Application period"
 msgstr "Période de demande"
 
-msgid "From"
-msgstr "De"
-
-msgid "Date"
-msgstr "Date"
-
-msgid "Start date."
-msgstr "Date de début."
-
-msgid "Until"
-msgstr "jusqu’à"
-
-msgid "End date."
-msgstr "Date de fin."
-
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr "Si elles sont définies, les demandes ne peuvent être soumises et modifiées que pendant cette période. Tu peux modifier ce paramètre à tout moment pour fermer ou réactiver les candidatures."
 
@@ -3163,6 +3165,23 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "optionnel"
 
+msgid "Date"
+msgstr "Date"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr "De"
+
+msgid "Start date."
+msgstr "Date de début."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr "jusqu’à"
+
+msgid "End date."
+msgstr "Date de fin."
+
 msgid "Call to Action Button"
 msgstr "Bouton : Appel à l'action"
 
@@ -3435,10 +3454,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr "Exporter"
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr "Editer “%(team_name)s”"
-
 msgid "Help about groups"
 msgstr "Aide à propos des groupes"
 
@@ -3473,8 +3488,6 @@ msgstr "Une fois que tu as créé la conférence, tu peux créer des salles de c
 msgid "Conference start and end date and time"
 msgstr "Date et heure de début et de fin de la conférence"
 
-#, fuzzy
-#| msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
 msgstr "La date et l’heure de début sont utilisées pour les e-mails de notification de rappel (s’ils sont configurés). Peut s’étendre sur plusieurs jours."
 
@@ -3482,7 +3495,7 @@ msgid "Instead of regular membership requests, require users to request particip
 msgstr "Au lieu de demandes régulières d’adhésion, les utilisateurs doivent demander leur participation en remplissant un formulaire de demande. Les administrateurs de la conférence peuvent voir toutes les demandes et les approuver/les refuser dans le zone de gestion de la participation."
 
 msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
-msgstr ""
+msgstr "Chaque membre inscrit peut s’inscrire instantanément sans aucune approbation préalable. Garde à l’esprit que chaque membre peut créer et publier du contenu. Les membres ne peuvent toutefois supprimer que leurs propres éléments."
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
 msgstr "Dans quels calendriers de projets ou de groupes la conférence doit-elle figurer ?"
@@ -3527,23 +3540,19 @@ msgid "Icon"
 msgstr "Icône"
 
 msgid "Will be shown as a small logo."
-msgstr ""
+msgstr "Sera affiché comme un petit logo."
 
-#, fuzzy
-#| msgid "This email address already has a registered user!"
 msgid "This content will be visible for all registered users!"
-msgstr "Cette adresse e-mail a déjà un utilisateur enregistré !"
+msgstr "Ce contenu sera visible pour tous les utilisateurs inscrits !"
 
-#, fuzzy
-#| msgid "Header image"
 msgid "Header Image"
 msgstr "Image d'en-tête"
 
 msgid "Will be shown as a header in the conference lobby and on the conference microsite."
-msgstr ""
+msgstr "Sera affiché comme un en-tête dans le hall de la conférence et sur le microsite de la conférence."
 
 msgid "Will be shown as a header on the microsite."
-msgstr ""
+msgstr "Sera affiché comme un en-tête sur le microsite."
 
 msgid "Upload an image."
 msgstr "Télécharger une image."
@@ -3551,7 +3560,9 @@ msgstr "Télécharger une image."
 msgid "Reset"
 msgstr "Réinitialiser"
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
+#, fuzzy
+#| msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr "Les fichiers téléchargés seront disponibles pour le téléchargement et les images seront affichées dans une galerie."
 
 msgid "Example: http://mywebsite.com"
@@ -3836,23 +3847,20 @@ msgid "You are invited!"
 msgstr "Tu es invité !"
 
 msgid "Participation is open for everyone. You may instantly join and become a member."
-msgstr ""
+msgstr "La participation est ouverte à tous. Tu peux rejoindre instantanément et devenir membre."
 
 msgid "You may request to become a member and participate once your request has been accepted."
-msgstr ""
+msgstr "Tu peux demander à devenir membre et à participer une fois que ta demande a été acceptée."
 
 msgid "Join now!"
 msgstr "Rejoins !"
 
-#, fuzzy
-#| msgid "Team membership"
 msgid "Request membership"
-msgstr "Appartenance à l'équipe"
+msgstr "Demander l’adhésion"
 
-#, fuzzy, python-format
-#| msgid "Do you wish to request to join „%(title)s“?"
+#, python-format
 msgid "Do you wish to join „%(title)s“ now?"
-msgstr "Veux-tu demander à rejoindre „%(title)s“ ?"
+msgstr "Souhaites-tu rejoindre „%(title)s“ maintenant ?"
 
 msgid "Browse"
 msgstr "Naviguer"
@@ -3978,6 +3986,10 @@ msgstr "Déplacer"
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr "Un message de %(sender_full_name)s"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "Editer “%(team_name)s”"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
@@ -5044,6 +5056,18 @@ msgstr "Autres projets et groupes"
 msgid "Search for Users"
 msgstr "Rechercher utilisateurs"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create content"
+msgid "External contents"
+msgstr "Créer du contenu"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Visibility on other platforms"
+msgid "Include contents from other platforms"
+msgstr "Visibilité sur d'autres plateformes"
+
 msgid "Ordering"
 msgstr "Ordonner"
 
@@ -5095,9 +5119,6 @@ msgstr "e-mails de tous les abonnés à la newsletter"
 msgid "E-Mails of ALL active users"
 msgstr "e-mails de TOUS les utilisateurs actifs"
 
-msgid "Time"
-msgstr "Temps"
-
 msgid "Ok"
 msgstr "Ok"
 
@@ -5111,21 +5132,19 @@ msgid "Learn more"
 msgstr "En savoir plus"
 
 msgid "Recommended minimum dimensions: 200px x 200px (square)."
-msgstr ""
+msgstr "Dimensions minimales recommandées : 200px x 200px (carré)."
 
 msgid "All common image file types are supported. Maximum file size is 10 MB."
-msgstr ""
+msgstr "Tous les types de fichiers d’image courants sont pris en charge. La taille maximale du fichier est de 10 Mo."
 
 msgid "Recommended minimum dimensions: 600px x 140px (wide)."
-msgstr ""
+msgstr "Dimensions minimales recommandées : 600px x 140px (large)."
 
 msgid "Recommended minimum dimensions: 1140px x 240px (wide)."
-msgstr ""
+msgstr "Dimensions minimales recommandées : 1140px x 240px (large)."
 
-#, fuzzy
-#| msgid "Help about the microsite"
 msgid "View the microsite now"
-msgstr "Aide à propos du microsite"
+msgstr "Voir le microsite maintenant"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
@@ -5182,6 +5201,10 @@ msgstr "Créer groupe"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Organization"
 msgstr "Créer l’organisation"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5348,6 +5371,10 @@ msgid "No current notifications"
 msgstr "Pas de notifications actuelles"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr "Tout le réseau"
 
@@ -5372,8 +5399,8 @@ msgid "SDG"
 msgstr "SDG"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
-msgstr "Externe"
+msgid "from"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You"
@@ -5471,6 +5498,11 @@ msgstr "Erreur !"
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Désolé, le contenu demandé n'a pas pu être récupéré sur le serveur."
 
+#, fuzzy
+#| msgid "Done"
+msgid "on"
+msgstr "Effectué"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr "Visiter la page de l'événement"
@@ -5544,6 +5576,12 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "Je ne souhaite PAS être contacté (e) pour une éventuelle collaboration "
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Your Profile"
+msgid "To Profile"
+msgstr "Ton profil"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Rejoindre projet"
 
@@ -5600,8 +5638,28 @@ msgid "Discover"
 msgstr "Découvrir"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
+#, fuzzy
+#| msgid "Apply Filters"
+msgid "Filter"
+msgstr "Appliquer les filtres"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Note from the organizers"
+msgid "Content from the Forum"
+msgstr "Note des organisateurs"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Only content from my Groups and Projects"
+msgid "Content from my Groups and Projects"
 msgstr "exclusivement le contenu de mes groupes et projets"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Public Project"
+msgid "Public content"
+msgstr "Projet public"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6150,6 +6208,16 @@ msgstr "Chronologie"
 msgid "Contents"
 msgstr "Contenus"
 
+#, fuzzy
+#| msgid "My upcoming Projects"
+msgid "My upcoming Events"
+msgstr "Mes projets à venir"
+
+#, fuzzy
+#| msgid "You can change this setting later in your profile settings"
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr "Tu peux changer ce paramètre plus tard dans tes paramètres de profil"
+
 msgid "Close to me"
 msgstr "Près de moi"
 
@@ -6340,6 +6408,11 @@ msgstr "Menu du projet"
 msgid "Project Dashboard"
 msgstr "Tableau de bord du projet"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "in the Project Dashboard"
+msgstr "Tableau de bord du projet"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Organise efficacement tes projets ou initiatives avec tes collègues militants. Tous les outils importants pour collaborer en un seul endroit : nouvelles, blocs-notes, événements, todos, et plus encore."
 
@@ -6373,6 +6446,9 @@ msgstr "Convertir les éléments sélectionnés en projets"
 msgid "Project administrator"
 msgstr "Administrateur du projet"
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr ""
+
 msgid "Project name"
 msgstr "Nom du projet"
 
@@ -6386,6 +6462,9 @@ msgid "Project members only"
 msgstr "Membres du projet seulement"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr "Les utilisateurs peuvent se joindre en soumettant une demande d’adhésion qui peut être acceptée ou refusée par l’un des administrateurs du projet."
+
+msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
 msgid "Collaborate!"
@@ -6416,6 +6495,11 @@ msgid "Group Menu"
 msgstr "Menu de groupe"
 
 msgid "Group Dashboard"
+msgstr "Tableau de bord de groupe"
+
+#, fuzzy
+#| msgid "Group Dashboard"
+msgid "in the Group Dashboard"
 msgstr "Tableau de bord de groupe"
 
 msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
@@ -6451,6 +6535,9 @@ msgstr "Convertir les éléments sélectionnés en groupes"
 msgid "Group administrator"
 msgstr "Administrateur du groupe"
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr ""
+
 msgid "Group name"
 msgstr "Nom du groupe"
 
@@ -6464,6 +6551,9 @@ msgid "Group members only"
 msgstr "Membres du groupe seulement"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr "Les utilisateurs peuvent se joindre en soumettant une demande d’adhésion qui peut être acceptée ou refusée par l’un des administrateurs du groupe."
+
+msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
@@ -6532,6 +6622,14 @@ msgstr "Convertir les éléments sélectionnés en conférences"
 msgid "Conference contact person"
 msgstr "Personne de contact pour la conférence"
 
+#, fuzzy, python-format
+#| msgid "Request about your project \"%(group_name)s\""
+msgid "Request about your conference \"%(group_name)s\""
+msgstr "Demande à propos de ton projet \"%(group_name)s\""
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr ""
+
 msgid "Conference name"
 msgstr "Nom de la conférence"
 
@@ -6548,6 +6646,9 @@ msgid "Conference members only"
 msgstr "Membres de la conférence seulement"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr "Les utilisateurs peuvent se joindre en soumettant une demande d’adhésion qui peut être acceptée ou refusée par l’un des organisateurs de la conférence."
+
+msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
 
 msgid "Participate!"
@@ -6945,6 +7046,9 @@ msgstr "Désolé, nous n'avons pas pu connecter ton compte, car nous n'avons pas
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Désolé, tu ne peux pas te connecter car ton compte est suspendu. Contacte un admin du système !"
 
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr ""
+
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr "Ton mot de passe a été défini avec succès ! Tu peux maintenant te connecter à l’aide de ton adresse e-mail et du mot de passe que tu viens de définir."
 
@@ -7079,6 +7183,15 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
 
+#~ msgid "Attach existing Files..."
+#~ msgstr "Attacher les fichiers existants..."
+
+#~ msgid "Time"
+#~ msgstr "Temps"
+
+#~ msgid "External"
+#~ msgstr "Externe"
+
 #~ msgid "Determins if application management is visible in conference administration."
 #~ msgstr "Détermine si la gestion des applications est visible dans l’administration de la conférence."
 
@@ -7128,9 +7241,6 @@ msgstr "Tes changements ont été enregistrés."
 #~| msgid "Deactivate Project/Group"
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Désactiver le projet / groupe"
-
-#~ msgid "Public Project"
-#~ msgstr "Projet public"
 
 #~ msgid "Public Group"
 #~ msgstr "Groupe public"

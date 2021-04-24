@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -231,6 +231,9 @@ msgstr "ეს გუნდი შეყვანილი URL-ს ქვეშ 
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "ეს ანგარიში აქტიური აღარ არის. თქვენ გამოსული ხართ."
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr ""
@@ -1407,6 +1410,12 @@ msgstr "თხოვნა თქვენს პროექტთან \"%(gr
 msgid "Request about your group \"%(group_name)s\""
 msgstr "თხოვნა თქვენ ჯგუფთან \"%(group_name)s\" დაკავშირებით"
 
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "Now"
+msgstr "ახლა"
+
 msgid "Token"
 msgstr "ტოკენი"
 
@@ -1501,6 +1510,10 @@ msgid "Managed Tag"
 msgstr ""
 
 #, fuzzy
+msgid "Managed Tags"
+msgstr "იდეის შექმნა"
+
+#, fuzzy
 msgid "Managed Tag Type"
 msgstr "იდეის შექმნა"
 
@@ -1592,6 +1605,14 @@ msgstr "ყოველკვირეული მიმოხილვა"
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
 msgstr "პირადი პარამეტრები თითოეული პროექტის/ჯგუფისათვის..."
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
+msgstr ""
 
 msgid "--- No country selected ---"
 msgstr ""
@@ -2446,9 +2467,6 @@ msgstr "წევრები"
 msgid "Settings"
 msgstr "პარამეტრები"
 
-msgid "Attach existing Files..."
-msgstr "არსებული ფაილების მიმაგრება..."
-
 msgid "Drag and Drop files here..."
 msgstr "გადაიტანეთ და ჩაყარეთ ფაილები აქ..."
 
@@ -2902,21 +2920,6 @@ msgstr ""
 msgid "Application period"
 msgstr "განცხადების სახელი"
 
-msgid "From"
-msgstr "დან"
-
-msgid "Date"
-msgstr "თარიღი"
-
-msgid "Start date."
-msgstr "საწყისი თარიღი."
-
-msgid "Until"
-msgstr "მდე"
-
-msgid "End date."
-msgstr "დასასრული."
-
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr ""
 
@@ -3368,6 +3371,23 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "ნებაყოფლობითი"
 
+msgid "Date"
+msgstr "თარიღი"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr "დან"
+
+msgid "Start date."
+msgstr "საწყისი თარიღი."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr "მდე"
+
+msgid "End date."
+msgstr "დასასრული."
+
 msgid "Call to Action Button"
 msgstr "დაუკავშირდით აქტივაციის ღილაკს"
 
@@ -3670,10 +3690,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr "გადაცემა"
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr "“%(team_name)s-ის” რედაქტირება"
-
 msgid "Help about groups"
 msgstr "ჯგუფების შესახებ დახმარება"
 
@@ -3787,7 +3803,7 @@ msgstr "გამოსახულების ატვირთვა."
 msgid "Reset"
 msgstr "გადატვირთვა"
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr ""
 
 msgid "Example: http://mywebsite.com"
@@ -4243,6 +4259,10 @@ msgstr "გადატანა"
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr "შეტყობინება %(sender_full_name)s-სგან"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "“%(team_name)s-ის” რედაქტირება"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
@@ -5322,6 +5342,16 @@ msgstr "სხვა პროექტები და ჯგუფები"
 msgid "Search for Users"
 msgstr "ძიება მომხმარებლებში"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create content"
+msgid "External contents"
+msgstr "კონტენტის შექმნა"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Include contents from other platforms"
+msgstr ""
+
 msgid "Ordering"
 msgstr "შეკვეთა"
 
@@ -5373,9 +5403,6 @@ msgstr ""
 
 msgid "E-Mails of ALL active users"
 msgstr ""
-
-msgid "Time"
-msgstr "დრო"
 
 msgid "Ok"
 msgstr "კარგი"
@@ -5469,6 +5496,10 @@ msgstr "ჯგუფის შექმნა"
 #, fuzzy
 msgid "Create Organization"
 msgstr "მოწვევის წაშლა"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5640,6 +5671,10 @@ msgid "No current notifications"
 msgstr "მიმდინარე შეტყობინებები"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr "მთლიანი ქსელი"
 
@@ -5666,7 +5701,7 @@ msgid "SDG"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
+msgid "from"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5773,6 +5808,11 @@ msgstr "შეცდომა!"
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "ბოდიშს გიხდით, მოთხოვნილი კონტენტი ვერ დაბრუნდება სერვერიდან."
 
+#, fuzzy
+#| msgid "Done"
+msgid "on"
+msgstr "დასრულებულია"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr "ეწვიეთ ღონისძიებათა გვერდს"
@@ -5850,6 +5890,12 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "არ მსურს პოტენციურ თანამშრომლებთან დაკავშირება!"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Your Profile"
+msgid "To Profile"
+msgstr "თქვენი პროფილი"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "პროექტში ჩართვა"
 
@@ -5908,8 +5954,28 @@ msgid "Discover"
 msgstr "ძებნა"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
+#, fuzzy
+#| msgid "Apply Filters"
+msgid "Filter"
+msgstr "ფილტრების გამოყენება"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Content (left column)"
+msgid "Content from the Forum"
+msgstr "შინაარსი (მარცხენა სვეტი)"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Only content from my Groups and Projects"
+msgid "Content from my Groups and Projects"
 msgstr "კონტენტი მხოლოდ ჩემი ჯგუფებიდან და პროექტებიდან"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Public Project"
+msgid "Public content"
+msgstr "საჯარო პროექტი"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6473,6 +6539,16 @@ msgstr "Timeline"
 msgid "Contents"
 msgstr "კონტენტები"
 
+#, fuzzy
+#| msgid "My Groups and Projects"
+msgid "My upcoming Events"
+msgstr "ჩემი პროექტები და ჯგუფები"
+
+#, fuzzy
+#| msgid "You can change this setting later in your profile settings"
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr "თქვენ შეგიძლიათ შეცვალოთ ეს პარამეტრი მოგვიანებით, თქვენს პროფილის პარამეტრებში"
+
 msgid "Close to me"
 msgstr "ჩემთან ახლოს"
 
@@ -6669,6 +6745,10 @@ msgstr "პროექტის ტიპი"
 msgid "Project Dashboard"
 msgstr "ხელსაწყოთა პანელი"
 
+#, fuzzy
+msgid "in the Project Dashboard"
+msgstr "ხელსაწყოთა პანელი"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "თქვენი პროექტების და ინიციატივების ეფექტურად ორგანიზება თქვენთან ერთად კამპანიაზე მომუშავეებთან ერთად. ყველა მნიშვნელოვანი საშუალება ერთ ადგილას: ახალი ამბები, დაფები, ღონისძიებები, ტოდოები და სხვა."
 
@@ -6716,6 +6796,9 @@ msgstr "არჩეული ჯგუფების პროექტებ�
 msgid "Project administrator"
 msgstr "პროექტის ადმინისტრატორი"
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr ""
+
 msgid "Project name"
 msgstr "პროექტის სახელი"
 
@@ -6733,6 +6816,9 @@ msgid "Project members only"
 msgstr "მხოლოდ გუნდის წევრებისათვის"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
 msgid "Collaborate!"
@@ -6775,6 +6861,10 @@ msgstr "ჯგუფის სახელი"
 
 #, fuzzy
 msgid "Group Dashboard"
+msgstr "ხელსაწყოთა პანელი"
+
+#, fuzzy
+msgid "in the Group Dashboard"
 msgstr "ხელსაწყოთა პანელი"
 
 msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
@@ -6824,6 +6914,9 @@ msgstr "არჩეული პროექტების ჯგუფებ�
 msgid "Group administrator"
 msgstr "ჯგუფის ადმინისტრატორი"
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr ""
+
 msgid "Group name"
 msgstr "ჯგუფის სახელი"
 
@@ -6841,6 +6934,9 @@ msgid "Group members only"
 msgstr "მხოლოდ გუნდის წევრებისათვის"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 #, fuzzy
@@ -6942,6 +7038,14 @@ msgstr "არჩეული ჯგუფების პროექტებ�
 msgid "Conference contact person"
 msgstr "ვიდეო კონფერენციის სერვერი"
 
+#, fuzzy, python-format
+#| msgid "Request about your project \"%(group_name)s\""
+msgid "Request about your conference \"%(group_name)s\""
+msgstr "თხოვნა თქვენს პროექტთან \"%(group_name)s\" დაკავშირებით"
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr ""
+
 #, fuzzy
 msgid "Conference name"
 msgstr "ვიდეო კონფერენციის სერვერი"
@@ -6966,6 +7070,9 @@ msgid "Conference members only"
 msgstr "ვიდეო კონფერენციის სერვერი"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
 
 #, fuzzy
@@ -7389,6 +7496,9 @@ msgstr "სამწუხაროდ, ჩვენ არ შეგვიძ�
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "სამწუხაროდ, თქვენ არ შეგიძლიათ შესვლა, რადგან თქვენი ანგარიში შეჩერებულია. გთხოვთ, დაუკავშირდეთ სისტემურ ადმინისტრატორს!"
 
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr ""
+
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr ""
 
@@ -7531,6 +7641,12 @@ msgstr "თქვენ არ ხართ %s-ის წევრი! თუ �
 msgid "Your changes have been saved."
 msgstr "თქვენი ცვლილებები შენახულია."
 
+#~ msgid "Attach existing Files..."
+#~ msgstr "არსებული ფაილების მიმაგრება..."
+
+#~ msgid "Time"
+#~ msgstr "დრო"
+
 #, fuzzy
 #~| msgid "Header image"
 #~ msgid "Banner Image"
@@ -7565,9 +7681,6 @@ msgstr "თქვენი ცვლილებები შენახულ�
 
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "პროექტები და ჯგუფები დეაქტივირირებულია"
-
-#~ msgid "Public Project"
-#~ msgstr "საჯარო პროექტი"
 
 #~ msgid "Public Group"
 #~ msgstr "საჯარო ჯგუფი"

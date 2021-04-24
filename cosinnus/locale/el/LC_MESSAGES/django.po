@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -238,6 +238,9 @@ msgid "This team no longer resides under the URL you entered. You have been redi
 msgstr ""
 
 msgid "This account is no longer active. You have been logged out."
+msgstr ""
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1344,6 +1347,9 @@ msgstr ""
 msgid "Request about your group \"%(group_name)s\""
 msgstr ""
 
+msgid "Now"
+msgstr ""
+
 msgid "Token"
 msgstr ""
 
@@ -1437,6 +1443,9 @@ msgstr ""
 msgid "Managed Tag"
 msgstr ""
 
+msgid "Managed Tags"
+msgstr ""
+
 msgid "Managed Tag Type"
 msgstr ""
 
@@ -1518,6 +1527,14 @@ msgstr ""
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
 msgstr ""
 
 msgid "--- No country selected ---"
@@ -2303,9 +2320,6 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-msgid "Attach existing Files..."
-msgstr ""
-
 msgid "Drag and Drop files here..."
 msgstr ""
 
@@ -2732,21 +2746,6 @@ msgstr ""
 msgid "Application period"
 msgstr ""
 
-msgid "From"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Start date."
-msgstr ""
-
-msgid "Until"
-msgstr ""
-
-msgid "End date."
-msgstr ""
-
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr ""
 
@@ -3155,6 +3154,23 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr ""
 
+msgid "Date"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr ""
+
+msgid "Start date."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr ""
+
+msgid "End date."
+msgstr ""
+
 msgid "Call to Action Button"
 msgstr ""
 
@@ -3427,10 +3443,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr ""
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr ""
-
 msgid "Help about groups"
 msgstr ""
 
@@ -3537,7 +3549,7 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr ""
 
 msgid "Example: http://mywebsite.com"
@@ -3960,6 +3972,10 @@ msgstr ""
 
 #, python-format
 msgid "A message from %(sender_full_name)s"
+msgstr ""
+
+#, python-format
+msgid "Edit “%(team_name)s”"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -4845,6 +4861,14 @@ msgstr ""
 msgid "Search for Users"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "External contents"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Include contents from other platforms"
+msgstr ""
+
 msgid "Ordering"
 msgstr ""
 
@@ -4894,9 +4918,6 @@ msgid "E-Mails of all newsletter subcribers"
 msgstr ""
 
 msgid "E-Mails of ALL active users"
-msgstr ""
-
-msgid "Time"
 msgstr ""
 
 msgid "Ok"
@@ -4980,6 +5001,10 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Organization"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5147,6 +5172,10 @@ msgid "No current notifications"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr ""
 
@@ -5171,7 +5200,7 @@ msgid "SDG"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
+msgid "from"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5270,6 +5299,9 @@ msgstr ""
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr ""
 
+msgid "on"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr ""
@@ -5343,6 +5375,10 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "To Profile"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr ""
 
@@ -5399,7 +5435,19 @@ msgid "Discover"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
+msgid "Filter"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Content from the Forum"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Content from my Groups and Projects"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Public content"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5949,6 +5997,12 @@ msgstr ""
 msgid "Contents"
 msgstr ""
 
+msgid "My upcoming Events"
+msgstr ""
+
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr ""
+
 msgid "Close to me"
 msgstr ""
 
@@ -6136,6 +6190,9 @@ msgstr ""
 msgid "Project Dashboard"
 msgstr ""
 
+msgid "in the Project Dashboard"
+msgstr ""
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr ""
 
@@ -6169,6 +6226,9 @@ msgstr ""
 msgid "Project administrator"
 msgstr ""
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr ""
+
 msgid "Project name"
 msgstr ""
 
@@ -6182,6 +6242,9 @@ msgid "Project members only"
 msgstr ""
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
 msgid "Collaborate!"
@@ -6212,6 +6275,9 @@ msgid "Group Menu"
 msgstr ""
 
 msgid "Group Dashboard"
+msgstr ""
+
+msgid "in the Group Dashboard"
 msgstr ""
 
 msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
@@ -6247,6 +6313,9 @@ msgstr ""
 msgid "Group administrator"
 msgstr ""
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr ""
+
 msgid "Group name"
 msgstr ""
 
@@ -6260,6 +6329,9 @@ msgid "Group members only"
 msgstr ""
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
@@ -6328,6 +6400,13 @@ msgstr ""
 msgid "Conference contact person"
 msgstr ""
 
+#, python-format
+msgid "Request about your conference \"%(group_name)s\""
+msgstr ""
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr ""
+
 msgid "Conference name"
 msgstr ""
 
@@ -6344,6 +6423,9 @@ msgid "Conference members only"
 msgstr ""
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
 
 msgid "Participate!"
@@ -6739,6 +6821,9 @@ msgid "Sorry, we could not connect your user account, because we could not retri
 msgstr ""
 
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
+msgstr ""
+
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
 msgstr ""
 
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."

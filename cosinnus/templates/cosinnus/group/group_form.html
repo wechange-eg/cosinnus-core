@@ -16,7 +16,7 @@
 
 {% block page_title %}
 	{% if object %}
-	   {% blocktrans with team_name=object.name %}Edit “{{ team_name }}”{% endblocktrans %}
+	   {{ group_model_class.get_trans.EDIT }}: {{ object.name }}
 	{% else %}
 	   {{ group_model_class.get_trans.CREATE }}
     {% endif %}
@@ -356,7 +356,7 @@
                         {% if group_model == "CosinnusConference" %}
 	                        {# Attachable File upload Field #}
 	                        {% captureas files_legend %}
-		                        {% trans "Uploaded files will be available for download and images will be shown in a gallery." %}
+		                        {% trans "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room." %}
 		                        {% trans "This content will be visible for all registered users!" %}
 		                        {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
 	                        {% endcaptureas %}
@@ -401,7 +401,7 @@
                         
 		                {% block managed_tag_field %}
 		                    {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS %}
-		                        {% include 'cosinnus/fields/managed_tag_formfield.html' with form=form.forms.obj legend=COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_CONTENT type="group" %}
+		                        {% include 'cosinnus/fields/managed_tag_formfield.html' with form=form.forms.obj type="group" %}
 		                    {% endif %}
 		                {% endblock managed_tag_field %}
 		                

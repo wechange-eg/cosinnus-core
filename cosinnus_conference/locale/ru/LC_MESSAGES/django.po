@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,12 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
-msgstr ""
+msgstr "Ваша конференция все еще находится в ознакомительном режиме. У Вас есть доступ ко всем функциям, но их можно использовать без ограничений лишь с несколькими людьми. Чтобы обеспечить полную функциональность Вашей конференции со многими пользователями, бесплатно зарезервируйте достаточный объем здесь:"
 
-#, fuzzy
-#| msgid "Conferences"
 msgid "Conference Bookings"
-msgstr "Конференции"
+msgstr "Резервирования для конференции"
 
 msgid "Conferences"
 msgstr "Конференции"
