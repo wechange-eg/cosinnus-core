@@ -33,7 +33,7 @@ from cosinnus.models.group import CosinnusPortal,\
 from cosinnus.models import MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
-    send_mail_or_fail_threaded, send_html_mail_threaded
+    send_mail_or_fail_threaded, send_html_mail_threaded, send_mail_or_fail
 from django.template.loader import render_to_string
 from django.http.response import HttpResponseNotAllowed, JsonResponse, HttpResponseRedirect,\
     HttpResponseForbidden, HttpResponse, HttpResponseServerError
@@ -858,7 +858,7 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
         send_mail_or_fail_threaded(new_email, subj_user, None, data)
         
 
-def email_first_login_token_to_user(user):
+def email_first_login_token_to_user(user, threaded=True):
     """ Sets the profile variables for a user to login without a set password,
         and sends out an email with a verification URL to the user.
     """
@@ -881,7 +881,12 @@ def email_first_login_token_to_user(user):
         'content': render_to_string(template, data),
     })
     subj_user = render_to_string('cosinnus/mail/user_email_first_token_subj.txt', data)
-    send_mail_or_fail_threaded(user.email, subj_user, None, data)
+    
+    if threaded:
+        send_mail_func = send_mail_or_fail_threaded
+    else:
+        send_mail_func = send_mail_or_fail
+    send_mail_func(user.email, subj_user, None, data)
     
     user.cosinnus_profile.settings[PROFILE_SETTING_LOGIN_TOKEN_SENT] = timezone.now()
     user.cosinnus_profile.save()

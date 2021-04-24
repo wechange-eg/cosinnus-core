@@ -28,7 +28,7 @@ from cosinnus.views.profile import UserProfileUpdateView
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.utils.html import render_html_with_variables
-from cosinnus.core.mail import send_html_mail_threaded
+from cosinnus.core.mail import send_html_mail
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.views.user import email_first_login_token_to_user
@@ -153,13 +153,13 @@ class BaseNewsletterUpdateView(UpdateView):
                 filtered_users.append(user)
         return filtered_users
     
-    def _send_newsletter(self, recipients):
+    def _send_newsletter(self, recipients, threaded=True):
         subject = self.object.subject
         text = self.object.body
         for recipient in recipients:
             user_text = textfield(render_html_with_variables(recipient, text))
             # omitt the topic line after "Hello user," by passing topic_instead_of_subject=' '
-            send_html_mail_threaded(recipient, subject, user_text, topic_instead_of_subject=' ')
+            send_html_mail(recipient, subject, user_text, topic_instead_of_subject=' ', threaded=threaded)
 
     def form_valid(self, form):
         self.object = form.save()
@@ -170,7 +170,7 @@ class BaseNewsletterUpdateView(UpdateView):
             my_self = self
             class CosinnusSendNewsletterThread(Thread):
                 def run(self):
-                    my_self._send_newsletter(recipients)
+                    my_self._send_newsletter(recipients, threaded=False)
             CosinnusSendNewsletterThread().start()
             
             self.object.sent = timezone.now()
@@ -301,8 +301,8 @@ class UserListView(ListView):
             raise PermissionDenied('You do not have permission to access this page.')
         return super().dispatch(request, *args, **kwargs)
 
-    def send_login_token(self, user):
-        email_first_login_token_to_user(user)
+    def send_login_token(self, user, threaded=True):
+        email_first_login_token_to_user(user, threaded=threaded)
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -336,7 +336,7 @@ class UserListView(ListView):
                             profile = user.cosinnus_profile
                             profile.refresh_from_db()
                             if not PROFILE_SETTING_LOGIN_TOKEN_SENT in profile.settings:
-                                view.send_login_token(user)
+                                view.send_login_token(user, threaded=False)
                 UserLoginTokenThread().start()
                 
                 msg = _('Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations.')

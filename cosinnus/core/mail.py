@@ -164,7 +164,7 @@ def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc
         mail_thread.start()
 
 
-def send_html_mail_threaded(to_user, subject, html_content, topic_instead_of_subject=None):
+def send_html_mail(to_user, subject, html_content, topic_instead_of_subject=None, threaded=False):
     """ Sends out a pretty html to an email-address.
         The given `html_content` will be placed inside the notification html template,
         and the style will be a "from-portal" style (instead of a "from-group" style.
@@ -173,8 +173,14 @@ def send_html_mail_threaded(to_user, subject, html_content, topic_instead_of_sub
     
     template = '/cosinnus/html_mail/notification.html'
     data = get_html_mail_data(to_user, topic_instead_of_subject or subject, html_content)
-    send_mail_or_fail_threaded(to_user.email, subject, template, data, is_html=True)
-
+    if threaded:
+        send_mail_func = send_mail_or_fail_threaded
+    else:
+        send_mail_func = send_mail_or_fail
+    send_mail_func(to_user.email, subject, template, data, is_html=True)
+    
+def send_html_mail_threaded(to_user, subject, html_content, topic_instead_of_subject=None):
+    send_html_mail(to_user, subject, html_content, topic_instead_of_subject=topic_instead_of_subject, threaded=True)
 
 def render_html_mail(to_user, subject, html_content):
     """ Renders the HTML that would be used to send an email given the content.
