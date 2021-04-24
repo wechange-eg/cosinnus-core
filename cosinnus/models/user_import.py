@@ -190,7 +190,7 @@ class CosinnusUserImportProcessorBase(object):
     CSV_HEADERS_TO_FIELD_MAP = {
         'email': 'email',
         'firstname': 'first_name',
-        'lastname':'last_name',
+        'lastname': 'last_name',
     }
     
     # lower case list of all column names known and used for the import
@@ -205,10 +205,10 @@ class CosinnusUserImportProcessorBase(object):
         'first_name',
     ]
     # reverse map of CSV_HEADERS_TO_FIELD_MAP, initialized on init
-    field_name_map = None # dict
+    field_name_map = None  # dict
     
     # a list of django.auth.Users created already during the run
-    created_users = None # dict
+    created_users = None  # dict
     
     # the user performing the import, or None
     import_creator = None
