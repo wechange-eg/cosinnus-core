@@ -1,5 +1,10 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n cosinnus_tags %}
+{% load i18n cosinnus_tags static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static 'js/ajax_forms.js' %}"></script>
+{% endblock extrahead %}
 
 {% block page_title %}{% trans "User Administration" %} - {% trans "Edit" %}{% endblock %}
 
@@ -129,36 +134,42 @@
             <th>{{ user.last_name }}</th>
             <th>{% if user.last_login %}{{ user.last_login }}{% else %}-{% endif %}</th>
             <th>
-                {% if not user.last_login and not user.password %}
-                <form method="post">{% csrf_token %}
-                    {% if request.GET.search %}
-                        <input type="hidden" name="search" value="{{ request.GET.search }}">
-                    {% endif %}
-                    <div class="fadedown pull-right">
-                        <button type="submit" name="send_login_token" value="{{ user.id }}" class="btn btn-emphasized btn-autosize btn-small">
-                            <ul class="media-list">
-                                <li class="media">
-                                    <a class="pull-left">
-                                        <i class="fa fa-envelope"></i>
-                                    </a>
-                                    <div class="media-body">
-						                {% if user.cosinnus_profile.get_last_login_token_sent %}
-						                    {% trans 'Resend login token'%}
-						                {% else %}
-                                            {% trans 'Send login token'%}
-						                {% endif %}
-                                    </div>
-                                </li>
-                            </ul>
-                        </button>
-                    </div>
-                </form>
-                {% endif %}
-                {% if user.cosinnus_profile.get_last_login_token_sent %}
-	                <div class="pull-right">
-	                    {% trans 'Last sent on: ' %} {{ user.cosinnus_profile.get_last_login_token_sent |stringformat:"%Y-%m-%dT%H:%M:%SZ"|date:"SHORT_DATETIME_FORMAT"}}
-	                </div>
-                {% endif %}
+                <div data-target="ajax-form-delete-element" data-ajax-form-id="send-login-token-u-{{ user.id }}">
+	                {% if not user.last_login and not user.password %}
+		                <form method="post" id="send-login-token-u-{{ user.id }}" data-target="ajax-form">{% csrf_token %}
+		                    {% if request.GET.search %}
+		                        <input type="hidden" name="search" value="{{ request.GET.search }}" />
+		                    {% endif %}
+		                    <input type="hidden" name="send_login_token" value="{{ user.id }}" />
+		                    <div class="fadedown pull-right">
+		                        <button type="submit" class="btn btn-emphasized btn-autosize btn-small">
+		                            <ul class="media-list">
+		                                <li class="media">
+		                                    <a class="pull-left">
+		                                        <i class="fa fa-envelope"></i>
+		                                    </a>
+		                                    <div class="media-body">
+								                {% if user.cosinnus_profile.get_last_login_token_sent %}
+								                    {% trans 'Resend login token'%}
+								                {% else %}
+		                                            {% trans 'Send login token'%}
+								                {% endif %}
+		                                    </div>
+		                                </li>
+		                            </ul>
+		                        </button>
+		                    </div>
+		                </form>
+	                {% endif %}
+	                {% if user.cosinnus_profile.get_last_login_token_sent %}
+		                <div class="pull-right">
+		                    {% trans 'Last sent on: ' %} {{ user.cosinnus_profile.get_last_login_token_sent |stringformat:"%Y-%m-%dT%H:%M:%SZ"|date:"SHORT_DATETIME_FORMAT"}}
+		                </div>
+	                {% endif %}
+                </div>                
+                <div class="pull-right color-primary" style="display: none;" data-target="ajax-form-show-element" data-ajax-form-id="send-login-token-u-{{ user.id }}">
+                    {% blocktrans with email=user.email %}Login token was sent to {{ email }}.{% endblocktrans %}
+                </div>
             </th>
         </tr>
         {% endfor %}
