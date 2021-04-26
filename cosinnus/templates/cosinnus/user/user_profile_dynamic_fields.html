@@ -1,6 +1,6 @@
 {% load cosinnus_tags %}
 {% for key, value in profile_values.items %}
-    {% if value %}
+    {% if value and key in labels %}
         <legend>{{ labels|get_item:key|get_attr:'label' }}</legend>
         {% with type=labels|get_item:key|get_attr:'type' %}
             {% if type == 'country' %}
