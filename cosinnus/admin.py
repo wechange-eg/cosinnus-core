@@ -79,13 +79,19 @@ class MembershipAdmin(admin.ModelAdmin):
     
     def make_admin(self, request, queryset):
         """ Converts the memberships' statuses """
-        queryset.update(status=MEMBERSHIP_ADMIN)
+        for item in queryset:
+            # do this one-by-one to preserve triggers
+            item.status = MEMBERSHIP_ADMIN
+            item.save()
         self.message_user(request, f'Made {len(queryset)} users an Admin', messages.SUCCESS)
     make_admin.short_description = _("Convert memberships to Admin status")
         
     def make_member(self, request, queryset):
         """ Converts the memberships' statuses """
-        queryset.update(status=MEMBERSHIP_MEMBER)
+        for item in queryset:
+            # do this one-by-one to preserve triggers
+            item.status = MEMBERSHIP_MEMBER
+            item.save()
         self.message_user(request, f'Made {len(queryset)} users a Member', messages.SUCCESS)
     make_member.short_description = _("Convert memberships to Member status")
     
