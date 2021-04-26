@@ -397,7 +397,7 @@ class BBBRoom(models.Model):
             as it also handles creating statistics.
             @param request: (optional)  """
         if not self.check_user_can_enter_room(user):
-            return HttpResponseForbidden()
+            return None
 
         if not self.is_running:
             try:
