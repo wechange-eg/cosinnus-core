@@ -309,7 +309,16 @@ def get_inherited_visibility_from_group(group):
         return BaseTagObject.VISIBILITY_ALL
     else:
         return BaseTagObject.VISIBILITY_GROUP
-    
+
+def check_user_can_create_groups(user):    
+    """ Checks if a user has the necessary permissions to create a CosinnusGroup """
+    if not user.is_authenticated:
+        return False
+    if check_user_superuser(user):
+        return True
+    if getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False):
+        return True
+    return False
 
 def check_user_can_create_conferences(user):    
     """ Checks if a user has the necessary permissions to create a CosinnusConference """
