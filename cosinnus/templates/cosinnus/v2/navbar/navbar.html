@@ -209,16 +209,18 @@
 					{{ COSINNUS_PROJECT_TRANS.CREATE_NEW }}
 				</div>
 			</a>
-			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:group__group-add' %}"
-                    class="create-menu-link flex-grow">
-                <h2 class="headline">{{ COSINNUS_SOCIETY_TRANS.VERBOSE_NAME }}</h2>
-                <div class="description">
-                    {% include 'cosinnus/v2/texts/create_groups_description.html' %}
-                </div>
-                <div class="action text-bold">
-                    {{ COSINNUS_SOCIETY_TRANS.CREATE_NEW }}
-                </div>
-            </a>
+			{% if not SETTINGS.COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED or user|user_can_create_groups %}
+				<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:group__group-add' %}"
+	                    class="create-menu-link flex-grow">
+	                <h2 class="headline">{{ COSINNUS_SOCIETY_TRANS.VERBOSE_NAME }}</h2>
+	                <div class="description">
+	                    {% include 'cosinnus/v2/texts/create_groups_description.html' %}
+	                </div>
+	                <div class="action text-bold">
+	                    {{ COSINNUS_SOCIETY_TRANS.CREATE_NEW }}
+	                </div>
+	            </a>
+            {% endif %}
             {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
                 {% if not SETTINGS.COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED or user|user_can_create_conferences %}
 		            <a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:conference__group-add' %}"
