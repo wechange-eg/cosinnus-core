@@ -100,6 +100,7 @@ from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizat
 from cosinnus_organization.utils import get_organization_select2_pills
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.views.attached_object import AttachableViewMixin
+from cosinnus.core.middleware import inactive_logout_middleware
 
 logger = logging.getLogger('cosinnus')
 
@@ -441,6 +442,8 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
 
     def get_context_data(self, **kwargs):
         context = super(GroupDetailView, self).get_context_data(**kwargs)
+        user_is_superuser = check_user_superuser(self.request.user)
+        
         admin_ids = self.membership_class.objects.get_admins(group=self.group)
         all_member_ids = self.membership_class.objects.get_members(group=self.group)
         pending_ids = self.membership_class.objects.get_pendings(group=self.group)
@@ -452,7 +455,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         # users in other portals
         # we also exclude users who have never logged in
         _q = get_user_model().objects.all()
-        if not check_user_superuser(self.request.user):
+        if not user_is_superuser:
             _q = filter_active_users(_q)
         _q = _q.order_by('first_name', 'last_name').select_related('cosinnus_profile')
         
@@ -466,8 +469,12 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             exclude(id__in=invited_pending_ids). \
             filter(id__in=CosinnusPortal.get_current().members)
         
-        hidden_members = 0
-        user_count = members.count()
+        hidden_member_count = 0
+        user_count = filter_active_users(members).count()
+        # for admins: count the inactive users
+        inactive_member_count = 0
+        if user_is_superuser:
+            inactive_member_count = members.count() - user_count
         is_member_of_this_group = self.request.user.pk in admin_ids or self.request.user.pk in member_ids or \
                  check_user_superuser(self.request.user)
                  
@@ -487,7 +494,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             # concatenate admins into members, because we might have sorted out a private admin, 
             # and the template iterates only over members to display people
             # members = list(set(chain(members, admins)))
-            hidden_members = user_count - members.count()
+            hidden_member_count = user_count - members.count()
         
         # add admins to user count now, because they are shown even if hidden visibility
         user_count += admins.count()
@@ -537,11 +544,13 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             'recruited': recruited,
             'non_members': non_members,
             'member_count': user_count,
-            'hidden_user_count': hidden_members,
+            'inactive_member_count': inactive_member_count,
+            'hidden_user_count': hidden_member_count,
             'more_user_count': more_user_count,
             'member_invite_form': MultiUserSelectForm(group=self.group),
             'group_invite_form': MultiGroupSelectForm(group=self.group),
-            'invited_groups': invited_groups
+            'invited_groups': invited_groups,
+            'user_is_superuser': user_is_superuser,
         })
         return context
 
