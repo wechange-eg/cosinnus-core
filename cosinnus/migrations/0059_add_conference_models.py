@@ -73,7 +73,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='userprofile',
             name='language',
-            field=models.CharField(choices=[('en', 'English--NATIVE-LANGUAGE'), ('de', 'Deutsch--NATIVE-LANGUAGE'), ('ru', 'Russian--NATIVE-LANGUAGE')], default='de', max_length=2, verbose_name='Language'),
+            field=models.CharField(choices=[('en', 'English--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE'), ('de', 'Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE'), ('ru', 'Russian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')], default='de', max_length=2, verbose_name='Language'),
         ),
         migrations.AddField(
             model_name='cosinnusconferenceroom',

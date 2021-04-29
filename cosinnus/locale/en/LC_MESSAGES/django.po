@@ -504,59 +504,59 @@ msgstr ""
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
 msgstr ""
 
-msgid "Deutsch--NATIVE-LANGUAGE"
+msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Deutsch"
 
-msgid "English--NATIVE-LANGUAGE"
+msgid "English--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "English"
 
-msgid "Russian--NATIVE-LANGUAGE"
+msgid "Russian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Русский"
 
-msgid "Ukrainian--NATIVE-LANGUAGE"
+msgid "Ukrainian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Українська"
 
-msgid "French--NATIVE-LANGUAGE"
+msgid "French--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Français"
 
-msgid "Polish--NATIVE-LANGUAGE"
+msgid "Polish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Polski"
 
-msgid "Spanish--NATIVE-LANGUAGE"
+msgid "Spanish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Español"
 
-msgid "Romanian--NATIVE-LANGUAGE"
+msgid "Romanian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Română"
 
-msgid "Belarussian--NATIVE-LANGUAGE"
+msgid "Belarussian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Беларуская"
 
-msgid "Dutch--NATIVE-LANGUAGE"
+msgid "Dutch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Nederlands"
 
-msgid "Czech--NATIVE-LANGUAGE"
+msgid "Czech--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Čeština"
 
-msgid "Azerbaijani--NATIVE-LANGUAGE"
+msgid "Azerbaijani--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Azerbaycan dili"
 
-msgid "Armenian--NATIVE-LANGUAGE"
+msgid "Armenian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Հայոց լեզու"
 
-msgid "Georgian--NATIVE-LANGUAGE"
+msgid "Georgian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "ქართული ენა"
 
-msgid "Kazakh--NATIVE-LANGUAGE"
+msgid "Kazakh--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Қазақ тілі"
 
-msgid "Arabic--NATIVE-LANGUAGE"
+msgid "Arabic--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "العربية"
 
-msgid "Hebrew--NATIVE-LANGUAGE"
+msgid "Hebrew--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "עברית"
 
-msgid "Belarus"
-msgstr ""
+msgid "Greek--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Ελληνικά"
 
 msgctxt "Multi-Address Field Subfield"
 msgid "Address Title"
