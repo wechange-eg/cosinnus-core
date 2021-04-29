@@ -707,28 +707,31 @@
                  $(this).find('.small-calendar').data('data-dateelement', dateElement);
                 // "2014-04-28"
                 var date = dateElement.attr('data-date');
-                $('#datePickerModal .modal-body .small-calendar')
-                    .fullCalendar('render')
-                    .find('td[data-date='+date+']')
+                $.cosinnus.fullcalendar();
+                $('#datePickerModal .modal-body .small-calendar').
+                    find('td[data-date='+date+']:not(.fc-other-month)')
                     .addClass('selected');
             });
 
             $('#datePickerModal .small-calendar')
-                .on("fullCalendarDayClick", function(event, date, jsEvent) {
-                    var dayElement = jsEvent.currentTarget;
-                    if ($(dayElement).hasClass('fc-other-month')) return;
+                .on("fullCalendarDayClick", function(event, date) {
+                    var calendarElement = event.currentTarget;
+                    if ($(calendarElement).hasClass('fc-other-month')) return;
 
-                    var dateDataAttr = date.getFullYear() + "-"
-                        + ((date.getMonth()+1).toString().length === 2
-                            ? (date.getMonth()+1)
-                            : "0" + (date.getMonth()+1)) + "-"
-                        + (date.getDate().toString().length === 2
-                            ? date.getDate()
-                            : "0" + date.getDate());
+                    var dateDataAttr = date.date.getFullYear() + "-"
+                        + ((date.date.getMonth()+1).toString().length === 2
+                            ? (date.date.getMonth()+1)
+                            : "0" + (date.date.getMonth()+1)) + "-"
+                        + (date.date.getDate().toString().length === 2
+                            ? date.date.getDate()
+                            : "0" + date.date.getDate());
 
                     // unselect all and re-select later
-                    $(dayElement).parent().parent().find('td').removeClass('selected');
-                    $(dayElement).addClass('selected');
+                    $(calendarElement).find('td').removeClass('selected');
+                    $(calendarElement).find('td[data-date='+dateDataAttr+']:not(.fc-other-month)')
+                        .addClass('selected')
+                    console.log(calendarElement)
+                    console.log(dateDataAttr)
 
                     // When submit button pressed, update currently selected date in form
                     var target_element = $(this).data('data-dateelement');
