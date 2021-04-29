@@ -406,8 +406,8 @@ class CosinnusUserImportProcessorBase(object):
             user.save()
             user.username = str(user.id)
             user.save()
-            CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user,
-                                                           status=MEMBERSHIP_MEMBER)
+            # CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user,
+            #                                                status=MEMBERSHIP_MEMBER)
             
         del user_kwargs['username']
         user_import_item.add_user_report_item(str(_('New user account: ') + str(user_kwargs)), report_class="info")
