@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n cosinnus_tags %}
 
 {% if not noinclude %}
 <link rel="stylesheet" href="{% static 'css/vendor/easymde.min.css' %}?v=2.10.1">
@@ -44,7 +44,7 @@
                         editor = null;
                       },
                       className: "btn fa fa-window-close",
-                      title: '{% trans "Disable editor" %}'
+                      title: {% trans "Disable editor" as title_i18n %}{{ title_i18n|json|safe }},
                   }
               ],
 	      });
