@@ -1259,7 +1259,10 @@ def get_attr(obj, attr_name):
 def get_item(obj, attr_name):
     """ Returns the given attribute by trying to resolve
         it in the template using __getitem__ """
-    return obj[attr_name]
+    try:
+        return obj[attr_name]
+    except KeyError:
+        return ''
 
 @register.filter
 def get_item_or_none(obj, attr_name):

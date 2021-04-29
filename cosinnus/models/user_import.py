@@ -401,7 +401,7 @@ class CosinnusUserImportProcessorBase(object):
         if last_name:
             user_kwargs['last_name'] = last_name
         user = get_user_model()(**user_kwargs)
-        
+        #
         if not dry_run:
             user.save()
             user.username = str(user.id)
