@@ -3,163 +3,163 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-22 12:51+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2021-03-30 19:20+0200\n"
+"PO-Revision-Date: 2021-04-26 10:40+0300\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.4.2\n"
 
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
-msgstr ""
+msgstr "Η σύσκεψη βρίσκεται ακόμη σε δοκιμαστική λειτουργία. Έχετε πρόσβαση σε όλες τις λειτουργίες, αλλά μπορείτε να τις χρησιμοποιήσετε μόνο με λίγα άτομα χωρίς περιορισμούς. Για να διασφαλίσετε την πλήρη απόδοση κατά τη σύσκεψή σας με πολλούς χρήστες, προχωρήστε σε δωρεάν κράτηση επαρκούς χωρητικότητας εδώ:"
 
 msgid "Conference Bookings"
-msgstr ""
+msgstr "Κρατήσεις Σύσκεψης"
 
 msgid "Conferences"
-msgstr ""
+msgstr "Συσκέψεις"
 
 msgctxt "the_app"
 msgid "conference"
-msgstr ""
+msgstr "σύσκεψη"
 
 msgid "End date must be before start date"
-msgstr ""
+msgstr "Η ημερομηνία λήξης πρέπει να προηγείται της ημερομηνίας έναρξης"
 
 msgid "Please also provide a start date"
-msgstr ""
+msgstr "Παρακαλούμε εισάγετε επίσης ημερομηνία έναρξης"
 
 msgid "Please also provide a end date"
-msgstr ""
+msgstr "Παρακαλούμε εισάγετε επίσης ημερομηνία λήξης"
 
 msgid "First Choice"
-msgstr ""
+msgstr "Πρώτη Επιλογή"
 
 msgid "Second Choice"
-msgstr ""
+msgstr "Δεύτερη Επιλογή"
 
 msgid "Conference Management"
-msgstr ""
+msgstr "Διαχείριση Σύσκεψης"
 
 msgid "Workshop Participant File Upload"
-msgstr ""
+msgstr "Φόρτωση Αρχείου Συμμετέχοντα στο Σεμινάριο"
 
 #, python-format
 msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr ""
+msgstr "Παρακαλούμε ανεβάστε ένα CSV με τις παρακάτω στήλες: αναγνωριστικό μοναδικού χρήστη, όνομα, επώνυμο και μία στήλη για κάθε σεμινάριο που αναγνωρίζεται από το slug του σεμιναρίου. Για Βοήθεια μπορείτε να κατεβάσετε ένα πρότυπο <a href=\"%(workshop_participants_upload_skeleton)s\">εδώ</a>"
 
 msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr ""
+msgstr "Στη συνέχεια προσθέστε μια σειρά για κάθε λογαριασμό που θέλετε να προσθέσετε. Θα πρέπει να προσθέσετε ένα αναγνωριστικό μοναδικού χρήστη, αλλά το όνομα και το επώνυμο μπορεί να παραμείνει κενό. Στη συνέχεια προσθέστε το 1 σε όλες τις στήλες του σεμιναρίου όπου ο χρήστης θα πρέπει να είναι κανονικό μέλος ή το 2 εάν ο χρήστης θα πρέπει να είναι διαχειριστής του σεμιναρίου."
 
 msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr ""
+msgstr "Η φόρτωση του CSV θα ενεργοποιήσει τη δημιουργία των λογαριασμών και τις συνδρομές σεμιναρίου του λογαριασμού και έχει ως αποτέλεσμα την άμεση λήψη του CSV με τους νέους λογαριασμούς και κωδικούς πρόσβασης. Οι κωδικοί πρόσβασης θα συμπεριληφθούν μόνο όταν δημιουργηθεί ο λογαριασμός. Παρακαλούμε ανανεώστε τη σελίδα μετά τη λήψη."
 
 msgid "Upload File"
-msgstr ""
+msgstr "Φόρτωση Αρχείου"
 
 msgid "Go to conference"
-msgstr ""
+msgstr "Μετάβαση στη σύσκεψη"
 
 msgid "This function is not enabled for this conference."
-msgstr ""
+msgstr "Η συγκεκριμένη λειτουργία δεν έχει ενεργοποιηθεί για αυτή τη σύσκεψη."
 
 msgid "Conference successfully started and user accounts activated"
-msgstr ""
+msgstr "Η σύσκεψη ξεκίνησε με επιτυχία και οι λογαριασμοί χρήστη ενεργοποιήθηκαν"
 
 msgid "Conference successfully finished and user accounts deactivated"
-msgstr ""
+msgstr "Η σύσκεψη ολοκληρώθηκε με επιτυχία και οι λογαριασμοί χρήστη απενεργοποιήθηκαν"
 
 msgid "Successfully deactivated user account"
-msgstr ""
+msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε με επιτυχία"
 
 msgid "Successfully activated user account"
-msgstr ""
+msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
 
 msgid "Successfully removed user"
-msgstr ""
+msgstr "Ο χρήστης αφαιρέθηκε με επιτυχία"
 
 msgid "User was not created"
-msgstr ""
+msgstr "Δεν δημιουργήθηκε χρήστης"
 
 msgid "Workshop username"
-msgstr ""
+msgstr "Όνομα χρήστη σεμιναρίου"
 
 msgid "First Name"
-msgstr ""
+msgstr "Όνομα"
 
 msgid "Last Name"
-msgstr ""
+msgstr "Επώνυμο"
 
 msgid "The room was created successfully."
-msgstr ""
+msgstr "Το δωμάτιο δημιουργήθηκε με επιτυχία."
 
 msgid "The room was saved successfully."
-msgstr ""
+msgstr "Το δωμάτιο αποθηκεύτηκε με επιτυχία."
 
 msgid "The room was deleted successfully."
-msgstr ""
+msgstr "Το δωμάτιο διαγράφηκε με επιτυχία."
 
 msgid "The supplied Conference Room could not be found"
-msgstr ""
+msgstr "Η διαθέσιμη Αίθουσα Σύσκεψης δεν βρέθηκε"
 
 msgid "Conference reminder settings have been successfully updated."
-msgstr ""
+msgstr "Οι ρυθμίσεις υπενθύμισης σύσκεψης έχουν ενημερωθεί με επιτυχία."
 
 msgid "A test email has been sent to your email address."
-msgstr ""
+msgstr "Ένα δοκιμαστικό email έχει σταλεί στη διεύθυνση email σας."
 
 msgid "Participation configurations have been updated."
-msgstr ""
+msgstr "Η διαμόρφωση συμμετοχής έχει ενημερωθεί."
 
 msgid "Your application has been submitted."
-msgstr ""
+msgstr "Η αίτησή σας έχει υποβληθεί."
 
 msgid "Your application has been updated."
-msgstr ""
+msgstr "Η αίτησή σας έχει ενημερωθεί."
 
 msgid "You cannot change your application anymore."
-msgstr ""
+msgstr "Δεν μπορείτε πλέον να πραγματοποιήσετε αλλαγές στην αίτησή σας."
 
 msgid "Application has been withdrawn."
-msgstr ""
+msgstr "Η αίτηση έχει αποσυρθεί."
 
 #, python-format
 msgid "The following users were accepted and added as members: %s"
-msgstr ""
+msgstr "Οι παρακάτω χρήστες έγιναν αποδεκτοί και προστέθηκαν ως μέλη: %s"
 
 #, python-format
 msgid "The following users were put on the wait list: %s"
-msgstr ""
+msgstr "Οι παρακάτω χρήστες προστέθηκαν στη λίστα αναμονής: %s"
 
 #, python-format
 msgid "The following users were declined: %s"
-msgstr ""
+msgstr "Οι παρακάτω χρήστες απορρίφθηκαν: %s"
 
 msgid "Your changes were saved."
-msgstr ""
+msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
 
 msgid "Option"
-msgstr ""
+msgstr "Επιλογή"
 
 msgid "Motivation for applying"
-msgstr ""
+msgstr "Κίνητρο αίτησης"
 
 msgid "Status"
-msgstr ""
+msgstr "Κατάσταση"
 
 msgid "Contact E-Mail Address"
-msgstr ""
+msgstr "Email Επικοινωνίας"
 
 msgid "Contact Phone Number"
-msgstr ""
+msgstr "Τηλέφωνο Επικοινωνίας"
 
 msgid "List of Applicants"
-msgstr ""
+msgstr "Κατάλογος Υποψηφίων"
