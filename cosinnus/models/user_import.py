@@ -386,8 +386,8 @@ class CosinnusUserImportProcessorBase(object):
             @return: None if not successful, else a auth user object """
         # fields are in REQUIRED_FIELDS_FOR_IMPORT so we can assume they exist
         email = item_data.get(self.field_name_map['email']).lower()
-        first_name = item_data.get(self.field_name_map['first_name']) 
-        last_name = item_data.get(self.field_name_map['last_name'], None) 
+        first_name = item_data.get(self.field_name_map['first_name'], '')[:30]
+        last_name = item_data.get(self.field_name_map['last_name'], '')[:30]
         
         if not validates(EmailValidator, email):
             user_import_item.add_user_report_item(_('The email address was not a valid email address!'), report_class="error")
