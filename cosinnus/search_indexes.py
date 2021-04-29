@@ -12,7 +12,8 @@ from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgram
     TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin,\
     DocumentBoostMixin, CommaSeperatedIntegerMultiValueField,\
     LocalCachedIndexMixin, DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
-from cosinnus.utils.user import filter_active_users, filter_portal_users
+from cosinnus.utils.user import filter_active_users, filter_portal_users,\
+    is_user_active
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
     CosinnusConference
@@ -306,6 +307,11 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
         qs = filter_active_users(qs, filter_on_user_profile_model=True)
         qs = qs.select_related('user').all()
         return qs
+    
+    def should_update(self, instance, **kwargs):
+        """ Only update active users """
+        should = super(UserProfileIndex, self).should_update(instance, **kwargs)
+        return should and is_user_active(instance.user)
     
     def _get_memberships_count(self, obj):
         if not hasattr(obj, '_memberships_count'):

@@ -555,6 +555,10 @@ class UserAdmin(DjangoUserAdmin):
         for user in queryset:
             user.is_active = False
             user.save()
+            # save the user's profile as well, 
+            # as numerous triggers occur on the profile instead of the user object
+            if user.cosinnus_profile:
+                user.cosinnus_profile.save()
             count += 1
         message = _('%d Users were deactivated successfully.') % count
         self.message_user(request, message)
