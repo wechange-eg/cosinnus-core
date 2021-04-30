@@ -19,6 +19,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='userprofile',
             name='language',
-            field=models.CharField(choices=[('de', 'Deutsch--NATIVE-LANGUAGE'), ('en', 'English--NATIVE-LANGUAGE'), ('ru', 'Russian--NATIVE-LANGUAGE'), ('uk', 'Ukrainian--NATIVE-LANGUAGE'), ('fr', 'French--NATIVE-LANGUAGE'), ('pl', 'Polish--NATIVE-LANGUAGE'), ('be', 'Belarussian--NATIVE-LANGUAGE')], default='de', max_length=2, verbose_name='Language'),
+            field=models.CharField(choices=[('de', 'Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE'), ('en', 'English--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE'), ('ru', 'Russian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE'), ('uk', 'Ukrainian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE'), ('fr', 'French--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE'), ('pl', 'Polish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE'), ('be', 'Belarussian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')], default='de', max_length=2, verbose_name='Language'),
         ),
     ]

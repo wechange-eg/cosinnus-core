@@ -15,6 +15,10 @@ def replace_non_portal_urls(html_text, replacement_url=None, portal_url=None):
         portal_url = CosinnusPortal.get_current().get_domain()
     if replacement_url is None:
         replacement_url = portal_url
+    # add a GET param to show a redirect warning to the user 
+    # (handled by `ExternalEmailLinkRedirectNoticeMiddleware`)
+    append_param_arg = '?' if not '?' in replacement_url else '&'
+    replacement_url = f'{replacement_url}{append_param_arg}external_link_redirect=1'
     
     for m in reversed([it for it in BETTER_URL_RE.finditer(html_text)]):
         matched_url = m.group()

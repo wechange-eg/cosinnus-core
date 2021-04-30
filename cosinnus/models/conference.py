@@ -457,38 +457,43 @@ APPLICATION_STATES_VISIBLE = [
 
 class CosinnusConferenceApplicationQuerySet(models.QuerySet):
     
+    def active(self):
+        return self.filter(conference__is_active=True)
+    
     def order_by_conference_startdate(self):
-        return self.order_by('conference__from_date')
+        return self.active().order_by('conference__from_date')
     
     def pending_current(self):
         """ Returns all pending applications with conference to_date in the future """
         now = timezone.now()
         pending = [APPLICATION_SUBMITTED, APPLICATION_WAITLIST]
-        return self.filter(conference__to_date__gte=now)\
+        return self.active()\
+                   .filter(conference__to_date__gte=now)\
                    .filter(status__in=pending)\
                    .order_by('conference__from_date')
 
     def accepted_current(self):
         now = timezone.now()
         rejected = [APPLICATION_INVALID, APPLICATION_DECLINED]
-        return self.filter(conference__to_date__gte=now)\
+        return self.active()\
+                   .filter(conference__to_date__gte=now)\
                    .exclude(status__in=rejected)\
                    .order_by('conference__from_date')
 
     def accepted_in_past(self):
         now = timezone.now()
-        return self.filter(conference__to_date__lte=now, status=APPLICATION_ACCEPTED)
+        return self.active().filter(conference__to_date__lte=now, status=APPLICATION_ACCEPTED)
     
     def declined_in_past(self):
         now = timezone.now()
-        return self.filter(conference__to_date__lte=now, status=APPLICATION_DECLINED)
+        return self.active().filter(conference__to_date__lte=now, status=APPLICATION_DECLINED)
     
     def applied(self):
-        return self.filter(status=APPLICATION_SUBMITTED)
+        return self.active().filter(status=APPLICATION_SUBMITTED)
 
     def pending(self):
         pending = [APPLICATION_SUBMITTED, APPLICATION_WAITLIST]
-        return self.filter(status__in=pending)
+        return self.active().filter(status__in=pending)
 
 
 class CosinnusConferenceApplication(models.Model):

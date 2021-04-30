@@ -30,6 +30,7 @@ user_conference_application_accepted = dispatch.Signal(providing_args=["user", "
 user_conference_application_declined = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_conference_application_waitlisted = dispatch.Signal(providing_args=["user", "obj", "audience"])
 conference_created_in_group = dispatch.Signal(providing_args=["user", "obj", "audience"])
+conference_created_in_group_alert = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_conference_invited_to_apply = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
@@ -397,6 +398,7 @@ notifications = {
         'alert_text': _('%(sender_name)s created the conference %(object_name)s'),
         'alert_text_multi': _('%(sender_name)s created %(count)d conferences'),
         'alert_multi_type': 2,
+        'can_be_alert': False,
         
         'is_html': True,
         'event_text': _('%(sender_name)s created the conference %(object_name)s'),
@@ -410,6 +412,26 @@ notifications = {
         },
         'action_button_text': pgettext_lazy('email campaign button label to apply for a conference', 'Apply now!'),
         'action_button_alternate_text': _('View conference'),
+    },
+    'conference_created_in_group_alert': {
+        'label': _('A user created a new conference'), 
+        'hidden': True, 
+        'signals': [conference_created_in_group_alert],
+        'default': True,
+        'moderatable_content': False,
+        
+        'alert_text': _('%(sender_name)s created the conference %(object_name)s'),
+        'alert_text_multi': _('%(sender_name)s created %(count)d conferences'),
+        'alert_multi_type': 2,
+        'can_be_alert': True,
+        'can_be_email': False,
+        'data_attributes': {
+            'object_name': 'name', 
+            'object_url': 'get_absolute_url', 
+            'object_text': 'description_long_or_short',
+            'image_url': 'get_avatar_thumbnail_url',
+            'event_meta': 'from_date',
+        },
     },
     'user_conference_invited_to_apply': {
         'label': '<hidden-user_group_invited>', 

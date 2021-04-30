@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -233,6 +233,9 @@ msgstr "Ця група або проєкт більше не знаходить
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Здійснено вихід із системи, тому що цей обліковий запис більше не активний."
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr ""
@@ -1408,6 +1411,12 @@ msgstr "Запити щодо Вашого проекту \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Запити щодо Вашої групи \"%(group_name)s\""
 
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "Now"
+msgstr "Зараз"
+
 msgid "Token"
 msgstr "Токен"
 
@@ -1502,6 +1511,10 @@ msgid "Managed Tag"
 msgstr ""
 
 #, fuzzy
+msgid "Managed Tags"
+msgstr "Створити ідею"
+
+#, fuzzy
 msgid "Managed Tag Type"
 msgstr "Створити ідею"
 
@@ -1593,6 +1606,14 @@ msgstr "У щотижневому звіті"
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
 msgstr "Окремі налаштування для кожного Проєкту/Групи..."
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
+msgstr ""
 
 msgid "--- No country selected ---"
 msgstr "--- Не вибрано жодної країни ---"
@@ -2461,9 +2482,6 @@ msgstr "Учасники"
 msgid "Settings"
 msgstr "Налаштування"
 
-msgid "Attach existing Files..."
-msgstr "Додати наявні файли..."
-
 msgid "Drag and Drop files here..."
 msgstr "Перетягніть файли сюди..."
 
@@ -2924,21 +2942,6 @@ msgstr ""
 #| msgid "Application name"
 msgid "Application period"
 msgstr "Назва застосунку"
-
-msgid "From"
-msgstr "З"
-
-msgid "Date"
-msgstr "Дата"
-
-msgid "Start date."
-msgstr "Дата початку."
-
-msgid "Until"
-msgstr "До"
-
-msgid "End date."
-msgstr "Кінцева дата."
 
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr ""
@@ -3403,6 +3406,23 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "опціонально"
 
+msgid "Date"
+msgstr "Дата"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr "З"
+
+msgid "Start date."
+msgstr "Дата початку."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr "До"
+
+msgid "End date."
+msgstr "Кінцева дата."
+
 msgid "Call to Action Button"
 msgstr "Кнопка «Заклик до дії»"
 
@@ -3708,10 +3728,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr "Експортувати"
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr "Редагувати “%(team_name)s”"
-
 msgid "Help about groups"
 msgstr "Довідка щодо груп"
 
@@ -3826,7 +3842,7 @@ msgstr "Завантажити зображення."
 msgid "Reset"
 msgstr "Скинути"
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr ""
 
 msgid "Example: http://mywebsite.com"
@@ -4279,6 +4295,10 @@ msgstr "Перемістити"
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr "Повідомлення від %(sender_full_name)s"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "Редагувати “%(team_name)s”"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
@@ -5366,6 +5386,18 @@ msgstr "Інші Проєкти та Групи"
 msgid "Search for Users"
 msgstr "Пошук Користувачів"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create content"
+msgid "External contents"
+msgstr "Створити контент"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Visibility on other platforms"
+msgid "Include contents from other platforms"
+msgstr "Видимість на інших платформах"
+
 msgid "Ordering"
 msgstr "Упорядкування"
 
@@ -5416,9 +5448,6 @@ msgstr "Електронні адреси всіх підписників на �
 
 msgid "E-Mails of ALL active users"
 msgstr "Електронні адреси ВСІХ активних користувачів"
-
-msgid "Time"
-msgstr "Час"
 
 msgid "Ok"
 msgstr "Ок"
@@ -5510,6 +5539,10 @@ msgstr "Створити Групу"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Organization"
 msgstr "Створити Організацію"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5676,6 +5709,10 @@ msgid "No current notifications"
 msgstr "Поточних сповіщень немає"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr "Уся Мережа"
 
@@ -5702,8 +5739,8 @@ msgid "SDG"
 msgstr "Цілі Сталого Розвитку"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
-msgstr "Зовнішні"
+msgid "from"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You"
@@ -5810,6 +5847,11 @@ msgstr "Помилка!"
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Вибачте, контент, який ви хочете переглянути, не вдається завантажити з сервера."
 
+#, fuzzy
+#| msgid "Done"
+msgid "on"
+msgstr "Виконано"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr "Відвідати сторінку заходу"
@@ -5886,6 +5928,12 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "НЕ бажає контакту щодо можливої співпраці!"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Your Profile"
+msgid "To Profile"
+msgstr "Ваш Профіль"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Долучитися до Проєкту"
 
@@ -5944,8 +5992,28 @@ msgid "Discover"
 msgstr "Дізнатися"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
+#, fuzzy
+#| msgid "Apply Filters"
+msgid "Filter"
+msgstr "Застосувати фільтри"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Content (left column)"
+msgid "Content from the Forum"
+msgstr "Зміст (лівий стовпчик)"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Only content from my Groups and Projects"
+msgid "Content from my Groups and Projects"
 msgstr "Лише контент з моїх Груп та Проєктів"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Public Project"
+msgid "Public content"
+msgstr "Відкритий Проєкт"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6510,6 +6578,16 @@ msgstr "Хронологія"
 msgid "Contents"
 msgstr "Контент"
 
+#, fuzzy
+#| msgid "My Groups and Projects"
+msgid "My upcoming Events"
+msgstr "Мої Групи та Проєкти"
+
+#, fuzzy
+#| msgid "You can change this setting later in your profile settings"
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr "Ви можете пізніше змінити ці налаштування в налаштуваннях профілю"
+
 msgid "Close to me"
 msgstr "Поруч"
 
@@ -6704,6 +6782,11 @@ msgstr "Меню Проєкту"
 msgid "Project Dashboard"
 msgstr "Інформаційна панель Проєкту"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "in the Project Dashboard"
+msgstr "Інформаційна панель Проєкту"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Ефективно реалізовуйте проєкти або ініціативи разом із однодумцями! Ми зібрали всі необхідні інструменти в одному місці: Новини, Документи, Заходи, Завдання та значно більше."
 
@@ -6751,6 +6834,9 @@ msgstr "Перетворити вибрані Групи в Проєкти"
 msgid "Project administrator"
 msgstr "Адміністратори Проєкту"
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr ""
+
 msgid "Project name"
 msgstr "Назва проєкту"
 
@@ -6768,6 +6854,9 @@ msgid "Project members only"
 msgstr "Тільки члени команди"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
 msgid "Collaborate!"
@@ -6810,7 +6899,12 @@ msgstr "Меню Групи"
 msgid "Group Dashboard"
 msgstr "Інформаційна панель Групи"
 
-msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
+#, fuzzy
+#| msgid "Group Dashboard"
+msgid "in the Group Dashboard"
+msgstr "Інформаційна панель Групи"
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Групи допомагають вдосконалити зв'язок та співпрацю у великих мережах та організаціях. Всередині Групи ти можеш об'єднати декілька менших проєктів або робочих груп."
 
 msgid "Edit Group"
@@ -6857,6 +6951,9 @@ msgstr "Перетворити вибрані Проєкти в Групи"
 msgid "Group administrator"
 msgstr "Адміністратори Групи"
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr ""
+
 msgid "Group name"
 msgstr "Назва групи"
 
@@ -6874,6 +6971,9 @@ msgid "Group members only"
 msgstr "Тільки члени команди"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 #, fuzzy
@@ -6978,6 +7078,14 @@ msgstr "Перетворити вибрані Групи в Проєкти"
 msgid "Conference contact person"
 msgstr "Тип конференційної кімнати"
 
+#, fuzzy, python-format
+#| msgid "Request about your project \"%(group_name)s\""
+msgid "Request about your conference \"%(group_name)s\""
+msgstr "Запити щодо Вашого проекту \"%(group_name)s\""
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr ""
+
 #, fuzzy
 #| msgid "Conference Page"
 msgid "Conference name"
@@ -7004,6 +7112,9 @@ msgid "Conference members only"
 msgstr "Кольори конференції"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
 
 #, fuzzy
@@ -7423,6 +7534,9 @@ msgstr "Вибачте, ми не змогли встановити зв'язо�
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Вибачте, Ви не можете ввійти, тому що ваш профіль було призупинено. Будь ласка, зверніться до системного адміністратора!"
 
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr ""
+
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr ""
 
@@ -7565,6 +7679,15 @@ msgstr "Наразі Ви не є членом %s! Якщо ви бажаєте 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
 
+#~ msgid "Attach existing Files..."
+#~ msgstr "Додати наявні файли..."
+
+#~ msgid "Time"
+#~ msgstr "Час"
+
+#~ msgid "External"
+#~ msgstr "Зовнішні"
+
 #, fuzzy
 #~| msgid "Header image"
 #~ msgid "Banner Image"
@@ -7611,9 +7734,6 @@ msgstr "Ваші зміни були збережені."
 
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Деактивувати Проєкти та Групи"
-
-#~ msgid "Public Project"
-#~ msgstr "Відкритий Проєкт"
 
 #~ msgid "Public Group"
 #~ msgstr "Відкрита Група"

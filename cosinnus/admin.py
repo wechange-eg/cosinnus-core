@@ -419,7 +419,9 @@ admin.site.register(CosinnusConference, CosinnusConferenceAdmin)
 class CosinnusPortalAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'site', 'public')
     prepopulated_fields = {'slug': ('name', )}
-    readonly_fields = ('saved_infos',)
+    readonly_fields = ('saved_infos',) 
+    exclude = ('logo_image', 'background_image', 'protocol', 'public', 
+               'website', 'description', 'top_color', 'bottom_color',)
     inlines = [CosinnusConferenceSettingsInline]
     
     def queryset(self, request):
@@ -553,6 +555,10 @@ class UserAdmin(DjangoUserAdmin):
         for user in queryset:
             user.is_active = False
             user.save()
+            # save the user's profile as well, 
+            # as numerous triggers occur on the profile instead of the user object
+            if user.cosinnus_profile:
+                user.cosinnus_profile.save()
             count += 1
         message = _('%d Users were deactivated successfully.') % count
         self.message_user(request, message)

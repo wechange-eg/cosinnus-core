@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -235,6 +235,9 @@ msgid "This team no longer resides under the URL you entered. You have been redi
 msgstr ""
 
 msgid "This account is no longer active. You have been logged out."
+msgstr ""
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -501,59 +504,59 @@ msgstr ""
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
 msgstr ""
 
-msgid "Deutsch--NATIVE-LANGUAGE"
+msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Deutsch"
 
-msgid "English--NATIVE-LANGUAGE"
+msgid "English--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "English"
 
-msgid "Russian--NATIVE-LANGUAGE"
+msgid "Russian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Русский"
 
-msgid "Ukrainian--NATIVE-LANGUAGE"
+msgid "Ukrainian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Українська"
 
-msgid "French--NATIVE-LANGUAGE"
+msgid "French--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Français"
 
-msgid "Polish--NATIVE-LANGUAGE"
+msgid "Polish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Polski"
 
-msgid "Spanish--NATIVE-LANGUAGE"
+msgid "Spanish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Español"
 
-msgid "Romanian--NATIVE-LANGUAGE"
+msgid "Romanian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Română"
 
-msgid "Belarussian--NATIVE-LANGUAGE"
+msgid "Belarussian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Беларуская"
 
-msgid "Dutch--NATIVE-LANGUAGE"
+msgid "Dutch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Nederlands"
 
-msgid "Czech--NATIVE-LANGUAGE"
+msgid "Czech--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Čeština"
 
-msgid "Azerbaijani--NATIVE-LANGUAGE"
+msgid "Azerbaijani--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Azerbaycan dili"
 
-msgid "Armenian--NATIVE-LANGUAGE"
+msgid "Armenian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Հայոց լեզու"
 
-msgid "Georgian--NATIVE-LANGUAGE"
+msgid "Georgian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "ქართული ენა"
 
-msgid "Kazakh--NATIVE-LANGUAGE"
+msgid "Kazakh--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Қазақ тілі"
 
-msgid "Arabic--NATIVE-LANGUAGE"
+msgid "Arabic--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "العربية"
 
-msgid "Hebrew--NATIVE-LANGUAGE"
+msgid "Hebrew--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "עברית"
 
-msgid "Belarus"
-msgstr ""
+msgid "Greek--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Ελληνικά"
 
 msgctxt "Multi-Address Field Subfield"
 msgid "Address Title"
@@ -1380,6 +1383,9 @@ msgstr ""
 msgid "Request about your group \"%(group_name)s\""
 msgstr ""
 
+msgid "Now"
+msgstr ""
+
 msgid "Token"
 msgstr ""
 
@@ -1487,6 +1493,10 @@ msgid "Managed Tag"
 msgstr ""
 
 #, fuzzy
+msgid "Managed Tags"
+msgstr "Create Project"
+
+#, fuzzy
 msgid "Managed Tag Type"
 msgstr "Create Project"
 
@@ -1572,6 +1582,14 @@ msgstr ""
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
 msgstr ""
 
 msgid "--- No country selected ---"
@@ -2392,9 +2410,6 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-msgid "Attach existing Files..."
-msgstr ""
-
 msgid "Drag and Drop files here..."
 msgstr ""
 
@@ -2843,21 +2858,6 @@ msgstr ""
 msgid "Application period"
 msgstr ""
 
-msgid "From"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Start date."
-msgstr ""
-
-msgid "Until"
-msgstr ""
-
-msgid "End date."
-msgstr ""
-
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr ""
 
@@ -3287,6 +3287,23 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr ""
 
+msgid "Date"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr ""
+
+msgid "Start date."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr ""
+
+msgid "End date."
+msgstr ""
+
 msgid "Call to Action Button"
 msgstr ""
 
@@ -3574,10 +3591,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr ""
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr "Edit project “%(team_name)s”"
-
 msgid "Help about groups"
 msgstr ""
 
@@ -3687,7 +3700,7 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr ""
 
 msgid "Example: http://mywebsite.com"
@@ -4133,6 +4146,10 @@ msgstr ""
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr ""
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "Edit project “%(team_name)s”"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -5031,6 +5048,15 @@ msgstr "Other Projects"
 msgid "Search for Users"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "External contents"
+msgstr "Create Project"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Include contents from other platforms"
+msgstr ""
+
 msgid "Ordering"
 msgstr ""
 
@@ -5080,9 +5106,6 @@ msgid "E-Mails of all newsletter subcribers"
 msgstr ""
 
 msgid "E-Mails of ALL active users"
-msgstr ""
-
-msgid "Time"
 msgstr ""
 
 msgid "Ok"
@@ -5174,6 +5197,10 @@ msgstr "Create Group"
 #, fuzzy
 msgid "Create Organization"
 msgstr "There are no groups."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5356,6 +5383,10 @@ msgid "No current notifications"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr ""
 
@@ -5381,7 +5412,7 @@ msgid "SDG"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
+msgid "from"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5482,6 +5513,9 @@ msgstr ""
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr ""
 
+msgid "on"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr ""
@@ -5561,6 +5595,11 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+msgid "To Profile"
+msgstr "Edit Project"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 msgid "Join Project"
 msgstr "Edit Project"
 
@@ -5620,9 +5659,22 @@ msgid "Discover"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Filter"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Content from the Forum"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-msgid "Only content from my Groups and Projects"
+msgid "Content from my Groups and Projects"
 msgstr "My Projects"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Public content"
+msgstr "All Projects"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6185,6 +6237,13 @@ msgstr ""
 msgid "Contents"
 msgstr ""
 
+#, fuzzy
+msgid "My upcoming Events"
+msgstr "My Projects"
+
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr ""
+
 msgid "Close to me"
 msgstr ""
 
@@ -6387,6 +6446,10 @@ msgstr "Project Type"
 msgid "Project Dashboard"
 msgstr "Project Type"
 
+#, fuzzy
+msgid "in the Project Dashboard"
+msgstr "Project Type"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr ""
 
@@ -6429,6 +6492,9 @@ msgstr "Convert selected Groups to Projects"
 msgid "Project administrator"
 msgstr "The administration of Projects begins with managing its membership. Here you can decide who can join your project and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal."
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr ""
+
 #, fuzzy
 msgid "Project name"
 msgstr "Project Type"
@@ -6444,6 +6510,9 @@ msgid "Project members only"
 msgstr "Project Type"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
 msgid "Collaborate!"
@@ -6480,7 +6549,11 @@ msgstr "Group"
 msgid "Group Dashboard"
 msgstr "Project Type"
 
-msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
+#, fuzzy
+msgid "in the Group Dashboard"
+msgstr "Project Type"
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr ""
 
 msgid "Edit Group"
@@ -6520,6 +6593,9 @@ msgstr "Convert selected Projects to Groups"
 msgid "Group administrator"
 msgstr "There are no groups."
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr ""
+
 #, fuzzy
 msgid "Group name"
 msgstr "Group"
@@ -6534,6 +6610,9 @@ msgid "Group members only"
 msgstr ""
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
@@ -6614,6 +6693,13 @@ msgstr "Convert selected Groups to Projects"
 msgid "Conference contact person"
 msgstr ""
 
+#, python-format
+msgid "Request about your conference \"%(group_name)s\""
+msgstr ""
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr ""
+
 #, fuzzy
 msgid "Conference name"
 msgstr "Create Project"
@@ -6636,6 +6722,9 @@ msgid "Conference members only"
 msgstr ""
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
 
 msgid "Participate!"
@@ -7037,6 +7126,9 @@ msgstr ""
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr ""
 
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr ""
+
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr ""
 
@@ -7215,10 +7307,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Other Projects"
-
-#, fuzzy
-#~ msgid "Public Project"
-#~ msgstr "All Projects"
 
 #, fuzzy
 #~ msgid "Public Group"

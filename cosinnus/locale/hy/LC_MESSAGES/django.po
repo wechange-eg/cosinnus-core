@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -231,6 +231,9 @@ msgstr "Այս թիմն այլևս ներկայացված չէ ձեր մուտք
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Այս անձնական էջյ այլևս ակտիվ չէ: Դուք դուրս եք եկել համակարգից."
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr ""
@@ -1407,6 +1410,12 @@ msgstr "Հայց ձեր նախագծի վերաբերյալ \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Հայց ձեր խմբի վերաբերյալ \"%(group_name)s\""
 
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "Now"
+msgstr "Հիմա"
+
 msgid "Token"
 msgstr "Թոքեն"
 
@@ -1501,6 +1510,10 @@ msgid "Managed Tag"
 msgstr ""
 
 #, fuzzy
+msgid "Managed Tags"
+msgstr "Ստեղծել գաղափար"
+
+#, fuzzy
 msgid "Managed Tag Type"
 msgstr "Ստեղծել գաղափար"
 
@@ -1592,6 +1605,14 @@ msgstr "Շաբաթվա զեկույցում"
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
 msgstr "Անհատական կարգավորումներ յուրաքանչյուր Ծրագրի / Խմբի համար ..."
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
+msgstr ""
 
 msgid "--- No country selected ---"
 msgstr ""
@@ -2448,9 +2469,6 @@ msgstr "Անդամներ"
 msgid "Settings"
 msgstr "Կարգավորումներ"
 
-msgid "Attach existing Files..."
-msgstr "Կցել առկա ֆայլերը ..."
-
 msgid "Drag and Drop files here..."
 msgstr "Քաշեք և թողեք ֆայլերը այստեղ ..."
 
@@ -2906,21 +2924,6 @@ msgstr ""
 msgid "Application period"
 msgstr "Հավելվածի անվանումը"
 
-msgid "From"
-msgstr "Սկսած"
-
-msgid "Date"
-msgstr "Ամսաթիվ"
-
-msgid "Start date."
-msgstr "Մեկնարկի ամսաթիվ."
-
-msgid "Until"
-msgstr "Մինչև"
-
-msgid "End date."
-msgstr "Ավարտի ամսաթիվ."
-
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr ""
 
@@ -3372,6 +3375,23 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "ըստ ցանկության"
 
+msgid "Date"
+msgstr "Ամսաթիվ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr "Սկսած"
+
+msgid "Start date."
+msgstr "Մեկնարկի ամսաթիվ."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr "Մինչև"
+
+msgid "End date."
+msgstr "Ավարտի ամսաթիվ."
+
 msgid "Call to Action Button"
 msgstr "Գործողության կոչի կոճակ"
 
@@ -3674,10 +3694,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr "Արտահանել"
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr "Խմբագրել “%(team_name)s”"
-
 msgid "Help about groups"
 msgstr "Օգնություն խմբերի մասին"
 
@@ -3791,7 +3807,7 @@ msgstr "Վերբեռնել պատկեր."
 msgid "Reset"
 msgstr "Վերակայել"
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr ""
 
 msgid "Example: http://mywebsite.com"
@@ -4247,6 +4263,10 @@ msgstr "Տեղափոխել"
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr "Նամակ %(sender_full_name)s -ից"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "Խմբագրել “%(team_name)s”"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
@@ -5324,6 +5344,16 @@ msgstr "Այլ Նախագծեր և Խմբեր"
 msgid "Search for Users"
 msgstr "Օգտատերերի որոնում"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create content"
+msgid "External contents"
+msgstr "Ստեղծել բովանդակություն"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Include contents from other platforms"
+msgstr ""
+
 msgid "Ordering"
 msgstr "Պատվեր"
 
@@ -5375,9 +5405,6 @@ msgstr ""
 
 msgid "E-Mails of ALL active users"
 msgstr ""
-
-msgid "Time"
-msgstr "Ժամանակ"
 
 msgid "Ok"
 msgstr "Ok"
@@ -5471,6 +5498,10 @@ msgstr "Ստեղծել Խումբ"
 #, fuzzy
 msgid "Create Organization"
 msgstr "Ջնջել հրավերը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5641,6 +5672,10 @@ msgid "No current notifications"
 msgstr "Ընթացիկ ծանուցումներ չկան"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr "Ամբողջ ցանցը"
 
@@ -5667,7 +5702,7 @@ msgid "SDG"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
+msgid "from"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5774,6 +5809,11 @@ msgstr "Սխալ!"
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Ներեցեք, բայց հայցվող բովանդակությունը հնարավոր չէ ստանալ սերվերից."
 
+#, fuzzy
+#| msgid "Done"
+msgid "on"
+msgstr "Կատարված է"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr "Այցելել իրադարձությունների էջ"
@@ -5851,6 +5891,12 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "ՉԻ ցանկանում կապվել հնարավոր համագործակցության համար!"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Your Profile"
+msgid "To Profile"
+msgstr "Քո պրոֆիլը"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Միանալ Նախագծին"
 
@@ -5909,8 +5955,28 @@ msgid "Discover"
 msgstr "Բացահայտել"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
+#, fuzzy
+#| msgid "Apply Filters"
+msgid "Filter"
+msgstr "Կիրառել Ֆիլտրեր"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Content (left column)"
+msgid "Content from the Forum"
+msgstr "Բովանդակություն (ձախ սյուն)"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Only content from my Groups and Projects"
+msgid "Content from my Groups and Projects"
 msgstr "Միայն իմ Խմբերի և նախագծերի բովանդակությունը"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Public Project"
+msgid "Public content"
+msgstr "Հասարակական Նախագիծ"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6474,6 +6540,16 @@ msgstr "Նորությունների էջ"
 msgid "Contents"
 msgstr "Բովանդակություն"
 
+#, fuzzy
+#| msgid "My Groups and Projects"
+msgid "My upcoming Events"
+msgstr "Իմ Խմբերը և Նախագծերը"
+
+#, fuzzy
+#| msgid "You can change this setting later in your profile settings"
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr "Դուք կարող եք փոխել այս կարգավորումը ավելի ուշ ձեր պրոֆիլի պարամետրերում"
+
 msgid "Close to me"
 msgstr "Մոտ է ինձ"
 
@@ -6670,6 +6746,10 @@ msgstr "Նախագծի տեսակը"
 msgid "Project Dashboard"
 msgstr "Կառավարման վահանակ"
 
+#, fuzzy
+msgid "in the Project Dashboard"
+msgstr "Կառավարման վահանակ"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Արդյունավետ կազմակերպեք ձեր նախագծերը կամ նախաձեռնությունները ձեր գործընկերների հետ միասին: Մի տեղում համագործակցելու համար առկա են բոլոր կարևոր գործիքները- Նորություններ, Պահոցներ, իրադարձություններ, Անելիքների ցանկ և այլն."
 
@@ -6717,6 +6797,9 @@ msgstr "Փոխակերպել ընտրված Խմբերը Ծրագրերի"
 msgid "Project administrator"
 msgstr "Նախագցի ադմինիստրատոր"
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr ""
+
 msgid "Project name"
 msgstr "Նախագծի անվանում"
 
@@ -6734,6 +6817,9 @@ msgid "Project members only"
 msgstr "Միայն թիմի անդամները"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
 msgid "Collaborate!"
@@ -6778,7 +6864,11 @@ msgstr "Խմբի անվանում"
 msgid "Group Dashboard"
 msgstr "Կառավարման վահանակ"
 
-msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
+#, fuzzy
+msgid "in the Group Dashboard"
+msgstr "Կառավարման վահանակ"
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Խմբերն օգնում են բարելավել հաղորդակցությունը և համագործակցությունը խոշոր ցանցերում կամ կազմակերպություններում: Մի խմբի շրջանակներում կարող եք միաձուլել մի քանի փոքր նախագծեր կամ աշխատանքային խմբեր."
 
 msgid "Edit Group"
@@ -6825,6 +6915,9 @@ msgstr "Փոխակերպել ընտրված Ծրագրերը Խմբերի"
 msgid "Group administrator"
 msgstr "Խմբի ադմինիստրատոր"
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr ""
+
 msgid "Group name"
 msgstr "Խմբի անվանում"
 
@@ -6842,6 +6935,9 @@ msgid "Group members only"
 msgstr "Միայն թիմի անդամները"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 #, fuzzy
@@ -6943,6 +7039,14 @@ msgstr "Փոխակերպել ընտրված Խմբերը Ծրագրերի"
 msgid "Conference contact person"
 msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
+#, fuzzy, python-format
+#| msgid "Request about your project \"%(group_name)s\""
+msgid "Request about your conference \"%(group_name)s\""
+msgstr "Հայց ձեր նախագծի վերաբերյալ \"%(group_name)s\""
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr ""
+
 #, fuzzy
 msgid "Conference name"
 msgstr "Վիդեո-կոնֆերանսի սերվեր"
@@ -6967,6 +7071,9 @@ msgid "Conference members only"
 msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr ""
+
+msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
 
 #, fuzzy
@@ -7390,6 +7497,9 @@ msgstr "Ներեցեք, մենք չկարողացանք միանալ ձեր օգ
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Ներեցեք, դուք չեք կարող մուտք գործել, քանի որ ձեր էջը կասեցված է: Խնդրում ենք կապվել համակարգի ադմինիստրատորի հետ!"
 
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr ""
+
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr ""
 
@@ -7532,6 +7642,12 @@ msgstr "Դուք ներկայումս %s- ի անդամ չեք: Եթե ցանկ�
 msgid "Your changes have been saved."
 msgstr "Ձեր փոփոխությունները պահպանվել են."
 
+#~ msgid "Attach existing Files..."
+#~ msgstr "Կցել առկա ֆայլերը ..."
+
+#~ msgid "Time"
+#~ msgstr "Ժամանակ"
+
 #, fuzzy
 #~| msgid "Header image"
 #~ msgid "Banner Image"
@@ -7566,9 +7682,6 @@ msgstr "Ձեր փոփոխությունները պահպանվել են."
 
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Դեակտիվացված նախագծեր և խմբեր"
-
-#~ msgid "Public Project"
-#~ msgstr "Հասարակական Նախագիծ"
 
 #~ msgid "Public Group"
 #~ msgstr "Հասարակական Խումբ"

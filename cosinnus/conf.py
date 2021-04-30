@@ -769,6 +769,9 @@ class CosinnusConf(AppConf):
     
     USER_EXTERNAL_USERS_FORBIDDEN = False
     
+    # whether the "last name" user form field is also required, just like "first name"
+    USER_FORM_LAST_NAME_REQUIRED = False
+    
     # if true, an additional signup form field will be present
     SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK = False
     

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
-"PO-Revision-Date: 2021-03-12 17:51+0100\n"
+"POT-Creation-Date: 2021-04-22 12:51+0200\n"
+"PO-Revision-Date: 2021-04-22 12:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -47,7 +47,7 @@ msgstr "Токен с таким кодом уже существует! Пож�
 
 #, python-format
 msgid "The following items were converted to %s:"
-msgstr ""
+msgstr "Следующие элементы были преобразованы в %s:"
 
 msgid "The following Users were added to this portal:"
 msgstr "На портал были добавлены следующие пользователи:"
@@ -239,6 +239,9 @@ msgstr "Эта группа/этот проект больше не находи
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Вы были выведены из системы, так как Ваш аккаунт неактивен."
+
+msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Вы автоматически вышли из системы, так как были некоторое время неактивны."
@@ -455,7 +458,7 @@ msgstr "%(sender_name)s пригласил Вас присоединиться, 
 
 #, python-format
 msgid "%(sender_name)s just created \"%(team_name)s\" on %(portal_name)s!"
-msgstr ""
+msgstr "%(sender_name)s только что создал/создала “%(team_name)s\" на %(portal_name)s!"
 
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
@@ -1199,16 +1202,14 @@ msgstr "Проект"
 msgid "Conference"
 msgstr "Конференция"
 
-#, fuzzy
-#| msgid "New membership request"
 msgid "Regular membership requests"
-msgstr "Новые заявки на вступление"
+msgstr "Заявки на обычное членство"
 
 msgid "Require participation applications for this conference"
 msgstr "Требовать подать заявку на участие для этой конференции"
 
 msgid "Everyone may join"
-msgstr ""
+msgstr "Каждый может присоединиться"
 
 msgid "Project Type"
 msgstr "Тип проекта"
@@ -1353,6 +1354,12 @@ msgstr "Запрос о Вашем проекте \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Запрос о Вашей группе \"%(group_name)s\""
 
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "Now"
+msgstr "Сейчас"
+
 msgid "Token"
 msgstr "Токен"
 
@@ -1447,6 +1454,11 @@ msgstr "Cosinnus идеи"
 msgid "Managed Tag"
 msgstr "Управляемый тег"
 
+#, fuzzy
+#| msgid "Managed Tag"
+msgid "Managed Tags"
+msgstr "Управляемый тег"
+
 msgid "Managed Tag Type"
 msgstr "Создать идею"
 
@@ -1529,6 +1541,14 @@ msgstr "Ответ на \"я хотел бы получать письма-ув�
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
 msgstr "Индивидуальные настройки для каждого Проекта/Группы..."
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "No E-Mails for RocketChat messages"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgid "E-Mails for all direct messages and mentions"
+msgstr ""
 
 msgid "--- No country selected ---"
 msgstr "--- Не выделена страна ---"
@@ -2234,8 +2254,7 @@ msgstr "Поиск электронного письма, имени или фа
 msgid "search"
 msgstr "Поиск"
 
-#, fuzzy, python-format
-#| msgid "Could not find any users with an email that contains '%(search_string)s.'"
+#, python-format
 msgid ""
 "\n"
 "                Found %(total)s user with an email that contains: '%(search_string)s'\n"
@@ -2244,8 +2263,12 @@ msgid_plural ""
 "\n"
 "                Found %(total)s users with an email that contains: '%(search_string)s'\n"
 "                "
-msgstr[0] "Не удалось найти пользователей с электронным письмом, содержащим ‘%(search_string)s.’"
-msgstr[1] "Не удалось найти пользователей с электронным письмом, содержащим ‘%(search_string)s.’"
+msgstr[0] ""
+"\n"
+"Найден %(total)s пользователь с электронным письмом, содержащим: '%(search_string)s'                "
+msgstr[1] ""
+"\n"
+"Найдено %(total)s пользователя/-ей с электронным письмом, содержащим: ‘%(search_string)s’                "
 
 msgid "clear search"
 msgstr "Сбросить результаты поиска"
@@ -2317,9 +2340,6 @@ msgstr "Члены"
 
 msgid "Settings"
 msgstr "Настройки"
-
-msgid "Attach existing Files..."
-msgstr "Приложить имеющиеся файлы…"
 
 msgid "Drag and Drop files here..."
 msgstr "Перетащите файлы сюда..."
@@ -2747,21 +2767,6 @@ msgstr " Если желаете воспользоваться простой �
 msgid "Application period"
 msgstr "Название приложения"
 
-msgid "From"
-msgstr "От"
-
-msgid "Date"
-msgstr "Дата"
-
-msgid "Start date."
-msgstr "Дата начала."
-
-msgid "Until"
-msgstr "До"
-
-msgid "End date."
-msgstr "Любая дата."
-
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr "Если задано в параметрах, заявки можно отправлять и редактировать только в течение этого промежутка времени. Этот параметр можно изменить в любое время, чтобы закрыть или снова включить подачу заявок."
 
@@ -2844,7 +2849,7 @@ msgstr "Отправить за 1 день до начала конференц
 
 #, python-format
 msgid "Edit Room “%(title)s”"
-msgstr ""
+msgstr "Редактировать комнату “%(title)s”"
 
 msgid "Create Room"
 msgstr "Создать"
@@ -3173,6 +3178,23 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "дополнительно"
 
+msgid "Date"
+msgstr "Дата"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "From"
+msgstr "От"
+
+msgid "Start date."
+msgstr "Дата начала."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Until"
+msgstr "До"
+
+msgid "End date."
+msgstr "Любая дата."
+
 msgid "Call to Action Button"
 msgstr "Клавиша Призыв к действию"
 
@@ -3446,10 +3468,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr "Экспортировать"
 
-#, python-format
-msgid "Edit “%(team_name)s”"
-msgstr "Редактировать проект  “%(team_name)s”"
-
 msgid "Help about groups"
 msgstr "Справка о группах"
 
@@ -3484,8 +3502,6 @@ msgstr "После создания конференции можно созда
 msgid "Conference start and end date and time"
 msgstr "Конференция успешно началась и пользовательсике аккаунты активированы"
 
-#, fuzzy
-#| msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
 msgstr "Дата и время начала используются в электронных письмах с напоминанием (если настроено). Может охватывать несколько дней."
 
@@ -3493,7 +3509,7 @@ msgid "Instead of regular membership requests, require users to request particip
 msgstr "Вместо обычных заявок на членство потребуйте от пользователей заполнить форму заявки на участие. Администраторы конференции могут видеть все заявки и принять/отклонить их в разделе управления заявками на участие."
 
 msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
-msgstr ""
+msgstr "Любой зарегистрированный член может присоединиться без предварительного одобрения. Помните, что любой член может создавать и публиковать контент. Тем не менее члены могут удалять только свои элементы."
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
 msgstr "В календарях каких проектов или групп должна отображаться эта конференция?"
@@ -3538,23 +3554,19 @@ msgid "Icon"
 msgstr "Изображение"
 
 msgid "Will be shown as a small logo."
-msgstr ""
+msgstr "Будет отображаться как маленький логотип."
 
-#, fuzzy
-#| msgid "This email address already has a registered user!"
 msgid "This content will be visible for all registered users!"
-msgstr "Этот адрес электронной почты уже используется зарегистрированным пользователем!"
+msgstr "Этот контент будут видеть все зарегистрированные пользователи!"
 
-#, fuzzy
-#| msgid "Header image"
 msgid "Header Image"
-msgstr "Фоновое изображение"
+msgstr "Изображение в верхнем колонтитуле"
 
 msgid "Will be shown as a header in the conference lobby and on the conference microsite."
-msgstr ""
+msgstr "Будет отображаться как верхний колонтитул в фойе конференции и на микросайте конференции."
 
 msgid "Will be shown as a header on the microsite."
-msgstr ""
+msgstr "Будет отображаться как верхний колонтитул на микросайте конференции."
 
 msgid "Upload an image."
 msgstr "Загрузить изображение."
@@ -3562,7 +3574,9 @@ msgstr "Загрузить изображение."
 msgid "Reset"
 msgstr "Сбросить"
 
-msgid "Uploaded files will be available for download and images will be shown in a gallery."
+#, fuzzy
+#| msgid "Uploaded files will be available for download and images will be shown in a gallery."
+msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr "Загруженные файлы доступны для скачивания, и изображения будут отображаться в галерее."
 
 msgid "Example: http://mywebsite.com"
@@ -3848,23 +3862,20 @@ msgid "You are invited!"
 msgstr "Вы приглашены!"
 
 msgid "Participation is open for everyone. You may instantly join and become a member."
-msgstr ""
+msgstr "Участие открыто для всех. Вы можете сразу же присоединиться и стать членом."
 
 msgid "You may request to become a member and participate once your request has been accepted."
-msgstr ""
+msgstr "Вы можете отправить заявку на членство и участвовать, как только Ваш заявка будет принята."
 
 msgid "Join now!"
 msgstr "Присоединяйтесь сейчас!"
 
-#, fuzzy
-#| msgid "Team membership"
 msgid "Request membership"
-msgstr "Членство в группе"
+msgstr "Подать заявку на членство"
 
-#, fuzzy, python-format
-#| msgid "Do you wish to request to join „%(title)s“?"
+#, python-format
 msgid "Do you wish to join „%(title)s“ now?"
-msgstr "Вы хотите отправить запрос, чтобы присоединиться к „%(title)s“?"
+msgstr "Хотите присоединиться к „%(title)s“ сейчас?"
 
 msgid "Browse"
 msgstr "Просматривать"
@@ -3991,6 +4002,10 @@ msgstr "Переместить"
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr "Сообщение от %(sender_full_name)s"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "Редактировать проект  “%(team_name)s”"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
@@ -4234,6 +4249,20 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
+"Здравствуйте %(user_name)s,\n"
+"\n"
+"для Вас только что был создан аккаунт на %(site_name)s. Мы рады приветствовать Вас!\n"
+"\n"
+"Чтобы начать пользоваться аккаунтом, Вы должны установить пароль. Затем Вы сможете войти с помощью Вашего адреса электронной почты %(user_mail)s и этого пароля.\n"
+"\n"
+"\n"
+"Нажмите на следующую ссылку, чтобы установить пароль (либо скопируйте и вставьте эту ссылку в браузер):\n"
+"%(domain_url)s%(verification_token)s\n"
+"\n"
+"\n"
+"Благодарим Вас и до скорого!\n"
+"\n"
+"Ваша команда %(site_name)s"
 
 #, python-format
 msgid "Please set yout initial password for %(site_name)s!"
@@ -5045,6 +5074,18 @@ msgstr "Другие проекты и группы"
 msgid "Search for Users"
 msgstr "Поиск пользователей"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create content"
+msgid "External contents"
+msgstr "Создать контент"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Visibility on other platforms"
+msgid "Include contents from other platforms"
+msgstr "Видимость на других платформах"
+
 # ???
 msgid "Ordering"
 msgstr "Порядок"
@@ -5097,9 +5138,6 @@ msgstr "Емейлы всех подписчиков новостей"
 msgid "E-Mails of ALL active users"
 msgstr "Емейлы ВСЕХ активных пользователей"
 
-msgid "Time"
-msgstr "Время"
-
 msgid "Ok"
 msgstr "Ок"
 
@@ -5113,21 +5151,19 @@ msgid "Learn more"
 msgstr "Узнать больше"
 
 msgid "Recommended minimum dimensions: 200px x 200px (square)."
-msgstr ""
+msgstr "Рекомендуемые минимальные размеры: 200 пикселей × 200 пикселей (квадрат)."
 
 msgid "All common image file types are supported. Maximum file size is 10 MB."
-msgstr ""
+msgstr "Поддерживаются все стандартные форматы графических файлов. Максимальный размер файла — 10 МБ."
 
 msgid "Recommended minimum dimensions: 600px x 140px (wide)."
-msgstr ""
+msgstr "Рекомендуемые минимальные размеры: 600 пикселей × 140 пикселей (широкий формат)."
 
 msgid "Recommended minimum dimensions: 1140px x 240px (wide)."
-msgstr ""
+msgstr "Рекомендуемые минимальные размеры: 1140 пикселей × 240 пикселей (широкий формат)."
 
-#, fuzzy
-#| msgid "Help about the microsite"
 msgid "View the microsite now"
-msgstr "Справка о микроватте"
+msgstr "Посмотреть микросайт сейчас"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
@@ -5184,6 +5220,10 @@ msgstr "Создать группу"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Organization"
 msgstr "Создать организацию"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Categories"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "SDGS"
@@ -5350,6 +5390,10 @@ msgid "No current notifications"
 msgstr "Нет текущих уведовлений"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Find on map:"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Entire Network"
 msgstr "Вся сеть"
 
@@ -5374,8 +5418,8 @@ msgid "SDG"
 msgstr "Цели устойчивого развития"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "External"
-msgstr "Внешний"
+msgid "from"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You"
@@ -5473,6 +5517,11 @@ msgstr "Ошибкa!"
 msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Извините, но запрошенный контент не может быть получен с сервера."
 
+#, fuzzy
+#| msgid "Done"
+msgid "on"
+msgstr "Готово"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
 msgstr "Посетите страницу мероприятия"
@@ -5546,6 +5595,12 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "НЕ желаю контактов насчет возможного сотрудничества!"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Your Profile"
+msgid "To Profile"
+msgstr "Ваш профиль"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Присоединиться к проекту"
 
@@ -5602,8 +5657,28 @@ msgid "Discover"
 msgstr "Узнай"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Only content from my Groups and Projects"
+#, fuzzy
+#| msgid "Apply Filters"
+msgid "Filter"
+msgstr "Применить фильтры"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Note from the organizers"
+msgid "Content from the Forum"
+msgstr "Сообщение от организаторов"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Only content from my Groups and Projects"
+msgid "Content from my Groups and Projects"
 msgstr "Только контент с моих Групп и Проектов"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Public Project"
+msgid "Public content"
+msgstr "Проект в открытом доступе"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "We could not load more data at this time."
@@ -6152,6 +6227,16 @@ msgstr "Хронология"
 msgid "Contents"
 msgstr "Содержание"
 
+#, fuzzy
+#| msgid "My upcoming Projects"
+msgid "My upcoming Events"
+msgstr "Мои группы и проекты"
+
+#, fuzzy
+#| msgid "You can change this setting later in your profile settings"
+msgid "The map is centrered on the address you added in your profile settings."
+msgstr "Вы можете позднее изменить эти настройки в настройках Вашего профиля"
+
 msgid "Close to me"
 msgstr "Рядом со мной"
 
@@ -6343,6 +6428,11 @@ msgstr "Меню проекта"
 msgid "Project Dashboard"
 msgstr "Панель управления проекта"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "in the Project Dashboard"
+msgstr "Панель управления проекта"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Реализовывай проекты и инициативы эффективно вместе с единомышленниками. Все важные инструменты для этого сотрудничества вы найдете в одном месте: Новости, Документы, События, Задания и много другого."
 
@@ -6376,6 +6466,9 @@ msgstr "Преобразовать выделенные группы в прое
 msgid "Project administrator"
 msgstr "Администратор проекта"
 
+msgid "You are now in a private channel with the admins of this project."
+msgstr ""
+
 msgid "Project name"
 msgstr "Название проекта"
 
@@ -6389,6 +6482,9 @@ msgid "Project members only"
 msgstr "Только для членов проекта или группы"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+msgstr "Пользователи могут присоединиться путем отправки заявки на членство, которую может принять или отклонить администратор проекта."
+
+msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
 msgid "Collaborate!"
@@ -6421,7 +6517,12 @@ msgstr "Меню группы"
 msgid "Group Dashboard"
 msgstr "Панель управления группы"
 
-msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
+#, fuzzy
+#| msgid "Group Dashboard"
+msgid "in the Group Dashboard"
+msgstr "Панель управления группы"
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Группы помогают улучшить связь и сотрудничество в большой сети или организации. Внутри одной группы ты можешь объединить несколько небольших проектов или рабочих групп."
 
 msgid "Edit Group"
@@ -6454,6 +6555,9 @@ msgstr "Преобразовать выделенные проекты в гру
 msgid "Group administrator"
 msgstr "Администратор группы"
 
+msgid "You are now in a private channel with the admins of this group."
+msgstr ""
+
 msgid "Group name"
 msgstr "Название группы"
 
@@ -6467,6 +6571,9 @@ msgid "Group members only"
 msgstr "Только для членов проекта или группы"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+msgstr "Пользователи могут присоединиться путем отправки заявки на членство, которую может принять или отклонить администратор группы."
+
+msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
@@ -6535,6 +6642,14 @@ msgstr "Преобразовать выделенные группы в прое
 msgid "Conference contact person"
 msgstr "Тип комнаты конференции"
 
+#, fuzzy, python-format
+#| msgid "Request about your project \"%(group_name)s\""
+msgid "Request about your conference \"%(group_name)s\""
+msgstr "Запрос о Вашем проекте \"%(group_name)s\""
+
+msgid "You are now in a private channel with the organizers of this conference."
+msgstr ""
+
 msgid "Conference name"
 msgstr "Страница конференции"
 
@@ -6551,6 +6666,9 @@ msgid "Conference members only"
 msgstr "Цвет темы конференции"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+msgstr "Пользователи могут присоединиться путем отправки заявки на членство, которую может принять или отклонить организатор конференции."
+
+msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
 
 msgid "Participate!"
@@ -6768,7 +6886,7 @@ msgstr "Пользователь %(username)s успешно приглашен!
 
 #, python-format
 msgid "The following users were invited to apply: %s"
-msgstr ""
+msgstr "Следующие пользователи были приглашены для подачи заявки: %s"
 
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr "Все выбранные члены групп/проектов уже были приглашены или уже подали заявку. Новые приглашения не отправлялись."
@@ -6864,11 +6982,11 @@ msgstr "%s-app были активированы!"
 
 #, python-format
 msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
-msgstr ""
+msgstr "Вы отправляли заявку на присоединение к организации “%(name)s”. Вы получите электронное письмо, как только администратор ответит на Ваш запрос."
 
 #, python-format
 msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
-msgstr ""
+msgstr "Проект/группа %(group)s уже был(-а) приглашен(-а) и сразу же присвоен(-а)!"
 
 # ???
 msgid "No appname given for adding containers."
@@ -6949,6 +7067,9 @@ msgstr "Извините, мы не связаться с Вашим аккау�
 
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Извините, вы не можете войти, потому, что с аккаунта осуществлялась подозрительная активность. Пожалуйста, обратитесь к администратору!"
+
+msgid "You are already logged in. This function is only available to set up your account for the first time!"
+msgstr ""
 
 msgid "Your password was set successfully! You may now log in using your e-mail address and the password you just set."
 msgstr "Ваш пароль успешно установлен! Теперь Вы можете войти с помощью Вашего адреса электронной почты и этого пароля."
@@ -7084,6 +7205,15 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
+#~ msgid "Attach existing Files..."
+#~ msgstr "Приложить имеющиеся файлы…"
+
+#~ msgid "Time"
+#~ msgstr "Время"
+
+#~ msgid "External"
+#~ msgstr "Внешний"
+
 #~ msgid "Banner Image"
 #~ msgstr "Фоновое изображение"
 
@@ -7131,9 +7261,6 @@ msgstr "Ваши изменения были сохранены."
 
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Деактивировать проекты и группы"
-
-#~ msgid "Public Project"
-#~ msgstr "Проект в открытом доступе"
 
 #~ msgid "Public Group"
 #~ msgstr "Группа в открытом доступе"

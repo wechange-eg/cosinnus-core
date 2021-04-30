@@ -325,7 +325,7 @@ class ModelRetrievalMixin(object):
         queryset = None
         skip_filters = False
         if BaseHierarchicalTaggableObjectModel in inspect.getmro(model):
-            queryset = model._default_manager.filter(is_container=False)
+            queryset = model._default_manager.filter(is_container=False, group__is_active=True)
             queryset = exclude_special_folders(queryset)
         elif model_name == 'cosinnus_event.Event':
             if current_only:
@@ -335,13 +335,15 @@ class ModelRetrievalMixin(object):
             queryset = queryset.exclude(is_hidden_group_proxy=True)
         elif model_name == 'cosinnus_marketplace.Offer':
             queryset = model.objects.all_active()
-        elif model is CosinnusIdea or BaseTaggableObjectModel in inspect.getmro(model):
+        elif model is CosinnusIdea: 
             queryset = model._default_manager.all()
+        elif BaseTaggableObjectModel in inspect.getmro(model):
+            queryset = model._default_manager.all().filter(group__is_active=True)
         elif model_name == "postman.Message":
             queryset = model.objects.inbox(user)
             skip_filters = True
         elif model is get_cosinnus_group_model() or issubclass(model, get_cosinnus_group_model()):
-            queryset = model.objects.get_queryset()
+            queryset = model.objects.get_queryset().filter(is_active=True)
         else:
             return None
     

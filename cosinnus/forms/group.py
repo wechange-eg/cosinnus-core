@@ -147,6 +147,11 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
     if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS:
         managed_tag_field = forms.CharField(required=settings.COSINNUS_MANAGED_TAGS_GROUP_FORMFIELD_REQUIRED)
     
+    # This is for `FormAttachableMixin` to set all uploaded files to public (otherwise they couldn't be downloaded
+    # from the microsite)
+    # TODO: if groups ever become non-publicly visible, change this setting!
+    FORCE_ATTACHED_OBJECTS_VISIBILITY_ALL = True
+    
     class Meta(object):
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 'sdgs',
                         'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
@@ -179,7 +184,13 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
         for field in list(self.fields.values()):
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
-                
+    
+    @property
+    def group(self):
+        """ This is for `FormAttachableMixin` to get passed the group as a target for
+            uploading files. Only works after the group has been created however. """
+        return self.instance if self.instance.pk else None
+    
     def clean(self):
         if not self.cleaned_data.get('name', None):
             name = self.get_cleaned_name_from_other_languages()
@@ -255,7 +266,13 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
             user_superuser = check_user_superuser(self.request.user)
             
             
-            conference_notification_pairs = []
+            # we need to split email and alert here, because
+            # emails should check the notification settings normally,
+            # but for alerts, we need to check if the user is following the *target group*!
+            # (the notification logic for user_wants_alert would always return true on a group object)
+            conference_notification_email_pairs = []
+            conference_notification_alert_pairs = []
+            
             for related_group in self.cleaned_data['related_groups']:
                 # non-superuser users can only tag groups they are in
                 if not user_superuser and related_group.id not in user_group_ids:
@@ -269,21 +286,38 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
                     # the conference will be reflected into the group, so we send a notification
                     non_conference_group_types = [get_cosinnus_group_model().TYPE_PROJECT, get_cosinnus_group_model().TYPE_SOCIETY]
                     if self.instance.group_is_conference and related_group.type in non_conference_group_types:
-                        audience_except_creator = [member for member in related_group.actual_members if member.id != self.request.user.id]
+                        audience_group_members_except_creator = [member for member in related_group.actual_members if member.id != self.request.user.id]
+                        audience_group_followers_except_creator_ids = [pk for pk in related_group.get_followed_user_ids() if not pk in [self.request.user.id]]
+                        audience_group_followers_except_creator = get_user_model().objects.filter(id__in=audience_group_followers_except_creator_ids)
+                        # HERE: we should send alerts only for followers of the target group,
+                        #    but send the email notification for members, independent of following
                         # set the target group for the notification onto the group instance
                         setattr(self.instance, 'notification_target_group', related_group)
-                        conference_notification_pairs.append((self.instance, audience_except_creator))
+                        conference_notification_email_pairs.append((self.instance, audience_group_members_except_creator))
+                        conference_notification_alert_pairs.append((self.instance, audience_group_followers_except_creator))
+                        
             
             # send notifications in a session to avoid duplicate messages to any user
             session_id = uuid1().int     
-            for i, pair in enumerate(conference_notification_pairs):
+            for i, pair in enumerate(conference_notification_email_pairs):
                 cosinnus_notifications.conference_created_in_group.send(
                     sender=self,
                     user=self.request.user,
                     obj=pair[0],
                     audience=pair[1],
                     session_id=session_id,
-                    end_session=bool(i == len(conference_notification_pairs)-1)
+                    end_session=bool(i == len(conference_notification_email_pairs)-1)
+                )
+            # send email/alert in a different session each
+            session_id = uuid1().int     
+            for i, pair in enumerate(conference_notification_alert_pairs):
+                cosinnus_notifications.conference_created_in_group_alert.send(
+                    sender=self,
+                    user=self.request.user,
+                    obj=pair[0],
+                    audience=pair[1],
+                    session_id=session_id,
+                    end_session=bool(i == len(conference_notification_alert_pairs)-1)
                 )
         
         self.save_m2m = save_m2m

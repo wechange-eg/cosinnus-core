@@ -96,6 +96,7 @@ class DKIMEmailBackend(EmailBackend):
 class RobustElasticSearchBackend(ElasticsearchSearchBackend):
     """A robust backend that doesn't crash when no connection is available"""
     
+    MIN_GRAM = 2
     MAX_NGRAM = 25
     
     def mute_error(f):
@@ -112,9 +113,14 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
         """ Add custom default options """
         tokenizer_settings = self.DEFAULT_SETTINGS['settings']['analysis']['tokenizer']
         filter_settings = self.DEFAULT_SETTINGS['settings']['analysis']['filter']
+        
+        tokenizer_settings['haystack_ngram_tokenizer']['min_gram'] = self.MIN_GRAM
         tokenizer_settings['haystack_ngram_tokenizer']['max_gram'] = self.MAX_NGRAM
+        tokenizer_settings['haystack_edgengram_tokenizer']['min_gram'] = self.MIN_GRAM
         tokenizer_settings['haystack_edgengram_tokenizer']['max_gram'] = self.MAX_NGRAM
+        filter_settings['haystack_ngram']['min_gram'] = self.MIN_GRAM
         filter_settings['haystack_ngram']['max_gram'] = self.MAX_NGRAM
+        filter_settings['haystack_edgengram']['min_gram'] = self.MIN_GRAM
         filter_settings['haystack_edgengram']['max_gram'] = self.MAX_NGRAM
         super(RobustElasticSearchBackend, self).__init__(*args, **options)
 
