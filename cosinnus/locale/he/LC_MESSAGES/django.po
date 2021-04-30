@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-22 12:51+0200\n"
+"POT-Creation-Date: 2021-04-30 17:45+0200\n"
 "PO-Revision-Date: 2021-04-14 14:50+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -482,56 +482,59 @@ msgstr "%(sender_name)s יצר את הפרויקט \"%(team_name)s\" מרעיו�
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
 msgstr "%(sender_name)s יצר כרגע את הפרויקט \"%(team_name)s\" ב-%(portal_name)s מרעיון שאתה עוקב אחריו! <br/><br/> על מנת לבדוק אותו לחץ על הלינק שלהלן. שם תוכל להחליט האם אתה מעוניין להצטרך לפרויקט."
 
-msgid "Deutsch--NATIVE-LANGUAGE"
-msgstr "Deutsch"
+msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "English--NATIVE-LANGUAGE"
-msgstr "English"
+msgid "English--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Russian--NATIVE-LANGUAGE"
-msgstr "Русский"
+msgid "Russian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Ukrainian--NATIVE-LANGUAGE"
-msgstr "Українська"
+msgid "Ukrainian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "French--NATIVE-LANGUAGE"
-msgstr "Français"
+msgid "French--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Polish--NATIVE-LANGUAGE"
-msgstr "Polski"
+msgid "Polish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Spanish--NATIVE-LANGUAGE"
-msgstr "Español"
+msgid "Spanish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Romanian--NATIVE-LANGUAGE"
-msgstr "Română"
+msgid "Romanian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Belarussian--NATIVE-LANGUAGE"
-msgstr "Беларуская"
+msgid "Belarussian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Dutch--NATIVE-LANGUAGE"
-msgstr "Nederlands"
+msgid "Dutch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Czech--NATIVE-LANGUAGE"
-msgstr "Čeština"
+msgid "Czech--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Azerbaijani--NATIVE-LANGUAGE"
-msgstr "Azerbaycan dili"
+msgid "Azerbaijani--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Armenian--NATIVE-LANGUAGE"
-msgstr "Հայոց լեզու"
+msgid "Armenian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Georgian--NATIVE-LANGUAGE"
-msgstr "ქართული ენა"
+msgid "Georgian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Kazakh--NATIVE-LANGUAGE"
-msgstr "Қазақ тілі"
+msgid "Kazakh--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Arabic--NATIVE-LANGUAGE"
-msgstr "العربية"
+msgid "Arabic--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
-msgid "Hebrew--NATIVE-LANGUAGE"
-msgstr "עברית"
+msgid "Hebrew--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
+
+msgid "Greek--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
 
 msgid "Belarus"
 msgstr "בלרוס"
@@ -2198,6 +2201,14 @@ msgstr "גוף ההודעה"
 msgid "Currently set Email Text"
 msgstr "טקסט הודעות דוא\"ל שמוגדר כעת"
 
+#, fuzzy
+#| msgid "Show more options..."
+msgid "Show all recipients..."
+msgstr "הצג אפשרויות נוספות..."
+
+msgid "Note: The newsletter can only be sent after saving any changes made to it!"
+msgstr ""
+
 msgid "Send yourself a Test-Mail"
 msgstr "בדיקת אימות: שלח לעצמך דוא\"ל"
 
@@ -2282,6 +2293,10 @@ msgstr "שלח אסימון כניסה"
 
 msgid "Last sent on: "
 msgstr "נשלח לאחרונה ב: "
+
+#, python-format
+msgid "Login token was sent to %(email)s."
+msgstr "אסימון הכניסה נשלח אל %(email)s."
 
 #, python-format
 msgid "Could not find any users with an email that contains '%(search_string)s.'"
@@ -3395,6 +3410,9 @@ msgstr "אין בקשות חברות חדשות."
 
 msgid "Current Members"
 msgstr "חברים פעילים כעת"
+
+msgid "inactive"
+msgstr "לא פעיל"
 
 msgid "Message all members"
 msgstr "שלח הודעה לכל החברים"
@@ -5841,9 +5859,6 @@ msgstr "מוצג כעת"
 msgid "not displayed right now"
 msgstr "לא מוצג כעת"
 
-msgid "inactive"
-msgstr "לא פעיל"
-
 msgid "Activate"
 msgstr "הפעל"
 
@@ -6506,7 +6521,9 @@ msgstr "לוח כלים של הקבוצה"
 msgid "in the Group Dashboard"
 msgstr "לוח כלים של הקבוצה"
 
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+#, fuzzy
+#| msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "קבוצות מסייעות לשפר את התקשורת ושיתוף הפעולה ברשתות או ארגונים גדולים. בתוך קבוצה באפשרותך לאחד מספר פרויקטים קטנים יותר או קבוצות עבודה."
 
 msgid "Edit Group"
@@ -6718,10 +6735,6 @@ msgstr "הידיעון נוצר בהצלחה!"
 
 msgid "Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations."
 msgstr "אסימוני כניסה לכל המשתמשים שלא הוזמנו בעבר נשלחים כעת ברקע. באפשרותך לרענן דף זה כדי לעדכן את תצוגת המצב של ההזמנות."
-
-#, python-format
-msgid "Login token was sent to %(email)s."
-msgstr "אסימון הכניסה נשלח אל %(email)s."
 
 msgid "Die Änderungen wurden erfolgreich gespeichert."
 msgstr "השינויים נשמרו בהצלחה."
@@ -7186,6 +7199,57 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
+
+#~ msgid "Deutsch--NATIVE-LANGUAGE"
+#~ msgstr "Deutsch"
+
+#~ msgid "English--NATIVE-LANGUAGE"
+#~ msgstr "English"
+
+#~ msgid "Russian--NATIVE-LANGUAGE"
+#~ msgstr "Русский"
+
+#~ msgid "Ukrainian--NATIVE-LANGUAGE"
+#~ msgstr "Українська"
+
+#~ msgid "French--NATIVE-LANGUAGE"
+#~ msgstr "Français"
+
+#~ msgid "Polish--NATIVE-LANGUAGE"
+#~ msgstr "Polski"
+
+#~ msgid "Spanish--NATIVE-LANGUAGE"
+#~ msgstr "Español"
+
+#~ msgid "Romanian--NATIVE-LANGUAGE"
+#~ msgstr "Română"
+
+#~ msgid "Belarussian--NATIVE-LANGUAGE"
+#~ msgstr "Беларуская"
+
+#~ msgid "Dutch--NATIVE-LANGUAGE"
+#~ msgstr "Nederlands"
+
+#~ msgid "Czech--NATIVE-LANGUAGE"
+#~ msgstr "Čeština"
+
+#~ msgid "Azerbaijani--NATIVE-LANGUAGE"
+#~ msgstr "Azerbaycan dili"
+
+#~ msgid "Armenian--NATIVE-LANGUAGE"
+#~ msgstr "Հայոց լեզու"
+
+#~ msgid "Georgian--NATIVE-LANGUAGE"
+#~ msgstr "ქართული ენა"
+
+#~ msgid "Kazakh--NATIVE-LANGUAGE"
+#~ msgstr "Қазақ тілі"
+
+#~ msgid "Arabic--NATIVE-LANGUAGE"
+#~ msgstr "العربية"
+
+#~ msgid "Hebrew--NATIVE-LANGUAGE"
+#~ msgstr "עברית"
 
 #~ msgid "Attach existing Files..."
 #~ msgstr "צירוף קבצים קיימים..."

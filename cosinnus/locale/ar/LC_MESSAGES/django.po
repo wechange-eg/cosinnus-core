@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-22 12:51+0200\n"
+"POT-Creation-Date: 2021-04-30 17:45+0200\n"
 "PO-Revision-Date: 2021-03-22 14:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -524,55 +524,58 @@ msgstr "%(sender_name)s أنشأ للتو المشروع \"%(team_name)s\" من 
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
 msgstr "قام %(sender_name)s للتو بإنشاء المشروع \"%(team_name)s\" على %(portal_name)s من فكرة تتابعها! <br/> <br/> للتحقق من ذلك، يرجى النقر فوق الراتباط أدناه. هناك يمكنك معرفة ما إذا كنت ترغب في الانضمام إلى المشروع."
 
-msgid "Deutsch--NATIVE-LANGUAGE"
+msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "English--NATIVE-LANGUAGE"
+msgid "English--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Russian--NATIVE-LANGUAGE"
+msgid "Russian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Ukrainian--NATIVE-LANGUAGE"
+msgid "Ukrainian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "French--NATIVE-LANGUAGE"
+msgid "French--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Polish--NATIVE-LANGUAGE"
+msgid "Polish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Spanish--NATIVE-LANGUAGE"
+msgid "Spanish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Romanian--NATIVE-LANGUAGE"
+msgid "Romanian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Belarussian--NATIVE-LANGUAGE"
+msgid "Belarussian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Dutch--NATIVE-LANGUAGE"
+msgid "Dutch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Czech--NATIVE-LANGUAGE"
+msgid "Czech--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Azerbaijani--NATIVE-LANGUAGE"
+msgid "Azerbaijani--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Armenian--NATIVE-LANGUAGE"
+msgid "Armenian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Georgian--NATIVE-LANGUAGE"
+msgid "Georgian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Kazakh--NATIVE-LANGUAGE"
+msgid "Kazakh--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Arabic--NATIVE-LANGUAGE"
+msgid "Arabic--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
-msgid "Hebrew--NATIVE-LANGUAGE"
+msgid "Hebrew--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
+
+msgid "Greek--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
 msgid "Belarus"
@@ -2393,6 +2396,14 @@ msgstr "هيئة"
 msgid "Currently set Email Text"
 msgstr "نص البريد الإلكتروني الترحيبي المعين حاليًا"
 
+#, fuzzy
+#| msgid "Show more options..."
+msgid "Show all recipients..."
+msgstr "اظهار خيارات إضافية..."
+
+msgid "Note: The newsletter can only be sent after saving any changes made to it!"
+msgstr ""
+
 msgid "Send yourself a Test-Mail"
 msgstr "أرسل لنفسك بريدًا تجريبيًا"
 
@@ -2504,6 +2515,10 @@ msgstr "لا تسجيل الدخول حتى الان"
 
 msgid "Last sent on: "
 msgstr "آخر إرسال في:"
+
+#, python-format
+msgid "Login token was sent to %(email)s."
+msgstr "تم إرسال رمز تسجيل الدخول إلى %(email)s."
 
 #, fuzzy, python-format
 msgid "Could not find any users with an email that contains '%(search_string)s.'"
@@ -3748,6 +3763,9 @@ msgstr "لا توجد طلبات عضوية جديدة."
 
 msgid "Current Members"
 msgstr "الأعضاء الحاليين"
+
+msgid "inactive"
+msgstr "غير نشط"
 
 msgid "Message all members"
 msgstr "أرسل رسالة إلى جميع الأعضاء"
@@ -6237,9 +6255,6 @@ msgstr "معروض الآن"
 msgid "not displayed right now"
 msgstr "غير معروض الآن"
 
-msgid "inactive"
-msgstr "غير نشط"
-
 msgid "Activate"
 msgstr "تفعيل"
 
@@ -6951,7 +6966,9 @@ msgstr "لوحة تحكم المجموعة"
 msgid "in the Group Dashboard"
 msgstr "لوحة تحكم المجموعة"
 
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+#, fuzzy
+#| msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "تساعد المجموعات في تحسين الاتصال والتعاون في الشبكات أو المنظمات الكبيرة. يمكنك الجمع بين العديد من المشاريع الصغيرة أو مجموعات العمل ضمن المجموعة."
 
 msgid "Edit Group"
@@ -7212,10 +7229,6 @@ msgstr "تم إنشاء النشرة الإخبارية بنجاح!"
 
 msgid "Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations."
 msgstr "يتم الآن إرسال رموز تسجيل الدخول لجميع المستخدمين غير المدعوين سابقًا في الخلفية. يمكنك تحديث هذه الصفحة لتحديث عرض حالة الدعوات."
-
-#, python-format
-msgid "Login token was sent to %(email)s."
-msgstr "تم إرسال رمز تسجيل الدخول إلى %(email)s."
 
 msgid "Die Änderungen wurden erfolgreich gespeichert."
 msgstr "تم حفظ التغييرات بنجاح."
