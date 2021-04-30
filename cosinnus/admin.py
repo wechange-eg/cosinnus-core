@@ -533,7 +533,7 @@ class UserAdmin(DjangoUserAdmin):
     has_logged_in.boolean = True
     
     def tos_accepted(self, obj):
-        return bool(obj.cosinnus_profile.settings.get('tos_accepted', False))
+        return bool(obj.cosinnus_profile.settings and obj.cosinnus_profile.settings.get('tos_accepted', False))
     tos_accepted.short_description = _('ToS accepted?')
     tos_accepted.boolean = True
     
