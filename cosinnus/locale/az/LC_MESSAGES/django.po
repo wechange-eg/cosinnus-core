@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 17:45+0200\n"
+"POT-Creation-Date: 2021-05-01 14:27+0200\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,11 +85,20 @@ msgid "ToS accepted?"
 msgstr "ToS qəbul edildi?"
 
 #, python-format
-msgid "%d Users were deactivated successfully."
+msgid "%(count)d User account(s) were deactivated successfully. They will be deleted after 30 days from now."
+msgstr ""
+
+msgid "DEACTIVATE user accounts and DELETE them after 30 days"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%d Users were deactivated successfully."
+msgid "%(count)d User account(s) were reactivated successfully."
 msgstr "%d İstifadəçilər uğurla de aktivasiya edildi."
 
-msgid "Deactivate users (will keep all all items they created on the site)"
-msgstr "İstifadəçiləri de aktivasiya edin (saytda tərtib olunan bütün məlumatları saxlayacaq)"
+#, fuzzy
+msgid "Reactivate user accounts"
+msgstr "İstifadəçi hesabını silin"
 
 #, fuzzy, python-format
 msgid "%d Users were synchronized successfully."
@@ -6077,8 +6086,14 @@ msgstr "Aşağıdakı düyməni klikləyərək istifadəçi hesabınızı, profi
 msgid "Your created documents, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you."
 msgstr "Yaradılmış sənədləriniz, xəbər yazılarınız, yüklənmiş sənədləriniz və digər məzmununuz saytda saxlanacaqdır. Ancaq bu məzmun artıq adınızı çəkməyəcək və ya sizə bağlanmayacaqdır."
 
-msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
-msgstr "Məzmununuzu silmək istəyirsinizsə, hazırda geri qayıdın və indi silin. Profilinizi sildikdən sonra bu hesabla yaratdığınız hər hansı bir şeyə giriş əldə edə bilməyəcəksiniz."
+msgid "On Rocket Chat, your profile direct messages will be deleted, but within discussions and channels, the content will remain."
+msgstr ""
+
+msgid "If you still want to delete content, please do so now by deleting the content on the corresponding pages."
+msgstr ""
+
+msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
+msgstr ""
 
 msgid "Delete Account"
 msgstr "Hesabı silin"
@@ -7496,11 +7511,14 @@ msgstr "Üzr istəyirik, profiliniz yaddaşda saxlanıla bilmədi, çünki avata
 msgid "Sorry, something went wrong while saving your profile!"
 msgstr "Bağışlayın, profilinizi yaddaşda saxlayarkən bir şey səhv oldu!"
 
-msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
+#, fuzzy
+#| msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
+msgid "Your user account has been deactivated and will be deleted in 30 days. We're sorry you are no longer with us."
 msgstr "Profiliniz uğurla silindi. Üzr istəyirik ki, artıq bizimlə deyilsiniz."
 
-#, python-format
-msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
+#, fuzzy, python-format
+#| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
+msgid "You are the only administrator left for \"%(group_name)s\". Please appoint a different administrator or delete it first."
 msgstr "\"%s\" üçün qalan yeganə adminsən. Zəhmət olmasa fərqli bir admin təyin edin və ya əvvəlcə onu silmək."
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
@@ -7656,6 +7674,12 @@ msgstr "Hal-hazırda %s üzvü deyilsiniz! Əgər arzu edirsinizsə, Siz aşağ�
 
 msgid "Your changes have been saved."
 msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
+
+#~ msgid "Deactivate users (will keep all all items they created on the site)"
+#~ msgstr "İstifadəçiləri de aktivasiya edin (saytda tərtib olunan bütün məlumatları saxlayacaq)"
+
+#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
+#~ msgstr "Məzmununuzu silmək istəyirsinizsə, hazırda geri qayıdın və indi silin. Profilinizi sildikdən sonra bu hesabla yaratdığınız hər hansı bir şeyə giriş əldə edə bilməyəcəksiniz."
 
 #~ msgid "Deutsch--NATIVE-LANGUAGE"
 #~ msgstr "Deutsch"

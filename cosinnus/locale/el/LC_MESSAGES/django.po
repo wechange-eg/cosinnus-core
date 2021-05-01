@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 17:45+0200\n"
+"POT-Creation-Date: 2021-05-01 14:27+0200\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,11 +84,21 @@ msgid "ToS accepted?"
 msgstr "Το ToS έγινε δεκτό;"
 
 #, python-format
-msgid "%d Users were deactivated successfully."
+msgid "%(count)d User account(s) were deactivated successfully. They will be deleted after 30 days from now."
+msgstr ""
+
+msgid "DEACTIVATE user accounts and DELETE them after 30 days"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%d Users were deactivated successfully."
+msgid "%(count)d User account(s) were reactivated successfully."
 msgstr "%d Χρήστες απενεργοποιήθηκαν με επιτυχία."
 
-msgid "Deactivate users (will keep all all items they created on the site)"
-msgstr "Απενεργοποίηση χρηστών (θα κρατήσει όλα τα άλλα στοιχεία που δημιούργησαν στον ιστότοπο)"
+#, fuzzy
+#| msgid "Successfully activated user account"
+msgid "Reactivate user accounts"
+msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
 
 #, python-format
 msgid "%d Users were synchronized successfully."
@@ -1444,7 +1454,7 @@ msgid "Managed Tags"
 msgstr "Διαχειριζόμενη Ετικέτα"
 
 msgid "Managed Tag Type"
-msgstr "Είδος Διαχειριζόμενης Ετικέτας\v"
+msgstr "Είδος Διαχειριζόμενης Ετικέτας"
 
 msgid "Managed Tag Types"
 msgstr "Είδη Διαχειριζόμενης Ετικέτας"
@@ -3809,7 +3819,7 @@ msgid "Share"
 msgstr "Κοινή χρήση"
 
 msgid "Share on Facebook"
-msgstr "Κοινή χρήση στο Facebook\v"
+msgstr "Κοινή χρήση στο Facebook"
 
 msgid "Share on Twitter"
 msgstr "Κοινή χρήση στο Twitter"
@@ -5749,8 +5759,14 @@ msgstr "Κάνοντας κλικ στο πλήκτρο παρακάτω, θα �
 msgid "Your created documents, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you."
 msgstr "Τα έγγραφα που δημιουργήσατε, οι νέες αναρτήσεις, τα ανεβασμένα αρχεία και άλλο περιεχόμενο θα φυλαχθεί στον ιστότοπο. Ωστόσο, αυτό το περιεχόμενο δε θα φέρει πλέον το όνομά σας ή δε θα είναι συνδεδεμένο με εσάς."
 
-msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
-msgstr "Εάν επιθυμείτε να διαγράψετε κάποιο από το περιεχόμενό σας, επιστρέψτε πίσω για να το κάντε. Από τη στιγμή που θα διαγράψετε το προφίλ σας, δε θα έχετε πλέον πρόσβαση σε οτιδήποτε δημιουργήσατε με αυτόν τον λογαριασμό."
+msgid "On Rocket Chat, your profile direct messages will be deleted, but within discussions and channels, the content will remain."
+msgstr ""
+
+msgid "If you still want to delete content, please do so now by deleting the content on the corresponding pages."
+msgstr ""
+
+msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
+msgstr ""
 
 msgid "Delete Account"
 msgstr "Διαγραφή Λογαριασμού"
@@ -7032,11 +7048,14 @@ msgstr "Λυπούμαστε, δεν ήταν δυνατή η αποθήκευσ
 msgid "Sorry, something went wrong while saving your profile!"
 msgstr "Λυπούμαστε, παρουσιάστηκε ένα σφάλμα κατά την αποθήκευση του προφίλ σας!"
 
-msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
+#, fuzzy
+#| msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
+msgid "Your user account has been deactivated and will be deleted in 30 days. We're sorry you are no longer with us."
 msgstr "Το προφίλ σας διαγράφηκε με επιτυχία. Λυπούμαστε που δεν είστε πλέον μαζί μας."
 
-#, python-format
-msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
+#, fuzzy, python-format
+#| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
+msgid "You are the only administrator left for \"%(group_name)s\". Please appoint a different administrator or delete it first."
 msgstr "Είστε ο μόνος διαχειριστής που έμεινε για \"%s\". Παρακαλούμε ορίστε διαφορετικό διαχειριστή ή διαγράψετε τον πρώτα."
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
@@ -7184,6 +7203,12 @@ msgstr "Δεν είστε μέλος του %s αυτή τη στιγμή! Εά�
 
 msgid "Your changes have been saved."
 msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
+
+#~ msgid "Deactivate users (will keep all all items they created on the site)"
+#~ msgstr "Απενεργοποίηση χρηστών (θα κρατήσει όλα τα άλλα στοιχεία που δημιούργησαν στον ιστότοπο)"
+
+#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
+#~ msgstr "Εάν επιθυμείτε να διαγράψετε κάποιο από το περιεχόμενό σας, επιστρέψτε πίσω για να το κάντε. Από τη στιγμή που θα διαγράψετε το προφίλ σας, δε θα έχετε πλέον πρόσβαση σε οτιδήποτε δημιουργήσατε με αυτόν τον λογαριασμό."
 
 #~ msgid "Arabic--NATIVE-LANGUAGE"
 #~ msgstr "Αραβικά--ΜΗΤΡΙΚΗ-ΓΛΩΣΣΑ"

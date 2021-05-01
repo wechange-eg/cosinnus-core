@@ -34,8 +34,44 @@ from cosinnus.core import signals
 from django.forms.fields import CharField
 
 
+def deactivate_user(user):
+    """ Deactivates a user account """
+    user.is_active = False
+    user.save()
+    # save the user's profile as well, 
+    # as numerous triggers occur on the profile instead of the user object
+    if user.cosinnus_profile:
+        user.cosinnus_profile.save()
+
+ 
+def deactivate_user_and_mark_for_deletion(user):
+    """ Deacitvates a user account and marks them for deletion in 30 days """
+    if user.cosinnus_profile:
+        # TODO: add a marked-for-deletion flag and a cronjob, deleting the profile using this
+        pass
+    deactivate_user(user)
+
+
+def reactivate_user(user):
+    """ Deactivates a user account and deletes their marked-for-deletion-flag """
+    user.is_active = True
+    user.save()
+    # save the user's profile as well, 
+    # as numerous triggers occur on the profile instead of the user object
+    if user.cosinnus_profile:
+        # TODO here: delete the marked-for-deletion flag
+        user.cosinnus_profile.save()
+    else:
+        # create a new userprofile if the old one was already deleted, 
+        # so we have a functioning user account again
+        get_user_profile_model()._default_manager.get_for_user(user)
+
+
 def delete_userprofile(user):
-    """ Deactivate and anonymize a user's profile """
+    """ Deactivate and completely anonymize a user's profile, name and email,
+        leaving only the empty User object.
+        All content created by the user and foreign-key relations are preserved,
+        but will display ""Deleted User)" as creator. """
     
     profile = user.cosinnus_profile
     
@@ -278,7 +314,7 @@ update_view = UserProfileUpdateView.as_view()
 class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView):
     #form_class = UserProfileForm
     template_name = 'cosinnus/user/userprofile_delete.html'
-    message_success = _('Your profile was deleted successfully. We\'re sorry you are no longer with us.')
+    message_success = _('Your user account has been deactivated and will be deleted in 30 days. We\'re sorry you are no longer with us.')
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -294,7 +330,7 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
         for group in CosinnusGroup.objects.get_for_user(user):
             admins = CosinnusGroupMembership.objects.get_admins(group=group)
             if user.pk in admins:
-                messages.error(self.request, _('You are the only administrator left for "%s". Please appoint a different administrator or delete it first.' % group.name))
+                messages.error(self.request, _('You are the only administrator left for "%(group_name)s". Please appoint a different administrator or delete it first.' % {'group_name': group.name}))
                 is_safe = False
         
         return is_safe
@@ -307,7 +343,10 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
         self.object = self.get_object()
         if not self._validate_user_delete_safe(request.user):
             return HttpResponseRedirect(reverse('cosinnus:profile-delete'))
-        delete_userprofile(request.user)
+        
+        # this no longer immediately deletes the user profile, but instead deactivates it!
+        # function after 30 days.
+        deactivate_user_and_mark_for_deletion(request.user)
         
         # log user out
         logout(request)

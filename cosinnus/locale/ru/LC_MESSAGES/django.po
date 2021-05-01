@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 17:45+0200\n"
+"POT-Creation-Date: 2021-05-01 14:27+0200\n"
 "PO-Revision-Date: 2021-04-22 12:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -95,11 +95,21 @@ msgid "ToS accepted?"
 msgstr "ToS принят?"
 
 #, python-format
-msgid "%d Users were deactivated successfully."
+msgid "%(count)d User account(s) were deactivated successfully. They will be deleted after 30 days from now."
+msgstr ""
+
+msgid "DEACTIVATE user accounts and DELETE them after 30 days"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%d Users were deactivated successfully."
+msgid "%(count)d User account(s) were reactivated successfully."
 msgstr "Деактивированные пользователи: %d."
 
-msgid "Deactivate users (will keep all all items they created on the site)"
-msgstr "Деактивировать выделенных пользователей (все элементы, созданные ими на сайте, будут сохранены)"
+#, fuzzy
+#| msgid "Successfully activated user account"
+msgid "Reactivate user accounts"
+msgstr "Аккаунт пользователя успешно активирован"
 
 #, python-format
 msgid "%d Users were synchronized successfully."
@@ -5777,8 +5787,14 @@ msgstr "Нажимая на кнопку ниже, Вы безвозвратно
 msgid "Your created documents, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you."
 msgstr "Созданные Вами документы, новости, сообщения загруженные файлы и другой контент будут сохранены на сайте. Однако это содержание больше не будет находиться под Вашим именем и не будет связано с Вами."
 
-msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
-msgstr "Если Вы хотите удалить что-либо из Вашего контента, пожалуйста, вернитесь и сделайте это сейчас. Как только Вы удалите свой профиль, Вы потеряете доступ ко всему, что Вы создали на этом аккаунте."
+msgid "On Rocket Chat, your profile direct messages will be deleted, but within discussions and channels, the content will remain."
+msgstr ""
+
+msgid "If you still want to delete content, please do so now by deleting the content on the corresponding pages."
+msgstr ""
+
+msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
+msgstr ""
 
 msgid "Delete Account"
 msgstr "Удалить аккаунт"
@@ -7065,11 +7081,14 @@ msgstr "К сожалению, Ваш профиль не был сохране�
 msgid "Sorry, something went wrong while saving your profile!"
 msgstr "К сожалению, при сохранении Вашего профиля что-то пошло не так!"
 
-msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
+#, fuzzy
+#| msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
+msgid "Your user account has been deactivated and will be deleted in 30 days. We're sorry you are no longer with us."
 msgstr "Ваш профиль удален. Жаль, что Вы больше не с нами."
 
-#, python-format
-msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
+#, fuzzy, python-format
+#| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
+msgid "You are the only administrator left for \"%(group_name)s\". Please appoint a different administrator or delete it first."
 msgstr "Вы последний администратор \"%s\". Пожалуйста, определите другого администратора перед тем, как удалить свой профиль, или сначала удалите проект."
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
@@ -7217,6 +7236,12 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
+
+#~ msgid "Deactivate users (will keep all all items they created on the site)"
+#~ msgstr "Деактивировать выделенных пользователей (все элементы, созданные ими на сайте, будут сохранены)"
+
+#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
+#~ msgstr "Если Вы хотите удалить что-либо из Вашего контента, пожалуйста, вернитесь и сделайте это сейчас. Как только Вы удалите свой профиль, Вы потеряете доступ ко всему, что Вы создали на этом аккаунте."
 
 #~ msgid "Deutsch--NATIVE-LANGUAGE"
 #~ msgstr "Deutsch"

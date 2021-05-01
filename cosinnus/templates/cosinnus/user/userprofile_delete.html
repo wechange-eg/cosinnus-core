@@ -17,27 +17,34 @@
 
 
 {% block content %}
-    
-    <div class="alert alert-danger alert-dismissable">
-	    <i class="fa fa-exclamation-triangle fa-3x"></i>
-	    <p>{% trans 'Warning!' %}</p>
-	    <p>{% trans "You are about to delete your user account from the site!" %}</p>
-	</div>
-
     <!-- a box with semi transparent background -->
     <div class="content-box">
-	    
-            <legend>{% trans "Delete user profile" %}</legend>
+            
+	    <div class="alert alert-danger alert-dismissable">
+	        <i class="fa fa-exclamation-triangle fa-3x"></i>
+	        <p>{% trans 'Warning!' %}</p>
+	        <p>{% trans "You are about to delete your user account from the site!" %}</p>
+	    </div>
+    
+        <h2>{% trans "Delete user profile" %}</h2>
 
-            <!-- On large screens the long explanation texts are on the right side next to the input elements -->
-            <div class="row">
-                <!-- explanation text -->
-                <div class="col-md-12">
-                    <p class="transparent">{% trans "By clicking the button below, you will irrevocably delete your user account, profile and personal information from this site." %}</p><!-- Text here if neccessary -->
-                    <p class="transparent">{% trans "Your created documents, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you." %}</p><!-- Text here if neccessary -->
-                    <p class="transparent">{% trans "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account." %}</p><!-- Text here if neccessary -->
+        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
+        <div class="row">
+            <!-- explanation text -->
+            <div class="col-md-12">
+                <div class="textfield transparent">
+                    <p>{% trans "By clicking the button below, you will irrevocably delete your user account, profile and personal information from this site." %}</p><!-- Text here if neccessary -->
+                    <br/>
+                    <p>
+                        {% trans "Your created documents, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you." %}
+                        {% trans "On Rocket Chat, your profile direct messages will be deleted, but within discussions and channels, the content will remain." %}
+                        {% trans "If you still want to delete content, please do so now by deleting the content on the corresponding pages." %}
+                    </p><!-- Text here if neccessary -->
+                    <br/>
+                    <p>{% trans "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion." %}</p><!-- Text here if neccessary -->
                 </div>
-            </div><!-- row -->
+            </div>
+        </div><!-- row -->
     </div>
     
     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#delete_confirm_modal">

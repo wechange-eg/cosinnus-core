@@ -28,6 +28,9 @@ user_registered = dispatch.Signal(providing_args=["user"])
     (this also happens when a user "deletes" their account """
 user_deactivated = dispatch.Signal(providing_args=["user"])
 
+""" Called after a user account is activated, or re-activated after being deactivated """
+user_activated = dispatch.Signal(providing_args=["user"])
+
 """ Called just before a user "deletes" their account and their
     profile still just now exists, before it will be deleted.
     Can be used to delete/disconnect any external linked accounts. """
@@ -35,9 +38,6 @@ pre_userprofile_delete = dispatch.Signal(providing_args=["profile"])
 
 """ Called after a user has successfully changed their password """
 user_password_changed = dispatch.Signal(providing_args=["user"])
-
-""" Called after a user account is activated, or re-activated after being deactivated """
-user_activated = dispatch.Signal(providing_args=["user"])
 
 """ Called when the user logs in for the first time ever """
 user_logged_in_first_time = dispatch.Signal(providing_args=['request', 'user'])

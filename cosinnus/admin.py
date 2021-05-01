@@ -44,6 +44,8 @@ from cosinnus.models.user_import import CosinnusUserImport
 from django.contrib.contenttypes.admin import GenericTabularInline,\
     GenericStackedInline
 from django_reverse_admin import ReverseModelAdmin
+from cosinnus.views.profile import deactivate_user_and_mark_for_deletion,\
+    reactivate_user
 
 class SingleDeleteActionMixin(object):
     
@@ -522,7 +524,7 @@ class UserHasLoggedInFilter(admin.SimpleListFilter):
 
 class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
-    actions = ['deactivate_users', 'export_as_csv', 'log_in_as_user']
+    actions = ['deactivate_users', 'reactivate_users', 'export_as_csv', 'log_in_as_user']
     if settings.COSINNUS_ROCKET_ENABLED:
         actions += ['force_sync_rocket_user', 'make_user_rocket_admin', 'force_redo_user_room_memberships',
                     'ensure_user_account_sanity']
@@ -553,16 +555,20 @@ class UserAdmin(DjangoUserAdmin):
     def deactivate_users(self, request, queryset):
         count = 0
         for user in queryset:
-            user.is_active = False
-            user.save()
-            # save the user's profile as well, 
-            # as numerous triggers occur on the profile instead of the user object
-            if user.cosinnus_profile:
-                user.cosinnus_profile.save()
+            deactivate_user_and_mark_for_deletion(user)
             count += 1
-        message = _('%d Users were deactivated successfully.') % count
+        message = _('%(count)d User account(s) were deactivated successfully. They will be deleted after 30 days from now.') % {'count': count}
         self.message_user(request, message)
-    deactivate_users.short_description = _('Deactivate users (will keep all all items they created on the site)')
+    deactivate_users.short_description = _('DEACTIVATE user accounts and DELETE them after 30 days')
+    
+    def reactivate_users(self, request, queryset):
+        count = 0
+        for user in queryset:
+            reactivate_user(user)
+            count += 1
+        message = _('%(count)d User account(s) were reactivated successfully.') % {'count': count}
+        self.message_user(request, message)
+    reactivate_users.short_description = _('Reactivate user accounts')
     
     def log_in_as_user(self, request, queryset):
         user = queryset[0]

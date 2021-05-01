@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 17:45+0200\n"
+"POT-Creation-Date: 2021-05-01 14:27+0200\n"
 "PO-Revision-Date: 2021-03-22 14:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -100,11 +100,21 @@ msgid "ToS accepted?"
 msgstr "هل قبلت بنود الخدمة؟"
 
 #, python-format
-msgid "%d Users were deactivated successfully."
+msgid "%(count)d User account(s) were deactivated successfully. They will be deleted after 30 days from now."
+msgstr ""
+
+msgid "DEACTIVATE user accounts and DELETE them after 30 days"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%d Users were deactivated successfully."
+msgid "%(count)d User account(s) were reactivated successfully."
 msgstr "%d تم إلغاء تنشيط المستخدمين بنجاح."
 
-msgid "Deactivate users (will keep all all items they created on the site)"
-msgstr "إلغاء تنشيط المستخدمين (سيتم الاحتفاظ بجميع العناصر التي قاموا بإنشائها على الموقع)"
+#, fuzzy
+#| msgid "Successfully activated user account"
+msgid "Reactivate user accounts"
+msgstr "تم تنشيط حساب المستخدم بنجاح"
 
 #, fuzzy, python-format
 #| msgid "%d Users were deactivated successfully."
@@ -6158,8 +6168,14 @@ msgstr "بالنقر فوق الزر أدناه، ستحذف حساب المست
 msgid "Your created documents, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you."
 msgstr "سيتم الاحتفاظ بالمستندات التي تم إنشاؤها ومنشورات الأخبار والملفات التي تم تحميلها والمحتويات الأخرى على الموقع. ومع ذلك، لن يحمل هذا المحتوى اسمك ولن يكون مرتبطًا بك."
 
-msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
-msgstr "إذا كنت ترغب في حذف أي من المحتوى الخاص بك، يرجى الرجوع والقيام بذلك الآن. بمجرد حذف ملف التعريف الخاص بك، لن يكون لديك أي وصول إلى أي شيء قمت بإنشائه باستخدام هذا الحساب."
+msgid "On Rocket Chat, your profile direct messages will be deleted, but within discussions and channels, the content will remain."
+msgstr ""
+
+msgid "If you still want to delete content, please do so now by deleting the content on the corresponding pages."
+msgstr ""
+
+msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
+msgstr ""
 
 msgid "Delete Account"
 msgstr "حذف الحساب"
@@ -7550,11 +7566,13 @@ msgstr "عذرًا، تعذر حفظ ملف التعريف الخاص بك نظ�
 msgid "Sorry, something went wrong while saving your profile!"
 msgstr "عذراً، حدث خطأ ما أثناء حفظ ملف التعريف الخاص بك!"
 
-msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
+#, fuzzy
+#| msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
+msgid "Your user account has been deactivated and will be deleted in 30 days. We're sorry you are no longer with us."
 msgstr "تم حذف ملف التعريف الخاص بك بنجاح. نأسف لأنك لم تعد معنا."
 
 #, fuzzy, python-format
-msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
+msgid "You are the only administrator left for \"%(group_name)s\". Please appoint a different administrator or delete it first."
 msgstr "أنت المسؤول الوحيد المتبقي لـ\"%s\". يرجى تعيين مسؤول مختلف أو حذفه أولاً."
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
@@ -7708,6 +7726,12 @@ msgstr "أنت لست عضوًا حاليًا في %s! إذا كنت ترغب ف
 
 msgid "Your changes have been saved."
 msgstr "تم حفظ التغييرات."
+
+#~ msgid "Deactivate users (will keep all all items they created on the site)"
+#~ msgstr "إلغاء تنشيط المستخدمين (سيتم الاحتفاظ بجميع العناصر التي قاموا بإنشائها على الموقع)"
+
+#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
+#~ msgstr "إذا كنت ترغب في حذف أي من المحتوى الخاص بك، يرجى الرجوع والقيام بذلك الآن. بمجرد حذف ملف التعريف الخاص بك، لن يكون لديك أي وصول إلى أي شيء قمت بإنشائه باستخدام هذا الحساب."
 
 #~ msgid "Attach existing Files..."
 #~ msgstr "إرفاق الملفات الموجودة..."
