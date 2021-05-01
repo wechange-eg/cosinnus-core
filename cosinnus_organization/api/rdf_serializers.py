@@ -1,5 +1,5 @@
 from rdflib import URIRef
-from rdflib.namespace import Namespace, SDO, XSD
+from rdflib.namespace import Namespace
 from rest_framework.reverse import reverse
 
 from rest_framework_rdf.serializers import RDFSerializer, RDFField, RDFSerializerMethodField
@@ -7,6 +7,7 @@ from rest_framework_rdf.serializers import RDFSerializer, RDFField, RDFSerialize
 from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationLocation
 
 WECHANGE = Namespace('http://wechange.de')
+SDO = Namespace('http://schema.org/')
 
 
 class PlaceRDFSerializer(RDFSerializer):
@@ -23,7 +24,7 @@ class PlaceRDFSerializer(RDFSerializer):
 
     def get_id(self, instance):
         url = reverse('cosinnus:api:organization-detail', kwargs={'slug': instance.organization.slug})
-        return URIRef(f'{self.context["request"].build_absolute_uri(url)[:-1]}#location')
+        return URIRef(f'{self.context["request"].build_absolute_uri(url)}#location')
 
 
 class ContactPointRDFSerializer(RDFSerializer):
@@ -40,14 +41,14 @@ class ContactPointRDFSerializer(RDFSerializer):
 
     def get_id(self, instance):
         url = reverse('cosinnus:api:organization-detail', kwargs={'slug': instance.slug})
-        return URIRef(f'{self.context["request"].build_absolute_uri(url)[:-1]}#contactPoint')
+        return URIRef(f'{self.context["request"].build_absolute_uri(url)}#contactPoint')
 
 
 class OrganizationRDFSerializer(RDFSerializer):
     name = RDFField(predicate=SDO.name)
     legal_name = RDFSerializerMethodField(predicate=SDO.legalName)
     url = RDFSerializerMethodField(predicate=SDO.url)
-    place = PlaceRDFSerializer(source='locations.first', predicate=SDO.place)
+    place = PlaceRDFSerializer(source='locations.first', predicate=SDO.location)
     contact_point = ContactPointRDFSerializer(source='*', predicate=SDO.contactPoint)
 
     class Meta:
@@ -61,7 +62,7 @@ class OrganizationRDFSerializer(RDFSerializer):
 
     def get_id(self, instance):
         url = reverse('cosinnus:api:organization-detail', kwargs={'slug': instance.slug})
-        return URIRef(f'{self.context["request"].build_absolute_uri(url)[:-1]}#organization')
+        return URIRef(f'{self.context["request"].build_absolute_uri(url)}#organization')
 
     def get_url(self, obj):
         return obj.get_absolute_url()
@@ -92,7 +93,7 @@ class CreativeWorkRDFSerializer(RDFSerializer):
 
     def get_id(self, instance):
         url = reverse('cosinnus:api:organization-detail', kwargs={'slug': instance.slug})
-        return URIRef(self.context["request"].build_absolute_uri(url)[:-1])
+        return URIRef(self.context["request"].build_absolute_uri(url))
 
     def get_license(self, obj):
         return 'CC0-1.0'
@@ -111,10 +112,10 @@ class CreativeWorkRDFSerializer(RDFSerializer):
         return obj.get_absolute_url()
 
     def get_created(self, obj):
-        return str(obj.created)
+        return obj.created and obj.created.isoformat() or None
 
     def get_last_modified(self, obj):
-        return str(obj.last_modified)
+        return obj.last_modified and obj.last_modified.isoformat() or None
 
 
 class PostalAddressRDFSerializer(RDFSerializer):
@@ -135,4 +136,4 @@ class PostalAddressRDFSerializer(RDFSerializer):
 
     def get_id(self, instance):
         url = reverse('cosinnus:api:organization-detail', kwargs={'slug': instance.organization.slug})
-        return URIRef(f'{self.context["request"].build_absolute_uri(url)[:-1]}#postalAdress')
+        return URIRef(f'{self.context["request"].build_absolute_uri(url)}#postalAdress')

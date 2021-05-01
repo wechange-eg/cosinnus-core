@@ -25,7 +25,7 @@ import {Stage} from "./Stage/list"
 import {Discussions} from "./Discussions/list"
 import {Workshops} from "./Workshops/list"
 import {CoffeeTables} from "./CoffeeTables/list"
-import {Organisations} from "./Organisations"
+import {Organizations} from "./Organizations"
 import {CoffeeTable} from "./CoffeeTables/detail"
 import {Channels} from "./Channels/list"
 import {Channel} from "./Channels/detail"
@@ -131,7 +131,7 @@ class AppConnector extends Component<AppProps> {
       </Switch>
       )) || (room.props.type === "exhibition" && (
       <Switch>
-        <ProtectedRoute {...routeProps} component={Organisations}/>
+        <ProtectedRoute {...routeProps} component={Organizations}/>
       </Switch>
     )) || (room.props.type === "results" && (
       <Switch>

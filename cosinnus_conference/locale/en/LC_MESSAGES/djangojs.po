@@ -78,7 +78,7 @@ msgstr "Connect with someone via videochat for 5 minutes"
 msgid "Contact"
 msgstr "Contact"
 
-#. [conference.organisations.country]
+#. [conference.organizations.country]
 #. defaultMessage is:
 #. Country
 #: locale/src/views/Participants/list.json
@@ -170,7 +170,7 @@ msgstr "Manage events"
 msgid "Manage rooms"
 msgstr "Manage rooms"
 
-#. [conference.organisations.name]
+#. [conference.organizations.name]
 #. defaultMessage is:
 #. Name
 #: locale/src/views/Participants/list.json
@@ -227,12 +227,12 @@ msgstr "No networking channels."
 msgid "No participants."
 msgstr "No participants."
 
-#. [conference.organisations.noResults]
+#. [conference.organizations.noResults]
 #. defaultMessage is:
-#. No represented organisations.
+#. No represented organizations.
 #: locale/src/views/Organisations/index.json
-msgid "No represented organisations."
-msgstr "No represented organisations."
+msgid "No represented organizations."
+msgstr "No represented organizations."
 
 #. [conference.workshops.noUpcomingResults]
 #. defaultMessage is:
@@ -252,19 +252,19 @@ msgstr "No upcoming workshops."
 msgid "Now"
 msgstr "Now"
 
-#. [conference.organisations.organisation]
+#. [conference.organizations.organization]
 #. defaultMessage is:
 #. Organisation
 #: locale/src/views/Participants/list.json
-msgid "Organisation"
+msgid "Organization"
 msgstr "Organisation"
 
-#. [conference.organisations.representedOrganisations]
+#. [conference.organizations.representedOrganisations]
 #. defaultMessage is:
-#. Represented organisations
+#. Represented organizations
 #: locale/src/views/Organisations/index.json
-msgid "Represented organisations"
-msgstr "Represented organisations"
+msgid "Represented organizations"
+msgstr "Represented organizations"
 
 #. [conference.rooms.noRoomsText]
 #. defaultMessage is:

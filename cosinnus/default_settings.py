@@ -22,7 +22,7 @@ COSINNUS_PORTAL_NAME = None
 # the suffix of every often-changing JS/CSS staticfile
 # increase this to make sure browsers reload a cached version 
 # after making non-compatible changes to scripts or styles!
-COSINNUS_STATICFILES_VERSION = '1.00'
+COSINNUS_STATICFILES_VERSION = '1.01'
 
 DEBUG = False
 
@@ -260,27 +260,28 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     return _INSTALLED_APPS
 
 LANGUAGES = [
-    ('de', _('Deutsch--NATIVE-LANGUAGE')),
-    ('en', _('English--NATIVE-LANGUAGE')),
-    ('ru', _('Russian--NATIVE-LANGUAGE')),
-    ('uk', _('Ukrainian--NATIVE-LANGUAGE')),
+    ('de', _('Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('en', _('English--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('ru', _('Russian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('uk', _('Ukrainian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     # other languages available, but not yet, or not by default
     # (enable them for your specific portals by defining `LANGUAGES` in settings.py
-    ('fr', _('French--NATIVE-LANGUAGE')),
-    ('pl', _('Polish--NATIVE-LANGUAGE')),
-    ('es', _('Spanish--NATIVE-LANGUAGE')),
-    ('ro', _('Romanian--NATIVE-LANGUAGE')),
-    ('be', _('Belarussian--NATIVE-LANGUAGE')),
-    ('nl', _('Dutch--NATIVE-LANGUAGE')),
+    ('fr', _('French--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('pl', _('Polish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('es', _('Spanish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('ro', _('Romanian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('be', _('Belarussian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('nl', _('Dutch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     
-    ('cs', _('Czech--NATIVE-LANGUAGE')),
-    ('az', _('Azerbaijani--NATIVE-LANGUAGE')),
-    ('hy', _('Armenian--NATIVE-LANGUAGE')),
-    ('ka', _('Georgian--NATIVE-LANGUAGE')),
-    ('kk', _('Kazakh--NATIVE-LANGUAGE')),
+    ('cs', _('Czech--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('az', _('Azerbaijani--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('hy', _('Armenian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('ka', _('Georgian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('kk', _('Kazakh--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     
-    ('ar', _('Arabic--NATIVE-LANGUAGE')),
-    ('he', _('Hebrew--NATIVE-LANGUAGE')),
+    ('ar', _('Arabic--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('he', _('Hebrew--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('el', _('Greek--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

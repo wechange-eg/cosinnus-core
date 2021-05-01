@@ -4,13 +4,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid ""
@@ -878,6 +871,9 @@ msgstr "Ansatz"
 msgid "Approved"
 msgstr "Bestätigt"
 
+msgid "Arabic--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "العربية"
+
 msgid "Arabic--NATIVE-LANGUAGE"
 msgstr "العربية"
 
@@ -912,6 +908,9 @@ msgstr "Bist du sicher dass du diesen Inhalt löschen willt?"
 msgid "Are you sure you want to delete this team?"
 msgstr "Sind sie sicher dass sie dieses Projekt löschen wollen?"
 
+msgid "Armenian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Հայոց լեզու"
+
 msgid "Armenian--NATIVE-LANGUAGE"
 msgstr "Հայոց լեզու"
 
@@ -944,6 +943,9 @@ msgstr "Es muss mindestens ein Typ von Kartenobjekten ausgewählt werden!"
 
 msgid "Attach Images/Files"
 msgstr "Bilder/Dateien anhängen"
+
+msgid "Attach existing Files..."
+msgstr "Vorhandene Datei wählen..."
 
 msgid "Attach files, add a location, mark topics and adjust visibility settings"
 msgstr ""
@@ -982,6 +984,9 @@ msgstr "Avatar"
 
 msgid "Avatar will be deleted once you save."
 msgstr "Bild wird beim speichern gelöscht."
+
+msgid "Azerbaijani--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Azerbaycan dili"
 
 msgid "Azerbaijani--NATIVE-LANGUAGE"
 msgstr "Azerbaycan dili"
@@ -1046,6 +1051,9 @@ msgstr ""
 
 msgid "Belarus"
 msgstr "Belarus"
+
+msgid "Belarussian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Беларуская"
 
 msgid "Belarussian--NATIVE-LANGUAGE"
 msgstr "Беларуская"
@@ -1765,6 +1773,9 @@ msgstr "Aktuell unterstützen folgende Browser den Ordner-Upload:"
 msgid "Cut"
 msgstr "Cut"
 
+msgid "Czech--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Čeština"
+
 msgid "Czech--NATIVE-LANGUAGE"
 msgstr "Čeština"
 
@@ -1932,6 +1943,9 @@ msgstr "Detaillierte, öffentliche Beschreibung."
 
 msgid "Details"
 msgstr "Details"
+
+msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Deutsch"
 
 msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
@@ -2114,6 +2128,9 @@ msgstr "Testlauf beendet, warten auf den Start des Imports"
 msgid "Dry run in progress"
 msgstr "Testlauf läuft"
 
+msgid "Dutch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Nederlands"
+
 msgid "Dutch--NATIVE-LANGUAGE"
 msgstr "Nederlands"
 
@@ -2244,6 +2261,9 @@ msgstr "Enddatum."
 
 msgid "Energie"
 msgstr "Energie"
+
+msgid "English--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "English"
 
 msgid "English--NATIVE-LANGUAGE"
 msgstr "English"
@@ -2572,6 +2592,9 @@ msgstr ""
 msgid "Forum"
 msgstr "Forum"
 
+msgid "French--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Français"
+
 msgid "French--NATIVE-LANGUAGE"
 msgstr "Français"
 
@@ -2604,6 +2627,9 @@ msgstr "Allgemein"
 
 msgid "Generate a new captcha"
 msgstr "Neues Captcha generieren"
+
+msgid "Georgian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "ქართული ენა"
 
 msgid "Georgian--NATIVE-LANGUAGE"
 msgstr "ქართული ენა"
@@ -2644,12 +2670,26 @@ msgstr ""
 "Netzwerk - %(portal_name)s bietet dir die nötigen Tools zur Online-"
 "Zusammenarbeit."
 
+#, python-format
+msgid ""
+"Good to see you! At %(portal_name)s you can collaborate with others in "
+"Projects and Groups. Whether Initiative, Organization, or Network - "
+"%(portal_name)s offers all the necessary tools for your online collaboration."
+msgstr ""
+"Schön, dass du da bist! Auf %(portal_name)s kannst du in Gruppen und "
+"Projekten mit anderen zusammenarbeiten. Ob Initiative, Organisation oder "
+"Netzwerk - %(portal_name)s bietet dir die nötigen Tools zur Online-"
+"Zusammenarbeit."
+
 msgid "Gradient color"
 msgstr "Verlaufsfarbe"
 
 #, python-format
 msgid "Great to see you're creating a project from the idea \"%(idea_name)s\"!"
 msgstr "Toll, dass du ein Projekt aus der Idee \"%(idea_name)s\" erstellst!"
+
+msgid "Greek--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Ελληνικά"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Group"
@@ -2697,6 +2737,15 @@ msgstr ""
 "Netzwerken oder Organisationen vereinfachen. Unter einer Gruppe könnt ihr "
 "mehrere kleine Projekte, Arbeitsgruppen oder -kreise abbilden."
 
+msgid ""
+"Groups help improve communication and collaboration in large networks or "
+"organizations. Within a Group you can bring together several smaller projects "
+"or workgroups."
+msgstr ""
+"Mit Gruppen kannst du die Kommunikation und Zusammenarbeit in großen "
+"Netzwerken oder Organisationen vereinfachen. Unter einer Gruppe könnt ihr "
+"mehrere kleine Projekte, Arbeitsgruppen oder -kreise abbilden."
+
 msgid "HD space used by groups"
 msgstr "Speicherbedarf Gruppen"
 
@@ -2720,6 +2769,9 @@ msgstr "Kopfzeile (nach Banner)"
 
 msgid "Header image"
 msgstr "Header image"
+
+msgid "Hebrew--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "עברית"
 
 msgid "Hebrew--NATIVE-LANGUAGE"
 msgstr "עברית"
@@ -3653,6 +3705,9 @@ msgstr "Jetzt anmelden und teilnehmen!"
 msgid "Join now!"
 msgstr "Jetzt beitreten!"
 
+msgid "Kazakh--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Қазақ тілі"
+
 msgid "Kazakh--NATIVE-LANGUAGE"
 msgstr "Қазақ тілі"
 
@@ -4436,6 +4491,10 @@ msgstr ""
 "Nur Mitglieder dieser Tagung können diesen Inhalt sehen. Stelle jetzt einen "
 "Antrag auf Mitgliedschaft!"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Only content from my Groups and Projects"
+msgstr "Nur Beiträge aus meinen Gruppen und Projekten"
+
 msgid ""
 "Only group members can see the content you requested. Apply to become a "
 "member now!"
@@ -4765,6 +4824,9 @@ msgstr ""
 #, python-format
 msgid "Please verify your email address for %(site_name)s!"
 msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s!"
+
+msgid "Polish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Polski"
 
 msgid "Polish--NATIVE-LANGUAGE"
 msgstr "Polski"
@@ -5197,6 +5259,9 @@ msgstr "Rocket.Chat Raum ID"
 msgid "RocketChat room name"
 msgstr "Rocket.Chat Raum Name"
 
+msgid "Romanian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Română"
+
 msgid "Romanian--NATIVE-LANGUAGE"
 msgstr "Română"
 
@@ -5225,6 +5290,9 @@ msgstr ""
 "Zeilen auf diesen Zeilennummern hatten nicht die gleiche Anzahl von Elementen "
 "({len( verarbeitete_kopfzeile)}) wie die Kopfzeile: {\", \"."
 "join(ungleiche_Zeilen}) }!"
+
+msgid "Russian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Русский"
 
 msgid "Russian--NATIVE-LANGUAGE"
 msgstr "Русский"
@@ -5718,6 +5786,9 @@ msgstr "Sortierfeld"
 msgid "Sorting index"
 msgstr "Sortierfeld"
 
+msgid "Spanish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Español"
+
 msgid "Spanish--NATIVE-LANGUAGE"
 msgstr "Español"
 
@@ -6205,6 +6276,13 @@ msgstr ""
 msgid ""
 "The start date and time are used for reminder notification emails (if set "
 "up). Can span multiple days."
+msgstr ""
+"Die Start- und Endzeit werden für Erinnerungs-E-Mails benutzt (wenn "
+"eingesetllt). Kann mehrere Tage beinhalten."
+
+msgid ""
+"The start date and time are used for reminder notification emails (if set "
+"up). Can span mutltiple days."
 msgstr ""
 "Die Start- und Endzeit werden für Erinnerungs-E-Mails benutzt (wenn "
 "eingesetllt). Kann mehrere Tage beinhalten."
@@ -6730,6 +6808,9 @@ msgstr "Geben sie Titel/Typ des Anhangs ein"
 
 msgid "URL"
 msgstr "URL"
+
+msgid "Ukrainian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr "Українська"
 
 msgid "Ukrainian--NATIVE-LANGUAGE"
 msgstr "Українська"
@@ -8999,9 +9080,6 @@ msgstr "Webseite"
 #~ msgid "Apply for"
 #~ msgstr "Teilnahme beantragen"
 
-#~ msgid "Attach existing Files..."
-#~ msgstr "Vorhandene Datei wählen..."
-
 #~ msgid "Banner Image"
 #~ msgstr "Bannerbild"
 
@@ -9093,6 +9171,9 @@ msgstr "Webseite"
 
 #~ msgid "Public Group"
 #~ msgstr "Öffentliche Gruppe"
+
+#~ msgid "Public Project"
+#~ msgstr "Öffentliches Projekt"
 
 #~ msgid "Put on waitlist"
 #~ msgstr "Auf die Warteliste"

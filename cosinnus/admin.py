@@ -535,7 +535,7 @@ class UserAdmin(DjangoUserAdmin):
     has_logged_in.boolean = True
     
     def tos_accepted(self, obj):
-        return bool(obj.cosinnus_profile.settings.get('tos_accepted', False))
+        return bool(obj.cosinnus_profile.settings and obj.cosinnus_profile.settings.get('tos_accepted', False))
     tos_accepted.short_description = _('ToS accepted?')
     tos_accepted.boolean = True
     
@@ -555,6 +555,10 @@ class UserAdmin(DjangoUserAdmin):
         for user in queryset:
             user.is_active = False
             user.save()
+            # save the user's profile as well, 
+            # as numerous triggers occur on the profile instead of the user object
+            if user.cosinnus_profile:
+                user.cosinnus_profile.save()
             count += 1
         message = _('%d Users were deactivated successfully.') % count
         self.message_user(request, message)

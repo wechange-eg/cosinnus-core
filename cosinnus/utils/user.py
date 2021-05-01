@@ -127,10 +127,12 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
     if filter_on_user_profile_model:
         return user_model_qs.exclude(user__is_active=False).\
             exclude(user__last_login__exact=None).\
+            exclude(user__email__icontains='__unverified__').\
             filter(settings__contains='tos_accepted')
     else:
         return user_model_qs.exclude(is_active=False).\
             exclude(last_login__exact=None).\
+            exclude(email__icontains='__unverified__').\
             filter(cosinnus_profile__settings__contains='tos_accepted')
             
 def filter_portal_users(user_model_qs, portal=None):

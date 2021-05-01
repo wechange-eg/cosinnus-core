@@ -769,6 +769,9 @@ class CosinnusConf(AppConf):
     
     USER_EXTERNAL_USERS_FORBIDDEN = False
     
+    # whether the "last name" user form field is also required, just like "first name"
+    USER_FORM_LAST_NAME_REQUIRED = False
+    
     # if true, an additional signup form field will be present
     SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK = False
     
@@ -804,7 +807,7 @@ class CosinnusConf(AppConf):
     #         in_signup=True, # whether to show up in the signup form
     #     ), ...
     # }
-    # example: {'organisation': {'type': 'text', 'required': True}}
+    # example: {'organization': {'type': 'text', 'required': True}}
     USERPROFILE_EXTRA_FIELDS = {}
     
     # a dict of <form-name> -> list of formfield names that will be disabled in the user profile forms 

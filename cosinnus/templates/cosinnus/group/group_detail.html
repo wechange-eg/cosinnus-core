@@ -329,7 +329,7 @@
 	        {% endif %}
 	        
 	        {% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
-		        {% if user in admins or user|is_superuser or recruited %}
+		        {% if user in admins or user_is_superuser or recruited %}
 		
 			        <div class="panel panel-default large-space">
 			            <div class="panel-heading">
@@ -349,7 +349,7 @@
 			        
 						        {% comment %} -------- Recruit Box and list of recruitees -------- {% endcomment %}
 						        
-						        {% if user in admins or user|is_superuser %}
+						        {% if user in admins or user_is_superuser %}
 						            <div class="clearfix large-space"></div>
 						        
 						            <legend>{% trans "Invite People to Register and Join" %}</legend>
@@ -379,7 +379,7 @@
 						        {% endif %}
 						        
 						        {% if recruited %}
-						            {% if user in admins or user|is_superuser %}        
+						            {% if user in admins or user_is_superuser %}        
 						                <legend>{% trans "All currently invited people" %}</legend>
 						            {% else %}
 						                <legend>{% trans "People currently invited by you" %}</legend>
@@ -391,7 +391,7 @@
 							                <div class="btn btn-default w100 regular-space">
 						                        <ul class="media-list">
 						                            <li class="media">
-				                                        {% if user == recruitation.invited_by or user in admins or user|is_superuser %}
+				                                        {% if user == recruitation.invited_by or user in admins or user_is_superuser %}
 				                                            <button type="button" class="btn btn-emphasized btn-icon-only pull-right" 
 		                                                             data-toggle="modal" data-target="#{{modal_id}}" title="{% trans "Delete invitation" %}">
 		                                                        <ul class="media-list">
@@ -433,7 +433,7 @@
 						                            </li>
 						                        </ul>
 						                    </div>
-						                    {% if user == recruitation.invited_by or user in admins or user|is_superuser %}
+						                    {% if user == recruitation.invited_by or user in admins or user_is_superuser %}
 						                        {% captureas label %}{% blocktrans with title=recruitation.email %}Do you really want to delete the invitation for "{{ title }}"?{% endblocktrans %}{% endcaptureas %}
 						                        {% captureas title %}{% trans "Delete invitation" %}{% endcaptureas %}
 						                        {% captureas action %}{% group_url 'cosinnus:group-user-recruit-delete' group=group id=recruitation.id %}{% endcaptureas %}
@@ -580,7 +580,10 @@
                 <h4 class="panel-title {% if request.GET.invite %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseThree">
                     <i class="fa fa-chevron-down panel-collapsed"></i>
                     <i class="fa fa-chevron-up panel-open"></i>
-                    {% trans "Current Members" %} ({{ members|length }})
+                    {% trans "Current Members" %} ({{ member_count }})
+                    {% if user_is_superuser and inactive_member_count %}
+	                    (+{{ inactive_member_count }} {% trans "inactive" %})
+	                {% endif %}
                 </h4>
             </div>
             <div id="collapseThree" class="panel-collapse {% if request.GET.invite %}collapse{% else %}in{% endif %}">
@@ -602,7 +605,13 @@
 					            </ul>
 					        </div>
 				        {% endif %}
-				        <legend>{% trans "Members" %}{% if member_count %} ({{ member_count }}){% endif %}</legend>
+				        <legend>
+				            {% trans "Members" %}
+			                {% if member_count %} ({{ member_count }}){% endif %}
+			                {% if user_is_superuser and inactive_member_count %}
+			                    (+{{ inactive_member_count }} {% trans "inactive" %})
+			                {% endif %}
+		                </legend>
 			        </div>
 			        <div class="clearfix"></div>
 			        {% endif %}

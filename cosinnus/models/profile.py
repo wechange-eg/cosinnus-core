@@ -41,7 +41,7 @@ from cosinnus.utils.files import get_avatar_filename, image_thumbnail, \
     image_thumbnail_url
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.utils.user import get_newly_registered_user_email
+from cosinnus.utils.user import get_newly_registered_user_email, is_user_active
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
 
 
@@ -203,6 +203,10 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         if created:
             # send creation signal
             signals.userprofile_created.send(sender=self, profile=self)
+        
+        # manual indexing sanity: remove inactive users from index
+        if not is_user_active(self.user):
+            self.remove_index()
         
         # send a copy of the ToS to the User via email?
         if settings.COSINNUS_SEND_TOS_AFTER_USER_REGISTRATION and self.user and self.user.email:

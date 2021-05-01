@@ -102,6 +102,7 @@ class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFie
     email = forms.EmailField(label=_('email address'), required=True, validators=[MaxLengthValidator(220)]) 
     first_name = forms.CharField(label=_('first name'), required=True)  
     
+    
     if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF \
                 and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:
         managed_tag_field = forms.CharField(required=settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED)
@@ -113,6 +114,8 @@ class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFie
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].required = True
+        if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED:
+            self.fields['last_name'].required = True
     
     def is_valid(self):
         """ Get the email from the form and set it as username. 
@@ -183,8 +186,10 @@ class UserChangeForm(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super(UserChangeForm, self).__init__(*args, **kwargs)
-        self.fields['first_name'].required = True
         self.fields['email'].required = True
+        self.fields['first_name'].required = True
+        if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED:
+            self.fields['last_name'].required = True
         
         
     def clean_email(self):
