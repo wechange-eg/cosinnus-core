@@ -3,9 +3,16 @@ from __future__ import unicode_literals
 
 from django_cron import CronJobBase, Schedule
 
+import logging
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
 from django.core.exceptions import ImproperlyConfigured
+from cosinnus.models.profile import get_user_profile_model
+from django.utils.timezone import now
+from django.utils.encoding import force_text
+from cosinnus.views.profile import delete_userprofile
+
+logger = logging.getLogger('cosinnus')
 
 
 class CosinnusCronJobBase(CronJobBase):
@@ -25,3 +32,28 @@ class CosinnusCronJobBase(CronJobBase):
     
     def do(self):
         raise ImproperlyConfigured('``do()`` must be overridden in your cron object!')
+
+
+class DeleteScheduledUserProfiles(CosinnusCronJobBase):
+    """ Triggers a profile delete on all user profiles whose `scheduled_for_deletion_at`
+        datetime is in the past. """
+    
+    RUN_EVERY_MINS = 60 # every 1 minute
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    
+    cosinnus_code = 'cosinnus.delete_scheduled_user_profiles'
+    
+    def do(self):
+        profiles_to_delete = get_user_profile_model().objects\
+            .exclude(scheduled_for_deletion_at__exact=None)\
+            .filter(scheduled_for_deletion_at__lte=now())
+        
+        for profile in profiles_to_delete:
+            try:
+                # sanity checks are done within this function, no need to do any here
+                delete_userprofile(profile.user)
+            except Exception as e:
+                logger.error('delete_userprofile() threw an exception during the DeleteScheduledUserProfiles cronjob! (in extra)', extra={'exception': force_text(e)})
+            
+
+

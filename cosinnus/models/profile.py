@@ -141,7 +141,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     may_be_contacted = models.BooleanField(_('May be contacted'), default=False)
     
     # UI and other preferences and extra settings for the user account
-    settings = JSONField(default={})
+    settings = JSONField(default={}, blank=True)
     extra_fields = JSONField(default={}, blank=True,
                 help_text='NO LONGER USED! Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
     dynamic_fields = PostgresJSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),

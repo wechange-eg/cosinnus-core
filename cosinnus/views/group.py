@@ -592,6 +592,7 @@ class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsC
         elif 'remove_member' in request.POST:
             user_id = int(request.POST.get('remove_member'))
             user = get_user_model().objects.get(id=user_id)
+            user.is_active = False
             delete_userprofile(user)
             messages.add_message(request, messages.SUCCESS, _('Successfully removed user'))
 

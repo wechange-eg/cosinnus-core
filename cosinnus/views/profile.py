@@ -2,39 +2,45 @@
 from __future__ import unicode_literals
 
 from builtins import str
+from datetime import timedelta
+import logging
+from uuid import uuid1
+
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist, ValidationError, \
+    PermissionDenied
+from django.forms.fields import CharField
+from django.http.response import Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
+from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
-from django.conf import settings
-
-from cosinnus.forms.profile import UserProfileForm
-from cosinnus.models.profile import get_user_profile_model
-from cosinnus.views.mixins.avatar import AvatarFormMixin
-from django.contrib import messages
-from django.core.exceptions import ObjectDoesNotExist, ValidationError,\
-    PermissionDenied
-from django.http.response import Http404, HttpResponseRedirect
-from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
-    CosinnusPortal
-from cosinnus.models.widget import WidgetConfig
-from django.contrib.auth import logout
-from cosinnus.utils.permissions import check_user_integrated_portal_member,\
-    check_user_can_see_user, check_user_superuser
 from django.views.generic.edit import DeleteView
-from cosinnus.core.decorators.views import redirect_to_not_logged_in
-from cosinnus.utils.urls import safe_redirect
-from cosinnus.templatetags.cosinnus_tags import cosinnus_setting
-from uuid import uuid1
-from cosinnus.views.user import set_user_email_to_verify
-from cosinnus.core import signals
-from django.forms.fields import CharField
-from django.utils.timezone import now
-from datetime import timedelta
 
+from cosinnus.core import signals
+from cosinnus.core.decorators.views import redirect_to_not_logged_in
+from cosinnus.forms.profile import UserProfileForm
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, \
+    CosinnusPortal
+from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
+from cosinnus.models.widget import WidgetConfig
+from cosinnus.templatetags.cosinnus_tags import cosinnus_setting
+from cosinnus.utils.permissions import check_user_integrated_portal_member, \
+    check_user_can_see_user, check_user_superuser
+from cosinnus.utils.urls import safe_redirect
+from cosinnus.views.mixins.avatar import AvatarFormMixin
+from cosinnus.views.user import set_user_email_to_verify
+from django.utils.crypto import get_random_string
+from oauth2_provider import models as oauth2_provider_models
+
+
+logger = logging.getLogger('cosinnus')
 
 def deactivate_user(user):
     """ Deactivates a user account """
@@ -80,7 +86,12 @@ def delete_userprofile(user):
     """ Deactivate and completely anonymize a user's profile, name and email,
         leaving only the empty User object.
         All content created by the user and foreign-key relations are preserved,
-        but will display ""Deleted User)" as creator. """
+        but will display ""Deleted User)" as creator.
+        Will not work on userprofiles whose user account is still active! """
+    
+    if user.is_active:
+        logger.warning('Aborting user profile deletion because the user account was still active!', extra={'user_id': user.id})
+        return
     
     profile = user.cosinnus_profile
     
@@ -103,27 +114,36 @@ def delete_userprofile(user):
     except get_tag_object_model().DoesNotExist:
         pass
     
-    # delete user profile
-    if profile.avatar:
-        profile.avatar.delete(False)
-    profile.delete()
-    
-    # set user to inactive and anonymize all data. retain a padded version of his email
-    user.first_name = "deleted"
-    user.last_name = "user"
-    user.username = user.id
-    
-    # retain email with prefix, cut prefix so field length doesn't break constraints
-    scrambled_email_prefix = '__deleted_user__%s' % str(uuid1())[:8]
-    scramble_cutoff = user._meta.get_field('email').max_length - len(scrambled_email_prefix) - 2
-    scrambled_email_prefix = scrambled_email_prefix[:scramble_cutoff]
-    user.email = '%s__%s' % (scrambled_email_prefix, user.email)
-
+    # delete AllAuth user data
     if settings.COSINNUS_IS_OAUTH_CLIENT:
         from allauth.socialaccount.models import SocialAccount
         from allauth.account.models import EmailAddress
         SocialAccount.objects.filter(user=user).delete()
         EmailAddress.objects.filter(user=user).delete()
+    
+    # delete oauth2_provider user tokens and grants
+    try:
+        oauth2_provider_models.get_grant_model().objects.filter(user=user).delete()
+        oauth2_provider_models.get_access_token_model().objects.filter(user=user).delete()
+        oauth2_provider_models.get_refresh_token_model().objects.filter(user=user).delete()
+    except Exception as e:
+        logger.warn('Userprofile delete: could not delete a user\'s oauth tokens because of an exception.', extra={'exception': e})
+    
+    # delete user profile
+    if profile.avatar:
+        profile.avatar.delete(False)
+    profile.delete()
+    
+    # set user to inactive and anonymize all data. 
+    user.first_name = "deleted"
+    user.last_name = "user"
+    user.username = user.id
+    # replace e-mail with random address
+    user.email = '__deleted_user__%s@deleted.com' % get_random_string()
+    
+    # we no longer retain a padded version of the user's email
+    #scramble_cutoff = user._meta.get_field('email').max_length - len(scrambled_email_prefix) - 2
+    #scrambled_email_prefix = scrambled_email_prefix[:scramble_cutoff]
     
     user.is_active = False
     user.save()

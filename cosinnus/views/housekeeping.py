@@ -8,7 +8,8 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.models import MEMBERSHIP_PENDING, MEMBERSHIP_ADMIN
 from cosinnus.utils.dashboard import create_initial_group_widgets
-from django.http.response import HttpResponse, HttpResponseForbidden
+from django.http.response import HttpResponse, HttpResponseForbidden,\
+    HttpResponseBadRequest
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from cosinnus.views.profile import delete_userprofile
@@ -71,6 +72,8 @@ def ensure_group_widgets(request=None):
 def delete_spam_users(request):
     if not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
+    
+    return HttpResponseBadRequest('This view is disabled now!')
     
     ret = ''
     user_csv = ''

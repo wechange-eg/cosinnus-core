@@ -421,6 +421,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # TODO: FIXME: this should be inverted, ie each cosinnus app should set these settings!
 # cosinnus-core should not know about other cosinnus apps here!
 CRON_CLASSES = [
+    'cosinnus.cron.DeleteScheduledUserProfiles',
     'cosinnus_marketplace.cron.DeactivateExpiredOffers',
     'cosinnus_message.cron.ProcessDirectReplyMails',
     'cosinnus_conference.cron.SendConferenceReminders',
