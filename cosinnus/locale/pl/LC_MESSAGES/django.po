@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-02 13:41+0200\n"
+"POT-Creation-Date: 2021-05-02 15:35+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -7098,9 +7098,9 @@ msgid "Your user account has been deactivated and will be deleted in 30 days. We
 msgstr "Twój profil został usunięty pomyślnie. Szkoda, że już nie jesteś z nami."
 
 # This sentence makes no sense to me in English, it negates itself.
-#, fuzzy, python-format
+#, fuzzy
 #| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
-msgid "You are the only administrator left for \"%(group_name)s\". Please appoint a different administrator or delete it first."
+msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
 msgstr "Jesteś ostatnim administratorem \"%s\". Wskaż nowego administratora lub najpierw go usuń."
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"

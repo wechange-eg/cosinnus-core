@@ -356,12 +356,17 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
     def _validate_user_delete_safe(self, user):
         is_safe = user.is_authenticated
         
+        non_safe_groups = []
         for group in CosinnusGroup.objects.get_for_user(user):
             admins = CosinnusGroupMembership.objects.get_admins(group=group)
             if user.pk in admins:
-                messages.error(self.request, _('You are the only administrator left for "%(group_name)s". Please appoint a different administrator or delete it first.' % {'group_name': group.name}))
+                non_safe_groups.append(group)
                 is_safe = False
-        
+        if non_safe_groups:
+            msg = _('You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:')
+            group_string = ''.join([f"\n* {group.name}" for group in non_safe_groups]) 
+            msg = f'{msg}\n{group_string}'
+            messages.error(self.request, msg)
         return is_safe
     
     def get(self, request, *args, **kwargs):

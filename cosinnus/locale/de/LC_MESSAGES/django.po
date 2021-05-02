@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-02 13:41+0200\n"
+"POT-Creation-Date: 2021-05-02 15:35+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -6341,8 +6341,7 @@ msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "to %(portal_name)s"
 msgstr "auf %(portal_name)s"
 
-#, fuzzy, python-format
-#| msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+#, python-format
 msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organization, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
 msgstr "Schön, dass du da bist! Auf %(portal_name)s kannst du in Gruppen und Projekten mit anderen zusammenarbeiten. Ob Initiative, Organisation oder Netzwerk - %(portal_name)s bietet dir die nötigen Tools zur Online-Zusammenarbeit."
 
@@ -7071,9 +7070,8 @@ msgstr "Entschuldigung, etwas ist beim Speichern deines Profils schief gelaufen!
 msgid "Your user account has been deactivated and will be deleted in 30 days. We're sorry you are no longer with us."
 msgstr "Dein Benutzer_innen-Profil wurde deaktiviert und wird in 30 Tagen gelöscht. Schade dass du nicht länger bei uns bist."
 
-#, python-format
-msgid "You are the only administrator left for \"%(group_name)s\". Please appoint a different administrator or delete it first."
-msgstr "Du bist der/die letzte Administrator(in) übrig in \"%(group_name)s\". Bitte wähle vor dem Löschen deines Profils einen anderen Administrator aus oder lösche das Projekt zuerst."
+msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
+msgstr "Du bist der/die letzte Administrator/in in diesen Projekten, Gruppen oder Tagungen. Bitte deaktiviere sie zuerst oder wähle vor dem Löschen deines Profils eine/n andere/n Administrator/in aus:"
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
 msgstr "Entschuldige, wir konnten aufgrund eines internen Fehlers dein Benutzerkonto nicht einloggen. Bitte kontaktiere einen Administrator!"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-02 13:41+0200\n"
+"POT-Creation-Date: 2021-05-02 15:35+0200\n"
 "PO-Revision-Date: 2021-04-14 14:50+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -7086,9 +7086,9 @@ msgstr "מצטערים, משהו השתבש בזמן שמירת הפרופיל �
 msgid "Your user account has been deactivated and will be deleted in 30 days. We're sorry you are no longer with us."
 msgstr "הפרופיל שלך נמחק בהצלחה. אנחנו מצטערים שאתה כבר לא איתנו."
 
-#, fuzzy, python-format
+#, fuzzy
 #| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
-msgid "You are the only administrator left for \"%(group_name)s\". Please appoint a different administrator or delete it first."
+msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
 msgstr "אתה מנהל המערכת היחיד שנותר עבור \"%s\". נא מנה מנהל מערכת אחר או מחק אותו תחילה."
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"

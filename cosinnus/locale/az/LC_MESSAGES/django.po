@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-02 13:41+0200\n"
+"POT-Creation-Date: 2021-05-02 15:35+0200\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -7534,9 +7534,9 @@ msgstr "Bağışlayın, profilinizi yaddaşda saxlayarkən bir şey səhv oldu!"
 msgid "Your user account has been deactivated and will be deleted in 30 days. We're sorry you are no longer with us."
 msgstr "Profiliniz uğurla silindi. Üzr istəyirik ki, artıq bizimlə deyilsiniz."
 
-#, fuzzy, python-format
+#, fuzzy
 #| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
-msgid "You are the only administrator left for \"%(group_name)s\". Please appoint a different administrator or delete it first."
+msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
 msgstr "\"%s\" üçün qalan yeganə adminsən. Zəhmət olmasa fərqli bir admin təyin edin və ya əvvəlcə onu silmək."
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
