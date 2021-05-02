@@ -147,12 +147,17 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     dynamic_fields = PostgresJSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
                 help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`',
                 encoder=DjangoJSONEncoder)                       
-
+    
+    scheduled_for_deletion_at = models.DateTimeField(_('Scheduled for Deletion at'), default=None, blank=True, null=True,
+                                               help_text=_('The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)'))
+    deletion_triggered_by_self = models.BooleanField(_('Deletion triggered by self'), default=False, editable=False)
+    
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     
     objects = BaseUserProfileManager()
 
-    SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings', 'managed_tag_assignments', 'likes']\
+    SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings', 
+                   'managed_tag_assignments', 'likes', 'deletion_triggered_by_self']\
                     + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
     
     # this indicates that objects of this model are in some way always visible by registered users

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 14:27+0200\n"
+"POT-Creation-Date: 2021-05-02 13:41+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -82,6 +82,15 @@ msgid "Logged in before"
 msgstr ""
 
 msgid "Never logged in"
+msgstr ""
+
+msgid "Scheduled for Deletion?"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
 msgstr ""
 
 msgid "Has Logged In"
@@ -1572,6 +1581,15 @@ msgstr ""
 msgid "May be contacted"
 msgstr ""
 
+msgid "Scheduled for Deletion at"
+msgstr ""
+
+msgid "The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)"
+msgstr ""
+
+msgid "Deletion triggered by self"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr ""
 
@@ -2578,9 +2596,6 @@ msgid "I want to like this"
 msgstr ""
 
 msgid "I want to follow this"
-msgstr ""
-
-msgid "Yes"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__

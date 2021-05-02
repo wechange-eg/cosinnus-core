@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 14:27+0200\n"
+"POT-Creation-Date: 2021-05-02 13:41+0200\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,6 +77,18 @@ msgstr "Մուտք է գործել անցյալում"
 
 msgid "Never logged in"
 msgstr "Երբեք մուտք չի գործել"
+
+msgid "Scheduled for Deletion?"
+msgstr ""
+
+msgid "Yes"
+msgstr "Այո"
+
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "No"
+msgstr "Հիմա"
 
 msgid "Has Logged In"
 msgstr "Մուտք է գործել"
@@ -1595,6 +1607,15 @@ msgstr "Լեզու"
 msgid "May be contacted"
 msgstr "Հնարավոր է կապվել"
 
+msgid "Scheduled for Deletion at"
+msgstr ""
+
+msgid "The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)"
+msgstr ""
+
+msgid "Deletion triggered by self"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr "Ծառայությունների մատուցման պայմաններ"
 
@@ -2639,9 +2660,6 @@ msgstr "Ես ցանկանում եմ հավանել սա"
 
 msgid "I want to follow this"
 msgstr "Ես ցանկանում եմ հետևել սա"
-
-msgid "Yes"
-msgstr "Այո"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Follow"

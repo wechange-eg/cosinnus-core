@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 14:27+0200\n"
+"POT-Creation-Date: 2021-05-02 13:41+0200\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,6 +77,18 @@ msgstr "Ертерек жүйеге кірген"
 
 msgid "Never logged in"
 msgstr "Ешқашан жүйеге кірмеген"
+
+msgid "Scheduled for Deletion?"
+msgstr ""
+
+msgid "Yes"
+msgstr "Иә"
+
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "No"
+msgstr "Енді"
 
 msgid "Has Logged In"
 msgstr "Жүйеге кірді"
@@ -1595,6 +1607,15 @@ msgstr "Тіл"
 msgid "May be contacted"
 msgstr "Байланысуға болады"
 
+msgid "Scheduled for Deletion at"
+msgstr ""
+
+msgid "The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)"
+msgstr ""
+
+msgid "Deletion triggered by self"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr "Қызмет көрсету шарттары"
 
@@ -2639,9 +2660,6 @@ msgstr "Маған ұнаса екен деймін"
 
 msgid "I want to follow this"
 msgstr "Мен осыған жазылғым келеді"
-
-msgid "Yes"
-msgstr "Иә"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Follow"

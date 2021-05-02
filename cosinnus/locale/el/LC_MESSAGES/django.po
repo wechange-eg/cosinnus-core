@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 14:27+0200\n"
+"POT-Creation-Date: 2021-05-02 13:41+0200\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,6 +76,18 @@ msgstr "Συνδέθηκε πριν"
 
 msgid "Never logged in"
 msgstr "Δεν συνδέθηκε ποτέ"
+
+msgid "Scheduled for Deletion?"
+msgstr ""
+
+msgid "Yes"
+msgstr "Ναι"
+
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "No"
+msgstr "Τώρα"
 
 msgid "Has Logged In"
 msgstr "Έχει Συνδεθεί"
@@ -1513,6 +1525,15 @@ msgstr "Γλώσσα"
 msgid "May be contacted"
 msgstr "Μπορεί να έρθει σε επικοινωνία"
 
+msgid "Scheduled for Deletion at"
+msgstr ""
+
+msgid "The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)"
+msgstr ""
+
+msgid "Deletion triggered by self"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr "Όροι Εξυπηρέτησης"
 
@@ -2491,9 +2512,6 @@ msgstr "Θέλω να κάνω like σε αυτό"
 
 msgid "I want to follow this"
 msgstr "Θέλω να ακολουθήσω αυτό"
-
-msgid "Yes"
-msgstr "Ναι"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Follow"

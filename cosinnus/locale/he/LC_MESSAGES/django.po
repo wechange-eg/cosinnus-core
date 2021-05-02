@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 14:27+0200\n"
+"POT-Creation-Date: 2021-05-02 13:41+0200\n"
 "PO-Revision-Date: 2021-04-14 14:50+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -87,6 +87,18 @@ msgstr "התחבר בעבר"
 
 msgid "Never logged in"
 msgstr "מעולם לא התחבר"
+
+msgid "Scheduled for Deletion?"
+msgstr ""
+
+msgid "Yes"
+msgstr "כן"
+
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "No"
+msgstr "כעת"
 
 msgid "Has Logged In"
 msgstr "התחבר"
@@ -1526,6 +1538,15 @@ msgstr "שפה"
 msgid "May be contacted"
 msgstr "ניתן ליצור קשר"
 
+msgid "Scheduled for Deletion at"
+msgstr ""
+
+msgid "The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)"
+msgstr ""
+
+msgid "Deletion triggered by self"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr "תנאי שימוש"
 
@@ -2504,9 +2525,6 @@ msgstr "אני רוצה לאהוב את זה"
 
 msgid "I want to follow this"
 msgstr "אני רוצה לעקוב אחרי זה"
-
-msgid "Yes"
-msgstr "כן"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Follow"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 14:27+0200\n"
+"POT-Creation-Date: 2021-05-02 13:41+0200\n"
 "PO-Revision-Date: 2021-04-22 12:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -87,6 +87,18 @@ msgstr "Входил в систему прежде"
 
 msgid "Never logged in"
 msgstr "Никогда не входил в систему"
+
+msgid "Scheduled for Deletion?"
+msgstr ""
+
+msgid "Yes"
+msgstr "Да"
+
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "No"
+msgstr "Сейчас"
 
 msgid "Has Logged In"
 msgstr "Уже заходил в систему"
@@ -1532,6 +1544,15 @@ msgstr "Язык"
 msgid "May be contacted"
 msgstr "Можно связаться"
 
+msgid "Scheduled for Deletion at"
+msgstr ""
+
+msgid "The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)"
+msgstr ""
+
+msgid "Deletion triggered by self"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr "Условия пользования"
 
@@ -2512,9 +2533,6 @@ msgstr "Я хочу лайкнуть это"
 
 msgid "I want to follow this"
 msgstr "Я хочу следить за этим"
-
-msgid "Yes"
-msgstr "Да"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Follow"

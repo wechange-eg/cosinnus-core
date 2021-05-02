@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 14:27+0200\n"
+"POT-Creation-Date: 2021-05-02 13:41+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -83,6 +83,15 @@ msgstr "Schonmal eingeloggt"
 msgid "Never logged in"
 msgstr "Nie eingeloggt"
 
+msgid "Scheduled for Deletion?"
+msgstr "Zur Löschung geplant?"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "No"
+msgstr "Nein"
+
 msgid "Has Logged In"
 msgstr "Jemals eingeloggt"
 
@@ -102,7 +111,7 @@ msgstr "%(count)d Benutzerkonten wurden erfolgreich reaktiviert."
 
 #
 msgid "Reactivate user accounts"
-msgstr "Benutzerkontos reaktivieren"
+msgstr "Reaktiviere Benutzerkontos"
 
 #, python-format
 msgid "%d Users were synchronized successfully."
@@ -1514,6 +1523,15 @@ msgstr "Sprache"
 msgid "May be contacted"
 msgstr "Darf kontaktiert werden"
 
+msgid "Scheduled for Deletion at"
+msgstr "Zur Löschung geplant am"
+
+msgid "The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)"
+msgstr "Der Zeitpunkt, zu dem die Löschung dieses Profils geplant ist. Die Löschung wird nach diesem Datum vorgenommen (NUR WENN das Benutzerkonto auf inaktiv gestellt ist!)"
+
+msgid "Deletion triggered by self"
+msgstr "Löschung wurde selbst veranlasst"
+
 msgid "Terms of Service"
 msgstr "Nutzungsbedingungen"
 
@@ -2491,9 +2509,6 @@ msgstr "Ich möchte den Inhalt Liken"
 
 msgid "I want to follow this"
 msgstr "Ich möchte dem Inhalt folgen"
-
-msgid "Yes"
-msgstr "Ja"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Follow"
@@ -6528,8 +6543,6 @@ msgstr "Gruppendashboard"
 msgid "in the Group Dashboard"
 msgstr "im Gruppendashboard"
 
-#, fuzzy
-#| msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
 msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Mit Gruppen kannst du die Kommunikation und Zusammenarbeit in großen Netzwerken oder Organisationen vereinfachen. Unter einer Gruppe könnt ihr mehrere kleine Projekte, Arbeitsgruppen oder -kreise abbilden."
 

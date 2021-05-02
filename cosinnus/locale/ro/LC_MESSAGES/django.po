@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 14:27+0200\n"
+"POT-Creation-Date: 2021-05-02 13:41+0200\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,6 +76,18 @@ msgstr "Autentificat înainte"
 
 msgid "Never logged in"
 msgstr "Niciodată autentificat"
+
+msgid "Scheduled for Deletion?"
+msgstr ""
+
+msgid "Yes"
+msgstr "Da"
+
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "No"
+msgstr "Acum"
 
 msgid "Has Logged In"
 msgstr "S-a autentificat"
@@ -1597,6 +1609,15 @@ msgstr "Limba"
 msgid "May be contacted"
 msgstr "Poate fi contactat"
 
+msgid "Scheduled for Deletion at"
+msgstr ""
+
+msgid "The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)"
+msgstr ""
+
+msgid "Deletion triggered by self"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr "Termeni și Service"
 
@@ -2654,9 +2675,6 @@ msgstr "Vreau să-mi placă asta"
 
 msgid "I want to follow this"
 msgstr "Vreau să urmez asta"
-
-msgid "Yes"
-msgstr "Da"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Follow"

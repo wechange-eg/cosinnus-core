@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 14:27+0200\n"
+"POT-Creation-Date: 2021-05-02 13:41+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -85,6 +85,18 @@ msgstr "Uživatel přihlášen dříve"
 
 msgid "Never logged in"
 msgstr "Nikdy nepřihlášen"
+
+msgid "Scheduled for Deletion?"
+msgstr ""
+
+msgid "Yes"
+msgstr "Ano"
+
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "No"
+msgstr "Teď"
 
 msgid "Has Logged In"
 msgstr "Se přihlásil"
@@ -1531,6 +1543,15 @@ msgstr "Jazyk"
 msgid "May be contacted"
 msgstr "Může být kontaktován/a"
 
+msgid "Scheduled for Deletion at"
+msgstr ""
+
+msgid "The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)"
+msgstr ""
+
+msgid "Deletion triggered by self"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr "Podmínky služby"
 
@@ -2545,9 +2566,6 @@ msgstr "Chci dát like"
 
 msgid "I want to follow this"
 msgstr "Chci to sledovat"
-
-msgid "Yes"
-msgstr "Ano"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Follow"

@@ -679,6 +679,11 @@ class CosinnusConf(AppConf):
     #: The serializer used for the user profile
     USER_PROFILE_SERIALIZER = 'cosinnus.api.serializers.user.UserProfileSerializer'
     
+    # the duration in days from which a user deletes their user
+    # account until its actual deletion is triggererd
+    # see `UserProfile.scheduled_for_deletion_at`
+    USER_PROFILE_DELETION_SCHEDULE_DAYS = 30
+    
     # when users newly register, are their profiles marked as visible rather than private on the site?
     USER_DEFAULT_VISIBLE_WHEN_CREATED = True
     

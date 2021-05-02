@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 14:27+0200\n"
+"POT-Creation-Date: 2021-05-02 13:41+0200\n"
 "PO-Revision-Date: 2021-02-18 20:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -88,6 +88,18 @@ msgstr "Al eerder ingelogd"
 
 msgid "Never logged in"
 msgstr "Nooit ingelogd"
+
+msgid "Scheduled for Deletion?"
+msgstr ""
+
+msgid "Yes"
+msgstr "Ja"
+
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "No"
+msgstr "Nu"
 
 msgid "Has Logged In"
 msgstr "Heeft ingelogd"
@@ -1614,6 +1626,15 @@ msgstr "Taal"
 msgid "May be contacted"
 msgstr "Kan gecontacteerd worden"
 
+msgid "Scheduled for Deletion at"
+msgstr ""
+
+msgid "The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)"
+msgstr ""
+
+msgid "Deletion triggered by self"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr "Servicevoorwaarden"
 
@@ -2666,9 +2687,6 @@ msgstr "Ik wil dit leuk vinden"
 
 msgid "I want to follow this"
 msgstr "Ik wil dit volgen"
-
-msgid "Yes"
-msgstr "Ja"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Follow"

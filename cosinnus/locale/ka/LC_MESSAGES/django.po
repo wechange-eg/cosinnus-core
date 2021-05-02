@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 14:27+0200\n"
+"POT-Creation-Date: 2021-05-02 13:41+0200\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,6 +77,18 @@ msgstr "ადრე იყო შესული"
 
 msgid "Never logged in"
 msgstr "არასდროს არ შესულა"
+
+msgid "Scheduled for Deletion?"
+msgstr ""
+
+msgid "Yes"
+msgstr "დიახ"
+
+#, fuzzy
+#| msgctxt "join team button second item"
+#| msgid "Now"
+msgid "No"
+msgstr "ახლა"
 
 msgid "Has Logged In"
 msgstr "შესულა"
@@ -1595,6 +1607,15 @@ msgstr "ენა"
 msgid "May be contacted"
 msgstr "შეიძლება მოხდეს დაკავშირება"
 
+msgid "Scheduled for Deletion at"
+msgstr ""
+
+msgid "The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)"
+msgstr ""
+
+msgid "Deletion triggered by self"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr "სერვისის განმარტებები"
 
@@ -2636,9 +2657,6 @@ msgstr "მსურს მომეწონოს"
 
 msgid "I want to follow this"
 msgstr "მსურს თვალი ვადევნო"
-
-msgid "Yes"
-msgstr "დიახ"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Follow"

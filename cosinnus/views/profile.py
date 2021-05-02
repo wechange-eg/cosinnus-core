@@ -32,6 +32,8 @@ from uuid import uuid1
 from cosinnus.views.user import set_user_email_to_verify
 from cosinnus.core import signals
 from django.forms.fields import CharField
+from django.utils.timezone import now
+from datetime import timedelta
 
 
 def deactivate_user(user):
@@ -44,22 +46,29 @@ def deactivate_user(user):
         user.cosinnus_profile.save()
 
  
-def deactivate_user_and_mark_for_deletion(user):
+def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False):
     """ Deacitvates a user account and marks them for deletion in 30 days """
     if user.cosinnus_profile:
-        # TODO: add a marked-for-deletion flag and a cronjob, deleting the profile using this
-        pass
+        # add a marked-for-deletion flag and a cronjob, deleting the profile using this
+        deletion_schedule_time = now() + timedelta(
+            days=settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS
+        )
+        user.cosinnus_profile.scheduled_for_deletion_at = deletion_schedule_time
+        user.cosinnus_profile.deletion_triggered_by_self = triggered_by_self
+        user.cosinnus_profile.save()
     deactivate_user(user)
 
 
 def reactivate_user(user):
-    """ Deactivates a user account and deletes their marked-for-deletion-flag """
+    """ Reactivates a user account and deletes their marked-for-deletion-flag """
     user.is_active = True
     user.save()
     # save the user's profile as well, 
     # as numerous triggers occur on the profile instead of the user object
     if user.cosinnus_profile:
-        # TODO here: delete the marked-for-deletion flag
+        # delete the marked-for-deletion flag
+        user.cosinnus_profile.scheduled_for_deletion_at = None
+        user.cosinnus_profile.deletion_triggered_by_self = False
         user.cosinnus_profile.save()
     else:
         # create a new userprofile if the old one was already deleted, 
@@ -346,7 +355,7 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
         
         # this no longer immediately deletes the user profile, but instead deactivates it!
         # function after 30 days.
-        deactivate_user_and_mark_for_deletion(request.user)
+        deactivate_user_and_mark_for_deletion(request.user, triggered_by_self=True)
         
         # log user out
         logout(request)
