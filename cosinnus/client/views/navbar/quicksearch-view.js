@@ -118,8 +118,9 @@ module.exports = BaseView.extend({
             'projects': type === 'projects',
             'groups': type === 'groups',
             'ideas': type === 'ideas',
-            'conferences': type === 'conferences'
-        }
+            'conferences': type === 'conferences',
+            'organizations': type === 'organizations'
+        };
 
         var params = [];
 
