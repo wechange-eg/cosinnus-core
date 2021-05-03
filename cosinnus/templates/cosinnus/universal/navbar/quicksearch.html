@@ -35,6 +35,11 @@
 						{{ macros.typeLabel("ideas", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
 					</a>
 				{% endif %}
+                {% if COSINNUS_ORGANIZATIONS_ENABLED %}
+                    <a class="rounded-button button-color-organizations result-filter-button quicksearch-filterbutton" data-result-filter-type="organizations">
+                        {{ macros.typeLabel("organizations", "rounded-button-inner", useStyles=false, COSINNUS_TRANS=COSINNUS_TRANS) }}
+                    </a>
+                {% endif %}
 			</div>
 		</div>
 	</li>
