@@ -294,7 +294,7 @@ groups_newsletter_update = GroupsNewsletterUpdateView.as_view()
 class UserListView(ListView):
     model = get_user_model()
     template_name = 'cosinnus/administration/user_list.html'
-    ordering = '-date_joined'
+    ordering = '-last_login'
     paginate_by = 50
 
     def dispatch(self, request, *args, **kwargs):
@@ -312,6 +312,10 @@ class UserListView(ListView):
             qs = qs.filter(Q(email__icontains=search_string) |
                            Q(first_name__icontains=search_string) |
                            Q(last_name__icontains=search_string) )
+        if self.request.GET.get('order_by'):
+            order = self.request.GET.get('order_by')
+            if order:
+                qs = qs.order_by(order, 'id')
         return qs
 
     def get_context_data(self):
@@ -322,8 +326,11 @@ class UserListView(ListView):
 
     def post(self, request, *args, **kwargs):
         search_string = ''
+        order_by = ''
         if 'search' in self.request.POST and request.POST.get('search'):
             search_string = '?search={}'.format(request.POST.get('search'))
+        if 'order_by' in self.request.POST and request.POST.get('order_by'):
+            order_by = '&order_by={}'.format(request.POST.get('order_by'))
         if 'send_login_token' in self.request.POST:
             if self.request.POST.get('send_login_token') == '__all__':
                 non_tokened_users = get_user_model().objects.\
@@ -352,7 +359,7 @@ class UserListView(ListView):
                     }
                     return JsonResponse(data)
                 messages.add_message(self.request, messages.SUCCESS, _('Login token was sent to %(email)s.') % {'email': user.email})
-        redirect_path = '{}{}'.format(request.path_info, search_string)
+        redirect_path = '{}{}{}'.format(request.path_info, search_string, order_by)
         return HttpResponseRedirect(redirect_path)
 
 user_list = UserListView.as_view()
