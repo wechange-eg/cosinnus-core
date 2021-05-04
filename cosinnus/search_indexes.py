@@ -122,6 +122,11 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
         qs = qs.select_related('media_tag').all()
         return qs
     
+    def should_update(self, instance, **kwargs):
+        """ Only update active groups """
+        should = super(CosinnusGroupIndexMixin, self).should_update(instance, **kwargs)
+        return should and instance.is_active
+    
     def boost_model(self, obj, indexed_data):
         """ We boost a combined measure of 2 added factors: newness (50%) and group member rank (50%).
             This means that a new group with lots of members will rank highest and an old group with no members lowest.

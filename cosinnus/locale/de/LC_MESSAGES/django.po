@@ -6462,7 +6462,7 @@ msgid "Edit Project"
 msgstr "Projekt bearbeiten"
 
 msgid "Activate Project"
-msgstr "Projekt reaktivieren"
+msgstr "Projekt aktivieren"
 
 msgid "Re-activate Project"
 msgstr "Projekt reaktivieren"

@@ -980,6 +980,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         if created:
             # send creation signal
             signals.group_object_created.send(sender=self, group=self)
+        
+        # manual indexing sanity: remove inactive groups from index
+        if not self.is_active:
+            self.remove_index()
 
     def delete(self, *args, **kwargs):
         self._clear_cache(slug=self.slug)

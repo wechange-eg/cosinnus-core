@@ -193,7 +193,8 @@ class MembershipInline(admin.StackedInline):
 
 class CosinnusProjectAdmin(admin.ModelAdmin):
     actions = ['convert_to_society', 'convert_to_conference', 'add_members_to_current_portal', 'move_members_to_current_portal',
-                'move_groups_to_current_portal', 'move_groups_to_current_portal_and_message_users']
+                'move_groups_to_current_portal', 'move_groups_to_current_portal_and_message_users',
+                'activate_groups', 'deactivate_groups']
     list_display = ('name', 'slug', 'portal', 'public', 'is_active',)
     list_filter = ('portal', 'public', 'is_active',)
     search_fields = ('name', 'slug', 'id',)
@@ -271,6 +272,31 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         self._convert_to_type(request, queryset, CosinnusGroup.TYPE_CONFERENCE, CosinnusConference)
     convert_to_conference.short_description = CosinnusConference.get_trans().CONVERT_ITEMS_TO
     
+    def activate_groups(self, request, queryset):
+        """ Deactivates groups """
+        activated_groups = []
+        for group in queryset:
+            group.is_active = True
+            group.save()
+            activated_groups.append(group)
+        message = _('The following items were activated:') + '\n' + ", ".join([
+            group.name for group in activated_groups
+        ])
+        self.message_user(request, message, messages.SUCCESS)
+    activate_groups.short_description = CosinnusProject.get_trans().ACTIVATE
+    
+    def deactivate_groups(self, request, queryset):
+        """ Deactivates groups """
+        deactivated_groups = []
+        for group in queryset:
+            group.is_active = False
+            group.save()
+            deactivated_groups.append(group)
+        message = _('The following items were deactivated:') + '\n' + ", ".join([
+            group.name for group in deactivated_groups
+        ])
+        self.message_user(request, message, messages.SUCCESS)
+    deactivate_groups.short_description = CosinnusProject.get_trans().DEACTIVATE
     
     def add_members_to_current_portal(self, request, queryset, remove_all_other_memberships=False):
         """ Converts this CosinnusGroup's type """
@@ -398,6 +424,16 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
         self.move_society_and_subprojects_to_portal(request, queryset, message_members=True)
     move_society_and_subprojects_to_portal_and_message_users.short_description = _("Move selected groups and their subprojects to current portal and message members")
     
+    def activate_groups(self, request, queryset):
+        """ Deactivates groups """
+        super(CosinnusSocietyAdmin, self).activate_groups(request, queryset)
+    activate_groups.short_description = CosinnusSociety.get_trans().ACTIVATE
+    
+    def deactivate_groups(self, request, queryset):
+        """ Deactivates groups """
+        super(CosinnusSocietyAdmin, self).deactivate_groups(request, queryset)
+    deactivate_groups.short_description = CosinnusSociety.get_trans().DEACTIVATE
+    
     def get_form(self, request, obj=None, **kwargs):
         self.exclude = ("parent", )
         return super(CosinnusSocietyAdmin, self).get_form(request, obj, **kwargs)
@@ -414,6 +450,17 @@ class CosinnusConferenceAdmin(CosinnusProjectAdmin):
         actions = super(CosinnusConferenceAdmin, self).get_actions(request)
         del actions['convert_to_conference']
         return actions
+    
+    def activate_groups(self, request, queryset):
+        """ Deactivates groups """
+        super(CosinnusConferenceAdmin, self).activate_groups(request, queryset)
+    activate_groups.short_description = CosinnusConference.get_trans().ACTIVATE
+    
+    def deactivate_groups(self, request, queryset):
+        """ Deactivates groups """
+        super(CosinnusConferenceAdmin, self).deactivate_groups(request, queryset)
+    deactivate_groups.short_description = CosinnusConference.get_trans().DEACTIVATE
+    
 
 admin.site.register(CosinnusConference, CosinnusConferenceAdmin)
 
