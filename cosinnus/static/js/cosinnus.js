@@ -235,7 +235,9 @@
                     var calendarList = new FullCalendar.Calendar(eventListEl, $.extend({
                         initialView: 'listWeek',
                         events: cosinnus_calendarEvents,
-                        contentHeight: 'auto'
+                        contentHeight: 'auto',
+                        displayEventTime: false,
+                        eventDisplay: 'block',
                     }, dateFormat))
                     calendarList.setOption('locale', cosinnus_current_language);
                     calendarList.render();
@@ -269,6 +271,8 @@
                             center: isSmall ? 'title': ''
                         },
                         contentHeight: 'auto',
+                        eventDisplay: 'block',
+                        displayEventTime: false,
                         showNonCurrentDates: false,
                         fixedWeekCount: false,
                         editable: editable,
