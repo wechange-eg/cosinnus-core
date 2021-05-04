@@ -27,6 +27,9 @@
         {% if request.GET.order_by %}
             <input type="hidden" name="order_by" value="{{ request.GET.order_by }}">
         {% endif %}
+        {% if request.GET.managed_tag %}
+            <input type="hidden" name="managed_tag" value="{{ request.GET.managed_tag }}">
+        {% endif %}
         <div class="fadedown pull-right">
             <button id="start_send_all_tokens" type="submit" name="send_login_token" value="__all__" class="btn btn-emphasized btn-autosize">
                 <ul class="media-list">
@@ -47,43 +50,61 @@
 	        </script>
         </div>
     </form>
-    
+
     <h2 class="white-text large-space">{% trans 'Users' %}</h2>
-    <form method="post">{% csrf_token %}
+    <form method="get">
         {% if request.GET.order_by %}
             <input type="hidden" name="order_by" value="{{ request.GET.order_by }}">
         {% endif %}
-        <div class="row">
-            <div class="col-md-10">
-                <div type="button" class="btn btn-default w100">
-                    <ul class="media-list">
-                        <li class="media">
-                            <a class="pull-left" href="#">
-                                <i class="fa fa-search"></i>
-                            </a>
-                            <div class="media-body media-body-form-control">
-                                <input class="form-control"
-                                    placeholder="{% trans 'Search for email, firstname or lastname' %}"
-                                    name="search" {% if request.GET.search %}value="{{ request.GET.search }}"{% endif %}>
+        <div class="content-box">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="cosinnus-field">
+                        <label>{% trans 'Search' %}</label>
+						<div class="cosinnus-field-input large-field">
+                            <div type="button" class="btn btn-default w100">
+                                <ul class="media-list">
+                                    <li class="media">
+                                        <a class="pull-left" href="#">
+                                            <i class="fa fa-search"></i>
+                                        </a>
+                                        <div class="media-body media-body-form-control">
+                                            <input class="form-control"
+                                                placeholder="{% trans 'Search for email, firstname or lastname' %}"
+                                                name="search" {% if request.GET.search %}value="{{ request.GET.search }}"{% endif %}>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-emphasized large-space" title="{% trans 'search' %}">
-                    <ul class="media-list">
-                        <li class="media">
-                            <div class="media-body">
-                                {% trans 'search' %}
-                            </div>
-                        </li>
-                    </ul>
-                </button>
-            </div>
+                <div class="col-md-4">
+					<div class="cosinnus-field">
+                        <label>{{ options_label }}</label>
+						<div class="cosinnus-field-input large-field">
+							<select name="managed_tag">
+                                <option value="">{% trans 'nothing selected' %}</option>
+								{% for option in options %}
+								<option value="{{ option.0 }}" {% if option.0 == request.GET.managed_tag %}selected{% endif %}>{{ option.1 }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+				</div>
 
+            </div>
         </div>
+        <button type="submit" class="btn btn-emphasized large-space" title="{% trans 'search' %}">
+            <ul class="media-list">
+                <li class="media">
+                    <div class="media-body">
+                        {% trans 'search' %}
+                    </div>
+                </li>
+            </ul>
+        </button>
     </form>
 
 
@@ -119,36 +140,36 @@
         <thead>
             <tr>
                 {% if request.GET.order_by == 'email' %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&order_by=-email">{% trans "Email" %} <i class="fa fa-chevron-down"></i></a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=-email">{% trans "Email" %} <i class="fa fa-chevron-down"></i></a></th>
                 {% elif request.GET.order_by == '-email'  %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&order_by=email">{% trans "Email" %} <i class="fa fa-chevron-up"></i></a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=email">{% trans "Email" %} <i class="fa fa-chevron-up"></i></a></th>
                 {% else %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&order_by=email">{% trans "Email" %}</a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=email">{% trans "Email" %}</a></th>
                 {% endif %}
 
 
                 {% if request.GET.order_by == 'first_name' %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&order_by=-first_name">{% trans "Firstname" %} <i class="fa fa-chevron-down"></i></a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=-first_name">{% trans "Firstname" %} <i class="fa fa-chevron-down"></i></a></th>
                 {% elif request.GET.order_by == '-first_name'%}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&order_by=first_name">{% trans "Firstname" %} <i class="fa fa-chevron-up"></i></a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=first_name">{% trans "Firstname" %} <i class="fa fa-chevron-up"></i></a></th>
                 {% else %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&order_by=first_name">{% trans "Firstname" %}</a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=first_name">{% trans "Firstname" %}</a></th>
                 {% endif %}
 
                 {% if request.GET.order_by == 'last_name' %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&order_by=-last_name">{% trans "Lastname" %} <i class="fa fa-chevron-down"></i></a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=-last_name">{% trans "Lastname" %} <i class="fa fa-chevron-down"></i></a></th>
                 {% elif request.GET.order_by == '-last_name' %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&order_by=last_name">{% trans "Lastname" %} <i class="fa fa-chevron-up"></i></a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=last_name">{% trans "Lastname" %} <i class="fa fa-chevron-up"></i></a></th>
                 {% else %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&order_by=last_name">{% trans "Lastname" %}</a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=last_name">{% trans "Lastname" %}</a></th>
                 {% endif %}
 
                 {% if request.GET.order_by == '-last_login' %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&order_by=last_login">{% trans "Last Login" %} <i class="fa fa-chevron-up"></i></a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=last_login">{% trans "Last Login" %} <i class="fa fa-chevron-up"></i></a></th>
                 {% elif request.GET.order_by == 'last_login' %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&order_by=-last_login">{% trans "Last Login" %} <i class="fa fa-chevron-down"></i></a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=-last_login">{% trans "Last Login" %} <i class="fa fa-chevron-down"></i></a></th>
                 {% else %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&order_by=-last_login">{% trans "Last Login" %}</a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=-last_login">{% trans "Last Login" %}</a></th>
                 {% endif %}
                 <th><div class="pull-right">{% trans "User token" %}</div></th>
             </tr>
@@ -235,8 +256,8 @@
     <div class="user-management-search-pagination row">
         <class class="col-xs-4">
             {% if page_obj.has_previous %}
-                <a href="?page=1&search={{ request.GET.search}}&order_by={{ request.GET.order_by }}">&laquo; {% trans 'to first page' %}</a>
-                <a href="?page={{ page_obj.previous_page_number }}&search={{ request.GET.search}}&order_by={{ request.GET.order_by }}">{% trans 'previous' %}</a>
+                <a href="?page=1&search={{ request.GET.search}}&managed_tag={{ request.GET.managed_tag }}&order_by={{ request.GET.order_by }}">&laquo; {% trans 'to first page' %}</a>
+                <a href="?page={{ page_obj.previous_page_number }}&search={{ request.GET.search}}&managed_tag={{ request.GET.managed_tag }}&order_by={{ request.GET.order_by }}">{% trans 'previous' %}</a>
             {% endif %}
         </class>
 
@@ -246,7 +267,7 @@
 
         <div class="col-xs-4 next">
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}&search={{ request.GET.search}}&order_by={{ request.GET.order_by }}">{% trans 'next' %} &raquo;</a>
+                <a href="?page={{ page_obj.next_page_number }}&search={{ request.GET.search}}&managed_tag={{ request.GET.managed_tag }}&order_by={{ request.GET.order_by }}">{% trans 'next' %} &raquo;</a>
             {% endif %}
         </div>
     </div>
