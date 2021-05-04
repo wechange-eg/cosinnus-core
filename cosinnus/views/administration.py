@@ -30,7 +30,9 @@ from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.core.mail import send_html_mail
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
+from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.managed_tags import (CosinnusManagedTag,
+                                          CosinnusManagedTagAssignment)
 from cosinnus.views.user import email_first_login_token_to_user
 from cosinnus.conf import settings
 from cosinnus.models.profile import PROFILE_SETTING_LOGIN_TOKEN_SENT
@@ -294,7 +296,7 @@ groups_newsletter_update = GroupsNewsletterUpdateView.as_view()
 class UserListView(ListView):
     model = get_user_model()
     template_name = 'cosinnus/administration/user_list.html'
-    ordering = '-date_joined'
+    ordering = '-last_login'
     paginate_by = 50
 
     def dispatch(self, request, *args, **kwargs):
@@ -312,18 +314,57 @@ class UserListView(ListView):
             qs = qs.filter(Q(email__icontains=search_string) |
                            Q(first_name__icontains=search_string) |
                            Q(last_name__icontains=search_string) )
+        if self.request.GET.get('order_by'):
+            order = self.request.GET.get('order_by')
+            if order:
+                qs = qs.order_by(order, 'id')
+        if self.request.GET.get('managed_tag'):
+            managed_tag_id = self.request.GET.get('managed_tag')
+            if managed_tag_id:
+                managed_tag = CosinnusManagedTag.objects.filter(
+                    id=managed_tag_id).first()
+                profile_type = ContentType.objects.get(
+                    app_label='cosinnus', model='userprofile')
+                assignments = CosinnusManagedTagAssignment.objects.filter(
+                    content_type=profile_type.id,
+                    managed_tag=managed_tag).values_list(
+                        'object_id', flat=True)
+                user = get_user_profile_model().objects.filter(
+                    id__in=assignments).values_list('user__id', flat=True)
+                qs = qs.filter(id__in=user)
         return qs
+
+    def get_managed_tag_as_options(self):
+        if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS:
+            predefined_slugs = settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS
+            managed_tags = CosinnusManagedTag.objects.filter(slug__in=predefined_slugs)
+            return [(str(tag.id), tag.name) for tag in managed_tags]
+        managed_tags = CosinnusManagedTag.objects.all()
+        return [(str(tag.id), tag.name) for tag in managed_tags]
+
+    def get_options_label(self):
+        return CosinnusManagedTag.labels.MANAGED_TAG_NAME
 
     def get_context_data(self):
         context = super().get_context_data()
-        context['total'] = self.get_queryset().count()
+        context.update({
+            'total': self.get_queryset().count(),
+            'options': self.get_managed_tag_as_options(),
+            'options_label': self.get_options_label()
+        })
         return context
 
 
     def post(self, request, *args, **kwargs):
         search_string = ''
+        order_by = ''
+        managed_tag = ''
         if 'search' in self.request.POST and request.POST.get('search'):
             search_string = '?search={}'.format(request.POST.get('search'))
+        if 'order_by' in self.request.POST and request.POST.get('order_by'):
+            order_by = '&order_by={}'.format(request.POST.get('order_by'))
+        if 'managed_tag' in self.request.POST and request.POST.get('managed_tag'):
+            managed_tag = '&managed_tag={}'.format(request.POST.get('managed_tag'))
         if 'send_login_token' in self.request.POST:
             if self.request.POST.get('send_login_token') == '__all__':
                 non_tokened_users = get_user_model().objects.\
@@ -339,7 +380,7 @@ class UserListView(ListView):
                             if not PROFILE_SETTING_LOGIN_TOKEN_SENT in profile.settings:
                                 view.send_login_token(user, threaded=False)
                 UserLoginTokenThread().start()
-                
+
                 msg = _('Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations.')
                 messages.add_message(self.request, messages.SUCCESS, msg)
             else:
@@ -352,7 +393,7 @@ class UserListView(ListView):
                     }
                     return JsonResponse(data)
                 messages.add_message(self.request, messages.SUCCESS, _('Login token was sent to %(email)s.') % {'email': user.email})
-        redirect_path = '{}{}'.format(request.path_info, search_string)
+        redirect_path = '{}{}{}{}'.format(request.path_info, search_string, order_by, managed_tag)
         return HttpResponseRedirect(redirect_path)
 
 user_list = UserListView.as_view()
