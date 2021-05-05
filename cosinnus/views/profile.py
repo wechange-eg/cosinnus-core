@@ -64,6 +64,9 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False):
         user.cosinnus_profile.deletion_triggered_by_self = triggered_by_self
         user.cosinnus_profile.save()
     deactivate_user(user)
+    
+    # send extended deactivation signal
+    signals.user_deactivated_and_marked_for_deletion.send(sender=None, profile=user.cosinnus_profile)
 
 
 def reactivate_user(user):

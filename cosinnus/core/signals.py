@@ -31,6 +31,10 @@ user_deactivated = dispatch.Signal(providing_args=["user"])
 """ Called after a user account is activated, or re-activated after being deactivated """
 user_activated = dispatch.Signal(providing_args=["user"])
 
+""" Called after a user has deactivated their account and marked it for 30-day deletion,
+    or when an admin has triggered this action for a user account in the django admin. """
+user_deactivated_and_marked_for_deletion = dispatch.Signal(providing_args=["profile"])
+
 """ Called just before a user "deletes" their account and their
     profile still just now exists, before it will be deleted.
     Can be used to delete/disconnect any external linked accounts. """
