@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-22 12:51+0200\n"
+"POT-Creation-Date: 2021-05-05 15:30+0200\n"
 "PO-Revision-Date: 2021-03-05 18:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -33,13 +33,17 @@ msgctxt "the_app"
 msgid "conference"
 msgstr "مؤتمر"
 
-msgid "End date must be before start date"
+#, fuzzy
+#| msgid "End date must be before start date"
+msgid "The start date must be before the end date"
 msgstr "يجب أن يكون تاريخ الانتهاء قبل تاريخ الابتداء"
 
 msgid "Please also provide a start date"
 msgstr "يرجى أيضًا تقديم تاريخ الابتداء"
 
-msgid "Please also provide a end date"
+#, fuzzy
+#| msgid "Please also provide a end date"
+msgid "Please also provide an end date"
 msgstr "يرجى أيضا تقديم تاريخ الانتهاء"
 
 msgid "First Choice"

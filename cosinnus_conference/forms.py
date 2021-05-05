@@ -103,7 +103,7 @@ class ConferenceParticipationManagement(forms.ModelForm):
 
         if application_end and application_end:
             if application_end <= application_start:
-                msg = _('End date must be before start date')
+                msg = _('The start date must be before the end date')
                 self.add_error('application_end', msg)
 
         elif application_end and not application_start:
@@ -111,7 +111,7 @@ class ConferenceParticipationManagement(forms.ModelForm):
             self.add_error('application_start', msg)
 
         elif application_start and not application_end:
-            msg = _('Please also provide a end date')
+            msg = _('Please also provide an end date')
             self.add_error('application_end', msg)
 
         return cleaned_data

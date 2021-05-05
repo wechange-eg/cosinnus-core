@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:20+0200\n"
+"POT-Creation-Date: 2021-05-05 15:30+0200\n"
 "PO-Revision-Date: 2021-04-26 10:40+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.4.2\n"
 
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
@@ -31,13 +31,17 @@ msgctxt "the_app"
 msgid "conference"
 msgstr "σύσκεψη"
 
-msgid "End date must be before start date"
+#, fuzzy
+#| msgid "End date must be before start date"
+msgid "The start date must be before the end date"
 msgstr "Η ημερομηνία λήξης πρέπει να προηγείται της ημερομηνίας έναρξης"
 
 msgid "Please also provide a start date"
 msgstr "Παρακαλούμε εισάγετε επίσης ημερομηνία έναρξης"
 
-msgid "Please also provide a end date"
+#, fuzzy
+#| msgid "Please also provide a end date"
+msgid "Please also provide an end date"
 msgstr "Παρακαλούμε εισάγετε επίσης ημερομηνία λήξης"
 
 msgid "First Choice"
