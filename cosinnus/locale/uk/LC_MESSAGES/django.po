@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-02 15:35+0200\n"
+"POT-Creation-Date: 2021-05-05 14:14+0200\n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,6 +36,16 @@ msgstr "Токен з таким кодом вже існує! Будь ласк
 #, fuzzy, python-format
 #| msgid "The following Projects were converted to Groups:"
 msgid "The following items were converted to %s:"
+msgstr "Наступні Проєкти були перетворені в Групи:"
+
+#, fuzzy
+#| msgid "The following Projects were converted to Groups:"
+msgid "The following items were activated:"
+msgstr "Наступні Проєкти були перетворені в Групи:"
+
+#, fuzzy
+#| msgid "The following Projects were converted to Groups:"
+msgid "The following items were deactivated:"
 msgstr "Наступні Проєкти були перетворені в Групи:"
 
 msgid "The following Users were added to this portal:"
@@ -2418,6 +2428,9 @@ msgstr "Адміністрація"
 
 msgid "send login token to all inactive users"
 msgstr ""
+
+msgid "Search"
+msgstr "Пошук"
 
 msgid "Search for email, firstname or lastname"
 msgstr ""
@@ -5117,9 +5130,6 @@ msgstr "Всі Організації"
 msgid "Search..."
 msgstr "Пошук..."
 
-msgid "Search"
-msgstr "Пошук"
-
 msgid "Messages"
 msgstr "Повідомлення"
 
@@ -6863,15 +6873,11 @@ msgstr "Ви деактивуєте цей/цю проєкт/групу!"
 msgid "You are about to re-activate this project. It and all of its content will be visible on the website again."
 msgstr "Ви повторно активуєте цей/цю проєкт/групу. Проєкт/групу і весь контент буде знову видно на сайті."
 
-#, fuzzy
-#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "Ви деактивуєте цей/цю проєкт/групу. Проєкт/групу і весь контент буде приховано на сайті для усіх, зокрема вас."
-
-#, fuzzy
-#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
-msgstr "Цей процес є оборотним. Ви можете будь-коли відновити проєкт/групу зі свого профілю користувача."
+msgid ""
+"You are about to deactivate this project. When your project is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the project can be reactivated by your and any other project administrator."
+msgstr ""
 
 #, fuzzy
 #| msgid "Convert selected Groups to Projects"
@@ -6982,15 +6988,11 @@ msgstr "Ви деактивуєте цей/цю проєкт/групу!"
 msgid "You are about to re-activate this group. It and all of its content will be visible on the website again."
 msgstr "Ви повторно активуєте цей/цю проєкт/групу. Проєкт/групу і весь контент буде знову видно на сайті."
 
-#, fuzzy
-#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "Ви деактивуєте цей/цю проєкт/групу. Проєкт/групу і весь контент буде приховано на сайті для усіх, зокрема вас."
-
-#, fuzzy
-#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
-msgstr "Цей процес є оборотним. Ви можете будь-коли відновити проєкт/групу зі свого профілю користувача."
+msgid ""
+"You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the group can be reactivated by your and any other group administrator."
+msgstr ""
 
 #, fuzzy
 #| msgid "Convert selected Projects to Groups"
@@ -7109,15 +7111,11 @@ msgstr "Ви деактивуєте цей/цю проєкт/групу!"
 msgid "You are about to re-activate this conference. It and all of its content will be visible on the website again."
 msgstr "Ви повторно активуєте цей/цю проєкт/групу. Проєкт/групу і весь контент буде знову видно на сайті."
 
-#, fuzzy
-#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "Ви деактивуєте цей/цю проєкт/групу. Проєкт/групу і весь контент буде приховано на сайті для усіх, зокрема вас."
-
-#, fuzzy
-#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
-msgstr "Цей процес є оборотним. Ви можете будь-коли відновити проєкт/групу зі свого профілю користувача."
+msgid ""
+"You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the conference can be reactivated by your and any other conference organizer."
+msgstr ""
 
 #, fuzzy
 #| msgid "Convert selected Groups to Projects"
@@ -7435,8 +7433,11 @@ msgid "%(team_name)s was re-activated successfully!"
 msgstr "%(team_name)s було успішно активовано ще раз!"
 
 #, python-format
-msgid "%(team_name)s was deactivated successfully!"
-msgstr "%(team_name)s було успішно деактивовано!"
+msgid ""
+"%(team_name)s was deactivated successfully!\n"
+"\n"
+"Should you wish to delete it permanently, please send an email to the administrators of the portal. Please send the email from the email account with which you are registered at this platform and add the exact name to the email, so that the administrators can verify your request."
+msgstr ""
 
 msgid "This project/group is already active!"
 msgstr "Цей Проєкт/Група уже активні!"
@@ -7574,6 +7575,17 @@ msgstr "Ваш профіль успішно видалено. Нам шкода
 #| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
 msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
 msgstr "Ви єдиний(-а) адміністратор(-ка) в «%s». Перед тим, як видалити ваш профіль, будь ласка, призначте іншого адміністратора або видаліть проєкт."
+
+msgid ""
+"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n"
+"\n"
+"If this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile."
+msgstr ""
+
+#, fuzzy
+#| msgid "You are about to delete your user account from the site!"
+msgid "Information about the deletion of your user account"
+msgstr "Ви видаляєте ваш обліковий запис з вебсайту!"
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
 msgstr "Вибачте, ми не можемо встановити зв'язок з Вашим обліковим записом через внутрішню помилку. Будь ласка, зверніться до системного адміністратора!"
@@ -7728,6 +7740,39 @@ msgstr "Наразі Ви не є членом %s! Якщо ви бажаєте 
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#, fuzzy
+#~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Ви деактивуєте цей/цю проєкт/групу. Проєкт/групу і весь контент буде приховано на сайті для усіх, зокрема вас."
+
+#, fuzzy
+#~| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+#~ msgstr "Цей процес є оборотним. Ви можете будь-коли відновити проєкт/групу зі свого профілю користувача."
+
+#, fuzzy
+#~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Ви деактивуєте цей/цю проєкт/групу. Проєкт/групу і весь контент буде приховано на сайті для усіх, зокрема вас."
+
+#, fuzzy
+#~| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+#~ msgstr "Цей процес є оборотним. Ви можете будь-коли відновити проєкт/групу зі свого профілю користувача."
+
+#, fuzzy
+#~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Ви деактивуєте цей/цю проєкт/групу. Проєкт/групу і весь контент буде приховано на сайті для усіх, зокрема вас."
+
+#, fuzzy
+#~| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+#~ msgstr "Цей процес є оборотним. Ви можете будь-коли відновити проєкт/групу зі свого профілю користувача."
+
+#~ msgid "%(team_name)s was deactivated successfully!"
+#~ msgstr "%(team_name)s було успішно деактивовано!"
 
 #~ msgid "Deactivate users (will keep all all items they created on the site)"
 #~ msgstr "Деактивувати вибраних користувачів (зберігає усі створені ними об'єкти на сторінці)"

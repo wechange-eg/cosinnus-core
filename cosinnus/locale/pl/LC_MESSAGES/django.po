@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-02 15:35+0200\n"
+"POT-Creation-Date: 2021-05-05 14:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,6 +42,16 @@ msgstr "Token z tym samym kodem już istnieje! Proszę wybrać inny ciąg dla to
 
 #, python-format
 msgid "The following items were converted to %s:"
+msgstr "Następujące pozycje zostały przekonwertowane na %s:"
+
+#, fuzzy
+#| msgid "The following items were converted to %s:"
+msgid "The following items were activated:"
+msgstr "Następujące pozycje zostały przekonwertowane na %s:"
+
+#, fuzzy
+#| msgid "The following items were converted to %s:"
+msgid "The following items were deactivated:"
 msgstr "Następujące pozycje zostały przekonwertowane na %s:"
 
 msgid "The following Users were added to this portal:"
@@ -2277,6 +2287,9 @@ msgstr "Administracja Użytkownika"
 
 msgid "send login token to all inactive users"
 msgstr "wyślij token loginu do wszystkich nieaktywnych użytkowników"
+
+msgid "Search"
+msgstr "Szukaj"
 
 msgid "Search for email, firstname or lastname"
 msgstr "Szukaj po adresie e-mail, imieniu lub nazwisku"
@@ -4815,9 +4828,6 @@ msgstr "Wszystkie organizacje"
 msgid "Search..."
 msgstr "Szukaj..."
 
-msgid "Search"
-msgstr "Szukaj"
-
 msgid "Messages"
 msgstr "Wiadomości"
 
@@ -6497,11 +6507,11 @@ msgstr "Właśnie dezaktywujesz ten projekt!"
 msgid "You are about to re-activate this project. It and all of its content will be visible on the website again."
 msgstr "Właśnie reaktywujesz ten projekt. On i jego treści będą znów widoczne na stronie internetowej."
 
-msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "Właśnie dezaktywujesz ten projekt. On i jego treści będą znów ukryte na stronie internetowej i niewidoczne dla każdego, łącznie z Tobą."
-
-msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
-msgstr "Ten proces jest odwracalny. W każdej chwili możesz reaktywować projekt ze swojej strony profilu użytkownika."
+msgid ""
+"You are about to deactivate this project. When your project is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the project can be reactivated by your and any other project administrator."
+msgstr ""
 
 msgid "Convert selected items to Projects"
 msgstr "Konwertuj zaznaczone pozycje na Projekty"
@@ -6588,11 +6598,11 @@ msgstr "Właśnie dezaktywujesz tę grupę!"
 msgid "You are about to re-activate this group. It and all of its content will be visible on the website again."
 msgstr "Właśnie reaktywujesz tę grupę. Ona i jej treści będą znów widoczne na stronie internetowej."
 
-msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "Właśnie dezaktywujesz tę grupę. Ona i jej treści będą znów ukryte na stronie internetowej i niewidoczne dla każdego, łącznie z Tobą."
-
-msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
-msgstr "Ten proces jest odwracalny. W każdej chwili możesz reaktywować grupę ze swojej strony profilu użytkownika."
+msgid ""
+"You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the group can be reactivated by your and any other group administrator."
+msgstr ""
 
 msgid "Convert selected items to Groups"
 msgstr "Konwertuj zaznaczone pozycje na Grupy"
@@ -6675,11 +6685,11 @@ msgstr "Właśnie dezaktywujesz tę konferencję!"
 msgid "You are about to re-activate this conference. It and all of its content will be visible on the website again."
 msgstr "Właśnie reaktywujesz tę konferencję. Ona i jej treści będą znów widoczne na stronie internetowej."
 
-msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "Właśnie dezaktywujesz tę konferencję. Ona i jej treści będą znów ukryte na stronie internetowej i niewidoczne dla każdego, łącznie z Tobą."
-
-msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
-msgstr "Ten proces jest odwracalny. W każdej chwili możesz reaktywować konferencję ze swojej strony profilu użytkownika."
+msgid ""
+"You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the conference can be reactivated by your and any other conference organizer."
+msgstr ""
 
 msgid "Convert selected items to Conferences"
 msgstr "Konwertuj zaznaczone pozycje na konferencje"
@@ -6961,8 +6971,11 @@ msgid "%(team_name)s was re-activated successfully!"
 msgstr "%(team_name)s reaktywowany pomyślnie!"
 
 #, python-format
-msgid "%(team_name)s was deactivated successfully!"
-msgstr "%(team_name)s zdezaktywowany pomyślnie!"
+msgid ""
+"%(team_name)s was deactivated successfully!\n"
+"\n"
+"Should you wish to delete it permanently, please send an email to the administrators of the portal. Please send the email from the email account with which you are registered at this platform and add the exact name to the email, so that the administrators can verify your request."
+msgstr ""
 
 msgid "This project/group is already active!"
 msgstr "Ten projekt/grupa jest już aktywny/a!"
@@ -7102,6 +7115,17 @@ msgstr "Twój profil został usunięty pomyślnie. Szkoda, że już nie jesteś 
 #| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
 msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
 msgstr "Jesteś ostatnim administratorem \"%s\". Wskaż nowego administratora lub najpierw go usuń."
+
+msgid ""
+"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n"
+"\n"
+"If this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile."
+msgstr ""
+
+#, fuzzy
+#| msgid "You are about to delete your user account from the site!"
+msgid "Information about the deletion of your user account"
+msgstr "Za chwilę usuniesz swoje konto użytkownika ze strony!"
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
 msgstr "Przepraszamy, nie mogliśmy połączyć Twojego konta użytkownika z powodu wewnętrznego błędu. Skontaktuj się z administratorem systemu!"
@@ -7248,6 +7272,32 @@ msgstr "Obecnie nie jesteś członkiem %s! Jeśli chcesz nim zostać, możesz wy
 
 msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
+
+#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Właśnie dezaktywujesz ten projekt. On i jego treści będą znów ukryte na stronie internetowej i niewidoczne dla każdego, łącznie z Tobą."
+
+#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+#~ msgstr "Ten proces jest odwracalny. W każdej chwili możesz reaktywować projekt ze swojej strony profilu użytkownika."
+
+#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Właśnie dezaktywujesz tę grupę. Ona i jej treści będą znów ukryte na stronie internetowej i niewidoczne dla każdego, łącznie z Tobą."
+
+#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+#~ msgstr "Ten proces jest odwracalny. W każdej chwili możesz reaktywować grupę ze swojej strony profilu użytkownika."
+
+#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Właśnie dezaktywujesz tę konferencję. Ona i jej treści będą znów ukryte na stronie internetowej i niewidoczne dla każdego, łącznie z Tobą."
+
+#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+#~ msgstr "Ten proces jest odwracalny. W każdej chwili możesz reaktywować konferencję ze swojej strony profilu użytkownika."
+
+#~ msgid "%(team_name)s was deactivated successfully!"
+#~ msgstr "%(team_name)s zdezaktywowany pomyślnie!"
+
+#, fuzzy
+#~| msgid "No Tag selected"
+#~ msgid "nothing selected"
+#~ msgstr "Nie wybrano znacznika"
 
 #~ msgid "Deactivate users (will keep all all items they created on the site)"
 #~ msgstr "Dezaktywuj użytkowników (pozycje utworzone przez nich zostaną zachowane na strone)"

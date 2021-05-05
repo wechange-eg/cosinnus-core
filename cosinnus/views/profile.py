@@ -30,7 +30,7 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, \
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
 from cosinnus.models.widget import WidgetConfig
-from cosinnus.templatetags.cosinnus_tags import cosinnus_setting
+from cosinnus.templatetags.cosinnus_tags import cosinnus_setting, textfield
 from cosinnus.utils.permissions import check_user_integrated_portal_member, \
     check_user_can_see_user, check_user_superuser
 from cosinnus.utils.urls import safe_redirect
@@ -38,6 +38,7 @@ from cosinnus.views.mixins.avatar import AvatarFormMixin
 from cosinnus.views.user import set_user_email_to_verify
 from django.utils.crypto import get_random_string
 from oauth2_provider import models as oauth2_provider_models
+from cosinnus.core.mail import send_html_mail
 
 
 logger = logging.getLogger('cosinnus')
@@ -378,14 +379,19 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
         if not self._validate_user_delete_safe(request.user):
             return HttpResponseRedirect(reverse('cosinnus:profile-delete'))
         
+        # send a notification email ignoring notification settings
+        text = _('Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n\nIf this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile.')
+        body_text = textfield(text)
+        send_html_mail(request.user, _('Information about the deletion of your user account'), body_text, threaded=False)
+        
         # this no longer immediately deletes the user profile, but instead deactivates it!
         # function after 30 days.
         deactivate_user_and_mark_for_deletion(request.user, triggered_by_self=True)
         
         # log user out
         logout(request)
-        
         messages.success(self.request, self.message_success)
+        
         return HttpResponseRedirect(self.get_success_url())
     
 

@@ -85,7 +85,7 @@
                         <label>{{ options_label }}</label>
 						<div class="cosinnus-field-input large-field">
 							<select name="managed_tag">
-                                <option value="">{% trans 'nothing selected' %}</option>
+                                <option value="">{% trans '(No choice)' %}</option>
 								{% for option in options %}
 								<option value="{{ option.0 }}" {% if option.0 == request.GET.managed_tag %}selected{% endif %}>{{ option.1 }}</option>
 								{% endfor %}

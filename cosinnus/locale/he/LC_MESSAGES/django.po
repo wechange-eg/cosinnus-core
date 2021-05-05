@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-02 15:35+0200\n"
+"POT-Creation-Date: 2021-05-05 14:14+0200\n"
 "PO-Revision-Date: 2021-04-14 14:50+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,6 +47,16 @@ msgstr "אסימון עם אותו קוד כבר קיים! נא בחר מחרו�
 
 #, python-format
 msgid "The following items were converted to %s:"
+msgstr "הפריטים הבאים הומרו ל%s:"
+
+#, fuzzy
+#| msgid "The following items were converted to %s:"
+msgid "The following items were activated:"
+msgstr "הפריטים הבאים הומרו ל%s:"
+
+#, fuzzy
+#| msgid "The following items were converted to %s:"
+msgid "The following items were deactivated:"
 msgstr "הפריטים הבאים הומרו ל%s:"
 
 msgid "The following Users were added to this portal:"
@@ -2281,6 +2291,9 @@ msgstr "ניהול משתמש"
 
 msgid "send login token to all inactive users"
 msgstr "שלח אסימון כניסה לכל המשתמשים הלא פעילים"
+
+msgid "Search"
+msgstr "חיפוש"
 
 msgid "Search for email, firstname or lastname"
 msgstr "חיפוש דואר אלקטרוני, שם פרטי או שם משפחה"
@@ -4809,9 +4822,6 @@ msgstr "כל הארגונים"
 msgid "Search..."
 msgstr "חיפוש..."
 
-msgid "Search"
-msgstr "חיפוש"
-
 msgid "Messages"
 msgstr "הודעות"
 
@@ -6487,11 +6497,11 @@ msgstr "אתה עומד להשבית פרויקט זה!"
 msgid "You are about to re-activate this project. It and all of its content will be visible on the website again."
 msgstr "אתה עומד להפעיל מחדש פרוייקט זה. הקבוצה ותכניה יהיו גלויים באתר שוב."
 
-msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "אתה עומד להשבית פרוייקט זה. הפרוייקט ותכניו יהיו בלתי נראים מהאתר, לעולם כולל אותך."
-
-msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
-msgstr "תהליך זה הפיך. באפשרותך להפעיל מחדש את הפרוייקט מדף פרופיל המשתמש שלך בכל עת."
+msgid ""
+"You are about to deactivate this project. When your project is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the project can be reactivated by your and any other project administrator."
+msgstr ""
 
 msgid "Convert selected items to Projects"
 msgstr "המר פריטים נבחרים לפרוייקטים"
@@ -6578,11 +6588,11 @@ msgstr "אתה עומד להשבית את הקבוצה הזאת!"
 msgid "You are about to re-activate this group. It and all of its content will be visible on the website again."
 msgstr "אתה עומד להפעיל מחדש קבוצה זו. זה וכל התוכן שלה יהיו גלויים באתר שוב."
 
-msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "אתה עומד להשבית קבוצה זו. הקבוצה וכל תכניה יוסתרו מהאתר ויהיו בלתי נראים לכולם, כולל אותך."
-
-msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
-msgstr "תהליך זה הפיך. באפשרותך להפעיל מחדש את הקבוצה מדף פרופיל המשתמש שלך בכל עת."
+msgid ""
+"You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the group can be reactivated by your and any other group administrator."
+msgstr ""
 
 msgid "Convert selected items to Groups"
 msgstr "המר פריטים נבחרים לקבוצות"
@@ -6665,11 +6675,11 @@ msgstr "אתה עומד להשבית ועידה זו!"
 msgid "You are about to re-activate this conference. It and all of its content will be visible on the website again."
 msgstr "אתה עומד להפעיל מחדש ועידה זו. הועידה וכל תכניה יהיו גלויים באתר שוב."
 
-msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "אתה עומד להשבית ועידה זו. הועידה וכל תכניה יוסתרו מהאתר ויהיו בלתי נראים לכולם כולל אותך."
-
-msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
-msgstr "תהליך זה הפיך. באפשרותך להפעיל מחדש את הוועידה מדף פרופיל המשתמש שלך בכל עת."
+msgid ""
+"You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the conference can be reactivated by your and any other conference organizer."
+msgstr ""
 
 msgid "Convert selected items to Conferences"
 msgstr "המרת פריטים נבחרים לוועידות"
@@ -6951,8 +6961,11 @@ msgid "%(team_name)s was re-activated successfully!"
 msgstr "%(team_name)s הופעל מחדש בהצלחה!"
 
 #, python-format
-msgid "%(team_name)s was deactivated successfully!"
-msgstr "%(team_name)s הושבת בהצלחה!"
+msgid ""
+"%(team_name)s was deactivated successfully!\n"
+"\n"
+"Should you wish to delete it permanently, please send an email to the administrators of the portal. Please send the email from the email account with which you are registered at this platform and add the exact name to the email, so that the administrators can verify your request."
+msgstr ""
 
 msgid "This project/group is already active!"
 msgstr "פרויקט/קבוצה זו כבר פעילים!"
@@ -7090,6 +7103,17 @@ msgstr "הפרופיל שלך נמחק בהצלחה. אנחנו מצטערים �
 #| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
 msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
 msgstr "אתה מנהל המערכת היחיד שנותר עבור \"%s\". נא מנה מנהל מערכת אחר או מחק אותו תחילה."
+
+msgid ""
+"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n"
+"\n"
+"If this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile."
+msgstr ""
+
+#, fuzzy
+#| msgid "You are about to delete your user account from the site!"
+msgid "Information about the deletion of your user account"
+msgstr "אתה עומד למחוק את חשבון המשתמש שלך מהאתר!"
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
 msgstr "מצטערים, לא היתה אפשרות לחבר את חשבון המשתמש שלך עקב שגיאה פנימית. נא פנה למנהל מערכת!"
@@ -7236,6 +7260,32 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
+
+#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "אתה עומד להשבית פרוייקט זה. הפרוייקט ותכניו יהיו בלתי נראים מהאתר, לעולם כולל אותך."
+
+#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+#~ msgstr "תהליך זה הפיך. באפשרותך להפעיל מחדש את הפרוייקט מדף פרופיל המשתמש שלך בכל עת."
+
+#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "אתה עומד להשבית קבוצה זו. הקבוצה וכל תכניה יוסתרו מהאתר ויהיו בלתי נראים לכולם, כולל אותך."
+
+#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+#~ msgstr "תהליך זה הפיך. באפשרותך להפעיל מחדש את הקבוצה מדף פרופיל המשתמש שלך בכל עת."
+
+#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "אתה עומד להשבית ועידה זו. הועידה וכל תכניה יוסתרו מהאתר ויהיו בלתי נראים לכולם כולל אותך."
+
+#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+#~ msgstr "תהליך זה הפיך. באפשרותך להפעיל מחדש את הוועידה מדף פרופיל המשתמש שלך בכל עת."
+
+#~ msgid "%(team_name)s was deactivated successfully!"
+#~ msgstr "%(team_name)s הושבת בהצלחה!"
+
+#, fuzzy
+#~| msgid "No Tag selected"
+#~ msgid "nothing selected"
+#~ msgstr "לא נבחר תג"
 
 #~ msgid "Deactivate users (will keep all all items they created on the site)"
 #~ msgstr "השבת משתמשים (ישמור את כל הפריטים שנוצרו באתר)"

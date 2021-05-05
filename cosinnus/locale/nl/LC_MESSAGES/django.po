@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-02 15:35+0200\n"
+"POT-Creation-Date: 2021-05-05 14:14+0200\n"
 "PO-Revision-Date: 2021-02-18 20:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -48,6 +48,16 @@ msgstr "Er bestaat al een token met dezelfde code! Kies een andere tekenreeks vo
 #, fuzzy, python-format
 #| msgid "The following Projects were converted to Groups:"
 msgid "The following items were converted to %s:"
+msgstr "De volgende projecten zijn omgezet naar groepen:"
+
+#, fuzzy
+#| msgid "The following Projects were converted to Groups:"
+msgid "The following items were activated:"
+msgstr "De volgende projecten zijn omgezet naar groepen:"
+
+#, fuzzy
+#| msgid "The following Projects were converted to Groups:"
+msgid "The following items were deactivated:"
 msgstr "De volgende projecten zijn omgezet naar groepen:"
 
 msgid "The following Users were added to this portal:"
@@ -2431,6 +2441,9 @@ msgstr "Administratie"
 
 msgid "send login token to all inactive users"
 msgstr ""
+
+msgid "Search"
+msgstr "Zoeken"
 
 msgid "Search for email, firstname or lastname"
 msgstr ""
@@ -5169,9 +5182,6 @@ msgstr "Alle organisaties"
 msgid "Search..."
 msgstr "Zoeken…"
 
-msgid "Search"
-msgstr "Zoeken"
-
 msgid "Messages"
 msgstr "Berichten"
 
@@ -6919,15 +6929,11 @@ msgstr "Je staat op het punt dit project/deze groep te deactiveren!"
 msgid "You are about to re-activate this project. It and all of its content will be visible on the website again."
 msgstr "Je staat op het punt dit project/deze groep opnieuw te activeren. Alle inhoud ervan zal weer zichtbaar zijn op de website."
 
-#, fuzzy
-#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "Je staat op het punt dit project/deze groep te deactiveren. De inhoud zal worden verborgen op de website en onzichtbaar worden voor iedereen, jezelf inclusief."
-
-#, fuzzy
-#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
-msgstr "Dit proces is omkeerbaar. Je kunt het project/de groep op elk moment opnieuw activeren vanuit je gebruikersprofiel."
+msgid ""
+"You are about to deactivate this project. When your project is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the project can be reactivated by your and any other project administrator."
+msgstr ""
 
 #, fuzzy
 #| msgid "Convert selected Groups to Projects"
@@ -7038,15 +7044,11 @@ msgstr "Je staat op het punt dit project/deze groep te deactiveren!"
 msgid "You are about to re-activate this group. It and all of its content will be visible on the website again."
 msgstr "Je staat op het punt dit project/deze groep opnieuw te activeren. Alle inhoud ervan zal weer zichtbaar zijn op de website."
 
-#, fuzzy
-#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "Je staat op het punt dit project/deze groep te deactiveren. De inhoud zal worden verborgen op de website en onzichtbaar worden voor iedereen, jezelf inclusief."
-
-#, fuzzy
-#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
-msgstr "Dit proces is omkeerbaar. Je kunt het project/de groep op elk moment opnieuw activeren vanuit je gebruikersprofiel."
+msgid ""
+"You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the group can be reactivated by your and any other group administrator."
+msgstr ""
 
 #, fuzzy
 #| msgid "Convert selected Projects to Groups"
@@ -7169,15 +7171,11 @@ msgstr "Je staat op het punt dit project/deze groep te deactiveren!"
 msgid "You are about to re-activate this conference. It and all of its content will be visible on the website again."
 msgstr "Je staat op het punt dit project/deze groep opnieuw te activeren. Alle inhoud ervan zal weer zichtbaar zijn op de website."
 
-#, fuzzy
-#| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr "Je staat op het punt dit project/deze groep te deactiveren. De inhoud zal worden verborgen op de website en onzichtbaar worden voor iedereen, jezelf inclusief."
-
-#, fuzzy
-#| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
-msgstr "Dit proces is omkeerbaar. Je kunt het project/de groep op elk moment opnieuw activeren vanuit je gebruikersprofiel."
+msgid ""
+"You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the conference can be reactivated by your and any other conference organizer."
+msgstr ""
 
 #, fuzzy
 #| msgid "Convert selected Groups to Projects"
@@ -7495,8 +7493,11 @@ msgid "%(team_name)s was re-activated successfully!"
 msgstr "%(team_name)s is succesvol gereactiveerd!"
 
 #, python-format
-msgid "%(team_name)s was deactivated successfully!"
-msgstr "%(team_name)s is succesvol gedeactiveerd!"
+msgid ""
+"%(team_name)s was deactivated successfully!\n"
+"\n"
+"Should you wish to delete it permanently, please send an email to the administrators of the portal. Please send the email from the email account with which you are registered at this platform and add the exact name to the email, so that the administrators can verify your request."
+msgstr ""
 
 msgid "This project/group is already active!"
 msgstr "Dit project/deze groep is al actief!"
@@ -7636,6 +7637,17 @@ msgstr "Je profiel is succesvol verwijderd. Het spijt ons dat je niet langer bij
 #| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
 msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
 msgstr "Je bent de enige beheerder die nog over is voor “%s”. Wijs een andere beheerder aan of verwijder deze eerst."
+
+msgid ""
+"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n"
+"\n"
+"If this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile."
+msgstr ""
+
+#, fuzzy
+#| msgid "You are about to delete your user account from the site!"
+msgid "Information about the deletion of your user account"
+msgstr "Je staat op het punt je gebruikersaccount van de site te verwijderen!"
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
 msgstr "Sorry, we konden je gebruikersaccount niet verbinden vanwege een interne fout. Neem contact op met een systeembeheerder!"
@@ -7790,6 +7802,39 @@ msgstr "Je bent momenteel geen lid van %s! Als je wilt, kun je hieronder het lid
 
 msgid "Your changes have been saved."
 msgstr "Je wijzigingen zijn opgeslagen."
+
+#, fuzzy
+#~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Je staat op het punt dit project/deze groep te deactiveren. De inhoud zal worden verborgen op de website en onzichtbaar worden voor iedereen, jezelf inclusief."
+
+#, fuzzy
+#~| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+#~ msgstr "Dit proces is omkeerbaar. Je kunt het project/de groep op elk moment opnieuw activeren vanuit je gebruikersprofiel."
+
+#, fuzzy
+#~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Je staat op het punt dit project/deze groep te deactiveren. De inhoud zal worden verborgen op de website en onzichtbaar worden voor iedereen, jezelf inclusief."
+
+#, fuzzy
+#~| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+#~ msgstr "Dit proces is omkeerbaar. Je kunt het project/de groep op elk moment opnieuw activeren vanuit je gebruikersprofiel."
+
+#, fuzzy
+#~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Je staat op het punt dit project/deze groep te deactiveren. De inhoud zal worden verborgen op de website en onzichtbaar worden voor iedereen, jezelf inclusief."
+
+#, fuzzy
+#~| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
+#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+#~ msgstr "Dit proces is omkeerbaar. Je kunt het project/de groep op elk moment opnieuw activeren vanuit je gebruikersprofiel."
+
+#~ msgid "%(team_name)s was deactivated successfully!"
+#~ msgstr "%(team_name)s is succesvol gedeactiveerd!"
 
 #~ msgid "Deactivate users (will keep all all items they created on the site)"
 #~ msgstr "Gebruikers deactiveren (alle items die ze op de site hebben gemaakt worden bewaard)"

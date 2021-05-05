@@ -1553,7 +1553,7 @@ class ActivateOrDeactivateGroupView(TemplateView):
     template_name = 'cosinnus/group/group_activate_or_deactivate.html'
     
     message_success_activate = _('%(team_name)s was re-activated successfully!')
-    message_success_deactivate = _('%(team_name)s was deactivated successfully!')
+    message_success_deactivate = _('%(team_name)s was deactivated successfully!\n\nShould you wish to delete it permanently, please send an email to the administrators of the portal. Please send the email from the email account with which you are registered at this platform and add the exact name to the email, so that the administrators can verify your request.')
     
     def dispatch(self, request, *args, **kwargs):
         group_id = int(kwargs.pop('group_id'))

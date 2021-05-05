@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-02 15:35+0200\n"
+"POT-Creation-Date: 2021-05-05 14:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -43,6 +43,16 @@ msgstr ""
 #, fuzzy, python-format
 #| msgid "The following Projects were converted to Groups:"
 msgid "The following items were converted to %s:"
+msgstr "The following Projects were converted to Groups:"
+
+#, fuzzy
+#| msgid "The following Projects were converted to Groups:"
+msgid "The following items were activated:"
+msgstr "The following Projects were converted to Groups:"
+
+#, fuzzy
+#| msgid "The following Projects were converted to Groups:"
+msgid "The following items were deactivated:"
 msgstr "The following Projects were converted to Groups:"
 
 msgid "The following Users were added to this portal:"
@@ -2351,6 +2361,9 @@ msgid "User Administration"
 msgstr "There are no groups."
 
 msgid "send login token to all inactive users"
+msgstr ""
+
+msgid "Search"
 msgstr ""
 
 msgid "Search for email, firstname or lastname"
@@ -4787,9 +4800,6 @@ msgstr ""
 msgid "Search..."
 msgstr ""
 
-msgid "Search"
-msgstr ""
-
 msgid "Messages"
 msgstr ""
 
@@ -6518,10 +6528,10 @@ msgstr "Are you sure you want to delete this prject?"
 msgid "You are about to re-activate this project. It and all of its content will be visible on the website again."
 msgstr ""
 
-msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr ""
-
-msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+msgid ""
+"You are about to deactivate this project. When your project is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the project can be reactivated by your and any other project administrator."
 msgstr ""
 
 #, fuzzy
@@ -6621,10 +6631,10 @@ msgstr "Are you sure you want to delete this prject?"
 msgid "You are about to re-activate this group. It and all of its content will be visible on the website again."
 msgstr ""
 
-msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr ""
-
-msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+msgid ""
+"You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the group can be reactivated by your and any other group administrator."
 msgstr ""
 
 #, fuzzy
@@ -6722,10 +6732,10 @@ msgstr "Are you sure you want to delete this prject?"
 msgid "You are about to re-activate this conference. It and all of its content will be visible on the website again."
 msgstr ""
 
-msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
-msgstr ""
-
-msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+msgid ""
+"You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+"\n"
+" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the conference can be reactivated by your and any other conference organizer."
 msgstr ""
 
 #, fuzzy
@@ -7016,7 +7026,10 @@ msgid "%(team_name)s was re-activated successfully!"
 msgstr ""
 
 #, python-format
-msgid "%(team_name)s was deactivated successfully!"
+msgid ""
+"%(team_name)s was deactivated successfully!\n"
+"\n"
+"Should you wish to delete it permanently, please send an email to the administrators of the portal. Please send the email from the email account with which you are registered at this platform and add the exact name to the email, so that the administrators can verify your request."
 msgstr ""
 
 msgid "This project/group is already active!"
@@ -7153,6 +7166,15 @@ msgid "Your user account has been deactivated and will be deleted in 30 days. We
 msgstr ""
 
 msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
+msgstr ""
+
+msgid ""
+"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n"
+"\n"
+"If this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile."
+msgstr ""
+
+msgid "Information about the deletion of your user account"
 msgstr ""
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
