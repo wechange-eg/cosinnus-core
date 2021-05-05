@@ -134,7 +134,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     description = models.TextField(verbose_name=_('Description'), blank=True, null=True)
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, editable=False, on_delete=models.SET_NULL)
-    website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
+    website = models.URLField(_('Website'), max_length=200, blank=True, null=True)
     language = models.CharField(_('Language'), max_length=2,
         choices=settings.LANGUAGES, default='de')
     # display and inclusion in forms is dependent on setting `COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD`
