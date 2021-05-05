@@ -333,10 +333,24 @@
                     calendar.setOption('locale', cosinnus_current_language);
                     calendar.render();
                     $.cosinnus.initializedFullcalendars.push(calendar);
-                })
+                });
+                $('.clear-small-calendar').off('click').on('click', function() {
+                    $.cosinnus.clearSmallCalendarValues($(this).parent('.input-area'));
+                });
             }
         },
-
+        
+        clearSmallCalendarValues: function(parentEl) {
+            // clears all selected values from the small calendar date pickers within the jquery parentEl element
+            $.each($.cosinnus.initializedFullcalendars, function(i, calendar){
+                calendar.destroy();
+            });
+            parentEl.find('.calendar-date-time-chooser input').removeAttr('value').val('');
+            parentEl.find('.small-calendar').empty();
+            $.cosinnus.initializedFullcalendars = [];
+            $.cosinnus.fullcalendar();
+            $.cosinnus.calendarDayTimeChooser();
+        },
 
         calendarBig : function() {
             // The big calendar fills the whole content area and contains the user's events.

@@ -3,34 +3,35 @@ from __future__ import unicode_literals
 
 from builtins import object
 import locale
+import logging
 
+from annoying.functions import get_object_or_None
+from django.contrib.contenttypes.fields import GenericForeignKey, \
+    GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import JSONField as PostgresJSONField
+from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils import timezone
+from django.utils.crypto import get_random_string
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from phonenumber_field.modelfields import PhoneNumberField
 import six
-from django.core.cache import cache
 
 from cosinnus.conf import settings
-from cosinnus.utils.files import get_conference_conditions_filename
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.utils.files import get_conference_conditions_filename
 from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify
-from cosinnus.utils.urls import group_aware_reverse
-from django.utils.crypto import get_random_string
-import logging
-from cosinnus.views.mixins.group import ModelInheritsGroupReadWritePermissionsMixin
-from cosinnus.utils.permissions import check_user_superuser
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey,\
-    GenericRelation
-from cosinnus.models.tagged import get_tag_object_model
-from annoying.functions import get_object_or_None
-from phonenumber_field.modelfields import PhoneNumberField
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.permissions import check_user_superuser
+from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.views.mixins.group import ModelInheritsGroupReadWritePermissionsMixin
+
 
 logger = logging.getLogger('cosinnus')
 
@@ -362,6 +363,7 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
         return self.events.filter(is_break=False)\
                 .exclude(type=ConferenceEvent.TYPE_COFFEE_TABLE)\
                 .order_by('from_date')
+
 
 class ParticipationManagement(models.Model):
 

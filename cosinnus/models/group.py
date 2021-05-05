@@ -984,6 +984,12 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         # manual indexing sanity: remove inactive groups from index
         if not self.is_active:
             self.remove_index()
+            
+        # for conferences: if membership_mode is set to MEMBERSHIP_MODE_APPLICATION, 
+        # create a ParticipationManagement as well
+        if self.membership_mode == self.MEMBERSHIP_MODE_APPLICATION and self.participation_management.count() == 0:
+            from cosinnus.models.conference import ParticipationManagement
+            ParticipationManagement.objects.create(conference=self)
 
     def delete(self, *args, **kwargs):
         self._clear_cache(slug=self.slug)

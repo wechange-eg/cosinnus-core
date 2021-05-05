@@ -29,11 +29,11 @@
             <input class="calendar-date-time-chooser-hiddendate" id="id_{{ from_date_field.html_name }}_0" name="{{ from_date_field.html_name }}_0" 
                 placeholder="{% trans "Start date." %}" type="hidden" 
                 {% if from_date_field.value %}
-                value="{{ from_date_field.value|date:"Y-m-d" }}" 
+                    value="{{ from_date_field.value|date:"Y-m-d" }}" 
                 {% elif form_view == "add" and request.GET.start %}
-                value="{{ request.GET.start }}" 
-                {% else %}
-                value="{% now "Y-m-d" %}" 
+                    value="{{ request.GET.start }}" 
+                {% elif not date_nullable %}
+                    value="{% now "Y-m-d" %}" 
                 {% endif %}
             >
             <input class="calendar-date-time-chooser-time" id="id_{{ from_date_field.html_name }}_1" name="{{ from_date_field.html_name }}_1" 
@@ -51,11 +51,11 @@
             <input class="calendar-date-time-chooser-hiddendate" id="id_{{ to_field.html_name }}_0" name="{{ to_date_field.html_name }}_0"
                 placeholder="{% trans "End date." %}" type="hidden" 
                 {% if to_date_field.value %}
-                value="{{ to_date_field.value|date:"Y-m-d" }}" 
+                  value="{{ to_date_field.value|date:"Y-m-d" }}" 
                 {% elif form_view == "add" and request.GET.end %}
-                value="{{ request.GET.end }}" 
-                {% else %}
-                value="{% now "Y-m-d" %}" 
+                   value="{{ request.GET.end }}" 
+                {% elif not date_nullable %}
+                   value="{% now "Y-m-d" %}" 
                 {% endif %}
             >
             <input class="calendar-date-time-chooser-time" id="id_{{ to_date_field.html_name }}_1" name="{{ to_date_field.html_name }}_1"
@@ -64,6 +64,12 @@
             >    
             <div class="small-calendar"></div>
         </li>
+        
+	    {% if date_nullable %}
+	        <a class="clear-small-calendar">
+                <i class="fas fa-close"></i>
+            </a>
+	    {% endif %}
     </ol>
 {% endcaptureas %}
 {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label large_field=True date_legend=date_legend %}
