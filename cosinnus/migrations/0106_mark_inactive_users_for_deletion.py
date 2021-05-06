@@ -5,6 +5,7 @@ from django.db.models.aggregates import Min, Max
 from cosinnus.conf import settings
 from django.utils.timezone import now
 from datetime import timedelta
+from django.core.exceptions import FieldDoesNotExist
 
 
 def mark_inactive_users_for_deletion(apps, schema_editor):
@@ -20,7 +21,10 @@ def mark_inactive_users_for_deletion(apps, schema_editor):
     deletion_schedule_time = now() + timedelta(days=30)
     inactive_users = User.objects.filter(is_active=False)
     inactive_user_profiles = UserProfile.objects.filter(user__in=inactive_users)
-    inactive_user_profiles.update(scheduled_for_deletion_at=deletion_schedule_time)
+    try:
+        inactive_user_profiles.update(scheduled_for_deletion_at=deletion_schedule_time)
+    except FieldDoesNotExist:
+        pass # some swappable models may not have this field
 
 
 class Migration(migrations.Migration):
