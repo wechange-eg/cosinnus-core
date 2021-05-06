@@ -12,7 +12,8 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusPortal, CosinnusPortalMembership,\
     CosinnusGroup, CosinnusPermanentRedirect, CosinnusUnregisterdUserGroupInvite, RelatedGroups, CosinnusGroupInviteToken
-from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN
+from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN,\
+    MEMBER_STATUS
 from cosinnus.models.profile import get_user_profile_model,\
     GlobalBlacklistedEmail, GlobalUserNotificationSetting
 from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory,\
@@ -78,23 +79,31 @@ class MembershipAdmin(admin.ModelAdmin):
     actions = ['make_admin', 'make_member']
     if settings.COSINNUS_ROCKET_ENABLED:
         actions += ['force_redo_user_room_membership',]
+    if settings.COSINNUS_CLOUD_ENABLED:
+        actions += ['force_redo_cloud_user_room_membership',]
     
     def make_admin(self, request, queryset):
         """ Converts the memberships' statuses """
-        queryset.update(status=MEMBERSHIP_ADMIN)
+        # manual saving of each item to trigger signal listeners
+        for item in queryset:
+            item.status = MEMBERSHIP_ADMIN
+            item.save()
         self.message_user(request, f'Made {len(queryset)} users an Admin', messages.SUCCESS)
     make_admin.short_description = _("Convert memberships to Admin status")
         
     def make_member(self, request, queryset):
         """ Converts the memberships' statuses """
-        queryset.update(status=MEMBERSHIP_MEMBER)
+        # manual saving of each item to trigger signal listeners
+        for item in queryset:
+            item.status = MEMBERSHIP_MEMBER
+            item.save()
         self.message_user(request, f'Made {len(queryset)} users a Member', messages.SUCCESS)
     make_member.short_description = _("Convert memberships to Member status")
     
     if settings.COSINNUS_ROCKET_ENABLED:
         def force_redo_user_room_membership(self, request, queryset):
             count = 0
-            from cosinnus_message.rocket_chat import RocketChatConnection
+            from cosinnus_message.rocket_chat import RocketChatConnection # noqa
             rocket = RocketChatConnection()
             for membership in queryset:
                 rocket.invite_or_kick_for_membership(membership)
@@ -102,6 +111,18 @@ class MembershipAdmin(admin.ModelAdmin):
             message = _('%d Users\' rocketchat room memberships were re-done.') % count
             self.message_user(request, message)
         force_redo_user_room_membership.short_description = _('Rocket: Fix missing RocketChat room membership for users')
+    
+    if settings.COSINNUS_CLOUD_ENABLED:
+        def force_redo_cloud_user_room_membership(self, request, queryset):
+            count = 0
+            from cosinnus_cloud.hooks import user_joined_group_receiver_sub # noqa
+            for membership in queryset:
+                if membership.status in MEMBER_STATUS:
+                    user_joined_group_receiver_sub(None, membership.user, membership.group)
+                    count += 1
+            message = _('%d Users\' nextcloud folder memberships were re-done.') % count
+            self.message_user(request, message)
+        force_redo_cloud_user_room_membership.short_description = _('Nextcloud: Fix missing Nextcloud folder membership for users')
         
 admin.site.register(CosinnusGroupMembership, MembershipAdmin)
 
@@ -169,14 +190,20 @@ class PortalMembershipAdmin(admin.ModelAdmin):
     
     def make_admin(self, request, queryset):
         """ Converts the memberships' statuses """
-        queryset.update(status=MEMBERSHIP_ADMIN)
+        # manual saving of each item to trigger signal listeners
+        for item in queryset:
+            item.status = MEMBERSHIP_ADMIN
+            item.save()
         self.message_user(request, f'Made {len(queryset)} users an Admin', messages.SUCCESS)
     
     make_admin.short_description = _("Convert memberships to Admin status")
         
     def make_member(self, request, queryset):
         """ Converts the memberships' statuses """
-        queryset.update(status=MEMBERSHIP_MEMBER)
+        # manual saving of each item to trigger signal listeners
+        for item in queryset:
+            item.status = MEMBERSHIP_MEMBER
+            item.save()
         self.message_user(request, f'Made {len(queryset)} users a Member', messages.SUCCESS)
         
     make_member.short_description = _("Convert memberships to Member status")
