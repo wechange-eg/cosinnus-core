@@ -38,7 +38,7 @@ class DeleteScheduledUserProfiles(CosinnusCronJobBase):
     """ Triggers a profile delete on all user profiles whose `scheduled_for_deletion_at`
         datetime is in the past. """
     
-    RUN_EVERY_MINS = 60 # every 1 minute
+    RUN_EVERY_MINS = 60 # every 1 hour
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
     
     cosinnus_code = 'cosinnus.delete_scheduled_user_profiles'
@@ -51,9 +51,11 @@ class DeleteScheduledUserProfiles(CosinnusCronJobBase):
         for profile in profiles_to_delete:
             try:
                 # sanity checks are done within this function, no need to do any here
+                user_id = profile.user.id
                 delete_userprofile(profile.user)
+                logger.info('delete_userprofile() cronjob: profile was deleted completely after 30 days', extra={'user_id': user_id})
             except Exception as e:
-                logger.error('delete_userprofile() threw an exception during the DeleteScheduledUserProfiles cronjob! (in extra)', extra={'exception': force_text(e)})
+                logger.error('delete_userprofile() cronjob: threw an exception during the DeleteScheduledUserProfiles cronjob! (in extra)', extra={'exception': force_text(e)})
             
 
 
