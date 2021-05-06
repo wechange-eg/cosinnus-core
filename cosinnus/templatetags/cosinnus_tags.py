@@ -29,7 +29,7 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_group_create_objects_access, check_object_read_access, get_user_token,
     check_user_portal_admin, check_user_superuser,
     check_object_likefollowstar_access, filter_tagged_object_queryset_for_user,
-    check_user_can_create_conferences)
+    check_user_can_create_conferences, check_user_can_create_groups)
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
 from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
     LikeObject, CosinnusTopicCategory
@@ -1281,7 +1281,10 @@ def get_attr(obj, attr_name):
 def get_item(obj, attr_name):
     """ Returns the given attribute by trying to resolve
         it in the template using __getitem__ """
-    return obj[attr_name]
+    try:
+        return obj[attr_name]
+    except KeyError:
+        return ''
 
 @register.filter
 def get_item_or_none(obj, attr_name):
@@ -1359,6 +1362,11 @@ def conference_application(context, conference):
 def is_user_active(user):
     """ Returns for a user the value of the given ui pref """
     return utils_is_user_active(user)
+
+@register.filter
+def user_can_create_groups(user):
+    """ Checks if a user has the necessary permissions to create a CosinnusGroup"""
+    return check_user_can_create_groups(user)
 
 @register.filter
 def user_can_create_conferences(user):

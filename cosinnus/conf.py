@@ -691,9 +691,18 @@ class CosinnusConf(AppConf):
     # if False, users can only create Projects 
     USERS_CAN_CREATE_GROUPS = False
     
+    # setting this to True will only show the create group button in the navbar "+"-menu 
+    # if the current user actually has permission to create a group
+    SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED = False
+    
     # should regular, non-admin users be allowed to create CosinnusConferences as well?
     # if False, users can only create Projects 
     USERS_CAN_CREATE_CONFERENCES = False
+    
+    # if `CONFERENCES_ENABLED` is True, setting this to 
+    # True will only show the conference button if the current user actually
+    # has permission to create a conference
+    SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED = True
     
     # any users with any of these managed_tag_slugs
     # supersedes `USERS_CAN_CREATE_CONFERENCES`
@@ -704,11 +713,6 @@ class CosinnusConf(AppConf):
     
     # whether to use the premium difference for conferences
     PREMIUM_CONFERENCES_ENABLED = False
-    
-    # if `CONFERENCES_ENABLED` is True, setting this to 
-    # True will only show the conference button if the current user actually
-    # has permission to create a conference
-    SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED = True
     
     # For conferences, disables the react conference interface, locks non-admin members 
     # to the microsite, removes most group-like elements like apps andremoves room management

@@ -79,6 +79,7 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     MENU_LABEL = _('Group Menu')
     DASHBOARD_LABEL = _('Group Dashboard')
     DASHBOARD_LABEL_ON = _('in the Group Dashboard')
+
     BROWSE_ALL = _('Browse all Groups')
     CREATE = _('Create Group')
     CREATE_NEW = _('Create new Group')
