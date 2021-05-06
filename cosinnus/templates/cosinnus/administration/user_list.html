@@ -191,7 +191,8 @@
             <th>{{ user.last_name }}</th>
             <th>{% managed_tags_for_user user as managed_tags %}
                 {% for tag in managed_tags %}
-                    <a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ tag.id }}&order_by={{ request.GET.order_by }}">{{ tag.name }}</a>
+                    <a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ tag.id }}&order_by={{ request.GET.order_by }}">
+                        {{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
             </th>
             <th>{% if user.last_login %}{{ user.last_login }}{% else %}-{% endif %}</th>

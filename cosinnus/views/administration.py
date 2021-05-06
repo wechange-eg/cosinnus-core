@@ -45,6 +45,7 @@ from django.utils.timezone import now
 from _collections import defaultdict
 from cosinnus.utils.user import check_user_has_accepted_any_tos
 from django.http.response import JsonResponse
+from django.db.models import F
 
 
 class AdministrationView(TemplateView):
@@ -317,7 +318,11 @@ class UserListView(ListView):
         if self.request.GET.get('order_by'):
             order = self.request.GET.get('order_by')
             if order:
-                qs = qs.order_by(order, 'id')
+                if order.startswith('-'):
+                    order_func = F(order.replace('-', '')).desc(nulls_last=True)
+                else:
+                    order_func = F(order).asc(nulls_first=True)
+                qs = qs.order_by(order_func, 'id')
         if self.request.GET.get('managed_tag'):
             managed_tag_id = self.request.GET.get('managed_tag')
             if managed_tag_id:
