@@ -67,7 +67,7 @@ from cosinnus.utils.user import check_user_has_accepted_portal_tos,\
 from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
 from django.templatetags.i18n import do_translate, do_block_translate, TranslateNode, BlockTranslateNode
 from cosinnus.utils.html import render_html_with_variables
-from cosinnus.models.managed_tags import CosinnusManagedTag
+from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
 from cosinnus.views.ui_prefs import get_ui_prefs_for_user
 
 logger = logging.getLogger('cosinnus')
@@ -1149,6 +1149,28 @@ def render_managed_tags_json():
         } for tag in all_managed_tags
     ]
     return mark_safe(_json.dumps(managed_tags_json))
+
+
+@register.simple_tag()
+def managed_tags_for_user(user):
+    profile_type = ContentType.objects.get(
+                    app_label='cosinnus', model='userprofile')
+    profile = user.cosinnus_profile
+    assignments = CosinnusManagedTagAssignment.objects.filter(
+                    content_type=profile_type.id,
+                    object_id=profile.id).values_list(
+                        'managed_tag__slug', flat=True)
+
+    if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS:
+        predefined_slugs = \
+            settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS
+        assignments = assignments.filter(
+            managed_tag__slug__in=predefined_slugs)
+
+    managed_tags = CosinnusManagedTag.objects.filter(
+        slug__in=assignments).distinct()
+    return managed_tags
+
 
 @register.simple_tag()
 def get_non_cms_root_url():

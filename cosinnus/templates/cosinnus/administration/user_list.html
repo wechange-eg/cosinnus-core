@@ -164,6 +164,8 @@
                 <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=last_name">{% trans "Lastname" %}</a></th>
                 {% endif %}
 
+                <th>{{ column_header }}</th>
+
                 {% if request.GET.order_by == '-last_login' %}
                 <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=last_login">{% trans "Last Login" %} <i class="fa fa-chevron-up"></i></a></th>
                 {% elif request.GET.order_by == 'last_login' %}
@@ -187,6 +189,11 @@
             </th>
             <th>{{ user.first_name }}</th>
             <th>{{ user.last_name }}</th>
+            <th>{% managed_tags_for_user user as managed_tags %}
+                {% for tag in managed_tags %}
+                    <a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ tag.id }}&order_by={{ request.GET.order_by }}">{{ tag.name }}</a>
+                {% endfor %}
+            </th>
             <th>{% if user.last_login %}{{ user.last_login }}{% else %}-{% endif %}</th>
             <th>
                 <div data-target="ajax-form-delete-element" data-ajax-form-id="send-login-token-u-{{ user.id }}">
@@ -221,7 +228,7 @@
 		                    {% trans 'Last sent on: ' %} {{ user.cosinnus_profile.get_last_login_token_sent |stringformat:"%Y-%m-%dT%H:%M:%SZ"|date:"SHORT_DATETIME_FORMAT"}}
 		                </div>
 	                {% endif %}
-                </div>                
+                </div>
                 <div class="pull-right color-primary" style="display: none;" data-target="ajax-form-show-element" data-ajax-form-id="send-login-token-u-{{ user.id }}">
                     {% blocktrans with email=user.email %}Login token was sent to {{ email }}.{% endblocktrans %}
                 </div>

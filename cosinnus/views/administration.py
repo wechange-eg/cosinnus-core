@@ -345,12 +345,16 @@ class UserListView(ListView):
     def get_options_label(self):
         return CosinnusManagedTag.labels.MANAGED_TAG_NAME
 
+    def get_table_column_header(self):
+        return CosinnusManagedTag.labels.MANAGED_TAG_NAME_PLURAL
+
     def get_context_data(self):
         context = super().get_context_data()
         context.update({
             'total': self.get_queryset().count(),
             'options': self.get_managed_tag_as_options(),
-            'options_label': self.get_options_label()
+            'options_label': self.get_options_label(),
+            'column_header': self.get_table_column_header()
         })
         return context
 
