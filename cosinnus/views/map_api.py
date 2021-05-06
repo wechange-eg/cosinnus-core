@@ -245,13 +245,13 @@ def map_search_endpoint(request, filter_group_id=None):
         # if we only look at conferences, order them by their from_date, future first!
         if prefer_own_portal:
             sort_args = ['-portal'] + sort_args
+        sqs = sqs.order_by(*sort_args)
         
         """
         # this would be the way to force-sort a content type by a natural ordering instead of score if its the only type being shown
         if params.get('conferences', False) and sum([1 if params.get(content_key, False) else 0 for content_key in MAP_CONTENT_TYPE_SEARCH_PARAMETERS.keys()]) == 1:
             sort_args = ['-from_date'] + sort_args
             skip_score_sorting = True
-        sqs = sqs.order_by(*sort_args)
         """
     
     # sort results into one list per model
