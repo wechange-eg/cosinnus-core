@@ -14,7 +14,8 @@ from django.forms import BaseFormSet
 from django_select2.widgets import Select2MultipleWidget
 from cosinnus.forms.widgets import SplitHiddenDateWidget
 
-from cosinnus.utils.validators import validate_file_infection
+from cosinnus.utils.validators import validate_file_infection,\
+    CleanFromToDateFieldsMixin
 
 
 class ConferenceRemindersForm(forms.ModelForm):
@@ -96,29 +97,13 @@ class ConferenceParticipationManagement(forms.ModelForm):
         if self.cleaned_data['application_options'] and len(self.cleaned_data) > 0:
             return [int(option) for option in self.cleaned_data['application_options']]
 
-    def clean(self):
-        cleaned_data = super().clean()
-        application_start = cleaned_data.get('application_start')
-        application_end = cleaned_data.get('application_end')
-
-        if application_end and application_end:
-            if application_end <= application_start:
-                msg = _('The start date must be before the end date')
-                self.add_error('application_end', msg)
-
-        elif application_end and not application_start:
-            msg = _('Please also provide a start date')
-            self.add_error('application_start', msg)
-
-        elif application_start and not application_end:
-            msg = _('Please also provide an end date')
-            self.add_error('application_end', msg)
-
-        return cleaned_data
 
 
-class ConferenceApplicationForm(forms.ModelForm):
+class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):
     conditions_accepted = forms.BooleanField(required=True)
+    
+    from_date_field_name = 'application_start'
+    to_date_field_name = 'application_end'
     
     class Meta:
         model = CosinnusConferenceApplication

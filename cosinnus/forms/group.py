@@ -39,7 +39,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.group import SDG_CHOICES
 from cosinnus.forms.managed_tags import ManagedTagFormMixin
-from cosinnus.utils.validators import validate_file_infection
+from cosinnus.utils.validators import validate_file_infection,\
+    CleanFromToDateFieldsMixin
 from cosinnus.forms.widgets import SplitHiddenDateWidget
 from cosinnus.forms.attached_object import FormAttachableMixin
 from annoying.functions import get_object_or_None
@@ -378,7 +379,7 @@ class _CosinnusSocietyForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
         model = CosinnusSociety
 
 
-class _CosinnusConferenceForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
+class _CosinnusConferenceForm(CleanAppSettingsMixin, CleanFromToDateFieldsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
     """ Specific form implementation for CosinnusConference objects (used through `registration.group_models`)  """
     
     from_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='00:00'))

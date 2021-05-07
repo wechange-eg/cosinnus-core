@@ -7099,7 +7099,7 @@ msgid ""
 "\n"
 "If this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile."
 msgstr ""
-"Das bei uns unter dieser Email gespeicherte Profil der Plattform wurde von Dir deaktiviert und zur Löschung freigegeben.. Das Profil wurde von der Webseite entfernt und wir werden das Konto in 30 Tagen vollständig löschen. \n"
+"Das bei uns unter dieser Email gespeicherte Profil der Plattform wurde von Dir deaktiviert und zur Löschung freigegeben. Das Profil wurde von der Webseite entfernt und wir werden das Konto in 30 Tagen vollständig löschen. \n"
 "\n"
 "Sollte dies ohne Dein Wissen geschehen sein oder falls Du es dir in der Zwischenzeit anders überlegst, hast Du die Möglichkeit Dich zügig an die Portaladministrator/innen bzw. die im Impressum angegebene E-Mail-Adresse zu wenden. Bitte beachte, dass die Reaktionszeit per Mail in manchen Fällen länger dauern kann. Bitte melde Dich daher frühzeitig, falls Du Dein Profil noch weiter behalten möchtest."
 
