@@ -91,7 +91,7 @@ class OrganizationCreateView(RequireLoggedInMixin, CosinnusOrganizationFormMixin
             tab = self.request.GET.get('tab', 0)
             if tab < len(self.extra_forms):
                 return reverse('cosinnus:organization-edit', kwargs={'organization': self.object.slug}) + f"./?tab={tab + 1}"
-        return self.object.get_absolute_url() + '&action=create'
+        return self.object.get_absolute_url() + '?action=create'
 
     def forms_valid(self, form, inlines):
         ret = super(OrganizationCreateView, self).forms_valid(form, inlines)
@@ -122,7 +122,7 @@ class OrganizationEditView(RequireWriteGrouplessMixin, AvatarFormMixin, Cosinnus
         return context
 
     def get_success_url(self):
-        return self.object.get_absolute_url() + '&action=edit'
+        return self.object.get_absolute_url() + '?action=edit'
 
 
 class OrganizationDeleteView(RequireWriteGrouplessMixin, SamePortalGroupMixin, AjaxFormsDeleteViewMixin,
