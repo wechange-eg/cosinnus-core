@@ -25,12 +25,14 @@ class OrganizationMembersView(GroupDetailView):
     membership_class = CosinnusOrganizationMembership
     invite_class = CosinnusUnregisteredUserOrganizationInvite
     group_url_kwarg = 'organization'
+    model = CosinnusOrganization
 
 
 class OrganizationUserListView(GroupUserListView):
     serializer_class = OrganizationSimpleSerializer
     template_name = 'cosinnus/organization/organization_user_list.html'
     group_url_kwarg = 'organization'
+    model = CosinnusOrganization
 
 
 class OrganizationConfirmMixin(GroupConfirmMixin):
