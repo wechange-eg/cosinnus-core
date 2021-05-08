@@ -2,51 +2,45 @@
 from __future__ import unicode_literals
 
 from builtins import object
+
+from django import forms
 from django.contrib import admin, messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth import login as django_login
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from django.contrib.contenttypes.admin import GenericStackedInline
+from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
-
-from cosinnus.models.group import CosinnusGroupMembership,\
-    CosinnusPortal, CosinnusPortalMembership,\
-    CosinnusGroup, CosinnusPermanentRedirect, CosinnusUnregisterdUserGroupInvite, RelatedGroups, CosinnusGroupInviteToken
-from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN,\
-    MEMBER_STATUS
-from cosinnus.models.profile import get_user_profile_model,\
-    GlobalBlacklistedEmail, GlobalUserNotificationSetting
-from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory,\
-    get_tag_object_model, BaseTagObject
-from cosinnus.models.cms import CosinnusMicropage
-from cosinnus.models.feedback import CosinnusReportedObject,\
-    CosinnusSentEmailLog, CosinnusFailedLoginRateLimitLog
-from cosinnus.utils.dashboard import create_initial_group_widgets
-from cosinnus.models.tagged import TagObject
-from cosinnus.models.widget import WidgetConfig
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
-    CosinnusConference
-from cosinnus.utils.group import get_cosinnus_group_model
-from django.contrib.auth import login as django_login
+from django_reverse_admin import ReverseModelAdmin
 
 from cosinnus.conf import settings
-from cosinnus.models.idea import CosinnusIdea
 from cosinnus.core import signals
-from django import forms
-from django.core.exceptions import ValidationError
-from cosinnus.models.bbb_room import BBBRoom, BBBRoomVisitStatistics
-from cosinnus.models.conference import CosinnusConferenceRoom,\
-    CosinnusConferenceSettings
-from cosinnus.models.conference import ParticipationManagement, CosinnusConferenceApplication
-from cosinnus.models.managed_tags import CosinnusManagedTag,\
-    CosinnusManagedTagAssignment, CosinnusManagedTagType
+from cosinnus.models.cms import CosinnusMicropage
+from cosinnus.models.conference import CosinnusConferenceSettings, \
+    CosinnusConferencePremiumCapacityInfo
+from cosinnus.models.feedback import CosinnusReportedObject, \
+    CosinnusSentEmailLog, CosinnusFailedLoginRateLimitLog
+from cosinnus.models.group import CosinnusGroupMembership, \
+    CosinnusPortal, CosinnusPortalMembership, \
+    CosinnusGroup, CosinnusPermanentRedirect, CosinnusUnregisterdUserGroupInvite, RelatedGroups, CosinnusGroupInviteToken
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety, \
+    CosinnusConference
+from cosinnus.models.idea import CosinnusIdea
+from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagType
+from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN, \
+    MEMBER_STATUS
 from cosinnus.models.newsletter import Newsletter, GroupsNewsletter
+from cosinnus.models.profile import get_user_profile_model, \
+    GlobalBlacklistedEmail, GlobalUserNotificationSetting
+from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
+from cosinnus.models.tagged import TagObject
 from cosinnus.models.user_import import CosinnusUserImport
-from django.contrib.contenttypes.admin import GenericTabularInline,\
-    GenericStackedInline
-from django_reverse_admin import ReverseModelAdmin
-from cosinnus.views.profile import deactivate_user_and_mark_for_deletion,\
-    reactivate_user
+from cosinnus.models.widget import WidgetConfig
+from cosinnus.utils.dashboard import create_initial_group_widgets
+from cosinnus.utils.group import get_cosinnus_group_model
+
 
 class SingleDeleteActionMixin(object):
     
@@ -346,7 +340,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             CosinnusPortalMembership.objects.filter(status=MEMBERSHIP_PENDING, 
                     group=CosinnusPortal.get_current(), user__in=users).delete()
         for user in users:
-            membership, created = CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user, 
+            membership, __ = CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user, 
                     defaults={'status': MEMBERSHIP_MEMBER})
             # this ensures that join-signals for all members really arrive (for putting new portal members into the Blog, etc)
             post_save.send(sender=CosinnusPortalMembership, instance=membership, created=True)
@@ -487,9 +481,12 @@ class CosinnusConferenceAdmin(CosinnusProjectAdmin):
         """ Deactivates groups """
         super(CosinnusConferenceAdmin, self).deactivate_groups(request, queryset)
     deactivate_groups.short_description = CosinnusConference.get_trans().DEACTIVATE
-    
 
-admin.site.register(CosinnusConference, CosinnusConferenceAdmin)
+
+class CosinnusConferencePremiumCapacityInfoInline(admin.StackedInline):
+    model = CosinnusConferencePremiumCapacityInfo
+    template = 'cosinnus/admin/conference_premium_capacity_info_help_text_stacked_inline.html'
+    extra = 0
 
 
 class CosinnusPortalAdmin(admin.ModelAdmin):
@@ -498,7 +495,7 @@ class CosinnusPortalAdmin(admin.ModelAdmin):
     readonly_fields = ('saved_infos',) 
     exclude = ('logo_image', 'background_image', 'protocol', 'public', 
                'website', 'description', 'top_color', 'bottom_color',)
-    inlines = [CosinnusConferenceSettingsInline]
+    inlines = [CosinnusConferenceSettingsInline, CosinnusConferencePremiumCapacityInfoInline]
     
     def queryset(self, request):
         """ Allow portals to be accessed only by superusers and Portal-Admins """
@@ -654,8 +651,10 @@ class UserAdmin(DjangoUserAdmin):
         return False
      
     def deactivate_users(self, request, queryset):
+        from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
         count = 0
         for user in queryset:
+            
             deactivate_user_and_mark_for_deletion(user)
             count += 1
         message = _('%(count)d User account(s) were deactivated successfully. They will be deleted after 30 days from now.') % {'count': count}
@@ -663,6 +662,7 @@ class UserAdmin(DjangoUserAdmin):
     deactivate_users.short_description = _('DEACTIVATE user accounts and DELETE them after 30 days')
     
     def reactivate_users(self, request, queryset):
+        from cosinnus.views.profile import reactivate_user
         count = 0
         for user in queryset:
             reactivate_user(user)
@@ -679,7 +679,7 @@ class UserAdmin(DjangoUserAdmin):
     if settings.COSINNUS_ROCKET_ENABLED:
         def force_sync_rocket_user(self, request, queryset):
             count = 0
-            from cosinnus_message.rocket_chat import RocketChatConnection, delete_cached_rocket_connection
+            from cosinnus_message.rocket_chat import RocketChatConnection, delete_cached_rocket_connection # noqa 
             rocket = RocketChatConnection()
             for user in queryset:
                 rocket.users_update(user, force_user_update=True, update_password=True)
@@ -691,7 +691,7 @@ class UserAdmin(DjangoUserAdmin):
         
         def make_user_rocket_admin(self, request, queryset):
             count = 0
-            from cosinnus_message.rocket_chat import RocketChatConnection
+            from cosinnus_message.rocket_chat import RocketChatConnection # noqa 
             rocket = RocketChatConnection()
             for user in queryset:
                 rocket.rocket.users_update(user_id=rocket.get_user_id(user), roles=['user', 'admin'])
@@ -702,7 +702,7 @@ class UserAdmin(DjangoUserAdmin):
         
         def ensure_user_account_sanity(self, request, queryset):
             count = 0
-            from cosinnus_message.rocket_chat import RocketChatConnection
+            from cosinnus_message.rocket_chat import RocketChatConnection # noqa 
             rocket = RocketChatConnection()
             for user in queryset:
                 rocket.ensure_user_account_sanity(user)
@@ -713,7 +713,7 @@ class UserAdmin(DjangoUserAdmin):
         
         def force_redo_user_room_memberships(self, request, queryset):
             count = 0
-            from cosinnus_message.rocket_chat import RocketChatConnection
+            from cosinnus_message.rocket_chat import RocketChatConnection # noqa 
             rocket = RocketChatConnection()
             for user in queryset:
                 rocket.force_redo_user_room_memberships(user)
@@ -809,51 +809,6 @@ if settings.COSINNUS_IDEAS_ENABLED:
     
     admin.site.register(CosinnusIdea, CosinnusIdeaAdmin)
 
-
-def restart_bbb_rooms(modeladmin, request, queryset):
-    for bbb_room in queryset.all():
-        try:
-            bbb_room.restart()
-        except:
-            pass
-
-
-restart_bbb_rooms.short_description = _('Restart')
-
-
-class CosinnusBBBRoomAdmin(admin.ModelAdmin):
-    list_display = ('meeting_id', 'name', 'ended', 'portal')
-    list_filter = ('ended', 'portal')
-    search_fields = ('meeting_id', 'internal_meeting_id', 'name')
-    actions = (restart_bbb_rooms, )
-admin.site.register(BBBRoom, CosinnusBBBRoomAdmin)
-
-
-class CosinnusConferenceRoomAdmin(admin.ModelAdmin):
-    list_display = ('title', 'id', 'type', 'group', 'sort_index')
-    list_filter = ('group', 'group__portal')
-    search_fields = ('slug', 'title',)
-    inlines = [CosinnusConferenceSettingsInline]
-
-admin.site.register(CosinnusConferenceRoom, CosinnusConferenceRoomAdmin)
-
-class CosinnusParticipationManagementAdmin(admin.ModelAdmin):
-    list_display = ('conference', 'application_start', 'application_end')
-
-admin.site.register(ParticipationManagement, CosinnusParticipationManagementAdmin)
-
-class CosinnusConferenceApplicationAdmin(admin.ModelAdmin):
-    list_display = ('user_email', 'conference', 'status')
-    search_fields = ('conference__name',)
-
-admin.site.register(CosinnusConferenceApplication, CosinnusConferenceApplicationAdmin)
-
-class BBBRoomVisitStatisticsAdmin(admin.ModelAdmin):
-    list_display = ('user', 'bbb_room', 'group', 'visit_datetime')
-    list_filter = ('bbb_room',)
-    search_fields = ('bbb_room__name', 'group__name')
-    
-admin.site.register(BBBRoomVisitStatistics, BBBRoomVisitStatisticsAdmin)
 
 
 class CosinnusNewsletterAdmin(admin.ModelAdmin):

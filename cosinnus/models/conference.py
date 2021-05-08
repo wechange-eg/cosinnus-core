@@ -366,6 +366,9 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
 
 
 class ParticipationManagement(models.Model):
+    """ A settings object for a CosinnusConference that determines how and when 
+        CosinnusConferenceApplications may be submitted, as well as other meta options
+        for the application options for that conference. """
 
     participants_limit = models.IntegerField(blank=True, null=True)
     application_start = models.DateTimeField(blank=True, null=True)
@@ -418,7 +421,6 @@ class ParticipationManagement(models.Model):
     @property
     def to_date(self):
         return self.application_end
-
 
 
 APPLICATION_INVALID = 1
@@ -499,6 +501,7 @@ class CosinnusConferenceApplicationQuerySet(models.QuerySet):
 
 
 class CosinnusConferenceApplication(models.Model):
+    """ A model for an application to attend a conference, submitted by a user. """
 
     conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
                                            verbose_name=_('Confernence Application'),
@@ -585,3 +588,56 @@ class CosinnusConferenceApplication(models.Model):
         """ Needed for django-admin """
         return self.user.email
 
+
+
+class CosinnusConferencePremiumBlock(models.Model):
+    """ Signifies the time frames during which CosinnusConferences are set into premium mode by a 
+        cronjob that switches their `is_premium_currently` flag. While this flag is True,
+        the BBB URLs for all rooms/events within this conference will use the server config set 
+        in the `CosinnusConferenceSettings.bbb_server_choice_premium` for each settings object
+        inherited or set for each conference event.  """
+    
+    conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
+                                           verbose_name=_('Conference'),
+                                           related_name='conference_premium_blocks',
+                                           on_delete=models.CASCADE)
+    
+    from_date = models.DateTimeField(_('Start Datetime'), default=None, blank=True, null=True,
+                                     help_text=_('During this time, the conference will be using the premium BBB server.'))
+    to_date = models.DateTimeField(_('End Datetime'), default=None, blank=True, null=True,
+                                     help_text=_('During this time, the conference will be using the premium BBB server.'))
+    
+    created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
+    last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
+    
+    class Meta(object):
+        ordering = ('from_date',)
+        verbose_name = _('Cosinnus Conference Premium Block')
+        verbose_name_plural = _('Cosinnus Conference Premium Blocks')
+
+
+class CosinnusConferencePremiumCapacityInfo(models.Model):
+    """ A guiding-only info for portal admins, during which times the premium BBB server can take 
+        which capacity of users. Serves as a guideline for portal admins when they accept conferences
+        as premium conference, to decide whether additional capacity on the BBB cluster should be booked. """
+    
+    portal = models.ForeignKey('cosinnus.CosinnusPortal',
+                               verbose_name=_('Portal'),
+                               related_name='portal_premium_capacity_blocks',
+                               on_delete=models.CASCADE)
+    
+    from_date = models.DateTimeField(_('Start Datetime'), default=None, blank=True, null=True,
+                                     help_text=_('The time frame while the selected capacity is available.'))
+    to_date = models.DateTimeField(_('End Datetime'), default=None, blank=True, null=True,
+                                     help_text=_('The time frame while the selected capacity is available.'))
+    max_participants = models.PositiveIntegerField(verbose_name=_('Maximum BBB participants'), default=0,
+                                                   help_text=_('The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins.'))
+    
+    created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
+    last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
+    
+    class Meta(object):
+        ordering = ('from_date',)
+        verbose_name = _('Cosinnus Conference Premium Capacity Info')
+        verbose_name_plural = _('Cosinnus Conference Premium Capacity Infos')
+    

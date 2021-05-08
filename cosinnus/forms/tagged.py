@@ -3,40 +3,34 @@ from __future__ import unicode_literals
 
 from builtins import object
 from collections import OrderedDict
-from copy import copy
-
-from django import forms
+from django_select2.fields import Select2ChoiceField
+from django_select2.widgets import Select2MultipleWidget, Select2Widget
 from multiform import MultiModelForm, InvalidArgument
 
-from cosinnus.forms.group import GroupKwargModelFormMixin
-from cosinnus.forms.user import UserKwargModelFormMixin
-from cosinnus.models.tagged import get_tag_object_model, BaseTagObject
-from cosinnus.utils.import_utils import import_from_settings
-from cosinnus.forms.select2 import TagSelect2Field
-from django.urls import reverse_lazy
+from django import forms
+from django.forms.widgets import SelectMultiple
 from django.http.request import QueryDict
-
 from django.urls import reverse
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
-from django_select2.fields import Select2ChoiceField
-
-from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
-
-from cosinnus.utils.urls import group_aware_reverse
-from django.forms.widgets import SelectMultiple
-from django_select2.widgets import Select2MultipleWidget, Select2Widget
-from cosinnus.utils.user import get_user_select2_pills
 from cosinnus.fields import UserSelect2MultipleChoiceField
-from cosinnus.utils.permissions import get_inherited_visibility_from_group
+from cosinnus.forms.group import GroupKwargModelFormMixin
+from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
+from cosinnus.forms.select2 import TagSelect2Field
+from cosinnus.forms.user import UserKwargModelFormMixin
+from cosinnus.models.tagged import get_tag_object_model, BaseTagObject
 from cosinnus.utils.functions import get_int_or_None
+from cosinnus.utils.import_utils import import_from_settings
+from cosinnus.utils.permissions import get_inherited_visibility_from_group
+from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.utils.user import get_user_select2_pills
 
 
 TagObject = get_tag_object_model()
 
 
-class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
-                        forms.ModelForm):
+class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin, forms.ModelForm):
     
     like = forms.BooleanField(label=_('Like'), required=False)
     approach = Select2ChoiceField(choices=TagObject.APPROACH_CHOICES, required=False)
