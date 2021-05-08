@@ -3967,25 +3967,34 @@ msgstr "Anfrage zurückziehen"
 
 #, python-format
 msgid "%(team_name)s - Assigned organizations"
-msgstr "%(team_name)s - Zugewiesene Gruppen"
+msgstr "%(team_name)s - Zugewiesene Organisationen"
 
 msgid "Assigned organizations"
-msgstr "Zugewiesene Gruppen"
+msgstr "Zugewiesene Organisationen"
 
 msgid "Request organizations..."
-msgstr "Gruppe anfragen..."
+msgstr "Organisationen anfragen..."
 
 msgid "Request organization"
-msgstr "Gruppe anfragen"
+msgstr "Organisation anfragen"
 
 msgid "Enter a name to find organizations to request..."
-msgstr "Gib einen Namen ein, um Gruppen zu finden, zum Einladen..."
+msgstr "Gib einen Namen ein, um Organisationen zu finden, zum Einladen..."
 
 msgid "Request organizations"
-msgstr "Gruppe anfragen"
+msgstr "Organisationen anfragen"
 
 msgid "Requested organizations"
-msgstr "Angefragte Gruppen"
+msgstr "Angefragte Organisationen"
+
+msgid "There are no assigned organizations."
+msgstr "Es gibt keine zugeordneten Organisationen."
+
+msgid "There are no pending organization requests."
+msgstr "Es gibt keine Anfragen von Organisationen."
+
+msgid "There are no organization invitations."
+msgstr "Es gibt keine Einladungen von Organisationen."
 
 msgid "Revoke request"
 msgstr "Anfrage zurückziehen"
@@ -5360,19 +5369,19 @@ msgstr "Alle Projekte anzeigen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You have not created any organizations yet."
-msgstr "Du hast noch keine Gruppen angelegt."
+msgstr "Du hast noch keine Organisationen angelegt."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create new Organization"
-msgstr "Neue Gruppe anlegen"
+msgstr "Neue Organisation anlegen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Browse all Organizations"
-msgstr "Alle Gruppen durchsuchen"
+msgstr "Alle Organisationen durchsuchen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Organizations"
-msgstr "Nach Gruppen suchen"
+msgstr "Nach Organisation suchen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I am following"

@@ -276,6 +276,7 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
                                    related_name='cosinnus_organizations', through=CosinnusOrganizationMembership)
 
+    settings = JSONField(default={}, blank=True)
     extra_fields = JSONField(default={}, blank=True)
     objects = OrganizationManager()
 

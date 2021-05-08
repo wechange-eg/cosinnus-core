@@ -171,8 +171,8 @@
 				                {% endif %}
 
 				            {% empty %}
-				                <!-- {% trans "There are no pending invitations." %} -->
-				                {% include 'cosinnus/common/empty_button.html' with message="There are no pending organization requests." %}
+				                {% trans "There are no pending organization requests." as empty_message %}
+				                {% include 'cosinnus/common/empty_button.html' with message=empty_message %}
 				            {% endfor %}
 
 				        {% endif %}
@@ -262,7 +262,8 @@
 							{% endif %}
 
 						{% empty %}
-							{% include 'cosinnus/common/empty_button.html' with message="There are no organization invitations." %}
+							{% trans "There are no organization invitations." as empty_message %}
+							{% include 'cosinnus/common/empty_button.html' with message=empty_message %}
 						{% endfor %}
 
 						<div class="clearfix"></div>
@@ -339,8 +340,8 @@
 			            {% endif %}
 
 					{% empty %}
-						<!-- {% trans "There are no new membership requests." %} -->
-						{% include 'cosinnus/common/empty_button.html' with message="There are no assigned organizations." %}
+						{% trans "There are no assigned organizations." as empty_message %}
+						{% include 'cosinnus/common/empty_button.html' with message=empty_message %}
 			        {% endfor %}
 
                 </div> {% comment %} panel-body {% endcomment %}
