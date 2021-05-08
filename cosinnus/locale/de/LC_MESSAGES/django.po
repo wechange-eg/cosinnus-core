@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 14:14+0200\n"
+"POT-Creation-Date: 2021-05-08 17:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -36,6 +36,13 @@ msgstr "%d Die Rocketchat-Raummitgliedschaften der Benutzer wurden neu erstellt.
 
 msgid "Rocket: Fix missing RocketChat room membership for users"
 msgstr "Rocket: Fehlende RocketChat-Raummitgliedschaft für Benutzer beheben"
+
+#, python-format
+msgid "%d Users' nextcloud folder memberships were re-done."
+msgstr "%d Nextcloud-Gruppenordnerzugehörigkeiten von Benutzer/innen wurden neu erstellt."
+
+msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
+msgstr "Nextcloud: Fehlende Nextcloud-Gruppenordnerzugehörigkeiten für Benutzer beheben"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr "Ein token mit dem selben Code existiert bereits. Bitte wähle eine andere Zeichenfolge für das Token."
@@ -3987,15 +3994,6 @@ msgstr "Organisationen anfragen"
 msgid "Requested organizations"
 msgstr "Angefragte Organisationen"
 
-msgid "There are no assigned organizations."
-msgstr "Es gibt keine zugeordneten Organisationen."
-
-msgid "There are no pending organization requests."
-msgstr "Es gibt keine Anfragen von Organisationen."
-
-msgid "There are no organization invitations."
-msgstr "Es gibt keine Einladungen von Organisationen."
-
 msgid "Revoke request"
 msgstr "Anfrage zurückziehen"
 
@@ -4018,6 +4016,9 @@ msgstr "Anfrage für Gruppe widerrufen"
 msgid "Do you really want to decline the request?"
 msgstr "Möchtest du die Einladung wirklich ablehnen?"
 
+msgid "There are no pending organization requests."
+msgstr "Es gibt keine Anfragen von Organisationen."
+
 msgid "Organization invitations"
 msgstr "Organisationseinladungen"
 
@@ -4027,12 +4028,18 @@ msgstr "Einladung ablehnen"
 msgid "Invited"
 msgstr "Eingeladen"
 
+msgid "There are no organization invitations."
+msgstr "Es gibt keine Einladungen von Organisationen."
+
 #, python-format
 msgid "Do you really want to remove „%(name)s“ from the organization?"
 msgstr "Möchtest du \"%(name)s\" wirklich aus der Organisation entfernen?"
 
 msgid "Remove organization"
 msgstr "Organisation entfernen"
+
+msgid "There are no assigned organizations."
+msgstr "Es gibt keine zugeordneten Organisationen."
 
 msgid "Add container"
 msgstr "Zusammenstellung hinzufügen"
@@ -6756,6 +6763,15 @@ msgstr "Das Passwort muss mindestens ein Sonderzeichen enthalten (z. B.: $ § % 
 #, python-brace-format
 msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
 msgstr "Dein Passwort muss mindestens enthalten: : {upper_case} Großbuchstaben, {lower_case} Kleinbuchstaben, {special_character} nicht-alphanumerische Zeichen."
+
+msgid "The start date must be before the end date"
+msgstr "Das Anfangsdatum muss vor dem Enddatum liegen"
+
+msgid "Please also provide a start date"
+msgstr "Bitte gib auch ein Anfangsdatum an"
+
+msgid "Please also provide an end date"
+msgstr "Bitte gib auch ein Enddatum an"
 
 msgid "Test email sent!"
 msgstr "Test email wurde gesendet!"

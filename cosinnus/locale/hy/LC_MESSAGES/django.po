@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 14:14+0200\n"
+"POT-Creation-Date: 2021-05-08 17:45+0200\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,6 +29,13 @@ msgid "%d Users' rocketchat room memberships were re-done."
 msgstr ""
 
 msgid "Rocket: Fix missing RocketChat room membership for users"
+msgstr ""
+
+#, python-format
+msgid "%d Users' nextcloud folder memberships were re-done."
+msgstr ""
+
+msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
 msgstr ""
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
@@ -4287,6 +4294,11 @@ msgid "Do you really want to decline the request?"
 msgstr "Ցանկանու՞մ եք արդյոք մերժել հրավերը?"
 
 #, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no pending organization requests."
+msgstr "Առկա հրավերներ չկան."
+
+#, fuzzy
 msgid "Organization invitations"
 msgstr "Հրավերներ"
 
@@ -4298,6 +4310,11 @@ msgstr "Մերժել հրավերը"
 msgid "Invited"
 msgstr "Հրավիրել"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no organization invitations."
+msgstr "Առկա հրավերներ չկան."
+
 #, fuzzy, python-format
 msgid "Do you really want to remove „%(name)s“ from the organization?"
 msgstr "Ցանկանու՞մ եք արդյոք „%(name)s“ անդամին ջնջել թիմից?"
@@ -4305,6 +4322,11 @@ msgstr "Ցանկանու՞մ եք արդյոք „%(name)s“ անդամին ջ�
 #, fuzzy
 msgid "Remove organization"
 msgstr "Հեռացնել գտնվելու վայրը"
+
+#, fuzzy
+#| msgid "There are no invitations."
+msgid "There are no assigned organizations."
+msgstr "Հրավերներ չկան."
 
 msgid "Add container"
 msgstr "Ավելացնել կոնտեյներ"
@@ -7177,6 +7199,15 @@ msgstr ""
 
 #, python-brace-format
 msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
+msgstr ""
+
+msgid "The start date must be before the end date"
+msgstr ""
+
+msgid "Please also provide a start date"
+msgstr ""
+
+msgid "Please also provide an end date"
 msgstr ""
 
 msgid "Test email sent!"

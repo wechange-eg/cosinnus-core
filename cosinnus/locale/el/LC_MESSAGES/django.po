@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 14:14+0200\n"
+"POT-Creation-Date: 2021-05-08 17:45+0200\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,6 +29,16 @@ msgid "%d Users' rocketchat room memberships were re-done."
 msgstr "Έγινε αναδημιουργία %d συνδρομών χρηστών για δωμάτιο rocketchat."
 
 msgid "Rocket: Fix missing RocketChat room membership for users"
+msgstr "Rocket: Επιδιορθώστε τη συνδρομή χρηστών για δωμάτιο RocketChat που λείπει"
+
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%d Users' nextcloud folder memberships were re-done."
+msgstr "Έγινε αναδημιουργία %d συνδρομών χρηστών για δωμάτιο rocketchat."
+
+#, fuzzy
+#| msgid "Rocket: Fix missing RocketChat room membership for users"
+msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
 msgstr "Rocket: Επιδιορθώστε τη συνδρομή χρηστών για δωμάτιο RocketChat που λείπει"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
@@ -4003,6 +4013,11 @@ msgstr "Ανάκληση αιτήματος για οργανισμό"
 msgid "Do you really want to decline the request?"
 msgstr "Είστε βέβαιοι ότι θέλετε να απορρίψετε το αίτημα;"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no pending organization requests."
+msgstr "Δεν υπάρχουν προσκλήσεις σε εκκρεμότητα."
+
 msgid "Organization invitations"
 msgstr "Προσκλήσεις οργανισμού"
 
@@ -4012,12 +4027,22 @@ msgstr "Απόρριψη πρόσκλησης"
 msgid "Invited"
 msgstr "Προσκλήθηκε"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no organization invitations."
+msgstr "Δεν υπάρχουν προσκλήσεις σε εκκρεμότητα."
+
 #, python-format
 msgid "Do you really want to remove „%(name)s“ from the organization?"
 msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε \"%(name)s\" από τον οργανισμό;"
 
 msgid "Remove organization"
 msgstr "Αφαίρεση οργανισμού"
+
+#, fuzzy
+#| msgid "There are no invitations."
+msgid "There are no assigned organizations."
+msgstr "Δεν υπάρχουν προσκλήσεις."
 
 msgid "Add container"
 msgstr "Προσθήκη δοχείου"
@@ -6743,6 +6768,15 @@ msgstr "Ο κωδικός πρόσβασης πρέπει να περιέχει 
 #, python-brace-format
 msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
 msgstr "Ο κωδικός πρόσβασής σας πρέπει να περιέχει τουλάχιστον: {upper_case} κεφαλαίο γράμμα, {lower_case} πεζό γράμμα, {special_character} μη αλφαριθμητικό χαρακτήρα."
+
+msgid "The start date must be before the end date"
+msgstr ""
+
+msgid "Please also provide a start date"
+msgstr ""
+
+msgid "Please also provide an end date"
+msgstr ""
 
 msgid "Test email sent!"
 msgstr "Το δοκιμαστικό email στάλθηκε!"

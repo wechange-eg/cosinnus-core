@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 14:14+0200\n"
+"POT-Creation-Date: 2021-05-08 17:45+0200\n"
 "PO-Revision-Date: 2021-02-18 20:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -40,6 +40,13 @@ msgid "%d Users' rocketchat room memberships were re-done."
 msgstr ""
 
 msgid "Rocket: Fix missing RocketChat room membership for users"
+msgstr ""
+
+#, python-format
+msgid "%d Users' nextcloud folder memberships were re-done."
+msgstr ""
+
+msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
 msgstr ""
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
@@ -4366,6 +4373,11 @@ msgid "Do you really want to decline the request?"
 msgstr "Wil je de uitnodiging weigeren?"
 
 #, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no pending organization requests."
+msgstr "Er zijn geen openstaande uitnodigingen."
+
+#, fuzzy
 #| msgid "Organizations"
 msgid "Organization invitations"
 msgstr "Organisaties"
@@ -4380,6 +4392,11 @@ msgstr "Uitnodiging afwijzen"
 msgid "Invited"
 msgstr "Uitnodigen"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no organization invitations."
+msgstr "Er zijn geen openstaande uitnodigingen."
+
 #, fuzzy, python-format
 #| msgid "Do you really want to remove member „%(name)s“ from the team?"
 msgid "Do you really want to remove „%(name)s“ from the organization?"
@@ -4389,6 +4406,11 @@ msgstr "Weet je zeker dat je lid “%(name)s” uit het team wilt verwijderen?"
 #| msgid "Remove location"
 msgid "Remove organization"
 msgstr "Locatie verwijderen"
+
+#, fuzzy
+#| msgid "There are no invitations."
+msgid "There are no assigned organizations."
+msgstr "Er zijn geen uitnodigingen."
 
 msgid "Add container"
 msgstr "Container toevoegen"
@@ -7279,6 +7301,15 @@ msgstr ""
 
 #, python-brace-format
 msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
+msgstr ""
+
+msgid "The start date must be before the end date"
+msgstr ""
+
+msgid "Please also provide a start date"
+msgstr ""
+
+msgid "Please also provide an end date"
 msgstr ""
 
 msgid "Test email sent!"

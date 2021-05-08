@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 14:14+0200\n"
+"POT-Creation-Date: 2021-05-08 17:45+0200\n"
 "PO-Revision-Date: 2021-04-07 13:19+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -40,6 +40,16 @@ msgid "%d Users' rocketchat room memberships were re-done."
 msgstr "%d Les adhésions des utilisateurs à la salle Rocketchat ont été refaites."
 
 msgid "Rocket: Fix missing RocketChat room membership for users"
+msgstr "Rocket : correction de l'absence d'adhésion à la salle RocketChat pour les utilisateurs"
+
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%d Users' nextcloud folder memberships were re-done."
+msgstr "%d Les adhésions des utilisateurs à la salle Rocketchat ont été refaites."
+
+#, fuzzy
+#| msgid "Rocket: Fix missing RocketChat room membership for users"
+msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
 msgstr "Rocket : correction de l'absence d'adhésion à la salle RocketChat pour les utilisateurs"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
@@ -4014,6 +4024,11 @@ msgstr "Révoquer la demande d’organisation"
 msgid "Do you really want to decline the request?"
 msgstr "Veux-tu vraiment décliner la demande ?"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no pending organization requests."
+msgstr "Il n'y a aucune invitation en attente."
+
 msgid "Organization invitations"
 msgstr "Invitations de l’organisation"
 
@@ -4023,12 +4038,22 @@ msgstr "Décliner l'invitation"
 msgid "Invited"
 msgstr "Invité(e)"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no organization invitations."
+msgstr "Il n'y a aucune invitation en attente."
+
 #, python-format
 msgid "Do you really want to remove „%(name)s“ from the organization?"
 msgstr "Veux-tu vraiment enlever „%(name)s“ de l'organisation ?"
 
 msgid "Remove organization"
 msgstr "Enlever l’organisation"
+
+#, fuzzy
+#| msgid "There are no invitations."
+msgid "There are no assigned organizations."
+msgstr "Il n'y a pas d'invitations."
 
 msgid "Add container"
 msgstr "Ajouter contenant"
@@ -6754,6 +6779,15 @@ msgstr "Le mot de passe doit contenir au moins un caractère spécial (par exemp
 #, python-brace-format
 msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
 msgstr "Ton mot de passe doit contenir au moins : {upper_case} caractère majuscule, {lower_case} caractère minuscule, {special_character} caractère numérique non alpha."
+
+msgid "The start date must be before the end date"
+msgstr ""
+
+msgid "Please also provide a start date"
+msgstr ""
+
+msgid "Please also provide an end date"
+msgstr ""
 
 msgid "Test email sent!"
 msgstr "Envoi d'un e-mail de test !\t"

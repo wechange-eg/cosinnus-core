@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 14:14+0200\n"
+"POT-Creation-Date: 2021-05-08 17:45+0200\n"
 "PO-Revision-Date: 2021-03-22 14:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -40,6 +40,16 @@ msgid "%d Users' rocketchat room memberships were re-done."
 msgstr "%dتمت إعادة عضويات غرفة rocketchat للمستخدمين."
 
 msgid "Rocket: Fix missing RocketChat room membership for users"
+msgstr " إصلاح عضوية غرفة RocketChat المفقودة للمستخدمين"
+
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%d Users' nextcloud folder memberships were re-done."
+msgstr "%dتمت إعادة عضويات غرفة rocketchat للمستخدمين."
+
+#, fuzzy
+#| msgid "Rocket: Fix missing RocketChat room membership for users"
+msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
 msgstr " إصلاح عضوية غرفة RocketChat المفقودة للمستخدمين"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
@@ -4405,6 +4415,11 @@ msgstr "ابحث عن المستخدمين"
 msgid "Do you really want to decline the request?"
 msgstr "هل تريد حقًا رفض الدعوة؟"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no pending organization requests."
+msgstr "لا توجد دعوات معلقة."
+
 msgid "Organization invitations"
 msgstr "دعوات"
 
@@ -4414,12 +4429,22 @@ msgstr "رفض الدعوة"
 msgid "Invited"
 msgstr "دعوة"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no organization invitations."
+msgstr "لا توجد دعوات معلقة."
+
 #, python-format
 msgid "Do you really want to remove „%(name)s“ from the organization?"
 msgstr "هل تريد حقًا إزالة العضو „%(name)s“من الفريق؟"
 
 msgid "Remove organization"
 msgstr "إزالة الموقع"
+
+#, fuzzy
+#| msgid "There are no invitations."
+msgid "There are no assigned organizations."
+msgstr "لا توجد دعوات."
 
 msgid "Add container"
 msgstr "أضف الحاوية"
@@ -7244,6 +7269,15 @@ msgstr "يجب أن تحتوي كلمة المرور على حرف خاص واح
 #, python-brace-format
 msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
 msgstr "يجب أن تحتوي كلمة مرورك على الأقل على: {upper_case} حرف كبير ، {lower_case} حرف صغير ، {special_character} حرف ليس أبجديًا."
+
+msgid "The start date must be before the end date"
+msgstr ""
+
+msgid "Please also provide a start date"
+msgstr ""
+
+msgid "Please also provide an end date"
+msgstr ""
 
 msgid "Test email sent!"
 msgstr "تم إرسال بريد الكتروني تجريبي!"

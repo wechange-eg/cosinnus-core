@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 15:30+0200\n"
+"POT-Creation-Date: 2021-05-08 17:45+0200\n"
 "PO-Revision-Date: 2021-04-01 10:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -30,19 +30,6 @@ msgstr "Konference"
 msgctxt "the_app"
 msgid "conference"
 msgstr "app_konference"
-
-#, fuzzy
-#| msgid "End date must be before start date"
-msgid "The start date must be before the end date"
-msgstr "Konečné datum musí být před počátečním datem"
-
-msgid "Please also provide a start date"
-msgstr "Poskytněte, prosím, také počáteční datum"
-
-#, fuzzy
-#| msgid "Please also provide a end date"
-msgid "Please also provide an end date"
-msgstr "Poskytněte, prosím, také konečné datum"
 
 msgid "First Choice"
 msgstr "První volba"
@@ -167,6 +154,19 @@ msgstr "Kontaktní telefonní číslo"
 
 msgid "List of Applicants"
 msgstr "Seznam žadatelů"
+
+#, fuzzy
+#~| msgid "End date must be before start date"
+#~ msgid "The start date must be before the end date"
+#~ msgstr "Konečné datum musí být před počátečním datem"
+
+#~ msgid "Please also provide a start date"
+#~ msgstr "Poskytněte, prosím, také počáteční datum"
+
+#, fuzzy
+#~| msgid "Please also provide a end date"
+#~ msgid "Please also provide an end date"
+#~ msgstr "Poskytněte, prosím, také konečné datum"
 
 #~ msgid "Conference is running"
 #~ msgstr "Konference probíhá"

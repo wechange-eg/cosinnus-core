@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 15:30+0200\n"
+"POT-Creation-Date: 2021-05-08 17:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,19 +30,6 @@ msgstr "Конференции"
 msgctxt "the_app"
 msgid "conference"
 msgstr "конференция"
-
-#, fuzzy
-#| msgid "End date must be before start date"
-msgid "The start date must be before the end date"
-msgstr "Дата окончания должна предшествовать дате начала"
-
-msgid "Please also provide a start date"
-msgstr "Укажите дату начала"
-
-#, fuzzy
-#| msgid "Please also provide a end date"
-msgid "Please also provide an end date"
-msgstr "Укажите дату окончания"
 
 msgid "First Choice"
 msgstr "Первый выбор"
@@ -167,3 +154,16 @@ msgstr "Контактный номер телефона"
 
 msgid "List of Applicants"
 msgstr "Список заявителей"
+
+#, fuzzy
+#~| msgid "End date must be before start date"
+#~ msgid "The start date must be before the end date"
+#~ msgstr "Дата окончания должна предшествовать дате начала"
+
+#~ msgid "Please also provide a start date"
+#~ msgstr "Укажите дату начала"
+
+#, fuzzy
+#~| msgid "Please also provide a end date"
+#~ msgid "Please also provide an end date"
+#~ msgstr "Укажите дату окончания"

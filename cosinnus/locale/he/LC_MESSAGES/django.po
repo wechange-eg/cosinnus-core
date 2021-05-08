@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 14:14+0200\n"
+"POT-Creation-Date: 2021-05-08 17:45+0200\n"
 "PO-Revision-Date: 2021-04-14 14:50+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -40,6 +40,16 @@ msgid "%d Users' rocketchat room memberships were re-done."
 msgstr "%d חברויות של משתמשים החדרי צקאט של רוקט-צ'ט אותחלו מחדש."
 
 msgid "Rocket: Fix missing RocketChat room membership for users"
+msgstr "רוקט-צ'אט: תקן חברות חסרה בחדר צ'אט עבור משתמשים של רוקט"
+
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%d Users' nextcloud folder memberships were re-done."
+msgstr "%d חברויות של משתמשים החדרי צקאט של רוקט-צ'ט אותחלו מחדש."
+
+#, fuzzy
+#| msgid "Rocket: Fix missing RocketChat room membership for users"
+msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
 msgstr "רוקט-צ'אט: תקן חברות חסרה בחדר צ'אט עבור משתמשים של רוקט"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
@@ -4016,6 +4026,11 @@ msgstr "בטל ההזמנה לארגון"
 msgid "Do you really want to decline the request?"
 msgstr "האם אתה באמת רוצה לדחות את ההזמנה?"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no pending organization requests."
+msgstr "אין הזמנות ממתינות."
+
 msgid "Organization invitations"
 msgstr "הזמנות ארגונים"
 
@@ -4025,12 +4040,22 @@ msgstr "דחה הזמנה"
 msgid "Invited"
 msgstr "מוזמן"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no organization invitations."
+msgstr "אין הזמנות ממתינות."
+
 #, python-format
 msgid "Do you really want to remove „%(name)s“ from the organization?"
 msgstr "האם אתה בטוח שברצונך להסיר את החבר „%(name)s“ מהצוות?"
 
 msgid "Remove organization"
 msgstr "הסר ארגון"
+
+#, fuzzy
+#| msgid "There are no invitations."
+msgid "There are no assigned organizations."
+msgstr "אין הזמנות."
 
 msgid "Add container"
 msgstr "הוסף קונטיינר"
@@ -6758,6 +6783,15 @@ msgstr "הסיסמה חייבת להכיל לפחות תו מיוחד אחד (ל
 #, python-brace-format
 msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
 msgstr "על הסיסמה שלך להכיל לפחות: תו אותיות רישיות {upper_case}, תו אותיות קטנות {lower_case}, {special_character} תו מספרי שאינו אלפא."
+
+msgid "The start date must be before the end date"
+msgstr ""
+
+msgid "Please also provide a start date"
+msgstr ""
+
+msgid "Please also provide an end date"
+msgstr ""
 
 msgid "Test email sent!"
 msgstr "בדיקת אימות נשלחה לדוא\"ל!"

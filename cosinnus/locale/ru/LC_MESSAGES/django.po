@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 14:14+0200\n"
+"POT-Creation-Date: 2021-05-08 17:45+0200\n"
 "PO-Revision-Date: 2021-04-22 12:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -40,6 +40,16 @@ msgid "%d Users' rocketchat room memberships were re-done."
 msgstr "%d Членство пользователей комнат rocketchat было создано заново."
 
 msgid "Rocket: Fix missing RocketChat room membership for users"
+msgstr "Rocket: Исправить недостающее членство для пользователей комнат RocketChat"
+
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%d Users' nextcloud folder memberships were re-done."
+msgstr "%d Членство пользователей комнат rocketchat было создано заново."
+
+#, fuzzy
+#| msgid "Rocket: Fix missing RocketChat room membership for users"
+msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
 msgstr "Rocket: Исправить недостающее членство для пользователей комнат RocketChat"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
@@ -4029,6 +4039,11 @@ msgstr "Поиск организаций"
 msgid "Do you really want to decline the request?"
 msgstr "Вы действительно хотите отклонить приглашение?"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no pending organization requests."
+msgstr "Нет приглашений, ожидающих Вашего внимания."
+
 msgid "Organization invitations"
 msgstr "Организации"
 
@@ -4038,12 +4053,22 @@ msgstr "Отклонить приглашение"
 msgid "Invited"
 msgstr "Пригласить"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no organization invitations."
+msgstr "Нет приглашений, ожидающих Вашего внимания."
+
 #, python-format
 msgid "Do you really want to remove „%(name)s“ from the organization?"
 msgstr "Вы действительно хотите удалить „%(name)s“ из проекта?"
 
 msgid "Remove organization"
 msgstr "Убрать местоположение"
+
+#, fuzzy
+#| msgid "There are no invitations."
+msgid "There are no assigned organizations."
+msgstr "Приглашений нет."
 
 # ???
 msgid "Add container"
@@ -6774,6 +6799,15 @@ msgstr "Пароль должен содержать по крайней мер�
 #, python-brace-format
 msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
 msgstr "Пароль должен содержать по крайней мере: {upper_case} заглавную букву, {lower_case} строчную букву, {special_character} специальный символ."
+
+msgid "The start date must be before the end date"
+msgstr ""
+
+msgid "Please also provide a start date"
+msgstr ""
+
+msgid "Please also provide an end date"
+msgstr ""
 
 msgid "Test email sent!"
 msgstr "Тестовый емейл отправлен!"

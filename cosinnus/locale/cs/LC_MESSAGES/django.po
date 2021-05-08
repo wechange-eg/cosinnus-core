@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 14:14+0200\n"
+"POT-Creation-Date: 2021-05-08 17:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -35,6 +35,16 @@ msgid "%d Users' rocketchat room memberships were re-done."
 msgstr "%d členství v uživatelské rocketchat místnosti bylo upraveno."
 
 msgid "Rocket: Fix missing RocketChat room membership for users"
+msgstr "Rocket: Zařiďte členství v RocketChat místnosti pro uživatele"
+
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%d Users' nextcloud folder memberships were re-done."
+msgstr "%d členství v uživatelské rocketchat místnosti bylo upraveno."
+
+#, fuzzy
+#| msgid "Rocket: Fix missing RocketChat room membership for users"
+msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
 msgstr "Rocket: Zařiďte členství v RocketChat místnosti pro uživatele"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
@@ -4067,6 +4077,11 @@ msgstr "Odvolejte žádost pro organizaci"
 msgid "Do you really want to decline the request?"
 msgstr "Opravdu chcete odmítnout žádost?"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no pending organization requests."
+msgstr "Neexistují žádné nevyřízené pozvánky."
+
 msgid "Organization invitations"
 msgstr "Pozvánky pro organizaci"
 
@@ -4076,12 +4091,22 @@ msgstr "Odmítněte pozvánku"
 msgid "Invited"
 msgstr "Pozváno"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no organization invitations."
+msgstr "Neexistují žádné nevyřízené pozvánky."
+
 #, python-format
 msgid "Do you really want to remove „%(name)s“ from the organization?"
 msgstr "Opravdu chcete odebrat „%(name)s“ z organizace?"
 
 msgid "Remove organization"
 msgstr "Odebrat organizaci"
+
+#, fuzzy
+#| msgid "There are no invitations."
+msgid "There are no assigned organizations."
+msgstr "Nejsou žádné pozvánky."
 
 msgid "Add container"
 msgstr "Přidat kontejner"
@@ -6810,6 +6835,15 @@ msgstr "Heslo musí obsahovat alespoň jeden zvláštní znak (kupř.: $ § % & 
 #, python-brace-format
 msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
 msgstr "Vaše heslo musí obsahovat alespoň: {upper_case} velké písmeno, {lower_case} malé písmeno, {special_character} nealfanumerický znak."
+
+msgid "The start date must be before the end date"
+msgstr ""
+
+msgid "Please also provide a start date"
+msgstr ""
+
+msgid "Please also provide an end date"
+msgstr ""
 
 msgid "Test email sent!"
 msgstr "Testovací e-mail odeslán!"

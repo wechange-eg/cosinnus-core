@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 15:30+0200\n"
+"POT-Creation-Date: 2021-05-08 17:45+0200\n"
 "PO-Revision-Date: 2021-04-26 10:40+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -30,19 +30,6 @@ msgstr "Συσκέψεις"
 msgctxt "the_app"
 msgid "conference"
 msgstr "σύσκεψη"
-
-#, fuzzy
-#| msgid "End date must be before start date"
-msgid "The start date must be before the end date"
-msgstr "Η ημερομηνία λήξης πρέπει να προηγείται της ημερομηνίας έναρξης"
-
-msgid "Please also provide a start date"
-msgstr "Παρακαλούμε εισάγετε επίσης ημερομηνία έναρξης"
-
-#, fuzzy
-#| msgid "Please also provide a end date"
-msgid "Please also provide an end date"
-msgstr "Παρακαλούμε εισάγετε επίσης ημερομηνία λήξης"
 
 msgid "First Choice"
 msgstr "Πρώτη Επιλογή"
@@ -167,3 +154,16 @@ msgstr "Τηλέφωνο Επικοινωνίας"
 
 msgid "List of Applicants"
 msgstr "Κατάλογος Υποψηφίων"
+
+#, fuzzy
+#~| msgid "End date must be before start date"
+#~ msgid "The start date must be before the end date"
+#~ msgstr "Η ημερομηνία λήξης πρέπει να προηγείται της ημερομηνίας έναρξης"
+
+#~ msgid "Please also provide a start date"
+#~ msgstr "Παρακαλούμε εισάγετε επίσης ημερομηνία έναρξης"
+
+#, fuzzy
+#~| msgid "Please also provide a end date"
+#~ msgid "Please also provide an end date"
+#~ msgstr "Παρακαλούμε εισάγετε επίσης ημερομηνία λήξης"
