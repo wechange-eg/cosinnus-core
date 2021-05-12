@@ -63,6 +63,7 @@ NEVER_REDIRECT_URLS = [
     '/language',
     '/api/v1/user/me/',
     '/api/v1/login/',
+    '/api/v2/navbar/',
     '/o/',
     # these deprecated URLs can be removed from the filter list once the URLs are removed
     # and their /account/ URL-path equivalents are the only remaining version of the view URL
