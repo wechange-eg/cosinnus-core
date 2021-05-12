@@ -9,7 +9,7 @@
 	            {% for type in ['projects', 'groups', 'conferences', 'ideas', 'organizations'] %}
 	                {% if type in controlView.availableFilterList %}
 	                    {% if not type in ['projects', 'groups'] or COSINNUS_SHOW_PROJECT_AND_GROUP_CREATE_BUTTONS %}
-	                        {% if not type == 'conferences' or COSINNUS_USER_CAN_CREATE_CONFERENCE %}
+	                        {% if COSINNUS_USER_CAN_CREATE_CONFERENCE or type != 'conferences'  %}
 					            <a href="{% if not cosinnus_active_user %}/signup/?acc_req_msg=1&next={% endif %}/{{type}}/add/" class="rounded-button button-color-{{ type }}-inverted">
 						            <span class="rounded-button-inner">
 						                {{ macros.typeLabel(type, useStyles=0, create=true, COSINNUS_TRANS=COSINNUS_TRANS) }}
