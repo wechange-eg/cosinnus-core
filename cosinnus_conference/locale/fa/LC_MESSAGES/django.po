@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-14 15:23+0200\n"
-"PO-Revision-Date: 2020-11-05 14:55+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: en\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr ""
@@ -154,36 +154,3 @@ msgstr ""
 
 msgid "List of Applicants"
 msgstr ""
-
-#~ msgid "TODO: Room Type Lobby description text"
-#~ msgstr "The lobby is the main entrance point for participants. You will find the conference‘s agenda here."
-
-#~ msgid "TODO: Room Type Stage description text"
-#~ msgstr "The stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
-
-#~ msgid "TODO: Room Type Workshops description text"
-#~ msgstr "In workshop rooms each event has a video conference. Presenters are allowed to moderate those."
-
-#~ msgid "TODO: Room Type Discussions description text"
-#~ msgstr "In workshop rooms each event has a video conference. Presenters are allowed to moderate those. Differs from „workshop rooms“ only by the design in the agenda. Workshop: tiles, discussion: list"
-
-#~ msgid "TODO: Room Type Coffee Tables description text"
-#~ msgstr "In the café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
-
-#~ msgid "TODO: Room Type Results description text"
-#~ msgstr "Include a project that you use for documentation purposes."
-
-#~ msgid "TODO: Room Type Participants description text"
-#~ msgstr "Shows a list of all participants"
-
-#~ msgid "Enable this to allow users to create their own coffee tables"
-#~ msgstr "Enable this to allow users to create their own café tables"
-
-#~ msgid "Sort index"
-#~ msgstr "Sort number"
-
-#~ msgid "Number by which rooms are sorted in ascending order in the conference room navigation list"
-#~ msgstr "The rooms are displayed in the room navigation in ascending order according to this number."
-
-#~ msgid "A short description or topic for your room. Will be shown on top of the room page."
-#~ msgstr "Brief description or theme of the room. Appears at the top of the room page."

@@ -259,6 +259,7 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     
     return _INSTALLED_APPS
 
+# for language codes see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 LANGUAGES = [
     ('de', _('Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     ('en', _('English--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
@@ -282,6 +283,7 @@ LANGUAGES = [
     ('ar', _('Arabic--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     ('he', _('Hebrew--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     ('el', _('Greek--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    #('fa', _('Persian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')), # not yet translated
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
