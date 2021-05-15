@@ -614,6 +614,13 @@ class CosinnusConferencePremiumBlock(models.Model):
         ordering = ('from_date',)
         verbose_name = _('Cosinnus Conference Premium Block')
         verbose_name_plural = _('Cosinnus Conference Premium Blocks')
+        
+    def save(self, *args, **kwargs):
+        """ Do the check for whether or not the conference for this block should be premium after saving """
+        super(CosinnusConferencePremiumBlock, self).save(*args, **kwargs)
+        from cosinnus_conference.utils import update_conference_premium_status
+        update_conference_premium_status(conferences=[self.conference])
+    
 
 
 class CosinnusConferencePremiumCapacityInfo(models.Model):

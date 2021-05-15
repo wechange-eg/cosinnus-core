@@ -424,6 +424,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # cosinnus-core should not know about other cosinnus apps here!
 CRON_CLASSES = [
     'cosinnus.cron.DeleteScheduledUserProfiles',
+    'cosinnus.cron.UpdateConferencePremiumStatus',
     'cosinnus_marketplace.cron.DeactivateExpiredOffers',
     'cosinnus_message.cron.ProcessDirectReplyMails',
     'cosinnus_conference.cron.SendConferenceReminders',

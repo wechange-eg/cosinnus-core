@@ -18,6 +18,8 @@ from cosinnus.utils.permissions import check_user_can_receive_emails
 from uritemplate.api import variables
 from django.template.defaultfilters import date
 from cosinnus.utils.html import render_html_with_variables
+from cosinnus.models.group_extra import CosinnusConference
+from django.utils.timezone import now
 
 
 def get_initial_template(field_name):
@@ -83,3 +85,28 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
             group.settings = {}
         group.settings[f'reminder_{field_name}_sent'] = force_text(datetime.now())
         group.save(update_fields=['settings', ])
+        
+
+def update_conference_premium_status(conferences=None):        
+    """ Updates the premium status for all given conferences (default: all conferences in portal).
+        Depending on whether a CosinnusConferencePremiumBlock is active (current time lies within its
+        from-to-date range), will set the `CosinnusGroup.is_premium_currently` flag.
+        
+        Note: This will circumvent the conference's save() method and *not* trigger any signals!
+    """
+    check_conferences = CosinnusConference.objects.all_in_portal()
+    if conferences:
+        check_conferences = check_conferences.filter(id__in=[conf.id for conf in conferences])
+    
+    _now = now()
+    current_time_filter = {
+        'conference_premium_blocks__from_date__lte': _now,
+        'conference_premium_blocks__to_date__gte': _now,
+    }
+    non_premium_to_activate = check_conferences.filter(is_premium_currently=False).filter(**current_time_filter)
+    premium_to_deactivate = check_conferences.exclude(is_premium_currently=False).exclude(**current_time_filter)
+    
+    non_premium_to_activate.update(is_premium_currently=True)
+    premium_to_deactivate.update(is_premium_currently=False)
+    
+
