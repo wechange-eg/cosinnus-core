@@ -507,7 +507,7 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
             filtered_conferences = conferences.filter(to_date__gte=now())
             
         if self.only_premium:
-            filtered_conferences = filtered_conferences.filter_has_premium_blocks()
+            filtered_conferences = filtered_conferences.filter_is_any_premium()
 
         # make a cached list for conference settings
         all_settings = CosinnusConferenceSettings.objects.all()

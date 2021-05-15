@@ -146,6 +146,10 @@ class CosinnusGroupQS(models.query.QuerySet):
             return self.filter(conference_premium_blocks__gt=0).distinct()
         else:
             return self.exclude(conference_premium_blocks__gt=0).distinct()
+    
+    def filter_is_any_premium(self):
+        """ Filters for groups that either have premium blocks or are permanently premium """
+        return self.filter(Q(conference_premium_blocks__gt=0) | Q(is_premium_permanently__exact=True)).distinct()
 
 
 class CosinnusGroupManager(models.Manager):

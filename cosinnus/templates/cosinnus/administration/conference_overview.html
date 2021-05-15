@@ -28,8 +28,10 @@
 {% block content %}
     <div class="content-box textfield">
         <h2>
-           {% if only_nonstandard %}
+            {% if only_nonstandard %}
 	            {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
+	        {% elif only_premium %}
+	            {% trans "Overview - Premium Conference Time Slots" %}
 	        {% else %}
 	            {% trans "Overview - Conferences, Rooms and Workshops" %}
 	        {% endif %}
@@ -71,7 +73,7 @@
                         {% if conference.from_date and conference.to_date %}
                             {
                                 id: 2000{{ conference.id }},
-                                title: '{% trans "Conference" %}: ' + $.cosinnus.decodeEntities('{{ conference.name|truncatechars:35 }}'),
+                                title: '{% trans "Conference" %}{% if conference.is_premium_permanently %} ({% trans "Permanently Premium" %}){% endif %}: ' + $.cosinnus.decodeEntities('{{ conference.name|truncatechars:35 }}'),
                                 start: "{{ conference.from_date|date:"c"}}",
                                 end: "{{ conference.to_date|date:"c"}}",
                                 className: 'conference-calendar-conference',
@@ -130,7 +132,10 @@
 				            </a>
 				            -
 					        <span>
-					            {% if item.conference.is_premium %}
+					           {% if item.conference.is_premium_permanently %}
+                                    <i class="fa fa-star"></i>
+                                    {% trans "Permanently Premium" %}
+					            {% elif item.conference.is_premium %}
 					                <i class="fa fa-star"></i>
 					                {% trans "Premium active" %}
 					            {% elif item.conference.has_premium_blocks %}
