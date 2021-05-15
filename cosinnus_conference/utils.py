@@ -93,6 +93,8 @@ def update_conference_premium_status(conferences=None):
         from-to-date range), will set the `CosinnusGroup.is_premium_currently` flag.
         
         Note: This will circumvent the conference's save() method and *not* trigger any signals!
+        
+        @param conferences: A list of CosinnusConference that should be updated, instead of all conferences
     """
     check_conferences = CosinnusConference.objects.all_in_portal()
     if conferences:

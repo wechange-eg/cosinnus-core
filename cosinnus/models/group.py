@@ -143,9 +143,9 @@ class CosinnusGroupQS(models.query.QuerySet):
         """ Filters (or excludes) for groups that can potentially be premium because they have assigned
             `CosinnusConferencePremiumBlock`s. """
         if has_premium_blocks:
-            return self.filter(conference_premium_blocks__gt=0)
+            return self.filter(conference_premium_blocks__gt=0).distinct()
         else:
-            return self.exclude(conference_premium_blocks__gt=0)
+            return self.exclude(conference_premium_blocks__gt=0).distinct()
 
 
 class CosinnusGroupManager(models.Manager):

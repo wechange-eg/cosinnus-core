@@ -40,7 +40,7 @@ from threading import Thread
 from cosinnus.views.mixins.group import RequireSuperuserMixin
 from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.models.conference import CosinnusConferenceSettings,\
-    CosinnusConferenceRoom
+    CosinnusConferenceRoom, CosinnusConferencePremiumCapacityInfo
 from django.utils.timezone import now
 from _collections import defaultdict
 from cosinnus.utils.user import check_user_has_accepted_any_tos
@@ -574,11 +574,21 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
             'portal_setting': CosinnusConferenceSettings.get_for_object(portal),
             'conference_report_list': conference_report_list,
             'only_nonstandard': self.only_nonstandard,
+            'only_premium': self.only_premium,
+            'conferences': filtered_conferences,
             'past': self.past,
         })
+        # additional data for the calendar view on the premium overview page
+        if self.only_premium:
+            portal_capacity_blocks = CosinnusConferencePremiumCapacityInfo.objects.filter(portal=portal)
+            conference_premium_blocks = []
+            for conference in filtered_conferences:
+                conference_premium_blocks.extend(list(conference.conference_premium_blocks.all()))
+            context.update({
+                'portal_capacity_blocks': portal_capacity_blocks,
+                'conference_premium_blocks': conference_premium_blocks,
+            })
         return context
     
-
 conference_overview = ConferenceOverviewView.as_view()
-
 

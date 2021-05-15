@@ -606,6 +606,8 @@ class CosinnusConferencePremiumBlock(models.Model):
                                      help_text=_('During this time, the conference will be using the premium BBB server.'))
     to_date = models.DateTimeField(_('End Datetime'), default=None, blank=True, null=True,
                                      help_text=_('During this time, the conference will be using the premium BBB server.'))
+    participants = models.PositiveIntegerField(verbose_name=_('Conference participants'), default=0,
+                                                   help_text=_('The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins.'))
     
     created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
     last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
@@ -645,6 +647,6 @@ class CosinnusConferencePremiumCapacityInfo(models.Model):
     
     class Meta(object):
         ordering = ('from_date',)
-        verbose_name = _('Cosinnus Conference Premium Capacity Info')
-        verbose_name_plural = _('Cosinnus Conference Premium Capacity Infos')
+        verbose_name = _('Conference Total Premium Capacity Info')
+        verbose_name_plural = _('Conference Total Premium Capacity Infos')
     
