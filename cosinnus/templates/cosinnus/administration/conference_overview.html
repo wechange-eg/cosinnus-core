@@ -79,8 +79,11 @@
 				            -
 					        <span>
 					            {% if item.conference.is_premium %}
-					                {% trans "Is premium" %}
 					                <i class="fa fa-star"></i>
+					                {% trans "Premium active" %}
+					            {% elif item.conference.has_premium_blocks %}
+                                    <i class="fa fa-star-o"></i>
+					                {% trans "Premium inactive, but scheduled" %}
 					            {% else %}
 					                {% trans "Not premium" %}
 					            {% endif %}

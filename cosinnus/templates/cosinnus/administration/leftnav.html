@@ -140,7 +140,7 @@
         </ul>
     </div>
     
-    <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url "cosinnus:administration-conference-overview-nonstandard" %}">
+    <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url "cosinnus:administration-conference-overview-nonstandard" %}">
         <ul class="media-list">
             <li class="media">
                 <a class="pull-left" href="#">
@@ -148,6 +148,19 @@
                 </a>
                 <div class="media-body">
                     {% trans "Conferences with Custom Settings" %}
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url "cosinnus:administration-conference-overview-premium" %}">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-television"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Premium Conferences" %}
                 </div>
             </li>
         </ul>

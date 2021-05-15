@@ -122,6 +122,7 @@ urlpatterns = [
     
     url(r'^administration/conference_overview/$', administration.conference_overview, name='administration-conference-overview'),
     url(r'^administration/conference_overview/nonstandard/$', administration.conference_overview, name='administration-conference-overview-nonstandard', kwargs={'only_nonstandard': True}),
+    url(r'^administration/conference_overview/premium/$', administration.conference_overview, name='administration-conference-overview-premium', kwargs={'only_premium': True}),
     
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),

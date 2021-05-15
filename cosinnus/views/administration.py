@@ -477,10 +477,12 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
     
     template_name = 'cosinnus/administration/conference_overview.html'
     only_nonstandard = False
+    only_premium = False
     past = False
     
     def dispatch(self, request, *args, **kwargs):
         self.only_nonstandard = kwargs.pop('only_nonstandard', self.only_nonstandard)
+        self.only_premium = kwargs.pop('only_premium', self.only_premium)
         self.past = request.GET.get('past', self.past)
         return super().dispatch(request, *args, **kwargs)
     
@@ -489,6 +491,8 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
             their conference setting object, if one exists.
             If self.only_nonstandard view option is set, we only show items if they have a conference setting item,
             otherwise we list all of them.
+            If self.only_premoum view option is set, we only show items from conferences that have at least one
+            premium block.
          """
         context = super(ConferenceOverviewView, self).get_context_data(*args, **kwargs)
         
@@ -501,7 +505,10 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
             filtered_conferences = conferences.exclude(to_date__gte=now())
         else:
             filtered_conferences = conferences.filter(to_date__gte=now())
-        
+            
+        if self.only_premium:
+            filtered_conferences = filtered_conferences.filter_has_premium_blocks()
+
         # make a cached list for conference settings
         all_settings = CosinnusConferenceSettings.objects.all()
         conference_settings_dict = defaultdict(dict)

@@ -127,6 +127,7 @@ def group_name_validator(value):
 
 
 class CosinnusGroupQS(models.query.QuerySet):
+    """ QuerySet for all cosinnus group models """
 
     def filter_membership_status(self, status):
         if isinstance(status, (list, tuple)):
@@ -137,6 +138,14 @@ class CosinnusGroupQS(models.query.QuerySet):
         ret = super(CosinnusGroupQS, self).update(**kwargs)
         self.model._clear_cache()
         return ret
+    
+    def filter_has_premium_blocks(self, has_premium_blocks=True):
+        """ Filters (or excludes) for groups that can potentially be premium because they have assigned
+            `CosinnusConferencePremiumBlock`s. """
+        if has_premium_blocks:
+            return self.filter(conference_premium_blocks__gt=0)
+        else:
+            return self.exclude(conference_premium_blocks__gt=0)
 
 
 class CosinnusGroupManager(models.Manager):
@@ -1061,6 +1070,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def is_premium(self):
         """ Shortcut to determine if a group is in premium state right now """
         return self.is_premium_currently or self.is_premium_permanently
+    
+    @property
+    def has_premium_blocks(self):
+        return bool(self.conference_premium_blocks.count() > 0)
     
     def add_member_to_group(self, user, membership_status):
         """ "Makes the user a group member". 
