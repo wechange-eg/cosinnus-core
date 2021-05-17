@@ -74,7 +74,10 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
 
     def get_url(self, obj):
         if obj.type == obj.TYPE_RESULTS and obj.target_result_group:
-            return obj.target_result_group.get_absolute_url()
+            # for the result room's project, check if it defines an alternate sub-URL in its settings 
+            # to be shown in the iframe 
+            result_group = obj.target_result_group
+            return result_group.get_absolute_url() + result_group.settings.get('conference_result_group_iframe_url', '')
         else:
             return obj.get_rocketchat_room_url()
 
