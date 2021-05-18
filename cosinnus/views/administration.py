@@ -533,6 +533,7 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
             total_rooms = 0
             total_events = 0
             rooms_and_events = []
+            shown_conferences = []
             anysetting_rooms = False
             for room in conference.rooms.all():
                 total_rooms += 1
@@ -570,6 +571,7 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
                     'event_count': total_events,
                 }
                 conference_report_list.append(conf_dict)
+                shown_conferences.append(conference)
         
         portal = CosinnusPortal.get_current()
         context.update({
@@ -578,53 +580,49 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
             'conference_report_list': conference_report_list,
             'only_nonstandard': self.only_nonstandard,
             'only_premium': self.only_premium,
-            'conferences': filtered_conferences,
+            'conferences': shown_conferences,
             'past': self.past,
         })
         # additional data for the calendar view on the premium overview page
-        if self.only_premium:
-            portal_capacity_blocks = CosinnusConferencePremiumCapacityInfo.objects.filter(portal=portal)
+        portal_capacity_blocks = CosinnusConferencePremiumCapacityInfo.objects.filter(portal=portal)
+        if self.past:
+            portal_capacity_blocks = portal_capacity_blocks.filter(to_date__lte=now())
+        else:
+            portal_capacity_blocks = portal_capacity_blocks.filter(to_date__gte=now())
+        # create a daily block with  
+        generated_capacity_blocks = [] 
+        now_date = now().date()
+        for capacity_block in portal_capacity_blocks:
+            cur_date  = capacity_block.from_date
+            # loop over each day of each portal block and get the total capacity of all premium blocks for that day
+            while cur_date <= capacity_block.to_date:
+                if not (self.past and cur_date > now_date) and not (not self.past and cur_date < now_date):
+                    premium_capacity = CosinnusConferencePremiumBlock.objects.filter(conference__portal=portal)\
+                        .filter(from_date__lte=cur_date, to_date__gte=cur_date)\
+                        .aggregate(Sum('participants')).get('participants__sum', None)
+                    generated_capacity_blocks.append({
+                        'date': cur_date,
+                        'total': capacity_block.max_participants,
+                        'premium': premium_capacity or 0,
+                    })
+                # step forward one day 
+                cur_date = cur_date + timedelta(days=1)
+            
+            
+        #paid_payments_month.aggregate(Sum('amount')).get('amount__sum', None)
+        conference_premium_blocks = []
+        for conference in filtered_conferences:
+            filtered_conf_blocks = conference.conference_premium_blocks.all()
             if self.past:
-                portal_capacity_blocks = portal_capacity_blocks.filter(to_date__lte=now())
+                filtered_conf_blocks = filtered_conf_blocks.filter(to_date__lte=now_date)
             else:
-                portal_capacity_blocks = portal_capacity_blocks.filter(to_date__gte=now())
-            # create a daily block with  
-            generated_capacity_blocks = [] 
-            now_date = now().date()
-            for capacity_block in portal_capacity_blocks:
-                cur_date  = capacity_block.from_date
-                # loop over each day of each portal block and get the total capacity of all premium blocks for that day
-                while cur_date <= capacity_block.to_date:
-                    if not (self.past and cur_date > now_date) and not (not self.past and cur_date < now_date):
-                        premium_capacity = CosinnusConferencePremiumBlock.objects.filter(conference__portal=portal)\
-                            .filter(from_date__lte=cur_date, to_date__gte=cur_date)\
-                            .aggregate(Sum('participants')).get('participants__sum', None)
-                        generated_capacity_blocks.append({
-                            'date': cur_date,
-                            'total': capacity_block.max_participants,
-                            'premium': premium_capacity or 0,
-                        })
-                        print(f'>>> {generated_capacity_blocks[-1]}')
-                    else:
-                        print('cont')
-                    # step forward one day 
-                    cur_date = cur_date + timedelta(days=1)
-                
-                
-            #paid_payments_month.aggregate(Sum('amount')).get('amount__sum', None)
-            conference_premium_blocks = []
-            for conference in filtered_conferences:
-                filtered_conf_blocks = conference.conference_premium_blocks.all()
-                if self.past:
-                    filtered_conf_blocks = filtered_conf_blocks.filter(to_date__lte=now_date)
-                else:
-                    filtered_conf_blocks = filtered_conf_blocks.filter(to_date__gte=now_date)
-                conference_premium_blocks.extend(list(filtered_conf_blocks))
-            context.update({
-                'portal_capacity_blocks': portal_capacity_blocks,
-                'generated_capacity_blocks': generated_capacity_blocks,
-                'conference_premium_blocks': conference_premium_blocks,
-            })
+                filtered_conf_blocks = filtered_conf_blocks.filter(to_date__gte=now_date)
+            conference_premium_blocks.extend(list(filtered_conf_blocks))
+        context.update({
+            'portal_capacity_blocks': portal_capacity_blocks,
+            'generated_capacity_blocks': generated_capacity_blocks,
+            'conference_premium_blocks': conference_premium_blocks,
+        })
         return context
     
 conference_overview = ConferenceOverviewView.as_view()
