@@ -602,9 +602,9 @@ class CosinnusConferencePremiumBlock(models.Model):
                                            related_name='conference_premium_blocks',
                                            on_delete=models.CASCADE)
     
-    from_date = models.DateTimeField(_('Start Datetime'), default=None, blank=True, null=True,
+    from_date = models.DateField(_('Start Datetime'), default=None, blank=True, null=True,
                                      help_text=_('During this time, the conference will be using the premium BBB server.'))
-    to_date = models.DateTimeField(_('End Datetime'), default=None, blank=True, null=True,
+    to_date = models.DateField(_('End Datetime'), default=None, blank=True, null=True,
                                      help_text=_('During this time, the conference will be using the premium BBB server.'))
     participants = models.PositiveIntegerField(verbose_name=_('Conference participants'), default=0,
                                                    help_text=_('The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins.'))
@@ -635,9 +635,9 @@ class CosinnusConferencePremiumCapacityInfo(models.Model):
                                related_name='portal_premium_capacity_blocks',
                                on_delete=models.CASCADE)
     
-    from_date = models.DateTimeField(_('Start Datetime'), default=None, blank=True, null=True,
+    from_date = models.DateField(_('Start Datetime'), default=None, blank=True, null=True,
                                      help_text=_('The time frame while the selected capacity is available.'))
-    to_date = models.DateTimeField(_('End Datetime'), default=None, blank=True, null=True,
+    to_date = models.DateField(_('End Datetime'), default=None, blank=True, null=True,
                                      help_text=_('The time frame while the selected capacity is available.'))
     max_participants = models.PositiveIntegerField(verbose_name=_('Maximum BBB participants'), default=0,
                                                    help_text=_('The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins.'))
