@@ -13,6 +13,7 @@ export interface ConferenceJson {
   }
   header_notification: {
     notification_text: string
+    notification_severity: string
     link_text: string
     link_url: string
   }
@@ -36,6 +37,7 @@ export interface ConferenceProps {
   }
   headerNotification: {
     notificationText: string
+    notificationSeverity: string
     linkText: string
     linkUrl: string
   }
@@ -73,6 +75,7 @@ export class Conference {
       },
       headerNotification: {
         notificationText: json.header_notification.notification_text,
+        notificationSeverity: json.header_notification.notification_severity,
         linkText: json.header_notification.link_text,
         linkUrl: json.header_notification.link_url,
       },
@@ -117,6 +120,7 @@ export class Conference {
       },  
       header_notification: {
         notification_text: props.headerNotification.notificationText,
+        notification_severity: props.headerNotification.notificationSeverity,
         link_text: props.headerNotification.linkText,
         link_url: props.headerNotification.linkUrl,
       },

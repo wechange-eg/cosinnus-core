@@ -523,6 +523,7 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
         event_ct_id = ContentType.objects.get_for_model(ConferenceEvent).id
         
         conference_report_list = []
+        shown_conferences = []
         for conference in filtered_conferences:
             # traverse the conference, its rooms and events and attach their settings to themselves
             confsetting = conference_settings_dict.get(conference_ct_id, {}).get(conference.id, None)
@@ -533,7 +534,6 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
             total_rooms = 0
             total_events = 0
             rooms_and_events = []
-            shown_conferences = []
             anysetting_rooms = False
             for room in conference.rooms.all():
                 total_rooms += 1
