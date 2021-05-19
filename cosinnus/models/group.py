@@ -68,6 +68,7 @@ from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from django.template.defaultfilters import date as django_date_filter
 
+from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -686,7 +687,7 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
 
 
 @python_2_unicode_compatible
-class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
+class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
                         CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin,
                         AttachableObjectModel):
     TYPE_PROJECT = 0
@@ -720,6 +721,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
 
     # a list of all database-fields that should be searched when looking up a group by its name
     NAME_LOOKUP_FIELDS = ['name', ]
+    translateable_fields = ['name', 'description']
 
     # don't worry, the default Portal with id 1 is created in a datamigration
     # there was no other way to generate completely runnable migrations
@@ -907,15 +909,6 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
 
     def _get_likeable_model_name(self):
         return 'CosinnusGroup'
-
-    def __getitem__(self, key):
-        """ Enable accessing fields and attributed of CosinnusGroup through dict lookup.
-            This facilitates accessing group fields in the way django templates does it
-            during render time and should not have any drawbacks.
-            We use this for some multi-language swapped models of CosinnusGroup
-            in projects like DRJA where group['name'] returns group.name or
-            group.name_ru depending on the language. """
-        return getattr(self, key)
 
     def save(self, keep_unmodified=False, *args, **kwargs):
         """ @param keep_unmodified: is de-referenced from kwargs here to support extended arguments. could be cleaner """
