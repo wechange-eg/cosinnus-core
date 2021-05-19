@@ -187,6 +187,16 @@
 	                        {% endif %}
                             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=group_model_class.get_trans.FORMFIELD_NAME_PLACEHOLDER field_value=name_val %}
 						{% endblock group_form_name_field %}
+
+						{% if object.translateable_fields and object.languages %}
+							{% if translation_form %}
+								{% for field in translation_form %}
+									{% if 'name_' in field.name %}
+										{% include 'cosinnus/fields/default_field.html' with field=field label=field.label %}
+									{% endif %}
+								{% endfor %}
+							{% endif %}
+						{% endif %}
 				        
 				        {% block from_to_date_fields %}
 	                        {% comment %} Date picker for from_date - to_date {% endcomment %}

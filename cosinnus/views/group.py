@@ -101,6 +101,7 @@ from cosinnus_organization.utils import get_organization_select2_pills
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.views.attached_object import AttachableViewMixin
 from cosinnus.core.middleware import inactive_logout_middleware
+from cosinnus.forms.group import TranslateableFieldsForm
 
 logger = logging.getLogger('cosinnus')
 
@@ -1004,6 +1005,14 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin,
             'submit_label': _('Save'),
             'group': self.group}
         )
+        if self.group.translateable_fields:
+            translation_form = TranslateableFieldsForm(
+                object=self.group,
+                initial=self.group.prepare_data_for_form()
+            )
+            context.update({
+                'translation_form': translation_form
+            })
         return context
     
     def get_form_kwargs(self):
@@ -1013,6 +1022,11 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin,
     
     def forms_valid(self, form, inlines):
         messages.success(self.request, self.message_success % {'team_type':self.object._meta.verbose_name})
+        if self.group.translateable_fields:
+            translation_form = TranslateableFieldsForm(object=self.group, data=self.request.POST)
+            if translation_form.is_valid():
+                translation_form.save()
+            translation_form
         return super(GroupUpdateView, self).forms_valid(form, inlines)
 
 

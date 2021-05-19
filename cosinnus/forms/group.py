@@ -633,3 +633,33 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
         for entry in row:
             cleaned_row.append(entry.strip())
         return cleaned_row
+
+
+class TranslateableFieldsForm(forms.Form):
+
+    def __init__(self, *args, **kwargs):
+        self.object = kwargs.pop('object', None)
+        super().__init__(*args, **kwargs)
+        if self.object.languages and self.object.translateable_fields:
+            for field in self.object.translateable_fields:
+                for language in self.object.languages:
+                    field_name = '{}_{}'.format(field, language[0])
+                    self.fields[field_name] = forms.CharField(
+                        label=language[1],
+                        required=False)
+
+    def save(self):
+        form_translations = self.cleaned_data
+        object_translations = self.object.translations
+        for field in self.object.translateable_fields:
+            if not object_translations.get(field):
+                object_translations[field] = {}
+            for lang in self.object.languages:
+                form_field_name = '{}_{}'.format(field, lang[0])
+                if form_translations.get(form_field_name):
+                    object_translations.get(
+                        field)[lang[0]] = form_translations.get(
+                        form_field_name)
+
+        self.object.translations = object_translations
+        self.object.save()
