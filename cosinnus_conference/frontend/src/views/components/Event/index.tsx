@@ -8,6 +8,7 @@ import {Content} from "../Content/style"
 import {IframeContent} from "../IframeContent"
 import {EventButtons} from "../EventButtons"
 import {Loading} from "../Loading"
+import {Sidebar} from "../Sidebar"
 import {EventRoomState} from "../../../stores/events/reducer"
 
 interface EventResponse {
@@ -81,6 +82,8 @@ export function Event(props: EventProps) {
           <Typography><FormattedMessage id="Event not found."/></Typography>
         </Content>
       )}
+      
+      {event && event.props.showChat && event.props.chatUrl && <Sidebar url={event.props.chatUrl} />}
     </Main>
   )
 }

@@ -276,11 +276,13 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
     management_urls = serializers.SerializerMethodField()
     note_html = serializers.SerializerMethodField()
     feed_url = serializers.SerializerMethodField()
-
+    show_chat = serializers.SerializerMethodField()
+    chat_url = serializers.SerializerMethodField()
+    
     class Meta(object):
         model = ConferenceEvent
         fields = ('id', 'title', 'note_html', 'from_date', 'to_date', 'room', 'url', 'is_queue_url', 'raw_html', 'is_break',
-                  'image_url', 'presenters', 'participants_limit', 'feed_url', 'management_urls')
+                  'image_url', 'presenters', 'participants_limit', 'feed_url', 'management_urls', 'show_chat', 'chat_url')
 
     def get_url(self, obj):
         # FIXME: Maybe smarter filtering for URL
@@ -313,6 +315,16 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
 
     def get_note_html(self, obj):
         return textfield(obj.note)
+    
+    def get_show_chat(self, obj):
+        """ Returns true if the show chat checkboxes on the event and its room are set
+            and the room as a rocketchat url """
+        return bool(obj.show_chat and obj.room.show_chat and obj.room.get_rocketchat_room_url())
+    
+    def get_chat_url(self, obj):
+        """ Returns the event room's URL if the show chat checkboxes on the event and its room are set
+            and the room as a rocketchat url """
+        return obj.show_chat and obj.room.show_chat and obj.room.get_rocketchat_room_url()
 
 
 class ConferenceEventParticipantsSerializer(serializers.ModelSerializer):
