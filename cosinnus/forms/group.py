@@ -637,6 +637,10 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
 
 class TranslateableFieldsForm(forms.Form):
 
+    def get_field_type(self, field):
+        return self.object._meta.get_field(
+            field).get_internal_type()
+
     def __init__(self, *args, **kwargs):
         self.object = kwargs.pop('object', None)
         super().__init__(*args, **kwargs)
@@ -644,9 +648,16 @@ class TranslateableFieldsForm(forms.Form):
             for field in self.object.translateable_fields:
                 for language in self.object.languages:
                     field_name = '{}_{}'.format(field, language[0])
-                    self.fields[field_name] = forms.CharField(
-                        label=language[1],
-                        required=False)
+                    field_type = self.get_field_type(field)
+                    if field_type == 'CharField':
+                        self.fields[field_name] = forms.CharField(
+                            label=language[1],
+                            required=False)
+                    elif field_type == 'TextField':
+                        self.fields[field_name] = forms.CharField(
+                            widget=forms.Textarea,
+                            label=language[1],
+                            required=False)
 
     def save(self):
         form_translations = self.cleaned_data
