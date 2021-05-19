@@ -40,12 +40,15 @@ from threading import Thread
 from cosinnus.views.mixins.group import RequireSuperuserMixin
 from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.models.conference import CosinnusConferenceSettings,\
-    CosinnusConferenceRoom
+    CosinnusConferenceRoom, CosinnusConferencePremiumCapacityInfo,\
+    CosinnusConferencePremiumBlock
 from django.utils.timezone import now
 from _collections import defaultdict
 from cosinnus.utils.user import check_user_has_accepted_any_tos
 from django.http.response import JsonResponse
 from django.db.models import F
+from datetime import timedelta
+from django.db.models.aggregates import Sum
 
 
 class AdministrationView(TemplateView):
@@ -477,10 +480,12 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
     
     template_name = 'cosinnus/administration/conference_overview.html'
     only_nonstandard = False
+    only_premium = False
     past = False
     
     def dispatch(self, request, *args, **kwargs):
         self.only_nonstandard = kwargs.pop('only_nonstandard', self.only_nonstandard)
+        self.only_premium = kwargs.pop('only_premium', self.only_premium)
         self.past = request.GET.get('past', self.past)
         return super().dispatch(request, *args, **kwargs)
     
@@ -489,6 +494,8 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
             their conference setting object, if one exists.
             If self.only_nonstandard view option is set, we only show items if they have a conference setting item,
             otherwise we list all of them.
+            If self.only_premoum view option is set, we only show items from conferences that have at least one
+            premium block.
          """
         context = super(ConferenceOverviewView, self).get_context_data(*args, **kwargs)
         
@@ -501,7 +508,10 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
             filtered_conferences = conferences.exclude(to_date__gte=now())
         else:
             filtered_conferences = conferences.filter(to_date__gte=now())
-        
+            
+        if self.only_premium:
+            filtered_conferences = filtered_conferences.filter_is_any_premium()
+
         # make a cached list for conference settings
         all_settings = CosinnusConferenceSettings.objects.all()
         conference_settings_dict = defaultdict(dict)
@@ -513,6 +523,7 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
         event_ct_id = ContentType.objects.get_for_model(ConferenceEvent).id
         
         conference_report_list = []
+        shown_conferences = []
         for conference in filtered_conferences:
             # traverse the conference, its rooms and events and attach their settings to themselves
             confsetting = conference_settings_dict.get(conference_ct_id, {}).get(conference.id, None)
@@ -560,6 +571,7 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
                     'event_count': total_events,
                 }
                 conference_report_list.append(conf_dict)
+                shown_conferences.append(conference)
         
         portal = CosinnusPortal.get_current()
         context.update({
@@ -567,11 +579,51 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
             'portal_setting': CosinnusConferenceSettings.get_for_object(portal),
             'conference_report_list': conference_report_list,
             'only_nonstandard': self.only_nonstandard,
+            'only_premium': self.only_premium,
+            'conferences': shown_conferences,
             'past': self.past,
+        })
+        # additional data for the calendar view on the premium overview page
+        portal_capacity_blocks = CosinnusConferencePremiumCapacityInfo.objects.filter(portal=portal)
+        if self.past:
+            portal_capacity_blocks = portal_capacity_blocks.filter(to_date__lte=now())
+        else:
+            portal_capacity_blocks = portal_capacity_blocks.filter(to_date__gte=now())
+        # create a daily block with  
+        generated_capacity_blocks = [] 
+        now_date = now().date()
+        for capacity_block in portal_capacity_blocks:
+            cur_date  = capacity_block.from_date
+            # loop over each day of each portal block and get the total capacity of all premium blocks for that day
+            while cur_date <= capacity_block.to_date:
+                if not (self.past and cur_date > now_date) and not (not self.past and cur_date < now_date):
+                    premium_capacity = CosinnusConferencePremiumBlock.objects.filter(conference__portal=portal)\
+                        .filter(from_date__lte=cur_date, to_date__gte=cur_date)\
+                        .aggregate(Sum('participants')).get('participants__sum', None)
+                    generated_capacity_blocks.append({
+                        'date': cur_date,
+                        'total': capacity_block.max_participants,
+                        'premium': premium_capacity or 0,
+                    })
+                # step forward one day 
+                cur_date = cur_date + timedelta(days=1)
+            
+            
+        #paid_payments_month.aggregate(Sum('amount')).get('amount__sum', None)
+        conference_premium_blocks = []
+        for conference in filtered_conferences:
+            filtered_conf_blocks = conference.conference_premium_blocks.all()
+            if self.past:
+                filtered_conf_blocks = filtered_conf_blocks.filter(to_date__lte=now_date)
+            else:
+                filtered_conf_blocks = filtered_conf_blocks.filter(to_date__gte=now_date)
+            conference_premium_blocks.extend(list(filtered_conf_blocks))
+        context.update({
+            'portal_capacity_blocks': portal_capacity_blocks,
+            'generated_capacity_blocks': generated_capacity_blocks,
+            'conference_premium_blocks': conference_premium_blocks,
         })
         return context
     
-
 conference_overview = ConferenceOverviewView.as_view()
-
 

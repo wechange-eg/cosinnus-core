@@ -265,15 +265,16 @@
                         headerToolbar: {
                             start: 'prev,next,today',
                             center: isSmall ? '': 'title',
-                            end: 'dayGridMonth,timeGridWeek,listWeek' // basicDay
+                            end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek' // basicDay
                         },
                         footerToolbar: {
                             center: isSmall ? 'title': ''
                         },
+                        slotDuration: '01:00:00',
                         contentHeight: 'auto',
                         eventDisplay: 'block',
                         displayEventTime: false,
-                        showNonCurrentDates: false,
+                        showNonCurrentDates: true,
                         fixedWeekCount: false,
                         editable: editable,
                         events: cosinnus_calendarEvents,

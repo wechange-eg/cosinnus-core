@@ -4,6 +4,8 @@
 {% block page_title %}
     {% if only_nonstandard %}
         {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
+    {% elif only_premium %}
+            {% trans "Overview - Premium Conferences Only" %}
     {% else %}
         {% trans "Overview - All Conferences" %}
     {% endif %}
@@ -18,6 +20,8 @@
     <li class="active">
         {% if only_nonstandard %}
             {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
+        {% elif only_premium %}
+            {% trans "Overview - Premium Conferences Only" %}
         {% else %}
             {% trans "Overview - All Conferences" %}
         {% endif %}
@@ -28,8 +32,10 @@
 {% block content %}
     <div class="content-box textfield">
         <h2>
-           {% if only_nonstandard %}
+            {% if only_nonstandard %}
 	            {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
+	        {% elif only_premium %}
+	            {% trans "Overview - Premium Conferences Only" %}
 	        {% else %}
 	            {% trans "Overview - Conferences, Rooms and Workshops" %}
 	        {% endif %}
@@ -46,6 +52,80 @@
 	            </a>
 	        {% endif %}
         </h2>
+        
+        
+        <h4>{% trans "Premium capacity occupancy overview" %}</h4>
+        <div class="textfield transparent">
+            <p>
+                {% trans "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity." %}
+            </p>
+        </div>
+        
+        <div class="big-calendar conference-premium-calendar large-space"></div>
+        
+        <script type="application/javascript">
+            var cosinnus_calendarEvents = [
+	            {% comment %}
+	                This if the version to take full capacity blocks without total premium capacity infos each day
+	                
+                    {% for portal_block in portal_capacity_blocks %}
+                        {% if portal_block.from_date and portal_block.to_date %}
+                            {
+                                id: 1000{{ portal_block.id }},
+                                title: '{{ i18n_portal_capacity|upper }}: 👥 {{ portal_block.max_participants }}',
+                                start: "{{ portal_block.from_date|date:"c"}}",
+                                end: "{{ portal_block.to_date|date:"c"}}",
+                                className: 'conference-calendar-portal-block',
+                                url: '{% url 'admin:cosinnus_cosinnusportal_change' object_id=portal.id %}#conference_settings',
+                                allDay: true
+                            },
+                        {% endif %}
+                    {% endfor %}
+	            {% endcomment %}
+	            
+	            {% for capacity_block in generated_capacity_blocks %}
+                    {
+                        title: '👥 {{ capacity_block.premium }}/{{ capacity_block.total }} {% trans "Booked" %}' ,
+                        start: "{{ capacity_block.date|date:"c"}}",
+                        end: "{{ capacity_block.date|next_day|date:"c"}}",
+                        className: 'conference-calendar-portal-block',
+                        url: '{% url 'admin:cosinnus_cosinnusportal_change' object_id=portal.id %}#conference_settings',
+                        allDay: true
+                    },
+                {% endfor %}
+	            
+                
+                {% for conference in conferences %}
+                    {% if conference.from_date and conference.to_date %}
+                        {
+                            id: 2000{{ conference.id }},
+                            title: '{% trans "Conference" %}{% if conference.is_premium_permanently %} ({% trans "Permanently Premium" %}){% endif %}: ' + $.cosinnus.decodeEntities('{{ conference.name|truncatechars:35 }}'),
+                            start: "{{ conference.from_date|date:"c"}}",
+                            end: "{{ conference.to_date|date:"c"}}",
+                            className: 'conference-calendar-conference',
+                            url: '{{ conference.get_absolute_url }}'
+                        },
+                    {% endif %}
+                {% endfor %}
+                
+                {% for conference_block in conference_premium_blocks %}
+                    {% if conference_block.from_date and conference_block.to_date %}
+                        {
+                            id: 3000{{ conference_block.id }},
+                            title: '👥 {{ conference_block.participants }}: ' + $.cosinnus.decodeEntities('{{ conference_block.conference.name|truncatechars:35 }}'),
+                            start: "{{ conference_block.from_date|date:"c"}}",
+                            end: "{{ conference_block.to_date|next_day|date:"c"}}",
+                            className: 'conference-calendar-conference-block',
+                            url: '{% url 'admin:cosinnus_cosinnusconference_change' object_id=conference_block.conference.id %}#conference_settings',
+                            allDay: true
+                        },
+                    {% endif %}
+                {% endfor %}
+            ];
+            $.cosinnus.fullcalendar();
+        </script>
+        
+        <hr/>
         
         <h4>
             {% trans "Portal Setting" %}
@@ -78,9 +158,15 @@
 				            </a>
 				            -
 					        <span>
-					            {% if item.conference.is_premium %}
-					                {% trans "Is premium" %}
+					           {% if item.conference.is_premium_permanently %}
+                                    <i class="fa fa-star"></i>
+                                    {% trans "Permanently Premium" %}
+					            {% elif item.conference.is_premium %}
 					                <i class="fa fa-star"></i>
+					                {% trans "Premium active" %}
+					            {% elif item.conference.has_premium_blocks %}
+                                    <i class="fa fa-star-o"></i>
+					                {% trans "Premium inactive, but scheduled" %}
 					            {% else %}
 					                {% trans "Not premium" %}
 					            {% endif %}

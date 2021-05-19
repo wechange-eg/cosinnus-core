@@ -50,7 +50,7 @@ function NotificationConnector(props: NotificationProps) {
     <div className={classes.notification}>
       {conference.props.headerNotification.notificationText && (
         <Alert
-          severity="warning"
+          severity={conference.props.headerNotification.notificationSeverity}
           action={
             <Link className={classes.link} target="_blank" href={conference.props.headerNotification.linkUrl} >
               {conference.props.headerNotification.linkText}

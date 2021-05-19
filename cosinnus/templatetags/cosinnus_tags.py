@@ -69,6 +69,7 @@ from django.templatetags.i18n import do_translate, do_block_translate, Translate
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
 from cosinnus.views.ui_prefs import get_ui_prefs_for_user
+from datetime import timedelta
 
 logger = logging.getLogger('cosinnus')
 
@@ -1365,11 +1366,17 @@ def is_user_active(user):
 
 @register.filter
 def user_can_create_groups(user):
-    """ Checks if a user has the necessary permissions to create a CosinnusGroup"""
+    """ Checks if a user has the necessary permissions to create a CosinnusGroup """
     return check_user_can_create_groups(user)
 
 @register.filter
 def user_can_create_conferences(user):
-    """ Checks if a user has the necessary permissions to create a CosinnusConference"""
+    """ Checks if a user has the necessary permissions to create a CosinnusConference """
     return check_user_can_create_conferences(user)
+
+@register.filter
+def next_day(datetime_obj):
+    """ Adds a timedelta day=1 to a date/datetime. Usefull for fullcalendars way
+        of considering a full-day event with the end-date on a day to span only to the end of the previous day. """
+    return datetime_obj + timedelta(days=1)
 

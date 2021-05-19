@@ -20,6 +20,7 @@ from django.utils.translation import ugettext_lazy as _, get_language
 from django.template.loader import render_to_string
 from django.template.context import Context
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
+from django.template.defaultfilters import date as date_format
 
 
 __all__ = ('ConferenceSerializer', )
@@ -144,10 +145,29 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
     def get_header_notification(self, obj):
         user = self.context['request'].user
         # show a premium notification for admins
-        if (settings.COSINNUS_PREMIUM_CONFERENCES_ENABLED and not obj.is_premium) \
-                and (check_ug_admin(user, obj) or check_user_superuser(user)):
+        if settings.COSINNUS_PREMIUM_CONFERENCES_ENABLED and (check_ug_admin(user, obj) or check_user_superuser(user)):
+            if obj.has_premium_blocks:
+                if obj.is_premium:
+                    notification_text = _('Your conference is currently using the high performance premium servers!')
+                    notification_severity = 'success'
+                else:
+                    notification_text = _('Your conference is currently not using the high performance premium servers, but has been assigned premium slots at other times.')
+                    notification_severity = 'info'
+                
+                premium_block_dates = []
+                for premium_block in obj.conference_premium_blocks.all():
+                    str_date = date_format(premium_block.from_date, 'SHORT_DATE_FORMAT')
+                    if premium_block.from_date != premium_block.to_date:
+                        str_date += ' - ' + date_format(premium_block.to_date, 'SHORT_DATE_FORMAT')
+                    premium_block_dates.append(str_date)
+                notification_text = str(notification_text) + '<br/>' + \
+                        str(_('Your currently scheduled premium dates are:')) + ' ' + ', '.join(premium_block_dates)
+            else:
+                notification_text = _('Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:')
+                notification_severity = 'warning'
             header_notification = {
-                'notification_text': _('Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:'),
+                'notification_text': notification_text,
+                'notification_severity': notification_severity,
                 'link_text': _('Conference Bookings'),
                 'link_url': render_to_string('cosinnus/v2/urls/conference_premium_booking_url.html', context={
                                 'COSINNUS_CURRENT_LANGUAGE': get_language(),
@@ -259,11 +279,13 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
     management_urls = serializers.SerializerMethodField()
     note_html = serializers.SerializerMethodField()
     feed_url = serializers.SerializerMethodField()
-
+    show_chat = serializers.SerializerMethodField()
+    chat_url = serializers.SerializerMethodField()
+    
     class Meta(object):
         model = ConferenceEvent
         fields = ('id', 'title', 'note_html', 'from_date', 'to_date', 'room', 'url', 'is_queue_url', 'raw_html', 'is_break',
-                  'image_url', 'presenters', 'participants_limit', 'feed_url', 'management_urls')
+                  'image_url', 'presenters', 'participants_limit', 'feed_url', 'management_urls', 'show_chat', 'chat_url')
 
     def get_url(self, obj):
         # FIXME: Maybe smarter filtering for URL
@@ -296,6 +318,16 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
 
     def get_note_html(self, obj):
         return textfield(obj.note)
+    
+    def get_show_chat(self, obj):
+        """ Returns true if the show chat checkboxes on the event and its room are set
+            and the room as a rocketchat url """
+        return bool(obj.show_chat and obj.room.show_chat and obj.room.get_rocketchat_room_url())
+    
+    def get_chat_url(self, obj):
+        """ Returns the event room's URL if the show chat checkboxes on the event and its room are set
+            and the room as a rocketchat url """
+        return obj.show_chat and obj.room.show_chat and obj.room.get_rocketchat_room_url()
 
 
 class ConferenceEventParticipantsSerializer(serializers.ModelSerializer):

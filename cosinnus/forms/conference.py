@@ -18,7 +18,9 @@ class CosinnusConferenceRoomForm(GroupKwargModelFormMixin, UserKwargModelFormMix
         model = CosinnusConferenceRoom
         exclude = ('group', 'slug', 'creator', 'created')
         fields = ['title', 'description', 'type', 'sort_index', 'is_visible',
-                  'max_coffeetable_participants', 'target_result_group', 'show_chat'] # 'allow_user_table_creation',
+                  'max_coffeetable_participants', 'target_result_group',] # 'allow_user_table_creation',
+        if settings.COSINNUS_ROCKET_ENABLED:
+            fields += ['show_chat',]
         
     def __init__(self, instance, *args, **kwargs):
         if 'request' in kwargs:
