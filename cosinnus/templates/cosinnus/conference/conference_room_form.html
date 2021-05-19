@@ -142,11 +142,13 @@
             {% trans "Room is visible" as vis_label %}
             {% trans "Uncheck this to hide the room for participants (you will still be able to see it)" as vis_legend %}
             {% include 'cosinnus/fields/checkbox_field.html' with field=form.is_visible label=vis_label legend=vis_legend checkbox_label=vis_label %}
-
-            {% comment %} Show chat {% endcomment %}
-	        {% trans "Show chat" as show_chat_label %}
-	        {% trans "Check this to show rocket chat in the sidebar." as show_chat_legend %}
-            {% include 'cosinnus/fields/checkbox_field.html' with field=form.show_chat label=show_chat_label legend=show_chat_legend checkbox_label=show_chat_label %}
+            
+            {% if SETTINGS.COSINNUS_ROCKET_ENABLED %}
+	            {% comment %} Show chat {% endcomment %}
+		        {% trans "Show chat" as show_chat_label %}
+		        {% trans "Check this to show rocket chat in the sidebar." as show_chat_legend %}
+	            {% include 'cosinnus/fields/checkbox_field.html' with field=form.show_chat label=show_chat_label legend=show_chat_legend checkbox_label=show_chat_label %}
+	        {% endif %}
         </div>
 	    
 	    <button type="submit" class="btn btn-emphasized">
