@@ -185,19 +185,10 @@
 	                        {% if request.GET.name %}
 	                            {% captureas name_val %}{{ request.GET.name }}{% endcaptureas %}
 	                        {% endif %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=group_model_class.get_trans.FORMFIELD_NAME_PLACEHOLDER field_value=name_val %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=group_model_class.get_trans.FORMFIELD_NAME_PLACEHOLDER field_value=name_val translation_fields=translation_form %}
 						{% endblock group_form_name_field %}
 
-						{% if object.translateable_fields and object.languages %}
-							{% if translation_form %}
-								{% for field in translation_form %}
-									{% if 'name_' in field.name %}
-										{% include 'cosinnus/fields/default_field.html' with field=field label=field.label %}
-									{% endif %}
-								{% endfor %}
-							{% endif %}
-						{% endif %}
-				        
+
 				        {% block from_to_date_fields %}
 	                        {% comment %} Date picker for from_date - to_date {% endcomment %}
 	                        {% if form.forms.obj.fields.from_date and form.forms.obj.fields.to_date %}
@@ -282,7 +273,7 @@
 		                    {% endcaptureas %}
 	                        {% include 'cosinnus/fields/default_field.html' with label=desc_label legend=group_legend field_id=form.forms.obj.description.id_for_label %}
 			                {% block group_form_description_field %}
-						        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label %}
+						        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label translation_fields=translation_form %}
 							{% endblock group_form_description_field %}
                         {% endif %}
 						
