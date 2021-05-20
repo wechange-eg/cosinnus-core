@@ -103,7 +103,7 @@
                             start: "{{ conference.from_date|date:"c"}}",
                             end: "{{ conference.to_date|date:"c"}}",
                             className: 'conference-calendar-conference',
-                            url: '{{ conference.get_absolute_url }}'
+                            url: '{% url 'admin:cosinnus_cosinnusconference_change' object_id=conference.id %}#conference_settings'
                         },
                     {% endif %}
                 {% endfor %}
