@@ -233,7 +233,7 @@
                 $('.event-list').each(function(index) {
                     var eventListEl = $('.event-list')[index];
                     var calendarList = new FullCalendar.Calendar(eventListEl, $.extend({
-                        initialView: 'listWeek',
+                        initialView: 'listMonth',
                         events: cosinnus_calendarEvents,
                         contentHeight: 'auto',
                         displayEventTime: false,
@@ -265,7 +265,7 @@
                         headerToolbar: {
                             start: 'prev,next,today',
                             center: isSmall ? '': 'title',
-                            end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek' // basicDay
+                            end: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth' // basicDay
                         },
                         footerToolbar: {
                             center: isSmall ? 'title': ''
