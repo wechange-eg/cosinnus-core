@@ -23,6 +23,7 @@ from datetime import timedelta
 from django.utils.timezone import now
 from django.http.response import HttpResponseForbidden
 from django.utils.crypto import get_random_string
+from cosinnus.models.group import CosinnusPortal
 
 
 # from cosinnus.models import MEMBERSHIP_ADMIN
@@ -367,13 +368,18 @@ class BBBRoom(models.Model):
         meeting._bbb_api = bbb_api
         return meeting
     
-    def build_extra_join_parameters(self):
+    def build_extra_join_parameters(self, user):
         """ Builds a parameter set fo the join API call for the join
             link for the user, from the default room parameters and the
             given room type's extra parameters """
         params = {}
         params.update(settings.BBB_DEFAULT_EXTRA_JOIN_PARAMETER)
         params.update(settings.BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS.get(self.room_type))
+        if user.cosinnus_profile.avatar:
+            domain = CosinnusPortal.get_current().get_domain()
+            params.update({
+                'avatarURL': domain + user.cosinnus_profile.get_avatar_thumbnail_url(size=(263,263))
+            })
         return params
     
     def get_join_url(self, user):
@@ -382,7 +388,7 @@ class BBBRoom(models.Model):
         password = self.get_password_for_user(user)
         username = full_name(user)
         if self.meeting_id and password:
-            extra_join_parameters = self.build_extra_join_parameters()
+            extra_join_parameters = self.build_extra_join_parameters(user)
             return self.bbb_api.join_url(self.meeting_id, username, password, extra_parameter_dict=extra_join_parameters)
         return ''
 
