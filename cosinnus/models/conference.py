@@ -595,7 +595,11 @@ class CosinnusConferencePremiumBlock(models.Model):
         cronjob that switches their `is_premium_currently` flag. While this flag is True,
         the BBB URLs for all rooms/events within this conference will use the server config set 
         in the `CosinnusConferenceSettings.bbb_server_choice_premium` for each settings object
-        inherited or set for each conference event.  """
+        inherited or set for each conference event.
+        
+        Note: There is a hook trigger for updating conferences when a CosinnusConferencePremiumBlock
+        is saved, that couldn't be integrated in the save() method because of transaction contexts.
+        See `update_conference_premium_status_on_block_save()`  """
     
     conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
                                            verbose_name=_('Conference'),
@@ -617,12 +621,9 @@ class CosinnusConferencePremiumBlock(models.Model):
         verbose_name = _('Cosinnus Conference Premium Block')
         verbose_name_plural = _('Cosinnus Conference Premium Blocks')
         
-    def save(self, *args, **kwargs):
-        """ Do the check for whether or not the conference for this block should be premium after saving """
-        super(CosinnusConferencePremiumBlock, self).save(*args, **kwargs)
-        from cosinnus_conference.utils import update_conference_premium_status
-        update_conference_premium_status(conferences=[self.conference])
-    
+
+
+
 
 
 class CosinnusConferencePremiumCapacityInfo(models.Model):

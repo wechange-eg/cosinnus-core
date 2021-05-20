@@ -16,7 +16,8 @@ from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus.core.middleware.login_ratelimit_middleware import login_ratelimit_triggered
 from cosinnus.core.registries.group_models import group_model_registry
-from cosinnus.models.conference import CosinnusConferenceRoom
+from cosinnus.models.conference import CosinnusConferenceRoom,\
+    CosinnusConferencePremiumBlock
 from cosinnus.models.feedback import CosinnusFailedLoginRateLimitLog
 from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
     CosinnusGroupMembership
@@ -33,6 +34,7 @@ from cosinnus.utils.user import assign_user_to_default_auth_group, \
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment,\
     CosinnusManagedTag
 from cosinnus.models.group_extra import ensure_group_type
+from cosinnus_conference.utils import update_conference_premium_status
 
 logger = logging.getLogger('cosinnus')
 
@@ -351,5 +353,12 @@ def group_membership_cache_clear_triggers(sender, instance, created=False, **kwa
         logger.exception(e)
 
 
+@receiver(post_save, sender=CosinnusConferencePremiumBlock)
+def update_conference_premium_status_on_block_save(sender, instance, created=False, **kwargs):
+    """ Clears the cache for tags when saved/deleted """
+    update_conference_premium_status(conferences=[instance.conference])
+        
+
 from cosinnus.apis.cleverreach import * # noqa
 from cosinnus.models.wagtail_models import *  # noqa
+
