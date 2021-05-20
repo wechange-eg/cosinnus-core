@@ -197,7 +197,8 @@ class BigBlueButtonAPI(object):
             return result
         else:
             logger.error('BBB Room error: Server request `start` was not successful.',
-                         extra={'response_status_code': response.status_code, 'result': response.text})
+                         extra={'response_status_code': response.status_code, 'result': response.text,
+                                'meeting_id': meeting_id, 'server_url': self.api_auth_url})
             raise Exception('BBB Room exception: Server request was not successful: ' + str(response.text))
     
     
