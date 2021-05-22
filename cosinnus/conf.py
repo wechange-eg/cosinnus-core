@@ -931,7 +931,7 @@ class CosinnusConf(AppConf):
 
     # default value for form field for how many coffee table
     # participants should be allowed
-    CONFERENCE_COFFEETABLES_MAX_PARTICIPANTS_DEFAULT = 6
+    CONFERENCE_COFFEETABLES_MAX_PARTICIPANTS_DEFAULT = 500
 
     # default value for form field for if to allow user creation of coffee tables
     CONFERENCE_COFFEETABLES_ALLOW_USER_CREATION_DEFAULT = False

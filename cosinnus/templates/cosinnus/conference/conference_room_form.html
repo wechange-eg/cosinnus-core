@@ -97,23 +97,26 @@
             {% endcaptureas %}
             {% include 'cosinnus/fields/default_field.html' with field=form.type label=type_label extra_html=type_description_html %}
             
-            <div class="room-type-selector room-type-selector-4">
-                {% comment %} Maximum table users Field {% endcomment %}
-                {% trans "Maximum Coffee Table Participants" as max_label %}
-                {% trans "How many participants should can join one coffee table before it is full" as max_legend %}
-                {% include 'cosinnus/fields/default_field.html' with field=form.max_coffeetable_participants label=max_label legend=max_legend %}
-                
-                <p>
-                    <i class="fas fa-exclamation-triangle"></i>
-                    {% trans "Attention: The visible update of the free seats is still work in progress. Therefore, we recommend not to use the limitation of individual coffee tables, so as not to let the virtual coffee go cold while searching for free seats." %}
-                </p>
-                {% comment %} Allow user Field {% endcomment %}
-                {% comment %} Disabled this option as the frontend isn't implemented
-                {% trans "Allow users to create new coffee tables" as allow_label %}
-                {% trans "Enable this to allow users to create their own coffee tables" as allow_legend %}
-                {% include 'cosinnus/fields/checkbox_field.html' with field=form.allow_user_table_creation label=allow_label legend=allow_legend checkbox_label=allow_label %}
-                 {% endcomment %}
-            </div>
+            {% comment %} The max_coffeetable_participants field is disabled in ConferenceRooms for now and only shows in ConferenceEvents! {% endcomment %}
+            {% if False %}
+	            <div class="room-type-selector room-type-selector-4">
+	                {% comment %} Maximum table users Field {% endcomment %}
+	                {% trans "Maximum Coffee Table Participants" as max_label %}
+	                {% trans "How many participants should can join one coffee table before it is full" as max_legend %}
+	                {% include 'cosinnus/fields/default_field.html' with field=form.max_coffeetable_participants label=max_label legend=max_legend %}
+	                
+	                <p>
+	                    <i class="fas fa-exclamation-triangle"></i>
+	                    {% trans "Attention: The visible update of the free seats is still work in progress. Therefore, we recommend not to use the limitation of individual coffee tables, so as not to let the virtual coffee go cold while searching for free seats." %}
+	                </p>
+	                {% comment %} Allow user Field {% endcomment %}
+	                {% comment %} Disabled this option as the frontend isn't implemented
+	                {% trans "Allow users to create new coffee tables" as allow_label %}
+	                {% trans "Enable this to allow users to create their own coffee tables" as allow_legend %}
+	                {% include 'cosinnus/fields/checkbox_field.html' with field=form.allow_user_table_creation label=allow_label legend=allow_legend checkbox_label=allow_label %}
+	                 {% endcomment %}
+	            </div>
+            {% endif %}
             
             <div class="room-type-selector room-type-selector-5">
                 {% comment %} Target project Field {% endcomment %}
