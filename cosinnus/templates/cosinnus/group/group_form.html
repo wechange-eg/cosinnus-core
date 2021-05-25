@@ -12,6 +12,14 @@
     {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 %}
     {% endif %}
+
+	{% if translation_form %}
+        {% for trans_field in translation_form %}
+            {% if 'description_' in trans_field.name %}
+            {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=trans_field.id_for_label noinclude=1 %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
 
 {% block page_title %}

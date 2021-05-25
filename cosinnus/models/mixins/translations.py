@@ -20,15 +20,6 @@ class TranslateableFieldsModelMixin(models.Model):
             return settings.LANGUAGES
         return ImproperlyConfigured
 
-    def prepare_data_for_form(self):
-        result = {}
-        for key in self.translations.keys():
-            translations = self.translations.get(key)
-            if translations:
-                for lang in translations.keys():
-                    result['{}_{}'.format(key, lang)] = translations.get(lang)
-        return result
-
     def __getitem__(self, key):
         if key in self.translateable_fields:
             current_laguage = get_language()

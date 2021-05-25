@@ -70,18 +70,18 @@
     {% if translation_fields %}<small><a onclick='$("#{{ field.name }}_translations").toggle()'>{% trans 'Add/Edit translations' %}</a></small> {% endif %}
 </div>
 
-<div id="{{ field.name }}_translations" style="display: none;">
 {% if translation_fields %}
-    {% for trans_field in translation_fields %}
-        {% if field.name in trans_field.name %}
+<div id="{{ field.name }}_translations" style="display: none;">
+    {% for trans_field_name, trans_field in translation_fields %}
+        {% if field.name in trans_field_name %}
             <div class="cosinnus-field">
                 <label>{{ trans_field.label }}</label>
                 <div class="{% if not unstyled %}cosinnus-field-input{% endif %} {% if major_field %}major-field{% elif large_field %}large-field{% else %}regular-field{% endif %} {% if field_classes %}{{ field_classes }}{% endif %}">
-                {% render_field trans_field %}
+                {% render_field form.forms.obj|get_item:trans_field_name %}
                 </div>
             </div>
         {% endif %}
     {% endfor %}
-{% endif %}
 </div>
+{% endif %}
 
