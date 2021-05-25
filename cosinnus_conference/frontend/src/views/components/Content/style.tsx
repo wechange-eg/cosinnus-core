@@ -12,6 +12,9 @@ export const Content = styled(Grid)(({ theme }) => ({
     color: theme.palette.text.primary,
     marginBottom: "1rem",
   },
+  "& p a": {
+    color: theme.palette.text.primary,
+  },
   "&.fullheight": {
     display: "flex",
     flexDirection: "column",
