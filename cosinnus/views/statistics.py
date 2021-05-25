@@ -141,8 +141,9 @@ def bbb_room_visit_statistics_download(request):
     ]
     #'user_mtag_ids',
     #'conference_mtag_ids',
-    
-    for visit in BBBRoomVisitStatistics.objects.all().order_by('visit_datetime'):
+    for visit in BBBRoomVisitStatistics.objects.all().order_by('visit_datetime').\
+            prefetch_related('user', 'user__cosinnus_profile', 'user__cosinnus_profile__media_tag',
+                             'group', 'bbb_room'):
         visitor = visit.user or None
         visitor_mt = visitor and visitor.cosinnus_profile and visitor.cosinnus_profile.media_tag or None
         visited_group_admins = visit.group and visit.group.actual_admins or []
