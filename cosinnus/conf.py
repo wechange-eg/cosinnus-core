@@ -1028,6 +1028,20 @@ class CosinnusConf(AppConf):
     
     BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: url.startswith('https://bbbatscale')
     
+    STARRED_STAR_LABEL = _('Bookmark')
+    STARRED_STARRING_LABEL = _('Bookmarked')
+    STARRED_OBJECTS_LIST = _('Bookmark list')
+    STARRED_USERS_LIST = _('Bookmarked Users list')
+    
+    # should the editable user-list be shown in the administration area?
+    PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
+    
+    # should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?
+    CALENDAR_WIDGET_DISPLAY_AS_LIST = False
+    # should the group dashboard widget grid calendar allow drag & drop of events (only while CALENDAR_WIDGET_DISPLAY_AS_LIST == False)
+    CALENDAR_WIDGET_ALLOW_EDIT_IN_GROUP_DASHBOARD = True
+
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
@@ -1092,16 +1106,4 @@ class CosinnusDefaultSettings(AppConf):
     }
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
-
-    STARRED_STAR_LABEL = _('Bookmark')
-    STARRED_STARRING_LABEL = _('Bookmarked')
-    STARRED_OBJECTS_LIST = _('Bookmark list')
-    STARRED_USERS_LIST = _('Bookmarked Users list')
-
-    PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
-    
-    # should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?
-    CALENDAR_WIDGET_DISPLAY_AS_LIST = False
-    # should the group dashboard widget grid calendar allow drag & drop of events (only while CALENDAR_WIDGET_DISPLAY_AS_LIST == False)
-    CALENDAR_WIDGET_ALLOW_EDIT_IN_GROUP_DASHBOARD = True
 
