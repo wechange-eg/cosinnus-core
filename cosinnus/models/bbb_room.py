@@ -378,7 +378,7 @@ class BBBRoom(models.Model):
         if user.cosinnus_profile.avatar:
             domain = CosinnusPortal.get_current().get_domain()
             params.update({
-                'avatarURL': domain + user.cosinnus_profile.get_avatar_thumbnail_url(size=(263,263))
+                'avatarURL': domain + user.cosinnus_profile.get_avatar_thumbnail_url(size=(800,800))
             })
         return params
     
