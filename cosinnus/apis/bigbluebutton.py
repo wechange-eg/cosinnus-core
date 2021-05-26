@@ -111,7 +111,7 @@ class BigBlueButtonAPI(object):
     
     
     def start(self, 
-            name, meeting_id, welcome="Welcome to the conversation",
+            name, meeting_id, welcome=None,
             moderator_password="", attendee_password="", max_participants=None, voice_bridge=None,
             parent_meeting_id=None, options=None, presentation_url=""):
         """ This function calls the BigBlueButton API directly to create a meeting with all available parameters available
@@ -158,14 +158,17 @@ class BigBlueButtonAPI(object):
         attendee_password = attendee_password if attendee_password else bbb_utils.random_password()
         moderator_password = moderator_password if moderator_password else bbb_utils.random_password()
     
-        query = (
+        query = [
             ("name", name),
             ('meetingID', meeting_id),
-            ("welcome", welcome),
             ("voiceBridge", voice_bridge),
             ("attendeePW", attendee_password),
             ("moderatorPW", moderator_password),
-        )
+        ]
+        if welcome:
+            query += [
+                ("welcome", welcome),
+            ]
     
         if max_participants and is_number(max_participants):
             query += (("maxParticipants", int(max_participants)),)

@@ -259,7 +259,7 @@ class BBBRoom(models.Model):
         return None
 
     @classmethod
-    def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=None,
+    def create(cls, name, meeting_id, meeting_welcome=None, attendee_password=None,
                moderator_password=None, max_participants=None, voice_bridge=None, options=None,
                room_type=None, presentation_url=None, source_object=None):
         """ Creates a new BBBRoom and crete a room on the remote bbb-server.
