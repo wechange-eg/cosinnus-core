@@ -1075,7 +1075,7 @@ class CosinnusDefaultSettings(AppConf):
     BBB_ROOM_PARTICIPANTS_CACHE_TIMEOUT_SECONDS = 20
     # should we monkeypatch for BBB appearently allowing one less persons to enter a room
     # than provided in max_participants during room creation
-    BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = True
+    BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = False
 
     # the default parameters added to every BBB room join
     # see https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
