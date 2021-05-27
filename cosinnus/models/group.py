@@ -721,7 +721,6 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
 
     # a list of all database-fields that should be searched when looking up a group by its name
     NAME_LOOKUP_FIELDS = ['name', ]
-    translateable_fields = ['name', 'description']
 
     # don't worry, the default Portal with id 1 is created in a datamigration
     # there was no other way to generate completely runnable migrations
@@ -1000,6 +999,11 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
     def delete(self, *args, **kwargs):
         self._clear_cache(slug=self.slug)
         super(CosinnusBaseGroup, self).delete(*args, **kwargs)
+
+    def get_translateable_fields(self):
+        if self.__class__.__name__ == 'CosinnusConference':
+            return ['name', 'description_long']
+        return ['name', 'description']
     
     @property
     def trans(self):

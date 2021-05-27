@@ -21,7 +21,7 @@ class TranslateableFieldsModelMixin(models.Model):
         return ImproperlyConfigured
 
     def __getitem__(self, key):
-        if key in self.translateable_fields:
+        if key in self.get_translateable_fields():
             current_laguage = get_language()
             field = self.translations.get(key)
             if field:
@@ -29,3 +29,6 @@ class TranslateableFieldsModelMixin(models.Model):
                 if value:
                     return value
         return getattr(self, key)
+
+    def get_translateable_fields(self):
+        return self.translateable_fields

@@ -9,9 +9,9 @@ class TranslatedFieldsFormMixin(object):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        if self.instance.languages and self.instance.translateable_fields:
+        if self.instance.languages and self.instance.get_translateable_fields():
             field_map = {}
-            for field in self.instance.translateable_fields:
+            for field in self.instance.get_translateable_fields():
                 for language in self.instance.languages:
                     field_name = '{}_translation_{}'.format(field, language[0])
                     field_type = self.get_field_type(field)
@@ -34,15 +34,16 @@ class TranslatedFieldsFormMixin(object):
             translations = self.instance.translations.get(key)
             if translations:
                 for lang in translations.keys():
-                    self.initial['{}_translation_{}'.format(key,
-                                                lang)] = translations.get(lang)
+                    self.initial['{}_translation_{}'.format(
+                        key,
+                        lang)] = translations.get(lang)
 
     def full_clean(self):
         super().full_clean()
         if hasattr(self, 'cleaned_data'):
             form_translations = self.cleaned_data
             object_translations = self.instance.translations
-            for field in self.instance.translateable_fields:
+            for field in self.instance.get_translateable_fields():
                 if not object_translations.get(field):
                     object_translations[field] = {}
                 for lang in self.instance.languages:

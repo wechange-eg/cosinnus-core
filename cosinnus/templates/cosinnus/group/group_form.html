@@ -13,6 +13,17 @@
        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 %}
     {% endif %}
 
+	{% if group_model == "CosinnusConference" %}
+	{% if form.forms.obj|get_attr:'translatable_field_items' %}
+        {% for trans_field_name, trans_field in form.forms.obj|get_attr:'translatable_field_items' %}
+            {% if 'description_long_translation' in trans_field_name %}
+            {% with translatable_field=form.forms.obj|get_item:trans_field_name %}
+            {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=translatable_field.id_for_label noinclude=1 %}
+            {% endwith %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+	{% else %}
 	{% if form.forms.obj|get_attr:'translatable_field_items' %}
         {% for trans_field_name, trans_field in form.forms.obj|get_attr:'translatable_field_items' %}
             {% if 'description_translation' in trans_field_name %}
@@ -22,6 +33,7 @@
             {% endif %}
         {% endfor %}
     {% endif %}
+	{% endif %}
 
 {% endblock %}
 
@@ -258,7 +270,7 @@
                                 {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
                             {% endcaptureas %}
                             {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True translation_form=form.forms.obj translation_fields=form.forms.obj|get_attr:'translatable_field_items' %}
                             
                             {# Contact Info Field #}
                             {% trans "Contact info" as contact_info_label %}
