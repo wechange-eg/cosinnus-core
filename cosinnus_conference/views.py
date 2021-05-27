@@ -454,10 +454,12 @@ class CosinnusConferenceRoomEditView(RequireWriteMixin, CosinnusConferenceRoomFo
     form_view = 'edit'
     message_success = _('The room was saved successfully.')
     
+
     def get_context_data(self, **kwargs):
         context = super(CosinnusConferenceRoomEditView, self).get_context_data(**kwargs)
         context.update({
             'form_view': self.form_view,
+            'translatable_field_items': self.get_form().translatable_field_items
         })
         return context
 

@@ -13,7 +13,7 @@ class TranslatedFieldsFormMixin(object):
             field_map = {}
             for field in self.instance.translateable_fields:
                 for language in self.instance.languages:
-                    field_name = '{}_{}'.format(field, language[0])
+                    field_name = '{}_translation_{}'.format(field, language[0])
                     field_type = self.get_field_type(field)
                     if field_type == 'CharField':
                         self.fields[field_name] = forms.CharField(
@@ -34,7 +34,7 @@ class TranslatedFieldsFormMixin(object):
             translations = self.instance.translations.get(key)
             if translations:
                 for lang in translations.keys():
-                    self.initial['{}_{}'.format(key,
+                    self.initial['{}_translation_{}'.format(key,
                                                 lang)] = translations.get(lang)
 
     def full_clean(self):
@@ -46,7 +46,8 @@ class TranslatedFieldsFormMixin(object):
                 if not object_translations.get(field):
                     object_translations[field] = {}
                 for lang in self.instance.languages:
-                    form_field_name = '{}_{}'.format(field, lang[0])
+                    form_field_name = '{}_translation_{}'.format(
+                        field, lang[0])
                     if form_translations.get(form_field_name):
                         object_translations.get(
                             field)[lang[0]] = form_translations.get(
