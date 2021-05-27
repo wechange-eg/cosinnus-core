@@ -436,6 +436,7 @@ class CosinnusConferenceRoomCreateView(RequireAdminMixin, CosinnusConferenceRoom
         context = super(CosinnusConferenceRoomCreateView, self).get_context_data(**kwargs)
         context.update({
             'form_view': self.form_view,
+            'translatable_field_items': self.get_form().translatable_field_items
         })
         return context
     
