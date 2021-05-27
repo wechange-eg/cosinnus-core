@@ -5,6 +5,8 @@ from builtins import object
 from builtins import str
 import logging
 
+import random
+
 from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth import get_user_model, password_validation
@@ -121,7 +123,7 @@ class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFie
         """ Get the email from the form and set it as username. 
             If none was set, hide the username field and let validation take its course. """
         self.data._mutable = True
-        self.data['username'] = self.data['email'][:150]
+        self.data['username'] = str(random.randint(100000000000, 999999999999))
         return super(UserCreationForm, self).is_valid()
 
     def clean_email(self):
