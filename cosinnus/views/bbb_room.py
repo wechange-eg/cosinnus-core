@@ -118,7 +118,11 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
                 if response.status_code == 302 and 'Location' in response.headers:
                     room_url = response.headers['Location']
                 elif not response.status_code == 200:
-                    logger.error('BBB Queue final step did not receive a 200/302 response!', extra={'response': response.json()})
+                    # this can happen when a room is still being created on the BBB server and 
+                    # we quickly ask BBBAtScale for its URL; it will return a "Room is still being created" error
+                    logger.warn('BBB Queue Scale-Cluster URL resolve step did not receive a 200/302 response, retrying.', 
+                                 extra={'response': response, 'response_text': response.text})
+                    return JsonResponse(data)
             data = {
                 'status': "DONE", 
                 'url': room_url,
