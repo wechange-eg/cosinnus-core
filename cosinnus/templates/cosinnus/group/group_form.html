@@ -13,13 +13,16 @@
        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 %}
     {% endif %}
 
-	{% if translation_form %}
-        {% for trans_field in translation_form %}
-            {% if 'description_' in trans_field.name %}
-            {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=trans_field.id_for_label noinclude=1 %}
+	{% if form.forms.obj|get_attr:'translatable_field_items' %}
+        {% for trans_field_name, trans_field in form.forms.obj|get_attr:'translatable_field_items' %}
+            {% if 'description_' in trans_field_name %}
+            {% with translatable_field=form.forms.obj|get_item:trans_field_name %}
+            {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=translatable_field.id_for_label noinclude=1 %}
+            {% endwith %}
             {% endif %}
         {% endfor %}
     {% endif %}
+
 {% endblock %}
 
 {% block page_title %}
@@ -193,7 +196,7 @@
 	                        {% if request.GET.name %}
 	                            {% captureas name_val %}{{ request.GET.name }}{% endcaptureas %}
 	                        {% endif %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=group_model_class.get_trans.FORMFIELD_NAME_PLACEHOLDER field_value=name_val translation_fields=translation_form %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=group_model_class.get_trans.FORMFIELD_NAME_PLACEHOLDER field_value=name_val translation_fields=form.forms.obj|get_attr:'translatable_field_items' %}
 						{% endblock group_form_name_field %}
 
 
@@ -281,7 +284,7 @@
 		                    {% endcaptureas %}
 	                        {% include 'cosinnus/fields/default_field.html' with label=desc_label legend=group_legend field_id=form.forms.obj.description.id_for_label %}
 			                {% block group_form_description_field %}
-						        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label translation_fields=translation_form %}
+						        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label translation_fields=form.forms.obj|get_attr:'translatable_field_items' %}
 							{% endblock group_form_description_field %}
                         {% endif %}
 						

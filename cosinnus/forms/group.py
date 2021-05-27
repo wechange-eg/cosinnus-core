@@ -39,6 +39,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.group import SDG_CHOICES
 from cosinnus.forms.managed_tags import ManagedTagFormMixin
+from cosinnus.forms.translations import TranslatedFieldsFormMixin
 from cosinnus.utils.validators import validate_file_infection,\
     CleanFromToDateFieldsMixin
 from cosinnus.forms.widgets import SplitHiddenDateWidget
@@ -132,8 +133,8 @@ class GroupFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
                     self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
 
 
-class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, 
-                GroupFormDynamicFieldsMixin, ManagedTagFormMixin, FormAttachableMixin, 
+class CosinnusBaseGroupForm(TranslatedFieldsFormMixin, FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin,
+                GroupFormDynamicFieldsMixin, ManagedTagFormMixin, FormAttachableMixin,
                 AdditionalFormsMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 
@@ -633,44 +634,3 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
         for entry in row:
             cleaned_row.append(entry.strip())
         return cleaned_row
-
-
-class TranslateableFieldsForm(forms.Form):
-
-    def get_field_type(self, field):
-        return self.object._meta.get_field(
-            field).get_internal_type()
-
-    def __init__(self, *args, **kwargs):
-        self.object = kwargs.pop('object', None)
-        super().__init__(*args, **kwargs)
-        if self.object.languages and self.object.translateable_fields:
-            for field in self.object.translateable_fields:
-                for language in self.object.languages:
-                    field_name = '{}_{}'.format(field, language[0])
-                    field_type = self.get_field_type(field)
-                    if field_type == 'CharField':
-                        self.fields[field_name] = forms.CharField(
-                            label=language[1],
-                            required=False)
-                    elif field_type == 'TextField':
-                        self.fields[field_name] = forms.CharField(
-                            widget=forms.Textarea,
-                            label=language[1],
-                            required=False)
-
-    def save(self):
-        form_translations = self.cleaned_data
-        object_translations = self.object.translations
-        for field in self.object.translateable_fields:
-            if not object_translations.get(field):
-                object_translations[field] = {}
-            for lang in self.object.languages:
-                form_field_name = '{}_{}'.format(field, lang[0])
-                if form_translations.get(form_field_name):
-                    object_translations.get(
-                        field)[lang[0]] = form_translations.get(
-                        form_field_name)
-
-        self.object.translations = object_translations
-        self.object.save()
