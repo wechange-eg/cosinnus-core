@@ -24,6 +24,7 @@ import six
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus.utils.files import get_conference_conditions_filename
 from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify
@@ -186,7 +187,9 @@ class CosinnusConferenceRoomManager(models.Manager):
     
 
 @python_2_unicode_compatible
-class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models.Model):
+class CosinnusConferenceRoom(TranslateableFieldsModelMixin,
+                             ModelInheritsGroupReadWritePermissionsMixin,
+                             models.Model):
     """ A model for rooms inside a conference group object.
         Each room will be displayed as a list in the conference main page
         and can be displayed in different ways, depending on its type """
@@ -218,6 +221,7 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
         TYPE_COFFEE_TABLES,
     )
     
+    translateable_fields = ['title', 'description']
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Team'),
         related_name='rooms', on_delete=models.CASCADE)
 
