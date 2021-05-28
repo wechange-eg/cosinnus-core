@@ -47,6 +47,15 @@
 	    <div class="field-description {% if not legend_selectable %}no-select {% endif %}{{ legend_class }}">{{ legend|safe }}</div>
 	{% endif %}
 	
+    {% if translation_fields %}
+        <div class="field-description">
+	        <a href="#" onclick="$('#{{ field.name }}_translations').slideToggle()">
+	            <i class="fas fa-fw fa-language"></i>
+	            {% trans 'Add/Edit translations' %}
+	        </a>
+        </div>
+    {% endif %}
+	
 	{% if field and field.errors %}
 	   {{ field.errors }}
 	{% endif %}
@@ -67,21 +76,20 @@
     {% if extra_html %}
        {{ extra_html|safe }}
     {% endif %}
-    {% if translation_fields %}<small><a onclick='$("#{{ field.name }}_translations").toggle()'>{% trans 'Add/Edit translations' %}</a></small> {% endif %}
 </div>
 
 {% if translation_fields and translation_form %}
-<div id="{{ field.name }}_translations" style="display: none;">
-    {% for trans_field_name, trans_field in translation_fields %}
-        {% if field.name|add:'_translation' in trans_field_name %}
-            <div class="cosinnus-field">
-                <label>{{ trans_field.label }}</label>
-                <div class="{% if not unstyled %}cosinnus-field-input{% endif %} {% if major_field %}major-field{% elif large_field %}large-field{% else %}regular-field{% endif %} {% if field_classes %}{{ field_classes }}{% endif %}">
-                {% render_field translation_form|get_item:trans_field_name %}
-                </div>
-            </div>
-        {% endif %}
-    {% endfor %}
-</div>
+	<div id="{{ field.name }}_translations" style="display: none;">
+	    {% for trans_field_name, trans_field in translation_fields %}
+	        {% if field.name|add:'_translation' in trans_field_name %}
+	            <div class="cosinnus-field">
+	                <label>{{ trans_field.label }}</label>
+	                <div class="{% if not unstyled %}cosinnus-field-input{% endif %} {% if major_field %}major-field{% elif large_field %}large-field{% else %}regular-field{% endif %} {% if field_classes %}{{ field_classes }}{% endif %}">
+	                    {% render_field translation_form|get_item:trans_field_name placeholder=placeholder autocomplete="off" %}
+	                </div>
+	            </div>
+	        {% endif %}
+	    {% endfor %}
+	</div>
 {% endif %}
 

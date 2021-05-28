@@ -33,6 +33,10 @@ class DashboardItem(dict):
 
     def __init__(self, obj=None, is_emphasized=False, user=None):
         if obj:
+            # Support for `TranslateableFieldsModelMixin
+            if hasattr(obj, 'get_translated_readonly_instance'):
+                obj = obj.get_translated_readonly_instance()
+            
             from cosinnus.templatetags.cosinnus_tags import full_name
             if is_emphasized:
                 self['is_emphasized'] = is_emphasized

@@ -33,7 +33,28 @@ from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_event.models import ConferenceEvent
 
 
-class ConferenceRoomSerializer(serializers.ModelSerializer):
+class _TranslatedInstanceMixin():
+    
+    def to_representation(self, instance):
+        """ Support for `TranslateableFieldsModelMixin` """
+        if hasattr(instance, 'get_translated_readonly_instance'):
+            instance = instance.get_translated_readonly_instance()
+        return super().to_representation(instance)
+
+
+class TranslateableModelSerializer(_TranslatedInstanceMixin, serializers.ModelSerializer):
+    """ A model serializer that works well with returning translated fields
+        for any models inheriting `TranslateableFieldsModelMixin` """
+    pass
+
+
+class TranslateableHyperlinkedModelSerializer(_TranslatedInstanceMixin, serializers.HyperlinkedModelSerializer):
+    """ A model serializer that works well with returning translated fields
+        for any models inheriting `TranslateableFieldsModelMixin` """
+    pass
+    
+class ConferenceRoomSerializer(TranslateableModelSerializer):
+    
     TYPE_MAP = {
         CosinnusConferenceRoom.TYPE_LOBBY: 'lobby',
         CosinnusConferenceRoom.TYPE_STAGE: 'stage',
@@ -96,12 +117,12 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
                 })
             return management_urls
         return {}
-
+    
     def get_description_html(self, obj):
         return textfield(obj.description)
 
 
-class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
+class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
     rooms = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
     theme_color = serializers.CharField(source='conference_theme_color')
@@ -117,7 +138,7 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
         model = CosinnusGroup
         fields = ('id', 'name', 'description', 'rooms', 'management_urls', 'theme_color', 'dates', 'avatar',
                   'wallpaper', 'images', 'header_notification', 'managed_tags', 'url', 'from_date', 'to_date')
-
+    
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
         request = self.context['request']
@@ -205,7 +226,7 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
         return obj.get_absolute_url()
     
 
-class ConferenceParticipant(serializers.ModelSerializer):
+class ConferenceParticipant(TranslateableModelSerializer):
     organization = serializers.SerializerMethodField()
     location = serializers.SerializerMethodField()
 
@@ -231,7 +252,7 @@ class ConferenceEventRoomSerializer(serializers.ModelSerializer):
         return ConferenceRoomSerializer.TYPE_MAP.get(obj.type)
 
 
-class ConferenceParticipantSerializer(serializers.ModelSerializer):
+class ConferenceParticipantSerializer(TranslateableModelSerializer):
     organization = serializers.SerializerMethodField()
     country = serializers.SerializerMethodField()
     chat_url = serializers.SerializerMethodField()
@@ -262,14 +283,14 @@ class ConferenceParticipantSerializer(serializers.ModelSerializer):
             return settings.COSINNUS_CHAT_BASE_URL
 
 
-class ConferenceEventParticipantSerializer(serializers.ModelSerializer):
+class ConferenceEventParticipantSerializer(TranslateableModelSerializer):
 
     class Meta(object):
         model = get_user_model()
         fields = ('first_name', 'last_name')
 
 
-class ConferenceEventSerializer(serializers.ModelSerializer):
+class ConferenceEventSerializer(TranslateableModelSerializer):
     room = ConferenceEventRoomSerializer()
     url = serializers.SerializerMethodField()
     is_queue_url = serializers.SerializerMethodField() 
@@ -330,7 +351,7 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
         return obj.show_chat and obj.room.show_chat and obj.room.get_rocketchat_room_url()
 
 
-class ConferenceEventParticipantsSerializer(serializers.ModelSerializer):
+class ConferenceEventParticipantsSerializer(TranslateableModelSerializer):
     participants_count = serializers.SerializerMethodField()
 
     class Meta(object):
