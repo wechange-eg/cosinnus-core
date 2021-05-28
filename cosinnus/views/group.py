@@ -102,6 +102,7 @@ from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.views.attached_object import AttachableViewMixin
 from cosinnus.core.middleware import inactive_logout_middleware
 
+
 logger = logging.getLogger('cosinnus')
 
 

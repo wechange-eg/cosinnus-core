@@ -39,6 +39,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.group import SDG_CHOICES
 from cosinnus.forms.managed_tags import ManagedTagFormMixin
+from cosinnus.forms.translations import TranslatedFieldsFormMixin
 from cosinnus.utils.validators import validate_file_infection,\
     CleanFromToDateFieldsMixin
 from cosinnus.forms.widgets import SplitHiddenDateWidget
@@ -132,8 +133,8 @@ class GroupFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
                     self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
 
 
-class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, 
-                GroupFormDynamicFieldsMixin, ManagedTagFormMixin, FormAttachableMixin, 
+class CosinnusBaseGroupForm(TranslatedFieldsFormMixin, FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin,
+                GroupFormDynamicFieldsMixin, ManagedTagFormMixin, FormAttachableMixin,
                 AdditionalFormsMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 

@@ -68,6 +68,7 @@ from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from django.template.defaultfilters import date as django_date_filter
 
+from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -686,7 +687,7 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
 
 
 @python_2_unicode_compatible
-class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
+class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
                         CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin,
                         AttachableObjectModel):
     TYPE_PROJECT = 0
@@ -908,15 +909,6 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def _get_likeable_model_name(self):
         return 'CosinnusGroup'
 
-    def __getitem__(self, key):
-        """ Enable accessing fields and attributed of CosinnusGroup through dict lookup.
-            This facilitates accessing group fields in the way django templates does it
-            during render time and should not have any drawbacks.
-            We use this for some multi-language swapped models of CosinnusGroup
-            in projects like DRJA where group['name'] returns group.name or
-            group.name_ru depending on the language. """
-        return getattr(self, key)
-
     def save(self, keep_unmodified=False, *args, **kwargs):
         """ @param keep_unmodified: is de-referenced from kwargs here to support extended arguments. could be cleaner """
         created = bool(self.pk is None)
@@ -1007,6 +999,11 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def delete(self, *args, **kwargs):
         self._clear_cache(slug=self.slug)
         super(CosinnusBaseGroup, self).delete(*args, **kwargs)
+
+    def get_translateable_fields(self):
+        if self.__class__.__name__ == 'CosinnusConference':
+            return ['name', 'description_long']
+        return ['name', 'description']
     
     @property
     def trans(self):
