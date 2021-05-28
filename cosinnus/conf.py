@@ -824,6 +824,9 @@ class CosinnusConf(AppConf):
     # multiforms choosable are 'obj' (CosinnusProfile), 'user', 'media_tag'
     USERPROFILE_DISABLED_FIELDS = {}
     
+    # should the 'user_profile_dynamic_fields.html' be shown as extra_html in the profile map detail page?
+    USERPROFILE_EXTRA_FIELDS_SHOW_ON_MAP = False
+    
     # should the form view for admin-defined dynamic fields be shown
     # in the admin
     DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED = False

@@ -1,4 +1,9 @@
 {% load cosinnus_tags %}
+
+{% comment %}  
+Override this file per-portal to display specific dynamic extra fields,
+or loop over all of them like this:
+
 {% for key, value in profile_values.items %}
     {% if value and key in labels %}
         <legend>{{ labels|get_item:key|get_attr:'label' }}</legend>
@@ -11,3 +16,4 @@
         {% endwith %}
     {% endif %}
 {% endfor %}
+{% endcomment %}
