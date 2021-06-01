@@ -53,6 +53,12 @@
 	          simplemde.value($('<textarea />').html(decodeURIComponent("{{ value|urlencode }}")).text());
 	      {% endif %}
 	      inited_simplemde = simplemde;
+        if (typeof window.simplemdes == 'undefined') {
+          window.simplemdes = []
+          window.simplemdes.push(inited_simplemde)
+        } else {
+          window.simplemdes.push(inited_simplemde)
+        }
   {% if lazy %}
     };
   {% else %}
