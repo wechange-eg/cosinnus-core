@@ -112,7 +112,7 @@ setup(
         'six==1.12.0',
         'sqlparse==0.1.10',
         'python-dateutil==2.4.1',
-        'urllib3==1.24.2',
+        'urllib3==1.26.5',
         'pytz==2018.5',
         'PyJWT==1.7.1',
         'python-memcached==1.59',
