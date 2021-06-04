@@ -7,34 +7,11 @@
 	    {% captureas description_value %}{{ request.GET.description }}{% endcaptureas %}
 	{% endif %}
     {% if not group_model == "CosinnusConference" %}
-        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
-    {% endif %}
-    {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
-       {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 %}
-    {% endif %}
-
-	{% if group_model == "CosinnusConference" %}
-	{% if form.forms.obj|get_attr:'translatable_field_items' %}
-        {% for trans_field_name, trans_field in form.forms.obj|get_attr:'translatable_field_items' %}
-            {% if 'description_long_translation' in trans_field_name %}
-            {% with translatable_field=form.forms.obj|get_item:trans_field_name %}
-            {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=translatable_field.id_for_label noinclude=1 %}
-            {% endwith %}
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-	{% else %}
-	{% if form.forms.obj|get_attr:'translatable_field_items' %}
-        {% for trans_field_name, trans_field in form.forms.obj|get_attr:'translatable_field_items' %}
-            {% if 'description_translation' in trans_field_name %}
-            {% with translatable_field=form.forms.obj|get_item:trans_field_name %}
-            {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=translatable_field.id_for_label noinclude=1 %}
-            {% endwith %}
-            {% endif %}
-        {% endfor %}
-    {% endif %}
+        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label translated_fields=form.forms.obj|get_attr:'translatable_fields_languages' %}
 	{% endif %}
-
+    {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
+       {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 translated_fields=form.forms.obj|get_attr:'translatable_fields_languages' %}
+    {% endif %}
 {% endblock %}
 
 {% block page_title %}
