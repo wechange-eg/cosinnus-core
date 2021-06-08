@@ -49,7 +49,7 @@
 	
     {% if translation_fields %}
         <div class="field-description">
-	        <a href="#" onclick="$('#{{ field.name }}_translations').slideToggle()">
+			<a href="#" onclick="$('#{{ field.name }}_translations').slideToggle(); $(window.simplemdes).each(function(index){window.simplemdes[index].codemirror.refresh();})">
 	            <i class="fas fa-fw fa-language"></i>
 	            {% trans 'Add/Edit translations' %}
 	        </a>

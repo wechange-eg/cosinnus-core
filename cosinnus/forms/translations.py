@@ -1,3 +1,4 @@
+import json
 from django import forms
 
 
@@ -27,6 +28,8 @@ class TranslatedFieldsFormMixin(object):
                     field_map[field_name] = self.fields[field_name]
             setattr(self, 'translatable_field_list', field_map.keys())
             setattr(self, 'translatable_field_items', field_map.items())
+            setattr(self, 'translatable_fields_languages',
+                    [language[0] for language in self.instance.languages])
             self.prepare_data_for_form()
 
     def prepare_data_for_form(self):
