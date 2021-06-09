@@ -13,7 +13,7 @@
 	}
 
 	.fc-list-event-dot {
-		border: 5px solid @normal;
+		border: 5px solid @app-neutral-color-white;
 	}
 
 	.fc-button {
@@ -81,14 +81,19 @@
 		background-color: @light;
 	}
 
-	// Single event in events table
-
-	.fc-ltr .fc-event-hori {
+	// Single events in events calendar and table
+    .fc-event {
 		border-radius: 0;
 		background-color: @normal;
 		border-color: @normal;
 		cursor: pointer;
-
+        color: @app-neutral-color-white;
+        
+        &:hover, &:hover td {
+            background-color: @dark;
+            border-color: @dark;
+        }
+		
 		&.event-special {
 		    background-color: @dark;
 		}
