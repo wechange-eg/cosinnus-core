@@ -720,6 +720,9 @@ class CosinnusConf(AppConf):
     
     CONFERENCES_USE_APPLICATIONS_CHOICE_DEFAULT = False
     
+    # whether or not BBB-streaming is enabled for this portal
+    CONFERENCES_STREAMING_ENABLED = False
+    
     # if set to any value other than None, the conference public field will be disabled
     # and locked to the value set here
     CONFERENCES_PUBLIC_SETTING_LOCKED = None
