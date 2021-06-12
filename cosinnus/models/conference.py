@@ -110,7 +110,7 @@ class CosinnusConferenceSettings(models.Model):
             None is returned.
             
             The currently supported source_object attachment points for CosinnusConferenceSettings are, 
-            in order of the hierarchy chain (see ``).
+            in order of the hierarchy chain: see `get_parent_object_in_conference_setting_chain`.
             
             Furthermore, this function will accept these models as source_object 
             and use the resolved cosinnus_event.ConferenceEvent as chain starting point, if there is one:

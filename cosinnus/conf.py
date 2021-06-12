@@ -723,6 +723,13 @@ class CosinnusConf(AppConf):
     # whether or not BBB-streaming is enabled for this portal
     CONFERENCES_STREAMING_ENABLED = False
     
+    # BBB Streaming base api url
+    CONFERENCES_STREAMING_API_URL = None
+    # BBB Streaming credentials username
+    CONFERENCES_STREAMING_API_AUTH_USER = None
+    # BBB Streaming credentials password
+    CONFERENCES_STREAMING_API_AUTH_PASSWORD = None
+    
     # if set to any value other than None, the conference public field will be disabled
     # and locked to the value set here
     CONFERENCES_PUBLIC_SETTING_LOCKED = None
