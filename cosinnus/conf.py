@@ -729,6 +729,13 @@ class CosinnusConf(AppConf):
     CONFERENCES_STREAMING_API_AUTH_USER = None
     # BBB Streaming credentials password
     CONFERENCES_STREAMING_API_AUTH_PASSWORD = None
+    # how many minutes before the streamed event start time the streamer is created via API
+    CONFERENCES_STREAMING_API_CREATE_STREAMER_BEFORE_MINUTES = 120
+    # how many minutes before the streamed event start time the streamer is called to start streaming via API
+    CONFERENCES_STREAMING_API_START_STREAMER_BEFORE_MINUTES = 10
+    # how many minutes after the streamed event start time the streamer is stopped and deleted via API
+    CONFERENCES_STREAMING_API_STOP_DELETE_STREAMER_AFTER_MINUTES = 30
+    
     
     # if set to any value other than None, the conference public field will be disabled
     # and locked to the value set here

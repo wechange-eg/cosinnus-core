@@ -425,10 +425,11 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 CRON_CLASSES = [
     'cosinnus.cron.DeleteScheduledUserProfiles',
     'cosinnus.cron.UpdateConferencePremiumStatus',
+    'cosinnus_conference.cron.SendConferenceReminders',
+    'cosinnus_event.cron.TriggerBBBStreamers',
+    'cosinnus_exchange.cron.PullData',
     'cosinnus_marketplace.cron.DeactivateExpiredOffers',
     'cosinnus_message.cron.ProcessDirectReplyMails',
-    'cosinnus_conference.cron.SendConferenceReminders',
-    'cosinnus_exchange.cron.PullData',
 ]
 # delete cronjob logs older than 30 days
 DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 30
