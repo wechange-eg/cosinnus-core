@@ -221,7 +221,8 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin,
         TYPE_COFFEE_TABLES,
     )
     
-    translateable_fields = ['title', 'description']
+    if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+        translateable_fields = ['title', 'description']
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Team'),
         related_name='rooms', on_delete=models.CASCADE)
 

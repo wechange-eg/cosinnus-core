@@ -999,11 +999,13 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
     def delete(self, *args, **kwargs):
         self._clear_cache(slug=self.slug)
         super(CosinnusBaseGroup, self).delete(*args, **kwargs)
-
+    
     def get_translateable_fields(self):
-        if self.__class__.__name__ == 'CosinnusConference':
-            return ['name', 'description_long']
-        return ['name', 'description']
+        if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+            if self.__class__.__name__ == 'CosinnusConference':
+                return ['name', 'description_long']
+            return ['name', 'description', 'description_long']
+        return []
     
     @property
     def trans(self):

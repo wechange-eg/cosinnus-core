@@ -510,7 +510,7 @@
 		                            {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
 		                            
 									{% block group_form_microsite_description_field %}
-			                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True %}
+			                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True translation_form=form.forms.obj translation_fields=form.forms.obj|get_attr:'translatable_field_items' %}
 				                    {% endblock group_form_microsite_description_field %}
 				                    
 				                    

@@ -47,7 +47,7 @@
 	    <div class="field-description {% if not legend_selectable %}no-select {% endif %}{{ legend_class }}">{{ legend|safe }}</div>
 	{% endif %}
 	
-    {% if translation_fields %}
+    {% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translation_fields %}
         <div class="field-description">
 			<a href="#" onclick="$('#{{ field.name }}_translations').slideToggle(); $(window.simplemdes).each(function(index){window.simplemdes[index].codemirror.refresh();})">
 	            <i class="fas fa-fw fa-language"></i>
@@ -78,7 +78,7 @@
     {% endif %}
 </div>
 
-{% if translation_fields and translation_form %}
+{% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translation_fields and translation_form %}
 	<div id="{{ field.name }}_translations" style="display: none;">
 	    {% for trans_field_name, trans_field in translation_fields %}
 	        {% if field.name|add:'_translation' in trans_field_name %}

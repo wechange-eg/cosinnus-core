@@ -8,6 +8,7 @@ from copy import copy
 
 
 class TranslateableFieldsModelMixin(models.Model):
+    
     translateable_fields = []
 
     class Meta(object):

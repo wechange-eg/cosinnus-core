@@ -76,7 +76,7 @@
   
 
 
-  {% if translated_fields %}
+  {% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translated_fields %}
 
   $( document ).ready(function() {
     var elementId = '{{ element_id }}';

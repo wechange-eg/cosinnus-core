@@ -1060,7 +1060,11 @@ class CosinnusConf(AppConf):
     CALENDAR_WIDGET_DISPLAY_AS_LIST = False
     # should the group dashboard widget grid calendar allow drag & drop of events (only while CALENDAR_WIDGET_DISPLAY_AS_LIST == False)
     CALENDAR_WIDGET_ALLOW_EDIT_IN_GROUP_DASHBOARD = True
-
+    
+    # enables the translated fields on groups/events/conference rooms and more
+    # that show additional formfields and use model mixins to in-place replace translated field values
+    # see `TranslateableFieldsModelMixin`
+    TRANSLATED_FIELDS_ENABLED = False
     
 
 class CosinnusDefaultSettings(AppConf):
