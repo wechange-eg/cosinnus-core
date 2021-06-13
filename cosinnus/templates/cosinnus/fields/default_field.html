@@ -80,6 +80,15 @@
 
 {% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translation_fields and translation_form %}
 	<div id="{{ field.name }}_translations" style="display: none;">
+	    <div class="cosinnus-field">
+	        <div class="field-description no-select">
+	            {% trans "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)." %}
+	        </div>
+            <div class="field-description no-select">
+	            {% trans "If present, the translations below will be shown according to the users' local language settings. They are not searchable." %}
+	        </div>
+	    </div>
+	
 	    {% for trans_field_name, trans_field in translation_fields %}
 	        {% if field.name|add:'_translation' in trans_field_name %}
 	            <div class="cosinnus-field">
