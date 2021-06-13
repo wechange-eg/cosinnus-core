@@ -584,19 +584,21 @@ class ConferenceOverviewView(RequireSuperuserMixin, TemplateView):
             'past': self.past,
         })
         # additional data for the calendar view on the premium overview page
+        # in both current/past views, the date border is actually 4 weeks beyond today for convenience
         portal_capacity_blocks = CosinnusConferencePremiumCapacityInfo.objects.filter(portal=portal)
         if self.past:
-            portal_capacity_blocks = portal_capacity_blocks.filter(to_date__lte=now())
+            now_date = (now()+timedelta(weeks=4)).date()
+            portal_capacity_blocks = portal_capacity_blocks.filter(from_date__lte=now()+timedelta(weeks=4))
         else:
-            portal_capacity_blocks = portal_capacity_blocks.filter(to_date__gte=now())
+            now_date = (now()-timedelta(weeks=4)).date()
+            portal_capacity_blocks = portal_capacity_blocks.filter(to_date__gte=now()-timedelta(weeks=4))
         # create a daily block with  
         generated_capacity_blocks = [] 
-        now_date = now().date()
         for capacity_block in portal_capacity_blocks:
             cur_date  = capacity_block.from_date
             # loop over each day of each portal block and get the total capacity of all premium blocks for that day
             while cur_date <= capacity_block.to_date:
-                if not (self.past and cur_date > now_date) and not (not self.past and cur_date < now_date):
+                if not (self.past and cur_date >= now_date) and not (not self.past and cur_date <= now_date):
                     premium_capacity = CosinnusConferencePremiumBlock.objects.filter(conference__portal=portal)\
                         .filter(from_date__lte=cur_date, to_date__gte=cur_date)\
                         .aggregate(Sum('participants')).get('participants__sum', None)
