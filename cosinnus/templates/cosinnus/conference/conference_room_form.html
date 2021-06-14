@@ -6,16 +6,7 @@
     {% if not object and request.GET.description %}
 	    {% captureas description_value %}{{ request.GET.description }}{% endcaptureas %}
 	{% endif %}
-    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.description.id_for_label value=description_value %}
-    {% if translatable_field_items %}
-        {% for trans_field_name, trans_field in translatable_field_items %}
-            {% if 'description_translation' in trans_field_name %}
-            {% with translatable_field=form|get_item:trans_field_name %}
-            {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=translatable_field.id_for_label noinclude=1 %}
-            {% endwith %}
-            {% endif %}
-        {% endfor %}
-    {% endif %}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.description.id_for_label value=description_value translation_form=form translated_field_name=form.description.html_name %}
 {% endblock %}
 
 {% block page_title %}
@@ -138,7 +129,7 @@
             
             {% comment %} Title Field {% endcomment %}
             {% trans "Title" as title_label %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.title label=title_label placeholder=title_label first=True translation_fields=translatable_field_items translation_form=form %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.title label=title_label placeholder=title_label first=True translation_form=form %}
             
             {% comment %} Sort Field {% endcomment %}
             {% trans "Sort index" as sort_label %}
@@ -148,7 +139,7 @@
 	        {% comment %} SimpleMDE Description Field (gets initialized in extrahead) {% endcomment %}
             {% trans "Description" as description_label %}
             {% captureas description_placeholder %}{% trans "A short description or topic for your room. Will be shown on top of the room page." %}{% endcaptureas %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.description label=description_label legend=description_placeholder placeholder=description_placeholder large_field=True translation_fields=translatable_field_items translation_form=form %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.description label=description_label legend=description_placeholder placeholder=description_placeholder large_field=True translation_form=form %}
 
             {% comment %} Visibility Field {% endcomment %}
             {% trans "Room is visible" as vis_label %}

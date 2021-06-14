@@ -7,10 +7,10 @@
 	    {% captureas description_value %}{{ request.GET.description }}{% endcaptureas %}
 	{% endif %}
     {% if not group_model == "CosinnusConference" %}
-        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label translated_fields=form.forms.obj|get_attr:'translatable_fields_languages' %}
+        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.description.html_name %}
 	{% endif %}
     {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
-       {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 translated_fields=form.forms.obj|get_attr:'translatable_fields_languages' %}
+       {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 translation_form=form.forms.obj translated_field_name=form.forms.obj.description_long.html_name %}
     {% endif %}
 {% endblock %}
 
@@ -185,7 +185,7 @@
 	                        {% if request.GET.name %}
 	                            {% captureas name_val %}{{ request.GET.name }}{% endcaptureas %}
 	                        {% endif %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=group_model_class.get_trans.FORMFIELD_NAME_PLACEHOLDER field_value=name_val translation_form=form.forms.obj translation_fields=form.forms.obj|get_attr:'translatable_field_items' %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=group_model_class.get_trans.FORMFIELD_NAME_PLACEHOLDER field_value=name_val translation_form=form.forms.obj %}
 						{% endblock group_form_name_field %}
 
 
@@ -247,7 +247,7 @@
                                 {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
                             {% endcaptureas %}
                             {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True translation_form=form.forms.obj translation_fields=form.forms.obj|get_attr:'translatable_field_items' %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True translation_form=form.forms.obj %}
                             
                             {# Contact Info Field #}
                             {% trans "Contact info" as contact_info_label %}
@@ -273,7 +273,7 @@
 		                    {% endcaptureas %}
 	                        {% include 'cosinnus/fields/default_field.html' with label=desc_label legend=group_legend field_id=form.forms.obj.description.id_for_label %}
 			                {% block group_form_description_field %}
-						        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label translation_form=form.forms.obj translation_fields=form.forms.obj|get_attr:'translatable_field_items' %}
+						        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label translation_form=form.forms.obj %}
 							{% endblock group_form_description_field %}
                         {% endif %}
 						
@@ -510,7 +510,7 @@
 		                            {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
 		                            
 									{% block group_form_microsite_description_field %}
-			                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True translation_form=form.forms.obj translation_fields=form.forms.obj|get_attr:'translatable_field_items' %}
+			                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True translation_form=form.forms.obj %}
 				                    {% endblock group_form_microsite_description_field %}
 				                    
 				                    

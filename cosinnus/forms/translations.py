@@ -10,9 +10,10 @@ class TranslatedFieldsFormMixin(object):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        if self.instance.languages and self.instance.get_translateable_fields():
+        translatable_base_fields = self.instance.get_translateable_fields()
+        if self.instance.languages and translatable_base_fields:
             field_map = {}
-            for field in self.instance.get_translateable_fields():
+            for field in translatable_base_fields:
                 for language in self.instance.languages:
                     field_name = '{}_translation_{}'.format(field, language[0])
                     field_type = self.get_field_type(field)
@@ -26,6 +27,7 @@ class TranslatedFieldsFormMixin(object):
                             label=language[1],
                             required=False)
                     field_map[field_name] = self.fields[field_name]
+            setattr(self, 'translatable_base_fields', translatable_base_fields)
             setattr(self, 'translatable_field_list', field_map.keys())
             setattr(self, 'translatable_field_items', field_map.items())
             setattr(self, 'translatable_fields_languages',

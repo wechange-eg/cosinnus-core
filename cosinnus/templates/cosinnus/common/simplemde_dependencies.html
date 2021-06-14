@@ -68,19 +68,20 @@
           window.simplemdesIds.push({{ element_id }})
         }
 
-        {% if lazy %}
+  {% if lazy %}
     };
   {% else %}
 });
   {% endif %}
-  
+    
 
-
-  {% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translated_fields %}
+  {% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translation_form %}
+    {% with translation_languages=translation_form|get_attr:'translatable_fields_languages' translated_fields=translation_form|get_attr:'translatable_base_fields' %}
+      {% if translation_languages and translated_field_name in translated_fields %}
 
   $( document ).ready(function() {
     var elementId = '{{ element_id }}';
-    var languages = {{ translated_fields | safe }};
+    var languages = {{ translation_languages | safe }};
     var fields_with_language = []
     $(languages).each(function(index){
       fields_with_language.push(elementId + '_translation_' + languages[index])
@@ -141,6 +142,8 @@
     })
 
   });
-{% endif %}
+      {% endif %}
+    {% endwith %}
+  {% endif %}
 
 </script>
