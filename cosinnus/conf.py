@@ -866,7 +866,7 @@ class CosinnusConf(AppConf):
     # URL for the iframe/tab leading to a specific group folder (with leading slash)
     CLOUD_GROUP_FOLDER_IFRAME_URL = '/apps/files/?dir=/%(group_folder_name)s'
     # whether all cloud links should open with target="_blank"
-    CLOUD_OPEN_IN_NEW_TAB = False
+    CLOUD_OPEN_IN_NEW_TAB = True
     # whether to prefix all nextcloud group folders with "Projekt" or "Gruppe"
     CLOUD_PREFIX_GROUP_FOLDERS = True
     # the quota for groupfolders, in bytes. -3 is the default for "unlimited"
