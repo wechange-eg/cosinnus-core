@@ -119,6 +119,7 @@ def create_streamer(name, bbb_url, bbb_secret, meeting_id, stream_url):
             "BBB_SECRET": bbb_secret,
             "BBB_MEETING_ID": meeting_id, 
             "BBB_STREAM_URL": stream_url,
+            "BBB_START_MEETING": "true",
         }
     }
     response = _stream_api_request('post', '/streamers/', data)
