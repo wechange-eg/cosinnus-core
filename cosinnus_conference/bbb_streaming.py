@@ -142,7 +142,7 @@ def start_streamer(streamer_id):
     response = _stream_api_request('post', f'/streamers/{streamer_id}/start/')
     if response.ok:
         return True
-    raise Exception('BBB Streaming: delete_streamer not successful!')
+    raise Exception('BBB Streaming: start_streamer not successful!')
 
 
 @_logged_in_stream_request
@@ -153,7 +153,7 @@ def stop_streamer(streamer_id):
     response = _stream_api_request('post', f'/streamers/{streamer_id}/stop/')
     if response.ok:
         return True
-    raise Exception('BBB Streaming: delete_streamer not successful!')
+    raise Exception('BBB Streaming: stop_streamer not successful!')
 
 @_logged_in_stream_request
 def delete_streamer(streamer_id):
