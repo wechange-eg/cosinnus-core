@@ -1002,9 +1002,11 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
     
     def get_translateable_fields(self):
         if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+            # translatable fields are only enabled for conferences for now
             if self.__class__.__name__ == 'CosinnusConference':
                 return ['name', 'description_long']
-            return ['name', 'description', 'description_long']
+            else:
+                return []
         return []
     
     @property

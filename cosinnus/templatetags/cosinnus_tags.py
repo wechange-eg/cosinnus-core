@@ -1276,7 +1276,7 @@ def get_user_from_id(id):
 def get_attr(obj, attr_name):
     """ Returns the given attribute object instead of trying to resolve
         it in the template using __getitem__ """
-    return getattr(obj, attr_name)
+    return getattr(obj, attr_name, None)
 
 @register.filter
 def get_item(obj, attr_name):
