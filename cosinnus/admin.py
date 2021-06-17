@@ -423,7 +423,7 @@ admin.site.register(CosinnusProject, CosinnusProjectAdmin)
 
 class CosinnusSocietyAdmin(CosinnusProjectAdmin):
     
-    actions = ['convert_to_project', 'convert_to_conference', 'move_society_and_subprojects_to_portal', 
+    actions = CosinnusProjectAdmin.actions + ['convert_to_project', 'move_society_and_subprojects_to_portal', 
                 'move_society_and_subprojects_to_portal_and_message_users']
     exclude = None
     
@@ -464,7 +464,7 @@ admin.site.register(CosinnusSociety, CosinnusSocietyAdmin)
 
 class CosinnusConferenceAdmin(CosinnusProjectAdmin):
     
-    actions = ['convert_to_project', 'convert_to_society',]
+    actions = CosinnusProjectAdmin.actions + ['convert_to_project', 'convert_to_society',]
     exclude = None
     
     def get_actions(self, request):

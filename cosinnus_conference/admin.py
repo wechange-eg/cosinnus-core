@@ -72,7 +72,7 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
         
     class CosinnusConferenceAdmin(CosinnusProjectAdmin):
         
-        actions = ['convert_to_project', 'convert_to_society',]
+        actions = CosinnusProjectAdmin.actions + ['convert_to_project']
         exclude = None
         inlines = CosinnusProjectAdmin.inlines + [
             CosinnusConferencePremiumBlockInline
