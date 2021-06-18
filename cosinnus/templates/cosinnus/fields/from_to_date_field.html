@@ -37,9 +37,13 @@
                 {% endif %}
             >
             <input class="calendar-date-time-chooser-time" id="id_{{ from_date_field.html_name }}_1" name="{{ from_date_field.html_name }}_1" 
-                placeholder="00:00" type="text" 
-                value="{{ from_date_field.value|date:"H:i" }}" 
-            >                                           
+                placeholder="00:00" type="text"
+                {% if from_date_field.value %}
+                    value="{{ from_date_field.value|date:'H:i' }}"
+                {% elif form_view == "add" and request.GET.starttime %}
+                    value="{{ request.GET.starttime }}"
+                {% endif %}
+            >
             <div class="small-calendar" data-initial-date="{% if from_date_field.value %} {{ from_date_field.value|date:'Y-m-d' }} {% elif form_view == 'add' and request.GET.start %} {{ request.GET.start }} {% else %} {% now 'Y-m-d' %} {% endif %}"></div>
         </li>
         <li class="calendar-date-time-chooser">
@@ -60,7 +64,11 @@
             >
             <input class="calendar-date-time-chooser-time" id="id_{{ to_date_field.html_name }}_1" name="{{ to_date_field.html_name }}_1"
                 placeholder="23:59" type="text" 
-                value="{{ to_date_field.value|date:"H:i" }}" 
+                {% if to_date_field.value %}
+                    value="{{ to_date_field.value|date:'H:i' }}"
+                {% elif form_view == "add" and request.GET.endtime %}
+                value="{{ request.GET.endtime  }}"
+                {% endif %}
             >    
             <div class="small-calendar" data-initial-date="{% if from_date_field.value %} {{ from_date_field.value|date:'Y-m-d' }} {% elif form_view == 'add' and request.GET.start %} {{ request.GET.start }} {% else %} {% now 'Y-m-d' %} {% endif %}"></div>
         </li>
