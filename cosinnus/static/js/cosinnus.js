@@ -332,6 +332,10 @@
                         }
                     }, dateFormat));
                     calendar.setOption('locale', cosinnus_current_language);
+                    if (calenderEl.hasAttribute('data-initial-date')) {
+                        var initialDate = calenderEl.getAttribute('data-initial-date').replace(/\s/g, '');
+                        calendar.gotoDate(initialDate);
+                    }
                     calendar.render();
                     $.cosinnus.initializedFullcalendars.push(calendar);
                 });
