@@ -220,6 +220,14 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin,
         TYPE_DISCUSSIONS,
         TYPE_COFFEE_TABLES,
     )
+
+    ROOM_TYPES_WITH_EVENT_FORM = (
+        TYPE_LOBBY,
+        TYPE_STAGE,
+        TYPE_WORKSHOPS,
+        TYPE_DISCUSSIONS,
+        TYPE_COFFEE_TABLES,
+    )
     
     if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
         translateable_fields = ['title', 'description']
@@ -368,6 +376,10 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin,
         return self.events.filter(is_break=False)\
                 .exclude(type=ConferenceEvent.TYPE_COFFEE_TABLE)\
                 .order_by('from_date')
+
+    @property
+    def has_event_form(self):
+        return self.type in self.ROOM_TYPES_WITH_EVENT_FORM
 
 
 class ParticipationManagement(models.Model):
