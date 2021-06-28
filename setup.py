@@ -55,7 +55,7 @@ setup(
     data_files=data_files,
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
-        'Django>=2.1.5,<2.2',
+        'Django~=2.2.24',
         'MarkupSafe==1.1',
         'Pillow==6.2.0',
         'Celery==4.2.0',
@@ -95,7 +95,7 @@ setup(
         'djangorestframework-jwt==1.11.0',
         'dnspython==1.15.0',
         'drf-yasg==1.17.1',
-        'easy-thumbnails==2.5',
+        'easy-thumbnails==2.7',
         'ecdsa==0.13.3',
         'geopy==1.11.0',
         'jsonfield==1.0.0',
@@ -110,7 +110,7 @@ setup(
         'requests-oauthlib==0.8.0',
         'rocketchat-API==0.6.26',
         'six==1.12.0',
-        'sqlparse==0.1.10',
+        'sqlparse==0.2.2',
         'python-dateutil==2.4.1',
         'urllib3==1.24.2',
         'pytz==2018.5',
@@ -122,7 +122,7 @@ setup(
         'XlsxWriter==1.3.7',
 
         # wagtail
-        'wagtail==2.3',
+        'wagtail==2.5',
         'django-compressor',
         
         # virus file scan validator
