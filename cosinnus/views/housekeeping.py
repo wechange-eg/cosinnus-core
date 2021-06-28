@@ -28,7 +28,7 @@ from cosinnus.models.tagged import BaseTagObject
 import random
 from django.utils.timezone import now
 from cosinnus.utils.user import filter_active_users, accept_user_tos_for_portal,\
-    get_user_tos_accepted_date
+    get_user_tos_accepted_date, is_user_active
 from cosinnus.models.profile import get_user_profile_model
 from django.core.mail.message import EmailMessage
 from cosinnus.core.mail import send_mail,\
@@ -550,8 +550,9 @@ def newsletter_users(request, includeOptedOut=False, never_logged_in_only=False,
     
     for user in users:
         if includeOptedOut or (check_user_can_receive_emails(user) and user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True):
-            row = [user.email, user.first_name, user.last_name, user.date_joined, user.cosinnus_profile.language]
-            result_columns.append(row)
+            if never_logged_in_only or is_user_active(user):
+                row = [user.email, user.first_name, user.last_name, user.date_joined, user.cosinnus_profile.language]
+                result_columns.append(row)
     return make_xlsx_response(result_columns, file_name=file_name)
 
 def active_user_emails(request):
