@@ -238,6 +238,7 @@
                         contentHeight: 'auto',
                         displayEventTime: false,
                         eventDisplay: 'block',
+                        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
                     }, dateFormat))
                     calendarList.setOption('locale', cosinnus_current_language);
                     calendarList.render();
@@ -278,6 +279,7 @@
                         fixedWeekCount: false,
                         editable: editable,
                         events: cosinnus_calendarEvents,
+                        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                         eventDrop: function(date) {
                             $(calendarEl)
                                 .closest('.big-calendar')
@@ -323,6 +325,7 @@
                         contentHeight: 'auto',
                         eventDisplay: 'background',
                         selectable: true,
+                        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                         dateClick: function(date) {
                             $(calenderEl).trigger('fullCalendarDayClick',[date]);
                         },
