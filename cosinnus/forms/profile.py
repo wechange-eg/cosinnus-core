@@ -13,6 +13,7 @@ from cosinnus.forms.managed_tags import ManagedTagFormMixin
 from cosinnus.forms.tagged import get_form
 from cosinnus.forms.user import UserChangeForm
 from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.validators import validate_file_infection
 
 
@@ -63,7 +64,22 @@ class _UserProfileForm(UserProfileFormDynamicFieldsMixin, ManagedTagFormMixin, f
         super(_UserProfileForm, self).__init__(*args, **kwargs)
         if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
             self.initial['newsletter_opt_in'] = self.instance.settings.get('newsletter_opt_in', False)
+
+        userprofile_default_description = CosinnusPortal.get_current().userprofile_default_description # getting the userprof_def_desc's var from the CosinnusPortal
+        self.initial['description'] = userprofile_default_description # getting the value of the initial description linked to the userprof_def_desc
     
+
+    def clean_description(self):
+        """ Check if the content of the description field has been changed """
+        data = self.cleaned_data['description'] 
+
+        # if not data: # is empty
+        #     return 'No data' 
+        # elif data == 'Test':
+        #     return 'Test was successful'
+        # else:
+        #     return 'Smthg went wrong'
+
     def save(self, commit=True):
         """ Set the username equal to the userid """
         profile = super(_UserProfileForm, self).save(commit=True)
