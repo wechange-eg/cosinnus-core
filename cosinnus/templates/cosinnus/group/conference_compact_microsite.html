@@ -100,12 +100,23 @@
                                                                 <br/>
                                                                 {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
                                                                 {% if event.note %}
-                                                                &nbsp;
-                                                                <a href="#" class="fadedown-clickarea">
-                                                                    {% trans "More infos..." %}
-                                                                    <i class="fa fa-chevron-down"></i>
-                                                                </a>
-                                                            {% endif %}
+                                                                    {% if event.description_is_public %}
+                                                                        &nbsp;
+                                                                        <a href="#" class="fadedown-clickarea">
+                                                                            {% trans "More infos..." %}
+                                                                            <i class="fa fa-chevron-down"></i>
+                                                                        </a>
+                                                                    {% elif not event.description_is_public and user.is_authenticated %}
+                                                                        &nbsp;
+                                                                        <a href="#" class="fadedown-clickarea">
+                                                                            {% trans "More infos..." %}
+                                                                            <i class="fa fa-chevron-down"></i>
+                                                                        </a>
+                                                                    {% elif not event.description_is_public and not user.is_authenticated %}
+                                                                        <br>
+                                                                        {% trans "Please Login or Register to view the event's description." %}
+                                                                    {% endif %}
+                                                                {% endif %}
                                                             {% endif %}
 						                                </div>
 						                                {% if event.note %}
