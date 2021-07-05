@@ -65,20 +65,21 @@ class _UserProfileForm(UserProfileFormDynamicFieldsMixin, ManagedTagFormMixin, f
         if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
             self.initial['newsletter_opt_in'] = self.instance.settings.get('newsletter_opt_in', False)
 
-        userprofile_default_description = CosinnusPortal.get_current().userprofile_default_description # getting the userprof_def_desc's var from the CosinnusPortal
-        self.initial['description'] = userprofile_default_description # getting the value of the initial description linked to the userprof_def_desc
+        userprofile_default_description = CosinnusPortal.get_current().userprofile_default_description # get the userprof_def_desc's value from the CosinnusPortal
+        if userprofile_default_description and not self.initial.get('description', None):
+            self.initial['description'] = userprofile_default_description # set the value of the initial description on userprof_def_desc
     
 
     def clean_description(self):
         """ Check if the content of the description field has been changed """
-        data = self.cleaned_data['description'] 
+        description = self.cleaned_data.get('description', None)
+        userprofile_default_description = CosinnusPortal.get_current().userprofile_default_description
 
-        # if not data: # is empty
-        #     return 'No data' 
-        # elif data == 'Test':
-        #     return 'Test was successful'
-        # else:
-        #     return 'Smthg went wrong'
+        if userprofile_default_description and description == userprofile_default_description:
+            return ''
+        
+        return description
+
 
     def save(self, commit=True):
         """ Set the username equal to the userid """
