@@ -592,10 +592,8 @@ msgstr "עברית"
 msgid "Greek--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Ελληνικά"
 
-#, fuzzy
-#| msgid "Georgian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgid "Persian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
-msgstr "ქართული ენა"
+msgstr "فارسی"
 
 msgid "Belarus"
 msgstr ""
