@@ -1,3 +1,4 @@
 {% load cosinnus_tags %}
 {% if object.media_tag and object.media_tag.location %}{{ object.media_tag.location }}{% endif %}
 {% if object.media_tag and object.media_tag.topics %}TOPS1: {{ object.media_tag.get_all_language_topics_rendered }}{% endif %}
+{% if object.media_tag and object.media_tag.tags %}{% for tag in object.media_tag.tags.all %}{{ tag }} {% endfor %}{% endif %}
