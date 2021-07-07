@@ -100,21 +100,33 @@
                                                                 <br/>
                                                                 {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
                                                                 {% if event.note %}
-                                                                    {% if event.description_is_public %}
-                                                                        &nbsp;
-                                                                        <a href="#" class="fadedown-clickarea">
-                                                                            {% trans "More infos..." %}
-                                                                            <i class="fa fa-chevron-down"></i>
-                                                                        </a>
-                                                                    {% elif not event.description_is_public and user.is_authenticated %}
-                                                                        &nbsp;
-                                                                        <a href="#" class="fadedown-clickarea">
-                                                                            {% trans "More infos..." %}
-                                                                            <i class="fa fa-chevron-down"></i>
-                                                                        </a>
-                                                                    {% elif not event.description_is_public and not user.is_authenticated %}
-                                                                        <br>
-                                                                        {% trans "Please Login or Register to view the event's description." %}
+                                                                    {% if user.is_authenticated %}
+                                                                        {% if user|has_read_access:group and event.is_confidential %}
+                                                                            &nbsp;
+                                                                            <a href="#" class="fadedown-clickarea">
+                                                                                {% trans "More infos..." %}
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </a>
+                                                                        {% elif user|has_read_access:group and not event.is_confidential %}
+                                                                            &nbsp;
+                                                                            <a href="#" class="fadedown-clickarea">
+                                                                                {% trans "More infos..." %}
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </a>
+                                                                        {% elif not user|has_read_access:group and event.is_confidential %}
+                                                                            <br>
+                                                                            {% trans "You need to be a member of the conference to view the event's description." %}
+                                                                        {% elif not user|has_read_access:group and not event.is_confidential %}
+                                                                            <br>
+                                                                            &nbsp;
+                                                                            <a href="#" class="fadedown-clickarea">
+                                                                                {% trans "More infos..." %}
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </a>
+                                                                        {% endif %}
+                                                                    {% else %}
+                                                                    <br>
+                                                                    {% trans "Please Login or Register to view the event's description." %}
                                                                     {% endif %}
                                                                 {% endif %}
                                                             {% endif %}
