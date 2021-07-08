@@ -122,7 +122,7 @@ def bbb_room_visit_statistics_download(request):
     """
         Will return a CSV containing infos about all BBB Room visits
     """
-    if request and not request.user.is_superuser:
+    if request and not check_user_superuser(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     rows = []
