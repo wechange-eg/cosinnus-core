@@ -45,10 +45,7 @@
 	<div class="dashboard-left-bar dashboard-column visible-panel-1">
 		<div class="dashboard-left-bar-content" style="display: none;">
 		    {% block left_bar_widgets %}
-		        {% block group_widget %}
-    				<div class="group-widget-root"></div>
-				{% endblock %}
-				
+		    
 				{% block conference_widget %}
 					{% if SETTINGS.COSINNUS_CONFERENCES_ENABLED and my_upcoming_conferences_with_icons %}
 						<div class="widget-content">
@@ -111,20 +108,28 @@
                     {% endif %}
                 {% endblock %}
 				
+				{% block starred_objects_widget %}
+                    <div class="starred-objects-widget-root"></div>
+                {% endblock %}
+                
+				{% block starred_users_widget %}
+                    <div class="starred-users-widget-root"></div>
+                {% endblock %}
+				
+				{% block group_widget %}
+                    <div class="group-widget-root"></div>
+                {% endblock %}
+				
+				{% block followed_objects_widget %}
+                    <div class="followed-objects-widget-root"></div>
+                {% endblock %}
+                
 				{% block extra_dashboard_content %}{% endblock %}
 				
                 {% block idea_widget %}
 				    <div class="ideas-widget-root"></div>
 				{% endblock %}
-                {% block starred_users_widget %}
-				    <div class="starred-users-widget-root"></div>
-                {% endblock %}
-                {% block starred_objects_widget %}
-				    <div class="starred-objects-widget-root"></div>
-                {% endblock %}
-                {% block followed_objects_widget %}
-				    <div class="followed-objects-widget-root"></div>
-                {% endblock %}
+                
 				{% block map_widget %}
 					{% if SETTINGS.COSINNUS_USERDASHBOARD_USE_LIVE_MAP_WIDGET %}
 						<div class="map-widget-iframe square-widget">

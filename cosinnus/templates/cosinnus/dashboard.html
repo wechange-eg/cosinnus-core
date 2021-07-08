@@ -310,9 +310,9 @@
                         {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=group %}
                     </div>
                     
-                    {% with society=group.get_parent_typed %}
-                        {% if society %}
-                            <p><i>{% trans "Group:" %} <a href="{{ society.get_absolute_url }}">{{ society.name }}</a></i></p>
+                    {% with parent_group=group.get_parent_typed %}
+                        {% if parent_group %}
+                            <p><i>{{ parent_group.trans.VERBOSE_NAME }}: <a href="{{ parent_group.get_absolute_url }}">{{ parent_group.name }}</a></i></p>
                         {% endif %}
                     {% endwith %}
                     

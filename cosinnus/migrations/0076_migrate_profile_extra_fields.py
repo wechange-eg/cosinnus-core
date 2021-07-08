@@ -2,14 +2,22 @@
 
 from django.db import migrations
 from django.db.models import F
-from cosinnus.models.profile import get_user_profile_model
+
+from cosinnus.conf import settings
+from cosinnus.utils.migrations import attach_swappable_dependencies
+from django.core.exceptions import ImproperlyConfigured
 
 
 def set_last_action_to_created(apps, schema_editor):
     """ One-Time sets all CosinnusIdeas' `last_updated` field value 
         to its `created` field value.  """
     
-    UserProfile = get_user_profile_model()
+    try:
+        app_label, model_name = settings.COSINNUS_USER_PROFILE_MODEL.split('.')
+    except ValueError:
+        raise ImproperlyConfigured("COSINNUS_USER_PROFILE_MODEL must be defined for this migration'")
+    
+    UserProfile = apps.get_model(app_label, model_name)
     for userprofile in UserProfile.objects.all():
         if userprofile.extra_fields:
             userprofile.dynamic_fields = userprofile.extra_fields
@@ -19,9 +27,9 @@ def set_last_action_to_created(apps, schema_editor):
     
 class Migration(migrations.Migration):
 
-    dependencies = [
+    dependencies = attach_swappable_dependencies([
         ('cosinnus', '0075_auto_20201116_0844'),
-    ]
+    ])
 
     operations = [
         migrations.RunPython(set_last_action_to_created, migrations.RunPython.noop),
