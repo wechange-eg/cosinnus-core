@@ -38,7 +38,8 @@ from django.template.defaultfilters import linebreaksbr
 from django.db.models.aggregates import Count
 from cosinnus.utils.http import make_csv_response, make_xlsx_response
 from operator import itemgetter
-from cosinnus.utils.permissions import check_user_can_receive_emails
+from cosinnus.utils.permissions import check_user_can_receive_emails,\
+    check_user_superuser
 import logging
 from cosinnus.templatetags.cosinnus_tags import textfield
 from annoying.functions import get_object_or_None
@@ -238,7 +239,7 @@ def add_members_to_forum(request=None):
 easter_european_country_codes = ['BY', 'BG', 'CZ', 'HU', 'MD', 'PL', 'RO', 'RU', 'SK', 'UA']
 
 def user_statistics(request=None):
-    if request and not request.user.is_superuser:
+    if request and not check_user_superuser(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     user_locs = get_user_model().objects.filter(cosinnus_profile__media_tag__location_lat__isnull=False)\
@@ -429,7 +430,7 @@ def _get_group_storage_space_mb(group):
     return size
 
 def group_storage_info(request):
-    if request and not request.user.is_superuser:
+    if request and not check_user_superuser(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     prints = '<h1>All groups and projects with file storage usage over 10MB:</h1><br/>'
@@ -446,7 +447,7 @@ def group_storage_report_csv(request):
         Will return a CSV containing infos about all Group:s
             URL, Member-count, Number-of-Projects, Storage-Size-in-MB, Storage-Size-of-Group-and-all-Child-Projects-in-MB
     """
-    if request and not request.user.is_superuser:
+    if request and not check_user_superuser(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     rows = []
@@ -468,7 +469,7 @@ def project_storage_report_csv(request):
         Will return a CSV containing infos about all Projects:
             URL, Member-count, Storage-Size-in-MB
     """
-    if request and not request.user.is_superuser:
+    if request and not check_user_superuser(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     rows = []
@@ -482,7 +483,7 @@ def project_storage_report_csv(request):
 
     
 def user_activity_info(request):
-    if request and not request.user.is_superuser:
+    if request and not check_user_superuser(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     prints = '<h1>User activity of users who logged in at least once, in terms of memberships in projects+groups, sorted by highest, one user per row:</h1><br/></br>'
