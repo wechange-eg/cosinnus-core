@@ -95,35 +95,31 @@
 							                                <a href="{{ event.get_absolute_url }}">
 									                            {{ event.title }} - {{ event.media_tag.visibility }}
 								                            </a>
-								                            
                                                                 {% if event.from_date %}
                                                                     <br/>
                                                                     {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
-                                                                    {% if event.note %}
-                                                                        {% if user.is_authenticated %}
-                                                                            {% if event.is_confidential and not user|has_read_access:group %}
-                                                                                <br>
-                                                                                {% trans "Only conference members can see the event\'s description." %}
-                                                                            {% else %}
-                                                                                &nbsp;
-                                                                                <a href="#" class="fadedown-clickarea">
-                                                                                    {% trans "More infos..." %}
-                                                                                    <i class="fa fa-chevron-down"></i>
-                                                                                </a>
-                                                                            {% endif %}
-                                                                        {% else %}
-                                                                        <br>
-                                                                        {% trans "Please Login or Register to view the event's description." %}
+                                                                        {% if event.note %}
+                                                                                {% if user.is_authenticated %}
+                                                                                        {% if event.is_confidential and not user|has_read_access:group %}
+                                                                                            <br>
+                                                                                            {% trans "Only conference members can see the event\'s description." %}
+                                                                                        {% else %}
+                                                                                            &nbsp;
+                                                                                            <a href="#" class="fadedown-clickarea">
+                                                                                                {% trans "More infos..." %}
+                                                                                                <i class="fa fa-chevron-down"></i>
+                                                                                            </a>
+                                                                                            <div class="textfield transparent">
+                                                                                                {{ event.note|textfield }}
+                                                                                            </div>
+                                                                                        {% endif %}
+                                                                                {% else %}
+                                                                                    <br>
+                                                                                    {% trans "Please Login or Register to view the event's description." %}
+                                                                                {% endif %}
                                                                         {% endif %}
-                                                                    {% endif %}
                                                                 {% endif %}
-
 						                                </div>
-						                                {% if event.note %}
-								                            <div class="textfield transparent">
-								                                {{ event.note|textfield }}
-								                            </div>
-							                            {% endif %}
 						                            </div>
 						                        {% endif %}
 						                    {% endfor %}
