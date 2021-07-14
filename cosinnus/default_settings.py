@@ -283,7 +283,7 @@ LANGUAGES = [
     ('ar', _('Arabic--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     ('he', _('Hebrew--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     ('el', _('Greek--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
-    #('fa', _('Persian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')), # not yet translated
+    ('fa', _('Persian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

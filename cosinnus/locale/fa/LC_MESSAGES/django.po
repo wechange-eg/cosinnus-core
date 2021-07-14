@@ -3,240 +3,242 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-14 15:22+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2021-05-25 15:32+0200\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
-msgstr ""
+msgstr "۱ %(object)s با موفقیت پاک شد"
 
 #, python-format
 msgid "%(number)d %(objects)s were deleted successfully"
-msgstr ""
+msgstr "%(number)d %(objects)s با موفقیت پاک شدند"
 
 msgid "Delete selected entries"
-msgstr ""
+msgstr "موارد انتخابی را پاک کن"
 
 msgid "Convert memberships to Admin status"
-msgstr ""
+msgstr "عضویت را به وضعیت مدیریت تغییر بده"
 
 msgid "Convert memberships to Member status"
-msgstr ""
+msgstr "عضویت را به وضعیت عضو تغییر بده"
 
 #, python-format
 msgid "%d Users' rocketchat room memberships were re-done."
-msgstr ""
+msgstr "%d عضویت اتاق راکت‌چت کاربران از نو انجام شدند."
 
 msgid "Rocket: Fix missing RocketChat room membership for users"
-msgstr ""
+msgstr "Rocket: مشکل عضویت ناپیدا در اتاق‌های راکت‌چت را برای کاربران حل کنید"
 
 #, python-format
 msgid "%d Users' nextcloud folder memberships were re-done."
-msgstr ""
+msgstr "عضویت پوشه‌ی nextcloud %d کاربر از نو انجام شد."
 
 msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
-msgstr ""
+msgstr "Nextcloud: مشکل پوشه‌های ناپیدای Nextcloud کاربران را حل کنید"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
-msgstr ""
+msgstr "یک نشانه با رمز مشابه در حال حاضر موجود می‌باشد! لطفن یک رشته‌ی دیگر برای نشانه‌ی خود برگزینید."
 
 #, python-format
 msgid "The following items were converted to %s:"
-msgstr ""
+msgstr "موارد روبرو به %s تغییر داده شدند:"
 
 msgid "The following items were activated:"
-msgstr ""
+msgstr "موارد روبرو فعال شدند:"
 
 msgid "The following items were deactivated:"
-msgstr ""
+msgstr "موارد روبرو غیرفعال شدند:"
 
 msgid "The following Users were added to this portal:"
-msgstr ""
+msgstr "موارد روبرو به درگاه افزوده شدند:"
 
 msgid "Add all members to current Portal"
-msgstr ""
+msgstr "تمام اعضا را به درگاه فعلی بیافزایید"
 
 msgid "Move selected teams to current portal"
-msgstr ""
+msgstr "گروه‌های گزیده‌شده را به درگاه فعلی جابجا کن"
 
 msgid "Move selected teams to current portal and message members"
-msgstr ""
+msgstr "گروه‌های گزیده‌شده را به درگاه فعلی جابجا کن و به اعضا پیام بفرست"
 
 msgid "In addition, the members were removed from all other Portals."
-msgstr ""
+msgstr "بعلاوه، اعضا از تمام درگاه‌ها پاک شدند."
 
 msgid "Move all members to current Portal (removes all other memberships!)"
-msgstr ""
+msgstr "تمام کاربران را به درگاه فعلی جابجا کن (تمام عضویت‌های دیگر را پاک کن!)"
 
 msgid "Move selected groups and their subprojects to current portal"
-msgstr ""
+msgstr "گروه‌های گزیده‌شده و زیرپروژه‌هایشان را به درگاه فعلی جابجا کن"
 
 msgid "Move selected groups and their subprojects to current portal and message members"
-msgstr ""
+msgstr "گروه‌های گزیده‌شده و زیرپروژه‌هایشان را به درگاه فعلی جابجا کن و به کاربران پیام بفرست"
 
 msgid "ToS Accepted"
-msgstr ""
+msgstr "ToS پذیرفته شد"
 
 msgid "ToS not Accepted"
-msgstr ""
+msgstr "ToS پذیرفته نشد"
 
 msgid "User Logged In"
-msgstr ""
+msgstr "کاربر وارد شده"
 
 msgid "Logged in before"
-msgstr ""
+msgstr "پیش‌تر وارد شده"
 
 msgid "Never logged in"
-msgstr ""
+msgstr "هرگز وارد نشده"
 
 msgid "Scheduled for Deletion?"
-msgstr ""
+msgstr "برای پاک‌کردن برنامه‌ریزی شده؟"
 
 msgid "Yes"
-msgstr ""
+msgstr "بله"
 
 msgid "No"
-msgstr ""
+msgstr "نه"
 
 msgid "Has Logged In"
-msgstr ""
+msgstr "وارد شده است"
 
 msgid "ToS accepted?"
-msgstr ""
+msgstr "ToS پذیرفته شد؟"
 
 #, python-format
 msgid "%(count)d User account(s) were deactivated successfully. They will be deleted after 30 days from now."
-msgstr ""
+msgstr "%(count)d حساب کاربری باموفقیت غیرفعال شد. تا ۳۰ روز دیگر آن‌ها پاک خواهند شد."
 
 msgid "DEACTIVATE user accounts and DELETE them after 30 days"
-msgstr ""
+msgstr "حساب‌های کاربری را غیرفعال و بعد از ۳۰ روز پاک‌شان کن"
 
 #, python-format
 msgid "%(count)d User account(s) were reactivated successfully."
-msgstr ""
+msgstr "%(count)d حساب کاربری باموفقیت دوباره فعال شد(ند)."
 
 msgid "Reactivate user accounts"
-msgstr ""
+msgstr "حساب‌های کاربری را دوباره فعال کن"
 
 #, python-format
 msgid "%d Users were synchronized successfully."
-msgstr ""
+msgstr "%d کاربر باموفقیت هماهنگ شدند."
 
 msgid "Rocket: Re-synchronize RocketChat user-account connection (will log users out of RocketChat!)"
-msgstr ""
+msgstr "Rocket: اتصال حساب کاربر راکت‌چت را دوباره هماهنگ کن (کاربران از سیستم راکت‌چت یک‌بار خارج می‌شوند!)"
 
 #, python-format
 msgid "%d Users were made RocketChat admins."
-msgstr ""
+msgstr "%d کاربر مدیر راکت‌چت شدند."
 
 msgid "Rocket: Make user RocketChat admin"
-msgstr ""
+msgstr "Rocket: کاربر راکت‌چت را مدیر کن"
 
 #, python-format
 msgid "%d Users rocketchat accounts were checked."
-msgstr ""
+msgstr "%d حساب کاربری راکت‌چت بررسی شدند."
 
 msgid "Rocket: Repair/create missing users' rocketchat accounts"
-msgstr ""
+msgstr "Rocket: حساب‌های راکت‌چت ناپیدا ساخته/مرمت شدند"
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
-msgstr ""
+msgstr "Rocket: مشکل عضویت اتاق ناپیدای کاربران را حل کن"
 
 msgid "Restart"
-msgstr ""
+msgstr "بازراه‌اندازی"
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
-msgstr ""
+msgstr "نشانی ایمیل این حساب کاربری که می‌خواهید با آن به سامانه متصل شوید ابتدا باید فعال شود."
 
 #, python-format
 msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
-msgstr ""
+msgstr "اگر هنوز یک ایمیل فعال‌سازی دریافت نکرده‌اید، لطفن بکوشید دوباره حساب کاربری بسازید یا این‌که به گروه پشتیبانی در این نشانی: %(email)s  یک ایمیل بفرستید!"
 
 #, python-format
 msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
-msgstr ""
+msgstr "اگر در فاصله‌ی چند دقیقه یک ایمیل فعال‌سازی از %(portal_name)s دریافت نکرده‌اید لطفن به پوشه‌ی اِسپم نگاه بیاندازید و یا این‌که دوباره ثبت‌نام کنید!"
 
-#, python-format
+#, fuzzy, python-format
 msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
-msgstr ""
+msgstr "%(sender_name)s از شما می‌خواهد که به پروژه‌ی \"%(team_name)s\" که روی %(portal_name)s قراردارد بپیوندید! روی نام پروژه که در زیر آمده کلیک کنید تا ببینید چه خبر است و همکاری کنید!"
 
 msgid "Mobilität"
-msgstr ""
+msgstr "ترابری"
 
 msgid "Energie"
-msgstr ""
+msgstr "نیرو"
 
+#, fuzzy
 msgid "Umwelt"
-msgstr ""
+msgstr "محیط‌زیست"
 
 msgid "Bildung"
-msgstr ""
+msgstr "آموزش"
 
 msgid "Gesundheit"
-msgstr ""
+msgstr "سلامت"
 
 msgid "Ernährung und Konsum"
-msgstr ""
+msgstr "تغذیه و مصرف"
 
 msgid "Kunst und Kultur"
-msgstr ""
+msgstr "هنر و فرهنگ"
 
 msgid "Geld und Finanzen"
-msgstr ""
+msgstr "پول و امور مالی"
 
 msgid "Arbeit und Recht"
-msgstr ""
+msgstr "کار و حقوق"
 
+#, fuzzy
 msgid "Bauen und Wohnen"
-msgstr ""
+msgstr "ساختمان و زندگی"
 
 msgid "Klimaschutz"
-msgstr ""
+msgstr "محافظت از محیط‌زیست"
 
 msgid "Overnight stay required"
-msgstr ""
+msgstr "اقامت شبانه مورد نیاز است"
 
 msgid "Barrier-free access required"
-msgstr ""
+msgstr "دسترسی بدون مانع مورد نیاز است"
 
 msgid "Interpreter required"
-msgstr ""
+msgstr "سخن‌گردان مورد نیاز است"
 
 msgid "Vegetarian cuisine"
-msgstr ""
+msgstr "خوراک سبزی‌‌خواران"
 
 msgid "Vegan cuisine"
-msgstr ""
+msgstr "خوراک ویگِن"
 
 msgid "Lactose-free cuisine"
-msgstr ""
+msgstr "خوراک بدون لاکتوز"
 
 msgid "Gluten-free cuisine"
-msgstr ""
+msgstr "خوراک بدون گلوتن"
 
 msgid "General"
-msgstr ""
+msgstr "همگانی"
 
 msgid "Active"
-msgstr ""
+msgstr "فعال"
 
 msgid "Restricted"
-msgstr ""
+msgstr "محدودشده"
 
 msgid "Premium"
-msgstr ""
+msgstr "اعلاء"
 
 msgid "Bookmark"
 msgstr ""
@@ -251,263 +253,265 @@ msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
-msgstr ""
+msgstr "تنها اعضای ثبت‌نام شده می‌توانند درون‌مایه‌ی درخواستی را ببینند! به سامانه وصل بشوید یا یک حساب بسازید!"
 
+#, fuzzy
 msgid "Please log in to access this page."
-msgstr ""
+msgstr "برای این‌‌که به این برگه دسترسی پیدا کنید به سامانه متصل شوید."
 
 #, python-format
 msgid "The page you tried to access belongs to an app that has been deactivated for this %(team_type)s. If you feel this is in error, ask the %(team_type)s's administrator to reactivate the app."
-msgstr ""
+msgstr "برگه‌ای که خواستید به آن وارد شوید به یک برنامه تعلق دارد که برای این %(team_type)s غیرفعال شده است. اگر احساس می‌کنید این یک خطاست، از مدیر %(team_type)s بخواهید که برنامه را دوباره فعال کنند."
 
 msgid "No team provided"
-msgstr ""
+msgstr "هیچ گروهی وارد نشده"
 
 msgid "This team no longer resides under the URL you entered. You have been redirected automatically to the current location."
-msgstr ""
+msgstr "این گروه دیگر در این نشانی که وارد کرده‌اید قرار ندارد. شما خودکارانه به این محل فرستاده داده شده‌اید."
 
+#, fuzzy
 msgid "This account is no longer active. You have been logged out."
-msgstr ""
+msgstr "این حساب دیگر فعال نیست. شما از سامانه خارج شده‌اید."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
-msgstr ""
+msgstr "از آن‌جا که روی لینکی که در یکی از ایمیل‌های ما بوده کلیک کرده‌اید به این‌جا فرستاده‌شده‌اید. به دلیل مسائل امنیتی ما نشانی وب‌سایت‌های بیرونی را در ایمیل‌هایم قرار نمی‌دهیم. اگر مایلید به این نشانی بروید پیوند آن در زیر آمده است."
 
 msgid "You have been automatically logged out after being inactive for some time."
-msgstr ""
+msgstr "پس از گذر مدت زمانی غیرفعال بودن از سامانه بیرون فرستاده شده‌اید."
 
 #, python-format
 msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
-msgstr ""
+msgstr "شما چندین بار کوشیده‌اید که به سامانه متصل شوید. پس از %(duration)s می‌توانید دوباره به سامانه متصل شوید."
 
 msgid "A user requested to become a member of this team (admins only)"
-msgstr ""
+msgstr "یک کاربر درخواست عضویت در این گروه داشته است (تنها مدیران)"
 
 #, python-format
 msgid "%(sender_name)s requested to become a member"
-msgstr ""
+msgstr "%(sender_name)s خواسته که عضو بشود"
 
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other requested to become a member"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others requested to become a member"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(sender_name)s و %(count_minus_one)d کاربر دیگر درخواست عضویت داشته‌اند"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d کاربر دیگر درخواست عضویت داشته‌اند"
 
 msgid "You are an admin of this team"
-msgstr ""
+msgstr "شما یک مدیر این گروه هستید"
 
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
-msgstr ""
+msgstr "\"%(sender_name)s\" خواسته که عضو %(team_name)s باشد."
 
 msgid "Your membership request was accepted"
-msgstr ""
+msgstr "درخواست عضویت شما پذیرفته شده است"
 
 msgid "Membership request accepted"
-msgstr ""
+msgstr "درخواست عضویت پذیرفته شد"
 
 #, python-format
 msgid "Your membership request for %(team_name)s was accepted!"
-msgstr ""
+msgstr "درخواست عضویت شما در گروه %(team_name)s پذیرفته شده است!"
 
 msgid "Your membership request was declined"
-msgstr ""
+msgstr "درخواست عضویت شما رد شده بود"
 
 msgid "Membership request declined"
-msgstr ""
+msgstr "درخواست عضویت رد شده"
 
 #, python-format
 msgid "We're sorry, but your membership request for %(team_name)s was declined."
-msgstr ""
+msgstr "پوزش می‌خواهیم ولی درخواست عضویت شما برای %(team_name)s رد شده."
 
 #, python-format
 msgid "Your membership request for %(team_name)s was declined."
-msgstr ""
+msgstr "درخواست عضویت شما برای %(team_name)s رد شده."
 
 msgid "A user has accepted the invitation to this team (admins only)"
-msgstr ""
+msgstr "یک کاربر دعوت عضویت در این گروه را پذیرفته (تنها مدیران)"
 
 #, python-format
 msgid "%(sender_name)s accepted the invitation"
-msgstr ""
+msgstr "%(sender_name)s دعوت را پذیرفت"
 
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other accepted the invitation"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others accepted the invitation"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(sender_name)s و %(count_minus_one)d کاربر دیگر دعوت را پذیرفته‌اند"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d کاربر دیگر دعوت را پذیرفته‌اند"
 
 #, python-format
 msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
-msgstr ""
+msgstr "%(sender_name)s دعوت به %(team_name)s را پذیرفته است."
 
 msgid "A user has declined the invitation to this team (admins only)"
-msgstr ""
+msgstr "یک کاربر دعوت عضویت در این گروه را رد کرده (تنها مدیران)"
 
 #, python-format
 msgid "%(sender_name)s declined the invitation"
-msgstr ""
+msgstr "%(sender_name)s دعوت را رد کرد"
 
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other declined the invitation"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others declined the invitation"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(sender_name)s و %(count_minus_one)d کاربر دیگر درخواست عضویت را رد کرده‌اند"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d کاربر دیگر درخواست عضویت را رد کرده‌اند"
 
 #, python-format
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
-msgstr ""
+msgstr "%(sender_name)s دعوت به %(team_name)s را رد کرده است."
 
 msgid "Your participation application was accepted"
-msgstr ""
+msgstr "درخواست مشارکت شما پذیرفته شده است"
 
 msgid "You submitted an application"
-msgstr ""
+msgstr "درخواست شما فرستاده شد"
 
 #, python-format
 msgid "Your participation application for %(team_name)s was accepted!"
-msgstr ""
+msgstr "درخواست مشارکت شما در گروه %(team_name)s پذیرفته شده است!"
 
 msgid "Your participation application was declined"
-msgstr ""
+msgstr "درخواست مشارکت شما پذیرفته شده است"
 
 #, python-format
 msgid "Your participation application for %(team_name)s was declined!"
-msgstr ""
+msgstr "درخواست مشارکت شما در گروه %(team_name)s رد شده است!"
 
 msgid "Your participation application was waitlisted"
-msgstr ""
+msgstr "درخواست مشارکت شما در فهرست انتظار قرار داده شده است"
 
 #, python-format
 msgid "Your participation application for %(team_name)s was waitlisted!"
-msgstr ""
+msgstr "درخواست مشارکت شما در گروه %(team_name)s در فهرست انتظار قرارگرفته است!"
 
 msgid "You were made an admin of this team"
-msgstr ""
+msgstr "شما مدیر این گروه شده‌اید"
 
 #, python-format
 msgid "%(sender_name)s made you an admin"
-msgstr ""
+msgstr "%(sender_name)s شما را مدیر کرده"
 
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
-msgstr ""
+msgstr "%(sender_name)s شما را مدیر \"%(team_name)s\" روی %(portal_name)s کرده!"
 
 msgid "Your admin status for this team was revoked"
-msgstr ""
+msgstr "مقام مدیری شما باطل شد"
 
 #, python-format
 msgid "%(sender_name)s revoked your admin status"
-msgstr ""
+msgstr "%(sender_name)s مقام مدیری شما را لغو کرد"
 
 #, python-format
 msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
-msgstr ""
+msgstr "%(sender_name)s مقام مدیری شما در \"%(team_name)s\" روی %(portal_name)s را باطل کرد!"
 
 msgid "You were tagged in a post, document or other item"
-msgstr ""
+msgstr "شما در مطلب، سند یا مورد دیگر عنوان شده‌اید"
 
 #, python-format
 msgid "%(sender_name)s tagged you in %(object_name)s"
-msgstr ""
+msgstr "%(sender_name)s شما را در %(object_name)s عنوان شده‌اید"
 
 #, python-format
 msgid "%(sender_name)s tagged you in %(count)d items"
-msgstr ""
+msgstr "%(sender_name)s شما را در %(count)d مورد عنوان کرده"
 
 #, python-format
 msgid "%(sender_name)s tagged you in"
-msgstr ""
+msgstr "%(sender_name)s شما را در این‌جا عنوان کرده"
 
 #, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
-msgstr ""
+msgstr "شما در \"%(object_name)s\" در %(team_name)s عنوان شده‌اید."
 
 #, python-format
 msgid "%(sender_name)s invited you to join %(team_name)s"
-msgstr ""
+msgstr "%(sender_name)s به %(team_name)s دعوت شده‌اید"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
-msgstr ""
+msgstr "%(sender_name)s شما را به \"%(team_name)s\" روی %(portal_name)s دعوت کرده! <br/><br/> برای پیوستن، لطفن روی پیوند زیر کلیک کنید. شما به درگاه فرستاده خواهید شد، و آن‌جا می‌توانید دعوت‌نامه را ببینید و بپذیرید."
 
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
-msgstr ""
+msgstr "%(sender_name)s شما را برای عضویت در \"%(team_name)s\" روی درگاه %(portal_name)s دعوت کرده!"
 
 msgid "Accept invitation"
-msgstr ""
+msgstr "پذیرفتن دعوت‌نامه"
 
 msgid "View invitation"
-msgstr ""
+msgstr "دیدن دعوت‌نامه"
 
 #, python-format
 msgid "%(sender_name)s invited you"
-msgstr ""
+msgstr "%(sender_name)s شما را دعوت کرده"
 
 msgid "New link to the moved project/group"
-msgstr ""
+msgstr "پیوند نو به گروه/پروژه‌ی جابجا شده"
 
 #, python-format
 msgid "One of your projects/groups were moved to the portal \"%(portal_name)s\"! <br/><br/> Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>All of your old URLs will continue to work and redirect you to the correct page on the new portal."
-msgstr ""
+msgstr "یکی از گروه‌ها/پروژه‌های شما به درگاه \"%(portal_name)s\" جابجا شد! <br/><br/> حساب کاربری شما برای این درگاه برابر حساب شما در درگاه پیشین است - نیازی نیست حساب تازه‌ای بسازید!<br/><br/>همه‌ی URLهای پیشین همانند پیش‌تر کار می‌کنند و شما را به برگه‌ی صحیح روی درگاه نو می‌فرستند."
 
 #, python-format
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
-msgstr ""
+msgstr "\"%(team_name)s\" به %(portal_name)s جابجا شد!"
 
 msgid "A user created a new conference"
-msgstr ""
+msgstr "یک کاربر یک کنفرانس نو ساخته"
 
 #, python-format
 msgid "%(sender_name)s created the conference %(object_name)s"
-msgstr ""
+msgstr "%(sender_name)s کنفرانس %(object_name)s را ساخته"
 
 #, python-format
 msgid "%(sender_name)s created %(count)d conferences"
-msgstr ""
+msgstr "%(sender_name)s %(count)d کنفرانس ساخته"
 
 #, python-format
 msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgstr ""
+msgstr "یک کنفرانس نو: \"%(object_name)s\" در %(team_name)s آگهی شد."
 
 msgctxt "email campaign button label to apply for a conference"
 msgid "Apply now!"
 msgstr ""
 
 msgid "View conference"
-msgstr ""
+msgstr "کنفرانس را ببینید"
 
 #, python-format
 msgid "%(sender_name)s invited you to apply for the conference %(team_name)s"
-msgstr ""
+msgstr "%(sender_name)s شما را برای شرکت در کنفرانس %(team_name)s دعوت کرده"
 
 #, python-format
 msgid "%(sender_name)s invited you to apply for \"%(team_name)s\" on %(portal_name)s! <br/><br/> To apply, please click on the link below."
-msgstr ""
+msgstr "%(sender_name)s شما را برای شرکت در \"%(team_name)s\" روی %(portal_name)s! <br/><br/> برای شرکت، لطفن روی پیوند زیر کلیک کنید."
 
 #, python-format
 msgid "%(sender_name)s just created \"%(team_name)s\" on %(portal_name)s!"
-msgstr ""
+msgstr "%(sender_name)s همین الان %(team_name)s\" را روی %(portal_name)s ساخته است!"
 
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
-msgstr ""
+msgstr "%(sender_name)s همین الان یک حساب کاربری روی  %(portal_name)s ساخته‌!"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
-msgstr ""
+msgstr "%(sender_name)s همین الان ایده‌ی \"%(object_name)s\"را  روی  %(portal_name)s ساخته‌!"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
-msgstr ""
+msgstr "%(sender_name)s همین الان ایده‌ی  \"%(object_name)s\" را ساخته!"
 
 #, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
-msgstr ""
+msgstr "%(sender_name)s همین الان پروژه‌ی \"%(team_name)s\" را از ایده‌ای که شما دنبال می‌کنید ساخته!"
 
 #, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
-msgstr ""
+msgstr "%(sender_name)s همین الان پروژه‌ی \"%(team_name)s را از ایده‌ای که شما دنبال می‌کنید روی %(portal_name)s ساخته! <br/><br/> برای این‌که یک نگاهی بیاندازید، لطفن روی پیوند زیر کلیک کنید. آن‌جا می‌توانید ببینید که آیا می‌خواهید به پروژه بپیوندید یا نه."
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
@@ -567,62 +571,62 @@ msgid "Persian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
 msgid "Belarus"
-msgstr ""
+msgstr "بلاروس"
 
 msgctxt "Multi-Address Field Subfield"
 msgid "Address Title"
-msgstr ""
+msgstr "عنوان نشانی"
 
 msgctxt "Multi-Address Field Subfield"
 msgid "Address Line 1"
-msgstr ""
+msgstr "خط ۱ نشانی"
 
 msgctxt "Multi-Address Field Subfield"
 msgid "Address Line 2"
-msgstr ""
+msgstr "خط ۲ نشانی"
 
 msgctxt "Multi-Address Field Subfield"
 msgid "Address Line 3"
-msgstr ""
+msgstr "خط ۳ نشانی"
 
 msgctxt "Multi-Address Field Subfield"
 msgid "Street and Number"
-msgstr ""
+msgstr "خیابان و شماره"
 
 msgctxt "Multi-Address Field Subfield"
 msgid "City"
-msgstr ""
+msgstr "شهر"
 
 msgctxt "Multi-Address Field Subfield"
 msgid "State"
-msgstr ""
+msgstr "ایالت"
 
 msgctxt "Multi-Address Field Subfield"
 msgid "Country"
-msgstr ""
+msgstr "کشور"
 
 msgctxt "Multi-Address Field Subfield"
 msgid "Phone Number"
-msgstr ""
+msgstr "شماره تلفن"
 
 msgctxt "Multi-Address Field Subfield"
 msgid "Mobile Phone Number"
-msgstr ""
+msgstr "شماره‌ی تلفن همراه"
 
 msgid "(No choice)"
-msgstr ""
+msgstr "(هیچ گزینه‌ای)"
 
 msgid "email address"
-msgstr ""
+msgstr "نشانی ایمیل"
 
 msgid "first name"
-msgstr ""
+msgstr "نام"
 
 msgid "This email address already has a registered user!"
-msgstr ""
+msgstr "این نشانی ایمیل همین الان یک کاربر ثبت‌نام‌شده دارد!"
 
 msgid "Attachments"
-msgstr ""
+msgstr "ضمیمه‌ها"
 
 msgid "Type the title and/or type of attachment"
 msgstr ""
@@ -631,234 +635,235 @@ msgid "Sort_field"
 msgstr ""
 
 msgid "Enter a number for sort order"
-msgstr ""
+msgstr "یک شماره برای دسته‌بندی وارد کنید"
 
 msgid "Widget label"
-msgstr ""
+msgstr "برچسب ویجت"
 
 msgid "Enter a title for the widget"
-msgstr ""
+msgstr "یک عنوان برای ویجت وارد کنید"
 
 msgid "Widget icon"
-msgstr ""
+msgstr "نماد ویجت"
 
 msgid "A font-awesome icon for the widget"
-msgstr ""
+msgstr "یک نماد font-awesome برای ویجت"
 
 msgid "Link label"
-msgstr ""
+msgstr "نماد پیوند"
 
 msgid "Enter a label for the widget-button"
-msgstr ""
+msgstr "یک برچسب برای کلید-ویجت وارد کنید"
 
 msgid "Text"
-msgstr ""
+msgstr "نوشته"
 
 msgid "Enter a description"
-msgstr ""
+msgstr "یک تعریف وارد کنید"
 
 msgid "All"
-msgstr ""
+msgstr "همه"
 
 msgid "Not assigned"
-msgstr ""
+msgstr "واگذار نشده"
 
 msgid "Any date"
-msgstr ""
+msgstr "هر تاریخی"
 
 msgid "Today"
-msgstr ""
+msgstr "امروز"
 
 msgid "This week"
-msgstr ""
+msgstr "این هفته"
 
 msgid "Next week"
-msgstr ""
+msgstr "هفته‌ی بعد"
 
 msgid "Next month"
-msgstr ""
+msgstr "ماه بعد"
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
-msgstr ""
+msgstr "به نظر نمی‌رسد این پیوند Youtube یا Vimeo معتبر باشد!"
 
 msgid "This doesn't seem to be a Twitter username!"
-msgstr ""
+msgstr "به نظر نمی‌رسد این یک نام کاربری Twitter معتبر باشد!"
 
 msgid "This doesn't seem to be a valid widget ID or embed HTML code from Twitter!"
-msgstr ""
+msgstr "به‌نظر نمی‌رسد که این یک شناسه‌ی ویجت یا کد HTML  درونه‌ای معتبر از سوی Twitter باشد!"
 
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
-msgstr ""
+msgstr "این به نظر یک پیوند معتبر Flickr Gallery به نظر نمی‌رسد! چنین پیوندی باید به شکل روبرو باشد: \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 
 msgid "Users"
-msgstr ""
+msgstr "کاربرها"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
-msgstr ""
+msgstr "گروه‌ها"
 
 msgid "Please remove the whitespace from '{}'"
-msgstr ""
+msgstr "لطفن فضاهای خالی را از '{}' پاک کنید"
 
 msgid "Names must be unique. You added '{}' more then once to your CSV. Please change the name."
-msgstr ""
+msgstr "نام‌ها باید بی‌همتا باشند. شما '{}' را بیش‌ از یک بار به CSV افزوده‌اید. لطفن نام را تغییر دهید."
 
 msgid "Can't find workshop with slug '{}'"
-msgstr ""
+msgstr "کارگروهی با آدرس کاربرپسند '{}' یافت نمی‌شود"
 
 msgid "This is not a valid CSV File"
-msgstr ""
+msgstr "این یک پرونده‌ی CSV معتبر نیست"
 
 msgid "CSV could not be parsed. Please use ',' or ';' as delimiter."
-msgstr ""
+msgstr "CSV تجزبه نشد. لطفن  ','  یا ';' را به عنوان جداساز به‌کار ببرید."
 
 msgid "Name"
-msgstr ""
+msgstr "نام"
 
 msgid "The selected choice was not found or invalid! Please choose a different value!"
-msgstr ""
+msgstr "گزینه‌ی که برگزیده‌اید پیدا نشد و یا نامعتبر بود! لطفن مقدار دیگری برگزینید!"
 
 msgid "Limit to teams"
-msgstr ""
+msgstr "به گروه‌ها محدود کنید"
 
 msgid "My teams"
-msgstr ""
+msgstr "گروه‌های من"
 
 msgid "Other teams"
-msgstr ""
+msgstr "گروه‌های دیگر"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 msgid "Like"
-msgstr ""
+msgstr "پسندیدن"
 
 msgid "Persons"
-msgstr ""
+msgstr "افراد"
 
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
-msgstr ""
+msgstr "لطفن یک ایمیل و گذرواژه‌‌ی صحیح وارد کنید. توجه داشته باشید که هر دو بخش ممکن است به حروف بزرگ و کوچک حساس باشد."
 
 msgid "Your Web browser doesn't appear to have cookies enabled. Cookies are required for logging in."
-msgstr ""
+msgstr "به نظر می‌رسد در مرورگر وب شما کوکی‌ها فعال نشده‌اند. کوکی‌ها برای وارد شدن به سامانه لازم‌اند."
 
 msgid "This account is inactive."
-msgstr ""
+msgstr "این حساب کاربری غیرفعال است."
 
 #, python-brace-format
 msgid "Some required columns are not present in the CSV: {missing_headers}!"
-msgstr ""
+msgstr "برخی از ستون‌های لازم در CSV نمی‌باشند: {missing_headers}!"
 
 msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
-msgstr ""
+msgstr "ردیف‌ها در این سطور تعداد موارد مشابه با سرآیند ({len(processed_header)})  را در خود ندارند: {\", \".join(mismatched_rows)}!"
 
 msgid "Some CSV headers did not have a name!"
-msgstr ""
+msgstr "بعضی سرآیند‌های CSV نام نداشتند!"
 
 msgid "Hello"
-msgstr ""
+msgstr "درود"
 
 msgid "Click the following link to change which emails you receive:"
-msgstr ""
+msgstr "روی پیوند زیر کلیک کنید تا ایمیل‌هایی که دریافت می‌کنید را تغییر دهید:"
 
 msgid "Notification Preferences"
-msgstr ""
+msgstr "ترجیحات آگاه‌سازی"
 
 msgid "Click the following link to never receive any more emails from us:"
-msgstr ""
+msgstr "روی پیوند زیر کلیک کنید تا دیگر هیچ ایمیلی از سوی ما دریافت نکنید:"
 
 msgid "Unsubscribe"
-msgstr ""
+msgstr "پایان دادن به اشتراک"
 
 msgid "My Dashboard"
-msgstr ""
+msgstr "داشبورد من"
 
 msgid "Tiny (50 x *)"
-msgstr ""
+msgstr "ریز (۵۰ x *)"
 
 msgid "Very Small (100 x *)"
-msgstr ""
+msgstr "خیلی کوچک (x۱۰۰*)"
 
 msgid "Smaller (150 x *)"
-msgstr ""
+msgstr "کوچک‌تر (۱۵۰ x *)"
 
 msgid "Small (200 x *)"
-msgstr ""
+msgstr "کوچک (۲۰۰ x *)"
 
 msgid "Medium-small (250 x *)"
-msgstr ""
+msgstr "متوسط-کوچک (۲۵۰ x *)"
 
 msgid "Medium (300 x *)"
-msgstr ""
+msgstr "متوسط (۳۰۰ x *)"
 
 msgid "Large (400 x *)"
-msgstr ""
+msgstr "بزرگ (۴۰۰ x *)"
 
 msgid "Larger (500 x *)"
-msgstr ""
+msgstr "بزرگ‌تر (۵۰۰ x *)"
 
 msgid "Very large (650 x *)"
-msgstr ""
+msgstr "خیلی بزرگ (۶۵۰ x *)"
 
 msgid "Extra large (800 x *)"
-msgstr ""
+msgstr "بسیار (۸۰۰ x *)"
 
 msgid "XXL (1200 x *)"
-msgstr ""
+msgstr "بسیاربسیاربزرگ(x۱۲۰۰*)"
 
 msgid "Portal"
-msgstr ""
+msgstr "درگاه"
 
 msgid "this user will enter the BBB presenter mode for this conversation"
-msgstr ""
+msgstr "این کاربر به حالت ارائه‌کننده‌ی BBB در این مکالمه وارد می‌شود"
 
 msgid "room name or title"
-msgstr ""
+msgstr "نام یا عنوان اتاق"
 
 msgid "the password set to enter the room as a moderator"
-msgstr ""
+msgstr "گذرواژه‌ی تعیین‌شده برای ورود به اتاق به عنوان مدیر"
 
 msgid "the password set to enter the room as a attendee"
-msgstr ""
+msgstr "گذرواژه‌ی تعیین‌شده برای ورود به اتاق به عنوان شرکت‌کننده"
 
 msgid "the rooms welcome message"
-msgstr ""
+msgstr "پیام خوش‌آمدگویی در اتاق‌ها"
 
 msgid "the welcome message, that is displayed to attendees"
-msgstr ""
+msgstr "پیام خوش‌آمدگویی که به شرکت‌کننده‌ها نشان‌داده‌می‌شود"
 
 msgid "number for dialing into the conference via telephone"
-msgstr ""
+msgstr "شماره‌ای که می‌شود با آن با تلفن تماس گرفت و وارد کنفرانس شد"
 
 msgid "pin to enter for telephone participants"
-msgstr ""
+msgstr "گذرواژه برای شرکت‌کننده‌هایی که با تلفن وارد می‌شوند"
 
 msgid "options for the room, that are represented in the bigbluebutton API"
-msgstr ""
+msgstr "گزینه‌ها برای اتاقی که در واسط برنامه‌نویسی bigbluebutton نمایش داده می‌شود"
 
 msgid "Room Type"
-msgstr ""
+msgstr "نوع اتاق"
 
 msgid "BBB ROOM"
-msgstr ""
+msgstr "اتاق BBB"
 
 msgid "Visitor"
-msgstr ""
+msgstr "ملاقات‌کننده"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Group"
-msgstr ""
+msgstr "گروه"
 
 msgid "Created"
-msgstr ""
+msgstr "ساخته‌شده"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Title"
-msgstr ""
+msgstr "عنوان"
 
 msgid "Last edited"
-msgstr ""
+msgstr "آخرین بار ویرایش شده"
 
 msgid "Last edited by"
-msgstr ""
+msgstr "آخرین بار ویرایش شده توسط"
 
 msgid "Cosinnus CMS Micropage"
 msgstr ""
@@ -867,106 +872,107 @@ msgid "Cosinnus Micropages"
 msgstr ""
 
 msgid "BBB Server"
-msgstr ""
+msgstr "سرور BBB"
 
 msgid "BBB Server for Premium Conferences"
-msgstr ""
+msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
 
 msgid "Cosinnus Conference Setting"
-msgstr ""
+msgstr "تنظیم کنفرانس Cosinnus"
 
 msgid "Cosinnus Conference Settings"
-msgstr ""
+msgstr "تنظیمات کنفرانس Cosinnus"
 
 msgid "Lobby"
-msgstr ""
+msgstr "سرسرا"
 
 msgid "Stage"
-msgstr ""
+msgstr "صحنه"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Workshops"
-msgstr ""
+msgstr "کارگاه‌ها"
 
 msgid "Discussions"
-msgstr ""
+msgstr "بحث‌ها"
 
 msgid "Coffee Tables"
-msgstr ""
+msgstr "میزهای قهوه"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Results"
-msgstr ""
+msgstr "نتایج"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Participants"
-msgstr ""
+msgstr "شرکت‌کنندگان"
 
 msgid "Team"
-msgstr ""
+msgstr "گروه"
 
 msgid "Slug"
-msgstr ""
+msgstr "نشانی کاربرپسند"
 
 msgid "Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!"
-msgstr ""
+msgstr "زمانی که این نشانی کاربرپسند را دستی تغییر می‌دهید بسیار مراقب باشید! امکان دارد بسیاری تاثیرات جانبی همچون ( اشکال در مسیریابی یا از این دست) رخ دهند!"
 
 msgid "Short Description"
-msgstr ""
+msgstr "تعریف کوتاه"
 
 msgid "Conference Room Type"
-msgstr ""
+msgstr "نوع اتاق کنفرانس"
 
 msgid "Is visible"
-msgstr ""
+msgstr "آشکار است"
 
 msgid "Sorting index"
-msgstr ""
+msgstr "فهرست دسته‌بندی می‌شود"
 
 msgid "Creator"
-msgstr ""
+msgstr "سازنده"
 
 msgid "Last modified"
-msgstr ""
+msgstr "آخرین بار ویرایش شده"
 
 msgid "RocketChat room id"
-msgstr ""
+msgstr "شناسه‌ی اتاق RocketChat"
 
 msgid "RocketChat room name"
-msgstr ""
+msgstr "نام اتاق RocketChat"
 
 msgid "Show chat"
-msgstr ""
+msgstr "گفتگو را نشان دهید"
 
 msgid "Allow users to create new coffee tables"
-msgstr ""
+msgstr "به کاربر اجازه دهید یک میز قهوه‌ی تازه بسازند"
 
 msgid "Maximum Coffee Table Participants"
-msgstr ""
+msgstr "بیش‌ترین شمار مشارکت‌کننده‌های میز قهوه"
 
 msgid "Result Project"
-msgstr ""
+msgstr "پروژه‌ی نتیجه"
 
 msgid "Conference Room"
-msgstr ""
+msgstr "اتاق کنفرانس"
 
 msgid "Conference Rooms"
-msgstr ""
+msgstr "اتاق‌های کنفرانس"
 
 msgid "Slug must not be empty."
-msgstr ""
+msgstr "نشانی کاربرپسند نمی‌تواند خالی باشد."
 
 msgid "Conditiions for participation"
-msgstr ""
+msgstr "شرایط برای شرکت‌کنندگان"
 
+#, fuzzy
 msgid "Shown as a download link near the checkbox to accept the conditions."
-msgstr ""
+msgstr "به عنوان یک پیوند دانلود کنار خانه‌ی خالی به‌منظور پذیرش شرایط نمایش داده شده."
 
 msgid "Participation Management"
-msgstr ""
+msgstr "مدیریت مشارکت"
 
 msgid "Request user information"
-msgstr ""
+msgstr "درخواست اطلاعات کاربر"
 
 msgid "Pre-filled content for the information field"
 msgstr ""
@@ -1118,53 +1124,53 @@ msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 
 msgid "Team membership"
-msgstr ""
+msgstr "عضویت گروه"
 
 msgid "Team memberships"
-msgstr ""
+msgstr "عضویت‌های گروه"
 
 msgid "Team Invite for Unregistered User"
-msgstr ""
+msgstr "دعوت‌های گروه برای کاربر ثبت‌نشده"
 
 msgid "Team Invites for Unregistered Users"
-msgstr ""
+msgstr "دعوت‌های گروه برای کاربران ثبت‌نشده"
 
 msgid "Portal membership"
-msgstr ""
+msgstr "عضویت در درگاه"
 
 msgid "Portal memberships"
-msgstr ""
+msgstr "عضویت‌ها در درگاه"
 
 msgid "Portals"
-msgstr ""
+msgstr "درگاه‌ها"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Description"
-msgstr ""
+msgstr "تعریف"
 
 msgid "Support Email"
-msgstr ""
+msgstr "ایمیل پشتیبانی"
 
 msgid "This email is shown to users as contact address on many pages"
-msgstr ""
+msgstr "این ایمیل روی برگه‌های بسیاری به عنوان نشانی تماس به کاربران نمایش داده می‌شود"
 
 msgid "Website"
-msgstr ""
+msgstr "وب‌سایت"
 
 msgid "Welcome-Email sending enabled"
-msgstr ""
+msgstr "فرستادن ایمیل خوش‌آمدگویی فعال است"
 
 msgid "Welcome-Email Text"
-msgstr ""
+msgstr "متن ایمیل وب‌سایت"
 
 msgid "If set and enabled, this text will be sent to all new users after their registration is complete."
 msgstr ""
 
 msgid "Public"
-msgstr ""
+msgstr "همگانی"
 
 msgid "Associated Site"
-msgstr ""
+msgstr "سایت پیوسته"
 
 msgid "Http/Https Protocol (overrides settings)"
 msgstr ""
@@ -1944,107 +1950,107 @@ msgid "Application name"
 msgstr ""
 
 msgid "Widget name"
-msgstr ""
+msgstr "نام ویجت"
 
 msgid "Widget Type"
-msgstr ""
+msgstr "نوع ویجت"
 
 msgid "Sort field"
-msgstr ""
+msgstr "زمینه را دسته‌بندی کن"
 
 msgid "Widget configuration"
-msgstr ""
+msgstr "تنظیم ویجت"
 
 msgid "Widget configurations"
-msgstr ""
+msgstr "تنظیمات ویجت"
 
 msgid "Either team or user must be defined."
-msgstr ""
+msgstr "یا گروه و یا کاربر باید تعریف بشوند."
 
 msgid "key"
-msgstr ""
+msgstr "کلید"
 
 msgid "value"
-msgstr ""
+msgstr "مقدار"
 
 msgid "Widget configuration item"
-msgstr ""
+msgstr "مورد تنظیم ویجت"
 
 msgid "Widget configuration items"
-msgstr ""
+msgstr "موارد تنظیم ویجت"
 
 msgid "select this page"
-msgstr ""
+msgstr "این برگه را انتخاب کن"
 
 msgid "edit this page"
-msgstr ""
+msgstr "این برگه را ویرایش کن"
 
 msgid "edit"
-msgstr ""
+msgstr "ویرایش"
 
 msgid "insert above"
-msgstr ""
+msgstr "به بالا وارد کن"
 
 msgid "insert below"
-msgstr ""
+msgstr "به پایین وارد کن"
 
 msgid "insert inside"
-msgstr ""
+msgstr "به درون وارد کن"
 
 msgid "softroot"
 msgstr ""
 
 msgid "home"
-msgstr ""
+msgstr "خانه"
 
 #, python-format
 msgid "Edit this page in %(language)s "
-msgstr ""
+msgstr "این برگه را در برگردان %(language)s "
 
 msgid "Cut"
-msgstr ""
+msgstr "بریدن"
 
 msgid "cut"
-msgstr ""
+msgstr "بریدن"
 
 msgid "Copy"
-msgstr ""
+msgstr "نسخه‌برداری"
 
 msgid "copy"
-msgstr ""
+msgstr "نسخه‌برداری"
 
 msgid "Add Child"
 msgstr ""
 
 msgid "add"
-msgstr ""
+msgstr "افزودن"
 
 msgid "Delete"
-msgstr ""
+msgstr "پاک کردن"
 
 msgid "delete"
-msgstr ""
+msgstr "پاک کردن"
 
 msgid "Unpublish"
-msgstr ""
+msgstr "نامنتشر"
 
 msgid "Publish"
-msgstr ""
+msgstr "منتشر"
 
 msgid "View on page"
-msgstr ""
+msgstr "روی برگه نشان بده"
 
 msgid "view"
-msgstr ""
+msgstr "نشان دادن"
 
 msgid "View reported item..."
-msgstr ""
+msgstr "مورد گزارش‌شده را نشان بده..."
 
 msgid "Edit reported item..."
-msgstr ""
+msgstr "مورد گزارش‌شده را ویرایش کن..."
 
 msgid "Delete reported item..."
-msgstr ""
+msgstr "مورد گزارش‌شده را پاک کن..."
 
 msgid "(The reported item has been deleted.)"
 msgstr ""
@@ -2631,34 +2637,34 @@ msgid "We will send them an email asking them to sign up and join %(group_name)s
 msgstr ""
 
 msgid "E-Mail Addresses"
-msgstr ""
+msgstr "نشانی‌های ایمیل"
 
 msgid "(one per line or comma-seperated)"
-msgstr ""
+msgstr "(یکی در هرخط یا با ویرگول ازهم جداشده)"
 
 msgid "Personal Message (optional)"
-msgstr ""
+msgstr "پیام شخصی (گزینشی)"
 
 msgid "Include a personal message (optional)"
-msgstr ""
+msgstr "یک پیام شخصی قرار دهید (گزینشی)"
 
 msgid "Invite new Members"
-msgstr ""
+msgstr "کاربران جدید دعوت کنید"
 
 msgid "Invite"
-msgstr ""
+msgstr "دعوت"
 
 msgid "Shown in my projects..."
-msgstr ""
+msgstr "در پروژه‌های من نشان بده..."
 
 msgid "Show in my projects..."
-msgstr ""
+msgstr "در پروژه‌های من نشان بده..."
 
 msgid "Disable editor"
-msgstr ""
+msgstr "ویرایش‌گر را غیرفعال کن"
 
 msgid "Current File"
-msgstr ""
+msgstr "پوشه‌ی فعلی"
 
 msgid "Application"
 msgstr ""
@@ -3337,41 +3343,41 @@ msgid "Invite registered users..."
 msgstr ""
 
 msgid "Invite a member"
-msgstr ""
+msgstr "یک عضو دعوت کن"
 
 msgid "Enter a user name or email to find users to invite..."
-msgstr ""
+msgstr "یک نام کاریری یا ایمیل وارد کنید تا کاربران را دعوت کنید..."
 
 msgid "Invite users"
-msgstr ""
+msgstr "کاربران را دعوت کن"
 
 msgid "Invited Members"
-msgstr ""
+msgstr "کاربران دعوت‌نامه"
 
 msgid "Revoke Invitation"
-msgstr ""
+msgstr "دعوت را باطل کن"
 
 msgid "Decline Invitation"
-msgstr ""
+msgstr "دعوت را رد کن"
 
 msgid "Accept Invitation"
-msgstr ""
+msgstr "دعوت را بپذیرید"
 
 msgid "Invited to be a member"
-msgstr ""
+msgstr "به عضویت دعوت کن"
 
 #, python-format
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
-msgstr ""
+msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
 
 msgid "Revoke Invitation for Member"
-msgstr ""
+msgstr "دعوت‌نامه را یرای کاربر باطل کن"
 
 msgid "Do you really want to decline the invitation?"
-msgstr ""
+msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
 
 msgid "There are no pending invitations."
-msgstr ""
+msgstr "هیچ دعوت‌نامه‌ی معوقی وجود ندارد."
 
 msgid "Invite unregistered users to apply..."
 msgstr ""
@@ -7027,17 +7033,17 @@ msgid "No validated CSV upload found to start the import from!"
 msgstr ""
 
 msgid "Unknown POST action!"
-msgstr ""
+msgstr "کار POST ناشناخته!"
 
 msgid "The following columns were not recognized and were ignored"
-msgstr ""
+msgstr "ستون‌های پیش رو تشخیص داده نشده و نادیده‌گرفته شدند"
 
 msgid "The import was successfully archived."
-msgstr ""
+msgstr "آن‌چه وارد شده با موفقیت بایگانی شد."
 
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
-msgstr ""
+msgstr "در حال حاضر شما عضو %s نیستید! اگر مایلید می‌توانید در زیر درخواست عضویت بفرستید."
 
 msgid "Your changes have been saved."
-msgstr ""
+msgstr "تغییرات‌تان ذخیره شده‌اند."
