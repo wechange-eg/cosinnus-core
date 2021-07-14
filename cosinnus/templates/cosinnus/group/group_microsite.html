@@ -436,33 +436,8 @@
 					    {% endif %}
 					{% endfor %}
 				{% endif %}
-				
-				
-			{% endblock microsite_left_column %}
-		</div> <!-- col-md-6 -->
-		
-		<div class="col-md-6">
-			{% block microsite_right_column %}
-			
-				{# News box #}
-				{% if not group|is_app_deactivated:'cosinnus_note' %}
-					<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
-			            <ul class="media-list">
-			                <li class="media">
-			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-			                    <div class="media-body">
-			                        {% trans "News" %}
-			                    </div>
-			                </li>
-			            </ul>
-			        </div><!-- btn -->
-			        <div class="white-content no-padding">
-			        	<iframe src="{% group_url 'cosinnus:note:embed' group=group %}" style="width: 100%; height: 350px;" frameborder=0></iframe>
-					</div>
-				{% endif %}
-				
-				
-                {% if SETTINGS.COSINNUS_MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE %}
+
+				{% if SETTINGS.COSINNUS_MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE %}
 					{% if group.twitter_username %}
 						{# Twitter username feed box #}
 						<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
@@ -558,6 +533,30 @@
 		                {% endif %}
 					{% endif %}
 				{% endwith %}
+				
+				
+			{% endblock microsite_left_column %}
+		</div> <!-- col-md-6 -->
+		
+		<div class="col-md-6">
+			{% block microsite_right_column %}
+			
+				{# News box #}
+				{% if not group|is_app_deactivated:'cosinnus_note' %}
+					<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    <div class="media-body">
+			                        {% trans "News" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			        <div class="white-content no-padding">
+			        	<iframe src="{% group_url 'cosinnus:note:embed' group=group %}" style="width: 100%; height: 1000px;" frameborder=0></iframe>
+					</div>
+				{% endif %}
 				
 				
 			{% endblock microsite_right_column %}
