@@ -603,6 +603,8 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
         help_text='A dict storage for all choice lists for the dynamic fields of type `DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT`',
         encoder=DjangoJSONEncoder)
 
+    userprofile_default_description = models.TextField(verbose_name=_('Default userprofile description'), blank=True, null=True)
+
     conference_settings_assignments = GenericRelation('cosinnus.CosinnusConferenceSettings')
 
     # exact time when last digest was sent out for each of the period settings
