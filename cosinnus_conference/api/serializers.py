@@ -241,7 +241,7 @@ class ConferenceParticipant(TranslateableModelSerializer):
         return obj.cosinnus_profile.media_tag.location
 
 
-class ConferenceEventRoomSerializer(serializers.ModelSerializer):
+class ConferenceEventRoomSerializer(TranslateableModelSerializer):
     type = serializers.SerializerMethodField()
 
     class Meta(object):
