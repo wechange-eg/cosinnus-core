@@ -177,6 +177,10 @@ class CosinnusConf(AppConf):
     # Set up at least one device at <host>/admin/otp_totp/totpdevice/ before activating this setting!
     ADMIN_2_FACTOR_AUTH_ENABLED = False
     
+    # if True while `ADMIN_2_FACTOR_AUTH_ENABLED` is enabled,
+    # the 2fa-check will extend to the /administration/ area, which it doesn't usually
+    ADMIN_2_FACTOR_AUTH_INCLUDE_ADMINISTRATION_AREA = False
+    
     # if True while `ADMIN_2_FACTOR_AUTH_ENABLED` is enabled, will force 2-factor-authentication
     # for superusers and portal on the ENTIRE site, and not only on the /admin/ backend
     ADMIN_2_FACTOR_AUTH_STRICT_MODE = False
