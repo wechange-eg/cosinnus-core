@@ -226,7 +226,7 @@ class UserCreateView(CreateView):
 
     message_success = _('Your account "%(user)s" was registered successfully. Welcome to the community!')
     message_success_inactive = _('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')
-    message_success_email_verification = _('User "%(email)s" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in.')
+    message_success_email_verification = _('Thank you for signing up and welcome to the platform! We sent an email to your address "%(email)s" - please click the link contained in it to verify your email address!')
     
     def get_initial(self):
         """ Allow pre-populating managed tags on signup using URL params /signup/?mtag=tag1,tag2 """
@@ -275,25 +275,23 @@ class UserCreateView(CreateView):
             messages.success(self.request, self.message_success_inactive % {'user': user.email, 'email': user.email})
             # since anonymous users have no session, show the success message in the template via a flag
             ret = HttpResponseRedirect(redirect_with_next(reverse('login'), self.request, 'validate_msg=admin'))
+        else:
+            # if registrations are open, the user may log in immediately. set the email_verified flag depending
+            # on portal settings
+            if CosinnusPortal.get_current().email_needs_verification:
+                set_user_email_to_verify(user, user.email, self.request)
+                messages.success(self.request, self.message_success_email_verification % {'email': user.email})
+            else:
+                user_profile = user.cosinnus_profile
+                user_profile.email_verified = True
+                user_profile.save()
+                _send_user_welcome_email_if_enabled(user)
+                messages.success(self.request, self.message_success % {'user': user.email})
             
-        # scramble this users email so he cannot log in until he verifies his email, if the portal has this enabled
-        if CosinnusPortal.get_current().email_needs_verification:
-            
-            with transaction.atomic():
-                # scramble actual email so the user cant log in but can be found in the admin
-                original_user_email = user.email  # don't show the scrambled emai later on
-                user.email = '__unverified__%s__%s' % (str(uuid1())[:8], original_user_email)
-                user.save()
-                set_user_email_to_verify(user, original_user_email, self.request)
-            
-            messages.success(self.request, self.message_success_email_verification % {'user': original_user_email, 'email': original_user_email})
-            # since anonymous users have no session, show the success message in the template via a flag
-            ret = HttpResponseRedirect(redirect_with_next(reverse('login'), self.request, 'validate_msg=email'))
-            
-        if not CosinnusPortal.get_current().users_need_activation and not CosinnusPortal.get_current().email_needs_verification:
-            messages.success(self.request, self.message_success % {'user': user.email})
+            # log the user in
             user.backend = 'cosinnus.backends.EmailAuthBackend'
-            _send_user_welcome_email_if_enabled(user)
+            login(self.request, user)
+            
             # send user account creation signal, the audience is empty because this is a moderator-only notification
             user_profile = user.cosinnus_profile
             # need to attach a group to notification objects
@@ -301,7 +299,7 @@ class UserCreateView(CreateView):
             forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
             setattr(user_profile, 'group', forum_group) 
             cosinnus_notifications.user_account_created.send(sender=self, user=user, obj=user_profile, audience=[])
-            login(self.request, user)
+            
         
         # send user registration signal
         signals.user_registered.send(sender=self, user=user)
@@ -616,6 +614,7 @@ def deny_user(request, user_id):
 
 def verifiy_user_email(request, email_verification_param):
     """ Verify an email by comparing a token sent only to this email with the one saved in the user profile during registration (or email change) """
+    redirect_url = reverse('cosinnus:profile-detail')
     user_id, token = email_verification_param.split('-', 1)
     
     try:
@@ -623,49 +622,47 @@ def verifiy_user_email(request, email_verification_param):
         user = USER_MODEL.objects.get(id=user_id)
     except (USER_MODEL.DoesNotExist, ValueError,):
         messages.error(request, _('The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired.'))
-        return redirect(reverse('login'))
+        return redirect(redirect_url)
+    
+    if request.user.is_authenticated and request.user.id != user.id:
+        messages.error(request, _('The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!'))
+        return redirect(redirect_url) 
     
     profile = user.cosinnus_profile
     target_email = profile.settings.get(PROFILE_SETTING_EMAIL_TO_VERIFY, None)
     target_token = profile.settings.get(PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN, None)
     if not target_email or not target_token:
         messages.error(request, _('The email for this account seems to already have been confirmed!'))
-        return redirect(reverse('login'))    
+        return redirect(redirect_url)    
     
     if not token == target_token:
         messages.error(request, _('The link you supplied for the email confirmation is no longer valid!'))
-        return redirect(reverse('login'))
+        return redirect(redirect_url)
     
-    # check if target email doesn't already exist:
-    if target_email and get_user_model().objects.filter(email__iexact=target_email).count():
+    # check if target email doesn't already exist in another user instance:
+    if target_email and get_user_model().objects.exclude(id=user_id).filter(email__iexact=target_email).count():
         # duplicate email is bad
         messages.error(request, _('The email you are trying to confirm has already been confirmed or belongs to another user!'))
-        return redirect(reverse('login'))
+        return redirect(redirect_url)
     
-    # everything seems to be in order, swap the scrambled with the real email
+    user_was_verified_before = profile.email_verified
+    # everything seems to be in order, swap the old with the real email
     with transaction.atomic():
         user.email = target_email
         user.save()
         del profile.settings[PROFILE_SETTING_EMAIL_TO_VERIFY]
         del profile.settings[PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN]
+        profile.email_verified = True
         profile.save()
     
     if user.is_active:
-        messages.success(request, _('Your email address %(email)s was successfully confirmed! Welcome to the community!') % {'email': user.email})
-        user.backend = 'cosinnus.backends.EmailAuthBackend'
-        _send_user_welcome_email_if_enabled(user)
-        # send user account creation signal, the audience is empty because this is a moderator-only notification
-        user_profile = user.cosinnus_profile
-        # need to attach a group to notification objects
-        forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
-        forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
-        setattr(user_profile, 'group', forum_group) 
-        cosinnus_notifications.user_account_created.send(sender=user, user=user, obj=user_profile, audience=[])
-        login(request, user)
-        return redirect(reverse('cosinnus:profile-detail'))
+        messages.success(request, _('Your email address %(email)s was successfully confirmed!') % {'email': user.email})
+        if not user_was_verified_before:
+            _send_user_welcome_email_if_enabled(user)
+        return redirect(redirect_url)
     else:
         messages.success(request, _('Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!') % {'email': user.email})
-        return redirect(reverse('login'))
+        return redirect(redirect_url)
     
 
 class UserDetailView(DetailView):
@@ -839,6 +836,7 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
         @param user_has_just_registered: If this True, a welcome email will be sent. 
             If False, an email change email will be sent. """
     
+    new_email = new_email.strip().lower()
     # the verification param for the URL consists of <user-id>-<uuid>, where the uuid is saved to the user's profile
     a_uuid = uuid1()
     verification_url_param = '%d-%s' % (user.id, a_uuid)
@@ -849,19 +847,30 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
     # message user for email verification
     if request:
         data = get_common_mail_context(request)
+        user_verification_url = CosinnusPortal.get_current().get_domain() +\
+                reverse('cosinnus:user-verifiy-email', kwargs={'email_verification_param': verification_url_param}) +\
+                redirect_with_next('', request)
         data.update({
             'user':user,
             'user_email':new_email,
-            'verification_url_param':verification_url_param,
-            'next': redirect_with_next('', request),
+            'user_verification_url': user_verification_url,
         })
-        template = 'cosinnus/mail/user_email_verification%s.html' % ('_onchange' if not user_has_just_registered else '')
+        subject = _('Please verify your email address for %(site_name)s!') % data
         
-        data.update({
-            'content': render_to_string(template, data),
-        })
-        subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
-        send_mail_or_fail_threaded(new_email, subj_user, None, data)
+        if user_has_just_registered:
+            text = str(_('You have just registered an account at {{ site_name }}. We\'re happy to see you!') % data) + '\n\n'
+        else:
+            text = str(_('You have just changed your email address at {{ site_name }}.') % data) + '\n\n'
+        text += str(_('Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):') % data) + '\n\n'
+        text += user_verification_url + '\n\n'
+        text += str(_('Thank you!') % data) + '\n\n'
+        text += str(_('Your %(site_name)s Team') % data) + '\n\n'
+        text += '---\n\n'
+        text += str(_('If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!') % data) + '\n\n'
+        
+        # send a notification email ignoring notification settings
+        body_text = textfield(text)
+        send_html_mail_threaded(user, subject, body_text)
         
 
 def email_first_login_token_to_user(user, threaded=True):
