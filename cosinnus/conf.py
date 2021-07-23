@@ -1069,6 +1069,10 @@ class CosinnusConf(AppConf):
     # that show additional formfields and use model mixins to in-place replace translated field values
     # see `TranslateableFieldsModelMixin`
     TRANSLATED_FIELDS_ENABLED = False
+
+    # user gets notification if s/he was invited to a group even if his/er notification preferences 
+    # are tunrned on 'daily', 'weekly', or even on 'never'
+    NOTIFICATIONS_GROUP_INVITATIONS_IGNORE_USER_SETTING = False
     
 
 class CosinnusDefaultSettings(AppConf):
