@@ -869,6 +869,7 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
         text += str(_('If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!') % data) + '\n\n'
         
         # send a notification email ignoring notification settings
+        # TODO: check blacklist! GlobalBlacklistedEmail.is_email_blacklisted(user.email)
         body_text = textfield(text)
         send_html_mail_threaded(user, subject, body_text)
         
