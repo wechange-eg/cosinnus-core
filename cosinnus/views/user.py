@@ -869,10 +869,10 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
         text += str(_('If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!') % data) + '\n\n'
         
         # send a notification email ignoring notification settings
-        # TODO: check blacklist! GlobalBlacklistedEmail.is_email_blacklisted(user.email)
-        body_text = textfield(text)
-        send_html_mail_threaded(user, subject, body_text)
-        
+        if not GlobalBlacklistedEmail.is_email_blacklisted(user.email):
+            body_text = textfield(text)
+            send_html_mail_threaded(user, subject, body_text)
+
 
 def email_first_login_token_to_user(user, threaded=True):
     """ Sets the profile variables for a user to login without a set password,
@@ -989,10 +989,12 @@ def resent_email_validation(request):
         return HttpResponseNotAllowed('GET')
     if not request.user.is_authenticated:
         return HttpResponseForbidden('Must be logged in!')
-    set_user_email_to_verify(request.user, request.user.email, request)
-    messages.add_message(request, messages.SUCCESS,
-                         _('A new validation email has been sents.'))
+    if not GlobalBlacklistedEmail.is_email_blacklisted(request.user.email):
+        set_user_email_to_verify(request.user, request.user.email, request)
+        messages.add_message(request, messages.SUCCESS,
+                             _('A new validation email has been sent.'))
     return HttpResponseRedirect(request.GET.get('next'))
+
 
 def accept_updated_tos(request):
     """ A bare-bones ajax endpoint to save a user's accepted ToS settings and newsletter settings.

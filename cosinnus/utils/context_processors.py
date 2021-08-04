@@ -12,6 +12,7 @@ from cosinnus.api.serializers.user import UserSerializer
 import json
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.forms.user import TermsOfServiceFormFields
+from cosinnus.models.profile import GlobalBlacklistedEmail
 
 import logging
 from cosinnus.utils.user import get_user_tos_accepted_date,\
@@ -153,6 +154,7 @@ def email_verified(request):
 
     if (user.is_authenticated and
             portal.email_needs_verification and not
+            GlobalBlacklistedEmail.is_email_blacklisted(request.user.email) and not
             request.user.cosinnus_profile.email_verified):
         url = reverse('cosinnus:resent-email-validation')
         url = '{}?next={}'.format(url, request.path)
