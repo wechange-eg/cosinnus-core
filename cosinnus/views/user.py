@@ -813,7 +813,7 @@ def password_reset_proxy(request, *args, **kwargs):
                 user = USER_MODEL.objects.get(email=email, is_active=True)
             except USER_MODEL.DoesNotExist:
                 pass
-        if GlobalBlacklistedEmail.is_email_blacklisted(email):
+        if user and not user.cosinnus_profile.email_verified and GlobalBlacklistedEmail.is_email_blacklisted(email):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_blacklisted_page.html')
         # disallow integrated users to reset their password
         if user and check_user_integrated_portal_member(user):
