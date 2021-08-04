@@ -1,0 +1,7 @@
+{% load cosinnus_tags %}
+<div class="announcement {% if announcement.level %} alert-{% if announcement.level == 'error' %}danger{% else %}{{ announcement.level }}{% endif %}{% endif %} alert-dismissable">
+    <i class="fa fa-info-circle fa-2x"></i>
+    {{ announcement.translated_text|textfield }}
+    {{ announcement.text|safe }}
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
+</div>

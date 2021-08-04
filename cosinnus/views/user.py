@@ -984,6 +984,16 @@ def accept_tos(request):
     return JsonResponse({'status': 'ok'})
 
 
+def resent_email_validation(request):
+    if request.method != 'GET':
+        return HttpResponseNotAllowed('GET')
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden('Must be logged in!')
+    set_user_email_to_verify(request.user, request.user.email, request)
+    messages.add_message(request, messages.SUCCESS,
+                         _('A new validation email has been sents.'))
+    return HttpResponseRedirect(request.GET.get('next'))
+
 def accept_updated_tos(request):
     """ A bare-bones ajax endpoint to save a user's accepted ToS settings and newsletter settings.
         The frontend doesn't care about a return values, so we don't either 

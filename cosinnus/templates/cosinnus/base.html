@@ -150,6 +150,9 @@
 
 
 		{% include 'announcements/announcements.html' %}
+        {% if email_not_verified_announcement %}
+        {% include 'announcements/announcement.html' with announcement=email_not_verified_announcement %}
+        {% endif %}
 
         <div class="{% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}" {% block container_attributes %}{% endblock container_attributes %}>
 

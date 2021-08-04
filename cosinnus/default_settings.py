@@ -137,6 +137,7 @@ TEMPLATES = [
                 'cosinnus.utils.context_processors.settings',
                 'cosinnus.utils.context_processors.cosinnus',
                 'cosinnus.utils.context_processors.tos_check',
+                'cosinnus.utils.context_processors.email_verified',
                 'announcements.context_processors.add_custom_announcements',
              ],
             'loaders': (
