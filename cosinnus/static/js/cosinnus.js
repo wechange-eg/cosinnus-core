@@ -388,7 +388,9 @@
                             ? date.start.getDate()
                             : "0" + date.start.getDate());
 
-                    date.end.setDate(date.end.getDate()-1)
+                    if (date.allDay) {
+                        date.end.setDate(date.end.getDate()-1)
+                    }
 
                     var endDateDataAttr = date.end.getFullYear() + "-"
                         + ((date.end.getMonth()+1).toString().length === 2
