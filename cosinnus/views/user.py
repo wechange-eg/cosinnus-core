@@ -84,18 +84,9 @@ logger = logging.getLogger('cosinnus')
 USER_MODEL = get_user_model()
 
 
-# def email_portal_admins(subject, template, data):
-#     mail_thread = MailThread()
-#     admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
-    
-#     for user in admins:
-#         mail_thread.add_mail(user.email, subject, template, data)
-#     mail_thread.start()
-
 def email_portal_admins(subject, template, data):
     admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
     text = textfield(render_to_string('cosinnus/mail/user_register_notification.html', data))
-    
     
     for user in admins:
         send_html_mail_threaded(user, subject, text)
