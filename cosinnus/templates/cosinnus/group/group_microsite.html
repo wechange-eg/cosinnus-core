@@ -431,6 +431,24 @@
 						{% trans "Your message" as contact_form_message_placeholder %}
 						{% include 'cosinnus/fields/default_field.html' with field=contact_form.email label=contact_form_email_label placeholder=contact_form_email_placeholder %}
 						{% include 'cosinnus/fields/default_field.html' with field=contact_form.message label=contact_form_message_label large_field=True placeholder=contact_form_message_placeholder %}
+
+        				{% trans "Captcha" as captcha_label %}
+        				{% captureas captcha_legend %}
+        				{% trans "We need to make sure you are a real person (sorry!)" %}
+        				<a class="refresh-captcha" href="#" style="color: #5a5a5a; text-decoration: underline;">
+        				{% trans "Generate a new captcha" %}
+        				</a>
+    					{% endcaptureas %}
+						{% include 'cosinnus/fields/default_field.html' with field=contact_form.captcha legend=captcha_legend label=captcha_label large_field=True field_classes="captcha-field" %}
+
+						<script>
+							$('.refresh-captcha').click(function () {
+								$.getJSON("/captcha/refresh/", function (result) {
+									$('.captcha').attr('src', result['image_url']);
+									$('#id_captcha_0').val(result['key'])
+								});
+							});
+						</script>
 					</div>
 					<button type="submit" class="btn btn-emphasized" title="Sichern">
 						<ul class="media-list">

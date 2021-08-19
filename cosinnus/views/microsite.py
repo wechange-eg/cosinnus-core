@@ -75,6 +75,9 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
                                  _('Your message has been sent.'))
             return HttpResponseRedirect(request.path_info)
         else:
+            messages.add_message(request,
+                                 messages.ERROR,
+                                 _('Something went wrong. Your message was not sent.'))
             context = self.get_context_data(contact_form=contact_form)
             return self.render_to_response(context)
     

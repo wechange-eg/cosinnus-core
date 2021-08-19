@@ -15,6 +15,7 @@ from django.utils.translation import ugettext_lazy as _
 from awesome_avatar import forms as avatar_forms
 
 from cosinnus.forms.mixins import AdditionalFormsMixin
+from captcha.fields import CaptchaField
 from cosinnus_organization.models import CosinnusOrganization
 from cosinnus.models.group import (CosinnusGroupMembership,
                                    CosinnusPortal,
@@ -639,3 +640,4 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
 class GroupContactForm(forms.Form):
     email = forms.EmailField()
     message = forms.CharField(widget=forms.Textarea)
+    captcha = CaptchaField()
