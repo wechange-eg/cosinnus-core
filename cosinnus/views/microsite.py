@@ -2,10 +2,15 @@
 from __future__ import unicode_literals
 
 from collections import defaultdict
+from django.contrib import messages
 
 from django.contrib.auth.models import AnonymousUser
-from django.http.response import Http404
+from django.http.response import Http404, HttpResponseRedirect
+from django.urls.base import reverse
 from django.views.generic import TemplateView
+from django.utils.translation import ugettext_lazy as _
+
+from cosinnus.forms.group import GroupContactForm
 
 from cosinnus.conf import settings
 from cosinnus.views.mixins.group import DipatchGroupURLMixin, GroupObjectCountMixin
@@ -45,6 +50,16 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
         for app_name, items in public_object_list.items():
             public_objects.append((items[0].get_cosinnus_app(), app_name, items))
         return public_objects
+
+    def post(self, request, group=None):
+        contact_form = GroupContactForm(data=request.POST)
+        if contact_form.is_valid():
+            messages.add_message(request,
+                                 messages.SUCCESS,
+                                 _('Your message has been sent.'))
+            return HttpResponseRedirect(request.path_info)
+        else:
+            return HttpResponseRedirect(request.path_info)
     
     def get_context_data(self, **kwargs):
         context = super(GroupMicrositeView, self).get_context_data(**kwargs)
@@ -52,6 +67,10 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
             'public_objects': self.get_public_objects(),
             'anonymous_user': AnonymousUser(),
         })
+        if self.group.show_contact_form:
+            context.update({
+                'contact_form': GroupContactForm()
+            })
         return context
     
 group_microsite_view = GroupMicrositeView.as_view()

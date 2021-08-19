@@ -407,6 +407,46 @@
 				    {% endif %}
 				{% endwith %}
 				
+
+				{% if contact_form %}
+				<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+					<ul class="media-list">
+						<li class="media">
+							<a class="pull-left btn-extra-emphasized" href="#"></a>
+							<div class="media-body">
+								{% trans "Email to group administrator" %}
+							</div>
+						</li>
+					</ul>
+				</div>
+				<form method="post">
+					<div class="content-box">
+						{% csrf_token %}
+						{% for hidden in contact_form.hidden_fields %}
+							{{ hidden }}
+						{% endfor %}
+						{% trans "Email" as contact_form_email_label %}
+						{% trans "Your email address" as contact_form_email_placeholder %}
+						{% trans "Message" as contact_form_message_label %}
+						{% trans "Your message" as contact_form_message_placeholder %}
+						{% include 'cosinnus/fields/default_field.html' with field=contact_form.email label=contact_form_email_label placeholder=contact_form_email_placeholder %}
+						{% include 'cosinnus/fields/default_field.html' with field=contact_form.message label=contact_form_message_label large_field=True placeholder=contact_form_message_placeholder %}
+					</div>
+					<button type="submit" class="btn btn-emphasized" title="Sichern">
+						<ul class="media-list">
+							<li class="media">
+								<a class="pull-left" href="#">
+									<i class="fa fa-check"></i>
+								</a>
+								<div class="media-body">
+									Sichern
+								</div>
+							</li>
+						</ul>
+					</button>
+				</form>
+				{% endif%}
+
 				{# Public objects box #}
 				{% if public_objects %}
 					{% for app, app_name, public_object_list in public_objects %}
