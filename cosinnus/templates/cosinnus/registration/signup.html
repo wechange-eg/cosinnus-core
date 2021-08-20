@@ -74,6 +74,10 @@
         {% endif %}
         
         <h2>{% trans "Sign up" %}</h2>
+        
+        {% comment %} Block for additional information / messages / announcements that may be added for particular portals {% endcomment %}
+        {% block announcement %}
+        {% endblock announcement %}
     
         {{ form.non_field_errors }}
         
