@@ -513,7 +513,7 @@ def _check_user_approval_permissions(request, user_id):
     
     if not request.user.is_authenticated:
         return redirect_to_not_logged_in(request)
-    elif not request.user.id in CosinnusPortal.get_current().admins:
+    elif not check_user_superuser(request.user):
         return redirect_to_403(request)
     return None
 
