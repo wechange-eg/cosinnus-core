@@ -526,15 +526,17 @@
 			                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.contact_info label=contact_info_label legend=contact_info_legend placeholder=contact_info_placeholder large_field=True %}
 
 									{# Contact Form Field #}
-			                        {% trans "Contact Form on Micropage" as contact_form_label %}
-				                    {% captureas contact_form_checkboxlabel %}
-				                    	{% trans "Display contact form." %}
-				                    {% endcaptureas %}
-									{% captureas contact_form_legend %}
-				                    	{% trans "A public contact form, which non-registered users can use to contact group admins of this group." %}
-				                    {% endcaptureas %}
-		                        	{% trans "Contact Form" as contact_form_placeholder %}
-			                        {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.show_contact_form legend=contact_form_legend label=contact_form_label checkbox_label=contact_form_checkboxlabel %}
+									{% if form.forms.obj.show_contact_form %}
+										{% trans "Contact Form on Micropage" as contact_form_label %}
+										{% captureas contact_form_checkboxlabel %}
+											{% trans "Display contact form." %}
+										{% endcaptureas %}
+										{% captureas contact_form_legend %}
+											{% trans "A public contact form, which non-registered users can use to contact group admins of this group." %}
+										{% endcaptureas %}
+										{% trans "Contact Form" as contact_form_placeholder %}
+										{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.show_contact_form legend=contact_form_legend label=contact_form_label checkbox_label=contact_form_checkboxlabel %}
+									{% endif %}
 		                        {% endif %}
 	
 			                    {# Microsite Public Apps Field #}
