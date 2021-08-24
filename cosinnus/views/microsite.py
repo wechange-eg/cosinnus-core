@@ -70,7 +70,10 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
             if contact_form.is_valid():
                 message = contact_form.cleaned_data.get('message')
                 email = contact_form.cleaned_data.get('email')
-                self.send_message_to_group_admins(message=message, email=email)
+                self.send_message_to_group_admins(message=message,
+                                                  email=email,
+                                                  group_name=self.group.name,
+                                                  group_url=self.group.get_absolute_url())
                 messages.add_message(request,
                                      messages.SUCCESS,
                                      _('Your message has been sent.'))
