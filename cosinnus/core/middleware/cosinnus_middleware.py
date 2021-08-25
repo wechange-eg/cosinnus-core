@@ -65,6 +65,7 @@ NEVER_REDIRECT_URLS = [
     '/api/v1/login/',
     '/api/v2/navbar/',
     '/o/',
+    '/group/forum/cloud/oauth2/',
     # these deprecated URLs can be removed from the filter list once the URLs are removed
     # and their /account/ URL-path equivalents are the only remaining version of the view URL
     '/administration/list-unsubscribe/',
@@ -84,7 +85,6 @@ LOGIN_URLS = NEVER_REDIRECT_URLS + [
     '/password_reset/',
     '/reset/',
     '/password_set_initial/',
-    '/o/',
 ]
 
 EXEMPTED_URLS_FOR_2FA = [url for url in LOGIN_URLS if url != '/admin/']
@@ -297,6 +297,7 @@ class RedirectAnonymousUserToLoginAllowSignupMiddleware(MiddlewareMixin):
     def process_request(self, request):
         if not request.user.is_authenticated:
             if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]):
+                logger
                 return redirect_to_not_logged_in(request)
 
 
