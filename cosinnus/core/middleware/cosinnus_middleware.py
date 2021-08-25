@@ -299,6 +299,18 @@ class RedirectAnonymousUserToLoginAllowSignupMiddleware(MiddlewareMixin):
                 return redirect_to_not_logged_in(request)
 
 
+class AllowOnlyAdminLoginsMiddleware(MiddlewareMixin):
+    """ This middleware will allow only superuser/portal-admin accounts to log in
+        to the plattform. Anonymous user have access as usual """
+
+    def process_request(self, request):
+        if request.user.is_authenticated and not check_user_superuser(request.user):
+            logout(request)
+            messages.error(request, _('Sorry, only admin accounts may log in at this time.'))
+            return redirect_to_not_logged_in(request)
+
+
+
 class ConditionalRedirectMiddleware(MiddlewareMixin):
     """ A collection of redirects based on some requirements we want to put it,
         usually to force some routing behaviour, like logged-in users being redirected off /login """
