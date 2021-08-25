@@ -1,6 +1,6 @@
-{% load i18n cosinnus_tags %}{% blocktrans %}You received a message via the contact form!
+{% load i18n cosinnus_tags %}{% blocktrans %}You received a message via the contact form on the micropage of "{{ group_name }}"!
 
-The message was:
+The message was sent from the micropage of [{{ group_name }}]({{ domain_url }}{{ group_url }}):
 "{{ message }}"
 
 

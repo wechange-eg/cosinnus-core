@@ -1074,6 +1074,9 @@ class CosinnusConf(AppConf):
     # are tunrned on 'daily', 'weekly', or even on 'never'
     NOTIFICATIONS_GROUP_INVITATIONS_IGNORE_USER_SETTING = False
     
+    # if set to True group admins can decide if a contact form should be displayed on the groups micropage
+    ALLOW_CONTACT_FORM_ON_MICROPAGE = False
+
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.

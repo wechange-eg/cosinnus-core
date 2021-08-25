@@ -1,1 +1,1 @@
-{% load i18n cosinnus_tags %}{% blocktrans %}You received a message via the contact form!{% endblocktrans %}
+{% load i18n cosinnus_tags %}{% blocktrans %}You received a message via the contact form on "{{ group_name }}"!{% endblocktrans %}

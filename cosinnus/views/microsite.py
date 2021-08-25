@@ -65,29 +65,38 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
         pass
 
     def post(self, request, group=None):
-        contact_form = GroupContactForm(data=request.POST)
-        if contact_form.is_valid():
-            message = contact_form.cleaned_data.get('message')
-            email = contact_form.cleaned_data.get('email')
-            self.send_message_to_group_admins(message=message, email=email)
-            messages.add_message(request,
-                                 messages.SUCCESS,
-                                 _('Your message has been sent.'))
-            return HttpResponseRedirect(request.path_info)
-        else:
-            messages.add_message(request,
-                                 messages.ERROR,
-                                 _('Something went wrong. Your message was not sent.'))
-            context = self.get_context_data(contact_form=contact_form)
-            return self.render_to_response(context)
-    
+        if settings.COSINNUS_ALLOW_CONTACT_FORM_ON_MICROPAGE:
+            contact_form = GroupContactForm(data=request.POST)
+            if contact_form.is_valid():
+                message = contact_form.cleaned_data.get('message')
+                email = contact_form.cleaned_data.get('email')
+                self.send_message_to_group_admins(message=message,
+                                                  email=email,
+                                                  group_name=self.group.name,
+                                                  group_url=self.group.get_absolute_url())
+                messages.add_message(request,
+                                     messages.SUCCESS,
+                                     _('Your message has been sent.'))
+                return HttpResponseRedirect(request.path_info)
+            else:
+                messages.add_message(request,
+                                     messages.ERROR,
+                                     _('Something went wrong. ' +
+                                       'Your message was not sent.'))
+                context = self.get_context_data(contact_form=contact_form)
+                return self.render_to_response(context)
+        context = self.get_context_data()
+        return self.render_to_response(context)
+
     def get_context_data(self, **kwargs):
         context = super(GroupMicrositeView, self).get_context_data(**kwargs)
         context.update({
             'public_objects': self.get_public_objects(),
             'anonymous_user': AnonymousUser(),
         })
-        if self.group.show_contact_form and 'contact_form' not in kwargs:
+        if (settings.COSINNUS_ALLOW_CONTACT_FORM_ON_MICROPAGE and
+           self.group.show_contact_form and
+           'contact_form' not in kwargs):
             context.update({
                 'contact_form': GroupContactForm()
             })
