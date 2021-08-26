@@ -54,6 +54,7 @@ function ParticipantsTable (props: ParticipantsTableProps) {
             <TableCell><FormattedMessage id="Name" /></TableCell>
             <TableCell><FormattedMessage id="Organization" /></TableCell>
             <TableCell><FormattedMessage id="Country" /></TableCell>
+            <TableCell><FormattedMessage id="City" /></TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
@@ -75,6 +76,7 @@ function ParticipantsTable (props: ParticipantsTableProps) {
               </TableCell>
               <TableCell>{participant.props.organization}</TableCell>
               <TableCell>{participant.props.country}</TableCell>
+              <TableCell>{participant.getLocation()}</TableCell>
               <TableCell align="right">
                 <Button
                   variant="contained"

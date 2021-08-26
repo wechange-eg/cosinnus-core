@@ -258,11 +258,12 @@ class ConferenceParticipantSerializer(TranslateableModelSerializer):
     chat_url = serializers.SerializerMethodField()
     avatar_url = serializers.SerializerMethodField()
     profile_url = serializers.SerializerMethodField()
+    location = serializers.SerializerMethodField()
 
     class Meta(object):
         model = get_user_model()
         fields = ('id', 'first_name', 'last_name', 'organization',
-                  'country', 'chat_url', 'avatar_url', 'profile_url')
+                  'country', 'chat_url', 'avatar_url', 'profile_url', 'location')
         order_by = ('first_name', 'last_name')
 
     def get_organization(self, obj):
@@ -293,6 +294,12 @@ class ConferenceParticipantSerializer(TranslateableModelSerializer):
     def get_profile_url(self, obj):
         if hasattr(obj, 'cosinnus_profile'):
             return obj.cosinnus_profile.get_absolute_url()
+        return ''
+
+    def get_location(self, obj):
+        if hasattr(obj, 'cosinnus_profile'):
+            if obj.cosinnus_profile.media_tag.location:
+                return obj.cosinnus_profile.media_tag.location
         return ''
 
 
