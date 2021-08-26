@@ -6,6 +6,7 @@ export interface ParticipantJson {
   country?: string
   chat_url?: string
   avatar_url?: string
+  profile_url?: string
 }
 
 export interface ParticipantProps {
@@ -16,6 +17,7 @@ export interface ParticipantProps {
   country?: string
   chatUrl?: string
   avatarUrl?: string
+  profileUrl?: string
 }
 
 export class Participant {
@@ -39,7 +41,8 @@ export class Participant {
       organization: json.organization,
       country: json.country,
       chatUrl: json.chat_url,
-      avatarUrl: json.avatar_url
+      avatarUrl: json.avatar_url,
+      profileUrl: json.profile_url
     }
 
     return new Participant(props)
@@ -78,6 +81,11 @@ export class Participant {
   getAvatarUrl() : string {
     if (!this.props.avatarUrl) return ""
     return this.props.avatarUrl
+  }
+
+  getProfileUrl() : string {
+    if (!this.props.profileUrl) return ""
+    return this.props.profileUrl
   }
 
   /**

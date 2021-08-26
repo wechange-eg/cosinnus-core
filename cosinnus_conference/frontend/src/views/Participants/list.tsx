@@ -1,6 +1,6 @@
 import {
-  Avatar, Button, CardActionArea, CardHeader, FormControl,
-  Grid, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+  Avatar, Button, CardHeader, FormControl,
+  Grid, InputLabel, Link, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   Typography
 } from "@material-ui/core"
 import React, {useEffect, useState} from "react"
@@ -61,15 +61,17 @@ function ParticipantsTable (props: ParticipantsTableProps) {
           {participants.map((participant, index) => (
             <TableRow key={index}>
               <TableCell component="th" scope="row">
-                <CardHeader
-                  avatar={
-                    <Avatar
-                      alt={participant.getFullName()}
-                      src={participant.getAvatarUrl()}
-                      variant="square" />
-                  }
-                  title={participant.getFullName()}
-                />
+                  <CardHeader
+                    avatar={
+                      <Avatar
+                        alt={participant.getFullName()}
+                        src={participant.getAvatarUrl()}
+                        variant="square" />
+                    }
+                    title={
+                      <Link href={participant.getProfileUrl()} target="_blank">{participant.getFullName()}</Link>
+                    }
+                  />
               </TableCell>
               <TableCell>{participant.props.organization}</TableCell>
               <TableCell>{participant.props.country}</TableCell>
