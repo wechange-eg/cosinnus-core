@@ -3,6 +3,7 @@ import {
   Grid, InputLabel, Link, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   Typography
 } from "@material-ui/core"
+import Alert from '@material-ui/lab/Alert';
 import React, {useEffect, useState} from "react"
 import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
@@ -126,6 +127,8 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
+        <Alert severity="info"><FormattedMessage id="Your profile is not shown here or not displayed correctly?
+                                                     Add to your profile or make yourself visible to other conference participants." /></Alert>
         <FormControl className={classes.formControl}>
           <InputLabel><FormattedMessage id="Filter by country" /></InputLabel>
           <Select
