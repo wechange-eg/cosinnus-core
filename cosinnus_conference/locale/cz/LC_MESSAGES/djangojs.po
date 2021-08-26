@@ -370,3 +370,8 @@ msgstr ""
 "Pokud kliknete, videokonferenci opustíte. Opravdu chcete odejít? Tip: "
 "Alternativně můžete otevřít odkaz na nové kartě nebo v okně a zůstat "
 "v události."
+
+msgid ""
+"Your profile is not shown here or not displayed correctly? "
+"Add to your profile or make yourself visible to other conference participants."
+msgstr ""

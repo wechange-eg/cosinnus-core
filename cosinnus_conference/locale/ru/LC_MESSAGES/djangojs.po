@@ -340,3 +340,8 @@ msgstr "Завтра"
 #: locale/src/views/components/Nav/index.json
 msgid "Membership"
 msgstr "Членство"
+
+msgid ""
+"Your profile is not shown here or not displayed correctly? "
+"Add to your profile or make yourself visible to other conference participants."
+msgstr ""

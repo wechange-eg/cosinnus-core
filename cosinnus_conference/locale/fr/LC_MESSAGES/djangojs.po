@@ -329,3 +329,8 @@ msgstr "participants"
 #. undefined
 msgid "places left"
 msgstr "places restantes"
+
+msgid ""
+"Your profile is not shown here or not displayed correctly? "
+"Add to your profile or make yourself visible to other conference participants."
+msgstr ""
