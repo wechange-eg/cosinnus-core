@@ -1,5 +1,5 @@
 import {
-  Button, CardActionArea, FormControl,
+  Avatar, Button, CardActionArea, CardHeader, FormControl,
   Grid, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   Typography
 } from "@material-ui/core"
@@ -60,7 +60,17 @@ function ParticipantsTable (props: ParticipantsTableProps) {
         <TableBody>
           {participants.map((participant, index) => (
             <TableRow key={index}>
-              <TableCell component="th" scope="row">{participant.getFullName()}</TableCell>
+              <TableCell component="th" scope="row">
+                <CardHeader
+                  avatar={
+                    <Avatar
+                      alt={participant.getFullName()}
+                      src={participant.getAvatarUrl()}
+                      variant="square" />
+                  }
+                  title={participant.getFullName()}
+                />
+              </TableCell>
               <TableCell>{participant.props.organization}</TableCell>
               <TableCell>{participant.props.country}</TableCell>
               <TableCell align="right">
