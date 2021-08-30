@@ -128,7 +128,7 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
       <Content>
         <Notification />
         <Typography component="h1">{room.props.title}</Typography>
-        <iframe src={getIframeUrl()} frameborder="0" width="50%" height="50%"></iframe>
+        <iframe src={getIframeUrl()} frameborder="0" width="100%" height="50%"></iframe>
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
