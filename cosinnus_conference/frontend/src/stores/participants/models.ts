@@ -5,6 +5,9 @@ export interface ParticipantJson {
   organization?: string
   country?: string
   chat_url?: string
+  avatar_url?: string
+  profile_url?: string
+  location?: string
 }
 
 export interface ParticipantProps {
@@ -14,6 +17,9 @@ export interface ParticipantProps {
   organization?: string
   country?: string
   chatUrl?: string
+  avatarUrl?: string
+  profileUrl?: string
+  location?: string
 }
 
 export class Participant {
@@ -37,6 +43,9 @@ export class Participant {
       organization: json.organization,
       country: json.country,
       chatUrl: json.chat_url,
+      avatarUrl: json.avatar_url,
+      profileUrl: json.profile_url,
+      location: json.location
     }
 
     return new Participant(props)
@@ -56,6 +65,8 @@ export class Participant {
       organization: props.organization,
       country: props.country,
       chat_url: props.chatUrl,
+      avatar_url: props.avatarUrl,
+      location: props.location
     }
   }
 
@@ -69,6 +80,21 @@ export class Participant {
       return this.props.firstName + " " + this.props.lastName
     }
     return this.props.firstName || this.props.lastName || ""
+  }
+
+  getAvatarUrl() : string {
+    if (!this.props.avatarUrl) return ""
+    return this.props.avatarUrl
+  }
+
+  getProfileUrl() : string {
+    if (!this.props.profileUrl) return ""
+    return this.props.profileUrl
+  }
+
+  getLocation() : string {
+    if (!this.props.location) return ""
+    return this.props.location
   }
 
   /**

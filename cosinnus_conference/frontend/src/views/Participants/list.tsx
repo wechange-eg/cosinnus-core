@@ -1,8 +1,9 @@
 import {
-  Button, CardActionArea, FormControl,
-  Grid, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+  Avatar, Button, CardHeader, FormControl,
+  Grid, InputLabel, Link, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   Typography
 } from "@material-ui/core"
+import Alert from '@material-ui/lab/Alert';
 import React, {useEffect, useState} from "react"
 import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
@@ -54,15 +55,29 @@ function ParticipantsTable (props: ParticipantsTableProps) {
             <TableCell><FormattedMessage id="Name" /></TableCell>
             <TableCell><FormattedMessage id="Organization" /></TableCell>
             <TableCell><FormattedMessage id="Country" /></TableCell>
+            <TableCell><FormattedMessage id="City" /></TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {participants.map((participant, index) => (
             <TableRow key={index}>
-              <TableCell component="th" scope="row">{participant.getFullName()}</TableCell>
+              <TableCell component="th" scope="row">
+                  <CardHeader
+                    avatar={
+                      <Avatar
+                        alt={participant.getFullName()}
+                        src={participant.getAvatarUrl()}
+                        variant="square" />
+                    }
+                    title={
+                      <Link href={participant.getProfileUrl()} target="_blank">{participant.getFullName()}</Link>
+                    }
+                  />
+              </TableCell>
               <TableCell>{participant.props.organization}</TableCell>
               <TableCell>{participant.props.country}</TableCell>
+              <TableCell>{participant.getLocation()}</TableCell>
               <TableCell align="right">
                 <Button
                   variant="contained"
@@ -100,6 +115,10 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
     setCountry(event.target.value)
   }
 
+  function getIframeUrl() {
+    return `/map/embed/?controls_disabled=1&filter_group=${window.conferenceId}`
+  }
+
   const countries: string[] = uniqBy(participants, p => p.props.country).map(p => p.props.country)
   if (country !== "") {
     filteredParticipants = participants.filter(p => p.props.country === country)
@@ -109,9 +128,12 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
       <Content>
         <Notification />
         <Typography component="h1">{room.props.title}</Typography>
+        <iframe src={getIframeUrl()} frameborder="0" width="50%" height="50%"></iframe>
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
+        <Alert severity="info"><FormattedMessage id="Your profile is not shown here or not displayed correctly?
+                                                     Add to your profile or make yourself visible to other conference participants." /></Alert>
         <FormControl className={classes.formControl}>
           <InputLabel><FormattedMessage id="Filter by country" /></InputLabel>
           <Select

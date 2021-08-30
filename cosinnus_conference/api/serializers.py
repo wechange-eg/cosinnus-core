@@ -256,10 +256,14 @@ class ConferenceParticipantSerializer(TranslateableModelSerializer):
     organization = serializers.SerializerMethodField()
     country = serializers.SerializerMethodField()
     chat_url = serializers.SerializerMethodField()
+    avatar_url = serializers.SerializerMethodField()
+    profile_url = serializers.SerializerMethodField()
+    location = serializers.SerializerMethodField()
 
     class Meta(object):
         model = get_user_model()
-        fields = ('id', 'first_name', 'last_name', 'organization', 'country', 'chat_url')
+        fields = ('id', 'first_name', 'last_name', 'organization',
+                  'country', 'chat_url', 'avatar_url', 'profile_url', 'location')
         order_by = ('first_name', 'last_name')
 
     def get_organization(self, obj):
@@ -281,6 +285,22 @@ class ConferenceParticipantSerializer(TranslateableModelSerializer):
             return f'{settings.COSINNUS_CHAT_BASE_URL}/direct/{obj.cosinnus_profile.rocket_username}/?layout=embedded'
         else:
             return settings.COSINNUS_CHAT_BASE_URL
+
+    def get_avatar_url(self, obj):
+        if hasattr(obj, 'cosinnus_profile'):
+            return obj.cosinnus_profile.get_avatar_thumbnail_url()
+        return ''
+
+    def get_profile_url(self, obj):
+        if hasattr(obj, 'cosinnus_profile'):
+            return obj.cosinnus_profile.get_absolute_url()
+        return ''
+
+    def get_location(self, obj):
+        if hasattr(obj, 'cosinnus_profile'):
+            if obj.cosinnus_profile.media_tag.location:
+                return obj.cosinnus_profile.media_tag.location
+        return ''
 
 
 class ConferenceEventParticipantSerializer(TranslateableModelSerializer):
