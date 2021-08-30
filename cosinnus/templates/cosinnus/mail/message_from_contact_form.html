@@ -1,0 +1,13 @@
+{% load i18n cosinnus_tags %}{% blocktrans %}You received a message via the contact form on the micropage of "{{ group_name }}"!
+
+The message was sent from the micropage of [{{ group_name }}]({{ domain_url }}{{ group_url }}):
+"{{ message }}"
+
+
+Reply to the message by writing to that email:
+{{ email}}
+
+(You're receiving this email because you are an administrator of a group.)
+
+
+Your {{ site_name }} Team{% endblocktrans %}

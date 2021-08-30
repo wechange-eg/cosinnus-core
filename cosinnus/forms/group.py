@@ -15,6 +15,7 @@ from django.utils.translation import ugettext_lazy as _
 from awesome_avatar import forms as avatar_forms
 
 from cosinnus.forms.mixins import AdditionalFormsMixin
+from captcha.fields import CaptchaField
 from cosinnus_organization.models import CosinnusOrganization
 from cosinnus.models.group import (CosinnusGroupMembership,
                                    CosinnusPortal,
@@ -161,6 +162,7 @@ class CosinnusBaseGroupForm(TranslatedFieldsFormMixin, FacebookIntegrationGroupF
                          'call_to_action_active', 'call_to_action_title', 'call_to_action_description',
                          'membership_mode'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
+                        + (['show_contact_form'] if settings.COSINNUS_ALLOW_CONTACT_FORM_ON_MICROPAGE else []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else []) \
                         + (['embedded_dashboard_html',] if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED else []) \
                         + (['managed_tag_field',] if (settings.COSINNUS_MANAGED_TAGS_ENABLED \
@@ -634,3 +636,9 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
         for entry in row:
             cleaned_row.append(entry.strip())
         return cleaned_row
+
+
+class GroupContactForm(forms.Form):
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)
+    captcha = CaptchaField()

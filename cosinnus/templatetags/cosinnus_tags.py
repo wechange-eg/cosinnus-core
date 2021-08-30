@@ -1380,3 +1380,8 @@ def next_day(datetime_obj):
         of considering a full-day event with the end-date on a day to span only to the end of the previous day. """
     return datetime_obj + timedelta(days=1)
 
+@register.simple_tag()
+def get_admin_data():
+    """ Returns the portal administrators on the signup page """
+    admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
+    return admins

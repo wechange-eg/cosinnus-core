@@ -65,6 +65,7 @@ NEVER_REDIRECT_URLS = [
     '/api/v1/login/',
     '/api/v2/navbar/',
     '/o/',
+    '/group/forum/cloud/oauth2/',
     # these deprecated URLs can be removed from the filter list once the URLs are removed
     # and their /account/ URL-path equivalents are the only remaining version of the view URL
     '/administration/list-unsubscribe/',
@@ -296,7 +297,20 @@ class RedirectAnonymousUserToLoginAllowSignupMiddleware(MiddlewareMixin):
     def process_request(self, request):
         if not request.user.is_authenticated:
             if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]):
+                logger
                 return redirect_to_not_logged_in(request)
+
+
+class AllowOnlyAdminLoginsMiddleware(MiddlewareMixin):
+    """ This middleware will allow only superuser/portal-admin accounts to log in
+        to the plattform. Anonymous user have access as usual """
+
+    def process_request(self, request):
+        if request.user.is_authenticated and not check_user_superuser(request.user):
+            logout(request)
+            messages.error(request, _('Sorry, only admin accounts may log in at this time.'))
+            return redirect_to_not_logged_in(request)
+
 
 
 class ConditionalRedirectMiddleware(MiddlewareMixin):

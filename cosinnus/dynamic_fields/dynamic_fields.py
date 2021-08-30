@@ -94,6 +94,8 @@ class CosinnusDynamicField(object):
     hidden = False
     # bool, special flag to lock field in user forms, but enabled for admins
     readonly = False
+    # int, max length for the text field
+    max_length = None
     # settings for how this field behaves for the search
     # see <str type of `DYNAMIC_FIELD_SEARCH_FIELD_TYPES`>
     search_field_type = DYNAMIC_FIELD_SEARCH_FIELD_TYPE_NONE

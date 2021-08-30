@@ -74,6 +74,10 @@
         {% endif %}
         
         <h2>{% trans "Sign up" %}</h2>
+        
+        {% comment %} Block for additional information / messages / announcements that may be added for particular portals {% endcomment %}
+        {% block announcement %}
+        {% endblock announcement %}
     
         {{ form.non_field_errors }}
         
@@ -107,12 +111,14 @@
         {% trans "This name will be displayed to other users on the site" as firstname_legend %}
         {% trans "First name" as firstname_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.first_name legend=firstname_legend label=firstname_label placeholder=firstname_placeholder %}
-                
+        
+        {% block last_name %}
         {# Regular Field #}
         {% trans "Last name" as lastname_label %}
         {% trans "You can supply your last name to be displayed as well" as lastname_legend %}
         {% trans "Last name" as lastname_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.last_name label=lastname_label legend=lastname_legend placeholder=lastname_placeholder help_popup="helptext_52_profilelastname" %}
+        {% endblock last_name %}
         
         {% comment %} The fields in this block are generated from `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` {% endcomment %}
         {% block portal_specific_userprofile_extra_fields %}
