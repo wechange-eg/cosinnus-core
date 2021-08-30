@@ -820,6 +820,7 @@
                 var mom = moment(data_date);
                 var diff_days = mom.diff(moment(), 'days');
                 
+
                 if ($(this).attr('data-date-style') == 'short') {
                     // render the date without time
                     moment.lang(moment.lang(),$.cosinnus.momentShort);
@@ -833,6 +834,7 @@
                         $(this).text(mom.calendar());
                     }
                 }
+
                 // add the absolute date as tooltip
                 if ($(this).attr('data-date-notooltip') != 'true') {
                     $(this).attr('title', mom.format('LLLL'));
@@ -841,6 +843,27 @@
 
             $('.moment-data-date').each(function() {
                 $(this).trigger('renderMomentDataDate');
+            });
+        },
+
+        renderTimezoneAwareDates: function () {
+
+            $('.moment-timezone-aware-date').each(function() {
+                var browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
+                var fromDate = $(this).attr('data-from-date')
+                var toDate = $(this).attr('data-to-date')
+
+                var browserTimezoneFromDate = moment.tz(fromDate, browserTimezone)
+                var browserTimezoneToDate = moment.tz(toDate, browserTimezone)
+
+                var utcServerOffset = moment.parseZone(fromDate).utcOffset()
+                var utcBrowserOffset = browserTimezoneToDate.utcOffset()
+                if (utcBrowserOffset !== utcServerOffset) {
+                    var fromDateFormated = browserTimezoneFromDate.format('LLLL')
+                    var toDateFormated = browserTimezoneToDate.format('LLLL')
+                    $(this).text(fromDateFormated + ' - ' + toDateFormated  + ' (' + browserTimezone + ')')
+                }
             });
         },
 
@@ -1777,6 +1800,7 @@ $(function() {
     $.cosinnus.searchbar();
     $.cosinnus.datePicker();
     $.cosinnus.renderMomentDataDate();
+    $.cosinnus.renderTimezoneAwareDates();
     $.cosinnus.etherpadEditMeta();
     $.cosinnus.etherpadList();
     $.cosinnus.inputDynamicSendButton();
