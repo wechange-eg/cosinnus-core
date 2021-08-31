@@ -105,6 +105,7 @@
 			{% if request.user.is_authenticated %}
                 {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
 				<a class="nav-button nav-button-with-message-counter" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-global' %}{% else %}{% url 'postman:inbox' %}{% endif %}"
+				         {% if SETTINGS.COSINNUS_ROCKET_ENABLED and SETTINGS.COSINNUS_ROCKET_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}
 				         role="button" title="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% trans "Rocket.Chat" %}{% else %}{% trans "Messages" %}{% endif %}"
 				         id="navbar-messages-button" >
 		    		<i class="fas fa-fw fa-envelope"></i>
