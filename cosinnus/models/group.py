@@ -1706,7 +1706,7 @@ class CosinnusLocation(models.Model):
     def location_url(self):
         if not self.location_lat or not self.location_lon:
             return None
-        return 'http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
+        return 'https://openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
     
     def save(self, *args, **kwargs):
         super(CosinnusLocation, self).save(*args, **kwargs)
