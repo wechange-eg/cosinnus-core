@@ -410,6 +410,10 @@
 		                {% block portal_specific_group_extra_fields %}
 		                    {% include 'cosinnus/fields/userprofile_extra_formfields.html' with form=form.forms.obj %}
 		                {% endblock %}
+
+						{# Checkbox field #}
+						{% block publicly_visible_checkbox %}
+						{% endblock %}
                         
                         {% block visibility_field %}
                             {% if not group_model == "CosinnusConference" %}

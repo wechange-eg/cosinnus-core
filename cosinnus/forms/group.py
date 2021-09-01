@@ -156,7 +156,7 @@ class CosinnusBaseGroupForm(TranslatedFieldsFormMixin, FacebookIntegrationGroupF
     FORCE_ATTACHED_OBJECTS_VISIBILITY_ALL = True
     
     class Meta(object):
-        fields = ['name', 'public', 'description', 'description_long', 'contact_info', 'sdgs',
+        fields = ['name', 'public', 'publicly_visible', 'description', 'description_long', 'contact_info', 'sdgs',
                         'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
                          'twitter_widget_id', 'flickr_url', 'deactivated_apps', 'microsite_public_apps',
                          'call_to_action_active', 'call_to_action_title', 'call_to_action_description',
