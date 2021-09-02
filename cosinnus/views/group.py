@@ -58,7 +58,8 @@ from cosinnus.core.registries import app_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm, MembershipForm, CosinnusLocationForm, \
     CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm, MultiUserSelectForm, MultiGroupSelectForm
-from cosinnus.forms.tagged import get_form  # circular import
+from cosinnus.forms.tagged import get_form
+from cosinnus.models import group  # circular import
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
                                    CosinnusPortal, CosinnusLocation,
                                    CosinnusGroupGalleryImage, CosinnusGroupCallToActionButton,
@@ -1627,16 +1628,21 @@ class GroupStartpage(View):
         if not getattr(settings, 'COSINNUS_MICROSITES_ENABLED', False):
             return False
         
-        if not request.user.is_authenticated:
-            # if microsite access is limited, only allow invite-links, but nothing else
-            if getattr(settings, 'COSINNUS_MICROSITES_DISABLE_ANONYMOUS_ACCESS', False) \
-                    and not request.GET.get('invited', None) == '1':
-                return False
-            else:
-                return True
-        # if the group is not accessible, redirect to microsite
-        if not check_object_read_access(self.group, request.user):
+        # if not request.user.is_authenticated:
+        #     # if microsite access is limited, only allow invite-links, but nothing else
+        #     if getattr(settings, 'COSINNUS_MICROSITES_DISABLE_ANONYMOUS_ACCESS', False) \
+        #             and not request.GET.get('invited', None) == '1':
+        #         return False
+        #     else:
+        #         return True
+
+        # if the group is not accessible, redirect to microsite 
+        #   in case if the group's microsite should not be closed for the non-authenticated users
+        if not check_object_read_access(self.group, request.user): 
+            if not self.group.publicly_visible and not request.user.is_authenticated:
+                return redirect_to_403(request, self)
             return True
+
         
         # check if this session user has clicked on "browse" for this group before
         # and if so, never let him see that groups microsite again
