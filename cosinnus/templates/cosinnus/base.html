@@ -194,24 +194,7 @@
         </div><!-- main container -->
 
         {% block footer %}
-            {% if SETTINGS.COSINNUS_V2_FORCE_SITE_FOOTER or not skip_page_footer and not SETTINGS.COSINNUS_USE_V2_NAVBAR and not SETTINGS.COSINNUS_USE_V2_DASHBOARD %}
-		        {% with portal_cms_roots=COSINNUS_CURRENT_PORTAL.wagtail_root_pages.all %}
-		        	{% if portal_cms_roots and portal_cms_roots.0.footer %}
-		        		<div class="footer-spacer"></div>
-				        <div class="widget-footer overlay-box overlay-box-gray cms-content cms-footer">
-				            <div class="container">
-				                <div class="row">
-				                    <div class="col-xs-12">
-			                    		{{ portal_cms_roots.0.footer|richtext }}
-				                    </div>
-				                </div><!-- row -->
-				            </div><!-- container -->
-				        </div><!-- footer -->
-				    {% else %}
-				    	<br/><br/><br/> <!-- replacement space for missing footer -->
-		        	{% endif %}
-		        {% endwith %}
-	        {% endif %}
+            {% include 'cosinnus/v2/footer.html' %}
         {% endblock footer %}
 
     {% block extrafooter %}

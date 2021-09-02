@@ -436,6 +436,11 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
 
 
 @register.simple_tag(takes_context=True)
+def cosinnus_footer_v2(context, template="cosinnus/v2/footer.html", request=None):
+    return render_to_string(template, context.flatten(), request=request)
+
+
+@register.simple_tag(takes_context=True)
 def cosinnus_render_widget(context, widget):
     """ Renders a given widget config and passes all context on to its template """
     flat = {}
