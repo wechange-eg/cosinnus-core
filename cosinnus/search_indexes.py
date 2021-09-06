@@ -33,8 +33,10 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     group_members = indexes.MultiValueField(indexed=False)
     sdgs = indexes.MultiValueField(model_attr='sdgs', null=True)
     managed_tags = indexes.MultiValueField()
-    public = indexes.BooleanField(model_attr='public')
-    always_visible = indexes.BooleanField(default=True)
+    # public = indexes.BooleanField(model_attr='public')
+    # always_visible = indexes.BooleanField(default=True)
+    public = indexes.BooleanField()
+    always_visible = indexes.BooleanField()
     created = indexes.DateTimeField(model_attr='created')
     group = indexes.IntegerField(model_attr='id')
     from_date = indexes.DateTimeField(model_attr='from_date', null=True)
@@ -94,6 +96,16 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     
     def prepare_managed_tags(self, obj):
         return obj.get_managed_tag_ids()
+    
+    def prepare_public(self, obj):
+        if obj.publicly_visbible == False:
+            obj.public == False
+        return obj.public
+
+    def prepare_always_visible(self, obj):
+        if obj.publicly_visbible == False:
+            obj.always_visible == False
+        return obj.always_visible == True
     
     def prepare_group_members(self, obj):
         if not hasattr(obj, '_group_members'):
