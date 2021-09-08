@@ -50,6 +50,12 @@ def filter_searchqueryset_for_read_access(sqs, user):
         SQ(always_visible__exact=True) # special marker for indexed objects that should always show up in search
     )
 
+    non_public_node = (
+        SQ(public__exact=False) |
+        SQ(always_visible__exact=True) |
+        SQ(publicly_visible__exact=True) # visible for the non-authenticated users
+    )
+
     if user.is_authenticated:
         if check_user_superuser(user):
             pass
@@ -86,7 +92,7 @@ def filter_searchqueryset_for_read_access(sqs, user):
             
             sqs = sqs.filter_and(ored_query)
     else:
-        sqs = sqs.filter_and(public_node)
+        sqs = sqs.filter_and(non_public_node)
         
     return sqs
 

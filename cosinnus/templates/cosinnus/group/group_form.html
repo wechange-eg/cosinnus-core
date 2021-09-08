@@ -413,6 +413,12 @@
 
 						{# Checkbox field #}
 						{% block publicly_visible_checkbox %}
+							{% if form.forms.obj.fields.publicly_visible %}
+								{% trans "Project/Group publicly visible" as groups_projects_public_visibility_label %}
+								{% trans "Should your project/group be visible for the non-registrated users? The microsite is to be found via the Internet and the portal search." as groups_projects_public_visibility_legend %}
+								{% trans "Enable the public visibility of your project/group" as groups_projects_public_visibility_box_label %}
+								{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.publicly_visible label=groups_projects_public_visibility_label legend=groups_projects_public_visibility_legend checkbox_label=groups_projects_public_visibility_box_label %}
+							{% endif %}
 						{% endblock %}
                         
                         {% block visibility_field %}

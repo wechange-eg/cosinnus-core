@@ -1628,22 +1628,18 @@ class GroupStartpage(View):
         if not getattr(settings, 'COSINNUS_MICROSITES_ENABLED', False):
             return False
         
-        # if not request.user.is_authenticated:
-        #     # if microsite access is limited, only allow invite-links, but nothing else
-        #     if getattr(settings, 'COSINNUS_MICROSITES_DISABLE_ANONYMOUS_ACCESS', False) \
-        #             and not request.GET.get('invited', None) == '1':
-        #         return False
-        #     else:
-        #         return True
+        if not request.user.is_authenticated:
+            # if microsite access is limited, only allow invite-links, but nothing else
+            if getattr(settings, 'COSINNUS_MICROSITES_DISABLE_ANONYMOUS_ACCESS', False) \
+                    and not request.GET.get('invited', None) == '1':
+                return False
+            else:
+                # if the group is not accessible, redirect to microsite 
+                #   in case if the group's microsite should not be closed for the non-authenticated users
+                if not check_object_read_access(self.group, request.user) and not self.group.publicly_visible:
+                    return redirect_to_403(request, self)
+                return True
 
-        # if the group is not accessible, redirect to microsite 
-        #   in case if the group's microsite should not be closed for the non-authenticated users
-        if not check_object_read_access(self.group, request.user): 
-            if not self.group.publicly_visible and not request.user.is_authenticated:
-                return redirect_to_403(request, self)
-            return True
-
-        
         # check if this session user has clicked on "browse" for this group before
         # and if so, never let him see that groups microsite again
         group_session_browse_key = 'group__browse__%s' % self.group.slug
