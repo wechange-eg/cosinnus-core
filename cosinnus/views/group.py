@@ -53,7 +53,7 @@ from cosinnus.api.serializers.group import GroupSimpleSerializer
 from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.core import signals
 from cosinnus.core.decorators.views import membership_required, redirect_to_403, \
-    dispatch_group_access, get_group_for_request
+    dispatch_group_access, get_group_for_request, redirect_to_not_logged_in
 from cosinnus.core.registries import app_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm, MembershipForm, CosinnusLocationForm, \
@@ -1637,7 +1637,7 @@ class GroupStartpage(View):
                 # if the group is not accessible, redirect to microsite 
                 #   in case if the group's microsite should not be closed for the non-authenticated users
                 if not check_object_read_access(self.group, request.user) and not self.group.publicly_visible:
-                    return redirect_to_403(request, self)
+                    return False
                 return True
 
         # check if this session user has clicked on "browse" for this group before

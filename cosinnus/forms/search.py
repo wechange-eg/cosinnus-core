@@ -50,12 +50,6 @@ def filter_searchqueryset_for_read_access(sqs, user):
         SQ(always_visible__exact=True) # special marker for indexed objects that should always show up in search
     )
 
-    non_public_node = (
-        SQ(public__exact=False) |
-        SQ(always_visible__exact=True) |
-        SQ(publicly_visible__exact=True) # visible for the non-authenticated users
-    )
-
     if user.is_authenticated:
         if check_user_superuser(user):
             pass
@@ -82,7 +76,7 @@ def filter_searchqueryset_for_read_access(sqs, user):
                  | logged_in_user_visibility | visible_for_all_authenticated_users
             
             users_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
-            if users_group_ids:
+            if True:
                 group_member_user_visibility = (
                     SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
                     SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) & # team mambers can see this user 
@@ -92,7 +86,7 @@ def filter_searchqueryset_for_read_access(sqs, user):
             
             sqs = sqs.filter_and(ored_query)
     else:
-        sqs = sqs.filter_and(non_public_node)
+        sqs = sqs.filter_and(public_node)
         
     return sqs
 

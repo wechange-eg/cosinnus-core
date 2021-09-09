@@ -362,13 +362,12 @@ class ModelRetrievalMixin(object):
                 portal_list += getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
             
             if model is CosinnusIdea or model is get_cosinnus_group_model() or issubclass(model, get_cosinnus_group_model()):
-                # check if a group/project should appear in quicksearch results
+                queryset = queryset.filter(portal__id__in=portal_list)
+                # check if a group/project should appear in quicksearch results for anonymous users
                 if model is get_cosinnus_group_model() or issubclass(model, get_cosinnus_group_model()) and not user.is_authenticated:
                     queryset = queryset.filter(publicly_visible=True)
-                else:    
-                    queryset = queryset.filter(portal__id__in=portal_list)
-                    if all_public:
-                        queryset = queryset.filter(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+                if all_public:
+                    queryset = queryset.filter(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
             else:
                 # filter for project and group content from within this portal (no conference contents!)
                 dashboard_content_group_types = [

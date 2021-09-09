@@ -20,6 +20,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cosinnusgroup',
             name='publicly_visible',
-            field=models.BooleanField(default=True, help_text='Checks if a group/project should be visible publicly', verbose_name='Publicly visible'),
+            field=models.BooleanField(default=settings.COSINNUS_GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE, help_text='Checks if a group/project should be visible publicly', verbose_name='Publicly visible'),
         )
     ]

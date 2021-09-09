@@ -418,6 +418,9 @@ class CosinnusConf(AppConf):
     # should the group avatar image be a required field?
     GROUP_AVATAR_REQUIRED = False
     
+    # sets the "publicly_visible" field value per portal
+    GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE = True
+    
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)
     
@@ -589,6 +592,8 @@ class CosinnusConf(AppConf):
     
     # should twitter and flickr embed fields and display be active for microsites?
     MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE = False
+    
+    
     
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
