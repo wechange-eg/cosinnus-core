@@ -418,7 +418,12 @@ class CosinnusConf(AppConf):
     # should the group avatar image be a required field?
     GROUP_AVATAR_REQUIRED = False
     
+    # whether to show the "publicly_visible" field in the group form options
+    GROUP_PUBLICY_VISIBLE_OPTION_SHOWN = True
+    
     # sets the "publicly_visible" field value per portal
+    # Note! this is reflected in migration 0113! If the setting is changed afte the migration
+    # has been run, previous values of all existing groups will remain unchanged!
     GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE = True
     
     # this is the thumbnail size for small image previews
