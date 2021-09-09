@@ -20,6 +20,10 @@ from haystack.query import EmptySearchQuerySet
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.functions import ensure_list_of_ints
 
+import logging
+
+logger = logging.getLogger('cosinnus')
+
 # FIXME: This can probably be replaced with SEARCH_MODEL_NAMES_REVERSE
 MODEL_ALIASES = {
     'todo': 'cosinnus_todo.todoentry',
@@ -166,7 +170,13 @@ class TaggableModelSearchForm(SearchForm):
                     if model_string == '<userprofile>':
                         model = get_user_profile_model()
                     else:
-                        model = apps.get_model(*model_string.split('.'))
+                        # GOTCHA: if you receive an error here and have disabled/left out a
+                        # cosinnus app, you should add it to `settings.COSINNUS_DISABLED_COSINNUS_APPS`!
+                        try:
+                            model = apps.get_model(*model_string.split('.'))
+                        except LookupError as e:
+                            logger.error('Search: Lookup error during search for cosinnus app model %s' % model_string, extra={'exception': e})
+                            continue
                     search_models.append(model)
                 # Add exchange model if activated
                 if exchange and f'{model_alias}s' in EXCHANGE_SEARCH_MODEL_NAMES_REVERSE:
