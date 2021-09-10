@@ -274,24 +274,22 @@ class ExternalEmailLinkRedirectNoticeMiddleware(MiddlewareMixin):
 class GroupResolvingMiddlewareMixin(object):
     """ Mixin for middleware that needs to resolve a possibly existing CosinnusGroup from the URL """
     
-    _group = 'undef'
-    
     def get_group(self, request):
         """ Glean the requested group from the URL, only once """
-        if self._group == 'undef':
+        if not hasattr(request, '_middleware_resolved_group'):
             try:
                 # get group name from URL, might already fail and except out on short URLs
                 group_name = request.path.split('/')[2] 
                 try:
-                    self._group = get_group_for_request(group_name, request)
+                    setattr(request, '_middleware_resolved_group', get_group_for_request(group_name, request))
                 except Exception as e:
                     if settings.DEBUG:
                         raise e
             except:
                 pass
-            if self._group == 'undef':
-                self._group = None
-        return self._group
+            if not hasattr(request, '_middleware_resolved_group'):
+                setattr(request, '_middleware_resolved_group', None)
+        return getattr(request, '_middleware_resolved_group')
     
     def is_url_for_publicly_visible_group_microsite(self, request):
         """ Is this a URL for a valid group that is publicly visible? """
