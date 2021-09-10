@@ -301,6 +301,10 @@ class GroupResolvingMiddlewareMixin(object):
                 path_split = request.path.split('/')
                 if path_split[3] == '' or path_split[3] == 'microsite':
                     return True
+                # the note embed view is part of the microsite and only ever displays content marked as public
+                # so we allow it for publicly_visible groups
+                if path_split[3] == 'note' and path_split[4] == 'embed':
+                    return True
             except:
                 pass
         return False
