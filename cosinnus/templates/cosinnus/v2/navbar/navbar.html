@@ -86,14 +86,14 @@
 	    		<i class="fas fa-fw fa-home"></i>
 			</a>
 			{% endblock %}
-			{% if SETTINGS.COSINNUS_CLOUD_ENABLED and request.user.is_authenticated %}
-			    {% block cloud_icon_button %}
+			{% block cloud_icon_button %}
+				{% if SETTINGS.COSINNUS_CLOUD_ENABLED and request.user.is_authenticated %}
 			        <a class="nav-button" href="{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}" role="button"
 			               title="{% trans "Cloud" %}" {% if SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}>
 			            <i class="fas fa-fw fa-cloud"></i>
 			        </a>
-			    {% endblock %}
-		    {% endif %}
+		    	{% endif %}
+			{% endblock %}
 			{% block calendar_icon_button %}
 				{% if SETTINGS.NEWW_EVENTS_GROUP_SLUG %}
 					<a class="nav-button" href="{% group_url "cosinnus:event:list" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" role="button" title="{% trans "Events" %}">
@@ -103,45 +103,57 @@
 			{% endblock %}
 
 			{% if request.user.is_authenticated %}
-                {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
-				<a class="nav-button nav-button-with-message-counter" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-global' %}{% else %}{% url 'postman:inbox' %}{% endif %}"
-				         {% if SETTINGS.COSINNUS_ROCKET_ENABLED and SETTINGS.COSINNUS_ROCKET_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}
-				         role="button" title="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% trans "Rocket.Chat" %}{% else %}{% trans "Messages" %}{% endif %}"
-				         id="navbar-messages-button" >
-		    		<i class="fas fa-fw fa-envelope"></i>
-		    		<span class="message-counter" style="display: none;"></span>
-				</a>
-				{% endif %}
-				{% if SETTINGS.COSINNUS_NOTIFICATION_ALERTS_ENABLED %}
-		        <a class="nav-button nav-button-with-message-counter nav-collapse-button collapsed" id="navbar-notifications-button" rel="toggle" role="button"
-		                    title="{% trans "Notifications" %}"
-		                    aria-expanded="false" aria-controls="notification-widget-collapse"
-		                    data-toggle="collapse" data-target="#notification-widget-collapse">
-		            <i class="fas fa-fw fa-bell"></i>
-		            <span class="message-counter" style="display: none;"></span>
-		        </a>
-		        {% endif %}
-				<a class="nav-button user-menu-button nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Profile" %}"
-				    		aria-expanded="false" aria-controls="user-menu-collapse"
-				    		data-toggle="collapse" data-target="#user-menu-collapse">
-				    {% include "cosinnus/user/user_avatar_image.html" with user=request.user image_size="mini" show_v2_icon_on_missing=True %}
-				</a>
+				{% block envelope_icon_button %}
+					{% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+					<a class="nav-button nav-button-with-message-counter" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-global' %}{% else %}{% url 'postman:inbox' %}{% endif %}"
+							{% if SETTINGS.COSINNUS_ROCKET_ENABLED and SETTINGS.COSINNUS_ROCKET_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}
+							role="button" title="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% trans "Rocket.Chat" %}{% else %}{% trans "Messages" %}{% endif %}"
+							id="navbar-messages-button" >
+						<i class="fas fa-fw fa-envelope"></i>
+						<span class="message-counter" style="display: none;"></span>
+					</a>
+					{% endif %}
+				{% endblock %}
+				{% block bell_icon_button %}
+					{% if SETTINGS.COSINNUS_NOTIFICATION_ALERTS_ENABLED %}
+					<a class="nav-button nav-button-with-message-counter nav-collapse-button collapsed" id="navbar-notifications-button" rel="toggle" role="button"
+								title="{% trans "Notifications" %}"
+								aria-expanded="false" aria-controls="notification-widget-collapse"
+								data-toggle="collapse" data-target="#notification-widget-collapse">
+						<i class="fas fa-fw fa-bell"></i>
+						<span class="message-counter" style="display: none;"></span>
+					</a>
+					{% endif %}
+				{% endblock %}
+				{% block avatar_icon_menu %}
+					<a class="nav-button user-menu-button nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Profile" %}"
+								aria-expanded="false" aria-controls="user-menu-collapse"
+								data-toggle="collapse" data-target="#user-menu-collapse">
+						{% include "cosinnus/user/user_avatar_image.html" with user=request.user image_size="mini" show_v2_icon_on_missing=True %}
+					</a>
+				{% endblock %}
 			{% else %}
-			    {% if not SETTINGS.COSINNUS_LANGUAGE_SELECT_DISABLED %}
-				<a class="nav-button nav-header-textlink" rel="toggle" role="button" title="{% trans "Change language" %}"
-			    		aria-expanded="false" aria-controls="language-menu-collapse"
-			    		data-toggle="collapse" data-target="#language-menu-collapse">
-	            	{{ request.LANGUAGE_CODE|upper }}
-	            </a>
-	            {% endif %}
-	            <a class="nav-button nav-header-textlink" href="{% url 'login' %}" title="{% trans "Log in" %}">
-	            	{% trans "Log in" %}
-	            </a>
-                {% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
-		            <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
-		            	{% trans "Register" %}
-		            </a>
-	            {% endif %}
+				{% block language_icon_menu %}
+					{% if not SETTINGS.COSINNUS_LANGUAGE_SELECT_DISABLED %}
+					<a class="nav-button nav-header-textlink" rel="toggle" role="button" title="{% trans "Change language" %}"
+							aria-expanded="false" aria-controls="language-menu-collapse"
+							data-toggle="collapse" data-target="#language-menu-collapse">
+						{{ request.LANGUAGE_CODE|upper }}
+					</a>
+					{% endif %}
+				{% endblock %}
+				{% block login_url %}
+					<a class="nav-button nav-header-textlink" href="{% url 'login' %}" title="{% trans "Log in" %}">
+						{% trans "Log in" %}
+					</a>
+				{% endblock %}
+				{% block register_url %}
+					{% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
+						<a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
+							{% trans "Register" %}
+						</a>
+					{% endif %}
+				{% endblock %}
 			{% endif %}
 	    </div>
 	    
