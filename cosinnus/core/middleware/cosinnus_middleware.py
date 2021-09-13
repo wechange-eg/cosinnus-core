@@ -293,7 +293,7 @@ class GroupResolvingMiddlewareMixin(object):
     
     def is_url_for_publicly_visible_group_microsite(self, request):
         """ Is this a URL for a valid group that is publicly visible? """
-        if self.get_group(request) and self.get_group(request).publicly_visible:
+        if self.get_group(request) and self.get_group(request).is_publicly_visible:
             try:
                 # check if the URL matches a microsite for this publicly visible group
                 path_split = request.path.split('/')

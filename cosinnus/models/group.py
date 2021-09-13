@@ -758,6 +758,7 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
                                   max_length=250)
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
     public = models.BooleanField(_('Public'), default=False)
+    # note: use the `is_publicly_visible()` attr instead of this field to determine the group's visibility!
     publicly_visible = models.BooleanField(_('Publicly visible'), 
                                            default=settings.COSINNUS_GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE, 
                                            help_text=_('Checks if a group/project should be visible publicly'))
@@ -1288,6 +1289,13 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
     @property
     def is_forum_group(self):
         return self.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+    
+    @property
+    def is_publicly_visible(self):
+        """ Checks if this group can be viewed (from the outside) for non-logged-in users. """
+        if not settings.COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN:
+            return settings.COSINNUS_GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE
+        return self.publicly_visible
 
     def _get_media_image_path(self, file_field, filename_modifier=None):
         """Gets the unique path for each image file in the media directory"""

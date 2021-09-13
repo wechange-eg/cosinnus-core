@@ -1636,7 +1636,7 @@ class GroupStartpage(View):
             else:
                 # if the group is not accessible, redirect to microsite 
                 #   in case if the group's microsite should not be closed for the non-authenticated users
-                if not check_object_read_access(self.group, request.user) and not self.group.publicly_visible:
+                if not check_object_read_access(self.group, request.user) and not self.group.is_publicly_visible:
                     return False
                 return True
 

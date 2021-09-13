@@ -365,7 +365,12 @@ class ModelRetrievalMixin(object):
                 queryset = queryset.filter(portal__id__in=portal_list)
                 # check if a group/project should appear in quicksearch results for anonymous users
                 if model is get_cosinnus_group_model() or issubclass(model, get_cosinnus_group_model()) and not user.is_authenticated:
-                    queryset = queryset.filter(publicly_visible=True)
+                    # if this portal cannot select the group visibility and the default is not visible, return no groups
+                    if not settings.COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN:
+                        if settings.COSINNUS_GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE == False:
+                            queryset = queryset.none()
+                    else:
+                        queryset = queryset.filter(publicly_visible=True)
                 if all_public:
                     queryset = queryset.filter(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
             else:

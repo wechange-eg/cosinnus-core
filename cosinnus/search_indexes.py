@@ -97,12 +97,12 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
         return obj.get_managed_tag_ids()
     
     def prepare_public(self, obj):
-        if not obj.publicly_visible:
+        if not obj.is_publicly_visible:
             return False
         return obj.public
 
     def prepare_always_visible(self, obj):
-        return obj.publicly_visible
+        return obj.is_publicly_visible
     
     def prepare_visible_for_all_authenticated_users(self, obj):
         """ This is hacky, but Haystack provides no method to filter
