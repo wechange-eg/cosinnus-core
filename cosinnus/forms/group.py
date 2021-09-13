@@ -163,6 +163,7 @@ class CosinnusBaseGroupForm(TranslatedFieldsFormMixin, FacebookIntegrationGroupF
                          'membership_mode'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
                         + (['show_contact_form'] if settings.COSINNUS_ALLOW_CONTACT_FORM_ON_MICROPAGE else []) \
+                        + (['publicly_visible'] if settings.COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN else []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else []) \
                         + (['embedded_dashboard_html',] if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED else []) \
                         + (['managed_tag_field',] if (settings.COSINNUS_MANAGED_TAGS_ENABLED \

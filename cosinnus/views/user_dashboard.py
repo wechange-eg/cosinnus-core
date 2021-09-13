@@ -362,8 +362,10 @@ class ModelRetrievalMixin(object):
                 portal_list += getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
             
             if model is CosinnusIdea or model is get_cosinnus_group_model() or issubclass(model, get_cosinnus_group_model()):
-                # TODO: if groups ever become non-publicly visible, filter for group view permission here!
                 queryset = queryset.filter(portal__id__in=portal_list)
+                # check if a group/project should appear in quicksearch results for anonymous users
+                if model is get_cosinnus_group_model() or issubclass(model, get_cosinnus_group_model()) and not user.is_authenticated:
+                    queryset = queryset.filter(publicly_visible=True)
                 if all_public:
                     queryset = queryset.filter(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
             else:

@@ -418,6 +418,14 @@ class CosinnusConf(AppConf):
     # should the group avatar image be a required field?
     GROUP_AVATAR_REQUIRED = False
     
+    # whether to show the "publicly_visible" field in the group form options
+    GROUP_PUBLICY_VISIBLE_OPTION_SHOWN = True
+    
+    # sets the "publicly_visible" field value per portal
+    # Note! this is reflected in migration 0113! If the setting is changed afte the migration
+    # has been run, previous values of all existing groups will remain unchanged!
+    GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE = True
+    
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)
     
@@ -589,6 +597,8 @@ class CosinnusConf(AppConf):
     
     # should twitter and flickr embed fields and display be active for microsites?
     MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE = False
+    
+    
     
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
@@ -804,6 +814,11 @@ class CosinnusConf(AppConf):
     
     # if true, an additional signup form field will be present
     SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK = False
+    
+    # whether the user signup form has the media-tag location field with a map
+    USER_SIGNUP_INCLUDES_LOCATION_FIELD = False
+    # if USER_SIGNUP_INCLUDES_LOCATION_FIELD==True, whether the field is required
+    USER_SIGNUP_LOCATION_FIELD_IS_REQUIRED = False
     
     # if True, the modern user import views will be shown
     # they require a per-portal implementation of the importer class

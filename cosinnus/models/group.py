@@ -758,6 +758,9 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
                                   max_length=250)
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
     public = models.BooleanField(_('Public'), default=False)
+    publicly_visible = models.BooleanField(_('Publicly visible'), 
+                                           default=settings.COSINNUS_GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE, 
+                                           help_text=_('Checks if a group/project should be visible publicly'))
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
                                    related_name='cosinnus_groups', through='cosinnus.CosinnusGroupMembership')
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
@@ -1706,7 +1709,7 @@ class CosinnusLocation(models.Model):
     def location_url(self):
         if not self.location_lat or not self.location_lon:
             return None
-        return 'http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
+        return 'https://openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
     
     def save(self, *args, **kwargs):
         super(CosinnusLocation, self).save(*args, **kwargs)

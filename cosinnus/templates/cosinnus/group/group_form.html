@@ -410,6 +410,14 @@
 		                {% block portal_specific_group_extra_fields %}
 		                    {% include 'cosinnus/fields/userprofile_extra_formfields.html' with form=form.forms.obj %}
 		                {% endblock %}
+
+						{# Checkbox field #}
+						{% if form.forms.obj.fields.publicly_visible %}
+							{% trans "Group/Project is publicly visible" as groups_projects_public_visibility_label %}
+							{% trans "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search." as groups_projects_public_visibility_legend %}
+							{% trans "Enable the public visibility of your group/project" as groups_projects_public_visibility_box_label %}
+							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.publicly_visible label=groups_projects_public_visibility_label legend=groups_projects_public_visibility_legend checkbox_label=groups_projects_public_visibility_box_label %}
+						{% endif %}
                         
                         {% block visibility_field %}
                             {% if not group_model == "CosinnusConference" %}

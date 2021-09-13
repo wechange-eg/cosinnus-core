@@ -58,8 +58,10 @@ def redirect_to_not_logged_in(request, view=None, group=None):
     next_arg = urlencode(next_arg)
     if group is not None:
         messages.warning(request, _('Only registered members can see the content you requested! Log in or create an account now!'))
+    else:
+        messages.error(request, _('Please log in to access this page.'))
+    if group is not None and group.publicly_visible:
         return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': group}) + '?next=' + next_arg)
-    messages.error(request, _('Please log in to access this page.'))
     return HttpResponseRedirect(reverse_lazy('login') + '?next=' + next_arg)
     
 

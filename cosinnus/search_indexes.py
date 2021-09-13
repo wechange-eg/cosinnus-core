@@ -33,8 +33,9 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     group_members = indexes.MultiValueField(indexed=False)
     sdgs = indexes.MultiValueField(model_attr='sdgs', null=True)
     managed_tags = indexes.MultiValueField()
-    public = indexes.BooleanField(model_attr='public')
-    always_visible = indexes.BooleanField(default=True)
+    public = indexes.BooleanField()
+    always_visible = indexes.BooleanField()
+    visible_for_all_authenticated_users = indexes.BooleanField()
     created = indexes.DateTimeField(model_attr='created')
     group = indexes.IntegerField(model_attr='id')
     from_date = indexes.DateTimeField(model_attr='from_date', null=True)
@@ -94,6 +95,20 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     
     def prepare_managed_tags(self, obj):
         return obj.get_managed_tag_ids()
+    
+    def prepare_public(self, obj):
+        if not obj.publicly_visible:
+            return False
+        return obj.public
+
+    def prepare_always_visible(self, obj):
+        return obj.publicly_visible
+    
+    def prepare_visible_for_all_authenticated_users(self, obj):
+        """ This is hacky, but Haystack provides no method to filter
+            for models in subqueries, so we set this indexed flag to be
+            able to filter on for permissions """
+        return True
     
     def prepare_group_members(self, obj):
         if not hasattr(obj, '_group_members'):

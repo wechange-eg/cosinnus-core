@@ -31,7 +31,13 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
         if not self.request.user.is_authenticated and getattr(settings, 'COSINNUS_MICROSITES_DISABLE_ANONYMOUS_ACCESS', False) \
                 and not request.GET.get('invited', None) == '1':
             return redirect_to_not_logged_in(self.request, view=self)
-        return super(GroupMicrositeView, self).dispatch(request, *args, **kwargs)
+        ret = super(GroupMicrositeView, self).dispatch(request, *args, **kwargs)
+        
+        # check if microsite/group is really publicly accesible; if not, redirect after all
+        if not self.request.user.is_authenticated and not self.group.publicly_visible:
+            print(f'{self.request.GET.get("next")} - {self.request.path}')
+            return redirect_to_not_logged_in(self.request, group=self.group)
+        return ret
     
     def get_template_names(self):
         """ Return the extending compact-conference microsite if this is a conference
