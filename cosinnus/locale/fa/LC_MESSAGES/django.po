@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:22+0200\n"
+"POT-Creation-Date: 2021-09-14 15:38+0200\n"
 "PO-Revision-Date: 2021-05-25 15:32+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.0.6\n"
 
 #, python-format
@@ -154,9 +154,6 @@ msgstr "Rocket: حساب‌های راکت‌چت ناپیدا ساخته/مرم
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: مشکل عضویت اتاق ناپیدای کاربران را حل کن"
 
-msgid "Restart"
-msgstr "بازراه‌اندازی"
-
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "نشانی ایمیل این حساب کاربری که می‌خواهید با آن به سامانه متصل شوید ابتدا باید فعال شود."
 
@@ -228,18 +225,6 @@ msgstr "خوراک بدون لاکتوز"
 msgid "Gluten-free cuisine"
 msgstr "خوراک بدون گلوتن"
 
-msgid "General"
-msgstr "همگانی"
-
-msgid "Active"
-msgstr "فعال"
-
-msgid "Restricted"
-msgstr "محدودشده"
-
-msgid "Premium"
-msgstr "اعلاء"
-
 msgid "Bookmark"
 msgstr ""
 
@@ -251,6 +236,18 @@ msgstr ""
 
 msgid "Bookmarked Users list"
 msgstr ""
+
+msgid "General"
+msgstr "همگانی"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Restricted"
+msgstr "محدودشده"
+
+msgid "Premium"
+msgstr "اعلاء"
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "تنها اعضای ثبت‌نام شده می‌توانند درون‌مایه‌ی درخواستی را ببینند! به سامانه وصل بشوید یا یک حساب بسازید!"
@@ -275,6 +272,9 @@ msgstr "این حساب دیگر فعال نیست. شما از سامانه خ�
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr "از آن‌جا که روی لینکی که در یکی از ایمیل‌های ما بوده کلیک کرده‌اید به این‌جا فرستاده‌شده‌اید. به دلیل مسائل امنیتی ما نشانی وب‌سایت‌های بیرونی را در ایمیل‌هایم قرار نمی‌دهیم. اگر مایلید به این نشانی بروید پیوند آن در زیر آمده است."
+
+msgid "Sorry, only admin accounts may log in at this time."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "پس از گذر مدت زمانی غیرفعال بودن از سامانه بیرون فرستاده شده‌اید."
@@ -739,6 +739,15 @@ msgstr "پسندیدن"
 msgid "Persons"
 msgstr "افراد"
 
+msgid "Location"
+msgstr ""
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
+
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
 msgstr "لطفن یک ایمیل و گذرواژه‌‌ی صحیح وارد کنید. توجه داشته باشید که هر دو بخش ممکن است به حروف بزرگ و کوچک حساس باشد."
 
@@ -1054,6 +1063,53 @@ msgstr ""
 msgid "Note from the organizers"
 msgstr ""
 
+msgid "Conference"
+msgstr ""
+
+msgid "Start Datetime"
+msgstr ""
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+msgid "End Datetime"
+msgstr ""
+
+#, fuzzy
+#| msgid "pin to enter for telephone participants"
+msgid "Conference participants"
+msgstr "گذرواژه برای شرکت‌کننده‌هایی که با تلفن وارد می‌شوند"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus Conference Setting"
+msgid "Cosinnus Conference Premium Block"
+msgstr "تنظیم کنفرانس Cosinnus"
+
+#, fuzzy
+#| msgid "Cosinnus Conference Settings"
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "تنظیمات کنفرانس Cosinnus"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+#| msgid "Maximum Coffee Table Participants"
+msgid "Maximum BBB participants"
+msgstr "بیش‌ترین شمار مشارکت‌کننده‌های میز قهوه"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr ""
 
@@ -1229,11 +1285,13 @@ msgstr ""
 msgid "Dynamic choice field choices"
 msgstr ""
 
+#, fuzzy
+#| msgid "Enter a description"
+msgid "Default userprofile description"
+msgstr "یک تعریف وارد کنید"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
-msgstr ""
-
-msgid "Conference"
 msgstr ""
 
 msgid "Regular membership requests"
@@ -1270,6 +1328,14 @@ msgid "Wallpaper image"
 msgstr ""
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Is visible"
+msgid "Publicly visible"
+msgstr "آشکار است"
+
+msgid "Checks if a group/project should be visible publicly"
 msgstr ""
 
 msgid "Application method"
@@ -1338,12 +1404,6 @@ msgstr ""
 msgid "Is conference"
 msgstr ""
 
-msgid "Start Datetime"
-msgstr ""
-
-msgid "End Datetime"
-msgstr ""
-
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
 
@@ -1369,6 +1429,9 @@ msgid "Related Teams"
 msgstr ""
 
 msgid "Dynamic extra fields"
+msgstr ""
+
+msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr ""
 
 msgid "Cosinnus project"
@@ -1428,15 +1491,6 @@ msgid "Permanent Team Redirects"
 msgstr ""
 
 msgid "Permanent Team Redirect"
-msgstr ""
-
-msgid "Location"
-msgstr ""
-
-msgid "Latitude"
-msgstr ""
-
-msgid "Longitude"
 msgstr ""
 
 msgid "CosinnusLocation"
@@ -2096,6 +2150,12 @@ msgstr ""
 msgid "Back to Project Overview"
 msgstr ""
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
 
@@ -2107,6 +2167,11 @@ msgstr ""
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr ""
+
+#, fuzzy
+#| msgid "BBB Server for Premium Conferences"
+msgid "Overview - Premium Conferences Only"
+msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
 
 msgid "Overview - All Conferences"
 msgstr ""
@@ -2126,13 +2191,30 @@ msgstr ""
 msgid "View Past"
 msgstr ""
 
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+msgid "Permanently Premium"
+msgstr ""
+
 msgid "Portal Setting"
 msgstr ""
 
 msgid "Conference Settings"
 msgstr ""
 
-msgid "Is premium"
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium active"
+msgstr "اعلاء"
+
+msgid "Premium inactive, but scheduled"
 msgstr ""
 
 msgid "Not premium"
@@ -2219,6 +2301,11 @@ msgstr ""
 
 msgid "Conference Overview"
 msgstr ""
+
+#, fuzzy
+#| msgid "BBB Server for Premium Conferences"
+msgid "Premium Conferences Only"
+msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
 
 msgid "Conferences with Custom Settings"
 msgstr ""
@@ -3167,9 +3254,6 @@ msgstr ""
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr ""
 
-msgid "Group:"
-msgstr ""
-
 msgid "No Description set"
 msgstr ""
 
@@ -3212,6 +3296,15 @@ msgstr ""
 
 msgctxt "written next to optional form fields"
 msgid "optional"
+msgstr ""
+
+msgid "Add/Edit translations"
+msgstr ""
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
 msgstr ""
 
 msgid "Date"
@@ -3279,7 +3372,13 @@ msgctxt "time"
 msgid "until"
 msgstr ""
 
+msgid "Only conference members can see the event\\'s description."
+msgstr ""
+
 msgid "More infos..."
+msgstr ""
+
+msgid "Please Login or Register to view the event's description."
 msgstr ""
 
 msgid "You will now receive notifications for content posted in this conference."
@@ -3642,6 +3741,15 @@ msgstr ""
 msgid "Select related Projects/Groups"
 msgstr ""
 
+msgid "Group/Project is publicly visible"
+msgstr ""
+
+msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your group/project"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr ""
 
@@ -3676,6 +3784,18 @@ msgid "Which apps should be activated?"
 msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
+msgstr ""
+
+msgid "Contact Form on Micropage"
+msgstr ""
+
+msgid "Display contact form."
+msgstr ""
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+msgid "Contact Form"
 msgstr ""
 
 msgid "From which apps should public items be shown on the microsite?"
@@ -3859,6 +3979,29 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
+msgstr ""
+
+msgid "Email to group administrator"
+msgstr ""
+
+#, fuzzy
+#| msgid "email address"
+msgid "Your email address"
+msgstr "نشانی ایمیل"
+
+msgid "Message"
+msgstr ""
+
+msgid "Your message"
+msgstr ""
+
+msgid "Captcha"
+msgstr ""
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr ""
+
+msgid "Generate a new captcha"
 msgstr ""
 
 msgid "Tweets"
@@ -4201,6 +4344,27 @@ msgstr ""
 
 #, python-format
 msgid "%(site_name)s CSV import was successful"
+msgstr ""
+
+#, python-format
+msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
 msgstr ""
 
 #, python-format
@@ -4877,15 +5041,6 @@ msgid "Last name"
 msgstr ""
 
 msgid "You can supply your last name to be displayed as well"
-msgstr ""
-
-msgid "Captcha"
-msgstr ""
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr ""
-
-msgid "Generate a new captcha"
 msgstr ""
 
 msgid "Search options..."
@@ -5662,9 +5817,6 @@ msgstr ""
 msgid "I am open for cooperation requests"
 msgstr ""
 
-msgid "Message"
-msgstr ""
-
 msgid "Welcome!"
 msgstr ""
 
@@ -6119,6 +6271,9 @@ msgid "Home"
 msgstr ""
 
 msgid "Rocket.Chat"
+msgstr ""
+
+msgid "Profile"
 msgstr ""
 
 msgid "Change language"
@@ -6831,6 +6986,14 @@ msgstr ""
 msgid "Your idea was deleted successfully."
 msgstr ""
 
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your message has been sent."
+msgstr "تغییرات‌تان ذخیره شده‌اند."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr ""
 
@@ -7047,3 +7210,6 @@ msgstr "در حال حاضر شما عضو %s نیستید! اگر مایلید 
 
 msgid "Your changes have been saved."
 msgstr "تغییرات‌تان ذخیره شده‌اند."
+
+#~ msgid "Restart"
+#~ msgstr "بازراه‌اندازی"

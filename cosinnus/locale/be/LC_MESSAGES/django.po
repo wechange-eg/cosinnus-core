@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:22+0200\n"
+"POT-Creation-Date: 2021-09-14 15:38+0200\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -153,9 +153,6 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
-msgid "Restart"
-msgstr ""
-
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr ""
 
@@ -225,6 +222,18 @@ msgstr ""
 msgid "Gluten-free cuisine"
 msgstr ""
 
+msgid "Bookmark"
+msgstr ""
+
+msgid "Bookmarked"
+msgstr ""
+
+msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
+msgstr ""
+
 msgid "General"
 msgstr "Агульныя"
 
@@ -236,18 +245,6 @@ msgid "Restricted"
 msgstr ""
 
 msgid "Premium"
-msgstr ""
-
-msgid "Bookmark"
-msgstr ""
-
-msgid "Bookmarked"
-msgstr ""
-
-msgid "Bookmark list"
-msgstr ""
-
-msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
@@ -270,6 +267,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "Гэта акаўнт ужо не актыўны. Вы выйшлі з акаўнту."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -756,6 +756,15 @@ msgstr "Упадабаць"
 msgid "Persons"
 msgstr "Асобы"
 
+msgid "Location"
+msgstr "Месцазнаходжанне"
+
+msgid "Latitude"
+msgstr "Шырата"
+
+msgid "Longitude"
+msgstr "Даўгата"
+
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
 msgstr "Калі ласка, увядзіце сапраўдныя адрас электроннай пошты і пароль. Звярніце ўвагу, што абодва палі могуць быць рэгістраадчувальнымі."
 
@@ -1104,6 +1113,59 @@ msgstr "CosinnusМесцазнаходжанні"
 msgid "Note from the organizers"
 msgstr ""
 
+#, fuzzy
+#| msgid "Configure"
+msgid "Conference"
+msgstr "Сканфігураваць"
+
+#, fuzzy
+#| msgid "Start date."
+msgid "Start Datetime"
+msgstr "Дата пачатку."
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+#, fuzzy
+#| msgid "End date."
+msgid "End Datetime"
+msgstr "Дата заканчэння."
+
+#, fuzzy
+#| msgid "Cosinnus projects"
+msgid "Conference participants"
+msgstr "Cosinnus-праекты"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus project"
+msgid "Cosinnus Conference Premium Block"
+msgstr "Cosinnus-праект"
+
+#, fuzzy
+#| msgid "Cosinnus projects"
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "Cosinnus-праекты"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+#| msgid "Participants"
+msgid "Maximum BBB participants"
+msgstr "Удзельнікі(-цы)"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr "Тэкст скаргі"
 
@@ -1283,14 +1345,14 @@ msgstr ""
 msgid "Dynamic choice field choices"
 msgstr ""
 
+#, fuzzy
+#| msgid "Detailed Description"
+msgid "Default userprofile description"
+msgstr "Падрабязнае апісанне"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Праект"
-
-#, fuzzy
-#| msgid "Configure"
-msgid "Conference"
-msgstr "Сканфігураваць"
 
 #, fuzzy
 #| msgid "New membership request"
@@ -1329,6 +1391,14 @@ msgstr "Фонавая выява"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Паказваецца як вялікая банарная выява на мікрасайце (1140 x 240 px)"
+
+#, fuzzy
+#| msgid "Public (visible without login)"
+msgid "Publicly visible"
+msgstr "Публічны (бачна без ўваходу на сайт)"
+
+msgid "Checks if a group/project should be visible publicly"
+msgstr ""
 
 #, fuzzy
 #| msgid "Application name"
@@ -1402,16 +1472,6 @@ msgstr "Ідэнтыфікатар Facebook-групы"
 msgid "Is conference"
 msgstr ""
 
-#, fuzzy
-#| msgid "Start date."
-msgid "Start Datetime"
-msgstr "Дата пачатку."
-
-#, fuzzy
-#| msgid "End date."
-msgid "End Datetime"
-msgstr "Дата заканчэння."
-
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
 
@@ -1442,6 +1502,11 @@ msgstr "Роднасныя тэрміны"
 
 msgid "Dynamic extra fields"
 msgstr ""
+
+#, fuzzy
+#| msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "Калі актыўна, на мікрасайце будзе адлюстроўвацца рамка закліку да дзеяння."
 
 msgid "Cosinnus project"
 msgstr "Cosinnus-праект"
@@ -1504,15 +1569,6 @@ msgstr "Нязменныя перанакіраванні на каманду"
 
 msgid "Permanent Team Redirect"
 msgstr "Нязменнае перанакіраванне на групу"
-
-msgid "Location"
-msgstr "Месцазнаходжанне"
-
-msgid "Latitude"
-msgstr "Шырата"
-
-msgid "Longitude"
-msgstr "Даўгата"
 
 msgid "CosinnusLocation"
 msgstr "CosinnusМесцазнаходжанне"
@@ -2200,6 +2256,12 @@ msgstr "Інфармацыя не прызначана"
 msgid "Back to Project Overview"
 msgstr "Вярнуцца да агульнага апісання праекту"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
 
@@ -2212,6 +2274,10 @@ msgstr ""
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Усе праекты"
 
 #, fuzzy
 msgid "Overview - All Conferences"
@@ -2236,6 +2302,20 @@ msgstr ""
 msgid "View Past"
 msgstr "Прагледзець праект"
 
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team members only"
+msgid "Permanently Premium"
+msgstr "Толькі чальцы каманды"
+
 #, fuzzy
 #| msgid "Privacy settings"
 msgid "Portal Setting"
@@ -2246,7 +2326,11 @@ msgstr "Налады прыватнасці"
 msgid "Conference Settings"
 msgstr "Cosinnus-праекты"
 
-msgid "Is premium"
+#, fuzzy
+msgid "Premium active"
+msgstr "(Неактыўная)"
+
+msgid "Premium inactive, but scheduled"
 msgstr ""
 
 msgid "Not premium"
@@ -2354,6 +2438,11 @@ msgstr "Простая статыстыка"
 #, fuzzy
 #| msgid "Create Event"
 msgid "Conference Overview"
+msgstr "Стварыць падзею"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Premium Conferences Only"
 msgstr "Стварыць падзею"
 
 #, fuzzy
@@ -3411,9 +3500,6 @@ msgstr "Цяпер Вы будзеце атрымліваць апавяшчэн
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "Цяпер Вы будзеце атрымліваць апавяшчэнні, калі ў гэтай групе будзе публікавацца публічнае змесціва."
 
-msgid "Group:"
-msgstr "Група:"
-
 msgid "No Description set"
 msgstr "Апісанне не прызначана"
 
@@ -3457,6 +3543,17 @@ msgstr "Аватар будзе выдалены, як толькі вы зах�
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "неабавязкова"
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Add/Edit translations"
+msgstr "Дадатковыя параметры"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "Дата"
@@ -3534,9 +3631,17 @@ msgid "until"
 msgstr "Да"
 
 #, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the event\\'s description."
+msgstr "Толькі чальцы каманды могуць бачыць матэрыялы, якія Вы запыталі. Падайце запыт на членства!"
+
+#, fuzzy
 #| msgid "No info."
 msgid "More infos..."
 msgstr "Няма інфармацыі."
+
+msgid "Please Login or Register to view the event's description."
+msgstr ""
 
 #, fuzzy
 msgid "You will now receive notifications for content posted in this conference."
@@ -3925,6 +4030,17 @@ msgstr "Ці ёсць іншыя праекты/групы, звязаныя з 
 msgid "Select related Projects/Groups"
 msgstr "Выбраць звязаныя праекты/групы"
 
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "Group/Project is publicly visible"
+msgstr "Гэты праект будзе пазначаны як бачны ўсім!"
+
+msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your group/project"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr "Налады прыватнасці"
 
@@ -3961,6 +4077,24 @@ msgstr "Якія прыкладанні трэба актываваць?"
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Гэта прыкладанне можна актываваць толькі для групы, а не для праекта!"
+
+#, fuzzy
+#| msgid "Cosinnus Micropages"
+msgid "Contact Form on Micropage"
+msgstr "Мікрастаронкі Cosinnus"
+
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Display contact form."
+msgstr "Кантактныя даныя"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Form"
+msgstr "Кантактныя даныя"
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Публічныя элементы з якіх прыкладанняў павінны адлюстроўвацца на мікрасайце?"
@@ -4148,6 +4282,34 @@ msgstr "Падзяліцца на Facebook"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
+msgstr ""
+
+#, fuzzy
+#| msgid "Group Administrator"
+msgid "Email to group administrator"
+msgstr "Адміністратар групы"
+
+#, fuzzy
+#| msgid "email address"
+msgid "Your email address"
+msgstr "адрас электроннай пошты"
+
+#, fuzzy
+#| msgid "Messages"
+msgid "Message"
+msgstr "Паведамленні"
+
+#, fuzzy
+msgid "Your message"
+msgstr "Паведамленні"
+
+msgid "Captcha"
+msgstr "Капча"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "Нам трэба пераканацца, што Вы сапраўды чалавек (прабачце!)"
+
+msgid "Generate a new captcha"
 msgstr ""
 
 msgid "Tweets"
@@ -4533,6 +4695,27 @@ msgstr ""
 #, python-format
 msgid "%(site_name)s CSV import was successful"
 msgstr "%(site_name)s CSV-імпарт завяршыўся паспяхова"
+
+#, python-format
+msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5400,15 +5583,6 @@ msgstr "Прозвішча"
 msgid "You can supply your last name to be displayed as well"
 msgstr "Можаце дадаць сваё прозвішча, каб яно таксама адлюстроўвалася"
 
-msgid "Captcha"
-msgstr "Капча"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "Нам трэба пераканацца, што Вы сапраўды чалавек (прабачце!)"
-
-msgid "Generate a new captcha"
-msgstr ""
-
 msgid "Search options..."
 msgstr "Параметры пошуку..."
 
@@ -6248,11 +6422,6 @@ msgstr ""
 msgid "I am open for cooperation requests"
 msgstr ""
 
-#, fuzzy
-#| msgid "Messages"
-msgid "Message"
-msgstr "Паведамленні"
-
 msgid "Welcome!"
 msgstr "Сардэчна вітаем!"
 
@@ -6740,6 +6909,11 @@ msgstr ""
 
 msgid "Rocket.Chat"
 msgstr ""
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "Мой профіль"
 
 #, fuzzy
 msgid "Change language"
@@ -7572,6 +7746,14 @@ msgstr "Для дабаўлення кантэйнераў не пазначан
 msgid "Your idea was deleted successfully."
 msgstr "Ваша ідэя паспяхова выдаленая."
 
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your message has been sent."
+msgstr "Вашы змены захаваныя."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "Падчас апрацоўкі Вашага аватара здарылася памылка. Калі ласка, пераканайцеся, што Вы вылучылі дастаткова вялікую частку выявы!"
 
@@ -7808,6 +7990,9 @@ msgstr "Вы не з'яўляецеся чальцом %s! Пры жаданні
 msgid "Your changes have been saved."
 msgstr "Вашы змены захаваныя."
 
+#~ msgid "Group:"
+#~ msgstr "Група:"
+
 #, fuzzy
 #~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
@@ -8000,10 +8185,6 @@ msgstr "Вашы змены захаваныя."
 #, fuzzy
 #~ msgid "Import Projects and Groups or Users"
 #~ msgstr "Мае праекты і групы"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Паведамленні"
 
 #~ msgid "Invited you"
 #~ msgstr "Запрасіў(-ла) Вас"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:22+0200\n"
+"POT-Creation-Date: 2021-09-14 15:38+0200\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -154,9 +154,6 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
-msgid "Restart"
-msgstr ""
-
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Жүйеге кірмес бұрын, сіз пайдаланғыңыз келетін есептік жазба үшін электрондық пошта мекенжайын іске қосуыңыз керек."
 
@@ -226,6 +223,18 @@ msgstr ""
 msgid "Gluten-free cuisine"
 msgstr ""
 
+msgid "Bookmark"
+msgstr ""
+
+msgid "Bookmarked"
+msgstr ""
+
+msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
+msgstr ""
+
 msgid "General"
 msgstr "Жалпы"
 
@@ -237,18 +246,6 @@ msgid "Restricted"
 msgstr ""
 
 msgid "Premium"
-msgstr ""
-
-msgid "Bookmark"
-msgstr ""
-
-msgid "Bookmarked"
-msgstr ""
-
-msgid "Bookmark list"
-msgstr ""
-
-msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
@@ -271,6 +268,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "Бұл есептік жазба енді белсенді емес. Сіз жүйеден шықтыңыз."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -751,6 +751,15 @@ msgstr "Ұнату"
 msgid "Persons"
 msgstr "Адамдар"
 
+msgid "Location"
+msgstr "Орналасуы"
+
+msgid "Latitude"
+msgstr "Ендік"
+
+msgid "Longitude"
+msgstr "Ұзындық"
+
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
 msgstr "Жарамды электрондық пошта мекенжайы мен құпия сөзді енгізіңіз. Назар аударыңыз, екі өріс те регистрді ескеруі мүмкін."
 
@@ -1100,6 +1109,55 @@ msgstr "CosinnusОрналасулар"
 msgid "Note from the organizers"
 msgstr ""
 
+#, fuzzy
+msgid "Conference"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+#| msgid "Start date."
+msgid "Start Datetime"
+msgstr "Басталу күні."
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+#, fuzzy
+#| msgid "End date."
+msgid "End Datetime"
+msgstr "Мерзімнің аяқталуы."
+
+#, fuzzy
+msgid "Conference participants"
+msgstr "Бейне конференциялар сервері"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+msgid "Cosinnus Conference Premium Block"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "Бейне конференциялар сервері"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+#| msgid "Participants"
+msgid "Maximum BBB participants"
+msgstr "Мүшелер"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr "Шағым мәтіні"
 
@@ -1279,13 +1337,14 @@ msgstr "Егер ол енгізілсе, бүкіл сайт бойынша б�
 msgid "Dynamic choice field choices"
 msgstr ""
 
+#, fuzzy
+#| msgid "Detailed Description"
+msgid "Default userprofile description"
+msgstr "Толық сипаттама"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Жоба"
-
-#, fuzzy
-msgid "Conference"
-msgstr "Бейне конференциялар сервері"
 
 #, fuzzy
 #| msgid "New membership request"
@@ -1324,6 +1383,14 @@ msgstr "Фондық сурет"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Microsite-та (1140 x 240 px) үлкен баннер ретінде көрсетілген"
+
+#, fuzzy
+#| msgid "Public (visible without login)"
+msgid "Publicly visible"
+msgstr "Жалпыға қол жетімді (жүйеге кірусіз көрінетін)"
+
+msgid "Checks if a group/project should be visible publicly"
+msgstr ""
 
 #, fuzzy
 #| msgid "Application name"
@@ -1397,16 +1464,6 @@ msgstr "Nextcloud тобының идентификаторы"
 msgid "Is conference"
 msgstr ""
 
-#, fuzzy
-#| msgid "Start date."
-msgid "Start Datetime"
-msgstr "Басталу күні."
-
-#, fuzzy
-#| msgid "End date."
-msgid "End Datetime"
-msgstr "Мерзімнің аяқталуы."
-
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
 
@@ -1436,6 +1493,11 @@ msgstr "Қатысты командалар"
 
 msgid "Dynamic extra fields"
 msgstr ""
+
+#, fuzzy
+#| msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "Егер бұл функция белсенді болса, «Шақыруға әрекет ету» терезесі микросайтта көрсетіледі."
 
 msgid "Cosinnus project"
 msgstr "Косинус жобасы"
@@ -1498,15 +1560,6 @@ msgstr "Тұрақты топты қайта бағыттаулар"
 
 msgid "Permanent Team Redirect"
 msgstr "Тұрақты топты қайта бағыттау"
-
-msgid "Location"
-msgstr "Орналасуы"
-
-msgid "Latitude"
-msgstr "Ендік"
-
-msgid "Longitude"
-msgstr "Ұзындық"
 
 msgid "CosinnusLocation"
 msgstr "CosinnusОрналасу"
@@ -2190,6 +2243,12 @@ msgstr "Ақпарат жоқ"
 msgid "Back to Project Overview"
 msgstr "Жобаға шолуға оралу"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
 
@@ -2201,6 +2260,10 @@ msgstr "Сол жақтағы бетті таңдаңыз."
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Бейне конференциялар сервері"
 
 #, fuzzy
 msgid "Overview - All Conferences"
@@ -2225,6 +2288,19 @@ msgstr ""
 msgid "View Past"
 msgstr "Жобаны қарау"
 
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Бейне конференциялар сервері"
+
 #, fuzzy
 #| msgid "Privacy settings"
 msgid "Portal Setting"
@@ -2234,7 +2310,12 @@ msgstr "Құпиялылық параметрлері"
 msgid "Conference Settings"
 msgstr "Бейне конференциялар сервері"
 
-msgid "Is premium"
+#, fuzzy
+#| msgid "inactive"
+msgid "Premium active"
+msgstr "белсенді емес"
+
+msgid "Premium inactive, but scheduled"
 msgstr ""
 
 msgid "Not premium"
@@ -2340,6 +2421,11 @@ msgstr "Қарапайым статистика"
 #, fuzzy
 msgid "Conference Overview"
 msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Premium Conferences Only"
+msgstr "Шара құру"
 
 #, fuzzy
 msgid "Conferences with Custom Settings"
@@ -3393,9 +3479,6 @@ msgstr "Енді сіз осы жобада жалпыға ортақ мазмұ
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "Енді осы топқа жалпыға ортақ мазмұн орналастырылған кезде сіз хабарландырулар аласыз."
 
-msgid "Group:"
-msgstr "Топ:"
-
 msgid "No Description set"
 msgstr "Сипаттама жоқ"
 
@@ -3439,6 +3522,17 @@ msgstr "Аватар сақтағаннан кейін жойылады."
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "міндетті емес"
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Add/Edit translations"
+msgstr "Қосымша опциялар"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "Күні"
@@ -3516,9 +3610,17 @@ msgid "until"
 msgstr "Дейін"
 
 #, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the event\\'s description."
+msgstr "Сіз сұраған мазмұнды тек топ мүшелері көре алады. Қазір мүшелікке өтініш бер!"
+
+#, fuzzy
 #| msgid "No info."
 msgid "More infos..."
 msgstr "Ақпарат жоқ."
+
+msgid "Please Login or Register to view the event's description."
+msgstr ""
 
 #, fuzzy
 #| msgid "You will now receive notifications for content posted in this project."
@@ -3905,6 +4007,17 @@ msgstr "Осы жобамен / топпен байланысты жобалар
 msgid "Select related Projects/Groups"
 msgstr "Тиісті жобаларды / топтарды таңдау"
 
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "Group/Project is publicly visible"
+msgstr "Бұл жоба көпшілік назарына ұсынылады!"
+
+msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your group/project"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr "Құпиялылық параметрлері"
 
@@ -3941,6 +4054,24 @@ msgstr "Қандай қосымшаларды іске қосу керек?"
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Бұл қосымшаны жоба үшін емес, тек топ үшін іске қосуға болады!"
+
+#, fuzzy
+#| msgid "Cosinnus Micropages"
+msgid "Contact Form on Micropage"
+msgstr "Cosinnus Micropages"
+
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Display contact form."
+msgstr "Байланыс ақпараты"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Form"
+msgstr "Байланыс ақпараты"
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Микроситте қоғамдық нысандар қай қосымшалардан көрінуі керек?"
@@ -4128,6 +4259,34 @@ msgstr "Facebook-те бөлісіңіз"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr ""
+
+#, fuzzy
+#| msgid "Group Administrator"
+msgid "Email to group administrator"
+msgstr "Топ Әкімшісі"
+
+#, fuzzy
+#| msgid "email address"
+msgid "Your email address"
+msgstr "электрондық пошта мекенжайы"
+
+#, fuzzy
+#| msgid "Messages"
+msgid "Message"
+msgstr "Хабарламалар"
+
+#, fuzzy
+msgid "Your message"
+msgstr "Хабарламалар"
+
+msgid "Captcha"
+msgstr "Капча"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "Сіздің жеке тұлға екендігіңізге сенімді болуымыз керек (кешіріңіз!)"
+
+msgid "Generate a new captcha"
+msgstr "Жаңа капча жасаңыз"
 
 msgid "Tweets"
 msgstr "Твиттер"
@@ -4512,6 +4671,27 @@ msgstr ""
 #, python-format
 msgid "%(site_name)s CSV import was successful"
 msgstr "%(site_name)s CSV импорты сәтті өтті"
+
+#, python-format
+msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5371,15 +5551,6 @@ msgstr "Тегі"
 msgid "You can supply your last name to be displayed as well"
 msgstr "Сіз өзіңіздің тегіңізді де көрсете аласыз"
 
-msgid "Captcha"
-msgstr "Капча"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "Сіздің жеке тұлға екендігіңізге сенімді болуымыз керек (кешіріңіз!)"
-
-msgid "Generate a new captcha"
-msgstr "Жаңа капча жасаңыз"
-
 msgid "Search options..."
 msgstr "Қосымша опцияларды іздеу."
 
@@ -6201,11 +6372,6 @@ msgstr "Сізбен бірге жұмыс жасағысы келетін ба�
 msgid "I am open for cooperation requests"
 msgstr "Мен ынтымақтастық туралы өтініштерге дайынмын"
 
-#, fuzzy
-#| msgid "Messages"
-msgid "Message"
-msgstr "Хабарламалар"
-
 msgid "Welcome!"
 msgstr "Қош келдіңіз!"
 
@@ -6678,6 +6844,11 @@ msgstr "Бастапқы бет"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "Менің профилім"
 
 msgid "Change language"
 msgstr "Тілді өзгерту"
@@ -7506,6 +7677,14 @@ msgstr "Контейнерлерді қосуға арналған атау жо
 msgid "Your idea was deleted successfully."
 msgstr "Сіздің идеяңыз сәтті жойылды."
 
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your message has been sent."
+msgstr "Сіздің өзгертулеріңіз сақталды."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "Аватарыңызды өңдеу кезінде қате пайда болды. Кескіннің жеткілікті үлкен бөлігін таңдағаныңызға көз жеткізіңіз!"
 
@@ -7737,6 +7916,9 @@ msgstr "Сіз қазір %s мүшесі емессіз! Егер қаласа�
 msgid "Your changes have been saved."
 msgstr "Сіздің өзгертулеріңіз сақталды."
 
+#~ msgid "Group:"
+#~ msgstr "Топ:"
+
 #, fuzzy
 #~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
@@ -7940,10 +8122,6 @@ msgstr "Сіздің өзгертулеріңіз сақталды."
 #, fuzzy
 #~ msgid "Import Projects and Groups or Users"
 #~ msgstr "Менің Жобаларым мен Топтары"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Хабарламалар"
 
 #~ msgid "Invited you"
 #~ msgstr "Сізді шақырды"

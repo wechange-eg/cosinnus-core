@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:22+0200\n"
+"POT-Creation-Date: 2021-09-14 15:38+0200\n"
 "PO-Revision-Date: 2021-04-14 14:50+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -167,9 +167,6 @@ msgstr "רוקט-צ'אט: תקן/צור חשבונות משתמשים חסרים
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "רוקט צ'אט: תקן חברויות משתמשי רוקט-צ'אט"
 
-msgid "Restart"
-msgstr "הפעל מחדש"
-
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "יש להפעיל את כתובת הדוא\"ל של החשבון על מנת להתחבר."
 
@@ -239,18 +236,6 @@ msgstr "מטבח ללא לקטוז"
 msgid "Gluten-free cuisine"
 msgstr "מטבח ללא גלוטן"
 
-msgid "General"
-msgstr "כללי"
-
-msgid "Active"
-msgstr "פעיל"
-
-msgid "Restricted"
-msgstr "מוגבל"
-
-msgid "Premium"
-msgstr "פרמיום"
-
 msgid "Bookmark"
 msgstr "סמן"
 
@@ -262,6 +247,18 @@ msgstr "רשימת מסומנים"
 
 msgid "Bookmarked Users list"
 msgstr "רשימת משתמשים מסומנים"
+
+msgid "General"
+msgstr "כללי"
+
+msgid "Active"
+msgstr "פעיל"
+
+msgid "Restricted"
+msgstr "מוגבל"
+
+msgid "Premium"
+msgstr "פרמיום"
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "רק חברים רשומים יכולים לראות את התוכן המבוקש! התחבר או צור חשבון עכשיו!"
@@ -283,6 +280,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "חשבון זה אינו פעיל יותר. נותקת מהמערכת."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -749,6 +749,15 @@ msgstr "אהבתי"
 msgid "Persons"
 msgstr "אנשים"
 
+msgid "Location"
+msgstr "מיקום"
+
+msgid "Latitude"
+msgstr "קו רוחב"
+
+msgid "Longitude"
+msgstr "קו אורך"
+
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
 msgstr "נא הזן כתובת דוא\"ל וסיסמא נכונים."
 
@@ -1063,6 +1072,53 @@ msgstr "בקשות לועידות קוסינוס"
 msgid "Note from the organizers"
 msgstr "הערה מהמארגנים"
 
+msgid "Conference"
+msgstr "ועידה"
+
+msgid "Start Datetime"
+msgstr "תאריך התחלה"
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+msgid "End Datetime"
+msgstr "תאריך סיום"
+
+#, fuzzy
+#| msgid "Conference Applications"
+msgid "Conference participants"
+msgstr "בקשות השתתפות לועידה"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus Conference Setting"
+msgid "Cosinnus Conference Premium Block"
+msgstr "הגדרת ועידת קוסינוס"
+
+#, fuzzy
+#| msgid "Cosinnus Conference Settings"
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "הגדרות ועידת קוסינוס"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+#| msgid "Maximal Number of participants"
+msgid "Maximum BBB participants"
+msgstr "מספר משתתפים מרבי"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr "טקסט תלונה"
 
@@ -1238,12 +1294,14 @@ msgstr "לפגישות פופ-אפ בסגנון הישן בלבד! אם הוזן
 msgid "Dynamic choice field choices"
 msgstr "אפשרויות בחירה דינמיות בשדה זה"
 
+#, fuzzy
+#| msgid "Detailed Description"
+msgid "Default userprofile description"
+msgstr "תיאור מפורט"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "פרויקט"
-
-msgid "Conference"
-msgstr "ועידה"
 
 msgid "Regular membership requests"
 msgstr "בקשות חברות רגילות"
@@ -1280,6 +1338,14 @@ msgstr "תמונת טפט"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "מוצג כתמונת מודעה גדולה על ה- Microsite (1140 x 240 px)"
+
+#, fuzzy
+#| msgid "Is visible"
+msgid "Publicly visible"
+msgstr "גלוי"
+
+msgid "Checks if a group/project should be visible publicly"
+msgstr ""
 
 msgid "Application method"
 msgstr "סוג טופס הבקשה"
@@ -1347,12 +1413,6 @@ msgstr "מזהה תיקיית קבוצת Nextcloud"
 msgid "Is conference"
 msgstr "היא וועידה"
 
-msgid "Start Datetime"
-msgstr "תאריך התחלה"
-
-msgid "End Datetime"
-msgstr "תאריך סיום"
-
 msgid "Allow temporary users accounts for this conference."
 msgstr "אפשר למשתמשים זמניים חשבונות עבור ועידה זו."
 
@@ -1379,6 +1439,11 @@ msgstr "צוותים קשורים"
 
 msgid "Dynamic extra fields"
 msgstr "שדות דינאמיים נוספים"
+
+#, fuzzy
+#| msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "אם היא פעילה, הקריאה לפעולת תיבה פעילה תוצג על גבי Microsite זה."
 
 msgid "Cosinnus project"
 msgstr "פרויקט קוסינוס"
@@ -1441,15 +1506,6 @@ msgstr "כיוונים מחדש לצוות קבוע"
 
 msgid "Permanent Team Redirect"
 msgstr "כיוון מחדש לצוות קבוע"
-
-msgid "Location"
-msgstr "מיקום"
-
-msgid "Latitude"
-msgstr "קו רוחב"
-
-msgid "Longitude"
-msgstr "קו אורך"
 
 msgid "CosinnusLocation"
 msgstr "מיקום קוסינוס"
@@ -2112,6 +2168,12 @@ msgstr "לא נקבע כל מידע"
 msgid "Back to Project Overview"
 msgstr "חזרה אל מבט כולל על הפרוייקט"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "ניתן להגדיר הגדרות ועידה ברמה זו. כל האובייקטים מתחת לרמה זו בהיררכיה יירשו את ההגדרות הללו, אלא אם כן הגדירו את הגדרות הוועידה לעצמם."
 
@@ -2123,6 +2185,11 @@ msgstr "בחר עמוד בצד שמאל."
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr "סקירה כללית - ועידות, חדרים וסדנאות עם הגדרות שרת BBB מותאמות אישית"
+
+#, fuzzy
+#| msgid "Overview - All Conferences"
+msgid "Overview - Premium Conferences Only"
+msgstr "סקירה כללית - כל הועידות"
 
 msgid "Overview - All Conferences"
 msgstr "סקירה כללית - כל הועידות"
@@ -2142,14 +2209,35 @@ msgstr "תצוגה"
 msgid "View Past"
 msgstr "צפה במה שהיה בעבר"
 
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+#| msgid "Bookmarked"
+msgid "Booked"
+msgstr "מסומן"
+
+#, fuzzy
+#| msgid "Conference is permanently premium"
+msgid "Permanently Premium"
+msgstr "הוועידה בסטטוס פרימיום לצמיתות"
+
 msgid "Portal Setting"
 msgstr "הגדרת פורטל"
 
 msgid "Conference Settings"
 msgstr "הגדרות ועידה"
 
-msgid "Is premium"
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium active"
 msgstr "פרמיום"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
 
 msgid "Not premium"
 msgstr "לא פרימיום"
@@ -2235,6 +2323,11 @@ msgstr "סטטיסטיקה פשוטה"
 
 msgid "Conference Overview"
 msgstr "מבט כולל על ועידה"
+
+#, fuzzy
+#| msgid "BBB Server for Premium Conferences"
+msgid "Premium Conferences Only"
+msgstr "שרת BBB לועידות פרימיום"
 
 msgid "Conferences with Custom Settings"
 msgstr "ועידות עם הגדרות מותאמות אישית"
@@ -3189,9 +3282,6 @@ msgstr "כעת תקבל הודעות בכל פעם שתוכן ציבורי יפ�
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "כעת תקבל הודעות בכל פעם שתוכן ציבורי יפורסם בקבוצה זו."
 
-msgid "Group:"
-msgstr "קבוצה:"
-
 msgid "No Description set"
 msgstr "לא הוגדר תיאור"
 
@@ -3235,6 +3325,17 @@ msgstr "האווטאר יימחק לאחר שתשמור/י."
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "אופציונאלי"
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Add/Edit translations"
+msgstr "אפשרויות נוספות"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "תאריך"
@@ -3301,8 +3402,16 @@ msgctxt "time"
 msgid "until"
 msgstr "עד"
 
+#, fuzzy
+#| msgid "Only conference members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the event\\'s description."
+msgstr "רק חברי הועידה יכולים לראות את התוכן המבוקש. הגש בקשת חברות כעת!"
+
 msgid "More infos..."
 msgstr "מידע נוסף..."
+
+msgid "Please Login or Register to view the event's description."
+msgstr ""
 
 msgid "You will now receive notifications for content posted in this conference."
 msgstr "כעת תקבל התראות עבור תוכן שפורסם בועידה זה."
@@ -3666,6 +3775,17 @@ msgstr "האם יש פרויקטים/קבוצות הקשורים לקבוצה ז
 msgid "Select related Projects/Groups"
 msgstr "בחירת פרויקטים/קבוצות קשורים"
 
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "Group/Project is publicly visible"
+msgstr "פרויקט זה יוגדר כנראה לציבור!"
+
+msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your group/project"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr "הגדרות פרטיות"
 
@@ -3701,6 +3821,24 @@ msgstr "אילו אפליקציות יש להפעיל?"
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "אפליקציה זו זמינה רק עבור קבוצה, ולא בעבור פרויקט!"
+
+#, fuzzy
+#| msgid "Cosinnus Micropages"
+msgid "Contact Form on Micropage"
+msgstr "Micropages קוסינוס"
+
+#, fuzzy
+#| msgid "Optional contact information"
+msgid "Display contact form."
+msgstr "פרטי קשר אופציונליים"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Form"
+msgstr "פרטי יצירת קשר"
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "מאילו אפליקציות יש להציג פריטים ציבוריים במיקרו-אתר?"
@@ -3884,6 +4022,33 @@ msgstr "שתף בטוויטר"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "יעדי התפתחות ברת קיימה"
+
+#, fuzzy
+#| msgid "Group administrator"
+msgid "Email to group administrator"
+msgstr "מנהל קבוצה"
+
+#, fuzzy
+#| msgid "email address"
+msgid "Your email address"
+msgstr "כתובת דוא\"ל"
+
+msgid "Message"
+msgstr "שלח הודעה"
+
+#, fuzzy
+#| msgid "Your name"
+msgid "Your message"
+msgstr "השם שלך"
+
+msgid "Captcha"
+msgstr "אימות"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "אנחנו צריכים לוודא שאתה אדם אמיתי"
+
+msgid "Generate a new captcha"
+msgstr "צור קוד אימות חדש"
 
 msgid "Tweets"
 msgstr "ציוצים"
@@ -4262,6 +4427,27 @@ msgstr ""
 #, python-format
 msgid "%(site_name)s CSV import was successful"
 msgstr "ייבוא CSV של %(site_name)s הצליח"
+
+#, python-format
+msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5093,15 +5279,6 @@ msgstr "שם משפחה"
 msgid "You can supply your last name to be displayed as well"
 msgstr "אתה יכול לספק את שם המשפחה שלך שיוצג גם כן"
 
-msgid "Captcha"
-msgstr "אימות"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "אנחנו צריכים לוודא שאתה אדם אמיתי"
-
-msgid "Generate a new captcha"
-msgstr "צור קוד אימות חדש"
-
 msgid "Search options..."
 msgstr "אפשרויות חיפוש..."
 
@@ -5892,9 +6069,6 @@ msgstr "מאותת על נכונותך ליצור קשר עם משתמשים א�
 msgid "I am open for cooperation requests"
 msgstr "אני פתוח לבקשות לשיתוף פעולה"
 
-msgid "Message"
-msgstr "שלח הודעה"
-
 msgid "Welcome!"
 msgstr "ברוכים הבאים!"
 
@@ -6354,6 +6528,11 @@ msgstr "דף הבית"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "הפרופיל שלי"
 
 msgid "Change language"
 msgstr "שנה שפה"
@@ -7075,6 +7254,14 @@ msgstr "לא הוגדר שם אפלירציה על מנת להוסיך קונט�
 msgid "Your idea was deleted successfully."
 msgstr "הרעיון שלך נמחק בהצלחה."
 
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your message has been sent."
+msgstr "השינויים שביצעת נשמרו בהצלחה."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "אירעה שגיאה בעת עיבוד האווטאר שלך. נא ודא שבחרת חלק גדול מספיק של התמונה!"
 
@@ -7297,6 +7484,15 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
+
+#~ msgid "Restart"
+#~ msgstr "הפעל מחדש"
+
+#~ msgid "Is premium"
+#~ msgstr "פרמיום"
+
+#~ msgid "Group:"
+#~ msgstr "קבוצה:"
 
 #~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "אתה עומד להשבית פרוייקט זה. הפרוייקט ותכניו יהיו בלתי נראים מהאתר, לעולם כולל אותך."
