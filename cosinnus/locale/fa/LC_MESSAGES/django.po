@@ -1,22 +1,11 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 15:38+0200\n"
-"PO-Revision-Date: 2021-05-25 15:32+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2021-09-14 15:41+0200\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -1076,7 +1065,6 @@ msgid "End Datetime"
 msgstr ""
 
 #, fuzzy
-#| msgid "pin to enter for telephone participants"
 msgid "Conference participants"
 msgstr "گذرواژه برای شرکت‌کننده‌هایی که با تلفن وارد می‌شوند"
 
@@ -1084,12 +1072,10 @@ msgid "The number of BBB participants that have been declared will take part in 
 msgstr ""
 
 #, fuzzy
-#| msgid "Cosinnus Conference Setting"
 msgid "Cosinnus Conference Premium Block"
 msgstr "تنظیم کنفرانس Cosinnus"
 
 #, fuzzy
-#| msgid "Cosinnus Conference Settings"
 msgid "Cosinnus Conference Premium Blocks"
 msgstr "تنظیمات کنفرانس Cosinnus"
 
@@ -1097,7 +1083,6 @@ msgid "The time frame while the selected capacity is available."
 msgstr ""
 
 #, fuzzy
-#| msgid "Maximum Coffee Table Participants"
 msgid "Maximum BBB participants"
 msgstr "بیش‌ترین شمار مشارکت‌کننده‌های میز قهوه"
 
@@ -1286,7 +1271,6 @@ msgid "Dynamic choice field choices"
 msgstr ""
 
 #, fuzzy
-#| msgid "Enter a description"
 msgid "Default userprofile description"
 msgstr "یک تعریف وارد کنید"
 
@@ -2169,7 +2153,6 @@ msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settin
 msgstr ""
 
 #, fuzzy
-#| msgid "BBB Server for Premium Conferences"
 msgid "Overview - Premium Conferences Only"
 msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
 
@@ -2210,7 +2193,6 @@ msgid "Conference Settings"
 msgstr ""
 
 #, fuzzy
-#| msgid "Premium"
 msgid "Premium active"
 msgstr "اعلاء"
 
@@ -2303,7 +2285,6 @@ msgid "Conference Overview"
 msgstr ""
 
 #, fuzzy
-#| msgid "BBB Server for Premium Conferences"
 msgid "Premium Conferences Only"
 msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
 
@@ -3786,7 +3767,7 @@ msgstr ""
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr ""
 
-msgid "Contact Form on Micropage"
+msgid "Contact Form on microsite"
 msgstr ""
 
 msgid "Display contact form."
@@ -3981,11 +3962,10 @@ msgstr ""
 msgid "Sustainable Development Goals"
 msgstr ""
 
-msgid "Email to group administrator"
+msgid "Email the group administrators"
 msgstr ""
 
 #, fuzzy
-#| msgid "email address"
 msgid "Your email address"
 msgstr "نشانی ایمیل"
 
@@ -6987,7 +6967,6 @@ msgid "Your idea was deleted successfully."
 msgstr ""
 
 #, fuzzy
-#| msgid "Your changes have been saved."
 msgid "Your message has been sent."
 msgstr "تغییرات‌تان ذخیره شده‌اند."
 

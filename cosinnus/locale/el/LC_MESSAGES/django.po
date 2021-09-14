@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 15:38+0200\n"
+"POT-Creation-Date: 2021-09-14 15:41+0200\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,12 +32,10 @@ msgid "Rocket: Fix missing RocketChat room membership for users"
 msgstr "Rocket: Επιδιορθώστε τη συνδρομή χρηστών για δωμάτιο RocketChat που λείπει"
 
 #, fuzzy, python-format
-#| msgid "%d Users' rocketchat room memberships were re-done."
 msgid "%d Users' nextcloud folder memberships were re-done."
 msgstr "Έγινε αναδημιουργία %d συνδρομών χρηστών για δωμάτιο rocketchat."
 
 #, fuzzy
-#| msgid "Rocket: Fix missing RocketChat room membership for users"
 msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
 msgstr "Rocket: Επιδιορθώστε τη συνδρομή χρηστών για δωμάτιο RocketChat που λείπει"
 
@@ -49,12 +47,10 @@ msgid "The following items were converted to %s:"
 msgstr "Τα παρακάτω στοιχεία μετατράπηκαν σε %s:"
 
 #, fuzzy
-#| msgid "The following items were converted to %s:"
 msgid "The following items were activated:"
 msgstr "Τα παρακάτω στοιχεία μετατράπηκαν σε %s:"
 
 #, fuzzy
-#| msgid "The following items were converted to %s:"
 msgid "The following items were deactivated:"
 msgstr "Τα παρακάτω στοιχεία μετατράπηκαν σε %s:"
 
@@ -104,8 +100,6 @@ msgid "Yes"
 msgstr "Ναι"
 
 #, fuzzy
-#| msgctxt "join team button second item"
-#| msgid "Now"
 msgid "No"
 msgstr "Τώρα"
 
@@ -123,12 +117,10 @@ msgid "DEACTIVATE user accounts and DELETE them after 30 days"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%d Users were deactivated successfully."
 msgid "%(count)d User account(s) were reactivated successfully."
 msgstr "%d Χρήστες απενεργοποιήθηκαν με επιτυχία."
 
 #, fuzzy
-#| msgid "Successfully activated user account"
 msgid "Reactivate user accounts"
 msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
 
@@ -1072,7 +1064,6 @@ msgid "End Datetime"
 msgstr "Λήξη Datetime"
 
 #, fuzzy
-#| msgid "Conference Applications"
 msgid "Conference participants"
 msgstr "Εφαρμογές Σύσκεψης"
 
@@ -1080,12 +1071,10 @@ msgid "The number of BBB participants that have been declared will take part in 
 msgstr ""
 
 #, fuzzy
-#| msgid "Cosinnus Conference Setting"
 msgid "Cosinnus Conference Premium Block"
 msgstr "Ρύθμιση Σύσκεψης Cosinnus"
 
 #, fuzzy
-#| msgid "Cosinnus Conference Settings"
 msgid "Cosinnus Conference Premium Blocks"
 msgstr "Ρυθμίσεις Σύσκεψης Cosinnus"
 
@@ -1093,7 +1082,6 @@ msgid "The time frame while the selected capacity is available."
 msgstr ""
 
 #, fuzzy
-#| msgid "Maximal Number of participants"
 msgid "Maximum BBB participants"
 msgstr "Μέγιστος Αριθμός συμμετεχόντων"
 
@@ -1282,7 +1270,6 @@ msgid "Dynamic choice field choices"
 msgstr "Επιλογές πεδίου δυναμικής επιλογής"
 
 #, fuzzy
-#| msgid "Detailed Description"
 msgid "Default userprofile description"
 msgstr "Λεπτομερής Περιγραφή"
 
@@ -1428,7 +1415,6 @@ msgid "Dynamic extra fields"
 msgstr "Δυναμικά πρόσθετα πεδία"
 
 #, fuzzy
-#| msgid "If this is active, a Call to Action box will be shown on the microsite."
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "Εάν αυτό είναι ενεργό, ένα πλαίσιο Έκκλησης για Δράση θα εμφανιστεί στον μικρότοπο."
 
@@ -1450,8 +1436,6 @@ msgid "Request about your group \"%(group_name)s\""
 msgstr "Αίτημα για την ομάδα σας \"%(group_name)s\""
 
 #, fuzzy
-#| msgctxt "join team button second item"
-#| msgid "Now"
 msgid "Now"
 msgstr "Τώρα"
 
@@ -1540,7 +1524,6 @@ msgid "Managed Tag"
 msgstr "Διαχειριζόμενη Ετικέτα"
 
 #, fuzzy
-#| msgid "Managed Tag"
 msgid "Managed Tags"
 msgstr "Διαχειριζόμενη Ετικέτα"
 
@@ -2172,7 +2155,6 @@ msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settin
 msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια με προσαρμοσμένες ρυθμίσεις Εξυπηρετητή-BBB"
 
 #, fuzzy
-#| msgid "Overview - All Conferences"
 msgid "Overview - Premium Conferences Only"
 msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
 
@@ -2201,12 +2183,10 @@ msgid "This calendar shows all conferences for the current view, all premium blo
 msgstr ""
 
 #, fuzzy
-#| msgid "Bookmarked"
 msgid "Booked"
 msgstr "Με σελιδοδείκτη"
 
 #, fuzzy
-#| msgid "Conference is permanently premium"
 msgid "Permanently Premium"
 msgstr "Η σύσκεψη είναι μόνιμα premium"
 
@@ -2217,7 +2197,6 @@ msgid "Conference Settings"
 msgstr "Ρυθμίσεις Σύσκεψης"
 
 #, fuzzy
-#| msgid "Premium"
 msgid "Premium active"
 msgstr "Premium"
 
@@ -2310,7 +2289,6 @@ msgid "Conference Overview"
 msgstr "Επισκόπηση Σύσκεψης"
 
 #, fuzzy
-#| msgid "BBB Server for Premium Conferences"
 msgid "Premium Conferences Only"
 msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
 
@@ -2334,7 +2312,6 @@ msgid "Currently set Email Text"
 msgstr "Τρέχον Κείμενο Email"
 
 #, fuzzy
-#| msgid "Show more options..."
 msgid "Show all recipients..."
 msgstr "Εμφάνιση περισσότερων επιλογών..."
 
@@ -3314,7 +3291,6 @@ msgid "optional"
 msgstr "προαιρετικό"
 
 #, fuzzy
-#| msgid "Additional options"
 msgid "Add/Edit translations"
 msgstr "Πρόσθετες επιλογές"
 
@@ -3390,7 +3366,6 @@ msgid "until"
 msgstr "έως"
 
 #, fuzzy
-#| msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgid "Only conference members can see the event\\'s description."
 msgstr "Μόνο τα μέλη της σύσκεψης μπορούν να δουν το περιεχόμενο που ζητήσατε. Κάντε αίτηση για να γίνετε μέλος τώρα!"
 
@@ -3731,7 +3706,6 @@ msgid "Reset"
 msgstr "Επαναφορά"
 
 #, fuzzy
-#| msgid "Uploaded files will be available for download and images will be shown in a gallery."
 msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr "Τα ανεβασμένα αρχεία θα είναι διαθέσιμα για λήψη και οι εικόνες θα εμφανίζονται σε συλλογή."
 
@@ -3810,12 +3784,11 @@ msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Αυτή η Εφαρμογή μπορεί να ενεργοποιηθεί μόνο για Ομάδα αλλά όχι για Έργο!"
 
 #, fuzzy
-#| msgid "Cosinnus Micropages"
-msgid "Contact Form on Micropage"
-msgstr "Cosinnus Micropages"
+#| msgid "Contact organizers"
+msgid "Contact Form on microsite"
+msgstr "Επικοινωνία με διοργανωτές"
 
 #, fuzzy
-#| msgid "Optional contact information"
 msgid "Display contact form."
 msgstr "Προαιρετικά στοιχεία επικοινωνίας"
 
@@ -3823,7 +3796,6 @@ msgid "A public contact form, which non-registered users can use to contact grou
 msgstr ""
 
 #, fuzzy
-#| msgid "Contact info"
 msgid "Contact Form"
 msgstr "Πληροφορίες Επικοινωνίας"
 
@@ -4012,11 +3984,10 @@ msgstr "Στόχοι Βιώσιμης Ανάπτυξης"
 
 #, fuzzy
 #| msgid "Group administrator"
-msgid "Email to group administrator"
+msgid "Email the group administrators"
 msgstr "Διαχειριστής ομάδας"
 
 #, fuzzy
-#| msgid "email address"
 msgid "Your email address"
 msgstr "διεύθυνση email"
 
@@ -4024,7 +3995,6 @@ msgid "Message"
 msgstr "Μήνυμα"
 
 #, fuzzy
-#| msgid "Your name"
 msgid "Your message"
 msgstr "Το όνομά σας"
 
@@ -4182,7 +4152,6 @@ msgid "Do you really want to decline the request?"
 msgstr "Είστε βέβαιοι ότι θέλετε να απορρίψετε το αίτημα;"
 
 #, fuzzy
-#| msgid "There are no pending invitations."
 msgid "There are no pending organization requests."
 msgstr "Δεν υπάρχουν προσκλήσεις σε εκκρεμότητα."
 
@@ -4196,7 +4165,6 @@ msgid "Invited"
 msgstr "Προσκλήθηκε"
 
 #, fuzzy
-#| msgid "There are no pending invitations."
 msgid "There are no organization invitations."
 msgstr "Δεν υπάρχουν προσκλήσεις σε εκκρεμότητα."
 
@@ -4208,7 +4176,6 @@ msgid "Remove organization"
 msgstr "Αφαίρεση οργανισμού"
 
 #, fuzzy
-#| msgid "There are no invitations."
 msgid "There are no assigned organizations."
 msgstr "Δεν υπάρχουν προσκλήσεις."
 
@@ -5310,13 +5277,11 @@ msgstr "Αναζήτηση για Χρήστες"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create content"
 msgid "External contents"
 msgstr "Δημιουργία περιεχομένου"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Visibility on other platforms"
 msgid "Include contents from other platforms"
 msgstr "Ορατότητα σε άλλες πλατφόρμες"
 
@@ -5751,7 +5716,6 @@ msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Λυπούμαστε αλλά το περιεχόμενο που ζητήθηκε δεν ήταν δυνατό να ανακτηθεί από τον διακομιστή."
 
 #, fuzzy
-#| msgid "Done"
 msgid "on"
 msgstr "Ολοκληρώθηκε"
 
@@ -5829,7 +5793,6 @@ msgstr "ΔΕΝ επιθυμεί την επικοινωνία για πιθαν�
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Your Profile"
 msgid "To Profile"
 msgstr "Το Προφίλ Σας"
 
@@ -5891,25 +5854,21 @@ msgstr "Ανακαλύψτε"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Apply Filters"
 msgid "Filter"
 msgstr "Εφαρμογή Φίλτρων"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Note from the organizers"
 msgid "Content from the Forum"
 msgstr "Σημείωση από τους διοργανωτές"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Only content from my Groups and Projects"
 msgid "Content from my Groups and Projects"
 msgstr "Μόνο περιεχόμενο από τις Ομάδες και τα Έργα μου"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Public"
 msgid "Public content"
 msgstr "Δημόσιος"
 
@@ -6461,12 +6420,10 @@ msgid "Contents"
 msgstr "Περιεχόμενα"
 
 #, fuzzy
-#| msgid "My upcoming Projects"
 msgid "My upcoming Events"
 msgstr "Τα προσεχή μου Έργα"
 
 #, fuzzy
-#| msgid "You can change this setting later in your profile settings"
 msgid "The map is centrered on the address you added in your profile settings."
 msgstr "Μπορείτε να αλλάξετε αυτή τη ρύθμιση αργότερα στις ρυθμίσεις προφίλ σας"
 
@@ -6517,7 +6474,6 @@ msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
 
 #, fuzzy
-#| msgid "My Profile"
 msgid "Profile"
 msgstr "Το Προφίλ Μου"
 
@@ -6666,7 +6622,6 @@ msgid "Project Dashboard"
 msgstr "Πίνακας Έργου"
 
 #, fuzzy
-#| msgid "Project Dashboard"
 msgid "in the Project Dashboard"
 msgstr "Πίνακας Έργου"
 
@@ -6755,7 +6710,6 @@ msgid "Group Dashboard"
 msgstr "Πίνακας Ομάδας"
 
 #, fuzzy
-#| msgid "Group Dashboard"
 msgid "in the Group Dashboard"
 msgstr "Πίνακας Ομάδας"
 
@@ -6880,7 +6834,6 @@ msgid "Conference contact person"
 msgstr "Άτομο επικοινωνίας σύσκεψης"
 
 #, fuzzy, python-format
-#| msgid "Request about your project \"%(group_name)s\""
 msgid "Request about your conference \"%(group_name)s\""
 msgstr "Αίτημα για το έργο σας \"%(group_name)s\""
 
@@ -7240,7 +7193,6 @@ msgid "Your idea was deleted successfully."
 msgstr "Η ιδέα σας διαγράφηκε με επιτυχία."
 
 #, fuzzy
-#| msgid "Your changes have been saved."
 msgid "Your message has been sent."
 msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
 
@@ -7304,12 +7256,10 @@ msgid "Sorry, something went wrong while saving your profile!"
 msgstr "Λυπούμαστε, παρουσιάστηκε ένα σφάλμα κατά την αποθήκευση του προφίλ σας!"
 
 #, fuzzy
-#| msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
 msgid "Your user account has been deactivated and will be deleted in 30 days. We're sorry you are no longer with us."
 msgstr "Το προφίλ σας διαγράφηκε με επιτυχία. Λυπούμαστε που δεν είστε πλέον μαζί μας."
 
 #, fuzzy
-#| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
 msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
 msgstr "Είστε ο μόνος διαχειριστής που έμεινε για \"%s\". Παρακαλούμε ορίστε διαφορετικό διαχειριστή ή διαγράψετε τον πρώτα."
 
@@ -7320,7 +7270,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "You are about to delete your user account from the site!"
 msgid "Information about the deletion of your user account"
 msgstr "Πρόκειται να διαγράψετε τον λογαριασμό χρήστη σας από τον ιστότοπο!"
 
@@ -7470,46 +7419,27 @@ msgstr "Δεν είστε μέλος του %s αυτή τη στιγμή! Εά�
 msgid "Your changes have been saved."
 msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
 
-#~ msgid "Restart"
-#~ msgstr "Επανεκκίνηση"
+#, fuzzy
+#~| msgid "Cosinnus Micropages"
+#~ msgid "Contact Form on Micropage"
+#~ msgstr "Cosinnus Micropages"
 
-#~ msgid "Is premium"
-#~ msgstr "Είναι premium"
+#, fuzzy
+#~| msgid "Group administrator"
+#~ msgid "Email to group administrator"
+#~ msgstr "Διαχειριστής ομάδας"
 
 #~ msgid "Group:"
 #~ msgstr "Ομάδα:"
 
-#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Πρόκειται να απενεργοποιήστε αυτό το έργο. Αυτό και όλο του το περιεχόμενο θα είναι κρυμμένο στην ιστοσελίδα και μη ορατό σε όλους, μαζί με εσάς."
+#~ msgid "Is premium"
+#~ msgstr "Είναι premium"
 
-#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
-#~ msgstr "Η διαδικασία είναι αναστρέψιμη. Μπορείτε να ενεργοποιήσετε εκ νέου το έργο από τη σελίδα προφίλ χρήστη οποιαδήποτε στιγμή."
-
-#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Πρόκειται να απενεργοποιήσετε αυτή την ομάδα. Αυτή και το περιεχόμενο της θα είναι κρυμμένα στην ιστοσελίδα και μη ορατά σε όλους, μαζί με εσάς."
-
-#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
-#~ msgstr "Αυτή η διαδικασία είναι αναστρέψιμη. Μπορείτε να ενεργοποιήσετε εκ νέου την ομάδα από τη σελίδα προφίλ χρήστη οποιαδήποτε στιγμή."
-
-#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Πρόκειται να απενεργοποιήσετε αυτή την σύσκεψη. Αυτή και το περιεχόμενο της θα είναι κρυμμένα στην ιστοσελίδα και μη ορατά σε όλους, μαζί με εσάς."
-
-#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
-#~ msgstr "Αυτή η διαδικασία είναι αναστρέψιμη. Μπορείτε να ενεργοποιήσετε εκ νέου την σύσκεψη από τη σελίδα προφίλ χρήστη οποιαδήποτε στιγμή."
+#~ msgid "Restart"
+#~ msgstr "Επανεκκίνηση"
 
 #~ msgid "%(team_name)s was deactivated successfully!"
 #~ msgstr "Ο/η %(team_name)s απενεργοποιήθηκε με επιτυχία!"
-
-#, fuzzy
-#~| msgid "No Tag selected"
-#~ msgid "nothing selected"
-#~ msgstr "Δεν έχει επιλεγεί Ετικέτα"
-
-#~ msgid "Deactivate users (will keep all all items they created on the site)"
-#~ msgstr "Απενεργοποίηση χρηστών (θα κρατήσει όλα τα άλλα στοιχεία που δημιούργησαν στον ιστότοπο)"
-
-#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
-#~ msgstr "Εάν επιθυμείτε να διαγράψετε κάποιο από το περιεχόμενό σας, επιστρέψτε πίσω για να το κάντε. Από τη στιγμή που θα διαγράψετε το προφίλ σας, δε θα έχετε πλέον πρόσβαση σε οτιδήποτε δημιουργήσατε με αυτόν τον λογαριασμό."
 
 #~ msgid "Arabic--NATIVE-LANGUAGE"
 #~ msgstr "Αραβικά--ΜΗΤΡΙΚΗ-ΓΛΩΣΣΑ"
@@ -7528,6 +7458,9 @@ msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
 
 #~ msgid "Czech--NATIVE-LANGUAGE"
 #~ msgstr "Τσεχικά--ΜΗΤΡΙΚΗ-ΓΛΩΣΣΑ"
+
+#~ msgid "Deactivate users (will keep all all items they created on the site)"
+#~ msgstr "Απενεργοποίηση χρηστών (θα κρατήσει όλα τα άλλα στοιχεία που δημιούργησαν στον ιστότοπο)"
 
 #~ msgid "Deutsch--NATIVE-LANGUAGE"
 #~ msgstr "Γερμανικά--ΜΗΤΡΙΚΗ-ΓΛΩΣΣΑ"
@@ -7556,6 +7489,9 @@ msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
 #~ msgid "Hebrew--NATIVE-LANGUAGE"
 #~ msgstr "Εβραϊκά--ΜΗΤΡΙΚΗ-ΓΛΩΣΣΑ"
 
+#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
+#~ msgstr "Εάν επιθυμείτε να διαγράψετε κάποιο από το περιεχόμενό σας, επιστρέψτε πίσω για να το κάντε. Από τη στιγμή που θα διαγράψετε το προφίλ σας, δε θα έχετε πλέον πρόσβαση σε οτιδήποτε δημιουργήσατε με αυτόν τον λογαριασμό."
+
 #~ msgid "Kazakh--NATIVE-LANGUAGE"
 #~ msgstr "Καζακστανικά--ΜΗΤΡΙΚΗ-ΓΛΩΣΣΑ"
 
@@ -7571,8 +7507,30 @@ msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
 #~ msgid "Spanish--NATIVE-LANGUAGE"
 #~ msgstr "Ισπανικά--ΜΗΤΡΙΚΗ-ΓΛΩΣΣΑ"
 
+#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+#~ msgstr "Αυτή η διαδικασία είναι αναστρέψιμη. Μπορείτε να ενεργοποιήσετε εκ νέου την σύσκεψη από τη σελίδα προφίλ χρήστη οποιαδήποτε στιγμή."
+
+#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+#~ msgstr "Αυτή η διαδικασία είναι αναστρέψιμη. Μπορείτε να ενεργοποιήσετε εκ νέου την ομάδα από τη σελίδα προφίλ χρήστη οποιαδήποτε στιγμή."
+
+#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+#~ msgstr "Η διαδικασία είναι αναστρέψιμη. Μπορείτε να ενεργοποιήσετε εκ νέου το έργο από τη σελίδα προφίλ χρήστη οποιαδήποτε στιγμή."
+
 #~ msgid "Time"
 #~ msgstr "Ώρα"
 
 #~ msgid "Ukrainian--NATIVE-LANGUAGE"
 #~ msgstr "Ουκρανικά--ΜΗΤΡΙΚΗ ΓΛΩΣΣΑ"
+
+#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Πρόκειται να απενεργοποιήσετε αυτή την σύσκεψη. Αυτή και το περιεχόμενο της θα είναι κρυμμένα στην ιστοσελίδα και μη ορατά σε όλους, μαζί με εσάς."
+
+#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Πρόκειται να απενεργοποιήσετε αυτή την ομάδα. Αυτή και το περιεχόμενο της θα είναι κρυμμένα στην ιστοσελίδα και μη ορατά σε όλους, μαζί με εσάς."
+
+#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Πρόκειται να απενεργοποιήστε αυτό το έργο. Αυτό και όλο του το περιεχόμενο θα είναι κρυμμένο στην ιστοσελίδα και μη ορατό σε όλους, μαζί με εσάς."
+
+#, fuzzy
+#~ msgid "nothing selected"
+#~ msgstr "Δεν έχει επιλεγεί Ετικέτα"

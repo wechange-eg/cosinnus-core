@@ -1,17 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 15:38+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2021-09-14 15:41+0200\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -48,17 +42,14 @@ msgid "A token with the same code already exists! Please choose a different stri
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "The following Projects were converted to Groups:"
 msgid "The following items were converted to %s:"
 msgstr "The following Projects were converted to Groups:"
 
 #, fuzzy
-#| msgid "The following Projects were converted to Groups:"
 msgid "The following items were activated:"
 msgstr "The following Projects were converted to Groups:"
 
 #, fuzzy
-#| msgid "The following Projects were converted to Groups:"
 msgid "The following items were deactivated:"
 msgstr "The following Projects were converted to Groups:"
 
@@ -913,12 +904,10 @@ msgid "BBB Server for Premium Conferences"
 msgstr ""
 
 #, fuzzy
-#| msgid "Cosinnus project"
 msgid "Cosinnus Conference Setting"
 msgstr "Project"
 
 #, fuzzy
-#| msgid "Cosinnus projects"
 msgid "Cosinnus Conference Settings"
 msgstr "Projects"
 
@@ -1110,7 +1099,6 @@ msgid "End Datetime"
 msgstr ""
 
 #, fuzzy
-#| msgid "Cosinnus projects"
 msgid "Conference participants"
 msgstr "Projects"
 
@@ -1118,12 +1106,10 @@ msgid "The number of BBB participants that have been declared will take part in 
 msgstr ""
 
 #, fuzzy
-#| msgid "Cosinnus project"
 msgid "Cosinnus Conference Premium Block"
 msgstr "Project"
 
 #, fuzzy
-#| msgid "Cosinnus projects"
 msgid "Cosinnus Conference Premium Blocks"
 msgstr "Projects"
 
@@ -1855,12 +1841,10 @@ msgid "Import Report HTML"
 msgstr ""
 
 #, fuzzy
-#| msgid "Cosinnus project"
 msgid "Cosinnus User Import"
 msgstr "Project"
 
 #, fuzzy
-#| msgid "Cosinnus projects"
 msgid "Cosinnus User Imports"
 msgstr "Projects"
 
@@ -2263,7 +2247,6 @@ msgid "Portal Setting"
 msgstr ""
 
 #, fuzzy
-#| msgid "Cosinnus projects"
 msgid "Conference Settings"
 msgstr "Projects"
 
@@ -2287,7 +2270,6 @@ msgid "running now!"
 msgstr "Join Project"
 
 #, fuzzy
-#| msgid "Cosinnus project"
 msgid "Conference Setting"
 msgstr "Project"
 
@@ -2316,12 +2298,10 @@ msgid "Newsletters"
 msgstr ""
 
 #, fuzzy
-#| msgid "Create Project"
 msgid "Update Newsletter"
 msgstr "Create Project"
 
 #, fuzzy
-#| msgid "Create Project"
 msgid "Create Newsletter"
 msgstr "Create Project"
 
@@ -2338,7 +2318,6 @@ msgid "Only users who have the Newsletter opt-in enabled in their profile will r
 msgstr ""
 
 #, fuzzy
-#| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to send the newsletter?"
 msgstr "Do you really want to leave project „%(title)s“?"
 
@@ -2346,7 +2325,6 @@ msgid "Send newsletter"
 msgstr ""
 
 #, fuzzy
-#| msgid "Create Project"
 msgid "Send Newsletter"
 msgstr "Create Project"
 
@@ -2377,7 +2355,6 @@ msgid "Premium Conferences Only"
 msgstr "Create Project"
 
 #, fuzzy
-#| msgid "Cosinnus projects"
 msgid "Conferences with Custom Settings"
 msgstr "Projects"
 
@@ -2423,7 +2400,6 @@ msgid "This newsletter has not been sent"
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "There are no newsletters yet."
 msgstr "There are no groups."
 
@@ -2502,7 +2478,6 @@ msgid "Could not find any users with an email that contains '%(search_string)s.'
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "There are no users yet."
 msgstr "There are no groups."
 
@@ -3077,17 +3052,14 @@ msgid "Send 1 hour before conference"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Edit “%(team_name)s”"
 msgid "Edit Room “%(title)s”"
 msgstr "Edit project “%(team_name)s”"
 
 #, fuzzy
-#| msgid "Create Group"
 msgid "Create Room"
 msgstr "Create Group"
 
 #, fuzzy
-#| msgid "Edit Group"
 msgid "Edit Room"
 msgstr "Edit Project"
 
@@ -3928,7 +3900,7 @@ msgstr ""
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr ""
 
-msgid "Contact Form on Micropage"
+msgid "Contact Form on microsite"
 msgstr ""
 
 msgid "Display contact form."
@@ -4129,7 +4101,7 @@ msgid "Sustainable Development Goals"
 msgstr ""
 
 #, fuzzy
-msgid "Email to group administrator"
+msgid "Email the group administrators"
 msgstr "There are no groups."
 
 msgid "Your email address"
@@ -4204,7 +4176,6 @@ msgid "Request membership"
 msgstr "Convert selected Projects to Groups"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you wish to join „%(title)s“ now?"
 msgstr "Do you really want to leave project „%(title)s“?"
 
@@ -6703,13 +6674,10 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Groups to Projects"
 msgid "Convert selected items to Projects"
 msgstr "Convert selected Groups to Projects"
 
 #, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_12_projectadministration"
 msgid "Project administrator"
 msgstr "The administration of Projects begins with managing its membership. Here you can decide who can join your project and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal."
 
@@ -6758,7 +6726,6 @@ msgid "You are not currently in any Groups"
 msgstr ""
 
 #, fuzzy
-#| msgid "My Groups"
 msgid "My upcoming Groups"
 msgstr "My Groups"
 
@@ -6806,7 +6773,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Convert selected items to Groups"
 msgstr "Convert selected Projects to Groups"
 
@@ -6907,7 +6873,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Groups to Projects"
 msgid "Convert selected items to Conferences"
 msgstr "Convert selected Groups to Projects"
 
@@ -6926,12 +6891,10 @@ msgid "Conference name"
 msgstr "Create Project"
 
 #, fuzzy
-#| msgid "Enter a name for the project."
 msgid "Enter a name for the conference."
 msgstr "Enter a name for the project."
 
 #, fuzzy
-#| msgid "Describe the project in a few sentences."
 msgid "Describe the conference in a few sentences."
 msgstr "Describe the project in a few sentences."
 
@@ -7167,7 +7130,6 @@ msgid "User %(username)s was successfully invited!"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "The following Projects were converted to Groups:"
 msgid "The following users were invited to apply: %s"
 msgstr "The following Projects were converted to Groups:"
 
@@ -7216,7 +7178,6 @@ msgid "This project/group is already inactive!"
 msgstr ""
 
 #, fuzzy
-#| msgid "You're receiving this email because you are an administrator of this group."
 msgid "You are not a member, but have access because you are an Administrator."
 msgstr "You're receiving this email because you are an administrator of this project."
 
@@ -7494,7 +7455,6 @@ msgid "Unknown POST action!"
 msgstr ""
 
 #, fuzzy
-#| msgid "The following Groups were converted to Projects:"
 msgid "The following columns were not recognized and were ignored"
 msgstr "The following Groups were converted to Projects:"
 
@@ -7509,81 +7469,33 @@ msgid "Your changes have been saved."
 msgstr ""
 
 #, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Convert selected Projects to Groups"
+#~ msgid "Email to group administrator"
+#~ msgstr "There are no groups."
 
 #~ msgid "Group:"
 #~ msgstr "Group:"
 
-#~ msgid "TODO: Room Type Lobby description text"
-#~ msgstr "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
-
-#~ msgid "TODO: Room Type Stage description text"
-#~ msgstr "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
-
-#~ msgid "TODO: Room Type Workshops description text"
-#~ msgstr "In Workshops each event has a video conference. Presenters are allowed to moderate those."
-
-#~ msgid "TODO: Room Type Discussions description text"
-#~ msgstr "In Discussions each event has a video conference. Presenters are allowed to moderate those. Differs from \"Workshops\" only by the design in the agenda. Workshop: tiles, discussion: list"
-
-#~ msgid "TODO: Room Type Coffee Tables description text"
-#~ msgstr "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
-
-#~ msgid "TODO: Room Type Results description text"
-#~ msgstr "Include a project that you use for documentation purposes."
-
-#~ msgid "TODO: Room Type Participants description text"
-#~ msgstr "Shows a list of all participants."
-
-#, fuzzy
-#~ msgid "All societies"
+#~ msgid "All groups"
 #~ msgstr "All projects"
 
 #~ msgid "All projects"
 #~ msgstr "All projects"
 
 #, fuzzy
-#~ msgid "Conference Dashboard"
-#~ msgstr "Project Type"
-
-#~ msgid "The following Groups were converted to Projects:"
-#~ msgstr "The following Groups were converted to Projects:"
-
-#, fuzzy
-#~ msgid "Search for email"
-#~ msgstr "Create Project"
-
-#, fuzzy
-#~ msgid "Deactivated Projects and Groups"
-#~ msgstr "Other Projects"
-
-#, fuzzy
-#~ msgid "Public Group"
-#~ msgstr "Select Group"
-
-#~ msgid "All groups"
+#~ msgid "All societies"
 #~ msgstr "All projects"
 
 #, fuzzy
 #~ msgid "Browse this public team"
 #~ msgstr "Public project"
+
+#, fuzzy
+#~ msgid "Conference Dashboard"
+#~ msgstr "Project Type"
+
+#, fuzzy
+#~ msgid "Deactivated Projects and Groups"
+#~ msgstr "Other Projects"
 
 #~ msgid "Deutsch"
 #~ msgstr "Deutsch"
@@ -7606,14 +7518,38 @@ msgstr ""
 #~ msgid "Gruppen"
 #~ msgstr "Group"
 
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Convert selected Projects to Groups"
+
+#, fuzzy
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Convert selected Projects to Groups"
+
+#, fuzzy
+#~ msgid "Import from a CSV File"
+#~ msgstr "Convert selected Projects to Groups"
+
 #~ msgid "No group found with this name"
 #~ msgstr "No project found with this name"
 
 #~ msgid "Polish"
 #~ msgstr "Polski"
 
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "Convert selected Projects to Groups"
+
+#, fuzzy
+#~ msgid "Public Group"
+#~ msgstr "Select Group"
+
 #~ msgid "Russian"
 #~ msgstr "Русский"
+
+#, fuzzy
+#~ msgid "Search for email"
+#~ msgstr "Create Project"
 
 #~ msgid "Society"
 #~ msgstr "Group"
@@ -7621,8 +7557,36 @@ msgstr ""
 #~ msgid "Society Menu"
 #~ msgstr "Group Menu"
 
+#~ msgid "TODO: Room Type Coffee Tables description text"
+#~ msgstr "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
+
+#~ msgid "TODO: Room Type Discussions description text"
+#~ msgstr "In Discussions each event has a video conference. Presenters are allowed to moderate those. Differs from \"Workshops\" only by the design in the agenda. Workshop: tiles, discussion: list"
+
+#~ msgid "TODO: Room Type Lobby description text"
+#~ msgstr "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
+
+#~ msgid "TODO: Room Type Participants description text"
+#~ msgstr "Shows a list of all participants."
+
+#~ msgid "TODO: Room Type Results description text"
+#~ msgstr "Include a project that you use for documentation purposes."
+
+#~ msgid "TODO: Room Type Stage description text"
+#~ msgstr "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+
+#~ msgid "TODO: Room Type Workshops description text"
+#~ msgstr "In Workshops each event has a video conference. Presenters are allowed to moderate those."
+
+#~ msgid "The following Groups were converted to Projects:"
+#~ msgstr "The following Groups were converted to Projects:"
+
 #~ msgid "Ukrainian"
 #~ msgstr "Українська"
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "Convert selected Projects to Groups"
 
 #~ msgid "join team"
 #~ msgstr "Join Project"

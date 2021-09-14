@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 15:38+0200\n"
+"POT-Creation-Date: 2021-09-14 15:41+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -266,7 +266,7 @@ msgid "You have been redirected here because you clicked a link in one of our ma
 msgstr "Du wurdest hierhin weitergeleitet, weil du einen Link in einer unserer E-Mails geklickt hast. Als Vorsichtsmaßnahme verlinken wir nicht direkt auf externe Webseiten aus unseren E-Mails. Bitte klicke den Link unten erneut wenn du die Seite besuchen möchtest."
 
 msgid "Sorry, only admin accounts may log in at this time."
-msgstr ""
+msgstr "Zurzeit können sich nur die Portal-Administrator_innen einloggen."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Du wurdest automatisch abgemeldet, nachdem du für einige Zeit inaktiv warst."
@@ -1276,10 +1276,8 @@ msgstr "Nur für Meeting-Popups für Veranstaltungen im alten Stil! Wenn eingege
 msgid "Dynamic choice field choices"
 msgstr "Dynamische Auswahlfeld Wahlmöglichkeiten"
 
-#, fuzzy
-#| msgid "Detailed Description"
 msgid "Default userprofile description"
-msgstr "Detaillierte Beschreibung"
+msgstr "Standardbeschreibung des Benutzerprofils"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
@@ -1396,7 +1394,7 @@ msgid "Is conference"
 msgstr "Ist Tagung"
 
 msgid "Allow temporary users accounts for this conference."
-msgstr "Temporäre Benutzerkonten für diese Tagung zulassen"
+msgstr "Allow temporary users accounts for this conference."
 
 msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
 msgstr "Wenn aktiviert, können Tagungsveranstalter temporäre Benutzerkonten erstellen, die aktiviert und deaktiviert werden können."
@@ -1422,10 +1420,8 @@ msgstr "Verwandte Projekte/Gruppen"
 msgid "Dynamic extra fields"
 msgstr "Dynamische Zusatzfelder"
 
-#, fuzzy
-#| msgid "If this is active, a Call to Action box will be shown on the microsite."
 msgid "If set to true, a contact form will be displayed on the micropage."
-msgstr "Wenn dies aktiv ist, wird die Aufruf zum Handeln - Microsite-Box auf der Microsite angezeigt."
+msgstr ""
 
 msgid "Cosinnus project"
 msgstr "Projekt"
@@ -2163,10 +2159,8 @@ msgstr "Wähle links eine Seite aus."
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr "Überblick - Tagungen, Räume und Workshops mit eigenen BBB-Server-Einstellungen"
 
-#, fuzzy
-#| msgid "Overview - All Conferences"
 msgid "Overview - Premium Conferences Only"
-msgstr "Überblick - Alle Tagungen"
+msgstr "Überblick - Premium-Tagungen"
 
 msgid "Overview - All Conferences"
 msgstr "Überblick - Alle Tagungen"
@@ -3809,23 +3803,17 @@ msgstr "Welche Apps sollen aktiviert sein?"
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Diese Anwendung kann nur für eine Gruppe, aber nicht für ein Projekt aktiviert werden!"
 
-#, fuzzy
-#| msgid "Cosinnus Micropages"
-msgid "Contact Form on Micropage"
-msgstr "Cosinnus Micropages"
+msgid "Contact Form on microsite"
+msgstr "Kontaktformular auf der Microsite"
 
-#, fuzzy
-#| msgid "Optional contact information"
 msgid "Display contact form."
-msgstr "Optionale Kontaktinformationen"
+msgstr "Kontaktformular anzeigen."
 
 msgid "A public contact form, which non-registered users can use to contact group admins of this group."
-msgstr ""
+msgstr "Ein öffentliches Kontaktformular, das von den nicht-registrierten Benutzern zwecks Kontaktaufnahme mit den Gruppen-Administrator_innen benutzt werden kann."
 
-#, fuzzy
-#| msgid "Contact info"
 msgid "Contact Form"
-msgstr "Kontaktinfos"
+msgstr "Kontaktformular"
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Aus welchen Anwendungen sollen öffentliche Inhalte auf der Microsite angezeigt werden?"
@@ -4011,22 +3999,17 @@ msgstr "Auf Twitter teilen"
 msgid "Sustainable Development Goals"
 msgstr "Ziele für nachhaltige Entwicklung"
 
-#, fuzzy
-#| msgid "Group administrator"
-msgid "Email to group administrator"
-msgstr "Gruppen-Administrator"
+msgid "Email the group administrators"
+msgstr "Email an die Gruppen-Administrator_innen schicken"
 
-#, fuzzy
-#| msgid "email address"
 msgid "Your email address"
-msgstr "E-Mail Adresse"
+msgstr "Deine Email-Adresse"
 
 msgid "Message"
 msgstr "Nachricht"
 
-#, fuzzy
 msgid "Your message"
-msgstr "Nachrichten"
+msgstr "Deine Nachricht"
 
 msgid "Captcha"
 msgstr "Captcha"
@@ -4422,10 +4405,23 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
+"Du hast eine Nachricht via das Kontaktformular auf der Microsite von «%(group_name)s» bekommen!\n"
+"\n"
+"Die Nachricht wurde auf der Microsite von [%(group_name)s](%(domain_url)s%(group_url)s) hinterlassen:\n"
+"«%(message)s»\n"
+"\n"
+"\n"
+"Deine Antwort kannst du auf diese Email schicken:\n"
+"%(email)s\n"
+"\n"
+"(Du hast diese Email bekommen, weil du ein Portal-Administrator bist.)\n"
+"\n"
+"\n"
+"Dein %(site_name)s Team"
 
 #, python-format
 msgid "You received a message via the contact form on \"%(group_name)s\"!"
-msgstr ""
+msgstr "Du hast eine Nachricht via das Kontaktformular von «%(group_name)s» bekommen!"
 
 #, python-format
 msgid ""
@@ -7236,13 +7232,11 @@ msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."
 msgid "Your idea was deleted successfully."
 msgstr "Deine Idee wurde erfolgreich gelöscht."
 
-#, fuzzy
-#| msgid "Your changes have been saved."
 msgid "Your message has been sent."
-msgstr "Deine Änderungen wurden übernommen."
+msgstr "Deine Nachricht wurde abgeschickt."
 
 msgid "Something went wrong. Your message was not sent."
-msgstr ""
+msgstr "Etwas ging schief. Deine Nachricht wurde nicht abgeschickt."
 
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "Es gab einen Fehler beim Verarbeiten der Avatar-Auswahl. Bitte stell sicher dass du einen gültigen und ausreichend großen Bereich im Bild ausgewählt hast!"
