@@ -139,8 +139,7 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
                   <FormattedMessage id="Edit Profile" />
                 </Link>
             }>
-            <FormattedMessage id="Your profile is not shown here or not displayed correctly?
-                                                     Add to your profile or make yourself visible to other conference participants." />
+            <FormattedMessage id="Your profile is not shown here or not displayed correctly? Add to your profile or make yourself visible to other conference participants." />
         </Alert>
         <FormControl className={classes.formControl}>
           <InputLabel><FormattedMessage id="Filter by country" /></InputLabel>
