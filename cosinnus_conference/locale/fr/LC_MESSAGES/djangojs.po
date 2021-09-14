@@ -3,6 +3,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "MIME-Version: 1.0\n"
 "Language: fr\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. [Agenda]
 #. defaultMessage is:
@@ -241,6 +248,12 @@ msgstr "Organisation"
 msgid "Organization"
 msgstr "Organisation"
 
+#. [City]
+#. defaultMessage is:
+#. undefined
+msgid "City"
+msgstr "Ville"
+
 #. [Represented organisations]
 #. defaultMessage is:
 #. undefined
@@ -331,6 +344,9 @@ msgid "places left"
 msgstr "places restantes"
 
 msgid ""
-"Your profile is not shown here or not displayed correctly? "
-"Add to your profile or make yourself visible to other conference participants."
+"Your profile is not shown here or not displayed correctly? Add to your "
+"profile or make yourself visible to other conference participants."
+msgstr ""
+
+msgid "Edit Profile"
 msgstr ""

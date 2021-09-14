@@ -9,7 +9,7 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. [Agenda]
 #. defaultMessage is:
@@ -239,6 +239,12 @@ msgstr "Nyní"
 msgid "Organization"
 msgstr "Organizace"
 
+#. [City]
+#. defaultMessage is:
+#. undefined
+msgid "City"
+msgstr ""
+
 #. [Represented organizations]
 #. defaultMessage is:
 #. undefined
@@ -328,6 +334,9 @@ msgid "places left"
 msgstr "volná místa"
 
 msgid ""
-"Your profile is not shown here or not displayed correctly? "
-"Add to your profile or make yourself visible to other conference participants."
+"Your profile is not shown here or not displayed correctly? Add to your "
+"profile or make yourself visible to other conference participants."
+msgstr ""
+
+msgid "Edit Profile"
 msgstr ""

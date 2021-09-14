@@ -132,8 +132,16 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
-        <Alert severity="info"><FormattedMessage id="Your profile is not shown here or not displayed correctly?
-                                                     Add to your profile or make yourself visible to other conference participants." /></Alert>
+        <Alert 
+            severity="info"
+            action={
+                <Link className={classes.link} target="_blank" href="/profile/edit/" >
+                  <FormattedMessage id="Edit Profile" />
+                </Link>
+            }>
+            <FormattedMessage id="Your profile is not shown here or not displayed correctly?
+                                                     Add to your profile or make yourself visible to other conference participants." />
+        </Alert>
         <FormControl className={classes.formControl}>
           <InputLabel><FormattedMessage id="Filter by country" /></InputLabel>
           <Select

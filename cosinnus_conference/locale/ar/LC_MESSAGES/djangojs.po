@@ -231,6 +231,12 @@ msgstr "الآن"
 msgid "Organization"
 msgstr "منظمة"
 
+#. [City]
+#. defaultMessage is:
+#. undefined
+msgid "City"
+msgstr ""
+
 #. [Represented organizations]
 #. defaultMessage is:
 #. undefined
