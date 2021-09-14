@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:22+0200\n"
+"POT-Creation-Date: 2021-09-14 15:36+0200\n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -157,10 +157,6 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
-#, fuzzy
-msgid "Restart"
-msgstr "Обмежений"
-
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Електронну адресу, яку Ви використовуєте для входу в обліковий запис, необхідно активувати."
 
@@ -230,18 +226,6 @@ msgstr ""
 msgid "Gluten-free cuisine"
 msgstr ""
 
-msgid "General"
-msgstr "Загальна інформація"
-
-msgid "Active"
-msgstr "Активний"
-
-msgid "Restricted"
-msgstr "Обмежений"
-
-msgid "Premium"
-msgstr "Преміум"
-
 msgid "Bookmark"
 msgstr ""
 
@@ -253,6 +237,18 @@ msgstr ""
 
 msgid "Bookmarked Users list"
 msgstr ""
+
+msgid "General"
+msgstr "Загальна інформація"
+
+msgid "Active"
+msgstr "Активний"
+
+msgid "Restricted"
+msgstr "Обмежений"
+
+msgid "Premium"
+msgstr "Преміум"
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Тільки зареєстровані користувачі можуть бачити цей вміст! Увійдіть в систему або зареєструйтеся зараз!"
@@ -274,6 +270,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "Здійснено вихід із системи, тому що цей обліковий запис більше не активний."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1105,6 +1104,58 @@ msgstr "Cosinnus Локації"
 msgid "Note from the organizers"
 msgstr ""
 
+#, fuzzy
+msgid "Conference"
+msgstr "Є конференція"
+
+#, fuzzy
+#| msgid "Start date."
+msgid "Start Datetime"
+msgstr "Дата початку."
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+#, fuzzy
+#| msgid "End date."
+msgid "End Datetime"
+msgstr "Кінцева дата."
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Conference participants"
+msgstr "Налаштування конференції"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Cosinnus Conference Premium Block"
+msgstr "Налаштування конференції"
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "Налаштування конференції"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+#| msgid "Maximum Coffee Table Participants"
+msgid "Maximum BBB participants"
+msgstr "Максимальна кількість учасників за Coffee Tables"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr "Текст скарги"
 
@@ -1282,13 +1333,14 @@ msgstr "Якщо задано, це активує функцію відеоко
 msgid "Dynamic choice field choices"
 msgstr ""
 
+#, fuzzy
+#| msgid "Detailed Description"
+msgid "Default userprofile description"
+msgstr "Детальний опис"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Проект"
-
-#, fuzzy
-msgid "Conference"
-msgstr "Є конференція"
 
 #, fuzzy
 #| msgid "New membership request"
@@ -1396,16 +1448,6 @@ msgstr "ID групової папки Nextcloud"
 msgid "Is conference"
 msgstr "Є конференція"
 
-#, fuzzy
-#| msgid "Start date."
-msgid "Start Datetime"
-msgstr "Дата початку."
-
-#, fuzzy
-#| msgid "End date."
-msgid "End Datetime"
-msgstr "Кінцева дата."
-
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
 
@@ -1438,6 +1480,11 @@ msgstr "Пов'язані команди"
 
 msgid "Dynamic extra fields"
 msgstr ""
+
+#, fuzzy
+#| msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "Якщо це активовано, то вікно Заклик до дії буде показано на мікросайті."
 
 msgid "Cosinnus project"
 msgstr "Проект"
@@ -2192,6 +2239,12 @@ msgstr "Немає інформації"
 msgid "Back to Project Overview"
 msgstr "Назад до Огляду Проєкта"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
 
@@ -2203,6 +2256,10 @@ msgstr "Виберіть сторінку зліва."
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Є конференція"
 
 #, fuzzy
 msgid "Overview - All Conferences"
@@ -2227,6 +2284,20 @@ msgstr ""
 msgid "View Past"
 msgstr "Переглянути Проєкт"
 
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Permanently Premium"
+msgstr "Конференція триває"
+
 #, fuzzy
 #| msgid "Privacy settings"
 msgid "Portal Setting"
@@ -2239,8 +2310,11 @@ msgstr "Налаштування конференції"
 
 #, fuzzy
 #| msgid "Premium"
-msgid "Is premium"
+msgid "Premium active"
 msgstr "Преміум"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
 
 #, fuzzy
 #| msgid "Premium"
@@ -2353,6 +2427,11 @@ msgstr "Проста Статистика"
 #| msgid "Conference Settings"
 msgid "Conference Overview"
 msgstr "Налаштування конференції"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Premium Conferences Only"
+msgstr "Створити Захід"
 
 #, fuzzy
 #| msgid "Conference is running"
@@ -3425,9 +3504,6 @@ msgstr "Тепер ви будете отримувати сповіщення �
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "Тепер ви будете отримувати сповіщення щоразу, коли публічний контент буде розміщено в цій групі."
 
-msgid "Group:"
-msgstr "Група:"
-
 msgid "No Description set"
 msgstr "Опис не створено"
 
@@ -3471,6 +3547,17 @@ msgstr "Аватар буде видалено після збереження."
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "опціонально"
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Add/Edit translations"
+msgstr "Додаткові опції"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "Дата"
@@ -3549,9 +3636,17 @@ msgid "until"
 msgstr "До"
 
 #, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the event\\'s description."
+msgstr "Тільки члени групи/проєкту можуть бачити цей вміст. Надішліть запит членства зараз!"
+
+#, fuzzy
 #| msgid "No info."
 msgid "More infos..."
 msgstr "Немає інформації."
+
+msgid "Please Login or Register to view the event's description."
+msgstr ""
 
 #, fuzzy
 #| msgid "You will now receive notifications for content posted in this project."
@@ -3977,6 +4072,24 @@ msgstr "Які застосунки слід активувати?"
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Цей застосунок можна активувати лише для групи, але не для проєкту!"
 
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Contact Form on microsite"
+msgstr "Контактна інформація"
+
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Display contact form."
+msgstr "Контактна інформація"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Form"
+msgstr "Контактна інформація"
+
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "З яких застосунків слід відображати загальнодоступні елементи на мікросайті?"
 
@@ -4162,6 +4275,34 @@ msgstr "Поширити на Twitter"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Цілі Сталого Розвитку"
+
+#, fuzzy
+#| msgid "Group Administrator"
+msgid "Email the group administrators"
+msgstr "Адміністратори Групи"
+
+#, fuzzy
+#| msgid "email address"
+msgid "Your email address"
+msgstr "адреса електронної скриньки"
+
+#, fuzzy
+#| msgid "Messages"
+msgid "Message"
+msgstr "Повідомлення"
+
+#, fuzzy
+msgid "Your message"
+msgstr "Повідомлення"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "Ми маємо переконатися, що Ви є справжньою людиною (вибачте!)"
+
+msgid "Generate a new captcha"
+msgstr "Згенерувати новий captcha"
 
 msgid "Tweets"
 msgstr "Твіти"
@@ -4545,6 +4686,27 @@ msgstr ""
 #, python-format
 msgid "%(site_name)s CSV import was successful"
 msgstr "%(site_name)s імпорт CSV був успішним"
+
+#, python-format
+msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5416,15 +5578,6 @@ msgstr "Прізвище"
 msgid "You can supply your last name to be displayed as well"
 msgstr "Ви також можете вказати для відображення Ваше прізвище"
 
-msgid "Captcha"
-msgstr "Captcha"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "Ми маємо переконатися, що Ви є справжньою людиною (вибачте!)"
-
-msgid "Generate a new captcha"
-msgstr "Згенерувати новий captcha"
-
 msgid "Search options..."
 msgstr "Пошук опцій…"
 
@@ -6239,11 +6392,6 @@ msgstr "Сигналізує про Ваше бажання контакту щ�
 msgid "I am open for cooperation requests"
 msgstr "Я відкритий(-а) до запитів щодо співпраці"
 
-#, fuzzy
-#| msgid "Messages"
-msgid "Message"
-msgstr "Повідомлення"
-
 msgid "Welcome!"
 msgstr "Вітаємо!"
 
@@ -6717,6 +6865,11 @@ msgstr "Головна"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "Мій профіль"
 
 msgid "Change language"
 msgstr "Змінити мову"
@@ -7544,6 +7697,14 @@ msgstr "Не вказано імені застосунку для додава�
 msgid "Your idea was deleted successfully."
 msgstr "Ваша ідея успішно видалена."
 
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your message has been sent."
+msgstr "Ваші зміни були збережені."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "Під час обробки вашого основного фото виникла помилка. Будь ласка, переконайтеся, що Ви обрали достатньо велику частину зображення!"
 
@@ -7774,6 +7935,18 @@ msgstr "Наразі Ви не є членом %s! Якщо ви бажаєте 
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#, fuzzy
+#~ msgid "Restart"
+#~ msgstr "Обмежений"
+
+#, fuzzy
+#~| msgid "Premium"
+#~ msgid "Is premium"
+#~ msgstr "Преміум"
+
+#~ msgid "Group:"
+#~ msgstr "Група:"
 
 #, fuzzy
 #~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
@@ -8013,10 +8186,6 @@ msgstr "Ваші зміни були збережені."
 #, fuzzy
 #~ msgid "Import Projects and Groups or Users"
 #~ msgstr "Мо"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Повідомлення"
 
 #~ msgid "Invited you"
 #~ msgstr "Запросив Вас"

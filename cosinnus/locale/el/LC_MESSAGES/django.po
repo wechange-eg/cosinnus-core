@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:22+0200\n"
+"POT-Creation-Date: 2021-09-14 15:36+0200\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,9 +156,6 @@ msgstr "Rocket: Επιδιορθώστε/δημιουργήστε λογαρια
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Επιδιορθώστε τις συνδρομές χρηστών για δωμάτιο RocketChat"
 
-msgid "Restart"
-msgstr "Επανεκκίνηση"
-
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Αυτή η διεύθυνση email για τον λογαριασμό που προσπαθείτε να χρησιμοποιήσετε χρειάζεται να ενεργοποιηθεί πριν να συνδεθείτε."
 
@@ -228,18 +225,6 @@ msgstr "Κουζίνα χωρίς λακτόζη"
 msgid "Gluten-free cuisine"
 msgstr "Κουζίνα χωρίς γλουτένη"
 
-msgid "General"
-msgstr "Γενικά"
-
-msgid "Active"
-msgstr "Ενεργός"
-
-msgid "Restricted"
-msgstr "Περιορισμένος"
-
-msgid "Premium"
-msgstr "Premium"
-
 msgid "Bookmark"
 msgstr "Σελιδοδείκτης"
 
@@ -251,6 +236,18 @@ msgstr "Λίστα Σελιδοδεικτών"
 
 msgid "Bookmarked Users list"
 msgstr "Λίστα Χρηστών με Σελιδοδείκτη"
+
+msgid "General"
+msgstr "Γενικά"
+
+msgid "Active"
+msgstr "Ενεργός"
+
+msgid "Restricted"
+msgstr "Περιορισμένος"
+
+msgid "Premium"
+msgstr "Premium"
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Μόνο τα εγγεγραμμένα μέλη μπορούν να δουν το περιεχόμενου που ζητήσατε! Συνδεθείτε ή δημιουργήστε λογαριασμό τώρα!"
@@ -272,6 +269,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "Αυτός ο λογαριασμός δεν είναι πλέον ενεργός. Έχετε αποσυνδεθεί."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1050,6 +1050,53 @@ msgstr "Αιτήσεις Σύσκεψης Cosinnus"
 msgid "Note from the organizers"
 msgstr "Σημείωση από τους διοργανωτές"
 
+msgid "Conference"
+msgstr "Σύσκεψη"
+
+msgid "Start Datetime"
+msgstr "Έναρξη Datetime"
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+msgid "End Datetime"
+msgstr "Λήξη Datetime"
+
+#, fuzzy
+#| msgid "Conference Applications"
+msgid "Conference participants"
+msgstr "Εφαρμογές Σύσκεψης"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus Conference Setting"
+msgid "Cosinnus Conference Premium Block"
+msgstr "Ρύθμιση Σύσκεψης Cosinnus"
+
+#, fuzzy
+#| msgid "Cosinnus Conference Settings"
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "Ρυθμίσεις Σύσκεψης Cosinnus"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+#| msgid "Maximal Number of participants"
+msgid "Maximum BBB participants"
+msgstr "Μέγιστος Αριθμός συμμετεχόντων"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr "Κείμενο Καταγγελίας"
 
@@ -1225,12 +1272,14 @@ msgstr "Για εκδηλώσεις παλιού τύπου μόνο αναδυ�
 msgid "Dynamic choice field choices"
 msgstr "Επιλογές πεδίου δυναμικής επιλογής"
 
+#, fuzzy
+#| msgid "Detailed Description"
+msgid "Default userprofile description"
+msgstr "Λεπτομερής Περιγραφή"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Έργο"
-
-msgid "Conference"
-msgstr "Σύσκεψη"
 
 msgid "Regular membership requests"
 msgstr "Αιτήματα κανονικής συνδρομής"
@@ -1334,12 +1383,6 @@ msgstr "Ταυτότητα Nextcloud Groupfolder"
 msgid "Is conference"
 msgstr "Είναι σύσκεψη"
 
-msgid "Start Datetime"
-msgstr "Έναρξη Datetime"
-
-msgid "End Datetime"
-msgstr "Λήξη Datetime"
-
 msgid "Allow temporary users accounts for this conference."
 msgstr "Επιτρέπονται προσωρινοί λογαριασμοί χρηστών για αυτή τη σύσκεψη."
 
@@ -1366,6 +1409,11 @@ msgstr "Σχετικές Ομάδες"
 
 msgid "Dynamic extra fields"
 msgstr "Δυναμικά πρόσθετα πεδία"
+
+#, fuzzy
+#| msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "Εάν αυτό είναι ενεργό, ένα πλαίσιο Έκκλησης για Δράση θα εμφανιστεί στον μικρότοπο."
 
 msgid "Cosinnus project"
 msgstr "Έργο Cosinnus"
@@ -2097,6 +2145,12 @@ msgstr "Δεν έχουν δοθεί πληροφορίες"
 msgid "Back to Project Overview"
 msgstr "Πίσω στην Επισκόπηση Έργου"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "Μπορείτε να ορίσετε τις ρυθμίσεις σύσκεψης σε αυτό το επίπεδο. Όλα τα αντικείμενα κάτω από αυτό το επίπεδο στην ιεραρχία θα έχουν αυτές τις ρυθμίσεις, εκτός εάν έχουν ορίσει τα ίδια ρυθμίσεις σύσκεψης."
 
@@ -2108,6 +2162,11 @@ msgstr "Επιλέξτε μια σελίδα στην αριστερή πλευ�
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια με προσαρμοσμένες ρυθμίσεις Εξυπηρετητή-BBB"
+
+#, fuzzy
+#| msgid "Overview - All Conferences"
+msgid "Overview - Premium Conferences Only"
+msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
 
 msgid "Overview - All Conferences"
 msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
@@ -2127,14 +2186,35 @@ msgstr "Προσεχής"
 msgid "View Past"
 msgstr "Προβολή Προηγούμενου"
 
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+#| msgid "Bookmarked"
+msgid "Booked"
+msgstr "Με σελιδοδείκτη"
+
+#, fuzzy
+#| msgid "Conference is permanently premium"
+msgid "Permanently Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
 msgid "Portal Setting"
 msgstr "Ρύθμιση Πύλης"
 
 msgid "Conference Settings"
 msgstr "Ρυθμίσεις Σύσκεψης"
 
-msgid "Is premium"
-msgstr "Είναι premium"
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
 
 msgid "Not premium"
 msgstr "Όχι premium"
@@ -2220,6 +2300,11 @@ msgstr "Απλή Στατιστική"
 
 msgid "Conference Overview"
 msgstr "Επισκόπηση Σύσκεψης"
+
+#, fuzzy
+#| msgid "BBB Server for Premium Conferences"
+msgid "Premium Conferences Only"
+msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
 
 msgid "Conferences with Custom Settings"
 msgstr "Συσκέψεις με Προσαρμοσμένες Ρυθμίσεις"
@@ -3176,9 +3261,6 @@ msgstr "Τώρα θα λαμβάνετε ειδοποιήσεις όταν δη�
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "Τώρα θα λαμβάνετε ειδοποιήσεις όταν δημόσιο περιεχόμενο θα αναρτάται σε αυτή την ομάδα."
 
-msgid "Group:"
-msgstr "Ομάδα:"
-
 msgid "No Description set"
 msgstr "Δεν έχει οριστεί Περιγραφή"
 
@@ -3222,6 +3304,17 @@ msgstr "Το Avatar θα διαγραφεί μετά την αποθήκευση
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "προαιρετικό"
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Add/Edit translations"
+msgstr "Πρόσθετες επιλογές"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "Ημερομηνία"
@@ -3288,8 +3381,16 @@ msgctxt "time"
 msgid "until"
 msgstr "έως"
 
+#, fuzzy
+#| msgid "Only conference members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the event\\'s description."
+msgstr "Μόνο τα μέλη της σύσκεψης μπορούν να δουν το περιεχόμενο που ζητήσατε. Κάντε αίτηση για να γίνετε μέλος τώρα!"
+
 msgid "More infos..."
 msgstr "Περισσότερες πληροφορίες..."
+
+msgid "Please Login or Register to view the event's description."
+msgstr ""
 
 msgid "You will now receive notifications for content posted in this conference."
 msgstr "Αυτή τη στιγμή θα λάβετε ειδοποιήσεις για περιεχόμενο που αναρτήθηκε σε αυτή τη σύσκεψη."
@@ -3689,6 +3790,24 @@ msgstr "Ποιες εφαρμογές πρέπει να ενεργοποιηθο
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Αυτή η Εφαρμογή μπορεί να ενεργοποιηθεί μόνο για Ομάδα αλλά όχι για Έργο!"
 
+#, fuzzy
+#| msgid "Contact organizers"
+msgid "Contact Form on microsite"
+msgstr "Επικοινωνία με διοργανωτές"
+
+#, fuzzy
+#| msgid "Optional contact information"
+msgid "Display contact form."
+msgstr "Προαιρετικά στοιχεία επικοινωνίας"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Form"
+msgstr "Πληροφορίες Επικοινωνίας"
+
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Από ποιες εφαρμογές θα πρέπει να εμφανίζονται τα δημόσια στοιχεία στον μικρότοπο;"
 
@@ -3871,6 +3990,33 @@ msgstr "Κοινή χρήση στο Twitter"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Στόχοι Βιώσιμης Ανάπτυξης"
+
+#, fuzzy
+#| msgid "Group administrator"
+msgid "Email the group administrators"
+msgstr "Διαχειριστής ομάδας"
+
+#, fuzzy
+#| msgid "email address"
+msgid "Your email address"
+msgstr "διεύθυνση email"
+
+msgid "Message"
+msgstr "Μήνυμα"
+
+#, fuzzy
+#| msgid "Your name"
+msgid "Your message"
+msgstr "Το όνομά σας"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "Χρειάζεται να διαπιστώσουμε ότι είστε πραγματικό πρόσωπο (λυπούμαστε!)"
+
+msgid "Generate a new captcha"
+msgstr "Δημιουργήστε νέο captcha"
 
 msgid "Tweets"
 msgstr "Tweets"
@@ -4249,6 +4395,27 @@ msgstr ""
 #, python-format
 msgid "%(site_name)s CSV import was successful"
 msgstr "Η εισαγωγή CSV %(site_name)s ήταν επιτυχής"
+
+#, python-format
+msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5080,15 +5247,6 @@ msgstr "Επώνυμο"
 msgid "You can supply your last name to be displayed as well"
 msgstr "Μπορείτε να εισάγετε το επώνυμό σας έτσι ώστε να εμφανίζεται επίσης"
 
-msgid "Captcha"
-msgstr "Captcha"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "Χρειάζεται να διαπιστώσουμε ότι είστε πραγματικό πρόσωπο (λυπούμαστε!)"
-
-msgid "Generate a new captcha"
-msgstr "Δημιουργήστε νέο captcha"
-
 msgid "Search options..."
 msgstr "Αναζήτηση επιλογών..."
 
@@ -5879,9 +6037,6 @@ msgstr "Σηματοδοτεί την επιθυμία σας να επικοι�
 msgid "I am open for cooperation requests"
 msgstr "Είναι διαθέσιμος για αιτήματα συνεργασίας"
 
-msgid "Message"
-msgstr "Μήνυμα"
-
 msgid "Welcome!"
 msgstr "Καλώς ήρθατε!"
 
@@ -6341,6 +6496,11 @@ msgstr "Αρχική"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "Το Προφίλ Μου"
 
 msgid "Change language"
 msgstr "Αλλαγή γλώσσας"
@@ -7060,6 +7220,14 @@ msgstr "Δεν δόθηκε όνομα εφαρμογής για την προσ
 msgid "Your idea was deleted successfully."
 msgstr "Η ιδέα σας διαγράφηκε με επιτυχία."
 
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your message has been sent."
+msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "Υπήρξε ένα σφάλμα κατά την επεξεργασία του avatar σας. Παρακαλούμε βεβαιωθείτε ότι επιλέξατε ένα αρκετά μεγάλο μέρος της εικόνας!"
 
@@ -7282,6 +7450,15 @@ msgstr "Δεν είστε μέλος του %s αυτή τη στιγμή! Εά�
 
 msgid "Your changes have been saved."
 msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
+
+#~ msgid "Restart"
+#~ msgstr "Επανεκκίνηση"
+
+#~ msgid "Is premium"
+#~ msgstr "Είναι premium"
+
+#~ msgid "Group:"
+#~ msgstr "Ομάδα:"
 
 #~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "Πρόκειται να απενεργοποιήστε αυτό το έργο. Αυτό και όλο του το περιεχόμενο θα είναι κρυμμένο στην ιστοσελίδα και μη ορατό σε όλους, μαζί με εσάς."

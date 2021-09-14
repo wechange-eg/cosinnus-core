@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:22+0200\n"
+"POT-Creation-Date: 2021-09-14 15:36+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -165,9 +165,6 @@ msgstr "Rocket: Opravte/vytvořte chybějící RocketChat účty"
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Zařiďte chybějící členství v RocketChat místnosti pro uživatele"
 
-msgid "Restart"
-msgstr "Restartujte"
-
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Před přihlášením je třeba aktivovat e-mailovou adresu účtu, který se pokoušíte použít."
 
@@ -237,18 +234,6 @@ msgstr "Bezlaktózová kuchyně"
 msgid "Gluten-free cuisine"
 msgstr "Bezglutenová kuchyně"
 
-msgid "General"
-msgstr "Obecné"
-
-msgid "Active"
-msgstr "Aktivovat"
-
-msgid "Restricted"
-msgstr "S omezením"
-
-msgid "Premium"
-msgstr "Premium"
-
 msgid "Bookmark"
 msgstr "Záložka"
 
@@ -260,6 +245,18 @@ msgstr "Seznam záložek"
 
 msgid "Bookmarked Users list"
 msgstr "Seznam uživatelů se záložkou"
+
+msgid "General"
+msgstr "Obecné"
+
+msgid "Active"
+msgstr "Aktivovat"
+
+msgid "Restricted"
+msgstr "S omezením"
+
+msgid "Premium"
+msgstr "Premium"
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Vámi vybraný obsah mohou zobrazit pouze registrovaní členové! Přihlaste se nebo si vytvořte účet hned teď!"
@@ -281,6 +278,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "Tento účet již není aktivní. Byli jste odhlášeni."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1068,6 +1068,53 @@ msgstr "Cosinnus žádosti o účast v konferenci"
 msgid "Note from the organizers"
 msgstr "Poznámka od organizátorů"
 
+msgid "Conference"
+msgstr "Konference"
+
+msgid "Start Datetime"
+msgstr "Počáteční datum a čas"
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+msgid "End Datetime"
+msgstr "Konečné datum a čas"
+
+#, fuzzy
+#| msgid "Conference Applications"
+msgid "Conference participants"
+msgstr "Žádost o účast v konferenci"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus Conference Setting"
+msgid "Cosinnus Conference Premium Block"
+msgstr "Cossinus nastavení konference"
+
+#, fuzzy
+#| msgid "Cosinnus Conference Settings"
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "Cossinus nastavení konference"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+#| msgid "Maximal Number of participants"
+msgid "Maximum BBB participants"
+msgstr "Maximální počet účastníků"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr "Text stížnosti"
 
@@ -1243,12 +1290,14 @@ msgstr "Pouze pro vyskakovací okna schůzek eventů starého stylu! Pokud je vl
 msgid "Dynamic choice field choices"
 msgstr "Dynamický výběr políček možností"
 
+#, fuzzy
+#| msgid "Detailed Description"
+msgid "Default userprofile description"
+msgstr "Detailní popis"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Projekt"
-
-msgid "Conference"
-msgstr "Konference"
 
 msgid "Regular membership requests"
 msgstr "Standardní žádosti o členství"
@@ -1352,12 +1401,6 @@ msgstr "ID Nextcloud složky skupiny"
 msgid "Is conference"
 msgstr "Je konference"
 
-msgid "Start Datetime"
-msgstr "Počáteční datum a čas"
-
-msgid "End Datetime"
-msgstr "Konečné datum a čas"
-
 msgid "Allow temporary users accounts for this conference."
 msgstr "Povoluje účty dočasných uživatelů pro tuto konferenci."
 
@@ -1384,6 +1427,11 @@ msgstr "Související týmy"
 
 msgid "Dynamic extra fields"
 msgstr "Dynamická extra pole"
+
+#, fuzzy
+#| msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "Je-li aktivní, na mikrostránce se zobrazí pole Výzva k akci."
 
 msgid "Cosinnus project"
 msgstr "Cosinnus projekt"
@@ -2115,6 +2163,12 @@ msgstr "Nejsou nastaveny žádné informace"
 msgid "Back to Project Overview"
 msgstr "Zpět na Přehled projektu"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "Můžete nastavit nastavení konference na této úrovni. Všechny předměty pod touto úrovní hierarchie budou obsahovat tato nastavení, pokud nemají nastavená vlastní nastavení konference."
 
@@ -2126,6 +2180,11 @@ msgstr "Vyberte stránku na levé straně."
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr "Přehled - konference, místnosti a workshopy s customizovanými nastaveními BBB serveru"
+
+#, fuzzy
+#| msgid "Overview - All Conferences"
+msgid "Overview - Premium Conferences Only"
+msgstr "Přehled - Všechny konference"
 
 msgid "Overview - All Conferences"
 msgstr "Přehled - Všechny konference"
@@ -2145,14 +2204,35 @@ msgstr "Nastávající"
 msgid "View Past"
 msgstr "Zobrazit minulý"
 
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+#| msgid "Bookmarked"
+msgid "Booked"
+msgstr "Se záložkou"
+
+#, fuzzy
+#| msgid "Conference is permanently premium"
+msgid "Permanently Premium"
+msgstr "Konference je trvale v kategorii premium"
+
 msgid "Portal Setting"
 msgstr "Nastavení portálu"
 
 msgid "Conference Settings"
 msgstr "Nastavení konference"
 
-msgid "Is premium"
-msgstr "Je premium"
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
 
 msgid "Not premium"
 msgstr "Není premium"
@@ -2256,6 +2336,11 @@ msgstr "Jednoduchá statistika"
 
 msgid "Conference Overview"
 msgstr "Konferenční přehled"
+
+#, fuzzy
+#| msgid "BBB Server for Premium Conferences"
+msgid "Premium Conferences Only"
+msgstr "BBB server pro Premium konference"
 
 msgid "Conferences with Custom Settings"
 msgstr "Konference s customizovanými nastaveními"
@@ -3240,9 +3325,6 @@ msgstr "Nyní budete dostávat oznámení, kdykoli bude v tomto projektu zveřej
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "Nyní budete dostávat oznámení, kdykoli bude v této skupině zveřejněn veřejný obsah."
 
-msgid "Group:"
-msgstr "Skupina:"
-
 msgid "No Description set"
 msgstr "Není nastaven žádný popis"
 
@@ -3286,6 +3368,17 @@ msgstr "Avatar bude po uložení smazán."
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "volitelné"
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Add/Edit translations"
+msgstr "Další možnosti"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "Datum"
@@ -3352,8 +3445,16 @@ msgctxt "time"
 msgid "until"
 msgstr "až do"
 
+#, fuzzy
+#| msgid "Only conference members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the event\\'s description."
+msgstr "Vámi vybraný obsah mohou zobrazit pouze účastníci konference. Podejte si žádost o členství nyní!"
+
 msgid "More infos..."
 msgstr "Více informací..."
+
+msgid "Please Login or Register to view the event's description."
+msgstr ""
 
 msgid "You will now receive notifications for content posted in this conference."
 msgstr "Nyní budete dostávat oznámení o obsahu zveřejněném v této konferenci."
@@ -3753,6 +3854,24 @@ msgstr "Které aplikace by měly být aktivovány?"
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Tuto aplikaci lze aktivovat pouze pro skupinu, nikoli však pro projekt!"
 
+#, fuzzy
+#| msgid "Contact organizers"
+msgid "Contact Form on microsite"
+msgstr "Kontaktujte organizátory"
+
+#, fuzzy
+#| msgid "Optional contact information"
+msgid "Display contact form."
+msgstr "Volitelné kontaktní informace"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Form"
+msgstr "Kontaktní informace"
+
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Z jakých aplikací by se měly veřejné položky zobrazovat na mikrostránce?"
 
@@ -3935,6 +4054,33 @@ msgstr "Sdílet na Twitteru"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Cíle udržitelného rozvoje"
+
+#, fuzzy
+#| msgid "Group administrator"
+msgid "Email the group administrators"
+msgstr "Administrátor skupiny"
+
+#, fuzzy
+#| msgid "email address"
+msgid "Your email address"
+msgstr "e-mailová adresa"
+
+msgid "Message"
+msgstr "Zpráva"
+
+#, fuzzy
+#| msgid "Your name"
+msgid "Your message"
+msgstr "Vaše jméno"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "Musíme se ujistit, že jste skutečná osoba (omlouváme se!)"
+
+msgid "Generate a new captcha"
+msgstr "Vygenerovat novou captcha"
 
 msgid "Tweets"
 msgstr "Tweety"
@@ -4313,6 +4459,27 @@ msgstr ""
 #, python-format
 msgid "%(site_name)s CSV import was successful"
 msgstr "%(site_name)s CSV import byl úspěšný"
+
+#, python-format
+msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5145,15 +5312,6 @@ msgstr "Příjmení"
 msgid "You can supply your last name to be displayed as well"
 msgstr "Můžete také zadat k zobrazení své příjmení"
 
-msgid "Captcha"
-msgstr "Captcha"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "Musíme se ujistit, že jste skutečná osoba (omlouváme se!)"
-
-msgid "Generate a new captcha"
-msgstr "Vygenerovat novou captcha"
-
 msgid "Search options..."
 msgstr "Možnosti hledání..."
 
@@ -5944,9 +6102,6 @@ msgstr "Signalizuje vaši ochotu být kontaktován/a ostatními uživateli, kte�
 msgid "I am open for cooperation requests"
 msgstr "Jsem otevřený/á pro žádosti o spolupráci"
 
-msgid "Message"
-msgstr "Zpráva"
-
 msgid "Welcome!"
 msgstr "Vítejte!"
 
@@ -6406,6 +6561,11 @@ msgstr "Domů"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "Můj profil"
 
 msgid "Change language"
 msgstr "Změnit jazyk"
@@ -7127,6 +7287,14 @@ msgstr "Pro přidávání kontejnerů nebyl zadán žádný název aplikace."
 msgid "Your idea was deleted successfully."
 msgstr "Váš nápad byl úspěšně smazán."
 
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your message has been sent."
+msgstr "Vaše změny byly uloženy."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "Při zpracování vašeho avatara došlo k chybě. Ujistěte se, že jste vybrali dostatečně velkou část obrázku!"
 
@@ -7349,6 +7517,15 @@ msgstr "Momentálně nejste členem %s! Pokud si přejete, můžete požádat o 
 
 msgid "Your changes have been saved."
 msgstr "Vaše změny byly uloženy."
+
+#~ msgid "Restart"
+#~ msgstr "Restartujte"
+
+#~ msgid "Is premium"
+#~ msgstr "Je premium"
+
+#~ msgid "Group:"
+#~ msgstr "Skupina:"
 
 #~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "Chystáte se deaktivovat tento projekt. Ten a veškerý jeho obsah bude na webu skryt a neviditelný pro všechny, včetně vás."

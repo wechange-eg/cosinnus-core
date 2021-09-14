@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:22+0200\n"
+"POT-Creation-Date: 2021-09-14 15:36+0200\n"
 "PO-Revision-Date: 2021-03-22 14:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -174,9 +174,6 @@ msgstr "روكيت: إصلاح / إنشاء حسابات الدردشة الصا
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "روكيت: إصلاح عضويات غرفة الدردشة المفقودة للمستخدمين"
 
-msgid "Restart"
-msgstr "إعادة تشغيل"
-
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "يجب تنشيط عنوان البريد الإلكتروني للحساب الذي تحاول استخدامه قبل أن تتمكن من تسجيل الدخول."
 
@@ -248,6 +245,18 @@ msgstr "مأكولات خالية من اللاكتوز"
 msgid "Gluten-free cuisine"
 msgstr "مطبخ خال من الغلوتين"
 
+msgid "Bookmark"
+msgstr "المرجعية"
+
+msgid "Bookmarked"
+msgstr "مرجعية"
+
+msgid "Bookmark list"
+msgstr "قائمة المرجعية"
+
+msgid "Bookmarked Users list"
+msgstr "قائمة المستخدمين المرجعية"
+
 msgid "General"
 msgstr "عام"
 
@@ -261,18 +270,6 @@ msgstr "محدد/مُقيد"
 
 msgid "Premium"
 msgstr "مميز"
-
-msgid "Bookmark"
-msgstr "المرجعية"
-
-msgid "Bookmarked"
-msgstr "مرجعية"
-
-msgid "Bookmark list"
-msgstr "قائمة المرجعية"
-
-msgid "Bookmarked Users list"
-msgstr "قائمة المستخدمين المرجعية"
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "الأعضاء المسجلين فقط يمكنهم رؤية المحتوى الذي طلبته! سجل الدخول أو انشأ حساب الآن!"
@@ -295,6 +292,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "هذا الحساب لم يعد نشطاً. لقد تم تسجيل الخروج."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1165,6 +1165,59 @@ msgstr "مواقع Cosinnus"
 msgid "Note from the organizers"
 msgstr "ملاحظة من المنظمين"
 
+#, fuzzy
+#| msgid "Is conference"
+msgid "Conference"
+msgstr "هو مؤتمر"
+
+#, fuzzy
+#| msgid "Start date."
+msgid "Start Datetime"
+msgstr "تاريخ البدء."
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+#, fuzzy
+#| msgid "End date."
+msgid "End Datetime"
+msgstr "تاريخ الاتهاء."
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conference participants"
+msgstr "المؤتمر قيد التشغيل"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Cosinnus Conference Premium Block"
+msgstr "المؤتمر قيد التشغيل"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "المؤتمر قيد التشغيل"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+#| msgid "Maximal Number of participants"
+msgid "Maximum BBB participants"
+msgstr "أقصى عدد من المشاركين"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr "نص الشكوى"
 
@@ -1349,14 +1402,14 @@ msgstr "إذا تم إدخاله، فسيتم تمكين وظيفة مؤتمر �
 msgid "Dynamic choice field choices"
 msgstr "خيارات مجال الاختيار الديناميكي"
 
+#, fuzzy
+#| msgid "Detailed Description"
+msgid "Default userprofile description"
+msgstr "وصف مفصل"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "مشروع"
-
-#, fuzzy
-#| msgid "Is conference"
-msgid "Conference"
-msgstr "هو مؤتمر"
 
 #, fuzzy
 #| msgid "Membership requests"
@@ -1471,16 +1524,6 @@ msgstr "معرّف مجلد مجموعة Nextcloud"
 msgid "Is conference"
 msgstr "هل المؤتمر"
 
-#, fuzzy
-#| msgid "Start date."
-msgid "Start Datetime"
-msgstr "تاريخ البدء."
-
-#, fuzzy
-#| msgid "End date."
-msgid "End Datetime"
-msgstr "تاريخ الاتهاء."
-
 msgid "Allow temporary users accounts for this conference."
 msgstr "السماح لحسابات المستخدمين المؤقتة لهذا المؤتمر."
 
@@ -1508,6 +1551,11 @@ msgstr "الفرق ذات الصلة"
 
 msgid "Dynamic extra fields"
 msgstr "الحقول الإضافية الديناميكية"
+
+#, fuzzy
+#| msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "ذا كان هذا نشطًا، فسيتم عرض مربع الدعوة للعمل على الموقع المصغر."
 
 msgid "Cosinnus project"
 msgstr "مشروع جار"
@@ -2281,6 +2329,12 @@ msgstr "لم يتم تعيين معلومات"
 msgid "Back to Project Overview"
 msgstr "عودة إلى النظرة العامة للمشروع"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "يمكنك ضبط إعدادات المؤتمر على هذا المستوى. ستحتوي جميع الأشياء الموجودة ضمن هذا المستوى في التسلسل الهرمي على هذه الإعدادات ، ما لم يقومو هم بتعيين إعدادات المؤتمر بنفسهم."
 
@@ -2292,6 +2346,11 @@ msgstr "حدد صفحة على الجانب الأيسر."
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل مع إعدادات خادم BBB المخصصة"
+
+#, fuzzy
+#| msgid "Overview - All Conferences"
+msgid "Overview - Premium Conferences Only"
+msgstr "نظرة عامة - جميع المؤتمرات"
 
 msgid "Overview - All Conferences"
 msgstr "نظرة عامة - جميع المؤتمرات"
@@ -2315,6 +2374,22 @@ msgstr "القادمة"
 msgid "View Past"
 msgstr "عرض المشروع"
 
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+#| msgid "Bookmarked"
+msgid "Booked"
+msgstr "مرجعية"
+
+#, fuzzy
+#| msgid "Conference is permanently premium"
+msgid "Permanently Premium"
+msgstr "المؤتمر هو مميز و دائم"
+
 #, fuzzy
 #| msgid "Privacy settings"
 msgid "Portal Setting"
@@ -2323,8 +2398,13 @@ msgstr "إعدادات الخصوصية"
 msgid "Conference Settings"
 msgstr "إعدادات المؤتمر"
 
-msgid "Is premium"
-msgstr "هو مميز"
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium active"
+msgstr "مميز"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
 
 msgid "Not premium"
 msgstr "غير مميز"
@@ -2426,6 +2506,11 @@ msgstr "إحصائيات بسيطة"
 #| msgid "Conference is running"
 msgid "Conference Overview"
 msgstr "المؤتمر قيد التشغيل"
+
+#, fuzzy
+#| msgid "BBB Server for Premium Conferences"
+msgid "Premium Conferences Only"
+msgstr "خادم BBB للمؤتمرات المتميزة"
 
 #, fuzzy
 #| msgid "Conference is running"
@@ -3509,9 +3594,6 @@ msgstr "ستتلقى الآن إشعارات كلما تم نشر محتوى ع�
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "ستتلقى الآن إشعارات كلما تم نشر محتوى عام في هذه المجموعة."
 
-msgid "Group:"
-msgstr "مجموعة:"
-
 msgid "No Description set"
 msgstr "لم يتم تعيين وصف"
 
@@ -3555,6 +3637,17 @@ msgstr "سيتم حذف الصورة الرمزية بمجرد الحفظ."
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "اختياري"
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Add/Edit translations"
+msgstr "خيارات اضافية"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "تاريخ"
@@ -3634,9 +3727,17 @@ msgid "until"
 msgstr "حتى"
 
 #, fuzzy
+#| msgid "Only conference members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the event\\'s description."
+msgstr "يمكن لأعضاء الفريق فقط رؤية المحتوى الذي طلبته. تقدم لتصبح عضوا الآن!"
+
+#, fuzzy
 #| msgid "No info."
 msgid "More infos..."
 msgstr "لا معلومات."
+
+msgid "Please Login or Register to view the event's description."
+msgstr ""
 
 #, fuzzy
 #| msgid "You will now receive notifications for content posted in this project."
@@ -4073,6 +4174,24 @@ msgstr "ما هي التطبيقات التي يجب تنشيطها؟"
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "لا يمكن تنشيط هذا التطبيق إلا لمجموعة، ولكن ليس لمشروع!"
 
+#, fuzzy
+#| msgid "Contact organizers"
+msgid "Contact Form on microsite"
+msgstr "معلومات التواصل"
+
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Display contact form."
+msgstr "معلومات التواصل"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Form"
+msgstr "معلومات التواصل"
+
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "ما هي التطبيقات التي يجب أن تظهر العناصر العامة منها على الموقع المصغّر؟"
 
@@ -4261,6 +4380,33 @@ msgstr "شارك على تويتر"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "أهداف التنمية المستدامة"
+
+#, fuzzy
+#| msgid "Group Administrator"
+msgid "Email the group administrators"
+msgstr "إدارة المجموعة"
+
+#, fuzzy
+#| msgid "email address"
+msgid "Your email address"
+msgstr "البريد الالكتروني"
+
+msgid "Message"
+msgstr "رسائل"
+
+#, fuzzy
+#| msgid "Your name"
+msgid "Your message"
+msgstr "اسمك"
+
+msgid "Captcha"
+msgstr "رمز تحقق"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "نحن بحاجة للتأكد من أنك شخص حقيقي (نأسف!)"
+
+msgid "Generate a new captcha"
+msgstr "قم بإنشاء رمز تحقق جديد"
 
 msgid "Tweets"
 msgstr "تغريدات"
@@ -4633,6 +4779,27 @@ msgstr ""
 #, python-format
 msgid "%(site_name)s CSV import was successful"
 msgstr "تم استيراد CSV %(site_name)s بنجاح!"
+
+#, python-format
+msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5482,15 +5649,6 @@ msgstr "اسم العائلة"
 msgid "You can supply your last name to be displayed as well"
 msgstr "يمكنك تقديم اسمك عائلتك ليتم عرضه أيضًا"
 
-msgid "Captcha"
-msgstr "رمز تحقق"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "نحن بحاجة للتأكد من أنك شخص حقيقي (نأسف!)"
-
-msgid "Generate a new captcha"
-msgstr "قم بإنشاء رمز تحقق جديد"
-
 msgid "Search options..."
 msgstr "خيارات البحث..."
 
@@ -6288,9 +6446,6 @@ msgstr "يشير إلى رغبتك في أن يتم الاتصال بك من ق�
 msgid "I am open for cooperation requests"
 msgstr "أنا منفتح على طلبات التعاون"
 
-msgid "Message"
-msgstr "رسائل"
-
 msgid "Welcome!"
 msgstr "أهلاً بك!"
 
@@ -6766,6 +6921,11 @@ msgstr "الصفحة الرئيسية"
 
 msgid "Rocket.Chat"
 msgstr "دردشة.Rocket"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "ملفي الشخصي"
 
 msgid "Change language"
 msgstr "تغيير اللغة"
@@ -7569,6 +7729,14 @@ msgstr "لم يتم تحديد اسم التطبيق لإضافة الحاويا
 msgid "Your idea was deleted successfully."
 msgstr "تم حذف فكرتك بنجاح."
 
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your message has been sent."
+msgstr "تم حفظ التغييرات."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "حدث خطأ أثناء معالجة الصورة الرمزية الخاصة بك. يرجى التأكد من تحديد جزء كبير بما يكفي من الصورة!"
 
@@ -7797,6 +7965,15 @@ msgstr "أنت لست عضوًا حاليًا في %s! إذا كنت ترغب ف
 
 msgid "Your changes have been saved."
 msgstr "تم حفظ التغييرات."
+
+#~ msgid "Restart"
+#~ msgstr "إعادة تشغيل"
+
+#~ msgid "Is premium"
+#~ msgstr "هو مميز"
+
+#~ msgid "Group:"
+#~ msgstr "مجموعة:"
 
 #, fuzzy
 #~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."

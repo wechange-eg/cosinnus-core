@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:22+0200\n"
+"POT-Creation-Date: 2021-09-14 15:36+0200\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -157,10 +157,6 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
-#, fuzzy
-msgid "Restart"
-msgstr "Restrâns"
-
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Trebuie să fie activată adresa de e-mail a contului pe care încercați să îl utilizați înainte de a vă autentifica."
 
@@ -230,18 +226,6 @@ msgstr ""
 msgid "Gluten-free cuisine"
 msgstr ""
 
-msgid "General"
-msgstr "General"
-
-msgid "Active"
-msgstr "Activ"
-
-msgid "Restricted"
-msgstr "Restrâns"
-
-msgid "Premium"
-msgstr "Premium"
-
 msgid "Bookmark"
 msgstr ""
 
@@ -253,6 +237,18 @@ msgstr ""
 
 msgid "Bookmarked Users list"
 msgstr ""
+
+msgid "General"
+msgstr "General"
+
+msgid "Active"
+msgstr "Activ"
+
+msgid "Restricted"
+msgstr "Restrâns"
+
+msgid "Premium"
+msgstr "Premium"
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Numai membrii înregistrați pot vedea conținutul pe care l-ați solicitat. Conectați-vă un cont acum!"
@@ -274,6 +270,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "Acest cont nu mai este activ. Ai fost deconectat."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1105,6 +1104,58 @@ msgstr "Cosinnus Locații"
 msgid "Note from the organizers"
 msgstr ""
 
+#, fuzzy
+msgid "Conference"
+msgstr "Este conferință"
+
+#, fuzzy
+#| msgid "Start date."
+msgid "Start Datetime"
+msgstr "Data de început."
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+#, fuzzy
+#| msgid "End date."
+msgid "End Datetime"
+msgstr "Data de sfârșit."
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Conference participants"
+msgstr "Setările Conferinței"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Cosinnus Conference Premium Block"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "Setările Conferinței"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+#| msgid "Maximum Coffee Table Participants"
+msgid "Maximum BBB participants"
+msgstr "Participanți Maximum la Masa de Cafea"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr "Text de reclamație"
 
@@ -1282,13 +1333,14 @@ msgstr "Dacă este introdus, va activa funcționalitatea conferinței video pe s
 msgid "Dynamic choice field choices"
 msgstr ""
 
+#, fuzzy
+#| msgid "Detailed Description"
+msgid "Default userprofile description"
+msgstr "Descriere detailată"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Proiect"
-
-#, fuzzy
-msgid "Conference"
-msgstr "Este conferință"
 
 #, fuzzy
 #| msgid "New membership request"
@@ -1396,16 +1448,6 @@ msgstr "Folderul de Grup Nextcloud ID"
 msgid "Is conference"
 msgstr "Este conferință"
 
-#, fuzzy
-#| msgid "Start date."
-msgid "Start Datetime"
-msgstr "Data de început."
-
-#, fuzzy
-#| msgid "End date."
-msgid "End Datetime"
-msgstr "Data de sfârșit."
-
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
 
@@ -1438,6 +1480,11 @@ msgstr "Echipe Conexe"
 
 msgid "Dynamic extra fields"
 msgstr ""
+
+#, fuzzy
+#| msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "Dacă aceasta este activă, pe Microsite va fi afișată o casetă Apel la Acțiune."
 
 msgid "Cosinnus project"
 msgstr "Proiect cosinnus"
@@ -2192,6 +2239,12 @@ msgstr "Nu sunt setate informații"
 msgid "Back to Project Overview"
 msgstr "Înapoi la prezentarea generală a Proiectului"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
 
@@ -2203,6 +2256,10 @@ msgstr "Selectați o pagină din partea stângă."
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Este conferință"
 
 #, fuzzy
 msgid "Overview - All Conferences"
@@ -2227,6 +2284,20 @@ msgstr ""
 msgid "View Past"
 msgstr "Vezi Proiect"
 
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Permanently Premium"
+msgstr "Conferința se desfășoară"
+
 #, fuzzy
 #| msgid "Privacy settings"
 msgid "Portal Setting"
@@ -2239,8 +2310,11 @@ msgstr "Setările Conferinței"
 
 #, fuzzy
 #| msgid "Premium"
-msgid "Is premium"
+msgid "Premium active"
 msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
 
 #, fuzzy
 #| msgid "Premium"
@@ -2353,6 +2427,11 @@ msgstr "Statistici Simple"
 #| msgid "Conference Settings"
 msgid "Conference Overview"
 msgstr "Setările Conferinței"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Premium Conferences Only"
+msgstr "Creează Eveniment"
 
 #, fuzzy
 #| msgid "Conference is running"
@@ -3425,9 +3504,6 @@ msgstr "Acum veți primi notificări ori de câte ori este publicat conținut pu
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "Acum veți primi notificări ori de câte ori conținutul public este postat în acest grup."
 
-msgid "Group:"
-msgstr "Grup:"
-
 msgid "No Description set"
 msgstr "Fără set de Descriere"
 
@@ -3471,6 +3547,17 @@ msgstr "Avatarul va fi șters odată ce salvați."
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "facultativ"
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Add/Edit translations"
+msgstr "Opțiuni suplimentare"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "Data"
@@ -3549,9 +3636,17 @@ msgid "until"
 msgstr "Până când"
 
 #, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the event\\'s description."
+msgstr "Numai membrii echipei pot vedea conținutul pe care l-ați solicitat. Aplicați pentru a deveni membru acum!"
+
+#, fuzzy
 #| msgid "No info."
 msgid "More infos..."
 msgstr "Fără informații."
+
+msgid "Please Login or Register to view the event's description."
+msgstr ""
 
 #, fuzzy
 #| msgid "You will now receive notifications for content posted in this project."
@@ -3975,6 +4070,24 @@ msgstr "Ce aplicații trebuie activate?"
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Această Aplicație poate fi activată doar pentru un Grup, dar nu și pentru un Proiect!"
 
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Contact Form on microsite"
+msgstr "Informații de contact"
+
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Display contact form."
+msgstr "Informații de contact"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Form"
+msgstr "Informații de contact"
+
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Din care aplicații ar trebui să fie afișate articole publice pe microsite?"
 
@@ -4160,6 +4273,34 @@ msgstr "Share pe Twitter"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Obiectivele Dezvoltării Durabile"
+
+#, fuzzy
+#| msgid "Group Administrator"
+msgid "Email the group administrators"
+msgstr "Administrator de Grup"
+
+#, fuzzy
+#| msgid "email address"
+msgid "Your email address"
+msgstr "adresa de e-mail"
+
+#, fuzzy
+#| msgid "Messages"
+msgid "Message"
+msgstr "Mesaje"
+
+#, fuzzy
+msgid "Your message"
+msgstr "Mesaje"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "Trebuie să ne asigurăm că sunteți o persoană reală (scuze!)"
+
+msgid "Generate a new captcha"
+msgstr "Generați o captcha nouă"
 
 msgid "Tweets"
 msgstr "Tweeturi"
@@ -4543,6 +4684,27 @@ msgstr ""
 #, python-format
 msgid "%(site_name)s CSV import was successful"
 msgstr "%(site_name)s CSV importul a avut succes"
+
+#, python-format
+msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5410,15 +5572,6 @@ msgstr "Numele de familie"
 msgid "You can supply your last name to be displayed as well"
 msgstr "Puteți furniza numele dvs. pentru a fi afișat, de asemenea"
 
-msgid "Captcha"
-msgstr "Captcha"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "Trebuie să ne asigurăm că sunteți o persoană reală (scuze!)"
-
-msgid "Generate a new captcha"
-msgstr "Generați o captcha nouă"
-
 msgid "Search options..."
 msgstr "Opțiuni de căutare..."
 
@@ -6233,11 +6386,6 @@ msgstr "Semnalează disponibilitatea dvs. de a fi contactat de alți utilizatori
 msgid "I am open for cooperation requests"
 msgstr "Sunt deschis pentru cereri de cooperare"
 
-#, fuzzy
-#| msgid "Messages"
-msgid "Message"
-msgstr "Mesaje"
-
 msgid "Welcome!"
 msgstr "Bine ați venit!"
 
@@ -6711,6 +6859,11 @@ msgstr "Acasă"
 
 msgid "Rocket.Chat"
 msgstr "Rachetă. Chat"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "Profilul Meu"
 
 msgid "Change language"
 msgstr "Schimbă limba"
@@ -7538,6 +7691,14 @@ msgstr "Nu este dat niciun nume de aplicație pentru adăugarea containerelor."
 msgid "Your idea was deleted successfully."
 msgstr "Ideea ta a fost ștearsă cu succes."
 
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your message has been sent."
+msgstr "Schimbările tale au fost salvate."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "A apărut o eroare la procesarea avatarului. Vă rugăm să vă asigurați că ați selectat o parte suficient de mare din imagine!"
 
@@ -7770,6 +7931,18 @@ msgid "Your changes have been saved."
 msgstr "Schimbările tale au fost salvate."
 
 #, fuzzy
+#~ msgid "Restart"
+#~ msgstr "Restrâns"
+
+#, fuzzy
+#~| msgid "Premium"
+#~ msgid "Is premium"
+#~ msgstr "Premium"
+
+#~ msgid "Group:"
+#~ msgstr "Grup:"
+
+#, fuzzy
 #~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "Urmează să dezactivezi acest proiect/grup. Acesta și tot conținutul său vor fi ascunse pe site-ul web și invizibile tuturor, inclusiv dvs."
@@ -7964,10 +8137,6 @@ msgstr "Schimbările tale au fost salvate."
 #, fuzzy
 #~ msgid "Import Projects and Groups or Users"
 #~ msgstr "Proiectele și Grupurile mele"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Mesaje"
 
 #~ msgid "Invited you"
 #~ msgstr "Te-a invitat"

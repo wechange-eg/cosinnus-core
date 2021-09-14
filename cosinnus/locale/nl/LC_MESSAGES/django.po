@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:22+0200\n"
+"POT-Creation-Date: 2021-09-14 15:36+0200\n"
 "PO-Revision-Date: 2021-02-18 20:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -169,11 +169,6 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
-#, fuzzy
-#| msgid "Restricted"
-msgid "Restart"
-msgstr "Beperkt"
-
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Het e-mailadres van de account waarmee je probeert in te loggen, moet eerst worden geactiveerd."
 
@@ -243,18 +238,6 @@ msgstr ""
 msgid "Gluten-free cuisine"
 msgstr ""
 
-msgid "General"
-msgstr "Algemeen"
-
-msgid "Active"
-msgstr "Actief"
-
-msgid "Restricted"
-msgstr "Beperkt"
-
-msgid "Premium"
-msgstr "Premium"
-
 msgid "Bookmark"
 msgstr ""
 
@@ -266,6 +249,18 @@ msgstr ""
 
 msgid "Bookmarked Users list"
 msgstr ""
+
+msgid "General"
+msgstr "Algemeen"
+
+msgid "Active"
+msgstr "Actief"
+
+msgid "Restricted"
+msgstr "Beperkt"
+
+msgid "Premium"
+msgstr "Premium"
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Alleen geregistreerde leden kunnen deze inhoud zien! Log in of maak nu een account aan!"
@@ -287,6 +282,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "Dit account is niet meer actief. Je bent uitgelogd."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1115,6 +1113,59 @@ msgstr "CosinnusLocaties"
 msgid "Note from the organizers"
 msgstr ""
 
+#, fuzzy
+#| msgid "Conference Room"
+msgid "Conference"
+msgstr "Conferentieruimte"
+
+#, fuzzy
+#| msgid "Start date."
+msgid "Start Datetime"
+msgstr "Startdatum."
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+#, fuzzy
+#| msgid "End date."
+msgid "End Datetime"
+msgstr "Einddatum."
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Conference participants"
+msgstr "Conferentie instellingen"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Cosinnus Conference Premium Block"
+msgstr "Conferentie instellingen"
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "Conferentie instellingen"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+#| msgid "Maximum Coffee Table Participants"
+msgid "Maximum BBB participants"
+msgstr "Max. aantal deelnemers koffietafel"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr "Klachtentekst"
 
@@ -1292,14 +1343,14 @@ msgstr "Indien ingevoerd, wordt de videoconferentie functionaliteit op het platf
 msgid "Dynamic choice field choices"
 msgstr ""
 
+#, fuzzy
+#| msgid "Detailed Description"
+msgid "Default userprofile description"
+msgstr "Gedetailleerde beschrijving"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Project"
-
-#, fuzzy
-#| msgid "Conference Room"
-msgid "Conference"
-msgstr "Conferentieruimte"
 
 #, fuzzy
 #| msgid "New membership request"
@@ -1408,16 +1459,6 @@ msgstr "Nextcloud Groep folder ID"
 msgid "Is conference"
 msgstr "Is conferentie"
 
-#, fuzzy
-#| msgid "Start date."
-msgid "Start Datetime"
-msgstr "Startdatum."
-
-#, fuzzy
-#| msgid "End date."
-msgid "End Datetime"
-msgstr "Einddatum."
-
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
 
@@ -1450,6 +1491,11 @@ msgstr "Verwante teams"
 
 msgid "Dynamic extra fields"
 msgstr ""
+
+#, fuzzy
+#| msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "Als dit actief is, wordt er een Call to Action box getoond op de microsite."
 
 msgid "Cosinnus project"
 msgstr "Cosinnus project"
@@ -2211,6 +2257,12 @@ msgstr "Geen informatie ingesteld"
 msgid "Back to Project Overview"
 msgstr "Terug naar projectoverzicht"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
 
@@ -2221,6 +2273,9 @@ msgid "Select a page on the left side."
 msgstr "Selecteer een pagina aan de linker kant."
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+msgid "Overview - Premium Conferences Only"
 msgstr ""
 
 msgid "Overview - All Conferences"
@@ -2245,6 +2300,20 @@ msgstr ""
 msgid "View Past"
 msgstr "Toon project"
 
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Permanently Premium"
+msgstr "Conferentie is bezig"
+
 #, fuzzy
 #| msgid "Privacy settings"
 msgid "Portal Setting"
@@ -2255,8 +2324,11 @@ msgstr "Conferentie instellingen"
 
 #, fuzzy
 #| msgid "Premium"
-msgid "Is premium"
+msgid "Premium active"
 msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
 
 #, fuzzy
 #| msgid "Premium"
@@ -2366,6 +2438,11 @@ msgstr "Simpele statistieken"
 #| msgid "Video Conference Server"
 msgid "Conference Overview"
 msgstr "Videoconferentie server"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Premium Conferences Only"
+msgstr "Evenement aanmaken"
 
 #, fuzzy
 #| msgid "Conference Settings"
@@ -3454,9 +3531,6 @@ msgstr "Je ontvangt een melding wanneer openbare inhoud in dit project wordt gep
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "Je ontvangt een melding wanneer openbare inhoud in deze groep wordt geplaatst."
 
-msgid "Group:"
-msgstr "Groep:"
-
 msgid "No Description set"
 msgstr "Geen beschrijving vastgesteld"
 
@@ -3500,6 +3574,17 @@ msgstr "Avatar wordt verwijderd na het opslaan."
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "optioneel"
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Add/Edit translations"
+msgstr "Extra opties"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "Datum"
@@ -3579,9 +3664,17 @@ msgid "until"
 msgstr "Tot"
 
 #, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the event\\'s description."
+msgstr "Alleen teamleden kunnen deze inhoud zien. Meld je nu aan om lid te worden!"
+
+#, fuzzy
 #| msgid "No info."
 msgid "More infos..."
 msgstr "Geen informatie."
+
+msgid "Please Login or Register to view the event's description."
+msgstr ""
 
 #, fuzzy
 #| msgid "You will now receive notifications for content posted in this project."
@@ -4005,6 +4098,24 @@ msgstr "Welke apps moeten worden geactiveerd?"
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Deze app kan alleen voor een groep worden geactiveerd, maar niet voor een project!"
 
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Contact Form on microsite"
+msgstr "Contactgegevens"
+
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Display contact form."
+msgstr "Contactgegevens"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Form"
+msgstr "Contactgegevens"
+
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Uit welke apps moeten openbare items op de microsite worden weergegeven?"
 
@@ -4191,6 +4302,35 @@ msgstr "Delen op Twitter"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Doelstellingen duurzame ontwikeling"
+
+#, fuzzy
+#| msgid "Group Administrator"
+msgid "Email the group administrators"
+msgstr "Groepsbeheerder"
+
+#, fuzzy
+#| msgid "email address"
+msgid "Your email address"
+msgstr "e-mailadres"
+
+#, fuzzy
+#| msgid "Messages"
+msgid "Message"
+msgstr "Berichten"
+
+#, fuzzy
+#| msgid "Messages"
+msgid "Your message"
+msgstr "Berichten"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "We willen zeker zijn dat je een echt persoon bent (sorry!)"
+
+msgid "Generate a new captcha"
+msgstr "Nieuwe captcha genereren"
 
 msgid "Tweets"
 msgstr "Tweets"
@@ -4598,6 +4738,27 @@ msgstr ""
 #, python-format
 msgid "%(site_name)s CSV import was successful"
 msgstr "%(site_name)s CSV import was succesvol"
+
+#, python-format
+msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5468,15 +5629,6 @@ msgstr "Achternaam"
 msgid "You can supply your last name to be displayed as well"
 msgstr "Je kunt aangeven dat je ook je achternaam wilt weergegeven"
 
-msgid "Captcha"
-msgstr "Captcha"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "We willen zeker zijn dat je een echt persoon bent (sorry!)"
-
-msgid "Generate a new captcha"
-msgstr "Nieuwe captcha genereren"
-
 msgid "Search options..."
 msgstr "Zoek opties…"
 
@@ -6295,11 +6447,6 @@ msgstr "Geeft aan dat je bereid bent gecontacteerd te worden door andere gebruik
 msgid "I am open for cooperation requests"
 msgstr "Ik sta open voor samenwerkingsverzoeken"
 
-#, fuzzy
-#| msgid "Messages"
-msgid "Message"
-msgstr "Berichten"
-
 msgid "Welcome!"
 msgstr "Welkom!"
 
@@ -6773,6 +6920,11 @@ msgstr "Home"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "Mijn profiel"
 
 msgid "Change language"
 msgstr "Taal wijzigen"
@@ -7606,6 +7758,14 @@ msgstr "Geen appnaam gegeven voor het toevoegen van containers."
 msgid "Your idea was deleted successfully."
 msgstr "Je idee is succesvol verwijderd."
 
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your message has been sent."
+msgstr "Je wijzigingen zijn opgeslagen."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "Er is een fout opgetreden bij het verwerken van je avatar. Zorg ervoor dat het deel van de afbeelding dat je hebt geselecteerd groot genoeg is!"
 
@@ -7838,6 +7998,19 @@ msgid "Your changes have been saved."
 msgstr "Je wijzigingen zijn opgeslagen."
 
 #, fuzzy
+#~| msgid "Restricted"
+#~ msgid "Restart"
+#~ msgstr "Beperkt"
+
+#, fuzzy
+#~| msgid "Premium"
+#~ msgid "Is premium"
+#~ msgstr "Premium"
+
+#~ msgid "Group:"
+#~ msgstr "Groep:"
+
+#, fuzzy
 #~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "Je staat op het punt dit project/deze groep te deactiveren. De inhoud zal worden verborgen op de website en onzichtbaar worden voor iedereen, jezelf inclusief."
@@ -8024,11 +8197,6 @@ msgstr "Je wijzigingen zijn opgeslagen."
 #~| msgid "Error!"
 #~ msgid "Errors:"
 #~ msgstr "Foutmelding!"
-
-#, fuzzy
-#~| msgid "Messages"
-#~ msgid "Info messages:"
-#~ msgstr "Berichten"
 
 #, fuzzy
 #~| msgid "Email"

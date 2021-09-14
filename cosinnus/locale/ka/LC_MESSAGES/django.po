@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:22+0200\n"
+"POT-Creation-Date: 2021-09-14 15:36+0200\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -154,9 +154,6 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
-msgid "Restart"
-msgstr ""
-
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "ელექტრონული ფოსტა, რომელსაც ანგარიშში შესასვლელად იყენებთ, შესვლამდე უნდა გააქტიუროთ."
 
@@ -226,6 +223,18 @@ msgstr ""
 msgid "Gluten-free cuisine"
 msgstr ""
 
+msgid "Bookmark"
+msgstr ""
+
+msgid "Bookmarked"
+msgstr ""
+
+msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
+msgstr ""
+
 msgid "General"
 msgstr "ზოგადი"
 
@@ -237,18 +246,6 @@ msgid "Restricted"
 msgstr ""
 
 msgid "Premium"
-msgstr ""
-
-msgid "Bookmark"
-msgstr ""
-
-msgid "Bookmarked"
-msgstr ""
-
-msgid "Bookmark list"
-msgstr ""
-
-msgid "Bookmarked Users list"
 msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
@@ -271,6 +268,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "ეს ანგარიში აქტიური აღარ არის. თქვენ გამოსული ხართ."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1100,6 +1100,55 @@ msgstr "CosinnusLocations"
 msgid "Note from the organizers"
 msgstr ""
 
+#, fuzzy
+msgid "Conference"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+#| msgid "Start date."
+msgid "Start Datetime"
+msgstr "საწყისი თარიღი."
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+#, fuzzy
+#| msgid "End date."
+msgid "End Datetime"
+msgstr "დასასრული."
+
+#, fuzzy
+msgid "Conference participants"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+msgid "Cosinnus Conference Premium Block"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+#| msgid "Participants"
+msgid "Maximum BBB participants"
+msgstr "მონაწილეები"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr "საჩივრის ტექსტი"
 
@@ -1279,13 +1328,14 @@ msgstr "შეყვანის შემთხვევაში, მოხდ
 msgid "Dynamic choice field choices"
 msgstr ""
 
+#, fuzzy
+#| msgid "Detailed Description"
+msgid "Default userprofile description"
+msgstr "დეტალური აღწერა"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "პროექტი"
-
-#, fuzzy
-msgid "Conference"
-msgstr "ვიდეო კონფერენციის სერვერი"
 
 #, fuzzy
 #| msgid "New membership request"
@@ -1397,16 +1447,6 @@ msgstr "Nextcloud Group ID"
 msgid "Is conference"
 msgstr ""
 
-#, fuzzy
-#| msgid "Start date."
-msgid "Start Datetime"
-msgstr "საწყისი თარიღი."
-
-#, fuzzy
-#| msgid "End date."
-msgid "End Datetime"
-msgstr "დასასრული."
-
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
 
@@ -1436,6 +1476,11 @@ msgstr "შესაბამის კავშირში მყოფი გ
 
 msgid "Dynamic extra fields"
 msgstr ""
+
+#, fuzzy
+#| msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "იმ შემთხვევაში თუ ეს აქტიურია microsite-ზე Call to Action box-ი იქნება ნაჩვენები."
 
 msgid "Cosinnus project"
 msgstr "კოსინუს პროექტი"
@@ -2190,6 +2235,12 @@ msgstr "არ არის ინფორმაციები"
 msgid "Back to Project Overview"
 msgstr "პროექტის მიმოხილვაზე დაბრუნება"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
 
@@ -2201,6 +2252,10 @@ msgstr "მარცხენა მხარეს გვერდის მო
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "ვიდეო კონფერენციის სერვერი"
 
 #, fuzzy
 msgid "Overview - All Conferences"
@@ -2225,6 +2280,19 @@ msgstr ""
 msgid "View Past"
 msgstr "პროექტის ნახვა"
 
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
 #, fuzzy
 #| msgid "Privacy settings"
 msgid "Portal Setting"
@@ -2234,7 +2302,12 @@ msgstr "პირადი პარამეტრები"
 msgid "Conference Settings"
 msgstr "ვიდეო კონფერენციის სერვერი"
 
-msgid "Is premium"
+#, fuzzy
+#| msgid "inactive"
+msgid "Premium active"
+msgstr "არააქტიური"
+
+msgid "Premium inactive, but scheduled"
 msgstr ""
 
 msgid "Not premium"
@@ -2339,6 +2412,11 @@ msgstr "უბრალო სტატისტიკა"
 #, fuzzy
 msgid "Conference Overview"
 msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+#| msgid "Create Event"
+msgid "Premium Conferences Only"
+msgstr "ღონისძიების შექმნა"
 
 #, fuzzy
 msgid "Conferences with Custom Settings"
@@ -3389,9 +3467,6 @@ msgstr "თქვენ მიიღებთ შეტყობინება�
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "თქვენ მიიღებთ შეტყობინებას, როდესაც ჯგუფში საჯარო სახის ინფორმაცია გამოქვეყნდება."
 
-msgid "Group:"
-msgstr "ჯგუფი:"
-
 msgid "No Description set"
 msgstr "აღწერა არ არის დამატებული"
 
@@ -3435,6 +3510,17 @@ msgstr "ავატარი წაიშლება, მას შემდ�
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "ნებაყოფლობითი"
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Add/Edit translations"
+msgstr "დამატებითი არჩევანი"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "თარიღი"
@@ -3512,9 +3598,17 @@ msgid "until"
 msgstr "მდე"
 
 #, fuzzy
+#| msgid "Only team members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the event\\'s description."
+msgstr "თქვენ მიერ მოთხოვნილი კონტენტის ნახვა მხოლოდ გუნდის წევრებს შეუძლიათ.  იმისათვის, რომ გახდეთ წევრი, გააკეთეთ განაცხადი ახლა !"
+
+#, fuzzy
 #| msgid "No info."
 msgid "More infos..."
 msgstr "არ არის ინფორმაცია."
+
+msgid "Please Login or Register to view the event's description."
+msgstr ""
 
 #, fuzzy
 #| msgid "You will now receive notifications for content posted in this project."
@@ -3938,6 +4032,24 @@ msgstr "რომელი აპლიკაციები უნდა იქ
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "ეს აპლიკაცია შეიძლება გააქტიურდეს მხოლოდ ჯგუფისთვის და არა პროექტისთვის!"
 
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Contact Form on microsite"
+msgstr "საკონტაქტო ინფორმაცია"
+
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Display contact form."
+msgstr "საკონტაქტო ინფორმაცია"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Form"
+msgstr "საკონტაქტო ინფორმაცია"
+
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "რომელი აპლიკაციებიდან იქნეს ნაჩვენები საჯარო საგნები მიკრო საიტზე?"
 
@@ -4124,6 +4236,34 @@ msgstr "Facebook-ზე გაზიარება"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr ""
+
+#, fuzzy
+#| msgid "Group Administrator"
+msgid "Email the group administrators"
+msgstr "ჯგუფის ადმინისტრატორი"
+
+#, fuzzy
+#| msgid "email address"
+msgid "Your email address"
+msgstr "ელ-ფოსტის მისამართი"
+
+#, fuzzy
+#| msgid "Messages"
+msgid "Message"
+msgstr "შეტყობინებები"
+
+#, fuzzy
+msgid "Your message"
+msgstr "შეტყობინებები"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "უნდა დავრწმუნდეთ, რომ ნამდვილად ადამიანი ხართ (ბოდიში!)"
+
+msgid "Generate a new captcha"
+msgstr "Generate a new captcha"
 
 msgid "Tweets"
 msgstr "Tweets"
@@ -4508,6 +4648,27 @@ msgstr ""
 #, python-format
 msgid "%(site_name)s CSV import was successful"
 msgstr "%(site_name)s CSV-ს გადმოტანა წარმატებული აღმოჩნდა"
+
+#, python-format
+msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5369,15 +5530,6 @@ msgstr "გვარი"
 msgid "You can supply your last name to be displayed as well"
 msgstr "შესაძლებელია თქვენი გვარის ჩვენებაც"
 
-msgid "Captcha"
-msgstr "Captcha"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "უნდა დავრწმუნდეთ, რომ ნამდვილად ადამიანი ხართ (ბოდიში!)"
-
-msgid "Generate a new captcha"
-msgstr "Generate a new captcha"
-
 msgid "Search options..."
 msgstr "არჩევანის ძიება..."
 
@@ -6200,11 +6352,6 @@ msgstr "ნიშანი თქვენს სურვილზე, რო�
 msgid "I am open for cooperation requests"
 msgstr "თანახმა ვარ თანამშრომლობის მოთხოვნებზე"
 
-#, fuzzy
-#| msgid "Messages"
-msgid "Message"
-msgstr "შეტყობინებები"
-
 msgid "Welcome!"
 msgstr "კეთილი იყოს თქვენი მობრძანება!"
 
@@ -6677,6 +6824,11 @@ msgstr "მთავარი"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "ჩემი პროფილი"
 
 msgid "Change language"
 msgstr "ენის შეცვლა"
@@ -7505,6 +7657,14 @@ msgstr "No appname given for adding containers."
 msgid "Your idea was deleted successfully."
 msgstr "თქვენი იდეა წარმატებით წაიშალა."
 
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your message has been sent."
+msgstr "თქვენი ცვლილებები შენახულია."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "შეცდომა დაფიქსირდა ავატარის წარმოებისას. გთხოვთ დარწმუნდეთ, რომ შერჩეული გამოსახულების ნაწილი საკმარისად დიდია!"
 
@@ -7736,6 +7896,9 @@ msgstr "თქვენ არ ხართ %s-ის წევრი! თუ �
 msgid "Your changes have been saved."
 msgstr "თქვენი ცვლილებები შენახულია."
 
+#~ msgid "Group:"
+#~ msgstr "ჯგუფი:"
+
 #, fuzzy
 #~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
@@ -7939,10 +8102,6 @@ msgstr "თქვენი ცვლილებები შენახულ�
 #, fuzzy
 #~ msgid "Import Projects and Groups or Users"
 #~ msgstr "ჩემი პროექტები და ჯგუფები"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "შეტყობინებები"
 
 #~ msgid "Invited you"
 #~ msgstr "თქვენ მოგიწვიათ"
