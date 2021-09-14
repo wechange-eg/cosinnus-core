@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.urls import resolve, Resolver404
+from django.urls import resolve, Resolver404, reverse
 from django.utils.formats import get_format
 from django.utils.translation import get_language
+from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings as SETTINGS
 from cosinnus.core.registries import app_registry
@@ -11,6 +12,7 @@ from cosinnus.api.serializers.user import UserSerializer
 import json
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.forms.user import TermsOfServiceFormFields
+from cosinnus.models.profile import GlobalBlacklistedEmail
 
 import logging
 from cosinnus.utils.user import get_user_tos_accepted_date,\
@@ -142,5 +144,24 @@ def tos_check(request):
                 }
         except Exception as e:
             logger.error('Error in `context_processory.tos_check`: %s' % e, extra={'exception': e})
-    
     return {}
+
+
+def email_verified(request):
+    context = dict()
+    portal = CosinnusPortal.get_current()
+    user = request.user
+
+    if (user.is_authenticated and
+            portal.email_needs_verification and not
+            GlobalBlacklistedEmail.is_email_blacklisted(request.user.email) and not
+            request.user.cosinnus_profile.email_verified):
+        url = reverse('cosinnus:resent-email-validation')
+        url = '{}?next={}'.format(url, request.path)
+        context['email_not_verified_announcement'] = {
+            'level': 'warning',
+            'text': _('Please validate your email address. '
+                      'Click <a href="{}">here</a> '
+                      'to send validation link again.'.format(url))
+        }
+    return context
