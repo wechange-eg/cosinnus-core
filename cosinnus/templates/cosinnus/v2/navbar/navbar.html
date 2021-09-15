@@ -4,19 +4,6 @@
     <div class="nav-content">
     	<div class="nav-section nav-brand">
     	    {% block nav_brand %}
-	    		{% if request.user.is_authenticated %}
-		            <a class="nav-button nav-button-with-message-counter burger-menu nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Menu" %}"
-				    		aria-expanded="false" aria-controls="main-collapse"
-				    		data-toggle="collapse" data-target="#main-collapse">
-			    		<i class="fas fa-fw fa-bars"></i>
-			    		{% with total_counter=groups_invited_count|add_num:group_requests_count %}
-				    		{% if total_counter > 0 %}
-				    			<span class="message-counter"> {{ total_counter }}</span>
-				    		{% endif %}
-			    		{% endwith %}
-		    		</a>
-	    		{% endif %}
-	
 	    		{% block brand_button %}
 		            <a class="nav-button" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "Dashboard" %}">
 		            	{% include 'cosinnus/v2/navbar/brand.html' %}
@@ -143,13 +130,13 @@
 					{% endif %}
 				{% endblock %}
 				{% block login_url %}
-					<a class="nav-button nav-header-textlink" href="{% url 'login' %}" title="{% trans "Log in" %}">
+					<a class="nav-button nav-header-textlink nav-header-textlink-login" href="{% url 'login' %}" title="{% trans "Log in" %}">
 						{% trans "Log in" %}
 					</a>
 				{% endblock %}
 				{% block register_url %}
 					{% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
-						<a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
+						<a class="nav-button nav-header-textlink nav-header-textlink-register mobile-hidden" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
 							{% trans "Register" %}
 						</a>
 					{% endif %}
