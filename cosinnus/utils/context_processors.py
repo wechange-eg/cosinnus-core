@@ -19,6 +19,7 @@ from cosinnus.utils.user import get_user_tos_accepted_date,\
     check_user_has_accepted_portal_tos
 from cosinnus.models.managed_tags import CosinnusManagedTag
 from cosinnus.trans.group import get_group_trans_by_type
+from cosinnus.utils.permissions import check_user_verified
 logger = logging.getLogger('cosinnus')
 
 
@@ -155,7 +156,7 @@ def email_verified(request):
     if (user.is_authenticated and
             portal.email_needs_verification and not
             GlobalBlacklistedEmail.is_email_blacklisted(request.user.email) and not
-            request.user.cosinnus_profile.email_verified):
+            check_user_verified(request.user)):
         url = reverse('cosinnus:resent-email-validation')
         url = '{}?next={}'.format(url, request.path)
         msg = _('Please validate your email address.')

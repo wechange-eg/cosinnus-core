@@ -41,7 +41,7 @@ from django.shortcuts import redirect, render
 from cosinnus.templatetags.cosinnus_tags import full_name_force, textfield,\
     full_name
 from cosinnus.utils.permissions import check_user_integrated_portal_member,\
-    check_user_can_see_user, check_user_superuser
+    check_user_can_see_user, check_user_superuser, check_user_verified
 from django.template.response import TemplateResponse
 from django.core.paginator import Paginator
 from cosinnus.views.mixins.group import EndlessPaginationMixin,\
@@ -814,7 +814,7 @@ def password_reset_proxy(request, *args, **kwargs):
                 user = USER_MODEL.objects.get(email=email, is_active=True)
             except USER_MODEL.DoesNotExist:
                 pass
-        if user and not user.cosinnus_profile.email_verified and GlobalBlacklistedEmail.is_email_blacklisted(email):
+        if user and not check_user_verified(user) and GlobalBlacklistedEmail.is_email_blacklisted(email):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_blacklisted_page.html')
         # disallow integrated users to reset their password
         if user and check_user_integrated_portal_member(user):

@@ -89,7 +89,8 @@ from cosinnus.views.microsite import GroupMicrositeView
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
                                         AjaxableFormMixin, ListAjaxableResponseMixin)
 from cosinnus.views.mixins.avatar import AvatarFormMixin
-from cosinnus.views.mixins.group import GroupIsConferenceMixin
+from cosinnus.views.mixins.group import GroupIsConferenceMixin,\
+    RequireVerifiedUserMixin
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin, \
     RequireLoggedInMixin, EndlessPaginationMixin, RequireWriteMixin
 from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
@@ -314,7 +315,7 @@ class GroupMembershipMixin(MembershipClassMixin):
     invite_class = CosinnusUnregisterdUserGroupInvite
 
 
-class GroupCreateView(CosinnusGroupFormMixin, AttachableViewMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
+class GroupCreateView(CosinnusGroupFormMixin, RequireVerifiedUserMixin, AttachableViewMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       CreateWithInlinesView):
 
     #form_class = 

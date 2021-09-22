@@ -11,7 +11,8 @@ from cosinnus.forms.idea import CosinnusIdeaForm
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.tagged import LikeObject
-from cosinnus.views.mixins.group import RequireLoggedInMixin, RequireWriteGrouplessMixin
+from cosinnus.views.mixins.group import RequireLoggedInMixin, RequireWriteGrouplessMixin,\
+    RequireVerifiedUserMixin
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from ajax_forms.ajax_forms import AjaxFormsDeleteViewMixin
@@ -39,7 +40,7 @@ class CosinnusIdeaFormMixin(object):
         return context
     
 
-class IdeaCreateView(RequireLoggedInMixin, CosinnusIdeaFormMixin, CreateView):
+class IdeaCreateView(RequireLoggedInMixin, RequireVerifiedUserMixin, CosinnusIdeaFormMixin, CreateView):
     """ Create View for Ideas """
     
     CREATOR_LIKES_OWN_IDEA = True

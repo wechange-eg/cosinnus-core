@@ -22,7 +22,9 @@ window.AjaxForms = {
 		}).catch(function(responseJSON){
 			if (responseJSON && 'form_errors' in responseJSON) {
 			    if ($form.attr('data-ajax-form-error-message')) {
-                    alert($form.attr('data-ajax-form-error-message'));			        
+                    alert($form.attr('data-ajax-form-error-message'));
+                } else if ('__all__' in responseJSON['form_errors']) {
+                    alert(responseJSON['form_errors']['__all__']);
 			    } else {
     				alert('Please fill out all required fields!');
 			    }
