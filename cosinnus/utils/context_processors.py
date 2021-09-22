@@ -157,7 +157,7 @@ def email_verified(request):
             portal.email_needs_verification and not
             GlobalBlacklistedEmail.is_email_blacklisted(request.user.email) and not
             check_user_verified(request.user)):
-        url = reverse('cosinnus:resent-email-validation')
+        url = reverse('cosinnus:resend-email-validation')
         url = '{}?next={}'.format(url, request.path)
         msg = _('Please validate your email address.')
         link_label = _('Click here to send the validation link again.')

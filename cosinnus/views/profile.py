@@ -35,7 +35,7 @@ from cosinnus.utils.permissions import check_user_integrated_portal_member, \
     check_user_can_see_user, check_user_superuser
 from cosinnus.utils.urls import safe_redirect
 from cosinnus.views.mixins.avatar import AvatarFormMixin
-from cosinnus.views.user import set_user_email_to_verify
+from cosinnus.views.user import send_user_email_to_verify
 from django.utils.crypto import get_random_string
 from oauth2_provider import models as oauth2_provider_models
 from cosinnus.core.mail import send_html_mail
@@ -295,7 +295,7 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
             
             # send out email confirmation email
             if getattr(self, 'target_email_to_confirm', None):
-                set_user_email_to_verify(self.user, self.target_email_to_confirm, self.request, user_has_just_registered=False)
+                send_user_email_to_verify(self.user, self.target_email_to_confirm, self.request, user_has_just_registered=False)
                 messages.warning(self.request, _('You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!'))
             
         except AttributeError as e:

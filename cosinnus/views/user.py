@@ -280,7 +280,7 @@ class UserCreateView(CreateView):
             # if registrations are open, the user may log in immediately. set the email_verified flag depending
             # on portal settings
             if CosinnusPortal.get_current().email_needs_verification:
-                set_user_email_to_verify(user, user.email, self.request)
+                send_user_email_to_verify(user, user.email, self.request)
                 messages.success(self.request, self.message_success_email_verification % {'email': user.email})
             else:
                 user_profile = user.cosinnus_profile
@@ -569,7 +569,10 @@ def approve_user(request, user_id):
     forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
     setattr(user_profile, 'group', forum_group) 
     cosinnus_notifications.user_account_created.send(sender=user, user=user, obj=user_profile, audience=[])
-
+    
+    # also send out a verification email if portals have email verification turned on
+    if CosinnusPortal.get_current().email_needs_verification:
+        send_user_email_to_verify(user, user.email, request)
     
     messages.success(request, _('Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site.') \
                      % {'username':full_name_force(user), 'email': user.email})
@@ -833,7 +836,7 @@ def password_reset_proxy(request, *args, **kwargs):
     return PasswordResetView.as_view(*args, **kwargs)(request)
 
 
-def set_user_email_to_verify(user, new_email, request=None, user_has_just_registered=True):
+def send_user_email_to_verify(user, new_email, request=None, user_has_just_registered=True):
     """ Sets the profile variables for a user to confirm a pending email, 
         and sends out an email with a verification URL to the user. 
         @param user_has_just_registered: If this True, a welcome email will be sent. 
@@ -854,6 +857,7 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
                 reverse('cosinnus:user-verifiy-email', kwargs={'email_verification_param': verification_url_param}) +\
                 redirect_with_next('', request)
         data.update({
+            'site_name': settings.COSINNUS_BASE_PAGE_TITLE_TRANS,
             'user':user,
             'user_email':new_email,
             'user_verification_url': user_verification_url,
@@ -861,9 +865,9 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
         subject = _('Please verify your email address for %(site_name)s!') % data
         
         if user_has_just_registered:
-            text = str(_('You have just registered an account at {{ site_name }}. We\'re happy to see you!') % data) + '\n\n'
+            text = str(_('You have just registered an account at %(site_name)s. We\'re happy to see you!') % data) + '\n\n'
         else:
-            text = str(_('You have just changed your email address at {{ site_name }}.') % data) + '\n\n'
+            text = str(_('You have just changed your email address at %(site_name)s.') % data) + '\n\n'
         text += str(_('Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):') % data) + '\n\n'
         text += user_verification_url + '\n\n'
         text += str(_('Thank you!') % data) + '\n\n'
@@ -987,13 +991,13 @@ def accept_tos(request):
     return JsonResponse({'status': 'ok'})
 
 
-def resent_email_validation(request):
+def resend_email_validation(request):
     if request.method != 'GET':
         return HttpResponseNotAllowed('GET')
     if not request.user.is_authenticated:
         return HttpResponseForbidden('Must be logged in!')
     if not GlobalBlacklistedEmail.is_email_blacklisted(request.user.email):
-        set_user_email_to_verify(request.user, request.user.email, request)
+        send_user_email_to_verify(request.user, request.user.email, request)
         messages.add_message(request, messages.SUCCESS,
                              _('A new validation email has been sent.'))
     return HttpResponseRedirect(request.GET.get('next'))

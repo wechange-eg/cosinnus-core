@@ -73,7 +73,8 @@
                 {# email Field #}
 				{% trans "E-Mail" as email_label %}
 				{% trans "E-Mail" as  email_placeholder %}
-				{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.email label=email_label placeholder=email_placeholder %}
+				{% captureas email_legend %}{% if COSINNUS_CURRENT_PORTAL.email_needs_verification %}{% trans "Changes to your email address need to be verified by clicking a link in an email we send to the new address." %}{% endif %}{% endcaptureas %}
+				{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.email label=email_label placeholder=email_placeholder legend=email_legend %}
                 {% endblock %}
 
                 {% block avatar %}

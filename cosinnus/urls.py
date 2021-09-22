@@ -77,7 +77,7 @@ urlpatterns = [
     
     url(r'^account/report/$', feedback.report_object, name='report-object'),
     url(r'^account/accept_tos/$', user.accept_tos, name='accept-tos'),
-    url(r'^account/resent_email_validation/$', user.resent_email_validation, name='resent-email-validation'),
+    url(r'^account/resend_email_validation/$', user.resend_email_validation, name='resend-email-validation'),
     url(r'^account/accept_updated_tos/$', user.accept_updated_tos, name='accept-updated-tos'),
     url(r'^account/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', user.add_email_to_blacklist, name='user-add-email-blacklist'),
     url(r'^account/list-unsubscribe-result/$', user.add_email_to_blacklist_result, name='user-add-email-blacklist-result'),
