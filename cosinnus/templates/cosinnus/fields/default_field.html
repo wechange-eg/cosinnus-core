@@ -48,7 +48,7 @@
 	{% endif %}
 	
     {% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translation_form and translation_form|get_attr:'translatable_base_fields' and field.html_name in translation_form|get_attr:'translatable_base_fields' %}
-        <div class="field-description">
+        <div class="translations-link">
 			<a href="#" onclick="$('#{{ field.name }}_translations').slideToggle(); $(window.simplemdes).each(function(index){window.simplemdes[index].codemirror.refresh();})">
 	            <i class="fas fa-fw fa-language"></i>
 	            {% trans 'Add/Edit translations' %}
@@ -80,7 +80,7 @@
 
 {% comment %} translation_fields=form.forms.obj|get_attr:'translatable_field_items'  {% endcomment %}
 {% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translation_form and field.html_name in translation_form|get_attr:'translatable_base_fields' %}
-	<div id="{{ field.name }}_translations" style="display: none;">
+	<div id="{{ field.name }}_translations" class="field-translations" style="display: none;">
 	    <div class="cosinnus-field">
 	        <div class="field-description no-select">
 	            {% trans "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)." %}
