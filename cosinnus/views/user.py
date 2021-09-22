@@ -275,7 +275,7 @@ class UserCreateView(CreateView):
             send_html_mail_threaded(user, subj_user, text)
             messages.success(self.request, self.message_success_inactive % {'user': user.email, 'email': user.email})
             # since anonymous users have no session, show the success message in the template via a flag
-            ret = HttpResponseRedirect(redirect_with_next(reverse('login'), self.request, 'validate_msg=admin'))
+            ret = HttpResponseRedirect(redirect_with_next(reverse('login'), self.request))
         else:
             # if registrations are open, the user may log in immediately. set the email_verified flag depending
             # on portal settings
