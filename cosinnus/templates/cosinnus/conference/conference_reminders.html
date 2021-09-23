@@ -150,7 +150,6 @@
             <div class="panel-heading">
                 <label for="id_send_immediately" class="cursor-pointer">
                     <h4 class="panel-title">
-                        {{ form.send_immediately }}&nbsp;
                         {% trans "send immediately" %}
                         {% comment %}
                         {% with object.settings.reminder_hour_before_sent|parse_datetime|date:"SHORT_DATETIME_FORMAT" as sent_date %}{% if sent_date %}
@@ -162,9 +161,21 @@
             </div>
             <div id="collapseSendImmediately" class="panel-collapse">
                 <div class="panel-body">
+                    <label>
+                        {% trans "This email will be sent immediately." %}
+                    </label>
+                    <div class="alert alert-info">
+                        <i class="fa fa-info fa-2x"></i>
+                        {% if last_sent %}
+                        <p>{% blocktrans with date=last_sent %}last instant email was sent on {{ date }} {% endblocktrans %}</p>
+                        {% else %}
+                        <p>{% trans 'no instant email has been sent yet.' %}</p>
+                        {% endif %}
+                    </div>
                     {# send immediately subject #}
                     {% trans "Invitation subject" as subject_label %}
                     {% include 'cosinnus/fields/default_field.html' with field=form.send_immediately_subject label=subject_label %}
+
                     {# send immediately email text #}
                     {% trans "Invitation text" as content_label %}
                     {% include 'cosinnus/fields/default_field.html' with field=form.send_immediately_content label=content_label legend_selectable=True legend=content_legend large_field=True %}

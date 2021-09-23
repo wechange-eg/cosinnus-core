@@ -25,7 +25,8 @@
             {% include 'cosinnus/fields/default_field.html' with field=form.subject label=subject_label %}
             {% include 'cosinnus/fields/default_field.html' with field=form.content label=content_label large_field=True %}
 
-            <div class="alert alert-danger alert-dismissable">
+            <div class="alert alert-danger">
+                <i class="fa fa-exclamation-triangle fa-2x"></i>
                 <p>{% blocktrans count count=members.count %}
                     This message will be sent to one participant.
                     {% plural %}
@@ -42,7 +43,7 @@
                         <i class="fa fa-check"></i>
                     </span>
                     <div class="media-body">
-                        {% trans 'Yes, sent message immediately' %}
+                        {% trans 'Yes, send message immediately' %}
                     </div>
                 </li>
             </ul>
@@ -54,7 +55,7 @@
                         <i class="fa fa-times"></i>
                     </span>
                     <div class="media-body">
-                        {% trans 'No, don't send' %}
+                        {% trans 'No, don\'t send' %}
                     </div>
                 </li>
             </ul>

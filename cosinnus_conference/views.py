@@ -19,6 +19,7 @@ from django.views.generic import (DetailView,
 from django.views.generic.base import View
 from django.views.generic.edit import FormView, CreateView, UpdateView,\
     DeleteView
+from django.utils.dateparse import parse_datetime
 import six
 
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
@@ -503,7 +504,15 @@ class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsCo
     def get_object(self, queryset=None):
         return self.group
 
+    def get_last_sent(self):
+        extra_fields = self.group.extra_fields
+        if extra_fields:
+            last_sent = extra_fields.get('reminder_send_immediately_last_sent')
+            if last_sent:
+                return parse_datetime(last_sent)
+
     def get_context_data(self, **kwargs):
+        kwargs['last_sent'] = self.get_last_sent()
         kwargs['object'] = self.group
         return super(ConferenceRemindersView, self).get_context_data(**kwargs)
 
@@ -562,6 +571,7 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
                                      update_setting=False)
             messages.success(self.request,
                              _('The message was sent to all participants.'))
+            form.save()
         return super().form_valid(form)
 
     def get_success_url(self):

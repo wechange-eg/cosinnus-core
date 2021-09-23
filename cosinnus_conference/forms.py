@@ -1,4 +1,5 @@
 from django import forms
+from django.utils import timezone
 
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_conference.utils import get_initial_template
@@ -32,7 +33,6 @@ class ConferenceRemindersForm(forms.ModelForm):
     hour_before_subject = forms.CharField(required=False)
     hour_before_content = forms.CharField(widget=forms.Textarea, required=False)
 
-    send_immediately = forms.BooleanField(widget=forms.CheckboxInput, required=False)
     send_immediately_subject = forms.CharField(required=False)
     send_immediately_content = forms.CharField(widget=forms.Textarea, required=False)
 
@@ -84,6 +84,11 @@ class ConferenceConfirmSendRemindersForm(forms.ModelForm):
             field_name = 'send_immediately_{}'.format(field_name)
             return extra_fields.get('reminder_{}'.format(field_name),
                                     get_initial_template(field_name))
+
+    def save(self, commit=True):
+        now = timezone.now()
+        self.instance.extra_fields['reminder_send_immediately_last_sent'] = now
+        return super().save(commit)
 
 
 class ConferenceFileUploadWidget(forms.ClearableFileInput):
