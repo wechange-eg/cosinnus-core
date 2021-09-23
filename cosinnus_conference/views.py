@@ -48,6 +48,7 @@ from django.http.response import Http404, HttpResponseForbidden,\
     HttpResponseNotFound
 
 from cosinnus_conference.forms import (ConferenceRemindersForm,
+                                       ConferenceConfirmSendRemindersForm,
                                        ConferenceParticipationManagement,
                                        ConferenceApplicationForm,
                                        PriorityFormSet,
@@ -518,10 +519,54 @@ class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsCo
             send_conference_reminder(self.group, recipients=[self.request.user],
                                      field_name=form.data.get('test'), update_setting=False)
             messages.success(self.request, _('A test email has been sent to your email address.'))
+        if 'send' in form.data:
+            return HttpResponseRedirect(group_aware_reverse(
+                'cosinnus:conference:confirm_send_reminder',
+                kwargs={'group': self.group}))
         return super(ConferenceRemindersView, self).form_valid(form)
 
     def get_success_url(self):
         return group_aware_reverse('cosinnus:conference:reminders', kwargs={'group': self.group})
+
+
+class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
+                                         RequireWriteMixin,
+                                         GroupIsConferenceMixin,
+                                         FormView):
+    template_name = \
+        'cosinnus/conference/conference_confirm_send_reminders.html'
+    form_class = ConferenceConfirmSendRemindersForm
+    message_success = _('Conference reminder settings '
+                        'have been successfully updated.')
+
+    def get_members(self):
+        return self.group.actual_members.exclude(id=self.request.user.id)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['instance'] = self.group
+        return kwargs
+
+    def get_object(self, queryset=None):
+        return self.group
+
+    def get_context_data(self, **kwargs):
+        kwargs['object'] = self.group
+        kwargs['members'] = self.get_members()
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        if 'send' in form.data:
+            send_conference_reminder(self.group, recipients=self.get_members(),
+                                     field_name='send_immediately',
+                                     update_setting=False)
+            messages.success(self.request,
+                             _('The message was sent to all participants.'))
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:conference:reminders',
+                                   kwargs={'group': self.group})
 
 
 class ConferenceParticipationManagementView(SamePortalGroupMixin,
@@ -1004,3 +1049,4 @@ conference_room_add = CosinnusConferenceRoomCreateView.as_view()
 conference_room_edit = CosinnusConferenceRoomEditView.as_view()
 conference_room_delete = CosinnusConferenceRoomDeleteView.as_view()
 conference_reminders = ConferenceRemindersView.as_view()
+conference_confirm_send_reminder = ConferenceConfirmSendRemindersView.as_view()

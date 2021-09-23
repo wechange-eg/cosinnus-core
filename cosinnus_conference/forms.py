@@ -65,6 +65,27 @@ class ConferenceRemindersForm(forms.ModelForm):
         return super(ConferenceRemindersForm, self).save(commit)
 
 
+class ConferenceConfirmSendRemindersForm(forms.ModelForm):
+    subject = forms.CharField()
+    content = forms.CharField(widget=forms.Textarea)
+
+    class Meta:
+        model = get_cosinnus_group_model()
+        fields = ('extra_fields', )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['subject'].widget.attrs['readonly'] = True
+        self.fields['content'].widget.attrs['readonly'] = True
+
+    def get_initial_for_field(self, field, field_name):
+        extra_fields = self.instance.extra_fields
+        if field_name == 'subject' or field_name == 'content':
+            field_name = 'send_immediately_{}'.format(field_name)
+            return extra_fields.get('reminder_{}'.format(field_name),
+                                    get_initial_template(field_name))
+
+
 class ConferenceFileUploadWidget(forms.ClearableFileInput):
     template_name = 'cosinnus/conference/clearable_file_input.html'
 
