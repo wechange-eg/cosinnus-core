@@ -32,6 +32,10 @@ class ConferenceRemindersForm(forms.ModelForm):
     hour_before_subject = forms.CharField(required=False)
     hour_before_content = forms.CharField(widget=forms.Textarea, required=False)
 
+    send_immediately = forms.BooleanField(widget=forms.CheckboxInput, required=False)
+    send_immediately_subject = forms.CharField(required=False)
+    send_immediately_content = forms.CharField(widget=forms.Textarea, required=False)
+
     class Meta:
         model = get_cosinnus_group_model()
         fields = ('extra_fields', )

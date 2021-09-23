@@ -146,6 +146,56 @@
             </div>
         </div>
 
+        <div class="panel panel-default large-space">
+            <div class="panel-heading">
+                <label for="id_send_immediately" class="cursor-pointer">
+                    <h4 class="panel-title">
+                        {{ form.send_immediately }}&nbsp;
+                        {% trans "send immediately" %}
+                        {% comment %}
+                        {% with object.settings.reminder_hour_before_sent|parse_datetime|date:"SHORT_DATETIME_FORMAT" as sent_date %}{% if sent_date %}
+                        <span class="badge">{% blocktrans %}Status info: sent {{ sent_date }}{% endblocktrans %}</span>
+                        {% endif %}{% endwith %}
+                        {% endcomment %}
+                    </h4>
+                </label>
+            </div>
+            <div id="collapseSendImmediately" class="panel-collapse">
+                <div class="panel-body">
+                    {# send immediately subject #}
+                    {% trans "Invitation subject" as subject_label %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.send_immediately_subject label=subject_label %}
+                    {# send immediately email text #}
+                    {% trans "Invitation text" as content_label %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.send_immediately_content label=content_label legend_selectable=True legend=content_legend large_field=True %}
+                    <button type="submit" class="btn btn-default btn-autosize" name="send" value="send_immediately">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left" href="#" tabindex="-1">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans 'Send immediately' %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                    <button type="submit" class="btn btn-default btn-autosize" name="test" value="send_immediately">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left" href="#" tabindex="-1">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans 'Send test to myself' %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-emphasized" name="submit" value="1">
             <ul class="media-list">
                 <li class="media">
