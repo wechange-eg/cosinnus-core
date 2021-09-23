@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -247,7 +247,7 @@ msgid "Only registered members can see the content you requested! Log in or crea
 msgstr "Nur registrierte Benutzer  können diesen Inhalt sehen! Log dich ein oder erstelle jetzt ein Benutzerkonto!"
 
 msgid "Please log in to access this page."
-msgstr "Bitte melde dich an um auf diese Seite zugreifen zu können."
+msgstr "Bitte melde dich an, um auf diese Seite zugreifen zu können."
 
 #, python-format
 msgid "The page you tried to access belongs to an app that has been deactivated for this %(team_type)s. If you feel this is in error, ask the %(team_type)s's administrator to reactivate the app."

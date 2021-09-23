@@ -346,7 +346,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             else:
                 redirects.append((resolved_url, message))
             self.settings[PROFILE_SETTING_REDIRECT_NEXT_VISIT] = redirects
-            self.save(update_fields=['settings'])
+            self.save()
     
     def pop_next_redirect(self):
         """ Tries to remove the first redirect URL in the user's setting's redirect list, and return it.

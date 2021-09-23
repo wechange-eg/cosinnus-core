@@ -191,18 +191,30 @@ class SetInitialPasswordView(TemplateView):
             if form.is_valid():
                 form.save()
                 messages.success(self.request, _("Your password was set successfully! You may now log in using your e-mail address and the password you just set."))
-
+                
+                profile = user.cosinnus_profile
+                profile_needs_to_saved = False
+                
                 try:
                     # removing the key from the cosinnus_profile settings to prevent double usage
-                    user.cosinnus_profile.settings.pop(PROFILE_SETTING_PASSWORD_NOT_SET)
+                    profile.settings.pop(PROFILE_SETTING_PASSWORD_NOT_SET)
+                    profile_needs_to_saved = True
                 except KeyError as e:
                     logger.error(
                         'Error while deleting key %s from cosinnus_profile settings of user %s. This key is supposed to be present. Password was set anyway',
                         extra={'exception': e, 'reason': str(e)})
                 
+                # setting your password automatically validates your email, as you have received the mail to your address
+                if not profile.email_verified:
+                    profile.email_verified = True
+                    profile_needs_to_saved = True
+                
                 # add redirect to the welcome-settings page, with priority so that it is shown as first one
                 if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
-                    user.cosinnus_profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), self.request), message=None, priority=True)
+                    profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), self.request), message=None, priority=True)
+                elif profile_needs_to_saved:
+                    # if a redirect has been added, the profile has been saved already. otherwise, save it here
+                    profile.save()
                 
                 # send welcome email if enabled
                 _send_user_welcome_email_if_enabled(user)
@@ -766,6 +778,22 @@ def password_change_proxy(request, *args, **kwargs):
         return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_changed_page.html')
     return CosinnusPasswordChangeView.as_view(*args, **kwargs)(request)
 
+
+class CosinnusPasswordResetConfirmView(PasswordResetConfirmView):
+    """ Overridden view that verifies a user's email on successful password reset """
+
+    def form_valid(self, form):
+        ret = super().form_valid(form)
+        profile = self.user.cosinnus_profile
+        # setting your password automatically validates your email, as you have received the mail to your address
+        if not profile.email_verified:
+            profile.email_verified = True
+            profile.save()
+        # send a password changed signal
+        signals.user_password_changed.send(sender=self, user=self.user)
+        return ret
+
+
 # =============== set a password from a only by token logged in user =========================== #
 
 class CosinnusSetInitialPasswordView(PasswordResetConfirmView):
@@ -824,10 +852,12 @@ def password_reset_proxy(request, *args, **kwargs):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_page.html')
         # silently disallow imported/created users without a password to reset their password
         # if the user import functionality is enabled, because then imported users are not active
-        # until they have been sent a token invite and may not use the password reset function
+        # until they have been sent a token invite and may not use the password reset function, 
+        # *if* they have not yet received a token invite
         if user and not user.password:
             if settings.COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED \
-                        and settings.COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES:
+                        and settings.COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES \
+                        and not PROFILE_SETTING_LOGIN_TOKEN_SENT in user.cosinnus_profile.settings:
                 return redirect(PasswordResetView().get_success_url())
             
     kwargs.update({

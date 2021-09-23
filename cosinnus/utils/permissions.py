@@ -250,7 +250,8 @@ def check_user_can_receive_emails(user):
     if not user.is_authenticated:
         return not GlobalBlacklistedEmail.is_email_blacklisted(user.email)
     else:
-        return (user.is_active and check_user_verified(user) and
+        verified_check = (CosinnusPortal.get_current().email_needs_verification == False) or check_user_verified(user)
+        return (user.is_active and verified_check and
                 GlobalUserNotificationSetting.objects.get_for_user(user) > GlobalUserNotificationSetting.SETTING_NEVER)
 
 def check_user_verified(user):
