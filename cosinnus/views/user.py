@@ -1029,8 +1029,8 @@ def resend_email_validation(request):
     if not GlobalBlacklistedEmail.is_email_blacklisted(request.user.email):
         send_user_email_to_verify(request.user, request.user.email, request)
         messages.add_message(request, messages.SUCCESS,
-                             _('A new validation email has been sent.'))
-    return HttpResponseRedirect(request.GET.get('next'))
+                             _('A new verification email has been sent.'))
+    return HttpResponseRedirect(redirect_next_or(request, reverse('cosinnus:profile-detail')))
 
 
 def accept_updated_tos(request):

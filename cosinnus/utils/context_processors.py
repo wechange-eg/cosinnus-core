@@ -159,8 +159,8 @@ def email_verified(request):
             check_user_verified(request.user)):
         url = reverse('cosinnus:resend-email-validation')
         url = '{}?next={}'.format(url, request.path)
-        msg = _('Please validate your email address.')
-        link_label = _('Click here to send the validation link again.')
+        msg = _('Please verify your email address.')
+        link_label = _('Click here to send the verification link again.')
         context['email_not_verified_announcement'] = {
             'level': 'warning',
             'text': f'{msg} <a href="{url}">{link_label}</a>'

@@ -701,6 +701,12 @@ class CosinnusConf(AppConf):
     # when users newly register, are their profiles marked as visible rather than private on the site?
     USER_DEFAULT_VISIBLE_WHEN_CREATED = True
     
+    # for portals with `email_needs_verification` active, how many days after registration
+    # should the user get a full-screen popup to "please verify your email now" on every
+    # page access?
+    # value: days in int, 0 for popup will never show
+    USER_SHOW_EMAIL_VERIFIED_POPUP_AFTER_DAYS = 0
+    
     # should regular, non-admin users be allowed to create Groups (Societies) as well?
     # if False, users can only create Projects 
     USERS_CAN_CREATE_GROUPS = False
