@@ -49,6 +49,7 @@ class _UserProfileForm(UserProfileFormDynamicFieldsMixin, ManagedTagFormMixin, f
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True, validators=[validate_file_infection])
     website = forms.URLField(widget=forms.TextInput, required=False)
     language = forms.CharField(required=False)
+    email_verified = forms.BooleanField(disabled=True, required=False)
     
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
         newsletter_opt_in = forms.BooleanField(label='newsletter_opt_in', required=False)
