@@ -402,6 +402,19 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def rocket_username(self, username):
         """ Sets new username for Rocket.Chat """
         self.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = username
+        
+    @property
+    def rocket_user_email(self):
+        """ Returns the email that rocketchat should use for this user.
+            Rocket should only ever be given the user's email through this getter.
+            Depending on the verification status of the user account,
+            this email might be a fake @wechange email instead of the real account's email
+            because rocketchat can just not behave and never send emails, and the "mail is verified"
+            feature is broken and still sends out emails. We have to prevent that for unverified mails. """
+        if not self.email_verified:
+            portal = CosinnusPortal.get_current()
+            return f'unverified_rocketchat_{portal.slug}_{portal.id}_{self.user.id}@wechange.de'
+        return self.user.email.lower()
 
     @property
     def workshop_user_name(self):
