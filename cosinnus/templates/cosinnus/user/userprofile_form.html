@@ -4,7 +4,7 @@
 {% block extrahead %}
     {{ block.super }}
     {% if not "description" in SETTINGS.COSINNUS_USERPROFILE_HIDDEN_FIELDS %}
-        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
+        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.description.html_name %}
     {% endif %}
 {% endblock %}
 
@@ -96,7 +96,7 @@
 	                    {# Large Field #}
 						{% trans "Who are you and what motivates you?" as description_label %}
 						{% trans "Tell others something about you!" as  description_placeholder %}
-						{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description label=description_label placeholder=description_placeholder large_field=True %}
+						{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description label=description_label placeholder=description_placeholder large_field=True translation_fields=translatable_field_items translation_form=form.forms.obj %}
 					{% endif %}
 
                     {# Regular Field #}

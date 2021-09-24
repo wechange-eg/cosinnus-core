@@ -16,6 +16,8 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.validators import validate_file_infection
 
+from cosinnus.forms.translations import TranslatedFieldsFormMixin
+
 
 class UserProfileFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
     """ Mixin for the UserProfile modelform that
@@ -44,7 +46,7 @@ class UserProfileFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
                     self.instance.dynamic_fields[field_name] = cleaned_value
 
 
-class _UserProfileForm(UserProfileFormDynamicFieldsMixin, ManagedTagFormMixin, forms.ModelForm):
+class _UserProfileForm(TranslatedFieldsFormMixin, UserProfileFormDynamicFieldsMixin, ManagedTagFormMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True, validators=[validate_file_infection])
     website = forms.URLField(widget=forms.TextInput, required=False)

@@ -44,6 +44,8 @@ from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import get_newly_registered_user_email, is_user_active
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
 
+from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
+
 
 logger = logging.getLogger('cosinnus')
 
@@ -93,7 +95,7 @@ class BaseUserProfileManager(models.Manager):
 
 @python_2_unicode_compatible
 class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
-                      LikeableObjectMixin, CosinnusManagedTagAssignmentModelMixin,
+                      TranslateableFieldsModelMixin, LikeableObjectMixin, CosinnusManagedTagAssignmentModelMixin,
                       models.Model):
     """
     This is a base user profile used within cosinnus. To use it, create your
@@ -125,6 +127,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     # if this or any extending profile models define additional username fields,
     # such as middle name, list the field names here
     ADDITIONAL_USERNAME_FIELDS = []
+    translateable_fields = ['description']
     
     user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False,
         related_name='cosinnus_profile', on_delete=models.CASCADE)
