@@ -143,13 +143,13 @@
 					{% endif %}
 				{% endblock %}
 				{% block login_url %}
-					<a class="nav-button nav-header-textlink" href="{% url 'login' %}" title="{% trans "Log in" %}">
+					<a class="nav-button nav-header-textlink nav-header-textlink-login" href="{% url 'login' %}" title="{% trans "Log in" %}">
 						{% trans "Log in" %}
 					</a>
 				{% endblock %}
 				{% block register_url %}
 					{% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
-						<a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
+						<a class="nav-button nav-header-textlink nav-header-textlink-register mobile-hidden" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
 							{% trans "Register" %}
 						</a>
 					{% endif %}
