@@ -248,7 +248,6 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'osm_field',
         'phonenumber_field',
         'postman',
-        'raven.contrib.django.raven_compat',
         'oauth2_provider',
         'corsheaders',
         'rest_framework',
@@ -299,7 +298,7 @@ LOGGING = {
     'disable_existing_loggers': True,
     'root': {
         'level': 'WARNING',
-        'handlers': ['sentry'],
+        'handlers': ['console'],
     },
     'formatters': {
         'verbose': {
@@ -307,10 +306,6 @@ LOGGING = {
         },
     },
     'handlers': {
-        'sentry': {
-            'level': 'INFO',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -323,24 +318,14 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
         },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['console', 'sentry'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
         'cosinnus': {
             'level': 'DEBUG',
-            'handlers': ['console', 'sentry'],
+            'handlers': ['console',],
             'propagate': False,
         },
         'wechange-payments': {
             'level': 'DEBUG',
-            'handlers': ['console', 'sentry'],
+            'handlers': ['console',],
             'propagate': False,
         },
     },
