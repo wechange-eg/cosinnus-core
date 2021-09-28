@@ -79,7 +79,9 @@ class ConferenceConfirmSendRemindersForm(forms.ModelForm):
         self.fields['content'].widget.attrs['readonly'] = True
 
     def get_initial_for_field(self, field, field_name):
-        extra_fields = self.instance.extra_fields
+        extra_fields = {}
+        if self.instance.extra_fields:
+            extra_fields = self.instance.extra_fields
         if field_name == 'subject' or field_name == 'content':
             field_name = 'send_immediately_{}'.format(field_name)
             return extra_fields.get('reminder_{}'.format(field_name),
@@ -87,6 +89,8 @@ class ConferenceConfirmSendRemindersForm(forms.ModelForm):
 
     def save(self, commit=True):
         now = timezone.now()
+        if not self.instance.extra_fields:
+            self.instance.extra_fields = {}
         self.instance.extra_fields['reminder_send_immediately_last_sent'] = now
         return super().save(commit)
 
