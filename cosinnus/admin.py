@@ -571,6 +571,27 @@ class UserToSAcceptedFilter(admin.SimpleListFilter):
             return queryset.filter(cosinnus_profile__settings__contains='tos_accepted')
         if self.value() == 'no':
             return queryset.exclude(cosinnus_profile__settings__contains='tos_accepted')
+        
+        
+class EmailVerifiedFilter(admin.SimpleListFilter):
+    """ Will show users that have their email verified (or not) """
+    
+    title = _('Email verified')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'emailverified'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Email verified')),
+            ('no', _('Email not verified')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.filter(cosinnus_profile__email_verified=True)
+        if self.value() == 'no':
+            return queryset.exclude(cosinnus_profile__email_verified=True)
 
 
 class UserHasLoggedInFilter(admin.SimpleListFilter):
@@ -622,9 +643,10 @@ class UserAdmin(DjangoUserAdmin):
         actions += ['force_sync_rocket_user', 'make_user_rocket_admin', 'force_redo_user_room_memberships',
                     'ensure_user_account_sanity']
     list_display = ('email', 'is_active', 'date_joined', 'has_logged_in', 'tos_accepted', 
-                    'username', 'first_name', 'last_name', 'is_staff', 'scheduled_for_deletion_at')
+                    'email_verified', 'username', 'first_name', 'last_name', 
+                    'is_staff', 'scheduled_for_deletion_at')
     list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,
-                                                       UserScheduledForDeletionAtFilter]
+                       UserScheduledForDeletionAtFilter, EmailVerifiedFilter]
     
     def has_logged_in(self, obj):
         return bool(obj.last_login is not None)
@@ -635,6 +657,11 @@ class UserAdmin(DjangoUserAdmin):
         return bool(obj.cosinnus_profile.settings and obj.cosinnus_profile.settings.get('tos_accepted', False))
     tos_accepted.short_description = _('ToS accepted?')
     tos_accepted.boolean = True
+    
+    def email_verified(self, obj):
+        return obj.cosinnus_profile.email_verified
+    email_verified.short_description = _('Email verified')
+    email_verified.boolean = True
     
     def scheduled_for_deletion_at(self, obj):
         return obj.cosinnus_profile.scheduled_for_deletion_at
