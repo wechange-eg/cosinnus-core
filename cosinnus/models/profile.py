@@ -127,7 +127,9 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     # if this or any extending profile models define additional username fields,
     # such as middle name, list the field names here
     ADDITIONAL_USERNAME_FIELDS = []
-    translateable_fields = ['description']
+    
+    if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+        translateable_fields = ['description']
     
     user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False,
         related_name='cosinnus_profile', on_delete=models.CASCADE)

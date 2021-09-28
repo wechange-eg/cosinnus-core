@@ -25,7 +25,7 @@ class TranslateableFieldsModelMixin(models.Model):
     def __getitem__(self, key):
         """ Any getitem calls like `instance[field]` (or in template: `{{ instance.field }}`)
             will return the translated field for this instance """
-        if key in self.get_translateable_fields():
+        if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED and key in self.get_translateable_fields():
             current_laguage = get_language()
             field = self.translations.get(key)
             if field:
