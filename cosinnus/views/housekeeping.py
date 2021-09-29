@@ -47,9 +47,6 @@ from annoying.functions import get_object_or_None
 
 logger = logging.getLogger('cosinnus')
 
-import logging
-logger = logging.getLogger('cosinnus')
-
 
 def ensure_group_widgets(request=None):
     """ Do some integrity checks and corrections. 
@@ -191,6 +188,16 @@ def deletecache(request):
     cache_key = request.GET.get('key', HOUSEKEEPING_CACHE_KEY)
     cache.delete(cache_key)
     return HttpResponse("The cache entry '%s' was deleted." % cache_key)
+
+
+def test_logging(request, level='error'):
+    if level == 'exception':
+        return 1/0
+    if level in ['error', 'warning', 'info']:
+        func = getattr(logger, level)
+        func(f'Test logging event with level: {level}')
+        return HttpResponse(f'Triggered a log message with level {level}.')
+    return HttpResponse(f'Did not trigger a log event because level "{level}" was unknown.')
 
 
 def check_and_delete_loop_redirects(request):
