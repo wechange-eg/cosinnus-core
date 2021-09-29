@@ -416,8 +416,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             this email might be a fake @wechange email instead of the real account's email
             because rocketchat can just not behave and never send emails, and the "mail is verified"
             feature is broken and still sends out emails. We have to prevent that for unverified mails. """
-        if not self.email_verified:
-            portal = CosinnusPortal.get_current()
+        portal = CosinnusPortal.get_current()
+        if portal.email_needs_verification and not self.email_verified:
             return f'unverified_rocketchat_{portal.slug}_{portal.id}_{self.user.id}@wechange.de'
         return self.user.email.lower()
 
