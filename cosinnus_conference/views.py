@@ -549,7 +549,7 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
                         'have been successfully updated.')
 
     def get_members(self):
-        return self.group.actual_members.exclude(id=self.request.user.id)
+        return self.group.actual_members
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
