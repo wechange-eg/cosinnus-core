@@ -151,11 +151,6 @@
                 <label for="id_send_immediately" class="cursor-pointer">
                     <h4 class="panel-title">
                         {% trans "send immediately" %}
-                        {% comment %}
-                        {% with object.settings.reminder_hour_before_sent|parse_datetime|date:"SHORT_DATETIME_FORMAT" as sent_date %}{% if sent_date %}
-                        <span class="badge">{% blocktrans %}Status info: sent {{ sent_date }}{% endblocktrans %}</span>
-                        {% endif %}{% endwith %}
-                        {% endcomment %}
                     </h4>
                 </label>
             </div>
@@ -166,8 +161,8 @@
                     </label>
                     <div class="alert alert-info">
                         <i class="fa fa-info fa-2x"></i>
-                        {% if last_sent %}
-                        <p>{% blocktrans with date=last_sent %}last instant email was sent on {{ date }} {% endblocktrans %}</p>
+                        {% if immediately_message_last_sent %}
+                        <p>{% blocktrans with date=immediately_message_last_sent %}last instant email was sent on {{ date }} {% endblocktrans %}</p>
                         {% else %}
                         <p>{% trans 'no instant email has been sent yet.' %}</p>
                         {% endif %}

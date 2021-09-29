@@ -512,7 +512,7 @@ class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsCo
                 return parse_datetime(last_sent)
 
     def get_context_data(self, **kwargs):
-        kwargs['last_sent'] = self.get_last_sent()
+        kwargs['immediately_message_last_sent'] = self.get_last_sent()
         kwargs['object'] = self.group
         return super(ConferenceRemindersView, self).get_context_data(**kwargs)
 
