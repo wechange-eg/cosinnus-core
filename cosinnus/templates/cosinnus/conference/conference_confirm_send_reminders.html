@@ -43,7 +43,11 @@
                         <i class="fa fa-check"></i>
                     </span>
                     <div class="media-body">
-                        {% trans 'Yes, send message immediately' %}
+                        {% blocktrans count count=members.count %}
+                        Yes, send immediately to one user.
+                        {% plural %}
+                        Yes, send immediately to {{ count }} users.
+                        {% endblocktrans %}
                     </div>
                 </li>
             </ul>
