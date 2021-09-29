@@ -25,7 +25,7 @@
             {% include 'cosinnus/fields/default_field.html' with field=form.subject label=subject_label %}
             {% include 'cosinnus/fields/default_field.html' with field=form.content label=content_label large_field=True %}
 
-            <div class="alert alert-danger">
+            <div class="alert alert-warning">
                 <i class="fa fa-exclamation-triangle fa-2x"></i>
                 <p>{% blocktrans count count=members.count %}
                     This message will be sent to one participant.
