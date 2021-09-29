@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 15:41+0200\n"
+"POT-Creation-Date: 2021-09-29 12:35+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -86,6 +86,14 @@ msgstr "ToS angenommen"
 
 msgid "ToS not Accepted"
 msgstr "ToS nicht angenommen"
+
+msgid "Email verified"
+msgstr ""
+
+#, fuzzy
+#| msgid "not specified"
+msgid "Email not verified"
+msgstr "nicht angegeben"
 
 msgid "User Logged In"
 msgstr "Jemals eingeloggt"
@@ -242,6 +250,9 @@ msgstr "Eingeschränkt"
 
 msgid "Premium"
 msgstr "Premium"
+
+msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
+msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Nur registrierte Benutzer  können diesen Inhalt sehen! Log dich ein oder erstelle jetzt ein Benutzerkonto!"
@@ -3282,6 +3293,28 @@ msgstr "Gib die Auswahlmöglichkeiten als Semikolon-getrennte Werte ein"
 msgid "Enter your choices"
 msgstr "Gib deine Auswahlmöglichkeiten ein"
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address to continue using your account."
+msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s!"
+
+msgid "You should already have received an email with a verification link we sent to your account's email address:"
+msgstr ""
+
+msgid "Click here to send the validation link again."
+msgstr ""
+
+msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address!"
+msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s!"
+
+msgid "Close"
+msgstr "Schließen"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr "Anstößigen Inhalt melden"
@@ -3300,9 +3333,6 @@ msgstr "Abschicken"
 
 msgid "Submitting..."
 msgstr "Übertrage..."
-
-msgid "Close"
-msgstr "Schließen"
 
 msgid "Avatar will be deleted once you save."
 msgstr "Bild wird beim speichern gelöscht."
@@ -4504,74 +4534,6 @@ msgstr "Bitte setze dein initiales Passwort für %(site_name)s!"
 
 #, python-format
 msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just registered an account at %(site_name)s. We're happy to see you!\n"
-"\n"
-"You will need to verify your email %(user_email)s before you can log in. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Thank you and see you soon!\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Hi %(user_name)s,\n"
-"\n"
-"du hast gerade einen Benutzeraccount bei %(site_name)s registriert. Wir freuen uns dich zu sehen!\n"
-"\n"
-"Du musst deine E-Mail-Adresse %(user_email)s bestätigen bevor du dich einloggen kannst. \n"
-"\n"
-"\n"
-"Bitte klicke auf den folgenden Link um deine Email-Adresse zu bestätigen (oder kopiere den Link und füge ihn in die Adresszeile in deinem Browser ein):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Danke und bis bald!\n"
-"\n"
-"Dein %(site_name)s Team"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just changed your email address at %(site_name)s.\n"
-"\n"
-"You will need to verify your email %(user_email)s before the changes take effect. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Hi %(user_name)s,\n"
-"\n"
-"du hast gerade deine E-Mail-Adesse bei %(site_name)s geändert.\n"
-"\n"
-"Du musst deine E-Mail-Adresse %(user_email)s bestätigen bevor die Änderung wirksam wird. \n"
-"\n"
-"\n"
-"Bitte klicke auf den folgenden Link um deine Email-Adresse zu bestätigen (oder kopiere den Link und füge ihn in die Adresszeile in deinem Browser ein):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Dein %(site_name)s Team"
-
-#, python-format
-msgid "Please verify your email address for %(site_name)s!"
-msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s!"
-
-#, python-format
-msgid ""
 "User \"%(sender_name)s\" has accepted the invitation to join \"%(team_name)s\".\n"
 "\n"
 "You're receiving this email because you are an administrator of this team.\n"
@@ -4774,11 +4736,18 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "Deine Registrierung bei %(site_name)s wurde abgelehnt."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#| "\n"
+#| "Out administrators will review your request and approve your user account soon!\n"
+#| "\n"
+#| "Until then, with warm greetings, \n"
+#| "your %(site_name)s Team"
 msgid ""
 "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 "\n"
-"Out administrators will review your request and approve your user account soon!\n"
+"Our administrators will review your request and approve your user account soon!\n"
 "\n"
 "Until then, with warm greetings, \n"
 "your %(site_name)s Team"
@@ -5049,12 +5018,6 @@ msgstr "Abgemeldet"
 msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
 msgstr "Um dich mit deinem %(portal_name)s-Konto auf einer anderen Plattform anzumelden, musst du dich zuerst auf %(portal_name)s anmelden."
 
-msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-msgstr "Das Benutzerkonto wurde erfolgreich registriert. Das Benutzerkonto muss noch überprüft und freigeschaltet werden bevor du dich einloggen kannst. Wir senden dir eine E-Mail an deine Adresse wenn es soweit ist."
-
-msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "Das Benutzerkonto wurde erfolgreich registriert. Du wirst innerhalb weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du klicken, bevor du dich einloggen kannst."
-
 msgid "Password"
 msgstr "Passwort"
 
@@ -5084,6 +5047,11 @@ msgstr "Entschuldige, aber dein Benuterkonto wurde über ein integriertes Portal
 
 msgid "Please contact an administrator if this is an issue for you."
 msgstr "Bitte kontaktiere einen Administrator wenn das ein Problem für dich darstellt."
+
+#, fuzzy
+#| msgid "Set your password"
+msgid "Sorry, we can't reset your password!"
+msgstr "Passwort festlegen"
 
 msgid "Password reset"
 msgstr "Passwort zurücksetzen"
@@ -5338,6 +5306,11 @@ msgstr "Gib einen oder mehrere Suchbegriffe ein oder wähle ein Thema aus um zu 
 
 msgid "CSV Downloads"
 msgstr "CSV Downloads"
+
+#, fuzzy
+#| msgid "HD space used by projects"
+msgid "HD space used by conferences"
+msgstr "Speicherbedarf Projekte"
 
 msgid "HD space used by groups"
 msgstr "Speicherbedarf Gruppen"
@@ -6018,6 +5991,9 @@ msgstr "Basisdaten"
 
 msgid "E-Mail"
 msgstr "E-Mail"
+
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr ""
 
 msgid "Profile avatar"
 msgstr "Avatar"
@@ -6914,6 +6890,14 @@ msgstr "Entschuldige, nur Portal-Administrator_innen können Tagungen deaktivier
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Tagung können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address."
+msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s!"
+
+msgid "Click here to send the verification link again."
+msgstr ""
+
 msgid "Team Description"
 msgstr "Projektbeschreibung"
 
@@ -7336,8 +7320,8 @@ msgid "User \"%(user)s\" was registered successfully. The account will need to b
 msgstr "Benutzer \"%(user)s\" wurde erfolgreich registriert. Das Benutzerkonto muss noch überprüft und freigeschaltet werden bevor du dich einloggen kannst. Wir senden dir eine E-Mail an \"%(email)s\" wenn es soweit ist."
 
 #, python-format
-msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "Benutzer \"%(email)s\" wurde erfolgreich registriert. Du wirst innerhalb weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du klicken, bevor du dich einloggen kannst."
+msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
+msgstr ""
 
 msgid "The invite token you have used does not exist!"
 msgstr "Das Einladungs-Token, das du benutzt hast, existiert nicht!"
@@ -7388,6 +7372,9 @@ msgstr "Du hast die Registrierung von %(username)s (%(email)s) abgelehnt! Eine E
 msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
 msgstr "Das Benutzerkonto für diesen Bestätigungslink gibt es nicht. Wahrscheinlich wurde deine Registrierung abgelehnt oder der Link ist nicht mehr gültig."
 
+msgid "The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!"
+msgstr ""
+
 msgid "The email for this account seems to already have been confirmed!"
 msgstr "Die E-Mail-Adresse für dieses Konto wurde anscheinend bereits bestätitgt!"
 
@@ -7397,13 +7384,41 @@ msgstr "Dieser Bestätigungslink ist nicht länger gültig!"
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
 msgstr "Die E-Mail-Adresse die du bestätigen wolltest wurde bereits bestätigt oder ist inzwischen von einem andern Benutzer registriert worden!"
 
-#, python-format
-msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+#, fuzzy, python-format
+#| msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+msgid "Your email address %(email)s was successfully confirmed!"
 msgstr "Deine E-Mail-Adresse %(email)s wurde erfolgreich bestätigt! Willkommen!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Deine E-Mail-Adresse %(email)s wurde erfolgreich bestätigt! Allerdings ist dein Konto noch nicht aktiv und muss von einem Administrator bestätigt werden bevor du dich einloggen kannst. Wir schicken dir eine Email sobald das passiert!"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s!"
+
+#, python-format
+msgid "You have just registered an account at %(site_name)s. We're happy to see you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "You have just changed your email address at %(site_name)s."
+msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s!"
+
+msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
+msgstr ""
+
+msgid "Thank you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "The %(site_name)s team"
+msgid "Your %(site_name)s Team"
+msgstr "Das Team von %(site_name)s"
+
+msgid "If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!"
+msgstr ""
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "Der Abbestellen-Link, den du geklickt hast, scheint nicht gültig zu sein!"
@@ -7411,6 +7426,9 @@ msgstr "Der Abbestellen-Link, den du geklickt hast, scheint nicht gültig zu sei
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr "Wir haben deine E-Mail-Adresse \"%(email)s\" von unserer Mailingliste entfernt. Du erhältst ab sofort keine Emails mehr von uns!"
+
+msgid "A new verification email has been sent."
+msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Willkommen! Du wurdest bereits in folgende Projekte und Gruppen eingeladen. Bitte klicke den Ausklappen-Button der Einladungen, die du annehmen oder ablehnen möchtest!"
@@ -7457,6 +7475,77 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before you can log in. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Thank you and see you soon!\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "du hast gerade einen Benutzeraccount bei %(site_name)s registriert. Wir freuen uns dich zu sehen!\n"
+#~ "\n"
+#~ "Du musst deine E-Mail-Adresse %(user_email)s bestätigen bevor du dich einloggen kannst. \n"
+#~ "\n"
+#~ "\n"
+#~ "Bitte klicke auf den folgenden Link um deine Email-Adresse zu bestätigen (oder kopiere den Link und füge ihn in die Adresszeile in deinem Browser ein):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Danke und bis bald!\n"
+#~ "\n"
+#~ "Dein %(site_name)s Team"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "du hast gerade deine E-Mail-Adesse bei %(site_name)s geändert.\n"
+#~ "\n"
+#~ "Du musst deine E-Mail-Adresse %(user_email)s bestätigen bevor die Änderung wirksam wird. \n"
+#~ "\n"
+#~ "\n"
+#~ "Bitte klicke auf den folgenden Link um deine Email-Adresse zu bestätigen (oder kopiere den Link und füge ihn in die Adresszeile in deinem Browser ein):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Dein %(site_name)s Team"
+
+#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+#~ msgstr "Das Benutzerkonto wurde erfolgreich registriert. Das Benutzerkonto muss noch überprüft und freigeschaltet werden bevor du dich einloggen kannst. Wir senden dir eine E-Mail an deine Adresse wenn es soweit ist."
+
+#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "Das Benutzerkonto wurde erfolgreich registriert. Du wirst innerhalb weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du klicken, bevor du dich einloggen kannst."
+
+#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "Benutzer \"%(email)s\" wurde erfolgreich registriert. Du wirst innerhalb weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du klicken, bevor du dich einloggen kannst."
 
 #, fuzzy
 #~ msgid "Import Projects and Groups or Users"

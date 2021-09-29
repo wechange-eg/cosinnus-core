@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 15:41+0200\n"
+"POT-Creation-Date: 2021-09-29 12:35+0200\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,6 +81,13 @@ msgstr "ToS Acceptat"
 
 msgid "ToS not Accepted"
 msgstr "ToS nu este acceptat"
+
+msgid "Email verified"
+msgstr ""
+
+#, fuzzy
+msgid "Email not verified"
+msgstr "(Inactiv)"
 
 msgid "User Logged In"
 msgstr "Utilizator Conectat în"
@@ -240,6 +247,9 @@ msgstr "Restrâns"
 
 msgid "Premium"
 msgstr "Premium"
+
+msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
+msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Numai membrii înregistrați pot vedea conținutul pe care l-ați solicitat. Conectați-vă un cont acum!"
@@ -3391,6 +3401,28 @@ msgstr ""
 msgid "Enter your choices"
 msgstr ""
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address to continue using your account."
+msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
+
+msgid "You should already have received an email with a verification link we sent to your account's email address:"
+msgstr ""
+
+msgid "Click here to send the validation link again."
+msgstr ""
+
+msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address!"
+msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
+
+msgid "Close"
+msgstr "Închide"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr "Raportați conținutul ofensator"
@@ -3409,9 +3441,6 @@ msgstr "Trimite"
 
 msgid "Submitting..."
 msgstr "Depunere..."
-
-msgid "Close"
-msgstr "Închide"
 
 msgid "Avatar will be deleted once you save."
 msgstr "Avatarul va fi șters odată ce salvați."
@@ -4636,74 +4665,6 @@ msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
 
 #, python-format
 msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just registered an account at %(site_name)s. We're happy to see you!\n"
-"\n"
-"You will need to verify your email %(user_email)s before you can log in. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Thank you and see you soon!\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Salut %(user_name)s,\n"
-"\n"
-"tocmai ai înregistrat un cont la %(site_name)s. Ne bucurăm să te vedem!\n"
-"\n"
-"Va trebui să vă confirmați e-mailul %(user_email)s înainte să vă puteți autentifica.\n"
-"\n"
-"\n"
-"Vă rugăm să faceți clic pe următorul link pentru a vă confirma adresa de e-mail (sau copiați și lipiți linkul în browser):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Mulțumesc și ne vedem curând!\n"
-"\n"
-"A ta %(site_name)s Echipă"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just changed your email address at %(site_name)s.\n"
-"\n"
-"You will need to verify your email %(user_email)s before the changes take effect. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Salut %(user_name)s,\n"
-"\n"
-"tocmai v-ați schimbat adresa de e-mail la %(site_name)s.\n"
-"\n"
-"Va trebui să vă confirmați e-mailul %(user_email)s înainte ca modificările să intre în vigoare.\n"
-"\n"
-"\n"
-"Vă rugăm să faceți clic pe următorul link pentru a vă confirma adresa de e-mail (sau copiați și lipiți linkul în browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"A ta %(site_name)s Echipă"
-
-#, python-format
-msgid "Please verify your email address for %(site_name)s!"
-msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
-
-#, python-format
-msgid ""
 "User \"%(sender_name)s\" has accepted the invitation to join \"%(team_name)s\".\n"
 "\n"
 "You're receiving this email because you are an administrator of this team.\n"
@@ -4906,11 +4867,18 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "Cererea dvs. de a vă alătura %(site_name)s a fost respins."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#| "\n"
+#| "Out administrators will review your request and approve your user account soon!\n"
+#| "\n"
+#| "Until then, with warm greetings, \n"
+#| "your %(site_name)s Team"
 msgid ""
 "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 "\n"
-"Out administrators will review your request and approve your user account soon!\n"
+"Our administrators will review your request and approve your user account soon!\n"
 "\n"
 "Until then, with warm greetings, \n"
 "your %(site_name)s Team"
@@ -5181,12 +5149,6 @@ msgstr "Delogat"
 msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
 msgstr "Pentru a vă folosi %(portal_name)s cont pentru a vă conecta la o altă platformă pe care trebuie să vă conectați %(portal_name)s primul."
 
-msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-msgstr "Contul dvs., a fost înregistrat cu succes. Contul va trebui să fie aprobat de un administrator înainte de a vă putea conecta. Vom trimite un e-mail la adresa dvs., atunci când se va întâmpla acest lucru."
-
-msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "Contul dvs., a fost înregistrat cu succes. Veți primi un e-mail de activare de la noi în câteva minute. Trebuie să confirmați adresa de e-mail înainte de a vă putea conecta."
-
 msgid "Password"
 msgstr "Parola"
 
@@ -5216,6 +5178,10 @@ msgstr "Ne pare rău, dar contul dvs. este asociat cu un Portal integrat! Aceast
 
 msgid "Please contact an administrator if this is an issue for you."
 msgstr "Vă rugăm să contactați un administrator dacă acesta este o problemă pentru dvs."
+
+#, fuzzy
+msgid "Sorry, we can't reset your password!"
+msgstr "Resetarea parolei"
 
 msgid "Password reset"
 msgstr "Resetare parola"
@@ -5479,6 +5445,11 @@ msgstr "Introduceți unul sau mai mulți termeni de căutare sau selectați un s
 
 msgid "CSV Downloads"
 msgstr "Descărcări CSV"
+
+#, fuzzy
+#| msgid "HD space used by projects"
+msgid "HD space used by conferences"
+msgstr "Spațiu HD utilizat de proiecte"
 
 msgid "HD space used by groups"
 msgstr "Spațiu HD utilizat de grupuri"
@@ -6169,6 +6140,9 @@ msgstr "Data de bază"
 
 msgid "E-Mail"
 msgstr "E-Mail"
+
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr ""
 
 msgid "Profile avatar"
 msgstr "Profil avatar"
@@ -7114,6 +7088,14 @@ msgstr "Ne pare rău, numai administratorii portalului pot dezactiva Grupuri! Pu
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Numai membrii echipei pot vedea conținutul pe care l-ați solicitat. Aplicați pentru a deveni membru acum!"
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address."
+msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
+
+msgid "Click here to send the verification link again."
+msgstr ""
+
 msgid "Team Description"
 msgstr "Descrierea Echipei"
 
@@ -7536,8 +7518,8 @@ msgid "User \"%(user)s\" was registered successfully. The account will need to b
 msgstr "Utilizatorul ”%(user)s” a fost înregistrat cu succes. Contul va trebui să fie aprobat înainte de a vă autentifica. Vom trimite un e-mail la adresa dvs ”%(email)s” când se va întâmpla acest lucru."
 
 #, python-format
-msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "Utilizatorul ”%(email)s” a fost înregistrat cu succes. Veți primi un e-mail de activare de la noi în câteva minute. Trebuie să confirmați adresa de e-mail înainte de a putea conecta."
+msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
+msgstr ""
 
 msgid "The invite token you have used does not exist!"
 msgstr "Jetonul de invitație pe care l-ați folosit nu există!"
@@ -7588,6 +7570,9 @@ msgstr "Ați refuzat cererea de alăturare din %(username)s (%(email)s)! A fost 
 msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
 msgstr "Contul de utilizator pe care îl căutați nu există! Probabil că înregistrarea dvs. a fost deja refuzată sau jetonul e-mailului a expirat."
 
+msgid "The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!"
+msgstr ""
+
 msgid "The email for this account seems to already have been confirmed!"
 msgstr "E-mailul pentru acest cont pare să fi fost deja confirmat!"
 
@@ -7597,13 +7582,41 @@ msgstr "Link-ul furnizat pentru confirmarea e-mailului nu mai este valabil!"
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
 msgstr "E-mailul pe care încercați să-l confirmați a fost deja confirmat sau aparține unui alt utilizator!"
 
-#, python-format
-msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+#, fuzzy, python-format
+#| msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+msgid "Your email address %(email)s was successfully confirmed!"
 msgstr "Adresa ta de e-mail %(email)s a fost confirmată cu succes! Bun venit în comunitate!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Adresa dvs. de e-mail %(email)s a fost confirmată cu succes! Cu toate acestea, contul dvs. nu este încă activ și va trebui să fie aprobat de un administrator înainte de a vă autentifica. Vă vom trimite un e-mail imediat ce se va întâmpla!"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
+
+#, python-format
+msgid "You have just registered an account at %(site_name)s. We're happy to see you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "You have just changed your email address at %(site_name)s."
+msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
+
+msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
+msgstr ""
+
+msgid "Thank you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "The %(site_name)s team"
+msgid "Your %(site_name)s Team"
+msgstr "Cea %(site_name)s echipă"
+
+msgid "If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!"
+msgstr ""
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "Linkul de dezabonare pe care l-ați făcut clic nu pare să fie valid!"
@@ -7611,6 +7624,9 @@ msgstr "Linkul de dezabonare pe care l-ați făcut clic nu pare să fie valid!"
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr "V-am dezabonat e-mailul ”%(email)s” du lista noastră de e-mailuri. Nu veți mai primi e-mailuri de la noi!"
+
+msgid "A new verification email has been sent."
+msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Bun venit! Ați fost invitat următoarele proiecte și grupuri. Vă rugăm faceți clic pe butonul derulant pentru a accepta sau refuza invitația pentru fiecare dintre ele!"
@@ -7661,6 +7677,77 @@ msgstr "În prezent nu sunteți membru %s! Dacă doriți, puteți solicita să d
 
 msgid "Your changes have been saved."
 msgstr "Schimbările tale au fost salvate."
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before you can log in. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Thank you and see you soon!\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Salut %(user_name)s,\n"
+#~ "\n"
+#~ "tocmai ai înregistrat un cont la %(site_name)s. Ne bucurăm să te vedem!\n"
+#~ "\n"
+#~ "Va trebui să vă confirmați e-mailul %(user_email)s înainte să vă puteți autentifica.\n"
+#~ "\n"
+#~ "\n"
+#~ "Vă rugăm să faceți clic pe următorul link pentru a vă confirma adresa de e-mail (sau copiați și lipiți linkul în browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Mulțumesc și ne vedem curând!\n"
+#~ "\n"
+#~ "A ta %(site_name)s Echipă"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Salut %(user_name)s,\n"
+#~ "\n"
+#~ "tocmai v-ați schimbat adresa de e-mail la %(site_name)s.\n"
+#~ "\n"
+#~ "Va trebui să vă confirmați e-mailul %(user_email)s înainte ca modificările să intre în vigoare.\n"
+#~ "\n"
+#~ "\n"
+#~ "Vă rugăm să faceți clic pe următorul link pentru a vă confirma adresa de e-mail (sau copiați și lipiți linkul în browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "A ta %(site_name)s Echipă"
+
+#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+#~ msgstr "Contul dvs., a fost înregistrat cu succes. Contul va trebui să fie aprobat de un administrator înainte de a vă putea conecta. Vom trimite un e-mail la adresa dvs., atunci când se va întâmpla acest lucru."
+
+#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "Contul dvs., a fost înregistrat cu succes. Veți primi un e-mail de activare de la noi în câteva minute. Trebuie să confirmați adresa de e-mail înainte de a vă putea conecta."
+
+#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "Utilizatorul ”%(email)s” a fost înregistrat cu succes. Veți primi un e-mail de activare de la noi în câteva minute. Trebuie să confirmați adresa de e-mail înainte de a putea conecta."
 
 #, fuzzy
 #~| msgid "Cosinnus Micropages"

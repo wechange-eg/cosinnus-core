@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 15:41+0200\n"
+"POT-Creation-Date: 2021-09-29 12:35+0200\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,6 +82,13 @@ msgstr "ToS қабылданды"
 
 msgid "ToS not Accepted"
 msgstr "ToS қабылданбады"
+
+msgid "Email verified"
+msgstr ""
+
+#, fuzzy
+msgid "Email not verified"
+msgstr "белсенді емес"
 
 msgid "User Logged In"
 msgstr "Пайдаланушы жүйеге кірді"
@@ -240,6 +247,9 @@ msgid "Restricted"
 msgstr ""
 
 msgid "Premium"
+msgstr ""
+
+msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
@@ -3393,6 +3403,28 @@ msgstr ""
 msgid "Enter your choices"
 msgstr ""
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address to continue using your account."
+msgstr "Электрондық пошта мекенжайыңызды %(site_name)s үшін растаңыз!"
+
+msgid "You should already have received an email with a verification link we sent to your account's email address:"
+msgstr ""
+
+msgid "Click here to send the validation link again."
+msgstr ""
+
+msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address!"
+msgstr "Электрондық пошта мекенжайыңызды %(site_name)s үшін растаңыз!"
+
+msgid "Close"
+msgstr "Жабу"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr "Мазмұнды баяндау"
@@ -3411,9 +3443,6 @@ msgstr "Жіберу"
 
 msgid "Submitting..."
 msgstr "Жіберілуде."
-
-msgid "Close"
-msgstr "Жабу"
 
 msgid "Avatar will be deleted once you save."
 msgstr "Аватар сақтағаннан кейін жойылады."
@@ -4641,74 +4670,6 @@ msgstr "Электрондық пошта мекенжайыңызды %(site_na
 
 #, python-format
 msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just registered an account at %(site_name)s. We're happy to see you!\n"
-"\n"
-"You will need to verify your email %(user_email)s before you can log in. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Thank you and see you soon!\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Сәлем %(user_name)s,\n"
-"\n"
-"Сіз %(site_name)s сайтында аккаунт жасадыңыз. Сізді көруге қуаныштымыз!\n"
-"\n"
-"Сайтқа кірудің алдында %(user_email)s жәшігін растауыңыз қажет. \n"
-"\n"
-"\n"
-"Жәшігіңізді растау үшін келесі сілтемеге өтіңіз (немесе браузеріңізге көшіріп салыңыз):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Рахмет және көріскенше!\n"
-"\n"
-"Сіздің %(site_name)s тобыңыз"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just changed your email address at %(site_name)s.\n"
-"\n"
-"You will need to verify your email %(user_email)s before the changes take effect. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Сәлем %(user_name)s,\n"
-"\n"
-"Сіз %(site_name)s сайтын поштаңызды өзгерттіңіз.\n"
-"\n"
-"Өзгертулер күшіне енбес бұрын өз поштаңызды %(user_email)s растауыңыз қажет. \n"
-"\n"
-"\n"
-"Жәшігіңізді растау үшін келесі сілтемеге өтіңіз (немесе браузеріңізге көшіріп салыңыз):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Сіздің %(site_name)s тобыңыз"
-
-#, python-format
-msgid "Please verify your email address for %(site_name)s!"
-msgstr "Электрондық пошта мекенжайыңызды %(site_name)s үшін растаңыз!"
-
-#, python-format
-msgid ""
 "User \"%(sender_name)s\" has accepted the invitation to join \"%(team_name)s\".\n"
 "\n"
 "You're receiving this email because you are an administrator of this team.\n"
@@ -4901,11 +4862,18 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "Сіздің %(site_name)s мүшесі болуға сұранысыңыз қабылданбады."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#| "\n"
+#| "Out administrators will review your request and approve your user account soon!\n"
+#| "\n"
+#| "Until then, with warm greetings, \n"
+#| "your %(site_name)s Team"
 msgid ""
 "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 "\n"
-"Out administrators will review your request and approve your user account soon!\n"
+"Our administrators will review your request and approve your user account soon!\n"
 "\n"
 "Until then, with warm greetings, \n"
 "your %(site_name)s Team"
@@ -5176,14 +5144,6 @@ msgstr "Жүйеден шықты"
 msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
 msgstr ""
 
-#, fuzzy
-msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-msgstr "“%(user)s” қолданушысы сәтті тіркелді. Жүйеге кірмес бұрын есептік жазбаны мақұлдау қажет. Бұл жағдай орын алғанда біз сіздің электронды поштаңызға “%(email)s” хат жібереміз."
-
-#, fuzzy
-msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "“%(user)s” қолданушысы сәтті тіркелді. Жақында сіздің %(email)s электрондық хат жібереміз. Кіру үшін сіз электрондық поштаны растауыңыз керек."
-
 msgid "Password"
 msgstr "Пароль"
 
@@ -5213,6 +5173,10 @@ msgstr "Кешіріңіз, бірақ сіздің есептік жазбаң�
 
 msgid "Please contact an administrator if this is an issue for you."
 msgstr "Егер бұл сізге қатысты мәселе болса, әкімшімен байланысыңыз."
+
+#, fuzzy
+msgid "Sorry, we can't reset your password!"
+msgstr "Парольді қалпына келтіру"
 
 msgid "Password reset"
 msgstr "Парольді қалпына келтіру"
@@ -5478,6 +5442,9 @@ msgstr "Бір немесе бірнеше іздеу шартын енгізі�
 #, fuzzy
 msgid "CSV Downloads"
 msgstr "Жүктеу"
+
+msgid "HD space used by conferences"
+msgstr ""
 
 msgid "HD space used by groups"
 msgstr ""
@@ -6175,6 +6142,9 @@ msgstr "Негізгі ақпарат"
 
 msgid "E-Mail"
 msgstr "Электрондық пошта"
+
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr ""
 
 msgid "Profile avatar"
 msgstr "Аватар"
@@ -7124,6 +7094,14 @@ msgstr "Кешіріңіз, тек портал әкімшілері Топта�
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Сіз сұраған мазмұнды тек топ мүшелері көре алады. Қазір мүшелікке өтініш бер!"
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address."
+msgstr "Электрондық пошта мекенжайыңызды %(site_name)s үшін растаңыз!"
+
+msgid "Click here to send the verification link again."
+msgstr ""
+
 msgid "Team Description"
 msgstr "Топ сипаттамасы"
 
@@ -7550,9 +7528,9 @@ msgstr "Сіздің “%(user)s” есептік жазбаңыз сәтті �
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgstr "“%(user)s” қолданушысы сәтті тіркелді. Жүйеге кірмес бұрын есептік жазбаны мақұлдау қажет. Бұл жағдай орын алғанда біз сіздің электронды поштаңызға “%(email)s” хат жібереміз."
 
-#, fuzzy, python-format
-msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "“%(user)s” қолданушысы сәтті тіркелді. Жақында сіздің %(email)s электрондық хат жібереміз. Кіру үшін сіз электрондық поштаны растауыңыз керек."
+#, python-format
+msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
+msgstr ""
 
 msgid "The invite token you have used does not exist!"
 msgstr "Сіз қолданған шақыру токені жоқ!"
@@ -7603,6 +7581,9 @@ msgstr "Сіз %(username)s (%(email)s) сұрауын қабылдамадың�
 msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
 msgstr "Сіз іздеген пайдаланушы тіркелгісі жоқ! Сіздің тіркеуіңіз бұған дейін қабылданбаған немесе электрондық пошта таңбасының мерзімі біткен болуы мүмкін."
 
+msgid "The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!"
+msgstr ""
+
 msgid "The email for this account seems to already have been confirmed!"
 msgstr "Осы есептік жазбаның электрондық поштасы расталған сияқты!"
 
@@ -7612,13 +7593,41 @@ msgstr "Электрондық поштаны растау үшін сіз бе�
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
 msgstr "Сіз растағыңыз келетін электрондық пошта әлдеқашан расталған немесе басқа пайдаланушыға тиесілі!"
 
-#, python-format
-msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+#, fuzzy, python-format
+#| msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+msgid "Your email address %(email)s was successfully confirmed!"
 msgstr "Сіздің электронды поштаңыздың %(email)s сәтті расталды! Қауымдастыққа қош келдіңіз!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Сіздің электронды поштаңыздың %(email)s сәтті расталды! Алайда, сіз тіркелгіңіз әлі белсенді емессіз және кіру үшін оны әкімшіңіз мақұлдауы керек. Біз сізге электронды пошта жібереміз!"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr "Электрондық пошта мекенжайыңызды %(site_name)s үшін растаңыз!"
+
+#, python-format
+msgid "You have just registered an account at %(site_name)s. We're happy to see you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "You have just changed your email address at %(site_name)s."
+msgstr "Электрондық пошта мекенжайыңызды %(site_name)s үшін растаңыз!"
+
+msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
+msgstr ""
+
+msgid "Thank you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "The %(site_name)s team"
+msgid "Your %(site_name)s Team"
+msgstr "%(site_name)s тобы"
+
+msgid "If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!"
+msgstr ""
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "Сіз басқан жазылымнан бас тарту сілтемесі дұрыс емес сияқты!"
@@ -7626,6 +7635,9 @@ msgstr "Сіз басқан жазылымнан бас тарту сілтем�
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr "“%(email)s” электрондық поштасын біздің тарату тізімімізден шығардық. Бізден бұдан былай электрондық пошта хабарламалары болмайды!"
+
+msgid "A new verification email has been sent."
+msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Қош келдіңіз! Сізді келесі жобалар мен топтарға шақырды. Олардың әрқайсысы үшін шақыруды қабылдау немесе қабылдамау үшін ашылмалы мәзірді басыңыз!"
@@ -7676,6 +7688,80 @@ msgstr "Сіз қазір %s мүшесі емессіз! Егер қаласа�
 
 msgid "Your changes have been saved."
 msgstr "Сіздің өзгертулеріңіз сақталды."
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before you can log in. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Thank you and see you soon!\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Сәлем %(user_name)s,\n"
+#~ "\n"
+#~ "Сіз %(site_name)s сайтында аккаунт жасадыңыз. Сізді көруге қуаныштымыз!\n"
+#~ "\n"
+#~ "Сайтқа кірудің алдында %(user_email)s жәшігін растауыңыз қажет. \n"
+#~ "\n"
+#~ "\n"
+#~ "Жәшігіңізді растау үшін келесі сілтемеге өтіңіз (немесе браузеріңізге көшіріп салыңыз):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Рахмет және көріскенше!\n"
+#~ "\n"
+#~ "Сіздің %(site_name)s тобыңыз"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Сәлем %(user_name)s,\n"
+#~ "\n"
+#~ "Сіз %(site_name)s сайтын поштаңызды өзгерттіңіз.\n"
+#~ "\n"
+#~ "Өзгертулер күшіне енбес бұрын өз поштаңызды %(user_email)s растауыңыз қажет. \n"
+#~ "\n"
+#~ "\n"
+#~ "Жәшігіңізді растау үшін келесі сілтемеге өтіңіз (немесе браузеріңізге көшіріп салыңыз):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Сіздің %(site_name)s тобыңыз"
+
+#, fuzzy
+#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+#~ msgstr "“%(user)s” қолданушысы сәтті тіркелді. Жүйеге кірмес бұрын есептік жазбаны мақұлдау қажет. Бұл жағдай орын алғанда біз сіздің электронды поштаңызға “%(email)s” хат жібереміз."
+
+#, fuzzy
+#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "“%(user)s” қолданушысы сәтті тіркелді. Жақында сіздің %(email)s электрондық хат жібереміз. Кіру үшін сіз электрондық поштаны растауыңыз керек."
+
+#, fuzzy
+#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "“%(user)s” қолданушысы сәтті тіркелді. Жақында сіздің %(email)s электрондық хат жібереміз. Кіру үшін сіз электрондық поштаны растауыңыз керек."
 
 #, fuzzy
 #~| msgid "Cosinnus Micropages"

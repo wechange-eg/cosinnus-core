@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 15:41+0200\n"
+"POT-Creation-Date: 2021-09-29 12:35+0200\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,6 +82,13 @@ msgstr "ToS-ը ընդունված է"
 
 msgid "ToS not Accepted"
 msgstr "ToS-ը ընդունված չէ"
+
+msgid "Email verified"
+msgstr ""
+
+#, fuzzy
+msgid "Email not verified"
+msgstr "ոչ ակտիվ"
 
 msgid "User Logged In"
 msgstr "Օգտատերը մուտք գործեց"
@@ -240,6 +247,9 @@ msgid "Restricted"
 msgstr ""
 
 msgid "Premium"
+msgstr ""
+
+msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
@@ -3393,6 +3403,28 @@ msgstr ""
 msgid "Enter your choices"
 msgstr ""
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address to continue using your account."
+msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
+
+msgid "You should already have received an email with a verification link we sent to your account's email address:"
+msgstr ""
+
+msgid "Click here to send the validation link again."
+msgstr ""
+
+msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address!"
+msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
+
+msgid "Close"
+msgstr "Փակել"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr "Հաղորդել վիրավորական բովանդակության մասին"
@@ -3411,9 +3443,6 @@ msgstr "Ուղարկել"
 
 msgid "Submitting..."
 msgstr "Տեղադրվում է."
-
-msgid "Close"
-msgstr "Փակել"
 
 msgid "Avatar will be deleted once you save."
 msgstr "Պահպանելուց հետո \"Ավատարը\" կջնջվի."
@@ -4641,74 +4670,6 @@ msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասց�
 
 #, python-format
 msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just registered an account at %(site_name)s. We're happy to see you!\n"
-"\n"
-"You will need to verify your email %(user_email)s before you can log in. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Thank you and see you soon!\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Ողջույն %(user_name)s,\n"
-"\n"
-"դուք գրանցվեցիք %(site_name)s -ում. Ուրախ ենք Ձեզ տեսնել!\n"
-"\n"
-"Դուք պետք է հաստատեք Ձեր էլ․հասցեն %(user_email)s նախքան կկարողանաք մուտք գործել։ \n"
-"\n"
-"\n"
-"Ձեր էլ.փոստի հասցեն հաստատելու համար անցեք հետևյալ հղումով (կամ բացեք այն ձեր բրաուզերում):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Շնորհակալություն, մինչ հանդիպում։\n"
-"\n"
-"Ձեր %(site_name)s թիմ"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just changed your email address at %(site_name)s.\n"
-"\n"
-"You will need to verify your email %(user_email)s before the changes take effect. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Ողջույն %(user_name)s,\n"
-"\n"
-"Դուք փոխեցիք ձեր էլ․ հասցեն %(site_name)s -ում.\n"
-"\n"
-"Փոփոխությունները ուժի մեջ մտնելուց առաջ անհրաժեշտ կլինի հաստատել ձեր էլ. հասցեն %(user_email)s: \n"
-"\n"
-"\n"
-"Ձեր էլ.փոստի հասցեն հաստատելու համար անցեք հետևյալ հղումով (կամ բացեք այն ձեր բրաուզերում):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Ձեր %(site_name)s թիմ"
-
-#, python-format
-msgid "Please verify your email address for %(site_name)s!"
-msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
-
-#, python-format
-msgid ""
 "User \"%(sender_name)s\" has accepted the invitation to join \"%(team_name)s\".\n"
 "\n"
 "You're receiving this email because you are an administrator of this team.\n"
@@ -4901,11 +4862,18 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "%(site_name)s- ին միանալու ձեր հայցը մերժվել է."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#| "\n"
+#| "Out administrators will review your request and approve your user account soon!\n"
+#| "\n"
+#| "Until then, with warm greetings, \n"
+#| "your %(site_name)s Team"
 msgid ""
 "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 "\n"
-"Out administrators will review your request and approve your user account soon!\n"
+"Our administrators will review your request and approve your user account soon!\n"
 "\n"
 "Until then, with warm greetings, \n"
 "your %(site_name)s Team"
@@ -5176,14 +5144,6 @@ msgstr "Լքել է համակարգը"
 msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
 msgstr ""
 
-#, fuzzy
-msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Անձնական էջը պետք է հաստատվի նախքան մուտքագրվելը: Երբ դա տեղի ունենա, մենք էլ․նամակ կուղարկենք ձեր \"%(email)s\" հասցեին."
-
-#, fuzzy
-msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Մենք շուտով կուղարկենք նամակ Ձեր նշված %(email)s\" էլ. հասցեյին: Մուտք գործելու համար անհրաժեշտ է հաստատել էլ. փոստի հասցեն."
-
 msgid "Password"
 msgstr "Գաղտնաբառ"
 
@@ -5213,6 +5173,10 @@ msgstr "Ներեցեք, բայց ձեր անձնական էջը կապված է 
 
 msgid "Please contact an administrator if this is an issue for you."
 msgstr "Խնդրում ենք կապվել ադմինիստրատորի հետ, եթե դա ձեզ համար խնդիր է ներկայացնում."
+
+#, fuzzy
+msgid "Sorry, we can't reset your password!"
+msgstr "Վերականգնել գաղտնաբառը"
 
 msgid "Password reset"
 msgstr "Գաղտնաբառը վերականգնվել է"
@@ -5478,6 +5442,9 @@ msgstr "Մուտքագրեք մեկ կամ մի քանի որոնման պայմ
 #, fuzzy
 msgid "CSV Downloads"
 msgstr "Ներբեռնել"
+
+msgid "HD space used by conferences"
+msgstr ""
 
 msgid "HD space used by groups"
 msgstr ""
@@ -6175,6 +6142,9 @@ msgstr "Հիմնական տվյալները"
 
 msgid "E-Mail"
 msgstr "Էլ․ հասցե"
+
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr ""
 
 msgid "Profile avatar"
 msgstr "Անձնական էջի ավատար"
@@ -7124,6 +7094,14 @@ msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորնե
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Միայն թիմի անդամները կարող են տեսնել ձեր կողմից հայցվող բովանդակությունը. Դիմեք ՝ այժմ անդամագրվելու համար!"
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address."
+msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
+
+msgid "Click here to send the verification link again."
+msgstr ""
+
 msgid "Team Description"
 msgstr "Թիմի նկարագրություն"
 
@@ -7550,9 +7528,9 @@ msgstr "Ձեր հաշիվը \"%(user)s\" հաջողությամբ գրանցվե
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Անձնական էջը պետք է հաստատվի նախքան մուտքագրվելը: Երբ դա տեղի ունենա, մենք էլ․նամակ կուղարկենք ձեր \"%(email)s\" հասցեին."
 
-#, fuzzy, python-format
-msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Մենք շուտով կուղարկենք նամակ Ձեր նշված %(email)s\" էլ. հասցեյին: Մուտք գործելու համար անհրաժեշտ է հաստատել էլ. փոստի հասցեն."
+#, python-format
+msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
+msgstr ""
 
 msgid "The invite token you have used does not exist!"
 msgstr "Ձեր կողմից օգտագործված հրավերի թոքենը գոյություն չունի!"
@@ -7603,6 +7581,9 @@ msgstr "Դուք մերժել եք %(username)s -ի միանալու հարցո�
 msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
 msgstr "Այն անձնական էջը, որը դուք փնտրում եք, գոյություն չունի: Ձեր գրանցումը հավանաբար արդեն մերժվել է կամ էլ․ հասցեի թոքենը լրացել է."
 
+msgid "The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!"
+msgstr ""
+
 msgid "The email for this account seems to already have been confirmed!"
 msgstr "Այս Էջի էլ․հասցեն, կարծես, արդեն հաստատված է!"
 
@@ -7612,13 +7593,41 @@ msgstr "Էլ.հասցեի հաստատման համար տրամադրած հղ�
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
 msgstr "Էլ․հասցեն, որը դուք փորձում եք հաստատել, արդեն հաստատվել է կամ պատկանում է մեկ այլ օգտատիրոջ!"
 
-#, python-format
-msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+#, fuzzy, python-format
+#| msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+msgid "Your email address %(email)s was successfully confirmed!"
 msgstr "Ձեր էլ. հասցեն %(email)s հաջողությամբ հաստատվեց։ Բարի գալուստ համայնք!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Ձեր էլ. հասցեն %(email)s հաջողությամբ հաստատվեց: Այնուամենայնիվ, ձեր Էջը դեռևս ակտիվ չէ և հարկավոր է, որպեսզի այն հաստատվի ադմինիստրատորի կողմից նախքան մուտք գործելը: Ակտիվացնելուն պես մենք ձեզ համապատասխան նամակ կուղարկենք!"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
+
+#, python-format
+msgid "You have just registered an account at %(site_name)s. We're happy to see you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "You have just changed your email address at %(site_name)s."
+msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
+
+msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
+msgstr ""
+
+msgid "Thank you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "The %(site_name)s team"
+msgid "Your %(site_name)s Team"
+msgstr "%(site_name)s թիմը"
+
+msgid "If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!"
+msgstr ""
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "Ձեր սեղմած բաժանորդագրման չեղարկման հղումը կարծես թե վավեր չէ!"
@@ -7626,6 +7635,9 @@ msgstr "Ձեր սեղմած բաժանորդագրման չեղարկման հղ
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr "Մենք հանեցինք ձեր էլ. հասցեն \"%(email)s\" մեր փոստային ցուցակից: Դուք այլևս էլ-նամակներ չեք ստանա մեզանից!"
+
+msgid "A new verification email has been sent."
+msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Բարի գալուստ! Ձեզ հրավիրվել են հետևյալ նախագծեր և խմբեր: Խնդրում ենք սեղմել ներքևի կոճակը ՝ յուրաքանչյուրի հրավերը ընդունելու կամ մերժելու համար!"
@@ -7676,6 +7688,80 @@ msgstr "Դուք ներկայումս %s- ի անդամ չեք: Եթե ցանկ�
 
 msgid "Your changes have been saved."
 msgstr "Ձեր փոփոխությունները պահպանվել են."
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before you can log in. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Thank you and see you soon!\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Ողջույն %(user_name)s,\n"
+#~ "\n"
+#~ "դուք գրանցվեցիք %(site_name)s -ում. Ուրախ ենք Ձեզ տեսնել!\n"
+#~ "\n"
+#~ "Դուք պետք է հաստատեք Ձեր էլ․հասցեն %(user_email)s նախքան կկարողանաք մուտք գործել։ \n"
+#~ "\n"
+#~ "\n"
+#~ "Ձեր էլ.փոստի հասցեն հաստատելու համար անցեք հետևյալ հղումով (կամ բացեք այն ձեր բրաուզերում):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Շնորհակալություն, մինչ հանդիպում։\n"
+#~ "\n"
+#~ "Ձեր %(site_name)s թիմ"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Ողջույն %(user_name)s,\n"
+#~ "\n"
+#~ "Դուք փոխեցիք ձեր էլ․ հասցեն %(site_name)s -ում.\n"
+#~ "\n"
+#~ "Փոփոխությունները ուժի մեջ մտնելուց առաջ անհրաժեշտ կլինի հաստատել ձեր էլ. հասցեն %(user_email)s: \n"
+#~ "\n"
+#~ "\n"
+#~ "Ձեր էլ.փոստի հասցեն հաստատելու համար անցեք հետևյալ հղումով (կամ բացեք այն ձեր բրաուզերում):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Ձեր %(site_name)s թիմ"
+
+#, fuzzy
+#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+#~ msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Անձնական էջը պետք է հաստատվի նախքան մուտքագրվելը: Երբ դա տեղի ունենա, մենք էլ․նամակ կուղարկենք ձեր \"%(email)s\" հասցեին."
+
+#, fuzzy
+#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Մենք շուտով կուղարկենք նամակ Ձեր նշված %(email)s\" էլ. հասցեյին: Մուտք գործելու համար անհրաժեշտ է հաստատել էլ. փոստի հասցեն."
+
+#, fuzzy
+#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Մենք շուտով կուղարկենք նամակ Ձեր նշված %(email)s\" էլ. հասցեյին: Մուտք գործելու համար անհրաժեշտ է հաստատել էլ. փոստի հասցեն."
 
 #, fuzzy
 #~| msgid "Cosinnus Micropages"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 15:41+0200\n"
+"POT-Creation-Date: 2021-09-29 12:35+0200\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,6 +82,13 @@ msgstr "ToS Qəbul edildi"
 
 msgid "ToS not Accepted"
 msgstr "ToS Qəbul edilmədi"
+
+msgid "Email verified"
+msgstr ""
+
+#, fuzzy
+msgid "Email not verified"
+msgstr "fəaliyyətsiz"
 
 msgid "User Logged In"
 msgstr "İstifadəçi daxil oldu"
@@ -240,6 +247,9 @@ msgid "Restricted"
 msgstr ""
 
 msgid "Premium"
+msgstr ""
+
+msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
@@ -3393,6 +3403,28 @@ msgstr ""
 msgid "Enter your choices"
 msgstr ""
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address to continue using your account."
+msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsiniz!"
+
+msgid "You should already have received an email with a verification link we sent to your account's email address:"
+msgstr ""
+
+msgid "Click here to send the validation link again."
+msgstr ""
+
+msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address!"
+msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsiniz!"
+
+msgid "Close"
+msgstr "Bağlayın"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr "Təhqiramiz məzmunu bildirin"
@@ -3411,9 +3443,6 @@ msgstr "Göndərin"
 
 msgid "Submitting..."
 msgstr "Göndərilir..."
-
-msgid "Close"
-msgstr "Bağlayın"
 
 msgid "Avatar will be deleted once you save."
 msgstr "Yaddaşda saxladığınız zaman Avatar silinəcəkdir."
@@ -4641,74 +4670,6 @@ msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsi
 
 #, python-format
 msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just registered an account at %(site_name)s. We're happy to see you!\n"
-"\n"
-"You will need to verify your email %(user_email)s before you can log in. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Thank you and see you soon!\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Salam %(user_name)s,\n"
-"\n"
-"Siz %(site_name)s saytında indicə bir hesab qeydiyyatdan keçirmisiniz. Siz görməyimizi şadıq!\n"
-"\n"
-"Daxili olmazdan əvvəl siz %(user_email)s e-poçtunuzu təsdiqləməli olacaqsınız. \n"
-"\n"
-"\n"
-"Zəhmət olmasa, e-poçt adresinizi təsdiqləmək üçün aşağıdakı linkə klikləyin (ya da linki brauzerinizə kopyalayın və yapışdırın):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Təşəkkür edirəm və tezliklə görüşmək üzrə!\n"
-"\n"
-"Sizin %(site_name)s Komandınız"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just changed your email address at %(site_name)s.\n"
-"\n"
-"You will need to verify your email %(user_email)s before the changes take effect. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Salam %(user_name)s,\n"
-"\n"
-"e-poçt adresinizi %(site_name)s saytında dəyişdirmisiniz .\n"
-"\n"
-"Dəyişikliklərin qüvvəyə minməzdən əvvəl %(user_email)s elektron poçtunuzu təsdiqləməlisiniz. \n"
-"\n"
-"\n"
-"Lütfən, e-poçt adresinizi təsdiqləmək üçün aşağıdakı linki vurun (və ya bağlantını brauzerinizə kopyalayın və yapışdırın):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Sizin %(site_name)s Komandınız"
-
-#, python-format
-msgid "Please verify your email address for %(site_name)s!"
-msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsiniz!"
-
-#, python-format
-msgid ""
 "User \"%(sender_name)s\" has accepted the invitation to join \"%(team_name)s\".\n"
 "\n"
 "You're receiving this email because you are an administrator of this team.\n"
@@ -4903,11 +4864,18 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "%(site_name)s saytına qoşulmaq istəyiniz rədd edildi."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#| "\n"
+#| "Out administrators will review your request and approve your user account soon!\n"
+#| "\n"
+#| "Until then, with warm greetings, \n"
+#| "your %(site_name)s Team"
 msgid ""
 "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 "\n"
-"Out administrators will review your request and approve your user account soon!\n"
+"Our administrators will review your request and approve your user account soon!\n"
 "\n"
 "Until then, with warm greetings, \n"
 "your %(site_name)s Team"
@@ -5178,14 +5146,6 @@ msgstr "Çıxış edin"
 msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
 msgstr ""
 
-#, fuzzy
-msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-msgstr "İstifadəçi \"%(user)s\" uğurla qeydiyyata alındı. Giriş etməzdən əvvəl hesab təsdiqlənməlidir. Bu baş verdikdə \"%(email)s\" ünvanınıza bir e-poçt göndərəcəyik."
-
-#, fuzzy
-msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "İstifadəçi \"%(user)s\" uğurla qeydiyyata alındı. Biz tezliklə \"%(email)s\" ünvanınıza bir e-poçt göndərəcəyik. Girişdən əvvəl e-poçt adresinizi təsdiqləməlisiniz."
-
 msgid "Password"
 msgstr "Şifrə"
 
@@ -5215,6 +5175,10 @@ msgstr "Bağışlayın, ancaq hesabınız inteqrasiya edilmiş bir Portal ilə �
 
 msgid "Please contact an administrator if this is an issue for you."
 msgstr "Əgər bir problem yaranarsa, zəhmət olmasa admin ilə əlaqə saxlayın."
+
+#, fuzzy
+msgid "Sorry, we can't reset your password!"
+msgstr "Şifrə sıfırlama"
 
 msgid "Password reset"
 msgstr "Şifrə sıfırlama"
@@ -5480,6 +5444,9 @@ msgstr "Bir və ya daha çox axtarış terminini daxil edin və ya axtarış ü�
 #, fuzzy
 msgid "CSV Downloads"
 msgstr "Endirin"
+
+msgid "HD space used by conferences"
+msgstr ""
 
 msgid "HD space used by groups"
 msgstr ""
@@ -6177,6 +6144,9 @@ msgstr "Əsas məlumatlar"
 
 msgid "E-Mail"
 msgstr "E-Poçt"
+
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr ""
 
 msgid "Profile avatar"
 msgstr "Profil avatarı"
@@ -7126,6 +7096,14 @@ msgstr "Bağışlayın, yalnız portal adminləri Qrupları ləğv edə bilər! 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Tələb etdiyiniz məzmunu yalnız komanda üzvləri görə bilər. İndi üzv olmaq üçün müraciət edin!"
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address."
+msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsiniz!"
+
+msgid "Click here to send the verification link again."
+msgstr ""
+
 msgid "Team Description"
 msgstr "Komandanın Təsviri"
 
@@ -7552,9 +7530,9 @@ msgstr "\"%(user)s\" hesabınız uğurla qeydiyyatdan keçdi. İcmaya xoş gəld
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgstr "İstifadəçi \"%(user)s\" uğurla qeydiyyata alındı. Giriş etməzdən əvvəl hesab təsdiqlənməlidir. Bu baş verdikdə \"%(email)s\" ünvanınıza bir e-poçt göndərəcəyik."
 
-#, fuzzy, python-format
-msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "İstifadəçi \"%(user)s\" uğurla qeydiyyata alındı. Biz tezliklə \"%(email)s\" ünvanınıza bir e-poçt göndərəcəyik. Girişdən əvvəl e-poçt adresinizi təsdiqləməlisiniz."
+#, python-format
+msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
+msgstr ""
 
 msgid "The invite token you have used does not exist!"
 msgstr "İstifadə etdiyiniz dəvət markeri mövcud deyil!"
@@ -7605,6 +7583,9 @@ msgstr "%(username)s (%(email)s) qoşulma tələbini rədd etdiniz! Onları məl
 msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
 msgstr "Axtardığınız istifadəçi hesabı mövcud deyil! Yəqin ki, qeydiyyatınız rədd edildi və ya e-poçt markerinin vaxtı keçib."
 
+msgid "The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!"
+msgstr ""
+
 msgid "The email for this account seems to already have been confirmed!"
 msgstr "Bu hesab üçün e-poçt artıq təsdiqlənmiş kimi görünür!"
 
@@ -7614,13 +7595,41 @@ msgstr "E-poçt təsdiqləməsi üçün təqdim etdiyiniz link artıq etibarlı 
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
 msgstr "Təsdiqləməyə çalışdığınız e-poçt artıq təsdiqlənib və ya başqa bir istifadəçiyə məxsusdur!"
 
-#, python-format
-msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+#, fuzzy, python-format
+#| msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+msgid "Your email address %(email)s was successfully confirmed!"
 msgstr "%(email)s e-poçt adresiniz uğurla təsdiqləndi! İcmaya xoş gəldiniz!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "%(email)s e-poçt adresiniz uğurla təsdiqləndi! Bununla birlikdə, hesabınız hələ aktiv deyil və girmədən əvvəl admin tərəfindən təsdiqlənməlidir. Bu baş verən kimi sizə bir e-poçt göndərəcəyik!"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsiniz!"
+
+#, python-format
+msgid "You have just registered an account at %(site_name)s. We're happy to see you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "You have just changed your email address at %(site_name)s."
+msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsiniz!"
+
+msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
+msgstr ""
+
+msgid "Thank you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "The %(site_name)s team"
+msgid "Your %(site_name)s Team"
+msgstr "%(site_name)s komandası"
+
+msgid "If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!"
+msgstr ""
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "Kliklədiyiniz qeyri-abunə linki etibarlı görünmür!"
@@ -7628,6 +7637,9 @@ msgstr "Kliklədiyiniz qeyri-abunə linki etibarlı görünmür!"
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr "\"%(email)s\" e-poçtunuzu poçt siyahısından çıxartdıq. Bizdən daha bir e-poçt almayacaqsınız!"
+
+msgid "A new verification email has been sent."
+msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Xoş gəldiniz! Sizi aşağıdakı layihələrə və qruplara dəvətlisiniz. Lütfən, hər bir element üçün dəvəti qəbul etmək və ya rədd etmək üçün açılan düyməni klikləyin!"
@@ -7678,6 +7690,80 @@ msgstr "Hal-hazırda %s üzvü deyilsiniz! Əgər arzu edirsinizsə, Siz aşağ�
 
 msgid "Your changes have been saved."
 msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before you can log in. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Thank you and see you soon!\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Salam %(user_name)s,\n"
+#~ "\n"
+#~ "Siz %(site_name)s saytında indicə bir hesab qeydiyyatdan keçirmisiniz. Siz görməyimizi şadıq!\n"
+#~ "\n"
+#~ "Daxili olmazdan əvvəl siz %(user_email)s e-poçtunuzu təsdiqləməli olacaqsınız. \n"
+#~ "\n"
+#~ "\n"
+#~ "Zəhmət olmasa, e-poçt adresinizi təsdiqləmək üçün aşağıdakı linkə klikləyin (ya da linki brauzerinizə kopyalayın və yapışdırın):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Təşəkkür edirəm və tezliklə görüşmək üzrə!\n"
+#~ "\n"
+#~ "Sizin %(site_name)s Komandınız"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Salam %(user_name)s,\n"
+#~ "\n"
+#~ "e-poçt adresinizi %(site_name)s saytında dəyişdirmisiniz .\n"
+#~ "\n"
+#~ "Dəyişikliklərin qüvvəyə minməzdən əvvəl %(user_email)s elektron poçtunuzu təsdiqləməlisiniz. \n"
+#~ "\n"
+#~ "\n"
+#~ "Lütfən, e-poçt adresinizi təsdiqləmək üçün aşağıdakı linki vurun (və ya bağlantını brauzerinizə kopyalayın və yapışdırın):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Sizin %(site_name)s Komandınız"
+
+#, fuzzy
+#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+#~ msgstr "İstifadəçi \"%(user)s\" uğurla qeydiyyata alındı. Giriş etməzdən əvvəl hesab təsdiqlənməlidir. Bu baş verdikdə \"%(email)s\" ünvanınıza bir e-poçt göndərəcəyik."
+
+#, fuzzy
+#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "İstifadəçi \"%(user)s\" uğurla qeydiyyata alındı. Biz tezliklə \"%(email)s\" ünvanınıza bir e-poçt göndərəcəyik. Girişdən əvvəl e-poçt adresinizi təsdiqləməlisiniz."
+
+#, fuzzy
+#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "İstifadəçi \"%(user)s\" uğurla qeydiyyata alındı. Biz tezliklə \"%(email)s\" ünvanınıza bir e-poçt göndərəcəyik. Girişdən əvvəl e-poçt adresinizi təsdiqləməlisiniz."
 
 #, fuzzy
 #~| msgid "Cosinnus Micropages"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 15:41+0200\n"
+"POT-Creation-Date: 2021-09-29 12:35+0200\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,6 +82,13 @@ msgstr "ToS geaccepteerd"
 
 msgid "ToS not Accepted"
 msgstr "ToS niet geaccepteerd"
+
+msgid "Email verified"
+msgstr ""
+
+#, fuzzy
+msgid "Email not verified"
+msgstr "(Inactief)"
 
 msgid "User Logged In"
 msgstr "Gebruiker ingelogd"
@@ -241,6 +248,9 @@ msgstr "Beperkt"
 
 msgid "Premium"
 msgstr "Premium"
+
+msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
+msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Alleen geregistreerde leden kunnen deze inhoud zien! Log in of maak nu een account aan!"
@@ -3382,6 +3392,28 @@ msgstr ""
 msgid "Enter your choices"
 msgstr ""
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address to continue using your account."
+msgstr "Controleer je e-mailadres voor %(site_name)s!"
+
+msgid "You should already have received an email with a verification link we sent to your account's email address:"
+msgstr ""
+
+msgid "Click here to send the validation link again."
+msgstr ""
+
+msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address!"
+msgstr "Controleer je e-mailadres voor %(site_name)s!"
+
+msgid "Close"
+msgstr "Sluiten"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr "Aanstootgevende inhoud melden"
@@ -3400,9 +3432,6 @@ msgstr "Versturen"
 
 msgid "Submitting..."
 msgstr "Indienen…"
-
-msgid "Close"
-msgstr "Sluiten"
 
 msgid "Avatar will be deleted once you save."
 msgstr "Avatar wordt verwijderd na het opslaan."
@@ -4628,74 +4657,6 @@ msgstr "Controleer je e-mailadres voor %(site_name)s!"
 
 #, python-format
 msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just registered an account at %(site_name)s. We're happy to see you!\n"
-"\n"
-"You will need to verify your email %(user_email)s before you can log in. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Thank you and see you soon!\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Hallo %(user_name)s,\n"
-"\n"
-"Je hebt zojuist een account geregistreerd op %(site_name)s. We zijn blij om je te zien!\n"
-"\n"
-"Je moet je e-mailadres %(user_email)s verifiëren voordat je kunt inloggen. \n"
-"\n"
-"\n"
-"Klik op de volgende link om je e-mailadres te verifiëren (of kopieer en plak het in je browser):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Bedankt en tot snel!\n"
-"\n"
-"Je %(site_name)s team"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just changed your email address at %(site_name)s.\n"
-"\n"
-"You will need to verify your email %(user_email)s before the changes take effect. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Hallo %(user_name)s,\n"
-"\n"
-"Zojuist heb je je e-mailadres veranderd op %(site_name)s.\n"
-"\n"
-"Je zult je e-mailadres %(user_email)s moeten verifiëren voordat de veranderingen plaats kunnen vinden. \n"
-"\n"
-"\n"
-"Klik op de volgende link om je e-mailadres te verifiëren:\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Je %(site_name)s team"
-
-#, python-format
-msgid "Please verify your email address for %(site_name)s!"
-msgstr "Controleer je e-mailadres voor %(site_name)s!"
-
-#, python-format
-msgid ""
 "User \"%(sender_name)s\" has accepted the invitation to join \"%(team_name)s\".\n"
 "\n"
 "You're receiving this email because you are an administrator of this team.\n"
@@ -4901,11 +4862,18 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "Je verzoek om lid te worden van %(site_name)s is geweigerd."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#| "\n"
+#| "Out administrators will review your request and approve your user account soon!\n"
+#| "\n"
+#| "Until then, with warm greetings, \n"
+#| "your %(site_name)s Team"
 msgid ""
 "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 "\n"
-"Out administrators will review your request and approve your user account soon!\n"
+"Our administrators will review your request and approve your user account soon!\n"
 "\n"
 "Until then, with warm greetings, \n"
 "your %(site_name)s Team"
@@ -5176,12 +5144,6 @@ msgstr "Uitgelogd"
 msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
 msgstr "Om je %(portal_name)s account te gebruiken om in te loggen op een ander platform moet je eerst inloggen op %(portal_name)s."
 
-msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-msgstr "Je account is succesvol geregistreerd. De account moet worden goedgekeurd voordat je kunt inloggen. We sturen een e-mail als het zover is."
-
-msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "Je account is succesvol geregistreerd. We sturen binnenkort een e-mail ter activering. Je moet je e-mailadres bevestigen voordat je kunt inloggen."
-
 msgid "Password"
 msgstr "Wachtwoord"
 
@@ -5211,6 +5173,10 @@ msgstr "Sorry, je account is gekoppeld aan een geïntegreerd portal! Dit beteken
 
 msgid "Please contact an administrator if this is an issue for you."
 msgstr "Neem contact op met een beheerder als dit een probleem voor je is."
+
+#, fuzzy
+msgid "Sorry, we can't reset your password!"
+msgstr "Wachtwoord resetten"
 
 msgid "Password reset"
 msgstr "Wachtwoord resetten"
@@ -5474,6 +5440,11 @@ msgstr "Voer een of meer zoektermen in of selecteer een onderwerp om te zoeken."
 
 msgid "CSV Downloads"
 msgstr "CSV downloads"
+
+#, fuzzy
+#| msgid "HD space used by projects"
+msgid "HD space used by conferences"
+msgstr "HD space gebruikt door projecten"
 
 msgid "HD space used by groups"
 msgstr "HD space gebruikt door groepen"
@@ -6164,6 +6135,9 @@ msgstr "Basisgegevens"
 
 msgid "E-Mail"
 msgstr "E-mailadres"
+
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr ""
 
 msgid "Profile avatar"
 msgstr "Profiel avatar"
@@ -7108,6 +7082,14 @@ msgstr "Sorry, alleen portalbeheerders kunnen groepen deactiveren! Je kunt een b
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Alleen teamleden kunnen deze inhoud zien. Meld je nu aan om lid te worden!"
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address."
+msgstr "Controleer je e-mailadres voor %(site_name)s!"
+
+msgid "Click here to send the verification link again."
+msgstr ""
+
 msgid "Team Description"
 msgstr "Team beschrijving"
 
@@ -7530,8 +7512,8 @@ msgid "User \"%(user)s\" was registered successfully. The account will need to b
 msgstr "Gebruiker “%(user)s” is succesvol geregistreerd. Het account moet worden goedgekeurd voordat je kunt inloggen. We sturen een e-mail naar je adres “%(email)s” als dit gebeurt."
 
 #, python-format
-msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "Gebruiker \"%(email)s\" is succesvol geregistreerd. We sturen binnen enkele minuten een e-mail. Je moet het e-mailadres bevestigen voordat je kunt inloggen."
+msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
+msgstr ""
 
 msgid "The invite token you have used does not exist!"
 msgstr "Het uitnodigingstoken dat je hebt gebruikt bestaat niet!"
@@ -7582,6 +7564,9 @@ msgstr "Je hebt het aanmeldingsverzoek van %(username)s (%(email)s) geweigerd! E
 msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
 msgstr "Het gebruikersaccount dat je zocht bestaat niet! Je registratie is waarschijnlijk al geweigerd of het e-mail-token is verlopen."
 
+msgid "The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!"
+msgstr ""
+
 msgid "The email for this account seems to already have been confirmed!"
 msgstr "De e-mail voor dit account lijkt al te zijn bevestigd!"
 
@@ -7591,13 +7576,41 @@ msgstr "De link die je hebt opgegeven voor de e-mailbevestiging is niet langer g
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
 msgstr "Het e-mailadres dat je probeert te bevestigen, is al bevestigd of is van een andere gebruiker!"
 
-#, python-format
-msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+#, fuzzy, python-format
+#| msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+msgid "Your email address %(email)s was successfully confirmed!"
 msgstr "Je e-mailadres %(email)s) is succesvol bevestigd! Welkom bij de community!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Je e-mailadres %(email)s is succesvol bevestigd! Je account is echter nog niet actief en moet door een beheerder worden goedgekeurd voordat je kunt inloggen. We sturen je een e-mail zodra dat gebeurt!"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr "Controleer je e-mailadres voor %(site_name)s!"
+
+#, python-format
+msgid "You have just registered an account at %(site_name)s. We're happy to see you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "You have just changed your email address at %(site_name)s."
+msgstr "Controleer je e-mailadres voor %(site_name)s!"
+
+msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
+msgstr ""
+
+msgid "Thank you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "The %(site_name)s team"
+msgid "Your %(site_name)s Team"
+msgstr "Het %(site_name)s team"
+
+msgid "If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!"
+msgstr ""
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "De afmeld-link waarop je hebt geklikt, lijkt niet geldig te zijn!"
@@ -7605,6 +7618,9 @@ msgstr "De afmeld-link waarop je hebt geklikt, lijkt niet geldig te zijn!"
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr "We hebben je e-mail “%(email)s” van onze mailinglijst afgemeld. Je ontvangt geen e-mails meer van ons!"
+
+msgid "A new verification email has been sent."
+msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Welkom! Je bent uitgenodigd voor de volgende projecten en groepen. Klik op de drop-down knop om op de uitnodigingen te antwoorden!"
@@ -7655,6 +7671,77 @@ msgstr "Je bent momenteel geen lid van %s! Als je wilt, kun je hieronder het lid
 
 msgid "Your changes have been saved."
 msgstr "Je wijzigingen zijn opgeslagen."
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before you can log in. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Thank you and see you soon!\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Hallo %(user_name)s,\n"
+#~ "\n"
+#~ "Je hebt zojuist een account geregistreerd op %(site_name)s. We zijn blij om je te zien!\n"
+#~ "\n"
+#~ "Je moet je e-mailadres %(user_email)s verifiëren voordat je kunt inloggen. \n"
+#~ "\n"
+#~ "\n"
+#~ "Klik op de volgende link om je e-mailadres te verifiëren (of kopieer en plak het in je browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Bedankt en tot snel!\n"
+#~ "\n"
+#~ "Je %(site_name)s team"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Hallo %(user_name)s,\n"
+#~ "\n"
+#~ "Zojuist heb je je e-mailadres veranderd op %(site_name)s.\n"
+#~ "\n"
+#~ "Je zult je e-mailadres %(user_email)s moeten verifiëren voordat de veranderingen plaats kunnen vinden. \n"
+#~ "\n"
+#~ "\n"
+#~ "Klik op de volgende link om je e-mailadres te verifiëren:\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Je %(site_name)s team"
+
+#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+#~ msgstr "Je account is succesvol geregistreerd. De account moet worden goedgekeurd voordat je kunt inloggen. We sturen een e-mail als het zover is."
+
+#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "Je account is succesvol geregistreerd. We sturen binnenkort een e-mail ter activering. Je moet je e-mailadres bevestigen voordat je kunt inloggen."
+
+#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "Gebruiker \"%(email)s\" is succesvol geregistreerd. We sturen binnen enkele minuten een e-mail. Je moet het e-mailadres bevestigen voordat je kunt inloggen."
 
 #, fuzzy
 #~| msgid "Cosinnus Micropages"

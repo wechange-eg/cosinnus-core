@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 15:41+0200\n"
+"POT-Creation-Date: 2021-09-29 12:35+0200\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,6 +83,14 @@ msgstr "Podmínky služby (ToS) přijaty"
 
 msgid "ToS not Accepted"
 msgstr "Podmínky služby (ToS) nepřijaty"
+
+msgid "Email verified"
+msgstr ""
+
+#, fuzzy
+#| msgid "not specified"
+msgid "Email not verified"
+msgstr "nespecifikováno"
 
 msgid "User Logged In"
 msgstr ""
@@ -243,6 +251,9 @@ msgstr "S omezením"
 
 msgid "Premium"
 msgstr "Premium"
+
+msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
+msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Vámi vybraný obsah mohou zobrazit pouze registrovaní členové! Přihlaste se nebo si vytvořte účet hned teď!"
@@ -3319,6 +3330,28 @@ msgstr "Vložte své výběry jako hodnoty oddělené středníkem"
 msgid "Enter your choices"
 msgstr "Vložte své výběry"
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address to continue using your account."
+msgstr "Ověřte prosím svou e-mailovou adresu pro %(site_name)s!"
+
+msgid "You should already have received an email with a verification link we sent to your account's email address:"
+msgstr ""
+
+msgid "Click here to send the validation link again."
+msgstr ""
+
+msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address!"
+msgstr "Ověřte prosím svou e-mailovou adresu pro %(site_name)s!"
+
+msgid "Close"
+msgstr "Zavřít"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr "Nahlásit nevhodný obsah"
@@ -3337,9 +3370,6 @@ msgstr "Poslat"
 
 msgid "Submitting..."
 msgstr "Odesílání..."
-
-msgid "Close"
-msgstr "Zavřít"
 
 msgid "Avatar will be deleted once you save."
 msgstr "Avatar bude po uložení smazán."
@@ -4542,74 +4572,6 @@ msgstr "Vytvořte, prosím, své počáteční heslo pro %(site_name)s!"
 
 #, python-format
 msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just registered an account at %(site_name)s. We're happy to see you!\n"
-"\n"
-"You will need to verify your email %(user_email)s before you can log in. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Thank you and see you soon!\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Ahoj %(user_name)s,\n"
-"\n"
-"právě jste zaregistrovali účet na %(site_name)s. Jsme rádi, že vás poznáváme!\n"
-"\n"
-"Než se budete moci přihlásit, budete muset ověřit svůj e-mail %(user_email)s.\n"
-"\n"
-"\n"
-"Kliknutím na následující odkaz ověřte svou e-mailovou adresu (nebo ji zkopírujte a vložte do svého prohlížeče):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Děkuji a brzy se uvidíme!\n"
-"\n"
-"Váš tým %(site_name)s"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just changed your email address at %(site_name)s.\n"
-"\n"
-"You will need to verify your email %(user_email)s before the changes take effect. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Ahoj %(user_name)s,\n"
-"\n"
-"právě jste změnili svou e-mailovou adresu na %(site_name)s.\n"
-"\n"
-"Než se změny projeví, budete muset ověřit svůj e-mail %(user_email)s.\n"
-"\n"
-"\n"
-"Kliknutím na následující odkaz ověřte svou e-mailovou adresu (nebo ji zkopírujte a vložte do svého prohlížeče):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Váš tým %(site_name)s"
-
-#, python-format
-msgid "Please verify your email address for %(site_name)s!"
-msgstr "Ověřte prosím svou e-mailovou adresu pro %(site_name)s!"
-
-#, python-format
-msgid ""
 "User \"%(sender_name)s\" has accepted the invitation to join \"%(team_name)s\".\n"
 "\n"
 "You're receiving this email because you are an administrator of this team.\n"
@@ -4812,11 +4774,18 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "Vaše žádost o připojení k webu %(site_name)s byla zamítnuta."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#| "\n"
+#| "Out administrators will review your request and approve your user account soon!\n"
+#| "\n"
+#| "Until then, with warm greetings, \n"
+#| "your %(site_name)s Team"
 msgid ""
 "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 "\n"
-"Out administrators will review your request and approve your user account soon!\n"
+"Our administrators will review your request and approve your user account soon!\n"
 "\n"
 "Until then, with warm greetings, \n"
 "your %(site_name)s Team"
@@ -5087,12 +5056,6 @@ msgstr "Odhlášeno"
 msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
 msgstr "Abyste mohli použít svůj účet %(portal_name)s k přihlášení na jinou platformu, musíte se nejprve přihlásit na %(portal_name)s."
 
-msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-msgstr "Váš účet byl úspěšně zaregistrován. Než se budete moci přihlásit, bude muset účet schválit administrátor. Až k tomu dojde, zašleme vám e-mail na vaši adresu."
-
-msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "Váš účet byl úspěšně zaregistrován. Za pár minut od nás obdržíte aktivační e-mail. Než se budete moci přihlásit, musíte potvrdit e-mailovou adresu."
-
 msgid "Password"
 msgstr "Heslo"
 
@@ -5122,6 +5085,11 @@ msgstr "Litujeme, ale váš účet je spojen s integrovaným portálem! To zname
 
 msgid "Please contact an administrator if this is an issue for you."
 msgstr "Pokud s tím máte problém, kontaktujte správce."
+
+#, fuzzy
+#| msgid "Set your password"
+msgid "Sorry, we can't reset your password!"
+msgstr "Nastavte své heslo"
 
 msgid "Password reset"
 msgstr "Obnovení hesla"
@@ -5376,6 +5344,11 @@ msgstr "Zadejte jeden nebo více hledaných výrazů nebo vyberte hledané téma
 
 msgid "CSV Downloads"
 msgstr "Stahování CSV"
+
+#, fuzzy
+#| msgid "HD space used by projects"
+msgid "HD space used by conferences"
+msgstr "HD prostor využívaný projekty"
 
 msgid "HD space used by groups"
 msgstr "HD prostor využívaný skupinami"
@@ -6052,6 +6025,9 @@ msgstr "Základní údaje"
 
 msgid "E-Mail"
 msgstr "E-mail"
+
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr ""
 
 msgid "Profile avatar"
 msgstr "Avatar profilu"
@@ -6939,6 +6915,14 @@ msgstr "Litujeme, pouze administrátoři portálu mohou deaktivovat konference! 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Vámi vybraný obsah mohou zobrazit pouze účastníci konference. Podejte si žádost o členství nyní!"
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address."
+msgstr "Ověřte prosím svou e-mailovou adresu pro %(site_name)s!"
+
+msgid "Click here to send the verification link again."
+msgstr ""
+
 msgid "Team Description"
 msgstr "Popis týmu"
 
@@ -7357,8 +7341,8 @@ msgid "User \"%(user)s\" was registered successfully. The account will need to b
 msgstr "Uživatel \"%(user)s\" byl úspěšně zaregistrován. Než se budete moci přihlásit, bude třeba účet schválit. Až k tomu dojde, zašleme vám e-mail na vaši adresu \"%(email)s\"."
 
 #, python-format
-msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "Uživatel \"%(email)s\" byl úspěšně zaregistrován. Za pár minut od nás obdržíte aktivační e-mail. Než se budete moci přihlásit, musíte potvrdit e-mailovou adresu."
+msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
+msgstr ""
 
 msgid "The invite token you have used does not exist!"
 msgstr "Použitý token pozvánky neexistuje!"
@@ -7409,6 +7393,9 @@ msgstr "Odmítli jste žádost o připojení uživatele %(username)s (%(email)s)
 msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
 msgstr "Hledaný uživatelský účet neexistuje! Vaše registrace byla pravděpodobně již zamítnuta nebo vypršela platnost e-mailového tokenu."
 
+msgid "The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!"
+msgstr ""
+
 msgid "The email for this account seems to already have been confirmed!"
 msgstr "Zdá se, že e-mail pro tento účet již byl potvrzen!"
 
@@ -7418,13 +7405,41 @@ msgstr "Odkaz, který jste zadali pro potvrzení e-mailem, již není platný!"
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
 msgstr "E-mail, který se pokoušíte potvrdit, již byl potvrzen nebo patří jinému uživateli!"
 
-#, python-format
-msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+#, fuzzy, python-format
+#| msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+msgid "Your email address %(email)s was successfully confirmed!"
 msgstr "Vaše e-mailová adresa %(email)s byla úspěšně potvrzena! Vítejte v komunitě!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Vaše e-mailová adresa %(email)s byla úspěšně potvrzena! Váš účet však ještě není aktivní a před přihlášením bude muset být schválen správcem. Jakmile k tomu dojde, zašleme vám e-mail!"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr "Ověřte prosím svou e-mailovou adresu pro %(site_name)s!"
+
+#, python-format
+msgid "You have just registered an account at %(site_name)s. We're happy to see you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "You have just changed your email address at %(site_name)s."
+msgstr "Ověřte prosím svou e-mailovou adresu pro %(site_name)s!"
+
+msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
+msgstr ""
+
+msgid "Thank you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "The %(site_name)s team"
+msgid "Your %(site_name)s Team"
+msgstr "Tým %(site_name)s"
+
+msgid "If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!"
+msgstr ""
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "Zdá se, že odkaz na odhlášení, který jste klikli, není platný!"
@@ -7432,6 +7447,9 @@ msgstr "Zdá se, že odkaz na odhlášení, který jste klikli, není platný!"
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr "Z vašeho e-mailového seznamu jsme odhlásili váš e-mail \"%(email)s\". Už od nás nebudete dostávat žádné e-maily!"
+
+msgid "A new verification email has been sent."
+msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Vítejte! Byli jste pozváni do následujících projektů a skupin. Kliknutím na rozbalovací tlačítko přijměte nebo odmítněte pozvání pro každý z nich!"
@@ -7478,6 +7496,77 @@ msgstr "Momentálně nejste členem %s! Pokud si přejete, můžete požádat o 
 
 msgid "Your changes have been saved."
 msgstr "Vaše změny byly uloženy."
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before you can log in. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Thank you and see you soon!\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Ahoj %(user_name)s,\n"
+#~ "\n"
+#~ "právě jste zaregistrovali účet na %(site_name)s. Jsme rádi, že vás poznáváme!\n"
+#~ "\n"
+#~ "Než se budete moci přihlásit, budete muset ověřit svůj e-mail %(user_email)s.\n"
+#~ "\n"
+#~ "\n"
+#~ "Kliknutím na následující odkaz ověřte svou e-mailovou adresu (nebo ji zkopírujte a vložte do svého prohlížeče):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Děkuji a brzy se uvidíme!\n"
+#~ "\n"
+#~ "Váš tým %(site_name)s"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Ahoj %(user_name)s,\n"
+#~ "\n"
+#~ "právě jste změnili svou e-mailovou adresu na %(site_name)s.\n"
+#~ "\n"
+#~ "Než se změny projeví, budete muset ověřit svůj e-mail %(user_email)s.\n"
+#~ "\n"
+#~ "\n"
+#~ "Kliknutím na následující odkaz ověřte svou e-mailovou adresu (nebo ji zkopírujte a vložte do svého prohlížeče):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Váš tým %(site_name)s"
+
+#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+#~ msgstr "Váš účet byl úspěšně zaregistrován. Než se budete moci přihlásit, bude muset účet schválit administrátor. Až k tomu dojde, zašleme vám e-mail na vaši adresu."
+
+#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "Váš účet byl úspěšně zaregistrován. Za pár minut od nás obdržíte aktivační e-mail. Než se budete moci přihlásit, musíte potvrdit e-mailovou adresu."
+
+#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "Uživatel \"%(email)s\" byl úspěšně zaregistrován. Za pár minut od nás obdržíte aktivační e-mail. Než se budete moci přihlásit, musíte potvrdit e-mailovou adresu."
 
 #, fuzzy
 #~| msgid "Cosinnus Micropages"
