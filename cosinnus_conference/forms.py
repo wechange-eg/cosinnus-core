@@ -6,17 +6,20 @@ from cosinnus_conference.utils import get_initial_template
 from cosinnus.models.conference import ParticipationManagement
 from cosinnus.models.conference import CosinnusConferenceApplication
 from cosinnus.models.conference import APPLICATION_STATES_VISIBLE
+from cosinnus.utils.html import render_html_with_variables
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from django.forms.widgets import SelectMultiple
 from django.forms import formset_factory, modelformset_factory
 from django.forms import BaseFormSet
+from django.template.defaultfilters import date
 from django_select2.widgets import Select2MultipleWidget
 from cosinnus.forms.widgets import SplitHiddenDateWidget
 
 from cosinnus.utils.validators import validate_file_infection,\
     CleanFromToDateFieldsMixin
+from uritemplate.api import variables
 
 
 class ConferenceRemindersForm(forms.ModelForm):
@@ -74,9 +77,21 @@ class ConferenceConfirmSendRemindersForm(forms.ModelForm):
         fields = ('extra_fields', )
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
         self.fields['subject'].widget.attrs['readonly'] = True
         self.fields['content'].widget.attrs['readonly'] = True
+
+    def get_variables(self):
+        return {
+            'name': self.instance.name,
+            'from_date': date(
+                timezone.localtime(self.instance.from_date),
+                'SHORT_DATETIME_FORMAT'),
+            'to_date': date(
+                timezone.localtime(self.instance.to_date),
+                'SHORT_DATETIME_FORMAT'),
+        }
 
     def get_initial_for_field(self, field, field_name):
         extra_fields = {}
@@ -84,8 +99,10 @@ class ConferenceConfirmSendRemindersForm(forms.ModelForm):
             extra_fields = self.instance.extra_fields
         if field_name == 'subject' or field_name == 'content':
             field_name = 'send_immediately_{}'.format(field_name)
-            return extra_fields.get('reminder_{}'.format(field_name),
-                                    get_initial_template(field_name))
+            field_value = extra_fields.get('reminder_{}'.format(field_name),
+                                           get_initial_template(field_name))
+            return render_html_with_variables(
+                self.user, field_value, self.get_variables())
 
     def save(self, commit=True):
         now = timezone.now()
