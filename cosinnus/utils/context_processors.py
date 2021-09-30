@@ -20,6 +20,9 @@ from cosinnus.utils.user import get_user_tos_accepted_date,\
 from cosinnus.models.managed_tags import CosinnusManagedTag
 from cosinnus.trans.group import get_group_trans_by_type
 from cosinnus.utils.permissions import check_user_verified
+from datetime import timedelta
+from django.utils import timezone
+from django.template.defaultfilters import date
 logger = logging.getLogger('cosinnus')
 
 
@@ -82,9 +85,9 @@ def cosinnus(request):
             #from cosinnus_message.rocket_chat import RocketChatConnection
             #unread_count = RocketChatConnection().unread_messages(user)
         else:
-            from cosinnus_stream.models import Stream
+            from cosinnus_stream.models import Stream # noqa
             stream_unseen_count = Stream.objects.my_stream_unread_count(user)
-            from postman.models import Message
+            from postman.models import Message # noqa
             unread_count = Message.objects.inbox_unread_count(user)
     else:
         unread_count = 0
@@ -160,6 +163,11 @@ def email_verified(request):
         url = reverse('cosinnus:resend-email-validation')
         url = '{}?next={}'.format(url, request.path)
         msg = _('Please verify your email address.')
+        # show ultimatum date until the nag-popup begins
+        if SETTINGS.COSINNUS_USER_SHOW_EMAIL_VERIFIED_POPUP_AFTER_DAYS > 0:
+            target_date = user.date_joined + timedelta(days=SETTINGS.COSINNUS_USER_SHOW_EMAIL_VERIFIED_POPUP_AFTER_DAYS)
+            msg = _('Please verify your email address by %(date_string)s.') % {'date_string': date(timezone.localtime(target_date), 'SHORT_DATE_FORMAT')}
+        
         link_label = _('Click here to send the verification link again.')
         context['email_not_verified_announcement'] = {
             'level': 'warning',
