@@ -30,13 +30,14 @@ from cosinnus.utils.files import image_thumbnail_url
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser,\
     check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus_event.models import ConferenceEvent
+from cosinnus_event.models import ConferenceEvent # noqa
 
 
 class _TranslatedInstanceMixin():
     
     def to_representation(self, instance):
         """ Support for `TranslateableFieldsModelMixin` """
+        self.untranslated_instance = instance
         if hasattr(instance, 'get_translated_readonly_instance'):
             instance = instance.get_translated_readonly_instance()
         return super().to_representation(instance)
@@ -101,7 +102,8 @@ class ConferenceRoomSerializer(TranslateableModelSerializer):
             result_group = obj.target_result_group
             return result_group.get_absolute_url() + result_group.settings.get('conference_result_group_iframe_url', '')
         else:
-            return obj.get_rocketchat_room_url()
+            # we need to use the untranslated instance, because this function might save the instance
+            return self.untranslated_instance.get_rocketchat_room_url()
 
     def get_management_urls(self, obj):
         user = self.context['request'].user
