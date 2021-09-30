@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:23+0200\n"
+"POT-Creation-Date: 2021-09-30 15:22+0200\n"
 "PO-Revision-Date: 2021-04-14 14:32+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,6 +17,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
+
+msgid "Restart"
+msgstr ""
+
+msgid "Your conference is currently using the high performance premium servers!"
+msgstr ""
+
+msgid "Your conference is currently not using the high performance premium servers, but has been assigned premium slots at other times."
+msgstr ""
+
+msgid "Your currently scheduled premium dates are:"
+msgstr ""
 
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr "הועידה שלך עדיין במצב ניסיון. יש לך גישה לכל התכונות, אך תוכל להשתמש בהן רק עם כמה אנשים ללא הגבלות. כדי להבטיח ביצועים מלאים בועידה שלך עם מספר משתמשים, הזמינו כאן מספיק יכולות בחינם:"
@@ -36,6 +48,15 @@ msgstr "בחירה ראשונה"
 
 msgid "Second Choice"
 msgstr "בחירה שנייה"
+
+msgid "Server Error"
+msgstr ""
+
+msgid "Error message:"
+msgstr ""
+
+msgid "No error message supplied."
+msgstr ""
 
 msgid "Conference Management"
 msgstr "ניהול שיחות ועידה"
@@ -106,6 +127,9 @@ msgstr "הגדרות תזכורת הוועידה עודכנו בהצלחה."
 
 msgid "A test email has been sent to your email address."
 msgstr "דוא\"ל בדיקה נשלח לכתובת הדוא\"ל שלך."
+
+msgid "The message was sent to all participants."
+msgstr ""
 
 msgid "Participation configurations have been updated."
 msgstr "תצורות ההשתתפות עודכנו."

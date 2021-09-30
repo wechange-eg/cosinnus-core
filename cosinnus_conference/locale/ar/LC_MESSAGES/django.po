@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:23+0200\n"
+"POT-Creation-Date: 2021-09-30 15:22+0200\n"
 "PO-Revision-Date: 2021-03-05 18:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,6 +17,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Poedit 2.4.1\n"
+
+msgid "Restart"
+msgstr ""
+
+msgid "Your conference is currently using the high performance premium servers!"
+msgstr ""
+
+msgid "Your conference is currently not using the high performance premium servers, but has been assigned premium slots at other times."
+msgstr ""
+
+msgid "Your currently scheduled premium dates are:"
+msgstr ""
 
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr ""
@@ -38,6 +50,15 @@ msgstr "الخيار الأول"
 
 msgid "Second Choice"
 msgstr "الخيار الثاني"
+
+msgid "Server Error"
+msgstr ""
+
+msgid "Error message:"
+msgstr ""
+
+msgid "No error message supplied."
+msgstr ""
 
 msgid "Conference Management"
 msgstr "إدارة المؤتمر"
@@ -110,6 +131,9 @@ msgstr "تم تحديث إعدادات تذكير المؤتمر بنجاح."
 
 msgid "A test email has been sent to your email address."
 msgstr "تم إرسال بريد إلكتروني تجريبي إلى عنوان بريدك الإلكتروني."
+
+msgid "The message was sent to all participants."
+msgstr ""
 
 #, fuzzy
 msgid "Participation configurations have been updated."

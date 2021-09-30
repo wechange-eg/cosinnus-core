@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:23+0200\n"
-"PO-Revision-Date: 2021-05-05 15:30+0200\n"
+"POT-Creation-Date: 2021-09-30 15:22+0200\n"
+"PO-Revision-Date: 2021-09-30 15:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -16,7 +16,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0\n"
+
+msgid "Restart"
+msgstr "Neu starten"
+
+msgid "Your conference is currently using the high performance premium servers!"
+msgstr "Ihre Tagung benutzt momentan die leistungsstarke Premium-Server!"
+
+msgid "Your conference is currently not using the high performance premium servers, but has been assigned premium slots at other times."
+msgstr "Ihre Tagung benutzt momentan keine leistungsstarke Premium-Server. Ihr wurde jedoch einige Premium-Slots zu anderen Zeiten festgelegt."
+
+msgid "Your currently scheduled premium dates are:"
+msgstr "Ihre derzeitig geplante Premium-Zeiten sind:"
 
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr "Deine Tagung befindet sich gerade noch im Probe-Modus. Du hast Zugriff auf alle Features, aber kannst diese nur mit wenigen Leuten uneingeschränkt nutzen. Um dir bei deiner Umsetzung mit mehreren Nutzer*innen die volle Leistung zu sichern, buche hier kostenlos ausreichend Kapazitäten:"
@@ -36,6 +48,15 @@ msgstr "Erste Wahl"
 
 msgid "Second Choice"
 msgstr "Zweite Wahl"
+
+msgid "Server Error"
+msgstr "Serverfehler"
+
+msgid "Error message:"
+msgstr "Inhalt des Fehlers:"
+
+msgid "No error message supplied."
+msgstr "Im Fehler ist kein Inhalt vorhanden."
 
 msgid "Conference Management"
 msgstr "Tagungsmanagement"
@@ -106,6 +127,9 @@ msgstr "Die Einstellungen für die Erinnerung an die Tagung wurden erfolgreich a
 
 msgid "A test email has been sent to your email address."
 msgstr "Es wurde eine Test-E-Mail an deine E-Mail-Adresse gesendet."
+
+msgid "The message was sent to all participants."
+msgstr "Die Nachricht wurde an alle Tagungsteilnehmer geschickt."
 
 msgid "Participation configurations have been updated."
 msgstr "Die Teilnahmekonfigurationen wurden aktualisiert."

@@ -3,20 +3,32 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:23+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2021-09-30 15:22+0200\n"
+"PO-Revision-Date: 2021-09-30 15:30+0200\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 3.0\n"
+
+msgid "Restart"
+msgstr "Перезапуск"
+
+msgid "Your conference is currently using the high performance premium servers!"
+msgstr "Ваша конференция использует высокопроизводительные премиум-сервера!"
+
+msgid "Your conference is currently not using the high performance premium servers, but has been assigned premium slots at other times."
+msgstr "Ваша конференция не использует высокопроизводительные премиум-сервера в настоящее время, но ей были присвоены премиальные слоты на другое время."
+
+msgid "Your currently scheduled premium dates are:"
+msgstr "Ваши запланированные премиум-слоты:"
 
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr "Ваша конференция все еще находится в ознакомительном режиме. У Вас есть доступ ко всем функциям, но их можно использовать без ограничений лишь с несколькими людьми. Чтобы обеспечить полную функциональность Вашей конференции со многими пользователями, бесплатно зарезервируйте достаточный объем здесь:"
@@ -36,6 +48,15 @@ msgstr "Первый выбор"
 
 msgid "Second Choice"
 msgstr "Второй выбор"
+
+msgid "Server Error"
+msgstr "Ошибка сервера"
+
+msgid "Error message:"
+msgstr "Сообщение ошибки:"
+
+msgid "No error message supplied."
+msgstr "Сообщение об ошибке не обнаружено."
 
 msgid "Conference Management"
 msgstr "Управление конференцией"
@@ -106,6 +127,9 @@ msgstr "Настройки напоминания о конференции бы
 
 msgid "A test email has been sent to your email address."
 msgstr "Тестовое электронное письмо было отправлено на Ваш адрес электронной почты."
+
+msgid "The message was sent to all participants."
+msgstr "Сообщение было отправлено всем участникам."
 
 msgid "Participation configurations have been updated."
 msgstr "Настройки участника обновлены."
