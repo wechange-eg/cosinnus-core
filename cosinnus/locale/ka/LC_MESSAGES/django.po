@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 12:35+0200\n"
+"POT-Creation-Date: 2021-09-30 12:18+0200\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2462,6 +2462,9 @@ msgstr ""
 msgid "search"
 msgstr "ძიება"
 
+msgid "Add user"
+msgstr "მომხმარებლის დამატება"
+
 #, python-format
 msgid ""
 "\n"
@@ -2519,9 +2522,6 @@ msgstr "წინა"
 
 msgid "next"
 msgstr "შემდეგი"
-
-msgid "Add user"
-msgstr "მომხმარებლის დამატება"
 
 #, fuzzy
 msgid "Update User"
@@ -2977,6 +2977,46 @@ msgstr ""
 msgid "List of Applicants"
 msgstr ""
 
+#, fuzzy
+msgid "Emails to conference participants"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "subject"
+msgstr ""
+
+#, fuzzy
+#| msgid "Content"
+msgid "content"
+msgstr "შინაარსი"
+
+#, python-format
+msgid ""
+"\n"
+"                    This message will be sent to one participant.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                    This message will be sent to %(count)s participants.\n"
+"                    "
+msgstr[0] ""
+
+msgid "Are you sure? Please check your entries beforehand with the help of a test email."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        Yes, send immediately to one user.\n"
+"                        "
+msgid_plural ""
+"\n"
+"                        Yes, send immediately to %(count)s users.\n"
+"                        "
+msgstr[0] ""
+
+msgid "No, don\\"
+msgstr ""
+
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
 msgstr ""
 
@@ -3038,10 +3078,6 @@ msgstr ""
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr ""
 
-#, fuzzy
-msgid "Conference reminders"
-msgstr "ვიდეო კონფერენციის სერვერი"
-
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
@@ -3073,6 +3109,24 @@ msgid "This e-mail will be sent out 24 hours before the conference start date."
 msgstr ""
 
 msgid "Send 1 hour before conference"
+msgstr ""
+
+msgid "send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "no instant email has been sent yet."
+msgstr "საკონტაქტო ბაზა ჯერ დამატებული არ არის."
+
+msgid "Send immediately"
 msgstr ""
 
 #, fuzzy, python-format
@@ -3527,10 +3581,6 @@ msgstr ""
 msgctxt "time"
 msgid "until"
 msgstr "მდე"
-
-#, fuzzy
-msgid "Only conference members can see the event\\'s description."
-msgstr "თქვენ მიერ მოთხოვნილი კონტენტის ნახვა მხოლოდ გუნდის წევრებს შეუძლიათ.  იმისათვის, რომ გახდეთ წევრი, გააკეთეთ განაცხადი ახლა !"
 
 #, fuzzy
 msgid "More infos..."
@@ -4283,9 +4333,6 @@ msgstr "ყველა პროექტი"
 msgid "Temporary User Accounts"
 msgstr ""
 
-msgid "Reminder emails"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 msgid "Organizations"
@@ -4516,6 +4563,10 @@ msgstr ""
 
 msgid "Conference starts soon: [[name]]"
 msgstr ""
+
+#, fuzzy
+msgid "Message to conference participants"
+msgstr "ვიდეო კონფერენციის სერვერი"
 
 msgid ""
 "The conference [[name]] starts in a week.\n"
@@ -6675,6 +6726,98 @@ msgstr "გვიხარია თქვენი დანახვა! %(por
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "ჩემი პროექტები და ჯგუფები"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "დახარისხების ველი"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "პროექტები/ჯგუფები"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "პროექტები/ჯგუფები"
+
+#, fuzzy
+msgid "Options"
+msgstr "პროპორციები"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "გამოსახულების ატვირთვა."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "ჩემი პროექტები და ჯგუფები"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "პაროლის გადაყენება წარმატებით განხორციელდა"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "შეცდომა!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "შეტყობინებები"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "შეცდომა!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "შეტყობინებები"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "სხვა პროექტების ჩვენება"
 
@@ -7687,6 +7830,14 @@ msgstr "თქვენ არ ხართ %s-ის წევრი! თუ �
 msgid "Your changes have been saved."
 msgstr "თქვენი ცვლილებები შენახულია."
 
+#, fuzzy
+#~ msgid "Conference reminders"
+#~ msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+#~ msgid "Only conference members can see the event\\'s description."
+#~ msgstr "თქვენ მიერ მოთხოვნილი კონტენტის ნახვა მხოლოდ გუნდის წევრებს შეუძლიათ.  იმისათვის, რომ გახდეთ წევრი, გააკეთეთ განაცხადი ახლა !"
+
 #~ msgid ""
 #~ "Hi %(user_name)s,\n"
 #~ "\n"
@@ -7837,10 +7988,6 @@ msgstr "თქვენი ცვლილებები შენახულ�
 #~ msgid "English--NATIVE-LANGUAGE"
 #~ msgstr "English"
 
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "შეცდომა!"
-
 #~ msgid "French--NATIVE-LANGUAGE"
 #~ msgstr "Français"
 
@@ -7895,44 +8042,20 @@ msgstr "თქვენი ცვლილებები შენახულ�
 #~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 #~ msgstr "თუ გსურთ წაშალოთ თქვენი ყველა კონტენტი, გთხოვთ, დაბრუნდეთ უკან. პროფილის წაშლის შემთხვევაში, თქვენ აღარ გექნებათ წვდომა თქვენ მიერ ანგარიშზე შექმნილ პროდუქტზე."
 
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "ჩემი პროექტები და ჯგუფები"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "ჩემი პროექტები და ჯგუფები"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "შეტყობინებები"
-
 #~ msgid "Invited you"
 #~ msgstr "თქვენ მოგიწვიათ"
 
 #~ msgid "Kazakh--NATIVE-LANGUAGE"
 #~ msgstr "Қазақ тілі"
 
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "პროპორციები"
-
 #~ msgid "Polish--NATIVE-LANGUAGE"
 #~ msgstr "Polski"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "პროექტები/ჯგუფები"
 
 #~ msgid "Public Group"
 #~ msgstr "საჯარო ჯგუფი"
 
 #~ msgid "Re-Activate Project/Group"
 #~ msgstr "პროექტის/ჯგუფის ხელახლა აქტივაცია"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "შეცდომა!"
 
 #~ msgid "Revoked your admin status"
 #~ msgstr "გუნდის ადმინისტრატორის სტატუსი გაგიუქმდათ"
@@ -7973,14 +8096,6 @@ msgstr "თქვენი ცვლილებები შენახულ�
 
 #~ msgid "Ukrainian--NATIVE-LANGUAGE"
 #~ msgstr "Українська"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "გამოსახულების ატვირთვა."
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "პროექტები/ჯგუფები"
 
 #~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
 #~ msgstr "ჩვენ გამოვაგზავნეთ ინსტრუქცია თქვენი პაროლის დასაყენებლად, რომელსაც მალე მიიღებთ."

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 12:35+0200\n"
+"POT-Creation-Date: 2021-09-30 12:18+0200\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2463,6 +2463,9 @@ msgstr ""
 msgid "search"
 msgstr "Іздеу"
 
+msgid "Add user"
+msgstr "Пайдаланушыны қосу"
+
 #, python-format
 msgid ""
 "\n"
@@ -2521,9 +2524,6 @@ msgstr "алдыңғы"
 
 msgid "next"
 msgstr "келесі"
-
-msgid "Add user"
-msgstr "Пайдаланушыны қосу"
 
 #, fuzzy
 msgid "Update User"
@@ -2981,6 +2981,48 @@ msgstr ""
 msgid "List of Applicants"
 msgstr ""
 
+#, fuzzy
+msgid "Emails to conference participants"
+msgstr "Бейне конференциялар сервері"
+
+msgid "subject"
+msgstr ""
+
+#, fuzzy
+#| msgid "Content"
+msgid "content"
+msgstr "Мазмұны"
+
+#, python-format
+msgid ""
+"\n"
+"                    This message will be sent to one participant.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                    This message will be sent to %(count)s participants.\n"
+"                    "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Are you sure? Please check your entries beforehand with the help of a test email."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        Yes, send immediately to one user.\n"
+"                        "
+msgid_plural ""
+"\n"
+"                        Yes, send immediately to %(count)s users.\n"
+"                        "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No, don\\"
+msgstr ""
+
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
 msgstr ""
 
@@ -3042,10 +3084,6 @@ msgstr ""
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr ""
 
-#, fuzzy
-msgid "Conference reminders"
-msgstr "Бейне конференциялар сервері"
-
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
@@ -3077,6 +3115,24 @@ msgid "This e-mail will be sent out 24 hours before the conference start date."
 msgstr ""
 
 msgid "Send 1 hour before conference"
+msgstr ""
+
+msgid "send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "no instant email has been sent yet."
+msgstr "Контакт мәліметтері әлі қосылмаған."
+
+msgid "Send immediately"
 msgstr ""
 
 #, fuzzy, python-format
@@ -3531,10 +3587,6 @@ msgstr ""
 msgctxt "time"
 msgid "until"
 msgstr "Дейін"
-
-#, fuzzy
-msgid "Only conference members can see the event\\'s description."
-msgstr "Сіз сұраған мазмұнды тек топ мүшелері көре алады. Қазір мүшелікке өтініш бер!"
 
 #, fuzzy
 msgid "More infos..."
@@ -4287,9 +4339,6 @@ msgstr "Барлық жобалар"
 msgid "Temporary User Accounts"
 msgstr ""
 
-msgid "Reminder emails"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 msgid "Organizations"
@@ -4520,6 +4569,10 @@ msgstr ""
 
 msgid "Conference starts soon: [[name]]"
 msgstr ""
+
+#, fuzzy
+msgid "Message to conference participants"
+msgstr "Бейне конференциялар сервері"
 
 msgid ""
 "The conference [[name]] starts in a week.\n"
@@ -6677,6 +6730,98 @@ msgstr "Сені көруге қуаныштымыз! %(portal_name)s-те сі�
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Қазір тіркеліп, оны қалыптастыруға көмектесіңіз"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Менің Жобаларым мен Топтары"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Cұрыптау өрісі"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Жобалар/Топтар"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Жобалар/Топтар"
+
+#, fuzzy
+msgid "Options"
+msgstr "Пропорциялар"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Суретті жүктеу."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Менің Жобаларым мен Топтары"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Парольді қалпына келтіру сәтті өтті"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Қате!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Хабарламалар"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Қате!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Хабарламалар"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Басқа Жобаларды көрсету"
 
@@ -7689,6 +7834,14 @@ msgstr "Сіз қазір %s мүшесі емессіз! Егер қаласа�
 msgid "Your changes have been saved."
 msgstr "Сіздің өзгертулеріңіз сақталды."
 
+#, fuzzy
+#~ msgid "Conference reminders"
+#~ msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+#~ msgid "Only conference members can see the event\\'s description."
+#~ msgstr "Сіз сұраған мазмұнды тек топ мүшелері көре алады. Қазір мүшелікке өтініш бер!"
+
 #~ msgid ""
 #~ "Hi %(user_name)s,\n"
 #~ "\n"
@@ -7838,10 +7991,6 @@ msgstr "Сіздің өзгертулеріңіз сақталды."
 #~ msgid "English--NATIVE-LANGUAGE"
 #~ msgstr "English"
 
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Қате!"
-
 #~ msgid "French--NATIVE-LANGUAGE"
 #~ msgstr "Français"
 
@@ -7896,44 +8045,20 @@ msgstr "Сіздің өзгертулеріңіз сақталды."
 #~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 #~ msgstr "Егер сіз кез-келген мазмұнды жойғыңыз келсе, оралыңыз және дәл қазір жасаңыз. Профильді жойғаннан кейін, сіз осы есептік жазбамен жасаған кез-келген нәрсеге кіре алмайсыз."
 
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Менің Жобаларым мен Топтары"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Менің Жобаларым мен Топтары"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Хабарламалар"
-
 #~ msgid "Invited you"
 #~ msgstr "Сізді шақырды"
 
 #~ msgid "Kazakh--NATIVE-LANGUAGE"
 #~ msgstr "Қазақ тілі"
 
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Пропорциялар"
-
 #~ msgid "Polish--NATIVE-LANGUAGE"
 #~ msgstr "Polski"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Жобалар/Топтар"
 
 #~ msgid "Public Group"
 #~ msgstr "Қоғамдық топ"
 
 #~ msgid "Re-Activate Project/Group"
 #~ msgstr "Жобаны / топты қайта белсендіру"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Қате!"
 
 #~ msgid "Revoked your admin status"
 #~ msgstr "Әкімші мәртебесін қайтарып алды"
@@ -7974,14 +8099,6 @@ msgstr "Сіздің өзгертулеріңіз сақталды."
 
 #~ msgid "Ukrainian--NATIVE-LANGUAGE"
 #~ msgstr "Українська"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Суретті жүктеу."
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Жобалар/Топтар"
 
 #~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
 #~ msgstr "Біз сізге құпия сөзді орнату туралы нұсқауларды жібердік. Сіз оларды жақын арада алуыңыз керек."

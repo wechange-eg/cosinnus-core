@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:23+0200\n"
+"POT-Creation-Date: 2021-09-30 15:22+0200\n"
 "PO-Revision-Date: 2021-04-01 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,6 +17,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 2.4.2\n"
+
+msgid "Restart"
+msgstr ""
+
+msgid "Your conference is currently using the high performance premium servers!"
+msgstr ""
+
+msgid "Your conference is currently not using the high performance premium servers, but has been assigned premium slots at other times."
+msgstr ""
+
+msgid "Your currently scheduled premium dates are:"
+msgstr ""
 
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr "Twoja konferencja jest nadal w trybie próbnym. Masz dostęp do wszystkich funkcji, ale możesz z nich korzystać tylko z kilkoma osobami bez ograniczeń. Aby zapewnić pełną wydajność konferencji z wieloma użytkownikami, zarezerwuj wystarczającą liczbę możliwości tutaj za darmo:"
@@ -36,6 +48,15 @@ msgstr "Pierwszy Wybór"
 
 msgid "Second Choice"
 msgstr "Drugi Wybór"
+
+msgid "Server Error"
+msgstr ""
+
+msgid "Error message:"
+msgstr ""
+
+msgid "No error message supplied."
+msgstr ""
 
 msgid "Conference Management"
 msgstr "Zarządzanie Konferencją"
@@ -106,6 +127,9 @@ msgstr "Pomyślnie zaktualizowano ustawienia przypomnienia o konferencji."
 
 msgid "A test email has been sent to your email address."
 msgstr "E-mail testowy został wysłany na Twój adres e-mail."
+
+msgid "The message was sent to all participants."
+msgstr ""
 
 msgid "Participation configurations have been updated."
 msgstr "Konfiguracja uczestnictwa została zaktualizowana."

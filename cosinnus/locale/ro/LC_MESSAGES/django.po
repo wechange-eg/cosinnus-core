@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 12:35+0200\n"
+"POT-Creation-Date: 2021-09-30 12:18+0200\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2456,6 +2456,9 @@ msgstr ""
 msgid "search"
 msgstr "Căutare"
 
+msgid "Add user"
+msgstr "Adăugați utilizator"
+
 #, python-format
 msgid ""
 "\n"
@@ -2514,9 +2517,6 @@ msgstr "anterior"
 
 msgid "next"
 msgstr "următor"
-
-msgid "Add user"
-msgstr "Adăugați utilizator"
 
 #, fuzzy
 msgid "Update User"
@@ -2977,6 +2977,48 @@ msgstr ""
 msgid "List of Applicants"
 msgstr ""
 
+#, fuzzy
+msgid "Emails to conference participants"
+msgstr "Setările Conferinței"
+
+msgid "subject"
+msgstr ""
+
+#, fuzzy
+#| msgid "Content"
+msgid "content"
+msgstr "Conținut"
+
+#, python-format
+msgid ""
+"\n"
+"                    This message will be sent to one participant.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                    This message will be sent to %(count)s participants.\n"
+"                    "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Are you sure? Please check your entries beforehand with the help of a test email."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        Yes, send immediately to one user.\n"
+"                        "
+msgid_plural ""
+"\n"
+"                        Yes, send immediately to %(count)s users.\n"
+"                        "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No, don\\"
+msgstr ""
+
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
 msgstr ""
 
@@ -3039,10 +3081,6 @@ msgstr ""
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr ""
 
-#, fuzzy
-msgid "Conference reminders"
-msgstr "Setările Conferinței"
-
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
@@ -3074,6 +3112,24 @@ msgid "This e-mail will be sent out 24 hours before the conference start date."
 msgstr ""
 
 msgid "Send 1 hour before conference"
+msgstr ""
+
+msgid "send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "no instant email has been sent yet."
+msgstr "Nu au fost adăugate încă date de contact."
+
+msgid "Send immediately"
 msgstr ""
 
 #, fuzzy, python-format
@@ -3529,10 +3585,6 @@ msgstr ""
 msgctxt "time"
 msgid "until"
 msgstr "Până când"
-
-#, fuzzy
-msgid "Only conference members can see the event\\'s description."
-msgstr "Numai membrii echipei pot vedea conținutul pe care l-ați solicitat. Aplicați pentru a deveni membru acum!"
 
 #, fuzzy
 msgid "More infos..."
@@ -4283,9 +4335,6 @@ msgstr "Toate Proiectele"
 msgid "Temporary User Accounts"
 msgstr ""
 
-msgid "Reminder emails"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Organizations"
 msgstr "Organizații"
@@ -4515,6 +4564,10 @@ msgstr ""
 
 msgid "Conference starts soon: [[name]]"
 msgstr ""
+
+#, fuzzy
+msgid "Message to conference participants"
+msgstr "Setările Conferinței"
 
 msgid ""
 "The conference [[name]] starts in a week.\n"
@@ -6675,6 +6728,98 @@ msgstr "Mă bucur să te văd! La %(portal_name)s puteți colabora cu alții în
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Înregistrați-vă acum și ajutați la modelarea acestuia"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Proiectele și Grupurile mele"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Câmp de sortare"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Proiecte/Grupuri"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Proiecte/Grupuri"
+
+#, fuzzy
+msgid "Options"
+msgstr "Proporții"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Încărcați o imagine."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Proiectele și Grupurile mele"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Resetarea parolei a reușit"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Eroare!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Mesaje"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Eroare!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Mesaje"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Afișează mai multe Proiecte"
 
@@ -7678,6 +7823,14 @@ msgstr "În prezent nu sunteți membru %s! Dacă doriți, puteți solicita să d
 msgid "Your changes have been saved."
 msgstr "Schimbările tale au fost salvate."
 
+#, fuzzy
+#~ msgid "Conference reminders"
+#~ msgstr "Setările Conferinței"
+
+#, fuzzy
+#~ msgid "Only conference members can see the event\\'s description."
+#~ msgstr "Numai membrii echipei pot vedea conținutul pe care l-ați solicitat. Aplicați pentru a deveni membru acum!"
+
 #~ msgid ""
 #~ "Hi %(user_name)s,\n"
 #~ "\n"
@@ -7839,10 +7992,6 @@ msgstr "Schimbările tale au fost salvate."
 #~ msgid "English--NATIVE-LANGUAGE"
 #~ msgstr "English"
 
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Eroare!"
-
 #~ msgid "External"
 #~ msgstr "Extern"
 
@@ -7868,18 +8017,6 @@ msgstr "Schimbările tale au fost salvate."
 #~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 #~ msgstr "Dacă doriți să ștergeți conținutul dvs., reveniți și faceți acest lucru acum. După ce ștergeți profilul dvs., nu veți mai avea acces la nimic pe care l-ați creat cu acest cont."
 
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Proiectele și Grupurile mele"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Proiectele și Grupurile mele"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Mesaje"
-
 #~ msgid "Invited you"
 #~ msgstr "Te-a invitat"
 
@@ -7889,29 +8026,17 @@ msgstr "Schimbările tale au fost salvate."
 #~ msgid "Nachrichten"
 #~ msgstr "Știri"
 
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Proporții"
-
 #~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 #~ msgstr "Vă rugăm să încărcați un CSV cu următoarele coloane: identificator unic de utilizator, prenume, nume de familie și o coloană pentru fiecare atelier identificat de slugul atelierului. Pentru Ajutor puteți descărca un șablon <a href=\"%(workshop_participants_upload_skeleton)s\">aici</a>"
 
 #~ msgid "Polish--NATIVE-LANGUAGE"
 #~ msgstr "Polski"
 
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Proiecte/Grupuri"
-
 #~ msgid "Public Group"
 #~ msgstr "Proiect Public"
 
 #~ msgid "Re-Activate Project/Group"
 #~ msgstr "Re-Activează Proiectul/Grupul"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Eroare!"
 
 #~ msgid "Revoked your admin status"
 #~ msgstr "A revocat starea dvs. de admin"
@@ -7962,14 +8087,6 @@ msgstr "Schimbările tale au fost salvate."
 
 #~ msgid "Ukrainian--NATIVE-LANGUAGE"
 #~ msgstr "Українська"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Încărcați o imagine."
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Proiecte/Grupuri"
 
 #~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
 #~ msgstr "V-am trimis prin e-mail instrucțiuni pentru setarea parolei. Ar trebui să le primiți în scurt timp."

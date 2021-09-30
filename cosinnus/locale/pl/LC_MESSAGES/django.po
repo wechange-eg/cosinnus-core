@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 12:35+0200\n"
+"POT-Creation-Date: 2021-09-30 12:18+0200\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2384,6 +2384,9 @@ msgstr "Szukaj po adresie e-mail, imieniu lub nazwisku"
 msgid "search"
 msgstr "szukaj"
 
+msgid "Add user"
+msgstr "Dodaj użytkownika"
+
 #, python-format
 msgid ""
 "\n"
@@ -2443,9 +2446,6 @@ msgstr "poprzednia"
 
 msgid "next"
 msgstr "następna"
-
-msgid "Add user"
-msgstr "Dodaj użytkownika"
 
 msgid "Update User"
 msgstr "Aktualizuj użytkownika"
@@ -2890,6 +2890,53 @@ msgstr "Wybierz użytkowników, których chcesz przypisać do tych warsztatów"
 msgid "List of Applicants"
 msgstr "Lista osób aplikujących"
 
+#, fuzzy
+msgid "Emails to conference participants"
+msgstr "Aplikacje do udziału w konferencji"
+
+#, fuzzy
+#| msgctxt "subject of an E-Mail"
+#| msgid "Subject"
+msgid "subject"
+msgstr "Temat"
+
+#, fuzzy
+#| msgid "Content"
+msgid "content"
+msgstr "Treść"
+
+#, python-format
+msgid ""
+"\n"
+"                    This message will be sent to one participant.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                    This message will be sent to %(count)s participants.\n"
+"                    "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Are you sure? Please check your entries beforehand with the help of a test email."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        Yes, send immediately to one user.\n"
+"                        "
+msgid_plural ""
+"\n"
+"                        Yes, send immediately to %(count)s users.\n"
+"                        "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "No, don\\"
+msgstr ""
+
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
 msgstr "Tutaj można skonfigurować formularz aplikacji, który uczestnicy mają wypełnić, aby móc się zgłosić."
 
@@ -2950,9 +2997,6 @@ msgstr "(nie wybrano żadnych warunków)"
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr "Jeśli plik został przesłany, wtedy osoby składające aplikację będą zobowiązani w tym pliku wyrazić zgodę na te warunki, zaznaczając odpowiednie pole wyboru"
 
-msgid "Conference reminders"
-msgstr "Przypomnienia o konferencji"
-
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Tutaj masz możliwość przygotowania tekstu informacyjnego dla wszystkich członków konferencji. Zostanie on wysłany automatycznie na 1 tydzień, 1 dzień i/lub 1 godzinę przed jej rozpoczęciem. Mail z powiadomieniem zawsze zawiera link do konferencji"
 
@@ -2983,6 +3027,24 @@ msgstr "Ten e-mail zostanie wysłany z 24 godzinnym wyprzedzeniem do daty rozpoc
 
 msgid "Send 1 hour before conference"
 msgstr "Wyślij 1 godzinę przed konferencją"
+
+msgid "send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "no instant email has been sent yet."
+msgstr "Nie dodano jeszcze danych kontaktowych."
+
+msgid "Send immediately"
+msgstr ""
 
 #, python-format
 msgid "Edit Room “%(title)s”"
@@ -3402,10 +3464,6 @@ msgstr "o godzinie"
 msgctxt "time"
 msgid "until"
 msgstr "do"
-
-#, fuzzy
-msgid "Only conference members can see the event\\'s description."
-msgstr "Tylko członkowie konferencji mają dostęp do tej treści. Aplikuj, aby zostać członkiem!"
 
 msgid "More infos..."
 msgstr "Więcej informacji..."
@@ -4129,9 +4187,6 @@ msgstr "Wszystkie Projekty"
 msgid "Temporary User Accounts"
 msgstr "Tymczasowe Konto Użytkownika"
 
-msgid "Reminder emails"
-msgstr "E-maile przypominające"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Organizations"
 msgstr "Organizacje"
@@ -4359,6 +4414,10 @@ msgstr ""
 
 msgid "Conference starts soon: [[name]]"
 msgstr "Konferencja [[name]] rozpoczyna się wkrótce."
+
+#, fuzzy
+msgid "Message to conference participants"
+msgstr "Aplikacje do udziału w konferencji"
 
 msgid ""
 "The conference [[name]] starts in a week.\n"
@@ -6513,6 +6572,98 @@ msgstr "Miło cię widzieć! W %(portal_name)s możesz współpracować z innymi
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Zaloguj się teraz i działaj"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Moje Projekty i Grupy"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Import nie powiódł się"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Projekty/Grupy"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Prześlij plik CSV"
+
+#, fuzzy
+msgid "Options"
+msgstr "Proporcje"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Prześlij obraz."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Moje Projekty i Grupy"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Import zakończony powodzeniem!"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Błąd!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Wiadomości"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Błąd!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Wiadomości"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Pokaż więcej projektów"
 
@@ -7459,6 +7610,16 @@ msgstr "Obecnie nie jesteś członkiem %s! Jeśli chcesz nim zostać, możesz wy
 msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
 
+#~ msgid "Conference reminders"
+#~ msgstr "Przypomnienia o konferencji"
+
+#, fuzzy
+#~ msgid "Only conference members can see the event\\'s description."
+#~ msgstr "Tylko członkowie konferencji mają dostęp do tej treści. Aplikuj, aby zostać członkiem!"
+
+#~ msgid "Reminder emails"
+#~ msgstr "E-maile przypominające"
+
 #~ msgid ""
 #~ "Hi %(user_name)s,\n"
 #~ "\n"
@@ -7587,10 +7748,6 @@ msgstr "Twoje zmiany zostały zapisane."
 #~ msgstr "Беларуская"
 
 #, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Import zakończony powodzeniem!"
-
-#, fuzzy
 #~ msgid "Conference Dashboard"
 #~ msgstr "Strona główna projektu"
 
@@ -7620,10 +7777,6 @@ msgstr "Twoje zmiany zostały zapisane."
 
 #~ msgid "English--NATIVE-LANGUAGE"
 #~ msgstr "English"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Błąd!"
 
 #~ msgid "External"
 #~ msgstr "Zewnętrzny"
@@ -7685,35 +7838,11 @@ msgstr "Twoje zmiany zostały zapisane."
 #~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 #~ msgstr "Jeśli chcesz usunąć jakiekolwiek Twoje treści, wróć i zrób to teraz. Po usunięciu profilu nie będziesz miał/a dostępu do tego, co stworzyłeś/-aś na tym koncie."
 
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Moje Projekty i Grupy"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Moje Projekty i Grupy"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Import nie powiódł się"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Wiadomości"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Wiadomości"
-
 #~ msgid "Invited you"
 #~ msgstr "Zaprosił/a Cię"
 
 #~ msgid "Kazakh--NATIVE-LANGUAGE"
 #~ msgstr "Қазақ тілі"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Proporcje"
 
 #~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 #~ msgstr "Proszę przesłać CSV z następującymi kolumnami: unikalny identyfikator użytkownika, imię, nazwisko oraz po jednej kolumnie dla każdego warsztatu, zidentyfikowane przez sług warsztatu. Aby uzyskać pomoc, możesz ściągnąć szablon <a href=\"%(workshop_participants_upload_skeleton)s\"> tutaj </a>"
@@ -7721,19 +7850,11 @@ msgstr "Twoje zmiany zostały zapisane."
 #~ msgid "Polish--NATIVE-LANGUAGE"
 #~ msgstr "Polski"
 
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projekty/Grupy"
-
 #~ msgid "Public Group"
 #~ msgstr "Grupa Publiczna"
 
 #~ msgid "Re-Activate Project/Group"
 #~ msgstr "Reaktywuj Projekt/Grupę"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Błąd!"
 
 #~ msgid "Revoked your admin status"
 #~ msgstr "Unieważnił Twój status administratora"
@@ -7777,14 +7898,6 @@ msgstr "Twoje zmiany zostały zapisane."
 
 #~ msgid "Ukrainian--NATIVE-LANGUAGE"
 #~ msgstr "Українська"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Prześlij obraz."
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Prześlij plik CSV"
 
 #~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
 #~ msgstr "Wysłaliśmy na Twój adres e-mail instrukcje ustawiania hasła. Otrzymasz je niebawem."
