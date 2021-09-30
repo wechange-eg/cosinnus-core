@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 12:35+0200\n"
+"POT-Creation-Date: 2021-09-30 12:18+0200\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2475,6 +2475,9 @@ msgstr ""
 msgid "search"
 msgstr "Пошук"
 
+msgid "Add user"
+msgstr "Дадаць карыстальніка(-цу)"
+
 #, python-format
 msgid ""
 "\n"
@@ -2533,9 +2536,6 @@ msgstr "папярэдняя"
 
 msgid "next"
 msgstr "наступная"
-
-msgid "Add user"
-msgstr "Дадаць карыстальніка(-цу)"
 
 #, fuzzy
 msgid "Update User"
@@ -3001,6 +3001,48 @@ msgstr ""
 msgid "List of Applicants"
 msgstr ""
 
+#, fuzzy
+msgid "Emails to conference participants"
+msgstr "Cosinnus-праекты"
+
+msgid "subject"
+msgstr ""
+
+#, fuzzy
+#| msgid "Content"
+msgid "content"
+msgstr "Змесціва"
+
+#, python-format
+msgid ""
+"\n"
+"                    This message will be sent to one participant.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                    This message will be sent to %(count)s participants.\n"
+"                    "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Are you sure? Please check your entries beforehand with the help of a test email."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        Yes, send immediately to one user.\n"
+"                        "
+msgid_plural ""
+"\n"
+"                        Yes, send immediately to %(count)s users.\n"
+"                        "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No, don\\"
+msgstr ""
+
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
 msgstr ""
 
@@ -3062,9 +3104,6 @@ msgstr ""
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr ""
 
-msgid "Conference reminders"
-msgstr ""
-
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
@@ -3096,6 +3135,24 @@ msgid "This e-mail will be sent out 24 hours before the conference start date."
 msgstr ""
 
 msgid "Send 1 hour before conference"
+msgstr ""
+
+msgid "send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "no instant email has been sent yet."
+msgstr "Кантактныя даныя яшчэ не дададзеныя."
+
+msgid "Send immediately"
 msgstr ""
 
 #, fuzzy, python-format
@@ -3550,10 +3607,6 @@ msgstr ""
 msgctxt "time"
 msgid "until"
 msgstr "Да"
-
-#, fuzzy
-msgid "Only conference members can see the event\\'s description."
-msgstr "Толькі чальцы каманды могуць бачыць матэрыялы, якія Вы запыталі. Падайце запыт на членства!"
 
 #, fuzzy
 msgid "More infos..."
@@ -4312,9 +4365,6 @@ msgstr "Усе праекты"
 msgid "Temporary User Accounts"
 msgstr ""
 
-msgid "Reminder emails"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 msgid "Organizations"
@@ -4546,6 +4596,10 @@ msgstr ""
 
 msgid "Conference starts soon: [[name]]"
 msgstr ""
+
+#, fuzzy
+msgid "Message to conference participants"
+msgstr "Cosinnus-праекты"
 
 msgid ""
 "The conference [[name]] starts in a week.\n"
@@ -6753,6 +6807,98 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Зарэгістравацца і пачаць супрацоўніцтва"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Мае праекты і групы"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Поле сартавання"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Праекты/групы"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Праекты/групы"
+
+#, fuzzy
+msgid "Options"
+msgstr "Прапорцыі"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Зацягніце выяву."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Мае праекты і групы"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Скіданне пароля прайшло паспяхова"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Памылка!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Паведамленні"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Памылка!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Паведамленні"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Паказаць больш праектаў"
 
@@ -7767,6 +7913,10 @@ msgstr "Вы не з'яўляецеся чальцом %s! Пры жаданні
 msgid "Your changes have been saved."
 msgstr "Вашы змены захаваныя."
 
+#, fuzzy
+#~ msgid "Only conference members can see the event\\'s description."
+#~ msgstr "Толькі чальцы каманды могуць бачыць матэрыялы, якія Вы запыталі. Падайце запыт на членства!"
+
 # EN > link in
 #~ msgid ""
 #~ "Hi %(user_name)s,\n"
@@ -7917,10 +8067,6 @@ msgstr "Вашы змены захаваныя."
 #~ msgid "English--NATIVE-LANGUAGE"
 #~ msgstr "English"
 
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Памылка!"
-
 #~ msgid "French--NATIVE-LANGUAGE"
 #~ msgstr "Français"
 
@@ -7972,44 +8118,20 @@ msgstr "Вашы змены захаваныя."
 #~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 #~ msgstr "Калі Вы жадаеце выдаліць штосьці з Вашага змесціва, калі ласка, вярніцеся і зрабіце гэта зараз. Як толькі вы выдаліце свой профіль, Вы згубіце доступ да любога змесціва, якое Вы стварылі пад гэтым акаўнтам."
 
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Мае праекты і групы"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Мае праекты і групы"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Паведамленні"
-
 #~ msgid "Invited you"
 #~ msgstr "Запрасіў(-ла) Вас"
 
 #~ msgid "Kazakh--NATIVE-LANGUAGE"
 #~ msgstr "Қазақ тілі"
 
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Прапорцыі"
-
 #~ msgid "Polish--NATIVE-LANGUAGE"
 #~ msgstr "Polski"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Праекты/групы"
 
 #~ msgid "Public Group"
 #~ msgstr "Публічная група"
 
 #~ msgid "Re-Activate Project/Group"
 #~ msgstr "Узнавіць праект/групу"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Памылка!"
 
 #~ msgid "Revoked your admin status"
 #~ msgstr "Адклікаў(-ла) Ваш статус адміністратара"
@@ -8050,14 +8172,6 @@ msgstr "Вашы змены захаваныя."
 
 #~ msgid "Ukrainian--NATIVE-LANGUAGE"
 #~ msgstr "Українська"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Зацягніце выяву."
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Праекты/групы"
 
 #~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
 #~ msgstr "Мы даслалі Вам інструкцыі па заданні пароля электронным лістом. Вы хутка іх атрымаеце."

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 12:35+0200\n"
-"PO-Revision-Date: 2021-08-31 14:09+0200\n"
+"POT-Creation-Date: 2021-09-30 12:18+0200\n"
+"PO-Revision-Date: 2021-09-30 14:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -2424,6 +2424,9 @@ msgstr "Поиск электронного письма, имени или фа
 msgid "search"
 msgstr "Поиск"
 
+msgid "Add user"
+msgstr "Добавить пользователя"
+
 #, python-format
 msgid ""
 "\n"
@@ -2480,9 +2483,6 @@ msgstr "предыдущее"
 
 msgid "next"
 msgstr "следующее"
-
-msgid "Add user"
-msgstr "Добавить пользователя"
 
 msgid "Update User"
 msgstr "Создать пользователя"
@@ -2859,7 +2859,7 @@ msgid "Withdraw"
 msgstr "Отозвать"
 
 msgid "Conference Applications"
-msgstr "Настройки конференции"
+msgstr "Заявки на участие в конференции"
 
 msgid "Manage participation applications"
 msgstr "Управлять заявками на участие"
@@ -2924,6 +2924,57 @@ msgstr "Выбрать пользователей для этого воркшо
 msgid "List of Applicants"
 msgstr "Список заявителей"
 
+msgid "Emails to conference participants"
+msgstr "Электронные письма участникам конференции"
+
+msgid "subject"
+msgstr "тема"
+
+msgid "content"
+msgstr "контент"
+
+#, python-format
+msgid ""
+"\n"
+"                    This message will be sent to one participant.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                    This message will be sent to %(count)s participants.\n"
+"                    "
+msgstr[0] ""
+"\n"
+"                    Это сообщение будет отправлено одному пользователю.\n"
+"                    "
+msgstr[1] ""
+"\n"
+"                    Это сообщение будет отправлено %(count)s пользователям.\n"
+"                    "
+
+msgid "Are you sure? Please check your entries beforehand with the help of a test email."
+msgstr "Вы уверены? Пожалуйста, проверьте Ваши записи с помощью тестового электронного письма заранее."
+
+#, python-format
+msgid ""
+"\n"
+"                        Yes, send immediately to one user.\n"
+"                        "
+msgid_plural ""
+"\n"
+"                        Yes, send immediately to %(count)s users.\n"
+"                        "
+msgstr[0] ""
+"\n"
+"                        Да, отправить одному пользователю.\n"
+"                        "
+msgstr[1] ""
+"\n"
+"                        Да, отправить %(count)s пользователям.\n"
+"                        "
+
+msgid "No, don\\"
+msgstr "Нет, отменить."
+
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
 msgstr "Здесь можно задать форму заявки, которую потенциальные участники должны заполнить."
 
@@ -2984,9 +3035,6 @@ msgstr "(условия не выбраны)"
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr "Если файл загружен, заявители должны согласиться с этими условиями путем установки флажка"
 
-msgid "Conference reminders"
-msgstr "Настройки конференции"
-
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Здесь Вы можете подготовить информацию для всех участников конференции. Она будет автоматически отправлена за 1 неделю, 1 день и/или 1 час до начала конференции. Электронное уведомление всегда будет содержать ссылку на конференцию"
 
@@ -3017,6 +3065,22 @@ msgstr "Это электронное письмо будет отправлен
 
 msgid "Send 1 hour before conference"
 msgstr "Отправить за 1 день до начала конференции"
+
+msgid "send immediately"
+msgstr "отправить незамедлительно"
+
+msgid "This email will be sent immediately."
+msgstr "Это электронное письмо будет отправлено сразу."
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr "последнее электронное письмо было отправлено %(date)s "
+
+msgid "no instant email has been sent yet."
+msgstr "нет отправленных электронных писем"
+
+msgid "Send immediately"
+msgstr "Отправить незамедлительно"
 
 #, python-format
 msgid "Edit Room “%(title)s”"
@@ -3440,11 +3504,6 @@ msgstr "час/-а/-ов"
 msgctxt "time"
 msgid "until"
 msgstr "До"
-
-#, fuzzy
-#| msgid "Only conference members can see the content you requested. Apply to become a member now!"
-msgid "Only conference members can see the event\\'s description."
-msgstr "Данный контент доступен только для членов группы. Подайте заявку на вступление прямо сейчас!"
 
 msgid "More infos..."
 msgstr "Контактная информация."
@@ -4169,9 +4228,6 @@ msgstr "Все проекты"
 msgid "Temporary User Accounts"
 msgstr "Временные аккаунты пользователей"
 
-msgid "Reminder emails"
-msgstr "Электронные письма с напоминанием"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Organizations"
 msgstr "Организации"
@@ -4403,6 +4459,9 @@ msgstr ""
 
 msgid "Conference starts soon: [[name]]"
 msgstr "Конференция скоро начнется: [[name]]"
+
+msgid "Message to conference participants"
+msgstr "Сообщение участникам конференции"
 
 msgid ""
 "The conference [[name]] starts in a week.\n"
@@ -6519,8 +6578,6 @@ msgstr "Главная"
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
 
-#, fuzzy
-#| msgid "My Profile"
 msgid "Profile"
 msgstr "Мой профиль"
 
@@ -6563,6 +6620,92 @@ msgstr "Рады видеть тебя! На %(portal_name)s ты можешь �
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Зарегистрироваться"
+
+msgid "Custom Wagtail Page"
+msgstr "Индивидуальная страница Wagtail"
+
+msgid "Tools"
+msgstr "Инструменты"
+
+msgid "Import Projects and Groups or Users"
+msgstr "Импортировать Проекты и Группы или Пользователей"
+
+# ???
+msgid "Import from a CSV File"
+msgstr "Импортировать из CSV файла"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr "Загрузите либо один CSV файл, чтобы импортировать Проекты и Группы, либо другой, чтобы импортировать Пользователей. Обратите внимание, что быть импортированным может только один файл за раз. Файл должен установленного формата. Если формат будет изменен (количество столбцов станет больше/меньше/изменится иначе), пожалуйста, обратитесь к разработчикам!"
+
+msgid "Project/group CSV File"
+msgstr "CSV файл для импорта Проекта/Группы"
+
+msgid "User CSV File"
+msgstr "CSV файл для импорта Пользователей"
+
+msgid "Options"
+msgstr "Дополнительные опции"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr "Дополнительные настройки CSV файла. Изменяйте их только в случае абсолютной уверенности в том, что Вы делаете!"
+
+msgid "Encoding of the CSV file"
+msgstr "Шифрование файла CSV"
+
+msgid "Delimiter of the CSV file"
+msgstr "Определение CSV файла"
+
+msgid "Upload and Import..."
+msgstr "Загрузка и импорт…"
+
+msgid "Import Projects and Groups"
+msgstr "Импорт Проектов и Групп"
+
+msgid "Clear results and start a new import!"
+msgstr "Отчистить результаты и начать новый импорт!"
+
+msgid "CSV Import Results"
+msgstr "Результаты импорта CSV файла"
+
+msgid "The import has finished. Here are the results:"
+msgstr "Импорт был завершен. Получены следующие результаты:"
+
+msgid "Read errors:"
+msgstr "Ошибки чтения!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr "Следующие ряды в Вашем CSV файле имели ошибки или некорректное количество столбцов, а потому были игнорированы:"
+
+msgid "Saved items:"
+msgstr "Сохраненные элементы:"
+
+msgid "Important messages:"
+msgstr "Важные сообщения:"
+
+msgid "Errors:"
+msgstr "Ошибки:"
+
+msgid "Info messages:"
+msgstr "Информационные сообщения:"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr "Файл CSV был прочтен успешно. В данный момент импорт работает на сервере!"
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+"По окончании импорта результаты отобразятся на этой странице.\n"
+"\t\t\n"
+"\t\t\t\tВ зависимости от количества импортированных элементов, процесс импорта может занять от нескольких секунд до нескольких минут. Вы можете закрыть страницу. \n"
+"Уведомление об окончании импорта будет выслано на адрес Вашей электронной почты <b>»%(email)s»</b> !\n"
+"\t\t\t"
+
+msgid "Progress:"
+msgstr "Прогресс:"
 
 msgid "Show more Projects"
 msgstr "Показать больше проектов"
@@ -6669,10 +6812,8 @@ msgstr "Меню проекта"
 msgid "Project Dashboard"
 msgstr "Панель управления проекта"
 
-#, fuzzy
-#| msgid "Project Dashboard"
 msgid "in the Project Dashboard"
-msgstr "Панель управления проекта"
+msgstr "в панели управления проектом"
 
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Реализовывай проекты и инициативы эффективно вместе с единомышленниками. Все важные инструменты для этого сотрудничества вы найдете в одном месте: Новости, Документы, События, Задания и много другого."
@@ -6932,10 +7073,8 @@ msgstr "Извините, но только администраторы пор�
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Данный контент доступен только для членов группы. Подайте заявку на вступление прямо сейчас!"
 
-#, fuzzy
-#| msgid "Please verify your email address for %(site_name)s!"
 msgid "Please verify your email address."
-msgstr "Пожалуйста, подтвердите Ваш электронный адрес для %(site_name)s!"
+msgstr "Пожалуйста, подтвердите Вашу электронную почту."
 
 msgid "Click here to send the verification link again."
 msgstr ""
@@ -7518,6 +7657,17 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
+#~ msgid "Conference reminders"
+#~ msgstr "Настройки конференции"
+
+#, fuzzy
+#~| msgid "Only conference members can see the content you requested. Apply to become a member now!"
+#~ msgid "Only conference members can see the event\\'s description."
+#~ msgstr "Данный контент доступен только для членов группы. Подайте заявку на вступление прямо сейчас!"
+
+#~ msgid "Reminder emails"
+#~ msgstr "Электронные письма с напоминанием"
+
 #~ msgid ""
 #~ "Hi %(user_name)s,\n"
 #~ "\n"
@@ -7588,57 +7738,6 @@ msgstr "Ваши изменения были сохранены."
 
 #~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 #~ msgstr "Пользователь \"%(email)s\" был успешно зарегистрирован. В ближайшее время Вы получите от нас емейл активации. Вам необходимо подтвердить емейл, прежде чем Вы сможете войти на сайт."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Мои проекты и группы"
-
-# ???
-#, fuzzy
-#~| msgid "Import failed"
-#~ msgid "Import from a CSV File"
-#~ msgstr "Поле сортировки"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Проекты/группы"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Проекты/группы"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Пропорции"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Загрузить изображение."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Мои проекты и группы"
-
-#, fuzzy
-#~| msgid "Import successful!"
-#~ msgid "CSV Import Results"
-#~ msgstr "Пароль был успешно переустановлен"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Ошибкa!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Сообщения"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Ошибкa!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Сообщения"
 
 #~ msgid "Restart"
 #~ msgstr "Ограниченный"
@@ -7830,11 +7929,13 @@ msgstr "Ваши изменения были сохранены."
 #~ "\n"
 #~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
 #~ "\n"
-#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails "
+#~ "bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
 #~ "\n"
 #~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
 #~ "\n"
-#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen "
+#~ "wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
 #~ "\n"
 #~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
 #~ "\n"
@@ -7849,7 +7950,8 @@ msgstr "Ваши изменения были сохранены."
 #~ "\n"
 #~ "Заранее сообщаем, что зарегистрировавшись здесь, Вы автоматически стали членом группы „Блог“, в которую поступает вся информация портала. Чтобы Вам легче было понять, что здесь происходит, в настройках уведомлений по умолчанию включена настройка „Все новости“. Настройки можно очень просто изменить в соответствии с вашими индивидуальными потребностями (нажать на свое имя в правой верхней части экрана), чтобы не получать нежелательных сообщений на электронную почту.\n"
 #~ "\n"
-#~ "Еще полезно знать следующее: данный портал - один из многих на wechange.de. Если Вам хочется познакомиться с другими порталами, это можно сделать с помощью вашего логина. Если Вы зарегистрированы на нескольких порталах, то в рубрике „Лента“ (в левом верхнем углу меню) вы будете получать все обновления групп и проектов, членами которых Вы являетесь. Перемещаться с одного портала на другой можно нажимая на их логотипы. Если Вы хотите стать членом группы „Блог“ на другом портале, вам надо будет просто подать заявку на членство.\n"
+#~ "Еще полезно знать следующее: данный портал - один из многих на wechange.de. Если Вам хочется познакомиться с другими порталами, это можно сделать с помощью вашего логина. Если Вы зарегистрированы на нескольких порталах, то в рубрике „Лента“ (в левом верхнем углу меню) вы будете получать все обновления групп и проектов, членами которых Вы являетесь. Перемещаться с одного портала на другой можно нажимая на их логотипы. Если Вы хотите стать членом группы „Блог“ на другом портале, вам "
+#~ "надо будет просто подать заявку на членство.\n"
 #~ "\n"
 #~ "Если у Вас появятся вопросы, технические рекомендации, Вы захотите сообщить об ошибке или поделиться своими пожеланиями, обращайтесь к администраторам портала.\n"
 #~ "\n"

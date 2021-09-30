@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 12:35+0200\n"
+"POT-Creation-Date: 2021-09-30 12:18+0200\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2410,6 +2410,9 @@ msgstr "Hledejte e-mail, jméno nebo příjmení"
 msgid "search"
 msgstr "vyhledávání"
 
+msgid "Add user"
+msgstr "Přidat uživatele"
+
 #, python-format
 msgid ""
 "\n"
@@ -2484,9 +2487,6 @@ msgstr "předchozí"
 
 msgid "next"
 msgstr "další"
-
-msgid "Add user"
-msgstr "Přidat uživatele"
 
 msgid "Update User"
 msgstr "Aktualizujte uživatele"
@@ -2940,6 +2940,55 @@ msgstr "Vyberte uživatele, kteří budou přiděleni k tomuto workshopu"
 msgid "List of Applicants"
 msgstr "Seznam žadatelů"
 
+#, fuzzy
+msgid "Emails to conference participants"
+msgstr "Žádost o účast v konferenci"
+
+#, fuzzy
+#| msgctxt "subject of an E-Mail"
+#| msgid "Subject"
+msgid "subject"
+msgstr "Předmět"
+
+#, fuzzy
+#| msgid "Content"
+msgid "content"
+msgstr "Obsah"
+
+#, python-format
+msgid ""
+"\n"
+"                    This message will be sent to one participant.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                    This message will be sent to %(count)s participants.\n"
+"                    "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Are you sure? Please check your entries beforehand with the help of a test email."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        Yes, send immediately to one user.\n"
+"                        "
+msgid_plural ""
+"\n"
+"                        Yes, send immediately to %(count)s users.\n"
+"                        "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "No, don\\"
+msgstr ""
+
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
 msgstr "Zde můžete konfigurovat formulář žádosti, který musí účastníci vyplnit, aby mohli žádost podat."
 
@@ -3000,9 +3049,6 @@ msgstr "(nevybrány žádné podmínky)"
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr "Pokud je soubor nahrán, žadatelé musí s těmito podmínkami v tomto souboru souhlasit zaškrtnutím checkboxu"
 
-msgid "Conference reminders"
-msgstr "Připomenutí konference"
-
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Zde máte možnost připravit informační text pro všechny účastníky konference. Bude odeslán automaticky 1 týden, 1 den a / nebo 1 hodinu před zahájením konference. E-maily s upozorněním vždy obsahují link na konferenci"
 
@@ -3033,6 +3079,24 @@ msgstr "Tento e-mail bude poslán 24 hodin před zahájením konference."
 
 msgid "Send 1 hour before conference"
 msgstr "Poslat 1 hodinu před zahájením konference"
+
+msgid "send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "no instant email has been sent yet."
+msgstr "Zatím nebyly přidány žádné kontaktní údaje."
+
+msgid "Send immediately"
+msgstr ""
 
 #, python-format
 msgid "Edit Room “%(title)s”"
@@ -3452,10 +3516,6 @@ msgstr "hodin(y)"
 msgctxt "time"
 msgid "until"
 msgstr "až do"
-
-#, fuzzy
-msgid "Only conference members can see the event\\'s description."
-msgstr "Vámi vybraný obsah mohou zobrazit pouze účastníci konference. Podejte si žádost o členství nyní!"
 
 msgid "More infos..."
 msgstr "Více informací..."
@@ -4185,9 +4245,6 @@ msgstr "Všechny projekty"
 msgid "Temporary User Accounts"
 msgstr "Dočasné uživatelské účty"
 
-msgid "Reminder emails"
-msgstr "Připomínací e-maily"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Organizations"
 msgstr "Organizace"
@@ -4415,6 +4472,10 @@ msgstr ""
 
 msgid "Conference starts soon: [[name]]"
 msgstr "Konference začíná brzy: [[name]]"
+
+#, fuzzy
+msgid "Message to conference participants"
+msgstr "Žádost o účast v konferenci"
 
 msgid ""
 "The conference [[name]] starts in a week.\n"
@@ -6552,6 +6613,106 @@ msgstr "Rádi vás vidíme! Na webu %(portal_name)s můžete spolupracovat s ost
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Přihlásit a podílet se teď"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups or Users"
+msgstr "Moje projekty a skupiny"
+
+#, fuzzy
+#| msgid "Import failed"
+msgid "Import from a CSV File"
+msgstr "Import se nezdařil"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Project/group"
+msgid "Project/group CSV File"
+msgstr "Projekt/skupina"
+
+#, fuzzy
+#| msgid "Upload CSV File"
+msgid "User CSV File"
+msgstr "Nahrát CSV soubor"
+
+#, fuzzy
+#| msgid "Proportions"
+msgid "Options"
+msgstr "Poměry"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Upload and Import..."
+msgstr "Nahrát obrázek."
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups"
+msgstr "Moje projekty a skupiny"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Import successful!"
+msgid "CSV Import Results"
+msgstr "Import byl úspěšný!"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+msgid "Read errors:"
+msgstr ""
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Vaše jméno"
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Errors:"
+msgstr "Chyba!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Vaše jméno"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Zobrazit více projektů"
 
@@ -7496,6 +7657,16 @@ msgstr "Momentálně nejste členem %s! Pokud si přejete, můžete požádat o 
 
 msgid "Your changes have been saved."
 msgstr "Vaše změny byly uloženy."
+
+#~ msgid "Conference reminders"
+#~ msgstr "Připomenutí konference"
+
+#, fuzzy
+#~ msgid "Only conference members can see the event\\'s description."
+#~ msgstr "Vámi vybraný obsah mohou zobrazit pouze účastníci konference. Podejte si žádost o členství nyní!"
+
+#~ msgid "Reminder emails"
+#~ msgstr "Připomínací e-maily"
 
 #~ msgid ""
 #~ "Hi %(user_name)s,\n"

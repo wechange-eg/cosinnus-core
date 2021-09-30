@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 12:35+0200\n"
+"POT-Creation-Date: 2021-09-30 12:18+0200\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2384,6 +2384,9 @@ msgstr "חיפוש דואר אלקטרוני, שם פרטי או שם משפחה
 msgid "search"
 msgstr "חיפוש"
 
+msgid "Add user"
+msgstr "הוסף משתמש"
+
 #, python-format
 msgid ""
 "\n"
@@ -2440,9 +2443,6 @@ msgstr "הקודם"
 
 msgid "next"
 msgstr "הבא"
-
-msgid "Add user"
-msgstr "הוסף משתמש"
 
 msgid "Update User"
 msgstr "עדכון המשתמש"
@@ -2884,6 +2884,51 @@ msgstr "בחר משתמשים לשייך לסדנא זו"
 msgid "List of Applicants"
 msgstr "רשימת מועמדים"
 
+#, fuzzy
+msgid "Emails to conference participants"
+msgstr "בקשות השתתפות לועידה"
+
+#, fuzzy
+#| msgctxt "subject of an E-Mail"
+#| msgid "Subject"
+msgid "subject"
+msgstr "נושא"
+
+#, fuzzy
+#| msgid "Content"
+msgid "content"
+msgstr "תוכן"
+
+#, python-format
+msgid ""
+"\n"
+"                    This message will be sent to one participant.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                    This message will be sent to %(count)s participants.\n"
+"                    "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Are you sure? Please check your entries beforehand with the help of a test email."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        Yes, send immediately to one user.\n"
+"                        "
+msgid_plural ""
+"\n"
+"                        Yes, send immediately to %(count)s users.\n"
+"                        "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No, don\\"
+msgstr ""
+
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
 msgstr "כאן באפשרותך לקבוע את תצורת טופס הבקשה שעל המשתתפים למלא כדי להגיש בקשה."
 
@@ -2944,9 +2989,6 @@ msgstr "(לא נבחרו תנאים)"
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr "אם קובץ מועלה, המועמדים יצטרכו להסכים לתנאים אלה בתיק זה על ידי סימון תיבת הסימון"
 
-msgid "Conference reminders"
-msgstr "תזכורות לוועידה"
-
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "כאן יש לך אפשרות להכין טקסט מידע לכל חברי הועידה. זה יישלח אוטומטית שבוע, יום אחד ו / או שעה לפני תחילת הכנס. דואר ההודעות מכיל תמיד קישור לועידה"
 
@@ -2977,6 +3019,24 @@ msgstr "דואר אלקטרוני זה יישלח 24 שעות לפני תארי�
 
 msgid "Send 1 hour before conference"
 msgstr "שלח שעה לפני הוועידה"
+
+msgid "send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "no instant email has been sent yet."
+msgstr "עדיין לא נוספו נתוני איש קשר."
+
+msgid "Send immediately"
+msgstr ""
 
 #, python-format
 msgid "Edit Room “%(title)s”"
@@ -3396,10 +3456,6 @@ msgstr "שעה"
 msgctxt "time"
 msgid "until"
 msgstr "עד"
-
-#, fuzzy
-msgid "Only conference members can see the event\\'s description."
-msgstr "רק חברי הועידה יכולים לראות את התוכן המבוקש. הגש בקשת חברות כעת!"
 
 msgid "More infos..."
 msgstr "מידע נוסף..."
@@ -4129,9 +4185,6 @@ msgstr "כל הפרויקטים"
 msgid "Temporary User Accounts"
 msgstr "חשבונות משתמשים זמניים"
 
-msgid "Reminder emails"
-msgstr "הודעות דוא\"ל לתזכורת"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Organizations"
 msgstr "ארגונים"
@@ -4359,6 +4412,10 @@ msgstr ""
 
 msgid "Conference starts soon: [[name]]"
 msgstr "הועידה מתחילה בקרוב:  [[name]]"
+
+#, fuzzy
+msgid "Message to conference participants"
+msgstr "בקשות השתתפות לועידה"
 
 msgid ""
 "The conference [[name]] starts in a week.\n"
@@ -6495,6 +6552,106 @@ msgstr "טוב לראותך! ב-%(portal_name)s אתה יכול ליצור שי�
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "הירשמו עכשיו ועזרו לעצב אותו"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups or Users"
+msgstr "הפרויקטים והקבוצות שלי"
+
+#, fuzzy
+#| msgid "Import failed"
+msgid "Import from a CSV File"
+msgstr "הייבוא נכשל"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Project/group"
+msgid "Project/group CSV File"
+msgstr "פרוייקט/קבוצה"
+
+#, fuzzy
+#| msgid "Upload CSV File"
+msgid "User CSV File"
+msgstr "העלאת קובץ CSV"
+
+#, fuzzy
+#| msgid "Proportions"
+msgid "Options"
+msgstr "פרופורציות"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Upload and Import..."
+msgstr "העלה תמונה."
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups"
+msgstr "הפרויקטים והקבוצות שלי"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Import successful!"
+msgid "CSV Import Results"
+msgstr "הייבוא הצליח!"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+msgid "Read errors:"
+msgstr ""
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "השם שלך"
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Errors:"
+msgstr "שגיאה!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "השם שלך"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "הצג פרוייקטים נוספים"
 
@@ -7439,6 +7596,16 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
+
+#~ msgid "Conference reminders"
+#~ msgstr "תזכורות לוועידה"
+
+#, fuzzy
+#~ msgid "Only conference members can see the event\\'s description."
+#~ msgstr "רק חברי הועידה יכולים לראות את התוכן המבוקש. הגש בקשת חברות כעת!"
+
+#~ msgid "Reminder emails"
+#~ msgstr "הודעות דוא\"ל לתזכורת"
 
 #~ msgid ""
 #~ "Hi %(user_name)s,\n"
