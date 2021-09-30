@@ -73,7 +73,7 @@
 
 {% if group.group_is_conference and user|has_write_access:object %}
 	{% captureas href %}{% group_url 'cosinnus:conference:reminders' group=group %}{% endcaptureas %}
-	{% captureas label %}{% trans "Reminder emails" %}{% endcaptureas %}
+	{% captureas label %}{% trans "Emails to conference participants" %}{% endcaptureas %}
 	{% include "cosinnus/leftnav_button.html" with active=is_conferencereminders extra_classes="fine-space" icon="fa-envelope" label=label href=href  %}
 {% endif %}
 

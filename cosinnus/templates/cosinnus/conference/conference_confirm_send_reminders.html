@@ -1,0 +1,69 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_group.html"  with current_page="conferencereminders" %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">{% trans "Emails to conference participants" %}</li>
+{% endblock %}
+
+{% block content %}
+    <form method="POST" action="" class="cosinnus-form">
+        {% csrf_token %}
+        <input type="hidden" id="provider" name="provider" value="{{ request.GET.provider }}">
+        <div class="content-box">
+
+            {{ form.non_field_errors }}
+            {% trans "subject" as subject_label %}
+            {% trans "content" as content_label %}
+
+            {% include 'cosinnus/fields/default_field.html' with field=form.subject label=subject_label %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.content label=content_label large_field=True %}
+
+            <div class="alert alert-warning">
+                <i class="fa fa-exclamation-triangle fa-2x"></i>
+                <p>{% blocktrans count count=members.count %}
+                    This message will be sent to one participant.
+                    {% plural %}
+                    This message will be sent to {{ count }} participants.
+                    {% endblocktrans %}
+                    {% trans 'Are you sure? Please check your entries beforehand with the help of a test email.' %}
+                </p>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-emphasized btn-autosize" name="send">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left" href="#" tabindex="-1">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    <div class="media-body">
+                        {% blocktrans count count=members.count %}
+                        Yes, send immediately to one user.
+                        {% plural %}
+                        Yes, send immediately to {{ count }} users.
+                        {% endblocktrans %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+        <button type="submit" class="btn btn-grey" name="cancel">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left" href="#" tabindex="-1">
+                        <i class="fa fa-times"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans 'No, don\'t send' %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+    </form>
+
+{% endblock %}

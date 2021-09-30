@@ -36,6 +36,8 @@ cosinnus_group_patterns = [
         name='applicants-details-download'),
     url(r'^reminders/$', views.conference_reminders,
         name='reminders'),
+    url(r'^confirm_send_reminder/$', views.conference_confirm_send_reminder,
+        name='confirm_send_reminder'),
     url(r'^apply/$', views.conference_application,
         name='application'),
 
