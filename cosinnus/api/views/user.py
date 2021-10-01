@@ -98,7 +98,7 @@ class OAuthUserView(APIView):
             return Response({
                 'success': True,
                 'id': user.username if user.username.isdigit() else str(user.id),
-                'email': user.email.lower(),
+                'email': user.cosinnus_profile.rocket_user_email, # use the rocket user email (may be a non-verified fake one)
                 'name': user.get_full_name(),
                 'avatar': avatar_url,
             })
