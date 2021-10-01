@@ -88,12 +88,10 @@ msgid "ToS not Accepted"
 msgstr "ToS nicht angenommen"
 
 msgid "Email verified"
-msgstr ""
+msgstr "Email-Adresse verifiziert"
 
-#, fuzzy
-#| msgid "not specified"
 msgid "Email not verified"
-msgstr "nicht angegeben"
+msgstr "Email ist nicht verifiziert"
 
 msgid "User Logged In"
 msgstr "Jemals eingeloggt"
@@ -252,7 +250,7 @@ msgid "Premium"
 msgstr "Premium"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
-msgstr ""
+msgstr "Um mit diesem Teil der Webseite fortzufahren, muss Ihre Email-Adresse erst verifiziert werden! Bitte prüfen Sie Ihre eingehende Emails und klicken Sie dann auf den Link in der Verifikationsemail, die Sie von uns erhalten haben. Alternativ können Sie die Verifikationsemail anfordern, wenn Sie den Link unten anklicken."
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Nur registrierte Benutzer  können diesen Inhalt sehen! Log dich ein oder erstelle jetzt ein Benutzerkonto!"
@@ -1072,45 +1070,37 @@ msgid "Start Datetime"
 msgstr "Anfangsdatum"
 
 msgid "During this time, the conference will be using the premium BBB server."
-msgstr ""
+msgstr "Während dieser Zeit wird die Tagung die Premium-BBB-Servers benutzen."
 
 msgid "End Datetime"
 msgstr "Enddatum"
 
-#, fuzzy
-#| msgid "Conference participation management"
 msgid "Conference participants"
-msgstr "Verwaltung von Tagungsteilnahmen"
+msgstr "Tagungsteilnehmer"
 
 msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
-msgstr ""
+msgstr "Die Anzahl von BBB-Tagungsteilnehmer, die sich für die Tagung diesmal angemeldet haben. Dies ist nur eine Richtlinie für die Portaladministratoren."
 
-#, fuzzy
-#| msgid "Cosinnus Conference Setting"
 msgid "Cosinnus Conference Premium Block"
-msgstr "Cosinnus Tagungs-Einstellung"
+msgstr "Cosinnus Tagungs-Premium-Block"
 
-#, fuzzy
-#| msgid "Cosinnus Conference Settings"
 msgid "Cosinnus Conference Premium Blocks"
-msgstr "Cosinnus Tagungs-Einstellungen"
+msgstr "Cosinnus Tagungs-Premium-Blocks"
 
 msgid "The time frame while the selected capacity is available."
-msgstr ""
+msgstr "Der Zeitraum, wann die ausgewählte Kapazität vorhanden wird."
 
-#, fuzzy
-#| msgid "Maximal Number of participants"
 msgid "Maximum BBB participants"
 msgstr "Maximale Anzahl von Teilnehmenden"
 
 msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
-msgstr ""
+msgstr "Die maximale Anzahl von BBB-Teilnehmern, die für alle Premium-Tagungen erlaubt werden soll. Dies ist nur eine Richtlinie für die Portaladministratoren."
 
 msgid "Conference Total Premium Capacity Info"
-msgstr ""
+msgstr "Information über die Premium-Gesamtkapazität der Tagung"
 
 msgid "Conference Total Premium Capacity Infos"
-msgstr ""
+msgstr "Informationen über die Premium-Gesamtkapazität der Tagung"
 
 msgid "Complaint Text"
 msgstr "Beschwerdetext"
@@ -1330,13 +1320,11 @@ msgstr "Hintergrundbild"
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Wird als großes Banner auf der Microsite angezeigt (1140 x 240 px)"
 
-#, fuzzy
-#| msgid "Is visible"
 msgid "Publicly visible"
-msgstr "Ist sichtbar"
+msgstr "Ist öffentlich"
 
 msgid "Checks if a group/project should be visible publicly"
-msgstr ""
+msgstr "Prüft, ob eine Gruppe / ein Projekt öffentlich einsehbar muss"
 
 msgid "Application method"
 msgstr "Art des Teilnahmeantrags"
@@ -1432,7 +1420,7 @@ msgid "Dynamic extra fields"
 msgstr "Dynamische Zusatzfelder"
 
 msgid "If set to true, a contact form will be displayed on the micropage."
-msgstr ""
+msgstr "Wenn der Wert auf True festgelegt ist, wird das Kontankformular auf der Microsite aufgezeigt."
 
 msgid "Cosinnus project"
 msgstr "Projekt"
@@ -1817,7 +1805,7 @@ msgid "CSV row did not contain data for required columns: \"%(fields)s\""
 msgstr "CSV-Zeile enthielt keine Daten für erforderliche Spalten: \"%(fields)s\""
 
 msgid "Import for a user item has failed, cancelling the import process! TODO: has data been written?"
-msgstr "Der Import für ein Benutzerelement ist fehlgeschlagen, der Importvorgang wird abgebrochen!"
+msgstr "Der Import für ein Benutzerelement ist fehlgeschlagen, der Importvorgang wird abgebrochen! TODO: wurden die Daten bearbeitet?"
 
 msgid "Total Items"
 msgstr "Gesamtzahl Einträge"
@@ -2153,10 +2141,10 @@ msgid "Back to Project Overview"
 msgstr "Zurück zur Übersicht"
 
 msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
-msgstr ""
+msgstr "Im angegebenen Zeitraum von einem dieser Blöcke, wird die Tagung im Premium-Modus sein. Im Laufe von diesem Premium-Modus, wird der Premium-BBB-Server für all die Räume der Tagung eingeschaltet."
 
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
-msgstr ""
+msgstr "Hier können Sie die Teilnehmer-Kapazitätenlimits des BBB-Servers für die bestimmte Zeitintervallen auf dem BBB-Premium-Server festlegen. Diese Limits dienen nur als eine Richtlinie für die Portaladministratoren, um festzustellen, ob die Kapazität des BBB-Servers erweitern werden muss."
 
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "Du kannst Tagungseinstellungen auf dieser Ebene festlegen. Alle Inhalte in der Hierarchie unter dieser Ebene werden die Einstellungen erben, falls für sie keine eigenen Einstellungen festgelegt sind."
@@ -2192,18 +2180,14 @@ msgid "View Past"
 msgstr "Vergangene ansehen"
 
 msgid "Premium capacity occupancy overview"
-msgstr ""
+msgstr "Überblick über die Belegung von Premium-Kapazität"
 
 msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
+msgstr "Dieser Kalendar zeigt all die Tagungen in der aktuellen Ansicht, alle Premium-Blöcke, die momentan für die Tagungen gebucht sind, sowie die gesamte Kapazität der bestimmten Premium-Servers."
 
-#, fuzzy
-#| msgid "Bookmarked"
 msgid "Booked"
-msgstr "Gemerkt"
+msgstr "Gebucht"
 
-#, fuzzy
-#| msgid "Conference is permanently premium"
 msgid "Permanently Premium"
 msgstr "Tagung ist durchgehend Premium"
 
@@ -2213,13 +2197,11 @@ msgstr "Portal-Einstellung"
 msgid "Conference Settings"
 msgstr "Tagungs-Einstellungen"
 
-#, fuzzy
-#| msgid "Premium"
 msgid "Premium active"
-msgstr "Premium"
+msgstr "Premium ist aktiv"
 
 msgid "Premium inactive, but scheduled"
-msgstr ""
+msgstr "Premium ist inaktiv, aber geplant"
 
 msgid "Not premium"
 msgstr "Nicht Premium"
@@ -2306,10 +2288,8 @@ msgstr "Simple Statistiken"
 msgid "Conference Overview"
 msgstr "Tagungs-Überblick"
 
-#, fuzzy
-#| msgid "BBB Server for Premium Conferences"
 msgid "Premium Conferences Only"
-msgstr "BBB-Server für Premium-Tagungen"
+msgstr "Nur Premium-Tagungen"
 
 msgid "Conferences with Custom Settings"
 msgstr "Tagungen mit eigenen Einstellungen"
@@ -2793,7 +2773,7 @@ msgid "Your profile"
 msgstr "Dein Profil"
 
 msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
-msgstr "Du erhältst eine Benachrichtigungs-E-Mail und eine Benachrichtigung auf der Webseite, wenn wir deine Anmeldung bearbeitet haben. Stelle also bitte sicher, dass du unter deinen Benachrichtigungseinstellungen an der Stelle \"Ich möchte Benachrichtigungs-Emails erhalten\" die richtige Auswahl getroffen hast, um E-Mails von uns zu erhalten."
+msgstr "Du erhältst eine Benachrichtigungs-E-Mail und eine Benachrichtigung auf der Webseite, wenn wir deine Anmeldung bearbeitet haben. Stelle also bitte sicher, dass du unter deinen Benachrichtigungseinstellungen an der Stelle \"Ich möchte Benachrichtigungs-Emails erhalten\" die richtige Auswahl getroffen hast, um E-Mails von uns zu erhalten!"
 
 msgid "Please provide your motivation for applying"
 msgstr "Bitte gib deine Motivation für die Teilnahme an"
@@ -3049,7 +3029,7 @@ msgid "send immediately"
 msgstr "sofort schicken"
 
 msgid "This email will be sent immediately."
-msgstr "Diese Email wird sofort geschickt. "
+msgstr "Diese Email wird sofort geschickt."
 
 #, python-format
 msgid "last instant email was sent on %(date)s "
@@ -3357,22 +3337,18 @@ msgstr "Gib die Auswahlmöglichkeiten als Semikolon-getrennte Werte ein"
 msgid "Enter your choices"
 msgstr "Gib deine Auswahlmöglichkeiten ein"
 
-#, fuzzy
-#| msgid "Please verify your email address for %(site_name)s!"
 msgid "Please verify your email address to continue using your account."
-msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s!"
+msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s."
 
 msgid "You should already have received an email with a verification link we sent to your account's email address:"
-msgstr ""
+msgstr "Sie sollten eine Email mit dem Verifizierungslink, die wir an Ihre zum Profil gebundene Email-Adresse geschickt hatten, bereits erhalten haben:"
 
 msgid "Click here to send the validation link again."
-msgstr ""
+msgstr "Bitte hier anklicken, um eine Verifizierungslink erneut zu schicken."
 
 msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
-msgstr ""
+msgstr "Wenn Sie Probleme mit dem Verifikationsvorgang haben, wenden Sie sich bitte an den Support!"
 
-#, fuzzy
-#| msgid "Please verify your email address for %(site_name)s!"
 msgid "Please verify your email address!"
 msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s!"
 
@@ -3405,16 +3381,14 @@ msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "optional"
 
-#, fuzzy
-#| msgid "Additional options"
 msgid "Add/Edit translations"
-msgstr "Zusätzliche Optionen"
+msgstr "Übersetzungen hinzufügen/ ändern"
 
 msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
-msgstr ""
+msgstr "Der Inhalt des obigen Feldes wird im Rahmen der Plattform-Suche auffindbar. Er wird angezeigt, es sei denn er nicht anhand von einer bestimmten Übersetzung (unten) überschrieben wird."
 
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
-msgstr ""
+msgstr "Falls vorhanden, werden die unten angegebene Übersetzungen entsprechend der lokalen Spracheinstellungen des Benutzers angezeigt. Diese sind nirgendwo auffindbar."
 
 msgid "Date"
 msgstr "Datum"
@@ -3485,7 +3459,7 @@ msgid "More infos..."
 msgstr "Mehr Informationen..."
 
 msgid "Please Login or Register to view the event's description."
-msgstr ""
+msgstr "Bitte loggen Sie sich ein oder registrieren Sie sich, um die Eventbeschreibung zu sehen."
 
 msgid "You will now receive notifications for content posted in this conference."
 msgstr "Du wirst jetzt Benachrichtigungen für Inhalte in dieser Tagung erhalten."
@@ -4795,14 +4769,7 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "Deine Registrierung bei %(site_name)s wurde abgelehnt."
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
-#| "\n"
-#| "Out administrators will review your request and approve your user account soon!\n"
-#| "\n"
-#| "Until then, with warm greetings, \n"
-#| "your %(site_name)s Team"
+#, python-format
 msgid ""
 "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 "\n"
@@ -5107,10 +5074,8 @@ msgstr "Entschuldige, aber dein Benuterkonto wurde über ein integriertes Portal
 msgid "Please contact an administrator if this is an issue for you."
 msgstr "Bitte kontaktiere einen Administrator wenn das ein Problem für dich darstellt."
 
-#, fuzzy
-#| msgid "Set your password"
 msgid "Sorry, we can't reset your password!"
-msgstr "Passwort festlegen"
+msgstr "Sorry, wir können Ihr Passwort nicht zurücksetzen!"
 
 msgid "Password reset"
 msgstr "Passwort zurücksetzen"
@@ -5366,10 +5331,8 @@ msgstr "Gib einen oder mehrere Suchbegriffe ein oder wähle ein Thema aus um zu 
 msgid "CSV Downloads"
 msgstr "CSV Downloads"
 
-#, fuzzy
-#| msgid "HD space used by projects"
 msgid "HD space used by conferences"
-msgstr "Speicherbedarf Projekte"
+msgstr "Festplattenspeicher, der von den Tagungen verwendet wird"
 
 msgid "HD space used by groups"
 msgstr "Speicherbedarf Gruppen"
@@ -6052,7 +6015,7 @@ msgid "E-Mail"
 msgstr "E-Mail"
 
 msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
-msgstr ""
+msgstr "Die Änderung Ihrer Email-Adresse muss erst mit dem Verifizierungslink, den wir an Ihre neue Email-Adresse geschickt haben, verifiziert werden."
 
 msgid "Profile avatar"
 msgstr "Avatar"
@@ -6535,8 +6498,6 @@ msgstr "Startseite"
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
 
-#, fuzzy
-#| msgid "My Profile"
 msgid "Profile"
 msgstr "Mein Profil"
 
@@ -6626,13 +6587,13 @@ msgid "CSV Import Results"
 msgstr "Ergebnisse des Imports"
 
 msgid "The import has finished. Here are the results:"
-msgstr "Import abgeschloßen. Hier sind die Ergebnisse: "
+msgstr "Der Importvorgang ist abgeschloßen. Hier sind die Ergebnisse:"
 
 msgid "Read errors:"
-msgstr "Lesefehler!"
+msgstr "Lesefehler:"
 
 msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT: "
+msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
 
 msgid "Saved items:"
 msgstr "Gespeicherte Daten:"
@@ -7033,13 +6994,11 @@ msgstr "Entschuldige, nur Portal-Administrator_innen können Tagungen deaktivier
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Tagung können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
-#, fuzzy
-#| msgid "Please verify your email address for %(site_name)s!"
 msgid "Please verify your email address."
-msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s!"
+msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s."
 
 msgid "Click here to send the verification link again."
-msgstr ""
+msgstr "Bitte hier anklicken, um die Verifikationslink erneut zu schicken."
 
 msgid "Team Description"
 msgstr "Projektbeschreibung"
@@ -7464,7 +7423,7 @@ msgstr "Benutzer \"%(user)s\" wurde erfolgreich registriert. Das Benutzerkonto m
 
 #, python-format
 msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
-msgstr ""
+msgstr "Vielen Dank für Ihre Anmeldung und herzlich Willkommen auf die Plattform! Wir haben an Ihre Email-Adresse \"%(email)s\" eine Email mit dem Verifizierungslink bereits geschickt!"
 
 msgid "The invite token you have used does not exist!"
 msgstr "Das Einladungs-Token, das du benutzt hast, existiert nicht!"
@@ -7516,7 +7475,7 @@ msgid "The user account you were looking for does not exist! Your registration w
 msgstr "Das Benutzerkonto für diesen Bestätigungslink gibt es nicht. Wahrscheinlich wurde deine Registrierung abgelehnt oder der Link ist nicht mehr gültig."
 
 msgid "The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!"
-msgstr ""
+msgstr "Die Email-Adresse, die Sie versuchen zu verifizieren, und die Email-Adresse, mit der Sie sich eingeloggt haben, gehört einem anderen Benutzeraccount! Bitte, loggen Sie sich aus bevor Sie den Verifizierungslink anklicken!"
 
 msgid "The email for this account seems to already have been confirmed!"
 msgstr "Die E-Mail-Adresse für dieses Konto wurde anscheinend bereits bestätitgt!"
@@ -7527,8 +7486,7 @@ msgstr "Dieser Bestätigungslink ist nicht länger gültig!"
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
 msgstr "Die E-Mail-Adresse die du bestätigen wolltest wurde bereits bestätigt oder ist inzwischen von einem andern Benutzer registriert worden!"
 
-#, fuzzy, python-format
-#| msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+#, python-format
 msgid "Your email address %(email)s was successfully confirmed!"
 msgstr "Deine E-Mail-Adresse %(email)s wurde erfolgreich bestätigt! Willkommen!"
 
@@ -7542,26 +7500,24 @@ msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s!"
 
 #, python-format
 msgid "You have just registered an account at %(site_name)s. We're happy to see you!"
-msgstr ""
+msgstr "Sie haben gerade einen Account auf %(site_name)s erstellt. Wir freuen uns, Sie zu sehen!"
 
-#, fuzzy, python-format
-#| msgid "Please verify your email address for %(site_name)s!"
+#, python-format
 msgid "You have just changed your email address at %(site_name)s."
-msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s!"
+msgstr "Sie haben Ihre Email-Adresse auf dem %(site_name)s gerade geändert."
 
 msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
-msgstr ""
+msgstr "Bitte verifizieren Sie Ihre Email-Adresse durch Klicken auf dem folgenden Link (oder durch Kopieren und Einfügen ihn in Ihrem Browser):"
 
 msgid "Thank you!"
-msgstr ""
+msgstr "Vielen Dank!"
 
-#, fuzzy, python-format
-#| msgid "The %(site_name)s team"
+#, python-format
 msgid "Your %(site_name)s Team"
 msgstr "Das Team von %(site_name)s"
 
 msgid "If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!"
-msgstr ""
+msgstr "Wenn Sie sich nicht für ein Account angemeldet haben, dann ignorieren Sie diese Email. Sie können auch auf den Link zur Abbestellung unten in dieser Email klicken, um keine weitere Emails von uns zu erhalten!"
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "Der Abbestellen-Link, den du geklickt hast, scheint nicht gültig zu sein!"
@@ -7571,7 +7527,7 @@ msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You 
 msgstr "Wir haben deine E-Mail-Adresse \"%(email)s\" von unserer Mailingliste entfernt. Du erhältst ab sofort keine Emails mehr von uns!"
 
 msgid "A new verification email has been sent."
-msgstr ""
+msgstr "Eine neue Verifizierungsmail wurde versandt."
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Willkommen! Du wurdest bereits in folgende Projekte und Gruppen eingeladen. Bitte klicke den Ausklappen-Button der Einladungen, die du annehmen oder ablehnen möchtest!"
