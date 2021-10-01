@@ -40,6 +40,19 @@
                     {% endif %}
                 {% endwith %}
             {% endfor %}
+
+            {% for conference in profile.cosinnus_conferences %}
+                {% if conference.from_date %}
+                {
+                        title: "{{ conference.name|truncatechars:25 }}",
+                        start: "{{ conference.from_date|date:'c'}}",
+                        {% if conference.to_date %}
+                        end: "{{ conference.to_date|date:'c'}}",
+                        {% endif %}
+                        url: "{{ conference.get_absolute_url }}"
+                    },
+                {% endif %}
+            {% endfor %}
         ];
         $.cosinnus.fullcalendar();
     </script>
