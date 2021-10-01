@@ -26,22 +26,7 @@
     
     <script type="text/javascript">
         var cosinnus_calendarEvents = [
-            {% for application in this_user.user_applications.order_by_conference_startdate %}
-                {% with group=application.conference %}
-                    {% if group.from_date %}
-                    {
-                        title: "{{ group.name|truncatechars:25 }}",
-                        start: "{{ group.from_date|date:'c'}}",
-                        {% if group.to_date %}
-                        end: "{{ group.to_date|date:'c'}}",
-                        {% endif %}
-                        url: "{{ group.get_absolute_url }}"
-                    },
-                    {% endif %}
-                {% endwith %}
-            {% endfor %}
-
-            {% for conference in profile.cosinnus_conferences %}
+            {% for conference in conferences %}
                 {% if conference.from_date %}
                 {
                         title: "{{ conference.name|truncatechars:25 }}",

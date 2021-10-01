@@ -20,7 +20,7 @@
 </div>
 {% endif %}
 
-{% with conferences=profile.cosinnus_conferences %}
+{% with conferences=conferences %}
     {% for conference in conferences %}
         {% if not SETTINGS.COSINNUS_USE_V2_DASHBOARD or not group.slug in SETTINGS.NEWW_DEFAULT_USER_GROUPS %}
             <button type="button" class="btn {% if conference.has_ended %} btn-disabled {% else %} btn-default {% endif %} w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ conference.get_absolute_url }}">
