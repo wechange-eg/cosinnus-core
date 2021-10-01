@@ -279,7 +279,7 @@
                         fixedWeekCount: false,
                         editable: editable,
                         events: cosinnus_calendarEvents,
-                        selectLongPressDelay: 0,
+                        selectLongPressDelay: 300,
                         timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                         eventDrop: function(date) {
                             $(calendarEl)
@@ -326,7 +326,7 @@
                         contentHeight: 'auto',
                         eventDisplay: 'background',
                         selectable: true,
-                        selectLongPressDelay: 0,
+                        selectLongPressDelay: 300,
                         timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                         dateClick: function(date) {
                             $(calenderEl).trigger('fullCalendarDayClick',[date]);
