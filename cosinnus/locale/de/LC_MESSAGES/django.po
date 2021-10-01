@@ -88,10 +88,10 @@ msgid "ToS not Accepted"
 msgstr "ToS nicht angenommen"
 
 msgid "Email verified"
-msgstr "Email-Adresse verifiziert"
+msgstr "E-Mail-Adresse verifiziert"
 
 msgid "Email not verified"
-msgstr "Email ist nicht verifiziert"
+msgstr "E-Mail ist nicht verifiziert"
 
 msgid "User Logged In"
 msgstr "Jemals eingeloggt"
@@ -250,7 +250,7 @@ msgid "Premium"
 msgstr "Premium"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
-msgstr "Um mit diesem Teil der Webseite fortzufahren, muss Ihre Email-Adresse erst verifiziert werden! Bitte prüfen Sie Ihre eingehende Emails und klicken Sie dann auf den Link in der Verifikationsemail, die Sie von uns erhalten haben. Alternativ können Sie die Verifikationsemail anfordern, wenn Sie den Link unten anklicken."
+msgstr "Um diesen Teil der Webseite zu benutzen, muss deine E-Mail-Adresse erst verifiziert werden! Bitte prüfen deine eingehenden E-Mails und klicke dann auf den Link in der Verifikations-E-Mail, die du von uns erhalten hast. Alternativ kannst du eine neue Verifikations-E-Mail anfordern, indem du den Link unten klickst."
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Nur registrierte Benutzer  können diesen Inhalt sehen! Log dich ein oder erstelle jetzt ein Benutzerkonto!"
@@ -1070,7 +1070,7 @@ msgid "Start Datetime"
 msgstr "Anfangsdatum"
 
 msgid "During this time, the conference will be using the premium BBB server."
-msgstr "Während dieser Zeit wird die Tagung die Premium-BBB-Servers benutzen."
+msgstr "Während dieser Zeit wird die Tagung die Premium-BBB-Server benutzen."
 
 msgid "End Datetime"
 msgstr "Enddatum"
@@ -1079,7 +1079,7 @@ msgid "Conference participants"
 msgstr "Tagungsteilnehmer"
 
 msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
-msgstr "Die Anzahl von BBB-Tagungsteilnehmer, die sich für die Tagung diesmal angemeldet haben. Dies ist nur eine Richtlinie für die Portaladministratoren."
+msgstr "Die Anzahl von BBB-Tagungsteilnehmern, die sich für die Tagung zu diesem Zeitpunkt angemeldet haben. Dies ist nur eine Richtlinie für die Portaladministratoren."
 
 msgid "Cosinnus Conference Premium Block"
 msgstr "Cosinnus Tagungs-Premium-Block"
@@ -1088,7 +1088,7 @@ msgid "Cosinnus Conference Premium Blocks"
 msgstr "Cosinnus Tagungs-Premium-Blocks"
 
 msgid "The time frame while the selected capacity is available."
-msgstr "Der Zeitraum, wann die ausgewählte Kapazität vorhanden wird."
+msgstr "Der Zeitraum, in dem die ausgewählte Kapazität vorhanden ist."
 
 msgid "Maximum BBB participants"
 msgstr "Maximale Anzahl von Teilnehmenden"
@@ -1321,7 +1321,7 @@ msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Wird als großes Banner auf der Microsite angezeigt (1140 x 240 px)"
 
 msgid "Publicly visible"
-msgstr "Ist öffentlich"
+msgstr "Öffentlich sichtbar"
 
 msgid "Checks if a group/project should be visible publicly"
 msgstr "Prüft, ob eine Gruppe / ein Projekt öffentlich einsehbar muss"
@@ -2773,7 +2773,7 @@ msgid "Your profile"
 msgstr "Dein Profil"
 
 msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
-msgstr "Du erhältst eine Benachrichtigungs-E-Mail und eine Benachrichtigung auf der Webseite, wenn wir deine Anmeldung bearbeitet haben. Stelle also bitte sicher, dass du unter deinen Benachrichtigungseinstellungen an der Stelle \"Ich möchte Benachrichtigungs-Emails erhalten\" die richtige Auswahl getroffen hast, um E-Mails von uns zu erhalten!"
+msgstr "Du erhältst eine Benachrichtigungs-E-Mail und eine Benachrichtigung auf der Webseite, wenn wir deine Anmeldung bearbeitet haben. Stelle also bitte sicher, dass du unter deinen Benachrichtigungseinstellungen an der Stelle \"Ich möchte Benachrichtigungs-E-Mails erhalten\" die richtige Auswahl getroffen hast, um E-Mails von uns zu erhalten!"
 
 msgid "Please provide your motivation for applying"
 msgstr "Bitte gib deine Motivation für die Teilnahme an"
@@ -2884,7 +2884,7 @@ msgid "List of Applicants"
 msgstr "Liste der Antragssteller/innen"
 
 msgid "Emails to conference participants"
-msgstr "Emails an Tagungsteilnehmer"
+msgstr "E-Mails an Tagungsteilnehmer"
 
 msgid "subject"
 msgstr "Betreff"
@@ -2911,7 +2911,7 @@ msgstr[1] ""
 "                "
 
 msgid "Are you sure? Please check your entries beforehand with the help of a test email."
-msgstr "Sind Sie sicher? Bitte prüfen Sie Ihre Eingaben anhand von der Test- E-Mail vorher."
+msgstr "Bist du sicher? Bitte prüfe deine Eingaben anhand von der Test- E-Mail vorher."
 
 #, python-format
 msgid ""
@@ -3029,14 +3029,14 @@ msgid "send immediately"
 msgstr "sofort schicken"
 
 msgid "This email will be sent immediately."
-msgstr "Diese Email wird sofort geschickt."
+msgstr "Diese E-Mail wird sofort geschickt."
 
 #, python-format
 msgid "last instant email was sent on %(date)s "
-msgstr "letzte Email wurde am %(date)s geschickt "
+msgstr "letzte E-Mail wurde am %(date)s geschickt "
 
 msgid "no instant email has been sent yet."
-msgstr "Es wurden noch keine Emails geschickt."
+msgstr "Es wurden noch keine E-Mails geschickt."
 
 msgid "Send immediately"
 msgstr "Sofort schicken"
@@ -3341,13 +3341,13 @@ msgid "Please verify your email address to continue using your account."
 msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s."
 
 msgid "You should already have received an email with a verification link we sent to your account's email address:"
-msgstr "Sie sollten eine Email mit dem Verifizierungslink, die wir an Ihre zum Profil gebundene Email-Adresse geschickt hatten, bereits erhalten haben:"
+msgstr "Du solltest bereits eine E-Mail mit dem Verifizierungslink erhalten haben, die wir an die E-Mail-Adresse deines Benutzerkontos geschickt haben:"
 
 msgid "Click here to send the validation link again."
-msgstr "Bitte hier anklicken, um den Verifikationslink erneut zu schicken."
+msgstr "Hier klicken, um den Verifikationslink erneut zu schicken."
 
 msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
-msgstr "Wenn Sie Probleme mit dem Verifikationsvorgang haben, wenden Sie sich bitte an den Support!"
+msgstr "Wenn du Probleme mit dem Verifikationsvorgang hast, wende dich bitte an den Support!"
 
 msgid "Please verify your email address!"
 msgstr "Bitte bestätige deine E-Mail-Adresse!"
@@ -3382,13 +3382,13 @@ msgid "optional"
 msgstr "optional"
 
 msgid "Add/Edit translations"
-msgstr "Übersetzungen hinzufügen/ ändern"
+msgstr "Übersetzungen hinzufügen / ändern"
 
 msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
-msgstr "Der Inhalt des obigen Feldes wird im Rahmen der Plattform-Suche auffindbar. Er wird angezeigt, es sei denn er nicht anhand von einer bestimmten Übersetzung (unten) überschrieben wird."
+msgstr "Der Inhalt des obigen Feldes wird im Rahmen der Plattform-Suche auffindbar. Er wird angezeigt wenn er nicht anhand von einer bestimmten Übersetzung (unten) überschrieben wird."
 
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
-msgstr "Falls vorhanden, werden die unten angegebene Übersetzungen entsprechend der lokalen Spracheinstellungen des Benutzers angezeigt. Diese sind nirgendwo auffindbar."
+msgstr "Falls vorhanden, werden die unten angegebenen Übersetzungen entsprechend der lokalen Spracheinstellungen des Benutzers angezeigt. Sie sind nicht in der Suche auffindbar."
 
 msgid "Date"
 msgstr "Datum"
@@ -3459,7 +3459,7 @@ msgid "More infos..."
 msgstr "Mehr Informationen..."
 
 msgid "Please Login or Register to view the event's description."
-msgstr "Bitte loggen Sie sich ein oder registrieren Sie sich, um die Eventbeschreibung zu sehen."
+msgstr "Bitte logge dich ein oder registriere dich, um die Veranstaltungsbeschreibung zu sehen."
 
 msgid "You will now receive notifications for content posted in this conference."
 msgstr "Du wirst jetzt Benachrichtigungen für Inhalte in dieser Tagung erhalten."
@@ -3488,7 +3488,7 @@ msgid "Delete team “%(team_name)s”"
 msgstr "“%(team_name)s” löschen"
 
 msgid "Are you sure you want to delete this team?"
-msgstr "Sind sie sicher dass sie dieses Projekt löschen wollen?"
+msgstr "Bist du sicher dass du dieses Team löschen willst?"
 
 #, python-format
 msgid "%(team_name)s - Members"
@@ -4063,10 +4063,10 @@ msgid "Sustainable Development Goals"
 msgstr "Ziele für nachhaltige Entwicklung"
 
 msgid "Email the group administrators"
-msgstr "Email an die Gruppen-Administrator_innen schicken"
+msgstr "E-Mail an die Gruppen-Administrator_innen schicken"
 
 msgid "Your email address"
-msgstr "Deine Email-Adresse"
+msgstr "Deine E-Mail-Adresse"
 
 msgid "Message"
 msgstr "Nachricht"
@@ -4474,10 +4474,10 @@ msgstr ""
 "«%(message)s»\n"
 "\n"
 "\n"
-"Deine Antwort kannst du auf diese Email schicken:\n"
+"Deine Antwort kannst du auf diese E-Mail schicken:\n"
 "%(email)s\n"
 "\n"
-"(Du hast diese Email bekommen, weil du ein Portal-Administrator bist.)\n"
+"(Du hast diese E-Mail bekommen, weil du ein Portal-Administrator bist.)\n"
 "\n"
 "\n"
 "Dein %(site_name)s Team"
@@ -5016,7 +5016,7 @@ msgid "Not logged in."
 msgstr "Nicht eingeloggt."
 
 msgid "You cannot create or edit events until you are logged in!"
-msgstr "Sie können keine Veranstaltungen anlegen oder bearbeiten bis sie sich einloggen!"
+msgstr "Du kannst keine Veranstaltungen anlegen oder bearbeiten bis du dich einloggst!"
 
 msgid "No anonymous access!"
 msgstr "Kein anonymer Zugriff erlaubt!"
@@ -5075,7 +5075,7 @@ msgid "Please contact an administrator if this is an issue for you."
 msgstr "Bitte kontaktiere einen Administrator wenn das ein Problem für dich darstellt."
 
 msgid "Sorry, we can't reset your password!"
-msgstr "Sorry, wir können Ihr Passwort nicht zurücksetzen!"
+msgstr "Entschuldige, wir können dein Passwort nicht zurücksetzen!"
 
 msgid "Password reset"
 msgstr "Passwort zurücksetzen"
@@ -5154,7 +5154,7 @@ msgid "You're receiving this email because you requested a password reset for yo
 msgstr "Sie erhalten diese E-Mail weil sie eine Passwortänderung ihres Benutzer_innenkontos auf der Seite %(site_name)s beantragt haben."
 
 msgid "Please go to the following page and choose a new password:"
-msgstr "Bitte klicke auf diesen Link und wählen sie ein neues Passwort:"
+msgstr "Bitte klicke auf diesen Link und wähle ein neues Passwort:"
 
 msgid "Your username, in case you've forgotten:"
 msgstr "Ihr Benutzer_innen-Name:"
@@ -6015,7 +6015,7 @@ msgid "E-Mail"
 msgstr "E-Mail"
 
 msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
-msgstr "Die Änderung Ihrer Email-Adresse muss erst mit dem Verifizierungslink, den wir an Ihre neue Email-Adresse geschickt haben, verifiziert werden."
+msgstr "Die Änderung deiner E-Mail-Adresse muss erst mit dem Verifizierungslink, den wir an deine neue E-Mail-Adresse geschickt haben, verifiziert werden."
 
 msgid "Profile avatar"
 msgstr "Avatar"
@@ -6918,7 +6918,7 @@ msgid "Please verify your email address by %(date_string)s."
 msgstr "Bitte bestätige deine E-Mail-Adresse bis %(date_string)s."
 
 msgid "Click here to send the verification link again."
-msgstr "Bitte hier anklicken, um den Verifikationslink erneut zu schicken."
+msgstr "Hier klicken, um den Verifikationslink erneut zu schicken."
 
 msgid "Team Description"
 msgstr "Projektbeschreibung"
@@ -7292,7 +7292,7 @@ msgid "Your user account is associated with an integrated Portal. This account's
 msgstr "Dein Benuterkonto wurde über ein integriertes Portal erstellt. Die E-Mail-Adresse dieses Kontos ist deshalb unveränderbar und deine Änderungen daran wurden nicht übernommen."
 
 msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
-msgstr "Du hast deine E-Mail-Adresse geändert. Wir schicken dir eine E-Mail an diese Adresse, die einen Bestätigungslink enthält. Bis du diesen Link klickst wird dein Profil weiter unter der alten Email-Adresse geführt!"
+msgstr "Du hast deine E-Mail-Adresse geändert. Wir schicken dir eine E-Mail an diese Adresse, die einen Bestätigungslink enthält. Bis du diesen Link klickst wird dein Profil weiter unter der alten E-Mail-Adresse geführt!"
 
 msgid "Sorry, your profile could not be saved because there was an error while processing the avatar!"
 msgstr "Entschuldigung, dein Profil konnte nicht gespeichert werden weil es einen Fehler beim Speichern des Avatars gab!"
@@ -7311,7 +7311,7 @@ msgid ""
 "\n"
 "If this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile."
 msgstr ""
-"Das bei uns unter dieser Email gespeicherte Profil der Plattform wurde von Dir deaktiviert und zur Löschung freigegeben. Das Profil wurde von der Webseite entfernt und wir werden das Konto in 30 Tagen vollständig löschen. \n"
+"Das bei uns unter dieser E-Mail gespeicherte Profil der Plattform wurde von Dir deaktiviert und zur Löschung freigegeben. Das Profil wurde von der Webseite entfernt und wir werden das Konto in 30 Tagen vollständig löschen. \n"
 "\n"
 "Sollte dies ohne Dein Wissen geschehen sein oder falls Du es dir in der Zwischenzeit anders überlegst, hast Du die Möglichkeit Dich zügig an die Portaladministrator/innen bzw. die im Impressum angegebene E-Mail-Adresse zu wenden. Bitte beachte, dass die Reaktionszeit per Mail in manchen Fällen länger dauern kann. Bitte melde Dich daher frühzeitig, falls Du Dein Profil noch weiter behalten möchtest."
 
@@ -7343,7 +7343,7 @@ msgstr "Benutzer \"%(user)s\" wurde erfolgreich registriert. Das Benutzerkonto m
 
 #, python-format
 msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
-msgstr "Vielen Dank für Ihre Anmeldung und herzlich Willkommen auf die Plattform! Wir haben an Ihre Email-Adresse \"%(email)s\" eine Email mit dem Verifizierungslink bereits geschickt!"
+msgstr "Vielen Dank für deine Anmeldung und herzlich willkommen auf der Plattform! Wir haben an deine E-Mail-Adresse \"%(email)s\" eine E-Mail mit dem Verifizierungslink geschickt!"
 
 msgid "The invite token you have used does not exist!"
 msgstr "Das Einladungs-Token, das du benutzt hast, existiert nicht!"
@@ -7395,7 +7395,7 @@ msgid "The user account you were looking for does not exist! Your registration w
 msgstr "Das Benutzerkonto für diesen Bestätigungslink gibt es nicht. Wahrscheinlich wurde deine Registrierung abgelehnt oder der Link ist nicht mehr gültig."
 
 msgid "The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!"
-msgstr "Die Email-Adresse, die Sie versuchen zu verifizieren, und die Email-Adresse, mit der Sie sich eingeloggt haben, gehört einem anderen Benutzeraccount! Bitte, loggen Sie sich aus bevor Sie den Verifizierungslink anklicken!"
+msgstr "Die E-Mail-Adresse, die du versucht hast zu verifizieren, und die E-Mail-Adresse, mit der du dich eingeloggt hast, gehört einem anderen Benutzeraccount! Bitte logge dich sich aus bevor du den Verifizierungslink anklickst!"
 
 msgid "The email for this account seems to already have been confirmed!"
 msgstr "Die E-Mail-Adresse für dieses Konto wurde anscheinend bereits bestätitgt!"
@@ -7412,7 +7412,7 @@ msgstr "Deine E-Mail-Adresse %(email)s wurde erfolgreich bestätigt! Willkommen!
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
-msgstr "Deine E-Mail-Adresse %(email)s wurde erfolgreich bestätigt! Allerdings ist dein Konto noch nicht aktiv und muss von einem Administrator bestätigt werden bevor du dich einloggen kannst. Wir schicken dir eine Email sobald das passiert!"
+msgstr "Deine E-Mail-Adresse %(email)s wurde erfolgreich bestätigt! Allerdings ist dein Konto noch nicht aktiv und muss von einem Administrator bestätigt werden bevor du dich einloggen kannst. Wir schicken dir eine E-Mail sobald das passiert!"
 
 #, python-format
 msgid "Please verify your email address for %(site_name)s!"
@@ -7424,10 +7424,10 @@ msgstr "Sie haben gerade einen Account auf %(site_name)s erstellt. Wir freuen un
 
 #, python-format
 msgid "You have just changed your email address at %(site_name)s."
-msgstr "Sie haben Ihre Email-Adresse auf dem %(site_name)s gerade geändert."
+msgstr "Sie haben Ihre E-Mail-Adresse auf dem %(site_name)s gerade geändert."
 
 msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
-msgstr "Bitte verifizieren Sie Ihre Email-Adresse durch Klicken auf dem folgenden Link (oder durch Kopieren und Einfügen ihn in Ihrem Browser):"
+msgstr "Bitte verifiziere deine E-Mail-Adresse, indem du den folgenden Link klickst (oder ihn kopierst und ihn in deinem Browser einfügst):"
 
 msgid "Thank you!"
 msgstr "Vielen Dank!"
@@ -7437,14 +7437,14 @@ msgid "Your %(site_name)s Team"
 msgstr "Das Team von %(site_name)s"
 
 msgid "If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!"
-msgstr "Wenn Sie sich nicht für ein Account angemeldet haben, dann ignorieren Sie diese Email. Sie können auch auf den Link zur Abbestellung unten in dieser Email klicken, um keine weitere Emails von uns zu erhalten!"
+msgstr "Wenn du dich nicht für einen Account angemeldet hast, ignoriere bitte diese E-Mail. Du kannst auch auf den Link zur Abbestellung unten in dieser E-Mail klicken, um keine weitere E-Mails von uns zu erhalten!"
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "Der Abbestellen-Link, den du geklickt hast, scheint nicht gültig zu sein!"
 
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
-msgstr "Wir haben deine E-Mail-Adresse \"%(email)s\" von unserer Mailingliste entfernt. Du erhältst ab sofort keine Emails mehr von uns!"
+msgstr "Wir haben deine E-Mail-Adresse \"%(email)s\" von unserer Mailingliste entfernt. Du erhältst ab sofort keine E-Mails mehr von uns!"
 
 msgid "A new verification email has been sent."
 msgstr "Eine neue Verifizierungsmail wurde versandt."
