@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 12:18+0200\n"
+"POT-Creation-Date: 2021-10-01 19:02+0200\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6726,98 +6726,6 @@ msgstr "გვიხარია თქვენი დანახვა! %(por
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
 
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-#, fuzzy
-msgid "Import Projects and Groups or Users"
-msgstr "ჩემი პროექტები და ჯგუფები"
-
-#, fuzzy
-msgid "Import from a CSV File"
-msgstr "დახარისხების ველი"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-#, fuzzy
-msgid "Project/group CSV File"
-msgstr "პროექტები/ჯგუფები"
-
-#, fuzzy
-msgid "User CSV File"
-msgstr "პროექტები/ჯგუფები"
-
-#, fuzzy
-msgid "Options"
-msgstr "პროპორციები"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-msgid "Delimiter of the CSV file"
-msgstr ""
-
-#, fuzzy
-msgid "Upload and Import..."
-msgstr "გამოსახულების ატვირთვა."
-
-#, fuzzy
-msgid "Import Projects and Groups"
-msgstr "ჩემი პროექტები და ჯგუფები"
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-#, fuzzy
-msgid "CSV Import Results"
-msgstr "პაროლის გადაყენება წარმატებით განხორციელდა"
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-#, fuzzy
-msgid "Read errors:"
-msgstr "შეცდომა!"
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-msgid "Saved items:"
-msgstr ""
-
-#, fuzzy
-msgid "Important messages:"
-msgstr "შეტყობინებები"
-
-#, fuzzy
-msgid "Errors:"
-msgstr "შეცდომა!"
-
-#, fuzzy
-msgid "Info messages:"
-msgstr "შეტყობინებები"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
-
 msgid "Show more Projects"
 msgstr "სხვა პროექტების ჩვენება"
 
@@ -7238,6 +7146,11 @@ msgstr "თქვენ მიერ მოთხოვნილი კონტ
 #, fuzzy
 #| msgid "Please verify your email address for %(site_name)s!"
 msgid "Please verify your email address."
+msgstr "გთხოვთ დაადასტუროთ თქვენი ელ-ფოსტის მისამართის ნამდვილობა %(site_name)s-თვის!"
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address by %(date_string)s."
 msgstr "გთხოვთ დაადასტუროთ თქვენი ელ-ფოსტის მისამართის ნამდვილობა %(site_name)s-თვის!"
 
 msgid "Click here to send the verification link again."
@@ -7829,6 +7742,54 @@ msgstr "თქვენ არ ხართ %s-ის წევრი! თუ �
 
 msgid "Your changes have been saved."
 msgstr "თქვენი ცვლილებები შენახულია."
+
+#, fuzzy
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "ჩემი პროექტები და ჯგუფები"
+
+#, fuzzy
+#~ msgid "Import from a CSV File"
+#~ msgstr "დახარისხების ველი"
+
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "პროექტები/ჯგუფები"
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "პროექტები/ჯგუფები"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "პროპორციები"
+
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "გამოსახულების ატვირთვა."
+
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "ჩემი პროექტები და ჯგუფები"
+
+#, fuzzy
+#~ msgid "CSV Import Results"
+#~ msgstr "პაროლის გადაყენება წარმატებით განხორციელდა"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "შეცდომა!"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "შეტყობინებები"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "შეცდომა!"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "შეტყობინებები"
 
 #, fuzzy
 #~ msgid "Conference reminders"

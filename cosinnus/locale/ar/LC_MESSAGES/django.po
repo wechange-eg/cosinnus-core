@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 12:18+0200\n"
+"POT-Creation-Date: 2021-10-01 19:02+0200\n"
 "PO-Revision-Date: 2021-09-29 12:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -6960,108 +6960,6 @@ msgstr "تسرنا رؤيتك! في %(portal_name)s يمكنك التعاون م
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "سجل الآن وساعد في التشكيل"
 
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-#, fuzzy
-#| msgid "My Projects and Groups"
-msgid "Import Projects and Groups or Users"
-msgstr "مشاريعي ومجموعاتي"
-
-#, fuzzy
-#| msgid "Import failed"
-msgid "Import from a CSV File"
-msgstr "تعُذر الاستيراد"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-#, fuzzy
-#| msgid "Project/group"
-msgid "Project/group CSV File"
-msgstr "مشاريع/مجموعات"
-
-#, fuzzy
-#| msgid "Upload CSV File"
-msgid "User CSV File"
-msgstr "تحميل ملف CSV"
-
-#, fuzzy
-#| msgid "Proportions"
-msgid "Options"
-msgstr "النسب"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-msgid "Delimiter of the CSV file"
-msgstr ""
-
-#, fuzzy
-#| msgid "Upload an image."
-msgid "Upload and Import..."
-msgstr "حمّل صورة."
-
-#, fuzzy
-#| msgid "My Projects and Groups"
-msgid "Import Projects and Groups"
-msgstr "مشاريعي ومجموعاتي"
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-#, fuzzy
-#| msgid "Import successful!"
-msgid "CSV Import Results"
-msgstr "نجح الاستيراد!"
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-msgid "Read errors:"
-msgstr ""
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-msgid "Saved items:"
-msgstr ""
-
-#, fuzzy
-#| msgid "Your name"
-msgid "Important messages:"
-msgstr "اسمك"
-
-#, fuzzy
-#| msgid "Error!"
-msgid "Errors:"
-msgstr "خطأ!"
-
-#, fuzzy
-#| msgid "Your name"
-msgid "Info messages:"
-msgstr "اسمك"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
-
 msgid "Show more Projects"
 msgstr "عرض المزيد من المشاريع"
 
@@ -7496,6 +7394,11 @@ msgstr "يمكن لأعضاء الفريق فقط رؤية المحتوى الذ
 #, fuzzy
 #| msgid "Please verify your email address for %(site_name)s!"
 msgid "Please verify your email address."
+msgstr "يرجى التحقق من عنوان بريدك الإلكتروني لـ %(site_name)s!"
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address by %(date_string)s."
 msgstr "يرجى التحقق من عنوان بريدك الإلكتروني لـ %(site_name)s!"
 
 msgid "Click here to send the verification link again."
@@ -8085,6 +7988,61 @@ msgstr "أنت لست عضوًا حاليًا في %s! إذا كنت ترغب ف
 
 msgid "Your changes have been saved."
 msgstr "تم حفظ التغييرات."
+
+#, fuzzy
+#~| msgid "My Projects and Groups"
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "مشاريعي ومجموعاتي"
+
+#, fuzzy
+#~| msgid "Import failed"
+#~ msgid "Import from a CSV File"
+#~ msgstr "تعُذر الاستيراد"
+
+#, fuzzy
+#~| msgid "Project/group"
+#~ msgid "Project/group CSV File"
+#~ msgstr "مشاريع/مجموعات"
+
+#, fuzzy
+#~| msgid "Upload CSV File"
+#~ msgid "User CSV File"
+#~ msgstr "تحميل ملف CSV"
+
+#, fuzzy
+#~| msgid "Proportions"
+#~ msgid "Options"
+#~ msgstr "النسب"
+
+#, fuzzy
+#~| msgid "Upload an image."
+#~ msgid "Upload and Import..."
+#~ msgstr "حمّل صورة."
+
+#, fuzzy
+#~| msgid "My Projects and Groups"
+#~ msgid "Import Projects and Groups"
+#~ msgstr "مشاريعي ومجموعاتي"
+
+#, fuzzy
+#~| msgid "Import successful!"
+#~ msgid "CSV Import Results"
+#~ msgstr "نجح الاستيراد!"
+
+#, fuzzy
+#~| msgid "Your name"
+#~ msgid "Important messages:"
+#~ msgstr "اسمك"
+
+#, fuzzy
+#~| msgid "Error!"
+#~ msgid "Errors:"
+#~ msgstr "خطأ!"
+
+#, fuzzy
+#~| msgid "Your name"
+#~ msgid "Info messages:"
+#~ msgstr "اسمك"
 
 #, fuzzy
 #~| msgid "Conference is running"

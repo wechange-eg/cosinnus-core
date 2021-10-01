@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 12:18+0200\n"
+"POT-Creation-Date: 2021-10-01 19:02+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -6535,92 +6535,6 @@ msgstr "Раді бачити Вас На %(portal_name)s Ви можете сп
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Зареєструватися та долучитися"
 
-msgid "Custom Wagtail Page"
-msgstr "Custom Wagtail Page"
-
-msgid "Tools"
-msgstr "Інструменти "
-
-msgid "Import Projects and Groups or Users"
-msgstr "Імпортувати проєкти та групи або користувачів"
-
-msgid "Import from a CSV File"
-msgstr "Імпорт із файлу CSV"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr "Завантажте або CSV-файл для імпортування проектів та груп, або CSV-файл для імпорту користувачів. Одночасно може відбуватися лише один імпорт. Формат повинен бути таким, який був узгоджений. Якщо формат зміниться (більше/менше/різні колонки), зверніться до розробників!"
-
-msgid "Project/group CSV File"
-msgstr "CSV файл проєкту/групи"
-
-msgid "User CSV File"
-msgstr "CSV файл користувача"
-
-msgid "Options"
-msgstr "Варіанти"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr "Налаштування за замовчуванням для файлу CSV. Змініть їх, тільки якщо ви абсолютно знаєте, що робите!"
-
-msgid "Encoding of the CSV file"
-msgstr "Кодування файлу CSV"
-
-msgid "Delimiter of the CSV file"
-msgstr "Розділювач файлу CSV"
-
-msgid "Upload and Import..."
-msgstr "Завантажити та імпортувати ..."
-
-msgid "Import Projects and Groups"
-msgstr "Імпортувати проєкти та групи"
-
-msgid "Clear results and start a new import!"
-msgstr "Очистіть результати та почніть новий імпорт!"
-
-msgid "CSV Import Results"
-msgstr "Результати імпорту CSV"
-
-msgid "The import has finished. Here are the results:"
-msgstr "Імпорт завершено. Ось результати:"
-
-msgid "Read errors:"
-msgstr "Помилка!"
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr "Ці рядки у вашому файлі CSV мали помилки або неправильну кількість колонок і були ПРОІГНОРОВАНІ:"
-
-msgid "Saved items:"
-msgstr "Збережені елементи:"
-
-msgid "Important messages:"
-msgstr "Важливі повідомлення:"
-
-msgid "Errors:"
-msgstr "Помилка!"
-
-#, fuzzy
-#| msgid "Important messages:"
-msgid "Info messages:"
-msgstr "Важливі повідомлення:"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr "Файл CSV було успішно прочитано, і зараз імпорт виконується на сервері!"
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-"На цій сторінці відображатимуться результати після завершення імпорту.\n"
-"\t\t\n"
-"\t\t\t\t Залежно від кількості імпортованих елементів цей процес може зайняти від кількох секунд до кількох хвилин. Вам не потрібно тримати цю сторінку відкритою. Ми надішлемо вам електронного листа на вашу адресу   <b>\"%(email) s\" </b>, як тільки імпорт завершиться!\n"
-"\t\t\t"
-
-msgid "Progress:"
-msgstr "Прогрес:"
-
 msgid "Show more Projects"
 msgstr "Показати більше Проєктів"
 
@@ -6993,6 +6907,11 @@ msgstr "Тільки учасники конференції можуть бач
 #, fuzzy
 #| msgid "Please verify your email address for %(site_name)s!"
 msgid "Please verify your email address."
+msgstr "Будь ласка, підтвердіть свою адресу електронної пошти для %(site_name)s!"
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address by %(date_string)s."
 msgstr "Будь ласка, підтвердіть свою адресу електронної пошти для %(site_name)s!"
 
 msgid "Click here to send the verification link again."
@@ -7575,6 +7494,91 @@ msgstr "Наразі Ви не є членом %s! Якщо ви бажаєте 
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#~ msgid "Custom Wagtail Page"
+#~ msgstr "Custom Wagtail Page"
+
+#~ msgid "Tools"
+#~ msgstr "Інструменти "
+
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Імпортувати проєкти та групи або користувачів"
+
+#~ msgid "Import from a CSV File"
+#~ msgstr "Імпорт із файлу CSV"
+
+#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+#~ msgstr "Завантажте або CSV-файл для імпортування проектів та груп, або CSV-файл для імпорту користувачів. Одночасно може відбуватися лише один імпорт. Формат повинен бути таким, який був узгоджений. Якщо формат зміниться (більше/менше/різні колонки), зверніться до розробників!"
+
+#~ msgid "Project/group CSV File"
+#~ msgstr "CSV файл проєкту/групи"
+
+#~ msgid "User CSV File"
+#~ msgstr "CSV файл користувача"
+
+#~ msgid "Options"
+#~ msgstr "Варіанти"
+
+#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+#~ msgstr "Налаштування за замовчуванням для файлу CSV. Змініть їх, тільки якщо ви абсолютно знаєте, що робите!"
+
+#~ msgid "Encoding of the CSV file"
+#~ msgstr "Кодування файлу CSV"
+
+#~ msgid "Delimiter of the CSV file"
+#~ msgstr "Розділювач файлу CSV"
+
+#~ msgid "Upload and Import..."
+#~ msgstr "Завантажити та імпортувати ..."
+
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Імпортувати проєкти та групи"
+
+#~ msgid "Clear results and start a new import!"
+#~ msgstr "Очистіть результати та почніть новий імпорт!"
+
+#~ msgid "CSV Import Results"
+#~ msgstr "Результати імпорту CSV"
+
+#~ msgid "The import has finished. Here are the results:"
+#~ msgstr "Імпорт завершено. Ось результати:"
+
+#~ msgid "Read errors:"
+#~ msgstr "Помилка!"
+
+#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+#~ msgstr "Ці рядки у вашому файлі CSV мали помилки або неправильну кількість колонок і були ПРОІГНОРОВАНІ:"
+
+#~ msgid "Saved items:"
+#~ msgstr "Збережені елементи:"
+
+#~ msgid "Important messages:"
+#~ msgstr "Важливі повідомлення:"
+
+#~ msgid "Errors:"
+#~ msgstr "Помилка!"
+
+#, fuzzy
+#~| msgid "Important messages:"
+#~ msgid "Info messages:"
+#~ msgstr "Важливі повідомлення:"
+
+#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
+#~ msgstr "Файл CSV було успішно прочитано, і зараз імпорт виконується на сервері!"
+
+#~ msgid ""
+#~ "This page will show the results when the import is finished.\n"
+#~ "\t\t\n"
+#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+#~ "\t\t\t"
+#~ msgstr ""
+#~ "На цій сторінці відображатимуться результати після завершення імпорту.\n"
+#~ "\t\t\n"
+#~ "\t\t\t\t Залежно від кількості імпортованих елементів цей процес може зайняти від кількох секунд до кількох хвилин. Вам не потрібно тримати цю сторінку відкритою. Ми надішлемо вам електронного листа на вашу адресу   <b>\"%(email) s\" </b>, як тільки імпорт завершиться!\n"
+#~ "\t\t\t"
+
+#~ msgid "Progress:"
+#~ msgstr "Прогрес:"
 
 #~ msgid "Conference reminders"
 #~ msgstr "Нагадування про конференцію"
