@@ -169,7 +169,7 @@ class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
         user = self.context['request'].user
         # show a premium notification for admins
         if settings.COSINNUS_PREMIUM_CONFERENCES_ENABLED and (check_ug_admin(user, obj) or check_user_superuser(user)):
-            if obj.has_premium_blocks:
+            if obj.has_premium_blocks or obj.is_premium:
                 if obj.is_premium:
                     notification_text = _('Your conference is currently using the high performance premium servers!')
                     notification_severity = 'success'
