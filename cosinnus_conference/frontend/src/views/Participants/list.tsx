@@ -104,7 +104,7 @@ function ParticipantsTable (props: ParticipantsTableProps) {
 
 function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) {
   const { participants, fetchParticipants, room } = props
-  const [country, setCountry] = useState("")
+  const [country, setCountry] = useState("-----")
   const classes = useStyles()
   let filteredParticipants: Participant[] = participants
   if (!participants || participants.length == 0) {
@@ -120,7 +120,7 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
   }
 
   const countries: string[] = uniqBy(participants, p => p.props.country).map(p => p.props.country)
-  if (country !== "") {
+  if (country !== "-----") {
     filteredParticipants = participants.filter(p => p.props.country === country)
   }
   return (
@@ -147,6 +147,7 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
             value={country}
             onChange={handleCountryChange}
           >
+            <MenuItem value={'-----'}><FormattedMessage id="Filter by country" /></MenuItem>
             {countries.map((country) => (
               <MenuItem key={country} value={country}>{country}</MenuItem>
             ))}
