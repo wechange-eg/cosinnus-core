@@ -226,6 +226,21 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
                         filter(settings__contains='tos_accepted')
             self.qs = qs
         return self.qs
+
+    def get_conferences_for_user(self, profile):
+        from cosinnus.models.group_extra import CosinnusConference
+        applications = profile.user.user_applications.all()
+        conferences_application_ids = list(
+            applications.values_list('conference__id', flat=True))
+        conferences_membership_ids = [conference.id
+                                      for conference
+                                      in profile.cosinnus_conferences]
+        unique_ids = set(conferences_application_ids +
+                         conferences_membership_ids)
+
+        conferences = CosinnusConference.objects.filter(
+            id__in=list(unique_ids)).order_by('-from_date')
+        return conferences
     
     def get_context_data(self, **kwargs):
         context = super(UserProfileDetailView, self).get_context_data(**kwargs)
@@ -234,6 +249,7 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
             'optional_fields': profile.get_optional_fields(),
             'profile': profile,
             'this_user': profile.user,
+            'conferences': self.get_conferences_for_user(profile)
         })
         return context
 

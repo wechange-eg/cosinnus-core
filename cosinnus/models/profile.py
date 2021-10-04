@@ -273,7 +273,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def cosinnus_groups(self):
         """ Returns all groups this user is a member or admin of """
         return get_cosinnus_group_model().objects.get_for_user(self.user)
-    
+
     @property
     def cosinnus_groups_pks(self):
         """ Returns all group ids this user is a member or admin of """
@@ -290,6 +290,12 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         """ Returns all societies this user is a member or admin of """
         from cosinnus.models.group_extra import CosinnusSociety
         return CosinnusSociety.objects.get_for_user(self.user)
+
+    @property
+    def cosinnus_conferences(self):
+        """ Returns all conferences this user is a member or admin of """
+        from cosinnus.models.group_extra import CosinnusConference
+        return CosinnusConference.objects.get_for_user(self.user)
     
     def get_deactivated_groups(self):
         """ Returns a QS of all (untyped) deactivated groups for this user """

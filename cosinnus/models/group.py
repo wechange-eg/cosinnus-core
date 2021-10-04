@@ -1467,6 +1467,11 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
         return has_time and running
 
     @property
+    def has_ended(self):
+        if self.to_date:
+            return self.to_date <= now()
+
+    @property
     def conference_events(self):
         from cosinnus_event.models import ConferenceEvent # noqa
         return ConferenceEvent.objects.filter(group=self)
