@@ -173,11 +173,9 @@ class BBBRoom(models.Model):
         :return: password for the user to join the room
         :rtype: str
         """
-        if user in self.attendees.all():
-            return self.attendee_password
-        elif user in self.moderators.all():
+        if check_user_superuser(user) or user in self.moderators.all():
             return self.moderator_password
-        elif check_user_superuser(user):
+        elif user in self.attendees.all():
             return self.attendee_password
         else:
             return ''
