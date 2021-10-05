@@ -8,7 +8,8 @@ from rest_framework.views import APIView
 from cosinnus.api.serializers.portal import PortalSettingsSerializer
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
-from cosinnus.templatetags.cosinnus_tags import cosinnus_menu_v2
+from cosinnus.templatetags.cosinnus_tags import cosinnus_menu_v2,\
+    cosinnus_footer_v2
 from cosinnus.utils.user import filter_active_users
 
 
@@ -136,7 +137,7 @@ class FooterView(APIView):
     def get(self, request):
         context = Context({'request': request})
         return Response({
-            'html': cosinnus_menu_v2(context, request=request),
+            'html': cosinnus_footer_v2(context, request=request),
         })
 
 
