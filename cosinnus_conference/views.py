@@ -60,12 +60,13 @@ from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus import cosinnus_notifications
 from django.utils.functional import cached_property
 import xlsxwriter
+from cosinnus.utils.http import make_xlsx_response
 
 logger = logging.getLogger('cosinnus')
 
 
 class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin,
-                                     RequireExtraDispatchCheckMixin, DetailView):
+                                  RequireExtraDispatchCheckMixin, DetailView):
 
     template_name = 'cosinnus/conference/conference_temporary_users.html'
     
@@ -110,8 +111,18 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             delete_userprofile(user)
             messages.add_message(request, messages.SUCCESS, _('Successfully removed user'))
 
-        return redirect(group_aware_reverse('cosinnus:conference:management',
-                                            kwargs={'group': self.group}))
+        elif 'downloadPasswords' in request.POST:
+            filename = '{}_participants_passwords'.format(
+                self.group.slug)
+            header = [_('Workshop username'), _('First Name'),
+                      _('Last Name'), _('Email'), _('Password')]
+            accounts = self.get_accounts_with_password()
+            return make_xlsx_response(accounts, row_names=header,
+                                      file_name=filename)
+
+        return redirect(group_aware_reverse(
+            'cosinnus:conference:temporary-users',
+            kwargs={'group': self.group}))
 
     def update_all_members_status(self, status):
         for member in self.group.conference_members:
@@ -119,6 +130,23 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             if status:
                 member.last_login = None
             member.save()
+
+    def get_accounts_with_password(self):
+        accounts = []
+        for member in self.group.conference_members:
+            pwd = ''
+            if not member.password or not member.last_login:
+                pwd = get_random_string()
+                member.set_password(pwd)
+                member.save()
+            accounts.append([
+                member.cosinnus_profile.readable_workshop_user_name,
+                member.first_name,
+                member.last_name,
+                member.email,
+                pwd
+            ])
+        return accounts
 
     def update_member_status(self, user_id, status):
         try:
@@ -129,23 +157,10 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         except ObjectDoesNotExist:
             pass
 
-    def get_member_workshops(self, member):
-        return CosinnusGroupMembership.objects.filter(user=member, group__parent=self.group)
-
-    def get_members_and_workshops(self):
-        members = []
-        for member in self.group.conference_members:
-            member_dict = {
-                'member': member,
-                'workshops': self.get_member_workshops(member)
-            }
-            members.append(member_dict)
-        return members
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['group'] = self.group
-        context['members'] = self.get_members_and_workshops()
+        context['members'] = self.group.conference_members
         context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
 
         return context
@@ -166,18 +181,9 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
 
     def form_valid(self, form):
         data = form.cleaned_data.get('participants')
-        header, accounts = self.process_data(data)
-
-        filename = '{}_participants_passwords.csv'.format(self.group.slug)
-
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
-
-        writer = csv.writer(response)
-        writer.writerow(header)
-        for account in accounts:
-            writer.writerow(account)
-        return response
+        self.process_data(data)
+        return redirect(group_aware_reverse('cosinnus:conference:temporary-users',
+                                            kwargs={'group': self.group}))
 
     def process_data(self, data):
         groups_list = data.get('header')
@@ -187,7 +193,7 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
             account = self.create_account(row, groups_list)
             accounts_list.append(account)
 
-        return header + ['email', 'password'], accounts_list
+        return header + ['email'], accounts_list
 
     def get_unique_workshop_name(self, name):
         no_whitespace = name.replace(' ', '')
@@ -208,12 +214,11 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
             user.first_name = first_name
             user.last_name = last_name
             user.save()
-            self.create_or_update_memberships(user, data, groups)
+            self.create_or_update_memberships(user)
             return data + [user.email, '']
         except ObjectDoesNotExist:
             random_email = '{}@wechange.de'.format(get_random_string())
-            pwd = get_random_string()
-            user = create_base_user(random_email, password=pwd, first_name=first_name, last_name=last_name)
+            user = create_base_user(random_email, first_name=first_name, last_name=last_name, no_generated_password=True)
 
             if user:
                 profile = get_user_profile_model()._default_manager.get_for_user(user)
@@ -232,12 +237,12 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
                 user.is_active = False
                 user.save()
 
-                self.create_or_update_memberships(user, data, groups)
-                return data + [unique_email, pwd]
+                self.create_or_update_memberships(user)
+                return data + [unique_email]
             else:
                 return data + [_('User was not created'), '']
 
-    def create_or_update_memberships(self, user, data, groups):
+    def create_or_update_memberships(self, user):
 
         # Add user to the parent group
         membership, created = CosinnusGroupMembership.objects.get_or_create(
@@ -248,93 +253,54 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
             membership.status = MEMBERSHIP_MEMBER
             membership.save()
 
-        # Add user to all child groups/projects that were marked with 1 or 2 in the csv or delete membership
-        for i, group in enumerate(groups):
-            if isinstance(group, CosinnusGroup):
-                if data[i] in [str(MEMBERSHIP_MEMBER), str(MEMBERSHIP_ADMIN)]:
-                    status = int(data[i])
-                    membership, created = CosinnusGroupMembership.objects.get_or_create(
-                        group=group,
-                        user=user
-                    )
-                    if created:
-                        membership.status = status
-                        membership.save()
-                    else:
-                        current_status = membership.status
-                        if current_status < status:
-                            membership.status = status
-                            membership.save()
-                else:
-                    try:
-                        membership = CosinnusGroupMembership.objects.get(
-                            group=group,
-                            user=user
-                        )
-                        membership.delete()
-                    except ObjectDoesNotExist:
-                        continue
-            else:
-                continue
 
-
-class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
-
+class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin,
+                                       GroupIsConferenceMixin, View):
 
     def get(self, request, *args, **kwars):
         members = self.group.conference_members
 
-        filename = '{}_statistics.csv'.format(self.group.slug)
-
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
-
-        header = ['Workshop username', 'email', 'workshops count', 'has logged in', 'last login date', 'Terms of service accepted']
-
-        writer = csv.writer(response)
-        writer.writerow(header)
+        filename = '{}_statistics'.format(self.group.slug)
+        rows = []
+        header = ['Workshop username', 'email', 'has logged in',
+                  'last login date', 'Terms of service accepted']
 
         for member in members:
-            workshop_username = member.cosinnus_profile.readable_workshop_user_name
+            profile = member.cosinnus_profile
+            workshop_username = profile.readable_workshop_user_name
             email = member.email
-            workshop_count = self.get_membership_count(member)
             has_logged_in, logged_in_date = self.get_last_login(member)
-            tos_accepted = 1 if member.cosinnus_profile.settings.get('tos_accepted', False) else 0
-            row = [workshop_username, email, workshop_count, has_logged_in, logged_in_date, tos_accepted]
-            writer.writerow(row)
-        return response
-
-    def get_membership_count(self, member):
-        return member.cosinnus_groups.filter(parent=self.group).count()
+            tos_accepted = 1 if profile.settings.get(
+                'tos_accepted', False) else 0
+            row = [workshop_username, email, has_logged_in,
+                   logged_in_date, tos_accepted]
+            rows.append(row)
+        return make_xlsx_response(rows, row_names=header, file_name=filename)
 
     def get_last_login(self, member):
         has_logged_in = 1 if member.last_login else 0
         last_login = timezone.localtime(member.last_login)
-        logged_in_date = last_login.strftime("%Y-%m-%d %H:%M") if member.last_login else ''
+        logged_in_date = ''
+        if member.last_login:
+            logged_in_date = last_login.strftime("%Y-%m-%d %H:%M")
 
         return [has_logged_in, logged_in_date]
 
 
-class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
+class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin,
+                                             RequireWriteMixin,
+                                             GroupIsConferenceMixin, View):
 
     def get(self, request, *args, **kwars):
         filename = '{}_participants.csv'.format(self.group.slug)
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
-
-        writer = csv.writer(response)
-
         header = [_('Workshop username'), _('First Name'), _('Last Name')]
-        workshop_slugs = [group.slug for group in self.group.groups.all()]
-
-        full_header = header + workshop_slugs
-
-        writer.writerow(full_header)
+        rows = []
 
         for i in range(5):
-            row = ['' for entry in full_header]
-            writer.writerow(row)
-        return response
+            row = ['' for entry in header]
+            rows.append(row)
+
+        return make_xlsx_response(rows, row_names=header, file_name=filename)
 
 
 class ConferenceRoomManagementView(RequireAdminMixin, GroupIsConferenceMixin, ListView):
