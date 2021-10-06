@@ -10,9 +10,9 @@
 
 {% block breadcrumb %}
         {{ block.super }}
-        {% group_url 'cosinnus:conference:management' group=group as conference_management_page %}
-        <li><a href="{{ conference_management_page }}">{% trans "Conference Management" %}</a></li>
-        <li class="active">{% trans "Workshop Participant File Upload" %}</li>
+        {% group_url 'cosinnus:conference:temporary-users' group=group as conference_management_page %}
+        <li><a href="{{ conference_management_page }}">{% trans "Temporary Users" %}</a></li>
+        <li class="active">{% trans "Temporary Users File Upload" %}</li>
 {% endblock %}
 
 {% block content %}

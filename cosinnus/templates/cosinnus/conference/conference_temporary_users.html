@@ -147,20 +147,20 @@
 		            {% if member_dict.member.is_active %}
 		            {% captureas label %}{% trans "Do you really want to deactivate the member's user account ?" %}{% endcaptureas %}
 	                {% captureas title %}{% trans "Deactivate Member" %}{% endcaptureas %}
-	                {% captureas action %}{% group_url 'cosinnus:conference:management' group=object %}{% endcaptureas %}
-	                {% include "cosinnus/modal_box.html" with id=modal_deactivate_id label=label title=title form_action=action submit_name="deactivate_member" submit_value=member_dict.member.id title_icon='fas fa-minus-circle' %}
+	                {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
+	                {% include "cosinnus/modal_box.html" with id=modal_deactivate_id label=label title=title form_action=action submit_name="deactivate_member" submit_value=member.id title_icon='fas fa-minus-circle' %}
 
 	                {% else %}
 	                {% captureas label %}{% trans "Do you really want to activate the member's user account ?" %}{% endcaptureas %}
 	                {% captureas title %}{% trans "Activate Member" %}{% endcaptureas %}
-	                {% captureas action %}{% group_url 'cosinnus:conference:management' group=object %}{% endcaptureas %}
-	                {% include "cosinnus/modal_box.html" with id=modal_activate_id label=label title=title form_action=action submit_name="activate_member" submit_value=member_dict.member.id title_icon='fas fa-check-circle' %}
+	                {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
+	                {% include "cosinnus/modal_box.html" with id=modal_activate_id label=label title=title form_action=action submit_name="activate_member" submit_value=member.id title_icon='fas fa-check-circle' %}
 	                {% endif %}
 
 	                {% captureas label %}{% trans "Do you really want to remove the user?" %}{% endcaptureas %}
 	                {% captureas title %}{% trans "Remove User" %}{% endcaptureas %}
-	                {% captureas action %}{% group_url 'cosinnus:conference:management' group=object %}{% endcaptureas %}
-	                {% include "cosinnus/modal_box.html" with id=modal_remove_id label=label title=title form_action=action submit_name="remove_member" submit_value=member_dict.member.id title_icon_full_class='fas fa-user-slash' %}
+	                {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
+	                {% include "cosinnus/modal_box.html" with id=modal_remove_id label=label title=title form_action=action submit_name="remove_member" submit_value=member.id title_icon_full_class='fas fa-user-slash' %}
 		        {% endfor %}
 		        
 		        <div>
