@@ -89,6 +89,10 @@
         
         {% captureas controlsEnabled %}{% if request.GET.controls_disabled %}0{% else %}1{% endif %}{% endcaptureas %}
         {% captureas forcePaginationControlsEnabled %}{% if request.GET.controls_disabled %}0{% else %}1{% endif %}{% endcaptureas %}
+        {% if not request.GET.noFullscreen %}
         {% include 'cosinnus/common/init_client_module.html' with module='module-embed' id="app-embed" embed=True extra_classes="no-navbar" fullscreen=True controlsEnabled=controlsEnabled settings=map_settings|json|safe forcePaginationControlsEnabled=forcePaginationControlsEnabled %}
+        {% else %}
+        {% include 'cosinnus/common/init_client_module.html' with module='module-embed' id="app-embed" embed=True extra_classes="no-navbar" fullscreen=False controlsEnabled=controlsEnabled settings=map_settings|json|safe forcePaginationControlsEnabled=forcePaginationControlsEnabled %}
+        {% endif %}
     </body>
 </html>

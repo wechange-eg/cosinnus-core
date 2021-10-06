@@ -116,7 +116,7 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
   }
 
   function getIframeUrl() {
-    return `/map/embed/?controls_disabled=1&filter_group=${window.conferenceId}`
+    return `/map/embed/?controls_disabled=1&filter_group=${window.conferenceId}&noFullscreen=1`
   }
 
   const countries: string[] = uniqBy(participants, p => p.props.country).map(p => p.props.country)
