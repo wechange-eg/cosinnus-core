@@ -13,12 +13,23 @@
 {% endblock %}
 
 {% block content %}
+{% group_url 'cosinnus:conference:workshop-participants-upload' group=group as workshop_participants_upload_page %}
+{% group_url 'cosinnus:conference:workshop-participants-download' group=group as workshop_participants_download_page %}
+<button type="button" class="btn btn-emphasized">
+	<ul class="media-list">
+		<li class="media">
+			<a class="pull-left" href="{{ workshop_participants_upload_page }}">
+				<i class="fa fa-upload"></i>
+			</a>
+			<div class="media-body">
+				<a href="{{  workshop_participants_upload_page }}">{% trans "Upload Participants" %}</a>
+			</div>
+		</li>
+	</ul>
+</button>
+<div class="clearfix"></div>
 <div class="content-box">
 	<h2 class="white-text large-space">{{ group.name }} ({% if group.conference_is_running %} {% trans "Conference is running" %} {% else %} {% trans "Conference is not running" %} {% endif %})</h2>
-	
-	{% group_url 'cosinnus:conference:workshop-participants-upload' group=group as workshop_participants_upload_page %}
-	{% group_url 'cosinnus:conference:workshop-participants-download' group=group as workshop_participants_download_page %}
-
 
 	<div class="panel panel-default large-space">
         <div class="panel-heading">
