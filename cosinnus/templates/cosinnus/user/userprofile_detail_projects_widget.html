@@ -3,10 +3,10 @@
 <div type="button" class="btn btn-emphasized btn-headline btn-no-interact fine-space">
     <ul class="media-list">
         <li class="media">
-            <a class="pull-left btn-extra-emphasized" href="#"></a>
-            <a class="pull-left" href="#">
+            <span class="pull-left btn-extra-emphasized"></span>
+            <span class="pull-left">
                 <i class="fa fa-sitemap"></i>
-            </a>
+            </span>
             <div class="media-body">
                 {% if request.user.is_authenticated and request.user == this_user %}
                     {{ COSINNUS_PROJECT_TRANS.MY_LIST }}
@@ -24,9 +24,9 @@
             <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
                 <ul class="media-list">
                     <li class="media">
-                        <a class="pull-left">
+                        <span class="pull-left">
                             {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-                        </a>
+                        </span>
                         <div class="media-body">
                             {{ group.name }}
                         </div>

@@ -161,7 +161,7 @@
 			<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
 	            <ul class="media-list">
 	                <li class="media">
-	                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+	                    <span class="pull-left btn-extra-emphasized"></span>
 	                    <div class="media-body">
 	                        {% if group.type == 0 %}{% trans "About the Project" %}{% else %}{% trans "About the Group" %}{% endif %}
 	                    </div>
@@ -332,7 +332,7 @@
 					<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
 			            <ul class="media-list">
 			                <li class="media">
-			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    <span class="pull-left btn-extra-emphasized"></span>
 			                    <div class="media-body">
 			                        {% trans "Contact" %}
 			                    </div>
@@ -392,9 +392,9 @@
 								    <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized" style="float: none; margin-left: 0px;">
 				                        <ul class="media-list">
 				                            <li class="media">
-				                                <a class="pull-left" href="#">
+				                                <span class="pull-left">
 				                                    <i class="fa fa-envelope"></i>
-				                                </a>
+				                                </span>
 				                                <div class="media-body">
 				                                    {% trans "Contact" %}
 				                                </div>
@@ -412,7 +412,7 @@
 				<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
 					<ul class="media-list">
 						<li class="media">
-							<a class="pull-left btn-extra-emphasized" href="#"></a>
+							<span class="pull-left btn-extra-emphasized"></span>
 							<div class="media-body">
 								{% trans "Email the group administrators" %}
 							</div>
@@ -453,9 +453,9 @@
 					<button type="submit" class="btn btn-emphasized" title="Send">
 						<ul class="media-list">
 							<li class="media">
-								<a class="pull-left" href="#">
+								<span class="pull-left">
 									<i class="fa fa-check"></i>
-								</a>
+								</span>
 								<div class="media-body">
 									{% trans "Send" %}
 								</div>
@@ -475,7 +475,7 @@
 						        <div type="button" class="{{ app_css_class }} btn btn-emphasized btn-headline fine-space v-offset-l">
 						            <ul class="media-list">
 						                <li class="media">
-						                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+						                    <span class="pull-left btn-extra-emphasized"></span>
 						                    <div class="media-body">
 						                        <i class="fa {{ app_icon }}"></i>
 						                        {% trans app_name context "the_app" %}
@@ -501,7 +501,7 @@
 						<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
 				            <ul class="media-list">
 				                <li class="media">
-				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+				                    <span class="pull-left btn-extra-emphasized"></span>
 				                    <div class="media-body">
 				                        {% trans "Tweets" %}
 				                    </div>
@@ -518,7 +518,7 @@
 						<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
 				            <ul class="media-list">
 				                <li class="media">
-				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+				                    <span class="pull-left btn-extra-emphasized"></span>
 				                    <div class="media-body">
 				                        {% trans "Tweets" %}
 				                    </div>
@@ -536,7 +536,7 @@
 						<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
 				            <ul class="media-list">
 				                <li class="media">
-				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+				                    <span class="pull-left btn-extra-emphasized"></span>
 				                    <div class="media-body">
 				                        {% trans "Flickr Gallery" %}
 				                    </div>
@@ -556,7 +556,7 @@
 						    <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
 		                        <ul class="media-list">
 		                            <li class="media">
-		                                <a class="pull-left btn-extra-emphasized" href="#"></a>
+		                                <span class="pull-left btn-extra-emphasized"></span>
 		                                <div class="media-body">
 		                                    {% if group.call_to_action_title %}
 		                                        {{ group.call_to_action_title }}
@@ -577,9 +577,9 @@
 		                            <button href="{{ cta_button.url }}" target="_blank" type="button" class="btn btn-emphasized" style="float: none; margin-left: 0px;">
 	                                    <ul class="media-list">
 	                                        <li class="media">
-	                                            <a class="pull-left" href="#">
+	                                            <span class="pull-left">
 	                                                <i class="fa fa-external-link"></i>
-	                                            </a>
+	                                            </span>
 	                                            <div class="media-body">
 	                                                {{ cta_button.label }}
 	                                            </div>

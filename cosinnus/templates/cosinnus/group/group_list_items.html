@@ -84,9 +84,9 @@
 		                   
 		                <ul class="media-list">
 		                    <li class="media">
-		                        <a class="pull-left" href="#">
+		                        <span class="pull-left">
 		                            <i class="fa fa-group"></i>
-		                        </a>
+		                        </span>
 		                        <div class="media-body">
 		                            {% if user.pk in members %}
 		                                {% trans "Leave" %}
@@ -105,9 +105,9 @@
 	                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-edit' group=group %}">
 	                    <ul class="media-list">
 	                        <li class="media">
-	                            <a class="pull-left" href="#">
+	                            <span class="pull-left">
 	                                <i class="fa fa-pencil"></i>
-	                            </a>
+	                            </span>
 	                            <div class="media-body">
 	                                {% trans "Edit" %}
 	                            </div>
@@ -120,9 +120,9 @@
 	                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-microsite' group=group %}">
 	                    <ul class="media-list">
 	                        <li class="media">
-	                            <a class="pull-left" href="#">
+	                            <span class="pull-left">
 	                                <i class="fa fa-group"></i>
-	                            </a>
+	                            </span>
 	                            <div class="media-body">
 	                                {% trans "Details" %}
 	                            </div>
@@ -137,9 +137,9 @@
                             <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:conference:application' group=group.slug %}" target="_blank">
                                 <ul class="media-list">
                                     <li class="media">
-                                        <a class="pull-left" href="#">
+                                        <span class="pull-left">
                                             <i class="fa fa-sign-in"></i>
-                                        </a>
+                                        </span>
                                         <div class="media-body">
                                             {% trans "Apply for Participation" %}
                                         </div>
@@ -152,9 +152,9 @@
 		                    <button type="button" class="btn btn-emphasized" onclick="$('#accept-group-invitation-form').submit();">
 		                        <ul class="media-list">
 		                            <li class="media">
-		                                <a class="pull-left" href="#">
+		                                <span class="pull-left">
 		                                    <i class="fa fa-sign-in"></i>
-		                                </a>
+		                                </span>
 		                                <div class="media-body">
 		                                    {% trans "Accept Invitation" %}
 		                                </div>
@@ -168,9 +168,9 @@
                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
                         <ul class="media-list">
                             <li class="media">
-                                <a class="pull-left" href="#">
+                                <span class="pull-left">
                                     <i class="fa fa-close"></i>
-                                </a>
+                                </span>
                                 <div class="media-body">
                                     {% trans "Decline Invitation" %}</span>
                                 </div>
@@ -192,9 +192,9 @@
 	                <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:group-deactivate' group_id=group.id %}">
 	                    <ul class="media-list">
 	                        <li class="media">
-	                            <a class="pull-left" href="#">
+	                            <span class="pull-left">
 	                                <i class="fa fa-times"></i>
-	                            </a>
+	                            </span>
 	                            <div class="media-body">
 	                                {% trans "Deactivate" %}
 	                            </div>
@@ -211,9 +211,9 @@
 	                <button type="button" class="btn btn-emphasized {% if is_deactivated_groups_view %}regular-space {% endif %}" href="{% url 'cosinnus:group-activate' group_id=group.id %}">
 	                    <ul class="media-list">
 	                        <li class="media">
-	                            <a class="pull-left" href="#">
+	                            <span class="pull-left">
 	                                <i class="fa fa-flash"></i>
-	                            </a>
+	                            </span>
 	                            <div class="media-body">
 	                                {% trans "Re-Activate" %}
 	                            </div>

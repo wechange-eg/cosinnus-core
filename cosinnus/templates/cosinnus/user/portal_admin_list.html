@@ -54,13 +54,13 @@
 	            <div class="btn btn-emphasized w100">
 	                <ul class="media-list">
 	                    <li class="media">
-	                        <a class="pull-left" href="{% url 'cosinnus:profile-detail' username=user.username %}">
+	                        <span class="pull-left" href="{% url 'cosinnus:profile-detail' username=user.username %}">
 	                            {% include "cosinnus/user/user_avatar_image.html" with user=user %}
-	                        </a>
+	                        </span>
 	                        {% comment %}   fadedown disabled
-	                        <a class="pull-right fadedown-clickarea" href="#">
+	                        <span class="pull-right fadedown-clickarea">
 	                            <i class="fa fa-chevron-down"></i>
-	                        </a>
+	                        </span>
 	                        {% endcomment %}
 	                        {% if not member == user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
                             {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
@@ -104,9 +104,9 @@
             <div class="btn btn-default w100">
                 <ul class="media-list">
                     <li class="media">
-                        <a class="pull-left" href="#">
+                        <span class="pull-left">
                             <img src="{% static 'images/jane-doe.png' %}" />
-                        </a>
+                        </span>
                         <div class="media-body">
                             {% blocktrans with hidden_count=hidden_user_count %}And {{ hidden_count }} private users...{% endblocktrans %}
                         </div>

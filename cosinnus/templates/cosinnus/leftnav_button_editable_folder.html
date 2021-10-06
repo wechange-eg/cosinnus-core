@@ -5,13 +5,13 @@
     {% comment %} <button type="button" class="btn w100 btn{% if active %}-extra{% endif %}-emphasized {{ extra_classes }}" href="{{ href }}"> {% endcomment %}
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left btn-extra-emphasized" href="{{ href }}">
+                <span class="pull-left btn-extra-emphasized" href="{{ href }}">
                     {% if icon_content %}
                         {{ icon_content }}
                     {% else %}
                         <i class="fa {{ icon }}"></i>
                     {% endif %}
-                </a>
+                </span>
                 <a id="folder_clickarea_{{ folder.group.pk }}_{{ folder.pk }}" class="pull-right fadedown-clickarea edit-this-clickarea" title="{% trans "Edit folder" %}" href="#">
                     <i class="fa fa-ellipsis-h"></i>
                 </a>

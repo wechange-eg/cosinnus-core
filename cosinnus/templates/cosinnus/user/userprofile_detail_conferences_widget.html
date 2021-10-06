@@ -3,10 +3,10 @@
 <div type="button" class="btn btn-emphasized btn-headline btn-no-interact fine-space section-header">
     <ul class="media-list">
         <li class="media">
-            <a class="pull-left btn-extra-emphasized" href="#"></a>
-            <a class="pull-left" href="#">
+            <span class="pull-left btn-extra-emphasized"></span>
+            <span class="pull-left">
                 <i class="fa fa-users"></i>
-            </a>
+            </span>
             <div class="media-body">
                 {% if request.user.is_authenticated and request.user == this_user %}
                     {{ COSINNUS_CONFERENCE_TRANS.MY_LIST }}
