@@ -296,22 +296,24 @@
                 </li>
               </ul>
             </button>
-
-            <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "models" %}&models=organization">
-              <ul class="media-list">
-                <li class="media">
-                  <!--
-                  <a class="pull-left" style="background-color:inherit;" href="#">
-                  -->
-                  <a class="pull-left" href="#">
-                    <i class="fa fa-building"></i>
-                  </a>
-                  <div class="media-body">
-                    {% trans "Organizations" %}
-                  </div>
-                </li>
-              </ul>
-            </button>
+            
+            {% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
+	            <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "models" %}&models=organization">
+	              <ul class="media-list">
+	                <li class="media">
+	                  <!--
+	                  <a class="pull-left" style="background-color:inherit;" href="#">
+	                  -->
+	                  <a class="pull-left" href="#">
+	                    <i class="fa fa-building"></i>
+	                  </a>
+	                  <div class="media-body">
+	                    {% trans "Organizations" %}
+	                  </div>
+	                </li>
+	              </ul>
+	            </button>
+            {% endif %}
 
             {% if user.is_authenticated %}
             
