@@ -8,7 +8,8 @@ from rest_framework.views import APIView
 from cosinnus.api.serializers.portal import PortalSettingsSerializer
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
-from cosinnus.templatetags.cosinnus_tags import cosinnus_menu_v2
+from cosinnus.templatetags.cosinnus_tags import cosinnus_menu_v2,\
+    cosinnus_footer_v2
 from cosinnus.utils.user import filter_active_users
 
 
@@ -100,7 +101,8 @@ class StatisticsManagedTagFilteredView(StatisticsView):
             qs = qs.filter(group__managed_tag_assignments__managed_tag__slug=self.tag_slug)
         return qs
 
-class NavBarView(APIView):
+
+class HeaderView(APIView):
     """
     Returns navigation including styles to be included within Wordpress
     """
@@ -128,6 +130,17 @@ class NavBarView(APIView):
         })
 
 
+class FooterView(APIView):
+    """
+    Returns navigation including styles to be included within Wordpress
+    """
+    def get(self, request):
+        context = Context({'request': request})
+        return Response({
+            'html': cosinnus_footer_v2(context, request=request),
+        })
+
+
 class SettingsView(APIView):
     """
     Returns portal settings
@@ -139,5 +152,6 @@ class SettingsView(APIView):
 
 
 statistics = StatisticsView.as_view()
-navbar = NavBarView.as_view()
+header = HeaderView.as_view()
+footer = FooterView.as_view()
 settings = SettingsView.as_view()
