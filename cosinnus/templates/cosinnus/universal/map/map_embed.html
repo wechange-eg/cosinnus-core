@@ -82,6 +82,15 @@
             }
 
         </style>
+
+        {% if request.GET.noFullscreen %}
+        <style type="text/css">
+            body {
+                padding-top: 0;
+            }
+
+        </style>
+        {% endif %}
     </head>
     
     <body>
