@@ -4,18 +4,20 @@
     <div class="nav-content">
     	<div class="nav-section nav-brand">
     	    {% block nav_brand %}
-	    		{% if request.user.is_authenticated %}
-		            <a class="nav-button nav-button-with-message-counter burger-menu nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Menu" %}"
-				    		aria-expanded="false" aria-controls="main-collapse"
-				    		data-toggle="collapse" data-target="#main-collapse">
-			    		<i class="fas fa-fw fa-bars"></i>
-			    		{% with total_counter=groups_invited_count|add_num:group_requests_count %}
-				    		{% if total_counter > 0 %}
-				    			<span class="message-counter"> {{ total_counter }}</span>
-				    		{% endif %}
-			    		{% endwith %}
-		    		</a>
-	    		{% endif %}
+				{% block burger_menu %}
+					{% if request.user.is_authenticated %}
+						<a class="nav-button nav-button-with-message-counter burger-menu nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Menu" %}"
+								aria-expanded="false" aria-controls="main-collapse"
+								data-toggle="collapse" data-target="#main-collapse">
+							<i class="fas fa-fw fa-bars"></i>
+							{% with total_counter=groups_invited_count|add_num:group_requests_count %}
+								{% if total_counter > 0 %}
+									<span class="message-counter"> {{ total_counter }}</span>
+								{% endif %}
+							{% endwith %}
+						</a>
+					{% endif %}
+				{% endblock %}
 	
 	    		{% block brand_button %}
 		            <a class="nav-button" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "Dashboard" %}">
