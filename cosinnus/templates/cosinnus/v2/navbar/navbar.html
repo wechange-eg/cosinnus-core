@@ -24,15 +24,18 @@
 		            	{% include 'cosinnus/v2/navbar/brand.html' %}
 		            </a>
 	            {% endblock %}
-	            <div class="brand-links mobile-hidden">
-	            	{% include 'cosinnus/v2/navbar/brand_links.html' %}
-	            </div>
-	
-	            {% if not SETTINGS.COSINNUS_USE_V2_NAVBAR and SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
-		            <a class="nav-button nav-header-textlink hidden-during-search" href="#">
-		            	***ADMIN-ONLY TEST PHASE***
-		            </a>
-	        	{% endif %}
+	            
+	            {% block brand_links %}
+		            <div class="brand-links mobile-hidden">
+		            	{% include 'cosinnus/v2/navbar/brand_links.html' %}
+		            </div>
+		
+		            {% if not SETTINGS.COSINNUS_USE_V2_NAVBAR and SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
+			            <a class="nav-button nav-header-textlink hidden-during-search" href="#">
+			            	***ADMIN-ONLY TEST PHASE***
+			            </a>
+		        	{% endif %}
+	        	{% endblock %}
         	{% endblock %}
     	</div>
     </div>
