@@ -34,128 +34,104 @@
 		<div class="large-space">{% trans 'Here you can create temporary user accounts that are valid only for this conference and only when you activate them.' %}</div>
 	</div>
 
-	<div class="panel panel-default large-space">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                {% trans "Temporary Users" %}
-            </h4>
-        </div>
-        <div id="collapseThree" class="panel-collapse">
-            <div class="panel-body">
-		        {% for member in members %}
-		            <div class="fadedown regular-space">
-		                <div class="btn btn-emphasized w100">
-		                    <ul class="media-list">
-		                        <li class="media">
-		                            <span class="pull-left" href="{{ member|profile_url }}">
-		                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
-		                            </span>
-		                            <a class="pull-right fadedown-clickarea" href="#">
-			                            <i class="fa fa-chevron-down"></i>
-			                        </a>
-		                            <div class="media-body">
-		                                <span class="annotation mobile-hidden">
-		                                	{% if member.last_login %}
-		                                	<span>
-		                                		{% trans 'last login' %}: {{ member.last_login | date }}
-		                                		&nbsp;&nbsp;
-		                                	</span>
-		                                	{% else %}
-		                                	<span>
-		                                		{% trans 'last login' %}: {% trans 'no login yet'%}
-		                                		&nbsp;&nbsp;
-		                                	</span>
-		                                	{% endif %}
-		                                	<span>
-		                                		{% if member.password %} {% trans "Password set" %} {% else %} {% trans "No password" %} {% endif %}
-		                                		&nbsp;&nbsp;
-		                                	</span>
-		                                	<span>
-	                                        {% if member.is_active %} {% trans 'active'%} {% else %} {% trans 'not active'%} {% endif %}
-	                                        	&nbsp;&nbsp;
-	                                    	</span>
-	                                	</span>
-		                                <a href="{{ member|profile_url }}">
-		                                	{% if member.cosinnus_profile.workshop_user_name %}
-		                                	{{ member.cosinnus_profile.readable_workshop_user_name }}
-		                                	{% else %}
-		                                    {{ member|full_name }}
-		                                    {% endif %}
-		                                </a>
-		                            </div>
-		                        </li>
-		                    </ul>
-		                </div>
-		                <div>
-		                	{% if member.is_active %}
-		                	{% captureas modal_deactivate_id %}userModal_deactivate_{{member.pk}}{% endcaptureas %}
-		                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_deactivate_id}}">
-		                        <ul class="media-list">
-		                            <li class="media">
-		                            	<a class="pull-left" href="#">
-				                                <i class="fas fa-minus-circle"></i>
-				                            </a>
-		                                <div class="media-body">
-		                                    {% trans "deactivate member" %}
-		                                </div>
-		                            </li>
-		                        </ul>
-		                    </button>
+	<table class="table table-striped white-content">
+		<thead>
+			<tr>
+				<th>{% trans 'Workshop user name' %}</th>
+				<th>{% trans 'email' %}</th>
+				<th>{% trans 'last login' %}</th>
+				<th>{% trans 'active' %}</div></th>
+				<th>{% trans 'password' %}</th>
+				<th></th>
+			</tr>
+		</thead>
 
-		                    {% else %}
-		                    {% captureas modal_activate_id %}userModal_activate_{{member.pk}}{% endcaptureas %}
-		                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_activate_id}}">
-		                        <ul class="media-list">
-		                            <li class="media">
-		                            	<a class="pull-left" href="#">
-				                                <i class="fas fa-check-circle"></i>
-				                            </a>
-		                                <div class="media-body">
-		                                    {% trans "activate member" %}
-		                                </div>
-		                            </li>
-		                        </ul>
-		                    </button>
-		                    {% endif %}
+		{% for member in members %}
+		<tr>
+			<th>
+				{% if member.cosinnus_profile.workshop_user_name %}
+				{{ member.cosinnus_profile.readable_workshop_user_name }}
+				{% else %}
+				{{ member|full_name }}
+				{% endif %}
+			</th>
+			<th>
+				{{ member.email }}
+			</th>
+			<th>
+				{% if member.last_login %} {{ member.last_login | date }} {% else %} {% trans 'no login yet'%} {% endif %}
+			</th>
+			<th>{% if member.is_active %} {% trans 'active'%} {% else %} {% trans 'not active'%} {% endif %}</th>
+			<th>
+				{% if member.password %} {% trans "Password set" %} {% else %} {% trans "No password" %} {% endif %}
+			</th>
+			<th>
+				{% if member.is_active %}
+					{% captureas modal_deactivate_id %}userModal_deactivate_{{member.pk}}{% endcaptureas %}
+					<button type="button" class="btn btn-default btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_deactivate_id}}">
+						<ul class="media-list">
+							<li class="media">
+								<a class="pull-left" href="#">
+										<i class="fas fa-minus-circle"></i>
+									</a>
+								<div class="media-body">
+									{% trans "deactivate user" %}
+								</div>
+							</li>
+						</ul>
+					</button>
+				{% else %}
+					{% captureas modal_activate_id %}userModal_activate_{{member.pk}}{% endcaptureas %}
+					<button type="button" class="btn btn-emphasized btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_activate_id}}">
+						<ul class="media-list">
+							<li class="media">
+								<a class="pull-left" href="#">
+										<i class="fas fa-check-circle"></i>
+									</a>
+								<div class="media-body">
+									{% trans "activate user" %}
+								</div>
+							</li>
+						</ul>
+					</button>
+				{% endif %}
 
-		                    {% captureas modal_remove_id %}userModal_remove_{{member.pk}}{% endcaptureas %}
-		                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_remove_id}}">
-		                        <ul class="media-list">
-		                            <li class="media">
-		                            	<a class="pull-left" href="#">
-				                                <i class="fas fa-user-slash"></i>
-				                            </a>
-		                                <div class="media-body">
-		                                    {% trans "remove user" %}
-		                                </div>
-		                            </li>
-		                        </ul>
-		                    </button>
+				{% captureas modal_remove_id %}userModal_remove_{{member.pk}}{% endcaptureas %}
+				<button type="button" class="btn btn-emphasized btn-small btn-autosize" data-toggle="modal" data-target="#{{modal_remove_id}}">
+					<ul class="media-list">
+						<li class="media">
+							<a class="pull-left" href="#">
+									<i class="fas fa-user-slash"></i>
+								</a>
+							<div class="media-body">
+								{% trans "remove user" %}
+							</div>
+						</li>
+					</ul>
+				</button>
+			</th>
+			{% if member.is_active %}
+		        {% captureas label %}{% trans "Do you really want to deactivate the member's user account ?" %}{% endcaptureas %}
+	            {% captureas title %}{% trans "Deactivate Member" %}{% endcaptureas %}
+	            {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
+	            {% include "cosinnus/modal_box.html" with id=modal_deactivate_id label=label title=title form_action=action submit_name="deactivate_member" submit_value=member.id title_icon='fas fa-minus-circle' %}
 
-		                </div>
-		            </div>
-		            {% if member.is_active %}
-		            {% captureas label %}{% trans "Do you really want to deactivate the member's user account ?" %}{% endcaptureas %}
-	                {% captureas title %}{% trans "Deactivate Member" %}{% endcaptureas %}
-	                {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
-	                {% include "cosinnus/modal_box.html" with id=modal_deactivate_id label=label title=title form_action=action submit_name="deactivate_member" submit_value=member.id title_icon='fas fa-minus-circle' %}
+	        {% else %}
+	            {% captureas label %}{% trans "Do you really want to activate the member's user account ?" %}{% endcaptureas %}
+	            {% captureas title %}{% trans "Activate Member" %}{% endcaptureas %}
+	            {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
+	            {% include "cosinnus/modal_box.html" with id=modal_activate_id label=label title=title form_action=action submit_name="activate_member" submit_value=member.id title_icon='fas fa-check-circle' %}
+	        {% endif %}
 
-	                {% else %}
-	                {% captureas label %}{% trans "Do you really want to activate the member's user account ?" %}{% endcaptureas %}
-	                {% captureas title %}{% trans "Activate Member" %}{% endcaptureas %}
-	                {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
-	                {% include "cosinnus/modal_box.html" with id=modal_activate_id label=label title=title form_action=action submit_name="activate_member" submit_value=member.id title_icon='fas fa-check-circle' %}
-	                {% endif %}
+	            {% captureas label %}{% trans "Do you really want to remove the user?" %}{% endcaptureas %}
+	            {% captureas title %}{% trans "Remove User" %}{% endcaptureas %}
+	            {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
+	            {% include "cosinnus/modal_box.html" with id=modal_remove_id label=label title=title form_action=action submit_name="remove_member" submit_value=member.id title_icon_full_class='fas fa-user-slash' %}
+		</tr>
+		{% endfor %}
+	</table>
 
-	                {% captureas label %}{% trans "Do you really want to remove the user?" %}{% endcaptureas %}
-	                {% captureas title %}{% trans "Remove User" %}{% endcaptureas %}
-	                {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
-	                {% include "cosinnus/modal_box.html" with id=modal_remove_id label=label title=title form_action=action submit_name="remove_member" submit_value=member.id title_icon_full_class='fas fa-user-slash' %}
-		        {% endfor %}
-				</div>
-			</div>
-		</div>
-	</div>
+</div>
 <div>
 
 <div class="fadedown pull-right regular-space">
