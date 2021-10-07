@@ -3,6 +3,10 @@
 
 {% block teaser %}{% endblock %}
 
+{% block og_meta_attributes %}
+	{% include 'cosinnus/group/group_og_meta_attributes.html' with group=group %}
+{% endblock og_meta_attributes %}
+
 {% block microsite_subheader %}
 	<div class="group-microsite-subheader">
 		<div class="group-microsite-subheader-container">
