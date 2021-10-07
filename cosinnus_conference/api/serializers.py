@@ -176,15 +176,17 @@ class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
                 else:
                     notification_text = _('Your conference is currently not using the high performance premium servers, but has been assigned premium slots at other times.')
                     notification_severity = 'info'
-                
-                premium_block_dates = []
-                for premium_block in obj.conference_premium_blocks.all():
-                    str_date = date_format(premium_block.from_date, 'SHORT_DATE_FORMAT')
-                    if premium_block.from_date != premium_block.to_date:
-                        str_date += ' - ' + date_format(premium_block.to_date, 'SHORT_DATE_FORMAT')
-                    premium_block_dates.append(str_date)
-                notification_text = str(notification_text) + '<br/>' + \
-                        str(_('Your currently scheduled premium dates are:')) + ' ' + ', '.join(premium_block_dates)
+                    
+                if obj.has_premium_blocks:
+                    premium_block_dates = []
+                    for premium_block in obj.conference_premium_blocks.all():
+                        str_date = date_format(premium_block.from_date, 'SHORT_DATE_FORMAT')
+                        if premium_block.from_date != premium_block.to_date:
+                            str_date += ' - ' + date_format(premium_block.to_date, 'SHORT_DATE_FORMAT')
+                        premium_block_dates.append(str_date)
+                    if premium_block_dates:
+                        notification_text = str(notification_text) + '<br/>' + \
+                                str(_('Your currently scheduled premium dates are:')) + ' ' + ', '.join(premium_block_dates)
             else:
                 notification_text = _('Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:')
                 notification_severity = 'warning'
