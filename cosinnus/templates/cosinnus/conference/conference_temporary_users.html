@@ -97,7 +97,7 @@
 				{% endif %}
 
 				{% captureas modal_remove_id %}userModal_remove_{{member.pk}}{% endcaptureas %}
-				<button type="button" class="btn btn-emphasized btn-small btn-autosize" data-toggle="modal" data-target="#{{modal_remove_id}}">
+				<button type="button" class="btn btn-emphasized btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_remove_id}}">
 					<ul class="media-list">
 						<li class="media">
 							<a class="pull-left" href="#">
@@ -105,6 +105,20 @@
 								</a>
 							<div class="media-body">
 								{% trans "remove user" %}
+							</div>
+						</li>
+					</ul>
+				</button>
+
+				{% captureas modal_change_password_id %}userModal_change_password_{{member.pk}}{% endcaptureas %}
+				<button type="button" class="btn btn-emphasized btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_change_password_id}}">
+					<ul class="media-list">
+						<li class="media">
+							<a class="pull-left" href="#">
+									<i class="fas fa-user-slash"></i>
+								</a>
+							<div class="media-body">
+								{% trans "Change password" %}
 							</div>
 						</li>
 					</ul>
@@ -123,10 +137,15 @@
 	            {% include "cosinnus/modal_box.html" with id=modal_activate_id label=label title=title form_action=action submit_name="activate_member" submit_value=member.id title_icon='fas fa-check-circle' %}
 	        {% endif %}
 
-	            {% captureas label %}{% trans "Do you really want to remove the user?" %}{% endcaptureas %}
-	            {% captureas title %}{% trans "Remove User" %}{% endcaptureas %}
-	            {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
-	            {% include "cosinnus/modal_box.html" with id=modal_remove_id label=label title=title form_action=action submit_name="remove_member" submit_value=member.id title_icon_full_class='fas fa-user-slash' %}
+	        {% captureas label %}{% trans "Do you really want to remove the user?" %}{% endcaptureas %}
+	        {% captureas title %}{% trans "Remove User" %}{% endcaptureas %}
+	        {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
+	        {% include "cosinnus/modal_box.html" with id=modal_remove_id label=label title=title form_action=action submit_name="remove_member" submit_value=member.id title_icon_full_class='fas fa-user-slash' %}
+
+			{% captureas label %}{% trans "Do you really want to change the password of the user?" %}{% endcaptureas %}
+	        {% captureas title %}{% trans "Change password for User" %}{% endcaptureas %}
+	        {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
+	        {% include "cosinnus/modal_box.html" with id=modal_change_password_id label=label title=title form_action=action submit_name="change_password" submit_value=member.id title_icon_full_class='fas fa-user-slash' %}
 		</tr>
 		{% endfor %}
 	</table>
