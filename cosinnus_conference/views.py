@@ -61,6 +61,7 @@ from cosinnus import cosinnus_notifications
 from django.utils.functional import cached_property
 import xlsxwriter
 from cosinnus.utils.http import make_xlsx_response
+from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
 
 logger = logging.getLogger('cosinnus')
 
@@ -77,6 +78,11 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
     
     def get_object(self, queryset=None):
         return self.group
+
+    def get_temporary_users(self):
+        temporary_users = self.group.conference_members
+        return [user for user in temporary_users if user.cosinnus_profile
+                and not user.cosinnus_profile.scheduled_for_deletion_at]
 
     def post(self, request, *args, **kwargs):
         if 'startConferenence' in request.POST:
@@ -108,7 +114,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         elif 'remove_member' in request.POST:
             user_id = int(request.POST.get('remove_member'))
             user = get_user_model().objects.get(id=user_id)
-            delete_userprofile(user)
+            deactivate_user_and_mark_for_deletion(user)
             messages.add_message(request, messages.SUCCESS, _('Successfully removed user'))
 
         elif 'downloadPasswords' in request.POST:
@@ -125,7 +131,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             kwargs={'group': self.group}))
 
     def update_all_members_status(self, status):
-        for member in self.group.conference_members:
+        for member in self.get_temporary_users():
             member.is_active = status
             if status:
                 member.last_login = None
@@ -133,7 +139,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
 
     def get_accounts_with_password(self):
         accounts = []
-        for member in self.group.conference_members:
+        for member in self.get_temporary_users():
             pwd = ''
             if not member.password or not member.last_login:
                 pwd = get_random_string()
@@ -160,7 +166,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['group'] = self.group
-        context['members'] = self.group.conference_members
+        context['members'] = self.get_temporary_users()
         context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
 
         return context
