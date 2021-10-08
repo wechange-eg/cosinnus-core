@@ -272,15 +272,16 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin,
                   'last login date', 'Terms of service accepted']
 
         for member in members:
-            profile = member.cosinnus_profile
-            workshop_username = profile.readable_workshop_user_name
-            email = member.email
-            has_logged_in, logged_in_date = self.get_last_login(member)
-            tos_accepted = 1 if profile.settings.get(
-                'tos_accepted', False) else 0
-            row = [workshop_username, email, has_logged_in,
-                   logged_in_date, tos_accepted]
-            rows.append(row)
+            if (member.cosinnus_profile and not member.cosinnus_profile.scheduled_for_deletion_at):
+                profile = member.cosinnus_profile
+                workshop_username = profile.readable_workshop_user_name
+                email = member.email
+                has_logged_in, logged_in_date = self.get_last_login(member)
+                tos_accepted = 1 if profile.settings.get(
+                    'tos_accepted', False) else 0
+                row = [workshop_username, email, has_logged_in,
+                       logged_in_date, tos_accepted]
+                rows.append(row)
         return make_xlsx_response(rows, row_names=header, file_name=filename)
 
     def get_last_login(self, member):
