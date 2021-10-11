@@ -54,7 +54,7 @@ from wagtail.core.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
 from annoying.functions import get_object_or_None
 from django.utils.text import normalize_newlines
-from cosinnus.utils.functions import ensure_list_of_ints
+from cosinnus.utils.functions import ensure_list_of_ints, convert_html_to_string
 from django.db.models.query import QuerySet
 from django.core.serializers import serialize
 from cosinnus.models.idea import CosinnusIdea
@@ -1396,3 +1396,10 @@ def get_admin_data():
     """ Returns the portal administrators on the signup page """
     admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
     return admins
+
+@register.filter
+def safe_text(text):
+    """ Returns JS-safe text, for use in form-elements that might get re-used in JS. """
+    return convert_html_to_string(text)
+
+
