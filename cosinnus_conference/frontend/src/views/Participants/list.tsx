@@ -116,7 +116,7 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
   }
 
   function getIframeUrl() {
-    return `/map/embed/?controls_disabled=1&filter_group=${window.conferenceId}`
+    return `/map/embed/?controls_disabled=1&filter_group=${window.conferenceId}&noFullscreen=1`
   }
 
   const countries: string[] = uniqBy(participants, p => p.props.country).map(p => p.props.country)
@@ -128,7 +128,7 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
       <Content>
         <Notification />
         <Typography component="h1">{room.props.title}</Typography>
-        <iframe src={getIframeUrl()} frameborder="0" width="100%" height="50%"></iframe>
+        <iframe src={getIframeUrl()} frameborder="0" width="100%" height="400px"></iframe>
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
