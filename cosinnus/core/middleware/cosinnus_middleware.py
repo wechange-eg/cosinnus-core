@@ -65,6 +65,8 @@ NEVER_REDIRECT_URLS = [
     '/api/v1/user/me/',
     '/api/v1/login/',
     '/api/v2/navbar/',
+    '/api/v2/header/',
+    '/api/v2/footer/',
     '/o/',
     '/group/forum/cloud/oauth2/',
     # these deprecated URLs can be removed from the filter list once the URLs are removed
