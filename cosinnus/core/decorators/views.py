@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus_organization.models import CosinnusOrganization
 from cosinnus.utils.permissions import check_object_write_access,\
     check_group_create_objects_access, check_object_read_access, get_user_token,\
-    check_user_superuser
+    check_user_superuser, check_user_verified
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect, Http404
 from django.urls import reverse_lazy
@@ -24,14 +24,34 @@ from cosinnus.utils.exceptions import CosinnusPermissionDeniedException
 
 import logging
 from cosinnus.models.group import CosinnusPortal
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from cosinnus.utils.urls import group_aware_reverse
 from django.template.defaultfilters import urlencode
 logger = logging.getLogger('cosinnus')
 
 
+MSG_USER_NOT_VERIFIED = _('You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above.')
+
+
+def redirect_to_error_page(request, view=None, group=None):
+    """ Returns a redirect to an error page with the same URL and support for displaying error messages.
+        You should always use `messages.error/warning/info` before calling this function, otherwise the page
+        will be blank.
+        @param group: If supplied, the user will in most cases be redirected to the group's micropage instead """
+    # support for the ajaxable view mixin
+    if view and getattr(view, 'is_ajax_request_url', False):
+        return HttpResponseForbidden('Not authenticated')
+    # redirect to group's micropage
+    if group is not None:
+        # only redirect to micropage if user isn't a member of the group
+        if not request.user.is_authenticated or not request.user.id in group.members:
+            messages.warning(request, group.trans.MESSAGE_MEMBERS_ONLY)
+            return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': group}))
+    return render(request, template_name='cosinnus/common/error.html', context={})
+
+
 def redirect_to_403(request, view=None, group=None):
-    """ Returns a redirect to the login page with a next-URL parameter and an error message 
+    """ Returns a redirect to a permission-denied page with the same URL and an and an error message 
         @param group: If supplied, the user will in most cases be redirected to the group's micropage instead """
     # support for the ajaxable view mixin
     if view and getattr(view, 'is_ajax_request_url', False):
@@ -58,10 +78,19 @@ def redirect_to_not_logged_in(request, view=None, group=None):
     next_arg = urlencode(next_arg)
     if group is not None:
         messages.warning(request, _('Only registered members can see the content you requested! Log in or create an account now!'))
+    else:
+        messages.error(request, _('Please log in to access this page.'))
+    if group is not None and group.is_publicly_visible:
         return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': group}) + '?next=' + next_arg)
-    messages.error(request, _('Please log in to access this page.'))
     return HttpResponseRedirect(reverse_lazy('login') + '?next=' + next_arg)
-    
+
+
+def redirect_to_not_verified(request, view=None, group=None):
+    """ Returns a redirect to an empty page with an error message, telling the user they need to verify
+        their email address to continue. """
+    messages.warning(request, MSG_USER_NOT_VERIFIED)
+    return redirect_to_error_page(request, view=view, group=group)
+
 
 def get_group_for_request(group_name, request):
     """ Retrieve the proxy group object depending on the URL path regarding 
@@ -173,6 +202,24 @@ def require_logged_in():
             
             if not user.is_authenticated:
                 return redirect_to_not_logged_in(request, view=self)
+            
+            return function(self, request, *args, **kwargs)
+            
+        return wrapper
+    return decorator
+
+
+def require_verified_user_access():
+    """A method decorator that checks that the requesting user has a verified email address  """
+
+    def decorator(function):
+        @functools.wraps(function, assigned=available_attrs(function))
+        def wrapper(self, request, *args, **kwargs):
+            user = request.user
+            if not user.is_authenticated:
+                return redirect_to_not_logged_in(request, view=self)
+            if not check_user_verified(user):
+                return redirect_to_not_verified(request, view=self)
             
             return function(self, request, *args, **kwargs)
             

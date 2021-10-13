@@ -17,7 +17,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _, LANGUAGE_SESSION_KEY
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import RedirectView
-from django.views.generic.base import View
+from django.views.generic.base import View, TemplateView
 import requests
 
 from cosinnus.conf import settings
@@ -74,6 +74,14 @@ def view_404(request, exception):
 def view_500(request):
     content = render_to_string('cosinnus/common/500.html')
     return HttpResponseServerError(content)
+
+
+class GenericErrorPageView(TemplateView):
+    """ Displays a simple error page, listing all attributed supplied as GET param. """
+    
+    template_name = 'cosinnus/conference/error_page.html'
+
+generic_error_page_view = GenericErrorPageView.as_view()
 
 
 class SwitchLanguageView(RedirectView):

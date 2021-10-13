@@ -32,7 +32,6 @@ export const useStyles = makeStyles((theme) => ({
     "& h3": {
       fontWeight: 700,
       color: theme.palette.text.secondary,
-      textTransform: "uppercase",
       fontSize: "1.3rem",
       marginBottom: "1rem"
     },

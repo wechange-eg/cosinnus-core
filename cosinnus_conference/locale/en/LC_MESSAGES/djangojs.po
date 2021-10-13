@@ -333,3 +333,10 @@ msgstr "participants"
 #: locale/src/views/components/CoffeeTable/index.json
 msgid "places left"
 msgstr "places left"
+
+msgid ""
+"Your profile is not shown here or not displayed correctly? "
+"Add to your profile or make yourself visible to other conference participants."
+msgstr ""
+"Your profile is not shown here or not displayed correctly? "
+"Add to your profile or make yourself visible to other conference participants."

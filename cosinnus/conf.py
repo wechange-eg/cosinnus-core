@@ -177,6 +177,10 @@ class CosinnusConf(AppConf):
     # Set up at least one device at <host>/admin/otp_totp/totpdevice/ before activating this setting!
     ADMIN_2_FACTOR_AUTH_ENABLED = False
     
+    # if True while `ADMIN_2_FACTOR_AUTH_ENABLED` is enabled,
+    # the 2fa-check will extend to the /administration/ area, which it doesn't usually
+    ADMIN_2_FACTOR_AUTH_INCLUDE_ADMINISTRATION_AREA = False
+    
     # if True while `ADMIN_2_FACTOR_AUTH_ENABLED` is enabled, will force 2-factor-authentication
     # for superusers and portal on the ENTIRE site, and not only on the /admin/ backend
     ADMIN_2_FACTOR_AUTH_STRICT_MODE = False
@@ -414,6 +418,14 @@ class CosinnusConf(AppConf):
     # should the group avatar image be a required field?
     GROUP_AVATAR_REQUIRED = False
     
+    # whether to show the "publicly_visible" field in the group form options
+    GROUP_PUBLICY_VISIBLE_OPTION_SHOWN = True
+    
+    # sets the "publicly_visible" field value per portal
+    # Note! this is reflected in migration 0113! If the setting is changed afte the migration
+    # has been run, previous values of all existing groups will remain unchanged!
+    GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE = True
+    
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)
     
@@ -586,6 +598,8 @@ class CosinnusConf(AppConf):
     # should twitter and flickr embed fields and display be active for microsites?
     MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE = False
     
+    
+    
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
     HIDE_APPS = set(['cosinnus_organization', 'cosinnus_conference', 'cosinnus_message', 'cosinnus_notifications',
@@ -687,6 +701,12 @@ class CosinnusConf(AppConf):
     # when users newly register, are their profiles marked as visible rather than private on the site?
     USER_DEFAULT_VISIBLE_WHEN_CREATED = True
     
+    # for portals with `email_needs_verification` active, how many days after registration
+    # should the user get a full-screen popup to "please verify your email now" on every
+    # page access?
+    # value: days in int, 0 for popup will never show
+    USER_SHOW_EMAIL_VERIFIED_POPUP_AFTER_DAYS = 0
+    
     # should regular, non-admin users be allowed to create Groups (Societies) as well?
     # if False, users can only create Projects 
     USERS_CAN_CREATE_GROUPS = False
@@ -719,6 +739,23 @@ class CosinnusConf(AppConf):
     CONFERENCES_USE_COMPACT_MODE = False
     
     CONFERENCES_USE_APPLICATIONS_CHOICE_DEFAULT = False
+    
+    # whether or not BBB-streaming is enabled for this portal
+    CONFERENCES_STREAMING_ENABLED = False
+    
+    # BBB Streaming base api url
+    CONFERENCES_STREAMING_API_URL = None
+    # BBB Streaming credentials username
+    CONFERENCES_STREAMING_API_AUTH_USER = None
+    # BBB Streaming credentials password
+    CONFERENCES_STREAMING_API_AUTH_PASSWORD = None
+    # how many minutes before the streamed event start time the streamer is created via API
+    CONFERENCES_STREAMING_API_CREATE_STREAMER_BEFORE_MINUTES = 120
+    # how many minutes before the streamed event start time the streamer is called to start streaming via API
+    CONFERENCES_STREAMING_API_START_STREAMER_BEFORE_MINUTES = 10
+    # how many minutes after the streamed event start time the streamer is stopped and deleted via API
+    CONFERENCES_STREAMING_API_STOP_DELETE_STREAMER_AFTER_MINUTES = 30
+    
     
     # if set to any value other than None, the conference public field will be disabled
     # and locked to the value set here
@@ -784,6 +821,11 @@ class CosinnusConf(AppConf):
     # if true, an additional signup form field will be present
     SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK = False
     
+    # whether the user signup form has the media-tag location field with a map
+    USER_SIGNUP_INCLUDES_LOCATION_FIELD = False
+    # if USER_SIGNUP_INCLUDES_LOCATION_FIELD==True, whether the field is required
+    USER_SIGNUP_LOCATION_FIELD_IS_REQUIRED = False
+    
     # if True, the modern user import views will be shown
     # they require a per-portal implementation of the importer class
     USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED = False
@@ -824,6 +866,9 @@ class CosinnusConf(AppConf):
     # multiforms choosable are 'obj' (CosinnusProfile), 'user', 'media_tag'
     USERPROFILE_DISABLED_FIELDS = {}
     
+    # should the 'user_profile_dynamic_fields.html' be shown as extra_html in the profile map detail page?
+    USERPROFILE_EXTRA_FIELDS_SHOW_ON_MAP = False
+    
     # should the form view for admin-defined dynamic fields be shown
     # in the admin
     DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED = False
@@ -863,7 +908,7 @@ class CosinnusConf(AppConf):
     # URL for the iframe/tab leading to a specific group folder (with leading slash)
     CLOUD_GROUP_FOLDER_IFRAME_URL = '/apps/files/?dir=/%(group_folder_name)s'
     # whether all cloud links should open with target="_blank"
-    CLOUD_OPEN_IN_NEW_TAB = False
+    CLOUD_OPEN_IN_NEW_TAB = True
     # whether to prefix all nextcloud group folders with "Projekt" or "Gruppe"
     CLOUD_PREFIX_GROUP_FOLDERS = True
     # the quota for groupfolders, in bytes. -3 is the default for "unlimited"
@@ -931,7 +976,7 @@ class CosinnusConf(AppConf):
 
     # default value for form field for how many coffee table
     # participants should be allowed
-    CONFERENCE_COFFEETABLES_MAX_PARTICIPANTS_DEFAULT = 6
+    CONFERENCE_COFFEETABLES_MAX_PARTICIPANTS_DEFAULT = 500
 
     # default value for form field for if to allow user creation of coffee tables
     CONFERENCE_COFFEETABLES_ALLOW_USER_CREATION_DEFAULT = False
@@ -1028,6 +1073,31 @@ class CosinnusConf(AppConf):
     
     BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: url.startswith('https://bbbatscale')
     
+    STARRED_STAR_LABEL = _('Bookmark')
+    STARRED_STARRING_LABEL = _('Bookmarked')
+    STARRED_OBJECTS_LIST = _('Bookmark list')
+    STARRED_USERS_LIST = _('Bookmarked Users list')
+    
+    # should the editable user-list be shown in the administration area?
+    PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
+    
+    # should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?
+    CALENDAR_WIDGET_DISPLAY_AS_LIST = False
+    # should the group dashboard widget grid calendar allow drag & drop of events (only while CALENDAR_WIDGET_DISPLAY_AS_LIST == False)
+    CALENDAR_WIDGET_ALLOW_EDIT_IN_GROUP_DASHBOARD = True
+    
+    # enables the translated fields on groups/events/conference rooms and more
+    # that show additional formfields and use model mixins to in-place replace translated field values
+    # see `TranslateableFieldsModelMixin`
+    TRANSLATED_FIELDS_ENABLED = False
+
+    # user gets notification if s/he was invited to a group even if his/er notification preferences 
+    # are tunrned on 'daily', 'weekly', or even on 'never'
+    NOTIFICATIONS_GROUP_INVITATIONS_IGNORE_USER_SETTING = False
+    
+    # if set to True group admins can decide if a contact form should be displayed on the groups micropage
+    ALLOW_CONTACT_FORM_ON_MICROPAGE = False
+
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
@@ -1061,7 +1131,7 @@ class CosinnusDefaultSettings(AppConf):
     BBB_ROOM_PARTICIPANTS_CACHE_TIMEOUT_SECONDS = 20
     # should we monkeypatch for BBB appearently allowing one less persons to enter a room
     # than provided in max_participants during room creation
-    BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = True
+    BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = False
 
     # the default parameters added to every BBB room join
     # see https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
@@ -1092,16 +1162,4 @@ class CosinnusDefaultSettings(AppConf):
     }
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
-
-    STARRED_STAR_LABEL = _('Bookmark')
-    STARRED_STARRING_LABEL = _('Bookmarked')
-    STARRED_OBJECTS_LIST = _('Bookmark list')
-    STARRED_USERS_LIST = _('Bookmarked Users list')
-
-    PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
-    
-    # should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?
-    CALENDAR_WIDGET_DISPLAY_AS_LIST = False
-    # should the group dashboard widget grid calendar allow drag & drop of events (only while CALENDAR_WIDGET_DISPLAY_AS_LIST == False)
-    CALENDAR_WIDGET_ALLOW_EDIT_IN_GROUP_DASHBOARD = True
 

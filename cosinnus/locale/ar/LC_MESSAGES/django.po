@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 14:14+0200\n"
-"PO-Revision-Date: 2021-03-22 14:30+0100\n"
+"POT-Creation-Date: 2021-09-29 12:35+0200\n"
+"PO-Revision-Date: 2021-09-29 12:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ar\n"
@@ -40,6 +40,16 @@ msgid "%d Users' rocketchat room memberships were re-done."
 msgstr "%dتمت إعادة عضويات غرفة rocketchat للمستخدمين."
 
 msgid "Rocket: Fix missing RocketChat room membership for users"
+msgstr " إصلاح عضوية غرفة RocketChat المفقودة للمستخدمين"
+
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%d Users' nextcloud folder memberships were re-done."
+msgstr "%dتمت إعادة عضويات غرفة rocketchat للمستخدمين."
+
+#, fuzzy
+#| msgid "Rocket: Fix missing RocketChat room membership for users"
+msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
 msgstr " إصلاح عضوية غرفة RocketChat المفقودة للمستخدمين"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
@@ -92,6 +102,14 @@ msgstr "تم قبول بنود الخدمة"
 #, fuzzy
 msgid "ToS not Accepted"
 msgstr "بنود الخدمة غير مقبولة"
+
+msgid "Email verified"
+msgstr ""
+
+#, fuzzy
+#| msgid "not specified"
+msgid "Email not verified"
+msgstr "غير محدد"
 
 msgid "User Logged In"
 msgstr "قام المستخدم بتسجيل الدخول"
@@ -164,9 +182,6 @@ msgstr "روكيت: إصلاح / إنشاء حسابات الدردشة الصا
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "روكيت: إصلاح عضويات غرفة الدردشة المفقودة للمستخدمين"
 
-msgid "Restart"
-msgstr "إعادة تشغيل"
-
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "يجب تنشيط عنوان البريد الإلكتروني للحساب الذي تحاول استخدامه قبل أن تتمكن من تسجيل الدخول."
 
@@ -197,7 +212,6 @@ msgstr "تعليم"
 msgid "Gesundheit"
 msgstr "صحة"
 
-#, fuzzy
 msgid "Ernährung und Konsum"
 msgstr "النظام الغذائي والاستهلاك"
 
@@ -210,7 +224,6 @@ msgstr "مال وتمويل"
 msgid "Arbeit und Recht"
 msgstr "عمل وقانون"
 
-#, fuzzy
 msgid "Bauen und Wohnen"
 msgstr "البناء والمعيشة"
 
@@ -238,20 +251,6 @@ msgstr "مأكولات خالية من اللاكتوز"
 msgid "Gluten-free cuisine"
 msgstr "مطبخ خال من الغلوتين"
 
-msgid "General"
-msgstr "عام"
-
-#, fuzzy
-#| msgid "Activate"
-msgid "Active"
-msgstr "تفعيل"
-
-msgid "Restricted"
-msgstr "محدد/مُقيد"
-
-msgid "Premium"
-msgstr "مميز"
-
 msgid "Bookmark"
 msgstr "المرجعية"
 
@@ -263,6 +262,21 @@ msgstr "قائمة المرجعية"
 
 msgid "Bookmarked Users list"
 msgstr "قائمة المستخدمين المرجعية"
+
+msgid "General"
+msgstr "عام"
+
+msgid "Active"
+msgstr "تفعيل"
+
+msgid "Restricted"
+msgstr "محدد/مُقيد"
+
+msgid "Premium"
+msgstr "مميز"
+
+msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
+msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "الأعضاء المسجلين فقط يمكنهم رؤية المحتوى الذي طلبته! سجل الدخول أو انشأ حساب الآن!"
@@ -285,6 +299,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "هذا الحساب لم يعد نشطاً. لقد تم تسجيل الخروج."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -477,7 +494,6 @@ msgstr "لقد دعتك %(sender_name)s للانضمام إلى \"%(team_name)s\
 msgid "Accept invitation"
 msgstr "قبول دعوة"
 
-#, fuzzy
 msgid "View invitation"
 msgstr "عرض الدعوة"
 
@@ -512,14 +528,12 @@ msgstr "%(sender_name)s أشار لك في %(count)d عناصر"
 msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
 msgstr "قد تمت الإشارة لم في \"%(object_name)s\" في %(team_name)s."
 
-#, fuzzy
 msgctxt "email campaign button label to apply for a conference"
 msgid "Apply now!"
-msgstr "تطبيق"
+msgstr "قدم الآن!"
 
-#, fuzzy
 msgid "View conference"
-msgstr "هل المؤتمر"
+msgstr "عرض المؤتمر"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s invited you to join %(team_name)s"
@@ -608,6 +622,9 @@ msgid "Hebrew--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
 msgid "Greek--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
+
+msgid "Persian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
 msgid "Belarus"
@@ -788,6 +805,15 @@ msgstr "أعجبني"
 
 msgid "Persons"
 msgstr "أشخاص"
+
+msgid "Location"
+msgstr "موقع"
+
+msgid "Latitude"
+msgstr "خط العرض"
+
+msgid "Longitude"
+msgstr "خط الطول"
 
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
 msgstr "الرجاء إدخال البريد الإلكتروني وكلمة المرور الصحيحين. لاحظ أن كلا الحقلين قد يكونا حساسين لحالة الأحرف."
@@ -1152,6 +1178,57 @@ msgstr "مواقع Cosinnus"
 msgid "Note from the organizers"
 msgstr "ملاحظة من المنظمين"
 
+msgid "Conference"
+msgstr " مؤتمر"
+
+#, fuzzy
+#| msgid "Start date."
+msgid "Start Datetime"
+msgstr "تاريخ البدء."
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+#, fuzzy
+#| msgid "End date."
+msgid "End Datetime"
+msgstr "تاريخ الاتهاء."
+
+#, fuzzy
+#| msgid "Conference Applications"
+msgid "Conference participants"
+msgstr "تطبيقات المؤتمر"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Cosinnus Conference Premium Block"
+msgstr "المؤتمر قيد التشغيل"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "المؤتمر قيد التشغيل"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+#| msgid "Maximal Number of participants"
+msgid "Maximum BBB participants"
+msgstr "أقصى عدد من المشاركين"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr "نص الشكوى"
 
@@ -1336,25 +1413,23 @@ msgstr "إذا تم إدخاله، فسيتم تمكين وظيفة مؤتمر �
 msgid "Dynamic choice field choices"
 msgstr "خيارات مجال الاختيار الديناميكي"
 
+#, fuzzy
+#| msgid "Detailed Description"
+msgid "Default userprofile description"
+msgstr "وصف مفصل"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "مشروع"
 
-#, fuzzy
-#| msgid "Is conference"
-msgid "Conference"
-msgstr "هو مؤتمر"
-
-#, fuzzy
-#| msgid "Membership requests"
 msgid "Regular membership requests"
-msgstr "طلبات العضوية"
+msgstr "طلبات العضوية المنتظمة"
 
 msgid "Require participation applications for this conference"
 msgstr "طلب طلبات المشاركة لهذا المؤتمر"
 
 msgid "Everyone may join"
-msgstr ""
+msgstr "يمكن للجميع الانضمام"
 
 msgid "Project Type"
 msgstr "نوع المشروع"
@@ -1382,6 +1457,14 @@ msgstr "صورة الخلفية"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "تظهر كصورة إعلان بانر كبيرة على الموقع المصغَّر"
+
+#, fuzzy
+#| msgid "Is visible"
+msgid "Publicly visible"
+msgstr "مرئي"
+
+msgid "Checks if a group/project should be visible publicly"
+msgstr ""
 
 #, fuzzy
 #| msgid "Application name"
@@ -1458,16 +1541,6 @@ msgstr "معرّف مجلد مجموعة Nextcloud"
 msgid "Is conference"
 msgstr "هل المؤتمر"
 
-#, fuzzy
-#| msgid "Start date."
-msgid "Start Datetime"
-msgstr "تاريخ البدء."
-
-#, fuzzy
-#| msgid "End date."
-msgid "End Datetime"
-msgstr "تاريخ الاتهاء."
-
 msgid "Allow temporary users accounts for this conference."
 msgstr "السماح لحسابات المستخدمين المؤقتة لهذا المؤتمر."
 
@@ -1495,6 +1568,11 @@ msgstr "الفرق ذات الصلة"
 
 msgid "Dynamic extra fields"
 msgstr "الحقول الإضافية الديناميكية"
+
+#, fuzzy
+#| msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "ذا كان هذا نشطًا، فسيتم عرض مربع الدعوة للعمل على الموقع المصغر."
 
 msgid "Cosinnus project"
 msgstr "مشروع جار"
@@ -1557,15 +1635,6 @@ msgstr "عمليات إعادة توجيه الفريق الدائمة"
 
 msgid "Permanent Team Redirect"
 msgstr "إعادة توجيه الفريق الدائم"
-
-msgid "Location"
-msgstr "موقع"
-
-msgid "Latitude"
-msgstr "خط العرض"
-
-msgid "Longitude"
-msgstr "خط الطول"
 
 msgid "CosinnusLocation"
 msgstr "موقع Cosinnus"
@@ -2268,6 +2337,12 @@ msgstr "لم يتم تعيين معلومات"
 msgid "Back to Project Overview"
 msgstr "عودة إلى النظرة العامة للمشروع"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "يمكنك ضبط إعدادات المؤتمر على هذا المستوى. ستحتوي جميع الأشياء الموجودة ضمن هذا المستوى في التسلسل الهرمي على هذه الإعدادات ، ما لم يقومو هم بتعيين إعدادات المؤتمر بنفسهم."
 
@@ -2279,6 +2354,11 @@ msgstr "حدد صفحة على الجانب الأيسر."
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل مع إعدادات خادم BBB المخصصة"
+
+#, fuzzy
+#| msgid "Overview - All Conferences"
+msgid "Overview - Premium Conferences Only"
+msgstr "نظرة عامة - جميع المؤتمرات"
 
 msgid "Overview - All Conferences"
 msgstr "نظرة عامة - جميع المؤتمرات"
@@ -2302,6 +2382,22 @@ msgstr "القادمة"
 msgid "View Past"
 msgstr "عرض المشروع"
 
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+#| msgid "Bookmarked"
+msgid "Booked"
+msgstr "مرجعية"
+
+#, fuzzy
+#| msgid "Conference is permanently premium"
+msgid "Permanently Premium"
+msgstr "المؤتمر هو مميز و دائم"
+
 #, fuzzy
 #| msgid "Privacy settings"
 msgid "Portal Setting"
@@ -2310,8 +2406,13 @@ msgstr "إعدادات الخصوصية"
 msgid "Conference Settings"
 msgstr "إعدادات المؤتمر"
 
-msgid "Is premium"
-msgstr "هو مميز"
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium active"
+msgstr "مميز"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
 
 msgid "Not premium"
 msgstr "غير مميز"
@@ -2415,6 +2516,11 @@ msgid "Conference Overview"
 msgstr "المؤتمر قيد التشغيل"
 
 #, fuzzy
+#| msgid "BBB Server for Premium Conferences"
+msgid "Premium Conferences Only"
+msgstr "خادم BBB للمؤتمرات المتميزة"
+
+#, fuzzy
 #| msgid "Conference is running"
 msgid "Conferences with Custom Settings"
 msgstr "المؤتمر قيد التشغيل"
@@ -2471,28 +2577,20 @@ msgstr "لا توجد عناصر حتى الآن"
 msgid "Add newsletter"
 msgstr "أضف رسالة إخبارية"
 
-#, fuzzy
-#| msgid "Create User"
 msgid "Create new User"
 msgstr "إنشاء مستخدم"
 
-#, fuzzy
-#| msgid "First name"
 msgid "Firstname"
 msgstr "الاسم الأول"
 
-#, fuzzy
-#| msgid "Last name"
 msgid "Lastname"
 msgstr "اسم العائلة"
 
 msgid "Save"
 msgstr "حفظ"
 
-#, fuzzy
-#| msgid "Administration"
 msgid "User Administration"
-msgstr "الإدارة"
+msgstr "إدارة المستخدم"
 
 msgid "send login token to all inactive users"
 msgstr "إرسال رمز تسجيل الدخول إلى جميع المستخدمين غير النشطين"
@@ -2503,8 +2601,6 @@ msgstr "بحث"
 msgid "Search for email, firstname or lastname"
 msgstr "ابحث عن البريد الإلكتروني أو الاسم الأول أو الاسم الأخير"
 
-#, fuzzy
-#| msgid "Search"
 msgid "search"
 msgstr "بحث"
 
@@ -2942,7 +3038,6 @@ msgstr "تعديل التطبيق الخاص بك ل"
 msgid "Please fill out the fields below to submit your application. Be aware that the organizers may take your profile into consideration when processing your application, so make sure that your profile page is well maintained. You can view and edit your profile page here:"
 msgstr "يرجى ملء الحقول أدناه لتقديم طلبك. اعلم أن المنظمين قد يأخذون ملفك الشخصي في الاعتبار عند معالجة طلبك ، لذا تأكد من صيانة صفحة ملفك الشخصي بشكل جيد. يمكنك عرض صفحة ملف التعريف الخاصة بك وتعديلها هنا:"
 
-#, fuzzy
 msgid "Your profile"
 msgstr "صفحتك الشخصية"
 
@@ -2966,8 +3061,6 @@ msgstr "نوصيك بتوفير خيار اتصال واحد على الأقل �
 msgid "Contact Phone Number"
 msgstr "الاتصال رقم الهاتف"
 
-#, fuzzy
-#| msgid "Workshops"
 msgid "Workshop"
 msgstr "ورش عمل"
 
@@ -2977,15 +3070,11 @@ msgstr "احتياجاتي الفردية"
 msgid "(no options chosen)"
 msgstr "(لم يتم اختيار أي خيارات)"
 
-#, fuzzy
-#| msgid "Application name"
 msgid "Application conditions"
-msgstr "إسم التطبيق"
+msgstr "شروط التطبيق"
 
-#, fuzzy
-#| msgid "Download Statistics"
 msgid "Download the conditions"
-msgstr "تنزيل الإحصائيات"
+msgstr "قم بتنزيل الشروط"
 
 msgid "I accept the conditions in order to submit my application"
 msgstr "أوافق على الشروط من أجل تقديم طلبي"
@@ -2999,18 +3088,14 @@ msgstr "التقدم للمشاركة في المؤتمر"
 msgid "Withdraw"
 msgstr "انسحب"
 
-#, fuzzy
-#| msgid "Conference is running"
 msgid "Conference Applications"
-msgstr "المؤتمر قيد التشغيل"
+msgstr "تطبيقات المؤتمر"
 
 msgid "Manage participation applications"
 msgstr "إدارة طلبات المشاركة"
 
-#, fuzzy
-#| msgid "There are no invitations."
 msgid "There are no participation applications yet."
-msgstr "لا توجد دعوات."
+msgstr "لا توجد طلبات مشاركة حتى الآن."
 
 msgid "Here you and all other organizers can process all applications. Check each application carefully and select your choice of whether to decline or accept an application or put it on the wait list. You may add a reason for waitlisted or declined applications that will be shown to the applicant."
 msgstr "هنا يمكنك أنت وجميع المنظمين الآخرين معالجة جميع التطبيقات. تحقق من كل تطبيق بعناية وحدد اختيارك سواء لرفض أو قبول أحد التطبيقات أو وضعه في قائمة الانتظار. يمكنك إضافة سبب للتطبيقات المدرجة أو المرفوضة في قائمة الانتظار والتي سيتم عرضها لمقدم الطلب."
@@ -3045,42 +3130,29 @@ msgstr[5] ""
 msgid "Collapse all processed applications"
 msgstr "تصغير جميع التطبيقات المجهزة"
 
-#, fuzzy
-#| msgid "not active"
 msgid "not specified"
-msgstr "غير مفعّل"
+msgstr "غير محدد"
 
-#, fuzzy
-#| msgid "Show more options..."
 msgid "show more ..."
-msgstr "اظهار خيارات إضافية..."
+msgstr "أظهر المزيد ..."
 
 msgid "Reason for rejection"
 msgstr "سبب الرفض"
 
-#, fuzzy
-#| msgctxt "written next to optional form fields"
-#| msgid "optional"
 msgid "optional"
 msgstr "اختياري"
 
-#, fuzzy
-#| msgid "First name"
 msgid "First Choice"
-msgstr "الاسم الأول"
+msgstr "الخيار الأول"
 
 msgid "Second Choice"
 msgstr "الخيار الثاني"
 
-#, fuzzy
-#| msgid "Application name"
 msgid "Application submitted"
-msgstr "إسم التطبيق"
+msgstr "تم تقديم الطلب"
 
-#, fuzzy
-#| msgid "Workshop username"
 msgid "Workshop Assignments"
-msgstr "اسم مستخدم ورشة العمل"
+msgstr "مهام ورشة العمل"
 
 msgid "Choose users to assign to this workshop"
 msgstr "اختر المستخدمين لتعيينهم في ورشة العمل هذه"
@@ -3496,9 +3568,6 @@ msgstr "ستتلقى الآن إشعارات كلما تم نشر محتوى ع�
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "ستتلقى الآن إشعارات كلما تم نشر محتوى عام في هذه المجموعة."
 
-msgid "Group:"
-msgstr "مجموعة:"
-
 msgid "No Description set"
 msgstr "لم يتم تعيين وصف"
 
@@ -3513,6 +3582,28 @@ msgstr "أدخل اختياراتك كقيم مفصولة بفاصلة منقو�
 
 msgid "Enter your choices"
 msgstr "أدخل اختياراتك"
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address to continue using your account."
+msgstr "يرجى التحقق من عنوان بريدك الإلكتروني لـ %(site_name)s!"
+
+msgid "You should already have received an email with a verification link we sent to your account's email address:"
+msgstr ""
+
+msgid "Click here to send the validation link again."
+msgstr ""
+
+msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address!"
+msgstr "يرجى التحقق من عنوان بريدك الإلكتروني لـ %(site_name)s!"
+
+msgid "Close"
+msgstr "إغلاق"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
@@ -3533,15 +3624,23 @@ msgstr "إرسال"
 msgid "Submitting..."
 msgstr "التقديم جار..."
 
-msgid "Close"
-msgstr "إغلاق"
-
 msgid "Avatar will be deleted once you save."
 msgstr "سيتم حذف الصورة الرمزية بمجرد الحفظ."
 
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "اختياري"
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Add/Edit translations"
+msgstr "خيارات اضافية"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "تاريخ"
@@ -3621,9 +3720,17 @@ msgid "until"
 msgstr "حتى"
 
 #, fuzzy
+#| msgid "Only conference members can see the content you requested. Apply to become a member now!"
+msgid "Only conference members can see the event\\'s description."
+msgstr "يمكن لأعضاء الفريق فقط رؤية المحتوى الذي طلبته. تقدم لتصبح عضوا الآن!"
+
+#, fuzzy
 #| msgid "No info."
 msgid "More infos..."
 msgstr "لا معلومات."
+
+msgid "Please Login or Register to view the event's description."
+msgstr ""
 
 #, fuzzy
 #| msgid "You will now receive notifications for content posted in this project."
@@ -3815,14 +3922,11 @@ msgstr "أرسل رسالة إلى جميع الأعضاء"
 msgid "Send Message"
 msgstr "أرسل رسالة"
 
-#, fuzzy
-#| msgid "This account is inactive."
 msgid "User account inactive"
-msgstr "هذا الحساب غير مفعل."
+msgstr "حساب المستخدم غير نشط"
 
-#, fuzzy
 msgid "Kick"
-msgstr "ركلة"
+msgstr "طرد"
 
 msgid "Make Member"
 msgstr "اجعله عضواً"
@@ -3917,7 +4021,7 @@ msgid "Instead of regular membership requests, require users to request particip
 msgstr "بدلاً من طلبات العضوية العادية ، اطلب من المستخدمين طلب المشاركة عن طريق ملء نموذج طلب. يمكن لمسؤولي المؤتمر رؤية جميع الطلبات والموافقة عليها / رفضها في منطقة إدارة المشاركة."
 
 msgid "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items."
-msgstr ""
+msgstr "يمكن لكل عضو مسجل الانضمام على الفور دون أي موافقة مسبقة. ضع في اعتبارك أنه يجوز لكل عضو إنشاء محتوى ونشره. يمكن للأعضاء حذف العناصر الخاصة بهم فقط."
 
 msgid "In which projects' or groups' calendars should the conference be shown?"
 msgstr "في أي تقويمات المشاريع أو المجموعات يجب أن يظهر المؤتمر؟"
@@ -3966,12 +4070,10 @@ msgid "Icon"
 msgstr "أيقونة"
 
 msgid "Will be shown as a small logo."
-msgstr ""
+msgstr "سيظهر كشعار صغير."
 
-#, fuzzy
-#| msgid "This email address already has a registered user!"
 msgid "This content will be visible for all registered users!"
-msgstr "يوجد لهذا البريد الإلكتروني مستخدم مسجل!"
+msgstr "سيكون هذا المحتوى مرئيًا لجميع المستخدمين المسجلين!"
 
 #, fuzzy
 #| msgid "Header image"
@@ -3979,10 +4081,10 @@ msgid "Header Image"
 msgstr "صورة الترويسة"
 
 msgid "Will be shown as a header in the conference lobby and on the conference microsite."
-msgstr ""
+msgstr "سيظهر في رأسية المؤتمر وعلى الموقع المصغر للمؤتمر."
 
 msgid "Will be shown as a header on the microsite."
-msgstr ""
+msgstr "سيتم عرضه كرأسية على الموقع المصغَّر."
 
 msgid "Upload an image."
 msgstr "حمّل صورة."
@@ -4022,6 +4124,17 @@ msgstr "هل هناك أي مشاريع/مجموعات متعلقة بهذا ا�
 msgid "Select related Projects/Groups"
 msgstr "حدد المشاريع/المجموعات ذات الصلة"
 
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "Group/Project is publicly visible"
+msgstr "سيتم تعيين هذا المشروع لتكون مرئية للعامة!"
+
+msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your group/project"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr "إعدادات الخصوصية"
 
@@ -4059,6 +4172,24 @@ msgstr "ما هي التطبيقات التي يجب تنشيطها؟"
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "لا يمكن تنشيط هذا التطبيق إلا لمجموعة، ولكن ليس لمشروع!"
+
+#, fuzzy
+#| msgid "Contact organizers"
+msgid "Contact Form on microsite"
+msgstr "معلومات التواصل"
+
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Display contact form."
+msgstr "معلومات التواصل"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Form"
+msgstr "معلومات التواصل"
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "ما هي التطبيقات التي يجب أن تظهر العناصر العامة منها على الموقع المصغّر؟"
@@ -4249,6 +4380,33 @@ msgstr "شارك على تويتر"
 msgid "Sustainable Development Goals"
 msgstr "أهداف التنمية المستدامة"
 
+#, fuzzy
+#| msgid "Group Administrator"
+msgid "Email the group administrators"
+msgstr "إدارة المجموعة"
+
+#, fuzzy
+#| msgid "email address"
+msgid "Your email address"
+msgstr "البريد الالكتروني"
+
+msgid "Message"
+msgstr "رسائل"
+
+#, fuzzy
+#| msgid "Your name"
+msgid "Your message"
+msgstr "اسمك"
+
+msgid "Captcha"
+msgstr "رمز تحقق"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "نحن بحاجة للتأكد من أنك شخص حقيقي (نأسف!)"
+
+msgid "Generate a new captcha"
+msgstr "قم بإنشاء رمز تحقق جديد"
+
 msgid "Tweets"
 msgstr "تغريدات"
 
@@ -4261,7 +4419,6 @@ msgstr "دعوة للعمل"
 msgid "Register and join!"
 msgstr "سجل وانضم!"
 
-#, fuzzy
 msgid "Register"
 msgstr "تسجيل"
 
@@ -4286,18 +4443,16 @@ msgid "You are invited!"
 msgstr "انت مدعو!"
 
 msgid "Participation is open for everyone. You may instantly join and become a member."
-msgstr ""
+msgstr "المشاركة مفتوحة للجميع. يمكنك الانضمام على الفور وتصبح عضوا."
 
 msgid "You may request to become a member and participate once your request has been accepted."
-msgstr ""
+msgstr "يمكنك طلب أن تصبح عضوًا والمشاركة بمجرد قبول طلبك."
 
 msgid "Join now!"
 msgstr "انضم الان!"
 
-#, fuzzy
-#| msgid "Team membership"
 msgid "Request membership"
-msgstr "عضوية الفريق"
+msgstr "طلب العضوية"
 
 #, fuzzy, python-format
 #| msgid "Do you wish to request to join „%(title)s“?"
@@ -4307,15 +4462,11 @@ msgstr "هل ترغب في طلب الانضمام الى „%(title)s“؟"
 msgid "Browse"
 msgstr "تصفح"
 
-#, fuzzy
-#| msgid "Register and join!"
 msgid "Register and apply!"
 msgstr "سجل وانضم!"
 
-#, fuzzy
-#| msgid "You have been invited to collaborate!"
 msgid "You have been invited to apply!"
-msgstr "لقد تمت دعوتك للتعاون!"
+msgstr "لقد تمت دعوتك للتقديم!"
 
 #, fuzzy
 #| msgid "Application name"
@@ -4335,10 +4486,8 @@ msgstr "كل المستخدمين"
 msgid "Portal Administrators"
 msgstr "مسؤولي البوابة"
 
-#, fuzzy
-#| msgid "Is conference"
 msgid "All Conferences"
-msgstr "هو مؤتمر"
+msgstr "جميع المؤتمرات"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Groups"
@@ -4405,6 +4554,11 @@ msgstr "ابحث عن المستخدمين"
 msgid "Do you really want to decline the request?"
 msgstr "هل تريد حقًا رفض الدعوة؟"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no pending organization requests."
+msgstr "لا توجد دعوات معلقة."
+
 msgid "Organization invitations"
 msgstr "دعوات"
 
@@ -4414,12 +4568,22 @@ msgstr "رفض الدعوة"
 msgid "Invited"
 msgstr "دعوة"
 
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no organization invitations."
+msgstr "لا توجد دعوات معلقة."
+
 #, python-format
 msgid "Do you really want to remove „%(name)s“ from the organization?"
 msgstr "هل تريد حقًا إزالة العضو „%(name)s“من الفريق؟"
 
 msgid "Remove organization"
 msgstr "إزالة الموقع"
+
+#, fuzzy
+#| msgid "There are no invitations."
+msgid "There are no assigned organizations."
+msgstr "لا توجد دعوات."
 
 msgid "Add container"
 msgstr "أضف الحاوية"
@@ -4500,7 +4664,6 @@ msgstr "اسم المجلد"
 msgid "Delete folder"
 msgstr "حذف المجلد"
 
-#, fuzzy
 msgid "Download"
 msgstr "تحميل"
 
@@ -4513,7 +4676,6 @@ msgstr "أرسلت"
 msgid "Archiv"
 msgstr "أرشيف"
 
-#, fuzzy
 msgid "Papierkorb"
 msgstr "سلة المحذوفات"
 
@@ -4605,6 +4767,27 @@ msgstr ""
 #, python-format
 msgid "%(site_name)s CSV import was successful"
 msgstr "تم استيراد CSV %(site_name)s بنجاح!"
+
+#, python-format
+msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -4700,74 +4883,6 @@ msgstr ""
 #, fuzzy, python-format
 #| msgid "Please verify your email address for %(site_name)s!"
 msgid "Please set yout initial password for %(site_name)s!"
-msgstr "يرجى التحقق من عنوان بريدك الإلكتروني لـ %(site_name)s!"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just registered an account at %(site_name)s. We're happy to see you!\n"
-"\n"
-"You will need to verify your email %(user_email)s before you can log in. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Thank you and see you soon!\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"مرحبا %(user_name)s،\n"
-"\n"
-"لقد قمت للتو بتسجيل حساب في%(site_name)s. يسعدنا رؤيتك!\n"
-"\n"
-"ستحتاج إلى التحقق من بريدك الإلكتروني %(user_email)s قبل أن تتمكن من تسجيل الدخول.\n"
-"\n"
-"\n"
-"يرجى النقر فوق الراتباط التالي للتحقق من عنوان بريدك الإلكتروني (أو نسخ الرابط ولصقه في متصفحك):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"شكرا لك ونراك قريبا!\n"
-"\n"
-"فريق %(site_name)s"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just changed your email address at %(site_name)s.\n"
-"\n"
-"You will need to verify your email %(user_email)s before the changes take effect. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"مرحبا %(user_name)s،\n"
-"\n"
-"لقد قمت للتو بتغيير عنوان بريدك الإلكتروني في %(site_name)s.\n"
-"\n"
-"ستحتاج إلى التحقق من بريدك الإلكتروني %(user_email)s قبل تفعيل التغييرات.\n"
-"\n"
-"\n"
-"يرجى النقر فوق الراتباط التالي للتحقق من عنوان بريدك الإلكتروني (أو نسخ الرابط ولصقه في متصفحك):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"فريق %(site_name)s"
-
-#, python-format
-msgid "Please verify your email address for %(site_name)s!"
 msgstr "يرجى التحقق من عنوان بريدك الإلكتروني لـ %(site_name)s!"
 
 #, python-format
@@ -4973,11 +5088,18 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "تم رفض طلبك للانضمام إلى %(site_name)s."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#| "\n"
+#| "Out administrators will review your request and approve your user account soon!\n"
+#| "\n"
+#| "Until then, with warm greetings, \n"
+#| "your %(site_name)s Team"
 msgid ""
 "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 "\n"
-"Out administrators will review your request and approve your user account soon!\n"
+"Our administrators will review your request and approve your user account soon!\n"
 "\n"
 "Until then, with warm greetings, \n"
 "your %(site_name)s Team"
@@ -5249,12 +5371,6 @@ msgstr "قام بتسجيل الخروج"
 msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
 msgstr "من أجل استخدام حساب %(portal_name)s الخاص بك لتسجيل الدخول إلى نظام أساسي آخر ، يلزمك تسجيل الدخول على %(portal_name)s أولاً."
 
-msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-msgstr "تم تسجيل حسابك بنجاح. سيحتاج الحساب إلى موافقة المسؤول قبل أن تتمكن من تسجيل الدخول. سنرسل بريدًا إلكترونيًا إلى عنوانك عندما يحدث ذلك."
-
-msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "تم تسجيل حسابك بنجاح. سوف تتلقى بريدًا إلكترونيًا للتفعيل منا في غضون بضع دقائق. تحتاج إلى تأكيد عنوان البريد الإلكتروني قبل أن تتمكن من تسجيل الدخول."
-
 msgid "Password"
 msgstr "كلمة السر"
 
@@ -5284,6 +5400,11 @@ msgstr "عذراً، ولكن حسابك مرتبط ببوابة متكاملة!
 
 msgid "Please contact an administrator if this is an issue for you."
 msgstr "يرجى الاتصال بالمسؤول إذا كانت هذه مشكلة بالنسبة لك."
+
+#, fuzzy
+#| msgid "Set your password"
+msgid "Sorry, we can't reset your password!"
+msgstr "إعادة تعيين كلمة سر"
 
 msgid "Password reset"
 msgstr "إعادة تعيين كلمة سر"
@@ -5454,15 +5575,6 @@ msgstr "اسم العائلة"
 msgid "You can supply your last name to be displayed as well"
 msgstr "يمكنك تقديم اسمك عائلتك ليتم عرضه أيضًا"
 
-msgid "Captcha"
-msgstr "رمز تحقق"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "نحن بحاجة للتأكد من أنك شخص حقيقي (نأسف!)"
-
-msgid "Generate a new captcha"
-msgstr "قم بإنشاء رمز تحقق جديد"
-
 msgid "Search options..."
 msgstr "خيارات البحث..."
 
@@ -5551,6 +5663,11 @@ msgstr "أدخل مصطلح بحث واحدًا أو أكثر أو حدد موض
 msgid "CSV Downloads"
 msgstr "تنزيلات CSV"
 
+#, fuzzy
+#| msgid "HD space used by projects"
+msgid "HD space used by conferences"
+msgstr "مساحة HD مستخدمة من قبل المشروعات"
+
 msgid "HD space used by groups"
 msgstr "مساحة HD مستخدمة من قبل المجموعات"
 
@@ -5582,19 +5699,17 @@ msgid "Learn more"
 msgstr "تعلم المزيد"
 
 msgid "Recommended minimum dimensions: 200px x 200px (square)."
-msgstr ""
+msgstr "الحد الأدنى الموصى به للأبعاد: 200 بكسل × 200 بكسل (مربع)."
 
 msgid "All common image file types are supported. Maximum file size is 10 MB."
-msgstr ""
+msgstr "يتم دعم جميع أنواع ملفات الصور الشائعة. أقصى حجم للملف هو 10 ميغا بايت."
 
 msgid "Recommended minimum dimensions: 600px x 140px (wide)."
-msgstr ""
+msgstr "الحد الأدنى الموصى به للأبعاد: 600 بكسل × 140 بكسل (عرضًا)."
 
 msgid "Recommended minimum dimensions: 1140px x 240px (wide)."
-msgstr ""
+msgstr "الحد الأدنى الموصى به للأبعاد: 1140 بكسل × 240 بكسل (عرضًا)."
 
-#, fuzzy
-#| msgid "Help about the microsite"
 msgid "View the microsite now"
 msgstr "مساعدة حول المواقع المصغرة"
 
@@ -5895,10 +6010,8 @@ msgid "Participation request pending..."
 msgstr "طلب العضوية معلّق..."
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Participants"
 msgid "Participate"
-msgstr "المشاركين"
+msgstr "شارك"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Contact organizers"
@@ -6006,10 +6119,8 @@ msgid "Projects - Created from this Idea"
 msgstr "المشاريع - التي تم إنشاؤها من هذه الفكرة"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "You are a Member"
 msgid "You are a Admin"
-msgstr "انت عضو"
+msgstr "أنت مسؤول"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ownership request pending..."
@@ -6239,6 +6350,9 @@ msgstr "البيانات الأساسية"
 msgid "E-Mail"
 msgstr "عناوين البريد الإلكتروني"
 
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr ""
+
 msgid "Profile avatar"
 msgstr "الصورة الرمزية للملف الشخصي"
 
@@ -6259,9 +6373,6 @@ msgstr "يشير إلى رغبتك في أن يتم الاتصال بك من ق�
 
 msgid "I am open for cooperation requests"
 msgstr "أنا منفتح على طلبات التعاون"
-
-msgid "Message"
-msgstr "رسائل"
 
 msgid "Welcome!"
 msgstr "أهلاً بك!"
@@ -6538,7 +6649,6 @@ msgctxt "Facebook connect explanation box list header"
 msgid "We guarantee:"
 msgstr "نحن نضمن:"
 
-#, fuzzy
 msgctxt "Facebook connect explanation box list items"
 msgid "We will only post exactly what you have written"
 msgstr "سننشر فقط ما كتبته بالضبط"
@@ -6739,6 +6849,11 @@ msgstr "الصفحة الرئيسية"
 msgid "Rocket.Chat"
 msgstr "دردشة.Rocket"
 
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "ملفي الشخصي"
+
 msgid "Change language"
 msgstr "تغيير اللغة"
 
@@ -6772,7 +6887,8 @@ msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "to %(portal_name)s"
 msgstr "الى %(portal_name)s"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
 msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organization, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
 msgstr "تسرنا رؤيتك! في %(portal_name)s يمكنك التعاون مع الآخرين في المشاريع والمجموعات. سواء كانت المبادرة أو المنظمة أو الشبكة - %(portal_name)s تقدم جميع الأدوات اللازمة للتعاون عبر الإنترنت."
 
@@ -6945,10 +7061,8 @@ msgstr "إسم المشروع"
 msgid "Enter a name for the project."
 msgstr "أدخل اسمًا للمشروع."
 
-#, fuzzy
-#| msgid "Where are you active?"
 msgid "Where is the project active?"
-msgstr "اين انت نشط؟"
+msgstr "أين ينشط المشروع؟"
 
 #, fuzzy
 #| msgid "Team members only"
@@ -6956,7 +7070,7 @@ msgid "Project members only"
 msgstr "أعضاء الفريق فقط"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
-msgstr ""
+msgstr "يمكن للمستخدمين الانضمام عن طريق إرسال طلب عضوية يمكن قبوله أو رفضه من قبل أي من مسؤولي المشروع."
 
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
@@ -6970,13 +7084,9 @@ msgstr "انضم الآن وتعاون!"
 msgid "You have been invited to collaborate!"
 msgstr "لقد تمت دعوتك للتعاون!"
 
-#, fuzzy
-#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
 msgstr "عذرًا ، يمكن فقط لمسؤولي البوابة إلغاء تنشيط المجموعات! يمكنك كتابة رسالة إلى أحد المسؤولين لإلغاء تنشيطها نيابة عنك. أدناه يمكنك العثور على قائمة بجميع المسؤولين."
 
-#, fuzzy
-#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgid "Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgstr "عذرًا ، يمكن فقط لمسؤولي البوابة إلغاء تنشيط المجموعات! يمكنك كتابة رسالة إلى أحد المسؤولين لإلغاء تنشيطها نيابة عنك. أدناه يمكنك العثور على قائمة بجميع المسؤولين."
 
@@ -7167,10 +7277,8 @@ msgstr ""
 msgid "Convert selected items to Conferences"
 msgstr "تحويل المجموعات المحددة إلى مشاريع"
 
-#, fuzzy
-#| msgid "Conference Management"
 msgid "Conference contact person"
-msgstr "إدارة المؤتمرات"
+msgstr "الشخص المسؤول عن الاتصال بالمؤتمر"
 
 #, fuzzy, python-format
 #| msgid "Request about your project \"%(group_name)s\""
@@ -7196,7 +7304,7 @@ msgid "Conference members only"
 msgstr "إدارة المؤتمرات"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
-msgstr ""
+msgstr "يمكن للمستخدمين الانضمام عن طريق إرسال طلب عضوية يمكن قبوله أو رفضه من قبل أي من منظمي المؤتمر."
 
 msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
@@ -7219,13 +7327,20 @@ msgstr "عذرًا ، يمكن فقط لمسؤولي البوابة إلغاء �
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "يمكن لأعضاء الفريق فقط رؤية المحتوى الذي طلبته. تقدم لتصبح عضوا الآن!"
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address."
+msgstr "يرجى التحقق من عنوان بريدك الإلكتروني لـ %(site_name)s!"
+
+msgid "Click here to send the verification link again."
+msgstr ""
+
 msgid "Team Description"
 msgstr "وصف الفريق"
 
 msgid "About Us"
 msgstr "عن المشروع"
 
-#, fuzzy
 msgid "Question about"
 msgstr "سؤال عن"
 
@@ -7244,6 +7359,15 @@ msgstr "يجب أن تحتوي كلمة المرور على حرف خاص واح
 #, python-brace-format
 msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
 msgstr "يجب أن تحتوي كلمة مرورك على الأقل على: {upper_case} حرف كبير ، {lower_case} حرف صغير ، {special_character} حرف ليس أبجديًا."
+
+msgid "The start date must be before the end date"
+msgstr ""
+
+msgid "Please also provide a start date"
+msgstr ""
+
+msgid "Please also provide an end date"
+msgstr ""
 
 msgid "Test email sent!"
 msgstr "تم إرسال بريد الكتروني تجريبي!"
@@ -7272,19 +7396,15 @@ msgstr "تم حفظ التغييرات بنجاح."
 msgid "Login token was sent."
 msgstr "تم إرسال رمز تسجيل الدخول."
 
-#, fuzzy
-#| msgid "User %(username)s was successfully invited!"
 msgid "User successfully created!"
-msgstr "تمت دعوة المستخدم %(username)s بنجاح!"
+msgstr "تم إنشاء المستخدم بنجاح!"
 
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "هذه اللغة \"%s\" غير مدعومة"
 
-#, fuzzy
-#| msgid "Your idea was deleted successfully."
 msgid "Your data was saved successfully!"
-msgstr "تم حذف فكرتك بنجاح."
+msgstr "تم حفظ بياناتك بنجاح!"
 
 msgid "No model given to export data from."
 msgstr "لم يتم إعطاء نموذج لتصدير البيانات منه."
@@ -7532,6 +7652,14 @@ msgstr "لم يتم تحديد اسم التطبيق لإضافة الحاويا
 msgid "Your idea was deleted successfully."
 msgstr "تم حذف فكرتك بنجاح."
 
+#, fuzzy
+#| msgid "Your changes have been saved."
+msgid "Your message has been sent."
+msgstr "تم حفظ التغييرات."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "حدث خطأ أثناء معالجة الصورة الرمزية الخاصة بك. يرجى التأكد من تحديد جزء كبير بما يكفي من الصورة!"
 
@@ -7634,8 +7762,8 @@ msgid "User \"%(user)s\" was registered successfully. The account will need to b
 msgstr "تم تسجيل المستخدم \"%(user)s\" بنجاح. يجب الموافقة على الحساب قبل أن تتمكن من تسجيل الدخول. سنرسل بريدًا إلكترونيًا إلى عنوانك \"%(email)s\" عندما يحدث ذلك."
 
 #, python-format
-msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "تم تسجيل المستخدم \"%(email)s\" بنجاح. سوف تتلقى بريدًا إلكترونيًا للتفعيل منا في غضون بضع دقائق. تحتاج إلى تأكيد عنوان البريد الإلكتروني قبل أن تتمكن من تسجيل الدخول."
+msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
+msgstr ""
 
 msgid "The invite token you have used does not exist!"
 msgstr "رمز الدعوة الذي استخدمته غير موجود!"
@@ -7688,6 +7816,9 @@ msgstr "لقد رفضت طلب انضمام %(username)s (%(email)s)! تم إر�
 msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
 msgstr "حساب المستخدم الذي كنت تبحث عنه غير موجود! ربما تم رفض تسجيلك بالفعل أو أن فاعليه رمز البريد الإلكتروني قد انتهى."
 
+msgid "The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!"
+msgstr ""
+
 msgid "The email for this account seems to already have been confirmed!"
 msgstr "يبدو أن البريد الإلكتروني لهذا الحساب قد تم تأكيده بالفعل!"
 
@@ -7698,12 +7829,40 @@ msgid "The email you are trying to confirm has already been confirmed or belongs
 msgstr "البريد الإلكتروني الذي تحاول تأكيده تم تأكيده بالفعل أو قد ينتمي إلى مستخدم آخر!"
 
 #, fuzzy, python-format
-msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+#| msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+msgid "Your email address %(email)s was successfully confirmed!"
 msgstr "تم تأكيد عنوان بريدك الإلكتروني %(email)s بنجاح! مرحبا بك!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "تم تأكيد عنوان بريدك الإلكتروني %(email)s بنجاح! ومع ذلك، فإن حسابك ليس نشطًا بعد وسيتعين الموافقة عليه من قبل المسؤول قبل أن تتمكن من تسجيل الدخول. سنرسل إليك بريدًا إلكترونيًا بمجرد حدوث ذلك!"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr "يرجى التحقق من عنوان بريدك الإلكتروني لـ %(site_name)s!"
+
+#, python-format
+msgid "You have just registered an account at %(site_name)s. We're happy to see you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "You have just changed your email address at %(site_name)s."
+msgstr "يرجى التحقق من عنوان بريدك الإلكتروني لـ %(site_name)s!"
+
+msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
+msgstr ""
+
+msgid "Thank you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "The %(site_name)s team"
+msgid "Your %(site_name)s Team"
+msgstr "فريق %(site_name)s"
+
+msgid "If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!"
+msgstr ""
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "يبدو أن رابط إلغاء الاشتراك الذي نقرت عليه غير صالح!"
@@ -7712,7 +7871,9 @@ msgstr "يبدو أن رابط إلغاء الاشتراك الذي نقرت ع�
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr "لقد ألغينا اشتراكك في بريدك الإلكتروني \"%(email)s\" من قائمتنا البريدية. لن تتلقى المزيد من رسائل البريد الإلكتروني منا!"
 
-#, fuzzy
+msgid "A new verification email has been sent."
+msgstr ""
+
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "أهلاً بك! تمت دعوتك إلى المشاريع والمجموعات التالية. الرجاء النقرعلى زر القائمة لقبول أو رفض الدعوة لكل منهم!"
 
@@ -7731,10 +7892,8 @@ msgstr "تم تنشيط الإعلان الخاص بك بنجاح."
 msgid "Your Announcement was deactivated successfully."
 msgstr "تم إلغاء تنشيط الإعلان الخاص بك بنجاح."
 
-#, fuzzy
-#| msgid "Your Announcement was deleted successfully."
 msgid "The Archived User Import Entry was deleted successfully."
-msgstr "تم حذف الإعلان الخاص بك بنجاح."
+msgstr "تم حذف إدخال استيراد المستخدم المؤرشف بنجاح."
 
 msgid "This action is not allowed right now"
 msgstr "هذا الإجراء غير متاح مباشرة!"
@@ -7760,6 +7919,149 @@ msgstr "أنت لست عضوًا حاليًا في %s! إذا كنت ترغب ف
 
 msgid "Your changes have been saved."
 msgstr "تم حفظ التغييرات."
+
+#~ msgid "Deactivate users (will keep all all items they created on the site)"
+#~ msgstr "إلغاء تنشيط المستخدمين (سيتم الاحتفاظ بجميع العناصر التي قاموا بإنشائها على الموقع)"
+
+#~ msgid "Restart"
+#~ msgstr "إعادة تشغيل"
+
+#~ msgid "Deutsch--NATIVE-LANGUAGE"
+#~ msgstr "الألمانية - اللغة الأم"
+
+#~ msgid "English--NATIVE-LANGUAGE"
+#~ msgstr "الإنجليزية - اللغة الأم"
+
+#~ msgid "Russian--NATIVE-LANGUAGE"
+#~ msgstr "الروسية - اللغة الأم"
+
+#~ msgid "Ukrainian--NATIVE-LANGUAGE"
+#~ msgstr "الأوكرانية - اللغة الأم"
+
+#~ msgid "French--NATIVE-LANGUAGE"
+#~ msgstr "الفرنسية - اللغة الأم"
+
+#~ msgid "Polish--NATIVE-LANGUAGE"
+#~ msgstr "البولندية -اللغة الأم"
+
+#~ msgid "Spanish--NATIVE-LANGUAGE"
+#~ msgstr "الإسبانية - اللغة الأم"
+
+#~ msgid "Romanian--NATIVE-LANGUAGE"
+#~ msgstr "الرومانية - اللغة الأم"
+
+#~ msgid "Belarussian--NATIVE-LANGUAGE"
+#~ msgstr "البيلاروسية -اللغة الأم"
+
+#~ msgid "Dutch--NATIVE-LANGUAGE"
+#~ msgstr "الهولندية - اللغة الأم"
+
+#~ msgid "Czech--NATIVE-LANGUAGE"
+#~ msgstr "التشيكية - اللغة الأم"
+
+#~ msgid "Azerbaijani--NATIVE-LANGUAGE"
+#~ msgstr "الأذربيجانية - اللغة الأم"
+
+#~ msgid "Armenian--NATIVE-LANGUAGE"
+#~ msgstr "الأرمينية - اللغة الأم"
+
+#~ msgid "Georgian--NATIVE-LANGUAGE"
+#~ msgstr "الجورجية - اللغة الأم"
+
+#~ msgid "Kazakh--NATIVE-LANGUAGE"
+#~ msgstr "الكازاخستانية -اللغة الأم"
+
+#~ msgid "Arabic--NATIVE-LANGUAGE"
+#~ msgstr "العربية - اللغة الأم"
+
+#~ msgid "Hebrew--NATIVE-LANGUAGE"
+#~ msgstr "العبرية - اللغة الأم"
+
+#~ msgid "Is premium"
+#~ msgstr "هو مميز"
+
+#~ msgid "Attach existing Files..."
+#~ msgstr "إرفاق الملفات الموجودة..."
+
+#~ msgid "Group:"
+#~ msgstr "مجموعة:"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before you can log in. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Thank you and see you soon!\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "مرحبا %(user_name)s،\n"
+#~ "\n"
+#~ "لقد قمت للتو بتسجيل حساب في%(site_name)s. يسعدنا رؤيتك!\n"
+#~ "\n"
+#~ "ستحتاج إلى التحقق من بريدك الإلكتروني %(user_email)s قبل أن تتمكن من تسجيل الدخول.\n"
+#~ "\n"
+#~ "\n"
+#~ "يرجى النقر فوق الراتباط التالي للتحقق من عنوان بريدك الإلكتروني (أو نسخ الرابط ولصقه في متصفحك):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "شكرا لك ونراك قريبا!\n"
+#~ "\n"
+#~ "فريق %(site_name)s"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "مرحبا %(user_name)s،\n"
+#~ "\n"
+#~ "لقد قمت للتو بتغيير عنوان بريدك الإلكتروني في %(site_name)s.\n"
+#~ "\n"
+#~ "ستحتاج إلى التحقق من بريدك الإلكتروني %(user_email)s قبل تفعيل التغييرات.\n"
+#~ "\n"
+#~ "\n"
+#~ "يرجى النقر فوق الراتباط التالي للتحقق من عنوان بريدك الإلكتروني (أو نسخ الرابط ولصقه في متصفحك):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "فريق %(site_name)s"
+
+#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+#~ msgstr "تم تسجيل حسابك بنجاح. سيحتاج الحساب إلى موافقة المسؤول قبل أن تتمكن من تسجيل الدخول. سنرسل بريدًا إلكترونيًا إلى عنوانك عندما يحدث ذلك."
+
+#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "تم تسجيل حسابك بنجاح. سوف تتلقى بريدًا إلكترونيًا للتفعيل منا في غضون بضع دقائق. تحتاج إلى تأكيد عنوان البريد الإلكتروني قبل أن تتمكن من تسجيل الدخول."
+
+#~ msgid "Time"
+#~ msgstr "وقت"
+
+#~ msgid "External"
+#~ msgstr "خارجي"
+
+#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
+#~ msgstr "إذا كنت ترغب في حذف أي من المحتوى الخاص بك، يرجى الرجوع والقيام بذلك الآن. بمجرد حذف ملف التعريف الخاص بك، لن يكون لديك أي وصول إلى أي شيء قمت بإنشائه باستخدام هذا الحساب."
 
 #, fuzzy
 #~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
@@ -7790,25 +8092,8 @@ msgstr "تم حفظ التغييرات."
 #~ msgid "%(team_name)s was deactivated successfully!"
 #~ msgstr "تم تعطيل %(team_name)s بنجاح!"
 
-#, fuzzy
-#~| msgid "No Tag selected"
-#~ msgid "nothing selected"
-#~ msgstr "لم يتم تحديد علامة"
-
-#~ msgid "Deactivate users (will keep all all items they created on the site)"
-#~ msgstr "إلغاء تنشيط المستخدمين (سيتم الاحتفاظ بجميع العناصر التي قاموا بإنشائها على الموقع)"
-
-#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
-#~ msgstr "إذا كنت ترغب في حذف أي من المحتوى الخاص بك، يرجى الرجوع والقيام بذلك الآن. بمجرد حذف ملف التعريف الخاص بك، لن يكون لديك أي وصول إلى أي شيء قمت بإنشائه باستخدام هذا الحساب."
-
-#~ msgid "Attach existing Files..."
-#~ msgstr "إرفاق الملفات الموجودة..."
-
-#~ msgid "Time"
-#~ msgstr "وقت"
-
-#~ msgid "External"
-#~ msgstr "خارجي"
+#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "تم تسجيل المستخدم \"%(email)s\" بنجاح. سوف تتلقى بريدًا إلكترونيًا للتفعيل منا في غضون بضع دقائق. تحتاج إلى تأكيد عنوان البريد الإلكتروني قبل أن تتمكن من تسجيل الدخول."
 
 #, fuzzy
 #~| msgid "Header image"

@@ -77,6 +77,7 @@ urlpatterns = [
     
     url(r'^account/report/$', feedback.report_object, name='report-object'),
     url(r'^account/accept_tos/$', user.accept_tos, name='accept-tos'),
+    url(r'^account/resend_email_validation/$', user.resend_email_validation, name='resend-email-validation'),
     url(r'^account/accept_updated_tos/$', user.accept_updated_tos, name='accept-updated-tos'),
     url(r'^account/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', user.add_email_to_blacklist, name='user-add-email-blacklist'),
     url(r'^account/list-unsubscribe-result/$', user.add_email_to_blacklist_result, name='user-add-email-blacklist-result'),
@@ -122,6 +123,7 @@ urlpatterns = [
     
     url(r'^administration/conference_overview/$', administration.conference_overview, name='administration-conference-overview'),
     url(r'^administration/conference_overview/nonstandard/$', administration.conference_overview, name='administration-conference-overview-nonstandard', kwargs={'only_nonstandard': True}),
+    url(r'^administration/conference_overview/premium/$', administration.conference_overview, name='administration-conference-overview-premium', kwargs={'only_premium': True}),
     
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),
@@ -137,20 +139,27 @@ urlpatterns = [
     url(r'^housekeeping/fillcache/(?P<number>[^/]+)/$', housekeeping.fillcache, name='housekeeping-fillcache'),
     url(r'^housekeeping/getcache$', housekeeping.getcache, name='housekeeping-getcache'),
     url(r'^housekeeping/deletecache$', housekeeping.deletecache, name='housekeeping-deletecache'),
-    url(r'^housekeeping/validate_redirects', housekeeping.check_and_delete_loop_redirects, name='housekeeping-validate-redirects'),
-    url(r'^housekeeping/add_members_to_forum', housekeeping.add_members_to_forum, name='housekeeping-add-members-to-forum'),
-    url(r'^housekeeping/user_statistics', housekeeping.user_statistics, name='housekeeping-user-statistics'),
+    url(r'^housekeeping/test_logging/$', housekeeping.test_logging, name='housekeeping-test-logging'),
+    url(r'^housekeeping/test_logging/info/$', housekeeping.test_logging, name='housekeeping-test-logging', kwargs={'level': 'info'}),
+    url(r'^housekeeping/test_logging/warning/$', housekeeping.test_logging, name='housekeeping-test-logging', kwargs={'level': 'warning'}),
+    url(r'^housekeeping/test_logging/error/$', housekeeping.test_logging, name='housekeeping-test-logging', kwargs={'level': 'error'}),
+    url(r'^housekeeping/test_logging/exception/$', housekeeping.test_logging, name='housekeeping-test-logging', kwargs={'level': 'exception'}),
+    url(r'^housekeeping/validate_redirects/', housekeeping.check_and_delete_loop_redirects, name='housekeeping-validate-redirects'),
+    url(r'^housekeeping/add_members_to_forum/', housekeeping.add_members_to_forum, name='housekeeping-add-members-to-forum'),
+    url(r'^housekeeping/user_statistics/', housekeeping.user_statistics, name='housekeeping-user-statistics'),
     url(r'^housekeeping/create_map_test_entities/(?P<count>\d+)/', housekeeping.create_map_test_entities, name='housekeeping-create-map-test-entities'),
     url(r'^housekeeping/reset_user_tos_flags/', housekeeping.reset_user_tos_flags, name='housekeeping-reset-user-tos-flags'),
     url(r'^housekeeping/send_testmail/', housekeeping.send_testmail, name='housekeeping-send-testmail'),
     url(r'^housekeeping/print_testmail/', housekeeping.print_testmail, name='housekeeping-print-testmail'),
     url(r'^housekeeping/print_settings/', housekeeping.print_settings, name='housekeeping-print-settings'),
     url(r'^housekeeping/group_storage_info/', housekeeping.group_storage_info, name='housekeeping-group-storage-info'),
+    url(r'^housekeeping/conference_storage_report/', housekeeping.conference_storage_report_csv, name='housekeeping-conference-storage-report'),
     url(r'^housekeeping/group_storage_report/', housekeeping.group_storage_report_csv, name='housekeeping-group-storage-report'),
     url(r'^housekeeping/project_storage_report/', housekeeping.project_storage_report_csv, name='housekeeping-project-storage-report'),
     url(r'^housekeeping/user_activity_info/', housekeeping.user_activity_info, name='housekeeping-user-activity-info'),
     url(r'^housekeeping/group_admin_emails/(?P<slugs>[^/]+)/', housekeeping.group_admin_emails, name='housekeeping-group-admin-emails'),
-
+    
+    url(r'^error/$', common.generic_error_page_view, name='generic-error-page'),
 
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]

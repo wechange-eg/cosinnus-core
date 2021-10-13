@@ -23,6 +23,7 @@ from django.contrib import messages
 import logging 
 from django.utils.encoding import force_text
 from cosinnus.models.group import CosinnusPortal
+from threading import Thread
 logger = logging.getLogger('cosinnus')
 
 
@@ -92,6 +93,23 @@ class DKIMEmailBackend(EmailBackend):
             return False
         return True
     
+    
+def threaded_execution_and_catch_error(f):
+    """ Will run in a thread and catch all errors """
+    
+    def error_wrapper(self, *args, **kwargs):
+        my_self = self
+        class CosinnusElasticsearchExecutionThread(Thread):
+            def run(self):
+                try:
+                    return f(my_self, *args, **kwargs)
+                except (TransportError, ProtocolError, ConnectionError) as e:
+                    logger.error('Could not connect to the ElasticSearch backend for indexing! The search function will not work and saving objects on the site will be terribly slow! Exception in extra.', extra={'exception': force_text(e)})
+                except Exception as e:
+                    logger.error('An unknown error occured while indexing an object! Exception in extra.', extra={'exception': force_text(e)})
+        CosinnusElasticsearchExecutionThread().start()
+    return error_wrapper
+
 
 class RobustElasticSearchBackend(ElasticsearchSearchBackend):
     """A robust backend that doesn't crash when no connection is available"""
@@ -99,15 +117,6 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
     MIN_GRAM = 2
     MAX_NGRAM = 25
     
-    def mute_error(f):
-        def error_wrapper(self, *args, **kwargs):
-            try:
-                return f(self, *args, **kwargs)
-            except (TransportError, ProtocolError, ConnectionError) as e:
-                logger.exception('Could not connect to the ElasticSearch backend for indexing! The search function will not work and saving objects on the site will be terribly slow! Exception in extra.', extra={'exception': force_text(e)})
-            except Exception as e:
-                logger.exception('An unknown error occured while indexing an object! Exception in extra.', extra={'exception': force_text(e)})
-        return error_wrapper
 
     def __init__(self, *args, **options):
         """ Add custom default options """
@@ -132,15 +141,15 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
                 field_mapping["search_analyzer"] = "standard"
         return content_field_name, mapping
 
-    @mute_error
+    @threaded_execution_and_catch_error
     def update(self, *args, **kwargs):
         super(RobustElasticSearchBackend, self).update(*args, **kwargs)
 
-    @mute_error
+    @threaded_execution_and_catch_error
     def remove(self, *args, **kwargs):
         super(RobustElasticSearchBackend, self).remove(*args, **kwargs)
 
-    @mute_error
+    @threaded_execution_and_catch_error
     def clear(self, *args, **kwargs):
         super(RobustElasticSearchBackend, self).clear(*args, **kwargs)
 

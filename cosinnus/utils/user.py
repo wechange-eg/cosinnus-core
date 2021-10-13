@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import logging
+import random
 
 from cosinnus.conf import settings
 from cosinnus.core.registries.widgets import widget_registry
@@ -197,7 +198,7 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
     if not password and no_generated_password:
         # special handling for user without password
         user_model = get_user_model()
-        temp_username = email if not username else username
+        temp_username = str(random.randint(100000000000, 999999999999)) if not username else username
 
         # check if user with that password already exist
         user, created = user_model.objects.get_or_create(username=temp_username, email=email)
@@ -288,7 +289,7 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
 def get_newly_registered_user_email(user):
     """ Safely gets a user object's email address, even if they have yet to veryify their email address
         (in this case, the `user.email` field is scrambled.
-        See `cosinnus.views.user.set_user_email_to_verify()` """
+        See `cosinnus.views.user.send_user_email_to_verify()` """
     from cosinnus.models.profile import PROFILE_SETTING_EMAIL_TO_VERIFY
     return user.cosinnus_profile.settings.get(PROFILE_SETTING_EMAIL_TO_VERIFY, user.email)
 

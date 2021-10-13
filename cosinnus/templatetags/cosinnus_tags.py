@@ -69,6 +69,8 @@ from django.templatetags.i18n import do_translate, do_block_translate, Translate
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
 from cosinnus.views.ui_prefs import get_ui_prefs_for_user
+from datetime import timedelta
+from django.utils.timezone import now
 
 logger = logging.getLogger('cosinnus')
 
@@ -1275,7 +1277,7 @@ def get_user_from_id(id):
 def get_attr(obj, attr_name):
     """ Returns the given attribute object instead of trying to resolve
         it in the template using __getitem__ """
-    return getattr(obj, attr_name)
+    return getattr(obj, attr_name, None)
 
 @register.filter
 def get_item(obj, attr_name):
@@ -1365,11 +1367,27 @@ def is_user_active(user):
 
 @register.filter
 def user_can_create_groups(user):
-    """ Checks if a user has the necessary permissions to create a CosinnusGroup"""
+    """ Checks if a user has the necessary permissions to create a CosinnusGroup """
     return check_user_can_create_groups(user)
 
 @register.filter
 def user_can_create_conferences(user):
-    """ Checks if a user has the necessary permissions to create a CosinnusConference"""
+    """ Checks if a user has the necessary permissions to create a CosinnusConference """
     return check_user_can_create_conferences(user)
 
+@register.filter
+def next_day(datetime_obj):
+    """ Adds a timedelta day=1 to a date/datetime. Usefull for fullcalendars way
+        of considering a full-day event with the end-date on a day to span only to the end of the previous day. """
+    return datetime_obj + timedelta(days=1)
+
+@register.filter
+def older_than_days(datetime_obj, num_days):
+    """ Checks if a given datetime is older than `num_days` than today's date. """
+    return (datetime_obj + timedelta(days=num_days)) <= now()
+
+@register.simple_tag()
+def get_admin_data():
+    """ Returns the portal administrators on the signup page """
+    admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
+    return admins

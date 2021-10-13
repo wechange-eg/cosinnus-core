@@ -53,12 +53,13 @@ from cosinnus.api.serializers.group import GroupSimpleSerializer
 from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.core import signals
 from cosinnus.core.decorators.views import membership_required, redirect_to_403, \
-    dispatch_group_access, get_group_for_request
+    dispatch_group_access, get_group_for_request, redirect_to_not_logged_in
 from cosinnus.core.registries import app_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm, MembershipForm, CosinnusLocationForm, \
     CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm, MultiUserSelectForm, MultiGroupSelectForm
-from cosinnus.forms.tagged import get_form  # circular import
+from cosinnus.forms.tagged import get_form
+from cosinnus.models import group  # circular import
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
                                    CosinnusPortal, CosinnusLocation,
                                    CosinnusGroupGalleryImage, CosinnusGroupCallToActionButton,
@@ -88,7 +89,8 @@ from cosinnus.views.microsite import GroupMicrositeView
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
                                         AjaxableFormMixin, ListAjaxableResponseMixin)
 from cosinnus.views.mixins.avatar import AvatarFormMixin
-from cosinnus.views.mixins.group import GroupIsConferenceMixin
+from cosinnus.views.mixins.group import GroupIsConferenceMixin,\
+    RequireVerifiedUserMixin
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin, \
     RequireLoggedInMixin, EndlessPaginationMixin, RequireWriteMixin
 from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
@@ -101,6 +103,7 @@ from cosinnus_organization.utils import get_organization_select2_pills
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.views.attached_object import AttachableViewMixin
 from cosinnus.core.middleware import inactive_logout_middleware
+
 
 logger = logging.getLogger('cosinnus')
 
@@ -312,7 +315,7 @@ class GroupMembershipMixin(MembershipClassMixin):
     invite_class = CosinnusUnregisterdUserGroupInvite
 
 
-class GroupCreateView(CosinnusGroupFormMixin, AttachableViewMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
+class GroupCreateView(CosinnusGroupFormMixin, RequireVerifiedUserMixin, AttachableViewMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       CreateWithInlinesView):
 
     #form_class = 
@@ -1632,11 +1635,12 @@ class GroupStartpage(View):
                     and not request.GET.get('invited', None) == '1':
                 return False
             else:
+                # if the group is not accessible, redirect to microsite 
+                #   in case if the group's microsite should not be closed for the non-authenticated users
+                if not check_object_read_access(self.group, request.user) and not self.group.is_publicly_visible:
+                    return False
                 return True
-        # if the group is not accessible, redirect to microsite
-        if not check_object_read_access(self.group, request.user):
-            return True
-        
+
         # check if this session user has clicked on "browse" for this group before
         # and if so, never let him see that groups microsite again
         group_session_browse_key = 'group__browse__%s' % self.group.slug

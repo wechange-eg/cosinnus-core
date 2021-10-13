@@ -79,7 +79,7 @@ class BigBlueButtonAPI(object):
                             break
                     # if we have found a group, and that group has a premium status, we use 
                     # the premium server choice of the bbb server settings object
-                    if found_group and (found_group.is_premium):
+                    if found_group and found_group.is_premium:
                         bbb_server_choice = conference_settings.bbb_server_choice_premium
                 
                 auth_pair = dict(settings.COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS).get(bbb_server_choice)
@@ -111,7 +111,7 @@ class BigBlueButtonAPI(object):
     
     
     def start(self, 
-            name, meeting_id, welcome="Welcome to the conversation",
+            name, meeting_id, welcome=None,
             moderator_password="", attendee_password="", max_participants=None, voice_bridge=None,
             parent_meeting_id=None, options=None, presentation_url=""):
         """ This function calls the BigBlueButton API directly to create a meeting with all available parameters available
@@ -158,14 +158,17 @@ class BigBlueButtonAPI(object):
         attendee_password = attendee_password if attendee_password else bbb_utils.random_password()
         moderator_password = moderator_password if moderator_password else bbb_utils.random_password()
     
-        query = (
+        query = [
             ("name", name),
             ('meetingID', meeting_id),
-            ("welcome", welcome),
             ("voiceBridge", voice_bridge),
             ("attendeePW", attendee_password),
             ("moderatorPW", moderator_password),
-        )
+        ]
+        if welcome:
+            query += [
+                ("welcome", welcome),
+            ]
     
         if max_participants and is_number(max_participants):
             query += (("maxParticipants", int(max_participants)),)
@@ -197,7 +200,8 @@ class BigBlueButtonAPI(object):
             return result
         else:
             logger.error('BBB Room error: Server request `start` was not successful.',
-                         extra={'response_status_code': response.status_code, 'result': response.text})
+                         extra={'response_status_code': response.status_code, 'result': response.text,
+                                'meeting_id': meeting_id, 'server_url': self.api_auth_url})
             raise Exception('BBB Room exception: Server request was not successful: ' + str(response.text))
     
     

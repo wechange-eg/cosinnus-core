@@ -27,7 +27,8 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from cosinnus.utils.permissions import check_user_superuser, check_ug_membership,\
     check_ug_admin
 from annoying.functions import get_object_or_None
-from cosinnus.core.decorators.views import redirect_to_not_logged_in
+from cosinnus.core.decorators.views import redirect_to_not_logged_in,\
+    get_group_for_request
 
 
 logger = logging.getLogger('cosinnus')
@@ -63,7 +64,9 @@ NEVER_REDIRECT_URLS = [
     '/language',
     '/api/v1/user/me/',
     '/api/v1/login/',
+    '/api/v2/navbar/',
     '/o/',
+    '/group/forum/cloud/oauth2/',
     # these deprecated URLs can be removed from the filter list once the URLs are removed
     # and their /account/ URL-path equivalents are the only remaining version of the view URL
     '/administration/list-unsubscribe/',
@@ -128,8 +131,12 @@ class OTPMiddleware(MiddlewareMixin):
         if not getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED', False):
             return None
         
-        # regular mode covers the django-admin and administration area
-        filter_path = '/admin'
+        # regular mode covers only the admin backend
+        filter_path = '/admin/'
+        # semi-strict mode covers the django-admin and administration area
+        if getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_INCLUDE_ADMINISTRATION_AREA', False) or \
+                getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
+            filter_path = '/admin'
         # strict mode covers the entire page
         if getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_STRICT_MODE', False):
             filter_path = '/'
@@ -255,43 +262,115 @@ class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
                 return redirect(next_page) 
 
 
-class DenyAnonymousAccessMiddleware(MiddlewareMixin):
-    """ This middleware will show an error page on any anonymous request,
-        unless the request is directed at a login URL. """
-    
-    def process_request(self, request):
-        if not request.user.is_authenticated:
-            if request.path not in LOGIN_URLS:
-                return TemplateResponse(request, 'cosinnus/portal/no_anonymous_access_page.html').render()
-
-
-class RedirectAnonymousUserToLoginMiddleware(MiddlewareMixin):
-    """ This middleware will show an error page on any anonymous request,
-        unless the request is directed at a login URL. """
-
-    def process_request(self, request):
-        if not request.user.is_authenticated:
-            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS]):
-                return redirect_to_not_logged_in(request)
-
-
 class ExternalEmailLinkRedirectNoticeMiddleware(MiddlewareMixin):
-    """ This middleware will show an error page on any anonymous request,
-        unless the request is directed at a login URL. """
+    """ Shows a warning message for external links clicked from an email
+         if any request URL contains the `external_link_redirect` flag. """
 
     def process_request(self, request):
         if request.GET.get('external_link_redirect', None) == '1':
             messages.warning(request, _('You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it.'))
 
-            
-class RedirectAnonymousUserToLoginAllowSignupMiddleware(MiddlewareMixin):
-    """ This middleware will show an error page on any anonymous request,
+
+class GroupResolvingMiddlewareMixin(object):
+    """ Mixin for middleware that needs to resolve a possibly existing CosinnusGroup from the URL """
+    
+    def get_group(self, request):
+        """ Glean the requested group from the URL, only once """
+        if not hasattr(request, '_middleware_resolved_group'):
+            try:
+                # get group name from URL, might already fail and except out on short URLs
+                group_name = request.path.split('/')[2] 
+                try:
+                    setattr(request, '_middleware_resolved_group', get_group_for_request(group_name, request))
+                except Exception as e:
+                    if settings.DEBUG:
+                        raise e
+            except:
+                pass
+            if not hasattr(request, '_middleware_resolved_group'):
+                setattr(request, '_middleware_resolved_group', None)
+        return getattr(request, '_middleware_resolved_group')
+    
+    def is_url_for_publicly_visible_group_microsite(self, request):
+        """ Is this a URL for a valid group that is publicly visible? """
+        if self.get_group(request) and self.get_group(request).is_publicly_visible:
+            try:
+                # check if the URL matches a microsite for this publicly visible group
+                path_split = request.path.split('/')
+                if path_split[3] == '' or path_split[3] == 'microsite':
+                    return True
+                # the note embed view is part of the microsite and only ever displays content marked as public
+                # so we allow it for publicly_visible groups
+                if path_split[3] == 'note' and path_split[4] == 'embed':
+                    return True
+            except:
+                pass
+        return False
+    
+    def is_url_for_group_ical_token_feed(self, request):
+        """ Is this a URL for a valid group and an ical feed inside that group? """
+        if self.get_group(request):
+            try:
+                # check if the URL matches an iCal feed URL for cosinnus_event
+                path_split = request.path.split('/')
+                if path_split[3] == 'event' and path_split[4] == 'feed':
+                    return True
+            except:
+                pass
+        return False
+    
+    def is_anonymous_block_exempted_group_url(self, request):
+        """ Is this a URL for a valid group, that can always be accessed by 
+            anonymous users, even if the portal is blocked from anonymous access? """
+        return self.is_url_for_publicly_visible_group_microsite(request) or self.is_url_for_group_ical_token_feed(request)
+
+
+class DenyAnonymousAccessMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
+    """ Middlware for blocking out anonymous users completely.
+        This middleware will show an error page on any anonymous request,
         unless the request is directed at a login URL. """
+    
+    def process_request(self, request):
+        if not request.user.is_authenticated:
+            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS]) \
+                    and not self.is_anonymous_block_exempted_group_url(request):
+                return TemplateResponse(request, 'cosinnus/portal/no_anonymous_access_page.html').render()
+
+
+class RedirectAnonymousUserToLoginMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
+    """ Middlware for blocking anonymous users and letting them log in.
+        This middleware will show an error message for any anonymous request,
+        and redirect to the login page, unless the request is directed at a login URL. """
 
     def process_request(self, request):
         if not request.user.is_authenticated:
-            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]):
+            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS]) \
+                    and not self.is_anonymous_block_exempted_group_url(request):
                 return redirect_to_not_logged_in(request)
+
+
+class RedirectAnonymousUserToLoginAllowSignupMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
+    """ Middlware for blocking anonymous users and letting them log in or register.
+        This middleware will show an error message for any anonymous request,
+        and redirect to the login page, unless the request is directed at a login or signup URL. """
+
+    def process_request(self, request):
+        if not request.user.is_authenticated:
+            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]) \
+                    and not self.is_anonymous_block_exempted_group_url(request):
+                return redirect_to_not_logged_in(request)
+
+
+class AllowOnlyAdminLoginsMiddleware(MiddlewareMixin):
+    """ This middleware will allow only superuser/portal-admin accounts to log in
+        to the plattform. Anonymous user have access as usual """
+
+    def process_request(self, request):
+        if request.user.is_authenticated and not check_user_superuser(request.user):
+            logout(request)
+            messages.error(request, _('Sorry, only admin accounts may log in at this time.'))
+            return redirect_to_not_logged_in(request)
+
 
 
 class ConditionalRedirectMiddleware(MiddlewareMixin):

@@ -71,6 +71,11 @@ module.exports = DelegatedWidgetView.extend({
         if (self.widgetData && self.widgetData.items && self.widgetData.items.length == 0) {
         	self.$el.remove()
         }
+        // remove widget if unknown content type (app type might be disabled)
+        if (self.state['errorResponseText'] && self.state['errorResponseText'].startsWith('Unknown content type supplied')) {
+            self.$el.remove()
+        }
+        
         
         return self;
     },

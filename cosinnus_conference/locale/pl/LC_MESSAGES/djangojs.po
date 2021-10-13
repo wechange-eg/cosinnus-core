@@ -244,6 +244,12 @@ msgstr "Organizacja"
 msgid "Organization"
 msgstr "Organizacja"
 
+#. [City]
+#. defaultMessage is:
+#. undefined
+msgid "City"
+msgstr ""
+
 #. [Represented organisations]
 #. defaultMessage is:
 #. undefined
@@ -339,3 +345,11 @@ msgstr "uczestnicy"
 #. undefined
 msgid "places left"
 msgstr "pozostało miejsc"
+
+msgid ""
+"Your profile is not shown here or not displayed correctly? "
+"Add to your profile or make yourself visible to other conference participants."
+msgstr ""
+
+msgid "Edit Profile"
+msgstr ""

@@ -55,6 +55,9 @@ const muiCssBaseline = {
       "background": "#ffffff",
       "height": "100%",
     },
+    ".announcement": {
+      "margin-top": "0",
+    },
     ".conference": {
       "margin-left": navWidth,
       "height": "100%",

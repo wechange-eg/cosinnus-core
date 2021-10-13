@@ -7,10 +7,10 @@
 	    {% captureas description_value %}{{ request.GET.description }}{% endcaptureas %}
 	{% endif %}
     {% if not group_model == "CosinnusConference" %}
-        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
-    {% endif %}
+        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.description.html_name %}
+	{% endif %}
     {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
-       {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 %}
+       {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 translation_form=form.forms.obj translated_field_name=form.forms.obj.description_long.html_name %}
     {% endif %}
 {% endblock %}
 
@@ -185,9 +185,10 @@
 	                        {% if request.GET.name %}
 	                            {% captureas name_val %}{{ request.GET.name }}{% endcaptureas %}
 	                        {% endif %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=group_model_class.get_trans.FORMFIELD_NAME_PLACEHOLDER field_value=name_val %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=group_model_class.get_trans.FORMFIELD_NAME_PLACEHOLDER field_value=name_val translation_form=form.forms.obj %}
 						{% endblock group_form_name_field %}
-				        
+
+
 				        {% block from_to_date_fields %}
 	                        {% comment %} Date picker for from_date - to_date {% endcomment %}
 	                        {% if form.forms.obj.fields.from_date and form.forms.obj.fields.to_date %}
@@ -246,7 +247,7 @@
                                 {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
                             {% endcaptureas %}
                             {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True translation_form=form.forms.obj %}
                             
                             {# Contact Info Field #}
                             {% trans "Contact info" as contact_info_label %}
@@ -272,7 +273,7 @@
 		                    {% endcaptureas %}
 	                        {% include 'cosinnus/fields/default_field.html' with label=desc_label legend=group_legend field_id=form.forms.obj.description.id_for_label %}
 			                {% block group_form_description_field %}
-						        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label %}
+						        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label translation_form=form.forms.obj %}
 							{% endblock group_form_description_field %}
                         {% endif %}
 						
@@ -409,6 +410,14 @@
 		                {% block portal_specific_group_extra_fields %}
 		                    {% include 'cosinnus/fields/userprofile_extra_formfields.html' with form=form.forms.obj %}
 		                {% endblock %}
+
+						{# Checkbox field #}
+						{% if form.forms.obj.fields.publicly_visible %}
+							{% trans "Group/Project is publicly visible" as groups_projects_public_visibility_label %}
+							{% trans "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search." as groups_projects_public_visibility_legend %}
+							{% trans "Enable the public visibility of your group/project" as groups_projects_public_visibility_box_label %}
+							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.publicly_visible label=groups_projects_public_visibility_label legend=groups_projects_public_visibility_legend checkbox_label=groups_projects_public_visibility_box_label %}
+						{% endif %}
                         
                         {% block visibility_field %}
                             {% if not group_model == "CosinnusConference" %}
@@ -516,7 +525,7 @@
 		                            {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
 		                            
 									{% block group_form_microsite_description_field %}
-			                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True %}
+			                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True translation_form=form.forms.obj %}
 				                    {% endblock group_form_microsite_description_field %}
 				                    
 				                    
@@ -530,6 +539,19 @@
 				                    {% endcaptureas %}
 		                        	{% trans "Contact Information" as contact_info_placeholder %}
 			                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.contact_info label=contact_info_label legend=contact_info_legend placeholder=contact_info_placeholder large_field=True %}
+
+									{# Contact Form Field #}
+									{% if form.forms.obj.show_contact_form %}
+										{% trans "Contact Form on microsite" as contact_form_label %}
+										{% captureas contact_form_checkboxlabel %}
+											{% trans "Display contact form." %}
+										{% endcaptureas %}
+										{% captureas contact_form_legend %}
+											{% trans "A public contact form, which non-registered users can use to contact group admins of this group." %}
+										{% endcaptureas %}
+										{% trans "Contact Form" as contact_form_placeholder %}
+										{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.show_contact_form legend=contact_form_legend label=contact_form_label checkbox_label=contact_form_checkboxlabel %}
+									{% endif %}
 		                        {% endif %}
 	
 			                    {# Microsite Public Apps Field #}

@@ -5,6 +5,8 @@ from builtins import object
 from builtins import str
 import logging
 
+import random
+
 from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth import get_user_model, password_validation
@@ -21,6 +23,7 @@ from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.utils.user import accept_user_tos_for_portal
+from osm_field.fields import OSMField, LatitudeField, LongitudeField
 
 
 logger = logging.getLogger('cosinnus')
@@ -116,12 +119,24 @@ class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFie
         self.fields['first_name'].required = True
         if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED:
             self.fields['last_name'].required = True
+        
+        # if the location field is to be shown in signup, show it here
+        if settings.COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD:
+            self.fields['location'] = OSMField(_('Location'), blank=True, null=True, lat_field='location_lat', lon_field='location_lon').formfield()
+            self.fields['location_lat'] = LatitudeField(_('Latitude'), blank=True, null=True).formfield(widget=forms.HiddenInput())
+            self.fields['location_lon'] = LongitudeField(_('Longitude'), blank=True, null=True).formfield(widget=forms.HiddenInput())
+            if settings.COSINNUS_USER_SIGNUP_LOCATION_FIELD_IS_REQUIRED:
+                self.fields['location'].required = True
+                self.fields['location_lat'].required = True
+                self.fields['location_lon'].required = True
+            
+            
     
     def is_valid(self):
         """ Get the email from the form and set it as username. 
             If none was set, hide the username field and let validation take its course. """
         self.data._mutable = True
-        self.data['username'] = self.data['email'][:150]
+        self.data['username'] = str(random.randint(100000000000, 999999999999))
         return super(UserCreationForm, self).is_valid()
 
     def clean_email(self):
@@ -151,18 +166,33 @@ class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFie
         CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user, defaults={
             'status': 1,
         })
-        default_visibility = None
         
+        media_tag = user.cosinnus_profile.media_tag
+        media_tag_needs_saving = False
+        
+        # set media_tag visibility
+        default_visibility = None
         # set the user's visibility to public if the setting says so
         if settings.COSINNUS_USER_DEFAULT_VISIBLE_WHEN_CREATED:
             default_visibility = BaseTagObject.VISIBILITY_ALL
         # set the user's visibility to the locked value if the setting says so
         if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
             default_visibility = settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED
-        
         if default_visibility is not None:
-            media_tag = user.cosinnus_profile.media_tag
             media_tag.visibility = default_visibility
+            media_tag_needs_saving = True
+        
+        # set user location field if included in signup
+        if settings.COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD:
+            if self.cleaned_data.get('location', None) and \
+                        self.cleaned_data.get('location_lat', None) and \
+                        self.cleaned_data.get('location_lon', None):
+                media_tag.location = self.cleaned_data.get('location')
+                media_tag.location_lat = self.cleaned_data.get('location_lat')
+                media_tag.location_lon = self.cleaned_data.get('location_lon')
+                media_tag_needs_saving = True
+            
+        if media_tag_needs_saving:
             media_tag.save()
         
         # set the user's tos_accepted flag to true and date to now

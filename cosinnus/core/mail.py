@@ -249,8 +249,9 @@ def get_common_mail_context(request, group=None, user=None):
             'group': group,
         })
     if user:
+        from cosinnus.templatetags.cosinnus_tags import full_name_force
         context.update({
-            'user_name': user.get_full_name() or user.get_username(),
+            'user_name': full_name_force(user),
             'user': user,
         })
     return context

@@ -63,7 +63,8 @@
             <script src="{% static 'js/vendor/fullcalendar/lib/main.min.js' %}"></script>
 
 	        <script src="{% static 'js/vendor/jquery.sortElements.js' %}"></script>
-	        <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
+	        <script src="{% static 'js/vendor/moment-with-locales.min.js' %}"></script>
+            <script src="{% static 'js/vendor/moment-timezone-with-data.min.js' %}"></script>
 	        <script src="{% static 'js/vendor/jquery.ui.widget.js' %}"></script>
             <script src="{% static 'js/vendor/jquery.fileupload.js' %}"></script>
             <script src="{% static 'js/vendor/simplebar.min.js' %}"></script>
@@ -150,6 +151,9 @@
 
 
 		{% include 'announcements/announcements.html' %}
+        {% if email_not_verified_announcement %}
+        {% include 'announcements/announcement.html' with announcement=email_not_verified_announcement %}
+        {% endif %}
 
         <div class="{% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}" {% block container_attributes %}{% endblock container_attributes %}>
 

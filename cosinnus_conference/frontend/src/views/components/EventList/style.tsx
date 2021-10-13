@@ -37,6 +37,7 @@ export const useStyles = makeStyles((theme) => ({
           fontWeight: 700,
           color: theme.palette.text.primary,
           wordBreak: "break-word",
+          hyphens: "auto",
         }
       },
       "& div.event-title": {

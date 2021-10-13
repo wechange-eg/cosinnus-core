@@ -15,6 +15,7 @@ from django.utils.translation import ugettext_lazy as _
 from awesome_avatar import forms as avatar_forms
 
 from cosinnus.forms.mixins import AdditionalFormsMixin
+from captcha.fields import CaptchaField
 from cosinnus_organization.models import CosinnusOrganization
 from cosinnus.models.group import (CosinnusGroupMembership,
                                    CosinnusPortal,
@@ -39,7 +40,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.group import SDG_CHOICES
 from cosinnus.forms.managed_tags import ManagedTagFormMixin
-from cosinnus.utils.validators import validate_file_infection
+from cosinnus.forms.translations import TranslatedFieldsFormMixin
+from cosinnus.utils.validators import validate_file_infection,\
+    CleanFromToDateFieldsMixin
 from cosinnus.forms.widgets import SplitHiddenDateWidget
 from cosinnus.forms.attached_object import FormAttachableMixin
 from annoying.functions import get_object_or_None
@@ -131,8 +134,8 @@ class GroupFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
                     self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
 
 
-class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, 
-                GroupFormDynamicFieldsMixin, ManagedTagFormMixin, FormAttachableMixin, 
+class CosinnusBaseGroupForm(TranslatedFieldsFormMixin, FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin,
+                GroupFormDynamicFieldsMixin, ManagedTagFormMixin, FormAttachableMixin,
                 AdditionalFormsMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 
@@ -159,6 +162,8 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
                          'call_to_action_active', 'call_to_action_title', 'call_to_action_description',
                          'membership_mode'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
+                        + (['show_contact_form'] if settings.COSINNUS_ALLOW_CONTACT_FORM_ON_MICROPAGE else []) \
+                        + (['publicly_visible'] if settings.COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN else []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else []) \
                         + (['embedded_dashboard_html',] if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED else []) \
                         + (['managed_tag_field',] if (settings.COSINNUS_MANAGED_TAGS_ENABLED \
@@ -378,7 +383,7 @@ class _CosinnusSocietyForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
         model = CosinnusSociety
 
 
-class _CosinnusConferenceForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
+class _CosinnusConferenceForm(CleanAppSettingsMixin, CleanFromToDateFieldsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
     """ Specific form implementation for CosinnusConference objects (used through `registration.group_models`)  """
     
     from_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='00:00'))
@@ -632,3 +637,9 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
         for entry in row:
             cleaned_row.append(entry.strip())
         return cleaned_row
+
+
+class GroupContactForm(forms.Form):
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)
+    captcha = CaptchaField()

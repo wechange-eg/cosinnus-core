@@ -1,5 +1,7 @@
 import json
 
+import random
+
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from oauth2_provider.decorators import protected_resource
@@ -41,7 +43,7 @@ class UserViewSet(viewsets.ModelViewSet):
             user = serializer.save()
         else:
             # Overwrite username with ID
-            user = serializer.save(username=email)
+            user = serializer.save(username=str(random.randint(100000000000, 999999999999)))
             user.username = user.id
             user.save(update_fields=['username'])
         if password is not None:

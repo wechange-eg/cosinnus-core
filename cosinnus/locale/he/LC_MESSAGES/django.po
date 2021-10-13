@@ -1,22 +1,11 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 14:14+0200\n"
-"PO-Revision-Date: 2021-04-14 14:50+0300\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2021-09-29 12:35+0200\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -42,6 +31,14 @@ msgstr "%d חברויות של משתמשים החדרי צקאט של רוקט-
 msgid "Rocket: Fix missing RocketChat room membership for users"
 msgstr "רוקט-צ'אט: תקן חברות חסרה בחדר צ'אט עבור משתמשים של רוקט"
 
+#, fuzzy, python-format
+msgid "%d Users' nextcloud folder memberships were re-done."
+msgstr "%d חברויות של משתמשים החדרי צקאט של רוקט-צ'ט אותחלו מחדש."
+
+#, fuzzy
+msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
+msgstr "רוקט-צ'אט: תקן חברות חסרה בחדר צ'אט עבור משתמשים של רוקט"
+
 msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr "אסימון עם אותו קוד כבר קיים! נא בחר מחרוזת אחרת עבור האסימון שלך."
 
@@ -50,12 +47,10 @@ msgid "The following items were converted to %s:"
 msgstr "הפריטים הבאים הומרו ל%s:"
 
 #, fuzzy
-#| msgid "The following items were converted to %s:"
 msgid "The following items were activated:"
 msgstr "הפריטים הבאים הומרו ל%s:"
 
 #, fuzzy
-#| msgid "The following items were converted to %s:"
 msgid "The following items were deactivated:"
 msgstr "הפריטים הבאים הומרו ל%s:"
 
@@ -89,6 +84,14 @@ msgstr "תנאי השימוש אושרו"
 msgid "ToS not Accepted"
 msgstr "תנאי השימוש לא אושרו"
 
+msgid "Email verified"
+msgstr ""
+
+#, fuzzy
+#| msgid "not specified"
+msgid "Email not verified"
+msgstr "לא צוין"
+
 msgid "User Logged In"
 msgstr "משתמש מחובר"
 
@@ -105,8 +108,6 @@ msgid "Yes"
 msgstr "כן"
 
 #, fuzzy
-#| msgctxt "join team button second item"
-#| msgid "Now"
 msgid "No"
 msgstr "כעת"
 
@@ -124,12 +125,10 @@ msgid "DEACTIVATE user accounts and DELETE them after 30 days"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%d Users were deactivated successfully."
 msgid "%(count)d User account(s) were reactivated successfully."
 msgstr "%d משתמשים הושבתו בהצלחה."
 
 #, fuzzy
-#| msgid "Successfully activated user account"
 msgid "Reactivate user accounts"
 msgstr "חשבון משתמש הופעל בהצלחה"
 
@@ -156,9 +155,6 @@ msgstr "רוקט-צ'אט: תקן/צור חשבונות משתמשים חסרים
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "רוקט צ'אט: תקן חברויות משתמשי רוקט-צ'אט"
-
-msgid "Restart"
-msgstr "הפעל מחדש"
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "יש להפעיל את כתובת הדוא\"ל של החשבון על מנת להתחבר."
@@ -229,6 +225,18 @@ msgstr "מטבח ללא לקטוז"
 msgid "Gluten-free cuisine"
 msgstr "מטבח ללא גלוטן"
 
+msgid "Bookmark"
+msgstr "סמן"
+
+msgid "Bookmarked"
+msgstr "מסומן"
+
+msgid "Bookmark list"
+msgstr "רשימת מסומנים"
+
+msgid "Bookmarked Users list"
+msgstr "רשימת משתמשים מסומנים"
+
 msgid "General"
 msgstr "כללי"
 
@@ -241,17 +249,8 @@ msgstr "מוגבל"
 msgid "Premium"
 msgstr "פרמיום"
 
-msgid "Bookmark"
-msgstr "סמן"
-
-msgid "Bookmarked"
-msgstr "מסומן"
-
-msgid "Bookmark list"
-msgstr "רשימת מסומנים"
-
-msgid "Bookmarked Users list"
-msgstr "רשימת משתמשים מסומנים"
+msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
+msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "רק חברים רשומים יכולים לראות את התוכן המבוקש! התחבר או צור חשבון עכשיו!"
@@ -273,6 +272,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "חשבון זה אינו פעיל יותר. נותקת מהמערכת."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -568,6 +570,9 @@ msgstr ""
 msgid "Greek--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
 
+msgid "Persian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
+msgstr ""
+
 msgid "Belarus"
 msgstr "בלרוס"
 
@@ -735,6 +740,15 @@ msgstr "אהבתי"
 
 msgid "Persons"
 msgstr "אנשים"
+
+msgid "Location"
+msgstr "מיקום"
+
+msgid "Latitude"
+msgstr "קו רוחב"
+
+msgid "Longitude"
+msgstr "קו אורך"
 
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
 msgstr "נא הזן כתובת דוא\"ל וסיסמא נכונים."
@@ -1050,6 +1064,49 @@ msgstr "בקשות לועידות קוסינוס"
 msgid "Note from the organizers"
 msgstr "הערה מהמארגנים"
 
+msgid "Conference"
+msgstr "ועידה"
+
+msgid "Start Datetime"
+msgstr "תאריך התחלה"
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+msgid "End Datetime"
+msgstr "תאריך סיום"
+
+#, fuzzy
+msgid "Conference participants"
+msgstr "בקשות השתתפות לועידה"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+msgid "Cosinnus Conference Premium Block"
+msgstr "הגדרת ועידת קוסינוס"
+
+#, fuzzy
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "הגדרות ועידת קוסינוס"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+msgid "Maximum BBB participants"
+msgstr "מספר משתתפים מרבי"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr "טקסט תלונה"
 
@@ -1225,12 +1282,13 @@ msgstr "לפגישות פופ-אפ בסגנון הישן בלבד! אם הוזן
 msgid "Dynamic choice field choices"
 msgstr "אפשרויות בחירה דינמיות בשדה זה"
 
+#, fuzzy
+msgid "Default userprofile description"
+msgstr "תיאור מפורט"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "פרויקט"
-
-msgid "Conference"
-msgstr "ועידה"
 
 msgid "Regular membership requests"
 msgstr "בקשות חברות רגילות"
@@ -1267,6 +1325,14 @@ msgstr "תמונת טפט"
 
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "מוצג כתמונת מודעה גדולה על ה- Microsite (1140 x 240 px)"
+
+#, fuzzy
+#| msgid "Is visible"
+msgid "Publicly visible"
+msgstr "גלוי"
+
+msgid "Checks if a group/project should be visible publicly"
+msgstr ""
 
 msgid "Application method"
 msgstr "סוג טופס הבקשה"
@@ -1334,12 +1400,6 @@ msgstr "מזהה תיקיית קבוצת Nextcloud"
 msgid "Is conference"
 msgstr "היא וועידה"
 
-msgid "Start Datetime"
-msgstr "תאריך התחלה"
-
-msgid "End Datetime"
-msgstr "תאריך סיום"
-
 msgid "Allow temporary users accounts for this conference."
 msgstr "אפשר למשתמשים זמניים חשבונות עבור ועידה זו."
 
@@ -1367,6 +1427,10 @@ msgstr "צוותים קשורים"
 msgid "Dynamic extra fields"
 msgstr "שדות דינאמיים נוספים"
 
+#, fuzzy
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "אם היא פעילה, הקריאה לפעולת תיבה פעילה תוצג על גבי Microsite זה."
+
 msgid "Cosinnus project"
 msgstr "פרויקט קוסינוס"
 
@@ -1385,8 +1449,6 @@ msgid "Request about your group \"%(group_name)s\""
 msgstr "בקשה אודות הקבוצה שלך \"%(group_name)s\""
 
 #, fuzzy
-#| msgctxt "join team button second item"
-#| msgid "Now"
 msgid "Now"
 msgstr "כעת"
 
@@ -1428,15 +1490,6 @@ msgstr "כיוונים מחדש לצוות קבוע"
 
 msgid "Permanent Team Redirect"
 msgstr "כיוון מחדש לצוות קבוע"
-
-msgid "Location"
-msgstr "מיקום"
-
-msgid "Latitude"
-msgstr "קו רוחב"
-
-msgid "Longitude"
-msgstr "קו אורך"
 
 msgid "CosinnusLocation"
 msgstr "מיקום קוסינוס"
@@ -1484,7 +1537,6 @@ msgid "Managed Tag"
 msgstr "תג מנוהל"
 
 #, fuzzy
-#| msgid "Managed Tag"
 msgid "Managed Tags"
 msgstr "תג מנוהל"
 
@@ -2099,6 +2151,12 @@ msgstr "לא נקבע כל מידע"
 msgid "Back to Project Overview"
 msgstr "חזרה אל מבט כולל על הפרוייקט"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "ניתן להגדיר הגדרות ועידה ברמה זו. כל האובייקטים מתחת לרמה זו בהיררכיה יירשו את ההגדרות הללו, אלא אם כן הגדירו את הגדרות הוועידה לעצמם."
 
@@ -2110,6 +2168,10 @@ msgstr "בחר עמוד בצד שמאל."
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr "סקירה כללית - ועידות, חדרים וסדנאות עם הגדרות שרת BBB מותאמות אישית"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "סקירה כללית - כל הועידות"
 
 msgid "Overview - All Conferences"
 msgstr "סקירה כללית - כל הועידות"
@@ -2129,14 +2191,32 @@ msgstr "תצוגה"
 msgid "View Past"
 msgstr "צפה במה שהיה בעבר"
 
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "מסומן"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "הוועידה בסטטוס פרימיום לצמיתות"
+
 msgid "Portal Setting"
 msgstr "הגדרת פורטל"
 
 msgid "Conference Settings"
 msgstr "הגדרות ועידה"
 
-msgid "Is premium"
+#, fuzzy
+msgid "Premium active"
 msgstr "פרמיום"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
 
 msgid "Not premium"
 msgstr "לא פרימיום"
@@ -2223,6 +2303,10 @@ msgstr "סטטיסטיקה פשוטה"
 msgid "Conference Overview"
 msgstr "מבט כולל על ועידה"
 
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "שרת BBB לועידות פרימיום"
+
 msgid "Conferences with Custom Settings"
 msgstr "ועידות עם הגדרות מותאמות אישית"
 
@@ -2243,7 +2327,6 @@ msgid "Currently set Email Text"
 msgstr "טקסט הודעות דוא\"ל שמוגדר כעת"
 
 #, fuzzy
-#| msgid "Show more options..."
 msgid "Show all recipients..."
 msgstr "הצג אפשרויות נוספות..."
 
@@ -3176,9 +3259,6 @@ msgstr "כעת תקבל הודעות בכל פעם שתוכן ציבורי יפ�
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "כעת תקבל הודעות בכל פעם שתוכן ציבורי יפורסם בקבוצה זו."
 
-msgid "Group:"
-msgstr "קבוצה:"
-
 msgid "No Description set"
 msgstr "לא הוגדר תיאור"
 
@@ -3193,6 +3273,28 @@ msgstr "הזן את הבחירות שלך כערכים המופרדים בין �
 
 msgid "Enter your choices"
 msgstr "הזן את הבחירות שלך"
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address to continue using your account."
+msgstr "נא אמת את כתובת הדוא\"ל שלך עבור %(site_name)s!"
+
+msgid "You should already have received an email with a verification link we sent to your account's email address:"
+msgstr ""
+
+msgid "Click here to send the validation link again."
+msgstr ""
+
+msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address!"
+msgstr "נא אמת את כתובת הדוא\"ל שלך עבור %(site_name)s!"
+
+msgid "Close"
+msgstr "סגור"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
@@ -3213,15 +3315,22 @@ msgstr "שלח"
 msgid "Submitting..."
 msgstr "נשלח..."
 
-msgid "Close"
-msgstr "סגור"
-
 msgid "Avatar will be deleted once you save."
 msgstr "האווטאר יימחק לאחר שתשמור/י."
 
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "אופציונאלי"
+
+#, fuzzy
+msgid "Add/Edit translations"
+msgstr "אפשרויות נוספות"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "תאריך"
@@ -3288,8 +3397,15 @@ msgctxt "time"
 msgid "until"
 msgstr "עד"
 
+#, fuzzy
+msgid "Only conference members can see the event\\'s description."
+msgstr "רק חברי הועידה יכולים לראות את התוכן המבוקש. הגש בקשת חברות כעת!"
+
 msgid "More infos..."
 msgstr "מידע נוסף..."
+
+msgid "Please Login or Register to view the event's description."
+msgstr ""
 
 msgid "You will now receive notifications for content posted in this conference."
 msgstr "כעת תקבל התראות עבור תוכן שפורסם בועידה זה."
@@ -3622,7 +3738,6 @@ msgid "Reset"
 msgstr "איפוס"
 
 #, fuzzy
-#| msgid "Uploaded files will be available for download and images will be shown in a gallery."
 msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr "קבצים שהועלו יהיו זמינים להורדה ותמונות יוצגו בגלריה."
 
@@ -3652,6 +3767,17 @@ msgstr "האם יש פרויקטים/קבוצות הקשורים לקבוצה ז
 
 msgid "Select related Projects/Groups"
 msgstr "בחירת פרויקטים/קבוצות קשורים"
+
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "Group/Project is publicly visible"
+msgstr "פרויקט זה יוגדר כנראה לציבור!"
+
+msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your group/project"
+msgstr ""
 
 msgid "Privacy settings"
 msgstr "הגדרות פרטיות"
@@ -3688,6 +3814,22 @@ msgstr "אילו אפליקציות יש להפעיל?"
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "אפליקציה זו זמינה רק עבור קבוצה, ולא בעבור פרויקט!"
+
+#, fuzzy
+#| msgid "Contact organizers"
+msgid "Contact Form on microsite"
+msgstr "צור קשר עם המארגנים"
+
+#, fuzzy
+msgid "Display contact form."
+msgstr "פרטי קשר אופציונליים"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+msgid "Contact Form"
+msgstr "פרטי יצירת קשר"
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "מאילו אפליקציות יש להציג פריטים ציבוריים במיקרו-אתר?"
@@ -3872,6 +4014,31 @@ msgstr "שתף בטוויטר"
 msgid "Sustainable Development Goals"
 msgstr "יעדי התפתחות ברת קיימה"
 
+#, fuzzy
+#| msgid "Group administrator"
+msgid "Email the group administrators"
+msgstr "מנהל קבוצה"
+
+#, fuzzy
+msgid "Your email address"
+msgstr "כתובת דוא\"ל"
+
+msgid "Message"
+msgstr "שלח הודעה"
+
+#, fuzzy
+msgid "Your message"
+msgstr "השם שלך"
+
+msgid "Captcha"
+msgstr "אימות"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "אנחנו צריכים לוודא שאתה אדם אמיתי"
+
+msgid "Generate a new captcha"
+msgstr "צור קוד אימות חדש"
+
 msgid "Tweets"
 msgstr "ציוצים"
 
@@ -4016,6 +4183,10 @@ msgstr "בטל ההזמנה לארגון"
 msgid "Do you really want to decline the request?"
 msgstr "האם אתה באמת רוצה לדחות את ההזמנה?"
 
+#, fuzzy
+msgid "There are no pending organization requests."
+msgstr "אין הזמנות ממתינות."
+
 msgid "Organization invitations"
 msgstr "הזמנות ארגונים"
 
@@ -4025,12 +4196,20 @@ msgstr "דחה הזמנה"
 msgid "Invited"
 msgstr "מוזמן"
 
+#, fuzzy
+msgid "There are no organization invitations."
+msgstr "אין הזמנות ממתינות."
+
 #, python-format
 msgid "Do you really want to remove „%(name)s“ from the organization?"
 msgstr "האם אתה בטוח שברצונך להסיר את החבר „%(name)s“ מהצוות?"
 
 msgid "Remove organization"
 msgstr "הסר ארגון"
+
+#, fuzzy
+msgid "There are no assigned organizations."
+msgstr "אין הזמנות."
 
 msgid "Add container"
 msgstr "הוסף קונטיינר"
@@ -4237,6 +4416,27 @@ msgstr "ייבוא CSV של %(site_name)s הצליח"
 
 #, python-format
 msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
+
+#, python-format
+msgid ""
 "User \"%(sender_name)s\" has reported the item \"%(object_name)s\" to be offensive.\n"
 "\n"
 "The reason, as written by the reporter:\n"
@@ -4312,74 +4512,6 @@ msgstr ""
 #, python-format
 msgid "Please set yout initial password for %(site_name)s!"
 msgstr "אנא הגדר את הסיסמה הראשונית שלך ל-%(site_name)s!"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just registered an account at %(site_name)s. We're happy to see you!\n"
-"\n"
-"You will need to verify your email %(user_email)s before you can log in. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Thank you and see you soon!\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"שלום %(user_name)s,\n"
-"\n"
-"בדיוק נרשמת ב-%(site_name)s. אנחנו שמחים לראותך!\n"
-"\n"
-"עליך לאמת את כתובת הדוא\"ל שלך לפני שתוכל להתחבר %(user_email)s.\n"
-"\n"
-"\n"
-"נא לחץ על הקישור הבא כדי לאמת את הכתובת (או העתק והדבק את הקישור לדפדפן שלך):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"תודה... נתראה בקרוב!\n"
-"\n"
-"שלך, צוות %(site_name)s"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just changed your email address at %(site_name)s.\n"
-"\n"
-"You will need to verify your email %(user_email)s before the changes take effect. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"שלום %(user_name)s,\n"
-"\n"
-"שינית זה עתה את כתובת הדוא\"ל ב-%(site_name)s.\n"
-"\n"
-"עליך לבצע אימות לכתובת הדוא\"ל %(user_email)s לפני שהשינויים יכנסו לתוקף.\n"
-"\n"
-"\n"
-"נא לחץ על הקישור הבא על מנת לאמת את הכתובת (או העתק והדבק את הקישור לדפדפן שלך):\n"
-"%(domain_url)s%(user_verification_url)s \n"
-"\n"
-"\n"
-"\n"
-"שלך, צוות %(site_name)s"
-
-#, python-format
-msgid "Please verify your email address for %(site_name)s!"
-msgstr "נא אמת את כתובת הדוא\"ל שלך עבור %(site_name)s!"
 
 #, python-format
 msgid ""
@@ -4585,11 +4717,18 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "בקשתך להצטרף ל-%(site_name)s נדחתה."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#| "\n"
+#| "Out administrators will review your request and approve your user account soon!\n"
+#| "\n"
+#| "Until then, with warm greetings, \n"
+#| "your %(site_name)s Team"
 msgid ""
 "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 "\n"
-"Out administrators will review your request and approve your user account soon!\n"
+"Our administrators will review your request and approve your user account soon!\n"
 "\n"
 "Until then, with warm greetings, \n"
 "your %(site_name)s Team"
@@ -4860,12 +4999,6 @@ msgstr "מנותק"
 msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
 msgstr "על מנת להשתמש בחשבון %(portal_name)s שלך כדי להתחבר לפלטפורמה נוספת עליך להתחבר ב-%(portal_name)s תחילה."
 
-msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-msgstr "החשבון שלך נרשם בהצלחה. מנהל מערכת יצטרך לאשר את החשבון לפני שתוכל להתחבר. אנו נשלח הודעת דוא\"ל לכתובת שלך כאשר הדבר יקרה."
-
-msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "החשבון שלך נרשם בהצלחה. תקבל מאיתנו דוא\"ל הפעלה בעוד כמה דקות. עליך לאמת את כתובת הדואר האלקטרוני לפני שתוכל להתחבר."
-
 msgid "Password"
 msgstr "סיסמה"
 
@@ -4895,6 +5028,11 @@ msgstr "מצטערים, אך החשבון שלך משויך לפורטל משו�
 
 msgid "Please contact an administrator if this is an issue for you."
 msgstr "נא פנה למנהל מערכת אם זוהי בעיה עבורך."
+
+#, fuzzy
+#| msgid "Set your password"
+msgid "Sorry, we can't reset your password!"
+msgstr "הגדרת הסיסמה שלך"
 
 msgid "Password reset"
 msgstr "איפוס סיסמה"
@@ -5065,15 +5203,6 @@ msgstr "שם משפחה"
 msgid "You can supply your last name to be displayed as well"
 msgstr "אתה יכול לספק את שם המשפחה שלך שיוצג גם כן"
 
-msgid "Captcha"
-msgstr "אימות"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "אנחנו צריכים לוודא שאתה אדם אמיתי"
-
-msgid "Generate a new captcha"
-msgstr "צור קוד אימות חדש"
-
 msgid "Search options..."
 msgstr "אפשרויות חיפוש..."
 
@@ -5118,13 +5247,11 @@ msgstr "חפש משתמשים"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create content"
 msgid "External contents"
 msgstr "יצירת תוכן"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Visibility on other platforms"
 msgid "Include contents from other platforms"
 msgstr "נראות על גבי הפלטפורמה"
 
@@ -5160,6 +5287,11 @@ msgstr "הזן מונח חיפוש אחד או יותר או בחר נושא ל�
 
 msgid "CSV Downloads"
 msgstr "הורדות CSV"
+
+#, fuzzy
+#| msgid "HD space used by projects"
+msgid "HD space used by conferences"
+msgstr "שטח HD המשמש פרוייקטים"
 
 msgid "HD space used by groups"
 msgstr "שטח HD המשמש קבוצות"
@@ -5559,7 +5691,6 @@ msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "מצטערים, אך לא היתה אפשרות לאחזר את התוכן המבוקש מהשרת."
 
 #, fuzzy
-#| msgid "Done"
 msgid "on"
 msgstr "בוצע"
 
@@ -5637,7 +5768,6 @@ msgstr "לא מעוניין ביצירת קשר לגבי הזדמנויות פו
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Your Profile"
 msgid "To Profile"
 msgstr "הפרופיל שלך"
 
@@ -5699,25 +5829,21 @@ msgstr "גלה/י"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Apply Filters"
 msgid "Filter"
 msgstr "החל מסננים"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Note from the organizers"
 msgid "Content from the Forum"
 msgstr "הערה מהמארגנים"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Only content from my Groups and Projects"
 msgid "Content from my Groups and Projects"
 msgstr "תוכן מהקבוצות והפרויקטים שלי בלבד"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Public Project"
 msgid "Public content"
 msgstr "פרויקט ציבורי"
 
@@ -5843,6 +5969,9 @@ msgstr "נתונים בסיסיים"
 msgid "E-Mail"
 msgstr "דואר אלקטרוני"
 
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr ""
+
 msgid "Profile avatar"
 msgstr "אווטאר פרופיל"
 
@@ -5863,9 +5992,6 @@ msgstr "מאותת על נכונותך ליצור קשר עם משתמשים א�
 
 msgid "I am open for cooperation requests"
 msgstr "אני פתוח לבקשות לשיתוף פעולה"
-
-msgid "Message"
-msgstr "שלח הודעה"
 
 msgid "Welcome!"
 msgstr "ברוכים הבאים!"
@@ -6272,12 +6398,10 @@ msgid "Contents"
 msgstr "תוכן העניינים"
 
 #, fuzzy
-#| msgid "My upcoming Projects"
 msgid "My upcoming Events"
 msgstr "הפרוייקטים הקרובים שלי"
 
 #, fuzzy
-#| msgid "You can change this setting later in your profile settings"
 msgid "The map is centrered on the address you added in your profile settings."
 msgstr "באפשרותך לשנות הגדרה זו מאוחר יותר בהגדרות הפרופיל שלך"
 
@@ -6326,6 +6450,10 @@ msgstr "דף הבית"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
+
+#, fuzzy
+msgid "Profile"
+msgstr "הפרופיל שלי"
 
 msgid "Change language"
 msgstr "שנה שפה"
@@ -6472,7 +6600,6 @@ msgid "Project Dashboard"
 msgstr "לוח כלים של הפרויקט"
 
 #, fuzzy
-#| msgid "Project Dashboard"
 msgid "in the Project Dashboard"
 msgstr "לוח כלים של הפרויקט"
 
@@ -6561,12 +6688,10 @@ msgid "Group Dashboard"
 msgstr "לוח כלים של הקבוצה"
 
 #, fuzzy
-#| msgid "Group Dashboard"
 msgid "in the Group Dashboard"
 msgstr "לוח כלים של הקבוצה"
 
 #, fuzzy
-#| msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
 msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "קבוצות מסייעות לשפר את התקשורת ושיתוף הפעולה ברשתות או ארגונים גדולים. בתוך קבוצה באפשרותך לאחד מספר פרויקטים קטנים יותר או קבוצות עבודה."
 
@@ -6688,7 +6813,6 @@ msgid "Conference contact person"
 msgstr "איש קשר של ועידה"
 
 #, fuzzy, python-format
-#| msgid "Request about your project \"%(group_name)s\""
 msgid "Request about your conference \"%(group_name)s\""
 msgstr "בקשה אודות הפרויקט שלך \"%(group_name)s\""
 
@@ -6734,6 +6858,14 @@ msgstr "מצטערים, רק מנהלי פורטל יכולים לבטל את ה
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "רק חברי הועידה יכולים לראות את התוכן המבוקש. הגש בקשת חברות כעת!"
 
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address."
+msgstr "נא אמת את כתובת הדוא\"ל שלך עבור %(site_name)s!"
+
+msgid "Click here to send the verification link again."
+msgstr ""
+
 msgid "Team Description"
 msgstr "תיאור צוות"
 
@@ -6758,6 +6890,15 @@ msgstr "הסיסמה חייבת להכיל לפחות תו מיוחד אחד (ל
 #, python-brace-format
 msgid "Your password must contain at least: {upper_case} upper case character, {lower_case} lower case character, {special_character} non alpha numerical character."
 msgstr "על הסיסמה שלך להכיל לפחות: תו אותיות רישיות {upper_case}, תו אותיות קטנות {lower_case}, {special_character} תו מספרי שאינו אלפא."
+
+msgid "The start date must be before the end date"
+msgstr ""
+
+msgid "Please also provide a start date"
+msgstr ""
+
+msgid "Please also provide an end date"
+msgstr ""
 
 msgid "Test email sent!"
 msgstr "בדיקת אימות נשלחה לדוא\"ל!"
@@ -7038,6 +7179,13 @@ msgstr "לא הוגדר שם אפלירציה על מנת להוסיך קונט�
 msgid "Your idea was deleted successfully."
 msgstr "הרעיון שלך נמחק בהצלחה."
 
+#, fuzzy
+msgid "Your message has been sent."
+msgstr "השינויים שביצעת נשמרו בהצלחה."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "אירעה שגיאה בעת עיבוד האווטאר שלך. נא ודא שבחרת חלק גדול מספיק של התמונה!"
 
@@ -7095,12 +7243,10 @@ msgid "Sorry, something went wrong while saving your profile!"
 msgstr "מצטערים, משהו השתבש בזמן שמירת הפרופיל שלך!"
 
 #, fuzzy
-#| msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
 msgid "Your user account has been deactivated and will be deleted in 30 days. We're sorry you are no longer with us."
 msgstr "הפרופיל שלך נמחק בהצלחה. אנחנו מצטערים שאתה כבר לא איתנו."
 
 #, fuzzy
-#| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
 msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
 msgstr "אתה מנהל המערכת היחיד שנותר עבור \"%s\". נא מנה מנהל מערכת אחר או מחק אותו תחילה."
 
@@ -7111,7 +7257,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "You are about to delete your user account from the site!"
 msgid "Information about the deletion of your user account"
 msgstr "אתה עומד למחוק את חשבון המשתמש שלך מהאתר!"
 
@@ -7139,8 +7284,8 @@ msgid "User \"%(user)s\" was registered successfully. The account will need to b
 msgstr "המשתמש \"%(user)s\" נרשם בהצלחה. החשבון יצטרך להיות מאושר בטרם תורשה להתחבר. אנו נשלח מייל לכתובתך \"%(email)s\" כאשר זה קורה."
 
 #, python-format
-msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "המשתמש \"%(email)s\" נרשם בהצלחה. בעוד כמה דק' תקבל דוא\"ל הפעלה מאיתנו. יש לאמת את כתובת הדוא\"ל לפני שתוכל להתחבר."
+msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
+msgstr ""
 
 msgid "The invite token you have used does not exist!"
 msgstr "אסימון ההזמנה שהשתמשת בו אינו קיים!"
@@ -7191,6 +7336,9 @@ msgstr "דחית את בקשת ההצטרפות של המשתמש %(username)s (
 msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
 msgstr "חשבון המשתמש שחיפשת אינו קיים! סביר להניח שהרישום שלך כבר נדחה או שפג תוקפו של האסימון."
 
+msgid "The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!"
+msgstr ""
+
 msgid "The email for this account seems to already have been confirmed!"
 msgstr "נראה שהודעת הדוא\"ל עבור חשבון זה כבר אושרה!"
 
@@ -7200,13 +7348,41 @@ msgstr "הקישור שסיפקת לאישור הדוא\"ל אינו חוקי ע
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
 msgstr "כתובת הדוא\"ל שאתה מנסה לאמת כבר אומתה בעבר או שייכת למשתמש אחר!"
 
-#, python-format
-msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+#, fuzzy, python-format
+#| msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+msgid "Your email address %(email)s was successfully confirmed!"
 msgstr "כתובת הדוא\"ל שלך %(email)s אומתה בהצלחה! ברוכים הבאים לקהילה!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "כתובת הדוא\"ל שלך %(email)s אומתה בהצלחה!, עם זאת, חשבונך עדיין לא פעיל וצריך להיות מאושר על ידי מנהל המערכת בטרם תוכל להתחבר. אנו נשלח לך דוא\"ל ברגע שזה יקרה!"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr "נא אמת את כתובת הדוא\"ל שלך עבור %(site_name)s!"
+
+#, python-format
+msgid "You have just registered an account at %(site_name)s. We're happy to see you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "You have just changed your email address at %(site_name)s."
+msgstr "נא אמת את כתובת הדוא\"ל שלך עבור %(site_name)s!"
+
+msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
+msgstr ""
+
+msgid "Thank you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "The %(site_name)s team"
+msgid "Your %(site_name)s Team"
+msgstr "צוות %(site_name)s"
+
+msgid "If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!"
+msgstr ""
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "הקישור להסרת כתובת הדוא\"ל מרשימת התפוצה שלחצת עליו אינו חוקי יותר!"
@@ -7214,6 +7390,9 @@ msgstr "הקישור להסרת כתובת הדוא\"ל מרשימת התפוצ�
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr "כתובת הדוא\"ל שלך \"%(email)s\" הוסרה מרשימת התפוצה שלנו. לא תקבל עוד מיילים מאיתנו!"
+
+msgid "A new verification email has been sent."
+msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "ברוך הבא! הוזמנת לפרויקטים והקבוצות הבאות. אנא לחץ על הלחצן הנפתח על מנת לאשר או לדחות כל אחד מהם!"
@@ -7261,176 +7440,262 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
 
-#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "אתה עומד להשבית פרוייקט זה. הפרוייקט ותכניו יהיו בלתי נראים מהאתר, לעולם כולל אותך."
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before you can log in. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Thank you and see you soon!\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "שלום %(user_name)s,\n"
+#~ "\n"
+#~ "בדיוק נרשמת ב-%(site_name)s. אנחנו שמחים לראותך!\n"
+#~ "\n"
+#~ "עליך לאמת את כתובת הדוא\"ל שלך לפני שתוכל להתחבר %(user_email)s.\n"
+#~ "\n"
+#~ "\n"
+#~ "נא לחץ על הקישור הבא כדי לאמת את הכתובת (או העתק והדבק את הקישור לדפדפן שלך):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "תודה... נתראה בקרוב!\n"
+#~ "\n"
+#~ "שלך, צוות %(site_name)s"
 
-#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
-#~ msgstr "תהליך זה הפיך. באפשרותך להפעיל מחדש את הפרוייקט מדף פרופיל המשתמש שלך בכל עת."
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "שלום %(user_name)s,\n"
+#~ "\n"
+#~ "שינית זה עתה את כתובת הדוא\"ל ב-%(site_name)s.\n"
+#~ "\n"
+#~ "עליך לבצע אימות לכתובת הדוא\"ל %(user_email)s לפני שהשינויים יכנסו לתוקף.\n"
+#~ "\n"
+#~ "\n"
+#~ "נא לחץ על הקישור הבא על מנת לאמת את הכתובת (או העתק והדבק את הקישור לדפדפן שלך):\n"
+#~ "%(domain_url)s%(user_verification_url)s \n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "שלך, צוות %(site_name)s"
 
-#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "אתה עומד להשבית קבוצה זו. הקבוצה וכל תכניה יוסתרו מהאתר ויהיו בלתי נראים לכולם, כולל אותך."
+#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+#~ msgstr "החשבון שלך נרשם בהצלחה. מנהל מערכת יצטרך לאשר את החשבון לפני שתוכל להתחבר. אנו נשלח הודעת דוא\"ל לכתובת שלך כאשר הדבר יקרה."
 
-#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
-#~ msgstr "תהליך זה הפיך. באפשרותך להפעיל מחדש את הקבוצה מדף פרופיל המשתמש שלך בכל עת."
+#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "החשבון שלך נרשם בהצלחה. תקבל מאיתנו דוא\"ל הפעלה בעוד כמה דקות. עליך לאמת את כתובת הדואר האלקטרוני לפני שתוכל להתחבר."
 
-#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "אתה עומד להשבית ועידה זו. הועידה וכל תכניה יוסתרו מהאתר ויהיו בלתי נראים לכולם כולל אותך."
-
-#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
-#~ msgstr "תהליך זה הפיך. באפשרותך להפעיל מחדש את הוועידה מדף פרופיל המשתמש שלך בכל עת."
-
-#~ msgid "%(team_name)s was deactivated successfully!"
-#~ msgstr "%(team_name)s הושבת בהצלחה!"
+#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "המשתמש \"%(email)s\" נרשם בהצלחה. בעוד כמה דק' תקבל דוא\"ל הפעלה מאיתנו. יש לאמת את כתובת הדוא\"ל לפני שתוכל להתחבר."
 
 #, fuzzy
-#~| msgid "No Tag selected"
-#~ msgid "nothing selected"
-#~ msgstr "לא נבחר תג"
+#~| msgid "Cosinnus Micropages"
+#~ msgid "Contact Form on Micropage"
+#~ msgstr "Micropages קוסינוס"
 
-#~ msgid "Deactivate users (will keep all all items they created on the site)"
-#~ msgstr "השבת משתמשים (ישמור את כל הפריטים שנוצרו באתר)"
+#, fuzzy
+#~| msgid "Group administrator"
+#~ msgid "Email to group administrator"
+#~ msgstr "מנהל קבוצה"
 
-#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
-#~ msgstr "אם ברצונך למחוק את התוכן שלך, חזור אחורה ועשה זאת כעת. לאחר שתמחק את הפרופיל שלך, לא תהיה לך עוד גישה לכל דבר שיצרת באמצעות חשבון זה."
+#~ msgid "Group:"
+#~ msgstr "קבוצה:"
 
-#~ msgid "Deutsch--NATIVE-LANGUAGE"
-#~ msgstr "Deutsch"
+#~ msgid "Is premium"
+#~ msgstr "פרמיום"
 
-#~ msgid "English--NATIVE-LANGUAGE"
-#~ msgstr "English"
-
-#~ msgid "Russian--NATIVE-LANGUAGE"
-#~ msgstr "Русский"
-
-#~ msgid "Ukrainian--NATIVE-LANGUAGE"
-#~ msgstr "Українська"
-
-#~ msgid "French--NATIVE-LANGUAGE"
-#~ msgstr "Français"
-
-#~ msgid "Polish--NATIVE-LANGUAGE"
-#~ msgstr "Polski"
-
-#~ msgid "Spanish--NATIVE-LANGUAGE"
-#~ msgstr "Español"
-
-#~ msgid "Romanian--NATIVE-LANGUAGE"
-#~ msgstr "Română"
-
-#~ msgid "Belarussian--NATIVE-LANGUAGE"
-#~ msgstr "Беларуская"
-
-#~ msgid "Dutch--NATIVE-LANGUAGE"
-#~ msgstr "Nederlands"
-
-#~ msgid "Czech--NATIVE-LANGUAGE"
-#~ msgstr "Čeština"
-
-#~ msgid "Azerbaijani--NATIVE-LANGUAGE"
-#~ msgstr "Azerbaycan dili"
-
-#~ msgid "Armenian--NATIVE-LANGUAGE"
-#~ msgstr "Հայոց լեզու"
-
-#~ msgid "Georgian--NATIVE-LANGUAGE"
-#~ msgstr "ქართული ენა"
-
-#~ msgid "Kazakh--NATIVE-LANGUAGE"
-#~ msgstr "Қазақ тілі"
-
-#~ msgid "Arabic--NATIVE-LANGUAGE"
-#~ msgstr "العربية"
-
-#~ msgid "Hebrew--NATIVE-LANGUAGE"
-#~ msgstr "עברית"
-
-#~ msgid "Attach existing Files..."
-#~ msgstr "צירוף קבצים קיימים..."
-
-#~ msgid "Time"
-#~ msgstr "זמן"
-
-#~ msgid "External"
-#~ msgstr "חיצוני"
-
-#~ msgid "Banner Image"
-#~ msgstr "תמונת באנר"
-
-#~ msgid "Determins if application management is visible in conference administration."
-#~ msgstr "קובע אם ניהול טפסי הבקשות חשוף במנהלת הועידה."
+#~ msgid "Restart"
+#~ msgstr "הפעל מחדש"
 
 #~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s יצר כרגע את הפרויקט/קבוצה \"%(team_name)s\" ב-%(portal_name)s!"
 
-#~ msgid "All societies"
-#~ msgstr "כל החברות"
-
-#~ msgid "All projects"
-#~ msgstr "כל הפרויקטים"
-
-#, fuzzy
-#~| msgid "Project Dashboard"
-#~ msgid "Conference Dashboard"
-#~ msgstr "לוח כלים של הפרויקט"
-
-#~ msgid "The following Groups were converted to Projects:"
-#~ msgstr "הקבוצות הבאות הוסבו לפרויקטים:"
-
-#~ msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
-#~ msgstr "אם קבוצה מסומנת ככנס, ניתן ליצור חשבונות באופן אוטומטי עבור משתתפי הסדנה"
-
-#~ msgid "Determins whether a group that is marked as conference is running"
-#~ msgstr "קובע האם קבוצה המסומנת כוועידה מריצה"
-
-#, fuzzy
-#~| msgid "Search for Ideas"
-#~ msgid "Search for email"
-#~ msgstr "חפש רעיונות"
+#~ msgid "%(team_name)s was deactivated successfully!"
+#~ msgstr "%(team_name)s הושבת בהצלחה!"
 
 #~ msgid "Add workshop"
 #~ msgstr "הוסף סדנה"
 
-#~ msgid "Re-Activate Project/Group"
-#~ msgstr "הפעל מחדש פרוייקט/קבוצה"
+#~ msgid "All groups"
+#~ msgstr "כל הקבוצות"
+
+#~ msgid "All projects"
+#~ msgstr "כל הפרויקטים"
+
+#~ msgid "All societies"
+#~ msgstr "כל החברות"
+
+#~ msgid "Arabic--NATIVE-LANGUAGE"
+#~ msgstr "العربية"
+
+#~ msgid "Armenian--NATIVE-LANGUAGE"
+#~ msgstr "Հայոց լեզու"
+
+#~ msgid "Attach existing Files..."
+#~ msgstr "צירוף קבצים קיימים..."
+
+#~ msgid "Azerbaijani--NATIVE-LANGUAGE"
+#~ msgstr "Azerbaycan dili"
+
+#~ msgid "Banner Image"
+#~ msgstr "תמונת באנר"
+
+#~ msgid "Belarussian--NATIVE-LANGUAGE"
+#~ msgstr "Беларуская"
+
+#, fuzzy
+#~ msgid "Conference Dashboard"
+#~ msgstr "לוח כלים של הפרויקט"
+
+#~ msgid "Czech--NATIVE-LANGUAGE"
+#~ msgstr "Čeština"
 
 #~ msgid "Deactivate Project/Group"
 #~ msgstr "השבת פרויקט/קבוצה"
 
+#~ msgid "Deactivate users (will keep all all items they created on the site)"
+#~ msgstr "השבת משתמשים (ישמור את כל הפריטים שנוצרו באתר)"
+
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "השבת פרויקטים וקבוצות"
 
-#~ msgid "Public Group"
-#~ msgstr "קבוצה ציבורית"
+#~ msgid "Determins if application management is visible in conference administration."
+#~ msgstr "קובע אם ניהול טפסי הבקשות חשוף במנהלת הועידה."
 
-#~ msgid "All groups"
-#~ msgstr "כל הקבוצות"
+#~ msgid "Determins whether a group that is marked as conference is running"
+#~ msgstr "קובע האם קבוצה המסומנת כוועידה מריצה"
 
-#~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
-#~ msgstr "שלחנו לך בדוא\"ל הוראות להגדרת הסיסמה שלך. אתה אמור לקבלם בקרוב."
+#~ msgid "Deutsch--NATIVE-LANGUAGE"
+#~ msgstr "Deutsch"
 
-#~ msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-#~ msgstr "מצטערים, רק מנהלי פורטל יכולים ליצור קבוצות! באפשרותך ליצור פרוייקט, או לכתוב הודעה לאחד המנהלים כדי ליצור קבוצה עבורך. להלן ניתן למצוא רשימה של כל מנהלי המערכת."
+#~ msgid "Dutch--NATIVE-LANGUAGE"
+#~ msgstr "Nederlands"
 
-#~ msgid "Workshop Participant File Upload"
-#~ msgstr "העלאת קובץ המשתתף בסדנה"
+#~ msgid "English--NATIVE-LANGUAGE"
+#~ msgstr "English"
+
+#~ msgid "External"
+#~ msgstr "חיצוני"
+
+#~ msgid "French--NATIVE-LANGUAGE"
+#~ msgstr "Français"
+
+#~ msgid "Georgian--NATIVE-LANGUAGE"
+#~ msgstr "ქართული ენა"
+
+#~ msgid "Hebrew--NATIVE-LANGUAGE"
+#~ msgstr "עברית"
+
+#, fuzzy
+#~ msgid "Here you can find an overview of items you follow."
+#~ msgstr "כאן ניתן למצוא סקירה כללית של רעיונות שאהבת."
+
+#~ msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
+#~ msgstr "אם קבוצה מסומנת ככנס, ניתן ליצור חשבונות באופן אוטומטי עבור משתתפי הסדנה"
+
+#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
+#~ msgstr "אם ברצונך למחוק את התוכן שלך, חזור אחורה ועשה זאת כעת. לאחר שתמחק את הפרופיל שלך, לא תהיה לך עוד גישה לכל דבר שיצרת באמצעות חשבון זה."
+
+#~ msgid "Kazakh--NATIVE-LANGUAGE"
+#~ msgstr "Қазақ тілі"
 
 #~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 #~ msgstr ""
 #~ "אנא העלה/י CSV עם העמודות הבאות: מזהה משתמש ייחודי, שם פרטי, שם משפחה ועמודה אחת עבור כל סדנה המזוהה על ידי שורת הסדר של הסדנה. לעזרה תוכל/י להוריד תבנית \n"
 #~ "<a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 
+#~ msgid "Polish--NATIVE-LANGUAGE"
+#~ msgstr "Polski"
+
+#~ msgid "Public Group"
+#~ msgstr "קבוצה ציבורית"
+
+#~ msgid "Re-Activate Project/Group"
+#~ msgstr "הפעל מחדש פרוייקט/קבוצה"
+
+#~ msgid "Romanian--NATIVE-LANGUAGE"
+#~ msgstr "Română"
+
+#~ msgid "Russian--NATIVE-LANGUAGE"
+#~ msgstr "Русский"
+
+#, fuzzy
+#~ msgid "Search for email"
+#~ msgstr "חפש רעיונות"
+
+#~ msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+#~ msgstr "מצטערים, רק מנהלי פורטל יכולים ליצור קבוצות! באפשרותך ליצור פרוייקט, או לכתוב הודעה לאחד המנהלים כדי ליצור קבוצה עבורך. להלן ניתן למצוא רשימה של כל מנהלי המערכת."
+
+#~ msgid "Spanish--NATIVE-LANGUAGE"
+#~ msgstr "Español"
+
+#~ msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
+#~ msgstr "העלאת ה-CSV תגרום ליצירת החשבונות וליצירה של חברות בסנדת החשבונות והתוצאה תהיה הורדה ישירה של ה-CSV עם החשבונות והסיסמאות החדשים שנוצרו. הסיסמה תוכלל רק בעת יצירת החשבון. אנא רענן/י את העמוד לאחר ההורדה."
+
+#~ msgid "The following Groups were converted to Projects:"
+#~ msgstr "הקבוצות הבאות הוסבו לפרויקטים:"
+
 #~ msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
 #~ msgstr ""
 #~ "לאחר מכן הוסף/י שורה עבור כל חשבון אותו תרצה/י להוסיף.\\n\n"
 #~ "עליך להוסיף מזהה משתמש ייחודי אבל השם הפרטי ושם המשפחה יכולים להיות ריקים. לאחר מכן הוסף/י 1 לכל עמודות הסדנה היכן שהמשתמש צריך להיות חבר נורמלי או 2 אם המשתמש המסוים צריך להיות מנהל סדנה."
 
-#~ msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-#~ msgstr "העלאת ה-CSV תגרום ליצירת החשבונות וליצירה של חברות בסנדת החשבונות והתוצאה תהיה הורדה ישירה של ה-CSV עם החשבונות והסיסמאות החדשים שנוצרו. הסיסמה תוכלל רק בעת יצירת החשבון. אנא רענן/י את העמוד לאחר ההורדה."
+#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+#~ msgstr "תהליך זה הפיך. באפשרותך להפעיל מחדש את הוועידה מדף פרופיל המשתמש שלך בכל עת."
+
+#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+#~ msgstr "תהליך זה הפיך. באפשרותך להפעיל מחדש את הקבוצה מדף פרופיל המשתמש שלך בכל עת."
+
+#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+#~ msgstr "תהליך זה הפיך. באפשרותך להפעיל מחדש את הפרוייקט מדף פרופיל המשתמש שלך בכל עת."
+
+#~ msgid "Time"
+#~ msgstr "זמן"
+
+#~ msgid "Ukrainian--NATIVE-LANGUAGE"
+#~ msgstr "Українська"
+
+#~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
+#~ msgstr "שלחנו לך בדוא\"ל הוראות להגדרת הסיסמה שלך. אתה אמור לקבלם בקרוב."
+
+#~ msgid "Workshop Participant File Upload"
+#~ msgstr "העלאת קובץ המשתתף בסדנה"
+
+#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "אתה עומד להשבית ועידה זו. הועידה וכל תכניה יוסתרו מהאתר ויהיו בלתי נראים לכולם כולל אותך."
+
+#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "אתה עומד להשבית קבוצה זו. הקבוצה וכל תכניה יוסתרו מהאתר ויהיו בלתי נראים לכולם, כולל אותך."
+
+#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "אתה עומד להשבית פרוייקט זה. הפרוייקט ותכניו יהיו בלתי נראים מהאתר, לעולם כולל אותך."
 
 #~ msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
 #~ msgstr "ההזמנה שלך ל-%(team_type)s “%(team_name)s” נדחתה בהצלחה."
 
 #, fuzzy
-#~| msgid "Here you can find an overview of Ideas you have liked."
-#~ msgid "Here you can find an overview of items you follow."
-#~ msgstr "כאן ניתן למצוא סקירה כללית של רעיונות שאהבת."
+#~ msgid "nothing selected"
+#~ msgstr "לא נבחר תג"

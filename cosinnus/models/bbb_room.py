@@ -22,6 +22,8 @@ from cosinnus.utils.permissions import check_user_superuser
 from datetime import timedelta
 from django.utils.timezone import now
 from django.http.response import HttpResponseForbidden
+from django.utils.crypto import get_random_string
+from cosinnus.models.group import CosinnusPortal
 
 
 # from cosinnus.models import MEMBERSHIP_ADMIN
@@ -257,7 +259,7 @@ class BBBRoom(models.Model):
         return None
 
     @classmethod
-    def create(cls, name, meeting_id, meeting_welcome='Welcome!', attendee_password=None,
+    def create(cls, name, meeting_id, meeting_welcome=None, attendee_password=None,
                moderator_password=None, max_participants=None, voice_bridge=None, options=None,
                room_type=None, presentation_url=None, source_object=None):
         """ Creates a new BBBRoom and crete a room on the remote bbb-server.
@@ -296,6 +298,20 @@ class BBBRoom(models.Model):
 
         :type: dict
         """
+        
+        from cosinnus.models.group import CosinnusPortal
+        current_portal = CosinnusPortal.get_current()
+        
+        # Do not create a meeting if one already exists
+        existing_meeting = get_object_or_None(BBBRoom, meeting_id=meeting_id, portal=current_portal)
+        if existing_meeting:
+            existing_meeting.restart()
+            return existing_meeting
+        
+        # add a suffix to uniquify this meeting id - makes it safe for manual restarts
+        # by deleting the BBBRoom object
+        meeting_id = f'{meeting_id}-' + get_random_string(8)
+        
         if attendee_password is None:
             attendee_password = bbb_utils.random_password()
         if moderator_password is None:
@@ -329,9 +345,6 @@ class BBBRoom(models.Model):
 
         meeting_json = bbb_utils.xml_to_json(m_xml)
 
-        from cosinnus.models.group import CosinnusPortal
-        current_portal = CosinnusPortal.get_current()
-
         # Now create a model for it.
         meeting, created = BBBRoom.objects.get_or_create(meeting_id=meeting_id, portal=current_portal)
         meeting.name = name
@@ -355,13 +368,18 @@ class BBBRoom(models.Model):
         meeting._bbb_api = bbb_api
         return meeting
     
-    def build_extra_join_parameters(self):
+    def build_extra_join_parameters(self, user):
         """ Builds a parameter set fo the join API call for the join
             link for the user, from the default room parameters and the
             given room type's extra parameters """
         params = {}
         params.update(settings.BBB_DEFAULT_EXTRA_JOIN_PARAMETER)
         params.update(settings.BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS.get(self.room_type))
+        if user.cosinnus_profile.avatar:
+            domain = CosinnusPortal.get_current().get_domain()
+            params.update({
+                'avatarURL': domain + user.cosinnus_profile.get_avatar_thumbnail_url(size=(800,800))
+            })
         return params
     
     def get_join_url(self, user):
@@ -370,7 +388,7 @@ class BBBRoom(models.Model):
         password = self.get_password_for_user(user)
         username = full_name(user)
         if self.meeting_id and password:
-            extra_join_parameters = self.build_extra_join_parameters()
+            extra_join_parameters = self.build_extra_join_parameters(user)
             return self.bbb_api.join_url(self.meeting_id, username, password, extra_parameter_dict=extra_join_parameters)
         return ''
 
@@ -385,7 +403,7 @@ class BBBRoom(models.Model):
             as it also handles creating statistics.
             @param request: (optional)  """
         if not self.check_user_can_enter_room(user):
-            return HttpResponseForbidden()
+            return None
 
         if not self.is_running:
             try:

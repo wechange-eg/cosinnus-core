@@ -407,6 +407,64 @@
 				    {% endif %}
 				{% endwith %}
 				
+
+				{% if contact_form %}
+				<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+					<ul class="media-list">
+						<li class="media">
+							<a class="pull-left btn-extra-emphasized" href="#"></a>
+							<div class="media-body">
+								{% trans "Email the group administrators" %}
+							</div>
+						</li>
+					</ul>
+				</div>
+				<form method="post">
+					<div class="content-box">
+						{% csrf_token %}
+						{% for hidden in contact_form.hidden_fields %}
+							{{ hidden }}
+						{% endfor %}
+						{% trans "Email" as contact_form_email_label %}
+						{% trans "Your email address" as contact_form_email_placeholder %}
+						{% trans "Message" as contact_form_message_label %}
+						{% trans "Your message" as contact_form_message_placeholder %}
+						{% include 'cosinnus/fields/default_field.html' with field=contact_form.email label=contact_form_email_label placeholder=contact_form_email_placeholder %}
+						{% include 'cosinnus/fields/default_field.html' with field=contact_form.message label=contact_form_message_label large_field=True placeholder=contact_form_message_placeholder %}
+
+        				{% trans "Captcha" as captcha_label %}
+        				{% captureas captcha_legend %}
+        				{% trans "We need to make sure you are a real person (sorry!)" %}
+        				<a class="refresh-captcha" href="#" style="color: #5a5a5a; text-decoration: underline;">
+        				{% trans "Generate a new captcha" %}
+        				</a>
+    					{% endcaptureas %}
+						{% include 'cosinnus/fields/default_field.html' with field=contact_form.captcha legend=captcha_legend label=captcha_label large_field=True field_classes="captcha-field" %}
+
+						<script>
+							$('.refresh-captcha').click(function () {
+								$.getJSON("/captcha/refresh/", function (result) {
+									$('.captcha').attr('src', result['image_url']);
+									$('#id_captcha_0').val(result['key'])
+								});
+							});
+						</script>
+					</div>
+					<button type="submit" class="btn btn-emphasized" title="Send">
+						<ul class="media-list">
+							<li class="media">
+								<a class="pull-left" href="#">
+									<i class="fa fa-check"></i>
+								</a>
+								<div class="media-body">
+									{% trans "Send" %}
+								</div>
+							</li>
+						</ul>
+					</button>
+				</form>
+				{% endif%}
+
 				{# Public objects box #}
 				{% if public_objects %}
 					{% for app, app_name, public_object_list in public_objects %}
@@ -436,33 +494,8 @@
 					    {% endif %}
 					{% endfor %}
 				{% endif %}
-				
-				
-			{% endblock microsite_left_column %}
-		</div> <!-- col-md-6 -->
-		
-		<div class="col-md-6">
-			{% block microsite_right_column %}
-			
-				{# News box #}
-				{% if not group|is_app_deactivated:'cosinnus_note' %}
-					<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
-			            <ul class="media-list">
-			                <li class="media">
-			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-			                    <div class="media-body">
-			                        {% trans "News" %}
-			                    </div>
-			                </li>
-			            </ul>
-			        </div><!-- btn -->
-			        <div class="white-content no-padding">
-			        	<iframe src="{% group_url 'cosinnus:note:embed' group=group %}" style="width: 100%; height: 350px;" frameborder=0></iframe>
-					</div>
-				{% endif %}
-				
-				
-                {% if SETTINGS.COSINNUS_MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE %}
+
+				{% if SETTINGS.COSINNUS_MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE %}
 					{% if group.twitter_username %}
 						{# Twitter username feed box #}
 						<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
@@ -558,6 +591,30 @@
 		                {% endif %}
 					{% endif %}
 				{% endwith %}
+				
+				
+			{% endblock microsite_left_column %}
+		</div> <!-- col-md-6 -->
+		
+		<div class="col-md-6">
+			{% block microsite_right_column %}
+			
+				{# News box #}
+				{% if not group|is_app_deactivated:'cosinnus_note' %}
+					<div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    <div class="media-body">
+			                        {% trans "News" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			        <div class="white-content no-padding">
+			        	<iframe src="{% group_url 'cosinnus:note:embed' group=group %}" style="width: 100%; height: 1000px;" frameborder=0></iframe>
+					</div>
+				{% endif %}
 				
 				
 			{% endblock microsite_right_column %}

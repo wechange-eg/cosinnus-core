@@ -231,6 +231,12 @@ msgstr "עכשיו"
 msgid "Organization"
 msgstr "ארגון"
 
+#. [City]
+#. defaultMessage is:
+#. undefined
+msgid "City"
+msgstr ""
+
 #. [Represented organizations]
 #. defaultMessage is:
 #. undefined
@@ -318,3 +324,11 @@ msgstr "משתתפים"
 #. undefined
 msgid "places left"
 msgstr "מקומות שנותרו"
+
+msgid ""
+"Your profile is not shown here or not displayed correctly? "
+"Add to your profile or make yourself visible to other conference participants."
+msgstr ""
+
+msgid "Edit Profile"
+msgstr ""

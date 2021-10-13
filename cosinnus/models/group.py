@@ -68,6 +68,7 @@ from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from django.template.defaultfilters import date as django_date_filter
 
+from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -127,6 +128,7 @@ def group_name_validator(value):
 
 
 class CosinnusGroupQS(models.query.QuerySet):
+    """ QuerySet for all cosinnus group models """
 
     def filter_membership_status(self, status):
         if isinstance(status, (list, tuple)):
@@ -137,6 +139,18 @@ class CosinnusGroupQS(models.query.QuerySet):
         ret = super(CosinnusGroupQS, self).update(**kwargs)
         self.model._clear_cache()
         return ret
+    
+    def filter_has_premium_blocks(self, has_premium_blocks=True):
+        """ Filters (or excludes) for groups that can potentially be premium because they have assigned
+            `CosinnusConferencePremiumBlock`s. """
+        if has_premium_blocks:
+            return self.filter(conference_premium_blocks__gt=0).distinct()
+        else:
+            return self.exclude(conference_premium_blocks__gt=0).distinct()
+    
+    def filter_is_any_premium(self):
+        """ Filters for groups that either have premium blocks or are permanently premium """
+        return self.filter(Q(conference_premium_blocks__gt=0) | Q(is_premium_permanently__exact=True)).distinct()
 
 
 class CosinnusGroupManager(models.Manager):
@@ -589,6 +603,8 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
         help_text='A dict storage for all choice lists for the dynamic fields of type `DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT`',
         encoder=DjangoJSONEncoder)
 
+    userprofile_default_description = models.TextField(verbose_name=_('Default userprofile description'), blank=True, null=True)
+
     conference_settings_assignments = GenericRelation('cosinnus.CosinnusConferenceSettings')
 
     # exact time when last digest was sent out for each of the period settings
@@ -673,7 +689,7 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
 
 
 @python_2_unicode_compatible
-class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
+class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
                         CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin,
                         AttachableObjectModel):
     TYPE_PROJECT = 0
@@ -742,6 +758,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
                                   max_length=250)
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
     public = models.BooleanField(_('Public'), default=False)
+    # note: use the `is_publicly_visible()` attr instead of this field to determine the group's visibility!
+    publicly_visible = models.BooleanField(_('Publicly visible'), 
+                                           default=settings.COSINNUS_GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE, 
+                                           help_text=_('Checks if a group/project should be visible publicly'))
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
                                    related_name='cosinnus_groups', through='cosinnus.CosinnusGroupMembership')
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
@@ -871,6 +891,7 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
 
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     conference_settings_assignments = GenericRelation('cosinnus.CosinnusConferenceSettings')
+    show_contact_form = models.BooleanField(default=False, help_text=_('If set to true, a contact form will be displayed on the micropage.'))
     
     objects = CosinnusGroupManager()
 
@@ -897,15 +918,6 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
 
     def _get_likeable_model_name(self):
         return 'CosinnusGroup'
-
-    def __getitem__(self, key):
-        """ Enable accessing fields and attributed of CosinnusGroup through dict lookup.
-            This facilitates accessing group fields in the way django templates does it
-            during render time and should not have any drawbacks.
-            We use this for some multi-language swapped models of CosinnusGroup
-            in projects like DRJA where group['name'] returns group.name or
-            group.name_ru depending on the language. """
-        return getattr(self, key)
 
     def save(self, keep_unmodified=False, *args, **kwargs):
         """ @param keep_unmodified: is de-referenced from kwargs here to support extended arguments. could be cleaner """
@@ -998,6 +1010,15 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
         self._clear_cache(slug=self.slug)
         super(CosinnusBaseGroup, self).delete(*args, **kwargs)
     
+    def get_translateable_fields(self):
+        if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+            # translatable fields are only enabled for conferences for now
+            if self.__class__.__name__ == 'CosinnusConference':
+                return ['name', 'description_long']
+            else:
+                return []
+        return []
+    
     @property
     def trans(self):
         """ Returns the typed group trans object containing translations for all 
@@ -1064,6 +1085,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     def is_premium(self):
         """ Shortcut to determine if a group is in premium state right now """
         return self.is_premium_currently or self.is_premium_permanently
+    
+    @property
+    def has_premium_blocks(self):
+        return bool(self.conference_premium_blocks.count() > 0)
     
     def add_member_to_group(self, user, membership_status):
         """ "Makes the user a group member". 
@@ -1267,6 +1292,13 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
     @property
     def is_forum_group(self):
         return self.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+    
+    @property
+    def is_publicly_visible(self):
+        """ Checks if this group can be viewed (from the outside) for non-logged-in users. """
+        if not settings.COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN:
+            return settings.COSINNUS_GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE
+        return self.publicly_visible
 
     def _get_media_image_path(self, file_field, filename_modifier=None):
         """Gets the unique path for each image file in the media directory"""
@@ -1688,7 +1720,7 @@ class CosinnusLocation(models.Model):
     def location_url(self):
         if not self.location_lat or not self.location_lon:
             return None
-        return 'http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
+        return 'https://openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
     
     def save(self, *args, **kwargs):
         super(CosinnusLocation, self).save(*args, **kwargs)

@@ -24,6 +24,7 @@ import six
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus.utils.files import get_conference_conditions_filename
 from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify
@@ -109,7 +110,7 @@ class CosinnusConferenceSettings(models.Model):
             None is returned.
             
             The currently supported source_object attachment points for CosinnusConferenceSettings are, 
-            in order of the hierarchy chain (see ``).
+            in order of the hierarchy chain: see `get_parent_object_in_conference_setting_chain`.
             
             Furthermore, this function will accept these models as source_object 
             and use the resolved cosinnus_event.ConferenceEvent as chain starting point, if there is one:
@@ -186,7 +187,9 @@ class CosinnusConferenceRoomManager(models.Manager):
     
 
 @python_2_unicode_compatible
-class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models.Model):
+class CosinnusConferenceRoom(TranslateableFieldsModelMixin,
+                             ModelInheritsGroupReadWritePermissionsMixin,
+                             models.Model):
     """ A model for rooms inside a conference group object.
         Each room will be displayed as a list in the conference main page
         and can be displayed in different ways, depending on its type """
@@ -217,7 +220,17 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
         TYPE_DISCUSSIONS,
         TYPE_COFFEE_TABLES,
     )
+
+    ROOM_TYPES_WITH_EVENT_FORM = (
+        TYPE_LOBBY,
+        TYPE_STAGE,
+        TYPE_WORKSHOPS,
+        TYPE_DISCUSSIONS,
+        TYPE_COFFEE_TABLES,
+    )
     
+    if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+        translateable_fields = ['title', 'description']
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Team'),
         related_name='rooms', on_delete=models.CASCADE)
 
@@ -364,8 +377,15 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
                 .exclude(type=ConferenceEvent.TYPE_COFFEE_TABLE)\
                 .order_by('from_date')
 
+    @property
+    def has_event_form(self):
+        return self.type in self.ROOM_TYPES_WITH_EVENT_FORM
+
 
 class ParticipationManagement(models.Model):
+    """ A settings object for a CosinnusConference that determines how and when 
+        CosinnusConferenceApplications may be submitted, as well as other meta options
+        for the application options for that conference. """
 
     participants_limit = models.IntegerField(blank=True, null=True)
     application_start = models.DateTimeField(blank=True, null=True)
@@ -418,7 +438,6 @@ class ParticipationManagement(models.Model):
     @property
     def to_date(self):
         return self.application_end
-
 
 
 APPLICATION_INVALID = 1
@@ -499,6 +518,7 @@ class CosinnusConferenceApplicationQuerySet(models.QuerySet):
 
 
 class CosinnusConferenceApplication(models.Model):
+    """ A model for an application to attend a conference, submitted by a user. """
 
     conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
                                            verbose_name=_('Confernence Application'),
@@ -585,3 +605,66 @@ class CosinnusConferenceApplication(models.Model):
         """ Needed for django-admin """
         return self.user.email
 
+
+
+class CosinnusConferencePremiumBlock(models.Model):
+    """ Signifies the time frames during which CosinnusConferences are set into premium mode by a 
+        cronjob that switches their `is_premium_currently` flag. While this flag is True,
+        the BBB URLs for all rooms/events within this conference will use the server config set 
+        in the `CosinnusConferenceSettings.bbb_server_choice_premium` for each settings object
+        inherited or set for each conference event.
+        
+        Note: There is a hook trigger for updating conferences when a CosinnusConferencePremiumBlock
+        is saved, that couldn't be integrated in the save() method because of transaction contexts.
+        See `update_conference_premium_status_on_block_save()`  """
+    
+    conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
+                                           verbose_name=_('Conference'),
+                                           related_name='conference_premium_blocks',
+                                           on_delete=models.CASCADE)
+    
+    from_date = models.DateField(_('Start Datetime'), default=None, blank=True, null=True,
+                                     help_text=_('During this time, the conference will be using the premium BBB server.'))
+    to_date = models.DateField(_('End Datetime'), default=None, blank=True, null=True,
+                                     help_text=_('During this time, the conference will be using the premium BBB server.'))
+    participants = models.PositiveIntegerField(verbose_name=_('Conference participants'), default=0,
+                                                   help_text=_('The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins.'))
+    
+    created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
+    last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
+    
+    class Meta(object):
+        ordering = ('from_date',)
+        verbose_name = _('Cosinnus Conference Premium Block')
+        verbose_name_plural = _('Cosinnus Conference Premium Blocks')
+        
+
+
+
+
+
+class CosinnusConferencePremiumCapacityInfo(models.Model):
+    """ A guiding-only info for portal admins, during which times the premium BBB server can take 
+        which capacity of users. Serves as a guideline for portal admins when they accept conferences
+        as premium conference, to decide whether additional capacity on the BBB cluster should be booked. """
+    
+    portal = models.ForeignKey('cosinnus.CosinnusPortal',
+                               verbose_name=_('Portal'),
+                               related_name='portal_premium_capacity_blocks',
+                               on_delete=models.CASCADE)
+    
+    from_date = models.DateField(_('Start Datetime'), default=None, blank=True, null=True,
+                                     help_text=_('The time frame while the selected capacity is available.'))
+    to_date = models.DateField(_('End Datetime'), default=None, blank=True, null=True,
+                                     help_text=_('The time frame while the selected capacity is available.'))
+    max_participants = models.PositiveIntegerField(verbose_name=_('Maximum BBB participants'), default=0,
+                                                   help_text=_('The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins.'))
+    
+    created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
+    last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
+    
+    class Meta(object):
+        ordering = ('from_date',)
+        verbose_name = _('Conference Total Premium Capacity Info')
+        verbose_name_plural = _('Conference Total Premium Capacity Infos')
+    

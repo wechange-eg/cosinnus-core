@@ -17,6 +17,8 @@ from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.forms.select2 import HeavySelect2MultipleFreeTextChoiceWidget, \
     HeavySelect2FreeTextChoiceWidget
 from cosinnus.utils.user import get_user_select2_pills
+from cosinnus.utils.functions import is_number
+from django.core.validators import MaxLengthValidator
 
 
 class DynamicFieldFormFieldGenerator(object):
@@ -79,9 +81,14 @@ class DynamicFieldFormFieldGenerator(object):
 
 class TextDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     formfield_class = forms.CharField
+    
+    def get_formfield_kwargs(self):
+        kwargs = {}
+        if self._dynamic_field_options.max_length and is_number(self._dynamic_field_options.max_length):
+            kwargs['validators'] = [MaxLengthValidator(self._dynamic_field_options.max_length)]
+        return kwargs
 
-class TextAreaDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
-    formfield_class = forms.CharField
+class TextAreaDynamicFieldFormFieldGenerator(TextDynamicFieldFormFieldGenerator):
     widget_class = forms.Textarea
 
 class IntDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):

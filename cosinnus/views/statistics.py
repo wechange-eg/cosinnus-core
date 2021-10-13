@@ -122,7 +122,7 @@ def bbb_room_visit_statistics_download(request):
     """
         Will return a CSV containing infos about all BBB Room visits
     """
-    if request and not request.user.is_superuser:
+    if request and not check_user_superuser(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     rows = []
@@ -142,12 +142,21 @@ def bbb_room_visit_statistics_download(request):
     #'user_mtag_ids',
     #'conference_mtag_ids',
     
-    for visit in BBBRoomVisitStatistics.objects.all().order_by('visit_datetime'):
+    # cache for group_id (int) -> user
+    group_admin_cache = {}
+    for visit in BBBRoomVisitStatistics.objects.all().order_by('visit_datetime').\
+            prefetch_related('user', 'user__cosinnus_profile', 'user__cosinnus_profile__media_tag',
+                             'group', 'bbb_room'):
         visitor = visit.user or None
         visitor_mt = visitor and visitor.cosinnus_profile and visitor.cosinnus_profile.media_tag or None
-        visited_group_admins = visit.group and visit.group.actual_admins or []
-        # only reporting data on the first admin for simplicity
-        visited_group_admin = len(visited_group_admins) > 0 and visited_group_admins[0] or None
+        # cache the group-admins
+        visited_group_admin = group_admin_cache.get(visit.group_id, None)
+        if visited_group_admin is None:
+            visited_group_admins = visit.group and visit.group.actual_admins or []
+            # only reporting data on the first admin for simplicity
+            visited_group_admin = len(visited_group_admins) > 0 and visited_group_admins[0] or None
+            group_admin_cache[visit.group_id] = visited_group_admin
+            
         rows.append([
             timezone.localtime(visit.visit_datetime).strftime('%Y-%m-%d %H:%M:%S'), # 'datetime',
             visit.group and visit.group.name or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_NAME, ''), #'conference_name',

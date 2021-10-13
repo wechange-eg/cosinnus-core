@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 15:30+0200\n"
+"POT-Creation-Date: 2021-05-14 15:23+0200\n"
 "PO-Revision-Date: 2021-04-07 13:20+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -30,19 +30,6 @@ msgstr "Conférences"
 msgctxt "the_app"
 msgid "conference"
 msgstr "Conférence"
-
-#, fuzzy
-#| msgid "End date must be before start date"
-msgid "The start date must be before the end date"
-msgstr "La date de fin doit être avant la date de début"
-
-msgid "Please also provide a start date"
-msgstr "Veuillez également fournir une date de début"
-
-#, fuzzy
-#| msgid "Please also provide a end date"
-msgid "Please also provide an end date"
-msgstr "Veuillez également fournir une date de fin"
 
 msgid "First Choice"
 msgstr "Premier choix"
@@ -167,6 +154,19 @@ msgstr "Numéro de téléphone de contact"
 
 msgid "List of Applicants"
 msgstr "Liste des candidats"
+
+#, fuzzy
+#~| msgid "End date must be before start date"
+#~ msgid "The start date must be before the end date"
+#~ msgstr "La date de fin doit être avant la date de début"
+
+#~ msgid "Please also provide a start date"
+#~ msgstr "Veuillez également fournir une date de début"
+
+#, fuzzy
+#~| msgid "Please also provide a end date"
+#~ msgid "Please also provide an end date"
+#~ msgstr "Veuillez également fournir une date de fin"
 
 #~ msgid "Conference is running"
 #~ msgstr "La conférence est en cours"

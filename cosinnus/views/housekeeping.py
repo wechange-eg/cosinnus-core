@@ -22,13 +22,14 @@ import json
 import urllib.request, urllib.error, urllib.parse
 from django.utils.encoding import force_text
 import pickle
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+    CosinnusConference
 import datetime
 from cosinnus.models.tagged import BaseTagObject
 import random
 from django.utils.timezone import now
 from cosinnus.utils.user import filter_active_users, accept_user_tos_for_portal,\
-    get_user_tos_accepted_date
+    get_user_tos_accepted_date, is_user_active
 from cosinnus.models.profile import get_user_profile_model
 from django.core.mail.message import EmailMessage
 from cosinnus.core.mail import send_mail,\
@@ -38,14 +39,12 @@ from django.template.defaultfilters import linebreaksbr
 from django.db.models.aggregates import Count
 from cosinnus.utils.http import make_csv_response, make_xlsx_response
 from operator import itemgetter
-from cosinnus.utils.permissions import check_user_can_receive_emails
+from cosinnus.utils.permissions import check_user_can_receive_emails,\
+    check_user_superuser
 import logging
 from cosinnus.templatetags.cosinnus_tags import textfield
 from annoying.functions import get_object_or_None
 
-logger = logging.getLogger('cosinnus')
-
-import logging
 logger = logging.getLogger('cosinnus')
 
 
@@ -191,6 +190,16 @@ def deletecache(request):
     return HttpResponse("The cache entry '%s' was deleted." % cache_key)
 
 
+def test_logging(request, level='error'):
+    if level == 'exception':
+        return 1/0
+    if level in ['error', 'warning', 'info']:
+        func = getattr(logger, level)
+        func(f'Test logging event with level: {level}')
+        return HttpResponse(f'Triggered a log message with level {level}.')
+    return HttpResponse(f'Did not trigger a log event because level "{level}" was unknown.')
+
+
 def check_and_delete_loop_redirects(request):
     if not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
@@ -238,7 +247,7 @@ def add_members_to_forum(request=None):
 easter_european_country_codes = ['BY', 'BG', 'CZ', 'HU', 'MD', 'PL', 'RO', 'RU', 'SK', 'UA']
 
 def user_statistics(request=None):
-    if request and not request.user.is_superuser:
+    if request and not check_user_superuser(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     user_locs = get_user_model().objects.filter(cosinnus_profile__media_tag__location_lat__isnull=False)\
@@ -429,7 +438,7 @@ def _get_group_storage_space_mb(group):
     return size
 
 def group_storage_info(request):
-    if request and not request.user.is_superuser:
+    if request and not check_user_superuser(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     prints = '<h1>All groups and projects with file storage usage over 10MB:</h1><br/>'
@@ -441,18 +450,23 @@ def group_storage_info(request):
     return HttpResponse(prints)
 
 
-def group_storage_report_csv(request):
+def conference_storage_report_csv(request):
+    """ See ``group_storage_report_csv``, this is the same, just for Conferences and their subprojects. """
+    return group_storage_report_csv(request, group_model=CosinnusConference, filename='conference-storage-report')
+
+def group_storage_report_csv(request, group_model=None, filename='group-storage-report'):
     """
-        Will return a CSV containing infos about all Group:s
+        Will return a CSV containing infos about all Groups:
             URL, Member-count, Number-of-Projects, Storage-Size-in-MB, Storage-Size-of-Group-and-all-Child-Projects-in-MB
     """
-    if request and not request.user.is_superuser:
+    if request and not check_user_superuser(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     rows = []
     headers = ['url', 'member-count', 'number-projects', 'group-storage-mb', 'group-and-projects-sum-mb']
     
-    for group in CosinnusSociety.objects.all_in_portal():
+    klass = group_model or CosinnusSociety
+    for group in klass.objects.all_in_portal():
         projects = group.get_children()
         group_size = _get_group_storage_space_mb(group)
         projects_size = 0
@@ -460,7 +474,7 @@ def group_storage_report_csv(request):
             projects_size += _get_group_storage_space_mb(project)
         rows.append([group.get_absolute_url(), group.member_count, len(projects), group_size, group_size + projects_size])
     rows = sorted(rows, key=itemgetter(4), reverse=True)
-    return make_csv_response(rows, headers, 'group-storage-report')
+    return make_csv_response(rows, headers, filename)
 
 
 def project_storage_report_csv(request):
@@ -468,7 +482,7 @@ def project_storage_report_csv(request):
         Will return a CSV containing infos about all Projects:
             URL, Member-count, Storage-Size-in-MB
     """
-    if request and not request.user.is_superuser:
+    if request and not check_user_superuser(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     rows = []
@@ -482,7 +496,7 @@ def project_storage_report_csv(request):
 
     
 def user_activity_info(request):
-    if request and not request.user.is_superuser:
+    if request and not check_user_superuser(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     prints = '<h1>User activity of users who logged in at least once, in terms of memberships in projects+groups, sorted by highest, one user per row:</h1><br/></br>'
@@ -497,25 +511,79 @@ def user_activity_info(request):
 #                 annotate(group_projects=group_projects).annotate(group_projects_admin=group_projects_admin).\
 #                 annotate(projects_only=projects_only).annotate(groups_only=groups_only):
     portal = CosinnusPortal.get_current()
+    headers = []
+    offset = 0
+    if settings.COSINNUS_CONFERENCES_ENABLED:
+        headers += [
+            'conferences-count',
+            'admin-of-conferences-count',
+        ]
+        offset = 2
+    headers += [
+        'projects-and-groups-count',
+        'groups-only-count',
+        'projects-only-count',
+        'admin-of-projects-and-groups-count',
+        'user-last-authentication-login-days',
+        'current-tos-accepted',
+        'registration-date',
+        'events-attended',
+    ]
+    group_type_cache = {} # id (int) --> group type (int)
     for membership in CosinnusGroupMembership.objects.filter(group__portal=CosinnusPortal.get_current(), user__is_active=True).exclude(user__last_login__exact=None):
-        user = membership.user
-        user_row = users.get(user.id, [0, 0, 0, 0, (now()-user.last_login).days, 1, user.date_joined])
-        user_row[0] += 1
-        if membership.group.type == CosinnusGroup().TYPE_PROJECT:
-            user_row[1] +=1 
-        if membership.group.type == CosinnusGroup().TYPE_SOCIETY:
-            user_row[2] +=1 
-        if membership.status == MEMBERSHIP_ADMIN:
-            user_row[3] += 1
-        tos_accepted_date = get_user_tos_accepted_date(user)
-        if portal.tos_date.year > 2000 and (tos_accepted_date is None or tos_accepted_date < portal.tos_date):
-            user_row[5] = 0
+        # get the statistics row for the user of the membership, if there already is one we're aggregating
+        user_row = users.get(membership.user_id, None)
+        if user_row is None:
+            user = membership.user
+            initial_row = []
+            if settings.COSINNUS_CONFERENCES_ENABLED:
+                initial_row += [0, 0]
+            tos_accepted_date = get_user_tos_accepted_date(user)
+            tos_accepted = 1
+            if portal.tos_date.year > 2000 and (tos_accepted_date is None or tos_accepted_date < portal.tos_date):
+                tos_accepted = 0
+            initial_row += [
+                0,                              # 'projects-and-groups-count',
+                0,                              # 'groups-only-count',
+                0,                              # 'projects-only-count',
+                0,                              # 'admin-of-projects-and-groups-count',
+                (now()-user.last_login).days,   # 'user-last-login-days',
+                tos_accepted,                   # 'current-tos-accepted',
+                user.date_joined,               # 'registration-date',
+                0,                              # 'events-attended',
+            ]
+            user_row = initial_row
         
-        users[membership.user.id] = user_row
+        group_type = group_type_cache.get(membership.group_id, None)
+        if group_type is None:
+            group_type = membership.group.type
+            group_type_cache[membership.group_id] = group_type
+            
+        if settings.COSINNUS_CONFERENCES_ENABLED:
+            if group_type == CosinnusGroup.TYPE_CONFERENCE:
+                user_row[0] += 1 # 'conferences-count'
+                if membership.status == MEMBERSHIP_ADMIN:
+                    user_row[1] += 1 # 'admin-of-conferences-count',
+        user_row[offset] += 1 # 'projects-and-groups-count'
+        if group_type == CosinnusGroup.TYPE_PROJECT:
+            user_row[offset+1] += 1 # 'groups-only-count'
+        if group_type == CosinnusGroup.TYPE_SOCIETY:
+            user_row[offset+2] += 1 # 'projects-only-count'
+        if group_type in [CosinnusGroup.TYPE_SOCIETY, CosinnusGroup.TYPE_PROJECT] and membership.status == MEMBERSHIP_ADMIN:
+            user_row[offset+3] += 1 # 'admin-of-projects-and-groups-count'
+        
+        users[membership.user_id] = user_row
+    
+    # add event attendance stats
+    from cosinnus_event.models import EventAttendance # noqa
+    for attendance in EventAttendance.objects.filter(state=EventAttendance.ATTENDANCE_GOING):
+        user_row = users.get(attendance.user_id, None)
+        if user_row is None:
+            continue
+        user_row[offset+7] += 1
     
     rows = users.values()
-    rows = sorted(rows, key=lambda row: row[0], reverse=True)
-    headers = ['projects-and-groups-count', 'groups-only-count', 'projects-only-count', 'admin-of-projects-and-groups-count', 'user-last-login-days', 'current-tos-accepted', 'registration-date']
+    rows = sorted(rows, key=lambda row: row[offset], reverse=True)
 
     #prints += '<br/>'.join([','.join((str(cell) for cell in row)) for row in rows])
     #return HttpResponse(prints)
@@ -550,8 +618,9 @@ def newsletter_users(request, includeOptedOut=False, never_logged_in_only=False,
     
     for user in users:
         if includeOptedOut or (check_user_can_receive_emails(user) and user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True):
-            row = [user.email, user.first_name, user.last_name, user.date_joined, user.cosinnus_profile.language]
-            result_columns.append(row)
+            if never_logged_in_only or is_user_active(user):
+                row = [user.email, user.first_name, user.last_name, user.date_joined, user.cosinnus_profile.language]
+                result_columns.append(row)
     return make_xlsx_response(result_columns, file_name=file_name)
 
 def active_user_emails(request):

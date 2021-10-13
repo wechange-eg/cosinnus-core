@@ -55,6 +55,7 @@
         </ul>
     </button>
     
+    {% if object.has_event_form %}
     <button type="button" href="{{ object.get_room_create_url }}" class="btn btn-emphasized btn-autosize">
         <ul class="media-list">
             <li class="media">
@@ -67,6 +68,7 @@
             </li>
         </ul>
     </button>
+    {% endif %}
     
       
 </div><!-- fadedown -->

@@ -22,7 +22,7 @@ COSINNUS_PORTAL_NAME = None
 # the suffix of every often-changing JS/CSS staticfile
 # increase this to make sure browsers reload a cached version 
 # after making non-compatible changes to scripts or styles!
-COSINNUS_STATICFILES_VERSION = '1.03'
+COSINNUS_STATICFILES_VERSION = '1.09'
 
 DEBUG = False
 
@@ -137,6 +137,7 @@ TEMPLATES = [
                 'cosinnus.utils.context_processors.settings',
                 'cosinnus.utils.context_processors.cosinnus',
                 'cosinnus.utils.context_processors.tos_check',
+                'cosinnus.utils.context_processors.email_verified',
                 'announcements.context_processors.add_custom_announcements',
              ],
             'loaders': (
@@ -247,7 +248,6 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'osm_field',
         'phonenumber_field',
         'postman',
-        'raven.contrib.django.raven_compat',
         'oauth2_provider',
         'corsheaders',
         'rest_framework',
@@ -259,6 +259,7 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     
     return _INSTALLED_APPS
 
+# for language codes see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 LANGUAGES = [
     ('de', _('Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     ('en', _('English--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
@@ -282,6 +283,7 @@ LANGUAGES = [
     ('ar', _('Arabic--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     ('he', _('Hebrew--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     ('el', _('Greek--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('fa', _('Persian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -296,7 +298,7 @@ LOGGING = {
     'disable_existing_loggers': True,
     'root': {
         'level': 'WARNING',
-        'handlers': ['sentry'],
+        'handlers': ['console'],
     },
     'formatters': {
         'verbose': {
@@ -304,10 +306,6 @@ LOGGING = {
         },
     },
     'handlers': {
-        'sentry': {
-            'level': 'INFO',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -320,24 +318,14 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
         },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['console', 'sentry'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
         'cosinnus': {
             'level': 'DEBUG',
-            'handlers': ['console', 'sentry'],
+            'handlers': ['console',],
             'propagate': False,
         },
         'wechange-payments': {
             'level': 'DEBUG',
-            'handlers': ['console', 'sentry'],
+            'handlers': ['console',],
             'propagate': False,
         },
     },
@@ -422,10 +410,12 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # cosinnus-core should not know about other cosinnus apps here!
 CRON_CLASSES = [
     'cosinnus.cron.DeleteScheduledUserProfiles',
+    'cosinnus.cron.UpdateConferencePremiumStatus',
+    'cosinnus_conference.cron.SendConferenceReminders',
+    'cosinnus_event.cron.TriggerBBBStreamers',
+    'cosinnus_exchange.cron.PullData',
     'cosinnus_marketplace.cron.DeactivateExpiredOffers',
     'cosinnus_message.cron.ProcessDirectReplyMails',
-    'cosinnus_conference.cron.SendConferenceReminders',
-    'cosinnus_exchange.cron.PullData',
 ]
 # delete cronjob logs older than 30 days
 DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 30
