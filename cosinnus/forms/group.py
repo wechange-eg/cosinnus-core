@@ -340,7 +340,7 @@ class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
         required=False
     )
     
-    extra_forms_setting = 'COSINNUS_PROJECT_ADDITIONAL_FORMS'
+    dynamic_forms_setting = 'COSINNUS_PROJECT_ADDITIONAL_FORMS'
 
     class Meta(object):
         fields = CosinnusBaseGroupForm.Meta.fields + ['parent',]
@@ -371,7 +371,7 @@ class _CosinnusSocietyForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
         required=False
     )
     
-    extra_forms_setting = 'COSINNUS_GROUP_ADDITIONAL_FORMS'
+    dynamic_forms_setting = 'COSINNUS_GROUP_ADDITIONAL_FORMS'
 
     class Meta(object):
         fields = CosinnusBaseGroupForm.Meta.fields
@@ -389,7 +389,7 @@ class _CosinnusConferenceForm(CleanAppSettingsMixin, AsssignPortalMixin, Cosinnu
         required=False
     )
     
-    extra_forms_setting = 'COSINNUS_CONFERENCE_ADDITIONAL_FORMS'
+    dynamic_forms_setting = 'COSINNUS_CONFERENCE_ADDITIONAL_FORMS'
     
     class Meta(object):
         fields = CosinnusBaseGroupForm.Meta.fields + [

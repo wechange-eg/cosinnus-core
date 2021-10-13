@@ -1,0 +1,16 @@
+{% extends "cosinnus/user/userprofile_form.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+
+{% block userprofile_extra_fields %}
+    
+    {% if SETTINGS.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN and form.forms.obj.newsletter_opt_in %}
+        {# Newsletter opt-in checkbox #}
+        {% trans "News via the newsletter" as newsletter_label %}
+        {% trans "To involve you in news, developments and projects at and around bothAnd, we established a newsletter. If you enjoy receiving these news from us once a week, we would be very happy :)" as newsletter_legend %}
+        {% trans "Yes, I want to be involved in what is going on with and around bothAnd and receive a newsletter." as newsletter_box_label %}
+        {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.newsletter_opt_in label=newsletter_label legend=newsletter_legend checkbox_label=newsletter_box_label %}
+    {% endif %}
+    
+{% endblock userprofile_extra_fields %}
+

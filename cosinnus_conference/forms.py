@@ -33,18 +33,18 @@ class ConferenceRemindersForm(forms.ModelForm):
 
     class Meta:
         model = get_cosinnus_group_model()
-        fields = ('extra_fields', )
+        fields = ('dynamic_fields', )
 
     def get_initial_for_field(self, field, field_name):
-        extra_fields = self.instance.extra_fields
-        initial = extra_fields and extra_fields.get(f'reminder_{field_name}') or None
+        dynamic_fields = self.instance.dynamic_fields
+        initial = dynamic_fields and dynamic_fields.get(f'reminder_{field_name}') or None
         if ('subject' in field_name or 'content' in field_name) and not initial:
             initial = get_initial_template(field_name)
         return initial
 
     def save(self, commit=True):
         for field_name, value in self.cleaned_data.items():
-            if field_name == 'extra_fields':
+            if field_name == 'dynamic_fields':
                 continue
             # Check if subject/email text changed
             key = f'reminder_{field_name}'
@@ -52,11 +52,11 @@ class ConferenceRemindersForm(forms.ModelForm):
                 if value.replace('\r', '') == get_initial_template(field_name):
                     value = None
             if value:
-                if not self.instance.extra_fields:
-                    self.instance.extra_fields = {}
-                self.instance.extra_fields[key] = value
-            elif self.instance.extra_fields and key in self.instance.extra_fields:
-                del self.instance.extra_fields[key]
+                if not self.instance.dynamic_fields:
+                    self.instance.dynamic_fields = {}
+                self.instance.dynamic_fields[key] = value
+            elif self.instance.dynamic_fields and key in self.instance.dynamic_fields:
+                del self.instance.dynamic_fields[key]
         return super(ConferenceRemindersForm, self).save(commit)
 
 

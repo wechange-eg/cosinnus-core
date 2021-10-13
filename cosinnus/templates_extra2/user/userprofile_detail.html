@@ -1,0 +1,20 @@
+{% extends 'cosinnus/user/userprofile_detail.html' %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block portal_specific_userprofile_extra_fields %}
+    {% if profile.dynamic_fields.organisation %}
+        <legend>{% trans "Organization" %}</legend>
+        <p class="transparent">
+            <i class="fa fa-building"></i> 
+            {{ profile.dynamic_fields.organisation }}
+        </p>
+    {% endif %}
+    
+    {% if profile.dynamic_fields.country %}
+        <legend>{% trans "Country" %}</legend>
+        <p class="transparent">
+            <i class="fa fa-globe"></i> 
+            {{ profile.dynamic_fields.country|get_country_name }}
+        </p>
+    {% endif %}
+{% endblock %}

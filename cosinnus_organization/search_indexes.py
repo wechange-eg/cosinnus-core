@@ -1,3 +1,5 @@
+import json
+
 from django.utils.timezone import now
 from haystack import indexes
 
@@ -25,6 +27,8 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
     group_members = indexes.MultiValueField()
     groups = indexes.MultiValueField()
     always_visible = indexes.BooleanField(default=True)
+    dynamic_fields = indexes.CharField(null=True)
+    is_open_for_cooperation = indexes.BooleanField()
 
     def get_model(self):
         return CosinnusOrganization
@@ -95,6 +99,9 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
         if not hasattr(obj, '_groups'):
             obj._groups = list(obj.groups.active_groups().values_list('group_id', flat=True))
         return obj._groups
+
+    def prepare_dynamic_fields(self, obj):
+        return json.dumps(obj.dynamic_fields)
 
     def index_queryset(self, using=None):
         qs = self.get_model().objects.active()

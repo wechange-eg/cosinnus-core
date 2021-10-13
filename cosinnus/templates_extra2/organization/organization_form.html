@@ -1,0 +1,23 @@
+{% extends "cosinnus/organization/organization_form.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+{% block extra_forms %}
+{% with form.forms.obj.extra_forms.0 as form %}
+<div class="tab-pane {% if request.GET.tab == "1" %}active{% endif %}" id="1">
+    {# fundings_count field #}
+    {% trans "Has your organization been supported in this program in the past?" as fundings_count_label %}
+    {% include 'cosinnus/fields/default_field.html' with field=form.fundings_count label=fundings_count_label %}
+
+    {# Languages Field #}
+	{% trans "What languages are spoken in your organization?" as languages_label %}
+	{% trans "Select languages" as languages_placeholder %}
+	{% include 'cosinnus/fields/default_field.html' with field=form.languages label=languages_label placeholder=languages_placeholder large_field=True %}
+
+    {# Areas Field #}
+	{% trans "In which fundable areas is your organization active?" as areas_label %}
+	{% trans "Select areas" as areas_placeholder %}
+	{% include 'cosinnus/fields/default_field.html' with field=form.areas label=areas_label placeholder=areas_placeholder large_field=True %}
+
+</div>
+{% endwith %}
+{% endblock extra_forms %}

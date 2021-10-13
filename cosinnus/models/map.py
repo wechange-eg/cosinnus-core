@@ -94,6 +94,7 @@ class HaystackMapCard(BaseMapCard):
             'address': result.mt_location,
             'url': result.url,
             'iconImageUrl': result.icon_image_url,
+
         }
         fields.update(**kwargs)
         
@@ -183,6 +184,8 @@ class BaseMapResult(DictResult):
         'type': 'BaseResult',  # should be different for every class
         'liked': False,  # has the current user liked this?
         'source': None,  # source platform if external content
+        'dynamic_fields': None,
+        'is_open_for_cooperation': None,
     }
 
 
@@ -239,6 +242,8 @@ class HaystackMapResult(BaseMapResult):
             'content_count': result.content_count,
             'liked': user.id in result.liked_user_ids if (user and getattr(result, 'liked_user_ids', [])) else False,
             'source': result.source,
+            'dynamic_fields': json.loads(result.dynamic_fields or '{}'),
+            'is_open_for_cooperation': result.is_open_for_cooperation,
         }
         if settings.COSINNUS_ENABLE_SDGS:
             fields.update({

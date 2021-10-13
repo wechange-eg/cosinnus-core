@@ -72,6 +72,7 @@ module.exports = ContentControlView.extend({
             managedTagsFiltersActive: false,
             ignoreLocation: false, // if true, search ignores all geo-loc and even shows results without tagged location
             exchange: false, // if true, search includes contents from external platforms
+            matching: '', // if set, search shows contents matching group/project/organization specified
             searching: false,
             searchHadErrors: false,
             searchResultLimit: 20,
@@ -1490,6 +1491,7 @@ module.exports = ContentControlView.extend({
             q: util.ifundef(urlParams.q, this.state.q),
             ignoreLocation: util.ifundef(urlParams.ignore_location, this.state.ignoreLocation),
             exchange: util.ifundef(urlParams.exchange, this.state.exchange),
+            matching: util.ifundef(urlParams.matching, this.state.matching),
             searchResultLimit: util.ifundef(urlParams.limit, this.state.searchResultLimit),
             activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds),
             activeTextTopicIds: util.ifundef(urlParams.text_topics, this.state.activeTextTopicIds),
@@ -1661,6 +1663,11 @@ module.exports = ContentControlView.extend({
         if (this.state.exchange) {
             _.extend(searchParams, {
                 exchange: 1
+            });
+        }
+        if (this.state.matching) {
+            _.extend(searchParams, {
+                matching: this.state.matching
             });
         }
         if (forAPI) {

@@ -263,6 +263,7 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
     is_active = models.BooleanField(_('Is active'),
         help_text='If an organization is not active, it counts as non-existent for all purposes and views on the website.',
         default=True)
+    is_open_for_cooperation = models.BooleanField(_('Open for cooperation'), null=True)
     created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL,
         verbose_name=_('Creator'),
@@ -277,7 +278,7 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
                                    related_name='cosinnus_organizations', through=CosinnusOrganizationMembership)
 
     settings = JSONField(default={}, blank=True)
-    extra_fields = JSONField(default={}, blank=True)
+    dynamic_fields = JSONField(default={}, blank=True)
     objects = OrganizationManager()
 
     # this indicates that objects of this model are in some way always visible by registered users

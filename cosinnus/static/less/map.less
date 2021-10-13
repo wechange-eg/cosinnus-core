@@ -81,32 +81,62 @@
     .apply-color-people {
         color: @map-people-color;
     }
+    .apply-bg-color-people {
+        background-color: @map-people-color;
+    }
     .apply-color-events {
         color: @map-events-color;
+    }
+    .apply-bg-color-events {
+        background-color: @map-events-color;
     }
     .apply-color-projects {
         color: @map-projects-color;
     }
+    .apply-bg-color-projects {
+        background-color: @map-projects-color;
+    }
     .apply-color-conferences {
         color: @map-conferences-color;
+    }
+    .apply-bg-color-conferences {
+        background-color: @map-conferences-color;
     }
     .apply-color-groups {
         color: @map-groups-color;
     }
+    .apply-bg-color-groups {
+        background-color: @map-groups-color;
+    }
     .apply-color-ideas {
         color: @map-ideas-color;
+    }
+    .apply-bg-color-ideas {
+        background-color: @map-ideas-color;
     }
     .apply-color-organizations {
         color: @map-organizations-color;
     }
+    .apply-bg-color-organizations {
+        background-color: @map-organizations-color;
+    }
     .apply-color-cloudfiles {
         color: @map-cloud-color;
+    }
+    .apply-bg-color-cloudfiles {
+        background-color: @map-cloud-color;
     }
     .apply-color-cloud {
         color: @map-cloud-color;
     }
+    .apply-bg-color-cloud {
+        background-color: @map-cloud-color;
+    }
     .apply-color-liked {
         color: @map-liked-color;
+    }
+    .apply-bg-color-liked {
+        background-color: @map-liked-color;
     }
 
     .inline-spacer {
@@ -576,11 +606,21 @@
         font-size: 18px;
         font-weight: normal;
         margin: 10px 0 10px 0;
+        &.with-icon {
+            display: flex;
+            align-items: flex-start;
+            span {
+                flex: 1;
+            }
+            i {
+                font-size: 30px;
+            }
+        }
     }
+
     p {
         padding: 0;
     }
-    
 }
 
 /** Specific styles for detail view, see above for common tile/detail styles */
@@ -738,6 +778,17 @@
         img {
             max-width: 100%;
             max-height: 100%;
+        }
+    }
+
+    .alert {
+        border-radius: 4px;
+        i {
+            font-size: 30px;
+            color: white;
+        }
+        p {
+            color: white;
         }
     }
     

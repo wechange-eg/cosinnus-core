@@ -1,0 +1,23 @@
+{% extends "cosinnus/group/group_form.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+{% block extra_forms %}
+{% with form.forms.obj.extra_forms.0 as form %}
+<div class="tab-pane {% if request.GET.tab == "1" %}active{% endif %}" id="1">
+    {# funding_goal field #}
+    {% trans "Which of the funding objectives of civil society cooperation does your project pursue?" as funding_goal_label %}
+    {% include 'cosinnus/fields/default_field.html' with field=form.funding_goal label=funding_goal_label %}
+
+    {# Areas Field #}
+	{% trans "In which fundable areas is your project active?" as areas_label %}
+	{% trans "Select areas" as areas_placeholder %}
+	{% include 'cosinnus/fields/default_field.html' with field=form.areas label=areas_label placeholder=areas_placeholder large_field=True %}
+
+    {# has_been_funded Field #}
+    {% trans "Funding" as has_been_funded_label %}
+    {% trans "This project is or was funded by the German Foreign Office." as has_been_funded_box_label %}
+    {% include 'cosinnus/fields/checkbox_field.html' with field=form.has_been_funded label=has_been_funded_label checkbox_label=has_been_funded_box_label %}
+
+</div>
+{% endwith %}
+{% endblock extra_forms %}

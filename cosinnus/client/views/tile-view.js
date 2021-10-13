@@ -5,9 +5,13 @@ var Result = require('models/result');
 var util = require('lib/util');
 
 var tileTemplateDefault = require('tiles/grid-tile-default');
-
+var tileTemplateGroups = require('tiles/grid-tile-groups');
+var tileTemplateProjects = require('tiles/grid-tile-projects');
 if (COSINNUS_CLOUD_ENABLED) {
     var tileTemplateCloudfile = require('tiles/grid-tile-cloudfile');
+}
+if (COSINNUS_ORGANIZATIONS_ENABLED) {
+    var tileTemplateOrganizations = require('tiles/grid-tile-organizations');
 }
 
 module.exports = BaseView.extend({
@@ -43,14 +47,20 @@ module.exports = BaseView.extend({
     /** Adjust this view's template based on the result type it displays (and other states) */
     fitTemplate: function () {
         var self = this;
-        if (self.model.get('type') == 'cloudfile') {
+        if (self.model.get('type') === 'cloudfile') {
             self.template = tileTemplateCloudfile;
             self.state.isSmall = true;
             self.state.noImage = true;
-        } else if (self.model.get('type') == 'people') {
+        } else if (self.model.get('type') === 'people') {
             self.state.isSmall = true;
-        } 
-        self.state.isYou = self.model.get('type') == 'people' && cosinnus_active_user && self.model.get('slug') == cosinnus_active_user.username;
+        } else if (self.model.get('type') === 'groups') {
+            self.template = tileTemplateGroups;
+        } else if (self.model.get('type') === 'projects') {
+            self.template = tileTemplateProjects;
+        } else if (self.model.get('type') === 'organizations') {
+            self.template = tileTemplateOrganizations;
+        }
+        self.state.isYou = self.model.get('type') === 'people' && cosinnus_active_user && self.model.get('slug') === cosinnus_active_user.username;
     },
     
     /** Extend the template data by the controlView's options and state */

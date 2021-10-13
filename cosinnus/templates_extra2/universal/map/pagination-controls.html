@@ -1,0 +1,128 @@
+{% load i18n %}
+
+{% if paginationControlsEnabled and not paginationControlsUseInfiniteScroll %}
+    <div class="map-pagination-controls mobile-view mobile-view-list-visible-block">
+        <div class="line">
+            {% if page %}
+                <div class="rounded-button rounded-button-circular button-action trigger-pagination-backward {% if not page.has_previous %}disabled {% endif %}">
+                    <span class="rounded-button-inner">
+                        <i class="fa fa-fw fa-chevron-left"></i>
+                    </span>
+                </div>
+                <div class="inline-spacer">
+                    <span>
+                        {{ page.start }} - {{ page.end }}
+                    </span>
+                    {% if 1  %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans 'of' %}
+                        {{ page.total_count }}
+                    {% endif %}
+                    <span>
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans 'Results' %}
+                    </span>
+                </div>
+                <div class="inline-spacer rounded-button rounded-button-circular button-action trigger-pagination-forward {% if not page.has_next %}disabled {% endif %}">
+                    <span class="rounded-button-inner">
+                        <i class="fa fa-fw fa-chevron-right"></i>
+                    </span>
+                </div>
+            {% else %}
+                <div class="spacer"></div>
+                <i>
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans 'No results found.' %}
+                </i>
+            {% endif %}
+
+
+        {% if searchHadErrors %}
+            <div class="message-error">
+                <i class="fa fa-warning"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans 'Could not complete the search due to an error.' %}
+            </div>
+        {% endif %}
+
+        </div>
+    </div>
+{% endif %}
+
+{# scroll controls are no longer shown and always on search-when-scrolling #}
+{% if 0 and scrollControlsEnabled %}
+    <div class="map-scroll-controls mobile-hidden">
+        <table class="onoffswitch-frame">
+            <tr>
+                <td class="onoffswitch-text-label">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans 'Search when moving the map' %}
+                </td>
+                <td>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch-search-on-scroll" class="onoffswitch-checkbox toggle-search-on-scroll" id="check-search-on-scroll" {% if searchOnScroll %}checked{% endif %}>
+                        <label class="onoffswitch-label" for="check-search-on-scroll">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        {# Currently not shown. #}
+        {% if 0 and not searchOnScroll and resultsStale and not searching %}
+            <div class="rounded-button button-color-action stale-search-button">
+               <span>
+                   {# Translators: __INCLUDE_JS_PO__ #}
+                   {% trans 'Search this area' %}
+               </span>
+            </div>
+        {% endif %}
+    </div>
+{% endif %}
+
+
+<div class="map-create-idea-button-frame mobile-hidden">
+
+    {% if show_idea_button %}
+        {#
+         # This is the rounded button version
+         # <a {% if not cosinnus_active_user %}href="/signup/?acc_req_msg=1&next=/map/" class="{% else %}class="trigger-create-idea{% endif %} rounded-button rounded-button-large rounded-button-circular button-color-primary-inverted shadowed-button hidden">
+	     #     <span class="rounded-button-inner">
+	     #         <i class="fa fa-lightbulb-o"></i>+
+	     #     </span>
+	     # </a>
+	    #}
+
+
+	    <a {% if not cosinnus_active_user %}href="/signup/?acc_req_msg=1&next=/map/" class="{% else %}class="trigger-create-idea{% endif %} rounded-button button-color-ideas-inverted shadowed-button">
+	        <span class="rounded-button-inner">
+	            <i class="fa fa-lightbulb-o"></i>
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans 'Create Idea' %}
+	        </span>
+	    </a>
+    {% endif %}
+
+    {% if splitscreen and COSINNUS_SHOW_PROJECT_AND_GROUP_CREATE_BUTTONS %}
+	    <a href="{% if not cosinnus_active_user %}/signup/?acc_req_msg=1&next={% endif %}/projects/add/" class="rounded-button button-color-projects-inverted shadowed-button">
+	        <span class="rounded-button-inner">
+	            <i class="fa fa-group"></i>
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans 'Create Project' %}
+	        </span>
+	    </a>
+    {% endif %}
+
+    {% if splitscreen %}
+	    <a {% if not cosinnus_active_user %}href="/signup/?acc_req_msg=1&next=/map/" class="{% else %}class="trigger-matching{% endif %} rounded-button button-color-primary-inverted shadowed-button">
+	        <span class="rounded-button-inner">
+	            <i class="fa fa-puzzle-piece"></i>
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans 'Find partners' %}
+	        </span>
+	    </a>
+    {% endif %}
+
+</div>

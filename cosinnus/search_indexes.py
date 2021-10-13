@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
+import json
+
 from haystack import indexes
 
 from django.contrib.auth import get_user_model
@@ -40,6 +43,8 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     from_date = indexes.DateTimeField(model_attr='from_date', null=True)
     to_date = indexes.DateTimeField(model_attr='to_date', null=True)
     humanized_event_time_html = indexes.CharField(stored=True, indexed=False)
+    dynamic_fields = indexes.CharField(null=True)
+    is_open_for_cooperation = indexes.BooleanField()
     
     # for filtering on this model
     is_group_model = indexes.BooleanField(default=True)
@@ -115,7 +120,10 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
         except ImportError:
             return -1
         return event_model.get_current(obj, AnonymousUser()).count()
-    
+
+    def prepare_dynamic_fields(self, obj):
+        return json.dumps(obj.dynamic_fields)
+
     def index_queryset(self, using=None):
         qs = self.get_model().objects.all()
         qs = qs.filter(is_active=True)

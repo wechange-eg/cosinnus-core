@@ -54,7 +54,7 @@ class CosinnusOrganizationLocationInlineFormset(InlineFormSet):
 
 class _CosinnusOrganizationForm(AsssignPortalMixin, AdditionalFormsMixin, forms.ModelForm):
 
-    extra_forms_setting = 'COSINNUS_ORGANIZATION_ADDITIONAL_FORMS'
+    dynamic_forms_setting = 'COSINNUS_ORGANIZATION_ADDITIONAL_FORMS'
 
     avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 
                       disable_preview=True, validators=[validate_file_infection])

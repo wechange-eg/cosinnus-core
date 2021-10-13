@@ -33,8 +33,8 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
     """
     Send conference reminder email a week/day/hour before start
     """
-    def render_template(extra_fields, field_name, field_type, user, group):
-        template = extra_fields.get(f'reminder_{field_name}_{field_type}')
+    def render_template(dynamic_fields, field_name, field_type, user, group):
+        template = dynamic_fields.get(f'reminder_{field_name}_{field_type}')
         template = template or get_initial_template(f'{field_name}_{field_type}')
         variables = {
             'name': group['name'],
@@ -56,9 +56,9 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
             if hasattr(recipient, 'cosinnus_profile'):  # receiver can be a virtual user
                 translation.activate(getattr(recipient.cosinnus_profile, 'language', settings.LANGUAGES[0][0]))
 
-            extra_fields = group.extra_fields or {}
-            subject = render_template(extra_fields, field_name, 'subject', recipient, group)
-            content = textfield(render_template(extra_fields, field_name, 'content', recipient, group))
+            dynamic_fields = group.dynamic_fields or {}
+            subject = render_template(dynamic_fields, field_name, 'subject', recipient, group)
+            content = textfield(render_template(dynamic_fields, field_name, 'content', recipient, group))
 
             portal_url = group.portal.get_domain()
             group_icon_url = portal_url + (group.get_avatar_thumbnail_url() or get_image_url_for_icon(group.get_icon()))

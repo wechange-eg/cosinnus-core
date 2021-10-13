@@ -1,6 +1,7 @@
 {% load i18n %}
 {% import "include/macros.html" as macros %}
 
+{% if not matching %}
 <div class="map-controls mobile-view mobile-view-search-visible-block">
      <div class="map-controls-search">
          <div class="search-box">
@@ -238,4 +239,4 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
     
         
 </div>
-
+{% endif %}
