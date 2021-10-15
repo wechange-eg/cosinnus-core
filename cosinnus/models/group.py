@@ -651,7 +651,7 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
 
     def get_logo_image_url(self):
         """ Returns the portal logo static image URL """
-        return '%s%s' % (self.get_domain(), static('img/v2_navbar_brand.png'))
+        return '%s%s' % (self.get_domain(), static('img/logo-icon.png'))
 
     def __str__(self):
         return self.name

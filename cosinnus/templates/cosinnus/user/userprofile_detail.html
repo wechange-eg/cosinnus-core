@@ -17,6 +17,11 @@
         <li class="active">{% trans "Your Profile" %}</li>
 {% endblock %}
 
+{% block og_url %}{{ block.super }}{% endblock og_url %}
+{% block og_title %}{{ user.get_full_name }} - {% trans 'Profile' %} - {{ block.super }}{% endblock og_title %}
+{% block og_image %}{{ COSINNUS_CURRENT_PORTAL.get_logo_image_url }}{% endblock og_image %}
+{% block og_description %}{% if profile.description %}{{ profile.description|textfield }}{% else %}{% trans "No Description set" %}{% endif %}{% endblock %}
+
 {% block content %}
 
     {% if SETTINGS.DEBUG and not user|cosinnus_setting:"test_msg" %}
