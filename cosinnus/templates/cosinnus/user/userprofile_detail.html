@@ -18,9 +18,9 @@
 {% endblock %}
 
 {% block og_url %}{{ block.super }}{% endblock og_url %}
-{% block og_title %}{{ user.get_full_name }} - {% trans 'Profile' %} - {{ block.super }}{% endblock og_title %}
-{% block og_image %}{{ COSINNUS_CURRENT_PORTAL.get_logo_image_url }}{% endblock og_image %}
-{% block og_description %}{% if profile.description %}{{ profile.description|textfield }}{% else %}{% trans "No Description set" %}{% endif %}{% endblock %}
+{% block og_title %}{{ this_user.get_full_name }} - {% trans 'Profile' %} - {{ block.super }}{% endblock og_title %}
+{% block og_image %}{% include "cosinnus/user/user_avatar_image_url.html" with user=this_user image_size="large" alternate_url=COSINNUS_CURRENT_PORTAL.get_logo_image_url %}{% endblock og_image %}
+{% block og_description %}{% if profile.description %}{{ profile.description|textfield|safe_text|linebreaksoneline }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 {% block content %}
 

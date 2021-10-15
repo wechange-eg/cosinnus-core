@@ -3,6 +3,6 @@
 
 <meta property="og:url"           content="{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% endblock og_url %}" />
 <meta property="og:title"         content="{% block og_title %}{{ group.name }}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %} - {% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% endif %}{% endblock og_title %}" />
-<meta property="og:image"         content="{% block og_image %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{% include 'cosinnus/group/group_avatar_image_url.html' %}{% endblock og_image %}" />
+<meta property="og:image"         content="{% block og_image %}{% include 'cosinnus/group/group_avatar_image_url.html' %}{% endblock og_image %}" />
 <meta property="og:site_name"     content="{% block og_site_name %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% else %}{{ COSINNUS_CURRENT_PORTAL.name }}{% endif %}{% endblock og_site_name %}" />
-<meta property="og:description"   content="{% block og_description %}{% if group.description_long %}{{ group.description_long }}{% elif group.description %}{{ group.description }}{% else %}{% trans "No Description set" %}{% endif %}{% endblock og_description %}" />
+<meta property="og:description"   content="{% block og_description %}{% if group.description_long %}{{ group.description_long }}{% elif group.description %}{{ group.description }}{% endif %}{% endblock og_description %}" />
