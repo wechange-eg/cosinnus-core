@@ -187,12 +187,21 @@
 	    <div class="col-md-6 col-lg-4 large-space">
 			{% block middle_column %}
 		        {% include 'cosinnus/user/userprofile_detail_groups_widget.html' %}
+		        
+		        {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
+                    {% include 'cosinnus/user/userprofile_detail_projects_widget.html' %}
+                {% endif %}
 			{% endblock %}
 	    </div><!-- column -->
 	    
 	    <div class="col-md-6 col-lg-4 large-space">
 			{% block right_column %}
-                {% include 'cosinnus/user/userprofile_detail_projects_widget.html' %}
+                {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
+                    {% include 'cosinnus/user/userprofile_detail_conferences_widget.html' with conferences=conferences %}
+                {% else %}
+	                {% include 'cosinnus/user/userprofile_detail_projects_widget.html' %}
+                {% endif %}
+    
 			{% endblock %}
         </div><!-- column -->
 	
