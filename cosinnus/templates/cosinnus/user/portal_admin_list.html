@@ -54,9 +54,9 @@
 	            <div class="btn btn-emphasized w100">
 	                <ul class="media-list">
 	                    <li class="media">
-	                        <span class="pull-left" href="{% url 'cosinnus:profile-detail' username=user.username %}">
+	                        <a class="pull-left" href="{% url 'cosinnus:profile-detail' username=user.username %}">
 	                            {% include "cosinnus/user/user_avatar_image.html" with user=user %}
-	                        </span>
+	                        </a>
 	                        {% comment %}   fadedown disabled
 	                        <span class="pull-right fadedown-clickarea">
 	                            <i class="fa fa-chevron-down"></i>

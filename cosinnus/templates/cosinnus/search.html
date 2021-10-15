@@ -429,9 +429,9 @@
                 <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "exchange" %}{% if not request.GET.exchange %}&exchange=true{% endif %}">
                   <ul class="media-list">
                     <li class="media">
-                      <span class="pull-left" href="?{% strip_params request "exchange" %}{% if not request.GET.exchange %}&exchange=true{% endif %}">
+                      <a class="pull-left" href="?{% strip_params request "exchange" %}{% if not request.GET.exchange %}&exchange=true{% endif %}">
                         <i class="fa fa-{% if request.GET.exchange %}check-{% endif %}square"></i>
-                      </span>
+                      </a>
                       <div class="media-body">
                         {% trans "Include contents from other platforms" %}
                       </div>

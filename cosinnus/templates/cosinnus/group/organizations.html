@@ -292,9 +292,9 @@
 			                <div class="btn btn-emphasized w100">
 			                    <ul class="media-list">
 			                        <li class="media">
-			                            <span class="pull-left" href="{{ member|profile_url }}">
+			                            <a class="pull-left" href="{{ member|profile_url }}">
 			                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
-			                            </span>
+			                            </a>
 			                            {% if user|has_write_access:object %}
 			                            <a class="pull-right fadedown-clickarea" href="#">
 			                                <i class="fa fa-chevron-down"></i>

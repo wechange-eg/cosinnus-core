@@ -182,9 +182,9 @@
 			        	<button class="btn btn-emphasized">
 			        		<ul class="media-list">
 			        			<li class="media">
-			        				<span class="pull-left" href="{{ workshop_participants_download_page }}">
+			        				<a class="pull-left" href="{{ workshop_participants_download_page }}">
 			        					<i class="fa fa-download"></i>
-					                </span>
+					                </a>
 			        				<div class="media-body">
 			        					<a href="{{ workshop_participants_download_page }}">{% trans "Download Statistics" %}</a>
 			        				</div>
@@ -215,9 +215,9 @@
 	        		<div class="btn btn-emphasized w100">
 	            		<ul class="media-list">
 	            			<li class="media">
-	            				<span class="pull-left" href="{{ group_url }}">
+	            				<a class="pull-left" href="{{ group_url }}">
 	                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-	                        	</span>
+	                        	</a>
 	                        	<div class="media-body">
 	                        		<a href="{{ group_url }}">
 	                                {{ group.name }}
