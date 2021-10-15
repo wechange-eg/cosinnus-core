@@ -101,7 +101,8 @@ Reverted for now, interferes with some formfields
 }
 
 
-.media > a.pull-right .select2-container {
+.media > a.pull-right .select2-container,
+.media > span.pull-right .select2-container {
 	// priority selector in todos
 
 	float: right;
@@ -190,6 +191,10 @@ div[href] {
 ul.appnavi-dropdown-menu {
 	padding: 0;
 	margin-top: 5px;
+}
+
+.fadedown-clickarea {
+    cursor: pointer;
 }
 
 .btn-app-colors(@light,@normal,@dark) {
@@ -350,10 +355,12 @@ ul.appnavi-dropdown-menu {
 		margin-left: 0;
 	}
 	// And not at beginning of line
-	a.pull-right + a {
+	a.pull-right + a,
+    span.pull-right + span {
 		margin-left: 0;
 	}
-	a.pull-right + a.pull-right {
+	a.pull-right + a.pull-right,
+	span.pull-right + span.pull-right {
 		margin-right: 7px;
 	}
 
@@ -485,7 +492,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 		width: 100%;
 		> li.media {
 			background-color: transparent;
-			> a.pull-right {
+			> a.pull-right,
+			> span.pull-right {
 				background-color: transparent;
 			}
 			> div.media-body {
@@ -523,13 +531,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	float: none;
 	margin:0;
 
-	.media > a.pull-left:first-child:empty {
+	.media > a.pull-left:first-child:empty,
+	.media > span.pull-left:first-child:empty {
 		width: 10px;
 	}
-	.media > a.pull-left:not(:first-child) {
+	.media > a.pull-left:not(:first-child),
+	.media > span.pull-left:not(:first-child) {
 		background-color: transparent;
 	}
-	.media > a.pull-left, .media > a.pull-right {
+	.media > a.pull-left, .media > a.pull-right,
+	.media > span.pull-left, .media > span.pull-right {
 		height: 50px;
 		width: 50px;
 		font-size: 28px;
