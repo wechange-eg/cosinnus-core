@@ -37,9 +37,9 @@
 <button class="pull-right btn btn-emphasized btn-autosize" {% if SETTINGS.COSINNUS_SHOW_WELCOME_SETTINGS_PAGE %}href="{% url 'cosinnus:welcome-settings' %}" {% else %}href="{% url 'cosinnus:user-dashboard' %}" {% endif %}>
     <ul class="media-list">
         <li class="media">
-            <a class="pull-left" href="#">
+            <span class="pull-left">
                 <i class="fa fa-check"></i>
-            </a>
+            </span>
             <div class="media-body">
                 {% trans 'OK' %}
             </div>

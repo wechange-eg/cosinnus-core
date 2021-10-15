@@ -37,9 +37,9 @@
 		                            <span class="pull-left" href="{{ member_dict.member|profile_url }}">
 		                                {% include "cosinnus/user/user_avatar_image.html" with user=member_dict.member %}
 		                            </span>
-		                            <a class="pull-right fadedown-clickarea" href="#">
+		                            <span class="pull-right fadedown-clickarea">
 			                            <i class="fa fa-chevron-down"></i>
-			                        </a>
+			                        </span>
 		                            <div class="media-body">
 		                                <span class="annotation mobile-hidden">
 		                                	{% if member_dict.member.last_login %}
@@ -91,9 +91,9 @@
 		                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_deactivate_id}}">
 		                        <ul class="media-list">
 		                            <li class="media">
-		                            	<a class="pull-left" href="#">
+		                            	<span class="pull-left">
 				                                <i class="fas fa-minus-circle"></i>
-				                            </a>
+				                            </span>
 		                                <div class="media-body">
 		                                    {% trans "deactivate member" %}
 		                                </div>
@@ -106,9 +106,9 @@
 		                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_activate_id}}">
 		                        <ul class="media-list">
 		                            <li class="media">
-		                            	<a class="pull-left" href="#">
+		                            	<span class="pull-left">
 				                                <i class="fas fa-check-circle"></i>
-				                            </a>
+				                            </span>
 		                                <div class="media-body">
 		                                    {% trans "activate member" %}
 		                                </div>
@@ -121,9 +121,9 @@
 		                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_remove_id}}">
 		                        <ul class="media-list">
 		                            <li class="media">
-		                            	<a class="pull-left" href="#">
+		                            	<span class="pull-left">
 				                                <i class="fas fa-user-slash"></i>
-				                            </a>
+				                            </span>
 		                                <div class="media-body">
 		                                    {% trans "remove user" %}
 		                                </div>
@@ -159,13 +159,13 @@
 					        <button type="submit" class="btn btn-emphasized btn-autosize" name="{% if group.conference_is_running %}finishConferenence{% else %}startConferenence{% endif%}">
 					            <ul class="media-list">
 					                <li class="media">
-					                    <a class="pull-left" href="#">
+					                    <span class="pull-left">
 					                    	{% if group.conference_is_running %}
 					                    	<i class="far fa-stop-circle"></i>
 					                    	{% else %}
 					                        <i class="far fa-play-circle"></i>
 					                        {% endif %}
-					                    </a>
+					                    </span>
 					                    <div class="media-body">
 					                    	{% if group.conference_is_running %}
 					                        {% trans "Finish conference and deactivate user accounts" %}
@@ -182,9 +182,9 @@
 			        	<button class="btn btn-emphasized">
 			        		<ul class="media-list">
 			        			<li class="media">
-			        				<a class="pull-left" href="{{ workshop_participants_download_page }}">
+			        				<span class="pull-left" href="{{ workshop_participants_download_page }}">
 			        					<i class="fa fa-download"></i>
-					                </a>
+					                </span>
 			        				<div class="media-body">
 			        					<a href="{{ workshop_participants_download_page }}">{% trans "Download Statistics" %}</a>
 			        				</div>
@@ -215,9 +215,9 @@
 	        		<div class="btn btn-emphasized w100">
 	            		<ul class="media-list">
 	            			<li class="media">
-	            				<a class="pull-left" href="{{ group_url }}">
+	            				<span class="pull-left" href="{{ group_url }}">
 	                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-	                        	</a>
+	                        	</span>
 	                        	<div class="media-body">
 	                        		<a href="{{ group_url }}">
 	                                {{ group.name }}

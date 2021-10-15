@@ -12,9 +12,9 @@
                     <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}join/?direct=1" style="width: 100% !important;" type="button" class="btn btn-emphasized">
                         <ul class="media-list">
                             <li class="media">
-                                <a class="pull-left" href="#">
+                                <span class="pull-left">
                                     <i class="fa fa-user-plus"></i>
-                                </a>
+                                </span>
                                 <div class="media-body">
                                     {% trans "Register and join!" %}
                                 </div>
@@ -30,9 +30,9 @@
                 <button href="{% url 'cosinnus:user-add' %}?next={% if request.GET.next %}{{ request.GET.next }}{% else %}{{ group.get_absolute_url }}{% endif %}" type="button" class="btn btn-emphasized">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="#">
+                            <span class="pull-left">
                                 <i class="fa fa-user-plus"></i>
-                            </a>
+                            </span>
                             <div class="media-body">
                                     {% trans "Register" %}
                             </div>
@@ -42,9 +42,9 @@
                 <button href="{% url 'login' %}?next={% if request.GET.next %}{{ request.GET.next }}{% else %}{{ group.get_absolute_url }}{% endif %}" type="button" class="btn btn-emphasized">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="#">
+                            <span class="pull-left">
                                 <i class="fa fa-sign-in"></i>
-                            </a>
+                            </span>
                             <div class="media-body">
                                 {% trans "Log in" %}
                             </div>
@@ -61,9 +61,9 @@
         <button href="{{ group.get_absolute_url }}" type="button" class="btn btn-emphasized btn-autosize">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left" href="#">
+                    <span class="pull-left">
                         <i class="fa fa-sign-in"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                         {% if group.type == 0 %}
                             {% trans "View Project" %}
@@ -80,9 +80,9 @@
         <button type="button" class="btn btn-default btn-autosize" data-toggle="modal" data-target="#join_withdraw_modal">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left" href="#">
+                    <span class="pull-left">
                         <i class="fa fa-sign-out"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                         {% trans "Withdraw" %}</span>
                     </div>
@@ -100,9 +100,9 @@
         <button type="button" class="btn btn-emphasized btn-autosize" onclick="$('#accept-group-invitation-form').submit();">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left" href="#">
+                    <span class="pull-left">
                         <i class="fa fa-sign-in"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                         {% trans "Accept Invitation" %}
                     </div>
@@ -114,9 +114,9 @@
         <button type="button" class="btn btn-default btn-autosize" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left" href="#">
+                    <span class="pull-left">
                         <i class="fa fa-close"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                         {% trans "Decline Invitation" %}</span>
                     </div>
@@ -149,9 +149,9 @@
         <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#join_withdraw_modal">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left" href="#">
+                    <span class="pull-left">
                         <i class="fa fa-sign-in"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                         {% if group.is_autojoin_group %}
 	                        {% trans "Join now!" %}
@@ -180,9 +180,9 @@
         <button href="{{ group.get_absolute_url }}?browse=true" type="button" class="btn btn-emphasized btn-autosize">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left" href="#">
+                    <span class="pull-left">
                         <i class="fa fa-sign-in"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                         {% trans "Browse" %}
                     </div>

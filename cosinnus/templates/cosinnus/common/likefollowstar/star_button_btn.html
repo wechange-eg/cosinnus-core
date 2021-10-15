@@ -9,9 +9,9 @@
         {% if not user|can_likefollowstar:object %}href="{% url 'login' %}?next={{ object.get_absolute_follow_url|urlencode }}"{% endif %}>
     <ul class="show-unselected media-list">
         <li class="media">
-            <a class="pull-left" href="#">
+            <span class="pull-left">
                 <i class="far fa-star prevent-click"></i>
-            </a>
+            </span>
             <div class="media-body">
                 {% get_setting "COSINNUS_STARRED_STAR_LABEL" %}
             </div>
@@ -19,9 +19,9 @@
     </ul>
     <ul class="show-selected media-list">
         <li class="media">
-            <a class="pull-left" href="#">
+            <span class="pull-left">
                 <i class="fas fa-star prevent-click"></i>
-            </a>
+            </span>
             <div class="media-body">
                 {% get_setting "COSINNUS_STARRED_STARRING_LABEL" %}
             </div>

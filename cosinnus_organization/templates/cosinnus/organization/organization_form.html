@@ -26,9 +26,9 @@
         <div type="button" class="btn w100 btn-default" data-toggle="modal" data-target="#deleteModal">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left" href="#">
+                    <span class="pull-left">
                         <i class="fa fa-eraser"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                         {% trans "Delete this Organization" %}
                     </div>
@@ -184,9 +184,9 @@
 	    <button type="submit" class="btn btn-emphasized">
 	        <ul class="media-list">
 	            <li class="media">
-	                <a class="pull-left" href="#">
+	                <span class="pull-left">
 	                    <i class="fa fa-check"></i>
-	                </a>
+	                </span>
 	                <div class="media-body" id="submit">
                         {% if not request.GET.tab %}{% trans "Continue" %}{% else %}{% trans "Save" %}{% endif %}
 	                </div>
