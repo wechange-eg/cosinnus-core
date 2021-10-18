@@ -28,8 +28,10 @@
                 class="calendar-date-time-chooser-date" />
             <input class="calendar-date-time-chooser-hiddendate" id="id_{{ from_date_field.html_name }}_0" name="{{ from_date_field.html_name }}_0" 
                 placeholder="{% trans "Start date." %}" type="hidden" 
-                {% if from_date_field.value %}
+                {% if from_date_field.value and from_date_field.value|date:"Y-m-d" %}
                     value="{{ from_date_field.value|date:"Y-m-d" }}" 
+                {% elif from_date_field.value and from_date_field.value|length == 2 %}
+                    value="{{ from_date_field.value.0 }}"
                 {% elif form_view == "add" and request.GET.start %}
                     value="{{ request.GET.start }}" 
                 {% elif not date_nullable %}
@@ -38,13 +40,15 @@
             >
             <input class="calendar-date-time-chooser-time" id="id_{{ from_date_field.html_name }}_1" name="{{ from_date_field.html_name }}_1" 
                 placeholder="00:00" type="text"
-                {% if from_date_field.value %}
+                {% if from_date_field.value and from_date_field.value|date:'H:i' %}
                     value="{{ from_date_field.value|date:'H:i' }}"
+                {% elif from_date_field.value and to_date_field.value|length == 2 %}
+                    value="{{ from_date_field.value.1 }}"
                 {% elif form_view == "add" and request.GET.starttime %}
                     value="{{ request.GET.starttime }}"
                 {% endif %}
             >
-            <div class="small-calendar" data-initial-date="{% if from_date_field.value %} {{ from_date_field.value|date:'Y-m-d' }} {% elif form_view == 'add' and request.GET.start %} {{ request.GET.start }} {% else %} {% now 'Y-m-d' %} {% endif %}"></div>
+            <div class="small-calendar" data-initial-date="{% if from_date_field.value and from_date_field.value|date:'Y-m-d' %}{{ from_date_field.value|date:'Y-m-d' }}{% elif from_date_field.value and from_date_field.value|length == 2 %}{{ from_date_field.value.0 }}{% elif form_view == 'add' and request.GET.start %} {{ request.GET.start }} {% else %} {% now 'Y-m-d' %} {% endif %}"></div>
         </li>
         <li class="calendar-date-time-chooser">
             {% trans "Until" %} <i class="fa fa-calendar"></i>
@@ -54,8 +58,10 @@
                 class="calendar-date-time-chooser-date" />
             <input class="calendar-date-time-chooser-hiddendate" id="id_{{ to_field.html_name }}_0" name="{{ to_date_field.html_name }}_0"
                 placeholder="{% trans "End date." %}" type="hidden" 
-                {% if to_date_field.value %}
-                  value="{{ to_date_field.value|date:"Y-m-d" }}" 
+                {% if to_date_field.value and to_date_field.value|date:"Y-m-d" %}
+                    value="{{ to_date_field.value|date:"Y-m-d" }}" 
+                {% elif to_date_field.value and to_date_field.value|length == 2 %}
+                    value="{{ to_date_field.value.0 }}"
                 {% elif form_view == "add" and request.GET.end %}
                    value="{{ request.GET.end }}" 
                 {% elif not date_nullable %}
@@ -64,13 +70,15 @@
             >
             <input class="calendar-date-time-chooser-time" id="id_{{ to_date_field.html_name }}_1" name="{{ to_date_field.html_name }}_1"
                 placeholder="23:59" type="text" 
-                {% if to_date_field.value %}
+                {% if to_date_field.value and to_date_field.value|date:'H:i' %}
                     value="{{ to_date_field.value|date:'H:i' }}"
+                {% elif to_date_field.value and to_date_field.value|length == 2 %}
+                    value="{{ to_date_field.value.1 }}"
                 {% elif form_view == "add" and request.GET.endtime %}
-                value="{{ request.GET.endtime  }}"
+                    value="{{ request.GET.endtime  }}"
                 {% endif %}
             >    
-            <div class="small-calendar" data-initial-date="{% if from_date_field.value %} {{ from_date_field.value|date:'Y-m-d' }} {% elif form_view == 'add' and request.GET.start %} {{ request.GET.start }} {% else %} {% now 'Y-m-d' %} {% endif %}"></div>
+            <div class="small-calendar" data-initial-date="{% if to_date_field.value and to_date_field.value|date:'Y-m-d' %}{{ to_date_field.value|date:'Y-m-d' }}{% elif to_date_field.value and to_date_field.value|length == 2 %}{{ to_date_field.value.0 }}{% elif form_view == 'add' and request.GET.start %} {{ request.GET.start }} {% else %} {% now 'Y-m-d' %} {% endif %}"></div>
         </li>
         
 	    {% if date_nullable %}
