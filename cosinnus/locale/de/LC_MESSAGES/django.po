@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 19:02+0200\n"
+"POT-Creation-Date: 2021-10-18 15:48+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -5978,6 +5978,9 @@ msgstr "Falls du noch Inhalte von dir löschen möchtest, tue dies bitte jetzt i
 msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
 msgstr "Dein Profil wird zuerst deaktiviert und komplett von der Plattform entfernt. Nach 30 Tagen und erst dann wird es endgültig aus unserer Datenbank gelöscht. In unseren Backup-Systemen ist der Account unter Umständen noch bis zu 6 Monate gespeichert. Falls Dir das zu lang ist wende Dich bitte an den Support dieser Plattform zur sofortigen Löschung."
 
+msgid "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account."
+msgstr "Während dieser 30-tägigen Frist ist die E-Mail-Adresse deines Kontos reserviert und kann nicht für die Registrierung eines neuen Kontos verwendet werden."
+
 #
 msgid "Delete Account"
 msgstr "Konto löschen"
@@ -5993,6 +5996,9 @@ msgstr "Benutzer_innen-Konto löschen"
 msgid "User profile: %(username)s"
 msgstr "Benutzer_innen-Profil: %(username)s"
 
+msgid "Profile"
+msgstr "Mein Profil"
+
 msgid "Cooperation requests"
 msgstr "Kooperationsanfragen"
 
@@ -6004,6 +6010,9 @@ msgstr "Ich möchte KEINE Anfragen für potentielle Zusammenarbeit erhalten!"
 
 msgid "My Website"
 msgstr "Meine Webseite"
+
+msgid "ended"
+msgstr "beendet"
 
 msgid "Edit Your Profile"
 msgstr "Profil bearbeiten"
@@ -6497,9 +6506,6 @@ msgstr "Startseite"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
-
-msgid "Profile"
-msgstr "Mein Profil"
 
 msgid "Change language"
 msgstr "Sprache ändern"

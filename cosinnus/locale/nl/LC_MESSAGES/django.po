@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 19:02+0200\n"
+"POT-Creation-Date: 2021-10-18 15:48+0200\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6155,6 +6155,9 @@ msgstr ""
 msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
 msgstr ""
 
+msgid "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account."
+msgstr ""
+
 msgid "Delete Account"
 msgstr "Account verwijderen"
 
@@ -6168,6 +6171,10 @@ msgstr "Gebruikersaccount verwijderen"
 msgid "User profile: %(username)s"
 msgstr "Gebruikersprofiel: %(username)s"
 
+#, fuzzy
+msgid "Profile"
+msgstr "Mijn profiel"
+
 msgid "Cooperation requests"
 msgstr "Samenwerkingsverzoeken"
 
@@ -6179,6 +6186,11 @@ msgstr "Ik wens NIET gecontacteerd te worden voor mogelijke samenwerking!"
 
 msgid "My Website"
 msgstr "Mijn website"
+
+#, fuzzy
+#| msgid "Gesendet"
+msgid "ended"
+msgstr "Verzonden"
 
 msgid "Edit Your Profile"
 msgstr "Je profiel bewerken"
@@ -6677,10 +6689,6 @@ msgstr "Home"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
-
-#, fuzzy
-msgid "Profile"
-msgstr "Mijn profiel"
 
 msgid "Change language"
 msgstr "Taal wijzigen"

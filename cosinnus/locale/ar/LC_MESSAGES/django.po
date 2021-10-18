@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 19:02+0200\n"
+"POT-Creation-Date: 2021-10-18 15:48+0200\n"
 "PO-Revision-Date: 2021-09-29 12:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -6380,6 +6380,9 @@ msgstr ""
 msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
 msgstr ""
 
+msgid "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account."
+msgstr ""
+
 msgid "Delete Account"
 msgstr "حذف الحساب"
 
@@ -6393,6 +6396,11 @@ msgstr "حذف حساب المستخدم"
 msgid "User profile: %(username)s"
 msgstr "ملف شخصي للمستخدم: %(username)s"
 
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "ملفي الشخصي"
+
 msgid "Cooperation requests"
 msgstr "طلبات التعاونر"
 
@@ -6404,6 +6412,11 @@ msgstr "لا أرغب في أن يتم الاتصال بي من أجل التع�
 
 msgid "My Website"
 msgstr "الموقع الإلكتروني الخاص بي"
+
+#, fuzzy
+#| msgid "Gesendet"
+msgid "ended"
+msgstr "أرسلت"
 
 msgid "Edit Your Profile"
 msgstr "تعديل ملفك الشخصي"
@@ -6912,11 +6925,6 @@ msgstr "الصفحة الرئيسية"
 
 msgid "Rocket.Chat"
 msgstr "دردشة.Rocket"
-
-#, fuzzy
-#| msgid "My Profile"
-msgid "Profile"
-msgstr "ملفي الشخصي"
 
 msgid "Change language"
 msgstr "تغيير اللغة"

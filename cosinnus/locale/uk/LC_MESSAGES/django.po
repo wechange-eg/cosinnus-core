@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 19:02+0200\n"
+"POT-Creation-Date: 2021-10-18 15:48+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -5976,6 +5976,9 @@ msgstr "Якщо ви все ще хочете видалити контент, 
 msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
 msgstr "Спочатку ваш профіль буде деактивовано та повністю видалено з платформи. Лише через 30 днів він буде назавжди видалений з нашої бази даних. У наших системах резервного копіювання обліковий запис може зберігатися до 6 місяців. Якщо це занадто довго для вас, зверніться до служби підтримки цієї платформи для негайного видалення."
 
+msgid "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account."
+msgstr ""
+
 msgid "Delete Account"
 msgstr "Видалити обліковий запис"
 
@@ -5989,6 +5992,11 @@ msgstr "Видалити обліковий запис користувача"
 msgid "User profile: %(username)s"
 msgstr "Профіль користувача(-ки): %(username)s"
 
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "Мій профіль"
+
 msgid "Cooperation requests"
 msgstr "Запрошення до співпраці"
 
@@ -6000,6 +6008,11 @@ msgstr "Я НЕ хочу, щоб зі мною зв’язувалися щод�
 
 msgid "My Website"
 msgstr "Мій Вебсайт"
+
+#, fuzzy
+#| msgid "Gesendet"
+msgid "ended"
+msgstr "Надіслані"
 
 msgid "Edit Your Profile"
 msgstr "Редагувати Ваш Профіль"
@@ -6489,11 +6502,6 @@ msgstr "Домашня сторінка"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
-
-#, fuzzy
-#| msgid "My Profile"
-msgid "Profile"
-msgstr "Мій профіль"
 
 msgid "Change language"
 msgstr "Змінити мову"
