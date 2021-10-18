@@ -3338,7 +3338,7 @@ msgid "Enter your choices"
 msgstr "Gib deine Auswahlmöglichkeiten ein"
 
 msgid "Please verify your email address to continue using your account."
-msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s."
+msgstr "Bitte bestätige deine E-Mail-Adresse, um dein Konto weiter zu benutzen."
 
 msgid "You should already have received an email with a verification link we sent to your account's email address:"
 msgstr "Du solltest bereits eine E-Mail mit dem Verifizierungslink erhalten haben, die wir an die E-Mail-Adresse deines Benutzerkontos geschickt haben:"
@@ -6917,7 +6917,7 @@ msgid "Only conference members can see the content you requested. Apply to becom
 msgstr "Nur Mitglieder dieser Tagung können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
 msgid "Please verify your email address."
-msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s."
+msgstr "Bitte bestätige deine E-Mail-Adresse."
 
 #, python-format
 msgid "Please verify your email address by %(date_string)s."
