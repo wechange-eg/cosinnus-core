@@ -384,7 +384,12 @@ class BBBRoom(models.Model):
         """ Returns the actual BBB-Server URL with tokens for a given user
             to join this room """
         password = self.get_password_for_user(user)
-        username = full_name(user)
+        display_name_func = settings.COSINNUS_CONFERENCES_USER_DISPLAY_NAME_FUNC
+        if display_name_func is not None and callable(display_name_func):
+            username = display_name_func(user)
+        else:
+            username = full_name(user)
+        
         if self.meeting_id and password:
             extra_join_parameters = self.build_extra_join_parameters(user)
             return self.bbb_api.join_url(self.meeting_id, username, password, extra_parameter_dict=extra_join_parameters)
