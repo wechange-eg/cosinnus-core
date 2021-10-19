@@ -321,7 +321,7 @@ class BBBRoom(models.Model):
             options = {}
 
         # default BBBRoom settings with given options
-        default_options = settings.BBB_ROOM_DEFAULT_SETTINGS
+        default_options = settings.BBB_DEFAULT_CREATE_PARAMETERS
         default_options.update(options)
         
         # monkeypatch for BBB appearently allowing one less persons to enter a room
@@ -371,7 +371,7 @@ class BBBRoom(models.Model):
             link for the user, from the default room parameters and the
             given room type's extra parameters """
         params = {}
-        params.update(settings.BBB_DEFAULT_EXTRA_JOIN_PARAMETER)
+        params.update(settings.BBB_DEFAULT_JOIN_PARAMETERS)
         params.update(settings.BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS.get(self.room_type))
         if user.cosinnus_profile.avatar:
             domain = CosinnusPortal.get_current().get_domain()

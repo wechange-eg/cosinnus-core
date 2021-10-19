@@ -91,7 +91,7 @@ class BBBRoomTest(TestCase):
             options=room_options
         )
 
-        expected_options = settings.BBB_ROOM_DEFAULT_SETTINGS
+        expected_options = settings.BBB_DEFAULT_CREATE_PARAMETERS
         expected_options.update(room_options)
 
         self.assertEqual(room.name, "OptionTest")

@@ -1126,23 +1126,24 @@ class CosinnusDefaultSettings(AppConf):
     BBB_API_URL = None
     BBB_HASH_ALGORITHM = "SHA1"
 
-    BBB_ROOM_DEFAULT_SETTINGS = {
-        "record": False,
-        "autoStartRecording": False,
-        "allowStartStopRecording": True
-    }
     # cache timeout for retrieval of participants
     BBB_ROOM_PARTICIPANTS_CACHE_TIMEOUT_SECONDS = 20
     # should we monkeypatch for BBB appearently allowing one less persons to enter a room
     # than provided in max_participants during room creation
     BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = False
-
-    # the default parameters added to every BBB room join
-    # see https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
-    BBB_DEFAULT_EXTRA_JOIN_PARAMETER = {
-        'userdata-bbb_mirror_own_webcam': 'true',
-
+    
+    # the default BBB create-call parameters for all room types
+    BBB_DEFAULT_CREATE_PARAMETERS = {
+        "record": False,
+        "autoStartRecording": False,
+        "allowStartStopRecording": True
     }
+    # the default BBB join-call parameters for all room types
+    # see https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
+    BBB_DEFAULT_JOIN_PARAMETERS = {
+        'userdata-bbb_mirror_own_webcam': 'true',
+    }
+    
     BBB_ROOM_TYPE_DEFAULT = 0
     BBB_ROOM_TYPE_CHOICES = (
         (0, _('General')),
@@ -1150,7 +1151,22 @@ class CosinnusDefaultSettings(AppConf):
         (2, _('Restricted')),
         (3, _('Premium')),
     )
-    # a map for variable room types
+    # a map for the JSON keys possible to prepend before 
+    # a JSON-setting key for BBB calls, e.g. "coffee__create",
+    # mapping to bbb room-types defined in `BBB_ROOM_TYPE_CHOICES`
+    BBB_ROOM_TYPE_JSON_PREFIXES = {
+        'coffee': 1,
+    }
+    # a map for the portal defaults for BBB create-call parameters that will be added to specific BBB room-types 
+    # (defined in `BBB_ROOM_TYPE_CHOICES`)
+    BBB_ROOM_TYPE_EXTRA_CREATE_PARAMETERS = {
+        0: {},
+        1: {},
+        2: {},
+        3: {},
+    }
+    # a map for the portal defaults for BBB join-call parameters that will be added to specific BBB room-types 
+    # (defined in `BBB_ROOM_TYPE_CHOICES`)
     BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS = {
         0: {},
         1: {
