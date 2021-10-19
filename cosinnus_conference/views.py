@@ -11,6 +11,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import redirect, get_object_or_404
+from django.utils.text import slugify
 from django.utils.crypto import get_random_string
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
@@ -212,6 +213,7 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
         username = self.get_unique_workshop_name(data[0])
         first_name = data[1]
         last_name = data[2]
+        portal_name = slugify(settings.COSINNUS_PORTAL_NAME)
 
         try:
             name_string = '"{}":"{}"'.format(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME, username)
@@ -223,7 +225,7 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
             self.create_or_update_memberships(user)
             return data + [user.email, '']
         except ObjectDoesNotExist:
-            random_email = '{}@wechange.de'.format(get_random_string())
+            random_email = '{}@{}.de'.format(get_random_string(), portal_name)
             user = create_base_user(random_email, first_name=first_name, last_name=last_name, no_generated_password=True)
 
             if user:
@@ -238,7 +240,7 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
                         self.request), message=None, priority=True)
                 profile.save()
 
-                unique_email = 'User{}.C{}@wechange.de'.format(str(user.id), str(self.group.id))
+                unique_email = 'User{}.C{}@{}.de'.format(str(user.id), str(self.group.id), portal_name)
                 user.email = unique_email
                 user.is_active = False
                 user.save()
