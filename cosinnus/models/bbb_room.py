@@ -24,6 +24,8 @@ from django.utils.timezone import now
 from django.http.response import HttpResponseForbidden
 from django.utils.crypto import get_random_string
 from cosinnus.models.group import CosinnusPortal
+from django.core.exceptions import ImproperlyConfigured
+from pip._internal.cli.cmdoptions import editable
 
 
 # from cosinnus.models import MEMBERSHIP_ADMIN
@@ -88,10 +90,6 @@ class BBBRoom(models.Model):
                                           help_text=_("the password set to enter the room as a moderator"))
     attendee_password = models.CharField(max_length=30, default='', null=True, blank=True,
                                          help_text=_("the password set to enter the room as a attendee"))
-    welcome_message = models.CharField(max_length=300, null=True, blank=True, verbose_name=_("the rooms welcome message"),
-                                       help_text=_("the welcome message, that is displayed to attendees"))
-    max_participants = models.PositiveIntegerField(blank=True, null=True, default=None, verbose_name="maximum number of users",
-                                                   help_text="Maximum number in the conference at the same time. NOTE: Seems this needs to be +1 more the number that you actually want for BBB to allow!")
     dial_number = models.CharField(blank=True, null=True, default="", max_length=20,
                                    help_text=_("number for dialing into the conference via telephone"),
                                    verbose_name="telephone dial in number")
@@ -101,13 +99,27 @@ class BBBRoom(models.Model):
     internal_meeting_id = models.CharField(max_length=100, blank=True, null=True)
     parent_meeting_id = models.CharField(max_length=100, blank=True, null=True)
     ended = models.BooleanField(default=False)
-    options = JSONField(blank=True, null=True, default=dict, verbose_name="room options",
-                        help_text=_("options for the room, that are represented in the bigbluebutton API"))
     
+    
+    # deprecated in favor of deriving create options directly from the source event!
+    options = JSONField(blank=True, null=True, default=dict, verbose_name="room options",
+                        editable=False,
+                        help_text=_("DEPRECATED! options for the room, that are represented in the bigbluebutton API"))
+    # deprecated in favor of deriving create options directly from the source event!
+    welcome_message = models.CharField(max_length=300, null=True, blank=True, verbose_name=_("the rooms welcome message"),
+                                       editable=False,
+                                       help_text=_("DEPRECATED! the welcome message, that is displayed to attendees"))
+    # deprecated in favor of deriving create options directly from the source event!
     # type of the room. this determines which extra join call parameters are given
     # along for the user join link. see `settings.BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS`
     room_type = models.PositiveSmallIntegerField(_('Room Type'), blank=False,
-        default=settings.BBB_ROOM_TYPE_DEFAULT, choices=settings.BBB_ROOM_TYPE_CHOICES)
+        editable=False,
+        default=settings.BBB_ROOM_TYPE_DEFAULT, choices=settings.BBB_ROOM_TYPE_CHOICES,
+        help_text="DEPRECATED!")
+    # deprecated in favor of deriving create options directly from the source event!
+    max_participants = models.PositiveIntegerField(blank=True, null=True, default=None, verbose_name="maximum number of users",
+                                                   editable=False,
+                                                   help_text="Maximum number in the conference at the same time. NOTE: Seems this needs to be +1 more the number that you actually want for BBB to allow!")
     
     
     objects = models.Manager()
@@ -117,6 +129,9 @@ class BBBRoom(models.Model):
     
     # the BigBlueButtonAPI instance for this room
     _bbb_api = None
+    
+    # the cached source ConferenceEvent instance for this room
+    _event = '__unset__'
 
     def __str__(self):
         return str(self.meeting_id)
@@ -226,22 +241,22 @@ class BBBRoom(models.Model):
     @property
     def event(self):
         """ Tries to get a conference event for this bbb room, or returns None else """
-        from cosinnus_event.models import ConferenceEvent # noqa
-        media_tag = self.tagged_objects.first()
-        event = get_object_or_None(ConferenceEvent, media_tag=media_tag)
-        return event
+        if self._event == '__unset__':
+            from cosinnus_event.models import ConferenceEvent # noqa
+            media_tag = self.tagged_objects.first()
+            # TODO: if other event types can carry BBBRooms, replace the `ConferenceEvent` here!
+            self._event = get_object_or_None(ConferenceEvent, media_tag=media_tag)
+        return self._event
 
     def restart(self):
         event = self.event
         m_xml = self.bbb_api.start(
             name=self.name,
             meeting_id=self.meeting_id,
-            welcome=self.welcome_message,
             attendee_password=self.attendee_password,
             moderator_password=self.moderator_password,
             voice_bridge=self.voice_bridge,
-            max_participants=self.max_participants,
-            options=self.options,
+            options=self.build_extra_create_parameters(),
             presentation_url=event.presentation_file.url if event and event.presentation_file else None,
         )
 
@@ -257,9 +272,9 @@ class BBBRoom(models.Model):
         return None
 
     @classmethod
-    def create(cls, name, meeting_id, meeting_welcome=None, attendee_password=None,
-               moderator_password=None, max_participants=None, voice_bridge=None, options=None,
-               room_type=None, presentation_url=None, source_object=None):
+    def create(cls, name, meeting_id, attendee_password=None,
+               moderator_password=None, voice_bridge=None,
+               presentation_url=None, source_object=None):
         """ Creates a new BBBRoom and crete a room on the remote bbb-server.
 
         :param name: Name of the BBBRoom
@@ -277,17 +292,8 @@ class BBBRoom(models.Model):
         :param moderator_password: Password for joining the meeting with moderator rights
         :type: str
 
-        :param max_participants: Maximum number of participants moderator + attendees allowed at the same time
-        :type: int
-
         :param voice_bridge: Dial in PIN for joining the meeting via telephone call
         :type: int range(10000 - 99999)
-
-        :param options: Options for the BBBRoom according to the BBB API.
-                         See https://docs.bigbluebutton.org/dev/api.html#create
-        
-        :param room_type: The type of the rooms, as choice of `settings.BBB_ROOM_TYPE_CHOICES` 
-                or None for `BBB_ROOM_TYPE_DEFAULT`
 
         :param presentation_url: Publicly available URL of presentation file to be pre-uploaded as slides to BBB room
         :type: str
@@ -315,29 +321,14 @@ class BBBRoom(models.Model):
         if moderator_password is None:
             moderator_password = bbb_utils.random_password()
 
-        if options and type(options) is not dict:
-            raise ValueError("Options parameter should be from type dict!")
-        else:
-            options = {}
-
-        # default BBBRoom settings with given options
-        default_options = settings.BBB_DEFAULT_CREATE_PARAMETERS
-        default_options.update(options)
-        
-        # monkeypatch for BBB appearently allowing one less persons to enter a room
-        if max_participants is not None and settings.BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE:
-            max_participants += 1
-        
         bbb_api = BigBlueButtonAPI(source_object=source_object)
         m_xml = bbb_api.start(
             name=name,
             meeting_id=meeting_id,
-            welcome=meeting_welcome,
             attendee_password=attendee_password,
             moderator_password=moderator_password,
-            max_participants=max_participants,
             voice_bridge=voice_bridge,
-            options=default_options,
+            options=cls.build_extra_create_parameters_for_object(source_object),
             presentation_url=presentation_url,
         )
 
@@ -346,7 +337,6 @@ class BBBRoom(models.Model):
         # Now create a model for it.
         meeting, created = BBBRoom.objects.get_or_create(meeting_id=meeting_id, portal=current_portal)
         meeting.name = name
-        meeting.welcome_message = meeting_welcome
         meeting.meeting_id = meeting_json['meetingID']
         meeting.attendee_password = meeting_json['attendeePW']
         meeting.moderator_password = meeting_json['moderatorPW']
@@ -354,9 +344,6 @@ class BBBRoom(models.Model):
         meeting.parent_meeting_id = meeting_json['parentMeetingID']
         meeting.voice_bridge = meeting_json['voiceBridge']
         meeting.dial_number = meeting_json['dialNumber']
-        meeting.max_participants = max_participants
-        meeting.options = default_options
-        meeting.room_type = room_type if room_type is not None else settings.BBB_ROOM_TYPE_DEFAULT
 
         if not meeting_json:
             meeting.ended = True
@@ -365,6 +352,34 @@ class BBBRoom(models.Model):
         # set cached meeting api settings
         meeting._bbb_api = bbb_api
         return meeting
+    
+    def get_source_object(self):
+        """ Attempts to find the source object for this BBBRoom, i.e. the
+            Model instance with the media_tag attached that this BBBRoom is attached to.
+            That instance should also have a CosinnusConferenceSettings attached. """
+        event = self.event
+        if event:
+            return event
+        raise ImproperlyConfigured("NYI: non-ConferenceEvent source types for BBBRooms are not yet supported!")
+        return None
+    
+    def build_extra_create_parameters(self):
+        """ Builds a parameter set for the create API call. Will use the inferred source 
+            object that this BBBRoom belongs to to generate options. """
+        return self._meta.model.build_extra_create_parameters_for_object(self.get_source_object())
+    
+    @classmethod
+    def build_extra_create_parameters_for_object(cls, source_object):
+        params = {}
+        params.update(settings.BBB_DEFAULT_CREATE_PARAMETERS)
+        params.update(settings.BBB_ROOM_TYPE_EXTRA_CREATE_PARAMETERS.get(source_object.get_bbb_room_type()))
+        # special: the max_participants is currently finally derived from the source event
+        max_participants = source_object.get_max_participants()
+        if max_participants:
+            params.update({
+                'maxParticipants': max_participants,
+            })
+        return params
     
     def build_extra_join_parameters(self, user):
         """ Builds a parameter set fo the join API call for the join

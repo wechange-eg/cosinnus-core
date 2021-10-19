@@ -111,8 +111,8 @@ class BigBlueButtonAPI(object):
     
     
     def start(self, 
-            name, meeting_id, welcome=None,
-            moderator_password="", attendee_password="", max_participants=None, voice_bridge=None,
+            name, meeting_id,
+            moderator_password="", attendee_password="", voice_bridge=None,
             parent_meeting_id=None, options=None, presentation_url=""):
         """ This function calls the BigBlueButton API directly to create a meeting with all available parameters available
             in the cosinnus-core.BBBRoom model.
@@ -131,9 +131,6 @@ class BigBlueButtonAPI(object):
     
         :param attendee_password: Password for users to join with default attendee privileges
         :type: str
-    
-        :param max_participants: Number of users allowed in the conference
-        :type: int
     
         :param voice_bridge: Dial in PIN for telephone users
         :type: int
@@ -157,30 +154,24 @@ class BigBlueButtonAPI(object):
         voice_bridge = voice_bridge if voice_bridge and is_number(voice_bridge) else bbb_utils.random_voice_bridge()
         attendee_password = attendee_password if attendee_password else bbb_utils.random_password()
         moderator_password = moderator_password if moderator_password else bbb_utils.random_password()
-    
-        query = [
-            ("name", name),
-            ('meetingID', meeting_id),
-            ("voiceBridge", voice_bridge),
-            ("attendeePW", attendee_password),
-            ("moderatorPW", moderator_password),
-        ]
-        if welcome:
-            query += [
-                ("welcome", welcome),
-            ]
-    
-        if max_participants and is_number(max_participants):
-            query += (("maxParticipants", int(max_participants)),)
-    
-        if parent_meeting_id:
-            query += (("parentMeetingID", parent_meeting_id),)
-    
+        
+        params = {}
         if options:
-            for key, value in options.items():
-                query += ((key, value),)
-    
-        query = urllib.parse.urlencode(query)
+            params.update(options)
+        # these are the options that aren't overwritable by JSON options
+        params.update({
+            "name": name,
+            'meetingID': meeting_id,
+            "voiceBridge": voice_bridge,
+            "attendeePW": attendee_password,
+            "moderatorPW": moderator_password,
+        })
+        if parent_meeting_id:
+            params.update({
+                "parentMeetingID": parent_meeting_id,
+            })
+        
+        query = urllib.parse.urlencode(list(params.items()))
     
         hashed = self.api_call(query, call)
         url = self.api_auth_url + call + '?' + hashed

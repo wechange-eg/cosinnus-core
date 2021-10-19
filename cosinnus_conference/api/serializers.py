@@ -320,7 +320,7 @@ class ConferenceEventSerializer(TranslateableModelSerializer):
     is_queue_url = serializers.SerializerMethodField() 
     image_url = serializers.SerializerMethodField()
     presenters = ConferenceEventParticipantSerializer(many=True)
-    participants_limit = serializers.IntegerField(source='max_participants')
+    participants_limit = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
     note_html = serializers.SerializerMethodField()
     feed_url = serializers.SerializerMethodField()
@@ -363,6 +363,9 @@ class ConferenceEventSerializer(TranslateableModelSerializer):
 
     def get_note_html(self, obj):
         return textfield(obj.note)
+    
+    def get_participants_limit(self, obj):
+        return obj.get_max_participants()
     
     def get_show_chat(self, obj):
         """ Returns true if the show chat checkboxes on the event and its room are set
