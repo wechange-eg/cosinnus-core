@@ -265,3 +265,10 @@ class AsignUserToEventForm(forms.Form):
         super().__init__(*args, **kwargs)
 
 AsignUserToEventForm = formset_factory(AsignUserToEventForm, extra=0)
+
+
+class TemporaryUserNewPasswordForm(forms.Form):
+    email = forms.EmailField(widget=forms.TextInput(
+        attrs={'readonly': 'readonly'}))
+    password = forms.CharField(widget=forms.TextInput(
+        attrs={'readonly': 'readonly'}))

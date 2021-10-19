@@ -55,7 +55,8 @@ from cosinnus_conference.forms import (ConferenceRemindersForm,
                                        ConferenceApplicationForm,
                                        PriorityFormSet,
                                        ConferenceApplicationManagementFormSet,
-                                       AsignUserToEventForm)
+                                       AsignUserToEventForm,
+                                       TemporaryUserNewPasswordForm)
 from cosinnus_conference.utils import send_conference_reminder
 from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus import cosinnus_notifications
@@ -127,6 +128,18 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             return make_xlsx_response(accounts, row_names=header,
                                       file_name=filename)
 
+        elif 'change_password' in request.POST:
+            user_id = int(request.POST.get('change_password'))
+            user = get_user_model().objects.get(id=user_id)
+            form = TemporaryUserNewPasswordForm(data=request.POST)
+            if form.is_valid():
+                password = form.cleaned_data.get('password')
+                user.set_password(password)
+                user.save()
+                messages.add_message(
+                    request, messages.SUCCESS,
+                    _('Successfully updated password of user'))
+
         return redirect(group_aware_reverse(
             'cosinnus:conference:temporary-users',
             kwargs={'group': self.group}))
@@ -164,10 +177,22 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         except ObjectDoesNotExist:
             pass
 
+    def get_members_with_password_form(self):
+        members_with_form = []
+        members = self.get_temporary_users()
+        for member in members:
+            members_with_form.append(
+                (member, TemporaryUserNewPasswordForm(initial={
+                    'password': get_random_string(),
+                    'email': member.email
+                }))
+            )
+        return members_with_form
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['group'] = self.group
-        context['members'] = self.get_temporary_users()
+        context['members'] = self.get_members_with_password_form()
         context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
 
         return context

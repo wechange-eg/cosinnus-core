@@ -31,6 +31,9 @@
             
             <div class="modal-body">
                 {{ label|safe }}
+                {% if form_extra_visible_fields %}
+	                {{ form_extra_visible_fields }}
+	            {% endif %}
             </div>
             {% if not hide_footer %}
             <div class="modal-footer">

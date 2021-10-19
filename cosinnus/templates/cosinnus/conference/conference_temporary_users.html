@@ -37,57 +37,70 @@
 	<table class="table table-striped white-content">
 		<thead>
 			<tr>
-				<th>{% trans 'Workshop user name' %}</th>
-				<th>{% trans 'email' %}</th>
-				<th>{% trans 'last login' %}</th>
+				<th>{% trans 'Workshop user name and email' %}</th>
 				<th>{% trans 'active' %}</div></th>
 				<th>{% trans 'password' %}</th>
-				<th></th>
+				<th>{% trans 'last login' %}</th>
 			</tr>
 		</thead>
 
-		{% for member in members %}
+		{% for member,form in members %}
 		<tr>
 			<th>
-				{% if member.cosinnus_profile.workshop_user_name %}
-				{{ member.cosinnus_profile.readable_workshop_user_name }}
-				{% else %}
-				{{ member|full_name }}
-				{% endif %}
-			</th>
-			<th>
-				{{ member.email }}
-			</th>
-			<th>
-				{% if member.last_login %} {{ member.last_login | date }} {% else %} {% trans 'no login yet'%} {% endif %}
-			</th>
-			<th>{% if member.is_active %} {% trans 'active'%} {% else %} {% trans 'not active'%} {% endif %}</th>
-			<th>
-				{% if member.password %} {% trans "Password set" %} {% else %} {% trans "No password" %} {% endif %}
-			</th>
-			<th>
-				{% if member.is_active %}
-					{% captureas modal_deactivate_id %}userModal_deactivate_{{member.pk}}{% endcaptureas %}
-					<button type="button" class="btn btn-default btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_deactivate_id}}">
+				<div class="pull-left">
+					{% if member.cosinnus_profile.workshop_user_name %}
+						{{ member.cosinnus_profile.readable_workshop_user_name }}: {{ member.email }}
+					{% else %}
+						{{ member|full_name }} : {{ member.email }}
+					{% endif %}
+				</div>
+				<div class="pull-left">
+					{% captureas modal_remove_id %}userModal_remove_{{member.pk}}{% endcaptureas %}
+					<button type="button" class="btn btn-default btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_remove_id}}">
 						<ul class="media-list">
 							<li class="media">
 								<a class="pull-left" href="#">
-										<i class="fas fa-minus-circle"></i>
-									</a>
+									<i class="fas fa-user-slash"></i>
+								</a>
 								<div class="media-body">
-									{% trans "deactivate user" %}
+									{% trans "remove user" %}
 								</div>
 							</li>
 						</ul>
 					</button>
+				</div>
+			</th>
+			<th>
+				<div class="pull-left">
+					{% if member.is_active %}
+						{% trans 'yes'%}
+					{% else %}
+						{% trans 'no'%}
+					{% endif %}
+				</div>
+				<div class="pull-left">
+					{% if member.is_active %}
+						{% captureas modal_deactivate_id %}userModal_deactivate_{{member.pk}}{% endcaptureas %}
+						<button type="button" class="btn btn-default btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_deactivate_id}}">
+							<ul class="media-list">
+								<li class="media">
+									<a class="pull-left" href="#">
+										<i class="fas fa-minus-circle"></i>
+									</a>
+									<div class="media-body">
+										{% trans "deactivate user" %}
+									</div>
+								</li>
+							</ul>
+						</button>
 				{% else %}
 					{% captureas modal_activate_id %}userModal_activate_{{member.pk}}{% endcaptureas %}
-					<button type="button" class="btn btn-emphasized btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_activate_id}}">
+					<button type="button" class="btn btn-default btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_activate_id}}">
 						<ul class="media-list">
 							<li class="media">
 								<a class="pull-left" href="#">
-										<i class="fas fa-check-circle"></i>
-									</a>
+									<i class="fas fa-check-circle"></i>
+								</a>
 								<div class="media-body">
 									{% trans "activate user" %}
 								</div>
@@ -95,34 +108,40 @@
 						</ul>
 					</button>
 				{% endif %}
-
-				{% captureas modal_remove_id %}userModal_remove_{{member.pk}}{% endcaptureas %}
-				<button type="button" class="btn btn-emphasized btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_remove_id}}">
-					<ul class="media-list">
-						<li class="media">
-							<a class="pull-left" href="#">
+				</div>
+			</th>
+			<th>
+				<div class="pull-left">
+					{% if member.password %}
+						{% trans "Password set" %}
+					{% else %}
+						{% trans "no Password" %}
+					{% endif %}
+				</div>
+				<div class="pull-left">
+					{% captureas modal_change_password_id %}userModal_change_password_{{member.pk}}{% endcaptureas %}
+					<button type="button" class="btn btn-default btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_change_password_id}}">
+						<ul class="media-list">
+							<li class="media">
+								<a class="pull-left" href="#">
 									<i class="fas fa-user-slash"></i>
 								</a>
-							<div class="media-body">
-								{% trans "remove user" %}
-							</div>
-						</li>
-					</ul>
-				</button>
-
-				{% captureas modal_change_password_id %}userModal_change_password_{{member.pk}}{% endcaptureas %}
-				<button type="button" class="btn btn-emphasized btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_change_password_id}}">
-					<ul class="media-list">
-						<li class="media">
-							<a class="pull-left" href="#">
-									<i class="fas fa-user-slash"></i>
-								</a>
-							<div class="media-body">
-								{% trans "Change password" %}
-							</div>
-						</li>
-					</ul>
-				</button>
+								<div class="media-body">
+									{% if member.password %}
+										{% trans "Change password" %}
+									{% else %}
+										{% trans "Set password" %}
+									{% endif %}
+								</div>
+							</li>
+						</ul>
+					</button>
+				</div>
+			</th>
+			<th>
+				<div class="pull-left">
+					{% if member.last_login %} {{ member.last_login | date }} {% else %} - {% endif %}
+				</div>
 			</th>
 			{% if member.is_active %}
 		        {% captureas label %}{% trans "Do you really want to deactivate the member's user account ?" %}{% endcaptureas %}
@@ -142,10 +161,14 @@
 	        {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
 	        {% include "cosinnus/modal_box.html" with id=modal_remove_id label=label title=title form_action=action submit_name="remove_member" submit_value=member.id title_icon_full_class='fas fa-user-slash' %}
 
-			{% captureas label %}{% trans "Do you really want to change the password of the user?" %}{% endcaptureas %}
-	        {% captureas title %}{% trans "Change password for User" %}{% endcaptureas %}
-	        {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
-	        {% include "cosinnus/modal_box.html" with id=modal_change_password_id label=label title=title form_action=action submit_name="change_password" submit_value=member.id title_icon_full_class='fas fa-user-slash' %}
+			{% captureas label_password_change %}{% trans "" %}{% endcaptureas %}
+	        {% captureas title_password_change %}{% trans "Change password for User" %}{% endcaptureas %}
+	        {% captureas action_password_change %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
+			{% captureas form_extra_visible_fields %}
+			{% include 'cosinnus/fields/default_field.html' with field=form.email label=form.email.label %}
+			{% include 'cosinnus/fields/default_field.html' with field=form.password label=form.password.label %}
+			{% endcaptureas %}
+	        {% include "cosinnus/modal_box.html" with id=modal_change_password_id label=label_password_change title=title_password_change form_action=action_password_change submit_name="change_password" form_extra_visible_fields=form_extra_visible_fields submit_value=member.id title_icon_full_class='fas fa-user-slash' %}
 		</tr>
 		{% endfor %}
 	</table>
