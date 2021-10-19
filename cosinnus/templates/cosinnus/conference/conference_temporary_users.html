@@ -13,27 +13,39 @@
 {% endblock %}
 
 {% block content %}
-{% group_url 'cosinnus:conference:workshop-participants-upload' group=group as workshop_participants_upload_page %}
+
 {% group_url 'cosinnus:conference:workshop-participants-download' group=group as workshop_participants_download_page %}
-<button type="button" class="btn btn-emphasized btn-autosize">
-	<ul class="media-list">
-		<li class="media">
-			<a class="pull-left" href="{{ workshop_participants_upload_page }}">
-				<i class="fa fa-upload"></i>
-			</a>
-			<div class="media-body">
-				<a href="{{  workshop_participants_upload_page }}">{% trans "Upload Temporary Users" %}</a>
-			</div>
-		</li>
-	</ul>
-</button>
-<div class="clearfix"></div>
+
 <div class="content-box">
 	<div class="tab-pane active">
 		<h2>{% trans "Temporary Users" %} ({% if group.conference_is_running %} {% trans "Conference is running" %} {% else %} {% trans "Conference is not running" %} {% endif %})</h2>
 		<div class="large-space">{% trans 'Here you can create temporary user accounts that are valid only for this conference and only when you activate them.' %}</div>
 	</div>
 
+	{% group_url 'cosinnus:conference:workshop-participants-upload-skeleton' group=group as workshop_participants_upload_skeleton %}
+	<p>{% blocktrans %}Please upload a spreadsheet with the following columns: unique user identifier, first name and last name. For Help you can download a template <a href="{{ workshop_participants_upload_skeleton }}">here</a>.{% endblocktrans %}</p>
+
+	<p>{% trans "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank." %}</p>
+
+	<form action="{% group_url 'cosinnus:conference:workshop-participants-upload' group=group %}" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		{% include 'cosinnus/fields/default_field.html' with field=upload_form.participants %}
+		<button type="submit" class="btn btn-emphasized large-space">
+			<ul class="media-list">
+				<li class="media">
+					<a class="pull-left" href="#">
+						<i class="fa fa-upload"></i>
+					</a>
+					<div class="media-body">
+						{% trans "Upload File" %}
+					</div>
+				</li>
+			</ul>
+		</button>
+	</form>
+
+
+	{% if members %}
 	<table class="table table-striped white-content">
 		<thead>
 			<tr>
@@ -85,10 +97,10 @@
 							<ul class="media-list">
 								<li class="media">
 									<a class="pull-left" href="#">
-										<i class="fas fa-minus-circle"></i>
+										<i class="fas fa-check-circle"></i>
 									</a>
 									<div class="media-body">
-										{% trans "deactivate user" %}
+										{% trans "deactivate" %}
 									</div>
 								</li>
 							</ul>
@@ -99,10 +111,10 @@
 						<ul class="media-list">
 							<li class="media">
 								<a class="pull-left" href="#">
-									<i class="fas fa-check-circle"></i>
+									<i class="fas fa-minus-circle"></i>
 								</a>
 								<div class="media-body">
-									{% trans "activate user" %}
+									{% trans "activate" %}
 								</div>
 							</li>
 						</ul>
@@ -124,7 +136,11 @@
 						<ul class="media-list">
 							<li class="media">
 								<a class="pull-left" href="#">
-									<i class="fas fa-user-slash"></i>
+									{% if member.password %}
+										<i class="fa fa-key" aria-hidden="true"></i>
+									{% else %}
+										<i class="fa fa-question" aria-hidden="true"></i>
+									{% endif %}
 								</a>
 								<div class="media-body">
 									{% if member.password %}
@@ -172,6 +188,7 @@
 		</tr>
 		{% endfor %}
 	</table>
+	{% endif %}
 
 </div>
 <div>
@@ -263,5 +280,6 @@ TODO: remove this feature properly when we refactor this!
     </div>
 </div>
 {% endcomment %}
+
 
 {% endblock content %}

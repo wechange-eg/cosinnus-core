@@ -194,13 +194,13 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         context['group'] = self.group
         context['members'] = self.get_members_with_password_form()
         context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
+        context['upload_form'] = CosinusWorkshopParticipantCSVImportForm(group=self.group)
 
         return context
 
 
 class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, FormView):
 
-    template_name = 'cosinnus/conference/workshop_participants_upload.html'
     form_class = CosinusWorkshopParticipantCSVImportForm
 
     def get_object(self, queryset=None):
@@ -330,14 +330,20 @@ class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin,
 
     def get(self, request, *args, **kwars):
         filename = '{}_participants.csv'.format(self.group.slug)
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="{}"'.format(
+            filename)
+
+        writer = csv.writer(response)
+
         header = [_('Workshop username'), _('First Name'), _('Last Name')]
-        rows = []
+
+        writer.writerow(header)
 
         for i in range(5):
             row = ['' for entry in header]
-            rows.append(row)
-
-        return make_xlsx_response(rows, row_names=header, file_name=filename)
+            writer.writerow(row)
+        return response
 
 
 class ConferenceRoomManagementView(RequireAdminMixin, GroupIsConferenceMixin, ListView):
