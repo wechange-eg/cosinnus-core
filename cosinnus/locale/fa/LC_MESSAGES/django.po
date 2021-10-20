@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-18 15:48+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2158,90 +2158,6 @@ msgstr ""
 msgid "Select a page on the left side."
 msgstr ""
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
-
-msgid "Overview - All Conferences"
-msgstr ""
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-msgid "View Upcoming"
-msgstr ""
-
-msgid "Upcoming"
-msgstr ""
-
-msgid "View Past"
-msgstr ""
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-msgid "Permanently Premium"
-msgstr ""
-
-msgid "Portal Setting"
-msgstr ""
-
-msgid "Conference Settings"
-msgstr ""
-
-#, fuzzy
-msgid "Premium active"
-msgstr "اعلاء"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-msgid "Start"
-msgstr ""
-
-msgid "running now!"
-msgstr ""
-
-msgid "Conference Setting"
-msgstr ""
-
-msgid "Room"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr ""
-
-msgid "There are no items to show."
-msgstr ""
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "Not set"
-msgstr ""
-
 msgid "Newsletters"
 msgstr ""
 
@@ -2288,16 +2204,6 @@ msgid "User Welcome Email"
 msgstr ""
 
 msgid "Simple Statistics"
-msgstr ""
-
-msgid "Conference Overview"
-msgstr ""
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
-
-msgid "Conferences with Custom Settings"
 msgstr ""
 
 msgid "Edit"
@@ -3188,6 +3094,120 @@ msgid "Accept"
 msgstr ""
 
 msgid "Decline"
+msgstr ""
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
+
+msgid "Overview - All Conferences"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference Rooms"
+msgid "Conference Administration"
+msgstr "اتاق‌های کنفرانس"
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr ""
+
+msgid "Temporary restrictions"
+msgstr ""
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr ""
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr ""
+
+msgid "Portal administrators"
+msgstr ""
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+msgid "View Upcoming"
+msgstr ""
+
+msgid "Upcoming"
+msgstr ""
+
+msgid "View Past"
+msgstr ""
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+msgid "Permanently Premium"
+msgstr ""
+
+msgid "Portal Setting"
+msgstr ""
+
+msgid "Conference Settings"
+msgstr ""
+
+#, fuzzy
+msgid "Premium active"
+msgstr "اعلاء"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "running now!"
+msgstr ""
+
+msgid "Conference Setting"
+msgstr ""
+
+msgid "Room"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr ""
+
+msgid "There are no items to show."
+msgstr ""
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "Not set"
+msgstr ""
+
+msgid "Conference Overview"
+msgstr ""
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
+
+msgid "Conferences with Custom Settings"
 msgstr ""
 
 msgid "Rearrange"

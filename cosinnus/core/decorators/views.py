@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus_organization.models import CosinnusOrganization
 from cosinnus.utils.permissions import check_object_write_access,\
     check_group_create_objects_access, check_object_read_access, get_user_token,\
-    check_user_superuser, check_user_verified
+    check_user_superuser, check_user_verified, check_user_portal_manager
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect, Http404
 from django.urls import reverse_lazy
@@ -239,6 +239,26 @@ def require_superuser():
             if not user.is_authenticated:
                 return redirect_to_not_logged_in(request, view=self)
             if not check_user_superuser(user):
+                raise PermissionDenied('You do not have permission to access this page.')
+            
+            return function(self, request, *args, **kwargs)
+            
+        return wrapper
+    return decorator
+
+
+def require_portal_manager():
+    """A method decorator that checks that the requesting user is a portal manager or superuser (admin or portal admin)
+    """
+
+    def decorator(function):
+        @functools.wraps(function, assigned=available_attrs(function))
+        def wrapper(self, request, *args, **kwargs):
+            user = request.user
+            
+            if not user.is_authenticated:
+                return redirect_to_not_logged_in(request, view=self)
+            if not check_user_portal_manager(user) and not check_user_superuser(user):
                 raise PermissionDenied('You do not have permission to access this page.')
             
             return function(self, request, *args, **kwargs)

@@ -29,7 +29,8 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_group_create_objects_access, check_object_read_access, get_user_token,
     check_user_portal_admin, check_user_superuser,
     check_object_likefollowstar_access, filter_tagged_object_queryset_for_user,
-    check_user_can_create_conferences, check_user_can_create_groups)
+    check_user_can_create_conferences, check_user_can_create_groups,
+    check_user_portal_manager)
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
 from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
     LikeObject, CosinnusTopicCategory
@@ -154,6 +155,13 @@ def is_superuser(user):
     Template filter to check if a user has admin priviledges or is a portal admin.
     """
     return check_user_superuser(user)
+
+@register.filter
+def is_portal_manager(user):
+    """
+    Template filter to check if a user has manager priviledges on this portal.
+    """
+    return check_user_portal_manager(user)
 
 @register.filter
 def is_portal_admin(user):
