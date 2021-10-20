@@ -9,7 +9,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden, JsonResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.text import slugify
 from django.utils.crypto import get_random_string
@@ -55,8 +55,7 @@ from cosinnus_conference.forms import (ConferenceRemindersForm,
                                        ConferenceApplicationForm,
                                        PriorityFormSet,
                                        ConferenceApplicationManagementFormSet,
-                                       AsignUserToEventForm,
-                                       TemporaryUserNewPasswordForm)
+                                       AsignUserToEventForm)
 from cosinnus_conference.utils import send_conference_reminder
 from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus import cosinnus_notifications
@@ -87,6 +86,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
                 and not user.cosinnus_profile.scheduled_for_deletion_at]
 
     def post(self, request, *args, **kwargs):
+
         if 'startConferenence' in request.POST:
             self.group.conference_is_running = True
             self.group.save()
@@ -131,14 +131,16 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         elif 'change_password' in request.POST:
             user_id = int(request.POST.get('change_password'))
             user = get_user_model().objects.get(id=user_id)
-            form = TemporaryUserNewPasswordForm(data=request.POST)
-            if form.is_valid():
-                password = form.cleaned_data.get('password')
-                user.set_password(password)
-                user.save()
-                messages.add_message(
-                    request, messages.SUCCESS,
-                    _('Successfully updated password of user'))
+            pwd = get_random_string()
+            user.set_password(pwd)
+            user.save()
+            return JsonResponse(
+                {
+                    'email': user.email,
+                    'id': user.id,
+                    'password': pwd
+                }
+            )
 
         return redirect(group_aware_reverse(
             'cosinnus:conference:temporary-users',
@@ -177,22 +179,10 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         except ObjectDoesNotExist:
             pass
 
-    def get_members_with_password_form(self):
-        members_with_form = []
-        members = self.get_temporary_users()
-        for member in members:
-            members_with_form.append(
-                (member, TemporaryUserNewPasswordForm(initial={
-                    'password': get_random_string(),
-                    'email': member.email
-                }))
-            )
-        return members_with_form
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['group'] = self.group
-        context['members'] = self.get_members_with_password_form()
+        context['members'] = self.get_temporary_users()
         context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
         context['upload_form'] = CosinusWorkshopParticipantCSVImportForm(group=self.group)
 

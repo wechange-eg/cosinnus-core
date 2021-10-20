@@ -17,6 +17,11 @@
 {% group_url 'cosinnus:conference:workshop-participants-download' group=group as workshop_participants_download_page %}
 
 <div class="content-box">
+
+	{% captureas label_password_change %}{% trans "Password changed" %}{% endcaptureas %}
+	{% captureas title_password_change %}{% trans "Changed password for User" %}{% endcaptureas %}
+	{% include "cosinnus/modal_box.html" with id="modal_password_changed" label=label_password_change title=title_password_change title_icon_full_class='fas fa-user-slash' %}
+
 	<div class="tab-pane active">
 		<h2>{% trans "Temporary Users" %} ({% if group.conference_is_running %} {% trans "Conference is running" %} {% else %} {% trans "Conference is not running" %} {% endif %})</h2>
 		<div class="large-space">{% trans 'Here you can create temporary user accounts that are valid only for this conference and only when you activate them.' %}</div>
@@ -56,7 +61,7 @@
 			</tr>
 		</thead>
 
-		{% for member,form in members %}
+		{% for member in members %}
 		<tr>
 			<th>
 				<div class="pull-left">
@@ -132,7 +137,7 @@
 				</div>
 				<div class="pull-left">
 					{% captureas modal_change_password_id %}userModal_change_password_{{member.pk}}{% endcaptureas %}
-					<button type="button" class="btn btn-default btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_change_password_id}}">
+					<button type="button" class="btn btn-default btn-small btn-autosize large-space" onclick="setPassword({{ member.id }})">
 						<ul class="media-list">
 							<li class="media">
 								<a class="pull-left" href="#">
@@ -143,11 +148,7 @@
 									{% endif %}
 								</a>
 								<div class="media-body">
-									{% if member.password %}
-										{% trans "Change password" %}
-									{% else %}
-										{% trans "Set password" %}
-									{% endif %}
+									{% trans "Set password" %}
 								</div>
 							</li>
 						</ul>
@@ -176,20 +177,10 @@
 	        {% captureas title %}{% trans "Remove User" %}{% endcaptureas %}
 	        {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
 	        {% include "cosinnus/modal_box.html" with id=modal_remove_id label=label title=title form_action=action submit_name="remove_member" submit_value=member.id title_icon_full_class='fas fa-user-slash' %}
-
-			{% captureas label_password_change %}{% trans "" %}{% endcaptureas %}
-	        {% captureas title_password_change %}{% trans "Change password for User" %}{% endcaptureas %}
-	        {% captureas action_password_change %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
-			{% captureas form_extra_visible_fields %}
-			{% include 'cosinnus/fields/default_field.html' with field=form.email label=form.email.label %}
-			{% include 'cosinnus/fields/default_field.html' with field=form.password label=form.password.label %}
-			{% endcaptureas %}
-	        {% include "cosinnus/modal_box.html" with id=modal_change_password_id label=label_password_change title=title_password_change form_action=action_password_change submit_name="change_password" form_extra_visible_fields=form_extra_visible_fields submit_value=member.id title_icon_full_class='fas fa-user-slash' %}
 		</tr>
 		{% endfor %}
 	</table>
 	{% endif %}
-
 </div>
 <div>
 
@@ -247,6 +238,8 @@
 </div>
 
 
+
+
 {% comment %}
 Removed for now
 TODO: remove this feature properly when we refactor this!
@@ -280,6 +273,23 @@ TODO: remove this feature properly when we refactor this!
     </div>
 </div>
 {% endcomment %}
-
-
 {% endblock content %}
+
+{% block extrahead %}
+{{ block.super }}
+<script>
+	function setPassword(userId) {
+		$.post(
+			window.location.pathname,
+  			{
+    			change_password: userId
+  			},
+  			function(data, status){
+				var text = 'email: ' +  data['email'] + ', {% trans "New password" %}: ' +  data['password'];
+				var modalBody = $('#modal_password_changed .modal-body').text(text);
+				$('#modal_password_changed').modal('show');
+  			}
+		);
+	}
+</script>
+{% endblock %}
