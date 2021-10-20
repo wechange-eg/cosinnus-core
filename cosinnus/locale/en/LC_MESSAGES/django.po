@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-18 15:48+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2214,96 +2214,6 @@ msgstr "There are no groups."
 msgid "Select a page on the left side."
 msgstr ""
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "My Projects"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "My Projects"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-msgid "View Upcoming"
-msgstr ""
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Edit Project"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-msgid "Permanently Premium"
-msgstr ""
-
-msgid "Portal Setting"
-msgstr ""
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Projects"
-
-msgid "Premium active"
-msgstr ""
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-msgid "Start"
-msgstr ""
-
-#, fuzzy
-msgid "running now!"
-msgstr "Join Project"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Project"
-
-#, fuzzy
-msgid "Room"
-msgstr "Project Type"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr ""
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "There are no groups."
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "Not set"
-msgstr ""
-
 msgid "Newsletters"
 msgstr ""
 
@@ -2355,18 +2265,6 @@ msgstr ""
 
 msgid "Simple Statistics"
 msgstr ""
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Create Project"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Create Project"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Projects"
 
 msgid "Edit"
 msgstr ""
@@ -3303,6 +3201,128 @@ msgstr ""
 
 msgid "Decline"
 msgstr ""
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "My Projects"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "My Projects"
+
+#, fuzzy
+msgid "Conference Administration"
+msgstr "There are no groups."
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr ""
+
+msgid "Temporary restrictions"
+msgstr ""
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr ""
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+msgid "Portal administrators"
+msgstr "The administration of Projects begins with managing its membership. Here you can decide who can join your project and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal."
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+msgid "View Upcoming"
+msgstr ""
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Edit Project"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+msgid "Permanently Premium"
+msgstr ""
+
+msgid "Portal Setting"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Projects"
+
+msgid "Premium active"
+msgstr ""
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+#, fuzzy
+msgid "running now!"
+msgstr "Join Project"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Project"
+
+#, fuzzy
+msgid "Room"
+msgstr "Project Type"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr ""
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "There are no groups."
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "Not set"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Projects"
 
 msgid "Rearrange"
 msgstr ""

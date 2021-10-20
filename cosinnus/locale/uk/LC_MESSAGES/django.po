@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-18 15:48+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2160,88 +2160,6 @@ msgstr "Адміністрація"
 msgid "Select a page on the left side."
 msgstr "Виберіть сторінку зліва."
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Огляд - Конференції, кабінети та воркшопи із власними налаштуваннями BBB-сервера"
-
-msgid "Overview - Premium Conferences Only"
-msgstr "Огляд - тільки преміум -конференції"
-
-msgid "Overview - All Conferences"
-msgstr "Огляд - усі конференції"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Огляд - конференції, кімнати та воркшопи"
-
-msgid "Past"
-msgstr "Минуле"
-
-msgid "View Upcoming"
-msgstr "Переглянути майбутні"
-
-msgid "Upcoming"
-msgstr "Майбутні"
-
-msgid "View Past"
-msgstr "Переглянути минуле"
-
-msgid "Premium capacity occupancy overview"
-msgstr "Огляд завантаженості преміум-класу"
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr "У цьому календарі відображаються всі конференції для поточного представлення, усі блоки преміум-класу, які наразі заброньовані для конференцій, та загальна визначена ємність сервера преміум-класу."
-
-msgid "Booked"
-msgstr "Заброньовано"
-
-msgid "Permanently Premium"
-msgstr "Постійно преміум-класу"
-
-msgid "Portal Setting"
-msgstr "Налаштування порталу"
-
-msgid "Conference Settings"
-msgstr "Налаштування конференції"
-
-msgid "Premium active"
-msgstr "Преміум активний"
-
-msgid "Premium inactive, but scheduled"
-msgstr "Преміум неактивний, але за розкладом"
-
-msgid "Not premium"
-msgstr "Не є преміум"
-
-msgid "Rooms"
-msgstr "Кімнати"
-
-msgid "Start"
-msgstr "Початок"
-
-msgid "running now!"
-msgstr "Долучитися зараз!"
-
-msgid "Conference Setting"
-msgstr "Налаштування конференції"
-
-msgid "Room"
-msgstr "Кімната"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Подія"
-
-msgid "There are no items to show."
-msgstr "Немає жодного елементу для показу"
-
-msgid "BBB"
-msgstr "ВВВ"
-
-msgid "BBB Premium"
-msgstr "ВВВ Преміум"
-
-msgid "Not set"
-msgstr "Не встановлено"
-
 msgid "Newsletters"
 msgstr "Інформаційні бюлетені"
 
@@ -2290,15 +2208,6 @@ msgstr "Вітальний текст листа користувача"
 
 msgid "Simple Statistics"
 msgstr "Проста Статистика"
-
-msgid "Conference Overview"
-msgstr "Налаштування конференції"
-
-msgid "Premium Conferences Only"
-msgstr "Створити Захід"
-
-msgid "Conferences with Custom Settings"
-msgstr "Конференція триває"
 
 msgid "Edit"
 msgstr "Редагувати"
@@ -3201,6 +3110,121 @@ msgstr "Прийняти "
 
 msgid "Decline"
 msgstr "Відхилити "
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Огляд - Конференції, кабінети та воркшопи із власними налаштуваннями BBB-сервера"
+
+msgid "Overview - Premium Conferences Only"
+msgstr "Огляд - тільки преміум -конференції"
+
+msgid "Overview - All Conferences"
+msgstr "Огляд - усі конференції"
+
+#, fuzzy
+#| msgid "User Administration"
+msgid "Conference Administration"
+msgstr "Адміністрація Користувача"
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Temporary User Accounts"
+msgid "Temporary restrictions"
+msgstr "Тимчасовий обліковий запис користувача"
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr ""
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Portal administrators"
+msgstr "Адміністратори Порталу"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Огляд - конференції, кімнати та воркшопи"
+
+msgid "Past"
+msgstr "Минуле"
+
+msgid "View Upcoming"
+msgstr "Переглянути майбутні"
+
+msgid "Upcoming"
+msgstr "Майбутні"
+
+msgid "View Past"
+msgstr "Переглянути минуле"
+
+msgid "Premium capacity occupancy overview"
+msgstr "Огляд завантаженості преміум-класу"
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr "У цьому календарі відображаються всі конференції для поточного представлення, усі блоки преміум-класу, які наразі заброньовані для конференцій, та загальна визначена ємність сервера преміум-класу."
+
+msgid "Booked"
+msgstr "Заброньовано"
+
+msgid "Permanently Premium"
+msgstr "Постійно преміум-класу"
+
+msgid "Portal Setting"
+msgstr "Налаштування порталу"
+
+msgid "Conference Settings"
+msgstr "Налаштування конференції"
+
+msgid "Premium active"
+msgstr "Преміум активний"
+
+msgid "Premium inactive, but scheduled"
+msgstr "Преміум неактивний, але за розкладом"
+
+msgid "Not premium"
+msgstr "Не є преміум"
+
+msgid "Rooms"
+msgstr "Кімнати"
+
+msgid "Start"
+msgstr "Початок"
+
+msgid "running now!"
+msgstr "Долучитися зараз!"
+
+msgid "Conference Setting"
+msgstr "Налаштування конференції"
+
+msgid "Room"
+msgstr "Кімната"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Подія"
+
+msgid "There are no items to show."
+msgstr "Немає жодного елементу для показу"
+
+msgid "BBB"
+msgstr "ВВВ"
+
+msgid "BBB Premium"
+msgstr "ВВВ Преміум"
+
+msgid "Not set"
+msgstr "Не встановлено"
+
+msgid "Conference Overview"
+msgstr "Налаштування конференції"
+
+msgid "Premium Conferences Only"
+msgstr "Створити Захід"
+
+msgid "Conferences with Custom Settings"
+msgstr "Конференція триває"
 
 msgid "Rearrange"
 msgstr "Переставити"

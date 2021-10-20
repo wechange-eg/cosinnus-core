@@ -30,6 +30,30 @@
 
 
 {% block content %}
+    
+    {% comment %} Temporary change, delete when the conference premium block forms are in! {% endcomment %}    
+    {% trans "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!" as temp_apology %}
+    <div class="alert alert-warning alert-dismissable">
+        <i class="fa fa-exclamation fa-3x"></i>
+        <h4>{% trans "Temporary restrictions" %}</h4>
+        <div class="v-offset-s">
+        <p>
+            {% trans "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences." %}
+        </p>
+        <p>
+            {% trans "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!" %}
+        </p>
+        <p>
+            {% trans "Portal administrators" %}:
+            {% for superuser in all_superusers %}
+                <a href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=superuser.username %}{% else %}{% url 'postman:write' recipients=superuser.username %}?next={% url 'postman:sent' %}{% endif %}" 
+                   target="_blank">{{ superuser|full_name }}
+                </a>{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        </p>
+        </div>
+    </div>
+    
     <div class="content-box textfield">
         <h2>
             {% if only_nonstandard %}
@@ -129,9 +153,15 @@
         
         <h4>
             {% trans "Portal Setting" %}
-            <a href="{% url 'admin:cosinnus_cosinnusportal_change' object_id=portal.id %}#conference_settings" target="_blank">
-                <i class="fa fa-cog"></i>
-            </a>
+            {% if request.user|is_superuser %}
+	            <a href="{% url 'admin:cosinnus_cosinnusportal_change' object_id=portal.id %}#conference_settings" target="_blank">
+	                <i class="fa fa-cog"></i>
+	            </a>
+            {% else %}
+                <a onclick="alert('{{ temp_apology }}')">
+                    <i class="fa fa-cog"></i>
+                </a>
+            {% endif %}
         </h4>
         {% include 'cosinnus/conference_administration/conference_overview_setting_snippet.html' with setting=portal_setting %}
         
@@ -153,9 +183,15 @@
 				            <a href="{{ item.conference.get_absolute_url }}" target="_blank">
     				            {{ item.conference.name }}
 				            </a>
-				            <a href="{% url 'admin:cosinnus_cosinnusconference_change' object_id=item.conference.id %}#conference_settings" target="_blank">
-				                <i class="fa fa-cog"></i>
-				            </a>
+				            {% if request.user|is_superuser %}
+					            <a href="{% url 'admin:cosinnus_cosinnusconference_change' object_id=item.conference.id %}#conference_settings" target="_blank">
+					                <i class="fa fa-cog"></i>
+					            </a>
+				            {% else %}
+				                <a onclick="alert('{{ temp_apology }}')">
+				                    <i class="fa fa-cog"></i>
+				                </a>
+				            {% endif %}
 				            -
 					        <span>
 					           {% if item.conference.is_premium_permanently %}
@@ -194,9 +230,15 @@
 					                {% if item.conference.resolved_conference_setting %}
 					                    <i class="fas fa-fw {{ COSINNUS_CONFERENCE_TRANS.ICON }}"></i>
 					                    {% trans "Conference Setting" %}:
-					                    <a href="{% url 'admin:cosinnus_cosinnusconference_change' object_id=item.conference.id %}#conference_settings" target="_blank">
-			                                <i class="fa fa-cog"></i>
-			                            </a>
+					                    {% if request.user|is_superuser %}
+						                    <a href="{% url 'admin:cosinnus_cosinnusconference_change' object_id=item.conference.id %}#conference_settings" target="_blank">
+				                                <i class="fa fa-cog"></i>
+				                            </a>
+							            {% else %}
+							                <a onclick="alert('{{ temp_apology }}')">
+							                    <i class="fa fa-cog"></i>
+							                </a>
+							            {% endif %}
 					                    {% include 'cosinnus/conference_administration/conference_overview_setting_snippet.html' with setting=item.conference.resolved_conference_setting %}
 					                {% endif %}
 					                
@@ -211,9 +253,15 @@
 										                    <a href="{{ room.get_absolute_url }}" target="_blank">
 			                                                    {{ room.title }}    								        
 			                                                </a>
-			                                                <a href="{% url 'admin:cosinnus_cosinnusconferenceroom_change' object_id=room.id %}#conference_settings" target="_blank">
-								                                <i class="fa fa-cog"></i>
-								                            </a>
+			                                                {% if request.user|is_superuser %}
+				                                                <a href="{% url 'admin:cosinnus_cosinnusconferenceroom_change' object_id=room.id %}#conference_settings" target="_blank">
+									                                <i class="fa fa-cog"></i>
+									                            </a>
+												            {% else %}
+												                <a onclick="alert('{{ temp_apology }}')">
+												                    <i class="fa fa-cog"></i>
+												                </a>
+												            {% endif %}
 								                            <br/>
 			                                                {% if room.resolved_conference_setting %}
 			                                                    {% include 'cosinnus/conference_administration/conference_overview_setting_snippet.html' with setting=room.resolved_conference_setting %}
@@ -229,9 +277,15 @@
 						                                                <a href="{{ event.get_absolute_url }}" target="_blank">
 						                                                    {{ event.title }}                                         
 						                                                </a>
-						                                                <a href="{% url 'admin:cosinnus_event_conferenceevent_change' object_id=event.id %}#conference_settings" target="_blank">
-						                                                    <i class="fa fa-cog"></i>
-						                                                </a>
+						                                                {% if request.user|is_superuser %}
+							                                                <a href="{% url 'admin:cosinnus_event_conferenceevent_change' object_id=event.id %}#conference_settings" target="_blank">
+							                                                    <i class="fa fa-cog"></i>
+							                                                </a>
+															            {% else %}
+															                <a onclick="alert('{{ temp_apology }}')">
+															                    <i class="fa fa-cog"></i>
+															                </a>
+															            {% endif %}
 						                                                <br/>
 						                                                {% if event.resolved_conference_setting %}
 						                                                    {% include 'cosinnus/conference_administration/conference_overview_setting_snippet.html' with setting=event.resolved_conference_setting %}
