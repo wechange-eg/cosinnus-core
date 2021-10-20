@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-18 15:48+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2221,102 +2221,6 @@ msgstr "Ադմինիստրացիա"
 msgid "Select a page on the left side."
 msgstr "Ընտրեք էջը ձախ կողմում."
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Դիտել էջում"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Դիտել նախագիծը"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Գաղտնիության կարգավորումներ"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "ոչ ակտիվ"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Մեկնարկի ամսաթիվ."
-
-#, fuzzy
-msgid "running now!"
-msgstr "Միացիր հիմա!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Room"
-msgstr "Թիմի տեսակից"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Իրադարձություն"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Դեռ նյութեր չկան"
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Նշանակված չէ"
-
 msgid "Newsletters"
 msgstr ""
 
@@ -2368,18 +2272,6 @@ msgstr "Օգտատիրոջ Ողջույնի էլ․ նամակ"
 
 msgid "Simple Statistics"
 msgstr "Պարզ վիճակագրություն"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Ստեղծել Իրադարձություն"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 msgid "Edit"
 msgstr "Խմբագրել"
@@ -3334,6 +3226,137 @@ msgstr "Ընդունել օգտատիրոջը"
 #, fuzzy
 msgid "Decline"
 msgstr "Մերժել օգտատիրոջը"
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Conference Administration"
+msgstr "Ադմինիստրացիա"
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Description"
+msgid "Temporary restrictions"
+msgstr "Թիմի նկարագրություն"
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr ""
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Portal administrators"
+msgstr "Պորտալի Ադմինիստրատորներ"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Դիտել էջում"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Դիտել նախագիծը"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Գաղտնիության կարգավորումներ"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "ոչ ակտիվ"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Մեկնարկի ամսաթիվ."
+
+#, fuzzy
+msgid "running now!"
+msgstr "Միացիր հիմա!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Room"
+msgstr "Թիմի տեսակից"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Իրադարձություն"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Դեռ նյութեր չկան"
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Նշանակված չէ"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Ստեղծել Իրադարձություն"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 msgid "Rearrange"
 msgstr "Վերադասավորվել"

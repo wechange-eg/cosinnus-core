@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-18 15:48+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2208,101 +2208,6 @@ msgstr "Administratie"
 msgid "Select a page on the left side."
 msgstr "Selecteer een pagina aan de linker kant."
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-msgid "Overview - Premium Conferences Only"
-msgstr ""
-
-msgid "Overview - All Conferences"
-msgstr ""
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Op pagina bekijken"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Toon project"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Conferentie is bezig"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Privacy instellingen"
-
-msgid "Conference Settings"
-msgstr "Conferentie instellingen"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-#, fuzzy
-msgid "Not premium"
-msgstr "Premium"
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Startdatum."
-
-#, fuzzy
-msgid "running now!"
-msgstr "Doe mee!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Conferentie instellingen"
-
-#, fuzzy
-msgid "Room"
-msgstr "Ruimte type"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Evenement"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Er zijn nog geen items"
-
-msgid "BBB"
-msgstr ""
-
-#, fuzzy
-msgid "BBB Premium"
-msgstr "Premium"
-
-#, fuzzy
-msgid "Not set"
-msgstr "Niet toegewezen"
-
 msgid "Newsletters"
 msgstr ""
 
@@ -2353,18 +2258,6 @@ msgstr "Welkomstmail voor gebruikers"
 
 msgid "Simple Statistics"
 msgstr "Simpele statistieken"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Videoconferentie server"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Evenement aanmaken"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Conferentie instellingen"
 
 msgid "Edit"
 msgstr "Wijzigen"
@@ -3324,6 +3217,136 @@ msgstr "Gebruiker accepteren"
 #, fuzzy
 msgid "Decline"
 msgstr "Gebruiker afwijzen"
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+msgid "Overview - Premium Conferences Only"
+msgstr ""
+
+msgid "Overview - All Conferences"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Administration"
+msgstr "Administratie"
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Description"
+msgid "Temporary restrictions"
+msgstr "Team beschrijving"
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr ""
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Portal administrators"
+msgstr "Portalbeheerders"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Op pagina bekijken"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Toon project"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Conferentie is bezig"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Privacy instellingen"
+
+msgid "Conference Settings"
+msgstr "Conferentie instellingen"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+#, fuzzy
+msgid "Not premium"
+msgstr "Premium"
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Startdatum."
+
+#, fuzzy
+msgid "running now!"
+msgstr "Doe mee!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Conferentie instellingen"
+
+#, fuzzy
+msgid "Room"
+msgstr "Ruimte type"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Evenement"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Er zijn nog geen items"
+
+msgid "BBB"
+msgstr ""
+
+#, fuzzy
+msgid "BBB Premium"
+msgstr "Premium"
+
+#, fuzzy
+msgid "Not set"
+msgstr "Niet toegewezen"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Videoconferentie server"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Evenement aanmaken"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Conferentie instellingen"
 
 msgid "Rearrange"
 msgstr "Herschikken"

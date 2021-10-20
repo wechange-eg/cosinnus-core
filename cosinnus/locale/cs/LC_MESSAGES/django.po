@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-18 15:48+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2174,92 +2174,6 @@ msgstr "Správa"
 msgid "Select a page on the left side."
 msgstr "Vyberte stránku na levé straně."
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Přehled - konference, místnosti a workshopy s customizovanými nastaveními BBB serveru"
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Přehled - Všechny konference"
-
-msgid "Overview - All Conferences"
-msgstr "Přehled - Všechny konference"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Přehled - konference, místnosti a workshopy"
-
-msgid "Past"
-msgstr "Dřívější"
-
-msgid "View Upcoming"
-msgstr "Zobrazit nastávající"
-
-msgid "Upcoming"
-msgstr "Nastávající"
-
-msgid "View Past"
-msgstr "Zobrazit minulý"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-msgid "Booked"
-msgstr "Se záložkou"
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Konference je trvale v kategorii premium"
-
-msgid "Portal Setting"
-msgstr "Nastavení portálu"
-
-msgid "Conference Settings"
-msgstr "Nastavení konference"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "Není premium"
-
-msgid "Rooms"
-msgstr "Místnosti"
-
-msgid "Start"
-msgstr "Zahájení"
-
-msgid "running now!"
-msgstr "probíhá nyní!"
-
-msgid "Conference Setting"
-msgstr "Nastavení konference"
-
-msgid "Room"
-msgstr "Místnost"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Událost"
-
-msgid "There are no items to show."
-msgstr "Nejsou žádné položky pro zobrazení."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB Premium"
-
-msgid "Not set"
-msgstr "Nenastavený"
-
 msgid "Newsletters"
 msgstr "Bulletiny"
 
@@ -2325,16 +2239,6 @@ msgstr "Uvítací e-mail uživatele"
 
 msgid "Simple Statistics"
 msgstr "Jednoduchá statistika"
-
-msgid "Conference Overview"
-msgstr "Konferenční přehled"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "BBB server pro Premium konference"
-
-msgid "Conferences with Custom Settings"
-msgstr "Konference s customizovanými nastaveními"
 
 msgid "Edit"
 msgstr "Upravit"
@@ -3270,6 +3174,126 @@ msgstr "Přijmout"
 
 msgid "Decline"
 msgstr "Zamítnout"
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Přehled - konference, místnosti a workshopy s customizovanými nastaveními BBB serveru"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Přehled - Všechny konference"
+
+msgid "Overview - All Conferences"
+msgstr "Přehled - Všechny konference"
+
+#, fuzzy
+#| msgid "User Administration"
+msgid "Conference Administration"
+msgstr "Administrace uživatele"
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Temporary User Accounts"
+msgid "Temporary restrictions"
+msgstr "Dočasné uživatelské účty"
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr ""
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Portal administrators"
+msgstr "Správci portálu"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Přehled - konference, místnosti a workshopy"
+
+msgid "Past"
+msgstr "Dřívější"
+
+msgid "View Upcoming"
+msgstr "Zobrazit nastávající"
+
+msgid "Upcoming"
+msgstr "Nastávající"
+
+msgid "View Past"
+msgstr "Zobrazit minulý"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "Se záložkou"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Konference je trvale v kategorii premium"
+
+msgid "Portal Setting"
+msgstr "Nastavení portálu"
+
+msgid "Conference Settings"
+msgstr "Nastavení konference"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "Není premium"
+
+msgid "Rooms"
+msgstr "Místnosti"
+
+msgid "Start"
+msgstr "Zahájení"
+
+msgid "running now!"
+msgstr "probíhá nyní!"
+
+msgid "Conference Setting"
+msgstr "Nastavení konference"
+
+msgid "Room"
+msgstr "Místnost"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Událost"
+
+msgid "There are no items to show."
+msgstr "Nejsou žádné položky pro zobrazení."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB Premium"
+
+msgid "Not set"
+msgstr "Nenastavený"
+
+msgid "Conference Overview"
+msgstr "Konferenční přehled"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "BBB server pro Premium konference"
+
+msgid "Conferences with Custom Settings"
+msgstr "Konference s customizovanými nastaveními"
 
 msgid "Rearrange"
 msgstr "Uspořádat"

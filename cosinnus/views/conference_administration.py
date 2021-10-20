@@ -17,6 +17,8 @@ from cosinnus.models.conference import CosinnusConferenceSettings, \
 from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.views.mixins.group import RequirePortalManagerMixin
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.utils.user import filter_active_users, filter_portal_users
+from django.contrib.auth import get_user_model
 
 
 class ConferenceAdministrationView(RedirectView):
@@ -181,6 +183,10 @@ class ConferenceOverviewView(RequirePortalManagerMixin, TemplateView):
             'portal_capacity_blocks': portal_capacity_blocks,
             'generated_capacity_blocks': generated_capacity_blocks,
             'conference_premium_blocks': conference_premium_blocks,
+        })
+        # Temporary change, delete when the conference premium block forms are in!
+        context.update({
+            'all_superusers': filter_active_users(filter_portal_users(get_user_model().objects.filter(is_superuser=True)))
         })
         return context
     

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-18 15:48+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "PO-Revision-Date: 2021-09-29 12:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2352,105 +2352,6 @@ msgstr "الإدارة"
 msgid "Select a page on the left side."
 msgstr "حدد صفحة على الجانب الأيسر."
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل مع إعدادات خادم BBB المخصصة"
-
-#, fuzzy
-#| msgid "Overview - All Conferences"
-msgid "Overview - Premium Conferences Only"
-msgstr "نظرة عامة - جميع المؤتمرات"
-
-msgid "Overview - All Conferences"
-msgstr "نظرة عامة - جميع المؤتمرات"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل"
-
-msgid "Past"
-msgstr "ماضي"
-
-#, fuzzy
-#| msgid "View on page"
-msgid "View Upcoming"
-msgstr "عرض على الصفحة"
-
-msgid "Upcoming"
-msgstr "القادمة"
-
-#, fuzzy
-#| msgid "View Project"
-msgid "View Past"
-msgstr "عرض المشروع"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-#| msgid "Bookmarked"
-msgid "Booked"
-msgstr "مرجعية"
-
-#, fuzzy
-#| msgid "Conference is permanently premium"
-msgid "Permanently Premium"
-msgstr "المؤتمر هو مميز و دائم"
-
-#, fuzzy
-#| msgid "Privacy settings"
-msgid "Portal Setting"
-msgstr "إعدادات الخصوصية"
-
-msgid "Conference Settings"
-msgstr "إعدادات المؤتمر"
-
-#, fuzzy
-#| msgid "Premium"
-msgid "Premium active"
-msgstr "مميز"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "غير مميز"
-
-msgid "Rooms"
-msgstr "غرف"
-
-msgid "Start"
-msgstr "ابدأ"
-
-msgid "running now!"
-msgstr "قيد الشتغيل"
-
-msgid "Conference Setting"
-msgstr "إعداد المؤتمر"
-
-msgid "Room"
-msgstr "غرفة"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "مناسبة"
-
-#, fuzzy
-#| msgid "There are no items yet"
-msgid "There are no items to show."
-msgstr "لا توجد عناصر حتى الآن"
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB مميز"
-
-#, fuzzy
-msgid "Not set"
-msgstr "غير معتمد"
-
 msgid "Newsletters"
 msgstr "النشرات الإخبارية"
 
@@ -2509,21 +2410,6 @@ msgstr "البريد الإلكتروني الترحيبي للمستخدم"
 
 msgid "Simple Statistics"
 msgstr "إحصائيات بسيطة"
-
-#, fuzzy
-#| msgid "Conference is running"
-msgid "Conference Overview"
-msgstr "المؤتمر قيد التشغيل"
-
-#, fuzzy
-#| msgid "BBB Server for Premium Conferences"
-msgid "Premium Conferences Only"
-msgstr "خادم BBB للمؤتمرات المتميزة"
-
-#, fuzzy
-#| msgid "Conference is running"
-msgid "Conferences with Custom Settings"
-msgstr "المؤتمر قيد التشغيل"
 
 msgid "Edit"
 msgstr "تعديل"
@@ -3524,6 +3410,144 @@ msgstr "قبول المستخدم"
 #| msgid "Decline User"
 msgid "Decline"
 msgstr "رفض المستخدم"
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل مع إعدادات خادم BBB المخصصة"
+
+#, fuzzy
+#| msgid "Overview - All Conferences"
+msgid "Overview - Premium Conferences Only"
+msgstr "نظرة عامة - جميع المؤتمرات"
+
+msgid "Overview - All Conferences"
+msgstr "نظرة عامة - جميع المؤتمرات"
+
+#, fuzzy
+#| msgid "User Administration"
+msgid "Conference Administration"
+msgstr "إدارة المستخدم"
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Temporary User Accounts"
+msgid "Temporary restrictions"
+msgstr "حسابات المستخدمين المؤقتة"
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr ""
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Portal administrators"
+msgstr "مسؤولي البوابة"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل"
+
+msgid "Past"
+msgstr "ماضي"
+
+#, fuzzy
+#| msgid "View on page"
+msgid "View Upcoming"
+msgstr "عرض على الصفحة"
+
+msgid "Upcoming"
+msgstr "القادمة"
+
+#, fuzzy
+#| msgid "View Project"
+msgid "View Past"
+msgstr "عرض المشروع"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+#| msgid "Bookmarked"
+msgid "Booked"
+msgstr "مرجعية"
+
+#, fuzzy
+#| msgid "Conference is permanently premium"
+msgid "Permanently Premium"
+msgstr "المؤتمر هو مميز و دائم"
+
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Portal Setting"
+msgstr "إعدادات الخصوصية"
+
+msgid "Conference Settings"
+msgstr "إعدادات المؤتمر"
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium active"
+msgstr "مميز"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "غير مميز"
+
+msgid "Rooms"
+msgstr "غرف"
+
+msgid "Start"
+msgstr "ابدأ"
+
+msgid "running now!"
+msgstr "قيد الشتغيل"
+
+msgid "Conference Setting"
+msgstr "إعداد المؤتمر"
+
+msgid "Room"
+msgstr "غرفة"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "مناسبة"
+
+#, fuzzy
+#| msgid "There are no items yet"
+msgid "There are no items to show."
+msgstr "لا توجد عناصر حتى الآن"
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB مميز"
+
+#, fuzzy
+msgid "Not set"
+msgstr "غير معتمد"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conference Overview"
+msgstr "المؤتمر قيد التشغيل"
+
+#, fuzzy
+#| msgid "BBB Server for Premium Conferences"
+msgid "Premium Conferences Only"
+msgstr "خادم BBB للمؤتمرات المتميزة"
+
+#, fuzzy
+#| msgid "Conference is running"
+msgid "Conferences with Custom Settings"
+msgstr "المؤتمر قيد التشغيل"
 
 msgid "Rearrange"
 msgstr "إعادة الترتيب"
