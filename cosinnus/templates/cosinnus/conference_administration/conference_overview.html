@@ -12,11 +12,11 @@
 {% endblock %}
 
 {% block leftnav %}
-    {% include 'cosinnus/administration/leftnav.html' %}
+    {% include 'cosinnus/conference_administration/leftnav.html' %}
 {% endblock leftnav %}
 
 {% block breadcrumb %}
-    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Conference Administration" %}</a></li>
     <li class="active">
         {% if only_nonstandard %}
             {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
@@ -133,7 +133,7 @@
                 <i class="fa fa-cog"></i>
             </a>
         </h4>
-        {% include 'cosinnus/administration/conference_overview_setting_snippet.html' with setting=portal_setting %}
+        {% include 'cosinnus/conference_administration/conference_overview_setting_snippet.html' with setting=portal_setting %}
         
         <hr/>
         
@@ -197,7 +197,7 @@
 					                    <a href="{% url 'admin:cosinnus_cosinnusconference_change' object_id=item.conference.id %}#conference_settings" target="_blank">
 			                                <i class="fa fa-cog"></i>
 			                            </a>
-					                    {% include 'cosinnus/administration/conference_overview_setting_snippet.html' with setting=item.conference.resolved_conference_setting %}
+					                    {% include 'cosinnus/conference_administration/conference_overview_setting_snippet.html' with setting=item.conference.resolved_conference_setting %}
 					                {% endif %}
 					                
 					                {% if item.rooms_and_events %}
@@ -216,7 +216,7 @@
 								                            </a>
 								                            <br/>
 			                                                {% if room.resolved_conference_setting %}
-			                                                    {% include 'cosinnus/administration/conference_overview_setting_snippet.html' with setting=room.resolved_conference_setting %}
+			                                                    {% include 'cosinnus/conference_administration/conference_overview_setting_snippet.html' with setting=room.resolved_conference_setting %}
 			                                                {% endif %}
 			    								        {% endif %}
 			    								        
@@ -234,7 +234,7 @@
 						                                                </a>
 						                                                <br/>
 						                                                {% if event.resolved_conference_setting %}
-						                                                    {% include 'cosinnus/administration/conference_overview_setting_snippet.html' with setting=event.resolved_conference_setting %}
+						                                                    {% include 'cosinnus/conference_administration/conference_overview_setting_snippet.html' with setting=event.resolved_conference_setting %}
 						                                                {% endif %}
 					                                                </li>
 					    								        {% endfor %}
