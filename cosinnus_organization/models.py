@@ -472,10 +472,10 @@ class CosinnusOrganizationLocation(models.Model):
 class CosinnusOrganizationGroupQuerySet(models.QuerySet):
 
     def active_groups(self):
-        return self.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN), group__is_active=True)
+        return self.filter(status__in=MEMBER_STATUS, group__is_active=True)
 
     def active_organizations(self):
-        return self.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN), organization__is_active=True)
+        return self.filter(status__in=MEMBER_STATUS, organization__is_active=True)
 
 
 class CosinnusOrganizationGroup(models.Model):
@@ -506,6 +506,6 @@ class CosinnusOrganizationGroup(models.Model):
         # Only update the date if the the state changes from pending to member
         # or admin
         if (self._old_current_status == MEMBERSHIP_PENDING or self._old_current_status == MEMBERSHIP_INVITED_PENDING) and \
-                (self.status == MEMBERSHIP_ADMIN or self.status == MEMBERSHIP_MEMBER):
+                (self.status in MEMBER_STATUS):
             self.date = now()
         return super(CosinnusOrganizationGroup, self).save(*args, **kwargs)
