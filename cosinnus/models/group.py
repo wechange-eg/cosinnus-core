@@ -23,7 +23,7 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.conf import settings
 from cosinnus.models.membership import BaseMembership, MEMBERSHIP_ADMIN, \
     MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS, MembersManagerMixin,\
-    MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER
+    MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_MANAGER
 from cosinnus.utils.functions import unique_aware_slugify,\
     clean_single_line_text, sort_key_strcoll_attr
 from cosinnus.utils.files import get_group_avatar_filename,\
@@ -651,7 +651,7 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
 
     def get_logo_image_url(self):
         """ Returns the portal logo static image URL """
-        return '%s%s' % (self.get_domain(), static('img/v2_navbar_brand.png'))
+        return '%s%s' % (self.get_domain(), static('img/logo-icon.png'))
 
     def __str__(self):
         return self.name
@@ -1098,7 +1098,8 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
             # upgrade the membership, or do nothing
             if (membership.status in [MEMBERSHIP_INVITED_PENDING, MEMBERSHIP_PENDING] and \
                     membership_status in MEMBER_STATUS) or \
-                    (membership.status == MEMBERSHIP_MEMBER and membership_status == MEMBERSHIP_ADMIN): 
+                    (membership.status == MEMBERSHIP_MEMBER and membership_status in (MEMBERSHIP_MANAGER, MEMBERSHIP_ADMIN)) or \
+                    (membership.status == MEMBERSHIP_MANAGER and membership_status == MEMBERSHIP_ADMIN): 
                 membership.status = membership_status
                 membership.save()
         elif not membership:

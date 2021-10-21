@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 19:02+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2221,102 +2221,6 @@ msgstr "İdarəetmə"
 msgid "Select a page on the left side."
 msgstr "Sol tərəfdə bir səhifə seçin."
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Video konfrans Serveri"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Səhifədə bax"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Layihəyə baxın"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Məxfilik parametrləri"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "fəaliyyətsiz"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Başlanğıc tarixi."
-
-#, fuzzy
-msgid "running now!"
-msgstr "İndi qoşulun!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Room"
-msgstr "Komanda Tipindən"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Tədbir"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Hələlik əşyalar yoxdur"
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Təyin edilməyib"
-
 msgid "Newsletters"
 msgstr ""
 
@@ -2368,18 +2272,6 @@ msgstr "İstifadəçinin Salamlama E-poçtu"
 
 msgid "Simple Statistics"
 msgstr "Sadə Statistika"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Tədbir Yaradın"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Video konfrans Serveri"
 
 msgid "Edit"
 msgstr "Redaktə edin"
@@ -3334,6 +3226,137 @@ msgstr "İstifadəçini qəbul edin"
 #, fuzzy
 msgid "Decline"
 msgstr "İstifadəçiyə imtina edin"
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Conference Administration"
+msgstr "İdarəetmə"
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Description"
+msgid "Temporary restrictions"
+msgstr "Komandanın Təsviri"
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr ""
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Portal administrators"
+msgstr "Portal Adminləri"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Səhifədə bax"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Layihəyə baxın"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Məxfilik parametrləri"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "fəaliyyətsiz"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Başlanğıc tarixi."
+
+#, fuzzy
+msgid "running now!"
+msgstr "İndi qoşulun!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Room"
+msgstr "Komanda Tipindən"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Tədbir"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Hələlik əşyalar yoxdur"
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Təyin edilməyib"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Tədbir Yaradın"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Video konfrans Serveri"
 
 msgid "Rearrange"
 msgstr "Yenidən qruplaşdırın"
@@ -6164,6 +6187,9 @@ msgstr ""
 msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
 msgstr ""
 
+msgid "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account."
+msgstr ""
+
 msgid "Delete Account"
 msgstr "Hesabı silin"
 
@@ -6177,6 +6203,10 @@ msgstr "İstifadəçi hesabını silin"
 msgid "User profile: %(username)s"
 msgstr "İstifadəçi profili: %(username)s"
 
+#, fuzzy
+msgid "Profile"
+msgstr "Mənim Hesabım"
+
 msgid "Cooperation requests"
 msgstr "Əməkdaşlıq istəkləri"
 
@@ -6188,6 +6218,11 @@ msgstr "Potensial əməkdaşlıq üçün əlaqə qurmaq İSTƏMİRƏM!"
 
 msgid "My Website"
 msgstr "Vebsaytım"
+
+#, fuzzy
+#| msgid "Gesendet"
+msgid "ended"
+msgstr "Göndərilib"
 
 msgid "Edit Your Profile"
 msgstr "Profilinizi redaktə edin"
@@ -6687,10 +6722,6 @@ msgstr "Ana səhifə"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Çat"
-
-#, fuzzy
-msgid "Profile"
-msgstr "Mənim Hesabım"
 
 msgid "Change language"
 msgstr "Dili dəyişdirin"

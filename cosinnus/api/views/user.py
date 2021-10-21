@@ -12,8 +12,8 @@ from rest_framework.views import APIView
 
 from cosinnus.conf import settings
 from ..serializers.user import UserCreateUpdateSerializer, UserSerializer
-from ...models import get_user_profile_model, CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_MEMBER, \
-    MEMBERSHIP_ADMIN
+from ...models import get_user_profile_model, CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_MEMBER
+from cosinnus.models.membership import MEMBER_STATUS
 
 User = get_user_model()
 
@@ -70,7 +70,7 @@ class UserViewSet(viewsets.ModelViewSet):
         if groups is not None:
             # Get existing memberships
             old_groups = CosinnusGroupMembership.objects.filter(user=user, group__slug__in=groups)
-            old_groups = old_groups.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN))
+            old_groups = old_groups.filter(status__in=MEMBER_STATUS)
             old_groups = old_groups.values_list('group__slug', flat=True)
             # Delete all other memberships
             CosinnusGroupMembership.objects.filter(user=user).exclude(group__slug__in=old_groups).delete()

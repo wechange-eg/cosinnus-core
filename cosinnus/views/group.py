@@ -2053,7 +2053,7 @@ class GroupOrganizationsView(DetailView):
         context.update({
             'requested': queryset.filter(status=MEMBERSHIP_PENDING),
             'invited': queryset.filter(status=MEMBERSHIP_INVITED_PENDING),
-            'members': queryset.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN)),
+            'members': queryset.filter(status__in=MEMBER_STATUS),
             'request_form': MultiOrganizationSelectForm(group=self.object),
             'group': self.object,
         })

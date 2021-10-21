@@ -48,9 +48,9 @@
     <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{ modal_id }}">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#">
+                <span class="pull-left">
                     <i class="fa fa-eraser"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans "Delete" %}
                 </div>
@@ -61,13 +61,13 @@
     <button type="button" class="btn btn-emphasized" href="{{ object.get_activate_url }}">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#">
+                <span class="pull-left">
                     {% if object.is_active %}
                     <i class="fa fa-close"></i>
                     {% else %}
                     <i class="fa fa-check"></i>
                     {% endif %}
-                </a>
+                </span>
                 <div class="media-body">
                     {% if object.is_active %}
                         {% trans "Deactivate" %}

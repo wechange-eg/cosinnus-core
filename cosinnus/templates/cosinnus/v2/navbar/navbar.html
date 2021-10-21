@@ -4,33 +4,38 @@
     <div class="nav-content">
     	<div class="nav-section nav-brand">
     	    {% block nav_brand %}
-	    		{% if request.user.is_authenticated %}
-		            <a class="nav-button nav-button-with-message-counter burger-menu nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Menu" %}"
-				    		aria-expanded="false" aria-controls="main-collapse"
-				    		data-toggle="collapse" data-target="#main-collapse">
-			    		<i class="fas fa-fw fa-bars"></i>
-			    		{% with total_counter=groups_invited_count|add_num:group_requests_count %}
-				    		{% if total_counter > 0 %}
-				    			<span class="message-counter"> {{ total_counter }}</span>
-				    		{% endif %}
-			    		{% endwith %}
-		    		</a>
-	    		{% endif %}
+				{% block burger_menu %}
+					{% if request.user.is_authenticated %}
+						<a class="nav-button nav-button-with-message-counter burger-menu nav-collapse-button collapsed" rel="toggle" role="button" title="{% trans "Menu" %}"
+								aria-expanded="false" aria-controls="main-collapse"
+								data-toggle="collapse" data-target="#main-collapse">
+							<i class="fas fa-fw fa-bars"></i>
+							{% with total_counter=groups_invited_count|add_num:group_requests_count %}
+								{% if total_counter > 0 %}
+									<span class="message-counter"> {{ total_counter }}</span>
+								{% endif %}
+							{% endwith %}
+						</a>
+					{% endif %}
+				{% endblock %}
 	
 	    		{% block brand_button %}
 		            <a class="nav-button" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "Dashboard" %}">
 		            	{% include 'cosinnus/v2/navbar/brand.html' %}
 		            </a>
 	            {% endblock %}
-	            <div class="brand-links mobile-hidden">
-	            	{% include 'cosinnus/v2/navbar/brand_links.html' %}
-	            </div>
-	
-	            {% if not SETTINGS.COSINNUS_USE_V2_NAVBAR and SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
-		            <a class="nav-button nav-header-textlink hidden-during-search" href="#">
-		            	***ADMIN-ONLY TEST PHASE***
-		            </a>
-	        	{% endif %}
+	            
+	            {% block brand_links %}
+		            <div class="brand-links mobile-hidden">
+		            	{% include 'cosinnus/v2/navbar/brand_links.html' %}
+		            </div>
+		
+		            {% if not SETTINGS.COSINNUS_USE_V2_NAVBAR and SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
+			            <a class="nav-button nav-header-textlink hidden-during-search" href="#">
+			            	***ADMIN-ONLY TEST PHASE***
+			            </a>
+		        	{% endif %}
+	        	{% endblock %}
         	{% endblock %}
     	</div>
     </div>
@@ -404,20 +409,34 @@
 			</ul>
 		</div>
 
-		{% if request.user|is_superuser %}
-			<div class="nav-flyout-section padded">
-				<ul class="item-list">
-					<li>
-						<a href="{% url 'cosinnus:administration' %}" class="list-item" role="button" titledby=".item-text">
-				    		<div class="item-text">
-				    			{% trans "Administration" %}
-				    		</div>
-						</a>
-					</li>
-				</ul>
-			</div>
-
-		{% endif %}
+		{% if request.user|is_portal_manager or request.user|is_superuser %}
+            <div class="nav-flyout-section padded">
+                {% if request.user|is_superuser  %}
+	                <ul class="item-list">
+	                    <li>
+	                        <a href="{% url 'cosinnus:administration' %}" class="list-item" role="button" titledby=".item-text">
+	                            <div class="item-text">
+	                                {% trans "Administration" %}
+	                            </div>
+	                        </a>
+	                    </li>
+	                </ul>
+                {% endif %}
+                
+                {% if request.user|is_portal_manager or request.user|is_superuser %}
+	                <ul class="item-list">
+	                    <li>
+	                        <a href="{% url 'cosinnus:conference-administration' %}" class="list-item" role="button" titledby=".item-text">
+	                            <div class="item-text">
+	                                {% trans "Conference Administration" %}
+	                            </div>
+	                        </a>
+	                    </li>
+	                </ul>
+		        {% endif %}
+            </div>
+        {% endif %}
+        
 
 		<div class="nav-flyout-section padded">
 			<ul class="item-list">

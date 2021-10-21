@@ -8,9 +8,9 @@
 	<div type="button" class="btn btn-default w100 regular-space">
 	    <ul class="media-list">
 	        <li class="media">
-	            <a class="pull-left" href="#">
+	            <span class="pull-left">
 	                <i class="fa fa-pencil"></i>
-	            </a>
+	            </span>
 	            <div class="media-body media-body-form-control">
 	                {% captureas placeholder %}{% trans "Widget title" %}{% endcaptureas %}
 	                {% render_field form.widget_title class+="form-control" placeholder=placeholder %}
@@ -28,9 +28,9 @@
 	<div type="button" class="btn btn-default w100 regular-space">
 	    <ul class="media-list">
 	        <li class="media">
-	            <a class="pull-left" href="#">
+	            <span class="pull-left">
 	                <i class="fa fa-pencil"></i>
-	            </a>
+	            </span>
 	            <div class="media-body media-body-form-control">
 	                {% captureas placeholder %}{% trans "Font-awesome Widget Icon" %}{% endcaptureas %}
 	                {% render_field form.widget_icon class+="form-control" placeholder=placeholder %}
@@ -43,9 +43,9 @@
     <div type="button" class="btn btn-default w100 regular-space">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#">
+                <span class="pull-left">
                     <i class="fa fa-pencil"></i>
-                </a>
+                </span>
                 <div class="media-body media-body-form-control">
                     {% captureas placeholder %}{% trans "Link label" %}{% endcaptureas %}
                     {% render_field form.link_label class+="form-control" placeholder=placeholder %}
@@ -58,9 +58,9 @@
     <div type="button" class="btn btn-default w100 regular-space">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#">
+                <span class="pull-left">
                     <i class="fa fa-sort-numeric-asc"></i>
-                </a>
+                </span>
                 <div class="media-body media-body-form-control">
                     {% captureas placeholder %}{% trans "Sort field" %}{% endcaptureas %}
                     {% render_field form.sort_field class+="form-control" placeholder=placeholder %}

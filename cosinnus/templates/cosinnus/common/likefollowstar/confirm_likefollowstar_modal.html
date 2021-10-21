@@ -49,9 +49,9 @@
 	                <button id="confirm_likefollowstar_modal_submit_btn" type="button" class="btn btn-emphasized">
 	                    <ul class="media-list">
 	                        <li class="media">
-	                            <a class="pull-left" href="#">
+	                            <span class="pull-left">
 	                                <i class="fa {% if request.GET.like %}fa-heart{% else %}fa-bell{% endif %}"></i>
-	                            </a>
+	                            </span>
 	                            <div class="media-body">
 	                                {% trans "Yes" %}
 	                            </div>
@@ -61,9 +61,9 @@
 	                <button type="button" class="btn btn-emphasized" data-dismiss="modal">
 	                    <ul class="media-list">
 	                        <li class="media">
-	                            <a class="pull-left" href="#">
+	                            <span class="pull-left">
 	                                <i class="fa fa-times"></i>
-	                            </a>
+	                            </span>
 	                            <div class="media-body">
 	                                {% trans "Cancel" %}
 	                            </div>

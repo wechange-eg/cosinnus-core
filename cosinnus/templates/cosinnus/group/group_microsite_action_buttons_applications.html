@@ -8,9 +8,9 @@
 	        <button href="{% url 'cosinnus:user-add' %}?next={% group_url 'cosinnus:conference:application' group=group.slug %}" style="width: 100% !important;" type="button" class="btn btn-emphasized">
 	            <ul class="media-list">
 	                <li class="media">
-	                    <a class="pull-left" href="#">
+	                    <span class="pull-left">
 	                        <i class="fa fa-user-plus"></i>
-	                    </a>
+	                    </span>
 	                    <div class="media-body">
 	                        {% trans "Register and apply!" %}
 	                    </div>
@@ -21,9 +21,9 @@
 	        <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}join/?direct=1" style="width: 100% !important;" type="button" class="btn btn-emphasized">
                 <ul class="media-list">
                     <li class="media">
-                        <a class="pull-left" href="#">
+                        <span class="pull-left">
                             <i class="fa fa-user-plus"></i>
-                        </a>
+                        </span>
                         <div class="media-body">
                             {% trans "Register and join!" %}
                         </div>
@@ -71,9 +71,9 @@
                 <button type="button" class="btn btn-default btn-autosize" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="#">
+                            <span class="pull-left">
                                 <i class="fa fa-close"></i>
-                            </a>
+                            </span>
                             <div class="media-body">
                                 {% trans "Decline Invitation" %}</span>
                             </div>
@@ -90,9 +90,9 @@
                 <button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="#">
+                            <span class="pull-left">
                                 <i class="fa fa-pencil"></i>
-                            </a>
+                            </span>
                             <div class="media-body">
                                 {% trans "Edit Application" %}
                             </div>
@@ -103,9 +103,9 @@
                 <button href="{% group_url 'cosinnus:conference:application' group=group.slug %}" type="button" class="btn btn-emphasized btn-autosize">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="#">
+                            <span class="pull-left">
                                 <i class="fa fa-sign-in"></i>
-                            </a>
+                            </span>
                             <div class="media-body">
                                 {% trans "Apply for Participation" %}
                             </div>

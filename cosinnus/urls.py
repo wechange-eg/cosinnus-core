@@ -11,7 +11,7 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 from cosinnus.api.views.group import CosinnusSocietyViewSet, CosinnusProjectViewSet
 from cosinnus.api.views.user import oauth_user, oauth_profile, current_user, oauth_current_user, UserViewSet
-from cosinnus.api.views.portal import statistics as api_statistics, navbar, settings as api_settings
+from cosinnus.api.views.portal import statistics as api_statistics, header, footer, settings as api_settings
 from cosinnus.api.views.i18n import translations
 from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
@@ -20,7 +20,8 @@ from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_por
 from cosinnus.views import bbb_room, user_import
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
-    user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields
+    user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields, \
+    conference_administration
 from cosinnus_conference.api.views import ConferenceViewSet,\
     PublicConferenceViewSet
 from cosinnus_event.api.views import EventViewSet
@@ -121,9 +122,10 @@ urlpatterns = [
     url(r'^administration/announcement/(?P<slug>[^/]+)/delete/$', user_dashboard_announcement.user_dashboard_announcement_delete, name='user-dashboard-announcement-delete'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/activate-toggle/$', user_dashboard_announcement.user_dashboard_announcement_activate, name='user-dashboard-announcement-activate'),
     
-    url(r'^administration/conference_overview/$', administration.conference_overview, name='administration-conference-overview'),
-    url(r'^administration/conference_overview/nonstandard/$', administration.conference_overview, name='administration-conference-overview-nonstandard', kwargs={'only_nonstandard': True}),
-    url(r'^administration/conference_overview/premium/$', administration.conference_overview, name='administration-conference-overview-premium', kwargs={'only_premium': True}),
+    url(r'^conference_administration/$', conference_administration.conference_administration, name='conference-administration'),
+    url(r'^conference_administration/conference_overview/$', conference_administration.conference_overview, name='conference-administration-overview'),
+    url(r'^conference_administration/conference_overview/nonstandard/$', conference_administration.conference_overview, name='conference-administration-overview-nonstandard', kwargs={'only_nonstandard': True}),
+    url(r'^conference_administration/conference_overview/premium/$', conference_administration.conference_overview, name='conference-administration-overview-premium', kwargs={'only_premium': True}),
     
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),
@@ -361,7 +363,8 @@ schema_view = get_schema_view(
 )
 
 urlpatterns += [
-    url(r'^api/v2/navbar/$', navbar, name='api-navbar'),
+    url(r'^api/v2/(?:header|navbar)/$', header, name='api-header'),
+    url(r'^api/v2/footer/$', footer, name='api-footer'),
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

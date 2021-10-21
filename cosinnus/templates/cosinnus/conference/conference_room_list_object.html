@@ -4,9 +4,9 @@
     <div class="btn {% if object.is_visible %}btn-emphasized{% else %}btn-default{% endif %} w100" href="{{ object.get_edit_url }}">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-right fadedown-clickarea">
+                <span class="pull-right fadedown-clickarea">
                     <i class="fa fa-chevron-down"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     <span class="annotation mobile-hidden">
                         <span>
@@ -32,9 +32,9 @@
     <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{ modal_id }}">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#">
+                <span class="pull-left">
                     <i class="fa fa-eraser"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans "Delete" %}
                 </div>
@@ -45,9 +45,9 @@
     <button type="button" href="{{ object.get_edit_url }}" class="btn btn-emphasized">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#">
+                <span class="pull-left">
                     <i class="fa fa-pencil"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans "Edit" %}
                 </div>
@@ -59,9 +59,9 @@
     <button type="button" href="{{ object.get_room_create_url }}" class="btn btn-emphasized btn-autosize">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#">
+                <span class="pull-left">
                     <i class="fa fa-calendar"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans "Create Conference Event" %}
                 </div>

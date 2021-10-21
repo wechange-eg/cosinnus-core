@@ -24,9 +24,9 @@
                     </a>
                     <a class="pull-left" style="background-color:inherit;" href="#">
                     -->
-                    <a class="pull-left" href="#">
+                    <span class="pull-left">
                       <i class="fa fa-caret-down"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                       {% trans "Search options..." %}
                     </div>
@@ -43,9 +43,9 @@
 	          <div type="button" class="btn btn-default w100 regular-space">
 			    <ul class="media-list">
 			        <li class="media">
-			            <a class="pull-left" href="#">
+			            <span class="pull-left">
 			                <i class="fa fa-lightbulb-o"></i>
-			            </a>
+                  </span>
 			            <div class="media-body">
 			                {% captureas placeholder %}{% trans "Select topics" %}{% endcaptureas %}
 			                {% render_field form.topics class+=" w100" placeholder=placeholder %}
@@ -70,9 +70,9 @@
                     </a>
                     <a class="pull-left" style="background-color:inherit;" href="#">
                     -->
-                    <a class="pull-left" href="#">
+                    <span class="pull-left">
                       <i class="fa fa-search"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                       {% trans "All" %}
                     </div>
@@ -92,9 +92,9 @@
                         </a>
                         <a class="pull-left" style="background-color:inherit;" href="#">
                         -->
-                        <a class="pull-left" href="#">
+                        <span class="pull-left">
                           <i class="fa fa-file-text-o"></i>
-                        </a>
+                        </span>
                         <div class="media-body">
                           {% trans "News" %}
                         </div>
@@ -115,9 +115,9 @@
                         </a>
                         <a class="pull-left" style="background-color:inherit;" href="#">
                         -->
-                        <a class="pull-left" href="#">
+                        <span class="pull-left">
                           <i class="fa fa-calendar"></i>
-                        </a>
+                        </span>
                         <div class="media-body">
                           {% trans "Events" %}
                         </div>
@@ -138,9 +138,9 @@
 	                    </a>
 	                    <a class="pull-left" style="background-color:inherit;" href="#">
 	                    -->
-	                    <a class="pull-left" href="#">
+	                    <span class="pull-left">
 	                      <i class="fa fa-tasks"></i>
-	                    </a>
+	                    </span>
 	                    <div class="media-body">
 	                      {% trans "Todos" %}
 	                    </div>
@@ -161,9 +161,9 @@
 	                    </a>
 	                    <a class="pull-left" style="background-color:inherit;" href="#">
 	                    -->
-	                    <a class="pull-left" href="#">
+	                    <span class="pull-left">
 	                      <i class="fa fa-file-text-o"></i>
-	                    </a>
+	                    </span>
 	                    <div class="media-body">
 	                      {% trans "Etherpads" %}
 	                    </div>
@@ -182,9 +182,9 @@
 	                    </a>
 	                    <a class="pull-left" style="background-color:inherit;" href="#">
 	                    -->
-	                    <a class="pull-left" href="#">
+	                    <span class="pull-left">
 	                      <i class="fa fa-table"></i>
-	                    </a>
+	                    </span>
 	                    <div class="media-body">
 	                      {% trans "Ethercalcs" %}
 	                    </div>
@@ -205,9 +205,9 @@
                         </a>
                         <a class="pull-left" style="background-color:inherit;" href="#">
                         -->
-                        <a class="pull-left" href="#">
+                        <span class="pull-left">
                           <i class="fa fa-file"></i>
-                        </a>
+                        </span>
                         <div class="media-body">
                           {% trans "Files" %}
                         </div>
@@ -228,9 +228,9 @@
                         </a>
                         <a class="pull-left" style="background-color:inherit;" href="#">
                         -->
-                        <a class="pull-left" href="#">
+                        <span class="pull-left">
                           <i class="fa fa-bar-chart"></i>
-                        </a>
+                        </span>
                         <div class="media-body">
                           {% trans "Polls" %}
                         </div>
@@ -251,9 +251,9 @@
                         </a>
                         <a class="pull-left" style="background-color:inherit;" href="#">
                         -->
-                        <a class="pull-left" href="#">
+                        <span class="pull-left">
                           <i class="fa fa-exchange"></i>
-                        </a>
+                        </span>
                         <div class="media-body">
                           {% trans "Offers" %}
                         </div>
@@ -270,9 +270,9 @@
                   <!--
                   <a class="pull-left" style="background-color:inherit;" href="#">
                   -->
-                  <a class="pull-left" href="#">
+                  <span class="pull-left">
                     <i class="fa fa-group"></i>
-                  </a>
+                  </span>
                   <div class="media-body">
                     {% trans "Projects" %}
                   </div>
@@ -287,31 +287,33 @@
                   <!--
                   <a class="pull-left" style="background-color:inherit;" href="#">
                   -->
-                  <a class="pull-left" href="#">
+                  <span class="pull-left">
                     <i class="fa fa-sitemap"></i>
-                  </a>
+                  </span>
                   <div class="media-body">
                     {% trans "Groups" %}
                   </div>
                 </li>
               </ul>
             </button>
-
-            <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "models" %}&models=organization">
-              <ul class="media-list">
-                <li class="media">
-                  <!--
-                  <a class="pull-left" style="background-color:inherit;" href="#">
-                  -->
-                  <a class="pull-left" href="#">
-                    <i class="fa fa-building"></i>
-                  </a>
-                  <div class="media-body">
-                    {% trans "Organizations" %}
-                  </div>
-                </li>
-              </ul>
-            </button>
+            
+            {% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
+	            <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "models" %}&models=organization">
+	              <ul class="media-list">
+	                <li class="media">
+	                  <!--
+	                  <a class="pull-left" style="background-color:inherit;" href="#">
+	                  -->
+	                  <span class="pull-left" href="#">
+	                    <i class="fa fa-building"></i>
+	                  </span>
+	                  <div class="media-body">
+	                    {% trans "Organizations" %}
+	                  </div>
+	                </li>
+	              </ul>
+	            </button>
+            {% endif %}
 
             {% if user.is_authenticated %}
             
@@ -342,9 +344,9 @@
 		                      <!--
 		                      <a class="pull-left" style="background-color:inherit;" href="#">
 		                      -->
-		                      <a class="pull-left" href="#">
+		                      <span class="pull-left">
 		                        <i class="fa fa-cloud"></i>
-		                      </a>
+		                      </span>
 		                      <div class="media-body">
 		                        {% trans "Search in Cloud files" %}
 		                        <i class="fa fa-external-link"></i>
@@ -364,9 +366,9 @@
 	                  <!--
 	                  <a class="pull-left" style="background-color:inherit;" href="#">
 	                  -->
-	                  <a class="pull-left" href="#">
+	                  <span class="pull-left">
 	                    <i class="fa fa-sitemap"></i>
-	                  </a>
+	                  </span>
 	                  <div class="media-body">
 	                    {% trans "All Projects and Groups" %}
 	                  </div>
@@ -378,9 +380,9 @@
 	            <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "groups" %}&groups=mine">
 	              <ul class="media-list">
 	                <li class="media">
-	                  <a class="pull-left" href="#">
+	                  <span class="pull-left">
 	                      <i class="fa fa-sitemap"></i>
-	                  </a>
+	                  </span>
 	                  <div class="media-body">
 	                    {% trans "My Projects and Groups" %}
 	                  </div>
@@ -391,9 +393,9 @@
 	            <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "groups" %}&groups=others">
 	              <ul class="media-list">
 	                <li class="media">
-	                  <a class="pull-left" href="#">
+	                  <span class="pull-left">
 	                      <i class="fa fa-sitemap"></i>
-	                  </a>
+	                  </span>
 	                  <div class="media-body">
 	                    {% trans "Other Projects and Groups" %}
 	                  </div>
@@ -411,9 +413,9 @@
                   <!--
                   <a class="pull-left" style="background-color:inherit;" href="#">
                   -->
-                  <a class="pull-left" href="#">
+                  <span class="pull-left">
                     <i class="fa fa-user"></i>
-                  </a>
+                  </span>
                   <div class="media-body">
                     {% trans "Users" %}
                   </div>
@@ -486,9 +488,9 @@
             <button type="submit" class="btn btn-default">
               <ul class="media-list">
                 <li class="media">
-                  <a class="pull-left" href="#">
+                  <span class="pull-left">
                     <i class="fa fa-search"></i>
-                  </a>
+                  </span>
                   <div class="media-body">
                     Filtern
                   </div>
@@ -591,9 +593,9 @@
                       		<button type="button" class="btn btn-{% if page.has_previous %}emphasized{% else %}default{% endif %} pull-left" style="margin: 0;" {% if page.has_previous %}href="?{% strip_params request "page" %}&page={{ page.previous_page_number }}"{% else %}disabled=1{% endif %}>
 					            <ul class="media-list">
 					                <li class="media">
-					                    <a class="pull-left" href="#">
+					                    <span class="pull-left">
 					                        <i class="fa fa-chevron-left"></i>
-					                    </a>
+					                    </span>
 					                    <div class="media-body">
 					                        {% trans "previous" %}
 					                    </div>
@@ -604,9 +606,9 @@
 					        <button type="button" class="btn btn-{% if page.has_next %}emphasized{% else %}default{% endif %}" {% if page.has_next %}href="?{% strip_params request "page" %}&page={{ page.next_page_number }}"{% else %}disabled=1{% endif %}>
 					            <ul class="media-list">
 					                <li class="media">
-					                    <a class="pull-left" href="#">
+					                    <span class="pull-left">
 					                        <i class="fa fa-chevron-right"></i>
-					                    </a>
+					                    </span>
 					                    <div class="media-body">
 					                        {% trans "next" %}
 					                    </div>

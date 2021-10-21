@@ -756,10 +756,14 @@ class CosinnusConf(AppConf):
     # how many minutes after the streamed event start time the streamer is stopped and deleted via API
     CONFERENCES_STREAMING_API_STOP_DELETE_STREAMER_AFTER_MINUTES = 30
     
-    
     # if set to any value other than None, the conference public field will be disabled
     # and locked to the value set here
     CONFERENCES_PUBLIC_SETTING_LOCKED = None
+    
+    # can be set to a function receiving `user` as only argument, 
+    # to modify the user display name that BBB will use for a joining user
+    # default if None: `full_name`
+    CONFERENCES_USER_DISPLAY_NAME_FUNC = None
     
     # if set to True, regular non-portal admin users can not create projects and groups by themselves
     # and some elements like the "+" button in the navbar is hidden

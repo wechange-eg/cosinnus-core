@@ -29,7 +29,8 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_group_create_objects_access, check_object_read_access, get_user_token,
     check_user_portal_admin, check_user_superuser,
     check_object_likefollowstar_access, filter_tagged_object_queryset_for_user,
-    check_user_can_create_conferences, check_user_can_create_groups)
+    check_user_can_create_conferences, check_user_can_create_groups,
+    check_user_portal_manager)
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
 from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
     LikeObject, CosinnusTopicCategory
@@ -54,7 +55,7 @@ from wagtail.core.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
 from annoying.functions import get_object_or_None
 from django.utils.text import normalize_newlines
-from cosinnus.utils.functions import ensure_list_of_ints
+from cosinnus.utils.functions import ensure_list_of_ints, convert_html_to_string
 from django.db.models.query import QuerySet
 from django.core.serializers import serialize
 from cosinnus.models.idea import CosinnusIdea
@@ -154,6 +155,13 @@ def is_superuser(user):
     Template filter to check if a user has admin priviledges or is a portal admin.
     """
     return check_user_superuser(user)
+
+@register.filter
+def is_portal_manager(user):
+    """
+    Template filter to check if a user has manager priviledges on this portal.
+    """
+    return check_user_portal_manager(user)
 
 @register.filter
 def is_portal_admin(user):
@@ -434,6 +442,11 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         
         # TODO cache the dumped JSON strings?
         
+    return render_to_string(template, context.flatten(), request=request)
+
+
+@register.simple_tag(takes_context=True)
+def cosinnus_footer_v2(context, template="cosinnus/v2/footer.html", request=None):
     return render_to_string(template, context.flatten(), request=request)
 
 
@@ -1392,3 +1405,10 @@ def get_admin_data():
     """ Returns the portal administrators on the signup page """
     admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
     return admins
+
+@register.filter
+def safe_text(text):
+    """ Returns JS-safe text, for use in form-elements that might get re-used in JS. """
+    return convert_html_to_string(text)
+
+

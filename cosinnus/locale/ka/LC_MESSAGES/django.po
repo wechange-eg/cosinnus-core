@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 19:02+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2221,102 +2221,6 @@ msgstr "ადმინისტრაცია"
 msgid "Select a page on the left side."
 msgstr "მარცხენა მხარეს გვერდის მონიშვნა."
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "ვიდეო კონფერენციის სერვერი"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "ვიდეო კონფერენციის სერვერი"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "გვერდზე ნახვა"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "პროექტის ნახვა"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "ვიდეო კონფერენციის სერვერი"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "პირადი პარამეტრები"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "ვიდეო კონფერენციის სერვერი"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "არააქტიური"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "საწყისი თარიღი."
-
-#, fuzzy
-msgid "running now!"
-msgstr "ჩაერთეთ ახლა!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "ვიდეო კონფერენციის სერვერი"
-
-#, fuzzy
-msgid "Room"
-msgstr "გუნდის ტიპიდან"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "ღონისძება"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "საგნები ჯერ არ არის"
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "არ არის დალაგებული"
-
 msgid "Newsletters"
 msgstr ""
 
@@ -2367,18 +2271,6 @@ msgstr "მომხმარებლის მისასალმებე�
 
 msgid "Simple Statistics"
 msgstr "უბრალო სტატისტიკა"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "ვიდეო კონფერენციის სერვერი"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "ღონისძიების შექმნა"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "ვიდეო კონფერენციის სერვერი"
 
 msgid "Edit"
 msgstr "რედაქტირება"
@@ -3328,6 +3220,137 @@ msgstr "მომხმარებლის დათანხმება"
 #, fuzzy
 msgid "Decline"
 msgstr "მომხმარებლის გაუქმება"
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Conference Administration"
+msgstr "ადმინისტრაცია"
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Description"
+msgid "Temporary restrictions"
+msgstr "გუნდის აღწერა"
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr ""
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Portal administrators"
+msgstr "პორტალის ადმინისტრატორები"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "გვერდზე ნახვა"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "პროექტის ნახვა"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "პირადი პარამეტრები"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "არააქტიური"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "საწყისი თარიღი."
+
+#, fuzzy
+msgid "running now!"
+msgstr "ჩაერთეთ ახლა!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Room"
+msgstr "გუნდის ტიპიდან"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "ღონისძება"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "საგნები ჯერ არ არის"
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "არ არის დალაგებული"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "ღონისძიების შექმნა"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "ვიდეო კონფერენციის სერვერი"
 
 msgid "Rearrange"
 msgstr "გადაწყობა"
@@ -6158,6 +6181,9 @@ msgstr ""
 msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
 msgstr ""
 
+msgid "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account."
+msgstr ""
+
 msgid "Delete Account"
 msgstr "ანგარიშის წაშლა"
 
@@ -6171,6 +6197,10 @@ msgstr "მომხმარებლის ანგარიშის წა�
 msgid "User profile: %(username)s"
 msgstr "მომხმარებლის პროფილი: %(username)s"
 
+#, fuzzy
+msgid "Profile"
+msgstr "ჩემი პროფილი"
+
 msgid "Cooperation requests"
 msgstr "მოთხოვნები თანამშრომლობაზე"
 
@@ -6182,6 +6212,11 @@ msgstr "არ მსურს პოტენციურ კოლაბორ
 
 msgid "My Website"
 msgstr "ჩემი ვებ-საიტი"
+
+#, fuzzy
+#| msgid "Gesendet"
+msgid "ended"
+msgstr "გაგზავნილია"
 
 msgid "Edit Your Profile"
 msgstr "ჩემი პროფილის რედაქტირება"
@@ -6681,10 +6716,6 @@ msgstr "მთავარი"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
-
-#, fuzzy
-msgid "Profile"
-msgstr "ჩემი პროფილი"
 
 msgid "Change language"
 msgstr "ენის შეცვლა"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 19:02+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2155,88 +2155,6 @@ msgstr "Administration"
 msgid "Select a page on the left side."
 msgstr "Wähle links eine Seite aus."
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Überblick - Tagungen, Räume und Workshops mit eigenen BBB-Server-Einstellungen"
-
-msgid "Overview - Premium Conferences Only"
-msgstr "Überblick - Premium-Tagungen"
-
-msgid "Overview - All Conferences"
-msgstr "Überblick - Alle Tagungen"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Überblick - Tagungen, Räume und Workshops"
-
-msgid "Past"
-msgstr "Vergangenheit"
-
-msgid "View Upcoming"
-msgstr "Aktuelle ansehen"
-
-msgid "Upcoming"
-msgstr "Aktuelle"
-
-msgid "View Past"
-msgstr "Vergangene ansehen"
-
-msgid "Premium capacity occupancy overview"
-msgstr "Überblick über die Belegung von Premium-Kapazität"
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr "Dieser Kalendar zeigt all die Tagungen in der aktuellen Ansicht, alle Premium-Blöcke, die momentan für die Tagungen gebucht sind, sowie die gesamte Kapazität der bestimmten Premium-Servers."
-
-msgid "Booked"
-msgstr "Gebucht"
-
-msgid "Permanently Premium"
-msgstr "Tagung ist durchgehend Premium"
-
-msgid "Portal Setting"
-msgstr "Portal-Einstellung"
-
-msgid "Conference Settings"
-msgstr "Tagungs-Einstellungen"
-
-msgid "Premium active"
-msgstr "Premium ist aktiv"
-
-msgid "Premium inactive, but scheduled"
-msgstr "Premium ist inaktiv, aber geplant"
-
-msgid "Not premium"
-msgstr "Nicht Premium"
-
-msgid "Rooms"
-msgstr "Räume"
-
-msgid "Start"
-msgstr "Beginnt"
-
-msgid "running now!"
-msgstr "läuft gerade!"
-
-msgid "Conference Setting"
-msgstr "Tagungs-Einstellungen"
-
-msgid "Room"
-msgstr "Raum"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Veranstaltung"
-
-msgid "There are no items to show."
-msgstr "Keine Inhalte vorhanden."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB-Premium"
-
-msgid "Not set"
-msgstr "Nicht eingestellt"
-
 msgid "Newsletters"
 msgstr "Newsletter"
 
@@ -2284,15 +2202,6 @@ msgstr "Willkommens-E-Mail für neue Benutzer"
 
 msgid "Simple Statistics"
 msgstr "Simple Statistiken"
-
-msgid "Conference Overview"
-msgstr "Tagungs-Überblick"
-
-msgid "Premium Conferences Only"
-msgstr "Nur Premium-Tagungen"
-
-msgid "Conferences with Custom Settings"
-msgstr "Tagungen mit eigenen Einstellungen"
 
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -3214,6 +3123,115 @@ msgstr "Akzeptieren"
 msgid "Decline"
 msgstr "Ablehnen"
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Überblick - Tagungen, Räume und Workshops mit eigenen BBB-Server-Einstellungen"
+
+msgid "Overview - Premium Conferences Only"
+msgstr "Überblick - Premium-Tagungen"
+
+msgid "Overview - All Conferences"
+msgstr "Überblick - Alle Tagungen"
+
+msgid "Conference Administration"
+msgstr "Tagungsverwaltung"
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr "Während wir die Schnittstelle zur Konferenzverwaltung überarbeiten, können leider nur Portaladministrator_innen Änderungen für Premium-Tagungen vornehmen. Bitte kontaktiere eine der oben auf der Seite aufgeführten Portaladministrator_in, um diese Änderungen für dich vorzunehmen!"
+
+msgid "Temporary restrictions"
+msgstr "Temporäre Einschränkungen"
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr "Während wir die Schnittstelle zur Tagungsverwaltung überarbeiten, können nur Portaladministrator_innen Änderungen für Premium-Tagungen vornehmen."
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr "Wenn du kein/keine Portaladministrator_in bist und Änderungen vornehmen möchtest, wende dich bitte an einen der unten aufgeführten Portaladministrator_innen, um diese Änderungen für dich vorzunehmen."
+
+msgid "Portal administrators"
+msgstr "Portal-Administrator_innen"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Überblick - Tagungen, Räume und Workshops"
+
+msgid "Past"
+msgstr "Vergangenheit"
+
+msgid "View Upcoming"
+msgstr "Aktuelle ansehen"
+
+msgid "Upcoming"
+msgstr "Aktuelle"
+
+msgid "View Past"
+msgstr "Vergangene ansehen"
+
+msgid "Premium capacity occupancy overview"
+msgstr "Überblick über die Belegung von Premium-Kapazität"
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr "Dieser Kalendar zeigt all die Tagungen in der aktuellen Ansicht, alle Premium-Blöcke, die momentan für die Tagungen gebucht sind, sowie die gesamte Kapazität der bestimmten Premium-Servers."
+
+msgid "Booked"
+msgstr "Gebucht"
+
+msgid "Permanently Premium"
+msgstr "Tagung ist durchgehend Premium"
+
+msgid "Portal Setting"
+msgstr "Portal-Einstellung"
+
+msgid "Conference Settings"
+msgstr "Tagungs-Einstellungen"
+
+msgid "Premium active"
+msgstr "Premium ist aktiv"
+
+msgid "Premium inactive, but scheduled"
+msgstr "Premium ist inaktiv, aber geplant"
+
+msgid "Not premium"
+msgstr "Nicht Premium"
+
+msgid "Rooms"
+msgstr "Räume"
+
+msgid "Start"
+msgstr "Beginnt"
+
+msgid "running now!"
+msgstr "läuft gerade!"
+
+msgid "Conference Setting"
+msgstr "Tagungs-Einstellungen"
+
+msgid "Room"
+msgstr "Raum"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Veranstaltung"
+
+msgid "There are no items to show."
+msgstr "Keine Inhalte vorhanden."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB-Premium"
+
+msgid "Not set"
+msgstr "Nicht eingestellt"
+
+msgid "Conference Overview"
+msgstr "Tagungs-Überblick"
+
+msgid "Premium Conferences Only"
+msgstr "Nur Premium-Tagungen"
+
+msgid "Conferences with Custom Settings"
+msgstr "Tagungen mit eigenen Einstellungen"
+
 msgid "Rearrange"
 msgstr "Umsortieren"
 
@@ -3338,7 +3356,7 @@ msgid "Enter your choices"
 msgstr "Gib deine Auswahlmöglichkeiten ein"
 
 msgid "Please verify your email address to continue using your account."
-msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s."
+msgstr "Bitte bestätige deine E-Mail-Adresse, um dein Konto weiter zu benutzen."
 
 msgid "You should already have received an email with a verification link we sent to your account's email address:"
 msgstr "Du solltest bereits eine E-Mail mit dem Verifizierungslink erhalten haben, die wir an die E-Mail-Adresse deines Benutzerkontos geschickt haben:"
@@ -5978,6 +5996,9 @@ msgstr "Falls du noch Inhalte von dir löschen möchtest, tue dies bitte jetzt i
 msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
 msgstr "Dein Profil wird zuerst deaktiviert und komplett von der Plattform entfernt. Nach 30 Tagen und erst dann wird es endgültig aus unserer Datenbank gelöscht. In unseren Backup-Systemen ist der Account unter Umständen noch bis zu 6 Monate gespeichert. Falls Dir das zu lang ist wende Dich bitte an den Support dieser Plattform zur sofortigen Löschung."
 
+msgid "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account."
+msgstr "Während dieser 30-tägigen Frist ist die E-Mail-Adresse deines Kontos reserviert und kann nicht für die Registrierung eines neuen Kontos verwendet werden."
+
 #
 msgid "Delete Account"
 msgstr "Konto löschen"
@@ -5993,6 +6014,9 @@ msgstr "Benutzer_innen-Konto löschen"
 msgid "User profile: %(username)s"
 msgstr "Benutzer_innen-Profil: %(username)s"
 
+msgid "Profile"
+msgstr "Mein Profil"
+
 msgid "Cooperation requests"
 msgstr "Kooperationsanfragen"
 
@@ -6004,6 +6028,9 @@ msgstr "Ich möchte KEINE Anfragen für potentielle Zusammenarbeit erhalten!"
 
 msgid "My Website"
 msgstr "Meine Webseite"
+
+msgid "ended"
+msgstr "beendet"
 
 msgid "Edit Your Profile"
 msgstr "Profil bearbeiten"
@@ -6498,9 +6525,6 @@ msgstr "Startseite"
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
 
-msgid "Profile"
-msgstr "Mein Profil"
-
 msgid "Change language"
 msgstr "Sprache ändern"
 
@@ -6911,7 +6935,7 @@ msgid "Only conference members can see the content you requested. Apply to becom
 msgstr "Nur Mitglieder dieser Tagung können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
 msgid "Please verify your email address."
-msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s."
+msgstr "Bitte bestätige deine E-Mail-Adresse."
 
 #, python-format
 msgid "Please verify your email address by %(date_string)s."

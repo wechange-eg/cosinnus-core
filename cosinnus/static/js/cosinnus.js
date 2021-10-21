@@ -53,7 +53,7 @@
             if (typeof target === "undefined") {
                 target = 'body';
             }
-            $(target).on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea, .fadedown a.fadedown-clickarea',function(e) {
+            $(target).on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea, .fadedown .fadedown-clickarea',function(e) {
                 if (!$(this).closest('.fadedown').hasClass('open')) {
                     // closed
                     $(this)

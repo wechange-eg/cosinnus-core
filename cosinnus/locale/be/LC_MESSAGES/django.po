@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 19:02+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2231,102 +2231,6 @@ msgstr "Адміністратар"
 msgid "Select a page on the left side."
 msgstr ""
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Усе праекты"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Усе праекты"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Прагледзець на старонцы"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Прагледзець праект"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Толькі чальцы каманды"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Налады прыватнасці"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Cosinnus-праекты"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "(Неактыўная)"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Дата пачатку."
-
-#, fuzzy
-msgid "running now!"
-msgstr "Далучыцеся зараз!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Cosinnus-праект"
-
-#, fuzzy
-msgid "Room"
-msgstr "З тыпу каманды"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Падзея"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Бачных карыстальнікаў(-ц) няма."
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Не прызначана"
-
 msgid "Newsletters"
 msgstr ""
 
@@ -2380,18 +2284,6 @@ msgstr "Тэкст вітальнага ліста"
 
 msgid "Simple Statistics"
 msgstr "Простая статыстыка"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Стварыць падзею"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Стварыць падзею"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Cosinnus-праекты"
 
 msgid "Edit"
 msgstr "Рэдагаваць"
@@ -3354,6 +3246,137 @@ msgstr "Прыняць карыстальніка(-цу)"
 #, fuzzy
 msgid "Decline"
 msgstr "Адмовіць карыстальніку(-цы)"
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Усе праекты"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Усе праекты"
+
+#, fuzzy
+msgid "Conference Administration"
+msgstr "Адміністратар"
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Description"
+msgid "Temporary restrictions"
+msgstr "Апісанне каманды"
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr ""
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Portal administrators"
+msgstr "Адміністратары партала"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Прагледзець на старонцы"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Прагледзець праект"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Толькі чальцы каманды"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Налады прыватнасці"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Cosinnus-праекты"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "(Неактыўная)"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Дата пачатку."
+
+#, fuzzy
+msgid "running now!"
+msgstr "Далучыцеся зараз!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Cosinnus-праект"
+
+#, fuzzy
+msgid "Room"
+msgstr "З тыпу каманды"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Падзея"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Бачных карыстальнікаў(-ц) няма."
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Не прызначана"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Стварыць падзею"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Стварыць падзею"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Cosinnus-праекты"
 
 msgid "Rearrange"
 msgstr "Змяніць парадак"
@@ -6215,6 +6238,9 @@ msgstr ""
 msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
 msgstr ""
 
+msgid "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account."
+msgstr ""
+
 msgid "Delete Account"
 msgstr "Выдаліць акаўнт"
 
@@ -6229,6 +6255,10 @@ msgid "User profile: %(username)s"
 msgstr "Профіль карыстальніка(-цы): %(username)s"
 
 #, fuzzy
+msgid "Profile"
+msgstr "Мой профіль"
+
+#, fuzzy
 msgid "Cooperation requests"
 msgstr "Запыты на членства"
 
@@ -6240,6 +6270,11 @@ msgstr ""
 
 msgid "My Website"
 msgstr "Мой вэбсайт"
+
+#, fuzzy
+#| msgid "Gesendet"
+msgid "ended"
+msgstr "Адпраўленыя"
 
 msgid "Edit Your Profile"
 msgstr "Рэдагаваць Ваш профіль"
@@ -6757,10 +6792,6 @@ msgstr ""
 
 msgid "Rocket.Chat"
 msgstr ""
-
-#, fuzzy
-msgid "Profile"
-msgstr "Мой профіль"
 
 #, fuzzy
 msgid "Change language"

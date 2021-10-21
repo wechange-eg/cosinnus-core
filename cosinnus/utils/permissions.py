@@ -227,6 +227,14 @@ def check_user_portal_admin(user, portal=None):
     return user.id in portal.admins
 
 
+def check_user_portal_manager(user, portal=None):
+    """ Checks permissions if a user is a portal manager in the given or current portal.
+            returns ``True`` if the user is a portal manager
+    """
+    portal = portal or CosinnusPortal.get_current()
+    return user.id in portal.managers
+
+
 def check_user_portal_moderator(user, portal=None):
     """ Checks if a user is a portal moderator (must also be portal admin) in the given or current portal.
             returns ``True`` if the user is a portal moderator

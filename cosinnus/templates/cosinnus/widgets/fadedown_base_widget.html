@@ -23,9 +23,9 @@
 	                <a class="pull-left" href="{{ request.user|profile_url }}">
 	                    {% include "cosinnus/user/user_avatar_image.html" with user=request.user %}
 	                </a>
-	                <a class="pull-right" href="#">
+	                <span class="pull-right">
 	                    <i class="fa fa-pencil"></i>
-	                </a>
+	                </span>
 	                <div class="media-body ">
 	                        <span data-target="widget-title"></span>
 	                </div>
@@ -44,9 +44,9 @@
     <button type="button" class="btn btn-emphasized dashboard-appwidget-morebutton" data-target="widget-reload-button">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-right btn-extra-emphasized" href="#">
+                <span class="pull-right btn-extra-emphasized">
                     <i class="fa fa-refresh "></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans "More" %}
                 </div>

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 19:02+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2211,104 +2211,6 @@ msgstr "Administrare"
 msgid "Select a page on the left side."
 msgstr "Selectați o pagină din partea stângă."
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Este conferință"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Este conferință"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Vizualizarea pe pagină"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Vezi Proiect"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Conferința se desfășoară"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Setările de confidențialitate"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Setările Conferinței"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-#, fuzzy
-msgid "Not premium"
-msgstr "Premium"
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Restrâns"
-
-#, fuzzy
-msgid "running now!"
-msgstr "Alătură-te acum!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Setările Conferinței"
-
-#, fuzzy
-msgid "Room"
-msgstr "Tipul Camerei"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Eveniment"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Nu există articole încă"
-
-msgid "BBB"
-msgstr ""
-
-#, fuzzy
-msgid "BBB Premium"
-msgstr "Premium"
-
-#, fuzzy
-msgid "Not set"
-msgstr "Nealocat"
-
 msgid "Newsletters"
 msgstr ""
 
@@ -2361,18 +2263,6 @@ msgstr "Utilizator Bun Venit pe E-mail"
 
 msgid "Simple Statistics"
 msgstr "Statistici Simple"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Setările Conferinței"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Creează Eveniment"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Conferința se desfășoară"
 
 msgid "Edit"
 msgstr "Editați"
@@ -3333,6 +3223,139 @@ msgstr "Accept utilizatorul"
 #, fuzzy
 msgid "Decline"
 msgstr "Refuz utilizator"
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Este conferință"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Este conferință"
+
+#, fuzzy
+msgid "Conference Administration"
+msgstr "Administrare"
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Description"
+msgid "Temporary restrictions"
+msgstr "Descrierea Echipei"
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr ""
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Portal administrators"
+msgstr "Administratorii Portalului"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Vizualizarea pe pagină"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Vezi Proiect"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Conferința se desfășoară"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Setările de confidențialitate"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+#, fuzzy
+msgid "Not premium"
+msgstr "Premium"
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Restrâns"
+
+#, fuzzy
+msgid "running now!"
+msgstr "Alătură-te acum!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+msgid "Room"
+msgstr "Tipul Camerei"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Eveniment"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Nu există articole încă"
+
+msgid "BBB"
+msgstr ""
+
+#, fuzzy
+msgid "BBB Premium"
+msgstr "Premium"
+
+#, fuzzy
+msgid "Not set"
+msgstr "Nealocat"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Creează Eveniment"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Conferința se desfășoară"
 
 msgid "Rearrange"
 msgstr "Rearanja"
@@ -6160,6 +6183,9 @@ msgstr ""
 msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
 msgstr ""
 
+msgid "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account."
+msgstr ""
+
 msgid "Delete Account"
 msgstr "Șterge Contul"
 
@@ -6173,6 +6199,10 @@ msgstr "Ștergeți contul de utilizator"
 msgid "User profile: %(username)s"
 msgstr "Profil de utilizator: %(username)s"
 
+#, fuzzy
+msgid "Profile"
+msgstr "Profilul Meu"
+
 msgid "Cooperation requests"
 msgstr "Cerere de cooperare"
 
@@ -6184,6 +6214,11 @@ msgstr "NU doresc să fiu contactat pentru o colaborare potențială!"
 
 msgid "My Website"
 msgstr "Site-ul Meu"
+
+#, fuzzy
+#| msgid "Gesendet"
+msgid "ended"
+msgstr "Dent s-a înălțat mult"
 
 msgid "Edit Your Profile"
 msgstr "Editează-ți Profilul"
@@ -6683,10 +6718,6 @@ msgstr "Acasă"
 
 msgid "Rocket.Chat"
 msgstr "Rachetă. Chat"
-
-#, fuzzy
-msgid "Profile"
-msgstr "Profilul Meu"
 
 msgid "Change language"
 msgstr "Schimbă limba"

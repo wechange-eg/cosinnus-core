@@ -10,10 +10,9 @@ from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
 from cosinnus.conf import settings
-from cosinnus.models import MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.import_utils import import_from_settings
-from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
+from cosinnus.models.membership import MEMBER_STATUS
 
 User = get_user_model()
 
@@ -120,5 +119,5 @@ class UserCreateUpdateSerializer(serializers.ModelSerializer):
         return obj.cosinnus_profile.extra_fields
 
     def get_groups(self, obj):
-        queryset = obj.cosinnus_memberships.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN))
+        queryset = obj.cosinnus_memberships.filter(status__in=MEMBER_STATUS)
         return list(queryset.values_list('group__slug', flat=True))

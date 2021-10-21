@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 19:02+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2162,92 +2162,6 @@ msgstr "Διαχείριση"
 msgid "Select a page on the left side."
 msgstr "Επιλέξτε μια σελίδα στην αριστερή πλευρά."
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια με προσαρμοσμένες ρυθμίσεις Εξυπηρετητή-BBB"
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
-
-msgid "Overview - All Conferences"
-msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια"
-
-msgid "Past"
-msgstr "Προηγούμενος"
-
-msgid "View Upcoming"
-msgstr "Προβολή Προσεχούς"
-
-msgid "Upcoming"
-msgstr "Προσεχής"
-
-msgid "View Past"
-msgstr "Προβολή Προηγούμενου"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-msgid "Booked"
-msgstr "Με σελιδοδείκτη"
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Η σύσκεψη είναι μόνιμα premium"
-
-msgid "Portal Setting"
-msgstr "Ρύθμιση Πύλης"
-
-msgid "Conference Settings"
-msgstr "Ρυθμίσεις Σύσκεψης"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "Όχι premium"
-
-msgid "Rooms"
-msgstr "Δωμάτια"
-
-msgid "Start"
-msgstr "Έναρξη"
-
-msgid "running now!"
-msgstr "εκτελείται τώρα!"
-
-msgid "Conference Setting"
-msgstr "Ρύθμιση Σύσκεψης"
-
-msgid "Room"
-msgstr "Δωμάτιο"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Εκδήλωση"
-
-msgid "There are no items to show."
-msgstr "Δεν υπάρχουν στοιχεία να προβληθούν."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB Premium"
-
-msgid "Not set"
-msgstr "Δεν έχει οριστεί"
-
 msgid "Newsletters"
 msgstr "Newsletter"
 
@@ -2295,16 +2209,6 @@ msgstr "Email Καλωσορίσματος Χρήστη"
 
 msgid "Simple Statistics"
 msgstr "Απλή Στατιστική"
-
-msgid "Conference Overview"
-msgstr "Επισκόπηση Σύσκεψης"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
-
-msgid "Conferences with Custom Settings"
-msgstr "Συσκέψεις με Προσαρμοσμένες Ρυθμίσεις"
 
 msgid "Edit"
 msgstr "Επεξεργασία"
@@ -3208,6 +3112,126 @@ msgstr "Αποδοχή"
 
 msgid "Decline"
 msgstr "Απόρριψη"
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια με προσαρμοσμένες ρυθμίσεις Εξυπηρετητή-BBB"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
+
+msgid "Overview - All Conferences"
+msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
+
+#, fuzzy
+#| msgid "User Administration"
+msgid "Conference Administration"
+msgstr "Διαχείριση Χρήστη"
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Temporary User Accounts"
+msgid "Temporary restrictions"
+msgstr "Προσωρινοί Λογαριασμοί Χρήστη"
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr ""
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Portal administrators"
+msgstr "Διαχειριστές Πύλης"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια"
+
+msgid "Past"
+msgstr "Προηγούμενος"
+
+msgid "View Upcoming"
+msgstr "Προβολή Προσεχούς"
+
+msgid "Upcoming"
+msgstr "Προσεχής"
+
+msgid "View Past"
+msgstr "Προβολή Προηγούμενου"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "Με σελιδοδείκτη"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+msgid "Portal Setting"
+msgstr "Ρύθμιση Πύλης"
+
+msgid "Conference Settings"
+msgstr "Ρυθμίσεις Σύσκεψης"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "Όχι premium"
+
+msgid "Rooms"
+msgstr "Δωμάτια"
+
+msgid "Start"
+msgstr "Έναρξη"
+
+msgid "running now!"
+msgstr "εκτελείται τώρα!"
+
+msgid "Conference Setting"
+msgstr "Ρύθμιση Σύσκεψης"
+
+msgid "Room"
+msgstr "Δωμάτιο"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Εκδήλωση"
+
+msgid "There are no items to show."
+msgstr "Δεν υπάρχουν στοιχεία να προβληθούν."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB Premium"
+
+msgid "Not set"
+msgstr "Δεν έχει οριστεί"
+
+msgid "Conference Overview"
+msgstr "Επισκόπηση Σύσκεψης"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
+
+msgid "Conferences with Custom Settings"
+msgstr "Συσκέψεις με Προσαρμοσμένες Ρυθμίσεις"
 
 msgid "Rearrange"
 msgstr "Αναδιάταξη"
@@ -5990,6 +6014,9 @@ msgstr ""
 msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
 msgstr ""
 
+msgid "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account."
+msgstr ""
+
 msgid "Delete Account"
 msgstr "Διαγραφή Λογαριασμού"
 
@@ -6003,6 +6030,10 @@ msgstr "Διαγραφή λογαριασμού χρήστη"
 msgid "User profile: %(username)s"
 msgstr "Προφίλ χρήστη: %(username)s"
 
+#, fuzzy
+msgid "Profile"
+msgstr "Το Προφίλ Μου"
+
 msgid "Cooperation requests"
 msgstr "Αιτήματα συνεργασίας"
 
@@ -6014,6 +6045,9 @@ msgstr "ΔΕΝ επιθυμώ την επικοινωνία για πιθανή 
 
 msgid "My Website"
 msgstr "Η Ιστοσελίδα Μου"
+
+msgid "ended"
+msgstr ""
 
 msgid "Edit Your Profile"
 msgstr "Επεξεργασία του Προφίλ Σας"
@@ -6505,10 +6539,6 @@ msgstr "Αρχική"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
-
-#, fuzzy
-msgid "Profile"
-msgstr "Το Προφίλ Μου"
 
 msgid "Change language"
 msgstr "Αλλαγή γλώσσας"

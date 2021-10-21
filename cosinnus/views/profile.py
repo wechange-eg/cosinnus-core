@@ -228,6 +228,9 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
         return self.qs
 
     def get_conferences_for_user(self, profile):
+        if not settings.COSINNUS_CONFERENCES_ENABLED:
+            return []
+        
         from cosinnus.models.group_extra import CosinnusConference
         applications = profile.user.user_applications.all()
         conferences_application_ids = list(
@@ -238,8 +241,12 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
         unique_ids = set(conferences_application_ids +
                          conferences_membership_ids)
 
-        conferences = CosinnusConference.objects.filter(
-            id__in=list(unique_ids)).order_by('-from_date')
+        current_conferences = CosinnusConference.objects.filter(
+            id__in=list(unique_ids)).filter(to_date__gte=now()).order_by('from_date')
+        ended_conferences = CosinnusConference.objects.filter(
+            id__in=list(unique_ids)).exclude(to_date__gte=now()).order_by('-from_date')
+
+        conferences = list(current_conferences) + list(ended_conferences)
         return conferences
     
     def get_context_data(self, **kwargs):

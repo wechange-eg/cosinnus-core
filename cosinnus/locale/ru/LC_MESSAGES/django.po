@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 19:02+0200\n"
+"POT-Creation-Date: 2021-10-20 15:24+0200\n"
 "PO-Revision-Date: 2021-10-01 19:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2167,89 +2167,6 @@ msgstr "Администрирование"
 msgid "Select a page on the left side."
 msgstr "Выбрать страницу слева."
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Обзор — конференции, комнаты и воркшопы с пользовательскими настройками сервера BBB"
-
-msgid "Overview - Premium Conferences Only"
-msgstr "Обзор - Только премиальные конференции"
-
-msgid "Overview - All Conferences"
-msgstr "Конференция"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Обзор — конференции, комнаты и воркшопы"
-
-msgid "Past"
-msgstr "Прошедшие"
-
-msgid "View Upcoming"
-msgstr "Посмотреть на странице"
-
-msgid "Upcoming"
-msgstr "Будущие"
-
-msgid "View Past"
-msgstr "Посмотреть проект"
-
-msgid "Premium capacity occupancy overview"
-msgstr "Обзор использования премиальной мощности серверов"
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr "Этот календарь отражает все конференции в реальном режиме, все премиальные блоки, забронированные для конференции, а также доступную совокупную мощность премиальных серверов."
-
-msgid "Booked"
-msgstr "Добавлено в закладки"
-
-msgid "Permanently Premium"
-msgstr "Всегда премиум"
-
-msgid "Portal Setting"
-msgstr "Настройки приватности"
-
-msgid "Conference Settings"
-msgstr "Настройки конференции"
-
-msgid "Premium active"
-msgstr "Премиум активен"
-
-msgid "Premium inactive, but scheduled"
-msgstr "Премиальный режим не активирован, но запланирован"
-
-msgid "Not premium"
-msgstr "Премиум"
-
-msgid "Rooms"
-msgstr "Комнаты"
-
-msgid "Start"
-msgstr "Ограниченный"
-
-msgid "running now!"
-msgstr "запущен!"
-
-msgid "Conference Setting"
-msgstr "Настройки конференции"
-
-msgid "Room"
-msgstr "Тип комнаты"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Мероприятия"
-
-msgid "There are no items to show."
-msgstr "Здесь пока пусто."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "Премиум"
-
-# ???
-msgid "Not set"
-msgstr "Не определено"
-
 msgid "Newsletters"
 msgstr "Информационная рассылка"
 
@@ -2297,15 +2214,6 @@ msgstr "Приветственный емейл пользователям"
 
 msgid "Simple Statistics"
 msgstr "Простая статистика"
-
-msgid "Conference Overview"
-msgstr "Настройки конференции"
-
-msgid "Premium Conferences Only"
-msgstr "Только премиальные конференции"
-
-msgid "Conferences with Custom Settings"
-msgstr "Проходит конференция"
 
 msgid "Edit"
 msgstr "Редактировать"
@@ -3212,6 +3120,122 @@ msgstr "Принять заявку пользователя"
 
 msgid "Decline"
 msgstr "Отклонить заявку пользователя"
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Обзор — конференции, комнаты и воркшопы с пользовательскими настройками сервера BBB"
+
+msgid "Overview - Premium Conferences Only"
+msgstr "Обзор - Только премиальные конференции"
+
+msgid "Overview - All Conferences"
+msgstr "Конференция"
+
+#, fuzzy
+#| msgid "User Administration"
+msgid "Conference Administration"
+msgstr "Администрирование"
+
+msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Temporary User Accounts"
+msgid "Temporary restrictions"
+msgstr "Временные аккаунты пользователей"
+
+msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
+msgstr ""
+
+msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Portal administrators"
+msgstr "Администраторы портала"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Обзор — конференции, комнаты и воркшопы"
+
+msgid "Past"
+msgstr "Прошедшие"
+
+msgid "View Upcoming"
+msgstr "Посмотреть на странице"
+
+msgid "Upcoming"
+msgstr "Будущие"
+
+msgid "View Past"
+msgstr "Посмотреть проект"
+
+msgid "Premium capacity occupancy overview"
+msgstr "Обзор использования премиальной мощности серверов"
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr "Этот календарь отражает все конференции в реальном режиме, все премиальные блоки, забронированные для конференции, а также доступную совокупную мощность премиальных серверов."
+
+msgid "Booked"
+msgstr "Добавлено в закладки"
+
+msgid "Permanently Premium"
+msgstr "Всегда премиум"
+
+msgid "Portal Setting"
+msgstr "Настройки приватности"
+
+msgid "Conference Settings"
+msgstr "Настройки конференции"
+
+msgid "Premium active"
+msgstr "Премиум активен"
+
+msgid "Premium inactive, but scheduled"
+msgstr "Премиальный режим не активирован, но запланирован"
+
+msgid "Not premium"
+msgstr "Премиум"
+
+msgid "Rooms"
+msgstr "Комнаты"
+
+msgid "Start"
+msgstr "Ограниченный"
+
+msgid "running now!"
+msgstr "запущен!"
+
+msgid "Conference Setting"
+msgstr "Настройки конференции"
+
+msgid "Room"
+msgstr "Тип комнаты"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Мероприятия"
+
+msgid "There are no items to show."
+msgstr "Здесь пока пусто."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "Премиум"
+
+# ???
+msgid "Not set"
+msgstr "Не определено"
+
+msgid "Conference Overview"
+msgstr "Настройки конференции"
+
+msgid "Premium Conferences Only"
+msgstr "Только премиальные конференции"
+
+msgid "Conferences with Custom Settings"
+msgstr "Проходит конференция"
 
 msgid "Rearrange"
 msgstr "Перегруппировать"
@@ -5973,6 +5997,9 @@ msgstr "Если Вы все еще хотите удалить содержим
 msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
 msgstr "Ваш профиль будет сперва деактивирован и полностью убран с платформы. Через 30 дней - не раньше и не позже - он будет полностью удален из нашей базы данных. На наших запасных серверах Ваш аккаунт может сохраняться вплоть до 6 месяцев. Если для Вас это неприемлемо, пожалуйста, обратитесь в поддержку для незамедлительного удаления данных."
 
+msgid "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account."
+msgstr ""
+
 msgid "Delete Account"
 msgstr "Удалить аккаунт"
 
@@ -5986,6 +6013,9 @@ msgstr "Удалить аккаунт пользователя"
 msgid "User profile: %(username)s"
 msgstr "Профиль пользователя: %(username)s"
 
+msgid "Profile"
+msgstr "Мой профиль"
+
 msgid "Cooperation requests"
 msgstr "Заявки насчет сотрудничества"
 
@@ -5997,6 +6027,11 @@ msgstr "Я НЕ желаю контакта насчет возможного с
 
 msgid "My Website"
 msgstr "Мой сайт"
+
+#, fuzzy
+#| msgid "Gesendet"
+msgid "ended"
+msgstr "Отправлено"
 
 msgid "Edit Your Profile"
 msgstr "Редактировать Ваш профиль"
@@ -6486,9 +6521,6 @@ msgstr "Главная"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
-
-msgid "Profile"
-msgstr "Мой профиль"
 
 msgid "Change language"
 msgstr "Изменить язык"
@@ -7842,13 +7874,11 @@ msgstr "Ваши изменения были сохранены."
 #~ "\n"
 #~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
 #~ "\n"
-#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails "
-#~ "bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
 #~ "\n"
 #~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
 #~ "\n"
-#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen "
-#~ "wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
 #~ "\n"
 #~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
 #~ "\n"
@@ -7863,8 +7893,7 @@ msgstr "Ваши изменения были сохранены."
 #~ "\n"
 #~ "Заранее сообщаем, что зарегистрировавшись здесь, Вы автоматически стали членом группы „Блог“, в которую поступает вся информация портала. Чтобы Вам легче было понять, что здесь происходит, в настройках уведомлений по умолчанию включена настройка „Все новости“. Настройки можно очень просто изменить в соответствии с вашими индивидуальными потребностями (нажать на свое имя в правой верхней части экрана), чтобы не получать нежелательных сообщений на электронную почту.\n"
 #~ "\n"
-#~ "Еще полезно знать следующее: данный портал - один из многих на wechange.de. Если Вам хочется познакомиться с другими порталами, это можно сделать с помощью вашего логина. Если Вы зарегистрированы на нескольких порталах, то в рубрике „Лента“ (в левом верхнем углу меню) вы будете получать все обновления групп и проектов, членами которых Вы являетесь. Перемещаться с одного портала на другой можно нажимая на их логотипы. Если Вы хотите стать членом группы „Блог“ на другом портале, вам "
-#~ "надо будет просто подать заявку на членство.\n"
+#~ "Еще полезно знать следующее: данный портал - один из многих на wechange.de. Если Вам хочется познакомиться с другими порталами, это можно сделать с помощью вашего логина. Если Вы зарегистрированы на нескольких порталах, то в рубрике „Лента“ (в левом верхнем углу меню) вы будете получать все обновления групп и проектов, членами которых Вы являетесь. Перемещаться с одного портала на другой можно нажимая на их логотипы. Если Вы хотите стать членом группы „Блог“ на другом портале, вам надо будет просто подать заявку на членство.\n"
 #~ "\n"
 #~ "Если у Вас появятся вопросы, технические рекомендации, Вы захотите сообщить об ошибке или поделиться своими пожеланиями, обращайтесь к администраторам портала.\n"
 #~ "\n"
