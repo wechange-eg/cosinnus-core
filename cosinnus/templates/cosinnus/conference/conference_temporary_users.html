@@ -59,9 +59,32 @@
 	<div class="clearfix"></div>
 	{% if members %}
 	<div class="content-box">
+		<p><strong>{% trans 'Download User credentials' %}</strong></p>
+		<p></p>
+		<p>{% trans "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants." %}</p>
+	</div>
+	<div class="fadedown pull-right large-space">
+		<form action="" method="post">
+		{% csrf_token %}
+			<button type="submit" class="btn btn-emphasized btn-autosize large-space" name="downloadPasswords">
+				<ul class="media-list">
+					<li class="media">
+						<a class="pull-left" href="#">
+							<i class="fa fa-download"></i>
+						</a>
+						<div class="media-body">
+							{% trans "Download passwords and login info" %}
+						</div>
+					</li>
+				</ul>
+			</button>
+		</form>
+	</div>
+	<div class="clearfix"></div>
+	<div class="content-box">
 		<p><strong>{% trans 'Activate/Deactivate Users' %}</strong></p>
 		<p></p>
-		<p>{% trans "Once you uploaded all Temporary Users you can activate all User accounts. That means the users can actually login in with their credentials." %}</p>
+		<p>{% trans "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials." %}</p>
 		<p>{% trans "Once the conference is over you can deactivate all ausers. That means they can not login in with their credentials anymore." %}</p>
 	</div>
 	<div class="fadedown pull-right large-space">
@@ -247,23 +270,6 @@
 </div>
 <div>
 
-<div class="fadedown pull-right regular-space">
-	<form action="" method="post">
-	{% csrf_token %}
-		<button type="submit" class="btn btn-emphasized btn-autosize" name="downloadPasswords">
-			<ul class="media-list">
-				<li class="media">
-					<a class="pull-left" href="#">
-						<i class="fa fa-download"></i>
-					</a>
-					<div class="media-body">
-						{% trans "Download passwords and login info" %}
-					</div>
-				</li>
-			</ul>
-		</button>
-	</form>
-</div>
 <div class="fadedown pull-right">
 	<button class="btn btn-emphasized">
 		<ul class="media-list">
