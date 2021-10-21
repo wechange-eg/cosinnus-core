@@ -68,15 +68,16 @@ logger = logging.getLogger('cosinnus')
 
 
 class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin,
-                                  RequireExtraDispatchCheckMixin, DetailView):
+                                  RequireExtraDispatchCheckMixin, FormView):
 
     template_name = 'cosinnus/conference/conference_temporary_users.html'
-    
+    form_class = CosinusWorkshopParticipantCSVImportForm
+
     def extra_dispatch_check(self):
         if not self.group.allow_conference_temporary_users:
             messages.warning(self.request, _('This function is not enabled for this conference.'))
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
-    
+
     def get_object(self, queryset=None):
         return self.group
 
@@ -86,6 +87,13 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
                 and not user.cosinnus_profile.scheduled_for_deletion_at]
 
     def post(self, request, *args, **kwargs):
+
+        if 'upload_file' in request.POST:
+            form = self.get_form()
+            if form.is_valid():
+                return self.form_valid(form)
+            else:
+                return self.form_invalid(form)
 
         if 'startConferenence' in request.POST:
             self.group.conference_is_running = True
@@ -184,17 +192,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         context['group'] = self.group
         context['members'] = self.get_temporary_users()
         context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
-        context['upload_form'] = CosinusWorkshopParticipantCSVImportForm(group=self.group)
-
         return context
-
-
-class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, FormView):
-
-    form_class = CosinusWorkshopParticipantCSVImportForm
-
-    def get_object(self, queryset=None):
-        return self.group
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -1049,7 +1047,6 @@ conference_applications = ConferenceParticipationManagementApplicationsView.as_v
 conference_application = ConferenceApplicationView.as_view()
 conference_participation_management = ConferenceParticipationManagementView.as_view()
 conference_temporary_users = ConferenceTemporaryUserView.as_view()
-workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
 workshop_participants_download = WorkshopParticipantsDownloadView.as_view()
 workshop_participants_upload_skeleton = WorkshopParticipantsUploadSkeletonView.as_view()
 conference_room_management = ConferenceRoomManagementView.as_view()

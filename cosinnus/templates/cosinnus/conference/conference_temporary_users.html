@@ -14,7 +14,9 @@
 
 {% block content %}
 
+
 {% group_url 'cosinnus:conference:workshop-participants-download' group=group as workshop_participants_download_page %}
+
 
 <div class="content-box">
 
@@ -32,10 +34,10 @@
 
 	<p>{% trans "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank." %}</p>
 
-	<form action="{% group_url 'cosinnus:conference:workshop-participants-upload' group=group %}" method="post" enctype="multipart/form-data">
+	<form action="{% group_url 'cosinnus:conference:temporary-users' group=group %}" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
-		{% include 'cosinnus/fields/default_field.html' with field=upload_form.participants %}
-		<button type="submit" class="btn btn-emphasized large-space">
+		{% include 'cosinnus/fields/default_field.html' with field=form.participants %}
+		<button type="submit" name="upload_file" class="btn btn-emphasized large-space">
 			<ul class="media-list">
 				<li class="media">
 					<a class="pull-left" href="#">
@@ -48,6 +50,7 @@
 			</ul>
 		</button>
 	</form>
+
 
 
 	{% if members %}
@@ -163,19 +166,19 @@
 			{% if member.is_active %}
 		        {% captureas label %}{% trans "Do you really want to deactivate the member's user account ?" %}{% endcaptureas %}
 	            {% captureas title %}{% trans "Deactivate Member" %}{% endcaptureas %}
-	            {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
+	            {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=group %}{% endcaptureas %}
 	            {% include "cosinnus/modal_box.html" with id=modal_deactivate_id label=label title=title form_action=action submit_name="deactivate_member" submit_value=member.id title_icon='fas fa-minus-circle' %}
 
 	        {% else %}
 	            {% captureas label %}{% trans "Do you really want to activate the member's user account ?" %}{% endcaptureas %}
 	            {% captureas title %}{% trans "Activate Member" %}{% endcaptureas %}
-	            {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
+	            {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=group %}{% endcaptureas %}
 	            {% include "cosinnus/modal_box.html" with id=modal_activate_id label=label title=title form_action=action submit_name="activate_member" submit_value=member.id title_icon='fas fa-check-circle' %}
 	        {% endif %}
 
 	        {% captureas label %}{% trans "Do you really want to remove the user?" %}{% endcaptureas %}
 	        {% captureas title %}{% trans "Remove User" %}{% endcaptureas %}
-	        {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=object %}{% endcaptureas %}
+	        {% captureas action %}{% group_url 'cosinnus:conference:temporary-users' group=group %}{% endcaptureas %}
 	        {% include "cosinnus/modal_box.html" with id=modal_remove_id label=label title=title form_action=action submit_name="remove_member" submit_value=member.id title_icon_full_class='fas fa-user-slash' %}
 		</tr>
 		{% endfor %}
@@ -236,6 +239,7 @@
 		</ul>
 	</button>
 </div>
+
 
 
 
