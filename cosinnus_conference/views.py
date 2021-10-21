@@ -95,19 +95,19 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             else:
                 return self.form_invalid(form)
 
-        if 'startConferenence' in request.POST:
+        if 'activateUsers' in request.POST:
             self.group.conference_is_running = True
             self.group.save()
             self.update_all_members_status(True)
             messages.add_message(request, messages.SUCCESS,
-                                 _('Conference successfully started and user accounts activated'))
+                                 _('successfully activated all user accounts.'))
 
-        elif 'finishConferenence' in request.POST:
+        elif 'deactivateUsers' in request.POST:
             self.group.conference_is_running = False
             self.group.save()
             self.update_all_members_status(False)
             messages.add_message(request, messages.SUCCESS,
-                                 _('Conference successfully finished and user accounts deactivated'))
+                                 _('successfully deactivated all user accounts.'))
 
         elif 'deactivate_member' in request.POST:
             user_id = int(request.POST.get('deactivate_member'))
@@ -126,6 +126,11 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             user = get_user_model().objects.get(id=user_id)
             deactivate_user_and_mark_for_deletion(user)
             messages.add_message(request, messages.SUCCESS, _('Successfully removed user'))
+
+        elif 'remove_all_members' in request.POST:
+            for member in self.get_temporary_users():
+                deactivate_user_and_mark_for_deletion(member)
+            messages.add_message(request, messages.SUCCESS, _('Successfully removed all user'))
 
         elif 'downloadPasswords' in request.POST:
             filename = '{}_participants_passwords'.format(
