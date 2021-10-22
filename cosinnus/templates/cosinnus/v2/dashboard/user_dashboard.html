@@ -46,26 +46,6 @@
 		<div class="dashboard-left-bar-content" style="display: none;">
 		    {% block left_bar_widgets %}
 
-                {% block matching %}
-    				{% if SETTINGS.COSINNUS_MATCHING_ENABLED %}
-						<div class="widget-content">
-							<ul class="item-list">
-								<li>
-									<a class="list-item" href="/map/">
-										<div class="item-icon ">
-											<i class="fas fa-puzzle-piece"></i>
-										</div>
-										<div class="item-text">
-											{% trans "Find partners" %}
-										</div>
-									</a>
-								</li>
-							</ul>
-						</div>
-					{% endif %}
-                {% endblock %}
-
-
 				{% block conference_widget %}
 					{% if SETTINGS.COSINNUS_CONFERENCES_ENABLED and my_upcoming_conferences_with_icons %}
 						<div class="widget-content">
@@ -134,7 +114,7 @@
 
 				{% block starred_users_widget %}
                     <div class="starred-users-widget-root"></div>
-				{% block extra_dashboard_content %}{% endblock %}
+				{% endblock %}
 
                 {% block idea_widget %}
 				    <div class="ideas-widget-root"></div>
@@ -148,11 +128,26 @@
                     <div class="followed-objects-widget-root"></div>
                 {% endblock %}
 
-				{% block extra_dashboard_content %}{% endblock %}
+                {% block matching %}
+    				{% if SETTINGS.COSINNUS_MATCHING_ENABLED %}
+						<div class="widget-content">
+							<ul class="item-list">
+								<li>
+									<a class="list-item" href="/map/?matching=true">
+										<div class="item-icon ">
+											<i class="fas fa-puzzle-piece"></i>
+										</div>
+										<div class="item-text">
+											{% trans "Find partners" %}
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+					{% endif %}
+                {% endblock %}
 
-                {% block idea_widget %}
-				    <div class="ideas-widget-root"></div>
-				{% endblock %}
+				{% block extra_dashboard_content %}{% endblock %}
 
 				{% block map_widget %}
 					{% if SETTINGS.COSINNUS_USERDASHBOARD_USE_LIVE_MAP_WIDGET %}

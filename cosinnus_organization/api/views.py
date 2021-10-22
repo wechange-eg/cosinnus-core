@@ -4,12 +4,14 @@ from cosinnus.conf import settings
 from cosinnus_organization.api.rdf_serializers import CreativeWorkRDFSerializer
 from cosinnus_organization.api.serializers import OrganizationListSerializer, OrganizationRetrieveSerializer
 from cosinnus_organization.models import CosinnusOrganization
-from cosinnus.api.views.mixins import PublicCosinnusGroupFilterMixin, ReadOnlyOrIsAdminUser, CosinnusFilterQuerySetMixin
+from cosinnus.api.views.mixins import PublicCosinnusGroupFilterMixin, ReadOnlyOrIsAdminUser, \
+    CosinnusFilterQuerySetMixin, GetForUserViewSetMixin
 from rest_framework_rdf.viewsets import RDFViewSetMixin
 
 
 class OrganizationViewSet(PublicCosinnusGroupFilterMixin,
                           CosinnusFilterQuerySetMixin,
+                          GetForUserViewSetMixin,
                           RDFViewSetMixin,
                           viewsets.ModelViewSet):
     http_method_names = getattr(settings, 'COSINNUS_API_SETTINGS', {}).get('organization', ['get', ])

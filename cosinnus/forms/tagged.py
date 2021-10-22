@@ -324,8 +324,5 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}, init_func
             @property
             def save_attachable(self):
                 return self.forms['obj'].save_attachable
-    
 
     return TaggableObjectForm
-
-    

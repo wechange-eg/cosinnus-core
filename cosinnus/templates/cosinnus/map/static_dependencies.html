@@ -71,6 +71,7 @@
     var COSINNUS_TRANS_BROWSE_ALL_CONFERENCES = "{{ COSINNUS_CONFERENCE_TRANS.BROWSE_ALL }}";
     var COSINNUS_TRANS_CREATE_CONFERENCE = "{{ COSINNUS_CONFERENCE_TRANS.CREATE_NEW }}";
     var COSINNUS_USER_CAN_CREATE_CONFERENCE = {% if user|user_can_create_conferences %}true{% else %}false{% endif %};
+    var COSINNUS_FORUM_GROUP_SLUG = "{% get_setting 'NEWW_FORUM_GROUP_SLUG' %}";
 </script>
 
 {% include 'cosinnus/map/extra_head_map.html' %}

@@ -474,7 +474,7 @@
 						{# is_open_for_cooperation Field #}
 						{% trans "Is your project open to other partner organizations?" as is_open_for_cooperation_label %}
 						{% trans "Project is open for further partner organizations." as is_open_for_cooperation_box_label %}
-						{% include 'cosinnus/fields/checkbox_field.html' with field=form.is_open_for_cooperation label=is_open_for_cooperation_label checkbox_label=is_open_for_cooperation_box_label %}
+						{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.is_open_for_cooperation label=is_open_for_cooperation_label checkbox_label=is_open_for_cooperation_box_label %}
 						{% endif %}
                         
                         <div {% if group_model == "CosinnusConference" %}style="display: none;"{% endif %}>

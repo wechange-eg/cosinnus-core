@@ -875,7 +875,7 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
     # on the platform, no matter their visibility settings, and thus subject to moderation
     cosinnus_always_visible_by_users_moderator_flag = True
 
-    is_open_for_cooperation = models.BooleanField(_('Open for cooperation'), null=True)
+    is_open_for_cooperation = models.BooleanField(_('Open for cooperation'), default=False)
 
     # NOTE: this is the deprecated old extra_field jsonfield,
     # but it is still in use for some custom portal code, so cannot yet be removed.

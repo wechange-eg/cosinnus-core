@@ -45,7 +45,7 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     to_date = indexes.DateTimeField(model_attr='to_date', null=True)
     humanized_event_time_html = indexes.CharField(stored=True, indexed=False)
     dynamic_fields = indexes.CharField(null=True)
-    is_open_for_cooperation = indexes.BooleanField()
+    is_open_for_cooperation = indexes.BooleanField(model_attr='is_open_for_cooperation')
     
     # for filtering on this model
     is_group_model = indexes.BooleanField(default=True)

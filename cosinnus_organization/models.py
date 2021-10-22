@@ -65,7 +65,8 @@ class OrganizationManager(models.Manager):
             
         # Check that at most one of slugs and pks is set
         assert not (slugs and pks)
-        assert not (slugs or pks)
+        if (slugs is None) and (pks is None):
+            slugs = list(self.get_slugs().keys())
             
         if slugs is not None:
             if isinstance(slugs, six.string_types):
@@ -151,6 +152,13 @@ class OrganizationManager(models.Manager):
     
     def get_queryset(self):
         return CosinnusOrganizationQS(self.model, using=self._db).select_related('portal')
+
+    def get_for_user(self, user, includeInactive=False):
+        """
+        :returns: a list of :class:`CosinnusGroup` the given user is a member
+            or admin of.
+        """
+        return self.get_cached(pks=self.get_for_user_pks(user, includeInactive=includeInactive))
 
     def get_for_user_pks(self, user, include_public=False, member_status_in=MEMBER_STATUS, includeInactive=False):
         """
@@ -263,7 +271,7 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
     is_active = models.BooleanField(_('Is active'),
         help_text='If an organization is not active, it counts as non-existent for all purposes and views on the website.',
         default=True)
-    is_open_for_cooperation = models.BooleanField(_('Open for cooperation'), null=True)
+    is_open_for_cooperation = models.BooleanField(_('Open for cooperation'), default=False)
     created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL,
         verbose_name=_('Creator'),

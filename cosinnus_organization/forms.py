@@ -62,7 +62,7 @@ class _CosinnusOrganizationForm(AsssignPortalMixin, AdditionalFormsMixin, forms.
     class Meta(object):
         model = CosinnusOrganization
         fields = ['name', 'type', 'type_other', 'description', 'avatar', 'wallpaper', 'website', 'email',
-                  'phone_number']
+                  'phone_number', 'is_open_for_cooperation']
 
     def __init__(self, instance, *args, **kwargs):
         if 'request' in kwargs:

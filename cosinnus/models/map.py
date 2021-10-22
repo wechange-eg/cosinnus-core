@@ -29,6 +29,7 @@ from cosinnus.utils.permissions import check_ug_membership, check_ug_pending, \
     check_ug_invited_pending, check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_exchange.models import ExchangeProject, ExchangeSociety, ExchangeOrganization, ExchangeEvent
+from cosinnus_organization.models import CosinnusOrganization
 
 
 def _prepend_url(user, portal=None):
@@ -640,23 +641,32 @@ SHORTENED_ID_MAP = {
     'cosinnus.userprofile': 3,
     'cosinnus_event.event': 4,
     'cosinnus.cosinnusidea': 5,
-    'cosinnus_organization.CosinnusOrganization': 6,
+    'cosinnus_organization.cosinnusorganization': 6,
 }
+SHORTENED_ID_MAP_REVERSE = dict([(val, key) for key, val in list(SHORTENED_ID_MAP.items())])
 
 SEARCH_MODEL_NAMES = {
     get_user_profile_model(): 'people',
     CosinnusProject: 'projects',
     CosinnusSociety: 'groups',
+    CosinnusOrganization: 'organizations',
 }
+SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
+
 SHORT_MODEL_MAP = {
     1: CosinnusProject,
     2: CosinnusSociety,
     3: get_user_profile_model(),
+    # 4: Event,
+    # 5: CosinnusIdea,
+    6: CosinnusOrganization,
 }
+SHORT_MODEL_MAP_REVERSE = dict([(val, key) for key, val in list(SHORT_MODEL_MAP.items())])
 SEARCH_RESULT_DETAIL_TYPE_MAP = {
     'people': DetailedUserMapResult,
     'projects': DetailedProjectMapResult,
     'groups': DetailedSocietyMapResult,
+    'organizations': DetailedOrganizationMapResult,
 }
 try:
     from cosinnus_event.models import Event #noqa
@@ -810,8 +820,7 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
         'conferences': DetailedConferenceMapResult,
     })
 
-    
-SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
+
 # these can always be read by any user (returned fields still vary)
 SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS = [
     'projects',

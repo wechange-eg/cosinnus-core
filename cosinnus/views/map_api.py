@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from builtins import str
 import json
 import logging
+import re
 
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
@@ -90,6 +91,7 @@ MAP_NON_CONTENT_TYPE_SEARCH_PARAMETERS = {
     'toDate': None,
     'toTime': None,
     'exchange': False,
+    'matching': '',
 }
 # supported map search query parameters for selecting content models, and their default values (as python data after a json.loads()!) if not present
 MAP_CONTENT_TYPE_SEARCH_PARAMETERS = {
@@ -232,14 +234,35 @@ def map_search_endpoint(request, filter_group_id=None):
             # filter events by upcoming status and exclude hidden proxies
             sqs = filter_event_searchqueryset_by_upcoming(sqs)
 
-
     # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't shown)
     if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
         sqs = sqs.exclude(is_group_model=True, slug__in=get_default_user_group_slugs())
-    
-    # kip score sorting and only rely on natural ordering?
+
+
+    # filter for matching candidate (e. g. project.<slug>)
+    matching = re.match(r'(projects|groups|organizations)\.([a-z0-9-_]+)', params.get('matching', ''))
+    matching_obj, matching_dynamic_fields = None, None
+    if matching:
+        matching_type, matching_slug = matching.groups()
+        # get matching candidate
+        portal = CosinnusPortal.get_current().id
+        django_model = SEARCH_MODEL_NAMES_REVERSE.get(matching_type)
+        matching_obj = get_searchresult_by_args(portal, matching_type, matching_slug)
+        # filter content types: project, group or organization
+        sqs = sqs.filter(django_ct__in=(
+            'cosinnus.cosinnusproject',
+            'cosinnus.cosinnussociety',
+            'cosinnus_organization.cosinnusorganization',
+        ))
+        # filter only candidates which are open for cooperation
+        sqs = sqs.filter(is_open_for_cooperation=True)
+        # exclude matching candidate itself
+        sqs = sqs.exclude(_id=matching_obj.id)
+        matching_dynamic_fields = json.loads(matching_obj.dynamic_fields)
+
+    # skip score sorting and only rely on natural ordering?
     skip_score_sorting = False
-    # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
+    # if we have no query-boosted results, use *only* our custom sorting (haystack's is very random)
     if not query:
         sort_args = ['-local_boost']
         # if we only look at conferences, order them by their from_date, future first!
@@ -258,7 +281,6 @@ def map_search_endpoint(request, filter_group_id=None):
     total_count = sqs.count()
     sqs = sqs[limit*page:limit*(page+1)]
     results = []
-        
     for i, result in enumerate(sqs):
         if skip_score_sorting:
             # if we skip score sorting and only rely on the natural ordering, we make up fake high scores
@@ -268,6 +290,17 @@ def map_search_endpoint(request, filter_group_id=None):
             result.score = result.local_boost
             if prefer_own_portal and is_number(result.portal) and int(result.portal) == CosinnusPortal.get_current().id:
                 result.score += 100.0
+        if matching:
+            # boost by fields
+            for boost_field in getattr(settings, 'COSINNUS_MATCHING_FIELDS', []):
+                if set(result.get(boost_field).split(",")) & set(matching_obj.get(boost_field).split(",")):
+                    result.score = 100000 - (limit*page) - i
+                    break
+            dynamic_fields = json.loads(result.dynamic_fields)
+            for boost_field in getattr(settings, 'COSINNUS_MATCHING_DYNAMIC_FIELDS', []):
+                if set(dynamic_fields.get(boost_field).split(",")) & set(matching_dynamic_fields.get(boost_field).split(",")):
+                    result.score = 100000 - (limit*page) - i
+                    break
         results.append(HaystackMapResult(result, user=request.user))
         
     # if the requested item (direct select) is not in the queryset snippet

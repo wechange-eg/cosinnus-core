@@ -28,7 +28,7 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
     groups = indexes.MultiValueField()
     always_visible = indexes.BooleanField(default=True)
     dynamic_fields = indexes.CharField(null=True)
-    is_open_for_cooperation = indexes.BooleanField()
+    is_open_for_cooperation = indexes.BooleanField(model_attr='is_open_for_cooperation')
 
     def get_model(self):
         return CosinnusOrganization
