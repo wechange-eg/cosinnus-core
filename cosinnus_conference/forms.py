@@ -265,3 +265,4 @@ class AsignUserToEventForm(forms.Form):
         super().__init__(*args, **kwargs)
 
 AsignUserToEventForm = formset_factory(AsignUserToEventForm, extra=0)
+

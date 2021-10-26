@@ -183,7 +183,6 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
     from cosinnus.models.profile import get_user_profile_model
     from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
     from cosinnus.models.membership import MEMBERSHIP_MEMBER
-    from cosinnus.views.user import email_first_login_token_to_user
     from django.contrib.auth import get_user_model
     from django.core.exceptions import ObjectDoesNotExist
 
@@ -201,9 +200,7 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
         temp_username = str(random.randint(100000000000, 999999999999)) if not username else username
 
         # check if user with that password already exist
-        user, created = user_model.objects.get_or_create(username=temp_username, email=email)
-
-        email_first_login_token_to_user(user=user)
+        user, created = user_model.objects.get_or_create(username=temp_username, email=email, is_active=False)
         if not created:
             logger.error('Manual user creation failed. A user with tha username already exists!')
 
