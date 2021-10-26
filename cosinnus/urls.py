@@ -126,6 +126,7 @@ urlpatterns = [
     url(r'^conference_administration/conference_overview/$', conference_administration.conference_overview, name='conference-administration-overview'),
     url(r'^conference_administration/conference_overview/nonstandard/$', conference_administration.conference_overview, name='conference-administration-overview-nonstandard', kwargs={'only_nonstandard': True}),
     url(r'^conference_administration/conference_overview/premium/$', conference_administration.conference_overview, name='conference-administration-overview-premium', kwargs={'only_premium': True}),
+    url(r'^conference_administration/conference/(?P<slug>[^/]+)/blocks/add/$', conference_administration.conference_add_premium_block, name='conference-administration-add-premium-block'),
     
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),

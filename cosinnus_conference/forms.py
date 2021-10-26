@@ -6,6 +6,7 @@ from cosinnus_conference.utils import get_initial_template
 from cosinnus.models.conference import ParticipationManagement
 from cosinnus.models.conference import CosinnusConferenceApplication
 from cosinnus.models.conference import APPLICATION_STATES_VISIBLE
+from cosinnus.models.conference import CosinnusConferencePremiumBlock
 from cosinnus.utils.html import render_html_with_variables
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
@@ -265,3 +266,12 @@ class AsignUserToEventForm(forms.Form):
         super().__init__(*args, **kwargs)
 
 AsignUserToEventForm = formset_factory(AsignUserToEventForm, extra=0)
+
+
+class ConferencePremiumBlockForm(CleanFromToDateFieldsMixin, forms.ModelForm):
+    from_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='00:00'))
+    to_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='23:59'))
+
+    class Meta:
+        model = CosinnusConferencePremiumBlock
+        fields = ['from_date', 'to_date', 'participants']
