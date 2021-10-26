@@ -225,7 +225,6 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         unique_name = '{}_{}__{}'.format(self.group.portal.id, self.group.id, no_whitespace)
         return unique_name
 
-    @transaction.atomic
     def create_account(self, data, groups):
 
         username = self.get_unique_workshop_name(data[0])
@@ -253,6 +252,8 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
                 profile = get_user_profile_model()._default_manager.get_for_user(user)
                 profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
                 profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
+                profile.email_verified = True
+                
                 profile.add_redirect_on_next_page(
                     redirect_with_next(
                         group_aware_reverse(
