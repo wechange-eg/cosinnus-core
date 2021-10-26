@@ -629,12 +629,6 @@ COSINNUS_EXCHANGE_RUN_EVERY_MINS = 60 * 24
 #   serializer: None (required, e.g. 'cosinnus_exchange.serializers.ExchangeEventSerializer')
 COSINNUS_EXCHANGE_BACKENDS = []
 
-# Matching
-COSINNUS_MATCHING_ENABLED = False
-# Fields that will be used for matching ranking, should be present in projects, groups and organizations
-COSINNUS_MATCHING_FIELDS = ()
-COSINNUS_MATCHING_DYNAMIC_FIELDS = ()
-
 COSINNUS_STARRED_STAR_LABEL = _('Bookmark')
 COSINNUS_STARRED_STARRING_LABEL = _('Bookmarked')
 COSINNUS_STARRED_OBJECTS_LIST = _('Bookmark list')
