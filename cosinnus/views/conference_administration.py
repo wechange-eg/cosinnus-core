@@ -9,6 +9,9 @@ from django.urls import reverse_lazy
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import TemplateView, RedirectView
+from django.views.generic import FormView
+
+from cosinnus.utils.group import get_cosinnus_group_model
 
 from cosinnus.conf import settings
 from cosinnus.models.conference import CosinnusConferenceSettings, \
@@ -17,6 +20,7 @@ from cosinnus.models.conference import CosinnusConferenceSettings, \
 from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.views.mixins.group import RequirePortalManagerMixin
 from cosinnus.models.group import CosinnusPortal
+from cosinnus_conference.forms import ConferencePremiumBlockForm
 from cosinnus.utils.user import filter_active_users, filter_portal_users
 from django.contrib.auth import get_user_model
 
@@ -189,6 +193,25 @@ class ConferenceOverviewView(RequirePortalManagerMixin, TemplateView):
             'all_superusers': filter_active_users(filter_portal_users(get_user_model().objects.filter(is_superuser=True)))
         })
         return context
-    
-conference_overview = ConferenceOverviewView.as_view()
 
+
+class ConferenceAddPremiumBlockView(RequirePortalManagerMixin, FormView):
+    template_name = 'cosinnus/conference_administration/conference_premium_block_form.html'
+    form_class = ConferencePremiumBlockForm
+
+    def get_conference(self):
+        slug = self.kwargs.get('slug')
+        cosinnus_group = get_cosinnus_group_model()
+        return cosinnus_group.objects.get(slug=slug)
+
+    def form_valid(self, form):
+        form.instance.conference = self.get_conference()
+        form.instance.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('cosinnus:conference-administration-overview')
+
+
+conference_overview = ConferenceOverviewView.as_view()
+conference_add_premium_block = ConferenceAddPremiumBlockView.as_view()

@@ -165,7 +165,8 @@
         <h4>{% trans "Conference Settings" %}</h4>
         {% if conference_report_list %}
             {% for item in conference_report_list %}
-                
+                <div class="row">
+                    <div class="col-md-10">
                 {% captureas uuid %}{{ "accordion-"|add_uuid }}{% endcaptureas %}
                 <div class="panel panel-default import-report-container-item">
 				    <div class="panel-heading">
@@ -283,7 +284,13 @@
 					    </div>
 				    {% endif %}
 				</div>
-                
+                </div>
+                <div class="col-md-2">
+                    <a href="{% url 'cosinnus:conference-administration-add-premium-block' slug=item.conference.slug %}">
+                        <i class="fa fa-plus"></i> {% trans 'Add new premium block' %}
+                    </a>
+                </div>
+            </div>
                 
             {% endfor %}
         {% else %}

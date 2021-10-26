@@ -1,0 +1,57 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block page_title %}
+        {% trans "Add Premium Block to Conferences" %}
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus/conference_administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Conference Administration" %}</a></li>
+    <li class="active">
+        {% if only_nonstandard %}
+            {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
+        {% elif only_premium %}
+            {% trans "Overview - Premium Conferences Only" %}
+        {% else %}
+            {% trans "Overview - All Conferences" %}
+        {% endif %}
+    </li>
+{% endblock %}
+
+{% block content %}
+<form action method="post" class="cosinnus-form form-horizontal">{% csrf_token %}
+    <div class="content-box">
+        <div class="tab-content">
+            <div class="tab-pane active">
+                <h2>{% trans 'Add Premium Block' %}</h2>
+
+                {% trans "from" as from_date_label %}
+                {% trans "from" as from_date_placeholder %}
+                {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.from_date to_date_field=form.to_date %}
+
+                {% trans "participants" as participants_label %}
+                {% trans "participants" as lparticipants_placeholder %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.participants label=participants_label placeholder=participants_placeholder large_field=True %}
+
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-emphasized btn-autosize">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-floppy-o"></i>
+                </span>
+                <div class="media-body">
+                    {% trans "Save" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+</form>
+
+{% endblock %}
