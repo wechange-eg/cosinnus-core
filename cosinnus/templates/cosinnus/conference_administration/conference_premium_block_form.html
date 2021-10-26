@@ -10,15 +10,9 @@
 {% endblock leftnav %}
 
 {% block breadcrumb %}
-    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Conference Administration" %}</a></li>
+    <li><a href="{% url 'cosinnus:conference-administration' %}">{% trans "Conference Administration" %}</a></li>
     <li class="active">
-        {% if only_nonstandard %}
-            {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
-        {% elif only_premium %}
-            {% trans "Overview - Premium Conferences Only" %}
-        {% else %}
-            {% trans "Overview - All Conferences" %}
-        {% endif %}
+        {% blocktrans with name=conference.name %}Add Premium Block to "{{ name }}"{% endblocktrans %}
     </li>
 {% endblock %}
 
@@ -27,7 +21,7 @@
     <div class="content-box">
         <div class="tab-content">
             <div class="tab-pane active">
-                <h2>{% trans 'Add Premium Block' %}</h2>
+                <h2>{% blocktrans with name=conference.name %}Add Premium Block to "{{ name }}" {% endblocktrans %}</h2>
 
                 {% trans "from" as from_date_label %}
                 {% trans "from" as from_date_placeholder %}

@@ -212,6 +212,13 @@ class ConferenceAddPremiumBlockView(RequirePortalManagerMixin, FormView):
     def get_success_url(self):
         return reverse_lazy('cosinnus:conference-administration-overview')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'conference': self.get_conference()
+        })
+        return context
+
 
 conference_overview = ConferenceOverviewView.as_view()
 conference_add_premium_block = ConferenceAddPremiumBlockView.as_view()
