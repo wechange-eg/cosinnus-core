@@ -4,11 +4,15 @@ from __future__ import unicode_literals
 from _collections import defaultdict
 from datetime import timedelta
 from django.contrib.contenttypes.models import ContentType
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models.aggregates import Sum
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import TemplateView, RedirectView
+from django.views.generic.edit import UpdateView
 from django.views.generic import FormView
 
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -207,6 +211,8 @@ class ConferenceAddPremiumBlockView(RequirePortalManagerMixin, FormView):
     def form_valid(self, form):
         form.instance.conference = self.get_conference()
         form.instance.save()
+        messages.add_message(self.request, messages.SUCCESS,
+                             _('Successfully added premium block'))
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -214,11 +220,46 @@ class ConferenceAddPremiumBlockView(RequirePortalManagerMixin, FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        conference = self.get_conference()
         context.update({
-            'conference': self.get_conference()
+            'conference': conference,
+            'title': _('Add Premium Block to "{}"').format(conference.name)
         })
         return context
 
 
+class ConferenceEditPremiumBlockView(SuccessMessageMixin, RequirePortalManagerMixin, UpdateView):
+    template_name = 'cosinnus/conference_administration/conference_premium_block_form.html'
+    model = CosinnusConferencePremiumBlock
+    form_class = ConferencePremiumBlockForm
+    success_message = _('Successfully updated premium block.')
+    pk_url_kwarg = 'block_id'
+
+    def get_conference(self):
+        return self.object.conference
+
+    def get_success_url(self):
+        return reverse_lazy('cosinnus:conference-administration-overview')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        conference = self.get_conference()
+        context.update({
+            'conference': conference,
+            'title': _('Edit Premium Block in conference "{}"').format(
+                conference.name)
+        })
+        return context
+
+    def post(self, request, *args, **kwargs):
+        if 'delete' in request.POST:
+            self.get_object().delete()
+            messages.add_message(request, messages.SUCCESS,
+                                 _('Successfully deleted premium block'))
+            return HttpResponseRedirect(self.get_success_url())
+        return super().post(request, *args, **kwargs)
+
+
 conference_overview = ConferenceOverviewView.as_view()
 conference_add_premium_block = ConferenceAddPremiumBlockView.as_view()
+conference_edit_premium_block = ConferenceEditPremiumBlockView.as_view()
