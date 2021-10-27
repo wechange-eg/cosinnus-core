@@ -62,16 +62,16 @@ class DeleteScheduledUserProfiles(CosinnusCronJobBase):
                 logger.error('delete_userprofile() cronjob: threw an exception during the DeleteScheduledUserProfiles cronjob! (in extra)', extra={'exception': force_text(e)})
             
 
-if settings.COSINNUS_CONFERENCES_ENABLED:
-    class UpdateConferencePremiumStatus(CosinnusCronJobBase):
-        """ Updates the premium status for all conferences. """
-        
-        RUN_EVERY_MINS = 1 # every 1 min (or every time the cron runs at least)
-        schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
-        
-        cosinnus_code = 'cosinnus.update_conference_premium_status'
-        
-        def do(self):
+class UpdateConferencePremiumStatus(CosinnusCronJobBase):
+    """ Updates the premium status for all conferences. """
+    
+    RUN_EVERY_MINS = 1 # every 1 min (or every time the cron runs at least)
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    
+    cosinnus_code = 'cosinnus.update_conference_premium_status'
+    
+    def do(self):
+        if settings.COSINNUS_CONFERENCES_ENABLED:
             update_conference_premium_status()
 
 
