@@ -166,7 +166,7 @@
         {% if conference_report_list %}
             {% for item in conference_report_list %}
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                 {% captureas uuid %}{{ "accordion-"|add_uuid }}{% endcaptureas %}
                 <div class="panel panel-default import-report-container-item">
 				    <div class="panel-heading">
@@ -290,8 +290,34 @@
                         <i class="fa fa-plus"></i> {% trans 'Add new premium block' %}
                     </a>
                 </div>
+                {% captureas modal_toggle_premium_id %}modal_toggle_premium_{{ item.conference.id }}{% endcaptureas %}
+                <div class="col-md-2">
+                    <a type="button" href="" data-target="#{{ modal_toggle_premium_id }}" data-toggle="modal">
+                        {% if not item.conference.is_premium_permanently %}
+                            {% trans 'Make Permanent Premium' %}
+                        {% else %}
+                            {% trans 'Remove Permanent Premium' %}
+                        {% endif %}
+                    </a>
+                </div>
+                {% captureas label %}
+                    {% if not item.conference.is_premium_permanently %}
+                        {% trans "Do you really want to make this conference premium permanent?" %}
+                    {% else %}
+                        {% trans 'Do you really want to remove premium permanent from this conference?' %}
+                    {% endif %}
+                {% endcaptureas %}
+	            {% captureas title %}
+                    {% if not item.conference.is_premium_permanently %}
+                        {% trans 'Make Permanent Premium' %}
+                    {% else %}
+                        {% trans 'Remove Permanent Premium' %}
+                    {% endif %}
+                {% endcaptureas %}
+	            {% captureas action %}{% url 'cosinnus:conference-administration-overview' %}{% endcaptureas %}
+                {% captureas conference_id %}{{ item.conference.id }}{% endcaptureas %}
+	            {% include "cosinnus/modal_box.html" with id=modal_toggle_premium_id label=label title=title form_action=action submit_name="toggle_permanent_premium" submit_value=conference_id title_icon_full_class='' %}
             </div>
-                
             {% endfor %}
         {% else %}
             {% trans "There are no items to show." %}
