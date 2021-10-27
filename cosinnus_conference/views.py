@@ -14,7 +14,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.utils.text import slugify
 from django.utils.crypto import get_random_string
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy, ngettext
 from django.views.generic import (DetailView,
     ListView, TemplateView)
 from django.views.generic.base import View
@@ -206,23 +206,33 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
 
     def form_valid(self, form):
         data = form.cleaned_data.get('participants')
-        self.process_data(data)
-        return redirect(group_aware_reverse('cosinnus:conference:temporary-users',
-                                            kwargs={'group': self.group}))
+        accounts_count = len(self.process_data(data))
+        message = ngettext(
+            'Successfully created %(count)d account',
+            'Successfully created  %(count)d accounts',
+            accounts_count,
+        ) % {
+            'count': accounts_count,
+        }
+        messages.add_message(
+            self.request, messages.SUCCESS, message)
+        return redirect(group_aware_reverse(
+            'cosinnus:conference:temporary-users',
+            kwargs={'group': self.group}))
 
     def process_data(self, data):
         groups_list = data.get('header')
-        header = data.get('header_original')
         accounts_list = []
         for row in data.get('data'):
             account = self.create_account(row, groups_list)
             accounts_list.append(account)
 
-        return header + ['email'], accounts_list
+        return accounts_list
 
     def get_unique_workshop_name(self, name):
         no_whitespace = name.replace(' ', '')
-        unique_name = '{}_{}__{}'.format(self.group.portal.id, self.group.id, no_whitespace)
+        unique_name = '{}_{}__{}'.format(
+            self.group.portal.id, self.group.id, no_whitespace)
         return unique_name
 
     def create_account(self, data, groups):
