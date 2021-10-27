@@ -23,7 +23,7 @@
             <div class="tab-pane active">
                 <h2>{{ title }}</h2>
 
-                {% trans "participants" as participants_label %}
+                {% trans "Participants" as participants_label %}
                 {% trans "participants" as lparticipants_placeholder %}
                 {% include 'cosinnus/fields/default_field.html' with field=form.participants label=participants_label placeholder=participants_placeholder large_field=True %}
 
@@ -52,7 +52,7 @@
                     <i class="fa fa-minus-circle"></i>
                 </span>
                 <div class="media-body">
-                    {% trans "delete" %}
+                    {% trans "Delete" %}
                 </div>
             </li>
         </ul>
@@ -61,10 +61,9 @@
 </form>
 
 {% if form.instance.id %}
-{% captureas label %}{% blocktrans with name=conference.name %}Do you really want to delete this block from „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
-{% captureas title %}{% trans "Delete Premium Block" %}{% endcaptureas %}
-{% captureas action %}{% url 'cosinnus:conference-administration-edit-premium-block' block_id=object.id %}{% endcaptureas %}
-{% include "cosinnus/modal_box.html" with id='delete_block' label=label title=title form_action=action title_icon='fa-minus-circle' submit_name="delete" %}
-{% endif %}
-
+	{% captureas label %}{% blocktrans with name=conference.name %}Do you really want to delete this block from „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
+	{% captureas title %}{% trans "Delete Premium Block" %}{% endcaptureas %}
+	{% captureas action %}{% url 'cosinnus:conference-administration-edit-premium-block' block_id=object.id %}{% endcaptureas %}
+	{% include "cosinnus/modal_box.html" with id='delete_block' label=label title=title form_action=action title_icon='fa-minus-circle' submit_name="delete" %}
+	{% endif %}
 {% endblock %}
