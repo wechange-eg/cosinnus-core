@@ -170,7 +170,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         accounts = []
         for member in self.get_temporary_users():
             pwd = ''
-            if not member.password or not member.last_login:
+            if not member.password:
                 pwd = get_random_string()
                 member.set_password(pwd)
                 member.save()
