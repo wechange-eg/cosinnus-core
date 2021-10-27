@@ -126,7 +126,7 @@
                             start: "{{ conference.from_date|date:"c"}}",
                             end: "{{ conference.to_date|date:"c"}}",
                             className: 'conference-calendar-conference',
-                            url: '{% url 'admin:cosinnus_cosinnusconference_change' object_id=conference.id %}#conference_settings'
+                            url: '{{ conference.get_absolute_url }}'
                         },
                     {% endif %}
                 {% endfor %}
@@ -286,9 +286,11 @@
 				</div>
                 </div>
                 <div class="col-md-2">
-                    <a href="{% url 'cosinnus:conference-administration-add-premium-block' slug=item.conference.slug %}">
-                        <i class="fa fa-plus"></i> {% trans 'Add new premium block' %}
-                    </a>
+                    {% if not item.conference.is_premium_permanently %}
+	                    <a href="{% url 'cosinnus:conference-administration-add-premium-block' slug=item.conference.slug %}">
+	                        <i class="fa fa-plus"></i> {% trans 'Add new premium block' %}
+	                    </a>
+                    {% endif %}
                 </div>
                 {% captureas modal_toggle_premium_id %}modal_toggle_premium_{{ item.conference.id }}{% endcaptureas %}
                 <div class="col-md-2">
