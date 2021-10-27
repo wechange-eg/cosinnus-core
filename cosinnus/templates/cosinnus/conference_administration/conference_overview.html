@@ -139,7 +139,7 @@
                             start: "{{ conference_block.from_date|date:"c"}}",
                             end: "{{ conference_block.to_date|next_day|date:"c"}}",
                             className: 'conference-calendar-conference-block',
-                            url: '{% url 'admin:cosinnus_cosinnusconference_change' object_id=conference_block.conference.id %}#conference_settings',
+                            url: '{% url 'cosinnus:conference-administration-edit-premium-block' block_id=conference_block.id %}',
                             allDay: true
                         },
                     {% endif %}
