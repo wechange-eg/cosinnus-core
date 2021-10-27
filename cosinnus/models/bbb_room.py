@@ -26,6 +26,8 @@ from django.utils.crypto import get_random_string
 from cosinnus.models.group import CosinnusPortal
 from django.core.exceptions import ImproperlyConfigured
 from pip._internal.cli.cmdoptions import editable
+from cosinnus.utils.functions import clean_single_line_text
+from django.template.defaultfilters import truncatechars
 
 
 # from cosinnus.models import MEMBERSHIP_ADMIN
@@ -135,6 +137,11 @@ class BBBRoom(models.Model):
 
     def __str__(self):
         return str(self.meeting_id)
+    
+    @classmethod
+    def clean_room_name(self, raw_name):
+        """ Returns a clean, max-length version acceptable for the BBB create API """
+        return truncatechars(clean_single_line_text(raw_name), 50)
     
     @property
     def bbb_api(self):
@@ -315,6 +322,7 @@ class BBBRoom(models.Model):
         # add a suffix to uniquify this meeting id - makes it safe for manual restarts
         # by deleting the BBBRoom object
         meeting_id = f'{meeting_id}-' + get_random_string(8)
+        name = cls.clean_room_name(name)
         
         if attendee_password is None:
             attendee_password = bbb_utils.random_password()
