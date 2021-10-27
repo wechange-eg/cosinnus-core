@@ -55,6 +55,25 @@ class ConferenceOverviewView(RequirePortalManagerMixin, TemplateView):
         self.only_premium = kwargs.pop('only_premium', self.only_premium)
         self.past = request.GET.get('past', self.past)
         return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if 'toggle_permanent_premium' in request.POST:
+            conference_id = request.POST.get('toggle_permanent_premium')
+            if conference_id:
+                conference = CosinnusConference.objects.filter(id=conference_id).first()
+                conference.is_premium_permanently = not conference.is_premium_permanently
+                conference.save()
+                if conference.is_premium_permanently:
+                    messages.add_message(
+                        request, messages.SUCCESS,
+                        _('Successfully made conference permanent premium'))
+                else:
+                    messages.add_message(
+                        request, messages.SUCCESS,
+                        _('Successfully removed permanent premium from conference'))
+
+        return self.render_to_response(self.get_context_data(*args, **kwargs))
+
     
     def get_context_data(self, *args, **kwargs):
         """ Gather all conferences, and their rooms and those rooms' events and for each of those,
