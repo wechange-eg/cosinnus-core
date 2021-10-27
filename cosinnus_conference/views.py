@@ -235,12 +235,18 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             self.group.portal.id, self.group.id, no_whitespace)
         return unique_name
 
+    def get_email_domain(self):
+        if (settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN and not
+                settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN == ''):
+            return settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN
+        return '{}.de'.format(slugify(settings.COSINNUS_PORTAL_NAME))
+
     def create_account(self, data, groups):
 
         username = self.get_unique_workshop_name(data[0])
         first_name = data[1]
         last_name = data[2]
-        portal_name = slugify(settings.COSINNUS_PORTAL_NAME)
+        email_domain = self.get_email_domain()
 
         try:
             name_string = '"{}":"{}"'.format(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME, username)
@@ -255,7 +261,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             self.create_or_update_memberships(user)
             return data + [user.email, '']
         except ObjectDoesNotExist:
-            random_email = '{}@{}.de'.format(get_random_string(), portal_name)
+            random_email = '{}@{}'.format(get_random_string(), email_domain)
             user = create_base_user(random_email, first_name=first_name, last_name=last_name, no_generated_password=True)
 
             if user:
@@ -263,7 +269,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
                 profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
                 profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
                 profile.email_verified = True
-                
+
                 profile.add_redirect_on_next_page(
                     redirect_with_next(
                         group_aware_reverse(
@@ -272,7 +278,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
                         self.request), message=None, priority=True)
                 profile.save()
 
-                unique_email = 'User{}.C{}@{}.de'.format(str(user.id), str(self.group.id), portal_name)
+                unique_email = 'User{}.C{}@{}'.format(str(user.id), str(self.group.id), email_domain)
                 user.email = unique_email
                 user.is_active = False
                 user.save()
