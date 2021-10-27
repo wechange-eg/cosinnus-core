@@ -191,11 +191,21 @@ def deletecache(request):
 
 
 def test_logging(request, level='error'):
+    harmless = 'my value'
+    bic = 'shouldnotbeshown!bic'
+    iban = 'shouldnotbeshown!iban'
+    user_password_generated = 'shouldnotbeshown!pwd'
+    extra = {
+        'harmless': harmless,
+        'bic': bic,
+        'iban': iban,
+        'user_password_generated': user_password_generated,
+    }
     if level == 'exception':
         return 1/0
     if level in ['error', 'warning', 'info']:
         func = getattr(logger, level)
-        func(f'Test logging event with level: {level}')
+        func(f'Test logging event with level: {level}', extra=extra)
         return HttpResponse(f'Triggered a log message with level {level}.')
     return HttpResponse(f'Did not trigger a log event because level "{level}" was unknown.')
 

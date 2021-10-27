@@ -1168,23 +1168,24 @@ def render_managed_tags_json():
 
 @register.simple_tag()
 def managed_tags_for_user(user):
-    profile_type = ContentType.objects.get(
-                    app_label='cosinnus', model='userprofile')
-    profile = user.cosinnus_profile
-    assignments = CosinnusManagedTagAssignment.objects.filter(
-                    content_type=profile_type.id,
-                    object_id=profile.id).values_list(
-                        'managed_tag__slug', flat=True)
+    if hasattr(user, 'cosinnus_profile'):
+        profile_type = ContentType.objects.get(
+                        app_label='cosinnus', model='userprofile')
+        profile = user.cosinnus_profile
+        assignments = CosinnusManagedTagAssignment.objects.filter(
+                        content_type=profile_type.id,
+                        object_id=profile.id).values_list(
+                            'managed_tag__slug', flat=True)
 
-    if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS:
-        predefined_slugs = \
-            settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS
-        assignments = assignments.filter(
-            managed_tag__slug__in=predefined_slugs)
+        if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS:
+            predefined_slugs = \
+                settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS
+            assignments = assignments.filter(
+                managed_tag__slug__in=predefined_slugs)
 
-    managed_tags = CosinnusManagedTag.objects.filter(
-        slug__in=assignments).distinct()
-    return managed_tags
+        managed_tags = CosinnusManagedTag.objects.filter(
+            slug__in=assignments).distinct()
+        return managed_tags
 
 
 @register.simple_tag()
