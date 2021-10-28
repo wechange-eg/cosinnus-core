@@ -17,7 +17,7 @@ from awesome_avatar import forms as avatar_forms
 from cosinnus.forms.mixins import AdditionalFormsMixin
 from captcha.fields import CaptchaField
 from cosinnus_organization.models import CosinnusOrganization
-from cosinnus.models.group import (CosinnusGroupMembership,
+from cosinnus.models.group import (CosinnusBaseGroup, CosinnusGroupMembership,
                                    CosinnusPortal,
     CosinnusLocation, RelatedGroups, CosinnusGroupGalleryImage,
     CosinnusGroupCallToActionButton)
@@ -160,7 +160,7 @@ class CosinnusBaseGroupForm(TranslatedFieldsFormMixin, FacebookIntegrationGroupF
                         'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
                          'twitter_widget_id', 'flickr_url', 'deactivated_apps', 'microsite_public_apps',
                          'call_to_action_active', 'call_to_action_title', 'call_to_action_description',
-                         'membership_mode'] \
+                         'membership_mode', 'video_conference_type'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
                         + (['show_contact_form'] if settings.COSINNUS_ALLOW_CONTACT_FORM_ON_MICROPAGE else []) \
                         + (['publicly_visible'] if settings.COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN else []) \
@@ -189,6 +189,19 @@ class CosinnusBaseGroupForm(TranslatedFieldsFormMixin, FacebookIntegrationGroupF
         for field in list(self.fields.values()):
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
+
+        # dynamic dropdown for video conference types in groups / projects
+        self.fields['video_conference_type'].choices = CosinnusBaseGroup.VIDEO_CONFERENCE_TYPE_CHOICES
+        if not settings.COSINNUS_BBB_SERVER_CHOICES:
+            custom_choices = (
+                (CosinnusBaseGroup.FAIRMEETING, _('Fairmeeting')),
+                (CosinnusBaseGroup.NO_VIDEO_CONFERENCE, _('No video conference')),)
+            self.fields['video_conference_type'].choices = custom_choices
+        elif not CosinnusPortal.get_current().video_conference_server:
+            custom_choices = (
+                (CosinnusBaseGroup.BBB_MEETING, _('BBB-Meeting')),
+                (CosinnusBaseGroup.NO_VIDEO_CONFERENCE, _('No video conference')),)
+            self.fields['video_conference_type'].choices = custom_choices
     
     @property
     def group(self):

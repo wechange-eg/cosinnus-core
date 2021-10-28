@@ -557,6 +557,12 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         })
         return context
 
+class GroupMeetingView(SamePortalGroupMixin, RequireReadMixin, DetailView):
+
+    template_name = 'cosinnus/group/group_meeting.html'
+
+    def get_object(self, queryset=None):
+        return self.group
 
 class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, DetailView):
 
@@ -2157,6 +2163,7 @@ conference_management = ConferenceManagementView.as_view()
 workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
 workshop_participants_download = WorkshopParticipantsDownloadView.as_view()
 workshop_participants_upload_skeleton = WorkshopParticipantsUploadSkeletonView.as_view()
+group_meeting = GroupMeetingView.as_view()
 group_members_map = GroupMembersMapListView.as_view()
 group_list = GroupListView.as_view()
 group_list_api = GroupListView.as_view(is_ajax_request_url=True)
