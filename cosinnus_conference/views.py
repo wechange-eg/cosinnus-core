@@ -14,7 +14,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.utils.text import slugify
 from django.utils.crypto import get_random_string
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy, ngettext
 from django.views.generic import (DetailView,
     ListView, TemplateView)
 from django.views.generic.base import View
@@ -170,7 +170,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         accounts = []
         for member in self.get_temporary_users():
             pwd = ''
-            if not member.password or not member.last_login:
+            if not member.password:
                 pwd = get_random_string()
                 member.set_password(pwd)
                 member.save()
@@ -206,31 +206,47 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
 
     def form_valid(self, form):
         data = form.cleaned_data.get('participants')
-        self.process_data(data)
-        return redirect(group_aware_reverse('cosinnus:conference:temporary-users',
-                                            kwargs={'group': self.group}))
+        accounts_count = len(self.process_data(data))
+        message = ngettext(
+            'Successfully created %(count)d account',
+            'Successfully created  %(count)d accounts',
+            accounts_count,
+        ) % {
+            'count': accounts_count,
+        }
+        messages.add_message(
+            self.request, messages.SUCCESS, message)
+        return redirect(group_aware_reverse(
+            'cosinnus:conference:temporary-users',
+            kwargs={'group': self.group}))
 
     def process_data(self, data):
         groups_list = data.get('header')
-        header = data.get('header_original')
         accounts_list = []
         for row in data.get('data'):
             account = self.create_account(row, groups_list)
             accounts_list.append(account)
 
-        return header + ['email'], accounts_list
+        return accounts_list
 
     def get_unique_workshop_name(self, name):
         no_whitespace = name.replace(' ', '')
-        unique_name = '{}_{}__{}'.format(self.group.portal.id, self.group.id, no_whitespace)
+        unique_name = '{}_{}__{}'.format(
+            self.group.portal.id, self.group.id, no_whitespace)
         return unique_name
+
+    def get_email_domain(self):
+        if (settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN and not
+                settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN == ''):
+            return settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN
+        return '{}.de'.format(slugify(settings.COSINNUS_PORTAL_NAME))
 
     def create_account(self, data, groups):
 
         username = self.get_unique_workshop_name(data[0])
         first_name = data[1]
         last_name = data[2]
-        portal_name = slugify(settings.COSINNUS_PORTAL_NAME)
+        email_domain = self.get_email_domain()
 
         try:
             name_string = '"{}":"{}"'.format(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME, username)
@@ -245,7 +261,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             self.create_or_update_memberships(user)
             return data + [user.email, '']
         except ObjectDoesNotExist:
-            random_email = '{}@{}.de'.format(get_random_string(), portal_name)
+            random_email = '{}@{}'.format(get_random_string(), email_domain)
             user = create_base_user(random_email, first_name=first_name, last_name=last_name, no_generated_password=True)
 
             if user:
@@ -253,7 +269,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
                 profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
                 profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
                 profile.email_verified = True
-                
+
                 profile.add_redirect_on_next_page(
                     redirect_with_next(
                         group_aware_reverse(
@@ -262,7 +278,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
                         self.request), message=None, priority=True)
                 profile.save()
 
-                unique_email = 'User{}.C{}@{}.de'.format(str(user.id), str(self.group.id), portal_name)
+                unique_email = 'User{}.C{}@{}'.format(str(user.id), str(self.group.id), email_domain)
                 user.email = unique_email
                 user.is_active = False
                 user.save()

@@ -593,6 +593,9 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
         for row in reader:
             cleaned_row = self.clean_row_data(row)
             workshop_username = cleaned_row[0]
+            first_name = cleaned_row[1]
+            if not first_name:
+                raise forms.ValidationError(_("Please always provide a first name"))
             if ' ' in workshop_username:
                 raise forms.ValidationError(_("Please remove the whitespace from '{}'").format(workshop_username))
             if workshop_username not in workshop_usernames:

@@ -1167,3 +1167,4 @@ class CosinnusDefaultSettings(AppConf):
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
 
+    TEMP_USER_EMAIL_DOMAIN = ''
