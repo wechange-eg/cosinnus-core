@@ -1,0 +1,37 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls %}
+
+{% block after_related_objects %}
+    {{ block.super }}
+    
+    <div>
+        <h4>{% trans "Advanced BBB-Room Tools" %}</h4>
+        <p>
+            {% trans "Directly enter the BBB meeting" %}:
+            <a href="{{ original.get_absolute_url }}">{% trans "Join meeting directly" %}</a>
+        </p>
+        <p>
+            {% trans "Enter the BBB meeting in the conference frontend" %}:
+            <a href="{{ original.get_source_object.get_absolute_url }}">{% trans "Join meeting in conference frontend" %}</a>
+        </p>
+        <p>
+            {% trans "For options and parameters, go to the parent event's admin page" %}:
+            {% if original.get_source_object.get_admin_change_url %}
+                <a href="{{ original.get_source_object.get_admin_change_url }}">{% trans "Event admin page" %}</a>
+            {% else %}
+                <i>({% trans "Not implemented for this type of event" %})</i>
+            {% endif %}
+        </p>
+        {% if original.get_source_object.group %}
+	        <p>
+	            {% trans "For further options and parameters, go to the parent conference's admin page" %}:
+	            {% if original.get_source_object.group.get_admin_change_url %}
+	                <a href="{{ original.get_source_object.group.get_admin_change_url }}">{% trans "Conference admin page" %}</a>
+	            {% else %}
+	                <i>({% trans "Not implemented for this type of event" %})</i>
+	            {% endif %}
+	        </p>
+        {% endif %}
+        
+    </div>
+{% endblock %}

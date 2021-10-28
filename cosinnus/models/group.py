@@ -1182,6 +1182,15 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
                 reverse('postman:sent')
             )
     
+    def get_admin_change_url(self):
+        """ Returns the django admin edit page for this object. """
+        type_map = {
+            self.TYPE_PROJECT: 'cosinnusproject',
+            self.TYPE_SOCIETY: 'cosinnussociety',
+            self.TYPE_CONFERENCE: 'cosinnusconference',
+        }
+        return reverse(f'admin:cosinnus_{type_map[self.type]}_change', kwargs={'object_id': self.id})
+    
     def get_humanized_event_time_html(self):
         if not self.from_date:
             return ''
