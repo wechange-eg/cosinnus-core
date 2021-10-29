@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -3618,7 +3618,7 @@ msgid "Accept User"
 msgstr "Annehmen"
 
 msgid "Membership requested"
-msgstr "Mitgliederschaft wurde beantragt"
+msgstr "Mitgliedschaft wurde beantragt"
 
 #, python-format
 msgid "Do you really want to accept user „%(name)s“ as a member?"
