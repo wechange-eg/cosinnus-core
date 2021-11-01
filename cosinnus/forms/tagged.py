@@ -133,14 +133,14 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin, forms
         
         # save BBB room
         if self.instance.pk and self.instance.bbb_room:
-            self.initial['bbb_room'] = self.instance.bbb_room
+            setattr(self, '_saved_bbb_room', self.instance.bbb_room)
         
     def save(self, commit=True):
         self.instance = super(BaseTagObjectForm, self).save(commit=False)
         
         # restore BBB room
-        if 'bbb_room' in self.initial:
-            self.instance.bbb_room = self.initial['bbb_room']
+        if hasattr(self, '_saved_bbb_room'):
+            self.instance.bbb_room = getattr(self, '_saved_bbb_room', None)
         
         # the tag inherits the visibility default from the instance's group
         # if no or no valid visibility has been selected in the form, 
