@@ -28,6 +28,7 @@ from django.core.exceptions import ImproperlyConfigured
 from pip._internal.cli.cmdoptions import editable
 from cosinnus.utils.functions import clean_single_line_text
 from django.template.defaultfilters import truncatechars
+from cosinnus.models.membership import MEMBERSHIP_MEMBER, MANAGER_STATUS
 
 
 # from cosinnus.models import MEMBERSHIP_ADMIN
@@ -132,8 +133,8 @@ class BBBRoom(models.Model):
     # the BigBlueButtonAPI instance for this room
     _bbb_api = None
     
-    # the cached source ConferenceEvent instance for this room
-    _event = '__unset__'
+    # the cached source object instance for this room
+    _source_obj = '__unset__'
 
     def __str__(self):
         return str(self.meeting_id)
@@ -156,6 +157,7 @@ class BBBRoom(models.Model):
         if created and not self.portal:
             from cosinnus.models.group import CosinnusPortal
             self.portal = CosinnusPortal.get_current()
+        self.name = BBBRoom.clean_room_name(self.name)
         super(BBBRoom, self).save(*args, **kwargs)
 
     def end(self):
@@ -221,12 +223,21 @@ class BBBRoom(models.Model):
         else:
             self.attendees.add(user)
             self.moderators.remove(user)
+    
+    def join_users(self, users, as_moderator=False):
+        if as_moderator:
+            self.moderators.add(*users)
+            self.attendees.remove(*users)
+        else:
+            self.attendees.add(*users)
+            self.moderators.remove(*users)
 
     def join_group_members(self, group):
+        """ Automatically joins all members of the given group into the room,
+            with priviledges depending on their membership status """
         for membership in group.memberships.all():
-            # FIXME: reference group MEMBER_STATUS etc
-            if membership.status in (1, 2,):
-                self.join_user(membership.user, as_moderator=bool(membership.status==2))
+            if membership.status in MEMBERSHIP_MEMBER:
+                self.join_user(membership.user, as_moderator=bool(membership.status in MANAGER_STATUS))
 
     @property
     def members(self):
@@ -246,17 +257,43 @@ class BBBRoom(models.Model):
         return False
 
     @property
-    def event(self):
-        """ Tries to get a conference event for this bbb room, or returns None else """
-        if self._event == '__unset__':
+    def source_object(self):
+        """ Attempts to find the source object for this BBBRoom, i.e. the
+            Model instance with the media_tag attached that this BBBRoom is attached to.
+            That instance should also have a CosinnusConferenceSettings attached.
+            Note: if other event types can carry BBBRooms, replace the `ConferenceEvent` here! """
+        if self._source_obj == '__unset__':
+            # try Conference Event
             from cosinnus_event.models import ConferenceEvent # noqa
             media_tag = self.tagged_objects.first()
-            # TODO: if other event types can carry BBBRooms, replace the `ConferenceEvent` here!
-            self._event = get_object_or_None(ConferenceEvent, media_tag=media_tag)
-        return self._event
+            self._source_obj = get_object_or_None(ConferenceEvent, media_tag=media_tag)
+            if self._source_obj:
+                return self._source_obj
+            
+            # try Event
+            from cosinnus_event.models import Event # noqa
+            media_tag = self.tagged_objects.first()
+            self._source_obj = get_object_or_None(Event, media_tag=media_tag)
+            if self._source_obj:
+                return self._source_obj
+            
+            # try Group
+            from cosinnus.utils.group import get_cosinnus_group_model
+            media_tag = self.tagged_objects.first()
+            self._source_obj = get_object_or_None(get_cosinnus_group_model(), media_tag=media_tag)
+            if self._source_obj:
+                return self._source_obj
+            
+            if settings.DEBUG:
+                raise ImproperlyConfigured("NYI: This bbb room source object type for BBBRooms is not yet supported!")
+            self._source_obj = None
+        return self._source_obj
 
     def restart(self):
-        event = self.event
+        presentation_url = None
+        source_obj = self.source_object
+        if source_obj:
+            presentation_url = source_obj.get_presentation_url()
         m_xml = self.bbb_api.start(
             name=self.name,
             meeting_id=self.meeting_id,
@@ -264,7 +301,7 @@ class BBBRoom(models.Model):
             moderator_password=self.moderator_password,
             voice_bridge=self.voice_bridge,
             options=self.build_extra_create_parameters(),
-            presentation_url=event.presentation_file.url if event and event.presentation_file else None,
+            presentation_url=presentation_url,
         )
 
         meeting_json = bbb_utils.xml_to_json(m_xml)
@@ -361,20 +398,10 @@ class BBBRoom(models.Model):
         meeting._bbb_api = bbb_api
         return meeting
     
-    def get_source_object(self):
-        """ Attempts to find the source object for this BBBRoom, i.e. the
-            Model instance with the media_tag attached that this BBBRoom is attached to.
-            That instance should also have a CosinnusConferenceSettings attached. """
-        event = self.event
-        if event:
-            return event
-        raise ImproperlyConfigured("NYI: non-ConferenceEvent source types for BBBRooms are not yet supported!")
-        return None
-    
     def build_extra_create_parameters(self):
         """ Builds a parameter set for the create API call. Will use the inferred source 
             object that this BBBRoom belongs to to generate options. """
-        return self._meta.model.build_extra_create_parameters_for_object(self.get_source_object())
+        return self._meta.model.build_extra_create_parameters_for_object(self.source_object)
     
     @classmethod
     def build_extra_create_parameters_for_object(cls, source_object):
@@ -439,9 +466,9 @@ class BBBRoom(models.Model):
         
         # add statistics visit
         try:
-            room_event = self.event
-            event_group = room_event and room_event.group or None
-            BBBRoomVisitStatistics.create_user_visit_for_bbb_room(user, self, group=event_group)
+            source_obj = self.source_object
+            if source_obj:
+                BBBRoomVisitStatistics.create_user_visit_for_bbb_room(user, self, group=source_obj.get_group_for_bbb_room())
         except Exception as e:
             if settings.DEBUG:
                 raise

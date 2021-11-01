@@ -22,7 +22,7 @@ from cosinnus.models.feedback import CosinnusFailedLoginRateLimitLog
 from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
     CosinnusGroupMembership
 from cosinnus.models.membership import MEMBERSHIP_MEMBER, MEMBER_STATUS, \
-    MEMBERSHIP_ADMIN
+    MEMBERSHIP_ADMIN, MEMBERSHIP_MANAGER
 from cosinnus.models.profile import GlobalBlacklistedEmail, \
     GlobalUserNotificationSetting, get_user_profile_model
 from cosinnus.models.tagged import ensure_container, LikeObject
@@ -229,7 +229,7 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                         room.remove_user(instance.user)
                     else:
                         if instance.status in MEMBER_STATUS:
-                            room.join_user(instance.user, as_moderator=bool(instance.status==MEMBERSHIP_ADMIN))
+                            room.join_user(instance.user, as_moderator=bool(instance.status==MEMBERSHIP_MANAGER))
 
                 # For group conferences:
                 group = instance.group

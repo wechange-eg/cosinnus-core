@@ -1514,8 +1514,13 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
         return ConferenceEvent.objects.filter(group=self)
     
     def can_have_bbb_room(self):
+        """ For BBBRoomMixin """
         return self.video_conference_type == self.BBB_MEETING
 
+    def get_group_for_bbb_room(self):
+        """ For BBBRoomMixin, overridable function to the group for this BBB room. Can be None. """
+        return self
+    
 
 class CosinnusGroup(CosinnusBaseGroup):
     class Meta(CosinnusBaseGroup.Meta):
