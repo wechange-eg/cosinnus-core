@@ -70,6 +70,7 @@ from django.template.defaultfilters import date as django_date_filter
 
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus_event.mixins import BBBRoomMixin
+from cosinnus.utils.dates import timestamp_from_datetime
 
 logger = logging.getLogger('cosinnus')
 
@@ -1394,6 +1395,17 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
         if not hasattr(self, key):
             setattr(self, key, self.media_tag)
         return getattr(self, key)
+    
+    @property    
+    def secret_from_created(self):
+        """ Returns an (unsafe) secret id based on the created date timestamp """
+        return str(timestamp_from_datetime(self.created)).replace('.', '')
+    
+    def get_readable_title(self):
+        """ The human-readable title. 
+            An overridable replacement for the title, to be used by extending models
+            that may not have a well-readable title. """
+        return self.name
 
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self})

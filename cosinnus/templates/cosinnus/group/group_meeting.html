@@ -43,7 +43,7 @@
 	                                            <i class="fa fa-expand"></i>
 	                                        </a>
 	                                    </span>
-	                                <span>{{ object.title }}</span>
+	                                <span>{{ object.name }}</span>
 	                            </div>
 	                        </li>
 	                    </ul>
@@ -63,7 +63,7 @@
 				</div>
 			{% elif COSINNUS_CURRENT_PORTAL.video_conference_server and group.video_conference_type == 2 %}
 				<div class="etherpad-iframe">
-					<iframe src="{{ COSINNUS_CURRENT_PORTAL.video_conference_server_url }}" allow="display-capture *; geolocation; microphone *; camera *" width="100%" height="100%"></iframe>
+					<iframe src="{{ COSINNUS_CURRENT_PORTAL.video_conference_server_url }}-{{ group.id }}-{{ group.secret_from_created }}" allow="display-capture *; geolocation; microphone *; camera *" width="100%" height="100%"></iframe>
 				</div>
 			{% endif %}
 	

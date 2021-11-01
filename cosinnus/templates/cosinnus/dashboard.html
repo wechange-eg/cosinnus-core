@@ -207,16 +207,6 @@
                                     </div>
                                 {% endif %}
                             {% endblock file_app %}
-                            {% block video_conference_meeting %}
-                                {% if group.video_conference_type %}
-                                    <div class="dashboard-header-link app-calendar mobile-hidden">
-                                        <a href="{% group_url 'cosinnus:group-meeting' group=group %}">
-                                            <i class="fa fa-eye"></i>
-                                            {% if group.video_conference_type == 1 %}{% trans "BBB-Meeting" %}{% else %}{% trans "Fairmeeting" %}{% endif %}
-                                        </a>
-                                    </div>
-                                {% endif %}
-                            {% endblock video_conference_meeting %}
                             {% block etherpad_app %}
                                 {% if "etherpad" in object_counts %}
                                     <div class="dashboard-header-link app-etherpad mobile-hidden">
@@ -283,6 +273,16 @@
                                     </div>
                                 {% endif %}
                             {% endblock note_app %}
+                            {% block video_conference_meeting %}
+                                {% if group.video_conference_type %}
+                                    <div class="dashboard-header-link app-calendar mobile-hidden">
+                                        <a href="{% group_url 'cosinnus:group-meeting' group=group %}">
+                                            <i class="fa fa-eye"></i>
+                                            {% if group.video_conference_type == 1 %}{% trans "BBB-Meeting" %}{% else %}{% trans "Fairmeeting" %}{% endif %}
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endblock video_conference_meeting %}
                         {% endblock dashboard_apps %}
                         
                     {% elif user.pk in group.pendings %}
