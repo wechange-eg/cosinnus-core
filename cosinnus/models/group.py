@@ -69,6 +69,7 @@ from django.utils.timezone import now
 from django.template.defaultfilters import date as django_date_filter
 
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
+from cosinnus_event.mixins import BBBRoomMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -690,7 +691,7 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
 
 @python_2_unicode_compatible
 class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
-                        CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin,
+                        CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin, BBBRoomMixin,
                         AttachableObjectModel):
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1
@@ -720,6 +721,17 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
     ]
 
     GROUP_MODEL_TYPE = TYPE_PROJECT
+
+    NO_VIDEO_CONFERENCE = 0
+    BBB_MEETING = 1
+    FAIRMEETING = 2
+
+    #: Choices for :attr: `video_conference_type`: ``(int, str)``
+    VIDEO_CONFERENCE_TYPE_CHOICES = (
+        (BBB_MEETING, _('BBB-Meeting')),
+        (FAIRMEETING, _('Fairmeeting')),
+        (NO_VIDEO_CONFERENCE, _('No video conference')),
+    )
 
     # a list of all database-fields that should be searched when looking up a group by its name
     NAME_LOOKUP_FIELDS = ['name', ]
@@ -771,6 +783,9 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
                                                        default=MEMBERSHIP_MODE_REQUEST,
                                                        choices=MEMBERSHIP_MODE_CHOICES
                                                        )
+    
+    video_conference_type = models.PositiveIntegerField(_('Type of video conference available for a group / a project'), blank=False, null=False, choices=VIDEO_CONFERENCE_TYPE_CHOICES, default=NO_VIDEO_CONFERENCE)
+    
     # microsite-embeds:
     video = models.URLField(_('Microsite Video'), max_length=200, blank=True, null=True,
                             validators=[MaxLengthValidator(200)])
@@ -1476,6 +1491,9 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
     def conference_events(self):
         from cosinnus_event.models import ConferenceEvent # noqa
         return ConferenceEvent.objects.filter(group=self)
+    
+    def can_have_bbb_room(self):
+        return self.video_conference_type == self.BBB_MEETING
 
 
 class CosinnusGroup(CosinnusBaseGroup):

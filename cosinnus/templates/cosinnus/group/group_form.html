@@ -418,6 +418,17 @@
 							{% trans "Enable the public visibility of your group/project" as groups_projects_public_visibility_box_label %}
 							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.publicly_visible label=groups_projects_public_visibility_label legend=groups_projects_public_visibility_legend checkbox_label=groups_projects_public_visibility_box_label %}
 						{% endif %}
+
+						{# Dropdown field #}
+						{% block video_conference_type_dropdown %}
+							{% if not SETTINGS.COSINNUS_BBB_SERVER_CHOICES and not COSINNUS_CURRENT_PORTAL.video_conference_server %}
+								<input type="hidden" name="video_conference_type" id="id_video_conference_type" value="0">
+							{% else %}
+								{% trans "Video conference type" as video_conference_type_label %}
+								{% trans "Choose the type of the video conference you would like to have" as video_conference_type_legend %}
+								{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.video_conference_type label=video_conference_type_label legend=video_conference_type_legend %}
+							{% endif %}
+						{% endblock %}
                         
                         {% block visibility_field %}
                             {% if not group_model == "CosinnusConference" %}
