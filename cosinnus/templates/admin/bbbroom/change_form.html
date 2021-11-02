@@ -12,21 +12,21 @@
         </p>
         <p>
             {% trans "Enter the BBB meeting in the conference frontend" %}:
-            <a href="{{ original.get_source_object.get_absolute_url }}">{% trans "Join meeting in conference frontend" %}</a>
+            <a href="{{ original.source_object.get_absolute_url }}">{% trans "Join meeting in conference frontend" %}</a>
         </p>
         <p>
             {% trans "For options and parameters, go to the parent event's admin page" %}:
-            {% if original.get_source_object.get_admin_change_url %}
-                <a href="{{ original.get_source_object.get_admin_change_url }}">{% trans "Event admin page" %}</a>
+            {% if original.source_object.get_admin_change_url %}
+                <a href="{{ original.source_object.get_admin_change_url }}">{% trans "Event admin page" %}</a>
             {% else %}
                 <i>({% trans "Not implemented for this type of event" %})</i>
             {% endif %}
         </p>
-        {% if original.get_source_object.group %}
+        {% if original.source_object.group %}
 	        <p>
 	            {% trans "For further options and parameters, go to the parent conference's admin page" %}:
-	            {% if original.get_source_object.group.get_admin_change_url %}
-	                <a href="{{ original.get_source_object.group.get_admin_change_url }}">{% trans "Conference admin page" %}</a>
+	            {% if original.source_object.group.get_admin_change_url %}
+	                <a href="{{ original.source_object.group.get_admin_change_url }}">{% trans "Conference admin page" %}</a>
 	            {% else %}
 	                <i>({% trans "Not implemented for this type of event" %})</i>
 	            {% endif %}

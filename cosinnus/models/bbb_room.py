@@ -73,12 +73,6 @@ class BBBRoom(models.Model):
 
     :var attendee_password: password to enter a conversation as moderator
     :type: str
-
-    :var welcome_message: Message that is displayed when enterin the conversation
-    :type: str
-
-    :var max_attendees: Message that is displayed when enterin the conversation
-    :type: str
     """
     portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='bbb_rooms', 
         null=False, blank=False, default=1, on_delete=models.CASCADE) # port_id 1 is created in a datamigration!
@@ -327,9 +321,6 @@ class BBBRoom(models.Model):
         :param meeting_id: ID on the BBB-Server. Must be unique for any meeting running on the BBB-Server
         :type: str
 
-        :param meeting_welcome: Welcome message displayed at start of the meeting
-        :type: str
-
         :param attendee_password: Password for joining the meeting with attendee rights
         :type: str
 
@@ -409,7 +400,7 @@ class BBBRoom(models.Model):
         params.update(settings.BBB_DEFAULT_CREATE_PARAMETERS)
         params.update(settings.BBB_ROOM_TYPE_EXTRA_CREATE_PARAMETERS.get(source_object.get_bbb_room_type()))
         # special: the max_participants is currently finally derived from the source event
-        max_participants = source_object.get_max_participants()
+        max_participants = source_object.get_max_participants() # see `BBBRoomMixin.get_max_participants`
         if max_participants:
             params.update({
                 'maxParticipants': max_participants,

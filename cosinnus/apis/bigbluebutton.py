@@ -123,9 +123,6 @@ class BigBlueButtonAPI(object):
         :param meeting_id: Human readable ID for the meeting
         :type: str
     
-        :param welcome: Welcome message when joining the meeting
-        :type: str
-    
         :param moderator_password: Password for users to join with moderator privileges
         :type: str
     
