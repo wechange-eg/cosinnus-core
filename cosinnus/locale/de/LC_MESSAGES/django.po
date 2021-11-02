@@ -3818,7 +3818,7 @@ msgid "Accept User"
 msgstr "Annehmen"
 
 msgid "Membership requested"
-msgstr "Mitgliederschaft wurde beantragt"
+msgstr "Mitgliedschaft wurde beantragt"
 
 #, python-format
 msgid "Do you really want to accept user „%(name)s“ as a member?"
