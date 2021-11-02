@@ -114,6 +114,9 @@ class CountryDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
 class PhoneDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     formfield_class = PhoneNumberField
 
+class EmailDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
+    formfield_class = forms.EmailField
+
 class URLDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     formfield_class = forms.URLField
 
@@ -320,6 +323,7 @@ EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS = {
     dynamic_fields.DYNAMIC_FIELD_TYPE_COUNTRY: CountryDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_LANGUAGE: LanguageDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_PHONE: PhoneDynamicFieldFormFieldGenerator,
+    dynamic_fields.DYNAMIC_FIELD_TYPE_EMAIL: EmailDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_URL: URLDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_PREDEFINED_CHOICES_TEXT: PredefinedChoicesTextDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT: AdminDefinedChoicesTextDynamicFieldFormFieldGenerator,
