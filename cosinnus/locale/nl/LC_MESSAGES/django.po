@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 15:24+0200\n"
+"POT-Creation-Date: 2021-11-02 12:10+0100\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -689,6 +689,16 @@ msgstr "Volgende week"
 msgid "Next month"
 msgstr "Volgende maand"
 
+msgid "Fairmeeting"
+msgstr ""
+
+#, fuzzy
+msgid "No video conference"
+msgstr "Is conferentie"
+
+msgid "BBB-Meeting"
+msgstr ""
+
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
 msgstr "Dit lijkt geen geldige YouTube- of Vimeo-link te zijn!"
 
@@ -707,6 +717,9 @@ msgstr "Gebruikers"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Groepen"
+
+msgid "Please always provide a first name"
+msgstr ""
 
 msgid "Please remove the whitespace from '{}'"
 msgstr "Verwijder alsjeblieft de spatie in '{}'"
@@ -839,20 +852,24 @@ msgstr "het wachtwoord om de ruimte als moderator te betreden"
 msgid "the password set to enter the room as a attendee"
 msgstr "het wachtwoord om de ruimte als deelnemer te betreden"
 
-msgid "the rooms welcome message"
-msgstr "welkomstboodschap van de ruimte"
-
-msgid "the welcome message, that is displayed to attendees"
-msgstr "de welkomstboodschap die deelnemers zien"
-
 msgid "number for dialing into the conference via telephone"
 msgstr "het nummer om per telefoon in de conferentie in te bellen"
 
 msgid "pin to enter for telephone participants"
 msgstr "toegangspin voor telefonische deelnemers"
 
-msgid "options for the room, that are represented in the bigbluebutton API"
+#, fuzzy
+#| msgid "options for the room, that are represented in the bigbluebutton API"
+msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
 msgstr "opties voor de ruimte, die worden weergegeven in de bigbluebutton API"
+
+msgid "the rooms welcome message"
+msgstr "welkomstboodschap van de ruimte"
+
+#, fuzzy
+#| msgid "the welcome message, that is displayed to attendees"
+msgid "DEPRECATED! the welcome message, that is displayed to attendees"
+msgstr "de welkomstboodschap die deelnemers zien"
 
 msgid "Room Type"
 msgstr "Ruimte type"
@@ -1362,6 +1379,9 @@ msgstr ""
 #, fuzzy
 msgid "Application method"
 msgstr "Applicatienaam"
+
+msgid "Type of video conference available for a group / a project"
+msgstr ""
 
 msgid "Microsite Video"
 msgstr "Microsite video"
@@ -2076,6 +2096,40 @@ msgstr "Widget configuratie item"
 msgid "Widget configuration items"
 msgstr "Widget configuratie items"
 
+msgid "Advanced BBB-Room Tools"
+msgstr ""
+
+msgid "Directly enter the BBB meeting"
+msgstr ""
+
+msgid "Join meeting directly"
+msgstr ""
+
+#, fuzzy
+msgid "Enter the BBB meeting in the conference frontend"
+msgstr "Voer een naam in voor het project."
+
+msgid "Join meeting in conference frontend"
+msgstr ""
+
+msgid "For options and parameters, go to the parent event's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "edit this page"
+msgid "Event admin page"
+msgstr "deze pagina wijzigen"
+
+msgid "Not implemented for this type of event"
+msgstr ""
+
+msgid "For further options and parameters, go to the parent conference's admin page"
+msgstr ""
+
+#, fuzzy
+msgid "Conference admin page"
+msgstr "Conferentiepagina"
+
 msgid "select this page"
 msgstr "deze pagina selecteren"
 
@@ -2427,6 +2481,11 @@ msgstr ""
 
 msgid "Manage Participation Applications"
 msgstr ""
+
+#, fuzzy
+#| msgid "Team Description"
+msgid "Manage Temporary User Accounts"
+msgstr "Team beschrijving"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3122,57 +3181,136 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "Er zijn nog geen items"
 
-msgid "Conference Management"
-msgstr "Conferentiebeheer"
-
-msgid "Conference is running"
-msgstr "Conferentie is bezig"
+#, fuzzy
+#| msgid "Team Description"
+msgid "Temporary Users"
+msgstr "Team beschrijving"
 
 #, fuzzy
-msgid "Conference is not running"
-msgstr "Conferentie is bezig"
+#| msgid "Password change"
+msgid "Password changed"
+msgstr "Wachtwoord wijziging"
 
-msgid "Accounts from CSV Upload"
+#, fuzzy
+#| msgid "Change password"
+msgid "Changed password for User"
+msgstr "Wachtwoord wijzigen"
+
+#, fuzzy
+msgid "Remove all Users"
+msgstr "Verwijder Lid"
+
+#, fuzzy
+msgid "Do you really want to remove all users?"
+msgstr "Weet u zeker dat je „%(title)s“ wilt verlaten?"
+
+msgid "Here you can create temporary user accounts that are valid only for this conference and only when you activate them."
+msgstr ""
+
+msgid "Upload spreadsheet"
+msgstr ""
+
+#, python-format
+msgid "Please upload a spreadsheet with the following columns: unique user identifier, first name and last name. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgstr ""
+
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank."
 msgstr ""
 
 #, fuzzy
-msgid "Upload Participants"
-msgstr "Deelnemers"
+msgid "Upload File"
+msgstr "Document uploaden"
 
 #, fuzzy
-msgid "last login"
-msgstr "Valideer"
+msgid "Download User credentials"
+msgstr "Simpele Statistiek"
 
-msgid "no login yet"
+msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants."
 msgstr ""
 
-msgid "Admin"
-msgstr "Beheerder"
+msgid "Download passwords and login info"
+msgstr ""
 
-msgid "Member"
-msgstr "Lid"
+#, fuzzy
+msgid "Activate/Deactivate Users"
+msgstr "Lid weigeren"
+
+msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
+msgstr ""
+
+msgid "Once the conference is over you can deactivate all ausers. That means they can not login in with their credentials anymore."
+msgstr ""
+
+#, fuzzy
+msgid "activate user accounts"
+msgstr "Gebruikersaccount succesvol geactiveerd"
+
+#, fuzzy
+msgid "deactivate user accounts"
+msgstr "Gebruikersaccount succesvol geactiveerd"
+
+msgid "reset/delete all users"
+msgstr ""
+
+msgid "Once the conference is over you can remove all ausers."
+msgstr ""
+
+#, fuzzy
+msgid "remove user accounts"
+msgstr "Gebruikersaccount succesvol geactiveerd"
+
+#, fuzzy
+#| msgid "Workshop username"
+msgid "Workshop user name and email"
+msgstr "Workshop gebruikersnaam"
 
 msgid "active"
 msgstr "actief"
 
 #, fuzzy
-msgid "not active"
-msgstr "(Inactief)"
-
-msgid "User participates in the following workshops:"
-msgstr ""
+#| msgid "Password"
+msgid "password"
+msgstr "Wachtwoord"
 
 #, fuzzy
-msgid "deactivate member"
-msgstr "Deactiveer Groep"
-
-#, fuzzy
-msgid "activate member"
-msgstr "Nodig een lid uit"
+msgid "last login"
+msgstr "Valideer"
 
 #, fuzzy
 msgid "remove user"
 msgstr "Verwijder Lid"
+
+#, fuzzy
+#| msgid "Yes"
+msgid "yes"
+msgstr "Ja"
+
+msgid "no"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "deactivate"
+msgstr "Deactiveren"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "activate"
+msgstr "Deactiveren"
+
+#, fuzzy
+#| msgid "Password reset"
+msgid "Password set"
+msgstr "Wachtwoord resetten"
+
+#, fuzzy
+#| msgid "Password"
+msgid "no Password"
+msgstr "Wachtwoord"
+
+#, fuzzy
+msgid "Set password"
+msgstr "Verander mijn wachtwoord"
 
 #, fuzzy
 msgid "Do you really want to deactivate the member's user account ?"
@@ -3199,16 +3337,11 @@ msgid "Remove User"
 msgstr "Verwijder Lid"
 
 #, fuzzy
-msgid "Finish conference and deactivate user accounts"
-msgstr "Gebruikersaccount succesvol gedeactiveerd"
-
-#, fuzzy
-msgid "Start conference and activate user accounts"
-msgstr "Gebruikersaccount succesvol gedeactiveerd"
-
-#, fuzzy
 msgid "Download Statistics"
 msgstr "Simpele Statistiek"
+
+msgid "New password"
+msgstr "Nieuw wachtwoord"
 
 #, fuzzy
 msgid "Accept"
@@ -3230,9 +3363,6 @@ msgstr ""
 #, fuzzy
 msgid "Conference Administration"
 msgstr "Administratie"
-
-msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
-msgstr ""
 
 #, fuzzy
 #| msgid "Team Description"
@@ -3321,6 +3451,26 @@ msgstr "Ruimte type"
 msgid "Event"
 msgstr "Evenement"
 
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Conferentie is bezig"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Conferentie is bezig"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Weet u zeker dat je „%(title)s“ wilt verlaten?"
+
+#, fuzzy
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Weet je zeker dat je lid “%(name)s” uit het team wilt verwijderen?"
+
 #, fuzzy
 msgid "There are no items to show."
 msgstr "Er zijn nog geen items"
@@ -3335,6 +3485,25 @@ msgstr "Premium"
 #, fuzzy
 msgid "Not set"
 msgstr "Niet toegewezen"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Evenement aanmaken"
+
+#, fuzzy
+#| msgid "Participants"
+msgid "participants"
+msgstr "Deelnemers"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to decline member „%(name)s“?"
+msgid "Do you really want to delete this block from „%(name)s“?"
+msgstr "Weet je zeker dat je lid “%(name)s” wilt weigeren?"
+
+#, fuzzy
+#| msgid "Delete Profile"
+msgid "Delete Premium Block"
+msgstr "Profiel verwijderen"
 
 #, fuzzy
 msgid "Conference Overview"
@@ -3422,6 +3591,10 @@ msgstr "Evenementen"
 
 msgid "News"
 msgstr "Nieuws"
+
+#, fuzzy
+msgid "Video conference"
+msgstr "Is conferentie"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -3786,6 +3959,12 @@ msgstr "Bericht versturen aan alle leden"
 msgid "Send Message"
 msgstr "Bericht versturen"
 
+msgid "Admin"
+msgstr "Beheerder"
+
+msgid "Member"
+msgstr "Lid"
+
 #, fuzzy
 msgid "User account inactive"
 msgstr "Dit account is niet actief."
@@ -3991,6 +4170,13 @@ msgstr ""
 msgid "Enable the public visibility of your group/project"
 msgstr ""
 
+#, fuzzy
+msgid "Include a video conference"
+msgstr "Is conferentie"
+
+msgid "Choose the type of the video conference you would like to include in the dashboard"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr "Privacy instellingen"
 
@@ -4182,6 +4368,21 @@ msgstr "Er zijn geen uitnodigingen."
 
 msgid "Map"
 msgstr "Kaart"
+
+#, fuzzy
+#| msgid "Deleting..."
+msgid "Meeting"
+msgstr "Verwijderen…"
+
+msgid "Fullscreen"
+msgstr ""
+
+msgid "Leave Fullscreen"
+msgstr ""
+
+#, fuzzy
+msgid "Leave video conference"
+msgstr "Is conferentie"
 
 msgid "Not happy with how your Microsite looks?"
 msgstr "Niet tevreden hoe je microsite eruit ziet?"
@@ -5301,9 +5502,6 @@ msgstr "Voer een nieuw wachtwoord in"
 
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
 msgstr "Voer je nieuwe wachtwoord twee keer in, zodat we kunnen controleren of je het correct hebt ingevoerd."
-
-msgid "New password"
-msgstr "Nieuw wachtwoord"
 
 msgid "New password confirmation"
 msgstr "Nieuw wachtwoord herhalen"
@@ -7251,6 +7449,34 @@ msgid "The language \"%s\" is not supported"
 msgstr "De taal “%s” wordt niet ondersteund"
 
 #, fuzzy
+msgid "Successfully made conference permanent premium"
+msgstr "Conferentie is bezig"
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed permanent premium from conference"
+msgstr "Gebruiker succesvol verwijderd"
+
+msgid "Successfully added premium block"
+msgstr ""
+
+msgid "Add Premium Block to \"{}\""
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully updated premium block."
+msgstr "Gebruikersaccount succesvol gedeactiveerd"
+
+msgid "Edit Premium Block in conference \"{}\""
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully deleted premium block"
+msgstr "Gebruikersaccount succesvol gedeactiveerd"
+
+#, fuzzy
 msgid "Your data was saved successfully!"
 msgstr "Je idee is succesvol verwijderd."
 
@@ -7323,18 +7549,6 @@ msgstr "Gebruikersaccount succesvol geactiveerd"
 
 msgid "Successfully removed user"
 msgstr "Gebruiker succesvol verwijderd"
-
-msgid "User was not created"
-msgstr "Gebruiker is niet aangemaakt"
-
-msgid "Workshop username"
-msgstr "Workshop gebruikersnaam"
-
-msgid "First Name"
-msgstr "Voornaam"
-
-msgid "Last Name"
-msgstr "Achternaam"
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -7760,6 +7974,49 @@ msgstr "Je bent momenteel geen lid van %s! Als je wilt, kun je hieronder het lid
 
 msgid "Your changes have been saved."
 msgstr "Je wijzigingen zijn opgeslagen."
+
+#~ msgid "Conference Management"
+#~ msgstr "Conferentiebeheer"
+
+#~ msgid "Conference is running"
+#~ msgstr "Conferentie is bezig"
+
+#, fuzzy
+#~ msgid "Conference is not running"
+#~ msgstr "Conferentie is bezig"
+
+#, fuzzy
+#~ msgid "Upload Participants"
+#~ msgstr "Deelnemers"
+
+#, fuzzy
+#~ msgid "not active"
+#~ msgstr "(Inactief)"
+
+#, fuzzy
+#~ msgid "deactivate member"
+#~ msgstr "Deactiveer Groep"
+
+#, fuzzy
+#~ msgid "activate member"
+#~ msgstr "Nodig een lid uit"
+
+#, fuzzy
+#~ msgid "Finish conference and deactivate user accounts"
+#~ msgstr "Gebruikersaccount succesvol gedeactiveerd"
+
+#, fuzzy
+#~ msgid "Start conference and activate user accounts"
+#~ msgstr "Gebruikersaccount succesvol gedeactiveerd"
+
+#~ msgid "User was not created"
+#~ msgstr "Gebruiker is niet aangemaakt"
+
+#~ msgid "First Name"
+#~ msgstr "Voornaam"
+
+#~ msgid "Last Name"
+#~ msgstr "Achternaam"
 
 #, fuzzy
 #~ msgid "Import Projects and Groups or Users"

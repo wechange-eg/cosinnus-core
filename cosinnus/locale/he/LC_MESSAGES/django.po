@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 15:24+0200\n"
+"POT-Creation-Date: 2021-11-02 12:10+0100\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -685,6 +685,17 @@ msgstr "שבוע הבא"
 msgid "Next month"
 msgstr "בחודש הבא"
 
+msgid "Fairmeeting"
+msgstr ""
+
+#, fuzzy
+#| msgid "View conference"
+msgid "No video conference"
+msgstr "הצג ועידה"
+
+msgid "BBB-Meeting"
+msgstr ""
+
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
 msgstr "זה לא נראה כמו קישור Youtube או Vimeo תקף!"
 
@@ -703,6 +714,9 @@ msgstr "משתמשים"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "קבוצות"
+
+msgid "Please always provide a first name"
+msgstr ""
 
 msgid "Please remove the whitespace from '{}'"
 msgstr "נא הסר את המרחב הלבן מ- '{}'"
@@ -835,20 +849,24 @@ msgstr "הסיסמה אשר נקבעה להיכנס אל החדר כמנהל פ�
 msgid "the password set to enter the room as a attendee"
 msgstr "הסיסמה אשר נקבעה להיכנס אל החדר כמנהל פורום"
 
-msgid "the rooms welcome message"
-msgstr "הודעת ברוכים הבאים של החדרים"
-
-msgid "the welcome message, that is displayed to attendees"
-msgstr "הודעת ברוכים הבאים, המוצגת עבור הנוכחים"
-
 msgid "number for dialing into the conference via telephone"
 msgstr "מספר להתקשרות אל תוך הוועידה דרך הטלפון"
 
 msgid "pin to enter for telephone participants"
 msgstr "מספר פין לכניסה עבור משתתפי טלפון"
 
-msgid "options for the room, that are represented in the bigbluebutton API"
+#, fuzzy
+#| msgid "options for the room, that are represented in the bigbluebutton API"
+msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
 msgstr "אופציות עבור החדר, המיוצגות ב- bigbluebutton API\\"
+
+msgid "the rooms welcome message"
+msgstr "הודעת ברוכים הבאים של החדרים"
+
+#, fuzzy
+#| msgid "the welcome message, that is displayed to attendees"
+msgid "DEPRECATED! the welcome message, that is displayed to attendees"
+msgstr "הודעת ברוכים הבאים, המוצגת עבור הנוכחים"
 
 msgid "Room Type"
 msgstr "סוג חדר"
@@ -1336,6 +1354,9 @@ msgstr ""
 
 msgid "Application method"
 msgstr "סוג טופס הבקשה"
+
+msgid "Type of video conference available for a group / a project"
+msgstr ""
 
 msgid "Microsite Video"
 msgstr "סרטון Microsite"
@@ -2034,6 +2055,42 @@ msgstr "פריט תצורת יישומון"
 msgid "Widget configuration items"
 msgstr "פריטי תצורת יישומון"
 
+msgid "Advanced BBB-Room Tools"
+msgstr ""
+
+msgid "Directly enter the BBB meeting"
+msgstr ""
+
+msgid "Join meeting directly"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a name for the conference."
+msgid "Enter the BBB meeting in the conference frontend"
+msgstr "הזן שם עבור הוועידה."
+
+msgid "Join meeting in conference frontend"
+msgstr ""
+
+msgid "For options and parameters, go to the parent event's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "edit this page"
+msgid "Event admin page"
+msgstr "ערוך דף זה"
+
+msgid "Not implemented for this type of event"
+msgstr ""
+
+msgid "For further options and parameters, go to the parent conference's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference name"
+msgid "Conference admin page"
+msgstr "שם ועידה"
+
 msgid "select this page"
 msgstr "בחר דף זה"
 
@@ -2371,6 +2428,11 @@ msgstr "עריכת תנאי השתתפות"
 
 msgid "Manage Participation Applications"
 msgstr "נהל בקשות השתתפות"
+
+#, fuzzy
+#| msgid "Temporary User Accounts"
+msgid "Manage Temporary User Accounts"
+msgstr "חשבונות משתמשים זמניים"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3037,50 +3099,149 @@ msgstr "תוכלו ליצור ישירות אירועי ועידה לחדרים 
 msgid "There are no rooms yet."
 msgstr "אין עדיין חדרים."
 
-msgid "Conference Management"
-msgstr "ניהול כנסים"
+#, fuzzy
+#| msgid "Temporary User Accounts"
+msgid "Temporary Users"
+msgstr "חשבונות משתמשים זמניים"
 
-msgid "Conference is running"
-msgstr "הוועידה פועלת"
+#, fuzzy
+#| msgid "Password change"
+msgid "Password changed"
+msgstr "שינוי סיסמה"
 
-msgid "Conference is not running"
-msgstr "הוועידה אינה פועלת"
+#, fuzzy
+#| msgid "Change password"
+msgid "Changed password for User"
+msgstr "שנה סיסמה"
 
-msgid "Accounts from CSV Upload"
-msgstr "חשבונות מהעלאת CSV"
+#, fuzzy
+#| msgid "Remove User"
+msgid "Remove all Users"
+msgstr "הסר משתמש"
 
-msgid "Upload Participants"
-msgstr "העלאת משתתפים"
+#, fuzzy
+#| msgid "Do you really want to remove the user?"
+msgid "Do you really want to remove all users?"
+msgstr "האם אתה בטוח שברצונך להסיר את המשתמש?"
 
-msgid "last login"
-msgstr "פעילות אחרונה"
+#, fuzzy
+#| msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+msgid "Here you can create temporary user accounts that are valid only for this conference and only when you activate them."
+msgstr "אם אפשרות זו זמינה, מנהלי שיחות ועידה יכולים ליצור חשבונות משתמשים זמניים שניתן להפעיל ולהשבית."
 
-msgid "no login yet"
-msgstr "טרם התחבר"
+msgid "Upload spreadsheet"
+msgstr ""
 
-msgid "Admin"
-msgstr "מנהל מערכת"
+#, fuzzy, python-format
+#| msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
+msgid "Please upload a spreadsheet with the following columns: unique user identifier, first name and last name. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgstr ""
+"אנא העלה/י CSV עם העמודות הבאות: מזהה משתמש ייחודי, שם פרטי, שם משפחה ועמודה אחת עבור כל סדנה המזוהה על ידי שורת הסדר של הסדנה. לעזרה תוכל/י להוריד תבנית \n"
+"<a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 
-msgid "Member"
-msgstr "חבר"
+#, fuzzy
+#| msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank."
+msgstr ""
+"לאחר מכן הוסף/י שורה עבור כל חשבון אותו תרצה/י להוסיף.\\n\n"
+"עליך להוסיף מזהה משתמש ייחודי אבל השם הפרטי ושם המשפחה יכולים להיות ריקים. לאחר מכן הוסף/י 1 לכל עמודות הסדנה היכן שהמשתמש צריך להיות חבר נורמלי או 2 אם המשתמש המסוים צריך להיות מנהל סדנה."
+
+#, fuzzy
+#| msgid "Upload CSV File"
+msgid "Upload File"
+msgstr "העלאת קובץ CSV"
+
+#, fuzzy
+#| msgid "Download the conditions"
+msgid "Download User credentials"
+msgstr "הורד את התנאים"
+
+msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants."
+msgstr ""
+
+msgid "Download passwords and login info"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate Member"
+msgid "Activate/Deactivate Users"
+msgstr "השבת חבר"
+
+msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
+msgstr ""
+
+msgid "Once the conference is over you can deactivate all ausers. That means they can not login in with their credentials anymore."
+msgstr ""
+
+#, fuzzy
+msgid "activate user accounts"
+msgstr "חשבון משתמש הופעל בהצלחה"
+
+#, fuzzy
+msgid "deactivate user accounts"
+msgstr "חשבון משתמש הופעל בהצלחה"
+
+msgid "reset/delete all users"
+msgstr ""
+
+msgid "Once the conference is over you can remove all ausers."
+msgstr ""
+
+#, fuzzy
+msgid "remove user accounts"
+msgstr "חשבון משתמש הופעל בהצלחה"
+
+#, fuzzy
+#| msgid "Workshop username"
+msgid "Workshop user name and email"
+msgstr "שם משתמש לסדנה"
 
 msgid "active"
 msgstr "פעיל"
 
-msgid "not active"
-msgstr "לא פעיל"
+#, fuzzy
+#| msgid "Password"
+msgid "password"
+msgstr "סיסמה"
 
-msgid "User participates in the following workshops:"
-msgstr "המשתמש משתתף בסדנאות הבאות:"
-
-msgid "deactivate member"
-msgstr "השבת חבר"
-
-msgid "activate member"
-msgstr "הפעל חברות"
+msgid "last login"
+msgstr "פעילות אחרונה"
 
 msgid "remove user"
 msgstr "הסר משתמש"
+
+#, fuzzy
+#| msgid "Yes"
+msgid "yes"
+msgstr "כן"
+
+msgid "no"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "deactivate"
+msgstr "השבת"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "activate"
+msgstr "השבת"
+
+#, fuzzy
+#| msgid "Password reset"
+msgid "Password set"
+msgstr "איפוס סיסמה"
+
+#, fuzzy
+#| msgid "Password"
+msgid "no Password"
+msgstr "סיסמה"
+
+#, fuzzy
+#| msgid "Set my password"
+msgid "Set password"
+msgstr "הגדרת הסיסמה שלי"
 
 msgid "Do you really want to deactivate the member's user account ?"
 msgstr "האם שאתה בטוח שברצונך להשבית את חשבון המשתמש של החבר?"
@@ -3100,14 +3261,11 @@ msgstr "האם אתה בטוח שברצונך להסיר את המשתמש?"
 msgid "Remove User"
 msgstr "הסר משתמש"
 
-msgid "Finish conference and deactivate user accounts"
-msgstr "סיים ועידה ובטל הפעלה של חשבונות משתמשים"
-
-msgid "Start conference and activate user accounts"
-msgstr "התחל שיחת ועידה והפעל חשבונות משתמשים"
-
 msgid "Download Statistics"
 msgstr "הורד סטטיסטיקה"
+
+msgid "New password"
+msgstr "סיסמה חדשה"
 
 msgid "Accept"
 msgstr "אשר משתמש"
@@ -3129,9 +3287,6 @@ msgstr "סקירה כללית - כל הועידות"
 #| msgid "User Administration"
 msgid "Conference Administration"
 msgstr "ניהול משתמש"
-
-msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
-msgstr ""
 
 #, fuzzy
 #| msgid "Temporary User Accounts"
@@ -3213,6 +3368,27 @@ msgstr "חדר"
 msgid "Event"
 msgstr "אירוע"
 
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "הוועידה בסטטוס פרימיום לצמיתות"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "הוועידה בסטטוס פרימיום לצמיתות"
+
+#, fuzzy
+#| msgid "Do you really want to remove the user?"
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "האם אתה בטוח שברצונך להסיר את המשתמש?"
+
+#, fuzzy
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "האם אתה בטוח שברצונך להסיר את החבר „%(name)s“ מהצוות?"
+
 msgid "There are no items to show."
 msgstr "אין פריטים להצגה."
 
@@ -3224,6 +3400,25 @@ msgstr "BBB פרימיום"
 
 msgid "Not set"
 msgstr "לא נקבע"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "שרת BBB לועידות פרימיום"
+
+#, fuzzy
+#| msgid "Participants"
+msgid "participants"
+msgstr "משתתפים"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to decline member „%(name)s“?"
+msgid "Do you really want to delete this block from „%(name)s“?"
+msgstr "האם אתה בטוח שברצונך לבטל את החברות של „%(name)s“?"
+
+#, fuzzy
+#| msgid "Delete Profile"
+msgid "Delete Premium Block"
+msgstr "מחק פרופיל"
 
 msgid "Conference Overview"
 msgstr "מבט כולל על ועידה"
@@ -3309,6 +3504,11 @@ msgstr "אירועים"
 
 msgid "News"
 msgstr "חדשות"
+
+#, fuzzy
+#| msgid "View conference"
+msgid "Video conference"
+msgstr "הצג ועידה"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -3658,6 +3858,12 @@ msgstr "שלח הודעה לכל החברים"
 msgid "Send Message"
 msgstr "שלח הודעה"
 
+msgid "Admin"
+msgstr "מנהל מערכת"
+
+msgid "Member"
+msgstr "חבר"
+
 msgid "User account inactive"
 msgstr "חשבון זה אינו פעיל"
 
@@ -3859,6 +4065,14 @@ msgstr ""
 msgid "Enable the public visibility of your group/project"
 msgstr ""
 
+#, fuzzy
+#| msgid "Send 1 day before conference"
+msgid "Include a video conference"
+msgstr "שלח יום אחד לפני הוועידה"
+
+msgid "Choose the type of the video conference you would like to include in the dashboard"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr "הגדרות פרטיות"
 
@@ -4048,6 +4262,22 @@ msgstr "אין הזמנות."
 
 msgid "Map"
 msgstr "מפה"
+
+#, fuzzy
+#| msgid "Deleting..."
+msgid "Meeting"
+msgstr "מוחק..."
+
+msgid "Fullscreen"
+msgstr ""
+
+msgid "Leave Fullscreen"
+msgstr ""
+
+#, fuzzy
+#| msgid "View conference"
+msgid "Leave video conference"
+msgstr "הצג ועידה"
 
 msgid "Not happy with how your Microsite looks?"
 msgstr "לא מרוצה מאיך שהמיקרו-אתר שלך נראה?"
@@ -5162,9 +5392,6 @@ msgstr "הכנס סיסמה חדשה"
 
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
 msgstr "הזן את הסיסמה החדשה שלך פעמיים כדי שנוכל לאמת שהקלדת אותה כהלכה."
-
-msgid "New password"
-msgstr "סיסמה חדשה"
 
 msgid "New password confirmation"
 msgstr "אישור סיסמה חדשה"
@@ -7028,6 +7255,35 @@ msgstr "המשתמש נוצר בהצלחה!"
 msgid "The language \"%s\" is not supported"
 msgstr "השפה \"%s\" אינה נתמכת"
 
+#, fuzzy
+#| msgid "Conference is permanently premium"
+msgid "Successfully made conference permanent premium"
+msgstr "הוועידה בסטטוס פרימיום לצמיתות"
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed permanent premium from conference"
+msgstr "משתמש הוסר בהצלחה"
+
+msgid "Successfully added premium block"
+msgstr ""
+
+msgid "Add Premium Block to \"{}\""
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully updated premium block."
+msgstr "חשבון משתמש הושבת בהצלחה"
+
+msgid "Edit Premium Block in conference \"{}\""
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully deleted premium block"
+msgstr "חשבון משתמש הושבת בהצלחה"
+
 msgid "Your data was saved successfully!"
 msgstr "הנתונים שלך נשמרו בהצלחה!"
 
@@ -7100,18 +7356,6 @@ msgstr "חשבון משתמש הופעל בהצלחה"
 
 msgid "Successfully removed user"
 msgstr "משתמש הוסר בהצלחה"
-
-msgid "User was not created"
-msgstr "המשתמש לא נוצר"
-
-msgid "Workshop username"
-msgstr "שם משתמש לסדנה"
-
-msgid "First Name"
-msgstr "שם פרטי"
-
-msgid "Last Name"
-msgstr "שם משפחה"
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -7534,6 +7778,51 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
 
+#~ msgid "Conference Management"
+#~ msgstr "ניהול כנסים"
+
+#~ msgid "Conference is running"
+#~ msgstr "הוועידה פועלת"
+
+#~ msgid "Conference is not running"
+#~ msgstr "הוועידה אינה פועלת"
+
+#~ msgid "Accounts from CSV Upload"
+#~ msgstr "חשבונות מהעלאת CSV"
+
+#~ msgid "Upload Participants"
+#~ msgstr "העלאת משתתפים"
+
+#~ msgid "no login yet"
+#~ msgstr "טרם התחבר"
+
+#~ msgid "not active"
+#~ msgstr "לא פעיל"
+
+#~ msgid "User participates in the following workshops:"
+#~ msgstr "המשתמש משתתף בסדנאות הבאות:"
+
+#~ msgid "deactivate member"
+#~ msgstr "השבת חבר"
+
+#~ msgid "activate member"
+#~ msgstr "הפעל חברות"
+
+#~ msgid "Finish conference and deactivate user accounts"
+#~ msgstr "סיים ועידה ובטל הפעלה של חשבונות משתמשים"
+
+#~ msgid "Start conference and activate user accounts"
+#~ msgstr "התחל שיחת ועידה והפעל חשבונות משתמשים"
+
+#~ msgid "User was not created"
+#~ msgstr "המשתמש לא נוצר"
+
+#~ msgid "First Name"
+#~ msgstr "שם פרטי"
+
+#~ msgid "Last Name"
+#~ msgstr "שם משפחה"
+
 #, fuzzy
 #~| msgid "My Projects and Groups"
 #~ msgid "Import Projects and Groups or Users"
@@ -7779,11 +8068,6 @@ msgstr "השינויים שביצעת נשמרו בהצלחה."
 #~ msgid "Kazakh--NATIVE-LANGUAGE"
 #~ msgstr "Қазақ тілі"
 
-#~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-#~ msgstr ""
-#~ "אנא העלה/י CSV עם העמודות הבאות: מזהה משתמש ייחודי, שם פרטי, שם משפחה ועמודה אחת עבור כל סדנה המזוהה על ידי שורת הסדר של הסדנה. לעזרה תוכל/י להוריד תבנית \n"
-#~ "<a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-
 #~ msgid "Polish--NATIVE-LANGUAGE"
 #~ msgstr "Polski"
 
@@ -7814,11 +8098,6 @@ msgstr "השינויים שביצעת נשמרו בהצלחה."
 
 #~ msgid "The following Groups were converted to Projects:"
 #~ msgstr "הקבוצות הבאות הוסבו לפרויקטים:"
-
-#~ msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-#~ msgstr ""
-#~ "לאחר מכן הוסף/י שורה עבור כל חשבון אותו תרצה/י להוסיף.\\n\n"
-#~ "עליך להוסיף מזהה משתמש ייחודי אבל השם הפרטי ושם המשפחה יכולים להיות ריקים. לאחר מכן הוסף/י 1 לכל עמודות הסדנה היכן שהמשתמש צריך להיות חבר נורמלי או 2 אם המשתמש המסוים צריך להיות מנהל סדנה."
 
 #~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
 #~ msgstr "תהליך זה הפיך. באפשרותך להפעיל מחדש את הוועידה מדף פרופיל המשתמש שלך בכל עת."

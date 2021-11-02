@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 15:24+0200\n"
+"POT-Creation-Date: 2021-11-02 12:10+0100\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -695,6 +695,17 @@ msgstr "Příští týden"
 msgid "Next month"
 msgstr "Příští měsíc"
 
+msgid "Fairmeeting"
+msgstr ""
+
+#, fuzzy
+#| msgid "View conference"
+msgid "No video conference"
+msgstr "Prohlédněte si konferenci"
+
+msgid "BBB-Meeting"
+msgstr ""
+
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
 msgstr "Zdá se, že to není platný odkaz na YouTube nebo Vimeo!"
 
@@ -713,6 +724,9 @@ msgstr "Uživatelé"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Skupiny"
+
+msgid "Please always provide a first name"
+msgstr ""
 
 msgid "Please remove the whitespace from '{}'"
 msgstr "Odstraňte mezery z „{}“"
@@ -845,20 +859,24 @@ msgstr "nastaveno heslo pro vstup do místnosti jako moderátor"
 msgid "the password set to enter the room as a attendee"
 msgstr "nastaveno heslo pro vstup do místnosti jako účastník"
 
-msgid "the rooms welcome message"
-msgstr "uvítací zpráva do místností"
-
-msgid "the welcome message, that is displayed to attendees"
-msgstr "uvítací zpráva, která je zobrazena účastníkům"
-
 msgid "number for dialing into the conference via telephone"
 msgstr "číslo pro zavolání na konferenci přes telefon"
 
 msgid "pin to enter for telephone participants"
 msgstr "pin pro vstup pro účastníky přes telefon"
 
-msgid "options for the room, that are represented in the bigbluebutton API"
+#, fuzzy
+#| msgid "options for the room, that are represented in the bigbluebutton API"
+msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
 msgstr "možnosti pro místnost, které jsou zastoupeny v bigblubutton API"
+
+msgid "the rooms welcome message"
+msgstr "uvítací zpráva do místností"
+
+#, fuzzy
+#| msgid "the welcome message, that is displayed to attendees"
+msgid "DEPRECATED! the welcome message, that is displayed to attendees"
+msgstr "uvítací zpráva, která je zobrazena účastníkům"
 
 msgid "Room Type"
 msgstr "Typ místnosti"
@@ -1346,6 +1364,9 @@ msgstr ""
 
 msgid "Application method"
 msgstr "Metoda podání žádosti"
+
+msgid "Type of video conference available for a group / a project"
+msgstr ""
 
 msgid "Microsite Video"
 msgstr "Video mikrostránky"
@@ -2042,6 +2063,42 @@ msgstr "Položka konfigurace widgetu"
 msgid "Widget configuration items"
 msgstr "Položky konfigurace widgetu"
 
+msgid "Advanced BBB-Room Tools"
+msgstr ""
+
+msgid "Directly enter the BBB meeting"
+msgstr ""
+
+msgid "Join meeting directly"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a name for the conference."
+msgid "Enter the BBB meeting in the conference frontend"
+msgstr "Zadejte název konference."
+
+msgid "Join meeting in conference frontend"
+msgstr ""
+
+msgid "For options and parameters, go to the parent event's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "edit this page"
+msgid "Event admin page"
+msgstr "upravit tuto stránku"
+
+msgid "Not implemented for this type of event"
+msgstr ""
+
+msgid "For further options and parameters, go to the parent conference's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference name"
+msgid "Conference admin page"
+msgstr "Název konference"
+
 msgid "select this page"
 msgstr "vybrat tuto stránku"
 
@@ -2415,6 +2472,11 @@ msgstr "Editujte podmínky účasti"
 
 msgid "Manage Participation Applications"
 msgstr "Řiďte žádosti o účast"
+
+#, fuzzy
+#| msgid "Temporary User Accounts"
+msgid "Manage Temporary User Accounts"
+msgstr "Dočasné uživatelské účty"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3097,50 +3159,145 @@ msgstr "Můžete přímo vytvořit eventy konference z tohoto místa pomocí kon
 msgid "There are no rooms yet."
 msgstr "Zatím tu nejsou žádné místnosti."
 
-msgid "Conference Management"
-msgstr "Vedení konference"
+#, fuzzy
+#| msgid "Temporary User Accounts"
+msgid "Temporary Users"
+msgstr "Dočasné uživatelské účty"
 
-msgid "Conference is running"
-msgstr "Konference probíhá"
+#, fuzzy
+#| msgid "Password change"
+msgid "Password changed"
+msgstr "Změna hesla"
 
-msgid "Conference is not running"
-msgstr "Konference neprobíhá"
+#, fuzzy
+#| msgid "Change password"
+msgid "Changed password for User"
+msgstr "Změnit heslo"
 
-msgid "Accounts from CSV Upload"
-msgstr "Účty z nahrávání z CSV"
+#, fuzzy
+#| msgid "Remove User"
+msgid "Remove all Users"
+msgstr "Odebrat uživatele"
 
-msgid "Upload Participants"
-msgstr "Nahrajte účastníky"
+#, fuzzy
+#| msgid "Do you really want to remove the user?"
+msgid "Do you really want to remove all users?"
+msgstr "Opravdu chcete uživatele odebrat?"
 
-msgid "last login"
-msgstr "poslední přihlášení"
+#, fuzzy
+#| msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+msgid "Here you can create temporary user accounts that are valid only for this conference and only when you activate them."
+msgstr "Pokud je to povoleno, administrátoři konference mohou vytvořit uživatelské účty, které mohou být aktivovány a deaktivovány."
 
-msgid "no login yet"
-msgstr "zatím žádné přihlášení"
+msgid "Upload spreadsheet"
+msgstr ""
 
-msgid "Admin"
-msgstr "Správce"
+#, fuzzy, python-format
+#| msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
+msgid "Please upload a spreadsheet with the following columns: unique user identifier, first name and last name. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgstr "Nahrajte soubor CSV s následujícími sloupci: jedinečný identifikátor uživatele, jméno, příjmení a jeden sloupec pro každý workshop označený identifikátorem workshopu. Pro nápovědu si můžete stáhnout šablonu <a href=\"%(workshop_participants_upload_skeleton)s\">zde</a>"
 
-msgid "Member"
-msgstr "Člen"
+#, fuzzy
+#| msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank."
+msgstr "Poté přidejte řádek pro každý účet, který chcete přidat. Musíte přidat jedinečný identifikátor uživatele, ale jméno a příjmení mohou být prázdné. Pak přidejte 1 do všech sloupců workshopu, kde by měl být uživatel normálním členem, nebo 2, pokud by měl být tento uživatel správcem workshopu."
+
+#, fuzzy
+#| msgid "Upload CSV File"
+msgid "Upload File"
+msgstr "Nahrát CSV soubor"
+
+#, fuzzy
+#| msgid "Download the conditions"
+msgid "Download User credentials"
+msgstr "Stáhněte si podmínky"
+
+msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants."
+msgstr ""
+
+msgid "Download passwords and login info"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate Member"
+msgid "Activate/Deactivate Users"
+msgstr "Deaktivovat člena"
+
+msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
+msgstr ""
+
+msgid "Once the conference is over you can deactivate all ausers. That means they can not login in with their credentials anymore."
+msgstr ""
+
+#, fuzzy
+msgid "activate user accounts"
+msgstr "Uživatelský účet byl úspěšně aktivován"
+
+#, fuzzy
+msgid "deactivate user accounts"
+msgstr "Uživatelský účet byl úspěšně aktivován"
+
+msgid "reset/delete all users"
+msgstr ""
+
+msgid "Once the conference is over you can remove all ausers."
+msgstr ""
+
+#, fuzzy
+msgid "remove user accounts"
+msgstr "Uživatelský účet byl úspěšně aktivován"
+
+#, fuzzy
+#| msgid "Workshop username"
+msgid "Workshop user name and email"
+msgstr "Uživatelské jméno workshopu"
 
 msgid "active"
 msgstr "aktivní"
 
-msgid "not active"
-msgstr "neaktivní"
+#, fuzzy
+#| msgid "Password"
+msgid "password"
+msgstr "Heslo"
 
-msgid "User participates in the following workshops:"
-msgstr "Uživatel se účastní následujících workshopů:"
-
-msgid "deactivate member"
-msgstr "deaktivovat člena"
-
-msgid "activate member"
-msgstr "aktivovat člena"
+msgid "last login"
+msgstr "poslední přihlášení"
 
 msgid "remove user"
 msgstr "odebrat uživatele"
+
+#, fuzzy
+#| msgid "Yes"
+msgid "yes"
+msgstr "Ano"
+
+msgid "no"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "deactivate"
+msgstr "Deaktivovat"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "activate"
+msgstr "Deaktivovat"
+
+#, fuzzy
+#| msgid "Password reset"
+msgid "Password set"
+msgstr "Obnovení hesla"
+
+#, fuzzy
+#| msgid "Password"
+msgid "no Password"
+msgstr "Heslo"
+
+#, fuzzy
+#| msgid "Set my password"
+msgid "Set password"
+msgstr "Nastavte mé heslo"
 
 msgid "Do you really want to deactivate the member's user account ?"
 msgstr "Opravdu chcete deaktivovat uživatelský účet člena?"
@@ -3160,14 +3317,11 @@ msgstr "Opravdu chcete uživatele odebrat?"
 msgid "Remove User"
 msgstr "Odebrat uživatele"
 
-msgid "Finish conference and deactivate user accounts"
-msgstr "Dokončit konferenci a deaktivovat uživatelské účty"
-
-msgid "Start conference and activate user accounts"
-msgstr "Zahájit konferenci a deaktivovat uživatelské účty"
-
 msgid "Download Statistics"
 msgstr "Stáhnout statistiku"
+
+msgid "New password"
+msgstr "Nové heslo"
 
 msgid "Accept"
 msgstr "Přijmout"
@@ -3189,9 +3343,6 @@ msgstr "Přehled - Všechny konference"
 #| msgid "User Administration"
 msgid "Conference Administration"
 msgstr "Administrace uživatele"
-
-msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
-msgstr ""
 
 #, fuzzy
 #| msgid "Temporary User Accounts"
@@ -3273,6 +3424,27 @@ msgstr "Místnost"
 msgid "Event"
 msgstr "Událost"
 
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Konference je trvale v kategorii premium"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Konference je trvale v kategorii premium"
+
+#, fuzzy
+#| msgid "Do you really want to remove the user?"
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Opravdu chcete uživatele odebrat?"
+
+#, fuzzy
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Opravdu chcete odebrat člena „%(name)s“ z týmu?"
+
 msgid "There are no items to show."
 msgstr "Nejsou žádné položky pro zobrazení."
 
@@ -3284,6 +3456,25 @@ msgstr "BBB Premium"
 
 msgid "Not set"
 msgstr "Nenastavený"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "BBB server pro Premium konference"
+
+#, fuzzy
+#| msgid "Participants"
+msgid "participants"
+msgstr "Účastníci"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to decline member „%(name)s“?"
+msgid "Do you really want to delete this block from „%(name)s“?"
+msgstr "Opravdu chcete odmítnout člena „%(name)s“?"
+
+#, fuzzy
+#| msgid "Delete Profile"
+msgid "Delete Premium Block"
+msgstr "Smazat profil"
 
 msgid "Conference Overview"
 msgstr "Konferenční přehled"
@@ -3369,6 +3560,11 @@ msgstr "Události"
 
 msgid "News"
 msgstr "Novinky"
+
+#, fuzzy
+#| msgid "View conference"
+msgid "Video conference"
+msgstr "Prohlédněte si konferenci"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -3718,6 +3914,12 @@ msgstr "Poslat zprávu všem členům"
 msgid "Send Message"
 msgstr "Poslat zprávu"
 
+msgid "Admin"
+msgstr "Správce"
+
+msgid "Member"
+msgstr "Člen"
+
 msgid "User account inactive"
 msgstr "Uživatelský účet neaktivní"
 
@@ -3919,6 +4121,14 @@ msgstr ""
 msgid "Enable the public visibility of your group/project"
 msgstr ""
 
+#, fuzzy
+#| msgid "Send 1 day before conference"
+msgid "Include a video conference"
+msgstr "Zaslat 1 den před zahájením konference"
+
+msgid "Choose the type of the video conference you would like to include in the dashboard"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr "Nastavení ochrany osobních údajů"
 
@@ -4108,6 +4318,22 @@ msgstr "Nejsou žádné pozvánky."
 
 msgid "Map"
 msgstr "Mapa"
+
+#, fuzzy
+#| msgid "Deleting..."
+msgid "Meeting"
+msgstr "Mazání..."
+
+msgid "Fullscreen"
+msgstr ""
+
+msgid "Leave Fullscreen"
+msgstr ""
+
+#, fuzzy
+#| msgid "View conference"
+msgid "Leave video conference"
+msgstr "Prohlédněte si konferenci"
 
 msgid "Not happy with how your Microsite looks?"
 msgstr "Nejste spokojeni s tím, jak vypadá vaše mikrostránka?"
@@ -5223,9 +5449,6 @@ msgstr "Zadejte nové heslo"
 
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
 msgstr "Zadejte prosím své nové heslo dvakrát, abychom mohli ověřit, že jste je zadali správně."
-
-msgid "New password"
-msgstr "Nové heslo"
 
 msgid "New password confirmation"
 msgstr "Potvrzení nového hesla"
@@ -7089,6 +7312,35 @@ msgstr "Uživatel byl úspěšně vytvořen!"
 msgid "The language \"%s\" is not supported"
 msgstr "Jazyk \"%s\" není podporován"
 
+#, fuzzy
+#| msgid "Conference is permanently premium"
+msgid "Successfully made conference permanent premium"
+msgstr "Konference je trvale v kategorii premium"
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed permanent premium from conference"
+msgstr "Uživatel byl úspěšně odebrán"
+
+msgid "Successfully added premium block"
+msgstr ""
+
+msgid "Add Premium Block to \"{}\""
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully updated premium block."
+msgstr "Uživatelský účet byl úspěšně deaktivován"
+
+msgid "Edit Premium Block in conference \"{}\""
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully deleted premium block"
+msgstr "Uživatelský účet byl úspěšně deaktivován"
+
 msgid "Your data was saved successfully!"
 msgstr "Vaše data byla úspěšně uložena!"
 
@@ -7161,18 +7413,6 @@ msgstr "Uživatelský účet byl úspěšně aktivován"
 
 msgid "Successfully removed user"
 msgstr "Uživatel byl úspěšně odebrán"
-
-msgid "User was not created"
-msgstr "Uživatel nebyl vytvořen"
-
-msgid "Workshop username"
-msgstr "Uživatelské jméno workshopu"
-
-msgid "First Name"
-msgstr "Jméno"
-
-msgid "Last Name"
-msgstr "Příjmení"
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -7595,6 +7835,51 @@ msgstr "Momentálně nejste členem %s! Pokud si přejete, můžete požádat o 
 msgid "Your changes have been saved."
 msgstr "Vaše změny byly uloženy."
 
+#~ msgid "Conference Management"
+#~ msgstr "Vedení konference"
+
+#~ msgid "Conference is running"
+#~ msgstr "Konference probíhá"
+
+#~ msgid "Conference is not running"
+#~ msgstr "Konference neprobíhá"
+
+#~ msgid "Accounts from CSV Upload"
+#~ msgstr "Účty z nahrávání z CSV"
+
+#~ msgid "Upload Participants"
+#~ msgstr "Nahrajte účastníky"
+
+#~ msgid "no login yet"
+#~ msgstr "zatím žádné přihlášení"
+
+#~ msgid "not active"
+#~ msgstr "neaktivní"
+
+#~ msgid "User participates in the following workshops:"
+#~ msgstr "Uživatel se účastní následujících workshopů:"
+
+#~ msgid "deactivate member"
+#~ msgstr "deaktivovat člena"
+
+#~ msgid "activate member"
+#~ msgstr "aktivovat člena"
+
+#~ msgid "Finish conference and deactivate user accounts"
+#~ msgstr "Dokončit konferenci a deaktivovat uživatelské účty"
+
+#~ msgid "Start conference and activate user accounts"
+#~ msgstr "Zahájit konferenci a deaktivovat uživatelské účty"
+
+#~ msgid "User was not created"
+#~ msgstr "Uživatel nebyl vytvořen"
+
+#~ msgid "First Name"
+#~ msgstr "Jméno"
+
+#~ msgid "Last Name"
+#~ msgstr "Příjmení"
+
 #, fuzzy
 #~| msgid "My Projects and Groups"
 #~ msgid "Import Projects and Groups or Users"
@@ -7836,9 +8121,6 @@ msgstr "Vaše změny byly uloženy."
 #~ msgid "Kazakh--NATIVE-LANGUAGE"
 #~ msgstr "Қазақ тілі"
 
-#~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-#~ msgstr "Nahrajte soubor CSV s následujícími sloupci: jedinečný identifikátor uživatele, jméno, příjmení a jeden sloupec pro každý workshop označený identifikátorem workshopu. Pro nápovědu si můžete stáhnout šablonu <a href=\"%(workshop_participants_upload_skeleton)s\">zde</a>"
-
 #~ msgid "Polish--NATIVE-LANGUAGE"
 #~ msgstr "Polski"
 
@@ -7869,9 +8151,6 @@ msgstr "Vaše změny byly uloženy."
 
 #~ msgid "The following Groups were converted to Projects:"
 #~ msgstr "Následující skupiny byly převedeny na projekty:"
-
-#~ msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-#~ msgstr "Poté přidejte řádek pro každý účet, který chcete přidat. Musíte přidat jedinečný identifikátor uživatele, ale jméno a příjmení mohou být prázdné. Pak přidejte 1 do všech sloupců workshopu, kde by měl být uživatel normálním členem, nebo 2, pokud by měl být tento uživatel správcem workshopu."
 
 #~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
 #~ msgstr "Tento proces je reverzibilní. Konferenci můžete ze stránky svého uživatelského profilu kdykoli znovu aktivovat."

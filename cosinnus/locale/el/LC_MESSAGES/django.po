@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 15:24+0200\n"
+"POT-Creation-Date: 2021-11-02 12:10+0100\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -683,6 +683,17 @@ msgstr "Την επόμενη εβδομάδα"
 msgid "Next month"
 msgstr "Τον επόμενο μήνα"
 
+msgid "Fairmeeting"
+msgstr ""
+
+#, fuzzy
+#| msgid "View conference"
+msgid "No video conference"
+msgstr "Προβολή σύσκεψης"
+
+msgid "BBB-Meeting"
+msgstr ""
+
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
 msgstr "Αυτός δεν φαίνεται να είναι ένας έγκυρος σύνδεσμος YouTube ή Vimeo!"
 
@@ -701,6 +712,9 @@ msgstr "Χρήστες"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Ομάδες"
+
+msgid "Please always provide a first name"
+msgstr ""
 
 msgid "Please remove the whitespace from '{}'"
 msgstr "Παρακαλούμε αφαιρέστε τον κενό χώρο από '{}'"
@@ -833,20 +847,24 @@ msgstr "ο κωδικός πρόσβασης ορίστηκε για να εισ
 msgid "the password set to enter the room as a attendee"
 msgstr "ο κωδικός πρόσβασης ορίστηκε για να εισέλθετε στο δωμάτιο ως παρευρισκόμενος"
 
-msgid "the rooms welcome message"
-msgstr "το μήνυμα καλωσορίσματος των δωματίων"
-
-msgid "the welcome message, that is displayed to attendees"
-msgstr "το μήνυμα καλωσορίσματος που εμφανίζεται στους παρευρισκόμενους"
-
 msgid "number for dialing into the conference via telephone"
 msgstr "αριθμός για πληκτρολόγηση στη σύσκεψη μέσω τηλεφώνου"
 
 msgid "pin to enter for telephone participants"
 msgstr "κωδικός pin για να εισάγουν οι συμμετέχοντες μέσω τηλεφώνου"
 
-msgid "options for the room, that are represented in the bigbluebutton API"
+#, fuzzy
+#| msgid "options for the room, that are represented in the bigbluebutton API"
+msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
 msgstr "επιλογές για το δωμάτιο που εκπροσωπούνται στο bigbluebutton API"
+
+msgid "the rooms welcome message"
+msgstr "το μήνυμα καλωσορίσματος των δωματίων"
+
+#, fuzzy
+#| msgid "the welcome message, that is displayed to attendees"
+msgid "DEPRECATED! the welcome message, that is displayed to attendees"
+msgstr "το μήνυμα καλωσορίσματος που εμφανίζεται στους παρευρισκόμενους"
 
 msgid "Room Type"
 msgstr "Είδος Δωματίου"
@@ -1334,6 +1352,9 @@ msgstr ""
 
 msgid "Application method"
 msgstr "Μέθοδος αίτησης"
+
+msgid "Type of video conference available for a group / a project"
+msgstr ""
 
 msgid "Microsite Video"
 msgstr "Βίντεο Μικρότοπου"
@@ -2030,6 +2051,42 @@ msgstr "Στοιχείο διάταξης Widget"
 msgid "Widget configuration items"
 msgstr "Στοιχεία διάταξης Widget"
 
+msgid "Advanced BBB-Room Tools"
+msgstr ""
+
+msgid "Directly enter the BBB meeting"
+msgstr ""
+
+msgid "Join meeting directly"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a name for the conference."
+msgid "Enter the BBB meeting in the conference frontend"
+msgstr "Εισάγετε όνομα για τη σύσκεψη."
+
+msgid "Join meeting in conference frontend"
+msgstr ""
+
+msgid "For options and parameters, go to the parent event's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "edit this page"
+msgid "Event admin page"
+msgstr "επεξεργασία αυτής της σελίδας"
+
+msgid "Not implemented for this type of event"
+msgstr ""
+
+msgid "For further options and parameters, go to the parent conference's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference name"
+msgid "Conference admin page"
+msgstr "Όνομα σύσκεψης"
+
 msgid "select this page"
 msgstr "επιλογή αυτής της σελίδας"
 
@@ -2369,6 +2426,11 @@ msgstr "Επεξεργασία Όρων Συμμετοχής"
 
 msgid "Manage Participation Applications"
 msgstr "Διαχείριση Αιτήσεων Συμμετοχής"
+
+#, fuzzy
+#| msgid "Temporary User Accounts"
+msgid "Manage Temporary User Accounts"
+msgstr "Προσωρινοί Λογαριασμοί Χρήστη"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3035,50 +3097,142 @@ msgstr "Μπορείτε άμεσα να δημιουργήσετε εκδηλώ
 msgid "There are no rooms yet."
 msgstr "Δεν υπάρχουν ακόμη δωμάτια."
 
-msgid "Conference Management"
-msgstr "Διαχείριση Συνδιάσκεψης"
+#, fuzzy
+#| msgid "Temporary User Accounts"
+msgid "Temporary Users"
+msgstr "Προσωρινοί Λογαριασμοί Χρήστη"
 
-msgid "Conference is running"
-msgstr "Η σύσκεψη είναι σε εξέλιξη"
+#, fuzzy
+#| msgid "Password change"
+msgid "Password changed"
+msgstr "Αλλαγή κωδικού πρόσβασης"
 
-msgid "Conference is not running"
-msgstr "Η σύσκεψη δεν είναι σε εξέλιξη"
+#, fuzzy
+#| msgid "Change password"
+msgid "Changed password for User"
+msgstr "Αλλαγή κωδικού πρόσβασης"
 
-msgid "Accounts from CSV Upload"
-msgstr "Λογαριασμοί από Φόρτωση CSV"
+#, fuzzy
+#| msgid "Remove User"
+msgid "Remove all Users"
+msgstr "Αφαίρεση Χρήστη"
 
-msgid "Upload Participants"
-msgstr "Φόρτωση Συμμετεχόντων"
+#, fuzzy
+#| msgid "Do you really want to remove the user?"
+msgid "Do you really want to remove all users?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον χρήστη;"
 
-msgid "last login"
-msgstr "τελευταία σύνδεση"
+#, fuzzy
+#| msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+msgid "Here you can create temporary user accounts that are valid only for this conference and only when you activate them."
+msgstr "Σε περίπτωση ενεργοποίησης, οι διαχειριστές της σύσκεψης μπορούν να δημιουργήσουν προσωρινούς λογαριασμούς χρήστη μπορούν να ενεργοποιηθούν και να απενεργοποιηθούν."
 
-msgid "no login yet"
-msgstr "δεν έγινε σύνδεση ακόμη"
+msgid "Upload spreadsheet"
+msgstr ""
 
-msgid "Admin"
-msgstr "Διαχειριστής"
+#, python-format
+msgid "Please upload a spreadsheet with the following columns: unique user identifier, first name and last name. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgstr ""
 
-msgid "Member"
-msgstr "Μέλος"
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank."
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload CSV File"
+msgid "Upload File"
+msgstr "Φόρτωση Αρχείου CSV"
+
+#, fuzzy
+#| msgid "Download the conditions"
+msgid "Download User credentials"
+msgstr "Λήψη των όρων"
+
+msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants."
+msgstr ""
+
+msgid "Download passwords and login info"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate Member"
+msgid "Activate/Deactivate Users"
+msgstr "Απενεργοποίηση Μέλους"
+
+msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
+msgstr ""
+
+msgid "Once the conference is over you can deactivate all ausers. That means they can not login in with their credentials anymore."
+msgstr ""
+
+#, fuzzy
+msgid "activate user accounts"
+msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
+
+#, fuzzy
+msgid "deactivate user accounts"
+msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
+
+msgid "reset/delete all users"
+msgstr ""
+
+msgid "Once the conference is over you can remove all ausers."
+msgstr ""
+
+#, fuzzy
+msgid "remove user accounts"
+msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
+
+#, fuzzy
+#| msgid "Workshop username"
+msgid "Workshop user name and email"
+msgstr "Όνομα χρήστη σεμιναρίου"
 
 msgid "active"
 msgstr "ενεργό"
 
-msgid "not active"
-msgstr "ανενεργό"
+#, fuzzy
+#| msgid "Password"
+msgid "password"
+msgstr "Κωδικός πρόσβασης"
 
-msgid "User participates in the following workshops:"
-msgstr "Ο χρήστης συμμετέχει στα παρακάτω σεμινάρια:"
-
-msgid "deactivate member"
-msgstr "απενεργοποίηση μέλους"
-
-msgid "activate member"
-msgstr "ενεργοποίηση μέλους"
+msgid "last login"
+msgstr "τελευταία σύνδεση"
 
 msgid "remove user"
 msgstr "αφαίρεση χρήστη"
+
+#, fuzzy
+#| msgid "Yes"
+msgid "yes"
+msgstr "Ναι"
+
+msgid "no"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "deactivate"
+msgstr "Απενεργοποίηση"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "activate"
+msgstr "Απενεργοποίηση"
+
+#, fuzzy
+#| msgid "Password reset"
+msgid "Password set"
+msgstr "Επαναφορά κωδικού πρόσβασης"
+
+#, fuzzy
+#| msgid "Password"
+msgid "no Password"
+msgstr "Κωδικός πρόσβασης"
+
+#, fuzzy
+#| msgid "Set my password"
+msgid "Set password"
+msgstr "Ορισμός του κωδικού πρόσβασής μου"
 
 msgid "Do you really want to deactivate the member's user account ?"
 msgstr "Είστε βέβαιοι ότι θέλετε να απενεργοποιήσετε τον λογαριασμό χρήστη του μέλους;"
@@ -3098,14 +3252,11 @@ msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε 
 msgid "Remove User"
 msgstr "Αφαίρεση Χρήστη"
 
-msgid "Finish conference and deactivate user accounts"
-msgstr "Ολοκλήρωση σύσκεψης και απενεργοποίηση λογαριασμών χρήστη"
-
-msgid "Start conference and activate user accounts"
-msgstr "Έναρξη σύσκεψης και ενεργοποίηση λογαριασμών χρήστη"
-
 msgid "Download Statistics"
 msgstr "Λήψη Στατιστικών"
+
+msgid "New password"
+msgstr "Νέος κωδικός πρόσβασης"
 
 msgid "Accept"
 msgstr "Αποδοχή"
@@ -3127,9 +3278,6 @@ msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
 #| msgid "User Administration"
 msgid "Conference Administration"
 msgstr "Διαχείριση Χρήστη"
-
-msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
-msgstr ""
 
 #, fuzzy
 #| msgid "Temporary User Accounts"
@@ -3211,6 +3359,27 @@ msgstr "Δωμάτιο"
 msgid "Event"
 msgstr "Εκδήλωση"
 
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+#, fuzzy
+#| msgid "Do you really want to remove the user?"
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον χρήστη;"
+
+#, fuzzy
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε το μέλος \"%(name)s\" από την ομάδα;"
+
 msgid "There are no items to show."
 msgstr "Δεν υπάρχουν στοιχεία να προβληθούν."
 
@@ -3222,6 +3391,25 @@ msgstr "BBB Premium"
 
 msgid "Not set"
 msgstr "Δεν έχει οριστεί"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
+
+#, fuzzy
+#| msgid "Participants"
+msgid "participants"
+msgstr "Συμμετέχοντες"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to decline member „%(name)s“?"
+msgid "Do you really want to delete this block from „%(name)s“?"
+msgstr "Είστε βέβαιοι ότι θέλετε να απορρίψετε το μέλος „%(name)s“;"
+
+#, fuzzy
+#| msgid "Delete Profile"
+msgid "Delete Premium Block"
+msgstr "Διαγραφή Προφίλ"
 
 msgid "Conference Overview"
 msgstr "Επισκόπηση Σύσκεψης"
@@ -3307,6 +3495,11 @@ msgstr "Εκδηλώσεις"
 
 msgid "News"
 msgstr "Ειδήσεις"
+
+#, fuzzy
+#| msgid "View conference"
+msgid "Video conference"
+msgstr "Προβολή σύσκεψης"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -3656,6 +3849,12 @@ msgstr "Αποστολή μηνύματος σε όλα τα μέλη"
 msgid "Send Message"
 msgstr "Αποστολή Μηνύματος"
 
+msgid "Admin"
+msgstr "Διαχειριστής"
+
+msgid "Member"
+msgstr "Μέλος"
+
 msgid "User account inactive"
 msgstr "Ανενεργός λογαριασμός χρήστη"
 
@@ -3857,6 +4056,14 @@ msgstr ""
 msgid "Enable the public visibility of your group/project"
 msgstr ""
 
+#, fuzzy
+#| msgid "Send 1 day before conference"
+msgid "Include a video conference"
+msgstr "Αποστολή 1 ημέρα πριν από τη σύσκεψη"
+
+msgid "Choose the type of the video conference you would like to include in the dashboard"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr "Ρυθμίσεις απορρήτου"
 
@@ -4046,6 +4253,22 @@ msgstr "Δεν υπάρχουν προσκλήσεις."
 
 msgid "Map"
 msgstr "Χάρτης"
+
+#, fuzzy
+#| msgid "Deleting..."
+msgid "Meeting"
+msgstr "Διαγραφή..."
+
+msgid "Fullscreen"
+msgstr ""
+
+msgid "Leave Fullscreen"
+msgstr ""
+
+#, fuzzy
+#| msgid "View conference"
+msgid "Leave video conference"
+msgstr "Προβολή σύσκεψης"
 
 msgid "Not happy with how your Microsite looks?"
 msgstr "Δεν είστε ευχαριστημένος με την εμφάνιση του Μικρότοπού σας;"
@@ -5160,9 +5383,6 @@ msgstr "Εισαγωγή νέου κωδικού πρόσβασης"
 
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
 msgstr "Παρακαλούμε εισάγετε τον νέο σας κωδικό πρόσβασης δύο φορές έτσι ώστε να επαληθεύσουμε ότι τον πληκτρολογήσατε σωστά."
-
-msgid "New password"
-msgstr "Νέος κωδικός πρόσβασης"
 
 msgid "New password confirmation"
 msgstr "Επιβεβαίωση νέου κωδικού πρόσβασης"
@@ -7023,6 +7243,35 @@ msgstr "Ο χρήστης δημιουργήθηκε με επιτυχία!"
 msgid "The language \"%s\" is not supported"
 msgstr "Η γλώσσα \"%s\" δεν υποστηρίζεται"
 
+#, fuzzy
+#| msgid "Conference is permanently premium"
+msgid "Successfully made conference permanent premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed permanent premium from conference"
+msgstr "Ο χρήστης αφαιρέθηκε με επιτυχία"
+
+msgid "Successfully added premium block"
+msgstr ""
+
+msgid "Add Premium Block to \"{}\""
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully updated premium block."
+msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε με επιτυχία"
+
+msgid "Edit Premium Block in conference \"{}\""
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully deleted premium block"
+msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε με επιτυχία"
+
 msgid "Your data was saved successfully!"
 msgstr "Τα δεδομένα σας αποθηκεύτηκαν με επιτυχία!"
 
@@ -7095,18 +7344,6 @@ msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με
 
 msgid "Successfully removed user"
 msgstr "Ο χρήστης αφαιρέθηκε με επιτυχία"
-
-msgid "User was not created"
-msgstr "Δεν δημιουργήθηκε χρήστης"
-
-msgid "Workshop username"
-msgstr "Όνομα χρήστη σεμιναρίου"
-
-msgid "First Name"
-msgstr "Όνομα"
-
-msgid "Last Name"
-msgstr "Επώνυμο"
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -7528,6 +7765,51 @@ msgstr "Δεν είστε μέλος του %s αυτή τη στιγμή! Εά�
 
 msgid "Your changes have been saved."
 msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
+
+#~ msgid "Conference Management"
+#~ msgstr "Διαχείριση Συνδιάσκεψης"
+
+#~ msgid "Conference is running"
+#~ msgstr "Η σύσκεψη είναι σε εξέλιξη"
+
+#~ msgid "Conference is not running"
+#~ msgstr "Η σύσκεψη δεν είναι σε εξέλιξη"
+
+#~ msgid "Accounts from CSV Upload"
+#~ msgstr "Λογαριασμοί από Φόρτωση CSV"
+
+#~ msgid "Upload Participants"
+#~ msgstr "Φόρτωση Συμμετεχόντων"
+
+#~ msgid "no login yet"
+#~ msgstr "δεν έγινε σύνδεση ακόμη"
+
+#~ msgid "not active"
+#~ msgstr "ανενεργό"
+
+#~ msgid "User participates in the following workshops:"
+#~ msgstr "Ο χρήστης συμμετέχει στα παρακάτω σεμινάρια:"
+
+#~ msgid "deactivate member"
+#~ msgstr "απενεργοποίηση μέλους"
+
+#~ msgid "activate member"
+#~ msgstr "ενεργοποίηση μέλους"
+
+#~ msgid "Finish conference and deactivate user accounts"
+#~ msgstr "Ολοκλήρωση σύσκεψης και απενεργοποίηση λογαριασμών χρήστη"
+
+#~ msgid "Start conference and activate user accounts"
+#~ msgstr "Έναρξη σύσκεψης και ενεργοποίηση λογαριασμών χρήστη"
+
+#~ msgid "User was not created"
+#~ msgstr "Δεν δημιουργήθηκε χρήστης"
+
+#~ msgid "First Name"
+#~ msgstr "Όνομα"
+
+#~ msgid "Last Name"
+#~ msgstr "Επώνυμο"
 
 #, fuzzy
 #~| msgid "My Projects and Groups"

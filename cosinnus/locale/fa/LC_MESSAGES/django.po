@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 15:24+0200\n"
+"POT-Creation-Date: 2021-11-02 12:10+0100\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -680,6 +680,17 @@ msgstr "هفته‌ی بعد"
 msgid "Next month"
 msgstr "ماه بعد"
 
+msgid "Fairmeeting"
+msgstr ""
+
+#, fuzzy
+#| msgid "View conference"
+msgid "No video conference"
+msgstr "کنفرانس را ببینید"
+
+msgid "BBB-Meeting"
+msgstr ""
+
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
 msgstr "به نظر نمی‌رسد این پیوند Youtube یا Vimeo معتبر باشد!"
 
@@ -698,6 +709,9 @@ msgstr "کاربرها"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "گروه‌ها"
+
+msgid "Please always provide a first name"
+msgstr ""
 
 msgid "Please remove the whitespace from '{}'"
 msgstr "لطفن فضاهای خالی را از '{}' پاک کنید"
@@ -831,20 +845,24 @@ msgstr "گذرواژه‌ی تعیین‌شده برای ورود به اتاق 
 msgid "the password set to enter the room as a attendee"
 msgstr "گذرواژه‌ی تعیین‌شده برای ورود به اتاق به عنوان شرکت‌کننده"
 
-msgid "the rooms welcome message"
-msgstr "پیام خوش‌آمدگویی در اتاق‌ها"
-
-msgid "the welcome message, that is displayed to attendees"
-msgstr "پیام خوش‌آمدگویی که به شرکت‌کننده‌ها نشان‌داده‌می‌شود"
-
 msgid "number for dialing into the conference via telephone"
 msgstr "شماره‌ای که می‌شود با آن با تلفن تماس گرفت و وارد کنفرانس شد"
 
 msgid "pin to enter for telephone participants"
 msgstr "گذرواژه برای شرکت‌کننده‌هایی که با تلفن وارد می‌شوند"
 
-msgid "options for the room, that are represented in the bigbluebutton API"
+#, fuzzy
+#| msgid "options for the room, that are represented in the bigbluebutton API"
+msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
 msgstr "گزینه‌ها برای اتاقی که در واسط برنامه‌نویسی bigbluebutton نمایش داده می‌شود"
+
+msgid "the rooms welcome message"
+msgstr "پیام خوش‌آمدگویی در اتاق‌ها"
+
+#, fuzzy
+#| msgid "the welcome message, that is displayed to attendees"
+msgid "DEPRECATED! the welcome message, that is displayed to attendees"
+msgstr "پیام خوش‌آمدگویی که به شرکت‌کننده‌ها نشان‌داده‌می‌شود"
 
 msgid "Room Type"
 msgstr "نوع اتاق"
@@ -1332,6 +1350,9 @@ msgid "Checks if a group/project should be visible publicly"
 msgstr ""
 
 msgid "Application method"
+msgstr ""
+
+msgid "Type of video conference available for a group / a project"
 msgstr ""
 
 msgid "Microsite Video"
@@ -2026,6 +2047,42 @@ msgstr "مورد تنظیم ویجت"
 msgid "Widget configuration items"
 msgstr "موارد تنظیم ویجت"
 
+msgid "Advanced BBB-Room Tools"
+msgstr ""
+
+msgid "Directly enter the BBB meeting"
+msgstr ""
+
+msgid "Join meeting directly"
+msgstr ""
+
+#, fuzzy
+#| msgid "number for dialing into the conference via telephone"
+msgid "Enter the BBB meeting in the conference frontend"
+msgstr "شماره‌ای که می‌شود با آن با تلفن تماس گرفت و وارد کنفرانس شد"
+
+msgid "Join meeting in conference frontend"
+msgstr ""
+
+msgid "For options and parameters, go to the parent event's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "edit this page"
+msgid "Event admin page"
+msgstr "این برگه را ویرایش کن"
+
+msgid "Not implemented for this type of event"
+msgstr ""
+
+msgid "For further options and parameters, go to the parent conference's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference Room Type"
+msgid "Conference admin page"
+msgstr "نوع اتاق کنفرانس"
+
 msgid "select this page"
 msgstr "این برگه را انتخاب کن"
 
@@ -2357,6 +2414,9 @@ msgid "Edit Conditions of Participation"
 msgstr ""
 
 msgid "Manage Participation Applications"
+msgstr ""
+
+msgid "Manage Temporary User Accounts"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -3018,49 +3078,118 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr ""
 
-msgid "Conference Management"
+msgid "Temporary Users"
 msgstr ""
 
-msgid "Conference is running"
+msgid "Password changed"
 msgstr ""
 
-msgid "Conference is not running"
+msgid "Changed password for User"
 msgstr ""
 
-msgid "Accounts from CSV Upload"
+msgid "Remove all Users"
 msgstr ""
 
-msgid "Upload Participants"
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to remove all users?"
+msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
+
+msgid "Here you can create temporary user accounts that are valid only for this conference and only when you activate them."
 msgstr ""
 
-msgid "last login"
+msgid "Upload spreadsheet"
 msgstr ""
 
-msgid "no login yet"
+#, python-format
+msgid "Please upload a spreadsheet with the following columns: unique user identifier, first name and last name. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
 msgstr ""
 
-msgid "Admin"
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank."
 msgstr ""
 
-msgid "Member"
+msgid "Upload File"
+msgstr ""
+
+msgid "Download User credentials"
+msgstr ""
+
+msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants."
+msgstr ""
+
+msgid "Download passwords and login info"
+msgstr ""
+
+msgid "Activate/Deactivate Users"
+msgstr ""
+
+msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
+msgstr ""
+
+msgid "Once the conference is over you can deactivate all ausers. That means they can not login in with their credentials anymore."
+msgstr ""
+
+#, fuzzy
+#| msgid "Reactivate user accounts"
+msgid "activate user accounts"
+msgstr "حساب‌های کاربری را دوباره فعال کن"
+
+#, fuzzy
+#| msgid "Reactivate user accounts"
+msgid "deactivate user accounts"
+msgstr "حساب‌های کاربری را دوباره فعال کن"
+
+msgid "reset/delete all users"
+msgstr ""
+
+msgid "Once the conference is over you can remove all ausers."
+msgstr ""
+
+#, fuzzy
+#| msgid "Reactivate user accounts"
+msgid "remove user accounts"
+msgstr "حساب‌های کاربری را دوباره فعال کن"
+
+msgid "Workshop user name and email"
 msgstr ""
 
 msgid "active"
 msgstr ""
 
-msgid "not active"
+msgid "password"
 msgstr ""
 
-msgid "User participates in the following workshops:"
-msgstr ""
-
-msgid "deactivate member"
-msgstr ""
-
-msgid "activate member"
+msgid "last login"
 msgstr ""
 
 msgid "remove user"
+msgstr ""
+
+#, fuzzy
+#| msgid "Yes"
+msgid "yes"
+msgstr "بله"
+
+msgid "no"
+msgstr ""
+
+#, fuzzy
+#| msgid "Active"
+msgid "deactivate"
+msgstr "فعال"
+
+#, fuzzy
+#| msgid "Active"
+msgid "activate"
+msgstr "فعال"
+
+msgid "Password set"
+msgstr ""
+
+msgid "no Password"
+msgstr ""
+
+msgid "Set password"
 msgstr ""
 
 msgid "Do you really want to deactivate the member's user account ?"
@@ -3081,13 +3210,10 @@ msgstr ""
 msgid "Remove User"
 msgstr ""
 
-msgid "Finish conference and deactivate user accounts"
-msgstr ""
-
-msgid "Start conference and activate user accounts"
-msgstr ""
-
 msgid "Download Statistics"
+msgstr ""
+
+msgid "New password"
 msgstr ""
 
 msgid "Accept"
@@ -3110,9 +3236,6 @@ msgstr ""
 #| msgid "Conference Rooms"
 msgid "Conference Administration"
 msgstr "اتاق‌های کنفرانس"
-
-msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
-msgstr ""
 
 msgid "Temporary restrictions"
 msgstr ""
@@ -3188,6 +3311,25 @@ msgstr ""
 msgid "Event"
 msgstr ""
 
+msgid "Add new premium block"
+msgstr ""
+
+msgid "Make Permanent Premium"
+msgstr ""
+
+msgid "Remove Permanent Premium"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
+
 msgid "There are no items to show."
 msgstr ""
 
@@ -3199,6 +3341,24 @@ msgstr ""
 
 msgid "Not set"
 msgstr ""
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
+
+#, fuzzy
+#| msgid "Participants"
+msgid "participants"
+msgstr "شرکت‌کنندگان"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to delete this block from „%(name)s“?"
+msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "تنظیم کنفرانس Cosinnus"
 
 msgid "Conference Overview"
 msgstr ""
@@ -3284,6 +3444,11 @@ msgstr ""
 
 msgid "News"
 msgstr ""
+
+#, fuzzy
+#| msgid "View conference"
+msgid "Video conference"
+msgstr "کنفرانس را ببینید"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -3629,6 +3794,12 @@ msgstr ""
 msgid "Send Message"
 msgstr ""
 
+msgid "Admin"
+msgstr ""
+
+msgid "Member"
+msgstr ""
+
 msgid "User account inactive"
 msgstr ""
 
@@ -3827,6 +3998,14 @@ msgstr ""
 msgid "Enable the public visibility of your group/project"
 msgstr ""
 
+#, fuzzy
+#| msgid "View conference"
+msgid "Include a video conference"
+msgstr "کنفرانس را ببینید"
+
+msgid "Choose the type of the video conference you would like to include in the dashboard"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr ""
 
@@ -4012,6 +4191,20 @@ msgstr ""
 
 msgid "Map"
 msgstr ""
+
+msgid "Meeting"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr ""
+
+msgid "Leave Fullscreen"
+msgstr ""
+
+#, fuzzy
+#| msgid "View conference"
+msgid "Leave video conference"
+msgstr "کنفرانس را ببینید"
 
 msgid "Not happy with how your Microsite looks?"
 msgstr ""
@@ -4954,9 +5147,6 @@ msgid "Enter new password"
 msgstr ""
 
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
-msgstr ""
-
-msgid "New password"
 msgstr ""
 
 msgid "New password confirmation"
@@ -6800,6 +6990,27 @@ msgstr ""
 msgid "The language \"%s\" is not supported"
 msgstr ""
 
+msgid "Successfully made conference permanent premium"
+msgstr ""
+
+msgid "Successfully removed permanent premium from conference"
+msgstr ""
+
+msgid "Successfully added premium block"
+msgstr ""
+
+msgid "Add Premium Block to \"{}\""
+msgstr ""
+
+msgid "Successfully updated premium block."
+msgstr ""
+
+msgid "Edit Premium Block in conference \"{}\""
+msgstr ""
+
+msgid "Successfully deleted premium block"
+msgstr ""
+
 msgid "Your data was saved successfully!"
 msgstr ""
 
@@ -6871,18 +7082,6 @@ msgid "Successfully activated user account"
 msgstr ""
 
 msgid "Successfully removed user"
-msgstr ""
-
-msgid "User was not created"
-msgstr ""
-
-msgid "Workshop username"
-msgstr ""
-
-msgid "First Name"
-msgstr ""
-
-msgid "Last Name"
 msgstr ""
 
 #, python-format

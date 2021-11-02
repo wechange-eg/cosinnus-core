@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 15:24+0200\n"
+"POT-Creation-Date: 2021-11-02 12:10+0100\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -692,6 +692,16 @@ msgstr "Próxima semana"
 msgid "Next month"
 msgstr "Próximo mes"
 
+msgid "Fairmeeting"
+msgstr ""
+
+#, fuzzy
+msgid "No video conference"
+msgstr "Sobre el proyecto"
+
+msgid "BBB-Meeting"
+msgstr ""
+
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
 msgstr "Este enlace no parece ser válido para Youtube o Vimeo!"
 
@@ -712,6 +722,9 @@ msgstr "Usarios"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Grupos"
+
+msgid "Please always provide a first name"
+msgstr ""
 
 msgid "Please remove the whitespace from '{}'"
 msgstr ""
@@ -846,19 +859,19 @@ msgstr ""
 msgid "the password set to enter the room as a attendee"
 msgstr ""
 
-msgid "the rooms welcome message"
-msgstr ""
-
-msgid "the welcome message, that is displayed to attendees"
-msgstr ""
-
 msgid "number for dialing into the conference via telephone"
 msgstr ""
 
 msgid "pin to enter for telephone participants"
 msgstr ""
 
-msgid "options for the room, that are represented in the bigbluebutton API"
+msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
+msgstr ""
+
+msgid "the rooms welcome message"
+msgstr ""
+
+msgid "DEPRECATED! the welcome message, that is displayed to attendees"
 msgstr ""
 
 #, fuzzy
@@ -1375,6 +1388,9 @@ msgstr ""
 #, fuzzy
 msgid "Application method"
 msgstr "Nombre de applicación"
+
+msgid "Type of video conference available for a group / a project"
+msgstr ""
 
 msgid "Microsite Video"
 msgstr "Video del Micrositio"
@@ -2100,6 +2116,40 @@ msgstr "Elemento de la configuración del widget"
 msgid "Widget configuration items"
 msgstr "Elementos de la configuración del widget"
 
+msgid "Advanced BBB-Room Tools"
+msgstr ""
+
+msgid "Directly enter the BBB meeting"
+msgstr ""
+
+msgid "Join meeting directly"
+msgstr ""
+
+#, fuzzy
+msgid "Enter the BBB meeting in the conference frontend"
+msgstr "Inserta un nombre para el proyecto."
+
+msgid "Join meeting in conference frontend"
+msgstr ""
+
+msgid "For options and parameters, go to the parent event's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "edit this page"
+msgid "Event admin page"
+msgstr "editar esta página"
+
+msgid "Not implemented for this type of event"
+msgstr ""
+
+msgid "For further options and parameters, go to the parent conference's admin page"
+msgstr ""
+
+#, fuzzy
+msgid "Conference admin page"
+msgstr "Crear evento"
+
 msgid "select this page"
 msgstr "seleccionar esta página"
 
@@ -2457,6 +2507,11 @@ msgstr ""
 
 msgid "Manage Participation Applications"
 msgstr ""
+
+#, fuzzy
+#| msgid "Team Description"
+msgid "Manage Temporary User Accounts"
+msgstr "Descripción del equipo"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3153,57 +3208,135 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "No hay usuarios visibles."
 
-msgid "Conference Management"
+#, fuzzy
+#| msgid "Team Description"
+msgid "Temporary Users"
+msgstr "Descripción del equipo"
+
+#, fuzzy
+#| msgid "Password change"
+msgid "Password changed"
+msgstr "Cambio de contraseña"
+
+#, fuzzy
+#| msgid "Change password"
+msgid "Changed password for User"
+msgstr "Cambiar contraseña"
+
+#, fuzzy
+msgid "Remove all Users"
+msgstr "Eliminar miembo"
+
+#, fuzzy
+msgid "Do you really want to remove all users?"
+msgstr "Estas seguro de que quieres dejar „%(title)s“?"
+
+msgid "Here you can create temporary user accounts that are valid only for this conference and only when you activate them."
 msgstr ""
 
-msgid "Conference is running"
+msgid "Upload spreadsheet"
 msgstr ""
 
-msgid "Conference is not running"
+#, python-format
+msgid "Please upload a spreadsheet with the following columns: unique user identifier, first name and last name. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
 msgstr ""
 
-msgid "Accounts from CSV Upload"
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank."
 msgstr ""
 
 #, fuzzy
-msgid "Upload Participants"
-msgstr "Participantes"
+msgid "Upload File"
+msgstr "Sube una imagen."
 
 #, fuzzy
-msgid "last login"
-msgstr "Válido hasta"
+msgid "Download User credentials"
+msgstr "Estadísticas simples"
 
-msgid "no login yet"
+msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants."
 msgstr ""
 
-msgid "Admin"
-msgstr "Administrador"
+msgid "Download passwords and login info"
+msgstr ""
 
-msgid "Member"
-msgstr "Miembro"
+#, fuzzy
+msgid "Activate/Deactivate Users"
+msgstr "Rechazar miembro"
+
+msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
+msgstr ""
+
+msgid "Once the conference is over you can deactivate all ausers. That means they can not login in with their credentials anymore."
+msgstr ""
+
+#, fuzzy
+msgid "activate user accounts"
+msgstr "Eliminar cuenta de usario"
+
+#, fuzzy
+msgid "deactivate user accounts"
+msgstr "Eliminar cuenta de usario"
+
+msgid "reset/delete all users"
+msgstr ""
+
+msgid "Once the conference is over you can remove all ausers."
+msgstr ""
+
+#, fuzzy
+msgid "remove user accounts"
+msgstr "Eliminar cuenta de usario"
+
+msgid "Workshop user name and email"
+msgstr ""
 
 #, fuzzy
 msgid "active"
 msgstr "Esta activo"
 
 #, fuzzy
-msgid "not active"
-msgstr "(Inactivo)"
-
-msgid "User participates in the following workshops:"
-msgstr ""
+#| msgid "Password"
+msgid "password"
+msgstr "Contraseña"
 
 #, fuzzy
-msgid "deactivate member"
-msgstr "Desactivar grupo"
-
-#, fuzzy
-msgid "activate member"
-msgstr "Invitar un miembro"
+msgid "last login"
+msgstr "Válido hasta"
 
 #, fuzzy
 msgid "remove user"
 msgstr "Eliminar miembo"
+
+#, fuzzy
+#| msgid "Yes"
+msgid "yes"
+msgstr "Si"
+
+msgid "no"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "deactivate"
+msgstr "Desactivar"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "activate"
+msgstr "Desactivar"
+
+#, fuzzy
+#| msgid "Password reset"
+msgid "Password set"
+msgstr "Reinicio de contraseña"
+
+#, fuzzy
+#| msgid "Password"
+msgid "no Password"
+msgstr "Contraseña"
+
+#, fuzzy
+msgid "Set password"
+msgstr "Cambiar mi contraseña"
 
 #, fuzzy
 msgid "Do you really want to deactivate the member's user account ?"
@@ -3230,16 +3363,11 @@ msgid "Remove User"
 msgstr "Eliminar miembo"
 
 #, fuzzy
-msgid "Finish conference and deactivate user accounts"
-msgstr "Eliminar cuenta de usario"
-
-#, fuzzy
-msgid "Start conference and activate user accounts"
-msgstr "Eliminar cuenta de usario"
-
-#, fuzzy
 msgid "Download Statistics"
 msgstr "Estadísticas simples"
+
+msgid "New password"
+msgstr "Contraseña nueva"
 
 #, fuzzy
 msgid "Accept"
@@ -3263,9 +3391,6 @@ msgstr "Todos los proyectos"
 #, fuzzy
 msgid "Conference Administration"
 msgstr "Administrador"
-
-msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
-msgstr ""
 
 #, fuzzy
 #| msgid "Team Description"
@@ -3354,6 +3479,26 @@ msgstr "Del tipo de equipo"
 msgid "Event"
 msgstr "Evento"
 
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Solo miembros del grupo"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Solo miembros del grupo"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Estas seguro de que quieres dejar „%(title)s“?"
+
+#, fuzzy
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Estas seguro de que quieres eliminar al miembro „%(name)s“ del equipo?"
+
 #, fuzzy
 msgid "There are no items to show."
 msgstr "No hay usuarios visibles."
@@ -3367,6 +3512,25 @@ msgstr ""
 #, fuzzy
 msgid "Not set"
 msgstr "No asignado"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Crear evento"
+
+#, fuzzy
+#| msgid "Participants"
+msgid "participants"
+msgstr "Participantes"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to decline member „%(name)s“?"
+msgid "Do you really want to delete this block from „%(name)s“?"
+msgstr "Estas seguro de que quieres rechazar al miembro „%(name)s“?"
+
+#, fuzzy
+#| msgid "Delete Profile"
+msgid "Delete Premium Block"
+msgstr "Eliminar perfil"
 
 #, fuzzy
 msgid "Conference Overview"
@@ -3455,6 +3619,10 @@ msgstr "Eventos"
 
 msgid "News"
 msgstr "Novedades"
+
+#, fuzzy
+msgid "Video conference"
+msgstr "Sobre el proyecto"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -3825,6 +3993,12 @@ msgstr "Mandar mensaje a todos los miembros"
 msgid "Send Message"
 msgstr "Enviar mensaje"
 
+msgid "Admin"
+msgstr "Administrador"
+
+msgid "Member"
+msgstr "Miembro"
+
 #, fuzzy
 msgid "User account inactive"
 msgstr "Esta cuenta esta inactiva."
@@ -4027,6 +4201,13 @@ msgstr "¿Su grupo / proyecto debería ser visible para los usuarios anónimos? 
 msgid "Enable the public visibility of your group/project"
 msgstr "Habilite la visibilidad pública de su grupo / proyecto"
 
+#, fuzzy
+msgid "Include a video conference"
+msgstr "Inserta un nombre para el proyecto."
+
+msgid "Choose the type of the video conference you would like to include in the dashboard"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr "Configuración de la privacidad"
 
@@ -4216,6 +4397,21 @@ msgstr "No hay invitaciones."
 
 msgid "Map"
 msgstr "Mapa"
+
+#, fuzzy
+#| msgid "Deleting..."
+msgid "Meeting"
+msgstr "Eliminando..."
+
+msgid "Fullscreen"
+msgstr ""
+
+msgid "Leave Fullscreen"
+msgstr ""
+
+#, fuzzy
+msgid "Leave video conference"
+msgstr "Sobre el proyecto"
 
 msgid "Not happy with how your Microsite looks?"
 msgstr "No estas contento con la apariencia de tu micrositio?"
@@ -5332,9 +5528,6 @@ msgstr "Inserta contraseña nueva"
 
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
 msgstr "Por favor inserta tu contraseña nueva dos veces para que podamos verificar que la ingresaste correctamente."
-
-msgid "New password"
-msgstr "Contraseña nueva"
 
 msgid "New password confirmation"
 msgstr "Confirmación de contraseña nueva"
@@ -7337,6 +7530,31 @@ msgid "The language \"%s\" is not supported"
 msgstr "La idioma \"%s\" no es apollada"
 
 #, fuzzy
+msgid "Successfully made conference permanent premium"
+msgstr "Solo miembros del grupo"
+
+#, fuzzy
+msgid "Successfully removed permanent premium from conference"
+msgstr "Eliminar cuenta de usario"
+
+msgid "Successfully added premium block"
+msgstr ""
+
+msgid "Add Premium Block to \"{}\""
+msgstr ""
+
+#, fuzzy
+msgid "Successfully updated premium block."
+msgstr "Eliminar cuenta de usario"
+
+msgid "Edit Premium Block in conference \"{}\""
+msgstr ""
+
+#, fuzzy
+msgid "Successfully deleted premium block"
+msgstr "Eliminar cuenta de usario"
+
+#, fuzzy
 msgid "Your data was saved successfully!"
 msgstr "Tu idea fue eliminda con éxito."
 
@@ -7412,21 +7630,6 @@ msgstr "Eliminar cuenta de usario"
 #, fuzzy
 msgid "Successfully removed user"
 msgstr "Eliminar cuenta de usario"
-
-#, fuzzy
-msgid "User was not created"
-msgstr "Ha creado"
-
-msgid "Workshop username"
-msgstr ""
-
-#, fuzzy
-msgid "First Name"
-msgstr "Nombre"
-
-#, fuzzy
-msgid "Last Name"
-msgstr "Apellido"
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -7859,6 +8062,42 @@ msgstr "Actualmente no eres miembro de %s! Si lo deseas, puedes solicitar para s
 
 msgid "Your changes have been saved."
 msgstr "Se han guardado los cambios."
+
+#, fuzzy
+#~ msgid "Upload Participants"
+#~ msgstr "Participantes"
+
+#, fuzzy
+#~ msgid "not active"
+#~ msgstr "(Inactivo)"
+
+#, fuzzy
+#~ msgid "deactivate member"
+#~ msgstr "Desactivar grupo"
+
+#, fuzzy
+#~ msgid "activate member"
+#~ msgstr "Invitar un miembro"
+
+#, fuzzy
+#~ msgid "Finish conference and deactivate user accounts"
+#~ msgstr "Eliminar cuenta de usario"
+
+#, fuzzy
+#~ msgid "Start conference and activate user accounts"
+#~ msgstr "Eliminar cuenta de usario"
+
+#, fuzzy
+#~ msgid "User was not created"
+#~ msgstr "Ha creado"
+
+#, fuzzy
+#~ msgid "First Name"
+#~ msgstr "Nombre"
+
+#, fuzzy
+#~ msgid "Last Name"
+#~ msgstr "Apellido"
 
 #, fuzzy
 #~ msgid "Import Projects and Groups or Users"

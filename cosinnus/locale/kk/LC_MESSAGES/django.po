@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 15:24+0200\n"
+"POT-Creation-Date: 2021-11-02 12:10+0100\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -687,6 +687,16 @@ msgstr "Келесі аптада"
 msgid "Next month"
 msgstr "Келесі айда"
 
+msgid "Fairmeeting"
+msgstr ""
+
+#, fuzzy
+msgid "No video conference"
+msgstr "Бейне конференциялар сервері"
+
+msgid "BBB-Meeting"
+msgstr ""
+
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
 msgstr "Бұл жарамды Youtube немесе Vimeo сілтемесі емес сияқты!"
 
@@ -705,6 +715,9 @@ msgstr "Пайдаланушылар"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Топтар"
+
+msgid "Please always provide a first name"
+msgstr ""
 
 msgid "Please remove the whitespace from '{}'"
 msgstr ""
@@ -838,19 +851,19 @@ msgstr ""
 msgid "the password set to enter the room as a attendee"
 msgstr ""
 
-msgid "the rooms welcome message"
-msgstr ""
-
-msgid "the welcome message, that is displayed to attendees"
-msgstr ""
-
 msgid "number for dialing into the conference via telephone"
 msgstr ""
 
 msgid "pin to enter for telephone participants"
 msgstr ""
 
-msgid "options for the room, that are represented in the bigbluebutton API"
+msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
+msgstr ""
+
+msgid "the rooms welcome message"
+msgstr ""
+
+msgid "DEPRECATED! the welcome message, that is displayed to attendees"
 msgstr ""
 
 #, fuzzy
@@ -1369,6 +1382,9 @@ msgstr ""
 #, fuzzy
 msgid "Application method"
 msgstr "Өтінімнің атауы"
+
+msgid "Type of video conference available for a group / a project"
+msgstr ""
 
 msgid "Microsite Video"
 msgstr "Microsite Видео"
@@ -2089,6 +2105,40 @@ msgstr "Виджет конфигурациясының пункті"
 msgid "Widget configuration items"
 msgstr "Виджетті баптау элементтері"
 
+msgid "Advanced BBB-Room Tools"
+msgstr ""
+
+msgid "Directly enter the BBB meeting"
+msgstr ""
+
+msgid "Join meeting directly"
+msgstr ""
+
+#, fuzzy
+msgid "Enter the BBB meeting in the conference frontend"
+msgstr "Жобаның атын енгізіңіз."
+
+msgid "Join meeting in conference frontend"
+msgstr ""
+
+msgid "For options and parameters, go to the parent event's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "edit this page"
+msgid "Event admin page"
+msgstr "осы бетті өңдеңіз"
+
+msgid "Not implemented for this type of event"
+msgstr ""
+
+msgid "For further options and parameters, go to the parent conference's admin page"
+msgstr ""
+
+#, fuzzy
+msgid "Conference admin page"
+msgstr "Бейне конференциялар сервері"
+
 msgid "select this page"
 msgstr "осы бетті таңдаңыз"
 
@@ -2441,6 +2491,11 @@ msgstr ""
 
 msgid "Manage Participation Applications"
 msgstr ""
+
+#, fuzzy
+#| msgid "Team Description"
+msgid "Manage Temporary User Accounts"
+msgstr "Топ сипаттамасы"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3131,57 +3186,134 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "Әзірге бұл жерде ештеңе жоқ"
 
-msgid "Conference Management"
+#, fuzzy
+#| msgid "Team Description"
+msgid "Temporary Users"
+msgstr "Топ сипаттамасы"
+
+#, fuzzy
+#| msgid "Password change"
+msgid "Password changed"
+msgstr "Парольді өзгерту"
+
+#, fuzzy
+#| msgid "Change password"
+msgid "Changed password for User"
+msgstr "Парольді өзгертіңіз"
+
+#, fuzzy
+msgid "Remove all Users"
+msgstr "Мүшені алып тастау"
+
+#, fuzzy
+msgid "Do you really want to remove all users?"
+msgstr "Шынымен %(title)s“ қалдырғыңыз келе ме?"
+
+msgid "Here you can create temporary user accounts that are valid only for this conference and only when you activate them."
 msgstr ""
 
-msgid "Conference is running"
+msgid "Upload spreadsheet"
+msgstr ""
+
+#, python-format
+msgid "Please upload a spreadsheet with the following columns: unique user identifier, first name and last name. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgstr ""
+
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank."
 msgstr ""
 
 #, fuzzy
-msgid "Conference is not running"
-msgstr "Бейне конференциялар сервері"
+msgid "Upload File"
+msgstr "Суретті жүктеу."
 
-msgid "Accounts from CSV Upload"
+#, fuzzy
+msgid "Download User credentials"
+msgstr "Қарапайым статистика"
+
+msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants."
+msgstr ""
+
+msgid "Download passwords and login info"
 msgstr ""
 
 #, fuzzy
-msgid "Upload Participants"
-msgstr "Мүшелер"
+msgid "Activate/Deactivate Users"
+msgstr "Бас тарту"
 
-#, fuzzy
-msgid "last login"
-msgstr "Растау"
-
-msgid "no login yet"
+msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
 msgstr ""
 
-msgid "Admin"
-msgstr "Админ"
+msgid "Once the conference is over you can deactivate all ausers. That means they can not login in with their credentials anymore."
+msgstr ""
 
-msgid "Member"
-msgstr "Мүше"
+#, fuzzy
+msgid "activate user accounts"
+msgstr "Пайдаланушы тіркелгісін жою"
+
+#, fuzzy
+msgid "deactivate user accounts"
+msgstr "Пайдаланушы тіркелгісін жою"
+
+msgid "reset/delete all users"
+msgstr ""
+
+msgid "Once the conference is over you can remove all ausers."
+msgstr ""
+
+#, fuzzy
+msgid "remove user accounts"
+msgstr "Пайдаланушы тіркелгісін жою"
+
+msgid "Workshop user name and email"
+msgstr ""
 
 msgid "active"
 msgstr "белсенді"
 
 #, fuzzy
-msgid "not active"
-msgstr "белсенді емес"
-
-msgid "User participates in the following workshops:"
-msgstr ""
+#| msgid "Password"
+msgid "password"
+msgstr "Пароль"
 
 #, fuzzy
-msgid "deactivate member"
-msgstr "Топты ажыратыңыз"
-
-#, fuzzy
-msgid "activate member"
-msgstr "Пайдаланушыны шақыру"
+msgid "last login"
+msgstr "Растау"
 
 #, fuzzy
 msgid "remove user"
 msgstr "Мүшені алып тастау"
+
+#, fuzzy
+#| msgid "Yes"
+msgid "yes"
+msgstr "Иә"
+
+msgid "no"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "deactivate"
+msgstr "Жойыңыз"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "activate"
+msgstr "Жойыңыз"
+
+#, fuzzy
+#| msgid "Password reset"
+msgid "Password set"
+msgstr "Парольді қалпына келтіру"
+
+#, fuzzy
+#| msgid "Password"
+msgid "no Password"
+msgstr "Пароль"
+
+#, fuzzy
+msgid "Set password"
+msgstr "Паролімді өзгертіңіз"
 
 #, fuzzy
 msgid "Do you really want to deactivate the member's user account ?"
@@ -3208,16 +3340,11 @@ msgid "Remove User"
 msgstr "Мүшені алып тастау"
 
 #, fuzzy
-msgid "Finish conference and deactivate user accounts"
-msgstr "Пайдаланушы тіркелгісін жою"
-
-#, fuzzy
-msgid "Start conference and activate user accounts"
-msgstr "Пайдаланушы тіркелгісін жою"
-
-#, fuzzy
 msgid "Download Statistics"
 msgstr "Қарапайым статистика"
+
+msgid "New password"
+msgstr "Жаңа пароль"
 
 #, fuzzy
 msgid "Accept"
@@ -3241,9 +3368,6 @@ msgstr "Бейне конференциялар сервері"
 #, fuzzy
 msgid "Conference Administration"
 msgstr "Әкімшілік"
-
-msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
-msgstr ""
 
 #, fuzzy
 #| msgid "Team Description"
@@ -3332,6 +3456,26 @@ msgstr "Команда түрінен"
 msgid "Event"
 msgstr "Шара"
 
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Шынымен %(title)s“ қалдырғыңыз келе ме?"
+
+#, fuzzy
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Шынымен „%(name)s“ мүшелер командасынан жойғыңыз келе ме?"
+
 #, fuzzy
 msgid "There are no items to show."
 msgstr "Әзірге бұл жерде ештеңе жоқ"
@@ -3345,6 +3489,25 @@ msgstr ""
 #, fuzzy
 msgid "Not set"
 msgstr "Тағайындалмаған"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Шара құру"
+
+#, fuzzy
+#| msgid "Participants"
+msgid "participants"
+msgstr "Мүшелер"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to decline member „%(name)s“?"
+msgid "Do you really want to delete this block from „%(name)s“?"
+msgstr "„%(name)s“-дан бас тартқыңыз келе ме?"
+
+#, fuzzy
+#| msgid "Delete Profile"
+msgid "Delete Premium Block"
+msgstr "Профильді жою"
 
 #, fuzzy
 msgid "Conference Overview"
@@ -3433,6 +3596,10 @@ msgstr "Оқиғалар"
 
 msgid "News"
 msgstr "Жаңалықтар"
+
+#, fuzzy
+msgid "Video conference"
+msgstr "Бейне конференциялар сервері"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -3797,6 +3964,12 @@ msgstr "Барлық мүшелерге хабарлаңыз"
 msgid "Send Message"
 msgstr "Xабарлама жіберу"
 
+msgid "Admin"
+msgstr "Админ"
+
+msgid "Member"
+msgstr "Мүше"
+
 #, fuzzy
 msgid "User account inactive"
 msgstr "Бұл тіркелгі белсенді емес."
@@ -4002,6 +4175,13 @@ msgstr ""
 msgid "Enable the public visibility of your group/project"
 msgstr ""
 
+#, fuzzy
+msgid "Include a video conference"
+msgstr "Бейне конференциялар сервері"
+
+msgid "Choose the type of the video conference you would like to include in the dashboard"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr "Құпиялылық параметрлері"
 
@@ -4194,6 +4374,21 @@ msgstr "Шақырулар жоқ."
 
 msgid "Map"
 msgstr "Карта"
+
+#, fuzzy
+#| msgid "Deleting..."
+msgid "Meeting"
+msgstr "Өшіріліп жатыр."
+
+msgid "Fullscreen"
+msgstr ""
+
+msgid "Leave Fullscreen"
+msgstr ""
+
+#, fuzzy
+msgid "Leave video conference"
+msgstr "Бейне конференциялар сервері"
 
 msgid "Not happy with how your Microsite looks?"
 msgstr "Сіздің микросайттың қандай екеніне риза емессіз бе?"
@@ -5301,9 +5496,6 @@ msgstr "Жаңа парольді енгізіңіз"
 
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
 msgstr "Жаңа құпия сөзді екі рет енгізіңіз, біз оны дұрыс енгізгенімізді тексере аламыз."
-
-msgid "New password"
-msgstr "Жаңа пароль"
 
 msgid "New password confirmation"
 msgstr "Жаңа парольді растау"
@@ -7262,6 +7454,31 @@ msgid "The language \"%s\" is not supported"
 msgstr "Тіл “%s” қолданылмайды"
 
 #, fuzzy
+msgid "Successfully made conference permanent premium"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Successfully removed permanent premium from conference"
+msgstr "Пайдаланушы тіркелгісін жою"
+
+msgid "Successfully added premium block"
+msgstr ""
+
+msgid "Add Premium Block to \"{}\""
+msgstr ""
+
+#, fuzzy
+msgid "Successfully updated premium block."
+msgstr "Пайдаланушы тіркелгісін жою"
+
+msgid "Edit Premium Block in conference \"{}\""
+msgstr ""
+
+#, fuzzy
+msgid "Successfully deleted premium block"
+msgstr "Пайдаланушы тіркелгісін жою"
+
+#, fuzzy
 msgid "Your data was saved successfully!"
 msgstr "Сіздің идеяңыз сәтті жойылды."
 
@@ -7337,21 +7554,6 @@ msgstr "Пайдаланушы тіркелгісін жою"
 #, fuzzy
 msgid "Successfully removed user"
 msgstr "Пайдаланушы тіркелгісін жою"
-
-#, fuzzy
-msgid "User was not created"
-msgstr "Жасады"
-
-msgid "Workshop username"
-msgstr ""
-
-#, fuzzy
-msgid "First Name"
-msgstr "Аты"
-
-#, fuzzy
-msgid "Last Name"
-msgstr "Тегі"
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -7777,6 +7979,46 @@ msgstr "Сіз қазір %s мүшесі емессіз! Егер қаласа�
 
 msgid "Your changes have been saved."
 msgstr "Сіздің өзгертулеріңіз сақталды."
+
+#, fuzzy
+#~ msgid "Conference is not running"
+#~ msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+#~ msgid "Upload Participants"
+#~ msgstr "Мүшелер"
+
+#, fuzzy
+#~ msgid "not active"
+#~ msgstr "белсенді емес"
+
+#, fuzzy
+#~ msgid "deactivate member"
+#~ msgstr "Топты ажыратыңыз"
+
+#, fuzzy
+#~ msgid "activate member"
+#~ msgstr "Пайдаланушыны шақыру"
+
+#, fuzzy
+#~ msgid "Finish conference and deactivate user accounts"
+#~ msgstr "Пайдаланушы тіркелгісін жою"
+
+#, fuzzy
+#~ msgid "Start conference and activate user accounts"
+#~ msgstr "Пайдаланушы тіркелгісін жою"
+
+#, fuzzy
+#~ msgid "User was not created"
+#~ msgstr "Жасады"
+
+#, fuzzy
+#~ msgid "First Name"
+#~ msgstr "Аты"
+
+#, fuzzy
+#~ msgid "Last Name"
+#~ msgstr "Тегі"
 
 #, fuzzy
 #~ msgid "Import Projects and Groups or Users"

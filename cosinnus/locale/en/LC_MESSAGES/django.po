@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 15:24+0200\n"
+"POT-Creation-Date: 2021-11-02 12:10+0100\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -708,6 +708,16 @@ msgstr ""
 msgid "Next month"
 msgstr ""
 
+msgid "Fairmeeting"
+msgstr ""
+
+#, fuzzy
+msgid "No video conference"
+msgstr "About the project"
+
+msgid "BBB-Meeting"
+msgstr ""
+
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
 msgstr ""
 
@@ -726,6 +736,9 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Groups"
+
+msgid "Please always provide a first name"
+msgstr ""
 
 msgid "Please remove the whitespace from '{}'"
 msgstr ""
@@ -859,19 +872,19 @@ msgstr ""
 msgid "the password set to enter the room as a attendee"
 msgstr ""
 
-msgid "the rooms welcome message"
-msgstr ""
-
-msgid "the welcome message, that is displayed to attendees"
-msgstr ""
-
 msgid "number for dialing into the conference via telephone"
 msgstr ""
 
 msgid "pin to enter for telephone participants"
 msgstr ""
 
-msgid "options for the room, that are represented in the bigbluebutton API"
+msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
+msgstr ""
+
+msgid "the rooms welcome message"
+msgstr ""
+
+msgid "DEPRECATED! the welcome message, that is displayed to attendees"
 msgstr ""
 
 #, fuzzy
@@ -1364,6 +1377,9 @@ msgid "Checks if a group/project should be visible publicly"
 msgstr ""
 
 msgid "Application method"
+msgstr ""
+
+msgid "Type of video conference available for a group / a project"
 msgstr ""
 
 msgid "Microsite Video"
@@ -2081,6 +2097,38 @@ msgstr ""
 msgid "Widget configuration items"
 msgstr ""
 
+msgid "Advanced BBB-Room Tools"
+msgstr ""
+
+msgid "Directly enter the BBB meeting"
+msgstr ""
+
+msgid "Join meeting directly"
+msgstr ""
+
+#, fuzzy
+msgid "Enter the BBB meeting in the conference frontend"
+msgstr "Enter a name for the project."
+
+msgid "Join meeting in conference frontend"
+msgstr ""
+
+msgid "For options and parameters, go to the parent event's admin page"
+msgstr ""
+
+msgid "Event admin page"
+msgstr ""
+
+msgid "Not implemented for this type of event"
+msgstr ""
+
+msgid "For further options and parameters, go to the parent conference's admin page"
+msgstr ""
+
+#, fuzzy
+msgid "Conference admin page"
+msgstr "Create Project"
+
 msgid "select this page"
 msgstr ""
 
@@ -2424,6 +2472,9 @@ msgid "Edit Conditions of Participation"
 msgstr ""
 
 msgid "Manage Participation Applications"
+msgstr ""
+
+msgid "Manage Temporary User Accounts"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -3114,54 +3165,119 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "There are no groups."
 
-msgid "Conference Management"
+#, fuzzy
+msgid "Temporary Users"
+msgstr "Create Project"
+
+msgid "Password changed"
 msgstr ""
 
-msgid "Conference is running"
+msgid "Changed password for User"
 msgstr ""
 
-msgid "Conference is not running"
+#, fuzzy
+msgid "Remove all Users"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Do you really want to remove all users?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+msgid "Here you can create temporary user accounts that are valid only for this conference and only when you activate them."
 msgstr ""
 
-msgid "Accounts from CSV Upload"
+msgid "Upload spreadsheet"
 msgstr ""
 
-msgid "Upload Participants"
+#, python-format
+msgid "Please upload a spreadsheet with the following columns: unique user identifier, first name and last name. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
 msgstr ""
 
-msgid "last login"
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank."
 msgstr ""
 
-msgid "no login yet"
+#, fuzzy
+msgid "Upload File"
+msgstr "Convert selected Projects to Groups"
+
+msgid "Download User credentials"
 msgstr ""
 
-msgid "Admin"
+msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants."
 msgstr ""
 
-msgid "Member"
+msgid "Download passwords and login info"
+msgstr ""
+
+#, fuzzy
+msgid "Activate/Deactivate Users"
+msgstr "Create Project"
+
+msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
+msgstr ""
+
+msgid "Once the conference is over you can deactivate all ausers. That means they can not login in with their credentials anymore."
+msgstr ""
+
+#, fuzzy
+msgid "activate user accounts"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "deactivate user accounts"
+msgstr "Create Project"
+
+msgid "reset/delete all users"
+msgstr ""
+
+msgid "Once the conference is over you can remove all ausers."
+msgstr ""
+
+#, fuzzy
+msgid "remove user accounts"
+msgstr "Create Project"
+
+msgid "Workshop user name and email"
 msgstr ""
 
 msgid "active"
 msgstr ""
 
-#, fuzzy
-msgid "not active"
-msgstr "Create Project"
-
-msgid "User participates in the following workshops:"
+msgid "password"
 msgstr ""
 
-#, fuzzy
-msgid "deactivate member"
-msgstr "Create Project"
-
-#, fuzzy
-msgid "activate member"
-msgstr "Create Project"
+msgid "last login"
+msgstr ""
 
 #, fuzzy
 msgid "remove user"
 msgstr "Edit Project"
+
+msgid "yes"
+msgstr ""
+
+msgid "no"
+msgstr ""
+
+#, fuzzy
+msgid "deactivate"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "activate"
+msgstr "Create Project"
+
+msgid "Password set"
+msgstr ""
+
+msgid "no Password"
+msgstr ""
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_5_password"
+msgid "Set password"
+msgstr "You can change your password in the fields below. When doing so, it is especially important that you try to make your password as long as possible (at least 10 characters). The longer it is, the better. In addition, a special character, a capital letter and a small letter are recommended."
 
 #, fuzzy
 msgid "Do you really want to deactivate the member's user account ?"
@@ -3187,13 +3303,10 @@ msgstr "Do you really want to leave project „%(title)s“?"
 msgid "Remove User"
 msgstr "Create Project"
 
-msgid "Finish conference and deactivate user accounts"
-msgstr ""
-
-msgid "Start conference and activate user accounts"
-msgstr ""
-
 msgid "Download Statistics"
+msgstr ""
+
+msgid "New password"
 msgstr ""
 
 msgid "Accept"
@@ -3216,9 +3329,6 @@ msgstr "My Projects"
 #, fuzzy
 msgid "Conference Administration"
 msgstr "There are no groups."
-
-msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
-msgstr ""
 
 msgid "Temporary restrictions"
 msgstr ""
@@ -3299,6 +3409,23 @@ msgstr "Project Type"
 msgid "Event"
 msgstr ""
 
+msgid "Add new premium block"
+msgstr ""
+
+msgid "Make Permanent Premium"
+msgstr ""
+
+msgid "Remove Permanent Premium"
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
 #, fuzzy
 msgid "There are no items to show."
 msgstr "There are no groups."
@@ -3311,6 +3438,22 @@ msgstr ""
 
 msgid "Not set"
 msgstr ""
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "participants"
+msgstr "Projects"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from „%(name)s“?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Project"
 
 #, fuzzy
 msgid "Conference Overview"
@@ -3399,6 +3542,10 @@ msgstr ""
 
 msgid "News"
 msgstr ""
+
+#, fuzzy
+msgid "Video conference"
+msgstr "About the project"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -3758,6 +3905,12 @@ msgstr ""
 msgid "Send Message"
 msgstr ""
 
+msgid "Admin"
+msgstr ""
+
+msgid "Member"
+msgstr ""
+
 msgid "User account inactive"
 msgstr ""
 
@@ -3960,6 +4113,13 @@ msgstr ""
 msgid "Enable the public visibility of your group/project"
 msgstr ""
 
+#, fuzzy
+msgid "Include a video conference"
+msgstr "Enter a name for the project."
+
+msgid "Choose the type of the video conference you would like to include in the dashboard"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr ""
 
@@ -4147,6 +4307,19 @@ msgstr "There are no groups."
 
 msgid "Map"
 msgstr ""
+
+msgid "Meeting"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr ""
+
+msgid "Leave Fullscreen"
+msgstr ""
+
+#, fuzzy
+msgid "Leave video conference"
+msgstr "About the project"
 
 msgid "Not happy with how your Microsite looks?"
 msgstr ""
@@ -5122,9 +5295,6 @@ msgid "Enter new password"
 msgstr ""
 
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
-msgstr ""
-
-msgid "New password"
 msgstr ""
 
 msgid "New password confirmation"
@@ -7073,6 +7243,27 @@ msgstr ""
 msgid "The language \"%s\" is not supported"
 msgstr ""
 
+msgid "Successfully made conference permanent premium"
+msgstr ""
+
+msgid "Successfully removed permanent premium from conference"
+msgstr ""
+
+msgid "Successfully added premium block"
+msgstr ""
+
+msgid "Add Premium Block to \"{}\""
+msgstr ""
+
+msgid "Successfully updated premium block."
+msgstr ""
+
+msgid "Edit Premium Block in conference \"{}\""
+msgstr ""
+
+msgid "Successfully deleted premium block"
+msgstr ""
+
 msgid "Your data was saved successfully!"
 msgstr ""
 
@@ -7144,18 +7335,6 @@ msgid "Successfully activated user account"
 msgstr ""
 
 msgid "Successfully removed user"
-msgstr ""
-
-msgid "User was not created"
-msgstr ""
-
-msgid "Workshop username"
-msgstr ""
-
-msgid "First Name"
-msgstr ""
-
-msgid "Last Name"
 msgstr ""
 
 #, python-format
@@ -7575,6 +7754,18 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr ""
+
+#, fuzzy
+#~ msgid "not active"
+#~ msgstr "Create Project"
+
+#, fuzzy
+#~ msgid "deactivate member"
+#~ msgstr "Create Project"
+
+#, fuzzy
+#~ msgid "activate member"
+#~ msgstr "Create Project"
 
 #, fuzzy
 #~ msgid "Import Projects and Groups or Users"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 15:24+0200\n"
+"POT-Creation-Date: 2021-11-02 12:10+0100\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -687,6 +687,16 @@ msgstr "შემდეგი კვირა"
 msgid "Next month"
 msgstr "შემდეგი თვე"
 
+msgid "Fairmeeting"
+msgstr ""
+
+#, fuzzy
+msgid "No video conference"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "BBB-Meeting"
+msgstr ""
+
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
 msgstr "Youtube ან Vimeo ბმული სავარაუდოდ  მოქმედი არ არის !"
 
@@ -705,6 +715,9 @@ msgstr "მოხმარებლები"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "ჯგუფები"
+
+msgid "Please always provide a first name"
+msgstr ""
 
 msgid "Please remove the whitespace from '{}'"
 msgstr ""
@@ -838,19 +851,19 @@ msgstr ""
 msgid "the password set to enter the room as a attendee"
 msgstr ""
 
-msgid "the rooms welcome message"
-msgstr ""
-
-msgid "the welcome message, that is displayed to attendees"
-msgstr ""
-
 msgid "number for dialing into the conference via telephone"
 msgstr ""
 
 msgid "pin to enter for telephone participants"
 msgstr ""
 
-msgid "options for the room, that are represented in the bigbluebutton API"
+msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
+msgstr ""
+
+msgid "the rooms welcome message"
+msgstr ""
+
+msgid "DEPRECATED! the welcome message, that is displayed to attendees"
 msgstr ""
 
 #, fuzzy
@@ -1369,6 +1382,9 @@ msgstr ""
 #, fuzzy
 msgid "Application method"
 msgstr "განცხადების სახელი"
+
+msgid "Type of video conference available for a group / a project"
+msgstr ""
 
 msgid "Microsite Video"
 msgstr "Microsite ვიდეო"
@@ -2089,6 +2105,40 @@ msgstr "ვიჯეტის კონფიგურაციის საგ�
 msgid "Widget configuration items"
 msgstr "ვიჯეტის კონფიგურაციის საგნები"
 
+msgid "Advanced BBB-Room Tools"
+msgstr ""
+
+msgid "Directly enter the BBB meeting"
+msgstr ""
+
+msgid "Join meeting directly"
+msgstr ""
+
+#, fuzzy
+msgid "Enter the BBB meeting in the conference frontend"
+msgstr "შეიყვანეთ პროექტის სახელი."
+
+msgid "Join meeting in conference frontend"
+msgstr ""
+
+msgid "For options and parameters, go to the parent event's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "edit this page"
+msgid "Event admin page"
+msgstr "გვერდის რედაქტირება"
+
+msgid "Not implemented for this type of event"
+msgstr ""
+
+msgid "For further options and parameters, go to the parent conference's admin page"
+msgstr ""
+
+#, fuzzy
+msgid "Conference admin page"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
 msgid "select this page"
 msgstr "გვერდის მონიშნვა"
 
@@ -2439,6 +2489,11 @@ msgstr ""
 
 msgid "Manage Participation Applications"
 msgstr ""
+
+#, fuzzy
+#| msgid "Team Description"
+msgid "Manage Temporary User Accounts"
+msgstr "გუნდის აღწერა"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3125,57 +3180,134 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "საგნები ჯერ არ არის"
 
-msgid "Conference Management"
+#, fuzzy
+#| msgid "Team Description"
+msgid "Temporary Users"
+msgstr "გუნდის აღწერა"
+
+#, fuzzy
+#| msgid "Password change"
+msgid "Password changed"
+msgstr "პაროლის შეცვლა"
+
+#, fuzzy
+#| msgid "Change password"
+msgid "Changed password for User"
+msgstr "პაროლის შეცვლა"
+
+#, fuzzy
+msgid "Remove all Users"
+msgstr "წევრის ამოშლა"
+
+#, fuzzy
+msgid "Do you really want to remove all users?"
+msgstr "ნამდვილად გსურთ დატოვოთ  „%(title)s“?"
+
+msgid "Here you can create temporary user accounts that are valid only for this conference and only when you activate them."
 msgstr ""
 
-msgid "Conference is running"
+msgid "Upload spreadsheet"
+msgstr ""
+
+#, python-format
+msgid "Please upload a spreadsheet with the following columns: unique user identifier, first name and last name. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgstr ""
+
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank."
 msgstr ""
 
 #, fuzzy
-msgid "Conference is not running"
-msgstr "ვიდეო კონფერენციის სერვერი"
+msgid "Upload File"
+msgstr "გამოსახულების ატვირთვა."
 
-msgid "Accounts from CSV Upload"
+#, fuzzy
+msgid "Download User credentials"
+msgstr "უბრალო სტატისტიკა"
+
+msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants."
+msgstr ""
+
+msgid "Download passwords and login info"
 msgstr ""
 
 #, fuzzy
-msgid "Upload Participants"
-msgstr "მონაწილეები"
+msgid "Activate/Deactivate Users"
+msgstr "წევრისათვის უარის თქმა"
 
-#, fuzzy
-msgid "last login"
-msgstr "განახლება"
-
-msgid "no login yet"
+msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
 msgstr ""
 
-msgid "Admin"
-msgstr "ადმინისტრატორი"
+msgid "Once the conference is over you can deactivate all ausers. That means they can not login in with their credentials anymore."
+msgstr ""
 
-msgid "Member"
-msgstr "წევრი"
+#, fuzzy
+msgid "activate user accounts"
+msgstr "მომხმარებლის ანგარიშის წაშლა"
+
+#, fuzzy
+msgid "deactivate user accounts"
+msgstr "მომხმარებლის ანგარიშის წაშლა"
+
+msgid "reset/delete all users"
+msgstr ""
+
+msgid "Once the conference is over you can remove all ausers."
+msgstr ""
+
+#, fuzzy
+msgid "remove user accounts"
+msgstr "მომხმარებლის ანგარიშის წაშლა"
+
+msgid "Workshop user name and email"
+msgstr ""
 
 msgid "active"
 msgstr "აქტიური"
 
 #, fuzzy
-msgid "not active"
-msgstr "არააქტიური"
-
-msgid "User participates in the following workshops:"
-msgstr ""
+#| msgid "Password"
+msgid "password"
+msgstr "პაროლი"
 
 #, fuzzy
-msgid "deactivate member"
-msgstr "ჯგუფის აქტივაციის გაუქმება"
-
-#, fuzzy
-msgid "activate member"
-msgstr "წევრის მოწვევა"
+msgid "last login"
+msgstr "განახლება"
 
 #, fuzzy
 msgid "remove user"
 msgstr "წევრის ამოშლა"
+
+#, fuzzy
+#| msgid "Yes"
+msgid "yes"
+msgstr "დიახ"
+
+msgid "no"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "deactivate"
+msgstr "დეაქტივაცია"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "activate"
+msgstr "დეაქტივაცია"
+
+#, fuzzy
+#| msgid "Password reset"
+msgid "Password set"
+msgstr "პაროლის გადაყენება"
+
+#, fuzzy
+#| msgid "Password"
+msgid "no Password"
+msgstr "პაროლი"
+
+#, fuzzy
+msgid "Set password"
+msgstr "შეცვალეთ პაროლი"
 
 #, fuzzy
 msgid "Do you really want to deactivate the member's user account ?"
@@ -3202,16 +3334,11 @@ msgid "Remove User"
 msgstr "წევრის ამოშლა"
 
 #, fuzzy
-msgid "Finish conference and deactivate user accounts"
-msgstr "მომხმარებლის ანგარიშის წაშლა"
-
-#, fuzzy
-msgid "Start conference and activate user accounts"
-msgstr "მომხმარებლის ანგარიშის წაშლა"
-
-#, fuzzy
 msgid "Download Statistics"
 msgstr "უბრალო სტატისტიკა"
+
+msgid "New password"
+msgstr "ახალი პაროლი"
 
 #, fuzzy
 msgid "Accept"
@@ -3235,9 +3362,6 @@ msgstr "ვიდეო კონფერენციის სერვერ�
 #, fuzzy
 msgid "Conference Administration"
 msgstr "ადმინისტრაცია"
-
-msgid "Sorry, while we are re-working the conference administration interface, only portal administrators can make changes for premium conferences. Please contact one of the portal administrators listed at the top of the page to make these changes for you!"
-msgstr ""
 
 #, fuzzy
 #| msgid "Team Description"
@@ -3326,6 +3450,26 @@ msgstr "გუნდის ტიპიდან"
 msgid "Event"
 msgstr "ღონისძება"
 
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "ნამდვილად გსურთ დატოვოთ  „%(title)s“?"
+
+#, fuzzy
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "ნამდვილად გსურთ წევრ „%(name)s-ის“ გუნდიდან ამოშლა?"
+
 #, fuzzy
 msgid "There are no items to show."
 msgstr "საგნები ჯერ არ არის"
@@ -3339,6 +3483,25 @@ msgstr ""
 #, fuzzy
 msgid "Not set"
 msgstr "არ არის დალაგებული"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "ღონისძიების შექმნა"
+
+#, fuzzy
+#| msgid "Participants"
+msgid "participants"
+msgstr "მონაწილეები"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to decline member „%(name)s“?"
+msgid "Do you really want to delete this block from „%(name)s“?"
+msgstr "ნამდვილად გსურთ უარი უთხრათ „%(name)s-ს“ წევრობაზე?"
+
+#, fuzzy
+#| msgid "Delete Profile"
+msgid "Delete Premium Block"
+msgstr "პროფილის წაშლა"
 
 #, fuzzy
 msgid "Conference Overview"
@@ -3427,6 +3590,10 @@ msgstr "ღონისძიებები"
 
 msgid "News"
 msgstr "ახალი ამბები"
+
+#, fuzzy
+msgid "Video conference"
+msgstr "ვიდეო კონფერენციის სერვერი"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -3791,6 +3958,12 @@ msgstr "ყველა წევრის შეტყობინება"
 msgid "Send Message"
 msgstr "შეტყობინების გაგზავნა"
 
+msgid "Admin"
+msgstr "ადმინისტრატორი"
+
+msgid "Member"
+msgstr "წევრი"
+
 #, fuzzy
 msgid "User account inactive"
 msgstr "ეს ანგარიში არ არის აქტიური."
@@ -3996,6 +4169,13 @@ msgstr ""
 msgid "Enable the public visibility of your group/project"
 msgstr ""
 
+#, fuzzy
+msgid "Include a video conference"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "Choose the type of the video conference you would like to include in the dashboard"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr "პირადი პარამეტრები"
 
@@ -4188,6 +4368,21 @@ msgstr "მოწვევები არ არის."
 
 msgid "Map"
 msgstr "რუკა"
+
+#, fuzzy
+#| msgid "Deleting..."
+msgid "Meeting"
+msgstr "მიმდინარეობს წაშლა..."
+
+msgid "Fullscreen"
+msgstr ""
+
+msgid "Leave Fullscreen"
+msgstr ""
+
+#, fuzzy
+msgid "Leave video conference"
+msgstr "ვიდეო კონფერენციის სერვერი"
 
 msgid "Not happy with how your Microsite looks?"
 msgstr "არ მოგწონთ თქვენი მიკრო საიტი როგორ გამოიყურება?"
@@ -5296,9 +5491,6 @@ msgstr "შეიყვანეთ ახალი პაროლი"
 
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
 msgstr "გთხოვთ ორჯერ შეიყვანოთ ახალი პაროლი, რათა დავრწმუნდეთ, რომ სწორად გაქვთ შეყვანილი."
-
-msgid "New password"
-msgstr "ახალი პაროლი"
 
 msgid "New password confirmation"
 msgstr "ახალი პაროლის დადასტურება"
@@ -7258,6 +7450,31 @@ msgid "The language \"%s\" is not supported"
 msgstr "\"%s\" ენა არ არის მხარდაჭერილი"
 
 #, fuzzy
+msgid "Successfully made conference permanent premium"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Successfully removed permanent premium from conference"
+msgstr "მომხმარებლის ანგარიშის წაშლა"
+
+msgid "Successfully added premium block"
+msgstr ""
+
+msgid "Add Premium Block to \"{}\""
+msgstr ""
+
+#, fuzzy
+msgid "Successfully updated premium block."
+msgstr "მომხმარებლის ანგარიშის წაშლა"
+
+msgid "Edit Premium Block in conference \"{}\""
+msgstr ""
+
+#, fuzzy
+msgid "Successfully deleted premium block"
+msgstr "მომხმარებლის ანგარიშის წაშლა"
+
+#, fuzzy
 msgid "Your data was saved successfully!"
 msgstr "თქვენი იდეა წარმატებით წაიშალა."
 
@@ -7333,21 +7550,6 @@ msgstr "მომხმარებლის ანგარიშის წა�
 #, fuzzy
 msgid "Successfully removed user"
 msgstr "მომხმარებლის ანგარიშის წაშლა"
-
-#, fuzzy
-msgid "User was not created"
-msgstr "შექმნა"
-
-msgid "Workshop username"
-msgstr ""
-
-#, fuzzy
-msgid "First Name"
-msgstr "სახელი"
-
-#, fuzzy
-msgid "Last Name"
-msgstr "გვარი"
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -7773,6 +7975,46 @@ msgstr "თქვენ არ ხართ %s-ის წევრი! თუ �
 
 msgid "Your changes have been saved."
 msgstr "თქვენი ცვლილებები შენახულია."
+
+#, fuzzy
+#~ msgid "Conference is not running"
+#~ msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+#~ msgid "Upload Participants"
+#~ msgstr "მონაწილეები"
+
+#, fuzzy
+#~ msgid "not active"
+#~ msgstr "არააქტიური"
+
+#, fuzzy
+#~ msgid "deactivate member"
+#~ msgstr "ჯგუფის აქტივაციის გაუქმება"
+
+#, fuzzy
+#~ msgid "activate member"
+#~ msgstr "წევრის მოწვევა"
+
+#, fuzzy
+#~ msgid "Finish conference and deactivate user accounts"
+#~ msgstr "მომხმარებლის ანგარიშის წაშლა"
+
+#, fuzzy
+#~ msgid "Start conference and activate user accounts"
+#~ msgstr "მომხმარებლის ანგარიშის წაშლა"
+
+#, fuzzy
+#~ msgid "User was not created"
+#~ msgstr "შექმნა"
+
+#, fuzzy
+#~ msgid "First Name"
+#~ msgstr "სახელი"
+
+#, fuzzy
+#~ msgid "Last Name"
+#~ msgstr "გვარი"
 
 #, fuzzy
 #~ msgid "Import Projects and Groups or Users"
