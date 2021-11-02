@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import pycountry
+
 from django_select2.fields import Select2MultipleChoiceField, Select2ChoiceField
 from django_select2.widgets import Select2Widget, HeavySelect2MultipleWidget
 
@@ -217,6 +219,16 @@ class PredefinedChoicesTextDynamicFieldFormFieldGenerator(_BaseSelect2DynamicFie
     def get_formfield_kwargs(self):
         return {'choices': self._dynamic_field_options.choices}
     
+
+class LanguageDynamicFieldFormFieldGenerator(_BaseSelect2DynamicFieldFormFieldGenerator):
+
+    def get_formfield_kwargs(self):
+        all_languages = [(lang.alpha_2, _(lang.name))
+                         for lang in pycountry.languages
+                         if hasattr(lang, 'alpha_2')]
+        choices = [('', _('No choice'))] + all_languages
+        return {'choices': choices}
+
     
 class AdminDefinedChoicesTextDynamicFieldFormFieldGenerator(_BaseSelect2DynamicFieldFormFieldGenerator):
     
@@ -306,6 +318,7 @@ EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS = {
     dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: BooleanDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: DateDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_COUNTRY: CountryDynamicFieldFormFieldGenerator,
+    dynamic_fields.DYNAMIC_FIELD_TYPE_LANGUAGE: LanguageDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_PHONE: PhoneDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_URL: URLDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_PREDEFINED_CHOICES_TEXT: PredefinedChoicesTextDynamicFieldFormFieldGenerator,
