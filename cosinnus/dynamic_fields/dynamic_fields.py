@@ -38,6 +38,8 @@ DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT = 'free_choices_text'
 # a list of objects that each contain fields that make up an address, and a "currently_selected" flag
 # which marks, which of the list of addresses is the current one
 DYNAMIC_FIELD_TYPE_MULTI_ADDRESS = 'multi_address'
+# a choice field that receives choices from custom function
+DYNAMIC_FIELD_TYPE_DYNAMIC_CHOICES = 'dynamic_choices'
 
 # list of all dynamic field types
 DYNAMIC_FIELD_TYPES = [
@@ -56,6 +58,7 @@ DYNAMIC_FIELD_TYPES = [
     DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD,
     DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT,
     DYNAMIC_FIELD_TYPE_MULTI_ADDRESS,
+    DYNAMIC_FIELD_TYPE_DYNAMIC_CHOICES
 ]
 
 # field will not be included in search
@@ -107,6 +110,8 @@ class CosinnusDynamicField(object):
     search_field_type = DYNAMIC_FIELD_SEARCH_FIELD_TYPE_NONE
     # an internal-only note for this field. never displayed anywhere
     note = None
+    # pass path to function as string for dynamic choices
+    function_string = None
     
     def __init__(self, **kwargs):
         for name, value in kwargs.items():

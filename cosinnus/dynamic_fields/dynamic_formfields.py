@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import importlib
 import pycountry
 
 from django_select2.fields import Select2MultipleChoiceField, Select2ChoiceField
@@ -221,7 +222,16 @@ class PredefinedChoicesTextDynamicFieldFormFieldGenerator(_BaseSelect2DynamicFie
     
     def get_formfield_kwargs(self):
         return {'choices': self._dynamic_field_options.choices}
-    
+
+class DynamicChoicesFieldFormFieldGenerator(_BaseSelect2DynamicFieldFormFieldGenerator):
+
+    def get_formfield_kwargs(self):
+        function_string = self._dynamic_field_options.function_string
+        mod_name, func_name = function_string.rsplit('.', 1)
+        mod = importlib.import_module(mod_name)
+        func = getattr(mod, func_name)
+        choices = func()
+        return {'choices': choices}
 
 class LanguageDynamicFieldFormFieldGenerator(_BaseSelect2DynamicFieldFormFieldGenerator):
 
@@ -332,4 +342,5 @@ EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS = {
     dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT: FreeChoicesTextDynamicFieldFormFieldGenerator, 
     # TODO: make this a custom field with value parsing and template
     dynamic_fields.DYNAMIC_FIELD_TYPE_MULTI_ADDRESS: MultiAddressDynamicFieldFormFieldGenerator,
+    dynamic_fields.DYNAMIC_FIELD_TYPE_DYNAMIC_CHOICES: DynamicChoicesFieldFormFieldGenerator
 }
