@@ -1315,6 +1315,12 @@ def get_country_name(country_code):
     from django_countries import countries
     return dict(countries).get(country_code, '(unknown)')
 
+@register.filter
+def get_language_name(language_code):
+    """ Returns the verbose language for a ISO 639-1 language code """
+    import pycountry
+    return _(pycountry.languages.get(alpha_2=language_code).name)
+
 @register.simple_tag
 def get_setting(name):
     return getattr(settings, name, "")
