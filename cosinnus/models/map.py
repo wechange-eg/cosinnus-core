@@ -28,6 +28,7 @@ from cosinnus.utils.group import message_group_admins_url
 from cosinnus.utils.permissions import check_ug_membership, check_ug_pending, \
     check_ug_invited_pending, check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus_event.models import Event
 from cosinnus_exchange.models import ExchangeProject, ExchangeSociety, ExchangeOrganization, ExchangeEvent
 from cosinnus_organization.models import CosinnusOrganization
 
@@ -649,6 +650,7 @@ SEARCH_MODEL_NAMES = {
     get_user_profile_model(): 'people',
     CosinnusProject: 'projects',
     CosinnusSociety: 'groups',
+    Event: 'events',
     CosinnusOrganization: 'organizations',
 }
 SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])

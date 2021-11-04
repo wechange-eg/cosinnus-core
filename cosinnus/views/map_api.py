@@ -125,12 +125,15 @@ class SearchQuerySetMixin:
 
     def dispatch(self, request, *args, **kwargs):
         self.params = self._collect_parameters(request.GET, self.search_parameters)
-        self.params['q'] = force_text(self.params['q'])
-        if not is_number(self.params['limit']) or self.params['limit'] < 0:
-            return HttpResponseBadRequest('``limit`` param must be a positive number or 0!')
-        self.params['limit'] = min(self.params['limit'], SERVER_SIDE_SEARCH_LIMIT)
-        if not is_number(self.params['page']) or self.params['page'] < 0:
-            return HttpResponseBadRequest('``page`` param must be a positive number or 0!')
+        if 'q' in self.params:
+            self.params['q'] = force_text(self.params['q'])
+        if 'limit' in self.params:
+            if not is_number(self.params['limit']) or self.params['limit'] < 0:
+                return HttpResponseBadRequest('``limit`` param must be a positive number or 0!')
+            self.params['limit'] = min(self.params['limit'], SERVER_SIDE_SEARCH_LIMIT)
+        if 'page' in self.params:
+            if not is_number(self.params['page']) or self.params['page'] < 0:
+                return HttpResponseBadRequest('``page`` param must be a positive number or 0!')
         return super().dispatch(request, *args, **kwargs)
 
     def _collect_parameters(self, param_dict, parameter_list):
