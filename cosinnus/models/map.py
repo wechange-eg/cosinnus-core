@@ -243,7 +243,7 @@ class HaystackMapResult(BaseMapResult):
             'content_count': result.content_count,
             'liked': user.id in result.liked_user_ids if (user and getattr(result, 'liked_user_ids', [])) else False,
             'source': result.source,
-            'dynamic_fields': json.loads(result.dynamic_fields or '{}'),
+            'dynamic_fields': result.dynamic_fields,
             'is_open_for_cooperation': result.is_open_for_cooperation,
         }
         if settings.COSINNUS_ENABLE_SDGS:

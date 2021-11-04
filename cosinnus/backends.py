@@ -139,6 +139,11 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
         for _field_name, field_mapping in mapping.items():
             if "analyzer" in field_mapping and field_mapping["analyzer"] == "ngram_analyzer":
                 field_mapping["search_analyzer"] = "standard"
+            field_class = args[0].get(_field_name)
+            if field_class and field_class.field_type == "nested":
+                field_mapping["type"] = "nested"
+                if hasattr(field_class, "get_properties"):
+                    field_mapping["properties"] = field_class.get_properties()
         return content_field_name, mapping
 
     @threaded_execution_and_catch_error
