@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 15:22+0200\n"
+"POT-Creation-Date: 2021-11-09 19:22+0100\n"
 "PO-Revision-Date: 2021-03-05 18:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,174 +15,296 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Poedit 2.4.1\n"
 
+#: admin.py:29
 msgid "Restart"
 msgstr ""
 
-msgid "Your conference is currently using the high performance premium servers!"
+#: api/serializers.py:174
+msgid ""
+"Your conference is currently using the high performance premium servers!"
 msgstr ""
 
-msgid "Your conference is currently not using the high performance premium servers, but has been assigned premium slots at other times."
+#: api/serializers.py:177
+msgid ""
+"Your conference is currently not using the high performance premium servers, "
+"but has been assigned premium slots at other times."
 msgstr ""
 
+#: api/serializers.py:189
 msgid "Your currently scheduled premium dates are:"
 msgstr ""
 
-msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
+#: api/serializers.py:191
+msgid ""
+"Your conference is still in trial mode. You have access to all features, but "
+"can only use them with a few people without restrictions. To ensure full "
+"performance for your conference with multiple users, book sufficient "
+"capacities here for free:"
 msgstr ""
 
+#: api/serializers.py:196
 #, fuzzy
 #| msgid "Conferences"
 msgid "Conference Bookings"
 msgstr "مؤتمرات"
 
+#: cosinnus_app.py:17
 msgid "Conferences"
 msgstr "مؤتمرات"
 
+#: cosinnus_app.py:22
 msgctxt "the_app"
 msgid "conference"
 msgstr "مؤتمر"
 
+#: forms.py:228 views.py:1046
 msgid "First Choice"
 msgstr "الخيار الأول"
 
+#: forms.py:228 views.py:1047
 msgid "Second Choice"
 msgstr "الخيار الثاني"
 
+#: templates/cosinnus/conference/error_page.html:5
+#: templates/cosinnus/conference/error_page.html:13
 msgid "Server Error"
 msgstr ""
 
+#: templates/cosinnus/conference/error_page.html:16
 msgid "Error message:"
 msgstr ""
 
+#: templates/cosinnus/conference/error_page.html:24
 msgid "No error message supplied."
 msgstr ""
 
-msgid "Conference Management"
-msgstr "إدارة المؤتمر"
-
-#, fuzzy
-msgid "Workshop Participant File Upload"
-msgstr "تحميل ملف مشارك ورشة العمل"
-
-#, python-format
-msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr "يرجى تحميل ملف CSV مع الأعمدة التالية: معرف المستخدم الفريد, الاسم الأول,اسم العائلة وعمود واحد لكل ورشة عمل تم تحديدها بواسطة الرابط الثابت لورشة العمل. للحصول على المساعدة ، يمكنك تحميل نموذج <a href=\"%(workshop_participants_upload_skeleton)s\">هنا</a>"
-
-msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr "ثم أضف صفًا لكل حساب تريد إضافته. يجب عليك إضافة معرف مستخدم فريد ولكن يمكن أن يكون الاسم الأول والأخير فارغين. ثم أضف 1 إلى جميع أعمدة ورشة العمل بحيث يجب أن يكون المستخدم عضوًا عاديًا أو 2 إذا كان هذا المستخدم يجب أن يكون مسؤول ورشة العمل."
-
-msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr "سوف يؤدي تحميل CSV إلى إنشاء الحسابات وعضويات حسابات ورش العمل والنتائج في تنزيل CSV مباشر بالحسابات وكلمات المرور التي تم انشاءها حديثًا. ستشمل كلمات المرور فقط عند إنشاء الحساب. يرجى تحديث الصفحة بعد التنزيل."
-
-msgid "Upload File"
-msgstr "رفع ملف"
-
+#: utils.py:80
 msgid "Go to conference"
 msgstr "اذهب إلى المؤتمر"
 
+#: views.py:78 views.py:687
 msgid "This function is not enabled for this conference."
 msgstr "لم يتم تمكين هذه الوظيفة لهذا المؤتمر."
 
-msgid "Conference successfully started and user accounts activated"
-msgstr "بدأ المؤتمر بنجاح وتم تنشيط حسابات المستخدمين"
+#: views.py:103
+#, fuzzy
+#| msgid "Successfully activated user account"
+msgid "successfully activated all user accounts."
+msgstr "تم تنشيط حساب المستخدم بنجاح"
 
-msgid "Conference successfully finished and user accounts deactivated"
-msgstr "انتهى المؤتمر بنجاح وتم إلغاء تنشيط حسابات المستخدمين"
+#: views.py:110
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "successfully deactivated all user accounts."
+msgstr "تم إلغاء تنشيط حساب المستخدم بنجاح"
 
+#: views.py:116
 msgid "Successfully deactivated user account"
 msgstr "تم إلغاء تنشيط حساب المستخدم بنجاح"
 
+#: views.py:122
 msgid "Successfully activated user account"
 msgstr "تم تنشيط حساب المستخدم بنجاح"
 
+#: views.py:128
 msgid "Successfully removed user"
 msgstr "تم إزالة المستخدم بنجاح"
 
-msgid "User was not created"
-msgstr "لم يتم إنشاء المستخدم"
+#: views.py:133
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed all user"
+msgstr "تم إزالة المستخدم بنجاح"
 
-msgid "Workshop username"
-msgstr "اسم مستخدم ورشة العمل"
+#: views.py:138 views.py:372 views.py:377
+msgid "Username"
+msgstr ""
 
+#: views.py:138 views.py:372 views.py:1031
 msgid "First Name"
 msgstr "الاسم الأول"
 
+#: views.py:139 views.py:372 views.py:1032
 msgid "Last Name"
 msgstr "الاسم الاخير"
 
+#: views.py:139
+msgid "Email"
+msgstr ""
+
+#: views.py:139
+msgid "Password"
+msgstr ""
+
+#: views.py:213
+#, fuzzy, python-format
+#| msgid "Successfully deactivated user account"
+msgid "Successfully created %(created_count)d account."
+msgid_plural "Successfully created  %(created_count)d accounts."
+msgstr[0] "تم إلغاء تنشيط حساب المستخدم بنجاح"
+msgstr[1] "تم إلغاء تنشيط حساب المستخدم بنجاح"
+msgstr[2] "تم إلغاء تنشيط حساب المستخدم بنجاح"
+msgstr[3] "تم إلغاء تنشيط حساب المستخدم بنجاح"
+msgstr[4] "تم إلغاء تنشيط حساب المستخدم بنجاح"
+msgstr[5] "تم إلغاء تنشيط حساب المستخدم بنجاح"
+
+#: views.py:230
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully updated accounts."
+msgstr "تم إلغاء تنشيط حساب المستخدم بنجاح"
+
+#: views.py:312
+msgid "User was not created"
+msgstr "لم يتم إنشاء المستخدم"
+
+#: views.py:478
 msgid "The room was created successfully."
 msgstr "تم إنشاء الغرفة بنجاح."
 
+#: views.py:500
 msgid "The room was saved successfully."
 msgstr "تم حفظ الغرفة بنجاح."
 
+#: views.py:518
 msgid "The room was deleted successfully."
 msgstr "تم حذف الغرفة بنجاح."
 
+#: views.py:537
 #, fuzzy
 msgid "The supplied Conference Room could not be found"
 msgstr "تعذر العثور على غرفة الاجتماعات الموردة"
 
+#: views.py:545 views.py:591
 msgid "Conference reminder settings have been successfully updated."
 msgstr "تم تحديث إعدادات تذكير المؤتمر بنجاح."
 
+#: views.py:573
 msgid "A test email has been sent to your email address."
 msgstr "تم إرسال بريد إلكتروني تجريبي إلى عنوان بريدك الإلكتروني."
 
+#: views.py:617
 msgid "The message was sent to all participants."
 msgstr ""
 
+#: views.py:653
 #, fuzzy
 msgid "Participation configurations have been updated."
 msgstr "تم تحديث تكوينات المشاركة."
 
+#: views.py:724
 msgid "Your application has been submitted."
 msgstr "تم تقديم تطبيقاتك."
 
+#: views.py:729
 msgid "Your application has been updated."
 msgstr "تم تحديث التطبيق الخاص بك."
 
+#: views.py:743
 msgid "You cannot change your application anymore."
 msgstr "لا يمكنك تغيير طلبك بعد الآن."
 
+#: views.py:751
 msgid "Application has been withdrawn."
 msgstr "تم سحب التطبيق."
 
+#: views.py:893
 #, python-format
 msgid "The following users were accepted and added as members: %s"
 msgstr "تم قبول المستخدمين التالين وإضافتهم كأعضاء: %s"
 
+#: views.py:895
 #, python-format
 msgid "The following users were put on the wait list: %s"
 msgstr "تم وضع المستخدمين التالين في قائمة الانتظار: %s"
 
+#: views.py:897
 #, python-format
 msgid "The following users were declined: %s"
 msgstr "تم رفض المستخدمين التالين: %s"
 
+#: views.py:899
 msgid "Your changes were saved."
 msgstr "تم حفظ التغييرات الخاصة بك."
 
+#: views.py:1010
 msgid "Option"
 msgstr "خيار"
 
+#: views.py:1033
 msgid "Motivation for applying"
 msgstr "الدافع للتقديم"
 
+#: views.py:1034
 msgid "Status"
 msgstr "حالة"
 
+#: views.py:1038
 msgid "Contact E-Mail Address"
 msgstr "عنوان البريد الإلكتروني للاتصال"
 
+#: views.py:1042
 msgid "Contact Phone Number"
 msgstr "الاتصال رقم الهاتف"
 
+#: views.py:1087
 msgid "List of Applicants"
 msgstr "قائمة المتقدمين"
+
+#~ msgid "Conference Management"
+#~ msgstr "إدارة المؤتمر"
+
+#, fuzzy
+#~ msgid "Workshop Participant File Upload"
+#~ msgstr "تحميل ملف مشارك ورشة العمل"
+
+#~ msgid ""
+#~ "Please upload a CSV with the following columns: unique user identifier, "
+#~ "first name, last name and one column for each workshop identified by the "
+#~ "workshop's slug. For Help you can download a template <a href="
+#~ "\"%(workshop_participants_upload_skeleton)s\">here</a>"
+#~ msgstr ""
+#~ "يرجى تحميل ملف CSV مع الأعمدة التالية: معرف المستخدم الفريد, الاسم الأول,"
+#~ "اسم العائلة وعمود واحد لكل ورشة عمل تم تحديدها بواسطة الرابط الثابت لورشة "
+#~ "العمل. للحصول على المساعدة ، يمكنك تحميل نموذج <a href="
+#~ "\"%(workshop_participants_upload_skeleton)s\">هنا</a>"
+
+#~ msgid ""
+#~ "Then add a row for each account that you want to add. You have to add a "
+#~ "unique user identifier but first and last name can be blank. Then add a 1 "
+#~ "to all workshop columns where the user should be a normal member or a 2 "
+#~ "if that user should be workshop admin."
+#~ msgstr ""
+#~ "ثم أضف صفًا لكل حساب تريد إضافته. يجب عليك إضافة معرف مستخدم فريد ولكن "
+#~ "يمكن أن يكون الاسم الأول والأخير فارغين. ثم أضف 1 إلى جميع أعمدة ورشة "
+#~ "العمل بحيث يجب أن يكون المستخدم عضوًا عاديًا أو 2 إذا كان هذا المستخدم يجب "
+#~ "أن يكون مسؤول ورشة العمل."
+
+#~ msgid ""
+#~ "The CSV upload will trigger the creation of the accounts and account "
+#~ "workshop memberships and results in a direct CSV download with the newly "
+#~ "created accounts and passwords. The passwords will only be included when "
+#~ "the account is created. Please refresh the page after the download."
+#~ msgstr ""
+#~ "سوف يؤدي تحميل CSV إلى إنشاء الحسابات وعضويات حسابات ورش العمل والنتائج "
+#~ "في تنزيل CSV مباشر بالحسابات وكلمات المرور التي تم انشاءها حديثًا. ستشمل "
+#~ "كلمات المرور فقط عند إنشاء الحساب. يرجى تحديث الصفحة بعد التنزيل."
+
+#~ msgid "Upload File"
+#~ msgstr "رفع ملف"
+
+#~ msgid "Conference successfully started and user accounts activated"
+#~ msgstr "بدأ المؤتمر بنجاح وتم تنشيط حسابات المستخدمين"
+
+#~ msgid "Conference successfully finished and user accounts deactivated"
+#~ msgstr "انتهى المؤتمر بنجاح وتم إلغاء تنشيط حسابات المستخدمين"
+
+#~ msgid "Workshop username"
+#~ msgstr "اسم مستخدم ورشة العمل"
 
 #, fuzzy
 #~| msgid "End date must be before start date"

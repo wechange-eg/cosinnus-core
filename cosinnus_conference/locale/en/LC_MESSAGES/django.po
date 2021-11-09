@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 15:22+0200\n"
+"POT-Creation-Date: 2021-11-09 19:22+0100\n"
 "PO-Revision-Date: 2020-11-05 14:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,181 +18,251 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
 
+#: admin.py:29
 msgid "Restart"
 msgstr ""
 
-msgid "Your conference is currently using the high performance premium servers!"
+#: api/serializers.py:174
+msgid ""
+"Your conference is currently using the high performance premium servers!"
 msgstr ""
 
-msgid "Your conference is currently not using the high performance premium servers, but has been assigned premium slots at other times."
+#: api/serializers.py:177
+msgid ""
+"Your conference is currently not using the high performance premium servers, "
+"but has been assigned premium slots at other times."
 msgstr ""
 
+#: api/serializers.py:189
 msgid "Your currently scheduled premium dates are:"
 msgstr ""
 
-msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
+#: api/serializers.py:191
+msgid ""
+"Your conference is still in trial mode. You have access to all features, but "
+"can only use them with a few people without restrictions. To ensure full "
+"performance for your conference with multiple users, book sufficient "
+"capacities here for free:"
 msgstr ""
 
+#: api/serializers.py:196
 msgid "Conference Bookings"
 msgstr ""
 
+#: cosinnus_app.py:17
 msgid "Conferences"
 msgstr ""
 
+#: cosinnus_app.py:22
 msgctxt "the_app"
 msgid "conference"
 msgstr ""
 
+#: forms.py:228 views.py:1046
 msgid "First Choice"
 msgstr ""
 
+#: forms.py:228 views.py:1047
 msgid "Second Choice"
 msgstr ""
 
+#: templates/cosinnus/conference/error_page.html:5
+#: templates/cosinnus/conference/error_page.html:13
 msgid "Server Error"
 msgstr ""
 
+#: templates/cosinnus/conference/error_page.html:16
 msgid "Error message:"
 msgstr ""
 
+#: templates/cosinnus/conference/error_page.html:24
 msgid "No error message supplied."
 msgstr ""
 
-msgid "Conference Management"
-msgstr ""
-
-msgid "Workshop Participant File Upload"
-msgstr ""
-
-#, python-format
-msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr ""
-
-msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr ""
-
-msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr ""
-
-msgid "Upload File"
-msgstr ""
-
+#: utils.py:80
 msgid "Go to conference"
 msgstr ""
 
+#: views.py:78 views.py:687
 msgid "This function is not enabled for this conference."
 msgstr ""
 
-msgid "Conference successfully started and user accounts activated"
+#: views.py:103
+msgid "successfully activated all user accounts."
 msgstr ""
 
-msgid "Conference successfully finished and user accounts deactivated"
+#: views.py:110
+msgid "successfully deactivated all user accounts."
 msgstr ""
 
+#: views.py:116
 msgid "Successfully deactivated user account"
 msgstr ""
 
+#: views.py:122
 msgid "Successfully activated user account"
 msgstr ""
 
+#: views.py:128
 msgid "Successfully removed user"
 msgstr ""
 
-msgid "User was not created"
+#: views.py:133
+msgid "Successfully removed all user"
 msgstr ""
 
-msgid "Workshop username"
+#: views.py:138 views.py:372 views.py:377
+msgid "Username"
 msgstr ""
 
+#: views.py:138 views.py:372 views.py:1031
 msgid "First Name"
 msgstr ""
 
+#: views.py:139 views.py:372 views.py:1032
 msgid "Last Name"
 msgstr ""
 
+#: views.py:139
+msgid "Email"
+msgstr ""
+
+#: views.py:139
+msgid "Password"
+msgstr ""
+
+#: views.py:213
+#, python-format
+msgid "Successfully created %(created_count)d account."
+msgid_plural "Successfully created  %(created_count)d accounts."
+msgstr[0] ""
+msgstr[1] ""
+
+#: views.py:230
+msgid "Successfully updated accounts."
+msgstr ""
+
+#: views.py:312
+msgid "User was not created"
+msgstr ""
+
+#: views.py:478
 msgid "The room was created successfully."
 msgstr ""
 
+#: views.py:500
 msgid "The room was saved successfully."
 msgstr ""
 
+#: views.py:518
 msgid "The room was deleted successfully."
 msgstr ""
 
+#: views.py:537
 msgid "The supplied Conference Room could not be found"
 msgstr ""
 
+#: views.py:545 views.py:591
 msgid "Conference reminder settings have been successfully updated."
 msgstr ""
 
+#: views.py:573
 msgid "A test email has been sent to your email address."
 msgstr ""
 
+#: views.py:617
 msgid "The message was sent to all participants."
 msgstr ""
 
+#: views.py:653
 msgid "Participation configurations have been updated."
 msgstr ""
 
+#: views.py:724
 msgid "Your application has been submitted."
 msgstr ""
 
+#: views.py:729
 msgid "Your application has been updated."
 msgstr ""
 
+#: views.py:743
 msgid "You cannot change your application anymore."
 msgstr ""
 
+#: views.py:751
 msgid "Application has been withdrawn."
 msgstr ""
 
+#: views.py:893
 #, python-format
 msgid "The following users were accepted and added as members: %s"
 msgstr ""
 
+#: views.py:895
 #, python-format
 msgid "The following users were put on the wait list: %s"
 msgstr ""
 
+#: views.py:897
 #, python-format
 msgid "The following users were declined: %s"
 msgstr ""
 
+#: views.py:899
 msgid "Your changes were saved."
 msgstr ""
 
+#: views.py:1010
 msgid "Option"
 msgstr ""
 
+#: views.py:1033
 msgid "Motivation for applying"
 msgstr ""
 
+#: views.py:1034
 msgid "Status"
 msgstr ""
 
+#: views.py:1038
 msgid "Contact E-Mail Address"
 msgstr ""
 
+#: views.py:1042
 msgid "Contact Phone Number"
 msgstr ""
 
+#: views.py:1087
 msgid "List of Applicants"
 msgstr ""
 
 #~ msgid "TODO: Room Type Lobby description text"
-#~ msgstr "The lobby is the main entrance point for participants. You will find the conference‘s agenda here."
+#~ msgstr ""
+#~ "The lobby is the main entrance point for participants. You will find the "
+#~ "conference‘s agenda here."
 
 #~ msgid "TODO: Room Type Stage description text"
-#~ msgstr "The stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+#~ msgstr ""
+#~ "The stage is used to display a stream, e.g. from YouTube or Vimeo. A chat "
+#~ "is shown next to it."
 
 #~ msgid "TODO: Room Type Workshops description text"
-#~ msgstr "In workshop rooms each event has a video conference. Presenters are allowed to moderate those."
+#~ msgstr ""
+#~ "In workshop rooms each event has a video conference. Presenters are "
+#~ "allowed to moderate those."
 
 #~ msgid "TODO: Room Type Discussions description text"
-#~ msgstr "In workshop rooms each event has a video conference. Presenters are allowed to moderate those. Differs from „workshop rooms“ only by the design in the agenda. Workshop: tiles, discussion: list"
+#~ msgstr ""
+#~ "In workshop rooms each event has a video conference. Presenters are "
+#~ "allowed to moderate those. Differs from „workshop rooms“ only by the "
+#~ "design in the agenda. Workshop: tiles, discussion: list"
 
 #~ msgid "TODO: Room Type Coffee Tables description text"
-#~ msgstr "In the café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
+#~ msgstr ""
+#~ "In the café you can create as many tables as you want. There, the "
+#~ "participants can meet and start a video conference directly with a webcam "
+#~ "and microphone."
 
 #~ msgid "TODO: Room Type Results description text"
 #~ msgstr "Include a project that you use for documentation purposes."
@@ -206,8 +276,16 @@ msgstr ""
 #~ msgid "Sort index"
 #~ msgstr "Sort number"
 
-#~ msgid "Number by which rooms are sorted in ascending order in the conference room navigation list"
-#~ msgstr "The rooms are displayed in the room navigation in ascending order according to this number."
+#~ msgid ""
+#~ "Number by which rooms are sorted in ascending order in the conference "
+#~ "room navigation list"
+#~ msgstr ""
+#~ "The rooms are displayed in the room navigation in ascending order "
+#~ "according to this number."
 
-#~ msgid "A short description or topic for your room. Will be shown on top of the room page."
-#~ msgstr "Brief description or theme of the room. Appears at the top of the room page."
+#~ msgid ""
+#~ "A short description or topic for your room. Will be shown on top of the "
+#~ "room page."
+#~ msgstr ""
+#~ "Brief description or theme of the room. Appears at the top of the room "
+#~ "page."
