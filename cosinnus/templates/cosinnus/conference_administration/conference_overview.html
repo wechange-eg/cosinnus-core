@@ -30,29 +30,6 @@
 
 
 {% block content %}
-    
-    {% comment %} Temporary change, delete when the conference premium block forms are in! {% endcomment %}    
-    <div class="alert alert-warning alert-dismissable">
-        <i class="fa fa-exclamation fa-3x"></i>
-        <h4>{% trans "Temporary restrictions" %}</h4>
-        <div class="v-offset-s">
-        <p>
-            {% trans "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences." %}
-        </p>
-        <p>
-            {% trans "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!" %}
-        </p>
-        <p>
-            {% trans "Portal administrators" %}:
-            {% for superuser in all_superusers %}
-                <a href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=superuser.username %}{% else %}{% url 'postman:write' recipients=superuser.username %}?next={% url 'postman:sent' %}{% endif %}" 
-                   target="_blank">{{ superuser|full_name }}
-                </a>{% if not forloop.last %},{% endif %}
-            {% endfor %}
-        </p>
-        </div>
-    </div>
-    
     <div class="content-box textfield">
         <h2>
             {% if only_nonstandard %}
