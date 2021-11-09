@@ -135,7 +135,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         elif 'downloadPasswords' in request.POST:
             filename = '{}_participants_passwords'.format(
                 self.group.slug)
-            header = [_('Workshop username'), _('First Name'),
+            header = [_('Username'), _('First Name'),
                       _('Last Name'), _('Email'), _('Password')]
             accounts = self.get_accounts_with_password()
             return make_xlsx_response(accounts, row_names=header,
