@@ -16,7 +16,7 @@
 {% endblock leftnav %}
 
 {% block breadcrumb %}
-    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Conference Administration" %}</a></li>
+    <li><a href="{% url 'cosinnus:conference-administration-overview' %}">{% trans "Conference Administration" %}</a></li>
     <li class="active">
         {% if only_nonstandard %}
             {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
@@ -30,6 +30,7 @@
 
 
 {% block content %}
+
     <div class="content-box textfield">
         <h2>
             {% if only_nonstandard %}
