@@ -241,11 +241,10 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             kwargs={'group': self.group}))
 
     def process_data(self, data):
-        groups_list = data.get('header')
         accounts_created_list = []
         accounts_updated_list = []
         for row in data.get('data'):
-            account, created = self.create_or_update_account(row, groups_list)
+            account, created = self.create_or_update_account(row)
             if created:
                 accounts_created_list.append(account)
             else:
@@ -265,7 +264,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             return settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN
         return '{}.de'.format(slugify(settings.COSINNUS_PORTAL_NAME))
 
-    def create_or_update_account(self, data, groups):
+    def create_or_update_account(self, data):
 
         username = self.get_unique_workshop_name(data[0])
         first_name = data[1]

@@ -59,12 +59,7 @@
 		
 			        <li class="{{app_css_class}} appnavi-listelement {% if app.active %}active{% endif %} fine-space">
 			            <a href="{{ app.url }}" {% if app.app == 'cosinnus_cloud' and SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}>
-			                <i class="fa fa-fw {{ app_icon }}"></i>
-			                {% if group.group_is_conference and app.app == 'cosinnus_event' %}
-			                    {% trans "Workshops" %}
-			                {% else %}
-	    		                {{ app.label }}
-			                {% endif %}
+			                <i class="fa fa-fw {{ app_icon }}"></i> {{ app.label }}
 			            </a>
 			        </li>
 	            {% endif %}
