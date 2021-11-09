@@ -344,7 +344,7 @@ class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin,
         response['Content-Disposition'] = 'attachment; filename="{}"'.format(
             filename)
 
-        writer = csv.writer(response)
+        writer = csv.writer(response, delimiter=';')
 
         header = [_('Username'), _('First Name'), _('Last Name')]
 
