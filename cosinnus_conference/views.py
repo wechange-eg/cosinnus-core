@@ -204,30 +204,54 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         kwargs['group'] = self.group
         return kwargs
 
+    def get_success_message(self, accounts_created, accounts_updated):
+        created_count = len(accounts_created)
+        updated_count = len(accounts_updated)
+        if accounts_created:
+            if not accounts_updated:
+                return ngettext(
+                    'Successfully created %(created_count)d account.',
+                    'Successfully created  %(created_count)d accounts.',
+                    created_count,
+                ) % {
+                    'created_count': created_count
+                }
+            else:
+                return ngettext(
+                    ('Successfully created %(created_count)d '
+                     'account and updated accounts.'),
+                    ('Successfully created  %(created_count)d '
+                     'accounts and updated accounts.'),
+                    created_count,
+                ) % {
+                    'created_count': created_count
+                }
+        if updated_count:
+            return _('Successfully updated accounts.')
+
     def form_valid(self, form):
         data = form.cleaned_data.get('participants')
-        accounts_count = len(self.process_data(data))
-        message = ngettext(
-            'Successfully created %(count)d account',
-            'Successfully created  %(count)d accounts',
-            accounts_count,
-        ) % {
-            'count': accounts_count,
-        }
+        accounts_created, accounts_updated = self.process_data(data)
+        success_message = self.get_success_message(accounts_created,
+                                                   accounts_updated)
         messages.add_message(
-            self.request, messages.SUCCESS, message)
+            self.request, messages.SUCCESS, success_message)
         return redirect(group_aware_reverse(
             'cosinnus:conference:temporary-users',
             kwargs={'group': self.group}))
 
     def process_data(self, data):
         groups_list = data.get('header')
-        accounts_list = []
+        accounts_created_list = []
+        accounts_updated_list = []
         for row in data.get('data'):
-            account = self.create_account(row, groups_list)
-            accounts_list.append(account)
+            account, created = self.create_or_update_account(row, groups_list)
+            if created:
+                accounts_created_list.append(account)
+            else:
+                accounts_updated_list.append(account)
 
-        return accounts_list
+        return accounts_created_list, accounts_updated_list
 
     def get_unique_workshop_name(self, name):
         no_whitespace = name.replace(' ', '')
@@ -241,7 +265,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             return settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN
         return '{}.de'.format(slugify(settings.COSINNUS_PORTAL_NAME))
 
-    def create_account(self, data, groups):
+    def create_or_update_account(self, data, groups):
 
         username = self.get_unique_workshop_name(data[0])
         first_name = data[1]
@@ -259,7 +283,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             user.last_name = last_name
             user.save()
             self.create_or_update_memberships(user)
-            return data + [user.email, '']
+            return data + [user.email, ''], False
         except ObjectDoesNotExist:
             random_email = '{}@{}'.format(get_random_string(), email_domain)
             user = create_base_user(random_email, first_name=first_name, last_name=last_name, no_generated_password=True)
@@ -284,7 +308,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
                 user.save()
 
                 self.create_or_update_memberships(user)
-                return data + [unique_email]
+                return data + [unique_email], True
             else:
                 return data + [_('User was not created'), '']
 
