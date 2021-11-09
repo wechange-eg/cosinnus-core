@@ -308,7 +308,7 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin,
 
         filename = '{}_statistics'.format(self.group.slug)
         rows = []
-        header = ['Workshop username', 'email', 'has logged in',
+        header = ['username', 'email', 'has logged in',
                   'last login date', 'Terms of service accepted']
 
         for member in members:
@@ -346,7 +346,7 @@ class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin,
 
         writer = csv.writer(response)
 
-        header = [_('Workshop username'), _('First Name'), _('Last Name')]
+        header = [_('Username'), _('First Name'), _('Last Name')]
 
         writer.writerow(header)
 
