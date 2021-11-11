@@ -143,7 +143,7 @@
 	<table class="table table-striped white-content">
 		<thead>
 			<tr>
-				<th>{% trans 'name and email' %}</th>
+				<th>{% trans 'name' %}</th>
 				<th>{% trans 'active' %}</div></th>
 				<th>{% trans 'password' %}</th>
 				<th>{% trans 'last login' %}</th>
@@ -155,11 +155,11 @@
 			<th>
 				<div class="pull-left">
 					{% if member.cosinnus_profile.workshop_user_name %}
-						{{ member.cosinnus_profile.readable_workshop_user_name }}: {{ member.email }}
+						{{ member.cosinnus_profile.readable_workshop_user_name }}: {{ member.first_name }} {{ member.last_name }}
 					{% else %}
 						{{ member|full_name }} : {{ member.email }}
 					{% endif %}
-				</div>
+				</div></br>
 				<div class="pull-left">
 					{% captureas modal_remove_id %}userModal_remove_{{member.pk}}{% endcaptureas %}
 					<button type="button" class="btn btn-default btn-small btn-autosize large-space" data-toggle="modal" data-target="#{{modal_remove_id}}">
@@ -183,7 +183,7 @@
 					{% else %}
 						{% trans 'no'%}
 					{% endif %}
-				</div>
+				</div></br>
 				<div class="pull-left">
 					{% if member.is_active %}
 						{% captureas modal_deactivate_id %}userModal_deactivate_{{member.pk}}{% endcaptureas %}
