@@ -74,7 +74,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
     form_class = CosinusWorkshopParticipantCSVImportForm
 
     def extra_dispatch_check(self):
-        if not self.group.allow_conference_temporary_users:
+        if not self.group.temporary_users_allowed:
             messages.warning(self.request, _('This function is not enabled for this conference.'))
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
 
@@ -135,7 +135,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         elif 'downloadPasswords' in request.POST:
             filename = '{}_participants_passwords'.format(
                 self.group.slug)
-            header = [_('Workshop username'), _('First Name'),
+            header = [_('Username'), _('First Name'),
                       _('Last Name'), _('Email'), _('Password')]
             accounts = self.get_accounts_with_password()
             return make_xlsx_response(accounts, row_names=header,
@@ -192,11 +192,20 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         except ObjectDoesNotExist:
             pass
 
+    def get_blank_password_users_exist(self):
+        users = self.get_temporary_users()
+        for user in users:
+            if not user.password:
+                return True
+        return False
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['group'] = self.group
         context['members'] = self.get_temporary_users()
-        context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
+        context['group_admins'] = CosinnusGroupMembership.objects.get_admins(
+            group=self.group)
+        context['download_passwords'] = self.get_blank_password_users_exist()
         return context
 
     def get_form_kwargs(self):
@@ -204,30 +213,53 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         kwargs['group'] = self.group
         return kwargs
 
+    def get_success_message(self, accounts_created, accounts_updated):
+        created_count = len(accounts_created)
+        updated_count = len(accounts_updated)
+        if accounts_created:
+            if not accounts_updated:
+                return ngettext(
+                    'Successfully created %(created_count)d account.',
+                    'Successfully created  %(created_count)d accounts.',
+                    created_count,
+                ) % {
+                    'created_count': created_count
+                }
+            else:
+                return ngettext(
+                    ('Successfully created %(created_count)d '
+                     'account and updated accounts.'),
+                    ('Successfully created  %(created_count)d '
+                     'accounts and updated accounts.'),
+                    created_count,
+                ) % {
+                    'created_count': created_count
+                }
+        if updated_count:
+            return _('Successfully updated accounts.')
+
     def form_valid(self, form):
         data = form.cleaned_data.get('participants')
-        accounts_count = len(self.process_data(data))
-        message = ngettext(
-            'Successfully created %(count)d account',
-            'Successfully created  %(count)d accounts',
-            accounts_count,
-        ) % {
-            'count': accounts_count,
-        }
+        accounts_created, accounts_updated = self.process_data(data)
+        success_message = self.get_success_message(accounts_created,
+                                                   accounts_updated)
         messages.add_message(
-            self.request, messages.SUCCESS, message)
+            self.request, messages.SUCCESS, success_message)
         return redirect(group_aware_reverse(
             'cosinnus:conference:temporary-users',
             kwargs={'group': self.group}))
 
     def process_data(self, data):
-        groups_list = data.get('header')
-        accounts_list = []
+        accounts_created_list = []
+        accounts_updated_list = []
         for row in data.get('data'):
-            account = self.create_account(row, groups_list)
-            accounts_list.append(account)
+            account, created = self.create_or_update_account(row)
+            if created:
+                accounts_created_list.append(account)
+            else:
+                accounts_updated_list.append(account)
 
-        return accounts_list
+        return accounts_created_list, accounts_updated_list
 
     def get_unique_workshop_name(self, name):
         no_whitespace = name.replace(' ', '')
@@ -241,7 +273,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             return settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN
         return '{}.de'.format(slugify(settings.COSINNUS_PORTAL_NAME))
 
-    def create_account(self, data, groups):
+    def create_or_update_account(self, data):
 
         username = self.get_unique_workshop_name(data[0])
         first_name = data[1]
@@ -259,7 +291,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             user.last_name = last_name
             user.save()
             self.create_or_update_memberships(user)
-            return data + [user.email, '']
+            return data + [user.email, ''], False
         except ObjectDoesNotExist:
             random_email = '{}@{}'.format(get_random_string(), email_domain)
             user = create_base_user(random_email, first_name=first_name, last_name=last_name, no_generated_password=True)
@@ -284,7 +316,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
                 user.save()
 
                 self.create_or_update_memberships(user)
-                return data + [unique_email]
+                return data + [unique_email], True
             else:
                 return data + [_('User was not created'), '']
 
@@ -308,7 +340,7 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin,
 
         filename = '{}_statistics'.format(self.group.slug)
         rows = []
-        header = ['Workshop username', 'email', 'has logged in',
+        header = ['username', 'email', 'has logged in',
                   'last login date', 'Terms of service accepted']
 
         for member in members:
@@ -344,14 +376,15 @@ class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin,
         response['Content-Disposition'] = 'attachment; filename="{}"'.format(
             filename)
 
-        writer = csv.writer(response)
+        writer = csv.writer(response, delimiter=';')
 
-        header = [_('Workshop username'), _('First Name'), _('Last Name')]
+        header = [_('Username'), _('First Name'), _('Last Name')]
 
         writer.writerow(header)
 
         for i in range(5):
-            row = ['' for entry in header]
+            row = ['' if not entry == _('Username')
+                   else str(i + 1) for entry in header]
             writer.writerow(row)
         return response
 

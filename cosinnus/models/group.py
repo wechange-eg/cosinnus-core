@@ -1102,6 +1102,10 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
     @property
     def has_premium_blocks(self):
         return bool(self.conference_premium_blocks.count() > 0)
+
+    @property
+    def temporary_users_allowed(self):
+        return self.has_premium_blocks or self.is_premium_permanently
     
     def add_member_to_group(self, user, membership_status):
         """ "Makes the user a group member". 

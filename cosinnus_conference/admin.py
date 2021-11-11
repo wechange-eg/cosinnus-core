@@ -79,6 +79,9 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
         inlines = CosinnusProjectAdmin.inlines + [
             CosinnusConferencePremiumBlockInline
         ]
+        readonly_fields = ('created', 'last_modified', 'is_premium_currently',
+                           'attached_objects',
+                           'allow_conference_temporary_users')
         
         def get_actions(self, request):
             actions = super(CosinnusConferenceAdmin, self).get_actions(request)

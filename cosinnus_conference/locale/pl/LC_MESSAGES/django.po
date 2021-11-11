@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 15:22+0200\n"
+"POT-Creation-Date: 2021-11-09 19:22+0100\n"
 "PO-Revision-Date: 2021-04-01 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,166 +18,295 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 2.4.2\n"
 
+#: admin.py:29
 msgid "Restart"
 msgstr ""
 
-msgid "Your conference is currently using the high performance premium servers!"
+#: api/serializers.py:174
+msgid ""
+"Your conference is currently using the high performance premium servers!"
 msgstr ""
 
-msgid "Your conference is currently not using the high performance premium servers, but has been assigned premium slots at other times."
+#: api/serializers.py:177
+msgid ""
+"Your conference is currently not using the high performance premium servers, "
+"but has been assigned premium slots at other times."
 msgstr ""
 
+#: api/serializers.py:189
 msgid "Your currently scheduled premium dates are:"
 msgstr ""
 
-msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
-msgstr "Twoja konferencja jest nadal w trybie próbnym. Masz dostęp do wszystkich funkcji, ale możesz z nich korzystać tylko z kilkoma osobami bez ograniczeń. Aby zapewnić pełną wydajność konferencji z wieloma użytkownikami, zarezerwuj wystarczającą liczbę możliwości tutaj za darmo:"
+#: api/serializers.py:191
+msgid ""
+"Your conference is still in trial mode. You have access to all features, but "
+"can only use them with a few people without restrictions. To ensure full "
+"performance for your conference with multiple users, book sufficient "
+"capacities here for free:"
+msgstr ""
+"Twoja konferencja jest nadal w trybie próbnym. Masz dostęp do wszystkich "
+"funkcji, ale możesz z nich korzystać tylko z kilkoma osobami bez ograniczeń. "
+"Aby zapewnić pełną wydajność konferencji z wieloma użytkownikami, zarezerwuj "
+"wystarczającą liczbę możliwości tutaj za darmo:"
 
+#: api/serializers.py:196
 msgid "Conference Bookings"
 msgstr "Bukowanie konferencji"
 
+#: cosinnus_app.py:17
 msgid "Conferences"
 msgstr "Konferencje"
 
+#: cosinnus_app.py:22
 msgctxt "the_app"
 msgid "conference"
 msgstr "ap konferencji"
 
+#: forms.py:228 views.py:1046
 msgid "First Choice"
 msgstr "Pierwszy Wybór"
 
+#: forms.py:228 views.py:1047
 msgid "Second Choice"
 msgstr "Drugi Wybór"
 
+#: templates/cosinnus/conference/error_page.html:5
+#: templates/cosinnus/conference/error_page.html:13
 msgid "Server Error"
 msgstr ""
 
+#: templates/cosinnus/conference/error_page.html:16
 msgid "Error message:"
 msgstr ""
 
+#: templates/cosinnus/conference/error_page.html:24
 msgid "No error message supplied."
 msgstr ""
 
-msgid "Conference Management"
-msgstr "Zarządzanie Konferencją"
-
-msgid "Workshop Participant File Upload"
-msgstr "Wysłano Plik Uczestnika Warsztatów"
-
-#, python-format
-msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr "Proszę przesłać plik CSV z następującymi kolumnami: unikalny identyfikator użytkownika, imię, nazwisko oraz jedna kolumna dla każdego warsztatu identyfikowana przez jego hasło. Aby uzyskać pomoc, możesz pobrać szablon <a href=\"%(workshop_participants_upload_skeleton)s\">tutaj</a>"
-
-msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr "Następnie, dodaj wiersz dla każdego konta, które chcesz dodać. Musisz dodać unikalny identyfikator użytkownika, ale imię i nazwisko mogą być puste. Następnie dodaj 1 do wszystkich kolumn warsztatu, gdzie użytkownik powinien być zwykłym członkiem lub 2, jeśli użytkownik powinien być administratorem warsztatów."
-
-msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr "Przesłanie CSV spowoduje utworzenie kont i członkostwa w warsztatach, a w rezultacie bezpośrednie pobranie CSV z nowo utworzonymi kontami i hasłami. Hasła zostaną dołączone tylko wtedy, gdy zostanie utworzone konto. Proszę odświeżyć stronę po pobraniu."
-
-msgid "Upload File"
-msgstr "Wyślij Plik"
-
+#: utils.py:80
 msgid "Go to conference"
 msgstr "Przejdź do konferencji"
 
+#: views.py:78 views.py:687
 msgid "This function is not enabled for this conference."
 msgstr "Dla tej konferencji funkcja ta nie jest aktywna"
 
-msgid "Conference successfully started and user accounts activated"
-msgstr "Konferencja rozpoczęta pomyślnie a konta użytkownika zostały aktywowane"
+#: views.py:103
+#, fuzzy
+#| msgid "Successfully activated user account"
+msgid "successfully activated all user accounts."
+msgstr "Konto użytkownika zostało pomyślnie zaktywowane"
 
-msgid "Conference successfully finished and user accounts deactivated"
-msgstr "Konferencja zakończona pomyślnie a konta użytkownika zostały zdezaktywowane"
+#: views.py:110
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "successfully deactivated all user accounts."
+msgstr "Pomyślnie dezaktywowano konto użytkownika"
 
+#: views.py:116
 msgid "Successfully deactivated user account"
 msgstr "Pomyślnie dezaktywowano konto użytkownika"
 
+#: views.py:122
 msgid "Successfully activated user account"
 msgstr "Konto użytkownika zostało pomyślnie zaktywowane"
 
+#: views.py:128
 msgid "Successfully removed user"
 msgstr "Pomyślnie usunięto użytkownika"
 
-msgid "User was not created"
-msgstr "Użytkownik nie został utworzony"
+#: views.py:133
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed all user"
+msgstr "Pomyślnie usunięto użytkownika"
 
-msgid "Workshop username"
-msgstr "Nazwa uczestnika warsztatu"
+#: views.py:138 views.py:372 views.py:377
+msgid "Username"
+msgstr ""
 
+#: views.py:138 views.py:372 views.py:1031
 msgid "First Name"
 msgstr "Imię"
 
+#: views.py:139 views.py:372 views.py:1032
 msgid "Last Name"
 msgstr "Nazwisko"
 
+#: views.py:139
+msgid "Email"
+msgstr ""
+
+#: views.py:139
+msgid "Password"
+msgstr ""
+
+#: views.py:213
+#, fuzzy, python-format
+#| msgid "Successfully deactivated user account"
+msgid "Successfully created %(created_count)d account."
+msgid_plural "Successfully created  %(created_count)d accounts."
+msgstr[0] "Pomyślnie dezaktywowano konto użytkownika"
+msgstr[1] "Pomyślnie dezaktywowano konto użytkownika"
+msgstr[2] "Pomyślnie dezaktywowano konto użytkownika"
+
+#: views.py:230
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully updated accounts."
+msgstr "Pomyślnie dezaktywowano konto użytkownika"
+
+#: views.py:312
+msgid "User was not created"
+msgstr "Użytkownik nie został utworzony"
+
+#: views.py:478
 msgid "The room was created successfully."
 msgstr "Pokój został pomyślnie utworzony."
 
+#: views.py:500
 msgid "The room was saved successfully."
 msgstr "Pokój został pomyślnie zapisany."
 
+#: views.py:518
 msgid "The room was deleted successfully."
 msgstr "Pokój został pomyślnie usunięty."
 
+#: views.py:537
 msgid "The supplied Conference Room could not be found"
 msgstr "Nie można znaleźć dostarczonej Sali Konferencyjnej"
 
+#: views.py:545 views.py:591
 msgid "Conference reminder settings have been successfully updated."
 msgstr "Pomyślnie zaktualizowano ustawienia przypomnienia o konferencji."
 
+#: views.py:573
 msgid "A test email has been sent to your email address."
 msgstr "E-mail testowy został wysłany na Twój adres e-mail."
 
+#: views.py:617
 msgid "The message was sent to all participants."
 msgstr ""
 
+#: views.py:653
 msgid "Participation configurations have been updated."
 msgstr "Konfiguracja uczestnictwa została zaktualizowana."
 
+#: views.py:724
 msgid "Your application has been submitted."
 msgstr "Twoja aplikacja została przesłana."
 
+#: views.py:729
 msgid "Your application has been updated."
 msgstr "Twoja aplikacja została zaktualizowana."
 
+#: views.py:743
 msgid "You cannot change your application anymore."
 msgstr "Nie możesz już zmienić swojej aplikacji."
 
+#: views.py:751
 msgid "Application has been withdrawn."
 msgstr "Aplikacja została wycofana."
 
+#: views.py:893
 #, python-format
 msgid "The following users were accepted and added as members: %s"
-msgstr "Następujący użytkownicy zostali zaakceptowani i dodani jako członkowie: %s "
+msgstr ""
+"Następujący użytkownicy zostali zaakceptowani i dodani jako członkowie: %s "
 
+#: views.py:895
 #, python-format
 msgid "The following users were put on the wait list: %s"
 msgstr "Następujący użytkownicy zostali umieszczeni na liście oczekujących: %s"
 
+#: views.py:897
 #, python-format
 msgid "The following users were declined: %s"
 msgstr "Następujący użytkownicy zostali odrzuceni: %s"
 
+#: views.py:899
 msgid "Your changes were saved."
 msgstr "Twoje zmiany zostały zapisane."
 
+#: views.py:1010
 msgid "Option"
 msgstr "Opcja"
 
+#: views.py:1033
 msgid "Motivation for applying"
 msgstr "Motywacja do złożenia aplikacji"
 
+#: views.py:1034
 msgid "Status"
 msgstr "Status"
 
+#: views.py:1038
 msgid "Contact E-Mail Address"
 msgstr "Kontaktowy adres e-mail"
 
+#: views.py:1042
 msgid "Contact Phone Number"
 msgstr "Numer telefonu kontaktowego"
 
+#: views.py:1087
 msgid "List of Applicants"
 msgstr "Lista osób aplikujących"
+
+#~ msgid "Conference Management"
+#~ msgstr "Zarządzanie Konferencją"
+
+#~ msgid "Workshop Participant File Upload"
+#~ msgstr "Wysłano Plik Uczestnika Warsztatów"
+
+#~ msgid ""
+#~ "Please upload a CSV with the following columns: unique user identifier, "
+#~ "first name, last name and one column for each workshop identified by the "
+#~ "workshop's slug. For Help you can download a template <a href="
+#~ "\"%(workshop_participants_upload_skeleton)s\">here</a>"
+#~ msgstr ""
+#~ "Proszę przesłać plik CSV z następującymi kolumnami: unikalny "
+#~ "identyfikator użytkownika, imię, nazwisko oraz jedna kolumna dla każdego "
+#~ "warsztatu identyfikowana przez jego hasło. Aby uzyskać pomoc, możesz "
+#~ "pobrać szablon <a href=\"%(workshop_participants_upload_skeleton)s"
+#~ "\">tutaj</a>"
+
+#~ msgid ""
+#~ "Then add a row for each account that you want to add. You have to add a "
+#~ "unique user identifier but first and last name can be blank. Then add a 1 "
+#~ "to all workshop columns where the user should be a normal member or a 2 "
+#~ "if that user should be workshop admin."
+#~ msgstr ""
+#~ "Następnie, dodaj wiersz dla każdego konta, które chcesz dodać. Musisz "
+#~ "dodać unikalny identyfikator użytkownika, ale imię i nazwisko mogą być "
+#~ "puste. Następnie dodaj 1 do wszystkich kolumn warsztatu, gdzie użytkownik "
+#~ "powinien być zwykłym członkiem lub 2, jeśli użytkownik powinien być "
+#~ "administratorem warsztatów."
+
+#~ msgid ""
+#~ "The CSV upload will trigger the creation of the accounts and account "
+#~ "workshop memberships and results in a direct CSV download with the newly "
+#~ "created accounts and passwords. The passwords will only be included when "
+#~ "the account is created. Please refresh the page after the download."
+#~ msgstr ""
+#~ "Przesłanie CSV spowoduje utworzenie kont i członkostwa w warsztatach, a w "
+#~ "rezultacie bezpośrednie pobranie CSV z nowo utworzonymi kontami i "
+#~ "hasłami. Hasła zostaną dołączone tylko wtedy, gdy zostanie utworzone "
+#~ "konto. Proszę odświeżyć stronę po pobraniu."
+
+#~ msgid "Upload File"
+#~ msgstr "Wyślij Plik"
+
+#~ msgid "Conference successfully started and user accounts activated"
+#~ msgstr ""
+#~ "Konferencja rozpoczęta pomyślnie a konta użytkownika zostały aktywowane"
+
+#~ msgid "Conference successfully finished and user accounts deactivated"
+#~ msgstr ""
+#~ "Konferencja zakończona pomyślnie a konta użytkownika zostały "
+#~ "zdezaktywowane"
+
+#~ msgid "Workshop username"
+#~ msgstr "Nazwa uczestnika warsztatu"
 
 #, fuzzy
 #~| msgid "End date must be before start date"
@@ -261,8 +390,12 @@ msgstr "Lista osób aplikujących"
 #~ msgid "Add workshop"
 #~ msgstr "Přidat workshop"
 
-#~ msgid "There was an error in one of the fields you entered. Please correct it before saving!"
-#~ msgstr "V jednom z polí, která jste zadali, došlo k chybě. Před uložením to prosím opravte!"
+#~ msgid ""
+#~ "There was an error in one of the fields you entered. Please correct it "
+#~ "before saving!"
+#~ msgstr ""
+#~ "V jednom z polí, která jste zadali, došlo k chybě. Před uložením to "
+#~ "prosím opravte!"
 
 #~ msgid "Add project"
 #~ msgstr "Přidat projekt"

@@ -589,50 +589,35 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
         reader = self.process_csv(csv_file)
         header = next(reader, None)
         cleaned_header = self.clean_row_data(header)
-
-        group_header = self.process_and_validate_header(cleaned_header)
         data = self.process_and_validate_data(reader)
 
         return {
             'header_original': cleaned_header,
-            'header': group_header,
             'data': data
         }
 
     def process_and_validate_data(self, reader):
         data = []
-        workshop_usernames = []
+        usernames = []
 
         for row in reader:
             cleaned_row = self.clean_row_data(row)
-            workshop_username = cleaned_row[0]
+            username = cleaned_row[0]
             first_name = cleaned_row[1]
+            if not username:
+                raise forms.ValidationError(_("Please always provide a username"))
             if not first_name:
                 raise forms.ValidationError(_("Please always provide a first name"))
-            if ' ' in workshop_username:
-                raise forms.ValidationError(_("Please remove the whitespace from '{}'").format(workshop_username))
-            if workshop_username not in workshop_usernames:
-                workshop_usernames.append(workshop_username)
+            if ' ' in username:
+                raise forms.ValidationError(_("Please remove the whitespace from '{}'").format(username))
+            if username not in usernames:
+                usernames.append(username)
             else:
                 raise forms.ValidationError(_("Names must be unique. You added '{}' more"
-                                              " then once to your CSV. Please change the name.").format(workshop_username))
+                                              " then once to your CSV. Please change the name.").format(username))
             data.append(self.clean_row_data(cleaned_row))
 
         return data
-
-    def process_and_validate_header(self, header):
-        group_header = ['', '', '']
-
-        for slug in header[3:]:
-                try:
-                    group = CosinnusGroup.objects.get(parent=self.group,
-                                                      portal=self.group.portal,
-                                                      type=CosinnusGroup.TYPE_PROJECT,
-                                                      slug=slug.lower())
-                    group_header.append(group)
-                except ObjectDoesNotExist:
-                    raise forms.ValidationError(_("Can't find workshop with slug '{}'").format(slug))
-        return group_header
 
     def process_csv(self, csv_file):
         try:

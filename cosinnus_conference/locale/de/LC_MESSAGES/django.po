@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 15:22+0200\n"
+"POT-Creation-Date: 2021-11-09 19:22+0100\n"
 "PO-Revision-Date: 2021-09-30 15:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,166 +18,287 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0\n"
 
+#: admin.py:29
 msgid "Restart"
 msgstr "Neu starten"
 
-msgid "Your conference is currently using the high performance premium servers!"
+#: api/serializers.py:174
+msgid ""
+"Your conference is currently using the high performance premium servers!"
 msgstr "Ihre Tagung benutzt momentan die leistungsstarke Premium-Server!"
 
-msgid "Your conference is currently not using the high performance premium servers, but has been assigned premium slots at other times."
-msgstr "Ihre Tagung benutzt momentan keine leistungsstarke Premium-Server. Ihr wurde jedoch einige Premium-Slots zu anderen Zeiten festgelegt."
+#: api/serializers.py:177
+msgid ""
+"Your conference is currently not using the high performance premium servers, "
+"but has been assigned premium slots at other times."
+msgstr ""
+"Ihre Tagung benutzt momentan keine leistungsstarke Premium-Server. Ihr wurde "
+"jedoch einige Premium-Slots zu anderen Zeiten festgelegt."
 
+#: api/serializers.py:189
 msgid "Your currently scheduled premium dates are:"
 msgstr "Ihre derzeitig geplante Premium-Zeiten sind:"
 
-msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
-msgstr "Deine Tagung befindet sich gerade noch im Probe-Modus. Du hast Zugriff auf alle Features, aber kannst diese nur mit wenigen Leuten uneingeschränkt nutzen. Um dir bei deiner Umsetzung mit mehreren Nutzer*innen die volle Leistung zu sichern, buche hier kostenlos ausreichend Kapazitäten:"
+#: api/serializers.py:191
+msgid ""
+"Your conference is still in trial mode. You have access to all features, but "
+"can only use them with a few people without restrictions. To ensure full "
+"performance for your conference with multiple users, book sufficient "
+"capacities here for free:"
+msgstr ""
+"Deine Tagung befindet sich gerade noch im Probe-Modus. Du hast Zugriff auf "
+"alle Features, aber kannst diese nur mit wenigen Leuten uneingeschränkt "
+"nutzen. Um dir bei deiner Umsetzung mit mehreren Nutzer*innen die volle "
+"Leistung zu sichern, buche hier kostenlos ausreichend Kapazitäten:"
 
+#: api/serializers.py:196
 msgid "Conference Bookings"
 msgstr "Tagungsbuchungen"
 
+#: cosinnus_app.py:17
 msgid "Conferences"
 msgstr "Tagungen"
 
+#: cosinnus_app.py:22
 msgctxt "the_app"
 msgid "conference"
 msgstr "Tagung"
 
+#: forms.py:228 views.py:1046
 msgid "First Choice"
 msgstr "Erste Wahl"
 
+#: forms.py:228 views.py:1047
 msgid "Second Choice"
 msgstr "Zweite Wahl"
 
+#: templates/cosinnus/conference/error_page.html:5
+#: templates/cosinnus/conference/error_page.html:13
 msgid "Server Error"
 msgstr "Serverfehler"
 
+#: templates/cosinnus/conference/error_page.html:16
 msgid "Error message:"
 msgstr "Inhalt des Fehlers:"
 
+#: templates/cosinnus/conference/error_page.html:24
 msgid "No error message supplied."
 msgstr "Im Fehler ist kein Inhalt vorhanden."
 
-msgid "Conference Management"
-msgstr "Tagungsmanagement"
-
-msgid "Workshop Participant File Upload"
-msgstr "Workshop-Teilnehmer Datei-Upload"
-
-#, python-format
-msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr "Bitte lade eine CSV-Datei mit den folgenden Spalten hoch: eindeutige Benutzerkennung, Vorname, Nachname und eine Spalte für jeden Workshop, die durch den Slug des Workshops gekennzeichnet ist. Zur Hilfe können Sie eine Vorlage <a href=\"%(workshop_participants_upload_skeleton)s\">hier</a> herunterladen"
-
-msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr "Füge dann für jedes Konto, das du hinzufügen möchtest, eine Zeile hinzu. Du musst eine eindeutige Benutzerkennung hinzufügen, aber Vor- und Nachname können leer sein. Füge dann allen Workshop-Spalten eine 1 hinzu, wenn der Benutzer ein normales Mitglied sein soll, oder eine 2, wenn dieser Benutzer Workshop-Admin sein soll."
-
-msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr "Der CSV-Upload löst die Erstellung der Konten und Konto-Workshop-Mitgliedschaften aus und führt zu einem direkten CSV-Download mit den neu erstellten Konten und Passwörtern. Die Passwörter werden erst beim Anlegen des Kontos mit einbezogen. Bitte aktualisiere die Seite nach dem Download."
-
-msgid "Upload File"
-msgstr "Datei hochladen"
-
+#: utils.py:80
 msgid "Go to conference"
 msgstr "Zur Tagung"
 
+#: views.py:78 views.py:687
 msgid "This function is not enabled for this conference."
 msgstr "Diese Funktion ist für diese Tagung nicht aktiviert."
 
-msgid "Conference successfully started and user accounts activated"
-msgstr "Tagung erfolgreich gestartet und Nutzerkonten aktiviert"
+#: views.py:103
+msgid "successfully activated all user accounts."
+msgstr "Nutzerkonten erfolgreich aktiviert"
 
-msgid "Conference successfully finished and user accounts deactivated"
-msgstr "Tagung erfolgreich beendet und Nutzerkonten deaktiviert"
+#: views.py:110
+msgid "successfully deactivated all user accounts."
+msgstr "Nutzerkonten erfolgreich deaktiviert"
 
+#: views.py:116
 msgid "Successfully deactivated user account"
 msgstr "Nutzerkonto erfolgreich deaktiviert"
 
+#: views.py:122
 msgid "Successfully activated user account"
 msgstr "Nutzerkonto erfolgreich aktiviert"
 
+#: views.py:128
 msgid "Successfully removed user"
 msgstr "Nutzerkonto erfolgreich entfern"
 
-msgid "User was not created"
-msgstr "Benutzer nicht generiert"
+#: views.py:133
+msgid "Successfully removed all user"
+msgstr "Nutzerkonten erfolgreich entfernt"
 
-msgid "Workshop username"
-msgstr "Workshop Benutzername"
+#: views.py:138 views.py:372 views.py:377
+msgid "Username"
+msgstr "Nutzername"
 
+#: views.py:138 views.py:372 views.py:1031
 msgid "First Name"
 msgstr "Vorname"
 
+#: views.py:139 views.py:372 views.py:1032
 msgid "Last Name"
 msgstr "Nachname"
 
+#: views.py:139
+msgid "Email"
+msgstr "E-mail"
+
+#: views.py:139
+msgid "Password"
+msgstr "Passwort"
+
+#: views.py:213
+msgid "Successfully created %(created_count)d account."
+msgid_plural "Successfully created  %(created_count)d accounts."
+msgstr[0] "%(created_count)d Nutzerkonten erfolgreich erstellt."
+msgstr[1] "%(created_count)d Nutzerkonto erfolgreich erstellt."
+
+#: views.py:230
+msgid "Successfully updated accounts."
+msgstr "Nutzerkonto erfolgreich aktualisiert."
+
+#: views.py:312
+msgid "User was not created"
+msgstr "Benutzer nicht generiert"
+
+#: views.py:478
 msgid "The room was created successfully."
 msgstr "Raum erfolgreich erstellt."
 
+#: views.py:500
 msgid "The room was saved successfully."
 msgstr "Raum erfolgreich gespeichert."
 
+#: views.py:518
 msgid "The room was deleted successfully."
 msgstr "Raum erfolgreich gelöscht."
 
+#: views.py:537
 msgid "The supplied Conference Room could not be found"
 msgstr "Gewünschter Tagungsraum nicht gefunden"
 
+#: views.py:545 views.py:591
 msgid "Conference reminder settings have been successfully updated."
-msgstr "Die Einstellungen für die Erinnerung an die Tagung wurden erfolgreich aktualisiert."
+msgstr ""
+"Die Einstellungen für die Erinnerung an die Tagung wurden erfolgreich "
+"aktualisiert."
 
+#: views.py:573
 msgid "A test email has been sent to your email address."
 msgstr "Es wurde eine Test-E-Mail an deine E-Mail-Adresse gesendet."
 
+#: views.py:617
 msgid "The message was sent to all participants."
 msgstr "Die Nachricht wurde an alle Tagungsteilnehmer geschickt."
 
+#: views.py:653
 msgid "Participation configurations have been updated."
 msgstr "Die Teilnahmekonfigurationen wurden aktualisiert."
 
+#: views.py:724
 msgid "Your application has been submitted."
 msgstr "Deine Anmeldung wurde eingereicht."
 
+#: views.py:729
 msgid "Your application has been updated."
 msgstr "Deine Anmeldung wurde aktualisiert."
 
+#: views.py:743
 msgid "You cannot change your application anymore."
 msgstr "Du kannst deine Anmeldung nicht mehr ändern."
 
+#: views.py:751
 msgid "Application has been withdrawn."
 msgstr "Die Anmeldung wurde zurückgezogen."
 
+#: views.py:893
 #, python-format
 msgid "The following users were accepted and added as members: %s"
-msgstr "Die folgenden Nutzer/innen wurden akzeptiert und als Teilnehmende bestätigt: %s"
+msgstr ""
+"Die folgenden Nutzer/innen wurden akzeptiert und als Teilnehmende bestätigt: "
+"%s"
 
+#: views.py:895
 #, python-format
 msgid "The following users were put on the wait list: %s"
 msgstr "Die folgenden Nutzer/innen wurden auf die Warteliste gesetzt: %s"
 
+#: views.py:897
 #, python-format
 msgid "The following users were declined: %s"
 msgstr "Die folgenden Nutzer/innen wurden abgelehnt: %s"
 
+#: views.py:899
 msgid "Your changes were saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#: views.py:1010
 msgid "Option"
 msgstr "Option"
 
+#: views.py:1033
 msgid "Motivation for applying"
 msgstr "Motivation für die Anmeldung"
 
+#: views.py:1034
 msgid "Status"
 msgstr "Status"
 
+#: views.py:1038
 msgid "Contact E-Mail Address"
 msgstr "Kontakt-E-Mail-Address"
 
+#: views.py:1042
 msgid "Contact Phone Number"
 msgstr "Kontakt-Telefonnummer"
 
+#: views.py:1087
 msgid "List of Applicants"
 msgstr "Liste der Antragssteller/innen"
+
+#~ msgid "Conference Management"
+#~ msgstr "Tagungsmanagement"
+
+#~ msgid "Workshop Participant File Upload"
+#~ msgstr "Workshop-Teilnehmer Datei-Upload"
+
+#~ msgid ""
+#~ "Please upload a CSV with the following columns: unique user identifier, "
+#~ "first name, last name and one column for each workshop identified by the "
+#~ "workshop's slug. For Help you can download a template <a href="
+#~ "\"%(workshop_participants_upload_skeleton)s\">here</a>"
+#~ msgstr ""
+#~ "Bitte lade eine CSV-Datei mit den folgenden Spalten hoch: eindeutige "
+#~ "Benutzerkennung, Vorname, Nachname und eine Spalte für jeden Workshop, "
+#~ "die durch den Slug des Workshops gekennzeichnet ist. Zur Hilfe können Sie "
+#~ "eine Vorlage <a href=\"%(workshop_participants_upload_skeleton)s\">hier</"
+#~ "a> herunterladen"
+
+#~ msgid ""
+#~ "Then add a row for each account that you want to add. You have to add a "
+#~ "unique user identifier but first and last name can be blank. Then add a 1 "
+#~ "to all workshop columns where the user should be a normal member or a 2 "
+#~ "if that user should be workshop admin."
+#~ msgstr ""
+#~ "Füge dann für jedes Konto, das du hinzufügen möchtest, eine Zeile hinzu. "
+#~ "Du musst eine eindeutige Benutzerkennung hinzufügen, aber Vor- und "
+#~ "Nachname können leer sein. Füge dann allen Workshop-Spalten eine 1 hinzu, "
+#~ "wenn der Benutzer ein normales Mitglied sein soll, oder eine 2, wenn "
+#~ "dieser Benutzer Workshop-Admin sein soll."
+
+#~ msgid ""
+#~ "The CSV upload will trigger the creation of the accounts and account "
+#~ "workshop memberships and results in a direct CSV download with the newly "
+#~ "created accounts and passwords. The passwords will only be included when "
+#~ "the account is created. Please refresh the page after the download."
+#~ msgstr ""
+#~ "Der CSV-Upload löst die Erstellung der Konten und Konto-Workshop-"
+#~ "Mitgliedschaften aus und führt zu einem direkten CSV-Download mit den neu "
+#~ "erstellten Konten und Passwörtern. Die Passwörter werden erst beim "
+#~ "Anlegen des Kontos mit einbezogen. Bitte aktualisiere die Seite nach dem "
+#~ "Download."
+
+#~ msgid "Upload File"
+#~ msgstr "Datei hochladen"
+
+#~ msgid "Conference successfully started and user accounts activated"
+#~ msgstr "Tagung erfolgreich gestartet und Nutzerkonten aktiviert"
+
+#~ msgid "Conference successfully finished and user accounts deactivated"
+#~ msgstr "Tagung erfolgreich beendet und Nutzerkonten deaktiviert"
+
+#~ msgid "Workshop username"
+#~ msgstr "Workshop Benutzername"
 
 #~ msgid "The start date must be before the end date"
 #~ msgstr "Das Startdatum muss vor dem Enddatum liegen"
@@ -284,29 +405,48 @@ msgstr "Liste der Antragssteller/innen"
 #~ msgid "Edit Room"
 #~ msgstr "Raum bearbeiten"
 
-#~ msgid "There was an error in one of the fields you entered. Please correct it before saving!"
-#~ msgstr "Es gibt einen Fehler in der Eingabe. Bitte korrigieren und erneut speichern!"
+#~ msgid ""
+#~ "There was an error in one of the fields you entered. Please correct it "
+#~ "before saving!"
+#~ msgstr ""
+#~ "Es gibt einen Fehler in der Eingabe. Bitte korrigieren und erneut "
+#~ "speichern!"
 
 #~ msgid "Room type"
 #~ msgstr "Raumtyp"
 
 #~ msgid "TODO: Room Type Lobby description text"
-#~ msgstr "Die Lobby ist der zentrale Einstiegspunkt für Teilnehmenden. Hier erscheint die Agenda der Tagung"
+#~ msgstr ""
+#~ "Die Lobby ist der zentrale Einstiegspunkt für Teilnehmenden. Hier "
+#~ "erscheint die Agenda der Tagung"
 
 #~ msgid "TODO: Room Type Stage description text"
-#~ msgstr "Die Bühne dient dazu, einen Stream einzubinden, z.B. aus YouTube oder Vimeo. Daneben erscheint ein Chat"
+#~ msgstr ""
+#~ "Die Bühne dient dazu, einen Stream einzubinden, z.B. aus YouTube oder "
+#~ "Vimeo. Daneben erscheint ein Chat"
 
 #~ msgid "TODO: Room Type Workshops description text"
-#~ msgstr "In Workshop-Räumen erhält jede Veranstaltung eine Videokonferenz. Diese können die Präsentierenden auch moderieren"
+#~ msgstr ""
+#~ "In Workshop-Räumen erhält jede Veranstaltung eine Videokonferenz. Diese "
+#~ "können die Präsentierenden auch moderieren"
 
 #~ msgid "TODO: Room Type Discussions description text"
-#~ msgstr "In Diskussions-Räumen erhält jede Veranstaltung eine Videokonferenz. Diese können die Präsentierenden auch moderieren. Unterscheidet sich von den Workshop-Räumen bislang ausschließlich in der Darstellung der Agenda. Workshop: Kacheln, Diskussionen: Liste"
+#~ msgstr ""
+#~ "In Diskussions-Räumen erhält jede Veranstaltung eine Videokonferenz. "
+#~ "Diese können die Präsentierenden auch moderieren. Unterscheidet sich von "
+#~ "den Workshop-Räumen bislang ausschließlich in der Darstellung der Agenda. "
+#~ "Workshop: Kacheln, Diskussionen: Liste"
 
 #~ msgid "TODO: Room Type Coffee Tables description text"
-#~ msgstr "Im Café kannst du beliebig viele Café-Tische erstellen. Dort können sich die Teilnehmenden begegnen und eine VideoTagung direkt mit Webcam und Mikrofon starten"
+#~ msgstr ""
+#~ "Im Café kannst du beliebig viele Café-Tische erstellen. Dort können sich "
+#~ "die Teilnehmenden begegnen und eine VideoTagung direkt mit Webcam und "
+#~ "Mikrofon starten"
 
 #~ msgid "TODO: Room Type Results description text"
-#~ msgstr "Binde ein Projekt ein, das du als Ergebnisspeicher bzw. zu Dokumentationszwecken nutzt"
+#~ msgstr ""
+#~ "Binde ein Projekt ein, das du als Ergebnisspeicher bzw. zu "
+#~ "Dokumentationszwecken nutzt"
 
 #~ msgid "Add project"
 #~ msgstr "Projekt hinzufügen"
@@ -317,19 +457,24 @@ msgstr "Liste der Antragssteller/innen"
 #~ msgid "Maximum Coffee Table Participants"
 #~ msgstr "Max. Anzahl Teilnehmer pro Café-Tisch"
 
-#~ msgid "How many participants should can join one coffee table before it is full"
+#~ msgid ""
+#~ "How many participants should can join one coffee table before it is full"
 #~ msgstr "Wie viele Teilnehmer an einem Café-Tisch Platz nehmen dürfen"
 
 #~ msgid "Allow users to create new coffee tables"
 #~ msgstr "Benutzern erlauben Café-Tische anzulegen"
 
 #~ msgid "Enable this to allow users to create their own coffee tables"
-#~ msgstr "Aktiviere dies, um Teilnehmenden zu ermöglichen, eigene Café-Tische zu erstellen"
+#~ msgstr ""
+#~ "Aktiviere dies, um Teilnehmenden zu ermöglichen, eigene Café-Tische zu "
+#~ "erstellen"
 
 #~ msgid "Result Project"
 #~ msgstr "Ergebnis-Projekt"
 
-#~ msgid "Choose one of the sub-projects of this group to display as nested results-project for participants"
+#~ msgid ""
+#~ "Choose one of the sub-projects of this group to display as nested results-"
+#~ "project for participants"
 #~ msgstr "Wähle eines dieser Projekte als Ergebnis-Projekt"
 
 #~ msgid "Title"
@@ -338,20 +483,32 @@ msgstr "Liste der Antragssteller/innen"
 #~ msgid "Sort index"
 #~ msgstr "Sortierungsnummer"
 
-#~ msgid "Number by which rooms are sorted in ascending order in the conference room navigation list"
-#~ msgstr "Räume werden anhand dieser Nummer aufsteigend sortiert und erscheinen so in der Raum-Navigation"
+#~ msgid ""
+#~ "Number by which rooms are sorted in ascending order in the conference "
+#~ "room navigation list"
+#~ msgstr ""
+#~ "Räume werden anhand dieser Nummer aufsteigend sortiert und erscheinen so "
+#~ "in der Raum-Navigation"
 
 #~ msgid "Description"
 #~ msgstr "Beschreibung"
 
-#~ msgid "A short description or topic for your room. Will be shown on top of the room page."
-#~ msgstr "Kurze Beschreibung oder Thema des Raums. Erscheint auf der Raum-Seite ganz oben."
+#~ msgid ""
+#~ "A short description or topic for your room. Will be shown on top of the "
+#~ "room page."
+#~ msgstr ""
+#~ "Kurze Beschreibung oder Thema des Raums. Erscheint auf der Raum-Seite "
+#~ "ganz oben."
 
 #~ msgid "Room is visible"
 #~ msgstr "Raum ist sichtbar"
 
-#~ msgid "Uncheck this to hide the room for participants (you will still be able to see it)"
-#~ msgstr "Häkchen entfernen, um Raum für Teilnehmende zu verstecken (Du wirst den Raum weiterhin sehen)"
+#~ msgid ""
+#~ "Uncheck this to hide the room for participants (you will still be able to "
+#~ "see it)"
+#~ msgstr ""
+#~ "Häkchen entfernen, um Raum für Teilnehmende zu verstecken (Du wirst den "
+#~ "Raum weiterhin sehen)"
 
 #~ msgid "Save"
 #~ msgstr "Speichern"
