@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 19:32+0100\n"
+"POT-Creation-Date: 2021-11-11 14:48+0100\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5211,9 +5211,9 @@ msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με
 
 #: templates/cosinnus/conference/conference_temporary_users.html:146
 #, fuzzy
-#| msgid "Workshop username"
-msgid "name and email"
-msgstr "Όνομα χρήστη σεμιναρίου"
+#| msgid "Lastname"
+msgid "name"
+msgstr "Επίθετο"
 
 #: templates/cosinnus/conference/conference_temporary_users.html:147
 #: templates/cosinnus/user_dashboard_announcement/list_object.html:34
@@ -5256,56 +5256,44 @@ msgstr "Απενεργοποίηση"
 msgid "activate"
 msgstr "Απενεργοποίηση"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:222
+#: templates/cosinnus/conference/conference_temporary_users.html:229
 #, fuzzy
-#| msgid "Password reset"
-msgid "Password set"
+#| msgid "Reset password"
+msgid "(re)set password"
 msgstr "Επαναφορά κωδικού πρόσβασης"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:224
-#, fuzzy
-#| msgid "Password"
-msgid "no Password"
-msgstr "Κωδικός πρόσβασης"
-
-#: templates/cosinnus/conference/conference_temporary_users.html:240
-#, fuzzy
-#| msgid "Set my password"
-msgid "Set password"
-msgstr "Ορισμός του κωδικού πρόσβασής μου"
-
-#: templates/cosinnus/conference/conference_temporary_users.html:253
+#: templates/cosinnus/conference/conference_temporary_users.html:242
 msgid "Do you really want to deactivate the member's user account ?"
 msgstr ""
 "Είστε βέβαιοι ότι θέλετε να απενεργοποιήσετε τον λογαριασμό χρήστη του "
 "μέλους;"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:254
+#: templates/cosinnus/conference/conference_temporary_users.html:243
 msgid "Deactivate Member"
 msgstr "Απενεργοποίηση Μέλους"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:259
+#: templates/cosinnus/conference/conference_temporary_users.html:248
 msgid "Do you really want to activate the member's user account ?"
 msgstr ""
 "Είστε βέβαιοι ότι θέλετε να ενεργοποιήσετε τον λογαριασμό χρήστη του μέλους;"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:260
+#: templates/cosinnus/conference/conference_temporary_users.html:249
 msgid "Activate Member"
 msgstr "Ενεργοποίηση Μέλους"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:265
+#: templates/cosinnus/conference/conference_temporary_users.html:254
 msgid "Do you really want to remove the user?"
 msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον χρήστη;"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:266
+#: templates/cosinnus/conference/conference_temporary_users.html:255
 msgid "Remove User"
 msgstr "Αφαίρεση Χρήστη"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:283
+#: templates/cosinnus/conference/conference_temporary_users.html:272
 msgid "Download Statistics"
 msgstr "Λήψη Στατιστικών"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:340
+#: templates/cosinnus/conference/conference_temporary_users.html:329
 #: templates/cosinnus/registration/password_reset_confirm.html:36
 #: templates/cosinnus/registration/password_reset_confirm.html:44
 msgid "New password"
@@ -12755,6 +12743,26 @@ msgstr ""
 #: views/widget.py:342
 msgid "Your changes have been saved."
 msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
+
+#, fuzzy
+#~| msgid "Workshop username"
+#~ msgid "name and email"
+#~ msgstr "Όνομα χρήστη σεμιναρίου"
+
+#, fuzzy
+#~| msgid "Password reset"
+#~ msgid "Password set"
+#~ msgstr "Επαναφορά κωδικού πρόσβασης"
+
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "no Password"
+#~ msgstr "Κωδικός πρόσβασης"
+
+#, fuzzy
+#~| msgid "Set my password"
+#~ msgid "Set password"
+#~ msgstr "Ορισμός του κωδικού πρόσβασής μου"
 
 #~ msgid "Can't find workshop with slug '{}'"
 #~ msgstr "Δεν μπορώ να βρω σεμινάριο με slug '{}'"

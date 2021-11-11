@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 19:32+0100\n"
+"POT-Creation-Date: 2021-11-11 14:48+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -5227,9 +5227,9 @@ msgstr "Повторно активуйте облікові записи кор
 
 #: templates/cosinnus/conference/conference_temporary_users.html:146
 #, fuzzy
-#| msgid "Workshop username"
-msgid "name and email"
-msgstr "Назва учасника воркшопу"
+#| msgid "Lastname"
+msgid "name"
+msgstr "Прізвище"
 
 #: templates/cosinnus/conference/conference_temporary_users.html:147
 #: templates/cosinnus/user_dashboard_announcement/list_object.html:34
@@ -5272,53 +5272,41 @@ msgstr "Деактивувати"
 msgid "activate"
 msgstr "Деактивувати"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:222
+#: templates/cosinnus/conference/conference_temporary_users.html:229
 #, fuzzy
-#| msgid "Password reset"
-msgid "Password set"
+#| msgid "Reset password"
+msgid "(re)set password"
 msgstr "Змінити пароль"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:224
-#, fuzzy
-#| msgid "Password"
-msgid "no Password"
-msgstr "Пароль"
-
-#: templates/cosinnus/conference/conference_temporary_users.html:240
-#, fuzzy
-#| msgid "Set my password"
-msgid "Set password"
-msgstr "Встановити мій пароль"
-
-#: templates/cosinnus/conference/conference_temporary_users.html:253
+#: templates/cosinnus/conference/conference_temporary_users.html:242
 msgid "Do you really want to deactivate the member's user account ?"
 msgstr "Ви дійсно хочете деактивувати обліковий запис користувача учасника?"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:254
+#: templates/cosinnus/conference/conference_temporary_users.html:243
 msgid "Deactivate Member"
 msgstr "деактивувати учасника"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:259
+#: templates/cosinnus/conference/conference_temporary_users.html:248
 msgid "Do you really want to activate the member's user account ?"
 msgstr "Ви дійсно хочете активувати обліковий запис користувача учасника?"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:260
+#: templates/cosinnus/conference/conference_temporary_users.html:249
 msgid "Activate Member"
 msgstr "активувати учасника"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:265
+#: templates/cosinnus/conference/conference_temporary_users.html:254
 msgid "Do you really want to remove the user?"
 msgstr "Ви дійсно хочете видалити користувача?"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:266
+#: templates/cosinnus/conference/conference_temporary_users.html:255
 msgid "Remove User"
 msgstr "видалити користувача"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:283
+#: templates/cosinnus/conference/conference_temporary_users.html:272
 msgid "Download Statistics"
 msgstr "Завантажити статистику"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:340
+#: templates/cosinnus/conference/conference_temporary_users.html:329
 #: templates/cosinnus/registration/password_reset_confirm.html:36
 #: templates/cosinnus/registration/password_reset_confirm.html:44
 msgid "New password"
@@ -12702,6 +12690,26 @@ msgstr ""
 #: views/widget.py:342
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#, fuzzy
+#~| msgid "Workshop username"
+#~ msgid "name and email"
+#~ msgstr "Назва учасника воркшопу"
+
+#, fuzzy
+#~| msgid "Password reset"
+#~ msgid "Password set"
+#~ msgstr "Змінити пароль"
+
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "no Password"
+#~ msgstr "Пароль"
+
+#, fuzzy
+#~| msgid "Set my password"
+#~ msgid "Set password"
+#~ msgstr "Встановити мій пароль"
 
 #~ msgid "Can't find workshop with slug '{}'"
 #~ msgstr "Не вдалося знайти воркшоп з елементом '{}'"

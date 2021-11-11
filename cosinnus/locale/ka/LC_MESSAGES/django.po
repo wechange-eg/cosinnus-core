@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 19:32+0100\n"
+"POT-Creation-Date: 2021-11-11 14:48+0100\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5093,8 +5093,9 @@ msgid "remove user accounts"
 msgstr "მომხმარებლის ანგარიშის წაშლა"
 
 #: templates/cosinnus/conference/conference_temporary_users.html:146
-msgid "name and email"
-msgstr ""
+#, fuzzy
+msgid "name"
+msgstr "გვარი"
 
 #: templates/cosinnus/conference/conference_temporary_users.html:147
 #: templates/cosinnus/user_dashboard_announcement/list_object.html:34
@@ -5139,59 +5140,48 @@ msgstr "დეაქტივაცია"
 msgid "activate"
 msgstr "დეაქტივაცია"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:222
+#: templates/cosinnus/conference/conference_temporary_users.html:229
 #, fuzzy
-#| msgid "Password reset"
-msgid "Password set"
+#| msgid "Reset password"
+msgid "(re)set password"
 msgstr "პაროლის გადაყენება"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:224
-#, fuzzy
-#| msgid "Password"
-msgid "no Password"
-msgstr "პაროლი"
-
-#: templates/cosinnus/conference/conference_temporary_users.html:240
-#, fuzzy
-msgid "Set password"
-msgstr "შეცვალეთ პაროლი"
-
-#: templates/cosinnus/conference/conference_temporary_users.html:253
+#: templates/cosinnus/conference/conference_temporary_users.html:242
 #, fuzzy
 msgid "Do you really want to deactivate the member's user account ?"
 msgstr "ნამდვილად გსურთ მოწვევაზე უარის თქმა?"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:254
+#: templates/cosinnus/conference/conference_temporary_users.html:243
 #, fuzzy
 msgid "Deactivate Member"
 msgstr "წევრისათვის უარის თქმა"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:259
+#: templates/cosinnus/conference/conference_temporary_users.html:248
 #, fuzzy
 msgid "Do you really want to activate the member's user account ?"
 msgstr "ნამდვილად გსურთ მოწვევაზე უარის თქმა?"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:260
+#: templates/cosinnus/conference/conference_temporary_users.html:249
 #, fuzzy
 msgid "Activate Member"
 msgstr "წევრისათვის დათანხმება"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:265
+#: templates/cosinnus/conference/conference_temporary_users.html:254
 #, fuzzy
 msgid "Do you really want to remove the user?"
 msgstr "ნამდვილად გსურთ დატოვოთ  „%(title)s“?"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:266
+#: templates/cosinnus/conference/conference_temporary_users.html:255
 #, fuzzy
 msgid "Remove User"
 msgstr "წევრის ამოშლა"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:283
+#: templates/cosinnus/conference/conference_temporary_users.html:272
 #, fuzzy
 msgid "Download Statistics"
 msgstr "უბრალო სტატისტიკა"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:340
+#: templates/cosinnus/conference/conference_temporary_users.html:329
 #: templates/cosinnus/registration/password_reset_confirm.html:36
 #: templates/cosinnus/registration/password_reset_confirm.html:44
 msgid "New password"
@@ -12558,6 +12548,20 @@ msgstr "თქვენ არ ხართ %s-ის წევრი! თუ �
 #: views/widget.py:342
 msgid "Your changes have been saved."
 msgstr "თქვენი ცვლილებები შენახულია."
+
+#, fuzzy
+#~| msgid "Password reset"
+#~ msgid "Password set"
+#~ msgstr "პაროლის გადაყენება"
+
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "no Password"
+#~ msgstr "პაროლი"
+
+#, fuzzy
+#~ msgid "Set password"
+#~ msgstr "შეცვალეთ პაროლი"
 
 #, fuzzy
 #~ msgid "Conference is not running"

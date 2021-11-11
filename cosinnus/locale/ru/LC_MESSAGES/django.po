@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 19:32+0100\n"
+"POT-Creation-Date: 2021-11-11 14:48+0100\n"
 "PO-Revision-Date: 2021-10-01 19:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -5238,9 +5238,9 @@ msgstr "Активировать пользовательские аккаунт
 
 #: templates/cosinnus/conference/conference_temporary_users.html:146
 #, fuzzy
-#| msgid "Workshop username"
-msgid "name and email"
-msgstr "Название воркшопа"
+#| msgid "Lastname"
+msgid "name"
+msgstr "Фамилия"
 
 #: templates/cosinnus/conference/conference_temporary_users.html:147
 #: templates/cosinnus/user_dashboard_announcement/list_object.html:34
@@ -5283,53 +5283,41 @@ msgstr "Деактивировать"
 msgid "activate"
 msgstr "Деактивировать"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:222
+#: templates/cosinnus/conference/conference_temporary_users.html:229
 #, fuzzy
-#| msgid "Password reset"
-msgid "Password set"
+#| msgid "Reset password"
+msgid "(re)set password"
 msgstr "Переустановить пароль"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:224
-#, fuzzy
-#| msgid "Password"
-msgid "no Password"
-msgstr "Пароль"
-
-#: templates/cosinnus/conference/conference_temporary_users.html:240
-#, fuzzy
-#| msgid "Set my password"
-msgid "Set password"
-msgstr "Изменить мой пароль"
-
-#: templates/cosinnus/conference/conference_temporary_users.html:253
+#: templates/cosinnus/conference/conference_temporary_users.html:242
 msgid "Do you really want to deactivate the member's user account ?"
 msgstr "Вы действительно хотите отклонить приглашение?"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:254
+#: templates/cosinnus/conference/conference_temporary_users.html:243
 msgid "Deactivate Member"
 msgstr "Отклонить заявку"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:259
+#: templates/cosinnus/conference/conference_temporary_users.html:248
 msgid "Do you really want to activate the member's user account ?"
 msgstr "Вы действительно хотите отклонить приглашение?"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:260
+#: templates/cosinnus/conference/conference_temporary_users.html:249
 msgid "Activate Member"
 msgstr "Принять пользователя"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:265
+#: templates/cosinnus/conference/conference_temporary_users.html:254
 msgid "Do you really want to remove the user?"
 msgstr "Вы действительно хотите покинуть проект „%(title)s“?"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:266
+#: templates/cosinnus/conference/conference_temporary_users.html:255
 msgid "Remove User"
 msgstr "Удалить пользователя из проекта"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:283
+#: templates/cosinnus/conference/conference_temporary_users.html:272
 msgid "Download Statistics"
 msgstr "Простая статистика"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:340
+#: templates/cosinnus/conference/conference_temporary_users.html:329
 #: templates/cosinnus/registration/password_reset_confirm.html:36
 #: templates/cosinnus/registration/password_reset_confirm.html:44
 msgid "New password"
@@ -12751,6 +12739,26 @@ msgstr ""
 #: views/widget.py:342
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
+
+#, fuzzy
+#~| msgid "Workshop username"
+#~ msgid "name and email"
+#~ msgstr "Название воркшопа"
+
+#, fuzzy
+#~| msgid "Password reset"
+#~ msgid "Password set"
+#~ msgstr "Переустановить пароль"
+
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "no Password"
+#~ msgstr "Пароль"
+
+#, fuzzy
+#~| msgid "Set my password"
+#~ msgid "Set password"
+#~ msgstr "Изменить мой пароль"
 
 #~ msgid "Can't find workshop with slug '{}'"
 #~ msgstr "Не найден воркшоп с идентификатором '{}'"

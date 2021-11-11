@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 19:32+0100\n"
+"POT-Creation-Date: 2021-11-11 14:48+0100\n"
 "PO-Revision-Date: 2021-09-29 12:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -5400,9 +5400,9 @@ msgstr "تم تنشيط حساب المستخدم بنجاح"
 
 #: templates/cosinnus/conference/conference_temporary_users.html:146
 #, fuzzy
-#| msgid "Workshop username"
-msgid "name and email"
-msgstr "اسم مستخدم ورشة العمل"
+#| msgid "Lastname"
+msgid "name"
+msgstr "اسم العائلة"
 
 #: templates/cosinnus/conference/conference_temporary_users.html:147
 #: templates/cosinnus/user_dashboard_announcement/list_object.html:34
@@ -5445,55 +5445,43 @@ msgstr "تعطيل"
 msgid "activate"
 msgstr "تعطيل"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:222
+#: templates/cosinnus/conference/conference_temporary_users.html:229
 #, fuzzy
-#| msgid "Password reset"
-msgid "Password set"
+#| msgid "Reset password"
+msgid "(re)set password"
 msgstr "إعادة تعيين كلمة سر"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:224
-#, fuzzy
-#| msgid "Password"
-msgid "no Password"
-msgstr "كلمة السر"
-
-#: templates/cosinnus/conference/conference_temporary_users.html:240
-#, fuzzy
-#| msgid "Set my password"
-msgid "Set password"
-msgstr "غيّر كلمة السر الخاصة بي"
-
-#: templates/cosinnus/conference/conference_temporary_users.html:253
+#: templates/cosinnus/conference/conference_temporary_users.html:242
 msgid "Do you really want to deactivate the member's user account ?"
 msgstr "هل تريد حقًا إلغاء تنشيط حساب المستخدم الخاص بالعضو؟"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:254
+#: templates/cosinnus/conference/conference_temporary_users.html:243
 msgid "Deactivate Member"
 msgstr "تم إلغاء تنشيط العضو"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:259
+#: templates/cosinnus/conference/conference_temporary_users.html:248
 msgid "Do you really want to activate the member's user account ?"
 msgstr "هل تريد فعلاً تفعيل حساب المستخدم الخاص بالعضو؟"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:260
+#: templates/cosinnus/conference/conference_temporary_users.html:249
 msgid "Activate Member"
 msgstr "تفعيل العضو"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:265
+#: templates/cosinnus/conference/conference_temporary_users.html:254
 #, fuzzy
 #| msgid "Do you really want to decline the invitation?"
 msgid "Do you really want to remove the user?"
 msgstr "هل تريد حقًا رفض الدعوة؟"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:266
+#: templates/cosinnus/conference/conference_temporary_users.html:255
 msgid "Remove User"
 msgstr "إزالة المستخدم"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:283
+#: templates/cosinnus/conference/conference_temporary_users.html:272
 msgid "Download Statistics"
 msgstr "تنزيل الإحصائيات"
 
-#: templates/cosinnus/conference/conference_temporary_users.html:340
+#: templates/cosinnus/conference/conference_temporary_users.html:329
 #: templates/cosinnus/registration/password_reset_confirm.html:36
 #: templates/cosinnus/registration/password_reset_confirm.html:44
 msgid "New password"
@@ -12895,6 +12883,26 @@ msgstr "أنت لست عضوًا حاليًا في %s! إذا كنت ترغب ف
 #: views/widget.py:342
 msgid "Your changes have been saved."
 msgstr "تم حفظ التغييرات."
+
+#, fuzzy
+#~| msgid "Workshop username"
+#~ msgid "name and email"
+#~ msgstr "اسم مستخدم ورشة العمل"
+
+#, fuzzy
+#~| msgid "Password reset"
+#~ msgid "Password set"
+#~ msgstr "إعادة تعيين كلمة سر"
+
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "no Password"
+#~ msgstr "كلمة السر"
+
+#, fuzzy
+#~| msgid "Set my password"
+#~ msgid "Set password"
+#~ msgstr "غيّر كلمة السر الخاصة بي"
 
 #, fuzzy
 #~ msgid "Can't find workshop with slug '{}'"
