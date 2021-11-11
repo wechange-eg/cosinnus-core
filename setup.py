@@ -104,6 +104,7 @@ setup(
         'numpy==1.14.5',
         'oauthlib==3.0.1',
         'paramiko==2.4.2',
+        'pycountry==20.7.3',
         'pycrypto==2.6.1',
         'redis==2.10.6',
         'requests==2.20.0',

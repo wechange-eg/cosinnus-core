@@ -191,8 +191,9 @@
 					        {% endwith %}
 			            {% endif %}
                     {% endblock %}
-		            
+
 		            {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
+					{% block extra_fields %}{% endblock %}
 	            {% endblock userprofile_content %}
 			</div><!-- content-box -->
 			{% endblock %}
