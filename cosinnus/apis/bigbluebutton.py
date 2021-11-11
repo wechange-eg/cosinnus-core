@@ -59,8 +59,8 @@ class BigBlueButtonAPI(object):
         current_portal = CosinnusPortal.get_current()
         if source_object is None:
             source_object = current_portal
-        conference_settings = CosinnusConferenceSettings.get_for_object(source_object)
         
+        conference_settings = CosinnusConferenceSettings.get_for_object(source_object)
         if conference_settings:
             try:
                 # find if the srouce object belongs to or is a group with premium status active
@@ -75,6 +75,7 @@ class BigBlueButtonAPI(object):
                             found_group = checked_parent
                             break
                         checked_parent = get_parent_object_in_conference_setting_chain(checked_parent)
+                        
                         if checked_parent is None:
                             break
                     # if we have found a group, and that group has a premium status, we use 
@@ -87,6 +88,8 @@ class BigBlueButtonAPI(object):
             except Exception as e:
                 logger.error('Misconfigured: Either COSINNUS_BBB_SERVER_CHOICES or COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS are not properly set up!',
                              extra={'exception': e})
+                if settings.DEBUG:
+                    raise
         
         return (None, None)
     

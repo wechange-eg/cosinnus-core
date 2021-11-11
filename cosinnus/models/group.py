@@ -902,9 +902,9 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
             encoder=DjangoJSONEncoder)  
     sdgs = PostgresJSONField(default=list, blank=True, null=True)
     
-    managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
-    conference_settings_assignments = GenericRelation('cosinnus.CosinnusConferenceSettings')
     show_contact_form = models.BooleanField(default=False, help_text=_('If set to true, a contact form will be displayed on the micropage.'))
+    
+    managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     
     objects = CosinnusGroupManager()
 

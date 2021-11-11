@@ -35,7 +35,6 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
         
         # check if microsite/group is really publicly accesible; if not, redirect after all
         if not self.request.user.is_authenticated and not self.group.is_publicly_visible:
-            print(f'{self.request.GET.get("next")} - {self.request.path}')
             return redirect_to_not_logged_in(self.request, group=self.group)
         return ret
     

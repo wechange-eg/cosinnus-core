@@ -1180,7 +1180,81 @@ class CosinnusDefaultSettings(AppConf):
         2: {},
         3: {},
     }
+    
+    """
+    The configuration of BBB join/create params
+    for the field presets in `CosinnusConferenceSettings`.
+    - dict keys for the fields correspond to 
+        0: `CosinnusConferenceSettings.SETTING_NO`
+        1: `CosinnusConferenceSettings.SETTING_YES`
+    - sub-dict keys for the dicts correspond to
+        'create' the BBB API create call
+        'join': the BBB join URL params
+    
+    Full example for a single field (value keys and create/join keys
+    may be empty or missing for non-options):
+    
+        'auto_mic': {
+            0: {
+                'create': {
+                    'param1': 'false',
+                },
+                'join': {
+                    'param2': 'false',
+                },
+            },
+            1: {
+                'create': {
+                    'param1': 'true',
+                },
+                'join': {
+                    'param2': 'true',
+                },
+            },
+        },
+    """
+    BBB_PRESET_FORM_FIELD_PARAMS = {
+        'mic_starts_on': {
+            0: {
+                'create': {
+                    'muteOnStart': 'true',
+                },
+            },
+        },
+        'cam_starts_on': {
+            1: {
+                'join': {
+                    'userdata-bbb_auto_share_webcam': 'true',
+                },
+            },
+        },
+    }
+    
+    # the default baseline portal values for the form field presets
+    # from BBB_PRESET_FORM_FIELD_PARAMS. choose from a value of
+    # 0: `CosinnusConferenceSettings.SETTING_NO`
+    # 1: `CosinnusConferenceSettings.SETTING_YES`
+    BBB_PRESET_FORM_FIELD_PORTAL_DEFAULTS = {
+        'mic_starts_on': 1,
+        'cam_starts_on': 1,
+    }
+    
+    # a list of field names from fields in `CosinnusConferenceSettings`
+    # that should NOT be shown in the BBB forms and admin as inheritable
+    # changable choices
+    BBB_PRESET_FORM_FIELDS_DISABLED = []
+    
+    # a list of field names from fields in fields in `CosinnusConferenceSettings`
+    # that will be shown to the users in the frontend Event forms as choices
+    # for presets for BBB rooms
+    BBB_PRESET_USER_FORM_FIELDS = [
+        'mic_starts_on',
+        'cam_starts_on',
+    ]
+    
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
+    
+    
 
     TEMP_USER_EMAIL_DOMAIN = ''

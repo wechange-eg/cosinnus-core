@@ -29,6 +29,7 @@ from pip._internal.cli.cmdoptions import editable
 from cosinnus.utils.functions import clean_single_line_text
 from django.template.defaultfilters import truncatechars
 from cosinnus.models.membership import MEMBERSHIP_MEMBER, MANAGER_STATUS
+from cosinnus.models.conference import CosinnusConferenceSettings
 
 
 # from cosinnus.models import MEMBERSHIP_ADMIN
@@ -116,7 +117,7 @@ class BBBRoom(models.Model):
     # deprecated in favor of deriving create options directly from the source event!
     max_participants = models.PositiveIntegerField(blank=True, null=True, default=None, verbose_name="maximum number of users",
                                                    editable=False,
-                                                   help_text="Maximum number in the conference at the same time. NOTE: Seems this needs to be +1 more the number that you actually want for BBB to allow!")
+                                                   help_text="DEPRECATED! Maximum number in the conference at the same time. NOTE: Seems this needs to be +1 more the number that you actually want for BBB to allow!")
     
     
     objects = models.Manager()
@@ -399,6 +400,8 @@ class BBBRoom(models.Model):
         params = {}
         params.update(settings.BBB_DEFAULT_CREATE_PARAMETERS)
         params.update(settings.BBB_ROOM_TYPE_EXTRA_CREATE_PARAMETERS.get(source_object.get_bbb_room_type()))
+        # add the source object's options from all inherited settings objects
+        params.update(cls._get_bbb_extra_params_for_api_call('create', source_object))
         # special: the max_participants is currently finally derived from the source event
         max_participants = source_object.get_max_participants() # see `BBBRoomMixin.get_max_participants`
         if max_participants:
@@ -414,11 +417,36 @@ class BBBRoom(models.Model):
         params = {}
         params.update(settings.BBB_DEFAULT_JOIN_PARAMETERS)
         params.update(settings.BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS.get(self.room_type))
+        # add the source object's options from all inherited settings objects
+        params.update(self._meta.model._get_bbb_extra_params_for_api_call('join', self.source_object))
+        # add the user's avatar from their profile
         if user.cosinnus_profile.avatar:
             domain = CosinnusPortal.get_current().get_domain()
             params.update({
                 'avatarURL': domain + user.cosinnus_profile.get_avatar_thumbnail_url(size=(800,800))
             })
+        return params
+    
+    @classmethod
+    def _get_bbb_extra_params_for_api_call(cls, api_call_method, source_object):
+        """ Collect all BBB extra params for a specific api call method,
+            as set by the collected inherited CosinnusConferenceSettings
+            for the `source_object` and all of its ancestors in the settings inheritance chain.
+            @param api_call_method: the BBB API-method, such as 'create' or 'join'. this determines,
+                which params are selected from the configured `settings.BBB_PRESET_FORM_FIELD_PARAMS`
+                for each field_name in the settings presets
+            @param source_object: the source object from which the inheritance chain starts """
+        params = {}
+        # add the source object's options from all inherited settings objects
+        value_choices_dict = CosinnusConferenceSettings.get_bbb_preset_form_field_values_for_object(source_object)
+        
+        for field_name, bbb_options_dict in settings.BBB_PRESET_FORM_FIELD_PARAMS.items():
+            # we now know which option the setting should use, so return any params to be used for the specific api call
+            if field_name not in value_choices_dict:
+                continue
+            value_options_dict = bbb_options_dict.get(value_choices_dict[field_name], {})
+            api_call_params = value_options_dict.get(api_call_method, {})
+            params.update(api_call_params)
         return params
     
     def get_join_url(self, user):

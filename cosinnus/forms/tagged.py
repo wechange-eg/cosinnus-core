@@ -221,6 +221,14 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}, init_func
             if init_func:
                 init_func(self)
             
+            # give a back-reference to the multiform to each individual form
+            for _name, form in self.forms.items():
+                setattr(form, 'multiform', self)
+                # call the `post_init` funnction on the sub-form if it exists
+                post_init = getattr(form, 'post_init', None)
+                if callable(post_init):
+                    post_init()
+            
         # attach any extra form classes
         for form_name, form_class in list(base_extra_forms.items()):
             base_forms[form_name] = form_class

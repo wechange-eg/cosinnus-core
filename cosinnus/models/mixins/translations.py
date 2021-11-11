@@ -47,7 +47,7 @@ class TranslateableFieldsModelMixin(models.Model):
         for field_name in self.get_translateable_fields():
             # set translated field value
             setattr(readonly_copy, field_name, self[field_name])
-            # replace writing functions
-            setattr(readonly_copy, 'save', _protected_func)
-            setattr(readonly_copy, 'delete', _protected_func)
+        # replace writing functions
+        setattr(readonly_copy, 'save', _protected_func)
+        setattr(readonly_copy, 'delete', _protected_func)
         return readonly_copy
