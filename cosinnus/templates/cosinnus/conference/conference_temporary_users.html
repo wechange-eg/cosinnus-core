@@ -69,7 +69,7 @@
 		<p>{% trans "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants. Passwords are not stored in the system and can be downloaded only once!" %}</p>
 	</div>
 	<div class="fadedown pull-right large-space">
-		<button type="button" class="btn btn-emphasized btn-autosize large-space" data-toggle="modal" data-target="#download_credentials">
+		<button type="button" id="credentials-download-button" class="btn btn-emphasized {% if not download_passwords %} disabled {% endif %} btn-autosize large-space" data-toggle="modal" data-target="#download_credentials">
 			<ul class="media-list">
 				<li class="media">
 					<a class="pull-left" href="#">
@@ -218,26 +218,15 @@
 			</th>
 			<th>
 				<div class="pull-left">
-					{% if member.password %}
-						{% trans "Password set" %}
-					{% else %}
-						{% trans "no Password" %}
-					{% endif %}
-				</div>
-				<div class="pull-left">
 					{% captureas modal_change_password_id %}userModal_change_password_{{member.pk}}{% endcaptureas %}
 					<button type="button" class="btn btn-default btn-small btn-autosize large-space" onclick="setPassword({{ member.id }})">
 						<ul class="media-list">
 							<li class="media">
 								<a class="pull-left" href="#">
-									{% if member.password %}
-										<i class="fa fa-key" aria-hidden="true"></i>
-									{% else %}
-										<i class="fa fa-question" aria-hidden="true"></i>
-									{% endif %}
+									<i class="fa fa-key" aria-hidden="true"></i>
 								</a>
 								<div class="media-body">
-									{% trans "Set password" %}
+									{% trans "(re)set password" %}
 								</div>
 							</li>
 						</ul>
@@ -343,5 +332,12 @@ TODO: remove this feature properly when we refactor this!
   			}
 		);
 	}
+
+	$(document).ready(function() {
+        $('#download_credentials_btnsubmit').click(function(event){
+            $('#download_credentials').modal('hide');
+			$('#credentials-download-button').prop("disabled", true);
+        })
+    });
 </script>
 {% endblock %}

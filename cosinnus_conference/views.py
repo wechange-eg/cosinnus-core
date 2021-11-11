@@ -192,11 +192,20 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         except ObjectDoesNotExist:
             pass
 
+    def get_blank_password_users_exist(self):
+        users = self.get_temporary_users()
+        for user in users:
+            if not user.password:
+                return True
+        return False
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['group'] = self.group
         context['members'] = self.get_temporary_users()
-        context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
+        context['group_admins'] = CosinnusGroupMembership.objects.get_admins(
+            group=self.group)
+        context['download_passwords'] = self.get_blank_password_users_exist()
         return context
 
     def get_form_kwargs(self):
