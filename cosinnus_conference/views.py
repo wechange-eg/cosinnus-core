@@ -96,14 +96,12 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
                 return self.form_invalid(form)
 
         if 'activateUsers' in request.POST:
-            self.group.conference_is_running = True
             self.group.save()
             self.update_all_members_status(True)
             messages.add_message(request, messages.SUCCESS,
                                  _('successfully activated all user accounts.'))
 
         elif 'deactivateUsers' in request.POST:
-            self.group.conference_is_running = False
             self.group.save()
             self.update_all_members_status(False)
             messages.add_message(request, messages.SUCCESS,

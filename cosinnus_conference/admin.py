@@ -81,7 +81,7 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
         ]
         readonly_fields = ('created', 'last_modified', 'is_premium_currently',
                            'attached_objects',
-                           'allow_conference_temporary_users')
+                           'allow_conference_temporary_users', 'conference_is_running')
         
         def get_actions(self, request):
             actions = super(CosinnusConferenceAdmin, self).get_actions(request)

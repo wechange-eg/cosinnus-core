@@ -564,87 +564,6 @@ class GroupMeetingView(SamePortalGroupMixin, RequireReadMixin, DetailView):
     def get_object(self, queryset=None):
         return self.group
 
-class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, DetailView):
-
-    template_name = 'cosinnus/group/conference_management.html'
-
-    def get_object(self, queryset=None):
-        return self.group
-
-    def post(self, request, *args, **kwargs):
-        if 'startConferenence' in request.POST:
-            self.group.conference_is_running = True
-            self.group.save()
-            self.update_all_members_status(True)
-            messages.add_message(request, messages.SUCCESS,
-                                 _('Conference successfully started and user accounts activated'))
-
-        elif 'finishConferenence' in request.POST:
-            self.group.conference_is_running = False
-            self.group.save()
-            self.update_all_members_status(False)
-            messages.add_message(request, messages.SUCCESS,
-                                 _('Conference successfully finished and user accounts deactivated'))
-
-        elif 'deactivate_member' in request.POST:
-            user_id = int(request.POST.get('deactivate_member'))
-            user = self.update_member_status(user_id, False)
-            if user:
-                messages.add_message(request, messages.SUCCESS, _('Successfully deactivated user account'))
-
-        elif 'activate_member' in request.POST:
-            user_id = int(request.POST.get('activate_member'))
-            user = self.update_member_status(user_id, True)
-            if user:
-                messages.add_message(request, messages.SUCCESS, _('Successfully activated user account'))
-
-        elif 'remove_member' in request.POST:
-            user_id = int(request.POST.get('remove_member'))
-            user = get_user_model().objects.get(id=user_id)
-            user.is_active = False
-            delete_userprofile(user)
-            messages.add_message(request, messages.SUCCESS, _('Successfully removed user'))
-
-        return redirect(group_aware_reverse('cosinnus:conference-management',
-                                            kwargs={'group': self.group}))
-
-    def update_all_members_status(self, status):
-        for member in self.group.conference_members:
-            member.is_active = status
-            if status:
-                member.last_login = None
-            member.save()
-
-    def update_member_status(self, user_id, status):
-        try:
-            user = get_user_model().objects.get(id=user_id)
-            user.is_active = status
-            user.save()
-            return user
-        except ObjectDoesNotExist:
-            pass
-
-    def get_member_workshops(self, member):
-        return CosinnusGroupMembership.objects.filter(user=member, group__parent=self.group)
-
-    def get_members_and_workshops(self):
-        members = []
-        for member in self.group.conference_members:
-            member_dict = {
-                'member': member,
-                'workshops': self.get_member_workshops(member)
-            }
-            members.append(member_dict)
-        return members
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['group'] = self.group
-        context['members'] = self.get_members_and_workshops()
-        context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
-
-        return context
-
 
 class GroupMembersMapListView(GroupDetailView):
 
@@ -1974,7 +1893,6 @@ group_delete = GroupDeleteView.as_view()
 group_delete_api = GroupDeleteView.as_view(is_ajax_request_url=True)
 group_detail = GroupDetailView.as_view()
 group_detail_api = GroupDetailView.as_view(is_ajax_request_url=True)
-conference_management = ConferenceManagementView.as_view()
 group_meeting = GroupMeetingView.as_view()
 group_members_map = GroupMembersMapListView.as_view()
 group_list = GroupListView.as_view()
