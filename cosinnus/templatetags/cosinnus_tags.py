@@ -1321,6 +1321,13 @@ def get_language_name(language_code):
     import pycountry
     return _(pycountry.languages.get(alpha_2=language_code).name)
 
+@register.filter
+def get_dynamic_field_value(dynamic_field_key, dynamic_field_name):
+    choices = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.get(dynamic_field_name).choices
+    for choice in choices:
+        if choice[0] == dynamic_field_key:
+            return choice[1]
+
 @register.simple_tag
 def get_setting(name):
     return getattr(settings, name, "")
