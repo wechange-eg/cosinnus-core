@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 19:22+0100\n"
+"POT-Creation-Date: 2021-11-16 12:48+0100\n"
 "PO-Revision-Date: 2021-09-30 15:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -64,11 +64,11 @@ msgctxt "the_app"
 msgid "conference"
 msgstr "Tagung"
 
-#: forms.py:228 views.py:1046
+#: forms.py:228 views.py:1045
 msgid "First Choice"
 msgstr "Erste Wahl"
 
-#: forms.py:228 views.py:1047
+#: forms.py:228 views.py:1046
 msgid "Second Choice"
 msgstr "Zweite Wahl"
 
@@ -89,160 +89,160 @@ msgstr "Im Fehler ist kein Inhalt vorhanden."
 msgid "Go to conference"
 msgstr "Zur Tagung"
 
-#: views.py:78 views.py:687
+#: views.py:78 views.py:686
 msgid "This function is not enabled for this conference."
 msgstr "Diese Funktion ist für diese Tagung nicht aktiviert."
 
-#: views.py:103
+#: views.py:102
 msgid "successfully activated all user accounts."
 msgstr "Nutzerkonten erfolgreich aktiviert"
 
-#: views.py:110
+#: views.py:108
 msgid "successfully deactivated all user accounts."
 msgstr "Nutzerkonten erfolgreich deaktiviert"
 
-#: views.py:116
+#: views.py:114
 msgid "Successfully deactivated user account"
 msgstr "Nutzerkonto erfolgreich deaktiviert"
 
-#: views.py:122
+#: views.py:120
 msgid "Successfully activated user account"
 msgstr "Nutzerkonto erfolgreich aktiviert"
 
-#: views.py:128
+#: views.py:126
 msgid "Successfully removed user"
 msgstr "Nutzerkonto erfolgreich entfern"
 
-#: views.py:133
+#: views.py:131
 msgid "Successfully removed all user"
 msgstr "Nutzerkonten erfolgreich entfernt"
 
-#: views.py:138 views.py:372 views.py:377
+#: views.py:136 views.py:371 views.py:376
 msgid "Username"
 msgstr "Nutzername"
 
-#: views.py:138 views.py:372 views.py:1031
+#: views.py:136 views.py:371 views.py:1030
 msgid "First Name"
 msgstr "Vorname"
 
-#: views.py:139 views.py:372 views.py:1032
+#: views.py:137 views.py:371 views.py:1031
 msgid "Last Name"
 msgstr "Nachname"
 
-#: views.py:139
+#: views.py:137
 msgid "Email"
 msgstr "E-mail"
 
-#: views.py:139
+#: views.py:137
 msgid "Password"
 msgstr "Passwort"
 
-#: views.py:213
-msgid "Successfully created %(created_count)d account."
-msgid_plural "Successfully created  %(created_count)d accounts."
-msgstr[0] "%(created_count)d Nutzerkonten erfolgreich erstellt."
-msgstr[1] "%(created_count)d Nutzerkonto erfolgreich erstellt."
+#: views.py:220
+msgid "Successfully created %(created_count)d account. "
+msgid_plural "Successfully created  %(created_count)d accounts. "
+msgstr[0] "%(created_count)d Nutzerkonto erfolgreich erstellt. "
+msgstr[1] "%(created_count)d Nutzerkonten erfolgreich erstellt. "
 
-#: views.py:230
+#: views.py:228
 msgid "Successfully updated accounts."
-msgstr "Nutzerkonto erfolgreich aktualisiert."
+msgstr "Nutzerkonten erfolgreich aktualisiert."
 
-#: views.py:312
+#: views.py:311
 msgid "User was not created"
 msgstr "Benutzer nicht generiert"
 
-#: views.py:478
+#: views.py:477
 msgid "The room was created successfully."
 msgstr "Raum erfolgreich erstellt."
 
-#: views.py:500
+#: views.py:499
 msgid "The room was saved successfully."
 msgstr "Raum erfolgreich gespeichert."
 
-#: views.py:518
+#: views.py:517
 msgid "The room was deleted successfully."
 msgstr "Raum erfolgreich gelöscht."
 
-#: views.py:537
+#: views.py:536
 msgid "The supplied Conference Room could not be found"
 msgstr "Gewünschter Tagungsraum nicht gefunden"
 
-#: views.py:545 views.py:591
+#: views.py:544 views.py:590
 msgid "Conference reminder settings have been successfully updated."
 msgstr ""
 "Die Einstellungen für die Erinnerung an die Tagung wurden erfolgreich "
 "aktualisiert."
 
-#: views.py:573
+#: views.py:572
 msgid "A test email has been sent to your email address."
 msgstr "Es wurde eine Test-E-Mail an deine E-Mail-Adresse gesendet."
 
-#: views.py:617
+#: views.py:616
 msgid "The message was sent to all participants."
 msgstr "Die Nachricht wurde an alle Tagungsteilnehmer geschickt."
 
-#: views.py:653
+#: views.py:652
 msgid "Participation configurations have been updated."
 msgstr "Die Teilnahmekonfigurationen wurden aktualisiert."
 
-#: views.py:724
+#: views.py:723
 msgid "Your application has been submitted."
 msgstr "Deine Anmeldung wurde eingereicht."
 
-#: views.py:729
+#: views.py:728
 msgid "Your application has been updated."
 msgstr "Deine Anmeldung wurde aktualisiert."
 
-#: views.py:743
+#: views.py:742
 msgid "You cannot change your application anymore."
 msgstr "Du kannst deine Anmeldung nicht mehr ändern."
 
-#: views.py:751
+#: views.py:750
 msgid "Application has been withdrawn."
 msgstr "Die Anmeldung wurde zurückgezogen."
 
-#: views.py:893
+#: views.py:892
 #, python-format
 msgid "The following users were accepted and added as members: %s"
 msgstr ""
 "Die folgenden Nutzer/innen wurden akzeptiert und als Teilnehmende bestätigt: "
 "%s"
 
-#: views.py:895
+#: views.py:894
 #, python-format
 msgid "The following users were put on the wait list: %s"
 msgstr "Die folgenden Nutzer/innen wurden auf die Warteliste gesetzt: %s"
 
-#: views.py:897
+#: views.py:896
 #, python-format
 msgid "The following users were declined: %s"
 msgstr "Die folgenden Nutzer/innen wurden abgelehnt: %s"
 
-#: views.py:899
+#: views.py:898
 msgid "Your changes were saved."
 msgstr "Deine Änderungen wurden übernommen."
 
-#: views.py:1010
+#: views.py:1009
 msgid "Option"
 msgstr "Option"
 
-#: views.py:1033
+#: views.py:1032
 msgid "Motivation for applying"
 msgstr "Motivation für die Anmeldung"
 
-#: views.py:1034
+#: views.py:1033
 msgid "Status"
 msgstr "Status"
 
-#: views.py:1038
+#: views.py:1037
 msgid "Contact E-Mail Address"
 msgstr "Kontakt-E-Mail-Address"
 
-#: views.py:1042
+#: views.py:1041
 msgid "Contact Phone Number"
 msgstr "Kontakt-Telefonnummer"
 
-#: views.py:1087
+#: views.py:1086
 msgid "List of Applicants"
 msgstr "Liste der Antragssteller/innen"
 

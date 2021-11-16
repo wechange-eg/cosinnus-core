@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 19:22+0100\n"
+"POT-Creation-Date: 2021-11-16 12:48+0100\n"
 "PO-Revision-Date: 2020-11-05 14:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -58,11 +58,11 @@ msgctxt "the_app"
 msgid "conference"
 msgstr ""
 
-#: forms.py:228 views.py:1046
+#: forms.py:228 views.py:1045
 msgid "First Choice"
 msgstr ""
 
-#: forms.py:228 views.py:1047
+#: forms.py:228 views.py:1046
 msgid "Second Choice"
 msgstr ""
 
@@ -83,157 +83,157 @@ msgstr ""
 msgid "Go to conference"
 msgstr ""
 
-#: views.py:78 views.py:687
+#: views.py:78 views.py:686
 msgid "This function is not enabled for this conference."
 msgstr ""
 
-#: views.py:103
+#: views.py:102
 msgid "successfully activated all user accounts."
 msgstr ""
 
-#: views.py:110
+#: views.py:108
 msgid "successfully deactivated all user accounts."
 msgstr ""
 
-#: views.py:116
+#: views.py:114
 msgid "Successfully deactivated user account"
 msgstr ""
 
-#: views.py:122
+#: views.py:120
 msgid "Successfully activated user account"
 msgstr ""
 
-#: views.py:128
+#: views.py:126
 msgid "Successfully removed user"
 msgstr ""
 
-#: views.py:133
+#: views.py:131
 msgid "Successfully removed all user"
 msgstr ""
 
-#: views.py:138 views.py:372 views.py:377
+#: views.py:136 views.py:371 views.py:376
 msgid "Username"
 msgstr ""
 
-#: views.py:138 views.py:372 views.py:1031
+#: views.py:136 views.py:371 views.py:1030
 msgid "First Name"
 msgstr ""
 
-#: views.py:139 views.py:372 views.py:1032
+#: views.py:137 views.py:371 views.py:1031
 msgid "Last Name"
 msgstr ""
 
-#: views.py:139
+#: views.py:137
 msgid "Email"
 msgstr ""
 
-#: views.py:139
+#: views.py:137
 msgid "Password"
 msgstr ""
 
-#: views.py:213
+#: views.py:220
 #, python-format
-msgid "Successfully created %(created_count)d account."
-msgid_plural "Successfully created  %(created_count)d accounts."
+msgid "Successfully created %(created_count)d account. "
+msgid_plural "Successfully created  %(created_count)d accounts. "
 msgstr[0] ""
 msgstr[1] ""
 
-#: views.py:230
+#: views.py:228
 msgid "Successfully updated accounts."
 msgstr ""
 
-#: views.py:312
+#: views.py:311
 msgid "User was not created"
 msgstr ""
 
-#: views.py:478
+#: views.py:477
 msgid "The room was created successfully."
 msgstr ""
 
-#: views.py:500
+#: views.py:499
 msgid "The room was saved successfully."
 msgstr ""
 
-#: views.py:518
+#: views.py:517
 msgid "The room was deleted successfully."
 msgstr ""
 
-#: views.py:537
+#: views.py:536
 msgid "The supplied Conference Room could not be found"
 msgstr ""
 
-#: views.py:545 views.py:591
+#: views.py:544 views.py:590
 msgid "Conference reminder settings have been successfully updated."
 msgstr ""
 
-#: views.py:573
+#: views.py:572
 msgid "A test email has been sent to your email address."
 msgstr ""
 
-#: views.py:617
+#: views.py:616
 msgid "The message was sent to all participants."
 msgstr ""
 
-#: views.py:653
+#: views.py:652
 msgid "Participation configurations have been updated."
 msgstr ""
 
-#: views.py:724
+#: views.py:723
 msgid "Your application has been submitted."
 msgstr ""
 
-#: views.py:729
+#: views.py:728
 msgid "Your application has been updated."
 msgstr ""
 
-#: views.py:743
+#: views.py:742
 msgid "You cannot change your application anymore."
 msgstr ""
 
-#: views.py:751
+#: views.py:750
 msgid "Application has been withdrawn."
 msgstr ""
 
-#: views.py:893
+#: views.py:892
 #, python-format
 msgid "The following users were accepted and added as members: %s"
 msgstr ""
 
-#: views.py:895
+#: views.py:894
 #, python-format
 msgid "The following users were put on the wait list: %s"
 msgstr ""
 
-#: views.py:897
+#: views.py:896
 #, python-format
 msgid "The following users were declined: %s"
 msgstr ""
 
-#: views.py:899
+#: views.py:898
 msgid "Your changes were saved."
 msgstr ""
 
-#: views.py:1010
+#: views.py:1009
 msgid "Option"
 msgstr ""
 
-#: views.py:1033
+#: views.py:1032
 msgid "Motivation for applying"
 msgstr ""
 
-#: views.py:1034
+#: views.py:1033
 msgid "Status"
 msgstr ""
 
-#: views.py:1038
+#: views.py:1037
 msgid "Contact E-Mail Address"
 msgstr ""
 
-#: views.py:1042
+#: views.py:1041
 msgid "Contact Phone Number"
 msgstr ""
 
-#: views.py:1087
+#: views.py:1086
 msgid "List of Applicants"
 msgstr ""
 

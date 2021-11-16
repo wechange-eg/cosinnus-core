@@ -860,7 +860,7 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
                                                           default=False,
                                                           help_text=_('If enabled, conference admins can create temporary user accounts that can be activated and deactivated.')
                                                          )
-    
+    # deprecated, was used to configure when temporary are allowed to log in
     conference_is_running = models.BooleanField(_('Conference accounts active'),
                                                 help_text=_('If enabled, temporary user accounts for this conference are active and can log in.'),
                                                 default=False
