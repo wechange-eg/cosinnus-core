@@ -99,15 +99,21 @@ def threaded_execution_and_catch_error(f):
     
     def error_wrapper(self, *args, **kwargs):
         my_self = self
-        class CosinnusElasticsearchExecutionThread(Thread):
-            def run(self):
-                try:
-                    return f(my_self, *args, **kwargs)
-                except (TransportError, ProtocolError, ConnectionError) as e:
-                    logger.error('Could not connect to the ElasticSearch backend for indexing! The search function will not work and saving objects on the site will be terribly slow! Exception in extra.', extra={'exception': force_text(e)})
-                except Exception as e:
-                    logger.error('An unknown error occured while indexing an object! Exception in extra.', extra={'exception': force_text(e)})
-        CosinnusElasticsearchExecutionThread().start()
+        def do_execute():
+            try:
+                return f(my_self, *args, **kwargs)
+            except (TransportError, ProtocolError, ConnectionError) as e:
+                logger.error('Could not connect to the ElasticSearch backend for indexing! The search function will not work and saving objects on the site will be terribly slow! Exception in extra.', extra={'exception': force_text(e)})
+            except Exception as e:
+                logger.error('An unknown error occured while indexing an object! Exception in extra.', extra={'exception': force_text(e)})
+        
+        if getattr(settings, 'COSINNUS_ELASTIC_BACKEND_RUN_THREADED', True):
+            class CosinnusElasticsearchExecutionThread(Thread):
+                def run(self):
+                    do_execute()
+            CosinnusElasticsearchExecutionThread().start()
+        else:
+            do_execute()
     return error_wrapper
 
 

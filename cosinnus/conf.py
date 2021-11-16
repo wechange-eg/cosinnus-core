@@ -1047,8 +1047,10 @@ class CosinnusConf(AppConf):
     CALENDAR_WIDGET_DISPLAY_AS_LIST = False
     # should the group dashboard widget grid calendar allow drag & drop of events (only while CALENDAR_WIDGET_DISPLAY_AS_LIST == False)
     CALENDAR_WIDGET_ALLOW_EDIT_IN_GROUP_DASHBOARD = True
-
     
+    # determines if the elasticsearch backend should use threading on update/remove/clear writing actions
+    ELASTIC_BACKEND_RUN_THREADED = True
+
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.

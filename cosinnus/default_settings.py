@@ -170,25 +170,6 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'django.contrib.admin',
         'sekizai',
         
-        # haystack needs to precede wagtail because wagtail idiotically overrides haystack's mmanagement commands
-        'haystack',
-        
-        # wagtail
-        'wagtail_overextends',
-        'compressor',
-        'modelcluster',
-        'wagtail.core',
-        'wagtail.admin',
-        'wagtail.documents',
-        'wagtail.snippets',
-        'wagtail.users',
-        'wagtail.images',
-        'wagtail.embeds',
-        'wagtail.search',
-        'wagtail.sites',
-        'wagtail.contrib.redirects',
-        'wagtail.contrib.forms',
-        
     ]
     
     # Internal Apps (as defined in external project)
@@ -217,6 +198,27 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     _INSTALLED_APPS += extra_cosinnus_apps
     
     _INSTALLED_APPS += [
+        
+        # haystack needs to precede wagtail because wagtail idiotically overrides haystack's mmanagement commands
+        'haystack',
+        
+        # wagtail
+        'wagtail_overextends',
+        'compressor',
+        'modelcluster',
+        'wagtail.core',
+        'wagtail.admin',
+        'wagtail.documents',
+        'wagtail.snippets',
+        'wagtail.users',
+        'wagtail.images',
+        'wagtail.embeds',
+        'wagtail.search',
+        'wagtail.sites',
+        'wagtail.contrib.redirects',
+        'wagtail.contrib.forms',
+        
+        
         'announcements',
         'ajax_forms',
       
