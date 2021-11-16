@@ -3910,11 +3910,8 @@ msgstr "Teilnahmebedingungen bearbeiten"
 msgid "Manage Participation Applications"
 msgstr "Teilnahmeanträge bearbeiten"
 
-#: templates/cosinnus/appsmenu.html:117
-#, fuzzy
-#| msgid "Temporary User Accounts"
 msgid "Manage Temporary User Accounts"
-msgstr "Temporäre Benutzerkonten"
+msgstr "Temporäre Benutzerkonten verwalten"
 
 #
 #. Translators: __INCLUDE_JS_PO__

@@ -214,27 +214,19 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
     def get_success_message(self, accounts_created, accounts_updated):
         created_count = len(accounts_created)
         updated_count = len(accounts_updated)
+        message = ''
         if accounts_created:
-            if not accounts_updated:
-                return ngettext(
-                    'Successfully created %(created_count)d account.',
-                    'Successfully created  %(created_count)d accounts.',
-                    created_count,
-                ) % {
-                    'created_count': created_count
-                }
-            else:
-                return ngettext(
-                    ('Successfully created %(created_count)d '
-                     'account and updated accounts.'),
-                    ('Successfully created  %(created_count)d '
-                     'accounts and updated accounts.'),
-                    created_count,
-                ) % {
-                    'created_count': created_count
-                }
+            message = ngettext(
+                'Successfully created %(created_count)d account. ',
+                'Successfully created  %(created_count)d accounts. ',
+                created_count,
+            ) % {
+                'created_count': created_count
+            }
+
         if updated_count:
-            return _('Successfully updated accounts.')
+            message = str(message) + str(_('Successfully updated accounts.'))
+        return message
 
     def form_valid(self, form):
         data = form.cleaned_data.get('participants')

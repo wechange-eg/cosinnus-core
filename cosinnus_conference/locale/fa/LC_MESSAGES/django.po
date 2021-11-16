@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 19:22+0100\n"
+"POT-Creation-Date: 2021-11-16 12:48+0100\n"
 "PO-Revision-Date: 2021-05-21 21:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -62,11 +62,11 @@ msgctxt "the_app"
 msgid "conference"
 msgstr "کنفرانس"
 
-#: forms.py:228 views.py:1046
+#: forms.py:228 views.py:1045
 msgid "First Choice"
 msgstr "گزینه‌ی نخست"
 
-#: forms.py:228 views.py:1047
+#: forms.py:228 views.py:1046
 msgid "Second Choice"
 msgstr "گزینه‌ی دوم"
 
@@ -87,166 +87,166 @@ msgstr ""
 msgid "Go to conference"
 msgstr "برو به کنفرانس"
 
-#: views.py:78 views.py:687
+#: views.py:78 views.py:686
 msgid "This function is not enabled for this conference."
 msgstr "این کارایی برای کنفرانس فعال نشده است."
 
-#: views.py:103
+#: views.py:102
 #, fuzzy
 #| msgid "Successfully activated user account"
 msgid "successfully activated all user accounts."
 msgstr "حساب‌های کاربران با موفقیت فعال شدند"
 
-#: views.py:110
+#: views.py:108
 #, fuzzy
 #| msgid "Successfully deactivated user account"
 msgid "successfully deactivated all user accounts."
 msgstr "حساب‌های کاربران با موفقیت غیرفعال شدند"
 
-#: views.py:116
+#: views.py:114
 msgid "Successfully deactivated user account"
 msgstr "حساب‌های کاربران با موفقیت غیرفعال شدند"
 
-#: views.py:122
+#: views.py:120
 msgid "Successfully activated user account"
 msgstr "حساب‌های کاربران با موفقیت فعال شدند"
 
-#: views.py:128
+#: views.py:126
 msgid "Successfully removed user"
 msgstr "کاربر با موفقیت حذف شد"
 
-#: views.py:133
+#: views.py:131
 #, fuzzy
 #| msgid "Successfully removed user"
 msgid "Successfully removed all user"
 msgstr "کاربر با موفقیت حذف شد"
 
-#: views.py:138 views.py:372 views.py:377
+#: views.py:136 views.py:371 views.py:376
 msgid "Username"
 msgstr ""
 
-#: views.py:138 views.py:372 views.py:1031
+#: views.py:136 views.py:371 views.py:1030
 msgid "First Name"
 msgstr "نام"
 
-#: views.py:139 views.py:372 views.py:1032
+#: views.py:137 views.py:371 views.py:1031
 msgid "Last Name"
 msgstr "نام خانوادگی"
 
-#: views.py:139
+#: views.py:137
 msgid "Email"
 msgstr ""
 
-#: views.py:139
+#: views.py:137
 msgid "Password"
 msgstr ""
 
-#: views.py:213
+#: views.py:220
 #, fuzzy, python-format
 #| msgid "Successfully deactivated user account"
-msgid "Successfully created %(created_count)d account."
-msgid_plural "Successfully created  %(created_count)d accounts."
+msgid "Successfully created %(created_count)d account. "
+msgid_plural "Successfully created  %(created_count)d accounts. "
 msgstr[0] "حساب‌های کاربران با موفقیت غیرفعال شدند"
 msgstr[1] "حساب‌های کاربران با موفقیت غیرفعال شدند"
 
-#: views.py:230
+#: views.py:228
 #, fuzzy
 #| msgid "Successfully deactivated user account"
 msgid "Successfully updated accounts."
 msgstr "حساب‌های کاربران با موفقیت غیرفعال شدند"
 
-#: views.py:312
+#: views.py:311
 msgid "User was not created"
 msgstr "کار با موفقیت ساخته نشد"
 
-#: views.py:478
+#: views.py:477
 msgid "The room was created successfully."
 msgstr "اتاق با موفقیت ساخته شد."
 
-#: views.py:500
+#: views.py:499
 msgid "The room was saved successfully."
 msgstr "اتاق با موفقیت ذخیره شد."
 
-#: views.py:518
+#: views.py:517
 msgid "The room was deleted successfully."
 msgstr "اتاق با موفقیت پاک شد."
 
-#: views.py:537
+#: views.py:536
 msgid "The supplied Conference Room could not be found"
 msgstr "اتاق کنفرانسی که وارد کرده‌اید پیدا نشد"
 
-#: views.py:545 views.py:591
+#: views.py:544 views.py:590
 msgid "Conference reminder settings have been successfully updated."
 msgstr "تنظیمات یادآور کنفرانس با موفقیت به‌روز شدند."
 
-#: views.py:573
+#: views.py:572
 msgid "A test email has been sent to your email address."
 msgstr "یک ایمیل آزمایشی برای نشانی ایمیل شما فرستاده شد."
 
-#: views.py:617
+#: views.py:616
 msgid "The message was sent to all participants."
 msgstr ""
 
-#: views.py:653
+#: views.py:652
 msgid "Participation configurations have been updated."
 msgstr "تنظیمات شرکت‌کننده‌ها به‌روز شده‌اند."
 
-#: views.py:724
+#: views.py:723
 msgid "Your application has been submitted."
 msgstr "درخواست شما فرستاده شد."
 
-#: views.py:729
+#: views.py:728
 msgid "Your application has been updated."
 msgstr "درخواست شما به‌روز شد."
 
-#: views.py:743
+#: views.py:742
 msgid "You cannot change your application anymore."
 msgstr "شما دیگر نمی‌توانید درخواست‌تان را تغییر دهید."
 
-#: views.py:751
+#: views.py:750
 msgid "Application has been withdrawn."
 msgstr "درخواست بازپس گرفته‌شده است."
 
-#: views.py:893
+#: views.py:892
 #, python-format
 msgid "The following users were accepted and added as members: %s"
 msgstr "کاربران روبرو پذیرفته و به عنوان عضو افزوده شده‌اند: %s"
 
-#: views.py:895
+#: views.py:894
 #, python-format
 msgid "The following users were put on the wait list: %s"
 msgstr "کاربران روبرو در فهرست انتظار قرار داده شده‌اند: %s"
 
-#: views.py:897
+#: views.py:896
 #, python-format
 msgid "The following users were declined: %s"
 msgstr "کاربران روبرو رد شده‌اند: %s"
 
-#: views.py:899
+#: views.py:898
 msgid "Your changes were saved."
 msgstr "تغییرات‌تان ذخیره شده‌اند."
 
-#: views.py:1010
+#: views.py:1009
 msgid "Option"
 msgstr "گزینه"
 
-#: views.py:1033
+#: views.py:1032
 msgid "Motivation for applying"
 msgstr "انگیزه‌ی ارایه‌ی درخواست"
 
-#: views.py:1034
+#: views.py:1033
 msgid "Status"
 msgstr "وضعیت"
 
-#: views.py:1038
+#: views.py:1037
 msgid "Contact E-Mail Address"
 msgstr "نشانی تماس ایمیل"
 
-#: views.py:1042
+#: views.py:1041
 msgid "Contact Phone Number"
 msgstr "شماره‌ی تلفن تماس"
 
-#: views.py:1087
+#: views.py:1086
 msgid "List of Applicants"
 msgstr "فهرست درخواست‌دهنده‌ها"
 

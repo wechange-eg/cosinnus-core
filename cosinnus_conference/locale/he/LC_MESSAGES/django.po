@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 19:22+0100\n"
+"POT-Creation-Date: 2021-11-16 12:48+0100\n"
 "PO-Revision-Date: 2021-04-14 14:32+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -61,11 +61,11 @@ msgctxt "the_app"
 msgid "conference"
 msgstr "שרת ועידות וידאו"
 
-#: forms.py:228 views.py:1046
+#: forms.py:228 views.py:1045
 msgid "First Choice"
 msgstr "בחירה ראשונה"
 
-#: forms.py:228 views.py:1047
+#: forms.py:228 views.py:1046
 msgid "Second Choice"
 msgstr "בחירה שנייה"
 
@@ -86,166 +86,166 @@ msgstr ""
 msgid "Go to conference"
 msgstr "עבור לוועידה"
 
-#: views.py:78 views.py:687
+#: views.py:78 views.py:686
 msgid "This function is not enabled for this conference."
 msgstr "פונקציה זו אינה זמינה עבור ועידה זו."
 
-#: views.py:103
+#: views.py:102
 #, fuzzy
 #| msgid "Successfully activated user account"
 msgid "successfully activated all user accounts."
 msgstr "חשבון משתמש הופעל בהצלחה"
 
-#: views.py:110
+#: views.py:108
 #, fuzzy
 #| msgid "Successfully deactivated user account"
 msgid "successfully deactivated all user accounts."
 msgstr "חשבון משתמש הושבת בהצלחה"
 
-#: views.py:116
+#: views.py:114
 msgid "Successfully deactivated user account"
 msgstr "חשבון משתמש הושבת בהצלחה"
 
-#: views.py:122
+#: views.py:120
 msgid "Successfully activated user account"
 msgstr "חשבון משתמש הופעל בהצלחה"
 
-#: views.py:128
+#: views.py:126
 msgid "Successfully removed user"
 msgstr "משתמש הוסר בהצלחה"
 
-#: views.py:133
+#: views.py:131
 #, fuzzy
 #| msgid "Successfully removed user"
 msgid "Successfully removed all user"
 msgstr "משתמש הוסר בהצלחה"
 
-#: views.py:138 views.py:372 views.py:377
+#: views.py:136 views.py:371 views.py:376
 msgid "Username"
 msgstr ""
 
-#: views.py:138 views.py:372 views.py:1031
+#: views.py:136 views.py:371 views.py:1030
 msgid "First Name"
 msgstr "שם פרטי"
 
-#: views.py:139 views.py:372 views.py:1032
+#: views.py:137 views.py:371 views.py:1031
 msgid "Last Name"
 msgstr "שם משפחה"
 
-#: views.py:139
+#: views.py:137
 msgid "Email"
 msgstr ""
 
-#: views.py:139
+#: views.py:137
 msgid "Password"
 msgstr ""
 
-#: views.py:213
+#: views.py:220
 #, fuzzy, python-format
 #| msgid "Successfully deactivated user account"
-msgid "Successfully created %(created_count)d account."
-msgid_plural "Successfully created  %(created_count)d accounts."
+msgid "Successfully created %(created_count)d account. "
+msgid_plural "Successfully created  %(created_count)d accounts. "
 msgstr[0] "חשבון משתמש הושבת בהצלחה"
 msgstr[1] "חשבון משתמש הושבת בהצלחה"
 
-#: views.py:230
+#: views.py:228
 #, fuzzy
 #| msgid "Successfully deactivated user account"
 msgid "Successfully updated accounts."
 msgstr "חשבון משתמש הושבת בהצלחה"
 
-#: views.py:312
+#: views.py:311
 msgid "User was not created"
 msgstr "המשתמש לא נוצר"
 
-#: views.py:478
+#: views.py:477
 msgid "The room was created successfully."
 msgstr "החדר נוצר בהצלחה."
 
-#: views.py:500
+#: views.py:499
 msgid "The room was saved successfully."
 msgstr "החדר נשמר בהצלחה."
 
-#: views.py:518
+#: views.py:517
 msgid "The room was deleted successfully."
 msgstr "החדר נמחק בהצלחה."
 
-#: views.py:537
+#: views.py:536
 msgid "The supplied Conference Room could not be found"
 msgstr "חדר הועידות שסופק לא נמצא"
 
-#: views.py:545 views.py:591
+#: views.py:544 views.py:590
 msgid "Conference reminder settings have been successfully updated."
 msgstr "הגדרות תזכורת הוועידה עודכנו בהצלחה."
 
-#: views.py:573
+#: views.py:572
 msgid "A test email has been sent to your email address."
 msgstr "דוא\"ל בדיקה נשלח לכתובת הדוא\"ל שלך."
 
-#: views.py:617
+#: views.py:616
 msgid "The message was sent to all participants."
 msgstr ""
 
-#: views.py:653
+#: views.py:652
 msgid "Participation configurations have been updated."
 msgstr "תצורות ההשתתפות עודכנו."
 
-#: views.py:724
+#: views.py:723
 msgid "Your application has been submitted."
 msgstr "בקשתך הוגשה."
 
-#: views.py:729
+#: views.py:728
 msgid "Your application has been updated."
 msgstr "הבקשה שלך עודכנה."
 
-#: views.py:743
+#: views.py:742
 msgid "You cannot change your application anymore."
 msgstr "אין באפשרותך לשנות את בקשתך יותר."
 
-#: views.py:751
+#: views.py:750
 msgid "Application has been withdrawn."
 msgstr "הבקשה בוטלה."
 
-#: views.py:893
+#: views.py:892
 #, python-format
 msgid "The following users were accepted and added as members: %s"
 msgstr "המשתמשים הבאים התקבלו ונוספו כחברים: %s"
 
-#: views.py:895
+#: views.py:894
 #, python-format
 msgid "The following users were put on the wait list: %s"
 msgstr "המשתמשים הבאים הוכנסו לרשימת ההמתנה: %s"
 
-#: views.py:897
+#: views.py:896
 #, python-format
 msgid "The following users were declined: %s"
 msgstr "המשתמשים הבאים נדחו: %s"
 
-#: views.py:899
+#: views.py:898
 msgid "Your changes were saved."
 msgstr "השינויים שביצעת נשמרו."
 
-#: views.py:1010
+#: views.py:1009
 msgid "Option"
 msgstr "אפשרות"
 
-#: views.py:1033
+#: views.py:1032
 msgid "Motivation for applying"
 msgstr "מוטיבצייה להגשת מועמדות"
 
-#: views.py:1034
+#: views.py:1033
 msgid "Status"
 msgstr "מצב"
 
-#: views.py:1038
+#: views.py:1037
 msgid "Contact E-Mail Address"
 msgstr "כתובת דואר אלקטרוני של איש קשר"
 
-#: views.py:1042
+#: views.py:1041
 msgid "Contact Phone Number"
 msgstr "מספר טלפון של איש קשר"
 
-#: views.py:1087
+#: views.py:1086
 msgid "List of Applicants"
 msgstr "רשימת מועמדים"
 
