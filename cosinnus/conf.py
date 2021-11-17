@@ -1101,6 +1101,9 @@ class CosinnusConf(AppConf):
     
     # if set to True group admins can decide if a contact form should be displayed on the groups micropage
     ALLOW_CONTACT_FORM_ON_MICROPAGE = False
+    
+    # determines if the elasticsearch backend should use threading on update/remove/clear writing actions
+    ELASTIC_BACKEND_RUN_THREADED = True
 
 
 class CosinnusDefaultSettings(AppConf):
