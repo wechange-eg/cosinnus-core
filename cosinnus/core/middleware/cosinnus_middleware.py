@@ -13,7 +13,7 @@ from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.utils.encoding import force_text
 from django.utils.functional import curry
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext, ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
@@ -142,6 +142,9 @@ class OTPMiddleware(MiddlewareMixin):
             filter_path = '/admin'
         # strict mode covers the entire page
         if getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_STRICT_MODE', False):
+            filter_path = '/'
+        # common users 2fa activation
+        if getattr(settings, 'COSINNUS_COMMON_USER_2_FACTOR_AUTH_ENABLED', False):
             filter_path = '/'
         
         user = getattr(request, 'user', None)

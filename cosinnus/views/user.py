@@ -1165,4 +1165,27 @@ def cleanup_user_after_first_login(sender, user, request, **kwargs):
     CosinnusUnregisterdUserGroupInvite.objects.filter(email=user.email).delete()
 
 
-    
+# =============== set a password from a only by token logged in user =========================== #
+
+class TwoFactorUserHubView(TemplateView):
+    """
+    Simple TemplateView rendering the "user_2fa_settings.html" page.
+    """
+
+    template_name = 'cosinnus/user_2fa/user_2fa_settings.html'
+
+two_factor_user_hub = TwoFactorUserHubView.as_view()
+
+
+from two_factor.views import SetupView
+#from two_factor.forms import TOTPDeviceForm
+
+class Cosinnus2FASetupView(SetupView):
+
+    template_name = 'cosinnus/user_2fa/user_2fa_setup.html'
+
+
+two_factor_auth_setup = Cosinnus2FASetupView.as_view()
+
+
+# ================================================================================================= #

@@ -2,7 +2,6 @@
 
 from django.contrib.auth import views as auth_views
 from django_otp.forms import OTPTokenForm
-from django_otp import _user_is_anonymous
 
 from functools import partial
 from django.shortcuts import redirect
@@ -20,7 +19,7 @@ class AdminOnlyOTPTokenValidationView(auth_views.LoginView):
     
     def dispatch(self, request, *args, **kwargs):
         user = self.request.user
-        if _user_is_anonymous(user) or user.is_verified() or not (user.is_staff or user.is_superuser):
+        if not user.is_authenticated or user.is_verified() or not (user.is_staff or user.is_superuser):
             return redirect('/admin/')
         user.backend = 'cosinnus.backends.EmailAuthBackend'
         return super(AdminOnlyOTPTokenValidationView, self).dispatch(request, *args, **kwargs)

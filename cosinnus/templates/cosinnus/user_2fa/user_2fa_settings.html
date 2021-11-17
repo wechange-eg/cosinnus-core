@@ -1,0 +1,51 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n  cosinnus_tags widget_tweaks %}
+
+
+{% block page_title %}{% trans '2FA Settings' %}{% endblock %}
+
+{% block jshead %}
+    {% comment %} UPDATE HERE LATER {% endcomment %}
+{% endblock jshead %}
+
+{% block leftnav %}
+    {% include "cosinnus/user/leftnav.html"  with view="two-factor-auth" %}
+
+    {% comment %} {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_5_password" %} >DO NOT FORGET TO ADD NEW HELP TEXT FOR THE POPUP< {% endcomment %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+        <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
+        <li class="active">{% trans "2FA Settings" %}</li>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="content-box">
+        <h4>{% trans "Enable Two-Factor Authentication" %}</h4>
+        <p>{% blocktrans %} 
+            You are about to take your account security to the next level. 
+            <br/>
+            To use the 2fa-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. 
+            <br/> 
+            We do not have another 2fa option at the moment and will inform you if there are changes in this regard.
+        {% endblocktrans %}</p>
+    </div>
+
+
+    <button type="submit" href="{% url 'cosinnus:two-factor-auth-setup' %}" class="btn btn-emphasized btn-autosize">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left" tabindex="-1">
+                    <i class="fa fa-hand-o-right"></i>
+                </span>
+                <div class="media-body">
+                    {% trans 'Activate 2FA' %}
+                </div>
+            </li>
+        </ul>
+    </button>
+
+
+{% endblock content %}

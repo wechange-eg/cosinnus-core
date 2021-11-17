@@ -215,7 +215,11 @@ if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSI
         url(r'^search/api/quicksearch/$', search.api_quicksearch, name='quicksearch-api'),
     ]
 
-
+if settings.COSINNUS_COMMON_USER_2_FACTOR_AUTH_ENABLED:
+    urlpatterns += [
+        url(r'^two_factor_auth_settings/$', user.two_factor_user_hub, name='two-factor-auth-settings'),
+        url(r'^two_factor_auth_settings/setup/$', user.two_factor_auth_setup, name='two-factor-auth-setup'),
+    ]
 
 # some user management not allowed in integrated mode and sso-mode
 if not is_integrated_portal() and not is_sso_portal():

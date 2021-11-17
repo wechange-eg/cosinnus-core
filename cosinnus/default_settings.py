@@ -235,6 +235,8 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'widget_tweaks',
         'django_otp',
         'django_otp.plugins.otp_totp',
+        'django_otp.plugins.otp_static',
+        'two_factor',
         
         # External Apps
         'awesome_avatar',
