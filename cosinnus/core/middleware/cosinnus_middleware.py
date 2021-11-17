@@ -143,11 +143,18 @@ class OTPMiddleware(MiddlewareMixin):
         # strict mode covers the entire page
         if getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_STRICT_MODE', False):
             filter_path = '/'
-        # common users 2fa activation
+        # mode for common users covers the entire portal
         if getattr(settings, 'COSINNUS_COMMON_USER_2_FACTOR_AUTH_ENABLED', False):
             filter_path = '/'
         
         user = getattr(request, 'user', None)
+        # check if the user is authenticated and they attempted to access a covered url
+        if user and user.is_authenticated and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
+            # check if the user is not yet 2fa verified, if so send them to the verification view
+            if not user.is_verified():
+                next_url = request.path
+                return redirect(reverse('cosinnus:login-2fa') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
+
         # check if the user is a superuser and they attempted to access a covered url
         if user and check_user_superuser(user) and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
             # check if the user is not yet 2fa verified, if so send them to the verification view
