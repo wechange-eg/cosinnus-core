@@ -1,4 +1,4 @@
-{% extends "cosinnus_etherpad/base.html" %}
+{% extends "cosinnus_event/base.html" %}
 {% load i18n static cosinnus_tags widget_tweaks sekizai_tags %}
 
 {% block html_attributes %}class="mobile-noscroll"{% endblock html_attributes %}
@@ -38,6 +38,16 @@
 
 	                            <div class="media-body">
 	                                    <span class="annotation">
+				                            <a class="fullscreen-button fullscreen-popout" title="{% trans "Popout" %}" target="_blank" 
+				                                    {% if SETTINGS.COSINNUS_BBB_SERVER_CHOICES and group.video_conference_type == 1 %}
+				                                        href="{{ group.get_bbb_room_url }}"
+				                                    {% elif COSINNUS_CURRENT_PORTAL.video_conference_server and group.video_conference_type == 2 %}
+                                                        href="{{ COSINNUS_CURRENT_PORTAL.video_conference_server_url }}-{{ group.id }}-{{ group.secret_from_created }}"
+                                                    {% endif %}
+				                                    >
+				                                <span>{% trans "Popout" %}</span>
+				                                <i class="fa fa-external-link"></i>
+				                            </a>
 	                                        <a class="fullscreen-button fullscreen-toggle" title="{% trans "Fullscreen" %}">
 	                                            <span>{% trans "Fullscreen" %}</span>
 	                                            <i class="fa fa-expand"></i>
@@ -58,11 +68,11 @@
 		        {% endif %}
 	           
 			{% if SETTINGS.COSINNUS_BBB_SERVER_CHOICES and group.video_conference_type == 1 %}
-				<div class="etherpad-iframe">
+				<div class="video-conference-iframe">
 					<iframe src="{{ group.get_bbb_room_url }}" allow="display-capture *; geolocation; microphone *; camera *" width="100%" height="100%"></iframe>
 				</div>
 			{% elif COSINNUS_CURRENT_PORTAL.video_conference_server and group.video_conference_type == 2 %}
-				<div class="etherpad-iframe">
+				<div class="video-conference-iframe">
 					<iframe src="{{ COSINNUS_CURRENT_PORTAL.video_conference_server_url }}-{{ group.id }}-{{ group.secret_from_created }}" allow="display-capture *; geolocation; microphone *; camera *" width="100%" height="100%"></iframe>
 				</div>
 			{% endif %}
@@ -94,15 +104,17 @@
 				    return false;
 				}
 				if (isSafariBrowser()){
-				    $('.etherpad-iframe').css('overflow-y', 'scroll').css('-webkit-overflow-scrolling', 'touch');
+				    $('.video-conference-iframe').css('overflow-y', 'scroll').css('-webkit-overflow-scrolling', 'touch');
 				}$(function() {
-					/** Video chat fullscreen toggle: left as 'etherpad-iframe' due to constant bugs with fullscreen-mode */
-					
+					/** Video chat fullscreen toggle: left as 'video-conference-iframe' due to constant bugs with fullscreen-mode */
+					$('.fullscreen-popout').click(function() {
+                        $('.video-conference-iframe').html('<p class="textfield">{% trans "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page." %}</p>');
+                    });
 					$('.fullscreen-toggle').click(function() {
-						$('.etherpad-iframe').toggleClass('fullscreen');
+						$('.video-conference-iframe').toggleClass('fullscreen');
 					});
 					$('.stop-etherpad').click(function(){
-						$('.etherpad-iframe').html('');
+						$('.video-conference-iframe').html('');
 					});
 				});
             </script>
