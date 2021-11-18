@@ -1,0 +1,21 @@
+{% extends "cosinnus/user_2fa/user_2fa_settings.html" %}
+{% load i18n  cosinnus_tags widget_tweaks %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">{% trans "Disable 2FA" %}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="content-box">
+        <h1>{% block title %}{% trans "Disable Two-factor Authentication" %}{% endblock %}</h1>
+        <p>{% blocktrans trimmed %}You are about to disable two-factor authentication. This
+        weakens your account security, are you sure?{% endblocktrans %}</p>
+        <form method="post">
+        {% csrf_token %}
+        <table>{{ form }}</table>
+        <button class="btn btn-danger"
+                type="submit">{% trans "Disable" %}</button>
+        </form>
+    </div>
+{% endblock %}

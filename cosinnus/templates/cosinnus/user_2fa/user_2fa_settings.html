@@ -22,30 +22,59 @@
 
 {% block content %}
 
-    <div class="content-box">
-        <h4>{% trans "Enable Two-Factor Authentication" %}</h4>
-        <p>{% blocktrans %} 
-            You are about to take your account security to the next level. 
-            <br/>
-            To use the 2fa-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. 
-            <br/> 
-            We do not have another 2fa option at the moment and will inform you if there are changes in this regard.
-        {% endblocktrans %}</p>
-    </div>
+    {% block enable_2fa %}
 
+        <div class="content-box">
+            <h4>{% trans "Enable Two-Factor Authentication" %}</h4>
+            <p>{% blocktrans %} 
+                You are about to take your account security to the next level. 
+                <br/>
+                To use the 2fa-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. 
+                <br/> 
+                We do not have another 2fa option at the moment and will inform you if there are changes in this regard.
+            {% endblocktrans %}</p>
+        </div>
 
-    <button type="submit" href="{% url 'cosinnus:two-factor-auth-setup' %}" class="btn btn-emphasized btn-autosize">
-        <ul class="media-list">
-            <li class="media">
-                <span class="pull-left" tabindex="-1">
-                    <i class="fa fa-hand-o-right"></i>
-                </span>
-                <div class="media-body">
-                    {% trans 'Activate 2FA' %}
-                </div>
-            </li>
-        </ul>
-    </button>
+        <button type="submit" href="{% url 'cosinnus:two-factor-auth-setup' %}" class="btn btn-emphasized btn-autosize">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left" tabindex="-1">
+                        <i class="fa fa-hand-o-right"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans 'Activate 2FA' %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+
+    {% endblock enable_2fa %}
+
+    <hr>
+
+    {% block disable_2fa %}
+
+        <div class="content-box">
+            <h4>{% trans "Disable Two-Factor Authentication" %}</h4>
+            <p>{% blocktrans %} 
+                    Disable the the 2fa-Feature.
+            {% endblocktrans %}</p>
+        </div>
+
+        <button type="submit" href="{% url 'cosinnus:two-factor-auth-disable' %}" class="btn btn-emphasized btn-autosize">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left" tabindex="-1">
+                        <i class="fa fa-hand-o-right"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans 'Deactivate 2FA' %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+
+    {% endblock disable_2fa %}
 
 
 {% endblock content %}

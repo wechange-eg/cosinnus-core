@@ -1188,4 +1188,13 @@ class Cosinnus2FASetupView(SetupView):
 two_factor_auth_setup = Cosinnus2FASetupView.as_view()
 
 
+from two_factor.views import DisableView
+
+class Cosinnus2FADisableView(DisableView):
+
+    template_name = 'cosinnus/user_2fa/user_2fa_disable.html'
+    success_url = reverse_lazy('login')
+
+two_factor_auth_disable = Cosinnus2FADisableView.as_view()
+
 # ================================================================================================= #
