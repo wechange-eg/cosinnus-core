@@ -1238,8 +1238,8 @@ class CosinnusDefaultSettings(AppConf):
     # 0: `CosinnusConferenceSettings.SETTING_NO`
     # 1: `CosinnusConferenceSettings.SETTING_YES`
     BBB_PRESET_FORM_FIELD_PORTAL_DEFAULTS = {
-        'mic_starts_on': 1,
-        'cam_starts_on': 1,
+        'mic_starts_on': 0,
+        'cam_starts_on': 0,
     }
     
     # a list of field names from fields in `CosinnusConferenceSettings`

@@ -12,7 +12,7 @@
 	                     {% if field.value == value or value|stringify == field.value %}checked="checked"{% endif %}>
 	            <span class="">
 	                {% if value == 9999 %}
-	                    {% trans "Inherited" %}
+	                    {% trans "Default" %}
 	                {% else %}
 		                {{ label }}
 	                {% endif %}
