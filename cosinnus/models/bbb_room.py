@@ -102,11 +102,11 @@ class BBBRoom(models.Model):
     # deprecated in favor of deriving create options directly from the source event!
     options = JSONField(blank=True, null=True, default=dict, verbose_name="room options",
                         editable=False,
-                        help_text=_("DEPRECATED! options for the room, that are represented in the bigbluebutton API"))
+                        help_text="DEPRECATED! options for the room, that are represented in the bigbluebutton API")
     # deprecated in favor of deriving create options directly from the source event!
     welcome_message = models.CharField(max_length=300, null=True, blank=True, verbose_name=_("the rooms welcome message"),
                                        editable=False,
-                                       help_text=_("DEPRECATED! the welcome message, that is displayed to attendees"))
+                                       help_text="DEPRECATED! the welcome message, that is displayed to attendees")
     # deprecated in favor of deriving create options directly from the source event!
     # type of the room. this determines which extra join call parameters are given
     # along for the user join link. see `settings.BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS`
