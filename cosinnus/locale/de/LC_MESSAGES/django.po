@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0\n"
 
 #: admin.py:57
 #, python-format
@@ -6343,7 +6343,7 @@ msgstr "Nachricht schicken"
 #: templates/cosinnus/group/group_detail.html:660
 #: templates/cosinnus/group/group_list_items.html:41
 msgid "Admin"
-msgstr "Administratot"
+msgstr "Administrator"
 
 #: templates/cosinnus/group/group_detail.html:662
 #: templates/cosinnus/group/group_list_items.html:43
