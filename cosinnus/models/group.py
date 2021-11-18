@@ -860,12 +860,6 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
                                                           default=False,
                                                           help_text=_('If enabled, conference admins can create temporary user accounts that can be activated and deactivated.')
                                                          )
-    # deprecated, was used to configure when temporary are allowed to log in
-    conference_is_running = models.BooleanField(_('Conference accounts active'),
-                                                help_text=_('If enabled, temporary user accounts for this conference are active and can log in.'),
-                                                default=False
-                                                )
-    
     is_premium_currently = models.BooleanField(_('Conference is currrently premium'),
                                                 help_text='Flag whether this is currently in premium mode because of a booking, changed automatically by the system.',
                                                 default=False,
