@@ -855,11 +855,6 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
                                      help_text='Used for conferences to determine overall running time period.')
     to_date = models.DateTimeField(_('End Datetime'), default=None, blank=True, null=True,
                                      help_text='Used for conferences to determine overall running time period.')
-    
-    allow_conference_temporary_users = models.BooleanField(_('Allow temporary users accounts for this conference.'),
-                                                          default=False,
-                                                          help_text=_('If enabled, conference admins can create temporary user accounts that can be activated and deactivated.')
-                                                         )
     is_premium_currently = models.BooleanField(_('Conference is currrently premium'),
                                                 help_text='Flag whether this is currently in premium mode because of a booking, changed automatically by the system.',
                                                 default=False,

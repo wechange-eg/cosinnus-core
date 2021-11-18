@@ -19,5 +19,9 @@ class Migration(migrations.Migration):
         migrations.RemoveField(
             model_name='cosinnusgroup',
             name='conference_is_running',
+        ),
+        migrations.RemoveField(
+            model_name='cosinnusgroup',
+            name='allow_conference_temporary_users',
         )
     ]

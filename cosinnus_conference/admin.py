@@ -75,7 +75,6 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
     class CosinnusConferenceAdmin(CosinnusProjectAdmin):
         
         actions = CosinnusProjectAdmin.actions + ['convert_to_project']
-        exclude = ('allow_conference_temporary_users',)
         inlines = CosinnusProjectAdmin.inlines + [
             CosinnusConferencePremiumBlockInline
         ]
