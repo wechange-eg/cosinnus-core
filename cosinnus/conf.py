@@ -830,6 +830,9 @@ class CosinnusConf(AppConf):
     # if USER_SIGNUP_INCLUDES_LOCATION_FIELD==True, whether the field is required
     USER_SIGNUP_LOCATION_FIELD_IS_REQUIRED = False
     
+    # whether the user signup form has the media-tag topic field
+    USER_SIGNUP_INCLUDES_TOPIC_FIELD = False
+    
     # if True, the modern user import views will be shown
     # they require a per-portal implementation of the importer class
     USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED = False

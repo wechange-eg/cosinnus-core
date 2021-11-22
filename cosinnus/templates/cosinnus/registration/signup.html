@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n  cosinnus_tags widget_tweaks honeypot %}
+{% load i18n cosinnus_tags static widget_tweaks honeypot %}
 
 {% block page_title %}{% trans "Sign up" %}{% endblock %}
 
@@ -128,8 +128,8 @@
             
             {% block location_field %}
                 {% if SETTINGS.COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD %}
-                    <link href="/static/css/osm_field.css" type="text/css" media="screen" rel="stylesheet">
-                    <script type="text/javascript" src="/static/js/osm_field.js"></script>
+                    <link href="{% static 'css/osm_field.css' %}" type="text/css" media="screen" rel="stylesheet">
+                    <script type="text/javascript" src="{% static 'js/osm_field.js' %}"></script>
                     {% captureas loc_html %}
                         {% trans "Place or adress" as loc_placeholder %}
                         {% render_field form.location placeholder=loc_placeholder class+="font14px" %}
@@ -141,6 +141,17 @@
                     <div class="clearfix"></div>
                 {% endif %}
             {% endblock location_field %}
+            
+            {% block topic_field %}
+                {% if SETTINGS.COSINNUS_USER_SIGNUP_INCLUDES_TOPIC_FIELD %}
+                    <link href="{% static 'css/vendor/select2.css' %}" rel="stylesheet">
+                    <script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
+                    {# Large Field #}
+					{% trans "Which topics are you interested in?" as topics_label %}
+					{% trans "Select topics" as topics_placeholder %}
+					{% include 'cosinnus/fields/default_field.html' with field=form.topics label=topics_label placeholder=topics_placeholder large_field=True %}
+                {% endif %}
+            {% endblock topic_field %}
             
             {% comment %} The fields in this block are generated from `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` {% endcomment %}
             {% block portal_specific_userprofile_extra_fields %}

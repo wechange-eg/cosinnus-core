@@ -21,9 +21,10 @@ from cosinnus.forms.dynamic_fields import _DynamicFieldsBaseFormMixin
 from cosinnus.forms.managed_tags import ManagedTagFormMixin
 from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
 from cosinnus.models.profile import get_user_profile_model
-from cosinnus.models.tagged import BaseTagObject
+from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
 from cosinnus.utils.user import accept_user_tos_for_portal
 from osm_field.fields import OSMField, LatitudeField, LongitudeField
+from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
 
 
 logger = logging.getLogger('cosinnus')
@@ -129,8 +130,11 @@ class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFie
                 self.fields['location'].required = True
                 self.fields['location_lat'].required = True
                 self.fields['location_lon'].required = True
-            
-            
+        
+        # if the topic field is to be shown in signup, show it here
+        if settings.COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD:
+            TagObject = get_tag_object_model()
+            self.fields['topics'] = CommaSeparatedSelect2MultipleChoiceField(choices=TagObject.TOPIC_CHOICES, required=False)
     
     def is_valid(self):
         """ Get the email from the form and set it as username. 
@@ -191,6 +195,12 @@ class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFie
                 media_tag.location_lat = self.cleaned_data.get('location_lat')
                 media_tag.location_lon = self.cleaned_data.get('location_lon')
                 media_tag_needs_saving = True
+        
+        # set user topic field if included in signup
+        if settings.COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD:
+            if self.cleaned_data.get('topics', None):
+                media_tag.topics = self.cleaned_data.get('topics')
+            media_tag_needs_saving = True
             
         if media_tag_needs_saving:
             media_tag.save()
