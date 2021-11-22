@@ -222,7 +222,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', )}
     readonly_fields = ('created', 'last_modified', 'is_premium_currently', 'attached_objects',)
     raw_id_fields = ('parent',)
-    exclude = ('is_conference', 'conference_is_running')
+    exclude = ('is_conference',)
     inlines = [CosinnusConferenceSettingsInline]
     
     ALL_TYPES_CLASSES = [CosinnusProject, CosinnusSociety, CosinnusConference]
