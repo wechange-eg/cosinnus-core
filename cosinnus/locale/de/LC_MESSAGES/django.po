@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -5088,7 +5088,7 @@ msgid "Set your location to let other users find your profile on the map (as lon
 msgstr "Gib deinen Standort an, damit dich andere Benutzer auf der Karte finden können (wenn es deine Sichtbarkeitseinstellungen erlauben). Deine Karte wird auf deinen Standort zentriert sein, wenn du sie öffnest."
 
 msgid "Which topics are you interested in?"
-msgstr "An welchen Themen bist du interessiert?"
+msgstr "Welche Themen interessieren Sie?"
 
 msgid "What would you like to learn?"
 msgstr "Was möchtest du lernen?"
@@ -5272,10 +5272,10 @@ msgid "New Password"
 msgstr "Neues Passwort"
 
 msgid "Enter a password you don't use anywhere else. The longer the better!"
-msgstr "Gib ein Passwort ein, das du nirgendwo anders benutzt. Je länger, desto besser!"
+msgstr "Geben Sie ein Passwort ein, das Sie nirgendwo anders benutzen. Je länger, desto besser!"
 
 msgid "Repeat your password just to make sure"
-msgstr "Gib dein Passwort zur Sicherheit nochmal an"
+msgstr "Geben Sie dieses Passwort zur Sicherheit nochmal an"
 
 msgid "Repeat new Password"
 msgstr "Neues Passwort wiederholen"
@@ -5401,13 +5401,13 @@ msgid "Email address"
 msgstr "E-Mail Adresse"
 
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr "Diese Adresse wird zum Einloggen benutzt. An diese Adresse werden auch Benachrichtigungs-E-Mails geschickt (wenn du das möchtest)"
+msgstr "Diese Adresse wird zum Einloggen benutzt. An diese Adresse werden auch Benachrichtigungs-E-Mails geschickt (wenn Sie das möchten)."
 
 msgid "Repeat Password"
 msgstr "Passwort wiederholen"
 
 msgid "Your name"
-msgstr "Dein Name"
+msgstr "Wie lautet Ihr Name"
 
 msgid "This name will be displayed to other users on the site"
 msgstr "Dieser Name wird anderen Benutzern auf der Plattform angezeigt"
