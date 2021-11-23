@@ -4,13 +4,14 @@ from __future__ import unicode_literals
 from builtins import object
 import copy
 import logging
+import six
 
 from annoying.functions import get_object_or_None
 import django
 from django.apps import apps
 from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.postgres.fields import JSONField as PostgresJSONField
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.core.serializers.json import DjangoJSONEncoder
@@ -18,7 +19,6 @@ from django.db import models, transaction
 from django.db.models.signals import post_save, class_prepared
 from django.template.loader import render_to_string
 from django.urls import reverse
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
@@ -93,7 +93,7 @@ class BaseUserProfileManager(models.Manager):
         raise TypeError('user must be of type int or Model but is %s' % type(user))
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
                       TranslateableFieldsModelMixin, LikeableObjectMixin, CosinnusManagedTagAssignmentModelMixin,
                       models.Model):

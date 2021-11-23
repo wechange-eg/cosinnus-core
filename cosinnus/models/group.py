@@ -17,7 +17,6 @@ from django.db import models
 from django.db.models import Q, Max, Min, F
 from django.db.models.functions import Cast
 from django.utils import timezone
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
@@ -510,7 +509,7 @@ class CosinnusPortalMembership(BaseMembership):
         verbose_name_plural = _('Portal memberships')
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
     _CURRENT_PORTAL_CACHE_KEY = 'cosinnus/core/portal/current'
     _ALL_PORTAL_CACHE_KEY = 'cosinnus/core/portal/all'
@@ -694,7 +693,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
         return None
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
                         CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin, BBBRoomMixin,
                         AttachableObjectModel):
@@ -1540,7 +1539,7 @@ class CosinnusGroup(CosinnusBaseGroup):
         swappable = 'COSINNUS_GROUP_OBJECT_MODEL'
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusGroupInviteToken(models.Model):
     # determines on which portal the token will be accessible for users
     portal = models.ForeignKey(CosinnusPortal, verbose_name=_('Portal'), related_name='group_invite_tokens', 

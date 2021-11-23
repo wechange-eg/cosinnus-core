@@ -4,13 +4,13 @@ from __future__ import unicode_literals
 from builtins import object
 from collections import OrderedDict
 import locale
+import six
 
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.urls import reverse
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 import six
@@ -219,7 +219,7 @@ class CosinnusUnregisteredUserOrganizationInvite(BaseMembership):
         unique_together = (('email', 'group'),)
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model):
     """
     Organization model.

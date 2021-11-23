@@ -16,7 +16,7 @@ from django.apps import apps
 
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 
 # delegate import to avoid cyclic dependencies
 _CosinnusPortal = None

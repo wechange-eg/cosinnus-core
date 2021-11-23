@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from builtins import object
 import locale
 import logging
+import six
 
 from annoying.functions import get_object_or_None
 from django.contrib.contenttypes.fields import GenericForeignKey, \
@@ -17,7 +18,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.crypto import get_random_string
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from phonenumber_field.modelfields import PhoneNumberField
 import six
@@ -484,7 +484,7 @@ class CosinnusConferenceRoomManager(models.Manager):
                 .select_related('group').order_by('sort_index', 'title')
     
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
                              ModelInheritsGroupReadWritePermissionsMixin,
                              models.Model):

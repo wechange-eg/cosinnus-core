@@ -44,7 +44,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView,
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
 from django_select2.views import NO_ERR_RESP, Select2View
-from extra_views import (CreateWithInlinesView, InlineFormSet,
+from extra_views import (CreateWithInlinesView, InlineFormSetView,
                          UpdateWithInlinesView)
 from multiform.forms import InvalidArgument
 
@@ -119,21 +119,21 @@ class SamePortalGroupMixin(object):
         return super(SamePortalGroupMixin, self).get_queryset().filter(portal=CosinnusPortal.get_current())
 
 
-class CosinnusLocationInlineFormset(InlineFormSet):
+class CosinnusLocationInlineFormset(InlineFormSetView):
     extra = 5
     max_num = 5
     form_class = CosinnusLocationForm
     model = CosinnusLocation
 
 
-class CosinnusGroupGalleryImageInlineFormset(InlineFormSet):
+class CosinnusGroupGalleryImageInlineFormset(InlineFormSetView):
     extra = 6
     max_num = 6
     form_class = CosinnusGroupGalleryImageForm
     model = CosinnusGroupGalleryImage
 
 
-class CosinnusGroupCallToActionButtonInlineFormset(InlineFormSet):
+class CosinnusGroupCallToActionButtonInlineFormset(InlineFormSetView):
     extra = 10
     max_num = 10
     form_class = CosinnusGroupCallToActionButtonForm

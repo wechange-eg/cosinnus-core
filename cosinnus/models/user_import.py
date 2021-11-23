@@ -3,13 +3,13 @@ from __future__ import unicode_literals
 
 from builtins import object
 import locale
+import six
 from threading import Thread
 
 from django.contrib.postgres.fields.jsonb import JSONField as PostgresJSONField
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models, transaction
 from django.urls.base import reverse
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
@@ -63,7 +63,7 @@ class CosinnusUserImportReportItems(object):
         return render_to_string('cosinnus/user_import/report_item.html', context=context)
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusUserImport(models.Model):
     """ Saves uploaded import data and report output so that a dry-run can be saved and the user can,
         after checking the report, finalize the import from the dry run.

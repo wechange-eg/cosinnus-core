@@ -171,7 +171,6 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'suit',
         'django.contrib.admin',
         'sekizai',
-        
     ]
     
     # Internal Apps (as defined in external project)

@@ -3,9 +3,9 @@ from __future__ import unicode_literals
 
 from builtins import object
 import logging
+import six
 
 from annoying.functions import get_object_or_None
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
@@ -38,7 +38,7 @@ class CosinnusConferenceManager(CosinnusGroupManager):
     get_query_set = get_queryset
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusProject(get_cosinnus_group_model()):
     
     class Meta(object):
@@ -70,7 +70,7 @@ class CosinnusProject(get_cosinnus_group_model()):
         return super(CosinnusProject, cls).get_trans()
         
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusSociety(get_cosinnus_group_model()):
     
     class Meta(object):

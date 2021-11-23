@@ -17,7 +17,7 @@ from threading import Thread
 from django.core.mail.message import EmailMultiAlternatives
 from cosinnus.utils.user import get_list_unsubscribe_url
 from cosinnus.models.group import CosinnusPortal
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 from django.utils.safestring import mark_safe
 from django.utils.html import strip_tags
 from cosinnus.utils.html import replace_non_portal_urls
