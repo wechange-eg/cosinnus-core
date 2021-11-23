@@ -1254,8 +1254,9 @@ class CosinnusDefaultSettings(AppConf):
     # that will be shown to the users in the frontend Event forms as choices
     # for presets for BBB rooms
     BBB_PRESET_USER_FORM_FIELDS = [
-        'mic_starts_on',
-        'cam_starts_on',
+        # FIXME: fields are temporarily disabled
+        #'mic_starts_on',
+        #'cam_starts_on',
     ]
     
     # limit visit creation for (user, bbb_room) pairs to a time window
