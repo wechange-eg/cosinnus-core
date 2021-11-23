@@ -151,7 +151,11 @@ class OTPMiddleware(MiddlewareMixin):
         # check if the user is authenticated and they attempted to access a covered url
         if user and user.is_authenticated and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
             # check if the user is not yet 2fa verified, if so send them to the verification view
-            if not user.is_verified():
+            from django_otp import devices_for_user
+            devices = list(devices_for_user(user))
+            for device in devices:
+                verify_is_allowed = device.verify_is_allowed()
+            if not verify_is_allowed and not user.is_verified():
                 next_url = request.path
                 return redirect(reverse('cosinnus:login-2fa') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
 

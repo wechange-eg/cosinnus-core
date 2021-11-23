@@ -1167,7 +1167,9 @@ def cleanup_user_after_first_login(sender, user, request, **kwargs):
 
 # =============== set a password from a only by token logged in user =========================== #
 
-class TwoFactorUserHubView(TemplateView):
+from two_factor.views import SetupView
+
+class TwoFactorUserHubView(SetupView):
     """
     Simple TemplateView rendering the "user_2fa_settings.html" page.
     """
@@ -1177,15 +1179,14 @@ class TwoFactorUserHubView(TemplateView):
 two_factor_user_hub = TwoFactorUserHubView.as_view()
 
 
-from two_factor.views import SetupView
-#from two_factor.forms import TOTPDeviceForm
+# #from two_factor.forms import TOTPDeviceForm
 
-class Cosinnus2FASetupView(SetupView):
+# class Cosinnus2FASetupView(SetupView):
 
-    template_name = 'cosinnus/user_2fa/user_2fa_setup.html'
+#     template_name = 'cosinnus/user_2fa/user_2fa_setup.html'
 
 
-two_factor_auth_setup = Cosinnus2FASetupView.as_view()
+# two_factor_auth_setup = Cosinnus2FASetupView.as_view()
 
 
 from two_factor.views import DisableView

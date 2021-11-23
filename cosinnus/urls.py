@@ -218,7 +218,7 @@ if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSI
 if settings.COSINNUS_COMMON_USER_2_FACTOR_AUTH_ENABLED:
     urlpatterns += [
         url(r'^two_factor_auth_settings/$', user.two_factor_user_hub, name='two-factor-auth-settings'),
-        url(r'^two_factor_auth_settings/setup/$', user.two_factor_auth_setup, name='two-factor-auth-setup'),
+        #url(r'^two_factor_auth_settings/setup/$', user.two_factor_auth_setup, name='two-factor-auth-setup'),
         url(r'^two_factor_auth_settings/disable/$', user.two_factor_auth_disable, name='two-factor-auth-disable'),
     ]
 
