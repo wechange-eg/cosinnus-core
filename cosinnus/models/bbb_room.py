@@ -416,7 +416,7 @@ class BBBRoom(models.Model):
             given room type's extra parameters """
         params = {}
         params.update(settings.BBB_DEFAULT_JOIN_PARAMETERS)
-        params.update(settings.BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS.get(self.room_type))
+        params.update(settings.BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS.get(self.source_object.get_bbb_room_type()))
         # add the source object's options from all inherited settings objects
         params.update(self._meta.model._get_bbb_extra_params_for_api_call('join', self.source_object))
         # add the user's avatar from their profile
