@@ -1167,9 +1167,9 @@ def cleanup_user_after_first_login(sender, user, request, **kwargs):
 
 # =============== set a password from a only by token logged in user =========================== #
 
-from two_factor.views import SetupView
+from two_factor.views import ProfileView, SetupView, DisableView, BackupTokensView
 
-class TwoFactorUserHubView(SetupView):
+class TwoFactorUserHubView(ProfileView):
     """
     Simple TemplateView rendering the "user_2fa_settings.html" page.
     """
@@ -1179,23 +1179,27 @@ class TwoFactorUserHubView(SetupView):
 two_factor_user_hub = TwoFactorUserHubView.as_view()
 
 
-# #from two_factor.forms import TOTPDeviceForm
+class Cosinnus2FASetupView(SetupView):
 
-# class Cosinnus2FASetupView(SetupView):
+    template_name = 'cosinnus/user_2fa/user_2fa_setup.html'
 
-#     template_name = 'cosinnus/user_2fa/user_2fa_setup.html'
+two_factor_auth_setup = Cosinnus2FASetupView.as_view()
 
-
-# two_factor_auth_setup = Cosinnus2FASetupView.as_view()
-
-
-from two_factor.views import DisableView
 
 class Cosinnus2FADisableView(DisableView):
 
     template_name = 'cosinnus/user_2fa/user_2fa_disable.html'
-    success_url = reverse_lazy('login')
+    success_url = 'cosinnus:two-factor-auth-settings'
 
 two_factor_auth_disable = Cosinnus2FADisableView.as_view()
+
+
+class Cosinnus2FABackupTokensView(BackupTokensView):
+
+    template_name = 'cosinnus/user_2fa/user_2fa_backup_tokens.html'
+    success_url = 'cosinnus:two-factor-auth-backup-tokens'
+
+two_factor_auth_back_tokens = Cosinnus2FABackupTokensView.as_view()
+
 
 # ================================================================================================= #
