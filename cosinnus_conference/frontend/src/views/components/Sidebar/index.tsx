@@ -41,7 +41,7 @@ export function Sidebar(props: SidebarProps) {
         width="100%"
         height="100%"
         className={classes.iframe}
-        allow="display-capture; geolocation; microphone *; camera *; fullscreen *;"
+        allow="display-capture *; geolocation *; microphone *; camera *; fullscreen *;"
       />
     </Drawer>
   )
