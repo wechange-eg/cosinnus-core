@@ -1,0 +1,30 @@
+{% extends "cosinnus/user_2fa/user_2fa_settings.html" %}
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{% block breadcrumb %}
+        <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
+        <li class="active"><a href="{% url 'cosinnus:two-factor-auth-settings' %}">{% trans "2FA Settings" %}</a></li>
+        <li class="active"><a href="{% url 'cosinnus:two-factor-auth-setup' %}">{% trans "2FA Setup" %}</a></li>
+        <li class="active">{% trans "2FA Setup Complete" %}</li>
+{% endblock %}
+
+{% block content %}
+  <h1>{% block title %}{% trans "2FA Setup Complete" %}{% endblock %}</h1>
+
+  <p>{% blocktrans trimmed %}Congratulations, you've successfully enabled 2FA.{% endblocktrans %}</p>
+
+  {% if not phone_methods %}
+    <p><a href="{% url 'profile:profile-detail' %}"
+        class="btn btn-block btn-secondary">{% trans "Back to your profile" %}</a></p>
+  {% else %}
+    <p>{% blocktrans trimmed %}However, it might happen that you don't have access to
+      your primary token device. To enable account recovery, add a phone
+      number.{% endblocktrans %}</p>
+
+    <a href="{% url 'profile:profile-detail' %}"
+        class="float-right btn btn-link">{% trans "Back to your profile" %}</a>
+    <p><a href="{% url 'two_factor:phone_create' %}"
+        class="btn btn-success">{% trans "Add Phone Number" %}</a></p>
+  {% endif %}
+
+{% endblock %}
