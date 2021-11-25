@@ -10,6 +10,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey, \
     GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import JSONField as PostgresJSONField
+from django.core.serializers.json import DjangoJSONEncoder
 from django.core.cache import cache
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -27,7 +28,7 @@ from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus.utils.files import get_conference_conditions_filename
 from cosinnus.utils.functions import clean_single_line_text, \
-    unique_aware_slugify
+    unique_aware_slugify, update_dict_recursive
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
@@ -117,29 +118,32 @@ class CosinnusConferenceSettings(models.Model):
         default=SETTING_INHERIT, choices=BBB_SERVER_CHOICES_WITH_INHERIT,
         help_text='The chosen BBB-Server/Cluster setting for the generic object, that will be used when the group of that object is currently in its premium state. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
     
+    bbb_params = PostgresJSONField(default=dict, blank=True, verbose_name=_('BBB API Parameters'),
+            help_text='Custom parameters for API calls like join/create for all BBB rooms for this object and in its inherited objects.',
+            encoder=DjangoJSONEncoder)
+    
     # for later:
 #     auto_mic = models.PositiveSmallIntegerField(_('TODO: Skip mic check'), 
 #         blank=False, default=SETTING_INHERIT, choices=PRESET_FIELD_CHOICES,
 #         editable=bool('auto_mic' not in settings.BBB_PRESET_FORM_FIELDS_DISABLED),
 #         help_text=_('TODO: whether to skip mic'))
 
-    mic_starts_on = models.PositiveSmallIntegerField(_('Turn on microphone on entering'), 
-        blank=False, default=SETTING_INHERIT, choices=PRESET_FIELD_CHOICES,
-        editable=bool('mic_starts_on' not in settings.BBB_PRESET_FORM_FIELDS_DISABLED),
-        help_text=_('Whether the microphone is active when entering the BBB room'))
-     
-    cam_starts_on = models.PositiveSmallIntegerField(_('Turn on camera on entering'), 
-        blank=False, default=SETTING_INHERIT, choices=PRESET_FIELD_CHOICES,
-        editable=bool('cam_starts_on' not in settings.BBB_PRESET_FORM_FIELDS_DISABLED),
-        help_text=_('Whether the camera is active when entering the BBB room'))
+# TODO remove
+#     mic_starts_on = models.PositiveSmallIntegerField(_('Turn on microphone on entering'), 
+#         blank=False, default=SETTING_INHERIT, choices=PRESET_FIELD_CHOICES,
+#         editable=bool('mic_starts_on' not in settings.BBB_PRESET_FORM_FIELDS_DISABLED),
+#         help_text=_('Whether the microphone is active when entering the BBB room'))
+#      
+#     cam_starts_on = models.PositiveSmallIntegerField(_('Turn on camera on entering'), 
+#         blank=False, default=SETTING_INHERIT, choices=PRESET_FIELD_CHOICES,
+#         editable=bool('cam_starts_on' not in settings.BBB_PRESET_FORM_FIELDS_DISABLED),
+#         help_text=_('Whether the camera is active when entering the BBB room'))
     
     # list of field names that can be overwritten during higher-chain inheritance
     # these fields all need to be able to take on the value of `SETTING_INHERIT`
     INHERITABLE_FIELDS = [
         'bbb_server_choice',
         'bbb_server_choice_premium',
-        'mic_starts_on',
-        'cam_starts_on',
     ]
     
     CACHE_KEY = 'cosinnus/core/conferencesetting/class/%s/id/%d'
@@ -239,39 +243,88 @@ class CosinnusConferenceSettings(models.Model):
         for field_name in self.INHERITABLE_FIELDS:
             if getattr(self, field_name, 'UNSET') == self.SETTING_INHERIT:
                 setattr(self, field_name, getattr(inherit_target, field_name))
+        # for bbb_params, recursively update the lower dict with out
+        # TODO: check!
+        print(f'>>> Inherited dict [target:{inherit_target.bbb_params}], [self:{self.bbb_params}]')
+        self.bbb_params = update_dict_recursive(inherit_target.bbb_params, self.bbb_params)
+        print(f' >>>> merged: {self.bbb_params}')
         return self
     
-    @classmethod
-    def get_bbb_preset_form_field_values_for_object(cls, source_object):
-        """ For a given source object that can have CosinnusConferenceSettings attached,
-            get the chosen/inherited choice values for `BBB_PRESET_FORM_FIELD_PARAMS`
+    def get_finalized_bbb_params(self, no_defaults=False, nature=None):
+        """ Return a flattened copy of the `bbb_param` field of this config object.
+            This takes the portal default BBB params from
+             """
+        params = {} if no_defaults else copy(settings.BBB_PARAM_PORTAL_DEFAULTS)
+        params.update(self.bbb_params)
+        if nature:
+            # TODO: special merge for __coffee nature!
+            pass
+        return params
+    
+    def get_bbb_preset_form_field_values(self, no_defaults=False, nature=None):
+        """ Get the chosen/inherited choice values for `BBB_PRESET_FORM_FIELD_PARAMS` this config object.
+            @param no_inheritance: if True, will only return values for the current object,
+                and won't replace inherited values with default values configured in settings.
+                If this is set to True, the choice_values returned may equal `SETTING_INHERIT` too.
+            @param nature: the nature of the source object (type of event) for replacing specific call params
             @return: a dict of {<field_name>: <choice_value>, ...} """
         value_choices_dict = {}  
-        conference_settings = cls.get_for_object(source_object)
-        for field_name, _bbb_options_dict in settings.BBB_PRESET_FORM_FIELD_PARAMS.items():
-            # for each non-disabled preset field, find the value we should use
-            if field_name in settings.BBB_PRESET_FORM_FIELDS_DISABLED:
-                continue
-            option_value = getattr(conference_settings, field_name, None)
-            # sanity check: this shouldn't be None!
-            if option_value is None:
-                if settings.DEBUG:
-                    raise ImproperlyConfigured(f'The value for {field_name} in conference settings inheritance should not be None!')
-                continue
+        bbb_params = self.get_finalized_bbb_params(no_defaults=no_defaults, nature=nature)
+        
+        for field_name in settings.BBB_PRESET_USER_FORM_FIELDS:
+            field_choice_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS.get(field_name)
+            # match the first preset_value that exists and isn't empty 
+            # and fulfills all conditions in the current settings object
+            matched_value = self.SETTING_INHERIT
+            for preset_value, preset_call_config in field_choice_dict.items():
+                # match first occurence in this loop and break if found
+                if preset_call_config:
+                    matching = True
+                    for api_call_name, api_call_params in preset_call_config.items():
+                        # check if all params that occur in `BBB_PRESET_FORM_FIELD_PARAMS`
+                        # occur in each corresponding value -> call -> param-list in the current settings object
+                        if not api_call_params or not all([
+                                    bbb_params.get(api_call_name, {}).get(param_key, None) == param_val 
+                                    for param_key, param_val in api_call_params.items()
+                                ]):
+                            matching = False
+                            print(f'>>> broken match {field_name} --> {api_call_params}')
+                            break
+                    if matching:
+                        print(f' >> actual match {field_name}, {preset_value} --> {preset_call_config}')
+                        matched_value = preset_value
+                        break
             # if the settings object has no set value, the portal default value is used
-            if option_value == CosinnusConferenceSettings.SETTING_INHERIT:
-                option_value = settings.BBB_PRESET_FORM_FIELD_PORTAL_DEFAULTS.get(field_name)
-                if option_value is None:
-                    logger.warning(f'BBB option parameter building: A portal default value for "{field_name}" was not set in `BBB_PRESET_FORM_FIELD_PORTAL_DEFAULTS`!')
-                    continue
-            value_choices_dict[field_name] = option_value
+            if matched_value == self.SETTING_INHERIT and not no_defaults:
+                logger.warning(f'BBB option parameter building: A portal default value for "{field_name}" was not set in `BBB_PARAM_PORTAL_DEFAULTS`! Assuming "no" for this value.')
+                matched_value = self.SETTING_NO
+            value_choices_dict[field_name] = matched_value
         return value_choices_dict
     
+    def set_bbb_preset_form_field_values(self, preset_choices_dict, nature=None):
+        """ Generates from scratch and sets the `bbb_params` for this config object, given a list of
+            user-chosen values and presets from presets from `BBB_PRESET_FORM_FIELD_PARAMS` """
+        bbb_params = {}
+        for field_name, choice_value in preset_choices_dict.items():
+            if field_name in settings.BBB_PRESET_FORM_FIELD_PARAMS and \
+                    choice_value is not None and choice_value != self.SETTING_INHERIT:
+                update_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS.get(field_name).get(choice_value, {})
+                print(f'>> updateing bbb_params with dict {update_dict} from field {field_name} ')
+                bbb_params.update(update_dict)
+                # TODO: update the call values depending on the nature!
+                if nature:
+                    pass
+        self.bbb_params = bbb_params
+        
     def has_changed_inherited_fields(self):
-        """ Returns True if any of the inheritable fields as a value other than the default inherit marker, False else. 
+        """ Returns True if any of the inheritable fields as a value other than the default inherit marker,
+            or if the `bbb_params` field is set, False else. 
             If this returns False, it means that this settings instance carries no extra information and could be 
             deleted without losing anything. """
-        return any([getattr(self, field_name) != self.SETTING_INHERIT for field_name in self.INHERITABLE_FIELDS])
+        return bool(
+            any([getattr(self, field_name) != self.SETTING_INHERIT for field_name in self.INHERITABLE_FIELDS]) \
+            or self.bbb_params
+        )
     
     def get_readonly_copy(self):    
         """ Return a readonly copy of this instance, so that it can be passed around in the 

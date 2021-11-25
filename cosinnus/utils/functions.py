@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 from builtins import str
-from importlib import import_module
-from uuid import uuid1
-from django.core.exceptions import ImproperlyConfigured
-from django.utils.text import normalize_newlines, unescape_entities
-from django.utils.html import strip_tags
-from django.utils.encoding import force_text
-from django.core.validators import validate_email
-from django.core.exceptions import ValidationError
-import six
-import numpy
-import locale
+import collections.abc
 import functools
+from importlib import import_module
+import locale
 import logging
+from uuid import uuid1
+
+from django.core.exceptions import ImproperlyConfigured
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+from django.utils.encoding import force_text
+from django.utils.html import strip_tags
+from django.utils.text import normalize_newlines, unescape_entities
+import six
+
 
 logger = logging.getLogger('cosinnus')
 
@@ -307,3 +310,12 @@ def catch_all_and_log(func):
                              extra={'exception': e})
     return inner_function
 
+
+def update_dict_recursive(d, u):
+    """ Recursively update a dict so that all nested dicts are also updated instead of replaced """
+    for k, v in u.items():
+        if isinstance(v, collections.abc.Mapping):
+            d[k] = update_dict_recursive(d.get(k, {}), v)
+        else:
+            d[k] = v
+    return d

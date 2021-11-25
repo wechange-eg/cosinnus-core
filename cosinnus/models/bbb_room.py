@@ -30,6 +30,7 @@ from cosinnus.utils.functions import clean_single_line_text
 from django.template.defaultfilters import truncatechars
 from cosinnus.models.membership import MEMBERSHIP_MEMBER, MANAGER_STATUS
 from cosinnus.models.conference import CosinnusConferenceSettings
+from copy import copy
 
 
 # from cosinnus.models import MEMBERSHIP_ADMIN
@@ -416,6 +417,7 @@ class BBBRoom(models.Model):
             given room type's extra parameters """
         params = {}
         params.update(settings.BBB_DEFAULT_JOIN_PARAMETERS)
+        # TODO: replace BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS with the nature during the flatten
         params.update(settings.BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS.get(self.source_object.get_bbb_room_type()))
         # add the source object's options from all inherited settings objects
         params.update(self._meta.model._get_bbb_extra_params_for_api_call('join', self.source_object))
@@ -436,18 +438,13 @@ class BBBRoom(models.Model):
                 which params are selected from the configured `settings.BBB_PRESET_FORM_FIELD_PARAMS`
                 for each field_name in the settings presets
             @param source_object: the source object from which the inheritance chain starts """
-        params = {}
         # add the source object's options from all inherited settings objects
-        value_choices_dict = CosinnusConferenceSettings.get_bbb_preset_form_field_values_for_object(source_object)
-        
-        for field_name, bbb_options_dict in settings.BBB_PRESET_FORM_FIELD_PARAMS.items():
-            # we now know which option the setting should use, so return any params to be used for the specific api call
-            if field_name not in value_choices_dict:
-                continue
-            value_options_dict = bbb_options_dict.get(value_choices_dict[field_name], {})
-            api_call_params = value_options_dict.get(api_call_method, {})
-            params.update(api_call_params)
-        return params
+        conference_settings = CosinnusConferenceSettings.get_for_object(source_object)
+        # this is the merged params object containing the flattened hierarchy of inherited objects
+        # TODO: set nature of source object
+        bbb_params = conference_settings.get_finalized_bbb_params(nature=None)
+        call_params = bbb_params.get(api_call_method, {})
+        return call_params
     
     def get_join_url(self, user):
         """ Returns the actual BBB-Server URL with tokens for a given user

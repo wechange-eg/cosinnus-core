@@ -1226,8 +1226,18 @@ class CosinnusDefaultSettings(AppConf):
                     'muteOnStart': 'true',
                 },
             },
+            1: {
+                'create': {
+                    'muteOnStart': 'false',
+                },
+            },
         },
         'cam_starts_on': {
+            0: {
+                'join': {
+                    'userdata-bbb_auto_share_webcam': 'false',
+                },
+            },
             1: {
                 'join': {
                     'userdata-bbb_auto_share_webcam': 'true',
@@ -1236,13 +1246,15 @@ class CosinnusDefaultSettings(AppConf):
         },
     }
     
-    # the default baseline portal values for the form field presets
-    # from BBB_PRESET_FORM_FIELD_PARAMS. choose from a value of
-    # 0: `CosinnusConferenceSettings.SETTING_NO`
-    # 1: `CosinnusConferenceSettings.SETTING_YES`
-    BBB_PRESET_FORM_FIELD_PORTAL_DEFAULTS = {
-        'mic_starts_on': 0,
-        'cam_starts_on': 0,
+    # the default baseline portal values for the BBB call params
+    # these are also used to generate the portal preset defaults for inheritance
+    BBB_PARAM_PORTAL_DEFAULTS = {
+        'create': {
+            'muteOnStart': 'true',
+        },
+        'join': {
+            'userdata-bbb_auto_share_webcam': 'false',
+        },
     }
     
     # a list of field names from fields in `CosinnusConferenceSettings`
@@ -1254,9 +1266,8 @@ class CosinnusDefaultSettings(AppConf):
     # that will be shown to the users in the frontend Event forms as choices
     # for presets for BBB rooms
     BBB_PRESET_USER_FORM_FIELDS = [
-        # FIXME: fields are temporarily disabled
-        #'mic_starts_on',
-        #'cam_starts_on',
+        'mic_starts_on',
+        'cam_starts_on',
     ]
     
     # limit visit creation for (user, bbb_room) pairs to a time window
