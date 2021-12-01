@@ -89,7 +89,8 @@ LOGIN_URLS = NEVER_REDIRECT_URLS + [
     '/password_reset/',
     '/reset/',
     '/password_set_initial/',
-    '/two_factor_auth_token/',
+    '/two_factor_auth/token_login/',
+    '/two_factor_auth/qrcode/',
 ]
 
 EXEMPTED_URLS_FOR_2FA = [url for url in LOGIN_URLS if url != '/admin/']

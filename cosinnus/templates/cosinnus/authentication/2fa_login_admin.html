@@ -1,0 +1,98 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static suit_tags %}
+{% load url from suit_compat %}
+
+{% block extrastyle %}{{ block.super }}
+    {#    <link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />#}
+{% endblock %}
+
+{% block bodyclass %}login{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content-left %}{% endblock %}
+
+{% block container %}
+
+    {% block content %}
+
+        {% if form.errors and not form.non_field_errors and not form.this_is_the_login_form.errors %}
+            <p class="errornote alert alert-error">
+                {% blocktrans count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+            </p>
+        {% endif %}
+
+        {% if form.non_field_errors or form.this_is_the_login_form.errors %}
+            {% if form.this_is_the_login_form.errors %}
+                {% for error in form.non_field_errors|add:form.this_is_the_login_form.errors %}
+                    <p class="errornote alert alert-error">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            {% else %}
+                {% for error in form.non_field_errors %}
+                    <p class="errornote alert alert-error">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+
+        <div id="content-main">
+            <h1><i class="icon-lock icon-white"></i> {{ 'ADMIN_NAME'|suit_conf }} - {% trans "2-factor access only" %}</h1>
+			
+			{% if form.otp_device.field.choices %}
+	            <form action="{{ app_path }}" method="post" id="login-form"><div class="hide">{% csrf_token %}</div>
+	            	
+	            	{% if form.get_user %}
+					    <div class="form-row">
+					        <label for="id_otp_device">{% trans 'OTP Device:' %}</label> {{ form.otp_device }}
+					    </div>
+				    {% endif %}
+	                <div class="form-row control-group{% if not form.this_is_the_login_form.errors and form.otp_token.errors %} error{% endif %}">
+	                    <label for="id_otp_token" class="control-label required">{% trans "Enter the generated number code from your authenticator app" %}:</label> {{ form.otp_token }}
+	                    {% if not form.this_is_the_login_form.errors and form.otp_token.errors %}<div class="help-block">{{ form.otp_token.errors }}</div>{% endif %}
+	                </div>
+	                
+	                {% url 'admin_password_reset' as password_reset_url %}
+	                {% if password_reset_url %}
+	                    <div class="password-reset-link">
+	                        <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
+	                    </div>
+	                {% endif %}
+	                <div class="submit-row">
+	                    <input type="submit" value="{% trans 'Validate' %}" class="btn btn-info"/>
+	                    <a type="button"  href="{% url "admin:logout" %}" class="btn btn-link btn-info pull-right">{% trans 'Log out' %}</a>
+	                </div>
+	            </form>
+	
+	            <script type="text/javascript">
+	                document.getElementById('id_otp_token').focus()
+	            </script>
+            {% else %}
+            	<form> 
+            		<div class="form-row">
+	            		<p>
+		            		{% trans "You are logged in as" %}: <b>{{ request.user.email }}</b>
+		            	</p>
+		            	<p>
+		            		{% trans "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!" %} 
+		            		<br/>
+		            		<a href="https://{{ request.get_host }}/admin/otp_totp/totpdevice/">https://{{ request.get_host }}/admin/otp_totp/totpdevice/</a>
+		            	</p>
+	            	</div>
+	            	
+	            	<div class="submit-row">
+	                    <a type="button"  href="{% url "admin:logout" %}" class="btn btn-link btn-info">{% trans 'Log out' %}</a>
+	                </div>
+            	</form>
+            {% endif %}
+        </div>
+    {% endblock %}
+{% endblock %}

@@ -81,6 +81,9 @@ from django.core.exceptions import PermissionDenied
 from cosinnus import cosinnus_notifications
 from cosinnus.utils.html import render_html_with_variables
 from django.utils import timezone
+from two_factor.views.core import QRGeneratorView
+from two_factor.views.utils import class_view_decorator
+from two_factor.utils import default_device
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -1193,8 +1196,15 @@ class Cosinnus2FASetupView(SetupView):
 
     template_name = 'cosinnus/user_2fa/user_2fa_setup.html'
     success_url = 'cosinnus:two-factor-auth-setup-complete'
+    qrcode_url = 'cosinnus:two-factor-auth-qr'
 
 two_factor_auth_setup = Cosinnus2FASetupView.as_view()
+
+
+class Cosinnus2FAQRGeneratorView(QRGeneratorView):
+    pass
+
+two_factor_auth_qr = Cosinnus2FAQRGeneratorView.as_view()
 
 
 class Cosinnus2FASetupCompleteView(SetupCompleteView):
@@ -1220,23 +1230,48 @@ class Cosinnus2FABackupTokensView(BackupTokensView):
 two_factor_auth_back_tokens = Cosinnus2FABackupTokensView.as_view()
 
 
-
-class Cosinnus2FAAuthenticationTokenView(FormView):
+@class_view_decorator(sensitive_post_parameters())
+@class_view_decorator(never_cache)
+class Cosinnus2FAAuthenticationTokenView(RequireLoggedInMixin, FormView):
 
     form_class = AuthenticationTokenForm
     template_name = 'cosinnus/user_2fa/user_2fa_login.html'
     success_url = reverse_lazy('cosinnus:cosinnus:profile-detail')
+    two_factor_method = 'token'
 
-    def __init__(self, user, initial_device, **kwargs):
-        print(user + initial_device)
-        super(Cosinnus2FAAuthenticationTokenView, self).__init__(user, initial_device, **kwargs)
-        self.user=user
-        self.initial_device=initial_device
+#     def __init__(self, user, initial_device, **kwargs):
+#         print(user + initial_device)
+#         super(Cosinnus2FAAuthenticationTokenView, self).__init__(user, initial_device, **kwargs)
+#         self.user=user
+#         self.initial_device=initial_device
+
+    def get_form_kwargs(self, step=None):
+        """
+        AuthenticationTokenForm requires the user kwarg.
+        """
+        user = self.request.user
+        return {
+            'user': user,
+            'initial_device': default_device(user),
+        }
+    
+    def form_invalid(self, form):
+        """If the form is invalid, render the invalid form."""
+        print('>>> form invalid')
+        import ipdb;ipdb.set_trace()
+        return super().form_invalid(form)
 
     def form_valid(self, form):
         print(f'FORM CLEANED DATA: {form.cleaned_data}')
         return super().form_valid(form)
-
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context.update({
+            'two_factor_method': self.two_factor_method,
+        })
+        print(f'>>> form: {context["form"].__dict__}')
+        return context
 
 two_factor_auth_token = Cosinnus2FAAuthenticationTokenView.as_view()
 
