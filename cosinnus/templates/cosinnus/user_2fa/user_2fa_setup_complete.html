@@ -9,22 +9,23 @@
 {% endblock %}
 
 {% block content %}
-  <h1>{% block title %}{% trans "2FA Setup Complete" %}{% endblock %}</h1>
 
-  <p>{% blocktrans trimmed %}Congratulations, you've successfully enabled 2FA.{% endblocktrans %}</p>
+    <div class="content-box">
+        <h4>{% block title %}{% trans "2FA Setup Complete" %}{% endblock %}</h4>
+        <p>{% blocktrans trimmed %}Congratulations, you've successfully enabled 2FA.{% endblocktrans %}</p>
+    </div>
 
-  {% if not phone_methods %}
-    <p><a href="{% url 'profile:profile-detail' %}"
-        class="btn btn-block btn-secondary">{% trans "Back to your profile" %}</a></p>
-  {% else %}
-    <p>{% blocktrans trimmed %}However, it might happen that you don't have access to
-      your primary token device. To enable account recovery, add a phone
-      number.{% endblocktrans %}</p>
-
-    <a href="{% url 'profile:profile-detail' %}"
-        class="float-right btn btn-link">{% trans "Back to your profile" %}</a>
-    <p><a href="{% url 'two_factor:phone_create' %}"
-        class="btn btn-success">{% trans "Add Phone Number" %}</a></p>
-  {% endif %}
+        <button type="submit" href="{% url 'cosinnus:profile-detail' %}" class="btn btn-emphasized btn-autosize">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left" tabindex="-1">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Back to your profile" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
 
 {% endblock %}

@@ -68,7 +68,9 @@
       </ul>
     </button>
 
-    {% include "two_factor/_wizard_forms.html" %}
-
+    <table class="mb-3">
+      {{ wizard.management_form }}
+      {{ wizard.form }}
+    </table>
   </form>
 {% endblock %}

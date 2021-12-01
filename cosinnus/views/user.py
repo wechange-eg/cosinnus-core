@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from builtins import str
 from django.contrib.auth import get_user_model, login as auth_login, logout as auth_logout,\
     login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
@@ -14,6 +15,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.http import Http404
+from django.views.generic.edit import FormView
 from cosinnus.core.decorators.views import staff_required, superuser_required,\
     redirect_to_not_logged_in, redirect_to_403
 from cosinnus.forms.user import UserCreationForm, UserChangeForm,\
@@ -1165,9 +1167,17 @@ def cleanup_user_after_first_login(sender, user, request, **kwargs):
     CosinnusUnregisterdUserGroupInvite.objects.filter(email=user.email).delete()
 
 
-# =============== set a password from a only by token logged in user =========================== #
+# =============== 2FA for common users =========================== #
 
 from two_factor.views import ProfileView, SetupView, SetupCompleteView, DisableView, BackupTokensView
+from two_factor.forms import AuthenticationTokenForm, BackupTokenForm
+
+# class Cosinnus2FACommonUserLogin(LoginView):
+
+#     template_name = 'cosinnus/user_2fa/user_2fa_login.html'
+
+# two_factor_auth_login = Cosinnus2FACommonUserLogin.as_view()
+
 
 class TwoFactorUserHubView(ProfileView):
     """
@@ -1210,4 +1220,32 @@ class Cosinnus2FABackupTokensView(BackupTokensView):
 two_factor_auth_back_tokens = Cosinnus2FABackupTokensView.as_view()
 
 
-# ================================================================================================= #
+
+class Cosinnus2FAAuthenticationTokenView(FormView):
+
+    form_class = AuthenticationTokenForm
+    template_name = 'cosinnus/user_2fa/user_2fa_login.html'
+    success_url = reverse_lazy('cosinnus:cosinnus:profile-detail')
+
+    def __init__(self, user, initial_device, **kwargs):
+        print(user + initial_device)
+        super(Cosinnus2FAAuthenticationTokenView, self).__init__(user, initial_device, **kwargs)
+        self.user=user
+        self.initial_device=initial_device
+
+    def form_valid(self, form):
+        print(f'FORM CLEANED DATA: {form.cleaned_data}')
+        return super().form_valid(form)
+
+
+two_factor_auth_token = Cosinnus2FAAuthenticationTokenView.as_view()
+
+
+# class Cosinnus2FABackupTokenView(FormView):
+    
+#     form_class = BackupTokenForm
+#     template_name = 'cosinnus/user_2fa/user_2fa_login.html'
+
+# two_factor_backup_token = Cosinnus2FABackupTokenView.as_view()
+
+# ================================================================ #

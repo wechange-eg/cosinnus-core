@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import include, url
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, re_path
 from django.views.generic.base import RedirectView, TemplateView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
@@ -217,9 +217,12 @@ if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSI
 
 if settings.COSINNUS_COMMON_USER_2_FACTOR_AUTH_ENABLED:
     urlpatterns += [
+        #url(r'^two_factor_auth_login/$', user.two_factor_auth_login, name='two-factor-auth-login'),
+        url(r'^two_factor_auth_token/$', user.two_factor_auth_token, name='two-factor-auth-token'),
+        #url(r'^two_factor_backup_token/$', user.two_factor_backup_token, name='two-factor-backup-token'),
         url(r'^two_factor_auth_settings/$', user.two_factor_user_hub, name='two-factor-auth-settings'),
         url(r'^two_factor_auth_settings/setup/$', user.two_factor_auth_setup, name='two-factor-auth-setup'),
-        url(r'^two_factor_auth_settings/setup/complete$', user.two_factor_auth_setup_complete, name='two-factor-auth-setup-complete'),
+        url(r'^two_factor_auth_settings/setup/complete/$', user.two_factor_auth_setup_complete, name='two-factor-auth-setup-complete'),
         url(r'^two_factor_auth_settings/disable/$', user.two_factor_auth_disable, name='two-factor-auth-disable'),
         url(r'^two_factor_auth_settings/backup_tokens/$', user.two_factor_auth_back_tokens, name='two-factor-auth-backup-tokens'),
     ]
