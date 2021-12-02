@@ -62,6 +62,10 @@ class CosinnusConferenceSettingsForm(forms.ModelForm):
         """ Collect the inherited field labels of the parent objects for the preset fields.
             We're using post_init for multiforms as we have no back reference to 
             the MultiForm in __init__ """
+        # if BBB is active, generate preset fields for meeting parameter options
+        if not settings.COSINNUS_BBB_SERVER_CHOICES:
+            return
+            
         # generate the fields for choices as configured in `BBB_PRESET_USER_FORM_FIELDS`
         # TODO set nature of the target instance for the form
         nature = None

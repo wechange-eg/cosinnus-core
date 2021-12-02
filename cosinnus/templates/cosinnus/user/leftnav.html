@@ -146,7 +146,7 @@
 	{% endif %}
 {% endif %}
 
-{% if SETTINGS.COSINNUS_COMMON_USER_2_FACTOR_AUTH_ENABLED %}
+{% if SETTINGS.COSINNUS_USER_2_FACTOR_AUTH_ENABLED %}
 <button type="button" class="btn w100 btn-{% if view == "two-factor-auth" %}extra-{% endif %}emphasized regular-space" href="{% url 'cosinnus:two-factor-auth-settings' %}">
 	<ul class="media-list">
 		<li class="media">

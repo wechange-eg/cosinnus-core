@@ -90,6 +90,7 @@ LOGIN_URLS = NEVER_REDIRECT_URLS + [
     '/reset/',
     '/password_set_initial/',
     '/two_factor_auth/token_login/',
+    '/two_factor_auth/token_login/backup/',
     '/two_factor_auth/qrcode/',
 ]
 
@@ -125,7 +126,7 @@ class StartupMiddleware(MiddlewareMixin):
         raise MiddlewareNotUsed
 
 
-class OTPMiddleware(MiddlewareMixin):
+class AdminOTPMiddleware(MiddlewareMixin):
     """
         If setting `COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED` is True, this middleware 
         will restrict all access to the django admin area to accounts with a django-otp
@@ -158,10 +159,10 @@ class OTPMiddleware(MiddlewareMixin):
         return None
 
     
-class CommonUser2FAMiddleware(MiddlewareMixin):
+class UserOTPMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
-        if not getattr(settings, 'COSINNUS_COMMON_USER_2_FACTOR_AUTH_ENABLED', False):
+        if not getattr(settings, 'COSINNUS_USER_2_FACTOR_AUTH_ENABLED', False):
             return None
         
         filter_path = '/'
@@ -174,7 +175,6 @@ class CommonUser2FAMiddleware(MiddlewareMixin):
             devices = list(devices_for_user(user))
             has_verifiable_devices = False
             for device in devices:
-                print('XXXXXXXXX' + str(device) + str(device.verify_is_allowed()))
                 verify_is_allowed = device.verify_is_allowed()
                 if verify_is_allowed[0] == True:
                     has_verifiable_devices = True

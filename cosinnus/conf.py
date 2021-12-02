@@ -187,7 +187,7 @@ class CosinnusConf(AppConf):
 
     # if True, users may activate the 2-factor-authentication for
     # their user profiles within the portal
-    COMMON_USER_2_FACTOR_AUTH_ENABLED = False
+    USER_2_FACTOR_AUTH_ENABLED = False
     
     # enable this to sign up new members to a cleverreach newsletter group
     CLEVERREACH_AUTO_SIGNUP_ENABLED = False

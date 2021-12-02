@@ -217,17 +217,16 @@ if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSI
         url(r'^search/api/quicksearch/$', search.api_quicksearch, name='quicksearch-api'),
     ]
 
-if settings.COSINNUS_COMMON_USER_2_FACTOR_AUTH_ENABLED:
+if settings.COSINNUS_USER_2_FACTOR_AUTH_ENABLED:
     urlpatterns += [
-        #url(r'^two_factor_auth_login/$', user.two_factor_auth_login, name='two-factor-auth-login'),
-        url(r'^two_factor_auth/token_login/$', authentication.non_admin_otp_token_validation, name='two-factor-auth-token'),
-        url(r'^two_factor_auth/qrcode/$', user.two_factor_auth_qr, name='two-factor-auth-qr'),
-        #url(r'^two_factor_backup_token/$', user.two_factor_backup_token, name='two-factor-backup-token'),
-        url(r'^two_factor_auth/settings/$', user.two_factor_user_hub, name='two-factor-auth-settings'),
-        url(r'^two_factor_auth/settings/setup/$', user.two_factor_auth_setup, name='two-factor-auth-setup'),
-        url(r'^two_factor_auth/settings/setup/complete/$', user.two_factor_auth_setup_complete, name='two-factor-auth-setup-complete'),
-        url(r'^two_factor_auth/settings/disable/$', user.two_factor_auth_disable, name='two-factor-auth-disable'),
-        url(r'^two_factor_auth/settings/backup_tokens/$', user.two_factor_auth_back_tokens, name='two-factor-auth-backup-tokens'),
+        url(r'^two_factor_auth/token_login/$', authentication.user_otp_token_validation, name='two-factor-auth-token'),
+        url(r'^two_factor_auth/token_login/backup/$', authentication.user_otp_token_validation, name='two-factor-auth-token-backup', kwargs={'two_factor_method': 'backup'}),
+        url(r'^two_factor_auth/qrcode/$', authentication.two_factor_auth_qr, name='two-factor-auth-qr'),
+        url(r'^two_factor_auth/settings/$', authentication.two_factor_user_hub, name='two-factor-auth-settings'),
+        url(r'^two_factor_auth/settings/setup/$', authentication.two_factor_auth_setup, name='two-factor-auth-setup'),
+        url(r'^two_factor_auth/settings/setup/complete/$', authentication.two_factor_auth_setup_complete, name='two-factor-auth-setup-complete'),
+        url(r'^two_factor_auth/settings/disable/$', authentication.two_factor_auth_disable, name='two-factor-auth-disable'),
+        url(r'^two_factor_auth/settings/backup_tokens/$', authentication.two_factor_auth_back_tokens, name='two-factor-auth-backup-tokens'),
     ]
 
 # some user management not allowed in integrated mode and sso-mode
