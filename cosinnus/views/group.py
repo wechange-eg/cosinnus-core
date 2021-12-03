@@ -103,6 +103,7 @@ from cosinnus_organization.utils import get_organization_select2_pills
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.views.attached_object import AttachableViewMixin
 from cosinnus.core.middleware import inactive_logout_middleware
+from cosinnus.forms.conference import CosinnusConferenceSettingsMultiForm
 
 
 logger = logging.getLogger('cosinnus')
@@ -191,7 +192,8 @@ class CosinnusGroupFormMixin(object):
     
     def get_form_class(self):
         
-        class CosinnusGroupForm(get_form(self.group_form_class, attachable=False)):
+        class CosinnusGroupForm(get_form(self.group_form_class, attachable=False,
+                         extra_forms={'conference_settings_assignments': CosinnusConferenceSettingsMultiForm})):
             def dispatch_init_group(self, name, group):
                 if name == 'media_tag':
                     return group

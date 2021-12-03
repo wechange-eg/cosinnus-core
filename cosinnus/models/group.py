@@ -69,7 +69,7 @@ from django.utils.timezone import now
 from django.template.defaultfilters import date as django_date_filter
 
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
-from cosinnus_event.mixins import BBBRoomMixin
+from cosinnus_event.mixins import BBBRoomMixin # noqa
 from cosinnus.utils.dates import timestamp_from_datetime
 
 logger = logging.getLogger('cosinnus')

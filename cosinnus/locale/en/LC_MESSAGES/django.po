@@ -6,6 +6,12 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -6982,7 +6988,7 @@ msgid "Groups help improve communication and collaboration in large networks or 
 msgstr ""
 
 msgid "Edit Group"
-msgstr "Edit Project"
+msgstr ""
 
 #, fuzzy
 msgid "Activate Group"

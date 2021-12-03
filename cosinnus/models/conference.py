@@ -25,6 +25,7 @@ import six
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus_event.mixins import BBBRoomMixin # noqa
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus.utils.files import get_conference_conditions_filename
 from cosinnus.utils.functions import clean_single_line_text, \
@@ -34,6 +35,8 @@ from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import ModelInheritsGroupReadWritePermissionsMixin
 from copy import copy
+from django.urls.base import reverse
+from _collections import defaultdict
 
 
 logger = logging.getLogger('cosinnus')
@@ -306,15 +309,40 @@ class CosinnusConferenceSettings(models.Model):
         """ Generates from scratch and sets the `bbb_params` for this config object, given a list of
             user-chosen values and presets from presets from `BBB_PRESET_FORM_FIELD_PARAMS` """
         bbb_params = {}
+        # Step 1: we create a fresh set of BBB params 
+        #     from only the chosen preset choices in the form
         for field_name, choice_value in preset_choices_dict.items():
             if field_name in settings.BBB_PRESET_FORM_FIELD_PARAMS and \
                     choice_value is not None and choice_value != self.SETTING_INHERIT:
                 update_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS.get(field_name).get(choice_value, {})
-                print(f'>> updateing bbb_params with dict {update_dict} from field {field_name} ')
                 bbb_params.update(update_dict)
                 # TODO: update the call values depending on the nature!
                 if nature:
                     pass
+                
+        # Step 2: we carry over any "unknown" values, that aren't defined in presets,
+        #     so we don't clear the field when no preset is set, but an admin has
+        #     manually entered new parameters
+        #     collect for each API-call a list of names of keys we know
+        call_keys = defaultdict(list) # e.g. {'create': ['muteOnStart'], 'join': ['userdata-bbb_auto_share_webcam']}
+        for preset_field_name in [preset for preset in settings.BBB_PRESET_USER_FORM_FIELDS if not preset in settings.BBB_PRESET_FORM_FIELDS_DISABLED]:
+            call_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS[preset_field_name]
+            for _choice, api_call_param_dict in call_dict.items():
+                for api_name, param_dict in api_call_param_dict.items():
+                    call_keys[api_name] += param_dict.keys()
+        # find any keys from our old about-to-be-overwritten params, that aren't in the known list for carrying over
+        for api_name_key, api_name_val in self.bbb_params.items():
+            # if the call key isn't even known, doesnt make sense, but we still keep the value
+            if api_name_key not in call_keys:
+                bbb_params[api_name_key] = api_name_val
+                continue
+            if type(api_name_val) is dict:
+                for param_key, param_val in api_name_val.items():
+                    if param_key not in call_keys[api_name_key]:
+                        # we do not know this key in the second level of params, so save them
+                        if api_name_key not in bbb_params:
+                            bbb_params[api_name_key] = {}
+                        bbb_params[api_name_key][param_key] = param_val
         self.bbb_params = bbb_params
         
     def has_changed_inherited_fields(self):
@@ -394,7 +422,7 @@ class CosinnusConferenceRoomManager(models.Manager):
     
 
 @python_2_unicode_compatible
-class CosinnusConferenceRoom(TranslateableFieldsModelMixin,
+class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
                              ModelInheritsGroupReadWritePermissionsMixin,
                              models.Model):
     """ A model for rooms inside a conference group object.
@@ -499,7 +527,6 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin,
     
     objects = CosinnusConferenceRoomManager()
     
-    
     class Meta(object):
         ordering = ('sort_index', 'title')
         verbose_name = _('Conference Room')
@@ -527,6 +554,14 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin,
         
         # initialize/sync room-type-specific extras
         self.ensure_room_type_dependencies()
+    
+    def get_admin_change_url(self):
+        """ Returns the django admin edit page for this object. """
+        return reverse('admin:cosinnus_cosinnusconferenceroom_change', kwargs={'object_id': self.id})
+    
+    def get_group_for_bbb_room(self):
+        """ For BBBRoomMixin, overridable function to the group for this BBB room. Can be None. """
+        return self.group
         
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:conference:room', kwargs={'group': self.group, 'slug': self.slug})

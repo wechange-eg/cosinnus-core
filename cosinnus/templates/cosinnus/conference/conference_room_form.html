@@ -152,6 +152,19 @@
 		        {% trans "Check this to show rocket chat in the sidebar." as show_chat_legend %}
 	            {% include 'cosinnus/fields/checkbox_field.html' with field=form.show_chat label=show_chat_label legend=show_chat_legend checkbox_label=show_chat_label %}
 	        {% endif %}
+	        
+	        {% if SETTINGS.BBB_PRESET_USER_FORM_FIELDS %}
+		        <div class="room-type-selector room-type-selector-2 room-type-selector-3 room-type-selector-4">
+	                <div class="cosinnus-field ">
+	                    <label>{% trans "BBB video conference options" %}</label>
+	                    <div class="field-description no-select">
+	                        {% trans "These settings will be the default for all conference events in this room." %}
+	                        {% trans "You may still override these options in each individual event." %}
+	                    </div>
+	                    {% include 'cosinnus/conference/conference_settings_formfields.html' with form=form %}
+	                </div>
+	            </div>
+            {% endif %}
         </div>
 	    
 	    <button type="submit" class="btn btn-emphasized">
