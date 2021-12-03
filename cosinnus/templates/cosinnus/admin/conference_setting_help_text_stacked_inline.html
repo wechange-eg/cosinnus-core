@@ -1,6 +1,29 @@
-{% load i18n %}
+{% load i18n cosinnus_tags %}
+
 <a id="conference_settings"></a>
+<br/>
+<h2>{% trans "BBB-Room Settings" %}</h2>
 <p>
     {% trans "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves." %}
 </p>
+
+<h4>{% trans "Inherited BBB-Parameters" %}</h4>
+<p>
+    {% trans "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters." %}
+    <br/>
+    {% with parent_obj=original.get_parent_bbb_chain_object %}
+        {% if parent_obj %}
+            {% trans "The next higher up object in the BBB hierarchy chain is" %}:
+            <a href="{{ parent_obj.get_admin_change_url }}">{{ parent_obj }}</a>
+        {% else %}
+            {% trans "This object has no higher up object in the BBB hierarchy chain." %}
+        {% endif %}
+    {% endwith %}
+</p>
+<p>
+    {% comment %} Every object displaying this inline should be inheriting `BBBRoomMixin` {% endcomment %}
+</p>
+
+<pre>{{ original.get_finalized_bbb_params_for_parent | pretty_json }}</pre>
+
 {% include 'admin/edit_inline/stacked.html' %}

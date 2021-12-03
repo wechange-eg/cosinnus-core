@@ -286,7 +286,7 @@ class CosinnusConf(AppConf):
     
     # very very small timeout for cached BBB server configs!
     # this should be in the seconds region
-    CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT = 10 # 10 seconds
+    CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT = 2 # 2 seconds
     
     # should CosinnusIdeas be enabled for this Portal?
     IDEAS_ENABLED = False

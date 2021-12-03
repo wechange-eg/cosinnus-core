@@ -157,8 +157,9 @@ class CosinnusConferenceSettings(models.Model):
     @classmethod
     def get_for_object(cls, source_object, no_traversal=False, agglomerated_setting_obj=None, recursed=False):
         """ Given any object in the BBB settings hierarchy chain,
-            checks if there is a settings object attached and returns it,
-            or checks the next higher object in the chain.
+            this returns an agglomeration of all the settings objects attached to `source_object`
+            and all inherited objects higher up in the object chain. 
+            
             If arrived at CosinnusPortal, and no setings object is found,
             None is returned.
             

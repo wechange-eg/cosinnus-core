@@ -650,7 +650,16 @@ class CosinnusPortal(MembersManagerMixin, models.Model):
 
     def get_absolute_url(self):
         return self.get_domain()
-
+    
+    def get_admin_change_url(self):
+        """ Returns the django admin edit page for this object. """
+        return reverse('admin:cosinnus_cosinnusportal_change', kwargs={'object_id': self.id})
+    
+    def get_finalized_bbb_params_for_parent(self):
+        """ Compatibility for `BBBRoomMixin` functionality used in
+            `conference_setting_help_text_stacked_inline.html` """
+        return settings.BBB_PARAM_PORTAL_DEFAULTS
+    
     def get_logo_image_url(self):
         """ Returns the portal logo static image URL """
         return '%s%s' % (self.get_domain(), static('img/logo-icon.png'))

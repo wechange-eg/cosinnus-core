@@ -47,7 +47,7 @@ from django.utils.encoding import force_text
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.template.defaultfilters import linebreaksbr
+from django.template.defaultfilters import linebreaksbr, pprint
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
     CosinnusConference
 from cosinnus.models.conference import CosinnusConferenceApplication
@@ -1045,6 +1045,11 @@ def json(obj):
     if isinstance(obj, QuerySet):
         return serialize('json', obj)
     return _json.dumps(obj)
+
+@register.filter
+def pretty_json(obj):
+    """ Prints nicely readable JSON. Recommended to use a <pre> tag with this. """
+    return _json.dumps(obj, indent=4)
 
 @register.filter
 def get_membership_portals(user):
