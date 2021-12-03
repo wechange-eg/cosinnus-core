@@ -350,13 +350,24 @@ class CosinnusConferenceSettings(models.Model):
             return
         super().save(*args, **kwargs)
     
+    def _text_for_server_choice(self, choice_id):
+        choice_dict = dict(settings.COSINNUS_BBB_SERVER_CHOICES)
+        if choice_id not in choice_dict:
+            auth_dict = dict(settings.COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS)
+            if choice_id in auth_dict:
+                # if the BBB choice was removed and is still in auth servers, return the URL
+                return f'(Deprecated Server Choice): {auth_dict[choice_id][0]}'
+            else:
+                return '(Invalid BBB server, possibly removed)'
+        return choice_dict[choice_id]
+    
     @property
     def bbb_server_choice_text(self):
-        return settings.COSINNUS_BBB_SERVER_CHOICES[self.bbb_server_choice][1]
+        return self._text_for_server_choice(self.bbb_server_choice)
     
     @property
     def bbb_server_choice_premium_text(self):
-        return settings.COSINNUS_BBB_SERVER_CHOICES[self.bbb_server_choice_premium][1]
+        return self._text_for_server_choice(self.bbb_server_choice_premium)
     
 
 class CosinnusConferenceRoomQS(models.query.QuerySet):
