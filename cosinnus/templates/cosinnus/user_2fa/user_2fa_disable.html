@@ -11,11 +11,19 @@
 
     <div class="content-box">
         <h4>{% block title %}{% trans "Disable 2FA" %}{% endblock %}</h4>
-        <p>{% blocktrans trimmed %}You are about to disable two-factor authentication. This
+        <p class="textfield transparent">{% blocktrans trimmed %}You are about to disable two-factor authentication. This
         weakens your account security, are you sure?{% endblocktrans %}</p>
-        <form method="post">
-            {% csrf_token %}
-            {% include 'cosinnus/fields/checkbox_field.html' with field=form %}
+        <form method="post" class="cosinnus-form">
+            <div class="cosinnus-field">{% csrf_token %}
+                <div class="cosinnus-field-input regular-field checkbox-field">
+                    {{ form }}
+                    {% comment %} We are using the jQuery attribute selector to hide the original form label since it is hardly removable from the source form. {% endcomment %}
+                    <script>
+                      $('label[for="id_understand"]').hide();
+                    </script>
+                    {% trans "Yes, I am sure." %}
+                </div>
+            </div>
     </div>
             <button type="submit" class="btn btn-emphasized btn-autosize">
                 <ul class="media-list">

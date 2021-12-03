@@ -12,7 +12,7 @@
 
     <div class="content-box">
         <h4>{% block title %}{% trans "2FA Setup Complete" %}{% endblock %}</h4>
-        <p>{% blocktrans trimmed %}Congratulations, you've successfully enabled 2FA.{% endblocktrans %}</p>
+        <p class="textfield transparent">{% blocktrans trimmed %}Congratulations, you've successfully enabled 2FA.{% endblocktrans %}</p>
     </div>
 
         <button type="submit" href="{% url 'cosinnus:profile-detail' %}" class="btn btn-emphasized btn-autosize">

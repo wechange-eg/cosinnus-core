@@ -25,7 +25,7 @@
         {% if default_device %}
             <div class="content-box">
                     <h4>{% trans "Backup Tokens" %}</h4>
-                    <p>{% blocktrans trimmed %}If you don't have any device with you, you can access
+                    <p class="textfield transparent">{% blocktrans trimmed %}If you don't have any device with you, you can access
                         your account using backup tokens.{% endblocktrans %}
                         {% blocktrans trimmed count counter=backup_tokens %}
                         You have only one backup token remaining.
@@ -47,12 +47,15 @@
                         </ul>
                     </button>
             
-            <div class="clearfix"></div>
+            <hr class="invisible"/>
+            <hr class="invisible"/>
+            
+            {% comment %}
+            {% endcomment %}
 
             <div class="content-box">
-
                     <h4>{% trans "Disable 2FA" %}</h4>
-                    <p>{% blocktrans trimmed %}
+                    <p class="textfield transparent">{% blocktrans trimmed %}
                         However we strongly discourage you to do so, you can
                         also disable two-factor authentication for your account.
                         {% endblocktrans %}
@@ -76,11 +79,9 @@
             <div class="content-box">
 
                     <h4>{% trans "2FA Settings" %}</h4>
-                    <p>{% blocktrans trimmed %}Two-factor authentication is not enabled for your
-                        account. Enable two-factor authentication for enhanced account
-                        security. <br> 
-                        To use the 2fa-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. 
-                        We do not have another 2fa option at the moment and will inform you if there are changes in this regard.{% endblocktrans %}
+                    <p class="textfield transparent">{% blocktrans trimmed %}Two-factor authentication is not enabled for your
+                        account. <br> Enable two-factor authentication for enhanced account security.
+                        {% endblocktrans %}
                     </p>
             </div>
                     <button type="submit" href="{% url 'cosinnus:two-factor-auth-setup' %}" class="btn btn-emphasized btn-autosize">

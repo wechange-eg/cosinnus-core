@@ -11,7 +11,7 @@
 
     <div class="content-box">
         <h4>{% block title %}{% trans "Backup Tokens" %}{% endblock %}</h4>
-        <p>{% blocktrans trimmed %}Backup tokens can be used when your primary and backup
+        <p class="textfield transparent">{% blocktrans trimmed %}Backup tokens can be used when your primary and backup
             phone numbers aren't available. The backup tokens below can be used
             for login verification. <br> If you've used up all your backup tokens, you
             can generate a new set of backup tokens. Only the backup tokens shown
@@ -24,9 +24,9 @@
             <li>{{ token.token }}</li>
             {% endfor %}
         </ul>
-        <p>{% blocktrans %}Print these tokens and keep them somewhere safe.{% endblocktrans %}</p>
+        <p class="textfield transparent">{% blocktrans %}Print these tokens and keep them somewhere safe.{% endblocktrans %}</p>
         {% else %}
-        <p>{% trans "You don't have any backup codes yet." %}</p>
+        <p class="textfield transparent">{% trans "You don't have any backup codes yet." %}</p>
         {% endif %}
     </div>
 
